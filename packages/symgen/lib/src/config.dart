@@ -13,8 +13,8 @@ class Config {
   String get output => _output;
   late String _output;
 
-  List<String> get whiteList => _whiteList;
-  late final List<String> _whiteList = <String>[];
+  List<String> get allowlist => _allowlist;
+  late final List<String> _allowlist = <String>[];
 
   String get libraryPath => _libraryPath;
   late String _libraryPath;
@@ -44,8 +44,8 @@ class Config {
     config._targetLibraries =
         List.unmodifiable(map.getValue('target-libraries'));
 
-    config._whiteList.addAll(_readWhiteListFile(
-      map.getValue('white-list', mandatory: false),
+    config._allowlist.addAll(_readAllowlistFile(
+      map.getValue('allowlist', mandatory: false),
     ));
 
     config._preamble =
@@ -64,7 +64,7 @@ class Config {
     return value;
   }
 
-  static List<String> _readWhiteListFile(String? path) {
+  static List<String> _readAllowlistFile(String? path) {
     if (path == null) {
       return <String>[];
     }

@@ -10,13 +10,13 @@ import 'package:ffi/ffi.dart';
 import 'package:tizen_interop/4.0/wearable/tizen.dart';
 
 String? getApplicationName() {
-    String? appName;
-    using((Arena arena) {
-      Pointer<Pointer<Int8>> namePtr = arena.allocate(sizeOf<Pointer>());
-      tizen.app_get_name(namePtr);
-      appName = namePtr.value.toDartString();
-      malloc.free(namePtr.value);
-    });
-    return appName;
+  String? appName;
+  using((Arena arena) {
+    Pointer<Pointer<Int8>> namePtr = arena.allocate(sizeOf<Pointer>());
+    tizen.app_get_name(namePtr);
+    appName = namePtr.value.toDartString();
+    malloc.free(namePtr.value);
+  });
+  return appName;
 }
 ```

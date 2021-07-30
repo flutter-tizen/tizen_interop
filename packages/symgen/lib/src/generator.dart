@@ -32,7 +32,7 @@ final Map<String, List<String>> ${_config.name} = {
     for (var library in _config.targetLibraries) {
       contents += '  \'$library\': [\n';
       for (var symbol in _getSymbols(libraryPath.childFile(library))) {
-        if (_config.whiteList.isEmpty || _config.whiteList.contains(symbol)) {
+        if (_config.allowlist.isEmpty || _config.allowlist.contains(symbol)) {
           contents += '    \'$symbol\',\n';
         }
       }
