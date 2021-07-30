@@ -3,6 +3,7 @@
 // found in the LICENSE file.
 
 import 'dart:io' show Platform;
+import 'package:file/file.dart';
 import 'package:file/local.dart';
 import 'package:yaml/yaml.dart';
 
@@ -70,7 +71,7 @@ class Config {
     }
     final file = LocalFileSystem().file(path);
     if (!file.existsSync()) {
-      throw FormatException('$path is not found.');
+      throw FileSystemException('$path is not found.');
     }
     return file.readAsLinesSync();
   }
@@ -81,7 +82,7 @@ extension _YamlMapExtensions on YamlMap {
     dynamic value = this[key];
     if (value == null) {
       if (defaultValue == null && mandatory) {
-        throw FormatException('$key not found');
+        throw StateError('$key not found');
       }
       value = defaultValue;
     }

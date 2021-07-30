@@ -18,7 +18,7 @@ class CodeGenerator {
     var fs = const LocalFileSystem();
     final libraryPath = fs.directory(_config.libraryPath);
     if (!libraryPath.existsSync()) {
-      throw FormatException('$libraryPath is not found.');
+      throw FileSystemException('$libraryPath is not found.');
     }
 
     var contents = '''
