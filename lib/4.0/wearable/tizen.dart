@@ -23,10 +23,7 @@ class _LookupProvider {
       throw ArgumentError(
           'Failed to lookup symbol (undefined symbol: $symbolName');
     }
-    var library = _libraryCache[libraryName];
-    if (library == null) {
-      _libraryCache[libraryName] = DynamicLibrary.open(libraryName);
-    }
+    _libraryCache[libraryName] ??= DynamicLibrary.open(libraryName);
     return _libraryCache[libraryName]!.lookup(symbolName);
   }
 
