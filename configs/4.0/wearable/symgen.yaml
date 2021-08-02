@@ -8,6 +8,7 @@ preamble: |
 name: tizen40Symbols
 output: 'lib/src/bindings/4.0/wearable/generated_symbols.dart'
 library-path: 'rootstraps/wearable-4.0-device.core/usr/lib'
+allowlist: 'configs/4.0/wearable/allowlist.txt'
 target-libraries:
   - libaccounts-svc.so.0                        # Account / Account Manager
   - libfido-client.so.0                         # Account / FIDO Client

@@ -3,6 +3,7 @@
 // found in the LICENSE file.
 
 import 'dart:io' show Platform;
+import 'package:args/args.dart';
 import 'package:file/file.dart';
 import 'package:file/local.dart';
 import 'package:yaml/yaml.dart';
@@ -28,26 +29,36 @@ class Config {
 
   Config._();
 
-  factory Config.fromYaml(String yaml) {
-    return Config.fromYamlMap(loadYaml(yaml) as YamlMap);
+  factory Config.fromYaml(String yaml, {ArgResults? argResults}) {
+    return Config.fromYamlMap(
+      loadYaml(yaml) as YamlMap,
+      argResults: argResults,
+    );
   }
 
-  factory Config.fromYamlMap(YamlMap map) {
+  factory Config.fromYamlMap(YamlMap map, {ArgResults? argResults}) {
     final config = Config._();
 
     config._name = map.getValue('name');
-    config._output = _mapEnvironmentVariables(
-      map.getValue('output'),
-    )!;
-    config._libraryPath = _mapEnvironmentVariables(
-      map.getValue('library-path'),
-    )!;
+
+    config._output = argResults?['output'] ??
+        _mapEnvironmentVariables(map.getValue('output'));
+
+    config._libraryPath = argResults?['library-path'] ??
+        _mapEnvironmentVariables(map.getValue('library-path'));
+
+    config._allowlist.addAll(
+      _readAllowlistFile(
+        argResults?['allowlist'] ??
+            map.getValue(
+              'allowlist',
+              mandatory: false,
+            ),
+      ),
+    );
+
     config._targetLibraries =
         List.unmodifiable(map.getValue('target-libraries'));
-
-    config._allowlist.addAll(_readAllowlistFile(
-      map.getValue('allowlist', mandatory: false),
-    ));
 
     config._preamble =
         map.getValue('preamble', mandatory: false, defaultValue: '');
@@ -71,7 +82,7 @@ class Config {
     }
     final file = LocalFileSystem().file(path);
     if (!file.existsSync()) {
-      throw FileSystemException('$path is not found.');
+      throw FileSystemException('Could not find the allowlist file', path);
     }
     return file.readAsLinesSync();
   }
