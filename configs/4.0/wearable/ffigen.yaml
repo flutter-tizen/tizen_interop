@@ -55,6 +55,7 @@ headers:
 
 compiler-opts:
   - '-m32'
+  - '-Wno-incomplete-setjmp-declaration'
   - '-I./rootstraps/wearable-4.0-device.core/usr/include/'
   - '-I./rootstraps/wearable-4.0-device.core/usr/include/appfw/'
   - '-I./rootstraps/wearable-4.0-device.core/usr/include/notification/'
