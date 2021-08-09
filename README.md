@@ -4,7 +4,9 @@ This package provides Dart bindings and utility functions for using Tizen native
 
 ## ❗ Experimental ❗
 
-This project is in an **experimental** state. Only specific versions and specific profiles of Tizen can be supported, and some binding APIs may be missing or have errors. 
+This package is in experimental stage. It is not intended for production use.
+Only specific versions and profiles of Tizen are supported, and some binding APIs may be missing or have errors.
+Graphics and WebView related APIs are not provided. 
 
 ## Example
 
