@@ -6,6 +6,7 @@ import '../../src/bindings/4.0/wearable/generated_symbols.dart';
 
 export '../../src/bindings/4.0/wearable/generated_bindings.dart';
 export '../../src/extensions.dart';
+export '../../src/cstring.dart';
 
 final _provider = _LookupProvider();
 
