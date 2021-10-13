@@ -37,6 +37,7 @@ final appName = using((Arena arena) {
   }
 });
 ```
+
 Notice that the output value of [`app_get_name()`](https://docs.tizen.org/application/native/api/wearable/4.0/group__CAPI__APP__COMMON__MODULE.html#ga26b09c3080ccd8e32120bce697863268) is of `char *` type and must be released by the caller explicitly. If you're using IDEs like VS Code, you can hover your mouse over symbols or press `F12` to jump to their definitions and read API docs.
 
 
@@ -46,14 +47,14 @@ Run script files as follows. Dart bindings (`lib/src/.../generated_bindings.dart
 
 ```sh
 ./scripts/copy_rootstraps.sh
-./scripts/build_bindings.sh
+./scripts/generated_bindings.sh
 ```
 
 
 ## Supported APIs
 This package provides bindings of the following APIs of [Tizen Iot-Headed profile](https://docs.tizen.org/application/native/api/overview/):
 
-> UI and WebView related APIs are not provided. 
+_Note: UI and WebView related APIs are not provided._
 
 | Category | Sub Category | Tizen 4.0 | Tizen 5.0 |
 | -------- | -------- |:--------:|:--------:|
