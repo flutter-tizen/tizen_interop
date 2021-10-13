@@ -107,4 +107,3 @@ target-libraries:
   - libtts_engine.so                            # UIX / TTS Engine
   - libvc.so                                    # UIX / Voice control
   - libvc_engine.so                             # UIX / Voice control engine
-  

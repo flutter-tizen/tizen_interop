@@ -4,7 +4,7 @@ preamble: |
   // found in the LICENSE file.
 
 name: "Tizen40Native"
-description: "provides Dart bindings and utility functions for using Tizen native APIs."
+description: "Provides Dart bindings and utility functions for using Tizen native APIs."
 output: "lib/src/bindings/4.0/generated_bindings.dart"
 llvm-path:
   - "/usr/lib/llvm-12"
