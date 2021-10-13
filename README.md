@@ -47,7 +47,7 @@ Run script files as follows. Dart bindings (`lib/src/.../generated_bindings.dart
 
 ```sh
 ./scripts/copy_rootstraps.sh
-./scripts/generated_bindings.sh
+./scripts/generate_bindings.sh
 ```
 
 
