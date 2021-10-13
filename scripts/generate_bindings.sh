@@ -7,17 +7,9 @@ set -e
 
 SCRIPT_DIR=$(dirname $(readlink -f $0))
 
-if [[ -z $TIZEN_STUDIO ]]; then
-    if [[ -d $HOME/tizen-studio ]]; then
-        TIZEN_STUDIO=$HOME/tizen-studio
-    else
-        echo "Not found the Tizen Studio. Please set the TIZEN_STUDIO environment variable."
-        exit 1
-    fi
-fi
+TARGET_PLATFORMS="4.0 5.0"
 
-# Copy rootstraps from Tizen Studio.
-OUTDIR=$SCRIPT_DIR/../rootstraps
-rm -fr $OUTDIR && mkdir -p $OUTDIR
-cp -fr $TIZEN_STUDIO/platforms/tizen-4.0/iot-headed/rootstraps/iot-headed-4.0-device.core $OUTDIR
-cp -fr $TIZEN_STUDIO/platforms/tizen-5.0/iot-headed/rootstraps/iot-headed-5.0-device.core $OUTDIR
+for v in $TARGET_PLATFORMS; do
+    dart run symgen --config $SCRIPT_DIR/../configs/$v/symgen.yaml
+    dart run ffigen --config $SCRIPT_DIR/../configs/$v/ffigen.yaml
+done
