@@ -5,7 +5,7 @@ preamble: |
 
 name: tizen50Symbols
 output: 'lib/src/bindings/5.0/generated_symbols.dart'
-library-path: 'rootstraps/iot-headed-5.0-device.core/usr/lib'
+library-path: 'rootstraps/5.0/usr/lib'
 target-libraries:
   - libaccounts-svc.so.0                        # Account / Account Manager
   - libfido-client.so.0                         # Account / FIDO Client

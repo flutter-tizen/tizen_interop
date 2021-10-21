@@ -15,7 +15,7 @@ if [ -z "$version" ]; then
 fi
 
 entrypoints=$ROOT_DIR/configs/$version/entrypoints.h
-rootstraps=$ROOT_DIR/rootstraps/iot-headed-$version-device.core
+rootstraps=$ROOT_DIR/rootstraps/$version
 
 if [[ ! -f "$entrypoints" ]]; then
     echo "Not found $entrypoints"
