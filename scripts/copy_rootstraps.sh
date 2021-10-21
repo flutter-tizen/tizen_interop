@@ -7,11 +7,11 @@ set -e
 
 SCRIPT_DIR=$(dirname $(readlink -f $0))
 
-if [[ -z $TIZEN_STUDIO ]]; then
+if [[ -z $TIZEN_SDK ]]; then
     if [[ -d $HOME/tizen-studio ]]; then
-        TIZEN_STUDIO=$HOME/tizen-studio
+        TIZEN_SDK=$HOME/tizen-studio
     else
-        echo "Could not find 'Tizen Studio'. Set TIZEN_STUDIO to locate the installed path."
+        echo "Could not find 'Tizen SDK'. Set TIZEN_SDK to locate the installed path."
         exit 1
     fi
 fi
@@ -22,7 +22,7 @@ rm -fr $OUTDIR
 
 VERSIONS="4.0 5.0 5.5 6.0"
 for v in $VERSIONS; do
-    rootstrap=$TIZEN_STUDIO/platforms/tizen-$v/iot-headed/rootstraps/iot-headed-$v-device.core
+    rootstrap=$TIZEN_SDK/platforms/tizen-$v/iot-headed/rootstraps/iot-headed-$v-device.core
     if [ ! -d $rootstrap ]; then
         echo "No installed rootstrap: IOT-Headed-$v-NativeAppDevelopment-CLI"
         exit 1

@@ -3,7 +3,7 @@ preamble: |
   // Use of this source code is governed by a BSD-style license that can be
   // found in the LICENSE file.
 
-name: "Tizen50Native"
+name: "Tizen60Native"
 description: "Provides Dart bindings and utility functions for using Tizen native APIs."
 output: "lib/src/bindings/6.0/generated_bindings.dart"
 llvm-path:

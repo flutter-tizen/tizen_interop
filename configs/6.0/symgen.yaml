@@ -3,7 +3,7 @@ preamble: |
   // Use of this source code is governed by a BSD-style license that can be
   // found in the LICENSE file.
 
-name: tizen50Symbols
+name: tizen60Symbols
 output: 'lib/src/bindings/6.0/generated_symbols.dart'
 library-path: 'rootstraps/6.0/usr/lib'
 target-libraries:
