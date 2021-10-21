@@ -29,7 +29,8 @@ import 'package:tizen_interop/4.0/tizen.dart';
 ### Example
 ```dart
 // Getting a string value from the Native API.
-// Recommends using `arena` to allocate memory because it frees the memory automatically when the `using` block ends.
+// Prefer using `arena` to allocate memory because it frees the memory
+// automatically when the `using` block ends.
 final appName = using((Arena arena) {
   Pointer<Pointer<Int8>> ppStr = arena();
   if (tizen.app_get_name(ppStr) == 0) {
@@ -58,8 +59,8 @@ final memInfo = using((Arena arena) {
 // Passing a string value to the Native API.
 final modelName = using((Arena arena) {
   Pointer<Pointer<Int8>> ppStr = arena();
-  // The allocated memory by the `toNativeInt8` method should be freed by the caller.
-  // But `arena` allocator will free it automatically.
+  // The allocated memory by the `toNativeInt8` method should be freed by 
+  // the caller. But `arena` allocator will free it automatically.
   final key =
       'http://tizen.org/system/model_name'.toNativeInt8(allocator: arena);
   if (tizen.system_info_get_platform_string(key, ppStr) == 0) {
