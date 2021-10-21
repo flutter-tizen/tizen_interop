@@ -36,6 +36,30 @@ final appName = using((Arena arena) {
     return ppStr.value.toDartString();
   }
 });
+
+final memSize = using((Arena arena) {
+  Pointer<Int32> pMemSize = arena();
+  if (tizen.runtime_info_get_physical_memory_size(pMemSize) == 0) {
+    return pMemSize.value;
+  }
+});
+ 
+final memInfo = using((Arena arena) {
+  Pointer<runtime_memory_info_s> pMemInfo = arena();
+  if (tizen.runtime_info_get_system_memory_info(pMemInfo) == 0) {
+    return pMemInfo.ref;
+  }
+});
+ 
+final modelName = using((Arena arena) {
+  Pointer<Pointer<Int8>> ppStr = arena();
+  final key =
+      'http://tizen.org/system/model_name'.toNativeInt8(allocator: arena);
+  if (tizen.system_info_get_platform_string(key, ppStr) == 0) {
+    arena.using(ppStr.value, calloc.free);
+    return ppStr.value.toDartString();
+  }
+});
 ```
 
 Notice that the output value of [`app_get_name()`](https://docs.tizen.org/application/native/api/wearable/4.0/group__CAPI__APP__COMMON__MODULE.html#ga26b09c3080ccd8e32120bce697863268) is of `char *` type and must be released by the caller explicitly. If you're using IDEs like VS Code, you can hover your mouse over symbols or press `F12` to jump to their definitions and read API docs.
@@ -60,118 +84,118 @@ This package provides bindings of the following APIs of [Tizen Iot-Headed profil
 
 _Note: UI and WebView related APIs are not provided._
 
-| Category | Sub Category | Tizen 4.0 | Tizen 5.0 |
-| -------- | -------- |:--------:|:--------:|
-| Account | Account Manager | | ✔ |
-| | FIDO Client | | ✔ |
-| | Account Manager | | ✔ |
-| | OAuth 2.0 | | ✔ |
-| | Sync Manager | | ✔ |
-| Application Framework | Application | ✔ | ✔ |
-| | Alarm | ✔ | ✔ |
-| | App Common | ✔ | ✔ |
-| | App Control | ✔ | ✔ |
-| | Event | ✔ | ✔ |
-| | Internationalization | ✔ | ✔ |
-| | Job scheduler | | ✔ |
-| | Preference | ✔ | ✔ |
-| | Resource Manager | ✔ | ✔ |
-| | Application Manager | ✔ | ✔ |
-| | Badge | ✔ | ✔ |
-| | Bundle | ✔ | ✔ |
-| | Component Based Application | | |
-| | Component Manager | | |
-| | Data Control | ✔ | ✔ |
-| | Message Port | ✔ | ✔ |
-| | Notification | ✔ | ✔ |
-| | Notification EX | | |
-| | Package Manager | ✔ | ✔ |
-| | RPC Port | | ✔ |
-| | Service Application | ✔ | ✔ |
-| | Shortcut | ✔ | ✔ |
-| Base | Common Error | ✔ | ✔ |
-| Content | Download | ✔ | ✔ |
-| | MIME Type | ✔ | ✔ |
-| | Media Content | ✔ | ✔ |
-| | Activity Recognition | | ✔ |
-| | Contextual History | | ✔ |
-| | Contextual Trigger | | ✔ |
-| | Gesture Recognition | | ✔ |
-| Location | Geofence Manager | | ✔ |
-| | Location Manager | | ✔ |
-| Messaging | Email | ✔ | ✔ |
-| | Messages | ✔ | |
-| | Push | | ✔ |
-| Multimedia | Audio I/O | ✔ | ✔ |
-| | Camera | ✔ | ✔ |
-| | Image Util | | ✔ |
-| | Media Codec | ✔ | ✔ |
-| | Media Controller | ✔ | ✔ |
-| | Media Demuxer | ✔ | ✔ |
-| | Media Muxer | ✔ | ✔ |
-| | Media Streamer | ✔ | ✔ |
-| | Media Tool | ✔ | ✔ |
-| | Media Vision | ✔ | ✔ |
-| | Metadata Editor | ✔ | ✔ |
-| | Metadata Extractor | ✔ | ✔ |
-| | Player | ✔ | ✔ |
-| | Radio | | ✔ |
-| | Recorder | ✔ | ✔ |
-| | Screen Mirroring | | ✔ |
-| | Sound Manager | ✔ | ✔ |
-| | Sound Pool | ✔ | ✔ |
-| | StreamRecorder | ✔ | ✔ |
-| | Thumbnail Util | ✔ | ✔ |
-| | Tone Player | ✔ | ✔ |
-| | Video Util | ✔ | |
-| | WAV Player | ✔ | ✔ |
-| Network | Application Service Platform | | ✔ |
-| | Bluetooth | ✔ | ✔ |
-| | Connection | ✔ | ✔ |
-| | DNSSD | ✔ | ✔ |
-| | HTTP | | ✔ |
-| | IoTCon | ✔ | ✔ |
-| | MTP | ✔ | ✔ |
-| | SSDP | ✔ | ✔ |
-| | Smart Traffic Control | | ✔ |
-| | Smartcard | ✔ | |
-| | SoftAP | | ✔ |
-| | VPN Service | | ✔ |
-| | Wi-Fi Manager | ✔ | ✔ |
-| | Wi-Fi Direct | | ✔ |
-| Security | CSR | ✔ | ✔ |
-| | Device Certificate Manager | | ✔ |
-| | Device Policy Manager | ✔ | ✔ |
-| | Key Manager | ✔ | ✔ |
-| | Privacy Privilege Manager | ✔ | ✔ |
-| | Privilege Info | ✔ | ✔ |
-| | YACA | ✔ | ✔ |
-| Social | Calendar | ✔ | ✔ |
-| | Contacts | ✔ | ✔ |
-| | Phonenumber utils | ✔ | ✔ |
-| System | Device | ✔ | ✔ |
-| | Diagnostics | | |
-| | Dlog | ✔ | ✔ |
-| | Feedback | ✔ | ✔ |
-| | Media key | ✔ | ✔ |
-| | Peripheral IO | ✔ | ✔ |
-| | Runtime information | ✔ | ✔ |
-| | Sensor | ✔ | ✔ |
-| | Storage | ✔ | ✔ |
-| | System Information | ✔ | ✔ |
-| | System Settings | ✔ | ✔ |
-| | T-trace | ✔ | ✔ |
-| | USB Host | ✔ | ✔ |
-| Telephony | Telephony Information | ✔ | |
-| UI | Clipboard History Manager | ✔ | ✔ |
-| | External Output Manager | ✔ | ✔ |
-| | TBM Surface | ✔ | ✔ |
-| UIX | Input Method | ✔ | ✔ |
-| | Input Method Manager | ✔ | ✔ |
-| | Multi assistant | | ✔ |
-| | STT | ✔ | ✔ |
-| | STT Engine | ✔ | ✔ |
-| | TTS | ✔ | ✔ |
-| | TTS Engine | ✔ | ✔ |
-| | Voice control | ✔ | ✔ |
-| | Voice control engine | | ✔ |
+| Category | Sub Category | Tizen 4.0 | Tizen 5.0 | Tizen 5.5 | Tizen 6.0 |
+| -------- | -------- |:--------:|:--------:|:--------:|:--------:|
+| Account | Account Manager | | ✔ | ✔ | ✔ |
+| | FIDO Client | | ✔ | ✔ | ✔ |
+| | Account Manager | | ✔ | ✔ | ✔ |
+| | OAuth 2.0 | | ✔ | ✔ | ✔ |
+| | Sync Manager | | ✔ | ✔ | ✔ |
+| Application Framework | Application | ✔ | ✔ | ✔ | ✔ |
+| | Alarm | ✔ | ✔ | ✔ | ✔ |
+| | App Common | ✔ | ✔ | ✔ | ✔ |
+| | App Control | ✔ | ✔ | ✔ | ✔ |
+| | Event | ✔ | ✔ | ✔ | ✔ |
+| | Internationalization | ✔ | ✔ | ✔ | ✔ |
+| | Job scheduler | | ✔ | ✔ | ✔ |
+| | Preference | ✔ | ✔ | ✔ | ✔ |
+| | Resource Manager | ✔ | ✔ | ✔ | ✔ |
+| | Application Manager | ✔ | ✔ | ✔ | ✔ |
+| | Badge | ✔ | ✔ | ✔ | ✔ |
+| | Bundle | ✔ | ✔ | ✔ | ✔ |
+| | Data Control | ✔ | ✔ | ✔ | ✔ |
+| | Message Port | ✔ | ✔ | ✔ | ✔ |
+| | Notification | ✔ | ✔ | ✔ | ✔ |
+| | Notification EX | | | ✔ | ✔ |
+| | Package Manager | ✔ | ✔ | ✔ | ✔ |
+| | RPC Port | | ✔ | ✔ | ✔ |
+| | Service Application | ✔ | ✔ | ✔ | ✔ |
+| | Shortcut | ✔ | ✔ | ✔ | ✔ |
+| Base | Common Error | ✔ | ✔ | ✔ | ✔ |
+| Content | Download | ✔ | ✔ | ✔ | ✔ |
+| | MIME Type | ✔ | ✔ | ✔ | ✔ |
+| | Media Content | ✔ | ✔ | ✔ | ✔ |
+| | Activity Recognition | | ✔ | ✔ | ✔ |
+| | Contextual History | | ✔ | ✔ | ✔ |
+| | Contextual Trigger | | ✔ | ✔ | ✔ |
+| | Gesture Recognition | | ✔ | ✔ | ✔ |
+| Location | Geofence Manager | | ✔ | ✔ | ✔ |
+| | Location Manager | | ✔ | ✔ | ✔ |
+| Messaging | Email | ✔ | ✔ | ✔ | ✔ |
+| | Messages | ✔ | | | |
+| | Push | | ✔ | ✔ | ✔ |
+| Multimedia | Audio I/O | ✔ | ✔ | ✔ | ✔ |
+| | Camera | ✔ | ✔ | ✔ | ✔ |
+| | Image Util | | ✔ | ✔ | ✔ |
+| | Media Codec | ✔ | ✔ | ✔ | ✔ |
+| | Media Controller | ✔ | ✔ | ✔ | ✔ |
+| | Media Demuxer | ✔ | ✔ | ✔ | ✔ |
+| | Media Muxer | ✔ | ✔ | ✔ | ✔ |
+| | Media Streamer | ✔ | ✔ | ✔ | ✔ |
+| | Media Tool | ✔ | ✔ | ✔ | ✔ |
+| | Media Vision | ✔ | ✔ | ✔ | ✔ |
+| | Metadata Editor | ✔ | ✔ | ✔ | ✔ |
+| | Metadata Extractor | ✔ | ✔ | ✔ | ✔ |
+| | Player | ✔ | ✔ | ✔ | ✔ |
+| | Radio | | ✔ | ✔ | ✔ |
+| | Recorder | ✔ | ✔ | ✔ | ✔ |
+| | Screen Mirroring | | ✔ | ✔ | ✔ |
+| | Sound Manager | ✔ | ✔ | ✔ | ✔ |
+| | Sound Pool | ✔ | ✔ | ✔ | ✔ |
+| | StreamRecorder | ✔ | ✔ | ✔ | ✔ |
+| | Thumbnail Util | ✔ | ✔ | ✔ | ✔ |
+| | Tone Player | ✔ | ✔ | ✔ | ✔ |
+| | Video Util | ✔ | | | |
+| | WAV Player | ✔ | ✔ | ✔ | ✔ |
+| Network | Application Service Platform | | ✔ | ✔ | ✔ |
+| | Bluetooth | ✔ | ✔ | ✔ | ✔ |
+| | Connection | ✔ | ✔ | ✔ | ✔ |
+| | DNSSD | ✔ | ✔ | ✔ | ✔ |
+| | HTTP | | ✔ | ✔ | ✔ |
+| | IoTCon | ✔ | ✔ | ✔ | ✔ |
+| | MTP | ✔ | ✔ | ✔ | ✔ |
+| | SSDP | ✔ | ✔ | ✔ | ✔ |
+| | Smart Traffic Control | | ✔ | ✔ | ✔ |
+| | Smartcard | ✔ | | | |
+| | SoftAP | | ✔ | ✔ | ✔ |
+| | VPN Service | | ✔ | ✔ | ✔ |
+| | Wi-Fi Manager | ✔ | ✔ | ✔ | ✔ |
+| | Wi-Fi Direct | | ✔ | ✔ | ✔ |
+| Security | CSR | ✔ | ✔ | ✔ | ✔ |
+| | Device Certificate Manager | | ✔ | ✔ | ✔ |
+| | Device Policy Manager | ✔ | ✔ | ✔ | ✔ |
+| | Key Manager | ✔ | ✔ | ✔ | ✔ |
+| | Privacy Privilege Manager | ✔ | ✔ | ✔ | ✔ |
+| | Privilege Info | ✔ | ✔ | ✔ | ✔ |
+| | YACA | ✔ | ✔ | ✔ | ✔ |
+| Social | Calendar | ✔ | ✔ | ✔ | ✔ |
+| | Contacts | ✔ | ✔ | ✔ | ✔ |
+| | Phonenumber utils | ✔ | ✔ | ✔ | ✔ |
+| System | Device | ✔ | ✔ | ✔ | ✔ |
+| | Diagnostics | | | | ✔ |
+| | Dlog | ✔ | ✔ | ✔ | ✔ |
+| | Feedback | ✔ | ✔ | ✔ | ✔ |
+| | Media key | ✔ | ✔ | ✔ | ✔ |
+| | Peripheral IO | ✔ | ✔ | ✔ | ✔ |
+| | Runtime information | ✔ | ✔ | ✔ | ✔ |
+| | Sensor | ✔ | ✔ | ✔ | ✔ |
+| | Storage | ✔ | ✔ | ✔ | ✔ |
+| | System Information | ✔ | ✔ | ✔ | ✔ |
+| | System Settings | ✔ | ✔ | ✔ | ✔ |
+| | T-trace | ✔ | ✔ | ✔ | ✔ |
+| | USB Host | ✔ | ✔ | ✔ | ✔ |
+| Telephony | Telephony Information | ✔ | | | |
+| UI | Clipboard History Manager | ✔ | ✔ | ✔ | ✔ |
+| | External Output Manager | ✔ | ✔ | ✔ | ✔ |
+| | TBM Surface | ✔ | ✔ | ✔ | ✔ |
+| UIX | Autofill | | |✔ | ✔ |
+| | Input Method | ✔ | ✔ | ✔ | ✔ |
+| | Input Method Manager | ✔ | ✔ | ✔ | ✔ |
+| | Multi assistant | | ✔ | ✔ | ✔ |
+| | STT | ✔ | ✔ | ✔ | ✔ |
+| | STT Engine | ✔ | ✔ | ✔ | ✔ |
+| | TTS | ✔ | ✔ | ✔ | ✔ |
+| | TTS Engine | ✔ | ✔ | ✔ | ✔ |
+| | Voice control | ✔ | ✔ | ✔ | ✔ |
+| | Voice control engine | | ✔ | ✔ | ✔ |
+| | Voice control manager | | | ✔ | ✔ |
