@@ -7,7 +7,12 @@ set -e
 
 SCRIPT_DIR=$(dirname $(readlink -f $0))
 
-TARGET_PLATFORMS="4.0 5.0"
+TARGET_PLATFORMS="4.0 5.0 5.5 6.0"
+
+if [ ! -d $SCRIPT_DIR/../rootstraps ]; then
+    echo "No rootstraps found. Run copy_rootstraps.sh first."
+    exit 1
+fi
 
 for v in $TARGET_PLATFORMS; do
     dart run symgen --config $SCRIPT_DIR/../configs/$v/symgen.yaml
