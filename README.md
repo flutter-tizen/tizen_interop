@@ -94,118 +94,124 @@ This package provides bindings of the following APIs of [Tizen Iot-Headed profil
 
 _Note: UI and WebView related APIs are not provided._
 
-| Category | Sub Category | Tizen 4.0 | Tizen 5.0 | Tizen 5.5 | Tizen 6.0 |
-| -------- | -------- |:--------:|:--------:|:--------:|:--------:|
-| Account | Account Manager | | ✔ | ✔ | ✔ |
-| | FIDO Client | | ✔ | ✔ | ✔ |
-| | Account Manager | | ✔ | ✔ | ✔ |
-| | OAuth 2.0 | | ✔ | ✔ | ✔ |
-| | Sync Manager | | ✔ | ✔ | ✔ |
-| Application Framework | Application | ✔ | ✔ | ✔ | ✔ |
-| | Alarm | ✔ | ✔ | ✔ | ✔ |
-| | App Common | ✔ | ✔ | ✔ | ✔ |
-| | App Control | ✔ | ✔ | ✔ | ✔ |
-| | Event | ✔ | ✔ | ✔ | ✔ |
-| | Internationalization | ✔ | ✔ | ✔ | ✔ |
-| | Job scheduler | | ✔ | ✔ | ✔ |
-| | Preference | ✔ | ✔ | ✔ | ✔ |
-| | Resource Manager | ✔ | ✔ | ✔ | ✔ |
-| | Application Manager | ✔ | ✔ | ✔ | ✔ |
-| | Badge | ✔ | ✔ | ✔ | ✔ |
-| | Bundle | ✔ | ✔ | ✔ | ✔ |
-| | Data Control | ✔ | ✔ | ✔ | ✔ |
-| | Message Port | ✔ | ✔ | ✔ | ✔ |
-| | Notification | ✔ | ✔ | ✔ | ✔ |
-| | Notification EX | | | ✔ | ✔ |
-| | Package Manager | ✔ | ✔ | ✔ | ✔ |
-| | RPC Port | | ✔ | ✔ | ✔ |
-| | Service Application | ✔ | ✔ | ✔ | ✔ |
-| | Shortcut | ✔ | ✔ | ✔ | ✔ |
-| Base | Common Error | ✔ | ✔ | ✔ | ✔ |
-| Content | Download | ✔ | ✔ | ✔ | ✔ |
-| | MIME Type | ✔ | ✔ | ✔ | ✔ |
-| | Media Content | ✔ | ✔ | ✔ | ✔ |
-| | Activity Recognition | | ✔ | ✔ | ✔ |
-| | Contextual History | | ✔ | ✔ | ✔ |
-| | Contextual Trigger | | ✔ | ✔ | ✔ |
-| | Gesture Recognition | | ✔ | ✔ | ✔ |
-| Location | Geofence Manager | | ✔ | ✔ | ✔ |
-| | Location Manager | | ✔ | ✔ | ✔ |
-| Messaging | Email | ✔ | ✔ | ✔ | ✔ |
-| | Messages | ✔ | | | |
-| | Push | | ✔ | ✔ | ✔ |
-| Multimedia | Audio I/O | ✔ | ✔ | ✔ | ✔ |
-| | Camera | ✔ | ✔ | ✔ | ✔ |
-| | Image Util | | ✔ | ✔ | ✔ |
-| | Media Codec | ✔ | ✔ | ✔ | ✔ |
-| | Media Controller | ✔ | ✔ | ✔ | ✔ |
-| | Media Demuxer | ✔ | ✔ | ✔ | ✔ |
-| | Media Muxer | ✔ | ✔ | ✔ | ✔ |
-| | Media Streamer | ✔ | ✔ | ✔ | ✔ |
-| | Media Tool | ✔ | ✔ | ✔ | ✔ |
-| | Media Vision | ✔ | ✔ | ✔ | ✔ |
-| | Metadata Editor | ✔ | ✔ | ✔ | ✔ |
-| | Metadata Extractor | ✔ | ✔ | ✔ | ✔ |
-| | Player | ✔ | ✔ | ✔ | ✔ |
-| | Radio | | ✔ | ✔ | ✔ |
-| | Recorder | ✔ | ✔ | ✔ | ✔ |
-| | Screen Mirroring | | ✔ | ✔ | ✔ |
-| | Sound Manager | ✔ | ✔ | ✔ | ✔ |
-| | Sound Pool | ✔ | ✔ | ✔ | ✔ |
-| | StreamRecorder | ✔ | ✔ | ✔ | ✔ |
-| | Thumbnail Util | ✔ | ✔ | ✔ | ✔ |
-| | Tone Player | ✔ | ✔ | ✔ | ✔ |
-| | Video Util | ✔ | | | |
-| | WAV Player | ✔ | ✔ | ✔ | ✔ |
-| Network | Application Service Platform | | ✔ | ✔ | ✔ |
-| | Bluetooth | ✔ | ✔ | ✔ | ✔ |
-| | Connection | ✔ | ✔ | ✔ | ✔ |
-| | DNSSD | ✔ | ✔ | ✔ | ✔ |
-| | HTTP | | ✔ | ✔ | ✔ |
-| | IoTCon | ✔ | ✔ | ✔ | ✔ |
-| | MTP | ✔ | ✔ | ✔ | ✔ |
-| | SSDP | ✔ | ✔ | ✔ | ✔ |
-| | Smart Traffic Control | | ✔ | ✔ | ✔ |
-| | Smartcard | ✔ | | | |
-| | SoftAP | | ✔ | ✔ | ✔ |
-| | VPN Service | | ✔ | ✔ | ✔ |
-| | Wi-Fi Manager | ✔ | ✔ | ✔ | ✔ |
-| | Wi-Fi Direct | | ✔ | ✔ | ✔ |
-| Security | CSR | ✔ | ✔ | ✔ | ✔ |
-| | Device Certificate Manager | | ✔ | ✔ | ✔ |
-| | Device Policy Manager | ✔ | ✔ | ✔ | ✔ |
-| | Key Manager | ✔ | ✔ | ✔ | ✔ |
-| | Privacy Privilege Manager | ✔ | ✔ | ✔ | ✔ |
-| | Privilege Info | ✔ | ✔ | ✔ | ✔ |
-| | YACA | ✔ | ✔ | ✔ | ✔ |
-| Social | Calendar | ✔ | ✔ | ✔ | ✔ |
-| | Contacts | ✔ | ✔ | ✔ | ✔ |
-| | Phonenumber utils | ✔ | ✔ | ✔ | ✔ |
-| System | Device | ✔ | ✔ | ✔ | ✔ |
-| | Diagnostics | | | | ✔ |
-| | Dlog | ✔ | ✔ | ✔ | ✔ |
-| | Feedback | ✔ | ✔ | ✔ | ✔ |
-| | Media key | ✔ | ✔ | ✔ | ✔ |
-| | Peripheral IO | ✔ | ✔ | ✔ | ✔ |
-| | Runtime information | ✔ | ✔ | ✔ | ✔ |
-| | Sensor | ✔ | ✔ | ✔ | ✔ |
-| | Storage | ✔ | ✔ | ✔ | ✔ |
-| | System Information | ✔ | ✔ | ✔ | ✔ |
-| | System Settings | ✔ | ✔ | ✔ | ✔ |
-| | T-trace | ✔ | ✔ | ✔ | ✔ |
-| | USB Host | ✔ | ✔ | ✔ | ✔ |
-| Telephony | Telephony Information | ✔ | | | |
-| UI | Clipboard History Manager | ✔ | ✔ | ✔ | ✔ |
-| | External Output Manager | ✔ | ✔ | ✔ | ✔ |
-| | TBM Surface | ✔ | ✔ | ✔ | ✔ |
-| UIX | Autofill | | |✔ | ✔ |
-| | Input Method | ✔ | ✔ | ✔ | ✔ |
-| | Input Method Manager | ✔ | ✔ | ✔ | ✔ |
-| | Multi assistant | | ✔ | ✔ | ✔ |
-| | STT | ✔ | ✔ | ✔ | ✔ |
-| | STT Engine | ✔ | ✔ | ✔ | ✔ |
-| | TTS | ✔ | ✔ | ✔ | ✔ |
-| | TTS Engine | ✔ | ✔ | ✔ | ✔ |
-| | Voice control | ✔ | ✔ | ✔ | ✔ |
-| | Voice control engine | | ✔ | ✔ | ✔ |
-| | Voice control manager | | | ✔ | ✔ |
+| Category | Sub Category | Tizen 4.0 | Tizen 5.0 | Tizen 5.5 | Tizen 6.0 | Tizen 6.5 |
+| -------- | -------- |:--------:|:--------:|:--------:|:--------:|:--------:|
+| Account | Account Manager | | ✔ | ✔ | ✔ | ✔ |
+| | FIDO Client | | ✔ | ✔ | ✔ | ✔ |
+| | Account Manager | | ✔ | ✔ | ✔ | ✔ |
+| | OAuth 2.0 | | ✔ | ✔ | ✔ | ✔ |
+| | Sync Manager | | ✔ | ✔ | ✔ | ✔ |
+| Application Framework | Application | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | Alarm | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | App Common | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | App Control | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | App Control URI | | | | | ✔ |
+| | Event | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | Internationalization | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | Job scheduler | | ✔ | ✔ | ✔ | ✔ |
+| | Preference | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | Resource Manager | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | Application Manager | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | Badge | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | Bundle | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | Cion | | | | | ✔ |
+| | Data Control | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | Message Port | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | Notification | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | Notification EX | | | ✔ | ✔ | ✔ |
+| | Package Manager | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | RPC Port | | ✔ | ✔ | ✔ | ✔ |
+| | Service Application | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | Shortcut | ✔ | ✔ | ✔ | ✔ | ✔ |
+| Base | Common Error | ✔ | ✔ | ✔ | ✔ | ✔ |
+| Content | Download | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | MIME Type | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | Media Content | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | Activity Recognition | | ✔ | ✔ | ✔ | |
+| | Contextual History | | ✔ | ✔ | ✔ | ✔ |
+| | Contextual Trigger | | ✔ | ✔ | ✔ | ✔ |
+| | Gesture Recognition | | ✔ | ✔ | ✔ | |
+| Location | Geofence Manager | | ✔ | ✔ | ✔ | ✔ |
+| | Location Manager | | ✔ | ✔ | ✔ | ✔ |
+| Machine Learning | Pipeline | | | | | ✔ |
+| | Single | | | | | ✔ |
+| | Trainer | | | | | ✔ |
+| Messaging | Email | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | Messages | ✔ | | | | ✔ |
+| | Push | | ✔ | ✔ | ✔ | ✔ |
+| Multimedia | Audio I/O | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | Camera | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | Image Util | | ✔ | ✔ | ✔ | ✔ |
+| | Media Codec | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | Media Controller | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | Media Demuxer | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | Media Muxer | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | Media Streamer | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | Media Tool | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | Media Vision | ✔ | ✔ | ✔ | ✔ | |
+| | Metadata Editor | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | Metadata Extractor | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | Player | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | Radio | | ✔ | ✔ | ✔ | ✔ |
+| | Recorder | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | Screen Mirroring | | ✔ | ✔ | ✔ | ✔ |
+| | Sound Manager | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | Sound Pool | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | StreamRecorder | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | Thumbnail Util | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | Tone Player | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | Video Util | ✔ | | | | |
+| | WAV Player | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | WebRTC | | | | | ✔ |
+| Network | Application Service Platform | | ✔ | ✔ | ✔ | ✔ |
+| | Bluetooth | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | Connection | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | DNSSD | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | HTTP | | ✔ | ✔ | ✔ | ✔ |
+| | IoTCon | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | MTP | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | SSDP | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | Smart Traffic Control | | ✔ | ✔ | ✔ | ✔ |
+| | Smartcard | ✔ | | | | ✔ |
+| | SoftAP | | ✔ | ✔ | ✔ | ✔ |
+| | VPN Service | | ✔ | ✔ | ✔ | ✔ |
+| | Wi-Fi Manager | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | Wi-Fi Direct | | ✔ | ✔ | ✔ | ✔ |
+| Security | CSR | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | Device Certificate Manager | | ✔ | ✔ | ✔ | ✔ |
+| | Device Policy Manager | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | Key Manager | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | Privacy Privilege Manager | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | Privilege Info | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | YACA | ✔ | ✔ | ✔ | ✔ | ✔ |
+| Social | Calendar | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | Contacts | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | Phonenumber utils | ✔ | ✔ | ✔ | ✔ | ✔ |
+| System | Device | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | Diagnostics | | | | ✔ | ✔ |
+| | Dlog | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | Feedback | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | Media key | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | Peripheral IO | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | Runtime information | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | Sensor | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | Storage | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | System Information | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | System Settings | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | T-trace | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | USB Host | ✔ | ✔ | ✔ | ✔ | ✔ |
+| Telephony | Telephony Information | ✔ | | | | |
+| UI | Clipboard History Manager | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | External Output Manager | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | TBM Surface | ✔ | ✔ | ✔ | ✔ | ✔ |
+| UIX | Autofill | | |✔ | ✔ | ✔ |
+| | Input Method | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | Input Method Manager | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | Multi assistant | | ✔ | ✔ | ✔ | ✔ |
+| | STT | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | STT Engine | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | TTS | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | TTS Engine | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | Voice control | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | Voice control engine | | ✔ | ✔ | ✔ | ✔ |
+| | Voice control manager | | | ✔ | ✔ | ✔ |
