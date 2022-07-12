@@ -7,7 +7,7 @@ set -e
 
 SCRIPT_DIR=$(dirname $(readlink -f $0))
 
-TARGET_PLATFORMS="4.0 5.0 5.5 6.0"
+TARGET_PLATFORMS="4.0 5.0 5.5 6.0 6.5"
 
 if [ ! -d $SCRIPT_DIR/../rootstraps ]; then
     echo "No rootstraps found. Run copy_rootstraps.sh first."

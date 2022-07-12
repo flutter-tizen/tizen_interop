@@ -20,7 +20,7 @@ fi
 OUTDIR=$SCRIPT_DIR/../rootstraps
 rm -fr $OUTDIR
 
-VERSIONS="4.0 5.0 5.5 6.0"
+VERSIONS="4.0 5.0 5.5 6.0 6.5"
 for v in $VERSIONS; do
     rootstrap=$TIZEN_SDK/platforms/tizen-$v/iot-headed/rootstraps/iot-headed-$v-device.core
     if [ ! -d $rootstrap ]; then
@@ -30,4 +30,3 @@ for v in $VERSIONS; do
     mkdir -p $OUTDIR/$v    
     cp -fr $rootstrap/usr $OUTDIR/$v
 done
-
