@@ -1,0 +1,16 @@
+name: Release
+
+on: [pull_request]
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - uses: subosito/flutter-action@v1
+      with:
+        channel: stable
+    - name: Dry run on pull request
+      run: flutter pub publish --dry-run
