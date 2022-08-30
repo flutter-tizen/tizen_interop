@@ -77,6 +77,3 @@ build/
 
 # Tizen Rootstraps
 rootstraps/
-
-# Docs
-docs/**/*.png
