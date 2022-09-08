@@ -1,26 +1,14 @@
 name: Release
 
-on:
-  pull_request:
-  workflow_dispatch:
+on: [pull_request]
 
 jobs:
   release:
     runs-on: ubuntu-latest
-    # if: ${{ github.repository_owner == 'flutter-tizen' }}
     steps:
       - uses: actions/checkout@v3
       - uses: subosito/flutter-action@v2
         with:
           channel: stable
       - name: Dry run on pull request
-        if: ${{ github.event_name == 'pull_request' }}
         run: flutter pub publish --dry-run
-      - name: Try publish
-        if: ${{ github.event_name == 'workflow_dispatch' }}
-        env:
-          PUB_CREDENTIALS: ${{ secrets.PUB_CREDENTIALS }}
-        timeout-minutes: 2
-        run: |
-          echo '${{ secrets.PUB_CREDENTIALS }}' > $PUB_CACHE/credentials.json
-          flutter pub publish -f || true
