@@ -136,3 +136,11 @@ dart-bool: true
 
 typedef-map:
   "size_t": "Int32"
+
+structs:
+  rename:
+    '_(.*)': '$1'
+  
+enums:
+  rename:
+    '_(.*)': '$1'
