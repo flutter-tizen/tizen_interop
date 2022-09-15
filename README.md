@@ -11,8 +11,8 @@ To use this package, add `ffi` and `tizen_interop` as dependencies in your `pubs
 
 ```yaml
 dependencies:
-  ffi: ^1.1.2
-  tizen_interop: ^0.1.0
+  ffi: ^2.0.1
+  tizen_interop: ^0.2.0
 ```
 
 Then, import `package:ffi/ffi.dart` and `package:tizen_interop/[TIZEN_VERSION]/tizen.dart` in your Dart code.
@@ -29,20 +29,31 @@ import 'package:tizen_interop/4.0/tizen.dart';
 // Prefer using `arena` to allocate memory because it frees the memory
 // automatically when the `using` block ends.
 final appName = using((Arena arena) {
-  Pointer<Pointer<Int8>> ppStr = arena();
+  Pointer<Pointer<Char>> ppStr = arena();
   if (tizen.app_get_name(ppStr) == 0) {
     // The memory allocated by the Native API must be freed by the caller.
     arena.using(ppStr.value, calloc.free);
     return ppStr.value.toDartString();
   }
+  return 'unknown';
+});
+
+// Passing a string value to the Native API.
+// The memory allocated by the `toNativeChar` method must be freed by
+// the caller. The `arena` allocator will free it automatically.
+using((Arena arena) {
+  tizen.preference_set_int(
+      'tizen_interop_test_key_for_int'.toNativeChar(allocator: arena), 100);
 });
 
 // Getting an integer value from the Native API.
-final memSize = using((Arena arena) {
-  Pointer<Int32> pMemSize = arena();
-  if (tizen.runtime_info_get_physical_memory_size(pMemSize) == 0) {
-    return pMemSize.value;
-  }
+final preferenceValue = using((Arena arena) {
+  Pointer<Int> pValue = arena();
+  int ret = tizen.preference_get_int(
+    'tizen_interop_test_key_for_int'.toNativeChar(allocator: arena),
+    pValue,
+  );
+  return ret == 0 ? pValue.value : 0;
 });
 
 // Getting a struct value from the Native API.
@@ -50,19 +61,6 @@ final memInfo = using((Arena arena) {
   Pointer<runtime_memory_info_s> pMemInfo = arena();
   if (tizen.runtime_info_get_system_memory_info(pMemInfo) == 0) {
     return pMemInfo.ref;
-  }
-});
-
-// Passing a string value to the Native API.
-final modelName = using((Arena arena) {
-  Pointer<Pointer<Int8>> ppStr = arena();
-  // The memory allocated by the `toNativeInt8` method must be freed by
-  // the caller. The `arena` allocator will free it automatically.
-  final key =
-      'http://tizen.org/system/model_name'.toNativeInt8(allocator: arena);
-  if (tizen.system_info_get_platform_string(key, ppStr) == 0) {
-    arena.using(ppStr.value, calloc.free);
-    return ppStr.value.toDartString();
   }
 });
 ```
