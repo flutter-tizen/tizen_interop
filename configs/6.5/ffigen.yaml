@@ -140,14 +140,8 @@ compiler-opts:
   - '-I./rootstraps/6.5/usr/include/glib-2.0/'
   - '-I./rootstraps/6.5/usr/lib/glib-2.0/include/'
 
-dart-bool: true
-
-typedef-map:
-  'size_t': 'Int32'
-
 structs:
-  rename:
-    '_+(.*)': '$1'
+  dependency-only: opaque
 
 enums:
   rename:

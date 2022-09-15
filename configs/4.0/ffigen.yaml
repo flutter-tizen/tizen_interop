@@ -106,19 +106,9 @@ compiler-opts:
   - '-I./rootstraps/4.0/usr/include/emile-1/'
   - '-I./rootstraps/4.0/usr/include/ecore-imf-1/'
 
-dart-bool: true
-
-typedef-map:
-  'size_t': 'Int32'
-
-globals:
-  rename:
-    '_+(.*)': '$1'
-
 structs:
-  rename:
-    '_+(.*)': '$1'
-  
+  dependency-only: opaque
+
 enums:
   rename:
     '_+(.*)': '$1'
