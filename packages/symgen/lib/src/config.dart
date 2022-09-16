@@ -3,6 +3,7 @@
 // found in the LICENSE file.
 
 import 'dart:io' show Platform;
+
 import 'package:args/args.dart';
 import 'package:file/file.dart';
 import 'package:file/local.dart';
@@ -10,22 +11,21 @@ import 'package:yaml/yaml.dart';
 
 class Config {
   String get name => _name;
-  late String _name;
+  late final String _name;
 
   String get output => _output;
-  late String _output;
+  late final String _output;
 
-  List<String> get allowlist => _allowlist;
-  late final List<String> _allowlist = <String>[];
+  final List<String> allowlist = <String>[];
 
   String get libraryPath => _libraryPath;
-  late String _libraryPath;
+  late final String _libraryPath;
 
   List<String> get targetLibraries => _targetLibraries;
-  late List<String> _targetLibraries;
+  late final List<String> _targetLibraries;
 
   String get preamble => _preamble;
-  late String _preamble;
+  late final String _preamble;
 
   Config._();
 
@@ -47,15 +47,9 @@ class Config {
     config._libraryPath = argResults?['library-path'] ??
         _mapEnvironmentVariables(map.getValue('library-path'));
 
-    config._allowlist.addAll(
-      _readAllowlistFile(
-        argResults?['allowlist'] ??
-            map.getValue(
-              'allowlist',
-              mandatory: false,
-            ),
-      ),
-    );
+    config.allowlist.addAll(_readAllowlistFile(
+      argResults?['allowlist'] ?? map.getValue('allowlist', mandatory: false),
+    ));
 
     config._targetLibraries =
         List.unmodifiable(map.getValue('target-libraries'));
@@ -67,11 +61,11 @@ class Config {
   }
 
   static String? _mapEnvironmentVariables(String? value) {
-    if (value == null || !value.contains('\$\{')) {
+    if (value == null || !value.contains('\${')) {
       return value;
     }
     for (var key in Platform.environment.keys) {
-      value = value!.replaceAll('\$\{$key\}', Platform.environment[key]!);
+      value = value!.replaceAll('\${$key}', Platform.environment[key]!);
     }
     return value;
   }
@@ -97,7 +91,6 @@ extension _YamlMapExtensions on YamlMap {
       }
       value = defaultValue;
     }
-
     return value;
   }
 }

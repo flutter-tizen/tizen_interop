@@ -1,0 +1,4 @@
+analyzer:
+  errors:
+    unused_element: ignore
+    unused_field: ignore
