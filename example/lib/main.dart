@@ -45,7 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // Prefer using `arena` to allocate memory because it frees the memory
     // automatically when the `using` block ends.
     _appName = using((Arena arena) {
-      final Pointer<Pointer<Char>> ppStr = arena();
+      Pointer<Pointer<Char>> ppStr = arena();
       if (tizen.app_get_name(ppStr) == 0) {
         // The memory allocated by the Native API must be freed by the caller.
         arena.using(ppStr.value, calloc.free);
@@ -62,17 +62,20 @@ class _MyHomePageState extends State<MyHomePage> {
 
     // Getting an integer value from the Native API.
     _preferenceValue = using((Arena arena) {
-      final Pointer<Int> pValue = arena();
-      int ret = tizen.preference_get_int(
-        'tizen_interop_test_key_for_int'.toNativeChar(allocator: arena),
-        pValue,
-      );
-      return ret == 0 ? pValue.value : 0;
+      Pointer<Int> pValue = arena();
+      if (tizen.preference_get_int(
+            'tizen_interop_test_key_for_int'.toNativeChar(allocator: arena),
+            pValue,
+          ) ==
+          0) {
+        return pValue.value;
+      }
+      return 0;
     });
 
     // Getting a struct value from the Native API.
     _freeMemory = using((Arena arena) {
-      final Pointer<runtime_memory_info_s> pMemInfo = arena();
+      Pointer<runtime_memory_info_s> pMemInfo = arena();
       if (tizen.runtime_info_get_system_memory_info(pMemInfo) == 0) {
         return pMemInfo.ref.free;
       }
