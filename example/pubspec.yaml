@@ -6,6 +6,7 @@ environment:
   sdk: '>=2.18.0 <3.0.0'
 
 dependencies:
+  ffi: ^2.0.1
   flutter:
     sdk: flutter
   tizen_interop:

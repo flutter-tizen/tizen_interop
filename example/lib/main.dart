@@ -1,6 +1,7 @@
-import 'package:flutter/material.dart';
 import 'dart:ffi';
+
 import 'package:ffi/ffi.dart';
+import 'package:flutter/material.dart';
 import 'package:tizen_interop/4.0/tizen.dart';
 
 void main() {
@@ -34,7 +35,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   String _appName = '';
   int _preferenceValue = 0;
-  runtime_memory_info_s? _memInfo;
+  int _freeMemory = 0;
 
   @override
   void initState() {
@@ -44,7 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // Prefer using `arena` to allocate memory because it frees the memory
     // automatically when the `using` block ends.
     _appName = using((Arena arena) {
-      Pointer<Pointer<Char>> ppStr = arena();
+      final Pointer<Pointer<Char>> ppStr = arena();
       if (tizen.app_get_name(ppStr) == 0) {
         // The memory allocated by the Native API must be freed by the caller.
         arena.using(ppStr.value, calloc.free);
@@ -61,7 +62,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     // Getting an integer value from the Native API.
     _preferenceValue = using((Arena arena) {
-      Pointer<Int> pValue = arena();
+      final Pointer<Int> pValue = arena();
       int ret = tizen.preference_get_int(
         'tizen_interop_test_key_for_int'.toNativeChar(allocator: arena),
         pValue,
@@ -70,11 +71,12 @@ class _MyHomePageState extends State<MyHomePage> {
     });
 
     // Getting a struct value from the Native API.
-    _memInfo = using((Arena arena) {
-      Pointer<runtime_memory_info_s> pMemInfo = arena();
+    _freeMemory = using((Arena arena) {
+      final Pointer<runtime_memory_info_s> pMemInfo = arena();
       if (tizen.runtime_info_get_system_memory_info(pMemInfo) == 0) {
-        return pMemInfo.ref;
+        return pMemInfo.ref.free;
       }
+      return 0;
     });
   }
 
@@ -90,9 +92,7 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             Text('app_get_name() = $_appName'),
             Text('preference_get_int() = $_preferenceValue'),
-            Text('Total Memory = ${_memInfo?.total}'),
-            Text('Used Memory = ${_memInfo?.used}'),
-            Text('Free Memory = ${_memInfo?.free}'),
+            Text('Free Memory = $_freeMemory'),
           ],
         ),
       ),
