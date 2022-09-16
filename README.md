@@ -28,7 +28,7 @@ import 'package:tizen_interop/4.0/tizen.dart';
 // Getting a string value from the Native API.
 // Prefer using `arena` to allocate memory because it frees the memory
 // automatically when the `using` block ends.
-final String appName = using((Arena arena) {
+String appName = using((Arena arena) {
   Pointer<Pointer<Char>> ppStr = arena();
   if (tizen.app_get_name(ppStr) == 0) {
     // The memory allocated by the Native API must be freed by the caller.
@@ -42,25 +42,24 @@ final String appName = using((Arena arena) {
 // The memory allocated by the `toNativeChar` method must be freed by
 // the caller. The `arena` allocator will free it automatically.
 using((Arena arena) {
-  tizen.preference_set_int(
-      'tizen_interop_test_key_for_int'.toNativeChar(allocator: arena), 100);
+  Pointer<Char> pKey =
+      'tizen_interop_test_key_for_int'.toNativeChar(allocator: arena);
+  tizen.preference_set_int(pKey, 100);
 });
 
 // Getting an integer value from the Native API.
-final int preferenceValue = using((Arena arena) {
+int preferenceValue = using((Arena arena) {
+  Pointer<Char> pKey =
+      'tizen_interop_test_key_for_int'.toNativeChar(allocator: arena);
   Pointer<Int> pValue = arena();
-  if (tizen.preference_get_int(
-        'tizen_interop_test_key_for_int'.toNativeChar(allocator: arena),
-        pValue,
-      ) ==
-      0) {
+  if (tizen.preference_get_int(pKey, pValue) == 0) {
     return pValue.value;
   }
   return 0;
 });
 
 // Getting a struct value from the Native API.
-final int freeMemory = using((Arena arena) {
+int freeMemory = using((Arena arena) {
   Pointer<runtime_memory_info_s> pMemInfo = arena();
   if (tizen.runtime_info_get_system_memory_info(pMemInfo) == 0) {
     return pMemInfo.ref.free;

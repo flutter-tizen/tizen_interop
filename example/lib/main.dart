@@ -55,19 +55,20 @@ class _MyHomePageState extends State<MyHomePage> {
     });
 
     // Passing a string value to the Native API.
+    // The memory allocated by the `toNativeChar` method must be freed by
+    // the caller. The `arena` allocator will free it automatically.
     using((Arena arena) {
-      tizen.preference_set_int(
-          'tizen_interop_test_key_for_int'.toNativeChar(allocator: arena), 100);
+      Pointer<Char> pKey =
+          'tizen_interop_test_key_for_int'.toNativeChar(allocator: arena);
+      tizen.preference_set_int(pKey, 100);
     });
 
     // Getting an integer value from the Native API.
     _preferenceValue = using((Arena arena) {
+      Pointer<Char> pKey =
+          'tizen_interop_test_key_for_int'.toNativeChar(allocator: arena);
       Pointer<Int> pValue = arena();
-      if (tizen.preference_get_int(
-            'tizen_interop_test_key_for_int'.toNativeChar(allocator: arena),
-            pValue,
-          ) ==
-          0) {
+      if (tizen.preference_get_int(pKey, pValue) == 0) {
         return pValue.value;
       }
       return 0;
