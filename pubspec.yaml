@@ -1,6 +1,6 @@
 name: tizen_interop
 description: Provides Dart bindings and utility functions for using Tizen native APIs.
-version: 0.2.0
+version: 0.2.1
 homepage: https://github.com/flutter-tizen/tizen_interop
 
 environment:

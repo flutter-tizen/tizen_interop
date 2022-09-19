@@ -133,9 +133,6 @@ compiler-opts:
   - '-I./rootstraps/5.5/usr/include/glib-2.0/'
   - '-I./rootstraps/5.5/usr/lib/glib-2.0/include/'
 
-structs:
-  dependency-only: opaque
-
 enums:
   rename:
     '_+(.*)': '$1'
