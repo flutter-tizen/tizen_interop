@@ -122,9 +122,6 @@ compiler-opts:
   - '-I./rootstraps/5.0/usr/include/emile-1/'
   - '-I./rootstraps/5.0/usr/include/ecore-imf-1/'
 
-structs:
-  dependency-only: opaque
-
 enums:
   rename:
     '_+(.*)': '$1'

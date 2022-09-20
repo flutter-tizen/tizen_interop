@@ -1,3 +1,7 @@
+## 0.2.1
+
+* Include all structs even if no dependencies.
+
 ## 0.2.0
 
 * Upgrade ffigen to 6.1.2.
