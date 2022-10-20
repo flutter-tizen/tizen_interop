@@ -1,3 +1,7 @@
+## 0.2.2
+
+* Remove path and yaml dependencies.
+
 ## 0.2.1
 
 * Include all structs even if no dependencies.
