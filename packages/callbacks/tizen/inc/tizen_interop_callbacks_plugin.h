@@ -1,0 +1,37 @@
+#ifndef FLUTTER_PLUGIN_TIZEN_INTEROP_CALLBACKS_PLUGIN_H_
+#define FLUTTER_PLUGIN_TIZEN_INTEROP_CALLBACKS_PLUGIN_H_
+
+#include <flutter_plugin_registrar.h>
+#include <map>
+#include <functional>
+
+#include <../../../../../dart-sdk/include/dart_api.h>
+
+#ifdef FLUTTER_PLUGIN_IMPL
+#define FLUTTER_PLUGIN_EXPORT __attribute__((visibility("default")))
+#else
+#define FLUTTER_PLUGIN_EXPORT
+#endif
+
+#if defined(__cplusplus)
+extern "C" {
+#endif
+
+FLUTTER_PLUGIN_EXPORT void TizenInteropCallbacksPluginRegisterWithRegistrar(
+    FlutterDesktopPluginRegistrarRef registrar);
+
+#if defined(__cplusplus)
+}  // extern "C"
+#endif
+
+inline Dart_Port send_port;
+
+struct CallbackInfo {
+  void *callbackPtr;
+  void *actualUserData;
+};
+
+typedef std::function<void()> CallbackWrapper;
+void RequestCallbackCall(CallbackWrapper *wrapper);
+
+#endif  // FLUTTER_PLUGIN_TIZEN_INTEROP_CALLBACKS_PLUGIN_H_

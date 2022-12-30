@@ -1,7 +1,7 @@
 # See https://docs.tizen.org/application/tizen-studio/native-tools/project-conversion
 # for details.
 
-APPNAME = async_callbacks_plugin
+APPNAME = tizen_interop_callbacks_plugin
 type = staticLib
 profile = common-4.0
 

@@ -1,19 +1,74 @@
-#ifndef _ASYNC_CALLBACKS_MACROS_H_
-#define _ASYNC_CALLBACKS_MACROS_H_
+#ifndef _TIZEN_INTEROP_CALLBACKS_MACROS_H_
+#define _TIZEN_INTEROP_CALLBACKS_MACROS_H_
 
-#ifndef EXPAND_LIST
 #define EXPAND_LIST(...) __VA_ARGS__
-#endif
 
-// Note: CB_PARAMS_NAMES should be defined before calling PROXY_GROUP_FOREACH.
+#define GET_CALLBACK_ID(CB_NAME, OFFSET) __reserved_cb_id_array[BASE_CALLBACK_ID_##CB_NAME + OFFSET]
 
-// foreach callbacks always return bool
-#ifndef PROXY_GROUP_FOREACH
-#define PROXY_GROUP_FOREACH(CB_NAME, CB_PARAMS...) \
-bool platform_blocking_##CB_NAME(CB_PARAMS, void *reg_user_data) { \
-  LOG_DEBUG("in platform_blocking_##CB_NAME"); \
+//#define LDEBUG(...) LOG_DEBUG(__VA_ARGS__)
+#define LDEBUG(...)
+
+// Note: CB_PARAMS_NAMES should be defined before calling PROXY_GROUP_*.
+
+#define PROXY_GROUP_RETURN(CB_NAME, CB_RETURN, CB_PARAMS...) \
+CB_RETURN platform_blocking_##CB_NAME(CB_PARAMS) { \
+  LDEBUG("in platform_blocking_##CB_NAME"); \
 \
-  int dartCallbackRetVal = 0; \
+  CB_RETURN dartCallbackRetVal = CB_RETURN(); \
+\
+  std::mutex mutex; \
+  std::unique_lock<std::mutex> lock(mutex); \
+  std::condition_variable cv; \
+\
+  bool dartCallbackFinished = false; \
+  int callbackId = reinterpret_cast<int>(user_data); \
+  CallbackInfo cbInfo = __cb_id_to_info_map[callbackId]; \
+  user_data = cbInfo.actualUserData; \
+  CallbackWrapper wrapper = \
+      [&cbInfo, &dartCallbackRetVal, \
+       EXPAND_LIST(CB_PARAMS_NAMES), \
+       &cv, &dartCallbackFinished] { \
+    CB_NAME local_cb_ptr = reinterpret_cast<CB_NAME>(cbInfo.callbackPtr); \
+    LDEBUG("calling local_cb_ptr()"); \
+    dartCallbackRetVal = local_cb_ptr(EXPAND_LIST(CB_PARAMS_NAMES)); \
+    dartCallbackFinished = true; \
+    LDEBUG("calling notify_one()"); \
+    cv.notify_one(); \
+  }; \
+\
+  CallbackWrapper *wrapper_ptr = new CallbackWrapper(wrapper); \
+  LDEBUG("calling RequestCallbackCall()"); \
+  RequestCallbackCall(wrapper_ptr); \
+\
+  LDEBUG("waiting for notification"); \
+  while (!dartCallbackFinished) { \
+    cv.wait(lock); \
+  } \
+\
+  LDEBUG("notification sent, dartCallbackRetVal: %d", dartCallbackRetVal); \
+  return dartCallbackRetVal; \
+} \
+\
+CB_RETURN platform_blocking_##CB_NAME##_0(CB_PARAMS) { \
+  return platform_blocking_##CB_NAME(EXPAND_LIST(CB_PARAMS_NAMES)); \
+} \
+CB_RETURN platform_blocking_##CB_NAME##_1(CB_PARAMS) { \
+  return platform_blocking_##CB_NAME(EXPAND_LIST(CB_PARAMS_NAMES)); \
+} \
+CB_RETURN platform_blocking_##CB_NAME##_2(CB_PARAMS) { \
+  return platform_blocking_##CB_NAME(EXPAND_LIST(CB_PARAMS_NAMES)); \
+} \
+CB_RETURN platform_blocking_##CB_NAME##_3(CB_PARAMS) { \
+  return platform_blocking_##CB_NAME(EXPAND_LIST(CB_PARAMS_NAMES)); \
+} \
+CB_RETURN platform_blocking_##CB_NAME##_4(CB_PARAMS) { \
+  return platform_blocking_##CB_NAME(EXPAND_LIST(CB_PARAMS_NAMES)); \
+}
+// end of PROXY_GROUP_RETURN
+
+#define PROXY_GROUP_BLOCKING(CB_NAME, CB_PARAMS...) \
+void platform_blocking_##CB_NAME(CB_PARAMS) { \
+  LDEBUG("in platform_blocking_##CB_NAME"); \
 \
   std::mutex mutex; \
   std::unique_lock<std::mutex> lock(mutex); \
@@ -21,61 +76,283 @@ bool platform_blocking_##CB_NAME(CB_PARAMS, void *reg_user_data) { \
 \
   bool dartCallbackFinished = false; \
 \
-  int callbackId = reinterpret_cast<int>(reg_user_data); \
+  int callbackId = reinterpret_cast<int>(user_data); \
   CallbackInfo cbInfo = __cb_id_to_info_map[callbackId]; \
-\
-  CB_NAME local_cb_ptr = \
-    reinterpret_cast<CB_NAME>(cbInfo.callbackPtr); \
-  void *actual_user_data = cbInfo.actualUserData; \
+  user_data = cbInfo.actualUserData; \
   CallbackWrapper wrapper = \
-      [local_cb_ptr, &dartCallbackRetVal, \
-       EXPAND_LIST(CB_PARAMS_NAMES), actual_user_data, \
-       &cv, &dartCallbackFinished] { \
-    LOG_DEBUG("calling local_cb_ptr()"); \
-    dartCallbackRetVal = local_cb_ptr(EXPAND_LIST(CB_PARAMS_NAMES), actual_user_data); \
+      [&cbInfo, EXPAND_LIST(CB_PARAMS_NAMES), &cv, &dartCallbackFinished] { \
+    CB_NAME local_cb_ptr = reinterpret_cast<CB_NAME>(cbInfo.callbackPtr); \
+    LDEBUG("calling local_cb_ptr()"); \
+    local_cb_ptr(EXPAND_LIST(CB_PARAMS_NAMES)); \
     dartCallbackFinished = true; \
-    LOG_DEBUG("calling notify_one()"); \
+    LDEBUG("calling notify_one()"); \
     cv.notify_one(); \
   }; \
 \
   CallbackWrapper *wrapper_ptr = new CallbackWrapper(wrapper); \
-  LOG_DEBUG("calling RequestCallbackCall()"); \
+  LDEBUG("calling RequestCallbackCall()"); \
   RequestCallbackCall(wrapper_ptr); \
 \
-  LOG_DEBUG("waiting for notification"); \
+  LDEBUG("waiting for notification"); \
   while (!dartCallbackFinished) { \
     cv.wait(lock); \
   } \
 \
-  LOG_DEBUG("notification received, dartCallbackRetVal: %d", dartCallbackRetVal); \
+  LDEBUG("notification sent"); \
+} \
+\
+void platform_blocking_##CB_NAME##_0(CB_PARAMS) { \
+  platform_blocking_##CB_NAME(EXPAND_LIST(CB_PARAMS_NAMES)); \
+} \
+void platform_blocking_##CB_NAME##_1(CB_PARAMS) { \
+  platform_blocking_##CB_NAME(EXPAND_LIST(CB_PARAMS_NAMES)); \
+} \
+void platform_blocking_##CB_NAME##_2(CB_PARAMS) { \
+  platform_blocking_##CB_NAME(EXPAND_LIST(CB_PARAMS_NAMES)); \
+} \
+void platform_blocking_##CB_NAME##_3(CB_PARAMS) { \
+  platform_blocking_##CB_NAME(EXPAND_LIST(CB_PARAMS_NAMES)); \
+} \
+void platform_blocking_##CB_NAME##_4(CB_PARAMS) { \
+  platform_blocking_##CB_NAME(EXPAND_LIST(CB_PARAMS_NAMES)); \
+}
+// end of PROXY_GROUP_BLOCKING
+
+#define PROXY_GROUP_NON_BLOCKING(CB_NAME, CB_PARAMS...) \
+void platform_non_blocking_##CB_NAME(CB_PARAMS) { \
+  LDEBUG("in platform_non_blocking_##CB_NAME"); \
+  int callbackId = reinterpret_cast<int>(user_data); \
+  CallbackInfo cbInfo = __cb_id_to_info_map[callbackId]; \
+  user_data = cbInfo.actualUserData; \
+  CallbackWrapper wrapper = \
+      [&cbInfo, EXPAND_LIST(CB_PARAMS_NAMES)] { \
+    CB_NAME local_cb_ptr = reinterpret_cast<CB_NAME>(cbInfo.callbackPtr); \
+    LDEBUG("calling local_cb_ptr()"); \
+    local_cb_ptr(EXPAND_LIST(CB_PARAMS_NAMES)); \
+  }; \
+\
+  CallbackWrapper *wrapper_ptr = new CallbackWrapper(wrapper); \
+  LDEBUG("calling RequestCallbackCall()"); \
+  RequestCallbackCall(wrapper_ptr); \
+} \
+\
+void platform_non_blocking_##CB_NAME##_0(CB_PARAMS) { \
+  platform_non_blocking_##CB_NAME(EXPAND_LIST(CB_PARAMS_NAMES)); \
+} \
+void platform_non_blocking_##CB_NAME##_1(CB_PARAMS) { \
+  platform_non_blocking_##CB_NAME(EXPAND_LIST(CB_PARAMS_NAMES)); \
+} \
+void platform_non_blocking_##CB_NAME##_2(CB_PARAMS) { \
+  platform_non_blocking_##CB_NAME(EXPAND_LIST(CB_PARAMS_NAMES)); \
+} \
+void platform_non_blocking_##CB_NAME##_3(CB_PARAMS) { \
+  platform_non_blocking_##CB_NAME(EXPAND_LIST(CB_PARAMS_NAMES)); \
+} \
+void platform_non_blocking_##CB_NAME##_4(CB_PARAMS) { \
+  platform_non_blocking_##CB_NAME(EXPAND_LIST(CB_PARAMS_NAMES)); \
+}
+// end of PROXY_GROUP_NON_BLOCKING
+
+#define PROXY_GROUP_RETURN_NO_USER_DATA(CB_NAME, CB_RETURN, CB_PARAMS...) \
+CB_RETURN platform_blocking_##CB_NAME(int callbackId, CB_PARAMS) { \
+  LDEBUG("in platform_blocking_##CB_NAME"); \
+\
+  CB_RETURN dartCallbackRetVal = CB_RETURN(); \
+\
+  std::mutex mutex; \
+  std::unique_lock<std::mutex> lock(mutex); \
+  std::condition_variable cv; \
+\
+  bool dartCallbackFinished = false; \
+  CallbackWrapper wrapper = \
+      [callbackId, &dartCallbackRetVal, \
+       EXPAND_LIST(CB_PARAMS_NAMES), \
+       &cv, &dartCallbackFinished] { \
+    CallbackInfo cbInfo = __cb_id_to_info_map[callbackId]; \
+    CB_NAME local_cb_ptr = reinterpret_cast<CB_NAME>(cbInfo.callbackPtr); \
+    LDEBUG("calling local_cb_ptr()"); \
+    dartCallbackRetVal = local_cb_ptr(EXPAND_LIST(CB_PARAMS_NAMES)); \
+    dartCallbackFinished = true; \
+    LDEBUG("calling notify_one()"); \
+    cv.notify_one(); \
+  }; \
+\
+  CallbackWrapper *wrapper_ptr = new CallbackWrapper(wrapper); \
+  LDEBUG("calling RequestCallbackCall()"); \
+  RequestCallbackCall(wrapper_ptr); \
+\
+  LDEBUG("waiting for notification"); \
+  while (!dartCallbackFinished) { \
+    cv.wait(lock); \
+  } \
+\
+  LDEBUG("notification sent, dartCallbackRetVal: %d", dartCallbackRetVal); \
   return dartCallbackRetVal; \
 } \
 \
-bool platform_blocking_##CB_NAME##_0(CB_PARAMS, void *reg_user_data) { \
-  return platform_blocking_##CB_NAME(EXPAND_LIST(CB_PARAMS_NAMES), reg_user_data); \
+CB_RETURN platform_blocking_##CB_NAME##_0(CB_PARAMS) { \
+  return platform_blocking_##CB_NAME(GET_CALLBACK_ID(CB_NAME,0), EXPAND_LIST(CB_PARAMS_NAMES)); \
 } \
-bool platform_blocking_##CB_NAME##_1(CB_PARAMS, void *reg_user_data) { \
-  return platform_blocking_##CB_NAME(EXPAND_LIST(CB_PARAMS_NAMES), reg_user_data); \
+CB_RETURN platform_blocking_##CB_NAME##_1(CB_PARAMS) { \
+  return platform_blocking_##CB_NAME(GET_CALLBACK_ID(CB_NAME,1), EXPAND_LIST(CB_PARAMS_NAMES)); \
 } \
-bool platform_blocking_##CB_NAME##_2(CB_PARAMS, void *reg_user_data) { \
-  return platform_blocking_##CB_NAME(EXPAND_LIST(CB_PARAMS_NAMES), reg_user_data); \
+CB_RETURN platform_blocking_##CB_NAME##_2(CB_PARAMS) { \
+  return platform_blocking_##CB_NAME(GET_CALLBACK_ID(CB_NAME,2), EXPAND_LIST(CB_PARAMS_NAMES)); \
 } \
-bool platform_blocking_##CB_NAME##_3(CB_PARAMS, void *reg_user_data) { \
-  return platform_blocking_##CB_NAME(EXPAND_LIST(CB_PARAMS_NAMES), reg_user_data); \
+CB_RETURN platform_blocking_##CB_NAME##_3(CB_PARAMS) { \
+  return platform_blocking_##CB_NAME(GET_CALLBACK_ID(CB_NAME,3), EXPAND_LIST(CB_PARAMS_NAMES)); \
 } \
-bool platform_blocking_##CB_NAME##_4(CB_PARAMS, void *reg_user_data) { \
-  return platform_blocking_##CB_NAME(EXPAND_LIST(CB_PARAMS_NAMES), reg_user_data); \
+CB_RETURN platform_blocking_##CB_NAME##_4(CB_PARAMS) { \
+  return platform_blocking_##CB_NAME(GET_CALLBACK_ID(CB_NAME,4), EXPAND_LIST(CB_PARAMS_NAMES)); \
 }
-#endif  // PROXY_GROUP_FOREACH
+// end of PROXY_GROUP_RETURN_NO_USER_DATA
 
-// PARAMS do not include the last parameter (user_data)
-#ifndef MULTI_PROXY_DECLARATIONS
-#define MULTI_PROXY_DECLARATIONS(RET_TYPE, CB_NAME, PARAMS...) \
-RET_TYPE CB_NAME ## _0(PARAMS, void *reg_user_data); \
-RET_TYPE CB_NAME ## _1(PARAMS, void *reg_user_data); \
-RET_TYPE CB_NAME ## _2(PARAMS, void *reg_user_data); \
-RET_TYPE CB_NAME ## _3(PARAMS, void *reg_user_data); \
-RET_TYPE CB_NAME ## _4(PARAMS, void *reg_user_data);
-#endif // MULTI_PROXY_DECLARATIONS
+#define PROXY_GROUP_BLOCKING_NO_USER_DATA(CB_NAME, CB_PARAMS...) \
+void platform_blocking_##CB_NAME(int callbackId, CB_PARAMS) { \
+  LDEBUG("in platform_blocking_##CB_NAME"); \
+\
+  std::mutex mutex; \
+  std::unique_lock<std::mutex> lock(mutex); \
+  std::condition_variable cv; \
+\
+  bool dartCallbackFinished = false; \
+  CallbackWrapper wrapper = \
+      [callbackId, EXPAND_LIST(CB_PARAMS_NAMES), &cv, &dartCallbackFinished] { \
+    CallbackInfo cbInfo = __cb_id_to_info_map[callbackId]; \
+    CB_NAME local_cb_ptr = reinterpret_cast<CB_NAME>(cbInfo.callbackPtr); \
+    LDEBUG("calling local_cb_ptr()"); \
+    local_cb_ptr(EXPAND_LIST(CB_PARAMS_NAMES)); \
+    dartCallbackFinished = true; \
+    LDEBUG("calling notify_one()"); \
+    cv.notify_one(); \
+  }; \
+\
+  CallbackWrapper *wrapper_ptr = new CallbackWrapper(wrapper); \
+  LDEBUG("calling RequestCallbackCall()"); \
+  RequestCallbackCall(wrapper_ptr); \
+\
+  LDEBUG("waiting for notification"); \
+  while (!dartCallbackFinished) { \
+    cv.wait(lock); \
+  } \
+\
+  LDEBUG("notification sent"); \
+} \
+\
+void platform_blocking_##CB_NAME##_0(CB_PARAMS) { \
+  platform_blocking_##CB_NAME(GET_CALLBACK_ID(CB_NAME,0), EXPAND_LIST(CB_PARAMS_NAMES)); \
+} \
+void platform_blocking_##CB_NAME##_1(CB_PARAMS) { \
+  platform_blocking_##CB_NAME(GET_CALLBACK_ID(CB_NAME,1), EXPAND_LIST(CB_PARAMS_NAMES)); \
+} \
+void platform_blocking_##CB_NAME##_2(CB_PARAMS) { \
+  platform_blocking_##CB_NAME(GET_CALLBACK_ID(CB_NAME,2), EXPAND_LIST(CB_PARAMS_NAMES)); \
+} \
+void platform_blocking_##CB_NAME##_3(CB_PARAMS) { \
+  platform_blocking_##CB_NAME(GET_CALLBACK_ID(CB_NAME,3), EXPAND_LIST(CB_PARAMS_NAMES)); \
+} \
+void platform_blocking_##CB_NAME##_4(CB_PARAMS) { \
+  platform_blocking_##CB_NAME(GET_CALLBACK_ID(CB_NAME,4), EXPAND_LIST(CB_PARAMS_NAMES)); \
+}
+// end of PROXY_GROUP_BLOCKING_NO_USER_DATA
 
-#endif // _ASYNC_CALLBACKS_MACROS_H_
+#define PROXY_GROUP_NON_BLOCKING_NO_USER_DATA(CB_NAME, CB_PARAMS...) \
+void platform_non_blocking_##CB_NAME(int callbackId, CB_PARAMS) { \
+  LDEBUG("in platform_non_blocking_##CB_NAME"); \
+\
+  CallbackInfo cbInfo = __cb_id_to_info_map[callbackId]; \
+  CallbackWrapper wrapper = \
+      [&cbInfo, EXPAND_LIST(CB_PARAMS_NAMES)] { \
+    CB_NAME local_cb_ptr = reinterpret_cast<CB_NAME>(cbInfo.callbackPtr); \
+    LDEBUG("calling local_cb_ptr()"); \
+    local_cb_ptr(EXPAND_LIST(CB_PARAMS_NAMES)); \
+  }; \
+\
+  CallbackWrapper *wrapper_ptr = new CallbackWrapper(wrapper); \
+  LDEBUG("calling RequestCallbackCall()"); \
+  RequestCallbackCall(wrapper_ptr); \
+} \
+\
+void platform_non_blocking_##CB_NAME##_0(CB_PARAMS) { \
+  platform_non_blocking_##CB_NAME(GET_CALLBACK_ID(CB_NAME,0), EXPAND_LIST(CB_PARAMS_NAMES)); \
+} \
+void platform_non_blocking_##CB_NAME##_1(CB_PARAMS) { \
+  platform_non_blocking_##CB_NAME(GET_CALLBACK_ID(CB_NAME,1), EXPAND_LIST(CB_PARAMS_NAMES)); \
+} \
+void platform_non_blocking_##CB_NAME##_2(CB_PARAMS) { \
+  platform_non_blocking_##CB_NAME(GET_CALLBACK_ID(CB_NAME,2), EXPAND_LIST(CB_PARAMS_NAMES)); \
+} \
+void platform_non_blocking_##CB_NAME##_3(CB_PARAMS) { \
+  platform_non_blocking_##CB_NAME(GET_CALLBACK_ID(CB_NAME,3), EXPAND_LIST(CB_PARAMS_NAMES)); \
+} \
+void platform_non_blocking_##CB_NAME##_4(CB_PARAMS) { \
+  platform_non_blocking_##CB_NAME(GET_CALLBACK_ID(CB_NAME,4), EXPAND_LIST(CB_PARAMS_NAMES)); \
+}
+// end of PROXY_GROUP_NON_BLOCKING_NO_USER_DATA
+
+#define PROXY_GROUP_RETURN_NO_USER_DATA_NO_PARAM(CB_NAME, CB_RETURN) \
+CB_RETURN platform_blocking_##CB_NAME(int callbackId) { \
+  LDEBUG("in platform_blocking_##CB_NAME"); \
+\
+  CB_RETURN dartCallbackRetVal = CB_RETURN(); \
+\
+  std::mutex mutex; \
+  std::unique_lock<std::mutex> lock(mutex); \
+  std::condition_variable cv; \
+\
+  bool dartCallbackFinished = false; \
+  CallbackWrapper wrapper = \
+      [callbackId, &dartCallbackRetVal, &cv, &dartCallbackFinished] { \
+    CallbackInfo cbInfo = __cb_id_to_info_map[callbackId]; \
+    CB_NAME local_cb_ptr = reinterpret_cast<CB_NAME>(cbInfo.callbackPtr); \
+    LDEBUG("calling local_cb_ptr()"); \
+    dartCallbackRetVal = local_cb_ptr(); \
+    dartCallbackFinished = true; \
+    LDEBUG("calling notify_one()"); \
+    cv.notify_one(); \
+  }; \
+\
+  CallbackWrapper *wrapper_ptr = new CallbackWrapper(wrapper); \
+  LDEBUG("calling RequestCallbackCall()"); \
+  RequestCallbackCall(wrapper_ptr); \
+\
+  LDEBUG("waiting for notification"); \
+  while (!dartCallbackFinished) { \
+    cv.wait(lock); \
+  } \
+\
+  LDEBUG("notification sent, dartCallbackRetVal: %d", dartCallbackRetVal); \
+  return dartCallbackRetVal; \
+} \
+\
+CB_RETURN platform_blocking_##CB_NAME##_0() { \
+  return platform_blocking_##CB_NAME(GET_CALLBACK_ID(CB_NAME,0)); \
+} \
+CB_RETURN platform_blocking_##CB_NAME##_1() { \
+  return platform_blocking_##CB_NAME(GET_CALLBACK_ID(CB_NAME,1)); \
+} \
+CB_RETURN platform_blocking_##CB_NAME##_2() { \
+  return platform_blocking_##CB_NAME(GET_CALLBACK_ID(CB_NAME,2)); \
+} \
+CB_RETURN platform_blocking_##CB_NAME##_3() { \
+  return platform_blocking_##CB_NAME(GET_CALLBACK_ID(CB_NAME,3)); \
+} \
+CB_RETURN platform_blocking_##CB_NAME##_4() { \
+  return platform_blocking_##CB_NAME(GET_CALLBACK_ID(CB_NAME,4)); \
+}
+// end of PROXY_GROUP_RETURN_NO_USER_DATA_NO_PARAM
+
+// CB_NAME does not contain indices
+#define MULTI_PROXY_MAP_ENTRY(CB_NAME) \
+  { std::string(#CB_NAME "_0"), \
+    reinterpret_cast<void*>(CB_NAME ## _0) }, \
+  { std::string(#CB_NAME "_1"), \
+    reinterpret_cast<void*>(CB_NAME ## _1) }, \
+  { std::string(#CB_NAME "_2"), \
+    reinterpret_cast<void*>(CB_NAME ## _2) }, \
+  { std::string(#CB_NAME "_3"), \
+    reinterpret_cast<void*>(CB_NAME ## _3) }, \
+  { std::string(#CB_NAME "_4"), \
+    reinterpret_cast<void*>(CB_NAME ## _4) },
+
+#endif // _TIZEN_INTEROP_CALLBACKS_MACROS_H_

@@ -1,77 +1,45 @@
-#include "async_callbacks_plugin.h"
+#include "tizen_interop_callbacks_plugin.h"
 
-// For getPlatformVersion; remove unless needed for your plugin implementation.
-#include <system_info.h>
-
-#include <flutter/method_channel.h>
 #include <flutter/plugin_registrar.h>
-#include <flutter/standard_method_codec.h>
+#include <../../../../../dart-sdk/include/dart_native_api.h>
+#include <../../../../../dart-sdk/include/dart_api_dl.h>
 
 #include <memory>
 #include <string>
 
 #include "log.h"
 
-#include "dart_api_dl.c"
-
-
 namespace {
 
-class AsyncCallbacksPlugin : public flutter::Plugin {
+class TizenInteropCallbacksPlugin : public flutter::Plugin {
  public:
   static void RegisterWithRegistrar(flutter::PluginRegistrar *registrar) {
-    auto channel =
-        std::make_unique<flutter::MethodChannel<flutter::EncodableValue>>(
-            registrar->messenger(), "async_callbacks",
-            &flutter::StandardMethodCodec::GetInstance());
-
-    auto plugin = std::make_unique<AsyncCallbacksPlugin>();
-
-    channel->SetMethodCallHandler(
-        [plugin_pointer = plugin.get()](const auto &call, auto result) {
-          plugin_pointer->HandleMethodCall(call, std::move(result));
-        });
-
+    auto plugin = std::make_unique<TizenInteropCallbacksPlugin>();
     registrar->AddPlugin(std::move(plugin));
   }
 
-  AsyncCallbacksPlugin() {}
+  TizenInteropCallbacksPlugin() {}
 
-  virtual ~AsyncCallbacksPlugin() {}
+  virtual ~TizenInteropCallbacksPlugin() {}
 
  private:
-  void HandleMethodCall(
-      const flutter::MethodCall<flutter::EncodableValue> &method_call,
-      std::unique_ptr<flutter::MethodResult<flutter::EncodableValue>> result) {
-    const auto &method_name = method_call.method_name();
-
-    // Replace "getPlatformVersion" check with your plugin's method.
-    if (method_name == "getPlatformVersion") {
-      char *value = nullptr;
-      int ret = system_info_get_platform_string(
-          "http://tizen.org/feature/platform.version", &value);
-      if (ret == SYSTEM_INFO_ERROR_NONE) {
-        result->Success(flutter::EncodableValue(std::string(value)));
-      } else {
-        result->Error(std::to_string(ret), "Failed to get platform version.");
-      }
-      if (value) {
-        free(value);
-      }
-    } else {
-      result->NotImplemented();
-    }
-  }
 };
 
 }  // namespace
 
-void AsyncCallbacksPluginRegisterWithRegistrar(
+void TizenInteropCallbacksPluginRegisterWithRegistrar(
     FlutterDesktopPluginRegistrarRef registrar) {
-  AsyncCallbacksPlugin::RegisterWithRegistrar(
+  TizenInteropCallbacksPlugin::RegisterWithRegistrar(
       flutter::PluginRegistrarManager::GetInstance()
           ->GetRegistrar<flutter::PluginRegistrar>(registrar));
 }
+
+std::map<int, CallbackInfo> __cb_id_to_info_map;
+
+#include "dart_api_dl.c"
+#undef TIZEN_DEPRECATION
+#undef DEPRECATION_WARNING 
+#include "../generated/callbacks_6.5.cc"
 
 void RequestCallbackCall(CallbackWrapper *wrapper) {
   LOG_DEBUG("in RequestCallbackCall()");
@@ -107,7 +75,7 @@ void RegisterSendPort(Dart_Port port) {
 }
 
 __attribute__((visibility("default")))
-void *RegisterWrappedCallbackInNativeLayer(int cb_id,  void *cb_ptr, void *actual_user_data,
+void *RegisterWrappedCallbackInNativeLayer(int cb_id, void *cb_ptr, void *actual_user_data,
     const char *multi_proxy_name) {
   LOG_DEBUG("in RegisterWrappedCallbackInNativeLayer");
   __cb_id_to_info_map[cb_id] = CallbackInfo{cb_ptr, actual_user_data};

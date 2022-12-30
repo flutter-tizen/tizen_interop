@@ -6,8 +6,7 @@
 #ifdef LOG_TAG
 #undef LOG_TAG
 #endif
-//#define LOG_TAG "AsyncCallbacksPlugin"
-#define LOG_TAG "ConsoleMessage"
+#define LOG_TAG "TizenInteropCallbacksPlugin"
 
 #ifndef __MODULE__
 #define __MODULE__ strrchr("/" __FILE__, '/') + 1
