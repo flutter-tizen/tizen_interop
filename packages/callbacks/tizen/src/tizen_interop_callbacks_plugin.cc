@@ -77,7 +77,7 @@ void RegisterSendPort(Dart_Port port) {
 __attribute__((visibility("default")))
 void *RegisterWrappedCallbackInNativeLayer(int cb_id, void *cb_ptr, void *actual_user_data,
     const char *multi_proxy_name) {
-  LOG_DEBUG("in RegisterWrappedCallbackInNativeLayer");
+  LOG_DEBUG("id:%d, cb_ptr=%p", cb_id, cb_ptr);
   __cb_id_to_info_map[cb_id] = CallbackInfo{cb_ptr, actual_user_data};
   return __multi_proxy_name_to_ptr_map[std::string(multi_proxy_name)];
 }
@@ -95,12 +95,20 @@ void UnregisterWrappedCallbackInNativeLayer(int cb_id) {
 
 __attribute__((visibility("default")))
 void RunCallbackInNativeLayer(CallbackWrapper *wrapper_ptr) {
-  LOG_DEBUG("in RunCallbackInNativeLayer()");
   CallbackWrapper wrapper = *wrapper_ptr;
-  LOG_DEBUG("calling wrapper()");
+  LOG_DEBUG("in RunCallbackInNativeLayer(), calling wrapper() %p", wrapper_ptr);
   wrapper();
   LOG_DEBUG("after calling wrapper()");
   delete wrapper_ptr;
 }
+
+__attribute__((visibility("default")))
+bool TizenInteropCallbacksProxyExists(char* name) {
+  bool exists = __multi_proxy_name_to_ptr_map.count(name);
+  LOG_DEBUG("checking if proxy %s exists: %d", name, exists);
+  free(name);
+  return exists;
+}
+
 
 } // extern "C"

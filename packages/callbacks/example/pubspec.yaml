@@ -10,8 +10,10 @@ dependencies:
   flutter:
     sdk: flutter
 
+  tizen_interop:
   tizen_interop_callbacks:
     path: ../
+  tizen_log:
 
 dev_dependencies:
   flutter_lints: ^2.0.0

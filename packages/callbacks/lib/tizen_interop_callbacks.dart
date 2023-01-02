@@ -1,9 +1,9 @@
-import 'dart:async';
 import 'dart:ffi';
 import 'dart:isolate';
 import 'package:ffi/ffi.dart';
 import 'package:tizen_log/tizen_log.dart';
-import 'package:flutter/services.dart';
+
+const String logTag = "TizenInteropCallbacksPlugin";
 
 class CallbackWrapper extends Opaque {}
 
@@ -27,10 +27,10 @@ class RegisteredCallback<DartCbType extends Function> {
 }
 
 class TizenInteropCallbacks {
-  static const MethodChannel _channel = MethodChannel('async_callbacks');
   final DynamicLibrary _process = DynamicLibrary.process();
   late Pointer Function(int, Pointer, Pointer, Pointer) registerWrappedCallback;
   late Pointer Function(int) unregisterWrappedCallback;
+  late bool Function(Pointer<Utf8>) platformProxyCallbackExists;
   late void Function(Pointer) runCallbackInNativeLayer;
 
   int curCallbackId = 0;
@@ -38,41 +38,35 @@ class TizenInteropCallbacks {
   final int PROXY_ID_COUNT = 5;
   var multiProxyIds = <String, List<bool>>{};
 
-  static Future<String?> get platformVersion async {
-    final String? version = await _channel.invokeMethod('getPlatformVersion');
-    return version;
-  }
-
   void init() {
-    Log.debug('ConsoleMessage', 'listening to ReceivePort');
+    Log.debug(logTag, 'listening to ReceivePort');
     final nativeCallbackCalls = ReceivePort()..listen(callbackCallRequested);
 
-    Log.debug('ConsoleMessage', 'setting nativePort');
+    Log.debug(logTag, 'setting nativePort');
     final int nativePort = nativeCallbackCalls.sendPort.nativePort;
-    Log.debug('ConsoleMessage', '    nativePort = $nativePort');
+    Log.debug(logTag, '    nativePort = $nativePort');
 
-    Log.debug('ConsoleMessage', 'looking up InitDartApiDL()');
+    Log.debug(logTag, 'looking up InitDartApiDL()');
     final initApi = _process
         .lookup<NativeFunction<Pointer Function(Pointer)>>('InitDartApiDL')
         .asFunction<Pointer Function(Pointer)>();
-    Log.debug('ConsoleMessage', 'calling initApi()');
+    Log.debug(logTag, 'calling initApi()');
     initApi(NativeApi.initializeApiDLData);
 
-    Log.debug('ConsoleMessage', 'looking up RegisterSendPort()');
+    Log.debug(logTag, 'looking up RegisterSendPort()');
     final void Function(int) registerSendPort = _process
         .lookup<NativeFunction<register_send_port>>("RegisterSendPort")
         .asFunction();
-    Log.debug('ConsoleMessage', 'calling registerSendPort()');
+    Log.debug(logTag, 'calling registerSendPort()');
     registerSendPort(nativePort);
 
-    Log.debug('ConsoleMessage', 'looking up RunCallbackInNativeLayer()');
+    Log.debug(logTag, 'looking up RunCallbackInNativeLayer()');
     runCallbackInNativeLayer = _process
         .lookup<NativeFunction<run_cb_in_native_layer>>(
             "RunCallbackInNativeLayer")
         .asFunction();
 
-    Log.debug(
-        'ConsoleMessage', 'looking up RegisterWrappedCallbackInNativeLayer()');
+    Log.debug(logTag, 'looking up RegisterWrappedCallbackInNativeLayer()');
     /*
        About template parameter for lookup<NativeFunction<...>>:
        Pointer Function(Int32, Pointer, Pointer, Pointer):
@@ -93,21 +87,26 @@ class TizenInteropCallbacks {
                     Pointer)>>('RegisterWrappedCallbackInNativeLayer')
         .asFunction();
 
-    Log.debug('ConsoleMessage',
-        'looking up UnregisterWrappedCallbackInNativeLayer()');
+    Log.debug(logTag, 'looking up UnregisterWrappedCallbackInNativeLayer()');
     unregisterWrappedCallback = _process
         .lookup<NativeFunction<Pointer Function(Int32)>>(
             'UnregisterWrappedCallbackInNativeLayer')
         .asFunction();
+
+    Log.debug(logTag, 'looking up TizenInteropCallbacksProxyExists()');
+    platformProxyCallbackExists = _process
+        .lookup<NativeFunction<Bool Function(Pointer<Utf8>)>>(
+            'TizenInteropCallbacksProxyExists')
+        .asFunction();
   }
 
   void callbackCallRequested(dynamic message) {
-    Log.debug('ConsoleMessage', 'in callbackCallRequested()');
+    Log.debug(logTag, 'in callbackCallRequested()');
     int callbackPtr = message;
     final callback = Pointer<CallbackWrapper>.fromAddress(callbackPtr);
-    Log.debug('ConsoleMessage', 'calling runCallbackInNativeLayer()');
+    Log.debug(logTag, 'calling runCallbackInNativeLayer()');
     runCallbackInNativeLayer(callback);
-    Log.debug('ConsoleMessage', 'after calling runCallbackInNativeLayer()');
+    Log.debug(logTag, 'after calling runCallbackInNativeLayer()');
   }
 
   int getFirstFreeId(List<bool> list) {
@@ -115,13 +114,13 @@ class TizenInteropCallbacks {
   }
 
   RegisteredCallback<DartCbType> register<DartCbType extends Function>(
-      String nativeName,
-      Pointer<NativeFunction<DartCbType>> dartCallback,
-      Pointer<Void> userData,
-      bool blocking) {
-    Log.debug('ConsoleMessage', 'looking up platform callback');
+      String nativeName, Pointer<NativeFunction<DartCbType>> dartCallback,
+      [Pointer<Void>? userData, bool? blocking]) {
+    Log.debug(logTag, 'looking up platform callback');
 
     String platformCbName = '';
+    blocking ??= !platformProxyCallbackExists(
+        'platform_non_blocking_${nativeName}_0'.toNativeUtf8());
     if (blocking) {
       platformCbName = 'platform_blocking_$nativeName';
     } else {
@@ -129,19 +128,17 @@ class TizenInteropCallbacks {
     }
 
     if (!multiProxyIds.containsKey(platformCbName)) {
-      Log.debug('ConsoleMessage',
-          'adding new list for platformCbName $platformCbName');
+      Log.debug(logTag, 'adding new list for platformCbName $platformCbName');
       multiProxyIds[platformCbName] = List<bool>.filled(PROXY_ID_COUNT, false);
     }
 
     int freeProxyId = getFirstFreeId(multiProxyIds[platformCbName]!);
     if (freeProxyId == -1) {
-      Log.debug('ConsoleMessage', 'no free proxy ids for $platformCbName');
-      // Return an unusable object
-      return RegisteredCallback<DartCbType>();
+      Log.error(logTag, 'no free proxy ids for $platformCbName');
+      throw Exception('Exhausted pool of $platformCbName proxies.');
     }
-    Log.debug('ConsoleMessage',
-        'setting proxy id $freeProxyId for cb $platformCbName as used');
+    Log.debug(
+        logTag, 'setting proxy id $freeProxyId for cb $platformCbName as used');
     multiProxyIds[platformCbName]![freeProxyId] = true;
     String platformCbWithIdx = '${platformCbName}_$freeProxyId';
     Pointer<Utf8> platformCbNamePtr = platformCbWithIdx.toNativeUtf8();
@@ -149,16 +146,18 @@ class TizenInteropCallbacks {
     int newId = curCallbackId++;
     Pointer<NativeFunction<DartCbType>> platformCallback = nullptr;
 
-    Log.debug('ConsoleMessage', 'calling registerWrappedCallback()');
+    Log.debug(logTag,
+        'calling registerWrappedCallback(), cb=${dartCallback.address.toRadixString(16)}');
     platformCallback = registerWrappedCallback(
             newId,
             dartCallback,
             // Note that this is the actual user data that the user wants
             // associated with the callback, not the user data modified by us.
-            userData,
+            userData ?? nullptr,
             platformCbNamePtr)
         .cast<NativeFunction<DartCbType>>();
-    Log.debug('ConsoleMessage', 'after calling registerWrappedCallback()');
+    Log.debug(logTag,
+        'after calling registerWrappedCallback(), pcb=${platformCallback.address.toRadixString(16)} ');
 
     malloc.free(platformCbNamePtr);
 
@@ -177,17 +176,17 @@ class TizenInteropCallbacks {
     int proxyId = regCb.proxyId;
 
     if (multiProxyIds[platformCbName]![proxyId] == false) {
-      Log.debug('ConsoleMessage',
-          'tried to remove proxy $proxyId for cb $platformCbName');
+      Log.debug(
+          logTag, 'tried to remove proxy $proxyId for cb $platformCbName');
     } else {
-      Log.debug('ConsoleMessage',
+      Log.debug(logTag,
           'setting proxy id $proxyId for cb $platformCbName as available');
       multiProxyIds[platformCbName]![proxyId] = false;
     }
 
-    Log.debug('ConsoleMessage', 'calling unregisterWrappedCallback()');
+    Log.debug(logTag, 'calling unregisterWrappedCallback()');
     unregisterWrappedCallback(regCb.id);
-    Log.debug('ConsoleMessage', 'after calling unregisterWrappedCallback()');
+    Log.debug(logTag, 'after calling unregisterWrappedCallback()');
     // consider returning success/error
   }
 }

@@ -5,14 +5,14 @@
 
 #define GET_CALLBACK_ID(CB_NAME, OFFSET) __reserved_cb_id_array[BASE_CALLBACK_ID_##CB_NAME + OFFSET]
 
-//#define LDEBUG(...) LOG_DEBUG(__VA_ARGS__)
-#define LDEBUG(...)
+#define LDEBUG(...) LOG_DEBUG(__VA_ARGS__)
+//#define LDEBUG(...)
 
 // Note: CB_PARAMS_NAMES should be defined before calling PROXY_GROUP_*.
 
 #define PROXY_GROUP_RETURN(CB_NAME, CB_RETURN, CB_PARAMS...) \
 CB_RETURN platform_blocking_##CB_NAME(CB_PARAMS) { \
-  LDEBUG("in platform_blocking_##CB_NAME"); \
+  LDEBUG("enter <RETURN> id:%d", user_data); \
 \
   CB_RETURN dartCallbackRetVal = CB_RETURN(); \
 \
@@ -29,7 +29,7 @@ CB_RETURN platform_blocking_##CB_NAME(CB_PARAMS) { \
        EXPAND_LIST(CB_PARAMS_NAMES), \
        &cv, &dartCallbackFinished] { \
     CB_NAME local_cb_ptr = reinterpret_cast<CB_NAME>(cbInfo.callbackPtr); \
-    LDEBUG("calling local_cb_ptr()"); \
+    LDEBUG("calling local_cb_ptr() %p", local_cb_ptr); \
     dartCallbackRetVal = local_cb_ptr(EXPAND_LIST(CB_PARAMS_NAMES)); \
     dartCallbackFinished = true; \
     LDEBUG("calling notify_one()"); \
@@ -68,7 +68,7 @@ CB_RETURN platform_blocking_##CB_NAME##_4(CB_PARAMS) { \
 
 #define PROXY_GROUP_BLOCKING(CB_NAME, CB_PARAMS...) \
 void platform_blocking_##CB_NAME(CB_PARAMS) { \
-  LDEBUG("in platform_blocking_##CB_NAME"); \
+  LDEBUG("enter <BLOCKING> id:%d", user_data); \
 \
   std::mutex mutex; \
   std::unique_lock<std::mutex> lock(mutex); \
@@ -82,7 +82,7 @@ void platform_blocking_##CB_NAME(CB_PARAMS) { \
   CallbackWrapper wrapper = \
       [&cbInfo, EXPAND_LIST(CB_PARAMS_NAMES), &cv, &dartCallbackFinished] { \
     CB_NAME local_cb_ptr = reinterpret_cast<CB_NAME>(cbInfo.callbackPtr); \
-    LDEBUG("calling local_cb_ptr()"); \
+    LDEBUG("calling local_cb_ptr() %p", local_cb_ptr); \
     local_cb_ptr(EXPAND_LIST(CB_PARAMS_NAMES)); \
     dartCallbackFinished = true; \
     LDEBUG("calling notify_one()"); \
@@ -120,14 +120,14 @@ void platform_blocking_##CB_NAME##_4(CB_PARAMS) { \
 
 #define PROXY_GROUP_NON_BLOCKING(CB_NAME, CB_PARAMS...) \
 void platform_non_blocking_##CB_NAME(CB_PARAMS) { \
-  LDEBUG("in platform_non_blocking_##CB_NAME"); \
+  LDEBUG("enter <NON_BLOCKING> id:%d", user_data); \
   int callbackId = reinterpret_cast<int>(user_data); \
   CallbackInfo cbInfo = __cb_id_to_info_map[callbackId]; \
+  CB_NAME local_cb_ptr = reinterpret_cast<CB_NAME>(cbInfo.callbackPtr); \
   user_data = cbInfo.actualUserData; \
   CallbackWrapper wrapper = \
-      [&cbInfo, EXPAND_LIST(CB_PARAMS_NAMES)] { \
-    CB_NAME local_cb_ptr = reinterpret_cast<CB_NAME>(cbInfo.callbackPtr); \
-    LDEBUG("calling local_cb_ptr()"); \
+      [local_cb_ptr, EXPAND_LIST(CB_PARAMS_NAMES)] { \
+    LDEBUG("calling local_cb_ptr() %p", local_cb_ptr); \
     local_cb_ptr(EXPAND_LIST(CB_PARAMS_NAMES)); \
   }; \
 \
@@ -155,7 +155,7 @@ void platform_non_blocking_##CB_NAME##_4(CB_PARAMS) { \
 
 #define PROXY_GROUP_RETURN_NO_USER_DATA(CB_NAME, CB_RETURN, CB_PARAMS...) \
 CB_RETURN platform_blocking_##CB_NAME(int callbackId, CB_PARAMS) { \
-  LDEBUG("in platform_blocking_##CB_NAME"); \
+  LDEBUG("enter <RETURN_NO_USER_DATA> id:%d", callbackId); \
 \
   CB_RETURN dartCallbackRetVal = CB_RETURN(); \
 \
@@ -170,7 +170,7 @@ CB_RETURN platform_blocking_##CB_NAME(int callbackId, CB_PARAMS) { \
        &cv, &dartCallbackFinished] { \
     CallbackInfo cbInfo = __cb_id_to_info_map[callbackId]; \
     CB_NAME local_cb_ptr = reinterpret_cast<CB_NAME>(cbInfo.callbackPtr); \
-    LDEBUG("calling local_cb_ptr()"); \
+    LDEBUG("calling local_cb_ptr() %p", local_cb_ptr); \
     dartCallbackRetVal = local_cb_ptr(EXPAND_LIST(CB_PARAMS_NAMES)); \
     dartCallbackFinished = true; \
     LDEBUG("calling notify_one()"); \
@@ -209,7 +209,7 @@ CB_RETURN platform_blocking_##CB_NAME##_4(CB_PARAMS) { \
 
 #define PROXY_GROUP_BLOCKING_NO_USER_DATA(CB_NAME, CB_PARAMS...) \
 void platform_blocking_##CB_NAME(int callbackId, CB_PARAMS) { \
-  LDEBUG("in platform_blocking_##CB_NAME"); \
+  LDEBUG("enter <BLOCKING_NO_USER_DATA> id:%d", callbackId); \
 \
   std::mutex mutex; \
   std::unique_lock<std::mutex> lock(mutex); \
@@ -220,7 +220,7 @@ void platform_blocking_##CB_NAME(int callbackId, CB_PARAMS) { \
       [callbackId, EXPAND_LIST(CB_PARAMS_NAMES), &cv, &dartCallbackFinished] { \
     CallbackInfo cbInfo = __cb_id_to_info_map[callbackId]; \
     CB_NAME local_cb_ptr = reinterpret_cast<CB_NAME>(cbInfo.callbackPtr); \
-    LDEBUG("calling local_cb_ptr()"); \
+    LDEBUG("calling local_cb_ptr() %p", local_cb_ptr); \
     local_cb_ptr(EXPAND_LIST(CB_PARAMS_NAMES)); \
     dartCallbackFinished = true; \
     LDEBUG("calling notify_one()"); \
@@ -258,13 +258,13 @@ void platform_blocking_##CB_NAME##_4(CB_PARAMS) { \
 
 #define PROXY_GROUP_NON_BLOCKING_NO_USER_DATA(CB_NAME, CB_PARAMS...) \
 void platform_non_blocking_##CB_NAME(int callbackId, CB_PARAMS) { \
-  LDEBUG("in platform_non_blocking_##CB_NAME"); \
+  LDEBUG("enter <NON_BLOCKING_NO_USER_DATA> id:%d", callbackId); \
 \
   CallbackInfo cbInfo = __cb_id_to_info_map[callbackId]; \
+  CB_NAME local_cb_ptr = reinterpret_cast<CB_NAME>(cbInfo.callbackPtr); \
   CallbackWrapper wrapper = \
-      [&cbInfo, EXPAND_LIST(CB_PARAMS_NAMES)] { \
-    CB_NAME local_cb_ptr = reinterpret_cast<CB_NAME>(cbInfo.callbackPtr); \
-    LDEBUG("calling local_cb_ptr()"); \
+      [local_cb_ptr, EXPAND_LIST(CB_PARAMS_NAMES)] { \
+    LDEBUG("calling local_cb_ptr() %p", local_cb_ptr); \
     local_cb_ptr(EXPAND_LIST(CB_PARAMS_NAMES)); \
   }; \
 \
@@ -292,7 +292,7 @@ void platform_non_blocking_##CB_NAME##_4(CB_PARAMS) { \
 
 #define PROXY_GROUP_RETURN_NO_USER_DATA_NO_PARAM(CB_NAME, CB_RETURN) \
 CB_RETURN platform_blocking_##CB_NAME(int callbackId) { \
-  LDEBUG("in platform_blocking_##CB_NAME"); \
+  LDEBUG("enter <RETURN_NO_USER_DATA_NO_PARAM> id:%d", callbackId); \
 \
   CB_RETURN dartCallbackRetVal = CB_RETURN(); \
 \
@@ -305,7 +305,7 @@ CB_RETURN platform_blocking_##CB_NAME(int callbackId) { \
       [callbackId, &dartCallbackRetVal, &cv, &dartCallbackFinished] { \
     CallbackInfo cbInfo = __cb_id_to_info_map[callbackId]; \
     CB_NAME local_cb_ptr = reinterpret_cast<CB_NAME>(cbInfo.callbackPtr); \
-    LDEBUG("calling local_cb_ptr()"); \
+    LDEBUG("calling local_cb_ptr() %p", local_cb_ptr); \
     dartCallbackRetVal = local_cb_ptr(); \
     dartCallbackFinished = true; \
     LDEBUG("calling notify_one()"); \

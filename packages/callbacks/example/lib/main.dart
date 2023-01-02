@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
-
+import 'dart:ffi';
+import 'package:tizen_interop/6.5/tizen.dart';
 import 'package:tizen_interop_callbacks/tizen_interop_callbacks.dart';
+import 'package:tizen_log/tizen_log.dart';
+
+MyAppState? myAppState;
 
 void main() {
   runApp(const MyApp());
@@ -11,26 +14,74 @@ class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   @override
-  State<MyApp> createState() => _MyAppState();
+  State<MyApp> createState() => MyAppState();
 }
 
-class _MyAppState extends State<MyApp> {
-  String _platformVersion = 'Unknown';
-  final _tizenInteropCallbacksPlugin = TizenInteropCallbacks();
+class MyAppState extends State<MyApp> {
+  bool? _batteryCharging;
+  int? _batteryLevel;
+  final callbacks = TizenInteropCallbacks();
 
   @override
   void initState() {
     super.initState();
+    myAppState = this;
     initPlatformState();
   }
 
-  Future<void> initPlatformState() async {
-    String platformVersion = 'Unknown platform version';
+  void initPlatformState() {
+    callbacks.init();
+
+    final chargerCb =
+        callbacks.register<Void Function(Int32, Pointer<Void>, Pointer<Void>)>(
+            'device_changed_cb',
+            Pointer.fromFunction(_batteryChanged),
+            Pointer.fromAddress(0),
+            true);
+    int ret = tizen.device_add_callback(
+        device_callback_e.DEVICE_CALLBACK_BATTERY_CHARGING,
+        chargerCb.regCallbackPtr,
+        chargerCb.regUserData);
+
+    if (ret != 0) {
+      throw Exception('Failed to add battery charging callback');
+    }
+
+    final levelCb =
+        callbacks.register<Void Function(Int32, Pointer<Void>, Pointer<Void>)>(
+            'device_changed_cb', Pointer.fromFunction(_batteryChanged));
+    ret = tizen.device_add_callback(
+        device_callback_e.DEVICE_CALLBACK_BATTERY_CAPACITY,
+        levelCb.regCallbackPtr,
+        levelCb.regUserData);
+
+    if (ret != 0) {
+      throw Exception('Failed to add battery level callback');
+    }
 
     if (!mounted) return;
+  }
 
+  static void _batteryChanged(
+      int type, Pointer<Void> value, Pointer<Void> userData) {
+    Log.info(logTag, 'callback called, type:$type, value: ${value.address}');
+    final int val = value.address;
+    if (type == device_callback_e.DEVICE_CALLBACK_BATTERY_CHARGING) {
+      myAppState?.updateBatteryCharging(val);
+    } else if (type == device_callback_e.DEVICE_CALLBACK_BATTERY_CAPACITY) {
+      myAppState?.updateBatteryLevel(val);
+    }
+  }
+
+  void updateBatteryLevel(int val) {
     setState(() {
-      _platformVersion = platformVersion;
+      _batteryLevel = val;
+    });
+  }
+
+  void updateBatteryCharging(int val) {
+    setState(() {
+      _batteryCharging = (val != 0);
     });
   }
 
@@ -42,7 +93,12 @@ class _MyAppState extends State<MyApp> {
           title: const Text('Plugin example app'),
         ),
         body: Center(
-          child: Text('Running on: $_platformVersion\n'),
+          child: Column(
+            children: [
+              Text('Battery charging: $_batteryCharging'),
+              Text('Battery level: $_batteryLevel'),
+            ],
+          ),
         ),
       ),
     );
