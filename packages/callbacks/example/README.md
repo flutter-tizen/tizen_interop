@@ -4,13 +4,8 @@ Demonstrates how to use the tizen_interop_callbacks plugin.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+The application shows status of battery - if charger is connected and battery level.
+The status is only shown when a callback information about change is called.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Not every Tizen device supports battery. You can run the example on emulator and use
+the Control Panel to simulate changes in charger/battery status.

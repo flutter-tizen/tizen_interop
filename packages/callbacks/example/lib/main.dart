@@ -30,8 +30,6 @@ class MyAppState extends State<MyApp> {
   }
 
   void initPlatformState() {
-    callbacks.init();
-
     final chargerCb =
         callbacks.register<Void Function(Int32, Pointer<Void>, Pointer<Void>)>(
             'device_changed_cb',

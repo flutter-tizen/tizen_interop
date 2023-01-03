@@ -12,16 +12,14 @@
 
 #define PROXY_GROUP_RETURN(CB_NAME, CB_RETURN, CB_PARAMS...) \
 CB_RETURN platform_blocking_##CB_NAME(CB_PARAMS) { \
-  LDEBUG("enter <RETURN> id:%d", user_data); \
-\
+  int callbackId = reinterpret_cast<int>(user_data); \
+  LDEBUG("enter <RETURN> id:%d", callbackId); \
   CB_RETURN dartCallbackRetVal = CB_RETURN(); \
-\
   std::mutex mutex; \
   std::unique_lock<std::mutex> lock(mutex); \
   std::condition_variable cv; \
 \
   bool dartCallbackFinished = false; \
-  int callbackId = reinterpret_cast<int>(user_data); \
   CallbackInfo cbInfo = __cb_id_to_info_map[callbackId]; \
   user_data = cbInfo.actualUserData; \
   CallbackWrapper wrapper = \
@@ -45,7 +43,7 @@ CB_RETURN platform_blocking_##CB_NAME(CB_PARAMS) { \
     cv.wait(lock); \
   } \
 \
-  LDEBUG("notification sent, dartCallbackRetVal: %d", dartCallbackRetVal); \
+  LDEBUG("notification sent, dartCallbackRetVal: %d", (int)dartCallbackRetVal); \
   return dartCallbackRetVal; \
 } \
 \
@@ -68,15 +66,14 @@ CB_RETURN platform_blocking_##CB_NAME##_4(CB_PARAMS) { \
 
 #define PROXY_GROUP_BLOCKING(CB_NAME, CB_PARAMS...) \
 void platform_blocking_##CB_NAME(CB_PARAMS) { \
-  LDEBUG("enter <BLOCKING> id:%d", user_data); \
-\
+  int callbackId = reinterpret_cast<int>(user_data); \
+  LDEBUG("enter <BLOCKING> id:%d", callbackId); \
   std::mutex mutex; \
   std::unique_lock<std::mutex> lock(mutex); \
   std::condition_variable cv; \
 \
   bool dartCallbackFinished = false; \
 \
-  int callbackId = reinterpret_cast<int>(user_data); \
   CallbackInfo cbInfo = __cb_id_to_info_map[callbackId]; \
   user_data = cbInfo.actualUserData; \
   CallbackWrapper wrapper = \
@@ -120,8 +117,8 @@ void platform_blocking_##CB_NAME##_4(CB_PARAMS) { \
 
 #define PROXY_GROUP_NON_BLOCKING(CB_NAME, CB_PARAMS...) \
 void platform_non_blocking_##CB_NAME(CB_PARAMS) { \
-  LDEBUG("enter <NON_BLOCKING> id:%d", user_data); \
   int callbackId = reinterpret_cast<int>(user_data); \
+  LDEBUG("enter <NON_BLOCKING> id:%d", callbackId); \
   CallbackInfo cbInfo = __cb_id_to_info_map[callbackId]; \
   CB_NAME local_cb_ptr = reinterpret_cast<CB_NAME>(cbInfo.callbackPtr); \
   user_data = cbInfo.actualUserData; \
@@ -344,15 +341,12 @@ CB_RETURN platform_blocking_##CB_NAME##_4() { \
 
 // CB_NAME does not contain indices
 #define MULTI_PROXY_MAP_ENTRY(CB_NAME) \
-  { std::string(#CB_NAME "_0"), \
-    reinterpret_cast<void*>(CB_NAME ## _0) }, \
-  { std::string(#CB_NAME "_1"), \
-    reinterpret_cast<void*>(CB_NAME ## _1) }, \
-  { std::string(#CB_NAME "_2"), \
-    reinterpret_cast<void*>(CB_NAME ## _2) }, \
-  { std::string(#CB_NAME "_3"), \
-    reinterpret_cast<void*>(CB_NAME ## _3) }, \
-  { std::string(#CB_NAME "_4"), \
-    reinterpret_cast<void*>(CB_NAME ## _4) },
+  { std::string( #CB_NAME ), {{ \
+    reinterpret_cast<void*>(CB_NAME ## _0), \
+    reinterpret_cast<void*>(CB_NAME ## _1), \
+    reinterpret_cast<void*>(CB_NAME ## _2), \
+    reinterpret_cast<void*>(CB_NAME ## _3), \
+    reinterpret_cast<void*>(CB_NAME ## _4), \
+  }} },
 
 #endif // _TIZEN_INTEROP_CALLBACKS_MACROS_H_

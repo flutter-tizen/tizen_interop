@@ -51,7 +51,7 @@ class CallbackInfo:
         self.filename = ''
         self.ret_type = ''
         self.name = ''
-        self.params: List[ParamInfo]= []
+        self.params: List[ParamInfo] = []
 
     def __repr__(self):
         rep = '<CB %s %s(' % (self.ret_type, self.name)
@@ -489,14 +489,16 @@ class CallbackGenerator:
         else:
             self.writeln(f'PROXY_GROUP_NON_BLOCKING_NO_USER_DATA({cb.name}{cb.param_list})')
 
-        self.map_entries.append(f'platform_non_blocking_{cb.name}')
+        self.map_entries.append((cb.name, f'platform_non_blocking_{cb.name}'))
 
     def generate_single_callback_code_blocking(self, cb: CallbackInfo, has_user_data=True):
         if cb.ret_type == 'void':
             if has_user_data:
                 self.writeln(f'PROXY_GROUP_BLOCKING({cb.name}{cb.param_list})')
-            else:
+            elif cb.param_list:
                 self.writeln(f'PROXY_GROUP_BLOCKING_NO_USER_DATA({cb.name}{cb.param_list})')
+            else:
+                raise NotImplementedError('NO return AND no params is not supported: ' + cb.name)
         else:
             if has_user_data:
                 self.writeln(f'PROXY_GROUP_RETURN({cb.name}, {cb.ret_type}{cb.param_list})')
@@ -504,38 +506,45 @@ class CallbackGenerator:
                 self.writeln(f'PROXY_GROUP_RETURN_NO_USER_DATA({cb.name}, {cb.ret_type}{cb.param_list})')
             else:
                 self.writeln(f'PROXY_GROUP_RETURN_NO_USER_DATA_NO_PARAM({cb.name}, {cb.ret_type})')
-        self.map_entries.append(f'platform_blocking_{cb.name}')
+        self.map_entries.append((cb.name, f'platform_blocking_{cb.name}'))
 
     def callback_info_patching(self, cb: CallbackInfo):
         if cb.name == 'sensor_accuracy_changed_cb' or cb.name == 'system_settings_iter_cb':
             cb.params[-1].name = 'user_data'
+            return True
         elif cb.name == 'sensor_events_cb':
             cb.params[1] = ParamInfo('sensor_event_s*', 'events')
         elif cb.name == 'mv_barcode_detected_cb':
             cb.params[3] = ParamInfo('const char**', 'messages')
 
-    def generate_single_callback_code(self, cb: CallbackInfo):
-        self.callback_info_patching(cb)
-
-        has_user_data = bool(cb.params) and cb.params[-1].name == 'user_data'
-        has_user_data |= cb.name in {
+        return cb.name in {
             'ime_language_requested_cb', 'ime_imdata_requested_cb', 'ime_geometry_requested_cb',
             'image_util_decode_completed_cb', 'image_util_encode_completed_cb',
         }
 
+    def generate_single_callback_code(self, cb: CallbackInfo):
+
+        has_user_data = bool(cb.params) and cb.params[-1].name == 'user_data'
+        has_user_data |= self.callback_info_patching(cb)
+
         if not has_user_data:
             self.write_reserved_callback_id(cb)
 
-        self.writeln(f'#define CB_PARAMS_NAMES {cb.param_names}')
+        has_params = has_user_data or cb.param_list
+        if has_params:
+            self.writeln(f'#define CB_PARAMS_NAMES {cb.param_names}')
         if cb.ret_type == 'void':
             self.generate_single_callback_code_non_blocking(cb, has_user_data)
             self.generate_single_callback_code_blocking(cb, has_user_data)
         else:
             self.generate_single_callback_code_blocking(cb, has_user_data)
-        self.writeln('#undef CB_PARAMS_NAMES\n')
+        if has_params:
+            self.writeln('#undef CB_PARAMS_NAMES\n')
+        else:
+            self.writeln()
 
     def generate_callbacks(self):
-        for cb in self.callbacks:
+        for cb in sorted(self.callbacks, key=lambda cb: cb.name):
             self.generate_single_callback_code(cb)
         return self.out
 
@@ -551,7 +560,7 @@ class CallbackGenerator:
         self.callbacks = cr.callbacks
 
         if self.callbacks:
-            for f in self.filenames:
+            for f in sorted(self.filenames):
                 if 'rootstrap' in f and '/usr/include/' in f:
                     self.writeln('#include <%s>\n' % f[f.index('/usr/include/')+13:])
 
@@ -563,13 +572,15 @@ def generate_preamble(output):
     print('#include "macros.h"\n', file=output)
     print('#include <mutex>', file=output)
     print('#include <condition_variable>\n', file=output)
-    print('extern std::map<std::string, void*> __multi_proxy_name_to_ptr_map;\n', file=output)
+    print('#define PROXY_INSTANCES_COUNT', PROXY_INSTANCES_COUNT, file=output)
+    # print('extern std::map<std::string, void*> __multi_proxy_name_to_ptr_map;\n', file=output)
 
 
-def process_config(config_path):
+def process_config(config_path, exclude):
     if not os.path.exists(config_path):
         print('ERROR: Config file does not exist:', config_path)
         return
+    excluded_items = (exclude or '').split(',')
     log.debug('Processing config file: %s', config_path)
     root_dir = os.path.relpath(os.path.join(os.path.dirname(config_path), os.pardir, os.pardir))
     log.debug('Root dir: %s', root_dir)
@@ -603,15 +614,19 @@ def process_config(config_path):
         match = files_to_find.intersection(files)
         if match:
             log.debug('%s %d %d', match, len(match), len(files_to_find))
-            items.extend(os.path.join(directory, m) for m in match)
+            items.extend(os.path.join(directory, m) for m in match if m not in excluded_items)
         for p in dirs_to_find:
             if directory.endswith(p):
-                log.debug('--- %s [%s] %s', directory, p, files)
-                items.append(os.path.join(directory, '*.h'))
+                if p in excluded_items:
+                    log.debug('skipping excluded %s', p)
+                else:
+                    log.debug('--- %s [%s] %s', directory, p, files)
+                    items.append(os.path.join(directory, '*.h'))
                 break
 
     if not items:
         return
+    excluded_items = [os.path.join(rootstrap_include, item) for item in excluded_items]
 
     reserved_callback_id = 0
     no_user_data_callbacks = set()
@@ -623,19 +638,19 @@ def process_config(config_path):
         cg.callback_id = reserved_callback_id
         cg.map_entries = map_entries
         cg.no_user_data_callbacks = no_user_data_callbacks
-        results.append(cg.process_files(glob.glob(item)))
+        results.append(cg.process_files([f for f in glob.glob(item) if not f in excluded_items]))
         reserved_callback_id = cg.callback_id
 
     generate_preamble(output)
     print(f'int __reserved_cb_id_array[{reserved_callback_id+PROXY_INSTANCES_COUNT}] = {{}};', file=output)
     for res in results:
         print(res.getvalue(), file=output)
-    print('\nstd::map<std::string, void*> __multi_proxy_name_to_ptr_map = {', file=output)
-    for cb in map_entries:
-        print(f'  MULTI_PROXY_MAP_ENTRY({cb})')
+    print(f'\nstd::map<std::string, MultiProxyFunctionsContainer> __multi_proxy_name_to_ptr_map = {{', file=output)
+    for cb_name, proxy_base in sorted(map_entries):
+        print(f'  MULTI_PROXY_MAP_ENTRY({proxy_base})')
     print('};\n', file=output)
     print('std::map<std::string, int> __reserved_base_id_map = {', file=output)
-    for cb in no_user_data_callbacks:
+    for cb in sorted(no_user_data_callbacks):
         print(f'  {{std::string("{cb}"), BASE_CALLBACK_ID_{cb}}},', file=output)
     print('};', file=output)
 
@@ -645,11 +660,12 @@ def main(argv):
     parser.add_argument('-c', '--config')
     parser.add_argument('-o', '--output')
     parser.add_argument('-v', '--verbose', action='store_true')
+    parser.add_argument('-e', '--exclude')
     parser.add_argument('files', nargs='*')
     args = parser.parse_args(argv)
     logging.basicConfig(level=logging.DEBUG if args.verbose else logging.WARNING)
     if args.config:
-        process_config(args.config)
+        process_config(args.config, exclude=args.exclude)
     elif args.files:
         cg = CallbackGenerator({}, [])
         res = cg.process_files(args.files).getvalue()
