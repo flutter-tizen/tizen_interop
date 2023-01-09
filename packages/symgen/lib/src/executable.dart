@@ -5,6 +5,7 @@
 // Executable script to generate symbol mapping for shared libraries.
 
 import 'dart:io';
+
 import 'package:args/args.dart';
 
 import 'config.dart';
