@@ -1,5 +1,5 @@
-name: async_callbacks_example
-description: Demonstrates how to use the async_callbacks plugin.
+name: tizen_interop_callbacks_example
+description: Demonstrates how to use the tizen_interop_callbacks plugin.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -18,11 +18,11 @@ dependencies:
   flutter:
     sdk: flutter
   tizen_interop:
-    path: ../../
+    path: ../../../
   tizen_log:
 
 
-  async_callbacks:
+  tizen_interop_callbacks:
     # When depending on this package from a real application you should use:
     #   async_callbacks: ^x.y.z
     # See https://dart.dev/tools/pub/dependencies#version-constraints

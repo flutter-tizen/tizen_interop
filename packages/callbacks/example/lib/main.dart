@@ -7,7 +7,7 @@ import 'dart:collection';
 import 'package:flutter/services.dart';
 import 'package:ffi/ffi.dart';
 import 'package:tizen_log/tizen_log.dart';
-import 'package:async_callbacks/async_callbacks.dart';
+import 'package:tizen_interop_callbacks/async_callbacks.dart';
 
 import 'package:tizen_interop/6.0/tizen.dart';
 
