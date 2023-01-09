@@ -1,8 +1,8 @@
 #include "tizen_interop_callbacks_plugin.h"
 
 #include <flutter/plugin_registrar.h>
-#include <../../../../../dart-sdk/include/dart_native_api.h>
-#include <../../../../../dart-sdk/include/dart_api_dl.h>
+#include <dart_native_api.h>
+#include <dart_api_dl.h>
 
 #include <memory>
 #include <string>

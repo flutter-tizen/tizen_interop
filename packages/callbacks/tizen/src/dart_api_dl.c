@@ -12,15 +12,9 @@
 // to make building possible.
 // See FindFunctionPointer() function for details.
 
-// To make this file work we had to change #includes,
-// the original ones are below.
-// #include "dart_api_dl.h"               /* NOLINT */
-// #include "dart_version.h"              /* NOLINT */
-// #include "internal/dart_api_dl_impl.h" /* NOLINT */
-// Here are the modified ones:
-#include <../../../../../dart-sdk/include/dart_api_dl.h>  /* NOLINT */
-#include <../../../../../dart-sdk/include/dart_version.h> /* NOLINT */
-#include <../../../../../dart-sdk/include/internal/dart_api_dl_impl.h> /* NOLINT */
+#include "dart_api_dl.h"               /* NOLINT */
+#include "dart_version.h"              /* NOLINT */
+#include "internal/dart_api_dl_impl.h" /* NOLINT */
 
 
 #include <string.h>
