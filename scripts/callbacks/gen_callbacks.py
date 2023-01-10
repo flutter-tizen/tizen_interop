@@ -548,7 +548,7 @@ class CallbackGenerator:
             self.generate_single_callback_code(cb)
         return self.out
 
-    def process_files(self, filenames):
+    def process_files(self, filenames, headers_prepend={}):
         self.filenames = filenames
 
         cr = CodeReader()
@@ -562,25 +562,34 @@ class CallbackGenerator:
         if self.callbacks:
             for f in sorted(self.filenames):
                 if 'rootstrap' in f and '/usr/include/' in f:
-                    self.writeln('#include <%s>\n' % f[f.index('/usr/include/')+13:])
+                    header = f[f.index('/usr/include/')+13:]
+                    if header in headers_prepend:
+                        for h in headers_prepend[header]:
+                            self.writeln('#include <%s>' % h)
+                    self.writeln('#include <%s>\n' % header)
 
         return self.generate_callbacks()
 
 
 def generate_preamble(output):
     print('#include "tizen_interop_callbacks_plugin.h"', file=output)
+    print('#define PROXY_INSTANCES_COUNT', PROXY_INSTANCES_COUNT, file=output)
     print('#include "macros.h"\n', file=output)
     print('#include <mutex>', file=output)
     print('#include <condition_variable>\n', file=output)
-    print('#define PROXY_INSTANCES_COUNT', PROXY_INSTANCES_COUNT, file=output)
     # print('extern std::map<std::string, void*> __multi_proxy_name_to_ptr_map;\n', file=output)
 
 
-def process_config(config_path, exclude):
+def process_config(config_path, exclude, preinclude):
     if not os.path.exists(config_path):
         print('ERROR: Config file does not exist:', config_path)
         return
     excluded_items = (exclude or '').split(',')
+    header_include_map = {}
+    if '=' in preinclude:
+        for pair in preinclude.split(':'):
+            header, dependencies = pair.split('=')
+            header_include_map[header] = dependencies.split(',')
     log.debug('Processing config file: %s', config_path)
     root_dir = os.path.relpath(os.path.join(os.path.dirname(config_path), os.pardir, os.pardir))
     log.debug('Root dir: %s', root_dir)
@@ -633,16 +642,24 @@ def process_config(config_path, exclude):
     output = sys.stdout
     map_entries = []
     results = []
+    callback_count = 0
     for item in sorted(items):
         cg = CallbackGenerator({}, [])
         cg.callback_id = reserved_callback_id
         cg.map_entries = map_entries
         cg.no_user_data_callbacks = no_user_data_callbacks
-        results.append(cg.process_files([f for f in glob.glob(item) if not f in excluded_items]))
+        results.append(
+            cg.process_files(
+                [f for f in glob.glob(item) if f not in excluded_items],
+                header_include_map,
+            )
+        )
         reserved_callback_id = cg.callback_id
+        callback_count += len(cg.callbacks)
 
     generate_preamble(output)
-    print(f'int __reserved_cb_id_array[{reserved_callback_id+PROXY_INSTANCES_COUNT}] = {{}};', file=output)
+    print(f'#define NO_USER_DATA_CALLBACKS_COUNT {(reserved_callback_id) // PROXY_INSTANCES_COUNT + 1}', file=output)
+    print(f'int __reserved_cb_id_array[PROXY_INSTANCES_COUNT * NO_USER_DATA_CALLBACKS_COUNT] = {{}};\n', file=output)
     for res in results:
         print(res.getvalue(), file=output)
     print(f'\nstd::map<std::string, MultiProxyFunctionsContainer> __multi_proxy_name_to_ptr_map = {{', file=output)
@@ -653,6 +670,7 @@ def process_config(config_path, exclude):
     for cb in sorted(no_user_data_callbacks):
         print(f'  {{std::string("{cb}"), BASE_CALLBACK_ID_{cb}}},', file=output)
     print('};', file=output)
+    log.info(f'Generated code for {callback_count} callbacks.')
 
 
 def main(argv):
@@ -661,11 +679,12 @@ def main(argv):
     parser.add_argument('-o', '--output')
     parser.add_argument('-v', '--verbose', action='store_true')
     parser.add_argument('-e', '--exclude')
+    parser.add_argument('-p', '--preinclude', default='')
     parser.add_argument('files', nargs='*')
     args = parser.parse_args(argv)
-    logging.basicConfig(level=logging.DEBUG if args.verbose else logging.WARNING)
+    logging.basicConfig(level=logging.DEBUG if args.verbose else logging.INFO)
     if args.config:
-        process_config(args.config, exclude=args.exclude)
+        process_config(args.config, exclude=args.exclude, preinclude=args.preinclude)
     elif args.files:
         cg = CallbackGenerator({}, [])
         res = cg.process_files(args.files).getvalue()

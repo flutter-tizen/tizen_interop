@@ -1,11 +1,13 @@
 #include "tizen_interop_callbacks_plugin.h"
+#define PROXY_INSTANCES_COUNT 5
 #include "macros.h"
 
 #include <mutex>
 #include <condition_variable>
 
-#define PROXY_INSTANCES_COUNT 5
-int __reserved_cb_id_array[265] = {};
+#define NO_USER_DATA_CALLBACKS_COUNT 53
+int __reserved_cb_id_array[PROXY_INSTANCES_COUNT * NO_USER_DATA_CALLBACKS_COUNT] = {};
+
 #include <account.h>
 
 #define CB_PARAMS_NAMES account, user_data
@@ -1074,6 +1076,44 @@ PROXY_GROUP_NON_BLOCKING(ime_terminate_cb, void * user_data)
 PROXY_GROUP_BLOCKING(ime_terminate_cb, void * user_data)
 #undef CB_PARAMS_NAMES
 
+
+
+#include <iotcon/iotcon-attributes.h>
+
+#include <iotcon/iotcon-errors.h>
+#include <iotcon/iotcon-client.h>
+
+#include <iotcon/iotcon-constant.h>
+
+#include <iotcon/iotcon-errors.h>
+
+#include <iotcon/iotcon-list.h>
+
+#include <iotcon/iotcon-lite-resource.h>
+
+#include <iotcon/iotcon-observers.h>
+
+#include <iotcon/iotcon-options.h>
+
+#include <iotcon/iotcon-query.h>
+
+#include <iotcon/iotcon-remote-resource.h>
+
+#include <iotcon/iotcon-representation.h>
+
+#include <iotcon/iotcon-request.h>
+
+#include <iotcon/iotcon-resource-interfaces.h>
+
+#include <iotcon/iotcon-resource-types.h>
+
+#include <iotcon/iotcon-resource.h>
+
+#include <iotcon/iotcon-response.h>
+
+#include <iotcon/iotcon-server.h>
+
+#include <iotcon/iotcon-types.h>
 
 #include <iotcon/iotcon.h>
 

@@ -15,8 +15,9 @@ if [ "$1" = "-v" ] ; then
 	EXTRA_ARGS="-v"
 fi
 
-declare -A EXCLUDE
+declare -A EXCLUDE HEADER_DEPS
 EXCLUDE[6.5]="-e peripheral_io.h,system/update_control.h"
+HEADER_DEPS[6.5]="-p iotcon/iotcon-client.h=iotcon/iotcon-errors.h"
 
 if [ -d $ROOTSTRAPS ]; then
 	for D in $ROOTSTRAPS/*; do
@@ -29,7 +30,8 @@ if [ -d $ROOTSTRAPS ]; then
 			continue
 		fi
 		FOUND_COUNT=$(( $FOUND_COUNT + 1))
-		"$CB_PACKAGE_ROOT"/gen_callbacks.py $EXTRA_ARGS ${EXCLUDE[$VERSION]} -c "$CONFIG" > "$TARGET"
+		"$CB_PACKAGE_ROOT"/gen_callbacks.py $EXTRA_ARGS ${EXCLUDE[$VERSION]} ${HEADER_DEPS[$VERSION]} \
+			-c "$CONFIG" > "$TARGET"
 	done
 fi
 

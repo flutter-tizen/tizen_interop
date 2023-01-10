@@ -69,8 +69,7 @@ class TizenInteropCallbacks {
   static TizenInteropCallbacks? _instance;
 
   int _curCallbackId = 0;
-  // ignore: non_constant_identifier_names
-  final int _PROXY_ID_COUNT = 5;
+  late final int _proxyIdCount;
   final _multiProxyIds = <String, List<bool>>{};
 
   /// Initializes the [TizenInteropCallbacks].
@@ -90,16 +89,23 @@ class TizenInteropCallbacks {
     final int nativePort = nativeCallbackCalls.sendPort.nativePort;
     Log.debug(logTag, '    nativePort = $nativePort');
 
+    _proxyIdCount = _process
+        .lookup<Int32>('TizenInteropCallbacksProxyInstancesCount')
+        .value;
+    Log.debug(logTag, 'proxy instances count: $_proxyIdCount');
+
     Log.debug(logTag, 'looking up InitDartApiDL()');
     final initApi = _process
-        .lookup<NativeFunction<Pointer Function(Pointer)>>('InitDartApiDL')
+        .lookup<NativeFunction<Pointer Function(Pointer)>>(
+            'TizenInteropCallbacksInitDartApiDL')
         .asFunction<Pointer Function(Pointer)>();
     Log.debug(logTag, 'calling initApi()');
     initApi(NativeApi.initializeApiDLData);
 
     Log.debug(logTag, 'looking up RegisterSendPort()');
     final void Function(int) registerSendPort = _process
-        .lookup<NativeFunction<Void Function(Int64)>>("RegisterSendPort")
+        .lookup<NativeFunction<Void Function(Int64)>>(
+            "TizenInteropCallbacksRegisterSendPort")
         .asFunction();
     Log.debug(logTag, 'calling registerSendPort()');
     registerSendPort(nativePort);
@@ -107,7 +113,7 @@ class TizenInteropCallbacks {
     Log.debug(logTag, 'looking up RunCallbackInNativeLayer()');
     _runCallbackInNativeLayer = _process
         .lookup<NativeFunction<Void Function(Pointer)>>(
-            "RunCallbackInNativeLayer")
+            "TizenInteropCallbacksRunCallbackInNativeLayer")
         .asFunction();
 
     Log.debug(logTag, 'looking up RegisterWrappedCallbackInNativeLayer()');
@@ -126,15 +132,15 @@ class TizenInteropCallbacks {
     */
     _registerWrappedCallback = _process
         .lookup<
-            NativeFunction<
-                Pointer Function(Int32, Pointer, Pointer, Pointer,
-                    Int32)>>('RegisterWrappedCallbackInNativeLayer')
+                NativeFunction<
+                    Pointer Function(Int32, Pointer, Pointer, Pointer, Int32)>>(
+            'TizenInteropCallbacksRegisterWrappedCallbackInNativeLayer')
         .asFunction();
 
     Log.debug(logTag, 'looking up UnregisterWrappedCallbackInNativeLayer()');
     _unregisterWrappedCallback = _process
         .lookup<NativeFunction<Pointer Function(Int32)>>(
-            'UnregisterWrappedCallbackInNativeLayer')
+            'TizenInteropCallbacksUnregisterWrappedCallbackInNativeLayer')
         .asFunction();
 
     Log.debug(logTag, 'looking up TizenInteropCallbacksProxyExists()');
@@ -213,8 +219,7 @@ class TizenInteropCallbacks {
 
     if (!_multiProxyIds.containsKey(platformCbName)) {
       Log.debug(logTag, 'adding new list for platformCbName $platformCbName');
-      _multiProxyIds[platformCbName] =
-          List<bool>.filled(_PROXY_ID_COUNT, false);
+      _multiProxyIds[platformCbName] = List<bool>.filled(_proxyIdCount, false);
     }
 
     int freeProxyId = _getFirstFreeId(_multiProxyIds[platformCbName]!);

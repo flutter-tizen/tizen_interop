@@ -349,4 +349,9 @@ CB_RETURN platform_blocking_##CB_NAME##_4() { \
     reinterpret_cast<void*>(CB_NAME ## _4), \
   }} },
 
+typedef void* MultiProxyFunctions[PROXY_INSTANCES_COUNT];
+struct MultiProxyFunctionsContainer {
+  MultiProxyFunctions mp;
+};
+
 #endif // _TIZEN_INTEROP_CALLBACKS_MACROS_H_

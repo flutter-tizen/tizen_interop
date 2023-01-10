@@ -36,18 +36,12 @@ void TizenInteropCallbacksPluginRegisterWithRegistrar(
 
 std::map<int, CallbackInfo> __cb_id_to_info_map;
 // sole purpose of this typedef and struct is to make it easier/possible to fill the map with literals
-typedef void* MultiProxyFunctions[5];
-struct MultiProxyFunctionsContainer {
-  MultiProxyFunctions mp;
-};
+
 
 #include "dart_api_dl.c"
 #undef TIZEN_DEPRECATION
 #undef DEPRECATION_WARNING 
 #include "../generated/callbacks_6.5.cc"
-#if PROXY_INSTANCES_COUNT != 5
-#error PROXY_INSTANCES_COUNT value mismatch
-#endif
 
 void RequestCallbackCall(CallbackWrapper *wrapper) {
   LOG_DEBUG("in RequestCallbackCall()");
@@ -67,7 +61,7 @@ void RequestCallbackCall(CallbackWrapper *wrapper) {
 extern "C" {
 
 __attribute__((visibility("default")))
-DART_EXPORT intptr_t InitDartApiDL(void *data) {
+DART_EXPORT intptr_t TizenInteropCallbacksInitDartApiDL(void *data) {
   LOG_DEBUG("in InitDartApiDL()");
   auto error = Dart_InitializeApiDL(data);
   if (error) {
@@ -77,13 +71,13 @@ DART_EXPORT intptr_t InitDartApiDL(void *data) {
 }
 
 __attribute__((visibility("default")))
-void RegisterSendPort(Dart_Port port) {
+void TizenInteropCallbacksRegisterSendPort(Dart_Port port) {
   LOG_DEBUG("in RegisterSendPort() port=%" PRId64, port);
   send_port = port;
 }
 
 __attribute__((visibility("default")))
-void *RegisterWrappedCallbackInNativeLayer(int cb_id, void *cb_ptr, void *actual_user_data,
+void *TizenInteropCallbacksRegisterWrappedCallbackInNativeLayer(int cb_id, void *cb_ptr, void *actual_user_data,
     const char *proxy_name, int proxy_num) {
   LOG_DEBUG("id:%d, cb_ptr=%p", cb_id, cb_ptr);
   if (proxy_num < 0 || proxy_num >= PROXY_INSTANCES_COUNT) {
@@ -97,7 +91,9 @@ void *RegisterWrappedCallbackInNativeLayer(int cb_id, void *cb_ptr, void *actual
   }
   __cb_id_to_info_map[cb_id] = CallbackInfo{cb_ptr, actual_user_data};
 
-  // strip platform_blocking_ / platform_non_blocking_ prefix
+  // we are only expecting proxy_name to be either platform_blocking_{CALLBACK} or platform_non_blocking_{CALLBACK}
+  // test the 9th character to check which one is it, and depending on that remove the ..._blocking_ prefix
+  // which ends at either 22nd (non_blocking variant) or 18th (blocking one) character.
   const auto &it = __reserved_base_id_map.find(std::string(proxy_name + ((proxy_name[9] == 'n') ? 22 : 18)));
   if (it != __reserved_base_id_map.end()) {
     LOG_DEBUG("storing remap callback id %s %d+%d -> %d", it->first.c_str(), it->second, proxy_num, cb_id);
@@ -108,7 +104,7 @@ void *RegisterWrappedCallbackInNativeLayer(int cb_id, void *cb_ptr, void *actual
 }
 
 __attribute__((visibility("default")))
-void UnregisterWrappedCallbackInNativeLayer(int cb_id) {
+void TizenInteropCallbacksUnregisterWrappedCallbackInNativeLayer(int cb_id) {
   LOG_DEBUG("in UnregisterWrappedCallbackInNativeLayer");
   const auto &it = __cb_id_to_info_map.find(cb_id);
   if (it != __cb_id_to_info_map.end()) {
@@ -119,7 +115,7 @@ void UnregisterWrappedCallbackInNativeLayer(int cb_id) {
 }
 
 __attribute__((visibility("default")))
-void RunCallbackInNativeLayer(CallbackWrapper *wrapper_ptr) {
+void TizenInteropCallbacksRunCallbackInNativeLayer(CallbackWrapper *wrapper_ptr) {
   CallbackWrapper wrapper = *wrapper_ptr;
   LOG_DEBUG("calling wrapper() %p", wrapper_ptr);
   wrapper();
@@ -134,5 +130,8 @@ bool TizenInteropCallbacksProxyExists(char* name) {
   free(name);
   return exists;
 }
+
+__attribute__((visibility("default")))
+int32_t TizenInteropCallbacksProxyInstancesCount = PROXY_INSTANCES_COUNT;
 
 } // extern "C"
