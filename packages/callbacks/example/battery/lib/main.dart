@@ -53,6 +53,14 @@ class MyAppState extends State<MyApp> {
         levelCb.regCallbackPtr,
         levelCb.regUserData);
 
+    // If you need to remove a callback, first unregister it:
+    // callbacks.unregister(chargerCb);
+    //
+    // Then call the Native API function:
+    // ret = tizen.device_remove_callback(
+    //     device_callback_e.DEVICE_CALLBACK_BATTERY_CHARGING,
+    //     chargerCb.regCallbackPtr);
+
     if (ret != 0) {
       throw Exception('Failed to add battery level callback');
     }
