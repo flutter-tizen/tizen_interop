@@ -6,7 +6,7 @@
 set -e
 
 SCRIPT_DIR=$(dirname $(readlink -f $0))
-CB_PACKAGE_ROOT="$SCRIPT_DIR/callbacks"
+CB_PACKAGE_ROOT="$SCRIPT_DIR/callbacks_generator"
 ROOTSTRAPS="$SCRIPT_DIR/../rootstraps"
 FOUND_COUNT=0
 
