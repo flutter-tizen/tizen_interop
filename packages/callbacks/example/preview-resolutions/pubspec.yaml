@@ -1,0 +1,22 @@
+name: tizen_interop_callbacks_example
+description: Demonstrates how to use the tizen_interop_callbacks plugin.
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+environment:
+  sdk: '>=2.17.0 <3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  tizen_interop:
+  tizen_interop_callbacks:
+    path: ../../
+  tizen_log:
+
+dev_dependencies:
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
