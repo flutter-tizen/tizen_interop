@@ -12,7 +12,7 @@ dependencies:
 
   tizen_interop:
   tizen_interop_callbacks:
-    path: ../
+    path: ../../
   tizen_log:
 
 dev_dependencies:
