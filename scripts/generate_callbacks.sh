@@ -16,26 +16,28 @@ if [ "$1" = "-v" ] ; then
 fi
 
 declare -A EXCLUDE HEADER_DEPS
-EXCLUDE[6.5]="-e peripheral_io.h,system/update_control.h"
-HEADER_DEPS[6.5]="-p iotcon/iotcon-client.h=iotcon/iotcon-errors.h"
 
-if [ -d $ROOTSTRAPS ]; then
-	for D in $ROOTSTRAPS/*; do
-		VERSION="${D##*/}"
-		TARGET="$SCRIPT_DIR/../packages/callbacks/tizen/generated/callbacks_$VERSION.cc"
-		echo "==== Generating callbacks for Tizen $VERSION: ${TARGET##*/../}"
-		CONFIG="$SCRIPT_DIR/../configs/$VERSION/ffigen.yaml"
-		if [ ! -f "$CONFIG" ] ; then
-			echo "ERROR: Config file not found $CONFIG"
-			continue
-		fi
-		FOUND_COUNT=$(( $FOUND_COUNT + 1))
-		"$CB_PACKAGE_ROOT"/gen_callbacks.py $EXTRA_ARGS ${EXCLUDE[$VERSION]} ${HEADER_DEPS[$VERSION]} \
-			-c "$CONFIG" > "$TARGET"
-	done
+if [ ! -d $ROOTSTRAPS ]; then
+	echo "ERROR: Rootstraps directory not found"
+	exit 1
 fi
 
-if [ $FOUND_COUNT -eq 0 ] ; then
+CONFIGS=""
+for C in "$SCRIPT_DIR"/../configs/*/ffigen.yaml; do
+	echo $C
+	VERSION="${C%/ffigen.yaml}"
+	VERSION="${VERSION##*/}"
+	echo "==== Found Tizen $VERSION config"
+	D="$ROOTSTRAPS/$VERSION"
+	if [ -d "$D" ] ; then
+		CONFIGS="-c $SCRIPT_DIR/../configs/$VERSION/ffigen.yaml $CONFIGS"
+	else
+		echo "ERROR: Rootstrap $ROOTSTRAPS/$VERSION not found"
+	fi
+done
+if [ -z "$CONFIGS" ] ; then
 	echo "ERROR: No rootstraps found. Run copy_rootstraps.sh first."
 	exit 1
 fi
+TARGET="$SCRIPT_DIR/../packages/callbacks/tizen/generated/callbacks.cc"
+"$CB_PACKAGE_ROOT"/gen_callbacks.py $CONFIGS -o "$TARGET"

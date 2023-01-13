@@ -7,11 +7,103 @@ import yaml
 import logging
 import argparse
 from io import StringIO
-from typing import List
+from typing import List, Mapping, Callable
 
 log = logging.getLogger('gen_callbacks')
 PROXY_INSTANCES_COUNT = 5
+# callbacks which have user_data paramter, but is not detected:
+CB_USER_DATA_OVERRIDES= {
+    'ime_language_requested_cb',
+    'ime_imdata_requested_cb',
+    'ime_geometry_requested_cb',
+    'image_util_decode_completed_cb',
+    'image_util_encode_completed_cb',
+}
+CB_PARAMETER_PATCHES: Mapping[str, Callable] = {
+    'sensor_accuracy_changed_cb':
+        lambda cb: cb.params[-1].set_name('user_data'),
+    'system_settings_iter_cb':
+        lambda cb: cb.params[-1].set_name('user_data'),
+    'sensor_events_cb':
+        lambda cb: cb.params[1].set_type('sensor_event_s*').set_name('events'),
+    'mv_barcode_detected_cb':
+        lambda cb: cb.params[3].set_type('const char**').set_name('messages'),
+}
+KNOWN_TYPES = {
+    'bool',
+    'bool*',
+    'char*',
+    'char**',
+    'double',
+    'float*',
+    'float**',
+    'int',
+    'int*',
+    'long',
+    'long long',
+    'unsigned',
+    'unsigned char',
+    'unsigned char*',
+    'unsigned char**',
+    'unsigned int',
+    'unsigned int*',
+    'unsigned long',
+    'unsigned long long',
+    'unsigned short',
+    'void',
+    'void*',
+    'void**',
+    'bool',
+    'bool*',
+    'char*',
+    'char**',
+    'double',
+    'float*',
+    'float**',
+    'int',
+    'int*',
+    'long',
+    'long long',
+    'size_t',
+    'time_t',
+    'unsigned',
+    'unsigned char',
+    'unsigned char*',
+    'unsigned char**',
+    'unsigned int',
+    'unsigned int*',
+    'unsigned long',
+    'unsigned long long',
+    'unsigned short',
+    'void',
+    'void*',
+    'void**',
 
+    'size_t',
+    'time_t',
+}
+SPECIAL_TYPES = {
+    'dnssd_browser_h': 'unsigned int',
+    'dnssd_service_h': 'unsigned int',
+    'mtp_device_h': 'int',
+    'mtp_object_h': 'int',
+    'mtp_storage_h': 'int',
+    'ssdp_browser_h': 'unsigned int',
+    'ssdp_service_h': 'unsigned int',
+    'result_set_cursor': 'void*',
+    'stte_result_time_cb': 'void*',
+    'stte_supported_language_cb': 'void*',
+    'ttse_supported_voice_cb': 'void*',
+    'vce_supported_language_cb': 'void*',
+    'Ecore_IMF_Input_Hints': 'some_enum',
+    'Ecore_IMF_Input_Panel_Lang': 'some_enum',
+    'Ecore_IMF_Input_Panel_Layout': 'some_enum',
+    'Ecore_IMF_Input_Panel_Return_Key_Type': 'some_enum',
+    'eom_output_id': 'unsigned int',
+    'location_coords_s': 'location_coords_s_copy',
+    'mv_rectangle_s': 'mv_rectangle_s_copy',
+    'wifi_direct_connection_state_cb_data_s': 'wifi_direct_connection_state_cb_data_s_copy',
+}
 
 class Token:
     def __init__(self, _type):
@@ -45,6 +137,14 @@ class ParamInfo:
         return self._type == other._type and\
                 self.name == other.name
 
+    def set_name(self, name):
+        self.name = name
+        return self
+
+    def set_type(self, _type):
+        self._type = _type
+        return self
+
 
 class CallbackInfo:
     def __init__(self):
@@ -52,6 +152,7 @@ class CallbackInfo:
         self.ret_type = ''
         self.name = ''
         self.params: List[ParamInfo] = []
+        self._has_user_data: bool = None
 
     def __repr__(self):
         rep = '<CB %s %s(' % (self.ret_type, self.name)
@@ -66,6 +167,24 @@ class CallbackInfo:
         return self.ret_type == other.ret_type and\
                 self.name == other.name and\
                 self.params == other.params
+
+    def compatible_signature(self, other):
+        param_types = [p._type for p in self.params]
+        param_types_other = [p._type for p in other.params]
+        return self.ret_type == other.ret_type and param_types == param_types_other
+
+    @property
+    def allow_non_blocking(self):
+        return self.ret_type == 'void'
+
+    @property
+    def has_user_data(self):
+        if self._has_user_data is None:
+            self._has_user_data = bool(self.params) and self.params[-1].name == 'user_data'
+        return self._has_user_data
+
+    def override_has_user_data(self, has_user_data):
+        self._has_user_data = has_user_data
 
     @property
     def param_names(self) -> str:
@@ -227,6 +346,15 @@ class CodeReader:
         f = open(filename, encoding='UTF-8')
         self.string = f.read()
         f.close()
+
+    @classmethod
+    def read_callbacks_from_string(class_, code):
+        cr = class_()
+        cr.filename = '<code>'
+        cr.string = code
+        cr.tokenize()
+        cr.find_typedefs()
+        return cr.callbacks
 
     def is_part_of_word(self, c, is_first_char):
         if is_first_char:
@@ -466,8 +594,85 @@ class CodeReader:
             i += 1
 
 
+class CallbackDataCollector:
+    def __init__(self):
+        self.callbacks: Mapping[str, CallbackInfo] = {}
+        self.types = {}
+        self.no_user_data_callbacks = set()
+        self.versions = []
+        self.version = None
+
+    def set_version(self, version):
+        self.version = version
+        if not version in self.versions:
+            self.versions.append(version)
+
+    def load_headers(self, headers):
+
+        cr = CodeReader()
+        for f in headers:
+            cr.read_file(f)
+            cr.tokenize()
+            cr.find_typedefs()
+
+        for cb in cr.callbacks:
+            if cb.name in self.callbacks:
+                if not cb.compatible_signature(self.callbacks[cb.name]):
+                    log.warn('Callback %s signature mismatch %s\n\t%s\n\t%s', self.version, cb.name, repr(cb), repr(self.callbacks[cb.name]))
+            else:
+                self.callbacks[cb.name] = cb
+
+    def preprocess_callbacks_data(self):
+
+        for name, cb in self.callbacks.items():
+
+            patch = CB_PARAMETER_PATCHES.get(name)
+            if patch:
+                patch(cb)
+
+            if name in CB_USER_DATA_OVERRIDES  :
+                cb.override_has_user_data(True)
+
+            if not cb.has_user_data:
+                self.no_user_data_callbacks.add(name)
+
+            self.rewrite_types(cb)
+
+    @classmethod
+    def rewrite_types(class_, cb: CallbackInfo):
+        cb.ret_type = class_.type_equivalent(cb.ret_type)
+        if cb.ret_type == 'void*':
+            cb.ret_type = 'void_pointer'
+        elif cb.ret_type.endswith('*'):
+            log.error('Callback %s returns pointer: %s. Please add typedef for it.', cb.name, cb.ret_type)
+        for param in cb.params:
+            if param.name == 'void':
+                return
+            param.set_type(class_.type_equivalent(param._type))
+
+    @classmethod
+    def type_equivalent(class_, t):
+        t = t.strip().replace(' *', '*')
+        if t.startswith('const '):
+            inner = t[5:]
+            if inner in KNOWN_TYPES:
+                return t
+            else:
+                return 'const ' + class_.type_equivalent(inner)
+        elif t in KNOWN_TYPES:
+            return t
+        elif t in SPECIAL_TYPES:
+            return SPECIAL_TYPES[t]
+        elif t.endswith('*') or t.endswith('_h'):
+            return 'void*'
+        elif t.endswith('_e'):
+            return 'some_enum'
+        log.error('Failed to map type `%s`.', t)
+        return t
+
+
 class CallbackGenerator:
-    def __init__(self, handles, callbacks):
+    def __init__(self, callbacks):
         self.filenames = []
         self.callbacks = callbacks
         self.out = StringIO()
@@ -479,28 +684,28 @@ class CallbackGenerator:
         print(*args, file=self.out)
 
     def write_reserved_callback_id(self, cb):
-        self.callback_id += PROXY_INSTANCES_COUNT
         self.writeln(f'#define BASE_CALLBACK_ID_{cb.name} {self.callback_id}')
+        self.callback_id += PROXY_INSTANCES_COUNT
         self.no_user_data_callbacks.add(cb.name)
 
-    def generate_single_callback_code_non_blocking(self, cb: CallbackInfo, has_user_data=True):
-        if has_user_data:
+    def generate_single_callback_code_non_blocking(self, cb: CallbackInfo):
+        if cb.has_user_data:
             self.writeln(f'PROXY_GROUP_NON_BLOCKING({cb.name}{cb.param_list})')
         else:
             self.writeln(f'PROXY_GROUP_NON_BLOCKING_NO_USER_DATA({cb.name}{cb.param_list})')
 
         self.map_entries.append((cb.name, f'platform_non_blocking_{cb.name}'))
 
-    def generate_single_callback_code_blocking(self, cb: CallbackInfo, has_user_data=True):
+    def generate_single_callback_code_blocking(self, cb: CallbackInfo):
         if cb.ret_type == 'void':
-            if has_user_data:
+            if cb.has_user_data:
                 self.writeln(f'PROXY_GROUP_BLOCKING({cb.name}{cb.param_list})')
             elif cb.param_list:
                 self.writeln(f'PROXY_GROUP_BLOCKING_NO_USER_DATA({cb.name}{cb.param_list})')
             else:
                 raise NotImplementedError('NO return AND no params is not supported: ' + cb.name)
         else:
-            if has_user_data:
+            if cb.has_user_data:
                 self.writeln(f'PROXY_GROUP_RETURN({cb.name}, {cb.ret_type}{cb.param_list})')
             elif cb.param_list:
                 self.writeln(f'PROXY_GROUP_RETURN_NO_USER_DATA({cb.name}, {cb.ret_type}{cb.param_list})')
@@ -508,36 +713,20 @@ class CallbackGenerator:
                 self.writeln(f'PROXY_GROUP_RETURN_NO_USER_DATA_NO_PARAM({cb.name}, {cb.ret_type})')
         self.map_entries.append((cb.name, f'platform_blocking_{cb.name}'))
 
-    def callback_info_patching(self, cb: CallbackInfo):
-        if cb.name == 'sensor_accuracy_changed_cb' or cb.name == 'system_settings_iter_cb':
-            cb.params[-1].name = 'user_data'
-            return True
-        elif cb.name == 'sensor_events_cb':
-            cb.params[1] = ParamInfo('sensor_event_s*', 'events')
-        elif cb.name == 'mv_barcode_detected_cb':
-            cb.params[3] = ParamInfo('const char**', 'messages')
-
-        return cb.name in {
-            'ime_language_requested_cb', 'ime_imdata_requested_cb', 'ime_geometry_requested_cb',
-            'image_util_decode_completed_cb', 'image_util_encode_completed_cb',
-        }
-
     def generate_single_callback_code(self, cb: CallbackInfo):
 
-        has_user_data = bool(cb.params) and cb.params[-1].name == 'user_data'
-        has_user_data |= self.callback_info_patching(cb)
-
-        if not has_user_data:
+        if not cb.has_user_data:
             self.write_reserved_callback_id(cb)
+        self.writeln(f'typedef {cb.ret_type} (*{cb.name})({cb.param_list.lstrip(",")});')
 
-        has_params = has_user_data or cb.param_list
+        has_params = bool(cb.param_list)
         if has_params:
             self.writeln(f'#define CB_PARAMS_NAMES {cb.param_names}')
-        if cb.ret_type == 'void':
-            self.generate_single_callback_code_non_blocking(cb, has_user_data)
-            self.generate_single_callback_code_blocking(cb, has_user_data)
-        else:
-            self.generate_single_callback_code_blocking(cb, has_user_data)
+
+        if cb.allow_non_blocking:
+            self.generate_single_callback_code_non_blocking(cb)
+        self.generate_single_callback_code_blocking(cb)
+
         if has_params:
             self.writeln('#undef CB_PARAMS_NAMES\n')
         else:
@@ -570,6 +759,31 @@ class CallbackGenerator:
 
         return self.generate_callbacks()
 
+    def generate_full_source(self, api):
+
+        generate_preamble(self.out)
+        api.preprocess_callbacks_data()
+        print(f'#define NO_USER_DATA_CALLBACKS_COUNT {len(api.no_user_data_callbacks)}', file=self.out)
+        print(f'int __reserved_cb_id_array[PROXY_INSTANCES_COUNT * NO_USER_DATA_CALLBACKS_COUNT] = {{}};\n', file=self.out)
+        self.generate_callbacks()
+        print(f'\nstd::map<std::string, MultiProxyFunctionsContainer> __multi_proxy_name_to_ptr_map = {{', file=self.out)
+        for cb in sorted(self.callbacks, key=lambda cb: cb.name):
+            print(f'  MULTI_PROXY_MAP_ENTRY(platform_blocking_{cb.name})', file=self.out)
+            if cb.allow_non_blocking:
+                print(f'  MULTI_PROXY_MAP_ENTRY(platform_non_blocking_{cb.name})', file=self.out)
+        print('};\n', file=self.out)
+        print('std::map<std::string, int> __reserved_base_id_map = {', file=self.out)
+        for cb in sorted(api.no_user_data_callbacks):
+            print(f'  {{std::string("{cb}"), BASE_CALLBACK_ID_{cb}}},', file=self.out)
+        print('};', file=self.out)
+        log.info(f'Generated code for {len(api.callbacks)} callbacks.')
+
+    @staticmethod
+    def generate_from_collector(api: CallbackDataCollector, output):
+        cg = CallbackGenerator(list(api.callbacks.values()))
+        cg.out = output
+        cg.generate_full_source(api)
+
 
 def generate_preamble(output):
     print('#include "tizen_interop_callbacks_plugin.h"', file=output)
@@ -580,24 +794,15 @@ def generate_preamble(output):
     # print('extern std::map<std::string, void*> __multi_proxy_name_to_ptr_map;\n', file=output)
 
 
-def process_config(config_path, exclude, preinclude):
-    if not os.path.exists(config_path):
-        print('ERROR: Config file does not exist:', config_path)
-        return
-    excluded_items = (exclude or '').split(',')
-    header_include_map = {}
-    if '=' in preinclude:
-        for pair in preinclude.split(':'):
-            header, dependencies = pair.split('=')
-            header_include_map[header] = dependencies.split(',')
-    log.debug('Processing config file: %s', config_path)
+def find_headers_by_config(config_path):
+    log.info('Processing config file: %s', config_path)
     root_dir = os.path.relpath(os.path.join(os.path.dirname(config_path), os.pardir, os.pardir))
     log.debug('Root dir: %s', root_dir)
     api_version = os.path.basename(os.path.dirname(os.path.abspath(config_path)))
     log.debug('API version: %s', api_version)
     rootstrap_include = os.path.join(root_dir, 'rootstraps', api_version, 'usr', 'include')
     if not os.path.isdir(rootstrap_include):
-        print('ERROR: Rootstrap not found. There is no directory', rootstrap_include)
+        log.error('Rootstrap not found. There is no directory %s', rootstrap_include)
         return
 
     with open(config_path) as ffigen_conf_file:
@@ -615,78 +820,64 @@ def process_config(config_path, exclude, preinclude):
             log.debug('FILE %s', pattern[3:])
             files_to_find.add(pattern[3:])
         else:
-            assert False, pattern
+            raise NotImplemented(f'config include-directives `{pattern}` not supported')
 
-    items = []
+    items = set()
 
     for directory, _, files in os.walk(rootstrap_include):
         match = files_to_find.intersection(files)
         if match:
             log.debug('%s %d %d', match, len(match), len(files_to_find))
-            items.extend(os.path.join(directory, m) for m in match if m not in excluded_items)
+            items.update(os.path.join(directory, m) for m in match)
         for p in dirs_to_find:
             if directory.endswith(p):
-                if p in excluded_items:
-                    log.debug('skipping excluded %s', p)
-                else:
-                    log.debug('--- %s [%s] %s', directory, p, files)
-                    items.append(os.path.join(directory, '*.h'))
+                log.debug('--- %s [%s] %s', directory, p, files)
+                items.add(os.path.join(directory, '*.h'))
                 break
+    return api_version, rootstrap_include, items
 
-    if not items:
-        return
-    excluded_items = [os.path.join(rootstrap_include, item) for item in excluded_items]
 
-    reserved_callback_id = 0
-    no_user_data_callbacks = set()
-    output = sys.stdout
-    map_entries = []
-    results = []
-    callback_count = 0
-    for item in sorted(items):
-        cg = CallbackGenerator({}, [])
-        cg.callback_id = reserved_callback_id
-        cg.map_entries = map_entries
-        cg.no_user_data_callbacks = no_user_data_callbacks
-        results.append(
-            cg.process_files(
-                [f for f in glob.glob(item) if f not in excluded_items],
-                header_include_map,
-            )
-        )
-        reserved_callback_id = cg.callback_id
-        callback_count += len(cg.callbacks)
+def process_configs(args):
+    config_paths = args.config
+    for config_path in config_paths:
+        file_is_missing = False
+        if not os.path.exists(config_path):
+            log.error('Config file does not exist: %s', config_path)
+            file_is_missing = True
+        if file_is_missing:
+            return
 
-    generate_preamble(output)
-    print(f'#define NO_USER_DATA_CALLBACKS_COUNT {(reserved_callback_id) // PROXY_INSTANCES_COUNT + 1}', file=output)
-    print(f'int __reserved_cb_id_array[PROXY_INSTANCES_COUNT * NO_USER_DATA_CALLBACKS_COUNT] = {{}};\n', file=output)
-    for res in results:
-        print(res.getvalue(), file=output)
-    print(f'\nstd::map<std::string, MultiProxyFunctionsContainer> __multi_proxy_name_to_ptr_map = {{', file=output)
-    for cb_name, proxy_base in sorted(map_entries):
-        print(f'  MULTI_PROXY_MAP_ENTRY({proxy_base})')
-    print('};\n', file=output)
-    print('std::map<std::string, int> __reserved_base_id_map = {', file=output)
-    for cb in sorted(no_user_data_callbacks):
-        print(f'  {{std::string("{cb}"), BASE_CALLBACK_ID_{cb}}},', file=output)
-    print('};', file=output)
-    log.info(f'Generated code for {callback_count} callbacks.')
+    api = CallbackDataCollector()
+    for config_path in config_paths:
+        res = find_headers_by_config(config_path)
+        if not res:
+            return
+        api_version, rootstrap_include, items = res
+        api.set_version(api_version)
+        for item in items:
+            api.load_headers(glob.glob(item))
+
+    if args.output:
+        output = open(args.output, 'w')
+    else:
+        output = sys.stdout
+    CallbackGenerator.generate_from_collector(api, output)
+    if args.output:
+        output.close()
 
 
 def main(argv):
     parser = argparse.ArgumentParser()
-    parser.add_argument('-c', '--config')
+    parser.add_argument('-c', '--config', action='append', default=[])
     parser.add_argument('-o', '--output')
     parser.add_argument('-v', '--verbose', action='store_true')
-    parser.add_argument('-e', '--exclude')
-    parser.add_argument('-p', '--preinclude', default='')
     parser.add_argument('files', nargs='*')
     args = parser.parse_args(argv)
     logging.basicConfig(level=logging.DEBUG if args.verbose else logging.INFO)
     if args.config:
-        process_config(args.config, exclude=args.exclude, preinclude=args.preinclude)
+        process_configs(args)
     elif args.files:
-        cg = CallbackGenerator({}, [])
+        cg = CallbackGenerator([])
         res = cg.process_files(args.files).getvalue()
         print(res)
 

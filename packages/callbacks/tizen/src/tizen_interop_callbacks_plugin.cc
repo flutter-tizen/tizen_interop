@@ -35,13 +35,9 @@ void TizenInteropCallbacksPluginRegisterWithRegistrar(
 }
 
 std::map<int, CallbackInfo> __cb_id_to_info_map;
-// sole purpose of this typedef and struct is to make it easier/possible to fill the map with literals
-
 
 #include "dart_api_dl.c"
-#undef TIZEN_DEPRECATION
-#undef DEPRECATION_WARNING 
-#include "../generated/callbacks_6.5.cc"
+#include "../generated/callbacks.cc"
 
 void RequestCallbackCall(CallbackWrapper *wrapper) {
   LOG_DEBUG("in RequestCallbackCall()");

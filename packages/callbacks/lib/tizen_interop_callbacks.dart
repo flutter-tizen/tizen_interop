@@ -72,16 +72,18 @@ class TizenInteropCallbacks {
   late final int _proxyIdCount;
   final _multiProxyIds = <String, List<bool>>{};
 
-  /// Initializes the [TizenInteropCallbacks].
+  /// Factory constructor provides an instance of [TizenInteropCallbacks].
   ///
-  /// This class should be instantiated only once, on the main thread of
-  /// the main isolate - the one with your main() entry point / runApp() call.
-  TizenInteropCallbacks() {
-    if (_instance != null) {
-      throw Exception(
-          'There should be only one instance of TizenInteropCallbacks.');
-    }
-    _instance = this;
+  /// First access to this TizenInteropCallbacks instance should be performed
+  /// from the main isolate - the one with your main() entry point / runApp() call.
+  ///
+  /// Subsequent calls will return the same instance.
+  factory TizenInteropCallbacks() {
+    _instance ??= TizenInteropCallbacks._internal();
+    return _instance!;
+  }
+
+  TizenInteropCallbacks._internal() {
     Log.debug(logTag, 'listening to ReceivePort');
     final nativeCallbackCalls = ReceivePort()..listen(_callbackCallRequested);
 

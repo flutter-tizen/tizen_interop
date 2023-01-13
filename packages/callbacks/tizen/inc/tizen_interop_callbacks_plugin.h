@@ -34,4 +34,33 @@ struct CallbackInfo {
 typedef std::function<void()> CallbackWrapper;
 void RequestCallbackCall(CallbackWrapper *wrapper);
 
+typedef struct {
+  double latitude;
+  double longitude;
+} location_coords_s_copy;
+
+typedef struct {
+  int x;
+  int y;
+} mv_point_s;
+
+typedef struct {
+  mv_point_s point;
+  int width;
+  int height;
+} mv_rectangle_s_copy;
+
+#define WIFI_DIRECT_MAX_DEVICE_NAME_LEN 32
+#define WIFI_DIRECT_MAC_ADDRESS_LEN 18
+typedef struct {
+  char device_name[WIFI_DIRECT_MAX_DEVICE_NAME_LEN+1];  /**< Null-terminated device friendly name. */
+  char mac_address[WIFI_DIRECT_MAC_ADDRESS_LEN+1];      /**< Null-terminated Device's P2P Device Address */
+} wifi_direct_connection_state_cb_data_s_copy;
+
+typedef enum {
+  SOME_ENUM_0
+} some_enum;
+
+typedef void* void_pointer;
+
 #endif  // FLUTTER_PLUGIN_TIZEN_INTEROP_CALLBACKS_PLUGIN_H_
