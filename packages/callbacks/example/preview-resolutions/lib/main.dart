@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'dart:ffi';
 import 'dart:isolate';
 
-import 'package:flutter/services.dart';
 import 'package:ffi/ffi.dart';
 import 'package:tizen_interop/6.5/tizen.dart';
 import 'package:tizen_interop_callbacks/tizen_interop_callbacks.dart';
@@ -36,16 +35,13 @@ class ForeachCallArgsAsInts {
 // toInts() converts the data to ForeachCallArgsAsInts().
 class ForeachCallArgs {
   Pointer<Pointer<camera_cli_s>> cameraPtr = nullptr;
-  Pointer<NativeFunction<Bool Function(Int, Int, Pointer<Void>)>> regCallback = nullptr;
+  Pointer<NativeFunction<Bool Function(Int, Int, Pointer<Void>)>> regCallback =
+      nullptr;
   Pointer<Void> userData = nullptr;
   SendPort? sendPort;
 
-  ForeachCallArgs(cameraPtr, regCallback, userData, sendPort) {
-    this.cameraPtr = cameraPtr;
-    this.regCallback = regCallback;
-    this.userData = userData;
-    this.sendPort = sendPort;
-  }
+  ForeachCallArgs(
+      this.cameraPtr, this.regCallback, this.userData, this.sendPort);
 
   ForeachCallArgsAsInts toInts() {
     ForeachCallArgsAsInts res = ForeachCallArgsAsInts();
@@ -60,7 +56,7 @@ class ForeachCallArgs {
 }
 
 class MyAppState extends State<MyApp> {
-  String supportedRes = '';
+  List<String> supportedRes = [];
   final callbacks = TizenInteropCallbacks();
 
   @override
@@ -84,21 +80,18 @@ class MyAppState extends State<MyApp> {
     }
 
     Log.debug('ConsoleMessage', 'calling register()');
-    RegisteredCallback rcbPreview = callbacks.register
-        <Bool Function(Int, Int, Pointer<Void>)>
-        ('camera_supported_preview_resolution_cb',
-        Pointer.fromFunction(dartPreviewResCb, exceptionalRetVal),
-        nullptr,
-        true);
+    final rcbPreview =
+        callbacks.register<Bool Function(Int, Int, Pointer<Void>)>(
+            'camera_supported_preview_resolution_cb',
+            Pointer.fromFunction(dartPreviewResCb, exceptionalRetVal),
+            nullptr,
+            true);
 
     final recPortPreview = ReceivePort();
 
     // Prepare foreach call's arguments that will be sent to the spawned isolate.
-    ForeachCallArgs args = ForeachCallArgs(
-        cameraPtr,
-        rcbPreview.regCallbackPtr,
-        rcbPreview.regUserData,
-        recPortPreview.sendPort);
+    ForeachCallArgs args = ForeachCallArgs(cameraPtr, rcbPreview.regCallbackPtr,
+        rcbPreview.regUserData, recPortPreview.sendPort);
 
     // We can't send pointers, but we can send ints
     var intArgs = args.toInts();
@@ -110,6 +103,7 @@ class MyAppState extends State<MyApp> {
     // Wait for the spawned isolate to complete its work
     Log.debug('ConsoleMessage', 'waiting for recPort.first');
     await recPortPreview.first;
+    setState(() {});
 
     if (!mounted) return;
   }
@@ -119,22 +113,22 @@ class MyAppState extends State<MyApp> {
         'calling tizen.camera_foreach_supported_preview_resolution()');
 
     // Convert received ints back to pointers
-    Pointer<Pointer<camera_cli_s>> cameraPtr = Pointer.fromAddress(args.cameraPtrInt);
-    Pointer<NativeFunction<Bool Function(Int, Int, Pointer<Void>)>> regCallback =
-      Pointer.fromAddress(args.regCallbackInt);
+    Pointer<Pointer<camera_cli_s>> cameraPtr =
+        Pointer.fromAddress(args.cameraPtrInt);
+    Pointer<NativeFunction<Bool Function(Int, Int, Pointer<Void>)>>
+        regCallback = Pointer.fromAddress(args.regCallbackInt);
     Pointer<Void> userData = Pointer.fromAddress(args.userDataInt);
 
     int ret = tizen.camera_foreach_supported_preview_resolution(
-        cameraPtr.value,
-        regCallback,
-        userData);
+        cameraPtr.value, regCallback, userData);
 
     if (ret != 0) {
       Log.debug('ConsoleMessage',
           'tizen.camera_foreach_supported_preview_resolution() failed, ret: $ret');
       var msg = tizen.get_error_message(ret).toDartString();
       Log.debug('ConsoleMessage', 'ret: $ret, get_error_message(ret): $msg');
-      throw Exception('tizen.camera_foreach_capture_preview_resolution() failed');
+      throw Exception(
+          'tizen.camera_foreach_capture_preview_resolution() failed');
     }
 
     // The second argument is not important here, we return 1 here because
@@ -145,7 +139,7 @@ class MyAppState extends State<MyApp> {
   }
 
   static bool dartPreviewResCb(int width, int height, Pointer<Void> userData) {
-    myAppState?.supportedRes += '${width}x${height}  ';
+    myAppState?.supportedRes.add('${width}x${height}');
 
     // If we return false here, then the iteration will stop after the first call
     // of the callback, as expected.
@@ -163,7 +157,12 @@ class MyAppState extends State<MyApp> {
         body: Center(
           child: Column(
             children: [
-              Text('Supported preview resolutions: $supportedRes'),
+              const Text('Supported preview resolutions:'),
+              for (var res in supportedRes)
+                Padding(
+                  padding: const EdgeInsets.only(top: 8.0),
+                  child: Text(res),
+                ),
             ],
           ),
         ),
