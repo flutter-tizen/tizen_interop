@@ -2,6 +2,7 @@
 
 import os
 import sys
+import copy
 import glob
 import yaml
 import logging
@@ -601,11 +602,16 @@ class CallbackDataCollector:
         self.no_user_data_callbacks = set()
         self.versions = []
         self.version = None
+        self._used_type_mapping = None
+        self.loaded_headers = []
 
     def set_version(self, version):
         self.version = version
         if not version in self.versions:
             self.versions.append(version)
+
+    def enable_asserts(self):
+        self._used_type_mapping = set()
 
     def load_headers(self, headers):
 
@@ -614,6 +620,7 @@ class CallbackDataCollector:
             cr.read_file(f)
             cr.tokenize()
             cr.find_typedefs()
+            self.loaded_headers.append(f)
 
         for cb in cr.callbacks:
             if cb.name in self.callbacks:
@@ -623,6 +630,9 @@ class CallbackDataCollector:
                 self.callbacks[cb.name] = cb
 
     def preprocess_callbacks_data(self):
+
+        if self._used_type_mapping is not None:
+            callbacks_before_rewrite = copy.deepcopy(self.callbacks)
 
         for name, cb in self.callbacks.items():
 
@@ -638,9 +648,36 @@ class CallbackDataCollector:
 
             self.rewrite_types(cb)
 
+        if self._used_type_mapping is not None:
+            for name, cb in self.callbacks.items():
+                original_cb = callbacks_before_rewrite[name]
+                self._used_type_mapping.add((original_cb.ret_type, cb.ret_type))
+                for param, original_param in zip(cb.params, original_cb.params):
+                    self._used_type_mapping.add((original_param._type, param._type))
+
+    def get_type_mapping(self):
+        const_items = set(item for item in self._used_type_mapping if item[0].startswith('const '))
+        self._used_type_mapping.difference_update(const_items)
+        self._used_type_mapping.update(
+            set((item[0].replace('const ', ''), item[1].replace('const ', ''))
+            for item in const_items)
+        )
+        if self._used_type_mapping is not None:
+            for item in sorted(self._used_type_mapping):
+                if item[0] == item[1] or item[0].replace(' ', '') == item[1].replace(' ', ''):
+                    continue
+
+                # FIXME: those exceptions are probably results of issue with paramter parsing
+                if item[0] == 'char * messages *':
+                    yield 'char **', item[1]
+                elif item[0] == 'sensor_event_s events *':
+                    yield 'sensor_event_s*', item[1]
+                else:
+                    yield item
+
     @classmethod
     def rewrite_types(class_, cb: CallbackInfo):
-        cb.ret_type = class_.type_equivalent(cb.ret_type)
+        cb.ret_type = class_.type_substitute(cb.ret_type)
         if cb.ret_type == 'void*':
             cb.ret_type = 'void_pointer'
         elif cb.ret_type.endswith('*'):
@@ -648,17 +685,17 @@ class CallbackDataCollector:
         for param in cb.params:
             if param.name == 'void':
                 return
-            param.set_type(class_.type_equivalent(param._type))
+            param.set_type(class_.type_substitute(param._type))
 
     @classmethod
-    def type_equivalent(class_, t):
+    def type_substitute(class_, t):
         t = t.strip().replace(' *', '*')
         if t.startswith('const '):
             inner = t[5:]
             if inner in KNOWN_TYPES:
                 return t
             else:
-                return 'const ' + class_.type_equivalent(inner)
+                return 'const ' + class_.type_substitute(inner)
         elif t in KNOWN_TYPES:
             return t
         elif t in SPECIAL_TYPES:
@@ -764,9 +801,9 @@ class CallbackGenerator:
         generate_preamble(self.out)
         api.preprocess_callbacks_data()
         print(f'#define NO_USER_DATA_CALLBACKS_COUNT {len(api.no_user_data_callbacks)}', file=self.out)
-        print(f'int __reserved_cb_id_array[PROXY_INSTANCES_COUNT * NO_USER_DATA_CALLBACKS_COUNT] = {{}};\n', file=self.out)
+        print('int __reserved_cb_id_array[PROXY_INSTANCES_COUNT * NO_USER_DATA_CALLBACKS_COUNT] = {};\n', file=self.out)
         self.generate_callbacks()
-        print(f'\nstd::map<std::string, MultiProxyFunctionsContainer> __multi_proxy_name_to_ptr_map = {{', file=self.out)
+        print('\nstd::map<std::string, MultiProxyFunctionsContainer> __multi_proxy_name_to_ptr_map = {', file=self.out)
         for cb in sorted(self.callbacks, key=lambda cb: cb.name):
             print(f'  MULTI_PROXY_MAP_ENTRY(platform_blocking_{cb.name})', file=self.out)
             if cb.allow_non_blocking:
@@ -783,6 +820,28 @@ class CallbackGenerator:
         cg = CallbackGenerator(list(api.callbacks.values()))
         cg.out = output
         cg.generate_full_source(api)
+
+    @staticmethod
+    def generate_asserts_from_collector(api: CallbackDataCollector, output):
+        api.enable_asserts()
+        api.preprocess_callbacks_data()
+        cg = CallbackGenerator(list(api.callbacks.values()))
+        cg.out = output
+        generate_preamble(output)
+        output.write(f'#define NO_USER_DATA_CALLBACKS_COUNT {len(api.no_user_data_callbacks)}\n')
+        output.write('int __reserved_cb_id_array[PROXY_INSTANCES_COUNT * NO_USER_DATA_CALLBACKS_COUNT];\n')
+        output.write('std::map<std::string, MultiProxyFunctionsContainer> __multi_proxy_name_to_ptr_map;\n')
+        output.write('std::map<std::string, int> __reserved_base_id_map;\n\n')
+        output.write('#undef TIZEN_DEPRECATION\n#undef DEPRECATION_WARNING\n')
+        for header in api.loaded_headers:
+            if '/usr/include/' in header:
+                header = header.split('/usr/include/', 1)[1]
+            output.write(f'#include "{header}"\n')
+        output.write('\n')
+        for type1, type2 in api.get_type_mapping():
+            output.write(f'static_assert(sizeof({type1}) == sizeof({type2}), "Wrong ' \
+                + f'type substitution - {type1} and {type2} have different size.");\n')
+        log.info(f'Generated asserts for {len(api.callbacks)} callbacks.')
 
 
 def generate_preamble(output):
@@ -861,7 +920,10 @@ def process_configs(args):
         output = open(args.output, 'w')
     else:
         output = sys.stdout
-    CallbackGenerator.generate_from_collector(api, output)
+    if args.asserts:
+        CallbackGenerator.generate_asserts_from_collector(api, output)
+    else:
+        CallbackGenerator.generate_from_collector(api, output)
     if args.output:
         output.close()
 
@@ -871,6 +933,8 @@ def main(argv):
     parser.add_argument('-c', '--config', action='append', default=[])
     parser.add_argument('-o', '--output')
     parser.add_argument('-v', '--verbose', action='store_true')
+    parser.add_argument('-a', '--asserts', action='store_true',
+                        help='Generate asserts to verify type substitution')
     parser.add_argument('files', nargs='*')
     args = parser.parse_args(argv)
     logging.basicConfig(level=logging.DEBUG if args.verbose else logging.INFO)

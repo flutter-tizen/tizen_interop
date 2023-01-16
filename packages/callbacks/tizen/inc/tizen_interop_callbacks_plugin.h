@@ -42,10 +42,10 @@ typedef struct {
 typedef struct {
   int x;
   int y;
-} mv_point_s;
+} mv_point_s_copy;
 
 typedef struct {
-  mv_point_s point;
+  mv_point_s_copy point;
   int width;
   int height;
 } mv_rectangle_s_copy;
