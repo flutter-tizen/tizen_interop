@@ -14,14 +14,18 @@
 CB_RETURN platform_blocking_##CB_NAME(CB_PARAMS) { \
   int callbackId = reinterpret_cast<int>(user_data); \
   LDEBUG("enter <RETURN> id:%d", callbackId); \
+  CallbackInfo cbInfo = __cb_id_to_info_map[callbackId]; \
+  user_data = cbInfo.actualUserData; \
+  if (gettid() == main_thread_id) { \
+    LDEBUG("calling dart callback directly"); \
+    return (reinterpret_cast<CB_NAME>(cbInfo.callbackPtr))(EXPAND_LIST(CB_PARAMS_NAMES)); \
+  } \
   CB_RETURN dartCallbackRetVal = CB_RETURN(); \
   std::mutex mutex; \
   std::unique_lock<std::mutex> lock(mutex); \
   std::condition_variable cv; \
-\
   bool dartCallbackFinished = false; \
-  CallbackInfo cbInfo = __cb_id_to_info_map[callbackId]; \
-  user_data = cbInfo.actualUserData; \
+\
   CallbackWrapper wrapper = \
       [&cbInfo, &dartCallbackRetVal, \
        EXPAND_LIST(CB_PARAMS_NAMES), \
@@ -42,8 +46,7 @@ CB_RETURN platform_blocking_##CB_NAME(CB_PARAMS) { \
   while (!dartCallbackFinished) { \
     cv.wait(lock); \
   } \
-\
-  LDEBUG("notification sent, dartCallbackRetVal: %d", (int)dartCallbackRetVal); \
+  LDEBUG("exit, dartCallbackRetVal: %d", (int)dartCallbackRetVal); \
   return dartCallbackRetVal; \
 } \
 \
@@ -68,14 +71,17 @@ CB_RETURN platform_blocking_##CB_NAME##_4(CB_PARAMS) { \
 void platform_blocking_##CB_NAME(CB_PARAMS) { \
   int callbackId = reinterpret_cast<int>(user_data); \
   LDEBUG("enter <BLOCKING> id:%d", callbackId); \
+  CallbackInfo cbInfo = __cb_id_to_info_map[callbackId]; \
+  user_data = cbInfo.actualUserData; \
+  if (gettid() == main_thread_id) { \
+    LDEBUG("calling dart callback directly"); \
+    return (reinterpret_cast<CB_NAME>(cbInfo.callbackPtr))(EXPAND_LIST(CB_PARAMS_NAMES)); \
+  } \
   std::mutex mutex; \
   std::unique_lock<std::mutex> lock(mutex); \
   std::condition_variable cv; \
-\
   bool dartCallbackFinished = false; \
 \
-  CallbackInfo cbInfo = __cb_id_to_info_map[callbackId]; \
-  user_data = cbInfo.actualUserData; \
   CallbackWrapper wrapper = \
       [&cbInfo, EXPAND_LIST(CB_PARAMS_NAMES), &cv, &dartCallbackFinished] { \
     CB_NAME local_cb_ptr = reinterpret_cast<CB_NAME>(cbInfo.callbackPtr); \
@@ -94,8 +100,7 @@ void platform_blocking_##CB_NAME(CB_PARAMS) { \
   while (!dartCallbackFinished) { \
     cv.wait(lock); \
   } \
-\
-  LDEBUG("notification sent"); \
+  LDEBUG("exit"); \
 } \
 \
 void platform_blocking_##CB_NAME##_0(CB_PARAMS) { \
@@ -122,6 +127,7 @@ void platform_non_blocking_##CB_NAME(CB_PARAMS) { \
   CallbackInfo cbInfo = __cb_id_to_info_map[callbackId]; \
   CB_NAME local_cb_ptr = reinterpret_cast<CB_NAME>(cbInfo.callbackPtr); \
   user_data = cbInfo.actualUserData; \
+\
   CallbackWrapper wrapper = \
       [local_cb_ptr, EXPAND_LIST(CB_PARAMS_NAMES)] { \
     LDEBUG("calling local_cb_ptr() %p", local_cb_ptr); \
@@ -153,14 +159,17 @@ void platform_non_blocking_##CB_NAME##_4(CB_PARAMS) { \
 #define PROXY_GROUP_RETURN_NO_USER_DATA(CB_NAME, CB_RETURN, CB_PARAMS...) \
 CB_RETURN platform_blocking_##CB_NAME(int callbackId, CB_PARAMS) { \
   LDEBUG("enter <RETURN_NO_USER_DATA> id:%d", callbackId); \
-\
+  if (gettid() == main_thread_id) { \
+    CallbackInfo cbInfo = __cb_id_to_info_map[callbackId]; \
+    LDEBUG("calling dart callback directly"); \
+    return (reinterpret_cast<CB_NAME>(cbInfo.callbackPtr))(EXPAND_LIST(CB_PARAMS_NAMES)); \
+  } \
   CB_RETURN dartCallbackRetVal = CB_RETURN(); \
-\
   std::mutex mutex; \
   std::unique_lock<std::mutex> lock(mutex); \
   std::condition_variable cv; \
-\
   bool dartCallbackFinished = false; \
+\
   CallbackWrapper wrapper = \
       [callbackId, &dartCallbackRetVal, \
        EXPAND_LIST(CB_PARAMS_NAMES), \
@@ -182,8 +191,7 @@ CB_RETURN platform_blocking_##CB_NAME(int callbackId, CB_PARAMS) { \
   while (!dartCallbackFinished) { \
     cv.wait(lock); \
   } \
-\
-  LDEBUG("notification sent, dartCallbackRetVal: %d", dartCallbackRetVal); \
+  LDEBUG("exit, dartCallbackRetVal: %d", (int)dartCallbackRetVal); \
   return dartCallbackRetVal; \
 } \
 \
@@ -207,12 +215,16 @@ CB_RETURN platform_blocking_##CB_NAME##_4(CB_PARAMS) { \
 #define PROXY_GROUP_BLOCKING_NO_USER_DATA(CB_NAME, CB_PARAMS...) \
 void platform_blocking_##CB_NAME(int callbackId, CB_PARAMS) { \
   LDEBUG("enter <BLOCKING_NO_USER_DATA> id:%d", callbackId); \
-\
+  if (gettid() == main_thread_id) { \
+    CallbackInfo cbInfo = __cb_id_to_info_map[callbackId]; \
+    LDEBUG("calling dart callback directly"); \
+    return (reinterpret_cast<CB_NAME>(cbInfo.callbackPtr))(EXPAND_LIST(CB_PARAMS_NAMES)); \
+  } \
   std::mutex mutex; \
   std::unique_lock<std::mutex> lock(mutex); \
   std::condition_variable cv; \
-\
   bool dartCallbackFinished = false; \
+\
   CallbackWrapper wrapper = \
       [callbackId, EXPAND_LIST(CB_PARAMS_NAMES), &cv, &dartCallbackFinished] { \
     CallbackInfo cbInfo = __cb_id_to_info_map[callbackId]; \
@@ -232,8 +244,7 @@ void platform_blocking_##CB_NAME(int callbackId, CB_PARAMS) { \
   while (!dartCallbackFinished) { \
     cv.wait(lock); \
   } \
-\
-  LDEBUG("notification sent"); \
+  LDEBUG("exit"); \
 } \
 \
 void platform_blocking_##CB_NAME##_0(CB_PARAMS) { \
@@ -256,9 +267,9 @@ void platform_blocking_##CB_NAME##_4(CB_PARAMS) { \
 #define PROXY_GROUP_NON_BLOCKING_NO_USER_DATA(CB_NAME, CB_PARAMS...) \
 void platform_non_blocking_##CB_NAME(int callbackId, CB_PARAMS) { \
   LDEBUG("enter <NON_BLOCKING_NO_USER_DATA> id:%d", callbackId); \
-\
   CallbackInfo cbInfo = __cb_id_to_info_map[callbackId]; \
   CB_NAME local_cb_ptr = reinterpret_cast<CB_NAME>(cbInfo.callbackPtr); \
+\
   CallbackWrapper wrapper = \
       [local_cb_ptr, EXPAND_LIST(CB_PARAMS_NAMES)] { \
     LDEBUG("calling local_cb_ptr() %p", local_cb_ptr); \
@@ -290,14 +301,17 @@ void platform_non_blocking_##CB_NAME##_4(CB_PARAMS) { \
 #define PROXY_GROUP_RETURN_NO_USER_DATA_NO_PARAM(CB_NAME, CB_RETURN) \
 CB_RETURN platform_blocking_##CB_NAME(int callbackId) { \
   LDEBUG("enter <RETURN_NO_USER_DATA_NO_PARAM> id:%d", callbackId); \
-\
+  if (gettid() == main_thread_id) { \
+    CallbackInfo cbInfo = __cb_id_to_info_map[callbackId]; \
+    LDEBUG("calling dart callback directly"); \
+    return (reinterpret_cast<CB_NAME>(cbInfo.callbackPtr))(); \
+  } \
   CB_RETURN dartCallbackRetVal = CB_RETURN(); \
-\
   std::mutex mutex; \
   std::unique_lock<std::mutex> lock(mutex); \
   std::condition_variable cv; \
-\
   bool dartCallbackFinished = false; \
+\
   CallbackWrapper wrapper = \
       [callbackId, &dartCallbackRetVal, &cv, &dartCallbackFinished] { \
     CallbackInfo cbInfo = __cb_id_to_info_map[callbackId]; \
@@ -317,8 +331,7 @@ CB_RETURN platform_blocking_##CB_NAME(int callbackId) { \
   while (!dartCallbackFinished) { \
     cv.wait(lock); \
   } \
-\
-  LDEBUG("notification sent, dartCallbackRetVal: %d", dartCallbackRetVal); \
+  LDEBUG("exit, dartCallbackRetVal: %d", (int)dartCallbackRetVal); \
   return dartCallbackRetVal; \
 } \
 \

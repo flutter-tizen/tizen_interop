@@ -1,4 +1,5 @@
 #include "tizen_interop_callbacks_plugin.h"
+#include "log.h"
 
 #include <flutter/plugin_registrar.h>
 #include <dart_native_api.h>
@@ -7,7 +8,9 @@
 #include <memory>
 #include <string>
 
-#include "log.h"
+#include <unistd.h>
+#include <sys/syscall.h>
+#define gettid() syscall(SYS_gettid)
 
 namespace {
 
@@ -35,6 +38,7 @@ void TizenInteropCallbacksPluginRegisterWithRegistrar(
 }
 
 std::map<int, CallbackInfo> __cb_id_to_info_map;
+unsigned long main_thread_id = 0;
 
 #include "dart_api_dl.c"
 #include "../generated/callbacks.cc"
@@ -70,6 +74,7 @@ __attribute__((visibility("default")))
 void TizenInteropCallbacksRegisterSendPort(Dart_Port port) {
   LOG_DEBUG("in RegisterSendPort() port=%" PRId64, port);
   send_port = port;
+  main_thread_id = gettid();
 }
 
 __attribute__((visibility("default")))

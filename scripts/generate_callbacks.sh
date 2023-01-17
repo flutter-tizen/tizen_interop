@@ -14,11 +14,11 @@ TARGET="$SCRIPT_DIR/../packages/callbacks/tizen/generated/callbacks.cc"
 if [ "$1" = "verify" ] ; then
 	VERIFY=yes
 	#set -e
-    ARCHS="${ARCHS:-arm}" # arm64 x86
-    PROFILES="${PROFILES:-common}" 	# mobile, wearable, tv
+	ARCHS="${ARCHS:-arm}" # arm64 x86
+	PROFILES="${PROFILES:-common}" 	# mobile, wearable, tv
 	declare -A SKIP_VERIFY_VERSIONS
-    #SKIP_VERIFY_VERSIONS[4.0]=skip
-    EXAMPLE_DIR="$SCRIPT_DIR/../packages/callbacks/example"
+	#SKIP_VERIFY_VERSIONS[4.0]=skip
+	EXAMPLE_DIR="$SCRIPT_DIR/../packages/callbacks/example"
 	(cd "$EXAMPLE_DIR"; flutter-tizen pub get)
 fi
 if [ "$1" = "-v" ] ; then
@@ -37,13 +37,13 @@ for C in "$SCRIPT_DIR"/../configs/*/ffigen.yaml; do
 	echo $C
 	VERSION="${C%/ffigen.yaml}"
 	VERSION="${VERSION##*/}"
-    if [ -n "${SKIP_VERIFY_VERSIONS[VERSION]}" ] ; then continue; fi
 	echo "==== Found Tizen $VERSION config"
 	D="$ROOTSTRAPS/$VERSION"
 	if [ -d "$D" ] ; then
-        if [ "$VERIFY" = "yes" ] ; then
+		if [ "$VERIFY" = "yes" ] ; then
+			if [ -n "${SKIP_VERIFY_VERSIONS[$VERSION]}" ] ; then continue; fi
 			"$CB_PACKAGE_ROOT"/gen_callbacks.py --asserts -c $SCRIPT_DIR/../configs/$VERSION/ffigen.yaml -o "$TARGET"
-            sed -i '/manifest/ s/api-version="[0-9.]*"/api-version="'$VERSION'"/' "$EXAMPLE_DIR/tizen/tizen-manifest.xml"
+			sed -i '/manifest/ s/api-version="[0-9.]*"/api-version="'$VERSION'"/' "$EXAMPLE_DIR/tizen/tizen-manifest.xml"
 			for PROFILE in $PROFILES ; do
 				for ARCH in $ARCHS ; do
 					echo "$VERSION>  flutter-tizen build tpk --device-profile $PROFILE --target-arch $ARCH"
