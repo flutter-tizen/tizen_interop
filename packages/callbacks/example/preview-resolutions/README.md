@@ -4,8 +4,7 @@ Demonstrates how to use the tizen_interop_callbacks plugin.
 
 ## Getting Started
 
-The application shows status of battery - if charger is connected and battery level.
-The status is only shown when a callback information about change is called.
+The application shows a list of supported camera preview resolutions.
 
-Not every Tizen device supports battery. You can run the example on emulator and use
-the Control Panel to simulate changes in charger/battery status.
+The `camera_foreach_supported_preview_resolution()` is called from a spawned
+isolate because it blocks the calling thread.
