@@ -1,10 +1,10 @@
 /*
- * Copyright (c) 2020, the Dart project authors.  Please see the AUTHORS file
- * for details. All rights reserved. Use of this source code is governed by a
- * BSD-style license that can be found in the LICENSE file.
+ * Copyright (c) 2020, the Dart project authors.
+ * Please see the https://github.com/dart-lang/sdk/blob/main/AUTHORS for details.
+ * All rights reserved. Use of this source code is governed by a
+ * BSD-style license that can be found at https://github.com/dart-lang/sdk/blob/main/LICENSE.
  */
 
-// This is a hack.
 // This file was copied from flutter-tizen/flutter/bin/cache/dart-sdk/include/dart_api_dl.c.
 // We need to link to this file from tizen_native_plugin.cc.
 // This file caused a build error when flutter-tizen build was used.
