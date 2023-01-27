@@ -11,14 +11,26 @@ ROOTSTRAPS="$SCRIPT_DIR/../rootstraps"
 FOUND_COUNT=0
 TARGET="$SCRIPT_DIR/../packages/callbacks/tizen/generated/callbacks.cc"
 
-if [ "$1" = "verify" ] ; then
+if [ "$1" == "-h" -o "$1" = "help" -o "$1" = "--help" ] ; then
+	echo "$0 [-v]   - generates callbacks based on ffigen.yaml config files"
+	echo "$0 verify - check type substitution, see this script source for more info"
+	exit 0
+elif [ "$1" = "verify" ] ; then
+ # The generator can output a compile time asserts to test if types we are substituting for
+ # Tizen API types are of the same type - i.e. that our signatures are compatible with original
+ # callbacks signatures.
+ # When asserts are generated, the code is only usefull for verification, not for calling callbacks.
+ # Just the fact that the app with asserts is building means the signatures match.
+ # Many combinations of profile and platform version cause issues with Tizen headers,
+ # as not every header is available there, or they need to be included in specific order, etc.
+ # Because of that a failing build does not always mean that our type substitution is wrong.
 	VERIFY=yes
 	#set -e
 	ARCHS="${ARCHS:-arm}" # arm64 x86
 	PROFILES="${PROFILES:-common}" 	# mobile, wearable, tv
 	declare -A SKIP_VERIFY_VERSIONS
 	#SKIP_VERIFY_VERSIONS[4.0]=skip
-	EXAMPLE_DIR="$SCRIPT_DIR/../packages/callbacks/example"
+	EXAMPLE_DIR="$SCRIPT_DIR/../packages/callbacks/example/battery"
 	(cd "$EXAMPLE_DIR"; flutter-tizen pub get)
 fi
 if [ "$1" = "-v" ] ; then
