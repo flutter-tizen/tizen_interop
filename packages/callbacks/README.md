@@ -35,6 +35,9 @@ var levelCb = callbacks.register<Void Function(Int32, Pointer<Void>, Pointer<Voi
   'device_changed_cb', Pointer.fromFunction(_batteryChanged));
 ```
 
+The native function type to be used in `callbacks.register<>()` can be obtained by checking
+the definition of related callback type - the `device_changed_cb` in this case.
+
 5. Pass the obtained callback pointer and user data to Native API set/add callback function:
 ``` dart
 ret = tizen.device_add_callback(
@@ -42,3 +45,6 @@ ret = tizen.device_add_callback(
   levelCb.regCallbackPtr,
   levelCb.regUserData);
 ```
+
+Both `regCallbackPtr` and `regUserData` must be used. The callbacks handling implementation relies on the `regUserData`.
+The only exception are the few callbacks that do not have a user_data parameter.
