@@ -3,15 +3,16 @@ preamble: |
   // Use of this source code is governed by a BSD-style license that can be
   // found in the LICENSE file.
 
-name: tizen60Symbols
+name: 'tizen60Symbols'
 output: 'lib/src/bindings/6.0/generated_symbols.dart'
 library-path: 'rootstraps/6.0/usr/lib'
+
 target-libraries:
   - libaccounts-svc.so.0                        # Account / Account Manager
   - libfido-client.so.0                         # Account / FIDO Client
   - liboauth2.so.0                              # Account / OAuth 2.0
   - libcore-sync-client.so.1                    # Account / Sync Manager
-  - libcapi-appfw-application.so.0              # Applicatoin Framework / Application (include i18n)
+  - libcapi-appfw-application.so.0              # Applicatoin Framework / Application
   - libcapi-appfw-alarm.so.0                    # Application Framework / Application / Alarm
   - libcapi-appfw-app-common.so.0               # Application Framework / Application / App Common, Resource Manager
   - libcapi-appfw-app-control.so.0              # Application Framework / Application / App Control
@@ -48,7 +49,13 @@ target-libraries:
   - libcapi-mediamuxer.so.0                     # Multimedia / Media Muxer
   - libcapi-media-streamer.so.0                 # Multimedia / Media Streamer
   - libcapi-media-tool.so.0                     # Multimedia / Media Tool
-  - libcapi-media-vision.so.0                   # Multimedia / Media Vision
+  - libmv_barcode_detector.so                   # Multimedia / Media Vision BarCode
+  - libmv_barcode_generator.so                  # Multimedia / Media Vision BarCode
+  - libmv_common.so                             # Multimedia / Media Vision Common
+  - libmv_face.so                               # Multimedia / Media Vision Face
+  - libmv_image.so                              # Multimedia / Media Vision Image
+  - libmv_inference.so                          # Multimedia / Media Vision Inference
+  - libmv_surveillance.so                       # Multimedia / Media Vision Surveillance
   - libcapi-media-metadata-editor.so            # Multimedia / Metadata Editor
   - libcapi-media-metadata-extractor.so         # Multimedia / Metadata Extractor
   - libcapi-media-player.so.0                   # Multimedia / Player
@@ -66,6 +73,7 @@ target-libraries:
   - libcapi-network-connection.so.1             # Network / Connection
   - libnsd-dns-sd.so.0                          # Network / DNSSD
   - libcapi-network-http.so.0.1.0               # Network / HTTP
+  - libcapi-network-inm.so.0                    # Network / Intelligent Network Monitoring
   - libiotcon.so.0                              # Network / IoTCon
   - libcapi-network-mtp.so.1                    # Network / MTP
   - libnsd-ssdp.so.0                            # Network / SSDP
@@ -97,6 +105,7 @@ target-libraries:
   - libcapi-system-system-settings.so.0         # System / System Settings
   - libttrace.so.1                              # System / T-trace
   - libcapi-system-usbhost.so.0                 # System / USB Host
+  - libupdate-control.so.1                      # System / Update Control
   - libcbhm.so.1                                # UI / Clipboard History Manager
   - libeom.so.0                                 # UI / External Output Manager
   - libtbm.so.1                                 # UI / TBM Surface

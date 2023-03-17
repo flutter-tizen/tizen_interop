@@ -115,9 +115,12 @@ _Note: UI and WebView related APIs are not provided._
 | | Preference | ✔ | ✔ | ✔ | ✔ | ✔ |
 | | Resource Manager | ✔ | ✔ | ✔ | ✔ | ✔ |
 | | Application Manager | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | Attach panel |
 | | Badge | ✔ | ✔ | ✔ | ✔ | ✔ |
 | | Bundle | ✔ | ✔ | ✔ | ✔ | ✔ |
 | | Cion | | | | | ✔ |
+| | Component Based Application |
+| | Component Manager |
 | | Data Control | ✔ | ✔ | ✔ | ✔ | ✔ |
 | | Message Port | ✔ | ✔ | ✔ | ✔ | ✔ |
 | | Notification | ✔ | ✔ | ✔ | ✔ | ✔ |
@@ -126,21 +129,24 @@ _Note: UI and WebView related APIs are not provided._
 | | RPC Port | | ✔ | ✔ | ✔ | ✔ |
 | | Service Application | ✔ | ✔ | ✔ | ✔ | ✔ |
 | | Shortcut | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | Widget |
 | Base | Common Error | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | Utils |
 | Content | Download | ✔ | ✔ | ✔ | ✔ | ✔ |
 | | MIME Type | ✔ | ✔ | ✔ | ✔ | ✔ |
 | | Media Content | ✔ | ✔ | ✔ | ✔ | ✔ |
-| | Activity Recognition | | ✔ | ✔ | ✔ | |
+| Context | Activity Recognition | | ✔ | ✔ | ✔ | |
 | | Contextual History | | ✔ | ✔ | ✔ | ✔ |
 | | Contextual Trigger | | ✔ | ✔ | ✔ | ✔ |
 | | Gesture Recognition | | ✔ | ✔ | ✔ | |
 | Location | Geofence Manager | | ✔ | ✔ | ✔ | ✔ |
 | | Location Manager | | ✔ | ✔ | ✔ | ✔ |
+| | Maps Service |
 | Machine Learning | Pipeline | | | | | ✔ |
 | | Single | | | | | ✔ |
 | | Trainer | | | | | ✔ |
 | Messaging | Email | ✔ | ✔ | ✔ | ✔ | ✔ |
-| | Messages | ✔ | | | | ✔ |
+| | Messages | ✔ | | | | |
 | | Push | | ✔ | ✔ | ✔ | ✔ |
 | Multimedia | Audio I/O | ✔ | ✔ | ✔ | ✔ | ✔ |
 | | Camera | ✔ | ✔ | ✔ | ✔ | ✔ |
@@ -151,7 +157,7 @@ _Note: UI and WebView related APIs are not provided._
 | | Media Muxer | ✔ | ✔ | ✔ | ✔ | ✔ |
 | | Media Streamer | ✔ | ✔ | ✔ | ✔ | ✔ |
 | | Media Tool | ✔ | ✔ | ✔ | ✔ | ✔ |
-| | Media Vision | ✔ | ✔ | ✔ | ✔ | |
+| | Media Vision | ✔ | ✔ | ✔ | ✔ | ✔ |
 | | Metadata Editor | ✔ | ✔ | ✔ | ✔ | ✔ |
 | | Metadata Extractor | ✔ | ✔ | ✔ | ✔ | ✔ |
 | | Player | ✔ | ✔ | ✔ | ✔ | ✔ |
@@ -171,14 +177,16 @@ _Note: UI and WebView related APIs are not provided._
 | | Connection | ✔ | ✔ | ✔ | ✔ | ✔ |
 | | DNSSD | ✔ | ✔ | ✔ | ✔ | ✔ |
 | | HTTP | | ✔ | ✔ | ✔ | ✔ |
+| | Intelligent Network Monitoring | | | ✔ | ✔ | ✔ |
 | | IoTCon | ✔ | ✔ | ✔ | ✔ | ✔ |
 | | MTP | ✔ | ✔ | ✔ | ✔ | ✔ |
 | | SSDP | ✔ | ✔ | ✔ | ✔ | ✔ |
 | | Smart Traffic Control | | ✔ | ✔ | ✔ | ✔ |
-| | Smartcard | ✔ | | | | ✔ |
+| | Smartcard | ✔ | | | | |
 | | SoftAP | | ✔ | ✔ | ✔ | ✔ |
+| | User Awareness |
 | | VPN Service | | ✔ | ✔ | ✔ | ✔ |
-| | Wi-Fi Manager | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | Wi-Fi | ✔ | ✔ | ✔ | ✔ | ✔ |
 | | Wi-Fi Direct | | ✔ | ✔ | ✔ | ✔ |
 | Security | CSR | ✔ | ✔ | ✔ | ✔ | ✔ |
 | | Device Certificate Manager | | ✔ | ✔ | ✔ | ✔ |
@@ -203,18 +211,26 @@ _Note: UI and WebView related APIs are not provided._
 | | System Settings | ✔ | ✔ | ✔ | ✔ | ✔ |
 | | T-trace | ✔ | ✔ | ✔ | ✔ | ✔ |
 | | USB Host | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | Update Control | | ✔ | ✔ | ✔ | ✔ |
 | Telephony | Telephony Information | ✔ | | | | |
 | UI | Clipboard History Manager | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | DALi |
+| | EFL |
 | | External Output Manager | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | Minicontrol |
 | | TBM Surface | ✔ | ✔ | ✔ | ✔ | ✔ |
-| UIX | Autofill | | |✔ | ✔ | ✔ |
+| | Tizen WS Shell |
+| | UI View Manager |
+| UIX | Autofill | | | ✔ | ✔ | ✔ |
 | | Input Method | ✔ | ✔ | ✔ | ✔ | ✔ |
 | | Input Method Manager | ✔ | ✔ | ✔ | ✔ | ✔ |
 | | Multi assistant | | ✔ | ✔ | ✔ | ✔ |
 | | STT | ✔ | ✔ | ✔ | ✔ | ✔ |
 | | STT Engine | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | Sticker |
 | | TTS | ✔ | ✔ | ✔ | ✔ | ✔ |
 | | TTS Engine | ✔ | ✔ | ✔ | ✔ | ✔ |
 | | Voice control | ✔ | ✔ | ✔ | ✔ | ✔ |
+| | Voice control elementary |
 | | Voice control engine | | ✔ | ✔ | ✔ | ✔ |
 | | Voice control manager | | | ✔ | ✔ | ✔ |
