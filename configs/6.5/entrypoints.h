@@ -50,9 +50,9 @@
 #include <locations.h>
 
 // Machine Learning
-#include <nnstreamer/nnstreamer.h>
-#include <nnstreamer/nnstreamer-single.h>
-#include <nntrainer/nntrainer.h>
+#include <nnstreamer.h>
+#include <nnstreamer-single.h>
+#include <nntrainer.h>
 
 // Messaging
 #include <email.h>
