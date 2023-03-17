@@ -1,3 +1,7 @@
+## 0.2.4
+
+* Add missing APIs and regenerate bindings.
+
 ## 0.2.3
 
 * Add `lints` dependency.
