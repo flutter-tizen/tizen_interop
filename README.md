@@ -2,11 +2,7 @@
 
 [![pub package](https://img.shields.io/pub/v/tizen_interop.svg)](https://pub.dev/packages/tizen_interop)
 
-Provides Dart bindings and utilities for using Tizen native APIs.
-
-> **Warning**
->
-> This package is currently under testing and not intended for production use. Some APIs may be missing or have errors.
+Provides Dart bindings for Tizen native APIs, powered by [ffigen](https://pub.dev/packages/ffigen).
 
 
 ## Usage
@@ -16,7 +12,7 @@ To use this package, add `ffi` and `tizen_interop` as dependencies in your `pubs
 ```yaml
 dependencies:
   ffi: ^2.0.1
-  tizen_interop: ^0.2.4
+  tizen_interop: ^0.2.5
 ```
 
 Then, import `package:ffi/ffi.dart` and `package:tizen_interop/[TIZEN_VERSION]/tizen.dart` in your Dart code.
@@ -75,11 +71,13 @@ int freeMemory = using((Arena arena) {
 
 ## Supported APIs
 
-This package provides bindings of the following APIs of [Tizen IoT-Headed profile](https://docs.tizen.org/application/native/api/overview/):
+This package provides bindings for the following APIs of the [Tizen IoT-Headed](https://docs.tizen.org/application/native/api/iot-headed/latest) profile.
 
-_Note: UI and WebView related APIs are not provided._
+> **Note**
+>
+> UI and WebView related APIs are not included.
 
-| Category | Sub Category | Tizen 4.0 | Tizen 5.0 | Tizen 5.5 | Tizen 6.0 | Tizen 6.5 | Tizen 7.0 |
+| Category | Sub category | Tizen 4.0 | Tizen 5.0 | Tizen 5.5 | Tizen 6.0 | Tizen 6.5 | Tizen 7.0 |
 |-|-|:-:|:-:|:-:|:-:|:-:|:-:|
 | Account | Account Manager | | ✔ | ✔ | ✔ | ✔ | ✔ |
 | | FIDO Client | | ✔ | ✔ | ✔ | ✔ | ✔ |

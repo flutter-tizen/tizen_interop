@@ -1,3 +1,7 @@
+## 0.2.5
+
+* Add Tizen 7.0 bindings.
+
 ## 0.2.4
 
 * Add missing APIs and regenerate bindings.
