@@ -3,8 +3,11 @@ preamble: |
   // Use of this source code is governed by a BSD-style license that can be
   // found in the LICENSE file.
 
+  // ignore_for_file: camel_case_types, non_constant_identifier_names
+  // ignore_for_file: unused_element, unused_field
+
 name: 'Tizen55Native'
-description: 'Provides Dart bindings and utility functions for using Tizen native APIs.'
+description: 'Dart bindings for Tizen native APIs.'
 output: 'lib/src/bindings/5.5/generated_bindings.dart'
 
 llvm-path:

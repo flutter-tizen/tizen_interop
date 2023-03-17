@@ -1,3 +1,8 @@
+## 0.2.3
+
+* Add `lints` dependency.
+* Suppress lint rules to pass static analysis.
+
 ## 0.2.2
 
 * Remove path and yaml dependencies.

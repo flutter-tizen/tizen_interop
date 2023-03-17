@@ -2,9 +2,11 @@
 
 [![pub package](https://img.shields.io/pub/v/tizen_interop.svg)](https://pub.dev/packages/tizen_interop)
 
-This package provides Dart bindings and utility functions for using Tizen native APIs.
+Provides Dart bindings and utilities for using Tizen native APIs.
 
-_⚠️Caution: This package is currently under testing and not intended for production use. Some APIs may be missing or have errors._
+> **Warning**
+>
+> This package is currently under testing and not intended for production use. Some APIs may be missing or have errors.
 
 
 ## Usage
@@ -14,7 +16,7 @@ To use this package, add `ffi` and `tizen_interop` as dependencies in your `pubs
 ```yaml
 dependencies:
   ffi: ^2.0.1
-  tizen_interop: ^0.2.2
+  tizen_interop: ^0.2.3
 ```
 
 Then, import `package:ffi/ffi.dart` and `package:tizen_interop/[TIZEN_VERSION]/tizen.dart` in your Dart code.
