@@ -73,9 +73,7 @@ int freeMemory = using((Arena arena) {
 
 This package provides bindings for the following APIs of the [Tizen IoT-Headed](https://docs.tizen.org/application/native/api/iot-headed/latest) profile.
 
-> **Note**
->
-> UI and WebView related APIs are not included.
+> **Note**: UI and WebView related APIs are not included.
 
 | Category | Sub category | Tizen 4.0 | Tizen 5.0 | Tizen 5.5 | Tizen 6.0 | Tizen 6.5 | Tizen 7.0 |
 |-|-|:-:|:-:|:-:|:-:|:-:|:-:|
