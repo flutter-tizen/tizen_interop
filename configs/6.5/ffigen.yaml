@@ -3,19 +3,18 @@ preamble: |
   // Use of this source code is governed by a BSD-style license that can be
   // found in the LICENSE file.
 
-  // ignore_for_file: camel_case_types, non_constant_identifier_names
-  // ignore_for_file: unused_element, unused_field
+  // ignore_for_file: type=lint, unused_element, unused_field
 
 name: 'Tizen65Native'
 description: 'Dart bindings for Tizen native APIs.'
-output: 'lib/src/bindings/6.5/generated_bindings.dart'
+output: '../../lib/src/bindings/6.5/generated_bindings.dart'
 
 llvm-path:
   - '/usr/lib/llvm-12'
 
 headers:
   entry-points:
-    - 'configs/6.5/entrypoints.h'
+    - 'entrypoints.h'
   include-directives:
     - '**/account.h'
     - '**/autofill_common.h'
