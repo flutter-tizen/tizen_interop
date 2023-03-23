@@ -6136,6 +6136,16 @@ final Map<String, List<String>> tizen50Symbols = {
     'usb_host_unref_device',
     'usb_host_unset_hotplug_cb',
   ],
+  'libupdate-control.so.1': [
+    'update_control_cancel_reservation',
+    'update_control_check_new_version',
+    'update_control_deinitialize',
+    'update_control_do_update',
+    'update_control_download_package',
+    'update_control_get_property',
+    'update_control_initialize',
+    'update_control_make_reservation',
+  ],
   'libcbhm.so.1': [
     'cbhm_close_service',
     'cbhm_hide',

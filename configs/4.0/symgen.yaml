@@ -3,11 +3,12 @@ preamble: |
   // Use of this source code is governed by a BSD-style license that can be
   // found in the LICENSE file.
 
-name: tizen40Symbols
+name: 'tizen40Symbols'
 output: 'lib/src/bindings/4.0/generated_symbols.dart'
 library-path: 'rootstraps/4.0/usr/lib'
+
 target-libraries:
-  - libcapi-appfw-application.so.0              # Applicatoin Framework / Application (include i18n)
+  - libcapi-appfw-application.so.0              # Applicatoin Framework / Application
   - libcapi-appfw-alarm.so.0                    # Application Framework / Application / Alarm
   - libcapi-appfw-app-common.so.0               # Application Framework / Application / App Common, Resource Manager
   - libcapi-appfw-app-control.so.0              # Application Framework / Application / App Control

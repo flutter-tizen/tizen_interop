@@ -73,6 +73,7 @@
 #include <mv_common.h>
 #include <mv_face.h>
 #include <mv_image.h>
+#include <mv_inference.h>
 #include <mv_surveillance.h>
 #include <metadata_editor.h>
 #include <metadata_extractor.h>
@@ -93,6 +94,7 @@
 #include <net_connection.h>
 #include <dns-sd.h>
 #include <http.h>
+#include <inm.h>
 #include <iotcon.h>
 #include <ssdp.h>
 #include <stc.h>
@@ -129,14 +131,20 @@
 #include <yaca_rsa.h>
 #include <yaca_simple.h>
 
+// Social
+#include <calendar.h>
+#include <contacts.h>
+#include <phone_number.h>
+
 // System
 #include <device/battery.h>
 #include <device/callback.h>
 #include <device/display.h>
 #include <device/haptic.h>
+#include <device/ir.h>
 #include <device/led.h>
 #include <device/power.h>
-#include <device/ir.h>
+#include <device/temperature.h>
 #include <dlog.h>
 #include <feedback.h>
 #include <media_key.h>
@@ -148,6 +156,7 @@
 #include <system_settings.h>
 #include <trace.h>
 #include <usb_host.h>
+#include <update_control.h>
 
 // UI
 #include <cbhm.h>
