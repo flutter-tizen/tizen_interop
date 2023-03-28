@@ -100,14 +100,14 @@ compiler-opts:
   - '-I./rootstraps/4.0/usr/include/web/'
   - '-I./rootstraps/4.0/usr/include/yaca/'
 
-  # include efl directories
-  - '-I./rootstraps/4.0/usr/include/evas-1/'
+  # include EFL directories
+  - '-I./rootstraps/4.0/usr/include/ecore-imf-1/'
   - '-I./rootstraps/4.0/usr/include/efl-1/'
-  - '-I./rootstraps/4.0/usr/include/eo-1/'
   - '-I./rootstraps/4.0/usr/include/eina-1/'
   - '-I./rootstraps/4.0/usr/include/eina-1/eina/'
   - '-I./rootstraps/4.0/usr/include/emile-1/'
-  - '-I./rootstraps/4.0/usr/include/ecore-imf-1/'
+  - '-I./rootstraps/4.0/usr/include/eo-1/'
+  - '-I./rootstraps/4.0/usr/include/evas-1/'
 
 enums:
   rename:
