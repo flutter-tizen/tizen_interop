@@ -4,7 +4,7 @@ version: 0.1.0
 repository: https://github.com/flutter-tizen/tizen_interop/tree/main/packages/callbacks
 
 environment:
-  sdk: '>=2.17.0 <3.0.0'
+  sdk: '>=2.18.0 <3.0.0'
   flutter: ">=2.5.0"
 
 dependencies:

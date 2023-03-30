@@ -17,9 +17,18 @@
              __LINE__, ##arg)
 
 #define LOG_DEBUG(fmt, args...) LOG(DLOG_DEBUG, fmt, ##args)
-//#define LOG_DEBUG(...)
 #define LOG_INFO(fmt, args...) LOG(DLOG_INFO, fmt, ##args)
 #define LOG_WARN(fmt, args...) LOG(DLOG_WARN, fmt, ##args)
 #define LOG_ERROR(fmt, args...) LOG(DLOG_ERROR, fmt, ##args)
+
+// LDEBUG is used in macros.h, LOG_DEBUG_DETAIL in tizen_interop_callbacks_plugin.cc
+#if 0
+#define LDEBUG(...) LOG_DEBUG(__VA_ARGS__)
+#define LOG_DEBUG_DETAIL(...) LOG_DEBUG(__VA_ARGS__)
+#else
+#define LDEBUG(...)
+#define LOG_DEBUG_DETAIL(fmt, args...)
+#endif
+
 
 #endif  // __LOG_H__

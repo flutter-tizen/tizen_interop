@@ -26,7 +26,7 @@ else
   PUBLIC=$(filter %/tizen-common/public, $(patsubst -I"%",%,$(USER_C_OPTS)))
   DART_SDK_INCLUDE=$(join $(PUBLIC), /../../../../dart-sdk/include)
   ifeq ("$(realpath $(DART_SDK_INCLUDE))", "")
-    $(error Could not find directory `$(DART_SDK_INCLUDE)` while looking for find dart_api_dl.h. Please set DART_SDK_INCLUDE environment variable)
+    $(error Could not find directory `$(DART_SDK_INCLUDE)` while looking for dart_api_dl.h. Please set DART_SDK_INCLUDE environment variable)
   endif
   DART_SDK_INCLUDE:=$(realpath $(DART_SDK_INCLUDE))
   ifeq ("$(wildcard $(DART_SDK_INCLUDE)/dart_api_dl.h)","")

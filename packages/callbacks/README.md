@@ -39,12 +39,14 @@ The native function type to be used in `callbacks.register<>()` can be obtained 
 the definition of related callback type - the `device_changed_cb` in this case.
 
 5. Pass the obtained callback pointer and user data to Native API set/add callback function:
+
+> **Important information:**  
+> Both `interopCallback` and `interopUserData` must be used. The callbacks handling implementation relies on the `interopUserData`.
+> The only exception are the few callbacks that do not have a user_data parameter.
+
 ``` dart
 ret = tizen.device_add_callback(
   device_callback_e.DEVICE_CALLBACK_BATTERY_CAPACITY,
-  levelCb.regCallbackPtr,
-  levelCb.regUserData);
+  levelCb.interopCallback,
+  levelCb.interopUserData);
 ```
-
-Both `regCallbackPtr` and `regUserData` must be used. The callbacks handling implementation relies on the `regUserData`.
-The only exception are the few callbacks that do not have a user_data parameter.
