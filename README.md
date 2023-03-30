@@ -12,7 +12,7 @@ To use this package, add `ffi` and `tizen_interop` as dependencies in your `pubs
 ```yaml
 dependencies:
   ffi: ^2.0.1
-  tizen_interop: ^0.2.5
+  tizen_interop: ^0.2.6
 ```
 
 Then, import `package:ffi/ffi.dart` and `package:tizen_interop/[TIZEN_VERSION]/tizen.dart` in your Dart code.

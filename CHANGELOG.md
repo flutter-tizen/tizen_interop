@@ -1,3 +1,7 @@
+## 0.2.6
+
+* Upgrade ffigen to 7.2.9.
+
 ## 0.2.5
 
 * Add Tizen 7.0 bindings.
