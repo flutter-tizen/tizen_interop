@@ -6,15 +6,18 @@
 set -e
 
 SCRIPT_DIR=$(dirname $(readlink -f $0))
+ROOT_DIR=$(readlink -f $SCRIPT_DIR/..)
 
-TARGET_PLATFORMS="4.0 5.0 5.5 6.0 6.5"
-
-if [ ! -d $SCRIPT_DIR/../rootstraps ]; then
-    echo "No rootstraps found. Run copy_rootstraps.sh first."
-    exit 1
+version=$1
+if [ -z "$version" ]; then
+  echo "$(basename $0) <version>"
+  exit 1
 fi
 
-for v in $TARGET_PLATFORMS; do
-    dart run symgen --config $SCRIPT_DIR/../configs/$v/symgen.yaml
-    dart run ffigen --config $SCRIPT_DIR/../configs/$v/ffigen.yaml
-done
+if [ ! -d $ROOT_DIR/rootstraps/$version ]; then
+  echo "No rootstrap found. Run copy_rootstrap.sh first."
+  exit 1
+fi
+
+dart run symgen --config $ROOT_DIR/configs/$version/symgen.yaml
+dart run ffigen --config $ROOT_DIR/configs/$version/ffigen.yaml

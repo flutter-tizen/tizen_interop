@@ -1,0 +1,136 @@
+preamble: |
+  // Copyright 2023 Samsung Electronics Co., Ltd. All rights reserved.
+  // Use of this source code is governed by a BSD-style license that can be
+  // found in the LICENSE file.
+
+name: 'tizen70Symbols'
+output: '../../lib/src/bindings/7.0/generated_symbols.dart'
+library-path: 'rootstraps/7.0/usr/lib'
+
+target-libraries:
+  - libaccounts-svc.so.0                        # Account / Account Manager
+  - libfido-client.so.0                         # Account / FIDO Client
+  - liboauth2.so.0                              # Account / OAuth 2.0
+  - libcore-sync-client.so.1                    # Account / Sync Manager
+  - libcapi-appfw-application.so.0              # Applicatoin Framework / Application (include i18n)
+  - libcapi-appfw-alarm.so.0                    # Application Framework / Application / Alarm
+  - libcapi-appfw-app-common.so.0               # Application Framework / Application / App Common, Resource Manager
+  - libcapi-appfw-app-control.so.0              # Application Framework / Application / App Control
+  - libcapi-appfw-app-control-uri.so.0          # Application Framework / Application / App Control URI
+  - libcapi-appfw-event.so.0                    # Application Framework / Application / Event
+  - libcapi-appfw-job-scheduler.so.0            # Application Framework / Application / Job scheduler
+  - libcapi-appfw-preference.so.0               # Application Framework / Application / Preference
+  - libcapi-appfw-app-manager.so.0              # Application Framework / Application Manager
+  - libbadge.so.0                               # Application Framework / Badge
+  - libbundle.so.0                              # Application Framework / Bundle
+  - libcion.so.1                                # Application Framework / Cion
+  - libdata-control.so.0                        # Application Framework / Data Control
+  - libmessage-port.so.1                        # Application Framework / Message Port
+  - libnotification.so.0                        # Application Framework / Notification
+  - libnotification-ex.so.1                     # Application Framework / Notification EX
+  - libcapi-appfw-package-manager.so.0          # Application Framework / Package Manager
+  - librpc-port.so.1                            # Application Framework / RPC Port
+  - libappcore-agent.so.1                       # Application Framework / Service Application
+  - libcapi-base-common.so.0                    # Base / Common Error
+  - libcapi-web-url-download.so.0               # Content / Download
+  - libcapi-content-mime-type.so.0              # Content / Mime Type
+  - libcapi-content-media-content.so.0          # Content / Media Content
+  - libcapi-context.so.1                        # Context / Contextual History, Contextual Trigger
+  - libcapi-geofence-manager.so.0               # Location / Geofence Manager
+  - libcapi-location-manager.so.0               # Location / Location Manager
+  - libcapi-ml-common.so.1                      # Machine Learning
+  - libcapi-nnstreamer.so.1                     # Machine Learning / Pipeline
+  - libcapi-ml-service.so.1                     # Machine Learning / Service
+  - libcapi-ml-inference-single.so.1            # Machine Learning / Single
+  - libcapi-nntrainer.so                        # Machine Learning / Trainer
+  - libcapi-messaging-email.so.0                # Messaging / Email
+  - libpush.so.0                                # Messaging / Push
+  - libcapi-media-audio-io.so.0                 # Multimedia / Audio I/O
+  - libcapi-media-camera.so.0                   # Multimedia / Camera
+  - libcapi-media-image-util.so.0               # Multimedia / Image Util
+  - libcapi-media-codec.so.0                    # Multimedia / Media Codec
+  - libcapi-media-controller.so.0               # Multimedia / Media Controller
+  - libcapi-mediademuxer.so.0                   # Multimedia / Media Demuxer
+  - libcapi-mediamuxer.so.0                     # Multimedia / Media Muxer
+  - libcapi-media-streamer.so.0                 # Multimedia / Media Streamer
+  - libcapi-media-tool.so.0                     # Multimedia / Media Tool
+  - libmv_3d.so                                 # Multimedia / Media Vision 3D
+  - libmv_barcode_detector.so                   # Multimedia / Media Vision BarCode
+  - libmv_barcode_generator.so                  # Multimedia / Media Vision BarCode
+  - libmv_common.so                             # Multimedia / Media Vision Common
+  - libmv_face.so                               # Multimedia / Media Vision Face
+  - libmv_face_recognition.so                   # Multimedia / Media Vision Face Recognition
+  - libmv_image.so                              # Multimedia / Media Vision Image
+  - libmv_inference.so                          # Multimedia / Media Vision Inference
+  - libmv_roi_tracker.so                        # Multimedia / Media Vision Roi tracker
+  - libmv_surveillance.so                       # Multimedia / Media Vision Surveillance
+  - libcapi-media-editor.so.0                   # Multimedia / Media Editor
+  - libcapi-media-metadata-editor.so            # Multimedia / Metadata Editor
+  - libcapi-media-metadata-extractor.so         # Multimedia / Metadata Extractor
+  - libcapi-media-player.so.0                   # Multimedia / Player
+  - libcapi-media-radio.so.0                    # Multimeida / Radio
+  - libcapi-media-recorder.so.0                 # Multimedia / Recorder
+  - libcapi-media-screen-mirroring.so.0         # Multimedia / Screen Mirroring
+  - libcapi-media-sound-manager.so.0            # Multimedia / Sound Manager
+  - libcapi-media-sound-pool.so.0               # Multimedia / Sound Pool
+  - libcapi-media-streamrecorder.so.0           # Multimedia / StreamRecorder
+  - libcapi-media-thumbnail-util.so             # Multimedia / Thumbnail Util
+  - libcapi-media-tone-player.so.0              # Multimedia / Tone Player
+  - libcapi-media-wav-player.so.0               # Multimedia / WAV Player
+  - libcapi-media-webrtc.so.0                   # Multimedia / WebRTC
+  - libasp.so.0                                 # Network / Application Service Platform
+  - libcapi-network-bluetooth.so.0              # Network / Bluetooth
+  - libcapi-network-connection.so.1             # Network / Connection
+  - libnsd-dns-sd.so.0                          # Network / DNSSD
+  - libcapi-network-http.so.0.1.0               # Network / HTTP
+  - libcapi-network-inm.so.0                    # Network / Intelligent Network Monitoring
+  - libiotcon.so.0                              # Network / IoTCon
+  - libcapi-network-mtp.so.1                    # Network / MTP
+  - libnsd-ssdp.so.0                            # Network / SSDP
+  - libcapi-network-stc.so.0                    # Network / Smart Traffic Control
+  - libcapi-network-softap.so.0.1.0             # Network / SoftAP
+  - libcapi-vpnsvc.so.1                         # Network / VPN Service
+  - libcapi-network-wifi-manager.so.1           # Network / WI-Fi Manager
+  - libwifi-direct.so.1                         # Network / Wi-Fi Direct
+  - libcsr-client.so.2                          # Security / CSR
+  - libdevice-certificate-manager.so.2.0        # Security / Device Certificate Manager
+  - libdpm.so.0                                 # Security / Device Policy Manager
+  - libkey-manager-client.so.1                  # Security / Key Manager Client
+  - libcapi-privacy-privilege-manager.so.0      # Security / Privacy Privilege Manager
+  - libprivilege-info.so.1                      # Security / Privilege Info
+  - libyaca.so.0                                # Security / YACA
+  - libcalendar-service2.so.0                   # Social / Calendar
+  - libcontacts-service2.so.0                   # Social / Contacts
+  - libphonenumber-utils.so.0                   # Social / Phonenumber utils
+  - libcapi-system-device.so.0                  # System / Device
+  - libdiagnostics.so.1                         # System / Diagnostics
+  - libdlog.so.0                                # System / Dlog
+  - libfeedback.so.0                            # System / Feedback
+  - libcapi-system-media-key.so.0               # System / Media key
+  - libcapi-system-resource-monitor.so.0        # System / Monitor
+  - libcapi-system-peripheral-io.so.0           # System / Peripheral IO
+  - libcapi-system-runtime-info.so.0            # System / Runtime information
+  - libcapi-system-sensor.so.0                  # System / Sensor
+  - libstorage.so.0.1                           # System / Storage
+  - libcapi-system-info.so.0                    # System / System Information
+  - libcapi-system-system-settings.so.0         # System / System Settings
+  - libttrace.so.1                              # System / T-trace
+  - libcapi-system-usbhost.so.0                 # System / USB Host
+  - libupdate-control.so.1                      # System / Update Control
+  - libcbhm.so.1                                # UI / Clipboard History Manager
+  - libeom.so.0                                 # UI / External Output Manager
+  - libtbm.so.1                                 # UI / TBM Surface
+  - libcapi-ui-autofill.so.0                    # UIX / Autofill
+  - libcapi-ui-autofill-common.so.0             # UIX / Autofill common
+  - libcapi-ui-autofill-manager.so.0            # UIX / Autofill manager
+  - libcapi-ui-autofill-service.so.0            # UIX / Autofill service
+  - libcapi-ui-inputmethod.so.0                 # UIX / Input Method
+  - libcapi-ui-inputmethod-manager.so.0         # UIX / Input Method Manager
+  - libma.so                                    # UIX / Multi assistant
+  - libstt.so                                   # UIX / STT
+  - libstt_engine.so                            # UIX / STT Engine
+  - libtts.so                                   # UIX / TTS
+  - libtts_engine.so                            # UIX / TTS Engine
+  - libvc.so                                    # UIX / Voice control
+  - libvc_engine.so                             # UIX / Voice control engine
+  - libvc_manager.so                            # UIX / Voice control manager

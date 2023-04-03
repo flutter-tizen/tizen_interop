@@ -3,16 +3,18 @@ preamble: |
   // Use of this source code is governed by a BSD-style license that can be
   // found in the LICENSE file.
 
+  // ignore_for_file: type=lint, unused_element, unused_field
+
 name: 'Tizen50Native'
-description: 'Provides Dart bindings and utility functions for using Tizen native APIs.'
-output: 'lib/src/bindings/5.0/generated_bindings.dart'
+description: 'Dart bindings for Tizen native APIs.'
+output: '../../lib/src/bindings/5.0/generated_bindings.dart'
 
 llvm-path:
   - '/usr/lib/llvm-12'
 
 headers:
   entry-points:
-    - 'configs/5.0/entrypoints.h'
+    - 'entrypoints.h'
   include-directives:
     - '**/account.h'
     - '**/bundle.h'
@@ -45,8 +47,10 @@ headers:
     - '**/appfw/*.h'
     - '**/asp/*.h'
     - '**/badge/*.h'
+    - '**/calendar-service2/*.h'
     - '**/cbhm/*.h'
     - '**/ckm/ckmc/*.h'
+    - '**/contacts-svc/*.h'
     - '**/content/*.h'
     - '**/context-service/*.h'
     - '**/csr/*.h'
@@ -66,6 +70,7 @@ headers:
     - '**/network/*.h'
     - '**/notification/*.h'
     - '**/nsd/*.h'
+    - '**/phonenumber-utils/*.h'
     - '**/privacy-privilege-manager/*.h'
     - '**/rpc-port/*.h'
     - '**/sensor/*.h'
@@ -84,8 +89,10 @@ compiler-opts:
   - '-I./rootstraps/5.0/usr/include/appfw/'
   - '-I./rootstraps/5.0/usr/include/asp/'
   - '-I./rootstraps/5.0/usr/include/badge/'
+  - '-I./rootstraps/5.0/usr/include/calendar-service2/'
   - '-I./rootstraps/5.0/usr/include/cbhm/'
   - '-I./rootstraps/5.0/usr/include/ckm/'
+  - '-I./rootstraps/5.0/usr/include/contacts-svc/'
   - '-I./rootstraps/5.0/usr/include/content/'
   - '-I./rootstraps/5.0/usr/include/context-service/'
   - '-I./rootstraps/5.0/usr/include/csr/'
@@ -103,6 +110,7 @@ compiler-opts:
   - '-I./rootstraps/5.0/usr/include/network/'
   - '-I./rootstraps/5.0/usr/include/notification/'
   - '-I./rootstraps/5.0/usr/include/nsd/'
+  - '-I./rootstraps/5.0/usr/include/phonenumber-utils/'
   - '-I./rootstraps/5.0/usr/include/privacy-privilege-manager/'
   - '-I./rootstraps/5.0/usr/include/rpc-port/'
   - '-I./rootstraps/5.0/usr/include/sensor/'
@@ -113,14 +121,14 @@ compiler-opts:
   - '-I./rootstraps/5.0/usr/include/wifi-direct/'
   - '-I./rootstraps/5.0/usr/include/yaca/'
 
-  # include efl directories
-  - '-I./rootstraps/5.0/usr/include/evas-1/'
+  # include EFL directories
+  - '-I./rootstraps/5.0/usr/include/ecore-imf-1/'
   - '-I./rootstraps/5.0/usr/include/efl-1/'
-  - '-I./rootstraps/5.0/usr/include/eo-1/'
   - '-I./rootstraps/5.0/usr/include/eina-1/'
   - '-I./rootstraps/5.0/usr/include/eina-1/eina/'
   - '-I./rootstraps/5.0/usr/include/emile-1/'
-  - '-I./rootstraps/5.0/usr/include/ecore-imf-1/'
+  - '-I./rootstraps/5.0/usr/include/eo-1/'
+  - '-I./rootstraps/5.0/usr/include/evas-1/'
 
 enums:
   rename:

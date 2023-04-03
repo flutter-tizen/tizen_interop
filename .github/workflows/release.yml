@@ -15,6 +15,7 @@ jobs:
           channel: stable
       - name: Install credentials
         run: |
+          mkdir -p $PUB_CACHE
           echo '${{ secrets.PUB_CREDENTIALS }}' > $PUB_CACHE/credentials.json
           flutter pub get
       - name: Dry run on pull request

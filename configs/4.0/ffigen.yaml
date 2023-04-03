@@ -3,16 +3,18 @@ preamble: |
   // Use of this source code is governed by a BSD-style license that can be
   // found in the LICENSE file.
 
+  // ignore_for_file: type=lint, unused_element, unused_field
+
 name: 'Tizen40Native'
-description: 'Provides Dart bindings and utility functions for using Tizen native APIs.'
-output: 'lib/src/bindings/4.0/generated_bindings.dart'
+description: 'Dart bindings for Tizen native APIs.'
+output: '../../lib/src/bindings/4.0/generated_bindings.dart'
 
 llvm-path:
   - '/usr/lib/llvm-12'
 
 headers:
   entry-points:
-    - 'configs/4.0/entrypoints.h'
+    - 'entrypoints.h'
   include-directives:
     - '**/bundle.h'
     - '**/inputmethod.h'
@@ -97,14 +99,14 @@ compiler-opts:
   - '-I./rootstraps/4.0/usr/include/web/'
   - '-I./rootstraps/4.0/usr/include/yaca/'
 
-  # include efl directories
-  - '-I./rootstraps/4.0/usr/include/evas-1/'
+  # include EFL directories
+  - '-I./rootstraps/4.0/usr/include/ecore-imf-1/'
   - '-I./rootstraps/4.0/usr/include/efl-1/'
-  - '-I./rootstraps/4.0/usr/include/eo-1/'
   - '-I./rootstraps/4.0/usr/include/eina-1/'
   - '-I./rootstraps/4.0/usr/include/eina-1/eina/'
   - '-I./rootstraps/4.0/usr/include/emile-1/'
-  - '-I./rootstraps/4.0/usr/include/ecore-imf-1/'
+  - '-I./rootstraps/4.0/usr/include/eo-1/'
+  - '-I./rootstraps/4.0/usr/include/evas-1/'
 
 enums:
   rename:
