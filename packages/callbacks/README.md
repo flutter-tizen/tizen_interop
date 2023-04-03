@@ -2,7 +2,7 @@
 
 A tizen_interop_callbacks plugin has been create to solve the issue relate to error message: `Cannot invoke native callback outside an isolate`.
 
-All callbacks from common profile (IoT) for Tizen 4.0 ~ 6.5
+All callbacks from common profile (IoT) for Tizen 4.0 ~ 7.0
 are available and can be used on any platform.
 Similarly to tizen_interop itself, there is no build-time dependency.
 
@@ -13,7 +13,7 @@ See TizenInteropCallbacks class documentation.
 1. Add this package to your application dependencies - pubspec.yaml. tizen_interop will be needed too:
 ``` yaml
   ffi: ^2.0.1
-  tizen_interop: ^0.2.2
+  tizen_interop: ^0.2.6
   tizen_interop_callbacks:  ^0.1.0
 ```
 
