@@ -37,24 +37,18 @@ class RegisteredCallback<NativeCbType extends Function> {
   final int _proxyCallback;
 
   /// User data pointer to be used in native callback setter/adder.
-  Pointer<Void> get interopUserData => Pointer.fromAddress(_proxyUserData);
-  final int _proxyUserData;
+  Pointer<Void> get interopUserData => Pointer.fromAddress(id);
 
   /// See [RegisteredCallback] class members documentation.
-  RegisteredCallback._(
-      this.id,
-      this.callbackName,
-      this.platformCallbackName,
-      this.proxyId,
-      Pointer<NativeFunction<NativeCbType>> interopCallback,
-      this._proxyUserData)
+  RegisteredCallback._(this.id, this.callbackName, this.platformCallbackName,
+      this.proxyId, Pointer<NativeFunction<NativeCbType>> interopCallback)
       : _proxyCallback = interopCallback.address;
 }
 
 /// Class which manages wrappers and registration of callbacks.
 ///
-/// This class should be instantiated only once, on the main thread of
-/// the main isolate - the one with your main() entry point / runApp() call.
+/// This class must be instantiated only once. Preferrably in the root isolate, because
+/// the callbacks will be executed in the thread used for initialization and will have access to object in that isolate.
 ///
 /// There purpose of this class is to solve the issue related to error message:
 /// `Cannot invoke native callback outside an isolate.` If you are not
@@ -72,13 +66,15 @@ class RegisteredCallback<NativeCbType extends Function> {
 /// See [register()] for additional information.
 class TizenInteropCallbacks {
   final DynamicLibrary _process = DynamicLibrary.process();
-  late _RegistrationResult Function(Pointer, bool, Pointer, Pointer, int)
+  late final _RegistrationResult Function(Pointer, Pointer, int)
       _registerWrappedCallback;
-  late Pointer Function(int) _unregisterWrappedCallback;
-  late bool Function(Pointer<Utf8>) _platformProxyCallbackExists;
-  late void Function(Pointer) _runCallbackInNativeLayer;
+  late final void Function(int) _unregisterWrappedCallback;
+  late final bool Function(Pointer<Utf8>) _platformProxyCallbackExists;
+  late final void Function(Pointer) _runCallbackInNativeLayer;
+
   static TizenInteropCallbacks? _instance;
   static final Map<int, Object> _userObjectStore = {};
+  static final Object nullUserObjectMarker = Object();
 
   late final int _proxyIdCount;
   final _multiProxyIds = <String, List<bool>>{};
@@ -135,9 +131,6 @@ class TizenInteropCallbacks {
        Pointer   - returned pointer to multi proxy callback, cast to void*
        Function(
        Pointer,  - pointer to Dart callback
-       Bool,     - if true, next parameter will not be used, but registration ID
-                   will be passed to user callback, to be used with getUserObject()
-       Pointer,  - user data for Dart callback
        Pointer,  - pointer to name of multi proxy callback,
                    allocated in Dart layer by toNativeUtf8() and freed by malloc.free,
                    const char * in C++ layer
@@ -147,12 +140,12 @@ class TizenInteropCallbacks {
     _registerWrappedCallback = _process
         .lookup<
             NativeFunction<
-                _RegistrationResult Function(Pointer, Bool, Pointer, Pointer,
+                _RegistrationResult Function(Pointer, Pointer,
                     Int32)>>('TizenInteropCallbacksRegisterWrappedCallback')
         .asFunction();
 
     _unregisterWrappedCallback = _process
-        .lookup<NativeFunction<Pointer Function(Int32)>>(
+        .lookup<NativeFunction<Void Function(Uint32)>>(
             'TizenInteropCallbacksUnregisterWrappedCallback')
         .asFunction();
 
@@ -197,9 +190,8 @@ class TizenInteropCallbacks {
   ///
   /// Most Tizen Native API callbacks offer passing arbitrary data
   /// (in form of `void*`), known as `user_data`.
-  /// You can either specify [userData] - it will be passed to your Dart callback
-  /// as `user_data` parameter (if callback has such parameter), or [userObject] -
-  /// and then call [TizenInteropCallbacks.getUserObject(userData)] with the
+  /// You can provide [userObject] and then, inside your callback,
+  /// use [TizenInteropCallbacks.getUserObject(userData)] with the
   /// obtained `user_data` value to retrieve the object back.
   /// If neither is given, the `0`/`nullptr` will be passed.
   ///
@@ -221,7 +213,7 @@ class TizenInteropCallbacks {
   /// ```
   RegisteredCallback<NativeCbType> register<NativeCbType extends Function>(
       String callbackName, Pointer<NativeFunction<NativeCbType>> callback,
-      {Pointer<Void>? userData, Object? userObject, bool? blocking}) {
+      {Object? userObject, bool? blocking}) {
     _logDebug(_logTag, 'looking up platform callback');
 
     String platformCbName = '';
@@ -248,19 +240,10 @@ class TizenInteropCallbacks {
     _multiProxyIds[platformCbName]![freeProxyId] = true;
     Pointer<Utf8> platformCbNamePtr = platformCbName.toNativeUtf8();
 
-    if (userData != null && userObject != null) {
-      throw Exception("Cannot specify both userData and userObject.");
-    }
-    userData ??= nullptr;
-
     _logDebug(_logTag,
         'calling registerWrappedCallback(), cb=${callback.address.toRadixString(16)}');
-    final result = _registerWrappedCallback(
-        callback,
-        userObject != null, // should userData be overriden with ID?
-        userData, // if not ^^, then save given userData for user callback
-        platformCbNamePtr,
-        freeProxyId);
+    final result =
+        _registerWrappedCallback(callback, platformCbNamePtr, freeProxyId);
     malloc.free(platformCbNamePtr);
 
     final Pointer<NativeFunction<NativeCbType>> platformCallback =
@@ -271,19 +254,11 @@ class TizenInteropCallbacks {
       throw Exception('Failed to register callback.');
     }
 
-    if (userObject != null) {
-      _logDebug(_logTag, 'Saving userObjectStore[${result.id}] = $userObject');
-      _userObjectStore[result.id] = userObject;
-      userData = Pointer<Void>.fromAddress(result.id);
-    }
+    _logDebug(_logTag, 'Saving userObjectStore[${result.id}] = $userObject');
+    _userObjectStore[result.id] = userObject ?? nullUserObjectMarker;
 
     RegisteredCallback<NativeCbType> regCb = RegisteredCallback<NativeCbType>._(
-        result.id,
-        callbackName,
-        platformCbName,
-        freeProxyId,
-        platformCallback,
-        userData.address);
+        result.id, callbackName, platformCbName, freeProxyId, platformCallback);
     return regCb;
   }
 
@@ -324,17 +299,19 @@ class TizenInteropCallbacks {
   ///     userObject: anOject);
   /// ```
   ///
-  /// Keep in mind that this is not intended to transfer objects across threads.
-  /// You should access the TizenInteropCallbacks from the single Isolate only.
+  /// Keep in mind that this is not intended for transfering objects across threads.
+  /// You should access the TizenInteropCallbacks from a single isolate only.
   static T? getUserObject<T extends Object>(Pointer<Void> userData) {
-    final object = _userObjectStore[userData.address];
-    _logDebug(_logTag, 'getting from store ${userData.address} -> $object');
-    if (object == null) {
+    if (_userObjectStore.containsKey(userData.address)) {
+      var object = _userObjectStore[userData.address];
+      if (identical(object, nullUserObjectMarker)) object = null;
+      _logDebug(_logTag, 'getting from store ${userData.address} -> $object');
+      return object as T?;
+    } else {
       Log.warn(_logTag,
           'getUserObject(): key ${userData.address} not found, returning null');
       return null;
     }
-    return object as T;
   }
 }
 
@@ -343,6 +320,6 @@ class _RegistrationResult extends Struct {
   external Pointer callback;
 
   /// The registration ID
-  @Int()
+  @Uint32()
   external int id;
 }

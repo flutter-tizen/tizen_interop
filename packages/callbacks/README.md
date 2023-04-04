@@ -24,7 +24,7 @@ import 'package:tizen_interop/6.5/tizen.dart';
 import 'package:tizen_interop_callbacks/tizen_interop_callbacks.dart';
 ```
 
-3. Instantiate the TizenInteropCallbacks class. It should be done in your main thread - the thread your `main()` entry point is called.
+3. Instantiate the TizenInteropCallbacks class. It should be done in the root isolate - the thread your entry point (`main()`) is called.
 ``` dart
 final callbacks = TizenInteropCallbacks();
 ```

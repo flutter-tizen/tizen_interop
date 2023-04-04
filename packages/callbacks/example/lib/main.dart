@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
             PreviewResolutionsTab(),
           ]),
           appBar: AppBar(
-            title: const Text('Tizen Interop Callbacks example app'),
+            title: const Text(appTitle),
             bottom: const TabBar(tabs: [
               Tab(icon: Icon(Icons.battery_5_bar)),
               Tab(icon: Icon(Icons.camera)),

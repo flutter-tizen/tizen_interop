@@ -6,7 +6,7 @@
 #include <condition_variable>
 
 #define NO_USER_DATA_CALLBACKS_COUNT 56
-int __reserved_cb_id_array[PROXY_INSTANCES_COUNT * NO_USER_DATA_CALLBACKS_COUNT] = {};
+uint32_t __reserved_cb_id_array[PROXY_INSTANCES_COUNT * NO_USER_DATA_CALLBACKS_COUNT] = {};
 
 typedef bool (*account_cb)( void* account, void* user_data);
 #define CB_PARAMS_NAMES account, user_data

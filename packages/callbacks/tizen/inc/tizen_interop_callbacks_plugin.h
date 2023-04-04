@@ -24,16 +24,19 @@ FLUTTER_PLUGIN_EXPORT void TizenInteropCallbacksPluginRegisterWithRegistrar(
 }  // extern "C"
 #endif
 
+// Information needed to call the callback registered by the user.
 struct CallbackInfo {
-  void *callbackPtr;
-  void *actualUserData;
+  // The function pointer given to TizenInteropCallbacksRegisterWrappedCallback, should be a pointer created in Dart with ffi.Pointer.fromFunction()
+  void *callback_ptr;
 };
 
+// Used to hold lamda capturing callback info and parameters.
 typedef std::function<void()> CallbackWrapper;
+/// Sends the given wrapped callback to Dart to be called from there.
 void RequestCallbackCall(CallbackWrapper *wrapper);
 
 // A few structures copied from Tizen Native API headers, as we need whole
-// definion if it is used in callback signature.
+// definion if it is used in callback signature directly and not as pointer.
 typedef struct {
   double latitude;
   double longitude;

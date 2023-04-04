@@ -801,7 +801,7 @@ class CallbackGenerator:
         generate_preamble(self.out)
         api.preprocess_callbacks_data()
         print(f'#define NO_USER_DATA_CALLBACKS_COUNT {len(api.no_user_data_callbacks)}', file=self.out)
-        print('int __reserved_cb_id_array[PROXY_INSTANCES_COUNT * NO_USER_DATA_CALLBACKS_COUNT] = {};\n', file=self.out)
+        print('uint32_t __reserved_cb_id_array[PROXY_INSTANCES_COUNT * NO_USER_DATA_CALLBACKS_COUNT] = {};\n', file=self.out)
         self.generate_callbacks()
         print('\nstd::map<std::string, MultiProxyFunctionsContainer> __multi_proxy_name_to_ptr_map = {', file=self.out)
         for cb in sorted(self.callbacks, key=lambda cb: cb.name):
