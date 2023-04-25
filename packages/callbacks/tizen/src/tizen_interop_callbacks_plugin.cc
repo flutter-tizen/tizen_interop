@@ -38,14 +38,14 @@ void TizenInteropCallbacksPluginRegisterWithRegistrar(
 }
 
 // maps unique callback registration id to registered user callback
-std::map<uint32_t, CallbackInfo> __cb_id_to_info_map;
-// The port to communicate with Isolate that initialized TizenInteropCallbacks
+std::map<uint32_t, CallbackPointer> __cb_id_to_info_map;
+// the port to communicate with Isolate that initialized TizenInteropCallbacks
 Dart_Port send_port = 0;
 // Thread the plugin was initialized with
 // TizenInteropCallbacksRegisterSendPort(). The callbacks provided by the user
 // will be executed in it.
 unsigned long interop_callbacks_thread_id = 0;
-uint32_t last_used_cb_id = 0;
+uint32_t last_used_cb_id = 99;
 
 struct RegistrationResult {
   void *callback;
@@ -109,7 +109,7 @@ TizenInteropCallbacksRegisterSendPort(Dart_Port port) {
 // Finds an ID not existing in __cb_id_to_info_map. Returns 0 on failure.
 uint32_t find_free_callback_registration_id() {
   uint32_t cb_id = ++last_used_cb_id;
-  std::map<uint32_t, CallbackInfo>::iterator it;
+  std::map<uint32_t, CallbackPointer>::iterator it;
   const auto end = __cb_id_to_info_map.end();
   if (!cb_id || ((it = __cb_id_to_info_map.find(cb_id)) != end)) {
     // in and unusual case of wrapping or taken id, loop over used ones
@@ -155,7 +155,7 @@ TizenInteropCallbacksRegisterWrappedCallback(void *user_callback,
 
   LDEBUG("%s id:%" PRIu32 ", user_callback=%p", proxy_name, cb_id,
          user_callback);
-  __cb_id_to_info_map[cb_id] = CallbackInfo{user_callback};
+  __cb_id_to_info_map[cb_id] = user_callback;
 
   // we are only expecting proxy_name to be either platform_blocking_{CALLBACK}
   // or platform_non_blocking_{CALLBACK} test the 9th character to check which
