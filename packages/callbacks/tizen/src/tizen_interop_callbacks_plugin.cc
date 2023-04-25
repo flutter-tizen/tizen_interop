@@ -95,8 +95,9 @@ TizenInteropCallbacksRegisterSendPort(Dart_Port port) {
           "thread.");
       return 1;
     } else {
-      LOG_WARN("Attempted TizenInteropCallbacks initialization again.");
+      LOG_WARN("Attempted TizenInteropCallbacks initialization again - resetting.");
       send_port = port;
+      __cb_id_to_info_map.clear();
       return 2;
     }
   }
