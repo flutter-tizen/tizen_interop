@@ -53,7 +53,6 @@ struct RegistrationResult {
 };
 
 #include "../generated/callbacks.cc"
-#include "dart_api_dl.c"
 
 void RequestCallbackCall(CallbackWrapper *wrapper) {
   LDEBUG("in RequestCallbackCall(), wrapper=%p", wrapper);
