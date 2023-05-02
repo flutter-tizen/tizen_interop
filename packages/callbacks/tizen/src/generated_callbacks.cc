@@ -1,12 +1,13 @@
 #include "tizen_interop_callbacks_plugin.h"
-#define PROXY_INSTANCES_COUNT 5
-#include "macros.h"
 
 #include <mutex>
 #include <condition_variable>
 
+#include "macros.h"
+#include "types.h"
+
 #define NO_USER_DATA_CALLBACKS_COUNT 56
-uint32_t __reserved_cb_id_array[PROXY_INSTANCES_COUNT * NO_USER_DATA_CALLBACKS_COUNT] = {};
+uint32_t __reserved_cb_id_array[kProxyInstancesCount * NO_USER_DATA_CALLBACKS_COUNT] = {};
 
 typedef bool (*account_cb)( void* account, void* user_data);
 #define CB_PARAMS_NAMES account, user_data

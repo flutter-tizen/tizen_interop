@@ -765,11 +765,10 @@ class CallbackGenerator:
     self.map_entries.append((cb.name, f'platform_blocking_{cb.name}'))
 
   def generate_single_callback_code(self, cb: CallbackInfo):
-
     if not cb.has_user_data:
       self.write_reserved_callback_id(cb)
     self.writeln(
-      f'typedef {cb.ret_type} (*{cb.name})({cb.param_list.lstrip(",")});')
+      f'typedef {cb.ret_type} (*{cb.name})({cb.param_list.lstrip(", ")});')
 
     has_params = bool(cb.param_list)
     if has_params:
@@ -812,13 +811,12 @@ class CallbackGenerator:
     return self.generate_callbacks()
 
   def generate_full_source(self, api):
-
     generate_preamble(self.out)
     api.preprocess_callbacks_data()
     print(
-      f'#define NO_USER_DATA_CALLBACKS_COUNT {len(api.no_user_data_callbacks)}', file=self.out)
+      f'static constexpr int32_t kNoUserDataCallbackCount = {len(api.no_user_data_callbacks)};\n', file=self.out)
     print(
-      'uint32_t __reserved_cb_id_array[kProxyInstancesCount * NO_USER_DATA_CALLBACKS_COUNT] = {};\n', file=self.out)
+      'uint32_t __reserved_cb_id_array[kProxyInstanceCount * kNoUserDataCallbackCount] = {};\n', file=self.out)
     self.generate_callbacks()
     print(
       '\nstd::map<std::string, MultiProxyFunctionsContainer> __multi_proxy_name_to_ptr_map = {', file=self.out)
@@ -832,7 +830,7 @@ class CallbackGenerator:
     print(
       'std::map<std::string, int> __reserved_base_id_map = {', file=self.out)
     for cb in sorted(api.no_user_data_callbacks):
-      print(f'  {{std::string("{cb}"), BASE_CALLBACK_ID_{cb}}},', file=self.out)
+      print(f'  {{"{cb}", BASE_CALLBACK_ID_{cb}}},', file=self.out)
     print('};', file=self.out)
     log.info(f'Generated code for {len(api.callbacks)} callbacks.')
 
@@ -850,9 +848,9 @@ class CallbackGenerator:
     cg.out = output
     generate_preamble(output)
     output.write(
-      f'#define NO_USER_DATA_CALLBACKS_COUNT {len(api.no_user_data_callbacks)}\n')
+      f'static constexpr int32_t kNoUserDataCallbackCount = {len(api.no_user_data_callbacks)};\n')
     output.write(
-      'int __reserved_cb_id_array[kProxyInstancesCount * NO_USER_DATA_CALLBACKS_COUNT];\n')
+      'int __reserved_cb_id_array[kProxyInstanceCount * kNoUserDataCallbackCount];\n')
     output.write(
       'std::map<std::string, MultiProxyFunctionsContainer> __multi_proxy_name_to_ptr_map;\n')
     output.write('std::map<std::string, int> __reserved_base_id_map;\n\n')
@@ -864,17 +862,17 @@ class CallbackGenerator:
     output.write('\n')
     for type1, type2 in api.get_type_mapping():
       output.write(f'static_assert(sizeof({type1}) == sizeof({type2}), "Wrong '
-                   + f'type substitution - {type1} and {type2} have different size.");\n')
+                   + f'type substitution - {type1} and {type2} have different sizes.");\n')
     log.info(f'Generated asserts for {len(api.callbacks)} callbacks.')
 
 
 def generate_preamble(output):
   print('#include "tizen_interop_callbacks_plugin.h"\n', file=output)
-  print('#include <mutex>', file=output)
-  print('#include <condition_variable>\n', file=output)
+  print('#include <cstdint>', file=output)
+  print('#include <map>', file=output)
+  print('#include <string>\n', file=output)
   print('#include "macros.h"', file=output)
   print('#include "types.h"\n', file=output)
-  # print('extern std::map<std::string, void*> __multi_proxy_name_to_ptr_map;\n', file=output)
 
 
 def find_headers_by_config(config_path):

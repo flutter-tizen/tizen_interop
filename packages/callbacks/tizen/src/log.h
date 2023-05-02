@@ -21,7 +21,6 @@
 #define LOG_WARN(fmt, args...) LOG(DLOG_WARN, fmt, ##args)
 #define LOG_ERROR(fmt, args...) LOG(DLOG_ERROR, fmt, ##args)
 
-
 // You can switch detailed debugging here: 0 - disabled
 #if 0
 #define LDEBUG(...) LOG_DEBUG(__VA_ARGS__)

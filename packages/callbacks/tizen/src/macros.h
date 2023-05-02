@@ -1,5 +1,34 @@
-#ifndef _TIZEN_INTEROP_CALLBACKS_MACROS_H_
-#define _TIZEN_INTEROP_CALLBACKS_MACROS_H_
+#ifndef TIZEN_INTEROP_CALLBACKS_MACROS_H_
+#define TIZEN_INTEROP_CALLBACKS_MACROS_H_
+
+#include <sys/syscall.h>
+#include <unistd.h>
+
+#include <cinttypes>
+#include <condition_variable>
+#include <map>
+#include <mutex>
+
+#include "log.h"
+
+static constexpr int32_t kProxyInstanceCount = 5;
+
+// The function pointer given to TizenInteropCallbacksRegisterWrappedCallback.
+// Should be a pointer created in Dart with Pointer.fromFunction().
+typedef void *CallbackPointer;
+
+/// Sends the given wrapped callback to Dart to be called from there.
+void RequestCallbackCall(CallbackWrapper *wrapper);
+
+// maps unique callback registration id to registered user callback
+extern std::map<uint32_t, CallbackPointer> __cb_id_to_info_map;
+
+// Thread the plugin was initialized with
+// TizenInteropCallbacksRegisterSendPort(). The callbacks provided by the user
+// will be executed in it.
+extern unsigned long interop_callbacks_thread_id;
+
+#define gettid() syscall(SYS_gettid)
 
 #define GET_CALLBACK_ID(CB_NAME, OFFSET) \
   __reserved_cb_id_array[BASE_CALLBACK_ID_##CB_NAME + OFFSET]
@@ -419,9 +448,9 @@
        reinterpret_cast<void *>(CB_NAME##_4), \
    }}},
 
-typedef void *MultiProxyFunctions[PROXY_INSTANCES_COUNT];
+typedef void *MultiProxyFunctions[kProxyInstanceCount];
 struct MultiProxyFunctionsContainer {
   MultiProxyFunctions mp;
 };
 
-#endif  // _TIZEN_INTEROP_CALLBACKS_MACROS_H_
+#endif  // TIZEN_INTEROP_CALLBACKS_MACROS_H_

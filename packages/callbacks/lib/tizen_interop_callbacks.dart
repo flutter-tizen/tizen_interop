@@ -8,6 +8,8 @@ import 'package:ffi/ffi.dart';
 
 import 'package:tizen_log/tizen_log.dart';
 
+const int _kProxyInstanceCount = 5;
+
 /// Log entries will be tagger with this tag.
 const String _logTag = 'TizenInteropCallbacksPlugin';
 
@@ -81,7 +83,6 @@ class TizenInteropCallbacks {
   static final Map<int, Object> _userObjectStore = {};
   static final Object nullUserObjectMarker = Object();
 
-  late final int _proxyIdCount;
   final _multiProxyIds = <String, List<bool>>{};
 
   /// Factory constructor provides an instance of [TizenInteropCallbacks].
@@ -100,12 +101,6 @@ class TizenInteropCallbacks {
 
     final int nativePort = nativeCallbackCalls.sendPort.nativePort;
     _logDebug(_logTag, 'listening to ReceivePort');
-
-    _proxyIdCount = _process
-        .lookup<Int32>('TizenInteropCallbacksProxyInstancesCount')
-        .value;
-    Log.debug(_logTag,
-        'Initializing TizenInteropCallbacks, proxy instances count: $_proxyIdCount');
 
     final int Function(int) registerSendPort = _process
         .lookup<NativeFunction<Int32 Function(Int64)>>(
@@ -232,7 +227,8 @@ class TizenInteropCallbacks {
 
     if (!_multiProxyIds.containsKey(platformCbName)) {
       _logDebug(_logTag, 'adding new list for platformCbName $platformCbName');
-      _multiProxyIds[platformCbName] = List<bool>.filled(_proxyIdCount, false);
+      _multiProxyIds[platformCbName] =
+          List<bool>.filled(_kProxyInstanceCount, false);
     }
 
     int freeProxyId = _getFirstFreeId(_multiProxyIds[platformCbName]!);

@@ -4,17 +4,14 @@
 
 #include "tizen_interop_callbacks_plugin.h"
 
-#include <dart_api_dl.h>
-#include <dart_native_api.h>
 #include <flutter/plugin_registrar.h>
-#include <sys/syscall.h>
-#include <unistd.h>
 
+#include <map>
 #include <memory>
 #include <string>
 
 #include "log.h"
-#define gettid() syscall(SYS_gettid)
+#include "macros.h"
 
 namespace {
 
@@ -41,22 +38,13 @@ void TizenInteropCallbacksPluginRegisterWithRegistrar(
           ->GetRegistrar<flutter::PluginRegistrar>(registrar));
 }
 
-// maps unique callback registration id to registered user callback
 std::map<uint32_t, CallbackPointer> __cb_id_to_info_map;
 // the port to communicate with Isolate that initialized TizenInteropCallbacks
 Dart_Port send_port = 0;
-// Thread the plugin was initialized with
-// TizenInteropCallbacksRegisterSendPort(). The callbacks provided by the user
-// will be executed in it.
 unsigned long interop_callbacks_thread_id = 0;
 uint32_t last_used_cb_id = 99;
 
-struct RegistrationResult {
-  void *callback;
-  uint32_t id;
-};
-
-#include "../generated/callbacks.cc"
+#include "generated_callbacks.cc"
 
 void RequestCallbackCall(CallbackWrapper *wrapper) {
   LDEBUG("in RequestCallbackCall(), wrapper=%p", wrapper);
@@ -75,10 +63,7 @@ void RequestCallbackCall(CallbackWrapper *wrapper) {
   LDEBUG("after calling Dart_PostCObject_DL()");
 }
 
-extern "C" {
-
-__attribute__((visibility("default"))) DART_EXPORT intptr_t
-TizenInteropCallbacksInitDartApiDL(void *data) {
+intptr_t TizenInteropCallbacksInitDartApiDL(void *data) {
   LDEBUG("in InitDartApiDL()");
   auto error = Dart_InitializeApiDL(data);
   if (error) {
@@ -89,8 +74,7 @@ TizenInteropCallbacksInitDartApiDL(void *data) {
 
 // Stores the SendPort id created in Dart for communication. Returns non-zero if
 // called twice.
-__attribute__((visibility("default"))) int32_t
-TizenInteropCallbacksRegisterSendPort(Dart_Port port) {
+int32_t TizenInteropCallbacksRegisterSendPort(Dart_Port port) {
   LDEBUG("in RegisterSendPort() port=%" PRId64, port);
   if (send_port) {
     if (interop_callbacks_thread_id != gettid()) {
@@ -99,7 +83,8 @@ TizenInteropCallbacksRegisterSendPort(Dart_Port port) {
           "thread.");
       return 1;
     } else {
-      LOG_WARN("Attempted TizenInteropCallbacks initialization again - resetting.");
+      LOG_WARN(
+          "Attempted TizenInteropCallbacks initialization again - resetting.");
       send_port = port;
       __cb_id_to_info_map.clear();
       return 2;
@@ -136,11 +121,9 @@ uint32_t find_free_callback_registration_id() {
   return cb_id;
 }
 
-__attribute__((visibility("default"))) RegistrationResult
-TizenInteropCallbacksRegisterWrappedCallback(void *user_callback,
-                                             const char *proxy_name,
-                                             int proxy_num) {
-  if (proxy_num < 0 || proxy_num >= PROXY_INSTANCES_COUNT) {
+RegistrationResult TizenInteropCallbacksRegisterWrappedCallback(
+    void *user_callback, const char *proxy_name, int proxy_num) {
+  if (proxy_num < 0 || proxy_num >= kProxyInstanceCount) {
     LOG_ERROR("proxy_num=%d outside of acceptable range", proxy_num);
     return RegistrationResult{nullptr, 0};
   }
@@ -179,8 +162,7 @@ TizenInteropCallbacksRegisterWrappedCallback(void *user_callback,
   return RegistrationResult{multi_proxy_map_it->second.mp[proxy_num], cb_id};
 }
 
-__attribute__((visibility("default"))) void
-TizenInteropCallbacksUnregisterWrappedCallback(uint32_t cb_id) {
+void TizenInteropCallbacksUnregisterWrappedCallback(uint32_t cb_id) {
   LDEBUG("in UnregisterWrappedCallbackInNativeLayer");
   const auto &it = __cb_id_to_info_map.find(cb_id);
   if (it != __cb_id_to_info_map.end()) {
@@ -192,8 +174,7 @@ TizenInteropCallbacksUnregisterWrappedCallback(uint32_t cb_id) {
 
 // Executes the given wrapper. It is called from Dart, so the wrapped code is
 // executed in the proper thread.
-__attribute__((visibility("default"))) void TizenInteropCallbacksRunCallback(
-    CallbackWrapper *wrapper_pointer) {
+void TizenInteropCallbacksRunCallback(CallbackWrapper *wrapper_pointer) {
   CallbackWrapper wrapper = *wrapper_pointer;
   LDEBUG("calling wrapper() at %p", wrapper_pointer);
   wrapper();
@@ -203,16 +184,9 @@ __attribute__((visibility("default"))) void TizenInteropCallbacksRunCallback(
 
 // Returns true if the given platform callback exists. Used to check if
 // non-blocking variant is available.
-__attribute__((visibility("default"))) bool TizenInteropCallbacksProxyExists(
-    char *name) {
+bool TizenInteropCallbacksProxyExists(char *name) {
   bool exists = __multi_proxy_name_to_ptr_map.count(name);
   LDEBUG("checking if proxy %s exists: %d", name, exists);
   free(name);
   return exists;
 }
-
-// Exposes the value as symbol in so to Dart, ensuring it's same everywhere.
-__attribute__((visibility("default")))
-int32_t TizenInteropCallbacksProxyInstancesCount = PROXY_INSTANCES_COUNT;
-
-}  // extern "C"
