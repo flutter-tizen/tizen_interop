@@ -1,3 +1,7 @@
+# Copyright 2023 Samsung Electronics Co., Ltd. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
 import unittest
 import gen_callbacks as gc
 
@@ -348,15 +352,18 @@ class TestTokenize(unittest.TestCase):
     ])
 
   def test_doxygen_comment_brief(self):
-    code = '''/**
-            * @brief Gets ID.
-            */'''
+    code = '''
+/**
+ * @brief Gets ID.
+ */
+'''
 
     cr = gc.CodeReader()
     cr.string = code
     cr.tokenize()
 
     self.assertEqual(cr.tokens, [
+        gc.Token(cr.TOKEN_NEWLINE),
         gc.Token(cr.TOKEN_DOXYGEN_CMNT_START),
         gc.Token(cr.TOKEN_NEWLINE),
         gc.Token(cr.TOKEN_ASTERISK),
@@ -366,22 +373,26 @@ class TestTokenize(unittest.TestCase):
         self.token_word('ID'),
         gc.Token(cr.TOKEN_PERIOD),
         gc.Token(cr.TOKEN_NEWLINE),
-        gc.Token(cr.TOKEN_COMMENT_END)
+        gc.Token(cr.TOKEN_COMMENT_END),
+        gc.Token(cr.TOKEN_NEWLINE)
     ])
 
   def test_doxygen_comment_many_tags(self):
-    code = '''/**
-            * @brief
-            * @param[in]
-            * @param[out]
-            * @see
-            */'''
+    code = '''
+/**
+ * @brief
+ * @param[in]
+ * @param[out]
+ * @see
+ */
+'''
 
     cr = gc.CodeReader()
     cr.string = code
     cr.tokenize()
 
     self.assertEqual(cr.tokens, [
+        gc.Token(cr.TOKEN_NEWLINE),
         gc.Token(cr.TOKEN_DOXYGEN_CMNT_START),
         gc.Token(cr.TOKEN_NEWLINE),
         gc.Token(cr.TOKEN_ASTERISK),
@@ -406,5 +417,6 @@ class TestTokenize(unittest.TestCase):
         gc.Token(cr.TOKEN_AT),
         self.token_word('see'),
         gc.Token(cr.TOKEN_NEWLINE),
-        gc.Token(cr.TOKEN_COMMENT_END)
+        gc.Token(cr.TOKEN_COMMENT_END),
+        gc.Token(cr.TOKEN_NEWLINE)
     ])
