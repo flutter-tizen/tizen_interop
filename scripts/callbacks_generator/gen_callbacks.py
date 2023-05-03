@@ -816,10 +816,10 @@ class CallbackGenerator:
     print(
       f'static constexpr int32_t kNoUserDataCallbackCount = {len(api.no_user_data_callbacks)};\n', file=self.out)
     print(
-      'uint32_t __reserved_cb_id_array[kProxyInstanceCount * kNoUserDataCallbackCount] = {};\n', file=self.out)
+      'uint32_t reserved_callback_ids[kProxyInstanceCount * kNoUserDataCallbackCount] = {};\n', file=self.out)
     self.generate_callbacks()
     print(
-      '\nstd::map<std::string, MultiProxyFunctionsContainer> __multi_proxy_name_to_ptr_map = {', file=self.out)
+      '\nstd::map<std::string, MultiProxyFunctionsContainer> multi_proxy_map = {', file=self.out)
     for cb in sorted(self.callbacks, key=lambda cb: cb.name):
       print(
         f'  MULTI_PROXY_MAP_ENTRY(platform_blocking_{cb.name})', file=self.out)
@@ -828,7 +828,7 @@ class CallbackGenerator:
           f'  MULTI_PROXY_MAP_ENTRY(platform_non_blocking_{cb.name})', file=self.out)
     print('};\n', file=self.out)
     print(
-      'std::map<std::string, int> __reserved_base_id_map = {', file=self.out)
+      'std::map<std::string, int> reserved_base_id_map = {', file=self.out)
     for cb in sorted(api.no_user_data_callbacks):
       print(f'  {{"{cb}", BASE_CALLBACK_ID_{cb}}},', file=self.out)
     print('};', file=self.out)
@@ -850,10 +850,10 @@ class CallbackGenerator:
     output.write(
       f'static constexpr int32_t kNoUserDataCallbackCount = {len(api.no_user_data_callbacks)};\n')
     output.write(
-      'int __reserved_cb_id_array[kProxyInstanceCount * kNoUserDataCallbackCount];\n')
+      'int reserved_callback_ids[kProxyInstanceCount * kNoUserDataCallbackCount];\n')
     output.write(
-      'std::map<std::string, MultiProxyFunctionsContainer> __multi_proxy_name_to_ptr_map;\n')
-    output.write('std::map<std::string, int> __reserved_base_id_map;\n\n')
+      'std::map<std::string, MultiProxyFunctionsContainer> multi_proxy_map;\n')
+    output.write('std::map<std::string, int> reserved_base_id_map;\n\n')
     output.write('#undef TIZEN_DEPRECATION\n#undef DEPRECATION_WARNING\n')
     for header in api.loaded_headers:
       if '/usr/include/' in header:

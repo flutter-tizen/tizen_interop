@@ -115,7 +115,7 @@ class TizenInteropCallbacks {
 
     final initApi = _process
         .lookup<NativeFunction<Pointer Function(Pointer)>>(
-            'TizenInteropCallbacksInitDartApiDL')
+            'TizenInteropCallbacksInitDartApi')
         .asFunction<Pointer Function(Pointer)>();
     _logDebug(_logTag, 'calling initApi()');
     initApi(NativeApi.initializeApiDLData);

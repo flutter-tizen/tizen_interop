@@ -35,7 +35,7 @@ extern unsigned long interop_callbacks_thread_id;
 #define gettid() syscall(SYS_gettid)
 
 #define GET_CALLBACK_ID(CB_NAME, OFFSET) \
-  __reserved_cb_id_array[BASE_CALLBACK_ID_##CB_NAME + OFFSET]
+  reserved_callback_ids[BASE_CALLBACK_ID_##CB_NAME + OFFSET]
 
 // Note: CB_PARAMS_NAMES should be defined before calling PROXY_GROUP_*.
 #define PROXY_GROUP_RETURN(CB_NAME, CB_RETURN, CB_PARAMS...)                   \

@@ -28,7 +28,7 @@ extern "C" {
 FLUTTER_PLUGIN_EXPORT void TizenInteropCallbacksPluginRegisterWithRegistrar(
     FlutterDesktopPluginRegistrarRef registrar);
 
-FLUTTER_PLUGIN_EXPORT intptr_t TizenInteropCallbacksInitDartApiDL(void *data);
+FLUTTER_PLUGIN_EXPORT intptr_t TizenInteropCallbacksInitDartApi(void *data);
 
 FLUTTER_PLUGIN_EXPORT int32_t
 TizenInteropCallbacksRegisterSendPort(Dart_Port port);
@@ -36,10 +36,10 @@ TizenInteropCallbacksRegisterSendPort(Dart_Port port);
 FLUTTER_PLUGIN_EXPORT RegistrationResult
 TizenInteropCallbacksRegisterWrappedCallback(void *user_callback,
                                              const char *proxy_name,
-                                             int proxy_num);
+                                             int32_t proxy_num);
 
 FLUTTER_PLUGIN_EXPORT void TizenInteropCallbacksUnregisterWrappedCallback(
-    uint32_t cb_id);
+    uint32_t callback_id);
 
 FLUTTER_PLUGIN_EXPORT void TizenInteropCallbacksRunCallback(
     CallbackWrapper *wrapper_pointer);

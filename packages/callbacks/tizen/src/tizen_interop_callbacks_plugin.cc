@@ -61,7 +61,7 @@ void RequestCallbackCall(CallbackWrapper *wrapper) {
   LDEBUG("after calling Dart_PostCObject_DL()");
 }
 
-intptr_t TizenInteropCallbacksInitDartApiDL(void *data) {
+intptr_t TizenInteropCallbacksInitDartApi(void *data) {
   LDEBUG("in InitDartApiDL()");
   auto error = Dart_InitializeApiDL(data);
   if (error) {
@@ -120,14 +120,14 @@ uint32_t find_free_callback_registration_id() {
 }
 
 RegistrationResult TizenInteropCallbacksRegisterWrappedCallback(
-    void *user_callback, const char *proxy_name, int proxy_num) {
+    void *user_callback, const char *proxy_name, int32_t proxy_num) {
   if (proxy_num < 0 || proxy_num >= kProxyInstanceCount) {
     LOG_ERROR("proxy_num=%d outside of acceptable range", proxy_num);
     return RegistrationResult{nullptr, 0};
   }
   const auto &multi_proxy_map_it =
-      __multi_proxy_name_to_ptr_map.find(std::string(proxy_name));
-  if (multi_proxy_map_it == __multi_proxy_name_to_ptr_map.end()) {
+      multi_proxy_map.find(std::string(proxy_name));
+  if (multi_proxy_map_it == multi_proxy_map.end()) {
     LOG_ERROR("Wrong proxy_name `%s`", proxy_name);
     return RegistrationResult{nullptr, 0};
   }
@@ -146,13 +146,13 @@ RegistrationResult TizenInteropCallbacksRegisterWrappedCallback(
   // or platform_non_blocking_{CALLBACK} test the 9th character to check which
   // one is it, and depending on that remove the ..._blocking_ prefix which ends
   // at either 22nd (non_blocking variant) or 18th (blocking one) character.
-  const auto &base_id_map_it = __reserved_base_id_map.find(
+  const auto &base_id_map_it = reserved_base_id_map.find(
       std::string(proxy_name + ((proxy_name[9] == 'n') ? 22 : 18)));
-  if (base_id_map_it != __reserved_base_id_map.end()) {
+  if (base_id_map_it != reserved_base_id_map.end()) {
     LDEBUG("storing remap callback id %s %d+%d -> %" PRIu32,
            base_id_map_it->first.c_str(), base_id_map_it->second, proxy_num,
            cb_id);
-    __reserved_cb_id_array[base_id_map_it->second + proxy_num] = cb_id;
+    reserved_callback_ids[base_id_map_it->second + proxy_num] = cb_id;
   }
 
   LDEBUG("will use proxy callback %p",
@@ -160,13 +160,13 @@ RegistrationResult TizenInteropCallbacksRegisterWrappedCallback(
   return RegistrationResult{multi_proxy_map_it->second.mp[proxy_num], cb_id};
 }
 
-void TizenInteropCallbacksUnregisterWrappedCallback(uint32_t cb_id) {
+void TizenInteropCallbacksUnregisterWrappedCallback(uint32_t callback_id) {
   LDEBUG("in UnregisterWrappedCallbackInNativeLayer");
-  const auto &it = callback_pointers.find(cb_id);
+  const auto &it = callback_pointers.find(callback_id);
   if (it != callback_pointers.end()) {
-    callback_pointers.erase(cb_id);
+    callback_pointers.erase(callback_id);
   } else {
-    LOG_WARN("Callback with id %" PRIu32 " not found, ignoring", cb_id);
+    LOG_WARN("Callback with id %" PRIu32 " not found, ignoring", callback_id);
   }
 }
 
@@ -183,7 +183,7 @@ void TizenInteropCallbacksRunCallback(CallbackWrapper *wrapper_pointer) {
 // Returns true if the given platform callback exists. Used to check if
 // non-blocking variant is available.
 bool TizenInteropCallbacksProxyExists(char *name) {
-  bool exists = __multi_proxy_name_to_ptr_map.count(name);
+  bool exists = multi_proxy_map.count(name);
   LDEBUG("checking if proxy %s exists: %d", name, exists);
   free(name);
   return exists;
