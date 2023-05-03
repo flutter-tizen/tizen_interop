@@ -44,7 +44,7 @@ FLUTTER_PLUGIN_EXPORT void TizenInteropCallbacksUnregisterWrappedCallback(
 FLUTTER_PLUGIN_EXPORT void TizenInteropCallbacksRunCallback(
     CallbackWrapper *wrapper_pointer);
 
-FLUTTER_PLUGIN_EXPORT bool TizenInteropCallbacksProxyExists(char *name);
+FLUTTER_PLUGIN_EXPORT bool TizenInteropCallbacksProxyExists(const char *name);
 
 #if defined(__cplusplus)
 }  // extern "C"

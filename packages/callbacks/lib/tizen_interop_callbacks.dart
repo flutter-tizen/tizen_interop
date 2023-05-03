@@ -217,13 +217,15 @@ class TizenInteropCallbacks {
     _logDebug(_logTag, 'looking up platform callback');
 
     String platformCbName = '';
-    blocking ??= !_platformProxyCallbackExists(
-        'platform_non_blocking_$callbackName'.toNativeUtf8());
+    final nonBlockingCbNamePtr =
+        'platform_non_blocking_$callbackName'.toNativeUtf8();
+    blocking ??= !_platformProxyCallbackExists(nonBlockingCbNamePtr);
     if (blocking) {
       platformCbName = 'platform_blocking_$callbackName';
     } else {
       platformCbName = 'platform_non_blocking_$callbackName';
     }
+    calloc.free(nonBlockingCbNamePtr);
 
     if (!_multiProxyIds.containsKey(platformCbName)) {
       _logDebug(_logTag, 'adding new list for platformCbName $platformCbName');

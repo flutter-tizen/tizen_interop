@@ -13,7 +13,20 @@
 #include "log.h"
 #include "macros.h"
 
+// Maps unique callback registration ID to registered user callback.
+std::map<uint32_t, CallbackPointer> callback_pointers;
+
+// The thread where the plugin was initialized with
+// TizenInteropCallbacksRegisterSendPort(). The callbacks provided by the user
+// will be executed in it.
+unsigned long interop_callbacks_thread_id = 0;
+
 namespace {
+
+// The port to communicate with isolate that initialized TizenInteropCallbacks.
+Dart_Port send_port = 0;
+
+uint32_t last_used_callback_id = 99;
 
 class TizenInteropCallbacksPlugin : public flutter::Plugin {
  public:
@@ -36,44 +49,34 @@ void TizenInteropCallbacksPluginRegisterWithRegistrar(
           ->GetRegistrar<flutter::PluginRegistrar>(registrar));
 }
 
-std::map<uint32_t, CallbackPointer> callback_pointers;
-// the port to communicate with Isolate that initialized TizenInteropCallbacks
-Dart_Port send_port = 0;
-unsigned long interop_callbacks_thread_id = 0;
-uint32_t last_used_cb_id = 99;
-
 #include "generated_callbacks.cc"
 
 void RequestCallbackCall(CallbackWrapper *wrapper) {
-  LDEBUG("in RequestCallbackCall(), wrapper=%p", wrapper);
-  intptr_t wrapper_intptr = reinterpret_cast<intptr_t>(wrapper);
+  LDEBUG("in RequestCallbackCall(), wrapper: %p", wrapper);
 
-  Dart_CObject ptr_obj;
-  ptr_obj.type = Dart_CObject_kInt64;
-  ptr_obj.value.as_int64 = wrapper_intptr;
+  Dart_CObject wrapper_cobj;
+  wrapper_cobj.type = Dart_CObject_kInt64;
+  wrapper_cobj.value.as_int64 = reinterpret_cast<intptr_t>(wrapper);
 
-  bool posted = Dart_PostCObject_DL(send_port, &ptr_obj);
+  bool posted = Dart_PostCObject_DL(send_port, &wrapper_cobj);
   if (!posted) {
-    LOG_ERROR("Dart_PostCObject_DL(): message %" PRIxPTR " not posted",
-              wrapper_intptr);
+    LOG_ERROR("Dart_PostCObject_DL(): message %p not posted.", wrapper);
     delete wrapper;
   }
   LDEBUG("after calling Dart_PostCObject_DL()");
 }
 
 intptr_t TizenInteropCallbacksInitDartApi(void *data) {
-  LDEBUG("in InitDartApiDL()");
   auto error = Dart_InitializeApiDL(data);
   if (error) {
-    LOG_ERROR("Dart_InitializeApiDL() failed");
+    LOG_ERROR("Dart_InitializeApiDL() failed.");
   }
   return error;
 }
 
-// Stores the SendPort id created in Dart for communication. Returns non-zero if
+// Stores the SendPort ID created in Dart for communication. Returns non-zero if
 // called twice.
 int32_t TizenInteropCallbacksRegisterSendPort(Dart_Port port) {
-  LDEBUG("in RegisterSendPort() port=%" PRId64, port);
   if (send_port) {
     if (interop_callbacks_thread_id != gettid()) {
       LOG_ERROR(
@@ -94,79 +97,68 @@ int32_t TizenInteropCallbacksRegisterSendPort(Dart_Port port) {
 }
 
 // Finds an ID not existing in callback_pointers. Returns 0 on failure.
-uint32_t find_free_callback_registration_id() {
-  uint32_t cb_id = ++last_used_cb_id;
-  std::map<uint32_t, CallbackPointer>::iterator it;
-  const auto end = callback_pointers.end();
-  if (!cb_id || ((it = callback_pointers.find(cb_id)) != end)) {
-    // in and unusual case of wrapping or taken id, loop over used ones
-    if (!cb_id) it = callback_pointers.find(++cb_id);
-    while (it != end && it->first == cb_id) {
-      ++it;
-      ++cb_id;
+uint32_t FindFreeCallbackId() {
+  uint32_t callback_id = ++last_used_callback_id;
+  auto iter = callback_pointers.find(callback_id);
+  if (!callback_id || iter != callback_pointers.end()) {
+    // in an unusual case of wrapping or taken id, loop over used ones
+    if (!callback_id) {
+      iter = callback_pointers.find(++callback_id);
     }
-    if (!cb_id) {
-      // ended up back with 0? try again from the beginning
-      it = callback_pointers.find(++cb_id);
-      while (it != end && it->first == cb_id) {
-        ++it;
-        ++cb_id;
-      }
-      // if cb_id is 0 at that point, nothing can be done
+    while (iter != callback_pointers.end() && iter->first == callback_id) {
+      ++iter;
+      ++callback_id;
     }
-    last_used_cb_id = cb_id;
+    last_used_callback_id = callback_id;
   }
-  return cb_id;
+  return callback_id;
 }
 
 RegistrationResult TizenInteropCallbacksRegisterWrappedCallback(
     void *user_callback, const char *proxy_name, int32_t proxy_num) {
   if (proxy_num < 0 || proxy_num >= kProxyInstanceCount) {
-    LOG_ERROR("proxy_num=%d outside of acceptable range", proxy_num);
-    return RegistrationResult{nullptr, 0};
+    LOG_ERROR("proxy_num %d is out of acceptable range.", proxy_num);
+    return {nullptr, 0};
   }
-  const auto &multi_proxy_map_it =
-      multi_proxy_map.find(std::string(proxy_name));
-  if (multi_proxy_map_it == multi_proxy_map.end()) {
-    LOG_ERROR("Wrong proxy_name `%s`", proxy_name);
-    return RegistrationResult{nullptr, 0};
-  }
-
-  uint32_t cb_id = find_free_callback_registration_id();
-  if (!cb_id) {
-    LOG_ERROR("Failed to find unused registration id for %s", proxy_name);
-    return RegistrationResult{nullptr, 0};
+  const auto &multi_proxy_iter = multi_proxy_map.find(std::string(proxy_name));
+  if (multi_proxy_iter == multi_proxy_map.end()) {
+    LOG_ERROR("Wrong proxy_name: %s", proxy_name);
+    return {nullptr, 0};
   }
 
-  LDEBUG("%s id:%" PRIu32 ", user_callback=%p", proxy_name, cb_id,
+  uint32_t callback_id = FindFreeCallbackId();
+  if (!callback_id) {
+    LOG_ERROR("Failed to find unused callback ID for %s.", proxy_name);
+    return {nullptr, 0};
+  }
+
+  LDEBUG("%s id: %d, user_callback: %p", proxy_name, callback_id,
          user_callback);
-  callback_pointers[cb_id] = user_callback;
+  callback_pointers[callback_id] = user_callback;
 
-  // we are only expecting proxy_name to be either platform_blocking_{CALLBACK}
-  // or platform_non_blocking_{CALLBACK} test the 9th character to check which
+  // We are only expecting proxy_name to be either platform_blocking_{CALLBACK}
+  // or platform_non_blocking_{CALLBACK}. Test the 9th character to check which
   // one is it, and depending on that remove the ..._blocking_ prefix which ends
   // at either 22nd (non_blocking variant) or 18th (blocking one) character.
-  const auto &base_id_map_it = reserved_base_id_map.find(
+  const auto &base_id_iter = reserved_base_id_map.find(
       std::string(proxy_name + ((proxy_name[9] == 'n') ? 22 : 18)));
-  if (base_id_map_it != reserved_base_id_map.end()) {
-    LDEBUG("storing remap callback id %s %d+%d -> %" PRIu32,
-           base_id_map_it->first.c_str(), base_id_map_it->second, proxy_num,
-           cb_id);
-    reserved_callback_ids[base_id_map_it->second + proxy_num] = cb_id;
+  if (base_id_iter != reserved_base_id_map.end()) {
+    int base_id = base_id_iter->second;
+    LDEBUG("storing remap callback id %s: %d+%d -> %d",
+           base_id_iter->first.c_str(), base_id, proxy_num, callback_id);
+    reserved_callback_ids[base_id + proxy_num] = callback_id;
   }
 
-  LDEBUG("will use proxy callback %p",
-         multi_proxy_map_it->second.mp[proxy_num]);
-  return RegistrationResult{multi_proxy_map_it->second.mp[proxy_num], cb_id};
+  LDEBUG("will use proxy callback %p", multi_proxy_iter->second.mp[proxy_num]);
+  return {multi_proxy_iter->second.mp[proxy_num], callback_id};
 }
 
 void TizenInteropCallbacksUnregisterWrappedCallback(uint32_t callback_id) {
-  LDEBUG("in UnregisterWrappedCallbackInNativeLayer");
-  const auto &it = callback_pointers.find(callback_id);
-  if (it != callback_pointers.end()) {
+  const auto &iter = callback_pointers.find(callback_id);
+  if (iter != callback_pointers.end()) {
     callback_pointers.erase(callback_id);
   } else {
-    LOG_WARN("Callback with id %" PRIu32 " not found, ignoring", callback_id);
+    LOG_WARN("Callback with id %d not found, ignoring.", callback_id);
   }
 }
 
@@ -182,9 +174,6 @@ void TizenInteropCallbacksRunCallback(CallbackWrapper *wrapper_pointer) {
 
 // Returns true if the given platform callback exists. Used to check if
 // non-blocking variant is available.
-bool TizenInteropCallbacksProxyExists(char *name) {
-  bool exists = multi_proxy_map.count(name);
-  LDEBUG("checking if proxy %s exists: %d", name, exists);
-  free(name);
-  return exists;
+bool TizenInteropCallbacksProxyExists(const char *name) {
+  return multi_proxy_map.count(std::string(name));
 }

@@ -24,12 +24,7 @@ typedef void *CallbackPointer;
 // Sends the given wrapped callback to Dart to be called from there.
 void RequestCallbackCall(CallbackWrapper *wrapper);
 
-// Maps unique callback registration ID to registered user callback.
 extern std::map<uint32_t, CallbackPointer> callback_pointers;
-
-// The thread the plugin was initialized with
-// TizenInteropCallbacksRegisterSendPort(). The callbacks provided by the user
-// will be executed in it.
 extern unsigned long interop_callbacks_thread_id;
 
 #define gettid() syscall(SYS_gettid)
