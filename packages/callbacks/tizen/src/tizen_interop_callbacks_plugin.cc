@@ -25,8 +25,6 @@ class TizenInteropCallbacksPlugin : public flutter::Plugin {
   TizenInteropCallbacksPlugin() {}
 
   virtual ~TizenInteropCallbacksPlugin() {}
-
- private:
 };
 
 }  // namespace
@@ -38,7 +36,7 @@ void TizenInteropCallbacksPluginRegisterWithRegistrar(
           ->GetRegistrar<flutter::PluginRegistrar>(registrar));
 }
 
-std::map<uint32_t, CallbackPointer> __cb_id_to_info_map;
+std::map<uint32_t, CallbackPointer> callback_pointers;
 // the port to communicate with Isolate that initialized TizenInteropCallbacks
 Dart_Port send_port = 0;
 unsigned long interop_callbacks_thread_id = 0;
@@ -86,7 +84,7 @@ int32_t TizenInteropCallbacksRegisterSendPort(Dart_Port port) {
       LOG_WARN(
           "Attempted TizenInteropCallbacks initialization again - resetting.");
       send_port = port;
-      __cb_id_to_info_map.clear();
+      callback_pointers.clear();
       return 2;
     }
   }
@@ -95,21 +93,21 @@ int32_t TizenInteropCallbacksRegisterSendPort(Dart_Port port) {
   return 0;
 }
 
-// Finds an ID not existing in __cb_id_to_info_map. Returns 0 on failure.
+// Finds an ID not existing in callback_pointers. Returns 0 on failure.
 uint32_t find_free_callback_registration_id() {
   uint32_t cb_id = ++last_used_cb_id;
   std::map<uint32_t, CallbackPointer>::iterator it;
-  const auto end = __cb_id_to_info_map.end();
-  if (!cb_id || ((it = __cb_id_to_info_map.find(cb_id)) != end)) {
+  const auto end = callback_pointers.end();
+  if (!cb_id || ((it = callback_pointers.find(cb_id)) != end)) {
     // in and unusual case of wrapping or taken id, loop over used ones
-    if (!cb_id) it = __cb_id_to_info_map.find(++cb_id);
+    if (!cb_id) it = callback_pointers.find(++cb_id);
     while (it != end && it->first == cb_id) {
       ++it;
       ++cb_id;
     }
     if (!cb_id) {
       // ended up back with 0? try again from the beginning
-      it = __cb_id_to_info_map.find(++cb_id);
+      it = callback_pointers.find(++cb_id);
       while (it != end && it->first == cb_id) {
         ++it;
         ++cb_id;
@@ -142,7 +140,7 @@ RegistrationResult TizenInteropCallbacksRegisterWrappedCallback(
 
   LDEBUG("%s id:%" PRIu32 ", user_callback=%p", proxy_name, cb_id,
          user_callback);
-  __cb_id_to_info_map[cb_id] = user_callback;
+  callback_pointers[cb_id] = user_callback;
 
   // we are only expecting proxy_name to be either platform_blocking_{CALLBACK}
   // or platform_non_blocking_{CALLBACK} test the 9th character to check which
@@ -164,9 +162,9 @@ RegistrationResult TizenInteropCallbacksRegisterWrappedCallback(
 
 void TizenInteropCallbacksUnregisterWrappedCallback(uint32_t cb_id) {
   LDEBUG("in UnregisterWrappedCallbackInNativeLayer");
-  const auto &it = __cb_id_to_info_map.find(cb_id);
-  if (it != __cb_id_to_info_map.end()) {
-    __cb_id_to_info_map.erase(cb_id);
+  const auto &it = callback_pointers.find(cb_id);
+  if (it != callback_pointers.end()) {
+    callback_pointers.erase(cb_id);
   } else {
     LOG_WARN("Callback with id %" PRIu32 " not found, ignoring", cb_id);
   }
