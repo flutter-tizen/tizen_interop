@@ -9,7 +9,6 @@ dependencies:
   ffi: ^2.0.1
   flutter:
     sdk: flutter
-  provider: ^6.0.5
   tizen_interop: ^0.2.6
   tizen_interop_callbacks:
     path: ../

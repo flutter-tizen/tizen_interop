@@ -2,135 +2,133 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
+// ignore_for_file: public_member_api_docs, avoid_print
+
 import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:tizen_interop/4.0/tizen.dart';
 import 'package:tizen_interop_callbacks/tizen_interop_callbacks.dart';
-import 'package:tizen_log/tizen_log.dart';
 
-import 'strings.dart';
-
-class BatteryTab extends StatelessWidget {
+class BatteryTab extends StatefulWidget {
   const BatteryTab({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Consumer<BatteryService>(builder: (context, battery, child) {
-      if (battery.batteryAvailable) {
-        return Column(
-          children: [
-            Text('Battery charging: ${battery.batteryCharging}'),
-            Text('Battery level: ${battery.batteryLevel}'),
-          ],
-        );
-      } else {
-        return const Text('ERROR: Battery info not available.');
-      }
-    });
-  }
+  State<BatteryTab> createState() => _BatteryTabState();
 }
 
-class BatteryService with ChangeNotifier {
+class _BatteryTabState extends State<BatteryTab> {
+  final TizenInteropCallbacks _callbacks = TizenInteropCallbacks();
+
+  late final RegisteredCallback<
+      Void Function(Int32, Pointer<Void>, Pointer<Void>)> _chargingCallback;
+  late final RegisteredCallback<
+      Void Function(Int32, Pointer<Void>, Pointer<Void>)> _levelCallback;
+
   bool? _batteryCharging;
-  int? _batteryLevel;
-  late final Pointer<void> userData;
-  late final RegisteredCallback<
-      Void Function(Int32, Pointer<Void>, Pointer<Void>)> chargingCallback;
-  late final RegisteredCallback<
-      Void Function(Int32, Pointer<Void>, Pointer<Void>)> levelCallback;
+  int _batteryLevel = 0;
 
-  bool get batteryAvailable => _batteryCharging != null;
-  bool get batteryCharging => _batteryCharging ?? false;
-  int get batteryLevel => _batteryLevel ?? 0;
+  static void _batteryChanged(
+    int type,
+    Pointer<Void> value,
+    Pointer<Void> userData,
+  ) {
+    final state =
+        TizenInteropCallbacks.getUserObject<_BatteryTabState>(userData)!;
+    if (type == device_callback_e.DEVICE_CALLBACK_BATTERY_CHARGING) {
+      state._batteryCharging = value.address != 0;
+    } else if (type == device_callback_e.DEVICE_CALLBACK_BATTERY_CAPACITY) {
+      state._batteryLevel = value.address;
+    }
+    state.setState(() {});
+  }
 
-  BatteryService() {
-    Log.info(logTag, 'Initializing BatteryService');
-    final callbacks = TizenInteropCallbacks();
+  @override
+  void initState() {
+    super.initState();
 
-    chargingCallback = callbacks.register(
-        'device_changed_cb', Pointer.fromFunction(_batteryChanged),
-        userObject: this, blocking: true);
+    _chargingCallback = _callbacks.register(
+      'device_changed_cb',
+      Pointer.fromFunction(_batteryChanged),
+      userObject: this,
+      blocking: true,
+    );
     int ret = tizen.device_add_callback(
-        device_callback_e.DEVICE_CALLBACK_BATTERY_CHARGING,
-        chargingCallback.interopCallback,
-        chargingCallback.interopUserData);
-
+      device_callback_e.DEVICE_CALLBACK_BATTERY_CHARGING,
+      _chargingCallback.interopCallback,
+      _chargingCallback.interopUserData,
+    );
     if (ret != 0) {
-      Log.error(logTag, 'Failed to add battery charging callback [$ret]');
+      final error = tizen.get_error_message(ret).toDartString();
+      print('Failed to add battery charging callback: $error');
     }
 
-    levelCallback = callbacks.register(
-        'device_changed_cb', Pointer.fromFunction(_batteryChanged),
-        userObject: this);
+    _levelCallback = _callbacks.register(
+      'device_changed_cb',
+      Pointer.fromFunction(_batteryChanged),
+      userObject: this,
+    );
     ret = tizen.device_add_callback(
-        device_callback_e.DEVICE_CALLBACK_BATTERY_CAPACITY,
-        levelCallback.interopCallback,
-        levelCallback.interopUserData);
-
+      device_callback_e.DEVICE_CALLBACK_BATTERY_CAPACITY,
+      _levelCallback.interopCallback,
+      _levelCallback.interopUserData,
+    );
     if (ret != 0) {
-      Log.error(logTag, 'Failed to add battery level callback [$ret]');
+      final error = tizen.get_error_message(ret).toDartString();
+      print('Failed to add battery level callback: $error');
     }
 
     using((Arena arena) {
-      Pointer<Int> intPointer = arena();
-      ret = tizen.device_battery_get_percent(intPointer);
+      Pointer<Int> percent = arena();
+      int ret = tizen.device_battery_get_percent(percent);
       if (ret == 0) {
-        _batteryLevel = intPointer.value;
+        _batteryLevel = percent.value;
       } else {
-        Log.error(logTag, 'Failed to read battery level [$ret]');
+        final error = tizen.get_error_message(ret).toDartString();
+        print('Failed to read battery level: $error');
       }
-      Pointer<Bool> boolPointer = arena();
-      ret = tizen.device_battery_is_charging(boolPointer);
+
+      Pointer<Bool> charging = arena();
+      ret = tizen.device_battery_is_charging(charging);
       if (ret == 0) {
-        _batteryCharging = boolPointer.value;
+        _batteryCharging = charging.value;
       } else {
-        Log.error(logTag, 'Failed to read battery charging status [$ret]');
+        final error = tizen.get_error_message(ret).toDartString();
+        print('Failed to read battery charging status: $error');
       }
+      setState(() {});
     });
   }
 
   @override
   void dispose() {
-    Log.info(logTag, 'disposing BatteryService');
-    final callbacks = TizenInteropCallbacks();
     tizen.device_remove_callback(
-        device_callback_e.DEVICE_CALLBACK_BATTERY_CAPACITY,
-        levelCallback.interopCallback);
+      device_callback_e.DEVICE_CALLBACK_BATTERY_CAPACITY,
+      _levelCallback.interopCallback,
+    );
     tizen.device_remove_callback(
-        device_callback_e.DEVICE_CALLBACK_BATTERY_CHARGING,
-        chargingCallback.interopCallback);
-    callbacks.unregister(levelCallback);
-    callbacks.unregister(chargingCallback);
+      device_callback_e.DEVICE_CALLBACK_BATTERY_CHARGING,
+      _chargingCallback.interopCallback,
+    );
+    _callbacks.unregister(_levelCallback);
+    _callbacks.unregister(_chargingCallback);
+
     super.dispose();
   }
 
-  static void _batteryChanged(
-      int type, Pointer<Void> value, Pointer<Void> userData) {
-    Log.info(
-        logTag, 'battery callback called, type:$type, value: ${value.address}');
-    BatteryService? battery = TizenInteropCallbacks.getUserObject(userData);
-    int val = value.address;
-    if (type == device_callback_e.DEVICE_CALLBACK_BATTERY_CHARGING) {
-      battery?._updateBatteryCharging(val != 0);
-    } else if (type == device_callback_e.DEVICE_CALLBACK_BATTERY_CAPACITY) {
-      battery?._updateBatteryLevel(val);
+  @override
+  Widget build(BuildContext context) {
+    String status = 'Unknown';
+    if (_batteryCharging != null) {
+      status = _batteryCharging! ? 'Charging' : 'Discharging';
     }
-  }
-
-  void _updateBatteryLevel(int level) {
-    if (_batteryLevel != level) {
-      _batteryLevel = level;
-      notifyListeners();
-    }
-  }
-
-  void _updateBatteryCharging(bool charging) {
-    if (_batteryCharging != charging) {
-      _batteryCharging = charging;
-      notifyListeners();
-    }
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text('Battery status: $status'),
+        if (_batteryCharging != null) Text('Battery level: $_batteryLevel%')
+      ],
+    );
   }
 }

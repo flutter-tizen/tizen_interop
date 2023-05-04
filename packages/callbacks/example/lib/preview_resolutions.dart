@@ -13,7 +13,7 @@ import 'package:tizen_interop_callbacks/tizen_interop_callbacks.dart';
 import 'package:tizen_log/tizen_log.dart';
 import 'package:tuple/tuple.dart';
 
-import 'strings.dart';
+const String kLogTag = 'TizenInteropCallbacksExample';
 
 class PreviewResolutionsTab extends StatefulWidget {
   const PreviewResolutionsTab({super.key});
@@ -85,7 +85,7 @@ class _PreviewResolutionsRetriever {
     final ret = tizen.camera_foreach_supported_preview_resolution(
         cameraHandle, wrapper.interopCallback, wrapper.interopUserData);
     if (ret != 0) {
-      Log.error(logTag, 'Failed to query preview resolutions. [$ret]');
+      Log.error(kLogTag, 'Failed to query preview resolutions. [$ret]');
     }
 
     tizen.camera_destroy(cameraHandle);
@@ -109,7 +109,7 @@ class _PreviewResolutionsRetriever {
       if (ret == 0) {
         return cameraHandlePointer.value;
       } else {
-        Log.error(logTag, 'Failed to initialize camera. [$ret]');
+        Log.error(kLogTag, 'Failed to initialize camera. [$ret]');
         return Pointer<camera_cli_s>.fromAddress(0);
       }
     });
