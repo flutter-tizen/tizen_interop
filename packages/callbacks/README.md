@@ -1,52 +1,58 @@
 # tizen_interop_callbacks
 
-A tizen_interop_callbacks plugin has been create to solve the issue relate to error message: `Cannot invoke native callback outside an isolate`.
+A Flutter plugin to resolve issues related to the error message: `Cannot invoke native callback outside an isolate`.
 
-All callbacks from common profile (IoT) for Tizen 4.0 ~ 7.0
-are available and can be used on any platform.
-Similarly to tizen_interop itself, there is no build-time dependency.
+This package is designed to be used with the [`tizen_interop`](https://pub.dev/packages/tizen_interop) package.
+Similarly to `tizen_interop`, this package has no build time dependency on a specific Tizen profile or version.
 
-## Getting Started
+## Usage
 
-See TizenInteropCallbacks class documentation.
+1. Add this package and `tizen_interop` as dependencies in your `pubspec.yaml` file.
 
-1. Add this package to your application dependencies - pubspec.yaml. tizen_interop will be needed too:
-``` yaml
-  ffi: ^2.0.1
-  tizen_interop: ^0.2.6
-  tizen_interop_callbacks:  ^0.1.0
-```
+   ```yaml
+   dependencies:
+     ffi: ^2.0.1
+     tizen_interop: ^0.2.6
+     tizen_interop_callbacks: ^0.1.0
+   ```
 
-2. In your Dart code import the packages:
-``` dart
-import 'dart:ffi';
-import 'package:tizen_interop/6.5/tizen.dart';
-import 'package:tizen_interop_callbacks/tizen_interop_callbacks.dart';
-```
+2. In your Dart code, import the packages:
 
-3. Instantiate the TizenInteropCallbacks class. It should be done in the root isolate - the thread your entry point (`main()`) is called.
-``` dart
-final callbacks = TizenInteropCallbacks();
-```
+   ```dart
+   import 'dart:ffi';
+   import 'package:tizen_interop/4.0/tizen.dart';
+   import 'package:tizen_interop_callbacks/tizen_interop_callbacks.dart';
+   ```
 
-4. Implement your callback in dart and register it with TizenInteropCallbacks:
-``` dart
-var levelCb = callbacks.register<Void Function(Int32, Pointer<Void>, Pointer<Void>)>(
-  'device_changed_cb', Pointer.fromFunction(_batteryChanged));
-```
+3. Instantiate the `TizenInteropCallbacks` class. This should be done in the root isolate - the thread where your `main()` is called.
 
-The native function type to be used in `callbacks.register<>()` can be obtained by checking
-the definition of related callback type - the `device_changed_cb` in this case.
+   ```dart
+   final callbacks = TizenInteropCallbacks();
+   ```
 
-5. Pass the obtained callback pointer and user data to Native API set/add callback function:
+4. Implement your callback in Dart and register it with `TizenInteropCallbacks`:
 
-> **Important information:**  
-> Both `interopCallback` and `interopUserData` must be used. The callbacks handling implementation relies on the `interopUserData`.
-> The only exception are the few callbacks that do not have a user_data parameter.
+   ```dart
+   final callback = _callbacks.register<Void Function(Int32, Pointer<Void>, Pointer<Void>)>(
+     'device_changed_cb',
+     Pointer.fromFunction(_batteryChanged),
+   );
+   ```
 
-``` dart
-ret = tizen.device_add_callback(
-  device_callback_e.DEVICE_CALLBACK_BATTERY_CAPACITY,
-  levelCb.interopCallback,
-  levelCb.interopUserData);
-```
+   The native function type to be used in `register<>()` can be obtained by checking
+   the definition of the related callback type - the `device_changed_cb` in this case.
+
+5. Pass the obtained callback pointer and user_data to the Native API function:
+
+   > **Warning**
+   >
+   > Both `interopCallback` and `interopUserData` must be passed. The callback handling implementation relies on the `interopUserData`.
+   > The only exceptions are a few callbacks that do not accept `user_data` parameters.
+
+   ```dart
+   final ret = tizen.device_add_callback(
+     device_callback_e.DEVICE_CALLBACK_BATTERY_CAPACITY,
+     callback.interopCallback,
+     callback.interopUserData,
+   );
+   ```
