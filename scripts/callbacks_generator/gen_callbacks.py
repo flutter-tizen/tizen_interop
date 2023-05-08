@@ -113,6 +113,39 @@ SPECIAL_TYPES = {
     'wifi_direct_connection_state_cb_data_s': 'wifi_direct_connection_state_cb_data_s_copy',
 }
 
+EXTRA_HEADERS = {
+    '5.0': [
+        "appfw/widget_app.h",
+        "media/image_util_type.h",
+        "media/video_util_type.h",
+        "network/wifi-manager.h",
+    ],
+    '5.5': [
+        "appfw/widget_app.h",
+        "component_manager.h",
+        "media/image_util_type.h",
+        "media/video_util_type.h",
+    ],
+    '6.0': [
+        "appfw/widget_app.h",
+        "component_manager.h",
+        "media/image_util_type.h",
+        "media/video_util_type.h",
+    ],
+    '6.5': [
+        "appfw/widget_app.h",
+        "component_manager.h",
+        "context-service/activity_recognition.h",
+        "context-service/gesture_recognition.h",
+        "media/image_util_type.h",
+    ],
+    '7.0': [
+        "appfw/widget_app.h",
+        "component_manager.h",
+        "media/image_util_type.h",
+    ]
+}
+
 
 class Token:
   def __init__(self, _type):
@@ -841,7 +874,12 @@ class CallbackGenerator:
     cg.generate_full_source(api)
 
   @staticmethod
-  def generate_asserts_from_collector(api: CallbackDataCollector, output):
+  def generate_asserts_from_collector(api: CallbackDataCollector, output, args):
+    entrypoints = os.path.join(os.path.dirname(args.config[0]), 'entrypoints.h')
+    if not os.path.exists(entrypoints):
+      log.error('Entrypoints header not found (%s)', entrypoints)
+      sys.exit(3)
+    version = os.path.basename(os.path.dirname(args.config[0]))
     api.enable_asserts()
     api.preprocess_callbacks_data()
     cg = CallbackGenerator(list(api.callbacks.values()))
@@ -855,10 +893,9 @@ class CallbackGenerator:
       'std::map<std::string, MultiProxyFunctionsContainer> multi_proxy_map;\n')
     output.write('std::map<std::string, int> reserved_base_id_map;\n\n')
     output.write('#undef TIZEN_DEPRECATION\n#undef DEPRECATION_WARNING\n')
-    for header in api.loaded_headers:
-      if '/usr/include/' in header:
-        header = header.split('/usr/include/', 1)[1]
-      output.write(f'#include "{header}"\n')
+    output.write(f'#include "{entrypoints}"\n')
+    for header in EXTRA_HEADERS.get(version, []):
+        output.write(f'#include "{header}"\n')
     output.write('\n')
     for type1, type2 in api.get_type_mapping():
       output.write(f'static_assert(sizeof({type1}) == sizeof({type2}), "Wrong '
@@ -946,7 +983,7 @@ def process_configs(args):
   else:
     output = sys.stdout
   if args.asserts:
-    CallbackGenerator.generate_asserts_from_collector(api, output)
+    CallbackGenerator.generate_asserts_from_collector(api, output, args)
   else:
     CallbackGenerator.generate_from_collector(api, output)
   if args.output:
@@ -958,7 +995,7 @@ def main(argv):
   parser.add_argument('-c', '--config', action='append', default=[])
   parser.add_argument('-o', '--output')
   parser.add_argument('-v', '--verbose', action='store_true')
-  parser.add_argument('-a', '--asserts', action='store_true',
+  parser.add_argument('-a', '--asserts',
                       help='Generate asserts to verify type substitution')
   parser.add_argument('files', nargs='*')
   args = parser.parse_args(argv)

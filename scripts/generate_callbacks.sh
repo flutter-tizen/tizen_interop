@@ -25,10 +25,11 @@ elif [ "$1" = "verify" ]; then
   # as not every header is available there, or they need to be included in specific order, etc.
   # Because of that a failing build does not always mean that our type substitution is wrong.
   VERIFY=yes
-  ARCHS="${ARCHS:-arm}" # arm64 x86
+  ARCHS="${ARCHS:-arm arm64}" # arm64 x86
   PROFILES="${PROFILES:-common}" 	# mobile, wearable, tv
   declare -A SKIP_VERIFY_VERSIONS
-  #SKIP_VERIFY_VERSIONS[4.0]=skip
+  SKIP_VERIFY_VERSIONS[4.0]=skip
+  SKIP_VERIFY_VERSIONS[5.0]=skip   # conflict between inm.h and net_connection.h
   EXAMPLE_DIR="$SCRIPT_DIR/../packages/tizen_interop_callbacks/example"
   (cd "$EXAMPLE_DIR"; flutter-tizen pub get)
 fi
@@ -39,6 +40,7 @@ if [ ! -d $ROOTSTRAPS ]; then
 fi
 
 CONFIGS=""
+declare -a VERIFY_RESULT
 for C in "$SCRIPT_DIR"/../configs/*/ffigen.yaml; do
   echo $C
   VERSION="${C%/ffigen.yaml}"
@@ -47,13 +49,28 @@ for C in "$SCRIPT_DIR"/../configs/*/ffigen.yaml; do
   D="$ROOTSTRAPS/$VERSION"
   if [ -d "$D" ]; then
     if [ "$VERIFY" = "yes" ]; then
-      if [ -n "${SKIP_VERIFY_VERSIONS[$VERSION]}" ]; then continue; fi
-      "$GENERATOR_ROOT/gen_callbacks.py" --asserts -c $SCRIPT_DIR/../configs/$VERSION/ffigen.yaml -o "$TARGET"
+      if [ -n "${SKIP_VERIFY_VERSIONS[$VERSION]}" ]; then
+        VERIFY_RESULT[${#VERIFY_RESULT[@]}]="all   	-	$VERSION	skip"
+        continue
+      fi
+      "$GENERATOR_ROOT/gen_callbacks.py" --asserts="$VERSION" -c $SCRIPT_DIR/../configs/$VERSION/ffigen.yaml -o "$TARGET"
       sed -i '/manifest/ s/api-version="[0-9.]*"/api-version="'$VERSION'"/' "$EXAMPLE_DIR/tizen/tizen-manifest.xml"
       for PROFILE in $PROFILES; do
         for ARCH in $ARCHS; do
-          echo "$VERSION> flutter-tizen build tpk --device-profile $PROFILE --target-arch $ARCH"
-          (cd "$EXAMPLE_DIR"; flutter-tizen build tpk --device-profile $PROFILE --target-arch $ARCH --debug)
+          echo -e "\e[32m$VERSION> flutter-tizen build tpk --device-profile $PROFILE --target-arch $ARCH\e[0m"
+          LOGFILE="/tmp/tzincb-$PROFILE-$ARCH-$VERSION.log"
+          (cd "$EXAMPLE_DIR"; flutter-tizen build tpk --device-profile $PROFILE --target-arch $ARCH --debug 2>&1 \
+           | tee $LOGFILE)
+          if grep -q "use of undeclared identifier" "$LOGFILE"; then
+            RESULT="undeclared identifiers"
+          elif grep -q "Wrong type substitution" "$LOGFILE"; then
+            RESULT="ASSERTs failed"
+          elif grep -q "Built.*callbacks_example.*.tpk" "$LOGFILE" ; then
+            RESULT="ok"
+          else
+            RESULT="failed"
+          fi
+          VERIFY_RESULT[${#VERIFY_RESULT[@]}]="$PROFILE	$ARCH	$VERSION	$RESULT"
         done
       done
     else
@@ -64,11 +81,12 @@ for C in "$SCRIPT_DIR"/../configs/*/ffigen.yaml; do
     exit 1
   fi
 done
-if [ -z "$CONFIGS" ]; then
+if [ "$VERIFY" == "yes" ]; then
+  echo "======== Results of the verification"
+  for x in "${!VERIFY_RESULT[@]}"; do printf "  %s\n" "${VERIFY_RESULT[$x]}" ; done
+  exit
+elif [ -z "$CONFIGS" ]; then
   echo "ERROR: No rootstrap found. Run copy_rootstrap.sh first."
   exit 1
-fi
-if [ "$VERIFY" == "yes" ]; then
-  exit
 fi
 "$GENERATOR_ROOT/gen_callbacks.py" $CONFIGS -o "$TARGET"
