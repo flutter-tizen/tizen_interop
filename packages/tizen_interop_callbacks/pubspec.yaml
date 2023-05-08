@@ -1,7 +1,7 @@
 name: tizen_interop_callbacks
 description: Cross-thread callbacks for Tizen native APIs.
 homepage: https://github.com/flutter-tizen/tizen_interop
-repository: https://github.com/flutter-tizen/tizen_interop/tree/main/packages/callbacks
+repository: https://github.com/flutter-tizen/tizen_interop/tree/main/packages/tizen_interop_callbacks
 version: 0.1.0
 
 environment:

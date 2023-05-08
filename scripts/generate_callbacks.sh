@@ -3,13 +3,13 @@
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
 
-# set -e
+set -e
 
 SCRIPT_DIR=$(dirname $(readlink -f $0))
 GENERATOR_ROOT="$SCRIPT_DIR/callbacks_generator"
 ROOTSTRAPS="$SCRIPT_DIR/../rootstraps"
 FOUND_COUNT=0
-TARGET="$SCRIPT_DIR/../packages/callbacks/tizen/src/generated_callbacks.cc"
+TARGET="$SCRIPT_DIR/../packages/tizen_interop_callbacks/tizen/src/generated_callbacks.cc"
 
 if [ "$1" == "-h" -o "$1" = "help" -o "$1" = "--help" ]; then
   echo "$0        - generates callbacks based on ffigen.yaml config files"
@@ -29,7 +29,7 @@ elif [ "$1" = "verify" ]; then
   PROFILES="${PROFILES:-common}" 	# mobile, wearable, tv
   declare -A SKIP_VERIFY_VERSIONS
   #SKIP_VERIFY_VERSIONS[4.0]=skip
-  EXAMPLE_DIR="$SCRIPT_DIR/../packages/callbacks/example"
+  EXAMPLE_DIR="$SCRIPT_DIR/../packages/tizen_interop_callbacks/example"
   (cd "$EXAMPLE_DIR"; flutter-tizen pub get)
 fi
 
