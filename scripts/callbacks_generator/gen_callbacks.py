@@ -4,6 +4,7 @@
 # found in the LICENSE file.
 
 import os
+import re
 import sys
 import copy
 import glob
@@ -11,7 +12,7 @@ import yaml
 import logging
 import argparse
 from io import StringIO
-from typing import List, Mapping, Callable
+from typing import List, Mapping, Callable, Set
 
 log = logging.getLogger('gen_callbacks')
 
@@ -114,36 +115,6 @@ SPECIAL_TYPES = {
 }
 
 EXTRA_HEADERS = {
-    '5.0': [
-        "appfw/widget_app.h",
-        "media/image_util_type.h",
-        "media/video_util_type.h",
-        "network/wifi-manager.h",
-    ],
-    '5.5': [
-        "appfw/widget_app.h",
-        "component_manager.h",
-        "media/image_util_type.h",
-        "media/video_util_type.h",
-    ],
-    '6.0': [
-        "appfw/widget_app.h",
-        "component_manager.h",
-        "media/image_util_type.h",
-        "media/video_util_type.h",
-    ],
-    '6.5': [
-        "appfw/widget_app.h",
-        "component_manager.h",
-        "context-service/activity_recognition.h",
-        "context-service/gesture_recognition.h",
-        "media/image_util_type.h",
-    ],
-    '7.0': [
-        "appfw/widget_app.h",
-        "component_manager.h",
-        "media/image_util_type.h",
-    ]
 }
 
 
@@ -912,6 +883,18 @@ def generate_preamble(output):
   print('#include "types.h"\n', file=output)
 
 
+def load_entry_points(config_path, names) -> Set[str]:
+  config_dir = os.path.dirname(config_path)
+  entrypoints = []
+  for name in names:
+    with open(os.path.join(config_dir, name)) as source:
+      for line in source:
+        m = re.match('^#include\s+<(.*)>', line)
+        if m is not None:
+          entrypoints.append(m.group(1))
+  return entrypoints
+
+
 def find_headers_by_config(config_path):
   log.info('Processing config file: %s', config_path)
   root_dir = os.path.relpath(os.path.join(
@@ -929,19 +912,12 @@ def find_headers_by_config(config_path):
     ffigen_config = yaml.safe_load(ffigen_conf_file)
 
   selected = ffigen_config['headers']['include-directives']
-  files_to_find = set()
-  dirs_to_find = set()
-  for pattern in selected:
-    assert pattern.startswith('**/')
-    if pattern.endswith('/*.h'):
-      log.debug('DIR %s', pattern[3:-4])
-      dirs_to_find.add('/' + pattern[3:-4])
-    elif pattern.endswith('.h') and pattern.count('/') == 1:
-      log.debug('FILE %s', pattern[3:])
-      files_to_find.add(pattern[3:])
-    else:
-      raise NotImplemented(
-        f'config include-directives `{pattern}` not supported')
+  files_to_find = load_entry_points(config_path, ffigen_config['headers']['entry-points'])
+  paths_to_find = {}
+  for p in files_to_find:
+    if os.sep in p:
+      paths_to_find.setdefault(os.path.dirname(p), set()).add(os.path.basename(p))
+  files_to_find = set(p for p in files_to_find if not os.sep in p)
 
   items = set()
 
@@ -950,10 +926,11 @@ def find_headers_by_config(config_path):
     if match:
       log.debug('%s %d %d', match, len(match), len(files_to_find))
       items.update(os.path.join(directory, m) for m in match)
-    for p in dirs_to_find:
+    for p, names in paths_to_find.items():
       if directory.endswith(p):
-        log.debug('--- %s [%s] %s', directory, p, files)
-        items.add(os.path.join(directory, '*.h'))
+        match = names.intersection(files)
+        log.debug('--- %s [%s] %s', directory, p, match)
+        items.update(os.path.join(directory, m) for m in match)
         break
   return api_version, rootstrap_include, items
 

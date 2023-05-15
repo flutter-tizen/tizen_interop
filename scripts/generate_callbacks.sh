@@ -28,8 +28,7 @@ elif [ "$1" = "verify" ]; then
   ARCHS="${ARCHS:-arm arm64}" # arm64 x86
   PROFILES="${PROFILES:-common}" 	# mobile, wearable, tv
   declare -A SKIP_VERIFY_VERSIONS
-  SKIP_VERIFY_VERSIONS[4.0]=skip
-  SKIP_VERIFY_VERSIONS[5.0]=skip   # conflict between inm.h and net_connection.h
+  #SKIP_VERIFY_VERSIONS[4.0]=skip
   EXAMPLE_DIR="$SCRIPT_DIR/../packages/tizen_interop_callbacks/example"
   (cd "$EXAMPLE_DIR"; flutter-tizen pub get)
 fi
