@@ -11,7 +11,7 @@ import yaml
 import logging
 import argparse
 from io import StringIO
-from typing import List, Mapping, Callable
+from typing import List, Mapping, Callable, Set
 
 log = logging.getLogger('gen_callbacks')
 
@@ -115,35 +115,7 @@ SPECIAL_TYPES = {
 
 EXTRA_HEADERS = {
     '5.0': [
-        "appfw/widget_app.h",
-        "media/image_util_type.h",
-        "media/video_util_type.h",
-        "network/wifi-manager.h",
     ],
-    '5.5': [
-        "appfw/widget_app.h",
-        "component_manager.h",
-        "media/image_util_type.h",
-        "media/video_util_type.h",
-    ],
-    '6.0': [
-        "appfw/widget_app.h",
-        "component_manager.h",
-        "media/image_util_type.h",
-        "media/video_util_type.h",
-    ],
-    '6.5': [
-        "appfw/widget_app.h",
-        "component_manager.h",
-        "context-service/activity_recognition.h",
-        "context-service/gesture_recognition.h",
-        "media/image_util_type.h",
-    ],
-    '7.0': [
-        "appfw/widget_app.h",
-        "component_manager.h",
-        "media/image_util_type.h",
-    ]
 }
 
 
@@ -644,10 +616,11 @@ class CallbackDataCollector:
     self.version = None
     self._used_type_mapping = None
     self.loaded_headers = []
+    self.allowed_names: Set[str] = []
 
   def set_version(self, version):
     self.version = version
-    if not version in self.versions:
+    if version not in self.versions:
       self.versions.append(version)
 
   def enable_asserts(self):
@@ -672,6 +645,13 @@ class CallbackDataCollector:
   def preprocess_callbacks_data(self):
     if self._used_type_mapping is not None:
       callbacks_before_rewrite = copy.deepcopy(self.callbacks)
+    if self.allowed_names:
+      names = set(self.callbacks)
+      not_allowed_names = names.difference(self.allowed_names)
+      if not_allowed_names:
+        log.debug('Ignoring following names not found in bindinds: %s', not_allowed_names)
+        for name in not_allowed_names:
+          del self.callbacks[name]
 
     for name, cb in self.callbacks.items():
 
@@ -714,6 +694,16 @@ class CallbackDataCollector:
           yield 'sensor_event_s*', item[1]
         else:
           yield item
+
+  def set_bindings_filter(self, bindings_file_paths: List[str]):
+    names = set()
+    for bindings_path in bindings_file_paths:
+      with open(bindings_path) as bindings_file:
+        for line in bindings_file:
+          if line.startswith('typedef '):
+            names.add(line.split()[1])
+
+    self.allowed_names = names
 
   @classmethod
   def rewrite_types(class_, cb: CallbackInfo):
@@ -845,7 +835,8 @@ class CallbackGenerator:
 
   def generate_full_source(self, api):
     generate_preamble(self.out)
-    api.preprocess_callbacks_data()
+    print(f'static_assert(kProxyInstanceCount == {PROXY_INSTANCES_COUNT}, "Callbacks instances count mismatch");',
+          file=self.out)
     print(
       f'static constexpr int32_t kNoUserDataCallbackCount = {len(api.no_user_data_callbacks)};\n', file=self.out)
     print(
@@ -869,6 +860,7 @@ class CallbackGenerator:
 
   @staticmethod
   def generate_from_collector(api: CallbackDataCollector, output):
+    api.preprocess_callbacks_data()
     cg = CallbackGenerator(list(api.callbacks.values()))
     cg.out = output
     cg.generate_full_source(api)
@@ -899,7 +891,7 @@ class CallbackGenerator:
     output.write('\n')
     for type1, type2 in api.get_type_mapping():
       output.write(f'static_assert(sizeof({type1}) == sizeof({type2}), "Wrong '
-                   + f'type substitution - {type1} and {type2} have different sizes.");\n')
+                   f'type substitution - {type1} and {type2} have different sizes.");\n')
     log.info(f'Generated asserts for {len(api.callbacks)} callbacks.')
 
 
@@ -940,7 +932,7 @@ def find_headers_by_config(config_path):
       log.debug('FILE %s', pattern[3:])
       files_to_find.add(pattern[3:])
     else:
-      raise NotImplemented(
+      raise NotImplementedError(
         f'config include-directives `{pattern}` not supported')
 
   items = set()
@@ -978,6 +970,8 @@ def process_configs(args):
     for item in items:
       api.load_headers(glob.glob(item))
 
+  if args.bindings:
+    api.set_bindings_filter(args.bindings)
   if args.output:
     output = open(args.output, 'w')
   else:
@@ -997,6 +991,8 @@ def main(argv):
   parser.add_argument('-v', '--verbose', action='store_true')
   parser.add_argument('-a', '--asserts',
                       help='Generate asserts to verify type substitution')
+  parser.add_argument('-b', '--bindings', action='append', default=[],
+                      help='Filter callbacks using generated bindings dart file(s)')
   parser.add_argument('files', nargs='*')
   args = parser.parse_args(argv)
   logging.basicConfig(level=logging.DEBUG if args.verbose else logging.INFO)
@@ -1004,6 +1000,8 @@ def main(argv):
     process_configs(args)
   elif args.files:
     cg = CallbackGenerator([])
+    if args.bindings:
+      cg.set_bindings_filter(args.bindings)
     res = cg.process_files(args.files).getvalue()
     print(res)
 

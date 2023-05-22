@@ -28,8 +28,6 @@ elif [ "$1" = "verify" ]; then
   ARCHS="${ARCHS:-arm arm64}" # arm64 x86
   PROFILES="${PROFILES:-common}" 	# mobile, wearable, tv
   declare -A SKIP_VERIFY_VERSIONS
-  SKIP_VERIFY_VERSIONS[4.0]=skip
-  SKIP_VERIFY_VERSIONS[5.0]=skip   # conflict between inm.h and net_connection.h
   EXAMPLE_DIR="$SCRIPT_DIR/../packages/tizen_interop_callbacks/example"
   (cd "$EXAMPLE_DIR"; flutter-tizen pub get)
 fi
@@ -53,7 +51,7 @@ for C in "$SCRIPT_DIR"/../configs/*/ffigen.yaml; do
         VERIFY_RESULT[${#VERIFY_RESULT[@]}]="all   	-	$VERSION	skip"
         continue
       fi
-      "$GENERATOR_ROOT/gen_callbacks.py" --asserts="$VERSION" -c $SCRIPT_DIR/../configs/$VERSION/ffigen.yaml -o "$TARGET"
+      "$GENERATOR_ROOT/gen_callbacks.py" --asserts="$VERSION" -c $SCRIPT_DIR/../configs/$VERSION/ffigen.yaml -b $SCRIPT_DIR/../lib/src/bindings/$VERSION/generated_bindings.dart -o "$TARGET"
       sed -i '/manifest/ s/api-version="[0-9.]*"/api-version="'$VERSION'"/' "$EXAMPLE_DIR/tizen/tizen-manifest.xml"
       for PROFILE in $PROFILES; do
         for ARCH in $ARCHS; do
@@ -74,7 +72,7 @@ for C in "$SCRIPT_DIR"/../configs/*/ffigen.yaml; do
         done
       done
     else
-      CONFIGS="-c $SCRIPT_DIR/../configs/$VERSION/ffigen.yaml $CONFIGS"
+      CONFIGS="-c $SCRIPT_DIR/../configs/$VERSION/ffigen.yaml -b $SCRIPT_DIR/../lib/src/bindings/$VERSION/generated_bindings.dart $CONFIGS"
     fi
   else
     echo "ERROR: Rootstrap $ROOTSTRAPS/$VERSION not found."

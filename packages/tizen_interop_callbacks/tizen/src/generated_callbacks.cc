@@ -7,7 +7,8 @@
 #include "macros.h"
 #include "types.h"
 
-static constexpr int32_t kNoUserDataCallbackCount = 56;
+static_assert(kProxyInstanceCount == 5, "Callbacks instances count mismatch");
+static constexpr int32_t kNoUserDataCallbackCount = 54;
 
 uint32_t reserved_callback_ids[kProxyInstanceCount * kNoUserDataCallbackCount] = {};
 
@@ -67,12 +68,6 @@ PROXY_GROUP_BLOCKING(app_control_cb, void* app_control, void* user_data)
 typedef bool (*app_control_extra_data_cb)(void* app_control, const char* key, void* user_data);
 #define CB_PARAMS_NAMES app_control, key, user_data
 PROXY_GROUP_RETURN(app_control_extra_data_cb, bool, void* app_control, const char* key, void* user_data)
-#undef CB_PARAMS_NAMES
-
-#define BASE_CALLBACK_ID_app_control_host_res_fn 0
-typedef int (*app_control_host_res_fn)(void* data);
-#define CB_PARAMS_NAMES data
-PROXY_GROUP_RETURN_NO_USER_DATA(app_control_host_res_fn, int, void* data)
 #undef CB_PARAMS_NAMES
 
 typedef void (*app_control_reply_cb)(void* request, void* reply, some_enum result, void* user_data);
@@ -384,36 +379,6 @@ PROXY_GROUP_NON_BLOCKING(bt_adapter_visibility_mode_changed_cb, int result, some
 PROXY_GROUP_BLOCKING(bt_adapter_visibility_mode_changed_cb, int result, some_enum visibility_mode, void* user_data)
 #undef CB_PARAMS_NAMES
 
-typedef void (*bt_ag_call_handling_event_cb)(some_enum event, unsigned int call_id, void* user_data);
-#define CB_PARAMS_NAMES event, call_id, user_data
-PROXY_GROUP_NON_BLOCKING(bt_ag_call_handling_event_cb, some_enum event, unsigned int call_id, void* user_data)
-PROXY_GROUP_BLOCKING(bt_ag_call_handling_event_cb, some_enum event, unsigned int call_id, void* user_data)
-#undef CB_PARAMS_NAMES
-
-typedef void (*bt_ag_dtmf_transmitted_cb)(const char* dtmf, void* user_data);
-#define CB_PARAMS_NAMES dtmf, user_data
-PROXY_GROUP_NON_BLOCKING(bt_ag_dtmf_transmitted_cb, const char* dtmf, void* user_data)
-PROXY_GROUP_BLOCKING(bt_ag_dtmf_transmitted_cb, const char* dtmf, void* user_data)
-#undef CB_PARAMS_NAMES
-
-typedef void (*bt_ag_microphone_gain_changed_cb)(int gain, void* user_data);
-#define CB_PARAMS_NAMES gain, user_data
-PROXY_GROUP_NON_BLOCKING(bt_ag_microphone_gain_changed_cb, int gain, void* user_data)
-PROXY_GROUP_BLOCKING(bt_ag_microphone_gain_changed_cb, int gain, void* user_data)
-#undef CB_PARAMS_NAMES
-
-typedef void (*bt_ag_multi_call_handling_event_cb)(some_enum event, void* user_data);
-#define CB_PARAMS_NAMES event, user_data
-PROXY_GROUP_NON_BLOCKING(bt_ag_multi_call_handling_event_cb, some_enum event, void* user_data)
-PROXY_GROUP_BLOCKING(bt_ag_multi_call_handling_event_cb, some_enum event, void* user_data)
-#undef CB_PARAMS_NAMES
-
-typedef void (*bt_ag_speaker_gain_changed_cb)(int gain, void* user_data);
-#define CB_PARAMS_NAMES gain, user_data
-PROXY_GROUP_NON_BLOCKING(bt_ag_speaker_gain_changed_cb, int gain, void* user_data)
-PROXY_GROUP_BLOCKING(bt_ag_speaker_gain_changed_cb, int gain, void* user_data)
-#undef CB_PARAMS_NAMES
-
 typedef void (*bt_audio_connection_state_changed_cb)(int result, bool connected, const char* remote_address, some_enum type, void* user_data);
 #define CB_PARAMS_NAMES result, connected, remote_address, type, user_data
 PROXY_GROUP_NON_BLOCKING(bt_audio_connection_state_changed_cb, int result, bool connected, const char* remote_address, some_enum type, void* user_data)
@@ -643,19 +608,6 @@ PROXY_GROUP_NON_BLOCKING(bt_hid_host_connection_state_changed_cb, int result, bo
 PROXY_GROUP_BLOCKING(bt_hid_host_connection_state_changed_cb, int result, bool connected, const char* remote_address, void* user_data)
 #undef CB_PARAMS_NAMES
 
-#define BASE_CALLBACK_ID_bt_hrp_connection_state_changed_cb 5
-typedef void (*bt_hrp_connection_state_changed_cb)(int result, bool connected, const char* remote_address);
-#define CB_PARAMS_NAMES result, connected, remote_address
-PROXY_GROUP_NON_BLOCKING_NO_USER_DATA(bt_hrp_connection_state_changed_cb, int result, bool connected, const char* remote_address)
-PROXY_GROUP_BLOCKING_NO_USER_DATA(bt_hrp_connection_state_changed_cb, int result, bool connected, const char* remote_address)
-#undef CB_PARAMS_NAMES
-
-typedef void (*bt_hrp_sensor_characteristic_notification_state_changed_cb)(bool notify, void* server, void* gatt_handle, void* user_data);
-#define CB_PARAMS_NAMES notify, server, gatt_handle, user_data
-PROXY_GROUP_NON_BLOCKING(bt_hrp_sensor_characteristic_notification_state_changed_cb, bool notify, void* server, void* gatt_handle, void* user_data)
-PROXY_GROUP_BLOCKING(bt_hrp_sensor_characteristic_notification_state_changed_cb, bool notify, void* server, void* gatt_handle, void* user_data)
-#undef CB_PARAMS_NAMES
-
 typedef void (*bt_ipsp_connection_state_changed_cb)(int result, bool connected, const char* remote_address, const char* iface_name, void* user_data);
 #define CB_PARAMS_NAMES result, connected, remote_address, iface_name, user_data
 PROXY_GROUP_NON_BLOCKING(bt_ipsp_connection_state_changed_cb, int result, bool connected, const char* remote_address, const char* iface_name, void* user_data)
@@ -666,12 +618,6 @@ typedef void (*bt_ipsp_init_state_changed_cb)(int result, bool ipsp_initialized,
 #define CB_PARAMS_NAMES result, ipsp_initialized, user_data
 PROXY_GROUP_NON_BLOCKING(bt_ipsp_init_state_changed_cb, int result, bool ipsp_initialized, void* user_data)
 PROXY_GROUP_BLOCKING(bt_ipsp_init_state_changed_cb, int result, bool ipsp_initialized, void* user_data)
-#undef CB_PARAMS_NAMES
-
-typedef void (*bt_nap_connection_state_changed_cb)(bool connected, const char* remote_address, const char* interface_name, void* user_data);
-#define CB_PARAMS_NAMES connected, remote_address, interface_name, user_data
-PROXY_GROUP_NON_BLOCKING(bt_nap_connection_state_changed_cb, bool connected, const char* remote_address, const char* interface_name, void* user_data)
-PROXY_GROUP_BLOCKING(bt_nap_connection_state_changed_cb, bool connected, const char* remote_address, const char* interface_name, void* user_data)
 #undef CB_PARAMS_NAMES
 
 typedef void (*bt_opp_client_push_finished_cb)(int result, const char* remote_address, void* user_data);
@@ -708,12 +654,6 @@ typedef void (*bt_opp_server_transfer_progress_cb)(const char* file, long long s
 #define CB_PARAMS_NAMES file, size, percent, user_data
 PROXY_GROUP_NON_BLOCKING(bt_opp_server_transfer_progress_cb, const char* file, long long size, int percent, void* user_data)
 PROXY_GROUP_BLOCKING(bt_opp_server_transfer_progress_cb, const char* file, long long size, int percent, void* user_data)
-#undef CB_PARAMS_NAMES
-
-typedef void (*bt_panu_connection_state_changed_cb)(int result, bool connected, const char* remote_address, some_enum type, void* user_data);
-#define CB_PARAMS_NAMES result, connected, remote_address, type, user_data
-PROXY_GROUP_NON_BLOCKING(bt_panu_connection_state_changed_cb, int result, bool connected, const char* remote_address, some_enum type, void* user_data)
-PROXY_GROUP_BLOCKING(bt_panu_connection_state_changed_cb, int result, bool connected, const char* remote_address, some_enum type, void* user_data)
 #undef CB_PARAMS_NAMES
 
 typedef void (*bt_pbap_connection_state_changed_cb)(int result, bool connected, const char* remote_address, void* user_data);
@@ -1070,16 +1010,6 @@ typedef void (*cion_server_payload_received_cb)(const char* service_name, const 
 #define CB_PARAMS_NAMES service_name, peer_info, payload, status, user_data
 PROXY_GROUP_NON_BLOCKING(cion_server_payload_received_cb, const char* service_name, const void* peer_info, const void* payload, some_enum status, void* user_data)
 PROXY_GROUP_BLOCKING(cion_server_payload_received_cb, const char* service_name, const void* peer_info, const void* payload, some_enum status, void* user_data)
-#undef CB_PARAMS_NAMES
-
-typedef bool (*component_manager_component_context_cb)(void* handle, void* user_data);
-#define CB_PARAMS_NAMES handle, user_data
-PROXY_GROUP_RETURN(component_manager_component_context_cb, bool, void* handle, void* user_data)
-#undef CB_PARAMS_NAMES
-
-typedef bool (*component_manager_component_info_cb)(void* handle, void* user_data);
-#define CB_PARAMS_NAMES handle, user_data
-PROXY_GROUP_RETURN(component_manager_component_info_cb, bool, void* handle, void* user_data)
 #undef CB_PARAMS_NAMES
 
 typedef void (*connection_address_changed_cb)(const char* ipv4_address, const char* ipv6_address, void* user_data);
@@ -1580,11 +1510,6 @@ PROXY_GROUP_BLOCKING(image_util_encode_to_file_completed_cb, some_enum error_cod
 typedef bool (*image_util_supported_colorspace_cb)(some_enum colorspace, void* user_data);
 #define CB_PARAMS_NAMES colorspace, user_data
 PROXY_GROUP_RETURN(image_util_supported_colorspace_cb, bool, some_enum colorspace, void* user_data)
-#undef CB_PARAMS_NAMES
-
-typedef bool (*image_util_supported_jpeg_colorspace_cb)(some_enum colorspace, void* user_data);
-#define CB_PARAMS_NAMES colorspace, user_data
-PROXY_GROUP_RETURN(image_util_supported_jpeg_colorspace_cb, bool, some_enum colorspace, void* user_data)
 #undef CB_PARAMS_NAMES
 
 typedef void (*image_util_transform_completed2_cb)(void* dst, int error_code, void* user_data);
@@ -2656,7 +2581,7 @@ typedef int (*ml_custom_easy_invoke_cb)(const void* in, void* out, void* user_da
 PROXY_GROUP_RETURN(ml_custom_easy_invoke_cb, int, const void* in, void* out, void* user_data)
 #undef CB_PARAMS_NAMES
 
-#define BASE_CALLBACK_ID_ml_data_destroy_cb 10
+#define BASE_CALLBACK_ID_ml_data_destroy_cb 0
 typedef void (*ml_data_destroy_cb)(void* data);
 #define CB_PARAMS_NAMES data
 PROXY_GROUP_NON_BLOCKING_NO_USER_DATA(ml_data_destroy_cb, void* data)
@@ -2811,167 +2736,6 @@ PROXY_GROUP_RETURN(mv_surveillance_event_result_name_cb, bool, const char* name,
 typedef bool (*mv_surveillance_event_type_cb)(const char* event_type, void* user_data);
 #define CB_PARAMS_NAMES event_type, user_data
 PROXY_GROUP_RETURN(mv_surveillance_event_type_cb, bool, const char* event_type, void* user_data)
-#undef CB_PARAMS_NAMES
-
-typedef void (*nfc_activation_changed_cb)(bool activated, void* user_data);
-#define CB_PARAMS_NAMES activated, user_data
-PROXY_GROUP_NON_BLOCKING(nfc_activation_changed_cb, bool activated, void* user_data)
-PROXY_GROUP_BLOCKING(nfc_activation_changed_cb, bool activated, void* user_data)
-#undef CB_PARAMS_NAMES
-
-typedef void (*nfc_activation_completed_cb)(some_enum error, void* user_data);
-#define CB_PARAMS_NAMES error, user_data
-PROXY_GROUP_NON_BLOCKING(nfc_activation_completed_cb, some_enum error, void* user_data)
-PROXY_GROUP_BLOCKING(nfc_activation_completed_cb, some_enum error, void* user_data)
-#undef CB_PARAMS_NAMES
-
-typedef void (*nfc_hce_event_cb)(void* handle, some_enum event, unsigned char* apdu, unsigned int apdu_len, void* user_data);
-#define CB_PARAMS_NAMES handle, event, apdu, apdu_len, user_data
-PROXY_GROUP_NON_BLOCKING(nfc_hce_event_cb, void* handle, some_enum event, unsigned char* apdu, unsigned int apdu_len, void* user_data)
-PROXY_GROUP_BLOCKING(nfc_hce_event_cb, void* handle, some_enum event, unsigned char* apdu, unsigned int apdu_len, void* user_data)
-#undef CB_PARAMS_NAMES
-
-typedef void (*nfc_mifare_authenticate_with_keyA_completed_cb)(some_enum result, void* user_data);
-#define CB_PARAMS_NAMES result, user_data
-PROXY_GROUP_NON_BLOCKING(nfc_mifare_authenticate_with_keyA_completed_cb, some_enum result, void* user_data)
-PROXY_GROUP_BLOCKING(nfc_mifare_authenticate_with_keyA_completed_cb, some_enum result, void* user_data)
-#undef CB_PARAMS_NAMES
-
-typedef void (*nfc_mifare_authenticate_with_keyB_completed_cb)(some_enum result, void* user_data);
-#define CB_PARAMS_NAMES result, user_data
-PROXY_GROUP_NON_BLOCKING(nfc_mifare_authenticate_with_keyB_completed_cb, some_enum result, void* user_data)
-PROXY_GROUP_BLOCKING(nfc_mifare_authenticate_with_keyB_completed_cb, some_enum result, void* user_data)
-#undef CB_PARAMS_NAMES
-
-typedef void (*nfc_mifare_decrement_completed_cb)(some_enum result, void* user_data);
-#define CB_PARAMS_NAMES result, user_data
-PROXY_GROUP_NON_BLOCKING(nfc_mifare_decrement_completed_cb, some_enum result, void* user_data)
-PROXY_GROUP_BLOCKING(nfc_mifare_decrement_completed_cb, some_enum result, void* user_data)
-#undef CB_PARAMS_NAMES
-
-typedef void (*nfc_mifare_increment_completed_cb)(some_enum result, void* user_data);
-#define CB_PARAMS_NAMES result, user_data
-PROXY_GROUP_NON_BLOCKING(nfc_mifare_increment_completed_cb, some_enum result, void* user_data)
-PROXY_GROUP_BLOCKING(nfc_mifare_increment_completed_cb, some_enum result, void* user_data)
-#undef CB_PARAMS_NAMES
-
-typedef void (*nfc_mifare_read_block_completed_cb)(some_enum result, unsigned char* buffer, int bufer_size, void* user_data);
-#define CB_PARAMS_NAMES result, buffer, bufer_size, user_data
-PROXY_GROUP_NON_BLOCKING(nfc_mifare_read_block_completed_cb, some_enum result, unsigned char* buffer, int bufer_size, void* user_data)
-PROXY_GROUP_BLOCKING(nfc_mifare_read_block_completed_cb, some_enum result, unsigned char* buffer, int bufer_size, void* user_data)
-#undef CB_PARAMS_NAMES
-
-typedef void (*nfc_mifare_read_page_completed_cb)(some_enum result, unsigned char* buffer, int bufer_size, void* user_data);
-#define CB_PARAMS_NAMES result, buffer, bufer_size, user_data
-PROXY_GROUP_NON_BLOCKING(nfc_mifare_read_page_completed_cb, some_enum result, unsigned char* buffer, int bufer_size, void* user_data)
-PROXY_GROUP_BLOCKING(nfc_mifare_read_page_completed_cb, some_enum result, unsigned char* buffer, int bufer_size, void* user_data)
-#undef CB_PARAMS_NAMES
-
-typedef void (*nfc_mifare_restore_completed_cb)(some_enum result, void* user_data);
-#define CB_PARAMS_NAMES result, user_data
-PROXY_GROUP_NON_BLOCKING(nfc_mifare_restore_completed_cb, some_enum result, void* user_data)
-PROXY_GROUP_BLOCKING(nfc_mifare_restore_completed_cb, some_enum result, void* user_data)
-#undef CB_PARAMS_NAMES
-
-typedef void (*nfc_mifare_transfer_completed_cb)(some_enum result, void* user_data);
-#define CB_PARAMS_NAMES result, user_data
-PROXY_GROUP_NON_BLOCKING(nfc_mifare_transfer_completed_cb, some_enum result, void* user_data)
-PROXY_GROUP_BLOCKING(nfc_mifare_transfer_completed_cb, some_enum result, void* user_data)
-#undef CB_PARAMS_NAMES
-
-typedef void (*nfc_mifare_write_block_completed_cb)(some_enum result, void* user_data);
-#define CB_PARAMS_NAMES result, user_data
-PROXY_GROUP_NON_BLOCKING(nfc_mifare_write_block_completed_cb, some_enum result, void* user_data)
-PROXY_GROUP_BLOCKING(nfc_mifare_write_block_completed_cb, some_enum result, void* user_data)
-#undef CB_PARAMS_NAMES
-
-typedef void (*nfc_mifare_write_page_completed_cb)(some_enum result, void* user_data);
-#define CB_PARAMS_NAMES result, user_data
-PROXY_GROUP_NON_BLOCKING(nfc_mifare_write_page_completed_cb, some_enum result, void* user_data)
-PROXY_GROUP_BLOCKING(nfc_mifare_write_page_completed_cb, some_enum result, void* user_data)
-#undef CB_PARAMS_NAMES
-
-typedef void (*nfc_ndef_discovered_cb)(void* message, void* user_data);
-#define CB_PARAMS_NAMES message, user_data
-PROXY_GROUP_NON_BLOCKING(nfc_ndef_discovered_cb, void* message, void* user_data)
-PROXY_GROUP_BLOCKING(nfc_ndef_discovered_cb, void* message, void* user_data)
-#undef CB_PARAMS_NAMES
-
-typedef void (*nfc_p2p_data_received_cb)(void* target, void* message, void* user_data);
-#define CB_PARAMS_NAMES target, message, user_data
-PROXY_GROUP_NON_BLOCKING(nfc_p2p_data_received_cb, void* target, void* message, void* user_data)
-PROXY_GROUP_BLOCKING(nfc_p2p_data_received_cb, void* target, void* message, void* user_data)
-#undef CB_PARAMS_NAMES
-
-typedef void (*nfc_p2p_send_completed_cb)(some_enum result, void* user_data);
-#define CB_PARAMS_NAMES result, user_data
-PROXY_GROUP_NON_BLOCKING(nfc_p2p_send_completed_cb, some_enum result, void* user_data)
-PROXY_GROUP_BLOCKING(nfc_p2p_send_completed_cb, some_enum result, void* user_data)
-#undef CB_PARAMS_NAMES
-
-typedef void (*nfc_p2p_target_discovered_cb)(some_enum type, void* target, void* user_data);
-#define CB_PARAMS_NAMES type, target, user_data
-PROXY_GROUP_NON_BLOCKING(nfc_p2p_target_discovered_cb, some_enum type, void* target, void* user_data)
-PROXY_GROUP_BLOCKING(nfc_p2p_target_discovered_cb, some_enum type, void* target, void* user_data)
-#undef CB_PARAMS_NAMES
-
-typedef void (*nfc_se_event_cb)(some_enum event, void* user_data);
-#define CB_PARAMS_NAMES event, user_data
-PROXY_GROUP_NON_BLOCKING(nfc_se_event_cb, some_enum event, void* user_data)
-PROXY_GROUP_BLOCKING(nfc_se_event_cb, some_enum event, void* user_data)
-#undef CB_PARAMS_NAMES
-
-typedef void (*nfc_se_registered_aid_cb)(some_enum se_type, const char* aid, bool read_only, void* user_data);
-#define CB_PARAMS_NAMES se_type, aid, read_only, user_data
-PROXY_GROUP_NON_BLOCKING(nfc_se_registered_aid_cb, some_enum se_type, const char* aid, bool read_only, void* user_data)
-PROXY_GROUP_BLOCKING(nfc_se_registered_aid_cb, some_enum se_type, const char* aid, bool read_only, void* user_data)
-#undef CB_PARAMS_NAMES
-
-typedef void (*nfc_se_transaction_event_cb)(some_enum se_type, unsigned char* aid, int aid_size, unsigned char* param, int param_size, void* user_data);
-#define CB_PARAMS_NAMES se_type, aid, aid_size, param, param_size, user_data
-PROXY_GROUP_NON_BLOCKING(nfc_se_transaction_event_cb, some_enum se_type, unsigned char* aid, int aid_size, unsigned char* param, int param_size, void* user_data)
-PROXY_GROUP_BLOCKING(nfc_se_transaction_event_cb, some_enum se_type, unsigned char* aid, int aid_size, unsigned char* param, int param_size, void* user_data)
-#undef CB_PARAMS_NAMES
-
-typedef void (*nfc_snep_event_cb)(void* handle, some_enum event, some_enum result, void* msg, void* user_data);
-#define CB_PARAMS_NAMES handle, event, result, msg, user_data
-PROXY_GROUP_NON_BLOCKING(nfc_snep_event_cb, void* handle, some_enum event, some_enum result, void* msg, void* user_data)
-PROXY_GROUP_BLOCKING(nfc_snep_event_cb, void* handle, some_enum event, some_enum result, void* msg, void* user_data)
-#undef CB_PARAMS_NAMES
-
-typedef void (*nfc_tag_discovered_cb)(some_enum type, void* tag, void* user_data);
-#define CB_PARAMS_NAMES type, tag, user_data
-PROXY_GROUP_NON_BLOCKING(nfc_tag_discovered_cb, some_enum type, void* tag, void* user_data)
-PROXY_GROUP_BLOCKING(nfc_tag_discovered_cb, some_enum type, void* tag, void* user_data)
-#undef CB_PARAMS_NAMES
-
-typedef void (*nfc_tag_format_completed_cb)(some_enum result, void* user_data);
-#define CB_PARAMS_NAMES result, user_data
-PROXY_GROUP_NON_BLOCKING(nfc_tag_format_completed_cb, some_enum result, void* user_data)
-PROXY_GROUP_BLOCKING(nfc_tag_format_completed_cb, some_enum result, void* user_data)
-#undef CB_PARAMS_NAMES
-
-typedef bool (*nfc_tag_information_cb)(const char* key, const unsigned char* value, int value_size, void* user_data);
-#define CB_PARAMS_NAMES key, value, value_size, user_data
-PROXY_GROUP_RETURN(nfc_tag_information_cb, bool, const char* key, const unsigned char* value, int value_size, void* user_data)
-#undef CB_PARAMS_NAMES
-
-typedef void (*nfc_tag_read_completed_cb)(some_enum result, void* message, void* user_data);
-#define CB_PARAMS_NAMES result, message, user_data
-PROXY_GROUP_NON_BLOCKING(nfc_tag_read_completed_cb, some_enum result, void* message, void* user_data)
-PROXY_GROUP_BLOCKING(nfc_tag_read_completed_cb, some_enum result, void* message, void* user_data)
-#undef CB_PARAMS_NAMES
-
-typedef void (*nfc_tag_transceive_completed_cb)(some_enum result, unsigned char* buffer, int buffer_size, void* user_data);
-#define CB_PARAMS_NAMES result, buffer, buffer_size, user_data
-PROXY_GROUP_NON_BLOCKING(nfc_tag_transceive_completed_cb, some_enum result, unsigned char* buffer, int buffer_size, void* user_data)
-PROXY_GROUP_BLOCKING(nfc_tag_transceive_completed_cb, some_enum result, unsigned char* buffer, int buffer_size, void* user_data)
-#undef CB_PARAMS_NAMES
-
-typedef void (*nfc_tag_write_completed_cb)(some_enum result, void* user_data);
-#define CB_PARAMS_NAMES result, user_data
-PROXY_GROUP_NON_BLOCKING(nfc_tag_write_completed_cb, some_enum result, void* user_data)
-PROXY_GROUP_BLOCKING(nfc_tag_write_completed_cb, some_enum result, void* user_data)
 #undef CB_PARAMS_NAMES
 
 typedef int (*noti_ex_item_group_foreach_child_cb)(void* handle, void* user_data);
@@ -3362,7 +3126,7 @@ typedef int (*result_cb)(int ret, void* user_data);
 PROXY_GROUP_RETURN(result_cb, int, int ret, void* user_data)
 #undef CB_PARAMS_NAMES
 
-#define BASE_CALLBACK_ID_result_cb_t 15
+#define BASE_CALLBACK_ID_result_cb_t 5
 typedef int (*result_cb_t)(int ret, void* data);
 #define CB_PARAMS_NAMES ret, data
 PROXY_GROUP_RETURN_NO_USER_DATA(result_cb_t, int, int ret, void* data)
@@ -3777,17 +3541,17 @@ typedef int (*stte_audio_type_cb)(const char* audio_type, void* user_data);
 PROXY_GROUP_RETURN(stte_audio_type_cb, int, const char* audio_type, void* user_data)
 #undef CB_PARAMS_NAMES
 
-#define BASE_CALLBACK_ID_stte_cancel_cb 20
+#define BASE_CALLBACK_ID_stte_cancel_cb 10
 typedef int (*stte_cancel_cb)();
 PROXY_GROUP_RETURN_NO_USER_DATA_NO_PARAM(stte_cancel_cb, int)
 
-#define BASE_CALLBACK_ID_stte_check_app_agreed_cb 25
+#define BASE_CALLBACK_ID_stte_check_app_agreed_cb 15
 typedef int (*stte_check_app_agreed_cb)(const char* appid, bool* is_agreed);
 #define CB_PARAMS_NAMES appid, is_agreed
 PROXY_GROUP_RETURN_NO_USER_DATA(stte_check_app_agreed_cb, int, const char* appid, bool* is_agreed)
 #undef CB_PARAMS_NAMES
 
-#define BASE_CALLBACK_ID_stte_deinitialize_cb 30
+#define BASE_CALLBACK_ID_stte_deinitialize_cb 20
 typedef int (*stte_deinitialize_cb)();
 PROXY_GROUP_RETURN_NO_USER_DATA_NO_PARAM(stte_deinitialize_cb, int)
 
@@ -3801,39 +3565,39 @@ typedef int (*stte_foreach_supported_langs_cb)(void* callback, void* user_data);
 PROXY_GROUP_RETURN(stte_foreach_supported_langs_cb, int, void* callback, void* user_data)
 #undef CB_PARAMS_NAMES
 
-#define BASE_CALLBACK_ID_stte_get_info_cb 35
+#define BASE_CALLBACK_ID_stte_get_info_cb 25
 typedef int (*stte_get_info_cb)(char** engine_uuid, char** engine_name, char** engine_setting, bool* use_network);
 #define CB_PARAMS_NAMES engine_uuid, engine_name, engine_setting, use_network
 PROXY_GROUP_RETURN_NO_USER_DATA(stte_get_info_cb, int, char** engine_uuid, char** engine_name, char** engine_setting, bool* use_network)
 #undef CB_PARAMS_NAMES
 
-#define BASE_CALLBACK_ID_stte_get_recording_format_cb 40
+#define BASE_CALLBACK_ID_stte_get_recording_format_cb 30
 typedef int (*stte_get_recording_format_cb)(void* types, int* rate, int* channels);
 #define CB_PARAMS_NAMES types, rate, channels
 PROXY_GROUP_RETURN_NO_USER_DATA(stte_get_recording_format_cb, int, void* types, int* rate, int* channels)
 #undef CB_PARAMS_NAMES
 
-#define BASE_CALLBACK_ID_stte_initialize_cb 45
+#define BASE_CALLBACK_ID_stte_initialize_cb 35
 typedef int (*stte_initialize_cb)();
 PROXY_GROUP_RETURN_NO_USER_DATA_NO_PARAM(stte_initialize_cb, int)
 
-#define BASE_CALLBACK_ID_stte_is_valid_language_cb 50
+#define BASE_CALLBACK_ID_stte_is_valid_language_cb 40
 typedef int (*stte_is_valid_language_cb)(const char* language, bool* is_valid);
 #define CB_PARAMS_NAMES language, is_valid
 PROXY_GROUP_RETURN_NO_USER_DATA(stte_is_valid_language_cb, int, const char* language, bool* is_valid)
 #undef CB_PARAMS_NAMES
 
-#define BASE_CALLBACK_ID_stte_need_app_credential_cb 55
+#define BASE_CALLBACK_ID_stte_need_app_credential_cb 45
 typedef bool (*stte_need_app_credential_cb)();
 PROXY_GROUP_RETURN_NO_USER_DATA_NO_PARAM(stte_need_app_credential_cb, bool)
 
-#define BASE_CALLBACK_ID_stte_private_data_requested_cb 60
+#define BASE_CALLBACK_ID_stte_private_data_requested_cb 50
 typedef int (*stte_private_data_requested_cb)(const char* key, char** data);
 #define CB_PARAMS_NAMES key, data
 PROXY_GROUP_RETURN_NO_USER_DATA(stte_private_data_requested_cb, int, const char* key, char** data)
 #undef CB_PARAMS_NAMES
 
-#define BASE_CALLBACK_ID_stte_private_data_set_cb 65
+#define BASE_CALLBACK_ID_stte_private_data_set_cb 55
 typedef int (*stte_private_data_set_cb)(const char* key, const char* data);
 #define CB_PARAMS_NAMES key, data
 PROXY_GROUP_RETURN_NO_USER_DATA(stte_private_data_set_cb, int, const char* key, const char* data)
@@ -3844,13 +3608,13 @@ typedef bool (*stte_result_time_cb)(int index, some_enum event, const char* text
 PROXY_GROUP_RETURN(stte_result_time_cb, bool, int index, some_enum event, const char* text, long start_time, long end_time, void* user_data)
 #undef CB_PARAMS_NAMES
 
-#define BASE_CALLBACK_ID_stte_set_recording_data_cb 70
+#define BASE_CALLBACK_ID_stte_set_recording_data_cb 60
 typedef int (*stte_set_recording_data_cb)(const void* data, unsigned int length);
 #define CB_PARAMS_NAMES data, length
 PROXY_GROUP_RETURN_NO_USER_DATA(stte_set_recording_data_cb, int, const void* data, unsigned int length)
 #undef CB_PARAMS_NAMES
 
-#define BASE_CALLBACK_ID_stte_set_silence_detection_cb 75
+#define BASE_CALLBACK_ID_stte_set_silence_detection_cb 65
 typedef int (*stte_set_silence_detection_cb)(bool is_set);
 #define CB_PARAMS_NAMES is_set
 PROXY_GROUP_RETURN_NO_USER_DATA(stte_set_silence_detection_cb, int, bool is_set)
@@ -3861,17 +3625,17 @@ typedef int (*stte_start_cb)(const char* language, const char* type, const char*
 PROXY_GROUP_RETURN(stte_start_cb, int, const char* language, const char* type, const char* appid, const char* credential, void* user_data)
 #undef CB_PARAMS_NAMES
 
-#define BASE_CALLBACK_ID_stte_stop_cb 80
+#define BASE_CALLBACK_ID_stte_stop_cb 70
 typedef int (*stte_stop_cb)();
 PROXY_GROUP_RETURN_NO_USER_DATA_NO_PARAM(stte_stop_cb, int)
 
-#define BASE_CALLBACK_ID_stte_support_recognition_type_cb 85
+#define BASE_CALLBACK_ID_stte_support_recognition_type_cb 75
 typedef int (*stte_support_recognition_type_cb)(const char* type, bool* is_supported);
 #define CB_PARAMS_NAMES type, is_supported
 PROXY_GROUP_RETURN_NO_USER_DATA(stte_support_recognition_type_cb, int, const char* type, bool* is_supported)
 #undef CB_PARAMS_NAMES
 
-#define BASE_CALLBACK_ID_stte_support_silence_detection_cb 90
+#define BASE_CALLBACK_ID_stte_support_silence_detection_cb 80
 typedef bool (*stte_support_silence_detection_cb)();
 PROXY_GROUP_RETURN_NO_USER_DATA_NO_PARAM(stte_support_silence_detection_cb, bool)
 
@@ -3880,14 +3644,14 @@ typedef bool (*stte_supported_language_cb)(const char* language, void* user_data
 PROXY_GROUP_RETURN(stte_supported_language_cb, bool, const char* language, void* user_data)
 #undef CB_PARAMS_NAMES
 
-#define BASE_CALLBACK_ID_sync_adapter_cancel_sync_cb 95
+#define BASE_CALLBACK_ID_sync_adapter_cancel_sync_cb 85
 typedef void (*sync_adapter_cancel_sync_cb)(void* account, const char* sync_job_name, const char* sync_capability, void* sync_job_user_data);
 #define CB_PARAMS_NAMES account, sync_job_name, sync_capability, sync_job_user_data
 PROXY_GROUP_NON_BLOCKING_NO_USER_DATA(sync_adapter_cancel_sync_cb, void* account, const char* sync_job_name, const char* sync_capability, void* sync_job_user_data)
 PROXY_GROUP_BLOCKING_NO_USER_DATA(sync_adapter_cancel_sync_cb, void* account, const char* sync_job_name, const char* sync_capability, void* sync_job_user_data)
 #undef CB_PARAMS_NAMES
 
-#define BASE_CALLBACK_ID_sync_adapter_start_sync_cb 100
+#define BASE_CALLBACK_ID_sync_adapter_start_sync_cb 90
 typedef bool (*sync_adapter_start_sync_cb)(void* account, const char* sync_job_name, const char* sync_capability, void* sync_job_user_data);
 #define CB_PARAMS_NAMES account, sync_job_name, sync_capability, sync_job_user_data
 PROXY_GROUP_RETURN_NO_USER_DATA(sync_adapter_start_sync_cb, bool, void* account, const char* sync_job_name, const char* sync_capability, void* sync_job_user_data)
@@ -3980,24 +3744,24 @@ PROXY_GROUP_NON_BLOCKING(tts_utterance_started_cb, void* tts, int utt_id, void* 
 PROXY_GROUP_BLOCKING(tts_utterance_started_cb, void* tts, int utt_id, void* user_data)
 #undef CB_PARAMS_NAMES
 
-#define BASE_CALLBACK_ID_ttse_activated_mode_changed_cb 105
+#define BASE_CALLBACK_ID_ttse_activated_mode_changed_cb 95
 typedef void (*ttse_activated_mode_changed_cb)(int activated_mode);
 #define CB_PARAMS_NAMES activated_mode
 PROXY_GROUP_NON_BLOCKING_NO_USER_DATA(ttse_activated_mode_changed_cb, int activated_mode)
 PROXY_GROUP_BLOCKING_NO_USER_DATA(ttse_activated_mode_changed_cb, int activated_mode)
 #undef CB_PARAMS_NAMES
 
-#define BASE_CALLBACK_ID_ttse_cancel_synthesis_cb 110
+#define BASE_CALLBACK_ID_ttse_cancel_synthesis_cb 100
 typedef int (*ttse_cancel_synthesis_cb)();
 PROXY_GROUP_RETURN_NO_USER_DATA_NO_PARAM(ttse_cancel_synthesis_cb, int)
 
-#define BASE_CALLBACK_ID_ttse_check_app_agreed_cb 115
+#define BASE_CALLBACK_ID_ttse_check_app_agreed_cb 105
 typedef int (*ttse_check_app_agreed_cb)(const char* appid, bool* is_agreed);
 #define CB_PARAMS_NAMES appid, is_agreed
 PROXY_GROUP_RETURN_NO_USER_DATA(ttse_check_app_agreed_cb, int, const char* appid, bool* is_agreed)
 #undef CB_PARAMS_NAMES
 
-#define BASE_CALLBACK_ID_ttse_deinitialize_cb 120
+#define BASE_CALLBACK_ID_ttse_deinitialize_cb 110
 typedef int (*ttse_deinitialize_cb)();
 PROXY_GROUP_RETURN_NO_USER_DATA_NO_PARAM(ttse_deinitialize_cb, int)
 
@@ -4006,45 +3770,45 @@ typedef int (*ttse_foreach_supported_voices_cb)(void* callback, void* user_data)
 PROXY_GROUP_RETURN(ttse_foreach_supported_voices_cb, int, void* callback, void* user_data)
 #undef CB_PARAMS_NAMES
 
-#define BASE_CALLBACK_ID_ttse_get_info_cb 125
+#define BASE_CALLBACK_ID_ttse_get_info_cb 115
 typedef int (*ttse_get_info_cb)(char** engine_uuid, char** engine_name, char** engine_setting, bool* use_network);
 #define CB_PARAMS_NAMES engine_uuid, engine_name, engine_setting, use_network
 PROXY_GROUP_RETURN_NO_USER_DATA(ttse_get_info_cb, int, char** engine_uuid, char** engine_name, char** engine_setting, bool* use_network)
 #undef CB_PARAMS_NAMES
 
-#define BASE_CALLBACK_ID_ttse_initialize_cb 130
+#define BASE_CALLBACK_ID_ttse_initialize_cb 120
 typedef int (*ttse_initialize_cb)();
 PROXY_GROUP_RETURN_NO_USER_DATA_NO_PARAM(ttse_initialize_cb, int)
 
-#define BASE_CALLBACK_ID_ttse_is_valid_voice_cb 135
+#define BASE_CALLBACK_ID_ttse_is_valid_voice_cb 125
 typedef int (*ttse_is_valid_voice_cb)(const char* language, int type, bool* is_valid);
 #define CB_PARAMS_NAMES language, type, is_valid
 PROXY_GROUP_RETURN_NO_USER_DATA(ttse_is_valid_voice_cb, int, const char* language, int type, bool* is_valid)
 #undef CB_PARAMS_NAMES
 
-#define BASE_CALLBACK_ID_ttse_load_voice_cb 140
+#define BASE_CALLBACK_ID_ttse_load_voice_cb 130
 typedef int (*ttse_load_voice_cb)(const char* language, int type);
 #define CB_PARAMS_NAMES language, type
 PROXY_GROUP_RETURN_NO_USER_DATA(ttse_load_voice_cb, int, const char* language, int type)
 #undef CB_PARAMS_NAMES
 
-#define BASE_CALLBACK_ID_ttse_need_app_credential_cb 145
+#define BASE_CALLBACK_ID_ttse_need_app_credential_cb 135
 typedef bool (*ttse_need_app_credential_cb)();
 PROXY_GROUP_RETURN_NO_USER_DATA_NO_PARAM(ttse_need_app_credential_cb, bool)
 
-#define BASE_CALLBACK_ID_ttse_private_data_requested_cb 150
+#define BASE_CALLBACK_ID_ttse_private_data_requested_cb 140
 typedef int (*ttse_private_data_requested_cb)(const char* key, char** data);
 #define CB_PARAMS_NAMES key, data
 PROXY_GROUP_RETURN_NO_USER_DATA(ttse_private_data_requested_cb, int, const char* key, char** data)
 #undef CB_PARAMS_NAMES
 
-#define BASE_CALLBACK_ID_ttse_private_data_set_cb 155
+#define BASE_CALLBACK_ID_ttse_private_data_set_cb 145
 typedef int (*ttse_private_data_set_cb)(const char* key, const char* data);
 #define CB_PARAMS_NAMES key, data
 PROXY_GROUP_RETURN_NO_USER_DATA(ttse_private_data_set_cb, int, const char* key, const char* data)
 #undef CB_PARAMS_NAMES
 
-#define BASE_CALLBACK_ID_ttse_set_pitch_cb 160
+#define BASE_CALLBACK_ID_ttse_set_pitch_cb 150
 typedef int (*ttse_set_pitch_cb)(int pitch);
 #define CB_PARAMS_NAMES pitch
 PROXY_GROUP_RETURN_NO_USER_DATA(ttse_set_pitch_cb, int, int pitch)
@@ -4060,7 +3824,7 @@ typedef bool (*ttse_supported_voice_cb)(const char* language, int type, void* us
 PROXY_GROUP_RETURN(ttse_supported_voice_cb, bool, const char* language, int type, void* user_data)
 #undef CB_PARAMS_NAMES
 
-#define BASE_CALLBACK_ID_ttse_unload_voice_cb 165
+#define BASE_CALLBACK_ID_ttse_unload_voice_cb 155
 typedef int (*ttse_unload_voice_cb)(const char* language, int type);
 #define CB_PARAMS_NAMES language, type
 PROXY_GROUP_RETURN_NO_USER_DATA(ttse_unload_voice_cb, int, const char* language, int type)
@@ -4135,7 +3899,7 @@ PROXY_GROUP_NON_BLOCKING(vc_mgr_vc_tts_streaming_cb, int pid, int utt_id, some_e
 PROXY_GROUP_BLOCKING(vc_mgr_vc_tts_streaming_cb, int pid, int utt_id, some_enum event, char* buffer, int len, void* user_data)
 #undef CB_PARAMS_NAMES
 
-#define BASE_CALLBACK_ID_vce_cancel_cb 170
+#define BASE_CALLBACK_ID_vce_cancel_cb 160
 typedef int (*vce_cancel_cb)();
 PROXY_GROUP_RETURN_NO_USER_DATA_NO_PARAM(vce_cancel_cb, int)
 
@@ -4149,7 +3913,7 @@ typedef bool (*vce_command_cb)(int id, int type, int format, const char* command
 PROXY_GROUP_RETURN(vce_command_cb, bool, int id, int type, int format, const char* command, const char* param, int domain, void* user_data)
 #undef CB_PARAMS_NAMES
 
-#define BASE_CALLBACK_ID_vce_deinitialize_cb 175
+#define BASE_CALLBACK_ID_vce_deinitialize_cb 165
 typedef int (*vce_deinitialize_cb)();
 PROXY_GROUP_RETURN_NO_USER_DATA_NO_PARAM(vce_deinitialize_cb, int)
 
@@ -4158,59 +3922,59 @@ typedef int (*vce_foreach_supported_languages_cb)(void* callback, void* user_dat
 PROXY_GROUP_RETURN(vce_foreach_supported_languages_cb, int, void* callback, void* user_data)
 #undef CB_PARAMS_NAMES
 
-#define BASE_CALLBACK_ID_vce_get_info_cb 180
+#define BASE_CALLBACK_ID_vce_get_info_cb 170
 typedef int (*vce_get_info_cb)(char** engine_uuid, char** engine_name, char** engine_settings_app_id, bool* use_network);
 #define CB_PARAMS_NAMES engine_uuid, engine_name, engine_settings_app_id, use_network
 PROXY_GROUP_RETURN_NO_USER_DATA(vce_get_info_cb, int, char** engine_uuid, char** engine_name, char** engine_settings_app_id, bool* use_network)
 #undef CB_PARAMS_NAMES
 
-#define BASE_CALLBACK_ID_vce_get_recording_format_cb 185
+#define BASE_CALLBACK_ID_vce_get_recording_format_cb 175
 typedef int (*vce_get_recording_format_cb)(const char* audio_id, void* types, int* rate, int* channels);
 #define CB_PARAMS_NAMES audio_id, types, rate, channels
 PROXY_GROUP_RETURN_NO_USER_DATA(vce_get_recording_format_cb, int, const char* audio_id, void* types, int* rate, int* channels)
 #undef CB_PARAMS_NAMES
 
-#define BASE_CALLBACK_ID_vce_initialize_cb 190
+#define BASE_CALLBACK_ID_vce_initialize_cb 180
 typedef int (*vce_initialize_cb)();
 PROXY_GROUP_RETURN_NO_USER_DATA_NO_PARAM(vce_initialize_cb, int)
 
-#define BASE_CALLBACK_ID_vce_is_language_supported_cb 195
+#define BASE_CALLBACK_ID_vce_is_language_supported_cb 185
 typedef bool (*vce_is_language_supported_cb)(const char* language);
 #define CB_PARAMS_NAMES language
 PROXY_GROUP_RETURN_NO_USER_DATA(vce_is_language_supported_cb, bool, const char* language)
 #undef CB_PARAMS_NAMES
 
-#define BASE_CALLBACK_ID_vce_nlu_base_info_requested_cb 200
+#define BASE_CALLBACK_ID_vce_nlu_base_info_requested_cb 190
 typedef int (*vce_nlu_base_info_requested_cb)(const char* key, char** value);
 #define CB_PARAMS_NAMES key, value
 PROXY_GROUP_RETURN_NO_USER_DATA(vce_nlu_base_info_requested_cb, int, const char* key, char** value)
 #undef CB_PARAMS_NAMES
 
-#define BASE_CALLBACK_ID_vce_private_data_requested_cb 205
+#define BASE_CALLBACK_ID_vce_private_data_requested_cb 195
 typedef int (*vce_private_data_requested_cb)(const char* key, char** data);
 #define CB_PARAMS_NAMES key, data
 PROXY_GROUP_RETURN_NO_USER_DATA(vce_private_data_requested_cb, int, const char* key, char** data)
 #undef CB_PARAMS_NAMES
 
-#define BASE_CALLBACK_ID_vce_private_data_set_cb 210
+#define BASE_CALLBACK_ID_vce_private_data_set_cb 200
 typedef int (*vce_private_data_set_cb)(const char* key, const char* data);
 #define CB_PARAMS_NAMES key, data
 PROXY_GROUP_RETURN_NO_USER_DATA(vce_private_data_set_cb, int, const char* key, const char* data)
 #undef CB_PARAMS_NAMES
 
-#define BASE_CALLBACK_ID_vce_process_haptic_event_cb 215
+#define BASE_CALLBACK_ID_vce_process_haptic_event_cb 205
 typedef int (*vce_process_haptic_event_cb)(const char* event);
 #define CB_PARAMS_NAMES event
 PROXY_GROUP_RETURN_NO_USER_DATA(vce_process_haptic_event_cb, int, const char* event)
 #undef CB_PARAMS_NAMES
 
-#define BASE_CALLBACK_ID_vce_process_list_event_cb 220
+#define BASE_CALLBACK_ID_vce_process_list_event_cb 210
 typedef int (*vce_process_list_event_cb)(const char* event);
 #define CB_PARAMS_NAMES event
 PROXY_GROUP_RETURN_NO_USER_DATA(vce_process_list_event_cb, int, const char* event)
 #undef CB_PARAMS_NAMES
 
-#define BASE_CALLBACK_ID_vce_process_text_cb 225
+#define BASE_CALLBACK_ID_vce_process_text_cb 215
 typedef int (*vce_process_text_cb)(const char* text);
 #define CB_PARAMS_NAMES text
 PROXY_GROUP_RETURN_NO_USER_DATA(vce_process_text_cb, int, const char* text)
@@ -4221,55 +3985,55 @@ typedef int (*vce_request_tts_cb)(int pid, int utt_id, const char* text, const c
 PROXY_GROUP_RETURN(vce_request_tts_cb, int, int pid, int utt_id, const char* text, const char* language, void* user_data)
 #undef CB_PARAMS_NAMES
 
-#define BASE_CALLBACK_ID_vce_set_audio_type_cb 230
+#define BASE_CALLBACK_ID_vce_set_audio_type_cb 220
 typedef int (*vce_set_audio_type_cb)(const char* audio_type);
 #define CB_PARAMS_NAMES audio_type
 PROXY_GROUP_RETURN_NO_USER_DATA(vce_set_audio_type_cb, int, const char* audio_type)
 #undef CB_PARAMS_NAMES
 
-#define BASE_CALLBACK_ID_vce_set_commands_cb 235
+#define BASE_CALLBACK_ID_vce_set_commands_cb 225
 typedef int (*vce_set_commands_cb)(void* vc_command);
 #define CB_PARAMS_NAMES vc_command
 PROXY_GROUP_RETURN_NO_USER_DATA(vce_set_commands_cb, int, void* vc_command)
 #undef CB_PARAMS_NAMES
 
-#define BASE_CALLBACK_ID_vce_set_domain_cb 240
+#define BASE_CALLBACK_ID_vce_set_domain_cb 230
 typedef int (*vce_set_domain_cb)(const char* domain);
 #define CB_PARAMS_NAMES domain
 PROXY_GROUP_RETURN_NO_USER_DATA(vce_set_domain_cb, int, const char* domain)
 #undef CB_PARAMS_NAMES
 
-#define BASE_CALLBACK_ID_vce_set_language_cb 245
+#define BASE_CALLBACK_ID_vce_set_language_cb 235
 typedef int (*vce_set_language_cb)(const char* language);
 #define CB_PARAMS_NAMES language
 PROXY_GROUP_RETURN_NO_USER_DATA(vce_set_language_cb, int, const char* language)
 #undef CB_PARAMS_NAMES
 
-#define BASE_CALLBACK_ID_vce_set_recording_data_cb 250
+#define BASE_CALLBACK_ID_vce_set_recording_data_cb 240
 typedef int (*vce_set_recording_data_cb)(const void* data, unsigned int length, void* speech_detected);
 #define CB_PARAMS_NAMES data, length, speech_detected
 PROXY_GROUP_RETURN_NO_USER_DATA(vce_set_recording_data_cb, int, const void* data, unsigned int length, void* speech_detected)
 #undef CB_PARAMS_NAMES
 
-#define BASE_CALLBACK_ID_vce_set_server_dialog_cb 255
+#define BASE_CALLBACK_ID_vce_set_server_dialog_cb 245
 typedef int (*vce_set_server_dialog_cb)(const char* app_id, const char* credential);
 #define CB_PARAMS_NAMES app_id, credential
 PROXY_GROUP_RETURN_NO_USER_DATA(vce_set_server_dialog_cb, int, const char* app_id, const char* credential)
 #undef CB_PARAMS_NAMES
 
-#define BASE_CALLBACK_ID_vce_specific_engine_request_cb 260
+#define BASE_CALLBACK_ID_vce_specific_engine_request_cb 250
 typedef int (*vce_specific_engine_request_cb)(const char* engine_app_id, const char* event, const char* request);
 #define CB_PARAMS_NAMES engine_app_id, event, request
 PROXY_GROUP_RETURN_NO_USER_DATA(vce_specific_engine_request_cb, int, const char* engine_app_id, const char* event, const char* request)
 #undef CB_PARAMS_NAMES
 
-#define BASE_CALLBACK_ID_vce_start_cb 265
+#define BASE_CALLBACK_ID_vce_start_cb 255
 typedef int (*vce_start_cb)(bool stop_by_silence);
 #define CB_PARAMS_NAMES stop_by_silence
 PROXY_GROUP_RETURN_NO_USER_DATA(vce_start_cb, int, bool stop_by_silence)
 #undef CB_PARAMS_NAMES
 
-#define BASE_CALLBACK_ID_vce_stop_cb 270
+#define BASE_CALLBACK_ID_vce_stop_cb 260
 typedef int (*vce_stop_cb)();
 PROXY_GROUP_RETURN_NO_USER_DATA_NO_PARAM(vce_stop_cb, int)
 
@@ -4283,14 +4047,9 @@ typedef int (*vce_tts_audio_format_request_cb)(int* rate, int* channel, int* aud
 PROXY_GROUP_RETURN(vce_tts_audio_format_request_cb, int, int* rate, int* channel, int* audio_type, void* user_data)
 #undef CB_PARAMS_NAMES
 
-#define BASE_CALLBACK_ID_vce_unset_commands_cb 275
+#define BASE_CALLBACK_ID_vce_unset_commands_cb 265
 typedef int (*vce_unset_commands_cb)();
 PROXY_GROUP_RETURN_NO_USER_DATA_NO_PARAM(vce_unset_commands_cb, int)
-
-typedef bool (*video_util_progress_transcoding_cb)(some_enum error, unsigned long current_position, unsigned long duration, void* user_data);
-#define CB_PARAMS_NAMES error, current_position, duration, user_data
-PROXY_GROUP_RETURN(video_util_progress_transcoding_cb, bool, some_enum error, unsigned long current_position, unsigned long duration, void* user_data)
-#undef CB_PARAMS_NAMES
 
 typedef bool (*video_util_supported_audio_encoder_cb)(some_enum codec, void* user_data);
 #define CB_PARAMS_NAMES codec, user_data
@@ -4448,87 +4207,6 @@ typedef bool (*webrtc_turn_server_cb)(const char* turn_server, void* user_data);
 PROXY_GROUP_RETURN(webrtc_turn_server_cb, bool, const char* turn_server, void* user_data)
 #undef CB_PARAMS_NAMES
 
-typedef void_pointer (*widget_app_create_cb)(void* user_data);
-#define CB_PARAMS_NAMES user_data
-PROXY_GROUP_RETURN(widget_app_create_cb, void_pointer, void* user_data)
-#undef CB_PARAMS_NAMES
-
-typedef void (*widget_app_terminate_cb)(void* user_data);
-#define CB_PARAMS_NAMES user_data
-PROXY_GROUP_NON_BLOCKING(widget_app_terminate_cb, void* user_data)
-PROXY_GROUP_BLOCKING(widget_app_terminate_cb, void* user_data)
-#undef CB_PARAMS_NAMES
-
-typedef bool (*widget_context_cb)(void* context, void* user_data);
-#define CB_PARAMS_NAMES context, user_data
-PROXY_GROUP_RETURN(widget_context_cb, bool, void* context, void* user_data)
-#undef CB_PARAMS_NAMES
-
-typedef int (*widget_instance_create_cb)(void* context, void* content, int w, int h, void* user_data);
-#define CB_PARAMS_NAMES context, content, w, h, user_data
-PROXY_GROUP_RETURN(widget_instance_create_cb, int, void* context, void* content, int w, int h, void* user_data)
-#undef CB_PARAMS_NAMES
-
-typedef int (*widget_instance_destroy_cb)(void* context, some_enum reason, void* content, void* user_data);
-#define CB_PARAMS_NAMES context, reason, content, user_data
-PROXY_GROUP_RETURN(widget_instance_destroy_cb, int, void* context, some_enum reason, void* content, void* user_data)
-#undef CB_PARAMS_NAMES
-
-typedef int (*widget_instance_pause_cb)(void* context, void* user_data);
-#define CB_PARAMS_NAMES context, user_data
-PROXY_GROUP_RETURN(widget_instance_pause_cb, int, void* context, void* user_data)
-#undef CB_PARAMS_NAMES
-
-typedef int (*widget_instance_resize_cb)(void* context, int w, int h, void* user_data);
-#define CB_PARAMS_NAMES context, w, h, user_data
-PROXY_GROUP_RETURN(widget_instance_resize_cb, int, void* context, int w, int h, void* user_data)
-#undef CB_PARAMS_NAMES
-
-typedef int (*widget_instance_resume_cb)(void* context, void* user_data);
-#define CB_PARAMS_NAMES context, user_data
-PROXY_GROUP_RETURN(widget_instance_resume_cb, int, void* context, void* user_data)
-#undef CB_PARAMS_NAMES
-
-typedef int (*widget_instance_update_cb)(void* context, void* content, int force, void* user_data);
-#define CB_PARAMS_NAMES context, content, force, user_data
-PROXY_GROUP_RETURN(widget_instance_update_cb, int, void* context, void* content, int force, void* user_data)
-#undef CB_PARAMS_NAMES
-
-typedef void (*wifi_activated_cb)(some_enum result, void* user_data);
-#define CB_PARAMS_NAMES result, user_data
-PROXY_GROUP_NON_BLOCKING(wifi_activated_cb, some_enum result, void* user_data)
-PROXY_GROUP_BLOCKING(wifi_activated_cb, some_enum result, void* user_data)
-#undef CB_PARAMS_NAMES
-
-typedef bool (*wifi_config_list_cb)(const void* config, void* user_data);
-#define CB_PARAMS_NAMES config, user_data
-PROXY_GROUP_RETURN(wifi_config_list_cb, bool, const void* config, void* user_data)
-#undef CB_PARAMS_NAMES
-
-typedef void (*wifi_connected_cb)(some_enum result, void* user_data);
-#define CB_PARAMS_NAMES result, user_data
-PROXY_GROUP_NON_BLOCKING(wifi_connected_cb, some_enum result, void* user_data)
-PROXY_GROUP_BLOCKING(wifi_connected_cb, some_enum result, void* user_data)
-#undef CB_PARAMS_NAMES
-
-typedef void (*wifi_connection_state_changed_cb)(some_enum state, void* ap, void* user_data);
-#define CB_PARAMS_NAMES state, ap, user_data
-PROXY_GROUP_NON_BLOCKING(wifi_connection_state_changed_cb, some_enum state, void* ap, void* user_data)
-PROXY_GROUP_BLOCKING(wifi_connection_state_changed_cb, some_enum state, void* ap, void* user_data)
-#undef CB_PARAMS_NAMES
-
-typedef void (*wifi_deactivated_cb)(some_enum result, void* user_data);
-#define CB_PARAMS_NAMES result, user_data
-PROXY_GROUP_NON_BLOCKING(wifi_deactivated_cb, some_enum result, void* user_data)
-PROXY_GROUP_BLOCKING(wifi_deactivated_cb, some_enum result, void* user_data)
-#undef CB_PARAMS_NAMES
-
-typedef void (*wifi_device_state_changed_cb)(some_enum state, void* user_data);
-#define CB_PARAMS_NAMES state, user_data
-PROXY_GROUP_NON_BLOCKING(wifi_device_state_changed_cb, some_enum state, void* user_data)
-PROXY_GROUP_BLOCKING(wifi_device_state_changed_cb, some_enum state, void* user_data)
-#undef CB_PARAMS_NAMES
-
 typedef void (*wifi_direct_client_ip_address_assigned_cb)(const char* mac_address, const char* ip_address, const char* interface_address, void* user_data);
 #define CB_PARAMS_NAMES mac_address, ip_address, interface_address, user_data
 PROXY_GROUP_NON_BLOCKING(wifi_direct_client_ip_address_assigned_cb, const char* mac_address, const char* ip_address, const char* interface_address, void* user_data)
@@ -4595,17 +4273,6 @@ PROXY_GROUP_BLOCKING(wifi_direct_state_changed_cb, some_enum state, void* user_d
 typedef bool (*wifi_direct_supported_wps_type_cb)(some_enum type, void* user_data);
 #define CB_PARAMS_NAMES type, user_data
 PROXY_GROUP_RETURN(wifi_direct_supported_wps_type_cb, bool, some_enum type, void* user_data)
-#undef CB_PARAMS_NAMES
-
-typedef void (*wifi_disconnected_cb)(some_enum result, void* user_data);
-#define CB_PARAMS_NAMES result, user_data
-PROXY_GROUP_NON_BLOCKING(wifi_disconnected_cb, some_enum result, void* user_data)
-PROXY_GROUP_BLOCKING(wifi_disconnected_cb, some_enum result, void* user_data)
-#undef CB_PARAMS_NAMES
-
-typedef bool (*wifi_found_ap_cb)(void* ap, void* user_data);
-#define CB_PARAMS_NAMES ap, user_data
-PROXY_GROUP_RETURN(wifi_found_ap_cb, bool, void* ap, void* user_data)
 #undef CB_PARAMS_NAMES
 
 typedef void (*wifi_manager_activated_cb)(some_enum result, void* user_data);
@@ -4723,24 +4390,6 @@ PROXY_GROUP_NON_BLOCKING(wifi_manager_tdls_state_changed_cb, some_enum state, ch
 PROXY_GROUP_BLOCKING(wifi_manager_tdls_state_changed_cb, some_enum state, char* peer_mac_addr, void* user_data)
 #undef CB_PARAMS_NAMES
 
-typedef void (*wifi_rssi_level_changed_cb)(some_enum rssi_level, void* user_data);
-#define CB_PARAMS_NAMES rssi_level, user_data
-PROXY_GROUP_NON_BLOCKING(wifi_rssi_level_changed_cb, some_enum rssi_level, void* user_data)
-PROXY_GROUP_BLOCKING(wifi_rssi_level_changed_cb, some_enum rssi_level, void* user_data)
-#undef CB_PARAMS_NAMES
-
-typedef void (*wifi_scan_finished_cb)(some_enum error_code, void* user_data);
-#define CB_PARAMS_NAMES error_code, user_data
-PROXY_GROUP_NON_BLOCKING(wifi_scan_finished_cb, some_enum error_code, void* user_data)
-PROXY_GROUP_BLOCKING(wifi_scan_finished_cb, some_enum error_code, void* user_data)
-#undef CB_PARAMS_NAMES
-
-typedef void (*wifi_tdls_state_changed_cb)(some_enum state, char* peer_mac_addr, void* user_data);
-#define CB_PARAMS_NAMES state, peer_mac_addr, user_data
-PROXY_GROUP_NON_BLOCKING(wifi_tdls_state_changed_cb, some_enum state, char* peer_mac_addr, void* user_data)
-PROXY_GROUP_BLOCKING(wifi_tdls_state_changed_cb, some_enum state, char* peer_mac_addr, void* user_data)
-#undef CB_PARAMS_NAMES
-
 
 std::map<std::string, MultiProxyFunctionsContainer> multi_proxy_map = {
   MULTI_PROXY_MAP_ENTRY(platform_blocking_account_cb)
@@ -4757,7 +4406,6 @@ std::map<std::string, MultiProxyFunctionsContainer> multi_proxy_map = {
   MULTI_PROXY_MAP_ENTRY(platform_blocking_app_control_cb)
   MULTI_PROXY_MAP_ENTRY(platform_non_blocking_app_control_cb)
   MULTI_PROXY_MAP_ENTRY(platform_blocking_app_control_extra_data_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_blocking_app_control_host_res_fn)
   MULTI_PROXY_MAP_ENTRY(platform_blocking_app_control_reply_cb)
   MULTI_PROXY_MAP_ENTRY(platform_non_blocking_app_control_reply_cb)
   MULTI_PROXY_MAP_ENTRY(platform_blocking_app_control_result_cb)
@@ -4851,16 +4499,6 @@ std::map<std::string, MultiProxyFunctionsContainer> multi_proxy_map = {
   MULTI_PROXY_MAP_ENTRY(platform_non_blocking_bt_adapter_visibility_duration_changed_cb)
   MULTI_PROXY_MAP_ENTRY(platform_blocking_bt_adapter_visibility_mode_changed_cb)
   MULTI_PROXY_MAP_ENTRY(platform_non_blocking_bt_adapter_visibility_mode_changed_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_blocking_bt_ag_call_handling_event_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_non_blocking_bt_ag_call_handling_event_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_blocking_bt_ag_dtmf_transmitted_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_non_blocking_bt_ag_dtmf_transmitted_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_blocking_bt_ag_microphone_gain_changed_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_non_blocking_bt_ag_microphone_gain_changed_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_blocking_bt_ag_multi_call_handling_event_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_non_blocking_bt_ag_multi_call_handling_event_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_blocking_bt_ag_speaker_gain_changed_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_non_blocking_bt_ag_speaker_gain_changed_cb)
   MULTI_PROXY_MAP_ENTRY(platform_blocking_bt_audio_connection_state_changed_cb)
   MULTI_PROXY_MAP_ENTRY(platform_non_blocking_bt_audio_connection_state_changed_cb)
   MULTI_PROXY_MAP_ENTRY(platform_blocking_bt_avrcp_control_connection_state_changed_cb)
@@ -4934,16 +4572,10 @@ std::map<std::string, MultiProxyFunctionsContainer> multi_proxy_map = {
   MULTI_PROXY_MAP_ENTRY(platform_non_blocking_bt_hid_device_data_received_cb)
   MULTI_PROXY_MAP_ENTRY(platform_blocking_bt_hid_host_connection_state_changed_cb)
   MULTI_PROXY_MAP_ENTRY(platform_non_blocking_bt_hid_host_connection_state_changed_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_blocking_bt_hrp_connection_state_changed_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_non_blocking_bt_hrp_connection_state_changed_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_blocking_bt_hrp_sensor_characteristic_notification_state_changed_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_non_blocking_bt_hrp_sensor_characteristic_notification_state_changed_cb)
   MULTI_PROXY_MAP_ENTRY(platform_blocking_bt_ipsp_connection_state_changed_cb)
   MULTI_PROXY_MAP_ENTRY(platform_non_blocking_bt_ipsp_connection_state_changed_cb)
   MULTI_PROXY_MAP_ENTRY(platform_blocking_bt_ipsp_init_state_changed_cb)
   MULTI_PROXY_MAP_ENTRY(platform_non_blocking_bt_ipsp_init_state_changed_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_blocking_bt_nap_connection_state_changed_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_non_blocking_bt_nap_connection_state_changed_cb)
   MULTI_PROXY_MAP_ENTRY(platform_blocking_bt_opp_client_push_finished_cb)
   MULTI_PROXY_MAP_ENTRY(platform_non_blocking_bt_opp_client_push_finished_cb)
   MULTI_PROXY_MAP_ENTRY(platform_blocking_bt_opp_client_push_progress_cb)
@@ -4956,8 +4588,6 @@ std::map<std::string, MultiProxyFunctionsContainer> multi_proxy_map = {
   MULTI_PROXY_MAP_ENTRY(platform_non_blocking_bt_opp_server_transfer_finished_cb)
   MULTI_PROXY_MAP_ENTRY(platform_blocking_bt_opp_server_transfer_progress_cb)
   MULTI_PROXY_MAP_ENTRY(platform_non_blocking_bt_opp_server_transfer_progress_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_blocking_bt_panu_connection_state_changed_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_non_blocking_bt_panu_connection_state_changed_cb)
   MULTI_PROXY_MAP_ENTRY(platform_blocking_bt_pbap_connection_state_changed_cb)
   MULTI_PROXY_MAP_ENTRY(platform_non_blocking_bt_pbap_connection_state_changed_cb)
   MULTI_PROXY_MAP_ENTRY(platform_blocking_bt_pbap_list_vcards_cb)
@@ -5062,8 +4692,6 @@ std::map<std::string, MultiProxyFunctionsContainer> multi_proxy_map = {
   MULTI_PROXY_MAP_ENTRY(platform_non_blocking_cion_server_payload_async_result_cb)
   MULTI_PROXY_MAP_ENTRY(platform_blocking_cion_server_payload_received_cb)
   MULTI_PROXY_MAP_ENTRY(platform_non_blocking_cion_server_payload_received_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_blocking_component_manager_component_context_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_blocking_component_manager_component_info_cb)
   MULTI_PROXY_MAP_ENTRY(platform_blocking_connection_address_changed_cb)
   MULTI_PROXY_MAP_ENTRY(platform_non_blocking_connection_address_changed_cb)
   MULTI_PROXY_MAP_ENTRY(platform_blocking_connection_closed_cb)
@@ -5224,7 +4852,6 @@ std::map<std::string, MultiProxyFunctionsContainer> multi_proxy_map = {
   MULTI_PROXY_MAP_ENTRY(platform_blocking_image_util_encode_to_file_completed_cb)
   MULTI_PROXY_MAP_ENTRY(platform_non_blocking_image_util_encode_to_file_completed_cb)
   MULTI_PROXY_MAP_ENTRY(platform_blocking_image_util_supported_colorspace_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_blocking_image_util_supported_jpeg_colorspace_cb)
   MULTI_PROXY_MAP_ENTRY(platform_blocking_image_util_transform_completed2_cb)
   MULTI_PROXY_MAP_ENTRY(platform_non_blocking_image_util_transform_completed2_cb)
   MULTI_PROXY_MAP_ENTRY(platform_blocking_image_util_transform_completed_cb)
@@ -5598,59 +5225,6 @@ std::map<std::string, MultiProxyFunctionsContainer> multi_proxy_map = {
   MULTI_PROXY_MAP_ENTRY(platform_non_blocking_mv_surveillance_event_occurred_cb)
   MULTI_PROXY_MAP_ENTRY(platform_blocking_mv_surveillance_event_result_name_cb)
   MULTI_PROXY_MAP_ENTRY(platform_blocking_mv_surveillance_event_type_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_blocking_nfc_activation_changed_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_non_blocking_nfc_activation_changed_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_blocking_nfc_activation_completed_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_non_blocking_nfc_activation_completed_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_blocking_nfc_hce_event_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_non_blocking_nfc_hce_event_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_blocking_nfc_mifare_authenticate_with_keyA_completed_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_non_blocking_nfc_mifare_authenticate_with_keyA_completed_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_blocking_nfc_mifare_authenticate_with_keyB_completed_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_non_blocking_nfc_mifare_authenticate_with_keyB_completed_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_blocking_nfc_mifare_decrement_completed_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_non_blocking_nfc_mifare_decrement_completed_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_blocking_nfc_mifare_increment_completed_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_non_blocking_nfc_mifare_increment_completed_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_blocking_nfc_mifare_read_block_completed_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_non_blocking_nfc_mifare_read_block_completed_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_blocking_nfc_mifare_read_page_completed_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_non_blocking_nfc_mifare_read_page_completed_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_blocking_nfc_mifare_restore_completed_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_non_blocking_nfc_mifare_restore_completed_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_blocking_nfc_mifare_transfer_completed_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_non_blocking_nfc_mifare_transfer_completed_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_blocking_nfc_mifare_write_block_completed_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_non_blocking_nfc_mifare_write_block_completed_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_blocking_nfc_mifare_write_page_completed_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_non_blocking_nfc_mifare_write_page_completed_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_blocking_nfc_ndef_discovered_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_non_blocking_nfc_ndef_discovered_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_blocking_nfc_p2p_data_received_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_non_blocking_nfc_p2p_data_received_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_blocking_nfc_p2p_send_completed_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_non_blocking_nfc_p2p_send_completed_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_blocking_nfc_p2p_target_discovered_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_non_blocking_nfc_p2p_target_discovered_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_blocking_nfc_se_event_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_non_blocking_nfc_se_event_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_blocking_nfc_se_registered_aid_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_non_blocking_nfc_se_registered_aid_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_blocking_nfc_se_transaction_event_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_non_blocking_nfc_se_transaction_event_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_blocking_nfc_snep_event_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_non_blocking_nfc_snep_event_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_blocking_nfc_tag_discovered_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_non_blocking_nfc_tag_discovered_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_blocking_nfc_tag_format_completed_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_non_blocking_nfc_tag_format_completed_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_blocking_nfc_tag_information_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_blocking_nfc_tag_read_completed_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_non_blocking_nfc_tag_read_completed_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_blocking_nfc_tag_transceive_completed_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_non_blocking_nfc_tag_transceive_completed_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_blocking_nfc_tag_write_completed_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_non_blocking_nfc_tag_write_completed_cb)
   MULTI_PROXY_MAP_ENTRY(platform_blocking_noti_ex_item_group_foreach_child_cb)
   MULTI_PROXY_MAP_ENTRY(platform_blocking_noti_ex_manager_events_add_cb)
   MULTI_PROXY_MAP_ENTRY(platform_non_blocking_noti_ex_manager_events_add_cb)
@@ -6009,7 +5583,6 @@ std::map<std::string, MultiProxyFunctionsContainer> multi_proxy_map = {
   MULTI_PROXY_MAP_ENTRY(platform_blocking_vce_supported_language_cb)
   MULTI_PROXY_MAP_ENTRY(platform_blocking_vce_tts_audio_format_request_cb)
   MULTI_PROXY_MAP_ENTRY(platform_blocking_vce_unset_commands_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_blocking_video_util_progress_transcoding_cb)
   MULTI_PROXY_MAP_ENTRY(platform_blocking_video_util_supported_audio_encoder_cb)
   MULTI_PROXY_MAP_ENTRY(platform_blocking_video_util_supported_file_format_cb)
   MULTI_PROXY_MAP_ENTRY(platform_blocking_video_util_supported_video_encoder_cb)
@@ -6058,27 +5631,6 @@ std::map<std::string, MultiProxyFunctionsContainer> multi_proxy_map = {
   MULTI_PROXY_MAP_ENTRY(platform_blocking_webrtc_track_added_cb)
   MULTI_PROXY_MAP_ENTRY(platform_non_blocking_webrtc_track_added_cb)
   MULTI_PROXY_MAP_ENTRY(platform_blocking_webrtc_turn_server_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_blocking_widget_app_create_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_blocking_widget_app_terminate_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_non_blocking_widget_app_terminate_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_blocking_widget_context_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_blocking_widget_instance_create_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_blocking_widget_instance_destroy_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_blocking_widget_instance_pause_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_blocking_widget_instance_resize_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_blocking_widget_instance_resume_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_blocking_widget_instance_update_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_blocking_wifi_activated_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_non_blocking_wifi_activated_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_blocking_wifi_config_list_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_blocking_wifi_connected_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_non_blocking_wifi_connected_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_blocking_wifi_connection_state_changed_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_non_blocking_wifi_connection_state_changed_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_blocking_wifi_deactivated_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_non_blocking_wifi_deactivated_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_blocking_wifi_device_state_changed_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_non_blocking_wifi_device_state_changed_cb)
   MULTI_PROXY_MAP_ENTRY(platform_blocking_wifi_direct_client_ip_address_assigned_cb)
   MULTI_PROXY_MAP_ENTRY(platform_non_blocking_wifi_direct_client_ip_address_assigned_cb)
   MULTI_PROXY_MAP_ENTRY(platform_blocking_wifi_direct_connected_peer_cb)
@@ -6099,9 +5651,6 @@ std::map<std::string, MultiProxyFunctionsContainer> multi_proxy_map = {
   MULTI_PROXY_MAP_ENTRY(platform_blocking_wifi_direct_state_changed_cb)
   MULTI_PROXY_MAP_ENTRY(platform_non_blocking_wifi_direct_state_changed_cb)
   MULTI_PROXY_MAP_ENTRY(platform_blocking_wifi_direct_supported_wps_type_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_blocking_wifi_disconnected_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_non_blocking_wifi_disconnected_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_blocking_wifi_found_ap_cb)
   MULTI_PROXY_MAP_ENTRY(platform_blocking_wifi_manager_activated_cb)
   MULTI_PROXY_MAP_ENTRY(platform_non_blocking_wifi_manager_activated_cb)
   MULTI_PROXY_MAP_ENTRY(platform_blocking_wifi_manager_ap_ipv6_address_cb)
@@ -6137,17 +5686,9 @@ std::map<std::string, MultiProxyFunctionsContainer> multi_proxy_map = {
   MULTI_PROXY_MAP_ENTRY(platform_non_blocking_wifi_manager_tdls_discovered_cb)
   MULTI_PROXY_MAP_ENTRY(platform_blocking_wifi_manager_tdls_state_changed_cb)
   MULTI_PROXY_MAP_ENTRY(platform_non_blocking_wifi_manager_tdls_state_changed_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_blocking_wifi_rssi_level_changed_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_non_blocking_wifi_rssi_level_changed_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_blocking_wifi_scan_finished_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_non_blocking_wifi_scan_finished_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_blocking_wifi_tdls_state_changed_cb)
-  MULTI_PROXY_MAP_ENTRY(platform_non_blocking_wifi_tdls_state_changed_cb)
 };
 
 std::map<std::string, int> reserved_base_id_map = {
-  {"app_control_host_res_fn", BASE_CALLBACK_ID_app_control_host_res_fn},
-  {"bt_hrp_connection_state_changed_cb", BASE_CALLBACK_ID_bt_hrp_connection_state_changed_cb},
   {"ml_data_destroy_cb", BASE_CALLBACK_ID_ml_data_destroy_cb},
   {"result_cb_t", BASE_CALLBACK_ID_result_cb_t},
   {"stte_cancel_cb", BASE_CALLBACK_ID_stte_cancel_cb},

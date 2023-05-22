@@ -24,6 +24,5 @@
    ```
 
 4. Update callbacks data
-    * Copy EXTRA\_HEADERS data from recent version to create entry for new version in [gen_callbacks.py](callbacks_generator/gen_callbacks.py).
-    * Run `./generate_callbacks.sh verify` to check type substitution. Build errors will have to be addressed by editing `gen_callbacks.py` - if it's missing types errors - modify list of additional headers (EXTRA\_HEADERS), if substitution is not found or assert fails - edit the type mapping.
-    * Run `./generate_callbacks.py` to update `callbacks.cc` with callbacks data.
+  * Run `./generate_callbacks.sh verify` to check type substitution. Build errors will have to be addressed by editing `gen_callbacks.py` - if it's missing types errors - modify list of additional headers (EXTRA\_HEADERS), if substitution is not found or assert fails - edit the type mapping.
+  * Run `./generate_callbacks.sh` to update `callbacks.cc` with callbacks data.
