@@ -113,11 +113,6 @@ SPECIAL_TYPES = {
     'wifi_direct_connection_state_cb_data_s': 'wifi_direct_connection_state_cb_data_s_copy',
 }
 
-EXTRA_HEADERS = {
-    '5.0': [
-    ],
-}
-
 
 class Token:
   def __init__(self, _type):
@@ -649,7 +644,7 @@ class CallbackDataCollector:
       names = set(self.callbacks)
       not_allowed_names = names.difference(self.allowed_names)
       if not_allowed_names:
-        log.debug('Ignoring following names not found in bindinds: %s', not_allowed_names)
+        log.debug('Ignoring following names not found in bindings: %s', not_allowed_names)
         for name in not_allowed_names:
           del self.callbacks[name]
 
@@ -871,7 +866,6 @@ class CallbackGenerator:
     if not os.path.exists(entrypoints):
       log.error('Entrypoints header not found (%s)', entrypoints)
       sys.exit(3)
-    version = os.path.basename(os.path.dirname(args.config[0]))
     api.enable_asserts()
     api.preprocess_callbacks_data()
     cg = CallbackGenerator(list(api.callbacks.values()))
@@ -886,8 +880,6 @@ class CallbackGenerator:
     output.write('std::map<std::string, int> reserved_base_id_map;\n\n')
     output.write('#undef TIZEN_DEPRECATION\n#undef DEPRECATION_WARNING\n')
     output.write(f'#include "{entrypoints}"\n')
-    for header in EXTRA_HEADERS.get(version, []):
-        output.write(f'#include "{header}"\n')
     output.write('\n')
     for type1, type2 in api.get_type_mapping():
       output.write(f'static_assert(sizeof({type1}) == sizeof({type2}), "Wrong '
