@@ -66,6 +66,15 @@ int freeMemory = using((Arena arena) {
   }
   return 0;
 });
+
+// Both sync and async callbacks are supported as long as they are called on
+// the same thread.
+tizen.storage_foreach_device_supported(
+    Pointer.fromFunction(_storageDevice, false), nullptr);
+
+// Callbacks that are called outside the current thread will cause the error:
+// "Cannot invoke native callback outside an isolate".
+// See the tizen_interop_callbacks package for a solution.
 ```
 
 
