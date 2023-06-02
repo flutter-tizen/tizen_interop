@@ -1,5 +1,7 @@
 # tizen_interop_callbacks
 
+[![pub package](https://img.shields.io/pub/v/tizen_interop_callbacks.svg)](https://pub.dev/packages/tizen_interop_callbacks)
+
 A Flutter plugin to resolve issues related to the error message: `Cannot invoke native callback outside an isolate`.
 
 This package is designed to be used with the [`tizen_interop`](https://pub.dev/packages/tizen_interop) package.
