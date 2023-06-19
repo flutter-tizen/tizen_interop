@@ -23,9 +23,10 @@
    scripts/ffigen_helper.sh <version>
    ```
 
-4. Update callbacks data
+4. Update callbacks data.
+
    * Run `./generate_callbacks.sh verify` to check type substitution.
      Build errors will have to be addressed by editing `gen_callbacks.py`.
      If substitution is not found or assert fails - edit the type mapping
-     (see CallbackDataCollector.type_substitute() and maps used there: KNOWN\_TYPES, SPECIAL\_TYPES).
+     (see `CallbackDataCollector.type_substitute()` and maps used there: `KNOWN_TYPES`, `SPECIAL_TYPES`).
    * Run `./generate_callbacks.sh` to update `callbacks.cc` with callbacks data.
