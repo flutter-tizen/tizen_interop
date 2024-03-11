@@ -14,8 +14,8 @@ Similarly to `tizen_interop`, this package has no build time dependency on a spe
    ```yaml
    dependencies:
      ffi: ^2.0.1
-     tizen_interop: ^0.2.6
-     tizen_interop_callbacks: ^0.1.0
+     tizen_interop: ^0.2.7
+     tizen_interop_callbacks: ^0.1.1
    ```
 
 2. In your Dart code, import the packages:

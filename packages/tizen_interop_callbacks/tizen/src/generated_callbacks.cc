@@ -349,6 +349,12 @@ PROXY_GROUP_NON_BLOCKING(bt_adapter_le_device_discovery_state_changed_cb, int re
 PROXY_GROUP_BLOCKING(bt_adapter_le_device_discovery_state_changed_cb, int result, some_enum discovery_state, void* discovery_info, void* user_data)
 #undef CB_PARAMS_NAMES
 
+typedef void (*bt_adapter_le_new_scan_result_cb)(int result, void* handle, void* user_data);
+#define CB_PARAMS_NAMES result, handle, user_data
+PROXY_GROUP_NON_BLOCKING(bt_adapter_le_new_scan_result_cb, int result, void* handle, void* user_data)
+PROXY_GROUP_BLOCKING(bt_adapter_le_new_scan_result_cb, int result, void* handle, void* user_data)
+#undef CB_PARAMS_NAMES
+
 typedef void (*bt_adapter_le_scan_result_cb)(int result, void* info, void* user_data);
 #define CB_PARAMS_NAMES result, info, user_data
 PROXY_GROUP_NON_BLOCKING(bt_adapter_le_scan_result_cb, int result, void* info, void* user_data)
@@ -1022,6 +1028,12 @@ typedef void (*connection_closed_cb)(some_enum result, void* user_data);
 #define CB_PARAMS_NAMES result, user_data
 PROXY_GROUP_NON_BLOCKING(connection_closed_cb, some_enum result, void* user_data)
 PROXY_GROUP_BLOCKING(connection_closed_cb, some_enum result, void* user_data)
+#undef CB_PARAMS_NAMES
+
+typedef void (*connection_dhcp_state_changed_cb)(some_enum state, const char* interface_name, some_enum result, void* user_data);
+#define CB_PARAMS_NAMES state, interface_name, result, user_data
+PROXY_GROUP_NON_BLOCKING(connection_dhcp_state_changed_cb, some_enum state, const char* interface_name, some_enum result, void* user_data)
+PROXY_GROUP_BLOCKING(connection_dhcp_state_changed_cb, some_enum state, const char* interface_name, some_enum result, void* user_data)
 #undef CB_PARAMS_NAMES
 
 typedef void (*connection_ethernet_cable_state_chaged_cb)(some_enum state, void* user_data);
@@ -2304,10 +2316,10 @@ typedef bool (*media_bookmark_cb)(void* bookmark, void* user_data);
 PROXY_GROUP_RETURN(media_bookmark_cb, bool, void* bookmark, void* user_data)
 #undef CB_PARAMS_NAMES
 
-typedef void (*media_content_db_update_cb)(some_enum error, int pid, some_enum update_item, some_enum update_type, some_enum media_type, char* uuid, char* path, char* mime_type, void* user_data);
-#define CB_PARAMS_NAMES error, pid, update_item, update_type, media_type, uuid, path, mime_type, user_data
-PROXY_GROUP_NON_BLOCKING(media_content_db_update_cb, some_enum error, int pid, some_enum update_item, some_enum update_type, some_enum media_type, char* uuid, char* path, char* mime_type, void* user_data)
-PROXY_GROUP_BLOCKING(media_content_db_update_cb, some_enum error, int pid, some_enum update_item, some_enum update_type, some_enum media_type, char* uuid, char* path, char* mime_type, void* user_data)
+typedef void (*media_content_db_update_cb)(some_enum error, int pid, some_enum update_item, some_enum update_type, some_enum media_type, char* id, char* path, char* mime_type, void* user_data);
+#define CB_PARAMS_NAMES error, pid, update_item, update_type, media_type, id, path, mime_type, user_data
+PROXY_GROUP_NON_BLOCKING(media_content_db_update_cb, some_enum error, int pid, some_enum update_item, some_enum update_type, some_enum media_type, char* id, char* path, char* mime_type, void* user_data)
+PROXY_GROUP_BLOCKING(media_content_db_update_cb, some_enum error, int pid, some_enum update_item, some_enum update_type, some_enum media_type, char* id, char* path, char* mime_type, void* user_data)
 #undef CB_PARAMS_NAMES
 
 typedef bool (*media_face_cb)(void* face, void* user_data);
@@ -3732,6 +3744,12 @@ typedef bool (*tts_supported_voice_cb)(void* tts, const char* language, int voic
 PROXY_GROUP_RETURN(tts_supported_voice_cb, bool, void* tts, const char* language, int voice_type, void* user_data)
 #undef CB_PARAMS_NAMES
 
+typedef void (*tts_synthesized_pcm_cb)(void* tts, int utt_id, some_enum event, const char* pcm_data, int pcm_data_size, some_enum audio_type, int sample_rate, void* user_data);
+#define CB_PARAMS_NAMES tts, utt_id, event, pcm_data, pcm_data_size, audio_type, sample_rate, user_data
+PROXY_GROUP_NON_BLOCKING(tts_synthesized_pcm_cb, void* tts, int utt_id, some_enum event, const char* pcm_data, int pcm_data_size, some_enum audio_type, int sample_rate, void* user_data)
+PROXY_GROUP_BLOCKING(tts_synthesized_pcm_cb, void* tts, int utt_id, some_enum event, const char* pcm_data, int pcm_data_size, some_enum audio_type, int sample_rate, void* user_data)
+#undef CB_PARAMS_NAMES
+
 typedef void (*tts_utterance_completed_cb)(void* tts, int utt_id, void* user_data);
 #define CB_PARAMS_NAMES tts, utt_id, user_data
 PROXY_GROUP_NON_BLOCKING(tts_utterance_completed_cb, void* tts, int utt_id, void* user_data)
@@ -4241,6 +4259,12 @@ PROXY_GROUP_NON_BLOCKING(wifi_direct_discovery_state_chagned_cb, int error_code,
 PROXY_GROUP_BLOCKING(wifi_direct_discovery_state_chagned_cb, int error_code, some_enum discovery_state, void* user_data)
 #undef CB_PARAMS_NAMES
 
+typedef void (*wifi_direct_discovery_state_changed_cb)(int error_code, some_enum discovery_state, void* user_data);
+#define CB_PARAMS_NAMES error_code, discovery_state, user_data
+PROXY_GROUP_NON_BLOCKING(wifi_direct_discovery_state_changed_cb, int error_code, some_enum discovery_state, void* user_data)
+PROXY_GROUP_BLOCKING(wifi_direct_discovery_state_changed_cb, int error_code, some_enum discovery_state, void* user_data)
+#undef CB_PARAMS_NAMES
+
 typedef void (*wifi_direct_peer_found_cb)(int error_code, some_enum discovery_state, const char* mac_address, void* user_data);
 #define CB_PARAMS_NAMES error_code, discovery_state, mac_address, user_data
 PROXY_GROUP_NON_BLOCKING(wifi_direct_peer_found_cb, int error_code, some_enum discovery_state, const char* mac_address, void* user_data)
@@ -4489,6 +4513,8 @@ std::map<std::string, MultiProxyFunctionsContainer> multi_proxy_map = {
   MULTI_PROXY_MAP_ENTRY(platform_non_blocking_bt_adapter_le_advertising_state_changed_cb)
   MULTI_PROXY_MAP_ENTRY(platform_blocking_bt_adapter_le_device_discovery_state_changed_cb)
   MULTI_PROXY_MAP_ENTRY(platform_non_blocking_bt_adapter_le_device_discovery_state_changed_cb)
+  MULTI_PROXY_MAP_ENTRY(platform_blocking_bt_adapter_le_new_scan_result_cb)
+  MULTI_PROXY_MAP_ENTRY(platform_non_blocking_bt_adapter_le_new_scan_result_cb)
   MULTI_PROXY_MAP_ENTRY(platform_blocking_bt_adapter_le_scan_result_cb)
   MULTI_PROXY_MAP_ENTRY(platform_non_blocking_bt_adapter_le_scan_result_cb)
   MULTI_PROXY_MAP_ENTRY(platform_blocking_bt_adapter_name_changed_cb)
@@ -4696,6 +4722,8 @@ std::map<std::string, MultiProxyFunctionsContainer> multi_proxy_map = {
   MULTI_PROXY_MAP_ENTRY(platform_non_blocking_connection_address_changed_cb)
   MULTI_PROXY_MAP_ENTRY(platform_blocking_connection_closed_cb)
   MULTI_PROXY_MAP_ENTRY(platform_non_blocking_connection_closed_cb)
+  MULTI_PROXY_MAP_ENTRY(platform_blocking_connection_dhcp_state_changed_cb)
+  MULTI_PROXY_MAP_ENTRY(platform_non_blocking_connection_dhcp_state_changed_cb)
   MULTI_PROXY_MAP_ENTRY(platform_blocking_connection_ethernet_cable_state_chaged_cb)
   MULTI_PROXY_MAP_ENTRY(platform_non_blocking_connection_ethernet_cable_state_chaged_cb)
   MULTI_PROXY_MAP_ENTRY(platform_blocking_connection_ethernet_cable_state_changed_cb)
@@ -5513,6 +5541,8 @@ std::map<std::string, MultiProxyFunctionsContainer> multi_proxy_map = {
   MULTI_PROXY_MAP_ENTRY(platform_blocking_tts_state_changed_cb)
   MULTI_PROXY_MAP_ENTRY(platform_non_blocking_tts_state_changed_cb)
   MULTI_PROXY_MAP_ENTRY(platform_blocking_tts_supported_voice_cb)
+  MULTI_PROXY_MAP_ENTRY(platform_blocking_tts_synthesized_pcm_cb)
+  MULTI_PROXY_MAP_ENTRY(platform_non_blocking_tts_synthesized_pcm_cb)
   MULTI_PROXY_MAP_ENTRY(platform_blocking_tts_utterance_completed_cb)
   MULTI_PROXY_MAP_ENTRY(platform_non_blocking_tts_utterance_completed_cb)
   MULTI_PROXY_MAP_ENTRY(platform_blocking_tts_utterance_started_cb)
@@ -5641,6 +5671,8 @@ std::map<std::string, MultiProxyFunctionsContainer> multi_proxy_map = {
   MULTI_PROXY_MAP_ENTRY(platform_blocking_wifi_direct_discovered_peer_cb)
   MULTI_PROXY_MAP_ENTRY(platform_blocking_wifi_direct_discovery_state_chagned_cb)
   MULTI_PROXY_MAP_ENTRY(platform_non_blocking_wifi_direct_discovery_state_chagned_cb)
+  MULTI_PROXY_MAP_ENTRY(platform_blocking_wifi_direct_discovery_state_changed_cb)
+  MULTI_PROXY_MAP_ENTRY(platform_non_blocking_wifi_direct_discovery_state_changed_cb)
   MULTI_PROXY_MAP_ENTRY(platform_blocking_wifi_direct_peer_found_cb)
   MULTI_PROXY_MAP_ENTRY(platform_non_blocking_wifi_direct_peer_found_cb)
   MULTI_PROXY_MAP_ENTRY(platform_blocking_wifi_direct_peer_info_connection_state_changed_cb)

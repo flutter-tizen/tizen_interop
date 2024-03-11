@@ -12,7 +12,7 @@ const int _kProxyInstanceCount = 5;
 const String _kLogTag = 'TizenInteropCallbacksPlugin';
 
 /// Opaque type representing a wrapper function pointer.
-class _CallbackWrapper extends Opaque {}
+final class _CallbackWrapper extends Opaque {}
 
 // const _logDebug = Log.debug;
 void _logDebug(String tag, String message) {}
@@ -338,7 +338,7 @@ class TizenInteropCallbacks {
   }
 }
 
-class _RegistrationResult extends Struct {
+final class _RegistrationResult extends Struct {
   /// The native proxy callback to be used with Native API.
   external Pointer callback;
 
