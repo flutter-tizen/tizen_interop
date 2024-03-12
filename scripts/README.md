@@ -2,7 +2,7 @@
 
 ## Generating bindings from source
 
-1. Install a rootstrap of your target Tizen version (e.g. `IOT-Headed-4.0-NativeAppDevelopment-CLI`) using Tizen Package Manager.
+1. Install a rootstrap of your target Tizen version (e.g. `IOT-Headed-5.5-NativeAppDevelopment-CLI`) using Tizen Package Manager.
 
 2. Run scripts in this directory as follows, passing the version number as an argument.
 

@@ -1,3 +1,7 @@
+## 0.3.0
+
+* Remove Tizen 4.0/5.0 bindings.
+
 ## 0.2.7
 
 * Update the Dart SDK constraint.
