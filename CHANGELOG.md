@@ -1,6 +1,7 @@
-## NEXT
+## 0.2.7
 
 * Update the Dart SDK constraint.
+* Add Tizen 8.0 bindings.
 
 ## 0.2.6
 

@@ -23,9 +23,17 @@ if [[ -z $TIZEN_SDK ]]; then
   fi
 fi
 
-rootstrap=$TIZEN_SDK/platforms/tizen-$version/iot-headed/rootstraps/iot-headed-$version-device.core
+if [ "$version" = "8.0" ]; then
+  rootstrap=$TIZEN_SDK/platforms/tizen-$version/tizen/rootstraps/tizen-$version-device.core
+else
+  rootstrap=$TIZEN_SDK/platforms/tizen-$version/iot-headed/rootstraps/iot-headed-$version-device.core
+fi
 if [ ! -d $rootstrap ]; then
-  echo "Rootstrap not installed: IOT-Headed-$version-NativeAppDevelopment-CLI"
+  if [ "$version" = "8.0" ]; then
+    echo "Rootstrap not installed: Tizen-$version-NativeAppDevelopment-CLI"
+  else
+    echo "Rootstrap not installed: IOT-Headed-$version-NativeAppDevelopment-CLI"
+  fi
   exit 1
 fi
 
