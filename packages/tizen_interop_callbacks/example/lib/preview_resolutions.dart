@@ -9,7 +9,7 @@ import 'dart:isolate';
 
 import 'package:ffi/ffi.dart';
 import 'package:flutter/material.dart';
-import 'package:tizen_interop/4.0/tizen.dart';
+import 'package:tizen_interop/5.5/tizen.dart';
 import 'package:tizen_interop_callbacks/tizen_interop_callbacks.dart';
 
 class PreviewResolutionsTab extends StatefulWidget {
