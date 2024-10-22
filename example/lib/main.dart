@@ -2,7 +2,7 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 import 'package:flutter/material.dart';
-import 'package:tizen_interop/4.0/tizen.dart';
+import 'package:tizen_interop/6.0/tizen.dart';
 
 void main() {
   runApp(const MyApp());

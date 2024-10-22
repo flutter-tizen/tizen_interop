@@ -1,3 +1,7 @@
+## 0.3.0
+
+* Remove Tizen 5.5 callbacks.
+
 ## 0.2.0
 
 * Remove Tizen 4.0/5.0 callbacks.

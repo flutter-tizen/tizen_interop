@@ -14,15 +14,15 @@ Similarly to `tizen_interop`, this package has no build time dependency on a spe
    ```yaml
    dependencies:
      ffi: ^2.0.1
-     tizen_interop: ^0.3.0
-     tizen_interop_callbacks: ^0.2.0
+     tizen_interop: ^0.4.0
+     tizen_interop_callbacks: ^0.3.0
    ```
 
 2. In your Dart code, import the packages:
 
    ```dart
    import 'dart:ffi';
-   import 'package:tizen_interop/5.5/tizen.dart';
+   import 'package:tizen_interop/6.0/tizen.dart';
    import 'package:tizen_interop_callbacks/tizen_interop_callbacks.dart';
    ```
 

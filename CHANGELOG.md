@@ -1,3 +1,7 @@
+## 0.4.0
+
+* Remove Tizen 5.5 bindings.
+
 ## 0.3.0
 
 * Remove Tizen 4.0/5.0 bindings.
