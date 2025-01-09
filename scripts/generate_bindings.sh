@@ -20,4 +20,4 @@ if [ ! -d $ROOT_DIR/rootstraps/$version ]; then
 fi
 
 dart run symgen --config $ROOT_DIR/configs/$version/symgen.yaml
-dart run ffigen --config $ROOT_DIR/configs/$version/ffigen.yaml
+dart run ffigen --config $ROOT_DIR/configs/$version/ffigen.yaml --ignore-source-errors
