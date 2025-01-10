@@ -23,7 +23,13 @@
    scripts/ffigen_helper.sh <version>
    ```
 
-4. Update callbacks data.
+4. Run `symgen_helper.sh` to find out what to add to `symgen.yaml`.
+
+   ```sh
+   scripts/symgen_helper.sh <version>
+   ```
+
+5. Update callbacks data.
 
    * Run `./generate_callbacks.sh verify` to check type substitution.
      Build errors will have to be addressed by editing `gen_callbacks.py`.
