@@ -15,7 +15,7 @@
 
 1. Create a copy of any existing config in the `configs` directory with the new version number as the directory name.
 
-2. Manually update `entrypoints.h` and `symgen.yaml` by referring to the official [API docs](https://docs.tizen.org/application/native/api/iot-headed/latest) and the rootstrap.
+2. Manually update `entrypoints.h` and `symgen.yaml` by referring to the official [API docs](https://docs.tizen.org/application/native/api/iot-headed/latest) and the rootstrap. (Run `symgen_helper.sh` to find out what to add to `symgen.yaml`. (`scripts/symgen_helper.sh <version>`))
 
 3. Run `ffigen_helper.sh` to generate the contents of the `ffigen.yaml` file.
 
@@ -23,13 +23,7 @@
    scripts/ffigen_helper.sh <version>
    ```
 
-4. Run `symgen_helper.sh` to find out what to add to `symgen.yaml`.
-
-   ```sh
-   scripts/symgen_helper.sh <version>
-   ```
-
-5. Update callbacks data.
+4. Update callbacks data.
 
    * Run `./generate_callbacks.sh verify` to check type substitution.
      Build errors will have to be addressed by editing `gen_callbacks.py`.
