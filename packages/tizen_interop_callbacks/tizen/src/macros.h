@@ -14,6 +14,7 @@
 #include <mutex>
 
 #include "log.h"
+#include "tizen_interop_callbacks_plugin.h"
 
 static constexpr int32_t kProxyInstanceCount = 5;
 
