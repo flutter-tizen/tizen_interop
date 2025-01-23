@@ -1,3 +1,7 @@
+## 0.4.1
+
+* Add Tizen 9.0 bindings.
+
 ## 0.4.0
 
 * Remove Tizen 5.5 bindings.
