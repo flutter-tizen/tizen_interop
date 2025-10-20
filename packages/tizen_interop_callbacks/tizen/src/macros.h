@@ -50,7 +50,9 @@ extern unsigned long interop_callbacks_thread_id;
       return CB_RETURN();                                                      \
     }                                                                          \
     CallbackPointer _callback = _iter->second;                                 \
-    if (gettid() == interop_callbacks_thread_id) {                             \
+    pid_t _system_thread_id = gettid();                                        \
+    if ((_system_thread_id != -1 && interop_callbacks_thread_id != -1) &&      \
+        (_system_thread_id == interop_callbacks_thread_id)) {                  \
       LDEBUG("calling Dart callback directly");                                \
       return (reinterpret_cast<CB_NAME>(_callback))(CB_PARAMS_NAMES);          \
     }                                                                          \
@@ -117,7 +119,9 @@ extern unsigned long interop_callbacks_thread_id;
       return;                                                                  \
     }                                                                          \
     CallbackPointer _callback = _iter->second;                                 \
-    if (gettid() == interop_callbacks_thread_id) {                             \
+    pid_t _system_thread_id = gettid();                                        \
+    if ((_system_thread_id != -1 && interop_callbacks_thread_id != -1) &&      \
+        (_system_thread_id == interop_callbacks_thread_id)) {                  \
       LDEBUG("calling Dart callback directly");                                \
       return (reinterpret_cast<CB_NAME>(_callback))(CB_PARAMS_NAMES);          \
     }                                                                          \
@@ -222,7 +226,9 @@ extern unsigned long interop_callbacks_thread_id;
       return CB_RETURN();                                                      \
     }                                                                          \
     CallbackPointer _callback = _iter->second;                                 \
-    if (gettid() == interop_callbacks_thread_id) {                             \
+    pid_t _system_thread_id = gettid();                                        \
+    if ((_system_thread_id != -1 && interop_callbacks_thread_id != -1) &&      \
+        (_system_thread_id == interop_callbacks_thread_id)) {                  \
       LDEBUG("calling Dart callback directly");                                \
       return (reinterpret_cast<CB_NAME>(_callback))(CB_PARAMS_NAMES);          \
     }                                                                          \
@@ -286,7 +292,9 @@ extern unsigned long interop_callbacks_thread_id;
       return;                                                                  \
     }                                                                          \
     CallbackPointer _callback = _iter->second;                                 \
-    if (gettid() == interop_callbacks_thread_id) {                             \
+    pid_t _system_thread_id = gettid();                                        \
+    if ((_system_thread_id != -1 && interop_callbacks_thread_id != -1) &&      \
+        (_system_thread_id == interop_callbacks_thread_id)) {                  \
       LDEBUG("calling Dart callback directly");                                \
       return (reinterpret_cast<CB_NAME>(_callback))(CB_PARAMS_NAMES);          \
     }                                                                          \
@@ -387,7 +395,9 @@ extern unsigned long interop_callbacks_thread_id;
       return CB_RETURN();                                                      \
     }                                                                          \
     CallbackPointer _callback = _iter->second;                                 \
-    if (gettid() == interop_callbacks_thread_id) {                             \
+    pid_t _system_thread_id = gettid();                                        \
+    if ((_system_thread_id != -1 && interop_callbacks_thread_id != -1) &&      \
+        (_system_thread_id == interop_callbacks_thread_id)) {                  \
       LDEBUG("calling Dart callback directly");                                \
       return (reinterpret_cast<CB_NAME>(_callback))();                         \
     }                                                                          \

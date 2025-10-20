@@ -1,3 +1,7 @@
+# 0.3.2
+
+* Prevent invalid direct call.
+
 # 0.3.1
 
 * Add Tizen 9.0 callbacks.
