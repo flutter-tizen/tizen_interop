@@ -15,7 +15,7 @@ Similarly to `tizen_interop`, this package has no build time dependency on a spe
    dependencies:
      ffi: ^2.0.1
      tizen_interop: ^0.4.1
-     tizen_interop_callbacks: ^0.3.2
+     tizen_interop_callbacks: ^0.3.3
    ```
 
 2. In your Dart code, import the packages:
@@ -58,3 +58,52 @@ Similarly to `tizen_interop`, this package has no build time dependency on a spe
      callback.interopUserData,
    );
    ```
+
+## Note
+
+### Using Separate Isolates for Non-Void Return Callbacks
+
+If your callback has a non-void return type, you **must** execute the Native API call in a separate isolate to avoid deadlocks. This is because blocking callbacks use synchronization mechanisms that can block the main isolate thread.
+
+For a example of how to properly handle callbacks with return values, refer to [`getResolutions()`](./example/lib/preview_resolutions.dart) code in example.
+
+```dart
+Future<void> getResolutions() async {
+  final callbacks = TizenInteropCallbacks();
+  final port = ReceivePort();
+
+  // Register callback with non-void return type (bool in this case)
+  final callback = callbacks.register<Bool Function(Int, Int, Pointer<Void>)>(
+    'camera_supported_preview_resolution_cb',
+    Pointer.fromFunction(_previewResolutionCallback, false),
+    userObject: _resolutions,
+  );
+
+  // Execute Native API call in separate isolate
+  await Isolate.spawn(_getResolutions, [port.sendPort, callback]);
+  await port.first;
+
+  callbacks.unregister(callback);
+}
+
+static void _getResolutions(List<Object> message) async {
+  final sendPort = message[0] as SendPort;
+  final callback = message[1] as RegisteredCallback<Bool Function(Int, Int, Pointer<Void>)>;
+
+  // Native API call with blocking callback
+  final ret = tizen.camera_foreach_supported_preview_resolution(
+    cameraHandle,
+    callback.interopCallback,
+    callback.interopUserData,
+  );
+
+  sendPort.send(null);
+}
+
+static bool _previewResolutionCallback(int width, int height, Pointer<Void> userData) {
+  // This callback executes in the main isolate
+  final resolutions = TizenInteropCallbacks.getUserObject<List<String>>(userData)!;
+  resolutions.add('$width x $height');
+  return true;  // Return value
+}
+```
