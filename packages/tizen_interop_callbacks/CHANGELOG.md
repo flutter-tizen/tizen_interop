@@ -1,3 +1,7 @@
+# 0.3.3
+
+* Update README with notes regarding non-void return callback API.
+
 # 0.3.2
 
 * Prevent invalid direct call.
