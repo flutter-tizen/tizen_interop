@@ -1,0 +1,111 @@
+preamble: |
+  // Copyright 2025 Samsung Electronics Co., Ltd. All rights reserved.
+  // Use of this source code is governed by a BSD-style license that can be
+  // found in the LICENSE file.
+
+name: "tizen100Symbols"
+output: "lib/src/bindings/10.0/generated_symbols.dart"
+library-path: "rootstraps/10.0/usr/lib"
+
+target-libraries:
+  - libaccounts-svc.so # Account / Account Manager
+  - libcore-sync-client.so # Account / Sync Manager
+  - libcapi-appfw-application.so # Application Framework / Application (include i18n)
+  - libcapi-appfw-alarm.so # Application Framework / Application / Alarm
+  - libcapi-appfw-app-common.so # Application Framework / Application / App Common, Resource Manager
+  - libcapi-appfw-app-control.so # Application Framework / Application / App Control
+  - libcapi-appfw-app-control-uri.so # Application Framework / Application / App Control URI
+  - libcapi-appfw-event.so # Application Framework / Application / Event
+  - libcapi-appfw-app-manager.so # Application Framework / Application Manager
+  - libcapi-appfw-preference.so # Application Framework / Application / Preference
+  - libbundle.so # Application Framework / Bundle
+  - libcapi-appfw-job-scheduler.so # Application Framework / Application / Job scheduler
+  - libmessage-port.so # Application Framework / Message Port
+  - libnotification.so # Application Framework / Notification
+  - libcapi-appfw-package-manager.so # Application Framework / Package Manager
+  - librpc-port.so # Application Framework / RPC Port
+  - libappcore-agent.so # Application Framework / Service Application
+  - libtizen-core.so # Application Framework / Tizen Core
+  - libcapi-base-common.so # Base / Common Error
+  - libcapi-web-url-download.so # Content / Download
+  - libcapi-content-media-content.so # Content / Media Content
+  - libcapi-content-mime-type.so # Content / Mime Type
+  - libcapi-location-manager.so # Location / Location Manager
+  - libcapi-ml-service.so # Machine Learning / Service
+  - libcapi-ml-inference-single.so # Machine Learning / Single
+  - libcapi-nnstreamer.so # Machine Learning / Pipeline
+  - libcapi-nntrainer.so # Machine Learning / Trainer
+  - libpush.so # Messaging / Push
+  - libcapi-media-audio-io.so # Multimedia / Audio I/O
+  - libcapi-media-camera.so # Multimedia / Camera
+  - libcapi-media-image-util.so # Multimedia / Image Util
+  - libcapi-media-codec.so # Multimedia / Media Codec
+  - libcapi-media-controller.so # Multimedia / Media Controller
+  - libcapi-media-editor.so # Multimedia / Media Editor
+  - libcapi-media-tool.so # Multimedia / Media Tool
+  - libcapi-media-metadata-extractor.so # Multimedia / Metadata Extractor
+  - libmv_3d.so # Multimedia / Media Vision 3D
+  - libmv_common.so # Multimedia / Media Vision Common
+  - libmv_face.so # Multimedia / Media Vision Face
+  - libmv_face_recognition.so # Multimedia / Media Vision Face Recognition
+  - libmv_landmark_detection.so # Multimedia / Media Vision Pose Landmark Detection
+  - libmv_image.so # Multimedia / Media Vision Image
+  - libmv_image_classification.so # Multimedia / Media Vision Image Classification
+  - libmv_inference.so # Multimedia / Media Vision Inference
+  - libmv_object_detection.so # Multimedia / Media Vision Object Detection
+  - libmv_roi_tracker.so # Multimedia / Media Vision Roi tracker
+  - libmv_surveillance.so # Multimedia / Media Vision Surveillance
+  - libcapi-media-player.so # Multimedia / Player
+  - libcapi-media-radio.so # Multimeida / Radio
+  - libcapi-media-recorder.so # Multimedia / Recorder
+  - libcapi-media-screen-mirroring.so # Multimedia / Screen Mirroring
+  - libcapi-media-sound-manager.so # Multimedia / Sound Manager
+  - libcapi-media-sound-pool.so # Multimedia / Sound Pool
+  - libcapi-media-thumbnail-util.so # Multimedia / Thumbnail Util
+  - libcapi-media-tone-player.so # Multimedia / Tone Player
+  - libcapi-media-wav-player.so # Multimedia / WAV Player
+  - libcapi-media-webrtc.so # Multimedia / WebRTC
+  - libcapi-network-bluetooth.so # Network / Bluetooth
+  - libnsd-dns-sd.so # Network / DNSSD
+  - libcapi-network-inm.so # Network / Intelligent Network Monitoring
+  - libiotcon.so # Network / IoTCon
+  - libcapi-network-mtp.so # Network / MTP
+  - libcapi-network-connection.so # Network / Connection
+  - libcapi-network-softap.so # Network / SoftAP
+  - libnsd-ssdp.so # Network / SSDP
+  - libcapi-vpnsvc.so # Network / VPN Service
+  - libcapi-network-wifi-aware.so # Network / Wi-Fi Aware
+  - libwifi-direct.so # Network / Wi-Fi Direct
+  - libcapi-network-wifi-manager.so # Network / WI-Fi Manager
+  - libkey-manager-client.so # Security / Key Manager Client
+  - libprivilege-info.so # Security / Privilege Info
+  - libwebauthn-client.so # Security / Web Authentication
+  - libyaca.so # Security / YACA
+  - libphonenumber-utils.so # Social / Phonenumber utils
+  - libcapi-system-device.so # System / Device
+  - libdlog.so # System / Dlog
+  - libfeedback.so # System / Feedback
+  - libcapi-system-media-key.so # System / Media key
+  - libcapi-system-runtime-info.so # System / Runtime information
+  - libcapi-system-sensor.so # System / Sensor
+  - libcapi-system-resource-monitor.so # System / Monitor
+  - libcapi-system-info.so # System / System Information
+  - libcapi-system-system-settings.so # System / System Settings
+  - libupdate-control.so # System / Update Control
+  - libcapi-system-usbhost.so # System / USB Host
+  - libtbm.so # UI / TBM Surface
+  - libcapi-ui-autofill.so # UIX / Autofill
+  - libcapi-ui-autofill-common.so # UIX / Autofill common
+  - libcapi-ui-autofill-manager.so # UIX / Autofill manager
+  - libcapi-ui-autofill-service.so # UIX / Autofill service
+  - libcapi-ui-inputmethod.so # UIX / Input Method
+  - libcapi-ui-inputmethod-manager.so # UIX / Input Method Manager
+  - libmmi.so # UIX / MMI
+  - libma.so # UIX / Multi assistant
+  - libstt.so # UIX / STT
+  - libstt_engine.so # UIX / STT Engine
+  - libtts.so # UIX / TTS
+  - libtts_engine.so # UIX / TTS Engine
+  - libvc_engine.so # UIX / Voice control engine
+  - libvc.so # UIX / Voice control
+  - libvc_manager.so # UIX / Voice control manager
