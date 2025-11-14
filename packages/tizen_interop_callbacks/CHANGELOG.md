@@ -1,3 +1,7 @@
+# 0.4.0
+
+* Add Tizen 10.0 callbacks.
+
 # 0.3.3
 
 * Update README with notes regarding non-void return callback API.
