@@ -80,7 +80,7 @@ tizen.storage_foreach_device_supported(
 
 ## Supported APIs
 
-This package provides bindings for the following APIs of the Tizen [IoT-Headed](https://samsungtizenos.com/docs/library/?sid=ZWSMdLUN0YUP4s3) (or Common for [Tizen 8.0 ~ 9.0](https://docs.tizen.org/application/native/api/common/latest) and [TIzen 10.0](https://samsungtizenos.com/docs/library/?sid=ZWSMdLUN0YUP4s3)) profile.
+This package provides bindings for the following APIs of the Tizen [IoT-Headed](https://samsungtizenos.com/docs/library/?sid=ZWSMdLUN0YUP4s3) (or Common for [Tizen 8.0 ~ 9.0](https://docs.tizen.org/application/native/api/common/latest) and [Tizen 10.0](https://samsungtizenos.com/docs/library/?sid=ZWSMdLUN0YUP4s3)) profile.
 
 > **Note**: UI and WebView related APIs are not included.
 
