@@ -1,3 +1,7 @@
+## 0.5.0
+
+* Add Tizen 10.0 bindings.
+
 ## 0.4.1
 
 * Add Tizen 9.0 bindings.

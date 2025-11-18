@@ -632,7 +632,7 @@ class CallbackDataCollector:
     for cb in cr.callbacks:
       if cb.name in self.callbacks:
         if not cb.compatible_signature(self.callbacks[cb.name]):
-          log.warn('Callback %s signature mismatch %s\n\t%s\n\t%s',
+          log.warning('Callback %s signature mismatch %s\n\t%s\n\t%s',
                    self.version, cb.name, repr(cb), repr(self.callbacks[cb.name]))
       else:
         self.callbacks[cb.name] = cb
