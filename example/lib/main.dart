@@ -3,8 +3,16 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:flutter/material.dart';
 import 'package:tizen_interop/6.0/tizen.dart';
+import 'package:tizen_interop/6.0/tizen_symbols/capi_appfw_app_common_symbols.dart';
+import 'package:tizen_interop/6.0/tizen_symbols/capi_appfw_preference_symbols.dart';
+import 'package:tizen_interop/6.0/tizen_symbols/capi_system_runtime_info_symbols.dart';
 
 void main() {
+  // Register SymbolMaps
+  registerTizenSymbolMap(capiAppfwAppCommonSymbols);
+  registerTizenSymbolMap(capiAppfwPreferenceSymbols);
+  registerTizenSymbolMap(capiSystemRuntimeInfoSymbols);
+
   runApp(const MyApp());
 }
 

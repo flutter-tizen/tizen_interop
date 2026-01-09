@@ -5,16 +5,23 @@
 import 'dart:ffi';
 
 class LookupProvider {
-  LookupProvider(Map<String, List<String>> symbolMap) {
+  final Map<String, String> _libraryIndex = Map<String, String>();
+  final Map<String, DynamicLibrary> _libraryCache =
+      Map<String, DynamicLibrary>();
+  final Set<String> _registeredLibraries = {};
+
+  /// Register symbols for a specific module
+  void registerSymbols(Map<String, List<String>> symbolMap) {
     symbolMap.forEach((String library, List<String> symbols) {
+      if (_registeredLibraries.contains(library)) {
+        return;
+      }
       symbols.forEach((String symbol) {
         _libraryIndex[symbol] = library;
       });
+      _registeredLibraries.add(library);
     });
   }
-
-  late Map<String, String> _libraryIndex = Map<String, String>();
-  Map<String, DynamicLibrary> _libraryCache = Map<String, DynamicLibrary>();
 
   Pointer<T> lookup<T extends NativeType>(String symbolName) {
     var libraryName = _libraryIndex[symbolName];
