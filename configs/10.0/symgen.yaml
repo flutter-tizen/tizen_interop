@@ -78,6 +78,7 @@ target-libraries:
   - libwifi-direct.so.1                         # Network / Wi-Fi Direct
   - libcapi-network-wifi-manager.so.1           # Network / WI-Fi Manager
   - libkey-manager-client.so.1                  # Security / Key Manager Client
+  - libdevice-certificate-manager.so.2.0        # Security / Device Certificate Manager
   - libprivilege-info.so.1                      # Security / Privilege Info
   - libwebauthn-client.so.1                     # Security / Web Authentication
   - libyaca.so.0                                # Security / YACA
