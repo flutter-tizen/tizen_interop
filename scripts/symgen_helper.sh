@@ -25,6 +25,44 @@ LOADING_PID=$!
 
 declare -A symbols
 
+
+FILTER_SCRIPT="
+import sys
+import re
+
+files = [line.strip() for line in sys.stdin]
+groups = {}
+
+pattern = re.compile(r'^(.*\.so)((\.[0-9]+)*)$')
+
+for f in files:
+    m = pattern.match(f)
+    if m:
+        base = m.group(1)
+        if base not in groups:
+            groups[base] = []
+        groups[base].append(f)
+
+for base, variants in sorted(groups.items()):
+    versioned = [v for v in variants if v != base]
+    selected = None
+    if versioned:
+        def version_key(v):
+            ver_str = v[len(base)+1:]
+            parts = [int(p) for p in ver_str.split('.') if p.isdigit()]
+            return parts
+
+        versioned.sort(key=version_key, reverse=True)
+        versioned.sort(key=len)
+        selected = versioned[0]
+    else:
+        if base in variants:
+            selected = base
+
+    if selected:
+        print(selected)
+"
+
 while IFS= read -r so_file; do
     if file "$so_file" | grep -q 'ELF'; then
         while IFS= read -r symbol; do
@@ -35,7 +73,7 @@ while IFS= read -r so_file; do
     else
         echo "Warning: $so_file is not a valid ELF file."
     fi
-done < <(find "$rootstraps" -type f -name "*.so")
+done < <(find "$rootstraps" -type f -name "*.so*" | python3 -c "$FILTER_SCRIPT")
 
 kill $LOADING_PID
 wait $LOADING_PID 2>/dev/null
