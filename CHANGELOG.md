@@ -1,3 +1,8 @@
+## 0.5.1
+
+* Update the so list for Tizen 10.0 symgen.
+* Add missing tizen.dart for Tizen 10.0.
+
 ## 0.5.0
 
 * Add Tizen 10.0 bindings.
