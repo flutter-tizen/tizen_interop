@@ -102,7 +102,7 @@ final Map<String, List<String>> tizen100Symbols = {
     'account_update_to_db_by_id_without_permission',
     'account_update_to_db_by_user_name',
   ],
-  'libcore-sync-client.so': [
+  'libcore-sync-client.so.1': [
     'bundle_iterate_cb',
     'get_interval',
     'marshal_bundle',
@@ -180,7 +180,7 @@ final Map<String, List<String>> tizen100Symbols = {
     'umarshal_bundle',
     'umarshal_sync_job_list',
   ],
-  'libcapi-appfw-application.so': [
+  'libcapi-appfw-application.so.0': [
     'app_efl_exit',
     'app_efl_main',
     'app_exit',
@@ -195,7 +195,7 @@ final Map<String, List<String>> tizen100Symbols = {
     'ui_app_main',
     'ui_app_remove_event_handler',
   ],
-  'libcapi-appfw-alarm.so': [
+  'libcapi-appfw-alarm.so.0': [
     'alarm_cancel',
     'alarm_cancel_all',
     'alarm_foreach_registered_alarm',
@@ -227,7 +227,7 @@ final Map<String, List<String>> tizen100Symbols = {
     'alarm_update_period',
     'alarm_update_week_flag',
   ],
-  'libcapi-appfw-app-common.so': [
+  'libcapi-appfw-app-common.so.0': [
     'app_error',
     'app_event_add_handler',
     'app_event_fini',
@@ -276,7 +276,7 @@ final Map<String, List<String>> tizen100Symbols = {
     'app_watchdog_timer_kick',
     'i18n_get_text',
   ],
-  'libcapi-appfw-app-control.so': [
+  'libcapi-appfw-app-control.so.0': [
     'app_control_add_action_handler',
     'app_control_add_extra_data',
     'app_control_add_extra_data_array',
@@ -340,7 +340,7 @@ final Map<String, List<String>> tizen100Symbols = {
     'app_control_unset_auto_restart',
     'app_control_unset_defapp',
   ],
-  'libcapi-appfw-app-control-uri.so': [
+  'libcapi-appfw-app-control-uri.so.0': [
     'app_control_uri_builder_add_path',
     'app_control_uri_builder_add_query',
     'app_control_uri_builder_build',
@@ -363,14 +363,14 @@ final Map<String, List<String>> tizen100Symbols = {
     'app_control_uri_get_user',
     'app_control_uri_query_foreach',
   ],
-  'libcapi-appfw-event.so': [
+  'libcapi-appfw-event.so.0': [
     'event_add_event_handler',
     'event_keep_last_event_data',
     'event_publish_app_event',
     'event_publish_trusted_app_event',
     'event_remove_event_handler',
   ],
-  'libcapi-appfw-app-manager.so': [
+  'libcapi-appfw-app-manager.so.0': [
     'app_context_clone',
     'app_context_destroy',
     'app_context_get_app_id',
@@ -449,7 +449,7 @@ final Map<String, List<String>> tizen100Symbols = {
     'app_manager_unset_app_context_status_cb',
     'app_manager_unset_event_cb',
   ],
-  'libcapi-appfw-preference.so': [
+  'libcapi-appfw-preference.so.0': [
     'preference_foreach_item',
     'preference_get_boolean',
     'preference_get_double',
@@ -466,7 +466,7 @@ final Map<String, List<String>> tizen100Symbols = {
     'preference_set_string',
     'preference_unset_changed_cb',
   ],
-  'libbundle.so': [
+  'libbundle.so.0': [
     'bundle_add',
     'bundle_add_byte',
     'bundle_add_byte_array',
@@ -507,7 +507,7 @@ final Map<String, List<String>> tizen100Symbols = {
     'bundle_set_str_array_element',
     'bundle_to_json',
   ],
-  'libcapi-appfw-job-scheduler.so': [
+  'libcapi-appfw-job-scheduler.so.0': [
     'job_info_add_trigger_event',
     'job_info_clone',
     'job_info_create',
@@ -531,7 +531,7 @@ final Map<String, List<String>> tizen100Symbols = {
     'job_scheduler_service_add',
     'job_scheduler_service_remove',
   ],
-  'libmessage-port.so': [
+  'libmessage-port.so.1': [
     'message_port_add_registered_cb',
     'message_port_add_unregistered_cb',
     'message_port_check_remote_port',
@@ -546,7 +546,7 @@ final Map<String, List<String>> tizen100Symbols = {
     'message_port_unregister_local_port',
     'message_port_unregister_trusted_local_port',
   ],
-  'libnotification.so': [
+  'libnotification.so.0': [
     'make_dnd_allow_exception_from_exception',
     'make_empty_notification',
     'make_notification_from_noti',
@@ -839,7 +839,7 @@ final Map<String, List<String>> tizen100Symbols = {
     'noti_system_setting_get_do_not_disturb',
     'noti_system_setting_load_system_setting',
   ],
-  'libcapi-appfw-package-manager.so': [
+  'libcapi-appfw-package-manager.so.0': [
     'package_archive_info_create',
     'package_archive_info_destroy',
     'package_archive_info_foreach_direct_dependency',
@@ -959,7 +959,7 @@ final Map<String, List<String>> tizen100Symbols = {
     'package_size_info_get_external_cache_size',
     'package_size_info_get_external_data_size',
   ],
-  'librpc-port.so': [
+  'librpc-port.so.1': [
     'rpc_port_deregister_proc_info',
     'rpc_port_disconnect',
     'rpc_port_get_peer_info',
@@ -1045,7 +1045,7 @@ final Map<String, List<String>> tizen100Symbols = {
     'rpc_port_unset_private_sharing',
     'rpc_port_write',
   ],
-  'libappcore-agent.so': [
+  'libappcore-agent.so.1': [
     'service_app_add_event_handler',
     'service_app_add_job_handler',
     'service_app_exit',
@@ -1057,7 +1057,7 @@ final Map<String, List<String>> tizen100Symbols = {
     'service_app_remove_event_handler',
     'service_app_remove_job_handler',
   ],
-  'libtizen-core.so': [
+  'libtizen-core.so.0': [
     'tizen_core_add_channel',
     'tizen_core_add_event',
     'tizen_core_add_idle_job',
@@ -1124,12 +1124,12 @@ final Map<String, List<String>> tizen100Symbols = {
     'tizen_core_task_quit',
     'tizen_core_task_run',
   ],
-  'libcapi-base-common.so': [
+  'libcapi-base-common.so.0': [
     'get_error_message',
     'get_last_result',
     'set_last_result',
   ],
-  'libcapi-web-url-download.so': [
+  'libcapi-web-url-download.so.0': [
     'download_add_http_header_field',
     'download_cancel',
     'download_create',
@@ -1187,7 +1187,7 @@ final Map<String, List<String>> tizen100Symbols = {
     'download_unset_progress_cb',
     'download_unset_state_changed_cb',
   ],
-  'libcapi-content-media-content.so': [
+  'libcapi-content-media-content.so.0': [
     'audio_meta_clone',
     'audio_meta_destroy',
     'audio_meta_get_album',
@@ -1404,13 +1404,13 @@ final Map<String, List<String>> tizen100Symbols = {
     'video_meta_get_width',
     'video_meta_get_year',
   ],
-  'libcapi-content-mime-type.so': [
+  'libcapi-content-mime-type.so.0': [
     'mime_type_get_file_extension',
     'mime_type_get_mime_type',
     'mime_type_get_mime_type_for_data',
     'mime_type_get_mime_type_for_file',
   ],
-  'libcapi-location-manager.so': [
+  'libcapi-location-manager.so.0': [
     'gps_status_foreach_last_satellites_in_view',
     'gps_status_foreach_satellites_in_view',
     'gps_status_get_last_satellite',
@@ -1479,7 +1479,7 @@ final Map<String, List<String>> tizen100Symbols = {
     'location_manager_unset_velocity_updated_cb',
     'location_manager_unset_zone_changed_cb',
   ],
-  'libcapi-ml-service.so': [
+  'libcapi-ml-service.so.1': [
     'ml_service_destroy',
     'ml_service_get_information',
     'ml_service_get_input_information',
@@ -1508,7 +1508,7 @@ final Map<String, List<String>> tizen100Symbols = {
     'ml_service_start',
     'ml_service_stop',
   ],
-  'libcapi-ml-inference-single.so': [
+  'libcapi-ml-inference-single.so.1': [
     'ml_check_nnfw_availability',
     'ml_check_nnfw_availability_full',
     'ml_single_close',
@@ -1526,7 +1526,7 @@ final Map<String, List<String>> tizen100Symbols = {
     'ml_single_set_property',
     'ml_single_set_timeout',
   ],
-  'libcapi-nnstreamer.so': [
+  'libcapi-nnstreamer.so.1': [
     'ml_check_element_availability',
     'ml_pipeline_construct',
     'ml_pipeline_construct_internal',
@@ -1615,7 +1615,7 @@ final Map<String, List<String>> tizen100Symbols = {
     'ml_train_optimizer_set_property_with_single_param',
     'ml_train_tizen_set_feature_state',
   ],
-  'libpush.so': [
+  'libpush.so.0': [
     'push_connect',
     'push_deregister',
     'push_deregister_dbus_call_info',
@@ -1654,7 +1654,7 @@ final Map<String, List<String>> tizen100Symbols = {
     'push_tool_ping_change',
     'push_tool_pv_ip_change',
   ],
-  'libcapi-media-audio-io.so': [
+  'libcapi-media-audio-io.so.0': [
     'audio_in_create',
     'audio_in_destroy',
     'audio_in_drop',
@@ -1751,7 +1751,7 @@ final Map<String, List<String>> tizen100Symbols = {
     'cpp_audio_out_unset_stream_cb',
     'cpp_audio_out_write',
   ],
-  'libcapi-media-camera.so': [
+  'libcapi-media-camera.so.0': [
     'camera_add_device_state_changed_cb',
     'camera_attr_clear_af_area',
     'camera_attr_disable_shutter_sound',
@@ -1961,7 +1961,7 @@ final Map<String, List<String>> tizen100Symbols = {
     'camera_unset_preview_cb',
     'camera_unset_state_changed_cb',
   ],
-  'libcapi-media-image-util.so': [
+  'libcapi-media-image-util.so.0': [
     'image_util_agif_encode_add_frame',
     'image_util_agif_encode_create',
     'image_util_agif_encode_destroy',
@@ -2013,7 +2013,7 @@ final Map<String, List<String>> tizen100Symbols = {
     'image_util_transform_set_resolution',
     'image_util_transform_set_rotation',
   ],
-  'libcapi-media-codec.so': [
+  'libcapi-media-codec.so.0': [
     'codec_type_to_simple_enumeration',
     'mc_async_queue_disable',
     'mc_async_queue_flush',
@@ -2109,7 +2109,7 @@ final Map<String, List<String>> tizen100Symbols = {
     'mediacodec_unset_output_buffer_available_cb',
     'simple_to_codec_type_enumeration',
   ],
-  'libcapi-media-controller.so': [
+  'libcapi-media-controller.so.0': [
     'mc_client_create',
     'mc_client_destroy',
     'mc_client_destroy_playback',
@@ -2262,7 +2262,7 @@ final Map<String, List<String>> tizen100Symbols = {
     'mc_server_update_shuffle_mode',
     'mc_server_update_subtitles_enabled',
   ],
-  'libcapi-media-editor.so': [
+  'libcapi-media-editor.so.0': [
     'mediaeditor_activate_layer',
     'mediaeditor_add_clip',
     'mediaeditor_add_effect',
@@ -2310,7 +2310,7 @@ final Map<String, List<String>> tizen100Symbols = {
     'mediaeditor_unset_layer_priority_changed_cb',
     'mediaeditor_unset_state_changed_cb',
   ],
-  'libcapi-media-tool.so': [
+  'libcapi-media-tool.so.0': [
     'media_bridge_add_sink',
     'media_bridge_create',
     'media_bridge_destroy',
@@ -2728,7 +2728,7 @@ final Map<String, List<String>> tizen100Symbols = {
     'mv_surveillance_unsubscribe_event_trigger',
     'mv_surveillance_unsubscribe_event_trigger_open',
   ],
-  'libcapi-media-player.so': [
+  'libcapi-media-player.so.0': [
     'client_get_api_timeout',
     'client_wait_for_cb_return',
     'client_wait_for_server_ack',
@@ -2868,7 +2868,7 @@ final Map<String, List<String>> tizen100Symbols = {
     'player_unset_subtitle_updated_cb',
     'player_unset_video_stream_changed_cb',
   ],
-  'libcapi-media-radio.so': [
+  'libcapi-media-radio.so.0': [
     'radio_create',
     'radio_destroy',
     'radio_get_channel_spacing',
@@ -2892,7 +2892,7 @@ final Map<String, List<String>> tizen100Symbols = {
     'radio_unset_interrupted_cb',
     'radio_unset_scan_completed_cb',
   ],
-  'libcapi-media-recorder.so': [
+  'libcapi-media-recorder.so.0': [
     'recorder_add_device_state_changed_cb',
     'recorder_attr_get_audio_channel',
     'recorder_attr_get_audio_device',
@@ -2961,7 +2961,7 @@ final Map<String, List<String>> tizen100Symbols = {
     'recorder_unset_state_changed_cb',
     'recorder_unset_video_encode_decision_cb',
   ],
-  'libcapi-media-screen-mirroring.so': [
+  'libcapi-media-screen-mirroring.so.0': [
     'scmirroring_primary_sink_connect',
     'scmirroring_primary_sink_create',
     'scmirroring_primary_sink_destroy',
@@ -3075,7 +3075,7 @@ final Map<String, List<String>> tizen100Symbols = {
     'scmirroring_src_stop',
     'scmirroring_src_unset_state_changed_cb',
   ],
-  'libcapi-media-sound-manager.so': [
+  'libcapi-media-sound-manager.so.0': [
     'sound_manager_acquire_focus',
     'sound_manager_acquire_focus_all',
     'sound_manager_activate_ducking',
@@ -3197,7 +3197,7 @@ final Map<String, List<String>> tizen100Symbols = {
     'sound_manager_unpublish_local_device',
     'sound_manager_unset_filter',
   ],
-  'libcapi-media-sound-pool.so': [
+  'libcapi-media-sound-pool.so.0': [
     'sound_pool_activate',
     'sound_pool_create',
     'sound_pool_deactivate',
@@ -3223,18 +3223,18 @@ final Map<String, List<String>> tizen100Symbols = {
     'thumbnail_util_extract_to_buffer',
     'thumbnail_util_extract_to_file',
   ],
-  'libcapi-media-tone-player.so': [
+  'libcapi-media-tone-player.so.0': [
     'tone_player_start_new',
     'tone_player_stop',
   ],
-  'libcapi-media-wav-player.so': [
+  'libcapi-media-wav-player.so.0': [
     'wav_player_play_simple',
     'wav_player_start_loop',
     'wav_player_start_loop_stop_others',
     'wav_player_start_new',
     'wav_player_stop',
   ],
-  'libcapi-media-webrtc.so': [
+  'libcapi-media-webrtc.so.1': [
     'webrtc_add_ice_candidate',
     'webrtc_add_media_source',
     'webrtc_add_media_source_internal',
@@ -3379,7 +3379,7 @@ final Map<String, List<String>> tizen100Symbols = {
     'webrtc_util_create_description',
     'webrtc_util_strip_description',
   ],
-  'libcapi-network-bluetooth.so': [
+  'libcapi-network-bluetooth.so.0': [
     'bt_a2dp_set_content_protection',
     'bt_adapter_deinit_battery_monitor',
     'bt_adapter_disable',
@@ -4089,7 +4089,7 @@ final Map<String, List<String>> tizen100Symbols = {
     'bt_tds_stop_seeking_providers',
     'bt_tds_unset_transport_activation_requested_cb',
   ],
-  'libnsd-dns-sd.so': [
+  'libnsd-dns-sd.so.0': [
     'dnssd_browse_service',
     'dnssd_cancel_browse_service',
     'dnssd_cancel_resolve_service',
@@ -4119,7 +4119,7 @@ final Map<String, List<String>> tizen100Symbols = {
     'dnssd_start_browsing_service_on_interface',
     'dnssd_stop_browsing_service',
   ],
-  'libcapi-network-inm.so': [
+  'libcapi-network-inm.so.0': [
     'inm_ap_foreach_vsie',
     'inm_ap_get_assoc_status_code',
     'inm_ap_get_bssid',
@@ -4497,7 +4497,7 @@ final Map<String, List<String>> tizen100Symbols = {
     'inm_wifi_set_scan_state_changed_cb',
     'inm_wifi_unset_scan_state_changed_cb',
   ],
-  'libiotcon.so': [
+  'libiotcon.so.0': [
     'iotcon_add_generated_pin_cb',
     'iotcon_add_presence_cb',
     'iotcon_attributes_add_attributes',
@@ -4706,7 +4706,7 @@ final Map<String, List<String>> tizen100Symbols = {
     'iotcon_start_presence',
     'iotcon_stop_presence',
   ],
-  'libcapi-network-mtp.so': [
+  'libcapi-network-mtp.so.1': [
     'mtp_add_mtp_event_cb',
     'mtp_db_deinit',
     'mtp_db_get_object_info',
@@ -4917,7 +4917,7 @@ final Map<String, List<String>> tizen100Symbols = {
     'mtp_storageinfo_get_storage_type',
     'mtp_storageinfo_get_volume_identifier',
   ],
-  'libcapi-network-connection.so': [
+  'libcapi-network-connection.so.1': [
     'connection_add_profile',
     'connection_add_route',
     'connection_add_route_entry',
@@ -5068,7 +5068,7 @@ final Map<String, List<String>> tizen100Symbols = {
     'connection_unset_type_changed_cb',
     'connection_update_profile',
   ],
-  'libcapi-network-softap.so': [
+  'libcapi-network-softap.so.0.1.0': [
     'softap_client_clone',
     'softap_client_destroy',
     'softap_client_get_ip_address',
@@ -5121,7 +5121,7 @@ final Map<String, List<String>> tizen100Symbols = {
     'softap_unset_security_type_changed_cb',
     'softap_unset_ssid_visibility_changed_cb',
   ],
-  'libnsd-ssdp.so': [
+  'libnsd-ssdp.so.0': [
     'ssdp_create_local_service',
     'ssdp_deinitialize',
     'ssdp_deregister_local_service',
@@ -5136,7 +5136,7 @@ final Map<String, List<String>> tizen100Symbols = {
     'ssdp_start_browsing_service',
     'ssdp_stop_browsing_service',
   ],
-  'libcapi-vpnsvc.so': [
+  'libcapi-vpnsvc.so.1': [
     'vpnsvc_add_dns_server',
     'vpnsvc_add_route',
     'vpnsvc_block_networks',
@@ -5164,7 +5164,7 @@ final Map<String, List<String>> tizen100Symbols = {
     'vpnsvc_update_settings',
     'vpnsvc_write',
   ],
-  'libcapi-network-wifi-aware.so': [
+  'libcapi-network-wifi-aware.so.0': [
     'wifi_aware_data_path_close',
     'wifi_aware_data_path_create',
     'wifi_aware_data_path_destroy',
@@ -5234,7 +5234,7 @@ final Map<String, List<String>> tizen100Symbols = {
     'wifi_aware_subscribe_set_ttl',
     'wifi_aware_subscribe_set_type',
   ],
-  'libwifi-direct.so': [
+  'libwifi-direct.so.1': [
     'wifi_direct_accept_connection',
     'wifi_direct_activate',
     'wifi_direct_activate_pushbutton',
@@ -5344,7 +5344,7 @@ final Map<String, List<String>> tizen100Symbols = {
     'wifi_direct_unset_service_state_changed_cb',
     'wifi_direct_unset_state_changed_cb',
   ],
-  'libcapi-network-wifi-manager.so': [
+  'libcapi-network-wifi-manager.so.1': [
     'net_wifi_flush_bss',
     'net_wifi_get_5ghz_support',
     'net_wifi_get_6ghz_support',
@@ -5603,7 +5603,7 @@ final Map<String, List<String>> tizen100Symbols = {
     'wifi_manager_unset_scan_state_changed_cb',
     'wifi_manager_update_ap',
   ],
-  'libkey-manager-client.so': [
+  'libkey-manager-client.so.1': [
     'ckmc_alias_info_get_alias',
     'ckmc_alias_info_get_backend',
     'ckmc_alias_info_is_password_protected',
@@ -5689,7 +5689,7 @@ final Map<String, List<String>> tizen100Symbols = {
     'ckmc_verify_signature',
     'ckmc_wrap_concatenated_data',
   ],
-  'libprivilege-info.so': [
+  'libprivilege-info.so.1': [
     'privilege_info_free_privilege_info_list',
     'privilege_info_get_description',
     'privilege_info_get_description_by_pkgtype',
@@ -5698,14 +5698,14 @@ final Map<String, List<String>> tizen100Symbols = {
     'privilege_info_get_privacy_display_name',
     'privilege_info_get_privilege_info_list',
   ],
-  'libwebauthn-client.so': [
+  'libwebauthn-client.so.1': [
     'wauthn_cancel',
     'wauthn_get_assertion',
     'wauthn_make_credential',
     'wauthn_set_api_version',
     'wauthn_supported_authenticators',
   ],
-  'libyaca.so': [
+  'libyaca.so.0': [
     'yaca_cleanup',
     'yaca_context_destroy',
     'yaca_context_get_output_length',
@@ -5768,7 +5768,7 @@ final Map<String, List<String>> tizen100Symbols = {
     'yaca_verify_update',
     'yaca_zalloc',
   ],
-  'libphonenumber-utils.so': [
+  'libphonenumber-utils.so.0': [
     'phone_number_add_blocking_rule',
     'phone_number_blocking_rule_create',
     'phone_number_blocking_rule_destroy',
@@ -5786,7 +5786,7 @@ final Map<String, List<String>> tizen100Symbols = {
     'phone_number_get_normalized_number',
     'phone_number_remove_blocking_rule',
   ],
-  'libcapi-system-device.so': [
+  'libcapi-system-device.so.0': [
     'battery_finalize',
     'check_async_call_rate',
     'device_add_callback',
@@ -5877,7 +5877,7 @@ final Map<String, List<String>> tizen100Symbols = {
     'is_feature_display_state_supported',
     'is_feature_display_supported',
   ],
-  'libdlog.so': [
+  'libdlog.so.0': [
     'dlog_print',
     'dlog_print_dotnet',
     'dlog_print_native',
@@ -5886,7 +5886,7 @@ final Map<String, List<String>> tizen100Symbols = {
     'dlog_vprint_dotnet',
     'dlog_vprint_native',
   ],
-  'libfeedback.so': [
+  'libfeedback.so.0': [
     'feedback_deinitialize',
     'feedback_get_count_of_theme_internal',
     'feedback_get_theme_id_internal',
@@ -5906,11 +5906,11 @@ final Map<String, List<String>> tizen100Symbols = {
     'feedback_stop',
     'feedback_stop_type_internal',
   ],
-  'libcapi-system-media-key.so': [
+  'libcapi-system-media-key.so.0': [
     'media_key_release',
     'media_key_reserve',
   ],
-  'libcapi-system-runtime-info.so': [
+  'libcapi-system-runtime-info.so.0': [
     'runtime_info_app_usage_destroy',
     'runtime_info_app_usage_get_appid',
     'runtime_info_app_usage_get_count',
@@ -5933,7 +5933,7 @@ final Map<String, List<String>> tizen100Symbols = {
     'runtime_info_set_changed_cb',
     'runtime_info_unset_changed_cb',
   ],
-  'libcapi-system-sensor.so': [
+  'libcapi-system-sensor.so.0': [
     'getAngleChange',
     'getRotationMatrix',
     'quatToMatrix',
@@ -6019,7 +6019,7 @@ final Map<String, List<String>> tizen100Symbols = {
     'sensor_util_set_attribute_int',
     'setCoordinate',
   ],
-  'libcapi-system-resource-monitor.so': [
+  'libcapi-system-resource-monitor.so.0': [
     'resource_monitor_create_resource',
     'resource_monitor_delete_resource',
     'resource_monitor_exit',
@@ -6044,7 +6044,7 @@ final Map<String, List<String>> tizen100Symbols = {
     'resource_monitor_update',
     'resource_monitor_update_resource',
   ],
-  'libcapi-system-info.so': [
+  'libcapi-system-info.so.0': [
     'system_info_get_custom_bool',
     'system_info_get_custom_double',
     'system_info_get_custom_int',
@@ -6060,7 +6060,7 @@ final Map<String, List<String>> tizen100Symbols = {
     'system_info_get_value_int',
     'system_info_get_value_string',
   ],
-  'libcapi-system-system-settings.so': [
+  'libcapi-system-system-settings.so.0': [
     'system_settings_add_changed_cb',
     'system_settings_add_value_string',
     'system_settings_delete_value_string',
@@ -6075,7 +6075,7 @@ final Map<String, List<String>> tizen100Symbols = {
     'system_settings_set_value_string',
     'system_settings_unset_changed_cb',
   ],
-  'libupdate-control.so': [
+  'libupdate-control.so.1': [
     'update_control_cancel_reservation',
     'update_control_check_new_version',
     'update_control_deinitialize',
@@ -6091,7 +6091,7 @@ final Map<String, List<String>> tizen100Symbols = {
     'update_control_unset_finish_update_cb',
     'update_control_unset_ro_update_cb',
   ],
-  'libcapi-system-usbhost.so': [
+  'libcapi-system-usbhost.so.0': [
     'usb_host_claim_interface',
     'usb_host_config_destroy',
     'usb_host_config_get_interface',
@@ -6173,7 +6173,7 @@ final Map<String, List<String>> tizen100Symbols = {
     'usb_host_unref_device',
     'usb_host_unset_hotplug_cb',
   ],
-  'libtbm.so': [
+  'libtbm.so.1': [
     'tbm_backend_bufmgr_alloc_bo_func',
     'tbm_backend_bufmgr_alloc_bufmgr_func',
     'tbm_backend_bufmgr_free_bo_func',
@@ -6368,7 +6368,7 @@ final Map<String, List<String>> tizen100Symbols = {
     'user_data_delete',
     'user_data_lookup',
   ],
-  'libcapi-ui-autofill.so': [
+  'libcapi-ui-autofill.so.0': [
     'autofill_auth_info_request',
     'autofill_auth_info_set_received_cb',
     'autofill_auth_info_unset_received_cb',
@@ -6383,7 +6383,7 @@ final Map<String, List<String>> tizen100Symbols = {
     'autofill_fill_response_set_received_cb',
     'autofill_fill_response_unset_received_cb',
   ],
-  'libcapi-ui-autofill-common.so': [
+  'libcapi-ui-autofill-common.so.0': [
     'autofill_auth_info_create',
     'autofill_auth_info_destroy',
     'autofill_auth_info_get_app_id',
@@ -6476,7 +6476,7 @@ final Map<String, List<String>> tizen100Symbols = {
     'autofill_view_info_set_app_id',
     'autofill_view_info_set_view_id',
   ],
-  'libcapi-ui-autofill-manager.so': [
+  'libcapi-ui-autofill-manager.so.0': [
     'autofill_manager_connect',
     'autofill_manager_create',
     'autofill_manager_destroy',
@@ -6484,7 +6484,7 @@ final Map<String, List<String>> tizen100Symbols = {
     'autofill_manager_get_autofill_service',
     'autofill_manager_set_autofill_service',
   ],
-  'libcapi-ui-autofill-service.so': [
+  'libcapi-ui-autofill-service.so.0': [
     'autofill_service_deinitialize',
     'autofill_service_initialize',
     'autofill_service_send_auth_info',
@@ -6501,7 +6501,7 @@ final Map<String, List<String>> tizen100Symbols = {
     'autofill_service_unset_fill_requested_cb',
     'autofill_service_unset_terminate_received_cb',
   ],
-  'libcapi-ui-inputmethod.so': [
+  'libcapi-ui-inputmethod.so.0': [
     'ime_commit_content',
     'ime_commit_string',
     'ime_context_get_autocapital_type',
@@ -6621,7 +6621,7 @@ final Map<String, List<String>> tizen100Symbols = {
     'ime_update_preedit_string_with_commit',
     'ime_update_property',
   ],
-  'libcapi-ui-inputmethod-manager.so': [
+  'libcapi-ui-inputmethod-manager.so.0': [
     'ime_manager_get_active_ime',
     'ime_manager_get_enabled_ime_count',
     'ime_manager_is_ime_enabled',
@@ -6629,7 +6629,7 @@ final Map<String, List<String>> tizen100Symbols = {
     'ime_manager_show_ime_list',
     'ime_manager_show_ime_selector',
   ],
-  'libmmi.so': [
+  'libmmi.so.2': [
     'mmi_attribute_clone',
     'mmi_attribute_create',
     'mmi_attribute_create_string_array',
