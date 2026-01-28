@@ -3,16 +3,8 @@ import 'dart:ffi';
 import 'package:ffi/ffi.dart';
 import 'package:flutter/material.dart';
 import 'package:tizen_interop/6.0/tizen.dart';
-import 'package:tizen_interop/6.0/tizen_symbols/capi_appfw_app_common_symbols.dart';
-import 'package:tizen_interop/6.0/tizen_symbols/capi_appfw_preference_symbols.dart';
-import 'package:tizen_interop/6.0/tizen_symbols/capi_system_runtime_info_symbols.dart';
 
 void main() {
-  // Register SymbolMaps
-  registerTizenSymbolMap(capiAppfwAppCommonSymbols);
-  registerTizenSymbolMap(capiAppfwPreferenceSymbols);
-  registerTizenSymbolMap(capiSystemRuntimeInfoSymbols);
-
   runApp(const MyApp());
 }
 
@@ -54,7 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // automatically when the `using` block ends.
     _appName = using((Arena arena) {
       Pointer<Pointer<Char>> ppStr = arena();
-      if (tizen.app_get_name(ppStr) == 0) {
+      if (tizenCapiAppfwAppCommon.app_get_name(ppStr) == 0) {
         // The memory allocated by the Native API must be freed by the caller.
         arena.using(ppStr.value, calloc.free);
         return ppStr.value.toDartString();
@@ -68,7 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
     using((Arena arena) {
       Pointer<Char> pKey =
           'tizen_interop_test_key_for_int'.toNativeChar(allocator: arena);
-      tizen.preference_set_int(pKey, 100);
+      tizenCapiAppfwPreference.preference_set_int(pKey, 100);
     });
 
     // Getting an integer value from the Native API.
@@ -76,7 +68,7 @@ class _MyHomePageState extends State<MyHomePage> {
       Pointer<Char> pKey =
           'tizen_interop_test_key_for_int'.toNativeChar(allocator: arena);
       Pointer<Int> pValue = arena();
-      if (tizen.preference_get_int(pKey, pValue) == 0) {
+      if (tizenCapiAppfwPreference.preference_get_int(pKey, pValue) == 0) {
         return pValue.value;
       }
       return 0;
@@ -85,7 +77,9 @@ class _MyHomePageState extends State<MyHomePage> {
     // Getting a struct value from the Native API.
     _freeMemory = using((Arena arena) {
       Pointer<runtime_memory_info_s> pMemInfo = arena();
-      if (tizen.runtime_info_get_system_memory_info(pMemInfo) == 0) {
+      if (tizenCapiSystemRuntimeInfo
+              .runtime_info_get_system_memory_info(pMemInfo) ==
+          0) {
         return pMemInfo.ref.free;
       }
       return 0;

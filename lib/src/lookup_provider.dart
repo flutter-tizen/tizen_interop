@@ -8,19 +8,17 @@ class LookupProvider {
   final Map<String, String> _libraryIndex = Map<String, String>();
   final Map<String, DynamicLibrary> _libraryCache =
       Map<String, DynamicLibrary>();
-  final Set<String> _registeredLibraries = {};
+  final Set<String> _registeredSymbolMaps = {};
 
   /// Register symbols for a specific module
   void registerSymbols(Map<String, List<String>> symbolMap) {
-    symbolMap.forEach((String library, List<String> symbols) {
-      if (_registeredLibraries.contains(library)) {
-        return;
-      }
-      symbols.forEach((String symbol) {
-        _libraryIndex[symbol] = library;
+    if (_registeredSymbolMaps.add(symbolMap.keys.first)) {
+      symbolMap.forEach((String library, List<String> symbols) {
+        symbols.forEach((String symbol) {
+          _libraryIndex[symbol] = library;
+        });
       });
-      _registeredLibraries.add(library);
-    });
+    }
   }
 
   Pointer<T> lookup<T extends NativeType>(String symbolName) {
