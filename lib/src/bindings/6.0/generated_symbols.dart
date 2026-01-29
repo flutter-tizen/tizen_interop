@@ -9649,4 +9649,3 @@ const Map<String, List<String>> vc_managerSymbols = {
   ],
 };
 
-};

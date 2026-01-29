@@ -55,7 +55,6 @@ const Map<String, List<String>> ${moduleName}Symbols = {
 };\n
 ''';
     }
-    contents += '};\n';
 
     final outputFile = fs.file(_config.output);
     outputFile.parent.createSync(recursive: true);
