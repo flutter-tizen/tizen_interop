@@ -4,7 +4,7 @@ preamble: |
   // found in the LICENSE file.
 
 name: 'tizen65Symbols'
-output: 'lib/6.5/tizen_symbols'
+output: 'lib/src/bindings/6.5/generated_symbols.dart'
 library-path: 'rootstraps/6.5/usr/lib'
 
 target-libraries:

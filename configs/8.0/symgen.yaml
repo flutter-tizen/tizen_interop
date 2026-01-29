@@ -4,7 +4,7 @@ preamble: |
   // found in the LICENSE file.
 
 name: 'tizen80Symbols'
-output: 'lib/8.0/tizen_symbols'
+output: 'lib/src/bindings/8.0/generated_symbols.dart'
 library-path: 'rootstraps/8.0/usr/lib'
 
 target-libraries:
