@@ -30,3 +30,13 @@
      If substitution is not found or assert fails - edit the type mapping
      (see `CallbackDataCollector.type_substitute()` and maps used there: `KNOWN_TYPES`, `SPECIAL_TYPES`).
    * Run `./generate_callbacks.sh` to update `callbacks.cc` with callbacks data.
+
+## Generating documentation
+
+The `generate_doc_script.py` script generates markdown API documentation for all supported Tizen versions. It scans the `configs` directory and creates or overwrites `doc/tizen<version>_api.md` for each version.
+
+Run the script with:
+
+```sh
+python3 generate_doc_script.py
+```
