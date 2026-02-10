@@ -153,7 +153,7 @@ def process_version(ver):
     # 5. Write File
     os.makedirs(os.path.dirname(file_output), exist_ok=True)
     with open(file_output, 'w') as f:
-        f.write("| Library name | Variable name | Symbol name |\n")
+        f.write("| Module name | Getter name | Symbol name |\n")
         f.write("| --- | --- | --- |\n")
         f.write("\n".join(rows))
         f.write("\n")
