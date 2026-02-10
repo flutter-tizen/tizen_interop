@@ -1,3 +1,7 @@
+# Next
+
+* Updated the example to use each module's getter instead of the `tizen` getter.
+
 # 0.4.0
 
 * Add Tizen 10.0 callbacks.

@@ -38,5 +38,5 @@ The `generate_doc_script.py` script generates markdown API documentation for all
 Run the script with:
 
 ```sh
-python3 generate_doc_script.py
+python3 scripts/generate_doc_script.py
 ```
