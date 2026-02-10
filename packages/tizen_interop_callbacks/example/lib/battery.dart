@@ -54,13 +54,13 @@ class _BatteryTabState extends State<BatteryTab> {
       userObject: this,
       blocking: true,
     );
-    int ret = tizen.device_add_callback(
+    int ret = tizenCapiSystemDevice.device_add_callback(
       device_callback_e.DEVICE_CALLBACK_BATTERY_CHARGING,
       _chargingCallback.interopCallback,
       _chargingCallback.interopUserData,
     );
     if (ret != 0) {
-      final error = tizen.get_error_message(ret).toDartString();
+      final error = tizenCapiBaseCommon.get_error_message(ret).toDartString();
       print('Failed to add battery charging callback: $error');
     }
 
@@ -69,32 +69,32 @@ class _BatteryTabState extends State<BatteryTab> {
       Pointer.fromFunction(_batteryChanged),
       userObject: this,
     );
-    ret = tizen.device_add_callback(
+    ret = tizenCapiSystemDevice.device_add_callback(
       device_callback_e.DEVICE_CALLBACK_BATTERY_CAPACITY,
       _levelCallback.interopCallback,
       _levelCallback.interopUserData,
     );
     if (ret != 0) {
-      final error = tizen.get_error_message(ret).toDartString();
+      final error = tizenCapiBaseCommon.get_error_message(ret).toDartString();
       print('Failed to add battery level callback: $error');
     }
 
     using((Arena arena) {
       Pointer<Int> percent = arena();
-      int ret = tizen.device_battery_get_percent(percent);
+      int ret = tizenCapiSystemDevice.device_battery_get_percent(percent);
       if (ret == 0) {
         _batteryLevel = percent.value;
       } else {
-        final error = tizen.get_error_message(ret).toDartString();
+        final error = tizenCapiBaseCommon.get_error_message(ret).toDartString();
         print('Failed to read battery level: $error');
       }
 
       Pointer<Bool> charging = arena();
-      ret = tizen.device_battery_is_charging(charging);
+      ret = tizenCapiSystemDevice.device_battery_is_charging(charging);
       if (ret == 0) {
         _batteryCharging = charging.value;
       } else {
-        final error = tizen.get_error_message(ret).toDartString();
+        final error = tizenCapiBaseCommon.get_error_message(ret).toDartString();
         print('Failed to read battery charging status: $error');
       }
       setState(() {});
@@ -103,11 +103,11 @@ class _BatteryTabState extends State<BatteryTab> {
 
   @override
   void dispose() {
-    tizen.device_remove_callback(
+    tizenCapiSystemDevice.device_remove_callback(
       device_callback_e.DEVICE_CALLBACK_BATTERY_CAPACITY,
       _levelCallback.interopCallback,
     );
-    tizen.device_remove_callback(
+    tizenCapiSystemDevice.device_remove_callback(
       device_callback_e.DEVICE_CALLBACK_BATTERY_CHARGING,
       _chargingCallback.interopCallback,
     );

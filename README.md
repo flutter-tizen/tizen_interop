@@ -30,7 +30,7 @@ import 'package:tizen_interop/6.0/tizen.dart';
 // automatically when the `using` block ends.
 String appName = using((Arena arena) {
   Pointer<Pointer<Char>> ppStr = arena();
-  if (tizen.app_get_name(ppStr) == 0) {
+  if (tizenCapiAppfwAppCommon.app_get_name(ppStr) == 0) {
     // The memory allocated by the Native API must be freed by the caller.
     arena.using(ppStr.value, calloc.free);
     return ppStr.value.toDartString();
@@ -44,7 +44,7 @@ String appName = using((Arena arena) {
 using((Arena arena) {
   Pointer<Char> pKey =
       'tizen_interop_test_key_for_int'.toNativeChar(allocator: arena);
-  tizen.preference_set_int(pKey, 100);
+  tizenCapiAppfwPreference.preference_set_int(pKey, 100);
 });
 
 // Getting an integer value from the Native API.
@@ -52,7 +52,7 @@ int preferenceValue = using((Arena arena) {
   Pointer<Char> pKey =
       'tizen_interop_test_key_for_int'.toNativeChar(allocator: arena);
   Pointer<Int> pValue = arena();
-  if (tizen.preference_get_int(pKey, pValue) == 0) {
+  if (tizenCapiAppfwPreference.preference_get_int(pKey, pValue) == 0) {
     return pValue.value;
   }
   return 0;
@@ -61,7 +61,7 @@ int preferenceValue = using((Arena arena) {
 // Getting a struct value from the Native API.
 int freeMemory = using((Arena arena) {
   Pointer<runtime_memory_info_s> pMemInfo = arena();
-  if (tizen.runtime_info_get_system_memory_info(pMemInfo) == 0) {
+  if (tizenCapiSystemRuntimeInfo.runtime_info_get_system_memory_info(pMemInfo) == 0) {
     return pMemInfo.ref.free;
   }
   return 0;
@@ -69,13 +69,17 @@ int freeMemory = using((Arena arena) {
 
 // Both sync and async callbacks are supported as long as they are called on
 // the same thread.
-tizen.storage_foreach_device_supported(
+tizenStorage.storage_foreach_device_supported(
     Pointer.fromFunction(_storageDevice, false), nullptr);
 
 // Callbacks that are called outside the current thread will cause the error:
 // "Cannot invoke native callback outside an isolate".
 // See the tizen_interop_callbacks package for a solution.
 ```
+
+> **Note**: To find the correct getter for a specific API, please refer to the `doc/tizen{version}_api.md` file (e.g., `doc/tizen6.0_api.md`).
+
+> **Warning**: Currently, the package is under development. All getters instance the same `TizenNative` class, so you can technically access APIs from other modules through any getter. However, doing so will cause a runtime warning. Please use the correct getter for each API to avoid future compatibility issues.
 
 
 ## Supported APIs

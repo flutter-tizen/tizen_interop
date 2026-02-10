@@ -66,10 +66,10 @@ class _PreviewResolutionsState extends State<PreviewResolutionsTab> {
 
     final cameraHandle = using((Arena arena) {
       Pointer<camera_h> camera = arena();
-      final ret =
-          tizen.camera_create(camera_device_e.CAMERA_DEVICE_CAMERA0, camera);
+      final ret = tizenCapiMediaCamera.camera_create(
+          camera_device_e.CAMERA_DEVICE_CAMERA0, camera);
       if (ret != 0) {
-        final error = tizen.get_error_message(ret).toDartString();
+        final error = tizenCapiBaseCommon.get_error_message(ret).toDartString();
         print('Failed to initialize camera: $error');
         return nullptr;
       }
@@ -77,17 +77,18 @@ class _PreviewResolutionsState extends State<PreviewResolutionsTab> {
     });
 
     if (cameraHandle != nullptr) {
-      final ret = tizen.camera_foreach_supported_preview_resolution(
+      final ret =
+          tizenCapiMediaCamera.camera_foreach_supported_preview_resolution(
         cameraHandle,
         callback.interopCallback,
         callback.interopUserData,
       );
       if (ret != 0) {
-        final error = tizen.get_error_message(ret).toDartString();
+        final error = tizenCapiBaseCommon.get_error_message(ret).toDartString();
         print('Failed to query preview resolutions: $error');
       }
 
-      tizen.camera_destroy(cameraHandle);
+      tizenCapiMediaCamera.camera_destroy(cameraHandle);
     }
 
     sendPort.send(null);
