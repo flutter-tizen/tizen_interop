@@ -73,9 +73,7 @@ const Map<String, List<String>> ${moduleName}Symbols = {
       return functionNames;
     }
 
-    final funcExp = RegExp(
-        r'^[a-zA-Z_][a-zA-Z0-9_*\s]+\s+([a-zA-Z_][a-zA-Z0-9_]*)\s*\(',
-        multiLine: true);
+    final funcExp = RegExp(r'^[a-zA-Z_].*?[\s*]+([\w]+)\s*\(', multiLine: true);
 
     for (final entity in headerDir.listSync(recursive: true)) {
       if (entity is File && path.extension(entity.path) == '.h') {
@@ -96,7 +94,7 @@ const Map<String, List<String>> ${moduleName}Symbols = {
 
   Iterable<String> _getSymbols(File libraryFile) sync* {
     var result = Process.runSync('nm', ['-D', libraryFile.absolute.path]);
-    final exp = RegExp(r'[0-9a-f]+ T ([a-zA-Z].+)');
+    final exp = RegExp(r'[0-9a-f]+ T ([\w]+)');
     for (var line in LineSplitter.split(result.stdout)) {
       final match = exp.firstMatch(line);
       if (match != null) {

@@ -1,4 +1,4 @@
-| Library name | Variable name | Symbol name |
+| Module name | Getter name | Symbol name |
 | --- | --- | --- |
 | Account / Account Manager | tizenAccountsSvc | account_connect |
 |  |  | account_connect_readonly |
@@ -197,11 +197,21 @@
 |  |  | app_event_get_region_format |
 |  |  | app_event_get_suspended_state |
 |  |  | app_event_get_time_zone |
+|  |  | app_get_cache_path |
+|  |  | app_get_data_path |
 |  |  | app_get_display_state |
+|  |  | app_get_external_cache_path |
+|  |  | app_get_external_data_path |
+|  |  | app_get_external_shared_data_path |
 |  |  | app_get_id |
 |  |  | app_get_name |
 |  |  | app_get_res_control_allowed_resource_path |
 |  |  | app_get_res_control_global_resource_path |
+|  |  | app_get_resource_path |
+|  |  | app_get_shared_data_path |
+|  |  | app_get_shared_resource_path |
+|  |  | app_get_shared_trusted_path |
+|  |  | app_get_tep_resource_path |
 |  |  | app_get_version |
 |  |  | app_resource_manager_get |
 |  |  | app_resource_manager_init |
@@ -209,6 +219,7 @@
 |  |  | app_watchdog_timer_disable |
 |  |  | app_watchdog_timer_enable |
 |  |  | app_watchdog_timer_kick |
+|  |  | i18n_get_text |
 | Application Framework / Application / App Control | tizenCapiAppfwAppControl | app_control_add_action_handler |
 |  |  | app_control_add_extra_data |
 |  |  | app_control_add_extra_data_array |
@@ -387,7 +398,10 @@
 |  |  | bundle_add_byte_array |
 |  |  | bundle_add_str |
 |  |  | bundle_add_str_array |
+|  |  | bundle_create |
+|  |  | bundle_decode |
 |  |  | bundle_del |
+|  |  | bundle_dup |
 |  |  | bundle_encode |
 |  |  | bundle_foreach |
 |  |  | bundle_free |
@@ -395,6 +409,7 @@
 |  |  | bundle_get_byte_array |
 |  |  | bundle_get_count |
 |  |  | bundle_get_str |
+|  |  | bundle_get_str_array |
 |  |  | bundle_get_type |
 |  |  | bundle_keyval_get_array_val |
 |  |  | bundle_keyval_get_basic_val |
@@ -515,6 +530,10 @@
 |  |  | data_control_map_unregister_add_bulk_data_response_cb |
 |  |  | data_control_map_unregister_response_cb |
 |  |  | data_control_provider_add_data_change_consumer_filter_cb |
+|  |  | data_control_provider_create_delete_statement |
+|  |  | data_control_provider_create_insert_statement |
+|  |  | data_control_provider_create_select_statement |
+|  |  | data_control_provider_create_update_statement |
 |  |  | data_control_provider_foreach_data_change_consumer |
 |  |  | data_control_provider_get_client_appid |
 |  |  | data_control_provider_map_register_add_bulk_data_request_cb |
@@ -1034,7 +1053,8 @@
 |  |  | tizen_core_task_is_running |
 |  |  | tizen_core_task_quit |
 |  |  | tizen_core_task_run |
-| Base / Common Error | tizenCapiBaseCommon | get_last_result |
+| Base / Common Error | tizenCapiBaseCommon | get_error_message |
+|  |  | get_last_result |
 |  |  | set_last_result |
 | Content / Download | tizenCapiWebUrlDownload | download_add_http_header_field |
 |  |  | download_cancel |
@@ -1594,7 +1614,8 @@
 |  |  | email_set_message_sent_cb |
 |  |  | email_set_subject |
 |  |  | email_unset_message_sent_cb |
-| Messaging / Push | tizenPush | push_service_app_control_to_notification |
+| Messaging / Push | tizenPush | push_service_app_control_to_noti_data |
+|  |  | push_service_app_control_to_notification |
 |  |  | push_service_connect |
 |  |  | push_service_deregister |
 |  |  | push_service_disconnect |
@@ -4932,6 +4953,7 @@
 |  |  | update_control_unset_finish_update_cb |
 |  |  | update_control_unset_ro_update_cb |
 | UI / External Output Manager | tizenEom | eom_deinit |
+|  |  | eom_get_eom_output_ids |
 |  |  | eom_get_output_attribute |
 |  |  | eom_get_output_attribute_state |
 |  |  | eom_get_output_mode |
