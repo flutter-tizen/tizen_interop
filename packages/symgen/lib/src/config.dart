@@ -21,6 +21,9 @@ class Config {
   String get libraryPath => _libraryPath;
   late final String _libraryPath;
 
+  String get headerPath => _headerPath;
+  late final String _headerPath;
+
   List<String> get targetLibraries => _targetLibraries;
   late final List<String> _targetLibraries;
 
@@ -46,6 +49,8 @@ class Config {
 
     config._libraryPath = argResults?['library-path'] ??
         _mapEnvironmentVariables(map.getValue('library-path'));
+
+    config._headerPath = config._libraryPath.replaceAll('/lib', '/include');
 
     config.allowlist.addAll(_readAllowlistFile(
       argResults?['allowlist'] ?? map.getValue('allowlist', mandatory: false),

@@ -7,11 +7,13 @@ import 'dart:io';
 
 import 'package:file/file.dart';
 import 'package:file/local.dart';
+import 'package:path/path.dart' as path;
 
 import 'config.dart';
 
 class CodeGenerator {
   final Config _config;
+  late final Set<String> _headerFunctions;
 
   CodeGenerator(Config config) : _config = config;
 
@@ -21,6 +23,7 @@ class CodeGenerator {
     if (!libraryPath.existsSync()) {
       throw FileSystemException('$libraryPath is not found.');
     }
+    _headerFunctions = _getFunctionNamesFromHeaders();
 
     var contents = '''
 ${_config.preamble}
@@ -61,13 +64,44 @@ const Map<String, List<String>> ${moduleName}Symbols = {
     outputFile.writeAsStringSync(contents);
   }
 
+  Set<String> _getFunctionNamesFromHeaders() {
+    final fs = const LocalFileSystem();
+    final headerDir = fs.directory(_config.headerPath);
+    final functionNames = <String>{};
+
+    if (!headerDir.existsSync()) {
+      return functionNames;
+    }
+
+    final funcExp = RegExp(r'^[a-zA-Z_].*?[\s*]+([\w]+)\s*\(', multiLine: true);
+
+    for (final entity in headerDir.listSync(recursive: true)) {
+      if (entity is File && path.extension(entity.path) == '.h') {
+        try {
+          final content = entity.readAsStringSync();
+          final matches = funcExp.allMatches(content);
+          for (final match in matches) {
+            functionNames.add(match.group(1)!);
+          }
+        } catch (e) {
+          print('Warning: Could not read file ${entity.path}: $e');
+        }
+      }
+    }
+
+    return functionNames;
+  }
+
   Iterable<String> _getSymbols(File libraryFile) sync* {
     var result = Process.runSync('nm', ['-D', libraryFile.absolute.path]);
-    final exp = RegExp(r'[0-9a-f]+ T ([a-zA-Z].+)');
+    final exp = RegExp(r'[0-9a-f]+ T ([\w]+)');
     for (var line in LineSplitter.split(result.stdout)) {
       final match = exp.firstMatch(line);
       if (match != null) {
-        yield match.group(1)!;
+        final symbol = match.group(1)!;
+        if (_headerFunctions.contains(symbol)) {
+          yield symbol;
+        }
       }
     }
   }
