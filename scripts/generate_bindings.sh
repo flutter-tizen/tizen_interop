@@ -20,4 +20,28 @@ if [ ! -d $ROOT_DIR/rootstraps/$version ]; then
 fi
 
 dart run symgen --config $ROOT_DIR/configs/$version/symgen.yaml
-dart run ffigen --config $ROOT_DIR/configs/$version/ffigen.yaml --ignore-source-errors
+
+if [ -f "$ROOT_DIR/configs/$version/ffigen.yaml" ]; then
+    echo "Running ffigen with single config file..."
+    dart run ffigen --config $ROOT_DIR/configs/$version/ffigen.yaml --ignore-source-errors
+else
+    echo "Running ffigen for module-specific configs..."
+    config_dir="$ROOT_DIR/configs/$version"
+    count=0
+
+    for config_file in "$config_dir"/ffigen-*.yaml; do
+        [ -e "$config_file" ] || continue
+
+        count=$((count + 1))
+        filename=$(basename "$config_file")
+        echo "[$count] Processing $filename..."
+        dart run ffigen --config "$config_file" --ignore-source-errors
+    done
+
+    if [ $count -eq 0 ]; then
+        echo "Error: No ffigen config files found in $config_dir"
+        exit 1
+    fi
+
+    echo "Completed $count module(s)"
+fi
