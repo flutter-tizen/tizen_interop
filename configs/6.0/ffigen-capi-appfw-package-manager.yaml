@@ -24,6 +24,7 @@ compiler-opts:
   - '-Wno-incomplete-setjmp-declaration'
   - '-I./rootstraps/6.0/usr/include/'
   - '-I./rootstraps/6.0/usr/include/appfw/'
+  - '-Dsize_t=unsigned'
 
 enums:
   rename:
