@@ -17,6 +17,7 @@ headers:
   include-directives:
     - '**/media_format.h'
     - '**/media_packet.h'
+    - '**/media_packet_pool.h'
 
 library-imports:
   tbm_surface: 'generated_bindings_tbm.dart'

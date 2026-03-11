@@ -439,6 +439,36 @@ class Tizen60Storage {
   late final _storage_get_external_memory_size =
       _storage_get_external_memory_sizePtr
           .asFunction<int Function(ffi.Pointer<statvfs>)>();
+
+  int storage_get_internal_memory_size64(
+    ffi.Pointer<statvfs> buf,
+  ) {
+    return _storage_get_internal_memory_size64(
+      buf,
+    );
+  }
+
+  late final _storage_get_internal_memory_size64Ptr =
+      _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<statvfs>)>>(
+          'storage_get_internal_memory_size64');
+  late final _storage_get_internal_memory_size64 =
+      _storage_get_internal_memory_size64Ptr
+          .asFunction<int Function(ffi.Pointer<statvfs>)>();
+
+  int storage_get_external_memory_size64(
+    ffi.Pointer<statvfs> buf,
+  ) {
+    return _storage_get_external_memory_size64(
+      buf,
+    );
+  }
+
+  late final _storage_get_external_memory_size64Ptr =
+      _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Pointer<statvfs>)>>(
+          'storage_get_external_memory_size64');
+  late final _storage_get_external_memory_size64 =
+      _storage_get_external_memory_size64Ptr
+          .asFunction<int Function(ffi.Pointer<statvfs>)>();
 }
 
 /// @brief Enumeration for Storage of error codes.

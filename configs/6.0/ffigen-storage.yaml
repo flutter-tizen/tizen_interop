@@ -17,6 +17,7 @@ headers:
   include-directives:
     - '**/storage.h'
     - '**/storage-expand.h'
+    - 'entrypoints-storage.h'
 
 compiler-opts:
   - '-m32'

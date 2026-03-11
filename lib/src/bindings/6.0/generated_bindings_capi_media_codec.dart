@@ -828,7 +828,7 @@ class Tizen60CapiMediaCodec {
   /// @see media_packet_pool_destroy()
   int mediacodec_get_packet_pool(
     mediacodec_h mediacodec,
-    ffi.Pointer<media_packet_pool_h> pool,
+    ffi.Pointer<media_tool.media_packet_pool_h> pool,
   ) {
     return _mediacodec_get_packet_pool(
       mediacodec,
@@ -837,12 +837,14 @@ class Tizen60CapiMediaCodec {
   }
 
   late final _mediacodec_get_packet_poolPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(mediacodec_h,
-              ffi.Pointer<media_packet_pool_h>)>>('mediacodec_get_packet_pool');
+          ffi.NativeFunction<
+              ffi.Int Function(
+                  mediacodec_h, ffi.Pointer<media_tool.media_packet_pool_h>)>>(
+      'mediacodec_get_packet_pool');
   late final _mediacodec_get_packet_pool =
       _mediacodec_get_packet_poolPtr.asFunction<
-          int Function(mediacodec_h, ffi.Pointer<media_packet_pool_h>)>();
+          int Function(
+              mediacodec_h, ffi.Pointer<media_tool.media_packet_pool_h>)>();
 }
 
 final class mediacodec_s extends ffi.Opaque {}
@@ -1137,9 +1139,3 @@ typedef mediacodec_supported_codec_cbFunction = ffi.Bool Function(
     ffi.Int32 codec_type, ffi.Pointer<ffi.Void> user_data);
 typedef Dartmediacodec_supported_codec_cbFunction = bool Function(
     int codec_type, ffi.Pointer<ffi.Void> user_data);
-
-/// @brief  The Media Packet Pool Handle.
-/// @since_tizen 3.0
-typedef media_packet_pool_h = ffi.Pointer<media_packet_pool_s>;
-
-final class media_packet_pool_s extends ffi.Opaque {}

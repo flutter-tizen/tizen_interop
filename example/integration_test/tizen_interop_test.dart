@@ -364,7 +364,7 @@ void main() {
       final percentPtr = arena<Int>();
       final result = tizen.device_battery_get_percent(percentPtr);
       if (result != 0) {
-        final errMsg = tizenCapiBaseCommon.get_error_message(0);
+        final errMsg = tizenCapiBaseCommon.get_error_message(result);
         expect(errMsg, isNot(null));
       }
     });

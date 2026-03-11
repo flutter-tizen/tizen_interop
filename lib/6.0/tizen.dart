@@ -109,7 +109,6 @@ import '../../src/bindings/6.0/generated_bindings_storage.dart';
 import '../../src/bindings/6.0/generated_bindings_stt.dart';
 import '../../src/bindings/6.0/generated_bindings_stt_engine.dart';
 import '../../src/bindings/6.0/generated_bindings_tbm.dart';
-import '../../src/bindings/6.0/generated_bindings_time.dart';
 import '../../src/bindings/6.0/generated_bindings_ttrace.dart';
 import '../../src/bindings/6.0/generated_bindings_tts.dart';
 import '../../src/bindings/6.0/generated_bindings_tts_engine.dart';

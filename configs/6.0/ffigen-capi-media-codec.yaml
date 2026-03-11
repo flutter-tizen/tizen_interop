@@ -30,6 +30,10 @@ type-map:
       lib: 'media_tool'
       c-type: 'media_packet_h'
       dart-type: 'media_packet_h'
+    'media_packet_pool_h':
+      lib: 'media_tool'
+      c-type: 'media_packet_pool_h'
+      dart-type: 'media_packet_pool_h'
 
 compiler-opts:
   - '-m32'
