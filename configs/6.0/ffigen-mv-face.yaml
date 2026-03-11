@@ -1,0 +1,50 @@
+preamble: |
+  // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
+  // Use of this source code is governed by a BSD-style license that can be
+  // found in the LICENSE file.
+  // ignore_for_file: type=lint, unused_element, unused_field
+
+name: 'Tizen60MvFace'
+description: 'Dart bindings for Tizen mv_face APIs.'
+output: '../../lib/src/bindings/6.0/generated_bindings_mv_face.dart'
+
+llvm-path:
+  - '/usr/lib/llvm-12'
+
+headers:
+  entry-points:
+    - 'entrypoints-mv_face.h'
+  include-directives:
+    - '**/mv_face.h'
+
+library-imports:
+  mv_common: 'generated_bindings_mv_common.dart'
+
+type-map:
+  typedefs:
+    'mv_engine_config_h':
+      lib: 'mv_common'
+      c-type: 'mv_engine_config_h'
+      dart-type: 'mv_engine_config_h'
+    'mv_source_h':
+      lib: 'mv_common'
+      c-type: 'mv_source_h'
+      dart-type: 'mv_source_h'
+    'mv_quadrangle_s':
+      lib: 'mv_common'
+      c-type: 'mv_quadrangle_s'
+      dart-type: 'mv_quadrangle_s'
+    'mv_rectangle_s':
+      lib: 'mv_common'
+      c-type: 'mv_rectangle_s'
+      dart-type: 'mv_rectangle_s'
+
+compiler-opts:
+  - '-m32'
+  - '-Wno-incomplete-setjmp-declaration'
+  - '-I./rootstraps/6.0/usr/include/'
+  - '-I./rootstraps/6.0/usr/include/media/'
+
+enums:
+  rename:
+    '_+(.*)': '$1'

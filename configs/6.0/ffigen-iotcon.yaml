@@ -1,0 +1,45 @@
+preamble: |
+  // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
+  // Use of this source code is governed by a BSD-style license that can be
+  // found in the LICENSE file.
+  // ignore_for_file: type=lint, unused_element, unused_field
+
+name: 'Tizen60Iotcon'
+description: 'Dart bindings for Tizen iotcon APIs.'
+output: '../../lib/src/bindings/6.0/generated_bindings_iotcon.dart'
+
+llvm-path:
+  - '/usr/lib/llvm-12'
+
+headers:
+  entry-points:
+    - 'entrypoints-iotcon.h'
+  include-directives:
+    - '**/iotcon.h'
+    - '**/iotcon-types.h'
+    - '**/iotcon-errors.h'
+    - '**/iotcon-server.h'
+    - '**/iotcon-client.h'
+    - '**/iotcon-resource.h'
+    - '**/iotcon-lite-resource.h'
+    - '**/iotcon-response.h'
+    - '**/iotcon-observers.h'
+    - '**/iotcon-request.h'
+    - '**/iotcon-remote-resource.h'
+    - '**/iotcon-list.h'
+    - '**/iotcon-query.h'
+    - '**/iotcon-attributes.h'
+    - '**/iotcon-options.h'
+    - '**/iotcon-representation.h'
+    - '**/iotcon-resource-types.h'
+    - '**/iotcon-resource-interfaces.h'
+
+compiler-opts:
+  - '-m32'
+  - '-Wno-incomplete-setjmp-declaration'
+  - '-I./rootstraps/6.0/usr/include/'
+  - '-I./rootstraps/6.0/usr/include/iotcon/'
+
+enums:
+  rename:
+    '_+(.*)': '$1'

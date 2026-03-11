@@ -1,0 +1,56 @@
+preamble: |
+  // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
+  // Use of this source code is governed by a BSD-style license that can be
+  // found in the LICENSE file.
+  // ignore_for_file: type=lint, unused_element, unused_field
+
+name: 'Tizen60CapiContentMediaContent'
+description: 'Dart bindings for Tizen capi-content-media-content APIs.'
+output: '../../lib/src/bindings/6.0/generated_bindings_capi_content_media_content.dart'
+
+llvm-path:
+  - '/usr/lib/llvm-12'
+
+headers:
+  entry-points:
+    - 'entrypoints-capi-content-media-content.h'
+  include-directives:
+    - '**/media_audio.h'
+    - '**/media_bookmark.h'
+    - '**/media_content.h'    
+    - '**/media_content_type.h'
+    - '**/media_face.h'
+    - '**/media_filter.h'
+    - '**/media_folder.h'
+    - '**/media_group.h'
+    - '**/media_image.h'
+    - '**/media_info.h'
+    - '**/media_playlist.h'
+    - '**/media_storage.h'
+    - '**/media_tag.h'
+    - '**/media_video.h'
+
+library-imports:
+  ffi_lib: 'dart:ffi'
+
+type-map:
+  typedefs:
+    'time_t':
+      lib: 'ffi_lib'
+      c-type: 'Long'
+      dart-type: 'int'
+    '__time_t':
+      lib: 'ffi_lib'
+      c-type: 'Long'
+      dart-type: 'int'
+
+compiler-opts:
+  - '-m32'
+  - '-Wno-incomplete-setjmp-declaration'
+  - '-I./rootstraps/6.0/usr/include/'
+  - '-I./rootstraps/6.0/usr/include/content/'
+  - '-I./rootstraps/6.0/usr/include/media-content/'
+
+enums:
+  rename:
+    '_+(.*)': '$1'

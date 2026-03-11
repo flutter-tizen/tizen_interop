@@ -1,0 +1,71 @@
+preamble: |
+  // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
+  // Use of this source code is governed by a BSD-style license that can be
+  // found in the LICENSE file.
+  // ignore_for_file: type=lint, unused_element, unused_field
+
+name: 'Tizen60NotificationEx'
+description: 'Dart bindings for Tizen notification-ex APIs.'
+output: '../../lib/src/bindings/6.0/generated_bindings_notification_ex.dart'
+
+llvm-path:
+  - '/usr/lib/llvm-12'
+
+headers:
+  entry-points:
+    - 'entrypoints-notification-ex.h'
+  include-directives:
+    - '**/notification_ex.h'
+    - '**/notification_ex_app_control_action.h'
+    - '**/notification_ex_button.h'
+    - '**/notification_ex_chat_message.h'
+    - '**/notification_ex_checkbox.h'
+    - '**/notification_ex_entry.h'
+    - '**/notification_ex_error.h'
+    - '**/notification_ex_event_info.h'
+    - '**/notification_ex_group.h'
+    - '**/notification_ex_image.h'
+    - '**/notification_ex_input_selector.h'
+    - '**/notification_ex_progress.h'
+    - '**/notification_ex_manager.h'
+    - '**/notification_ex_reporter.h'
+    - '**/notification_ex_text.h'
+    - '**/notification_ex_time.h'
+    - '**/notification_ex_visibility_action.h'
+    - '**/notification_ex_multi_language.h'
+    - '**/notification_ex_item.h'
+
+library-imports:
+  ffi_lib: 'dart:ffi'
+  bundle: 'generated_bindings_bundle.dart'
+  app_control: 'generated_bindings_capi_appfw_app_control.dart'
+
+type-map:
+  typedefs:
+    'time_t':
+      lib: 'ffi_lib'
+      c-type: 'Long'
+      dart-type: 'int'
+    '__time_t':
+      lib: 'ffi_lib'
+      c-type: 'Long'
+      dart-type: 'int'
+    'bundle':
+      lib: 'bundle'
+      c-type: 'bundle'
+      dart-type: 'bundle'
+    'app_control_h':
+      lib: 'app_control'
+      c-type: 'app_control_h'
+      dart-type: 'app_control_h'
+
+compiler-opts:
+  - '-m32'
+  - '-Wno-incomplete-setjmp-declaration'
+  - '-I./rootstraps/6.0/usr/include/'
+  - '-I./rootstraps/6.0/usr/include/notification-ex/api/'
+  - '-I./rootstraps/6.0/usr/include/appfw/'
+
+enums:
+  rename:
+    '_+(.*)': '$1'

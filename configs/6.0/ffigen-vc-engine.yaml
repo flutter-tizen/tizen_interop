@@ -1,0 +1,32 @@
+preamble: |
+  // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
+  // Use of this source code is governed by a BSD-style license that can be
+  // found in the LICENSE file.
+  // ignore_for_file: type=lint, unused_element, unused_field
+
+name: 'Tizen60VcEngine'
+description: 'Dart bindings for Tizen vc_engine APIs.'
+output: '../../lib/src/bindings/6.0/generated_bindings_vc_engine.dart'
+
+llvm-path:
+  - '/usr/lib/llvm-12'
+
+headers:
+  entry-points:
+    - 'entrypoints-vc_engine.h'
+  include-directives:
+    - '**/vce.h'
+    - '**/voice_control_command.h'
+    - '**/voice_control_common.h'
+
+# library-imports:
+#   vc_cmd: 'generated_bindings_vc_engine.dart'
+
+compiler-opts:
+  - '-m32'
+  - '-Wno-incomplete-setjmp-declaration'
+  - '-I./rootstraps/6.0/usr/include/'
+
+enums:
+  rename:
+    '_+(.*)': '$1'

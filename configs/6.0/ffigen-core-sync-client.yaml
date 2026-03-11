@@ -1,0 +1,43 @@
+preamble: |
+  // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
+  // Use of this source code is governed by a BSD-style license that can be
+  // found in the LICENSE file.
+  // ignore_for_file: type=lint, unused_element, unused_field
+
+name: 'Tizen60CoreSyncClient'
+description: 'Dart bindings for Tizen core-sync-client APIs.'
+output: '../../lib/src/bindings/6.0/generated_bindings_core_sync_client.dart'
+
+llvm-path:
+  - '/usr/lib/llvm-12'
+
+headers:
+  entry-points:
+    - 'entrypoints-core-sync-client.h'
+  include-directives:
+    - '**/sync_manager.h'
+    - '**/sync_adapter.h'
+
+library-imports:
+  account: 'generated_bindings_accounts_svc.dart'
+  bundle: 'generated_bindings_bundle.dart'
+
+type-map:
+  typedefs:
+    'account_h':
+      lib: 'account'
+      c-type: 'account_h'
+      dart-type: 'account_h'
+    'bundle':
+      lib: 'bundle'
+      c-type: 'bundle'
+      dart-type: 'bundle'
+
+compiler-opts:
+  - '-m32'
+  - '-Wno-incomplete-setjmp-declaration'
+  - '-I./rootstraps/6.0/usr/include/'
+
+enums:
+  rename:
+    '_+(.*)': '$1'

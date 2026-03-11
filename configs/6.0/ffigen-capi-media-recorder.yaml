@@ -1,0 +1,48 @@
+preamble: |
+  // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
+  // Use of this source code is governed by a BSD-style license that can be
+  // found in the LICENSE file.
+  // ignore_for_file: type=lint, unused_element, unused_field
+
+name: 'Tizen60CapiMediaRecorder'
+description: 'Dart bindings for Tizen capi-media-recorder APIs.'
+output: '../../lib/src/bindings/6.0/generated_bindings_capi_media_recorder.dart'
+
+llvm-path:
+  - '/usr/lib/llvm-12'
+
+headers:
+  entry-points:
+    - 'entrypoints-capi-media-recorder.h'
+  include-directives:
+    - '**/recorder.h'
+
+library-imports:
+  camera: 'generated_bindings_capi_media_camera.dart'
+  sound_manager: 'generated_bindings_capi_media_sound_manager.dart'
+
+type-map:
+  typedefs:
+    'camera_h':
+      lib: 'camera'
+      c-type: 'camera_h'
+      dart-type: 'camera_h'
+    'recorder_video_data_s':
+      lib: 'camera'
+      c-type: 'camera_preview_data_s'
+      dart-type: 'camera_preview_data_s'
+    'sound_stream_info_h':
+      lib: 'sound_manager'
+      c-type: 'sound_stream_info_h'
+      dart-type: 'sound_stream_info_h'
+
+compiler-opts:
+  - '-m32'
+  - '-Wno-incomplete-setjmp-declaration'
+  - '-I./rootstraps/6.0/usr/include/'
+  - '-I./rootstraps/6.0/usr/include/media/'
+
+enums:
+  rename:
+    '_+(.*)': '$1'
+    'audio_sample_type_e' : '_audio_sample_type_e'

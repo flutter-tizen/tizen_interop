@@ -1,0 +1,34 @@
+preamble: |
+  // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
+  // Use of this source code is governed by a BSD-style license that can be
+  // found in the LICENSE file.
+  // ignore_for_file: type=lint, unused_element, unused_field
+
+name: 'Tizen60Eom'
+description: 'Dart bindings for Tizen eom APIs.'
+output: '../../lib/src/bindings/6.0/generated_bindings_eom.dart'
+
+llvm-path:
+  - '/usr/lib/llvm-12'
+
+headers:
+  entry-points:
+    - 'entrypoints-eom.h'
+  include-directives:
+    - '**/eom.h'
+
+compiler-opts:
+  - '-m32'
+  - '-Wno-incomplete-setjmp-declaration'
+  - '-I./rootstraps/6.0/usr/include/'
+  - '-I./rootstraps/6.0/usr/include/eom/'
+  - '-I./rootstraps/6.0/usr/include/evas-1/'
+  - '-I./rootstraps/6.0/usr/include/eina-1/'
+  - '-I./rootstraps/6.0/usr/include/eina-1/eina/'
+  - '-I./rootstraps/6.0/usr/include/eo-1/'
+  - '-I./rootstraps/6.0/usr/include/efl-1/'
+  - '-I./rootstraps/6.0/usr/include/emile-1/'
+
+enums:
+  rename:
+    '_+(.*)': '$1'

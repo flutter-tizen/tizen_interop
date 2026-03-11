@@ -1,0 +1,38 @@
+preamble: |
+  // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
+  // Use of this source code is governed by a BSD-style license that can be
+  // found in the LICENSE file.
+  // ignore_for_file: type=lint, unused_element, unused_field
+
+name: 'Tizen60Yaca'
+description: 'Dart bindings for Tizen yaca APIs.'
+output: '../../lib/src/bindings/6.0/generated_bindings_yaca.dart'
+
+llvm-path:
+  - '/usr/lib/llvm-12'
+
+headers:
+  entry-points:
+    - 'entrypoints-yaca.h'
+  include-directives:
+    - '**/yaca_crypto.h'
+    - '**/yaca_digest.h'
+    - '**/yaca_encrypt.h'
+    - '**/yaca_error.h'
+    - '**/yaca_key.h'
+    - '**/yaca_rsa.h'
+    - '**/yaca_seal.h'
+    - '**/yaca_sign.h'
+    - '**/yaca_simple.h'
+    - '**/yaca_types.h'
+
+
+compiler-opts:
+  - '-m32'
+  - '-Wno-incomplete-setjmp-declaration'
+  - '-I./rootstraps/6.0/usr/include/'
+  - '-I./rootstraps/6.0/usr/include/yaca/'
+
+enums:
+  rename:
+    '_+(.*)': '$1'

@@ -1,0 +1,32 @@
+preamble: |
+  // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
+  // Use of this source code is governed by a BSD-style license that can be
+  // found in the LICENSE file.
+  // ignore_for_file: type=lint, unused_element, unused_field
+
+name: 'Tizen60Oauth2'
+description: 'Dart bindings for Tizen oauth2 APIs.'
+output: '../../lib/src/bindings/6.0/generated_bindings_oauth2.dart'
+
+llvm-path:
+  - '/usr/lib/llvm-12'
+
+headers:
+  entry-points:
+    - 'entrypoints-oauth2.h'
+  include-directives:
+    - '**/oauth2.h'
+    - '**/oauth2_manager.h'
+    - '**/oauth2_request.h'
+    - '**/oauth2_response.h'
+    - '**/oauth2_error.h'
+    - '**/oauth2_types.h'
+
+compiler-opts:
+  - '-m32'
+  - '-Wno-incomplete-setjmp-declaration'
+  - '-I./rootstraps/6.0/usr/include/'
+
+enums:
+  rename:
+    '_+(.*)': '$1'

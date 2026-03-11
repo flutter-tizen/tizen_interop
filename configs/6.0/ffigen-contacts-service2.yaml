@@ -1,0 +1,45 @@
+preamble: |
+  // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
+  // Use of this source code is governed by a BSD-style license that can be
+  // found in the LICENSE file.
+  // ignore_for_file: type=lint, unused_element, unused_field
+
+name: 'Tizen60ContactsService2'
+description: 'Dart bindings for Tizen contacts-service2 APIs.'
+output: '../../lib/src/bindings/6.0/generated_bindings_contacts_service2.dart'
+
+llvm-path:
+  - '/usr/lib/llvm-12'
+
+headers:
+  entry-points:
+    - 'entrypoints-contacts-service2.h'
+  include-directives:
+    - '**/contacts.h'
+    - '**/contacts_errors.h'
+    - '**/contacts_service.h'
+    - '**/contacts_views.h'
+    - '**/contacts_types.h'
+    - '**/contacts_record.h'
+    - '**/contacts_list.h'
+    - '**/contacts_filter.h'
+    - '**/contacts_query.h'
+    - '**/contacts_db.h'
+    - '**/contacts_setting.h'
+    - '**/contacts_person.h'
+    - '**/contacts_group.h'
+    - '**/contacts_sim.h'
+    - '**/contacts_vcard.h'
+    - '**/contacts_activity.h'
+    - '**/contacts_phone_log.h'
+    - '**/contacts_db_status.h'
+
+compiler-opts:
+  - '-m32'
+  - '-Wno-incomplete-setjmp-declaration'
+  - '-I./rootstraps/6.0/usr/include/'
+  - '-I./rootstraps/6.0/usr/include/contacts-svc/'
+
+enums:
+  rename:
+    '_+(.*)': '$1'

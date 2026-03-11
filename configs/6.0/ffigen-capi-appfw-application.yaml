@@ -1,0 +1,50 @@
+preamble: |
+  // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
+  // Use of this source code is governed by a BSD-style license that can be
+  // found in the LICENSE file.
+  // ignore_for_file: type=lint, unused_element, unused_field
+
+name: 'Tizen60CapiAppfwApplication'
+description: 'Dart bindings for Tizen capi-appfw-application APIs.'
+output: '../../lib/src/bindings/6.0/generated_bindings_capi_appfw_application.dart'
+
+llvm-path:
+  - '/usr/lib/llvm-12'
+
+headers:
+  entry-points:
+    - 'entrypoints-capi-appfw-application.h'
+  include-directives:
+    - '**/app.h'
+    - '**/app_i18n.h'
+
+library-imports:
+  app_control: 'generated_bindings_capi_appfw_app_control.dart'
+  app_common: 'generated_bindings_capi_appfw_app_common.dart'
+
+type-map:
+  typedefs:
+    'app_control_h':
+      lib: 'app_control'
+      c-type: 'app_control_h'
+      dart-type: 'app_control_h'    
+    'app_event_handler_h':
+      lib: 'app_common'
+      c-type: 'app_event_handler_h'
+      dart-type: 'app_event_handler_h'
+    'app_event_cb':
+      lib: 'app_common'
+      c-type: 'app_event_cb'
+      dart-type: 'app_event_cb'
+
+compiler-opts:
+  - '-m32'
+  - '-Wno-incomplete-setjmp-declaration'
+  - '-I./rootstraps/6.0/usr/include/'
+  - '-I./rootstraps/6.0/usr/include/appfw/'
+
+enums:
+  rename:
+    '_+(.*)': '$1'
+    'app_device_orientation_e' : '_app_device_orientation_e'
+    'app_event_type_e' : '_app_event_type_e'

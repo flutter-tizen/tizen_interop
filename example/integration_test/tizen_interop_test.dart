@@ -3,6 +3,8 @@ import 'package:ffi/ffi.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:tizen_interop/6.0/tizen.dart';
+import 'package:tizen_interop/src/bindings/6.0/generated_bindings_time.dart'
+    as time;
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
@@ -250,6 +252,24 @@ void main() {
     });
   });
 
+  testWidgets(
+      'tizenCapiMediaSoundManager: sound_manager_create_stream_information & sound_manager_destroy_stream_information',
+      (WidgetTester tester) async {
+    final tizen = tizenCapiMediaSoundManager;
+    expect(tizen, isNotNull);
+    using((Arena arena) {
+      final handlePtr = arena<sound_stream_info_h>();
+      var result = tizen.sound_manager_create_stream_information(
+          sound_stream_type_e.SOUND_STREAM_TYPE_MEDIA,
+          Pointer.fromFunction(_soundManagerCallback),
+          nullptr,
+          handlePtr);
+      expect(result, 0);
+      result = tizen.sound_manager_destroy_stream_information(handlePtr.value);
+      expect(result, 0);
+    });
+  });
+
   testWidgets('tizenRpcPort: rpc_port_parcel_create & rpc_port_parcel_destroy',
       (WidgetTester tester) async {
     final tizen = tizenRpcPort;
@@ -296,7 +316,7 @@ void main() {
     final tizen = tizenCapiAppfwAlarm;
     expect(tizen, isNotNull);
     using((Arena arena) {
-      final date = arena<tm>();
+      final date = arena<time.tm>();
       final result = tizen.alarm_get_current_time(date);
       expect(result, 0);
     });
@@ -337,15 +357,16 @@ void main() {
     });
   });
 
-  testWidgets('tizenCapiBaseCommon: get_error_message',
+  testWidgets(
+      'tizenCapiSystemDevice: device_battery_get_percent & tizenCapiBaseCommon: get_error_message',
       (WidgetTester tester) async {
-    final tizen = tizenCapiBaseCommon;
+    final tizen = tizenCapiSystemDevice;
     expect(tizen, isNotNull);
     using((Arena arena) {
       final percentPtr = arena<Int>();
       final result = tizen.device_battery_get_percent(percentPtr);
       if (result != 0) {
-        final errMsg = tizen.get_error_message(0);
+        final errMsg = tizenCapiBaseCommon.get_error_message(0);
         expect(errMsg, isNot(null));
       }
     });
@@ -490,24 +511,6 @@ void main() {
     });
   });
 
-  testWidgets(
-      'tizenCapiMediaWavPlayer: sound_manager_create_stream_information & sound_manager_destroy_stream_information',
-      (WidgetTester tester) async {
-    final tizen = tizenCapiMediaWavPlayer;
-    expect(tizen, isNotNull);
-    using((Arena arena) {
-      final handlePtr = arena<sound_stream_info_h>();
-      var result = tizen.sound_manager_create_stream_information(
-          sound_stream_type_e.SOUND_STREAM_TYPE_MEDIA,
-          Pointer.fromFunction(_soundManagerCallback),
-          nullptr,
-          handlePtr);
-      expect(result, 0);
-      result = tizen.sound_manager_destroy_stream_information(handlePtr.value);
-      expect(result, 0);
-    });
-  });
-
   testWidgets('tizenCapiNetworkBluetooth: bt_adapter_get_state',
       (WidgetTester tester) async {
     final tizen = tizenCapiNetworkBluetooth;
@@ -580,37 +583,16 @@ void main() {
     });
   });
 
-  testWidgets('tizenCapiUiAutofillCommon: autofill_auth_info_set_received_cb',
+  testWidgets(
+      'tizenCapiUiAutofillCommon: autofill_view_info_create & autofill_view_info_destroy',
       (WidgetTester tester) async {
     final tizen = tizenCapiUiAutofillCommon;
     expect(tizen, isNotNull);
     using((Arena arena) {
-      final handlePtr = arena<autofill_h>();
-      var result = tizen.autofill_create(handlePtr);
+      final handlePtr = arena<autofill_view_info_h>();
+      var result = tizen.autofill_view_info_create(handlePtr);
       expect(result, 0);
-
-      result = tizen.autofill_auth_info_set_received_cb(handlePtr.value,
-          Pointer.fromFunction(_autofillInfoCallback), nullptr);
-      expect(result, 0);
-
-      result = tizen.autofill_destroy(handlePtr.value);
-      expect(result, 0);
-    });
-  });
-
-  testWidgets(
-      'tizenCapiUiAutofillManager: autofill_manager_create, autofill_manager_connect, autofill_manager_destroy',
-      (WidgetTester tester) async {
-    final tizen = tizenCapiUiAutofillManager;
-    expect(tizen, isNotNull);
-    using((Arena arena) {
-      final handlePtr = arena<autofill_manager_h>();
-      var result = tizen.autofill_manager_create(handlePtr);
-      expect(result, 0);
-      result = tizen.autofill_manager_connect(handlePtr.value,
-          Pointer.fromFunction(_autofillManagerCallback), nullptr);
-      expect(result, 0);
-      result = tizen.autofill_manager_destroy(handlePtr.value);
+      result = tizen.autofill_view_info_destroy(handlePtr.value);
       expect(result, 0);
     });
   });
@@ -806,9 +788,6 @@ void _soundManagerCallback(
     Pointer<Void> userData) {}
 
 void _autofillCallback(autofill_h ah, int status, Pointer<Void> userData) {}
-
-void _autofillInfoCallback(
-    autofill_h ah, autofill_auth_info_h authInfo, Pointer<Void> userData) {}
 
 void _autofillManagerCallback(
     autofill_manager_h ah, int status, Pointer<Void> userData) {}

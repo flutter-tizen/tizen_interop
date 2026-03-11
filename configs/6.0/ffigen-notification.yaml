@@ -1,0 +1,51 @@
+preamble: |
+  // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
+  // Use of this source code is governed by a BSD-style license that can be
+  // found in the LICENSE file.
+  // ignore_for_file: type=lint, unused_element, unused_field
+
+name: 'Tizen60Notification'
+description: 'Dart bindings for Tizen notification APIs.'
+output: '../../lib/src/bindings/6.0/generated_bindings_notification.dart'
+
+llvm-path:
+  - '/usr/lib/llvm-12'
+
+headers:
+  entry-points:
+    - 'entrypoints-notification.h'
+  include-directives:
+    - '**/notification.h'
+    - '**/notification_error.h'
+    - '**/notification_type.h'
+    - '**/notification_status.h'
+
+library-imports:
+  ffi_lib: 'dart:ffi'
+  app_control: 'generated_bindings_capi_appfw_app_control.dart'
+
+type-map:
+  typedefs:
+    'time_t':
+      lib: 'ffi_lib'
+      c-type: 'Long'
+      dart-type: 'int'
+    '__time_t':
+      lib: 'ffi_lib'
+      c-type: 'Long'
+      dart-type: 'int'
+    'app_control_h':
+      lib: 'app_control'
+      c-type: 'app_control_h'
+      dart-type: 'app_control_h'
+
+compiler-opts:
+  - '-m32'
+  - '-Wno-incomplete-setjmp-declaration'
+  - '-I./rootstraps/6.0/usr/include/'
+  - '-I./rootstraps/6.0/usr/include/notification/'
+  - '-I./rootstraps/6.0/usr/include/appfw/'
+
+enums:
+  rename:
+    '_+(.*)': '$1'

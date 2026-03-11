@@ -1,0 +1,28 @@
+preamble: |
+  // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
+  // Use of this source code is governed by a BSD-style license that can be
+  // found in the LICENSE file.
+  // ignore_for_file: type=lint, unused_element, unused_field
+
+name: 'Tizen60CapiMediaMetadataEditor'
+description: 'Dart bindings for Tizen capi-media-metadata-editor APIs.'
+output: '../../lib/src/bindings/6.0/generated_bindings_capi_media_metadata_editor.dart'
+
+llvm-path:
+  - '/usr/lib/llvm-12'
+
+headers:
+  entry-points:
+    - 'entrypoints-capi-media-metadata-editor.h'
+  include-directives:
+    - '**/metadata_editor.h'
+
+compiler-opts:
+  - '-m32'
+  - '-Wno-incomplete-setjmp-declaration'
+  - '-I./rootstraps/6.0/usr/include/'
+  - '-I./rootstraps/6.0/usr/include/metadata-editor/'
+
+enums:
+  rename:
+    '_+(.*)': '$1'

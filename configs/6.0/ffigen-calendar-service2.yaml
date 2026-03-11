@@ -1,0 +1,38 @@
+preamble: |
+  // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
+  // Use of this source code is governed by a BSD-style license that can be
+  // found in the LICENSE file.
+  // ignore_for_file: type=lint, unused_element, unused_field
+
+name: 'Tizen60CalendarService2'
+description: 'Dart bindings for Tizen calendar-service2 APIs.'
+output: '../../lib/src/bindings/6.0/generated_bindings_calendar_service2.dart'
+
+llvm-path:
+  - '/usr/lib/llvm-12'
+
+headers:
+  entry-points:
+    - 'entrypoints-calendar-service2.h'
+  include-directives:
+    - '**/calendar.h'
+    - '**/calendar_errors.h'
+    - '**/calendar_view.h'
+    - '**/calendar_db.h'
+    - '**/calendar_filter.h'
+    - '**/calendar_list.h'
+    - '**/calendar_query.h'
+    - '**/calendar_record.h'
+    - '**/calendar_service.h'
+    - '**/calendar_vcalendar.h'
+    - '**/calendar_reminder.h'
+
+compiler-opts:
+  - '-m32'
+  - '-Wno-incomplete-setjmp-declaration'
+  - '-I./rootstraps/6.0/usr/include/'
+  - '-I./rootstraps/6.0/usr/include/calendar-service2/'
+
+enums:
+  rename:
+    '_+(.*)': '$1'
