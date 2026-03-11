@@ -4,7 +4,7 @@ preamble: |
   // found in the LICENSE file.
   // ignore_for_file: type=lint, unused_element, unused_field
 
-name: 'Tizen60CapiLocationManager'
+name: 'Tizen60Time'
 description: 'Dart bindings for Tizen time header.'
 output: '../../lib/src/bindings/6.0/generated_bindings_time.dart'
 
@@ -16,6 +16,20 @@ headers:
     - 'entrypoints-time.h'
   include-directives:
     - '**/time.h'
+
+library-imports:
+  ffi_lib: 'dart:ffi'
+
+type-map:
+  typedefs:
+    'pid_t':
+      lib: 'ffi_lib'
+      c-type: 'Int'
+      dart-type: 'int'
+    '__pid_t':
+      lib: 'ffi_lib'
+      c-type: 'Int'
+      dart-type: 'int'
 
 compiler-opts:
   - '-m32'

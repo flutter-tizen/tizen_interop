@@ -3,8 +3,6 @@ import 'package:ffi/ffi.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:tizen_interop/6.0/tizen.dart';
-import 'package:tizen_interop/src/bindings/6.0/generated_bindings_time.dart'
-    as time;
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
@@ -316,7 +314,7 @@ void main() {
     final tizen = tizenCapiAppfwAlarm;
     expect(tizen, isNotNull);
     using((Arena arena) {
-      final date = arena<time.tm>();
+      final date = arena<tm>();
       final result = tizen.alarm_get_current_time(date);
       expect(result, 0);
     });
