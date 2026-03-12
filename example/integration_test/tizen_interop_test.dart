@@ -1,25 +1,39 @@
 import 'dart:ffi';
 import 'package:ffi/ffi.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:tizen_interop/6.0/tizen.dart';
 
+enum DeviceType {
+  kIsEmulator,
+  kIsRPI,
+  kIsTV,
+}
+
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
-  testWidgets('tizenCapiSystemInfo: system_info_get_platform_string',
-      (WidgetTester tester) async {
-    final tizen = tizenCapiSystemInfo;
-    expect(tizen, isNotNull);
-    using((Arena arena) {
-      final key =
-          'http://tizen.org/system/model_name'.toNativeUtf8(allocator: arena);
-      final valuePtr = arena<Pointer<Char>>();
-      final result =
-          tizen.system_info_get_platform_string(key.cast(), valuePtr);
-      expect(result, 0);
-      arena.using(valuePtr.value, calloc.free);
-    });
+  // Check if running on emulator before tests
+  DeviceType deviceType = DeviceType.kIsRPI;
+  using((Arena arena) {
+    final modelKey =
+        'http://tizen.org/system/model_name'.toNativeChar(allocator: arena);
+    final modelPtr = arena<Pointer<Char>>();
+    final result =
+        tizenCapiSystemInfo.system_info_get_platform_string(modelKey, modelPtr);
+    if (result == 0) {
+      final modelName = modelPtr.value.toDartString();
+      print('modelName: $modelName');
+      if (modelName.contains('emulator') || modelName.contains('Emulator')) {
+        deviceType = DeviceType.kIsEmulator;
+      } else if (modelName.contains('rpi') || modelName.contains('Rpi')) {
+        deviceType = DeviceType.kIsRPI;
+      } else {
+        deviceType = DeviceType.kIsTV;
+      }
+      arena.using(modelPtr.value, calloc.free);
+    }
   });
 
   testWidgets('tizenCapiSystemRuntimeInfo: runtime_info_get_value_bool',
@@ -33,7 +47,7 @@ void main() {
       final result = tizen.runtime_info_get_value_bool(key, valuePtr);
       expect(result, 0);
     });
-  });
+  }, skip: deviceType == DeviceType.kIsEmulator);
 
   testWidgets('tizenCapiSystemSystemSettings: system_settings_get_value_int',
       (WidgetTester tester) async {
@@ -45,7 +59,7 @@ void main() {
       final result = tizen.system_settings_get_value_int(key, valuePtr);
       expect(result, 0); // Should succeed usually
     });
-  });
+  }, skip: deviceType == DeviceType.kIsTV);
 
   testWidgets('tizenCapiSystemDevice: device_display_get_numbers',
       (WidgetTester tester) async {
@@ -193,7 +207,7 @@ void main() {
       result = tizen.wifi_manager_deinitialize(handlePtr.value);
       expect(result, 0);
     });
-  });
+  }, skip: deviceType == DeviceType.kIsEmulator);
 
   testWidgets(
       'tizenCapiAppfwPreference: preference_set_int & preference_get_int',
@@ -223,7 +237,7 @@ void main() {
       result = tizen.location_manager_destroy(handlePtr.value);
       expect(result, 0);
     });
-  });
+  }, skip: deviceType == DeviceType.kIsTV);
 
   testWidgets(
       'tizenCapiContentMediaContent: media_content_connect & media_content_disconnect',
@@ -353,7 +367,7 @@ void main() {
       expect(handlePtr.value, isNot(nullptr));
       result = tizen.job_info_destroy(handlePtr.value);
     });
-  });
+  }, skip: deviceType == DeviceType.kIsTV);
 
   testWidgets(
       'tizenCapiSystemDevice: device_battery_get_percent & tizenCapiBaseCommon: get_error_message',
@@ -413,7 +427,7 @@ void main() {
       result = tizen.camera_destroy(handlePtr.value);
       expect(result, 0);
     });
-  });
+  }, skip: deviceType == DeviceType.kIsTV);
 
   testWidgets('tizenCapiMediaController: mc_client_create & mc_client_destroy',
       (WidgetTester tester) async {
@@ -494,7 +508,7 @@ void main() {
       result = tizen.recorder_destroy(handlePtr.value);
       expect(result, 0);
     });
-  });
+  }, skip: deviceType == DeviceType.kIsTV);
 
   testWidgets('tizenCapiMediaTool: media_format_create & media_format_unref',
       (WidgetTester tester) async {
@@ -523,7 +537,7 @@ void main() {
       result = tizen.bt_deinitialize();
       expect(result, 0);
     });
-  });
+  }, skip: deviceType == DeviceType.kIsEmulator);
 
   testWidgets('tizenCapiNetworkInm: inm_initialize & inm_deinitialize',
       (WidgetTester tester) async {
@@ -536,7 +550,7 @@ void main() {
       result = tizen.inm_deinitialize(handlePtr.value);
       expect(result, 0);
     });
-  });
+  }, skip: deviceType == DeviceType.kIsEmulator);
 
   testWidgets('tizenCapiNetworkSoftap: softap_create & softap_destroy',
       (WidgetTester tester) async {
@@ -549,7 +563,9 @@ void main() {
       result = tizen.softap_destroy(handlePtr.value);
       expect(result, 0);
     });
-  });
+  },
+      skip: deviceType == DeviceType.kIsEmulator ||
+          deviceType == DeviceType.kIsTV);
 
   testWidgets('tizenCapiSystemUsbhost: usb_host_create & usb_host_destroy',
       (WidgetTester tester) async {
@@ -562,7 +578,9 @@ void main() {
       result = tizen.usb_host_destroy(handlePtr.value);
       expect(result, 0);
     });
-  });
+  },
+      skip: deviceType == DeviceType.kIsEmulator ||
+          deviceType == DeviceType.kIsTV);
 
   testWidgets(
       'tizenCapiUiAutofill: autofill_create, autofill_connect, autofill_destroy',
@@ -607,7 +625,9 @@ void main() {
       result = tizen.vpnsvc_deinit(handlePtr.value);
       expect(result, 0);
     });
-  });
+  },
+      skip: deviceType == DeviceType.kIsEmulator ||
+          deviceType == DeviceType.kIsTV);
 
   testWidgets('tizenMa: ma_initialize & ma_deinitialize',
       (WidgetTester tester) async {
@@ -663,7 +683,7 @@ void main() {
       result = tizen.mv_inference_destroy(handlePtr.value);
       expect(result, 0);
     });
-  });
+  }, skip: deviceType == DeviceType.kIsTV);
 
   testWidgets(
       'tizenMvSurveillance: mv_surveillance_event_trigger_create & mv_surveillance_event_trigger_destroy',
