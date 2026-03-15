@@ -595,7 +595,7 @@ Tizen60Cbhm get tizenCbhm =>
 
 Tizen60ContactsService2? _tizenContactsService2;
 Tizen60ContactsService2 get tizenContactsService2 => _tizenContactsService2 ??=
-    _getTizenInstance(cbhmSymbols, Tizen60ContactsService2.fromLookup)!;
+    _getTizenInstance(contactsService2Symbols, Tizen60ContactsService2.fromLookup)!;
 
 Tizen60CoreSyncClient? _tizenCoreSyncClient;
 Tizen60CoreSyncClient get tizenCoreSyncClient => _tizenCoreSyncClient ??=
