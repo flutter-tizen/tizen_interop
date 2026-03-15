@@ -789,6 +789,46 @@ void main() {
       tizen.yaca_cleanup();
     });
   });
+
+  testWidgets('tizenVc: vc_initialize & vc_deinitialize',
+      (WidgetTester tester) async {
+    final tizen = tizenVc;
+    expect(tizen, isNotNull);
+    using((Arena arena) {
+      var result = tizen.vc_initialize();
+      expect(result, isA<int>());
+      if (result == 0) {
+        result = tizen.vc_deinitialize();
+        expect(result, 0);
+      }
+    });
+  });
+
+  testWidgets('tizenVcEngine: vce_set_private_data',
+      (WidgetTester tester) async {
+    final tizen = tizenVcEngine;
+    expect(tizen, isNotNull);
+    using((Arena arena) {
+      final key = 'test_key'.toNativeChar(allocator: arena);
+      final data = 'test_data'.toNativeChar(allocator: arena);
+      final result = tizen.vce_set_private_data(key, data);
+      expect(result, isA<int>());
+    });
+  });
+
+  testWidgets('tizenVcManager: vc_mgr_initialize & vc_mgr_deinitialize',
+      (WidgetTester tester) async {
+    final tizen = tizenVcManager;
+    expect(tizen, isNotNull);
+    using((Arena arena) {
+      var result = tizen.vc_mgr_initialize();
+      expect(result, isA<int>());
+      if (result == 0) {
+        result = tizen.vc_mgr_deinitialize();
+        expect(result, 0);
+      }
+    });
+  });
 }
 
 void _serviceAppCallback(app_event_info_h eventInfo, Pointer<Void> userData) {}

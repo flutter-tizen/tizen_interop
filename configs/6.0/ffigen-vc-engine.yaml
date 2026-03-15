@@ -16,11 +16,6 @@ headers:
     - 'entrypoints-vc_engine.h'
   include-directives:
     - '**/vce.h'
-    - '**/voice_control_command.h'
-    - '**/voice_control_common.h'
-
-# library-imports:
-#   vc_cmd: 'generated_bindings_vc_engine.dart'
 
 compiler-opts:
   - '-m32'
