@@ -81,7 +81,7 @@ import '../../src/bindings/6.0/generated_bindings_device_certificate_manager.dar
 import '../../src/bindings/6.0/generated_bindings_diagnostics.dart';
 import '../../src/bindings/6.0/generated_bindings_dlog.dart';
 import '../../src/bindings/6.0/generated_bindings_dpm.dart';
-// import '../../src/bindings/6.0/generated_bindings_eom.dart';
+import '../../src/bindings/6.0/generated_bindings_eom.dart';
 import '../../src/bindings/6.0/generated_bindings_feedback.dart';
 import '../../src/bindings/6.0/generated_bindings_fido_client.dart';
 import '../../src/bindings/6.0/generated_bindings_iotcon.dart';
@@ -200,7 +200,7 @@ export '../../src/bindings/6.0/generated_bindings_device_certificate_manager.dar
 export '../../src/bindings/6.0/generated_bindings_diagnostics.dart';
 export '../../src/bindings/6.0/generated_bindings_dlog.dart';
 export '../../src/bindings/6.0/generated_bindings_dpm.dart';
-// export '../../src/bindings/6.0/generated_bindings_eom.dart';
+export '../../src/bindings/6.0/generated_bindings_eom.dart';
 export '../../src/bindings/6.0/generated_bindings_feedback.dart';
 export '../../src/bindings/6.0/generated_bindings_fido_client.dart';
 export '../../src/bindings/6.0/generated_bindings_iotcon.dart';
@@ -594,8 +594,9 @@ Tizen60Cbhm get tizenCbhm =>
     _tizenCbhm ??= _getTizenInstance(cbhmSymbols, Tizen60Cbhm.fromLookup)!;
 
 Tizen60ContactsService2? _tizenContactsService2;
-Tizen60ContactsService2 get tizenContactsService2 => _tizenContactsService2 ??=
-    _getTizenInstance(contactsService2Symbols, Tizen60ContactsService2.fromLookup)!;
+Tizen60ContactsService2 get tizenContactsService2 =>
+    _tizenContactsService2 ??= _getTizenInstance(
+        contactsService2Symbols, Tizen60ContactsService2.fromLookup)!;
 
 Tizen60CoreSyncClient? _tizenCoreSyncClient;
 Tizen60CoreSyncClient get tizenCoreSyncClient => _tizenCoreSyncClient ??=
@@ -627,8 +628,9 @@ Tizen60Dpm? _tizenDpm;
 Tizen60Dpm get tizenDpm =>
     _tizenDpm ??= _getTizenInstance(dpmSymbols, Tizen60Dpm.fromLookup)!;
 
-// Tizen60Eom? _tizenEom;
-// Tizen60Eom get tizenEom => _tizenEom ??= _getTizenInstance(eomSymbols, Tizen60Eom.fromLookup)!;
+Tizen60Eom? _tizenEom;
+Tizen60Eom get tizenEom =>
+    _tizenEom ??= _getTizenInstance(eomSymbols, Tizen60Eom.fromLookup)!;
 
 Tizen60Feedback? _tizenFeedback;
 Tizen60Feedback get tizenFeedback => _tizenFeedback ??=
@@ -760,15 +762,16 @@ Tizen60UpdateControl get tizenUpdateControl => _tizenUpdateControl ??=
     _getTizenInstance(updateControlSymbols, Tizen60UpdateControl.fromLookup)!;
 
 Tizen60Vc? _tizenVc;
-Tizen60Vc get tizenVc => _tizenVc ??= _getTizenInstance(vcSymbols, Tizen60Vc.fromLookup)!;
+Tizen60Vc get tizenVc =>
+    _tizenVc ??= _getTizenInstance(vcSymbols, Tizen60Vc.fromLookup)!;
 
 Tizen60VcEngine? _tizenVcEngine;
-Tizen60VcEngine get tizenVcEngine =>
-    _tizenVcEngine ??= _getTizenInstance(vc_engineSymbols, Tizen60VcEngine.fromLookup)!;
+Tizen60VcEngine get tizenVcEngine => _tizenVcEngine ??=
+    _getTizenInstance(vc_engineSymbols, Tizen60VcEngine.fromLookup)!;
 
 Tizen60VcManager? _tizenVcManager;
-Tizen60VcManager get tizenVcManager =>
-    _tizenVcManager ??= _getTizenInstance(vc_managerSymbols, Tizen60VcManager.fromLookup)!;
+Tizen60VcManager get tizenVcManager => _tizenVcManager ??=
+    _getTizenInstance(vc_managerSymbols, Tizen60VcManager.fromLookup)!;
 
 Tizen60WifiDirect? _tizenWifiDirect;
 Tizen60WifiDirect get tizenWifiDirect => _tizenWifiDirect ??=

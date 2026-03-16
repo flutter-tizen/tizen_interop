@@ -17,6 +17,16 @@ headers:
   include-directives:
     - '**/eom.h'
 
+library-imports:
+  ui_inputmethod: 'generated_bindings_capi_ui_inputmethod.dart'
+
+type-map:
+  typedefs:
+    'Evas_Object':
+      lib: 'ui_inputmethod'
+      c-type: 'Evas_Object'
+      dart-type: 'Evas_Object'
+
 compiler-opts:
   - '-m32'
   - '-Wno-incomplete-setjmp-declaration'
