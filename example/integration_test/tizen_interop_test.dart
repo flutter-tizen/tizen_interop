@@ -1,6 +1,5 @@
 import 'dart:ffi';
 import 'package:ffi/ffi.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:tizen_interop/6.0/tizen.dart';
@@ -24,7 +23,6 @@ void main() {
         tizenCapiSystemInfo.system_info_get_platform_string(modelKey, modelPtr);
     if (result == 0) {
       final modelName = modelPtr.value.toDartString();
-      print('modelName: $modelName');
       if (modelName.contains('emulator') || modelName.contains('Emulator')) {
         deviceType = DeviceType.kIsEmulator;
       } else if (modelName.contains('rpi') || modelName.contains('Rpi')) {
@@ -846,6 +844,3 @@ void _soundManagerCallback(
     Pointer<Void> userData) {}
 
 void _autofillCallback(autofill_h ah, int status, Pointer<Void> userData) {}
-
-void _autofillManagerCallback(
-    autofill_manager_h ah, int status, Pointer<Void> userData) {}

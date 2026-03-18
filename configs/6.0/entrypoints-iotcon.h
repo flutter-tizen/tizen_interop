@@ -1,2 +1,0 @@
-// IOTCON
-#include <iotcon.h>

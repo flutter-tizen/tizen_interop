@@ -1178,7 +1178,7 @@ class Tizen60CapiAppfwPackageManager {
   int package_archive_info_get_icon(
     package_archive_info_h archive_info,
     ffi.Pointer<ffi.Pointer<ffi.UnsignedChar>> icon,
-    ffi.Pointer<ffi.UnsignedInt> icon_size,
+    ffi.Pointer<ffi.Size> icon_size,
   ) {
     return _package_archive_info_get_icon(
       archive_info,
@@ -1192,13 +1192,13 @@ class Tizen60CapiAppfwPackageManager {
           ffi.Int Function(
               package_archive_info_h,
               ffi.Pointer<ffi.Pointer<ffi.UnsignedChar>>,
-              ffi.Pointer<ffi.UnsignedInt>)>>('package_archive_info_get_icon');
+              ffi.Pointer<ffi.Size>)>>('package_archive_info_get_icon');
   late final _package_archive_info_get_icon =
       _package_archive_info_get_iconPtr.asFunction<
           int Function(
               package_archive_info_h,
               ffi.Pointer<ffi.Pointer<ffi.UnsignedChar>>,
-              ffi.Pointer<ffi.UnsignedInt>)>();
+              ffi.Pointer<ffi.Size>)>();
 
   /// @brief Retrieves direct dependencies of the given package.
   /// @details package_info_dependency_info_cb() is called for each direct dependency of the given package.

@@ -1,2 +1,0 @@
-// Stt
-#include <stt.h>

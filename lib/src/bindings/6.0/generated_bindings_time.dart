@@ -544,9 +544,190 @@ class Tizen60Time {
       'timespec_get');
   late final _timespec_get =
       _timespec_getPtr.asFunction<int Function(ffi.Pointer<timespec>, int)>();
+
+  int gettimeofday(
+    ffi.Pointer<timeval> __tv,
+    __timezone_ptr_t __tz,
+  ) {
+    return _gettimeofday(
+      __tv,
+      __tz,
+    );
+  }
+
+  late final _gettimeofdayPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(
+              ffi.Pointer<timeval>, __timezone_ptr_t)>>('gettimeofday');
+  late final _gettimeofday = _gettimeofdayPtr
+      .asFunction<int Function(ffi.Pointer<timeval>, __timezone_ptr_t)>();
+
+  int settimeofday(
+    ffi.Pointer<timeval> __tv,
+    ffi.Pointer<timezone1> __tz,
+  ) {
+    return _settimeofday(
+      __tv,
+      __tz,
+    );
+  }
+
+  late final _settimeofdayPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(
+              ffi.Pointer<timeval>, ffi.Pointer<timezone1>)>>('settimeofday');
+  late final _settimeofday = _settimeofdayPtr
+      .asFunction<int Function(ffi.Pointer<timeval>, ffi.Pointer<timezone1>)>();
+
+  int adjtime(
+    ffi.Pointer<timeval> __delta,
+    ffi.Pointer<timeval> __olddelta,
+  ) {
+    return _adjtime(
+      __delta,
+      __olddelta,
+    );
+  }
+
+  late final _adjtimePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(
+              ffi.Pointer<timeval>, ffi.Pointer<timeval>)>>('adjtime');
+  late final _adjtime = _adjtimePtr
+      .asFunction<int Function(ffi.Pointer<timeval>, ffi.Pointer<timeval>)>();
+
+  int getitimer(
+    int __which,
+    ffi.Pointer<itimerval> __value,
+  ) {
+    return _getitimer(
+      __which,
+      __value,
+    );
+  }
+
+  late final _getitimerPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(
+              __itimer_which_t, ffi.Pointer<itimerval>)>>('getitimer');
+  late final _getitimer =
+      _getitimerPtr.asFunction<int Function(int, ffi.Pointer<itimerval>)>();
+
+  int setitimer(
+    int __which,
+    ffi.Pointer<itimerval> __new,
+    ffi.Pointer<itimerval> __old,
+  ) {
+    return _setitimer(
+      __which,
+      __new,
+      __old,
+    );
+  }
+
+  late final _setitimerPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(__itimer_which_t, ffi.Pointer<itimerval>,
+              ffi.Pointer<itimerval>)>>('setitimer');
+  late final _setitimer = _setitimerPtr.asFunction<
+      int Function(int, ffi.Pointer<itimerval>, ffi.Pointer<itimerval>)>();
+
+  int utimes(
+    ffi.Pointer<ffi.Char> __file,
+    ffi.Pointer<timeval> __tvp,
+  ) {
+    return _utimes(
+      __file,
+      __tvp,
+    );
+  }
+
+  late final _utimesPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(
+              ffi.Pointer<ffi.Char>, ffi.Pointer<timeval>)>>('utimes');
+  late final _utimes = _utimesPtr
+      .asFunction<int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<timeval>)>();
+
+  int lutimes(
+    ffi.Pointer<ffi.Char> __file,
+    ffi.Pointer<timeval> __tvp,
+  ) {
+    return _lutimes(
+      __file,
+      __tvp,
+    );
+  }
+
+  late final _lutimesPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(
+              ffi.Pointer<ffi.Char>, ffi.Pointer<timeval>)>>('lutimes');
+  late final _lutimes = _lutimesPtr
+      .asFunction<int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<timeval>)>();
+
+  int futimes(
+    int __fd,
+    ffi.Pointer<timeval> __tvp,
+  ) {
+    return _futimes(
+      __fd,
+      __tvp,
+    );
+  }
+
+  late final _futimesPtr = _lookup<
+          ffi.NativeFunction<ffi.Int Function(ffi.Int, ffi.Pointer<timeval>)>>(
+      'futimes');
+  late final _futimes =
+      _futimesPtr.asFunction<int Function(int, ffi.Pointer<timeval>)>();
 }
 
-final class sigevent extends ffi.Opaque {}
+final class sigevent extends ffi.Struct {
+  external __sigval_t sigev_value;
+
+  @ffi.Int()
+  external int sigev_signo;
+
+  @ffi.Int()
+  external int sigev_notify;
+
+  external UnnamedUnion1 _sigev_un;
+}
+
+typedef __sigval_t = sigval;
+
+final class sigval extends ffi.Union {
+  @ffi.Int()
+  external int sival_int;
+
+  external ffi.Pointer<ffi.Void> sival_ptr;
+}
+
+final class UnnamedUnion1 extends ffi.Union {
+  @ffi.Array.multi([13])
+  external ffi.Array<ffi.Int> _pad;
+
+  @ffi_lib.Int()
+  external int _tid;
+
+  external UnnamedStruct1 _sigev_thread;
+}
+
+final class UnnamedStruct1 extends ffi.Struct {
+  external ffi.Pointer<ffi.NativeFunction<ffi.Void Function(__sigval_t)>>
+      _function;
+
+  external ffi.Pointer<pthread_attr_t> _attribute;
+}
+
+final class pthread_attr_t extends ffi.Union {
+  @ffi.Array.multi([36])
+  external ffi.Array<ffi.Char> __size;
+
+  @ffi.Long()
+  external int __align;
+}
 
 typedef clock_t = __clock_t;
 typedef __clock_t = ffi.Long;
@@ -630,6 +811,41 @@ final class itimerspec extends ffi.Struct {
   external timespec it_value;
 }
 
+final class timezone1 extends ffi.Struct {
+  @ffi.Int()
+  external int tz_minuteswest;
+
+  @ffi.Int()
+  external int tz_dsttime;
+}
+
+final class timeval extends ffi.Struct {
+  @__time_t()
+  external int tv_sec;
+
+  @__suseconds_t()
+  external int tv_usec;
+}
+
+typedef __suseconds_t = ffi.Long;
+typedef Dart__suseconds_t = int;
+typedef __timezone_ptr_t = ffi.Pointer<timezone1>;
+
+abstract class itimer_which {
+  static const int ITIMER_REAL = 0;
+  static const int ITIMER_VIRTUAL = 1;
+  static const int ITIMER_PROF = 2;
+}
+
+final class itimerval extends ffi.Struct {
+  external timeval it_interval;
+
+  external timeval it_value;
+}
+
+typedef __itimer_which_t = ffi.Int;
+typedef Dart__itimer_which_t = int;
+
 const int _TIME_H = 1;
 
 const int _BITS_TIME_H = 1;
@@ -661,3 +877,11 @@ const int CLOCK_TAI = 11;
 const int TIMER_ABSTIME = 1;
 
 const int TIME_UTC = 1;
+
+const int _SYS_TIME_H = 1;
+
+const int ITIMER_REAL = 0;
+
+const int ITIMER_VIRTUAL = 1;
+
+const int ITIMER_PROF = 2;

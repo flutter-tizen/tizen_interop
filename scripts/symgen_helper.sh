@@ -106,7 +106,7 @@ for header in $file_from_entrypoints; do
         continue
     fi
 
-    functions=$(grep -oP '^\w+\s+\w+\s*\([^)]*\)\s*;' "$header_file" | awk '{print $2}' | sed 's/(.*//')
+    functions=$(grep -oP '^(?:[A-Za-z0-9_]+\s+)*\w+\s+\K\w+(?=\s*\()' "$header_file")
 
     for symbol in $functions; do
         if [[ -n "${symbols[$symbol]}" ]]; then

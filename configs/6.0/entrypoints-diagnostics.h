@@ -1,2 +1,0 @@
-// Diagnostics
-#include <diagnostics.h>

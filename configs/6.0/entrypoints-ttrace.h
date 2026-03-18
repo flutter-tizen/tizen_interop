@@ -1,2 +1,0 @@
-// Ttrace
-#include <trace.h>

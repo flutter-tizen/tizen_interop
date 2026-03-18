@@ -1,2 +1,0 @@
-// Eom
-#include <eom.h>
