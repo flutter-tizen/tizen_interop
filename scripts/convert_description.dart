@@ -42,6 +42,8 @@ final _codeBlockStartRegExp =
 final _topLevelDeclarationRegExp =
     RegExp(r'^(typedef|(?:abstract|final)\s+class|class|enum)\s+');
 final _primaryNativeClassRegExp = RegExp(r'^class\s+Tizen[0-9]+Native\b');
+final _publicTopLevelGetterRegExp =
+    RegExp(r'^[A-Za-z][A-Za-z0-9_<>,?. ]+\s+get\s+[A-Za-z][A-Za-z0-9_]*\b');
 
 class _DocItem {
   _DocItem({
@@ -199,7 +201,9 @@ String convertDoxygenCommentsInDartSource(String source, {String? path}) {
   final normalizedOutput =
       _shouldHideTopLevelGeneratedBindingsDeclarations(path)
           ? _annotateGeneratedBindingsTopLevelDeclarations(output)
-          : output;
+          : _shouldHideVersionedTizenLibraryGetters(path)
+              ? _annotateVersionedTizenLibraryGetters(output)
+              : output;
   final convertedSource = normalizedOutput.join(newline);
   if (hasTrailingNewline) {
     return '$convertedSource$newline';
@@ -234,6 +238,14 @@ bool _shouldHideTopLevelGeneratedBindingsDeclarations(String? path) {
   return fileName == 'generated_bindings.dart';
 }
 
+bool _shouldHideVersionedTizenLibraryGetters(String? path) {
+  if (path == null) {
+    return false;
+  }
+
+  return RegExp(r'(^|[\\/])lib[\\/]\d+\.\d+[\\/]tizen\.dart$').hasMatch(path);
+}
+
 List<String> _annotateGeneratedBindingsTopLevelDeclarations(
     List<String> lines) {
   final output = <String>[];
@@ -246,6 +258,33 @@ List<String> _annotateGeneratedBindingsTopLevelDeclarations(
     if (braceDepth == 0 &&
         _topLevelDeclarationRegExp.hasMatch(trimmed) &&
         !_primaryNativeClassRegExp.hasMatch(trimmed)) {
+      if (output.isEmpty || output.last.trim() != '/// {@nodoc}') {
+        output.add('/// {@nodoc}');
+      }
+    }
+
+    output.add(line);
+
+    if (isCommentLine) {
+      continue;
+    }
+
+    braceDepth += '{'.allMatches(line).length;
+    braceDepth -= '}'.allMatches(line).length;
+  }
+
+  return output;
+}
+
+List<String> _annotateVersionedTizenLibraryGetters(List<String> lines) {
+  final output = <String>[];
+  var braceDepth = 0;
+
+  for (final line in lines) {
+    final trimmed = line.trimLeft();
+    final isCommentLine = trimmed.startsWith('//');
+
+    if (braceDepth == 0 && _publicTopLevelGetterRegExp.hasMatch(trimmed)) {
       if (output.isEmpty || output.last.trim() != '/// {@nodoc}') {
         output.add('/// {@nodoc}');
       }
