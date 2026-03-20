@@ -39,6 +39,8 @@ final _inlineDoxygenTagRegExp =
     RegExp(r'@(?:if|elseif|else|endif|ref|[abce])\b');
 final _codeBlockStartRegExp =
     RegExp(r'^[@\\]code(?:\{\.?([^}]+)\})?(?:\s+.*)?$');
+final _versionedTizenLibraryPathRegExp =
+    RegExp(r'(^|[\\/])lib[\\/](\d+\.\d+)[\\/]tizen\.dart$');
 final _topLevelDeclarationRegExp =
     RegExp(r'^(typedef|(?:abstract|final)\s+class|class|enum)\s+');
 final _primaryNativeClassRegExp = RegExp(r'^class\s+Tizen[0-9]+Native\b');
@@ -198,12 +200,13 @@ String convertDoxygenCommentsInDartSource(String source, {String? path}) {
     output.addAll(converted.map((commentLine) => '$indent$commentLine'));
   }
 
+  final annotatedOutput = _shouldHideTopLevelGeneratedBindingsDeclarations(path)
+      ? _annotateGeneratedBindingsTopLevelDeclarations(output)
+      : _shouldHideVersionedTizenLibraryGetters(path)
+          ? _annotateVersionedTizenLibraryGetters(output)
+          : output;
   final normalizedOutput =
-      _shouldHideTopLevelGeneratedBindingsDeclarations(path)
-          ? _annotateGeneratedBindingsTopLevelDeclarations(output)
-          : _shouldHideVersionedTizenLibraryGetters(path)
-              ? _annotateVersionedTizenLibraryGetters(output)
-              : output;
+      _rewriteVersionedTizenLibraryName(annotatedOutput, path);
   final convertedSource = normalizedOutput.join(newline);
   if (hasTrailingNewline) {
     return '$convertedSource$newline';
@@ -301,6 +304,27 @@ List<String> _annotateVersionedTizenLibraryGetters(List<String> lines) {
   }
 
   return output;
+}
+
+List<String> _rewriteVersionedTizenLibraryName(
+    List<String> lines, String? path) {
+  if (path == null) {
+    return lines;
+  }
+
+  final match = _versionedTizenLibraryPathRegExp.firstMatch(path);
+  if (match == null) {
+    return lines;
+  }
+
+  final versionId = match.group(2)!.replaceAll('.', '_');
+  return lines
+      .map(
+        (line) => RegExp(r'^library\s+tizen_interop\s*;$').hasMatch(line)
+            ? 'library tizen_interop_$versionId;'
+            : line,
+      )
+      .toList();
 }
 
 List<String> _convertMethodDocLines(List<String> docLines) {
