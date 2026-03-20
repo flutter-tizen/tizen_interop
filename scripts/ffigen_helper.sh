@@ -27,7 +27,7 @@ if [[ ! -d "$rootstraps" ]]; then
   exit 1
 fi
 
-headers=$(cat $entrypoints | grep "#include" | sed -r 's/#include <(.+)>/\1/')
+headers=$(cat $entrypoints | grep "#include" | sed -r 's/#include <([^>]+).*/\1/')
 
 # print include-directives:
 find_files() {

@@ -101,7 +101,21 @@ add_symbol_file() {
 file_from_entrypoints=$(grep -oP '#include\s*<\K[^>]*' "$entrypoints")
 
 for header in $file_from_entrypoints; do
-    header_file=$(find "$rootstraps" -type f -name "$(basename $header)")
+    header_file=""
+
+    # First, try to find the header in `usr/include` directory
+    potential_file=$(find "$rootstraps" -type f -path "*/usr/include/$header" -print -quit)
+    if [ -f "$potential_file" ]; then
+        header_file="$potential_file"
+        echo "1.header: $header_file"
+    fi
+
+    # If not found in priority directories, fall back to searching by basename
+    if [ ! -f "$header_file" ]; then
+        header_file=$(find "$rootstraps" -type f -name "$(basename $header)" -print -quit)
+        echo "2.header: $header_file"
+    fi
+
     if [ ! -f "$header_file" ]; then
         continue
     fi
@@ -112,6 +126,7 @@ for header in $file_from_entrypoints; do
         if [[ -n "${symbols[$symbol]}" ]]; then
             found_symbol_file=$(basename ${symbols[$symbol]})
             echo "$(basename $header_file) / $found_symbol_file"
+            echo "$symbol"
             add_symbol_file $found_symbol_file
             break;
         fi
