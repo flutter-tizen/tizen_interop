@@ -39,6 +39,9 @@ final _inlineDoxygenTagRegExp =
     RegExp(r'@(?:if|elseif|else|endif|ref|[abce])\b');
 final _codeBlockStartRegExp =
     RegExp(r'^[@\\]code(?:\{\.?([^}]+)\})?(?:\s+.*)?$');
+final _topLevelDeclarationRegExp =
+    RegExp(r'^(typedef|(?:abstract|final)\s+class|class|enum)\s+');
+final _primaryNativeClassRegExp = RegExp(r'^class\s+Tizen[0-9]+Native\b');
 
 class _DocItem {
   _DocItem({
@@ -155,7 +158,7 @@ bool looksLikeDoxygenDocCommentBlock(List<String> docLines) {
 }
 
 /// Converts all recognized Doxygen-style `///` blocks in a Dart source string.
-String convertDoxygenCommentsInDartSource(String source) {
+String convertDoxygenCommentsInDartSource(String source, {String? path}) {
   final newline = source.contains('\r\n') ? '\r\n' : '\n';
   final hasTrailingNewline = source.endsWith('\n');
   final lines = source.split(RegExp(r'\r?\n')).toList();
@@ -193,7 +196,11 @@ String convertDoxygenCommentsInDartSource(String source) {
     output.addAll(converted.map((commentLine) => '$indent$commentLine'));
   }
 
-  final convertedSource = output.join(newline);
+  final normalizedOutput =
+      _shouldHideTopLevelGeneratedBindingsDeclarations(path)
+          ? _annotateGeneratedBindingsTopLevelDeclarations(output)
+          : output;
+  final convertedSource = normalizedOutput.join(newline);
   if (hasTrailingNewline) {
     return '$convertedSource$newline';
   }
@@ -209,13 +216,52 @@ bool convertDoxygenCommentsInDartFile(String path) {
   }
 
   final original = file.readAsStringSync();
-  final converted = convertDoxygenCommentsInDartSource(original);
+  final converted = convertDoxygenCommentsInDartSource(original, path: path);
   if (converted == original) {
     return false;
   }
 
   file.writeAsStringSync(converted);
   return true;
+}
+
+bool _shouldHideTopLevelGeneratedBindingsDeclarations(String? path) {
+  if (path == null) {
+    return false;
+  }
+
+  final fileName = path.split(RegExp(r'[\\/]')).last;
+  return fileName == 'generated_bindings.dart';
+}
+
+List<String> _annotateGeneratedBindingsTopLevelDeclarations(
+    List<String> lines) {
+  final output = <String>[];
+  var braceDepth = 0;
+
+  for (final line in lines) {
+    final trimmed = line.trimLeft();
+    final isCommentLine = trimmed.startsWith('//');
+
+    if (braceDepth == 0 &&
+        _topLevelDeclarationRegExp.hasMatch(trimmed) &&
+        !_primaryNativeClassRegExp.hasMatch(trimmed)) {
+      if (output.isEmpty || output.last.trim() != '/// {@nodoc}') {
+        output.add('/// {@nodoc}');
+      }
+    }
+
+    output.add(line);
+
+    if (isCommentLine) {
+      continue;
+    }
+
+    braceDepth += '{'.allMatches(line).length;
+    braceDepth -= '}'.allMatches(line).length;
+  }
+
+  return output;
 }
 
 List<String> _convertMethodDocLines(List<String> docLines) {
