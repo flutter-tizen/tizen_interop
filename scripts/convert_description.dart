@@ -37,15 +37,60 @@ const _doxygenTags = <String>[
 final _doxygenTagRegExp = RegExp(r'^@(' '${_doxygenTags.join('|')}' r')\b');
 final _inlineDoxygenTagRegExp =
     RegExp(r'@(?:if|elseif|else|endif|ref|[abce])\b');
+final _docCommentStartRegExp = RegExp(r'^(\s*)///');
+final _docCommentLineRegExp = RegExp(r'^\s*///');
 final _codeBlockStartRegExp =
     RegExp(r'^[@\\]code(?:\{\.?([^}]+)\})?(?:\s+.*)?$');
 final _versionedTizenLibraryPathRegExp =
     RegExp(r'(^|[\\/])lib[\\/](\d+\.\d+)[\\/]tizen\.dart$');
+final _pathSeparatorRegExp = RegExp(r'[\\/]');
 final _topLevelDeclarationRegExp =
     RegExp(r'^(typedef|(?:abstract|final)\s+class|class|enum)\s+');
 final _primaryNativeClassRegExp = RegExp(r'^class\s+Tizen[0-9]+Native\b');
 final _publicTopLevelGetterRegExp =
     RegExp(r'^[A-Za-z][A-Za-z0-9_<>,?. ]+\s+get\s+[A-Za-z][A-Za-z0-9_]*\b');
+final _libraryTizenInteropRegExp = RegExp(r'^library\s+tizen_interop\s*;$');
+final _briefTagRegExp = RegExp(r'^@brief\s*(.*)$');
+final _detailsTagRegExp = RegExp(r'^@details\s*(.*)$');
+final _deprecatedTagRegExp = RegExp(r'^@deprecated\s*(.*)$');
+final _sinceTizenTagRegExp = RegExp(r'^@since_tizen\s*(.*)$');
+final _sinceTagRegExp = RegExp(r'^@since\s*(.*)$');
+final _privlevelTagRegExp = RegExp(r'^@privlevel\s*(.*)$');
+final _privilegeTagRegExp = RegExp(r'^@privilege\s*(.*)$');
+final _remarksTagRegExp = RegExp(r'^@remarks?\s*(.*)$');
+final _paramTagRegExp = RegExp(r'^@param(?:\[(.*?)\])?\s+(\S+)\s*(.*)$');
+final _returnTagRegExp = RegExp(r'^@return\s*(.*)$');
+final _retvalTagRegExp = RegExp(r'^@retval\s*(.*)$');
+final _exceptionTagRegExp = RegExp(r'^@exception\s*(.*)$');
+final _preTagRegExp = RegExp(r'^@pre\s*(.*)$');
+final _postTagRegExp = RegExp(r'^@post\s*(.*)$');
+final _noteTagRegExp = RegExp(r'^@note\s*(.*)$');
+final _warningTagRegExp = RegExp(r'^@warning\s*(.*)$');
+final _seeTagRegExp = RegExp(r'^@see\s*(.*)$');
+final _parTagRegExp = RegExp(r'^@par\s*(.*)$');
+final _featureTagRegExp = RegExp(r'^@feature\s*(.*)$');
+final _platformTagRegExp = RegExp(r'^@platform\s*(.*)$');
+final _partnerTagRegExp = RegExp(r'^@partner\s*(.*)$');
+final _internalTagRegExp = RegExp(r'^@internal\s*(.*)$');
+final _wearableOnlyTagRegExp = RegExp(r'^@WEARABLE_ONLY\s*(.*)$');
+final _sectionTagRegExp = RegExp(r'^@section\s*(.*)$');
+final _groupTagRegExp = RegExp(r'^@(?:ingroup|addtogroup)\s*(.*)$');
+final _miscTagRegExp = RegExp(r'^@(typedef|struct|enum)\s*(.*)$');
+final _namedDocItemRegExp = RegExp(r'^(\S+)\s*(.*)$');
+final _titleTrailingColonRegExp = RegExp(r':+$');
+final _encodedNewlineMarkerRegExp = RegExp(r'(?<!\w)@n(?!\w)');
+final _conditionalSinceBranchRegExp = RegExp(
+  r'@(?:if|elseif)\s+([A-Z_]+)\s+(.+?)(?=\s+@(?:if|elseif|else|endif)\b|$)',
+);
+final _conditionalElseRegExp = RegExp(r'@else\s+(.+?)(?=\s+@endif\b|$)');
+final _simpleReferenceRegExp = RegExp(r'^[A-Za-z_][A-Za-z0-9_]*(?:\(\))?$');
+final _conditionalInlineBlockRegExp = RegExp(r'@if\s+[A-Z_]+\s+.+?@endif');
+final _inlineRefRegExp = RegExp(r'@ref\s+([^\s]+)');
+final _inlineFormattingTagRegExp = RegExp(r'@([abce])\s+([^\s]+)');
+final _trailingPunctuationRegExp = RegExp(r'^(.+?)([.,;:!?)]*)$');
+final _hashReferenceRegExp = RegExp(r'#([A-Za-z_][A-Za-z0-9_]*(?:\(\))?)');
+final _squareBracketLiteralRegExp = RegExp(r'\[([^\[\]]+)\](?!\()');
+final _whitespaceRegExp = RegExp(r'\s+');
 
 class _DocItem {
   _DocItem({
@@ -174,7 +219,7 @@ String convertDoxygenCommentsInDartSource(String source, {String? path}) {
   var index = 0;
   while (index < lines.length) {
     final line = lines[index];
-    final docMatch = RegExp(r'^(\s*)///').firstMatch(line);
+    final docMatch = _docCommentStartRegExp.firstMatch(line);
     if (docMatch == null) {
       output.add(line);
       index++;
@@ -183,7 +228,8 @@ String convertDoxygenCommentsInDartSource(String source, {String? path}) {
 
     final indent = docMatch.group(1)!;
     final block = <String>[];
-    while (index < lines.length && RegExp(r'^\s*///').hasMatch(lines[index])) {
+    while (
+        index < lines.length && _docCommentLineRegExp.hasMatch(lines[index])) {
       block.add(lines[index]);
       index++;
     }
@@ -237,7 +283,7 @@ bool _shouldHideTopLevelGeneratedBindingsDeclarations(String? path) {
     return false;
   }
 
-  final fileName = path.split(RegExp(r'[\\/]')).last;
+  final fileName = path.split(_pathSeparatorRegExp).last;
   return fileName == 'generated_bindings.dart';
 }
 
@@ -246,19 +292,18 @@ bool _shouldHideVersionedTizenLibraryGetters(String? path) {
     return false;
   }
 
-  return RegExp(r'(^|[\\/])lib[\\/]\d+\.\d+[\\/]tizen\.dart$').hasMatch(path);
+  return _versionedTizenLibraryPathRegExp.hasMatch(path);
 }
 
 List<String> _annotateGeneratedBindingsTopLevelDeclarations(
     List<String> lines) {
   final output = <String>[];
-  var braceDepth = 0;
 
   for (final line in lines) {
     final trimmed = line.trimLeft();
-    final isCommentLine = trimmed.startsWith('//');
+    final isTopLevelLine = trimmed == line;
 
-    if (braceDepth == 0 &&
+    if (isTopLevelLine &&
         _topLevelDeclarationRegExp.hasMatch(trimmed) &&
         !_primaryNativeClassRegExp.hasMatch(trimmed)) {
       if (output.isEmpty || output.last.trim() != '/// {@nodoc}') {
@@ -267,13 +312,6 @@ List<String> _annotateGeneratedBindingsTopLevelDeclarations(
     }
 
     output.add(line);
-
-    if (isCommentLine) {
-      continue;
-    }
-
-    braceDepth += '{'.allMatches(line).length;
-    braceDepth -= '}'.allMatches(line).length;
   }
 
   return output;
@@ -281,26 +319,18 @@ List<String> _annotateGeneratedBindingsTopLevelDeclarations(
 
 List<String> _annotateVersionedTizenLibraryGetters(List<String> lines) {
   final output = <String>[];
-  var braceDepth = 0;
 
   for (final line in lines) {
     final trimmed = line.trimLeft();
-    final isCommentLine = trimmed.startsWith('//');
+    final isTopLevelLine = trimmed == line;
 
-    if (braceDepth == 0 && _publicTopLevelGetterRegExp.hasMatch(trimmed)) {
+    if (isTopLevelLine && _publicTopLevelGetterRegExp.hasMatch(trimmed)) {
       if (output.isEmpty || output.last.trim() != '/// {@nodoc}') {
         output.add('/// {@nodoc}');
       }
     }
 
     output.add(line);
-
-    if (isCommentLine) {
-      continue;
-    }
-
-    braceDepth += '{'.allMatches(line).length;
-    braceDepth -= '}'.allMatches(line).length;
   }
 
   return output;
@@ -320,7 +350,7 @@ List<String> _rewriteVersionedTizenLibraryName(
   final versionId = match.group(2)!.replaceAll('.', '_');
   return lines
       .map(
-        (line) => RegExp(r'^library\s+tizen_interop\s*;$').hasMatch(line)
+        (line) => _libraryTizenInteropRegExp.hasMatch(line)
             ? 'library tizen_interop_$versionId;'
             : line,
       )
@@ -372,7 +402,8 @@ List<String> _convertMethodDocLines(List<String> docLines) {
 
   for (final codeBlock in doc.codeBlocks) {
     if (codeBlock.title != null && codeBlock.title!.isNotEmpty) {
-      final title = codeBlock.title!.replaceFirst(RegExp(r':+$'), '');
+      final title =
+          codeBlock.title!.replaceFirst(_titleTrailingColonRegExp, '');
       _appendDocParagraph(output, '**$title:**');
     }
     _appendCodeBlock(output, codeBlock);
@@ -503,20 +534,19 @@ _StructuredDoc _parseStructuredDoc(List<String> docLines) {
         continue;
       }
 
-      final briefMatch = RegExp(r'^@brief\s*(.*)$').firstMatch(trimmed);
+      final briefMatch = _briefTagRegExp.firstMatch(trimmed);
       if (briefMatch != null) {
         addParagraph(doc.summary, briefMatch.group(1)!);
         continue;
       }
 
-      final detailsMatch = RegExp(r'^@details\s*(.*)$').firstMatch(trimmed);
+      final detailsMatch = _detailsTagRegExp.firstMatch(trimmed);
       if (detailsMatch != null) {
         addParagraph(doc.details, detailsMatch.group(1)!);
         continue;
       }
 
-      final deprecatedMatch =
-          RegExp(r'^@deprecated\s*(.*)$').firstMatch(trimmed);
+      final deprecatedMatch = _deprecatedTagRegExp.firstMatch(trimmed);
       if (deprecatedMatch != null) {
         final text = deprecatedMatch.group(1)!.trim();
         addParagraph(
@@ -528,26 +558,25 @@ _StructuredDoc _parseStructuredDoc(List<String> docLines) {
         continue;
       }
 
-      final sinceTizenMatch =
-          RegExp(r'^@since_tizen\s*(.*)$').firstMatch(trimmed);
+      final sinceTizenMatch = _sinceTizenTagRegExp.firstMatch(trimmed);
       if (sinceTizenMatch != null) {
         addParagraph(doc.since, _formatSinceText(sinceTizenMatch.group(1)!));
         continue;
       }
 
-      final sinceMatch = RegExp(r'^@since\s*(.*)$').firstMatch(trimmed);
+      final sinceMatch = _sinceTagRegExp.firstMatch(trimmed);
       if (sinceMatch != null) {
         addParagraph(doc.since, sinceMatch.group(1)!);
         continue;
       }
 
-      final privlevelMatch = RegExp(r'^@privlevel\s*(.*)$').firstMatch(trimmed);
+      final privlevelMatch = _privlevelTagRegExp.firstMatch(trimmed);
       if (privlevelMatch != null) {
         addParagraph(doc.privilegeLevels, privlevelMatch.group(1)!);
         continue;
       }
 
-      final privilegeMatch = RegExp(r'^@privilege\s*(.*)$').firstMatch(trimmed);
+      final privilegeMatch = _privilegeTagRegExp.firstMatch(trimmed);
       if (privilegeMatch != null) {
         addParagraph(
           doc.privileges,
@@ -557,7 +586,7 @@ _StructuredDoc _parseStructuredDoc(List<String> docLines) {
         continue;
       }
 
-      final remarksMatch = RegExp(r'^@remarks?\s*(.*)$').firstMatch(trimmed);
+      final remarksMatch = _remarksTagRegExp.firstMatch(trimmed);
       if (remarksMatch != null) {
         addParagraph(
           doc.remarks,
@@ -567,9 +596,7 @@ _StructuredDoc _parseStructuredDoc(List<String> docLines) {
         continue;
       }
 
-      final paramMatch = RegExp(
-        r'^@param(?:\[(.*?)\])?\s+(\S+)\s*(.*)$',
-      ).firstMatch(trimmed);
+      final paramMatch = _paramTagRegExp.firstMatch(trimmed);
       if (paramMatch != null) {
         addNamedItem(
           doc.parameters,
@@ -580,57 +607,57 @@ _StructuredDoc _parseStructuredDoc(List<String> docLines) {
         continue;
       }
 
-      final returnMatch = RegExp(r'^@return\s*(.*)$').firstMatch(trimmed);
+      final returnMatch = _returnTagRegExp.firstMatch(trimmed);
       if (returnMatch != null) {
         addParagraph(doc.returns, returnMatch.group(1)!);
         continue;
       }
 
-      final retvalMatch = RegExp(r'^@retval\s*(.*)$').firstMatch(trimmed);
+      final retvalMatch = _retvalTagRegExp.firstMatch(trimmed);
       if (retvalMatch != null) {
         final parsed = _parseNamedDocItem(retvalMatch.group(1)!);
         addNamedItem(doc.returnValues, parsed.name, parsed.description);
         continue;
       }
 
-      final exceptionMatch = RegExp(r'^@exception\s*(.*)$').firstMatch(trimmed);
+      final exceptionMatch = _exceptionTagRegExp.firstMatch(trimmed);
       if (exceptionMatch != null) {
         final parsed = _parseNamedDocItem(exceptionMatch.group(1)!);
         addNamedItem(doc.exceptions, parsed.name, parsed.description);
         continue;
       }
 
-      final preMatch = RegExp(r'^@pre\s*(.*)$').firstMatch(trimmed);
+      final preMatch = _preTagRegExp.firstMatch(trimmed);
       if (preMatch != null) {
         addParagraph(doc.preconditions, preMatch.group(1)!);
         continue;
       }
 
-      final postMatch = RegExp(r'^@post\s*(.*)$').firstMatch(trimmed);
+      final postMatch = _postTagRegExp.firstMatch(trimmed);
       if (postMatch != null) {
         addParagraph(doc.postconditions, postMatch.group(1)!);
         continue;
       }
 
-      final noteMatch = RegExp(r'^@note\s*(.*)$').firstMatch(trimmed);
+      final noteMatch = _noteTagRegExp.firstMatch(trimmed);
       if (noteMatch != null) {
         addParagraph(doc.notes, noteMatch.group(1)!);
         continue;
       }
 
-      final warningMatch = RegExp(r'^@warning\s*(.*)$').firstMatch(trimmed);
+      final warningMatch = _warningTagRegExp.firstMatch(trimmed);
       if (warningMatch != null) {
         addParagraph(doc.warnings, warningMatch.group(1)!);
         continue;
       }
 
-      final seeMatch = RegExp(r'^@see\s*(.*)$').firstMatch(trimmed);
+      final seeMatch = _seeTagRegExp.firstMatch(trimmed);
       if (seeMatch != null) {
         addParagraph(doc.seeAlso, _normalizeSeeAlsoText(seeMatch.group(1)!));
         continue;
       }
 
-      final parMatch = RegExp(r'^@par\s*(.*)$').firstMatch(trimmed);
+      final parMatch = _parTagRegExp.firstMatch(trimmed);
       if (parMatch != null) {
         final title = _normalizeInlineDocText(parMatch.group(1)!);
         if (title.isNotEmpty) {
@@ -640,33 +667,32 @@ _StructuredDoc _parseStructuredDoc(List<String> docLines) {
         continue;
       }
 
-      final featureMatch = RegExp(r'^@feature\s*(.*)$').firstMatch(trimmed);
+      final featureMatch = _featureTagRegExp.firstMatch(trimmed);
       if (featureMatch != null) {
         addExtra('Required feature', featureMatch.group(1)!);
         continue;
       }
 
-      final platformMatch = RegExp(r'^@platform\s*(.*)$').firstMatch(trimmed);
+      final platformMatch = _platformTagRegExp.firstMatch(trimmed);
       if (platformMatch != null) {
         final text = platformMatch.group(1)!.trim();
         addExtra('Platform', text.isEmpty ? 'Platform API.' : text);
         continue;
       }
 
-      final partnerMatch = RegExp(r'^@partner\s*(.*)$').firstMatch(trimmed);
+      final partnerMatch = _partnerTagRegExp.firstMatch(trimmed);
       if (partnerMatch != null) {
         addExtra('Partner', partnerMatch.group(1)!);
         continue;
       }
 
-      final internalMatch = RegExp(r'^@internal\s*(.*)$').firstMatch(trimmed);
+      final internalMatch = _internalTagRegExp.firstMatch(trimmed);
       if (internalMatch != null) {
         addExtra('Internal', internalMatch.group(1)!);
         continue;
       }
 
-      final wearableOnlyMatch =
-          RegExp(r'^@WEARABLE_ONLY\s*(.*)$').firstMatch(trimmed);
+      final wearableOnlyMatch = _wearableOnlyTagRegExp.firstMatch(trimmed);
       if (wearableOnlyMatch != null) {
         final text = wearableOnlyMatch.group(1)!.trim();
         addExtra(
@@ -676,21 +702,19 @@ _StructuredDoc _parseStructuredDoc(List<String> docLines) {
         continue;
       }
 
-      final sectionMatch = RegExp(r'^@section\s*(.*)$').firstMatch(trimmed);
+      final sectionMatch = _sectionTagRegExp.firstMatch(trimmed);
       if (sectionMatch != null) {
         addExtra('Section', sectionMatch.group(1)!);
         continue;
       }
 
-      final groupMatch =
-          RegExp(r'^@(?:ingroup|addtogroup)\s*(.*)$').firstMatch(trimmed);
+      final groupMatch = _groupTagRegExp.firstMatch(trimmed);
       if (groupMatch != null) {
         addExtra('Group', groupMatch.group(1)!);
         continue;
       }
 
-      final miscTagMatch =
-          RegExp(r'^@(typedef|struct|enum)\s*(.*)$').firstMatch(trimmed);
+      final miscTagMatch = _miscTagRegExp.firstMatch(trimmed);
       if (miscTagMatch != null) {
         addExtra(
           _uppercaseFirst(miscTagMatch.group(1)!),
@@ -734,7 +758,7 @@ _StructuredDoc _parseStructuredDoc(List<String> docLines) {
 
 _DocItem _parseNamedDocItem(String text) {
   final normalized = _normalizeInlineDocText(text);
-  final match = RegExp(r'^(\S+)\s*(.*)$').firstMatch(normalized);
+  final match = _namedDocItemRegExp.firstMatch(normalized);
   if (match == null) {
     return _DocItem(description: normalized);
   }
@@ -834,8 +858,9 @@ String _stripGeneratedDocLine(String line) {
 }
 
 List<String> _expandDocLine(String line) {
-  final expanded =
-      line.replaceAll(r'\n', '\n').replaceAll(RegExp(r'(?<!\w)@n(?!\w)'), '\n');
+  final expanded = line
+      .replaceAll(r'\n', '\n')
+      .replaceAll(_encodedNewlineMarkerRegExp, '\n');
   final parts = expanded.split('\n');
   while (parts.isNotEmpty && parts.last.isEmpty) {
     parts.removeLast();
@@ -850,18 +875,13 @@ String _formatSinceText(String text) {
   }
 
   final items = <String>[];
-  final conditionalPattern = RegExp(
-    r'@(?:if|elseif)\s+([A-Z_]+)\s+(.+?)(?=\s+@(?:if|elseif|else|endif)\b|$)',
-  );
-  for (final match in conditionalPattern.allMatches(trimmed)) {
+  for (final match in _conditionalSinceBranchRegExp.allMatches(trimmed)) {
     final platform = _formatPlatformLabel(match.group(1)!);
     final version = _normalizeInlineDocText(match.group(2)!);
     items.add('$platform $version');
   }
 
-  final elseMatch = RegExp(
-    r'@else\s+(.+?)(?=\s+@endif\b|$)',
-  ).firstMatch(trimmed);
+  final elseMatch = _conditionalElseRegExp.firstMatch(trimmed);
   if (elseMatch != null) {
     items.add('Otherwise ${_normalizeInlineDocText(elseMatch.group(1)!)}');
   }
@@ -900,7 +920,7 @@ String _normalizeSeeAlsoText(String text) {
   if (normalized.startsWith('`') && normalized.endsWith('`')) {
     return normalized;
   }
-  if (RegExp(r'^[A-Za-z_][A-Za-z0-9_]*(?:\(\))?$').hasMatch(normalized)) {
+  if (_simpleReferenceRegExp.hasMatch(normalized)) {
     return '`$normalized`';
   }
   return normalized;
@@ -912,9 +932,7 @@ String _normalizeConditionalInlineText(String text) {
     return _normalizeInlineDocText(trimmed);
   }
 
-  final conditionalMatch = RegExp(
-    r'@if\s+[A-Z_]+\s+.+?@endif',
-  ).firstMatch(trimmed);
+  final conditionalMatch = _conditionalInlineBlockRegExp.firstMatch(trimmed);
   if (conditionalMatch == null) {
     return _normalizeInlineDocText(trimmed);
   }
@@ -935,20 +953,20 @@ String _normalizeInlineDocText(String text) {
   }
 
   normalized = normalized.replaceAll(r'\n', ' ');
-  normalized = normalized.replaceAll(RegExp(r'(?<!\w)@n(?!\w)'), ' ');
+  normalized = normalized.replaceAll(_encodedNewlineMarkerRegExp, ' ');
   normalized = normalized.replaceAll('%http://', 'http://');
   normalized = normalized.replaceAll('%https://', 'https://');
 
   normalized = normalized.replaceAllMapped(
-    RegExp(r'@ref\s+([^\s]+)'),
+    _inlineRefRegExp,
     (match) => '`${match.group(1)}`',
   );
   normalized = normalized.replaceAllMapped(
-    RegExp(r'@([abce])\s+([^\s]+)'),
+    _inlineFormattingTagRegExp,
     (match) {
       final marker = match.group(1)!;
       final rawToken = match.group(2)!;
-      final tokenMatch = RegExp(r'^(.+?)([.,;:!?)]*)$').firstMatch(rawToken)!;
+      final tokenMatch = _trailingPunctuationRegExp.firstMatch(rawToken)!;
       final token = tokenMatch.group(1)!;
       final punctuation = tokenMatch.group(2)!;
       final formatted = switch (marker) {
@@ -961,14 +979,14 @@ String _normalizeInlineDocText(String text) {
     },
   );
   normalized = normalized.replaceAllMapped(
-    RegExp(r'#([A-Za-z_][A-Za-z0-9_]*(?:\(\))?)'),
+    _hashReferenceRegExp,
     (match) => '`${match.group(1)}`',
   );
   normalized = normalized.replaceAllMapped(
-    RegExp(r'\[([^\[\]]+)\](?!\()'),
+    _squareBracketLiteralRegExp,
     (match) => '`${match.group(1)}`',
   );
-  normalized = normalized.replaceAll(RegExp(r'\s+'), ' ');
+  normalized = normalized.replaceAll(_whitespaceRegExp, ' ');
   return normalized.trim();
 }
 
