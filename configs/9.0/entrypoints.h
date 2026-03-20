@@ -4,6 +4,11 @@
 #include <fido_uaf_authenticator.h>  // deprecated
 #include <fido_uaf_client.h>         // deprecated
 #include <oauth2.h>
+#include <oauth2_error.h>
+#include <oauth2_manager.h>
+#include <oauth2_request.h>
+#include <oauth2_response.h>
+#include <oauth2_types.h>
 #include <sync_adapter.h>
 #include <sync_manager.h>
 
@@ -17,14 +22,47 @@
 #include <app_manager.h>
 #include <app_preference.h>
 #include <app_resource_manager.h>
-#include <badge.h>  // deprecated
+#include <badge.h>  //deprecated
 #include <bundle.h>
 #include <cion.h>
+#include <cion_client.h>
+#include <cion_connection_result.h>
+#include <cion_error.h>
+#include <cion_group.h>
+#include <cion_payload.h>
+#include <cion_payload_async_result.h>
+#include <cion_peer_info.h>
+#include <cion_security.h>
+#include <cion_server.h>
 #include <data_control.h>
+#include <data_control_bulk.h>
+#include <data_control_map.h>
+#include <data_control_noti.h>
+#include <data_control_provider.h>
+#include <data_control_sql.h>
+#include <data_control_sql_cursor.h>
 #include <job_scheduler.h>
 #include <message_port.h>
 #include <notification.h>
 #include <notification_ex.h>
+#include <notification_ex_app_control_action.h>
+#include <notification_ex_button.h>
+#include <notification_ex_chat_message.h>
+#include <notification_ex_checkbox.h>
+#include <notification_ex_entry.h>
+#include <notification_ex_error.h>
+#include <notification_ex_event_info.h>
+#include <notification_ex_group.h>
+#include <notification_ex_image.h>
+#include <notification_ex_input_selector.h>
+#include <notification_ex_item.h>
+#include <notification_ex_manager.h>
+#include <notification_ex_multi_language.h>
+#include <notification_ex_progress.h>
+#include <notification_ex_reporter.h>
+#include <notification_ex_text.h>
+#include <notification_ex_time.h>
+#include <notification_ex_visibility_action.h>
 #include <package_archive_info.h>
 #include <package_manager.h>
 #include <rpc-port-parcel.h>
@@ -52,6 +90,7 @@
 #include <locations.h>
 
 // Machine Learning
+#include <nnstreamer/ml-api-common.h>
 #include <nnstreamer/ml-api-service.h>
 #include <nnstreamer/nnstreamer-single.h>
 #include <nnstreamer/nnstreamer.h>
@@ -79,6 +118,8 @@
 #include <metadata_extractor.h>
 #include <mv_3d.h>
 #include <mv_barcode.h>
+#include <mv_barcode_detect.h>
+#include <mv_barcode_generate.h>
 #include <mv_common.h>
 #include <mv_face.h>  //deprecated
 #include <mv_face_recognition.h>
@@ -105,11 +146,11 @@
 #include <asp.h>  //deprecated
 #include <bluetooth.h>
 #include <dns-sd.h>
-#include <http.h>  //deprecated
 #include <inm.h>
 #include <iotcon.h>
 #include <mtp.h>
 #include <net_connection.h>
+#include <network/http.h>  // deprecated
 #include <nfc.h>
 #include <softap.h>
 #include <ssdp.h>
@@ -145,13 +186,43 @@
 #include <yaca_digest.h>
 #include <yaca_encrypt.h>
 #include <yaca_error.h>
+#include <yaca_key.h>
+#include <yaca_rsa.h>
 #include <yaca_seal.h>
 #include <yaca_sign.h>
+#include <yaca_simple.h>
 #include <yaca_types.h>
 
 // Social
 #include <calendar.h>
+#include <calendar_db.h>
+#include <calendar_errors.h>
+#include <calendar_filter.h>
+#include <calendar_list.h>
+#include <calendar_query.h>
+#include <calendar_record.h>
+#include <calendar_reminder.h>
+#include <calendar_service.h>
+#include <calendar_vcalendar.h>
+#include <calendar_view.h>
 #include <contacts.h>
+#include <contacts_activity.h>
+#include <contacts_db.h>
+#include <contacts_db_status.h>
+#include <contacts_errors.h>
+#include <contacts_filter.h>
+#include <contacts_group.h>
+#include <contacts_list.h>
+#include <contacts_person.h>
+#include <contacts_phone_log.h>
+#include <contacts_query.h>
+#include <contacts_record.h>
+#include <contacts_service.h>
+#include <contacts_setting.h>
+#include <contacts_sim.h>
+#include <contacts_types.h>
+#include <contacts_vcard.h>
+#include <contacts_views.h>
 #include <phone_number.h>
 
 // System
@@ -170,6 +241,7 @@
 #include <peripheral_io.h>
 #include <runtime_info.h>
 #include <sensor.h>
+#include <storage-expand.h>
 #include <storage.h>
 #include <system/resource-monitor.h>
 #include <system_info.h>

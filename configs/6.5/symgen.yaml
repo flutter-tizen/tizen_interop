@@ -36,6 +36,7 @@ target-libraries:
   - libcapi-web-url-download.so.0               # Content / Download
   - libcapi-content-mime-type.so.0              # Content / Mime Type
   - libcapi-content-media-content.so.0          # Content / Media Content
+  - libcapi-context-motion.so.2                 # Context / Activity Recognition, Gesture Recognition
   - libcapi-context.so.1                        # Context / Contextual History, Contextual Trigger
   - libcapi-geofence-manager.so.0               # Location / Geofence Manager
   - libcapi-location-manager.so.0               # Location / Location Manager
