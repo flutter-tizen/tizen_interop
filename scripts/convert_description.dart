@@ -1,6 +1,45 @@
 import 'dart:collection';
 import 'dart:io';
 
+const _doxygenTags = <String>[
+  'brief',
+  'details',
+  'deprecated',
+  'since(?:_tizen)?',
+  'privlevel',
+  'privilege',
+  'remarks?',
+  'param(?:\\[[^\\]]+\\])?',
+  'return',
+  'retval',
+  'exception',
+  'pre',
+  'post',
+  'note',
+  'warning',
+  'see',
+  'par',
+  'code',
+  'endcode',
+  'feature',
+  'platform',
+  'partner',
+  'internal',
+  'WEARABLE_ONLY',
+  'section',
+  'ingroup',
+  'addtogroup',
+  'typedef',
+  'struct',
+  'enum',
+];
+
+final _doxygenTagRegExp = RegExp(r'^@(' '${_doxygenTags.join('|')}' r')\b');
+final _inlineDoxygenTagRegExp =
+    RegExp(r'@(?:if|elseif|else|endif|ref|[abce])\b');
+final _codeBlockStartRegExp =
+    RegExp(r'^[@\\]code(?:\{\.?([^}]+)\})?(?:\s+.*)?$');
+
 class _DocItem {
   _DocItem({
     this.name,
@@ -21,11 +60,12 @@ class _CodeBlock {
   _CodeBlock({
     required this.lines,
     this.title,
+    this.language,
   });
 
   final List<String> lines;
   final String? title;
-  final String language = 'c';
+  final String? language;
 }
 
 class _StructuredDoc {
@@ -53,10 +93,11 @@ class _StructuredDoc {
   }
 }
 
+/// Converts Doxygen-style `///` comments in one or more Dart files in place.
 void main(List<String> args) {
   if (args.isEmpty || args.contains('--help') || args.contains('-h')) {
     stdout.writeln(
-      'Usage: dart run tool/convert_doxygen_to_dartdoc.dart <dart-file> '
+      'Usage: dart run scripts/convert_description.dart <dart-file> '
       '[more-dart-files...]',
     );
     exit(args.isEmpty ? 64 : 0);
@@ -95,23 +136,17 @@ void main(List<String> args) {
   }
 }
 
+/// Rewrites Doxygen-style `///` lines into dartdoc/Markdown comments.
 List<String> convertDoxygenDocCommentLines(List<String> docLines) {
   return _convertMethodDocLines(docLines);
 }
 
+/// Returns true when a doc-comment block contains recognized Doxygen markers.
 bool looksLikeDoxygenDocCommentBlock(List<String> docLines) {
-  const doxygenTagPattern =
-      r'^@(brief|details|deprecated|since(?:_tizen)?|privlevel|privilege|'
-      r'remarks?|param(?:\[[^\]]+\])?|return|retval|exception|pre|post|'
-      r'note|warning|see|par|code|endcode|feature|platform|partner|'
-      r'internal|WEARABLE_ONLY|section|ingroup|addtogroup|typedef|struct|'
-      r'enum)\b';
-  final tagRegExp = RegExp(doxygenTagPattern);
-  final inlineRegExp = RegExp(r'@(?:if|elseif|else|endif|ref|[abce])\b');
-
   for (final line in docLines) {
     final stripped = _stripGeneratedDocLine(line).trim();
-    if (tagRegExp.hasMatch(stripped) || inlineRegExp.hasMatch(stripped)) {
+    if (_doxygenTagRegExp.hasMatch(stripped) ||
+        _inlineDoxygenTagRegExp.hasMatch(stripped)) {
       return true;
     }
   }
@@ -119,6 +154,7 @@ bool looksLikeDoxygenDocCommentBlock(List<String> docLines) {
   return false;
 }
 
+/// Converts all recognized Doxygen-style `///` blocks in a Dart source string.
 String convertDoxygenCommentsInDartSource(String source) {
   final newline = source.contains('\r\n') ? '\r\n' : '\n';
   final hasTrailingNewline = source.endsWith('\n');
@@ -164,6 +200,8 @@ String convertDoxygenCommentsInDartSource(String source) {
   return convertedSource;
 }
 
+/// Rewrites recognized Doxygen-style `///` blocks in `path` and returns
+/// whether the file changed.
 bool convertDoxygenCommentsInDartFile(String path) {
   final file = File(path);
   if (!file.existsSync()) {
@@ -243,6 +281,7 @@ _StructuredDoc _parseStructuredDoc(List<String> docLines) {
   void Function(String text)? appendContinuation;
   final pendingParagraphTitles = <String>[];
   List<String>? currentCodeBlock;
+  String? currentCodeLanguage;
 
   void addParagraph(
     List<String> target,
@@ -328,9 +367,11 @@ _StructuredDoc _parseStructuredDoc(List<String> docLines) {
             _CodeBlock(
               lines: List<String>.from(currentCodeBlock),
               title: title,
+              language: currentCodeLanguage,
             ),
           );
           currentCodeBlock = null;
+          currentCodeLanguage = null;
           appendContinuation = null;
           continue;
         }
@@ -343,11 +384,12 @@ _StructuredDoc _parseStructuredDoc(List<String> docLines) {
         continue;
       }
 
-      if (trimmed == r'@code' ||
-          trimmed.startsWith('@code ') ||
-          trimmed == r'\code' ||
-          trimmed.startsWith(r'\code ')) {
+      final codeBlockStartMatch = _codeBlockStartRegExp.firstMatch(trimmed);
+      if (codeBlockStartMatch != null) {
         currentCodeBlock = <String>[];
+        currentCodeLanguage = _normalizeCodeBlockLanguage(
+          codeBlockStartMatch.group(1),
+        );
         appendContinuation = null;
         continue;
       }
@@ -572,6 +614,7 @@ _StructuredDoc _parseStructuredDoc(List<String> docLines) {
         title: pendingParagraphTitles.isNotEmpty
             ? pendingParagraphTitles.removeLast()
             : null,
+        language: currentCodeLanguage,
       ),
     );
   }
@@ -667,7 +710,9 @@ void _appendCodeBlock(List<String> output, _CodeBlock codeBlock) {
   if (output.isNotEmpty) {
     output.add('///');
   }
-  output.add('/// ```${codeBlock.language}');
+  output.add(
+    codeBlock.language == null ? '/// ```' : '/// ```${codeBlock.language}',
+  );
   for (final line in codeBlock.lines) {
     output.add(line.isEmpty ? '///' : '/// $line');
   }
@@ -820,6 +865,19 @@ String _normalizeInlineDocText(String text) {
 
 String _normalizeCodeLine(String line) {
   return line.replaceAll(r'\n', '').trimRight();
+}
+
+String? _normalizeCodeBlockLanguage(String? language) {
+  if (language == null) {
+    return null;
+  }
+
+  final normalized = language.trim();
+  if (normalized.isEmpty) {
+    return null;
+  }
+
+  return normalized.startsWith('.') ? normalized.substring(1) : normalized;
 }
 
 String _mergeDocText(String current, String next) {
