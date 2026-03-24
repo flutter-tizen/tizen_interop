@@ -28,7 +28,12 @@ headers:
     - '**/mtp.h'
     - '**/multi_assistant_common.h'
     - '**/multi_assistant.h'
+    - '**/oauth2_error.h'
     - '**/oauth2.h'
+    - '**/oauth2_manager.h'
+    - '**/oauth2_request.h'
+    - '**/oauth2_response.h'
+    - '**/oauth2_types.h'
     - '**/peripheral_io.h'
     - '**/privilege_information.h'
     - '**/push-service.h'
@@ -89,6 +94,7 @@ headers:
     - '**/web/*.h'
     - '**/wifi-direct/*.h'
     - '**/yaca/*.h'
+
 
 compiler-opts:
   - '-m32'

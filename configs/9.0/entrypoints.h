@@ -41,6 +41,7 @@
 #include <data_control_provider.h>
 #include <data_control_sql.h>
 #include <data_control_sql_cursor.h>
+#include <data_control_types.h>
 #include <job_scheduler.h>
 #include <message_port.h>
 #include <notification.h>
@@ -68,6 +69,8 @@
 #include <rpc-port-parcel.h>
 #include <rpc-port.h>
 #include <service_app.h>
+#include <shortcut/shortcut_manager.h>
+#include <shortcut_error.h>
 #include <tizen_core.h>
 
 // Base
@@ -179,9 +182,6 @@
 #include <privacy_privilege_manager.h>  // deprecated
 #include <privilege_information.h>
 #include <webauthn.h>
-#include <yaca/yaca_key.h>
-#include <yaca/yaca_rsa.h>
-#include <yaca/yaca_simple.h>
 #include <yaca_crypto.h>
 #include <yaca_digest.h>
 #include <yaca_encrypt.h>

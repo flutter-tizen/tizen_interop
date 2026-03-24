@@ -34529,6 +34529,438 @@ class Tizen90Native {
   late final _service_app_exit =
       _service_app_exitPtr.asFunction<void Function()>();
 
+  /// @deprecated Deprecated since 9.0
+  /// @brief Adds a shortcut to home, asynchronously.
+  /// @since_tizen 2.3
+  /// @privlevel public
+  /// @privilege %http://tizen.org/privilege/shortcut
+  /// @remarks If a homescreen does not support this feature, you will get a proper error code.\n
+  /// Application must check the return value of this function.\n
+  /// Application must check the return status from the callback function.\n
+  /// Application should set the callback function to get the result of this request.
+  /// @param[in] name The name of the created shortcut icon
+  /// @param[in] type The type of shortcuts
+  /// @param[in] uri The specific information for delivering to the viewer for creating a shortcut
+  /// @param[in] icon The absolute path of an icon file
+  /// @param[in] allow_duplicate @c 1 if it accepts the duplicated shortcut,
+  /// otherwise @c 0
+  /// @param[in] cb The address of the callback function that is called when the result comes back from the viewer
+  /// @param[in] data The callback data that is used in the callback function
+  /// @return @c 0 on success,
+  /// otherwise a negative error value
+  /// @retval #SHORTCUT_ERROR_NONE Successful
+  /// @retval #SHORTCUT_ERROR_NOT_SUPPORTED Not supported
+  /// @retval #SHORTCUT_ERROR_PERMISSION_DENIED Permission denied
+  /// @retval #SHORTCUT_ERROR_INVALID_PARAMETER Invalid function parameter
+  /// @retval #SHORTCUT_ERROR_OUT_OF_MEMORY Out of memory
+  /// @retval #SHORTCUT_ERROR_IO_ERROR I/O Error
+  /// @retval #SHORTCUT_ERROR_RESOURCE_BUSY Device or resource busy
+  /// @retval #SHORTCUT_ERROR_NO_SPACE There is no space to add a new shortcut
+  /// @retval #SHORTCUT_ERROR_EXIST Shortcut is already exist
+  /// @retval #SHORTCUT_ERROR_FAULT Unrecoverable error
+  /// @retval #SHORTCUT_ERROR_COMM Connection not established or communication problem
+  /// @pre You have to prepare the callback function.
+  /// @post You have to check the return status from the callback function which is passed by the argument.
+  /// @see result_cb()
+  /// @par Example
+  /// @code
+  /// #include <stdio.h>
+  /// #include <shortcut_manager.h>
+  /// static int _result_cb(int ret, int pid, void *data)
+  /// {
+  /// if (ret < 0)
+  /// dlog_print("Failed to add a shortcut: %s\n", perror(ret));
+  ///
+  /// dlog_print("Processed by the %d\n", pid);
+  /// return 0;
+  /// }
+  ///
+  /// static int app_create(void *data)
+  /// {
+  /// char* data_path = app_get_data_path();
+  /// int path_len = strlen(data_path)+10;
+  /// char * path = malloc(path_len);
+  /// memset(path, 0, path_len);
+  /// strncat(path, data_path, path_len);
+  /// strncat(path, "Friend.jpg", path_len);
+  ///
+  /// shortcut_add_to_home("With friends", LAUNCH_BY_URI, "gallery:0000-0000", path, 0, _result_cb, NULL);
+  /// free(path);
+  ///
+  /// return 0;
+  /// }
+  /// @endcode
+  int shortcut_add_to_home(
+    ffi.Pointer<ffi.Char> name,
+    int type,
+    ffi.Pointer<ffi.Char> uri,
+    ffi.Pointer<ffi.Char> icon,
+    int allow_duplicate,
+    result_cb cb,
+    ffi.Pointer<ffi.Void> data,
+  ) {
+    return _shortcut_add_to_home(
+      name,
+      type,
+      uri,
+      icon,
+      allow_duplicate,
+      cb,
+      data,
+    );
+  }
+
+  late final _shortcut_add_to_homePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(
+              ffi.Pointer<ffi.Char>,
+              ffi.Int32,
+              ffi.Pointer<ffi.Char>,
+              ffi.Pointer<ffi.Char>,
+              ffi.Int,
+              result_cb,
+              ffi.Pointer<ffi.Void>)>>('shortcut_add_to_home');
+  late final _shortcut_add_to_home = _shortcut_add_to_homePtr.asFunction<
+      int Function(ffi.Pointer<ffi.Char>, int, ffi.Pointer<ffi.Char>,
+          ffi.Pointer<ffi.Char>, int, result_cb, ffi.Pointer<ffi.Void>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Adds a widget to home, asynchronously.
+  /// @since_tizen 2.4
+  /// @privlevel public
+  /// @privilege %http://tizen.org/privilege/shortcut
+  /// @remarks If a homescreen does not support this feature, you will get a proper error code.\n
+  /// Application must check the return value of this function.\n
+  /// Application must check the return status from the callback function.\n
+  /// Application should set the callback function to get the result of this request.
+  /// @param[in] name The name of the created widget which will be shown when the widget is not prepared
+  /// @param[in] size The size of widget
+  /// @param[in] widget_id Widget ID
+  /// @param[in] icon The absolute path of an icon file which will be shown when the widget is not prepared
+  /// @param[in] period The Update period in seconds
+  /// @param[in] allow_duplicate @c 1 if it accepts the duplicated widget,
+  /// otherwise @c 0
+  /// @param[in] cb The address of the callback function that is called when the result comes back from the viewer
+  /// @param[in] data The callback data that is used in the callback function
+  /// @return @c 0 on success,
+  /// otherwise a negative error value
+  /// @retval #SHORTCUT_ERROR_NONE Successful
+  /// @retval #SHORTCUT_ERROR_NOT_SUPPORTED Not supported
+  /// @retval #SHORTCUT_ERROR_PERMISSION_DENIED Permission denied
+  /// @retval #SHORTCUT_ERROR_INVALID_PARAMETER Invalid function parameter
+  /// @retval #SHORTCUT_ERROR_OUT_OF_MEMORY Out of memory
+  /// @retval #SHORTCUT_ERROR_IO_ERROR I/O Error
+  /// @retval #SHORTCUT_ERROR_FAULT Unrecoverable error
+  /// @retval #SHORTCUT_ERROR_COMM Connection not established or communication problem
+  /// @pre You have to prepare the callback function.
+  /// @post You have to check the return status from the callback function which is passed by the argument.
+  /// @see result_cb()
+  /// @see shortcut_widget_size_e
+  /// @par Example
+  /// @code
+  /// #include <stdio.h>
+  /// #include <shortcut.h>
+  /// #include <storage.h>
+  ///
+  /// #define TIZEN_PATH_MAX 1024
+  /// static int _result_cb(int ret, int pid, void *data)
+  /// {
+  /// if (ret < 0)
+  /// dlog_print("Failed to add a widget: %s\n", perror(ret));
+  ///
+  /// dlog_print("Processed by the %d\n", pid);
+  ///
+  /// return 0;
+  /// }
+  ///
+  /// static int app_create(void *data)
+  /// {
+  /// char *image_root = NULL;
+  /// char image_path[TIZEN_PATH_MAX] = {0,};
+  ///
+  /// storage_get_directory(STORAGE_TYPE_INTERNAL, STORAGE_DIRECTORY_IMAGES, &image_root);
+  /// snprintf(image_path, TIZEN_PATH_MAX, "%s/alter_icon.png", image_root);
+  ///
+  /// shortcut_add_to_home_widget("alter_name", WIDGET_SIZE_1x1, "org.tizen.testwidget",
+  /// image_path, -1.0f, 0, _result_cb, NULL);
+  ///
+  /// return 0;
+  /// }
+  /// @endcode
+  int shortcut_add_to_home_widget(
+    ffi.Pointer<ffi.Char> name,
+    int size,
+    ffi.Pointer<ffi.Char> widget_id,
+    ffi.Pointer<ffi.Char> icon,
+    double period,
+    int allow_duplicate,
+    result_cb cb,
+    ffi.Pointer<ffi.Void> data,
+  ) {
+    return _shortcut_add_to_home_widget(
+      name,
+      size,
+      widget_id,
+      icon,
+      period,
+      allow_duplicate,
+      cb,
+      data,
+    );
+  }
+
+  late final _shortcut_add_to_home_widgetPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(
+              ffi.Pointer<ffi.Char>,
+              ffi.Int32,
+              ffi.Pointer<ffi.Char>,
+              ffi.Pointer<ffi.Char>,
+              ffi.Double,
+              ffi.Int,
+              result_cb,
+              ffi.Pointer<ffi.Void>)>>('shortcut_add_to_home_widget');
+  late final _shortcut_add_to_home_widget =
+      _shortcut_add_to_home_widgetPtr.asFunction<
+          int Function(
+              ffi.Pointer<ffi.Char>,
+              int,
+              ffi.Pointer<ffi.Char>,
+              ffi.Pointer<ffi.Char>,
+              double,
+              int,
+              result_cb,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Removes a shortcut from home, asynchronously.
+  /// @details If the callback function registered for a widget, the shortcut deletion is possible.
+  /// @since_tizen 3.0
+  /// @privlevel public
+  /// @privilege %http://tizen.org/privilege/shortcut
+  /// @param[in] name The name of the created shortcut icon
+  /// @param[in] cb The address of the callback function that is called when the result comes back from the viewer
+  /// @param[in] user_data The callback data that is used in the callback function
+  /// @return 0 on success, otherwise a negative error value
+  /// @retval #SHORTCUT_ERROR_NONE Successful
+  /// @retval #SHORTCUT_ERROR_NOT_SUPPORTED Not supported
+  /// @retval #SHORTCUT_ERROR_PERMISSION_DENIED Permission denied
+  /// @retval #SHORTCUT_ERROR_INVALID_PARAMETER Invalid function parameter
+  /// @retval #SHORTCUT_ERROR_OUT_OF_MEMORY Out of memory
+  /// @retval #SHORTCUT_ERROR_IO_ERROR I/O Error
+  /// @retval #SHORTCUT_ERROR_COMM Connection not established or communication problem
+  /// @pre You have to prepare the callback function.
+  /// @post You have to check the return status from the callback function which is passed by the argument.
+  /// @see result_cb()
+  /// @par Example
+  /// @code
+  /// #include <shortcut_manager.h>
+  ///
+  /// int _result_cb(int ret, void *data)
+  /// {
+  /// if (ret < 0)
+  /// dlog_print("Failed to remove a shortcut: %d\n", ret);
+  ///
+  /// return 0;
+  /// }
+  ///
+  /// {
+  /// int result;
+  ///
+  /// result = shortcut_remove_from_home("shortcut_name", _result_cb, NULL);
+  /// if (result != SHORTCUT_ERROR_NONE) {
+  /// dlog_print("Failed to remove a shortcut: %d\n", result);
+  /// return result;
+  /// }
+  /// }
+  ///
+  /// @endcode
+  int shortcut_remove_from_home(
+    ffi.Pointer<ffi.Char> name,
+    result_cb cb,
+    ffi.Pointer<ffi.Void> user_data,
+  ) {
+    return _shortcut_remove_from_home(
+      name,
+      cb,
+      user_data,
+    );
+  }
+
+  late final _shortcut_remove_from_homePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(ffi.Pointer<ffi.Char>, result_cb,
+              ffi.Pointer<ffi.Void>)>>('shortcut_remove_from_home');
+  late final _shortcut_remove_from_home =
+      _shortcut_remove_from_homePtr.asFunction<
+          int Function(
+              ffi.Pointer<ffi.Char>, result_cb, ffi.Pointer<ffi.Void>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Gets the preset list of shortcut template from the installed package, synchronously.
+  /// @since_tizen 2.4
+  /// @privlevel public
+  /// @privilege %http://tizen.org/privilege/shortcut
+  /// @remarks If a homescreen does not support this feature, you will get a proper error code.\n
+  /// Application must check the return value of this function.\n
+  /// Application must check the return status from the callback function.\n
+  /// Application should set the callback function to get the result of this request.
+  /// @param[in] package_name The package name
+  /// @param[in] list_cb The callback function to get the shortcut item information
+  /// @param[in] data The callback data that is used in the callback function
+  /// @return @c N Number of items (call count of the callback function),
+  /// otherwise a negative error value
+  /// @retval #SHORTCUT_ERROR_NOT_SUPPORTED Not supported
+  /// @retval #SHORTCUT_ERROR_PERMISSION_DENIED Permission denied
+  /// @retval #SHORTCUT_ERROR_INVALID_PARAMETER Invalid function parameter
+  /// @retval #SHORTCUT_ERROR_OUT_OF_MEMORY Out of memory
+  /// @retval #SHORTCUT_ERROR_IO_ERROR I/O Error
+  /// @retval #SHORTCUT_ERROR_FAULT Unrecoverable error
+  /// @retval #SHORTCUT_ERROR_COMM Connection not established or communication problem
+  /// @pre You have to prepare the callback function.
+  /// @post You have to check the return status from the callback function which is passed by the argument.
+  int shortcut_get_list(
+    ffi.Pointer<ffi.Char> package_name,
+    shortcut_list_cb list_cb,
+    ffi.Pointer<ffi.Void> data,
+  ) {
+    return _shortcut_get_list(
+      package_name,
+      list_cb,
+      data,
+    );
+  }
+
+  late final _shortcut_get_listPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(ffi.Pointer<ffi.Char>, shortcut_list_cb,
+              ffi.Pointer<ffi.Void>)>>('shortcut_get_list');
+  late final _shortcut_get_list = _shortcut_get_listPtr.asFunction<
+      int Function(
+          ffi.Pointer<ffi.Char>, shortcut_list_cb, ffi.Pointer<ffi.Void>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Sets a callback function to listen requests from applications.
+  /// @since_tizen 2.4
+  /// @privlevel public
+  /// @privilege %http://tizen.org/privilege/shortcut
+  /// @remarks Should be used in the homescreen.\n
+  /// Should check the return value of this function.
+  /// Prospective Clients: Homescreen.
+  /// @param[in] request_cb The callback function pointer that is invoked when add_to_home is requested
+  /// @param[in] data The callback data to deliver to the callback function
+  /// @return @c 0 on success, otherwise a negative error value
+  /// @retval #SHORTCUT_ERROR_NONE Successful
+  /// @retval #SHORTCUT_ERROR_NOT_SUPPORTED Not supported
+  /// @retval #SHORTCUT_ERROR_PERMISSION_DENIED Permission denied
+  /// @retval #SHORTCUT_ERROR_INVALID_PARAMETER Invalid function parameter
+  /// @retval #SHORTCUT_ERROR_OUT_OF_MEMORY Out of memory
+  /// @retval #SHORTCUT_ERROR_IO_ERROR I/O Error
+  /// @retval #SHORTCUT_ERROR_COMM Connection not established or communication problem
+  /// @pre You have to prepare a callback function.
+  /// @post If a request is sent from the application, the registered callback will be invoked.
+  /// @see shortcut_request_cb()
+  /// @see shortcut_error_e
+  int shortcut_set_request_cb(
+    shortcut_request_cb request_cb,
+    ffi.Pointer<ffi.Void> data,
+  ) {
+    return _shortcut_set_request_cb(
+      request_cb,
+      data,
+    );
+  }
+
+  late final _shortcut_set_request_cbPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(shortcut_request_cb,
+              ffi.Pointer<ffi.Void>)>>('shortcut_set_request_cb');
+  late final _shortcut_set_request_cb = _shortcut_set_request_cbPtr
+      .asFunction<int Function(shortcut_request_cb, ffi.Pointer<ffi.Void>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Unsets a callback for the shortcut request.
+  /// @since_tizen 3.0
+  /// @privlevel public
+  /// @privilege %http://tizen.org/privilege/shortcut
+  /// @remarks The specific error code can be obtained using the gat_last_result() method. Error codes are described in Exception section.
+  /// @return None
+  /// @exception #SHORTCUT_ERROR_NONE Successful
+  /// @exception #SHORTCUT_ERROR_NOT_SUPPORTED Not supported
+  /// @exception #SHORTCUT_ERROR_PERMISSION_DENIED Permission denied
+  /// @see shortcut_set_request_cb()
+  /// @see get_last_result()
+  void shortcut_unset_request_cb() {
+    return _shortcut_unset_request_cb();
+  }
+
+  late final _shortcut_unset_request_cbPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function()>>(
+          'shortcut_unset_request_cb');
+  late final _shortcut_unset_request_cb =
+      _shortcut_unset_request_cbPtr.asFunction<void Function()>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Sets the callback function to listen the remove requests from applications.
+  /// @since_tizen 3.0
+  /// @privlevel public
+  /// @privilege %http://tizen.org/privilege/shortcut
+  /// @remarks Should be used in the homescreen.\n
+  /// Should check the return value of this function.
+  /// Prospective Clients: Homescreen.
+  /// @param[in] remove_cb The callback function pointer that is invoked when remove_from_home is requested
+  /// @param[in] data The callback data to deliver to the callback function
+  /// @return 0 on success, otherwise a negative error value
+  /// @retval #SHORTCUT_ERROR_NONE Successful
+  /// @retval #SHORTCUT_ERROR_NOT_SUPPORTED Not supported
+  /// @retval #SHORTCUT_ERROR_PERMISSION_DENIED Permission denied
+  /// @retval #SHORTCUT_ERROR_INVALID_PARAMETER Invalid function parameter
+  /// @retval #SHORTCUT_ERROR_OUT_OF_MEMORY Out of memory
+  /// @retval #SHORTCUT_ERROR_IO_ERROR I/O Error
+  /// @retval #SHORTCUT_ERROR_COMM Connection not established or communication problem
+  /// @pre You have to prepare a callback function.
+  /// @post If a request is sent from the application, the registered callback will be invoked.
+  /// @see shortcut_remove_cb()
+  /// @see shortcut_error_e
+  int shortcut_set_remove_cb(
+    shortcut_remove_cb remove_cb,
+    ffi.Pointer<ffi.Void> data,
+  ) {
+    return _shortcut_set_remove_cb(
+      remove_cb,
+      data,
+    );
+  }
+
+  late final _shortcut_set_remove_cbPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(shortcut_remove_cb,
+              ffi.Pointer<ffi.Void>)>>('shortcut_set_remove_cb');
+  late final _shortcut_set_remove_cb = _shortcut_set_remove_cbPtr
+      .asFunction<int Function(shortcut_remove_cb, ffi.Pointer<ffi.Void>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Unsets a callback for the shortcut remove.
+  /// @since_tizen 3.0
+  /// @privlevel public
+  /// @privilege %http://tizen.org/privilege/shortcut
+  /// @remarks The specific error code can be obtained using the gat_last_result() method. Error codes are described in Exception section.
+  /// @return None
+  /// @exception #SHORTCUT_ERROR_NONE Successful
+  /// @exception #SHORTCUT_ERROR_NOT_SUPPORTED Not supported
+  /// @exception #SHORTCUT_ERROR_PERMISSION_DENIED Permission denied
+  /// @see shortcut_set_remove_cb()
+  /// @see get_last_result()
+  void shortcut_unset_remove_cb() {
+    return _shortcut_unset_remove_cb();
+  }
+
+  late final _shortcut_unset_remove_cbPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function()>>(
+          'shortcut_unset_remove_cb');
+  late final _shortcut_unset_remove_cb =
+      _shortcut_unset_remove_cbPtr.asFunction<void Function()>();
+
   /// @brief Makes a pair of channel sender and receiver.
   /// @since_tizen 9.0
   /// @remarks The @a sender should be released using tizen_core_channel_sender_destroy().
@@ -167888,6 +168320,740 @@ class Tizen90Native {
       _lookup<ffi.NativeFunction<ffi.Int Function()>>('wauthn_cancel');
   late final _wauthn_cancel = _wauthn_cancelPtr.asFunction<int Function()>();
 
+  /// @brief Initializes the library. Must be called before any other crypto
+  /// function. Should be called once in each thread that uses yaca.
+  /// @since_tizen 3.0
+  /// @return #YACA_ERROR_NONE on success,
+  /// negative on error
+  /// @retval #YACA_ERROR_NONE Successful
+  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
+  /// @retval #YACA_ERROR_INTERNAL Internal error
+  /// @see yaca_cleanup()
+  int yaca_initialize() {
+    return _yaca_initialize();
+  }
+
+  late final _yaca_initializePtr =
+      _lookup<ffi.NativeFunction<ffi.Int Function()>>('yaca_initialize');
+  late final _yaca_initialize =
+      _yaca_initializePtr.asFunction<int Function()>();
+
+  /// @brief Cleans up the library. Must be called before exiting the thread that called yaca_initialize().
+  /// @since_tizen 3.0
+  /// @see yaca_initialize()
+  void yaca_cleanup() {
+    return _yaca_cleanup();
+  }
+
+  late final _yaca_cleanupPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function()>>('yaca_cleanup');
+  late final _yaca_cleanup = _yaca_cleanupPtr.asFunction<void Function()>();
+
+  /// @brief Allocates the memory.
+  /// @since_tizen 3.0
+  /// @remarks The @a memory should be freed using yaca_free().
+  /// @param[in] size Size of the allocation (bytes)
+  /// @param[out] memory Allocated memory
+  /// @return #YACA_ERROR_NONE on success,
+  /// negative on error
+  /// @retval #YACA_ERROR_NONE Successful
+  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0)
+  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
+  /// @see yaca_zalloc()
+  /// @see yaca_realloc()
+  /// @see yaca_free()
+  int yaca_malloc(
+    int size,
+    ffi.Pointer<ffi.Pointer<ffi.Void>> memory,
+  ) {
+    return _yaca_malloc(
+      size,
+      memory,
+    );
+  }
+
+  late final _yaca_mallocPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(
+              ffi.Size, ffi.Pointer<ffi.Pointer<ffi.Void>>)>>('yaca_malloc');
+  late final _yaca_malloc = _yaca_mallocPtr
+      .asFunction<int Function(int, ffi.Pointer<ffi.Pointer<ffi.Void>>)>();
+
+  /// @brief Allocates the zeroed memory.
+  /// @since_tizen 3.0
+  /// @remarks The @a memory should be freed using yaca_free().
+  /// @param[in] size Size of the allocation (bytes)
+  /// @param[out] memory Allocated memory
+  /// @return #YACA_ERROR_NONE on success,
+  /// negative on error
+  /// @retval #YACA_ERROR_NONE Successful
+  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0)
+  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
+  /// @see yaca_malloc()
+  /// @see yaca_realloc()
+  /// @see yaca_free()
+  int yaca_zalloc(
+    int size,
+    ffi.Pointer<ffi.Pointer<ffi.Void>> memory,
+  ) {
+    return _yaca_zalloc(
+      size,
+      memory,
+    );
+  }
+
+  late final _yaca_zallocPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(
+              ffi.Size, ffi.Pointer<ffi.Pointer<ffi.Void>>)>>('yaca_zalloc');
+  late final _yaca_zalloc = _yaca_zallocPtr
+      .asFunction<int Function(int, ffi.Pointer<ffi.Pointer<ffi.Void>>)>();
+
+  /// @brief Re-allocates the memory.
+  /// @since_tizen 3.0
+  /// @remarks In case of failure the function doesn't free the memory pointed by @a memory.
+  /// @remarks If @a memory is NULL then the call is equivalent to yaca_malloc().
+  /// @remarks If the function fails the contents of @a memory will be left unchanged.
+  /// @remarks The @a memory should be freed using yaca_free().
+  /// @param[in] size Size of the new allocation (bytes)
+  /// @param[in,out] memory  Memory to be reallocated
+  /// @return #YACA_ERROR_NONE on success,
+  /// negative on error
+  /// @retval #YACA_ERROR_NONE Successful
+  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0)
+  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
+  /// @see yaca_malloc()
+  /// @see yaca_zalloc()
+  /// @see yaca_free()
+  int yaca_realloc(
+    int size,
+    ffi.Pointer<ffi.Pointer<ffi.Void>> memory,
+  ) {
+    return _yaca_realloc(
+      size,
+      memory,
+    );
+  }
+
+  late final _yaca_reallocPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(
+              ffi.Size, ffi.Pointer<ffi.Pointer<ffi.Void>>)>>('yaca_realloc');
+  late final _yaca_realloc = _yaca_reallocPtr
+      .asFunction<int Function(int, ffi.Pointer<ffi.Pointer<ffi.Void>>)>();
+
+  /// @brief Frees the memory allocated by yaca_malloc(), yaca_zalloc(),
+  /// yaca_realloc() or one of the cryptographic operations.
+  /// @since_tizen 3.0
+  /// @param[in] memory Pointer to the memory to be freed
+  /// @see yaca_malloc()
+  /// @see yaca_zalloc()
+  /// @see yaca_realloc()
+  void yaca_free(
+    ffi.Pointer<ffi.Void> memory,
+  ) {
+    return _yaca_free(
+      memory,
+    );
+  }
+
+  late final _yaca_freePtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>(
+          'yaca_free');
+  late final _yaca_free =
+      _yaca_freePtr.asFunction<void Function(ffi.Pointer<ffi.Void>)>();
+
+  /// @brief Safely compares first @a len bytes of two buffers.
+  /// @since_tizen 3.0
+  /// @param[in] first Pointer to the first buffer
+  /// @param[in] second Pointer to the second buffer
+  /// @param[in] len Length to compare
+  /// @return #YACA_ERROR_NONE when buffers are equal,
+  /// otherwise #YACA_ERROR_DATA_MISMATCH
+  /// @retval #YACA_ERROR_NONE Successful
+  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0)
+  /// @retval #YACA_ERROR_DATA_MISMATCH Buffers are different
+  int yaca_memcmp(
+    ffi.Pointer<ffi.Void> first,
+    ffi.Pointer<ffi.Void> second,
+    int len,
+  ) {
+    return _yaca_memcmp(
+      first,
+      second,
+      len,
+    );
+  }
+
+  late final _yaca_memcmpPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>,
+              ffi.Size)>>('yaca_memcmp');
+  late final _yaca_memcmp = _yaca_memcmpPtr.asFunction<
+      int Function(ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>, int)>();
+
+  /// @brief Generates random data.
+  /// @since_tizen 3.0
+  /// @param[in,out] data Pointer to the memory to be randomized
+  /// @param[in] data_len Length of the memory to be randomized
+  /// @return #YACA_ERROR_NONE on success,
+  /// negative on error
+  /// @retval #YACA_ERROR_NONE Successful
+  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0)
+  /// @retval #YACA_ERROR_INTERNAL Internal error
+  int yaca_randomize_bytes(
+    ffi.Pointer<ffi.Char> data,
+    int data_len,
+  ) {
+    return _yaca_randomize_bytes(
+      data,
+      data_len,
+    );
+  }
+
+  late final _yaca_randomize_bytesPtr = _lookup<
+          ffi
+          .NativeFunction<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Size)>>(
+      'yaca_randomize_bytes');
+  late final _yaca_randomize_bytes = _yaca_randomize_bytesPtr
+      .asFunction<int Function(ffi.Pointer<ffi.Char>, int)>();
+
+  /// @brief Sets the non-standard context properties. Can only be called on an initialized context.
+  /// @since_tizen 3.0
+  /// @remarks The @a value has to be of type appropriate for given property. See #yaca_property_e
+  /// for details on corresponding types.
+  /// @param[in,out] ctx Previously initialized crypto context
+  /// @param[in] property Property to be set
+  /// @param[in] value Property value
+  /// @param[in] value_len Length of the property value
+  /// @return #YACA_ERROR_NONE on success,
+  /// negative on error
+  /// @retval #YACA_ERROR_NONE Successful
+  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0,
+  /// invalid @a ctx or @a property)
+  /// @retval #YACA_ERROR_INTERNAL Internal error
+  /// @see #yaca_property_e
+  /// @see yaca_context_get_property()
+  int yaca_context_set_property(
+    yaca_context_h ctx,
+    int property,
+    ffi.Pointer<ffi.Void> value,
+    int value_len,
+  ) {
+    return _yaca_context_set_property(
+      ctx,
+      property,
+      value,
+      value_len,
+    );
+  }
+
+  late final _yaca_context_set_propertyPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(yaca_context_h, ffi.Int32, ffi.Pointer<ffi.Void>,
+              ffi.Size)>>('yaca_context_set_property');
+  late final _yaca_context_set_property =
+      _yaca_context_set_propertyPtr.asFunction<
+          int Function(yaca_context_h, int, ffi.Pointer<ffi.Void>, int)>();
+
+  /// @brief Returns the non-standard context properties. Can only be called on an initialized context.
+  /// @since_tizen 3.0
+  /// @remarks The @a value should be freed using yaca_free().
+  /// @remarks The @a value has to be of type appropriate for given property. See #yaca_property_e
+  /// for details on corresponding types.
+  /// @remarks The @a value_len can be NULL if returned @a value is a single object (i.e. not an array/buffer).
+  /// @param[in] ctx Previously initialized crypto context
+  /// @param[in] property Property to be read
+  /// @param[out] value Copy of the property value
+  /// @param[out] value_len Length of the property value will be returned here
+  /// @return #YACA_ERROR_NONE on success,
+  /// negative on error
+  /// @retval #YACA_ERROR_NONE Successful
+  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL,
+  /// invalid @a ctx or @a property)
+  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
+  /// @retval #YACA_ERROR_INTERNAL Internal error
+  /// @see #yaca_property_e
+  /// @see yaca_context_set_property()
+  /// @see yaca_free()
+  int yaca_context_get_property(
+    yaca_context_h ctx,
+    int property,
+    ffi.Pointer<ffi.Pointer<ffi.Void>> value,
+    ffi.Pointer<ffi.Size> value_len,
+  ) {
+    return _yaca_context_get_property(
+      ctx,
+      property,
+      value,
+      value_len,
+    );
+  }
+
+  late final _yaca_context_get_propertyPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(
+              yaca_context_h,
+              ffi.Int32,
+              ffi.Pointer<ffi.Pointer<ffi.Void>>,
+              ffi.Pointer<ffi.Size>)>>('yaca_context_get_property');
+  late final _yaca_context_get_property =
+      _yaca_context_get_propertyPtr.asFunction<
+          int Function(yaca_context_h, int, ffi.Pointer<ffi.Pointer<ffi.Void>>,
+              ffi.Pointer<ffi.Size>)>();
+
+  /// @brief Returns the minimum required size of the output buffer for a single crypto function call.
+  /// @since_tizen 3.0
+  /// @remarks This function should be used to learn the required size of the output buffer
+  /// for a single function call (eg. *_update or *_finalize). The actual output length
+  /// (number of bytes that has been used) will be returned by the function call itself.
+  /// @remarks In case the function call has no output (e.g. yaca_sign_update(),
+  /// yaca_digest_update()), there is no need to use this function.
+  /// @remarks In case the function call has no input (eg. *_finalize), the value of
+  /// @a input_len has to be set to 0.
+  /// @param[in] ctx Previously initialized crypto context
+  /// @param[in] input_len Length of the input data to be processed
+  /// @param[out] output_len Required length of the output
+  /// @return #YACA_ERROR_NONE on success,
+  /// negative on error
+  /// @retval #YACA_ERROR_NONE Successful
+  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL,
+  /// invalid @a ctx or too big @a input_len)
+  /// @retval #YACA_ERROR_INTERNAL Internal error
+  int yaca_context_get_output_length(
+    yaca_context_h ctx,
+    int input_len,
+    ffi.Pointer<ffi.Size> output_len,
+  ) {
+    return _yaca_context_get_output_length(
+      ctx,
+      input_len,
+      output_len,
+    );
+  }
+
+  late final _yaca_context_get_output_lengthPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(yaca_context_h, ffi.Size,
+              ffi.Pointer<ffi.Size>)>>('yaca_context_get_output_length');
+  late final _yaca_context_get_output_length =
+      _yaca_context_get_output_lengthPtr.asFunction<
+          int Function(yaca_context_h, int, ffi.Pointer<ffi.Size>)>();
+
+  /// @brief Destroys the crypto context. Must be called on all contexts that are no longer used.
+  /// Passing #YACA_CONTEXT_NULL is allowed.
+  /// @since_tizen 3.0
+  /// @param[in,out] ctx  Crypto context
+  /// @see #yaca_context_h
+  void yaca_context_destroy(
+    yaca_context_h ctx,
+  ) {
+    return _yaca_context_destroy(
+      ctx,
+    );
+  }
+
+  late final _yaca_context_destroyPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(yaca_context_h)>>(
+          'yaca_context_destroy');
+  late final _yaca_context_destroy =
+      _yaca_context_destroyPtr.asFunction<void Function(yaca_context_h)>();
+
+  /// @brief Initializes a digest context.
+  /// @since_tizen 3.0
+  /// @remarks The @a ctx should be released using yaca_context_destroy().
+  /// @param[out] ctx Newly created context
+  /// @param[in] algo Digest algorithm that will be used
+  /// @return #YACA_ERROR_NONE on success,
+  /// negative on error
+  /// @retval #YACA_ERROR_NONE Successful
+  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL,
+  /// invalid @a algo)
+  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
+  /// @retval #YACA_ERROR_INTERNAL Internal error
+  /// @see #yaca_digest_algorithm_e
+  /// @see yaca_digest_update()
+  /// @see yaca_digest_finalize()
+  /// @see yaca_context_destroy()
+  int yaca_digest_initialize(
+    ffi.Pointer<yaca_context_h> ctx,
+    int algo,
+  ) {
+    return _yaca_digest_initialize(
+      ctx,
+      algo,
+    );
+  }
+
+  late final _yaca_digest_initializePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(ffi.Pointer<yaca_context_h>,
+              ffi.Int32)>>('yaca_digest_initialize');
+  late final _yaca_digest_initialize = _yaca_digest_initializePtr
+      .asFunction<int Function(ffi.Pointer<yaca_context_h>, int)>();
+
+  /// @brief Feeds the message into the message digest algorithm.
+  /// @since_tizen 3.0
+  /// @param[in,out] ctx Context created by yaca_digest_initialize()
+  /// @param[in] message Message from which the digest is to be calculated
+  /// @param[in] message_len Length of the message
+  /// @return #YACA_ERROR_NONE on success,
+  /// negative on error
+  /// @retval #YACA_ERROR_NONE Successful
+  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0,
+  /// invalid @a ctx)
+  /// @retval #YACA_ERROR_INTERNAL Internal error
+  /// @see yaca_digest_initialize()
+  /// @see yaca_digest_finalize()
+  int yaca_digest_update(
+    yaca_context_h ctx,
+    ffi.Pointer<ffi.Char> message,
+    int message_len,
+  ) {
+    return _yaca_digest_update(
+      ctx,
+      message,
+      message_len,
+    );
+  }
+
+  late final _yaca_digest_updatePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(yaca_context_h, ffi.Pointer<ffi.Char>,
+              ffi.Size)>>('yaca_digest_update');
+  late final _yaca_digest_update = _yaca_digest_updatePtr
+      .asFunction<int Function(yaca_context_h, ffi.Pointer<ffi.Char>, int)>();
+
+  /// @brief Calculates the final digest.
+  /// @since_tizen 3.0
+  /// @remarks Skipping yaca_digest_update() and calling only yaca_digest_finalize() will produce an empty message digest.
+  /// @param[in,out] ctx A valid digest context
+  /// @param[out] digest Buffer for the message digest
+  /// (must be allocated by client, see yaca_context_get_output_length())
+  /// @param[out] digest_len Length of the digest,
+  /// actual number of bytes written will be returned here
+  /// @return #YACA_ERROR_NONE on success,
+  /// negative on error
+  /// @retval #YACA_ERROR_NONE Successful
+  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL,
+  /// invalid @a ctx)
+  /// @retval #YACA_ERROR_INTERNAL Internal error
+  /// @see yaca_digest_initialize()
+  /// @see yaca_digest_update()
+  /// @see yaca_context_get_output_length()
+  int yaca_digest_finalize(
+    yaca_context_h ctx,
+    ffi.Pointer<ffi.Char> digest,
+    ffi.Pointer<ffi.Size> digest_len,
+  ) {
+    return _yaca_digest_finalize(
+      ctx,
+      digest,
+      digest_len,
+    );
+  }
+
+  late final _yaca_digest_finalizePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(yaca_context_h, ffi.Pointer<ffi.Char>,
+              ffi.Pointer<ffi.Size>)>>('yaca_digest_finalize');
+  late final _yaca_digest_finalize = _yaca_digest_finalizePtr.asFunction<
+      int Function(
+          yaca_context_h, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Size>)>();
+
+  /// @brief Returns the recommended/default length of the Initialization Vector for a given encryption configuration.
+  /// @since_tizen 3.0
+  /// @remarks If returned @a iv_bit_len equals 0 that means that for this
+  /// specific algorithm and its parameters Initialization Vector is not used.
+  /// @param[in] algo Encryption algorithm
+  /// @param[in] bcm Chain mode
+  /// @param[in] key_bit_len Key length in bits
+  /// @param[out] iv_bit_len Recommended Initialization Vector length in bits
+  /// @return #YACA_ERROR_NONE on success,
+  /// negative on error
+  /// @retval #YACA_ERROR_NONE Successful
+  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL,
+  /// invalid @a algo, @a bcm or @a key_bit_len not
+  /// divisible by 8)
+  /// @retval #YACA_ERROR_INTERNAL Internal error
+  int yaca_encrypt_get_iv_bit_length(
+    int algo,
+    int bcm,
+    int key_bit_len,
+    ffi.Pointer<ffi.Size> iv_bit_len,
+  ) {
+    return _yaca_encrypt_get_iv_bit_length(
+      algo,
+      bcm,
+      key_bit_len,
+      iv_bit_len,
+    );
+  }
+
+  late final _yaca_encrypt_get_iv_bit_lengthPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(ffi.Int32, ffi.Int32, ffi.Size,
+              ffi.Pointer<ffi.Size>)>>('yaca_encrypt_get_iv_bit_length');
+  late final _yaca_encrypt_get_iv_bit_length =
+      _yaca_encrypt_get_iv_bit_lengthPtr
+          .asFunction<int Function(int, int, int, ffi.Pointer<ffi.Size>)>();
+
+  /// @brief Initializes an encryption context.
+  /// @since_tizen 3.0
+  /// @remarks The @a ctx should be released using yaca_context_destroy().
+  /// @param[out] ctx Newly created context
+  /// @param[in] algo Encryption algorithm that will be used
+  /// @param[in] bcm Chaining mode that will be used
+  /// @param[in] sym_key Symmetric key that will be used
+  /// @param[in] iv Initialization Vector that will be used
+  /// @return #YACA_ERROR_NONE on success,
+  /// negative on error
+  /// @retval #YACA_ERROR_NONE Successful
+  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL,
+  /// invalid @a algo, @a bcm, @a sym_key or @a iv)
+  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
+  /// @retval #YACA_ERROR_INTERNAL Internal error
+  /// @see #yaca_encrypt_algorithm_e
+  /// @see #yaca_block_cipher_mode_e
+  /// @see yaca_encrypt_update()
+  /// @see yaca_encrypt_finalize()
+  /// @see yaca_context_destroy()
+  int yaca_encrypt_initialize(
+    ffi.Pointer<yaca_context_h> ctx,
+    int algo,
+    int bcm,
+    yaca_key_h sym_key,
+    yaca_key_h iv,
+  ) {
+    return _yaca_encrypt_initialize(
+      ctx,
+      algo,
+      bcm,
+      sym_key,
+      iv,
+    );
+  }
+
+  late final _yaca_encrypt_initializePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(ffi.Pointer<yaca_context_h>, ffi.Int32, ffi.Int32,
+              yaca_key_h, yaca_key_h)>>('yaca_encrypt_initialize');
+  late final _yaca_encrypt_initialize = _yaca_encrypt_initializePtr.asFunction<
+      int Function(
+          ffi.Pointer<yaca_context_h>, int, int, yaca_key_h, yaca_key_h)>();
+
+  /// @brief Encrypts chunk of the data.
+  /// @since_tizen 3.0
+  /// @param[in,out] ctx Context created by yaca_encrypt_initialize()
+  /// @param[in] plaintext Plaintext to be encrypted
+  /// @param[in] plaintext_len Length of the plaintext
+  /// @param[out] ciphertext Buffer for the encrypted data
+  /// (must be allocated by client, see yaca_context_get_output_length())
+  /// @param[out] ciphertext_len Length of the encrypted data,
+  /// actual number of bytes written will be returned here
+  /// @return #YACA_ERROR_NONE on success,
+  /// negative on error
+  /// @retval #YACA_ERROR_NONE Successful
+  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0,
+  /// invalid @a ctx)
+  /// @retval #YACA_ERROR_INTERNAL Internal error
+  /// @see yaca_encrypt_initialize()
+  /// @see yaca_encrypt_finalize()
+  /// @see yaca_context_get_output_length()
+  int yaca_encrypt_update(
+    yaca_context_h ctx,
+    ffi.Pointer<ffi.Char> plaintext,
+    int plaintext_len,
+    ffi.Pointer<ffi.Char> ciphertext,
+    ffi.Pointer<ffi.Size> ciphertext_len,
+  ) {
+    return _yaca_encrypt_update(
+      ctx,
+      plaintext,
+      plaintext_len,
+      ciphertext,
+      ciphertext_len,
+    );
+  }
+
+  late final _yaca_encrypt_updatePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(
+              yaca_context_h,
+              ffi.Pointer<ffi.Char>,
+              ffi.Size,
+              ffi.Pointer<ffi.Char>,
+              ffi.Pointer<ffi.Size>)>>('yaca_encrypt_update');
+  late final _yaca_encrypt_update = _yaca_encrypt_updatePtr.asFunction<
+      int Function(yaca_context_h, ffi.Pointer<ffi.Char>, int,
+          ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Size>)>();
+
+  /// @brief Encrypts the final chunk of the data.
+  /// @since_tizen 3.0
+  /// @remarks Skipping yaca_encrypt_update() and calling only yaca_encrypt_finalize() will produce an encryption of an empty message.
+  /// @param[in,out] ctx A valid encrypt context
+  /// @param[out] ciphertext Final piece of the encrypted data
+  /// (must be allocated by client, see yaca_context_get_output_length())
+  /// @param[out] ciphertext_len Length of the final piece,
+  /// actual number of bytes written will be returned here
+  /// @return #YACA_ERROR_NONE on success,
+  /// negative on error
+  /// @retval #YACA_ERROR_NONE Successful
+  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL,
+  /// invalid @a ctx)
+  /// @retval #YACA_ERROR_INTERNAL Internal error
+  /// @see yaca_encrypt_initialize()
+  /// @see yaca_encrypt_update()
+  /// @see yaca_context_get_output_length()
+  int yaca_encrypt_finalize(
+    yaca_context_h ctx,
+    ffi.Pointer<ffi.Char> ciphertext,
+    ffi.Pointer<ffi.Size> ciphertext_len,
+  ) {
+    return _yaca_encrypt_finalize(
+      ctx,
+      ciphertext,
+      ciphertext_len,
+    );
+  }
+
+  late final _yaca_encrypt_finalizePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(yaca_context_h, ffi.Pointer<ffi.Char>,
+              ffi.Pointer<ffi.Size>)>>('yaca_encrypt_finalize');
+  late final _yaca_encrypt_finalize = _yaca_encrypt_finalizePtr.asFunction<
+      int Function(
+          yaca_context_h, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Size>)>();
+
+  /// @brief Initializes an decryption context.
+  /// @since_tizen 3.0
+  /// @remarks The @a ctx should be released using yaca_context_destroy().
+  /// @param[out] ctx Newly created context
+  /// @param[in] algo Encryption algorithm that was used to encrypt the data
+  /// @param[in] bcm Chaining mode that was used to encrypt the data
+  /// @param[in] sym_key Symmetric key that was used to encrypt the data
+  /// @param[in] iv Initialization Vector that was used to encrypt the data
+  /// @return #YACA_ERROR_NONE on success,
+  /// negative on error
+  /// @retval #YACA_ERROR_NONE Successful
+  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL,
+  /// invalid @a algo, @a bcm, @a sym_key or @a iv)
+  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
+  /// @retval #YACA_ERROR_INTERNAL Internal error
+  /// @see #yaca_encrypt_algorithm_e
+  /// @see #yaca_block_cipher_mode_e
+  /// @see yaca_decrypt_update()
+  /// @see yaca_decrypt_finalize()
+  /// @see yaca_context_destroy()
+  int yaca_decrypt_initialize(
+    ffi.Pointer<yaca_context_h> ctx,
+    int algo,
+    int bcm,
+    yaca_key_h sym_key,
+    yaca_key_h iv,
+  ) {
+    return _yaca_decrypt_initialize(
+      ctx,
+      algo,
+      bcm,
+      sym_key,
+      iv,
+    );
+  }
+
+  late final _yaca_decrypt_initializePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(ffi.Pointer<yaca_context_h>, ffi.Int32, ffi.Int32,
+              yaca_key_h, yaca_key_h)>>('yaca_decrypt_initialize');
+  late final _yaca_decrypt_initialize = _yaca_decrypt_initializePtr.asFunction<
+      int Function(
+          ffi.Pointer<yaca_context_h>, int, int, yaca_key_h, yaca_key_h)>();
+
+  /// @brief Decrypts chunk of the data.
+  /// @since_tizen 3.0
+  /// @param[in,out] ctx Context created by yaca_decrypt_initialize()
+  /// @param[in] ciphertext Ciphertext to be decrypted
+  /// @param[in] ciphertext_len Length of the ciphertext
+  /// @param[out] plaintext Buffer for the decrypted data
+  /// (must be allocated by client, see yaca_context_get_output_length())
+  /// @param[out] plaintext_len Length of the decrypted data,
+  /// actual number of bytes written will be returned here
+  /// @return #YACA_ERROR_NONE on success,
+  /// negative on error
+  /// @retval #YACA_ERROR_NONE Successful
+  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0,
+  /// invalid @a ctx), wrong #YACA_PROPERTY_CCM_AAD or
+  /// wrong #YACA_PROPERTY_CCM_TAG was used
+  /// @retval #YACA_ERROR_INTERNAL Internal error
+  /// @see yaca_decrypt_initialize()
+  /// @see yaca_decrypt_finalize()
+  /// @see yaca_context_get_output_length()
+  int yaca_decrypt_update(
+    yaca_context_h ctx,
+    ffi.Pointer<ffi.Char> ciphertext,
+    int ciphertext_len,
+    ffi.Pointer<ffi.Char> plaintext,
+    ffi.Pointer<ffi.Size> plaintext_len,
+  ) {
+    return _yaca_decrypt_update(
+      ctx,
+      ciphertext,
+      ciphertext_len,
+      plaintext,
+      plaintext_len,
+    );
+  }
+
+  late final _yaca_decrypt_updatePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(
+              yaca_context_h,
+              ffi.Pointer<ffi.Char>,
+              ffi.Size,
+              ffi.Pointer<ffi.Char>,
+              ffi.Pointer<ffi.Size>)>>('yaca_decrypt_update');
+  late final _yaca_decrypt_update = _yaca_decrypt_updatePtr.asFunction<
+      int Function(yaca_context_h, ffi.Pointer<ffi.Char>, int,
+          ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Size>)>();
+
+  /// @brief Decrypts the final chunk of the data.
+  /// @since_tizen 3.0
+  /// @remarks Skipping yaca_decrypt_update() and calling only yaca_decrypt_finalize() will produce a decryption of an empty ciphertext.
+  /// @param[in,out] ctx A valid decrypt context
+  /// @param[out] plaintext Final piece of the decrypted data
+  /// (must be allocated by client, see yaca_context_get_output_length())
+  /// @param[out] plaintext_len Length of the final piece,
+  /// actual number of bytes written will be returned here
+  /// @return #YACA_ERROR_NONE on success,
+  /// negative on error
+  /// @retval #YACA_ERROR_NONE Successful
+  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL,
+  /// invalid @a ctx), wrong #YACA_PROPERTY_GCM_AAD or
+  /// wrong #YACA_PROPERTY_GCM_TAG was used
+  /// @retval #YACA_ERROR_INTERNAL Internal error
+  /// @see yaca_decrypt_initialize()
+  /// @see yaca_decrypt_update()
+  /// @see yaca_context_get_output_length()
+  int yaca_decrypt_finalize(
+    yaca_context_h ctx,
+    ffi.Pointer<ffi.Char> plaintext,
+    ffi.Pointer<ffi.Size> plaintext_len,
+  ) {
+    return _yaca_decrypt_finalize(
+      ctx,
+      plaintext,
+      plaintext_len,
+    );
+  }
+
+  late final _yaca_decrypt_finalizePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(yaca_context_h, ffi.Pointer<ffi.Char>,
+              ffi.Pointer<ffi.Size>)>>('yaca_decrypt_finalize');
+  late final _yaca_decrypt_finalize = _yaca_decrypt_finalizePtr.asFunction<
+      int Function(
+          yaca_context_h, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Size>)>();
+
   /// @brief Gets key's type.
   /// @since_tizen 3.0
   /// @param[in] key Key which type we return
@@ -168640,1137 +169806,6 @@ class Tizen90Native {
       int Function(int, yaca_key_h, ffi.Pointer<ffi.Char>, int,
           ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Pointer<ffi.Size>)>();
 
-  /// @brief Encrypts data using a symmetric cipher.
-  /// @since_tizen 3.0
-  /// @remarks yaca_simple_encrypt() doesn't support #YACA_BCM_GCM and #YACA_BCM_CCM.
-  /// @remarks The @a ciphertext should be freed using yaca_free().
-  /// @remarks The @a plaintext can be NULL but then @a plaintext_len must be 0.
-  /// @param[in] algo Encryption algorithm (select #YACA_ENCRYPT_AES if unsure)
-  /// @param[in] bcm Chaining mode (select #YACA_BCM_CBC if unsure)
-  /// @param[in] sym_key Symmetric encryption key (see yaca_key.h for key generation functions)
-  /// @param[in] iv Initialization Vector
-  /// @param[in] plaintext Plaintext to be encrypted
-  /// @param[in] plaintext_len Length of the plaintext
-  /// @param[out] ciphertext Encrypted data, will be allocated by the library
-  /// @param[out] ciphertext_len Length of the encrypted data (may be larger than decrypted)
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0
-  /// invalid @a algo, @a bcm, @a sym_key or @a iv)
-  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see #yaca_encrypt_algorithm_e
-  /// @see #yaca_block_cipher_mode_e
-  /// @see yaca_simple_decrypt()
-  /// @see yaca_free()
-  int yaca_simple_encrypt(
-    int algo,
-    int bcm,
-    yaca_key_h sym_key,
-    yaca_key_h iv,
-    ffi.Pointer<ffi.Char> plaintext,
-    int plaintext_len,
-    ffi.Pointer<ffi.Pointer<ffi.Char>> ciphertext,
-    ffi.Pointer<ffi.Size> ciphertext_len,
-  ) {
-    return _yaca_simple_encrypt(
-      algo,
-      bcm,
-      sym_key,
-      iv,
-      plaintext,
-      plaintext_len,
-      ciphertext,
-      ciphertext_len,
-    );
-  }
-
-  late final _yaca_simple_encryptPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Int32,
-              ffi.Int32,
-              yaca_key_h,
-              yaca_key_h,
-              ffi.Pointer<ffi.Char>,
-              ffi.Size,
-              ffi.Pointer<ffi.Pointer<ffi.Char>>,
-              ffi.Pointer<ffi.Size>)>>('yaca_simple_encrypt');
-  late final _yaca_simple_encrypt = _yaca_simple_encryptPtr.asFunction<
-      int Function(int, int, yaca_key_h, yaca_key_h, ffi.Pointer<ffi.Char>, int,
-          ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Pointer<ffi.Size>)>();
-
-  /// @brief Decrypts data using a symmetric cipher.
-  /// @since_tizen 3.0
-  /// @remarks yaca_simple_decrypt() doesn't support #YACA_BCM_GCM and #YACA_BCM_CCM.
-  /// @remarks The @a plaintext should be freed using yaca_free().
-  /// @remarks The @a ciphertext can be NULL but then @a ciphertext_len must be 0.
-  /// @param[in] algo Decryption algorithm that was used to encrypt the data
-  /// @param[in] bcm Chaining mode that was used to encrypt the data
-  /// @param[in] sym_key Symmetric encryption key that was used to encrypt the data
-  /// @param[in] iv Initialization Vector that was used to encrypt the data
-  /// @param[in] ciphertext Ciphertext to be decrypted
-  /// @param[in] ciphertext_len Length of ciphertext
-  /// @param[out] plaintext Decrypted data, will be allocated by the library
-  /// @param[out] plaintext_len Length of the decrypted data
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0
-  /// invalid @a algo, @a bcm, @a sym_key or @a iv)
-  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see #yaca_encrypt_algorithm_e
-  /// @see #yaca_block_cipher_mode_e
-  /// @see yaca_simple_encrypt()
-  /// @see yaca_free()
-  int yaca_simple_decrypt(
-    int algo,
-    int bcm,
-    yaca_key_h sym_key,
-    yaca_key_h iv,
-    ffi.Pointer<ffi.Char> ciphertext,
-    int ciphertext_len,
-    ffi.Pointer<ffi.Pointer<ffi.Char>> plaintext,
-    ffi.Pointer<ffi.Size> plaintext_len,
-  ) {
-    return _yaca_simple_decrypt(
-      algo,
-      bcm,
-      sym_key,
-      iv,
-      ciphertext,
-      ciphertext_len,
-      plaintext,
-      plaintext_len,
-    );
-  }
-
-  late final _yaca_simple_decryptPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Int32,
-              ffi.Int32,
-              yaca_key_h,
-              yaca_key_h,
-              ffi.Pointer<ffi.Char>,
-              ffi.Size,
-              ffi.Pointer<ffi.Pointer<ffi.Char>>,
-              ffi.Pointer<ffi.Size>)>>('yaca_simple_decrypt');
-  late final _yaca_simple_decrypt = _yaca_simple_decryptPtr.asFunction<
-      int Function(int, int, yaca_key_h, yaca_key_h, ffi.Pointer<ffi.Char>, int,
-          ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Pointer<ffi.Size>)>();
-
-  /// @brief Calculates a digest of a message.
-  /// @since_tizen 3.0
-  /// @remarks The @a digest should be freed using yaca_free().
-  /// @remarks The @a message can be NULL but then @a message_len must be 0.
-  /// @param[in] algo Digest algorithm (select #YACA_DIGEST_SHA256 if unsure)
-  /// @param[in] message Message from which the digest is to be calculated
-  /// @param[in] message_len Length of the message
-  /// @param[out] digest Message digest, will be allocated by the library
-  /// @param[out] digest_len Length of message digest (depends on algorithm)
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL,
-  /// invalid @a algo)
-  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see #yaca_digest_algorithm_e
-  /// @see yaca_free()
-  int yaca_simple_calculate_digest(
-    int algo,
-    ffi.Pointer<ffi.Char> message,
-    int message_len,
-    ffi.Pointer<ffi.Pointer<ffi.Char>> digest,
-    ffi.Pointer<ffi.Size> digest_len,
-  ) {
-    return _yaca_simple_calculate_digest(
-      algo,
-      message,
-      message_len,
-      digest,
-      digest_len,
-    );
-  }
-
-  late final _yaca_simple_calculate_digestPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Int32,
-              ffi.Pointer<ffi.Char>,
-              ffi.Size,
-              ffi.Pointer<ffi.Pointer<ffi.Char>>,
-              ffi.Pointer<ffi.Size>)>>('yaca_simple_calculate_digest');
-  late final _yaca_simple_calculate_digest =
-      _yaca_simple_calculate_digestPtr.asFunction<
-          int Function(int, ffi.Pointer<ffi.Char>, int,
-              ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Pointer<ffi.Size>)>();
-
-  /// @brief Creates a signature using asymmetric private key.
-  /// @since_tizen 3.0
-  /// @remarks For #YACA_DIGEST_SHA384 and #YACA_DIGEST_SHA512 the RSA key size must be bigger than
-  /// #YACA_KEY_LENGTH_512BIT.
-  /// @remarks Using of #YACA_DIGEST_MD5 algorithm for DSA and ECDSA operations is prohibited.
-  /// @remarks The @a signature should be freed using yaca_free().
-  /// @remarks The @a message can be NULL but then @a message_len must be 0.
-  /// @param[in] algo Digest algorithm that will be used
-  /// @param[in] prv_key Private key that will be used, algorithm is
-  /// deduced based on key type, supported key types:
-  /// - #YACA_KEY_TYPE_RSA_PRIV,
-  /// - #YACA_KEY_TYPE_DSA_PRIV,
-  /// - #YACA_KEY_TYPE_EC_PRIV
-  /// @param[in] message Message to be signed
-  /// @param[in] message_len Length of the message
-  /// @param[out] signature Message signature, will be allocated by the library
-  /// @param[out] signature_len Length of the signature
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0
-  /// invalid @a algo or @a prv_key)
-  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see #yaca_key_type_e
-  /// @see #yaca_digest_algorithm_e
-  /// @see yaca_simple_verify_signature()
-  /// @see yaca_free()
-  int yaca_simple_calculate_signature(
-    int algo,
-    yaca_key_h prv_key,
-    ffi.Pointer<ffi.Char> message,
-    int message_len,
-    ffi.Pointer<ffi.Pointer<ffi.Char>> signature,
-    ffi.Pointer<ffi.Size> signature_len,
-  ) {
-    return _yaca_simple_calculate_signature(
-      algo,
-      prv_key,
-      message,
-      message_len,
-      signature,
-      signature_len,
-    );
-  }
-
-  late final _yaca_simple_calculate_signaturePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Int32,
-              yaca_key_h,
-              ffi.Pointer<ffi.Char>,
-              ffi.Size,
-              ffi.Pointer<ffi.Pointer<ffi.Char>>,
-              ffi.Pointer<ffi.Size>)>>('yaca_simple_calculate_signature');
-  late final _yaca_simple_calculate_signature =
-      _yaca_simple_calculate_signaturePtr.asFunction<
-          int Function(int, yaca_key_h, ffi.Pointer<ffi.Char>, int,
-              ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Pointer<ffi.Size>)>();
-
-  /// @brief Verifies a signature using asymmetric public key.
-  /// @since_tizen 3.0
-  /// @remarks The @a message can be NULL but then @a message_len must be 0.
-  /// @param[in] algo Digest algorithm that will be used
-  /// @param[in] pub_key Public key that will be used, algorithm is
-  /// deduced based on key type, supported key types:
-  /// - #YACA_KEY_TYPE_RSA_PUB,
-  /// - #YACA_KEY_TYPE_DSA_PUB,
-  /// - #YACA_KEY_TYPE_EC_PUB
-  /// @param[in] message Message
-  /// @param[in] message_len Length of the message
-  /// @param[in] signature Message signature to be verified
-  /// @param[in] signature_len Length of the signature
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0
-  /// invalid @a algo or @a pub_key)
-  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @retval #YACA_ERROR_DATA_MISMATCH The verification failed
-  /// @see #yaca_key_type_e
-  /// @see #yaca_digest_algorithm_e
-  /// @see yaca_simple_calculate_signature()
-  int yaca_simple_verify_signature(
-    int algo,
-    yaca_key_h pub_key,
-    ffi.Pointer<ffi.Char> message,
-    int message_len,
-    ffi.Pointer<ffi.Char> signature,
-    int signature_len,
-  ) {
-    return _yaca_simple_verify_signature(
-      algo,
-      pub_key,
-      message,
-      message_len,
-      signature,
-      signature_len,
-    );
-  }
-
-  late final _yaca_simple_verify_signaturePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Int32,
-              yaca_key_h,
-              ffi.Pointer<ffi.Char>,
-              ffi.Size,
-              ffi.Pointer<ffi.Char>,
-              ffi.Size)>>('yaca_simple_verify_signature');
-  late final _yaca_simple_verify_signature =
-      _yaca_simple_verify_signaturePtr.asFunction<
-          int Function(int, yaca_key_h, ffi.Pointer<ffi.Char>, int,
-              ffi.Pointer<ffi.Char>, int)>();
-
-  /// @brief Calculates a HMAC of given message using symmetric key.
-  /// @since_tizen 3.0
-  /// @remarks For verification, calculate message HMAC and compare with received MAC using yaca_memcmp().
-  /// @remarks The @a mac should be freed using yaca_free().
-  /// @remarks The @a message can be NULL but then @a message_len must be 0.
-  /// @param[in] algo Digest algorithm that will be used
-  /// @param[in] sym_key Key that will be used, supported key types:
-  /// - #YACA_KEY_TYPE_SYMMETRIC,
-  /// - #YACA_KEY_TYPE_DES
-  /// @param[in] message Message to calculate HMAC from
-  /// @param[in] message_len Length of the message
-  /// @param[out] mac MAC, will be allocated by the library
-  /// @param[out] mac_len Length of the MAC
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0
-  /// invalid @a algo or @a sym_key)
-  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see #yaca_key_type_e
-  /// @see #yaca_digest_algorithm_e
-  /// @see yaca_memcmp()
-  /// @see yaca_free()
-  int yaca_simple_calculate_hmac(
-    int algo,
-    yaca_key_h sym_key,
-    ffi.Pointer<ffi.Char> message,
-    int message_len,
-    ffi.Pointer<ffi.Pointer<ffi.Char>> mac,
-    ffi.Pointer<ffi.Size> mac_len,
-  ) {
-    return _yaca_simple_calculate_hmac(
-      algo,
-      sym_key,
-      message,
-      message_len,
-      mac,
-      mac_len,
-    );
-  }
-
-  late final _yaca_simple_calculate_hmacPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Int32,
-              yaca_key_h,
-              ffi.Pointer<ffi.Char>,
-              ffi.Size,
-              ffi.Pointer<ffi.Pointer<ffi.Char>>,
-              ffi.Pointer<ffi.Size>)>>('yaca_simple_calculate_hmac');
-  late final _yaca_simple_calculate_hmac =
-      _yaca_simple_calculate_hmacPtr.asFunction<
-          int Function(int, yaca_key_h, ffi.Pointer<ffi.Char>, int,
-              ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Pointer<ffi.Size>)>();
-
-  /// @brief Calculates a CMAC of given message using symmetric key.
-  /// @since_tizen 3.0
-  /// @remarks For verification, calculate message CMAC and compare with received MAC using yaca_memcmp().
-  /// @remarks The @a mac should be freed using yaca_free().
-  /// @remarks The @a message can be NULL but then @a message_len must be 0.
-  /// @param[in] algo Encryption algorithm that will be used
-  /// @param[in] sym_key Key that will be used, supported key types:
-  /// - #YACA_KEY_TYPE_SYMMETRIC,
-  /// - #YACA_KEY_TYPE_DES
-  /// @param[in] message Message to calculate CMAC from
-  /// @param[in] message_len Length of the message
-  /// @param[out] mac MAC, will be allocated by the library
-  /// @param[out] mac_len Length of the MAC
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0
-  /// invalid @a algo or @a sym_key)
-  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see #yaca_key_type_e
-  /// @see #yaca_encrypt_algorithm_e
-  /// @see yaca_memcmp()
-  /// @see yaca_free()
-  int yaca_simple_calculate_cmac(
-    int algo,
-    yaca_key_h sym_key,
-    ffi.Pointer<ffi.Char> message,
-    int message_len,
-    ffi.Pointer<ffi.Pointer<ffi.Char>> mac,
-    ffi.Pointer<ffi.Size> mac_len,
-  ) {
-    return _yaca_simple_calculate_cmac(
-      algo,
-      sym_key,
-      message,
-      message_len,
-      mac,
-      mac_len,
-    );
-  }
-
-  late final _yaca_simple_calculate_cmacPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Int32,
-              yaca_key_h,
-              ffi.Pointer<ffi.Char>,
-              ffi.Size,
-              ffi.Pointer<ffi.Pointer<ffi.Char>>,
-              ffi.Pointer<ffi.Size>)>>('yaca_simple_calculate_cmac');
-  late final _yaca_simple_calculate_cmac =
-      _yaca_simple_calculate_cmacPtr.asFunction<
-          int Function(int, yaca_key_h, ffi.Pointer<ffi.Char>, int,
-              ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Pointer<ffi.Size>)>();
-
-  /// @brief Initializes the library. Must be called before any other crypto
-  /// function. Should be called once in each thread that uses yaca.
-  /// @since_tizen 3.0
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see yaca_cleanup()
-  int yaca_initialize() {
-    return _yaca_initialize();
-  }
-
-  late final _yaca_initializePtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function()>>('yaca_initialize');
-  late final _yaca_initialize =
-      _yaca_initializePtr.asFunction<int Function()>();
-
-  /// @brief Cleans up the library. Must be called before exiting the thread that called yaca_initialize().
-  /// @since_tizen 3.0
-  /// @see yaca_initialize()
-  void yaca_cleanup() {
-    return _yaca_cleanup();
-  }
-
-  late final _yaca_cleanupPtr =
-      _lookup<ffi.NativeFunction<ffi.Void Function()>>('yaca_cleanup');
-  late final _yaca_cleanup = _yaca_cleanupPtr.asFunction<void Function()>();
-
-  /// @brief Allocates the memory.
-  /// @since_tizen 3.0
-  /// @remarks The @a memory should be freed using yaca_free().
-  /// @param[in] size Size of the allocation (bytes)
-  /// @param[out] memory Allocated memory
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0)
-  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
-  /// @see yaca_zalloc()
-  /// @see yaca_realloc()
-  /// @see yaca_free()
-  int yaca_malloc(
-    int size,
-    ffi.Pointer<ffi.Pointer<ffi.Void>> memory,
-  ) {
-    return _yaca_malloc(
-      size,
-      memory,
-    );
-  }
-
-  late final _yaca_mallocPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Size, ffi.Pointer<ffi.Pointer<ffi.Void>>)>>('yaca_malloc');
-  late final _yaca_malloc = _yaca_mallocPtr
-      .asFunction<int Function(int, ffi.Pointer<ffi.Pointer<ffi.Void>>)>();
-
-  /// @brief Allocates the zeroed memory.
-  /// @since_tizen 3.0
-  /// @remarks The @a memory should be freed using yaca_free().
-  /// @param[in] size Size of the allocation (bytes)
-  /// @param[out] memory Allocated memory
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0)
-  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
-  /// @see yaca_malloc()
-  /// @see yaca_realloc()
-  /// @see yaca_free()
-  int yaca_zalloc(
-    int size,
-    ffi.Pointer<ffi.Pointer<ffi.Void>> memory,
-  ) {
-    return _yaca_zalloc(
-      size,
-      memory,
-    );
-  }
-
-  late final _yaca_zallocPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Size, ffi.Pointer<ffi.Pointer<ffi.Void>>)>>('yaca_zalloc');
-  late final _yaca_zalloc = _yaca_zallocPtr
-      .asFunction<int Function(int, ffi.Pointer<ffi.Pointer<ffi.Void>>)>();
-
-  /// @brief Re-allocates the memory.
-  /// @since_tizen 3.0
-  /// @remarks In case of failure the function doesn't free the memory pointed by @a memory.
-  /// @remarks If @a memory is NULL then the call is equivalent to yaca_malloc().
-  /// @remarks If the function fails the contents of @a memory will be left unchanged.
-  /// @remarks The @a memory should be freed using yaca_free().
-  /// @param[in] size Size of the new allocation (bytes)
-  /// @param[in,out] memory  Memory to be reallocated
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0)
-  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
-  /// @see yaca_malloc()
-  /// @see yaca_zalloc()
-  /// @see yaca_free()
-  int yaca_realloc(
-    int size,
-    ffi.Pointer<ffi.Pointer<ffi.Void>> memory,
-  ) {
-    return _yaca_realloc(
-      size,
-      memory,
-    );
-  }
-
-  late final _yaca_reallocPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Size, ffi.Pointer<ffi.Pointer<ffi.Void>>)>>('yaca_realloc');
-  late final _yaca_realloc = _yaca_reallocPtr
-      .asFunction<int Function(int, ffi.Pointer<ffi.Pointer<ffi.Void>>)>();
-
-  /// @brief Frees the memory allocated by yaca_malloc(), yaca_zalloc(),
-  /// yaca_realloc() or one of the cryptographic operations.
-  /// @since_tizen 3.0
-  /// @param[in] memory Pointer to the memory to be freed
-  /// @see yaca_malloc()
-  /// @see yaca_zalloc()
-  /// @see yaca_realloc()
-  void yaca_free(
-    ffi.Pointer<ffi.Void> memory,
-  ) {
-    return _yaca_free(
-      memory,
-    );
-  }
-
-  late final _yaca_freePtr =
-      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>(
-          'yaca_free');
-  late final _yaca_free =
-      _yaca_freePtr.asFunction<void Function(ffi.Pointer<ffi.Void>)>();
-
-  /// @brief Safely compares first @a len bytes of two buffers.
-  /// @since_tizen 3.0
-  /// @param[in] first Pointer to the first buffer
-  /// @param[in] second Pointer to the second buffer
-  /// @param[in] len Length to compare
-  /// @return #YACA_ERROR_NONE when buffers are equal,
-  /// otherwise #YACA_ERROR_DATA_MISMATCH
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0)
-  /// @retval #YACA_ERROR_DATA_MISMATCH Buffers are different
-  int yaca_memcmp(
-    ffi.Pointer<ffi.Void> first,
-    ffi.Pointer<ffi.Void> second,
-    int len,
-  ) {
-    return _yaca_memcmp(
-      first,
-      second,
-      len,
-    );
-  }
-
-  late final _yaca_memcmpPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>,
-              ffi.Size)>>('yaca_memcmp');
-  late final _yaca_memcmp = _yaca_memcmpPtr.asFunction<
-      int Function(ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>, int)>();
-
-  /// @brief Generates random data.
-  /// @since_tizen 3.0
-  /// @param[in,out] data Pointer to the memory to be randomized
-  /// @param[in] data_len Length of the memory to be randomized
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0)
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  int yaca_randomize_bytes(
-    ffi.Pointer<ffi.Char> data,
-    int data_len,
-  ) {
-    return _yaca_randomize_bytes(
-      data,
-      data_len,
-    );
-  }
-
-  late final _yaca_randomize_bytesPtr = _lookup<
-          ffi
-          .NativeFunction<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Size)>>(
-      'yaca_randomize_bytes');
-  late final _yaca_randomize_bytes = _yaca_randomize_bytesPtr
-      .asFunction<int Function(ffi.Pointer<ffi.Char>, int)>();
-
-  /// @brief Sets the non-standard context properties. Can only be called on an initialized context.
-  /// @since_tizen 3.0
-  /// @remarks The @a value has to be of type appropriate for given property. See #yaca_property_e
-  /// for details on corresponding types.
-  /// @param[in,out] ctx Previously initialized crypto context
-  /// @param[in] property Property to be set
-  /// @param[in] value Property value
-  /// @param[in] value_len Length of the property value
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0,
-  /// invalid @a ctx or @a property)
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see #yaca_property_e
-  /// @see yaca_context_get_property()
-  int yaca_context_set_property(
-    yaca_context_h ctx,
-    int property,
-    ffi.Pointer<ffi.Void> value,
-    int value_len,
-  ) {
-    return _yaca_context_set_property(
-      ctx,
-      property,
-      value,
-      value_len,
-    );
-  }
-
-  late final _yaca_context_set_propertyPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(yaca_context_h, ffi.Int32, ffi.Pointer<ffi.Void>,
-              ffi.Size)>>('yaca_context_set_property');
-  late final _yaca_context_set_property =
-      _yaca_context_set_propertyPtr.asFunction<
-          int Function(yaca_context_h, int, ffi.Pointer<ffi.Void>, int)>();
-
-  /// @brief Returns the non-standard context properties. Can only be called on an initialized context.
-  /// @since_tizen 3.0
-  /// @remarks The @a value should be freed using yaca_free().
-  /// @remarks The @a value has to be of type appropriate for given property. See #yaca_property_e
-  /// for details on corresponding types.
-  /// @remarks The @a value_len can be NULL if returned @a value is a single object (i.e. not an array/buffer).
-  /// @param[in] ctx Previously initialized crypto context
-  /// @param[in] property Property to be read
-  /// @param[out] value Copy of the property value
-  /// @param[out] value_len Length of the property value will be returned here
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL,
-  /// invalid @a ctx or @a property)
-  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see #yaca_property_e
-  /// @see yaca_context_set_property()
-  /// @see yaca_free()
-  int yaca_context_get_property(
-    yaca_context_h ctx,
-    int property,
-    ffi.Pointer<ffi.Pointer<ffi.Void>> value,
-    ffi.Pointer<ffi.Size> value_len,
-  ) {
-    return _yaca_context_get_property(
-      ctx,
-      property,
-      value,
-      value_len,
-    );
-  }
-
-  late final _yaca_context_get_propertyPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              yaca_context_h,
-              ffi.Int32,
-              ffi.Pointer<ffi.Pointer<ffi.Void>>,
-              ffi.Pointer<ffi.Size>)>>('yaca_context_get_property');
-  late final _yaca_context_get_property =
-      _yaca_context_get_propertyPtr.asFunction<
-          int Function(yaca_context_h, int, ffi.Pointer<ffi.Pointer<ffi.Void>>,
-              ffi.Pointer<ffi.Size>)>();
-
-  /// @brief Returns the minimum required size of the output buffer for a single crypto function call.
-  /// @since_tizen 3.0
-  /// @remarks This function should be used to learn the required size of the output buffer
-  /// for a single function call (eg. *_update or *_finalize). The actual output length
-  /// (number of bytes that has been used) will be returned by the function call itself.
-  /// @remarks In case the function call has no output (e.g. yaca_sign_update(),
-  /// yaca_digest_update()), there is no need to use this function.
-  /// @remarks In case the function call has no input (eg. *_finalize), the value of
-  /// @a input_len has to be set to 0.
-  /// @param[in] ctx Previously initialized crypto context
-  /// @param[in] input_len Length of the input data to be processed
-  /// @param[out] output_len Required length of the output
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL,
-  /// invalid @a ctx or too big @a input_len)
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  int yaca_context_get_output_length(
-    yaca_context_h ctx,
-    int input_len,
-    ffi.Pointer<ffi.Size> output_len,
-  ) {
-    return _yaca_context_get_output_length(
-      ctx,
-      input_len,
-      output_len,
-    );
-  }
-
-  late final _yaca_context_get_output_lengthPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(yaca_context_h, ffi.Size,
-              ffi.Pointer<ffi.Size>)>>('yaca_context_get_output_length');
-  late final _yaca_context_get_output_length =
-      _yaca_context_get_output_lengthPtr.asFunction<
-          int Function(yaca_context_h, int, ffi.Pointer<ffi.Size>)>();
-
-  /// @brief Destroys the crypto context. Must be called on all contexts that are no longer used.
-  /// Passing #YACA_CONTEXT_NULL is allowed.
-  /// @since_tizen 3.0
-  /// @param[in,out] ctx  Crypto context
-  /// @see #yaca_context_h
-  void yaca_context_destroy(
-    yaca_context_h ctx,
-  ) {
-    return _yaca_context_destroy(
-      ctx,
-    );
-  }
-
-  late final _yaca_context_destroyPtr =
-      _lookup<ffi.NativeFunction<ffi.Void Function(yaca_context_h)>>(
-          'yaca_context_destroy');
-  late final _yaca_context_destroy =
-      _yaca_context_destroyPtr.asFunction<void Function(yaca_context_h)>();
-
-  /// @brief Initializes a digest context.
-  /// @since_tizen 3.0
-  /// @remarks The @a ctx should be released using yaca_context_destroy().
-  /// @param[out] ctx Newly created context
-  /// @param[in] algo Digest algorithm that will be used
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL,
-  /// invalid @a algo)
-  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see #yaca_digest_algorithm_e
-  /// @see yaca_digest_update()
-  /// @see yaca_digest_finalize()
-  /// @see yaca_context_destroy()
-  int yaca_digest_initialize(
-    ffi.Pointer<yaca_context_h> ctx,
-    int algo,
-  ) {
-    return _yaca_digest_initialize(
-      ctx,
-      algo,
-    );
-  }
-
-  late final _yaca_digest_initializePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<yaca_context_h>,
-              ffi.Int32)>>('yaca_digest_initialize');
-  late final _yaca_digest_initialize = _yaca_digest_initializePtr
-      .asFunction<int Function(ffi.Pointer<yaca_context_h>, int)>();
-
-  /// @brief Feeds the message into the message digest algorithm.
-  /// @since_tizen 3.0
-  /// @param[in,out] ctx Context created by yaca_digest_initialize()
-  /// @param[in] message Message from which the digest is to be calculated
-  /// @param[in] message_len Length of the message
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0,
-  /// invalid @a ctx)
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see yaca_digest_initialize()
-  /// @see yaca_digest_finalize()
-  int yaca_digest_update(
-    yaca_context_h ctx,
-    ffi.Pointer<ffi.Char> message,
-    int message_len,
-  ) {
-    return _yaca_digest_update(
-      ctx,
-      message,
-      message_len,
-    );
-  }
-
-  late final _yaca_digest_updatePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(yaca_context_h, ffi.Pointer<ffi.Char>,
-              ffi.Size)>>('yaca_digest_update');
-  late final _yaca_digest_update = _yaca_digest_updatePtr
-      .asFunction<int Function(yaca_context_h, ffi.Pointer<ffi.Char>, int)>();
-
-  /// @brief Calculates the final digest.
-  /// @since_tizen 3.0
-  /// @remarks Skipping yaca_digest_update() and calling only yaca_digest_finalize() will produce an empty message digest.
-  /// @param[in,out] ctx A valid digest context
-  /// @param[out] digest Buffer for the message digest
-  /// (must be allocated by client, see yaca_context_get_output_length())
-  /// @param[out] digest_len Length of the digest,
-  /// actual number of bytes written will be returned here
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL,
-  /// invalid @a ctx)
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see yaca_digest_initialize()
-  /// @see yaca_digest_update()
-  /// @see yaca_context_get_output_length()
-  int yaca_digest_finalize(
-    yaca_context_h ctx,
-    ffi.Pointer<ffi.Char> digest,
-    ffi.Pointer<ffi.Size> digest_len,
-  ) {
-    return _yaca_digest_finalize(
-      ctx,
-      digest,
-      digest_len,
-    );
-  }
-
-  late final _yaca_digest_finalizePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(yaca_context_h, ffi.Pointer<ffi.Char>,
-              ffi.Pointer<ffi.Size>)>>('yaca_digest_finalize');
-  late final _yaca_digest_finalize = _yaca_digest_finalizePtr.asFunction<
-      int Function(
-          yaca_context_h, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Size>)>();
-
-  /// @brief Returns the recommended/default length of the Initialization Vector for a given encryption configuration.
-  /// @since_tizen 3.0
-  /// @remarks If returned @a iv_bit_len equals 0 that means that for this
-  /// specific algorithm and its parameters Initialization Vector is not used.
-  /// @param[in] algo Encryption algorithm
-  /// @param[in] bcm Chain mode
-  /// @param[in] key_bit_len Key length in bits
-  /// @param[out] iv_bit_len Recommended Initialization Vector length in bits
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL,
-  /// invalid @a algo, @a bcm or @a key_bit_len not
-  /// divisible by 8)
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  int yaca_encrypt_get_iv_bit_length(
-    int algo,
-    int bcm,
-    int key_bit_len,
-    ffi.Pointer<ffi.Size> iv_bit_len,
-  ) {
-    return _yaca_encrypt_get_iv_bit_length(
-      algo,
-      bcm,
-      key_bit_len,
-      iv_bit_len,
-    );
-  }
-
-  late final _yaca_encrypt_get_iv_bit_lengthPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Int32, ffi.Int32, ffi.Size,
-              ffi.Pointer<ffi.Size>)>>('yaca_encrypt_get_iv_bit_length');
-  late final _yaca_encrypt_get_iv_bit_length =
-      _yaca_encrypt_get_iv_bit_lengthPtr
-          .asFunction<int Function(int, int, int, ffi.Pointer<ffi.Size>)>();
-
-  /// @brief Initializes an encryption context.
-  /// @since_tizen 3.0
-  /// @remarks The @a ctx should be released using yaca_context_destroy().
-  /// @param[out] ctx Newly created context
-  /// @param[in] algo Encryption algorithm that will be used
-  /// @param[in] bcm Chaining mode that will be used
-  /// @param[in] sym_key Symmetric key that will be used
-  /// @param[in] iv Initialization Vector that will be used
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL,
-  /// invalid @a algo, @a bcm, @a sym_key or @a iv)
-  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see #yaca_encrypt_algorithm_e
-  /// @see #yaca_block_cipher_mode_e
-  /// @see yaca_encrypt_update()
-  /// @see yaca_encrypt_finalize()
-  /// @see yaca_context_destroy()
-  int yaca_encrypt_initialize(
-    ffi.Pointer<yaca_context_h> ctx,
-    int algo,
-    int bcm,
-    yaca_key_h sym_key,
-    yaca_key_h iv,
-  ) {
-    return _yaca_encrypt_initialize(
-      ctx,
-      algo,
-      bcm,
-      sym_key,
-      iv,
-    );
-  }
-
-  late final _yaca_encrypt_initializePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<yaca_context_h>, ffi.Int32, ffi.Int32,
-              yaca_key_h, yaca_key_h)>>('yaca_encrypt_initialize');
-  late final _yaca_encrypt_initialize = _yaca_encrypt_initializePtr.asFunction<
-      int Function(
-          ffi.Pointer<yaca_context_h>, int, int, yaca_key_h, yaca_key_h)>();
-
-  /// @brief Encrypts chunk of the data.
-  /// @since_tizen 3.0
-  /// @param[in,out] ctx Context created by yaca_encrypt_initialize()
-  /// @param[in] plaintext Plaintext to be encrypted
-  /// @param[in] plaintext_len Length of the plaintext
-  /// @param[out] ciphertext Buffer for the encrypted data
-  /// (must be allocated by client, see yaca_context_get_output_length())
-  /// @param[out] ciphertext_len Length of the encrypted data,
-  /// actual number of bytes written will be returned here
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0,
-  /// invalid @a ctx)
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see yaca_encrypt_initialize()
-  /// @see yaca_encrypt_finalize()
-  /// @see yaca_context_get_output_length()
-  int yaca_encrypt_update(
-    yaca_context_h ctx,
-    ffi.Pointer<ffi.Char> plaintext,
-    int plaintext_len,
-    ffi.Pointer<ffi.Char> ciphertext,
-    ffi.Pointer<ffi.Size> ciphertext_len,
-  ) {
-    return _yaca_encrypt_update(
-      ctx,
-      plaintext,
-      plaintext_len,
-      ciphertext,
-      ciphertext_len,
-    );
-  }
-
-  late final _yaca_encrypt_updatePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              yaca_context_h,
-              ffi.Pointer<ffi.Char>,
-              ffi.Size,
-              ffi.Pointer<ffi.Char>,
-              ffi.Pointer<ffi.Size>)>>('yaca_encrypt_update');
-  late final _yaca_encrypt_update = _yaca_encrypt_updatePtr.asFunction<
-      int Function(yaca_context_h, ffi.Pointer<ffi.Char>, int,
-          ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Size>)>();
-
-  /// @brief Encrypts the final chunk of the data.
-  /// @since_tizen 3.0
-  /// @remarks Skipping yaca_encrypt_update() and calling only yaca_encrypt_finalize() will produce an encryption of an empty message.
-  /// @param[in,out] ctx A valid encrypt context
-  /// @param[out] ciphertext Final piece of the encrypted data
-  /// (must be allocated by client, see yaca_context_get_output_length())
-  /// @param[out] ciphertext_len Length of the final piece,
-  /// actual number of bytes written will be returned here
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL,
-  /// invalid @a ctx)
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see yaca_encrypt_initialize()
-  /// @see yaca_encrypt_update()
-  /// @see yaca_context_get_output_length()
-  int yaca_encrypt_finalize(
-    yaca_context_h ctx,
-    ffi.Pointer<ffi.Char> ciphertext,
-    ffi.Pointer<ffi.Size> ciphertext_len,
-  ) {
-    return _yaca_encrypt_finalize(
-      ctx,
-      ciphertext,
-      ciphertext_len,
-    );
-  }
-
-  late final _yaca_encrypt_finalizePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(yaca_context_h, ffi.Pointer<ffi.Char>,
-              ffi.Pointer<ffi.Size>)>>('yaca_encrypt_finalize');
-  late final _yaca_encrypt_finalize = _yaca_encrypt_finalizePtr.asFunction<
-      int Function(
-          yaca_context_h, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Size>)>();
-
-  /// @brief Initializes an decryption context.
-  /// @since_tizen 3.0
-  /// @remarks The @a ctx should be released using yaca_context_destroy().
-  /// @param[out] ctx Newly created context
-  /// @param[in] algo Encryption algorithm that was used to encrypt the data
-  /// @param[in] bcm Chaining mode that was used to encrypt the data
-  /// @param[in] sym_key Symmetric key that was used to encrypt the data
-  /// @param[in] iv Initialization Vector that was used to encrypt the data
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL,
-  /// invalid @a algo, @a bcm, @a sym_key or @a iv)
-  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see #yaca_encrypt_algorithm_e
-  /// @see #yaca_block_cipher_mode_e
-  /// @see yaca_decrypt_update()
-  /// @see yaca_decrypt_finalize()
-  /// @see yaca_context_destroy()
-  int yaca_decrypt_initialize(
-    ffi.Pointer<yaca_context_h> ctx,
-    int algo,
-    int bcm,
-    yaca_key_h sym_key,
-    yaca_key_h iv,
-  ) {
-    return _yaca_decrypt_initialize(
-      ctx,
-      algo,
-      bcm,
-      sym_key,
-      iv,
-    );
-  }
-
-  late final _yaca_decrypt_initializePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<yaca_context_h>, ffi.Int32, ffi.Int32,
-              yaca_key_h, yaca_key_h)>>('yaca_decrypt_initialize');
-  late final _yaca_decrypt_initialize = _yaca_decrypt_initializePtr.asFunction<
-      int Function(
-          ffi.Pointer<yaca_context_h>, int, int, yaca_key_h, yaca_key_h)>();
-
-  /// @brief Decrypts chunk of the data.
-  /// @since_tizen 3.0
-  /// @param[in,out] ctx Context created by yaca_decrypt_initialize()
-  /// @param[in] ciphertext Ciphertext to be decrypted
-  /// @param[in] ciphertext_len Length of the ciphertext
-  /// @param[out] plaintext Buffer for the decrypted data
-  /// (must be allocated by client, see yaca_context_get_output_length())
-  /// @param[out] plaintext_len Length of the decrypted data,
-  /// actual number of bytes written will be returned here
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0,
-  /// invalid @a ctx), wrong #YACA_PROPERTY_CCM_AAD or
-  /// wrong #YACA_PROPERTY_CCM_TAG was used
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see yaca_decrypt_initialize()
-  /// @see yaca_decrypt_finalize()
-  /// @see yaca_context_get_output_length()
-  int yaca_decrypt_update(
-    yaca_context_h ctx,
-    ffi.Pointer<ffi.Char> ciphertext,
-    int ciphertext_len,
-    ffi.Pointer<ffi.Char> plaintext,
-    ffi.Pointer<ffi.Size> plaintext_len,
-  ) {
-    return _yaca_decrypt_update(
-      ctx,
-      ciphertext,
-      ciphertext_len,
-      plaintext,
-      plaintext_len,
-    );
-  }
-
-  late final _yaca_decrypt_updatePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              yaca_context_h,
-              ffi.Pointer<ffi.Char>,
-              ffi.Size,
-              ffi.Pointer<ffi.Char>,
-              ffi.Pointer<ffi.Size>)>>('yaca_decrypt_update');
-  late final _yaca_decrypt_update = _yaca_decrypt_updatePtr.asFunction<
-      int Function(yaca_context_h, ffi.Pointer<ffi.Char>, int,
-          ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Size>)>();
-
-  /// @brief Decrypts the final chunk of the data.
-  /// @since_tizen 3.0
-  /// @remarks Skipping yaca_decrypt_update() and calling only yaca_decrypt_finalize() will produce a decryption of an empty ciphertext.
-  /// @param[in,out] ctx A valid decrypt context
-  /// @param[out] plaintext Final piece of the decrypted data
-  /// (must be allocated by client, see yaca_context_get_output_length())
-  /// @param[out] plaintext_len Length of the final piece,
-  /// actual number of bytes written will be returned here
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL,
-  /// invalid @a ctx), wrong #YACA_PROPERTY_GCM_AAD or
-  /// wrong #YACA_PROPERTY_GCM_TAG was used
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see yaca_decrypt_initialize()
-  /// @see yaca_decrypt_update()
-  /// @see yaca_context_get_output_length()
-  int yaca_decrypt_finalize(
-    yaca_context_h ctx,
-    ffi.Pointer<ffi.Char> plaintext,
-    ffi.Pointer<ffi.Size> plaintext_len,
-  ) {
-    return _yaca_decrypt_finalize(
-      ctx,
-      plaintext,
-      plaintext_len,
-    );
-  }
-
-  late final _yaca_decrypt_finalizePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(yaca_context_h, ffi.Pointer<ffi.Char>,
-              ffi.Pointer<ffi.Size>)>>('yaca_decrypt_finalize');
-  late final _yaca_decrypt_finalize = _yaca_decrypt_finalizePtr.asFunction<
-      int Function(
-          yaca_context_h, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Size>)>();
-
   /// @brief Initializes an asymmetric encryption context and generates symmetric key and Initialization Vector.
   /// @since_tizen 3.0
   /// @remarks Generated symmetric key is encrypted with public key,
@@ -170392,6 +170427,403 @@ class Tizen90Native {
               ffi.Size)>>('yaca_verify_finalize');
   late final _yaca_verify_finalize = _yaca_verify_finalizePtr
       .asFunction<int Function(yaca_context_h, ffi.Pointer<ffi.Char>, int)>();
+
+  /// @brief Encrypts data using a symmetric cipher.
+  /// @since_tizen 3.0
+  /// @remarks yaca_simple_encrypt() doesn't support #YACA_BCM_GCM and #YACA_BCM_CCM.
+  /// @remarks The @a ciphertext should be freed using yaca_free().
+  /// @remarks The @a plaintext can be NULL but then @a plaintext_len must be 0.
+  /// @param[in] algo Encryption algorithm (select #YACA_ENCRYPT_AES if unsure)
+  /// @param[in] bcm Chaining mode (select #YACA_BCM_CBC if unsure)
+  /// @param[in] sym_key Symmetric encryption key (see yaca_key.h for key generation functions)
+  /// @param[in] iv Initialization Vector
+  /// @param[in] plaintext Plaintext to be encrypted
+  /// @param[in] plaintext_len Length of the plaintext
+  /// @param[out] ciphertext Encrypted data, will be allocated by the library
+  /// @param[out] ciphertext_len Length of the encrypted data (may be larger than decrypted)
+  /// @return #YACA_ERROR_NONE on success,
+  /// negative on error
+  /// @retval #YACA_ERROR_NONE Successful
+  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0
+  /// invalid @a algo, @a bcm, @a sym_key or @a iv)
+  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
+  /// @retval #YACA_ERROR_INTERNAL Internal error
+  /// @see #yaca_encrypt_algorithm_e
+  /// @see #yaca_block_cipher_mode_e
+  /// @see yaca_simple_decrypt()
+  /// @see yaca_free()
+  int yaca_simple_encrypt(
+    int algo,
+    int bcm,
+    yaca_key_h sym_key,
+    yaca_key_h iv,
+    ffi.Pointer<ffi.Char> plaintext,
+    int plaintext_len,
+    ffi.Pointer<ffi.Pointer<ffi.Char>> ciphertext,
+    ffi.Pointer<ffi.Size> ciphertext_len,
+  ) {
+    return _yaca_simple_encrypt(
+      algo,
+      bcm,
+      sym_key,
+      iv,
+      plaintext,
+      plaintext_len,
+      ciphertext,
+      ciphertext_len,
+    );
+  }
+
+  late final _yaca_simple_encryptPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(
+              ffi.Int32,
+              ffi.Int32,
+              yaca_key_h,
+              yaca_key_h,
+              ffi.Pointer<ffi.Char>,
+              ffi.Size,
+              ffi.Pointer<ffi.Pointer<ffi.Char>>,
+              ffi.Pointer<ffi.Size>)>>('yaca_simple_encrypt');
+  late final _yaca_simple_encrypt = _yaca_simple_encryptPtr.asFunction<
+      int Function(int, int, yaca_key_h, yaca_key_h, ffi.Pointer<ffi.Char>, int,
+          ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Pointer<ffi.Size>)>();
+
+  /// @brief Decrypts data using a symmetric cipher.
+  /// @since_tizen 3.0
+  /// @remarks yaca_simple_decrypt() doesn't support #YACA_BCM_GCM and #YACA_BCM_CCM.
+  /// @remarks The @a plaintext should be freed using yaca_free().
+  /// @remarks The @a ciphertext can be NULL but then @a ciphertext_len must be 0.
+  /// @param[in] algo Decryption algorithm that was used to encrypt the data
+  /// @param[in] bcm Chaining mode that was used to encrypt the data
+  /// @param[in] sym_key Symmetric encryption key that was used to encrypt the data
+  /// @param[in] iv Initialization Vector that was used to encrypt the data
+  /// @param[in] ciphertext Ciphertext to be decrypted
+  /// @param[in] ciphertext_len Length of ciphertext
+  /// @param[out] plaintext Decrypted data, will be allocated by the library
+  /// @param[out] plaintext_len Length of the decrypted data
+  /// @return #YACA_ERROR_NONE on success,
+  /// negative on error
+  /// @retval #YACA_ERROR_NONE Successful
+  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0
+  /// invalid @a algo, @a bcm, @a sym_key or @a iv)
+  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
+  /// @retval #YACA_ERROR_INTERNAL Internal error
+  /// @see #yaca_encrypt_algorithm_e
+  /// @see #yaca_block_cipher_mode_e
+  /// @see yaca_simple_encrypt()
+  /// @see yaca_free()
+  int yaca_simple_decrypt(
+    int algo,
+    int bcm,
+    yaca_key_h sym_key,
+    yaca_key_h iv,
+    ffi.Pointer<ffi.Char> ciphertext,
+    int ciphertext_len,
+    ffi.Pointer<ffi.Pointer<ffi.Char>> plaintext,
+    ffi.Pointer<ffi.Size> plaintext_len,
+  ) {
+    return _yaca_simple_decrypt(
+      algo,
+      bcm,
+      sym_key,
+      iv,
+      ciphertext,
+      ciphertext_len,
+      plaintext,
+      plaintext_len,
+    );
+  }
+
+  late final _yaca_simple_decryptPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(
+              ffi.Int32,
+              ffi.Int32,
+              yaca_key_h,
+              yaca_key_h,
+              ffi.Pointer<ffi.Char>,
+              ffi.Size,
+              ffi.Pointer<ffi.Pointer<ffi.Char>>,
+              ffi.Pointer<ffi.Size>)>>('yaca_simple_decrypt');
+  late final _yaca_simple_decrypt = _yaca_simple_decryptPtr.asFunction<
+      int Function(int, int, yaca_key_h, yaca_key_h, ffi.Pointer<ffi.Char>, int,
+          ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Pointer<ffi.Size>)>();
+
+  /// @brief Calculates a digest of a message.
+  /// @since_tizen 3.0
+  /// @remarks The @a digest should be freed using yaca_free().
+  /// @remarks The @a message can be NULL but then @a message_len must be 0.
+  /// @param[in] algo Digest algorithm (select #YACA_DIGEST_SHA256 if unsure)
+  /// @param[in] message Message from which the digest is to be calculated
+  /// @param[in] message_len Length of the message
+  /// @param[out] digest Message digest, will be allocated by the library
+  /// @param[out] digest_len Length of message digest (depends on algorithm)
+  /// @return #YACA_ERROR_NONE on success,
+  /// negative on error
+  /// @retval #YACA_ERROR_NONE Successful
+  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL,
+  /// invalid @a algo)
+  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
+  /// @retval #YACA_ERROR_INTERNAL Internal error
+  /// @see #yaca_digest_algorithm_e
+  /// @see yaca_free()
+  int yaca_simple_calculate_digest(
+    int algo,
+    ffi.Pointer<ffi.Char> message,
+    int message_len,
+    ffi.Pointer<ffi.Pointer<ffi.Char>> digest,
+    ffi.Pointer<ffi.Size> digest_len,
+  ) {
+    return _yaca_simple_calculate_digest(
+      algo,
+      message,
+      message_len,
+      digest,
+      digest_len,
+    );
+  }
+
+  late final _yaca_simple_calculate_digestPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(
+              ffi.Int32,
+              ffi.Pointer<ffi.Char>,
+              ffi.Size,
+              ffi.Pointer<ffi.Pointer<ffi.Char>>,
+              ffi.Pointer<ffi.Size>)>>('yaca_simple_calculate_digest');
+  late final _yaca_simple_calculate_digest =
+      _yaca_simple_calculate_digestPtr.asFunction<
+          int Function(int, ffi.Pointer<ffi.Char>, int,
+              ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Pointer<ffi.Size>)>();
+
+  /// @brief Creates a signature using asymmetric private key.
+  /// @since_tizen 3.0
+  /// @remarks For #YACA_DIGEST_SHA384 and #YACA_DIGEST_SHA512 the RSA key size must be bigger than
+  /// #YACA_KEY_LENGTH_512BIT.
+  /// @remarks Using of #YACA_DIGEST_MD5 algorithm for DSA and ECDSA operations is prohibited.
+  /// @remarks The @a signature should be freed using yaca_free().
+  /// @remarks The @a message can be NULL but then @a message_len must be 0.
+  /// @param[in] algo Digest algorithm that will be used
+  /// @param[in] prv_key Private key that will be used, algorithm is
+  /// deduced based on key type, supported key types:
+  /// - #YACA_KEY_TYPE_RSA_PRIV,
+  /// - #YACA_KEY_TYPE_DSA_PRIV,
+  /// - #YACA_KEY_TYPE_EC_PRIV
+  /// @param[in] message Message to be signed
+  /// @param[in] message_len Length of the message
+  /// @param[out] signature Message signature, will be allocated by the library
+  /// @param[out] signature_len Length of the signature
+  /// @return #YACA_ERROR_NONE on success,
+  /// negative on error
+  /// @retval #YACA_ERROR_NONE Successful
+  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0
+  /// invalid @a algo or @a prv_key)
+  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
+  /// @retval #YACA_ERROR_INTERNAL Internal error
+  /// @see #yaca_key_type_e
+  /// @see #yaca_digest_algorithm_e
+  /// @see yaca_simple_verify_signature()
+  /// @see yaca_free()
+  int yaca_simple_calculate_signature(
+    int algo,
+    yaca_key_h prv_key,
+    ffi.Pointer<ffi.Char> message,
+    int message_len,
+    ffi.Pointer<ffi.Pointer<ffi.Char>> signature,
+    ffi.Pointer<ffi.Size> signature_len,
+  ) {
+    return _yaca_simple_calculate_signature(
+      algo,
+      prv_key,
+      message,
+      message_len,
+      signature,
+      signature_len,
+    );
+  }
+
+  late final _yaca_simple_calculate_signaturePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(
+              ffi.Int32,
+              yaca_key_h,
+              ffi.Pointer<ffi.Char>,
+              ffi.Size,
+              ffi.Pointer<ffi.Pointer<ffi.Char>>,
+              ffi.Pointer<ffi.Size>)>>('yaca_simple_calculate_signature');
+  late final _yaca_simple_calculate_signature =
+      _yaca_simple_calculate_signaturePtr.asFunction<
+          int Function(int, yaca_key_h, ffi.Pointer<ffi.Char>, int,
+              ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Pointer<ffi.Size>)>();
+
+  /// @brief Verifies a signature using asymmetric public key.
+  /// @since_tizen 3.0
+  /// @remarks The @a message can be NULL but then @a message_len must be 0.
+  /// @param[in] algo Digest algorithm that will be used
+  /// @param[in] pub_key Public key that will be used, algorithm is
+  /// deduced based on key type, supported key types:
+  /// - #YACA_KEY_TYPE_RSA_PUB,
+  /// - #YACA_KEY_TYPE_DSA_PUB,
+  /// - #YACA_KEY_TYPE_EC_PUB
+  /// @param[in] message Message
+  /// @param[in] message_len Length of the message
+  /// @param[in] signature Message signature to be verified
+  /// @param[in] signature_len Length of the signature
+  /// @return #YACA_ERROR_NONE on success,
+  /// negative on error
+  /// @retval #YACA_ERROR_NONE Successful
+  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0
+  /// invalid @a algo or @a pub_key)
+  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
+  /// @retval #YACA_ERROR_INTERNAL Internal error
+  /// @retval #YACA_ERROR_DATA_MISMATCH The verification failed
+  /// @see #yaca_key_type_e
+  /// @see #yaca_digest_algorithm_e
+  /// @see yaca_simple_calculate_signature()
+  int yaca_simple_verify_signature(
+    int algo,
+    yaca_key_h pub_key,
+    ffi.Pointer<ffi.Char> message,
+    int message_len,
+    ffi.Pointer<ffi.Char> signature,
+    int signature_len,
+  ) {
+    return _yaca_simple_verify_signature(
+      algo,
+      pub_key,
+      message,
+      message_len,
+      signature,
+      signature_len,
+    );
+  }
+
+  late final _yaca_simple_verify_signaturePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(
+              ffi.Int32,
+              yaca_key_h,
+              ffi.Pointer<ffi.Char>,
+              ffi.Size,
+              ffi.Pointer<ffi.Char>,
+              ffi.Size)>>('yaca_simple_verify_signature');
+  late final _yaca_simple_verify_signature =
+      _yaca_simple_verify_signaturePtr.asFunction<
+          int Function(int, yaca_key_h, ffi.Pointer<ffi.Char>, int,
+              ffi.Pointer<ffi.Char>, int)>();
+
+  /// @brief Calculates a HMAC of given message using symmetric key.
+  /// @since_tizen 3.0
+  /// @remarks For verification, calculate message HMAC and compare with received MAC using yaca_memcmp().
+  /// @remarks The @a mac should be freed using yaca_free().
+  /// @remarks The @a message can be NULL but then @a message_len must be 0.
+  /// @param[in] algo Digest algorithm that will be used
+  /// @param[in] sym_key Key that will be used, supported key types:
+  /// - #YACA_KEY_TYPE_SYMMETRIC,
+  /// - #YACA_KEY_TYPE_DES
+  /// @param[in] message Message to calculate HMAC from
+  /// @param[in] message_len Length of the message
+  /// @param[out] mac MAC, will be allocated by the library
+  /// @param[out] mac_len Length of the MAC
+  /// @return #YACA_ERROR_NONE on success,
+  /// negative on error
+  /// @retval #YACA_ERROR_NONE Successful
+  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0
+  /// invalid @a algo or @a sym_key)
+  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
+  /// @retval #YACA_ERROR_INTERNAL Internal error
+  /// @see #yaca_key_type_e
+  /// @see #yaca_digest_algorithm_e
+  /// @see yaca_memcmp()
+  /// @see yaca_free()
+  int yaca_simple_calculate_hmac(
+    int algo,
+    yaca_key_h sym_key,
+    ffi.Pointer<ffi.Char> message,
+    int message_len,
+    ffi.Pointer<ffi.Pointer<ffi.Char>> mac,
+    ffi.Pointer<ffi.Size> mac_len,
+  ) {
+    return _yaca_simple_calculate_hmac(
+      algo,
+      sym_key,
+      message,
+      message_len,
+      mac,
+      mac_len,
+    );
+  }
+
+  late final _yaca_simple_calculate_hmacPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(
+              ffi.Int32,
+              yaca_key_h,
+              ffi.Pointer<ffi.Char>,
+              ffi.Size,
+              ffi.Pointer<ffi.Pointer<ffi.Char>>,
+              ffi.Pointer<ffi.Size>)>>('yaca_simple_calculate_hmac');
+  late final _yaca_simple_calculate_hmac =
+      _yaca_simple_calculate_hmacPtr.asFunction<
+          int Function(int, yaca_key_h, ffi.Pointer<ffi.Char>, int,
+              ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Pointer<ffi.Size>)>();
+
+  /// @brief Calculates a CMAC of given message using symmetric key.
+  /// @since_tizen 3.0
+  /// @remarks For verification, calculate message CMAC and compare with received MAC using yaca_memcmp().
+  /// @remarks The @a mac should be freed using yaca_free().
+  /// @remarks The @a message can be NULL but then @a message_len must be 0.
+  /// @param[in] algo Encryption algorithm that will be used
+  /// @param[in] sym_key Key that will be used, supported key types:
+  /// - #YACA_KEY_TYPE_SYMMETRIC,
+  /// - #YACA_KEY_TYPE_DES
+  /// @param[in] message Message to calculate CMAC from
+  /// @param[in] message_len Length of the message
+  /// @param[out] mac MAC, will be allocated by the library
+  /// @param[out] mac_len Length of the MAC
+  /// @return #YACA_ERROR_NONE on success,
+  /// negative on error
+  /// @retval #YACA_ERROR_NONE Successful
+  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0
+  /// invalid @a algo or @a sym_key)
+  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
+  /// @retval #YACA_ERROR_INTERNAL Internal error
+  /// @see #yaca_key_type_e
+  /// @see #yaca_encrypt_algorithm_e
+  /// @see yaca_memcmp()
+  /// @see yaca_free()
+  int yaca_simple_calculate_cmac(
+    int algo,
+    yaca_key_h sym_key,
+    ffi.Pointer<ffi.Char> message,
+    int message_len,
+    ffi.Pointer<ffi.Pointer<ffi.Char>> mac,
+    ffi.Pointer<ffi.Size> mac_len,
+  ) {
+    return _yaca_simple_calculate_cmac(
+      algo,
+      sym_key,
+      message,
+      message_len,
+      mac,
+      mac_len,
+    );
+  }
+
+  late final _yaca_simple_calculate_cmacPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(
+              ffi.Int32,
+              yaca_key_h,
+              ffi.Pointer<ffi.Char>,
+              ffi.Size,
+              ffi.Pointer<ffi.Pointer<ffi.Char>>,
+              ffi.Pointer<ffi.Size>)>>('yaca_simple_calculate_cmac');
+  late final _yaca_simple_calculate_cmac =
+      _yaca_simple_calculate_cmacPtr.asFunction<
+          int Function(int, yaca_key_h, ffi.Pointer<ffi.Char>, int,
+              ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Pointer<ffi.Size>)>();
 
   /// @ingroup CAPI_SOCIAL_CALENDAR_SVC_MODULE
   /// @addtogroup CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE View/Property
@@ -219680,6 +220112,219 @@ typedef service_app_control_cbFunction = ffi.Void Function(
 typedef Dartservice_app_control_cbFunction = void Function(
     app_control_h app_control, ffi.Pointer<ffi.Void> user_data);
 
+/// @deprecated Deprecated since 9.0
+/// @brief Enumeration for values of shortcut response types.
+/// @since_tizen 2.3
+abstract class shortcut_error_e {
+  /// < Successful
+  static const int SHORTCUT_ERROR_NONE = 0;
+
+  /// < Invalid function parameter
+  static const int SHORTCUT_ERROR_INVALID_PARAMETER = -22;
+
+  /// < Out of memory
+  static const int SHORTCUT_ERROR_OUT_OF_MEMORY = -12;
+
+  /// < I/O Error
+  static const int SHORTCUT_ERROR_IO_ERROR = -5;
+
+  /// < Permission denied
+  static const int SHORTCUT_ERROR_PERMISSION_DENIED = -13;
+
+  /// < Not supported
+  static const int SHORTCUT_ERROR_NOT_SUPPORTED = -1073741822;
+
+  /// < Device or resource busy
+  static const int SHORTCUT_ERROR_RESOURCE_BUSY = -16;
+
+  /// < There is no space to add a new shortcut
+  static const int SHORTCUT_ERROR_NO_SPACE = -18219007;
+
+  /// < Shortcut is already added
+  static const int SHORTCUT_ERROR_EXIST = -18219006;
+
+  /// < Unrecoverable error
+  static const int SHORTCUT_ERROR_FAULT = -18219004;
+
+  /// < Not exist shortcut(@b Since: 3.0)
+  static const int SHORTCUT_ERROR_NOT_EXIST = -18219000;
+
+  /// < Connection not established or communication problem
+  static const int SHORTCUT_ERROR_COMM = -18218944;
+}
+
+/// @deprecated Deprecated since 9.0
+/// @brief Enumeration for shortcut types.
+/// @details Basically, two types of shortcuts are defined.
+/// Every homescreen developer should support these types of shortcuts.
+/// Or return, a proper errno to figure out why the application failed to add a shortcut.
+/// #LAUNCH_BY_APP is used for adding a package itself as a shortcut.
+/// #LAUNCH_BY_URI is used for adding a shortcut for "uri" data.
+/// @since_tizen 2.3
+abstract class shortcut_type {
+  /// < Launch the application itself
+  static const int LAUNCH_BY_APP = 0;
+
+  /// < Launch the application with the given data(URI)
+  static const int LAUNCH_BY_URI = 1;
+}
+
+/// @deprecated Deprecated since 9.0
+/// @brief Enumeration for sizes of shortcut widget.
+/// @since_tizen 2.4
+abstract class shortcut_widget_size {
+  /// < Type mask for the normal mode widget , don't use this value for specific size.
+  static const int WIDGET_SIZE_DEFAULT = 268435456;
+
+  /// < 1x1
+  static const int WIDGET_SIZE_1x1 = 268500992;
+
+  /// < 2x1
+  static const int WIDGET_SIZE_2x1 = 268566528;
+
+  /// < 2x2
+  static const int WIDGET_SIZE_2x2 = 268697600;
+
+  /// < 4x1
+  static const int WIDGET_SIZE_4x1 = 268959744;
+
+  /// < 4x2
+  static const int WIDGET_SIZE_4x2 = 269484032;
+
+  /// < 4x3
+  static const int WIDGET_SIZE_4x3 = 270532608;
+
+  /// < 4x4
+  static const int WIDGET_SIZE_4x4 = 272629760;
+
+  /// < 4x5
+  static const int WIDGET_SIZE_4x5 = 285212672;
+
+  /// < 4x6
+  static const int WIDGET_SIZE_4x6 = 301989888;
+
+  /// < Type mask for the easy mode widget, don't use this value for specific size.
+  static const int WIDGET_SIZE_EASY_DEFAULT = 805306368;
+
+  /// < Easy mode 1x1
+  static const int WIDGET_SIZE_EASY_1x1 = 805371904;
+
+  /// < Easy mode 3x2
+  static const int WIDGET_SIZE_EASY_3x1 = 805437440;
+
+  /// < Easy mode 3x3
+  static const int WIDGET_SIZE_EASY_3x3 = 805568512;
+}
+
+/// @deprecated Deprecated since 9.0
+/// @brief Called to receive the result of shortcut_add_to_home().
+/// @since_tizen 2.3
+/// @param[in] ret The result value, it could be @c 0 if it succeeds to add a shortcut,
+/// otherwise it returns an errno
+/// @param[in] user_data The callback data
+/// @return int @c 0 if there is no error,
+/// otherwise errno
+/// @see shortcut_add_to_home()
+typedef result_cb = ffi.Pointer<ffi.NativeFunction<result_cbFunction>>;
+typedef result_cbFunction = ffi.Int Function(
+    ffi.Int ret, ffi.Pointer<ffi.Void> user_data);
+typedef Dartresult_cbFunction = int Function(
+    int ret, ffi.Pointer<ffi.Void> user_data);
+
+/// @deprecated Deprecated since 9.0
+/// @brief Called to receive the result of shortcut_get_list().
+/// @since_tizen 2.4
+/// @param[in] package_name The name of package
+/// @param[in] icon The absolute path of an icon file for this shortcut
+/// @param[in] name The name of the created shortcut icon
+/// @param[in] extra_key The user data. A property of shortcut element in manifest file
+/// @param[in] extra_data The user data. A property of shortcut element in manifest file
+/// @param[in] user_data The callback user data
+/// @return SHORTCUT_ERROR_NONE to continue with the next iteration of the loop, other error values to break out of the loop
+/// @see shortcut_get_list()
+typedef shortcut_list_cb
+    = ffi.Pointer<ffi.NativeFunction<shortcut_list_cbFunction>>;
+typedef shortcut_list_cbFunction = ffi.Int Function(
+    ffi.Pointer<ffi.Char> package_name,
+    ffi.Pointer<ffi.Char> icon,
+    ffi.Pointer<ffi.Char> name,
+    ffi.Pointer<ffi.Char> extra_key,
+    ffi.Pointer<ffi.Char> extra_data,
+    ffi.Pointer<ffi.Void> user_data);
+typedef Dartshortcut_list_cbFunction = int Function(
+    ffi.Pointer<ffi.Char> package_name,
+    ffi.Pointer<ffi.Char> icon,
+    ffi.Pointer<ffi.Char> name,
+    ffi.Pointer<ffi.Char> extra_key,
+    ffi.Pointer<ffi.Char> extra_data,
+    ffi.Pointer<ffi.Void> user_data);
+
+/// @deprecated Deprecated since 9.0
+/// @brief Called to the add_to_home request.
+/// @details The homescreen should define a callback as this type and implement the service code
+/// for adding a new application shortcut.
+/// @since_tizen 2.4
+/// @param[in] package_name The name of package
+/// @param[in] name The name of the created shortcut icon
+/// @param[in] type One of the three defined types
+/// @param[in] content_info The specific information for creating a new shortcut
+/// @param[in] icon The absolute path of an icon file for this shortcut
+/// @param[in] pid The process ID of who request add_to_home
+/// @param[in] period The Update period in seconds
+/// @param[in] allow_duplicate @c 1 if the shortcut can be duplicated,
+/// otherwise a shortcut should exist only once
+/// @param[in] user_data The callback data
+/// @return The result of handling a shortcut creation request\n
+/// This returns @c 0 if the add_to_home request is handled successfully,
+/// otherwise it returns a proper errno
+/// @see shortcut_set_request_cb()
+typedef shortcut_request_cb
+    = ffi.Pointer<ffi.NativeFunction<shortcut_request_cbFunction>>;
+typedef shortcut_request_cbFunction = ffi.Int Function(
+    ffi.Pointer<ffi.Char> package_name,
+    ffi.Pointer<ffi.Char> name,
+    ffi.Int type,
+    ffi.Pointer<ffi.Char> content_info,
+    ffi.Pointer<ffi.Char> icon,
+    ffi.Int pid,
+    ffi.Double period,
+    ffi.Int allow_duplicate,
+    ffi.Pointer<ffi.Void> user_data);
+typedef Dartshortcut_request_cbFunction = int Function(
+    ffi.Pointer<ffi.Char> package_name,
+    ffi.Pointer<ffi.Char> name,
+    int type,
+    ffi.Pointer<ffi.Char> content_info,
+    ffi.Pointer<ffi.Char> icon,
+    int pid,
+    double period,
+    int allow_duplicate,
+    ffi.Pointer<ffi.Void> user_data);
+
+/// @deprecated Deprecated since 9.0
+/// @brief Called to the shortcut_remove_from_home() request.
+/// @since_tizen 3.0
+/// @param[in] package_name The name of package
+/// @param[in] name The name of the created shortcut icon
+/// @param[in] sender_pid The process ID of who request shortcut_remove_from_home()
+/// @param[in] user_data  The user data passed from the callback register function
+/// @return The result of handling a shortcut remove request\n
+/// This returns @c 0 if the remove_from_home request is handled successfully,
+/// otherwise it returns a proper errno.
+/// @see shortcut_set_remove_cb()
+typedef shortcut_remove_cb
+    = ffi.Pointer<ffi.NativeFunction<shortcut_remove_cbFunction>>;
+typedef shortcut_remove_cbFunction = ffi.Int Function(
+    ffi.Pointer<ffi.Char> package_name,
+    ffi.Pointer<ffi.Char> name,
+    ffi.Int sender_pid,
+    ffi.Pointer<ffi.Void> user_data);
+typedef Dartshortcut_remove_cbFunction = int Function(
+    ffi.Pointer<ffi.Char> package_name,
+    ffi.Pointer<ffi.Char> name,
+    int sender_pid,
+    ffi.Pointer<ffi.Void> user_data);
+
 /// @brief The tizen core channel sender handle.
 /// @since_tizen 9.0
 typedef tizen_core_channel_sender_h = ffi.Pointer<ffi.Void>;
@@ -247110,13 +247755,13 @@ abstract class yaca_kdf_e {
   static const int YACA_KDF_X962 = 1;
 }
 
-/// @brief An Initialization Vector or a key generation parameters by the key handle.
-/// @since_tizen 3.0
-typedef yaca_key_h = ffi.Pointer<yaca_key_s>;
-
 /// @brief The context handle.
 /// @since_tizen 3.0
 typedef yaca_context_h = ffi.Pointer<yaca_context_s>;
+
+/// @brief An Initialization Vector or a key generation parameters by the key handle.
+/// @since_tizen 3.0
+typedef yaca_key_h = ffi.Pointer<yaca_key_s>;
 
 /// @brief Enumeration for YACA error values.
 /// @since_tizen 3.0
