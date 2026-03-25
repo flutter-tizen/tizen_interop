@@ -4860,27 +4860,7 @@
 |  |  | vc_unset_server_dialog |
 |  |  | vc_unset_service_state_changed_cb |
 |  |  | vc_unset_state_changed_cb |
-| UIX / Voice control engine | tizenVcEngine | vc_cmd_create |
-|  |  | vc_cmd_destroy |
-|  |  | vc_cmd_get_command |
-|  |  | vc_cmd_get_format |
-|  |  | vc_cmd_get_type |
-|  |  | vc_cmd_get_unfixed_command |
-|  |  | vc_cmd_list_add |
-|  |  | vc_cmd_list_create |
-|  |  | vc_cmd_list_destroy |
-|  |  | vc_cmd_list_first |
-|  |  | vc_cmd_list_foreach_commands |
-|  |  | vc_cmd_list_get_count |
-|  |  | vc_cmd_list_get_current |
-|  |  | vc_cmd_list_last |
-|  |  | vc_cmd_list_next |
-|  |  | vc_cmd_list_prev |
-|  |  | vc_cmd_list_remove |
-|  |  | vc_cmd_set_command |
-|  |  | vc_cmd_set_format |
-|  |  | vc_cmd_set_type |
-|  |  | vce_get_audio_type |
+| UIX / Voice control engine | tizenVcEngine | vce_get_audio_type |
 |  |  | vce_get_command_count |
 |  |  | vce_get_foreach_command |
 |  |  | vce_get_private_data |
@@ -4906,27 +4886,7 @@
 |  |  | vce_unset_get_tts_audio_format_cb |
 |  |  | vce_unset_request_tts_cb |
 |  |  | vce_unset_specific_engine_request_cb |
-| UIX / Voice control manager | tizenVcManager | vc_cmd_create |
-|  |  | vc_cmd_destroy |
-|  |  | vc_cmd_get_command |
-|  |  | vc_cmd_get_format |
-|  |  | vc_cmd_get_type |
-|  |  | vc_cmd_get_unfixed_command |
-|  |  | vc_cmd_list_add |
-|  |  | vc_cmd_list_create |
-|  |  | vc_cmd_list_destroy |
-|  |  | vc_cmd_list_first |
-|  |  | vc_cmd_list_foreach_commands |
-|  |  | vc_cmd_list_get_count |
-|  |  | vc_cmd_list_get_current |
-|  |  | vc_cmd_list_last |
-|  |  | vc_cmd_list_next |
-|  |  | vc_cmd_list_prev |
-|  |  | vc_cmd_list_remove |
-|  |  | vc_cmd_set_command |
-|  |  | vc_cmd_set_format |
-|  |  | vc_cmd_set_type |
-|  |  | vc_mgr_cancel |
+| UIX / Voice control manager | tizenVcManager | vc_mgr_cancel |
 |  |  | vc_mgr_deinitialize |
 |  |  | vc_mgr_disable_command_type |
 |  |  | vc_mgr_do_action |

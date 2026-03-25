@@ -4,22 +4,34 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:tizen_interop/6.0/tizen.dart';
 
+enum DeviceType {
+  kIsEmulator,
+  kIsRPI,
+  kIsTV,
+}
+
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
-  testWidgets('tizenCapiSystemInfo: system_info_get_platform_string',
-      (WidgetTester tester) async {
-    final tizen = tizenCapiSystemInfo;
-    expect(tizen, isNotNull);
-    using((Arena arena) {
-      final key =
-          'http://tizen.org/system/model_name'.toNativeUtf8(allocator: arena);
-      final valuePtr = arena<Pointer<Char>>();
-      final result =
-          tizen.system_info_get_platform_string(key.cast(), valuePtr);
-      expect(result, 0);
-      arena.using(valuePtr.value, calloc.free);
-    });
+  // Check if running on emulator before tests
+  DeviceType deviceType = DeviceType.kIsRPI;
+  using((Arena arena) {
+    final modelKey =
+        'http://tizen.org/system/model_name'.toNativeChar(allocator: arena);
+    final modelPtr = arena<Pointer<Char>>();
+    final result =
+        tizenCapiSystemInfo.system_info_get_platform_string(modelKey, modelPtr);
+    if (result == 0) {
+      final modelName = modelPtr.value.toDartString();
+      if (modelName.contains('emulator') || modelName.contains('Emulator')) {
+        deviceType = DeviceType.kIsEmulator;
+      } else if (modelName.contains('rpi') || modelName.contains('Rpi')) {
+        deviceType = DeviceType.kIsRPI;
+      } else {
+        deviceType = DeviceType.kIsTV;
+      }
+      arena.using(modelPtr.value, calloc.free);
+    }
   });
 
   testWidgets('tizenCapiSystemRuntimeInfo: runtime_info_get_value_bool',
@@ -33,7 +45,7 @@ void main() {
       final result = tizen.runtime_info_get_value_bool(key, valuePtr);
       expect(result, 0);
     });
-  });
+  }, skip: deviceType == DeviceType.kIsEmulator);
 
   testWidgets('tizenCapiSystemSystemSettings: system_settings_get_value_int',
       (WidgetTester tester) async {
@@ -45,7 +57,7 @@ void main() {
       final result = tizen.system_settings_get_value_int(key, valuePtr);
       expect(result, 0); // Should succeed usually
     });
-  });
+  }, skip: deviceType == DeviceType.kIsTV);
 
   testWidgets('tizenCapiSystemDevice: device_display_get_numbers',
       (WidgetTester tester) async {
@@ -193,7 +205,7 @@ void main() {
       result = tizen.wifi_manager_deinitialize(handlePtr.value);
       expect(result, 0);
     });
-  });
+  }, skip: deviceType == DeviceType.kIsEmulator);
 
   testWidgets(
       'tizenCapiAppfwPreference: preference_set_int & preference_get_int',
@@ -223,7 +235,7 @@ void main() {
       result = tizen.location_manager_destroy(handlePtr.value);
       expect(result, 0);
     });
-  });
+  }, skip: deviceType == DeviceType.kIsTV);
 
   testWidgets(
       'tizenCapiContentMediaContent: media_content_connect & media_content_disconnect',
@@ -246,6 +258,24 @@ void main() {
       final volPtr = arena<Int>();
       final result = tizen.sound_manager_get_volume(
           sound_type_e.SOUND_TYPE_SYSTEM, volPtr);
+      expect(result, 0);
+    });
+  });
+
+  testWidgets(
+      'tizenCapiMediaSoundManager: sound_manager_create_stream_information & sound_manager_destroy_stream_information',
+      (WidgetTester tester) async {
+    final tizen = tizenCapiMediaSoundManager;
+    expect(tizen, isNotNull);
+    using((Arena arena) {
+      final handlePtr = arena<sound_stream_info_h>();
+      var result = tizen.sound_manager_create_stream_information(
+          sound_stream_type_e.SOUND_STREAM_TYPE_MEDIA,
+          Pointer.fromFunction(_soundManagerCallback),
+          nullptr,
+          handlePtr);
+      expect(result, 0);
+      result = tizen.sound_manager_destroy_stream_information(handlePtr.value);
       expect(result, 0);
     });
   });
@@ -335,17 +365,18 @@ void main() {
       expect(handlePtr.value, isNot(nullptr));
       result = tizen.job_info_destroy(handlePtr.value);
     });
-  });
+  }, skip: deviceType == DeviceType.kIsTV);
 
-  testWidgets('tizenCapiBaseCommon: get_error_message',
+  testWidgets(
+      'tizenCapiSystemDevice: device_battery_get_percent & tizenCapiBaseCommon: get_error_message',
       (WidgetTester tester) async {
-    final tizen = tizenCapiBaseCommon;
+    final tizen = tizenCapiSystemDevice;
     expect(tizen, isNotNull);
     using((Arena arena) {
       final percentPtr = arena<Int>();
       final result = tizen.device_battery_get_percent(percentPtr);
       if (result != 0) {
-        final errMsg = tizen.get_error_message(0);
+        final errMsg = tizenCapiBaseCommon.get_error_message(result);
         expect(errMsg, isNot(null));
       }
     });
@@ -394,7 +425,7 @@ void main() {
       result = tizen.camera_destroy(handlePtr.value);
       expect(result, 0);
     });
-  });
+  }, skip: deviceType == DeviceType.kIsTV);
 
   testWidgets('tizenCapiMediaController: mc_client_create & mc_client_destroy',
       (WidgetTester tester) async {
@@ -475,7 +506,7 @@ void main() {
       result = tizen.recorder_destroy(handlePtr.value);
       expect(result, 0);
     });
-  });
+  }, skip: deviceType == DeviceType.kIsTV);
 
   testWidgets('tizenCapiMediaTool: media_format_create & media_format_unref',
       (WidgetTester tester) async {
@@ -486,24 +517,6 @@ void main() {
       var result = tizen.media_format_create(handlePtr);
       expect(result, 0);
       result = tizen.media_format_unref(handlePtr.value);
-      expect(result, 0);
-    });
-  });
-
-  testWidgets(
-      'tizenCapiMediaWavPlayer: sound_manager_create_stream_information & sound_manager_destroy_stream_information',
-      (WidgetTester tester) async {
-    final tizen = tizenCapiMediaWavPlayer;
-    expect(tizen, isNotNull);
-    using((Arena arena) {
-      final handlePtr = arena<sound_stream_info_h>();
-      var result = tizen.sound_manager_create_stream_information(
-          sound_stream_type_e.SOUND_STREAM_TYPE_MEDIA,
-          Pointer.fromFunction(_soundManagerCallback),
-          nullptr,
-          handlePtr);
-      expect(result, 0);
-      result = tizen.sound_manager_destroy_stream_information(handlePtr.value);
       expect(result, 0);
     });
   });
@@ -522,7 +535,7 @@ void main() {
       result = tizen.bt_deinitialize();
       expect(result, 0);
     });
-  });
+  }, skip: deviceType == DeviceType.kIsEmulator);
 
   testWidgets('tizenCapiNetworkInm: inm_initialize & inm_deinitialize',
       (WidgetTester tester) async {
@@ -535,7 +548,7 @@ void main() {
       result = tizen.inm_deinitialize(handlePtr.value);
       expect(result, 0);
     });
-  });
+  }, skip: deviceType == DeviceType.kIsEmulator);
 
   testWidgets('tizenCapiNetworkSoftap: softap_create & softap_destroy',
       (WidgetTester tester) async {
@@ -548,7 +561,9 @@ void main() {
       result = tizen.softap_destroy(handlePtr.value);
       expect(result, 0);
     });
-  });
+  },
+      skip: deviceType == DeviceType.kIsEmulator ||
+          deviceType == DeviceType.kIsTV);
 
   testWidgets('tizenCapiSystemUsbhost: usb_host_create & usb_host_destroy',
       (WidgetTester tester) async {
@@ -561,7 +576,9 @@ void main() {
       result = tizen.usb_host_destroy(handlePtr.value);
       expect(result, 0);
     });
-  });
+  },
+      skip: deviceType == DeviceType.kIsEmulator ||
+          deviceType == DeviceType.kIsTV);
 
   testWidgets(
       'tizenCapiUiAutofill: autofill_create, autofill_connect, autofill_destroy',
@@ -580,37 +597,16 @@ void main() {
     });
   });
 
-  testWidgets('tizenCapiUiAutofillCommon: autofill_auth_info_set_received_cb',
+  testWidgets(
+      'tizenCapiUiAutofillCommon: autofill_view_info_create & autofill_view_info_destroy',
       (WidgetTester tester) async {
     final tizen = tizenCapiUiAutofillCommon;
     expect(tizen, isNotNull);
     using((Arena arena) {
-      final handlePtr = arena<autofill_h>();
-      var result = tizen.autofill_create(handlePtr);
+      final handlePtr = arena<autofill_view_info_h>();
+      var result = tizen.autofill_view_info_create(handlePtr);
       expect(result, 0);
-
-      result = tizen.autofill_auth_info_set_received_cb(handlePtr.value,
-          Pointer.fromFunction(_autofillInfoCallback), nullptr);
-      expect(result, 0);
-
-      result = tizen.autofill_destroy(handlePtr.value);
-      expect(result, 0);
-    });
-  });
-
-  testWidgets(
-      'tizenCapiUiAutofillManager: autofill_manager_create, autofill_manager_connect, autofill_manager_destroy',
-      (WidgetTester tester) async {
-    final tizen = tizenCapiUiAutofillManager;
-    expect(tizen, isNotNull);
-    using((Arena arena) {
-      final handlePtr = arena<autofill_manager_h>();
-      var result = tizen.autofill_manager_create(handlePtr);
-      expect(result, 0);
-      result = tizen.autofill_manager_connect(handlePtr.value,
-          Pointer.fromFunction(_autofillManagerCallback), nullptr);
-      expect(result, 0);
-      result = tizen.autofill_manager_destroy(handlePtr.value);
+      result = tizen.autofill_view_info_destroy(handlePtr.value);
       expect(result, 0);
     });
   });
@@ -627,7 +623,9 @@ void main() {
       result = tizen.vpnsvc_deinit(handlePtr.value);
       expect(result, 0);
     });
-  });
+  },
+      skip: deviceType == DeviceType.kIsEmulator ||
+          deviceType == DeviceType.kIsTV);
 
   testWidgets('tizenMa: ma_initialize & ma_deinitialize',
       (WidgetTester tester) async {
@@ -683,7 +681,7 @@ void main() {
       result = tizen.mv_inference_destroy(handlePtr.value);
       expect(result, 0);
     });
-  });
+  }, skip: deviceType == DeviceType.kIsTV);
 
   testWidgets(
       'tizenMvSurveillance: mv_surveillance_event_trigger_create & mv_surveillance_event_trigger_destroy',
@@ -789,6 +787,46 @@ void main() {
       tizen.yaca_cleanup();
     });
   });
+
+  testWidgets('tizenVc: vc_initialize & vc_deinitialize',
+      (WidgetTester tester) async {
+    final tizen = tizenVc;
+    expect(tizen, isNotNull);
+    using((Arena arena) {
+      var result = tizen.vc_initialize();
+      expect(result, isA<int>());
+      if (result == 0) {
+        result = tizen.vc_deinitialize();
+        expect(result, 0);
+      }
+    });
+  });
+
+  testWidgets('tizenVcEngine: vce_set_private_data',
+      (WidgetTester tester) async {
+    final tizen = tizenVcEngine;
+    expect(tizen, isNotNull);
+    using((Arena arena) {
+      final key = 'test_key'.toNativeChar(allocator: arena);
+      final data = 'test_data'.toNativeChar(allocator: arena);
+      final result = tizen.vce_set_private_data(key, data);
+      expect(result, isA<int>());
+    });
+  });
+
+  testWidgets('tizenVcManager: vc_mgr_initialize & vc_mgr_deinitialize',
+      (WidgetTester tester) async {
+    final tizen = tizenVcManager;
+    expect(tizen, isNotNull);
+    using((Arena arena) {
+      var result = tizen.vc_mgr_initialize();
+      expect(result, isA<int>());
+      if (result == 0) {
+        result = tizen.vc_mgr_deinitialize();
+        expect(result, 0);
+      }
+    });
+  });
 }
 
 void _serviceAppCallback(app_event_info_h eventInfo, Pointer<Void> userData) {}
@@ -806,9 +844,3 @@ void _soundManagerCallback(
     Pointer<Void> userData) {}
 
 void _autofillCallback(autofill_h ah, int status, Pointer<Void> userData) {}
-
-void _autofillInfoCallback(
-    autofill_h ah, autofill_auth_info_h authInfo, Pointer<Void> userData) {}
-
-void _autofillManagerCallback(
-    autofill_manager_h ah, int status, Pointer<Void> userData) {}

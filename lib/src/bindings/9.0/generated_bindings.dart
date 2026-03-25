@@ -34529,6 +34529,438 @@ class Tizen90Native {
   late final _service_app_exit =
       _service_app_exitPtr.asFunction<void Function()>();
 
+  /// @deprecated Deprecated since 9.0
+  /// @brief Adds a shortcut to home, asynchronously.
+  /// @since_tizen 2.3
+  /// @privlevel public
+  /// @privilege %http://tizen.org/privilege/shortcut
+  /// @remarks If a homescreen does not support this feature, you will get a proper error code.\n
+  /// Application must check the return value of this function.\n
+  /// Application must check the return status from the callback function.\n
+  /// Application should set the callback function to get the result of this request.
+  /// @param[in] name The name of the created shortcut icon
+  /// @param[in] type The type of shortcuts
+  /// @param[in] uri The specific information for delivering to the viewer for creating a shortcut
+  /// @param[in] icon The absolute path of an icon file
+  /// @param[in] allow_duplicate @c 1 if it accepts the duplicated shortcut,
+  /// otherwise @c 0
+  /// @param[in] cb The address of the callback function that is called when the result comes back from the viewer
+  /// @param[in] data The callback data that is used in the callback function
+  /// @return @c 0 on success,
+  /// otherwise a negative error value
+  /// @retval #SHORTCUT_ERROR_NONE Successful
+  /// @retval #SHORTCUT_ERROR_NOT_SUPPORTED Not supported
+  /// @retval #SHORTCUT_ERROR_PERMISSION_DENIED Permission denied
+  /// @retval #SHORTCUT_ERROR_INVALID_PARAMETER Invalid function parameter
+  /// @retval #SHORTCUT_ERROR_OUT_OF_MEMORY Out of memory
+  /// @retval #SHORTCUT_ERROR_IO_ERROR I/O Error
+  /// @retval #SHORTCUT_ERROR_RESOURCE_BUSY Device or resource busy
+  /// @retval #SHORTCUT_ERROR_NO_SPACE There is no space to add a new shortcut
+  /// @retval #SHORTCUT_ERROR_EXIST Shortcut is already exist
+  /// @retval #SHORTCUT_ERROR_FAULT Unrecoverable error
+  /// @retval #SHORTCUT_ERROR_COMM Connection not established or communication problem
+  /// @pre You have to prepare the callback function.
+  /// @post You have to check the return status from the callback function which is passed by the argument.
+  /// @see result_cb()
+  /// @par Example
+  /// @code
+  /// #include <stdio.h>
+  /// #include <shortcut_manager.h>
+  /// static int _result_cb(int ret, int pid, void *data)
+  /// {
+  /// if (ret < 0)
+  /// dlog_print("Failed to add a shortcut: %s\n", perror(ret));
+  ///
+  /// dlog_print("Processed by the %d\n", pid);
+  /// return 0;
+  /// }
+  ///
+  /// static int app_create(void *data)
+  /// {
+  /// char* data_path = app_get_data_path();
+  /// int path_len = strlen(data_path)+10;
+  /// char * path = malloc(path_len);
+  /// memset(path, 0, path_len);
+  /// strncat(path, data_path, path_len);
+  /// strncat(path, "Friend.jpg", path_len);
+  ///
+  /// shortcut_add_to_home("With friends", LAUNCH_BY_URI, "gallery:0000-0000", path, 0, _result_cb, NULL);
+  /// free(path);
+  ///
+  /// return 0;
+  /// }
+  /// @endcode
+  int shortcut_add_to_home(
+    ffi.Pointer<ffi.Char> name,
+    int type,
+    ffi.Pointer<ffi.Char> uri,
+    ffi.Pointer<ffi.Char> icon,
+    int allow_duplicate,
+    result_cb cb,
+    ffi.Pointer<ffi.Void> data,
+  ) {
+    return _shortcut_add_to_home(
+      name,
+      type,
+      uri,
+      icon,
+      allow_duplicate,
+      cb,
+      data,
+    );
+  }
+
+  late final _shortcut_add_to_homePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(
+              ffi.Pointer<ffi.Char>,
+              ffi.Int32,
+              ffi.Pointer<ffi.Char>,
+              ffi.Pointer<ffi.Char>,
+              ffi.Int,
+              result_cb,
+              ffi.Pointer<ffi.Void>)>>('shortcut_add_to_home');
+  late final _shortcut_add_to_home = _shortcut_add_to_homePtr.asFunction<
+      int Function(ffi.Pointer<ffi.Char>, int, ffi.Pointer<ffi.Char>,
+          ffi.Pointer<ffi.Char>, int, result_cb, ffi.Pointer<ffi.Void>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Adds a widget to home, asynchronously.
+  /// @since_tizen 2.4
+  /// @privlevel public
+  /// @privilege %http://tizen.org/privilege/shortcut
+  /// @remarks If a homescreen does not support this feature, you will get a proper error code.\n
+  /// Application must check the return value of this function.\n
+  /// Application must check the return status from the callback function.\n
+  /// Application should set the callback function to get the result of this request.
+  /// @param[in] name The name of the created widget which will be shown when the widget is not prepared
+  /// @param[in] size The size of widget
+  /// @param[in] widget_id Widget ID
+  /// @param[in] icon The absolute path of an icon file which will be shown when the widget is not prepared
+  /// @param[in] period The Update period in seconds
+  /// @param[in] allow_duplicate @c 1 if it accepts the duplicated widget,
+  /// otherwise @c 0
+  /// @param[in] cb The address of the callback function that is called when the result comes back from the viewer
+  /// @param[in] data The callback data that is used in the callback function
+  /// @return @c 0 on success,
+  /// otherwise a negative error value
+  /// @retval #SHORTCUT_ERROR_NONE Successful
+  /// @retval #SHORTCUT_ERROR_NOT_SUPPORTED Not supported
+  /// @retval #SHORTCUT_ERROR_PERMISSION_DENIED Permission denied
+  /// @retval #SHORTCUT_ERROR_INVALID_PARAMETER Invalid function parameter
+  /// @retval #SHORTCUT_ERROR_OUT_OF_MEMORY Out of memory
+  /// @retval #SHORTCUT_ERROR_IO_ERROR I/O Error
+  /// @retval #SHORTCUT_ERROR_FAULT Unrecoverable error
+  /// @retval #SHORTCUT_ERROR_COMM Connection not established or communication problem
+  /// @pre You have to prepare the callback function.
+  /// @post You have to check the return status from the callback function which is passed by the argument.
+  /// @see result_cb()
+  /// @see shortcut_widget_size_e
+  /// @par Example
+  /// @code
+  /// #include <stdio.h>
+  /// #include <shortcut.h>
+  /// #include <storage.h>
+  ///
+  /// #define TIZEN_PATH_MAX 1024
+  /// static int _result_cb(int ret, int pid, void *data)
+  /// {
+  /// if (ret < 0)
+  /// dlog_print("Failed to add a widget: %s\n", perror(ret));
+  ///
+  /// dlog_print("Processed by the %d\n", pid);
+  ///
+  /// return 0;
+  /// }
+  ///
+  /// static int app_create(void *data)
+  /// {
+  /// char *image_root = NULL;
+  /// char image_path[TIZEN_PATH_MAX] = {0,};
+  ///
+  /// storage_get_directory(STORAGE_TYPE_INTERNAL, STORAGE_DIRECTORY_IMAGES, &image_root);
+  /// snprintf(image_path, TIZEN_PATH_MAX, "%s/alter_icon.png", image_root);
+  ///
+  /// shortcut_add_to_home_widget("alter_name", WIDGET_SIZE_1x1, "org.tizen.testwidget",
+  /// image_path, -1.0f, 0, _result_cb, NULL);
+  ///
+  /// return 0;
+  /// }
+  /// @endcode
+  int shortcut_add_to_home_widget(
+    ffi.Pointer<ffi.Char> name,
+    int size,
+    ffi.Pointer<ffi.Char> widget_id,
+    ffi.Pointer<ffi.Char> icon,
+    double period,
+    int allow_duplicate,
+    result_cb cb,
+    ffi.Pointer<ffi.Void> data,
+  ) {
+    return _shortcut_add_to_home_widget(
+      name,
+      size,
+      widget_id,
+      icon,
+      period,
+      allow_duplicate,
+      cb,
+      data,
+    );
+  }
+
+  late final _shortcut_add_to_home_widgetPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(
+              ffi.Pointer<ffi.Char>,
+              ffi.Int32,
+              ffi.Pointer<ffi.Char>,
+              ffi.Pointer<ffi.Char>,
+              ffi.Double,
+              ffi.Int,
+              result_cb,
+              ffi.Pointer<ffi.Void>)>>('shortcut_add_to_home_widget');
+  late final _shortcut_add_to_home_widget =
+      _shortcut_add_to_home_widgetPtr.asFunction<
+          int Function(
+              ffi.Pointer<ffi.Char>,
+              int,
+              ffi.Pointer<ffi.Char>,
+              ffi.Pointer<ffi.Char>,
+              double,
+              int,
+              result_cb,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Removes a shortcut from home, asynchronously.
+  /// @details If the callback function registered for a widget, the shortcut deletion is possible.
+  /// @since_tizen 3.0
+  /// @privlevel public
+  /// @privilege %http://tizen.org/privilege/shortcut
+  /// @param[in] name The name of the created shortcut icon
+  /// @param[in] cb The address of the callback function that is called when the result comes back from the viewer
+  /// @param[in] user_data The callback data that is used in the callback function
+  /// @return 0 on success, otherwise a negative error value
+  /// @retval #SHORTCUT_ERROR_NONE Successful
+  /// @retval #SHORTCUT_ERROR_NOT_SUPPORTED Not supported
+  /// @retval #SHORTCUT_ERROR_PERMISSION_DENIED Permission denied
+  /// @retval #SHORTCUT_ERROR_INVALID_PARAMETER Invalid function parameter
+  /// @retval #SHORTCUT_ERROR_OUT_OF_MEMORY Out of memory
+  /// @retval #SHORTCUT_ERROR_IO_ERROR I/O Error
+  /// @retval #SHORTCUT_ERROR_COMM Connection not established or communication problem
+  /// @pre You have to prepare the callback function.
+  /// @post You have to check the return status from the callback function which is passed by the argument.
+  /// @see result_cb()
+  /// @par Example
+  /// @code
+  /// #include <shortcut_manager.h>
+  ///
+  /// int _result_cb(int ret, void *data)
+  /// {
+  /// if (ret < 0)
+  /// dlog_print("Failed to remove a shortcut: %d\n", ret);
+  ///
+  /// return 0;
+  /// }
+  ///
+  /// {
+  /// int result;
+  ///
+  /// result = shortcut_remove_from_home("shortcut_name", _result_cb, NULL);
+  /// if (result != SHORTCUT_ERROR_NONE) {
+  /// dlog_print("Failed to remove a shortcut: %d\n", result);
+  /// return result;
+  /// }
+  /// }
+  ///
+  /// @endcode
+  int shortcut_remove_from_home(
+    ffi.Pointer<ffi.Char> name,
+    result_cb cb,
+    ffi.Pointer<ffi.Void> user_data,
+  ) {
+    return _shortcut_remove_from_home(
+      name,
+      cb,
+      user_data,
+    );
+  }
+
+  late final _shortcut_remove_from_homePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(ffi.Pointer<ffi.Char>, result_cb,
+              ffi.Pointer<ffi.Void>)>>('shortcut_remove_from_home');
+  late final _shortcut_remove_from_home =
+      _shortcut_remove_from_homePtr.asFunction<
+          int Function(
+              ffi.Pointer<ffi.Char>, result_cb, ffi.Pointer<ffi.Void>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Gets the preset list of shortcut template from the installed package, synchronously.
+  /// @since_tizen 2.4
+  /// @privlevel public
+  /// @privilege %http://tizen.org/privilege/shortcut
+  /// @remarks If a homescreen does not support this feature, you will get a proper error code.\n
+  /// Application must check the return value of this function.\n
+  /// Application must check the return status from the callback function.\n
+  /// Application should set the callback function to get the result of this request.
+  /// @param[in] package_name The package name
+  /// @param[in] list_cb The callback function to get the shortcut item information
+  /// @param[in] data The callback data that is used in the callback function
+  /// @return @c N Number of items (call count of the callback function),
+  /// otherwise a negative error value
+  /// @retval #SHORTCUT_ERROR_NOT_SUPPORTED Not supported
+  /// @retval #SHORTCUT_ERROR_PERMISSION_DENIED Permission denied
+  /// @retval #SHORTCUT_ERROR_INVALID_PARAMETER Invalid function parameter
+  /// @retval #SHORTCUT_ERROR_OUT_OF_MEMORY Out of memory
+  /// @retval #SHORTCUT_ERROR_IO_ERROR I/O Error
+  /// @retval #SHORTCUT_ERROR_FAULT Unrecoverable error
+  /// @retval #SHORTCUT_ERROR_COMM Connection not established or communication problem
+  /// @pre You have to prepare the callback function.
+  /// @post You have to check the return status from the callback function which is passed by the argument.
+  int shortcut_get_list(
+    ffi.Pointer<ffi.Char> package_name,
+    shortcut_list_cb list_cb,
+    ffi.Pointer<ffi.Void> data,
+  ) {
+    return _shortcut_get_list(
+      package_name,
+      list_cb,
+      data,
+    );
+  }
+
+  late final _shortcut_get_listPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(ffi.Pointer<ffi.Char>, shortcut_list_cb,
+              ffi.Pointer<ffi.Void>)>>('shortcut_get_list');
+  late final _shortcut_get_list = _shortcut_get_listPtr.asFunction<
+      int Function(
+          ffi.Pointer<ffi.Char>, shortcut_list_cb, ffi.Pointer<ffi.Void>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Sets a callback function to listen requests from applications.
+  /// @since_tizen 2.4
+  /// @privlevel public
+  /// @privilege %http://tizen.org/privilege/shortcut
+  /// @remarks Should be used in the homescreen.\n
+  /// Should check the return value of this function.
+  /// Prospective Clients: Homescreen.
+  /// @param[in] request_cb The callback function pointer that is invoked when add_to_home is requested
+  /// @param[in] data The callback data to deliver to the callback function
+  /// @return @c 0 on success, otherwise a negative error value
+  /// @retval #SHORTCUT_ERROR_NONE Successful
+  /// @retval #SHORTCUT_ERROR_NOT_SUPPORTED Not supported
+  /// @retval #SHORTCUT_ERROR_PERMISSION_DENIED Permission denied
+  /// @retval #SHORTCUT_ERROR_INVALID_PARAMETER Invalid function parameter
+  /// @retval #SHORTCUT_ERROR_OUT_OF_MEMORY Out of memory
+  /// @retval #SHORTCUT_ERROR_IO_ERROR I/O Error
+  /// @retval #SHORTCUT_ERROR_COMM Connection not established or communication problem
+  /// @pre You have to prepare a callback function.
+  /// @post If a request is sent from the application, the registered callback will be invoked.
+  /// @see shortcut_request_cb()
+  /// @see shortcut_error_e
+  int shortcut_set_request_cb(
+    shortcut_request_cb request_cb,
+    ffi.Pointer<ffi.Void> data,
+  ) {
+    return _shortcut_set_request_cb(
+      request_cb,
+      data,
+    );
+  }
+
+  late final _shortcut_set_request_cbPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(shortcut_request_cb,
+              ffi.Pointer<ffi.Void>)>>('shortcut_set_request_cb');
+  late final _shortcut_set_request_cb = _shortcut_set_request_cbPtr
+      .asFunction<int Function(shortcut_request_cb, ffi.Pointer<ffi.Void>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Unsets a callback for the shortcut request.
+  /// @since_tizen 3.0
+  /// @privlevel public
+  /// @privilege %http://tizen.org/privilege/shortcut
+  /// @remarks The specific error code can be obtained using the gat_last_result() method. Error codes are described in Exception section.
+  /// @return None
+  /// @exception #SHORTCUT_ERROR_NONE Successful
+  /// @exception #SHORTCUT_ERROR_NOT_SUPPORTED Not supported
+  /// @exception #SHORTCUT_ERROR_PERMISSION_DENIED Permission denied
+  /// @see shortcut_set_request_cb()
+  /// @see get_last_result()
+  void shortcut_unset_request_cb() {
+    return _shortcut_unset_request_cb();
+  }
+
+  late final _shortcut_unset_request_cbPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function()>>(
+          'shortcut_unset_request_cb');
+  late final _shortcut_unset_request_cb =
+      _shortcut_unset_request_cbPtr.asFunction<void Function()>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Sets the callback function to listen the remove requests from applications.
+  /// @since_tizen 3.0
+  /// @privlevel public
+  /// @privilege %http://tizen.org/privilege/shortcut
+  /// @remarks Should be used in the homescreen.\n
+  /// Should check the return value of this function.
+  /// Prospective Clients: Homescreen.
+  /// @param[in] remove_cb The callback function pointer that is invoked when remove_from_home is requested
+  /// @param[in] data The callback data to deliver to the callback function
+  /// @return 0 on success, otherwise a negative error value
+  /// @retval #SHORTCUT_ERROR_NONE Successful
+  /// @retval #SHORTCUT_ERROR_NOT_SUPPORTED Not supported
+  /// @retval #SHORTCUT_ERROR_PERMISSION_DENIED Permission denied
+  /// @retval #SHORTCUT_ERROR_INVALID_PARAMETER Invalid function parameter
+  /// @retval #SHORTCUT_ERROR_OUT_OF_MEMORY Out of memory
+  /// @retval #SHORTCUT_ERROR_IO_ERROR I/O Error
+  /// @retval #SHORTCUT_ERROR_COMM Connection not established or communication problem
+  /// @pre You have to prepare a callback function.
+  /// @post If a request is sent from the application, the registered callback will be invoked.
+  /// @see shortcut_remove_cb()
+  /// @see shortcut_error_e
+  int shortcut_set_remove_cb(
+    shortcut_remove_cb remove_cb,
+    ffi.Pointer<ffi.Void> data,
+  ) {
+    return _shortcut_set_remove_cb(
+      remove_cb,
+      data,
+    );
+  }
+
+  late final _shortcut_set_remove_cbPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(shortcut_remove_cb,
+              ffi.Pointer<ffi.Void>)>>('shortcut_set_remove_cb');
+  late final _shortcut_set_remove_cb = _shortcut_set_remove_cbPtr
+      .asFunction<int Function(shortcut_remove_cb, ffi.Pointer<ffi.Void>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Unsets a callback for the shortcut remove.
+  /// @since_tizen 3.0
+  /// @privlevel public
+  /// @privilege %http://tizen.org/privilege/shortcut
+  /// @remarks The specific error code can be obtained using the gat_last_result() method. Error codes are described in Exception section.
+  /// @return None
+  /// @exception #SHORTCUT_ERROR_NONE Successful
+  /// @exception #SHORTCUT_ERROR_NOT_SUPPORTED Not supported
+  /// @exception #SHORTCUT_ERROR_PERMISSION_DENIED Permission denied
+  /// @see shortcut_set_remove_cb()
+  /// @see get_last_result()
+  void shortcut_unset_remove_cb() {
+    return _shortcut_unset_remove_cb();
+  }
+
+  late final _shortcut_unset_remove_cbPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function()>>(
+          'shortcut_unset_remove_cb');
+  late final _shortcut_unset_remove_cb =
+      _shortcut_unset_remove_cbPtr.asFunction<void Function()>();
+
   /// @brief Makes a pair of channel sender and receiver.
   /// @since_tizen 9.0
   /// @remarks The @a sender should be released using tizen_core_channel_sender_destroy().
@@ -117192,1629 +117624,6 @@ class Tizen90Native {
   late final _dnssd_destroy_remote_service =
       _dnssd_destroy_remote_servicePtr.asFunction<int Function(int)>();
 
-  /// @deprecated Deprecated since 9.0
-  /// @brief Initializes the HTTP module.
-  /// @since_tizen 3.0
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_OPERATION_FAILED Operation failed
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  /// @see http_deinit()
-  int http_init() {
-    return _http_init();
-  }
-
-  late final _http_initPtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function()>>('http_init');
-  late final _http_init = _http_initPtr.asFunction<int Function()>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Deinitializes the HTTP module.
-  /// @since_tizen 3.0
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_OPERATION_FAILED Operation failed
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  /// @see http_init()
-  int http_deinit() {
-    return _http_deinit();
-  }
-
-  late final _http_deinitPtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function()>>('http_deinit');
-  late final _http_deinit = _http_deinitPtr.asFunction<int Function()>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Creates the HTTP session handle.
-  /// @since_tizen 3.0
-  /// @remarks The @a http_session should be released using http_session_destroy().
-  /// Opened transactions can't be submitted after destroying session handle.
-  /// @param[in] mode The HTTP session mode
-  /// @param[out] http_session The HTTP session handle
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  /// @see http_session_destroy()
-  int http_session_create(
-    int mode,
-    ffi.Pointer<http_session_h> http_session,
-  ) {
-    return _http_session_create(
-      mode,
-      http_session,
-    );
-  }
-
-  late final _http_session_createPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Int32, ffi.Pointer<http_session_h>)>>('http_session_create');
-  late final _http_session_create = _http_session_createPtr
-      .asFunction<int Function(int, ffi.Pointer<http_session_h>)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Destroys the HTTP session handle.
-  /// @since_tizen 3.0
-  /// @remarks The @a http_session should be set to NULL after using it
-  /// @param[in] http_session The HTTP session handle
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  /// @see http_session_create()
-  int http_session_destroy(
-    http_session_h http_session,
-  ) {
-    return _http_session_destroy(
-      http_session,
-    );
-  }
-
-  late final _http_session_destroyPtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function(http_session_h)>>(
-          'http_session_destroy');
-  late final _http_session_destroy =
-      _http_session_destroyPtr.asFunction<int Function(http_session_h)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Opens HTTP transaction from the HTTP Session.
-  /// @since_tizen 3.0
-  /// @remarks The @a http_transaction should be released using http_transaction_destroy().
-  /// @param[in] http_session The HTTP session handle
-  /// @param[in] method The HTTP request method
-  /// @param[out] http_transaction The HTTP transaction handle
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_session_open_transaction(
-    http_session_h http_session,
-    int method,
-    ffi.Pointer<http_transaction_h> http_transaction,
-  ) {
-    return _http_session_open_transaction(
-      http_session,
-      method,
-      http_transaction,
-    );
-  }
-
-  late final _http_session_open_transactionPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int Function(
-                  http_session_h, ffi.Int32, ffi.Pointer<http_transaction_h>)>>(
-      'http_session_open_transaction');
-  late final _http_session_open_transaction =
-      _http_session_open_transactionPtr.asFunction<
-          int Function(http_session_h, int, ffi.Pointer<http_transaction_h>)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Sets the value to redirect the HTTP request automatically.
-  /// @since_tizen 3.0
-  /// @param[in] http_session The HTTP session handle
-  /// @param[in] auto_redirection The value which determines whether allow redirection or not
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  /// @see http_session_get_auto_redirection()
-  int http_session_set_auto_redirection(
-    http_session_h http_session,
-    bool auto_redirection,
-  ) {
-    return _http_session_set_auto_redirection(
-      http_session,
-      auto_redirection,
-    );
-  }
-
-  late final _http_session_set_auto_redirectionPtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function(http_session_h, ffi.Bool)>>(
-          'http_session_set_auto_redirection');
-  late final _http_session_set_auto_redirection =
-      _http_session_set_auto_redirectionPtr
-          .asFunction<int Function(http_session_h, bool)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Gets the auto redirection for the HTTP request.
-  /// @since_tizen 3.0
-  /// @param[in] http_session The HTTP session handle
-  /// @param[out] auto_redirect The value of auto redirect
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  /// @see http_session_set_auto_redirection()
-  int http_session_get_auto_redirection(
-    http_session_h http_session,
-    ffi.Pointer<ffi.Bool> auto_redirect,
-  ) {
-    return _http_session_get_auto_redirection(
-      http_session,
-      auto_redirect,
-    );
-  }
-
-  late final _http_session_get_auto_redirectionPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(http_session_h,
-              ffi.Pointer<ffi.Bool>)>>('http_session_get_auto_redirection');
-  late final _http_session_get_auto_redirection =
-      _http_session_get_auto_redirectionPtr
-          .asFunction<int Function(http_session_h, ffi.Pointer<ffi.Bool>)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Gets the number of active transactions in the current session.
-  /// @since_tizen 3.0
-  /// @param[in] http_session The HTTP session handle
-  /// @param[out] active_transaction_count The number of activated transactions
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_session_get_active_transaction_count(
-    http_session_h http_session,
-    ffi.Pointer<ffi.Int> active_transaction_count,
-  ) {
-    return _http_session_get_active_transaction_count(
-      http_session,
-      active_transaction_count,
-    );
-  }
-
-  late final _http_session_get_active_transaction_countPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int Function(http_session_h, ffi.Pointer<ffi.Int>)>>(
-      'http_session_get_active_transaction_count');
-  late final _http_session_get_active_transaction_count =
-      _http_session_get_active_transaction_countPtr
-          .asFunction<int Function(http_session_h, ffi.Pointer<ffi.Int>)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Gets the maximum number of transactions for the current session.
-  /// @since_tizen 3.0
-  /// @param[in] http_session The HTTP session handle
-  /// @param[out] transaction_count The maximum transaction count
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_session_get_max_transaction_count(
-    http_session_h http_session,
-    ffi.Pointer<ffi.Int> transaction_count,
-  ) {
-    return _http_session_get_max_transaction_count(
-      http_session,
-      transaction_count,
-    );
-  }
-
-  late final _http_session_get_max_transaction_countPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(http_session_h,
-              ffi.Pointer<ffi.Int>)>>('http_session_get_max_transaction_count');
-  late final _http_session_get_max_transaction_count =
-      _http_session_get_max_transaction_countPtr
-          .asFunction<int Function(http_session_h, ffi.Pointer<ffi.Int>)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Destroys all transactions.
-  /// @since_tizen 3.0
-  /// @remarks All http_transactions should be set to NULL after using it
-  /// @param[in] http_session The HTTP session handle
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_OPERATION_FAILED Operation failed
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_session_destroy_all_transactions(
-    http_session_h http_session,
-  ) {
-    return _http_session_destroy_all_transactions(
-      http_session,
-    );
-  }
-
-  late final _http_session_destroy_all_transactionsPtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function(http_session_h)>>(
-          'http_session_destroy_all_transactions');
-  late final _http_session_destroy_all_transactions =
-      _http_session_destroy_all_transactionsPtr
-          .asFunction<int Function(http_session_h)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Submits the HTTP request.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/internet \n
-  /// %http://tizen.org/privilege/network.get
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  /// @retval #HTTP_ERROR_PERMISSION_DENIED Permission denied
-  int http_transaction_submit(
-    http_transaction_h http_transaction,
-  ) {
-    return _http_transaction_submit(
-      http_transaction,
-    );
-  }
-
-  late final _http_transaction_submitPtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function(http_transaction_h)>>(
-          'http_transaction_submit');
-  late final _http_transaction_submit = _http_transaction_submitPtr
-      .asFunction<int Function(http_transaction_h)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Closes the HTTP transaction handle.
-  /// @since_tizen 3.0
-  /// @remarks The @a http_transaction should be set to NULL after using it.
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  /// @see http_session_open_transaction()
-  /// @see http_transaction_open_authentication()
-  int http_transaction_destroy(
-    http_transaction_h http_transaction,
-  ) {
-    return _http_transaction_destroy(
-      http_transaction,
-    );
-  }
-
-  late final _http_transaction_destroyPtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function(http_transaction_h)>>(
-          'http_transaction_destroy');
-  late final _http_transaction_destroy = _http_transaction_destroyPtr
-      .asFunction<int Function(http_transaction_h)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Registers callback called when receives header.
-  /// @since_tizen 3.0
-  /// @param[in] http_transaction        The HTTP transaction handle
-  /// @param[in] header_cb The callback  function to be called
-  /// @param[in] user_data The user data passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_set_received_header_cb(
-    http_transaction_h http_transaction,
-    http_transaction_header_cb header_cb,
-    ffi.Pointer<ffi.Void> user_data,
-  ) {
-    return _http_transaction_set_received_header_cb(
-      http_transaction,
-      header_cb,
-      user_data,
-    );
-  }
-
-  late final _http_transaction_set_received_header_cbPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int Function(http_transaction_h, http_transaction_header_cb,
-                  ffi.Pointer<ffi.Void>)>>(
-      'http_transaction_set_received_header_cb');
-  late final _http_transaction_set_received_header_cb =
-      _http_transaction_set_received_header_cbPtr.asFunction<
-          int Function(http_transaction_h, http_transaction_header_cb,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Registers callback called when receives body.
-  /// @since_tizen 3.0
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[in] body_cb The callback function to be called
-  /// @param[in] user_data The user data passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_set_received_body_cb(
-    http_transaction_h http_transaction,
-    http_transaction_body_cb body_cb,
-    ffi.Pointer<ffi.Void> user_data,
-  ) {
-    return _http_transaction_set_received_body_cb(
-      http_transaction,
-      body_cb,
-      user_data,
-    );
-  }
-
-  late final _http_transaction_set_received_body_cbPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(http_transaction_h, http_transaction_body_cb,
-              ffi.Pointer<ffi.Void>)>>('http_transaction_set_received_body_cb');
-  late final _http_transaction_set_received_body_cb =
-      _http_transaction_set_received_body_cbPtr.asFunction<
-          int Function(http_transaction_h, http_transaction_body_cb,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Registers callback called when writes data.
-  /// @since_tizen 3.0
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[in] write_cb The callback function to be called
-  /// @param[in] user_data The user data passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_set_uploaded_cb(
-    http_transaction_h http_transaction,
-    http_transaction_write_cb write_cb,
-    ffi.Pointer<ffi.Void> user_data,
-  ) {
-    return _http_transaction_set_uploaded_cb(
-      http_transaction,
-      write_cb,
-      user_data,
-    );
-  }
-
-  late final _http_transaction_set_uploaded_cbPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(http_transaction_h, http_transaction_write_cb,
-              ffi.Pointer<ffi.Void>)>>('http_transaction_set_uploaded_cb');
-  late final _http_transaction_set_uploaded_cb =
-      _http_transaction_set_uploaded_cbPtr.asFunction<
-          int Function(http_transaction_h, http_transaction_write_cb,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Registers callback called when transaction is completed.
-  /// @since_tizen 3.0
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[in] completed_cb The callback function to be called
-  /// @param[in] user_data The user data passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_set_completed_cb(
-    http_transaction_h http_transaction,
-    http_transaction_completed_cb completed_cb,
-    ffi.Pointer<ffi.Void> user_data,
-  ) {
-    return _http_transaction_set_completed_cb(
-      http_transaction,
-      completed_cb,
-      user_data,
-    );
-  }
-
-  late final _http_transaction_set_completed_cbPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(http_transaction_h, http_transaction_completed_cb,
-              ffi.Pointer<ffi.Void>)>>('http_transaction_set_completed_cb');
-  late final _http_transaction_set_completed_cb =
-      _http_transaction_set_completed_cbPtr.asFunction<
-          int Function(http_transaction_h, http_transaction_completed_cb,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Registers callback called when transaction is aborted.
-  /// @since_tizen 3.0
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[in] aborted_cb The callback function to be called
-  /// @param[in] user_data The user data passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_set_aborted_cb(
-    http_transaction_h http_transaction,
-    http_transaction_aborted_cb aborted_cb,
-    ffi.Pointer<ffi.Void> user_data,
-  ) {
-    return _http_transaction_set_aborted_cb(
-      http_transaction,
-      aborted_cb,
-      user_data,
-    );
-  }
-
-  late final _http_transaction_set_aborted_cbPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(http_transaction_h, http_transaction_aborted_cb,
-              ffi.Pointer<ffi.Void>)>>('http_transaction_set_aborted_cb');
-  late final _http_transaction_set_aborted_cb =
-      _http_transaction_set_aborted_cbPtr.asFunction<
-          int Function(http_transaction_h, http_transaction_aborted_cb,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Registers the progress callbacks.
-  /// @details Registers callback that is called when data is uploaded/downloaded.
-  /// @since_tizen 3.0
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[in] progress_cb The callback function to be called
-  /// @param[in] user_data The user data passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_set_progress_cb(
-    http_transaction_h http_transaction,
-    http_transaction_progress_cb progress_cb,
-    ffi.Pointer<ffi.Void> user_data,
-  ) {
-    return _http_transaction_set_progress_cb(
-      http_transaction,
-      progress_cb,
-      user_data,
-    );
-  }
-
-  late final _http_transaction_set_progress_cbPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(http_transaction_h, http_transaction_progress_cb,
-              ffi.Pointer<ffi.Void>)>>('http_transaction_set_progress_cb');
-  late final _http_transaction_set_progress_cb =
-      _http_transaction_set_progress_cbPtr.asFunction<
-          int Function(http_transaction_h, http_transaction_progress_cb,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Sets the timeout in seconds that is the timeout for waiting the transaction.
-  /// @details Sets the timeout in seconds that is the timeout for waiting the transaction. \n
-  /// A timeout value of zero means an infinite timeout.
-  /// @since_tizen 3.0
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[in] timeout The timeout in seconds
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_set_timeout(
-    http_transaction_h http_transaction,
-    int timeout,
-  ) {
-    return _http_transaction_set_timeout(
-      http_transaction,
-      timeout,
-    );
-  }
-
-  late final _http_transaction_set_timeoutPtr = _lookup<
-          ffi.NativeFunction<ffi.Int Function(http_transaction_h, ffi.Int)>>(
-      'http_transaction_set_timeout');
-  late final _http_transaction_set_timeout = _http_transaction_set_timeoutPtr
-      .asFunction<int Function(http_transaction_h, int)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Gets the timeout in seconds for the transaction.
-  /// @since_tizen 3.0
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[out] timeout The timeout in seconds
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_get_timeout(
-    http_transaction_h http_transaction,
-    ffi.Pointer<ffi.Int> timeout,
-  ) {
-    return _http_transaction_get_timeout(
-      http_transaction,
-      timeout,
-    );
-  }
-
-  late final _http_transaction_get_timeoutPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(http_transaction_h,
-              ffi.Pointer<ffi.Int>)>>('http_transaction_get_timeout');
-  late final _http_transaction_get_timeout = _http_transaction_get_timeoutPtr
-      .asFunction<int Function(http_transaction_h, ffi.Pointer<ffi.Int>)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Resumes the transaction.
-  /// @since_tizen 3.0
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_OPERATION_FAILED Operation failed
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_resume(
-    http_transaction_h http_transaction,
-  ) {
-    return _http_transaction_resume(
-      http_transaction,
-    );
-  }
-
-  late final _http_transaction_resumePtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function(http_transaction_h)>>(
-          'http_transaction_resume');
-  late final _http_transaction_resume = _http_transaction_resumePtr
-      .asFunction<int Function(http_transaction_h)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Pauses the transaction.
-  /// @since_tizen 3.0
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[in] pause_type The pause type of the connection
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_OPERATION_FAILED Operation failed
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_pause(
-    http_transaction_h http_transaction,
-    int pause_type,
-  ) {
-    return _http_transaction_pause(
-      http_transaction,
-      pause_type,
-    );
-  }
-
-  late final _http_transaction_pausePtr = _lookup<
-          ffi.NativeFunction<ffi.Int Function(http_transaction_h, ffi.Int32)>>(
-      'http_transaction_pause');
-  late final _http_transaction_pause = _http_transaction_pausePtr
-      .asFunction<int Function(http_transaction_h, int)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Cancels the transaction.
-  /// @details This function cancels the transaction.\n
-  /// The aborted callback is invoked after using it.
-  /// @since_tizen 3.0
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE  Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION  Invalid operation
-  /// @retval #HTTP_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED  Not Supported
-  int http_transaction_cancel(
-    http_transaction_h http_transaction,
-  ) {
-    return _http_transaction_cancel(
-      http_transaction,
-    );
-  }
-
-  late final _http_transaction_cancelPtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function(http_transaction_h)>>(
-          'http_transaction_cancel');
-  late final _http_transaction_cancel = _http_transaction_cancelPtr
-      .asFunction<int Function(http_transaction_h)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Sets ready to write event for a transaction.
-  /// @since_tizen 3.0
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[out] read_to_write Enable/disable ready to write
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_set_ready_to_write(
-    http_transaction_h http_transaction,
-    bool read_to_write,
-  ) {
-    return _http_transaction_set_ready_to_write(
-      http_transaction,
-      read_to_write,
-    );
-  }
-
-  late final _http_transaction_set_ready_to_writePtr = _lookup<
-          ffi.NativeFunction<ffi.Int Function(http_transaction_h, ffi.Bool)>>(
-      'http_transaction_set_ready_to_write');
-  late final _http_transaction_set_ready_to_write =
-      _http_transaction_set_ready_to_writePtr
-          .asFunction<int Function(http_transaction_h, bool)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Sets the interface name.
-  /// @since_tizen 3.0
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[in] interface_name The interface name to use as outgoing network interface
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_set_interface_name(
-    http_transaction_h http_transaction,
-    ffi.Pointer<ffi.Char> interface_name,
-  ) {
-    return _http_transaction_set_interface_name(
-      http_transaction,
-      interface_name,
-    );
-  }
-
-  late final _http_transaction_set_interface_namePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(http_transaction_h,
-              ffi.Pointer<ffi.Char>)>>('http_transaction_set_interface_name');
-  late final _http_transaction_set_interface_name =
-      _http_transaction_set_interface_namePtr.asFunction<
-          int Function(http_transaction_h, ffi.Pointer<ffi.Char>)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Gets the interface name.
-  /// @since_tizen 3.0
-  /// @remarks The @a interface_name should be freed using free().
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[out] interface_name The interface name
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_get_interface_name(
-    http_transaction_h http_transaction,
-    ffi.Pointer<ffi.Pointer<ffi.Char>> interface_name,
-  ) {
-    return _http_transaction_get_interface_name(
-      http_transaction,
-      interface_name,
-    );
-  }
-
-  late final _http_transaction_get_interface_namePtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int Function(
-                  http_transaction_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>>(
-      'http_transaction_get_interface_name');
-  late final _http_transaction_get_interface_name =
-      _http_transaction_get_interface_namePtr.asFunction<
-          int Function(
-              http_transaction_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Sets the flag to verify a server certificate.
-  /// @details The verify determines whether verifies the peer's certificate.
-  /// @since_tizen 3.0
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[in] verify The flag to verify a server certificate; true means verifies; false means it doesn't.
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_set_server_certificate_verification(
-    http_transaction_h http_transaction,
-    bool verify,
-  ) {
-    return _http_transaction_set_server_certificate_verification(
-      http_transaction,
-      verify,
-    );
-  }
-
-  late final _http_transaction_set_server_certificate_verificationPtr = _lookup<
-          ffi.NativeFunction<ffi.Int Function(http_transaction_h, ffi.Bool)>>(
-      'http_transaction_set_server_certificate_verification');
-  late final _http_transaction_set_server_certificate_verification =
-      _http_transaction_set_server_certificate_verificationPtr
-          .asFunction<int Function(http_transaction_h, bool)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Gets the flag to verify a server certificate.
-  /// @since_tizen 3.0
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[out] verify The flag to verify a server certificate; true means verifies; false means it doesn't.
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_get_server_certificate_verification(
-    http_transaction_h http_transaction,
-    ffi.Pointer<ffi.Bool> verify,
-  ) {
-    return _http_transaction_get_server_certificate_verification(
-      http_transaction,
-      verify,
-    );
-  }
-
-  late final _http_transaction_get_server_certificate_verificationPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int Function(http_transaction_h, ffi.Pointer<ffi.Bool>)>>(
-      'http_transaction_get_server_certificate_verification');
-  late final _http_transaction_get_server_certificate_verification =
-      _http_transaction_get_server_certificate_verificationPtr.asFunction<
-          int Function(http_transaction_h, ffi.Pointer<ffi.Bool>)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Sets the flag to allow TCP Fast Open.
-  /// @since_tizen 5.0
-  /// @remarks TCP Fast Open depends on kernel version.\n
-  /// #HTTP_ERROR_NOT_SUPPORTED error will be returned for kernel version less than 3.13.
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[in] enable The flag to enable TCP Fast Open
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_set_tcp_fastopen(
-    http_transaction_h http_transaction,
-    bool enable,
-  ) {
-    return _http_transaction_set_tcp_fastopen(
-      http_transaction,
-      enable,
-    );
-  }
-
-  late final _http_transaction_set_tcp_fastopenPtr = _lookup<
-          ffi.NativeFunction<ffi.Int Function(http_transaction_h, ffi.Bool)>>(
-      'http_transaction_set_tcp_fastopen');
-  late final _http_transaction_set_tcp_fastopen =
-      _http_transaction_set_tcp_fastopenPtr
-          .asFunction<int Function(http_transaction_h, bool)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Gets the flag to allow TCP Fast Open.
-  /// @since_tizen 5.0
-  /// @remarks TCP Fast Open depends on kernel version.\n
-  /// #HTTP_ERROR_NOT_SUPPORTED error will be returned for kernel version less than 3.13.
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[out] enable The flag to enable TCP Fast Open
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_get_tcp_fastopen(
-    http_transaction_h http_transaction,
-    ffi.Pointer<ffi.Bool> enable,
-  ) {
-    return _http_transaction_get_tcp_fastopen(
-      http_transaction,
-      enable,
-    );
-  }
-
-  late final _http_transaction_get_tcp_fastopenPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(http_transaction_h,
-              ffi.Pointer<ffi.Bool>)>>('http_transaction_get_tcp_fastopen');
-  late final _http_transaction_get_tcp_fastopen =
-      _http_transaction_get_tcp_fastopenPtr.asFunction<
-          int Function(http_transaction_h, ffi.Pointer<ffi.Bool>)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Adds a named field to header.
-  /// @details Adds a named field, which is a <@c fieldName, @c fieldValue> pair, to the current instance of HTTP Transaction.
-  /// @since_tizen 3.0
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[in] field_name The HTTP Header Field name
-  /// @param[in] field_value The HTTP Header Field value
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_header_add_field(
-    http_transaction_h http_transaction,
-    ffi.Pointer<ffi.Char> field_name,
-    ffi.Pointer<ffi.Char> field_value,
-  ) {
-    return _http_transaction_header_add_field(
-      http_transaction,
-      field_name,
-      field_value,
-    );
-  }
-
-  late final _http_transaction_header_add_fieldPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(http_transaction_h, ffi.Pointer<ffi.Char>,
-              ffi.Pointer<ffi.Char>)>>('http_transaction_header_add_field');
-  late final _http_transaction_header_add_field =
-      _http_transaction_header_add_fieldPtr.asFunction<
-          int Function(http_transaction_h, ffi.Pointer<ffi.Char>,
-              ffi.Pointer<ffi.Char>)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Removes the named field from header.
-  /// @details Remove the named field, which is a <@c fieldName, @c fieldValue> pair, from the current instance of HTTP Transaction.
-  /// @since_tizen 3.0
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[in] field_name The HTTP Header Field name
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_header_remove_field(
-    http_transaction_h http_transaction,
-    ffi.Pointer<ffi.Char> field_name,
-  ) {
-    return _http_transaction_header_remove_field(
-      http_transaction,
-      field_name,
-    );
-  }
-
-  late final _http_transaction_header_remove_fieldPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(http_transaction_h,
-              ffi.Pointer<ffi.Char>)>>('http_transaction_header_remove_field');
-  late final _http_transaction_header_remove_field =
-      _http_transaction_header_remove_fieldPtr.asFunction<
-          int Function(http_transaction_h, ffi.Pointer<ffi.Char>)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Gets the HTTP Header Field value from custom header.
-  /// @since_tizen 3.0
-  /// @remarks The @a field_value should be freed using free().
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[in] field_name The HTTP Header Field name
-  /// @param[out] field_value The HTTP Header Field value
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_header_get_field_value(
-    http_transaction_h http_transaction,
-    ffi.Pointer<ffi.Char> field_name,
-    ffi.Pointer<ffi.Pointer<ffi.Char>> field_value,
-  ) {
-    return _http_transaction_header_get_field_value(
-      http_transaction,
-      field_name,
-      field_value,
-    );
-  }
-
-  late final _http_transaction_header_get_field_valuePtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int Function(http_transaction_h, ffi.Pointer<ffi.Char>,
-                  ffi.Pointer<ffi.Pointer<ffi.Char>>)>>(
-      'http_transaction_header_get_field_value');
-  late final _http_transaction_header_get_field_value =
-      _http_transaction_header_get_field_valuePtr.asFunction<
-          int Function(http_transaction_h, ffi.Pointer<ffi.Char>,
-              ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Sets an HTTP method of the request header.
-  /// @details Sets an HTTP method such as GET, POST, PUT and etc.
-  /// @since_tizen 3.0
-  /// @remarks The default method is GET.
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[in] method The HTTP method
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_request_set_method(
-    http_transaction_h http_transaction,
-    int method,
-  ) {
-    return _http_transaction_request_set_method(
-      http_transaction,
-      method,
-    );
-  }
-
-  late final _http_transaction_request_set_methodPtr = _lookup<
-          ffi.NativeFunction<ffi.Int Function(http_transaction_h, ffi.Int32)>>(
-      'http_transaction_request_set_method');
-  late final _http_transaction_request_set_method =
-      _http_transaction_request_set_methodPtr
-          .asFunction<int Function(http_transaction_h, int)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Gets the HTTP method from request header.
-  /// @since_tizen 3.0
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[out] method The HTTP method
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_request_get_method(
-    http_transaction_h http_transaction,
-    ffi.Pointer<ffi.Int32> method,
-  ) {
-    return _http_transaction_request_get_method(
-      http_transaction,
-      method,
-    );
-  }
-
-  late final _http_transaction_request_get_methodPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(http_transaction_h,
-              ffi.Pointer<ffi.Int32>)>>('http_transaction_request_get_method');
-  late final _http_transaction_request_get_method =
-      _http_transaction_request_get_methodPtr.asFunction<
-          int Function(http_transaction_h, ffi.Pointer<ffi.Int32>)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Sets an HTTP version of the request header.
-  /// @since_tizen 3.0
-  /// @remarks The default version is HTTP 1.1.
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[in] version The HTTP version
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_request_set_version(
-    http_transaction_h http_transaction,
-    int version,
-  ) {
-    return _http_transaction_request_set_version(
-      http_transaction,
-      version,
-    );
-  }
-
-  late final _http_transaction_request_set_versionPtr = _lookup<
-          ffi.NativeFunction<ffi.Int Function(http_transaction_h, ffi.Int32)>>(
-      'http_transaction_request_set_version');
-  late final _http_transaction_request_set_version =
-      _http_transaction_request_set_versionPtr
-          .asFunction<int Function(http_transaction_h, int)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Gets the HTTP version from request header.
-  /// @details Gets the HTTP version.
-  /// @since_tizen 3.0
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[out] version The HTTP version
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_request_get_version(
-    http_transaction_h http_transaction,
-    ffi.Pointer<ffi.Int32> version,
-  ) {
-    return _http_transaction_request_get_version(
-      http_transaction,
-      version,
-    );
-  }
-
-  late final _http_transaction_request_get_versionPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(http_transaction_h,
-              ffi.Pointer<ffi.Int32>)>>('http_transaction_request_get_version');
-  late final _http_transaction_request_get_version =
-      _http_transaction_request_get_versionPtr.asFunction<
-          int Function(http_transaction_h, ffi.Pointer<ffi.Int32>)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Sets a URI of the request header.
-  /// @details Sets a URI of the request header.
-  /// @since_tizen 3.0
-  /// @remarks It should be used before http_transaction_submit().
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[in] host_uri The URI to use in the request
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_request_set_uri(
-    http_transaction_h http_transaction,
-    ffi.Pointer<ffi.Char> host_uri,
-  ) {
-    return _http_transaction_request_set_uri(
-      http_transaction,
-      host_uri,
-    );
-  }
-
-  late final _http_transaction_request_set_uriPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(http_transaction_h,
-              ffi.Pointer<ffi.Char>)>>('http_transaction_request_set_uri');
-  late final _http_transaction_request_set_uri =
-      _http_transaction_request_set_uriPtr.asFunction<
-          int Function(http_transaction_h, ffi.Pointer<ffi.Char>)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Gets the URI.
-  /// @since_tizen 3.0
-  /// @remarks The @a host_uri should be freed using free().
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[out] host_uri The host URI
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_request_get_uri(
-    http_transaction_h http_transaction,
-    ffi.Pointer<ffi.Pointer<ffi.Char>> host_uri,
-  ) {
-    return _http_transaction_request_get_uri(
-      http_transaction,
-      host_uri,
-    );
-  }
-
-  late final _http_transaction_request_get_uriPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int Function(
-                  http_transaction_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>>(
-      'http_transaction_request_get_uri');
-  late final _http_transaction_request_get_uri =
-      _http_transaction_request_get_uriPtr.asFunction<
-          int Function(
-              http_transaction_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Sets the Accept-Encoding header field of HTTP Request.
-  /// @details The Accept-Encoding header enables automatic decompression of HTTP downloads.
-  /// @since_tizen 3.0
-  /// @remarks If empty string is set, an Accept-Encoding header contains all supported built-in compressions.
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[in] encoding The encoding algorithms (e.g. gzip, deflate)
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_request_set_accept_encoding(
-    http_transaction_h http_transaction,
-    ffi.Pointer<ffi.Char> encoding,
-  ) {
-    return _http_transaction_request_set_accept_encoding(
-      http_transaction,
-      encoding,
-    );
-  }
-
-  late final _http_transaction_request_set_accept_encodingPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int Function(http_transaction_h, ffi.Pointer<ffi.Char>)>>(
-      'http_transaction_request_set_accept_encoding');
-  late final _http_transaction_request_set_accept_encoding =
-      _http_transaction_request_set_accept_encodingPtr.asFunction<
-          int Function(http_transaction_h, ffi.Pointer<ffi.Char>)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Gets the Accept-Encoding header field of HTTP Request.
-  /// @since_tizen 3.0
-  /// @remarks The @a encoding should be freed using free().
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[out] encoding The encoding algorithms
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_request_get_accept_encoding(
-    http_transaction_h http_transaction,
-    ffi.Pointer<ffi.Pointer<ffi.Char>> encoding,
-  ) {
-    return _http_transaction_request_get_accept_encoding(
-      http_transaction,
-      encoding,
-    );
-  }
-
-  late final _http_transaction_request_get_accept_encodingPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int Function(
-                  http_transaction_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>>(
-      'http_transaction_request_get_accept_encoding');
-  late final _http_transaction_request_get_accept_encoding =
-      _http_transaction_request_get_accept_encodingPtr.asFunction<
-          int Function(
-              http_transaction_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Sets a cookie in the HTTP request.
-  /// @since_tizen 3.0
-  /// @remarks The format of string should be NME=CONTENTS (e.g. "name1=hello; name2=tizen;")
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[in] cookie The cookie
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_request_set_cookie(
-    http_transaction_h http_transaction,
-    ffi.Pointer<ffi.Char> cookie,
-  ) {
-    return _http_transaction_request_set_cookie(
-      http_transaction,
-      cookie,
-    );
-  }
-
-  late final _http_transaction_request_set_cookiePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(http_transaction_h,
-              ffi.Pointer<ffi.Char>)>>('http_transaction_request_set_cookie');
-  late final _http_transaction_request_set_cookie =
-      _http_transaction_request_set_cookiePtr.asFunction<
-          int Function(http_transaction_h, ffi.Pointer<ffi.Char>)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Gets a cookie in the HTTP request.
-  /// @since_tizen 3.0
-  /// @remarks The @a cookie should be freed using free().
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[out] cookie The cookie
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_request_get_cookie(
-    http_transaction_h http_transaction,
-    ffi.Pointer<ffi.Pointer<ffi.Char>> cookie,
-  ) {
-    return _http_transaction_request_get_cookie(
-      http_transaction,
-      cookie,
-    );
-  }
-
-  late final _http_transaction_request_get_cookiePtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int Function(
-                  http_transaction_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>>(
-      'http_transaction_request_get_cookie');
-  late final _http_transaction_request_get_cookie =
-      _http_transaction_request_get_cookiePtr.asFunction<
-          int Function(
-              http_transaction_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Writes the request message body.
-  /// @details This function writes the request message body in the internal queue. \n
-  /// The written queue for request body is uploaded after invoking http_transaction_submit().
-  /// @since_tizen 3.0
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[in] body The message body data
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_request_write_body(
-    http_transaction_h http_transaction,
-    ffi.Pointer<ffi.Char> body,
-  ) {
-    return _http_transaction_request_write_body(
-      http_transaction,
-      body,
-    );
-  }
-
-  late final _http_transaction_request_write_bodyPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(http_transaction_h,
-              ffi.Pointer<ffi.Char>)>>('http_transaction_request_write_body');
-  late final _http_transaction_request_write_body =
-      _http_transaction_request_write_bodyPtr.asFunction<
-          int Function(http_transaction_h, ffi.Pointer<ffi.Char>)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Sets the file path for uploading a file.
-  /// @since_tizen 3.0
-  /// @remarks It is used with #HTTP_METHOD_PUT. \n
-  /// %http://tizen.org/privilege/mediastorage is needed if input or output path are relevant to media storage. \n
-  /// %http://tizen.org/privilege/externalstorage is needed if input or output path are relevant to external storage.
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[in] file_path The path for file
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE  Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION  Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED  Not Supported
-  /// @retval #HTTP_ERROR_PERMISSION_DENIED Permission denied
-  int http_transaction_request_set_upload_file(
-    http_transaction_h http_transaction,
-    ffi.Pointer<ffi.Char> file_path,
-  ) {
-    return _http_transaction_request_set_upload_file(
-      http_transaction,
-      file_path,
-    );
-  }
-
-  late final _http_transaction_request_set_upload_filePtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int Function(http_transaction_h, ffi.Pointer<ffi.Char>)>>(
-      'http_transaction_request_set_upload_file');
-  late final _http_transaction_request_set_upload_file =
-      _http_transaction_request_set_upload_filePtr.asFunction<
-          int Function(http_transaction_h, ffi.Pointer<ffi.Char>)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Gets the HTTP status code from HTTP Response.
-  /// @since_tizen 3.0
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[out] status_code The HTTP status code
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_response_get_status_code(
-    http_transaction_h http_transaction,
-    ffi.Pointer<ffi.Int32> status_code,
-  ) {
-    return _http_transaction_response_get_status_code(
-      http_transaction,
-      status_code,
-    );
-  }
-
-  late final _http_transaction_response_get_status_codePtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int Function(http_transaction_h, ffi.Pointer<ffi.Int32>)>>(
-      'http_transaction_response_get_status_code');
-  late final _http_transaction_response_get_status_code =
-      _http_transaction_response_get_status_codePtr.asFunction<
-          int Function(http_transaction_h, ffi.Pointer<ffi.Int32>)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Gets the HTTP status text from HTTP Response.
-  /// @since_tizen 3.0
-  /// @remarks The @a status_text should be freed using free().
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[out] status_text The HTTP status text
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_response_get_status_text(
-    http_transaction_h http_transaction,
-    ffi.Pointer<ffi.Pointer<ffi.Char>> status_text,
-  ) {
-    return _http_transaction_response_get_status_text(
-      http_transaction,
-      status_text,
-    );
-  }
-
-  late final _http_transaction_response_get_status_textPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int Function(
-                  http_transaction_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>>(
-      'http_transaction_response_get_status_text');
-  late final _http_transaction_response_get_status_text =
-      _http_transaction_response_get_status_textPtr.asFunction<
-          int Function(
-              http_transaction_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Gets the HTTP version from HTTP Response.
-  /// @since_tizen 3.0
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[out] version The HTTP version
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_response_get_version(
-    http_transaction_h http_transaction,
-    ffi.Pointer<ffi.Int32> version,
-  ) {
-    return _http_transaction_response_get_version(
-      http_transaction,
-      version,
-    );
-  }
-
-  late final _http_transaction_response_get_versionPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int Function(http_transaction_h, ffi.Pointer<ffi.Int32>)>>(
-      'http_transaction_response_get_version');
-  late final _http_transaction_response_get_version =
-      _http_transaction_response_get_versionPtr.asFunction<
-          int Function(http_transaction_h, ffi.Pointer<ffi.Int32>)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Opens HTTP transaction with authentication information.
-  /// @since_tizen 3.0
-  /// @remarks The @a http_auth_transaction should be released using http_transaction_destroy().
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[out] http_auth_transaction The HTTP transaction handle
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_open_authentication(
-    http_transaction_h http_transaction,
-    ffi.Pointer<http_transaction_h> http_auth_transaction,
-  ) {
-    return _http_transaction_open_authentication(
-      http_transaction,
-      http_auth_transaction,
-    );
-  }
-
-  late final _http_transaction_open_authenticationPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int Function(
-                  http_transaction_h, ffi.Pointer<http_transaction_h>)>>(
-      'http_transaction_open_authentication');
-  late final _http_transaction_open_authentication =
-      _http_transaction_open_authenticationPtr.asFunction<
-          int Function(http_transaction_h, ffi.Pointer<http_transaction_h>)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Sets an HTTP credentials.
-  /// @details Sets an HTTP authentication scheme such as username and password.
-  /// @since_tizen 3.0
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[in] user_name The HTTP user name
-  /// @param[in] password The HTTP password
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_set_credentials(
-    http_transaction_h http_transaction,
-    ffi.Pointer<ffi.Char> user_name,
-    ffi.Pointer<ffi.Char> password,
-  ) {
-    return _http_transaction_set_credentials(
-      http_transaction,
-      user_name,
-      password,
-    );
-  }
-
-  late final _http_transaction_set_credentialsPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(http_transaction_h, ffi.Pointer<ffi.Char>,
-              ffi.Pointer<ffi.Char>)>>('http_transaction_set_credentials');
-  late final _http_transaction_set_credentials =
-      _http_transaction_set_credentialsPtr.asFunction<
-          int Function(http_transaction_h, ffi.Pointer<ffi.Char>,
-              ffi.Pointer<ffi.Char>)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Gets the username & password for the HTTP credential.
-  /// @since_tizen 3.0
-  /// @remarks The @a user_name & @a password should be freed using free().
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[out] user_name The HTTP credential user name
-  /// @param[out] password The HTTP credential password
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_get_credentials(
-    http_transaction_h http_transaction,
-    ffi.Pointer<ffi.Pointer<ffi.Char>> user_name,
-    ffi.Pointer<ffi.Pointer<ffi.Char>> password,
-  ) {
-    return _http_transaction_get_credentials(
-      http_transaction,
-      user_name,
-      password,
-    );
-  }
-
-  late final _http_transaction_get_credentialsPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int Function(
-                  http_transaction_h,
-                  ffi.Pointer<ffi.Pointer<ffi.Char>>,
-                  ffi.Pointer<ffi.Pointer<ffi.Char>>)>>(
-      'http_transaction_get_credentials');
-  late final _http_transaction_get_credentials =
-      _http_transaction_get_credentialsPtr.asFunction<
-          int Function(http_transaction_h, ffi.Pointer<ffi.Pointer<ffi.Char>>,
-              ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Sets an HTTP authentication scheme.
-  /// @details Set an HTTP authentication scheme such as BASIC, MD5, NTLM and etc.
-  /// @since_tizen 3.0
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[in] auth_scheme The HTTP authentication scheme
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_set_http_auth_scheme(
-    http_transaction_h http_transaction,
-    int auth_scheme,
-  ) {
-    return _http_transaction_set_http_auth_scheme(
-      http_transaction,
-      auth_scheme,
-    );
-  }
-
-  late final _http_transaction_set_http_auth_schemePtr = _lookup<
-          ffi.NativeFunction<ffi.Int Function(http_transaction_h, ffi.Int32)>>(
-      'http_transaction_set_http_auth_scheme');
-  late final _http_transaction_set_http_auth_scheme =
-      _http_transaction_set_http_auth_schemePtr
-          .asFunction<int Function(http_transaction_h, int)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Gets the HTTP authentication scheme.
-  /// @since_tizen 3.0
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[out] auth_scheme The HTTP auth scheme value
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_get_http_auth_scheme(
-    http_transaction_h http_transaction,
-    ffi.Pointer<ffi.Int32> auth_scheme,
-  ) {
-    return _http_transaction_get_http_auth_scheme(
-      http_transaction,
-      auth_scheme,
-    );
-  }
-
-  late final _http_transaction_get_http_auth_schemePtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int Function(http_transaction_h, ffi.Pointer<ffi.Int32>)>>(
-      'http_transaction_get_http_auth_scheme');
-  late final _http_transaction_get_http_auth_scheme =
-      _http_transaction_get_http_auth_schemePtr.asFunction<
-          int Function(http_transaction_h, ffi.Pointer<ffi.Int32>)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Gets the HTTP authentication realm.
-  /// @since_tizen 3.0
-  /// @remarks The @a realm should be freed using free().
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[out] realm The HTTP authentication realm value
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_get_realm(
-    http_transaction_h http_transaction,
-    ffi.Pointer<ffi.Pointer<ffi.Char>> realm,
-  ) {
-    return _http_transaction_get_realm(
-      http_transaction,
-      realm,
-    );
-  }
-
-  late final _http_transaction_get_realmPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int Function(
-                  http_transaction_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>>(
-      'http_transaction_get_realm');
-  late final _http_transaction_get_realm =
-      _http_transaction_get_realmPtr.asFunction<
-          int Function(
-              http_transaction_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
-
   /// @brief Initializes INM.
   /// @since_tizen 5.0
   /// @privlevel public
@@ -133978,6 +132787,1629 @@ class Tizen90Native {
               ffi.Int32)>>('connection_reset_statistics');
   late final _connection_reset_statistics = _connection_reset_statisticsPtr
       .asFunction<int Function(connection_h, int, int)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Initializes the HTTP module.
+  /// @since_tizen 3.0
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_OPERATION_FAILED Operation failed
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  /// @see http_deinit()
+  int http_init() {
+    return _http_init();
+  }
+
+  late final _http_initPtr =
+      _lookup<ffi.NativeFunction<ffi.Int Function()>>('http_init');
+  late final _http_init = _http_initPtr.asFunction<int Function()>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Deinitializes the HTTP module.
+  /// @since_tizen 3.0
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_OPERATION_FAILED Operation failed
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  /// @see http_init()
+  int http_deinit() {
+    return _http_deinit();
+  }
+
+  late final _http_deinitPtr =
+      _lookup<ffi.NativeFunction<ffi.Int Function()>>('http_deinit');
+  late final _http_deinit = _http_deinitPtr.asFunction<int Function()>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Creates the HTTP session handle.
+  /// @since_tizen 3.0
+  /// @remarks The @a http_session should be released using http_session_destroy().
+  /// Opened transactions can't be submitted after destroying session handle.
+  /// @param[in] mode The HTTP session mode
+  /// @param[out] http_session The HTTP session handle
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_OUT_OF_MEMORY Out of memory
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  /// @see http_session_destroy()
+  int http_session_create(
+    int mode,
+    ffi.Pointer<http_session_h> http_session,
+  ) {
+    return _http_session_create(
+      mode,
+      http_session,
+    );
+  }
+
+  late final _http_session_createPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(
+              ffi.Int32, ffi.Pointer<http_session_h>)>>('http_session_create');
+  late final _http_session_create = _http_session_createPtr
+      .asFunction<int Function(int, ffi.Pointer<http_session_h>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Destroys the HTTP session handle.
+  /// @since_tizen 3.0
+  /// @remarks The @a http_session should be set to NULL after using it
+  /// @param[in] http_session The HTTP session handle
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  /// @see http_session_create()
+  int http_session_destroy(
+    http_session_h http_session,
+  ) {
+    return _http_session_destroy(
+      http_session,
+    );
+  }
+
+  late final _http_session_destroyPtr =
+      _lookup<ffi.NativeFunction<ffi.Int Function(http_session_h)>>(
+          'http_session_destroy');
+  late final _http_session_destroy =
+      _http_session_destroyPtr.asFunction<int Function(http_session_h)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Opens HTTP transaction from the HTTP Session.
+  /// @since_tizen 3.0
+  /// @remarks The @a http_transaction should be released using http_transaction_destroy().
+  /// @param[in] http_session The HTTP session handle
+  /// @param[in] method The HTTP request method
+  /// @param[out] http_transaction The HTTP transaction handle
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_OUT_OF_MEMORY Out of memory
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_session_open_transaction(
+    http_session_h http_session,
+    int method,
+    ffi.Pointer<http_transaction_h> http_transaction,
+  ) {
+    return _http_session_open_transaction(
+      http_session,
+      method,
+      http_transaction,
+    );
+  }
+
+  late final _http_session_open_transactionPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Int Function(
+                  http_session_h, ffi.Int32, ffi.Pointer<http_transaction_h>)>>(
+      'http_session_open_transaction');
+  late final _http_session_open_transaction =
+      _http_session_open_transactionPtr.asFunction<
+          int Function(http_session_h, int, ffi.Pointer<http_transaction_h>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Sets the value to redirect the HTTP request automatically.
+  /// @since_tizen 3.0
+  /// @param[in] http_session The HTTP session handle
+  /// @param[in] auto_redirection The value which determines whether allow redirection or not
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  /// @see http_session_get_auto_redirection()
+  int http_session_set_auto_redirection(
+    http_session_h http_session,
+    bool auto_redirection,
+  ) {
+    return _http_session_set_auto_redirection(
+      http_session,
+      auto_redirection,
+    );
+  }
+
+  late final _http_session_set_auto_redirectionPtr =
+      _lookup<ffi.NativeFunction<ffi.Int Function(http_session_h, ffi.Bool)>>(
+          'http_session_set_auto_redirection');
+  late final _http_session_set_auto_redirection =
+      _http_session_set_auto_redirectionPtr
+          .asFunction<int Function(http_session_h, bool)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Gets the auto redirection for the HTTP request.
+  /// @since_tizen 3.0
+  /// @param[in] http_session The HTTP session handle
+  /// @param[out] auto_redirect The value of auto redirect
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  /// @see http_session_set_auto_redirection()
+  int http_session_get_auto_redirection(
+    http_session_h http_session,
+    ffi.Pointer<ffi.Bool> auto_redirect,
+  ) {
+    return _http_session_get_auto_redirection(
+      http_session,
+      auto_redirect,
+    );
+  }
+
+  late final _http_session_get_auto_redirectionPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(http_session_h,
+              ffi.Pointer<ffi.Bool>)>>('http_session_get_auto_redirection');
+  late final _http_session_get_auto_redirection =
+      _http_session_get_auto_redirectionPtr
+          .asFunction<int Function(http_session_h, ffi.Pointer<ffi.Bool>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Gets the number of active transactions in the current session.
+  /// @since_tizen 3.0
+  /// @param[in] http_session The HTTP session handle
+  /// @param[out] active_transaction_count The number of activated transactions
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_session_get_active_transaction_count(
+    http_session_h http_session,
+    ffi.Pointer<ffi.Int> active_transaction_count,
+  ) {
+    return _http_session_get_active_transaction_count(
+      http_session,
+      active_transaction_count,
+    );
+  }
+
+  late final _http_session_get_active_transaction_countPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Int Function(http_session_h, ffi.Pointer<ffi.Int>)>>(
+      'http_session_get_active_transaction_count');
+  late final _http_session_get_active_transaction_count =
+      _http_session_get_active_transaction_countPtr
+          .asFunction<int Function(http_session_h, ffi.Pointer<ffi.Int>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Gets the maximum number of transactions for the current session.
+  /// @since_tizen 3.0
+  /// @param[in] http_session The HTTP session handle
+  /// @param[out] transaction_count The maximum transaction count
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_session_get_max_transaction_count(
+    http_session_h http_session,
+    ffi.Pointer<ffi.Int> transaction_count,
+  ) {
+    return _http_session_get_max_transaction_count(
+      http_session,
+      transaction_count,
+    );
+  }
+
+  late final _http_session_get_max_transaction_countPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(http_session_h,
+              ffi.Pointer<ffi.Int>)>>('http_session_get_max_transaction_count');
+  late final _http_session_get_max_transaction_count =
+      _http_session_get_max_transaction_countPtr
+          .asFunction<int Function(http_session_h, ffi.Pointer<ffi.Int>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Destroys all transactions.
+  /// @since_tizen 3.0
+  /// @remarks All http_transactions should be set to NULL after using it
+  /// @param[in] http_session The HTTP session handle
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_OPERATION_FAILED Operation failed
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_session_destroy_all_transactions(
+    http_session_h http_session,
+  ) {
+    return _http_session_destroy_all_transactions(
+      http_session,
+    );
+  }
+
+  late final _http_session_destroy_all_transactionsPtr =
+      _lookup<ffi.NativeFunction<ffi.Int Function(http_session_h)>>(
+          'http_session_destroy_all_transactions');
+  late final _http_session_destroy_all_transactions =
+      _http_session_destroy_all_transactionsPtr
+          .asFunction<int Function(http_session_h)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Submits the HTTP request.
+  /// @since_tizen 3.0
+  /// @privlevel public
+  /// @privilege %http://tizen.org/privilege/internet \n
+  /// %http://tizen.org/privilege/network.get
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  /// @retval #HTTP_ERROR_PERMISSION_DENIED Permission denied
+  int http_transaction_submit(
+    http_transaction_h http_transaction,
+  ) {
+    return _http_transaction_submit(
+      http_transaction,
+    );
+  }
+
+  late final _http_transaction_submitPtr =
+      _lookup<ffi.NativeFunction<ffi.Int Function(http_transaction_h)>>(
+          'http_transaction_submit');
+  late final _http_transaction_submit = _http_transaction_submitPtr
+      .asFunction<int Function(http_transaction_h)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Closes the HTTP transaction handle.
+  /// @since_tizen 3.0
+  /// @remarks The @a http_transaction should be set to NULL after using it.
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  /// @see http_session_open_transaction()
+  /// @see http_transaction_open_authentication()
+  int http_transaction_destroy(
+    http_transaction_h http_transaction,
+  ) {
+    return _http_transaction_destroy(
+      http_transaction,
+    );
+  }
+
+  late final _http_transaction_destroyPtr =
+      _lookup<ffi.NativeFunction<ffi.Int Function(http_transaction_h)>>(
+          'http_transaction_destroy');
+  late final _http_transaction_destroy = _http_transaction_destroyPtr
+      .asFunction<int Function(http_transaction_h)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Registers callback called when receives header.
+  /// @since_tizen 3.0
+  /// @param[in] http_transaction        The HTTP transaction handle
+  /// @param[in] header_cb The callback  function to be called
+  /// @param[in] user_data The user data passed to the callback function
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_set_received_header_cb(
+    http_transaction_h http_transaction,
+    http_transaction_header_cb header_cb,
+    ffi.Pointer<ffi.Void> user_data,
+  ) {
+    return _http_transaction_set_received_header_cb(
+      http_transaction,
+      header_cb,
+      user_data,
+    );
+  }
+
+  late final _http_transaction_set_received_header_cbPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Int Function(http_transaction_h, http_transaction_header_cb,
+                  ffi.Pointer<ffi.Void>)>>(
+      'http_transaction_set_received_header_cb');
+  late final _http_transaction_set_received_header_cb =
+      _http_transaction_set_received_header_cbPtr.asFunction<
+          int Function(http_transaction_h, http_transaction_header_cb,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Registers callback called when receives body.
+  /// @since_tizen 3.0
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[in] body_cb The callback function to be called
+  /// @param[in] user_data The user data passed to the callback function
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_set_received_body_cb(
+    http_transaction_h http_transaction,
+    http_transaction_body_cb body_cb,
+    ffi.Pointer<ffi.Void> user_data,
+  ) {
+    return _http_transaction_set_received_body_cb(
+      http_transaction,
+      body_cb,
+      user_data,
+    );
+  }
+
+  late final _http_transaction_set_received_body_cbPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(http_transaction_h, http_transaction_body_cb,
+              ffi.Pointer<ffi.Void>)>>('http_transaction_set_received_body_cb');
+  late final _http_transaction_set_received_body_cb =
+      _http_transaction_set_received_body_cbPtr.asFunction<
+          int Function(http_transaction_h, http_transaction_body_cb,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Registers callback called when writes data.
+  /// @since_tizen 3.0
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[in] write_cb The callback function to be called
+  /// @param[in] user_data The user data passed to the callback function
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_set_uploaded_cb(
+    http_transaction_h http_transaction,
+    http_transaction_write_cb write_cb,
+    ffi.Pointer<ffi.Void> user_data,
+  ) {
+    return _http_transaction_set_uploaded_cb(
+      http_transaction,
+      write_cb,
+      user_data,
+    );
+  }
+
+  late final _http_transaction_set_uploaded_cbPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(http_transaction_h, http_transaction_write_cb,
+              ffi.Pointer<ffi.Void>)>>('http_transaction_set_uploaded_cb');
+  late final _http_transaction_set_uploaded_cb =
+      _http_transaction_set_uploaded_cbPtr.asFunction<
+          int Function(http_transaction_h, http_transaction_write_cb,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Registers callback called when transaction is completed.
+  /// @since_tizen 3.0
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[in] completed_cb The callback function to be called
+  /// @param[in] user_data The user data passed to the callback function
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_set_completed_cb(
+    http_transaction_h http_transaction,
+    http_transaction_completed_cb completed_cb,
+    ffi.Pointer<ffi.Void> user_data,
+  ) {
+    return _http_transaction_set_completed_cb(
+      http_transaction,
+      completed_cb,
+      user_data,
+    );
+  }
+
+  late final _http_transaction_set_completed_cbPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(http_transaction_h, http_transaction_completed_cb,
+              ffi.Pointer<ffi.Void>)>>('http_transaction_set_completed_cb');
+  late final _http_transaction_set_completed_cb =
+      _http_transaction_set_completed_cbPtr.asFunction<
+          int Function(http_transaction_h, http_transaction_completed_cb,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Registers callback called when transaction is aborted.
+  /// @since_tizen 3.0
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[in] aborted_cb The callback function to be called
+  /// @param[in] user_data The user data passed to the callback function
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_set_aborted_cb(
+    http_transaction_h http_transaction,
+    http_transaction_aborted_cb aborted_cb,
+    ffi.Pointer<ffi.Void> user_data,
+  ) {
+    return _http_transaction_set_aborted_cb(
+      http_transaction,
+      aborted_cb,
+      user_data,
+    );
+  }
+
+  late final _http_transaction_set_aborted_cbPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(http_transaction_h, http_transaction_aborted_cb,
+              ffi.Pointer<ffi.Void>)>>('http_transaction_set_aborted_cb');
+  late final _http_transaction_set_aborted_cb =
+      _http_transaction_set_aborted_cbPtr.asFunction<
+          int Function(http_transaction_h, http_transaction_aborted_cb,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Registers the progress callbacks.
+  /// @details Registers callback that is called when data is uploaded/downloaded.
+  /// @since_tizen 3.0
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[in] progress_cb The callback function to be called
+  /// @param[in] user_data The user data passed to the callback function
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_set_progress_cb(
+    http_transaction_h http_transaction,
+    http_transaction_progress_cb progress_cb,
+    ffi.Pointer<ffi.Void> user_data,
+  ) {
+    return _http_transaction_set_progress_cb(
+      http_transaction,
+      progress_cb,
+      user_data,
+    );
+  }
+
+  late final _http_transaction_set_progress_cbPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(http_transaction_h, http_transaction_progress_cb,
+              ffi.Pointer<ffi.Void>)>>('http_transaction_set_progress_cb');
+  late final _http_transaction_set_progress_cb =
+      _http_transaction_set_progress_cbPtr.asFunction<
+          int Function(http_transaction_h, http_transaction_progress_cb,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Sets the timeout in seconds that is the timeout for waiting the transaction.
+  /// @details Sets the timeout in seconds that is the timeout for waiting the transaction. \n
+  /// A timeout value of zero means an infinite timeout.
+  /// @since_tizen 3.0
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[in] timeout The timeout in seconds
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_set_timeout(
+    http_transaction_h http_transaction,
+    int timeout,
+  ) {
+    return _http_transaction_set_timeout(
+      http_transaction,
+      timeout,
+    );
+  }
+
+  late final _http_transaction_set_timeoutPtr = _lookup<
+          ffi.NativeFunction<ffi.Int Function(http_transaction_h, ffi.Int)>>(
+      'http_transaction_set_timeout');
+  late final _http_transaction_set_timeout = _http_transaction_set_timeoutPtr
+      .asFunction<int Function(http_transaction_h, int)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Gets the timeout in seconds for the transaction.
+  /// @since_tizen 3.0
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[out] timeout The timeout in seconds
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_get_timeout(
+    http_transaction_h http_transaction,
+    ffi.Pointer<ffi.Int> timeout,
+  ) {
+    return _http_transaction_get_timeout(
+      http_transaction,
+      timeout,
+    );
+  }
+
+  late final _http_transaction_get_timeoutPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(http_transaction_h,
+              ffi.Pointer<ffi.Int>)>>('http_transaction_get_timeout');
+  late final _http_transaction_get_timeout = _http_transaction_get_timeoutPtr
+      .asFunction<int Function(http_transaction_h, ffi.Pointer<ffi.Int>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Resumes the transaction.
+  /// @since_tizen 3.0
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_OPERATION_FAILED Operation failed
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_resume(
+    http_transaction_h http_transaction,
+  ) {
+    return _http_transaction_resume(
+      http_transaction,
+    );
+  }
+
+  late final _http_transaction_resumePtr =
+      _lookup<ffi.NativeFunction<ffi.Int Function(http_transaction_h)>>(
+          'http_transaction_resume');
+  late final _http_transaction_resume = _http_transaction_resumePtr
+      .asFunction<int Function(http_transaction_h)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Pauses the transaction.
+  /// @since_tizen 3.0
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[in] pause_type The pause type of the connection
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_OPERATION_FAILED Operation failed
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_pause(
+    http_transaction_h http_transaction,
+    int pause_type,
+  ) {
+    return _http_transaction_pause(
+      http_transaction,
+      pause_type,
+    );
+  }
+
+  late final _http_transaction_pausePtr = _lookup<
+          ffi.NativeFunction<ffi.Int Function(http_transaction_h, ffi.Int32)>>(
+      'http_transaction_pause');
+  late final _http_transaction_pause = _http_transaction_pausePtr
+      .asFunction<int Function(http_transaction_h, int)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Cancels the transaction.
+  /// @details This function cancels the transaction.\n
+  /// The aborted callback is invoked after using it.
+  /// @since_tizen 3.0
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE  Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION  Invalid operation
+  /// @retval #HTTP_ERROR_OPERATION_FAILED  Operation failed
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED  Not Supported
+  int http_transaction_cancel(
+    http_transaction_h http_transaction,
+  ) {
+    return _http_transaction_cancel(
+      http_transaction,
+    );
+  }
+
+  late final _http_transaction_cancelPtr =
+      _lookup<ffi.NativeFunction<ffi.Int Function(http_transaction_h)>>(
+          'http_transaction_cancel');
+  late final _http_transaction_cancel = _http_transaction_cancelPtr
+      .asFunction<int Function(http_transaction_h)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Sets ready to write event for a transaction.
+  /// @since_tizen 3.0
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[out] read_to_write Enable/disable ready to write
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_set_ready_to_write(
+    http_transaction_h http_transaction,
+    bool read_to_write,
+  ) {
+    return _http_transaction_set_ready_to_write(
+      http_transaction,
+      read_to_write,
+    );
+  }
+
+  late final _http_transaction_set_ready_to_writePtr = _lookup<
+          ffi.NativeFunction<ffi.Int Function(http_transaction_h, ffi.Bool)>>(
+      'http_transaction_set_ready_to_write');
+  late final _http_transaction_set_ready_to_write =
+      _http_transaction_set_ready_to_writePtr
+          .asFunction<int Function(http_transaction_h, bool)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Sets the interface name.
+  /// @since_tizen 3.0
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[in] interface_name The interface name to use as outgoing network interface
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_set_interface_name(
+    http_transaction_h http_transaction,
+    ffi.Pointer<ffi.Char> interface_name,
+  ) {
+    return _http_transaction_set_interface_name(
+      http_transaction,
+      interface_name,
+    );
+  }
+
+  late final _http_transaction_set_interface_namePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(http_transaction_h,
+              ffi.Pointer<ffi.Char>)>>('http_transaction_set_interface_name');
+  late final _http_transaction_set_interface_name =
+      _http_transaction_set_interface_namePtr.asFunction<
+          int Function(http_transaction_h, ffi.Pointer<ffi.Char>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Gets the interface name.
+  /// @since_tizen 3.0
+  /// @remarks The @a interface_name should be freed using free().
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[out] interface_name The interface name
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_get_interface_name(
+    http_transaction_h http_transaction,
+    ffi.Pointer<ffi.Pointer<ffi.Char>> interface_name,
+  ) {
+    return _http_transaction_get_interface_name(
+      http_transaction,
+      interface_name,
+    );
+  }
+
+  late final _http_transaction_get_interface_namePtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Int Function(
+                  http_transaction_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>>(
+      'http_transaction_get_interface_name');
+  late final _http_transaction_get_interface_name =
+      _http_transaction_get_interface_namePtr.asFunction<
+          int Function(
+              http_transaction_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Sets the flag to verify a server certificate.
+  /// @details The verify determines whether verifies the peer's certificate.
+  /// @since_tizen 3.0
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[in] verify The flag to verify a server certificate; true means verifies; false means it doesn't.
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_set_server_certificate_verification(
+    http_transaction_h http_transaction,
+    bool verify,
+  ) {
+    return _http_transaction_set_server_certificate_verification(
+      http_transaction,
+      verify,
+    );
+  }
+
+  late final _http_transaction_set_server_certificate_verificationPtr = _lookup<
+          ffi.NativeFunction<ffi.Int Function(http_transaction_h, ffi.Bool)>>(
+      'http_transaction_set_server_certificate_verification');
+  late final _http_transaction_set_server_certificate_verification =
+      _http_transaction_set_server_certificate_verificationPtr
+          .asFunction<int Function(http_transaction_h, bool)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Gets the flag to verify a server certificate.
+  /// @since_tizen 3.0
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[out] verify The flag to verify a server certificate; true means verifies; false means it doesn't.
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_get_server_certificate_verification(
+    http_transaction_h http_transaction,
+    ffi.Pointer<ffi.Bool> verify,
+  ) {
+    return _http_transaction_get_server_certificate_verification(
+      http_transaction,
+      verify,
+    );
+  }
+
+  late final _http_transaction_get_server_certificate_verificationPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Int Function(http_transaction_h, ffi.Pointer<ffi.Bool>)>>(
+      'http_transaction_get_server_certificate_verification');
+  late final _http_transaction_get_server_certificate_verification =
+      _http_transaction_get_server_certificate_verificationPtr.asFunction<
+          int Function(http_transaction_h, ffi.Pointer<ffi.Bool>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Sets the flag to allow TCP Fast Open.
+  /// @since_tizen 5.0
+  /// @remarks TCP Fast Open depends on kernel version.\n
+  /// #HTTP_ERROR_NOT_SUPPORTED error will be returned for kernel version less than 3.13.
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[in] enable The flag to enable TCP Fast Open
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_set_tcp_fastopen(
+    http_transaction_h http_transaction,
+    bool enable,
+  ) {
+    return _http_transaction_set_tcp_fastopen(
+      http_transaction,
+      enable,
+    );
+  }
+
+  late final _http_transaction_set_tcp_fastopenPtr = _lookup<
+          ffi.NativeFunction<ffi.Int Function(http_transaction_h, ffi.Bool)>>(
+      'http_transaction_set_tcp_fastopen');
+  late final _http_transaction_set_tcp_fastopen =
+      _http_transaction_set_tcp_fastopenPtr
+          .asFunction<int Function(http_transaction_h, bool)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Gets the flag to allow TCP Fast Open.
+  /// @since_tizen 5.0
+  /// @remarks TCP Fast Open depends on kernel version.\n
+  /// #HTTP_ERROR_NOT_SUPPORTED error will be returned for kernel version less than 3.13.
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[out] enable The flag to enable TCP Fast Open
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_get_tcp_fastopen(
+    http_transaction_h http_transaction,
+    ffi.Pointer<ffi.Bool> enable,
+  ) {
+    return _http_transaction_get_tcp_fastopen(
+      http_transaction,
+      enable,
+    );
+  }
+
+  late final _http_transaction_get_tcp_fastopenPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(http_transaction_h,
+              ffi.Pointer<ffi.Bool>)>>('http_transaction_get_tcp_fastopen');
+  late final _http_transaction_get_tcp_fastopen =
+      _http_transaction_get_tcp_fastopenPtr.asFunction<
+          int Function(http_transaction_h, ffi.Pointer<ffi.Bool>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Adds a named field to header.
+  /// @details Adds a named field, which is a <@c fieldName, @c fieldValue> pair, to the current instance of HTTP Transaction.
+  /// @since_tizen 3.0
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[in] field_name The HTTP Header Field name
+  /// @param[in] field_value The HTTP Header Field value
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_header_add_field(
+    http_transaction_h http_transaction,
+    ffi.Pointer<ffi.Char> field_name,
+    ffi.Pointer<ffi.Char> field_value,
+  ) {
+    return _http_transaction_header_add_field(
+      http_transaction,
+      field_name,
+      field_value,
+    );
+  }
+
+  late final _http_transaction_header_add_fieldPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(http_transaction_h, ffi.Pointer<ffi.Char>,
+              ffi.Pointer<ffi.Char>)>>('http_transaction_header_add_field');
+  late final _http_transaction_header_add_field =
+      _http_transaction_header_add_fieldPtr.asFunction<
+          int Function(http_transaction_h, ffi.Pointer<ffi.Char>,
+              ffi.Pointer<ffi.Char>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Removes the named field from header.
+  /// @details Remove the named field, which is a <@c fieldName, @c fieldValue> pair, from the current instance of HTTP Transaction.
+  /// @since_tizen 3.0
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[in] field_name The HTTP Header Field name
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_header_remove_field(
+    http_transaction_h http_transaction,
+    ffi.Pointer<ffi.Char> field_name,
+  ) {
+    return _http_transaction_header_remove_field(
+      http_transaction,
+      field_name,
+    );
+  }
+
+  late final _http_transaction_header_remove_fieldPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(http_transaction_h,
+              ffi.Pointer<ffi.Char>)>>('http_transaction_header_remove_field');
+  late final _http_transaction_header_remove_field =
+      _http_transaction_header_remove_fieldPtr.asFunction<
+          int Function(http_transaction_h, ffi.Pointer<ffi.Char>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Gets the HTTP Header Field value from custom header.
+  /// @since_tizen 3.0
+  /// @remarks The @a field_value should be freed using free().
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[in] field_name The HTTP Header Field name
+  /// @param[out] field_value The HTTP Header Field value
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_header_get_field_value(
+    http_transaction_h http_transaction,
+    ffi.Pointer<ffi.Char> field_name,
+    ffi.Pointer<ffi.Pointer<ffi.Char>> field_value,
+  ) {
+    return _http_transaction_header_get_field_value(
+      http_transaction,
+      field_name,
+      field_value,
+    );
+  }
+
+  late final _http_transaction_header_get_field_valuePtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Int Function(http_transaction_h, ffi.Pointer<ffi.Char>,
+                  ffi.Pointer<ffi.Pointer<ffi.Char>>)>>(
+      'http_transaction_header_get_field_value');
+  late final _http_transaction_header_get_field_value =
+      _http_transaction_header_get_field_valuePtr.asFunction<
+          int Function(http_transaction_h, ffi.Pointer<ffi.Char>,
+              ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Sets an HTTP method of the request header.
+  /// @details Sets an HTTP method such as GET, POST, PUT and etc.
+  /// @since_tizen 3.0
+  /// @remarks The default method is GET.
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[in] method The HTTP method
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_request_set_method(
+    http_transaction_h http_transaction,
+    int method,
+  ) {
+    return _http_transaction_request_set_method(
+      http_transaction,
+      method,
+    );
+  }
+
+  late final _http_transaction_request_set_methodPtr = _lookup<
+          ffi.NativeFunction<ffi.Int Function(http_transaction_h, ffi.Int32)>>(
+      'http_transaction_request_set_method');
+  late final _http_transaction_request_set_method =
+      _http_transaction_request_set_methodPtr
+          .asFunction<int Function(http_transaction_h, int)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Gets the HTTP method from request header.
+  /// @since_tizen 3.0
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[out] method The HTTP method
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_request_get_method(
+    http_transaction_h http_transaction,
+    ffi.Pointer<ffi.Int32> method,
+  ) {
+    return _http_transaction_request_get_method(
+      http_transaction,
+      method,
+    );
+  }
+
+  late final _http_transaction_request_get_methodPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(http_transaction_h,
+              ffi.Pointer<ffi.Int32>)>>('http_transaction_request_get_method');
+  late final _http_transaction_request_get_method =
+      _http_transaction_request_get_methodPtr.asFunction<
+          int Function(http_transaction_h, ffi.Pointer<ffi.Int32>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Sets an HTTP version of the request header.
+  /// @since_tizen 3.0
+  /// @remarks The default version is HTTP 1.1.
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[in] version The HTTP version
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_request_set_version(
+    http_transaction_h http_transaction,
+    int version,
+  ) {
+    return _http_transaction_request_set_version(
+      http_transaction,
+      version,
+    );
+  }
+
+  late final _http_transaction_request_set_versionPtr = _lookup<
+          ffi.NativeFunction<ffi.Int Function(http_transaction_h, ffi.Int32)>>(
+      'http_transaction_request_set_version');
+  late final _http_transaction_request_set_version =
+      _http_transaction_request_set_versionPtr
+          .asFunction<int Function(http_transaction_h, int)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Gets the HTTP version from request header.
+  /// @details Gets the HTTP version.
+  /// @since_tizen 3.0
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[out] version The HTTP version
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_request_get_version(
+    http_transaction_h http_transaction,
+    ffi.Pointer<ffi.Int32> version,
+  ) {
+    return _http_transaction_request_get_version(
+      http_transaction,
+      version,
+    );
+  }
+
+  late final _http_transaction_request_get_versionPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(http_transaction_h,
+              ffi.Pointer<ffi.Int32>)>>('http_transaction_request_get_version');
+  late final _http_transaction_request_get_version =
+      _http_transaction_request_get_versionPtr.asFunction<
+          int Function(http_transaction_h, ffi.Pointer<ffi.Int32>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Sets a URI of the request header.
+  /// @details Sets a URI of the request header.
+  /// @since_tizen 3.0
+  /// @remarks It should be used before http_transaction_submit().
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[in] host_uri The URI to use in the request
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_request_set_uri(
+    http_transaction_h http_transaction,
+    ffi.Pointer<ffi.Char> host_uri,
+  ) {
+    return _http_transaction_request_set_uri(
+      http_transaction,
+      host_uri,
+    );
+  }
+
+  late final _http_transaction_request_set_uriPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(http_transaction_h,
+              ffi.Pointer<ffi.Char>)>>('http_transaction_request_set_uri');
+  late final _http_transaction_request_set_uri =
+      _http_transaction_request_set_uriPtr.asFunction<
+          int Function(http_transaction_h, ffi.Pointer<ffi.Char>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Gets the URI.
+  /// @since_tizen 3.0
+  /// @remarks The @a host_uri should be freed using free().
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[out] host_uri The host URI
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_request_get_uri(
+    http_transaction_h http_transaction,
+    ffi.Pointer<ffi.Pointer<ffi.Char>> host_uri,
+  ) {
+    return _http_transaction_request_get_uri(
+      http_transaction,
+      host_uri,
+    );
+  }
+
+  late final _http_transaction_request_get_uriPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Int Function(
+                  http_transaction_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>>(
+      'http_transaction_request_get_uri');
+  late final _http_transaction_request_get_uri =
+      _http_transaction_request_get_uriPtr.asFunction<
+          int Function(
+              http_transaction_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Sets the Accept-Encoding header field of HTTP Request.
+  /// @details The Accept-Encoding header enables automatic decompression of HTTP downloads.
+  /// @since_tizen 3.0
+  /// @remarks If empty string is set, an Accept-Encoding header contains all supported built-in compressions.
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[in] encoding The encoding algorithms (e.g. gzip, deflate)
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_request_set_accept_encoding(
+    http_transaction_h http_transaction,
+    ffi.Pointer<ffi.Char> encoding,
+  ) {
+    return _http_transaction_request_set_accept_encoding(
+      http_transaction,
+      encoding,
+    );
+  }
+
+  late final _http_transaction_request_set_accept_encodingPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Int Function(http_transaction_h, ffi.Pointer<ffi.Char>)>>(
+      'http_transaction_request_set_accept_encoding');
+  late final _http_transaction_request_set_accept_encoding =
+      _http_transaction_request_set_accept_encodingPtr.asFunction<
+          int Function(http_transaction_h, ffi.Pointer<ffi.Char>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Gets the Accept-Encoding header field of HTTP Request.
+  /// @since_tizen 3.0
+  /// @remarks The @a encoding should be freed using free().
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[out] encoding The encoding algorithms
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_request_get_accept_encoding(
+    http_transaction_h http_transaction,
+    ffi.Pointer<ffi.Pointer<ffi.Char>> encoding,
+  ) {
+    return _http_transaction_request_get_accept_encoding(
+      http_transaction,
+      encoding,
+    );
+  }
+
+  late final _http_transaction_request_get_accept_encodingPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Int Function(
+                  http_transaction_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>>(
+      'http_transaction_request_get_accept_encoding');
+  late final _http_transaction_request_get_accept_encoding =
+      _http_transaction_request_get_accept_encodingPtr.asFunction<
+          int Function(
+              http_transaction_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Sets a cookie in the HTTP request.
+  /// @since_tizen 3.0
+  /// @remarks The format of string should be NME=CONTENTS (e.g. "name1=hello; name2=tizen;")
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[in] cookie The cookie
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_request_set_cookie(
+    http_transaction_h http_transaction,
+    ffi.Pointer<ffi.Char> cookie,
+  ) {
+    return _http_transaction_request_set_cookie(
+      http_transaction,
+      cookie,
+    );
+  }
+
+  late final _http_transaction_request_set_cookiePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(http_transaction_h,
+              ffi.Pointer<ffi.Char>)>>('http_transaction_request_set_cookie');
+  late final _http_transaction_request_set_cookie =
+      _http_transaction_request_set_cookiePtr.asFunction<
+          int Function(http_transaction_h, ffi.Pointer<ffi.Char>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Gets a cookie in the HTTP request.
+  /// @since_tizen 3.0
+  /// @remarks The @a cookie should be freed using free().
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[out] cookie The cookie
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_request_get_cookie(
+    http_transaction_h http_transaction,
+    ffi.Pointer<ffi.Pointer<ffi.Char>> cookie,
+  ) {
+    return _http_transaction_request_get_cookie(
+      http_transaction,
+      cookie,
+    );
+  }
+
+  late final _http_transaction_request_get_cookiePtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Int Function(
+                  http_transaction_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>>(
+      'http_transaction_request_get_cookie');
+  late final _http_transaction_request_get_cookie =
+      _http_transaction_request_get_cookiePtr.asFunction<
+          int Function(
+              http_transaction_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Writes the request message body.
+  /// @details This function writes the request message body in the internal queue. \n
+  /// The written queue for request body is uploaded after invoking http_transaction_submit().
+  /// @since_tizen 3.0
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[in] body The message body data
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_request_write_body(
+    http_transaction_h http_transaction,
+    ffi.Pointer<ffi.Char> body,
+  ) {
+    return _http_transaction_request_write_body(
+      http_transaction,
+      body,
+    );
+  }
+
+  late final _http_transaction_request_write_bodyPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(http_transaction_h,
+              ffi.Pointer<ffi.Char>)>>('http_transaction_request_write_body');
+  late final _http_transaction_request_write_body =
+      _http_transaction_request_write_bodyPtr.asFunction<
+          int Function(http_transaction_h, ffi.Pointer<ffi.Char>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Sets the file path for uploading a file.
+  /// @since_tizen 3.0
+  /// @remarks It is used with #HTTP_METHOD_PUT. \n
+  /// %http://tizen.org/privilege/mediastorage is needed if input or output path are relevant to media storage. \n
+  /// %http://tizen.org/privilege/externalstorage is needed if input or output path are relevant to external storage.
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[in] file_path The path for file
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE  Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION  Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED  Not Supported
+  /// @retval #HTTP_ERROR_PERMISSION_DENIED Permission denied
+  int http_transaction_request_set_upload_file(
+    http_transaction_h http_transaction,
+    ffi.Pointer<ffi.Char> file_path,
+  ) {
+    return _http_transaction_request_set_upload_file(
+      http_transaction,
+      file_path,
+    );
+  }
+
+  late final _http_transaction_request_set_upload_filePtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Int Function(http_transaction_h, ffi.Pointer<ffi.Char>)>>(
+      'http_transaction_request_set_upload_file');
+  late final _http_transaction_request_set_upload_file =
+      _http_transaction_request_set_upload_filePtr.asFunction<
+          int Function(http_transaction_h, ffi.Pointer<ffi.Char>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Gets the HTTP status code from HTTP Response.
+  /// @since_tizen 3.0
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[out] status_code The HTTP status code
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_response_get_status_code(
+    http_transaction_h http_transaction,
+    ffi.Pointer<ffi.Int32> status_code,
+  ) {
+    return _http_transaction_response_get_status_code(
+      http_transaction,
+      status_code,
+    );
+  }
+
+  late final _http_transaction_response_get_status_codePtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Int Function(http_transaction_h, ffi.Pointer<ffi.Int32>)>>(
+      'http_transaction_response_get_status_code');
+  late final _http_transaction_response_get_status_code =
+      _http_transaction_response_get_status_codePtr.asFunction<
+          int Function(http_transaction_h, ffi.Pointer<ffi.Int32>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Gets the HTTP status text from HTTP Response.
+  /// @since_tizen 3.0
+  /// @remarks The @a status_text should be freed using free().
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[out] status_text The HTTP status text
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_response_get_status_text(
+    http_transaction_h http_transaction,
+    ffi.Pointer<ffi.Pointer<ffi.Char>> status_text,
+  ) {
+    return _http_transaction_response_get_status_text(
+      http_transaction,
+      status_text,
+    );
+  }
+
+  late final _http_transaction_response_get_status_textPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Int Function(
+                  http_transaction_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>>(
+      'http_transaction_response_get_status_text');
+  late final _http_transaction_response_get_status_text =
+      _http_transaction_response_get_status_textPtr.asFunction<
+          int Function(
+              http_transaction_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Gets the HTTP version from HTTP Response.
+  /// @since_tizen 3.0
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[out] version The HTTP version
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_response_get_version(
+    http_transaction_h http_transaction,
+    ffi.Pointer<ffi.Int32> version,
+  ) {
+    return _http_transaction_response_get_version(
+      http_transaction,
+      version,
+    );
+  }
+
+  late final _http_transaction_response_get_versionPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Int Function(http_transaction_h, ffi.Pointer<ffi.Int32>)>>(
+      'http_transaction_response_get_version');
+  late final _http_transaction_response_get_version =
+      _http_transaction_response_get_versionPtr.asFunction<
+          int Function(http_transaction_h, ffi.Pointer<ffi.Int32>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Opens HTTP transaction with authentication information.
+  /// @since_tizen 3.0
+  /// @remarks The @a http_auth_transaction should be released using http_transaction_destroy().
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[out] http_auth_transaction The HTTP transaction handle
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_OUT_OF_MEMORY Out of memory
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_open_authentication(
+    http_transaction_h http_transaction,
+    ffi.Pointer<http_transaction_h> http_auth_transaction,
+  ) {
+    return _http_transaction_open_authentication(
+      http_transaction,
+      http_auth_transaction,
+    );
+  }
+
+  late final _http_transaction_open_authenticationPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Int Function(
+                  http_transaction_h, ffi.Pointer<http_transaction_h>)>>(
+      'http_transaction_open_authentication');
+  late final _http_transaction_open_authentication =
+      _http_transaction_open_authenticationPtr.asFunction<
+          int Function(http_transaction_h, ffi.Pointer<http_transaction_h>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Sets an HTTP credentials.
+  /// @details Sets an HTTP authentication scheme such as username and password.
+  /// @since_tizen 3.0
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[in] user_name The HTTP user name
+  /// @param[in] password The HTTP password
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_set_credentials(
+    http_transaction_h http_transaction,
+    ffi.Pointer<ffi.Char> user_name,
+    ffi.Pointer<ffi.Char> password,
+  ) {
+    return _http_transaction_set_credentials(
+      http_transaction,
+      user_name,
+      password,
+    );
+  }
+
+  late final _http_transaction_set_credentialsPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(http_transaction_h, ffi.Pointer<ffi.Char>,
+              ffi.Pointer<ffi.Char>)>>('http_transaction_set_credentials');
+  late final _http_transaction_set_credentials =
+      _http_transaction_set_credentialsPtr.asFunction<
+          int Function(http_transaction_h, ffi.Pointer<ffi.Char>,
+              ffi.Pointer<ffi.Char>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Gets the username & password for the HTTP credential.
+  /// @since_tizen 3.0
+  /// @remarks The @a user_name & @a password should be freed using free().
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[out] user_name The HTTP credential user name
+  /// @param[out] password The HTTP credential password
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_OUT_OF_MEMORY Out of memory
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_get_credentials(
+    http_transaction_h http_transaction,
+    ffi.Pointer<ffi.Pointer<ffi.Char>> user_name,
+    ffi.Pointer<ffi.Pointer<ffi.Char>> password,
+  ) {
+    return _http_transaction_get_credentials(
+      http_transaction,
+      user_name,
+      password,
+    );
+  }
+
+  late final _http_transaction_get_credentialsPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Int Function(
+                  http_transaction_h,
+                  ffi.Pointer<ffi.Pointer<ffi.Char>>,
+                  ffi.Pointer<ffi.Pointer<ffi.Char>>)>>(
+      'http_transaction_get_credentials');
+  late final _http_transaction_get_credentials =
+      _http_transaction_get_credentialsPtr.asFunction<
+          int Function(http_transaction_h, ffi.Pointer<ffi.Pointer<ffi.Char>>,
+              ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Sets an HTTP authentication scheme.
+  /// @details Set an HTTP authentication scheme such as BASIC, MD5, NTLM and etc.
+  /// @since_tizen 3.0
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[in] auth_scheme The HTTP authentication scheme
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_set_http_auth_scheme(
+    http_transaction_h http_transaction,
+    int auth_scheme,
+  ) {
+    return _http_transaction_set_http_auth_scheme(
+      http_transaction,
+      auth_scheme,
+    );
+  }
+
+  late final _http_transaction_set_http_auth_schemePtr = _lookup<
+          ffi.NativeFunction<ffi.Int Function(http_transaction_h, ffi.Int32)>>(
+      'http_transaction_set_http_auth_scheme');
+  late final _http_transaction_set_http_auth_scheme =
+      _http_transaction_set_http_auth_schemePtr
+          .asFunction<int Function(http_transaction_h, int)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Gets the HTTP authentication scheme.
+  /// @since_tizen 3.0
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[out] auth_scheme The HTTP auth scheme value
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_get_http_auth_scheme(
+    http_transaction_h http_transaction,
+    ffi.Pointer<ffi.Int32> auth_scheme,
+  ) {
+    return _http_transaction_get_http_auth_scheme(
+      http_transaction,
+      auth_scheme,
+    );
+  }
+
+  late final _http_transaction_get_http_auth_schemePtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Int Function(http_transaction_h, ffi.Pointer<ffi.Int32>)>>(
+      'http_transaction_get_http_auth_scheme');
+  late final _http_transaction_get_http_auth_scheme =
+      _http_transaction_get_http_auth_schemePtr.asFunction<
+          int Function(http_transaction_h, ffi.Pointer<ffi.Int32>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Gets the HTTP authentication realm.
+  /// @since_tizen 3.0
+  /// @remarks The @a realm should be freed using free().
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[out] realm The HTTP authentication realm value
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_OUT_OF_MEMORY Out of memory
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_get_realm(
+    http_transaction_h http_transaction,
+    ffi.Pointer<ffi.Pointer<ffi.Char>> realm,
+  ) {
+    return _http_transaction_get_realm(
+      http_transaction,
+      realm,
+    );
+  }
+
+  late final _http_transaction_get_realmPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Int Function(
+                  http_transaction_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>>(
+      'http_transaction_get_realm');
+  late final _http_transaction_get_realm =
+      _http_transaction_get_realmPtr.asFunction<
+          int Function(
+              http_transaction_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
   /// @brief The default factory key.
   /// @details The key is 0xff, 0xff, 0xff, 0xff, 0xff, 0xff
@@ -167888,6 +168320,740 @@ class Tizen90Native {
       _lookup<ffi.NativeFunction<ffi.Int Function()>>('wauthn_cancel');
   late final _wauthn_cancel = _wauthn_cancelPtr.asFunction<int Function()>();
 
+  /// @brief Initializes the library. Must be called before any other crypto
+  /// function. Should be called once in each thread that uses yaca.
+  /// @since_tizen 3.0
+  /// @return #YACA_ERROR_NONE on success,
+  /// negative on error
+  /// @retval #YACA_ERROR_NONE Successful
+  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
+  /// @retval #YACA_ERROR_INTERNAL Internal error
+  /// @see yaca_cleanup()
+  int yaca_initialize() {
+    return _yaca_initialize();
+  }
+
+  late final _yaca_initializePtr =
+      _lookup<ffi.NativeFunction<ffi.Int Function()>>('yaca_initialize');
+  late final _yaca_initialize =
+      _yaca_initializePtr.asFunction<int Function()>();
+
+  /// @brief Cleans up the library. Must be called before exiting the thread that called yaca_initialize().
+  /// @since_tizen 3.0
+  /// @see yaca_initialize()
+  void yaca_cleanup() {
+    return _yaca_cleanup();
+  }
+
+  late final _yaca_cleanupPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function()>>('yaca_cleanup');
+  late final _yaca_cleanup = _yaca_cleanupPtr.asFunction<void Function()>();
+
+  /// @brief Allocates the memory.
+  /// @since_tizen 3.0
+  /// @remarks The @a memory should be freed using yaca_free().
+  /// @param[in] size Size of the allocation (bytes)
+  /// @param[out] memory Allocated memory
+  /// @return #YACA_ERROR_NONE on success,
+  /// negative on error
+  /// @retval #YACA_ERROR_NONE Successful
+  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0)
+  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
+  /// @see yaca_zalloc()
+  /// @see yaca_realloc()
+  /// @see yaca_free()
+  int yaca_malloc(
+    int size,
+    ffi.Pointer<ffi.Pointer<ffi.Void>> memory,
+  ) {
+    return _yaca_malloc(
+      size,
+      memory,
+    );
+  }
+
+  late final _yaca_mallocPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(
+              ffi.Size, ffi.Pointer<ffi.Pointer<ffi.Void>>)>>('yaca_malloc');
+  late final _yaca_malloc = _yaca_mallocPtr
+      .asFunction<int Function(int, ffi.Pointer<ffi.Pointer<ffi.Void>>)>();
+
+  /// @brief Allocates the zeroed memory.
+  /// @since_tizen 3.0
+  /// @remarks The @a memory should be freed using yaca_free().
+  /// @param[in] size Size of the allocation (bytes)
+  /// @param[out] memory Allocated memory
+  /// @return #YACA_ERROR_NONE on success,
+  /// negative on error
+  /// @retval #YACA_ERROR_NONE Successful
+  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0)
+  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
+  /// @see yaca_malloc()
+  /// @see yaca_realloc()
+  /// @see yaca_free()
+  int yaca_zalloc(
+    int size,
+    ffi.Pointer<ffi.Pointer<ffi.Void>> memory,
+  ) {
+    return _yaca_zalloc(
+      size,
+      memory,
+    );
+  }
+
+  late final _yaca_zallocPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(
+              ffi.Size, ffi.Pointer<ffi.Pointer<ffi.Void>>)>>('yaca_zalloc');
+  late final _yaca_zalloc = _yaca_zallocPtr
+      .asFunction<int Function(int, ffi.Pointer<ffi.Pointer<ffi.Void>>)>();
+
+  /// @brief Re-allocates the memory.
+  /// @since_tizen 3.0
+  /// @remarks In case of failure the function doesn't free the memory pointed by @a memory.
+  /// @remarks If @a memory is NULL then the call is equivalent to yaca_malloc().
+  /// @remarks If the function fails the contents of @a memory will be left unchanged.
+  /// @remarks The @a memory should be freed using yaca_free().
+  /// @param[in] size Size of the new allocation (bytes)
+  /// @param[in,out] memory  Memory to be reallocated
+  /// @return #YACA_ERROR_NONE on success,
+  /// negative on error
+  /// @retval #YACA_ERROR_NONE Successful
+  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0)
+  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
+  /// @see yaca_malloc()
+  /// @see yaca_zalloc()
+  /// @see yaca_free()
+  int yaca_realloc(
+    int size,
+    ffi.Pointer<ffi.Pointer<ffi.Void>> memory,
+  ) {
+    return _yaca_realloc(
+      size,
+      memory,
+    );
+  }
+
+  late final _yaca_reallocPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(
+              ffi.Size, ffi.Pointer<ffi.Pointer<ffi.Void>>)>>('yaca_realloc');
+  late final _yaca_realloc = _yaca_reallocPtr
+      .asFunction<int Function(int, ffi.Pointer<ffi.Pointer<ffi.Void>>)>();
+
+  /// @brief Frees the memory allocated by yaca_malloc(), yaca_zalloc(),
+  /// yaca_realloc() or one of the cryptographic operations.
+  /// @since_tizen 3.0
+  /// @param[in] memory Pointer to the memory to be freed
+  /// @see yaca_malloc()
+  /// @see yaca_zalloc()
+  /// @see yaca_realloc()
+  void yaca_free(
+    ffi.Pointer<ffi.Void> memory,
+  ) {
+    return _yaca_free(
+      memory,
+    );
+  }
+
+  late final _yaca_freePtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>(
+          'yaca_free');
+  late final _yaca_free =
+      _yaca_freePtr.asFunction<void Function(ffi.Pointer<ffi.Void>)>();
+
+  /// @brief Safely compares first @a len bytes of two buffers.
+  /// @since_tizen 3.0
+  /// @param[in] first Pointer to the first buffer
+  /// @param[in] second Pointer to the second buffer
+  /// @param[in] len Length to compare
+  /// @return #YACA_ERROR_NONE when buffers are equal,
+  /// otherwise #YACA_ERROR_DATA_MISMATCH
+  /// @retval #YACA_ERROR_NONE Successful
+  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0)
+  /// @retval #YACA_ERROR_DATA_MISMATCH Buffers are different
+  int yaca_memcmp(
+    ffi.Pointer<ffi.Void> first,
+    ffi.Pointer<ffi.Void> second,
+    int len,
+  ) {
+    return _yaca_memcmp(
+      first,
+      second,
+      len,
+    );
+  }
+
+  late final _yaca_memcmpPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>,
+              ffi.Size)>>('yaca_memcmp');
+  late final _yaca_memcmp = _yaca_memcmpPtr.asFunction<
+      int Function(ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>, int)>();
+
+  /// @brief Generates random data.
+  /// @since_tizen 3.0
+  /// @param[in,out] data Pointer to the memory to be randomized
+  /// @param[in] data_len Length of the memory to be randomized
+  /// @return #YACA_ERROR_NONE on success,
+  /// negative on error
+  /// @retval #YACA_ERROR_NONE Successful
+  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0)
+  /// @retval #YACA_ERROR_INTERNAL Internal error
+  int yaca_randomize_bytes(
+    ffi.Pointer<ffi.Char> data,
+    int data_len,
+  ) {
+    return _yaca_randomize_bytes(
+      data,
+      data_len,
+    );
+  }
+
+  late final _yaca_randomize_bytesPtr = _lookup<
+          ffi
+          .NativeFunction<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Size)>>(
+      'yaca_randomize_bytes');
+  late final _yaca_randomize_bytes = _yaca_randomize_bytesPtr
+      .asFunction<int Function(ffi.Pointer<ffi.Char>, int)>();
+
+  /// @brief Sets the non-standard context properties. Can only be called on an initialized context.
+  /// @since_tizen 3.0
+  /// @remarks The @a value has to be of type appropriate for given property. See #yaca_property_e
+  /// for details on corresponding types.
+  /// @param[in,out] ctx Previously initialized crypto context
+  /// @param[in] property Property to be set
+  /// @param[in] value Property value
+  /// @param[in] value_len Length of the property value
+  /// @return #YACA_ERROR_NONE on success,
+  /// negative on error
+  /// @retval #YACA_ERROR_NONE Successful
+  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0,
+  /// invalid @a ctx or @a property)
+  /// @retval #YACA_ERROR_INTERNAL Internal error
+  /// @see #yaca_property_e
+  /// @see yaca_context_get_property()
+  int yaca_context_set_property(
+    yaca_context_h ctx,
+    int property,
+    ffi.Pointer<ffi.Void> value,
+    int value_len,
+  ) {
+    return _yaca_context_set_property(
+      ctx,
+      property,
+      value,
+      value_len,
+    );
+  }
+
+  late final _yaca_context_set_propertyPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(yaca_context_h, ffi.Int32, ffi.Pointer<ffi.Void>,
+              ffi.Size)>>('yaca_context_set_property');
+  late final _yaca_context_set_property =
+      _yaca_context_set_propertyPtr.asFunction<
+          int Function(yaca_context_h, int, ffi.Pointer<ffi.Void>, int)>();
+
+  /// @brief Returns the non-standard context properties. Can only be called on an initialized context.
+  /// @since_tizen 3.0
+  /// @remarks The @a value should be freed using yaca_free().
+  /// @remarks The @a value has to be of type appropriate for given property. See #yaca_property_e
+  /// for details on corresponding types.
+  /// @remarks The @a value_len can be NULL if returned @a value is a single object (i.e. not an array/buffer).
+  /// @param[in] ctx Previously initialized crypto context
+  /// @param[in] property Property to be read
+  /// @param[out] value Copy of the property value
+  /// @param[out] value_len Length of the property value will be returned here
+  /// @return #YACA_ERROR_NONE on success,
+  /// negative on error
+  /// @retval #YACA_ERROR_NONE Successful
+  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL,
+  /// invalid @a ctx or @a property)
+  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
+  /// @retval #YACA_ERROR_INTERNAL Internal error
+  /// @see #yaca_property_e
+  /// @see yaca_context_set_property()
+  /// @see yaca_free()
+  int yaca_context_get_property(
+    yaca_context_h ctx,
+    int property,
+    ffi.Pointer<ffi.Pointer<ffi.Void>> value,
+    ffi.Pointer<ffi.Size> value_len,
+  ) {
+    return _yaca_context_get_property(
+      ctx,
+      property,
+      value,
+      value_len,
+    );
+  }
+
+  late final _yaca_context_get_propertyPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(
+              yaca_context_h,
+              ffi.Int32,
+              ffi.Pointer<ffi.Pointer<ffi.Void>>,
+              ffi.Pointer<ffi.Size>)>>('yaca_context_get_property');
+  late final _yaca_context_get_property =
+      _yaca_context_get_propertyPtr.asFunction<
+          int Function(yaca_context_h, int, ffi.Pointer<ffi.Pointer<ffi.Void>>,
+              ffi.Pointer<ffi.Size>)>();
+
+  /// @brief Returns the minimum required size of the output buffer for a single crypto function call.
+  /// @since_tizen 3.0
+  /// @remarks This function should be used to learn the required size of the output buffer
+  /// for a single function call (eg. *_update or *_finalize). The actual output length
+  /// (number of bytes that has been used) will be returned by the function call itself.
+  /// @remarks In case the function call has no output (e.g. yaca_sign_update(),
+  /// yaca_digest_update()), there is no need to use this function.
+  /// @remarks In case the function call has no input (eg. *_finalize), the value of
+  /// @a input_len has to be set to 0.
+  /// @param[in] ctx Previously initialized crypto context
+  /// @param[in] input_len Length of the input data to be processed
+  /// @param[out] output_len Required length of the output
+  /// @return #YACA_ERROR_NONE on success,
+  /// negative on error
+  /// @retval #YACA_ERROR_NONE Successful
+  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL,
+  /// invalid @a ctx or too big @a input_len)
+  /// @retval #YACA_ERROR_INTERNAL Internal error
+  int yaca_context_get_output_length(
+    yaca_context_h ctx,
+    int input_len,
+    ffi.Pointer<ffi.Size> output_len,
+  ) {
+    return _yaca_context_get_output_length(
+      ctx,
+      input_len,
+      output_len,
+    );
+  }
+
+  late final _yaca_context_get_output_lengthPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(yaca_context_h, ffi.Size,
+              ffi.Pointer<ffi.Size>)>>('yaca_context_get_output_length');
+  late final _yaca_context_get_output_length =
+      _yaca_context_get_output_lengthPtr.asFunction<
+          int Function(yaca_context_h, int, ffi.Pointer<ffi.Size>)>();
+
+  /// @brief Destroys the crypto context. Must be called on all contexts that are no longer used.
+  /// Passing #YACA_CONTEXT_NULL is allowed.
+  /// @since_tizen 3.0
+  /// @param[in,out] ctx  Crypto context
+  /// @see #yaca_context_h
+  void yaca_context_destroy(
+    yaca_context_h ctx,
+  ) {
+    return _yaca_context_destroy(
+      ctx,
+    );
+  }
+
+  late final _yaca_context_destroyPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(yaca_context_h)>>(
+          'yaca_context_destroy');
+  late final _yaca_context_destroy =
+      _yaca_context_destroyPtr.asFunction<void Function(yaca_context_h)>();
+
+  /// @brief Initializes a digest context.
+  /// @since_tizen 3.0
+  /// @remarks The @a ctx should be released using yaca_context_destroy().
+  /// @param[out] ctx Newly created context
+  /// @param[in] algo Digest algorithm that will be used
+  /// @return #YACA_ERROR_NONE on success,
+  /// negative on error
+  /// @retval #YACA_ERROR_NONE Successful
+  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL,
+  /// invalid @a algo)
+  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
+  /// @retval #YACA_ERROR_INTERNAL Internal error
+  /// @see #yaca_digest_algorithm_e
+  /// @see yaca_digest_update()
+  /// @see yaca_digest_finalize()
+  /// @see yaca_context_destroy()
+  int yaca_digest_initialize(
+    ffi.Pointer<yaca_context_h> ctx,
+    int algo,
+  ) {
+    return _yaca_digest_initialize(
+      ctx,
+      algo,
+    );
+  }
+
+  late final _yaca_digest_initializePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(ffi.Pointer<yaca_context_h>,
+              ffi.Int32)>>('yaca_digest_initialize');
+  late final _yaca_digest_initialize = _yaca_digest_initializePtr
+      .asFunction<int Function(ffi.Pointer<yaca_context_h>, int)>();
+
+  /// @brief Feeds the message into the message digest algorithm.
+  /// @since_tizen 3.0
+  /// @param[in,out] ctx Context created by yaca_digest_initialize()
+  /// @param[in] message Message from which the digest is to be calculated
+  /// @param[in] message_len Length of the message
+  /// @return #YACA_ERROR_NONE on success,
+  /// negative on error
+  /// @retval #YACA_ERROR_NONE Successful
+  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0,
+  /// invalid @a ctx)
+  /// @retval #YACA_ERROR_INTERNAL Internal error
+  /// @see yaca_digest_initialize()
+  /// @see yaca_digest_finalize()
+  int yaca_digest_update(
+    yaca_context_h ctx,
+    ffi.Pointer<ffi.Char> message,
+    int message_len,
+  ) {
+    return _yaca_digest_update(
+      ctx,
+      message,
+      message_len,
+    );
+  }
+
+  late final _yaca_digest_updatePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(yaca_context_h, ffi.Pointer<ffi.Char>,
+              ffi.Size)>>('yaca_digest_update');
+  late final _yaca_digest_update = _yaca_digest_updatePtr
+      .asFunction<int Function(yaca_context_h, ffi.Pointer<ffi.Char>, int)>();
+
+  /// @brief Calculates the final digest.
+  /// @since_tizen 3.0
+  /// @remarks Skipping yaca_digest_update() and calling only yaca_digest_finalize() will produce an empty message digest.
+  /// @param[in,out] ctx A valid digest context
+  /// @param[out] digest Buffer for the message digest
+  /// (must be allocated by client, see yaca_context_get_output_length())
+  /// @param[out] digest_len Length of the digest,
+  /// actual number of bytes written will be returned here
+  /// @return #YACA_ERROR_NONE on success,
+  /// negative on error
+  /// @retval #YACA_ERROR_NONE Successful
+  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL,
+  /// invalid @a ctx)
+  /// @retval #YACA_ERROR_INTERNAL Internal error
+  /// @see yaca_digest_initialize()
+  /// @see yaca_digest_update()
+  /// @see yaca_context_get_output_length()
+  int yaca_digest_finalize(
+    yaca_context_h ctx,
+    ffi.Pointer<ffi.Char> digest,
+    ffi.Pointer<ffi.Size> digest_len,
+  ) {
+    return _yaca_digest_finalize(
+      ctx,
+      digest,
+      digest_len,
+    );
+  }
+
+  late final _yaca_digest_finalizePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(yaca_context_h, ffi.Pointer<ffi.Char>,
+              ffi.Pointer<ffi.Size>)>>('yaca_digest_finalize');
+  late final _yaca_digest_finalize = _yaca_digest_finalizePtr.asFunction<
+      int Function(
+          yaca_context_h, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Size>)>();
+
+  /// @brief Returns the recommended/default length of the Initialization Vector for a given encryption configuration.
+  /// @since_tizen 3.0
+  /// @remarks If returned @a iv_bit_len equals 0 that means that for this
+  /// specific algorithm and its parameters Initialization Vector is not used.
+  /// @param[in] algo Encryption algorithm
+  /// @param[in] bcm Chain mode
+  /// @param[in] key_bit_len Key length in bits
+  /// @param[out] iv_bit_len Recommended Initialization Vector length in bits
+  /// @return #YACA_ERROR_NONE on success,
+  /// negative on error
+  /// @retval #YACA_ERROR_NONE Successful
+  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL,
+  /// invalid @a algo, @a bcm or @a key_bit_len not
+  /// divisible by 8)
+  /// @retval #YACA_ERROR_INTERNAL Internal error
+  int yaca_encrypt_get_iv_bit_length(
+    int algo,
+    int bcm,
+    int key_bit_len,
+    ffi.Pointer<ffi.Size> iv_bit_len,
+  ) {
+    return _yaca_encrypt_get_iv_bit_length(
+      algo,
+      bcm,
+      key_bit_len,
+      iv_bit_len,
+    );
+  }
+
+  late final _yaca_encrypt_get_iv_bit_lengthPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(ffi.Int32, ffi.Int32, ffi.Size,
+              ffi.Pointer<ffi.Size>)>>('yaca_encrypt_get_iv_bit_length');
+  late final _yaca_encrypt_get_iv_bit_length =
+      _yaca_encrypt_get_iv_bit_lengthPtr
+          .asFunction<int Function(int, int, int, ffi.Pointer<ffi.Size>)>();
+
+  /// @brief Initializes an encryption context.
+  /// @since_tizen 3.0
+  /// @remarks The @a ctx should be released using yaca_context_destroy().
+  /// @param[out] ctx Newly created context
+  /// @param[in] algo Encryption algorithm that will be used
+  /// @param[in] bcm Chaining mode that will be used
+  /// @param[in] sym_key Symmetric key that will be used
+  /// @param[in] iv Initialization Vector that will be used
+  /// @return #YACA_ERROR_NONE on success,
+  /// negative on error
+  /// @retval #YACA_ERROR_NONE Successful
+  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL,
+  /// invalid @a algo, @a bcm, @a sym_key or @a iv)
+  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
+  /// @retval #YACA_ERROR_INTERNAL Internal error
+  /// @see #yaca_encrypt_algorithm_e
+  /// @see #yaca_block_cipher_mode_e
+  /// @see yaca_encrypt_update()
+  /// @see yaca_encrypt_finalize()
+  /// @see yaca_context_destroy()
+  int yaca_encrypt_initialize(
+    ffi.Pointer<yaca_context_h> ctx,
+    int algo,
+    int bcm,
+    yaca_key_h sym_key,
+    yaca_key_h iv,
+  ) {
+    return _yaca_encrypt_initialize(
+      ctx,
+      algo,
+      bcm,
+      sym_key,
+      iv,
+    );
+  }
+
+  late final _yaca_encrypt_initializePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(ffi.Pointer<yaca_context_h>, ffi.Int32, ffi.Int32,
+              yaca_key_h, yaca_key_h)>>('yaca_encrypt_initialize');
+  late final _yaca_encrypt_initialize = _yaca_encrypt_initializePtr.asFunction<
+      int Function(
+          ffi.Pointer<yaca_context_h>, int, int, yaca_key_h, yaca_key_h)>();
+
+  /// @brief Encrypts chunk of the data.
+  /// @since_tizen 3.0
+  /// @param[in,out] ctx Context created by yaca_encrypt_initialize()
+  /// @param[in] plaintext Plaintext to be encrypted
+  /// @param[in] plaintext_len Length of the plaintext
+  /// @param[out] ciphertext Buffer for the encrypted data
+  /// (must be allocated by client, see yaca_context_get_output_length())
+  /// @param[out] ciphertext_len Length of the encrypted data,
+  /// actual number of bytes written will be returned here
+  /// @return #YACA_ERROR_NONE on success,
+  /// negative on error
+  /// @retval #YACA_ERROR_NONE Successful
+  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0,
+  /// invalid @a ctx)
+  /// @retval #YACA_ERROR_INTERNAL Internal error
+  /// @see yaca_encrypt_initialize()
+  /// @see yaca_encrypt_finalize()
+  /// @see yaca_context_get_output_length()
+  int yaca_encrypt_update(
+    yaca_context_h ctx,
+    ffi.Pointer<ffi.Char> plaintext,
+    int plaintext_len,
+    ffi.Pointer<ffi.Char> ciphertext,
+    ffi.Pointer<ffi.Size> ciphertext_len,
+  ) {
+    return _yaca_encrypt_update(
+      ctx,
+      plaintext,
+      plaintext_len,
+      ciphertext,
+      ciphertext_len,
+    );
+  }
+
+  late final _yaca_encrypt_updatePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(
+              yaca_context_h,
+              ffi.Pointer<ffi.Char>,
+              ffi.Size,
+              ffi.Pointer<ffi.Char>,
+              ffi.Pointer<ffi.Size>)>>('yaca_encrypt_update');
+  late final _yaca_encrypt_update = _yaca_encrypt_updatePtr.asFunction<
+      int Function(yaca_context_h, ffi.Pointer<ffi.Char>, int,
+          ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Size>)>();
+
+  /// @brief Encrypts the final chunk of the data.
+  /// @since_tizen 3.0
+  /// @remarks Skipping yaca_encrypt_update() and calling only yaca_encrypt_finalize() will produce an encryption of an empty message.
+  /// @param[in,out] ctx A valid encrypt context
+  /// @param[out] ciphertext Final piece of the encrypted data
+  /// (must be allocated by client, see yaca_context_get_output_length())
+  /// @param[out] ciphertext_len Length of the final piece,
+  /// actual number of bytes written will be returned here
+  /// @return #YACA_ERROR_NONE on success,
+  /// negative on error
+  /// @retval #YACA_ERROR_NONE Successful
+  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL,
+  /// invalid @a ctx)
+  /// @retval #YACA_ERROR_INTERNAL Internal error
+  /// @see yaca_encrypt_initialize()
+  /// @see yaca_encrypt_update()
+  /// @see yaca_context_get_output_length()
+  int yaca_encrypt_finalize(
+    yaca_context_h ctx,
+    ffi.Pointer<ffi.Char> ciphertext,
+    ffi.Pointer<ffi.Size> ciphertext_len,
+  ) {
+    return _yaca_encrypt_finalize(
+      ctx,
+      ciphertext,
+      ciphertext_len,
+    );
+  }
+
+  late final _yaca_encrypt_finalizePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(yaca_context_h, ffi.Pointer<ffi.Char>,
+              ffi.Pointer<ffi.Size>)>>('yaca_encrypt_finalize');
+  late final _yaca_encrypt_finalize = _yaca_encrypt_finalizePtr.asFunction<
+      int Function(
+          yaca_context_h, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Size>)>();
+
+  /// @brief Initializes an decryption context.
+  /// @since_tizen 3.0
+  /// @remarks The @a ctx should be released using yaca_context_destroy().
+  /// @param[out] ctx Newly created context
+  /// @param[in] algo Encryption algorithm that was used to encrypt the data
+  /// @param[in] bcm Chaining mode that was used to encrypt the data
+  /// @param[in] sym_key Symmetric key that was used to encrypt the data
+  /// @param[in] iv Initialization Vector that was used to encrypt the data
+  /// @return #YACA_ERROR_NONE on success,
+  /// negative on error
+  /// @retval #YACA_ERROR_NONE Successful
+  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL,
+  /// invalid @a algo, @a bcm, @a sym_key or @a iv)
+  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
+  /// @retval #YACA_ERROR_INTERNAL Internal error
+  /// @see #yaca_encrypt_algorithm_e
+  /// @see #yaca_block_cipher_mode_e
+  /// @see yaca_decrypt_update()
+  /// @see yaca_decrypt_finalize()
+  /// @see yaca_context_destroy()
+  int yaca_decrypt_initialize(
+    ffi.Pointer<yaca_context_h> ctx,
+    int algo,
+    int bcm,
+    yaca_key_h sym_key,
+    yaca_key_h iv,
+  ) {
+    return _yaca_decrypt_initialize(
+      ctx,
+      algo,
+      bcm,
+      sym_key,
+      iv,
+    );
+  }
+
+  late final _yaca_decrypt_initializePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(ffi.Pointer<yaca_context_h>, ffi.Int32, ffi.Int32,
+              yaca_key_h, yaca_key_h)>>('yaca_decrypt_initialize');
+  late final _yaca_decrypt_initialize = _yaca_decrypt_initializePtr.asFunction<
+      int Function(
+          ffi.Pointer<yaca_context_h>, int, int, yaca_key_h, yaca_key_h)>();
+
+  /// @brief Decrypts chunk of the data.
+  /// @since_tizen 3.0
+  /// @param[in,out] ctx Context created by yaca_decrypt_initialize()
+  /// @param[in] ciphertext Ciphertext to be decrypted
+  /// @param[in] ciphertext_len Length of the ciphertext
+  /// @param[out] plaintext Buffer for the decrypted data
+  /// (must be allocated by client, see yaca_context_get_output_length())
+  /// @param[out] plaintext_len Length of the decrypted data,
+  /// actual number of bytes written will be returned here
+  /// @return #YACA_ERROR_NONE on success,
+  /// negative on error
+  /// @retval #YACA_ERROR_NONE Successful
+  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0,
+  /// invalid @a ctx), wrong #YACA_PROPERTY_CCM_AAD or
+  /// wrong #YACA_PROPERTY_CCM_TAG was used
+  /// @retval #YACA_ERROR_INTERNAL Internal error
+  /// @see yaca_decrypt_initialize()
+  /// @see yaca_decrypt_finalize()
+  /// @see yaca_context_get_output_length()
+  int yaca_decrypt_update(
+    yaca_context_h ctx,
+    ffi.Pointer<ffi.Char> ciphertext,
+    int ciphertext_len,
+    ffi.Pointer<ffi.Char> plaintext,
+    ffi.Pointer<ffi.Size> plaintext_len,
+  ) {
+    return _yaca_decrypt_update(
+      ctx,
+      ciphertext,
+      ciphertext_len,
+      plaintext,
+      plaintext_len,
+    );
+  }
+
+  late final _yaca_decrypt_updatePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(
+              yaca_context_h,
+              ffi.Pointer<ffi.Char>,
+              ffi.Size,
+              ffi.Pointer<ffi.Char>,
+              ffi.Pointer<ffi.Size>)>>('yaca_decrypt_update');
+  late final _yaca_decrypt_update = _yaca_decrypt_updatePtr.asFunction<
+      int Function(yaca_context_h, ffi.Pointer<ffi.Char>, int,
+          ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Size>)>();
+
+  /// @brief Decrypts the final chunk of the data.
+  /// @since_tizen 3.0
+  /// @remarks Skipping yaca_decrypt_update() and calling only yaca_decrypt_finalize() will produce a decryption of an empty ciphertext.
+  /// @param[in,out] ctx A valid decrypt context
+  /// @param[out] plaintext Final piece of the decrypted data
+  /// (must be allocated by client, see yaca_context_get_output_length())
+  /// @param[out] plaintext_len Length of the final piece,
+  /// actual number of bytes written will be returned here
+  /// @return #YACA_ERROR_NONE on success,
+  /// negative on error
+  /// @retval #YACA_ERROR_NONE Successful
+  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL,
+  /// invalid @a ctx), wrong #YACA_PROPERTY_GCM_AAD or
+  /// wrong #YACA_PROPERTY_GCM_TAG was used
+  /// @retval #YACA_ERROR_INTERNAL Internal error
+  /// @see yaca_decrypt_initialize()
+  /// @see yaca_decrypt_update()
+  /// @see yaca_context_get_output_length()
+  int yaca_decrypt_finalize(
+    yaca_context_h ctx,
+    ffi.Pointer<ffi.Char> plaintext,
+    ffi.Pointer<ffi.Size> plaintext_len,
+  ) {
+    return _yaca_decrypt_finalize(
+      ctx,
+      plaintext,
+      plaintext_len,
+    );
+  }
+
+  late final _yaca_decrypt_finalizePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(yaca_context_h, ffi.Pointer<ffi.Char>,
+              ffi.Pointer<ffi.Size>)>>('yaca_decrypt_finalize');
+  late final _yaca_decrypt_finalize = _yaca_decrypt_finalizePtr.asFunction<
+      int Function(
+          yaca_context_h, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Size>)>();
+
   /// @brief Gets key's type.
   /// @since_tizen 3.0
   /// @param[in] key Key which type we return
@@ -168640,1137 +169806,6 @@ class Tizen90Native {
       int Function(int, yaca_key_h, ffi.Pointer<ffi.Char>, int,
           ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Pointer<ffi.Size>)>();
 
-  /// @brief Encrypts data using a symmetric cipher.
-  /// @since_tizen 3.0
-  /// @remarks yaca_simple_encrypt() doesn't support #YACA_BCM_GCM and #YACA_BCM_CCM.
-  /// @remarks The @a ciphertext should be freed using yaca_free().
-  /// @remarks The @a plaintext can be NULL but then @a plaintext_len must be 0.
-  /// @param[in] algo Encryption algorithm (select #YACA_ENCRYPT_AES if unsure)
-  /// @param[in] bcm Chaining mode (select #YACA_BCM_CBC if unsure)
-  /// @param[in] sym_key Symmetric encryption key (see yaca_key.h for key generation functions)
-  /// @param[in] iv Initialization Vector
-  /// @param[in] plaintext Plaintext to be encrypted
-  /// @param[in] plaintext_len Length of the plaintext
-  /// @param[out] ciphertext Encrypted data, will be allocated by the library
-  /// @param[out] ciphertext_len Length of the encrypted data (may be larger than decrypted)
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0
-  /// invalid @a algo, @a bcm, @a sym_key or @a iv)
-  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see #yaca_encrypt_algorithm_e
-  /// @see #yaca_block_cipher_mode_e
-  /// @see yaca_simple_decrypt()
-  /// @see yaca_free()
-  int yaca_simple_encrypt(
-    int algo,
-    int bcm,
-    yaca_key_h sym_key,
-    yaca_key_h iv,
-    ffi.Pointer<ffi.Char> plaintext,
-    int plaintext_len,
-    ffi.Pointer<ffi.Pointer<ffi.Char>> ciphertext,
-    ffi.Pointer<ffi.Size> ciphertext_len,
-  ) {
-    return _yaca_simple_encrypt(
-      algo,
-      bcm,
-      sym_key,
-      iv,
-      plaintext,
-      plaintext_len,
-      ciphertext,
-      ciphertext_len,
-    );
-  }
-
-  late final _yaca_simple_encryptPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Int32,
-              ffi.Int32,
-              yaca_key_h,
-              yaca_key_h,
-              ffi.Pointer<ffi.Char>,
-              ffi.Size,
-              ffi.Pointer<ffi.Pointer<ffi.Char>>,
-              ffi.Pointer<ffi.Size>)>>('yaca_simple_encrypt');
-  late final _yaca_simple_encrypt = _yaca_simple_encryptPtr.asFunction<
-      int Function(int, int, yaca_key_h, yaca_key_h, ffi.Pointer<ffi.Char>, int,
-          ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Pointer<ffi.Size>)>();
-
-  /// @brief Decrypts data using a symmetric cipher.
-  /// @since_tizen 3.0
-  /// @remarks yaca_simple_decrypt() doesn't support #YACA_BCM_GCM and #YACA_BCM_CCM.
-  /// @remarks The @a plaintext should be freed using yaca_free().
-  /// @remarks The @a ciphertext can be NULL but then @a ciphertext_len must be 0.
-  /// @param[in] algo Decryption algorithm that was used to encrypt the data
-  /// @param[in] bcm Chaining mode that was used to encrypt the data
-  /// @param[in] sym_key Symmetric encryption key that was used to encrypt the data
-  /// @param[in] iv Initialization Vector that was used to encrypt the data
-  /// @param[in] ciphertext Ciphertext to be decrypted
-  /// @param[in] ciphertext_len Length of ciphertext
-  /// @param[out] plaintext Decrypted data, will be allocated by the library
-  /// @param[out] plaintext_len Length of the decrypted data
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0
-  /// invalid @a algo, @a bcm, @a sym_key or @a iv)
-  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see #yaca_encrypt_algorithm_e
-  /// @see #yaca_block_cipher_mode_e
-  /// @see yaca_simple_encrypt()
-  /// @see yaca_free()
-  int yaca_simple_decrypt(
-    int algo,
-    int bcm,
-    yaca_key_h sym_key,
-    yaca_key_h iv,
-    ffi.Pointer<ffi.Char> ciphertext,
-    int ciphertext_len,
-    ffi.Pointer<ffi.Pointer<ffi.Char>> plaintext,
-    ffi.Pointer<ffi.Size> plaintext_len,
-  ) {
-    return _yaca_simple_decrypt(
-      algo,
-      bcm,
-      sym_key,
-      iv,
-      ciphertext,
-      ciphertext_len,
-      plaintext,
-      plaintext_len,
-    );
-  }
-
-  late final _yaca_simple_decryptPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Int32,
-              ffi.Int32,
-              yaca_key_h,
-              yaca_key_h,
-              ffi.Pointer<ffi.Char>,
-              ffi.Size,
-              ffi.Pointer<ffi.Pointer<ffi.Char>>,
-              ffi.Pointer<ffi.Size>)>>('yaca_simple_decrypt');
-  late final _yaca_simple_decrypt = _yaca_simple_decryptPtr.asFunction<
-      int Function(int, int, yaca_key_h, yaca_key_h, ffi.Pointer<ffi.Char>, int,
-          ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Pointer<ffi.Size>)>();
-
-  /// @brief Calculates a digest of a message.
-  /// @since_tizen 3.0
-  /// @remarks The @a digest should be freed using yaca_free().
-  /// @remarks The @a message can be NULL but then @a message_len must be 0.
-  /// @param[in] algo Digest algorithm (select #YACA_DIGEST_SHA256 if unsure)
-  /// @param[in] message Message from which the digest is to be calculated
-  /// @param[in] message_len Length of the message
-  /// @param[out] digest Message digest, will be allocated by the library
-  /// @param[out] digest_len Length of message digest (depends on algorithm)
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL,
-  /// invalid @a algo)
-  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see #yaca_digest_algorithm_e
-  /// @see yaca_free()
-  int yaca_simple_calculate_digest(
-    int algo,
-    ffi.Pointer<ffi.Char> message,
-    int message_len,
-    ffi.Pointer<ffi.Pointer<ffi.Char>> digest,
-    ffi.Pointer<ffi.Size> digest_len,
-  ) {
-    return _yaca_simple_calculate_digest(
-      algo,
-      message,
-      message_len,
-      digest,
-      digest_len,
-    );
-  }
-
-  late final _yaca_simple_calculate_digestPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Int32,
-              ffi.Pointer<ffi.Char>,
-              ffi.Size,
-              ffi.Pointer<ffi.Pointer<ffi.Char>>,
-              ffi.Pointer<ffi.Size>)>>('yaca_simple_calculate_digest');
-  late final _yaca_simple_calculate_digest =
-      _yaca_simple_calculate_digestPtr.asFunction<
-          int Function(int, ffi.Pointer<ffi.Char>, int,
-              ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Pointer<ffi.Size>)>();
-
-  /// @brief Creates a signature using asymmetric private key.
-  /// @since_tizen 3.0
-  /// @remarks For #YACA_DIGEST_SHA384 and #YACA_DIGEST_SHA512 the RSA key size must be bigger than
-  /// #YACA_KEY_LENGTH_512BIT.
-  /// @remarks Using of #YACA_DIGEST_MD5 algorithm for DSA and ECDSA operations is prohibited.
-  /// @remarks The @a signature should be freed using yaca_free().
-  /// @remarks The @a message can be NULL but then @a message_len must be 0.
-  /// @param[in] algo Digest algorithm that will be used
-  /// @param[in] prv_key Private key that will be used, algorithm is
-  /// deduced based on key type, supported key types:
-  /// - #YACA_KEY_TYPE_RSA_PRIV,
-  /// - #YACA_KEY_TYPE_DSA_PRIV,
-  /// - #YACA_KEY_TYPE_EC_PRIV
-  /// @param[in] message Message to be signed
-  /// @param[in] message_len Length of the message
-  /// @param[out] signature Message signature, will be allocated by the library
-  /// @param[out] signature_len Length of the signature
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0
-  /// invalid @a algo or @a prv_key)
-  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see #yaca_key_type_e
-  /// @see #yaca_digest_algorithm_e
-  /// @see yaca_simple_verify_signature()
-  /// @see yaca_free()
-  int yaca_simple_calculate_signature(
-    int algo,
-    yaca_key_h prv_key,
-    ffi.Pointer<ffi.Char> message,
-    int message_len,
-    ffi.Pointer<ffi.Pointer<ffi.Char>> signature,
-    ffi.Pointer<ffi.Size> signature_len,
-  ) {
-    return _yaca_simple_calculate_signature(
-      algo,
-      prv_key,
-      message,
-      message_len,
-      signature,
-      signature_len,
-    );
-  }
-
-  late final _yaca_simple_calculate_signaturePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Int32,
-              yaca_key_h,
-              ffi.Pointer<ffi.Char>,
-              ffi.Size,
-              ffi.Pointer<ffi.Pointer<ffi.Char>>,
-              ffi.Pointer<ffi.Size>)>>('yaca_simple_calculate_signature');
-  late final _yaca_simple_calculate_signature =
-      _yaca_simple_calculate_signaturePtr.asFunction<
-          int Function(int, yaca_key_h, ffi.Pointer<ffi.Char>, int,
-              ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Pointer<ffi.Size>)>();
-
-  /// @brief Verifies a signature using asymmetric public key.
-  /// @since_tizen 3.0
-  /// @remarks The @a message can be NULL but then @a message_len must be 0.
-  /// @param[in] algo Digest algorithm that will be used
-  /// @param[in] pub_key Public key that will be used, algorithm is
-  /// deduced based on key type, supported key types:
-  /// - #YACA_KEY_TYPE_RSA_PUB,
-  /// - #YACA_KEY_TYPE_DSA_PUB,
-  /// - #YACA_KEY_TYPE_EC_PUB
-  /// @param[in] message Message
-  /// @param[in] message_len Length of the message
-  /// @param[in] signature Message signature to be verified
-  /// @param[in] signature_len Length of the signature
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0
-  /// invalid @a algo or @a pub_key)
-  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @retval #YACA_ERROR_DATA_MISMATCH The verification failed
-  /// @see #yaca_key_type_e
-  /// @see #yaca_digest_algorithm_e
-  /// @see yaca_simple_calculate_signature()
-  int yaca_simple_verify_signature(
-    int algo,
-    yaca_key_h pub_key,
-    ffi.Pointer<ffi.Char> message,
-    int message_len,
-    ffi.Pointer<ffi.Char> signature,
-    int signature_len,
-  ) {
-    return _yaca_simple_verify_signature(
-      algo,
-      pub_key,
-      message,
-      message_len,
-      signature,
-      signature_len,
-    );
-  }
-
-  late final _yaca_simple_verify_signaturePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Int32,
-              yaca_key_h,
-              ffi.Pointer<ffi.Char>,
-              ffi.Size,
-              ffi.Pointer<ffi.Char>,
-              ffi.Size)>>('yaca_simple_verify_signature');
-  late final _yaca_simple_verify_signature =
-      _yaca_simple_verify_signaturePtr.asFunction<
-          int Function(int, yaca_key_h, ffi.Pointer<ffi.Char>, int,
-              ffi.Pointer<ffi.Char>, int)>();
-
-  /// @brief Calculates a HMAC of given message using symmetric key.
-  /// @since_tizen 3.0
-  /// @remarks For verification, calculate message HMAC and compare with received MAC using yaca_memcmp().
-  /// @remarks The @a mac should be freed using yaca_free().
-  /// @remarks The @a message can be NULL but then @a message_len must be 0.
-  /// @param[in] algo Digest algorithm that will be used
-  /// @param[in] sym_key Key that will be used, supported key types:
-  /// - #YACA_KEY_TYPE_SYMMETRIC,
-  /// - #YACA_KEY_TYPE_DES
-  /// @param[in] message Message to calculate HMAC from
-  /// @param[in] message_len Length of the message
-  /// @param[out] mac MAC, will be allocated by the library
-  /// @param[out] mac_len Length of the MAC
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0
-  /// invalid @a algo or @a sym_key)
-  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see #yaca_key_type_e
-  /// @see #yaca_digest_algorithm_e
-  /// @see yaca_memcmp()
-  /// @see yaca_free()
-  int yaca_simple_calculate_hmac(
-    int algo,
-    yaca_key_h sym_key,
-    ffi.Pointer<ffi.Char> message,
-    int message_len,
-    ffi.Pointer<ffi.Pointer<ffi.Char>> mac,
-    ffi.Pointer<ffi.Size> mac_len,
-  ) {
-    return _yaca_simple_calculate_hmac(
-      algo,
-      sym_key,
-      message,
-      message_len,
-      mac,
-      mac_len,
-    );
-  }
-
-  late final _yaca_simple_calculate_hmacPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Int32,
-              yaca_key_h,
-              ffi.Pointer<ffi.Char>,
-              ffi.Size,
-              ffi.Pointer<ffi.Pointer<ffi.Char>>,
-              ffi.Pointer<ffi.Size>)>>('yaca_simple_calculate_hmac');
-  late final _yaca_simple_calculate_hmac =
-      _yaca_simple_calculate_hmacPtr.asFunction<
-          int Function(int, yaca_key_h, ffi.Pointer<ffi.Char>, int,
-              ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Pointer<ffi.Size>)>();
-
-  /// @brief Calculates a CMAC of given message using symmetric key.
-  /// @since_tizen 3.0
-  /// @remarks For verification, calculate message CMAC and compare with received MAC using yaca_memcmp().
-  /// @remarks The @a mac should be freed using yaca_free().
-  /// @remarks The @a message can be NULL but then @a message_len must be 0.
-  /// @param[in] algo Encryption algorithm that will be used
-  /// @param[in] sym_key Key that will be used, supported key types:
-  /// - #YACA_KEY_TYPE_SYMMETRIC,
-  /// - #YACA_KEY_TYPE_DES
-  /// @param[in] message Message to calculate CMAC from
-  /// @param[in] message_len Length of the message
-  /// @param[out] mac MAC, will be allocated by the library
-  /// @param[out] mac_len Length of the MAC
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0
-  /// invalid @a algo or @a sym_key)
-  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see #yaca_key_type_e
-  /// @see #yaca_encrypt_algorithm_e
-  /// @see yaca_memcmp()
-  /// @see yaca_free()
-  int yaca_simple_calculate_cmac(
-    int algo,
-    yaca_key_h sym_key,
-    ffi.Pointer<ffi.Char> message,
-    int message_len,
-    ffi.Pointer<ffi.Pointer<ffi.Char>> mac,
-    ffi.Pointer<ffi.Size> mac_len,
-  ) {
-    return _yaca_simple_calculate_cmac(
-      algo,
-      sym_key,
-      message,
-      message_len,
-      mac,
-      mac_len,
-    );
-  }
-
-  late final _yaca_simple_calculate_cmacPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Int32,
-              yaca_key_h,
-              ffi.Pointer<ffi.Char>,
-              ffi.Size,
-              ffi.Pointer<ffi.Pointer<ffi.Char>>,
-              ffi.Pointer<ffi.Size>)>>('yaca_simple_calculate_cmac');
-  late final _yaca_simple_calculate_cmac =
-      _yaca_simple_calculate_cmacPtr.asFunction<
-          int Function(int, yaca_key_h, ffi.Pointer<ffi.Char>, int,
-              ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Pointer<ffi.Size>)>();
-
-  /// @brief Initializes the library. Must be called before any other crypto
-  /// function. Should be called once in each thread that uses yaca.
-  /// @since_tizen 3.0
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see yaca_cleanup()
-  int yaca_initialize() {
-    return _yaca_initialize();
-  }
-
-  late final _yaca_initializePtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function()>>('yaca_initialize');
-  late final _yaca_initialize =
-      _yaca_initializePtr.asFunction<int Function()>();
-
-  /// @brief Cleans up the library. Must be called before exiting the thread that called yaca_initialize().
-  /// @since_tizen 3.0
-  /// @see yaca_initialize()
-  void yaca_cleanup() {
-    return _yaca_cleanup();
-  }
-
-  late final _yaca_cleanupPtr =
-      _lookup<ffi.NativeFunction<ffi.Void Function()>>('yaca_cleanup');
-  late final _yaca_cleanup = _yaca_cleanupPtr.asFunction<void Function()>();
-
-  /// @brief Allocates the memory.
-  /// @since_tizen 3.0
-  /// @remarks The @a memory should be freed using yaca_free().
-  /// @param[in] size Size of the allocation (bytes)
-  /// @param[out] memory Allocated memory
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0)
-  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
-  /// @see yaca_zalloc()
-  /// @see yaca_realloc()
-  /// @see yaca_free()
-  int yaca_malloc(
-    int size,
-    ffi.Pointer<ffi.Pointer<ffi.Void>> memory,
-  ) {
-    return _yaca_malloc(
-      size,
-      memory,
-    );
-  }
-
-  late final _yaca_mallocPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Size, ffi.Pointer<ffi.Pointer<ffi.Void>>)>>('yaca_malloc');
-  late final _yaca_malloc = _yaca_mallocPtr
-      .asFunction<int Function(int, ffi.Pointer<ffi.Pointer<ffi.Void>>)>();
-
-  /// @brief Allocates the zeroed memory.
-  /// @since_tizen 3.0
-  /// @remarks The @a memory should be freed using yaca_free().
-  /// @param[in] size Size of the allocation (bytes)
-  /// @param[out] memory Allocated memory
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0)
-  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
-  /// @see yaca_malloc()
-  /// @see yaca_realloc()
-  /// @see yaca_free()
-  int yaca_zalloc(
-    int size,
-    ffi.Pointer<ffi.Pointer<ffi.Void>> memory,
-  ) {
-    return _yaca_zalloc(
-      size,
-      memory,
-    );
-  }
-
-  late final _yaca_zallocPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Size, ffi.Pointer<ffi.Pointer<ffi.Void>>)>>('yaca_zalloc');
-  late final _yaca_zalloc = _yaca_zallocPtr
-      .asFunction<int Function(int, ffi.Pointer<ffi.Pointer<ffi.Void>>)>();
-
-  /// @brief Re-allocates the memory.
-  /// @since_tizen 3.0
-  /// @remarks In case of failure the function doesn't free the memory pointed by @a memory.
-  /// @remarks If @a memory is NULL then the call is equivalent to yaca_malloc().
-  /// @remarks If the function fails the contents of @a memory will be left unchanged.
-  /// @remarks The @a memory should be freed using yaca_free().
-  /// @param[in] size Size of the new allocation (bytes)
-  /// @param[in,out] memory  Memory to be reallocated
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0)
-  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
-  /// @see yaca_malloc()
-  /// @see yaca_zalloc()
-  /// @see yaca_free()
-  int yaca_realloc(
-    int size,
-    ffi.Pointer<ffi.Pointer<ffi.Void>> memory,
-  ) {
-    return _yaca_realloc(
-      size,
-      memory,
-    );
-  }
-
-  late final _yaca_reallocPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Size, ffi.Pointer<ffi.Pointer<ffi.Void>>)>>('yaca_realloc');
-  late final _yaca_realloc = _yaca_reallocPtr
-      .asFunction<int Function(int, ffi.Pointer<ffi.Pointer<ffi.Void>>)>();
-
-  /// @brief Frees the memory allocated by yaca_malloc(), yaca_zalloc(),
-  /// yaca_realloc() or one of the cryptographic operations.
-  /// @since_tizen 3.0
-  /// @param[in] memory Pointer to the memory to be freed
-  /// @see yaca_malloc()
-  /// @see yaca_zalloc()
-  /// @see yaca_realloc()
-  void yaca_free(
-    ffi.Pointer<ffi.Void> memory,
-  ) {
-    return _yaca_free(
-      memory,
-    );
-  }
-
-  late final _yaca_freePtr =
-      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>(
-          'yaca_free');
-  late final _yaca_free =
-      _yaca_freePtr.asFunction<void Function(ffi.Pointer<ffi.Void>)>();
-
-  /// @brief Safely compares first @a len bytes of two buffers.
-  /// @since_tizen 3.0
-  /// @param[in] first Pointer to the first buffer
-  /// @param[in] second Pointer to the second buffer
-  /// @param[in] len Length to compare
-  /// @return #YACA_ERROR_NONE when buffers are equal,
-  /// otherwise #YACA_ERROR_DATA_MISMATCH
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0)
-  /// @retval #YACA_ERROR_DATA_MISMATCH Buffers are different
-  int yaca_memcmp(
-    ffi.Pointer<ffi.Void> first,
-    ffi.Pointer<ffi.Void> second,
-    int len,
-  ) {
-    return _yaca_memcmp(
-      first,
-      second,
-      len,
-    );
-  }
-
-  late final _yaca_memcmpPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>,
-              ffi.Size)>>('yaca_memcmp');
-  late final _yaca_memcmp = _yaca_memcmpPtr.asFunction<
-      int Function(ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>, int)>();
-
-  /// @brief Generates random data.
-  /// @since_tizen 3.0
-  /// @param[in,out] data Pointer to the memory to be randomized
-  /// @param[in] data_len Length of the memory to be randomized
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0)
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  int yaca_randomize_bytes(
-    ffi.Pointer<ffi.Char> data,
-    int data_len,
-  ) {
-    return _yaca_randomize_bytes(
-      data,
-      data_len,
-    );
-  }
-
-  late final _yaca_randomize_bytesPtr = _lookup<
-          ffi
-          .NativeFunction<ffi.Int Function(ffi.Pointer<ffi.Char>, ffi.Size)>>(
-      'yaca_randomize_bytes');
-  late final _yaca_randomize_bytes = _yaca_randomize_bytesPtr
-      .asFunction<int Function(ffi.Pointer<ffi.Char>, int)>();
-
-  /// @brief Sets the non-standard context properties. Can only be called on an initialized context.
-  /// @since_tizen 3.0
-  /// @remarks The @a value has to be of type appropriate for given property. See #yaca_property_e
-  /// for details on corresponding types.
-  /// @param[in,out] ctx Previously initialized crypto context
-  /// @param[in] property Property to be set
-  /// @param[in] value Property value
-  /// @param[in] value_len Length of the property value
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0,
-  /// invalid @a ctx or @a property)
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see #yaca_property_e
-  /// @see yaca_context_get_property()
-  int yaca_context_set_property(
-    yaca_context_h ctx,
-    int property,
-    ffi.Pointer<ffi.Void> value,
-    int value_len,
-  ) {
-    return _yaca_context_set_property(
-      ctx,
-      property,
-      value,
-      value_len,
-    );
-  }
-
-  late final _yaca_context_set_propertyPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(yaca_context_h, ffi.Int32, ffi.Pointer<ffi.Void>,
-              ffi.Size)>>('yaca_context_set_property');
-  late final _yaca_context_set_property =
-      _yaca_context_set_propertyPtr.asFunction<
-          int Function(yaca_context_h, int, ffi.Pointer<ffi.Void>, int)>();
-
-  /// @brief Returns the non-standard context properties. Can only be called on an initialized context.
-  /// @since_tizen 3.0
-  /// @remarks The @a value should be freed using yaca_free().
-  /// @remarks The @a value has to be of type appropriate for given property. See #yaca_property_e
-  /// for details on corresponding types.
-  /// @remarks The @a value_len can be NULL if returned @a value is a single object (i.e. not an array/buffer).
-  /// @param[in] ctx Previously initialized crypto context
-  /// @param[in] property Property to be read
-  /// @param[out] value Copy of the property value
-  /// @param[out] value_len Length of the property value will be returned here
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL,
-  /// invalid @a ctx or @a property)
-  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see #yaca_property_e
-  /// @see yaca_context_set_property()
-  /// @see yaca_free()
-  int yaca_context_get_property(
-    yaca_context_h ctx,
-    int property,
-    ffi.Pointer<ffi.Pointer<ffi.Void>> value,
-    ffi.Pointer<ffi.Size> value_len,
-  ) {
-    return _yaca_context_get_property(
-      ctx,
-      property,
-      value,
-      value_len,
-    );
-  }
-
-  late final _yaca_context_get_propertyPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              yaca_context_h,
-              ffi.Int32,
-              ffi.Pointer<ffi.Pointer<ffi.Void>>,
-              ffi.Pointer<ffi.Size>)>>('yaca_context_get_property');
-  late final _yaca_context_get_property =
-      _yaca_context_get_propertyPtr.asFunction<
-          int Function(yaca_context_h, int, ffi.Pointer<ffi.Pointer<ffi.Void>>,
-              ffi.Pointer<ffi.Size>)>();
-
-  /// @brief Returns the minimum required size of the output buffer for a single crypto function call.
-  /// @since_tizen 3.0
-  /// @remarks This function should be used to learn the required size of the output buffer
-  /// for a single function call (eg. *_update or *_finalize). The actual output length
-  /// (number of bytes that has been used) will be returned by the function call itself.
-  /// @remarks In case the function call has no output (e.g. yaca_sign_update(),
-  /// yaca_digest_update()), there is no need to use this function.
-  /// @remarks In case the function call has no input (eg. *_finalize), the value of
-  /// @a input_len has to be set to 0.
-  /// @param[in] ctx Previously initialized crypto context
-  /// @param[in] input_len Length of the input data to be processed
-  /// @param[out] output_len Required length of the output
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL,
-  /// invalid @a ctx or too big @a input_len)
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  int yaca_context_get_output_length(
-    yaca_context_h ctx,
-    int input_len,
-    ffi.Pointer<ffi.Size> output_len,
-  ) {
-    return _yaca_context_get_output_length(
-      ctx,
-      input_len,
-      output_len,
-    );
-  }
-
-  late final _yaca_context_get_output_lengthPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(yaca_context_h, ffi.Size,
-              ffi.Pointer<ffi.Size>)>>('yaca_context_get_output_length');
-  late final _yaca_context_get_output_length =
-      _yaca_context_get_output_lengthPtr.asFunction<
-          int Function(yaca_context_h, int, ffi.Pointer<ffi.Size>)>();
-
-  /// @brief Destroys the crypto context. Must be called on all contexts that are no longer used.
-  /// Passing #YACA_CONTEXT_NULL is allowed.
-  /// @since_tizen 3.0
-  /// @param[in,out] ctx  Crypto context
-  /// @see #yaca_context_h
-  void yaca_context_destroy(
-    yaca_context_h ctx,
-  ) {
-    return _yaca_context_destroy(
-      ctx,
-    );
-  }
-
-  late final _yaca_context_destroyPtr =
-      _lookup<ffi.NativeFunction<ffi.Void Function(yaca_context_h)>>(
-          'yaca_context_destroy');
-  late final _yaca_context_destroy =
-      _yaca_context_destroyPtr.asFunction<void Function(yaca_context_h)>();
-
-  /// @brief Initializes a digest context.
-  /// @since_tizen 3.0
-  /// @remarks The @a ctx should be released using yaca_context_destroy().
-  /// @param[out] ctx Newly created context
-  /// @param[in] algo Digest algorithm that will be used
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL,
-  /// invalid @a algo)
-  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see #yaca_digest_algorithm_e
-  /// @see yaca_digest_update()
-  /// @see yaca_digest_finalize()
-  /// @see yaca_context_destroy()
-  int yaca_digest_initialize(
-    ffi.Pointer<yaca_context_h> ctx,
-    int algo,
-  ) {
-    return _yaca_digest_initialize(
-      ctx,
-      algo,
-    );
-  }
-
-  late final _yaca_digest_initializePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<yaca_context_h>,
-              ffi.Int32)>>('yaca_digest_initialize');
-  late final _yaca_digest_initialize = _yaca_digest_initializePtr
-      .asFunction<int Function(ffi.Pointer<yaca_context_h>, int)>();
-
-  /// @brief Feeds the message into the message digest algorithm.
-  /// @since_tizen 3.0
-  /// @param[in,out] ctx Context created by yaca_digest_initialize()
-  /// @param[in] message Message from which the digest is to be calculated
-  /// @param[in] message_len Length of the message
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0,
-  /// invalid @a ctx)
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see yaca_digest_initialize()
-  /// @see yaca_digest_finalize()
-  int yaca_digest_update(
-    yaca_context_h ctx,
-    ffi.Pointer<ffi.Char> message,
-    int message_len,
-  ) {
-    return _yaca_digest_update(
-      ctx,
-      message,
-      message_len,
-    );
-  }
-
-  late final _yaca_digest_updatePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(yaca_context_h, ffi.Pointer<ffi.Char>,
-              ffi.Size)>>('yaca_digest_update');
-  late final _yaca_digest_update = _yaca_digest_updatePtr
-      .asFunction<int Function(yaca_context_h, ffi.Pointer<ffi.Char>, int)>();
-
-  /// @brief Calculates the final digest.
-  /// @since_tizen 3.0
-  /// @remarks Skipping yaca_digest_update() and calling only yaca_digest_finalize() will produce an empty message digest.
-  /// @param[in,out] ctx A valid digest context
-  /// @param[out] digest Buffer for the message digest
-  /// (must be allocated by client, see yaca_context_get_output_length())
-  /// @param[out] digest_len Length of the digest,
-  /// actual number of bytes written will be returned here
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL,
-  /// invalid @a ctx)
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see yaca_digest_initialize()
-  /// @see yaca_digest_update()
-  /// @see yaca_context_get_output_length()
-  int yaca_digest_finalize(
-    yaca_context_h ctx,
-    ffi.Pointer<ffi.Char> digest,
-    ffi.Pointer<ffi.Size> digest_len,
-  ) {
-    return _yaca_digest_finalize(
-      ctx,
-      digest,
-      digest_len,
-    );
-  }
-
-  late final _yaca_digest_finalizePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(yaca_context_h, ffi.Pointer<ffi.Char>,
-              ffi.Pointer<ffi.Size>)>>('yaca_digest_finalize');
-  late final _yaca_digest_finalize = _yaca_digest_finalizePtr.asFunction<
-      int Function(
-          yaca_context_h, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Size>)>();
-
-  /// @brief Returns the recommended/default length of the Initialization Vector for a given encryption configuration.
-  /// @since_tizen 3.0
-  /// @remarks If returned @a iv_bit_len equals 0 that means that for this
-  /// specific algorithm and its parameters Initialization Vector is not used.
-  /// @param[in] algo Encryption algorithm
-  /// @param[in] bcm Chain mode
-  /// @param[in] key_bit_len Key length in bits
-  /// @param[out] iv_bit_len Recommended Initialization Vector length in bits
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL,
-  /// invalid @a algo, @a bcm or @a key_bit_len not
-  /// divisible by 8)
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  int yaca_encrypt_get_iv_bit_length(
-    int algo,
-    int bcm,
-    int key_bit_len,
-    ffi.Pointer<ffi.Size> iv_bit_len,
-  ) {
-    return _yaca_encrypt_get_iv_bit_length(
-      algo,
-      bcm,
-      key_bit_len,
-      iv_bit_len,
-    );
-  }
-
-  late final _yaca_encrypt_get_iv_bit_lengthPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Int32, ffi.Int32, ffi.Size,
-              ffi.Pointer<ffi.Size>)>>('yaca_encrypt_get_iv_bit_length');
-  late final _yaca_encrypt_get_iv_bit_length =
-      _yaca_encrypt_get_iv_bit_lengthPtr
-          .asFunction<int Function(int, int, int, ffi.Pointer<ffi.Size>)>();
-
-  /// @brief Initializes an encryption context.
-  /// @since_tizen 3.0
-  /// @remarks The @a ctx should be released using yaca_context_destroy().
-  /// @param[out] ctx Newly created context
-  /// @param[in] algo Encryption algorithm that will be used
-  /// @param[in] bcm Chaining mode that will be used
-  /// @param[in] sym_key Symmetric key that will be used
-  /// @param[in] iv Initialization Vector that will be used
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL,
-  /// invalid @a algo, @a bcm, @a sym_key or @a iv)
-  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see #yaca_encrypt_algorithm_e
-  /// @see #yaca_block_cipher_mode_e
-  /// @see yaca_encrypt_update()
-  /// @see yaca_encrypt_finalize()
-  /// @see yaca_context_destroy()
-  int yaca_encrypt_initialize(
-    ffi.Pointer<yaca_context_h> ctx,
-    int algo,
-    int bcm,
-    yaca_key_h sym_key,
-    yaca_key_h iv,
-  ) {
-    return _yaca_encrypt_initialize(
-      ctx,
-      algo,
-      bcm,
-      sym_key,
-      iv,
-    );
-  }
-
-  late final _yaca_encrypt_initializePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<yaca_context_h>, ffi.Int32, ffi.Int32,
-              yaca_key_h, yaca_key_h)>>('yaca_encrypt_initialize');
-  late final _yaca_encrypt_initialize = _yaca_encrypt_initializePtr.asFunction<
-      int Function(
-          ffi.Pointer<yaca_context_h>, int, int, yaca_key_h, yaca_key_h)>();
-
-  /// @brief Encrypts chunk of the data.
-  /// @since_tizen 3.0
-  /// @param[in,out] ctx Context created by yaca_encrypt_initialize()
-  /// @param[in] plaintext Plaintext to be encrypted
-  /// @param[in] plaintext_len Length of the plaintext
-  /// @param[out] ciphertext Buffer for the encrypted data
-  /// (must be allocated by client, see yaca_context_get_output_length())
-  /// @param[out] ciphertext_len Length of the encrypted data,
-  /// actual number of bytes written will be returned here
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0,
-  /// invalid @a ctx)
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see yaca_encrypt_initialize()
-  /// @see yaca_encrypt_finalize()
-  /// @see yaca_context_get_output_length()
-  int yaca_encrypt_update(
-    yaca_context_h ctx,
-    ffi.Pointer<ffi.Char> plaintext,
-    int plaintext_len,
-    ffi.Pointer<ffi.Char> ciphertext,
-    ffi.Pointer<ffi.Size> ciphertext_len,
-  ) {
-    return _yaca_encrypt_update(
-      ctx,
-      plaintext,
-      plaintext_len,
-      ciphertext,
-      ciphertext_len,
-    );
-  }
-
-  late final _yaca_encrypt_updatePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              yaca_context_h,
-              ffi.Pointer<ffi.Char>,
-              ffi.Size,
-              ffi.Pointer<ffi.Char>,
-              ffi.Pointer<ffi.Size>)>>('yaca_encrypt_update');
-  late final _yaca_encrypt_update = _yaca_encrypt_updatePtr.asFunction<
-      int Function(yaca_context_h, ffi.Pointer<ffi.Char>, int,
-          ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Size>)>();
-
-  /// @brief Encrypts the final chunk of the data.
-  /// @since_tizen 3.0
-  /// @remarks Skipping yaca_encrypt_update() and calling only yaca_encrypt_finalize() will produce an encryption of an empty message.
-  /// @param[in,out] ctx A valid encrypt context
-  /// @param[out] ciphertext Final piece of the encrypted data
-  /// (must be allocated by client, see yaca_context_get_output_length())
-  /// @param[out] ciphertext_len Length of the final piece,
-  /// actual number of bytes written will be returned here
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL,
-  /// invalid @a ctx)
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see yaca_encrypt_initialize()
-  /// @see yaca_encrypt_update()
-  /// @see yaca_context_get_output_length()
-  int yaca_encrypt_finalize(
-    yaca_context_h ctx,
-    ffi.Pointer<ffi.Char> ciphertext,
-    ffi.Pointer<ffi.Size> ciphertext_len,
-  ) {
-    return _yaca_encrypt_finalize(
-      ctx,
-      ciphertext,
-      ciphertext_len,
-    );
-  }
-
-  late final _yaca_encrypt_finalizePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(yaca_context_h, ffi.Pointer<ffi.Char>,
-              ffi.Pointer<ffi.Size>)>>('yaca_encrypt_finalize');
-  late final _yaca_encrypt_finalize = _yaca_encrypt_finalizePtr.asFunction<
-      int Function(
-          yaca_context_h, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Size>)>();
-
-  /// @brief Initializes an decryption context.
-  /// @since_tizen 3.0
-  /// @remarks The @a ctx should be released using yaca_context_destroy().
-  /// @param[out] ctx Newly created context
-  /// @param[in] algo Encryption algorithm that was used to encrypt the data
-  /// @param[in] bcm Chaining mode that was used to encrypt the data
-  /// @param[in] sym_key Symmetric key that was used to encrypt the data
-  /// @param[in] iv Initialization Vector that was used to encrypt the data
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL,
-  /// invalid @a algo, @a bcm, @a sym_key or @a iv)
-  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see #yaca_encrypt_algorithm_e
-  /// @see #yaca_block_cipher_mode_e
-  /// @see yaca_decrypt_update()
-  /// @see yaca_decrypt_finalize()
-  /// @see yaca_context_destroy()
-  int yaca_decrypt_initialize(
-    ffi.Pointer<yaca_context_h> ctx,
-    int algo,
-    int bcm,
-    yaca_key_h sym_key,
-    yaca_key_h iv,
-  ) {
-    return _yaca_decrypt_initialize(
-      ctx,
-      algo,
-      bcm,
-      sym_key,
-      iv,
-    );
-  }
-
-  late final _yaca_decrypt_initializePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(ffi.Pointer<yaca_context_h>, ffi.Int32, ffi.Int32,
-              yaca_key_h, yaca_key_h)>>('yaca_decrypt_initialize');
-  late final _yaca_decrypt_initialize = _yaca_decrypt_initializePtr.asFunction<
-      int Function(
-          ffi.Pointer<yaca_context_h>, int, int, yaca_key_h, yaca_key_h)>();
-
-  /// @brief Decrypts chunk of the data.
-  /// @since_tizen 3.0
-  /// @param[in,out] ctx Context created by yaca_decrypt_initialize()
-  /// @param[in] ciphertext Ciphertext to be decrypted
-  /// @param[in] ciphertext_len Length of the ciphertext
-  /// @param[out] plaintext Buffer for the decrypted data
-  /// (must be allocated by client, see yaca_context_get_output_length())
-  /// @param[out] plaintext_len Length of the decrypted data,
-  /// actual number of bytes written will be returned here
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0,
-  /// invalid @a ctx), wrong #YACA_PROPERTY_CCM_AAD or
-  /// wrong #YACA_PROPERTY_CCM_TAG was used
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see yaca_decrypt_initialize()
-  /// @see yaca_decrypt_finalize()
-  /// @see yaca_context_get_output_length()
-  int yaca_decrypt_update(
-    yaca_context_h ctx,
-    ffi.Pointer<ffi.Char> ciphertext,
-    int ciphertext_len,
-    ffi.Pointer<ffi.Char> plaintext,
-    ffi.Pointer<ffi.Size> plaintext_len,
-  ) {
-    return _yaca_decrypt_update(
-      ctx,
-      ciphertext,
-      ciphertext_len,
-      plaintext,
-      plaintext_len,
-    );
-  }
-
-  late final _yaca_decrypt_updatePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              yaca_context_h,
-              ffi.Pointer<ffi.Char>,
-              ffi.Size,
-              ffi.Pointer<ffi.Char>,
-              ffi.Pointer<ffi.Size>)>>('yaca_decrypt_update');
-  late final _yaca_decrypt_update = _yaca_decrypt_updatePtr.asFunction<
-      int Function(yaca_context_h, ffi.Pointer<ffi.Char>, int,
-          ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Size>)>();
-
-  /// @brief Decrypts the final chunk of the data.
-  /// @since_tizen 3.0
-  /// @remarks Skipping yaca_decrypt_update() and calling only yaca_decrypt_finalize() will produce a decryption of an empty ciphertext.
-  /// @param[in,out] ctx A valid decrypt context
-  /// @param[out] plaintext Final piece of the decrypted data
-  /// (must be allocated by client, see yaca_context_get_output_length())
-  /// @param[out] plaintext_len Length of the final piece,
-  /// actual number of bytes written will be returned here
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL,
-  /// invalid @a ctx), wrong #YACA_PROPERTY_GCM_AAD or
-  /// wrong #YACA_PROPERTY_GCM_TAG was used
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see yaca_decrypt_initialize()
-  /// @see yaca_decrypt_update()
-  /// @see yaca_context_get_output_length()
-  int yaca_decrypt_finalize(
-    yaca_context_h ctx,
-    ffi.Pointer<ffi.Char> plaintext,
-    ffi.Pointer<ffi.Size> plaintext_len,
-  ) {
-    return _yaca_decrypt_finalize(
-      ctx,
-      plaintext,
-      plaintext_len,
-    );
-  }
-
-  late final _yaca_decrypt_finalizePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(yaca_context_h, ffi.Pointer<ffi.Char>,
-              ffi.Pointer<ffi.Size>)>>('yaca_decrypt_finalize');
-  late final _yaca_decrypt_finalize = _yaca_decrypt_finalizePtr.asFunction<
-      int Function(
-          yaca_context_h, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Size>)>();
-
   /// @brief Initializes an asymmetric encryption context and generates symmetric key and Initialization Vector.
   /// @since_tizen 3.0
   /// @remarks Generated symmetric key is encrypted with public key,
@@ -170392,6 +170427,403 @@ class Tizen90Native {
               ffi.Size)>>('yaca_verify_finalize');
   late final _yaca_verify_finalize = _yaca_verify_finalizePtr
       .asFunction<int Function(yaca_context_h, ffi.Pointer<ffi.Char>, int)>();
+
+  /// @brief Encrypts data using a symmetric cipher.
+  /// @since_tizen 3.0
+  /// @remarks yaca_simple_encrypt() doesn't support #YACA_BCM_GCM and #YACA_BCM_CCM.
+  /// @remarks The @a ciphertext should be freed using yaca_free().
+  /// @remarks The @a plaintext can be NULL but then @a plaintext_len must be 0.
+  /// @param[in] algo Encryption algorithm (select #YACA_ENCRYPT_AES if unsure)
+  /// @param[in] bcm Chaining mode (select #YACA_BCM_CBC if unsure)
+  /// @param[in] sym_key Symmetric encryption key (see yaca_key.h for key generation functions)
+  /// @param[in] iv Initialization Vector
+  /// @param[in] plaintext Plaintext to be encrypted
+  /// @param[in] plaintext_len Length of the plaintext
+  /// @param[out] ciphertext Encrypted data, will be allocated by the library
+  /// @param[out] ciphertext_len Length of the encrypted data (may be larger than decrypted)
+  /// @return #YACA_ERROR_NONE on success,
+  /// negative on error
+  /// @retval #YACA_ERROR_NONE Successful
+  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0
+  /// invalid @a algo, @a bcm, @a sym_key or @a iv)
+  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
+  /// @retval #YACA_ERROR_INTERNAL Internal error
+  /// @see #yaca_encrypt_algorithm_e
+  /// @see #yaca_block_cipher_mode_e
+  /// @see yaca_simple_decrypt()
+  /// @see yaca_free()
+  int yaca_simple_encrypt(
+    int algo,
+    int bcm,
+    yaca_key_h sym_key,
+    yaca_key_h iv,
+    ffi.Pointer<ffi.Char> plaintext,
+    int plaintext_len,
+    ffi.Pointer<ffi.Pointer<ffi.Char>> ciphertext,
+    ffi.Pointer<ffi.Size> ciphertext_len,
+  ) {
+    return _yaca_simple_encrypt(
+      algo,
+      bcm,
+      sym_key,
+      iv,
+      plaintext,
+      plaintext_len,
+      ciphertext,
+      ciphertext_len,
+    );
+  }
+
+  late final _yaca_simple_encryptPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(
+              ffi.Int32,
+              ffi.Int32,
+              yaca_key_h,
+              yaca_key_h,
+              ffi.Pointer<ffi.Char>,
+              ffi.Size,
+              ffi.Pointer<ffi.Pointer<ffi.Char>>,
+              ffi.Pointer<ffi.Size>)>>('yaca_simple_encrypt');
+  late final _yaca_simple_encrypt = _yaca_simple_encryptPtr.asFunction<
+      int Function(int, int, yaca_key_h, yaca_key_h, ffi.Pointer<ffi.Char>, int,
+          ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Pointer<ffi.Size>)>();
+
+  /// @brief Decrypts data using a symmetric cipher.
+  /// @since_tizen 3.0
+  /// @remarks yaca_simple_decrypt() doesn't support #YACA_BCM_GCM and #YACA_BCM_CCM.
+  /// @remarks The @a plaintext should be freed using yaca_free().
+  /// @remarks The @a ciphertext can be NULL but then @a ciphertext_len must be 0.
+  /// @param[in] algo Decryption algorithm that was used to encrypt the data
+  /// @param[in] bcm Chaining mode that was used to encrypt the data
+  /// @param[in] sym_key Symmetric encryption key that was used to encrypt the data
+  /// @param[in] iv Initialization Vector that was used to encrypt the data
+  /// @param[in] ciphertext Ciphertext to be decrypted
+  /// @param[in] ciphertext_len Length of ciphertext
+  /// @param[out] plaintext Decrypted data, will be allocated by the library
+  /// @param[out] plaintext_len Length of the decrypted data
+  /// @return #YACA_ERROR_NONE on success,
+  /// negative on error
+  /// @retval #YACA_ERROR_NONE Successful
+  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0
+  /// invalid @a algo, @a bcm, @a sym_key or @a iv)
+  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
+  /// @retval #YACA_ERROR_INTERNAL Internal error
+  /// @see #yaca_encrypt_algorithm_e
+  /// @see #yaca_block_cipher_mode_e
+  /// @see yaca_simple_encrypt()
+  /// @see yaca_free()
+  int yaca_simple_decrypt(
+    int algo,
+    int bcm,
+    yaca_key_h sym_key,
+    yaca_key_h iv,
+    ffi.Pointer<ffi.Char> ciphertext,
+    int ciphertext_len,
+    ffi.Pointer<ffi.Pointer<ffi.Char>> plaintext,
+    ffi.Pointer<ffi.Size> plaintext_len,
+  ) {
+    return _yaca_simple_decrypt(
+      algo,
+      bcm,
+      sym_key,
+      iv,
+      ciphertext,
+      ciphertext_len,
+      plaintext,
+      plaintext_len,
+    );
+  }
+
+  late final _yaca_simple_decryptPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(
+              ffi.Int32,
+              ffi.Int32,
+              yaca_key_h,
+              yaca_key_h,
+              ffi.Pointer<ffi.Char>,
+              ffi.Size,
+              ffi.Pointer<ffi.Pointer<ffi.Char>>,
+              ffi.Pointer<ffi.Size>)>>('yaca_simple_decrypt');
+  late final _yaca_simple_decrypt = _yaca_simple_decryptPtr.asFunction<
+      int Function(int, int, yaca_key_h, yaca_key_h, ffi.Pointer<ffi.Char>, int,
+          ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Pointer<ffi.Size>)>();
+
+  /// @brief Calculates a digest of a message.
+  /// @since_tizen 3.0
+  /// @remarks The @a digest should be freed using yaca_free().
+  /// @remarks The @a message can be NULL but then @a message_len must be 0.
+  /// @param[in] algo Digest algorithm (select #YACA_DIGEST_SHA256 if unsure)
+  /// @param[in] message Message from which the digest is to be calculated
+  /// @param[in] message_len Length of the message
+  /// @param[out] digest Message digest, will be allocated by the library
+  /// @param[out] digest_len Length of message digest (depends on algorithm)
+  /// @return #YACA_ERROR_NONE on success,
+  /// negative on error
+  /// @retval #YACA_ERROR_NONE Successful
+  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL,
+  /// invalid @a algo)
+  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
+  /// @retval #YACA_ERROR_INTERNAL Internal error
+  /// @see #yaca_digest_algorithm_e
+  /// @see yaca_free()
+  int yaca_simple_calculate_digest(
+    int algo,
+    ffi.Pointer<ffi.Char> message,
+    int message_len,
+    ffi.Pointer<ffi.Pointer<ffi.Char>> digest,
+    ffi.Pointer<ffi.Size> digest_len,
+  ) {
+    return _yaca_simple_calculate_digest(
+      algo,
+      message,
+      message_len,
+      digest,
+      digest_len,
+    );
+  }
+
+  late final _yaca_simple_calculate_digestPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(
+              ffi.Int32,
+              ffi.Pointer<ffi.Char>,
+              ffi.Size,
+              ffi.Pointer<ffi.Pointer<ffi.Char>>,
+              ffi.Pointer<ffi.Size>)>>('yaca_simple_calculate_digest');
+  late final _yaca_simple_calculate_digest =
+      _yaca_simple_calculate_digestPtr.asFunction<
+          int Function(int, ffi.Pointer<ffi.Char>, int,
+              ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Pointer<ffi.Size>)>();
+
+  /// @brief Creates a signature using asymmetric private key.
+  /// @since_tizen 3.0
+  /// @remarks For #YACA_DIGEST_SHA384 and #YACA_DIGEST_SHA512 the RSA key size must be bigger than
+  /// #YACA_KEY_LENGTH_512BIT.
+  /// @remarks Using of #YACA_DIGEST_MD5 algorithm for DSA and ECDSA operations is prohibited.
+  /// @remarks The @a signature should be freed using yaca_free().
+  /// @remarks The @a message can be NULL but then @a message_len must be 0.
+  /// @param[in] algo Digest algorithm that will be used
+  /// @param[in] prv_key Private key that will be used, algorithm is
+  /// deduced based on key type, supported key types:
+  /// - #YACA_KEY_TYPE_RSA_PRIV,
+  /// - #YACA_KEY_TYPE_DSA_PRIV,
+  /// - #YACA_KEY_TYPE_EC_PRIV
+  /// @param[in] message Message to be signed
+  /// @param[in] message_len Length of the message
+  /// @param[out] signature Message signature, will be allocated by the library
+  /// @param[out] signature_len Length of the signature
+  /// @return #YACA_ERROR_NONE on success,
+  /// negative on error
+  /// @retval #YACA_ERROR_NONE Successful
+  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0
+  /// invalid @a algo or @a prv_key)
+  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
+  /// @retval #YACA_ERROR_INTERNAL Internal error
+  /// @see #yaca_key_type_e
+  /// @see #yaca_digest_algorithm_e
+  /// @see yaca_simple_verify_signature()
+  /// @see yaca_free()
+  int yaca_simple_calculate_signature(
+    int algo,
+    yaca_key_h prv_key,
+    ffi.Pointer<ffi.Char> message,
+    int message_len,
+    ffi.Pointer<ffi.Pointer<ffi.Char>> signature,
+    ffi.Pointer<ffi.Size> signature_len,
+  ) {
+    return _yaca_simple_calculate_signature(
+      algo,
+      prv_key,
+      message,
+      message_len,
+      signature,
+      signature_len,
+    );
+  }
+
+  late final _yaca_simple_calculate_signaturePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(
+              ffi.Int32,
+              yaca_key_h,
+              ffi.Pointer<ffi.Char>,
+              ffi.Size,
+              ffi.Pointer<ffi.Pointer<ffi.Char>>,
+              ffi.Pointer<ffi.Size>)>>('yaca_simple_calculate_signature');
+  late final _yaca_simple_calculate_signature =
+      _yaca_simple_calculate_signaturePtr.asFunction<
+          int Function(int, yaca_key_h, ffi.Pointer<ffi.Char>, int,
+              ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Pointer<ffi.Size>)>();
+
+  /// @brief Verifies a signature using asymmetric public key.
+  /// @since_tizen 3.0
+  /// @remarks The @a message can be NULL but then @a message_len must be 0.
+  /// @param[in] algo Digest algorithm that will be used
+  /// @param[in] pub_key Public key that will be used, algorithm is
+  /// deduced based on key type, supported key types:
+  /// - #YACA_KEY_TYPE_RSA_PUB,
+  /// - #YACA_KEY_TYPE_DSA_PUB,
+  /// - #YACA_KEY_TYPE_EC_PUB
+  /// @param[in] message Message
+  /// @param[in] message_len Length of the message
+  /// @param[in] signature Message signature to be verified
+  /// @param[in] signature_len Length of the signature
+  /// @return #YACA_ERROR_NONE on success,
+  /// negative on error
+  /// @retval #YACA_ERROR_NONE Successful
+  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0
+  /// invalid @a algo or @a pub_key)
+  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
+  /// @retval #YACA_ERROR_INTERNAL Internal error
+  /// @retval #YACA_ERROR_DATA_MISMATCH The verification failed
+  /// @see #yaca_key_type_e
+  /// @see #yaca_digest_algorithm_e
+  /// @see yaca_simple_calculate_signature()
+  int yaca_simple_verify_signature(
+    int algo,
+    yaca_key_h pub_key,
+    ffi.Pointer<ffi.Char> message,
+    int message_len,
+    ffi.Pointer<ffi.Char> signature,
+    int signature_len,
+  ) {
+    return _yaca_simple_verify_signature(
+      algo,
+      pub_key,
+      message,
+      message_len,
+      signature,
+      signature_len,
+    );
+  }
+
+  late final _yaca_simple_verify_signaturePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(
+              ffi.Int32,
+              yaca_key_h,
+              ffi.Pointer<ffi.Char>,
+              ffi.Size,
+              ffi.Pointer<ffi.Char>,
+              ffi.Size)>>('yaca_simple_verify_signature');
+  late final _yaca_simple_verify_signature =
+      _yaca_simple_verify_signaturePtr.asFunction<
+          int Function(int, yaca_key_h, ffi.Pointer<ffi.Char>, int,
+              ffi.Pointer<ffi.Char>, int)>();
+
+  /// @brief Calculates a HMAC of given message using symmetric key.
+  /// @since_tizen 3.0
+  /// @remarks For verification, calculate message HMAC and compare with received MAC using yaca_memcmp().
+  /// @remarks The @a mac should be freed using yaca_free().
+  /// @remarks The @a message can be NULL but then @a message_len must be 0.
+  /// @param[in] algo Digest algorithm that will be used
+  /// @param[in] sym_key Key that will be used, supported key types:
+  /// - #YACA_KEY_TYPE_SYMMETRIC,
+  /// - #YACA_KEY_TYPE_DES
+  /// @param[in] message Message to calculate HMAC from
+  /// @param[in] message_len Length of the message
+  /// @param[out] mac MAC, will be allocated by the library
+  /// @param[out] mac_len Length of the MAC
+  /// @return #YACA_ERROR_NONE on success,
+  /// negative on error
+  /// @retval #YACA_ERROR_NONE Successful
+  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0
+  /// invalid @a algo or @a sym_key)
+  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
+  /// @retval #YACA_ERROR_INTERNAL Internal error
+  /// @see #yaca_key_type_e
+  /// @see #yaca_digest_algorithm_e
+  /// @see yaca_memcmp()
+  /// @see yaca_free()
+  int yaca_simple_calculate_hmac(
+    int algo,
+    yaca_key_h sym_key,
+    ffi.Pointer<ffi.Char> message,
+    int message_len,
+    ffi.Pointer<ffi.Pointer<ffi.Char>> mac,
+    ffi.Pointer<ffi.Size> mac_len,
+  ) {
+    return _yaca_simple_calculate_hmac(
+      algo,
+      sym_key,
+      message,
+      message_len,
+      mac,
+      mac_len,
+    );
+  }
+
+  late final _yaca_simple_calculate_hmacPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(
+              ffi.Int32,
+              yaca_key_h,
+              ffi.Pointer<ffi.Char>,
+              ffi.Size,
+              ffi.Pointer<ffi.Pointer<ffi.Char>>,
+              ffi.Pointer<ffi.Size>)>>('yaca_simple_calculate_hmac');
+  late final _yaca_simple_calculate_hmac =
+      _yaca_simple_calculate_hmacPtr.asFunction<
+          int Function(int, yaca_key_h, ffi.Pointer<ffi.Char>, int,
+              ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Pointer<ffi.Size>)>();
+
+  /// @brief Calculates a CMAC of given message using symmetric key.
+  /// @since_tizen 3.0
+  /// @remarks For verification, calculate message CMAC and compare with received MAC using yaca_memcmp().
+  /// @remarks The @a mac should be freed using yaca_free().
+  /// @remarks The @a message can be NULL but then @a message_len must be 0.
+  /// @param[in] algo Encryption algorithm that will be used
+  /// @param[in] sym_key Key that will be used, supported key types:
+  /// - #YACA_KEY_TYPE_SYMMETRIC,
+  /// - #YACA_KEY_TYPE_DES
+  /// @param[in] message Message to calculate CMAC from
+  /// @param[in] message_len Length of the message
+  /// @param[out] mac MAC, will be allocated by the library
+  /// @param[out] mac_len Length of the MAC
+  /// @return #YACA_ERROR_NONE on success,
+  /// negative on error
+  /// @retval #YACA_ERROR_NONE Successful
+  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0
+  /// invalid @a algo or @a sym_key)
+  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
+  /// @retval #YACA_ERROR_INTERNAL Internal error
+  /// @see #yaca_key_type_e
+  /// @see #yaca_encrypt_algorithm_e
+  /// @see yaca_memcmp()
+  /// @see yaca_free()
+  int yaca_simple_calculate_cmac(
+    int algo,
+    yaca_key_h sym_key,
+    ffi.Pointer<ffi.Char> message,
+    int message_len,
+    ffi.Pointer<ffi.Pointer<ffi.Char>> mac,
+    ffi.Pointer<ffi.Size> mac_len,
+  ) {
+    return _yaca_simple_calculate_cmac(
+      algo,
+      sym_key,
+      message,
+      message_len,
+      mac,
+      mac_len,
+    );
+  }
+
+  late final _yaca_simple_calculate_cmacPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(
+              ffi.Int32,
+              yaca_key_h,
+              ffi.Pointer<ffi.Char>,
+              ffi.Size,
+              ffi.Pointer<ffi.Pointer<ffi.Char>>,
+              ffi.Pointer<ffi.Size>)>>('yaca_simple_calculate_cmac');
+  late final _yaca_simple_calculate_cmac =
+      _yaca_simple_calculate_cmacPtr.asFunction<
+          int Function(int, yaca_key_h, ffi.Pointer<ffi.Char>, int,
+              ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Pointer<ffi.Size>)>();
 
   /// @ingroup CAPI_SOCIAL_CALENDAR_SVC_MODULE
   /// @addtogroup CAPI_SOCIAL_CALENDAR_SVC_VIEW_MODULE View/Property
@@ -219680,6 +220112,219 @@ typedef service_app_control_cbFunction = ffi.Void Function(
 typedef Dartservice_app_control_cbFunction = void Function(
     app_control_h app_control, ffi.Pointer<ffi.Void> user_data);
 
+/// @deprecated Deprecated since 9.0
+/// @brief Enumeration for values of shortcut response types.
+/// @since_tizen 2.3
+abstract class shortcut_error_e {
+  /// < Successful
+  static const int SHORTCUT_ERROR_NONE = 0;
+
+  /// < Invalid function parameter
+  static const int SHORTCUT_ERROR_INVALID_PARAMETER = -22;
+
+  /// < Out of memory
+  static const int SHORTCUT_ERROR_OUT_OF_MEMORY = -12;
+
+  /// < I/O Error
+  static const int SHORTCUT_ERROR_IO_ERROR = -5;
+
+  /// < Permission denied
+  static const int SHORTCUT_ERROR_PERMISSION_DENIED = -13;
+
+  /// < Not supported
+  static const int SHORTCUT_ERROR_NOT_SUPPORTED = -1073741822;
+
+  /// < Device or resource busy
+  static const int SHORTCUT_ERROR_RESOURCE_BUSY = -16;
+
+  /// < There is no space to add a new shortcut
+  static const int SHORTCUT_ERROR_NO_SPACE = -18219007;
+
+  /// < Shortcut is already added
+  static const int SHORTCUT_ERROR_EXIST = -18219006;
+
+  /// < Unrecoverable error
+  static const int SHORTCUT_ERROR_FAULT = -18219004;
+
+  /// < Not exist shortcut(@b Since: 3.0)
+  static const int SHORTCUT_ERROR_NOT_EXIST = -18219000;
+
+  /// < Connection not established or communication problem
+  static const int SHORTCUT_ERROR_COMM = -18218944;
+}
+
+/// @deprecated Deprecated since 9.0
+/// @brief Enumeration for shortcut types.
+/// @details Basically, two types of shortcuts are defined.
+/// Every homescreen developer should support these types of shortcuts.
+/// Or return, a proper errno to figure out why the application failed to add a shortcut.
+/// #LAUNCH_BY_APP is used for adding a package itself as a shortcut.
+/// #LAUNCH_BY_URI is used for adding a shortcut for "uri" data.
+/// @since_tizen 2.3
+abstract class shortcut_type {
+  /// < Launch the application itself
+  static const int LAUNCH_BY_APP = 0;
+
+  /// < Launch the application with the given data(URI)
+  static const int LAUNCH_BY_URI = 1;
+}
+
+/// @deprecated Deprecated since 9.0
+/// @brief Enumeration for sizes of shortcut widget.
+/// @since_tizen 2.4
+abstract class shortcut_widget_size {
+  /// < Type mask for the normal mode widget , don't use this value for specific size.
+  static const int WIDGET_SIZE_DEFAULT = 268435456;
+
+  /// < 1x1
+  static const int WIDGET_SIZE_1x1 = 268500992;
+
+  /// < 2x1
+  static const int WIDGET_SIZE_2x1 = 268566528;
+
+  /// < 2x2
+  static const int WIDGET_SIZE_2x2 = 268697600;
+
+  /// < 4x1
+  static const int WIDGET_SIZE_4x1 = 268959744;
+
+  /// < 4x2
+  static const int WIDGET_SIZE_4x2 = 269484032;
+
+  /// < 4x3
+  static const int WIDGET_SIZE_4x3 = 270532608;
+
+  /// < 4x4
+  static const int WIDGET_SIZE_4x4 = 272629760;
+
+  /// < 4x5
+  static const int WIDGET_SIZE_4x5 = 285212672;
+
+  /// < 4x6
+  static const int WIDGET_SIZE_4x6 = 301989888;
+
+  /// < Type mask for the easy mode widget, don't use this value for specific size.
+  static const int WIDGET_SIZE_EASY_DEFAULT = 805306368;
+
+  /// < Easy mode 1x1
+  static const int WIDGET_SIZE_EASY_1x1 = 805371904;
+
+  /// < Easy mode 3x2
+  static const int WIDGET_SIZE_EASY_3x1 = 805437440;
+
+  /// < Easy mode 3x3
+  static const int WIDGET_SIZE_EASY_3x3 = 805568512;
+}
+
+/// @deprecated Deprecated since 9.0
+/// @brief Called to receive the result of shortcut_add_to_home().
+/// @since_tizen 2.3
+/// @param[in] ret The result value, it could be @c 0 if it succeeds to add a shortcut,
+/// otherwise it returns an errno
+/// @param[in] user_data The callback data
+/// @return int @c 0 if there is no error,
+/// otherwise errno
+/// @see shortcut_add_to_home()
+typedef result_cb = ffi.Pointer<ffi.NativeFunction<result_cbFunction>>;
+typedef result_cbFunction = ffi.Int Function(
+    ffi.Int ret, ffi.Pointer<ffi.Void> user_data);
+typedef Dartresult_cbFunction = int Function(
+    int ret, ffi.Pointer<ffi.Void> user_data);
+
+/// @deprecated Deprecated since 9.0
+/// @brief Called to receive the result of shortcut_get_list().
+/// @since_tizen 2.4
+/// @param[in] package_name The name of package
+/// @param[in] icon The absolute path of an icon file for this shortcut
+/// @param[in] name The name of the created shortcut icon
+/// @param[in] extra_key The user data. A property of shortcut element in manifest file
+/// @param[in] extra_data The user data. A property of shortcut element in manifest file
+/// @param[in] user_data The callback user data
+/// @return SHORTCUT_ERROR_NONE to continue with the next iteration of the loop, other error values to break out of the loop
+/// @see shortcut_get_list()
+typedef shortcut_list_cb
+    = ffi.Pointer<ffi.NativeFunction<shortcut_list_cbFunction>>;
+typedef shortcut_list_cbFunction = ffi.Int Function(
+    ffi.Pointer<ffi.Char> package_name,
+    ffi.Pointer<ffi.Char> icon,
+    ffi.Pointer<ffi.Char> name,
+    ffi.Pointer<ffi.Char> extra_key,
+    ffi.Pointer<ffi.Char> extra_data,
+    ffi.Pointer<ffi.Void> user_data);
+typedef Dartshortcut_list_cbFunction = int Function(
+    ffi.Pointer<ffi.Char> package_name,
+    ffi.Pointer<ffi.Char> icon,
+    ffi.Pointer<ffi.Char> name,
+    ffi.Pointer<ffi.Char> extra_key,
+    ffi.Pointer<ffi.Char> extra_data,
+    ffi.Pointer<ffi.Void> user_data);
+
+/// @deprecated Deprecated since 9.0
+/// @brief Called to the add_to_home request.
+/// @details The homescreen should define a callback as this type and implement the service code
+/// for adding a new application shortcut.
+/// @since_tizen 2.4
+/// @param[in] package_name The name of package
+/// @param[in] name The name of the created shortcut icon
+/// @param[in] type One of the three defined types
+/// @param[in] content_info The specific information for creating a new shortcut
+/// @param[in] icon The absolute path of an icon file for this shortcut
+/// @param[in] pid The process ID of who request add_to_home
+/// @param[in] period The Update period in seconds
+/// @param[in] allow_duplicate @c 1 if the shortcut can be duplicated,
+/// otherwise a shortcut should exist only once
+/// @param[in] user_data The callback data
+/// @return The result of handling a shortcut creation request\n
+/// This returns @c 0 if the add_to_home request is handled successfully,
+/// otherwise it returns a proper errno
+/// @see shortcut_set_request_cb()
+typedef shortcut_request_cb
+    = ffi.Pointer<ffi.NativeFunction<shortcut_request_cbFunction>>;
+typedef shortcut_request_cbFunction = ffi.Int Function(
+    ffi.Pointer<ffi.Char> package_name,
+    ffi.Pointer<ffi.Char> name,
+    ffi.Int type,
+    ffi.Pointer<ffi.Char> content_info,
+    ffi.Pointer<ffi.Char> icon,
+    ffi.Int pid,
+    ffi.Double period,
+    ffi.Int allow_duplicate,
+    ffi.Pointer<ffi.Void> user_data);
+typedef Dartshortcut_request_cbFunction = int Function(
+    ffi.Pointer<ffi.Char> package_name,
+    ffi.Pointer<ffi.Char> name,
+    int type,
+    ffi.Pointer<ffi.Char> content_info,
+    ffi.Pointer<ffi.Char> icon,
+    int pid,
+    double period,
+    int allow_duplicate,
+    ffi.Pointer<ffi.Void> user_data);
+
+/// @deprecated Deprecated since 9.0
+/// @brief Called to the shortcut_remove_from_home() request.
+/// @since_tizen 3.0
+/// @param[in] package_name The name of package
+/// @param[in] name The name of the created shortcut icon
+/// @param[in] sender_pid The process ID of who request shortcut_remove_from_home()
+/// @param[in] user_data  The user data passed from the callback register function
+/// @return The result of handling a shortcut remove request\n
+/// This returns @c 0 if the remove_from_home request is handled successfully,
+/// otherwise it returns a proper errno.
+/// @see shortcut_set_remove_cb()
+typedef shortcut_remove_cb
+    = ffi.Pointer<ffi.NativeFunction<shortcut_remove_cbFunction>>;
+typedef shortcut_remove_cbFunction = ffi.Int Function(
+    ffi.Pointer<ffi.Char> package_name,
+    ffi.Pointer<ffi.Char> name,
+    ffi.Int sender_pid,
+    ffi.Pointer<ffi.Void> user_data);
+typedef Dartshortcut_remove_cbFunction = int Function(
+    ffi.Pointer<ffi.Char> package_name,
+    ffi.Pointer<ffi.Char> name,
+    int sender_pid,
+    ffi.Pointer<ffi.Void> user_data);
+
 /// @brief The tizen core channel sender handle.
 /// @since_tizen 9.0
 typedef tizen_core_channel_sender_h = ffi.Pointer<ffi.Void>;
@@ -236826,399 +237471,6 @@ typedef dnssd_resolved_cbFunction = ffi.Void Function(ffi.Int32 result,
 typedef Dartdnssd_resolved_cbFunction = void Function(int result,
     Dartdnssd_service_h remote_service, ffi.Pointer<ffi.Void> user_data);
 
-/// @deprecated Deprecated since 9.0
-/// @brief Enumeration for the HTTP session.
-/// @since_tizen 3.0
-abstract class http_session_mode_e {
-  /// < The Normal Mode
-  static const int HTTP_SESSION_MODE_NORMAL = 0;
-
-  /// < The Pipelining mode
-  static const int HTTP_SESSION_MODE_PIPELINING = 1;
-}
-
-/// @deprecated Deprecated since 9.0
-/// @brief Enumeration for the HTTP method.
-/// @since_tizen 3.0
-abstract class http_method_e {
-  /// < The HTTP GET Method
-  static const int HTTP_METHOD_GET = 64;
-
-  /// < The HTTP OPTIONS Method
-  static const int HTTP_METHOD_OPTIONS = 65;
-
-  /// < The HTTP HEAD Method
-  static const int HTTP_METHOD_HEAD = 66;
-
-  /// < The HTTP DELETE Method
-  static const int HTTP_METHOD_DELETE = 67;
-
-  /// < The HTTP TRACE Method
-  static const int HTTP_METHOD_TRACE = 68;
-
-  /// < The HTTP POST Method
-  static const int HTTP_METHOD_POST = 96;
-
-  /// < The HTTP PUT Method
-  static const int HTTP_METHOD_PUT = 97;
-
-  /// < The HTTP CONNECT Method
-  static const int HTTP_METHOD_CONNECT = 112;
-}
-
-/// @deprecated Deprecated since 9.0
-/// @brief Enumeration for the HTTP version.
-/// @since_tizen 3.0
-abstract class http_version_e {
-  /// < HTTP version 1.0
-  static const int HTTP_VERSION_1_0 = 0;
-
-  /// < HTTP version 1.1
-  static const int HTTP_VERSION_1_1 = 1;
-}
-
-/// @deprecated Deprecated since 9.0
-/// @brief Enumeration for transfer pause state.
-/// @since_tizen 3.0
-abstract class http_pause_type_e {
-  /// < Pause receiving data
-  static const int HTTP_PAUSE_RECV = 1;
-
-  /// < Pause sending data
-  static const int HTTP_PAUSE_SEND = 4;
-
-  /// < Pause both directions
-  static const int HTTP_PAUSE_ALL = 5;
-}
-
-/// @deprecated Deprecated since 9.0
-/// @brief Enumeration for the HTTP error code.
-/// @since_tizen 3.0
-abstract class http_error_code_e {
-  /// < Successful
-  static const int HTTP_ERROR_NONE = 0;
-
-  /// < Out of memory
-  static const int HTTP_ERROR_OUT_OF_MEMORY = -12;
-
-  /// < Permission denied
-  static const int HTTP_ERROR_PERMISSION_DENIED = -13;
-
-  /// < Invalid parameter
-  static const int HTTP_ERROR_INVALID_PARAMETER = -22;
-
-  /// < Invalid operation
-  static const int HTTP_ERROR_INVALID_OPERATION = -38;
-
-  /// < Operation failed
-  static const int HTTP_ERROR_OPERATION_FAILED = -30212095;
-
-  /// < Couldn't resolve host
-  static const int HTTP_ERROR_COULDNT_RESOLVE_HOST = -30212090;
-
-  /// < Couldn't Connect to host
-  static const int HTTP_ERROR_COULDNT_CONNECT = -30212089;
-
-  /// < Timeout
-  static const int HTTP_ERROR_OPERATION_TIMEDOUT = -30212056;
-
-  /// < SSL Error
-  static const int HTTP_ERROR_SSL_CONNECT_ERROR = -30212043;
-
-  /// < Operation Canceled
-  static const int HTTP_ERROR_CANCELED = -125;
-
-  /// < API is not supported
-  static const int HTTP_ERROR_NOT_SUPPORTED = -1073741822;
-}
-
-/// @deprecated Deprecated since 9.0
-/// @brief Enumeration for the HTTP status code.
-/// @since_tizen 3.0
-abstract class http_status_code_e {
-  /// < The undefined status
-  static const int HTTP_STATUS_UNDEFINED = 0;
-
-  /// < The status code: 100 Continue
-  static const int HTTP_STATUS_CONTINUE = 100;
-
-  /// < The status code: 101 Switching Protocols
-  static const int HTTP_STATUS_SWITCHING_PROTOCOLS = 101;
-
-  /// < The status code: 200 OK
-  static const int HTTP_STATUS_OK = 200;
-
-  /// < The status code: 201 Created
-  static const int HTTP_STATUS_CREATED = 201;
-
-  /// < The status code: 202 Accepted
-  static const int HTTP_STATUS_ACCEPTED = 202;
-
-  /// < The status code: 203 Non-Authoritative Information
-  static const int HTTP_STATUS_NON_AUTHORITATIVE_INFORMATION = 203;
-
-  /// < The status code: 204 No %Content
-  static const int HTTP_STATUS_NO_CONTENT = 204;
-
-  /// < The status code: 205 Reset %Content
-  static const int HTTP_STATUS_RESET_CONTENT = 205;
-
-  /// < The status code: 206 Partial %Content
-  static const int HTTP_STATUS_PARTIAL_CONTENT = 206;
-
-  /// < The status code: 300 Multiple Choices
-  static const int HTTP_STATUS_MULTIPLE_CHOICE = 300;
-
-  /// < The status code: 301 Moved Permanently
-  static const int HTTP_STATUS_MOVED_PERMANENTLY = 301;
-
-  /// < The status code: 302 Found
-  static const int HTTP_STATUS_MOVED_TEMPORARILY = 302;
-
-  /// < The status code: 303 See Other
-  static const int HTTP_STATUS_SEE_OTHER = 303;
-
-  /// < The status code: 304 Not Modified
-  static const int HTTP_STATUS_NOT_MODIFIED = 304;
-
-  /// < The status code: 305 Use Proxy
-  static const int HTTP_STATUS_USE_PROXY = 305;
-
-  /// < The status code: 400 Bad Request
-  static const int HTTP_STATUS_BAD_REQUEST = 400;
-
-  /// < The status code: 401 Unauthorized
-  static const int HTTP_STATUS_UNAUTHORIZED = 401;
-
-  /// < The status code: 402 Payment Required
-  static const int HTTP_STATUS_PAYMENT_REQUIRED = 402;
-
-  /// < The status code: 403 Forbidden
-  static const int HTTP_STATUS_FORBIDDEN = 403;
-
-  /// < The status code: 404 Not Found
-  static const int HTTP_STATUS_NOT_FOUND = 404;
-
-  /// < The status code: 405 Method Not Allowed
-  static const int HTTP_STATUS_METHOD_NOT_ALLOWED = 405;
-
-  /// < The status code: 406 Not Acceptable
-  static const int HTTP_STATUS_NOT_ACCEPTABLE = 406;
-
-  /// < The status code: 407 Proxy Authentication Required
-  static const int HTTP_STATUS_PROXY_AUTHENTICATION_REQUIRED = 407;
-
-  /// < The status code: 408 Request Timeout (not used)
-  static const int HTTP_STATUS_REQUEST_TIME_OUT = 408;
-
-  /// < The status code: 409 Conflict
-  static const int HTTP_STATUS_CONFLICT = 409;
-
-  /// < The status code: 410 Gone
-  static const int HTTP_STATUS_GONE = 410;
-
-  /// < The status code: 411 Length Required
-  static const int HTTP_STATUS_LENGTH_REQUIRED = 411;
-
-  /// < The status code: 412 Precondition Failed
-  static const int HTTP_STATUS_PRECONDITION_FAILED = 412;
-
-  /// < The status code: 413 Request Entity Too Large (not used)
-  static const int HTTP_STATUS_REQUEST_ENTITY_TOO_LARGE = 413;
-
-  /// < The status code: 414 Request-URI Too Long (not used)
-  static const int HTTP_STATUS_REQUEST_URI_TOO_LARGE = 414;
-
-  /// < The status code: 415 Unsupported %Media Type
-  static const int HTTP_STATUS_UNSUPPORTED_MEDIA_TYPE = 415;
-
-  /// < The status code: 500 Internal Server Error
-  static const int HTTP_STATUS_INTERNAL_SERVER_ERROR = 500;
-
-  /// < The status code: 501 Not Implemented
-  static const int HTTP_STATUS_NOT_IMPLEMENTED = 501;
-
-  /// < The status code: 502 Bad Gateway
-  static const int HTTP_STATUS_BAD_GATEWAY = 502;
-
-  /// < The status code: 503 Service Unavailable
-  static const int HTTP_STATUS_SERVICE_UNAVAILABLE = 503;
-
-  /// < The status code: 504 Gateway Timeout
-  static const int HTTP_STATUS_GATEWAY_TIME_OUT = 504;
-
-  /// < The status code: 505 HTTP Version Not Supported
-  static const int HTTP_STATUS_HTTP_VERSION_NOT_SUPPORTED = 505;
-}
-
-/// @deprecated Deprecated since 9.0
-/// @brief Enumeration for the HTTP authentication schemes.
-/// @since_tizen 3.0
-abstract class http_auth_scheme_e {
-  /// < No authentication type
-  static const int HTTP_AUTH_NONE = 0;
-
-  /// < The authentication type is Proxy Basic Authentication
-  static const int HTTP_AUTH_PROXY_BASIC = 1;
-
-  /// < The authentication type is Proxy Digest Authentication
-  static const int HTTP_AUTH_PROXY_MD5 = 2;
-
-  /// < The authentication Type is HTTP Basic Authentication
-  static const int HTTP_AUTH_WWW_BASIC = 3;
-
-  /// < The authentication type is HTTP Digest Authentication
-  static const int HTTP_AUTH_WWW_MD5 = 4;
-
-  /// < The authentication type is Proxy NTLM Authentication
-  static const int HTTP_AUTH_PROXY_NTLM = 5;
-
-  /// < The authentication type is NTLM Authentication
-  static const int HTTP_AUTH_WWW_NTLM = 7;
-
-  /// < The authentication type is Negotiate Authentication
-  static const int HTTP_AUTH_WWW_NEGOTIATE = 8;
-}
-
-/// @deprecated Deprecated since 9.0
-/// @brief The HTTP Session handle.
-/// @since_tizen 3.0
-typedef http_session_h = ffi.Pointer<ffi.Void>;
-
-/// @deprecated Deprecated since 9.0
-/// @brief The HTTP Transaction handle.
-/// @since_tizen 3.0
-typedef http_transaction_h = ffi.Pointer<ffi.Void>;
-
-/// @deprecated Deprecated since 9.0
-/// @brief Called when the HTTP header is received.
-/// @since_tizen 3.0
-/// @remarks The @a header should be released using free(). \n
-/// The @a header is available until @a http_transaction is released.
-/// @param[in] http_transaction The HTTP transaction handle
-/// @param[in] header The header information of HTTP Transaction
-/// @param[in] header_len The length of the HTTP Transaction header
-/// @param[in] user_data The user data
-/// @see http_transaction_set_received_header_cb()
-typedef http_transaction_header_cb
-    = ffi.Pointer<ffi.NativeFunction<http_transaction_header_cbFunction>>;
-typedef http_transaction_header_cbFunction = ffi.Void Function(
-    http_transaction_h http_transaction,
-    ffi.Pointer<ffi.Char> header,
-    ffi.Size header_len,
-    ffi.Pointer<ffi.Void> user_data);
-typedef Darthttp_transaction_header_cbFunction = void Function(
-    http_transaction_h http_transaction,
-    ffi.Pointer<ffi.Char> header,
-    int header_len,
-    ffi.Pointer<ffi.Void> user_data);
-
-/// @deprecated Deprecated since 9.0
-/// @brief Called when the HTTP response is received.
-/// @since_tizen 3.0
-/// @param[in] http_transaction The HTTP transaction handle
-/// @param[in] body Response information of HTTP Transaction
-/// @param[in] size Size in bytes of each element to be written
-/// @param[in] count Number of elements, each one with a size of size bytes
-/// @param[in] user_data The user data
-/// @see http_transaction_set_received_body_cb()
-typedef http_transaction_body_cb
-    = ffi.Pointer<ffi.NativeFunction<http_transaction_body_cbFunction>>;
-typedef http_transaction_body_cbFunction = ffi.Void Function(
-    http_transaction_h http_transaction,
-    ffi.Pointer<ffi.Char> body,
-    ffi.Size size,
-    ffi.Size count,
-    ffi.Pointer<ffi.Void> user_data);
-typedef Darthttp_transaction_body_cbFunction = void Function(
-    http_transaction_h http_transaction,
-    ffi.Pointer<ffi.Char> body,
-    int size,
-    int count,
-    ffi.Pointer<ffi.Void> user_data);
-
-/// @deprecated Deprecated since 9.0
-/// @brief Called when the HTTP ready to write event is received.
-/// @since_tizen 3.0
-/// @param[in] http_transaction The HTTP transaction handle
-/// @param[in] recommended_chunk_size Recommended chunk length(bytes) of the HTTP transaction
-/// @param[in] user_data The user data
-/// @see http_transaction_set_uploaded_cb()
-typedef http_transaction_write_cb
-    = ffi.Pointer<ffi.NativeFunction<http_transaction_write_cbFunction>>;
-typedef http_transaction_write_cbFunction = ffi.Void Function(
-    http_transaction_h http_transaction,
-    ffi.Int recommended_chunk_size,
-    ffi.Pointer<ffi.Void> user_data);
-typedef Darthttp_transaction_write_cbFunction = void Function(
-    http_transaction_h http_transaction,
-    int recommended_chunk_size,
-    ffi.Pointer<ffi.Void> user_data);
-
-/// @deprecated Deprecated since 9.0
-/// @brief Called when the HTTP transaction is completed.
-/// @since_tizen 3.0
-/// @param[in] http_transaction The HTTP transaction handle
-/// @param[in] user_data The user data
-/// @see http_transaction_set_completed_cb()
-typedef http_transaction_completed_cb
-    = ffi.Pointer<ffi.NativeFunction<http_transaction_completed_cbFunction>>;
-typedef http_transaction_completed_cbFunction = ffi.Void Function(
-    http_transaction_h http_transaction, ffi.Pointer<ffi.Void> user_data);
-typedef Darthttp_transaction_completed_cbFunction = void Function(
-    http_transaction_h http_transaction, ffi.Pointer<ffi.Void> user_data);
-
-/// @deprecated Deprecated since 9.0
-/// @brief Called when the HTTP transaction is aborted.
-/// @details Following error codes can be delivered. \n
-/// #HTTP_ERROR_OPERATION_FAILED, \n
-/// #HTTP_ERROR_COULDNT_RESOLVE_HOST, \n
-/// #HTTP_ERROR_COULDNT_CONNECT, \n
-/// #HTTP_ERROR_OPERATION_TIMEDOUT, \n
-/// #HTTP_ERROR_SSL_CONNECT_ERROR.
-/// @since_tizen 3.0
-/// @param[in] http_transaction The HTTP transaction handle
-/// @param[in] error The error code about aborted reason
-/// @param[in] user_data The user data
-/// @see http_transaction_set_aborted_cb()
-typedef http_transaction_aborted_cb
-    = ffi.Pointer<ffi.NativeFunction<http_transaction_aborted_cbFunction>>;
-typedef http_transaction_aborted_cbFunction = ffi.Void Function(
-    http_transaction_h http_transaction,
-    ffi.Int32 error,
-    ffi.Pointer<ffi.Void> user_data);
-typedef Darthttp_transaction_aborted_cbFunction = void Function(
-    http_transaction_h http_transaction,
-    int error,
-    ffi.Pointer<ffi.Void> user_data);
-
-/// @deprecated Deprecated since 9.0
-/// @brief Called to notify when the content body of the response message is being downloaded or uploaded.
-/// @since_tizen 3.0
-/// @param[in] http_transaction The HTTP transaction handle
-/// @param[in] download_total The total length of the data (in bytes) to download
-/// @param[in] download_now The current length of the downloaded data (in bytes)
-/// @param[in] upload_total The total length of the data (in bytes) to upload
-/// @param[in] upload_now The current length of the uploaded data (in bytes)
-/// @param[in] user_data The user data
-/// @see http_transaction_set_progress_cb()
-typedef http_transaction_progress_cb
-    = ffi.Pointer<ffi.NativeFunction<http_transaction_progress_cbFunction>>;
-typedef http_transaction_progress_cbFunction = ffi.Void Function(
-    http_transaction_h http_transaction,
-    ffi.Double download_total,
-    ffi.Double download_now,
-    ffi.Double upload_total,
-    ffi.Double upload_now,
-    ffi.Pointer<ffi.Void> user_data);
-typedef Darthttp_transaction_progress_cbFunction = void Function(
-    http_transaction_h http_transaction,
-    double download_total,
-    double download_now,
-    double upload_total,
-    double upload_now,
-    ffi.Pointer<ffi.Void> user_data);
-
 /// @brief Enumeration for Intelligent Network Monitoring (INM) error code.
 /// @since_tizen 5.0
 abstract class inm_error_e {
@@ -240077,6 +240329,399 @@ typedef connection_ipv6_address_cbFunction = ffi.Bool Function(
     ffi.Pointer<ffi.Char> ipv6_address, ffi.Pointer<ffi.Void> user_data);
 typedef Dartconnection_ipv6_address_cbFunction = bool Function(
     ffi.Pointer<ffi.Char> ipv6_address, ffi.Pointer<ffi.Void> user_data);
+
+/// @deprecated Deprecated since 9.0
+/// @brief Enumeration for the HTTP session.
+/// @since_tizen 3.0
+abstract class http_session_mode_e {
+  /// < The Normal Mode
+  static const int HTTP_SESSION_MODE_NORMAL = 0;
+
+  /// < The Pipelining mode
+  static const int HTTP_SESSION_MODE_PIPELINING = 1;
+}
+
+/// @deprecated Deprecated since 9.0
+/// @brief Enumeration for the HTTP method.
+/// @since_tizen 3.0
+abstract class http_method_e {
+  /// < The HTTP GET Method
+  static const int HTTP_METHOD_GET = 64;
+
+  /// < The HTTP OPTIONS Method
+  static const int HTTP_METHOD_OPTIONS = 65;
+
+  /// < The HTTP HEAD Method
+  static const int HTTP_METHOD_HEAD = 66;
+
+  /// < The HTTP DELETE Method
+  static const int HTTP_METHOD_DELETE = 67;
+
+  /// < The HTTP TRACE Method
+  static const int HTTP_METHOD_TRACE = 68;
+
+  /// < The HTTP POST Method
+  static const int HTTP_METHOD_POST = 96;
+
+  /// < The HTTP PUT Method
+  static const int HTTP_METHOD_PUT = 97;
+
+  /// < The HTTP CONNECT Method
+  static const int HTTP_METHOD_CONNECT = 112;
+}
+
+/// @deprecated Deprecated since 9.0
+/// @brief Enumeration for the HTTP version.
+/// @since_tizen 3.0
+abstract class http_version_e {
+  /// < HTTP version 1.0
+  static const int HTTP_VERSION_1_0 = 0;
+
+  /// < HTTP version 1.1
+  static const int HTTP_VERSION_1_1 = 1;
+}
+
+/// @deprecated Deprecated since 9.0
+/// @brief Enumeration for transfer pause state.
+/// @since_tizen 3.0
+abstract class http_pause_type_e {
+  /// < Pause receiving data
+  static const int HTTP_PAUSE_RECV = 1;
+
+  /// < Pause sending data
+  static const int HTTP_PAUSE_SEND = 4;
+
+  /// < Pause both directions
+  static const int HTTP_PAUSE_ALL = 5;
+}
+
+/// @deprecated Deprecated since 9.0
+/// @brief Enumeration for the HTTP error code.
+/// @since_tizen 3.0
+abstract class http_error_code_e {
+  /// < Successful
+  static const int HTTP_ERROR_NONE = 0;
+
+  /// < Out of memory
+  static const int HTTP_ERROR_OUT_OF_MEMORY = -12;
+
+  /// < Permission denied
+  static const int HTTP_ERROR_PERMISSION_DENIED = -13;
+
+  /// < Invalid parameter
+  static const int HTTP_ERROR_INVALID_PARAMETER = -22;
+
+  /// < Invalid operation
+  static const int HTTP_ERROR_INVALID_OPERATION = -38;
+
+  /// < Operation failed
+  static const int HTTP_ERROR_OPERATION_FAILED = -30212095;
+
+  /// < Couldn't resolve host
+  static const int HTTP_ERROR_COULDNT_RESOLVE_HOST = -30212090;
+
+  /// < Couldn't Connect to host
+  static const int HTTP_ERROR_COULDNT_CONNECT = -30212089;
+
+  /// < Timeout
+  static const int HTTP_ERROR_OPERATION_TIMEDOUT = -30212056;
+
+  /// < SSL Error
+  static const int HTTP_ERROR_SSL_CONNECT_ERROR = -30212043;
+
+  /// < Operation Canceled
+  static const int HTTP_ERROR_CANCELED = -125;
+
+  /// < API is not supported
+  static const int HTTP_ERROR_NOT_SUPPORTED = -1073741822;
+}
+
+/// @deprecated Deprecated since 9.0
+/// @brief Enumeration for the HTTP status code.
+/// @since_tizen 3.0
+abstract class http_status_code_e {
+  /// < The undefined status
+  static const int HTTP_STATUS_UNDEFINED = 0;
+
+  /// < The status code: 100 Continue
+  static const int HTTP_STATUS_CONTINUE = 100;
+
+  /// < The status code: 101 Switching Protocols
+  static const int HTTP_STATUS_SWITCHING_PROTOCOLS = 101;
+
+  /// < The status code: 200 OK
+  static const int HTTP_STATUS_OK = 200;
+
+  /// < The status code: 201 Created
+  static const int HTTP_STATUS_CREATED = 201;
+
+  /// < The status code: 202 Accepted
+  static const int HTTP_STATUS_ACCEPTED = 202;
+
+  /// < The status code: 203 Non-Authoritative Information
+  static const int HTTP_STATUS_NON_AUTHORITATIVE_INFORMATION = 203;
+
+  /// < The status code: 204 No %Content
+  static const int HTTP_STATUS_NO_CONTENT = 204;
+
+  /// < The status code: 205 Reset %Content
+  static const int HTTP_STATUS_RESET_CONTENT = 205;
+
+  /// < The status code: 206 Partial %Content
+  static const int HTTP_STATUS_PARTIAL_CONTENT = 206;
+
+  /// < The status code: 300 Multiple Choices
+  static const int HTTP_STATUS_MULTIPLE_CHOICE = 300;
+
+  /// < The status code: 301 Moved Permanently
+  static const int HTTP_STATUS_MOVED_PERMANENTLY = 301;
+
+  /// < The status code: 302 Found
+  static const int HTTP_STATUS_MOVED_TEMPORARILY = 302;
+
+  /// < The status code: 303 See Other
+  static const int HTTP_STATUS_SEE_OTHER = 303;
+
+  /// < The status code: 304 Not Modified
+  static const int HTTP_STATUS_NOT_MODIFIED = 304;
+
+  /// < The status code: 305 Use Proxy
+  static const int HTTP_STATUS_USE_PROXY = 305;
+
+  /// < The status code: 400 Bad Request
+  static const int HTTP_STATUS_BAD_REQUEST = 400;
+
+  /// < The status code: 401 Unauthorized
+  static const int HTTP_STATUS_UNAUTHORIZED = 401;
+
+  /// < The status code: 402 Payment Required
+  static const int HTTP_STATUS_PAYMENT_REQUIRED = 402;
+
+  /// < The status code: 403 Forbidden
+  static const int HTTP_STATUS_FORBIDDEN = 403;
+
+  /// < The status code: 404 Not Found
+  static const int HTTP_STATUS_NOT_FOUND = 404;
+
+  /// < The status code: 405 Method Not Allowed
+  static const int HTTP_STATUS_METHOD_NOT_ALLOWED = 405;
+
+  /// < The status code: 406 Not Acceptable
+  static const int HTTP_STATUS_NOT_ACCEPTABLE = 406;
+
+  /// < The status code: 407 Proxy Authentication Required
+  static const int HTTP_STATUS_PROXY_AUTHENTICATION_REQUIRED = 407;
+
+  /// < The status code: 408 Request Timeout (not used)
+  static const int HTTP_STATUS_REQUEST_TIME_OUT = 408;
+
+  /// < The status code: 409 Conflict
+  static const int HTTP_STATUS_CONFLICT = 409;
+
+  /// < The status code: 410 Gone
+  static const int HTTP_STATUS_GONE = 410;
+
+  /// < The status code: 411 Length Required
+  static const int HTTP_STATUS_LENGTH_REQUIRED = 411;
+
+  /// < The status code: 412 Precondition Failed
+  static const int HTTP_STATUS_PRECONDITION_FAILED = 412;
+
+  /// < The status code: 413 Request Entity Too Large (not used)
+  static const int HTTP_STATUS_REQUEST_ENTITY_TOO_LARGE = 413;
+
+  /// < The status code: 414 Request-URI Too Long (not used)
+  static const int HTTP_STATUS_REQUEST_URI_TOO_LARGE = 414;
+
+  /// < The status code: 415 Unsupported %Media Type
+  static const int HTTP_STATUS_UNSUPPORTED_MEDIA_TYPE = 415;
+
+  /// < The status code: 500 Internal Server Error
+  static const int HTTP_STATUS_INTERNAL_SERVER_ERROR = 500;
+
+  /// < The status code: 501 Not Implemented
+  static const int HTTP_STATUS_NOT_IMPLEMENTED = 501;
+
+  /// < The status code: 502 Bad Gateway
+  static const int HTTP_STATUS_BAD_GATEWAY = 502;
+
+  /// < The status code: 503 Service Unavailable
+  static const int HTTP_STATUS_SERVICE_UNAVAILABLE = 503;
+
+  /// < The status code: 504 Gateway Timeout
+  static const int HTTP_STATUS_GATEWAY_TIME_OUT = 504;
+
+  /// < The status code: 505 HTTP Version Not Supported
+  static const int HTTP_STATUS_HTTP_VERSION_NOT_SUPPORTED = 505;
+}
+
+/// @deprecated Deprecated since 9.0
+/// @brief Enumeration for the HTTP authentication schemes.
+/// @since_tizen 3.0
+abstract class http_auth_scheme_e {
+  /// < No authentication type
+  static const int HTTP_AUTH_NONE = 0;
+
+  /// < The authentication type is Proxy Basic Authentication
+  static const int HTTP_AUTH_PROXY_BASIC = 1;
+
+  /// < The authentication type is Proxy Digest Authentication
+  static const int HTTP_AUTH_PROXY_MD5 = 2;
+
+  /// < The authentication Type is HTTP Basic Authentication
+  static const int HTTP_AUTH_WWW_BASIC = 3;
+
+  /// < The authentication type is HTTP Digest Authentication
+  static const int HTTP_AUTH_WWW_MD5 = 4;
+
+  /// < The authentication type is Proxy NTLM Authentication
+  static const int HTTP_AUTH_PROXY_NTLM = 5;
+
+  /// < The authentication type is NTLM Authentication
+  static const int HTTP_AUTH_WWW_NTLM = 7;
+
+  /// < The authentication type is Negotiate Authentication
+  static const int HTTP_AUTH_WWW_NEGOTIATE = 8;
+}
+
+/// @deprecated Deprecated since 9.0
+/// @brief The HTTP Session handle.
+/// @since_tizen 3.0
+typedef http_session_h = ffi.Pointer<ffi.Void>;
+
+/// @deprecated Deprecated since 9.0
+/// @brief The HTTP Transaction handle.
+/// @since_tizen 3.0
+typedef http_transaction_h = ffi.Pointer<ffi.Void>;
+
+/// @deprecated Deprecated since 9.0
+/// @brief Called when the HTTP header is received.
+/// @since_tizen 3.0
+/// @remarks The @a header should be released using free(). \n
+/// The @a header is available until @a http_transaction is released.
+/// @param[in] http_transaction The HTTP transaction handle
+/// @param[in] header The header information of HTTP Transaction
+/// @param[in] header_len The length of the HTTP Transaction header
+/// @param[in] user_data The user data
+/// @see http_transaction_set_received_header_cb()
+typedef http_transaction_header_cb
+    = ffi.Pointer<ffi.NativeFunction<http_transaction_header_cbFunction>>;
+typedef http_transaction_header_cbFunction = ffi.Void Function(
+    http_transaction_h http_transaction,
+    ffi.Pointer<ffi.Char> header,
+    ffi.Size header_len,
+    ffi.Pointer<ffi.Void> user_data);
+typedef Darthttp_transaction_header_cbFunction = void Function(
+    http_transaction_h http_transaction,
+    ffi.Pointer<ffi.Char> header,
+    int header_len,
+    ffi.Pointer<ffi.Void> user_data);
+
+/// @deprecated Deprecated since 9.0
+/// @brief Called when the HTTP response is received.
+/// @since_tizen 3.0
+/// @param[in] http_transaction The HTTP transaction handle
+/// @param[in] body Response information of HTTP Transaction
+/// @param[in] size Size in bytes of each element to be written
+/// @param[in] count Number of elements, each one with a size of size bytes
+/// @param[in] user_data The user data
+/// @see http_transaction_set_received_body_cb()
+typedef http_transaction_body_cb
+    = ffi.Pointer<ffi.NativeFunction<http_transaction_body_cbFunction>>;
+typedef http_transaction_body_cbFunction = ffi.Void Function(
+    http_transaction_h http_transaction,
+    ffi.Pointer<ffi.Char> body,
+    ffi.Size size,
+    ffi.Size count,
+    ffi.Pointer<ffi.Void> user_data);
+typedef Darthttp_transaction_body_cbFunction = void Function(
+    http_transaction_h http_transaction,
+    ffi.Pointer<ffi.Char> body,
+    int size,
+    int count,
+    ffi.Pointer<ffi.Void> user_data);
+
+/// @deprecated Deprecated since 9.0
+/// @brief Called when the HTTP ready to write event is received.
+/// @since_tizen 3.0
+/// @param[in] http_transaction The HTTP transaction handle
+/// @param[in] recommended_chunk_size Recommended chunk length(bytes) of the HTTP transaction
+/// @param[in] user_data The user data
+/// @see http_transaction_set_uploaded_cb()
+typedef http_transaction_write_cb
+    = ffi.Pointer<ffi.NativeFunction<http_transaction_write_cbFunction>>;
+typedef http_transaction_write_cbFunction = ffi.Void Function(
+    http_transaction_h http_transaction,
+    ffi.Int recommended_chunk_size,
+    ffi.Pointer<ffi.Void> user_data);
+typedef Darthttp_transaction_write_cbFunction = void Function(
+    http_transaction_h http_transaction,
+    int recommended_chunk_size,
+    ffi.Pointer<ffi.Void> user_data);
+
+/// @deprecated Deprecated since 9.0
+/// @brief Called when the HTTP transaction is completed.
+/// @since_tizen 3.0
+/// @param[in] http_transaction The HTTP transaction handle
+/// @param[in] user_data The user data
+/// @see http_transaction_set_completed_cb()
+typedef http_transaction_completed_cb
+    = ffi.Pointer<ffi.NativeFunction<http_transaction_completed_cbFunction>>;
+typedef http_transaction_completed_cbFunction = ffi.Void Function(
+    http_transaction_h http_transaction, ffi.Pointer<ffi.Void> user_data);
+typedef Darthttp_transaction_completed_cbFunction = void Function(
+    http_transaction_h http_transaction, ffi.Pointer<ffi.Void> user_data);
+
+/// @deprecated Deprecated since 9.0
+/// @brief Called when the HTTP transaction is aborted.
+/// @details Following error codes can be delivered. \n
+/// #HTTP_ERROR_OPERATION_FAILED, \n
+/// #HTTP_ERROR_COULDNT_RESOLVE_HOST, \n
+/// #HTTP_ERROR_COULDNT_CONNECT, \n
+/// #HTTP_ERROR_OPERATION_TIMEDOUT, \n
+/// #HTTP_ERROR_SSL_CONNECT_ERROR.
+/// @since_tizen 3.0
+/// @param[in] http_transaction The HTTP transaction handle
+/// @param[in] error The error code about aborted reason
+/// @param[in] user_data The user data
+/// @see http_transaction_set_aborted_cb()
+typedef http_transaction_aborted_cb
+    = ffi.Pointer<ffi.NativeFunction<http_transaction_aborted_cbFunction>>;
+typedef http_transaction_aborted_cbFunction = ffi.Void Function(
+    http_transaction_h http_transaction,
+    ffi.Int32 error,
+    ffi.Pointer<ffi.Void> user_data);
+typedef Darthttp_transaction_aborted_cbFunction = void Function(
+    http_transaction_h http_transaction,
+    int error,
+    ffi.Pointer<ffi.Void> user_data);
+
+/// @deprecated Deprecated since 9.0
+/// @brief Called to notify when the content body of the response message is being downloaded or uploaded.
+/// @since_tizen 3.0
+/// @param[in] http_transaction The HTTP transaction handle
+/// @param[in] download_total The total length of the data (in bytes) to download
+/// @param[in] download_now The current length of the downloaded data (in bytes)
+/// @param[in] upload_total The total length of the data (in bytes) to upload
+/// @param[in] upload_now The current length of the uploaded data (in bytes)
+/// @param[in] user_data The user data
+/// @see http_transaction_set_progress_cb()
+typedef http_transaction_progress_cb
+    = ffi.Pointer<ffi.NativeFunction<http_transaction_progress_cbFunction>>;
+typedef http_transaction_progress_cbFunction = ffi.Void Function(
+    http_transaction_h http_transaction,
+    ffi.Double download_total,
+    ffi.Double download_now,
+    ffi.Double upload_total,
+    ffi.Double upload_now,
+    ffi.Pointer<ffi.Void> user_data);
+typedef Darthttp_transaction_progress_cbFunction = void Function(
+    http_transaction_h http_transaction,
+    double download_total,
+    double download_now,
+    double upload_total,
+    double upload_now,
+    ffi.Pointer<ffi.Void> user_data);
 
 /// @brief Error codes reported by the NFC API.
 /// @since_tizen 2.3
@@ -247110,13 +247755,13 @@ abstract class yaca_kdf_e {
   static const int YACA_KDF_X962 = 1;
 }
 
-/// @brief An Initialization Vector or a key generation parameters by the key handle.
-/// @since_tizen 3.0
-typedef yaca_key_h = ffi.Pointer<yaca_key_s>;
-
 /// @brief The context handle.
 /// @since_tizen 3.0
 typedef yaca_context_h = ffi.Pointer<yaca_context_s>;
+
+/// @brief An Initialization Vector or a key generation parameters by the key handle.
+/// @since_tizen 3.0
+typedef yaca_key_h = ffi.Pointer<yaca_key_s>;
 
 /// @brief Enumeration for YACA error values.
 /// @since_tizen 3.0

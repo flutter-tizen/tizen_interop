@@ -50,6 +50,10 @@ const Map<String, List<String>> ${moduleName}Symbols = {
 ''';
       for (var symbol in _getSymbols(libraryPath.childFile(library))) {
         if (_config.allowlist.isEmpty || _config.allowlist.contains(symbol)) {
+          if ((moduleName == 'vc_engine' || moduleName == 'vc_manager') &&
+              symbol.startsWith('vc_cmd_')) {
+            continue;
+          }
           contents += '    \'$symbol\',\n';
         }
       }

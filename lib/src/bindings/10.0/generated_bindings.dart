@@ -3809,6 +3809,1899 @@ class Tizen100Native {
           ffi.Pointer<ffi.UnsignedInt>,
           ffi.Pointer<ffi.Pointer<ffi.UnsignedInt>>)>();
 
+  /// @brief Creates #oauth2_request_h handle.
+  /// @details The handle must be freed via oauth2_request_destroy().
+  /// @since_tizen 2.4
+  ///
+  /// @param[out] handle The created oauth2_request handle, else NULL for error cases
+  ///
+  /// @return     @c 0 on success,
+  /// otherwise a negative error value
+  /// @retval     #OAUTH2_ERROR_NONE               Successful
+  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
+  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  int oauth2_request_create(
+    ffi.Pointer<oauth2_request_h> handle,
+  ) {
+    return _oauth2_request_create(
+      handle,
+    );
+  }
+
+  late final _oauth2_request_createPtr = _lookup<
+          ffi.NativeFunction<ffi.Int Function(ffi.Pointer<oauth2_request_h>)>>(
+      'oauth2_request_create');
+  late final _oauth2_request_create = _oauth2_request_createPtr
+      .asFunction<int Function(ffi.Pointer<oauth2_request_h>)>();
+
+  /// @brief Destroys #oauth2_request_h handle.
+  /// @since_tizen 2.4
+  ///
+  /// @param[in] handle The oauth2_request handle to destroy
+  ///
+  /// @return     @c 0 on success,
+  /// otherwise a negative error value
+  /// @retval     #OAUTH2_ERROR_NONE               Successful
+  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  int oauth2_request_destroy(
+    oauth2_request_h handle,
+  ) {
+    return _oauth2_request_destroy(
+      handle,
+    );
+  }
+
+  late final _oauth2_request_destroyPtr =
+      _lookup<ffi.NativeFunction<ffi.Int Function(oauth2_request_h)>>(
+          'oauth2_request_destroy');
+  late final _oauth2_request_destroy =
+      _oauth2_request_destroyPtr.asFunction<int Function(oauth2_request_h)>();
+
+  /// @brief Sets authorization end point URL.
+  /// @since_tizen 2.4
+  ///
+  /// @param[in] handle The request handle
+  /// @param[in] url The url
+  ///
+  /// @return     @c 0 on success,
+  /// otherwise a negative error value
+  /// @retval     #OAUTH2_ERROR_NONE               Successful
+  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
+  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  int oauth2_request_set_auth_end_point_url(
+    oauth2_request_h handle,
+    ffi.Pointer<ffi.Char> url,
+  ) {
+    return _oauth2_request_set_auth_end_point_url(
+      handle,
+      url,
+    );
+  }
+
+  late final _oauth2_request_set_auth_end_point_urlPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(oauth2_request_h,
+              ffi.Pointer<ffi.Char>)>>('oauth2_request_set_auth_end_point_url');
+  late final _oauth2_request_set_auth_end_point_url =
+      _oauth2_request_set_auth_end_point_urlPtr
+          .asFunction<int Function(oauth2_request_h, ffi.Pointer<ffi.Char>)>();
+
+  /// @brief Sets access token end point URL.
+  /// @since_tizen 2.4
+  ///
+  /// @param[in] handle The request handle
+  /// @param[in] url The url
+  ///
+  /// @return     @c 0 on success,
+  /// otherwise a negative error value
+  /// @retval     #OAUTH2_ERROR_NONE               Successful
+  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
+  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  int oauth2_request_set_token_end_point_url(
+    oauth2_request_h handle,
+    ffi.Pointer<ffi.Char> url,
+  ) {
+    return _oauth2_request_set_token_end_point_url(
+      handle,
+      url,
+    );
+  }
+
+  late final _oauth2_request_set_token_end_point_urlPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Int Function(oauth2_request_h, ffi.Pointer<ffi.Char>)>>(
+      'oauth2_request_set_token_end_point_url');
+  late final _oauth2_request_set_token_end_point_url =
+      _oauth2_request_set_token_end_point_urlPtr
+          .asFunction<int Function(oauth2_request_h, ffi.Pointer<ffi.Char>)>();
+
+  /// @brief Sets redirection URL.
+  /// @since_tizen 2.4
+  ///
+  /// @param[in] handle The request handle
+  /// @param[in] url The url
+  ///
+  /// @return     @c 0 on success,
+  /// otherwise a negative error value
+  /// @retval     #OAUTH2_ERROR_NONE               Successful
+  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
+  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  int oauth2_request_set_redirection_url(
+    oauth2_request_h handle,
+    ffi.Pointer<ffi.Char> url,
+  ) {
+    return _oauth2_request_set_redirection_url(
+      handle,
+      url,
+    );
+  }
+
+  late final _oauth2_request_set_redirection_urlPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(oauth2_request_h,
+              ffi.Pointer<ffi.Char>)>>('oauth2_request_set_redirection_url');
+  late final _oauth2_request_set_redirection_url =
+      _oauth2_request_set_redirection_urlPtr
+          .asFunction<int Function(oauth2_request_h, ffi.Pointer<ffi.Char>)>();
+
+  /// @brief Sets refresh token end point URL.
+  /// @since_tizen 2.4
+  ///
+  /// @param[in] handle The request handle
+  /// @param[in] url The url
+  ///
+  /// @return     @c 0 on success,
+  /// otherwise a negative error value
+  /// @retval     #OAUTH2_ERROR_NONE               Successful
+  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
+  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  int oauth2_request_set_refresh_token_url(
+    oauth2_request_h handle,
+    ffi.Pointer<ffi.Char> url,
+  ) {
+    return _oauth2_request_set_refresh_token_url(
+      handle,
+      url,
+    );
+  }
+
+  late final _oauth2_request_set_refresh_token_urlPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(oauth2_request_h,
+              ffi.Pointer<ffi.Char>)>>('oauth2_request_set_refresh_token_url');
+  late final _oauth2_request_set_refresh_token_url =
+      _oauth2_request_set_refresh_token_urlPtr
+          .asFunction<int Function(oauth2_request_h, ffi.Pointer<ffi.Char>)>();
+
+  /// @brief Sets refresh token. Used mostly while using oauth2_manager_refresh_access_token().
+  /// @since_tizen 2.4
+  ///
+  /// @param[in] handle The request handle
+  /// @param[in] refresh_token The refresh token string
+  ///
+  /// @return     @c 0 on success,
+  /// otherwise a negative error value
+  /// @retval     #OAUTH2_ERROR_NONE               Successful
+  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
+  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  int oauth2_request_set_refresh_token(
+    oauth2_request_h handle,
+    ffi.Pointer<ffi.Char> refresh_token,
+  ) {
+    return _oauth2_request_set_refresh_token(
+      handle,
+      refresh_token,
+    );
+  }
+
+  late final _oauth2_request_set_refresh_tokenPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(oauth2_request_h,
+              ffi.Pointer<ffi.Char>)>>('oauth2_request_set_refresh_token');
+  late final _oauth2_request_set_refresh_token =
+      _oauth2_request_set_refresh_tokenPtr
+          .asFunction<int Function(oauth2_request_h, ffi.Pointer<ffi.Char>)>();
+
+  /// @brief Sets response type.
+  /// @since_tizen 2.4
+  ///
+  /// @param[in] handle The request handle
+  /// @param[in] response_type The response type
+  ///
+  /// @return     @c 0 on success,
+  /// otherwise a negative error value
+  /// @retval     #OAUTH2_ERROR_NONE               Successful
+  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
+  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  int oauth2_request_set_response_type(
+    oauth2_request_h handle,
+    int response_type,
+  ) {
+    return _oauth2_request_set_response_type(
+      handle,
+      response_type,
+    );
+  }
+
+  late final _oauth2_request_set_response_typePtr = _lookup<
+          ffi.NativeFunction<ffi.Int Function(oauth2_request_h, ffi.Int32)>>(
+      'oauth2_request_set_response_type');
+  late final _oauth2_request_set_response_type =
+      _oauth2_request_set_response_typePtr
+          .asFunction<int Function(oauth2_request_h, int)>();
+
+  /// @brief Sets client id.
+  /// @since_tizen 2.4
+  ///
+  /// @param[in] handle The request handle
+  /// @param[in] client_id The client id
+  ///
+  /// @return     @c 0 on success,
+  /// otherwise a negative error value
+  /// @retval     #OAUTH2_ERROR_NONE               Successful
+  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
+  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  int oauth2_request_set_client_id(
+    oauth2_request_h handle,
+    ffi.Pointer<ffi.Char> client_id,
+  ) {
+    return _oauth2_request_set_client_id(
+      handle,
+      client_id,
+    );
+  }
+
+  late final _oauth2_request_set_client_idPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(oauth2_request_h,
+              ffi.Pointer<ffi.Char>)>>('oauth2_request_set_client_id');
+  late final _oauth2_request_set_client_id = _oauth2_request_set_client_idPtr
+      .asFunction<int Function(oauth2_request_h, ffi.Pointer<ffi.Char>)>();
+
+  /// @brief Sets client secret.
+  /// @since_tizen 2.4
+  ///
+  /// @param[in] handle The request handle
+  /// @param[in] client_secret The secret
+  ///
+  /// @return     @c 0 on success,
+  /// otherwise a negative error value
+  /// @retval     #OAUTH2_ERROR_NONE               Successful
+  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
+  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  int oauth2_request_set_client_secret(
+    oauth2_request_h handle,
+    ffi.Pointer<ffi.Char> client_secret,
+  ) {
+    return _oauth2_request_set_client_secret(
+      handle,
+      client_secret,
+    );
+  }
+
+  late final _oauth2_request_set_client_secretPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(oauth2_request_h,
+              ffi.Pointer<ffi.Char>)>>('oauth2_request_set_client_secret');
+  late final _oauth2_request_set_client_secret =
+      _oauth2_request_set_client_secretPtr
+          .asFunction<int Function(oauth2_request_h, ffi.Pointer<ffi.Char>)>();
+
+  /// @brief Sets client authentication type. Default is OAUTH2_CLIENT_AUTHENTICATION_TYPE_BASIC.
+  /// @since_tizen 2.4
+  ///
+  /// @remarks Facebook and Google does not support HTTP Basic Authentication, instead they require client credentials to be sent via request body.\n
+  /// So application must set #OAUTH2_CLIENT_AUTHENTICATION_TYPE_REQUEST_BODY for them.
+  ///
+  /// @param[in] handle The request handle
+  /// @param[in] client_auth_type The client authentication type
+  ///
+  /// @return     @c 0 on success,
+  /// otherwise a negative error value
+  /// @retval     #OAUTH2_ERROR_NONE               Successful
+  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
+  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  int oauth2_request_set_client_authentication_type(
+    oauth2_request_h handle,
+    int client_auth_type,
+  ) {
+    return _oauth2_request_set_client_authentication_type(
+      handle,
+      client_auth_type,
+    );
+  }
+
+  late final _oauth2_request_set_client_authentication_typePtr = _lookup<
+          ffi.NativeFunction<ffi.Int Function(oauth2_request_h, ffi.Int32)>>(
+      'oauth2_request_set_client_authentication_type');
+  late final _oauth2_request_set_client_authentication_type =
+      _oauth2_request_set_client_authentication_typePtr
+          .asFunction<int Function(oauth2_request_h, int)>();
+
+  /// @brief Sets scope.
+  /// @since_tizen 2.4
+  ///
+  /// @param[in] handle The request handle
+  /// @param[in] scope The scope
+  ///
+  /// @return     @c 0 on success,
+  /// otherwise a negative error value
+  /// @retval     #OAUTH2_ERROR_NONE               Successful
+  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
+  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  int oauth2_request_set_scope(
+    oauth2_request_h handle,
+    ffi.Pointer<ffi.Char> scope,
+  ) {
+    return _oauth2_request_set_scope(
+      handle,
+      scope,
+    );
+  }
+
+  late final _oauth2_request_set_scopePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(oauth2_request_h,
+              ffi.Pointer<ffi.Char>)>>('oauth2_request_set_scope');
+  late final _oauth2_request_set_scope = _oauth2_request_set_scopePtr
+      .asFunction<int Function(oauth2_request_h, ffi.Pointer<ffi.Char>)>();
+
+  /// @brief Sets state.
+  /// @since_tizen 2.4
+  ///
+  /// @param[in] handle The request handle
+  /// @param[in] state The state
+  ///
+  /// @return     @c 0 on success,
+  /// otherwise a negative error value
+  /// @retval     #OAUTH2_ERROR_NONE               Successful
+  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
+  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  int oauth2_request_set_state(
+    oauth2_request_h handle,
+    ffi.Pointer<ffi.Char> state,
+  ) {
+    return _oauth2_request_set_state(
+      handle,
+      state,
+    );
+  }
+
+  late final _oauth2_request_set_statePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(oauth2_request_h,
+              ffi.Pointer<ffi.Char>)>>('oauth2_request_set_state');
+  late final _oauth2_request_set_state = _oauth2_request_set_statePtr
+      .asFunction<int Function(oauth2_request_h, ffi.Pointer<ffi.Char>)>();
+
+  /// @brief Sets grant type.
+  /// @since_tizen 2.4
+  ///
+  /// @param[in] handle The request handle
+  /// @param[in] grant_type The grant type
+  ///
+  /// @return     @c 0 on success,
+  /// otherwise a negative error value
+  /// @retval     #OAUTH2_ERROR_NONE               Successful
+  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
+  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  int oauth2_request_set_grant_type(
+    oauth2_request_h handle,
+    int grant_type,
+  ) {
+    return _oauth2_request_set_grant_type(
+      handle,
+      grant_type,
+    );
+  }
+
+  late final _oauth2_request_set_grant_typePtr = _lookup<
+          ffi.NativeFunction<ffi.Int Function(oauth2_request_h, ffi.Int32)>>(
+      'oauth2_request_set_grant_type');
+  late final _oauth2_request_set_grant_type = _oauth2_request_set_grant_typePtr
+      .asFunction<int Function(oauth2_request_h, int)>();
+
+  /// @brief Sets authorization code.
+  /// @since_tizen 2.4
+  ///
+  /// @param[in] handle The request handle
+  /// @param[in] code The authorization code
+  ///
+  /// @return     @c 0 on success,
+  /// otherwise a negative error value
+  /// @retval     #OAUTH2_ERROR_NONE               Successful
+  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
+  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  ///
+  /// @see oauth2_response_get_authorization_code()
+  int oauth2_request_set_authorization_code(
+    oauth2_request_h handle,
+    ffi.Pointer<ffi.Char> code,
+  ) {
+    return _oauth2_request_set_authorization_code(
+      handle,
+      code,
+    );
+  }
+
+  late final _oauth2_request_set_authorization_codePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(oauth2_request_h,
+              ffi.Pointer<ffi.Char>)>>('oauth2_request_set_authorization_code');
+  late final _oauth2_request_set_authorization_code =
+      _oauth2_request_set_authorization_codePtr
+          .asFunction<int Function(oauth2_request_h, ffi.Pointer<ffi.Char>)>();
+
+  /// @brief Sets user name.
+  /// @since_tizen 2.4
+  ///
+  /// @param[in] handle The request handle
+  /// @param[in] user_name The user name
+  ///
+  /// @return     @c 0 on success,
+  /// otherwise a negative error value
+  /// @retval     #OAUTH2_ERROR_NONE               Successful
+  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
+  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  int oauth2_request_set_user_name(
+    oauth2_request_h handle,
+    ffi.Pointer<ffi.Char> user_name,
+  ) {
+    return _oauth2_request_set_user_name(
+      handle,
+      user_name,
+    );
+  }
+
+  late final _oauth2_request_set_user_namePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(oauth2_request_h,
+              ffi.Pointer<ffi.Char>)>>('oauth2_request_set_user_name');
+  late final _oauth2_request_set_user_name = _oauth2_request_set_user_namePtr
+      .asFunction<int Function(oauth2_request_h, ffi.Pointer<ffi.Char>)>();
+
+  /// @brief Sets password.
+  /// @since_tizen 2.4
+  ///
+  /// @param[in] handle The request handle
+  /// @param[in] password The password
+  ///
+  /// @return     @c 0 on success,
+  /// otherwise a negative error value
+  /// @retval     #OAUTH2_ERROR_NONE               Successful
+  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
+  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  int oauth2_request_set_password(
+    oauth2_request_h handle,
+    ffi.Pointer<ffi.Char> password,
+  ) {
+    return _oauth2_request_set_password(
+      handle,
+      password,
+    );
+  }
+
+  late final _oauth2_request_set_passwordPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(oauth2_request_h,
+              ffi.Pointer<ffi.Char>)>>('oauth2_request_set_password');
+  late final _oauth2_request_set_password = _oauth2_request_set_passwordPtr
+      .asFunction<int Function(oauth2_request_h, ffi.Pointer<ffi.Char>)>();
+
+  /// @brief Adds custom key-value pair to the request.
+  /// @since_tizen 2.4
+  ///
+  /// @param[in] handle The request handle
+  /// @param[in] key The key
+  /// @param[in] value The value
+  ///
+  /// @return     @c 0 on success,
+  /// otherwise a negative error value
+  /// @retval     #OAUTH2_ERROR_NONE               Successful
+  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
+  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  ///
+  /// @see oauth2_request_get_custom_data()
+  int oauth2_request_add_custom_data(
+    oauth2_request_h handle,
+    ffi.Pointer<ffi.Char> key,
+    ffi.Pointer<ffi.Char> value,
+  ) {
+    return _oauth2_request_add_custom_data(
+      handle,
+      key,
+      value,
+    );
+  }
+
+  late final _oauth2_request_add_custom_dataPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(oauth2_request_h, ffi.Pointer<ffi.Char>,
+              ffi.Pointer<ffi.Char>)>>('oauth2_request_add_custom_data');
+  late final _oauth2_request_add_custom_data =
+      _oauth2_request_add_custom_dataPtr.asFunction<
+          int Function(oauth2_request_h, ffi.Pointer<ffi.Char>,
+              ffi.Pointer<ffi.Char>)>();
+
+  /// @brief Gets authorization end point URL.
+  /// @since_tizen 2.4
+  ///
+  /// @remarks You must not release @a url using free().
+  /// @param[in] handle The request handle
+  /// @param[out] url The url
+  ///
+  /// @return     @c 0 on success,
+  /// otherwise a negative error value
+  /// @retval     #OAUTH2_ERROR_NONE               Successful
+  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
+  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// @retval     #OAUTH2_ERROR_VALUE_NOT_FOUND    Value not found
+  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  int oauth2_request_get_auth_end_point_url(
+    oauth2_request_h handle,
+    ffi.Pointer<ffi.Pointer<ffi.Char>> url,
+  ) {
+    return _oauth2_request_get_auth_end_point_url(
+      handle,
+      url,
+    );
+  }
+
+  late final _oauth2_request_get_auth_end_point_urlPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Int Function(
+                  oauth2_request_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>>(
+      'oauth2_request_get_auth_end_point_url');
+  late final _oauth2_request_get_auth_end_point_url =
+      _oauth2_request_get_auth_end_point_urlPtr.asFunction<
+          int Function(oauth2_request_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
+
+  /// @brief Gets access token end point URL.
+  /// @since_tizen 2.4
+  ///
+  /// @remarks You must not release @a url using free().
+  /// @param[in] handle The request handle
+  /// @param[out] url The url
+  ///
+  /// @return     @c 0 on success,
+  /// otherwise a negative error value
+  /// @retval     #OAUTH2_ERROR_NONE               Successful
+  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
+  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// @retval     #OAUTH2_ERROR_VALUE_NOT_FOUND    Value not found
+  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  int oauth2_request_get_token_end_point_url(
+    oauth2_request_h handle,
+    ffi.Pointer<ffi.Pointer<ffi.Char>> url,
+  ) {
+    return _oauth2_request_get_token_end_point_url(
+      handle,
+      url,
+    );
+  }
+
+  late final _oauth2_request_get_token_end_point_urlPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Int Function(
+                  oauth2_request_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>>(
+      'oauth2_request_get_token_end_point_url');
+  late final _oauth2_request_get_token_end_point_url =
+      _oauth2_request_get_token_end_point_urlPtr.asFunction<
+          int Function(oauth2_request_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
+
+  /// @brief Gets redirection URL.
+  /// @since_tizen 2.4
+  ///
+  /// @remarks You must not release @a url using free().
+  /// @param[in] handle The request handle
+  /// @param[out] url The url
+  ///
+  /// @return     @c 0 on success,
+  /// otherwise a negative error value
+  /// @retval     #OAUTH2_ERROR_NONE               Successful
+  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
+  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// @retval     #OAUTH2_ERROR_VALUE_NOT_FOUND    Value not found
+  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  int oauth2_request_get_redirection_url(
+    oauth2_request_h handle,
+    ffi.Pointer<ffi.Pointer<ffi.Char>> url,
+  ) {
+    return _oauth2_request_get_redirection_url(
+      handle,
+      url,
+    );
+  }
+
+  late final _oauth2_request_get_redirection_urlPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Int Function(
+                  oauth2_request_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>>(
+      'oauth2_request_get_redirection_url');
+  late final _oauth2_request_get_redirection_url =
+      _oauth2_request_get_redirection_urlPtr.asFunction<
+          int Function(oauth2_request_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
+
+  /// @brief Gets refresh token end point URL.
+  /// @since_tizen 2.4
+  ///
+  /// @remarks You must not release @a url using free().
+  /// @param[in] handle The request handle
+  /// @param[out] url The url
+  ///
+  /// @return     @c 0 on success,
+  /// otherwise a negative error value
+  /// @retval     #OAUTH2_ERROR_NONE               Successful
+  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
+  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// @retval     #OAUTH2_ERROR_VALUE_NOT_FOUND    Value not found
+  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  int oauth2_request_get_refresh_token_url(
+    oauth2_request_h handle,
+    ffi.Pointer<ffi.Pointer<ffi.Char>> url,
+  ) {
+    return _oauth2_request_get_refresh_token_url(
+      handle,
+      url,
+    );
+  }
+
+  late final _oauth2_request_get_refresh_token_urlPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Int Function(
+                  oauth2_request_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>>(
+      'oauth2_request_get_refresh_token_url');
+  late final _oauth2_request_get_refresh_token_url =
+      _oauth2_request_get_refresh_token_urlPtr.asFunction<
+          int Function(oauth2_request_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
+
+  /// @brief Gets refresh token.
+  /// @since_tizen 2.4
+  ///
+  /// @remarks You must not release @a refresh_token using free().
+  /// @param[in] handle The request handle
+  /// @param[out] refresh_token The refresh token
+  ///
+  /// @return     @c 0 on success,
+  /// otherwise a negative error value
+  /// @retval     #OAUTH2_ERROR_NONE               Successful
+  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
+  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// @retval     #OAUTH2_ERROR_VALUE_NOT_FOUND    Value not found
+  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  int oauth2_request_get_refresh_token(
+    oauth2_request_h handle,
+    ffi.Pointer<ffi.Pointer<ffi.Char>> refresh_token,
+  ) {
+    return _oauth2_request_get_refresh_token(
+      handle,
+      refresh_token,
+    );
+  }
+
+  late final _oauth2_request_get_refresh_tokenPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Int Function(
+                  oauth2_request_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>>(
+      'oauth2_request_get_refresh_token');
+  late final _oauth2_request_get_refresh_token =
+      _oauth2_request_get_refresh_tokenPtr.asFunction<
+          int Function(oauth2_request_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
+
+  /// @brief Gets response type.
+  /// @since_tizen 2.4
+  ///
+  /// @remarks		You must not free response_type
+  /// @param[in] handle The request handle
+  /// @param[out] response_type The response type
+  ///
+  /// @return     @c 0 on success,
+  /// otherwise a negative error value
+  /// @retval     #OAUTH2_ERROR_NONE               Successful
+  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
+  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// @retval     #OAUTH2_ERROR_VALUE_NOT_FOUND    Value not found
+  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  int oauth2_request_get_response_type(
+    oauth2_request_h handle,
+    ffi.Pointer<ffi.Int32> response_type,
+  ) {
+    return _oauth2_request_get_response_type(
+      handle,
+      response_type,
+    );
+  }
+
+  late final _oauth2_request_get_response_typePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(oauth2_request_h,
+              ffi.Pointer<ffi.Int32>)>>('oauth2_request_get_response_type');
+  late final _oauth2_request_get_response_type =
+      _oauth2_request_get_response_typePtr
+          .asFunction<int Function(oauth2_request_h, ffi.Pointer<ffi.Int32>)>();
+
+  /// @brief Gets client id.
+  /// @since_tizen 2.4
+  ///
+  /// @remarks You must not release @a client_id using free().
+  /// @param[in] handle The request handle
+  /// @param[out] client_id The client id
+  ///
+  /// @return     @c 0 on success,
+  /// otherwise a negative error value
+  /// @retval     #OAUTH2_ERROR_NONE               Successful
+  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
+  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// @retval     #OAUTH2_ERROR_VALUE_NOT_FOUND    Value not found
+  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  int oauth2_request_get_client_id(
+    oauth2_request_h handle,
+    ffi.Pointer<ffi.Pointer<ffi.Char>> client_id,
+  ) {
+    return _oauth2_request_get_client_id(
+      handle,
+      client_id,
+    );
+  }
+
+  late final _oauth2_request_get_client_idPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Int Function(
+                  oauth2_request_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>>(
+      'oauth2_request_get_client_id');
+  late final _oauth2_request_get_client_id =
+      _oauth2_request_get_client_idPtr.asFunction<
+          int Function(oauth2_request_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
+
+  /// @brief Gets client secret.
+  /// @since_tizen 2.4
+  ///
+  /// @remarks You must not release @a client_secret using free().
+  /// @param[in] handle The request handle
+  /// @param[out] client_secret The client_secret
+  ///
+  /// @return     @c 0 on success,
+  /// otherwise a negative error value
+  /// @retval     #OAUTH2_ERROR_NONE               Successful
+  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
+  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// @retval     #OAUTH2_ERROR_VALUE_NOT_FOUND    Value not found
+  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  int oauth2_request_get_client_secret(
+    oauth2_request_h handle,
+    ffi.Pointer<ffi.Pointer<ffi.Char>> client_secret,
+  ) {
+    return _oauth2_request_get_client_secret(
+      handle,
+      client_secret,
+    );
+  }
+
+  late final _oauth2_request_get_client_secretPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Int Function(
+                  oauth2_request_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>>(
+      'oauth2_request_get_client_secret');
+  late final _oauth2_request_get_client_secret =
+      _oauth2_request_get_client_secretPtr.asFunction<
+          int Function(oauth2_request_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
+
+  /// @brief Gets scope.
+  /// @since_tizen 2.4
+  ///
+  /// @remarks You must not release @a scope using free().
+  /// @param[in] handle The request handle
+  /// @param[out] scope The scope
+  ///
+  /// @return     @c 0 on success,
+  /// otherwise a negative error value
+  /// @retval     #OAUTH2_ERROR_NONE               Successful
+  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
+  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// @retval     #OAUTH2_ERROR_VALUE_NOT_FOUND    Value not found
+  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  int oauth2_request_get_scope(
+    oauth2_request_h handle,
+    ffi.Pointer<ffi.Pointer<ffi.Char>> scope,
+  ) {
+    return _oauth2_request_get_scope(
+      handle,
+      scope,
+    );
+  }
+
+  late final _oauth2_request_get_scopePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(oauth2_request_h,
+              ffi.Pointer<ffi.Pointer<ffi.Char>>)>>('oauth2_request_get_scope');
+  late final _oauth2_request_get_scope =
+      _oauth2_request_get_scopePtr.asFunction<
+          int Function(oauth2_request_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
+
+  /// @brief Gets state.
+  /// @since_tizen 2.4
+  ///
+  /// @remarks You must not release @a state using free().
+  /// @param[in] handle The request handle
+  /// @param[out] state The state
+  ///
+  /// @return     @c 0 on success,
+  /// otherwise a negative error value
+  /// @retval     #OAUTH2_ERROR_NONE               Successful
+  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
+  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// @retval     #OAUTH2_ERROR_VALUE_NOT_FOUND    Value not found
+  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  int oauth2_request_get_state(
+    oauth2_request_h handle,
+    ffi.Pointer<ffi.Pointer<ffi.Char>> state,
+  ) {
+    return _oauth2_request_get_state(
+      handle,
+      state,
+    );
+  }
+
+  late final _oauth2_request_get_statePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(oauth2_request_h,
+              ffi.Pointer<ffi.Pointer<ffi.Char>>)>>('oauth2_request_get_state');
+  late final _oauth2_request_get_state =
+      _oauth2_request_get_statePtr.asFunction<
+          int Function(oauth2_request_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
+
+  /// @brief Gets grant type.
+  /// @since_tizen 2.4
+  ///
+  /// @remarks You must not release @a grant_type using free().
+  /// @param[in] handle The request handle
+  /// @param[out] grant_type The grant type
+  ///
+  /// @return     @c 0 on success,
+  /// otherwise a negative error value
+  /// @retval     #OAUTH2_ERROR_NONE               Successful
+  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
+  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// @retval     #OAUTH2_ERROR_VALUE_NOT_FOUND    Value not found
+  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  int oauth2_request_get_grant_type(
+    oauth2_request_h handle,
+    ffi.Pointer<ffi.Int32> grant_type,
+  ) {
+    return _oauth2_request_get_grant_type(
+      handle,
+      grant_type,
+    );
+  }
+
+  late final _oauth2_request_get_grant_typePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(oauth2_request_h,
+              ffi.Pointer<ffi.Int32>)>>('oauth2_request_get_grant_type');
+  late final _oauth2_request_get_grant_type = _oauth2_request_get_grant_typePtr
+      .asFunction<int Function(oauth2_request_h, ffi.Pointer<ffi.Int32>)>();
+
+  /// @brief Gets authorization code.
+  /// @since_tizen 2.4
+  ///
+  /// @remarks You must not release @a code using free().
+  /// @param[in] handle The request handle.
+  /// @param[out] code The code.
+  ///
+  /// @return     @c 0 on success,
+  /// otherwise a negative error value
+  /// @retval     #OAUTH2_ERROR_NONE               Successful
+  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
+  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// @retval     #OAUTH2_ERROR_VALUE_NOT_FOUND    Value not found
+  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  int oauth2_request_get_authorization_code(
+    oauth2_request_h handle,
+    ffi.Pointer<ffi.Pointer<ffi.Char>> code,
+  ) {
+    return _oauth2_request_get_authorization_code(
+      handle,
+      code,
+    );
+  }
+
+  late final _oauth2_request_get_authorization_codePtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Int Function(
+                  oauth2_request_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>>(
+      'oauth2_request_get_authorization_code');
+  late final _oauth2_request_get_authorization_code =
+      _oauth2_request_get_authorization_codePtr.asFunction<
+          int Function(oauth2_request_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
+
+  /// @brief Gets user name.
+  /// @since_tizen 2.4
+  ///
+  /// @remarks You must not release @a user_name using free().
+  /// @param[in] handle The request handle
+  /// @param[out] user_name The user name
+  ///
+  /// @return     @c 0 on success,
+  /// otherwise a negative error value
+  /// @retval     #OAUTH2_ERROR_NONE               Successful
+  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
+  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// @retval     #OAUTH2_ERROR_VALUE_NOT_FOUND    Value not found
+  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  int oauth2_request_get_user_name(
+    oauth2_request_h handle,
+    ffi.Pointer<ffi.Pointer<ffi.Char>> user_name,
+  ) {
+    return _oauth2_request_get_user_name(
+      handle,
+      user_name,
+    );
+  }
+
+  late final _oauth2_request_get_user_namePtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Int Function(
+                  oauth2_request_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>>(
+      'oauth2_request_get_user_name');
+  late final _oauth2_request_get_user_name =
+      _oauth2_request_get_user_namePtr.asFunction<
+          int Function(oauth2_request_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
+
+  /// @brief Gets password.
+  /// @since_tizen 2.4
+  ///
+  /// @remarks You must not release @a password using free().
+  /// @param[in] handle The request handle
+  /// @param[out] password The password
+  ///
+  /// @return     @c 0 on success,
+  /// otherwise a negative error value
+  /// @retval     #OAUTH2_ERROR_NONE               Successful
+  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
+  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// @retval     #OAUTH2_ERROR_VALUE_NOT_FOUND    Value not found
+  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  int oauth2_request_get_password(
+    oauth2_request_h handle,
+    ffi.Pointer<ffi.Pointer<ffi.Char>> password,
+  ) {
+    return _oauth2_request_get_password(
+      handle,
+      password,
+    );
+  }
+
+  late final _oauth2_request_get_passwordPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Int Function(
+                  oauth2_request_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>>(
+      'oauth2_request_get_password');
+  late final _oauth2_request_get_password =
+      _oauth2_request_get_passwordPtr.asFunction<
+          int Function(oauth2_request_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
+
+  /// @brief Gets the custom value.
+  /// @since_tizen 2.4
+  ///
+  /// @remarks You must not release @a custom_value using free().
+  /// @param[in] handle The request handle
+  /// @param[in] custom_key The custom key
+  /// @param[out] custom_value The custom value
+  ///
+  /// @return     @c 0 on success,
+  /// otherwise a negative error value
+  /// @retval     #OAUTH2_ERROR_NONE               Successful
+  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
+  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// @retval     #OAUTH2_ERROR_VALUE_NOT_FOUND    Value not found
+  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  int oauth2_request_get_custom_data(
+    oauth2_request_h handle,
+    ffi.Pointer<ffi.Char> custom_key,
+    ffi.Pointer<ffi.Pointer<ffi.Char>> custom_value,
+  ) {
+    return _oauth2_request_get_custom_data(
+      handle,
+      custom_key,
+      custom_value,
+    );
+  }
+
+  late final _oauth2_request_get_custom_dataPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Int Function(oauth2_request_h, ffi.Pointer<ffi.Char>,
+                  ffi.Pointer<ffi.Pointer<ffi.Char>>)>>(
+      'oauth2_request_get_custom_data');
+  late final _oauth2_request_get_custom_data =
+      _oauth2_request_get_custom_dataPtr.asFunction<
+          int Function(oauth2_request_h, ffi.Pointer<ffi.Char>,
+              ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
+
+  /// @brief Gets error code.
+  /// @since_tizen 2.4
+  ///
+  /// @remarks You must not release @a server_error_code and @a platform_error_code using free().
+  /// @param[in] handle The error handle
+  /// @param[out] server_error_code Error code (if any) returned by the server
+  /// @param[out] platform_error_code Tizen platform related error code (if any), value is of type #oauth2_error_e
+  ///
+  /// @return     @c 0 on success,
+  /// otherwise a negative error value
+  /// @retval     #OAUTH2_ERROR_NONE               Successful
+  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
+  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// @retval     #OAUTH2_ERROR_VALUE_NOT_FOUND    Value not found
+  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  int oauth2_error_get_code(
+    oauth2_error_h handle,
+    ffi.Pointer<ffi.Int> server_error_code,
+    ffi.Pointer<ffi.Int> platform_error_code,
+  ) {
+    return _oauth2_error_get_code(
+      handle,
+      server_error_code,
+      platform_error_code,
+    );
+  }
+
+  late final _oauth2_error_get_codePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(oauth2_error_h, ffi.Pointer<ffi.Int>,
+              ffi.Pointer<ffi.Int>)>>('oauth2_error_get_code');
+  late final _oauth2_error_get_code = _oauth2_error_get_codePtr.asFunction<
+      int Function(
+          oauth2_error_h, ffi.Pointer<ffi.Int>, ffi.Pointer<ffi.Int>)>();
+
+  /// @brief Gets error description.
+  /// @since_tizen 2.4
+  ///
+  /// @remarks You must not release @a description using free().
+  /// @param[in] handle The error handle
+  /// @param[out] description The Error description
+  ///
+  /// @return     @c 0 on success,
+  /// otherwise a negative error value
+  /// @retval     #OAUTH2_ERROR_NONE               Successful
+  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
+  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// @retval     #OAUTH2_ERROR_VALUE_NOT_FOUND    Value not found
+  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  int oauth2_error_get_description(
+    oauth2_error_h handle,
+    ffi.Pointer<ffi.Pointer<ffi.Char>> description,
+  ) {
+    return _oauth2_error_get_description(
+      handle,
+      description,
+    );
+  }
+
+  late final _oauth2_error_get_descriptionPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Int Function(
+                  oauth2_error_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>>(
+      'oauth2_error_get_description');
+  late final _oauth2_error_get_description =
+      _oauth2_error_get_descriptionPtr.asFunction<
+          int Function(oauth2_error_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
+
+  /// @brief Gets error uri.
+  /// @since_tizen 2.4
+  ///
+  /// @remarks You must not release @a uri using free().
+  /// @param[in] handle The error handle
+  /// @param[out] uri The Error URI
+  ///
+  /// @return     @c 0 on success,
+  /// otherwise a negative error value
+  /// @retval     #OAUTH2_ERROR_NONE               Successful
+  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
+  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// @retval     #OAUTH2_ERROR_VALUE_NOT_FOUND    Value not found
+  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  int oauth2_error_get_uri(
+    oauth2_error_h handle,
+    ffi.Pointer<ffi.Pointer<ffi.Char>> uri,
+  ) {
+    return _oauth2_error_get_uri(
+      handle,
+      uri,
+    );
+  }
+
+  late final _oauth2_error_get_uriPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(oauth2_error_h,
+              ffi.Pointer<ffi.Pointer<ffi.Char>>)>>('oauth2_error_get_uri');
+  late final _oauth2_error_get_uri = _oauth2_error_get_uriPtr.asFunction<
+      int Function(oauth2_error_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
+
+  /// @brief Gets the custom data.
+  /// @since_tizen 2.4
+  ///
+  /// @remarks You must not release @a custom_value using free().
+  /// @param[in] handle The error handle
+  /// @param[in] custom_key The custom key
+  /// @param[out] custom_value The custom value
+  ///
+  /// @return     @c 0 on success,
+  /// otherwise a negative error value
+  /// @retval     #OAUTH2_ERROR_NONE               Successful
+  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
+  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// @retval     #OAUTH2_ERROR_VALUE_NOT_FOUND    Value not found
+  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  int oauth2_error_get_custom_data(
+    oauth2_error_h handle,
+    ffi.Pointer<ffi.Char> custom_key,
+    ffi.Pointer<ffi.Pointer<ffi.Char>> custom_value,
+  ) {
+    return _oauth2_error_get_custom_data(
+      handle,
+      custom_key,
+      custom_value,
+    );
+  }
+
+  late final _oauth2_error_get_custom_dataPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Int Function(oauth2_error_h, ffi.Pointer<ffi.Char>,
+                  ffi.Pointer<ffi.Pointer<ffi.Char>>)>>(
+      'oauth2_error_get_custom_data');
+  late final _oauth2_error_get_custom_data =
+      _oauth2_error_get_custom_dataPtr.asFunction<
+          int Function(oauth2_error_h, ffi.Pointer<ffi.Char>,
+              ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
+
+  /// @brief Destroys the received handle.
+  /// @since_tizen 2.4
+  ///
+  /// @param[in] handle The response handle
+  ///
+  /// @return     @c 0 on success,
+  /// otherwise a negative error value
+  /// @retval     #OAUTH2_ERROR_NONE               Successful
+  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  int oauth2_response_destroy(
+    oauth2_response_h handle,
+  ) {
+    return _oauth2_response_destroy(
+      handle,
+    );
+  }
+
+  late final _oauth2_response_destroyPtr =
+      _lookup<ffi.NativeFunction<ffi.Int Function(oauth2_response_h)>>(
+          'oauth2_response_destroy');
+  late final _oauth2_response_destroy =
+      _oauth2_response_destroyPtr.asFunction<int Function(oauth2_response_h)>();
+
+  /// @brief Gets the authorization code.
+  /// @since_tizen 2.4
+  ///
+  /// @remarks You must not release @a code using free().
+  /// @param[in] handle The response handle
+  /// @param[out] code The code.
+  ///
+  /// @return     @c 0 on success,
+  /// otherwise a negative error value
+  /// @retval     #OAUTH2_ERROR_NONE               Successful
+  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
+  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// @retval     #OAUTH2_ERROR_VALUE_NOT_FOUND    Value not found
+  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  ///
+  /// @see oauth2_request_set_authorization_code()
+  int oauth2_response_get_authorization_code(
+    oauth2_response_h handle,
+    ffi.Pointer<ffi.Pointer<ffi.Char>> code,
+  ) {
+    return _oauth2_response_get_authorization_code(
+      handle,
+      code,
+    );
+  }
+
+  late final _oauth2_response_get_authorization_codePtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Int Function(
+                  oauth2_response_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>>(
+      'oauth2_response_get_authorization_code');
+  late final _oauth2_response_get_authorization_code =
+      _oauth2_response_get_authorization_codePtr.asFunction<
+          int Function(
+              oauth2_response_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
+
+  /// @brief Gets state.
+  /// @since_tizen 2.4
+  ///
+  /// @remarks You must not release @a state using free().
+  /// @param[in] handle The response handle
+  /// @param[out] state The state.
+  ///
+  /// @return     @c 0 on success,
+  /// otherwise a negative error value
+  /// @retval     #OAUTH2_ERROR_NONE               Successful
+  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
+  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// @retval     #OAUTH2_ERROR_VALUE_NOT_FOUND    Value not found
+  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  int oauth2_response_get_state(
+    oauth2_response_h handle,
+    ffi.Pointer<ffi.Pointer<ffi.Char>> state,
+  ) {
+    return _oauth2_response_get_state(
+      handle,
+      state,
+    );
+  }
+
+  late final _oauth2_response_get_statePtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Int Function(
+                  oauth2_response_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>>(
+      'oauth2_response_get_state');
+  late final _oauth2_response_get_state =
+      _oauth2_response_get_statePtr.asFunction<
+          int Function(
+              oauth2_response_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
+
+  /// @brief Gets access token.
+  /// @since_tizen 2.4
+  ///
+  /// @remarks You must not release @a access_token using free().
+  /// @param[in] handle The response handle
+  /// @param[out] access_token The access token
+  ///
+  /// @return     @c 0 on success,
+  /// otherwise a negative error value
+  /// @retval     #OAUTH2_ERROR_NONE               Successful
+  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
+  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// @retval     #OAUTH2_ERROR_VALUE_NOT_FOUND    Value not found
+  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  int oauth2_response_get_access_token(
+    oauth2_response_h handle,
+    ffi.Pointer<ffi.Pointer<ffi.Char>> access_token,
+  ) {
+    return _oauth2_response_get_access_token(
+      handle,
+      access_token,
+    );
+  }
+
+  late final _oauth2_response_get_access_tokenPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Int Function(
+                  oauth2_response_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>>(
+      'oauth2_response_get_access_token');
+  late final _oauth2_response_get_access_token =
+      _oauth2_response_get_access_tokenPtr.asFunction<
+          int Function(
+              oauth2_response_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
+
+  /// @brief Gets token type.
+  /// @since_tizen 2.4
+  ///
+  /// @remarks You must not release @a token_type using free().
+  /// @param[in] handle The response handle
+  /// @param[out] token_type The token type
+  ///
+  /// @return     @c 0 on success,
+  /// otherwise a negative error value
+  /// @retval     #OAUTH2_ERROR_NONE               Successful
+  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
+  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// @retval     #OAUTH2_ERROR_VALUE_NOT_FOUND    Value not found
+  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  int oauth2_response_get_token_type(
+    oauth2_response_h handle,
+    ffi.Pointer<ffi.Pointer<ffi.Char>> token_type,
+  ) {
+    return _oauth2_response_get_token_type(
+      handle,
+      token_type,
+    );
+  }
+
+  late final _oauth2_response_get_token_typePtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Int Function(
+                  oauth2_response_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>>(
+      'oauth2_response_get_token_type');
+  late final _oauth2_response_get_token_type =
+      _oauth2_response_get_token_typePtr.asFunction<
+          int Function(
+              oauth2_response_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
+
+  /// @brief Gets expiry time.
+  /// @since_tizen 2.4
+  ///
+  /// @remarks You must not release @a expires_in using free().
+  /// @param[in] handle The response handle
+  /// @param[out] expires_in Expiry value
+  ///
+  /// @return     @c 0 on success,
+  /// otherwise a negative error value
+  /// @retval     #OAUTH2_ERROR_NONE               Successful
+  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
+  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// @retval     #OAUTH2_ERROR_VALUE_NOT_FOUND    Value not found
+  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  int oauth2_response_get_expires_in(
+    oauth2_response_h handle,
+    ffi.Pointer<ffi.LongLong> expires_in,
+  ) {
+    return _oauth2_response_get_expires_in(
+      handle,
+      expires_in,
+    );
+  }
+
+  late final _oauth2_response_get_expires_inPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(oauth2_response_h,
+              ffi.Pointer<ffi.LongLong>)>>('oauth2_response_get_expires_in');
+  late final _oauth2_response_get_expires_in =
+      _oauth2_response_get_expires_inPtr.asFunction<
+          int Function(oauth2_response_h, ffi.Pointer<ffi.LongLong>)>();
+
+  /// @brief Gets refresh token.
+  /// @since_tizen 2.4
+  ///
+  /// @remarks You must not release @a refresh_token using free().
+  /// @param[in] handle The response handle
+  /// @param[out] refresh_token The refresh token
+  ///
+  /// @return     @c 0 on success,
+  /// otherwise a negative error value
+  /// @retval     #OAUTH2_ERROR_NONE               Successful
+  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
+  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// @retval     #OAUTH2_ERROR_VALUE_NOT_FOUND    Value not found
+  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  int oauth2_response_get_refresh_token(
+    oauth2_response_h handle,
+    ffi.Pointer<ffi.Pointer<ffi.Char>> refresh_token,
+  ) {
+    return _oauth2_response_get_refresh_token(
+      handle,
+      refresh_token,
+    );
+  }
+
+  late final _oauth2_response_get_refresh_tokenPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Int Function(
+                  oauth2_response_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>>(
+      'oauth2_response_get_refresh_token');
+  late final _oauth2_response_get_refresh_token =
+      _oauth2_response_get_refresh_tokenPtr.asFunction<
+          int Function(
+              oauth2_response_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
+
+  /// @brief Gets scope.
+  /// @since_tizen 2.4
+  ///
+  /// @remarks You must not release @a scope using free().
+  /// @param[in] handle The response handle
+  /// @param[out] scope The scope
+  ///
+  /// @return     @c 0 on success,
+  /// otherwise a negative error value
+  /// @retval     #OAUTH2_ERROR_NONE               Successful
+  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
+  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// @retval     #OAUTH2_ERROR_VALUE_NOT_FOUND    Value not found
+  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  int oauth2_response_get_scope(
+    oauth2_response_h handle,
+    ffi.Pointer<ffi.Pointer<ffi.Char>> scope,
+  ) {
+    return _oauth2_response_get_scope(
+      handle,
+      scope,
+    );
+  }
+
+  late final _oauth2_response_get_scopePtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Int Function(
+                  oauth2_response_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>>(
+      'oauth2_response_get_scope');
+  late final _oauth2_response_get_scope =
+      _oauth2_response_get_scopePtr.asFunction<
+          int Function(
+              oauth2_response_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
+
+  /// @brief Gets error.
+  /// @since_tizen 2.4
+  ///
+  /// @remarks You must not release @a error using free().
+  /// @param[in] handle The response handle
+  /// @param[out] error The error structure
+  ///
+  /// @return     @c 0 on success,
+  /// otherwise a negative error value
+  /// @retval     #OAUTH2_ERROR_NONE               Successful
+  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
+  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// @retval     #OAUTH2_ERROR_VALUE_NOT_FOUND    Value not found
+  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  ///
+  /// @see oauth2_error_h
+  int oauth2_response_get_error(
+    oauth2_response_h handle,
+    ffi.Pointer<oauth2_error_h> error,
+  ) {
+    return _oauth2_response_get_error(
+      handle,
+      error,
+    );
+  }
+
+  late final _oauth2_response_get_errorPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(oauth2_response_h,
+              ffi.Pointer<oauth2_error_h>)>>('oauth2_response_get_error');
+  late final _oauth2_response_get_error =
+      _oauth2_response_get_errorPtr.asFunction<
+          int Function(oauth2_response_h, ffi.Pointer<oauth2_error_h>)>();
+
+  /// @brief Gets the custom data.
+  /// @details Some service providers send additional keys not specified in OAuth 2.0 RFC. To get those additional fields this API needs to be used.
+  /// @since_tizen 2.4
+  ///
+  /// @remarks You must not release @a custom_value using free().
+  /// @param[in] handle The response handle
+  /// @param[in] custom_key The custom key
+  /// @param[out] custom_value The custom value
+  ///
+  /// @return     @c 0 on success,
+  /// otherwise a negative error value
+  /// @retval     #OAUTH2_ERROR_NONE               Successful
+  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
+  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// @retval     #OAUTH2_ERROR_VALUE_NOT_FOUND    Value not found
+  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  int oauth2_response_get_custom_data(
+    oauth2_response_h handle,
+    ffi.Pointer<ffi.Char> custom_key,
+    ffi.Pointer<ffi.Pointer<ffi.Char>> custom_value,
+  ) {
+    return _oauth2_response_get_custom_data(
+      handle,
+      custom_key,
+      custom_value,
+    );
+  }
+
+  late final _oauth2_response_get_custom_dataPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Int Function(oauth2_response_h, ffi.Pointer<ffi.Char>,
+                  ffi.Pointer<ffi.Pointer<ffi.Char>>)>>(
+      'oauth2_response_get_custom_data');
+  late final _oauth2_response_get_custom_data =
+      _oauth2_response_get_custom_dataPtr.asFunction<
+          int Function(oauth2_response_h, ffi.Pointer<ffi.Char>,
+              ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
+
+  /// @brief Creates #oauth2_manager_h handle.
+  /// @remarks The @a handle must be released using oauth2_manager_destroy().
+  /// @since_tizen 2.4
+  ///
+  /// @param[out]  handle  The created handle
+  /// @return     @c 0 on success,
+  /// otherwise a negative error value
+  /// @retval     #OAUTH2_ERROR_NONE               Successful
+  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
+  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  ///
+  /// @see oauth2_manager_destroy()
+  int oauth2_manager_create(
+    ffi.Pointer<oauth2_manager_h> handle,
+  ) {
+    return _oauth2_manager_create(
+      handle,
+    );
+  }
+
+  late final _oauth2_manager_createPtr = _lookup<
+          ffi.NativeFunction<ffi.Int Function(ffi.Pointer<oauth2_manager_h>)>>(
+      'oauth2_manager_create');
+  late final _oauth2_manager_create = _oauth2_manager_createPtr
+      .asFunction<int Function(ffi.Pointer<oauth2_manager_h>)>();
+
+  /// @brief Destroys #oauth2_manager_h handle.
+  /// @since_tizen 2.4
+  ///
+  /// @param[in] handle The oauth2 manager handle
+  ///
+  /// @return     @c 0 on success,
+  /// otherwise a negative error value
+  /// @retval     #OAUTH2_ERROR_NONE               Successful
+  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  int oauth2_manager_destroy(
+    oauth2_manager_h handle,
+  ) {
+    return _oauth2_manager_destroy(
+      handle,
+    );
+  }
+
+  late final _oauth2_manager_destroyPtr =
+      _lookup<ffi.NativeFunction<ffi.Int Function(oauth2_manager_h)>>(
+          'oauth2_manager_destroy');
+  late final _oauth2_manager_destroy =
+      _oauth2_manager_destroyPtr.asFunction<int Function(oauth2_manager_h)>();
+
+  /// @brief Request OAuth 2.0 access token.
+  /// @details The response is delivered via oauth2_token_cb().
+  /// @since_tizen 2.4
+  /// @privlevel public
+  /// @privilege %http://tizen.org/privilege/internet
+  /// @remarks The "internet" privilege is required to call this API. Note, only one pending request is allowed.
+  ///
+  /// @param[in] handle   The oauth2 manager handle.
+  /// @param[in] request  The request handle.
+  /// @param[in] callback The callback to receive response.
+  /// @param[in] user_data  The user data to be passed to the callback function.
+  ///
+  /// @return     @c 0 on success,
+  /// otherwise a negative error value
+  /// @retval     #OAUTH2_ERROR_NONE               Successful
+  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY Out of memory.
+  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER Invalid input parameter(s) passed.
+  /// @retval     #OAUTH2_ERROR_ALREADY_IN_PROGRESS The previous request is already in progress.
+  /// @retval     #OAUTH2_ERROR_PERMISSION_DENIED Permission denied.
+  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED Not supported.
+  /// @retval     #OAUTH2_ERROR_PARSE_FAILED Parsing failed.
+  /// @retval     #OAUTH2_ERROR_NETWORK_ERROR Network Error.
+  /// @retval     #OAUTH2_ERROR_UNKNOWN Unknown system error.
+  ///
+  /// @see oauth2_token_cb()
+  /// @see oauth2_manager_create()
+  /// @see oauth2_request_create()
+  int oauth2_manager_request_token(
+    oauth2_manager_h handle,
+    oauth2_request_h request,
+    oauth2_token_cb callback,
+    ffi.Pointer<ffi.Void> user_data,
+  ) {
+    return _oauth2_manager_request_token(
+      handle,
+      request,
+      callback,
+      user_data,
+    );
+  }
+
+  late final _oauth2_manager_request_tokenPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(oauth2_manager_h, oauth2_request_h, oauth2_token_cb,
+              ffi.Pointer<ffi.Void>)>>('oauth2_manager_request_token');
+  late final _oauth2_manager_request_token =
+      _oauth2_manager_request_tokenPtr.asFunction<
+          int Function(oauth2_manager_h, oauth2_request_h, oauth2_token_cb,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// @brief Requests OAuth 2.0 access token with authorization URL.
+  /// @details The response is delivered via oauth2_token_auth_url_cb().
+  /// @since_tizen 9.0
+  /// @privlevel public
+  /// @privilege %http://tizen.org/privilege/internet
+  /// @remarks The "internet" privilege is required to call this API. Note, only one pending request is allowed.
+  ///
+  /// @param[in] handle   The oauth2 manager handle.
+  /// @param[in] request  The request handle.
+  /// @param[in] callback The callback to receive response.
+  /// @param[in] response_url  The response URL after successful Google Sign-in which contains the token.
+  /// @param[in] user_data  The user data to be passed to the callback function.
+  ///
+  /// @return     @c 0 on success,
+  /// otherwise a negative error value
+  /// @retval     #OAUTH2_ERROR_NONE               Successful
+  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED Not supported.
+  /// @retval     #OAUTH2_ERROR_PERMISSION_DENIED Permission denied.
+  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER Invalid input parameter(s) passed.
+  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY Out of memory.
+  /// @retval     #OAUTH2_ERROR_ALREADY_IN_PROGRESS The previous request is already in progress.
+  /// @retval     #OAUTH2_ERROR_PARSE_FAILED Parsing failed.
+  /// @retval     #OAUTH2_ERROR_NETWORK_ERROR Network Error.
+  /// @retval     #OAUTH2_ERROR_UNKNOWN Unknown system error.
+  ///
+  /// @see oauth2_token_auth_url_cb()
+  /// @see oauth2_manager_create()
+  /// @see oauth2_request_create()
+  int oauth2_manager_request_token_auth_url(
+    oauth2_manager_h handle,
+    oauth2_request_h request,
+    oauth2_token_auth_url_cb callback,
+    ffi.Pointer<ffi.Char> response_url,
+    ffi.Pointer<ffi.Void> user_data,
+  ) {
+    return _oauth2_manager_request_token_auth_url(
+      handle,
+      request,
+      callback,
+      response_url,
+      user_data,
+    );
+  }
+
+  late final _oauth2_manager_request_token_auth_urlPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(
+              oauth2_manager_h,
+              oauth2_request_h,
+              oauth2_token_auth_url_cb,
+              ffi.Pointer<ffi.Char>,
+              ffi.Pointer<ffi.Void>)>>('oauth2_manager_request_token_auth_url');
+  late final _oauth2_manager_request_token_auth_url =
+      _oauth2_manager_request_token_auth_urlPtr.asFunction<
+          int Function(
+              oauth2_manager_h,
+              oauth2_request_h,
+              oauth2_token_auth_url_cb,
+              ffi.Pointer<ffi.Char>,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// @brief Request authorization grant.
+  /// @details The response is delivered via oauth2_auth_grant_cb().
+  /// @since_tizen 2.4
+  /// @privlevel public
+  /// @privilege %http://tizen.org/privilege/internet
+  /// @remarks The "internet" privilege is required to call this API. Note, only one pending request is allowed at a time.
+  ///
+  /// @param[in] handle   The oauth2_manager handle.
+  /// @param[in] request  The request handle.
+  /// @param[in] callback The application callback.
+  /// @param[in] user_data  The user data to be passed to the callback function.
+  ///
+  /// @return     @c 0 on success,
+  /// otherwise a negative error value
+  /// @retval     #OAUTH2_ERROR_NONE               Successful
+  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY Out of memory.
+  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER Invalid input parameter(s) passed.
+  /// @retval     #OAUTH2_ERROR_ALREADY_IN_PROGRESS The previous request is already in progress.
+  /// @retval     #OAUTH2_ERROR_PERMISSION_DENIED Permission denied.
+  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED Not supported.
+  /// @retval     #OAUTH2_ERROR_PARSE_FAILED Parsing failed.
+  /// @retval     #OAUTH2_ERROR_NETWORK_ERROR Network Error.
+  /// @retval     #OAUTH2_ERROR_UNKNOWN Unknown system error.
+  ///
+  /// @see oauth2_auth_grant_cb()
+  /// @see oauth2_manager_create()
+  /// @see oauth2_request_create()
+  int oauth2_manager_request_authorization_grant(
+    oauth2_manager_h handle,
+    oauth2_request_h request,
+    oauth2_auth_grant_cb callback,
+    ffi.Pointer<ffi.Void> user_data,
+  ) {
+    return _oauth2_manager_request_authorization_grant(
+      handle,
+      request,
+      callback,
+      user_data,
+    );
+  }
+
+  late final _oauth2_manager_request_authorization_grantPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Int Function(oauth2_manager_h, oauth2_request_h,
+                  oauth2_auth_grant_cb, ffi.Pointer<ffi.Void>)>>(
+      'oauth2_manager_request_authorization_grant');
+  late final _oauth2_manager_request_authorization_grant =
+      _oauth2_manager_request_authorization_grantPtr.asFunction<
+          int Function(oauth2_manager_h, oauth2_request_h, oauth2_auth_grant_cb,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// @brief Requests an access token.
+  /// @details The response is delivered via oauth2_access_token_cb() callback.
+  /// @since_tizen 2.4
+  /// @privlevel public
+  /// @privilege %http://tizen.org/privilege/internet
+  /// @remarks The "internet" privilege is required to call this API. Note, only one pending request is allowed at a time.
+  ///
+  /// @param[in] handle   The oauth2_manager handle.
+  /// @param[in] request  The request handle.
+  /// @param[in] callback The application callback.
+  /// @param[in] user_data  The user data to be passed to the callback function.
+  ///
+  /// @return     @c 0 on success,
+  /// otherwise a negative error value
+  /// @retval     #OAUTH2_ERROR_NONE               Successful
+  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY Out of memory.
+  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER Invalid input parameter(s) passed.
+  /// @retval     #OAUTH2_ERROR_ALREADY_IN_PROGRESS The previous request is already in progress.
+  /// @retval     #OAUTH2_ERROR_PERMISSION_DENIED Permission denied.
+  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED Not supported.
+  /// @retval     #OAUTH2_ERROR_PARSE_FAILED Parsing failed.
+  /// @retval     #OAUTH2_ERROR_NETWORK_ERROR Network Error.
+  /// @retval     #OAUTH2_ERROR_UNKNOWN Unknown system error.
+  ///
+  /// @see oauth2_access_token_cb()
+  /// @see oauth2_manager_create()
+  /// @see oauth2_request_create()
+  int oauth2_manager_request_access_token(
+    oauth2_manager_h handle,
+    oauth2_request_h request,
+    oauth2_access_token_cb callback,
+    ffi.Pointer<ffi.Void> user_data,
+  ) {
+    return _oauth2_manager_request_access_token(
+      handle,
+      request,
+      callback,
+      user_data,
+    );
+  }
+
+  late final _oauth2_manager_request_access_tokenPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(
+              oauth2_manager_h,
+              oauth2_request_h,
+              oauth2_access_token_cb,
+              ffi.Pointer<ffi.Void>)>>('oauth2_manager_request_access_token');
+  late final _oauth2_manager_request_access_token =
+      _oauth2_manager_request_access_tokenPtr.asFunction<
+          int Function(oauth2_manager_h, oauth2_request_h,
+              oauth2_access_token_cb, ffi.Pointer<ffi.Void>)>();
+
+  /// @brief Requests a refresh token.
+  /// @details The response is delivered via oauth2_refresh_token_cb() callback.
+  /// @since_tizen 2.4
+  /// @privlevel public
+  /// @privilege %http://tizen.org/privilege/internet
+  /// @remarks The "internet" privilege is required to call this API. Note, only one pending request is allowed at a time.
+  ///
+  /// @param[in] handle   The oauth2 manager handle.
+  /// @param[in] request  The request handle.
+  /// @param[in] callback The application callback.
+  /// @param[in]  user_data  The user data to be passed to the callback function.
+  ///
+  /// @return     @c 0 on success,
+  /// otherwise a negative error value
+  /// @retval     #OAUTH2_ERROR_NONE               Successful
+  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY Out of memory.
+  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER Invalid input parameter(s) passed.
+  /// @retval     #OAUTH2_ERROR_ALREADY_IN_PROGRESS The previous request is already in progress.
+  /// @retval     #OAUTH2_ERROR_PERMISSION_DENIED Permission denied.
+  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED Not supported.
+  /// @retval     #OAUTH2_ERROR_PARSE_FAILED Parsing failed.
+  /// @retval     #OAUTH2_ERROR_NETWORK_ERROR Network Error.
+  /// @retval     #OAUTH2_ERROR_UNKNOWN Unknown system error.
+  ///
+  /// @see oauth2_refresh_token_cb()
+  /// @see oauth2_manager_create()
+  /// @see oauth2_request_create()
+  int oauth2_manager_refresh_access_token(
+    oauth2_manager_h handle,
+    oauth2_request_h request,
+    oauth2_refresh_token_cb callback,
+    ffi.Pointer<ffi.Void> user_data,
+  ) {
+    return _oauth2_manager_refresh_access_token(
+      handle,
+      request,
+      callback,
+      user_data,
+    );
+  }
+
+  late final _oauth2_manager_refresh_access_tokenPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(
+              oauth2_manager_h,
+              oauth2_request_h,
+              oauth2_refresh_token_cb,
+              ffi.Pointer<ffi.Void>)>>('oauth2_manager_refresh_access_token');
+  late final _oauth2_manager_refresh_access_token =
+      _oauth2_manager_refresh_access_tokenPtr.asFunction<
+          int Function(oauth2_manager_h, oauth2_request_h,
+              oauth2_refresh_token_cb, ffi.Pointer<ffi.Void>)>();
+
+  /// @brief Returns whether oauth2_manager related request is pending.
+  /// @since_tizen 2.4
+  ///
+  /// @param[in] handle The auth2 manager handle.
+  /// @retval     false No pending request
+  /// @retval     true There is pending request.
+  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  bool oauth2_manager_is_request_in_progress(
+    oauth2_manager_h handle,
+  ) {
+    return _oauth2_manager_is_request_in_progress(
+      handle,
+    );
+  }
+
+  late final _oauth2_manager_is_request_in_progressPtr =
+      _lookup<ffi.NativeFunction<ffi.Bool Function(oauth2_manager_h)>>(
+          'oauth2_manager_is_request_in_progress');
+  late final _oauth2_manager_is_request_in_progress =
+      _oauth2_manager_is_request_in_progressPtr
+          .asFunction<bool Function(oauth2_manager_h)>();
+
+  /// @brief Clears the cookies.
+  /// @since_tizen 2.4
+  /// @privlevel public
+  /// @privilege %http://tizen.org/privilege/internet
+  ///
+  /// @param[in] handle The oauth2 manager handle.
+  ///
+  /// @return     @c 0 on success,
+  /// otherwise a negative error value
+  /// @retval     #OAUTH2_ERROR_NONE               Successful
+  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
+  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// @retval     #OAUTH2_ERROR_PERMISSION_DENIED Permission denied.
+  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED Not supported.
+  int oauth2_manager_clear_cookies(
+    oauth2_manager_h handle,
+  ) {
+    return _oauth2_manager_clear_cookies(
+      handle,
+    );
+  }
+
+  late final _oauth2_manager_clear_cookiesPtr =
+      _lookup<ffi.NativeFunction<ffi.Int Function(oauth2_manager_h)>>(
+          'oauth2_manager_clear_cookies');
+  late final _oauth2_manager_clear_cookies = _oauth2_manager_clear_cookiesPtr
+      .asFunction<int Function(oauth2_manager_h)>();
+
+  /// @brief Clears the cache.
+  /// @since_tizen 2.4
+  /// @privlevel public
+  /// @privilege %http://tizen.org/privilege/internet
+  ///
+  /// @param[in] handle The oauth2 manager handle.
+  ///
+  /// @return     @c 0 on success,
+  /// otherwise a negative error value
+  /// @retval     #OAUTH2_ERROR_NONE               Successful
+  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
+  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// @retval     #OAUTH2_ERROR_PERMISSION_DENIED Permission denied.
+  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED Not supported.
+  int oauth2_manager_clear_cache(
+    oauth2_manager_h handle,
+  ) {
+    return _oauth2_manager_clear_cache(
+      handle,
+    );
+  }
+
+  late final _oauth2_manager_clear_cachePtr =
+      _lookup<ffi.NativeFunction<ffi.Int Function(oauth2_manager_h)>>(
+          'oauth2_manager_clear_cache');
+  late final _oauth2_manager_clear_cache = _oauth2_manager_clear_cachePtr
+      .asFunction<int Function(oauth2_manager_h)>();
+
   /// @brief Sets client (Sync Adapter) callback functions
   ///
   /// @since_tizen 2.4
@@ -115223,1629 +117116,6 @@ class Tizen100Native {
   late final _dnssd_destroy_remote_service =
       _dnssd_destroy_remote_servicePtr.asFunction<int Function(int)>();
 
-  /// @deprecated Deprecated since 9.0
-  /// @brief Initializes the HTTP module.
-  /// @since_tizen 3.0
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_OPERATION_FAILED Operation failed
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  /// @see http_deinit()
-  int http_init() {
-    return _http_init();
-  }
-
-  late final _http_initPtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function()>>('http_init');
-  late final _http_init = _http_initPtr.asFunction<int Function()>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Deinitializes the HTTP module.
-  /// @since_tizen 3.0
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_OPERATION_FAILED Operation failed
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  /// @see http_init()
-  int http_deinit() {
-    return _http_deinit();
-  }
-
-  late final _http_deinitPtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function()>>('http_deinit');
-  late final _http_deinit = _http_deinitPtr.asFunction<int Function()>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Creates the HTTP session handle.
-  /// @since_tizen 3.0
-  /// @remarks The @a http_session should be released using http_session_destroy().
-  /// Opened transactions can't be submitted after destroying session handle.
-  /// @param[in] mode The HTTP session mode
-  /// @param[out] http_session The HTTP session handle
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  /// @see http_session_destroy()
-  int http_session_create(
-    int mode,
-    ffi.Pointer<http_session_h> http_session,
-  ) {
-    return _http_session_create(
-      mode,
-      http_session,
-    );
-  }
-
-  late final _http_session_createPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(
-              ffi.Int32, ffi.Pointer<http_session_h>)>>('http_session_create');
-  late final _http_session_create = _http_session_createPtr
-      .asFunction<int Function(int, ffi.Pointer<http_session_h>)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Destroys the HTTP session handle.
-  /// @since_tizen 3.0
-  /// @remarks The @a http_session should be set to NULL after using it
-  /// @param[in] http_session The HTTP session handle
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  /// @see http_session_create()
-  int http_session_destroy(
-    http_session_h http_session,
-  ) {
-    return _http_session_destroy(
-      http_session,
-    );
-  }
-
-  late final _http_session_destroyPtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function(http_session_h)>>(
-          'http_session_destroy');
-  late final _http_session_destroy =
-      _http_session_destroyPtr.asFunction<int Function(http_session_h)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Opens HTTP transaction from the HTTP Session.
-  /// @since_tizen 3.0
-  /// @remarks The @a http_transaction should be released using http_transaction_destroy().
-  /// @param[in] http_session The HTTP session handle
-  /// @param[in] method The HTTP request method
-  /// @param[out] http_transaction The HTTP transaction handle
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_session_open_transaction(
-    http_session_h http_session,
-    int method,
-    ffi.Pointer<http_transaction_h> http_transaction,
-  ) {
-    return _http_session_open_transaction(
-      http_session,
-      method,
-      http_transaction,
-    );
-  }
-
-  late final _http_session_open_transactionPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int Function(
-                  http_session_h, ffi.Int32, ffi.Pointer<http_transaction_h>)>>(
-      'http_session_open_transaction');
-  late final _http_session_open_transaction =
-      _http_session_open_transactionPtr.asFunction<
-          int Function(http_session_h, int, ffi.Pointer<http_transaction_h>)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Sets the value to redirect the HTTP request automatically.
-  /// @since_tizen 3.0
-  /// @param[in] http_session The HTTP session handle
-  /// @param[in] auto_redirection The value which determines whether allow redirection or not
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  /// @see http_session_get_auto_redirection()
-  int http_session_set_auto_redirection(
-    http_session_h http_session,
-    bool auto_redirection,
-  ) {
-    return _http_session_set_auto_redirection(
-      http_session,
-      auto_redirection,
-    );
-  }
-
-  late final _http_session_set_auto_redirectionPtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function(http_session_h, ffi.Bool)>>(
-          'http_session_set_auto_redirection');
-  late final _http_session_set_auto_redirection =
-      _http_session_set_auto_redirectionPtr
-          .asFunction<int Function(http_session_h, bool)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Gets the auto redirection for the HTTP request.
-  /// @since_tizen 3.0
-  /// @param[in] http_session The HTTP session handle
-  /// @param[out] auto_redirect The value of auto redirect
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  /// @see http_session_set_auto_redirection()
-  int http_session_get_auto_redirection(
-    http_session_h http_session,
-    ffi.Pointer<ffi.Bool> auto_redirect,
-  ) {
-    return _http_session_get_auto_redirection(
-      http_session,
-      auto_redirect,
-    );
-  }
-
-  late final _http_session_get_auto_redirectionPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(http_session_h,
-              ffi.Pointer<ffi.Bool>)>>('http_session_get_auto_redirection');
-  late final _http_session_get_auto_redirection =
-      _http_session_get_auto_redirectionPtr
-          .asFunction<int Function(http_session_h, ffi.Pointer<ffi.Bool>)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Gets the number of active transactions in the current session.
-  /// @since_tizen 3.0
-  /// @param[in] http_session The HTTP session handle
-  /// @param[out] active_transaction_count The number of activated transactions
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_session_get_active_transaction_count(
-    http_session_h http_session,
-    ffi.Pointer<ffi.Int> active_transaction_count,
-  ) {
-    return _http_session_get_active_transaction_count(
-      http_session,
-      active_transaction_count,
-    );
-  }
-
-  late final _http_session_get_active_transaction_countPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int Function(http_session_h, ffi.Pointer<ffi.Int>)>>(
-      'http_session_get_active_transaction_count');
-  late final _http_session_get_active_transaction_count =
-      _http_session_get_active_transaction_countPtr
-          .asFunction<int Function(http_session_h, ffi.Pointer<ffi.Int>)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Gets the maximum number of transactions for the current session.
-  /// @since_tizen 3.0
-  /// @param[in] http_session The HTTP session handle
-  /// @param[out] transaction_count The maximum transaction count
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_session_get_max_transaction_count(
-    http_session_h http_session,
-    ffi.Pointer<ffi.Int> transaction_count,
-  ) {
-    return _http_session_get_max_transaction_count(
-      http_session,
-      transaction_count,
-    );
-  }
-
-  late final _http_session_get_max_transaction_countPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(http_session_h,
-              ffi.Pointer<ffi.Int>)>>('http_session_get_max_transaction_count');
-  late final _http_session_get_max_transaction_count =
-      _http_session_get_max_transaction_countPtr
-          .asFunction<int Function(http_session_h, ffi.Pointer<ffi.Int>)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Destroys all transactions.
-  /// @since_tizen 3.0
-  /// @remarks All http_transactions should be set to NULL after using it
-  /// @param[in] http_session The HTTP session handle
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_OPERATION_FAILED Operation failed
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_session_destroy_all_transactions(
-    http_session_h http_session,
-  ) {
-    return _http_session_destroy_all_transactions(
-      http_session,
-    );
-  }
-
-  late final _http_session_destroy_all_transactionsPtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function(http_session_h)>>(
-          'http_session_destroy_all_transactions');
-  late final _http_session_destroy_all_transactions =
-      _http_session_destroy_all_transactionsPtr
-          .asFunction<int Function(http_session_h)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Submits the HTTP request.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/internet \n
-  /// %http://tizen.org/privilege/network.get
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  /// @retval #HTTP_ERROR_PERMISSION_DENIED Permission denied
-  int http_transaction_submit(
-    http_transaction_h http_transaction,
-  ) {
-    return _http_transaction_submit(
-      http_transaction,
-    );
-  }
-
-  late final _http_transaction_submitPtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function(http_transaction_h)>>(
-          'http_transaction_submit');
-  late final _http_transaction_submit = _http_transaction_submitPtr
-      .asFunction<int Function(http_transaction_h)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Closes the HTTP transaction handle.
-  /// @since_tizen 3.0
-  /// @remarks The @a http_transaction should be set to NULL after using it.
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  /// @see http_session_open_transaction()
-  /// @see http_transaction_open_authentication()
-  int http_transaction_destroy(
-    http_transaction_h http_transaction,
-  ) {
-    return _http_transaction_destroy(
-      http_transaction,
-    );
-  }
-
-  late final _http_transaction_destroyPtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function(http_transaction_h)>>(
-          'http_transaction_destroy');
-  late final _http_transaction_destroy = _http_transaction_destroyPtr
-      .asFunction<int Function(http_transaction_h)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Registers callback called when receives header.
-  /// @since_tizen 3.0
-  /// @param[in] http_transaction        The HTTP transaction handle
-  /// @param[in] header_cb The callback  function to be called
-  /// @param[in] user_data The user data passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_set_received_header_cb(
-    http_transaction_h http_transaction,
-    http_transaction_header_cb header_cb,
-    ffi.Pointer<ffi.Void> user_data,
-  ) {
-    return _http_transaction_set_received_header_cb(
-      http_transaction,
-      header_cb,
-      user_data,
-    );
-  }
-
-  late final _http_transaction_set_received_header_cbPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int Function(http_transaction_h, http_transaction_header_cb,
-                  ffi.Pointer<ffi.Void>)>>(
-      'http_transaction_set_received_header_cb');
-  late final _http_transaction_set_received_header_cb =
-      _http_transaction_set_received_header_cbPtr.asFunction<
-          int Function(http_transaction_h, http_transaction_header_cb,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Registers callback called when receives body.
-  /// @since_tizen 3.0
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[in] body_cb The callback function to be called
-  /// @param[in] user_data The user data passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_set_received_body_cb(
-    http_transaction_h http_transaction,
-    http_transaction_body_cb body_cb,
-    ffi.Pointer<ffi.Void> user_data,
-  ) {
-    return _http_transaction_set_received_body_cb(
-      http_transaction,
-      body_cb,
-      user_data,
-    );
-  }
-
-  late final _http_transaction_set_received_body_cbPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(http_transaction_h, http_transaction_body_cb,
-              ffi.Pointer<ffi.Void>)>>('http_transaction_set_received_body_cb');
-  late final _http_transaction_set_received_body_cb =
-      _http_transaction_set_received_body_cbPtr.asFunction<
-          int Function(http_transaction_h, http_transaction_body_cb,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Registers callback called when writes data.
-  /// @since_tizen 3.0
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[in] write_cb The callback function to be called
-  /// @param[in] user_data The user data passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_set_uploaded_cb(
-    http_transaction_h http_transaction,
-    http_transaction_write_cb write_cb,
-    ffi.Pointer<ffi.Void> user_data,
-  ) {
-    return _http_transaction_set_uploaded_cb(
-      http_transaction,
-      write_cb,
-      user_data,
-    );
-  }
-
-  late final _http_transaction_set_uploaded_cbPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(http_transaction_h, http_transaction_write_cb,
-              ffi.Pointer<ffi.Void>)>>('http_transaction_set_uploaded_cb');
-  late final _http_transaction_set_uploaded_cb =
-      _http_transaction_set_uploaded_cbPtr.asFunction<
-          int Function(http_transaction_h, http_transaction_write_cb,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Registers callback called when transaction is completed.
-  /// @since_tizen 3.0
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[in] completed_cb The callback function to be called
-  /// @param[in] user_data The user data passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_set_completed_cb(
-    http_transaction_h http_transaction,
-    http_transaction_completed_cb completed_cb,
-    ffi.Pointer<ffi.Void> user_data,
-  ) {
-    return _http_transaction_set_completed_cb(
-      http_transaction,
-      completed_cb,
-      user_data,
-    );
-  }
-
-  late final _http_transaction_set_completed_cbPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(http_transaction_h, http_transaction_completed_cb,
-              ffi.Pointer<ffi.Void>)>>('http_transaction_set_completed_cb');
-  late final _http_transaction_set_completed_cb =
-      _http_transaction_set_completed_cbPtr.asFunction<
-          int Function(http_transaction_h, http_transaction_completed_cb,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Registers callback called when transaction is aborted.
-  /// @since_tizen 3.0
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[in] aborted_cb The callback function to be called
-  /// @param[in] user_data The user data passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_set_aborted_cb(
-    http_transaction_h http_transaction,
-    http_transaction_aborted_cb aborted_cb,
-    ffi.Pointer<ffi.Void> user_data,
-  ) {
-    return _http_transaction_set_aborted_cb(
-      http_transaction,
-      aborted_cb,
-      user_data,
-    );
-  }
-
-  late final _http_transaction_set_aborted_cbPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(http_transaction_h, http_transaction_aborted_cb,
-              ffi.Pointer<ffi.Void>)>>('http_transaction_set_aborted_cb');
-  late final _http_transaction_set_aborted_cb =
-      _http_transaction_set_aborted_cbPtr.asFunction<
-          int Function(http_transaction_h, http_transaction_aborted_cb,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Registers the progress callbacks.
-  /// @details Registers callback that is called when data is uploaded/downloaded.
-  /// @since_tizen 3.0
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[in] progress_cb The callback function to be called
-  /// @param[in] user_data The user data passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_set_progress_cb(
-    http_transaction_h http_transaction,
-    http_transaction_progress_cb progress_cb,
-    ffi.Pointer<ffi.Void> user_data,
-  ) {
-    return _http_transaction_set_progress_cb(
-      http_transaction,
-      progress_cb,
-      user_data,
-    );
-  }
-
-  late final _http_transaction_set_progress_cbPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(http_transaction_h, http_transaction_progress_cb,
-              ffi.Pointer<ffi.Void>)>>('http_transaction_set_progress_cb');
-  late final _http_transaction_set_progress_cb =
-      _http_transaction_set_progress_cbPtr.asFunction<
-          int Function(http_transaction_h, http_transaction_progress_cb,
-              ffi.Pointer<ffi.Void>)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Sets the timeout in seconds that is the timeout for waiting the transaction.
-  /// @details Sets the timeout in seconds that is the timeout for waiting the transaction. \n
-  /// A timeout value of zero means an infinite timeout.
-  /// @since_tizen 3.0
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[in] timeout The timeout in seconds
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_set_timeout(
-    http_transaction_h http_transaction,
-    int timeout,
-  ) {
-    return _http_transaction_set_timeout(
-      http_transaction,
-      timeout,
-    );
-  }
-
-  late final _http_transaction_set_timeoutPtr = _lookup<
-          ffi.NativeFunction<ffi.Int Function(http_transaction_h, ffi.Int)>>(
-      'http_transaction_set_timeout');
-  late final _http_transaction_set_timeout = _http_transaction_set_timeoutPtr
-      .asFunction<int Function(http_transaction_h, int)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Gets the timeout in seconds for the transaction.
-  /// @since_tizen 3.0
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[out] timeout The timeout in seconds
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_get_timeout(
-    http_transaction_h http_transaction,
-    ffi.Pointer<ffi.Int> timeout,
-  ) {
-    return _http_transaction_get_timeout(
-      http_transaction,
-      timeout,
-    );
-  }
-
-  late final _http_transaction_get_timeoutPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(http_transaction_h,
-              ffi.Pointer<ffi.Int>)>>('http_transaction_get_timeout');
-  late final _http_transaction_get_timeout = _http_transaction_get_timeoutPtr
-      .asFunction<int Function(http_transaction_h, ffi.Pointer<ffi.Int>)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Resumes the transaction.
-  /// @since_tizen 3.0
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_OPERATION_FAILED Operation failed
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_resume(
-    http_transaction_h http_transaction,
-  ) {
-    return _http_transaction_resume(
-      http_transaction,
-    );
-  }
-
-  late final _http_transaction_resumePtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function(http_transaction_h)>>(
-          'http_transaction_resume');
-  late final _http_transaction_resume = _http_transaction_resumePtr
-      .asFunction<int Function(http_transaction_h)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Pauses the transaction.
-  /// @since_tizen 3.0
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[in] pause_type The pause type of the connection
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_OPERATION_FAILED Operation failed
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_pause(
-    http_transaction_h http_transaction,
-    int pause_type,
-  ) {
-    return _http_transaction_pause(
-      http_transaction,
-      pause_type,
-    );
-  }
-
-  late final _http_transaction_pausePtr = _lookup<
-          ffi.NativeFunction<ffi.Int Function(http_transaction_h, ffi.Int32)>>(
-      'http_transaction_pause');
-  late final _http_transaction_pause = _http_transaction_pausePtr
-      .asFunction<int Function(http_transaction_h, int)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Cancels the transaction.
-  /// @details This function cancels the transaction.\n
-  /// The aborted callback is invoked after using it.
-  /// @since_tizen 3.0
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE  Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION  Invalid operation
-  /// @retval #HTTP_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED  Not Supported
-  int http_transaction_cancel(
-    http_transaction_h http_transaction,
-  ) {
-    return _http_transaction_cancel(
-      http_transaction,
-    );
-  }
-
-  late final _http_transaction_cancelPtr =
-      _lookup<ffi.NativeFunction<ffi.Int Function(http_transaction_h)>>(
-          'http_transaction_cancel');
-  late final _http_transaction_cancel = _http_transaction_cancelPtr
-      .asFunction<int Function(http_transaction_h)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Sets ready to write event for a transaction.
-  /// @since_tizen 3.0
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[out] read_to_write Enable/disable ready to write
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_set_ready_to_write(
-    http_transaction_h http_transaction,
-    bool read_to_write,
-  ) {
-    return _http_transaction_set_ready_to_write(
-      http_transaction,
-      read_to_write,
-    );
-  }
-
-  late final _http_transaction_set_ready_to_writePtr = _lookup<
-          ffi.NativeFunction<ffi.Int Function(http_transaction_h, ffi.Bool)>>(
-      'http_transaction_set_ready_to_write');
-  late final _http_transaction_set_ready_to_write =
-      _http_transaction_set_ready_to_writePtr
-          .asFunction<int Function(http_transaction_h, bool)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Sets the interface name.
-  /// @since_tizen 3.0
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[in] interface_name The interface name to use as outgoing network interface
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_set_interface_name(
-    http_transaction_h http_transaction,
-    ffi.Pointer<ffi.Char> interface_name,
-  ) {
-    return _http_transaction_set_interface_name(
-      http_transaction,
-      interface_name,
-    );
-  }
-
-  late final _http_transaction_set_interface_namePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(http_transaction_h,
-              ffi.Pointer<ffi.Char>)>>('http_transaction_set_interface_name');
-  late final _http_transaction_set_interface_name =
-      _http_transaction_set_interface_namePtr.asFunction<
-          int Function(http_transaction_h, ffi.Pointer<ffi.Char>)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Gets the interface name.
-  /// @since_tizen 3.0
-  /// @remarks The @a interface_name should be freed using free().
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[out] interface_name The interface name
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_get_interface_name(
-    http_transaction_h http_transaction,
-    ffi.Pointer<ffi.Pointer<ffi.Char>> interface_name,
-  ) {
-    return _http_transaction_get_interface_name(
-      http_transaction,
-      interface_name,
-    );
-  }
-
-  late final _http_transaction_get_interface_namePtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int Function(
-                  http_transaction_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>>(
-      'http_transaction_get_interface_name');
-  late final _http_transaction_get_interface_name =
-      _http_transaction_get_interface_namePtr.asFunction<
-          int Function(
-              http_transaction_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Sets the flag to verify a server certificate.
-  /// @details The verify determines whether verifies the peer's certificate.
-  /// @since_tizen 3.0
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[in] verify The flag to verify a server certificate; true means verifies; false means it doesn't.
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_set_server_certificate_verification(
-    http_transaction_h http_transaction,
-    bool verify,
-  ) {
-    return _http_transaction_set_server_certificate_verification(
-      http_transaction,
-      verify,
-    );
-  }
-
-  late final _http_transaction_set_server_certificate_verificationPtr = _lookup<
-          ffi.NativeFunction<ffi.Int Function(http_transaction_h, ffi.Bool)>>(
-      'http_transaction_set_server_certificate_verification');
-  late final _http_transaction_set_server_certificate_verification =
-      _http_transaction_set_server_certificate_verificationPtr
-          .asFunction<int Function(http_transaction_h, bool)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Gets the flag to verify a server certificate.
-  /// @since_tizen 3.0
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[out] verify The flag to verify a server certificate; true means verifies; false means it doesn't.
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_get_server_certificate_verification(
-    http_transaction_h http_transaction,
-    ffi.Pointer<ffi.Bool> verify,
-  ) {
-    return _http_transaction_get_server_certificate_verification(
-      http_transaction,
-      verify,
-    );
-  }
-
-  late final _http_transaction_get_server_certificate_verificationPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int Function(http_transaction_h, ffi.Pointer<ffi.Bool>)>>(
-      'http_transaction_get_server_certificate_verification');
-  late final _http_transaction_get_server_certificate_verification =
-      _http_transaction_get_server_certificate_verificationPtr.asFunction<
-          int Function(http_transaction_h, ffi.Pointer<ffi.Bool>)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Sets the flag to allow TCP Fast Open.
-  /// @since_tizen 5.0
-  /// @remarks TCP Fast Open depends on kernel version.\n
-  /// #HTTP_ERROR_NOT_SUPPORTED error will be returned for kernel version less than 3.13.
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[in] enable The flag to enable TCP Fast Open
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_set_tcp_fastopen(
-    http_transaction_h http_transaction,
-    bool enable,
-  ) {
-    return _http_transaction_set_tcp_fastopen(
-      http_transaction,
-      enable,
-    );
-  }
-
-  late final _http_transaction_set_tcp_fastopenPtr = _lookup<
-          ffi.NativeFunction<ffi.Int Function(http_transaction_h, ffi.Bool)>>(
-      'http_transaction_set_tcp_fastopen');
-  late final _http_transaction_set_tcp_fastopen =
-      _http_transaction_set_tcp_fastopenPtr
-          .asFunction<int Function(http_transaction_h, bool)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Gets the flag to allow TCP Fast Open.
-  /// @since_tizen 5.0
-  /// @remarks TCP Fast Open depends on kernel version.\n
-  /// #HTTP_ERROR_NOT_SUPPORTED error will be returned for kernel version less than 3.13.
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[out] enable The flag to enable TCP Fast Open
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_get_tcp_fastopen(
-    http_transaction_h http_transaction,
-    ffi.Pointer<ffi.Bool> enable,
-  ) {
-    return _http_transaction_get_tcp_fastopen(
-      http_transaction,
-      enable,
-    );
-  }
-
-  late final _http_transaction_get_tcp_fastopenPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(http_transaction_h,
-              ffi.Pointer<ffi.Bool>)>>('http_transaction_get_tcp_fastopen');
-  late final _http_transaction_get_tcp_fastopen =
-      _http_transaction_get_tcp_fastopenPtr.asFunction<
-          int Function(http_transaction_h, ffi.Pointer<ffi.Bool>)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Adds a named field to header.
-  /// @details Adds a named field, which is a <@c fieldName, @c fieldValue> pair, to the current instance of HTTP Transaction.
-  /// @since_tizen 3.0
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[in] field_name The HTTP Header Field name
-  /// @param[in] field_value The HTTP Header Field value
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_header_add_field(
-    http_transaction_h http_transaction,
-    ffi.Pointer<ffi.Char> field_name,
-    ffi.Pointer<ffi.Char> field_value,
-  ) {
-    return _http_transaction_header_add_field(
-      http_transaction,
-      field_name,
-      field_value,
-    );
-  }
-
-  late final _http_transaction_header_add_fieldPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(http_transaction_h, ffi.Pointer<ffi.Char>,
-              ffi.Pointer<ffi.Char>)>>('http_transaction_header_add_field');
-  late final _http_transaction_header_add_field =
-      _http_transaction_header_add_fieldPtr.asFunction<
-          int Function(http_transaction_h, ffi.Pointer<ffi.Char>,
-              ffi.Pointer<ffi.Char>)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Removes the named field from header.
-  /// @details Remove the named field, which is a <@c fieldName, @c fieldValue> pair, from the current instance of HTTP Transaction.
-  /// @since_tizen 3.0
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[in] field_name The HTTP Header Field name
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_header_remove_field(
-    http_transaction_h http_transaction,
-    ffi.Pointer<ffi.Char> field_name,
-  ) {
-    return _http_transaction_header_remove_field(
-      http_transaction,
-      field_name,
-    );
-  }
-
-  late final _http_transaction_header_remove_fieldPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(http_transaction_h,
-              ffi.Pointer<ffi.Char>)>>('http_transaction_header_remove_field');
-  late final _http_transaction_header_remove_field =
-      _http_transaction_header_remove_fieldPtr.asFunction<
-          int Function(http_transaction_h, ffi.Pointer<ffi.Char>)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Gets the HTTP Header Field value from custom header.
-  /// @since_tizen 3.0
-  /// @remarks The @a field_value should be freed using free().
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[in] field_name The HTTP Header Field name
-  /// @param[out] field_value The HTTP Header Field value
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_header_get_field_value(
-    http_transaction_h http_transaction,
-    ffi.Pointer<ffi.Char> field_name,
-    ffi.Pointer<ffi.Pointer<ffi.Char>> field_value,
-  ) {
-    return _http_transaction_header_get_field_value(
-      http_transaction,
-      field_name,
-      field_value,
-    );
-  }
-
-  late final _http_transaction_header_get_field_valuePtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int Function(http_transaction_h, ffi.Pointer<ffi.Char>,
-                  ffi.Pointer<ffi.Pointer<ffi.Char>>)>>(
-      'http_transaction_header_get_field_value');
-  late final _http_transaction_header_get_field_value =
-      _http_transaction_header_get_field_valuePtr.asFunction<
-          int Function(http_transaction_h, ffi.Pointer<ffi.Char>,
-              ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Sets an HTTP method of the request header.
-  /// @details Sets an HTTP method such as GET, POST, PUT and etc.
-  /// @since_tizen 3.0
-  /// @remarks The default method is GET.
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[in] method The HTTP method
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_request_set_method(
-    http_transaction_h http_transaction,
-    int method,
-  ) {
-    return _http_transaction_request_set_method(
-      http_transaction,
-      method,
-    );
-  }
-
-  late final _http_transaction_request_set_methodPtr = _lookup<
-          ffi.NativeFunction<ffi.Int Function(http_transaction_h, ffi.Int32)>>(
-      'http_transaction_request_set_method');
-  late final _http_transaction_request_set_method =
-      _http_transaction_request_set_methodPtr
-          .asFunction<int Function(http_transaction_h, int)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Gets the HTTP method from request header.
-  /// @since_tizen 3.0
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[out] method The HTTP method
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_request_get_method(
-    http_transaction_h http_transaction,
-    ffi.Pointer<ffi.Int32> method,
-  ) {
-    return _http_transaction_request_get_method(
-      http_transaction,
-      method,
-    );
-  }
-
-  late final _http_transaction_request_get_methodPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(http_transaction_h,
-              ffi.Pointer<ffi.Int32>)>>('http_transaction_request_get_method');
-  late final _http_transaction_request_get_method =
-      _http_transaction_request_get_methodPtr.asFunction<
-          int Function(http_transaction_h, ffi.Pointer<ffi.Int32>)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Sets an HTTP version of the request header.
-  /// @since_tizen 3.0
-  /// @remarks The default version is HTTP 1.1.
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[in] version The HTTP version
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_request_set_version(
-    http_transaction_h http_transaction,
-    int version,
-  ) {
-    return _http_transaction_request_set_version(
-      http_transaction,
-      version,
-    );
-  }
-
-  late final _http_transaction_request_set_versionPtr = _lookup<
-          ffi.NativeFunction<ffi.Int Function(http_transaction_h, ffi.Int32)>>(
-      'http_transaction_request_set_version');
-  late final _http_transaction_request_set_version =
-      _http_transaction_request_set_versionPtr
-          .asFunction<int Function(http_transaction_h, int)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Gets the HTTP version from request header.
-  /// @details Gets the HTTP version.
-  /// @since_tizen 3.0
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[out] version The HTTP version
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_request_get_version(
-    http_transaction_h http_transaction,
-    ffi.Pointer<ffi.Int32> version,
-  ) {
-    return _http_transaction_request_get_version(
-      http_transaction,
-      version,
-    );
-  }
-
-  late final _http_transaction_request_get_versionPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(http_transaction_h,
-              ffi.Pointer<ffi.Int32>)>>('http_transaction_request_get_version');
-  late final _http_transaction_request_get_version =
-      _http_transaction_request_get_versionPtr.asFunction<
-          int Function(http_transaction_h, ffi.Pointer<ffi.Int32>)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Sets a URI of the request header.
-  /// @details Sets a URI of the request header.
-  /// @since_tizen 3.0
-  /// @remarks It should be used before http_transaction_submit().
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[in] host_uri The URI to use in the request
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_request_set_uri(
-    http_transaction_h http_transaction,
-    ffi.Pointer<ffi.Char> host_uri,
-  ) {
-    return _http_transaction_request_set_uri(
-      http_transaction,
-      host_uri,
-    );
-  }
-
-  late final _http_transaction_request_set_uriPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(http_transaction_h,
-              ffi.Pointer<ffi.Char>)>>('http_transaction_request_set_uri');
-  late final _http_transaction_request_set_uri =
-      _http_transaction_request_set_uriPtr.asFunction<
-          int Function(http_transaction_h, ffi.Pointer<ffi.Char>)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Gets the URI.
-  /// @since_tizen 3.0
-  /// @remarks The @a host_uri should be freed using free().
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[out] host_uri The host URI
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_request_get_uri(
-    http_transaction_h http_transaction,
-    ffi.Pointer<ffi.Pointer<ffi.Char>> host_uri,
-  ) {
-    return _http_transaction_request_get_uri(
-      http_transaction,
-      host_uri,
-    );
-  }
-
-  late final _http_transaction_request_get_uriPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int Function(
-                  http_transaction_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>>(
-      'http_transaction_request_get_uri');
-  late final _http_transaction_request_get_uri =
-      _http_transaction_request_get_uriPtr.asFunction<
-          int Function(
-              http_transaction_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Sets the Accept-Encoding header field of HTTP Request.
-  /// @details The Accept-Encoding header enables automatic decompression of HTTP downloads.
-  /// @since_tizen 3.0
-  /// @remarks If empty string is set, an Accept-Encoding header contains all supported built-in compressions.
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[in] encoding The encoding algorithms (e.g. gzip, deflate)
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_request_set_accept_encoding(
-    http_transaction_h http_transaction,
-    ffi.Pointer<ffi.Char> encoding,
-  ) {
-    return _http_transaction_request_set_accept_encoding(
-      http_transaction,
-      encoding,
-    );
-  }
-
-  late final _http_transaction_request_set_accept_encodingPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int Function(http_transaction_h, ffi.Pointer<ffi.Char>)>>(
-      'http_transaction_request_set_accept_encoding');
-  late final _http_transaction_request_set_accept_encoding =
-      _http_transaction_request_set_accept_encodingPtr.asFunction<
-          int Function(http_transaction_h, ffi.Pointer<ffi.Char>)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Gets the Accept-Encoding header field of HTTP Request.
-  /// @since_tizen 3.0
-  /// @remarks The @a encoding should be freed using free().
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[out] encoding The encoding algorithms
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_request_get_accept_encoding(
-    http_transaction_h http_transaction,
-    ffi.Pointer<ffi.Pointer<ffi.Char>> encoding,
-  ) {
-    return _http_transaction_request_get_accept_encoding(
-      http_transaction,
-      encoding,
-    );
-  }
-
-  late final _http_transaction_request_get_accept_encodingPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int Function(
-                  http_transaction_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>>(
-      'http_transaction_request_get_accept_encoding');
-  late final _http_transaction_request_get_accept_encoding =
-      _http_transaction_request_get_accept_encodingPtr.asFunction<
-          int Function(
-              http_transaction_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Sets a cookie in the HTTP request.
-  /// @since_tizen 3.0
-  /// @remarks The format of string should be NME=CONTENTS (e.g. "name1=hello; name2=tizen;")
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[in] cookie The cookie
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_request_set_cookie(
-    http_transaction_h http_transaction,
-    ffi.Pointer<ffi.Char> cookie,
-  ) {
-    return _http_transaction_request_set_cookie(
-      http_transaction,
-      cookie,
-    );
-  }
-
-  late final _http_transaction_request_set_cookiePtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(http_transaction_h,
-              ffi.Pointer<ffi.Char>)>>('http_transaction_request_set_cookie');
-  late final _http_transaction_request_set_cookie =
-      _http_transaction_request_set_cookiePtr.asFunction<
-          int Function(http_transaction_h, ffi.Pointer<ffi.Char>)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Gets a cookie in the HTTP request.
-  /// @since_tizen 3.0
-  /// @remarks The @a cookie should be freed using free().
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[out] cookie The cookie
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_request_get_cookie(
-    http_transaction_h http_transaction,
-    ffi.Pointer<ffi.Pointer<ffi.Char>> cookie,
-  ) {
-    return _http_transaction_request_get_cookie(
-      http_transaction,
-      cookie,
-    );
-  }
-
-  late final _http_transaction_request_get_cookiePtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int Function(
-                  http_transaction_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>>(
-      'http_transaction_request_get_cookie');
-  late final _http_transaction_request_get_cookie =
-      _http_transaction_request_get_cookiePtr.asFunction<
-          int Function(
-              http_transaction_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Writes the request message body.
-  /// @details This function writes the request message body in the internal queue. \n
-  /// The written queue for request body is uploaded after invoking http_transaction_submit().
-  /// @since_tizen 3.0
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[in] body The message body data
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_request_write_body(
-    http_transaction_h http_transaction,
-    ffi.Pointer<ffi.Char> body,
-  ) {
-    return _http_transaction_request_write_body(
-      http_transaction,
-      body,
-    );
-  }
-
-  late final _http_transaction_request_write_bodyPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(http_transaction_h,
-              ffi.Pointer<ffi.Char>)>>('http_transaction_request_write_body');
-  late final _http_transaction_request_write_body =
-      _http_transaction_request_write_bodyPtr.asFunction<
-          int Function(http_transaction_h, ffi.Pointer<ffi.Char>)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Sets the file path for uploading a file.
-  /// @since_tizen 3.0
-  /// @remarks It is used with #HTTP_METHOD_PUT. \n
-  /// %http://tizen.org/privilege/mediastorage is needed if input or output path are relevant to media storage. \n
-  /// %http://tizen.org/privilege/externalstorage is needed if input or output path are relevant to external storage.
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[in] file_path The path for file
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE  Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION  Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED  Not Supported
-  /// @retval #HTTP_ERROR_PERMISSION_DENIED Permission denied
-  int http_transaction_request_set_upload_file(
-    http_transaction_h http_transaction,
-    ffi.Pointer<ffi.Char> file_path,
-  ) {
-    return _http_transaction_request_set_upload_file(
-      http_transaction,
-      file_path,
-    );
-  }
-
-  late final _http_transaction_request_set_upload_filePtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int Function(http_transaction_h, ffi.Pointer<ffi.Char>)>>(
-      'http_transaction_request_set_upload_file');
-  late final _http_transaction_request_set_upload_file =
-      _http_transaction_request_set_upload_filePtr.asFunction<
-          int Function(http_transaction_h, ffi.Pointer<ffi.Char>)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Gets the HTTP status code from HTTP Response.
-  /// @since_tizen 3.0
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[out] status_code The HTTP status code
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_response_get_status_code(
-    http_transaction_h http_transaction,
-    ffi.Pointer<ffi.Int32> status_code,
-  ) {
-    return _http_transaction_response_get_status_code(
-      http_transaction,
-      status_code,
-    );
-  }
-
-  late final _http_transaction_response_get_status_codePtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int Function(http_transaction_h, ffi.Pointer<ffi.Int32>)>>(
-      'http_transaction_response_get_status_code');
-  late final _http_transaction_response_get_status_code =
-      _http_transaction_response_get_status_codePtr.asFunction<
-          int Function(http_transaction_h, ffi.Pointer<ffi.Int32>)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Gets the HTTP status text from HTTP Response.
-  /// @since_tizen 3.0
-  /// @remarks The @a status_text should be freed using free().
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[out] status_text The HTTP status text
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_response_get_status_text(
-    http_transaction_h http_transaction,
-    ffi.Pointer<ffi.Pointer<ffi.Char>> status_text,
-  ) {
-    return _http_transaction_response_get_status_text(
-      http_transaction,
-      status_text,
-    );
-  }
-
-  late final _http_transaction_response_get_status_textPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int Function(
-                  http_transaction_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>>(
-      'http_transaction_response_get_status_text');
-  late final _http_transaction_response_get_status_text =
-      _http_transaction_response_get_status_textPtr.asFunction<
-          int Function(
-              http_transaction_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Gets the HTTP version from HTTP Response.
-  /// @since_tizen 3.0
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[out] version The HTTP version
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_response_get_version(
-    http_transaction_h http_transaction,
-    ffi.Pointer<ffi.Int32> version,
-  ) {
-    return _http_transaction_response_get_version(
-      http_transaction,
-      version,
-    );
-  }
-
-  late final _http_transaction_response_get_versionPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int Function(http_transaction_h, ffi.Pointer<ffi.Int32>)>>(
-      'http_transaction_response_get_version');
-  late final _http_transaction_response_get_version =
-      _http_transaction_response_get_versionPtr.asFunction<
-          int Function(http_transaction_h, ffi.Pointer<ffi.Int32>)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Opens HTTP transaction with authentication information.
-  /// @since_tizen 3.0
-  /// @remarks The @a http_auth_transaction should be released using http_transaction_destroy().
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[out] http_auth_transaction The HTTP transaction handle
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_open_authentication(
-    http_transaction_h http_transaction,
-    ffi.Pointer<http_transaction_h> http_auth_transaction,
-  ) {
-    return _http_transaction_open_authentication(
-      http_transaction,
-      http_auth_transaction,
-    );
-  }
-
-  late final _http_transaction_open_authenticationPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int Function(
-                  http_transaction_h, ffi.Pointer<http_transaction_h>)>>(
-      'http_transaction_open_authentication');
-  late final _http_transaction_open_authentication =
-      _http_transaction_open_authenticationPtr.asFunction<
-          int Function(http_transaction_h, ffi.Pointer<http_transaction_h>)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Sets an HTTP credentials.
-  /// @details Sets an HTTP authentication scheme such as username and password.
-  /// @since_tizen 3.0
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[in] user_name The HTTP user name
-  /// @param[in] password The HTTP password
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_set_credentials(
-    http_transaction_h http_transaction,
-    ffi.Pointer<ffi.Char> user_name,
-    ffi.Pointer<ffi.Char> password,
-  ) {
-    return _http_transaction_set_credentials(
-      http_transaction,
-      user_name,
-      password,
-    );
-  }
-
-  late final _http_transaction_set_credentialsPtr = _lookup<
-      ffi.NativeFunction<
-          ffi.Int Function(http_transaction_h, ffi.Pointer<ffi.Char>,
-              ffi.Pointer<ffi.Char>)>>('http_transaction_set_credentials');
-  late final _http_transaction_set_credentials =
-      _http_transaction_set_credentialsPtr.asFunction<
-          int Function(http_transaction_h, ffi.Pointer<ffi.Char>,
-              ffi.Pointer<ffi.Char>)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Gets the username & password for the HTTP credential.
-  /// @since_tizen 3.0
-  /// @remarks The @a user_name & @a password should be freed using free().
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[out] user_name The HTTP credential user name
-  /// @param[out] password The HTTP credential password
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_get_credentials(
-    http_transaction_h http_transaction,
-    ffi.Pointer<ffi.Pointer<ffi.Char>> user_name,
-    ffi.Pointer<ffi.Pointer<ffi.Char>> password,
-  ) {
-    return _http_transaction_get_credentials(
-      http_transaction,
-      user_name,
-      password,
-    );
-  }
-
-  late final _http_transaction_get_credentialsPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int Function(
-                  http_transaction_h,
-                  ffi.Pointer<ffi.Pointer<ffi.Char>>,
-                  ffi.Pointer<ffi.Pointer<ffi.Char>>)>>(
-      'http_transaction_get_credentials');
-  late final _http_transaction_get_credentials =
-      _http_transaction_get_credentialsPtr.asFunction<
-          int Function(http_transaction_h, ffi.Pointer<ffi.Pointer<ffi.Char>>,
-              ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Sets an HTTP authentication scheme.
-  /// @details Set an HTTP authentication scheme such as BASIC, MD5, NTLM and etc.
-  /// @since_tizen 3.0
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[in] auth_scheme The HTTP authentication scheme
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_set_http_auth_scheme(
-    http_transaction_h http_transaction,
-    int auth_scheme,
-  ) {
-    return _http_transaction_set_http_auth_scheme(
-      http_transaction,
-      auth_scheme,
-    );
-  }
-
-  late final _http_transaction_set_http_auth_schemePtr = _lookup<
-          ffi.NativeFunction<ffi.Int Function(http_transaction_h, ffi.Int32)>>(
-      'http_transaction_set_http_auth_scheme');
-  late final _http_transaction_set_http_auth_scheme =
-      _http_transaction_set_http_auth_schemePtr
-          .asFunction<int Function(http_transaction_h, int)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Gets the HTTP authentication scheme.
-  /// @since_tizen 3.0
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[out] auth_scheme The HTTP auth scheme value
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_get_http_auth_scheme(
-    http_transaction_h http_transaction,
-    ffi.Pointer<ffi.Int32> auth_scheme,
-  ) {
-    return _http_transaction_get_http_auth_scheme(
-      http_transaction,
-      auth_scheme,
-    );
-  }
-
-  late final _http_transaction_get_http_auth_schemePtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int Function(http_transaction_h, ffi.Pointer<ffi.Int32>)>>(
-      'http_transaction_get_http_auth_scheme');
-  late final _http_transaction_get_http_auth_scheme =
-      _http_transaction_get_http_auth_schemePtr.asFunction<
-          int Function(http_transaction_h, ffi.Pointer<ffi.Int32>)>();
-
-  /// @deprecated Deprecated since 9.0
-  /// @brief Gets the HTTP authentication realm.
-  /// @since_tizen 3.0
-  /// @remarks The @a realm should be freed using free().
-  /// @param[in] http_transaction The HTTP transaction handle
-  /// @param[out] realm The HTTP authentication realm value
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #HTTP_ERROR_NONE Successful
-  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #HTTP_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
-  int http_transaction_get_realm(
-    http_transaction_h http_transaction,
-    ffi.Pointer<ffi.Pointer<ffi.Char>> realm,
-  ) {
-    return _http_transaction_get_realm(
-      http_transaction,
-      realm,
-    );
-  }
-
-  late final _http_transaction_get_realmPtr = _lookup<
-          ffi.NativeFunction<
-              ffi.Int Function(
-                  http_transaction_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>>(
-      'http_transaction_get_realm');
-  late final _http_transaction_get_realm =
-      _http_transaction_get_realmPtr.asFunction<
-          int Function(
-              http_transaction_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
-
   /// @brief Initializes INM.
   /// @since_tizen 5.0
   /// @privlevel public
@@ -132142,6 +132412,1629 @@ class Tizen100Native {
               ffi.Int32)>>('connection_reset_statistics');
   late final _connection_reset_statistics = _connection_reset_statisticsPtr
       .asFunction<int Function(connection_h, int, int)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Initializes the HTTP module.
+  /// @since_tizen 3.0
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_OPERATION_FAILED Operation failed
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  /// @see http_deinit()
+  int http_init() {
+    return _http_init();
+  }
+
+  late final _http_initPtr =
+      _lookup<ffi.NativeFunction<ffi.Int Function()>>('http_init');
+  late final _http_init = _http_initPtr.asFunction<int Function()>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Deinitializes the HTTP module.
+  /// @since_tizen 3.0
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_OPERATION_FAILED Operation failed
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  /// @see http_init()
+  int http_deinit() {
+    return _http_deinit();
+  }
+
+  late final _http_deinitPtr =
+      _lookup<ffi.NativeFunction<ffi.Int Function()>>('http_deinit');
+  late final _http_deinit = _http_deinitPtr.asFunction<int Function()>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Creates the HTTP session handle.
+  /// @since_tizen 3.0
+  /// @remarks The @a http_session should be released using http_session_destroy().
+  /// Opened transactions can't be submitted after destroying session handle.
+  /// @param[in] mode The HTTP session mode
+  /// @param[out] http_session The HTTP session handle
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_OUT_OF_MEMORY Out of memory
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  /// @see http_session_destroy()
+  int http_session_create(
+    int mode,
+    ffi.Pointer<http_session_h> http_session,
+  ) {
+    return _http_session_create(
+      mode,
+      http_session,
+    );
+  }
+
+  late final _http_session_createPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(
+              ffi.Int32, ffi.Pointer<http_session_h>)>>('http_session_create');
+  late final _http_session_create = _http_session_createPtr
+      .asFunction<int Function(int, ffi.Pointer<http_session_h>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Destroys the HTTP session handle.
+  /// @since_tizen 3.0
+  /// @remarks The @a http_session should be set to NULL after using it
+  /// @param[in] http_session The HTTP session handle
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  /// @see http_session_create()
+  int http_session_destroy(
+    http_session_h http_session,
+  ) {
+    return _http_session_destroy(
+      http_session,
+    );
+  }
+
+  late final _http_session_destroyPtr =
+      _lookup<ffi.NativeFunction<ffi.Int Function(http_session_h)>>(
+          'http_session_destroy');
+  late final _http_session_destroy =
+      _http_session_destroyPtr.asFunction<int Function(http_session_h)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Opens HTTP transaction from the HTTP Session.
+  /// @since_tizen 3.0
+  /// @remarks The @a http_transaction should be released using http_transaction_destroy().
+  /// @param[in] http_session The HTTP session handle
+  /// @param[in] method The HTTP request method
+  /// @param[out] http_transaction The HTTP transaction handle
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_OUT_OF_MEMORY Out of memory
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_session_open_transaction(
+    http_session_h http_session,
+    int method,
+    ffi.Pointer<http_transaction_h> http_transaction,
+  ) {
+    return _http_session_open_transaction(
+      http_session,
+      method,
+      http_transaction,
+    );
+  }
+
+  late final _http_session_open_transactionPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Int Function(
+                  http_session_h, ffi.Int32, ffi.Pointer<http_transaction_h>)>>(
+      'http_session_open_transaction');
+  late final _http_session_open_transaction =
+      _http_session_open_transactionPtr.asFunction<
+          int Function(http_session_h, int, ffi.Pointer<http_transaction_h>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Sets the value to redirect the HTTP request automatically.
+  /// @since_tizen 3.0
+  /// @param[in] http_session The HTTP session handle
+  /// @param[in] auto_redirection The value which determines whether allow redirection or not
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  /// @see http_session_get_auto_redirection()
+  int http_session_set_auto_redirection(
+    http_session_h http_session,
+    bool auto_redirection,
+  ) {
+    return _http_session_set_auto_redirection(
+      http_session,
+      auto_redirection,
+    );
+  }
+
+  late final _http_session_set_auto_redirectionPtr =
+      _lookup<ffi.NativeFunction<ffi.Int Function(http_session_h, ffi.Bool)>>(
+          'http_session_set_auto_redirection');
+  late final _http_session_set_auto_redirection =
+      _http_session_set_auto_redirectionPtr
+          .asFunction<int Function(http_session_h, bool)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Gets the auto redirection for the HTTP request.
+  /// @since_tizen 3.0
+  /// @param[in] http_session The HTTP session handle
+  /// @param[out] auto_redirect The value of auto redirect
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  /// @see http_session_set_auto_redirection()
+  int http_session_get_auto_redirection(
+    http_session_h http_session,
+    ffi.Pointer<ffi.Bool> auto_redirect,
+  ) {
+    return _http_session_get_auto_redirection(
+      http_session,
+      auto_redirect,
+    );
+  }
+
+  late final _http_session_get_auto_redirectionPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(http_session_h,
+              ffi.Pointer<ffi.Bool>)>>('http_session_get_auto_redirection');
+  late final _http_session_get_auto_redirection =
+      _http_session_get_auto_redirectionPtr
+          .asFunction<int Function(http_session_h, ffi.Pointer<ffi.Bool>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Gets the number of active transactions in the current session.
+  /// @since_tizen 3.0
+  /// @param[in] http_session The HTTP session handle
+  /// @param[out] active_transaction_count The number of activated transactions
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_session_get_active_transaction_count(
+    http_session_h http_session,
+    ffi.Pointer<ffi.Int> active_transaction_count,
+  ) {
+    return _http_session_get_active_transaction_count(
+      http_session,
+      active_transaction_count,
+    );
+  }
+
+  late final _http_session_get_active_transaction_countPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Int Function(http_session_h, ffi.Pointer<ffi.Int>)>>(
+      'http_session_get_active_transaction_count');
+  late final _http_session_get_active_transaction_count =
+      _http_session_get_active_transaction_countPtr
+          .asFunction<int Function(http_session_h, ffi.Pointer<ffi.Int>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Gets the maximum number of transactions for the current session.
+  /// @since_tizen 3.0
+  /// @param[in] http_session The HTTP session handle
+  /// @param[out] transaction_count The maximum transaction count
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_session_get_max_transaction_count(
+    http_session_h http_session,
+    ffi.Pointer<ffi.Int> transaction_count,
+  ) {
+    return _http_session_get_max_transaction_count(
+      http_session,
+      transaction_count,
+    );
+  }
+
+  late final _http_session_get_max_transaction_countPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(http_session_h,
+              ffi.Pointer<ffi.Int>)>>('http_session_get_max_transaction_count');
+  late final _http_session_get_max_transaction_count =
+      _http_session_get_max_transaction_countPtr
+          .asFunction<int Function(http_session_h, ffi.Pointer<ffi.Int>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Destroys all transactions.
+  /// @since_tizen 3.0
+  /// @remarks All http_transactions should be set to NULL after using it
+  /// @param[in] http_session The HTTP session handle
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_OPERATION_FAILED Operation failed
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_session_destroy_all_transactions(
+    http_session_h http_session,
+  ) {
+    return _http_session_destroy_all_transactions(
+      http_session,
+    );
+  }
+
+  late final _http_session_destroy_all_transactionsPtr =
+      _lookup<ffi.NativeFunction<ffi.Int Function(http_session_h)>>(
+          'http_session_destroy_all_transactions');
+  late final _http_session_destroy_all_transactions =
+      _http_session_destroy_all_transactionsPtr
+          .asFunction<int Function(http_session_h)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Submits the HTTP request.
+  /// @since_tizen 3.0
+  /// @privlevel public
+  /// @privilege %http://tizen.org/privilege/internet \n
+  /// %http://tizen.org/privilege/network.get
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  /// @retval #HTTP_ERROR_PERMISSION_DENIED Permission denied
+  int http_transaction_submit(
+    http_transaction_h http_transaction,
+  ) {
+    return _http_transaction_submit(
+      http_transaction,
+    );
+  }
+
+  late final _http_transaction_submitPtr =
+      _lookup<ffi.NativeFunction<ffi.Int Function(http_transaction_h)>>(
+          'http_transaction_submit');
+  late final _http_transaction_submit = _http_transaction_submitPtr
+      .asFunction<int Function(http_transaction_h)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Closes the HTTP transaction handle.
+  /// @since_tizen 3.0
+  /// @remarks The @a http_transaction should be set to NULL after using it.
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  /// @see http_session_open_transaction()
+  /// @see http_transaction_open_authentication()
+  int http_transaction_destroy(
+    http_transaction_h http_transaction,
+  ) {
+    return _http_transaction_destroy(
+      http_transaction,
+    );
+  }
+
+  late final _http_transaction_destroyPtr =
+      _lookup<ffi.NativeFunction<ffi.Int Function(http_transaction_h)>>(
+          'http_transaction_destroy');
+  late final _http_transaction_destroy = _http_transaction_destroyPtr
+      .asFunction<int Function(http_transaction_h)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Registers callback called when receives header.
+  /// @since_tizen 3.0
+  /// @param[in] http_transaction        The HTTP transaction handle
+  /// @param[in] header_cb The callback  function to be called
+  /// @param[in] user_data The user data passed to the callback function
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_set_received_header_cb(
+    http_transaction_h http_transaction,
+    http_transaction_header_cb header_cb,
+    ffi.Pointer<ffi.Void> user_data,
+  ) {
+    return _http_transaction_set_received_header_cb(
+      http_transaction,
+      header_cb,
+      user_data,
+    );
+  }
+
+  late final _http_transaction_set_received_header_cbPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Int Function(http_transaction_h, http_transaction_header_cb,
+                  ffi.Pointer<ffi.Void>)>>(
+      'http_transaction_set_received_header_cb');
+  late final _http_transaction_set_received_header_cb =
+      _http_transaction_set_received_header_cbPtr.asFunction<
+          int Function(http_transaction_h, http_transaction_header_cb,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Registers callback called when receives body.
+  /// @since_tizen 3.0
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[in] body_cb The callback function to be called
+  /// @param[in] user_data The user data passed to the callback function
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_set_received_body_cb(
+    http_transaction_h http_transaction,
+    http_transaction_body_cb body_cb,
+    ffi.Pointer<ffi.Void> user_data,
+  ) {
+    return _http_transaction_set_received_body_cb(
+      http_transaction,
+      body_cb,
+      user_data,
+    );
+  }
+
+  late final _http_transaction_set_received_body_cbPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(http_transaction_h, http_transaction_body_cb,
+              ffi.Pointer<ffi.Void>)>>('http_transaction_set_received_body_cb');
+  late final _http_transaction_set_received_body_cb =
+      _http_transaction_set_received_body_cbPtr.asFunction<
+          int Function(http_transaction_h, http_transaction_body_cb,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Registers callback called when writes data.
+  /// @since_tizen 3.0
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[in] write_cb The callback function to be called
+  /// @param[in] user_data The user data passed to the callback function
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_set_uploaded_cb(
+    http_transaction_h http_transaction,
+    http_transaction_write_cb write_cb,
+    ffi.Pointer<ffi.Void> user_data,
+  ) {
+    return _http_transaction_set_uploaded_cb(
+      http_transaction,
+      write_cb,
+      user_data,
+    );
+  }
+
+  late final _http_transaction_set_uploaded_cbPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(http_transaction_h, http_transaction_write_cb,
+              ffi.Pointer<ffi.Void>)>>('http_transaction_set_uploaded_cb');
+  late final _http_transaction_set_uploaded_cb =
+      _http_transaction_set_uploaded_cbPtr.asFunction<
+          int Function(http_transaction_h, http_transaction_write_cb,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Registers callback called when transaction is completed.
+  /// @since_tizen 3.0
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[in] completed_cb The callback function to be called
+  /// @param[in] user_data The user data passed to the callback function
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_set_completed_cb(
+    http_transaction_h http_transaction,
+    http_transaction_completed_cb completed_cb,
+    ffi.Pointer<ffi.Void> user_data,
+  ) {
+    return _http_transaction_set_completed_cb(
+      http_transaction,
+      completed_cb,
+      user_data,
+    );
+  }
+
+  late final _http_transaction_set_completed_cbPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(http_transaction_h, http_transaction_completed_cb,
+              ffi.Pointer<ffi.Void>)>>('http_transaction_set_completed_cb');
+  late final _http_transaction_set_completed_cb =
+      _http_transaction_set_completed_cbPtr.asFunction<
+          int Function(http_transaction_h, http_transaction_completed_cb,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Registers callback called when transaction is aborted.
+  /// @since_tizen 3.0
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[in] aborted_cb The callback function to be called
+  /// @param[in] user_data The user data passed to the callback function
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_set_aborted_cb(
+    http_transaction_h http_transaction,
+    http_transaction_aborted_cb aborted_cb,
+    ffi.Pointer<ffi.Void> user_data,
+  ) {
+    return _http_transaction_set_aborted_cb(
+      http_transaction,
+      aborted_cb,
+      user_data,
+    );
+  }
+
+  late final _http_transaction_set_aborted_cbPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(http_transaction_h, http_transaction_aborted_cb,
+              ffi.Pointer<ffi.Void>)>>('http_transaction_set_aborted_cb');
+  late final _http_transaction_set_aborted_cb =
+      _http_transaction_set_aborted_cbPtr.asFunction<
+          int Function(http_transaction_h, http_transaction_aborted_cb,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Registers the progress callbacks.
+  /// @details Registers callback that is called when data is uploaded/downloaded.
+  /// @since_tizen 3.0
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[in] progress_cb The callback function to be called
+  /// @param[in] user_data The user data passed to the callback function
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_set_progress_cb(
+    http_transaction_h http_transaction,
+    http_transaction_progress_cb progress_cb,
+    ffi.Pointer<ffi.Void> user_data,
+  ) {
+    return _http_transaction_set_progress_cb(
+      http_transaction,
+      progress_cb,
+      user_data,
+    );
+  }
+
+  late final _http_transaction_set_progress_cbPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(http_transaction_h, http_transaction_progress_cb,
+              ffi.Pointer<ffi.Void>)>>('http_transaction_set_progress_cb');
+  late final _http_transaction_set_progress_cb =
+      _http_transaction_set_progress_cbPtr.asFunction<
+          int Function(http_transaction_h, http_transaction_progress_cb,
+              ffi.Pointer<ffi.Void>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Sets the timeout in seconds that is the timeout for waiting the transaction.
+  /// @details Sets the timeout in seconds that is the timeout for waiting the transaction. \n
+  /// A timeout value of zero means an infinite timeout.
+  /// @since_tizen 3.0
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[in] timeout The timeout in seconds
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_set_timeout(
+    http_transaction_h http_transaction,
+    int timeout,
+  ) {
+    return _http_transaction_set_timeout(
+      http_transaction,
+      timeout,
+    );
+  }
+
+  late final _http_transaction_set_timeoutPtr = _lookup<
+          ffi.NativeFunction<ffi.Int Function(http_transaction_h, ffi.Int)>>(
+      'http_transaction_set_timeout');
+  late final _http_transaction_set_timeout = _http_transaction_set_timeoutPtr
+      .asFunction<int Function(http_transaction_h, int)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Gets the timeout in seconds for the transaction.
+  /// @since_tizen 3.0
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[out] timeout The timeout in seconds
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_get_timeout(
+    http_transaction_h http_transaction,
+    ffi.Pointer<ffi.Int> timeout,
+  ) {
+    return _http_transaction_get_timeout(
+      http_transaction,
+      timeout,
+    );
+  }
+
+  late final _http_transaction_get_timeoutPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(http_transaction_h,
+              ffi.Pointer<ffi.Int>)>>('http_transaction_get_timeout');
+  late final _http_transaction_get_timeout = _http_transaction_get_timeoutPtr
+      .asFunction<int Function(http_transaction_h, ffi.Pointer<ffi.Int>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Resumes the transaction.
+  /// @since_tizen 3.0
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_OPERATION_FAILED Operation failed
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_resume(
+    http_transaction_h http_transaction,
+  ) {
+    return _http_transaction_resume(
+      http_transaction,
+    );
+  }
+
+  late final _http_transaction_resumePtr =
+      _lookup<ffi.NativeFunction<ffi.Int Function(http_transaction_h)>>(
+          'http_transaction_resume');
+  late final _http_transaction_resume = _http_transaction_resumePtr
+      .asFunction<int Function(http_transaction_h)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Pauses the transaction.
+  /// @since_tizen 3.0
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[in] pause_type The pause type of the connection
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_OPERATION_FAILED Operation failed
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_pause(
+    http_transaction_h http_transaction,
+    int pause_type,
+  ) {
+    return _http_transaction_pause(
+      http_transaction,
+      pause_type,
+    );
+  }
+
+  late final _http_transaction_pausePtr = _lookup<
+          ffi.NativeFunction<ffi.Int Function(http_transaction_h, ffi.Int32)>>(
+      'http_transaction_pause');
+  late final _http_transaction_pause = _http_transaction_pausePtr
+      .asFunction<int Function(http_transaction_h, int)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Cancels the transaction.
+  /// @details This function cancels the transaction.\n
+  /// The aborted callback is invoked after using it.
+  /// @since_tizen 3.0
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE  Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION  Invalid operation
+  /// @retval #HTTP_ERROR_OPERATION_FAILED  Operation failed
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED  Not Supported
+  int http_transaction_cancel(
+    http_transaction_h http_transaction,
+  ) {
+    return _http_transaction_cancel(
+      http_transaction,
+    );
+  }
+
+  late final _http_transaction_cancelPtr =
+      _lookup<ffi.NativeFunction<ffi.Int Function(http_transaction_h)>>(
+          'http_transaction_cancel');
+  late final _http_transaction_cancel = _http_transaction_cancelPtr
+      .asFunction<int Function(http_transaction_h)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Sets ready to write event for a transaction.
+  /// @since_tizen 3.0
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[out] read_to_write Enable/disable ready to write
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_set_ready_to_write(
+    http_transaction_h http_transaction,
+    bool read_to_write,
+  ) {
+    return _http_transaction_set_ready_to_write(
+      http_transaction,
+      read_to_write,
+    );
+  }
+
+  late final _http_transaction_set_ready_to_writePtr = _lookup<
+          ffi.NativeFunction<ffi.Int Function(http_transaction_h, ffi.Bool)>>(
+      'http_transaction_set_ready_to_write');
+  late final _http_transaction_set_ready_to_write =
+      _http_transaction_set_ready_to_writePtr
+          .asFunction<int Function(http_transaction_h, bool)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Sets the interface name.
+  /// @since_tizen 3.0
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[in] interface_name The interface name to use as outgoing network interface
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_set_interface_name(
+    http_transaction_h http_transaction,
+    ffi.Pointer<ffi.Char> interface_name,
+  ) {
+    return _http_transaction_set_interface_name(
+      http_transaction,
+      interface_name,
+    );
+  }
+
+  late final _http_transaction_set_interface_namePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(http_transaction_h,
+              ffi.Pointer<ffi.Char>)>>('http_transaction_set_interface_name');
+  late final _http_transaction_set_interface_name =
+      _http_transaction_set_interface_namePtr.asFunction<
+          int Function(http_transaction_h, ffi.Pointer<ffi.Char>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Gets the interface name.
+  /// @since_tizen 3.0
+  /// @remarks The @a interface_name should be freed using free().
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[out] interface_name The interface name
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_get_interface_name(
+    http_transaction_h http_transaction,
+    ffi.Pointer<ffi.Pointer<ffi.Char>> interface_name,
+  ) {
+    return _http_transaction_get_interface_name(
+      http_transaction,
+      interface_name,
+    );
+  }
+
+  late final _http_transaction_get_interface_namePtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Int Function(
+                  http_transaction_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>>(
+      'http_transaction_get_interface_name');
+  late final _http_transaction_get_interface_name =
+      _http_transaction_get_interface_namePtr.asFunction<
+          int Function(
+              http_transaction_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Sets the flag to verify a server certificate.
+  /// @details The verify determines whether verifies the peer's certificate.
+  /// @since_tizen 3.0
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[in] verify The flag to verify a server certificate; true means verifies; false means it doesn't.
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_set_server_certificate_verification(
+    http_transaction_h http_transaction,
+    bool verify,
+  ) {
+    return _http_transaction_set_server_certificate_verification(
+      http_transaction,
+      verify,
+    );
+  }
+
+  late final _http_transaction_set_server_certificate_verificationPtr = _lookup<
+          ffi.NativeFunction<ffi.Int Function(http_transaction_h, ffi.Bool)>>(
+      'http_transaction_set_server_certificate_verification');
+  late final _http_transaction_set_server_certificate_verification =
+      _http_transaction_set_server_certificate_verificationPtr
+          .asFunction<int Function(http_transaction_h, bool)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Gets the flag to verify a server certificate.
+  /// @since_tizen 3.0
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[out] verify The flag to verify a server certificate; true means verifies; false means it doesn't.
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_get_server_certificate_verification(
+    http_transaction_h http_transaction,
+    ffi.Pointer<ffi.Bool> verify,
+  ) {
+    return _http_transaction_get_server_certificate_verification(
+      http_transaction,
+      verify,
+    );
+  }
+
+  late final _http_transaction_get_server_certificate_verificationPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Int Function(http_transaction_h, ffi.Pointer<ffi.Bool>)>>(
+      'http_transaction_get_server_certificate_verification');
+  late final _http_transaction_get_server_certificate_verification =
+      _http_transaction_get_server_certificate_verificationPtr.asFunction<
+          int Function(http_transaction_h, ffi.Pointer<ffi.Bool>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Sets the flag to allow TCP Fast Open.
+  /// @since_tizen 5.0
+  /// @remarks TCP Fast Open depends on kernel version.\n
+  /// #HTTP_ERROR_NOT_SUPPORTED error will be returned for kernel version less than 3.13.
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[in] enable The flag to enable TCP Fast Open
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_set_tcp_fastopen(
+    http_transaction_h http_transaction,
+    bool enable,
+  ) {
+    return _http_transaction_set_tcp_fastopen(
+      http_transaction,
+      enable,
+    );
+  }
+
+  late final _http_transaction_set_tcp_fastopenPtr = _lookup<
+          ffi.NativeFunction<ffi.Int Function(http_transaction_h, ffi.Bool)>>(
+      'http_transaction_set_tcp_fastopen');
+  late final _http_transaction_set_tcp_fastopen =
+      _http_transaction_set_tcp_fastopenPtr
+          .asFunction<int Function(http_transaction_h, bool)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Gets the flag to allow TCP Fast Open.
+  /// @since_tizen 5.0
+  /// @remarks TCP Fast Open depends on kernel version.\n
+  /// #HTTP_ERROR_NOT_SUPPORTED error will be returned for kernel version less than 3.13.
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[out] enable The flag to enable TCP Fast Open
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_get_tcp_fastopen(
+    http_transaction_h http_transaction,
+    ffi.Pointer<ffi.Bool> enable,
+  ) {
+    return _http_transaction_get_tcp_fastopen(
+      http_transaction,
+      enable,
+    );
+  }
+
+  late final _http_transaction_get_tcp_fastopenPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(http_transaction_h,
+              ffi.Pointer<ffi.Bool>)>>('http_transaction_get_tcp_fastopen');
+  late final _http_transaction_get_tcp_fastopen =
+      _http_transaction_get_tcp_fastopenPtr.asFunction<
+          int Function(http_transaction_h, ffi.Pointer<ffi.Bool>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Adds a named field to header.
+  /// @details Adds a named field, which is a <@c fieldName, @c fieldValue> pair, to the current instance of HTTP Transaction.
+  /// @since_tizen 3.0
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[in] field_name The HTTP Header Field name
+  /// @param[in] field_value The HTTP Header Field value
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_header_add_field(
+    http_transaction_h http_transaction,
+    ffi.Pointer<ffi.Char> field_name,
+    ffi.Pointer<ffi.Char> field_value,
+  ) {
+    return _http_transaction_header_add_field(
+      http_transaction,
+      field_name,
+      field_value,
+    );
+  }
+
+  late final _http_transaction_header_add_fieldPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(http_transaction_h, ffi.Pointer<ffi.Char>,
+              ffi.Pointer<ffi.Char>)>>('http_transaction_header_add_field');
+  late final _http_transaction_header_add_field =
+      _http_transaction_header_add_fieldPtr.asFunction<
+          int Function(http_transaction_h, ffi.Pointer<ffi.Char>,
+              ffi.Pointer<ffi.Char>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Removes the named field from header.
+  /// @details Remove the named field, which is a <@c fieldName, @c fieldValue> pair, from the current instance of HTTP Transaction.
+  /// @since_tizen 3.0
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[in] field_name The HTTP Header Field name
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_header_remove_field(
+    http_transaction_h http_transaction,
+    ffi.Pointer<ffi.Char> field_name,
+  ) {
+    return _http_transaction_header_remove_field(
+      http_transaction,
+      field_name,
+    );
+  }
+
+  late final _http_transaction_header_remove_fieldPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(http_transaction_h,
+              ffi.Pointer<ffi.Char>)>>('http_transaction_header_remove_field');
+  late final _http_transaction_header_remove_field =
+      _http_transaction_header_remove_fieldPtr.asFunction<
+          int Function(http_transaction_h, ffi.Pointer<ffi.Char>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Gets the HTTP Header Field value from custom header.
+  /// @since_tizen 3.0
+  /// @remarks The @a field_value should be freed using free().
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[in] field_name The HTTP Header Field name
+  /// @param[out] field_value The HTTP Header Field value
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_header_get_field_value(
+    http_transaction_h http_transaction,
+    ffi.Pointer<ffi.Char> field_name,
+    ffi.Pointer<ffi.Pointer<ffi.Char>> field_value,
+  ) {
+    return _http_transaction_header_get_field_value(
+      http_transaction,
+      field_name,
+      field_value,
+    );
+  }
+
+  late final _http_transaction_header_get_field_valuePtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Int Function(http_transaction_h, ffi.Pointer<ffi.Char>,
+                  ffi.Pointer<ffi.Pointer<ffi.Char>>)>>(
+      'http_transaction_header_get_field_value');
+  late final _http_transaction_header_get_field_value =
+      _http_transaction_header_get_field_valuePtr.asFunction<
+          int Function(http_transaction_h, ffi.Pointer<ffi.Char>,
+              ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Sets an HTTP method of the request header.
+  /// @details Sets an HTTP method such as GET, POST, PUT and etc.
+  /// @since_tizen 3.0
+  /// @remarks The default method is GET.
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[in] method The HTTP method
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_request_set_method(
+    http_transaction_h http_transaction,
+    int method,
+  ) {
+    return _http_transaction_request_set_method(
+      http_transaction,
+      method,
+    );
+  }
+
+  late final _http_transaction_request_set_methodPtr = _lookup<
+          ffi.NativeFunction<ffi.Int Function(http_transaction_h, ffi.Int32)>>(
+      'http_transaction_request_set_method');
+  late final _http_transaction_request_set_method =
+      _http_transaction_request_set_methodPtr
+          .asFunction<int Function(http_transaction_h, int)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Gets the HTTP method from request header.
+  /// @since_tizen 3.0
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[out] method The HTTP method
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_request_get_method(
+    http_transaction_h http_transaction,
+    ffi.Pointer<ffi.Int32> method,
+  ) {
+    return _http_transaction_request_get_method(
+      http_transaction,
+      method,
+    );
+  }
+
+  late final _http_transaction_request_get_methodPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(http_transaction_h,
+              ffi.Pointer<ffi.Int32>)>>('http_transaction_request_get_method');
+  late final _http_transaction_request_get_method =
+      _http_transaction_request_get_methodPtr.asFunction<
+          int Function(http_transaction_h, ffi.Pointer<ffi.Int32>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Sets an HTTP version of the request header.
+  /// @since_tizen 3.0
+  /// @remarks The default version is HTTP 1.1.
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[in] version The HTTP version
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_request_set_version(
+    http_transaction_h http_transaction,
+    int version,
+  ) {
+    return _http_transaction_request_set_version(
+      http_transaction,
+      version,
+    );
+  }
+
+  late final _http_transaction_request_set_versionPtr = _lookup<
+          ffi.NativeFunction<ffi.Int Function(http_transaction_h, ffi.Int32)>>(
+      'http_transaction_request_set_version');
+  late final _http_transaction_request_set_version =
+      _http_transaction_request_set_versionPtr
+          .asFunction<int Function(http_transaction_h, int)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Gets the HTTP version from request header.
+  /// @details Gets the HTTP version.
+  /// @since_tizen 3.0
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[out] version The HTTP version
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_request_get_version(
+    http_transaction_h http_transaction,
+    ffi.Pointer<ffi.Int32> version,
+  ) {
+    return _http_transaction_request_get_version(
+      http_transaction,
+      version,
+    );
+  }
+
+  late final _http_transaction_request_get_versionPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(http_transaction_h,
+              ffi.Pointer<ffi.Int32>)>>('http_transaction_request_get_version');
+  late final _http_transaction_request_get_version =
+      _http_transaction_request_get_versionPtr.asFunction<
+          int Function(http_transaction_h, ffi.Pointer<ffi.Int32>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Sets a URI of the request header.
+  /// @details Sets a URI of the request header.
+  /// @since_tizen 3.0
+  /// @remarks It should be used before http_transaction_submit().
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[in] host_uri The URI to use in the request
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_request_set_uri(
+    http_transaction_h http_transaction,
+    ffi.Pointer<ffi.Char> host_uri,
+  ) {
+    return _http_transaction_request_set_uri(
+      http_transaction,
+      host_uri,
+    );
+  }
+
+  late final _http_transaction_request_set_uriPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(http_transaction_h,
+              ffi.Pointer<ffi.Char>)>>('http_transaction_request_set_uri');
+  late final _http_transaction_request_set_uri =
+      _http_transaction_request_set_uriPtr.asFunction<
+          int Function(http_transaction_h, ffi.Pointer<ffi.Char>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Gets the URI.
+  /// @since_tizen 3.0
+  /// @remarks The @a host_uri should be freed using free().
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[out] host_uri The host URI
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_request_get_uri(
+    http_transaction_h http_transaction,
+    ffi.Pointer<ffi.Pointer<ffi.Char>> host_uri,
+  ) {
+    return _http_transaction_request_get_uri(
+      http_transaction,
+      host_uri,
+    );
+  }
+
+  late final _http_transaction_request_get_uriPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Int Function(
+                  http_transaction_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>>(
+      'http_transaction_request_get_uri');
+  late final _http_transaction_request_get_uri =
+      _http_transaction_request_get_uriPtr.asFunction<
+          int Function(
+              http_transaction_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Sets the Accept-Encoding header field of HTTP Request.
+  /// @details The Accept-Encoding header enables automatic decompression of HTTP downloads.
+  /// @since_tizen 3.0
+  /// @remarks If empty string is set, an Accept-Encoding header contains all supported built-in compressions.
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[in] encoding The encoding algorithms (e.g. gzip, deflate)
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_request_set_accept_encoding(
+    http_transaction_h http_transaction,
+    ffi.Pointer<ffi.Char> encoding,
+  ) {
+    return _http_transaction_request_set_accept_encoding(
+      http_transaction,
+      encoding,
+    );
+  }
+
+  late final _http_transaction_request_set_accept_encodingPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Int Function(http_transaction_h, ffi.Pointer<ffi.Char>)>>(
+      'http_transaction_request_set_accept_encoding');
+  late final _http_transaction_request_set_accept_encoding =
+      _http_transaction_request_set_accept_encodingPtr.asFunction<
+          int Function(http_transaction_h, ffi.Pointer<ffi.Char>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Gets the Accept-Encoding header field of HTTP Request.
+  /// @since_tizen 3.0
+  /// @remarks The @a encoding should be freed using free().
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[out] encoding The encoding algorithms
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_request_get_accept_encoding(
+    http_transaction_h http_transaction,
+    ffi.Pointer<ffi.Pointer<ffi.Char>> encoding,
+  ) {
+    return _http_transaction_request_get_accept_encoding(
+      http_transaction,
+      encoding,
+    );
+  }
+
+  late final _http_transaction_request_get_accept_encodingPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Int Function(
+                  http_transaction_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>>(
+      'http_transaction_request_get_accept_encoding');
+  late final _http_transaction_request_get_accept_encoding =
+      _http_transaction_request_get_accept_encodingPtr.asFunction<
+          int Function(
+              http_transaction_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Sets a cookie in the HTTP request.
+  /// @since_tizen 3.0
+  /// @remarks The format of string should be NME=CONTENTS (e.g. "name1=hello; name2=tizen;")
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[in] cookie The cookie
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_request_set_cookie(
+    http_transaction_h http_transaction,
+    ffi.Pointer<ffi.Char> cookie,
+  ) {
+    return _http_transaction_request_set_cookie(
+      http_transaction,
+      cookie,
+    );
+  }
+
+  late final _http_transaction_request_set_cookiePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(http_transaction_h,
+              ffi.Pointer<ffi.Char>)>>('http_transaction_request_set_cookie');
+  late final _http_transaction_request_set_cookie =
+      _http_transaction_request_set_cookiePtr.asFunction<
+          int Function(http_transaction_h, ffi.Pointer<ffi.Char>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Gets a cookie in the HTTP request.
+  /// @since_tizen 3.0
+  /// @remarks The @a cookie should be freed using free().
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[out] cookie The cookie
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_request_get_cookie(
+    http_transaction_h http_transaction,
+    ffi.Pointer<ffi.Pointer<ffi.Char>> cookie,
+  ) {
+    return _http_transaction_request_get_cookie(
+      http_transaction,
+      cookie,
+    );
+  }
+
+  late final _http_transaction_request_get_cookiePtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Int Function(
+                  http_transaction_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>>(
+      'http_transaction_request_get_cookie');
+  late final _http_transaction_request_get_cookie =
+      _http_transaction_request_get_cookiePtr.asFunction<
+          int Function(
+              http_transaction_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Writes the request message body.
+  /// @details This function writes the request message body in the internal queue. \n
+  /// The written queue for request body is uploaded after invoking http_transaction_submit().
+  /// @since_tizen 3.0
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[in] body The message body data
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_request_write_body(
+    http_transaction_h http_transaction,
+    ffi.Pointer<ffi.Char> body,
+  ) {
+    return _http_transaction_request_write_body(
+      http_transaction,
+      body,
+    );
+  }
+
+  late final _http_transaction_request_write_bodyPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(http_transaction_h,
+              ffi.Pointer<ffi.Char>)>>('http_transaction_request_write_body');
+  late final _http_transaction_request_write_body =
+      _http_transaction_request_write_bodyPtr.asFunction<
+          int Function(http_transaction_h, ffi.Pointer<ffi.Char>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Sets the file path for uploading a file.
+  /// @since_tizen 3.0
+  /// @remarks It is used with #HTTP_METHOD_PUT. \n
+  /// %http://tizen.org/privilege/mediastorage is needed if input or output path are relevant to media storage. \n
+  /// %http://tizen.org/privilege/externalstorage is needed if input or output path are relevant to external storage.
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[in] file_path The path for file
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE  Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION  Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED  Not Supported
+  /// @retval #HTTP_ERROR_PERMISSION_DENIED Permission denied
+  int http_transaction_request_set_upload_file(
+    http_transaction_h http_transaction,
+    ffi.Pointer<ffi.Char> file_path,
+  ) {
+    return _http_transaction_request_set_upload_file(
+      http_transaction,
+      file_path,
+    );
+  }
+
+  late final _http_transaction_request_set_upload_filePtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Int Function(http_transaction_h, ffi.Pointer<ffi.Char>)>>(
+      'http_transaction_request_set_upload_file');
+  late final _http_transaction_request_set_upload_file =
+      _http_transaction_request_set_upload_filePtr.asFunction<
+          int Function(http_transaction_h, ffi.Pointer<ffi.Char>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Gets the HTTP status code from HTTP Response.
+  /// @since_tizen 3.0
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[out] status_code The HTTP status code
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_response_get_status_code(
+    http_transaction_h http_transaction,
+    ffi.Pointer<ffi.Int32> status_code,
+  ) {
+    return _http_transaction_response_get_status_code(
+      http_transaction,
+      status_code,
+    );
+  }
+
+  late final _http_transaction_response_get_status_codePtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Int Function(http_transaction_h, ffi.Pointer<ffi.Int32>)>>(
+      'http_transaction_response_get_status_code');
+  late final _http_transaction_response_get_status_code =
+      _http_transaction_response_get_status_codePtr.asFunction<
+          int Function(http_transaction_h, ffi.Pointer<ffi.Int32>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Gets the HTTP status text from HTTP Response.
+  /// @since_tizen 3.0
+  /// @remarks The @a status_text should be freed using free().
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[out] status_text The HTTP status text
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_response_get_status_text(
+    http_transaction_h http_transaction,
+    ffi.Pointer<ffi.Pointer<ffi.Char>> status_text,
+  ) {
+    return _http_transaction_response_get_status_text(
+      http_transaction,
+      status_text,
+    );
+  }
+
+  late final _http_transaction_response_get_status_textPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Int Function(
+                  http_transaction_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>>(
+      'http_transaction_response_get_status_text');
+  late final _http_transaction_response_get_status_text =
+      _http_transaction_response_get_status_textPtr.asFunction<
+          int Function(
+              http_transaction_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Gets the HTTP version from HTTP Response.
+  /// @since_tizen 3.0
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[out] version The HTTP version
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_response_get_version(
+    http_transaction_h http_transaction,
+    ffi.Pointer<ffi.Int32> version,
+  ) {
+    return _http_transaction_response_get_version(
+      http_transaction,
+      version,
+    );
+  }
+
+  late final _http_transaction_response_get_versionPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Int Function(http_transaction_h, ffi.Pointer<ffi.Int32>)>>(
+      'http_transaction_response_get_version');
+  late final _http_transaction_response_get_version =
+      _http_transaction_response_get_versionPtr.asFunction<
+          int Function(http_transaction_h, ffi.Pointer<ffi.Int32>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Opens HTTP transaction with authentication information.
+  /// @since_tizen 3.0
+  /// @remarks The @a http_auth_transaction should be released using http_transaction_destroy().
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[out] http_auth_transaction The HTTP transaction handle
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_OUT_OF_MEMORY Out of memory
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_open_authentication(
+    http_transaction_h http_transaction,
+    ffi.Pointer<http_transaction_h> http_auth_transaction,
+  ) {
+    return _http_transaction_open_authentication(
+      http_transaction,
+      http_auth_transaction,
+    );
+  }
+
+  late final _http_transaction_open_authenticationPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Int Function(
+                  http_transaction_h, ffi.Pointer<http_transaction_h>)>>(
+      'http_transaction_open_authentication');
+  late final _http_transaction_open_authentication =
+      _http_transaction_open_authenticationPtr.asFunction<
+          int Function(http_transaction_h, ffi.Pointer<http_transaction_h>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Sets an HTTP credentials.
+  /// @details Sets an HTTP authentication scheme such as username and password.
+  /// @since_tizen 3.0
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[in] user_name The HTTP user name
+  /// @param[in] password The HTTP password
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_set_credentials(
+    http_transaction_h http_transaction,
+    ffi.Pointer<ffi.Char> user_name,
+    ffi.Pointer<ffi.Char> password,
+  ) {
+    return _http_transaction_set_credentials(
+      http_transaction,
+      user_name,
+      password,
+    );
+  }
+
+  late final _http_transaction_set_credentialsPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(http_transaction_h, ffi.Pointer<ffi.Char>,
+              ffi.Pointer<ffi.Char>)>>('http_transaction_set_credentials');
+  late final _http_transaction_set_credentials =
+      _http_transaction_set_credentialsPtr.asFunction<
+          int Function(http_transaction_h, ffi.Pointer<ffi.Char>,
+              ffi.Pointer<ffi.Char>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Gets the username & password for the HTTP credential.
+  /// @since_tizen 3.0
+  /// @remarks The @a user_name & @a password should be freed using free().
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[out] user_name The HTTP credential user name
+  /// @param[out] password The HTTP credential password
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_OUT_OF_MEMORY Out of memory
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_get_credentials(
+    http_transaction_h http_transaction,
+    ffi.Pointer<ffi.Pointer<ffi.Char>> user_name,
+    ffi.Pointer<ffi.Pointer<ffi.Char>> password,
+  ) {
+    return _http_transaction_get_credentials(
+      http_transaction,
+      user_name,
+      password,
+    );
+  }
+
+  late final _http_transaction_get_credentialsPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Int Function(
+                  http_transaction_h,
+                  ffi.Pointer<ffi.Pointer<ffi.Char>>,
+                  ffi.Pointer<ffi.Pointer<ffi.Char>>)>>(
+      'http_transaction_get_credentials');
+  late final _http_transaction_get_credentials =
+      _http_transaction_get_credentialsPtr.asFunction<
+          int Function(http_transaction_h, ffi.Pointer<ffi.Pointer<ffi.Char>>,
+              ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Sets an HTTP authentication scheme.
+  /// @details Set an HTTP authentication scheme such as BASIC, MD5, NTLM and etc.
+  /// @since_tizen 3.0
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[in] auth_scheme The HTTP authentication scheme
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_set_http_auth_scheme(
+    http_transaction_h http_transaction,
+    int auth_scheme,
+  ) {
+    return _http_transaction_set_http_auth_scheme(
+      http_transaction,
+      auth_scheme,
+    );
+  }
+
+  late final _http_transaction_set_http_auth_schemePtr = _lookup<
+          ffi.NativeFunction<ffi.Int Function(http_transaction_h, ffi.Int32)>>(
+      'http_transaction_set_http_auth_scheme');
+  late final _http_transaction_set_http_auth_scheme =
+      _http_transaction_set_http_auth_schemePtr
+          .asFunction<int Function(http_transaction_h, int)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Gets the HTTP authentication scheme.
+  /// @since_tizen 3.0
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[out] auth_scheme The HTTP auth scheme value
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_get_http_auth_scheme(
+    http_transaction_h http_transaction,
+    ffi.Pointer<ffi.Int32> auth_scheme,
+  ) {
+    return _http_transaction_get_http_auth_scheme(
+      http_transaction,
+      auth_scheme,
+    );
+  }
+
+  late final _http_transaction_get_http_auth_schemePtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Int Function(http_transaction_h, ffi.Pointer<ffi.Int32>)>>(
+      'http_transaction_get_http_auth_scheme');
+  late final _http_transaction_get_http_auth_scheme =
+      _http_transaction_get_http_auth_schemePtr.asFunction<
+          int Function(http_transaction_h, ffi.Pointer<ffi.Int32>)>();
+
+  /// @deprecated Deprecated since 9.0
+  /// @brief Gets the HTTP authentication realm.
+  /// @since_tizen 3.0
+  /// @remarks The @a realm should be freed using free().
+  /// @param[in] http_transaction The HTTP transaction handle
+  /// @param[out] realm The HTTP authentication realm value
+  /// @return @c 0 on success,
+  /// otherwise negative error value
+  /// @retval #HTTP_ERROR_NONE Successful
+  /// @retval #HTTP_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #HTTP_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #HTTP_ERROR_OUT_OF_MEMORY Out of memory
+  /// @retval #HTTP_ERROR_NOT_SUPPORTED Not Supported
+  int http_transaction_get_realm(
+    http_transaction_h http_transaction,
+    ffi.Pointer<ffi.Pointer<ffi.Char>> realm,
+  ) {
+    return _http_transaction_get_realm(
+      http_transaction,
+      realm,
+    );
+  }
+
+  late final _http_transaction_get_realmPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Int Function(
+                  http_transaction_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>>(
+      'http_transaction_get_realm');
+  late final _http_transaction_get_realm =
+      _http_transaction_get_realmPtr.asFunction<
+          int Function(
+              http_transaction_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
   /// @brief The default factory key.
   /// @details The key is 0xff, 0xff, 0xff, 0xff, 0xff, 0xff
@@ -214236,6 +216129,194 @@ typedef bundle_keyval_t = keyval_t;
 typedef bundle_raw = ffi.UnsignedChar;
 typedef Dartbundle_raw = int;
 
+/// @brief Enumerations for Client authentication scheme, used to sign client id and client secret accordingly.
+/// @since_tizen 2.4
+/// @remarks Facebook and Google does not support HTTP Basic Authentication, instead they require client credentials to be sent via request body.
+/// Default is #OAUTH2_CLIENT_AUTHENTICATION_TYPE_BASIC (<a href="http://tools.ietf.org/html/rfc2617#section-2">rfc2617#section-2</a>)
+///
+/// @see oauth2_request_set_client_authentication_type()
+abstract class oauth2_client_authentication_type_e {
+  /// < HTTP Basic Authentication for client authentication.
+  static const int OAUTH2_CLIENT_AUTHENTICATION_TYPE_BASIC = 0;
+
+  /// < HTTP Digest Authentication for client authentication.
+  static const int OAUTH2_CLIENT_AUTHENTICATION_TYPE_DIGEST = 1;
+
+  /// < Client credentials are sent via request body
+  static const int OAUTH2_CLIENT_AUTHENTICATION_TYPE_REQUEST_BODY = 2;
+}
+
+/// @brief Enumerations to set grant_type.
+/// @since_tizen 2.4
+///
+/// @see oauth2_request_set_grant_type()
+abstract class oauth2_grant_type_e {
+  /// < Access Token Request for Authorization Code Grant type.
+  static const int OAUTH2_GRANT_TYPE_AUTH_CODE = 0;
+
+  /// < Access Token Request for Resource Owner Password Credentials Grant type.
+  static const int OAUTH2_GRANT_TYPE_PASSWORD = 1;
+
+  /// < Access Token Request for Client Credentials Grant type.
+  static const int OAUTH2_GRANT_TYPE_CLIENT_CREDENTIALS = 2;
+
+  /// < Refresh Token Request.
+  static const int OAUTH2_GRANT_TYPE_REFRESH = 3;
+}
+
+/// @brief Enumerations to set response_type.
+/// @since_tizen 2.4
+///
+/// @see oauth2_request_set_response_type()
+abstract class oauth2_response_type_e {
+  /// < Requesting an authorization code as response type.
+  static const int OAUTH2_RESPONSE_TYPE_CODE = 0;
+
+  /// < Requesting an access token(implicit grant) as response type.
+  static const int OAUTH2_RESPONSE_TYPE_TOKEN = 1;
+}
+
+/// @brief Enumerations of error codes for oauth2 APIs.
+/// @since_tizen 2.4
+abstract class oauth2_error_e {
+  /// < Successful
+  static const int OAUTH2_ERROR_NONE = 0;
+
+  /// < Out of memory
+  static const int OAUTH2_ERROR_OUT_OF_MEMORY = -12;
+
+  /// < Invalid parameter
+  static const int OAUTH2_ERROR_INVALID_PARAMETER = -22;
+
+  /// < Operation already in progress
+  static const int OAUTH2_ERROR_ALREADY_IN_PROGRESS = -114;
+
+  /// < Operation not supported
+  static const int OAUTH2_ERROR_NOT_SUPPORTED = -1073741822;
+
+  /// < Permission denied
+  static const int OAUTH2_ERROR_PERMISSION_DENIED = -13;
+
+  /// < Response parse failed
+  static const int OAUTH2_ERROR_PARSE_FAILED = -16842751;
+
+  /// < Network error
+  static const int OAUTH2_ERROR_NETWORK_ERROR = -16842750;
+
+  /// < Server error
+  static const int OAUTH2_ERROR_SERVER = -16842749;
+
+  /// < User cancelled the operation
+  static const int OAUTH2_ERROR_USER_CANCELLED = -16842748;
+
+  /// < Value not found
+  static const int OAUTH2_ERROR_VALUE_NOT_FOUND = -16842747;
+
+  /// < Unknown error
+  static const int OAUTH2_ERROR_UNKNOWN = -1073741824;
+}
+
+final class oauth2_request_s extends ffi.Opaque {}
+
+/// @brief The structure type for OAuth 2.0 Request handle.
+/// @since_tizen 2.4
+typedef oauth2_request_h = ffi.Pointer<oauth2_request_s>;
+
+final class oauth2_error_s extends ffi.Opaque {}
+
+/// @brief The structure type for OAuth 2.0 Error handle.
+/// @since_tizen 2.4
+typedef oauth2_error_h = ffi.Pointer<oauth2_error_s>;
+
+final class oauth2_response_s extends ffi.Opaque {}
+
+/// @brief The structure type for OAuth 2.0 Response handle.
+/// @since_tizen 2.4
+typedef oauth2_response_h = ffi.Pointer<oauth2_response_s>;
+
+final class oauth2_manager_s extends ffi.Opaque {}
+
+/// @brief The structure type for OAuth 2.0 Manager handle.
+/// @since_tizen 2.4
+typedef oauth2_manager_h = ffi.Pointer<oauth2_manager_s>;
+
+/// @brief Called when the oauth2_manager_request_token() response comes.
+/// @since_tizen 2.4
+/// @remarks The @a response must be released using oauth2_response_destroy().
+///
+/// @param[in] response The response
+/// @param[in] user_data The user data passed from the callback function
+///
+/// @pre oauth2_manager_request_token() must be called to get this callback invoked.
+/// @see oauth2_manager_request_token()
+typedef oauth2_token_cb
+    = ffi.Pointer<ffi.NativeFunction<oauth2_token_cbFunction>>;
+typedef oauth2_token_cbFunction = ffi.Void Function(
+    oauth2_response_h response, ffi.Pointer<ffi.Void> user_data);
+typedef Dartoauth2_token_cbFunction = void Function(
+    oauth2_response_h response, ffi.Pointer<ffi.Void> user_data);
+
+/// @brief Called when the oauth2_manager_request_token_auth_url() response comes.
+/// @since_tizen 9.0
+/// @remarks The @a response must be released using oauth2_response_destroy().
+///
+/// @param[in] response The response
+/// @param[in] user_data The user data passed from the callback function
+///
+/// @pre oauth2_manager_request_token_auth_url() must be called to get this callback invoked.
+/// @see oauth2_manager_request_token_auth_url()
+typedef oauth2_token_auth_url_cb
+    = ffi.Pointer<ffi.NativeFunction<oauth2_token_auth_url_cbFunction>>;
+typedef oauth2_token_auth_url_cbFunction = ffi.Void Function(
+    oauth2_response_h response, ffi.Pointer<ffi.Void> user_data);
+typedef Dartoauth2_token_auth_url_cbFunction = void Function(
+    oauth2_response_h response, ffi.Pointer<ffi.Void> user_data);
+
+/// @brief Called when oauth2_manager_request_authorization_grant() response comes.
+/// @since_tizen 2.4
+///
+/// @param[in] response The response. The @a response must be released using oauth2_response_destroy().
+/// @param[in] user_data The user data passed from the callback function.
+///
+/// @pre oauth2_manager_request_authorization_grant() must be called to get this callback invoked.
+/// @see oauth2_manager_request_authorization_grant()
+typedef oauth2_auth_grant_cb
+    = ffi.Pointer<ffi.NativeFunction<oauth2_auth_grant_cbFunction>>;
+typedef oauth2_auth_grant_cbFunction = ffi.Void Function(
+    oauth2_response_h response, ffi.Pointer<ffi.Void> user_data);
+typedef Dartoauth2_auth_grant_cbFunction = void Function(
+    oauth2_response_h response, ffi.Pointer<ffi.Void> user_data);
+
+/// @brief Called when oauth2_manager_request_access_token() response comes.
+/// @since_tizen 2.4
+///
+/// @param[in] response The response. The response must be released using oauth2_response_destroy().
+/// @param[in] user_data The user data passed from the callback function.
+///
+/// @pre oauth2_manager_request_access_token() must be called to get this callback invoked.
+/// @see oauth2_manager_request_access_token()
+typedef oauth2_access_token_cb
+    = ffi.Pointer<ffi.NativeFunction<oauth2_access_token_cbFunction>>;
+typedef oauth2_access_token_cbFunction = ffi.Void Function(
+    oauth2_response_h response, ffi.Pointer<ffi.Void> user_data);
+typedef Dartoauth2_access_token_cbFunction = void Function(
+    oauth2_response_h response, ffi.Pointer<ffi.Void> user_data);
+
+/// @brief Called when oauth2_manager_refresh_access_token() response comes.
+/// @since_tizen 2.4
+///
+/// @param[in] response The response. The @a response must be released using oauth2_response_destroy().
+/// @param[in] user_data The user data passed from the callback function.
+///
+/// @pre oauth2_manager_refresh_access_token() must be called to get this callback invoked.
+/// @see oauth2_manager_refresh_access_token().
+typedef oauth2_refresh_token_cb
+    = ffi.Pointer<ffi.NativeFunction<oauth2_refresh_token_cbFunction>>;
+typedef oauth2_refresh_token_cbFunction = ffi.Void Function(
+    oauth2_response_h response, ffi.Pointer<ffi.Void> user_data);
+typedef Dartoauth2_refresh_token_cbFunction = void Function(
+    oauth2_response_h response, ffi.Pointer<ffi.Void> user_data);
+
 /// @brief Callback function for Sync Adapter's start sync request.
 ///
 /// @since_tizen 2.4
@@ -236151,399 +238232,6 @@ typedef dnssd_resolved_cbFunction = ffi.Void Function(ffi.Int32 result,
 typedef Dartdnssd_resolved_cbFunction = void Function(int result,
     Dartdnssd_service_h remote_service, ffi.Pointer<ffi.Void> user_data);
 
-/// @deprecated Deprecated since 9.0
-/// @brief Enumeration for the HTTP session.
-/// @since_tizen 3.0
-abstract class http_session_mode_e {
-  /// < The Normal Mode
-  static const int HTTP_SESSION_MODE_NORMAL = 0;
-
-  /// < The Pipelining mode
-  static const int HTTP_SESSION_MODE_PIPELINING = 1;
-}
-
-/// @deprecated Deprecated since 9.0
-/// @brief Enumeration for the HTTP method.
-/// @since_tizen 3.0
-abstract class http_method_e {
-  /// < The HTTP GET Method
-  static const int HTTP_METHOD_GET = 64;
-
-  /// < The HTTP OPTIONS Method
-  static const int HTTP_METHOD_OPTIONS = 65;
-
-  /// < The HTTP HEAD Method
-  static const int HTTP_METHOD_HEAD = 66;
-
-  /// < The HTTP DELETE Method
-  static const int HTTP_METHOD_DELETE = 67;
-
-  /// < The HTTP TRACE Method
-  static const int HTTP_METHOD_TRACE = 68;
-
-  /// < The HTTP POST Method
-  static const int HTTP_METHOD_POST = 96;
-
-  /// < The HTTP PUT Method
-  static const int HTTP_METHOD_PUT = 97;
-
-  /// < The HTTP CONNECT Method
-  static const int HTTP_METHOD_CONNECT = 112;
-}
-
-/// @deprecated Deprecated since 9.0
-/// @brief Enumeration for the HTTP version.
-/// @since_tizen 3.0
-abstract class http_version_e {
-  /// < HTTP version 1.0
-  static const int HTTP_VERSION_1_0 = 0;
-
-  /// < HTTP version 1.1
-  static const int HTTP_VERSION_1_1 = 1;
-}
-
-/// @deprecated Deprecated since 9.0
-/// @brief Enumeration for transfer pause state.
-/// @since_tizen 3.0
-abstract class http_pause_type_e {
-  /// < Pause receiving data
-  static const int HTTP_PAUSE_RECV = 1;
-
-  /// < Pause sending data
-  static const int HTTP_PAUSE_SEND = 4;
-
-  /// < Pause both directions
-  static const int HTTP_PAUSE_ALL = 5;
-}
-
-/// @deprecated Deprecated since 9.0
-/// @brief Enumeration for the HTTP error code.
-/// @since_tizen 3.0
-abstract class http_error_code_e {
-  /// < Successful
-  static const int HTTP_ERROR_NONE = 0;
-
-  /// < Out of memory
-  static const int HTTP_ERROR_OUT_OF_MEMORY = -12;
-
-  /// < Permission denied
-  static const int HTTP_ERROR_PERMISSION_DENIED = -13;
-
-  /// < Invalid parameter
-  static const int HTTP_ERROR_INVALID_PARAMETER = -22;
-
-  /// < Invalid operation
-  static const int HTTP_ERROR_INVALID_OPERATION = -38;
-
-  /// < Operation failed
-  static const int HTTP_ERROR_OPERATION_FAILED = -30212095;
-
-  /// < Couldn't resolve host
-  static const int HTTP_ERROR_COULDNT_RESOLVE_HOST = -30212090;
-
-  /// < Couldn't Connect to host
-  static const int HTTP_ERROR_COULDNT_CONNECT = -30212089;
-
-  /// < Timeout
-  static const int HTTP_ERROR_OPERATION_TIMEDOUT = -30212056;
-
-  /// < SSL Error
-  static const int HTTP_ERROR_SSL_CONNECT_ERROR = -30212043;
-
-  /// < Operation Canceled
-  static const int HTTP_ERROR_CANCELED = -125;
-
-  /// < API is not supported
-  static const int HTTP_ERROR_NOT_SUPPORTED = -1073741822;
-}
-
-/// @deprecated Deprecated since 9.0
-/// @brief Enumeration for the HTTP status code.
-/// @since_tizen 3.0
-abstract class http_status_code_e {
-  /// < The undefined status
-  static const int HTTP_STATUS_UNDEFINED = 0;
-
-  /// < The status code: 100 Continue
-  static const int HTTP_STATUS_CONTINUE = 100;
-
-  /// < The status code: 101 Switching Protocols
-  static const int HTTP_STATUS_SWITCHING_PROTOCOLS = 101;
-
-  /// < The status code: 200 OK
-  static const int HTTP_STATUS_OK = 200;
-
-  /// < The status code: 201 Created
-  static const int HTTP_STATUS_CREATED = 201;
-
-  /// < The status code: 202 Accepted
-  static const int HTTP_STATUS_ACCEPTED = 202;
-
-  /// < The status code: 203 Non-Authoritative Information
-  static const int HTTP_STATUS_NON_AUTHORITATIVE_INFORMATION = 203;
-
-  /// < The status code: 204 No %Content
-  static const int HTTP_STATUS_NO_CONTENT = 204;
-
-  /// < The status code: 205 Reset %Content
-  static const int HTTP_STATUS_RESET_CONTENT = 205;
-
-  /// < The status code: 206 Partial %Content
-  static const int HTTP_STATUS_PARTIAL_CONTENT = 206;
-
-  /// < The status code: 300 Multiple Choices
-  static const int HTTP_STATUS_MULTIPLE_CHOICE = 300;
-
-  /// < The status code: 301 Moved Permanently
-  static const int HTTP_STATUS_MOVED_PERMANENTLY = 301;
-
-  /// < The status code: 302 Found
-  static const int HTTP_STATUS_MOVED_TEMPORARILY = 302;
-
-  /// < The status code: 303 See Other
-  static const int HTTP_STATUS_SEE_OTHER = 303;
-
-  /// < The status code: 304 Not Modified
-  static const int HTTP_STATUS_NOT_MODIFIED = 304;
-
-  /// < The status code: 305 Use Proxy
-  static const int HTTP_STATUS_USE_PROXY = 305;
-
-  /// < The status code: 400 Bad Request
-  static const int HTTP_STATUS_BAD_REQUEST = 400;
-
-  /// < The status code: 401 Unauthorized
-  static const int HTTP_STATUS_UNAUTHORIZED = 401;
-
-  /// < The status code: 402 Payment Required
-  static const int HTTP_STATUS_PAYMENT_REQUIRED = 402;
-
-  /// < The status code: 403 Forbidden
-  static const int HTTP_STATUS_FORBIDDEN = 403;
-
-  /// < The status code: 404 Not Found
-  static const int HTTP_STATUS_NOT_FOUND = 404;
-
-  /// < The status code: 405 Method Not Allowed
-  static const int HTTP_STATUS_METHOD_NOT_ALLOWED = 405;
-
-  /// < The status code: 406 Not Acceptable
-  static const int HTTP_STATUS_NOT_ACCEPTABLE = 406;
-
-  /// < The status code: 407 Proxy Authentication Required
-  static const int HTTP_STATUS_PROXY_AUTHENTICATION_REQUIRED = 407;
-
-  /// < The status code: 408 Request Timeout (not used)
-  static const int HTTP_STATUS_REQUEST_TIME_OUT = 408;
-
-  /// < The status code: 409 Conflict
-  static const int HTTP_STATUS_CONFLICT = 409;
-
-  /// < The status code: 410 Gone
-  static const int HTTP_STATUS_GONE = 410;
-
-  /// < The status code: 411 Length Required
-  static const int HTTP_STATUS_LENGTH_REQUIRED = 411;
-
-  /// < The status code: 412 Precondition Failed
-  static const int HTTP_STATUS_PRECONDITION_FAILED = 412;
-
-  /// < The status code: 413 Request Entity Too Large (not used)
-  static const int HTTP_STATUS_REQUEST_ENTITY_TOO_LARGE = 413;
-
-  /// < The status code: 414 Request-URI Too Long (not used)
-  static const int HTTP_STATUS_REQUEST_URI_TOO_LARGE = 414;
-
-  /// < The status code: 415 Unsupported %Media Type
-  static const int HTTP_STATUS_UNSUPPORTED_MEDIA_TYPE = 415;
-
-  /// < The status code: 500 Internal Server Error
-  static const int HTTP_STATUS_INTERNAL_SERVER_ERROR = 500;
-
-  /// < The status code: 501 Not Implemented
-  static const int HTTP_STATUS_NOT_IMPLEMENTED = 501;
-
-  /// < The status code: 502 Bad Gateway
-  static const int HTTP_STATUS_BAD_GATEWAY = 502;
-
-  /// < The status code: 503 Service Unavailable
-  static const int HTTP_STATUS_SERVICE_UNAVAILABLE = 503;
-
-  /// < The status code: 504 Gateway Timeout
-  static const int HTTP_STATUS_GATEWAY_TIME_OUT = 504;
-
-  /// < The status code: 505 HTTP Version Not Supported
-  static const int HTTP_STATUS_HTTP_VERSION_NOT_SUPPORTED = 505;
-}
-
-/// @deprecated Deprecated since 9.0
-/// @brief Enumeration for the HTTP authentication schemes.
-/// @since_tizen 3.0
-abstract class http_auth_scheme_e {
-  /// < No authentication type
-  static const int HTTP_AUTH_NONE = 0;
-
-  /// < The authentication type is Proxy Basic Authentication
-  static const int HTTP_AUTH_PROXY_BASIC = 1;
-
-  /// < The authentication type is Proxy Digest Authentication
-  static const int HTTP_AUTH_PROXY_MD5 = 2;
-
-  /// < The authentication Type is HTTP Basic Authentication
-  static const int HTTP_AUTH_WWW_BASIC = 3;
-
-  /// < The authentication type is HTTP Digest Authentication
-  static const int HTTP_AUTH_WWW_MD5 = 4;
-
-  /// < The authentication type is Proxy NTLM Authentication
-  static const int HTTP_AUTH_PROXY_NTLM = 5;
-
-  /// < The authentication type is NTLM Authentication
-  static const int HTTP_AUTH_WWW_NTLM = 7;
-
-  /// < The authentication type is Negotiate Authentication
-  static const int HTTP_AUTH_WWW_NEGOTIATE = 8;
-}
-
-/// @deprecated Deprecated since 9.0
-/// @brief The HTTP Session handle.
-/// @since_tizen 3.0
-typedef http_session_h = ffi.Pointer<ffi.Void>;
-
-/// @deprecated Deprecated since 9.0
-/// @brief The HTTP Transaction handle.
-/// @since_tizen 3.0
-typedef http_transaction_h = ffi.Pointer<ffi.Void>;
-
-/// @deprecated Deprecated since 9.0
-/// @brief Called when the HTTP header is received.
-/// @since_tizen 3.0
-/// @remarks The @a header should be released using free(). \n
-/// The @a header is available until @a http_transaction is released.
-/// @param[in] http_transaction The HTTP transaction handle
-/// @param[in] header The header information of HTTP Transaction
-/// @param[in] header_len The length of the HTTP Transaction header
-/// @param[in] user_data The user data
-/// @see http_transaction_set_received_header_cb()
-typedef http_transaction_header_cb
-    = ffi.Pointer<ffi.NativeFunction<http_transaction_header_cbFunction>>;
-typedef http_transaction_header_cbFunction = ffi.Void Function(
-    http_transaction_h http_transaction,
-    ffi.Pointer<ffi.Char> header,
-    ffi.Size header_len,
-    ffi.Pointer<ffi.Void> user_data);
-typedef Darthttp_transaction_header_cbFunction = void Function(
-    http_transaction_h http_transaction,
-    ffi.Pointer<ffi.Char> header,
-    int header_len,
-    ffi.Pointer<ffi.Void> user_data);
-
-/// @deprecated Deprecated since 9.0
-/// @brief Called when the HTTP response is received.
-/// @since_tizen 3.0
-/// @param[in] http_transaction The HTTP transaction handle
-/// @param[in] body Response information of HTTP Transaction
-/// @param[in] size Size in bytes of each element to be written
-/// @param[in] count Number of elements, each one with a size of size bytes
-/// @param[in] user_data The user data
-/// @see http_transaction_set_received_body_cb()
-typedef http_transaction_body_cb
-    = ffi.Pointer<ffi.NativeFunction<http_transaction_body_cbFunction>>;
-typedef http_transaction_body_cbFunction = ffi.Void Function(
-    http_transaction_h http_transaction,
-    ffi.Pointer<ffi.Char> body,
-    ffi.Size size,
-    ffi.Size count,
-    ffi.Pointer<ffi.Void> user_data);
-typedef Darthttp_transaction_body_cbFunction = void Function(
-    http_transaction_h http_transaction,
-    ffi.Pointer<ffi.Char> body,
-    int size,
-    int count,
-    ffi.Pointer<ffi.Void> user_data);
-
-/// @deprecated Deprecated since 9.0
-/// @brief Called when the HTTP ready to write event is received.
-/// @since_tizen 3.0
-/// @param[in] http_transaction The HTTP transaction handle
-/// @param[in] recommended_chunk_size Recommended chunk length(bytes) of the HTTP transaction
-/// @param[in] user_data The user data
-/// @see http_transaction_set_uploaded_cb()
-typedef http_transaction_write_cb
-    = ffi.Pointer<ffi.NativeFunction<http_transaction_write_cbFunction>>;
-typedef http_transaction_write_cbFunction = ffi.Void Function(
-    http_transaction_h http_transaction,
-    ffi.Int recommended_chunk_size,
-    ffi.Pointer<ffi.Void> user_data);
-typedef Darthttp_transaction_write_cbFunction = void Function(
-    http_transaction_h http_transaction,
-    int recommended_chunk_size,
-    ffi.Pointer<ffi.Void> user_data);
-
-/// @deprecated Deprecated since 9.0
-/// @brief Called when the HTTP transaction is completed.
-/// @since_tizen 3.0
-/// @param[in] http_transaction The HTTP transaction handle
-/// @param[in] user_data The user data
-/// @see http_transaction_set_completed_cb()
-typedef http_transaction_completed_cb
-    = ffi.Pointer<ffi.NativeFunction<http_transaction_completed_cbFunction>>;
-typedef http_transaction_completed_cbFunction = ffi.Void Function(
-    http_transaction_h http_transaction, ffi.Pointer<ffi.Void> user_data);
-typedef Darthttp_transaction_completed_cbFunction = void Function(
-    http_transaction_h http_transaction, ffi.Pointer<ffi.Void> user_data);
-
-/// @deprecated Deprecated since 9.0
-/// @brief Called when the HTTP transaction is aborted.
-/// @details Following error codes can be delivered. \n
-/// #HTTP_ERROR_OPERATION_FAILED, \n
-/// #HTTP_ERROR_COULDNT_RESOLVE_HOST, \n
-/// #HTTP_ERROR_COULDNT_CONNECT, \n
-/// #HTTP_ERROR_OPERATION_TIMEDOUT, \n
-/// #HTTP_ERROR_SSL_CONNECT_ERROR.
-/// @since_tizen 3.0
-/// @param[in] http_transaction The HTTP transaction handle
-/// @param[in] error The error code about aborted reason
-/// @param[in] user_data The user data
-/// @see http_transaction_set_aborted_cb()
-typedef http_transaction_aborted_cb
-    = ffi.Pointer<ffi.NativeFunction<http_transaction_aborted_cbFunction>>;
-typedef http_transaction_aborted_cbFunction = ffi.Void Function(
-    http_transaction_h http_transaction,
-    ffi.Int32 error,
-    ffi.Pointer<ffi.Void> user_data);
-typedef Darthttp_transaction_aborted_cbFunction = void Function(
-    http_transaction_h http_transaction,
-    int error,
-    ffi.Pointer<ffi.Void> user_data);
-
-/// @deprecated Deprecated since 9.0
-/// @brief Called to notify when the content body of the response message is being downloaded or uploaded.
-/// @since_tizen 3.0
-/// @param[in] http_transaction The HTTP transaction handle
-/// @param[in] download_total The total length of the data (in bytes) to download
-/// @param[in] download_now The current length of the downloaded data (in bytes)
-/// @param[in] upload_total The total length of the data (in bytes) to upload
-/// @param[in] upload_now The current length of the uploaded data (in bytes)
-/// @param[in] user_data The user data
-/// @see http_transaction_set_progress_cb()
-typedef http_transaction_progress_cb
-    = ffi.Pointer<ffi.NativeFunction<http_transaction_progress_cbFunction>>;
-typedef http_transaction_progress_cbFunction = ffi.Void Function(
-    http_transaction_h http_transaction,
-    ffi.Double download_total,
-    ffi.Double download_now,
-    ffi.Double upload_total,
-    ffi.Double upload_now,
-    ffi.Pointer<ffi.Void> user_data);
-typedef Darthttp_transaction_progress_cbFunction = void Function(
-    http_transaction_h http_transaction,
-    double download_total,
-    double download_now,
-    double upload_total,
-    double upload_now,
-    ffi.Pointer<ffi.Void> user_data);
-
 /// @brief Enumeration for Intelligent Network Monitoring (INM) error code.
 /// @since_tizen 5.0
 abstract class inm_error_e {
@@ -239426,6 +241114,399 @@ typedef connection_ipv6_address_cbFunction = ffi.Bool Function(
     ffi.Pointer<ffi.Char> ipv6_address, ffi.Pointer<ffi.Void> user_data);
 typedef Dartconnection_ipv6_address_cbFunction = bool Function(
     ffi.Pointer<ffi.Char> ipv6_address, ffi.Pointer<ffi.Void> user_data);
+
+/// @deprecated Deprecated since 9.0
+/// @brief Enumeration for the HTTP session.
+/// @since_tizen 3.0
+abstract class http_session_mode_e {
+  /// < The Normal Mode
+  static const int HTTP_SESSION_MODE_NORMAL = 0;
+
+  /// < The Pipelining mode
+  static const int HTTP_SESSION_MODE_PIPELINING = 1;
+}
+
+/// @deprecated Deprecated since 9.0
+/// @brief Enumeration for the HTTP method.
+/// @since_tizen 3.0
+abstract class http_method_e {
+  /// < The HTTP GET Method
+  static const int HTTP_METHOD_GET = 64;
+
+  /// < The HTTP OPTIONS Method
+  static const int HTTP_METHOD_OPTIONS = 65;
+
+  /// < The HTTP HEAD Method
+  static const int HTTP_METHOD_HEAD = 66;
+
+  /// < The HTTP DELETE Method
+  static const int HTTP_METHOD_DELETE = 67;
+
+  /// < The HTTP TRACE Method
+  static const int HTTP_METHOD_TRACE = 68;
+
+  /// < The HTTP POST Method
+  static const int HTTP_METHOD_POST = 96;
+
+  /// < The HTTP PUT Method
+  static const int HTTP_METHOD_PUT = 97;
+
+  /// < The HTTP CONNECT Method
+  static const int HTTP_METHOD_CONNECT = 112;
+}
+
+/// @deprecated Deprecated since 9.0
+/// @brief Enumeration for the HTTP version.
+/// @since_tizen 3.0
+abstract class http_version_e {
+  /// < HTTP version 1.0
+  static const int HTTP_VERSION_1_0 = 0;
+
+  /// < HTTP version 1.1
+  static const int HTTP_VERSION_1_1 = 1;
+}
+
+/// @deprecated Deprecated since 9.0
+/// @brief Enumeration for transfer pause state.
+/// @since_tizen 3.0
+abstract class http_pause_type_e {
+  /// < Pause receiving data
+  static const int HTTP_PAUSE_RECV = 1;
+
+  /// < Pause sending data
+  static const int HTTP_PAUSE_SEND = 4;
+
+  /// < Pause both directions
+  static const int HTTP_PAUSE_ALL = 5;
+}
+
+/// @deprecated Deprecated since 9.0
+/// @brief Enumeration for the HTTP error code.
+/// @since_tizen 3.0
+abstract class http_error_code_e {
+  /// < Successful
+  static const int HTTP_ERROR_NONE = 0;
+
+  /// < Out of memory
+  static const int HTTP_ERROR_OUT_OF_MEMORY = -12;
+
+  /// < Permission denied
+  static const int HTTP_ERROR_PERMISSION_DENIED = -13;
+
+  /// < Invalid parameter
+  static const int HTTP_ERROR_INVALID_PARAMETER = -22;
+
+  /// < Invalid operation
+  static const int HTTP_ERROR_INVALID_OPERATION = -38;
+
+  /// < Operation failed
+  static const int HTTP_ERROR_OPERATION_FAILED = -30212095;
+
+  /// < Couldn't resolve host
+  static const int HTTP_ERROR_COULDNT_RESOLVE_HOST = -30212090;
+
+  /// < Couldn't Connect to host
+  static const int HTTP_ERROR_COULDNT_CONNECT = -30212089;
+
+  /// < Timeout
+  static const int HTTP_ERROR_OPERATION_TIMEDOUT = -30212056;
+
+  /// < SSL Error
+  static const int HTTP_ERROR_SSL_CONNECT_ERROR = -30212043;
+
+  /// < Operation Canceled
+  static const int HTTP_ERROR_CANCELED = -125;
+
+  /// < API is not supported
+  static const int HTTP_ERROR_NOT_SUPPORTED = -1073741822;
+}
+
+/// @deprecated Deprecated since 9.0
+/// @brief Enumeration for the HTTP status code.
+/// @since_tizen 3.0
+abstract class http_status_code_e {
+  /// < The undefined status
+  static const int HTTP_STATUS_UNDEFINED = 0;
+
+  /// < The status code: 100 Continue
+  static const int HTTP_STATUS_CONTINUE = 100;
+
+  /// < The status code: 101 Switching Protocols
+  static const int HTTP_STATUS_SWITCHING_PROTOCOLS = 101;
+
+  /// < The status code: 200 OK
+  static const int HTTP_STATUS_OK = 200;
+
+  /// < The status code: 201 Created
+  static const int HTTP_STATUS_CREATED = 201;
+
+  /// < The status code: 202 Accepted
+  static const int HTTP_STATUS_ACCEPTED = 202;
+
+  /// < The status code: 203 Non-Authoritative Information
+  static const int HTTP_STATUS_NON_AUTHORITATIVE_INFORMATION = 203;
+
+  /// < The status code: 204 No %Content
+  static const int HTTP_STATUS_NO_CONTENT = 204;
+
+  /// < The status code: 205 Reset %Content
+  static const int HTTP_STATUS_RESET_CONTENT = 205;
+
+  /// < The status code: 206 Partial %Content
+  static const int HTTP_STATUS_PARTIAL_CONTENT = 206;
+
+  /// < The status code: 300 Multiple Choices
+  static const int HTTP_STATUS_MULTIPLE_CHOICE = 300;
+
+  /// < The status code: 301 Moved Permanently
+  static const int HTTP_STATUS_MOVED_PERMANENTLY = 301;
+
+  /// < The status code: 302 Found
+  static const int HTTP_STATUS_MOVED_TEMPORARILY = 302;
+
+  /// < The status code: 303 See Other
+  static const int HTTP_STATUS_SEE_OTHER = 303;
+
+  /// < The status code: 304 Not Modified
+  static const int HTTP_STATUS_NOT_MODIFIED = 304;
+
+  /// < The status code: 305 Use Proxy
+  static const int HTTP_STATUS_USE_PROXY = 305;
+
+  /// < The status code: 400 Bad Request
+  static const int HTTP_STATUS_BAD_REQUEST = 400;
+
+  /// < The status code: 401 Unauthorized
+  static const int HTTP_STATUS_UNAUTHORIZED = 401;
+
+  /// < The status code: 402 Payment Required
+  static const int HTTP_STATUS_PAYMENT_REQUIRED = 402;
+
+  /// < The status code: 403 Forbidden
+  static const int HTTP_STATUS_FORBIDDEN = 403;
+
+  /// < The status code: 404 Not Found
+  static const int HTTP_STATUS_NOT_FOUND = 404;
+
+  /// < The status code: 405 Method Not Allowed
+  static const int HTTP_STATUS_METHOD_NOT_ALLOWED = 405;
+
+  /// < The status code: 406 Not Acceptable
+  static const int HTTP_STATUS_NOT_ACCEPTABLE = 406;
+
+  /// < The status code: 407 Proxy Authentication Required
+  static const int HTTP_STATUS_PROXY_AUTHENTICATION_REQUIRED = 407;
+
+  /// < The status code: 408 Request Timeout (not used)
+  static const int HTTP_STATUS_REQUEST_TIME_OUT = 408;
+
+  /// < The status code: 409 Conflict
+  static const int HTTP_STATUS_CONFLICT = 409;
+
+  /// < The status code: 410 Gone
+  static const int HTTP_STATUS_GONE = 410;
+
+  /// < The status code: 411 Length Required
+  static const int HTTP_STATUS_LENGTH_REQUIRED = 411;
+
+  /// < The status code: 412 Precondition Failed
+  static const int HTTP_STATUS_PRECONDITION_FAILED = 412;
+
+  /// < The status code: 413 Request Entity Too Large (not used)
+  static const int HTTP_STATUS_REQUEST_ENTITY_TOO_LARGE = 413;
+
+  /// < The status code: 414 Request-URI Too Long (not used)
+  static const int HTTP_STATUS_REQUEST_URI_TOO_LARGE = 414;
+
+  /// < The status code: 415 Unsupported %Media Type
+  static const int HTTP_STATUS_UNSUPPORTED_MEDIA_TYPE = 415;
+
+  /// < The status code: 500 Internal Server Error
+  static const int HTTP_STATUS_INTERNAL_SERVER_ERROR = 500;
+
+  /// < The status code: 501 Not Implemented
+  static const int HTTP_STATUS_NOT_IMPLEMENTED = 501;
+
+  /// < The status code: 502 Bad Gateway
+  static const int HTTP_STATUS_BAD_GATEWAY = 502;
+
+  /// < The status code: 503 Service Unavailable
+  static const int HTTP_STATUS_SERVICE_UNAVAILABLE = 503;
+
+  /// < The status code: 504 Gateway Timeout
+  static const int HTTP_STATUS_GATEWAY_TIME_OUT = 504;
+
+  /// < The status code: 505 HTTP Version Not Supported
+  static const int HTTP_STATUS_HTTP_VERSION_NOT_SUPPORTED = 505;
+}
+
+/// @deprecated Deprecated since 9.0
+/// @brief Enumeration for the HTTP authentication schemes.
+/// @since_tizen 3.0
+abstract class http_auth_scheme_e {
+  /// < No authentication type
+  static const int HTTP_AUTH_NONE = 0;
+
+  /// < The authentication type is Proxy Basic Authentication
+  static const int HTTP_AUTH_PROXY_BASIC = 1;
+
+  /// < The authentication type is Proxy Digest Authentication
+  static const int HTTP_AUTH_PROXY_MD5 = 2;
+
+  /// < The authentication Type is HTTP Basic Authentication
+  static const int HTTP_AUTH_WWW_BASIC = 3;
+
+  /// < The authentication type is HTTP Digest Authentication
+  static const int HTTP_AUTH_WWW_MD5 = 4;
+
+  /// < The authentication type is Proxy NTLM Authentication
+  static const int HTTP_AUTH_PROXY_NTLM = 5;
+
+  /// < The authentication type is NTLM Authentication
+  static const int HTTP_AUTH_WWW_NTLM = 7;
+
+  /// < The authentication type is Negotiate Authentication
+  static const int HTTP_AUTH_WWW_NEGOTIATE = 8;
+}
+
+/// @deprecated Deprecated since 9.0
+/// @brief The HTTP Session handle.
+/// @since_tizen 3.0
+typedef http_session_h = ffi.Pointer<ffi.Void>;
+
+/// @deprecated Deprecated since 9.0
+/// @brief The HTTP Transaction handle.
+/// @since_tizen 3.0
+typedef http_transaction_h = ffi.Pointer<ffi.Void>;
+
+/// @deprecated Deprecated since 9.0
+/// @brief Called when the HTTP header is received.
+/// @since_tizen 3.0
+/// @remarks The @a header should be released using free(). \n
+/// The @a header is available until @a http_transaction is released.
+/// @param[in] http_transaction The HTTP transaction handle
+/// @param[in] header The header information of HTTP Transaction
+/// @param[in] header_len The length of the HTTP Transaction header
+/// @param[in] user_data The user data
+/// @see http_transaction_set_received_header_cb()
+typedef http_transaction_header_cb
+    = ffi.Pointer<ffi.NativeFunction<http_transaction_header_cbFunction>>;
+typedef http_transaction_header_cbFunction = ffi.Void Function(
+    http_transaction_h http_transaction,
+    ffi.Pointer<ffi.Char> header,
+    ffi.Size header_len,
+    ffi.Pointer<ffi.Void> user_data);
+typedef Darthttp_transaction_header_cbFunction = void Function(
+    http_transaction_h http_transaction,
+    ffi.Pointer<ffi.Char> header,
+    int header_len,
+    ffi.Pointer<ffi.Void> user_data);
+
+/// @deprecated Deprecated since 9.0
+/// @brief Called when the HTTP response is received.
+/// @since_tizen 3.0
+/// @param[in] http_transaction The HTTP transaction handle
+/// @param[in] body Response information of HTTP Transaction
+/// @param[in] size Size in bytes of each element to be written
+/// @param[in] count Number of elements, each one with a size of size bytes
+/// @param[in] user_data The user data
+/// @see http_transaction_set_received_body_cb()
+typedef http_transaction_body_cb
+    = ffi.Pointer<ffi.NativeFunction<http_transaction_body_cbFunction>>;
+typedef http_transaction_body_cbFunction = ffi.Void Function(
+    http_transaction_h http_transaction,
+    ffi.Pointer<ffi.Char> body,
+    ffi.Size size,
+    ffi.Size count,
+    ffi.Pointer<ffi.Void> user_data);
+typedef Darthttp_transaction_body_cbFunction = void Function(
+    http_transaction_h http_transaction,
+    ffi.Pointer<ffi.Char> body,
+    int size,
+    int count,
+    ffi.Pointer<ffi.Void> user_data);
+
+/// @deprecated Deprecated since 9.0
+/// @brief Called when the HTTP ready to write event is received.
+/// @since_tizen 3.0
+/// @param[in] http_transaction The HTTP transaction handle
+/// @param[in] recommended_chunk_size Recommended chunk length(bytes) of the HTTP transaction
+/// @param[in] user_data The user data
+/// @see http_transaction_set_uploaded_cb()
+typedef http_transaction_write_cb
+    = ffi.Pointer<ffi.NativeFunction<http_transaction_write_cbFunction>>;
+typedef http_transaction_write_cbFunction = ffi.Void Function(
+    http_transaction_h http_transaction,
+    ffi.Int recommended_chunk_size,
+    ffi.Pointer<ffi.Void> user_data);
+typedef Darthttp_transaction_write_cbFunction = void Function(
+    http_transaction_h http_transaction,
+    int recommended_chunk_size,
+    ffi.Pointer<ffi.Void> user_data);
+
+/// @deprecated Deprecated since 9.0
+/// @brief Called when the HTTP transaction is completed.
+/// @since_tizen 3.0
+/// @param[in] http_transaction The HTTP transaction handle
+/// @param[in] user_data The user data
+/// @see http_transaction_set_completed_cb()
+typedef http_transaction_completed_cb
+    = ffi.Pointer<ffi.NativeFunction<http_transaction_completed_cbFunction>>;
+typedef http_transaction_completed_cbFunction = ffi.Void Function(
+    http_transaction_h http_transaction, ffi.Pointer<ffi.Void> user_data);
+typedef Darthttp_transaction_completed_cbFunction = void Function(
+    http_transaction_h http_transaction, ffi.Pointer<ffi.Void> user_data);
+
+/// @deprecated Deprecated since 9.0
+/// @brief Called when the HTTP transaction is aborted.
+/// @details Following error codes can be delivered. \n
+/// #HTTP_ERROR_OPERATION_FAILED, \n
+/// #HTTP_ERROR_COULDNT_RESOLVE_HOST, \n
+/// #HTTP_ERROR_COULDNT_CONNECT, \n
+/// #HTTP_ERROR_OPERATION_TIMEDOUT, \n
+/// #HTTP_ERROR_SSL_CONNECT_ERROR.
+/// @since_tizen 3.0
+/// @param[in] http_transaction The HTTP transaction handle
+/// @param[in] error The error code about aborted reason
+/// @param[in] user_data The user data
+/// @see http_transaction_set_aborted_cb()
+typedef http_transaction_aborted_cb
+    = ffi.Pointer<ffi.NativeFunction<http_transaction_aborted_cbFunction>>;
+typedef http_transaction_aborted_cbFunction = ffi.Void Function(
+    http_transaction_h http_transaction,
+    ffi.Int32 error,
+    ffi.Pointer<ffi.Void> user_data);
+typedef Darthttp_transaction_aborted_cbFunction = void Function(
+    http_transaction_h http_transaction,
+    int error,
+    ffi.Pointer<ffi.Void> user_data);
+
+/// @deprecated Deprecated since 9.0
+/// @brief Called to notify when the content body of the response message is being downloaded or uploaded.
+/// @since_tizen 3.0
+/// @param[in] http_transaction The HTTP transaction handle
+/// @param[in] download_total The total length of the data (in bytes) to download
+/// @param[in] download_now The current length of the downloaded data (in bytes)
+/// @param[in] upload_total The total length of the data (in bytes) to upload
+/// @param[in] upload_now The current length of the uploaded data (in bytes)
+/// @param[in] user_data The user data
+/// @see http_transaction_set_progress_cb()
+typedef http_transaction_progress_cb
+    = ffi.Pointer<ffi.NativeFunction<http_transaction_progress_cbFunction>>;
+typedef http_transaction_progress_cbFunction = ffi.Void Function(
+    http_transaction_h http_transaction,
+    ffi.Double download_total,
+    ffi.Double download_now,
+    ffi.Double upload_total,
+    ffi.Double upload_now,
+    ffi.Pointer<ffi.Void> user_data);
+typedef Darthttp_transaction_progress_cbFunction = void Function(
+    http_transaction_h http_transaction,
+    double download_total,
+    double download_now,
+    double upload_total,
+    double upload_now,
+    ffi.Pointer<ffi.Void> user_data);
 
 /// @brief Error codes reported by the NFC API.
 /// @since_tizen 2.3

@@ -1407,6 +1407,24 @@ const Map<String, List<String>> capiContentMediaContentSymbols = {
   ],
 };
 
+const Map<String, List<String>> capiContextMotionSymbols = {
+  'libcapi-context-motion.so.2': [
+    'activity_create',
+    'activity_get_accuracy',
+    'activity_is_supported',
+    'activity_release',
+    'activity_start_recognition',
+    'activity_stop_recognition',
+    'gesture_create',
+    'gesture_get_event',
+    'gesture_get_tilt',
+    'gesture_is_supported',
+    'gesture_release',
+    'gesture_start_recognition',
+    'gesture_stop_recognition',
+  ],
+};
+
 const Map<String, List<String>> capiContextSymbols = {
   'libcapi-context.so.1': [
     'context_history_create',
@@ -5785,26 +5803,6 @@ const Map<String, List<String>> vcSymbols = {
 
 const Map<String, List<String>> vc_engineSymbols = {
   'libvc_engine.so': [
-    'vc_cmd_create',
-    'vc_cmd_destroy',
-    'vc_cmd_get_command',
-    'vc_cmd_get_format',
-    'vc_cmd_get_type',
-    'vc_cmd_get_unfixed_command',
-    'vc_cmd_list_add',
-    'vc_cmd_list_create',
-    'vc_cmd_list_destroy',
-    'vc_cmd_list_first',
-    'vc_cmd_list_foreach_commands',
-    'vc_cmd_list_get_count',
-    'vc_cmd_list_get_current',
-    'vc_cmd_list_last',
-    'vc_cmd_list_next',
-    'vc_cmd_list_prev',
-    'vc_cmd_list_remove',
-    'vc_cmd_set_command',
-    'vc_cmd_set_format',
-    'vc_cmd_set_type',
     'vce_get_audio_type',
     'vce_get_command_count',
     'vce_get_foreach_command',
@@ -5836,26 +5834,6 @@ const Map<String, List<String>> vc_engineSymbols = {
 
 const Map<String, List<String>> vc_managerSymbols = {
   'libvc_manager.so': [
-    'vc_cmd_create',
-    'vc_cmd_destroy',
-    'vc_cmd_get_command',
-    'vc_cmd_get_format',
-    'vc_cmd_get_type',
-    'vc_cmd_get_unfixed_command',
-    'vc_cmd_list_add',
-    'vc_cmd_list_create',
-    'vc_cmd_list_destroy',
-    'vc_cmd_list_first',
-    'vc_cmd_list_foreach_commands',
-    'vc_cmd_list_get_count',
-    'vc_cmd_list_get_current',
-    'vc_cmd_list_last',
-    'vc_cmd_list_next',
-    'vc_cmd_list_prev',
-    'vc_cmd_list_remove',
-    'vc_cmd_set_command',
-    'vc_cmd_set_format',
-    'vc_cmd_set_type',
     'vc_mgr_cancel',
     'vc_mgr_deinitialize',
     'vc_mgr_disable_command_type',

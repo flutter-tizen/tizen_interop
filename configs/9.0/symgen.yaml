@@ -88,6 +88,7 @@ target-libraries:
   - libcapi-network-inm.so.0                    # Network / Intelligent Network Monitoring
   - libiotcon.so.0                              # Network / IoTCon
   - libcapi-network-mtp.so.1                    # Network / MTP
+  - libcapi-network-nfc.so.0                    # Network / NFC
   - libnsd-ssdp.so.0                            # Network / SSDP
   - libcapi-network-stc.so.0                    # Network / Smart Traffic Control
   - libcapi-network-softap.so.0.1.0             # Network / SoftAP
@@ -129,7 +130,7 @@ target-libraries:
   - libcapi-ui-autofill-service.so.0            # UIX / Autofill service
   - libcapi-ui-inputmethod.so.0                 # UIX / Input Method
   - libcapi-ui-inputmethod-manager.so.0         # UIX / Input Method Manager
-  - libmmi.so                                   # UIX / MMI
+  - libmmi.so.2                                 # UIX / MMI
   - libma.so                                    # UIX / Multi assistant
   - libstt.so                                   # UIX / STT
   - libstt_engine.so                            # UIX / STT Engine

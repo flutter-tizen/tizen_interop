@@ -101,12 +101,24 @@ add_symbol_file() {
 file_from_entrypoints=$(grep -oP '#include\s*<\K[^>]*' "$entrypoints")
 
 for header in $file_from_entrypoints; do
-    header_file=$(find "$rootstraps" -type f -name "$(basename $header)")
+    header_file=""
+
+    # First, try to find the header in `usr/include` directory
+    potential_file=$(find "$rootstraps" -type f -path "*/usr/include/$header" -print -quit)
+    if [ -f "$potential_file" ]; then
+        header_file="$potential_file"
+    fi
+
+    # If not found in priority directories, fall back to searching by basename
+    if [ ! -f "$header_file" ]; then
+        header_file=$(find "$rootstraps" -type f -name "$(basename $header)" -print -quit)
+    fi
+
     if [ ! -f "$header_file" ]; then
         continue
     fi
 
-    functions=$(grep -oP '^\w+\s+\w+\s*\([^)]*\)\s*;' "$header_file" | awk '{print $2}' | sed 's/(.*//')
+    functions=$(grep -oP '^(?:[A-Za-z0-9_]+\s+)*\w+\s+\K\w+(?=\s*\()' "$header_file")
 
     for symbol in $functions; do
         if [[ -n "${symbols[$symbol]}" ]]; then
