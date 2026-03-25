@@ -17,19 +17,129 @@
 
 2. Manually update `entrypoints.h` and `symgen.yaml` by referring to the official [API docs](https://docs.tizen.org/application/native/api/iot-headed/latest) and the rootstrap. (Run `symgen_helper.sh` to find out what to add to `symgen.yaml`. (`scripts/symgen_helper.sh <version>`))
 
-3. Run `ffigen_helper.sh` to generate the contents of the `ffigen.yaml` file.
+3. Run `ffigen_helper.sh` to generate the contents of the `ffigen_XXX.yaml` files for the target-libraries
 
    ```sh
    scripts/ffigen_helper.sh <version>
    ```
 
-4. Update callbacks data.
+4. The `ffigen_helper.sh` script outputs a list of all headers. To generate binding code per target library, create a `ffigen_XXX.yaml` file for each library and add the corresponding header list from the ffigen_helper.sh output to each yaml file.
+
+5. Update callbacks data.
 
    * Run `./generate_callbacks.sh verify` to check type substitution.
      Build errors will have to be addressed by editing `gen_callbacks.py`.
      If substitution is not found or assert fails - edit the type mapping
      (see `CallbackDataCollector.type_substitute()` and maps used there: `KNOWN_TYPES`, `SPECIAL_TYPES`).
    * Run `./generate_callbacks.sh` to update `callbacks.cc` with callbacks data.
+
+## Handling Type Duplication Issues
+
+When splitting single binding code into library-specific binding codes from version 0.5.2 onwards, type duplication issues may occur between binding codes. Here are common issues and their solutions:
+
+### 1. Struct Type Duplication
+
+**Issue**: When both `generated_bindings_A.dart` and `generated_bindings_B.dart` define `struct AA {...}` and are exported through `tizen.dart`, a duplication error occurs.
+
+**Solution**: Add the following to the `ffigen_B.yaml` file used to generate `generated_bindings_B.dart`:
+
+```yaml
+library-imports:
+  A_Header: 'generated_bindings_A.dart'
+
+type-map:
+  structs:
+    'AA':
+      lib: 'A_Header'
+      c-type: 'AA'
+      dart-type: 'AA'
+```
+
+### 2. Typedef Type Duplication
+
+**Issue**: When both `generated_bindings_A.dart` and `generated_bindings_B.dart` define `typedef AA BB` and are exported through `tizen.dart`, a duplication error occurs.
+
+**Solution**: Add the following to the `ffigen_B.yaml` file used to generate `generated_bindings_B.dart`:
+
+```yaml
+library-imports:
+  A_Header: 'generated_bindings_A.dart'
+
+type-map:
+  typedef:
+    'AA':
+      lib: 'A_Header'
+      c-type: 'AA'
+      dart-type: 'AA'
+```
+
+### 3. Enum Type Duplication
+
+**Issue**: When both `generated_bindings_A.dart` and `generated_bindings_B.dart` define `enum {...} DD;` and are exported through `tizen.dart`, a duplication error occurs.
+
+**Solution**: Add the following to the `ffigen_B.yaml` file used to generate `generated_bindings_B.dart` (rename the enum to make it private by adding '_'):
+
+```yaml
+enums:
+  rename:
+    'DD' : '_DD'
+```
+
+### 4. Unused Callback Definitions
+
+**Issue**: When a callback is only defined in a header but not actually used, ffigen does not generate it (ffigen does not generate unused functions or types).
+
+**Solution**: Create a separate header file and define a temporary private function that uses the callback:
+
+```c
+// Temp_C.h
+#include <app_common.h>
+void _force_generate_app_event_cb(app_event_cb callback) {}
+```
+
+```yaml
+# ffigen_C.yaml
+entry-points:
+  - 'entrypoints.h'
+  - 'Temp_C.h'
+include-directives:
+  - '**/app_common.h'
+  - '**/app_resource_manager.h'
+  - 'Temp_C.h'
+```
+
+### 5. Generic Type Issues with typedef
+
+**Issue**: When there is code like `typedef __time_t time_t;` in a header file, generic type issues occur (generic types can only use basic types like int, double, or Pointer).
+
+**Solution**: Map directly to basic types as follows:
+
+```yaml
+library-imports:
+  ffi_lib: 'dart:ffi'
+
+type-map:
+  typedef:
+    'time_t':
+      lib: 'ffi_lib'
+      c-type: 'Long'
+      dart-type: 'int'
+    '__time_t':
+      lib: 'ffi_lib'
+      c-type: 'Long'
+      dart-type: 'int'
+```
+
+### 6. Unnamed Union Duplication
+
+**Issue**: When unnamed unions are defined in C code, binding code generation automatically assigns names like `UnnamedUnion1`, causing duplication issues.
+
+**Solution**: Add `hide UnnamedUnion1, UnnamedStruct1` after export:
+
+```dart
+export '../../src/bindings/6.0/generated_bindings_capi_media_camera.dart'
+    hide UnnamedUnion1, UnnamedStruct1;
+```
 
 ## Generating documentation
 

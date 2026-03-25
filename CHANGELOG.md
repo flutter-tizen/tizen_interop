@@ -1,10 +1,13 @@
 ## Next
 
 * Refactor symbol generation and LookupProvider registration logic.
-* Modify symbol files for Tizen 6.0, 6.5, 7.0, 8.0, 9.0, 10.0.
+* Modify symbol files for Tizen 6.0, 6.5, 7.0, 8.0, 9.0, and 10.0.
 * Separate `tizen` getter into each module's getter.
 * Change `final` type of the symbolMap variable to `const`.
 * Add Tizen API tables.
+* Add integration testcases.
+* Fix helper script bugs.
+* Add missing header and library lists for tizen 6.5, 7.0, 8.0, 9.0, and 10.0.
 
 ## 0.5.1
 
