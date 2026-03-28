@@ -14,11 +14,11 @@ llvm-path:
 headers:
   entry-points:
     - 'entrypoints.h'
-    - 'entrypoints-capi-appfw-app-common.h'
+    - 'entrypoints_capi_appfw_app_common.h'
   include-directives:
     - '**/app_common.h'
     - '**/app_resource_manager.h'
-    - 'entrypoints-capi-appfw-app-common.h'
+    - 'entrypoints_capi_appfw_app_common.h'
 
 compiler-opts:
   - '-m32'

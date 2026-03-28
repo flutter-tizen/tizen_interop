@@ -1,6 +1,6 @@
 # tizen_interop tools
 
-## Generating bindings from source
+## Copying a rootstrap
 
 1. Install a rootstrap of your target Tizen version (e.g. `IOT-Headed-6.0-NativeAppDevelopment-CLI`) using Tizen Package Manager.
 
@@ -8,24 +8,38 @@
 
    ```sh
    scripts/copy_rootstrap.sh <version>
-   scripts/generate_bindings.sh <version>
    ```
 
-## Adding new Tizen version support
+## Generating bindings for a new Tizen version
 
 1. Create a copy of any existing config in the `configs` directory with the new version number as the directory name.
 
 2. Manually update `entrypoints.h` and `symgen.yaml` by referring to the official [API docs](https://docs.tizen.org/application/native/api/iot-headed/latest) and the rootstrap. (Run `symgen_helper.sh` to find out what to add to `symgen.yaml`. (`scripts/symgen_helper.sh <version>`))
 
-3. Run `ffigen_helper.sh` to generate the contents of the `ffigen_XXX.yaml` files for the target-libraries
+3. The `configs/<version>` directory copied in step 1 contains `ffigen_*.yaml` files from the previous version. To update these to the new version, run:
 
    ```sh
-   scripts/ffigen_helper.sh <version>
+   python3 scripts/generate_ffigens.py <version>
    ```
 
-4. The `ffigen_helper.sh` script outputs a list of all headers. To generate binding code per target library, create a `ffigen_XXX.yaml` file for each library and add the corresponding header list from the ffigen_helper.sh output to each yaml file.
+4. If there are newly created files (`ffigen_*.yaml`), manually update their `include-directives:` by referring to the output of `scripts/ffigen_helper.sh <version>` or `rootstrap/<version>`.
 
-5. Update callbacks data.
+5. To generate binding code per target library, run:
+
+   ```sh
+   scripts/generate_bindings.sh <version>
+   ```
+
+6. Generate the main `lib/<version>/tizen.dart` file which exports all bindings and initializes module instances:
+
+   ```sh
+   python3 scripts/generate_tizen.py <version>
+   ```
+
+   This script scans `generated_symbols.dart` and all individual binding files to construct the Dart codebase cleanly.
+   If errors occur when running `dart analyze lib/<version>/tizen.dart` after generation, please refer to the **Handling Type Duplication Issues** section below to resolve them.
+
+7. Update callbacks data.
 
    * Run `./generate_callbacks.sh verify` to check type substitution.
      Build errors will have to be addressed by editing `gen_callbacks.py`.

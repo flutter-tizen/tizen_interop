@@ -29,7 +29,7 @@ else
     config_dir="$ROOT_DIR/configs/$version"
     count=0
 
-    for config_file in "$config_dir"/ffigen-*.yaml; do
+    for config_file in "$config_dir"/ffigen_*.yaml; do
         [ -e "$config_file" ] || continue
 
         count=$((count + 1))

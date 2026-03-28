@@ -14,11 +14,11 @@ llvm-path:
 headers:
   entry-points:
     - 'entrypoints.h'
-    - 'entrypoints-storage.h'
+    - 'entrypoints_storage.h'
   include-directives:
     - '**/storage.h'
     - '**/storage-expand.h'
-    - 'entrypoints-storage.h'
+    - 'entrypoints_storage.h'
 
 compiler-opts:
   - '-m32'

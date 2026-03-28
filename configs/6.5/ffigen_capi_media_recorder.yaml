@@ -1,13 +1,12 @@
 preamble: |
-  // Copyright 2022 Samsung Electronics Co., Ltd. All rights reserved.
+  // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
   // Use of this source code is governed by a BSD-style license that can be
   // found in the LICENSE file.
-
   // ignore_for_file: type=lint, unused_element, unused_field
 
-name: 'Tizen65Native'
-description: 'Dart bindings for Tizen native APIs.'
-output: '../../lib/src/bindings/6.5/generated_bindings.dart'
+name: 'Tizen65CapiMediaRecorder'
+description: 'Dart bindings for Tizen capi-media-recorder APIs.'
+output: '../../lib/src/bindings/6.5/generated_bindings_capi_media_recorder.dart'
 
 llvm-path:
   - '/usr/lib/llvm-12'
@@ -16,90 +15,32 @@ headers:
   entry-points:
     - 'entrypoints.h'
   include-directives:
-    - '**/account.h'
-    - '**/autofill_common.h'
-    - '**/autofill.h'
-    - '**/autofill_manager.h'
-    - '**/autofill_service.h'
-    - '**/bundle.h'
-    - '**/diagnostics.h'
-    - '**/fido.h'
-    - '**/fido_uaf_authenticator.h'
-    - '**/fido_uaf_client.h'
-    - '**/inputmethod.h'
-    - '**/inputmethod_manager.h'
-    - '**/mtp.h'
-    - '**/multi_assistant_common.h'
-    - '**/multi_assistant.h'
-    - '**/oauth2_error.h'
-    - '**/oauth2.h'
-    - '**/oauth2_manager.h'
-    - '**/oauth2_request.h'
-    - '**/oauth2_response.h'
-    - '**/oauth2_types.h'
-    - '**/peripheral_io.h'
-    - '**/privilege_information.h'
-    - '**/push-service.h'
-    - '**/stte.h'
-    - '**/stt.h'
-    - '**/sync_adapter.h'
-    - '**/sync_manager.h'
-    - '**/tbm_surface.h'
-    - '**/tizen_error.h'
-    - '**/tizen.h'
-    - '**/trace.h'
-    - '**/ttse.h'
-    - '**/tts.h'
-    - '**/usb_host.h'
-    - '**/vce.h'
-    - '**/voice_control.h'
-    - '**/voice_control_manager.h'
-    - '**/vpn_service.h'
-    - '**/appcore-agent/*.h'
-    - '**/appfw/*.h'
-    - '**/asp/*.h'
-    - '**/badge/*.h'
-    - '**/calendar-service2/*.h'
-    - '**/cbhm/*.h'
-    - '**/cion/*.h'
-    - '**/ckm/ckmc/*.h'
-    - '**/contacts-svc/*.h'
-    - '**/content/*.h'
-    - '**/context-service/*.h'
-    - '**/csr/*.h'
-    - '**/device/*.h'
-    - '**/device-certificate-manager/*.h'
-    - '**/dlog/*.h'
-    - '**/dpm/*.h'
-    - '**/eom/*.h'
-    - '**/feedback/*.h'
-    - '**/geofence/*.h'
-    - '**/iotcon/*.h'
-    - '**/location/*.h'
-    - '**/media/*.h'
-    - '**/media-content/*.h'
-    - '**/messaging/*.h'
-    - '**/metadata-editor/*.h'
-    - '**/network/*.h'
-    - '**/nnstreamer/*.h'
-    - '**/nntrainer/*.h'
-    - '**/notification/*.h'
-    - '**/notification-ex/api/*.h'
-    - '**/nsd/*.h'
-    - '**/phonenumber-utils/*.h'
-    - '**/privacy-privilege-manager/*.h'
-    - '**/rpc-port/*.h'
-    - '**/sensor/*.h'
-    - '**/shortcut/*.h'
-    - '**/storage/*.h'
-    - '**/system/*.h'
-    - '**/web/*.h'
-    - '**/wifi-direct/*.h'
-    - '**/yaca/*.h'
+    - '**/recorder.h'
+
+library-imports:
+  camera: 'generated_bindings_capi_media_camera.dart'
+  sound_manager: 'generated_bindings_capi_media_sound_manager.dart'
+
+type-map:
+  typedefs:
+    'camera_h':
+      lib: 'camera'
+      c-type: 'camera_h'
+      dart-type: 'camera_h'
+    'recorder_video_data_s':
+      lib: 'camera'
+      c-type: 'camera_preview_data_s'
+      dart-type: 'camera_preview_data_s'
+    'sound_stream_info_h':
+      lib: 'sound_manager'
+      c-type: 'sound_stream_info_h'
+      dart-type: 'sound_stream_info_h'
 
 compiler-opts:
   - '-m32'
   - '-Wno-incomplete-setjmp-declaration'
+
+  # include Tizen API directories
   - '-I./rootstraps/6.5/usr/include/'
   - '-I./rootstraps/6.5/usr/include/appcore-agent/'
   - '-I./rootstraps/6.5/usr/include/appfw/'
@@ -140,7 +81,6 @@ compiler-opts:
   - '-I./rootstraps/6.5/usr/include/web/'
   - '-I./rootstraps/6.5/usr/include/wifi-direct/'
   - '-I./rootstraps/6.5/usr/include/yaca/'
-
   # include EFL directories
   - '-I./rootstraps/6.5/usr/include/ecore-imf-1/'
   - '-I./rootstraps/6.5/usr/include/efl-1/'
@@ -157,3 +97,4 @@ compiler-opts:
 enums:
   rename:
     '_+(.*)': '$1'
+    'audio_sample_type_e' : '_audio_sample_type_e'
