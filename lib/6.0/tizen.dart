@@ -253,21 +253,6 @@ S _getTizenInstance<S>(Map<String, List<String>> symbolMap,
   );
 }
 
-Tizen60CapiAppfwAppCommon? _tizenCapiAppfwAppCommon;
-Tizen60CapiAppfwAppCommon get tizenCapiAppfwAppCommon =>
-    _tizenCapiAppfwAppCommon ??= _getTizenInstance(
-        capiAppfwAppCommonSymbols, Tizen60CapiAppfwAppCommon.fromLookup)!;
-
-Tizen60CapiAppfwPreference? _tizenCapiAppfwPreference;
-Tizen60CapiAppfwPreference get tizenCapiAppfwPreference =>
-    _tizenCapiAppfwPreference ??= _getTizenInstance(
-        capiAppfwPreferenceSymbols, Tizen60CapiAppfwPreference.fromLookup)!;
-
-Tizen60CapiSystemRuntimeInfo? _tizenCapiSystemRuntimeInfo;
-Tizen60CapiSystemRuntimeInfo get tizenCapiSystemRuntimeInfo =>
-    _tizenCapiSystemRuntimeInfo ??= _getTizenInstance(
-        capiSystemRuntimeInfoSymbols, Tizen60CapiSystemRuntimeInfo.fromLookup)!;
-
 Tizen60AccountsSvc? _tizenAccountsSvc;
 Tizen60AccountsSvc get tizenAccountsSvc => _tizenAccountsSvc ??=
     _getTizenInstance(accountsSvcSymbols, Tizen60AccountsSvc.fromLookup)!;
@@ -296,6 +281,11 @@ Tizen60CalendarService2 get tizenCalendarService2 =>
 Tizen60CapiAppfwAlarm? _tizenCapiAppfwAlarm;
 Tizen60CapiAppfwAlarm get tizenCapiAppfwAlarm => _tizenCapiAppfwAlarm ??=
     _getTizenInstance(capiAppfwAlarmSymbols, Tizen60CapiAppfwAlarm.fromLookup)!;
+
+Tizen60CapiAppfwAppCommon? _tizenCapiAppfwAppCommon;
+Tizen60CapiAppfwAppCommon get tizenCapiAppfwAppCommon =>
+    _tizenCapiAppfwAppCommon ??= _getTizenInstance(
+        capiAppfwAppCommonSymbols, Tizen60CapiAppfwAppCommon.fromLookup)!;
 
 Tizen60CapiAppfwAppControl? _tizenCapiAppfwAppControl;
 Tizen60CapiAppfwAppControl get tizenCapiAppfwAppControl =>
@@ -327,6 +317,11 @@ Tizen60CapiAppfwPackageManager get tizenCapiAppfwPackageManager =>
         capiAppfwPackageManagerSymbols,
         Tizen60CapiAppfwPackageManager.fromLookup)!;
 
+Tizen60CapiAppfwPreference? _tizenCapiAppfwPreference;
+Tizen60CapiAppfwPreference get tizenCapiAppfwPreference =>
+    _tizenCapiAppfwPreference ??= _getTizenInstance(
+        capiAppfwPreferenceSymbols, Tizen60CapiAppfwPreference.fromLookup)!;
+
 Tizen60CapiBaseCommon? _tizenCapiBaseCommon;
 Tizen60CapiBaseCommon get tizenCapiBaseCommon => _tizenCapiBaseCommon ??=
     _getTizenInstance(capiBaseCommonSymbols, Tizen60CapiBaseCommon.fromLookup)!;
@@ -342,14 +337,14 @@ Tizen60CapiContentMimeType get tizenCapiContentMimeType =>
     _tizenCapiContentMimeType ??= _getTizenInstance(
         capiContentMimeTypeSymbols, Tizen60CapiContentMimeType.fromLookup)!;
 
+Tizen60CapiContext? _tizenCapiContext;
+Tizen60CapiContext get tizenCapiContext => _tizenCapiContext ??=
+    _getTizenInstance(capiContextSymbols, Tizen60CapiContext.fromLookup)!;
+
 Tizen60CapiContextMotion? _tizenCapiContextMotion;
 Tizen60CapiContextMotion get tizenCapiContextMotion =>
     _tizenCapiContextMotion ??= _getTizenInstance(
         capiContextMotionSymbols, Tizen60CapiContextMotion.fromLookup)!;
-
-Tizen60CapiContext? _tizenCapiContext;
-Tizen60CapiContext get tizenCapiContext => _tizenCapiContext ??=
-    _getTizenInstance(capiContextSymbols, Tizen60CapiContext.fromLookup)!;
 
 Tizen60CapiGeofenceManager? _tizenCapiGeofenceManager;
 Tizen60CapiGeofenceManager get tizenCapiGeofenceManager =>
@@ -536,6 +531,11 @@ Tizen60CapiSystemPeripheralIo get tizenCapiSystemPeripheralIo =>
         capiSystemPeripheralIoSymbols,
         Tizen60CapiSystemPeripheralIo.fromLookup)!;
 
+Tizen60CapiSystemRuntimeInfo? _tizenCapiSystemRuntimeInfo;
+Tizen60CapiSystemRuntimeInfo get tizenCapiSystemRuntimeInfo =>
+    _tizenCapiSystemRuntimeInfo ??= _getTizenInstance(
+        capiSystemRuntimeInfoSymbols, Tizen60CapiSystemRuntimeInfo.fromLookup)!;
+
 Tizen60CapiSystemSensor? _tizenCapiSystemSensor;
 Tizen60CapiSystemSensor get tizenCapiSystemSensor =>
     _tizenCapiSystemSensor ??= _getTizenInstance(
@@ -662,33 +662,32 @@ Tizen60MessagePort get tizenMessagePort => _tizenMessagePort ??=
 Tizen60MvBarcodeDetector? _tizenMvBarcodeDetector;
 Tizen60MvBarcodeDetector get tizenMvBarcodeDetector =>
     _tizenMvBarcodeDetector ??= _getTizenInstance(
-        mv_barcode_detectorSymbols, Tizen60MvBarcodeDetector.fromLookup)!;
+        mvBarcodeDetectorSymbols, Tizen60MvBarcodeDetector.fromLookup)!;
 
 Tizen60MvBarcodeGenerator? _tizenMvBarcodeGenerator;
 Tizen60MvBarcodeGenerator get tizenMvBarcodeGenerator =>
     _tizenMvBarcodeGenerator ??= _getTizenInstance(
-        mv_barcode_generatorSymbols, Tizen60MvBarcodeGenerator.fromLookup)!;
+        mvBarcodeGeneratorSymbols, Tizen60MvBarcodeGenerator.fromLookup)!;
 
 Tizen60MvCommon? _tizenMvCommon;
 Tizen60MvCommon get tizenMvCommon => _tizenMvCommon ??=
-    _getTizenInstance(mv_commonSymbols, Tizen60MvCommon.fromLookup)!;
+    _getTizenInstance(mvCommonSymbols, Tizen60MvCommon.fromLookup)!;
 
 Tizen60MvFace? _tizenMvFace;
 Tizen60MvFace get tizenMvFace => _tizenMvFace ??=
-    _getTizenInstance(mv_faceSymbols, Tizen60MvFace.fromLookup)!;
+    _getTizenInstance(mvFaceSymbols, Tizen60MvFace.fromLookup)!;
 
 Tizen60MvImage? _tizenMvImage;
 Tizen60MvImage get tizenMvImage => _tizenMvImage ??=
-    _getTizenInstance(mv_imageSymbols, Tizen60MvImage.fromLookup)!;
+    _getTizenInstance(mvImageSymbols, Tizen60MvImage.fromLookup)!;
 
 Tizen60MvInference? _tizenMvInference;
 Tizen60MvInference get tizenMvInference => _tizenMvInference ??=
-    _getTizenInstance(mv_inferenceSymbols, Tizen60MvInference.fromLookup)!;
+    _getTizenInstance(mvInferenceSymbols, Tizen60MvInference.fromLookup)!;
 
 Tizen60MvSurveillance? _tizenMvSurveillance;
-Tizen60MvSurveillance get tizenMvSurveillance =>
-    _tizenMvSurveillance ??= _getTizenInstance(
-        mv_surveillanceSymbols, Tizen60MvSurveillance.fromLookup)!;
+Tizen60MvSurveillance get tizenMvSurveillance => _tizenMvSurveillance ??=
+    _getTizenInstance(mvSurveillanceSymbols, Tizen60MvSurveillance.fromLookup)!;
 
 Tizen60Notification? _tizenNotification;
 Tizen60Notification get tizenNotification => _tizenNotification ??=
@@ -741,7 +740,7 @@ Tizen60Stt get tizenStt =>
 
 Tizen60SttEngine? _tizenSttEngine;
 Tizen60SttEngine get tizenSttEngine => _tizenSttEngine ??=
-    _getTizenInstance(stt_engineSymbols, Tizen60SttEngine.fromLookup)!;
+    _getTizenInstance(sttEngineSymbols, Tizen60SttEngine.fromLookup)!;
 
 Tizen60Tbm? _tizenTbm;
 Tizen60Tbm get tizenTbm =>
@@ -757,7 +756,7 @@ Tizen60Tts get tizenTts =>
 
 Tizen60TtsEngine? _tizenTtsEngine;
 Tizen60TtsEngine get tizenTtsEngine => _tizenTtsEngine ??=
-    _getTizenInstance(tts_engineSymbols, Tizen60TtsEngine.fromLookup)!;
+    _getTizenInstance(ttsEngineSymbols, Tizen60TtsEngine.fromLookup)!;
 
 Tizen60UpdateControl? _tizenUpdateControl;
 Tizen60UpdateControl get tizenUpdateControl => _tizenUpdateControl ??=
@@ -769,11 +768,11 @@ Tizen60Vc get tizenVc =>
 
 Tizen60VcEngine? _tizenVcEngine;
 Tizen60VcEngine get tizenVcEngine => _tizenVcEngine ??=
-    _getTizenInstance(vc_engineSymbols, Tizen60VcEngine.fromLookup)!;
+    _getTizenInstance(vcEngineSymbols, Tizen60VcEngine.fromLookup)!;
 
 Tizen60VcManager? _tizenVcManager;
 Tizen60VcManager get tizenVcManager => _tizenVcManager ??=
-    _getTizenInstance(vc_managerSymbols, Tizen60VcManager.fromLookup)!;
+    _getTizenInstance(vcManagerSymbols, Tizen60VcManager.fromLookup)!;
 
 Tizen60WifiDirect? _tizenWifiDirect;
 Tizen60WifiDirect get tizenWifiDirect => _tizenWifiDirect ??=

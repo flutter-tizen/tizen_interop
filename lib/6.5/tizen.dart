@@ -150,7 +150,8 @@ export '../../src/bindings/6.5/generated_bindings_capi_context_motion.dart';
 export '../../src/bindings/6.5/generated_bindings_capi_geofence_manager.dart';
 export '../../src/bindings/6.5/generated_bindings_capi_location_manager.dart';
 export '../../src/bindings/6.5/generated_bindings_capi_media_audio_io.dart';
-export '../../src/bindings/6.5/generated_bindings_capi_media_camera.dart' hide UnnamedUnion1, UnnamedStruct1;
+export '../../src/bindings/6.5/generated_bindings_capi_media_camera.dart'
+    hide UnnamedUnion1, UnnamedStruct1;
 export '../../src/bindings/6.5/generated_bindings_capi_media_codec.dart';
 export '../../src/bindings/6.5/generated_bindings_capi_media_controller.dart';
 export '../../src/bindings/6.5/generated_bindings_capi_media_image_util.dart';
@@ -693,33 +694,32 @@ Tizen65MessagePort get tizenMessagePort => _tizenMessagePort ??=
 Tizen65MvBarcodeDetector? _tizenMvBarcodeDetector;
 Tizen65MvBarcodeDetector get tizenMvBarcodeDetector =>
     _tizenMvBarcodeDetector ??= _getTizenInstance(
-        mv_barcode_detectorSymbols, Tizen65MvBarcodeDetector.fromLookup)!;
+        mvBarcodeDetectorSymbols, Tizen65MvBarcodeDetector.fromLookup)!;
 
 Tizen65MvBarcodeGenerator? _tizenMvBarcodeGenerator;
 Tizen65MvBarcodeGenerator get tizenMvBarcodeGenerator =>
     _tizenMvBarcodeGenerator ??= _getTizenInstance(
-        mv_barcode_generatorSymbols, Tizen65MvBarcodeGenerator.fromLookup)!;
+        mvBarcodeGeneratorSymbols, Tizen65MvBarcodeGenerator.fromLookup)!;
 
 Tizen65MvCommon? _tizenMvCommon;
 Tizen65MvCommon get tizenMvCommon => _tizenMvCommon ??=
-    _getTizenInstance(mv_commonSymbols, Tizen65MvCommon.fromLookup)!;
+    _getTizenInstance(mvCommonSymbols, Tizen65MvCommon.fromLookup)!;
 
 Tizen65MvFace? _tizenMvFace;
 Tizen65MvFace get tizenMvFace => _tizenMvFace ??=
-    _getTizenInstance(mv_faceSymbols, Tizen65MvFace.fromLookup)!;
+    _getTizenInstance(mvFaceSymbols, Tizen65MvFace.fromLookup)!;
 
 Tizen65MvImage? _tizenMvImage;
 Tizen65MvImage get tizenMvImage => _tizenMvImage ??=
-    _getTizenInstance(mv_imageSymbols, Tizen65MvImage.fromLookup)!;
+    _getTizenInstance(mvImageSymbols, Tizen65MvImage.fromLookup)!;
 
 Tizen65MvInference? _tizenMvInference;
 Tizen65MvInference get tizenMvInference => _tizenMvInference ??=
-    _getTizenInstance(mv_inferenceSymbols, Tizen65MvInference.fromLookup)!;
+    _getTizenInstance(mvInferenceSymbols, Tizen65MvInference.fromLookup)!;
 
 Tizen65MvSurveillance? _tizenMvSurveillance;
-Tizen65MvSurveillance get tizenMvSurveillance =>
-    _tizenMvSurveillance ??= _getTizenInstance(
-        mv_surveillanceSymbols, Tizen65MvSurveillance.fromLookup)!;
+Tizen65MvSurveillance get tizenMvSurveillance => _tizenMvSurveillance ??=
+    _getTizenInstance(mvSurveillanceSymbols, Tizen65MvSurveillance.fromLookup)!;
 
 Tizen65Notification? _tizenNotification;
 Tizen65Notification get tizenNotification => _tizenNotification ??=
@@ -772,7 +772,7 @@ Tizen65Stt get tizenStt =>
 
 Tizen65SttEngine? _tizenSttEngine;
 Tizen65SttEngine get tizenSttEngine => _tizenSttEngine ??=
-    _getTizenInstance(stt_engineSymbols, Tizen65SttEngine.fromLookup)!;
+    _getTizenInstance(sttEngineSymbols, Tizen65SttEngine.fromLookup)!;
 
 Tizen65Tbm? _tizenTbm;
 Tizen65Tbm get tizenTbm =>
@@ -788,7 +788,7 @@ Tizen65Tts get tizenTts =>
 
 Tizen65TtsEngine? _tizenTtsEngine;
 Tizen65TtsEngine get tizenTtsEngine => _tizenTtsEngine ??=
-    _getTizenInstance(tts_engineSymbols, Tizen65TtsEngine.fromLookup)!;
+    _getTizenInstance(ttsEngineSymbols, Tizen65TtsEngine.fromLookup)!;
 
 Tizen65UpdateControl? _tizenUpdateControl;
 Tizen65UpdateControl get tizenUpdateControl => _tizenUpdateControl ??=
@@ -800,11 +800,11 @@ Tizen65Vc get tizenVc =>
 
 Tizen65VcEngine? _tizenVcEngine;
 Tizen65VcEngine get tizenVcEngine => _tizenVcEngine ??=
-    _getTizenInstance(vc_engineSymbols, Tizen65VcEngine.fromLookup)!;
+    _getTizenInstance(vcEngineSymbols, Tizen65VcEngine.fromLookup)!;
 
 Tizen65VcManager? _tizenVcManager;
 Tizen65VcManager get tizenVcManager => _tizenVcManager ??=
-    _getTizenInstance(vc_managerSymbols, Tizen65VcManager.fromLookup)!;
+    _getTizenInstance(vcManagerSymbols, Tizen65VcManager.fromLookup)!;
 
 Tizen65WifiDirect? _tizenWifiDirect;
 Tizen65WifiDirect get tizenWifiDirect => _tizenWifiDirect ??=

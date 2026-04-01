@@ -36,6 +36,7 @@ ${_config.preamble}
       var name = library
           .replaceAll('lib', '')
           .replaceAll('.so', '')
+          .replaceAll('_', '-')
           .replaceAll(RegExp(r'(\.[0-9]+)+$'), '');
       List<String> parts = name.split('-');
       var moduleName = parts[0] +
@@ -50,7 +51,7 @@ const Map<String, List<String>> ${moduleName}Symbols = {
 ''';
       for (var symbol in _getSymbols(libraryPath.childFile(library))) {
         if (_config.allowlist.isEmpty || _config.allowlist.contains(symbol)) {
-          if ((moduleName == 'vc_engine' || moduleName == 'vc_manager') &&
+          if ((moduleName == 'vcEngine' || moduleName == 'vcManager') &&
               symbol.startsWith('vc_cmd_')) {
             continue;
           }
