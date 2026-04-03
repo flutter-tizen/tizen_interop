@@ -2,17 +2,282 @@ library tizen_interop;
 
 import 'dart:ffi';
 
-import '../../src/bindings/9.0/generated_bindings.dart';
 import '../../src/bindings/9.0/generated_symbols.dart';
+import '../../src/bindings/9.0/generated_bindings_accounts_svc.dart';
+import '../../src/bindings/9.0/generated_bindings_appcore_agent.dart';
+import '../../src/bindings/9.0/generated_bindings_asp.dart';
+import '../../src/bindings/9.0/generated_bindings_badge.dart';
+import '../../src/bindings/9.0/generated_bindings_bundle.dart';
+import '../../src/bindings/9.0/generated_bindings_calendar_service2.dart';
+import '../../src/bindings/9.0/generated_bindings_capi_appfw_alarm.dart';
+import '../../src/bindings/9.0/generated_bindings_capi_appfw_app_common.dart';
+import '../../src/bindings/9.0/generated_bindings_capi_appfw_app_control.dart';
+import '../../src/bindings/9.0/generated_bindings_capi_appfw_app_control_uri.dart';
+import '../../src/bindings/9.0/generated_bindings_capi_appfw_app_manager.dart';
+import '../../src/bindings/9.0/generated_bindings_capi_appfw_application.dart';
+import '../../src/bindings/9.0/generated_bindings_capi_appfw_event.dart';
+import '../../src/bindings/9.0/generated_bindings_capi_appfw_job_scheduler.dart';
+import '../../src/bindings/9.0/generated_bindings_capi_appfw_package_manager.dart';
+import '../../src/bindings/9.0/generated_bindings_capi_appfw_preference.dart';
+import '../../src/bindings/9.0/generated_bindings_capi_base_common.dart';
+import '../../src/bindings/9.0/generated_bindings_capi_content_media_content.dart';
+import '../../src/bindings/9.0/generated_bindings_capi_content_mime_type.dart';
+import '../../src/bindings/9.0/generated_bindings_capi_context.dart';
+import '../../src/bindings/9.0/generated_bindings_capi_geofence_manager.dart';
+import '../../src/bindings/9.0/generated_bindings_capi_location_manager.dart';
+import '../../src/bindings/9.0/generated_bindings_capi_media_audio_io.dart';
+import '../../src/bindings/9.0/generated_bindings_capi_media_camera.dart';
+import '../../src/bindings/9.0/generated_bindings_capi_media_codec.dart';
+import '../../src/bindings/9.0/generated_bindings_capi_media_controller.dart';
+import '../../src/bindings/9.0/generated_bindings_capi_media_editor.dart';
+import '../../src/bindings/9.0/generated_bindings_capi_media_image_util.dart';
+import '../../src/bindings/9.0/generated_bindings_capi_media_metadata_editor.dart';
+import '../../src/bindings/9.0/generated_bindings_capi_media_metadata_extractor.dart';
+import '../../src/bindings/9.0/generated_bindings_capi_media_player.dart';
+import '../../src/bindings/9.0/generated_bindings_capi_media_radio.dart';
+import '../../src/bindings/9.0/generated_bindings_capi_media_recorder.dart';
+import '../../src/bindings/9.0/generated_bindings_capi_media_screen_mirroring.dart';
+import '../../src/bindings/9.0/generated_bindings_capi_media_sound_manager.dart';
+import '../../src/bindings/9.0/generated_bindings_capi_media_sound_pool.dart';
+import '../../src/bindings/9.0/generated_bindings_capi_media_thumbnail_util.dart';
+import '../../src/bindings/9.0/generated_bindings_capi_media_tone_player.dart';
+import '../../src/bindings/9.0/generated_bindings_capi_media_tool.dart';
+import '../../src/bindings/9.0/generated_bindings_capi_media_wav_player.dart';
+import '../../src/bindings/9.0/generated_bindings_capi_media_webrtc.dart';
+import '../../src/bindings/9.0/generated_bindings_capi_mediademuxer.dart';
+import '../../src/bindings/9.0/generated_bindings_capi_mediamuxer.dart';
+import '../../src/bindings/9.0/generated_bindings_capi_messaging_email.dart';
+import '../../src/bindings/9.0/generated_bindings_capi_ml_common.dart';
+import '../../src/bindings/9.0/generated_bindings_capi_ml_inference_single.dart';
+import '../../src/bindings/9.0/generated_bindings_capi_ml_service.dart';
+import '../../src/bindings/9.0/generated_bindings_capi_network_bluetooth.dart';
+import '../../src/bindings/9.0/generated_bindings_capi_network_connection.dart';
+import '../../src/bindings/9.0/generated_bindings_capi_network_http.dart';
+import '../../src/bindings/9.0/generated_bindings_capi_network_inm.dart';
+import '../../src/bindings/9.0/generated_bindings_capi_network_mtp.dart';
+import '../../src/bindings/9.0/generated_bindings_capi_network_nfc.dart';
+import '../../src/bindings/9.0/generated_bindings_capi_network_softap.dart';
+import '../../src/bindings/9.0/generated_bindings_capi_network_stc.dart';
+import '../../src/bindings/9.0/generated_bindings_capi_network_wifi_aware.dart';
+import '../../src/bindings/9.0/generated_bindings_capi_network_wifi_manager.dart';
+import '../../src/bindings/9.0/generated_bindings_capi_nnstreamer.dart';
+import '../../src/bindings/9.0/generated_bindings_capi_nntrainer.dart';
+import '../../src/bindings/9.0/generated_bindings_capi_privacy_privilege_manager.dart';
+import '../../src/bindings/9.0/generated_bindings_capi_system_device.dart';
+import '../../src/bindings/9.0/generated_bindings_capi_system_info.dart';
+import '../../src/bindings/9.0/generated_bindings_capi_system_media_key.dart';
+import '../../src/bindings/9.0/generated_bindings_capi_system_peripheral_io.dart';
+import '../../src/bindings/9.0/generated_bindings_capi_system_resource_monitor.dart';
+import '../../src/bindings/9.0/generated_bindings_capi_system_runtime_info.dart';
+import '../../src/bindings/9.0/generated_bindings_capi_system_sensor.dart';
+import '../../src/bindings/9.0/generated_bindings_capi_system_system_settings.dart';
+import '../../src/bindings/9.0/generated_bindings_capi_system_usbhost.dart';
+import '../../src/bindings/9.0/generated_bindings_capi_ui_autofill.dart';
+import '../../src/bindings/9.0/generated_bindings_capi_ui_autofill_common.dart';
+import '../../src/bindings/9.0/generated_bindings_capi_ui_autofill_manager.dart';
+import '../../src/bindings/9.0/generated_bindings_capi_ui_autofill_service.dart';
+import '../../src/bindings/9.0/generated_bindings_capi_ui_inputmethod.dart';
+import '../../src/bindings/9.0/generated_bindings_capi_ui_inputmethod_manager.dart';
+import '../../src/bindings/9.0/generated_bindings_capi_vpnsvc.dart';
+import '../../src/bindings/9.0/generated_bindings_capi_web_url_download.dart';
+import '../../src/bindings/9.0/generated_bindings_cion.dart';
+import '../../src/bindings/9.0/generated_bindings_contacts_service2.dart';
+import '../../src/bindings/9.0/generated_bindings_core_sync_client.dart';
+import '../../src/bindings/9.0/generated_bindings_csr_client.dart';
+import '../../src/bindings/9.0/generated_bindings_data_control.dart';
+import '../../src/bindings/9.0/generated_bindings_device_certificate_manager.dart';
+import '../../src/bindings/9.0/generated_bindings_diagnostics.dart';
+import '../../src/bindings/9.0/generated_bindings_dlog.dart';
+import '../../src/bindings/9.0/generated_bindings_dpm.dart';
+import '../../src/bindings/9.0/generated_bindings_eom.dart';
+import '../../src/bindings/9.0/generated_bindings_feedback.dart';
+import '../../src/bindings/9.0/generated_bindings_fido_client.dart';
+import '../../src/bindings/9.0/generated_bindings_iotcon.dart';
+import '../../src/bindings/9.0/generated_bindings_key_manager_client.dart';
+import '../../src/bindings/9.0/generated_bindings_ma.dart';
+import '../../src/bindings/9.0/generated_bindings_message_port.dart';
+import '../../src/bindings/9.0/generated_bindings_mmi.dart';
+import '../../src/bindings/9.0/generated_bindings_mv_3d.dart';
+import '../../src/bindings/9.0/generated_bindings_mv_barcode_detector.dart';
+import '../../src/bindings/9.0/generated_bindings_mv_barcode_generator.dart';
+import '../../src/bindings/9.0/generated_bindings_mv_common.dart';
+import '../../src/bindings/9.0/generated_bindings_mv_face.dart';
+import '../../src/bindings/9.0/generated_bindings_mv_face_recognition.dart';
+import '../../src/bindings/9.0/generated_bindings_mv_image.dart';
+import '../../src/bindings/9.0/generated_bindings_mv_image_classification.dart';
+import '../../src/bindings/9.0/generated_bindings_mv_inference.dart';
+import '../../src/bindings/9.0/generated_bindings_mv_landmark_detection.dart';
+import '../../src/bindings/9.0/generated_bindings_mv_object_detection.dart';
+import '../../src/bindings/9.0/generated_bindings_mv_roi_tracker.dart';
+import '../../src/bindings/9.0/generated_bindings_mv_surveillance.dart';
+import '../../src/bindings/9.0/generated_bindings_notification.dart';
+import '../../src/bindings/9.0/generated_bindings_notification_ex.dart';
+import '../../src/bindings/9.0/generated_bindings_nsd_dns_sd.dart';
+import '../../src/bindings/9.0/generated_bindings_nsd_ssdp.dart';
+import '../../src/bindings/9.0/generated_bindings_oauth2.dart';
+import '../../src/bindings/9.0/generated_bindings_phonenumber_utils.dart';
+import '../../src/bindings/9.0/generated_bindings_privilege_info.dart';
+import '../../src/bindings/9.0/generated_bindings_push.dart';
+import '../../src/bindings/9.0/generated_bindings_rpc_port.dart';
+import '../../src/bindings/9.0/generated_bindings_storage.dart';
+import '../../src/bindings/9.0/generated_bindings_stt.dart';
+import '../../src/bindings/9.0/generated_bindings_stt_engine.dart';
+import '../../src/bindings/9.0/generated_bindings_tbm.dart';
+import '../../src/bindings/9.0/generated_bindings_tizen_core.dart';
+import '../../src/bindings/9.0/generated_bindings_ttrace.dart';
+import '../../src/bindings/9.0/generated_bindings_tts.dart';
+import '../../src/bindings/9.0/generated_bindings_tts_engine.dart';
+import '../../src/bindings/9.0/generated_bindings_update_control.dart';
+import '../../src/bindings/9.0/generated_bindings_vc.dart';
+import '../../src/bindings/9.0/generated_bindings_vc_engine.dart';
+import '../../src/bindings/9.0/generated_bindings_vc_manager.dart';
+import '../../src/bindings/9.0/generated_bindings_webauthn_client.dart';
+import '../../src/bindings/9.0/generated_bindings_wifi_direct.dart';
+import '../../src/bindings/9.0/generated_bindings_yaca.dart';
 import '../../src/lookup_provider.dart';
 
-export '../../src/bindings/9.0/generated_bindings.dart';
 export '../../src/extensions.dart';
+export '../../src/bindings/9.0/generated_bindings_accounts_svc.dart';
+export '../../src/bindings/9.0/generated_bindings_appcore_agent.dart';
+export '../../src/bindings/9.0/generated_bindings_asp.dart';
+export '../../src/bindings/9.0/generated_bindings_badge.dart';
+export '../../src/bindings/9.0/generated_bindings_bundle.dart';
+export '../../src/bindings/9.0/generated_bindings_calendar_service2.dart';
+export '../../src/bindings/9.0/generated_bindings_capi_appfw_alarm.dart';
+export '../../src/bindings/9.0/generated_bindings_capi_appfw_app_common.dart';
+export '../../src/bindings/9.0/generated_bindings_capi_appfw_app_control.dart';
+export '../../src/bindings/9.0/generated_bindings_capi_appfw_app_control_uri.dart';
+export '../../src/bindings/9.0/generated_bindings_capi_appfw_app_manager.dart';
+export '../../src/bindings/9.0/generated_bindings_capi_appfw_application.dart';
+export '../../src/bindings/9.0/generated_bindings_capi_appfw_event.dart';
+export '../../src/bindings/9.0/generated_bindings_capi_appfw_job_scheduler.dart';
+export '../../src/bindings/9.0/generated_bindings_capi_appfw_package_manager.dart';
+export '../../src/bindings/9.0/generated_bindings_capi_appfw_preference.dart';
+export '../../src/bindings/9.0/generated_bindings_capi_base_common.dart';
+export '../../src/bindings/9.0/generated_bindings_capi_content_media_content.dart';
+export '../../src/bindings/9.0/generated_bindings_capi_content_mime_type.dart';
+export '../../src/bindings/9.0/generated_bindings_capi_context.dart';
+export '../../src/bindings/9.0/generated_bindings_capi_geofence_manager.dart';
+export '../../src/bindings/9.0/generated_bindings_capi_location_manager.dart';
+export '../../src/bindings/9.0/generated_bindings_capi_media_audio_io.dart';
+export '../../src/bindings/9.0/generated_bindings_capi_media_camera.dart'
+    hide UnnamedUnion1, UnnamedStruct1;
+export '../../src/bindings/9.0/generated_bindings_capi_media_codec.dart';
+export '../../src/bindings/9.0/generated_bindings_capi_media_controller.dart';
+export '../../src/bindings/9.0/generated_bindings_capi_media_editor.dart';
+export '../../src/bindings/9.0/generated_bindings_capi_media_image_util.dart';
+export '../../src/bindings/9.0/generated_bindings_capi_media_metadata_editor.dart';
+export '../../src/bindings/9.0/generated_bindings_capi_media_metadata_extractor.dart';
+export '../../src/bindings/9.0/generated_bindings_capi_media_player.dart';
+export '../../src/bindings/9.0/generated_bindings_capi_media_radio.dart';
+export '../../src/bindings/9.0/generated_bindings_capi_media_recorder.dart';
+export '../../src/bindings/9.0/generated_bindings_capi_media_screen_mirroring.dart';
+export '../../src/bindings/9.0/generated_bindings_capi_media_sound_manager.dart';
+export '../../src/bindings/9.0/generated_bindings_capi_media_sound_pool.dart';
+export '../../src/bindings/9.0/generated_bindings_capi_media_thumbnail_util.dart';
+export '../../src/bindings/9.0/generated_bindings_capi_media_tone_player.dart';
+export '../../src/bindings/9.0/generated_bindings_capi_media_tool.dart';
+export '../../src/bindings/9.0/generated_bindings_capi_media_wav_player.dart';
+export '../../src/bindings/9.0/generated_bindings_capi_media_webrtc.dart'
+    hide UnnamedUnion1;
+export '../../src/bindings/9.0/generated_bindings_capi_mediademuxer.dart';
+export '../../src/bindings/9.0/generated_bindings_capi_mediamuxer.dart';
+export '../../src/bindings/9.0/generated_bindings_capi_messaging_email.dart';
+export '../../src/bindings/9.0/generated_bindings_capi_ml_common.dart';
+export '../../src/bindings/9.0/generated_bindings_capi_ml_inference_single.dart';
+export '../../src/bindings/9.0/generated_bindings_capi_ml_service.dart';
+export '../../src/bindings/9.0/generated_bindings_capi_network_bluetooth.dart';
+export '../../src/bindings/9.0/generated_bindings_capi_network_connection.dart';
+export '../../src/bindings/9.0/generated_bindings_capi_network_http.dart';
+export '../../src/bindings/9.0/generated_bindings_capi_network_inm.dart';
+export '../../src/bindings/9.0/generated_bindings_capi_network_mtp.dart';
+export '../../src/bindings/9.0/generated_bindings_capi_network_nfc.dart';
+export '../../src/bindings/9.0/generated_bindings_capi_network_softap.dart';
+export '../../src/bindings/9.0/generated_bindings_capi_network_stc.dart';
+export '../../src/bindings/9.0/generated_bindings_capi_network_wifi_aware.dart';
+export '../../src/bindings/9.0/generated_bindings_capi_network_wifi_manager.dart';
+export '../../src/bindings/9.0/generated_bindings_capi_nnstreamer.dart';
+export '../../src/bindings/9.0/generated_bindings_capi_nntrainer.dart';
+export '../../src/bindings/9.0/generated_bindings_capi_privacy_privilege_manager.dart';
+export '../../src/bindings/9.0/generated_bindings_capi_system_device.dart';
+export '../../src/bindings/9.0/generated_bindings_capi_system_info.dart';
+export '../../src/bindings/9.0/generated_bindings_capi_system_media_key.dart';
+export '../../src/bindings/9.0/generated_bindings_capi_system_peripheral_io.dart';
+export '../../src/bindings/9.0/generated_bindings_capi_system_resource_monitor.dart';
+export '../../src/bindings/9.0/generated_bindings_capi_system_runtime_info.dart';
+export '../../src/bindings/9.0/generated_bindings_capi_system_sensor.dart';
+export '../../src/bindings/9.0/generated_bindings_capi_system_system_settings.dart';
+export '../../src/bindings/9.0/generated_bindings_capi_system_usbhost.dart';
+export '../../src/bindings/9.0/generated_bindings_capi_ui_autofill.dart';
+export '../../src/bindings/9.0/generated_bindings_capi_ui_autofill_common.dart';
+export '../../src/bindings/9.0/generated_bindings_capi_ui_autofill_manager.dart';
+export '../../src/bindings/9.0/generated_bindings_capi_ui_autofill_service.dart';
+export '../../src/bindings/9.0/generated_bindings_capi_ui_inputmethod.dart';
+export '../../src/bindings/9.0/generated_bindings_capi_ui_inputmethod_manager.dart';
+export '../../src/bindings/9.0/generated_bindings_capi_vpnsvc.dart';
+export '../../src/bindings/9.0/generated_bindings_capi_web_url_download.dart';
+export '../../src/bindings/9.0/generated_bindings_cion.dart';
+export '../../src/bindings/9.0/generated_bindings_contacts_service2.dart';
+export '../../src/bindings/9.0/generated_bindings_core_sync_client.dart';
+export '../../src/bindings/9.0/generated_bindings_csr_client.dart';
+export '../../src/bindings/9.0/generated_bindings_data_control.dart';
+export '../../src/bindings/9.0/generated_bindings_device_certificate_manager.dart';
+export '../../src/bindings/9.0/generated_bindings_diagnostics.dart';
+export '../../src/bindings/9.0/generated_bindings_dlog.dart';
+export '../../src/bindings/9.0/generated_bindings_dpm.dart';
+export '../../src/bindings/9.0/generated_bindings_eom.dart';
+export '../../src/bindings/9.0/generated_bindings_feedback.dart';
+export '../../src/bindings/9.0/generated_bindings_fido_client.dart';
+export '../../src/bindings/9.0/generated_bindings_iotcon.dart';
+export '../../src/bindings/9.0/generated_bindings_key_manager_client.dart';
+export '../../src/bindings/9.0/generated_bindings_ma.dart';
+export '../../src/bindings/9.0/generated_bindings_message_port.dart';
+export '../../src/bindings/9.0/generated_bindings_mmi.dart';
+export '../../src/bindings/9.0/generated_bindings_mv_3d.dart';
+export '../../src/bindings/9.0/generated_bindings_mv_barcode_detector.dart';
+export '../../src/bindings/9.0/generated_bindings_mv_barcode_generator.dart';
+export '../../src/bindings/9.0/generated_bindings_mv_common.dart';
+export '../../src/bindings/9.0/generated_bindings_mv_face.dart';
+export '../../src/bindings/9.0/generated_bindings_mv_face_recognition.dart';
+export '../../src/bindings/9.0/generated_bindings_mv_image.dart';
+export '../../src/bindings/9.0/generated_bindings_mv_image_classification.dart';
+export '../../src/bindings/9.0/generated_bindings_mv_inference.dart';
+export '../../src/bindings/9.0/generated_bindings_mv_landmark_detection.dart';
+export '../../src/bindings/9.0/generated_bindings_mv_object_detection.dart';
+export '../../src/bindings/9.0/generated_bindings_mv_roi_tracker.dart';
+export '../../src/bindings/9.0/generated_bindings_mv_surveillance.dart';
+export '../../src/bindings/9.0/generated_bindings_notification.dart';
+export '../../src/bindings/9.0/generated_bindings_notification_ex.dart';
+export '../../src/bindings/9.0/generated_bindings_nsd_dns_sd.dart';
+export '../../src/bindings/9.0/generated_bindings_nsd_ssdp.dart';
+export '../../src/bindings/9.0/generated_bindings_oauth2.dart';
+export '../../src/bindings/9.0/generated_bindings_phonenumber_utils.dart';
+export '../../src/bindings/9.0/generated_bindings_privilege_info.dart';
+export '../../src/bindings/9.0/generated_bindings_push.dart';
+export '../../src/bindings/9.0/generated_bindings_rpc_port.dart';
+export '../../src/bindings/9.0/generated_bindings_storage.dart';
+export '../../src/bindings/9.0/generated_bindings_stt.dart';
+export '../../src/bindings/9.0/generated_bindings_stt_engine.dart';
+export '../../src/bindings/9.0/generated_bindings_tbm.dart';
+export '../../src/bindings/9.0/generated_bindings_tizen_core.dart';
+export '../../src/bindings/9.0/generated_bindings_ttrace.dart';
+export '../../src/bindings/9.0/generated_bindings_tts.dart';
+export '../../src/bindings/9.0/generated_bindings_tts_engine.dart';
+export '../../src/bindings/9.0/generated_bindings_update_control.dart';
+export '../../src/bindings/9.0/generated_bindings_vc.dart';
+export '../../src/bindings/9.0/generated_bindings_vc_engine.dart';
+export '../../src/bindings/9.0/generated_bindings_vc_manager.dart';
+export '../../src/bindings/9.0/generated_bindings_webauthn_client.dart';
+export '../../src/bindings/9.0/generated_bindings_wifi_direct.dart';
+export '../../src/bindings/9.0/generated_bindings_yaca.dart';
+export '../../src/bindings/9.0/generated_bindings_time.dart'
+    hide UnnamedUnion1, UnnamedStruct1;
 
 final _lookupProvider = LookupProvider();
 
-Tizen90Native _getTizenNative(Map<String, List<String>> symbolMap) {
-  return Tizen90Native.fromLookup(
+S _getTizenInstance<S>(Map<String, List<String>> symbolMap,
+    S Function(Pointer<T> Function<T extends NativeType>(String)) fromLookup) {
+  return fromLookup(
     <T extends NativeType>(String symbolName) {
       _lookupProvider.registerSymbols(symbolMap);
       return _lookupProvider.lookup<T>(symbolName);
@@ -20,521 +285,603 @@ Tizen90Native _getTizenNative(Map<String, List<String>> symbolMap) {
   );
 }
 
-Tizen90Native? _tizenAccountsSvc;
-Tizen90Native get tizenAccountsSvc =>
-    _tizenAccountsSvc ??= _getTizenNative(accountsSvcSymbols);
-
-Tizen90Native? _tizenAppcoreAgent;
-Tizen90Native get tizenAppcoreAgent =>
-    _tizenAppcoreAgent ??= _getTizenNative(appcoreAgentSymbols);
-
-Tizen90Native? _tizenAsp;
-Tizen90Native get tizenAsp => _tizenAsp ??= _getTizenNative(aspSymbols);
-
-Tizen90Native? _tizenBadge;
-Tizen90Native get tizenBadge => _tizenBadge ??= _getTizenNative(badgeSymbols);
-
-Tizen90Native? _tizenBundle;
-Tizen90Native get tizenBundle =>
-    _tizenBundle ??= _getTizenNative(bundleSymbols);
-
-Tizen90Native? _tizenCalendarService2;
-Tizen90Native get tizenCalendarService2 =>
-    _tizenCalendarService2 ??= _getTizenNative(calendarService2Symbols);
-
-Tizen90Native? _tizenCapiAppfwAlarm;
-Tizen90Native get tizenCapiAppfwAlarm =>
-    _tizenCapiAppfwAlarm ??= _getTizenNative(capiAppfwAlarmSymbols);
-
-Tizen90Native? _tizenCapiAppfwAppCommon;
-Tizen90Native get tizenCapiAppfwAppCommon =>
-    _tizenCapiAppfwAppCommon ??= _getTizenNative(capiAppfwAppCommonSymbols);
-
-Tizen90Native? _tizenCapiAppfwAppControl;
-Tizen90Native get tizenCapiAppfwAppControl =>
-    _tizenCapiAppfwAppControl ??= _getTizenNative(capiAppfwAppControlSymbols);
-
-Tizen90Native? _tizenCapiAppfwAppControlUri;
-Tizen90Native get tizenCapiAppfwAppControlUri =>
-    _tizenCapiAppfwAppControlUri ??=
-        _getTizenNative(capiAppfwAppControlUriSymbols);
-
-Tizen90Native? _tizenCapiAppfwAppManager;
-Tizen90Native get tizenCapiAppfwAppManager =>
-    _tizenCapiAppfwAppManager ??= _getTizenNative(capiAppfwAppManagerSymbols);
-
-Tizen90Native? _tizenCapiAppfwApplication;
-Tizen90Native get tizenCapiAppfwApplication =>
-    _tizenCapiAppfwApplication ??= _getTizenNative(capiAppfwApplicationSymbols);
-
-Tizen90Native? _tizenCapiAppfwEvent;
-Tizen90Native get tizenCapiAppfwEvent =>
-    _tizenCapiAppfwEvent ??= _getTizenNative(capiAppfwEventSymbols);
-
-Tizen90Native? _tizenCapiAppfwJobScheduler;
-Tizen90Native get tizenCapiAppfwJobScheduler => _tizenCapiAppfwJobScheduler ??=
-    _getTizenNative(capiAppfwJobSchedulerSymbols);
-
-Tizen90Native? _tizenCapiAppfwPackageManager;
-Tizen90Native get tizenCapiAppfwPackageManager =>
-    _tizenCapiAppfwPackageManager ??=
-        _getTizenNative(capiAppfwPackageManagerSymbols);
-
-Tizen90Native? _tizenCapiAppfwPreference;
-Tizen90Native get tizenCapiAppfwPreference =>
-    _tizenCapiAppfwPreference ??= _getTizenNative(capiAppfwPreferenceSymbols);
-
-Tizen90Native? _tizenCapiBaseCommon;
-Tizen90Native get tizenCapiBaseCommon =>
-    _tizenCapiBaseCommon ??= _getTizenNative(capiBaseCommonSymbols);
-
-Tizen90Native? _tizenCapiContentMediaContent;
-Tizen90Native get tizenCapiContentMediaContent =>
-    _tizenCapiContentMediaContent ??=
-        _getTizenNative(capiContentMediaContentSymbols);
-
-Tizen90Native? _tizenCapiContentMimeType;
-Tizen90Native get tizenCapiContentMimeType =>
-    _tizenCapiContentMimeType ??= _getTizenNative(capiContentMimeTypeSymbols);
-
-Tizen90Native? _tizenCapiContext;
-Tizen90Native get tizenCapiContext =>
-    _tizenCapiContext ??= _getTizenNative(capiContextSymbols);
-
-Tizen90Native? _tizenCapiGeofenceManager;
-Tizen90Native get tizenCapiGeofenceManager =>
-    _tizenCapiGeofenceManager ??= _getTizenNative(capiGeofenceManagerSymbols);
-
-Tizen90Native? _tizenCapiLocationManager;
-Tizen90Native get tizenCapiLocationManager =>
-    _tizenCapiLocationManager ??= _getTizenNative(capiLocationManagerSymbols);
-
-Tizen90Native? _tizenCapiMediaAudioIo;
-Tizen90Native get tizenCapiMediaAudioIo =>
-    _tizenCapiMediaAudioIo ??= _getTizenNative(capiMediaAudioIoSymbols);
-
-Tizen90Native? _tizenCapiMediaCamera;
-Tizen90Native get tizenCapiMediaCamera =>
-    _tizenCapiMediaCamera ??= _getTizenNative(capiMediaCameraSymbols);
-
-Tizen90Native? _tizenCapiMediaCodec;
-Tizen90Native get tizenCapiMediaCodec =>
-    _tizenCapiMediaCodec ??= _getTizenNative(capiMediaCodecSymbols);
-
-Tizen90Native? _tizenCapiMediaController;
-Tizen90Native get tizenCapiMediaController =>
-    _tizenCapiMediaController ??= _getTizenNative(capiMediaControllerSymbols);
-
-Tizen90Native? _tizenCapiMediaEditor;
-Tizen90Native get tizenCapiMediaEditor =>
-    _tizenCapiMediaEditor ??= _getTizenNative(capiMediaEditorSymbols);
-
-Tizen90Native? _tizenCapiMediaImageUtil;
-Tizen90Native get tizenCapiMediaImageUtil =>
-    _tizenCapiMediaImageUtil ??= _getTizenNative(capiMediaImageUtilSymbols);
-
-Tizen90Native? _tizenCapiMediaMetadataEditor;
-Tizen90Native get tizenCapiMediaMetadataEditor =>
-    _tizenCapiMediaMetadataEditor ??=
-        _getTizenNative(capiMediaMetadataEditorSymbols);
-
-Tizen90Native? _tizenCapiMediaMetadataExtractor;
-Tizen90Native get tizenCapiMediaMetadataExtractor =>
-    _tizenCapiMediaMetadataExtractor ??=
-        _getTizenNative(capiMediaMetadataExtractorSymbols);
-
-Tizen90Native? _tizenCapiMediaPlayer;
-Tizen90Native get tizenCapiMediaPlayer =>
-    _tizenCapiMediaPlayer ??= _getTizenNative(capiMediaPlayerSymbols);
-
-Tizen90Native? _tizenCapiMediaRadio;
-Tizen90Native get tizenCapiMediaRadio =>
-    _tizenCapiMediaRadio ??= _getTizenNative(capiMediaRadioSymbols);
-
-Tizen90Native? _tizenCapiMediaRecorder;
-Tizen90Native get tizenCapiMediaRecorder =>
-    _tizenCapiMediaRecorder ??= _getTizenNative(capiMediaRecorderSymbols);
-
-Tizen90Native? _tizenCapiMediaScreenMirroring;
-Tizen90Native get tizenCapiMediaScreenMirroring =>
-    _tizenCapiMediaScreenMirroring ??=
-        _getTizenNative(capiMediaScreenMirroringSymbols);
-
-Tizen90Native? _tizenCapiMediaSoundManager;
-Tizen90Native get tizenCapiMediaSoundManager => _tizenCapiMediaSoundManager ??=
-    _getTizenNative(capiMediaSoundManagerSymbols);
-
-Tizen90Native? _tizenCapiMediaSoundPool;
-Tizen90Native get tizenCapiMediaSoundPool =>
-    _tizenCapiMediaSoundPool ??= _getTizenNative(capiMediaSoundPoolSymbols);
-
-Tizen90Native? _tizenCapiMediaThumbnailUtil;
-Tizen90Native get tizenCapiMediaThumbnailUtil =>
-    _tizenCapiMediaThumbnailUtil ??=
-        _getTizenNative(capiMediaThumbnailUtilSymbols);
-
-Tizen90Native? _tizenCapiMediaTonePlayer;
-Tizen90Native get tizenCapiMediaTonePlayer =>
-    _tizenCapiMediaTonePlayer ??= _getTizenNative(capiMediaTonePlayerSymbols);
-
-Tizen90Native? _tizenCapiMediaTool;
-Tizen90Native get tizenCapiMediaTool =>
-    _tizenCapiMediaTool ??= _getTizenNative(capiMediaToolSymbols);
-
-Tizen90Native? _tizenCapiMediaWavPlayer;
-Tizen90Native get tizenCapiMediaWavPlayer =>
-    _tizenCapiMediaWavPlayer ??= _getTizenNative(capiMediaWavPlayerSymbols);
-
-Tizen90Native? _tizenCapiMediaWebrtc;
-Tizen90Native get tizenCapiMediaWebrtc =>
-    _tizenCapiMediaWebrtc ??= _getTizenNative(capiMediaWebrtcSymbols);
-
-Tizen90Native? _tizenCapiMediademuxer;
-Tizen90Native get tizenCapiMediademuxer =>
-    _tizenCapiMediademuxer ??= _getTizenNative(capiMediademuxerSymbols);
-
-Tizen90Native? _tizenCapiMediamuxer;
-Tizen90Native get tizenCapiMediamuxer =>
-    _tizenCapiMediamuxer ??= _getTizenNative(capiMediamuxerSymbols);
-
-Tizen90Native? _tizenCapiMessagingEmail;
-Tizen90Native get tizenCapiMessagingEmail =>
-    _tizenCapiMessagingEmail ??= _getTizenNative(capiMessagingEmailSymbols);
-
-Tizen90Native? _tizenCapiMlCommon;
-Tizen90Native get tizenCapiMlCommon =>
-    _tizenCapiMlCommon ??= _getTizenNative(capiMlCommonSymbols);
-
-Tizen90Native? _tizenCapiMlInferenceSingle;
-Tizen90Native get tizenCapiMlInferenceSingle => _tizenCapiMlInferenceSingle ??=
-    _getTizenNative(capiMlInferenceSingleSymbols);
-
-Tizen90Native? _tizenCapiMlService;
-Tizen90Native get tizenCapiMlService =>
-    _tizenCapiMlService ??= _getTizenNative(capiMlServiceSymbols);
-
-Tizen90Native? _tizenCapiNetworkBluetooth;
-Tizen90Native get tizenCapiNetworkBluetooth =>
-    _tizenCapiNetworkBluetooth ??= _getTizenNative(capiNetworkBluetoothSymbols);
-
-Tizen90Native? _tizenCapiNetworkConnection;
-Tizen90Native get tizenCapiNetworkConnection => _tizenCapiNetworkConnection ??=
-    _getTizenNative(capiNetworkConnectionSymbols);
-
-Tizen90Native? _tizenCapiNetworkHttp;
-Tizen90Native get tizenCapiNetworkHttp =>
-    _tizenCapiNetworkHttp ??= _getTizenNative(capiNetworkHttpSymbols);
-
-Tizen90Native? _tizenCapiNetworkInm;
-Tizen90Native get tizenCapiNetworkInm =>
-    _tizenCapiNetworkInm ??= _getTizenNative(capiNetworkInmSymbols);
-
-Tizen90Native? _tizenCapiNetworkMtp;
-Tizen90Native get tizenCapiNetworkMtp =>
-    _tizenCapiNetworkMtp ??= _getTizenNative(capiNetworkMtpSymbols);
-
-Tizen90Native? _tizenCapiNetworkSoftap;
-Tizen90Native get tizenCapiNetworkSoftap =>
-    _tizenCapiNetworkSoftap ??= _getTizenNative(capiNetworkSoftapSymbols);
-
-Tizen90Native? _tizenCapiNetworkStc;
-Tizen90Native get tizenCapiNetworkStc =>
-    _tizenCapiNetworkStc ??= _getTizenNative(capiNetworkStcSymbols);
-
-Tizen90Native? _tizenCapiNetworkWifiAware;
-Tizen90Native get tizenCapiNetworkWifiAware =>
-    _tizenCapiNetworkWifiAware ??= _getTizenNative(capiNetworkWifiAwareSymbols);
-
-Tizen90Native? _tizenCapiNetworkWifiManager;
-Tizen90Native get tizenCapiNetworkWifiManager =>
-    _tizenCapiNetworkWifiManager ??=
-        _getTizenNative(capiNetworkWifiManagerSymbols);
-
-Tizen90Native? _tizenCapiNnstreamer;
-Tizen90Native get tizenCapiNnstreamer =>
-    _tizenCapiNnstreamer ??= _getTizenNative(capiNnstreamerSymbols);
-
-Tizen90Native? _tizenCapiNntrainer;
-Tizen90Native get tizenCapiNntrainer =>
-    _tizenCapiNntrainer ??= _getTizenNative(capiNntrainerSymbols);
-
-Tizen90Native? _tizenCapiPrivacyPrivilegeManager;
-Tizen90Native get tizenCapiPrivacyPrivilegeManager =>
-    _tizenCapiPrivacyPrivilegeManager ??=
-        _getTizenNative(capiPrivacyPrivilegeManagerSymbols);
-
-Tizen90Native? _tizenCapiSystemDevice;
-Tizen90Native get tizenCapiSystemDevice =>
-    _tizenCapiSystemDevice ??= _getTizenNative(capiSystemDeviceSymbols);
-
-Tizen90Native? _tizenCapiSystemInfo;
-Tizen90Native get tizenCapiSystemInfo =>
-    _tizenCapiSystemInfo ??= _getTizenNative(capiSystemInfoSymbols);
-
-Tizen90Native? _tizenCapiSystemMediaKey;
-Tizen90Native get tizenCapiSystemMediaKey =>
-    _tizenCapiSystemMediaKey ??= _getTizenNative(capiSystemMediaKeySymbols);
-
-Tizen90Native? _tizenCapiSystemPeripheralIo;
-Tizen90Native get tizenCapiSystemPeripheralIo =>
-    _tizenCapiSystemPeripheralIo ??=
-        _getTizenNative(capiSystemPeripheralIoSymbols);
-
-Tizen90Native? _tizenCapiSystemResourceMonitor;
-Tizen90Native get tizenCapiSystemResourceMonitor =>
-    _tizenCapiSystemResourceMonitor ??=
-        _getTizenNative(capiSystemResourceMonitorSymbols);
-
-Tizen90Native? _tizenCapiSystemRuntimeInfo;
-Tizen90Native get tizenCapiSystemRuntimeInfo => _tizenCapiSystemRuntimeInfo ??=
-    _getTizenNative(capiSystemRuntimeInfoSymbols);
-
-Tizen90Native? _tizenCapiSystemSensor;
-Tizen90Native get tizenCapiSystemSensor =>
-    _tizenCapiSystemSensor ??= _getTizenNative(capiSystemSensorSymbols);
-
-Tizen90Native? _tizenCapiSystemSystemSettings;
-Tizen90Native get tizenCapiSystemSystemSettings =>
-    _tizenCapiSystemSystemSettings ??=
-        _getTizenNative(capiSystemSystemSettingsSymbols);
-
-Tizen90Native? _tizenCapiSystemUsbhost;
-Tizen90Native get tizenCapiSystemUsbhost =>
-    _tizenCapiSystemUsbhost ??= _getTizenNative(capiSystemUsbhostSymbols);
-
-Tizen90Native? _tizenCapiUiAutofillCommon;
-Tizen90Native get tizenCapiUiAutofillCommon =>
-    _tizenCapiUiAutofillCommon ??= _getTizenNative(capiUiAutofillCommonSymbols);
-
-Tizen90Native? _tizenCapiUiAutofillManager;
-Tizen90Native get tizenCapiUiAutofillManager => _tizenCapiUiAutofillManager ??=
-    _getTizenNative(capiUiAutofillManagerSymbols);
-
-Tizen90Native? _tizenCapiUiAutofillService;
-Tizen90Native get tizenCapiUiAutofillService => _tizenCapiUiAutofillService ??=
-    _getTizenNative(capiUiAutofillServiceSymbols);
-
-Tizen90Native? _tizenCapiUiAutofill;
-Tizen90Native get tizenCapiUiAutofill =>
-    _tizenCapiUiAutofill ??= _getTizenNative(capiUiAutofillSymbols);
-
-Tizen90Native? _tizenCapiUiInputmethodManager;
-Tizen90Native get tizenCapiUiInputmethodManager =>
-    _tizenCapiUiInputmethodManager ??=
-        _getTizenNative(capiUiInputmethodManagerSymbols);
-
-Tizen90Native? _tizenCapiUiInputmethod;
-Tizen90Native get tizenCapiUiInputmethod =>
-    _tizenCapiUiInputmethod ??= _getTizenNative(capiUiInputmethodSymbols);
-
-Tizen90Native? _tizenCapiVpnsvc;
-Tizen90Native get tizenCapiVpnsvc =>
-    _tizenCapiVpnsvc ??= _getTizenNative(capiVpnsvcSymbols);
-
-Tizen90Native? _tizenCapiWebUrlDownload;
-Tizen90Native get tizenCapiWebUrlDownload =>
-    _tizenCapiWebUrlDownload ??= _getTizenNative(capiWebUrlDownloadSymbols);
-
-Tizen90Native? _tizenCion;
-Tizen90Native get tizenCion => _tizenCion ??= _getTizenNative(cionSymbols);
-
-Tizen90Native? _tizenContactsService2;
-Tizen90Native get tizenContactsService2 =>
-    _tizenContactsService2 ??= _getTizenNative(contactsService2Symbols);
-
-Tizen90Native? _tizenCoreSyncClient;
-Tizen90Native get tizenCoreSyncClient =>
-    _tizenCoreSyncClient ??= _getTizenNative(coreSyncClientSymbols);
-
-Tizen90Native? _tizenCsrClient;
-Tizen90Native get tizenCsrClient =>
-    _tizenCsrClient ??= _getTizenNative(csrClientSymbols);
-
-Tizen90Native? _tizenDataControl;
-Tizen90Native get tizenDataControl =>
-    _tizenDataControl ??= _getTizenNative(dataControlSymbols);
-
-Tizen90Native? _tizenDeviceCertificateManager;
-Tizen90Native get tizenDeviceCertificateManager =>
-    _tizenDeviceCertificateManager ??=
-        _getTizenNative(deviceCertificateManagerSymbols);
-
-Tizen90Native? _tizenDiagnostics;
-Tizen90Native get tizenDiagnostics =>
-    _tizenDiagnostics ??= _getTizenNative(diagnosticsSymbols);
-
-Tizen90Native? _tizenDlog;
-Tizen90Native get tizenDlog => _tizenDlog ??= _getTizenNative(dlogSymbols);
-
-Tizen90Native? _tizenDpm;
-Tizen90Native get tizenDpm => _tizenDpm ??= _getTizenNative(dpmSymbols);
-
-Tizen90Native? _tizenEom;
-Tizen90Native get tizenEom => _tizenEom ??= _getTizenNative(eomSymbols);
-
-Tizen90Native? _tizenFeedback;
-Tizen90Native get tizenFeedback =>
-    _tizenFeedback ??= _getTizenNative(feedbackSymbols);
-
-Tizen90Native? _tizenFidoClient;
-Tizen90Native get tizenFidoClient =>
-    _tizenFidoClient ??= _getTizenNative(fidoClientSymbols);
-
-Tizen90Native? _tizenIotcon;
-Tizen90Native get tizenIotcon =>
-    _tizenIotcon ??= _getTizenNative(iotconSymbols);
-
-Tizen90Native? _tizenKeyManagerClient;
-Tizen90Native get tizenKeyManagerClient =>
-    _tizenKeyManagerClient ??= _getTizenNative(keyManagerClientSymbols);
-
-Tizen90Native? _tizenMa;
-Tizen90Native get tizenMa => _tizenMa ??= _getTizenNative(maSymbols);
-
-Tizen90Native? _tizenMessagePort;
-Tizen90Native get tizenMessagePort =>
-    _tizenMessagePort ??= _getTizenNative(messagePortSymbols);
-
-Tizen90Native? _tizenMmi;
-Tizen90Native get tizenMmi => _tizenMmi ??= _getTizenNative(mmiSymbols);
-
-Tizen90Native? _tizenMv3d;
-Tizen90Native get tizenMv3d => _tizenMv3d ??= _getTizenNative(mv_3dSymbols);
-
-Tizen90Native? _tizenMvBarcodeDetector;
-Tizen90Native get tizenMvBarcodeDetector =>
-    _tizenMvBarcodeDetector ??= _getTizenNative(mv_barcode_detectorSymbols);
-
-Tizen90Native? _tizenMvBarcodeGenerator;
-Tizen90Native get tizenMvBarcodeGenerator =>
-    _tizenMvBarcodeGenerator ??= _getTizenNative(mv_barcode_generatorSymbols);
-
-Tizen90Native? _tizenMvCommon;
-Tizen90Native get tizenMvCommon =>
-    _tizenMvCommon ??= _getTizenNative(mv_commonSymbols);
-
-Tizen90Native? _tizenMvFaceRecognition;
-Tizen90Native get tizenMvFaceRecognition =>
-    _tizenMvFaceRecognition ??= _getTizenNative(mv_face_recognitionSymbols);
-
-Tizen90Native? _tizenMvFace;
-Tizen90Native get tizenMvFace =>
-    _tizenMvFace ??= _getTizenNative(mv_faceSymbols);
-
-Tizen90Native? _tizenMvImageClassification;
-Tizen90Native get tizenMvImageClassification => _tizenMvImageClassification ??=
-    _getTizenNative(mv_image_classificationSymbols);
-
-Tizen90Native? _tizenMvImage;
-Tizen90Native get tizenMvImage =>
-    _tizenMvImage ??= _getTizenNative(mv_imageSymbols);
-
-Tizen90Native? _tizenMvInference;
-Tizen90Native get tizenMvInference =>
-    _tizenMvInference ??= _getTizenNative(mv_inferenceSymbols);
-
-Tizen90Native? _tizenMvLandmarkDetection;
-Tizen90Native get tizenMvLandmarkDetection =>
-    _tizenMvLandmarkDetection ??= _getTizenNative(mv_landmark_detectionSymbols);
-
-Tizen90Native? _tizenMvObjectDetection;
-Tizen90Native get tizenMvObjectDetection =>
-    _tizenMvObjectDetection ??= _getTizenNative(mv_object_detectionSymbols);
-
-Tizen90Native? _tizenMvRoiTracker;
-Tizen90Native get tizenMvRoiTracker =>
-    _tizenMvRoiTracker ??= _getTizenNative(mv_roi_trackerSymbols);
-
-Tizen90Native? _tizenMvSurveillance;
-Tizen90Native get tizenMvSurveillance =>
-    _tizenMvSurveillance ??= _getTizenNative(mv_surveillanceSymbols);
-
-Tizen90Native? _tizenNotificationEx;
-Tizen90Native get tizenNotificationEx =>
-    _tizenNotificationEx ??= _getTizenNative(notificationExSymbols);
-
-Tizen90Native? _tizenNotification;
-Tizen90Native get tizenNotification =>
-    _tizenNotification ??= _getTizenNative(notificationSymbols);
-
-Tizen90Native? _tizenNsdDnsSd;
-Tizen90Native get tizenNsdDnsSd =>
-    _tizenNsdDnsSd ??= _getTizenNative(nsdDnsSdSymbols);
-
-Tizen90Native? _tizenNsdSsdp;
-Tizen90Native get tizenNsdSsdp =>
-    _tizenNsdSsdp ??= _getTizenNative(nsdSsdpSymbols);
-
-Tizen90Native? _tizenOauth2;
-Tizen90Native get tizenOauth2 =>
-    _tizenOauth2 ??= _getTizenNative(oauth2Symbols);
-
-Tizen90Native? _tizenPhonenumberUtils;
-Tizen90Native get tizenPhonenumberUtils =>
-    _tizenPhonenumberUtils ??= _getTizenNative(phonenumberUtilsSymbols);
-
-Tizen90Native? _tizenPrivilegeInfo;
-Tizen90Native get tizenPrivilegeInfo =>
-    _tizenPrivilegeInfo ??= _getTizenNative(privilegeInfoSymbols);
-
-Tizen90Native? _tizenPush;
-Tizen90Native get tizenPush => _tizenPush ??= _getTizenNative(pushSymbols);
-
-Tizen90Native? _tizenRpcPort;
-Tizen90Native get tizenRpcPort =>
-    _tizenRpcPort ??= _getTizenNative(rpcPortSymbols);
-
-Tizen90Native? _tizenStorage;
-Tizen90Native get tizenStorage =>
-    _tizenStorage ??= _getTizenNative(storageSymbols);
-
-Tizen90Native? _tizenSttEngine;
-Tizen90Native get tizenSttEngine =>
-    _tizenSttEngine ??= _getTizenNative(stt_engineSymbols);
-
-Tizen90Native? _tizenStt;
-Tizen90Native get tizenStt => _tizenStt ??= _getTizenNative(sttSymbols);
-
-Tizen90Native? _tizenTbm;
-Tizen90Native get tizenTbm => _tizenTbm ??= _getTizenNative(tbmSymbols);
-
-Tizen90Native? _tizenTizenCore;
-Tizen90Native get tizenTizenCore =>
-    _tizenTizenCore ??= _getTizenNative(tizenCoreSymbols);
-
-Tizen90Native? _tizenTtrace;
-Tizen90Native get tizenTtrace =>
-    _tizenTtrace ??= _getTizenNative(ttraceSymbols);
-
-Tizen90Native? _tizenTtsEngine;
-Tizen90Native get tizenTtsEngine =>
-    _tizenTtsEngine ??= _getTizenNative(tts_engineSymbols);
-
-Tizen90Native? _tizenTts;
-Tizen90Native get tizenTts => _tizenTts ??= _getTizenNative(ttsSymbols);
-
-Tizen90Native? _tizenUpdateControl;
-Tizen90Native get tizenUpdateControl =>
-    _tizenUpdateControl ??= _getTizenNative(updateControlSymbols);
-
-Tizen90Native? _tizenVcEngine;
-Tizen90Native get tizenVcEngine =>
-    _tizenVcEngine ??= _getTizenNative(vc_engineSymbols);
-
-Tizen90Native? _tizenVcManager;
-Tizen90Native get tizenVcManager =>
-    _tizenVcManager ??= _getTizenNative(vc_managerSymbols);
-
-Tizen90Native? _tizenVc;
-Tizen90Native get tizenVc => _tizenVc ??= _getTizenNative(vcSymbols);
-
-Tizen90Native? _tizenWebauthnClient;
-Tizen90Native get tizenWebauthnClient =>
-    _tizenWebauthnClient ??= _getTizenNative(webauthnClientSymbols);
-
-Tizen90Native? _tizenWifiDirect;
-Tizen90Native get tizenWifiDirect =>
-    _tizenWifiDirect ??= _getTizenNative(wifiDirectSymbols);
-
-Tizen90Native? _tizenYaca;
-Tizen90Native get tizenYaca => _tizenYaca ??= _getTizenNative(yacaSymbols);
+Tizen90AccountsSvc? _tizenAccountsSvc;
+Tizen90AccountsSvc get tizenAccountsSvc => _tizenAccountsSvc ??=
+    _getTizenInstance(accountsSvcSymbols, Tizen90AccountsSvc.fromLookup)!;
+
+Tizen90AppcoreAgent? _tizenAppcoreAgent;
+Tizen90AppcoreAgent get tizenAppcoreAgent => _tizenAppcoreAgent ??=
+    _getTizenInstance(appcoreAgentSymbols, Tizen90AppcoreAgent.fromLookup)!;
+
+Tizen90Asp? _tizenAsp;
+Tizen90Asp get tizenAsp =>
+    _tizenAsp ??= _getTizenInstance(aspSymbols, Tizen90Asp.fromLookup)!;
+
+Tizen90Badge? _tizenBadge;
+Tizen90Badge get tizenBadge =>
+    _tizenBadge ??= _getTizenInstance(badgeSymbols, Tizen90Badge.fromLookup)!;
+
+Tizen90Bundle? _tizenBundle;
+Tizen90Bundle get tizenBundle => _tizenBundle ??=
+    _getTizenInstance(bundleSymbols, Tizen90Bundle.fromLookup)!;
+
+Tizen90CalendarService2? _tizenCalendarService2;
+Tizen90CalendarService2 get tizenCalendarService2 =>
+    _tizenCalendarService2 ??= _getTizenInstance(
+        calendarService2Symbols, Tizen90CalendarService2.fromLookup)!;
+
+Tizen90CapiAppfwAlarm? _tizenCapiAppfwAlarm;
+Tizen90CapiAppfwAlarm get tizenCapiAppfwAlarm => _tizenCapiAppfwAlarm ??=
+    _getTizenInstance(capiAppfwAlarmSymbols, Tizen90CapiAppfwAlarm.fromLookup)!;
+
+Tizen90CapiAppfwAppCommon? _tizenCapiAppfwAppCommon;
+Tizen90CapiAppfwAppCommon get tizenCapiAppfwAppCommon =>
+    _tizenCapiAppfwAppCommon ??= _getTizenInstance(
+        capiAppfwAppCommonSymbols, Tizen90CapiAppfwAppCommon.fromLookup)!;
+
+Tizen90CapiAppfwAppControl? _tizenCapiAppfwAppControl;
+Tizen90CapiAppfwAppControl get tizenCapiAppfwAppControl =>
+    _tizenCapiAppfwAppControl ??= _getTizenInstance(
+        capiAppfwAppControlSymbols, Tizen90CapiAppfwAppControl.fromLookup)!;
+
+Tizen90CapiAppfwAppControlUri? _tizenCapiAppfwAppControlUri;
+Tizen90CapiAppfwAppControlUri get tizenCapiAppfwAppControlUri =>
+    _tizenCapiAppfwAppControlUri ??= _getTizenInstance(
+        capiAppfwAppControlUriSymbols,
+        Tizen90CapiAppfwAppControlUri.fromLookup)!;
+
+Tizen90CapiAppfwAppManager? _tizenCapiAppfwAppManager;
+Tizen90CapiAppfwAppManager get tizenCapiAppfwAppManager =>
+    _tizenCapiAppfwAppManager ??= _getTizenInstance(
+        capiAppfwAppManagerSymbols, Tizen90CapiAppfwAppManager.fromLookup)!;
+
+Tizen90CapiAppfwApplication? _tizenCapiAppfwApplication;
+Tizen90CapiAppfwApplication get tizenCapiAppfwApplication =>
+    _tizenCapiAppfwApplication ??= _getTizenInstance(
+        capiAppfwApplicationSymbols, Tizen90CapiAppfwApplication.fromLookup)!;
+
+Tizen90CapiAppfwEvent? _tizenCapiAppfwEvent;
+Tizen90CapiAppfwEvent get tizenCapiAppfwEvent => _tizenCapiAppfwEvent ??=
+    _getTizenInstance(capiAppfwEventSymbols, Tizen90CapiAppfwEvent.fromLookup)!;
+
+Tizen90CapiAppfwJobScheduler? _tizenCapiAppfwJobScheduler;
+Tizen90CapiAppfwJobScheduler get tizenCapiAppfwJobScheduler =>
+    _tizenCapiAppfwJobScheduler ??= _getTizenInstance(
+        capiAppfwJobSchedulerSymbols, Tizen90CapiAppfwJobScheduler.fromLookup)!;
+
+Tizen90CapiAppfwPackageManager? _tizenCapiAppfwPackageManager;
+Tizen90CapiAppfwPackageManager get tizenCapiAppfwPackageManager =>
+    _tizenCapiAppfwPackageManager ??= _getTizenInstance(
+        capiAppfwPackageManagerSymbols,
+        Tizen90CapiAppfwPackageManager.fromLookup)!;
+
+Tizen90CapiAppfwPreference? _tizenCapiAppfwPreference;
+Tizen90CapiAppfwPreference get tizenCapiAppfwPreference =>
+    _tizenCapiAppfwPreference ??= _getTizenInstance(
+        capiAppfwPreferenceSymbols, Tizen90CapiAppfwPreference.fromLookup)!;
+
+Tizen90CapiBaseCommon? _tizenCapiBaseCommon;
+Tizen90CapiBaseCommon get tizenCapiBaseCommon => _tizenCapiBaseCommon ??=
+    _getTizenInstance(capiBaseCommonSymbols, Tizen90CapiBaseCommon.fromLookup)!;
+
+Tizen90CapiContentMediaContent? _tizenCapiContentMediaContent;
+Tizen90CapiContentMediaContent get tizenCapiContentMediaContent =>
+    _tizenCapiContentMediaContent ??= _getTizenInstance(
+        capiContentMediaContentSymbols,
+        Tizen90CapiContentMediaContent.fromLookup)!;
+
+Tizen90CapiContentMimeType? _tizenCapiContentMimeType;
+Tizen90CapiContentMimeType get tizenCapiContentMimeType =>
+    _tizenCapiContentMimeType ??= _getTizenInstance(
+        capiContentMimeTypeSymbols, Tizen90CapiContentMimeType.fromLookup)!;
+
+Tizen90CapiContext? _tizenCapiContext;
+Tizen90CapiContext get tizenCapiContext => _tizenCapiContext ??=
+    _getTizenInstance(capiContextSymbols, Tizen90CapiContext.fromLookup)!;
+
+Tizen90CapiGeofenceManager? _tizenCapiGeofenceManager;
+Tizen90CapiGeofenceManager get tizenCapiGeofenceManager =>
+    _tizenCapiGeofenceManager ??= _getTizenInstance(
+        capiGeofenceManagerSymbols, Tizen90CapiGeofenceManager.fromLookup)!;
+
+Tizen90CapiLocationManager? _tizenCapiLocationManager;
+Tizen90CapiLocationManager get tizenCapiLocationManager =>
+    _tizenCapiLocationManager ??= _getTizenInstance(
+        capiLocationManagerSymbols, Tizen90CapiLocationManager.fromLookup)!;
+
+Tizen90CapiMediaAudioIo? _tizenCapiMediaAudioIo;
+Tizen90CapiMediaAudioIo get tizenCapiMediaAudioIo =>
+    _tizenCapiMediaAudioIo ??= _getTizenInstance(
+        capiMediaAudioIoSymbols, Tizen90CapiMediaAudioIo.fromLookup)!;
+
+Tizen90CapiMediaCamera? _tizenCapiMediaCamera;
+Tizen90CapiMediaCamera get tizenCapiMediaCamera =>
+    _tizenCapiMediaCamera ??= _getTizenInstance(
+        capiMediaCameraSymbols, Tizen90CapiMediaCamera.fromLookup)!;
+
+Tizen90CapiMediaCodec? _tizenCapiMediaCodec;
+Tizen90CapiMediaCodec get tizenCapiMediaCodec => _tizenCapiMediaCodec ??=
+    _getTizenInstance(capiMediaCodecSymbols, Tizen90CapiMediaCodec.fromLookup)!;
+
+Tizen90CapiMediaController? _tizenCapiMediaController;
+Tizen90CapiMediaController get tizenCapiMediaController =>
+    _tizenCapiMediaController ??= _getTizenInstance(
+        capiMediaControllerSymbols, Tizen90CapiMediaController.fromLookup)!;
+
+Tizen90CapiMediaEditor? _tizenCapiMediaEditor;
+Tizen90CapiMediaEditor get tizenCapiMediaEditor =>
+    _tizenCapiMediaEditor ??= _getTizenInstance(
+        capiMediaEditorSymbols, Tizen90CapiMediaEditor.fromLookup)!;
+
+Tizen90CapiMediaImageUtil? _tizenCapiMediaImageUtil;
+Tizen90CapiMediaImageUtil get tizenCapiMediaImageUtil =>
+    _tizenCapiMediaImageUtil ??= _getTizenInstance(
+        capiMediaImageUtilSymbols, Tizen90CapiMediaImageUtil.fromLookup)!;
+
+Tizen90CapiMediaMetadataEditor? _tizenCapiMediaMetadataEditor;
+Tizen90CapiMediaMetadataEditor get tizenCapiMediaMetadataEditor =>
+    _tizenCapiMediaMetadataEditor ??= _getTizenInstance(
+        capiMediaMetadataEditorSymbols,
+        Tizen90CapiMediaMetadataEditor.fromLookup)!;
+
+Tizen90CapiMediaMetadataExtractor? _tizenCapiMediaMetadataExtractor;
+Tizen90CapiMediaMetadataExtractor get tizenCapiMediaMetadataExtractor =>
+    _tizenCapiMediaMetadataExtractor ??= _getTizenInstance(
+        capiMediaMetadataExtractorSymbols,
+        Tizen90CapiMediaMetadataExtractor.fromLookup)!;
+
+Tizen90CapiMediaPlayer? _tizenCapiMediaPlayer;
+Tizen90CapiMediaPlayer get tizenCapiMediaPlayer =>
+    _tizenCapiMediaPlayer ??= _getTizenInstance(
+        capiMediaPlayerSymbols, Tizen90CapiMediaPlayer.fromLookup)!;
+
+Tizen90CapiMediaRadio? _tizenCapiMediaRadio;
+Tizen90CapiMediaRadio get tizenCapiMediaRadio => _tizenCapiMediaRadio ??=
+    _getTizenInstance(capiMediaRadioSymbols, Tizen90CapiMediaRadio.fromLookup)!;
+
+Tizen90CapiMediaRecorder? _tizenCapiMediaRecorder;
+Tizen90CapiMediaRecorder get tizenCapiMediaRecorder =>
+    _tizenCapiMediaRecorder ??= _getTizenInstance(
+        capiMediaRecorderSymbols, Tizen90CapiMediaRecorder.fromLookup)!;
+
+Tizen90CapiMediaScreenMirroring? _tizenCapiMediaScreenMirroring;
+Tizen90CapiMediaScreenMirroring get tizenCapiMediaScreenMirroring =>
+    _tizenCapiMediaScreenMirroring ??= _getTizenInstance(
+        capiMediaScreenMirroringSymbols,
+        Tizen90CapiMediaScreenMirroring.fromLookup)!;
+
+Tizen90CapiMediaSoundManager? _tizenCapiMediaSoundManager;
+Tizen90CapiMediaSoundManager get tizenCapiMediaSoundManager =>
+    _tizenCapiMediaSoundManager ??= _getTizenInstance(
+        capiMediaSoundManagerSymbols, Tizen90CapiMediaSoundManager.fromLookup)!;
+
+Tizen90CapiMediaSoundPool? _tizenCapiMediaSoundPool;
+Tizen90CapiMediaSoundPool get tizenCapiMediaSoundPool =>
+    _tizenCapiMediaSoundPool ??= _getTizenInstance(
+        capiMediaSoundPoolSymbols, Tizen90CapiMediaSoundPool.fromLookup)!;
+
+Tizen90CapiMediaThumbnailUtil? _tizenCapiMediaThumbnailUtil;
+Tizen90CapiMediaThumbnailUtil get tizenCapiMediaThumbnailUtil =>
+    _tizenCapiMediaThumbnailUtil ??= _getTizenInstance(
+        capiMediaThumbnailUtilSymbols,
+        Tizen90CapiMediaThumbnailUtil.fromLookup)!;
+
+Tizen90CapiMediaTonePlayer? _tizenCapiMediaTonePlayer;
+Tizen90CapiMediaTonePlayer get tizenCapiMediaTonePlayer =>
+    _tizenCapiMediaTonePlayer ??= _getTizenInstance(
+        capiMediaTonePlayerSymbols, Tizen90CapiMediaTonePlayer.fromLookup)!;
+
+Tizen90CapiMediaTool? _tizenCapiMediaTool;
+Tizen90CapiMediaTool get tizenCapiMediaTool => _tizenCapiMediaTool ??=
+    _getTizenInstance(capiMediaToolSymbols, Tizen90CapiMediaTool.fromLookup)!;
+
+Tizen90CapiMediaWavPlayer? _tizenCapiMediaWavPlayer;
+Tizen90CapiMediaWavPlayer get tizenCapiMediaWavPlayer =>
+    _tizenCapiMediaWavPlayer ??= _getTizenInstance(
+        capiMediaWavPlayerSymbols, Tizen90CapiMediaWavPlayer.fromLookup)!;
+
+Tizen90CapiMediaWebrtc? _tizenCapiMediaWebrtc;
+Tizen90CapiMediaWebrtc get tizenCapiMediaWebrtc =>
+    _tizenCapiMediaWebrtc ??= _getTizenInstance(
+        capiMediaWebrtcSymbols, Tizen90CapiMediaWebrtc.fromLookup)!;
+
+Tizen90CapiMediademuxer? _tizenCapiMediademuxer;
+Tizen90CapiMediademuxer get tizenCapiMediademuxer =>
+    _tizenCapiMediademuxer ??= _getTizenInstance(
+        capiMediademuxerSymbols, Tizen90CapiMediademuxer.fromLookup)!;
+
+Tizen90CapiMediamuxer? _tizenCapiMediamuxer;
+Tizen90CapiMediamuxer get tizenCapiMediamuxer => _tizenCapiMediamuxer ??=
+    _getTizenInstance(capiMediamuxerSymbols, Tizen90CapiMediamuxer.fromLookup)!;
+
+Tizen90CapiMessagingEmail? _tizenCapiMessagingEmail;
+Tizen90CapiMessagingEmail get tizenCapiMessagingEmail =>
+    _tizenCapiMessagingEmail ??= _getTizenInstance(
+        capiMessagingEmailSymbols, Tizen90CapiMessagingEmail.fromLookup)!;
+
+Tizen90CapiMlCommon? _tizenCapiMlCommon;
+Tizen90CapiMlCommon get tizenCapiMlCommon => _tizenCapiMlCommon ??=
+    _getTizenInstance(capiMlCommonSymbols, Tizen90CapiMlCommon.fromLookup)!;
+
+Tizen90CapiMlInferenceSingle? _tizenCapiMlInferenceSingle;
+Tizen90CapiMlInferenceSingle get tizenCapiMlInferenceSingle =>
+    _tizenCapiMlInferenceSingle ??= _getTizenInstance(
+        capiMlInferenceSingleSymbols, Tizen90CapiMlInferenceSingle.fromLookup)!;
+
+Tizen90CapiMlService? _tizenCapiMlService;
+Tizen90CapiMlService get tizenCapiMlService => _tizenCapiMlService ??=
+    _getTizenInstance(capiMlServiceSymbols, Tizen90CapiMlService.fromLookup)!;
+
+Tizen90CapiNetworkBluetooth? _tizenCapiNetworkBluetooth;
+Tizen90CapiNetworkBluetooth get tizenCapiNetworkBluetooth =>
+    _tizenCapiNetworkBluetooth ??= _getTizenInstance(
+        capiNetworkBluetoothSymbols, Tizen90CapiNetworkBluetooth.fromLookup)!;
+
+Tizen90CapiNetworkConnection? _tizenCapiNetworkConnection;
+Tizen90CapiNetworkConnection get tizenCapiNetworkConnection =>
+    _tizenCapiNetworkConnection ??= _getTizenInstance(
+        capiNetworkConnectionSymbols, Tizen90CapiNetworkConnection.fromLookup)!;
+
+Tizen90CapiNetworkHttp? _tizenCapiNetworkHttp;
+Tizen90CapiNetworkHttp get tizenCapiNetworkHttp =>
+    _tizenCapiNetworkHttp ??= _getTizenInstance(
+        capiNetworkHttpSymbols, Tizen90CapiNetworkHttp.fromLookup)!;
+
+Tizen90CapiNetworkInm? _tizenCapiNetworkInm;
+Tizen90CapiNetworkInm get tizenCapiNetworkInm => _tizenCapiNetworkInm ??=
+    _getTizenInstance(capiNetworkInmSymbols, Tizen90CapiNetworkInm.fromLookup)!;
+
+Tizen90CapiNetworkMtp? _tizenCapiNetworkMtp;
+Tizen90CapiNetworkMtp get tizenCapiNetworkMtp => _tizenCapiNetworkMtp ??=
+    _getTizenInstance(capiNetworkMtpSymbols, Tizen90CapiNetworkMtp.fromLookup)!;
+
+Tizen90CapiNetworkNfc? _tizenCapiNetworkNfc;
+Tizen90CapiNetworkNfc get tizenCapiNetworkNfc => _tizenCapiNetworkNfc ??=
+    _getTizenInstance(capiNetworkNfcSymbols, Tizen90CapiNetworkNfc.fromLookup)!;
+
+Tizen90CapiNetworkSoftap? _tizenCapiNetworkSoftap;
+Tizen90CapiNetworkSoftap get tizenCapiNetworkSoftap =>
+    _tizenCapiNetworkSoftap ??= _getTizenInstance(
+        capiNetworkSoftapSymbols, Tizen90CapiNetworkSoftap.fromLookup)!;
+
+Tizen90CapiNetworkStc? _tizenCapiNetworkStc;
+Tizen90CapiNetworkStc get tizenCapiNetworkStc => _tizenCapiNetworkStc ??=
+    _getTizenInstance(capiNetworkStcSymbols, Tizen90CapiNetworkStc.fromLookup)!;
+
+Tizen90CapiNetworkWifiAware? _tizenCapiNetworkWifiAware;
+Tizen90CapiNetworkWifiAware get tizenCapiNetworkWifiAware =>
+    _tizenCapiNetworkWifiAware ??= _getTizenInstance(
+        capiNetworkWifiAwareSymbols, Tizen90CapiNetworkWifiAware.fromLookup)!;
+
+Tizen90CapiNetworkWifiManager? _tizenCapiNetworkWifiManager;
+Tizen90CapiNetworkWifiManager get tizenCapiNetworkWifiManager =>
+    _tizenCapiNetworkWifiManager ??= _getTizenInstance(
+        capiNetworkWifiManagerSymbols,
+        Tizen90CapiNetworkWifiManager.fromLookup)!;
+
+Tizen90CapiNnstreamer? _tizenCapiNnstreamer;
+Tizen90CapiNnstreamer get tizenCapiNnstreamer => _tizenCapiNnstreamer ??=
+    _getTizenInstance(capiNnstreamerSymbols, Tizen90CapiNnstreamer.fromLookup)!;
+
+Tizen90CapiNntrainer? _tizenCapiNntrainer;
+Tizen90CapiNntrainer get tizenCapiNntrainer => _tizenCapiNntrainer ??=
+    _getTizenInstance(capiNntrainerSymbols, Tizen90CapiNntrainer.fromLookup)!;
+
+Tizen90CapiPrivacyPrivilegeManager? _tizenCapiPrivacyPrivilegeManager;
+Tizen90CapiPrivacyPrivilegeManager get tizenCapiPrivacyPrivilegeManager =>
+    _tizenCapiPrivacyPrivilegeManager ??= _getTizenInstance(
+        capiPrivacyPrivilegeManagerSymbols,
+        Tizen90CapiPrivacyPrivilegeManager.fromLookup)!;
+
+Tizen90CapiSystemDevice? _tizenCapiSystemDevice;
+Tizen90CapiSystemDevice get tizenCapiSystemDevice =>
+    _tizenCapiSystemDevice ??= _getTizenInstance(
+        capiSystemDeviceSymbols, Tizen90CapiSystemDevice.fromLookup)!;
+
+Tizen90CapiSystemInfo? _tizenCapiSystemInfo;
+Tizen90CapiSystemInfo get tizenCapiSystemInfo => _tizenCapiSystemInfo ??=
+    _getTizenInstance(capiSystemInfoSymbols, Tizen90CapiSystemInfo.fromLookup)!;
+
+Tizen90CapiSystemMediaKey? _tizenCapiSystemMediaKey;
+Tizen90CapiSystemMediaKey get tizenCapiSystemMediaKey =>
+    _tizenCapiSystemMediaKey ??= _getTizenInstance(
+        capiSystemMediaKeySymbols, Tizen90CapiSystemMediaKey.fromLookup)!;
+
+Tizen90CapiSystemPeripheralIo? _tizenCapiSystemPeripheralIo;
+Tizen90CapiSystemPeripheralIo get tizenCapiSystemPeripheralIo =>
+    _tizenCapiSystemPeripheralIo ??= _getTizenInstance(
+        capiSystemPeripheralIoSymbols,
+        Tizen90CapiSystemPeripheralIo.fromLookup)!;
+
+Tizen90CapiSystemResourceMonitor? _tizenCapiSystemResourceMonitor;
+Tizen90CapiSystemResourceMonitor get tizenCapiSystemResourceMonitor =>
+    _tizenCapiSystemResourceMonitor ??= _getTizenInstance(
+        capiSystemResourceMonitorSymbols,
+        Tizen90CapiSystemResourceMonitor.fromLookup)!;
+
+Tizen90CapiSystemRuntimeInfo? _tizenCapiSystemRuntimeInfo;
+Tizen90CapiSystemRuntimeInfo get tizenCapiSystemRuntimeInfo =>
+    _tizenCapiSystemRuntimeInfo ??= _getTizenInstance(
+        capiSystemRuntimeInfoSymbols, Tizen90CapiSystemRuntimeInfo.fromLookup)!;
+
+Tizen90CapiSystemSensor? _tizenCapiSystemSensor;
+Tizen90CapiSystemSensor get tizenCapiSystemSensor =>
+    _tizenCapiSystemSensor ??= _getTizenInstance(
+        capiSystemSensorSymbols, Tizen90CapiSystemSensor.fromLookup)!;
+
+Tizen90CapiSystemSystemSettings? _tizenCapiSystemSystemSettings;
+Tizen90CapiSystemSystemSettings get tizenCapiSystemSystemSettings =>
+    _tizenCapiSystemSystemSettings ??= _getTizenInstance(
+        capiSystemSystemSettingsSymbols,
+        Tizen90CapiSystemSystemSettings.fromLookup)!;
+
+Tizen90CapiSystemUsbhost? _tizenCapiSystemUsbhost;
+Tizen90CapiSystemUsbhost get tizenCapiSystemUsbhost =>
+    _tizenCapiSystemUsbhost ??= _getTizenInstance(
+        capiSystemUsbhostSymbols, Tizen90CapiSystemUsbhost.fromLookup)!;
+
+Tizen90CapiUiAutofill? _tizenCapiUiAutofill;
+Tizen90CapiUiAutofill get tizenCapiUiAutofill => _tizenCapiUiAutofill ??=
+    _getTizenInstance(capiUiAutofillSymbols, Tizen90CapiUiAutofill.fromLookup)!;
+
+Tizen90CapiUiAutofillCommon? _tizenCapiUiAutofillCommon;
+Tizen90CapiUiAutofillCommon get tizenCapiUiAutofillCommon =>
+    _tizenCapiUiAutofillCommon ??= _getTizenInstance(
+        capiUiAutofillCommonSymbols, Tizen90CapiUiAutofillCommon.fromLookup)!;
+
+Tizen90CapiUiAutofillManager? _tizenCapiUiAutofillManager;
+Tizen90CapiUiAutofillManager get tizenCapiUiAutofillManager =>
+    _tizenCapiUiAutofillManager ??= _getTizenInstance(
+        capiUiAutofillManagerSymbols, Tizen90CapiUiAutofillManager.fromLookup)!;
+
+Tizen90CapiUiAutofillService? _tizenCapiUiAutofillService;
+Tizen90CapiUiAutofillService get tizenCapiUiAutofillService =>
+    _tizenCapiUiAutofillService ??= _getTizenInstance(
+        capiUiAutofillServiceSymbols, Tizen90CapiUiAutofillService.fromLookup)!;
+
+Tizen90CapiUiInputmethod? _tizenCapiUiInputmethod;
+Tizen90CapiUiInputmethod get tizenCapiUiInputmethod =>
+    _tizenCapiUiInputmethod ??= _getTizenInstance(
+        capiUiInputmethodSymbols, Tizen90CapiUiInputmethod.fromLookup)!;
+
+Tizen90CapiUiInputmethodManager? _tizenCapiUiInputmethodManager;
+Tizen90CapiUiInputmethodManager get tizenCapiUiInputmethodManager =>
+    _tizenCapiUiInputmethodManager ??= _getTizenInstance(
+        capiUiInputmethodManagerSymbols,
+        Tizen90CapiUiInputmethodManager.fromLookup)!;
+
+Tizen90CapiVpnsvc? _tizenCapiVpnsvc;
+Tizen90CapiVpnsvc get tizenCapiVpnsvc => _tizenCapiVpnsvc ??=
+    _getTizenInstance(capiVpnsvcSymbols, Tizen90CapiVpnsvc.fromLookup)!;
+
+Tizen90CapiWebUrlDownload? _tizenCapiWebUrlDownload;
+Tizen90CapiWebUrlDownload get tizenCapiWebUrlDownload =>
+    _tizenCapiWebUrlDownload ??= _getTizenInstance(
+        capiWebUrlDownloadSymbols, Tizen90CapiWebUrlDownload.fromLookup)!;
+
+Tizen90Cion? _tizenCion;
+Tizen90Cion get tizenCion =>
+    _tizenCion ??= _getTizenInstance(cionSymbols, Tizen90Cion.fromLookup)!;
+
+Tizen90ContactsService2? _tizenContactsService2;
+Tizen90ContactsService2 get tizenContactsService2 =>
+    _tizenContactsService2 ??= _getTizenInstance(
+        contactsService2Symbols, Tizen90ContactsService2.fromLookup)!;
+
+Tizen90CoreSyncClient? _tizenCoreSyncClient;
+Tizen90CoreSyncClient get tizenCoreSyncClient => _tizenCoreSyncClient ??=
+    _getTizenInstance(coreSyncClientSymbols, Tizen90CoreSyncClient.fromLookup)!;
+
+Tizen90CsrClient? _tizenCsrClient;
+Tizen90CsrClient get tizenCsrClient => _tizenCsrClient ??=
+    _getTizenInstance(csrClientSymbols, Tizen90CsrClient.fromLookup)!;
+
+Tizen90DataControl? _tizenDataControl;
+Tizen90DataControl get tizenDataControl => _tizenDataControl ??=
+    _getTizenInstance(dataControlSymbols, Tizen90DataControl.fromLookup)!;
+
+Tizen90DeviceCertificateManager? _tizenDeviceCertificateManager;
+Tizen90DeviceCertificateManager get tizenDeviceCertificateManager =>
+    _tizenDeviceCertificateManager ??= _getTizenInstance(
+        deviceCertificateManagerSymbols,
+        Tizen90DeviceCertificateManager.fromLookup)!;
+
+Tizen90Diagnostics? _tizenDiagnostics;
+Tizen90Diagnostics get tizenDiagnostics => _tizenDiagnostics ??=
+    _getTizenInstance(diagnosticsSymbols, Tizen90Diagnostics.fromLookup)!;
+
+Tizen90Dlog? _tizenDlog;
+Tizen90Dlog get tizenDlog =>
+    _tizenDlog ??= _getTizenInstance(dlogSymbols, Tizen90Dlog.fromLookup)!;
+
+Tizen90Dpm? _tizenDpm;
+Tizen90Dpm get tizenDpm =>
+    _tizenDpm ??= _getTizenInstance(dpmSymbols, Tizen90Dpm.fromLookup)!;
+
+Tizen90Eom? _tizenEom;
+Tizen90Eom get tizenEom =>
+    _tizenEom ??= _getTizenInstance(eomSymbols, Tizen90Eom.fromLookup)!;
+
+Tizen90Feedback? _tizenFeedback;
+Tizen90Feedback get tizenFeedback => _tizenFeedback ??=
+    _getTizenInstance(feedbackSymbols, Tizen90Feedback.fromLookup)!;
+
+Tizen90FidoClient? _tizenFidoClient;
+Tizen90FidoClient get tizenFidoClient => _tizenFidoClient ??=
+    _getTizenInstance(fidoClientSymbols, Tizen90FidoClient.fromLookup)!;
+
+Tizen90Iotcon? _tizenIotcon;
+Tizen90Iotcon get tizenIotcon => _tizenIotcon ??=
+    _getTizenInstance(iotconSymbols, Tizen90Iotcon.fromLookup)!;
+
+Tizen90KeyManagerClient? _tizenKeyManagerClient;
+Tizen90KeyManagerClient get tizenKeyManagerClient =>
+    _tizenKeyManagerClient ??= _getTizenInstance(
+        keyManagerClientSymbols, Tizen90KeyManagerClient.fromLookup)!;
+
+Tizen90Ma? _tizenMa;
+Tizen90Ma get tizenMa =>
+    _tizenMa ??= _getTizenInstance(maSymbols, Tizen90Ma.fromLookup)!;
+
+Tizen90MessagePort? _tizenMessagePort;
+Tizen90MessagePort get tizenMessagePort => _tizenMessagePort ??=
+    _getTizenInstance(messagePortSymbols, Tizen90MessagePort.fromLookup)!;
+
+Tizen90Mmi? _tizenMmi;
+Tizen90Mmi get tizenMmi =>
+    _tizenMmi ??= _getTizenInstance(mmiSymbols, Tizen90Mmi.fromLookup)!;
+
+Tizen90Mv3d? _tizenMv3d;
+Tizen90Mv3d get tizenMv3d =>
+    _tizenMv3d ??= _getTizenInstance(mv3dSymbols, Tizen90Mv3d.fromLookup)!;
+
+Tizen90MvBarcodeDetector? _tizenMvBarcodeDetector;
+Tizen90MvBarcodeDetector get tizenMvBarcodeDetector =>
+    _tizenMvBarcodeDetector ??= _getTizenInstance(
+        mvBarcodeDetectorSymbols, Tizen90MvBarcodeDetector.fromLookup)!;
+
+Tizen90MvBarcodeGenerator? _tizenMvBarcodeGenerator;
+Tizen90MvBarcodeGenerator get tizenMvBarcodeGenerator =>
+    _tizenMvBarcodeGenerator ??= _getTizenInstance(
+        mvBarcodeGeneratorSymbols, Tizen90MvBarcodeGenerator.fromLookup)!;
+
+Tizen90MvCommon? _tizenMvCommon;
+Tizen90MvCommon get tizenMvCommon => _tizenMvCommon ??=
+    _getTizenInstance(mvCommonSymbols, Tizen90MvCommon.fromLookup)!;
+
+Tizen90MvFace? _tizenMvFace;
+Tizen90MvFace get tizenMvFace => _tizenMvFace ??=
+    _getTizenInstance(mvFaceSymbols, Tizen90MvFace.fromLookup)!;
+
+Tizen90MvFaceRecognition? _tizenMvFaceRecognition;
+Tizen90MvFaceRecognition get tizenMvFaceRecognition =>
+    _tizenMvFaceRecognition ??= _getTizenInstance(
+        mvFaceRecognitionSymbols, Tizen90MvFaceRecognition.fromLookup)!;
+
+Tizen90MvImage? _tizenMvImage;
+Tizen90MvImage get tizenMvImage => _tizenMvImage ??=
+    _getTizenInstance(mvImageSymbols, Tizen90MvImage.fromLookup)!;
+
+Tizen90MvImageClassification? _tizenMvImageClassification;
+Tizen90MvImageClassification get tizenMvImageClassification =>
+    _tizenMvImageClassification ??= _getTizenInstance(
+        mvImageClassificationSymbols, Tizen90MvImageClassification.fromLookup)!;
+
+Tizen90MvInference? _tizenMvInference;
+Tizen90MvInference get tizenMvInference => _tizenMvInference ??=
+    _getTizenInstance(mvInferenceSymbols, Tizen90MvInference.fromLookup)!;
+
+Tizen90MvLandmarkDetection? _tizenMvLandmarkDetection;
+Tizen90MvLandmarkDetection get tizenMvLandmarkDetection =>
+    _tizenMvLandmarkDetection ??= _getTizenInstance(
+        mvLandmarkDetectionSymbols, Tizen90MvLandmarkDetection.fromLookup)!;
+
+Tizen90MvObjectDetection? _tizenMvObjectDetection;
+Tizen90MvObjectDetection get tizenMvObjectDetection =>
+    _tizenMvObjectDetection ??= _getTizenInstance(
+        mvObjectDetectionSymbols, Tizen90MvObjectDetection.fromLookup)!;
+
+Tizen90MvRoiTracker? _tizenMvRoiTracker;
+Tizen90MvRoiTracker get tizenMvRoiTracker => _tizenMvRoiTracker ??=
+    _getTizenInstance(mvRoiTrackerSymbols, Tizen90MvRoiTracker.fromLookup)!;
+
+Tizen90MvSurveillance? _tizenMvSurveillance;
+Tizen90MvSurveillance get tizenMvSurveillance => _tizenMvSurveillance ??=
+    _getTizenInstance(mvSurveillanceSymbols, Tizen90MvSurveillance.fromLookup)!;
+
+Tizen90Notification? _tizenNotification;
+Tizen90Notification get tizenNotification => _tizenNotification ??=
+    _getTizenInstance(notificationSymbols, Tizen90Notification.fromLookup)!;
+
+Tizen90NotificationEx? _tizenNotificationEx;
+Tizen90NotificationEx get tizenNotificationEx => _tizenNotificationEx ??=
+    _getTizenInstance(notificationExSymbols, Tizen90NotificationEx.fromLookup)!;
+
+Tizen90NsdDnsSd? _tizenNsdDnsSd;
+Tizen90NsdDnsSd get tizenNsdDnsSd => _tizenNsdDnsSd ??=
+    _getTizenInstance(nsdDnsSdSymbols, Tizen90NsdDnsSd.fromLookup)!;
+
+Tizen90NsdSsdp? _tizenNsdSsdp;
+Tizen90NsdSsdp get tizenNsdSsdp => _tizenNsdSsdp ??=
+    _getTizenInstance(nsdSsdpSymbols, Tizen90NsdSsdp.fromLookup)!;
+
+Tizen90Oauth2? _tizenOauth2;
+Tizen90Oauth2 get tizenOauth2 => _tizenOauth2 ??=
+    _getTizenInstance(oauth2Symbols, Tizen90Oauth2.fromLookup)!;
+
+Tizen90PhonenumberUtils? _tizenPhonenumberUtils;
+Tizen90PhonenumberUtils get tizenPhonenumberUtils =>
+    _tizenPhonenumberUtils ??= _getTizenInstance(
+        phonenumberUtilsSymbols, Tizen90PhonenumberUtils.fromLookup)!;
+
+Tizen90PrivilegeInfo? _tizenPrivilegeInfo;
+Tizen90PrivilegeInfo get tizenPrivilegeInfo => _tizenPrivilegeInfo ??=
+    _getTizenInstance(privilegeInfoSymbols, Tizen90PrivilegeInfo.fromLookup)!;
+
+Tizen90Push? _tizenPush;
+Tizen90Push get tizenPush =>
+    _tizenPush ??= _getTizenInstance(pushSymbols, Tizen90Push.fromLookup)!;
+
+Tizen90RpcPort? _tizenRpcPort;
+Tizen90RpcPort get tizenRpcPort => _tizenRpcPort ??=
+    _getTizenInstance(rpcPortSymbols, Tizen90RpcPort.fromLookup)!;
+
+Tizen90Storage? _tizenStorage;
+Tizen90Storage get tizenStorage => _tizenStorage ??=
+    _getTizenInstance(storageSymbols, Tizen90Storage.fromLookup)!;
+
+Tizen90Stt? _tizenStt;
+Tizen90Stt get tizenStt =>
+    _tizenStt ??= _getTizenInstance(sttSymbols, Tizen90Stt.fromLookup)!;
+
+Tizen90SttEngine? _tizenSttEngine;
+Tizen90SttEngine get tizenSttEngine => _tizenSttEngine ??=
+    _getTizenInstance(sttEngineSymbols, Tizen90SttEngine.fromLookup)!;
+
+Tizen90Tbm? _tizenTbm;
+Tizen90Tbm get tizenTbm =>
+    _tizenTbm ??= _getTizenInstance(tbmSymbols, Tizen90Tbm.fromLookup)!;
+
+Tizen90TizenCore? _tizenTizenCore;
+Tizen90TizenCore get tizenTizenCore => _tizenTizenCore ??=
+    _getTizenInstance(tizenCoreSymbols, Tizen90TizenCore.fromLookup)!;
+
+Tizen90Ttrace? _tizenTtrace;
+Tizen90Ttrace get tizenTtrace => _tizenTtrace ??=
+    _getTizenInstance(ttraceSymbols, Tizen90Ttrace.fromLookup)!;
+
+Tizen90Tts? _tizenTts;
+Tizen90Tts get tizenTts =>
+    _tizenTts ??= _getTizenInstance(ttsSymbols, Tizen90Tts.fromLookup)!;
+
+Tizen90TtsEngine? _tizenTtsEngine;
+Tizen90TtsEngine get tizenTtsEngine => _tizenTtsEngine ??=
+    _getTizenInstance(ttsEngineSymbols, Tizen90TtsEngine.fromLookup)!;
+
+Tizen90UpdateControl? _tizenUpdateControl;
+Tizen90UpdateControl get tizenUpdateControl => _tizenUpdateControl ??=
+    _getTizenInstance(updateControlSymbols, Tizen90UpdateControl.fromLookup)!;
+
+Tizen90Vc? _tizenVc;
+Tizen90Vc get tizenVc =>
+    _tizenVc ??= _getTizenInstance(vcSymbols, Tizen90Vc.fromLookup)!;
+
+Tizen90VcEngine? _tizenVcEngine;
+Tizen90VcEngine get tizenVcEngine => _tizenVcEngine ??=
+    _getTizenInstance(vcEngineSymbols, Tizen90VcEngine.fromLookup)!;
+
+Tizen90VcManager? _tizenVcManager;
+Tizen90VcManager get tizenVcManager => _tizenVcManager ??=
+    _getTizenInstance(vcManagerSymbols, Tizen90VcManager.fromLookup)!;
+
+Tizen90WebauthnClient? _tizenWebauthnClient;
+Tizen90WebauthnClient get tizenWebauthnClient => _tizenWebauthnClient ??=
+    _getTizenInstance(webauthnClientSymbols, Tizen90WebauthnClient.fromLookup)!;
+
+Tizen90WifiDirect? _tizenWifiDirect;
+Tizen90WifiDirect get tizenWifiDirect => _tizenWifiDirect ??=
+    _getTizenInstance(wifiDirectSymbols, Tizen90WifiDirect.fromLookup)!;
+
+Tizen90Yaca? _tizenYaca;
+Tizen90Yaca get tizenYaca =>
+    _tizenYaca ??= _getTizenInstance(yacaSymbols, Tizen90Yaca.fromLookup)!;
