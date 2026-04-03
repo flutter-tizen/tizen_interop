@@ -112,7 +112,8 @@ def main():
     
     for b in bindings:
         lines.append(f"export '../../src/bindings/{version}/{b['filename']}';")
-        
+    lines.append(f"export '../../src/bindings/{version}/generated_bindings_time.dart' hide UnnamedUnion1, UnnamedStruct1;")
+
     lines.append("")
     lines.append("final _lookupProvider = LookupProvider();")
     lines.append("")
@@ -125,11 +126,6 @@ def main():
     lines.append("    },")
     lines.append("  );")
     lines.append("}")
-    
-    # We want to put Common/Base etc. first like in 6.0? Looking at 6.0, it's actually alphabetical but 
-    # CapiAppfwAppCommon etc are at the top? Wait, in 6.0:
-    # Tizen60CapiAppfwAppCommon, ... then Tizen60AccountsSvc...
-    # We can just sort alphabetically by class_name, no big deal.
     
     for b in bindings:
         lines.append("")

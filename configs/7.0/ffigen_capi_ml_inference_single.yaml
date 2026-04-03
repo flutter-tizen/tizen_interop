@@ -1,0 +1,168 @@
+preamble: |
+  // Copyright 2026 Samsung Electronics Co., Ltd. All rights reserved.
+  // Use of this source code is governed by a BSD-style license that can be
+  // found in the LICENSE file.
+  // ignore_for_file: type=lint, unused_element, unused_field
+
+name: 'Tizen70CapiMlInferenceSingle'
+
+description: 'Dart bindings for Tizen capi-ml-inference-single APIs.'
+
+output: '../../lib/src/bindings/7.0/generated_bindings_capi_ml_inference_single.dart'
+
+llvm-path:
+  - '/usr/lib/llvm-12'
+
+headers:
+  entry-points:
+    - 'entrypoints.h'
+  include-directives:
+    - '**/nnstreamer-single.h'
+    - '**/nnstreamer.h'
+
+library-imports:
+  ml_common: 'generated_bindings_capi_ml_common.dart'
+  nnstreamer: 'generated_bindings_capi_nnstreamer.dart'
+
+type-map:
+  typedefs:
+    'ml_tensors_data_h':
+      lib: 'ml_common'
+      c-type: 'ml_tensors_data_h'
+      dart-type: 'ml_tensors_data_h'
+    'ml_tensors_info_h':
+      lib: 'ml_common'
+      c-type: 'ml_tensors_info_h'
+      dart-type: 'ml_tensors_info_h'
+    'ml_option_h':
+      lib: 'ml_common'
+      c-type: 'ml_option_h'
+      dart-type: 'ml_option_h'
+    'ml_pipeline_state_cb':
+      lib: 'nnstreamer'
+      c-type: 'ml_pipeline_state_cb'
+      dart-type: 'ml_pipeline_state_cb'
+    'ml_pipeline_h':
+      lib: 'nnstreamer'
+      c-type: 'ml_pipeline_h'
+      dart-type: 'ml_pipeline_h'
+    'ml_pipeline_sink_cb':
+      lib: 'nnstreamer'
+      c-type: 'ml_pipeline_sink_cb'
+      dart-type: 'ml_pipeline_sink_cb'
+    'ml_pipeline_sink_h':
+      lib: 'nnstreamer'
+      c-type: 'ml_pipeline_sink_h'
+      dart-type: 'ml_pipeline_sink_h'
+    'ml_pipeline_src_h':
+      lib: 'nnstreamer'
+      c-type: 'ml_pipeline_src_h'
+      dart-type: 'ml_pipeline_src_h'
+    'ml_pipeline_src_callbacks_s':
+      lib: 'nnstreamer'
+      c-type: 'ml_pipeline_src_callbacks_s'
+      dart-type: 'ml_pipeline_src_callbacks_s'
+    'ml_pipeline_switch_h':
+      lib: 'nnstreamer'
+      c-type: 'ml_pipeline_switch_h'
+      dart-type: 'ml_pipeline_switch_h'
+    'ml_pipeline_valve_h':
+      lib: 'nnstreamer'
+      c-type: 'ml_pipeline_valve_h'
+      dart-type: 'ml_pipeline_valve_h'
+    'ml_pipeline_element_h':
+      lib: 'nnstreamer'
+      c-type: 'ml_pipeline_element_h'
+      dart-type: 'ml_pipeline_element_h'
+    'ml_custom_easy_filter_h':
+      lib: 'nnstreamer'
+      c-type: 'ml_custom_easy_filter_h'
+      dart-type: 'ml_custom_easy_filter_h'
+    'ml_pipeline_if_h':
+      lib: 'nnstreamer'
+      c-type: 'ml_pipeline_if_h'
+      dart-type: 'ml_pipeline_if_h'
+    'ml_pipeline_if_custom_cb':
+      lib: 'nnstreamer'
+      c-type: 'ml_pipeline_if_custom_cb'
+      dart-type: 'ml_pipeline_if_custom_cb'
+    'ml_custom_easy_invoke_cb':
+      lib: 'ml_common'
+      c-type: 'ml_custom_easy_invoke_cb'
+      dart-type: 'ml_custom_easy_invoke_cb'
+  structs:
+    'ml_pipeline_src_callbacks_s':
+      lib: 'nnstreamer'
+      c-type: 'ml_pipeline_src_callbacks_s'
+      dart-type: 'ml_pipeline_src_callbacks_s'
+
+macros:
+  exclude:
+    - 'ML_TIZEN_CAM_VIDEO_SRC'
+    - 'ML_TIZEN_CAM_AUDIO_SRC'
+  
+
+
+compiler-opts:
+  - '-m32'
+  - '-Wno-incomplete-setjmp-declaration'
+
+  # include Tizen API directories
+  - '-I./rootstraps/7.0/usr/include/'
+  - '-I./rootstraps/7.0/usr/include/appcore-agent/'
+  - '-I./rootstraps/7.0/usr/include/appfw/'
+  - '-I./rootstraps/7.0/usr/include/asp/'
+  - '-I./rootstraps/7.0/usr/include/badge/'
+  - '-I./rootstraps/7.0/usr/include/calendar-service2/'
+  - '-I./rootstraps/7.0/usr/include/cbhm/'
+  - '-I./rootstraps/7.0/usr/include/cion/'
+  - '-I./rootstraps/7.0/usr/include/ckm/'
+  - '-I./rootstraps/7.0/usr/include/contacts-svc/'
+  - '-I./rootstraps/7.0/usr/include/content/'
+  - '-I./rootstraps/7.0/usr/include/context-service/'
+  - '-I./rootstraps/7.0/usr/include/csr/'
+  - '-I./rootstraps/7.0/usr/include/device-certificate-manager/'
+  - '-I./rootstraps/7.0/usr/include/dlog/'
+  - '-I./rootstraps/7.0/usr/include/eom/'
+  - '-I./rootstraps/7.0/usr/include/feedback/'
+  - '-I./rootstraps/7.0/usr/include/geofence/'
+  - '-I./rootstraps/7.0/usr/include/iotcon/'
+  - '-I./rootstraps/7.0/usr/include/location/'
+  - '-I./rootstraps/7.0/usr/include/media/'
+  - '-I./rootstraps/7.0/usr/include/media-content/'
+  - '-I./rootstraps/7.0/usr/include/messaging/'
+  - '-I./rootstraps/7.0/usr/include/metadata-editor/'
+  - '-I./rootstraps/7.0/usr/include/network/'
+  - '-I./rootstraps/7.0/usr/include/nnstreamer/'
+  - '-I./rootstraps/7.0/usr/include/nntrainer/'
+  - '-I./rootstraps/7.0/usr/include/notification/'
+  - '-I./rootstraps/7.0/usr/include/notification-ex/api/'
+  - '-I./rootstraps/7.0/usr/include/nsd/'
+  - '-I./rootstraps/7.0/usr/include/phonenumber-utils/'
+  - '-I./rootstraps/7.0/usr/include/privacy-privilege-manager/'
+  - '-I./rootstraps/7.0/usr/include/rpc-port/'
+  - '-I./rootstraps/7.0/usr/include/sensor/'
+  - '-I./rootstraps/7.0/usr/include/storage/'
+  - '-I./rootstraps/7.0/usr/include/system/'
+  - '-I./rootstraps/7.0/usr/include/web/'
+  - '-I./rootstraps/7.0/usr/include/wifi-direct/'
+  - '-I./rootstraps/7.0/usr/include/yaca/'
+
+  # include EFL directories
+  - '-I./rootstraps/7.0/usr/include/ecore-imf-1/'
+  - '-I./rootstraps/7.0/usr/include/efl-1/'
+  - '-I./rootstraps/7.0/usr/include/eina-1/'
+  - '-I./rootstraps/7.0/usr/include/eina-1/eina/'
+  - '-I./rootstraps/7.0/usr/include/emile-1/'
+  - '-I./rootstraps/7.0/usr/include/eo-1/'
+  - '-I./rootstraps/7.0/usr/include/evas-1/'
+
+  # include glib directories
+  - '-I./rootstraps/7.0/usr/include/glib-2.0/'
+  - '-I./rootstraps/7.0/usr/lib/glib-2.0/include/'
+
+enums:
+  rename:
+    '_+(.*)': '$1'
+    'ml_nnfw_type_e' : '_ml_nnfw_type_e'
+    'ml_nnfw_hw_e': '_ml_nnfw_hw_e'

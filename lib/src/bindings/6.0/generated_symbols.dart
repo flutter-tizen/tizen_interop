@@ -2134,20 +2134,20 @@ const Map<String, List<String>> capiMediaToolSymbols = {
   ],
 };
 
-const Map<String, List<String>> mv_barcode_detectorSymbols = {
+const Map<String, List<String>> mvBarcodeDetectorSymbols = {
   'libmv_barcode_detector.so': [
     'mv_barcode_detect',
   ],
 };
 
-const Map<String, List<String>> mv_barcode_generatorSymbols = {
+const Map<String, List<String>> mvBarcodeGeneratorSymbols = {
   'libmv_barcode_generator.so': [
     'mv_barcode_generate_image',
     'mv_barcode_generate_source',
   ],
 };
 
-const Map<String, List<String>> mv_commonSymbols = {
+const Map<String, List<String>> mvCommonSymbols = {
   'libmv_common.so': [
     'mv_create_engine_config',
     'mv_create_source',
@@ -2174,7 +2174,7 @@ const Map<String, List<String>> mv_commonSymbols = {
   ],
 };
 
-const Map<String, List<String>> mv_faceSymbols = {
+const Map<String, List<String>> mvFaceSymbols = {
   'libmv_face.so': [
     'mv_face_detect',
     'mv_face_eye_condition_recognize',
@@ -2199,7 +2199,7 @@ const Map<String, List<String>> mv_faceSymbols = {
   ],
 };
 
-const Map<String, List<String>> mv_imageSymbols = {
+const Map<String, List<String>> mvImageSymbols = {
   'libmv_image.so': [
     'mv_image_object_clone',
     'mv_image_object_create',
@@ -2222,7 +2222,7 @@ const Map<String, List<String>> mv_imageSymbols = {
   ],
 };
 
-const Map<String, List<String>> mv_inferenceSymbols = {
+const Map<String, List<String>> mvInferenceSymbols = {
   'libmv_inference.so': [
     'mv_inference_configure',
     'mv_inference_create',
@@ -2245,7 +2245,7 @@ const Map<String, List<String>> mv_inferenceSymbols = {
   ],
 };
 
-const Map<String, List<String>> mv_surveillanceSymbols = {
+const Map<String, List<String>> mvSurveillanceSymbols = {
   'libmv_surveillance.so': [
     'mv_surveillance_event_trigger_create',
     'mv_surveillance_event_trigger_destroy',
@@ -5311,7 +5311,7 @@ const Map<String, List<String>> sttSymbols = {
   ],
 };
 
-const Map<String, List<String>> stt_engineSymbols = {
+const Map<String, List<String>> sttEngineSymbols = {
   'libstt_engine.so': [
     'stte_main',
     'stte_send_error',
@@ -5361,7 +5361,7 @@ const Map<String, List<String>> ttsSymbols = {
   ],
 };
 
-const Map<String, List<String>> tts_engineSymbols = {
+const Map<String, List<String>> ttsEngineSymbols = {
   'libtts_engine.so': [
     'ttse_get_pitch_range',
     'ttse_get_speed_range',
@@ -5431,7 +5431,7 @@ const Map<String, List<String>> vcSymbols = {
   ],
 };
 
-const Map<String, List<String>> vc_engineSymbols = {
+const Map<String, List<String>> vcEngineSymbols = {
   'libvc_engine.so': [
     'vce_get_audio_type',
     'vce_get_command_count',
@@ -5462,7 +5462,7 @@ const Map<String, List<String>> vc_engineSymbols = {
   ],
 };
 
-const Map<String, List<String>> vc_managerSymbols = {
+const Map<String, List<String>> vcManagerSymbols = {
   'libvc_manager.so': [
     'vc_mgr_cancel',
     'vc_mgr_deinitialize',

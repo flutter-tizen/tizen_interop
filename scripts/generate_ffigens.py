@@ -72,7 +72,7 @@ def parse_target_libraries(symgen_path):
                 if stripped.startswith('-'):
                     lib_str = stripped.split('- ')[1].split()[0]
                     if lib_str.startswith('lib'):
-                        lib_str = lib_str.removeprefix('lib')
+                        lib_str = lib_str[len('lib'):]
                     if '.so' in lib_str:
                         lib_str = lib_str.split('.so')[0]
                     target_libs.append(lib_str)
