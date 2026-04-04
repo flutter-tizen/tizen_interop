@@ -1,4 +1,4 @@
-library tizen_interop;
+library tizen_interop_10_0;
 
 import 'dart:ffi';
 
@@ -427,4 +427,3 @@ Tizen100Native get tizenWifiDirect =>
 Tizen100Native? _tizenYaca;
 Tizen100Native get tizenYaca =>
     _tizenYaca ??= _getTizenNative(yacaSymbols);
-
