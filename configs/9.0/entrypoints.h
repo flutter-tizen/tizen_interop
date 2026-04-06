@@ -93,11 +93,11 @@
 #include <locations.h>
 
 // Machine Learning
-#include <nnstreamer/ml-api-common.h>
-#include <nnstreamer/ml-api-service.h>
-#include <nnstreamer/nnstreamer-single.h>
-#include <nnstreamer/nnstreamer.h>
-#include <nntrainer/nntrainer.h>
+#include <ml-api-common.h>
+#include <ml-api-service.h>
+#include <nnstreamer-single.h>
+#include <nnstreamer.h>
+#include <nntrainer.h>
 
 // Messaging
 #include <email.h>  //deprecated
