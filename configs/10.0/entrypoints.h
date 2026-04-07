@@ -88,17 +88,20 @@
 #include <locations.h>
 
 // Machine Learning
-#include <nnstreamer/ml-api-common.h>
-#include <nnstreamer/ml-api-service.h>
-#include <nnstreamer/nnstreamer-single.h>
-#include <nnstreamer/nnstreamer.h>
-#include <nntrainer/nntrainer.h>
+#include <ml-api-common.h>
+#include <ml-api-service.h>
+#include <nnstreamer-single.h>
+#include <nnstreamer.h>
+#include <nntrainer.h>
 
 // Messaging
 #include <push-service.h>
 
 // Multimedia
+#include <AL/al.h>
 #include <AL/alc.h>
+#include <AL/alext.h>
+#include <AL/efx.h>
 #include <audio_io.h>
 #include <camera.h>
 #include <image_util.h>
