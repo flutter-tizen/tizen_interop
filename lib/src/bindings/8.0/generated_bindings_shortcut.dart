@@ -1,4 +1,4 @@
-// Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
+// Copyright 2026 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 // ignore_for_file: type=lint, unused_element, unused_field
@@ -9,17 +9,17 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen shortcut APIs.
-class Tizen60Shortcut {
+class Tizen80Shortcut {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
       _lookup;
 
   /// The symbols are looked up in [dynamicLibrary].
-  Tizen60Shortcut(ffi.DynamicLibrary dynamicLibrary)
+  Tizen80Shortcut(ffi.DynamicLibrary dynamicLibrary)
       : _lookup = dynamicLibrary.lookup;
 
   /// The symbols are looked up with [lookup].
-  Tizen60Shortcut.fromLookup(
+  Tizen80Shortcut.fromLookup(
       ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
           lookup)
       : _lookup = lookup;

@@ -71,6 +71,7 @@ compiler-opts:
   - '-I./rootstraps/8.0/usr/include/privacy-privilege-manager/'
   - '-I./rootstraps/8.0/usr/include/rpc-port/'
   - '-I./rootstraps/8.0/usr/include/sensor/'
+  - '-I./rootstraps/8.0/usr/include/shortcut/'
   - '-I./rootstraps/8.0/usr/include/storage/'
   - '-I./rootstraps/8.0/usr/include/system/'
   - '-I./rootstraps/8.0/usr/include/web/'

@@ -449,6 +449,46 @@ class Tizen65Shortcut {
       _shortcut_unset_remove_cbPtr.asFunction<void Function()>();
 }
 
+/// @brief Enumeration for values of shortcut response types.
+/// @since_tizen 2.3
+abstract class shortcut_error_e {
+  /// < Successful
+  static const int SHORTCUT_ERROR_NONE = 0;
+
+  /// < Invalid function parameter
+  static const int SHORTCUT_ERROR_INVALID_PARAMETER = -22;
+
+  /// < Out of memory
+  static const int SHORTCUT_ERROR_OUT_OF_MEMORY = -12;
+
+  /// < I/O Error
+  static const int SHORTCUT_ERROR_IO_ERROR = -5;
+
+  /// < Permission denied
+  static const int SHORTCUT_ERROR_PERMISSION_DENIED = -13;
+
+  /// < Not supported
+  static const int SHORTCUT_ERROR_NOT_SUPPORTED = -1073741822;
+
+  /// < Device or resource busy
+  static const int SHORTCUT_ERROR_RESOURCE_BUSY = -16;
+
+  /// < There is no space to add a new shortcut
+  static const int SHORTCUT_ERROR_NO_SPACE = -18219007;
+
+  /// < Shortcut is already added
+  static const int SHORTCUT_ERROR_EXIST = -18219006;
+
+  /// < Unrecoverable error
+  static const int SHORTCUT_ERROR_FAULT = -18219004;
+
+  /// < Not exist shortcut(@b Since: 3.0)
+  static const int SHORTCUT_ERROR_NOT_EXIST = -18219000;
+
+  /// < Connection not established or communication problem
+  static const int SHORTCUT_ERROR_COMM = -18218944;
+}
+
 /// @brief Enumeration for shortcut types.
 /// @details Basically, two types of shortcuts are defined.
 /// Every homescreen developer should support these types of shortcuts.

@@ -66,8 +66,8 @@
 #include <rpc-port-parcel.h>
 #include <rpc-port.h>
 #include <service_app.h>
-#include <shortcut/shortcut_manager.h>
 #include <shortcut_error.h>
+#include <shortcut_manager.h>
 #include <tizen_core.h>
 
 // Base

@@ -32,6 +32,7 @@ target-libraries:
   - librpc-port.so.1                            # Application Framework / RPC Port
   - libappcore-agent.so.1                       # Application Framework / Service Application
   - libtizen-core.so.0                          # Application Framework / Tizen Core
+  - libshortcut.so.0                            # Application Framework / Shortcut
   - libcapi-base-common.so.0                    # Base / Common Error
   - libcapi-web-url-download.so.0               # Content / Download
   - libcapi-content-mime-type.so.0              # Content / Mime Type
