@@ -39,7 +39,8 @@ def parse_tizen_dart(path):
     try:
         with open(path, 'r') as f:
             content = f.read()
-        pattern = re.compile(r'\w+\s+get\s+(\w+)\s*=>.*?_getTizenInstance\s*\(\s*(\w+)\s*,', re.DOTALL)
+        # Matches: Tizen100AccountsSvc get tizenAccountsSvc => _tizenAccountsSvc ??= _getTizenInstance(accountsSvcSymbols, ...
+        pattern = re.compile(r'\w+\s+get\s+(\w+)\s*=>\s*(?:_\w+\s*\?\?=\s*)?_getTizenInstance\s*\(\s*(\w+)\s*,', re.DOTALL)
         
         for match in pattern.finditer(content):
             getter_name = match.group(1)
