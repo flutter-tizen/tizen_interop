@@ -694,9 +694,9 @@ class CallbackDataCollector:
 
   def set_bindings_filter(self, bindings_file_paths: List[str]):
     names = set()
-    typedef_re = re.compile(r'^typedef\s+([a-zA-Z0-9_]+)', re.MULTILINE)
+    typedef_re = re.compile(r'^\s*typedef\s+([a-zA-Z0-9_]+)', re.MULTILINE)
     for bindings_path in bindings_file_paths:
-      with open(bindings_path) as bindings_file:
+      with open(bindings_path, encoding='utf-8') as bindings_file:
         content = bindings_file.read()
         for match in typedef_re.finditer(content):
           names.add(match.group(1))
@@ -930,7 +930,7 @@ def find_headers_by_config(config_path):
         raise NotImplementedError(
           f'config include-directives `{pattern}` not supported')
     else:
-      log.debug('Skipping pattern %s', pattern)
+      log.warning('Skipping unsupported pattern %s', pattern)
 
   items = set()
 
