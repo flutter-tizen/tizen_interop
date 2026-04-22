@@ -25,6 +25,321 @@ class Tizen90MvObjectDetection {
           lookup)
       : _lookup = lookup;
 
+  /// @brief Creates a inference handle for face detection object.
+  /// @details Use this function to create a inference handle. After the creation
+  /// the face detection task has to be prepared with
+  /// mv_face_detection_prepare() function to prepare a network
+  /// for the inference.
+  ///
+  /// @since_tizen 9.0
+  ///
+  /// @remarks The @a handle should be released using mv_face_detection_destroy().
+  ///
+  /// @param[out] handle    The handle to the inference to be created.
+  ///
+  /// @return @c 0 on success, otherwise a negative error value
+  /// @retval #MEDIA_VISION_ERROR_NONE Successful
+  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
+  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #MEDIA_VISION_ERROR_INTERNAL Internal Error
+  ///
+  /// @code
+  /// #include <mv_face_detection.h>
+  /// ...
+  /// mv_face_detection_h handle = NULL;
+  /// mv_face_detection_create(&handle);
+  /// ...
+  /// mv_face_detection_destroy(handle);
+  /// @endcode
+  ///
+  /// @see mv_face_detection_destroy()
+  /// @see mv_face_detection_prepare()
+  int mv_face_detection_create(
+    ffi.Pointer<mv_face_detection_h> handle,
+  ) {
+    return _mv_face_detection_create(
+      handle,
+    );
+  }
+
+  late final _mv_face_detection_createPtr = _lookup<
+          ffi
+          .NativeFunction<ffi.Int Function(ffi.Pointer<mv_face_detection_h>)>>(
+      'mv_face_detection_create');
+  late final _mv_face_detection_create = _mv_face_detection_createPtr
+      .asFunction<int Function(ffi.Pointer<mv_face_detection_h>)>();
+
+  /// @brief Destroys inference handle and releases all its resources.
+  ///
+  /// @since_tizen 9.0
+  ///
+  /// @param[in] handle    The handle to the inference to be destroyed.
+  ///
+  /// @return @c 0 on success, otherwise a negative error value
+  /// @retval #MEDIA_VISION_ERROR_NONE Successful
+  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
+  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
+  ///
+  /// @pre Create inference handle by using mv_face_detection_create()
+  ///
+  /// @see mv_face_detection_create()
+  int mv_face_detection_destroy(
+    mv_face_detection_h handle,
+  ) {
+    return _mv_face_detection_destroy(
+      handle,
+    );
+  }
+
+  late final _mv_face_detection_destroyPtr =
+      _lookup<ffi.NativeFunction<ffi.Int Function(mv_face_detection_h)>>(
+          'mv_face_detection_destroy');
+  late final _mv_face_detection_destroy = _mv_face_detection_destroyPtr
+      .asFunction<int Function(mv_face_detection_h)>();
+
+  /// @brief Configures the backend for the face detection inference.
+  ///
+  /// @since_tizen 9.0
+  ///
+  /// @param[in] handle         The handle to the inference
+  ///
+  /// @return @c 0 on success, otherwise a negative error value
+  /// @retval #MEDIA_VISION_ERROR_NONE Successful
+  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
+  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #MEDIA_VISION_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #MEDIA_VISION_ERROR_OUT_OF_MEMORY Out of memory
+  ///
+  /// @pre Create an inference handle by calling mv_face_detection_create()
+  int mv_face_detection_configure(
+    mv_face_detection_h handle,
+  ) {
+    return _mv_face_detection_configure(
+      handle,
+    );
+  }
+
+  late final _mv_face_detection_configurePtr =
+      _lookup<ffi.NativeFunction<ffi.Int Function(mv_face_detection_h)>>(
+          'mv_face_detection_configure');
+  late final _mv_face_detection_configure = _mv_face_detection_configurePtr
+      .asFunction<int Function(mv_face_detection_h)>();
+
+  /// @brief Prepares the face detection inference.
+  /// @details Use this function to prepare the face detection inference based on
+  /// the configured network.
+  ///
+  /// @since_tizen 9.0
+  ///
+  /// @param[in] handle         The handle to the inference.
+  ///
+  /// @return @c 0 on success, otherwise a negative error value
+  /// @retval #MEDIA_VISION_ERROR_NONE Successful
+  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
+  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #MEDIA_VISION_ERROR_INVALID_DATA Invalid model data
+  /// @retval #MEDIA_VISION_ERROR_OUT_OF_MEMORY Out of memory
+  /// @retval #MEDIA_VISION_ERROR_INVALID_OPERATION Invalid operation
+  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED_FORMAT Not supported format
+  ///
+  /// @pre Prepare an inference by calling mv_face_detection_configure()
+  int mv_face_detection_prepare(
+    mv_face_detection_h handle,
+  ) {
+    return _mv_face_detection_prepare(
+      handle,
+    );
+  }
+
+  late final _mv_face_detection_preparePtr =
+      _lookup<ffi.NativeFunction<ffi.Int Function(mv_face_detection_h)>>(
+          'mv_face_detection_prepare');
+  late final _mv_face_detection_prepare = _mv_face_detection_preparePtr
+      .asFunction<int Function(mv_face_detection_h)>();
+
+  /// @brief Performs the face detection inference on the @a source.
+  ///
+  /// @since_tizen 9.0
+  /// @remarks This function is synchronous and may take considerable time to run.
+  ///
+  /// @param[in] handle          The handle to the inference
+  /// @param[in] source         The handle to the source of the media
+  ///
+  /// @return @c 0 on success, otherwise a negative error value
+  /// @retval #MEDIA_VISION_ERROR_NONE Successful
+  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
+  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED_FORMAT Source colorspace
+  /// isn't supported
+  ///
+  /// @pre Create a source handle by calling mv_create_source()
+  /// @pre Create an inference handle by calling mv_face_detection_create()
+  /// @pre Prepare an inference by calling mv_face_detection_configure()
+  /// @pre Prepare an inference by calling mv_face_detection_prepare()
+  ///
+  /// @par Inference Example
+  /// @snippet face_detection_sync.c FD sync
+  int mv_face_detection_inference(
+    mv_face_detection_h handle,
+    mv_common.mv_source_h source,
+  ) {
+    return _mv_face_detection_inference(
+      handle,
+      source,
+    );
+  }
+
+  late final _mv_face_detection_inferencePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(mv_face_detection_h,
+              mv_common.mv_source_h)>>('mv_face_detection_inference');
+  late final _mv_face_detection_inference = _mv_face_detection_inferencePtr
+      .asFunction<int Function(mv_face_detection_h, mv_common.mv_source_h)>();
+
+  /// @brief Performs asynchronously the face detection inference on the @a source.
+  ///
+  /// @since_tizen 9.0
+  /// @remarks This function operates asynchronously, so it returns immediately upon invocation.
+  /// The inference results are inserted into the outgoing queue within the framework
+  /// in the order of processing, and the results can be obtained through mv_face_detection_get_result_count()
+  /// and mv_face_detection_get_bound_box().
+  ///
+  /// @param[in] handle         The handle to the inference
+  /// @param[in] source         The handle to the source of the media
+  ///
+  /// @return @c 0 on success, otherwise a negative error value
+  /// @retval #MEDIA_VISION_ERROR_NONE Successful
+  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
+  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED_FORMAT Source colorspace
+  /// isn't supported
+  ///
+  /// @pre Create a source handle by calling mv_create_source()
+  /// @pre Create an inference handle by calling mv_face_detection_create()
+  /// @pre Prepare an inference by calling mv_face_detection_configure()
+  /// @pre Prepare an inference by calling mv_face_detection_prepare()
+  ///
+  /// @par Async Inference Example
+  /// @snippet face_detection_async.c FD async
+  int mv_face_detection_inference_async(
+    mv_face_detection_h handle,
+    mv_common.mv_source_h source,
+  ) {
+    return _mv_face_detection_inference_async(
+      handle,
+      source,
+    );
+  }
+
+  late final _mv_face_detection_inference_asyncPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(mv_face_detection_h,
+              mv_common.mv_source_h)>>('mv_face_detection_inference_async');
+  late final _mv_face_detection_inference_async =
+      _mv_face_detection_inference_asyncPtr.asFunction<
+          int Function(mv_face_detection_h, mv_common.mv_source_h)>();
+
+  /// @brief Gets the face detection inference result on the @a handle.
+  ///
+  /// @since_tizen 9.0
+  ///
+  /// @param[in] handle          The handle to the inference
+  /// @param[out] frame_number   A frame number inferenced.
+  /// @param[out] result_cnt     A number of results.
+  ///
+  /// @return @c 0 on success, otherwise a negative error value
+  /// @retval #MEDIA_VISION_ERROR_NONE Successful
+  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
+  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
+  ///
+  /// @pre Create a source handle by calling mv_create_source()
+  /// @pre Create an inference handle by calling mv_face_detection_create()
+  /// @pre Prepare an inference by calling mv_face_detection_configure()
+  /// @pre Prepare an inference by calling mv_face_detection_prepare()
+  /// @pre Request an inference by calling mv_face_detection_inference()
+  int mv_face_detection_get_result_count(
+    mv_face_detection_h handle,
+    ffi.Pointer<ffi.UnsignedLong> frame_number,
+    ffi.Pointer<ffi.UnsignedInt> result_cnt,
+  ) {
+    return _mv_face_detection_get_result_count(
+      handle,
+      frame_number,
+      result_cnt,
+    );
+  }
+
+  late final _mv_face_detection_get_result_countPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Int Function(
+                  mv_face_detection_h,
+                  ffi.Pointer<ffi.UnsignedLong>,
+                  ffi.Pointer<ffi.UnsignedInt>)>>(
+      'mv_face_detection_get_result_count');
+  late final _mv_face_detection_get_result_count =
+      _mv_face_detection_get_result_countPtr.asFunction<
+          int Function(mv_face_detection_h, ffi.Pointer<ffi.UnsignedLong>,
+              ffi.Pointer<ffi.UnsignedInt>)>();
+
+  /// @brief Gets a bound box to detected face region.
+  ///
+  /// @since_tizen 9.0
+  ///
+  /// @param[in] handle              The handle to the inference
+  /// @param[in] index               A result index.
+  /// @param[out] left               An left position of bound box.
+  /// @param[out] top                An top position of bound box.
+  /// @param[out] right              An right position of bound box.
+  /// @param[out] bottom             An bottom position of bound box.
+  ///
+  /// @return @c 0 on success, otherwise a negative error value
+  /// @retval #MEDIA_VISION_ERROR_NONE Successful
+  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
+  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
+  ///
+  /// @pre Create a source handle by calling mv_create_source()
+  /// @pre Create an inference handle by calling mv_face_detection_create()
+  /// @pre Prepare an inference by calling mv_face_detection_configure()
+  /// @pre Prepare an inference by calling mv_face_detection_prepare()
+  /// @pre Request an inference by calling mv_face_detection_inference()
+  /// @pre Get result count by calling mv_face_detection_get_result_count()
+  int mv_face_detection_get_bound_box(
+    mv_face_detection_h handle,
+    int index,
+    ffi.Pointer<ffi.Int> left,
+    ffi.Pointer<ffi.Int> top,
+    ffi.Pointer<ffi.Int> right,
+    ffi.Pointer<ffi.Int> bottom,
+  ) {
+    return _mv_face_detection_get_bound_box(
+      handle,
+      index,
+      left,
+      top,
+      right,
+      bottom,
+    );
+  }
+
+  late final _mv_face_detection_get_bound_boxPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(
+              mv_face_detection_h,
+              ffi.UnsignedInt,
+              ffi.Pointer<ffi.Int>,
+              ffi.Pointer<ffi.Int>,
+              ffi.Pointer<ffi.Int>,
+              ffi.Pointer<ffi.Int>)>>('mv_face_detection_get_bound_box');
+  late final _mv_face_detection_get_bound_box =
+      _mv_face_detection_get_bound_boxPtr.asFunction<
+          int Function(
+              mv_face_detection_h,
+              int,
+              ffi.Pointer<ffi.Int>,
+              ffi.Pointer<ffi.Int>,
+              ffi.Pointer<ffi.Int>,
+              ffi.Pointer<ffi.Int>)>();
+
   /// @brief Creates a inference handle for object detection object.
   /// @details Use this function to create a inference handle. After the creation
   /// the object detection 3d task has to be prepared with
@@ -335,6 +650,11 @@ class Tizen90MvObjectDetection {
               ffi.Pointer<ffi.Int>,
               ffi.Pointer<ffi.Int>)>();
 }
+
+/// @brief The face detection object handle.
+///
+/// @since_tizen 9.0
+typedef mv_face_detection_h = ffi.Pointer<ffi.Void>;
 
 /// @brief The object detection object handle.
 ///

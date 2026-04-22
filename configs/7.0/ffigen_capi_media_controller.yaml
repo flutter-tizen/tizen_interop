@@ -19,6 +19,7 @@ headers:
     - '**/media_controller_metadata.h'
     - '**/media_controller_playlist.h'
     - '**/media_controller_server.h'
+    - '**/media_controller_type.h'
 
 library-imports:
   bundle: 'generated_bindings_bundle.dart'

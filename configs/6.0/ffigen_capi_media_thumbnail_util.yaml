@@ -16,6 +16,7 @@ headers:
     - 'entrypoints.h'
   include-directives:
     - '**/thumbnail_util.h'
+    - '**/thumbnail_util_type.h'
 
 compiler-opts:
   - '-m32'

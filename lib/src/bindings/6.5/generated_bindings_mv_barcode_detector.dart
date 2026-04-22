@@ -81,6 +81,123 @@ class Tizen65MvBarcodeDetector {
           ffi.Pointer<ffi.Void>)>();
 }
 
+/// @brief Enumeration for supported barcode types.
+/// @details QR codes (versions 1 to 40) and set of 1D barcodes are supported
+///
+/// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+/// @remarks #MV_BARCODE_UNDEFINED is deprecated. Use #MV_BARCODE_UNKNOWN instead
+abstract class mv_barcode_type_e {
+  /// < 2D barcode - Quick Response code
+  static const int MV_BARCODE_QR = 0;
+
+  /// < 1D barcode - Universal Product Code with 12-digit
+  static const int MV_BARCODE_UPC_A = 1;
+
+  /// < 1D barcode - Universal Product Code with 6-digit
+  static const int MV_BARCODE_UPC_E = 2;
+
+  /// < 1D barcode - International Article Number with 8-digit
+  static const int MV_BARCODE_EAN_8 = 3;
+
+  /// < 1D barcode - International Article Number with 13-digit
+  static const int MV_BARCODE_EAN_13 = 4;
+
+  /// < 1D barcode - Code 128
+  static const int MV_BARCODE_CODE128 = 5;
+
+  /// < 1D barcode - Code 39
+  static const int MV_BARCODE_CODE39 = 6;
+
+  /// < 1D barcode - Interleaved Two of Five
+  static const int MV_BARCODE_I2_5 = 7;
+
+  /// < @deprecated Undefined (Deprecated since 6.0)
+  static const int MV_BARCODE_UNDEFINED = 8;
+
+  /// < 1D barcode - International Article Number with 2-digit(add-on) (since 6.0)
+  static const int MV_BARCODE_EAN_2 = 9;
+
+  /// < 1D barcode - International Article Number with 5-digit(add-on) (since 6.0)
+  static const int MV_BARCODE_EAN_5 = 10;
+
+  /// < 1D barcode - Code 93 (since 6.0)
+  static const int MV_BARCODE_CODE93 = 11;
+
+  /// < 1D barcode - CODABAR (since 6.0)
+  static const int MV_BARCODE_CODABAR = 12;
+
+  /// < 1D barcode - GS1 DATABAR (since 6.0)
+  static const int MV_BARCODE_DATABAR = 13;
+
+  /// < 1D barcode - GS1 DATABAR EXPAND(since 6.0)
+  static const int MV_BARCODE_DATABAR_EXPAND = 14;
+
+  /// < Unknown (since 6.0)
+  static const int MV_BARCODE_UNKNOWN = 100;
+}
+
+/// @brief Enumeration for supported QR code error correction level.
+///
+/// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+/// @remarks This is unavailable for 1D barcodes
+abstract class mv_barcode_qr_ecc_e {
+  /// < Recovery up to  7% losses
+  static const int MV_BARCODE_QR_ECC_LOW = 0;
+
+  /// < Recovery up to 15% losses
+  static const int MV_BARCODE_QR_ECC_MEDIUM = 1;
+
+  /// < Recovery up to 25% losses
+  static const int MV_BARCODE_QR_ECC_QUARTILE = 2;
+
+  /// < Recovery up to 30% losses
+  static const int MV_BARCODE_QR_ECC_HIGH = 3;
+
+  /// < Unavailable
+  static const int MV_BARCODE_QR_ECC_UNAVAILABLE = 4;
+}
+
+/// @brief Enumeration for supported QR code encoding mode.
+///
+/// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+/// @remarks This is unavailable for 1D barcodes
+abstract class mv_barcode_qr_mode_e {
+  /// < Numeric digits
+  static const int MV_BARCODE_QR_MODE_NUMERIC = 0;
+
+  /// < Alphanumeric characters
+  static const int MV_BARCODE_QR_MODE_ALPHANUMERIC = 1;
+
+  /// < Raw 8-bit bytes
+  static const int MV_BARCODE_QR_MODE_BYTE = 2;
+
+  /// < UTF-8 character encoding
+  static const int MV_BARCODE_QR_MODE_UTF8 = 3;
+
+  /// < Unavailable
+  static const int MV_BARCODE_QR_MODE_UNAVAILABLE = 4;
+}
+
+/// @brief Enumeration for supported image formats for the barcode generating.
+///
+/// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+abstract class mv_barcode_image_format_e {
+  /// < Unavailable image format
+  static const int MV_BARCODE_IMAGE_FORMAT_UNAVAILABLE = -1;
+
+  /// < BMP image format
+  static const int MV_BARCODE_IMAGE_FORMAT_BMP = 0;
+
+  /// < JPEG image format
+  static const int MV_BARCODE_IMAGE_FORMAT_JPG = 1;
+
+  /// < PNG image format
+  static const int MV_BARCODE_IMAGE_FORMAT_PNG = 2;
+
+  /// < The number of supported image format
+  static const int MV_BARCODE_IMAGE_FORMAT_NUM = 3;
+}
+
 /// @brief Enumeration to target attribute
 ///
 /// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
@@ -150,61 +267,6 @@ typedef Dartmv_barcode_detected_cbFunction = void Function(
     ffi.Pointer<ffi.Int32> types,
     int number_of_barcodes,
     ffi.Pointer<ffi.Void> user_data);
-
-/// @brief Enumeration for supported barcode types.
-/// @details QR codes (versions 1 to 40) and set of 1D barcodes are supported
-///
-/// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
-/// @remarks #MV_BARCODE_UNDEFINED is deprecated. Use #MV_BARCODE_UNKNOWN instead
-abstract class mv_barcode_type_e {
-  /// < 2D barcode - Quick Response code
-  static const int MV_BARCODE_QR = 0;
-
-  /// < 1D barcode - Universal Product Code with 12-digit
-  static const int MV_BARCODE_UPC_A = 1;
-
-  /// < 1D barcode - Universal Product Code with 6-digit
-  static const int MV_BARCODE_UPC_E = 2;
-
-  /// < 1D barcode - International Article Number with 8-digit
-  static const int MV_BARCODE_EAN_8 = 3;
-
-  /// < 1D barcode - International Article Number with 13-digit
-  static const int MV_BARCODE_EAN_13 = 4;
-
-  /// < 1D barcode - Code 128
-  static const int MV_BARCODE_CODE128 = 5;
-
-  /// < 1D barcode - Code 39
-  static const int MV_BARCODE_CODE39 = 6;
-
-  /// < 1D barcode - Interleaved Two of Five
-  static const int MV_BARCODE_I2_5 = 7;
-
-  /// < @deprecated Undefined (Deprecated since 6.0)
-  static const int MV_BARCODE_UNDEFINED = 8;
-
-  /// < 1D barcode - International Article Number with 2-digit(add-on) (since 6.0)
-  static const int MV_BARCODE_EAN_2 = 9;
-
-  /// < 1D barcode - International Article Number with 5-digit(add-on) (since 6.0)
-  static const int MV_BARCODE_EAN_5 = 10;
-
-  /// < 1D barcode - Code 93 (since 6.0)
-  static const int MV_BARCODE_CODE93 = 11;
-
-  /// < 1D barcode - CODABAR (since 6.0)
-  static const int MV_BARCODE_CODABAR = 12;
-
-  /// < 1D barcode - GS1 DATABAR (since 6.0)
-  static const int MV_BARCODE_DATABAR = 13;
-
-  /// < 1D barcode - GS1 DATABAR EXPAND(since 6.0)
-  static const int MV_BARCODE_DATABAR_EXPAND = 14;
-
-  /// < Unknown (since 6.0)
-  static const int MV_BARCODE_UNKNOWN = 100;
-}
 
 const String MV_BARCODE_DETECT_ATTR_TARGET = 'MV_BARCODE_DETECT_ATTR_TARGET';
 

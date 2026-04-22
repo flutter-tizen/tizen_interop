@@ -17,6 +17,7 @@ headers:
   include-directives:
     - '**/tizen.h'
     - '**/tizen_error.h'
+    - '**tizen_type.h'
 
 compiler-opts:
   - '-m32'

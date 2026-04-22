@@ -9643,6 +9643,185 @@ class Tizen65CapiNetworkBluetooth {
           .asFunction<int Function(ffi.Pointer<ffi.Bool>)>();
 }
 
+/// @WEARABLE_ONLY
+/// @ingroup CAPI_NETWORK_BLUETOOTH_PBAP_MODULE
+/// @brief  Enumeration of PBAP fields.
+/// @since_tizen 3.0
+abstract class bt_pbap_field_e {
+  /// < All field
+  static const int BT_PBAP_FIELD_ALL = -1;
+
+  /// < vCard Version
+  static const int BT_PBAP_FIELD_VERSION = 1;
+
+  /// < Formatted Name
+  static const int BT_PBAP_FIELD_FN = 2;
+
+  /// < Structured Presentation of Name
+  static const int BT_PBAP_FIELD_N = 4;
+
+  /// < Associated Image or Photo
+  static const int BT_PBAP_FIELD_PHOTO = 8;
+
+  /// < Birthday
+  static const int BT_PBAP_FIELD_BDAY = 16;
+
+  /// < Delivery Address
+  static const int BT_PBAP_FIELD_ADR = 32;
+
+  /// < Delivery
+  static const int BT_PBAP_FIELD_LABEL = 64;
+
+  /// < Telephone Number
+  static const int BT_PBAP_FIELD_TEL = 128;
+
+  /// < Electronic Mail Address
+  static const int BT_PBAP_FIELD_EMAIL = 256;
+
+  /// < Electronic Mail
+  static const int BT_PBAP_FIELD_MAILER = 512;
+
+  /// < Time Zone
+  static const int BT_PBAP_FIELD_TZ = 1024;
+
+  /// < Geographic Position
+  static const int BT_PBAP_FIELD_GEO = 2048;
+
+  /// < Job
+  static const int BT_PBAP_FIELD_TITLE = 4096;
+
+  /// < Role within the Organization
+  static const int BT_PBAP_FIELD_ROLE = 8192;
+
+  /// < Organization Logo
+  static const int BT_PBAP_FIELD_LOGO = 16384;
+
+  /// < vCard of Person Representing
+  static const int BT_PBAP_FIELD_AGENT = 32768;
+
+  /// < Name of Organization
+  static const int BT_PBAP_FIELD_ORG = 65536;
+
+  /// < Comments
+  static const int BT_PBAP_FIELD_NOTE = 131072;
+
+  /// < Revision
+  static const int BT_PBAP_FIELD_REV = 262144;
+
+  /// < Pronunciation of Name
+  static const int BT_PBAP_FIELD_SOUND = 524288;
+
+  /// < Uniform Resource Locator
+  static const int BT_PBAP_FIELD_URL = 1048576;
+
+  /// < Unique ID
+  static const int BT_PBAP_FIELD_UID = 2097152;
+
+  /// < Public Encryption Key
+  static const int BT_PBAP_FIELD_KEY = 4194304;
+
+  /// < Nickname
+  static const int BT_PBAP_FIELD_NICKNAME = 8388608;
+
+  /// < Categories
+  static const int BT_PBAP_FIELD_CATEGORIES = 16777216;
+
+  /// < Product ID
+  static const int BT_PBAP_FIELD_PROID = 33554432;
+
+  /// < Class information
+  static const int BT_PBAP_FIELD_CLASS = 67108864;
+
+  /// < String used for sorting operations
+  static const int BT_PBAP_FIELD_SORT_STRING = 134217728;
+
+  /// < Time stamp
+  static const int BT_PBAP_FIELD_X_IRMC_CALL_DATETIME = 268435456;
+}
+
+/// @ingroup CAPI_NETWORK_BLUETOOTH_MODULE
+/// @brief Enumerations of Bluetooth error codes.
+/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+abstract class bt_error_e {
+  /// < Successful
+  static const int BT_ERROR_NONE = 0;
+
+  /// < Operation cancelled
+  static const int BT_ERROR_CANCELLED = -125;
+
+  /// < Invalid parameter
+  static const int BT_ERROR_INVALID_PARAMETER = -22;
+
+  /// < Out of memory
+  static const int BT_ERROR_OUT_OF_MEMORY = -12;
+
+  /// < Device or resource busy
+  static const int BT_ERROR_RESOURCE_BUSY = -16;
+
+  /// < Timeout error
+  static const int BT_ERROR_TIMED_OUT = -1073741823;
+
+  /// < Operation now in progress
+  static const int BT_ERROR_NOW_IN_PROGRESS = -115;
+
+  /// < BT is Not Supported
+  static const int BT_ERROR_NOT_SUPPORTED = -1073741822;
+
+  /// < Permission denied
+  static const int BT_ERROR_PERMISSION_DENIED = -13;
+
+  /// < Quota exceeded
+  static const int BT_ERROR_QUOTA_EXCEEDED = -122;
+
+  /// < No data available
+  static const int BT_ERROR_NO_DATA = -61;
+
+  /// < Device policy restriction (Since 3.0)
+  static const int BT_ERROR_DEVICE_POLICY_RESTRICTION = -1073741820;
+
+  /// < Local adapter not initialized
+  static const int BT_ERROR_NOT_INITIALIZED = -29359871;
+
+  /// < Local adapter not enabled
+  static const int BT_ERROR_NOT_ENABLED = -29359870;
+
+  /// < Operation already done
+  static const int BT_ERROR_ALREADY_DONE = -29359869;
+
+  /// < Operation failed
+  static const int BT_ERROR_OPERATION_FAILED = -29359868;
+
+  /// < Operation not in progress
+  static const int BT_ERROR_NOT_IN_PROGRESS = -29359867;
+
+  /// < Remote device not bonded
+  static const int BT_ERROR_REMOTE_DEVICE_NOT_BONDED = -29359866;
+
+  /// < Authentication rejected
+  static const int BT_ERROR_AUTH_REJECTED = -29359865;
+
+  /// < Authentication failed
+  static const int BT_ERROR_AUTH_FAILED = -29359864;
+
+  /// < Remote device not found
+  static const int BT_ERROR_REMOTE_DEVICE_NOT_FOUND = -29359863;
+
+  /// < Service search failed
+  static const int BT_ERROR_SERVICE_SEARCH_FAILED = -29359862;
+
+  /// < Remote device is not connected
+  static const int BT_ERROR_REMOTE_DEVICE_NOT_CONNECTED = -29359861;
+
+  /// < Resource temporarily unavailable
+  static const int BT_ERROR_AGAIN = -29359860;
+
+  /// < Service Not Found
+  static const int BT_ERROR_SERVICE_NOT_FOUND = -29359859;
+
+  /// < Authorization rejected (Since 5.0)
+  static const int BT_ERROR_AUTHORIZATION_REJECTED = -29359858;
+}
+
 /// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_MODULE
 /// @brief  Enumerations of the Bluetooth adapter state.
 /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
@@ -9667,6 +9846,178 @@ abstract class bt_adapter_visibility_mode_e {
   /// < Discoverable mode with time limit. After specific period,
   /// it is changed to #BT_ADAPTER_VISIBILITY_MODE_NON_DISCOVERABLE.
   static const int BT_ADAPTER_VISIBILITY_MODE_LIMITED_DISCOVERABLE = 2;
+}
+
+/// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_MODULE
+/// @brief Enumerations of the discovery state of Bluetooth device.
+/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+abstract class bt_adapter_device_discovery_state_e {
+  /// < Device discovery is started
+  static const int BT_ADAPTER_DEVICE_DISCOVERY_STARTED = 0;
+
+  /// < Device discovery is finished
+  static const int BT_ADAPTER_DEVICE_DISCOVERY_FINISHED = 1;
+
+  /// < The remote Bluetooth device is found
+  static const int BT_ADAPTER_DEVICE_DISCOVERY_FOUND = 2;
+}
+
+/// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
+/// @brief  Enumerations of the Bluetooth advertising state.
+/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+abstract class bt_adapter_le_advertising_state_e {
+  /// < Bluetooth advertising is stopped
+  static const int BT_ADAPTER_LE_ADVERTISING_STOPPED = 0;
+
+  /// < Bluetooth advertising is started
+  static const int BT_ADAPTER_LE_ADVERTISING_STARTED = 1;
+}
+
+/// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
+/// @brief  Enumerations of the Bluetooth advertising mode.
+/// @since_tizen 2.3.1
+abstract class bt_adapter_le_advertising_mode_e {
+  /// < Balanced advertising mode
+  static const int BT_ADAPTER_LE_ADVERTISING_MODE_BALANCED = 0;
+
+  /// < Low latency advertising mode
+  static const int BT_ADAPTER_LE_ADVERTISING_MODE_LOW_LATENCY = 1;
+
+  /// < Low energy advertising mode
+  static const int BT_ADAPTER_LE_ADVERTISING_MODE_LOW_ENERGY = 2;
+
+  /// < Custom mode to set advertising parameters
+  static const int BT_ADAPTER_LE_ADVERTISING_MODE_CUSTOM = 3;
+}
+
+/// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
+/// @brief  Enumerations of the Bluetooth advertising filter policy.
+/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+abstract class bt_adapter_le_advertising_filter_policy_e {
+  /// < White list is not in use
+  static const int BT_ADAPTER_LE_ADVERTISING_FILTER_DEFAULT = 0;
+
+  /// < Allow the scan
+  /// request that in the White list
+  static const int BT_ADAPTER_LE_ADVERTISING_FILTER_ALLOW_SCAN_WL = 1;
+
+  /// < Allow the connection
+  /// request that in the White list
+  static const int BT_ADAPTER_LE_ADVERTISING_FILTER_ALLOW_CONN_WL = 2;
+
+  /// < Allow the
+  /// scan and connection request that in the White list
+  static const int BT_ADAPTER_LE_ADVERTISING_FILTER_ALLOW_SCAN_CONN_WL = 3;
+}
+
+/// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
+/// @brief  Enumerations of the Bluetooth LE packet type.
+/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+abstract class bt_adapter_le_packet_type_e {
+  /// < Advertising packet
+  static const int BT_ADAPTER_LE_PACKET_ADVERTISING = 0;
+
+  /// < Scan response packet
+  static const int BT_ADAPTER_LE_PACKET_SCAN_RESPONSE = 1;
+}
+
+/// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
+/// @brief  Enumerations of the Bluetooth le scan mode.
+/// @since_tizen 3.0
+abstract class bt_adapter_le_scan_mode_e {
+  /// < Balanced mode of power consumption and connection latency
+  static const int BT_ADAPTER_LE_SCAN_MODE_BALANCED = 0;
+
+  /// < Low connection latency but high power consumption
+  static const int BT_ADAPTER_LE_SCAN_MODE_LOW_LATENCY = 1;
+
+  /// < Low power consumption but high connection latency
+  static const int BT_ADAPTER_LE_SCAN_MODE_LOW_ENERGY = 2;
+}
+
+/// @ingroup CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
+/// @brief Enumerations of device disconnect reason.
+/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+abstract class bt_device_disconnect_reason_e {
+  /// < Disconnected by unknown reason
+  static const int BT_DEVICE_DISCONNECT_REASON_UNKNOWN = 0;
+
+  /// < Disconnected by timeout
+  static const int BT_DEVICE_DISCONNECT_REASON_TIMEOUT = 1;
+
+  /// < Disconnected by local host
+  static const int BT_DEVICE_DISCONNECT_REASON_LOCAL_HOST = 2;
+
+  /// < Disconnected by remote
+  static const int BT_DEVICE_DISCONNECT_REASON_REMOTE = 3;
+}
+
+/// @ingroup CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
+/// @brief Enumerations of connection link type.
+/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+abstract class bt_device_connection_link_type_e {
+  /// < BR/EDR link
+  static const int BT_DEVICE_CONNECTION_LINK_BREDR = 0;
+
+  /// < LE link
+  static const int BT_DEVICE_CONNECTION_LINK_LE = 1;
+
+  /// < The connection type default
+  static const int BT_DEVICE_CONNECTION_LINK_DEFAULT = 255;
+}
+
+/// @ingroup CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
+/// @brief Enumerations of device authorization state.
+/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+abstract class bt_device_authorization_e {
+  /// < The remote Bluetooth device is authorized
+  static const int BT_DEVICE_AUTHORIZED = 0;
+
+  /// < The remote Bluetooth device is unauthorized
+  static const int BT_DEVICE_UNAUTHORIZED = 1;
+}
+
+/// @ingroup CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
+/// @brief Enumerations of Bluetooth profile.
+/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+abstract class bt_profile_e {
+  /// < RFCOMM Profile
+  static const int BT_PROFILE_RFCOMM = 1;
+
+  /// < Advanced Audio Distribution Profile Source role
+  static const int BT_PROFILE_A2DP = 2;
+
+  /// < Headset Profile
+  static const int BT_PROFILE_HSP = 4;
+
+  /// < Human Interface Device Profile
+  static const int BT_PROFILE_HID = 8;
+
+  /// < Network Access Point Profile
+  static const int BT_PROFILE_NAP = 16;
+
+  /// < Audio Gateway Profile
+  static const int BT_PROFILE_AG = 32;
+
+  /// < Generic Attribute Profile
+  static const int BT_PROFILE_GATT = 64;
+
+  /// < NAP server Profile
+  static const int BT_PROFILE_NAP_SERVER = 128;
+
+  /// < Advanced Audio Distribution Profile Sink role
+  static const int BT_PROFILE_A2DP_SINK = 256;
+}
+
+/// @ingroup CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
+/// @brief Enumerations of device address type.
+/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+abstract class bt_device_address_type_e {
+  /// < Public address
+  static const int BT_DEVICE_PUBLIC_ADDRESS = 0;
+
+  /// < Random address
+  static const int BT_DEVICE_RANDOM_ADDRESS = 1;
 }
 
 /// @ingroup CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
@@ -9752,88 +10103,36 @@ abstract class bt_service_class_t {
   static const int BT_SC_MAX = 16777216;
 }
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_MODULE
-/// @brief  Called when you get bonded devices repeatedly.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-///
-/// @param[in] device_info The bonded device information
-/// @param[in] user_data The user data passed from the foreach function
-/// @return @c true to continue with the next iteration of the loop,
-/// \n @c false to break out of the loop.
-/// @pre bt_adapter_foreach_bonded_device() will invoke this function.
-///
-/// @see bt_adapter_foreach_bonded_device()
-typedef bt_adapter_bonded_device_cb
-    = ffi.Pointer<ffi.NativeFunction<bt_adapter_bonded_device_cbFunction>>;
-typedef bt_adapter_bonded_device_cbFunction = ffi.Bool Function(
-    ffi.Pointer<bt_device_info_s> device_info, ffi.Pointer<ffi.Void> user_data);
-typedef Dartbt_adapter_bonded_device_cbFunction = bool Function(
-    ffi.Pointer<bt_device_info_s> device_info, ffi.Pointer<ffi.Void> user_data);
-
 /// @ingroup CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
-/// @brief Device information structure used for identifying pear device.
+/// @brief  Enumerations of major service class.
 /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-///
-/// @see #bt_class_s
-/// @see bt_device_bond_created_cb()
-final class bt_device_info_s extends ffi.Struct {
-  /// < The address of remote device
-  external ffi.Pointer<ffi.Char> remote_address;
+abstract class bt_major_service_class_e {
+  /// < Limited discoverable mode
+  static const int BT_MAJOR_SERVICE_CLASS_LIMITED_DISCOVERABLE_MODE = 8192;
 
-  /// < The name of remote device
-  external ffi.Pointer<ffi.Char> remote_name;
+  /// < Positioning class
+  static const int BT_MAJOR_SERVICE_CLASS_POSITIONING = 65536;
 
-  /// < The Bluetooth classes
-  external bt_class_s bt_class;
+  /// < Networking class
+  static const int BT_MAJOR_SERVICE_CLASS_NETWORKING = 131072;
 
-  /// < The UUID list of service
-  external ffi.Pointer<ffi.Pointer<ffi.Char>> service_uuid;
+  /// < Rendering class
+  static const int BT_MAJOR_SERVICE_CLASS_RENDERING = 262144;
 
-  /// < The number of services
-  @ffi.Int()
-  external int service_count;
+  /// < Capturing class
+  static const int BT_MAJOR_SERVICE_CLASS_CAPTURING = 524288;
 
-  /// < The bonding state
-  @ffi.Bool()
-  external bool is_bonded;
+  /// < Object transferring class
+  static const int BT_MAJOR_SERVICE_CLASS_OBJECT_TRANSFER = 1048576;
 
-  /// < The connection state
-  @ffi.Bool()
-  external bool is_connected;
+  /// < Audio class
+  static const int BT_MAJOR_SERVICE_CLASS_AUDIO = 2097152;
 
-  /// < The authorization state
-  @ffi.Bool()
-  external bool is_authorized;
+  /// < Telephony class
+  static const int BT_MAJOR_SERVICE_CLASS_TELEPHONY = 4194304;
 
-  /// < manufacturer specific data length
-  @ffi.Int()
-  external int manufacturer_data_len;
-
-  /// < manufacturer specific data
-  external ffi.Pointer<ffi.Char> manufacturer_data;
-}
-
-/// @ingroup CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
-/// @brief Class structure of device and service.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-///
-/// @see #bt_device_info_s
-/// @see #bt_adapter_device_discovery_info_s
-/// @see bt_device_bond_created_cb()
-/// @see bt_adapter_device_discovery_state_changed_cb()
-final class bt_class_s extends ffi.Struct {
-  /// < Major device class.
-  @ffi.Int32()
-  external int major_device_class;
-
-  /// < Minor device class.
-  @ffi.Int32()
-  external int minor_device_class;
-
-  /// < Major service class mask.
-  /// This value can be a combination of #bt_major_service_class_e like #BT_MAJOR_SERVICE_CLASS_RENDERING | #BT_MAJOR_SERVICE_CLASS_AUDIO
-  @ffi.Int()
-  external int major_service_class_mask;
+  /// < Information class
+  static const int BT_MAJOR_SERVICE_CLASS_INFORMATION = 8388608;
 }
 
 /// @ingroup CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
@@ -10134,6 +10433,972 @@ abstract class bt_minor_device_class_e {
   static const int BT_MINOR_DEVICE_CLASS_HEALTH_ANKLE_PROSTHESIS = 52;
 }
 
+/// @ingroup CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
+/// @brief  Enumerations of gap appearance type.
+/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+abstract class bt_appearance_type_e {
+  /// < Unknown appearance type
+  static const int BT_APPEARANCE_TYPE_UNKNOWN = 0;
+
+  /// < Generic Phone type - Generic category
+  static const int BT_APPEARANCE_TYPE_GENERIC_PHONE = 64;
+
+  /// < Generic Computer type - Generic category
+  static const int BT_APPEARANCE_TYPE_GENERIC_COMPUTER = 128;
+
+  /// < Generic Watch type - Generic category
+  static const int BT_APPEARANCE_TYPE_GENERIC_WATCH = 192;
+}
+
+/// @ingroup CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
+/// @brief  Enumerations of the Bluetooth device's LE connection mode.
+/// @since_tizen 3.0
+abstract class bt_device_le_connection_mode_e {
+  /// < Balanced mode of power consumption and connection latency
+  static const int BT_DEVICE_LE_CONNECTION_MODE_BALANCED = 0;
+
+  /// < Low connection latency but high power consumption
+  static const int BT_DEVICE_LE_CONNECTION_MODE_LOW_LATENCY = 1;
+
+  /// < Low power consumption but high connection latency
+  static const int BT_DEVICE_LE_CONNECTION_MODE_LOW_ENERGY = 2;
+}
+
+/// @ingroup CAPI_NETWORK_BLUETOOTH_SOCKET_MODULE
+/// @brief  Enumerations of connected Bluetooth device event role.
+/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+abstract class bt_socket_role_e {
+  /// < Unknown role
+  static const int BT_SOCKET_UNKNOWN = 0;
+
+  /// < Server role
+  static const int BT_SOCKET_SERVER = 1;
+
+  /// < Client role
+  static const int BT_SOCKET_CLIENT = 2;
+}
+
+/// @ingroup CAPI_NETWORK_BLUETOOTH_SOCKET_MODULE
+/// @brief  Enumerations of Bluetooth socket connection state.
+/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+abstract class bt_socket_connection_state_e {
+  /// < RFCOMM is connected
+  static const int BT_SOCKET_CONNECTED = 0;
+
+  /// < RFCOMM is disconnected
+  static const int BT_SOCKET_DISCONNECTED = 1;
+}
+
+/// @ingroup CAPI_NETWORK_BLUETOOTH_AUDIO_MODULE
+/// @brief  Enumerations for the types of profiles related with audio.
+/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+abstract class bt_audio_profile_type_e {
+  /// < All supported profiles related with audio (Both Host and Device role)
+  static const int BT_AUDIO_PROFILE_TYPE_ALL = 0;
+
+  /// < local device AG and remote device HF Client (Host role, ex: mobile)
+  static const int BT_AUDIO_PROFILE_TYPE_HSP_HFP = 1;
+
+  /// < A2DP Source Connection, remote device is A2DP Sink (Host role, ex: mobile)
+  static const int BT_AUDIO_PROFILE_TYPE_A2DP = 2;
+
+  /// < local device HF Client and remote device AG (Device role, ex: headset)
+  static const int BT_AUDIO_PROFILE_TYPE_AG = 3;
+
+  /// < A2DP Sink Connection, remote device is A2DP Source (Device role, ex: headset)
+  static const int BT_AUDIO_PROFILE_TYPE_A2DP_SINK = 4;
+}
+
+/// @ingroup CAPI_NETWORK_BLUETOOTH_AUDIO_AG_MODULE
+/// @brief  Enumerations for the call handling event.
+/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+abstract class bt_ag_call_handling_event_e {
+  /// < Request to answer an incoming call
+  static const int BT_AG_CALL_HANDLING_EVENT_ANSWER = 0;
+
+  /// < Request to release a call
+  static const int BT_AG_CALL_HANDLING_EVENT_RELEASE = 1;
+
+  /// < Request to reject an incoming call
+  static const int BT_AG_CALL_HANDLING_EVENT_REJECT = 2;
+}
+
+/// @ingroup CAPI_NETWORK_BLUETOOTH_AUDIO_AG_MODULE
+/// @brief  Enumerations for the multi call handling event.
+/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+abstract class bt_ag_multi_call_handling_event_e {
+  /// < Request to release held calls
+  static const int BT_AG_MULTI_CALL_HANDLING_EVENT_RELEASE_HELD_CALLS = 0;
+
+  /// < Request to release active calls
+  static const int BT_AG_MULTI_CALL_HANDLING_EVENT_RELEASE_ACTIVE_CALLS = 1;
+
+  /// < Request to put active calls into hold state and activate another (held or waiting) call
+  static const int BT_AG_MULTI_CALL_HANDLING_EVENT_ACTIVATE_HELD_CALL = 2;
+
+  /// < Request to add a held call to the conversation
+  static const int BT_AG_MULTI_CALL_HANDLING_EVENT_MERGE_CALLS = 3;
+
+  /// < Request to let a user who has two calls to connect these two calls together and release its connections to both other parties
+  static const int BT_AG_MULTI_CALL_HANDLING_EVENT_EXPLICIT_CALL_TRANSFER = 4;
+}
+
+/// @ingroup CAPI_NETWORK_BLUETOOTH_AVRCP_MODULE
+/// @brief  Enumerations for the equalizer state.
+/// @since_tizen @if WEARABLE 3.0 @else 2.4 @endif
+abstract class bt_avrcp_equalizer_state_e {
+  /// < Equalizer Off
+  static const int BT_AVRCP_EQUALIZER_STATE_OFF = 1;
+
+  /// < Equalizer On
+  static const int BT_AVRCP_EQUALIZER_STATE_ON = 2;
+}
+
+/// @ingroup CAPI_NETWORK_BLUETOOTH_AVRCP_MODULE
+/// @brief  Enumerations for the repeat mode.
+/// @since_tizen @if WEARABLE 3.0 @else 2.4 @endif
+abstract class bt_avrcp_repeat_mode_e {
+  /// < Repeat Off
+  static const int BT_AVRCP_REPEAT_MODE_OFF = 1;
+
+  /// < Single track repeat
+  static const int BT_AVRCP_REPEAT_MODE_SINGLE_TRACK = 2;
+
+  /// < All track repeat
+  static const int BT_AVRCP_REPEAT_MODE_ALL_TRACK = 3;
+
+  /// < Group repeat
+  static const int BT_AVRCP_REPEAT_MODE_GROUP = 4;
+}
+
+/// @ingroup CAPI_NETWORK_BLUETOOTH_AVRCP_MODULE
+/// @brief  Enumerations for the shuffle mode.
+/// @since_tizen @if WEARABLE 3.0 @else 2.4 @endif
+abstract class bt_avrcp_shuffle_mode_e {
+  /// < Shuffle Off
+  static const int BT_AVRCP_SHUFFLE_MODE_OFF = 1;
+
+  /// < All tracks shuffle
+  static const int BT_AVRCP_SHUFFLE_MODE_ALL_TRACK = 2;
+
+  /// < Group shuffle
+  static const int BT_AVRCP_SHUFFLE_MODE_GROUP = 3;
+}
+
+/// @ingroup CAPI_NETWORK_BLUETOOTH_AVRCP_MODULE
+/// @brief  Enumerations for the scan mode.
+/// @since_tizen @if WEARABLE 3.0 @else 2.4 @endif
+abstract class bt_avrcp_scan_mode_e {
+  /// < Scan Off
+  static const int BT_AVRCP_SCAN_MODE_OFF = 1;
+
+  /// < All tracks scan
+  static const int BT_AVRCP_SCAN_MODE_ALL_TRACK = 2;
+
+  /// < Group scan
+  static const int BT_AVRCP_SCAN_MODE_GROUP = 3;
+}
+
+/// @ingroup CAPI_NETWORK_BLUETOOTH_AVRCP_MODULE
+/// @brief  Enumerations for the player state.
+/// @since_tizen 3.0
+abstract class bt_avrcp_player_state_e {
+  /// < Stopped
+  static const int BT_AVRCP_PLAYER_STATE_STOPPED = 0;
+
+  /// < Playing
+  static const int BT_AVRCP_PLAYER_STATE_PLAYING = 1;
+
+  /// < Paused
+  static const int BT_AVRCP_PLAYER_STATE_PAUSED = 2;
+
+  /// < Seek Forward
+  static const int BT_AVRCP_PLAYER_STATE_FORWARD_SEEK = 3;
+
+  /// < Seek Rewind
+  static const int BT_AVRCP_PLAYER_STATE_REWIND_SEEK = 4;
+}
+
+/// @ingroup CAPI_NETWORK_BLUETOOTH_AVRCP_MODULE
+/// @brief  Enumeration for the player control commands.
+/// @since_tizen 3.0
+abstract class bt_avrcp_player_command_e {
+  /// < Play
+  static const int BT_AVRCP_CONTROL_PLAY = 1;
+
+  /// < Pause
+  static const int BT_AVRCP_CONTROL_PAUSE = 2;
+
+  /// < Stop
+  static const int BT_AVRCP_CONTROL_STOP = 3;
+
+  /// < Next Track
+  static const int BT_AVRCP_CONTROL_NEXT = 4;
+
+  /// < Previous track
+  static const int BT_AVRCP_CONTROL_PREVIOUS = 5;
+
+  /// < Fast Forward
+  static const int BT_AVRCP_CONTROL_FAST_FORWARD = 6;
+
+  /// < Rewind
+  static const int BT_AVRCP_CONTROL_REWIND = 7;
+}
+
+/// @ingroup CAPI_NETWORK_BLUETOOTH_AVRCP_MODULE
+/// @brief Structure of Track metadata information.
+/// @since_tizen 3.0
+///
+/// @see #bt_class_s
+final class bt_avrcp_metadata_attributes_info_s extends ffi.Struct {
+  /// < Title
+  external ffi.Pointer<ffi.Char> title;
+
+  /// < Artist
+  external ffi.Pointer<ffi.Char> artist;
+
+  /// < Album name
+  external ffi.Pointer<ffi.Char> album;
+
+  /// < Album Genre
+  external ffi.Pointer<ffi.Char> genre;
+
+  /// < The total number of tracks
+  @ffi.UnsignedInt()
+  external int total_tracks;
+
+  /// < Track number
+  @ffi.UnsignedInt()
+  external int number;
+
+  /// < Duration
+  @ffi.UnsignedInt()
+  external int duration;
+}
+
+/// @deprecated Deprecated since 5.0.
+/// @ingroup CAPI_NETWORK_BLUETOOTH_HDP_MODULE
+/// @brief  Enumerations for the data channel type.
+/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+/// @remarks Deprecated, because of no usecase and supported devices.
+abstract class bt_hdp_channel_type_e {
+  /// < Reliable Data Channel
+  static const int BT_HDP_CHANNEL_TYPE_RELIABLE = 1;
+
+  /// < Streaming Data Channel
+  static const int BT_HDP_CHANNEL_TYPE_STREAMING = 2;
+}
+
+/// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_MODULE
+/// @brief  Enumerations of the integer type for GATT handle's value.
+/// @since_tizen 2.3.1
+abstract class bt_data_type_int_e {
+  /// < 8 bit signed int type
+  static const int BT_DATA_TYPE_SINT8 = 0;
+
+  /// < 16 bit signed int type
+  static const int BT_DATA_TYPE_SINT16 = 1;
+
+  /// < 32 bit signed int type
+  static const int BT_DATA_TYPE_SINT32 = 2;
+
+  /// < 8 bit unsigned int type
+  static const int BT_DATA_TYPE_UINT8 = 3;
+
+  /// < 16 bit unsigned int type
+  static const int BT_DATA_TYPE_UINT16 = 4;
+
+  /// < 32 bit unsigned int type
+  static const int BT_DATA_TYPE_UINT32 = 5;
+}
+
+/// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_MODULE
+/// @brief  Enumerations of the float type for GATT handle's value.
+/// @since_tizen 2.3.1
+abstract class bt_data_type_float_e {
+  /// < 32 bit float type
+  static const int BT_DATA_TYPE_FLOAT = 0;
+
+  /// < 16 bit float type
+  static const int BT_DATA_TYPE_SFLOAT = 1;
+}
+
+/// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_MODULE
+/// @brief  Enumerations of the write type.
+/// @since_tizen 2.3.1
+abstract class bt_gatt_write_type_e {
+  /// < Write without response type
+  static const int BT_GATT_WRITE_TYPE_WRITE_NO_RESPONSE = 0;
+
+  /// < Write type
+  static const int BT_GATT_WRITE_TYPE_WRITE = 1;
+}
+
+/// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_MODULE
+/// @brief  Enumerations of the GATT handle's type.
+/// @since_tizen 2.3.1
+abstract class bt_gatt_type_e {
+  /// < GATT service type
+  static const int BT_GATT_TYPE_SERVICE = 1;
+
+  /// < GATT characteristic type
+  static const int BT_GATT_TYPE_CHARACTERISTIC = 2;
+
+  /// < GATT descriptor type
+  static const int BT_GATT_TYPE_DESCRIPTOR = 3;
+}
+
+/// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_MODULE
+/// @brief  Enumerations of the service type.
+/// @since_tizen 2.3.1
+abstract class bt_gatt_service_type_e {
+  /// < GATT primary service type
+  static const int BT_GATT_SERVICE_TYPE_PRIMARY = 1;
+
+  /// < GATT secondary service type
+  static const int BT_GATT_SERVICE_TYPE_SECONDARY = 2;
+}
+
+/// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_MODULE
+/// @brief  Enumerations of the characteristic's property.
+/// @since_tizen 2.3.1
+abstract class bt_gatt_property_e {
+  /// < Broadcast property
+  static const int BT_GATT_PROPERTY_BROADCAST = 1;
+
+  /// < Read property
+  static const int BT_GATT_PROPERTY_READ = 2;
+
+  /// < Write without response property
+  static const int BT_GATT_PROPERTY_WRITE_WITHOUT_RESPONSE = 4;
+
+  /// < Write property
+  static const int BT_GATT_PROPERTY_WRITE = 8;
+
+  /// < Notify property
+  static const int BT_GATT_PROPERTY_NOTIFY = 16;
+
+  /// < Indicate property
+  static const int BT_GATT_PROPERTY_INDICATE = 32;
+
+  /// < Authenticated signed writes property
+  static const int BT_GATT_PROPERTY_AUTHENTICATED_SIGNED_WRITES = 64;
+
+  /// < Extended properties
+  static const int BT_GATT_PROPERTY_EXTENDED_PROPERTIES = 128;
+}
+
+/// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_CLIENT_MODULE
+/// @brief  Enumerations of gatt server's service changing mode.
+/// @since_tizen 3.0
+abstract class bt_gatt_client_service_change_type_e {
+  /// < Service added
+  static const int BT_GATT_CLIENT_SERVICE_ADDED = 0;
+
+  /// < Service removed
+  static const int BT_GATT_CLIENT_SERVICE_REMOVED = 1;
+
+  /// < Resync is required (Since 6.5)
+  static const int BT_GATT_CLIENT_SERVICE_RESYNC = 2;
+}
+
+/// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_MODULE
+/// @brief  Enumerations of the attribute's permission.
+/// @since_tizen 3.0
+abstract class bt_gatt_permission_e {
+  /// < Readable permission
+  static const int BT_GATT_PERMISSION_READ = 1;
+
+  /// < Writable permission
+  static const int BT_GATT_PERMISSION_WRITE = 2;
+
+  /// < Readable permission required encryption
+  static const int BT_GATT_PERMISSION_ENCRYPT_READ = 4;
+
+  /// < Writable permission required encryption
+  static const int BT_GATT_PERMISSION_ENCRYPT_WRITE = 8;
+
+  /// < Readable permission required encryption and authentication
+  static const int BT_GATT_PERMISSION_ENCRYPT_AUTHENTICATED_READ = 16;
+
+  /// < Writable permission required encryption and authentication
+  static const int BT_GATT_PERMISSION_ENCRYPT_AUTHENTICATED_WRITE = 32;
+}
+
+/// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_SERVER_MODULE
+/// @brief  Enumerations of the remote device request types for attributes.
+/// @since_tizen 3.0
+abstract class bt_gatt_att_request_type_e {
+  /// < Read Requested
+  static const int BT_GATT_REQUEST_TYPE_READ = 0;
+
+  /// < Write Requested
+  static const int BT_GATT_REQUEST_TYPE_WRITE = 1;
+}
+
+/// @ingroup CAPI_NETWORK_BLUETOOTH_PAN_PANU_MODULE
+/// @brief  Enumerations for the types of PAN (Personal Area Networking) service.
+/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+abstract class bt_panu_service_type_e {
+  /// < Network Access Point
+  static const int BT_PANU_SERVICE_TYPE_NAP = 0;
+}
+
+/// @WEARABLE_ONLY
+/// @ingroup CAPI_NETWORK_BLUETOOTH_PBAP_MODULE
+/// @brief  Enumeration of address book location for PBAP.
+/// @since_tizen 3.0
+abstract class bt_pbap_address_book_source_e {
+  /// < Request for Addressbook from remote device
+  static const int BT_PBAP_SOURCE_DEVICE = 0;
+
+  /// < Request for address book from SIM
+  static const int BT_PBAP_SOURCE_SIM = 1;
+}
+
+/// @WEARABLE_ONLY
+/// @ingroup CAPI_NETWORK_BLUETOOTH_PBAP_MODULE
+/// @brief  Enumeration of folder type.
+/// @since_tizen 3.0
+abstract class bt_pbap_folder_type_e {
+  /// < Request for address book
+  static const int BT_PBAP_FOLDER_PHONE_BOOK = 0;
+
+  /// < Request for incoming calls
+  static const int BT_PBAP_FOLDER_INCOMING = 1;
+
+  /// < Request for outgoing calls
+  static const int BT_PBAP_FOLDER_OUTGOING = 2;
+
+  /// < Request for missed calls
+  static const int BT_PBAP_FOLDER_MISSED = 3;
+
+  /// < Request for combined calls
+  static const int BT_PBAP_FOLDER_COMBINED = 4;
+}
+
+/// @WEARABLE_ONLY
+/// @ingroup CAPI_NETWORK_BLUETOOTH_PBAP_MODULE
+/// @brief  Enumeration of phone book search fields.
+/// @since_tizen 3.0
+abstract class bt_pbap_search_field_e {
+  /// < Request for search by name (default)
+  static const int BT_PBAP_SEARCH_NAME = 0;
+
+  /// < Request for search by phone number
+  static const int BT_PBAP_SEARCH_NUMBER = 1;
+
+  /// < Request for search by sound
+  static const int BT_PBAP_SEARCH_SOUND = 2;
+}
+
+/// @WEARABLE_ONLY
+/// @ingroup CAPI_NETWORK_BLUETOOTH_PBAP_MODULE
+/// @brief  Enumeration of vCard Formats.
+/// @since_tizen 3.0
+abstract class bt_pbap_vcard_format_e {
+  /// < vCard format 2.1 (default)
+  static const int BT_PBAP_VCARD_FORMAT_VCARD21 = 0;
+
+  /// < vCard format 3.0
+  static const int BT_PBAP_VCARD_FORMAT_VCARD30 = 1;
+}
+
+/// @WEARABLE_ONLY
+/// @ingroup CAPI_NETWORK_BLUETOOTH_PBAP_MODULE
+/// @brief  Enumeration of sorting orders.
+/// @since_tizen 3.0
+abstract class bt_pbap_sort_order_e {
+  /// < Filter order indexed (default)
+  static const int BT_PBAP_ORDER_INDEXED = 0;
+
+  /// < Filter order alphanumeric
+  static const int BT_PBAP_ORDER_ALPHANUMERIC = 1;
+
+  /// < Filter order phonetic
+  static const int BT_PBAP_ORDER_PHONETIC = 2;
+}
+
+/// @ingroup CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
+/// @brief Class structure of device and service.
+/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+///
+/// @see #bt_device_info_s
+/// @see #bt_adapter_device_discovery_info_s
+/// @see bt_device_bond_created_cb()
+/// @see bt_adapter_device_discovery_state_changed_cb()
+final class bt_class_s extends ffi.Struct {
+  /// < Major device class.
+  @ffi.Int32()
+  external int major_device_class;
+
+  /// < Minor device class.
+  @ffi.Int32()
+  external int minor_device_class;
+
+  /// < Major service class mask.
+  /// This value can be a combination of #bt_major_service_class_e like #BT_MAJOR_SERVICE_CLASS_RENDERING | #BT_MAJOR_SERVICE_CLASS_AUDIO
+  @ffi.Int()
+  external int major_service_class_mask;
+}
+
+/// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_MODULE
+/// @brief Structure of device discovery information.
+/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+///
+/// @see #bt_class_s
+/// @see bt_adapter_device_discovery_state_changed_cb()
+final class bt_adapter_device_discovery_info_s extends ffi.Struct {
+  /// < The address of remote device
+  external ffi.Pointer<ffi.Char> remote_address;
+
+  /// < The name of remote device
+  external ffi.Pointer<ffi.Char> remote_name;
+
+  /// < The Bluetooth classes
+  external bt_class_s bt_class;
+
+  /// < The strength indicator of received signal
+  @ffi.Int()
+  external int rssi;
+
+  /// < The bonding state
+  @ffi.Bool()
+  external bool is_bonded;
+
+  /// < The UUID list of service
+  external ffi.Pointer<ffi.Pointer<ffi.Char>> service_uuid;
+
+  /// < The number of services
+  @ffi.Int()
+  external int service_count;
+
+  /// < The Bluetooth appearance
+  @ffi.Int32()
+  external int appearance;
+
+  /// < manufacturer specific data length
+  @ffi.Int()
+  external int manufacturer_data_len;
+
+  /// < manufacturer specific data
+  external ffi.Pointer<ffi.Char> manufacturer_data;
+}
+
+/// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
+/// @brief Structure of le scan result information.
+/// @since_tizen 2.3.1
+///
+/// @see bt_adapter_le_start_scan()
+final class bt_adapter_le_device_scan_result_info_s extends ffi.Struct {
+  /// < The address of remote device
+  external ffi.Pointer<ffi.Char> remote_address;
+
+  /// < The address type of remote device
+  @ffi.Int32()
+  external int address_type;
+
+  /// < The strength indicator of received signal
+  @ffi.Int()
+  external int rssi;
+
+  /// < advertising indication data length
+  @ffi.Int()
+  external int adv_data_len;
+
+  /// < advertising indication data
+  external ffi.Pointer<ffi.Char> adv_data;
+
+  /// < scan response data length
+  @ffi.Int()
+  external int scan_data_len;
+
+  /// < scan response data
+  external ffi.Pointer<ffi.Char> scan_data;
+}
+
+/// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
+/// @brief The structure for LE iBeacon scan result information.
+/// @since_tizen 4.0
+///
+/// @see bt_adapter_le_start_scan()
+final class bt_adapter_le_ibeacon_scan_result_info_s extends ffi.Struct {
+  /// < Company ID
+  @ffi.Int()
+  external int company_id;
+
+  /// < iBeacon type
+  @ffi.Int()
+  external int ibeacon_type;
+
+  /// < UUID
+  external ffi.Pointer<ffi.Char> uuid;
+
+  /// < Major ID
+  @ffi.Int()
+  external int major_id;
+
+  /// < Minor ID
+  @ffi.Int()
+  external int minor_id;
+
+  /// < Measured power
+  @ffi.Int()
+  external int measured_power;
+}
+
+/// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
+/// @brief LE service data structure.
+/// @since_tizen 2.3.1
+///
+/// @see bt_adapter_le_get_scan_result_service_data()
+final class bt_adapter_le_service_data_s extends ffi.Struct {
+  /// < 16 bit UUID of the service data
+  external ffi.Pointer<ffi.Char> service_uuid;
+
+  /// < Service data
+  external ffi.Pointer<ffi.Char> service_data;
+
+  /// < Service data length
+  @ffi.Int()
+  external int service_data_len;
+}
+
+/// @ingroup CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
+/// @brief Device information structure used for identifying pear device.
+/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+///
+/// @see #bt_class_s
+/// @see bt_device_bond_created_cb()
+final class bt_device_info_s extends ffi.Struct {
+  /// < The address of remote device
+  external ffi.Pointer<ffi.Char> remote_address;
+
+  /// < The name of remote device
+  external ffi.Pointer<ffi.Char> remote_name;
+
+  /// < The Bluetooth classes
+  external bt_class_s bt_class;
+
+  /// < The UUID list of service
+  external ffi.Pointer<ffi.Pointer<ffi.Char>> service_uuid;
+
+  /// < The number of services
+  @ffi.Int()
+  external int service_count;
+
+  /// < The bonding state
+  @ffi.Bool()
+  external bool is_bonded;
+
+  /// < The connection state
+  @ffi.Bool()
+  external bool is_connected;
+
+  /// < The authorization state
+  @ffi.Bool()
+  external bool is_authorized;
+
+  /// < manufacturer specific data length
+  @ffi.Int()
+  external int manufacturer_data_len;
+
+  /// < manufacturer specific data
+  external ffi.Pointer<ffi.Char> manufacturer_data;
+}
+
+/// @ingroup CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
+/// @brief Service Discovery Protocol (SDP) data structure.
+///
+/// @details This protocol is used for discovering available services or pear device,
+/// and finding one to connect with.
+///
+/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+/// @see bt_device_service_searched_cb()
+final class bt_device_sdp_info_s extends ffi.Struct {
+  /// < The address of remote device
+  external ffi.Pointer<ffi.Char> remote_address;
+
+  /// < The UUID list of service
+  external ffi.Pointer<ffi.Pointer<ffi.Char>> service_uuid;
+
+  /// < The number of services.
+  @ffi.Int()
+  external int service_count;
+}
+
+/// @ingroup CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
+/// @brief Device connection information structure.
+/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+///
+/// @see bt_device_connection_state_changed_cb()
+final class bt_device_connection_info_s extends ffi.Struct {
+  /// < The address of remote device
+  external ffi.Pointer<ffi.Char> remote_address;
+
+  /// < Link type
+  @ffi.Int32()
+  external int link;
+
+  /// < Disconnection reason
+  @ffi.Int32()
+  external int disconn_reason;
+}
+
+/// @ingroup CAPI_NETWORK_BLUETOOTH_SOCKET_MODULE
+/// @brief Rfcomm connection data used for exchanging data between Bluetooth devices.
+/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+///
+/// @see bt_socket_connection_state_changed_cb()
+final class bt_socket_connection_s extends ffi.Struct {
+  /// < The file descriptor of connected socket
+  @ffi.Int()
+  external int socket_fd;
+
+  /// < The file descriptor of the server socket or -1 for client connection
+  @ffi.Int()
+  external int server_fd;
+
+  /// < The local device role in this connection
+  @ffi.Int32()
+  external int local_role;
+
+  /// < The remote device address
+  external ffi.Pointer<ffi.Char> remote_address;
+
+  /// < The service UUId
+  external ffi.Pointer<ffi.Char> service_uuid;
+}
+
+/// @ingroup CAPI_NETWORK_BLUETOOTH_SOCKET_MODULE
+/// @brief Structure of RFCOMM received data.
+/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+///
+/// @remarks User can use standard linux functions for reading/writing \n
+/// data from/to sockets.
+///
+/// @see bt_socket_data_received_cb()
+final class bt_socket_received_data_s extends ffi.Struct {
+  /// < The socket fd
+  @ffi.Int()
+  external int socket_fd;
+
+  /// < The length of the received data
+  @ffi.Int()
+  external int data_size;
+
+  /// < The received data
+  external ffi.Pointer<ffi.Char> data;
+}
+
+/// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_CLIENT_MODULE
+/// @brief Attribute protocol MTU change information structure.
+/// @since_tizen 4.0
+///
+/// @see bt_gatt_client_att_mtu_changed_cb()
+final class bt_gatt_client_att_mtu_info_s extends ffi.Struct {
+  /// < The address of remote device
+  external ffi.Pointer<ffi.Char> remote_address;
+
+  /// < MTU value
+  @ffi.UnsignedInt()
+  external int mtu;
+
+  /// < Request status
+  @ffi.UnsignedInt()
+  external int status;
+}
+
+/// @ingroup CAPI_NETWORK_BLUETOOTH_HID_DEVICE_MODULE
+/// @brief Enumerations of the Bluetooth HID mouse's button.
+/// @since_tizen @if WEARABLE 3.0 @endif
+abstract class bt_hid_mouse_button_e {
+  /// <The mouse's none value
+  static const int BT_HID_MOUSE_BUTTON_NONE = 0;
+
+  /// <The mouse's left button value
+  static const int BT_HID_MOUSE_BUTTON_LEFT = 1;
+
+  /// <The mouse's right button value
+  static const int BT_HID_MOUSE_BUTTON_RIGHT = 2;
+
+  /// <The mouse's middle button value
+  static const int BT_HID_MOUSE_BUTTON_MIDDLE = 4;
+}
+
+/// @ingroup CAPI_NETWORK_BLUETOOTH_HID_DEVICE_MODULE
+/// @brief The structure type containing the HID mouse event information.
+/// @since_tizen @if WEARABLE 3.0 @endif
+///
+/// @see bt_hid_device_send_mouse_event()
+final class bt_hid_mouse_data_s extends ffi.Struct {
+  /// < The button values, we can combine key's values when we pressed multiple mouse buttons
+  @ffi.Int()
+  external int buttons;
+
+  /// < The location's x value, -128 ~127
+  @ffi.Int()
+  external int axis_x;
+
+  /// < The location's y value, -128 ~127
+  @ffi.Int()
+  external int axis_y;
+
+  /// < The padding value, -128 ~127
+  @ffi.Int()
+  external int padding;
+}
+
+/// @ingroup CAPI_NETWORK_BLUETOOTH_HID_DEVICE_MODULE
+/// @brief The structure type containing the HID keyboard event information.
+/// @details If you want to know more detail values, refer to http://www.usb.org/developers/hidpage/ and see "HID Usage Tables"
+/// @since_tizen @if WEARABLE 3.0 @endif
+///
+/// @see bt_hid_device_send_key_event()
+final class bt_hid_key_data_s extends ffi.Struct {
+  /// < The modifier keys : such as shift, alt
+  @ffi.UnsignedChar()
+  external int modifier;
+
+  /// < The key value - currently pressed keys : Max 8 at once
+  @ffi.Array.multi([8])
+  external ffi.Array<ffi.UnsignedChar> key;
+}
+
+/// @ingroup CAPI_NETWORK_BLUETOOTH_HID_DEVICE_MODULE
+/// @brief Enumerations of the Bluetooth HID header type.
+/// @since_tizen @if WEARABLE 3.0 @endif
+abstract class bt_hid_header_type_e {
+  /// < The Bluetooth HID header type: Handshake
+  static const int BT_HID_HEADER_HANDSHAKE = 0;
+
+  /// < The Bluetooth HID header type: HID control
+  static const int BT_HID_HEADER_HID_CONTROL = 1;
+
+  /// < The Bluetooth HID header type: Get report
+  static const int BT_HID_HEADER_GET_REPORT = 2;
+
+  /// < The Bluetooth HID header type: Set report
+  static const int BT_HID_HEADER_SET_REPORT = 3;
+
+  /// < The Bluetooth HID header type: Get protocol
+  static const int BT_HID_HEADER_GET_PROTOCOL = 4;
+
+  /// < The Bluetooth HID header type: Set protocol
+  static const int BT_HID_HEADER_SET_PROTOCOL = 5;
+
+  /// < The Bluetooth HID header type: Data
+  static const int BT_HID_HEADER_DATA = 6;
+
+  /// < The Bluetooth HID header type: Unknown
+  static const int BT_HID_HEADER_UNKNOWN = 7;
+}
+
+/// @ingroup CAPI_NETWORK_BLUETOOTH_HID_DEVICE_MODULE
+/// @brief Enumerations of the Bluetooth HID parameter type.
+/// @since_tizen @if WEARABLE 3.0 @endif
+abstract class bt_hid_param_type_e {
+  /// < Parameter type: Input
+  static const int BT_HID_PARAM_DATA_RTYPE_INPUT = 0;
+
+  /// < Parameter type: Output
+  static const int BT_HID_PARAM_DATA_RTYPE_OUTPUT = 1;
+}
+
+/// @ingroup CAPI_NETWORK_BLUETOOTH_HID_DEVICE_MODULE
+/// @brief Enumerations of the Bluetooth HID handshake type.
+/// @since_tizen @if WEARABLE 3.0 @endif
+abstract class bt_hid_handshake_type_e {
+  /// < Handshake error code none
+  static const int BT_HID_HANDSHAKE_SUCCESSFUL = 0;
+
+  /// < Handshake error code Not Ready
+  static const int BT_HID_HANDSHAKE_NOT_READY = 1;
+
+  /// < Handshake error code send invalid report id
+  static const int BT_HID_HANDSHAKE_ERR_INVALID_REPORT_ID = 2;
+
+  /// < Handshake error code request unsupported request
+  static const int BT_HID_HANDSHAKE_ERR_UNSUPPORTED_REQUEST = 3;
+
+  /// < Handshake error code received invalid parameter
+  static const int BT_HID_HANDSHAKE_ERR_INVALID_PARAMETER = 4;
+
+  /// < unknown error
+  static const int BT_HID_HANDSHAKE_ERR_UNKNOWN = 14;
+
+  /// < Fatal error
+  static const int BT_HID_HANDSHAKE_ERR_FATAL = 15;
+}
+
+/// @ingroup CAPI_NETWORK_BLUETOOTH_HID_DEVICE_MODULE
+/// @brief The structure type containing data received from the HID Host.
+/// @since_tizen @if WEARABLE 3.0 @endif
+final class bt_hid_device_received_data_s extends ffi.Struct {
+  /// < The remote device's address
+  external ffi.Pointer<ffi.Char> address;
+
+  /// < The header type
+  @ffi.Int32()
+  external int header_type;
+
+  /// < The parameter type
+  @ffi.Int32()
+  external int param_type;
+
+  /// < The length of the received data
+  @ffi.Int()
+  external int data_size;
+
+  /// < The received data
+  external ffi.Pointer<ffi.Char> data;
+}
+
+/// @WEARABLE_ONLY
+/// @ingroup CAPI_NETWORK_BLUETOOTH_PBAP_MODULE
+/// @brief The structure type containing vCard information.
+/// @since_tizen 3.0
+///
+/// @see bt_pbap_client_pull_vcard()
+final class bt_pbap_vcard_info_s extends ffi.Struct {
+  /// < The vcard index, used as a parameter for bt_pbap_client_pull_vcard()
+  @ffi.Int()
+  external int index;
+
+  /// < The contact name of the vCard
+  external ffi.Pointer<ffi.Char> contact_name;
+}
+
+/// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
+/// @brief Enumeration for the scan filter type.
+/// @since_tizen 4.0
+/// @see bt_adapter_le_scan_filter_set_type()
+abstract class bt_adapter_le_scan_filter_type_e {
+  /// < iBeacon filter type
+  static const int BT_ADAPTER_LE_SCAN_FILTER_TYPE_IBEACON = 0;
+
+  /// < Proximity UUID filter type
+  static const int BT_ADAPTER_LE_SCAN_FILTER_TYPE_PROXIMITY_UUID = 1;
+}
+
+/// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_MODULE
+/// @brief  Called when you get bonded devices repeatedly.
+/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+///
+/// @param[in] device_info The bonded device information
+/// @param[in] user_data The user data passed from the foreach function
+/// @return @c true to continue with the next iteration of the loop,
+/// \n @c false to break out of the loop.
+/// @pre bt_adapter_foreach_bonded_device() will invoke this function.
+///
+/// @see bt_adapter_foreach_bonded_device()
+typedef bt_adapter_bonded_device_cb
+    = ffi.Pointer<ffi.NativeFunction<bt_adapter_bonded_device_cbFunction>>;
+typedef bt_adapter_bonded_device_cbFunction = ffi.Bool Function(
+    ffi.Pointer<bt_device_info_s> device_info, ffi.Pointer<ffi.Void> user_data);
+typedef Dartbt_adapter_bonded_device_cbFunction = bool Function(
+    ffi.Pointer<bt_device_info_s> device_info, ffi.Pointer<ffi.Void> user_data);
+
 /// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_MODULE
 /// @brief  Called when the Bluetooth adapter state changes.
 /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
@@ -10241,80 +11506,6 @@ typedef Dartbt_adapter_device_discovery_state_changed_cbFunction
         ffi.Pointer<bt_adapter_device_discovery_info_s> discovery_info,
         ffi.Pointer<ffi.Void> user_data);
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_MODULE
-/// @brief Enumerations of the discovery state of Bluetooth device.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-abstract class bt_adapter_device_discovery_state_e {
-  /// < Device discovery is started
-  static const int BT_ADAPTER_DEVICE_DISCOVERY_STARTED = 0;
-
-  /// < Device discovery is finished
-  static const int BT_ADAPTER_DEVICE_DISCOVERY_FINISHED = 1;
-
-  /// < The remote Bluetooth device is found
-  static const int BT_ADAPTER_DEVICE_DISCOVERY_FOUND = 2;
-}
-
-/// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_MODULE
-/// @brief Structure of device discovery information.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-///
-/// @see #bt_class_s
-/// @see bt_adapter_device_discovery_state_changed_cb()
-final class bt_adapter_device_discovery_info_s extends ffi.Struct {
-  /// < The address of remote device
-  external ffi.Pointer<ffi.Char> remote_address;
-
-  /// < The name of remote device
-  external ffi.Pointer<ffi.Char> remote_name;
-
-  /// < The Bluetooth classes
-  external bt_class_s bt_class;
-
-  /// < The strength indicator of received signal
-  @ffi.Int()
-  external int rssi;
-
-  /// < The bonding state
-  @ffi.Bool()
-  external bool is_bonded;
-
-  /// < The UUID list of service
-  external ffi.Pointer<ffi.Pointer<ffi.Char>> service_uuid;
-
-  /// < The number of services
-  @ffi.Int()
-  external int service_count;
-
-  /// < The Bluetooth appearance
-  @ffi.Int32()
-  external int appearance;
-
-  /// < manufacturer specific data length
-  @ffi.Int()
-  external int manufacturer_data_len;
-
-  /// < manufacturer specific data
-  external ffi.Pointer<ffi.Char> manufacturer_data;
-}
-
-/// @ingroup CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
-/// @brief  Enumerations of gap appearance type.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-abstract class bt_appearance_type_e {
-  /// < Unknown appearance type
-  static const int BT_APPEARANCE_TYPE_UNKNOWN = 0;
-
-  /// < Generic Phone type - Generic category
-  static const int BT_APPEARANCE_TYPE_GENERIC_PHONE = 64;
-
-  /// < Generic Computer type - Generic category
-  static const int BT_APPEARANCE_TYPE_GENERIC_COMPUTER = 128;
-
-  /// < Generic Watch type - Generic category
-  static const int BT_APPEARANCE_TYPE_GENERIC_WATCH = 192;
-}
-
 /// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
 /// @brief  Called when the LE advertisement has been found.
 /// @since_tizen 2.3.1
@@ -10334,107 +11525,6 @@ typedef Dartbt_adapter_le_scan_result_cbFunction = void Function(
     int result,
     ffi.Pointer<bt_adapter_le_device_scan_result_info_s> info,
     ffi.Pointer<ffi.Void> user_data);
-
-/// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
-/// @brief Structure of le scan result information.
-/// @since_tizen 2.3.1
-///
-/// @see bt_adapter_le_start_scan()
-final class bt_adapter_le_device_scan_result_info_s extends ffi.Struct {
-  /// < The address of remote device
-  external ffi.Pointer<ffi.Char> remote_address;
-
-  /// < The address type of remote device
-  @ffi.Int32()
-  external int address_type;
-
-  /// < The strength indicator of received signal
-  @ffi.Int()
-  external int rssi;
-
-  /// < advertising indication data length
-  @ffi.Int()
-  external int adv_data_len;
-
-  /// < advertising indication data
-  external ffi.Pointer<ffi.Char> adv_data;
-
-  /// < scan response data length
-  @ffi.Int()
-  external int scan_data_len;
-
-  /// < scan response data
-  external ffi.Pointer<ffi.Char> scan_data;
-}
-
-/// @ingroup CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
-/// @brief Enumerations of device address type.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-abstract class bt_device_address_type_e {
-  /// < Public address
-  static const int BT_DEVICE_PUBLIC_ADDRESS = 0;
-
-  /// < Random address
-  static const int BT_DEVICE_RANDOM_ADDRESS = 1;
-}
-
-/// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
-/// @brief  Enumerations of the Bluetooth LE packet type.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-abstract class bt_adapter_le_packet_type_e {
-  /// < Advertising packet
-  static const int BT_ADAPTER_LE_PACKET_ADVERTISING = 0;
-
-  /// < Scan response packet
-  static const int BT_ADAPTER_LE_PACKET_SCAN_RESPONSE = 1;
-}
-
-/// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
-/// @brief LE service data structure.
-/// @since_tizen 2.3.1
-///
-/// @see bt_adapter_le_get_scan_result_service_data()
-final class bt_adapter_le_service_data_s extends ffi.Struct {
-  /// < 16 bit UUID of the service data
-  external ffi.Pointer<ffi.Char> service_uuid;
-
-  /// < Service data
-  external ffi.Pointer<ffi.Char> service_data;
-
-  /// < Service data length
-  @ffi.Int()
-  external int service_data_len;
-}
-
-/// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
-/// @brief The structure for LE iBeacon scan result information.
-/// @since_tizen 4.0
-///
-/// @see bt_adapter_le_start_scan()
-final class bt_adapter_le_ibeacon_scan_result_info_s extends ffi.Struct {
-  /// < Company ID
-  @ffi.Int()
-  external int company_id;
-
-  /// < iBeacon type
-  @ffi.Int()
-  external int ibeacon_type;
-
-  /// < UUID
-  external ffi.Pointer<ffi.Char> uuid;
-
-  /// < Major ID
-  @ffi.Int()
-  external int major_id;
-
-  /// < Minor ID
-  @ffi.Int()
-  external int minor_id;
-
-  /// < Measured power
-  @ffi.Int()
-  external int measured_power;
-}
 
 /// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
 /// @brief The handle to control Bluetooth LE advertising.
@@ -10505,59 +11595,6 @@ typedef Dartbt_adapter_le_advertising_state_changed_cbFunction = void Function(
     int adv_state,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
-/// @brief  Enumerations of the Bluetooth advertising state.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-abstract class bt_adapter_le_advertising_state_e {
-  /// < Bluetooth advertising is stopped
-  static const int BT_ADAPTER_LE_ADVERTISING_STOPPED = 0;
-
-  /// < Bluetooth advertising is started
-  static const int BT_ADAPTER_LE_ADVERTISING_STARTED = 1;
-}
-
-/// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
-/// @brief  Enumerations of the Bluetooth advertising mode.
-/// @since_tizen 2.3.1
-abstract class bt_adapter_le_advertising_mode_e {
-  /// < Balanced advertising mode
-  static const int BT_ADAPTER_LE_ADVERTISING_MODE_BALANCED = 0;
-
-  /// < Low latency advertising mode
-  static const int BT_ADAPTER_LE_ADVERTISING_MODE_LOW_LATENCY = 1;
-
-  /// < Low energy advertising mode
-  static const int BT_ADAPTER_LE_ADVERTISING_MODE_LOW_ENERGY = 2;
-
-  /// < Custom mode to set advertising parameters
-  static const int BT_ADAPTER_LE_ADVERTISING_MODE_CUSTOM = 3;
-}
-
-/// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
-/// @brief  Enumerations of the Bluetooth le scan mode.
-/// @since_tizen 3.0
-abstract class bt_adapter_le_scan_mode_e {
-  /// < Balanced mode of power consumption and connection latency
-  static const int BT_ADAPTER_LE_SCAN_MODE_BALANCED = 0;
-
-  /// < Low connection latency but high power consumption
-  static const int BT_ADAPTER_LE_SCAN_MODE_LOW_LATENCY = 1;
-
-  /// < Low power consumption but high connection latency
-  static const int BT_ADAPTER_LE_SCAN_MODE_LOW_ENERGY = 2;
-}
-
-/// @ingroup CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
-/// @brief Enumerations of device authorization state.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-abstract class bt_device_authorization_e {
-  /// < The remote Bluetooth device is authorized
-  static const int BT_DEVICE_AUTHORIZED = 0;
-
-  /// < The remote Bluetooth device is unauthorized
-  static const int BT_DEVICE_UNAUTHORIZED = 1;
-}
-
 /// @ingroup CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
 /// @brief  Called when you get connected profiles repeatedly.
 /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
@@ -10574,52 +11611,6 @@ typedef bt_device_connected_profileFunction = ffi.Bool Function(
     ffi.Int32 profile, ffi.Pointer<ffi.Void> user_data);
 typedef Dartbt_device_connected_profileFunction = bool Function(
     int profile, ffi.Pointer<ffi.Void> user_data);
-
-/// @ingroup CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
-/// @brief Enumerations of Bluetooth profile.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-abstract class bt_profile_e {
-  /// < RFCOMM Profile
-  static const int BT_PROFILE_RFCOMM = 1;
-
-  /// < Advanced Audio Distribution Profile Source role
-  static const int BT_PROFILE_A2DP = 2;
-
-  /// < Headset Profile
-  static const int BT_PROFILE_HSP = 4;
-
-  /// < Human Interface Device Profile
-  static const int BT_PROFILE_HID = 8;
-
-  /// < Network Access Point Profile
-  static const int BT_PROFILE_NAP = 16;
-
-  /// < Audio Gateway Profile
-  static const int BT_PROFILE_AG = 32;
-
-  /// < Generic Attribute Profile
-  static const int BT_PROFILE_GATT = 64;
-
-  /// < NAP server Profile
-  static const int BT_PROFILE_NAP_SERVER = 128;
-
-  /// < Advanced Audio Distribution Profile Sink role
-  static const int BT_PROFILE_A2DP_SINK = 256;
-}
-
-/// @ingroup CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
-/// @brief  Enumerations of the Bluetooth device's LE connection mode.
-/// @since_tizen 3.0
-abstract class bt_device_le_connection_mode_e {
-  /// < Balanced mode of power consumption and connection latency
-  static const int BT_DEVICE_LE_CONNECTION_MODE_BALANCED = 0;
-
-  /// < Low connection latency but high power consumption
-  static const int BT_DEVICE_LE_CONNECTION_MODE_LOW_LATENCY = 1;
-
-  /// < Low power consumption but high connection latency
-  static const int BT_DEVICE_LE_CONNECTION_MODE_LOW_ENERGY = 2;
-}
 
 /// @ingroup CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
 /// @brief Called when the process of creating bond finishes.
@@ -10717,26 +11708,6 @@ typedef Dartbt_device_service_searched_cbFunction = void Function(
     ffi.Pointer<ffi.Void> user_data);
 
 /// @ingroup CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
-/// @brief Service Discovery Protocol (SDP) data structure.
-///
-/// @details This protocol is used for discovering available services or pear device,
-/// and finding one to connect with.
-///
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-/// @see bt_device_service_searched_cb()
-final class bt_device_sdp_info_s extends ffi.Struct {
-  /// < The address of remote device
-  external ffi.Pointer<ffi.Char> remote_address;
-
-  /// < The UUID list of service
-  external ffi.Pointer<ffi.Pointer<ffi.Char>> service_uuid;
-
-  /// < The number of services.
-  @ffi.Int()
-  external int service_count;
-}
-
-/// @ingroup CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
 /// @brief  Called when the connection state is changed.
 /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
 ///
@@ -10755,55 +11726,6 @@ typedef Dartbt_device_connection_state_changed_cbFunction = void Function(
     bool connected,
     ffi.Pointer<bt_device_connection_info_s> conn_info,
     ffi.Pointer<ffi.Void> user_data);
-
-/// @ingroup CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
-/// @brief Device connection information structure.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-///
-/// @see bt_device_connection_state_changed_cb()
-final class bt_device_connection_info_s extends ffi.Struct {
-  /// < The address of remote device
-  external ffi.Pointer<ffi.Char> remote_address;
-
-  /// < Link type
-  @ffi.Int32()
-  external int link;
-
-  /// < Disconnection reason
-  @ffi.Int32()
-  external int disconn_reason;
-}
-
-/// @ingroup CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
-/// @brief Enumerations of connection link type.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-abstract class bt_device_connection_link_type_e {
-  /// < BR/EDR link
-  static const int BT_DEVICE_CONNECTION_LINK_BREDR = 0;
-
-  /// < LE link
-  static const int BT_DEVICE_CONNECTION_LINK_LE = 1;
-
-  /// < The connection type default
-  static const int BT_DEVICE_CONNECTION_LINK_DEFAULT = 255;
-}
-
-/// @ingroup CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
-/// @brief Enumerations of device disconnect reason.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-abstract class bt_device_disconnect_reason_e {
-  /// < Disconnected by unknown reason
-  static const int BT_DEVICE_DISCONNECT_REASON_UNKNOWN = 0;
-
-  /// < Disconnected by timeout
-  static const int BT_DEVICE_DISCONNECT_REASON_TIMEOUT = 1;
-
-  /// < Disconnected by local host
-  static const int BT_DEVICE_DISCONNECT_REASON_LOCAL_HOST = 2;
-
-  /// < Disconnected by remote
-  static const int BT_DEVICE_DISCONNECT_REASON_REMOTE = 3;
-}
 
 /// @ingroup CAPI_NETWORK_BLUETOOTH_SOCKET_MODULE
 /// @brief Called when you receive data.
@@ -10826,27 +11748,6 @@ typedef bt_socket_data_received_cbFunction = ffi.Void Function(
 typedef Dartbt_socket_data_received_cbFunction = void Function(
     ffi.Pointer<bt_socket_received_data_s> data,
     ffi.Pointer<ffi.Void> user_data);
-
-/// @ingroup CAPI_NETWORK_BLUETOOTH_SOCKET_MODULE
-/// @brief Structure of RFCOMM received data.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-///
-/// @remarks User can use standard linux functions for reading/writing \n
-/// data from/to sockets.
-///
-/// @see bt_socket_data_received_cb()
-final class bt_socket_received_data_s extends ffi.Struct {
-  /// < The socket fd
-  @ffi.Int()
-  external int socket_fd;
-
-  /// < The length of the received data
-  @ffi.Int()
-  external int data_size;
-
-  /// < The received data
-  external ffi.Pointer<ffi.Char> data;
-}
 
 /// @ingroup CAPI_NETWORK_BLUETOOTH_SOCKET_MODULE
 /// @brief  Called when a RFCOMM connection is requested.
@@ -10894,56 +11795,6 @@ typedef Dartbt_socket_connection_state_changed_cbFunction = void Function(
     int connection_state,
     ffi.Pointer<bt_socket_connection_s> connection,
     ffi.Pointer<ffi.Void> user_data);
-
-/// @ingroup CAPI_NETWORK_BLUETOOTH_SOCKET_MODULE
-/// @brief  Enumerations of Bluetooth socket connection state.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-abstract class bt_socket_connection_state_e {
-  /// < RFCOMM is connected
-  static const int BT_SOCKET_CONNECTED = 0;
-
-  /// < RFCOMM is disconnected
-  static const int BT_SOCKET_DISCONNECTED = 1;
-}
-
-/// @ingroup CAPI_NETWORK_BLUETOOTH_SOCKET_MODULE
-/// @brief Rfcomm connection data used for exchanging data between Bluetooth devices.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-///
-/// @see bt_socket_connection_state_changed_cb()
-final class bt_socket_connection_s extends ffi.Struct {
-  /// < The file descriptor of connected socket
-  @ffi.Int()
-  external int socket_fd;
-
-  /// < The file descriptor of the server socket or -1 for client connection
-  @ffi.Int()
-  external int server_fd;
-
-  /// < The local device role in this connection
-  @ffi.Int32()
-  external int local_role;
-
-  /// < The remote device address
-  external ffi.Pointer<ffi.Char> remote_address;
-
-  /// < The service UUId
-  external ffi.Pointer<ffi.Char> service_uuid;
-}
-
-/// @ingroup CAPI_NETWORK_BLUETOOTH_SOCKET_MODULE
-/// @brief  Enumerations of connected Bluetooth device event role.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-abstract class bt_socket_role_e {
-  /// < Unknown role
-  static const int BT_SOCKET_UNKNOWN = 0;
-
-  /// < Server role
-  static const int BT_SOCKET_SERVER = 1;
-
-  /// < Client role
-  static const int BT_SOCKET_CLIENT = 2;
-}
 
 /// @ingroup CAPI_NETWORK_BLUETOOTH_OPP_SERVER_MODULE
 /// @brief  Called when an OPP connection is requested.
@@ -11115,45 +11966,6 @@ typedef Dartbt_hid_device_connection_state_changed_cbFunction = void Function(
     ffi.Pointer<ffi.Void> user_data);
 
 /// @ingroup CAPI_NETWORK_BLUETOOTH_HID_DEVICE_MODULE
-/// @brief The structure type containing the HID mouse event information.
-/// @since_tizen @if WEARABLE 3.0 @endif
-///
-/// @see bt_hid_device_send_mouse_event()
-final class bt_hid_mouse_data_s extends ffi.Struct {
-  /// < The button values, we can combine key's values when we pressed multiple mouse buttons
-  @ffi.Int()
-  external int buttons;
-
-  /// < The location's x value, -128 ~127
-  @ffi.Int()
-  external int axis_x;
-
-  /// < The location's y value, -128 ~127
-  @ffi.Int()
-  external int axis_y;
-
-  /// < The padding value, -128 ~127
-  @ffi.Int()
-  external int padding;
-}
-
-/// @ingroup CAPI_NETWORK_BLUETOOTH_HID_DEVICE_MODULE
-/// @brief The structure type containing the HID keyboard event information.
-/// @details If you want to know more detail values, refer to http://www.usb.org/developers/hidpage/ and see "HID Usage Tables"
-/// @since_tizen @if WEARABLE 3.0 @endif
-///
-/// @see bt_hid_device_send_key_event()
-final class bt_hid_key_data_s extends ffi.Struct {
-  /// < The modifier keys : such as shift, alt
-  @ffi.UnsignedChar()
-  external int modifier;
-
-  /// < The key value - currently pressed keys : Max 8 at once
-  @ffi.Array.multi([8])
-  external ffi.Array<ffi.UnsignedChar> key;
-}
-
-/// @ingroup CAPI_NETWORK_BLUETOOTH_HID_DEVICE_MODULE
 /// @brief  Called when the HID Device receives data from the HID Host.
 /// @details The following error codes can be delivered: \n
 /// #BT_ERROR_NONE \n
@@ -11171,89 +11983,6 @@ typedef bt_hid_device_data_received_cbFunction = ffi.Void Function(
 typedef Dartbt_hid_device_data_received_cbFunction = void Function(
     ffi.Pointer<bt_hid_device_received_data_s> data,
     ffi.Pointer<ffi.Void> user_data);
-
-/// @ingroup CAPI_NETWORK_BLUETOOTH_HID_DEVICE_MODULE
-/// @brief The structure type containing data received from the HID Host.
-/// @since_tizen @if WEARABLE 3.0 @endif
-final class bt_hid_device_received_data_s extends ffi.Struct {
-  /// < The remote device's address
-  external ffi.Pointer<ffi.Char> address;
-
-  /// < The header type
-  @ffi.Int32()
-  external int header_type;
-
-  /// < The parameter type
-  @ffi.Int32()
-  external int param_type;
-
-  /// < The length of the received data
-  @ffi.Int()
-  external int data_size;
-
-  /// < The received data
-  external ffi.Pointer<ffi.Char> data;
-}
-
-/// @ingroup CAPI_NETWORK_BLUETOOTH_HID_DEVICE_MODULE
-/// @brief Enumerations of the Bluetooth HID header type.
-/// @since_tizen @if WEARABLE 3.0 @endif
-abstract class bt_hid_header_type_e {
-  /// < The Bluetooth HID header type: Handshake
-  static const int BT_HID_HEADER_HANDSHAKE = 0;
-
-  /// < The Bluetooth HID header type: HID control
-  static const int BT_HID_HEADER_HID_CONTROL = 1;
-
-  /// < The Bluetooth HID header type: Get report
-  static const int BT_HID_HEADER_GET_REPORT = 2;
-
-  /// < The Bluetooth HID header type: Set report
-  static const int BT_HID_HEADER_SET_REPORT = 3;
-
-  /// < The Bluetooth HID header type: Get protocol
-  static const int BT_HID_HEADER_GET_PROTOCOL = 4;
-
-  /// < The Bluetooth HID header type: Set protocol
-  static const int BT_HID_HEADER_SET_PROTOCOL = 5;
-
-  /// < The Bluetooth HID header type: Data
-  static const int BT_HID_HEADER_DATA = 6;
-
-  /// < The Bluetooth HID header type: Unknown
-  static const int BT_HID_HEADER_UNKNOWN = 7;
-}
-
-/// @ingroup CAPI_NETWORK_BLUETOOTH_HID_DEVICE_MODULE
-/// @brief Enumerations of the Bluetooth HID parameter type.
-/// @since_tizen @if WEARABLE 3.0 @endif
-abstract class bt_hid_param_type_e {
-  /// < Parameter type: Input
-  static const int BT_HID_PARAM_DATA_RTYPE_INPUT = 0;
-
-  /// < Parameter type: Output
-  static const int BT_HID_PARAM_DATA_RTYPE_OUTPUT = 1;
-}
-
-/// @ingroup CAPI_NETWORK_BLUETOOTH_AUDIO_MODULE
-/// @brief  Enumerations for the types of profiles related with audio.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-abstract class bt_audio_profile_type_e {
-  /// < All supported profiles related with audio (Both Host and Device role)
-  static const int BT_AUDIO_PROFILE_TYPE_ALL = 0;
-
-  /// < local device AG and remote device HF Client (Host role, ex: mobile)
-  static const int BT_AUDIO_PROFILE_TYPE_HSP_HFP = 1;
-
-  /// < A2DP Source Connection, remote device is A2DP Sink (Host role, ex: mobile)
-  static const int BT_AUDIO_PROFILE_TYPE_A2DP = 2;
-
-  /// < local device HF Client and remote device AG (Device role, ex: headset)
-  static const int BT_AUDIO_PROFILE_TYPE_AG = 3;
-
-  /// < A2DP Sink Connection, remote device is A2DP Source (Device role, ex: headset)
-  static const int BT_AUDIO_PROFILE_TYPE_A2DP_SINK = 4;
-}
 
 /// @ingroup CAPI_NETWORK_BLUETOOTH_AUDIO_MODULE
 /// @brief  Called when the connection state is changed.
@@ -11302,82 +12031,6 @@ typedef Dartbt_avrcp_target_connection_state_changed_cbFunction = void Function(
     bool connected,
     ffi.Pointer<ffi.Char> remote_address,
     ffi.Pointer<ffi.Void> user_data);
-
-/// @ingroup CAPI_NETWORK_BLUETOOTH_AVRCP_MODULE
-/// @brief  Enumerations for the equalizer state.
-/// @since_tizen @if WEARABLE 3.0 @else 2.4 @endif
-abstract class bt_avrcp_equalizer_state_e {
-  /// < Equalizer Off
-  static const int BT_AVRCP_EQUALIZER_STATE_OFF = 1;
-
-  /// < Equalizer On
-  static const int BT_AVRCP_EQUALIZER_STATE_ON = 2;
-}
-
-/// @ingroup CAPI_NETWORK_BLUETOOTH_AVRCP_MODULE
-/// @brief  Enumerations for the repeat mode.
-/// @since_tizen @if WEARABLE 3.0 @else 2.4 @endif
-abstract class bt_avrcp_repeat_mode_e {
-  /// < Repeat Off
-  static const int BT_AVRCP_REPEAT_MODE_OFF = 1;
-
-  /// < Single track repeat
-  static const int BT_AVRCP_REPEAT_MODE_SINGLE_TRACK = 2;
-
-  /// < All track repeat
-  static const int BT_AVRCP_REPEAT_MODE_ALL_TRACK = 3;
-
-  /// < Group repeat
-  static const int BT_AVRCP_REPEAT_MODE_GROUP = 4;
-}
-
-/// @ingroup CAPI_NETWORK_BLUETOOTH_AVRCP_MODULE
-/// @brief  Enumerations for the shuffle mode.
-/// @since_tizen @if WEARABLE 3.0 @else 2.4 @endif
-abstract class bt_avrcp_shuffle_mode_e {
-  /// < Shuffle Off
-  static const int BT_AVRCP_SHUFFLE_MODE_OFF = 1;
-
-  /// < All tracks shuffle
-  static const int BT_AVRCP_SHUFFLE_MODE_ALL_TRACK = 2;
-
-  /// < Group shuffle
-  static const int BT_AVRCP_SHUFFLE_MODE_GROUP = 3;
-}
-
-/// @ingroup CAPI_NETWORK_BLUETOOTH_AVRCP_MODULE
-/// @brief  Enumerations for the scan mode.
-/// @since_tizen @if WEARABLE 3.0 @else 2.4 @endif
-abstract class bt_avrcp_scan_mode_e {
-  /// < Scan Off
-  static const int BT_AVRCP_SCAN_MODE_OFF = 1;
-
-  /// < All tracks scan
-  static const int BT_AVRCP_SCAN_MODE_ALL_TRACK = 2;
-
-  /// < Group scan
-  static const int BT_AVRCP_SCAN_MODE_GROUP = 3;
-}
-
-/// @ingroup CAPI_NETWORK_BLUETOOTH_AVRCP_MODULE
-/// @brief  Enumerations for the player state.
-/// @since_tizen 3.0
-abstract class bt_avrcp_player_state_e {
-  /// < Stopped
-  static const int BT_AVRCP_PLAYER_STATE_STOPPED = 0;
-
-  /// < Playing
-  static const int BT_AVRCP_PLAYER_STATE_PLAYING = 1;
-
-  /// < Paused
-  static const int BT_AVRCP_PLAYER_STATE_PAUSED = 2;
-
-  /// < Seek Forward
-  static const int BT_AVRCP_PLAYER_STATE_FORWARD_SEEK = 3;
-
-  /// < Seek Rewind
-  static const int BT_AVRCP_PLAYER_STATE_REWIND_SEEK = 4;
-}
 
 /// @ingroup CAPI_NETWORK_BLUETOOTH_AVRCP_MODULE
 /// @brief  Called when the equalizer state is changed by the remote control device.
@@ -11484,37 +12137,6 @@ typedef Dartbt_avrcp_track_info_changed_cbFunction = void Function(
     ffi.Pointer<ffi.Void> user_data);
 
 /// @ingroup CAPI_NETWORK_BLUETOOTH_AVRCP_MODULE
-/// @brief Structure of Track metadata information.
-/// @since_tizen 3.0
-///
-/// @see #bt_class_s
-final class bt_avrcp_metadata_attributes_info_s extends ffi.Struct {
-  /// < Title
-  external ffi.Pointer<ffi.Char> title;
-
-  /// < Artist
-  external ffi.Pointer<ffi.Char> artist;
-
-  /// < Album name
-  external ffi.Pointer<ffi.Char> album;
-
-  /// < Album Genre
-  external ffi.Pointer<ffi.Char> genre;
-
-  /// < The total number of tracks
-  @ffi.UnsignedInt()
-  external int total_tracks;
-
-  /// < Track number
-  @ffi.UnsignedInt()
-  external int number;
-
-  /// < Duration
-  @ffi.UnsignedInt()
-  external int duration;
-}
-
-/// @ingroup CAPI_NETWORK_BLUETOOTH_AVRCP_MODULE
 /// @brief  Called when the connection state is changed.
 /// @since_tizen 3.0
 /// @param[in] connected  The state to be changed. true means connected state, Otherwise, false.
@@ -11530,32 +12152,6 @@ typedef bt_avrcp_control_connection_state_changed_cbFunction
 typedef Dartbt_avrcp_control_connection_state_changed_cbFunction
     = void Function(bool connected, ffi.Pointer<ffi.Char> remote_address,
         ffi.Pointer<ffi.Void> user_data);
-
-/// @ingroup CAPI_NETWORK_BLUETOOTH_AVRCP_MODULE
-/// @brief  Enumeration for the player control commands.
-/// @since_tizen 3.0
-abstract class bt_avrcp_player_command_e {
-  /// < Play
-  static const int BT_AVRCP_CONTROL_PLAY = 1;
-
-  /// < Pause
-  static const int BT_AVRCP_CONTROL_PAUSE = 2;
-
-  /// < Stop
-  static const int BT_AVRCP_CONTROL_STOP = 3;
-
-  /// < Next Track
-  static const int BT_AVRCP_CONTROL_NEXT = 4;
-
-  /// < Previous track
-  static const int BT_AVRCP_CONTROL_PREVIOUS = 5;
-
-  /// < Fast Forward
-  static const int BT_AVRCP_CONTROL_FAST_FORWARD = 6;
-
-  /// < Rewind
-  static const int BT_AVRCP_CONTROL_REWIND = 7;
-}
 
 /// @deprecated Deprecated since 5.0.
 /// @ingroup CAPI_NETWORK_BLUETOOTH_HDP_MODULE
@@ -11587,19 +12183,6 @@ typedef Dartbt_hdp_connected_cbFunction = void Function(
     int type,
     int channel,
     ffi.Pointer<ffi.Void> user_data);
-
-/// @deprecated Deprecated since 5.0.
-/// @ingroup CAPI_NETWORK_BLUETOOTH_HDP_MODULE
-/// @brief  Enumerations for the data channel type.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-/// @remarks Deprecated, because of no usecase and supported devices.
-abstract class bt_hdp_channel_type_e {
-  /// < Reliable Data Channel
-  static const int BT_HDP_CHANNEL_TYPE_RELIABLE = 1;
-
-  /// < Streaming Data Channel
-  static const int BT_HDP_CHANNEL_TYPE_STREAMING = 2;
-}
 
 /// @deprecated Deprecated since 5.0.
 /// @ingroup CAPI_NETWORK_BLUETOOTH_HDP_MODULE
@@ -11653,54 +12236,6 @@ typedef Dartbt_hdp_data_received_cbFunction = void Function(int channel,
 /// @since_tizen 2.3.1
 typedef bt_gatt_h = ffi.Pointer<ffi.Void>;
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_MODULE
-/// @brief  Enumerations of the integer type for GATT handle's value.
-/// @since_tizen 2.3.1
-abstract class bt_data_type_int_e {
-  /// < 8 bit signed int type
-  static const int BT_DATA_TYPE_SINT8 = 0;
-
-  /// < 16 bit signed int type
-  static const int BT_DATA_TYPE_SINT16 = 1;
-
-  /// < 32 bit signed int type
-  static const int BT_DATA_TYPE_SINT32 = 2;
-
-  /// < 8 bit unsigned int type
-  static const int BT_DATA_TYPE_UINT8 = 3;
-
-  /// < 16 bit unsigned int type
-  static const int BT_DATA_TYPE_UINT16 = 4;
-
-  /// < 32 bit unsigned int type
-  static const int BT_DATA_TYPE_UINT32 = 5;
-}
-
-/// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_MODULE
-/// @brief  Enumerations of the float type for GATT handle's value.
-/// @since_tizen 2.3.1
-abstract class bt_data_type_float_e {
-  /// < 32 bit float type
-  static const int BT_DATA_TYPE_FLOAT = 0;
-
-  /// < 16 bit float type
-  static const int BT_DATA_TYPE_SFLOAT = 1;
-}
-
-/// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_MODULE
-/// @brief  Enumerations of the GATT handle's type.
-/// @since_tizen 2.3.1
-abstract class bt_gatt_type_e {
-  /// < GATT service type
-  static const int BT_GATT_TYPE_SERVICE = 1;
-
-  /// < GATT characteristic type
-  static const int BT_GATT_TYPE_CHARACTERISTIC = 2;
-
-  /// < GATT descriptor type
-  static const int BT_GATT_TYPE_DESCRIPTOR = 3;
-}
-
 /// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_CLIENT_MODULE
 /// @brief The handle of a GATT client which is associated with a remote device.
 /// @since_tizen 2.3.1
@@ -11725,17 +12260,6 @@ typedef bt_gatt_foreach_cbFunction = ffi.Bool Function(ffi.Int total,
     ffi.Int index, bt_gatt_h gatt_handle, ffi.Pointer<ffi.Void> user_data);
 typedef Dartbt_gatt_foreach_cbFunction = bool Function(int total, int index,
     bt_gatt_h gatt_handle, ffi.Pointer<ffi.Void> user_data);
-
-/// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_MODULE
-/// @brief  Enumerations of the write type.
-/// @since_tizen 2.3.1
-abstract class bt_gatt_write_type_e {
-  /// < Write without response type
-  static const int BT_GATT_WRITE_TYPE_WRITE_NO_RESPONSE = 0;
-
-  /// < Write type
-  static const int BT_GATT_WRITE_TYPE_WRITE = 1;
-}
 
 /// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_CLIENT_MODULE
 /// @brief  Called when the client request(e.g. read / write) has been completed.
@@ -11776,24 +12300,6 @@ typedef Dartbt_gatt_client_att_mtu_changed_cbFunction = void Function(
     bt_gatt_client_h client,
     ffi.Pointer<bt_gatt_client_att_mtu_info_s> mtu_info,
     ffi.Pointer<ffi.Void> user_data);
-
-/// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_CLIENT_MODULE
-/// @brief Attribute protocol MTU change information structure.
-/// @since_tizen 4.0
-///
-/// @see bt_gatt_client_att_mtu_changed_cb()
-final class bt_gatt_client_att_mtu_info_s extends ffi.Struct {
-  /// < The address of remote device
-  external ffi.Pointer<ffi.Char> remote_address;
-
-  /// < MTU value
-  @ffi.UnsignedInt()
-  external int mtu;
-
-  /// < Request status
-  @ffi.UnsignedInt()
-  external int status;
-}
 
 /// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_CLIENT_MODULE
 /// @brief  Called when a value of a watched characteristic's GATT handle has been changed.
@@ -11840,20 +12346,6 @@ typedef Dartbt_gatt_client_service_changed_cbFunction = void Function(
     ffi.Pointer<ffi.Char> service_uuid,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_CLIENT_MODULE
-/// @brief  Enumerations of gatt server's service changing mode.
-/// @since_tizen 3.0
-abstract class bt_gatt_client_service_change_type_e {
-  /// < Service added
-  static const int BT_GATT_CLIENT_SERVICE_ADDED = 0;
-
-  /// < Service removed
-  static const int BT_GATT_CLIENT_SERVICE_REMOVED = 1;
-
-  /// < Resync is required (Since 6.5)
-  static const int BT_GATT_CLIENT_SERVICE_RESYNC = 2;
-}
-
 /// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_MODULE
 /// @brief Called when the connection state is changed.
 ///
@@ -11882,17 +12374,6 @@ typedef Dartbt_gatt_connection_state_changed_cbFunction = void Function(
     bool connected,
     ffi.Pointer<ffi.Char> remote_address,
     ffi.Pointer<ffi.Void> user_data);
-
-/// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_MODULE
-/// @brief  Enumerations of the service type.
-/// @since_tizen 2.3.1
-abstract class bt_gatt_service_type_e {
-  /// < GATT primary service type
-  static const int BT_GATT_SERVICE_TYPE_PRIMARY = 1;
-
-  /// < GATT secondary service type
-  static const int BT_GATT_SERVICE_TYPE_SECONDARY = 2;
-}
 
 /// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_SERVER_MODULE
 /// @brief The handle of a GATT server.
@@ -12009,17 +12490,6 @@ typedef Dartbt_gatt_server_write_value_requested_cbFunction = void Function(
     ffi.Pointer<ffi.Void> user_data);
 
 /// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_SERVER_MODULE
-/// @brief  Enumerations of the remote device request types for attributes.
-/// @since_tizen 3.0
-abstract class bt_gatt_att_request_type_e {
-  /// < Read Requested
-  static const int BT_GATT_REQUEST_TYPE_READ = 0;
-
-  /// < Write Requested
-  static const int BT_GATT_REQUEST_TYPE_WRITE = 1;
-}
-
-/// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_SERVER_MODULE
 /// @brief  Called when the sending notification / indication is done.
 /// @since_tizen 3.0
 ///
@@ -12089,39 +12559,6 @@ typedef Dartbt_pbap_connection_state_changed_cbFunction = void Function(
 
 /// @WEARABLE_ONLY
 /// @ingroup CAPI_NETWORK_BLUETOOTH_PBAP_MODULE
-/// @brief  Enumeration of address book location for PBAP.
-/// @since_tizen 3.0
-abstract class bt_pbap_address_book_source_e {
-  /// < Request for Addressbook from remote device
-  static const int BT_PBAP_SOURCE_DEVICE = 0;
-
-  /// < Request for address book from SIM
-  static const int BT_PBAP_SOURCE_SIM = 1;
-}
-
-/// @WEARABLE_ONLY
-/// @ingroup CAPI_NETWORK_BLUETOOTH_PBAP_MODULE
-/// @brief  Enumeration of folder type.
-/// @since_tizen 3.0
-abstract class bt_pbap_folder_type_e {
-  /// < Request for address book
-  static const int BT_PBAP_FOLDER_PHONE_BOOK = 0;
-
-  /// < Request for incoming calls
-  static const int BT_PBAP_FOLDER_INCOMING = 1;
-
-  /// < Request for outgoing calls
-  static const int BT_PBAP_FOLDER_OUTGOING = 2;
-
-  /// < Request for missed calls
-  static const int BT_PBAP_FOLDER_MISSED = 3;
-
-  /// < Request for combined calls
-  static const int BT_PBAP_FOLDER_COMBINED = 4;
-}
-
-/// @WEARABLE_ONLY
-/// @ingroup CAPI_NETWORK_BLUETOOTH_PBAP_MODULE
 /// @brief  Called when PBAP Phonebook size calculation completes.
 /// @details The following error codes can be delivered: \n
 /// #BT_ERROR_NONE \n
@@ -12147,33 +12584,6 @@ typedef Dartbt_pbap_phone_book_size_cbFunction = void Function(
     ffi.Pointer<ffi.Char> remote_address,
     int size,
     ffi.Pointer<ffi.Void> user_data);
-
-/// @WEARABLE_ONLY
-/// @ingroup CAPI_NETWORK_BLUETOOTH_PBAP_MODULE
-/// @brief  Enumeration of vCard Formats.
-/// @since_tizen 3.0
-abstract class bt_pbap_vcard_format_e {
-  /// < vCard format 2.1 (default)
-  static const int BT_PBAP_VCARD_FORMAT_VCARD21 = 0;
-
-  /// < vCard format 3.0
-  static const int BT_PBAP_VCARD_FORMAT_VCARD30 = 1;
-}
-
-/// @WEARABLE_ONLY
-/// @ingroup CAPI_NETWORK_BLUETOOTH_PBAP_MODULE
-/// @brief  Enumeration of sorting orders.
-/// @since_tizen 3.0
-abstract class bt_pbap_sort_order_e {
-  /// < Filter order indexed (default)
-  static const int BT_PBAP_ORDER_INDEXED = 0;
-
-  /// < Filter order alphanumeric
-  static const int BT_PBAP_ORDER_ALPHANUMERIC = 1;
-
-  /// < Filter order phonetic
-  static const int BT_PBAP_ORDER_PHONETIC = 2;
-}
 
 /// @WEARABLE_ONLY
 /// @ingroup CAPI_NETWORK_BLUETOOTH_PBAP_MODULE
@@ -12235,49 +12645,7 @@ typedef Dartbt_pbap_list_vcards_cbFunction = void Function(
     int count,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @WEARABLE_ONLY
-/// @ingroup CAPI_NETWORK_BLUETOOTH_PBAP_MODULE
-/// @brief The structure type containing vCard information.
-/// @since_tizen 3.0
-///
-/// @see bt_pbap_client_pull_vcard()
-final class bt_pbap_vcard_info_s extends ffi.Struct {
-  /// < The vcard index, used as a parameter for bt_pbap_client_pull_vcard()
-  @ffi.Int()
-  external int index;
-
-  /// < The contact name of the vCard
-  external ffi.Pointer<ffi.Char> contact_name;
-}
-
-/// @WEARABLE_ONLY
-/// @ingroup CAPI_NETWORK_BLUETOOTH_PBAP_MODULE
-/// @brief  Enumeration of phone book search fields.
-/// @since_tizen 3.0
-abstract class bt_pbap_search_field_e {
-  /// < Request for search by name (default)
-  static const int BT_PBAP_SEARCH_NAME = 0;
-
-  /// < Request for search by phone number
-  static const int BT_PBAP_SEARCH_NUMBER = 1;
-
-  /// < Request for search by sound
-  static const int BT_PBAP_SEARCH_SOUND = 2;
-}
-
 /// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
 /// @brief The handle of a Bluetooth LE scan filter.
 /// @since_tizen 4.0
 typedef bt_scan_filter_h = ffi.Pointer<ffi.Void>;
-
-/// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
-/// @brief Enumeration for the scan filter type.
-/// @since_tizen 4.0
-/// @see bt_adapter_le_scan_filter_set_type()
-abstract class bt_adapter_le_scan_filter_type_e {
-  /// < iBeacon filter type
-  static const int BT_ADAPTER_LE_SCAN_FILTER_TYPE_IBEACON = 0;
-
-  /// < Proximity UUID filter type
-  static const int BT_ADAPTER_LE_SCAN_FILTER_TYPE_PROXIMITY_UUID = 1;
-}

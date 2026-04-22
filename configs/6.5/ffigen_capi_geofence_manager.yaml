@@ -16,6 +16,7 @@ headers:
     - 'entrypoints.h'
   include-directives:
     - '**/geofence_manager.h'
+    - '**/geofence_type.h'
 
 compiler-opts:
   - '-m32'

@@ -386,11 +386,27 @@ class Tizen90CapiMediaMetadataExtractor {
 }
 
 /// @ingroup CAPI_METADATA_EXTRACTOR_MODULE
-/// @brief The metadata extractor handle.
+/// @brief Enumeration for metadata extractor error.
 /// @since_tizen 2.3
-typedef metadata_extractor_h = ffi.Pointer<metadata_extractor_s>;
+abstract class metadata_extractor_error_e {
+  /// < Successful
+  static const int METADATA_EXTRACTOR_ERROR_NONE = 0;
 
-final class metadata_extractor_s extends ffi.Opaque {}
+  /// < Invalid parameter
+  static const int METADATA_EXTRACTOR_ERROR_INVALID_PARAMETER = -22;
+
+  /// < Out of memory
+  static const int METADATA_EXTRACTOR_ERROR_OUT_OF_MEMORY = -12;
+
+  /// < File does not exist
+  static const int METADATA_EXTRACTOR_ERROR_FILE_EXISTS = -17;
+
+  /// < Permission denied
+  static const int METADATA_EXTRACTOR_ERROR_PERMISSION_DENIED = -13;
+
+  /// < Invalid internal operation
+  static const int METADATA_EXTRACTOR_ERROR_OPERATION_FAILED = -26411007;
+}
 
 /// @ingroup CAPI_METADATA_EXTRACTOR_MODULE
 /// @brief Enumeration for attribute.
@@ -504,3 +520,12 @@ abstract class metadata_extractor_attr_e {
   /// < Stitched type. (0:None, 1:Non-stitched, 2:stitched) (Since 9.0)
   static const int METADATA_360_STITCHED = 35;
 }
+
+final class metadata_extractor_s extends ffi.Opaque {}
+
+/// @ingroup CAPI_METADATA_EXTRACTOR_MODULE
+/// @brief The metadata extractor handle.
+/// @since_tizen 2.3
+typedef metadata_extractor_h = ffi.Pointer<metadata_extractor_s>;
+
+const int METADATA_EXTRACTOR_ERROR_CLASS = -26411008;

@@ -16,6 +16,7 @@ headers:
     - 'entrypoints.h'
   include-directives:
     - '**/metadata_extractor.h'
+    - '**/metadata_extractor_type.h'
 
 compiler-opts:
   - '-m32'

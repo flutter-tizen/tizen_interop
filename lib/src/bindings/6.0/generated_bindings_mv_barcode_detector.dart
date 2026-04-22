@@ -81,56 +81,6 @@ class Tizen60MvBarcodeDetector {
           ffi.Pointer<ffi.Void>)>();
 }
 
-/// @brief Enumeration to target attribute
-///
-/// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
-abstract class mv_barcode_detect_attr_target_e {
-  /// < 1D and 2D
-  static const int MV_BARCODE_DETECT_ATTR_TARGET_ALL = 0;
-
-  /// < 1D barcode only
-  static const int MV_BARCODE_DETECT_ATTR_TARGET_1D_BARCODE = 1;
-
-  /// < 2D barcode only
-  static const int MV_BARCODE_DETECT_ATTR_TARGET_2D_BARCODE = 2;
-}
-
-/// @brief Called when barcode detection is completed.
-/// @details If no barcode is detected then the method will be called, barcodes
-/// and states will be equal to NULL, and @a number_of_barcodes - 0.
-///
-/// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
-/// @param [in] source               The handle to the media source
-/// @param [in] engine_cfg           The handle to the configuration of the engine
-/// @param [in] barcode_locations    The quadrangle locations of detected barcodes
-/// @param [in] messages             The decoded messages of barcodes
-/// @param [in] types                The types of detected barcodes
-/// @param [in] number_of_barcodes   The number of detected barcodes
-/// @param [in] user_data            The user data passed from
-/// the mv_barcode_detect() function
-///
-/// @pre mv_barcode_detect() invokes this callback
-///
-/// @see mv_barcode_detect()
-typedef mv_barcode_detected_cb
-    = ffi.Pointer<ffi.NativeFunction<mv_barcode_detected_cbFunction>>;
-typedef mv_barcode_detected_cbFunction = ffi.Void Function(
-    mv_common.mv_source_h source,
-    mv_common.mv_engine_config_h engine_cfg,
-    ffi.Pointer<mv_common.mv_quadrangle_s> barcode_locations,
-    ffi.Pointer<ffi.Pointer<ffi.Char>> messages,
-    ffi.Pointer<ffi.Int32> types,
-    ffi.Int number_of_barcodes,
-    ffi.Pointer<ffi.Void> user_data);
-typedef Dartmv_barcode_detected_cbFunction = void Function(
-    mv_common.mv_source_h source,
-    mv_common.mv_engine_config_h engine_cfg,
-    ffi.Pointer<mv_common.mv_quadrangle_s> barcode_locations,
-    ffi.Pointer<ffi.Pointer<ffi.Char>> messages,
-    ffi.Pointer<ffi.Int32> types,
-    int number_of_barcodes,
-    ffi.Pointer<ffi.Void> user_data);
-
 /// @brief Enumeration for supported barcode types.
 /// @details QR codes (versions 1 to 40) and set of 1D barcodes are supported
 ///
@@ -185,5 +135,117 @@ abstract class mv_barcode_type_e {
   /// < Unknown (since 6.0)
   static const int MV_BARCODE_UNKNOWN = 100;
 }
+
+/// @brief Enumeration for supported QR code error correction level.
+///
+/// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+/// @remarks This is unavailable for 1D barcodes
+abstract class mv_barcode_qr_ecc_e {
+  /// < Recovery up to  7% losses
+  static const int MV_BARCODE_QR_ECC_LOW = 0;
+
+  /// < Recovery up to 15% losses
+  static const int MV_BARCODE_QR_ECC_MEDIUM = 1;
+
+  /// < Recovery up to 25% losses
+  static const int MV_BARCODE_QR_ECC_QUARTILE = 2;
+
+  /// < Recovery up to 30% losses
+  static const int MV_BARCODE_QR_ECC_HIGH = 3;
+
+  /// < Unavailable
+  static const int MV_BARCODE_QR_ECC_UNAVAILABLE = 4;
+}
+
+/// @brief Enumeration for supported QR code encoding mode.
+///
+/// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+/// @remarks This is unavailable for 1D barcodes
+abstract class mv_barcode_qr_mode_e {
+  /// < Numeric digits
+  static const int MV_BARCODE_QR_MODE_NUMERIC = 0;
+
+  /// < Alphanumeric characters
+  static const int MV_BARCODE_QR_MODE_ALPHANUMERIC = 1;
+
+  /// < Raw 8-bit bytes
+  static const int MV_BARCODE_QR_MODE_BYTE = 2;
+
+  /// < UTF-8 character encoding
+  static const int MV_BARCODE_QR_MODE_UTF8 = 3;
+
+  /// < Unavailable
+  static const int MV_BARCODE_QR_MODE_UNAVAILABLE = 4;
+}
+
+/// @brief Enumeration for supported image formats for the barcode generating.
+///
+/// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+abstract class mv_barcode_image_format_e {
+  /// < Unavailable image format
+  static const int MV_BARCODE_IMAGE_FORMAT_UNAVAILABLE = -1;
+
+  /// < BMP image format
+  static const int MV_BARCODE_IMAGE_FORMAT_BMP = 0;
+
+  /// < JPEG image format
+  static const int MV_BARCODE_IMAGE_FORMAT_JPG = 1;
+
+  /// < PNG image format
+  static const int MV_BARCODE_IMAGE_FORMAT_PNG = 2;
+
+  /// < The number of supported image format
+  static const int MV_BARCODE_IMAGE_FORMAT_NUM = 3;
+}
+
+/// @brief Enumeration to target attribute
+///
+/// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+abstract class mv_barcode_detect_attr_target_e {
+  /// < 1D and 2D
+  static const int MV_BARCODE_DETECT_ATTR_TARGET_ALL = 0;
+
+  /// < 1D barcode only
+  static const int MV_BARCODE_DETECT_ATTR_TARGET_1D_BARCODE = 1;
+
+  /// < 2D barcode only
+  static const int MV_BARCODE_DETECT_ATTR_TARGET_2D_BARCODE = 2;
+}
+
+/// @brief Called when barcode detection is completed.
+/// @details If no barcode is detected then the method will be called, barcodes
+/// and states will be equal to NULL, and @a number_of_barcodes - 0.
+///
+/// @since_tizen @if MOBILE 2.4 @else 3.0 @endif
+/// @param [in] source               The handle to the media source
+/// @param [in] engine_cfg           The handle to the configuration of the engine
+/// @param [in] barcode_locations    The quadrangle locations of detected barcodes
+/// @param [in] messages             The decoded messages of barcodes
+/// @param [in] types                The types of detected barcodes
+/// @param [in] number_of_barcodes   The number of detected barcodes
+/// @param [in] user_data            The user data passed from
+/// the mv_barcode_detect() function
+///
+/// @pre mv_barcode_detect() invokes this callback
+///
+/// @see mv_barcode_detect()
+typedef mv_barcode_detected_cb
+    = ffi.Pointer<ffi.NativeFunction<mv_barcode_detected_cbFunction>>;
+typedef mv_barcode_detected_cbFunction = ffi.Void Function(
+    mv_common.mv_source_h source,
+    mv_common.mv_engine_config_h engine_cfg,
+    ffi.Pointer<mv_common.mv_quadrangle_s> barcode_locations,
+    ffi.Pointer<ffi.Pointer<ffi.Char>> messages,
+    ffi.Pointer<ffi.Int32> types,
+    ffi.Int number_of_barcodes,
+    ffi.Pointer<ffi.Void> user_data);
+typedef Dartmv_barcode_detected_cbFunction = void Function(
+    mv_common.mv_source_h source,
+    mv_common.mv_engine_config_h engine_cfg,
+    ffi.Pointer<mv_common.mv_quadrangle_s> barcode_locations,
+    ffi.Pointer<ffi.Pointer<ffi.Char>> messages,
+    ffi.Pointer<ffi.Int32> types,
+    int number_of_barcodes,
+    ffi.Pointer<ffi.Void> user_data);
 
 const String MV_BARCODE_DETECT_ATTR_TARGET = 'MV_BARCODE_DETECT_ATTR_TARGET';

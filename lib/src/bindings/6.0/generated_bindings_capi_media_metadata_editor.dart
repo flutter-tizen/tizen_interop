@@ -368,9 +368,34 @@ class Tizen60CapiMediaMetadataEditor {
 }
 
 /// @ingroup CAPI_MEDIA_METADATA_EDITOR_MODULE
-/// @brief The handle of media metadata.
+/// @brief The enumerations of media metadata error.
 /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-typedef metadata_editor_h = ffi.Pointer<ffi.Void>;
+abstract class metadata_editor_error_e {
+  /// < Successful
+  static const int METADATA_EDITOR_ERROR_NONE = 0;
+
+  /// < Invalid parameter
+  static const int METADATA_EDITOR_ERROR_INVALID_PARAMETER = -22;
+
+  /// < Out of memory
+  static const int METADATA_EDITOR_ERROR_OUT_OF_MEMORY = -12;
+
+  /// < File not exist
+  static const int METADATA_EDITOR_ERROR_FILE_EXISTS = -17;
+
+  /// < Permission denied
+  static const int METADATA_EDITOR_ERROR_PERMISSION_DENIED = -13;
+
+  /// < Unsupported type
+  static const int METADATA_EDITOR_ERROR_NOT_SUPPORTED = -1073741822;
+
+  /// < Invalid internal operation
+  static const int METADATA_EDITOR_ERROR_OPERATION_FAILED = -27000831;
+
+  /// < Update not possible (Since 6.0)
+  static const int METADATA_EDITOR_ERROR_METADATA_UPDATE_NOT_POSSIBLE =
+      -27000830;
+}
 
 /// @ingroup CAPI_MEDIA_METADATA_EDITOR_MODULE
 /// @brief The enumerations of attribute.
@@ -415,3 +440,10 @@ abstract class metadata_editor_attr_e {
   /// < Unsynchronized lyric
   static const int METADATA_EDITOR_ATTR_UNSYNCLYRICS = 12;
 }
+
+/// @ingroup CAPI_MEDIA_METADATA_EDITOR_MODULE
+/// @brief The handle of media metadata.
+/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+typedef metadata_editor_h = ffi.Pointer<ffi.Void>;
+
+const int METADATA_EDITOR_ERROR_CLASS = -27000832;

@@ -16,6 +16,7 @@ headers:
     - 'entrypoints.h'
   include-directives:
     - '**/bluetooth.h'
+    - '**/bluetooth_type.h'
 
 compiler-opts:
   - '-m32'

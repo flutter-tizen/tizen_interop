@@ -16,6 +16,7 @@ headers:
     - 'entrypoints.h'
   include-directives:
     - '**/mv_inference.h'
+    - '**/mv_inference_type.h'
 
 library-imports:
   mv_common: 'generated_bindings_mv_common.dart'

@@ -279,7 +279,7 @@ abstract class _mv_barcode_type_e {
 ///
 /// @since_tizen 2.4
 /// @remarks This is unavailable for 1D barcodes
-abstract class mv_barcode_qr_mode_e {
+abstract class _mv_barcode_qr_mode_e {
   /// < Numeric digits
   static const int MV_BARCODE_QR_MODE_NUMERIC = 0;
 
@@ -300,7 +300,7 @@ abstract class mv_barcode_qr_mode_e {
 ///
 /// @since_tizen 2.4
 /// @remarks This is unavailable for 1D barcodes
-abstract class mv_barcode_qr_ecc_e {
+abstract class _mv_barcode_qr_ecc_e {
   /// < Recovery up to  7% losses
   static const int MV_BARCODE_QR_ECC_LOW = 0;
 
@@ -320,7 +320,7 @@ abstract class mv_barcode_qr_ecc_e {
 /// @brief Enumeration for supported image formats for the barcode generating.
 ///
 /// @since_tizen 2.4
-abstract class mv_barcode_image_format_e {
+abstract class _mv_barcode_image_format_e {
   /// < Unavailable image format
   static const int MV_BARCODE_IMAGE_FORMAT_UNAVAILABLE = -1;
 

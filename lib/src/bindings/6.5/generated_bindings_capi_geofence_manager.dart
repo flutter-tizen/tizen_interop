@@ -1223,71 +1223,6 @@ class Tizen65CapiGeofenceManager {
       .asFunction<int Function(geofence_status_h, ffi.Pointer<ffi.Int>)>();
 }
 
-/// @brief The geofence manager handle.
-/// @since_tizen 2.4
-typedef geofence_manager_h = ffi.Pointer<geofence_manager_s>;
-
-final class geofence_manager_s extends ffi.Opaque {}
-
-/// @brief The geofence handle.
-/// @since_tizen 2.4
-typedef geofence_h = ffi.Pointer<geofence_s>;
-
-final class geofence_s extends ffi.Opaque {}
-
-/// @brief Called when a device enters or exits the given geofence.
-/// @since_tizen 2.4
-/// @param[in] geofence_id The specified geofence ID
-/// @param[in] state The geofence state
-/// @param[in] user_data The user data passed from callback registration function
-/// @pre geofence_manager_start() will invoke this callback if you register this callback using geofence_manager_set_geofence_state_changed_cb().
-/// @see geofence_state_e
-/// @see geofence_manager_start()
-/// @see geofence_manager_set_geofence_state_changed_cb()
-typedef geofence_state_changed_cb
-    = ffi.Pointer<ffi.NativeFunction<geofence_state_changed_cbFunction>>;
-typedef geofence_state_changed_cbFunction = ffi.Void Function(
-    ffi.Int geofence_id, ffi.Int32 state, ffi.Pointer<ffi.Void> user_data);
-typedef Dartgeofence_state_changed_cbFunction = void Function(
-    int geofence_id, int state, ffi.Pointer<ffi.Void> user_data);
-
-/// @brief Enumeration for the state of geofence manager.
-/// @since_tizen 2.4
-abstract class geofence_state_e {
-  /// < Uncertain state of geofence
-  static const int GEOFENCE_STATE_UNCERTAIN = 0;
-
-  /// < Geofence In state
-  static const int GEOFENCE_STATE_IN = 1;
-
-  /// < Geofence Out state
-  static const int GEOFENCE_STATE_OUT = 2;
-}
-
-/// @brief Called when the some event occurs in geofence and place such as add, update, etc..
-/// @details The events of public geofence is also received if there are public geofences.
-/// @since_tizen 2.4
-/// @remarks The value of place_id or geofence_id is -1 when the place ID or geofence ID is not assigned.
-/// @param[in] place_id The place ID
-/// @param[in] geofence_id The specified geofence ID
-/// @param[in] error The error code for the particular action
-/// @param[in] manage The result code for the particular place and geofence management
-/// @param[in] user_data The user data passed from callback registration function
-/// @pre geofence_manager_start() will invoke this callback if you register this callback using geofence_manager_set_geofence_event_cb()
-/// @see geofence_manage_e
-/// @see geofence_manager_start()
-/// @see geofence_manager_set_geofence_event_cb()
-typedef geofence_event_cb
-    = ffi.Pointer<ffi.NativeFunction<geofence_event_cbFunction>>;
-typedef geofence_event_cbFunction = ffi.Void Function(
-    ffi.Int place_id,
-    ffi.Int geofence_id,
-    ffi.Int32 error,
-    ffi.Int32 manage,
-    ffi.Pointer<ffi.Void> user_data);
-typedef Dartgeofence_event_cbFunction = void Function(int place_id,
-    int geofence_id, int error, int manage, ffi.Pointer<ffi.Void> user_data);
-
 /// @brief Enumeration for Geofence manager of error code.
 /// @since_tizen 2.4
 abstract class geofence_manager_error_e {
@@ -1334,57 +1269,18 @@ abstract class geofence_manager_error_e {
   static const int GEOFENCE_MANAGER_ERROR_GEOFENCE_ACCESS_DENIED = -46202871;
 }
 
-/// @brief Enumeration for geofence management events.
+/// @brief Enumeration for the state of geofence manager.
 /// @since_tizen 2.4
-abstract class geofence_manage_e {
-  /// < Geofence is added
-  static const int GEOFENCE_MANAGE_FENCE_ADDED = 0;
+abstract class geofence_state_e {
+  /// < Uncertain state of geofence
+  static const int GEOFENCE_STATE_UNCERTAIN = 0;
 
-  /// < Geofence is removed
-  static const int GEOFENCE_MANAGE_FENCE_REMOVED = 1;
+  /// < Geofence In state
+  static const int GEOFENCE_STATE_IN = 1;
 
-  /// < Geofencing is started
-  static const int GEOFENCE_MANAGE_FENCE_STARTED = 2;
-
-  /// < Geofencing is stopped
-  static const int GEOFENCE_MANAGE_FENCE_STOPPED = 3;
-
-  /// < Place is added
-  static const int GEOFENCE_MANAGE_PLACE_ADDED = 16;
-
-  /// < Place is removed
-  static const int GEOFENCE_MANAGE_PLACE_REMOVED = 17;
-
-  /// < Place is updated
-  static const int GEOFENCE_MANAGE_PLACE_UPDATED = 18;
-
-  /// < Setting for geofencing is enabled
-  static const int GEOFENCE_MANAGE_SETTING_ENABLED = 32;
-
-  /// < Setting for geofencing is disabled
-  static const int GEOFENCE_MANAGE_SETTING_DISABLED = 33;
+  /// < Geofence Out state
+  static const int GEOFENCE_STATE_OUT = 2;
 }
-
-/// @brief Called when a proximity state of device is changed.
-/// @since_tizen 3.0
-/// @param[in] geofence_id The specified geofence ID
-/// @param[in] state The proximity state
-/// @param[in] provider The proximity provider
-/// @param[in] user_data The user data passed from callback registration function
-/// @pre geofence_manager_start() will invoke this callback if you register this callback using geofence_manager_set_geofence_proximity_state_changed_cb().
-/// @see geofence_proximity_state_e
-/// @see geofence_proximity_provider_e
-/// @see geofence_manager_start()
-/// @see geofence_manager_set_geofence_proximity_state_changed_cb()
-typedef geofence_proximity_state_changed_cb = ffi
-    .Pointer<ffi.NativeFunction<geofence_proximity_state_changed_cbFunction>>;
-typedef geofence_proximity_state_changed_cbFunction = ffi.Void Function(
-    ffi.Int geofence_id,
-    ffi.Int32 state,
-    ffi.Int32 provider,
-    ffi.Pointer<ffi.Void> user_data);
-typedef Dartgeofence_proximity_state_changed_cbFunction = void Function(
-    int geofence_id, int state, int provider, ffi.Pointer<ffi.Void> user_data);
 
 /// @brief Enumeration for the state of proximity.
 /// @since_tizen 3.0
@@ -1420,6 +1316,125 @@ abstract class geofence_proximity_provider_e {
   /// < Proximity is specified by Sensor
   static const int GEOFENCE_PROXIMITY_PROVIDER_SENSOR = 4;
 }
+
+/// @brief Enumeration for geofence type.
+/// @since_tizen 2.4
+abstract class geofence_type_e {
+  /// < Geofence is specified by geospatial coordinate
+  static const int GEOFENCE_TYPE_GEOPOINT = 1;
+
+  /// < Geofence is specified by Wi-Fi access point
+  static const int GEOFENCE_TYPE_WIFI = 2;
+
+  /// < Geofence is specified by Bluetooth device
+  static const int GEOFENCE_TYPE_BT = 3;
+}
+
+/// @brief Enumeration for geofence management events.
+/// @since_tizen 2.4
+abstract class geofence_manage_e {
+  /// < Geofence is added
+  static const int GEOFENCE_MANAGE_FENCE_ADDED = 0;
+
+  /// < Geofence is removed
+  static const int GEOFENCE_MANAGE_FENCE_REMOVED = 1;
+
+  /// < Geofencing is started
+  static const int GEOFENCE_MANAGE_FENCE_STARTED = 2;
+
+  /// < Geofencing is stopped
+  static const int GEOFENCE_MANAGE_FENCE_STOPPED = 3;
+
+  /// < Place is added
+  static const int GEOFENCE_MANAGE_PLACE_ADDED = 16;
+
+  /// < Place is removed
+  static const int GEOFENCE_MANAGE_PLACE_REMOVED = 17;
+
+  /// < Place is updated
+  static const int GEOFENCE_MANAGE_PLACE_UPDATED = 18;
+
+  /// < Setting for geofencing is enabled
+  static const int GEOFENCE_MANAGE_SETTING_ENABLED = 32;
+
+  /// < Setting for geofencing is disabled
+  static const int GEOFENCE_MANAGE_SETTING_DISABLED = 33;
+}
+
+final class geofence_manager_s extends ffi.Opaque {}
+
+final class geofence_s extends ffi.Opaque {}
+
+final class geofence_status_s extends ffi.Opaque {}
+
+/// @brief The geofence manager handle.
+/// @since_tizen 2.4
+typedef geofence_manager_h = ffi.Pointer<geofence_manager_s>;
+
+/// @brief The geofence handle.
+/// @since_tizen 2.4
+typedef geofence_h = ffi.Pointer<geofence_s>;
+
+/// @brief Called when a device enters or exits the given geofence.
+/// @since_tizen 2.4
+/// @param[in] geofence_id The specified geofence ID
+/// @param[in] state The geofence state
+/// @param[in] user_data The user data passed from callback registration function
+/// @pre geofence_manager_start() will invoke this callback if you register this callback using geofence_manager_set_geofence_state_changed_cb().
+/// @see geofence_state_e
+/// @see geofence_manager_start()
+/// @see geofence_manager_set_geofence_state_changed_cb()
+typedef geofence_state_changed_cb
+    = ffi.Pointer<ffi.NativeFunction<geofence_state_changed_cbFunction>>;
+typedef geofence_state_changed_cbFunction = ffi.Void Function(
+    ffi.Int geofence_id, ffi.Int32 state, ffi.Pointer<ffi.Void> user_data);
+typedef Dartgeofence_state_changed_cbFunction = void Function(
+    int geofence_id, int state, ffi.Pointer<ffi.Void> user_data);
+
+/// @brief Called when the some event occurs in geofence and place such as add, update, etc..
+/// @details The events of public geofence is also received if there are public geofences.
+/// @since_tizen 2.4
+/// @remarks The value of place_id or geofence_id is -1 when the place ID or geofence ID is not assigned.
+/// @param[in] place_id The place ID
+/// @param[in] geofence_id The specified geofence ID
+/// @param[in] error The error code for the particular action
+/// @param[in] manage The result code for the particular place and geofence management
+/// @param[in] user_data The user data passed from callback registration function
+/// @pre geofence_manager_start() will invoke this callback if you register this callback using geofence_manager_set_geofence_event_cb()
+/// @see geofence_manage_e
+/// @see geofence_manager_start()
+/// @see geofence_manager_set_geofence_event_cb()
+typedef geofence_event_cb
+    = ffi.Pointer<ffi.NativeFunction<geofence_event_cbFunction>>;
+typedef geofence_event_cbFunction = ffi.Void Function(
+    ffi.Int place_id,
+    ffi.Int geofence_id,
+    ffi.Int32 error,
+    ffi.Int32 manage,
+    ffi.Pointer<ffi.Void> user_data);
+typedef Dartgeofence_event_cbFunction = void Function(int place_id,
+    int geofence_id, int error, int manage, ffi.Pointer<ffi.Void> user_data);
+
+/// @brief Called when a proximity state of device is changed.
+/// @since_tizen 3.0
+/// @param[in] geofence_id The specified geofence ID
+/// @param[in] state The proximity state
+/// @param[in] provider The proximity provider
+/// @param[in] user_data The user data passed from callback registration function
+/// @pre geofence_manager_start() will invoke this callback if you register this callback using geofence_manager_set_geofence_proximity_state_changed_cb().
+/// @see geofence_proximity_state_e
+/// @see geofence_proximity_provider_e
+/// @see geofence_manager_start()
+/// @see geofence_manager_set_geofence_proximity_state_changed_cb()
+typedef geofence_proximity_state_changed_cb = ffi
+    .Pointer<ffi.NativeFunction<geofence_proximity_state_changed_cbFunction>>;
+typedef geofence_proximity_state_changed_cbFunction = ffi.Void Function(
+    ffi.Int geofence_id,
+    ffi.Int32 state,
+    ffi.Int32 provider,
+    ffi.Pointer<ffi.Void> user_data);
+typedef Dartgeofence_proximity_state_changed_cbFunction = void Function(
+    int geofence_id, int state, int provider, ffi.Pointer<ffi.Void> user_data);
 
 /// @brief Called when the fence list is requested.
 /// @since_tizen 2.4
@@ -1476,21 +1491,6 @@ typedef Dartgeofence_manager_place_cbFunction = bool Function(
     int place_cnt,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Enumeration for geofence type.
-/// @since_tizen 2.4
-abstract class geofence_type_e {
-  /// < Geofence is specified by geospatial coordinate
-  static const int GEOFENCE_TYPE_GEOPOINT = 1;
-
-  /// < Geofence is specified by Wi-Fi access point
-  static const int GEOFENCE_TYPE_WIFI = 2;
-
-  /// < Geofence is specified by Bluetooth device
-  static const int GEOFENCE_TYPE_BT = 3;
-}
-
 /// @brief The geofence status handle.
 /// @since_tizen 2.4
 typedef geofence_status_h = ffi.Pointer<geofence_status_s>;
-
-final class geofence_status_s extends ffi.Opaque {}

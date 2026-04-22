@@ -386,6 +386,8 @@ abstract class tizen_error_e {
   static const int TIZEN_ERROR_END_OF_COLLECTION = -1073741819;
 }
 
+const int NULL = 0;
+
 const int TIZEN_ERROR_MAX_PLATFORM_ERROR = 0;
 
 const int TIZEN_ERROR_MIN_PLATFORM_ERROR = -1073741824;

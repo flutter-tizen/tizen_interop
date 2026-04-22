@@ -1121,6 +1121,55 @@ class Tizen100MvFace {
 }
 
 /// @deprecated Deprecated since 9.0
+/// @brief Enumeration for eyes state type.
+///
+/// @since_tizen 3.0
+///
+/// @see mv_face_eye_condition_recognize()
+abstract class mv_face_eye_condition_e {
+  /// < Eyes are open
+  static const int MV_FACE_EYES_OPEN = 0;
+
+  /// < Eyes are closed
+  static const int MV_FACE_EYES_CLOSED = 1;
+
+  /// < The eyes condition wasn't determined
+  static const int MV_FACE_EYES_NOT_FOUND = 2;
+}
+
+/// @deprecated Deprecated since 9.0
+/// @brief Enumeration for expression types can be determined for faces.
+///
+/// @since_tizen 3.0
+///
+/// @see mv_face_facial_expression_recognize()
+abstract class mv_face_facial_expression_e {
+  /// < Unknown face expression
+  static const int MV_FACE_UNKNOWN = 0;
+
+  /// < Face expression is neutral
+  static const int MV_FACE_NEUTRAL = 1;
+
+  /// < Face expression is smiling
+  static const int MV_FACE_SMILE = 2;
+
+  /// < Face expression is sadness
+  static const int MV_FACE_SADNESS = 3;
+
+  /// < Face expression is surprise
+  static const int MV_FACE_SURPRISE = 4;
+
+  /// < Face expression is anger
+  static const int MV_FACE_ANGER = 5;
+
+  /// < Face expression is fear
+  static const int MV_FACE_FEAR = 6;
+
+  /// < Face expression is disgust
+  static const int MV_FACE_DISGUST = 7;
+}
+
+/// @deprecated Deprecated since 9.0
 /// @brief Called when faces are detected for the @a source.
 /// @details This type callback can be invoked each time when
 /// mv_face_detect() is called to process the results of face
@@ -1338,23 +1387,6 @@ typedef Dartmv_face_eye_condition_recognized_cbFunction = void Function(
     ffi.Pointer<ffi.Void> user_data);
 
 /// @deprecated Deprecated since 9.0
-/// @brief Enumeration for eyes state type.
-///
-/// @since_tizen 3.0
-///
-/// @see mv_face_eye_condition_recognize()
-abstract class mv_face_eye_condition_e {
-  /// < Eyes are open
-  static const int MV_FACE_EYES_OPEN = 0;
-
-  /// < Eyes are closed
-  static const int MV_FACE_EYES_CLOSED = 1;
-
-  /// < The eyes condition wasn't determined
-  static const int MV_FACE_EYES_NOT_FOUND = 2;
-}
-
-/// @deprecated Deprecated since 9.0
 /// @brief Called when facial expression is recognized.
 /// @details This type callback can be invoked each time when
 /// mv_face_facial_expression_recognize() is called for @a face_location to
@@ -1390,38 +1422,6 @@ typedef Dartmv_face_facial_expression_recognized_cbFunction = void Function(
     mv_common.mv_rectangle_s face_location,
     int facial_expression,
     ffi.Pointer<ffi.Void> user_data);
-
-/// @deprecated Deprecated since 9.0
-/// @brief Enumeration for expression types can be determined for faces.
-///
-/// @since_tizen 3.0
-///
-/// @see mv_face_facial_expression_recognize()
-abstract class mv_face_facial_expression_e {
-  /// < Unknown face expression
-  static const int MV_FACE_UNKNOWN = 0;
-
-  /// < Face expression is neutral
-  static const int MV_FACE_NEUTRAL = 1;
-
-  /// < Face expression is smiling
-  static const int MV_FACE_SMILE = 2;
-
-  /// < Face expression is sadness
-  static const int MV_FACE_SADNESS = 3;
-
-  /// < Face expression is surprise
-  static const int MV_FACE_SURPRISE = 4;
-
-  /// < Face expression is anger
-  static const int MV_FACE_ANGER = 5;
-
-  /// < Face expression is fear
-  static const int MV_FACE_FEAR = 6;
-
-  /// < Face expression is disgust
-  static const int MV_FACE_DISGUST = 7;
-}
 
 const String MV_FACE_DETECTION_MODEL_FILE_PATH =
     'MV_FACE_DETECTION_MODEL_FILE_PATH';

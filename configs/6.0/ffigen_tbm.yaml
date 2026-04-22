@@ -16,6 +16,7 @@ headers:
     - 'entrypoints.h'
   include-directives:
     - '**/tbm_surface.h'
+    - '**/tbm_type.h'
 
 compiler-opts:
   - '-m32'
