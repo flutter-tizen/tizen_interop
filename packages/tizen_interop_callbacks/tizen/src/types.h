@@ -36,6 +36,8 @@ typedef enum { SOME_ENUM_0 } some_enum;
 
 typedef void *void_pointer;
 
+// This enum is used as an argument for the ime_position_align_set_cb callback
+// function added in Tizen 9.0.
 typedef enum _Ecore_IMF_Input_Panel_Align {
   ECORE_IMF_INPUT_PANEL_ALIGN_TOP_LEFT,      /**< The top-left corner */
   ECORE_IMF_INPUT_PANEL_ALIGN_TOP_CENTER,    /**< The top-center position */
