@@ -254,8 +254,8 @@ String convertDoxygenCommentsInDartSource(String source, {String? path}) {
 
     final indent = docMatch.group(1)!;
     final block = <String>[];
-    while (index < lines.length &&
-        _docCommentLineRegExp.hasMatch(lines[index])) {
+    while (
+        index < lines.length && _docCommentLineRegExp.hasMatch(lines[index])) {
       block.add(lines[index]);
       index++;
     }
@@ -275,8 +275,8 @@ String convertDoxygenCommentsInDartSource(String source, {String? path}) {
   final annotatedOutput = _shouldHideTopLevelGeneratedBindingsDeclarations(path)
       ? _annotateGeneratedBindingsTopLevelDeclarations(output)
       : _shouldHideVersionedTizenLibraryGetters(path)
-      ? _annotateVersionedTizenLibraryGetters(output)
-      : output;
+          ? _annotateVersionedTizenLibraryGetters(output)
+          : output;
   final normalizedOutput = _rewriteVersionedTizenLibraryName(
     annotatedOutput,
     path,
@@ -524,34 +524,34 @@ _StructuredDoc _parseStructuredDoc(List<String> docLines) {
 
   for (final rawDocLine in docLines) {
     final stripped = _stripGeneratedDocLine(rawDocLine);
+
+    if (currentCodeBlock != null) {
+      final trimmed = stripped.trim();
+      if (trimmed == r'@endcode' || trimmed == r'\endcode') {
+        final title = pendingParagraphTitles.isNotEmpty
+            ? pendingParagraphTitles.removeLast()
+            : null;
+        doc.codeBlocks.add(
+          _CodeBlock(
+            lines: List<String>.from(currentCodeBlock),
+            title: title,
+            language: currentCodeLanguage,
+          ),
+        );
+        currentCodeBlock = null;
+        currentCodeLanguage = null;
+        appendContinuation = null;
+        continue;
+      }
+      currentCodeBlock.add(_normalizeCodeLine(stripped));
+      continue;
+    }
+
     final expandedLines = _expandDocLine(stripped);
 
     for (final expandedLine in expandedLines) {
-      final line = currentCodeBlock == null
-          ? expandedLine.trimRight()
-          : expandedLine;
+      final line = expandedLine.trimRight();
       final trimmed = line.trim();
-
-      if (currentCodeBlock != null) {
-        if (trimmed == r'@endcode' || trimmed == r'\endcode') {
-          final title = pendingParagraphTitles.isNotEmpty
-              ? pendingParagraphTitles.removeLast()
-              : null;
-          doc.codeBlocks.add(
-            _CodeBlock(
-              lines: List<String>.from(currentCodeBlock),
-              title: title,
-              language: currentCodeLanguage,
-            ),
-          );
-          currentCodeBlock = null;
-          currentCodeLanguage = null;
-          appendContinuation = null;
-          continue;
-        }
-        currentCodeBlock.add(_normalizeCodeLine(line));
-        continue;
-      }
 
       if (trimmed.isEmpty) {
         appendContinuation = null;
@@ -832,7 +832,11 @@ void _appendDocBullets(
     final bulletText = item.startsWith('http://') || item.startsWith('https://')
         ? '<$item>'
         : item;
-    output.add('/// - $bulletText');
+    final lines = bulletText.split('\n');
+    output.add('/// - ${lines.first}');
+    for (var i = 1; i < lines.length; i++) {
+      output.add(lines[i].isEmpty ? '///' : '///   ${lines[i]}');
+    }
   }
 }
 
@@ -841,9 +845,8 @@ void _appendDocNamedBullets(
   String heading,
   List<_DocItem> items,
 ) {
-  final filteredItems = items
-      .where((item) => item.description.trim().isNotEmpty)
-      .toList();
+  final filteredItems =
+      items.where((item) => item.description.trim().isNotEmpty).toList();
   if (filteredItems.isEmpty) {
     return;
   }
@@ -852,22 +855,31 @@ void _appendDocNamedBullets(
   }
   output.add('/// **$heading:**');
   for (final item in filteredItems) {
-    final buffer = StringBuffer('/// - ');
+    final firstLineBuffer = StringBuffer('/// - ');
+    String description = item.description;
     if (item.name != null) {
       final displayName = item.name!.startsWith('`') && item.name!.endsWith('`')
           ? item.name!
           : '`${item.name}`';
-      buffer.write(displayName);
+      firstLineBuffer.write(displayName);
       if (item.direction != null && item.direction!.isNotEmpty) {
-        buffer.write(' (${item.direction})');
+        firstLineBuffer.write(' (${item.direction})');
       }
-      if (item.description.isNotEmpty) {
-        buffer.write(': ${item.description}');
+      if (description.isNotEmpty) {
+        firstLineBuffer.write(': ');
+      }
+    }
+
+    if (description.isNotEmpty) {
+      final lines = description.split('\n');
+      firstLineBuffer.write(lines.first);
+      output.add(firstLineBuffer.toString());
+      for (var i = 1; i < lines.length; i++) {
+        output.add(lines[i].isEmpty ? '///' : '///   ${lines[i]}');
       }
     } else {
-      buffer.write(item.description);
+      output.add(firstLineBuffer.toString());
     }
-    output.add(buffer.toString());
   }
 }
 
@@ -1026,7 +1038,7 @@ String _normalizeInlineDocText(String text) {
 }
 
 String _normalizeCodeLine(String line) {
-  return line.replaceAll(r'\n', '').trimRight();
+  return line.trimRight();
 }
 
 String? _normalizeCodeBlockLanguage(String? language) {
@@ -1048,6 +1060,12 @@ String _mergeDocText(String current, String next) {
   }
   if (next.isEmpty) {
     return current;
+  }
+  final nextTrimmed = next.trimLeft();
+  if (nextTrimmed.startsWith('- ') ||
+      nextTrimmed.startsWith('* ') ||
+      RegExp(r'^\d+\.\s').hasMatch(nextTrimmed)) {
+    return '$current\n$next';
   }
   return '$current $next';
 }
