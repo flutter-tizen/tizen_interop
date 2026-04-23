@@ -1,4 +1,5 @@
-library tizen_interop;
+/// Tizen Interop for Tizen 6.5.
+library tizen_interop_6_5;
 
 import 'dart:ffi';
 
@@ -238,8 +239,6 @@ export '../../src/bindings/6.5/generated_bindings_storage.dart';
 export '../../src/bindings/6.5/generated_bindings_stt.dart';
 export '../../src/bindings/6.5/generated_bindings_stt_engine.dart';
 export '../../src/bindings/6.5/generated_bindings_tbm.dart';
-export '../../src/bindings/6.5/generated_bindings_time.dart'
-    hide UnnamedUnion1, UnnamedStruct1;
 export '../../src/bindings/6.5/generated_bindings_ttrace.dart';
 export '../../src/bindings/6.5/generated_bindings_tts.dart';
 export '../../src/bindings/6.5/generated_bindings_tts_engine.dart';
@@ -249,6 +248,8 @@ export '../../src/bindings/6.5/generated_bindings_vc_engine.dart';
 export '../../src/bindings/6.5/generated_bindings_vc_manager.dart';
 export '../../src/bindings/6.5/generated_bindings_wifi_direct.dart';
 export '../../src/bindings/6.5/generated_bindings_yaca.dart';
+export '../../src/bindings/6.5/generated_bindings_time.dart'
+    hide UnnamedUnion1, UnnamedStruct1;
 
 final _lookupProvider = LookupProvider();
 

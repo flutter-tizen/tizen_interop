@@ -47,6 +47,26 @@
      (see `CallbackDataCollector.type_substitute()` and maps used there: `KNOWN_TYPES`, `SPECIAL_TYPES`).
    * Run `./generate_callbacks.sh` to update `callbacks.cc` with callbacks data.
 
+## Converting Doxygen Comments to Dartdoc Format
+
+To convert Doxygen-style comments into Dartdoc format for the generated bindings of a specific Tizen version, run the following script:
+
+```sh
+dart run ./scripts/convert_description.dart <version>
+```
+
+This script will automatically process all `generated_bindings_*.dart` files inside the `lib/src/bindings/<version>` directory.
+
+## Generating documentation
+
+The `generate_doc_script.py` script generates markdown API documentation for all supported Tizen versions. It scans the `configs` directory and creates or overwrites `doc/tizen<version>_api.md` for each version.
+
+Run the script with:
+
+```sh
+python3 scripts/generate_doc_script.py
+```
+
 ## Handling Type Duplication Issues
 
 When splitting single binding code into library-specific binding codes from version 0.5.2 onwards, type duplication issues may occur between binding codes. Here are common issues and their solutions:
@@ -153,14 +173,4 @@ type-map:
 ```dart
 export '../../src/bindings/6.0/generated_bindings_capi_media_camera.dart'
     hide UnnamedUnion1, UnnamedStruct1;
-```
-
-## Generating documentation
-
-The `generate_doc_script.py` script generates markdown API documentation for all supported Tizen versions. It scans the `configs` directory and creates or overwrites `doc/tizen<version>_api.md` for each version.
-
-Run the script with:
-
-```sh
-python3 scripts/generate_doc_script.py
 ```

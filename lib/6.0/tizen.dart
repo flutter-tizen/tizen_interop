@@ -1,4 +1,5 @@
-library tizen_interop;
+/// Tizen Interop for Tizen 6.0.
+library tizen_interop_6_0;
 
 import 'dart:ffi';
 
@@ -126,8 +127,7 @@ export '../../src/bindings/6.0/generated_bindings_appcore_agent.dart';
 export '../../src/bindings/6.0/generated_bindings_asp.dart';
 export '../../src/bindings/6.0/generated_bindings_badge.dart';
 export '../../src/bindings/6.0/generated_bindings_bundle.dart';
-export '../../src/bindings/6.0/generated_bindings_calendar_service2.dart'
-    hide UnnamedUnion1, UnnamedStruct1;
+export '../../src/bindings/6.0/generated_bindings_calendar_service2.dart';
 export '../../src/bindings/6.0/generated_bindings_capi_appfw_alarm.dart';
 export '../../src/bindings/6.0/generated_bindings_capi_appfw_app_common.dart';
 export '../../src/bindings/6.0/generated_bindings_capi_appfw_app_control.dart';
@@ -229,8 +229,6 @@ export '../../src/bindings/6.0/generated_bindings_storage.dart';
 export '../../src/bindings/6.0/generated_bindings_stt.dart';
 export '../../src/bindings/6.0/generated_bindings_stt_engine.dart';
 export '../../src/bindings/6.0/generated_bindings_tbm.dart';
-export '../../src/bindings/6.0/generated_bindings_time.dart'
-    hide UnnamedUnion1, UnnamedStruct1;
 export '../../src/bindings/6.0/generated_bindings_ttrace.dart';
 export '../../src/bindings/6.0/generated_bindings_tts.dart';
 export '../../src/bindings/6.0/generated_bindings_tts_engine.dart';
@@ -240,6 +238,8 @@ export '../../src/bindings/6.0/generated_bindings_vc_engine.dart';
 export '../../src/bindings/6.0/generated_bindings_vc_manager.dart';
 export '../../src/bindings/6.0/generated_bindings_wifi_direct.dart';
 export '../../src/bindings/6.0/generated_bindings_yaca.dart';
+export '../../src/bindings/6.0/generated_bindings_time.dart'
+    hide UnnamedUnion1, UnnamedStruct1;
 
 final _lookupProvider = LookupProvider();
 

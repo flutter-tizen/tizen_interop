@@ -1,4 +1,5 @@
-library tizen_interop;
+/// Tizen Interop for Tizen 8.0.
+library tizen_interop_8_0;
 
 import 'dart:ffi';
 

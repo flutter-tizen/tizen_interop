@@ -97,7 +97,9 @@ def main():
 
     # 3. Generate tizen.dart
     lines = []
-    lines.append("library tizen_interop;")
+    version_underscored = version.replace('.', '_')
+    lines.append(f"/// Tizen Interop for Tizen {version}.")
+    lines.append(f"library tizen_interop_{version_underscored};")
     lines.append("")
     lines.append("import 'dart:ffi';")
     lines.append("")

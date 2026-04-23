@@ -1,0 +1,5 @@
+dartdoc:
+  warnings:
+    - unresolved-doc-reference
+  ignore:
+    - ambiguous-reexport
