@@ -244,7 +244,7 @@ bool looksLikeDoxygenDocCommentBlock(List<String> docLines) {
         stripped.startsWith('**Return values:**') ||
         stripped.startsWith('**See also:**') ||
         stripped.startsWith('**Example:**') ||
-        stripped.contains('{@nodoc}') ||
+        stripped.contains('@nodoc') ||
         stripped.contains('{@category')) {
       return false;
     }
@@ -418,8 +418,8 @@ List<String> _annotateModuleBindingDeclarations(
           output.add('/// {@category $categoryTizen}');
         }
       } else {
-        if (output.isEmpty || !output.last.trim().contains('{@nodoc}')) {
-          output.add('/// {@nodoc}');
+        if (output.isEmpty || !output.last.trim().contains('@nodoc')) {
+          output.add('/// @nodoc');
         }
       }
     }
@@ -444,8 +444,8 @@ List<String> _annotateAllAsNodoc(List<String> lines) {
     final isTopLevelLine = trimmed == line;
 
     if (isTopLevelLine && _topLevelDeclarationRegExp.hasMatch(trimmed)) {
-      if (output.isEmpty || !output.last.trim().contains('{@nodoc}')) {
-        output.add('/// {@nodoc}');
+      if (output.isEmpty || !output.last.trim().contains('@nodoc')) {
+        output.add('/// @nodoc');
       }
     }
     output.add(line);
@@ -465,8 +465,8 @@ List<String> _annotateGeneratedBindingsTopLevelDeclarations(
     if (isTopLevelLine &&
         _topLevelDeclarationRegExp.hasMatch(trimmed) &&
         !_primaryNativeClassRegExp.hasMatch(trimmed)) {
-      if (output.isEmpty || output.last.trim() != '/// {@nodoc}') {
-        output.add('/// {@nodoc}');
+      if (output.isEmpty || !output.last.trim().contains('@nodoc')) {
+        output.add('/// @nodoc');
       }
     }
 
