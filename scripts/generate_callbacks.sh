@@ -37,21 +37,38 @@ if [ ! -d $ROOTSTRAPS ]; then
   exit 1
 fi
 
-CONFIGS=""
+CONFIGS=()
 declare -a VERIFY_RESULT
-for C in "$SCRIPT_DIR"/../configs/*/ffigen.yaml; do
-  echo $C
-  VERSION="${C%/ffigen.yaml}"
-  VERSION="${VERSION##*/}"
+for V_DIR in "$SCRIPT_DIR"/../configs/*; do
+  [ -d "$V_DIR" ] || continue
+  VERSION="${V_DIR##*/}"
   echo "==== Found Tizen $VERSION config"
   D="$ROOTSTRAPS/$VERSION"
   if [ -d "$D" ]; then
+    VERSION_ARGS=()
+    if [ -f "$V_DIR/ffigen.yaml" ]; then
+      VERSION_ARGS=("-c" "$V_DIR/ffigen.yaml" "-b" "$SCRIPT_DIR/../lib/src/bindings/$VERSION/generated_bindings.dart")
+    else
+      for config_file in "$V_DIR"/ffigen_*.yaml; do
+        [ -e "$config_file" ] || continue
+        filename=$(basename -- "$config_file")
+        module_name="${filename#ffigen_}"
+        module_name="${module_name%.yaml}"
+        VERSION_ARGS+=("-c" "$config_file" "-b" "$SCRIPT_DIR/../lib/src/bindings/$VERSION/generated_bindings_${module_name}.dart")
+      done
+    fi
+
+    if [ ${#VERSION_ARGS[@]} -eq 0 ]; then
+      echo "WARNING: No ffigen configs found for $VERSION, skipping"
+      continue
+    fi
+
     if [ "$VERIFY" = "yes" ]; then
       if [ -n "${SKIP_VERIFY_VERSIONS[$VERSION]}" ]; then
         VERIFY_RESULT[${#VERIFY_RESULT[@]}]="all   	-	$VERSION	skip"
         continue
       fi
-      "$GENERATOR_ROOT/gen_callbacks.py" --asserts="$VERSION" -c $SCRIPT_DIR/../configs/$VERSION/ffigen.yaml -b $SCRIPT_DIR/../lib/src/bindings/$VERSION/generated_bindings.dart -o "$TARGET"
+      "$GENERATOR_ROOT/gen_callbacks.py" --asserts="$VERSION" "${VERSION_ARGS[@]}" -o "$TARGET"
       sed -i '/manifest/ s/api-version="[0-9.]*"/api-version="'$VERSION'"/' "$EXAMPLE_DIR/tizen/tizen-manifest.xml"
       for PROFILE in $PROFILES; do
         for ARCH in $ARCHS; do
@@ -72,7 +89,7 @@ for C in "$SCRIPT_DIR"/../configs/*/ffigen.yaml; do
         done
       done
     else
-      CONFIGS="-c $SCRIPT_DIR/../configs/$VERSION/ffigen.yaml -b $SCRIPT_DIR/../lib/src/bindings/$VERSION/generated_bindings.dart $CONFIGS"
+      CONFIGS+=("${VERSION_ARGS[@]}")
     fi
   else
     echo "ERROR: Rootstrap $ROOTSTRAPS/$VERSION not found."
@@ -83,8 +100,8 @@ if [ "$VERIFY" == "yes" ]; then
   echo "======== Results of the verification"
   for x in "${!VERIFY_RESULT[@]}"; do printf "  %s\n" "${VERIFY_RESULT[$x]}" ; done
   exit
-elif [ -z "$CONFIGS" ]; then
+elif [ ${#CONFIGS[@]} -eq 0 ]; then
   echo "ERROR: No rootstrap found. Run copy_rootstrap.sh first."
   exit 1
 fi
-"$GENERATOR_ROOT/gen_callbacks.py" $CONFIGS -o "$TARGET"
+"$GENERATOR_ROOT/gen_callbacks.py" "${CONFIGS[@]}" -o "$TARGET"

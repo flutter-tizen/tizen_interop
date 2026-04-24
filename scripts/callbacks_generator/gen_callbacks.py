@@ -10,6 +10,7 @@ import glob
 import yaml
 import logging
 import argparse
+import re
 from io import StringIO
 from typing import List, Mapping, Callable, Set
 
@@ -488,11 +489,12 @@ class CodeReader:
     # Move until '*/' is found.
     # We assume that comments have the closing '*/'.
     t = self.tokens
-    while t[idx]._type != self.TOKEN_COMMENT_END:
+    while idx < len(t) and t[idx]._type != self.TOKEN_COMMENT_END:
       idx += 1
 
     # Move to the token after '*/'.
-    idx += 1
+    if idx < len(t):
+      idx += 1
 
     return idx
 
@@ -692,11 +694,12 @@ class CallbackDataCollector:
 
   def set_bindings_filter(self, bindings_file_paths: List[str]):
     names = set()
+    typedef_re = re.compile(r'^\s*typedef\s+([a-zA-Z0-9_]+)', re.MULTILINE)
     for bindings_path in bindings_file_paths:
-      with open(bindings_path) as bindings_file:
-        for line in bindings_file:
-          if line.startswith('typedef '):
-            names.add(line.split()[1])
+      with open(bindings_path, encoding='utf-8') as bindings_file:
+        content = bindings_file.read()
+        for match in typedef_re.finditer(content):
+          names.add(match.group(1))
 
     self.allowed_names = names
 
@@ -916,16 +919,18 @@ def find_headers_by_config(config_path):
   files_to_find = set()
   dirs_to_find = set()
   for pattern in selected:
-    assert pattern.startswith('**/')
-    if pattern.endswith('/*.h'):
-      log.debug('DIR %s', pattern[3:-4])
-      dirs_to_find.add('/' + pattern[3:-4])
-    elif pattern.endswith('.h') and pattern.count('/') == 1:
-      log.debug('FILE %s', pattern[3:])
-      files_to_find.add(pattern[3:])
+    if pattern.startswith('**/'):
+      if pattern.endswith('/*.h'):
+        log.debug('DIR %s', pattern[3:-4])
+        dirs_to_find.add('/' + pattern[3:-4])
+      elif pattern.endswith('.h') and pattern.count('/') == 1:
+        log.debug('FILE %s', pattern[3:])
+        files_to_find.add(pattern[3:])
+      else:
+        raise NotImplementedError(
+          f'config include-directives `{pattern}` not supported')
     else:
-      raise NotImplementedError(
-        f'config include-directives `{pattern}` not supported')
+      log.warning('Skipping unsupported pattern %s', pattern)
 
   items = set()
 
@@ -933,7 +938,8 @@ def find_headers_by_config(config_path):
     match = files_to_find.intersection(files)
     if match:
       log.debug('%s %d %d', match, len(match), len(files_to_find))
-      items.update(os.path.join(directory, m) for m in match)
+      # Include all headers in the directory to find related types (e.g. _common.h, _type.h)
+      items.add(os.path.join(directory, '*.h'))
     for p in dirs_to_find:
       if directory.endswith(p):
         log.debug('--- %s [%s] %s', directory, p, files)
