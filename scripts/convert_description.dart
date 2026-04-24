@@ -54,9 +54,16 @@ final _versionedTizenLibraryPathRegExp = RegExp(
 );
 final _listRegExp = RegExp(r'^\d+\.\s');
 final _topLevelDeclarationRegExp = RegExp(
-  r'^(typedef|(?:abstract|final)\s+class|class|enum)\s+',
+  r'^(typedef|(?:abstract|final|base)?\s*class|class|enum|extension|const|final|var|late)\s+',
 );
-final _primaryNativeClassRegExp = RegExp(r'^class\s+Tizen[0-9]+Native\b');
+final _primaryNativeClassRegExp = RegExp(r'^(?:final\s+)?class\s+Tizen[0-9]+Native\b');
+final _moduleBindingPathRegExp = RegExp(
+  r'(^|[\\/])lib[\\/]src[\\/]bindings[\\/](\d+\.\d+)[\\/]generated_bindings_(\w+)\.dart$',
+);
+final _mainClassRegExp = RegExp(r'^class\s+(Tizen\d+\w+)\b');
+final _alwaysHideFilesRegExp = RegExp(
+  r'(^|[\\/])lib[\\/]src[\\/](extensions|bindings[\\/]\d+\.\d+[\\/]generated_symbols)\.dart$',
+);
 final _publicTopLevelGetterRegExp = RegExp(
   r'^[A-Za-z][A-Za-z0-9_<>,?. ]+\s+get\s+[A-Za-z][A-Za-z0-9_]*\b',
 );
@@ -175,13 +182,17 @@ void main(List<String> args) {
         for (final entry in bindingDir.listSync()) {
           if (entry is File) {
             final fileName = p.basename(entry.path);
-            if (fileName.startsWith('generated_bindings') &&
-                fileName.endsWith('.dart')) {
+            if (fileName.endsWith('.dart')) {
               pathsToProcess.add(entry.path);
             }
           }
         }
-      } else {
+      }
+      final extensionsFile = File('lib/src/extensions.dart');
+      if (extensionsFile.existsSync()) {
+        pathsToProcess.add(extensionsFile.path);
+      }
+      if (pathsToProcess.isEmpty) {
         stderr.writeln(
           'Expected a Dart file path or version (e.g. "6.0"), got: $arg',
         );
@@ -220,18 +231,34 @@ List<String> convertDoxygenDocCommentLines(List<String> docLines) {
 
 /// Returns true when a doc-comment block contains recognized Doxygen markers.
 bool looksLikeDoxygenDocCommentBlock(List<String> docLines) {
+  var hasDoxygenTags = false;
+
   for (final line in docLines) {
     final stripped = _stripGeneratedDocLine(line).trim();
+
+    // If it already looks like converted Dartdoc, don't process it again.
+    if (stripped.startsWith('**Since Tizen:**') ||
+        stripped.startsWith('**Parameters:**') ||
+        stripped.startsWith('**Returns:**') ||
+        stripped.startsWith('**Remarks:**') ||
+        stripped.startsWith('**Return values:**') ||
+        stripped.startsWith('**See also:**') ||
+        stripped.startsWith('**Example:**') ||
+        stripped.contains('{@nodoc}') ||
+        stripped.contains('{@category')) {
+      return false;
+    }
+
     if (line.trim().startsWith('<') ||
         _doxygenTagRegExp.hasMatch(stripped) ||
         _inlineDoxygenTagRegExp.hasMatch(stripped) ||
-        _squareBracketLiteralRegExp.hasMatch(stripped) ||
+        RegExp(r'\[(in|out|in,out)\]').hasMatch(stripped) ||
         stripped.contains('```[')) {
-      return true;
+      hasDoxygenTags = true;
     }
   }
 
-  return false;
+  return hasDoxygenTags;
 }
 
 /// Converts all recognized Doxygen-style `///` blocks in a Dart source string.
@@ -274,11 +301,15 @@ String convertDoxygenCommentsInDartSource(String source, {String? path}) {
     output.addAll(converted.map((commentLine) => '$indent$commentLine'));
   }
 
-  final annotatedOutput = _shouldHideTopLevelGeneratedBindingsDeclarations(path)
-      ? _annotateGeneratedBindingsTopLevelDeclarations(output)
-      : _shouldHideVersionedTizenLibraryGetters(path)
-          ? _annotateVersionedTizenLibraryGetters(output)
-          : output;
+  final annotatedOutput = _isModuleBindingFile(path)
+      ? _annotateModuleBindingDeclarations(output, path)
+      : _isAlwaysHideFile(path)
+          ? _annotateAllAsNodoc(output)
+          : _shouldHideTopLevelGeneratedBindingsDeclarations(path)
+              ? _annotateGeneratedBindingsTopLevelDeclarations(output)
+              : _shouldHideVersionedTizenLibraryGetters(path)
+                  ? _annotateVersionedTizenLibraryGetters(output)
+                  : output;
   final normalizedOutput = _rewriteVersionedTizenLibraryName(
     annotatedOutput,
     path,
@@ -323,6 +354,103 @@ bool _shouldHideVersionedTizenLibraryGetters(String? path) {
   }
 
   return _versionedTizenLibraryPathRegExp.hasMatch(path);
+}
+
+bool _isModuleBindingFile(String? path) {
+  if (path == null) {
+    return false;
+  }
+  return _moduleBindingPathRegExp.hasMatch(path);
+}
+
+List<String> _annotateModuleBindingDeclarations(
+  List<String> lines,
+  String? path,
+) {
+  if (path == null) {
+    return lines;
+  }
+
+  final match = _moduleBindingPathRegExp.firstMatch(path);
+  if (match == null) {
+    return lines;
+  }
+
+  final version = match.group(2)!;
+  final moduleName = match.group(3)!;
+  final versionId = version.replaceAll('.', '_');
+
+  String? mainClassName;
+  for (final line in lines) {
+    final classMatch = _mainClassRegExp.firstMatch(line);
+    if (classMatch != null) {
+      mainClassName = classMatch.group(1);
+      break;
+    }
+  }
+
+  if (mainClassName == null) {
+    return lines;
+  }
+
+  final categoryTizen = '$version/tizen';
+  final output = <String>[];
+
+  // Add library directive if missing
+  if (!lines.any((l) => l.trim().startsWith('library '))) {
+    output.add('/// {@category $categoryTizen}');
+    output.add('library tizen_interop_$versionId.$moduleName;');
+    output.add('');
+  }
+
+  for (final line in lines) {
+    final trimmed = line.trimLeft();
+    final isTopLevelLine = trimmed == line;
+
+    if (isTopLevelLine &&
+        _topLevelDeclarationRegExp.hasMatch(trimmed) &&
+        !_primaryNativeClassRegExp.hasMatch(trimmed)) {
+      final isMainClass = _mainClassRegExp.hasMatch(trimmed);
+
+      if (isMainClass) {
+        if (output.isEmpty ||
+            !output.last.trim().contains('{@category $categoryTizen}')) {
+          output.add('/// {@category $categoryTizen}');
+        }
+      } else {
+        if (output.isEmpty || !output.last.trim().contains('{@nodoc}')) {
+          output.add('/// {@nodoc}');
+        }
+      }
+    }
+
+    output.add(line);
+  }
+
+  return output;
+}
+
+bool _isAlwaysHideFile(String? path) {
+  if (path == null) {
+    return false;
+  }
+  return _alwaysHideFilesRegExp.hasMatch(path);
+}
+
+List<String> _annotateAllAsNodoc(List<String> lines) {
+  final output = <String>[];
+  for (final line in lines) {
+    final trimmed = line.trimLeft();
+    final isTopLevelLine = trimmed == line;
+
+    if (isTopLevelLine && _topLevelDeclarationRegExp.hasMatch(trimmed)) {
+      if (output.isEmpty || !output.last.trim().contains('{@nodoc}')) {
+        output.add('/// {@nodoc}');
+      }
+    }
+    output.add(line);
+  }
+  return output;
 }
 
 List<String> _annotateGeneratedBindingsTopLevelDeclarations(
@@ -1066,7 +1194,15 @@ String _mergeDocText(String current, String next) {
   final nextTrimmed = next.trimLeft();
   if (nextTrimmed.startsWith('- ') ||
       nextTrimmed.startsWith('* ') ||
+      nextTrimmed.startsWith('```') ||
+      nextTrimmed.startsWith('< ') ||
+      nextTrimmed.startsWith('Privilege :') ||
+      nextTrimmed.startsWith('{@') ||
+      (nextTrimmed.startsWith('**') && nextTrimmed.contains(':**')) ||
       _listRegExp.hasMatch(nextTrimmed)) {
+    return '$current\n$next';
+  }
+  if (current.endsWith('\n') || current.trimRight().endsWith('<')) {
     return '$current\n$next';
   }
   return '$current $next';
