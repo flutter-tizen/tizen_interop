@@ -15,7 +15,7 @@ headers:
   entry-points:
     - 'entrypoints.h'
   include-directives:
-    - '**/shortcut_manager.h'
+    - '**/shortcut/*.h'
 
 compiler-opts:
   - '-m32'

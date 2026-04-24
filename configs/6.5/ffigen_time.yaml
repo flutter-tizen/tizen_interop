@@ -84,7 +84,6 @@ compiler-opts:
   - '-I./rootstraps/6.5/usr/include/web/'
   - '-I./rootstraps/6.5/usr/include/wifi-direct/'
   - '-I./rootstraps/6.5/usr/include/yaca/'
-
   # include EFL directories
   - '-I./rootstraps/6.5/usr/include/ecore-imf-1/'
   - '-I./rootstraps/6.5/usr/include/efl-1/'

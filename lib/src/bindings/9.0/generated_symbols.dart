@@ -1179,6 +1179,19 @@ const Map<String, List<String>> tizenCoreSymbols = {
   ],
 };
 
+const Map<String, List<String>> shortcutSymbols = {
+  'libshortcut.so.0': [
+    'shortcut_add_to_home',
+    'shortcut_add_to_home_widget',
+    'shortcut_get_list',
+    'shortcut_remove_from_home',
+    'shortcut_set_remove_cb',
+    'shortcut_set_request_cb',
+    'shortcut_unset_remove_cb',
+    'shortcut_unset_request_cb',
+  ],
+};
+
 const Map<String, List<String>> capiBaseCommonSymbols = {
   'libcapi-base-common.so.0': [
     'get_error_message',

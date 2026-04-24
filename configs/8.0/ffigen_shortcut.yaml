@@ -1,12 +1,14 @@
 preamble: |
-  // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
+  // Copyright 2026 Samsung Electronics Co., Ltd. All rights reserved.
   // Use of this source code is governed by a BSD-style license that can be
   // found in the LICENSE file.
   // ignore_for_file: type=lint, unused_element, unused_field
 
-name: 'Tizen80Dlog'
-description: 'Dart bindings for Tizen dlog APIs.'
-output: '../../lib/src/bindings/8.0/generated_bindings_dlog.dart'
+name: 'Tizen80Shortcut'
+
+description: 'Dart bindings for Tizen shortcut APIs.'
+
+output: '../../lib/src/bindings/8.0/generated_bindings_shortcut.dart'
 
 llvm-path:
   - '/usr/lib/llvm-12'
@@ -15,7 +17,7 @@ headers:
   entry-points:
     - 'entrypoints.h'
   include-directives:
-    - '**/dlog.h'
+    - '**/shortcut/*.h'
 
 compiler-opts:
   - '-m32'

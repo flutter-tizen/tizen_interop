@@ -1,4 +1,4 @@
-// Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
+// Copyright 2026 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 // ignore_for_file: type=lint, unused_element, unused_field
@@ -9,21 +9,22 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen shortcut APIs.
-class Tizen60Shortcut {
+class Tizen90Shortcut {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
       _lookup;
 
   /// The symbols are looked up in [dynamicLibrary].
-  Tizen60Shortcut(ffi.DynamicLibrary dynamicLibrary)
+  Tizen90Shortcut(ffi.DynamicLibrary dynamicLibrary)
       : _lookup = dynamicLibrary.lookup;
 
   /// The symbols are looked up with [lookup].
-  Tizen60Shortcut.fromLookup(
+  Tizen90Shortcut.fromLookup(
       ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
           lookup)
       : _lookup = lookup;
 
+  /// @deprecated Deprecated since 9.0
   /// @brief Adds a shortcut to home, asynchronously.
   /// @since_tizen 2.3
   /// @privlevel public
@@ -118,6 +119,7 @@ class Tizen60Shortcut {
       int Function(ffi.Pointer<ffi.Char>, int, ffi.Pointer<ffi.Char>,
           ffi.Pointer<ffi.Char>, int, result_cb, ffi.Pointer<ffi.Void>)>();
 
+  /// @deprecated Deprecated since 9.0
   /// @brief Adds a widget to home, asynchronously.
   /// @since_tizen 2.4
   /// @privlevel public
@@ -225,6 +227,7 @@ class Tizen60Shortcut {
               result_cb,
               ffi.Pointer<ffi.Void>)>();
 
+  /// @deprecated Deprecated since 9.0
   /// @brief Removes a shortcut from home, asynchronously.
   /// @details If the callback function registered for a widget, the shortcut deletion is possible.
   /// @since_tizen 3.0
@@ -288,6 +291,7 @@ class Tizen60Shortcut {
           int Function(
               ffi.Pointer<ffi.Char>, result_cb, ffi.Pointer<ffi.Void>)>();
 
+  /// @deprecated Deprecated since 9.0
   /// @brief Gets the preset list of shortcut template from the installed package, synchronously.
   /// @since_tizen 2.4
   /// @privlevel public
@@ -330,6 +334,7 @@ class Tizen60Shortcut {
       int Function(
           ffi.Pointer<ffi.Char>, shortcut_list_cb, ffi.Pointer<ffi.Void>)>();
 
+  /// @deprecated Deprecated since 9.0
   /// @brief Sets a callback function to listen requests from applications.
   /// @since_tizen 2.4
   /// @privlevel public
@@ -368,6 +373,7 @@ class Tizen60Shortcut {
   late final _shortcut_set_request_cb = _shortcut_set_request_cbPtr
       .asFunction<int Function(shortcut_request_cb, ffi.Pointer<ffi.Void>)>();
 
+  /// @deprecated Deprecated since 9.0
   /// @brief Unsets a callback for the shortcut request.
   /// @since_tizen 3.0
   /// @privlevel public
@@ -389,6 +395,7 @@ class Tizen60Shortcut {
   late final _shortcut_unset_request_cb =
       _shortcut_unset_request_cbPtr.asFunction<void Function()>();
 
+  /// @deprecated Deprecated since 9.0
   /// @brief Sets the callback function to listen the remove requests from applications.
   /// @since_tizen 3.0
   /// @privlevel public
@@ -427,6 +434,7 @@ class Tizen60Shortcut {
   late final _shortcut_set_remove_cb = _shortcut_set_remove_cbPtr
       .asFunction<int Function(shortcut_remove_cb, ffi.Pointer<ffi.Void>)>();
 
+  /// @deprecated Deprecated since 9.0
   /// @brief Unsets a callback for the shortcut remove.
   /// @since_tizen 3.0
   /// @privlevel public
@@ -449,6 +457,7 @@ class Tizen60Shortcut {
       _shortcut_unset_remove_cbPtr.asFunction<void Function()>();
 }
 
+/// @deprecated Deprecated since 9.0
 /// @brief Enumeration for values of shortcut response types.
 /// @since_tizen 2.3
 abstract class shortcut_error_e {
@@ -489,6 +498,7 @@ abstract class shortcut_error_e {
   static const int SHORTCUT_ERROR_COMM = -18218944;
 }
 
+/// @deprecated Deprecated since 9.0
 /// @brief Enumeration for shortcut types.
 /// @details Basically, two types of shortcuts are defined.
 /// Every homescreen developer should support these types of shortcuts.
@@ -504,6 +514,7 @@ abstract class shortcut_type {
   static const int LAUNCH_BY_URI = 1;
 }
 
+/// @deprecated Deprecated since 9.0
 /// @brief Enumeration for sizes of shortcut widget.
 /// @since_tizen 2.4
 abstract class shortcut_widget_size {
@@ -550,6 +561,7 @@ abstract class shortcut_widget_size {
   static const int WIDGET_SIZE_EASY_3x3 = 805568512;
 }
 
+/// @deprecated Deprecated since 9.0
 /// @brief Called to receive the result of shortcut_add_to_home().
 /// @since_tizen 2.3
 /// @param[in] ret The result value, it could be @c 0 if it succeeds to add a shortcut,
@@ -564,6 +576,7 @@ typedef result_cbFunction = ffi.Int Function(
 typedef Dartresult_cbFunction = int Function(
     int ret, ffi.Pointer<ffi.Void> user_data);
 
+/// @deprecated Deprecated since 9.0
 /// @brief Called to receive the result of shortcut_get_list().
 /// @since_tizen 2.4
 /// @param[in] package_name The name of package
@@ -591,6 +604,7 @@ typedef Dartshortcut_list_cbFunction = int Function(
     ffi.Pointer<ffi.Char> extra_data,
     ffi.Pointer<ffi.Void> user_data);
 
+/// @deprecated Deprecated since 9.0
 /// @brief Called to the add_to_home request.
 /// @details The homescreen should define a callback as this type and implement the service code
 /// for adding a new application shortcut.
@@ -632,6 +646,7 @@ typedef Dartshortcut_request_cbFunction = int Function(
     int allow_duplicate,
     ffi.Pointer<ffi.Void> user_data);
 
+/// @deprecated Deprecated since 9.0
 /// @brief Called to the shortcut_remove_from_home() request.
 /// @since_tizen 3.0
 /// @param[in] package_name The name of package
