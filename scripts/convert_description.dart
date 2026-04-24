@@ -1,6 +1,8 @@
 import 'dart:collection';
 import 'dart:io';
 
+import 'package:path/path.dart' as p;
+
 const _doxygenTags = <String>[
   'brief',
   'details',
@@ -50,7 +52,7 @@ final _codeBlockStartRegExp = RegExp(
 final _versionedTizenLibraryPathRegExp = RegExp(
   r'(^|[\\/])lib[\\/](\d+\.\d+)[\\/]tizen\.dart$',
 );
-final _pathSeparatorRegExp = RegExp(r'[\\/]');
+final _listRegExp = RegExp(r'^\d+\.\s');
 final _topLevelDeclarationRegExp = RegExp(
   r'^(typedef|(?:abstract|final)\s+class|class|enum)\s+',
 );
@@ -172,7 +174,7 @@ void main(List<String> args) {
       if (bindingDir.existsSync()) {
         for (final entry in bindingDir.listSync()) {
           if (entry is File) {
-            final fileName = entry.path.split(_pathSeparatorRegExp).last;
+            final fileName = p.basename(entry.path);
             if (fileName.startsWith('generated_bindings') &&
                 fileName.endsWith('.dart')) {
               pathsToProcess.add(entry.path);
@@ -311,7 +313,7 @@ bool _shouldHideTopLevelGeneratedBindingsDeclarations(String? path) {
     return false;
   }
 
-  final fileName = path.split(_pathSeparatorRegExp).last;
+  final fileName = p.basename(path);
   return fileName == 'generated_bindings.dart';
 }
 
@@ -1064,7 +1066,7 @@ String _mergeDocText(String current, String next) {
   final nextTrimmed = next.trimLeft();
   if (nextTrimmed.startsWith('- ') ||
       nextTrimmed.startsWith('* ') ||
-      RegExp(r'^\d+\.\s').hasMatch(nextTrimmed)) {
+      _listRegExp.hasMatch(nextTrimmed)) {
     return '$current\n$next';
   }
   return '$current $next';
