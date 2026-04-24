@@ -449,6 +449,8 @@ class Tizen80Tbm {
       _tbm_surface_get_formatPtr.asFunction<int Function(tbm_surface_h)>();
 }
 
+final class _tbm_surface extends ffi.Opaque {}
+
 /// @brief Enumeration for tbm_surface error type.
 /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
 abstract class tbm_surface_error_e {
@@ -544,11 +546,127 @@ typedef tbm_surface_plane_s = _tbm_surface_plane;
 /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
 typedef tbm_surface_h = ffi.Pointer<_tbm_surface>;
 
-final class _tbm_surface extends ffi.Opaque {}
-
 /// @brief Definition for the TBM surface information struct.
 /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
 typedef tbm_surface_info_s = _tbm_surface_info;
+
+const int TBM_FORMAT_C8 = 538982467;
+
+const int TBM_FORMAT_RGB332 = 943867730;
+
+const int TBM_FORMAT_BGR233 = 944916290;
+
+const int TBM_FORMAT_XRGB4444 = 842093144;
+
+const int TBM_FORMAT_XBGR4444 = 842089048;
+
+const int TBM_FORMAT_RGBX4444 = 842094674;
+
+const int TBM_FORMAT_BGRX4444 = 842094658;
+
+const int TBM_FORMAT_ARGB4444 = 842093121;
+
+const int TBM_FORMAT_ABGR4444 = 842089025;
+
+const int TBM_FORMAT_RGBA4444 = 842088786;
+
+const int TBM_FORMAT_BGRA4444 = 842088770;
+
+const int TBM_FORMAT_XRGB1555 = 892424792;
+
+const int TBM_FORMAT_XBGR1555 = 892420696;
+
+const int TBM_FORMAT_RGBX5551 = 892426322;
+
+const int TBM_FORMAT_BGRX5551 = 892426306;
+
+const int TBM_FORMAT_ARGB1555 = 892424769;
+
+const int TBM_FORMAT_ABGR1555 = 892420673;
+
+const int TBM_FORMAT_RGBA5551 = 892420434;
+
+const int TBM_FORMAT_BGRA5551 = 892420418;
+
+const int TBM_FORMAT_RGB565 = 909199186;
+
+const int TBM_FORMAT_BGR565 = 909199170;
+
+const int TBM_FORMAT_RGB888 = 875710290;
+
+const int TBM_FORMAT_BGR888 = 875710274;
+
+const int TBM_FORMAT_XRGB8888 = 875713112;
+
+const int TBM_FORMAT_XBGR8888 = 875709016;
+
+const int TBM_FORMAT_RGBX8888 = 875714642;
+
+const int TBM_FORMAT_BGRX8888 = 875714626;
+
+const int TBM_FORMAT_ARGB8888 = 875713089;
+
+const int TBM_FORMAT_ABGR8888 = 875708993;
+
+const int TBM_FORMAT_RGBA8888 = 875708754;
+
+const int TBM_FORMAT_BGRA8888 = 875708738;
+
+const int TBM_FORMAT_XRGB2101010 = 808669784;
+
+const int TBM_FORMAT_XBGR2101010 = 808665688;
+
+const int TBM_FORMAT_RGBX1010102 = 808671314;
+
+const int TBM_FORMAT_BGRX1010102 = 808671298;
+
+const int TBM_FORMAT_ARGB2101010 = 808669761;
+
+const int TBM_FORMAT_ABGR2101010 = 808665665;
+
+const int TBM_FORMAT_RGBA1010102 = 808665426;
+
+const int TBM_FORMAT_BGRA1010102 = 808665410;
+
+const int TBM_FORMAT_YUYV = 1448695129;
+
+const int TBM_FORMAT_YVYU = 1431918169;
+
+const int TBM_FORMAT_UYVY = 1498831189;
+
+const int TBM_FORMAT_VYUY = 1498765654;
+
+const int TBM_FORMAT_AYUV = 1448433985;
+
+const int TBM_FORMAT_NV12 = 842094158;
+
+const int TBM_FORMAT_NV21 = 825382478;
+
+const int TBM_FORMAT_NV16 = 909203022;
+
+const int TBM_FORMAT_NV61 = 825644622;
+
+const int TBM_FORMAT_YUV410 = 961959257;
+
+const int TBM_FORMAT_YVU410 = 961893977;
+
+const int TBM_FORMAT_YUV411 = 825316697;
+
+const int TBM_FORMAT_YVU411 = 825316953;
+
+const int TBM_FORMAT_YUV420 = 842093913;
+
+const int TBM_FORMAT_YVU420 = 842094169;
+
+const int TBM_FORMAT_YUV422 = 909202777;
+
+const int TBM_FORMAT_YVU422 = 909203033;
+
+const int TBM_FORMAT_YUV444 = 875713881;
+
+const int TBM_FORMAT_YVU444 = 875714137;
+
+const int TBM_FORMAT_NV12MT = 842091860;
 
 const int TBM_SURF_PLANE_MAX = 4;
 

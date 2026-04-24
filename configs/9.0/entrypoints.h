@@ -45,6 +45,7 @@
 #include <job_scheduler.h>
 #include <message_port.h>
 #include <notification.h>
+#include <notification_error.h>
 #include <notification_ex.h>
 #include <notification_ex_app_control_action.h>
 #include <notification_ex_button.h>
@@ -64,6 +65,8 @@
 #include <notification_ex_text.h>
 #include <notification_ex_time.h>
 #include <notification_ex_visibility_action.h>
+#include <notification_status.h>
+#include <notification_type.h>
 #include <package_archive_info.h>
 #include <package_manager.h>
 #include <rpc-port-parcel.h>
@@ -112,35 +115,52 @@
 #include <media_controller_metadata.h>
 #include <media_controller_playlist.h>
 #include <media_controller_server.h>
+#include <media_controller_type.h>
 #include <media_editor.h>
 #include <media_format.h>
 #include <media_packet.h>
 #include <mediademuxer.h>
 #include <mediamuxer.h>
-#include <metadata_editor.h>  //deprecated
+#include <metadata_editor.h>       //deprecated
+#include <metadata_editor_type.h>  //deprecated
 #include <metadata_extractor.h>
+#include <metadata_extractor_type.h>
 #include <mv_3d.h>
 #include <mv_barcode.h>
 #include <mv_barcode_detect.h>
 #include <mv_barcode_generate.h>
+#include <mv_barcode_type.h>
 #include <mv_common.h>
 #include <mv_face.h>  //deprecated
+#include <mv_face_detection.h>
+#include <mv_face_detection_type.h>
 #include <mv_face_recognition.h>
+#include <mv_face_recognition_type.h>
+#include <mv_face_type.h>  //deprecated
 #include <mv_facial_landmark.h>
+#include <mv_facial_landmark_type.h>
 #include <mv_image.h>  //deprecated
 #include <mv_image_classification.h>
-#include <mv_inference.h>  //deprecated
+#include <mv_image_classification_type.h>
+#include <mv_image_type.h>      //deprecated
+#include <mv_inference.h>       //deprecated
+#include <mv_inference_type.h>  //deprecated
 #include <mv_object_detection.h>
+#include <mv_object_detection_type.h>
 #include <mv_pose_landmark.h>
+#include <mv_pose_landmark_type.h>
 #include <mv_roi_tracker.h>
 #include <mv_surveillance.h>  //deprecated
 #include <player.h>
 #include <radio.h>
 #include <recorder.h>
 #include <scmirroring_sink.h>
+#include <scmirroring_type.h>
 #include <sound_manager.h>
 #include <sound_pool.h>
+#include <sound_pool_type.h>
 #include <thumbnail_util.h>
+#include <thumbnail_util_type.h>
 #include <tone_player.h>
 #include <wav_player.h>
 #include <webrtc.h>
@@ -148,6 +168,7 @@
 // Network
 #include <asp.h>  //deprecated
 #include <bluetooth.h>
+#include <bluetooth_type.h>
 #include <dns-sd.h>
 #include <inm.h>
 #include <iotcon.h>
@@ -245,6 +266,7 @@
 #include <storage.h>
 #include <system/resource-monitor.h>
 #include <system_info.h>
+#include <system_info_type.h>
 #include <system_settings.h>
 #include <trace.h>
 #include <update_control.h>
@@ -253,6 +275,7 @@
 // UI
 #include <eom.h>  // deprecated
 #include <tbm_surface.h>
+#include <tbm_type.h>
 
 // UIX
 #include <autofill.h>

@@ -33,6 +33,7 @@
 #include <job_scheduler.h>
 #include <message_port.h>
 #include <notification.h>
+#include <notification_error.h>
 #include <notification_ex.h>
 #include <notification_ex_app_control_action.h>
 #include <notification_ex_button.h>
@@ -52,6 +53,8 @@
 #include <notification_ex_text.h>
 #include <notification_ex_time.h>
 #include <notification_ex_visibility_action.h>
+#include <notification_status.h>
+#include <notification_type.h>
 #include <package_archive_info.h>
 #include <package_manager.h>
 #include <rpc-port-parcel.h>
@@ -62,6 +65,7 @@
 // Base
 #include <tizen.h>
 #include <tizen_error.h>
+#include <tizen_type.h>
 
 // Content
 #include <download.h>
@@ -76,6 +80,7 @@
 
 // Location
 #include <geofence_manager.h>
+#include <geofence_type.h>
 #include <locations.h>
 
 // Messaging
@@ -91,35 +96,46 @@
 #include <media_controller_metadata.h>
 #include <media_controller_playlist.h>
 #include <media_controller_server.h>
+#include <media_controller_type.h>
 #include <media_format.h>
 #include <media_packet.h>
 #include <media_streamer.h>
 #include <mediademuxer.h>
 #include <mediamuxer.h>
 #include <metadata_editor.h>
+#include <metadata_editor_type.h>
 #include <metadata_extractor.h>
+#include <metadata_extractor_type.h>
 #include <mv_barcode.h>
 #include <mv_barcode_detect.h>
 #include <mv_barcode_generate.h>
+#include <mv_barcode_type.h>
 #include <mv_common.h>
 #include <mv_face.h>
+#include <mv_face_type.h>
 #include <mv_image.h>
+#include <mv_image_type.h>
 #include <mv_inference.h>
+#include <mv_inference_type.h>
 #include <mv_surveillance.h>
 #include <player.h>
 #include <radio.h>
 #include <recorder.h>
 #include <scmirroring_sink.h>
+#include <scmirroring_type.h>
 #include <sound_manager.h>
 #include <sound_pool.h>
+#include <sound_pool_type.h>
 #include <streamrecorder.h>
 #include <thumbnail_util.h>
+#include <thumbnail_util_type.h>
 #include <tone_player.h>
 #include <wav_player.h>
 
 // Network
 #include <asp.h>
 #include <bluetooth.h>
+#include <bluetooth_type.h>
 #include <dns-sd.h>
 #include <http.h>
 #include <inm.h>
@@ -212,6 +228,7 @@
 #include <storage-expand.h>
 #include <storage.h>
 #include <system_info.h>
+#include <system_info_type.h>
 #include <system_settings.h>
 #include <trace.h>
 #include <update_control.h>
@@ -221,6 +238,7 @@
 #include <cbhm.h>
 #include <eom.h>
 #include <tbm_surface.h>
+#include <tbm_type.h>
 
 // UIX
 #include <autofill.h>

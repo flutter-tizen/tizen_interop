@@ -16,6 +16,7 @@ headers:
     - 'entrypoints.h'
   include-directives:
     - '**/mv_barcode_detect.h'
+    - '**/mv_barcode_type.h'
 
 library-imports:
   mv_common: 'generated_bindings_mv_common.dart'

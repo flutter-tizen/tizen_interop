@@ -369,6 +369,38 @@ class Tizen70CapiSystemInfo {
           int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Int32>)>();
 }
 
+/// @brief Enumeration for system information error codes.
+abstract class system_info_error_e {
+  /// < Successful
+  static const int SYSTEM_INFO_ERROR_NONE = 0;
+
+  /// < Invalid parameter
+  static const int SYSTEM_INFO_ERROR_INVALID_PARAMETER = -22;
+
+  /// < Out of memory
+  static const int SYSTEM_INFO_ERROR_OUT_OF_MEMORY = -12;
+
+  /// < An input/output error occurred when reading value from system
+  static const int SYSTEM_INFO_ERROR_IO_ERROR = -5;
+
+  /// < No permission to use the API
+  static const int SYSTEM_INFO_ERROR_PERMISSION_DENIED = -13;
+
+  /// < Not supported parameter (Since 3.0)
+  static const int SYSTEM_INFO_ERROR_NOT_SUPPORTED = -1073741822;
+}
+
+/// @internal
+/// @brief It is not decided if it should be opened to public.
+abstract class system_info_type_e {
+  static const int SYSTEM_INFO_TYPE_MIN = 0;
+  static const int SYSTEM_INFO_BOOL = 0;
+  static const int SYSTEM_INFO_INT = 1;
+  static const int SYSTEM_INFO_DOUBLE = 2;
+  static const int SYSTEM_INFO_STRING = 3;
+  static const int SYSTEM_INFO_TYPE_MAX = 4;
+}
+
 /// @internal
 /// @brief Enumeration for system information key.
 abstract class system_info_key_e {
@@ -416,15 +448,4 @@ abstract class system_info_key_e {
 
   /// < @internal Indicates whether the device supports tethering
   static const int SYSTEM_INFO_KEY_TETHERING_SUPPORTED = 14;
-}
-
-/// @internal
-/// @brief It is not decided if it should be opened to public.
-abstract class system_info_type_e {
-  static const int SYSTEM_INFO_TYPE_MIN = 0;
-  static const int SYSTEM_INFO_BOOL = 0;
-  static const int SYSTEM_INFO_INT = 1;
-  static const int SYSTEM_INFO_DOUBLE = 2;
-  static const int SYSTEM_INFO_STRING = 3;
-  static const int SYSTEM_INFO_TYPE_MAX = 4;
 }

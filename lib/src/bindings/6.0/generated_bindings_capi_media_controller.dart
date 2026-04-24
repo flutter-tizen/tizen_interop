@@ -6781,6 +6781,461 @@ class Tizen60CapiMediaController {
       .asFunction<int Function(mc_server_h, ffi.Pointer<ffi.Char>)>();
 }
 
+/// @brief Enumeration for the media controller error.
+/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+abstract class mc_error_e {
+  /// < Successful
+  static const int MEDIA_CONTROLLER_ERROR_NONE = 0;
+
+  /// < Invalid parameter
+  static const int MEDIA_CONTROLLER_ERROR_INVALID_PARAMETER = -22;
+
+  /// < Out of memory
+  static const int MEDIA_CONTROLLER_ERROR_OUT_OF_MEMORY = -12;
+
+  /// < Invalid Operation
+  static const int MEDIA_CONTROLLER_ERROR_INVALID_OPERATION = -38;
+
+  /// < No space left on device
+  static const int MEDIA_CONTROLLER_ERROR_FILE_NO_SPACE_ON_DEVICE = -28;
+
+  /// < Permission denied
+  static const int MEDIA_CONTROLLER_ERROR_PERMISSION_DENIED = -13;
+
+  /// < Limited by server application (since 5.5)
+  static const int MEDIA_CONTROLLER_ERROR_ABILITY_LIMITED_BY_SERVER_APP =
+      -50462719;
+}
+
+/// @brief Enumeration for the media controller server state.
+/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+abstract class mc_server_state_e {
+  /// < None state
+  static const int MC_SERVER_STATE_NONE = 0;
+
+  /// < Activate state
+  static const int MC_SERVER_STATE_ACTIVATE = 1;
+
+  /// < Deactivate state
+  static const int MC_SERVER_STATE_DEACTIVATE = 2;
+}
+
+/// @brief Enumeration for the media meta info.
+/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+abstract class mc_meta_e {
+  /// < Title
+  static const int MC_META_MEDIA_TITLE = 0;
+
+  /// < Artist
+  static const int MC_META_MEDIA_ARTIST = 1;
+
+  /// < Album
+  static const int MC_META_MEDIA_ALBUM = 2;
+
+  /// < Author
+  static const int MC_META_MEDIA_AUTHOR = 3;
+
+  /// < Genre
+  static const int MC_META_MEDIA_GENRE = 4;
+
+  /// < Duration
+  static const int MC_META_MEDIA_DURATION = 5;
+
+  /// < Date
+  static const int MC_META_MEDIA_DATE = 6;
+
+  /// < Copyright
+  static const int MC_META_MEDIA_COPYRIGHT = 7;
+
+  /// < Description
+  static const int MC_META_MEDIA_DESCRIPTION = 8;
+
+  /// < Track Number
+  static const int MC_META_MEDIA_TRACK_NUM = 9;
+
+  /// < Picture. Album Art
+  static const int MC_META_MEDIA_PICTURE = 10;
+
+  /// < Season (Since 5.5)
+  static const int MC_META_MEDIA_SEASON = 11;
+
+  /// < Episode (Since 5.5)
+  static const int MC_META_MEDIA_EPISODE = 12;
+
+  /// < Content resolution (Since 5.5)
+  static const int MC_META_MEDIA_RESOLUTION = 13;
+}
+
+/// @brief Enumeration for the media playback state.
+/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+abstract class mc_playback_states_e {
+  /// < None
+  static const int MC_PLAYBACK_STATE_NONE = 0;
+
+  /// < Playing
+  static const int MC_PLAYBACK_STATE_PLAYING = 1;
+
+  /// < Paused
+  static const int MC_PLAYBACK_STATE_PAUSED = 2;
+
+  /// < Stopped
+  static const int MC_PLAYBACK_STATE_STOPPED = 3;
+
+  /// < Moving to the next item (Since @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif)
+  static const int MC_PLAYBACK_STATE_MOVING_TO_NEXT = 8;
+
+  /// < Moving to the previous item (Since @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif)
+  static const int MC_PLAYBACK_STATE_MOVING_TO_PREVIOUS = 9;
+
+  /// < Fast forwarding (Since @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif)
+  static const int MC_PLAYBACK_STATE_FAST_FORWARDING = 10;
+
+  /// < Rewinding (Since @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif)
+  static const int MC_PLAYBACK_STATE_REWINDING = 11;
+
+  /// < Connecting (Since 6.0)
+  static const int MC_PLAYBACK_STATE_CONNECTING = 12;
+
+  /// < Buffering (Since 6.0)
+  static const int MC_PLAYBACK_STATE_BUFFERING = 13;
+
+  /// < Error (Since 6.0)
+  static const int MC_PLAYBACK_STATE_ERROR = 14;
+}
+
+/// @brief Enumeration for the media playback action.
+/// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+abstract class mc_playback_action_e {
+  /// < Play
+  static const int MC_PLAYBACK_ACTION_PLAY = 0;
+
+  /// < Pause
+  static const int MC_PLAYBACK_ACTION_PAUSE = 1;
+
+  /// < Stop
+  static const int MC_PLAYBACK_ACTION_STOP = 2;
+
+  /// < Next item
+  static const int MC_PLAYBACK_ACTION_NEXT = 3;
+
+  /// < Previous item
+  static const int MC_PLAYBACK_ACTION_PREV = 4;
+
+  /// < Fast forward
+  static const int MC_PLAYBACK_ACTION_FAST_FORWARD = 5;
+
+  /// < Rewind
+  static const int MC_PLAYBACK_ACTION_REWIND = 6;
+
+  /// < Play/Pause toggle
+  static const int MC_PLAYBACK_ACTION_TOGGLE_PLAY_PAUSE = 7;
+}
+
+/// @brief Enumeration for the shuffle mode.
+/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+abstract class mc_shuffle_mode_e {
+  /// < Shuffle mode on
+  static const int MC_SHUFFLE_MODE_ON = 0;
+
+  /// < Shuffle mode off
+  static const int MC_SHUFFLE_MODE_OFF = 1;
+}
+
+/// @brief Enumeration for the repeat mode.
+/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+abstract class mc_repeat_mode_e {
+  /// < Repeat mode on for all media
+  static const int MC_REPEAT_MODE_ON = 0;
+
+  /// < Repeat mode off
+  static const int MC_REPEAT_MODE_OFF = 1;
+
+  /// < Repeat mode on for one media (Since @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif)
+  static const int MC_REPEAT_MODE_ONE_MEDIA = 2;
+}
+
+/// @brief Enumeration for the subscription type.
+/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+abstract class mc_subscription_type_e {
+  /// < Server state
+  static const int MC_SUBSCRIPTION_TYPE_SERVER_STATE = 0;
+
+  /// < Playback
+  static const int MC_SUBSCRIPTION_TYPE_PLAYBACK = 1;
+
+  /// < Metadata
+  static const int MC_SUBSCRIPTION_TYPE_METADATA = 2;
+
+  /// < Shuffle mode
+  static const int MC_SUBSCRIPTION_TYPE_SHUFFLE_MODE = 3;
+
+  /// < Repeat mode
+  static const int MC_SUBSCRIPTION_TYPE_REPEAT_MODE = 4;
+
+  /// < Playlist (Since @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif)
+  static const int MC_SUBSCRIPTION_TYPE_PLAYLIST = 5;
+
+  /// < Playback ability (Since 5.0)
+  static const int MC_SUBSCRIPTION_TYPE_PLAYBACK_ABILITY = 6;
+
+  /// < Shuffle ability (Since 5.0) (Deprecated since 5.5. Use #MC_SUBSCRIPTION_TYPE_ABILITY_SUPPORT instead)
+  static const int MC_SUBSCRIPTION_TYPE_SHUFFLE_ABILITY = 7;
+
+  /// < Repeat ability (Since 5.0) (Deprecated since 5.5. Use #MC_SUBSCRIPTION_TYPE_ABILITY_SUPPORT instead)
+  static const int MC_SUBSCRIPTION_TYPE_REPEAT_ABILITY = 8;
+
+  /// < Ability support (Since 5.5)
+  static const int MC_SUBSCRIPTION_TYPE_ABILITY_SUPPORT = 9;
+
+  /// < Display mode ability (Since 5.5)
+  static const int MC_SUBSCRIPTION_TYPE_DISPLAY_MODE_ABILITY = 10;
+
+  /// < Display rotation ability (Since 5.5)
+  static const int MC_SUBSCRIPTION_TYPE_DISPLAY_ROTATION_ABILITY = 11;
+}
+
+/// @brief Enumeration for the playlist update mode.
+/// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+abstract class mc_playlist_update_mode_e {
+  /// < Create or Update playlist
+  static const int MC_PLAYLIST_UPDATED = 0;
+
+  /// < Remove playlist
+  static const int MC_PLAYLIST_REMOVED = 1;
+}
+
+/// @brief Enumeration for the content type of the content.
+/// @since_tizen 5.0
+abstract class mc_content_type_e {
+  /// < Image content type
+  static const int MC_CONTENT_TYPE_IMAGE = 0;
+
+  /// < Video content type
+  static const int MC_CONTENT_TYPE_VIDEO = 1;
+
+  /// < Music content type
+  static const int MC_CONTENT_TYPE_MUSIC = 2;
+
+  /// < Other content type
+  static const int MC_CONTENT_TYPE_OTHER = 3;
+
+  /// < Not decided
+  static const int MC_CONTENT_TYPE_UNDECIDED = 4;
+}
+
+/// @brief Enumeration for the content age rating of the content.
+/// @since_tizen 5.0
+abstract class mc_content_age_rating_e {
+  /// < Suitable for all ages
+  static const int MC_CONTENT_RATING_ALL = 0;
+
+  /// < Suitable for ages 1 and up
+  static const int MC_CONTENT_RATING_1_PLUS = 1;
+
+  /// < Suitable for ages 2 and up
+  static const int MC_CONTENT_RATING_2_PLUS = 2;
+
+  /// < Suitable for ages 3 and up
+  static const int MC_CONTENT_RATING_3_PLUS = 3;
+
+  /// < Suitable for ages 4 and up
+  static const int MC_CONTENT_RATING_4_PLUS = 4;
+
+  /// < Suitable for ages 5 and up
+  static const int MC_CONTENT_RATING_5_PLUS = 5;
+
+  /// < Suitable for ages 6 and up
+  static const int MC_CONTENT_RATING_6_PLUS = 6;
+
+  /// < Suitable for ages 7 and up
+  static const int MC_CONTENT_RATING_7_PLUS = 7;
+
+  /// < Suitable for ages 8 and up
+  static const int MC_CONTENT_RATING_8_PLUS = 8;
+
+  /// < Suitable for ages 9 and up
+  static const int MC_CONTENT_RATING_9_PLUS = 9;
+
+  /// < Suitable for ages 10 and up
+  static const int MC_CONTENT_RATING_10_PLUS = 10;
+
+  /// < Suitable for ages 11 and up
+  static const int MC_CONTENT_RATING_11_PLUS = 11;
+
+  /// < Suitable for ages 12 and up
+  static const int MC_CONTENT_RATING_12_PLUS = 12;
+
+  /// < Suitable for ages 13 and up
+  static const int MC_CONTENT_RATING_13_PLUS = 13;
+
+  /// < Suitable for ages 14 and up
+  static const int MC_CONTENT_RATING_14_PLUS = 14;
+
+  /// < Suitable for ages 15 and up
+  static const int MC_CONTENT_RATING_15_PLUS = 15;
+
+  /// < Suitable for ages 16 and up
+  static const int MC_CONTENT_RATING_16_PLUS = 16;
+
+  /// < Suitable for ages 17 and up
+  static const int MC_CONTENT_RATING_17_PLUS = 17;
+
+  /// < Suitable for ages 18 and up
+  static const int MC_CONTENT_RATING_18_PLUS = 18;
+
+  /// < Suitable for ages 19 and up
+  static const int MC_CONTENT_RATING_19_PLUS = 19;
+}
+
+/// @brief Enumeration for the support of the ability.
+/// @since_tizen 5.0
+abstract class mc_ability_support_e {
+  /// < Supported
+  static const int MC_ABILITY_SUPPORTED_YES = 0;
+
+  /// < Not supported
+  static const int MC_ABILITY_SUPPORTED_NO = 1;
+
+  /// < Not decided
+  static const int MC_ABILITY_SUPPORTED_UNDECIDED = 2;
+}
+
+/// @brief Enumeration for the ability.
+/// @since_tizen 5.5
+abstract class mc_ability_e {
+  /// < Shuffle
+  static const int MC_ABILITY_SHUFFLE = 0;
+
+  /// < Repeat
+  static const int MC_ABILITY_REPEAT = 1;
+
+  /// < Playback Position
+  static const int MC_ABILITY_PLAYBACK_POSITION = 2;
+
+  /// < Playlist
+  static const int MC_ABILITY_PLAYLIST = 3;
+
+  /// < Custom command from a client
+  static const int MC_ABILITY_CLIENT_CUSTOM = 4;
+
+  /// < Search
+  static const int MC_ABILITY_SEARCH = 5;
+
+  /// < Subtitles display
+  static const int MC_ABILITY_SUBTITLES = 6;
+
+  /// < 360 content mode display
+  static const int MC_ABILITY_360_MODE = 7;
+}
+
+/// @brief Enumeration for the search category.
+/// @since_tizen 5.0
+abstract class mc_search_category_e {
+  /// < No search category
+  static const int MC_SEARCH_NO_CATEGORY = 0;
+
+  /// < Search by content title
+  static const int MC_SEARCH_TITLE = 1;
+
+  /// < Search by content artist
+  static const int MC_SEARCH_ARTIST = 2;
+
+  /// < Search by content album
+  static const int MC_SEARCH_ALBUM = 3;
+
+  /// < Search by content genre
+  static const int MC_SEARCH_GENRE = 4;
+
+  /// < Search by Time Place Occasion
+  static const int MC_SEARCH_TPO = 5;
+}
+
+/// @brief Enumeration for the display mode.
+/// @since_tizen 5.5
+abstract class mc_display_mode_e {
+  /// < Letter box
+  static const int MC_DISPLAY_MODE_LETTER_BOX = 1;
+
+  /// < Origin size
+  static const int MC_DISPLAY_MODE_ORIGIN_SIZE = 2;
+
+  /// < Full-screen
+  static const int MC_DISPLAY_MODE_FULL_SCREEN = 4;
+
+  /// < Cropped full-screen
+  static const int MC_DISPLAY_MODE_CROPPED_FULL = 8;
+}
+
+/// @brief Enumeration for the display rotation.
+/// @since_tizen 5.5
+abstract class mc_display_rotation_e {
+  /// < Display is not rotated
+  static const int MC_DISPLAY_ROTATION_NONE = 1;
+
+  /// < Display is rotated 90 degrees
+  static const int MC_DISPLAY_ROTATION_90 = 2;
+
+  /// < Display is rotated 180 degrees
+  static const int MC_DISPLAY_ROTATION_180 = 4;
+
+  /// < Display is rotated 270 degrees
+  static const int MC_DISPLAY_ROTATION_270 = 8;
+}
+
+/// @brief The result codes of the reply for the command or the event.
+/// @since_tizen 6.0
+///
+/// @see mc_cmd_reply_received_cb()
+/// @see mc_client_send_event_reply()
+/// @see mc_server_event_reply_received_cb()
+/// @see mc_server_send_cmd_reply()
+abstract class mc_result_code_e {
+  /// < The command or the event has been successfully completed.
+  static const int MC_RESULT_CODE_SUCCESS = 0;
+
+  /// < The command or the event had already been completed.
+  static const int MC_RESULT_CODE_ALREADY_DONE = 200;
+
+  /// < The command or the event is aborted by some external event (e.g. aborted play command by incoming call).
+  static const int MC_RESULT_CODE_ABORTED = 300;
+
+  /// < The command or the event is denied due to application policy (e.g. cannot rewind in recording).
+  static const int MC_RESULT_CODE_DENIED = 301;
+
+  /// < The command or the event is not supported.
+  static const int MC_RESULT_CODE_NOT_SUPPORTED = 302;
+
+  /// < The command or the event is out of supported range or the limit is reached.
+  static const int MC_RESULT_CODE_INVALID = 303;
+
+  /// < Timeout has occurred.
+  static const int MC_RESULT_CODE_TIMEOUT = 400;
+
+  /// < The application has failed.
+  static const int MC_RESULT_CODE_APP_FAILED = 401;
+
+  /// < The command or the event has failed because the application has no media.
+  static const int MC_RESULT_CODE_NO_MEDIA = 402;
+
+  /// < The command or the event has failed because there is no audio output device.
+  static const int MC_RESULT_CODE_NO_AUDIO_OUTPUT_DEVICE = 403;
+
+  /// < The command or the event has failed because there is no peer.
+  static const int MC_RESULT_CODE_NO_PEER = 404;
+
+  /// < The network has failed.
+  static const int MC_RESULT_CODE_NETWORK_FAILED = 500;
+
+  /// < The application needs to have an account to which it's logged in.
+  static const int MC_RESULT_CODE_NO_ACCOUNT = 600;
+
+  /// < The application could not log in.
+  static const int MC_RESULT_CODE_LOGIN_FAILED = 601;
+
+  /// < Unknown error.
+  static const int MC_RESULT_CODE_UNKNOWN = 2147483647;
+}
+
 /// @brief The structure type for the media controller playlist handle.
 /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
 typedef mc_playlist_h = ffi.Pointer<ffi.Void>;
@@ -6848,141 +7303,13 @@ typedef mc_playlist_cbFunction = ffi.Bool Function(
 typedef Dartmc_playlist_cbFunction = bool Function(
     mc_playlist_h playlist, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Enumeration for the media meta info.
-/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-abstract class mc_meta_e {
-  /// < Title
-  static const int MC_META_MEDIA_TITLE = 0;
-
-  /// < Artist
-  static const int MC_META_MEDIA_ARTIST = 1;
-
-  /// < Album
-  static const int MC_META_MEDIA_ALBUM = 2;
-
-  /// < Author
-  static const int MC_META_MEDIA_AUTHOR = 3;
-
-  /// < Genre
-  static const int MC_META_MEDIA_GENRE = 4;
-
-  /// < Duration
-  static const int MC_META_MEDIA_DURATION = 5;
-
-  /// < Date
-  static const int MC_META_MEDIA_DATE = 6;
-
-  /// < Copyright
-  static const int MC_META_MEDIA_COPYRIGHT = 7;
-
-  /// < Description
-  static const int MC_META_MEDIA_DESCRIPTION = 8;
-
-  /// < Track Number
-  static const int MC_META_MEDIA_TRACK_NUM = 9;
-
-  /// < Picture. Album Art
-  static const int MC_META_MEDIA_PICTURE = 10;
-
-  /// < Season (Since 5.5)
-  static const int MC_META_MEDIA_SEASON = 11;
-
-  /// < Episode (Since 5.5)
-  static const int MC_META_MEDIA_EPISODE = 12;
-
-  /// < Content resolution (Since 5.5)
-  static const int MC_META_MEDIA_RESOLUTION = 13;
-}
-
 /// @brief The structure type for the media controller ability handle.
 /// @since_tizen 5.0
 typedef mc_playback_ability_h = ffi.Pointer<ffi.Void>;
 
-/// @brief Enumeration for the media playback action.
-/// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
-abstract class mc_playback_action_e {
-  /// < Play
-  static const int MC_PLAYBACK_ACTION_PLAY = 0;
-
-  /// < Pause
-  static const int MC_PLAYBACK_ACTION_PAUSE = 1;
-
-  /// < Stop
-  static const int MC_PLAYBACK_ACTION_STOP = 2;
-
-  /// < Next item
-  static const int MC_PLAYBACK_ACTION_NEXT = 3;
-
-  /// < Previous item
-  static const int MC_PLAYBACK_ACTION_PREV = 4;
-
-  /// < Fast forward
-  static const int MC_PLAYBACK_ACTION_FAST_FORWARD = 5;
-
-  /// < Rewind
-  static const int MC_PLAYBACK_ACTION_REWIND = 6;
-
-  /// < Play/Pause toggle
-  static const int MC_PLAYBACK_ACTION_TOGGLE_PLAY_PAUSE = 7;
-}
-
-/// @brief Enumeration for the support of the ability.
-/// @since_tizen 5.0
-abstract class mc_ability_support_e {
-  /// < Supported
-  static const int MC_ABILITY_SUPPORTED_YES = 0;
-
-  /// < Not supported
-  static const int MC_ABILITY_SUPPORTED_NO = 1;
-
-  /// < Not decided
-  static const int MC_ABILITY_SUPPORTED_UNDECIDED = 2;
-}
-
 /// @brief The structure type for the media controller search handle.
 /// @since_tizen 5.0
 typedef mc_search_h = ffi.Pointer<ffi.Void>;
-
-/// @brief Enumeration for the content type of the content.
-/// @since_tizen 5.0
-abstract class mc_content_type_e {
-  /// < Image content type
-  static const int MC_CONTENT_TYPE_IMAGE = 0;
-
-  /// < Video content type
-  static const int MC_CONTENT_TYPE_VIDEO = 1;
-
-  /// < Music content type
-  static const int MC_CONTENT_TYPE_MUSIC = 2;
-
-  /// < Other content type
-  static const int MC_CONTENT_TYPE_OTHER = 3;
-
-  /// < Not decided
-  static const int MC_CONTENT_TYPE_UNDECIDED = 4;
-}
-
-/// @brief Enumeration for the search category.
-/// @since_tizen 5.0
-abstract class mc_search_category_e {
-  /// < No search category
-  static const int MC_SEARCH_NO_CATEGORY = 0;
-
-  /// < Search by content title
-  static const int MC_SEARCH_TITLE = 1;
-
-  /// < Search by content artist
-  static const int MC_SEARCH_ARTIST = 2;
-
-  /// < Search by content album
-  static const int MC_SEARCH_ALBUM = 3;
-
-  /// < Search by content genre
-  static const int MC_SEARCH_GENRE = 4;
-
-  /// < Search by Time Place Occasion
-  static const int MC_SEARCH_TPO = 5;
-}
 
 /// @brief Called for every search condition information in the obtained list of search.
 /// @details Iterates over a search list.
@@ -7047,19 +7374,6 @@ typedef Dartmc_server_state_updated_cbFunction = void Function(
     ffi.Pointer<ffi.Char> server_name,
     int state,
     ffi.Pointer<ffi.Void> user_data);
-
-/// @brief Enumeration for the media controller server state.
-/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-abstract class mc_server_state_e {
-  /// < None state
-  static const int MC_SERVER_STATE_NONE = 0;
-
-  /// < Activate state
-  static const int MC_SERVER_STATE_ACTIVATE = 1;
-
-  /// < Deactivate state
-  static const int MC_SERVER_STATE_DEACTIVATE = 2;
-}
 
 /// @brief Called when the playback information of the media controller server is updated.
 /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
@@ -7146,16 +7460,6 @@ typedef Dartmc_shuffle_mode_updated_cbFunction = void Function(
     int mode,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Enumeration for the shuffle mode.
-/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-abstract class mc_shuffle_mode_e {
-  /// < Shuffle mode on
-  static const int MC_SHUFFLE_MODE_ON = 0;
-
-  /// < Shuffle mode off
-  static const int MC_SHUFFLE_MODE_OFF = 1;
-}
-
 /// @brief Called when the repeat mode of the media controller server is updated.
 /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
 ///
@@ -7180,19 +7484,6 @@ typedef Dartmc_repeat_mode_updated_cbFunction = void Function(
     ffi.Pointer<ffi.Char> server_name,
     int mode,
     ffi.Pointer<ffi.Void> user_data);
-
-/// @brief Enumeration for the repeat mode.
-/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-abstract class mc_repeat_mode_e {
-  /// < Repeat mode on for all media
-  static const int MC_REPEAT_MODE_ON = 0;
-
-  /// < Repeat mode off
-  static const int MC_REPEAT_MODE_OFF = 1;
-
-  /// < Repeat mode on for one media (Since @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif)
-  static const int MC_REPEAT_MODE_ONE_MEDIA = 2;
-}
 
 /// @brief Called when the playback ability support of the media controller server is updated.
 /// @since_tizen 5.0
@@ -7299,34 +7590,6 @@ typedef Dartmc_ability_support_updated_cbFunction = void Function(
     int support,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Enumeration for the ability.
-/// @since_tizen 5.5
-abstract class mc_ability_e {
-  /// < Shuffle
-  static const int MC_ABILITY_SHUFFLE = 0;
-
-  /// < Repeat
-  static const int MC_ABILITY_REPEAT = 1;
-
-  /// < Playback Position
-  static const int MC_ABILITY_PLAYBACK_POSITION = 2;
-
-  /// < Playlist
-  static const int MC_ABILITY_PLAYLIST = 3;
-
-  /// < Custom command from a client
-  static const int MC_ABILITY_CLIENT_CUSTOM = 4;
-
-  /// < Search
-  static const int MC_ABILITY_SEARCH = 5;
-
-  /// < Subtitles display
-  static const int MC_ABILITY_SUBTITLES = 6;
-
-  /// < 360 content mode display
-  static const int MC_ABILITY_360_MODE = 7;
-}
-
 /// @brief Called when a media controller server's supported items for an ability is updated.
 /// @since_tizen 5.5
 ///
@@ -7416,16 +7679,6 @@ typedef Dartmc_playlist_updated_cbFunction = void Function(
     mc_playlist_h playlist,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Enumeration for the playlist update mode.
-/// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
-abstract class mc_playlist_update_mode_e {
-  /// < Create or Update playlist
-  static const int MC_PLAYLIST_UPDATED = 0;
-
-  /// < Remove playlist
-  static const int MC_PLAYLIST_REMOVED = 1;
-}
-
 /// @brief Called when the status of a media controller server's boolean attribute (subtitles or 360 mode) is updated.
 /// @since_tizen 5.5
 ///
@@ -7473,22 +7726,6 @@ typedef Dartmc_display_mode_updated_cbFunction = void Function(
     int mode,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Enumeration for the display mode.
-/// @since_tizen 5.5
-abstract class mc_display_mode_e {
-  /// < Letter box
-  static const int MC_DISPLAY_MODE_LETTER_BOX = 1;
-
-  /// < Origin size
-  static const int MC_DISPLAY_MODE_ORIGIN_SIZE = 2;
-
-  /// < Full-screen
-  static const int MC_DISPLAY_MODE_FULL_SCREEN = 4;
-
-  /// < Cropped full-screen
-  static const int MC_DISPLAY_MODE_CROPPED_FULL = 8;
-}
-
 /// @brief Called when a media controller server's display rotation is updated.
 /// @since_tizen 5.5
 ///
@@ -7511,22 +7748,6 @@ typedef Dartmc_display_rotation_updated_cbFunction = void Function(
     ffi.Pointer<ffi.Char> server_name,
     int rotation,
     ffi.Pointer<ffi.Void> user_data);
-
-/// @brief Enumeration for the display rotation.
-/// @since_tizen 5.5
-abstract class mc_display_rotation_e {
-  /// < Display is not rotated
-  static const int MC_DISPLAY_ROTATION_NONE = 1;
-
-  /// < Display is rotated 90 degrees
-  static const int MC_DISPLAY_ROTATION_90 = 2;
-
-  /// < Display is rotated 180 degrees
-  static const int MC_DISPLAY_ROTATION_180 = 4;
-
-  /// < Display is rotated 270 degrees
-  static const int MC_DISPLAY_ROTATION_270 = 8;
-}
 
 /// @brief Called when receiving custom event of media controller servers.
 /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
@@ -7563,46 +7784,6 @@ typedef Dartmc_client_custom_event_received_cbFunction = void Function(
     ffi.Pointer<bundle.bundle> data,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Enumeration for the subscription type.
-/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-abstract class mc_subscription_type_e {
-  /// < Server state
-  static const int MC_SUBSCRIPTION_TYPE_SERVER_STATE = 0;
-
-  /// < Playback
-  static const int MC_SUBSCRIPTION_TYPE_PLAYBACK = 1;
-
-  /// < Metadata
-  static const int MC_SUBSCRIPTION_TYPE_METADATA = 2;
-
-  /// < Shuffle mode
-  static const int MC_SUBSCRIPTION_TYPE_SHUFFLE_MODE = 3;
-
-  /// < Repeat mode
-  static const int MC_SUBSCRIPTION_TYPE_REPEAT_MODE = 4;
-
-  /// < Playlist (Since @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif)
-  static const int MC_SUBSCRIPTION_TYPE_PLAYLIST = 5;
-
-  /// < Playback ability (Since 5.0)
-  static const int MC_SUBSCRIPTION_TYPE_PLAYBACK_ABILITY = 6;
-
-  /// < Shuffle ability (Since 5.0) (Deprecated since 5.5. Use #MC_SUBSCRIPTION_TYPE_ABILITY_SUPPORT instead)
-  static const int MC_SUBSCRIPTION_TYPE_SHUFFLE_ABILITY = 7;
-
-  /// < Repeat ability (Since 5.0) (Deprecated since 5.5. Use #MC_SUBSCRIPTION_TYPE_ABILITY_SUPPORT instead)
-  static const int MC_SUBSCRIPTION_TYPE_REPEAT_ABILITY = 8;
-
-  /// < Ability support (Since 5.5)
-  static const int MC_SUBSCRIPTION_TYPE_ABILITY_SUPPORT = 9;
-
-  /// < Display mode ability (Since 5.5)
-  static const int MC_SUBSCRIPTION_TYPE_DISPLAY_MODE_ABILITY = 10;
-
-  /// < Display rotation ability (Since 5.5)
-  static const int MC_SUBSCRIPTION_TYPE_DISPLAY_ROTATION_ABILITY = 11;
-}
-
 /// @brief Called when requesting the list of subscribed servers.
 /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
 ///
@@ -7625,107 +7806,6 @@ typedef mc_subscribed_server_cbFunction = ffi.Bool Function(
     ffi.Pointer<ffi.Char> server_name, ffi.Pointer<ffi.Void> user_data);
 typedef Dartmc_subscribed_server_cbFunction = bool Function(
     ffi.Pointer<ffi.Char> server_name, ffi.Pointer<ffi.Void> user_data);
-
-/// @brief Enumeration for the media playback state.
-/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-abstract class mc_playback_states_e {
-  /// < None
-  static const int MC_PLAYBACK_STATE_NONE = 0;
-
-  /// < Playing
-  static const int MC_PLAYBACK_STATE_PLAYING = 1;
-
-  /// < Paused
-  static const int MC_PLAYBACK_STATE_PAUSED = 2;
-
-  /// < Stopped
-  static const int MC_PLAYBACK_STATE_STOPPED = 3;
-
-  /// < Moving to the next item (Since @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif)
-  static const int MC_PLAYBACK_STATE_MOVING_TO_NEXT = 8;
-
-  /// < Moving to the previous item (Since @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif)
-  static const int MC_PLAYBACK_STATE_MOVING_TO_PREVIOUS = 9;
-
-  /// < Fast forwarding (Since @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif)
-  static const int MC_PLAYBACK_STATE_FAST_FORWARDING = 10;
-
-  /// < Rewinding (Since @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif)
-  static const int MC_PLAYBACK_STATE_REWINDING = 11;
-
-  /// < Connecting (Since 6.0)
-  static const int MC_PLAYBACK_STATE_CONNECTING = 12;
-
-  /// < Buffering (Since 6.0)
-  static const int MC_PLAYBACK_STATE_BUFFERING = 13;
-
-  /// < Error (Since 6.0)
-  static const int MC_PLAYBACK_STATE_ERROR = 14;
-}
-
-/// @brief Enumeration for the content age rating of the content.
-/// @since_tizen 5.0
-abstract class mc_content_age_rating_e {
-  /// < Suitable for all ages
-  static const int MC_CONTENT_RATING_ALL = 0;
-
-  /// < Suitable for ages 1 and up
-  static const int MC_CONTENT_RATING_1_PLUS = 1;
-
-  /// < Suitable for ages 2 and up
-  static const int MC_CONTENT_RATING_2_PLUS = 2;
-
-  /// < Suitable for ages 3 and up
-  static const int MC_CONTENT_RATING_3_PLUS = 3;
-
-  /// < Suitable for ages 4 and up
-  static const int MC_CONTENT_RATING_4_PLUS = 4;
-
-  /// < Suitable for ages 5 and up
-  static const int MC_CONTENT_RATING_5_PLUS = 5;
-
-  /// < Suitable for ages 6 and up
-  static const int MC_CONTENT_RATING_6_PLUS = 6;
-
-  /// < Suitable for ages 7 and up
-  static const int MC_CONTENT_RATING_7_PLUS = 7;
-
-  /// < Suitable for ages 8 and up
-  static const int MC_CONTENT_RATING_8_PLUS = 8;
-
-  /// < Suitable for ages 9 and up
-  static const int MC_CONTENT_RATING_9_PLUS = 9;
-
-  /// < Suitable for ages 10 and up
-  static const int MC_CONTENT_RATING_10_PLUS = 10;
-
-  /// < Suitable for ages 11 and up
-  static const int MC_CONTENT_RATING_11_PLUS = 11;
-
-  /// < Suitable for ages 12 and up
-  static const int MC_CONTENT_RATING_12_PLUS = 12;
-
-  /// < Suitable for ages 13 and up
-  static const int MC_CONTENT_RATING_13_PLUS = 13;
-
-  /// < Suitable for ages 14 and up
-  static const int MC_CONTENT_RATING_14_PLUS = 14;
-
-  /// < Suitable for ages 15 and up
-  static const int MC_CONTENT_RATING_15_PLUS = 15;
-
-  /// < Suitable for ages 16 and up
-  static const int MC_CONTENT_RATING_16_PLUS = 16;
-
-  /// < Suitable for ages 17 and up
-  static const int MC_CONTENT_RATING_17_PLUS = 17;
-
-  /// < Suitable for ages 18 and up
-  static const int MC_CONTENT_RATING_18_PLUS = 18;
-
-  /// < Suitable for ages 19 and up
-  static const int MC_CONTENT_RATING_19_PLUS = 19;
-}
 
 /// @brief Called when requesting the list of created servers.
 /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
@@ -8131,3 +8211,5 @@ typedef Dartmc_server_search_cmd_received_cbFunction = void Function(
     ffi.Pointer<ffi.Char> request_id,
     mc_search_h search,
     ffi.Pointer<ffi.Void> user_data);
+
+const int MEDIA_CONTROLLER_ERROR_CLASS = -50462720;

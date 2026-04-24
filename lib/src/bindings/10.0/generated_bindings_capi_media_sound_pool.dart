@@ -886,10 +886,54 @@ class Tizen100CapiMediaSoundPool {
 }
 
 /// @deprecated Deprecated since 10.0
-/// @brief Sound pool handle type.
+/// @brief Enumeration for Tizen Sound Pool error.
 ///
 /// @since_tizen 4.0
-typedef sound_pool_h = ffi.Pointer<ffi.Void>;
+abstract class sound_pool_error_e {
+  static const int SOUND_POOL_ERROR_NONE = 0;
+  static const int SOUND_POOL_ERROR_KEY_NOT_AVAILABLE = -126;
+  static const int SOUND_POOL_ERROR_OUT_OF_MEMORY = -12;
+  static const int SOUND_POOL_ERROR_INVALID_PARAMETER = -22;
+  static const int SOUND_POOL_ERROR_INVALID_OPERATION = -38;
+  static const int SOUND_POOL_ERROR_NOT_PERMITTED = -1;
+  static const int SOUND_POOL_ERROR_NO_SUCH_FILE = -2;
+}
+
+/// @deprecated Deprecated since 10.0
+/// @brief Enumeration of sound pool stream state.
+///
+/// @since_tizen 4.0
+abstract class sound_pool_stream_state_e {
+  /// < Stream state isn't determined
+  static const int SOUND_POOL_STREAM_STATE_NONE = 0;
+
+  /// < Stream state is playing
+  static const int SOUND_POOL_STREAM_STATE_PLAYING = 1;
+
+  /// < Stream state is paused
+  static const int SOUND_POOL_STREAM_STATE_PAUSED = 2;
+
+  /// < Stream state is stopped
+  static const int SOUND_POOL_STREAM_STATE_STOPPED = 3;
+
+  /// < Stream state is finished
+  static const int SOUND_POOL_STREAM_STATE_FINISHED = 4;
+
+  /// < Stream state is suspended
+  static const int SOUND_POOL_STREAM_STATE_SUSPENDED = 5;
+}
+
+/// @deprecated Deprecated since 10.0
+/// @brief Enumeration of sound pool stream priority policy.
+///
+/// @since_tizen 4.0
+abstract class sound_pool_stream_priority_policy_e {
+  /// < Stream priority policy is mute
+  static const int SOUND_POOL_STREAM_PRIORITY_POLICY_MUTE = 0;
+
+  /// < Stream priority policy is suspended
+  static const int SOUND_POOL_STREAM_PRIORITY_POLICY_SUSPENDED = 1;
+}
 
 /// @deprecated Deprecated since 10.0
 /// @brief Enumeration of sound pool state.
@@ -902,6 +946,12 @@ abstract class sound_pool_state_e {
   /// < Sound pool inactive state: streams can't be played
   static const int SOUND_POOL_STATE_INACTIVE = 1;
 }
+
+/// @deprecated Deprecated since 10.0
+/// @brief Sound pool handle type.
+///
+/// @since_tizen 4.0
+typedef sound_pool_h = ffi.Pointer<ffi.Void>;
 
 /// @deprecated Deprecated since 10.0
 /// @brief Called when the sound pool state is changed.
@@ -933,18 +983,6 @@ typedef Dartsound_pool_state_changed_cbFunction = void Function(
     int prev_state,
     int cur_state,
     ffi.Pointer<ffi.Void> user_data);
-
-/// @deprecated Deprecated since 10.0
-/// @brief Enumeration of sound pool stream priority policy.
-///
-/// @since_tizen 4.0
-abstract class sound_pool_stream_priority_policy_e {
-  /// < Stream priority policy is mute
-  static const int SOUND_POOL_STREAM_PRIORITY_POLICY_MUTE = 0;
-
-  /// < Stream priority policy is suspended
-  static const int SOUND_POOL_STREAM_PRIORITY_POLICY_SUSPENDED = 1;
-}
 
 /// @deprecated Deprecated since 10.0
 /// @brief Called when the sound pool stream state is changed.
@@ -979,27 +1017,3 @@ typedef Dartsound_pool_stream_state_changed_cbFunction = void Function(
     int prev_state,
     int cur_state,
     ffi.Pointer<ffi.Void> user_data);
-
-/// @deprecated Deprecated since 10.0
-/// @brief Enumeration of sound pool stream state.
-///
-/// @since_tizen 4.0
-abstract class sound_pool_stream_state_e {
-  /// < Stream state isn't determined
-  static const int SOUND_POOL_STREAM_STATE_NONE = 0;
-
-  /// < Stream state is playing
-  static const int SOUND_POOL_STREAM_STATE_PLAYING = 1;
-
-  /// < Stream state is paused
-  static const int SOUND_POOL_STREAM_STATE_PAUSED = 2;
-
-  /// < Stream state is stopped
-  static const int SOUND_POOL_STREAM_STATE_STOPPED = 3;
-
-  /// < Stream state is finished
-  static const int SOUND_POOL_STREAM_STATE_FINISHED = 4;
-
-  /// < Stream state is suspended
-  static const int SOUND_POOL_STREAM_STATE_SUSPENDED = 5;
-}

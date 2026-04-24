@@ -1059,30 +1059,6 @@ class Tizen100CapiMediaScreenMirroring {
           int Function(scmirroring_sink_h, ffi.Pointer<ffi.Int32>)>();
 }
 
-/// @brief	The handle to the screen mirroring sink.
-/// @since_tizen 2.4
-typedef scmirroring_sink_h = ffi.Pointer<ffi.Void>;
-
-/// @brief Called when state of screen mirroring sink handle is changed.
-/// @since_tizen 2.4
-///
-/// @details This callback is called for state and error of screen mirroring sink will be delivered together.
-/// Error can be handled by return value of CAPIs. so there is no need to handle it here.
-///
-/// @param[in] error     The error code
-/// @param[in] state     The screen mirroring sink state
-/// @param[in] user_data The user data passed from the scmirroring_sink_set_state_cb() function
-///
-/// @pre scmirroring_sink_create()
-///
-/// @see scmirroring_sink_create()
-typedef scmirroring_sink_state_cb
-    = ffi.Pointer<ffi.NativeFunction<scmirroring_sink_state_cbFunction>>;
-typedef scmirroring_sink_state_cbFunction = ffi.Void Function(
-    ffi.Int32 error, ffi.Int32 state, ffi.Pointer<ffi.Void> user_data);
-typedef Dartscmirroring_sink_state_cbFunction = void Function(
-    int error, int state, ffi.Pointer<ffi.Void> user_data);
-
 /// @brief Enumeration to provide screen mirroring error information.
 /// @since_tizen 2.4
 abstract class scmirroring_error_e {
@@ -1135,6 +1111,41 @@ abstract class scmirroring_sink_state_e {
   /// < Screen mirroring is disconnected
   static const int SCMIRRORING_SINK_STATE_DISCONNECTED = 6;
   static const int SCMIRRORING_SINK_STATE_MAX = 7;
+}
+
+/// @brief Enumeration for screen mirroring resolution.
+/// @since_tizen 2.4
+abstract class scmirroring_resolution_e {
+  static const int SCMIRRORING_RESOLUTION_UNKNOWN = 0;
+
+  /// < W-1920, H-1080, 30 fps
+  static const int SCMIRRORING_RESOLUTION_1920x1080_P30 = 1;
+
+  /// < W-1280, H-720, 30 fps
+  static const int SCMIRRORING_RESOLUTION_1280x720_P30 = 2;
+
+  /// < W-960, H-540, 30 fps
+  static const int SCMIRRORING_RESOLUTION_960x540_P30 = 4;
+
+  /// < W-864, H-480, 30 fps
+  static const int SCMIRRORING_RESOLUTION_864x480_P30 = 8;
+
+  /// < W-720, H-480, 30 fps
+  static const int SCMIRRORING_RESOLUTION_720x480_P60 = 16;
+
+  /// < W-640, H-480, 60 fps
+  static const int SCMIRRORING_RESOLUTION_640x480_P60 = 32;
+
+  /// < W-640, H-360, 30 fps
+  static const int SCMIRRORING_RESOLUTION_640x360_P30 = 64;
+  static const int SCMIRRORING_RESOLUTION_MAX = 128;
+}
+
+/// @brief Ability to send to multisink.
+/// @since_tizen 3.0
+abstract class scmirroring_multisink_e {
+  static const int SCMIRRORING_MULTISINK_DISABLE = 0;
+  static const int SCMIRRORING_MULTISINK_ENABLE = 1;
 }
 
 /// @brief Enumeration for screen mirroring display surface type.
@@ -1199,16 +1210,6 @@ abstract class scmirroring_device_type_e {
   static const int SCMIRRORING_DEVICE_TYPE_MOBILE = 2;
 }
 
-/// @brief Enumeration for screen mirroring video codec.
-/// @since_tizen 2.4
-abstract class scmirroring_video_codec_e {
-  /// < Screen mirroring is not negotiated yet
-  static const int SCMIRRORING_VIDEO_CODEC_NONE = 0;
-
-  /// < H.264 codec for video
-  static const int SCMIRRORING_VIDEO_CODEC_H264 = 1;
-}
-
 /// @brief Enumeration for screen mirroring audio codec.
 /// @since_tizen 2.4
 abstract class scmirroring_audio_codec_e {
@@ -1224,3 +1225,57 @@ abstract class scmirroring_audio_codec_e {
   /// < LPCM codec for audio
   static const int SCMIRRORING_AUDIO_CODEC_LPCM = 3;
 }
+
+/// @brief Enumeration for screen mirroring video codec.
+/// @since_tizen 2.4
+abstract class scmirroring_video_codec_e {
+  /// < Screen mirroring is not negotiated yet
+  static const int SCMIRRORING_VIDEO_CODEC_NONE = 0;
+
+  /// < H.264 codec for video
+  static const int SCMIRRORING_VIDEO_CODEC_H264 = 1;
+}
+
+/// @brief Enumeration for screen mirroring direct streaming mode.
+/// @since_tizen 3.0
+abstract class scmirroring_direct_streaming_e {
+  /// < Disable screen mirroring direct streaming mode
+  static const int SCMIRRORING_DIRECT_STREAMING_DISABLED = 0;
+
+  /// < Enable direct streaming for files
+  static const int SCMIRRORING_DIRECT_STREAMING_ENABLED = 1;
+}
+
+/// @brief Enumeration for screen mirroring AV streaming transport.
+/// @since_tizen 3.0
+abstract class scmirroring_av_transport_e {
+  /// < UDP transport for AV streaming data
+  static const int SCMIRRORING_AV_TRANSPORT_UDP = 0;
+
+  /// < TCP transport for AV streaming data
+  static const int SCMIRRORING_AV_TRANSPORT_TCP = 1;
+}
+
+/// @brief	The handle to the screen mirroring sink.
+/// @since_tizen 2.4
+typedef scmirroring_sink_h = ffi.Pointer<ffi.Void>;
+
+/// @brief Called when state of screen mirroring sink handle is changed.
+/// @since_tizen 2.4
+///
+/// @details This callback is called for state and error of screen mirroring sink will be delivered together.
+/// Error can be handled by return value of CAPIs. so there is no need to handle it here.
+///
+/// @param[in] error     The error code
+/// @param[in] state     The screen mirroring sink state
+/// @param[in] user_data The user data passed from the scmirroring_sink_set_state_cb() function
+///
+/// @pre scmirroring_sink_create()
+///
+/// @see scmirroring_sink_create()
+typedef scmirroring_sink_state_cb
+    = ffi.Pointer<ffi.NativeFunction<scmirroring_sink_state_cbFunction>>;
+typedef scmirroring_sink_state_cbFunction = ffi.Void Function(
+    ffi.Int32 error, ffi.Int32 state, ffi.Pointer<ffi.Void> user_data);
+typedef Dartscmirroring_sink_state_cbFunction = void Function(
+    int error, int state, ffi.Pointer<ffi.Void> user_data);

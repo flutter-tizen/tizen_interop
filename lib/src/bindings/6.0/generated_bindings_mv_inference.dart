@@ -821,6 +821,179 @@ class Tizen60MvInference {
           ffi.Pointer<ffi.Float>)>();
 }
 
+/// @brief Enumeration for inference backend.
+/// #MV_INFERENCE_BACKEND_OPENCV An open source computer vision and machine learning
+/// software library.
+/// (https://opencv.org/about/)
+/// #MV_INFERENCE_BACKEND_TFLITE Google-introduced open source inference engine for embedded systems,
+/// which runs Tensorflow Lite model.
+/// (https://www.tensorflow.org/lite/guide/get_started)
+/// #MV_INFERENCE_BACKEND_ARMNN ARM-introduced open source inference engine for CPUs, GPUs and NPUs, which
+/// enables efficient translation of existing neural network frameworks
+/// such as TensorFlow, TensorFlow Lite and Caffes, allowing them to
+/// run efficiently without modification on Embedded hardware.
+/// (https://developer.arm.com/ip-products/processors/machine-learning/arm-nn)
+/// #MV_INFERENCE_BACKEND_MLAPI Samsung-introduced open source ML single API framework of NNStreamer, which
+/// runs various NN models via tensor filters of NNStreamer.
+/// (https://github.com/nnstreamer/nnstreamer)
+/// #MV_INFERENCE_BACKEND_ONE Samsung-introduced open source inference engine called On-device Neural Engine, which
+/// performs inference of a given NN model on various devices such as CPU, GPU, DSP and NPU.
+/// (https://github.com/Samsung/ONE)
+///
+/// @since_tizen 5.5
+///
+/// @see mv_inference_prepare()
+abstract class mv_inference_backend_type_e {
+  /// < None
+  static const int MV_INFERENCE_BACKEND_NONE = -1;
+
+  /// < OpenCV
+  static const int MV_INFERENCE_BACKEND_OPENCV = 0;
+
+  /// < TensorFlow-Lite
+  static const int MV_INFERENCE_BACKEND_TFLITE = 1;
+
+  /// < ARMNN (Since 6.0)
+  static const int MV_INFERENCE_BACKEND_ARMNN = 2;
+
+  /// < ML Single API of NNStreamer (Since 6.0)
+  static const int MV_INFERENCE_BACKEND_MLAPI = 3;
+
+  /// < On-device Neural Engine (Since 6.0)
+  static const int MV_INFERENCE_BACKEND_ONE = 4;
+
+  /// < Backend MAX
+  static const int MV_INFERENCE_BACKEND_MAX = 5;
+}
+
+/// @deprecated Deprecated since 6.0. Use #mv_inference_target_device_e instead.
+/// @brief Enumeration for inference target.
+///
+/// @since_tizen 5.5
+abstract class mv_inference_target_type_e {
+  /// < None
+  static const int MV_INFERENCE_TARGET_NONE = -1;
+
+  /// < CPU
+  static const int MV_INFERENCE_TARGET_CPU = 0;
+
+  /// < GPU
+  static const int MV_INFERENCE_TARGET_GPU = 1;
+
+  /// < CUSTOM
+  static const int MV_INFERENCE_TARGET_CUSTOM = 2;
+
+  /// < Target MAX
+  static const int MV_INFERENCE_TARGET_MAX = 3;
+}
+
+/// @brief Enumeration for inference target.
+///
+/// @since_tizen 6.0
+abstract class mv_inference_target_device_e {
+  /// < None
+  static const int MV_INFERENCE_TARGET_DEVICE_NONE = 0;
+
+  /// < CPU
+  static const int MV_INFERENCE_TARGET_DEVICE_CPU = 1;
+
+  /// < GPU
+  static const int MV_INFERENCE_TARGET_DEVICE_GPU = 2;
+
+  /// < CUSTOM
+  static const int MV_INFERENCE_TARGET_DEVICE_CUSTOM = 4;
+
+  /// < Target MAX
+  static const int MV_INFERENCE_TARGET_DEVICE_MAX = 8;
+}
+
+/// @brief Enumeration for input data type.
+///
+/// @since_tizen 6.0
+abstract class mv_inference_data_type_e {
+  /// < Data type of a given pre-trained model is float.
+  static const int MV_INFERENCE_DATA_FLOAT32 = 0;
+
+  /// < Data type of a given pre-trained model is unsigned char.
+  static const int MV_INFERENCE_DATA_UINT8 = 1;
+}
+
+/// @brief Enumeration for human pose landmark.
+///
+/// @since_tizen 6.0
+abstract class mv_inference_human_pose_landmark_e {
+  /// < Head of human pose
+  static const int MV_INFERENCE_HUMAN_POSE_HEAD = 1;
+
+  /// < Neck of human pose
+  static const int MV_INFERENCE_HUMAN_POSE_NECK = 2;
+
+  /// < Thorax of human pose
+  static const int MV_INFERENCE_HUMAN_POSE_THORAX = 3;
+
+  /// < Right shoulder of human pose
+  static const int MV_INFERENCE_HUMAN_POSE_RIGHT_SHOULDER = 4;
+
+  /// < Right elbow of human pose
+  static const int MV_INFERENCE_HUMAN_POSE_RIGHT_ELBOW = 5;
+
+  /// < Right wrist of human pose
+  static const int MV_INFERENCE_HUMAN_POSE_RIGHT_WRIST = 6;
+
+  /// < Left shoulder of human pose
+  static const int MV_INFERENCE_HUMAN_POSE_LEFT_SHOULDER = 7;
+
+  /// < Left elbow of human pose
+  static const int MV_INFERENCE_HUMAN_POSE_LEFT_ELBOW = 8;
+
+  /// < Left wrist of human pose
+  static const int MV_INFERENCE_HUMAN_POSE_LEFT_WRIST = 9;
+
+  /// < Pelvis of human pose
+  static const int MV_INFERENCE_HUMAN_POSE_PELVIS = 10;
+
+  /// < Right hip of human pose
+  static const int MV_INFERENCE_HUMAN_POSE_RIGHT_HIP = 11;
+
+  /// < Right knee of human pose
+  static const int MV_INFERENCE_HUMAN_POSE_RIGHT_KNEE = 12;
+
+  /// < Right ankle of human pose
+  static const int MV_INFERENCE_HUMAN_POSE_RIGHT_ANKLE = 13;
+
+  /// < Left hip of human pose
+  static const int MV_INFERENCE_HUMAN_POSE_LEFT_HIP = 14;
+
+  /// < Left knee of human pose
+  static const int MV_INFERENCE_HUMAN_POSE_LEFT_KNEE = 15;
+
+  /// < Left ankle of human pose
+  static const int MV_INFERENCE_HUMAN_POSE_LEFT_ANKLE = 16;
+}
+
+/// @brief Enumeration for human body parts.
+///
+/// @since_tizen 6.0
+abstract class mv_inference_human_body_part_e {
+  /// < HEAD, NECK, and THORAX
+  static const int MV_INFERENCE_HUMAN_BODY_PART_HEAD = 1;
+
+  /// < RIGHT SHOULDER, ELBOW, and WRIST
+  static const int MV_INFERENCE_HUMAN_BODY_PART_ARM_RIGHT = 2;
+
+  /// < LEFT SHOULDER, ELBOW, and WRIST
+  static const int MV_INFERENCE_HUMAN_BODY_PART_ARM_LEFT = 4;
+
+  /// < THORAX, PELVIS, RIGHT HIP, and LEFT HIP
+  static const int MV_INFERENCE_HUMAN_BODY_PART_BODY = 8;
+
+  /// < RIGHT HIP, KNEE, and ANKLE
+  static const int MV_INFERENCE_HUMAN_BODY_PART_LEG_RIGHT = 16;
+
+  /// < LEFT HIP, KNEE, and ANKLE
+  static const int MV_INFERENCE_HUMAN_BODY_PART_LEG_LEFT = 32;
+}
+
 /// @brief The inference handle.
 /// @details Contains information about location of
 /// detected landmarks for one or more poses.

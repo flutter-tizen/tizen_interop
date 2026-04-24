@@ -19,6 +19,8 @@ headers:
   include-directives:
     - '**/mv_facial_landmark.h'
     - '**/mv_facial_landmark_type.h'
+    - '**/mv_pose_landmark.h'
+    - '**/mv_pose_landmark_type.h'
 
 library-imports:
   mv_common: 'generated_bindings_mv_common.dart'

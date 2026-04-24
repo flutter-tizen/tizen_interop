@@ -16,6 +16,7 @@ headers:
     - 'entrypoints.h'
   include-directives:
     - '**/sound_pool.h'
+    - '**/sound_pool_type.h'
 
 compiler-opts:
   - '-m32'

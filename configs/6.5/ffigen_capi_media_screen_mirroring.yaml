@@ -16,6 +16,7 @@ headers:
     - 'entrypoints.h'
   include-directives:
     - '**/scmirroring_sink.h'
+    - '**/scmirroring_type.h'
 
 compiler-opts:
   - '-m32'

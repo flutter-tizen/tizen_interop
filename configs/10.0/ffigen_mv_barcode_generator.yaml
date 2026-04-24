@@ -91,3 +91,6 @@ enums:
   rename:
     '_+(.*)': '$1'
     'mv_barcode_type_e': '_mv_barcode_type_e'
+    'mv_barcode_qr_mode_e': '_mv_barcode_qr_mode_e'
+    'mv_barcode_qr_ecc_e': '_mv_barcode_qr_ecc_e'
+    'mv_barcode_image_format_e': '_mv_barcode_image_format_e'

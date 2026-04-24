@@ -16,6 +16,7 @@ headers:
     - 'entrypoints.h'
   include-directives:
     - '**/system_info.h'
+    - '**/system_info_type.h'
 
 compiler-opts:
   - '-m32'

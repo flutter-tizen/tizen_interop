@@ -380,12 +380,38 @@ class Tizen65CapiMediaThumbnailUtil {
 }
 
 /// @ingroup CAPI_MEDIA_THUMBNAIL_UTIL_MODULE
+/// @brief Enumeration for a thumbnail util error.
+/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+abstract class thumbnail_util_error_e {
+  /// < Successful
+  static const int THUMBNAIL_UTIL_ERROR_NONE = 0;
+
+  /// < Invalid parameter
+  static const int THUMBNAIL_UTIL_ERROR_INVALID_PARAMETER = -22;
+
+  /// < Out of memory
+  static const int THUMBNAIL_UTIL_ERROR_OUT_OF_MEMORY = -12;
+
+  /// < Invalid Operation
+  static const int THUMBNAIL_UTIL_ERROR_INVALID_OPERATION = -38;
+
+  /// < No space left on device
+  static const int THUMBNAIL_UTIL_ERROR_FILE_NO_SPACE_ON_DEVICE = -28;
+
+  /// < Permission denied
+  static const int THUMBNAIL_UTIL_ERROR_PERMISSION_DENIED = -13;
+
+  /// < Unsupported Content (Since 4.0)
+  static const int THUMBNAIL_UTIL_ERROR_UNSUPPORTED_CONTENT = -49872895;
+}
+
+final class thumbnail_s extends ffi.Opaque {}
+
+/// @ingroup CAPI_MEDIA_THUMBNAIL_UTIL_MODULE
 /// @deprecated Deprecated since 5.0.
 /// @brief The structure type for the thumbnail info handle.
 /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
 typedef thumbnail_h = ffi.Pointer<thumbnail_s>;
-
-final class thumbnail_s extends ffi.Opaque {}
 
 /// @ingroup CAPI_MEDIA_THUMBNAIL_UTIL_MODULE
 /// @deprecated Deprecated since 5.0.
@@ -431,28 +457,4 @@ typedef Dartthumbnail_extracted_cbFunction = void Function(
     int thumb_size,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @ingroup CAPI_MEDIA_THUMBNAIL_UTIL_MODULE
-/// @brief Enumeration for a thumbnail util error.
-/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-abstract class thumbnail_util_error_e {
-  /// < Successful
-  static const int THUMBNAIL_UTIL_ERROR_NONE = 0;
-
-  /// < Invalid parameter
-  static const int THUMBNAIL_UTIL_ERROR_INVALID_PARAMETER = -22;
-
-  /// < Out of memory
-  static const int THUMBNAIL_UTIL_ERROR_OUT_OF_MEMORY = -12;
-
-  /// < Invalid Operation
-  static const int THUMBNAIL_UTIL_ERROR_INVALID_OPERATION = -38;
-
-  /// < No space left on device
-  static const int THUMBNAIL_UTIL_ERROR_FILE_NO_SPACE_ON_DEVICE = -28;
-
-  /// < Permission denied
-  static const int THUMBNAIL_UTIL_ERROR_PERMISSION_DENIED = -13;
-
-  /// < Unsupported Content (Since 4.0)
-  static const int THUMBNAIL_UTIL_ERROR_UNSUPPORTED_CONTENT = -49872895;
-}
+const int THUMBNAIL_UTIL_ERROR_CLASS = -49872896;

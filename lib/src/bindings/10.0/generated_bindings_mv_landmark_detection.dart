@@ -331,9 +331,320 @@ class Tizen100MvLandmarkDetection {
       _mv_facial_landmark_get_positionPtr.asFunction<
           int Function(mv_facial_landmark_h, int, ffi.Pointer<ffi.UnsignedInt>,
               ffi.Pointer<ffi.UnsignedInt>)>();
+
+  /// @brief Creates pose landmark object handle.
+  /// @details Use this function to create an pose landmark object handle.
+  /// After creation the handle has to be prepared with
+  /// mv_pose_landmark_prepare() function to prepare
+  /// a pose landmark object.
+  ///
+  /// @since_tizen 9.0
+  ///
+  /// @param[out] handle    The handle to the pose landmark object to be created
+  ///
+  /// @return @c 0 on success, otherwise a negative error value
+  /// @retval #MEDIA_VISION_ERROR_NONE Successful
+  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #MEDIA_VISION_ERROR_INTERNAL Internal Error
+  ///
+  /// @post Release @a handle by using
+  /// mv_pose_landmark_destroy() function when it is not needed
+  /// anymore
+  ///
+  /// @code
+  /// #include <mv_pose_landmark.h>
+  /// ...
+  /// mv_pose_landmark_h handle = NULL;
+  /// mv_pose_landmark_create(&handle);
+  /// ...
+  /// mv_pose_landmark_destroy(handle);
+  /// @endcode
+  ///
+  /// @see mv_pose_landmark_destroy()
+  int mv_pose_landmark_create(
+    ffi.Pointer<mv_pose_landmark_h> handle,
+  ) {
+    return _mv_pose_landmark_create(
+      handle,
+    );
+  }
+
+  late final _mv_pose_landmark_createPtr = _lookup<
+          ffi
+          .NativeFunction<ffi.Int Function(ffi.Pointer<mv_pose_landmark_h>)>>(
+      'mv_pose_landmark_create');
+  late final _mv_pose_landmark_create = _mv_pose_landmark_createPtr
+      .asFunction<int Function(ffi.Pointer<mv_pose_landmark_h>)>();
+
+  /// @brief Destroys pose landmark handle and releases all its resources.
+  ///
+  /// @since_tizen 9.0
+  ///
+  /// @param[in] handle    The handle to the pose landmark object to be destroyed.
+  ///
+  /// @return @c 0 on success, otherwise a negative error value
+  /// @retval #MEDIA_VISION_ERROR_NONE Successful
+  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
+  ///
+  /// @pre Create an pose landmark handle by using mv_pose_landmark_create()
+  ///
+  /// @see mv_pose_landmark_create()
+  int mv_pose_landmark_destroy(
+    mv_pose_landmark_h handle,
+  ) {
+    return _mv_pose_landmark_destroy(
+      handle,
+    );
+  }
+
+  late final _mv_pose_landmark_destroyPtr =
+      _lookup<ffi.NativeFunction<ffi.Int Function(mv_pose_landmark_h)>>(
+          'mv_pose_landmark_destroy');
+  late final _mv_pose_landmark_destroy = _mv_pose_landmark_destroyPtr
+      .asFunction<int Function(mv_pose_landmark_h)>();
+
+  /// @brief Configures the backend to the inference handle.
+  ///
+  /// @since_tizen 9.0
+  ///
+  /// @param[in] handle         The handle to the inference
+  ///
+  /// @return @c 0 on success, otherwise a negative error value
+  /// @retval #MEDIA_VISION_ERROR_NONE Successful
+  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
+  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #MEDIA_VISION_ERROR_OUT_OF_MEMORY Out of memory
+  int mv_pose_landmark_configure(
+    mv_pose_landmark_h handle,
+  ) {
+    return _mv_pose_landmark_configure(
+      handle,
+    );
+  }
+
+  late final _mv_pose_landmark_configurePtr =
+      _lookup<ffi.NativeFunction<ffi.Int Function(mv_pose_landmark_h)>>(
+          'mv_pose_landmark_configure');
+  late final _mv_pose_landmark_configure = _mv_pose_landmark_configurePtr
+      .asFunction<int Function(mv_pose_landmark_h)>();
+
+  /// @brief Prepares inference.
+  /// @details Use this function to prepare inference based on
+  /// the configured network.
+  ///
+  /// @since_tizen 9.0
+  ///
+  /// @param[in] handle         The handle to the inference
+  ///
+  /// @return @c 0 on success, otherwise a negative error value
+  /// @retval #MEDIA_VISION_ERROR_NONE Successful
+  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #MEDIA_VISION_ERROR_INVALID_DATA Invalid model data
+  /// @retval #MEDIA_VISION_ERROR_OUT_OF_MEMORY Out of memory
+  int mv_pose_landmark_prepare(
+    mv_pose_landmark_h handle,
+  ) {
+    return _mv_pose_landmark_prepare(
+      handle,
+    );
+  }
+
+  late final _mv_pose_landmark_preparePtr =
+      _lookup<ffi.NativeFunction<ffi.Int Function(mv_pose_landmark_h)>>(
+          'mv_pose_landmark_prepare');
+  late final _mv_pose_landmark_prepare = _mv_pose_landmark_preparePtr
+      .asFunction<int Function(mv_pose_landmark_h)>();
+
+  /// @brief Inferences with a given facial on the @a source.
+  /// @details Use this function to inference with a given source.
+  ///
+  ///
+  /// @since_tizen 9.0
+  ///
+  /// @param[in] handle         The handle to the pose landmark object.
+  /// @param[in] source         The handle to the source of the media.
+  ///
+  /// @return @c 0 on success, otherwise a negative error value
+  /// @retval #MEDIA_VISION_ERROR_NONE Successful
+  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED_FORMAT Source colorspace
+  /// isn't supported
+  /// @retval #MEDIA_VISION_ERROR_OUT_OF_MEMORY Out of memory
+  ///
+  /// @pre Create a source handle by calling mv_create_source()
+  /// @pre Create an pose landmark handle by calling mv_pose_landmark_create()
+  /// @pre Prepare an inference by calling mv_pose_landmark_configure()
+  /// @pre Prepare an pose landmark by calling mv_pose_landmark_prepare()
+  ///
+  /// @par Inference Example
+  /// @snippet pose_landmark_sync.c PLD sync
+  int mv_pose_landmark_inference(
+    mv_pose_landmark_h handle,
+    mv_common.mv_source_h source,
+  ) {
+    return _mv_pose_landmark_inference(
+      handle,
+      source,
+    );
+  }
+
+  late final _mv_pose_landmark_inferencePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(mv_pose_landmark_h,
+              mv_common.mv_source_h)>>('mv_pose_landmark_inference');
+  late final _mv_pose_landmark_inference = _mv_pose_landmark_inferencePtr
+      .asFunction<int Function(mv_pose_landmark_h, mv_common.mv_source_h)>();
+
+  /// @brief Performs asynchronously the pose landmark inference on the @a source.
+  ///
+  /// @since_tizen 9.0
+  /// @remarks This function operates asynchronously, so it returns immediately upon invocation.
+  /// The inference results are inserted into the outgoing queue within the framework
+  /// in the order of processing, and the results can be obtained through mv_pose_landmark_get_result_count()
+  /// and mv_pose_landmark_get_position().
+  ///
+  /// @param[in] handle         The handle to the inference
+  /// @param[in] source         The handle to the source of the media
+  ///
+  /// @return @c 0 on success, otherwise a negative error value
+  /// @retval #MEDIA_VISION_ERROR_NONE Successful
+  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
+  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
+  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED_FORMAT Source colorspace
+  /// isn't supported
+  ///
+  /// @pre Create a source handle by calling mv_create_source()
+  /// @pre Create an inference handle by calling mv_pose_landmark_create()
+  /// @pre Prepare an inference by calling mv_pose_landmark_configure()
+  /// @pre Prepare an inference by calling mv_pose_landmark_prepare()
+  ///
+  /// @par Async Inference Example
+  /// @snippet pose_landmark_async.c PLD async
+  int mv_pose_landmark_inference_async(
+    mv_pose_landmark_h handle,
+    mv_common.mv_source_h source,
+  ) {
+    return _mv_pose_landmark_inference_async(
+      handle,
+      source,
+    );
+  }
+
+  late final _mv_pose_landmark_inference_asyncPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(mv_pose_landmark_h,
+              mv_common.mv_source_h)>>('mv_pose_landmark_inference_async');
+  late final _mv_pose_landmark_inference_async =
+      _mv_pose_landmark_inference_asyncPtr.asFunction<
+          int Function(mv_pose_landmark_h, mv_common.mv_source_h)>();
+
+  /// @brief Gets the result count to objects.
+  ///
+  /// @since_tizen 9.0
+  ///
+  /// @param[in] handle         The handle to the inference
+  /// @param[out] frame_number  A frame number inferenced.
+  /// @param[out] result_cnt    A number of results.
+  ///
+  /// @return @c 0 on success, otherwise a negative error value
+  /// @retval #MEDIA_VISION_ERROR_NONE Successful
+  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
+  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
+  ///
+  /// @pre Create a source handle by calling mv_create_source()
+  /// @pre Create an inference handle by calling mv_pose_landmark_create()
+  /// @pre Prepare an inference by calling mv_pose_landmark_configure()
+  /// @pre Prepare an inference by calling mv_pose_landmark_prepare()
+  /// @pre Request an inference by calling mv_pose_landmark_inference()
+  int mv_pose_landmark_get_result_count(
+    mv_pose_landmark_h handle,
+    ffi.Pointer<ffi.UnsignedLong> frame_number,
+    ffi.Pointer<ffi.UnsignedInt> result_cnt,
+  ) {
+    return _mv_pose_landmark_get_result_count(
+      handle,
+      frame_number,
+      result_cnt,
+    );
+  }
+
+  late final _mv_pose_landmark_get_result_countPtr = _lookup<
+          ffi.NativeFunction<
+              ffi.Int Function(
+                  mv_pose_landmark_h,
+                  ffi.Pointer<ffi.UnsignedLong>,
+                  ffi.Pointer<ffi.UnsignedInt>)>>(
+      'mv_pose_landmark_get_result_count');
+  late final _mv_pose_landmark_get_result_count =
+      _mv_pose_landmark_get_result_countPtr.asFunction<
+          int Function(mv_pose_landmark_h, ffi.Pointer<ffi.UnsignedLong>,
+              ffi.Pointer<ffi.UnsignedInt>)>();
+
+  /// @brief Gets the pose landmark position values to a given index.
+  ///
+  /// @since_tizen 9.0
+  /// @remarks pos_x and pos_y arrays are allocated internally by the framework and will remain valid
+  /// until the handle is released.
+  /// Please do not deallocate them directly, and if you want to use them after the handle is released,
+  /// please copy them to user memory and use the copy.
+  ///
+  /// This function operates differently depending on the inference request method.
+  /// - After mv_facial_landmark_inference() calls, this function returns facial landmark positions immediately.
+  /// - After mv_facial_landmark_inference_async() calls, this function can be blocked until the asynchronous inference request is completed
+  /// or the timeout occurs if no result within 3 seconds.
+  ///
+  /// Additionally, after calling the mv_facial_landmark_inference_async function, the function operates
+  /// in asynchronous mode until the handle is released.
+  ///
+  /// @param[in] handle               The handle to the inference
+  /// @param[in] index                A result index.
+  /// @param[out] pos_x               An array containing x-coordinate values.
+  /// @param[out] pos_y               An array containing y-coordinate values.
+  ///
+  /// @return @c 0 on success, otherwise a negative error value
+  /// @retval #MEDIA_VISION_ERROR_NONE Successful
+  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
+  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
+  ///
+  /// @pre Create a source handle by calling mv_create_source()
+  /// @pre Create an inference handle by calling mv_pose_landmark_create()
+  /// @pre Prepare an inference by calling mv_pose_landmark_configure()
+  /// @pre Prepare an inference by calling mv_pose_landmark_prepare()
+  /// @pre Prepare an inference by calling mv_pose_landmark_inference()
+  /// @pre Get result count by calling mv_pose_landmark_get_result_count()
+  int mv_pose_landmark_get_position(
+    mv_pose_landmark_h handle,
+    int index,
+    ffi.Pointer<ffi.UnsignedInt> pos_x,
+    ffi.Pointer<ffi.UnsignedInt> pos_y,
+  ) {
+    return _mv_pose_landmark_get_position(
+      handle,
+      index,
+      pos_x,
+      pos_y,
+    );
+  }
+
+  late final _mv_pose_landmark_get_positionPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(
+              mv_pose_landmark_h,
+              ffi.UnsignedInt,
+              ffi.Pointer<ffi.UnsignedInt>,
+              ffi.Pointer<ffi.UnsignedInt>)>>('mv_pose_landmark_get_position');
+  late final _mv_pose_landmark_get_position =
+      _mv_pose_landmark_get_positionPtr.asFunction<
+          int Function(mv_pose_landmark_h, int, ffi.Pointer<ffi.UnsignedInt>,
+              ffi.Pointer<ffi.UnsignedInt>)>();
 }
 
 /// @brief The facial landmark object handle.
 ///
 /// @since_tizen 9.0
 typedef mv_facial_landmark_h = ffi.Pointer<ffi.Void>;
+
+/// @brief The pose landmark object handle.
+///
+/// @since_tizen 9.0
+typedef mv_pose_landmark_h = ffi.Pointer<ffi.Void>;
