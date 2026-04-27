@@ -47,15 +47,13 @@
      (see `CallbackDataCollector.type_substitute()` and maps used there: `KNOWN_TYPES`, `SPECIAL_TYPES`).
    * Run `./generate_callbacks.sh` to update `callbacks.cc` with callbacks data.
 
-## Converting Doxygen Comments to Dartdoc Format
+8. Convert Doxygen-style comments into Dartdoc format for the generated bindings:
 
-To convert Doxygen-style comments into Dartdoc format for the generated bindings of a specific Tizen version, run the following script:
+   ```sh
+   dart run ./scripts/convert_description.dart <version>
+   ```
 
-```sh
-dart run ./scripts/convert_description.dart <version>
-```
-
-This script will automatically process all `generated_bindings_*.dart` files inside the `lib/src/bindings/<version>` directory.
+   This script will automatically process all `generated_bindings_*.dart` files inside the `lib/src/bindings/<version>` directory.
 
 ## Generating documentation
 
