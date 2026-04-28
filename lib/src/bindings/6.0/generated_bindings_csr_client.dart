@@ -1,3 +1,6 @@
+/// {@category 6.0/tizen}
+library tizen_interop_6_0.csr_client;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -10,6 +13,7 @@ import 'dart:ffi' as ffi;
 import 'dart:ffi' as ffi_lib;
 
 /// Dart bindings for Tizen csr-client APIs.
+/// {@category 6.0/tizen}
 class Tizen60CsrClient {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -25,23 +29,40 @@ class Tizen60CsrClient {
           lookup)
       : _lookup = lookup;
 
-  /// @partner
-  /// @brief Initializes and returns a Content Screening API handle.
-  /// @details A Content Screening API handle (or CSR CS handle) is obtained by this method.
-  /// The handle is required for subsequent CSR CS API calls.
-  /// @since_tizen 3.0
-  /// @privlevel partner
-  /// @privilege %http://tizen.org/privilege/antivirus.scan
-  /// @remarks @a handle should be released using csr_cs_context_destroy().
-  /// @remarks Multiple handles can be obtained.
-  /// @param[out] handle A pointer of CSR CS context handle
-  /// @return #CSR_ERROR_NONE on success,
-  /// otherwise a negative error value
-  /// @retval #CSR_ERROR_NONE Successful
-  /// @retval #CSR_ERROR_INVALID_HANDLE @a handle may be null
-  /// @retval #CSR_ERROR_OUT_OF_MEMORY Not enough memory
-  /// @retval #CSR_ERROR_SYSTEM System error
-  /// @see csr_cs_context_destroy()
+  /// Initializes and returns a Content Screening API handle.
+  ///
+  /// A Content Screening API handle (or CSR CS handle) is obtained by this method. The handle is required for subsequent CSR CS API calls.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/antivirus.scan>
+  ///
+  /// **Remarks:**
+  /// - `handle` should be released using csr_cs_context_destroy().
+  /// - Multiple handles can be obtained.
+  ///
+  /// **Parameters:**
+  /// - `handle` (out): A pointer of CSR CS context handle
+  ///
+  /// **Returns:**
+  /// - `CSR_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CSR_ERROR_NONE`: Successful
+  /// - `CSR_ERROR_INVALID_HANDLE`: `handle` may be null
+  /// - `CSR_ERROR_OUT_OF_MEMORY`: Not enough memory
+  /// - `CSR_ERROR_SYSTEM`: System error
+  ///
+  /// **See also:**
+  /// - `csr_cs_context_destroy()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int csr_cs_context_create(
     ffi.Pointer<csr_cs_context_h> handle,
   ) {
@@ -56,19 +77,34 @@ class Tizen60CsrClient {
   late final _csr_cs_context_create = _csr_cs_context_createPtr
       .asFunction<int Function(ffi.Pointer<csr_cs_context_h>)>();
 
-  /// @partner
-  /// @brief Releases all system resources associated with a Content Screening API handle.
-  /// @since_tizen 3.0
-  /// @privlevel partner
-  /// @privilege %http://tizen.org/privilege/antivirus.scan
-  /// @param[in] handle CSR CS context handle returned by csr_cs_context_create()
-  /// @return #CSR_ERROR_NONE on success,
-  /// otherwise a negative error value
-  /// @retval #CSR_ERROR_NONE Successful
-  /// @retval #CSR_ERROR_INVALID_HANDLE Invalid handle
-  /// @retval #CSR_ERROR_SOCKET Socket error between client and server
-  /// @retval #CSR_ERROR_SYSTEM System error
-  /// @see csr_cs_context_create()
+  /// Releases all system resources associated with a Content Screening API handle.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/antivirus.scan>
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): CSR CS context handle returned by csr_cs_context_create()
+  ///
+  /// **Returns:**
+  /// - `CSR_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CSR_ERROR_NONE`: Successful
+  /// - `CSR_ERROR_INVALID_HANDLE`: Invalid handle
+  /// - `CSR_ERROR_SOCKET`: Socket error between client and server
+  /// - `CSR_ERROR_SYSTEM`: System error
+  ///
+  /// **See also:**
+  /// - `csr_cs_context_create()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int csr_cs_context_destroy(
     csr_cs_context_h handle,
   ) {
@@ -83,26 +119,41 @@ class Tizen60CsrClient {
   late final _csr_cs_context_destroy =
       _csr_cs_context_destroyPtr.asFunction<int Function(csr_cs_context_h)>();
 
-  /// @partner
-  /// @brief Sets a popup option for malware detected.
-  /// @details If #CSR_CS_ASK_USER_YES is set, a popup will be prompted to a user when a malware is detected.
-  /// If #CSR_CS_ASK_USER_NO is set which is default value, no popup will be prompted even if a malware is detected.
-  /// User can allow, disallow, and remove detected malware by popup.
-  /// Selection can be different between malware's severity.
-  /// @since_tizen 3.0
-  /// @privlevel partner
-  /// @privilege %http://tizen.org/privilege/antivirus.scan
-  /// @remarks This option is disabled(#CSR_CS_ASK_USER_NO) as a default.
-  /// @param[in] handle CSR CS context handle returned by csr_cs_context_create()
-  /// @param[in] ask_user Popup option to set or unset
-  /// @return #CSR_ERROR_NONE on success,
-  /// otherwise a negative error value
-  /// @retval #CSR_ERROR_NONE Successful
-  /// @retval #CSR_ERROR_INVALID_HANDLE Invalid handle
-  /// @retval #CSR_ERROR_INVALID_PARAMETER @a ask_user is invalid
-  /// @retval #CSR_ERROR_SYSTEM System error
-  /// @see csr_cs_context_create()
-  /// @see csr_cs_context_destroy()
+  /// Sets a popup option for malware detected.
+  ///
+  /// If `CSR_CS_ASK_USER_YES` is set, a popup will be prompted to a user when a malware is detected. If `CSR_CS_ASK_USER_NO` is set which is default value, no popup will be prompted even if a malware is detected. User can allow, disallow, and remove detected malware by popup. Selection can be different between malware's severity.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/antivirus.scan>
+  ///
+  /// **Remarks:**
+  /// - This option is disabled(`CSR_CS_ASK_USER_NO`) as a default.
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): CSR CS context handle returned by csr_cs_context_create()
+  /// - `ask_user` (in): Popup option to set or unset
+  ///
+  /// **Returns:**
+  /// - `CSR_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CSR_ERROR_NONE`: Successful
+  /// - `CSR_ERROR_INVALID_HANDLE`: Invalid handle
+  /// - `CSR_ERROR_INVALID_PARAMETER`: `ask_user` is invalid
+  /// - `CSR_ERROR_SYSTEM`: System error
+  ///
+  /// **See also:**
+  /// - `csr_cs_context_create()`
+  /// - `csr_cs_context_destroy()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int csr_cs_set_ask_user(
     csr_cs_context_h handle,
     int ask_user,
@@ -119,25 +170,43 @@ class Tizen60CsrClient {
   late final _csr_cs_set_ask_user =
       _csr_cs_set_ask_userPtr.asFunction<int Function(csr_cs_context_h, int)>();
 
-  /// @partner
-  /// @brief Sets a popup message of a client in case that a malware is detected.
-  /// @details Default message is "Malware which may harm your device is detected."
-  /// @since_tizen 3.0
-  /// @privlevel partner
-  /// @privilege %http://tizen.org/privilege/antivirus.scan
-  /// @remarks Meaningful only when ask user option is set by csr_cs_set_ask_user().
-  /// @remarks The message will be printed on popup for user.
-  /// @remarks Default popup message will be used if it isn't set.
-  /// @param[in] handle CSR CS context handle returned by csr_cs_context_create()
-  /// @param[in] message A message to print on a popup
-  /// @return #CSR_ERROR_NONE on success,
-  /// otherwise a negative error value
-  /// @retval #CSR_ERROR_NONE Successful
-  /// @retval #CSR_ERROR_INVALID_HANDLE Invalid handle
-  /// @retval #CSR_ERROR_INVALID_PARAMETER @a message is too long or empty. Max size is 64 bytes
-  /// @retval #CSR_ERROR_SYSTEM System error
-  /// @see csr_cs_context_create()
-  /// @see csr_cs_context_destroy()
+  /// Sets a popup message of a client in case that a malware is detected.
+  ///
+  /// Default message is "Malware which may harm your device is detected."
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/antivirus.scan>
+  ///
+  /// **Remarks:**
+  /// - Meaningful only when ask user option is set by csr_cs_set_ask_user().
+  /// - The message will be printed on popup for user.
+  /// - Default popup message will be used if it isn't set.
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): CSR CS context handle returned by csr_cs_context_create()
+  /// - `message` (in): A message to print on a popup
+  ///
+  /// **Returns:**
+  /// - `CSR_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CSR_ERROR_NONE`: Successful
+  /// - `CSR_ERROR_INVALID_HANDLE`: Invalid handle
+  /// - `CSR_ERROR_INVALID_PARAMETER`: `message` is too long or empty. Max size is 64 bytes
+  /// - `CSR_ERROR_SYSTEM`: System error
+  ///
+  /// **See also:**
+  /// - `csr_cs_context_create()`
+  /// - `csr_cs_context_destroy()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int csr_cs_set_popup_message(
     csr_cs_context_h handle,
     ffi.Pointer<ffi.Char> message,
@@ -155,22 +224,39 @@ class Tizen60CsrClient {
   late final _csr_cs_set_popup_message = _csr_cs_set_popup_messagePtr
       .asFunction<int Function(csr_cs_context_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @partner
-  /// @brief Sets a maximum core usage during scanning.
-  /// @since_tizen 3.0
-  /// @privlevel partner
-  /// @privilege %http://tizen.org/privilege/antivirus.scan
-  /// @remarks If a core usage is not set, #CSR_CS_CORE_USAGE_DEFAULT will be used.
-  /// @param[in] handle CSR CS context handle returned by csr_cs_context_create()
-  /// @param[in] usage A maximum core usage during scanning
-  /// @return #CSR_ERROR_NONE on success,
-  /// otherwise a negative error value
-  /// @retval #CSR_ERROR_NONE Successful
-  /// @retval #CSR_ERROR_INVALID_HANDLE Invalid handle
-  /// @retval #CSR_ERROR_INVALID_PARAMETER @a usage is invalid
-  /// @retval #CSR_ERROR_SYSTEM System error
-  /// @see csr_cs_context_create()
-  /// @see csr_cs_context_destroy()
+  /// Sets a maximum core usage during scanning.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/antivirus.scan>
+  ///
+  /// **Remarks:**
+  /// - If a core usage is not set, `CSR_CS_CORE_USAGE_DEFAULT` will be used.
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): CSR CS context handle returned by csr_cs_context_create()
+  /// - `usage` (in): A maximum core usage during scanning
+  ///
+  /// **Returns:**
+  /// - `CSR_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CSR_ERROR_NONE`: Successful
+  /// - `CSR_ERROR_INVALID_HANDLE`: Invalid handle
+  /// - `CSR_ERROR_INVALID_PARAMETER`: `usage` is invalid
+  /// - `CSR_ERROR_SYSTEM`: System error
+  ///
+  /// **See also:**
+  /// - `csr_cs_context_create()`
+  /// - `csr_cs_context_destroy()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int csr_cs_set_core_usage(
     csr_cs_context_h handle,
     int usage,
@@ -187,22 +273,39 @@ class Tizen60CsrClient {
   late final _csr_cs_set_core_usage = _csr_cs_set_core_usagePtr
       .asFunction<int Function(csr_cs_context_h, int)>();
 
-  /// @partner
-  /// @brief Sets a scan on cloud option.
-  /// @since_tizen 3.0
-  /// @privlevel partner
-  /// @privilege %http://tizen.org/privilege/antivirus.scan
-  /// @remarks Scan on cloud option is turned off as a default.
-  /// @remarks If an engine does not support "scanning on cloud", this option is silently ignored.
-  /// @param[in] handle CSR CS context handle returned by csr_cs_context_create()
-  /// @param[in] scan_on_cloud Flag of scanning on cloud option
-  /// @return #CSR_ERROR_NONE on success,
-  /// otherwise a negative error value
-  /// @retval #CSR_ERROR_NONE Successful
-  /// @retval #CSR_ERROR_INVALID_HANDLE Invalid handle
-  /// @retval #CSR_ERROR_SYSTEM System error
-  /// @see csr_cs_context_create()
-  /// @see csr_cs_context_destroy()
+  /// Sets a scan on cloud option.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/antivirus.scan>
+  ///
+  /// **Remarks:**
+  /// - Scan on cloud option is turned off as a default.
+  /// - If an engine does not support "scanning on cloud", this option is silently ignored.
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): CSR CS context handle returned by csr_cs_context_create()
+  /// - `scan_on_cloud` (in): Flag of scanning on cloud option
+  ///
+  /// **Returns:**
+  /// - `CSR_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CSR_ERROR_NONE`: Successful
+  /// - `CSR_ERROR_INVALID_HANDLE`: Invalid handle
+  /// - `CSR_ERROR_SYSTEM`: System error
+  ///
+  /// **See also:**
+  /// - `csr_cs_context_create()`
+  /// - `csr_cs_context_destroy()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int csr_cs_set_scan_on_cloud(
     csr_cs_context_h handle,
     bool scan_on_cloud,
@@ -219,39 +322,55 @@ class Tizen60CsrClient {
   late final _csr_cs_set_scan_on_cloud = _csr_cs_set_scan_on_cloudPtr
       .asFunction<int Function(csr_cs_context_h, bool)>();
 
-  /// @partner
-  /// @brief Scans a data buffer for malware.
-  /// @details @a malware result of this method is not available for being judged by
-  /// csr_cs_judge_detected_malware() because it's data and not a file, so it cannot be removed or ignored.
-  /// @since_tizen 3.0
-  /// @privlevel partner
-  /// @privilege %http://tizen.org/privilege/antivirus.scan
-  /// @remarks Scan data synchronously.
-  /// @remarks @a malware will be released when @a handle is released using csr_cs_context_destroy().
-  /// @remarks If multiple malwares exists in @a data, the malware with the highest severity will be returned.
-  /// @param[in] handle CSR CS context handle returned by csr_cs_context_create()
-  /// @param[in] data A scan target data
-  /// @param[in] length A size of a scan target data
-  /// @param[out] malware A pointer of the detected malware handle. It can be null when no malware detected
-  /// @return #CSR_ERROR_NONE on success,
-  /// otherwise a negative error value
-  /// @retval #CSR_ERROR_NONE Successful
-  /// @retval #CSR_ERROR_INVALID_HANDLE Invalid handle
-  /// @retval #CSR_ERROR_OUT_OF_MEMORY Not enough memory
-  /// @retval #CSR_ERROR_INVALID_PARAMETER @a data or @a malware is invalid
-  /// @retval #CSR_ERROR_PERMISSION_DENIED No privilege to call
-  /// @retval #CSR_ERROR_NOT_SUPPORTED Device needed to run API is not supported
-  /// @retval #CSR_ERROR_SOCKET Socket error between client and server
-  /// @retval #CSR_ERROR_SERVER Server has been failed for some reason
-  /// @retval #CSR_ERROR_USER_RESPONSE_FAILED Getting user response is failed.
-  /// @a malware will be allocated on this error
-  /// @retval #CSR_ERROR_ENGINE_NOT_EXIST No engine exists
-  /// @retval #CSR_ERROR_ENGINE_DISABLED Engine is in disabled state
-  /// @retval #CSR_ERROR_ENGINE_NOT_ACTIVATED Engine is not activated
-  /// @retval #CSR_ERROR_ENGINE_INTERNAL Engine Internal error
-  /// @retval #CSR_ERROR_SYSTEM System error
-  /// @see csr_cs_context_create()
-  /// @see csr_cs_context_destroy()
+  /// Scans a data buffer for malware.
+  ///
+  /// `malware` result of this method is not available for being judged by csr_cs_judge_detected_malware() because it's data and not a file, so it cannot be removed or ignored.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/antivirus.scan>
+  ///
+  /// **Remarks:**
+  /// - Scan data synchronously.
+  /// - `malware` will be released when `handle` is released using csr_cs_context_destroy().
+  /// - If multiple malwares exists in `data`, the malware with the highest severity will be returned.
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): CSR CS context handle returned by csr_cs_context_create()
+  /// - `data` (in): A scan target data
+  /// - `length` (in): A size of a scan target data
+  /// - `malware` (out): A pointer of the detected malware handle. It can be null when no malware detected
+  ///
+  /// **Returns:**
+  /// - `CSR_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CSR_ERROR_NONE`: Successful
+  /// - `CSR_ERROR_INVALID_HANDLE`: Invalid handle
+  /// - `CSR_ERROR_OUT_OF_MEMORY`: Not enough memory
+  /// - `CSR_ERROR_INVALID_PARAMETER`: `data` or `malware` is invalid
+  /// - `CSR_ERROR_PERMISSION_DENIED`: No privilege to call
+  /// - `CSR_ERROR_NOT_SUPPORTED`: Device needed to run API is not supported
+  /// - `CSR_ERROR_SOCKET`: Socket error between client and server
+  /// - `CSR_ERROR_SERVER`: Server has been failed for some reason
+  /// - `CSR_ERROR_USER_RESPONSE_FAILED`: Getting user response is failed. `malware` will be allocated on this error
+  /// - `CSR_ERROR_ENGINE_NOT_EXIST`: No engine exists
+  /// - `CSR_ERROR_ENGINE_DISABLED`: Engine is in disabled state
+  /// - `CSR_ERROR_ENGINE_NOT_ACTIVATED`: Engine is not activated
+  /// - `CSR_ERROR_ENGINE_INTERNAL`: Engine Internal error
+  /// - `CSR_ERROR_SYSTEM`: System error
+  ///
+  /// **See also:**
+  /// - `csr_cs_context_create()`
+  /// - `csr_cs_context_destroy()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int csr_cs_scan_data(
     csr_cs_context_h handle,
     ffi.Pointer<ffi.UnsignedChar> data,
@@ -274,41 +393,56 @@ class Tizen60CsrClient {
       int Function(csr_cs_context_h, ffi.Pointer<ffi.UnsignedChar>, int,
           ffi.Pointer<csr_cs_malware_h>)>();
 
-  /// @partner
-  /// @brief Scans a file specified by file path for malware.
-  /// @since_tizen 3.0
-  /// @privlevel partner
-  /// @privilege %http://tizen.org/privilege/antivirus.scan
-  /// @remarks Scan file synchronously.
-  /// @remarks @a malware will be released when @a handle is released using csr_cs_context_destroy().
-  /// @remarks If multiple malwares exists in a file, the malware with the highest severity will be returned.
-  /// @param[in] handle CSR CS context handle returned by csr_cs_context_create()
-  /// @param[in] file_path A path of scan target file
-  /// @param[out] malware A pointer of the detected malware handle. It can be null when no malware detected
-  /// @return #CSR_ERROR_NONE on success,
-  /// otherwise a negative error value
-  /// @retval #CSR_ERROR_NONE Successful
-  /// @retval #CSR_ERROR_INVALID_HANDLE Invalid handle
-  /// @retval #CSR_ERROR_OUT_OF_MEMORY Not enough memory
-  /// @retval #CSR_ERROR_INVALID_PARAMETER @a file_path or @a malware is invalid
-  /// @retval #CSR_ERROR_PERMISSION_DENIED Access denied
-  /// @retval #CSR_ERROR_NOT_SUPPORTED Device needed to run API is not supported
-  /// @retval #CSR_ERROR_DB DB transaction error
-  /// @retval #CSR_ERROR_REMOVE_FAILED Removing file or application is failed when malware exist and user select to remove by popup.
-  /// @a malware will be allocated on this error
-  /// @retval #CSR_ERROR_USER_RESPONSE_FAILED Getting user response is failed
-  /// @a malware will be allocated on this error
-  /// @retval #CSR_ERROR_FILE_DO_NOT_EXIST File not found
-  /// @retval #CSR_ERROR_SOCKET Socket error between client and server
-  /// @retval #CSR_ERROR_SERVER Server has been failed for some reason
-  /// @retval #CSR_ERROR_ENGINE_NOT_EXIST No engine exists
-  /// @retval #CSR_ERROR_ENGINE_DISABLED Engine is in disabled state
-  /// @retval #CSR_ERROR_ENGINE_NOT_ACTIVATED Engine is not activated
-  /// @retval #CSR_ERROR_ENGINE_PERMISSION Insufficient permission of engine
-  /// @retval #CSR_ERROR_ENGINE_INTERNAL Engine Internal error
-  /// @retval #CSR_ERROR_SYSTEM System error
-  /// @see csr_cs_context_create()
-  /// @see csr_cs_context_destroy()
+  /// Scans a file specified by file path for malware.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/antivirus.scan>
+  ///
+  /// **Remarks:**
+  /// - Scan file synchronously.
+  /// - `malware` will be released when `handle` is released using csr_cs_context_destroy().
+  /// - If multiple malwares exists in a file, the malware with the highest severity will be returned.
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): CSR CS context handle returned by csr_cs_context_create()
+  /// - `file_path` (in): A path of scan target file
+  /// - `malware` (out): A pointer of the detected malware handle. It can be null when no malware detected
+  ///
+  /// **Returns:**
+  /// - `CSR_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CSR_ERROR_NONE`: Successful
+  /// - `CSR_ERROR_INVALID_HANDLE`: Invalid handle
+  /// - `CSR_ERROR_OUT_OF_MEMORY`: Not enough memory
+  /// - `CSR_ERROR_INVALID_PARAMETER`: `file_path` or `malware` is invalid
+  /// - `CSR_ERROR_PERMISSION_DENIED`: Access denied
+  /// - `CSR_ERROR_NOT_SUPPORTED`: Device needed to run API is not supported
+  /// - `CSR_ERROR_DB`: DB transaction error
+  /// - `CSR_ERROR_REMOVE_FAILED`: Removing file or application is failed when malware exist and user select to remove by popup. `malware` will be allocated on this error
+  /// - `CSR_ERROR_USER_RESPONSE_FAILED`: Getting user response is failed `malware` will be allocated on this error
+  /// - `CSR_ERROR_FILE_DO_NOT_EXIST`: File not found
+  /// - `CSR_ERROR_SOCKET`: Socket error between client and server
+  /// - `CSR_ERROR_SERVER`: Server has been failed for some reason
+  /// - `CSR_ERROR_ENGINE_NOT_EXIST`: No engine exists
+  /// - `CSR_ERROR_ENGINE_DISABLED`: Engine is in disabled state
+  /// - `CSR_ERROR_ENGINE_NOT_ACTIVATED`: Engine is not activated
+  /// - `CSR_ERROR_ENGINE_PERMISSION`: Insufficient permission of engine
+  /// - `CSR_ERROR_ENGINE_INTERNAL`: Engine Internal error
+  /// - `CSR_ERROR_SYSTEM`: System error
+  ///
+  /// **See also:**
+  /// - `csr_cs_context_create()`
+  /// - `csr_cs_context_destroy()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int csr_cs_scan_file(
     csr_cs_context_h handle,
     ffi.Pointer<ffi.Char> file_path,
@@ -329,23 +463,40 @@ class Tizen60CsrClient {
       int Function(csr_cs_context_h, ffi.Pointer<ffi.Char>,
           ffi.Pointer<csr_cs_malware_h>)>();
 
-  /// @partner
-  /// @brief Sets a callback function for the case that a file scan is completed.
-  /// @since_tizen 3.0
-  /// @privlevel partner
-  /// @privilege %http://tizen.org/privilege/antivirus.scan
-  /// @remarks Callback for asynchronous scan functions.
-  /// @param[in] handle CSR CS context handle returned by csr_cs_context_create()
-  /// @param[in] callback A callback function for each file or application scanning done without any malware.
-  /// @return #CSR_ERROR_NONE on success,
-  /// otherwise a negative error value
-  /// @retval #CSR_ERROR_NONE Successful
-  /// @retval #CSR_ERROR_INVALID_HANDLE Invalid handle
-  /// @retval #CSR_ERROR_INVALID_PARAMETER @a callback is invalid
-  /// @retval #CSR_ERROR_SYSTEM System error
-  /// @see csr_cs_scan_files_async()
-  /// @see csr_cs_scan_dir_async()
-  /// @see csr_cs_scan_dirs_async()
+  /// Sets a callback function for the case that a file scan is completed.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/antivirus.scan>
+  ///
+  /// **Remarks:**
+  /// - Callback for asynchronous scan functions.
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): CSR CS context handle returned by csr_cs_context_create()
+  /// - `callback` (in): A callback function for each file or application scanning done without any malware.
+  ///
+  /// **Returns:**
+  /// - `CSR_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CSR_ERROR_NONE`: Successful
+  /// - `CSR_ERROR_INVALID_HANDLE`: Invalid handle
+  /// - `CSR_ERROR_INVALID_PARAMETER`: `callback` is invalid
+  /// - `CSR_ERROR_SYSTEM`: System error
+  ///
+  /// **See also:**
+  /// - `csr_cs_scan_files_async()`
+  /// - `csr_cs_scan_dir_async()`
+  /// - `csr_cs_scan_dirs_async()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int csr_cs_set_file_scanned_cb(
     csr_cs_context_h handle,
     csr_cs_file_scanned_cb callback,
@@ -363,23 +514,40 @@ class Tizen60CsrClient {
   late final _csr_cs_set_file_scanned_cb = _csr_cs_set_file_scanned_cbPtr
       .asFunction<int Function(csr_cs_context_h, csr_cs_file_scanned_cb)>();
 
-  /// @partner
-  /// @brief Sets a callback function for detection of a malware.
-  /// @since_tizen 3.0
-  /// @privlevel partner
-  /// @privilege %http://tizen.org/privilege/antivirus.scan
-  /// @remarks Callback for asynchronous scan functions.
-  /// @param[in] handle CSR CS context handle returned by csr_cs_context_create()
-  /// @param[in] callback A callback function for each file or application scanning done with malware detected
-  /// @return #CSR_ERROR_NONE on success,
-  /// otherwise a negative error value
-  /// @retval #CSR_ERROR_NONE Successful
-  /// @retval #CSR_ERROR_INVALID_HANDLE Invalid handle
-  /// @retval #CSR_ERROR_INVALID_PARAMETER @a callback is invalid
-  /// @retval #CSR_ERROR_SYSTEM System error
-  /// @see csr_cs_scan_files_async()
-  /// @see csr_cs_scan_dir_async()
-  /// @see csr_cs_scan_dirs_async()
+  /// Sets a callback function for detection of a malware.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/antivirus.scan>
+  ///
+  /// **Remarks:**
+  /// - Callback for asynchronous scan functions.
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): CSR CS context handle returned by csr_cs_context_create()
+  /// - `callback` (in): A callback function for each file or application scanning done with malware detected
+  ///
+  /// **Returns:**
+  /// - `CSR_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CSR_ERROR_NONE`: Successful
+  /// - `CSR_ERROR_INVALID_HANDLE`: Invalid handle
+  /// - `CSR_ERROR_INVALID_PARAMETER`: `callback` is invalid
+  /// - `CSR_ERROR_SYSTEM`: System error
+  ///
+  /// **See also:**
+  /// - `csr_cs_scan_files_async()`
+  /// - `csr_cs_scan_dir_async()`
+  /// - `csr_cs_scan_dirs_async()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int csr_cs_set_detected_cb(
     csr_cs_context_h handle,
     csr_cs_detected_cb callback,
@@ -397,23 +565,40 @@ class Tizen60CsrClient {
   late final _csr_cs_set_detected_cb = _csr_cs_set_detected_cbPtr
       .asFunction<int Function(csr_cs_context_h, csr_cs_detected_cb)>();
 
-  /// @partner
-  /// @brief Sets a callback function for scanning completed without an error.
-  /// @since_tizen 3.0
-  /// @privlevel partner
-  /// @privilege %http://tizen.org/privilege/antivirus.scan
-  /// @remarks Callback for asynchronous scan functions.
-  /// @param[in] handle CSR CS context handle returned by csr_cs_context_create()
-  /// @param[in] callback A callback function for scanning completed successfully
-  /// @return #CSR_ERROR_NONE on success,
-  /// otherwise a negative error value
-  /// @retval #CSR_ERROR_NONE Successful
-  /// @retval #CSR_ERROR_INVALID_HANDLE Invalid handle
-  /// @retval #CSR_ERROR_INVALID_PARAMETER @a callback is invalid
-  /// @retval #CSR_ERROR_SYSTEM System error
-  /// @see csr_cs_scan_files_async()
-  /// @see csr_cs_scan_dir_async()
-  /// @see csr_cs_scan_dirs_async()
+  /// Sets a callback function for scanning completed without an error.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/antivirus.scan>
+  ///
+  /// **Remarks:**
+  /// - Callback for asynchronous scan functions.
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): CSR CS context handle returned by csr_cs_context_create()
+  /// - `callback` (in): A callback function for scanning completed successfully
+  ///
+  /// **Returns:**
+  /// - `CSR_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CSR_ERROR_NONE`: Successful
+  /// - `CSR_ERROR_INVALID_HANDLE`: Invalid handle
+  /// - `CSR_ERROR_INVALID_PARAMETER`: `callback` is invalid
+  /// - `CSR_ERROR_SYSTEM`: System error
+  ///
+  /// **See also:**
+  /// - `csr_cs_scan_files_async()`
+  /// - `csr_cs_scan_dir_async()`
+  /// - `csr_cs_scan_dirs_async()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int csr_cs_set_completed_cb(
     csr_cs_context_h handle,
     csr_cs_completed_cb callback,
@@ -431,25 +616,42 @@ class Tizen60CsrClient {
   late final _csr_cs_set_completed_cb = _csr_cs_set_completed_cbPtr
       .asFunction<int Function(csr_cs_context_h, csr_cs_completed_cb)>();
 
-  /// @partner
-  /// @brief Sets a callback function for scanning cancelled.
-  /// @since_tizen 3.0
-  /// @privlevel partner
-  /// @privilege %http://tizen.org/privilege/antivirus.scan
-  /// @remarks Callback for asynchronous scan functions.
-  /// @remarks Client can cancel asynchronous scanning by csr_cs_cancel_scanning().
-  /// @param[in] handle CSR CS context handle returned by csr_cs_context_create()
-  /// @param[in] callback A callback function for scanning cancelled
-  /// @return #CSR_ERROR_NONE on success,
-  /// otherwise a negative error value
-  /// @retval #CSR_ERROR_NONE Successful
-  /// @retval #CSR_ERROR_INVALID_HANDLE Invalid handle
-  /// @retval #CSR_ERROR_INVALID_PARAMETER @a callback is invalid
-  /// @retval #CSR_ERROR_SYSTEM System error
-  /// @see csr_cs_scan_files_async()
-  /// @see csr_cs_scan_dir_async()
-  /// @see csr_cs_scan_dirs_async()
-  /// @see csr_cs_cancel_scanning()
+  /// Sets a callback function for scanning cancelled.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/antivirus.scan>
+  ///
+  /// **Remarks:**
+  /// - Callback for asynchronous scan functions.
+  /// - Client can cancel asynchronous scanning by csr_cs_cancel_scanning().
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): CSR CS context handle returned by csr_cs_context_create()
+  /// - `callback` (in): A callback function for scanning cancelled
+  ///
+  /// **Returns:**
+  /// - `CSR_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CSR_ERROR_NONE`: Successful
+  /// - `CSR_ERROR_INVALID_HANDLE`: Invalid handle
+  /// - `CSR_ERROR_INVALID_PARAMETER`: `callback` is invalid
+  /// - `CSR_ERROR_SYSTEM`: System error
+  ///
+  /// **See also:**
+  /// - `csr_cs_scan_files_async()`
+  /// - `csr_cs_scan_dir_async()`
+  /// - `csr_cs_scan_dirs_async()`
+  /// - `csr_cs_cancel_scanning()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int csr_cs_set_cancelled_cb(
     csr_cs_context_h handle,
     csr_cs_cancelled_cb callback,
@@ -467,23 +669,40 @@ class Tizen60CsrClient {
   late final _csr_cs_set_cancelled_cb = _csr_cs_set_cancelled_cbPtr
       .asFunction<int Function(csr_cs_context_h, csr_cs_cancelled_cb)>();
 
-  /// @partner
-  /// @brief Sets a callback function for scanning stopped with an error.
-  /// @since_tizen 3.0
-  /// @privlevel partner
-  /// @privilege %http://tizen.org/privilege/antivirus.scan
-  /// @remarks Callback for asynchronous scan functions.
-  /// @param[in] handle CSR CS context handle returned by csr_cs_context_create()
-  /// @param[in] callback A callback function for scanning stopped due to an error
-  /// @return #CSR_ERROR_NONE on success,
-  /// otherwise a negative error value
-  /// @retval #CSR_ERROR_NONE Successful
-  /// @retval #CSR_ERROR_INVALID_HANDLE Invalid handle
-  /// @retval #CSR_ERROR_INVALID_PARAMETER @a callback is invalid
-  /// @retval #CSR_ERROR_SYSTEM System error
-  /// @see csr_cs_scan_files_async()
-  /// @see csr_cs_scan_dir_async()
-  /// @see csr_cs_scan_dirs_async()
+  /// Sets a callback function for scanning stopped with an error.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/antivirus.scan>
+  ///
+  /// **Remarks:**
+  /// - Callback for asynchronous scan functions.
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): CSR CS context handle returned by csr_cs_context_create()
+  /// - `callback` (in): A callback function for scanning stopped due to an error
+  ///
+  /// **Returns:**
+  /// - `CSR_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CSR_ERROR_NONE`: Successful
+  /// - `CSR_ERROR_INVALID_HANDLE`: Invalid handle
+  /// - `CSR_ERROR_INVALID_PARAMETER`: `callback` is invalid
+  /// - `CSR_ERROR_SYSTEM`: System error
+  ///
+  /// **See also:**
+  /// - `csr_cs_scan_files_async()`
+  /// - `csr_cs_scan_dir_async()`
+  /// - `csr_cs_scan_dirs_async()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int csr_cs_set_error_cb(
     csr_cs_context_h handle,
     csr_cs_error_cb callback,
@@ -501,56 +720,68 @@ class Tizen60CsrClient {
   late final _csr_cs_set_error_cb = _csr_cs_set_error_cbPtr
       .asFunction<int Function(csr_cs_context_h, csr_cs_error_cb)>();
 
-  /// @partner
-  /// @brief Scan files specified by an array of file paths for malware.
-  /// @details If scanning of the single file is done without detected malware,
-  /// csr_cs_file_scanned_cb() is called and else if malware detected
-  /// csr_cs_detected_cb() is called. If scanning is cancelled by
-  /// csr_cs_cancel_scanning(), csr_cs_cancelled_cb() is called. If scanning is failed
-  /// with error, csr_cs_error_cb() is called. If scanning is completed without
-  /// error, csr_cs_completed_cb(). Every callbacks are registered by callback
-  /// setter methods to @a handle and if callback is not registered, it will be just skipped to be called.
-  /// @since_tizen 3.0
-  /// @privlevel partner
-  /// @privilege %http://tizen.org/privilege/antivirus.scan
-  /// @remarks Asynchronous function.
-  /// @remarks The caller should set callback functions before calling this method.
-  /// @remarks Detected malware which is provided to the callback will be released when
-  /// @a handle is released using csr_cs_context_destroy().
-  /// @remarks If multiple malwares exists in a file, the malware with the highest
-  /// severity will be returned for the file via csr_cs_set_detected_cb().
-  /// @param[in] handle CSR CS context handle returned by csr_cs_context_create()
-  /// @param[in] file_paths An array of scan target files
-  /// @param[in] count A number of scan target files
-  /// @param[in] user_data The pointer of a user data. It can be null.
-  /// It is delivered back to the client when a callback function is called
-  /// @return #CSR_ERROR_NONE on success,
-  /// otherwise a negative error value
-  /// @retval #CSR_ERROR_NONE Successful
-  /// @retval #CSR_ERROR_INVALID_HANDLE Invalid handle
-  /// @retval #CSR_ERROR_OUT_OF_MEMORY Not enough memory
-  /// @retval #CSR_ERROR_INVALID_PARAMETER @a file_paths is invalid
-  /// @retval #CSR_ERROR_PERMISSION_DENIED Access denied
-  /// @retval #CSR_ERROR_NOT_SUPPORTED Device needed to run API is not supported
-  /// @retval #CSR_ERROR_BUSY Busy for processing another request
-  /// @retval #CSR_ERROR_FILE_DO_NOT_EXIST File not found
-  /// @retval #CSR_ERROR_SOCKET Socket error between client and server
-  /// @retval #CSR_ERROR_SERVER Server has been failed for some reason
-  /// @retval #CSR_ERROR_DB DB transaction error
-  /// @retval #CSR_ERROR_ENGINE_PERMISSION Insufficient permission of engine
-  /// @retval #CSR_ERROR_ENGINE_NOT_EXIST No engine exists
-  /// @retval #CSR_ERROR_ENGINE_DISABLED Engine is in disabled state
-  /// @retval #CSR_ERROR_ENGINE_NOT_ACTIVATED Engine is not activated
-  /// @retval #CSR_ERROR_ENGINE_INTERNAL Engine Internal error
-  /// @retval #CSR_ERROR_SYSTEM System error
-  /// @pre It is required to set callbacks, csr_cs_completed_cb, csr_cs_error_cb(),
-  /// csr_cs_cancel_scanning(), csr_cs_detected_cb(), and/or csr_cs_file_scanned_cb().
-  /// @see csr_cs_set_file_scanned_cb()
-  /// @see csr_cs_set_detected_cb()
-  /// @see csr_cs_set_completed_cb()
-  /// @see csr_cs_set_cancelled_cb()
-  /// @see csr_cs_set_error_cb()
-  /// @see csr_cs_cancel_scanning()
+  /// Scan files specified by an array of file paths for malware.
+  ///
+  /// If scanning of the single file is done without detected malware, csr_cs_file_scanned_cb() is called and else if malware detected csr_cs_detected_cb() is called. If scanning is cancelled by csr_cs_cancel_scanning(), csr_cs_cancelled_cb() is called. If scanning is failed with error, csr_cs_error_cb() is called. If scanning is completed without error, csr_cs_completed_cb(). Every callbacks are registered by callback setter methods to `handle` and if callback is not registered, it will be just skipped to be called.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/antivirus.scan>
+  ///
+  /// **Remarks:**
+  /// - Asynchronous function.
+  /// - The caller should set callback functions before calling this method.
+  /// - Detected malware which is provided to the callback will be released when
+  /// - `handle` is released using csr_cs_context_destroy().
+  /// - If multiple malwares exists in a file, the malware with the highest
+  /// - severity will be returned for the file via csr_cs_set_detected_cb().
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): CSR CS context handle returned by csr_cs_context_create()
+  /// - `file_paths` (in): An array of scan target files
+  /// - `count` (in): A number of scan target files
+  /// - `user_data` (in): The pointer of a user data. It can be null. It is delivered back to the client when a callback function is called
+  ///
+  /// **Returns:**
+  /// - `CSR_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CSR_ERROR_NONE`: Successful
+  /// - `CSR_ERROR_INVALID_HANDLE`: Invalid handle
+  /// - `CSR_ERROR_OUT_OF_MEMORY`: Not enough memory
+  /// - `CSR_ERROR_INVALID_PARAMETER`: `file_paths` is invalid
+  /// - `CSR_ERROR_PERMISSION_DENIED`: Access denied
+  /// - `CSR_ERROR_NOT_SUPPORTED`: Device needed to run API is not supported
+  /// - `CSR_ERROR_BUSY`: Busy for processing another request
+  /// - `CSR_ERROR_FILE_DO_NOT_EXIST`: File not found
+  /// - `CSR_ERROR_SOCKET`: Socket error between client and server
+  /// - `CSR_ERROR_SERVER`: Server has been failed for some reason
+  /// - `CSR_ERROR_DB`: DB transaction error
+  /// - `CSR_ERROR_ENGINE_PERMISSION`: Insufficient permission of engine
+  /// - `CSR_ERROR_ENGINE_NOT_EXIST`: No engine exists
+  /// - `CSR_ERROR_ENGINE_DISABLED`: Engine is in disabled state
+  /// - `CSR_ERROR_ENGINE_NOT_ACTIVATED`: Engine is not activated
+  /// - `CSR_ERROR_ENGINE_INTERNAL`: Engine Internal error
+  /// - `CSR_ERROR_SYSTEM`: System error
+  ///
+  /// **Preconditions:**
+  /// - It is required to set callbacks, csr_cs_completed_cb, csr_cs_error_cb(), csr_cs_cancel_scanning(), csr_cs_detected_cb(), and/or csr_cs_file_scanned_cb().
+  ///
+  /// **See also:**
+  /// - `csr_cs_set_file_scanned_cb()`
+  /// - `csr_cs_set_detected_cb()`
+  /// - `csr_cs_set_completed_cb()`
+  /// - `csr_cs_set_cancelled_cb()`
+  /// - `csr_cs_set_error_cb()`
+  /// - `csr_cs_cancel_scanning()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int csr_cs_scan_files_async(
     csr_cs_context_h handle,
     ffi.Pointer<ffi.Pointer<ffi.Char>> file_paths,
@@ -573,56 +804,68 @@ class Tizen60CsrClient {
       int Function(csr_cs_context_h, ffi.Pointer<ffi.Pointer<ffi.Char>>, int,
           ffi.Pointer<ffi.Void>)>();
 
-  /// @partner
-  /// @brief Scans a directory specified by directory path for malware.
-  /// @details If scanning of the single file is done without detected malware,
-  /// csr_cs_file_scanned_cb() is called and else if malware detected
-  /// csr_cs_detected_cb() is called. If scanning is cancelled by
-  /// csr_cs_cancel_scanning(), csr_cs_cancelled_cb() is called. If scanning is failed
-  /// with error, csr_cs_error_cb() is called. If scanning is completed without
-  /// error, csr_cs_completed_cb(). Every callbacks are registered by callback
-  /// setter methods to @a handle and if callback is not registered, it will be just skipped to be called.
-  /// @since_tizen 3.0
-  /// @privlevel partner
-  /// @privilege %http://tizen.org/privilege/antivirus.scan
-  /// @remarks Asynchronous function.
-  /// @remarks The caller should set callback functions before calling this method.
-  /// @remarks Detected malware which is provided to the callback will be released when
-  /// @a handle is released using csr_cs_context_destroy().
-  /// @remarks If multiple malwares exists in a file, the malware with the highest
-  /// severity will be returned for the file via csr_cs_set_detected_cb().
-  /// @param[in] handle CSR CS context handle returned by csr_cs_context_create()
-  /// @param[in] dir_path A path of scan target directory
-  /// @param[in] user_data The pointer of a user data. It can be null.
-  /// It is used on the callback functions which are registered to @a handle
-  /// @return #CSR_ERROR_NONE on success,
-  /// otherwise a negative error value
-  /// @retval #CSR_ERROR_NONE Successful
-  /// @retval #CSR_ERROR_INVALID_HANDLE Invalid handle
-  /// @retval #CSR_ERROR_OUT_OF_MEMORY Not enough memory
-  /// @retval #CSR_ERROR_INVALID_PARAMETER @a dir_path is invalid
-  /// @retval #CSR_ERROR_PERMISSION_DENIED Access denied
-  /// @retval #CSR_ERROR_NOT_SUPPORTED Device needed to run API is not supported
-  /// @retval #CSR_ERROR_BUSY Busy for processing another request
-  /// @retval #CSR_ERROR_FILE_DO_NOT_EXIST File not found
-  /// @retval #CSR_ERROR_FILE_SYSTEM File type is invalid. It should be directory
-  /// @retval #CSR_ERROR_SOCKET Socket error between client and server
-  /// @retval #CSR_ERROR_SERVER Server has been failed for some reason
-  /// @retval #CSR_ERROR_DB DB transaction error
-  /// @retval #CSR_ERROR_ENGINE_PERMISSION Insufficient permission of engine
-  /// @retval #CSR_ERROR_ENGINE_NOT_EXIST No engine exists
-  /// @retval #CSR_ERROR_ENGINE_DISABLED Engine is in disabled state
-  /// @retval #CSR_ERROR_ENGINE_NOT_ACTIVATED Engine is not activated
-  /// @retval #CSR_ERROR_ENGINE_INTERNAL Engine Internal error
-  /// @retval #CSR_ERROR_SYSTEM System error
-  /// @pre It is required to set callbacks, csr_cs_completed_cb, csr_cs_error_cb(),
-  /// csr_cs_cancel_scanning(), csr_cs_detected_cb(), and/or csr_cs_file_scanned_cb().
-  /// @see csr_cs_set_file_scanned_cb()
-  /// @see csr_cs_set_detected_cb()
-  /// @see csr_cs_set_completed_cb()
-  /// @see csr_cs_set_cancelled_cb()
-  /// @see csr_cs_set_error_cb()
-  /// @see csr_cs_cancel_scanning()
+  /// Scans a directory specified by directory path for malware.
+  ///
+  /// If scanning of the single file is done without detected malware, csr_cs_file_scanned_cb() is called and else if malware detected csr_cs_detected_cb() is called. If scanning is cancelled by csr_cs_cancel_scanning(), csr_cs_cancelled_cb() is called. If scanning is failed with error, csr_cs_error_cb() is called. If scanning is completed without error, csr_cs_completed_cb(). Every callbacks are registered by callback setter methods to `handle` and if callback is not registered, it will be just skipped to be called.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/antivirus.scan>
+  ///
+  /// **Remarks:**
+  /// - Asynchronous function.
+  /// - The caller should set callback functions before calling this method.
+  /// - Detected malware which is provided to the callback will be released when
+  /// - `handle` is released using csr_cs_context_destroy().
+  /// - If multiple malwares exists in a file, the malware with the highest
+  /// - severity will be returned for the file via csr_cs_set_detected_cb().
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): CSR CS context handle returned by csr_cs_context_create()
+  /// - `dir_path` (in): A path of scan target directory
+  /// - `user_data` (in): The pointer of a user data. It can be null. It is used on the callback functions which are registered to `handle`
+  ///
+  /// **Returns:**
+  /// - `CSR_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CSR_ERROR_NONE`: Successful
+  /// - `CSR_ERROR_INVALID_HANDLE`: Invalid handle
+  /// - `CSR_ERROR_OUT_OF_MEMORY`: Not enough memory
+  /// - `CSR_ERROR_INVALID_PARAMETER`: `dir_path` is invalid
+  /// - `CSR_ERROR_PERMISSION_DENIED`: Access denied
+  /// - `CSR_ERROR_NOT_SUPPORTED`: Device needed to run API is not supported
+  /// - `CSR_ERROR_BUSY`: Busy for processing another request
+  /// - `CSR_ERROR_FILE_DO_NOT_EXIST`: File not found
+  /// - `CSR_ERROR_FILE_SYSTEM`: File type is invalid. It should be directory
+  /// - `CSR_ERROR_SOCKET`: Socket error between client and server
+  /// - `CSR_ERROR_SERVER`: Server has been failed for some reason
+  /// - `CSR_ERROR_DB`: DB transaction error
+  /// - `CSR_ERROR_ENGINE_PERMISSION`: Insufficient permission of engine
+  /// - `CSR_ERROR_ENGINE_NOT_EXIST`: No engine exists
+  /// - `CSR_ERROR_ENGINE_DISABLED`: Engine is in disabled state
+  /// - `CSR_ERROR_ENGINE_NOT_ACTIVATED`: Engine is not activated
+  /// - `CSR_ERROR_ENGINE_INTERNAL`: Engine Internal error
+  /// - `CSR_ERROR_SYSTEM`: System error
+  ///
+  /// **Preconditions:**
+  /// - It is required to set callbacks, csr_cs_completed_cb, csr_cs_error_cb(), csr_cs_cancel_scanning(), csr_cs_detected_cb(), and/or csr_cs_file_scanned_cb().
+  ///
+  /// **See also:**
+  /// - `csr_cs_set_file_scanned_cb()`
+  /// - `csr_cs_set_detected_cb()`
+  /// - `csr_cs_set_completed_cb()`
+  /// - `csr_cs_set_cancelled_cb()`
+  /// - `csr_cs_set_error_cb()`
+  /// - `csr_cs_cancel_scanning()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int csr_cs_scan_dir_async(
     csr_cs_context_h handle,
     ffi.Pointer<ffi.Char> dir_path,
@@ -643,57 +886,69 @@ class Tizen60CsrClient {
       int Function(
           csr_cs_context_h, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Void>)>();
 
-  /// @partner
-  /// @brief Scan directories specified by an array of directory paths for malware.
-  /// @details If scanning of the single file is done without detected malware,
-  /// csr_cs_file_scanned_cb() is called and else if malware detected
-  /// csr_cs_detected_cb() is called. If scanning is cancelled by
-  /// csr_cs_cancel_scanning(), csr_cs_cancelled_cb() is called. If scanning is failed
-  /// with error, csr_cs_error_cb() is called. If scanning is completed without
-  /// error, csr_cs_completed_cb(). Every callbacks are registered by callback
-  /// setter methods to @a handle and if callback is not registered, it will just be skipped to be called.
-  /// @since_tizen 3.0
-  /// @privlevel partner
-  /// @privilege %http://tizen.org/privilege/antivirus.scan
-  /// @remarks Asynchronous function.
-  /// @remarks The caller should set callback functions before calls this method.
-  /// @remarks Detected malware which is provided to the callback will be released when
-  /// @a handle is released using csr_cs_context_destroy().
-  /// @remarks If multiple malwares exists in a file, the malware with the highest
-  /// severity will be returned for the file via csr_cs_set_detected_cb().
-  /// @param[in] handle CSR CS context handle returned by csr_cs_context_create()
-  /// @param[in] dir_paths An array of scan target directories
-  /// @param[in] count A number of scan target directories
-  /// @param[in] user_data The pointer of a user data. It can be null. It is used on
-  /// the callback functions which are registered to @a handle
-  /// @return #CSR_ERROR_NONE on success,
-  /// otherwise a negative error value
-  /// @retval #CSR_ERROR_NONE Successful
-  /// @retval #CSR_ERROR_INVALID_HANDLE Invalid handle
-  /// @retval #CSR_ERROR_OUT_OF_MEMORY Not enough memory
-  /// @retval #CSR_ERROR_INVALID_PARAMETER @a dir_paths is invalid
-  /// @retval #CSR_ERROR_PERMISSION_DENIED Access denied
-  /// @retval #CSR_ERROR_NOT_SUPPORTED Device needed to run API is not supported
-  /// @retval #CSR_ERROR_BUSY Busy for processing another request
-  /// @retval #CSR_ERROR_FILE_DO_NOT_EXIST File not found
-  /// @retval #CSR_ERROR_FILE_SYSTEM File type is invalid. It should be directory
-  /// @retval #CSR_ERROR_SOCKET Socket error between client and server
-  /// @retval #CSR_ERROR_SERVER Server has been failed for some reason
-  /// @retval #CSR_ERROR_DB DB transaction error
-  /// @retval #CSR_ERROR_ENGINE_PERMISSION Insufficient permission of engine
-  /// @retval #CSR_ERROR_ENGINE_NOT_EXIST No engine exists
-  /// @retval #CSR_ERROR_ENGINE_DISABLED Engine is in disabled state
-  /// @retval #CSR_ERROR_ENGINE_NOT_ACTIVATED Engine is not activated
-  /// @retval #CSR_ERROR_ENGINE_INTERNAL Engine Internal error
-  /// @retval #CSR_ERROR_SYSTEM System error
-  /// @pre It is required to set callbacks, csr_cs_completed_cb, csr_cs_error_cb(),
-  /// csr_cs_cancel_scanning(), csr_cs_detected_cb(), and/or csr_cs_file_scanned_cb().
-  /// @see csr_cs_set_file_scanned_cb()
-  /// @see csr_cs_set_detected_cb()
-  /// @see csr_cs_set_completed_cb()
-  /// @see csr_cs_set_cancelled_cb()
-  /// @see csr_cs_set_error_cb()
-  /// @see csr_cs_cancel_scanning()
+  /// Scan directories specified by an array of directory paths for malware.
+  ///
+  /// If scanning of the single file is done without detected malware, csr_cs_file_scanned_cb() is called and else if malware detected csr_cs_detected_cb() is called. If scanning is cancelled by csr_cs_cancel_scanning(), csr_cs_cancelled_cb() is called. If scanning is failed with error, csr_cs_error_cb() is called. If scanning is completed without error, csr_cs_completed_cb(). Every callbacks are registered by callback setter methods to `handle` and if callback is not registered, it will just be skipped to be called.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/antivirus.scan>
+  ///
+  /// **Remarks:**
+  /// - Asynchronous function.
+  /// - The caller should set callback functions before calls this method.
+  /// - Detected malware which is provided to the callback will be released when
+  /// - `handle` is released using csr_cs_context_destroy().
+  /// - If multiple malwares exists in a file, the malware with the highest
+  /// - severity will be returned for the file via csr_cs_set_detected_cb().
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): CSR CS context handle returned by csr_cs_context_create()
+  /// - `dir_paths` (in): An array of scan target directories
+  /// - `count` (in): A number of scan target directories
+  /// - `user_data` (in): The pointer of a user data. It can be null. It is used on the callback functions which are registered to `handle`
+  ///
+  /// **Returns:**
+  /// - `CSR_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CSR_ERROR_NONE`: Successful
+  /// - `CSR_ERROR_INVALID_HANDLE`: Invalid handle
+  /// - `CSR_ERROR_OUT_OF_MEMORY`: Not enough memory
+  /// - `CSR_ERROR_INVALID_PARAMETER`: `dir_paths` is invalid
+  /// - `CSR_ERROR_PERMISSION_DENIED`: Access denied
+  /// - `CSR_ERROR_NOT_SUPPORTED`: Device needed to run API is not supported
+  /// - `CSR_ERROR_BUSY`: Busy for processing another request
+  /// - `CSR_ERROR_FILE_DO_NOT_EXIST`: File not found
+  /// - `CSR_ERROR_FILE_SYSTEM`: File type is invalid. It should be directory
+  /// - `CSR_ERROR_SOCKET`: Socket error between client and server
+  /// - `CSR_ERROR_SERVER`: Server has been failed for some reason
+  /// - `CSR_ERROR_DB`: DB transaction error
+  /// - `CSR_ERROR_ENGINE_PERMISSION`: Insufficient permission of engine
+  /// - `CSR_ERROR_ENGINE_NOT_EXIST`: No engine exists
+  /// - `CSR_ERROR_ENGINE_DISABLED`: Engine is in disabled state
+  /// - `CSR_ERROR_ENGINE_NOT_ACTIVATED`: Engine is not activated
+  /// - `CSR_ERROR_ENGINE_INTERNAL`: Engine Internal error
+  /// - `CSR_ERROR_SYSTEM`: System error
+  ///
+  /// **Preconditions:**
+  /// - It is required to set callbacks, csr_cs_completed_cb, csr_cs_error_cb(), csr_cs_cancel_scanning(), csr_cs_detected_cb(), and/or csr_cs_file_scanned_cb().
+  ///
+  /// **See also:**
+  /// - `csr_cs_set_file_scanned_cb()`
+  /// - `csr_cs_set_detected_cb()`
+  /// - `csr_cs_set_completed_cb()`
+  /// - `csr_cs_set_cancelled_cb()`
+  /// - `csr_cs_set_error_cb()`
+  /// - `csr_cs_cancel_scanning()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int csr_cs_scan_dirs_async(
     csr_cs_context_h handle,
     ffi.Pointer<ffi.Pointer<ffi.Char>> dir_paths,
@@ -716,22 +971,39 @@ class Tizen60CsrClient {
       int Function(csr_cs_context_h, ffi.Pointer<ffi.Pointer<ffi.Char>>, int,
           ffi.Pointer<ffi.Void>)>();
 
-  /// @partner
-  /// @brief Cancels a running scanning task, asynchronously.
-  /// @since_tizen 3.0
-  /// @privlevel partner
-  /// @privilege %http://tizen.org/privilege/antivirus.scan
-  /// @remarks Only for asynchronous scan functions.
-  /// @param[in] handle CSR CS context handle returned by csr_cs_context_create()
-  /// @return #CSR_ERROR_NONE on success,
-  /// otherwise a negative error value
-  /// @retval #CSR_ERROR_NONE Successful
-  /// @retval #CSR_ERROR_INVALID_HANDLE Invalid handle
-  /// @retval #CSR_ERROR_NO_TASK No task to cancel
-  /// @retval #CSR_ERROR_SYSTEM System error
-  /// @see csr_cs_scan_files_async()
-  /// @see csr_cs_scan_dir_async()
-  /// @see csr_cs_scan_dirs_async()
+  /// Cancels a running scanning task, asynchronously.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/antivirus.scan>
+  ///
+  /// **Remarks:**
+  /// - Only for asynchronous scan functions.
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): CSR CS context handle returned by csr_cs_context_create()
+  ///
+  /// **Returns:**
+  /// - `CSR_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CSR_ERROR_NONE`: Successful
+  /// - `CSR_ERROR_INVALID_HANDLE`: Invalid handle
+  /// - `CSR_ERROR_NO_TASK`: No task to cancel
+  /// - `CSR_ERROR_SYSTEM`: System error
+  ///
+  /// **See also:**
+  /// - `csr_cs_scan_files_async()`
+  /// - `csr_cs_scan_dir_async()`
+  /// - `csr_cs_scan_dirs_async()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int csr_cs_cancel_scanning(
     csr_cs_context_h handle,
   ) {
@@ -746,20 +1018,32 @@ class Tizen60CsrClient {
   late final _csr_cs_cancel_scanning =
       _csr_cs_cancel_scanningPtr.asFunction<int Function(csr_cs_context_h)>();
 
-  /// @partner
-  /// @brief Extracts the severity of a detected malware from the detected malware handle.
-  /// @since_tizen 3.0
-  /// @privlevel partner
-  /// @privilege %http://tizen.org/privilege/antivirus.scan
-  /// @param[in] malware A detected malware handle returned by csr_cs_scan_data(),
-  /// csr_cs_scan_file() or csr_cs_malware_list_get_malware()
-  /// @param[out] severity A pointer of the severity of a detected malware
-  /// @return #CSR_ERROR_NONE on success,
-  /// otherwise a negative error value
-  /// @retval #CSR_ERROR_NONE Successful
-  /// @retval #CSR_ERROR_INVALID_HANDLE Invalid detected malware handle
-  /// @retval #CSR_ERROR_INVALID_PARAMETER @a severity is invalid
-  /// @retval #CSR_ERROR_SYSTEM System error
+  /// Extracts the severity of a detected malware from the detected malware handle.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/antivirus.scan>
+  ///
+  /// **Parameters:**
+  /// - `malware` (in): A detected malware handle returned by csr_cs_scan_data(), csr_cs_scan_file() or csr_cs_malware_list_get_malware()
+  /// - `severity` (out): A pointer of the severity of a detected malware
+  ///
+  /// **Returns:**
+  /// - `CSR_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CSR_ERROR_NONE`: Successful
+  /// - `CSR_ERROR_INVALID_HANDLE`: Invalid detected malware handle
+  /// - `CSR_ERROR_INVALID_PARAMETER`: `severity` is invalid
+  /// - `CSR_ERROR_SYSTEM`: System error
+  ///
+  /// **Paragraph:**
+  /// - tner
   int csr_cs_malware_get_severity(
     csr_cs_malware_h malware,
     ffi.Pointer<ffi.Int32> severity,
@@ -777,20 +1061,35 @@ class Tizen60CsrClient {
   late final _csr_cs_malware_get_severity = _csr_cs_malware_get_severityPtr
       .asFunction<int Function(csr_cs_malware_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @partner
-  /// @brief Extracts the name of a detected malware from the detected malware handle.
-  /// @since_tizen 3.0
-  /// @privlevel partner
-  /// @privilege %http://tizen.org/privilege/antivirus.scan
-  /// @remarks @a name must be released using free().
-  /// @param[in] malware A detected malware handle
-  /// @param[out] name A pointer of the name of a detected malware
-  /// @return #CSR_ERROR_NONE on success,
-  /// otherwise a negative error value
-  /// @retval #CSR_ERROR_NONE Successful
-  /// @retval #CSR_ERROR_INVALID_HANDLE Invalid detected malware handle
-  /// @retval #CSR_ERROR_INVALID_PARAMETER @a name is invalid
-  /// @retval #CSR_ERROR_SYSTEM System error
+  /// Extracts the name of a detected malware from the detected malware handle.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/antivirus.scan>
+  ///
+  /// **Remarks:**
+  /// - `name` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `malware` (in): A detected malware handle
+  /// - `name` (out): A pointer of the name of a detected malware
+  ///
+  /// **Returns:**
+  /// - `CSR_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CSR_ERROR_NONE`: Successful
+  /// - `CSR_ERROR_INVALID_HANDLE`: Invalid detected malware handle
+  /// - `CSR_ERROR_INVALID_PARAMETER`: `name` is invalid
+  /// - `CSR_ERROR_SYSTEM`: System error
+  ///
+  /// **Paragraph:**
+  /// - tner
   int csr_cs_malware_get_name(
     csr_cs_malware_h malware,
     ffi.Pointer<ffi.Pointer<ffi.Char>> name,
@@ -808,21 +1107,35 @@ class Tizen60CsrClient {
   late final _csr_cs_malware_get_name = _csr_cs_malware_get_namePtr.asFunction<
       int Function(csr_cs_malware_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @partner
-  /// @brief Extracts an url that contains detailed information on vendor's web site from the detected malware handle.
-  /// @since_tizen 3.0
-  /// @privlevel partner
-  /// @privilege %http://tizen.org/privilege/antivirus.scan
-  /// @remarks @a detailed_url must be released using free().
-  /// @param[in] malware A detected malware handle
-  /// @param[out] detailed_url A pointer of an url that contains detailed information on
-  /// vendor's web site. It can be null if a vendor doesn't provide this information
-  /// @return #CSR_ERROR_NONE on success,
-  /// otherwise a negative error value
-  /// @retval #CSR_ERROR_NONE Successful
-  /// @retval #CSR_ERROR_INVALID_HANDLE Invalid detected malware handle
-  /// @retval #CSR_ERROR_INVALID_PARAMETER @a detailed_url is invalid.
-  /// @retval #CSR_ERROR_SYSTEM System error
+  /// Extracts an url that contains detailed information on vendor's web site from the detected malware handle.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/antivirus.scan>
+  ///
+  /// **Remarks:**
+  /// - `detailed_url` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `malware` (in): A detected malware handle
+  /// - `detailed_url` (out): A pointer of an url that contains detailed information on vendor's web site. It can be null if a vendor doesn't provide this information
+  ///
+  /// **Returns:**
+  /// - `CSR_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CSR_ERROR_NONE`: Successful
+  /// - `CSR_ERROR_INVALID_HANDLE`: Invalid detected malware handle
+  /// - `CSR_ERROR_INVALID_PARAMETER`: `detailed_url` is invalid.
+  /// - `CSR_ERROR_SYSTEM`: System error
+  ///
+  /// **Paragraph:**
+  /// - tner
   int csr_cs_malware_get_detailed_url(
     csr_cs_malware_h malware,
     ffi.Pointer<ffi.Pointer<ffi.Char>> detailed_url,
@@ -842,19 +1155,32 @@ class Tizen60CsrClient {
       _csr_cs_malware_get_detailed_urlPtr.asFunction<
           int Function(csr_cs_malware_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @partner
-  /// @brief Extracts the time stamp when a malware is detected from the detected malware handle.
-  /// @since_tizen 3.0
-  /// @privlevel partner
-  /// @privilege %http://tizen.org/privilege/antivirus.scan
-  /// @param[in] malware A detected malware handle
-  /// @param[out] timestamp A pointer of the time stamp in milli second when a malware is detected
-  /// @return #CSR_ERROR_NONE on success,
-  /// otherwise a negative error value
-  /// @retval #CSR_ERROR_NONE Successful
-  /// @retval #CSR_ERROR_INVALID_HANDLE Invalid detected malware handle
-  /// @retval #CSR_ERROR_INVALID_PARAMETER @a timestamp is invalid
-  /// @retval #CSR_ERROR_SYSTEM System error
+  /// Extracts the time stamp when a malware is detected from the detected malware handle.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/antivirus.scan>
+  ///
+  /// **Parameters:**
+  /// - `malware` (in): A detected malware handle
+  /// - `timestamp` (out): A pointer of the time stamp in milli second when a malware is detected
+  ///
+  /// **Returns:**
+  /// - `CSR_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CSR_ERROR_NONE`: Successful
+  /// - `CSR_ERROR_INVALID_HANDLE`: Invalid detected malware handle
+  /// - `CSR_ERROR_INVALID_PARAMETER`: `timestamp` is invalid
+  /// - `CSR_ERROR_SYSTEM`: System error
+  ///
+  /// **Paragraph:**
+  /// - tner
   int csr_cs_malware_get_timestamp(
     csr_cs_malware_h malware,
     ffi.Pointer<ffi_lib.Long> timestamp,
@@ -872,20 +1198,35 @@ class Tizen60CsrClient {
   late final _csr_cs_malware_get_timestamp = _csr_cs_malware_get_timestampPtr
       .asFunction<int Function(csr_cs_malware_h, ffi.Pointer<ffi_lib.Long>)>();
 
-  /// @partner
-  /// @brief Extracts the file name where a malware is detected from the detected malware handle.
-  /// @since_tizen 3.0
-  /// @privlevel partner
-  /// @privilege %http://tizen.org/privilege/antivirus.scan
-  /// @remarks @a file_name must be released using free().
-  /// @param[in] malware A detected malware handle
-  /// @param[out] file_name A pointer of the file name where a malware is detected. The file name is null for csr_cs_scan_data()
-  /// @return #CSR_ERROR_NONE on success,
-  /// otherwise a negative error value
-  /// @retval #CSR_ERROR_NONE Successful
-  /// @retval #CSR_ERROR_INVALID_HANDLE Invalid detected malware handle
-  /// @retval #CSR_ERROR_INVALID_PARAMETER @a file_name is invalid
-  /// @retval #CSR_ERROR_SYSTEM System error
+  /// Extracts the file name where a malware is detected from the detected malware handle.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/antivirus.scan>
+  ///
+  /// **Remarks:**
+  /// - `file_name` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `malware` (in): A detected malware handle
+  /// - `file_name` (out): A pointer of the file name where a malware is detected. The file name is null for csr_cs_scan_data()
+  ///
+  /// **Returns:**
+  /// - `CSR_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CSR_ERROR_NONE`: Successful
+  /// - `CSR_ERROR_INVALID_HANDLE`: Invalid detected malware handle
+  /// - `CSR_ERROR_INVALID_PARAMETER`: `file_name` is invalid
+  /// - `CSR_ERROR_SYSTEM`: System error
+  ///
+  /// **Paragraph:**
+  /// - tner
   int csr_cs_malware_get_file_name(
     csr_cs_malware_h malware,
     ffi.Pointer<ffi.Pointer<ffi.Char>> file_name,
@@ -905,19 +1246,32 @@ class Tizen60CsrClient {
       _csr_cs_malware_get_file_namePtr.asFunction<
           int Function(csr_cs_malware_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @partner
-  /// @brief Extracts a user response of a popup from the detected malware handle.
-  /// @since_tizen 3.0
-  /// @privlevel partner
-  /// @privilege %http://tizen.org/privilege/antivirus.scan
-  /// @param[in] malware A detected malware handle
-  /// @param[out] response A pointer of the user response
-  /// @return #CSR_ERROR_NONE on success,
-  /// otherwise a negative error value
-  /// @retval #CSR_ERROR_NONE Successful
-  /// @retval #CSR_ERROR_INVALID_HANDLE Invalid result handle
-  /// @retval #CSR_ERROR_INVALID_PARAMETER @a response is invalid
-  /// @retval #CSR_ERROR_SYSTEM System error
+  /// Extracts a user response of a popup from the detected malware handle.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/antivirus.scan>
+  ///
+  /// **Parameters:**
+  /// - `malware` (in): A detected malware handle
+  /// - `response` (out): A pointer of the user response
+  ///
+  /// **Returns:**
+  /// - `CSR_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CSR_ERROR_NONE`: Successful
+  /// - `CSR_ERROR_INVALID_HANDLE`: Invalid result handle
+  /// - `CSR_ERROR_INVALID_PARAMETER`: `response` is invalid
+  /// - `CSR_ERROR_SYSTEM`: System error
+  ///
+  /// **Paragraph:**
+  /// - tner
   int csr_cs_malware_get_user_response(
     csr_cs_malware_h malware,
     ffi.Pointer<ffi.Int32> response,
@@ -936,19 +1290,32 @@ class Tizen60CsrClient {
       _csr_cs_malware_get_user_responsePtr
           .asFunction<int Function(csr_cs_malware_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @partner
-  /// @brief Checks if a malware was detected in an application or in a file.
-  /// @since_tizen 3.0
-  /// @privlevel partner
-  /// @privilege %http://tizen.org/privilege/antivirus.scan
-  /// @param[in] malware A detected malware handle
-  /// @param[out] is_app A pointer of a flag indicating the position where a malware was detected.
-  /// @return #CSR_ERROR_NONE on success,
-  /// otherwise a negative error value
-  /// @retval #CSR_ERROR_NONE Successful
-  /// @retval #CSR_ERROR_INVALID_HANDLE Invalid result handle
-  /// @retval #CSR_ERROR_INVALID_PARAMETER @a is_app is invalid
-  /// @retval #CSR_ERROR_SYSTEM System error
+  /// Checks if a malware was detected in an application or in a file.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/antivirus.scan>
+  ///
+  /// **Parameters:**
+  /// - `malware` (in): A detected malware handle
+  /// - `is_app` (out): A pointer of a flag indicating the position where a malware was detected.
+  ///
+  /// **Returns:**
+  /// - `CSR_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CSR_ERROR_NONE`: Successful
+  /// - `CSR_ERROR_INVALID_HANDLE`: Invalid result handle
+  /// - `CSR_ERROR_INVALID_PARAMETER`: `is_app` is invalid
+  /// - `CSR_ERROR_SYSTEM`: System error
+  ///
+  /// **Paragraph:**
+  /// - tner
   int csr_cs_malware_is_app(
     csr_cs_malware_h malware,
     ffi.Pointer<ffi.Bool> is_app,
@@ -966,21 +1333,35 @@ class Tizen60CsrClient {
   late final _csr_cs_malware_is_app = _csr_cs_malware_is_appPtr
       .asFunction<int Function(csr_cs_malware_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @partner
-  /// @brief Extracts the package id of an application where a malware is detected from detected malware handle.
-  /// @since_tizen 3.0
-  /// @privlevel partner
-  /// @privilege %http://tizen.org/privilege/antivirus.scan
-  /// @remarks @a pkg_id must be released using free().
-  /// @param[in] malware A detected malware handle
-  /// @param[out] pkg_id A pointer of the package id where a malware is detected.
-  /// It is null when a malware was not detected in an application
-  /// @return #CSR_ERROR_NONE on success,
-  /// otherwise a negative error value
-  /// @retval #CSR_ERROR_NONE Successful
-  /// @retval #CSR_ERROR_INVALID_HANDLE Invalid detected malware handle
-  /// @retval #CSR_ERROR_INVALID_PARAMETER @a pkg_id is invalid
-  /// @retval #CSR_ERROR_SYSTEM System error
+  /// Extracts the package id of an application where a malware is detected from detected malware handle.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/antivirus.scan>
+  ///
+  /// **Remarks:**
+  /// - `pkg_id` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `malware` (in): A detected malware handle
+  /// - `pkg_id` (out): A pointer of the package id where a malware is detected. It is null when a malware was not detected in an application
+  ///
+  /// **Returns:**
+  /// - `CSR_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CSR_ERROR_NONE`: Successful
+  /// - `CSR_ERROR_INVALID_HANDLE`: Invalid detected malware handle
+  /// - `CSR_ERROR_INVALID_PARAMETER`: `pkg_id` is invalid
+  /// - `CSR_ERROR_SYSTEM`: System error
+  ///
+  /// **Paragraph:**
+  /// - tner
   int csr_cs_malware_get_pkg_id(
     csr_cs_malware_h malware,
     ffi.Pointer<ffi.Pointer<ffi.Char>> pkg_id,
@@ -1000,34 +1381,46 @@ class Tizen60CsrClient {
       _csr_cs_malware_get_pkg_idPtr.asFunction<
           int Function(csr_cs_malware_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @platform
-  /// @brief Judges how a detected malware file is handled.
-  /// @details Detected malware will be removed by #CSR_CS_ACTION_REMOVE action.
-  /// File or application which contains malware will be removed.
-  /// Detected malware will be ignored by #CSR_CS_ACTION_IGNORE action.
-  /// File or application which contains malware will be ignored and will not be treated
-  /// as malware until this API is called with #CSR_CS_ACTION_UNIGNORE action.
-  /// @since_tizen 3.0
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/antivirus.admin
-  /// @remarks Detected malware can be removed or ignored.
-  /// @param[in] handle CSR CS context handle returned by csr_cs_context_create()
-  /// @param[in] malware A handle of a detected malware
-  /// @param[in] action An action to be taken
-  /// @return #CSR_ERROR_NONE on success,
-  /// otherwise a negative error value
-  /// @retval #CSR_ERROR_NONE Successful
-  /// @retval #CSR_ERROR_INVALID_HANDLE Invalid handle
-  /// @retval #CSR_ERROR_OUT_OF_MEMORY Not enough memory
-  /// @retval #CSR_ERROR_INVALID_PARAMETER @a malware or @a action is invalid
-  /// @retval #CSR_ERROR_PERMISSION_DENIED No permission to remove
-  /// @retval #CSR_ERROR_FILE_DO_NOT_EXIST File to take action on not found
-  /// @retval #CSR_ERROR_FILE_CHANGED File to take action on changed after detection
-  /// @retval #CSR_ERROR_SOCKET Socket error between client and server
-  /// @retval #CSR_ERROR_SERVER Server has been failed for some reason
-  /// @retval #CSR_ERROR_DB DB transaction error
-  /// @retval #CSR_ERROR_REMOVE_FAILED Removing file or application is failed
-  /// @retval #CSR_ERROR_SYSTEM System error
+  /// Judges how a detected malware file is handled.
+  ///
+  /// Detected malware will be removed by `CSR_CS_ACTION_REMOVE` action. File or application which contains malware will be removed. Detected malware will be ignored by `CSR_CS_ACTION_IGNORE` action. File or application which contains malware will be ignored and will not be treated as malware until this API is called with `CSR_CS_ACTION_UNIGNORE` action.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/antivirus.admin>
+  ///
+  /// **Remarks:**
+  /// - Detected malware can be removed or ignored.
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): CSR CS context handle returned by csr_cs_context_create()
+  /// - `malware` (in): A handle of a detected malware
+  /// - `action` (in): An action to be taken
+  ///
+  /// **Returns:**
+  /// - `CSR_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CSR_ERROR_NONE`: Successful
+  /// - `CSR_ERROR_INVALID_HANDLE`: Invalid handle
+  /// - `CSR_ERROR_OUT_OF_MEMORY`: Not enough memory
+  /// - `CSR_ERROR_INVALID_PARAMETER`: `malware` or `action` is invalid
+  /// - `CSR_ERROR_PERMISSION_DENIED`: No permission to remove
+  /// - `CSR_ERROR_FILE_DO_NOT_EXIST`: File to take action on not found
+  /// - `CSR_ERROR_FILE_CHANGED`: File to take action on changed after detection
+  /// - `CSR_ERROR_SOCKET`: Socket error between client and server
+  /// - `CSR_ERROR_SERVER`: Server has been failed for some reason
+  /// - `CSR_ERROR_DB`: DB transaction error
+  /// - `CSR_ERROR_REMOVE_FAILED`: Removing file or application is failed
+  /// - `CSR_ERROR_SYSTEM`: System error
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int csr_cs_judge_detected_malware(
     csr_cs_context_h handle,
     csr_cs_malware_h malware,
@@ -1047,31 +1440,48 @@ class Tizen60CsrClient {
   late final _csr_cs_judge_detected_malware = _csr_cs_judge_detected_malwarePtr
       .asFunction<int Function(csr_cs_context_h, csr_cs_malware_h, int)>();
 
-  /// @partner
-  /// @brief Gets information on a detected malware file specified by file path.
-  /// @since_tizen 3.0
-  /// @privlevel partner
-  /// @privilege %http://tizen.org/privilege/antivirus.scan
-  /// @remarks @a malware will be released when @a handle is destroyed.
-  /// @remarks @a file_path will be null if it's result of csr_cs_scan_data().
-  /// @param[in] handle CSR CS context handle returned by csr_cs_context_create()
-  /// @param[in] file_path A path of a detected malware file
-  /// @param[out] malware A pointer of the detected malware handle. It can be null when no malware file
-  /// @return #CSR_ERROR_NONE on success,
-  /// otherwise a negative error value
-  /// @retval #CSR_ERROR_NONE Successful
-  /// @retval #CSR_ERROR_INVALID_HANDLE Invalid handle
-  /// @retval #CSR_ERROR_OUT_OF_MEMORY Not enough memory
-  /// @retval #CSR_ERROR_INVALID_PARAMETER @a file_path or @a malware is invalid
-  /// @retval #CSR_ERROR_PERMISSION_DENIED No permission to remove
-  /// @retval #CSR_ERROR_FILE_DO_NOT_EXIST No malware file
-  /// @retval #CSR_ERROR_SOCKET Socket error between client and server
-  /// @retval #CSR_ERROR_SERVER Server has been failed for some reason
-  /// @retval #CSR_ERROR_DB DB transaction error
-  /// @retval #CSR_ERROR_SYSTEM System error
-  /// @see csr_cs_scan_data()
-  /// @see csr_cs_scan_file()
-  /// @see csr_cs_detected_cb
+  /// Gets information on a detected malware file specified by file path.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/antivirus.scan>
+  ///
+  /// **Remarks:**
+  /// - `malware` will be released when `handle` is destroyed.
+  /// - `file_path` will be null if it's result of csr_cs_scan_data().
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): CSR CS context handle returned by csr_cs_context_create()
+  /// - `file_path` (in): A path of a detected malware file
+  /// - `malware` (out): A pointer of the detected malware handle. It can be null when no malware file
+  ///
+  /// **Returns:**
+  /// - `CSR_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CSR_ERROR_NONE`: Successful
+  /// - `CSR_ERROR_INVALID_HANDLE`: Invalid handle
+  /// - `CSR_ERROR_OUT_OF_MEMORY`: Not enough memory
+  /// - `CSR_ERROR_INVALID_PARAMETER`: `file_path` or `malware` is invalid
+  /// - `CSR_ERROR_PERMISSION_DENIED`: No permission to remove
+  /// - `CSR_ERROR_FILE_DO_NOT_EXIST`: No malware file
+  /// - `CSR_ERROR_SOCKET`: Socket error between client and server
+  /// - `CSR_ERROR_SERVER`: Server has been failed for some reason
+  /// - `CSR_ERROR_DB`: DB transaction error
+  /// - `CSR_ERROR_SYSTEM`: System error
+  ///
+  /// **See also:**
+  /// - `csr_cs_scan_data()`
+  /// - `csr_cs_scan_file()`
+  /// - `csr_cs_detected_cb`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int csr_cs_get_detected_malware(
     csr_cs_context_h handle,
     ffi.Pointer<ffi.Char> file_path,
@@ -1093,29 +1503,44 @@ class Tizen60CsrClient {
           int Function(csr_cs_context_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<csr_cs_malware_h>)>();
 
-  /// @partner
-  /// @brief Gets information on a detected malware files specified by directory path.
-  /// @since_tizen 3.0
-  /// @privlevel partner
-  /// @privilege %http://tizen.org/privilege/antivirus.scan
-  /// @remarks @a list will be released when @a handle is destroyed.
-  /// @param[in] handle CSR CS context handle returned by csr_cs_context_create()
-  /// @param[in] dir_paths A directory path where detected malware files exists
-  /// @param[in] count Count of array element of @a dir_paths
-  /// @param[out] list A pointer of the detected malware list handle. It can be null when there is no malware file
-  /// @param[out] list_count Count of detected malware files which existed in the specified directory
-  /// @return #CSR_ERROR_NONE on success,
-  /// otherwise a negative error value
-  /// @retval #CSR_ERROR_NONE Successful
-  /// @retval #CSR_ERROR_INVALID_HANDLE Invalid handle
-  /// @retval #CSR_ERROR_OUT_OF_MEMORY Not enough memory
-  /// @retval #CSR_ERROR_INVALID_PARAMETER @a dir_paths, @a list, or @a count is invalid
-  /// @retval #CSR_ERROR_PERMISSION_DENIED No permission to remove
-  /// @retval #CSR_ERROR_FILE_DO_NOT_EXIST No malware file
-  /// @retval #CSR_ERROR_SOCKET Socket error between client and server
-  /// @retval #CSR_ERROR_SERVER Server has been failed for some reason
-  /// @retval #CSR_ERROR_DB DB transaction error
-  /// @retval #CSR_ERROR_SYSTEM System error
+  /// Gets information on a detected malware files specified by directory path.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/antivirus.scan>
+  ///
+  /// **Remarks:**
+  /// - `list` will be released when `handle` is destroyed.
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): CSR CS context handle returned by csr_cs_context_create()
+  /// - `dir_paths` (in): A directory path where detected malware files exists
+  /// - `count` (in): Count of array element of `dir_paths`
+  /// - `list` (out): A pointer of the detected malware list handle. It can be null when there is no malware file
+  /// - `list_count` (out): Count of detected malware files which existed in the specified directory
+  ///
+  /// **Returns:**
+  /// - `CSR_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CSR_ERROR_NONE`: Successful
+  /// - `CSR_ERROR_INVALID_HANDLE`: Invalid handle
+  /// - `CSR_ERROR_OUT_OF_MEMORY`: Not enough memory
+  /// - `CSR_ERROR_INVALID_PARAMETER`: `dir_paths`, `list`, or `count` is invalid
+  /// - `CSR_ERROR_PERMISSION_DENIED`: No permission to remove
+  /// - `CSR_ERROR_FILE_DO_NOT_EXIST`: No malware file
+  /// - `CSR_ERROR_SOCKET`: Socket error between client and server
+  /// - `CSR_ERROR_SERVER`: Server has been failed for some reason
+  /// - `CSR_ERROR_DB`: DB transaction error
+  /// - `CSR_ERROR_SYSTEM`: System error
+  ///
+  /// **Paragraph:**
+  /// - tner
   int csr_cs_get_detected_malwares(
     csr_cs_context_h handle,
     ffi.Pointer<ffi.Pointer<ffi.Char>> dir_paths,
@@ -1149,27 +1574,42 @@ class Tizen60CsrClient {
               ffi.Pointer<csr_cs_malware_list_h>,
               ffi.Pointer<ffi.Size>)>();
 
-  /// @partner
-  /// @brief Gets information on a ignored malware file specified by file path.
-  /// @since_tizen 3.0
-  /// @privlevel partner
-  /// @privilege %http://tizen.org/privilege/antivirus.scan
-  /// @remarks @a malware will be released when @a handle is destroyed.
-  /// @param[in] handle CSR CS context handle returned by csr_cs_context_create()
-  /// @param[in] file_path A path of a ignored malware file
-  /// @param[out] malware A pointer of the detected malware handle. It can be null when no ignored file
-  /// @return #CSR_ERROR_NONE on success,
-  /// otherwise a negative error value
-  /// @retval #CSR_ERROR_NONE Successful
-  /// @retval #CSR_ERROR_INVALID_HANDLE Invalid handle
-  /// @retval #CSR_ERROR_OUT_OF_MEMORY Not enough memory
-  /// @retval #CSR_ERROR_INVALID_PARAMETER @a file_path or @a malware is invalid
-  /// @retval #CSR_ERROR_PERMISSION_DENIED No permission to remove
-  /// @retval #CSR_ERROR_FILE_DO_NOT_EXIST No ignored file
-  /// @retval #CSR_ERROR_SOCKET Socket error between client and server
-  /// @retval #CSR_ERROR_SERVER Server has been failed for some reason
-  /// @retval #CSR_ERROR_DB DB transaction error
-  /// @retval #CSR_ERROR_SYSTEM System error
+  /// Gets information on a ignored malware file specified by file path.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/antivirus.scan>
+  ///
+  /// **Remarks:**
+  /// - `malware` will be released when `handle` is destroyed.
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): CSR CS context handle returned by csr_cs_context_create()
+  /// - `file_path` (in): A path of a ignored malware file
+  /// - `malware` (out): A pointer of the detected malware handle. It can be null when no ignored file
+  ///
+  /// **Returns:**
+  /// - `CSR_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CSR_ERROR_NONE`: Successful
+  /// - `CSR_ERROR_INVALID_HANDLE`: Invalid handle
+  /// - `CSR_ERROR_OUT_OF_MEMORY`: Not enough memory
+  /// - `CSR_ERROR_INVALID_PARAMETER`: `file_path` or `malware` is invalid
+  /// - `CSR_ERROR_PERMISSION_DENIED`: No permission to remove
+  /// - `CSR_ERROR_FILE_DO_NOT_EXIST`: No ignored file
+  /// - `CSR_ERROR_SOCKET`: Socket error between client and server
+  /// - `CSR_ERROR_SERVER`: Server has been failed for some reason
+  /// - `CSR_ERROR_DB`: DB transaction error
+  /// - `CSR_ERROR_SYSTEM`: System error
+  ///
+  /// **Paragraph:**
+  /// - tner
   int csr_cs_get_ignored_malware(
     csr_cs_context_h handle,
     ffi.Pointer<ffi.Char> file_path,
@@ -1191,29 +1631,44 @@ class Tizen60CsrClient {
           int Function(csr_cs_context_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<csr_cs_malware_h>)>();
 
-  /// @partner
-  /// @brief Gets information on ignored malware files specified by directory path.
-  /// @since_tizen 3.0
-  /// @privlevel partner
-  /// @privilege %http://tizen.org/privilege/antivirus.scan
-  /// @remarks @a list will be released when @a handle is destroyed.
-  /// @param[in] handle CSR CS context handle returned by csr_cs_context_create()
-  /// @param[in] dir_paths A directory path where ignored malware files exists
-  /// @param[in] count Count of array element of @a dir_paths
-  /// @param[out] list A pointer of the detected malware list handle. It can be null when no ignored file
-  /// @param[out] list_count Count of ignored malware files which existed in the specified directory
-  /// @return #CSR_ERROR_NONE on success,
-  /// otherwise a negative error value
-  /// @retval #CSR_ERROR_NONE Successful
-  /// @retval #CSR_ERROR_INVALID_HANDLE Invalid handle
-  /// @retval #CSR_ERROR_OUT_OF_MEMORY Not enough memory
-  /// @retval #CSR_ERROR_INVALID_PARAMETER @a dir_paths, @a list, or @a count is invalid
-  /// @retval #CSR_ERROR_PERMISSION_DENIED No permission to remove
-  /// @retval #CSR_ERROR_FILE_DO_NOT_EXIST No ignored file
-  /// @retval #CSR_ERROR_SOCKET Socket error between client and server
-  /// @retval #CSR_ERROR_SERVER Server has been failed for some reason
-  /// @retval #CSR_ERROR_DB DB transaction error
-  /// @retval #CSR_ERROR_SYSTEM System error
+  /// Gets information on ignored malware files specified by directory path.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/antivirus.scan>
+  ///
+  /// **Remarks:**
+  /// - `list` will be released when `handle` is destroyed.
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): CSR CS context handle returned by csr_cs_context_create()
+  /// - `dir_paths` (in): A directory path where ignored malware files exists
+  /// - `count` (in): Count of array element of `dir_paths`
+  /// - `list` (out): A pointer of the detected malware list handle. It can be null when no ignored file
+  /// - `list_count` (out): Count of ignored malware files which existed in the specified directory
+  ///
+  /// **Returns:**
+  /// - `CSR_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CSR_ERROR_NONE`: Successful
+  /// - `CSR_ERROR_INVALID_HANDLE`: Invalid handle
+  /// - `CSR_ERROR_OUT_OF_MEMORY`: Not enough memory
+  /// - `CSR_ERROR_INVALID_PARAMETER`: `dir_paths`, `list`, or `count` is invalid
+  /// - `CSR_ERROR_PERMISSION_DENIED`: No permission to remove
+  /// - `CSR_ERROR_FILE_DO_NOT_EXIST`: No ignored file
+  /// - `CSR_ERROR_SOCKET`: Socket error between client and server
+  /// - `CSR_ERROR_SERVER`: Server has been failed for some reason
+  /// - `CSR_ERROR_DB`: DB transaction error
+  /// - `CSR_ERROR_SYSTEM`: System error
+  ///
+  /// **Paragraph:**
+  /// - tner
   int csr_cs_get_ignored_malwares(
     csr_cs_context_h handle,
     ffi.Pointer<ffi.Pointer<ffi.Char>> dir_paths,
@@ -1247,21 +1702,36 @@ class Tizen60CsrClient {
               ffi.Pointer<csr_cs_malware_list_h>,
               ffi.Pointer<ffi.Size>)>();
 
-  /// @partner
-  /// @brief Extracts the detected malware handle from the detected malware list handle.
-  /// @since_tizen 3.0
-  /// @privlevel partner
-  /// @privilege %http://tizen.org/privilege/antivirus.scan
-  /// @remarks @a malware will be released when a context is released using csr_cs_context_destroy().
-  /// @param[in] list A detected malware list handle returned by csr_cs_get_detected_malwares() or csr_cs_get_ignored_malwares()
-  /// @param[in] index An index of a target detected malware handle to get
-  /// @param[out] malware A pointer of the detected malware handle. It can be null when index is invalid
-  /// @return #CSR_ERROR_NONE on success,
-  /// otherwise a negative error value
-  /// @retval #CSR_ERROR_NONE Successful
-  /// @retval #CSR_ERROR_INVALID_HANDLE Invalid list
-  /// @retval #CSR_ERROR_INVALID_PARAMETER @a index or @a malware is invalid
-  /// @retval #CSR_ERROR_SYSTEM System error
+  /// Extracts the detected malware handle from the detected malware list handle.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/antivirus.scan>
+  ///
+  /// **Remarks:**
+  /// - `malware` will be released when a context is released using csr_cs_context_destroy().
+  ///
+  /// **Parameters:**
+  /// - `list` (in): A detected malware list handle returned by csr_cs_get_detected_malwares() or csr_cs_get_ignored_malwares()
+  /// - `index` (in): An index of a target detected malware handle to get
+  /// - `malware` (out): A pointer of the detected malware handle. It can be null when index is invalid
+  ///
+  /// **Returns:**
+  /// - `CSR_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CSR_ERROR_NONE`: Successful
+  /// - `CSR_ERROR_INVALID_HANDLE`: Invalid list
+  /// - `CSR_ERROR_INVALID_PARAMETER`: `index` or `malware` is invalid
+  /// - `CSR_ERROR_SYSTEM`: System error
+  ///
+  /// **Paragraph:**
+  /// - tner
   int csr_cs_malware_list_get_malware(
     csr_cs_malware_list_h list,
     int index,
@@ -1284,21 +1754,34 @@ class Tizen60CsrClient {
           int Function(
               csr_cs_malware_list_h, int, ffi.Pointer<csr_cs_malware_h>)>();
 
-  /// @platform
-  /// @brief Gets the handle of a current engine information.
-  /// @since_tizen 3.0
-  /// @remarks @a engine should be released using csr_engine_destroy().
-  /// @param[in] id Engine identifier to get handle
-  /// @param[out] engine A pointer of the engine information handle
-  /// @return #CSR_ERROR_NONE on success,
-  /// otherwise a negative error value
-  /// @retval #CSR_ERROR_NONE Successful
-  /// @retval #CSR_ERROR_INVALID_PARAMETER @a engine is invalid
-  /// @retval #CSR_ERROR_ENGINE_NOT_EXIST No engine exists
-  /// @retval #CSR_ERROR_ENGINE_NOT_ACTIVATED Engine is not activated
-  /// @retval #CSR_ERROR_ENGINE_INTERNAL Engine Internal error
-  /// @retval #CSR_ERROR_SYSTEM System error
-  /// @see csr_engine_destroy()
+  /// Gets the handle of a current engine information.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - `engine` should be released using csr_engine_destroy().
+  ///
+  /// **Parameters:**
+  /// - `id` (in): Engine identifier to get handle
+  /// - `engine` (out): A pointer of the engine information handle
+  ///
+  /// **Returns:**
+  /// - `CSR_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CSR_ERROR_NONE`: Successful
+  /// - `CSR_ERROR_INVALID_PARAMETER`: `engine` is invalid
+  /// - `CSR_ERROR_ENGINE_NOT_EXIST`: No engine exists
+  /// - `CSR_ERROR_ENGINE_NOT_ACTIVATED`: Engine is not activated
+  /// - `CSR_ERROR_ENGINE_INTERNAL`: Engine Internal error
+  /// - `CSR_ERROR_SYSTEM`: System error
+  ///
+  /// **See also:**
+  /// - `csr_engine_destroy()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int csr_get_current_engine(
     int id,
     ffi.Pointer<csr_engine_h> engine,
@@ -1316,23 +1799,40 @@ class Tizen60CsrClient {
   late final _csr_get_current_engine = _csr_get_current_enginePtr
       .asFunction<int Function(int, ffi.Pointer<csr_engine_h>)>();
 
-  /// @platform
-  /// @brief Extracts a vendor name from the engine information handle.
-  /// @since_tizen 3.0
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/antivirus.admin
-  /// @remarks @a vendor must be released using free().
-  /// @param[in] engine The engine information handle
-  /// @param[out] vendor A pointer of the engine's vendor name
-  /// @return #CSR_ERROR_NONE on success,
-  /// otherwise a negative error value
-  /// @retval #CSR_ERROR_NONE Successful
-  /// @retval #CSR_ERROR_INVALID_HANDLE Invalid engine information handle
-  /// @retval #CSR_ERROR_INVALID_PARAMETER @a vendor is invalid
-  /// @retval #CSR_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #CSR_ERROR_ENGINE_INTERNAL Engine Internal error
-  /// @retval #CSR_ERROR_SYSTEM System error
-  /// @see csr_get_current_engine()
+  /// Extracts a vendor name from the engine information handle.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/antivirus.admin>
+  ///
+  /// **Remarks:**
+  /// - `vendor` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `engine` (in): The engine information handle
+  /// - `vendor` (out): A pointer of the engine's vendor name
+  ///
+  /// **Returns:**
+  /// - `CSR_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CSR_ERROR_NONE`: Successful
+  /// - `CSR_ERROR_INVALID_HANDLE`: Invalid engine information handle
+  /// - `CSR_ERROR_INVALID_PARAMETER`: `vendor` is invalid
+  /// - `CSR_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `CSR_ERROR_ENGINE_INTERNAL`: Engine Internal error
+  /// - `CSR_ERROR_SYSTEM`: System error
+  ///
+  /// **See also:**
+  /// - `csr_get_current_engine()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int csr_engine_get_vendor(
     csr_engine_h engine,
     ffi.Pointer<ffi.Pointer<ffi.Char>> vendor,
@@ -1350,23 +1850,40 @@ class Tizen60CsrClient {
   late final _csr_engine_get_vendor = _csr_engine_get_vendorPtr.asFunction<
       int Function(csr_engine_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @platform
-  /// @brief Extracts an engine name from the engine information handle.
-  /// @since_tizen 3.0
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/antivirus.admin
-  /// @remarks @a name must be released using free().
-  /// @param[in] engine The engine information handle
-  /// @param[out] name A pointer of the engine's name
-  /// @return #CSR_ERROR_NONE on success,
-  /// otherwise a negative error value
-  /// @retval #CSR_ERROR_NONE Successful
-  /// @retval #CSR_ERROR_INVALID_HANDLE Invalid engine information handle
-  /// @retval #CSR_ERROR_INVALID_PARAMETER @a name is invalid
-  /// @retval #CSR_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #CSR_ERROR_ENGINE_INTERNAL Engine Internal error
-  /// @retval #CSR_ERROR_SYSTEM System error
-  /// @see csr_get_current_engine()
+  /// Extracts an engine name from the engine information handle.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/antivirus.admin>
+  ///
+  /// **Remarks:**
+  /// - `name` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `engine` (in): The engine information handle
+  /// - `name` (out): A pointer of the engine's name
+  ///
+  /// **Returns:**
+  /// - `CSR_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CSR_ERROR_NONE`: Successful
+  /// - `CSR_ERROR_INVALID_HANDLE`: Invalid engine information handle
+  /// - `CSR_ERROR_INVALID_PARAMETER`: `name` is invalid
+  /// - `CSR_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `CSR_ERROR_ENGINE_INTERNAL`: Engine Internal error
+  /// - `CSR_ERROR_SYSTEM`: System error
+  ///
+  /// **See also:**
+  /// - `csr_get_current_engine()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int csr_engine_get_name(
     csr_engine_h engine,
     ffi.Pointer<ffi.Pointer<ffi.Char>> name,
@@ -1384,23 +1901,40 @@ class Tizen60CsrClient {
   late final _csr_engine_get_name = _csr_engine_get_namePtr.asFunction<
       int Function(csr_engine_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @platform
-  /// @brief Extracts an engine version from the engine information handle.
-  /// @since_tizen 3.0
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/antivirus.admin
-  /// @remarks @a version must be released using free().
-  /// @param[in] engine An engine information handle
-  /// @param[out] version A pointer of the engine's version
-  /// @return #CSR_ERROR_NONE on success,
-  /// otherwise a negative error value
-  /// @retval #CSR_ERROR_NONE Successful
-  /// @retval #CSR_ERROR_INVALID_HANDLE Invalid engine information handle
-  /// @retval #CSR_ERROR_INVALID_PARAMETER @a version is invalid
-  /// @retval #CSR_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #CSR_ERROR_ENGINE_INTERNAL Engine Internal error
-  /// @retval #CSR_ERROR_SYSTEM System error
-  /// @see csr_get_current_engine()
+  /// Extracts an engine version from the engine information handle.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/antivirus.admin>
+  ///
+  /// **Remarks:**
+  /// - `version` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `engine` (in): An engine information handle
+  /// - `version` (out): A pointer of the engine's version
+  ///
+  /// **Returns:**
+  /// - `CSR_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CSR_ERROR_NONE`: Successful
+  /// - `CSR_ERROR_INVALID_HANDLE`: Invalid engine information handle
+  /// - `CSR_ERROR_INVALID_PARAMETER`: `version` is invalid
+  /// - `CSR_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `CSR_ERROR_ENGINE_INTERNAL`: Engine Internal error
+  /// - `CSR_ERROR_SYSTEM`: System error
+  ///
+  /// **See also:**
+  /// - `csr_get_current_engine()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int csr_engine_get_version(
     csr_engine_h engine,
     ffi.Pointer<ffi.Pointer<ffi.Char>> version,
@@ -1418,23 +1952,40 @@ class Tizen60CsrClient {
   late final _csr_engine_get_version = _csr_engine_get_versionPtr.asFunction<
       int Function(csr_engine_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @platform
-  /// @brief Extracts an engine's data version from the engine information handle.
-  /// @since_tizen 3.0
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/antivirus.admin
-  /// @remarks @a version must be released using free().
-  /// @param[in] engine The engine information handle
-  /// @param[out] version A pointer of the data version. It can be null
-  /// @return #CSR_ERROR_NONE on success,
-  /// otherwise a negative error value
-  /// @retval #CSR_ERROR_NONE Successful
-  /// @retval #CSR_ERROR_INVALID_HANDLE Invalid engine information handle
-  /// @retval #CSR_ERROR_INVALID_PARAMETER @a version is invalid
-  /// @retval #CSR_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #CSR_ERROR_ENGINE_INTERNAL Engine Internal error
-  /// @retval #CSR_ERROR_SYSTEM System error
-  /// @see csr_get_current_engine()
+  /// Extracts an engine's data version from the engine information handle.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/antivirus.admin>
+  ///
+  /// **Remarks:**
+  /// - `version` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `engine` (in): The engine information handle
+  /// - `version` (out): A pointer of the data version. It can be null
+  ///
+  /// **Returns:**
+  /// - `CSR_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CSR_ERROR_NONE`: Successful
+  /// - `CSR_ERROR_INVALID_HANDLE`: Invalid engine information handle
+  /// - `CSR_ERROR_INVALID_PARAMETER`: `version` is invalid
+  /// - `CSR_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `CSR_ERROR_ENGINE_INTERNAL`: Engine Internal error
+  /// - `CSR_ERROR_SYSTEM`: System error
+  ///
+  /// **See also:**
+  /// - `csr_get_current_engine()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int csr_engine_get_data_version(
     csr_engine_h engine,
     ffi.Pointer<ffi.Pointer<ffi.Char>> version,
@@ -1454,22 +2005,37 @@ class Tizen60CsrClient {
       _csr_engine_get_data_versionPtr.asFunction<
           int Function(csr_engine_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @platform
-  /// @brief Extracts the latest update time of an engine from the engine information handle.
-  /// @since_tizen 3.0
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/antivirus.admin
-  /// @param[in] engine The engine information handle
-  /// @param[out] time A pointer of lasted update time
-  /// @return #CSR_ERROR_NONE on success,
-  /// otherwise a negative error value
-  /// @retval #CSR_ERROR_NONE Successful
-  /// @retval #CSR_ERROR_INVALID_HANDLE Invalid engine information handle
-  /// @retval #CSR_ERROR_INVALID_PARAMETER @a time is invalid
-  /// @retval #CSR_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #CSR_ERROR_ENGINE_INTERNAL Engine Internal error
-  /// @retval #CSR_ERROR_SYSTEM System error
-  /// @see csr_get_current_engine()
+  /// Extracts the latest update time of an engine from the engine information handle.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/antivirus.admin>
+  ///
+  /// **Parameters:**
+  /// - `engine` (in): The engine information handle
+  /// - `time` (out): A pointer of lasted update time
+  ///
+  /// **Returns:**
+  /// - `CSR_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CSR_ERROR_NONE`: Successful
+  /// - `CSR_ERROR_INVALID_HANDLE`: Invalid engine information handle
+  /// - `CSR_ERROR_INVALID_PARAMETER`: `time` is invalid
+  /// - `CSR_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `CSR_ERROR_ENGINE_INTERNAL`: Engine Internal error
+  /// - `CSR_ERROR_SYSTEM`: System error
+  ///
+  /// **See also:**
+  /// - `csr_get_current_engine()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int csr_engine_get_latest_update_time(
     csr_engine_h engine,
     ffi.Pointer<ffi_lib.Long> time,
@@ -1488,22 +2054,37 @@ class Tizen60CsrClient {
       _csr_engine_get_latest_update_timePtr
           .asFunction<int Function(csr_engine_h, ffi.Pointer<ffi_lib.Long>)>();
 
-  /// @platform
-  /// @brief Extracts the state of engine activation from the engine information handle.
-  /// @since_tizen 3.0
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/antivirus.admin
-  /// @param[in] engine The engine information handle
-  /// @param[out] activated A pointer of the engine activation state
-  /// @return #CSR_ERROR_NONE on success,
-  /// otherwise a negative error value
-  /// @retval #CSR_ERROR_NONE Successful
-  /// @retval #CSR_ERROR_INVALID_HANDLE Invalid engine information handle
-  /// @retval #CSR_ERROR_INVALID_PARAMETER @a activated is invalid
-  /// @retval #CSR_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #CSR_ERROR_ENGINE_INTERNAL Engine Internal error
-  /// @retval #CSR_ERROR_SYSTEM System error
-  /// @see csr_get_current_engine()
+  /// Extracts the state of engine activation from the engine information handle.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/antivirus.admin>
+  ///
+  /// **Parameters:**
+  /// - `engine` (in): The engine information handle
+  /// - `activated` (out): A pointer of the engine activation state
+  ///
+  /// **Returns:**
+  /// - `CSR_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CSR_ERROR_NONE`: Successful
+  /// - `CSR_ERROR_INVALID_HANDLE`: Invalid engine information handle
+  /// - `CSR_ERROR_INVALID_PARAMETER`: `activated` is invalid
+  /// - `CSR_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `CSR_ERROR_ENGINE_INTERNAL`: Engine Internal error
+  /// - `CSR_ERROR_SYSTEM`: System error
+  ///
+  /// **See also:**
+  /// - `csr_get_current_engine()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int csr_engine_get_activated(
     csr_engine_h engine,
     ffi.Pointer<ffi.Int32> activated,
@@ -1521,23 +2102,40 @@ class Tizen60CsrClient {
   late final _csr_engine_get_activated = _csr_engine_get_activatedPtr
       .asFunction<int Function(csr_engine_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @platform
-  /// @brief Enable or disable an engine.
-  /// @since_tizen 3.0
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/antivirus.admin
-  /// @remarks If an engine is disabled, all major operations would be failed with #CSR_ERROR_ENGINE_DISABLED error code.
-  /// @param[in] engine The engine information handle
-  /// @param[in] state The engine state
-  /// @return #CSR_ERROR_NONE on success,
-  /// otherwise a negative error value
-  /// @retval #CSR_ERROR_NONE Successful
-  /// @retval #CSR_ERROR_INVALID_HANDLE Invalid engine information handle
-  /// @retval #CSR_ERROR_INVALID_PARAMETER @a state is invalid
-  /// @retval #CSR_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #CSR_ERROR_ENGINE_INTERNAL Engine Internal error
-  /// @retval #CSR_ERROR_SYSTEM System error
-  /// @see csr_get_current_engine()
+  /// Enable or disable an engine.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/antivirus.admin>
+  ///
+  /// **Remarks:**
+  /// - If an engine is disabled, all major operations would be failed with `CSR_ERROR_ENGINE_DISABLED` error code.
+  ///
+  /// **Parameters:**
+  /// - `engine` (in): The engine information handle
+  /// - `state` (in): The engine state
+  ///
+  /// **Returns:**
+  /// - `CSR_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CSR_ERROR_NONE`: Successful
+  /// - `CSR_ERROR_INVALID_HANDLE`: Invalid engine information handle
+  /// - `CSR_ERROR_INVALID_PARAMETER`: `state` is invalid
+  /// - `CSR_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `CSR_ERROR_ENGINE_INTERNAL`: Engine Internal error
+  /// - `CSR_ERROR_SYSTEM`: System error
+  ///
+  /// **See also:**
+  /// - `csr_get_current_engine()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int csr_engine_set_state(
     csr_engine_h engine,
     int state,
@@ -1554,22 +2152,37 @@ class Tizen60CsrClient {
   late final _csr_engine_set_state =
       _csr_engine_set_statePtr.asFunction<int Function(csr_engine_h, int)>();
 
-  /// @platform
-  /// @brief Gets the engine state.
-  /// @since_tizen 3.0
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/antivirus.admin
-  /// @param[in] engine The engine information handle
-  /// @param[out] state A pointer of the engine state
-  /// @return #CSR_ERROR_NONE on success,
-  /// otherwise a negative error value
-  /// @retval #CSR_ERROR_NONE Successful
-  /// @retval #CSR_ERROR_INVALID_HANDLE Invalid engine information handle
-  /// @retval #CSR_ERROR_INVALID_PARAMETER @a state is invalid
-  /// @retval #CSR_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #CSR_ERROR_ENGINE_INTERNAL Engine Internal error
-  /// @retval #CSR_ERROR_SYSTEM System error
-  /// @see csr_get_current_engine()
+  /// Gets the engine state.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/antivirus.admin>
+  ///
+  /// **Parameters:**
+  /// - `engine` (in): The engine information handle
+  /// - `state` (out): A pointer of the engine state
+  ///
+  /// **Returns:**
+  /// - `CSR_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CSR_ERROR_NONE`: Successful
+  /// - `CSR_ERROR_INVALID_HANDLE`: Invalid engine information handle
+  /// - `CSR_ERROR_INVALID_PARAMETER`: `state` is invalid
+  /// - `CSR_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `CSR_ERROR_ENGINE_INTERNAL`: Engine Internal error
+  /// - `CSR_ERROR_SYSTEM`: System error
+  ///
+  /// **See also:**
+  /// - `csr_get_current_engine()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int csr_engine_get_state(
     csr_engine_h engine,
     ffi.Pointer<ffi.Int32> state,
@@ -1587,14 +2200,23 @@ class Tizen60CsrClient {
   late final _csr_engine_get_state = _csr_engine_get_statePtr
       .asFunction<int Function(csr_engine_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @platform
-  /// @brief Releases all system resources associated with a engine information handle.
-  /// @since_tizen 3.0
-  /// @param[in] engine The engine information handle
-  /// @return #CSR_ERROR_NONE on success,
-  /// otherwise a negative error value
-  /// @retval #CSR_ERROR_NONE Successful
-  /// @retval #CSR_ERROR_INVALID_HANDLE Invalid engine information handle
+  /// Releases all system resources associated with a engine information handle.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `engine` (in): The engine information handle
+  ///
+  /// **Returns:**
+  /// - `CSR_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CSR_ERROR_NONE`: Successful
+  /// - `CSR_ERROR_INVALID_HANDLE`: Invalid engine information handle
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int csr_engine_destroy(
     csr_engine_h engine,
   ) {
@@ -1609,23 +2231,40 @@ class Tizen60CsrClient {
   late final _csr_engine_destroy =
       _csr_engine_destroyPtr.asFunction<int Function(csr_engine_h)>();
 
-  /// @partner
-  /// @brief Initializes and returns a CSR Web Protection API handle.
-  /// @details A Web Protection API handle (or CSR WP handle) is obtained by this method.
-  /// The handle is required for subsequent CSR WP API calls.
-  /// @since_tizen 3.0
-  /// @privlevel partner
-  /// @privilege %http://tizen.org/privilege/antivirus.webprotect
-  /// @remarks @a handle should be released using csr_wp_context_destroy().
-  /// @remarks Multiple handles can be obtained.
-  /// @param[out] handle A pointer of CSR WP context handle
-  /// @return #CSR_ERROR_NONE on success,
-  /// otherwise a negative error value
-  /// @retval #CSR_ERROR_NONE Successful
-  /// @retval #CSR_ERROR_OUT_OF_MEMORY Not enough memory
-  /// @retval #CSR_ERROR_INVALID_PARAMETER @a handle is invalid
-  /// @retval #CSR_ERROR_SYSTEM System error
-  /// @see csr_wp_context_destroy()
+  /// Initializes and returns a CSR Web Protection API handle.
+  ///
+  /// A Web Protection API handle (or CSR WP handle) is obtained by this method. The handle is required for subsequent CSR WP API calls.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/antivirus.webprotect>
+  ///
+  /// **Remarks:**
+  /// - `handle` should be released using csr_wp_context_destroy().
+  /// - Multiple handles can be obtained.
+  ///
+  /// **Parameters:**
+  /// - `handle` (out): A pointer of CSR WP context handle
+  ///
+  /// **Returns:**
+  /// - `CSR_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CSR_ERROR_NONE`: Successful
+  /// - `CSR_ERROR_OUT_OF_MEMORY`: Not enough memory
+  /// - `CSR_ERROR_INVALID_PARAMETER`: `handle` is invalid
+  /// - `CSR_ERROR_SYSTEM`: System error
+  ///
+  /// **See also:**
+  /// - `csr_wp_context_destroy()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int csr_wp_context_create(
     ffi.Pointer<csr_wp_context_h> handle,
   ) {
@@ -1640,21 +2279,36 @@ class Tizen60CsrClient {
   late final _csr_wp_context_create = _csr_wp_context_createPtr
       .asFunction<int Function(ffi.Pointer<csr_wp_context_h>)>();
 
-  /// @partner
-  /// @brief Releases all system resources associated with a Web Protection API handle.
-  /// @since_tizen 3.0
-  /// @privlevel partner
-  /// @privilege %http://tizen.org/privilege/antivirus.webprotect
-  /// @param[in] handle CSR WP context handle returned by csr_wp_context_create()
-  /// @return #CSR_ERROR_NONE on success,
-  /// otherwise a negative error value
-  /// @retval #CSR_ERROR_NONE Successful
-  /// @retval #CSR_ERROR_INVALID_HANDLE Invalid handle
-  /// @retval #CSR_ERROR_SOCKET Socket error between client and server
-  /// @retval #CSR_ERROR_SERVER Server has been failed for some reason
-  /// @retval #CSR_ERROR_ENGINE_INTERNAL Engine Internal error
-  /// @retval #CSR_ERROR_SYSTEM System error
-  /// @see csr_wp_context_create()
+  /// Releases all system resources associated with a Web Protection API handle.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/antivirus.webprotect>
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): CSR WP context handle returned by csr_wp_context_create()
+  ///
+  /// **Returns:**
+  /// - `CSR_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CSR_ERROR_NONE`: Successful
+  /// - `CSR_ERROR_INVALID_HANDLE`: Invalid handle
+  /// - `CSR_ERROR_SOCKET`: Socket error between client and server
+  /// - `CSR_ERROR_SERVER`: Server has been failed for some reason
+  /// - `CSR_ERROR_ENGINE_INTERNAL`: Engine Internal error
+  /// - `CSR_ERROR_SYSTEM`: System error
+  ///
+  /// **See also:**
+  /// - `csr_wp_context_create()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int csr_wp_context_destroy(
     csr_wp_context_h handle,
   ) {
@@ -1669,23 +2323,40 @@ class Tizen60CsrClient {
   late final _csr_wp_context_destroy =
       _csr_wp_context_destroyPtr.asFunction<int Function(csr_wp_context_h)>();
 
-  /// @partner
-  /// @brief Sets a popup option for risky URL checked.
-  /// @details If #CSR_WP_ASK_USER_YES is set, a popup will be prompted to a user when a URL turns out risky.
-  /// If #CSR_WP_ASK_USER_NO is set, no popup will be prompted even when a URL turns out risky.
-  /// @since_tizen 3.0
-  /// @privlevel partner
-  /// @privilege %http://tizen.org/privilege/antivirus.webprotect
-  /// @remarks This option is disabled(#CSR_WP_ASK_USER_NO) as a default.
-  /// @param[in] handle CSR WP context handle returned by csr_wp_context_create()
-  /// @param[in] ask_user A popup option in case for a risky URL
-  /// @return #CSR_ERROR_NONE on success,
-  /// otherwise a negative error value
-  /// @retval #CSR_ERROR_NONE Successful
-  /// @retval #CSR_ERROR_INVALID_HANDLE Invalid handle
-  /// @retval #CSR_ERROR_INVALID_PARAMETER @a ask_user is invalid
-  /// @retval #CSR_ERROR_SYSTEM System error
-  /// @see csr_wp_context_create()
+  /// Sets a popup option for risky URL checked.
+  ///
+  /// If `CSR_WP_ASK_USER_YES` is set, a popup will be prompted to a user when a URL turns out risky. If `CSR_WP_ASK_USER_NO` is set, no popup will be prompted even when a URL turns out risky.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/antivirus.webprotect>
+  ///
+  /// **Remarks:**
+  /// - This option is disabled(`CSR_WP_ASK_USER_NO`) as a default.
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): CSR WP context handle returned by csr_wp_context_create()
+  /// - `ask_user` (in): A popup option in case for a risky URL
+  ///
+  /// **Returns:**
+  /// - `CSR_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CSR_ERROR_NONE`: Successful
+  /// - `CSR_ERROR_INVALID_HANDLE`: Invalid handle
+  /// - `CSR_ERROR_INVALID_PARAMETER`: `ask_user` is invalid
+  /// - `CSR_ERROR_SYSTEM`: System error
+  ///
+  /// **See also:**
+  /// - `csr_wp_context_create()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int csr_wp_set_ask_user(
     csr_wp_context_h handle,
     int ask_user,
@@ -1702,24 +2373,42 @@ class Tizen60CsrClient {
   late final _csr_wp_set_ask_user =
       _csr_wp_set_ask_userPtr.asFunction<int Function(csr_wp_context_h, int)>();
 
-  /// @partner
-  /// @brief Sets a popup message of a client in case for a risky URL.
-  /// @details Default message is "Risky URL which may harm your device is detected".
-  /// @since_tizen 3.0
-  /// @privlevel partner
-  /// @privilege %http://tizen.org/privilege/antivirus.webprotect
-  /// @remarks Meaningful only when ask user option is set by csr_wp_set_ask_user().
-  /// @remarks The message will be printed on popup for user.
-  /// @remarks Default popup message will be used if it isn't set.
-  /// @param[in] handle CSR WP context handle returned by csr_wp_context_create()
-  /// @param[in] message A message to print on a popup
-  /// @return #CSR_ERROR_NONE on success,
-  /// otherwise a negative error value
-  /// @retval #CSR_ERROR_NONE Successful
-  /// @retval #CSR_ERROR_INVALID_HANDLE Invalid handle
-  /// @retval #CSR_ERROR_INVALID_PARAMETER @a message is too long or empty. Max size is 64 bytes
-  /// @retval #CSR_ERROR_SYSTEM System error
-  /// @see csr_wp_context_create()
+  /// Sets a popup message of a client in case for a risky URL.
+  ///
+  /// Default message is "Risky URL which may harm your device is detected".
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/antivirus.webprotect>
+  ///
+  /// **Remarks:**
+  /// - Meaningful only when ask user option is set by csr_wp_set_ask_user().
+  /// - The message will be printed on popup for user.
+  /// - Default popup message will be used if it isn't set.
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): CSR WP context handle returned by csr_wp_context_create()
+  /// - `message` (in): A message to print on a popup
+  ///
+  /// **Returns:**
+  /// - `CSR_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CSR_ERROR_NONE`: Successful
+  /// - `CSR_ERROR_INVALID_HANDLE`: Invalid handle
+  /// - `CSR_ERROR_INVALID_PARAMETER`: `message` is too long or empty. Max size is 64 bytes
+  /// - `CSR_ERROR_SYSTEM`: System error
+  ///
+  /// **See also:**
+  /// - `csr_wp_context_create()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int csr_wp_set_popup_message(
     csr_wp_context_h handle,
     ffi.Pointer<ffi.Char> message,
@@ -1737,36 +2426,53 @@ class Tizen60CsrClient {
   late final _csr_wp_set_popup_message = _csr_wp_set_popup_messagePtr
       .asFunction<int Function(csr_wp_context_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @partner
-  /// @brief Checks URL reputation against the engine vendor's database.
-  /// @details Checks whether accessing the URL is risky or not and returns a result handle with the risk level for the URL.
-  /// @since_tizen 3.0
-  /// @privlevel partner
-  /// @privilege %http://tizen.org/privilege/antivirus.webprotect
-  /// @remarks @a result will be released when @a handle is released using csr_wp_context_destroy().
-  /// @param[in] handle CSR WP context handle returned by csr_wp_context_create()
-  /// @param[in] url URL to check
-  /// @param[out] result A pointer of the result handle with the Risk level for the URL
-  /// @return #CSR_ERROR_NONE on success,
-  /// otherwise a negative error value
-  /// @retval #CSR_ERROR_NONE Successful
-  /// @retval #CSR_ERROR_INVALID_HANDLE Invalid handle
-  /// @retval #CSR_ERROR_OUT_OF_MEMORY Not enough memory
-  /// @retval #CSR_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #CSR_ERROR_NOT_SUPPORTED Device needed to run API is not supported
-  /// @retval #CSR_ERROR_INVALID_PARAMETER @a url or @a result is invalid
-  /// @retval #CSR_ERROR_SOCKET Socket error between client and server
-  /// @retval #CSR_ERROR_SERVER Server has been failed for some reason
-  /// @retval #CSR_ERROR_USER_RESPONSE_FAILED Getting user response is failed.
-  /// @a result will be allocated on this error
-  /// @retval #CSR_ERROR_ENGINE_NOT_EXIST No engine exists
-  /// @retval #CSR_ERROR_ENGINE_DISABLED Engine is in disabled state
-  /// @retval #CSR_ERROR_ENGINE_NOT_ACTIVATED Engine is not activated
-  /// @retval #CSR_ERROR_ENGINE_INTERNAL Engine Internal error
-  /// @retval #CSR_ERROR_SYSTEM System error
-  /// @see csr_wp_context_create()
-  /// @see csr_wp_set_ask_user()
-  /// @see csr_wp_set_popup_message()
+  /// Checks URL reputation against the engine vendor's database.
+  ///
+  /// Checks whether accessing the URL is risky or not and returns a result handle with the risk level for the URL.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/antivirus.webprotect>
+  ///
+  /// **Remarks:**
+  /// - `result` will be released when `handle` is released using csr_wp_context_destroy().
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): CSR WP context handle returned by csr_wp_context_create()
+  /// - `url` (in): URL to check
+  /// - `result` (out): A pointer of the result handle with the Risk level for the URL
+  ///
+  /// **Returns:**
+  /// - `CSR_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CSR_ERROR_NONE`: Successful
+  /// - `CSR_ERROR_INVALID_HANDLE`: Invalid handle
+  /// - `CSR_ERROR_OUT_OF_MEMORY`: Not enough memory
+  /// - `CSR_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `CSR_ERROR_NOT_SUPPORTED`: Device needed to run API is not supported
+  /// - `CSR_ERROR_INVALID_PARAMETER`: `url` or `result` is invalid
+  /// - `CSR_ERROR_SOCKET`: Socket error between client and server
+  /// - `CSR_ERROR_SERVER`: Server has been failed for some reason
+  /// - `CSR_ERROR_USER_RESPONSE_FAILED`: Getting user response is failed. `result` will be allocated on this error
+  /// - `CSR_ERROR_ENGINE_NOT_EXIST`: No engine exists
+  /// - `CSR_ERROR_ENGINE_DISABLED`: Engine is in disabled state
+  /// - `CSR_ERROR_ENGINE_NOT_ACTIVATED`: Engine is not activated
+  /// - `CSR_ERROR_ENGINE_INTERNAL`: Engine Internal error
+  /// - `CSR_ERROR_SYSTEM`: System error
+  ///
+  /// **See also:**
+  /// - `csr_wp_context_create()`
+  /// - `csr_wp_set_ask_user()`
+  /// - `csr_wp_set_popup_message()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int csr_wp_check_url(
     csr_wp_context_h handle,
     ffi.Pointer<ffi.Char> url,
@@ -1787,20 +2493,35 @@ class Tizen60CsrClient {
       int Function(csr_wp_context_h, ffi.Pointer<ffi.Char>,
           ffi.Pointer<csr_wp_check_result_h>)>();
 
-  /// @partner
-  /// @brief Extracts a risk level of the url from the result handle.
-  /// @since_tizen 3.0
-  /// @privlevel partner
-  /// @privilege %http://tizen.org/privilege/antivirus.webprotect
-  /// @param[in] result A result handle returned by csr_wp_check_url()
-  /// @param[out] level A pointer of the risk level for the given URL
-  /// @return #CSR_ERROR_NONE on success,
-  /// otherwise a negative error value
-  /// @retval #CSR_ERROR_NONE Successful
-  /// @retval #CSR_ERROR_INVALID_HANDLE Invalid result handle
-  /// @retval #CSR_ERROR_INVALID_PARAMETER @a level is invalid
-  /// @retval #CSR_ERROR_SYSTEM System error
-  /// @see csr_wp_check_url()
+  /// Extracts a risk level of the url from the result handle.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/antivirus.webprotect>
+  ///
+  /// **Parameters:**
+  /// - `result` (in): A result handle returned by csr_wp_check_url()
+  /// - `level` (out): A pointer of the risk level for the given URL
+  ///
+  /// **Returns:**
+  /// - `CSR_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CSR_ERROR_NONE`: Successful
+  /// - `CSR_ERROR_INVALID_HANDLE`: Invalid result handle
+  /// - `CSR_ERROR_INVALID_PARAMETER`: `level` is invalid
+  /// - `CSR_ERROR_SYSTEM`: System error
+  ///
+  /// **See also:**
+  /// - `csr_wp_check_url()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int csr_wp_result_get_risk_level(
     csr_wp_check_result_h result,
     ffi.Pointer<ffi.Int32> level,
@@ -1819,23 +2540,38 @@ class Tizen60CsrClient {
       _csr_wp_result_get_risk_levelPtr.asFunction<
           int Function(csr_wp_check_result_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @partner
-  /// @brief Extracts an url of vendor's web site that contains detailed information about the risk from the result handle.
-  /// @since_tizen 3.0
-  /// @privlevel partner
-  /// @privilege %http://tizen.org/privilege/antivirus.webprotect
-  /// @remarks @a detailed_url must be released using free().
-  /// @param[in] result A result handle returned by csr_wp_check_url()
-  /// @param[out] detailed_url A pointer of an url that contains detailed information about the risk
-  /// If the risk level is #CSR_WP_RISK_MEDIUM or #CSR_WP_RISK_HIGH,
-  /// this url should be provided by the engine
-  /// @return #CSR_ERROR_NONE on success,
-  /// otherwise a negative error value
-  /// @retval #CSR_ERROR_NONE Successful
-  /// @retval #CSR_ERROR_INVALID_HANDLE Invalid result handle
-  /// @retval #CSR_ERROR_INVALID_PARAMETER @a detailed_url is invalid
-  /// @retval #CSR_ERROR_SYSTEM System error
-  /// @see csr_wp_check_url()
+  /// Extracts an url of vendor's web site that contains detailed information about the risk from the result handle.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/antivirus.webprotect>
+  ///
+  /// **Remarks:**
+  /// - `detailed_url` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `result` (in): A result handle returned by csr_wp_check_url()
+  /// - `detailed_url` (out): A pointer of an url that contains detailed information about the risk If the risk level is `CSR_WP_RISK_MEDIUM` or `CSR_WP_RISK_HIGH`, this url should be provided by the engine
+  ///
+  /// **Returns:**
+  /// - `CSR_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CSR_ERROR_NONE`: Successful
+  /// - `CSR_ERROR_INVALID_HANDLE`: Invalid result handle
+  /// - `CSR_ERROR_INVALID_PARAMETER`: `detailed_url` is invalid
+  /// - `CSR_ERROR_SYSTEM`: System error
+  ///
+  /// **See also:**
+  /// - `csr_wp_check_url()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int csr_wp_result_get_detailed_url(
     csr_wp_check_result_h result,
     ffi.Pointer<ffi.Pointer<ffi.Char>> detailed_url,
@@ -1856,21 +2592,36 @@ class Tizen60CsrClient {
           int Function(
               csr_wp_check_result_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @partner
-  /// @brief Extracts a user response of a popup from the result handle.
-  /// @since_tizen 3.0
-  /// @privlevel partner
-  /// @privilege %http://tizen.org/privilege/antivirus.webprotect
-  /// @param[in] result A result handle returned by csr_wp_check_url()
-  /// @param[out] response A pointer of the user response
-  /// @return #CSR_ERROR_NONE on success,
-  /// otherwise a negative error value
-  /// @retval #CSR_ERROR_NONE Successful
-  /// @retval #CSR_ERROR_INVALID_HANDLE Invalid result handle
-  /// @retval #CSR_ERROR_INVALID_PARAMETER @a response is invalid
-  /// @retval #CSR_ERROR_SYSTEM System error
-  /// @see csr_wp_check_url()
-  /// @see #csr_wp_user_response_e
+  /// Extracts a user response of a popup from the result handle.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/antivirus.webprotect>
+  ///
+  /// **Parameters:**
+  /// - `result` (in): A result handle returned by csr_wp_check_url()
+  /// - `response` (out): A pointer of the user response
+  ///
+  /// **Returns:**
+  /// - `CSR_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CSR_ERROR_NONE`: Successful
+  /// - `CSR_ERROR_INVALID_HANDLE`: Invalid result handle
+  /// - `CSR_ERROR_INVALID_PARAMETER`: `response` is invalid
+  /// - `CSR_ERROR_SYSTEM`: System error
+  ///
+  /// **See also:**
+  /// - `csr_wp_check_url()`
+  /// - `csr_wp_user_response_e`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int csr_wp_result_get_user_response(
     csr_wp_check_result_h result,
     ffi.Pointer<ffi.Int32> response,
@@ -1890,9 +2641,14 @@ class Tizen60CsrClient {
           int Function(csr_wp_check_result_h, ffi.Pointer<ffi.Int32>)>();
 }
 
-/// @partner
-/// @brief Enumeration for severity level of a detected malware.
-/// @since_tizen 3.0
+/// Enumeration for severity level of a detected malware.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Paragraph:**
+/// - tner
+/// @nodoc
 abstract class csr_cs_severity_level_e {
   /// < Low Severity. User can choose how to handle between skip, ignore and remove.
   static const int CSR_CS_SEVERITY_LOW = 1;
@@ -1904,9 +2660,14 @@ abstract class csr_cs_severity_level_e {
   static const int CSR_CS_SEVERITY_HIGH = 3;
 }
 
-/// @partner
-/// @brief Enumeration for the option of asking user about handling a detected malware.
-/// @since_tizen 3.0
+/// Enumeration for the option of asking user about handling a detected malware.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Paragraph:**
+/// - tner
+/// @nodoc
 abstract class csr_cs_ask_user_e {
   /// < Do not ask the user even if malicious contents were found.
   static const int CSR_CS_ASK_USER_NO = 0;
@@ -1915,9 +2676,14 @@ abstract class csr_cs_ask_user_e {
   static const int CSR_CS_ASK_USER_YES = 1;
 }
 
-/// @partner
-/// @brief Enumeration for the user response from popup.
-/// @since_tizen 3.0
+/// Enumeration for the user response from popup.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Paragraph:**
+/// - tner
+/// @nodoc
 abstract class csr_cs_user_response_e {
   /// < No response from user.
   static const int CSR_CS_USER_RESPONSE_USER_NOT_ASKED = 0;
@@ -1932,9 +2698,14 @@ abstract class csr_cs_user_response_e {
   static const int CSR_CS_USER_RESPONSE_PROCESSING_DISALLOWED = 3;
 }
 
-/// @partner
-/// @brief Enumeration for the action types for the detected malware files.
-/// @since_tizen 3.0
+/// Enumeration for the action types for the detected malware files.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Paragraph:**
+/// - tner
+/// @nodoc
 abstract class csr_cs_action_e {
   /// < Remove the detected malware file.
   static const int CSR_CS_ACTION_REMOVE = 0;
@@ -1946,9 +2717,14 @@ abstract class csr_cs_action_e {
   static const int CSR_CS_ACTION_UNIGNORE = 2;
 }
 
-/// @partner
-/// @brief Enumeration for maximum core usage during scanning.
-/// @since_tizen 3.0
+/// Enumeration for maximum core usage during scanning.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Paragraph:**
+/// - tner
+/// @nodoc
 abstract class csr_cs_core_usage_e {
   /// < Use default setting value.
   static const int CSR_CS_CORE_USAGE_DEFAULT = 0;
@@ -1963,17 +2739,26 @@ abstract class csr_cs_core_usage_e {
   static const int CSR_CS_CORE_USAGE_SINGLE = 3;
 }
 
+/// @nodoc
 final class __csr_cs_context_s extends ffi.Opaque {}
 
+/// @nodoc
 final class __csr_cs_malware_s extends ffi.Opaque {}
 
+/// @nodoc
 final class __csr_cs_malware_list_s extends ffi.Opaque {}
 
+/// @nodoc
 final class __csr_cs_engine_s extends ffi.Opaque {}
 
-/// @partner
-/// @brief Enumeration for CSR Errors.
-/// @since_tizen 3.0
+/// Enumeration for CSR Errors.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Paragraph:**
+/// - tner
+/// @nodoc
 abstract class csr_error_e {
   /// < Successful
   static const int CSR_ERROR_NONE = 0;
@@ -2042,125 +2827,204 @@ abstract class csr_error_e {
   static const int CSR_ERROR_SYSTEM = -31653633;
 }
 
-/// @partner
-/// @brief Content screening APIs context handle.
-/// @since_tizen 3.0
+/// Content screening APIs context handle.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Paragraph:**
+/// - tner
+/// @nodoc
 typedef csr_cs_context_h = ffi.Pointer<__csr_cs_context_s>;
 
-/// @partner
-/// @brief Detected malware handle.
-/// @since_tizen 3.0
+/// Detected malware handle.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Paragraph:**
+/// - tner
+/// @nodoc
 typedef csr_cs_malware_h = ffi.Pointer<__csr_cs_malware_s>;
 
-/// @partner
-/// @brief Called when each file scanning is done without malware.
-/// @since_tizen 3.0
-/// @remarks Only for asynchronous scan functions.
-/// @remarks Called for each file or application which is not detected malware.
-/// @param[in] file_path A path of the file scanned. It would be package path if it's in application
-/// @param[in] user_data A pointer of a user data. It's provided by client when calling asynchronous scanning method
-/// @see csr_cs_set_file_scanned_cb()
-/// @see csr_cs_scan_files_async()
-/// @see csr_cs_scan_dir_async()
-/// @see csr_cs_scan_dirs_async()
+/// Called when each file scanning is done without malware.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Remarks:**
+/// - Only for asynchronous scan functions.
+/// - Called for each file or application which is not detected malware.
+///
+/// **Parameters:**
+/// - `file_path` (in): A path of the file scanned. It would be package path if it's in application
+/// - `user_data` (in): A pointer of a user data. It's provided by client when calling asynchronous scanning method
+///
+/// **See also:**
+/// - `csr_cs_set_file_scanned_cb()`
+/// - `csr_cs_scan_files_async()`
+/// - `csr_cs_scan_dir_async()`
+/// - `csr_cs_scan_dirs_async()`
+///
+/// **Paragraph:**
+/// - tner
+/// @nodoc
 typedef csr_cs_file_scanned_cb
     = ffi.Pointer<ffi.NativeFunction<csr_cs_file_scanned_cbFunction>>;
+/// @nodoc
 typedef csr_cs_file_scanned_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> file_path, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartcsr_cs_file_scanned_cbFunction = void Function(
     ffi.Pointer<ffi.Char> file_path, ffi.Pointer<ffi.Void> user_data);
 
-/// @partner
-/// @brief Called when each file scanning is done with malware.
-/// @since_tizen 3.0
-/// @remarks Only for asynchronous scan functions.
-/// @remarks Called for each file or application which is detected malware.
-/// @remarks @a malware will be released when a context is released using csr_cs_context_destroy().
-/// @param[in] malware The detected malware handle
-/// @param[in] user_data A pointer of a user data. It's provided by client when calling asynchronous scanning method
-/// @see csr_cs_set_detected_cb()
-/// @see csr_cs_scan_files_async()
-/// @see csr_cs_scan_dir_async()
-/// @see csr_cs_scan_dirs_async()
+/// Called when each file scanning is done with malware.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Remarks:**
+/// - Only for asynchronous scan functions.
+/// - Called for each file or application which is detected malware.
+/// - `malware` will be released when a context is released using csr_cs_context_destroy().
+///
+/// **Parameters:**
+/// - `malware` (in): The detected malware handle
+/// - `user_data` (in): A pointer of a user data. It's provided by client when calling asynchronous scanning method
+///
+/// **See also:**
+/// - `csr_cs_set_detected_cb()`
+/// - `csr_cs_scan_files_async()`
+/// - `csr_cs_scan_dir_async()`
+/// - `csr_cs_scan_dirs_async()`
+///
+/// **Paragraph:**
+/// - tner
+/// @nodoc
 typedef csr_cs_detected_cb
     = ffi.Pointer<ffi.NativeFunction<csr_cs_detected_cbFunction>>;
+/// @nodoc
 typedef csr_cs_detected_cbFunction = ffi.Void Function(
     csr_cs_malware_h malware, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartcsr_cs_detected_cbFunction = void Function(
     csr_cs_malware_h malware, ffi.Pointer<ffi.Void> user_data);
 
-/// @partner
-/// @brief Called when scanning is finished successfully.
-/// @since_tizen 3.0
-/// @remarks Only for asynchronous scan functions.
-/// @remarks Called only once at the end of scanning when success.
-/// @param[in] user_data A pointer of a user data. It's provided by client when calling asynchronous scanning method
-/// @see csr_cs_set_completed_cb()
-/// @see csr_cs_scan_files_async()
-/// @see csr_cs_scan_dir_async()
-/// @see csr_cs_scan_dirs_async()
+/// Called when scanning is finished successfully.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Remarks:**
+/// - Only for asynchronous scan functions.
+/// - Called only once at the end of scanning when success.
+///
+/// **Parameters:**
+/// - `user_data` (in): A pointer of a user data. It's provided by client when calling asynchronous scanning method
+///
+/// **See also:**
+/// - `csr_cs_set_completed_cb()`
+/// - `csr_cs_scan_files_async()`
+/// - `csr_cs_scan_dir_async()`
+/// - `csr_cs_scan_dirs_async()`
+///
+/// **Paragraph:**
+/// - tner
+/// @nodoc
 typedef csr_cs_completed_cb
     = ffi.Pointer<ffi.NativeFunction<csr_cs_completed_cbFunction>>;
+/// @nodoc
 typedef csr_cs_completed_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartcsr_cs_completed_cbFunction = void Function(
     ffi.Pointer<ffi.Void> user_data);
 
-/// @partner
-/// @brief Called when scanning is cancelled by csr_cs_cancel_scanning().
-/// @since_tizen 3.0
-/// @remarks Only for asynchronous scan functions.
-/// @remarks Called only once at the end of scanning by being cancelled.
-/// @param[in] user_data A pointer of a user data. It's provided by client when calling asynchronous scanning method
-/// @see csr_cs_set_cancelled_cb()
-/// @see csr_cs_cancel_scanning()
-/// @see csr_cs_scan_files_async()
-/// @see csr_cs_scan_dir_async()
-/// @see csr_cs_scan_dirs_async()
+/// Called when scanning is cancelled by csr_cs_cancel_scanning().
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Remarks:**
+/// - Only for asynchronous scan functions.
+/// - Called only once at the end of scanning by being cancelled.
+///
+/// **Parameters:**
+/// - `user_data` (in): A pointer of a user data. It's provided by client when calling asynchronous scanning method
+///
+/// **See also:**
+/// - `csr_cs_set_cancelled_cb()`
+/// - `csr_cs_cancel_scanning()`
+/// - `csr_cs_scan_files_async()`
+/// - `csr_cs_scan_dir_async()`
+/// - `csr_cs_scan_dirs_async()`
+///
+/// **Paragraph:**
+/// - tner
+/// @nodoc
 typedef csr_cs_cancelled_cb
     = ffi.Pointer<ffi.NativeFunction<csr_cs_cancelled_cbFunction>>;
+/// @nodoc
 typedef csr_cs_cancelled_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartcsr_cs_cancelled_cbFunction = void Function(
     ffi.Pointer<ffi.Void> user_data);
 
-/// @partner
-/// @brief Called when scanning is stopped with an error.
-/// @details The following error codes can be delivered.\n
-/// #CSR_ERROR_FILE_DO_NOT_EXIST,\n
-/// #CSR_ERROR_SOCKET,\n
-/// #CSR_ERROR_SERVER,\n
-/// #CSR_ERROR_ENGINE_NOT_EXIST,\n
-/// #CSR_ERROR_ENGINE_DISABLED,\n
-/// #CSR_ERROR_ENGINE_NOT_ACTIVATED,\n
-/// #CSR_ERROR_ENGINE_PERMISSION,\n
-/// #CSR_ERROR_ENGINE_INTERNAL
-/// @since_tizen 3.0
-/// @remarks Only for asynchronous scan functions.
-/// @remarks Called only once at the end of scanning when failed with error.
-/// @param[in] error_code Error code of #csr_error_e defined in csr-error.h
-/// @param[in] user_data A pointer of a user data. It's provided by client when calling asynchronous scanning method
-/// @see csr_cs_set_error_cb()
-/// @see csr_cs_scan_files_async()
-/// @see csr_cs_scan_dir_async()
-/// @see csr_cs_scan_dirs_async()
+/// Called when scanning is stopped with an error.
+///
+/// The following error codes can be delivered. `CSR_ERROR_FILE_DO_NOT_EXIST`, `CSR_ERROR_SOCKET`, `CSR_ERROR_SERVER`, `CSR_ERROR_ENGINE_NOT_EXIST`, `CSR_ERROR_ENGINE_DISABLED`, `CSR_ERROR_ENGINE_NOT_ACTIVATED`, `CSR_ERROR_ENGINE_PERMISSION`, `CSR_ERROR_ENGINE_INTERNAL`
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Remarks:**
+/// - Only for asynchronous scan functions.
+/// - Called only once at the end of scanning when failed with error.
+///
+/// **Parameters:**
+/// - `error_code` (in): Error code of `csr_error_e` defined in csr-error.h
+/// - `user_data` (in): A pointer of a user data. It's provided by client when calling asynchronous scanning method
+///
+/// **See also:**
+/// - `csr_cs_set_error_cb()`
+/// - `csr_cs_scan_files_async()`
+/// - `csr_cs_scan_dir_async()`
+/// - `csr_cs_scan_dirs_async()`
+///
+/// **Paragraph:**
+/// - tner
+/// @nodoc
 typedef csr_cs_error_cb
     = ffi.Pointer<ffi.NativeFunction<csr_cs_error_cbFunction>>;
+/// @nodoc
 typedef csr_cs_error_cbFunction = ffi.Void Function(
     ffi.Int error_code, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartcsr_cs_error_cbFunction = void Function(
     int error_code, ffi.Pointer<ffi.Void> user_data);
 
-/// @partner
-/// @brief Detected malware list handle.
-/// @since_tizen 3.0
+/// Detected malware list handle.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Paragraph:**
+/// - tner
+/// @nodoc
 typedef csr_cs_malware_list_h = ffi.Pointer<__csr_cs_malware_list_s>;
 
+/// @nodoc
 final class __csr_engine_h extends ffi.Opaque {}
 
-/// @platform
-/// @brief Enumeration for engine identifier.
-/// @since_tizen 3.0
+/// Enumeration for engine identifier.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Platform:**
+/// - Platform API.
+/// @nodoc
 abstract class csr_engine_id_e {
   /// < Content screening engine id
   static const int CSR_ENGINE_CS = 1;
@@ -2169,9 +3033,14 @@ abstract class csr_engine_id_e {
   static const int CSR_ENGINE_WP = 2;
 }
 
-/// @platform
-/// @brief Enumeration for state of engine activation.
-/// @since_tizen 3.0
+/// Enumeration for state of engine activation.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Platform:**
+/// - Platform API.
+/// @nodoc
 abstract class csr_activated_e {
   /// < Engine is not activated
   static const int CSR_NOT_ACTIVATED = 1;
@@ -2180,9 +3049,14 @@ abstract class csr_activated_e {
   static const int CSR_ACTIVATED = 2;
 }
 
-/// @platform
-/// @brief Enumeration for state of engine.
-/// @since_tizen 3.0
+/// Enumeration for state of engine.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Platform:**
+/// - Platform API.
+/// @nodoc
 abstract class csr_state_e {
   /// < Enable engine
   static const int CSR_STATE_ENABLE = 1;
@@ -2191,18 +3065,30 @@ abstract class csr_state_e {
   static const int CSR_STATE_DISABLE = 2;
 }
 
-/// @platform
-/// @brief Engine handle.
-/// @since_tizen 3.0
+/// Engine handle.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Platform:**
+/// - Platform API.
+/// @nodoc
 typedef csr_engine_h = ffi.Pointer<__csr_engine_h>;
 
+/// @nodoc
 final class __csr_wp_context_s extends ffi.Opaque {}
 
+/// @nodoc
 final class __csr_wp_check_result_h extends ffi.Opaque {}
 
-/// @partner
-/// @brief Enumeration for the options about prompting a popup to a user.
-/// @since_tizen 3.0
+/// Enumeration for the options about prompting a popup to a user.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Paragraph:**
+/// - tner
+/// @nodoc
 abstract class csr_wp_ask_user_e {
   /// < Do not ask the user even if a URL turns out risky.
   static const int CSR_WP_ASK_USER_NO = 0;
@@ -2211,9 +3097,14 @@ abstract class csr_wp_ask_user_e {
   static const int CSR_WP_ASK_USER_YES = 1;
 }
 
-/// @partner
-/// @brief Enumeration for the user response for a popup.
-/// @since_tizen 3.0
+/// Enumeration for the user response for a popup.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Paragraph:**
+/// - tner
+/// @nodoc
 abstract class csr_wp_user_response_e {
   /// < There was no popup for asking the user.
   static const int CSR_WP_USER_RESPONSE_USER_NOT_ASKED = 0;
@@ -2225,9 +3116,14 @@ abstract class csr_wp_user_response_e {
   static const int CSR_WP_USER_RESPONSE_PROCESSING_DISALLOWED = 2;
 }
 
-/// @partner
-/// @brief Enumeration for risk level of a url.
-/// @since_tizen 3.0
+/// Enumeration for risk level of a url.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Paragraph:**
+/// - tner
+/// @nodoc
 abstract class csr_wp_risk_level_e {
   /// < Risk Low.
   static const int CSR_WP_RISK_LOW = 1;
@@ -2242,12 +3138,22 @@ abstract class csr_wp_risk_level_e {
   static const int CSR_WP_RISK_HIGH = 4;
 }
 
-/// @partner
-/// @brief CSR WP context handle.
-/// @since_tizen 3.0
+/// CSR WP context handle.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Paragraph:**
+/// - tner
+/// @nodoc
 typedef csr_wp_context_h = ffi.Pointer<__csr_wp_context_s>;
 
-/// @partner
-/// @brief CSR WP scan result handle.
-/// @since_tizen 3.0
+/// CSR WP scan result handle.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Paragraph:**
+/// - tner
+/// @nodoc
 typedef csr_wp_check_result_h = ffi.Pointer<__csr_wp_check_result_h>;

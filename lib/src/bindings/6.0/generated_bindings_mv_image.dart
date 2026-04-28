@@ -1,3 +1,6 @@
+/// {@category 6.0/tizen}
+library tizen_interop_6_0.mv_image;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -10,6 +13,7 @@ import 'dart:ffi' as ffi;
 import 'generated_bindings_mv_common.dart' as mv_common;
 
 /// Dart bindings for Tizen mv_image APIs.
+/// {@category 6.0/tizen}
 class Tizen60MvImage {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -25,48 +29,48 @@ class Tizen60MvImage {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Recognizes the given image objects on the source image.
-  /// @details Use this function to launch image recognition algorithm configured
-  /// by @a engine_cfg configuration.
+  /// Recognizes the given image objects on the source image.
   ///
-  /// @since_tizen 3.0
-  /// @param [in] source              The handle to the source image on which image
-  /// objects will be recognized
-  /// @param [in] image_objects       The set of handles to the image objects which
-  /// will be processed as targets of recognition
-  /// @param [in] number_of_objects   The number of image objects
-  /// @param [in] engine_cfg          The handle to the configuration of engine
-  /// which will be used for recognition. If NULL,
-  /// then default settings will be used.
-  /// @param [in] recognized_cb       The callback which will be called in order to
-  /// process recognition result
-  /// @param [in] user_data           The user data to be passed to the
-  /// @a recognized_cb
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED_FORMAT Source colorspace
-  /// isn't supported
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
+  /// Use this function to launch image recognition algorithm configured by `engine_cfg` configuration.
   ///
-  /// @pre Create a set of image objects using mv_image_object_create() for
-  /// each of them and construct (fill / load / clone) them on images that
-  /// will be recognized
-  /// @pre Create a source handle by calling mv_create_source() and fill
-  /// by the image for which recognition will be performed
-  /// @post mv_image_recognized_cb() will be called to process recognition result
-  /// @post Release source image by using mv_destroy_source()
-  /// @post Release image objects by using mv_image_object_destroy() for each
-  /// handle from @a image_objects set
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @see mv_image_recognized_cb()
-  /// @see mv_source_h
-  /// @see mv_create_source()
-  /// @see mv_destroy_source()
-  /// @see mv_image_object_h
-  /// @see mv_image_object_create()
-  /// @see mv_image_object_destroy()
-  /// @see mv_engine_config_h
+  /// **Parameters:**
+  /// - `[in]`: source The handle to the source image on which image objects will be recognized
+  /// - `[in]`: image_objects The set of handles to the image objects which will be processed as targets of recognition
+  /// - `[in]`: number_of_objects The number of image objects
+  /// - `[in]`: engine_cfg The handle to the configuration of engine which will be used for recognition. If NULL, then default settings will be used.
+  /// - `[in]`: recognized_cb The callback which will be called in order to process recognition result
+  /// - `[in]`: user_data The user data to be passed to the `recognized_cb`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED_FORMAT`: Source colorspace isn't supported
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - Create a set of image objects using mv_image_object_create() for each of them and construct (fill / load / clone) them on images that will be recognized
+  /// - Create a source handle by calling mv_create_source() and fill by the image for which recognition will be performed
+  ///
+  /// **Postconditions:**
+  /// - mv_image_recognized_cb() will be called to process recognition result
+  /// - Release source image by using mv_destroy_source()
+  /// - Release image objects by using mv_image_object_destroy() for each handle from `image_objects` set
+  ///
+  /// **See also:**
+  /// - `mv_image_recognized_cb()`
+  /// - `mv_source_h`
+  /// - `mv_create_source()`
+  /// - `mv_destroy_source()`
+  /// - `mv_image_object_h`
+  /// - `mv_image_object_create()`
+  /// - `mv_image_object_destroy()`
+  /// - `mv_engine_config_h`
   int mv_image_recognize(
     mv_common.mv_source_h source,
     ffi.Pointer<mv_image_object_h> image_objects,
@@ -103,56 +107,54 @@ class Tizen60MvImage {
           mv_image_recognized_cb,
           ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Tracks the given image tracking model on the current frame
-  /// @details Image tracking on a sequence of frames assumes calling this
-  /// function for each frame in the correct order.
-  /// @a tracked_cb will be called  for result processing.
+  /// Tracks the given image tracking model on the current frame
   ///
-  /// @since_tizen 3.0
-  /// @remarks Tracking algorithm is usually using for recognition of image object
-  /// on the sequence of images that are organized by time. For example,
-  /// it may be the sequence of frames from a video stream.
-  /// @remarks If object is lost during the tracking, system tries to find it
-  /// further for the following frames. Therefore, tracking will be
-  /// recovered when object appears again.
-  /// @remarks Previous calls of mv_image_track() for this
-  /// @a image_tracking_model will affect on current call
-  /// @param [in]     source                 The handle to the current image of
-  /// sequence where image tracking model
-  /// will be tracked
-  /// @param [in,out] image_tracking_model   The handle to the image tracking model
-  /// which processed as target of tracking
-  /// @param [in]     engine_cfg             The handle to the configuration of
-  /// engine which will be used for tracking.
-  /// If NULL, then default settings will be
-  /// used.
-  /// @param [in]     tracked_cb             The callback which will receive
-  /// tracking results
-  /// @param [in]     user_data              The user data to be passed to the
-  /// @a tracked_cb
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED_FORMAT Source colorspace
-  /// isn't supported
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
+  /// Image tracking on a sequence of frames assumes calling this function for each frame in the correct order. `tracked_cb` will be called for result processing.
   ///
-  /// @pre Create image tracking model by calling
-  /// mv_image_tracking_model_create() and set target by calling
-  /// mv_image_tracking_model_set_target()
-  /// @pre Create a source images by calling mv_create_source() for each of
-  /// them and construct them based on sequence of images for which will be
-  /// held image tracking
-  /// @post @a tracked_cb will be called to process tracking result
-  /// @post Release image tracking model by using
-  /// mv_image_tracking_model_destroy()
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @see mv_image_tracked_cb()
-  /// @see mv_source_h
-  /// @see mv_image_tracking_model_h
-  /// @see mv_image_tracking_model_create()
-  /// @see mv_image_tracking_model_set_target()
-  /// @see mv_image_tracking_model_destroy()
+  /// **Remarks:**
+  /// - Tracking algorithm is usually using for recognition of image object
+  /// - on the sequence of images that are organized by time. For example,
+  /// - it may be the sequence of frames from a video stream.
+  /// - If object is lost during the tracking, system tries to find it
+  /// - further for the following frames. Therefore, tracking will be
+  /// - recovered when object appears again.
+  /// - Previous calls of mv_image_track() for this
+  /// - `image_tracking_model` will affect on current call
+  ///
+  /// **Parameters:**
+  /// - `[in]`: source The handle to the current image of sequence where image tracking model will be tracked
+  /// - `[in,out]`: image_tracking_model The handle to the image tracking model which processed as target of tracking
+  /// - `[in]`: engine_cfg The handle to the configuration of engine which will be used for tracking. If NULL, then default settings will be used.
+  /// - `[in]`: tracked_cb The callback which will receive tracking results
+  /// - `[in]`: user_data The user data to be passed to the `tracked_cb`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED_FORMAT`: Source colorspace isn't supported
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - Create image tracking model by calling mv_image_tracking_model_create() and set target by calling mv_image_tracking_model_set_target()
+  /// - Create a source images by calling mv_create_source() for each of them and construct them based on sequence of images for which will be held image tracking
+  ///
+  /// **Postconditions:**
+  /// - `tracked_cb` will be called to process tracking result
+  /// - Release image tracking model by using mv_image_tracking_model_destroy()
+  ///
+  /// **See also:**
+  /// - `mv_image_tracked_cb()`
+  /// - `mv_source_h`
+  /// - `mv_image_tracking_model_h`
+  /// - `mv_image_tracking_model_create()`
+  /// - `mv_image_tracking_model_set_target()`
+  /// - `mv_image_tracking_model_destroy()`
   int mv_image_track(
     mv_common.mv_source_h source,
     mv_image_tracking_model_h image_tracking_model,
@@ -185,20 +187,29 @@ class Tizen60MvImage {
           mv_image_tracked_cb,
           ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Creates an image object.
+  /// Creates an image object.
   ///
-  /// @since_tizen 3.0
-  /// @param [out] image_object    A new handle to the image object
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MEDIA_VISION_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @post Release image object by using mv_image_object_destroy()
+  /// **Parameters:**
+  /// - `[out]`: image_object A new handle to the image object
   ///
-  /// @see mv_image_object_destroy()
-  /// @see mv_image_object_h
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MEDIA_VISION_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Postconditions:**
+  /// - Release image object by using mv_image_object_destroy()
+  ///
+  /// **See also:**
+  /// - `mv_image_object_destroy()`
+  /// - `mv_image_object_h`
   int mv_image_object_create(
     ffi.Pointer<mv_image_object_h> image_object,
   ) {
@@ -213,19 +224,28 @@ class Tizen60MvImage {
   late final _mv_image_object_create = _mv_image_object_createPtr
       .asFunction<int Function(ffi.Pointer<mv_image_object_h>)>();
 
-  /// @brief Destroys the image object.
+  /// Destroys the image object.
   ///
-  /// @since_tizen 3.0
-  /// @param [in] image_object    The handle to the image object to be destroyed
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @pre Create image object by using mv_image_object_create()
+  /// **Parameters:**
+  /// - `[in]`: image_object The handle to the image object to be destroyed
   ///
-  /// @see mv_image_object_create()
-  /// @see mv_image_object_h
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - Create image object by using mv_image_object_create()
+  ///
+  /// **See also:**
+  /// - `mv_image_object_create()`
+  /// - `mv_image_object_h`
   int mv_image_object_destroy(
     mv_image_object_h image_object,
   ) {
@@ -240,42 +260,48 @@ class Tizen60MvImage {
   late final _mv_image_object_destroy =
       _mv_image_object_destroyPtr.asFunction<int Function(mv_image_object_h)>();
 
-  /// @brief Fills the image object.
-  /// @details Extracts data from @a source image which will be needed for
-  /// recognition of depicted object in @a location.
+  /// Fills the image object.
   ///
-  /// @since_tizen 3.0
-  /// @remarks After filling the image object it can be evaluated by
-  /// mv_image_object_get_recognition_rate(). If recognition rate
-  /// is too low, try to use another image of object or change
-  /// configuration parameters (see #mv_engine_config_h) and construct
-  /// the image object again.
-  /// @param [in,out] image_object    The handle to the image object which will be
-  /// filled and can be recognized in future
-  /// @param [in]     engine_cfg      The handle to the configuration of engine
-  /// which will be used for extract recognition
-  /// data from @a source. If NULL, then default
-  /// settings will be used.
-  /// @param [in]     source          The source image where image object is depicted
-  /// @param [in]     location        The pointer to location of the image object
-  /// on the source image, or NULL if the object is
-  /// shown in full
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED_FORMAT Source colorspace
-  /// isn't supported
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
+  /// Extracts data from `source` image which will be needed for recognition of depicted object in `location`.
   ///
-  /// @pre Create image object by using mv_image_object_create()
-  /// @post Release image object by using mv_image_object_destroy()
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @see mv_image_object_h
-  /// @see mv_image_object_create()
-  /// @see mv_image_object_get_recognition_rate()
-  /// @see mv_image_recognize()
-  /// @see mv_image_object_destroy()
-  /// @see mv_engine_config_h
+  /// **Remarks:**
+  /// - After filling the image object it can be evaluated by
+  /// - mv_image_object_get_recognition_rate(). If recognition rate
+  /// - is too low, try to use another image of object or change
+  /// - configuration parameters (see `mv_engine_config_h`) and construct
+  /// - the image object again.
+  ///
+  /// **Parameters:**
+  /// - `[in,out]`: image_object The handle to the image object which will be filled and can be recognized in future
+  /// - `[in]`: engine_cfg The handle to the configuration of engine which will be used for extract recognition data from `source`. If NULL, then default settings will be used.
+  /// - `[in]`: source The source image where image object is depicted
+  /// - `[in]`: location The pointer to location of the image object on the source image, or NULL if the object is shown in full
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED_FORMAT`: Source colorspace isn't supported
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - Create image object by using mv_image_object_create()
+  ///
+  /// **Postconditions:**
+  /// - Release image object by using mv_image_object_destroy()
+  ///
+  /// **See also:**
+  /// - `mv_image_object_h`
+  /// - `mv_image_object_create()`
+  /// - `mv_image_object_get_recognition_rate()`
+  /// - `mv_image_recognize()`
+  /// - `mv_image_object_destroy()`
+  /// - `mv_engine_config_h`
   int mv_image_object_fill(
     mv_image_object_h image_object,
     mv_common.mv_engine_config_h engine_cfg,
@@ -301,34 +327,42 @@ class Tizen60MvImage {
       int Function(mv_image_object_h, mv_common.mv_engine_config_h,
           mv_common.mv_source_h, ffi.Pointer<mv_common.mv_rectangle_s>)>();
 
-  /// @brief Gets a value that determines how well an image object can be recognized.
-  /// @details Recognition rate determines how well an image object can be
-  /// recognized. This value can be from 0 to 1. If the recognition rate
-  /// is 0 object can not be recognized and the bigger it is the more
-  /// likely to recognize the object.
+  /// Gets a value that determines how well an image object can be recognized.
   ///
-  /// @since_tizen 3.0
-  /// @remarks If recognition rate is too low, try to use another image of object
-  /// or change some configuration parameters (see #mv_engine_config_h)
-  /// and fill the image object again (see mv_image_object_fill()).
-  /// @param [in]  image_object        The handle to the image object which will be
-  /// evaluated by this function
-  /// @param [out] recognition_rate    A value that determines how well an image
-  /// object can be recognized, if 0 then object
-  /// can not be recognized
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
+  /// Recognition rate determines how well an image object can be recognized. This value can be from 0 to 1. If the recognition rate is 0 object can not be recognized and the bigger it is the more likely to recognize the object.
   ///
-  /// @pre Create image object by using mv_image_object_create()
-  /// @post Release image object by using mv_image_object_destroy()
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @see mv_image_object_h
-  /// @see mv_image_object_create()
-  /// @see mv_image_object_fill()
-  /// @see mv_image_object_destroy()
-  /// @see mv_engine_config_h
+  /// **Remarks:**
+  /// - If recognition rate is too low, try to use another image of object
+  /// - or change some configuration parameters (see `mv_engine_config_h`)
+  /// - and fill the image object again (see mv_image_object_fill()).
+  ///
+  /// **Parameters:**
+  /// - `[in]`: image_object The handle to the image object which will be evaluated by this function
+  /// - `[out]`: recognition_rate A value that determines how well an image object can be recognized, if 0 then object can not be recognized
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - Create image object by using mv_image_object_create()
+  ///
+  /// **Postconditions:**
+  /// - Release image object by using mv_image_object_destroy()
+  ///
+  /// **See also:**
+  /// - `mv_image_object_h`
+  /// - `mv_image_object_create()`
+  /// - `mv_image_object_fill()`
+  /// - `mv_image_object_destroy()`
+  /// - `mv_engine_config_h`
   int mv_image_object_get_recognition_rate(
     mv_image_object_h image_object,
     ffi.Pointer<ffi.Double> recognition_rate,
@@ -347,26 +381,35 @@ class Tizen60MvImage {
       _mv_image_object_get_recognition_ratePtr.asFunction<
           int Function(mv_image_object_h, ffi.Pointer<ffi.Double>)>();
 
-  /// @brief Sets a label for the image object.
+  /// Sets a label for the image object.
   ///
-  /// @since_tizen 3.0
-  /// @param [in] image_object   The handle to the image object for which the label
-  /// will be assigned
-  /// @param [in] label          The label which will be assigned to the image
-  /// object
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @pre Create image object by using mv_image_object_create()
-  /// @post Label could be received by using mv_image_object_get_label()
-  /// @post Release image object by using mv_image_object_destroy()
+  /// **Parameters:**
+  /// - `[in]`: image_object The handle to the image object for which the label will be assigned
+  /// - `[in]`: label The label which will be assigned to the image object
   ///
-  /// @see mv_image_object_get_label()
-  /// @see mv_image_object_h
-  /// @see mv_image_object_create()
-  /// @see mv_image_object_destroy()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - Create image object by using mv_image_object_create()
+  ///
+  /// **Postconditions:**
+  /// - Label could be received by using mv_image_object_get_label()
+  /// - Release image object by using mv_image_object_destroy()
+  ///
+  /// **See also:**
+  /// - `mv_image_object_get_label()`
+  /// - `mv_image_object_h`
+  /// - `mv_image_object_create()`
+  /// - `mv_image_object_destroy()`
   int mv_image_object_set_label(
     mv_image_object_h image_object,
     int label,
@@ -383,28 +426,40 @@ class Tizen60MvImage {
   late final _mv_image_object_set_label = _mv_image_object_set_labelPtr
       .asFunction<int Function(mv_image_object_h, int)>();
 
-  /// @brief Gets a label of image object.
+  /// Gets a label of image object.
   ///
-  /// @since_tizen 3.0
-  /// @remarks If @a image_object have not a label, this function return
-  /// MEDIA_VISION_ERROR_NO_DATA value.
-  /// @param [in]  image_object   The handle to the image object from which a
-  /// label will be received
-  /// @param [out] label          The label of image object
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_NO_DATA Image object hasn't label
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @pre Create image object by using mv_image_object_create()
-  /// @pre Set label for the image object by using mv_image_object_set_label()
-  /// @post Release image object by using mv_image_object_destroy()
+  /// **Remarks:**
+  /// - If `image_object` have not a label, this function return
+  /// - MEDIA_VISION_ERROR_NO_DATA value.
   ///
-  /// @see mv_image_object_set_label()
-  /// @see mv_image_object_h
-  /// @see mv_image_object_create()
-  /// @see mv_image_object_destroy()
+  /// **Parameters:**
+  /// - `[in]`: image_object The handle to the image object from which a label will be received
+  /// - `[out]`: label The label of image object
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_NO_DATA`: Image object hasn't label
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - Create image object by using mv_image_object_create()
+  /// - Set label for the image object by using mv_image_object_set_label()
+  ///
+  /// **Postconditions:**
+  /// - Release image object by using mv_image_object_destroy()
+  ///
+  /// **See also:**
+  /// - `mv_image_object_set_label()`
+  /// - `mv_image_object_h`
+  /// - `mv_image_object_create()`
+  /// - `mv_image_object_destroy()`
   int mv_image_object_get_label(
     mv_image_object_h image_object,
     ffi.Pointer<ffi.Int> label,
@@ -422,22 +477,33 @@ class Tizen60MvImage {
   late final _mv_image_object_get_label = _mv_image_object_get_labelPtr
       .asFunction<int Function(mv_image_object_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Clones the image object.
+  /// Clones the image object.
   ///
-  /// @since_tizen 3.0
-  /// @remarks @a dst must be released using mv_image_object_destroy().
-  /// @param [in]  src    The handle to the source image object
-  /// @param [out] dst    The handle to the destination image object
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MEDIA_VISION_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @pre Create image object handles by calling mv_image_object_create()
+  /// **Remarks:**
+  /// - `dst` must be released using mv_image_object_destroy().
   ///
-  /// @see mv_image_object_create()
-  /// @see mv_image_object_destroy()
+  /// **Parameters:**
+  /// - `[in]`: src The handle to the source image object
+  /// - `[out]`: dst The handle to the destination image object
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MEDIA_VISION_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create image object handles by calling mv_image_object_create()
+  ///
+  /// **See also:**
+  /// - `mv_image_object_create()`
+  /// - `mv_image_object_destroy()`
   int mv_image_object_clone(
     mv_image_object_h src,
     ffi.Pointer<mv_image_object_h> dst,
@@ -455,27 +521,39 @@ class Tizen60MvImage {
   late final _mv_image_object_clone = _mv_image_object_clonePtr.asFunction<
       int Function(mv_image_object_h, ffi.Pointer<mv_image_object_h>)>();
 
-  /// @brief Saves the image object.
+  /// Saves the image object.
   ///
-  /// @since_tizen 3.0
-  /// @remarks @a image_object is saved to the absolute path directory.
-  /// Use app_get_data_path() for the private app storage path.
-  /// @param [in] file_name       Name of the file to path/save the image object
-  /// @param [in] image_object    The handle to the image object which will be saved
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PATH Invalid path
-  /// @retval #MEDIA_VISION_ERROR_PERMISSION_DENIED Not permitted
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @pre Create image object handle by calling mv_image_object_create()
-  /// @post Saved model can be loaded later by calling
-  /// mv_image_object_load() function
+  /// **Remarks:**
+  /// - `image_object` is saved to the absolute path directory.
+  /// - Use app_get_data_path() for the private app storage path.
   ///
-  /// @see mv_image_object_create()
-  /// @see mv_image_object_load()
-  /// @see mv_image_object_destroy()
+  /// **Parameters:**
+  /// - `[in]`: file_name Name of the file to path/save the image object
+  /// - `[in]`: image_object The handle to the image object which will be saved
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_INVALID_PATH`: Invalid path
+  /// - `MEDIA_VISION_ERROR_PERMISSION_DENIED`: Not permitted
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - Create image object handle by calling mv_image_object_create()
+  ///
+  /// **Postconditions:**
+  /// - Saved model can be loaded later by calling mv_image_object_load() function
+  ///
+  /// **See also:**
+  /// - `mv_image_object_create()`
+  /// - `mv_image_object_load()`
+  /// - `mv_image_object_destroy()`
   int mv_image_object_save(
     ffi.Pointer<ffi.Char> file_name,
     mv_image_object_h image_object,
@@ -493,29 +571,38 @@ class Tizen60MvImage {
   late final _mv_image_object_save = _mv_image_object_savePtr
       .asFunction<int Function(ffi.Pointer<ffi.Char>, mv_image_object_h)>();
 
-  /// @brief Loads an image object from the file.
+  /// Loads an image object from the file.
   ///
-  /// @since_tizen 3.0
-  /// @remarks @a image_object is loaded from the absolute path directory.
-  /// Use app_get_data_path() for the private app storage path.
-  /// @a image_object must be destroyed using
-  /// mv_image_object_destroy().
-  /// @param [in]  file_name       Name of path/file to load the image object
-  /// @param [out] image_object    The handle to the image object which will be
-  /// filled
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PATH Invalid path
-  /// @retval #MEDIA_VISION_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MEDIA_VISION_ERROR_PERMISSION_DENIED Not permitted
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @pre Image object can be preliminary saved with mv_image_object_save()
-  /// function
+  /// **Remarks:**
+  /// - `image_object` is loaded from the absolute path directory.
+  /// - Use app_get_data_path() for the private app storage path.
+  /// - `image_object` must be destroyed using
+  /// - mv_image_object_destroy().
   ///
-  /// @see mv_image_object_save()
-  /// @see mv_image_object_destroy()
+  /// **Parameters:**
+  /// - `[in]`: file_name Name of path/file to load the image object
+  /// - `[out]`: image_object The handle to the image object which will be filled
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_INVALID_PATH`: Invalid path
+  /// - `MEDIA_VISION_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MEDIA_VISION_ERROR_PERMISSION_DENIED`: Not permitted
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - Image object can be preliminary saved with mv_image_object_save() function
+  ///
+  /// **See also:**
+  /// - `mv_image_object_save()`
+  /// - `mv_image_object_destroy()`
   int mv_image_object_load(
     ffi.Pointer<ffi.Char> file_name,
     ffi.Pointer<mv_image_object_h> image_object,
@@ -533,18 +620,27 @@ class Tizen60MvImage {
   late final _mv_image_object_load = _mv_image_object_loadPtr.asFunction<
       int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<mv_image_object_h>)>();
 
-  /// @brief Creates an image tracking model.
+  /// Creates an image tracking model.
   ///
-  /// @since_tizen 3.0
-  /// @param [out] image_tracking_model    A new handle to the image tracking model
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @post Release image tracking model by using mv_image_tracking_model_destroy()
+  /// **Parameters:**
+  /// - `[out]`: image_tracking_model A new handle to the image tracking model
   ///
-  /// @see mv_image_tracking_model_destroy()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Postconditions:**
+  /// - Release image tracking model by using mv_image_tracking_model_destroy()
+  ///
+  /// **See also:**
+  /// - `mv_image_tracking_model_destroy()`
   int mv_image_tracking_model_create(
     ffi.Pointer<mv_image_tracking_model_h> image_tracking_model,
   ) {
@@ -561,35 +657,41 @@ class Tizen60MvImage {
       _mv_image_tracking_model_createPtr
           .asFunction<int Function(ffi.Pointer<mv_image_tracking_model_h>)>();
 
-  /// @brief Sets target of image tracking model.
-  /// @details Sets image object which will be tracked by using tracking
-  /// functionality with @a image_tracking_model.
+  /// Sets target of image tracking model.
   ///
-  /// @since_tizen 3.0
-  /// @param [in] image_object            Image object which will be set
-  /// as target for tracking
-  /// @param [in] image_tracking_model    Handle to the image tracking model
-  /// for which will be set a new target
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
+  /// Sets image object which will be tracked by using tracking functionality with `image_tracking_model`.
   ///
-  /// @pre Create image tracking model by calling
-  /// mv_image_tracking_model_create()
-  /// @pre Create an image object using mv_image_object_create() and construct
-  /// (fill / load / clone) it on image that will be tracking
-  /// @post Release image object by using mv_image_object_destroy()
-  /// @post Release image tracking model by using
-  /// mv_image_tracking_model_destroy()
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @see mv_image_object_h
-  /// @see mv_image_tracking_model_h
-  /// @see mv_image_object_create()
-  /// @see mv_image_object_destroy()
-  /// @see mv_image_tracking_model_create()
-  /// @see mv_image_track()
-  /// @see mv_image_tracking_model_destroy()
+  /// **Parameters:**
+  /// - `[in]`: image_object Image object which will be set as target for tracking
+  /// - `[in]`: image_tracking_model Handle to the image tracking model for which will be set a new target
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - Create image tracking model by calling mv_image_tracking_model_create()
+  /// - Create an image object using mv_image_object_create() and construct (fill / load / clone) it on image that will be tracking
+  ///
+  /// **Postconditions:**
+  /// - Release image object by using mv_image_object_destroy()
+  /// - Release image tracking model by using mv_image_tracking_model_destroy()
+  ///
+  /// **See also:**
+  /// - `mv_image_object_h`
+  /// - `mv_image_tracking_model_h`
+  /// - `mv_image_object_create()`
+  /// - `mv_image_object_destroy()`
+  /// - `mv_image_tracking_model_create()`
+  /// - `mv_image_track()`
+  /// - `mv_image_tracking_model_destroy()`
   int mv_image_tracking_model_set_target(
     mv_image_object_h image_object,
     mv_image_tracking_model_h image_tracking_model,
@@ -608,19 +710,27 @@ class Tizen60MvImage {
       _mv_image_tracking_model_set_targetPtr.asFunction<
           int Function(mv_image_object_h, mv_image_tracking_model_h)>();
 
-  /// @brief Destroys the image tracking model.
+  /// Destroys the image tracking model.
   ///
-  /// @since_tizen 3.0
-  /// @param [in] image_tracking_model    The handle to the image tracking model
-  /// to be destroyed
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @pre Create image tracking model by using mv_image_tracking_model_create()
+  /// **Parameters:**
+  /// - `[in]`: image_tracking_model The handle to the image tracking model to be destroyed
   ///
-  /// @see mv_image_tracking_model_create()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - Create image tracking model by using mv_image_tracking_model_create()
+  ///
+  /// **See also:**
+  /// - `mv_image_tracking_model_create()`
   int mv_image_tracking_model_destroy(
     mv_image_tracking_model_h image_tracking_model,
   ) {
@@ -636,33 +746,36 @@ class Tizen60MvImage {
       _mv_image_tracking_model_destroyPtr
           .asFunction<int Function(mv_image_tracking_model_h)>();
 
-  /// @brief Refreshes the state of image tracking model.
-  /// @details Clears moving history and change state to undetected. This function
-  /// is usually called each time before tracking is started for the new
-  /// sequence of sources which is not the direct continuation of the
-  /// sequence for which tracking has been performed before. Tracking
-  /// algorithm will try to find image by itself.
+  /// Refreshes the state of image tracking model.
   ///
-  /// @since_tizen 3.0
-  /// @param [in] image_tracking_model   The handle to the image tracking model
-  /// which will be refreshed
-  /// @param [in] engine_cfg             The handle to the configuration of
-  /// engine which will be used. If NULL,
-  /// then default settings will be used.
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
+  /// Clears moving history and change state to undetected. This function is usually called each time before tracking is started for the new sequence of sources which is not the direct continuation of the sequence for which tracking has been performed before. Tracking algorithm will try to find image by itself.
   ///
-  /// @pre Create image tracking model by calling
-  /// mv_image_tracking_model_create()
-  /// @post Release image tracking model by using
-  /// mv_image_tracking_model_destroy()
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @see mv_image_tracking_model_h
-  /// @see mv_image_tracking_model_create()
-  /// @see mv_image_track()
-  /// @see mv_image_tracking_model_destroy()
+  /// **Parameters:**
+  /// - `[in]`: image_tracking_model The handle to the image tracking model which will be refreshed
+  /// - `[in]`: engine_cfg The handle to the configuration of engine which will be used. If NULL, then default settings will be used.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - Create image tracking model by calling mv_image_tracking_model_create()
+  ///
+  /// **Postconditions:**
+  /// - Release image tracking model by using mv_image_tracking_model_destroy()
+  ///
+  /// **See also:**
+  /// - `mv_image_tracking_model_h`
+  /// - `mv_image_tracking_model_create()`
+  /// - `mv_image_track()`
+  /// - `mv_image_tracking_model_destroy()`
   int mv_image_tracking_model_refresh(
     mv_image_tracking_model_h image_tracking_model,
     mv_common.mv_engine_config_h engine_cfg,
@@ -683,23 +796,33 @@ class Tizen60MvImage {
           int Function(
               mv_image_tracking_model_h, mv_common.mv_engine_config_h)>();
 
-  /// @brief Clones the image tracking model.
+  /// Clones the image tracking model.
   ///
-  /// @since_tizen 3.0
-  /// @remarks @a dst must be released using mv_image_tracking_model_destroy().
-  /// @param [in]  src    The handle to the source image tracking model
-  /// @param [out] dst    The handle to the destination image tracking model
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MEDIA_VISION_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @pre Create image tracking model handles by calling
-  /// mv_image_tracking_model_create()
+  /// **Remarks:**
+  /// - `dst` must be released using mv_image_tracking_model_destroy().
   ///
-  /// @see mv_image_tracking_model_create()
-  /// @see mv_image_tracking_model_destroy()
+  /// **Parameters:**
+  /// - `[in]`: src The handle to the source image tracking model
+  /// - `[out]`: dst The handle to the destination image tracking model
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MEDIA_VISION_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create image tracking model handles by calling mv_image_tracking_model_create()
+  ///
+  /// **See also:**
+  /// - `mv_image_tracking_model_create()`
+  /// - `mv_image_tracking_model_destroy()`
   int mv_image_tracking_model_clone(
     mv_image_tracking_model_h src,
     ffi.Pointer<mv_image_tracking_model_h> dst,
@@ -720,29 +843,39 @@ class Tizen60MvImage {
           int Function(mv_image_tracking_model_h,
               ffi.Pointer<mv_image_tracking_model_h>)>();
 
-  /// @brief Saves the image tracking model.
+  /// Saves the image tracking model.
   ///
-  /// @since_tizen 3.0
-  /// @remarks @a image_tracking_model is saved to the absolute path directory.
-  /// Use app_get_data_path() for the private app storage path.
-  /// @param [in] file_name               Name of path/file to save the model
-  /// @param [in] image_tracking_model    The handle to the image tracking model
-  /// to be saved
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PATH Invalid path
-  /// @retval #MEDIA_VISION_ERROR_PERMISSION_DENIED Not permitted
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @pre Create image tracking model handle by calling
-  /// mv_image_tracking_model_create()
-  /// @post Saved model can be loaded later by calling
-  /// mv_image_tracking_model_load() function
+  /// **Remarks:**
+  /// - `image_tracking_model` is saved to the absolute path directory.
+  /// - Use app_get_data_path() for the private app storage path.
   ///
-  /// @see mv_image_tracking_model_create()
-  /// @see mv_image_tracking_model_load()
-  /// @see mv_image_tracking_model_destroy()
+  /// **Parameters:**
+  /// - `[in]`: file_name Name of path/file to save the model
+  /// - `[in]`: image_tracking_model The handle to the image tracking model to be saved
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_INVALID_PATH`: Invalid path
+  /// - `MEDIA_VISION_ERROR_PERMISSION_DENIED`: Not permitted
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - Create image tracking model handle by calling mv_image_tracking_model_create()
+  ///
+  /// **Postconditions:**
+  /// - Saved model can be loaded later by calling mv_image_tracking_model_load() function
+  ///
+  /// **See also:**
+  /// - `mv_image_tracking_model_create()`
+  /// - `mv_image_tracking_model_load()`
+  /// - `mv_image_tracking_model_destroy()`
   int mv_image_tracking_model_save(
     ffi.Pointer<ffi.Char> file_name,
     mv_image_tracking_model_h image_tracking_model,
@@ -761,29 +894,38 @@ class Tizen60MvImage {
       _mv_image_tracking_model_savePtr.asFunction<
           int Function(ffi.Pointer<ffi.Char>, mv_image_tracking_model_h)>();
 
-  /// @brief Loads an image tracking model from the file.
+  /// Loads an image tracking model from the file.
   ///
-  /// @since_tizen 3.0
-  /// @remarks @a image_tracking_model is loaded from the absolute path directory.
-  /// Use app_get_data_path() for the private app storage path.
-  /// @a image_tracking_model must be destroyed using
-  /// mv_image_tracking_model_destroy().
-  /// @param [in]  file_name               Name of path/file to load model
-  /// @param [out] image_tracking_model    The handle to the image tracking
-  /// model to be filled
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PATH Invalid path
-  /// @retval #MEDIA_VISION_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MEDIA_VISION_ERROR_PERMISSION_DENIED Not permitted
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @pre Image tracking model handle can be preliminary saved with
-  /// mv_image_tracking_model_save() function
+  /// **Remarks:**
+  /// - `image_tracking_model` is loaded from the absolute path directory.
+  /// - Use app_get_data_path() for the private app storage path.
+  /// - `image_tracking_model` must be destroyed using
+  /// - mv_image_tracking_model_destroy().
   ///
-  /// @see mv_image_tracking_model_save()
-  /// @see mv_image_tracking_model_destroy()
+  /// **Parameters:**
+  /// - `[in]`: file_name Name of path/file to load model
+  /// - `[out]`: image_tracking_model The handle to the image tracking model to be filled
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_INVALID_PATH`: Invalid path
+  /// - `MEDIA_VISION_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MEDIA_VISION_ERROR_PERMISSION_DENIED`: Not permitted
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - Image tracking model handle can be preliminary saved with mv_image_tracking_model_save() function
+  ///
+  /// **See also:**
+  /// - `mv_image_tracking_model_save()`
+  /// - `mv_image_tracking_model_destroy()`
   int mv_image_tracking_model_load(
     ffi.Pointer<ffi.Char> file_name,
     ffi.Pointer<mv_image_tracking_model_h> image_tracking_model,
@@ -805,47 +947,46 @@ class Tizen60MvImage {
               ffi.Pointer<ffi.Char>, ffi.Pointer<mv_image_tracking_model_h>)>();
 }
 
-/// @brief The image object's type handle.
+/// The image object's type handle.
 ///
-/// @since_tizen 3.0
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 typedef mv_image_object_h = ffi.Pointer<ffi.Void>;
 
-/// @brief Called when image recognition results are received from mv_image_recognize().
-/// @details This type of callback will be called after mv_image_recognize()
-/// in order to process recognition result.
+/// Called when image recognition results are received from mv_image_recognize().
 ///
-/// @since_tizen 3.0
-/// @remarks Values @a source, @a engine_cfg, @a image_objects, and @a number_of_objects
-/// are the same as values of input parameters of mv_image_recognize().
-/// @remarks @a locations are valid only inside callback.
-/// @param [in] source              The handle to the source image on which the
-/// recognition was carried out
-/// @param [in] engine_cfg          The handle to the configuration of engine
-/// that was used for image recognition, or NULL
-/// if default settings were applied
-/// @param [in] image_objects       The set of handles to the image objects which
-/// have been processed as targets of recognition
-/// @param [in] locations           The locations of image objects on the source
-/// image. This array corresponding to an array
-/// of image objects and each element contains a
-/// location of corresponding object on the
-/// @a source image or NULL if object is not
-/// recognized
-/// @param [in] number_of_objects   The number of image objects and corresponding
-/// locations
-/// @param [in] user_data           The user data passed from the
-/// mv_image_recognize() function
+/// This type of callback will be called after mv_image_recognize() in order to process recognition result.
 ///
-/// @pre Call mv_image_recognize() function to perform recognition of the
-/// image objects on the source image and invoke this callback as a result
+/// **Since Tizen:**
+/// - 3.0
 ///
-/// @see mv_image_recognize()
-/// @see mv_source_h
-/// @see mv_image_object_h
-/// @see mv_engine_config_h
-/// @see mv_quadrangle_s
+/// **Remarks:**
+/// - Values `source`, `engine_cfg`, `image_objects`, and `number_of_objects`
+/// - are the same as values of input parameters of mv_image_recognize().
+/// - `locations` are valid only inside callback.
+///
+/// **Parameters:**
+/// - `[in]`: source The handle to the source image on which the recognition was carried out
+/// - `[in]`: engine_cfg The handle to the configuration of engine that was used for image recognition, or NULL if default settings were applied
+/// - `[in]`: image_objects The set of handles to the image objects which have been processed as targets of recognition
+/// - `[in]`: locations The locations of image objects on the source image. This array corresponding to an array of image objects and each element contains a location of corresponding object on the `source` image or NULL if object is not recognized
+/// - `[in]`: number_of_objects The number of image objects and corresponding locations
+/// - `[in]`: user_data The user data passed from the mv_image_recognize() function
+///
+/// **Preconditions:**
+/// - Call mv_image_recognize() function to perform recognition of the image objects on the source image and invoke this callback as a result
+///
+/// **See also:**
+/// - `mv_image_recognize()`
+/// - `mv_source_h`
+/// - `mv_image_object_h`
+/// - `mv_engine_config_h`
+/// - `mv_quadrangle_s`
+/// @nodoc
 typedef mv_image_recognized_cb
     = ffi.Pointer<ffi.NativeFunction<mv_image_recognized_cbFunction>>;
+/// @nodoc
 typedef mv_image_recognized_cbFunction = ffi.Void Function(
     mv_common.mv_source_h source,
     mv_common.mv_engine_config_h engine_cfg,
@@ -853,6 +994,7 @@ typedef mv_image_recognized_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Pointer<mv_common.mv_quadrangle_s>> locations,
     ffi.UnsignedInt number_of_objects,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmv_image_recognized_cbFunction = void Function(
     mv_common.mv_source_h source,
     mv_common.mv_engine_config_h engine_cfg,
@@ -861,52 +1003,54 @@ typedef Dartmv_image_recognized_cbFunction = void Function(
     int number_of_objects,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief The image tracking model's type handle.
+/// The image tracking model's type handle.
 ///
-/// @since_tizen 3.0
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 typedef mv_image_tracking_model_h = ffi.Pointer<ffi.Void>;
 
-/// @brief Called when image tracking result received from mv_image_track()
-/// @details Image tracking on a sequence of frames assumes calling
-/// mv_image_track() function for each frame in the correct order.
-/// This type of callback will be called after each mv_image_track()
-/// call for processing result data.
+/// Called when image tracking result received from mv_image_track()
 ///
-/// @since_tizen 3.0
-/// @remarks If image object is not tracked then the callback will be invoked,
-/// but @a location will be NULL.
-/// @remarks Handles @a image_tracking_model, @a source and @a engine_cfg the
-/// same as input parameters of mv_image_track().
-/// @remarks @a location pointer is valid only inside callback
-/// @param [in] source                 The handle to the source image on which
-/// the tracking was carried out
-/// @param [in] image_tracking_model   The handle to the image tracking model
-/// which processed as target of tracking
-/// @param [in] engine_cfg             The handle to the configuration of engine
-/// that was used to image tracking, or
-/// NULL if default settings were applied
-/// @param [in] location               The image object location on the source
-/// image or NULL if objects is not tracked
-/// @param [in] user_data              The user data passed from the
-/// mv_image_track() function
+/// Image tracking on a sequence of frames assumes calling mv_image_track() function for each frame in the correct order. This type of callback will be called after each mv_image_track() call for processing result data.
 ///
-/// @pre Call mv_image_track() function to perform tracking of the image
-/// object on the current image from the sequence and invoke this callback
-/// as a result
+/// **Since Tizen:**
+/// - 3.0
 ///
-/// @see mv_image_track()
-/// @see mv_source_h
-/// @see mv_image_tracking_model_h
-/// @see mv_engine_config_h
-/// @see mv_quadrangle_s
+/// **Remarks:**
+/// - If image object is not tracked then the callback will be invoked,
+/// - but `location` will be NULL.
+/// - Handles `image_tracking_model`, `source` and `engine_cfg` the
+/// - same as input parameters of mv_image_track().
+/// - `location` pointer is valid only inside callback
+///
+/// **Parameters:**
+/// - `[in]`: source The handle to the source image on which the tracking was carried out
+/// - `[in]`: image_tracking_model The handle to the image tracking model which processed as target of tracking
+/// - `[in]`: engine_cfg The handle to the configuration of engine that was used to image tracking, or NULL if default settings were applied
+/// - `[in]`: location The image object location on the source image or NULL if objects is not tracked
+/// - `[in]`: user_data The user data passed from the mv_image_track() function
+///
+/// **Preconditions:**
+/// - Call mv_image_track() function to perform tracking of the image object on the current image from the sequence and invoke this callback as a result
+///
+/// **See also:**
+/// - `mv_image_track()`
+/// - `mv_source_h`
+/// - `mv_image_tracking_model_h`
+/// - `mv_engine_config_h`
+/// - `mv_quadrangle_s`
+/// @nodoc
 typedef mv_image_tracked_cb
     = ffi.Pointer<ffi.NativeFunction<mv_image_tracked_cbFunction>>;
+/// @nodoc
 typedef mv_image_tracked_cbFunction = ffi.Void Function(
     mv_common.mv_source_h source,
     mv_image_tracking_model_h image_tracking_model,
     mv_common.mv_engine_config_h engine_cfg,
     ffi.Pointer<mv_common.mv_quadrangle_s> location,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmv_image_tracked_cbFunction = void Function(
     mv_common.mv_source_h source,
     mv_image_tracking_model_h image_tracking_model,
@@ -914,41 +1058,54 @@ typedef Dartmv_image_tracked_cbFunction = void Function(
     ffi.Pointer<mv_common.mv_quadrangle_s> location,
     ffi.Pointer<ffi.Void> user_data);
 
+/// @nodoc
 const String MV_IMAGE_RECOGNITION_OBJECT_SCALE_FACTOR =
     'MV_IMAGE_RECOGNITION_OBJECT_SCALE_FACTOR';
 
+/// @nodoc
 const String MV_IMAGE_RECOGNITION_OBJECT_MAX_KEYPOINTS_NUM =
     'MV_IMAGE_RECOGNITION_OBJECT_MAX_KEYPOINTS_NUM';
 
+/// @nodoc
 const String MV_IMAGE_RECOGNITION_SCENE_SCALE_FACTOR =
     'MV_IMAGE_RECOGNITION_SCENE_SCALE_FACTOR';
 
+/// @nodoc
 const String MV_IMAGE_RECOGNITION_SCENE_MAX_KEYPOINTS_NUM =
     'MV_IMAGE_RECOGNITION_SCENE_MAX_KEYPOINTS_NUM';
 
+/// @nodoc
 const String MV_IMAGE_RECOGNITION_MIN_MATCH_NUM =
     'MV_IMAGE_RECOGNITION_MIN_MATCH_NUM';
 
+/// @nodoc
 const String MV_IMAGE_RECOGNITION_REQ_MATCH_PART =
     'MV_IMAGE_RECOGNITION_REQ_MATCH_PART';
 
+/// @nodoc
 const String MV_IMAGE_RECOGNITION_TOLERANT_MATCH_PART_ERR =
     'MV_IMAGE_RECOGNITION_TOLERANT_MATCH_PART_ERR';
 
+/// @nodoc
 const String MV_IMAGE_TRACKING_HISTORY_AMOUNT =
     'MV_IMAGE_TRACKING_HISTORY_AMOUNT';
 
+/// @nodoc
 const String MV_IMAGE_TRACKING_EXPECTED_OFFSET =
     'MV_IMAGE_TRACKING_EXPECTED_OFFSET';
 
+/// @nodoc
 const String MV_IMAGE_TRACKING_USE_STABLIZATION =
     'MV_IMAGE_TRACKING_USE_STABLIZATION';
 
+/// @nodoc
 const String MV_IMAGE_TRACKING_STABLIZATION_TOLERANT_SHIFT =
     'MV_IMAGE_TRACKING_STABLIZATION_TOLERANT_SHIFT';
 
+/// @nodoc
 const String MV_IMAGE_TRACKING_STABLIZATION_SPEED =
     'MV_IMAGE_TRACKING_STABLIZATION_SPEED';
 
+/// @nodoc
 const String MV_IMAGE_TRACKING_STABLIZATION_ACCELERATION =
     'MV_IMAGE_TRACKING_STABLIZATION_ACCELERATION';

@@ -1,3 +1,6 @@
+/// {@category 9.0/tizen}
+library tizen_interop_9_0.capi_media_thumbnail_util;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen capi-media-thumbnail-util APIs.
+/// {@category 9.0/tizen}
 class Tizen90CapiMediaThumbnailUtil {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,39 +28,38 @@ class Tizen90CapiMediaThumbnailUtil {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Extracts the thumbnail for the given media into a file, synchronously.
-  /// @details This function creates thumbnail from a given media file. \n
-  /// The generated thumbnail is saved in the given thumbnail path. \n
-  /// The format of the thumbnail file is determined by the extension of the thumbnail path
-  /// (e.g. path is input.jpg and thumbnail_path is thumbnail.png then thumbnail.png is encoded in the PNG format). \n
-  /// If the extension is missing or the format is not supported, the thumbnail is encoded in the same format as the given media
-  /// (e.g. path is input.jpg and thumbnail_path is thumbnail.out then thumbnail.out is encoded in the JPEG format). \n
-  /// Supported image formats are as follows: \n
-  /// - GIF, JPEG, PNG, BMP, WBMP \n
-  /// Video files only support JPEG format thumbnail.
+  /// Extracts the thumbnail for the given media into a file, synchronously.
   ///
-  /// @since_tizen 5.0
+  /// This function creates thumbnail from a given media file. The generated thumbnail is saved in the given thumbnail path. The format of the thumbnail file is determined by the extension of the thumbnail path (e.g. path is input.jpg and thumbnail_path is thumbnail.png then thumbnail.png is encoded in the PNG format). If the extension is missing or the format is not supported, the thumbnail is encoded in the same format as the given media (e.g. path is input.jpg and thumbnail_path is thumbnail.out then thumbnail.out is encoded in the JPEG format). Supported image formats are as follows:
+  /// - GIF, JPEG, PNG, BMP, WBMP Video files only support JPEG format thumbnail.
   ///
-  /// @remarks %http://tizen.org/privilege/mediastorage is needed if input or output path points to media storage. \n
-  /// %http://tizen.org/privilege/externalstorage is needed if input or output path points to external storage. \n
-  /// The width and height of the thumbnail to be generated cannot exceed 2000. \n
-  /// The width and height of the thumbnail to be generated cannot exceed the original resolution. \n
-  /// Since 5.5, if the width and height of the thumbnail to be generated exceeds the original resolution, the value changes to the original resolution. \n
-  /// In order to maintain the ratio, the requested size and generated size may be different. (Modify based on short axis) \n
-  /// If the parent directory of the thumbnail path to be generated does not exist, an error is returned.
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @param[in] path       The path of the original media file
-  /// @param[in] width      The width of the thumbnail
-  /// @param[in] height     The height of the thumbnail
-  /// @param[in] thumbnail_path   The path to save the generated thumbnail
+  /// **Remarks:**
+  /// - <http://tizen.org/privilege/mediastorage is needed if input or output path points to media storage.>
+  /// - <http://tizen.org/privilege/externalstorage is needed if input or output path points to external storage.>
+  /// - The width and height of the thumbnail to be generated cannot exceed 2000.
+  /// - The width and height of the thumbnail to be generated cannot exceed the original resolution.
+  /// - Since 5.5, if the width and height of the thumbnail to be generated exceeds the original resolution, the value changes to the original resolution.
+  /// - In order to maintain the ratio, the requested size and generated size may be different. (Modify based on short axis)
+  /// - If the parent directory of the thumbnail path to be generated does not exist, an error is returned.
   ///
-  /// @return @c 0 on success, otherwise a negative error value
+  /// **Parameters:**
+  /// - `path` (in): The path of the original media file
+  /// - `width` (in): The width of the thumbnail
+  /// - `height` (in): The height of the thumbnail
+  /// - `thumbnail_path` (in): The path to save the generated thumbnail
   ///
-  /// @retval #THUMBNAIL_UTIL_ERROR_NONE              Successful
-  /// @retval #THUMBNAIL_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #THUMBNAIL_UTIL_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #THUMBNAIL_UTIL_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #THUMBNAIL_UTIL_ERROR_PERMISSION_DENIED Permission denied
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `THUMBNAIL_UTIL_ERROR_NONE`: Successful
+  /// - `THUMBNAIL_UTIL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `THUMBNAIL_UTIL_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `THUMBNAIL_UTIL_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `THUMBNAIL_UTIL_ERROR_PERMISSION_DENIED`: Permission denied
   int thumbnail_util_extract_to_file(
     ffi.Pointer<ffi.Char> path,
     int width,
@@ -83,37 +86,42 @@ class Tizen90CapiMediaThumbnailUtil {
           int Function(
               ffi.Pointer<ffi.Char>, int, int, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Extracts the thumbnail for the given media into a buffer, synchronously.
-  /// @details This function creates thumbnails from a given media file. \n
-  /// The generated thumbnail is returned as a raw data stream.
+  /// Extracts the thumbnail for the given media into a buffer, synchronously.
   ///
-  /// @since_tizen 5.0
+  /// This function creates thumbnails from a given media file. The generated thumbnail is returned as a raw data stream.
   ///
-  /// @remarks %http://tizen.org/privilege/mediastorage is needed if input or output path points to media storage. \n
-  /// %http://tizen.org/privilege/externalstorage is needed if input or output path points to external storage. \n
-  /// The width and height of the thumbnail to be generated cannot exceed 2000. \n
-  /// The width and height of the thumbnail to be generated cannot exceed the original resolution. \n
-  /// In the case of video file, color space of the generated thumbnail is RGB. \n
-  /// In the case of image file, color space of the generated thumbnail is BGRA. \n
-  /// The @a thumb_buffer should be released using free().
-  /// Since 5.5, if the width and height of the thumbnail to be generated exceeds the original resolution, the value changes to the original resolution. \n
-  /// In order to maintain the ratio, the requested size and generated size may be different. (Modify based on short axis)
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @param[in] path       The path of the original media file
-  /// @param[in] width      The width of the thumbnail
-  /// @param[in] height     The height of the thumbnail
-  /// @param[out] thumb_buffer   The raw data of the thumbnail which is generated
-  /// @param[out] thumb_size     The size of the thumbnail which is generated
-  /// @param[out] thumb_width    The width of the thumbnail which is generated
-  /// @param[out] thumb_height   The height of the thumbnail which is generated
+  /// **Remarks:**
+  /// - <http://tizen.org/privilege/mediastorage is needed if input or output path points to media storage.>
+  /// - <http://tizen.org/privilege/externalstorage is needed if input or output path points to external storage.>
+  /// - The width and height of the thumbnail to be generated cannot exceed 2000.
+  /// - The width and height of the thumbnail to be generated cannot exceed the original resolution.
+  /// - In the case of video file, color space of the generated thumbnail is RGB.
+  /// - In the case of image file, color space of the generated thumbnail is BGRA.
+  /// - The `thumb_buffer` should be released using free().
+  /// - Since 5.5, if the width and height of the thumbnail to be generated exceeds the original resolution, the value changes to the original resolution.
+  /// - In order to maintain the ratio, the requested size and generated size may be different. (Modify based on short axis)
   ///
-  /// @return @c 0 on success, otherwise a negative error value
+  /// **Parameters:**
+  /// - `path` (in): The path of the original media file
+  /// - `width` (in): The width of the thumbnail
+  /// - `height` (in): The height of the thumbnail
+  /// - `thumb_buffer` (out): The raw data of the thumbnail which is generated
+  /// - `thumb_size` (out): The size of the thumbnail which is generated
+  /// - `thumb_width` (out): The width of the thumbnail which is generated
+  /// - `thumb_height` (out): The height of the thumbnail which is generated
   ///
-  /// @retval #THUMBNAIL_UTIL_ERROR_NONE              Successful
-  /// @retval #THUMBNAIL_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #THUMBNAIL_UTIL_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #THUMBNAIL_UTIL_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #THUMBNAIL_UTIL_ERROR_PERMISSION_DENIED Permission denied
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `THUMBNAIL_UTIL_ERROR_NONE`: Successful
+  /// - `THUMBNAIL_UTIL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `THUMBNAIL_UTIL_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `THUMBNAIL_UTIL_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `THUMBNAIL_UTIL_ERROR_PERMISSION_DENIED`: Permission denied
   int thumbnail_util_extract_to_buffer(
     ffi.Pointer<ffi.Char> path,
     int width,
@@ -157,9 +165,14 @@ class Tizen90CapiMediaThumbnailUtil {
               ffi.Pointer<ffi.UnsignedInt>)>();
 }
 
-/// @ingroup CAPI_MEDIA_THUMBNAIL_UTIL_MODULE
-/// @brief Enumeration for a thumbnail util error.
-/// @since_tizen 2.4
+/// Enumeration for a thumbnail util error.
+///
+/// **Since Tizen:**
+/// - 2.4
+///
+/// **Group:**
+/// - CAPI_MEDIA_THUMBNAIL_UTIL_MODULE
+/// @nodoc
 abstract class thumbnail_util_error_e {
   /// < Successful
   static const int THUMBNAIL_UTIL_ERROR_NONE = 0;
@@ -183,4 +196,5 @@ abstract class thumbnail_util_error_e {
   static const int THUMBNAIL_UTIL_ERROR_UNSUPPORTED_CONTENT = -49872895;
 }
 
+/// @nodoc
 const int THUMBNAIL_UTIL_ERROR_CLASS = -49872896;

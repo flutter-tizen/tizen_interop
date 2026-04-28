@@ -1,3 +1,6 @@
+/// {@category 8.0/tizen}
+library tizen_interop_8_0.mv_inference;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -10,6 +13,7 @@ import 'dart:ffi' as ffi;
 import 'generated_bindings_mv_common.dart' as mv_common;
 
 /// Dart bindings for Tizen mv_inference APIs.
+/// {@category 8.0/tizen}
 class Tizen80MvInference {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -25,37 +29,42 @@ class Tizen80MvInference {
           lookup)
       : _lookup = lookup;
 
-  /// /
-  /// /**
-  /// @brief Creates inference handle.
-  /// @details Use this function to create an inference. After the creation
-  /// the inference has to be prepared with
-  /// mv_inference_prepare() function to prepare a network
-  /// for the inference.
+  /// / /**
   ///
-  /// @since_tizen 5.5
-  /// @remarks If the app sets #MV_INFERENCE_MODEL_CONFIGURATION_FILE_PATH,
-  /// #MV_INFERENCE_MODEL_WEIGHT_FILE_PATH, and #MV_INFERENCE_MODEL_USER_FILE_PATH
-  /// to media storage, then the media storage privilege
-  /// %http://tizen.org/privilege/mediastorage is needed.\n
-  /// If the app sets any of the paths mentioned in the previous sentence
-  /// to external storage, then the external storage privilege
-  /// %http://tizen.org/privilege/externalstorage is needed.\n
-  /// If the required privileges aren't set properly, mv_inference_prepare() will returned
-  /// #MEDIA_VISION_ERROR_PERMISSION_DENIED.
+  /// Creates inference handle.
   ///
-  /// @remarks The @a infer should be released using mv_inference_destroy().
+  /// Use this function to create an inference. After the creation the inference has to be prepared with mv_inference_prepare() function to prepare a network for the inference.
   ///
-  /// @param[out] infer    The handle to the inference to be created
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Remarks:**
+  /// - If the app sets `MV_INFERENCE_MODEL_CONFIGURATION_FILE_PATH`,
+  /// - `MV_INFERENCE_MODEL_WEIGHT_FILE_PATH`, and `MV_INFERENCE_MODEL_USER_FILE_PATH`
+  /// - to media storage, then the media storage privilege
+  /// - <http://tizen.org/privilege/mediastorage is needed.>
+  /// - If the app sets any of the paths mentioned in the previous sentence
+  /// - to external storage, then the external storage privilege
+  /// - <http://tizen.org/privilege/externalstorage is needed.>
+  /// - If the required privileges aren't set properly, mv_inference_prepare() will returned
+  /// - `MEDIA_VISION_ERROR_PERMISSION_DENIED`.
+  /// - The `infer` should be released using mv_inference_destroy().
   ///
-  /// @see mv_inference_destroy()
-  /// @see mv_inference_prepare()
+  /// **Parameters:**
+  /// - `infer` (out): The handle to the inference to be created
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `mv_inference_destroy()`
+  /// - `mv_inference_prepare()`
   int mv_inference_create(
     ffi.Pointer<mv_inference_h> infer,
   ) {
@@ -70,20 +79,27 @@ class Tizen80MvInference {
   late final _mv_inference_create = _mv_inference_createPtr
       .asFunction<int Function(ffi.Pointer<mv_inference_h>)>();
 
-  /// @brief Destroys inference handle and releases all its resources.
+  /// Destroys inference handle and releases all its resources.
   ///
-  /// @since_tizen 5.5
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @param[in] infer    The handle to the inference to be destroyed
+  /// **Parameters:**
+  /// - `infer` (in): The handle to the inference to be destroyed
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @pre Create inference handle by using mv_inference_create()
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
   ///
-  /// @see mv_inference_create()
+  /// **Preconditions:**
+  /// - Create inference handle by using mv_inference_create()
+  ///
+  /// **See also:**
+  /// - `mv_inference_create()`
   int mv_inference_destroy(
     mv_inference_h infer,
   ) {
@@ -98,23 +114,25 @@ class Tizen80MvInference {
   late final _mv_inference_destroy =
       _mv_inference_destroyPtr.asFunction<int Function(mv_inference_h)>();
 
-  /// @brief Configures the network of the inference.
-  /// @details Use this function to configure the network of the inference
-  /// which is set to @a engine_config.
+  /// Configures the network of the inference.
   ///
-  /// @since_tizen 5.5
+  /// Use this function to configure the network of the inference which is set to `engine_config`.
   ///
-  /// @param[in] infer         The handle to the inference
-  /// @param[in] engine_config The handle to the configuration of
-  /// engine.
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// in @a engine_config
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PATH Invalid path of model data
-  /// in @a engine_config
+  /// **Parameters:**
+  /// - `infer` (in): The handle to the inference
+  /// - `engine_config` (in): The handle to the configuration of engine.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter in `engine_config`
+  /// - `MEDIA_VISION_ERROR_INVALID_PATH`: Invalid path of model data in `engine_config`
   int mv_inference_configure(
     mv_inference_h infer,
     mv_common.mv_engine_config_h engine_config,
@@ -132,23 +150,28 @@ class Tizen80MvInference {
   late final _mv_inference_configure = _mv_inference_configurePtr
       .asFunction<int Function(mv_inference_h, mv_common.mv_engine_config_h)>();
 
-  /// @brief Prepares inference.
-  /// @details Use this function to prepare inference based on
-  /// the configured network.
+  /// Prepares inference.
   ///
-  /// @since_tizen 5.5
+  /// Use this function to prepare inference based on the configured network.
   ///
-  /// @param[in] infer         The handle to the inference
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MEDIA_VISION_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_INVALID_DATA Invalid model data
-  /// @retval #MEDIA_VISION_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MEDIA_VISION_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED_FORMAT Not supported format
+  /// **Parameters:**
+  /// - `infer` (in): The handle to the inference
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MEDIA_VISION_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_INVALID_DATA`: Invalid model data
+  /// - `MEDIA_VISION_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MEDIA_VISION_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED_FORMAT`: Not supported format
   int mv_inference_prepare(
     mv_inference_h infer,
   ) {
@@ -163,22 +186,28 @@ class Tizen80MvInference {
   late final _mv_inference_prepare =
       _mv_inference_preparePtr.asFunction<int Function(mv_inference_h)>();
 
-  /// @brief Traverses the list of supported engines for inference.
-  /// @details Using this function the supported engines can be obtained.
-  /// The names can be used with #mv_engine_config_h related
-  /// getters and setters to get/set MV_INFERENCE_BACKEND_TYPE attribute
-  /// value.
+  /// Traverses the list of supported engines for inference.
   ///
-  /// @since_tizen 5.5
-  /// @param[in] infer The handle to the inference
-  /// @param[in] callback The iteration callback function
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Using this function the supported engines can be obtained. The names can be used with `mv_engine_config_h` related getters and setters to get/set MV_INFERENCE_BACKEND_TYPE attribute value.
   ///
-  /// @see mv_inference_supported_engine_cb()
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `infer` (in): The handle to the inference
+  /// - `callback` (in): The iteration callback function
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `mv_inference_supported_engine_cb()`
   int mv_inference_foreach_supported_engine(
     mv_inference_h infer,
     mv_inference_supported_engine_cb callback,
@@ -200,41 +229,45 @@ class Tizen80MvInference {
           int Function(mv_inference_h, mv_inference_supported_engine_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Performs image classification on the @a source.
-  /// @details Use this function to launch image classification.
-  /// Each time when mv_inference_image_classify() is
-  /// called, @a classified_cb will receive classes
-  /// which the media source may belong to.
+  /// Performs image classification on the `source`.
   ///
-  /// @since_tizen 5.5
-  /// @remarks This function is synchronous and may take considerable time to run.
+  /// Use this function to launch image classification. Each time when mv_inference_image_classify() is called, `classified_cb` will receive classes which the media source may belong to.
   ///
-  /// @param[in] source         The handle to the source of the media
-  /// @param[in] infer          The handle to the inference
-  /// @param[in] roi            Rectangular area in the @a source which will be analyzed.
-  /// If NULL, then the whole source will be analyzed.
-  /// @param[in] classified_cb  The callback which will be called for
-  /// classification on @a source.
-  /// This callback will receive classification results.
-  /// @param[in] user_data      The user data passed from the code where
-  /// mv_inference_image_classify() is invoked. This data will
-  /// be accessible in @a classified_cb callback.
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIA_VISION_ERROR_INTERNAL          Internal error
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED_FORMAT Source colorspace
-  /// isn't supported
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @pre Create a source handle by calling mv_create_source()
-  /// @pre Create an inference handle by calling mv_inference_create()
-  /// @pre Configure an inference handle by calling mv_inference_configure()
-  /// @pre Prepare an inference by calling mv_inference_prepare()
-  /// @post @a classified_cb will be called to provide classification results
+  /// **Remarks:**
+  /// - This function is synchronous and may take considerable time to run.
   ///
-  /// @see mv_inference_image_classified_cb()
+  /// **Parameters:**
+  /// - `source` (in): The handle to the source of the media
+  /// - `infer` (in): The handle to the inference
+  /// - `roi` (in): Rectangular area in the `source` which will be analyzed. If NULL, then the whole source will be analyzed.
+  /// - `classified_cb` (in): The callback which will be called for classification on `source`. This callback will receive classification results.
+  /// - `user_data` (in): The user data passed from the code where mv_inference_image_classify() is invoked. This data will be accessible in `classified_cb` callback.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIA_VISION_ERROR_INTERNAL`: Internal error
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED_FORMAT`: Source colorspace isn't supported
+  ///
+  /// **Preconditions:**
+  /// - Create a source handle by calling mv_create_source()
+  /// - Create an inference handle by calling mv_inference_create()
+  /// - Configure an inference handle by calling mv_inference_configure()
+  /// - Prepare an inference by calling mv_inference_prepare()
+  ///
+  /// **Postconditions:**
+  /// - `classified_cb` will be called to provide classification results
+  ///
+  /// **See also:**
+  /// - `mv_inference_image_classified_cb()`
   int mv_inference_image_classify(
     mv_common.mv_source_h source,
     mv_inference_h infer,
@@ -268,38 +301,43 @@ class Tizen80MvInference {
               mv_inference_image_classified_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Performs object detection on the @a source.
-  /// @details Use this function to launch object detection.
-  /// Each time when mv_inference_object_detect() is
-  /// called, @a detected_cb will receive a list of objects and their locations
-  /// in the media source.
+  /// Performs object detection on the `source`.
   ///
-  /// @since_tizen 5.5
-  /// @remarks This function is synchronous and may take considerable time to run.
+  /// Use this function to launch object detection. Each time when mv_inference_object_detect() is called, `detected_cb` will receive a list of objects and their locations in the media source.
   ///
-  /// @param[in] source         The handle to the source of the media
-  /// @param[in] infer          The handle to the inference
-  /// @param[in] detected_cb    The callback which will be called for
-  /// detecting objects in the media source.
-  /// This callback will receive the detection results.
-  /// @param[in] user_data      The user data passed from the code where
-  /// mv_inference_object_detect() is invoked. This data will
-  /// be accessible in @a detected_cb callback.
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_INTERNAL          Internal error
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED_FORMAT Source colorspace
-  /// isn't supported
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @pre Create a source handle by calling mv_create_source()
-  /// @pre Create an inference handle by calling mv_inference_create()
-  /// @pre Configure an inference handle by calling mv_inference_configure()
-  /// @pre Prepare an inference by calling mv_inference_prepare()
-  /// @post @a detected_cb will be called to provide detection results
+  /// **Remarks:**
+  /// - This function is synchronous and may take considerable time to run.
   ///
-  /// @see mv_inference_object_detected_cb()
+  /// **Parameters:**
+  /// - `source` (in): The handle to the source of the media
+  /// - `infer` (in): The handle to the inference
+  /// - `detected_cb` (in): The callback which will be called for detecting objects in the media source. This callback will receive the detection results.
+  /// - `user_data` (in): The user data passed from the code where mv_inference_object_detect() is invoked. This data will be accessible in `detected_cb` callback.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_INTERNAL`: Internal error
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED_FORMAT`: Source colorspace isn't supported
+  ///
+  /// **Preconditions:**
+  /// - Create a source handle by calling mv_create_source()
+  /// - Create an inference handle by calling mv_inference_create()
+  /// - Configure an inference handle by calling mv_inference_configure()
+  /// - Prepare an inference by calling mv_inference_prepare()
+  ///
+  /// **Postconditions:**
+  /// - `detected_cb` will be called to provide detection results
+  ///
+  /// **See also:**
+  /// - `mv_inference_object_detected_cb()`
   int mv_inference_object_detect(
     mv_common.mv_source_h source,
     mv_inference_h infer,
@@ -326,38 +364,43 @@ class Tizen80MvInference {
           int Function(mv_common.mv_source_h, mv_inference_h,
               mv_inference_object_detected_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Performs face detection on the @a source.
-  /// @details Use this function to launch face detection.
-  /// Each time when mv_inference_face_detect() is
-  /// called, @a detected_cb will receive a list of faces and their locations
-  /// in the media source.
+  /// Performs face detection on the `source`.
   ///
-  /// @since_tizen 5.5
-  /// @remarks This function is synchronous and may take considerable time to run.
+  /// Use this function to launch face detection. Each time when mv_inference_face_detect() is called, `detected_cb` will receive a list of faces and their locations in the media source.
   ///
-  /// @param[in] source         The handle to the source of the media
-  /// @param[in] infer          The handle to the inference
-  /// @param[in] detected_cb    The callback which will be called for
-  /// detecting faces on media source.
-  /// This callback will receive the detection results.
-  /// @param[in] user_data      The user data passed from the code where
-  /// mv_inference_face_detect() is invoked. This data will
-  /// be accessible in @a detected_cb callback.
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_INTERNAL          Internal error
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED_FORMAT Source colorspace
-  /// isn't supported
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @pre Create a source handle by calling mv_create_source()
-  /// @pre Create an inference handle by calling mv_inference_create()
-  /// @pre Configure an inference handle by calling mv_inference_configure()
-  /// @pre Prepare an inference by calling mv_inference_prepare()
-  /// @post @a detected_cb will be called to provide detection results
+  /// **Remarks:**
+  /// - This function is synchronous and may take considerable time to run.
   ///
-  /// @see mv_inference_face_detected_cb()
+  /// **Parameters:**
+  /// - `source` (in): The handle to the source of the media
+  /// - `infer` (in): The handle to the inference
+  /// - `detected_cb` (in): The callback which will be called for detecting faces on media source. This callback will receive the detection results.
+  /// - `user_data` (in): The user data passed from the code where mv_inference_face_detect() is invoked. This data will be accessible in `detected_cb` callback.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_INTERNAL`: Internal error
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED_FORMAT`: Source colorspace isn't supported
+  ///
+  /// **Preconditions:**
+  /// - Create a source handle by calling mv_create_source()
+  /// - Create an inference handle by calling mv_inference_create()
+  /// - Configure an inference handle by calling mv_inference_configure()
+  /// - Prepare an inference by calling mv_inference_prepare()
+  ///
+  /// **Postconditions:**
+  /// - `detected_cb` will be called to provide detection results
+  ///
+  /// **See also:**
+  /// - `mv_inference_face_detected_cb()`
   int mv_inference_face_detect(
     mv_common.mv_source_h source,
     mv_inference_h infer,
@@ -384,39 +427,44 @@ class Tizen80MvInference {
           int Function(mv_common.mv_source_h, mv_inference_h,
               mv_inference_face_detected_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Performs facial landmarks detection on the @a source.
-  /// @details Use this function to launch facial landmark detection.
-  /// Each time when mv_inference_facial_landmark_detect() is
-  /// called, @a detected_cb will receive a list facial landmark's locations
-  /// in the media source.
+  /// Performs facial landmarks detection on the `source`.
   ///
-  /// @since_tizen 5.5
-  /// @remarks This function is synchronous and may take considerable time to run.
+  /// Use this function to launch facial landmark detection. Each time when mv_inference_facial_landmark_detect() is called, `detected_cb` will receive a list facial landmark's locations in the media source.
   ///
-  /// @param[in] source         The handle to the source of the media
-  /// @param[in] infer          The handle to the inference
-  /// @param[in] roi            Rectangular area including a face in @a source which
-  /// will be analyzed. If NULL, then the whole source will be
-  /// analyzed.
-  /// @param[in] detected_cb    The callback which will receive the detection results.
-  /// @param[in] user_data      The user data passed from the code where
-  /// mv_inference_facial_landmark_detect() is invoked.
-  /// This data will be accessible in @a detected_cb callback.
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_INTERNAL          Internal error
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED_FORMAT Source colorspace
-  /// isn't supported
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @pre Create a source handle by calling mv_create_source()
-  /// @pre Create an inference handle by calling mv_inference_create()
-  /// @pre Configure an inference handle by calling mv_inference_configure()
-  /// @pre Prepare an inference by calling mv_inference_prepare()
-  /// @post @a detected_cb will be called to provide detection results
+  /// **Remarks:**
+  /// - This function is synchronous and may take considerable time to run.
   ///
-  /// @see mv_inference_facial_landmark_detected_cb()
+  /// **Parameters:**
+  /// - `source` (in): The handle to the source of the media
+  /// - `infer` (in): The handle to the inference
+  /// - `roi` (in): Rectangular area including a face in `source` which will be analyzed. If NULL, then the whole source will be analyzed.
+  /// - `detected_cb` (in): The callback which will receive the detection results.
+  /// - `user_data` (in): The user data passed from the code where mv_inference_facial_landmark_detect() is invoked. This data will be accessible in `detected_cb` callback.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_INTERNAL`: Internal error
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED_FORMAT`: Source colorspace isn't supported
+  ///
+  /// **Preconditions:**
+  /// - Create a source handle by calling mv_create_source()
+  /// - Create an inference handle by calling mv_inference_create()
+  /// - Configure an inference handle by calling mv_inference_configure()
+  /// - Prepare an inference by calling mv_inference_prepare()
+  ///
+  /// **Postconditions:**
+  /// - `detected_cb` will be called to provide detection results
+  ///
+  /// **See also:**
+  /// - `mv_inference_facial_landmark_detected_cb()`
   int mv_inference_facial_landmark_detect(
     mv_common.mv_source_h source,
     mv_inference_h infer,
@@ -450,38 +498,44 @@ class Tizen80MvInference {
               mv_inference_facial_landmark_detected_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Performs pose landmarks detection on the @a source.
-  /// @details Use this function to launch pose landmark detection.
-  /// Each time when mv_inference_pose_landmark_detect() is
-  /// called, @a detected_cb will receive a list of pose landmark's locations
-  /// in the media source.
+  /// Performs pose landmarks detection on the `source`.
   ///
-  /// @since_tizen 6.0
-  /// @remarks This function is synchronous and may take considerable time to run.
+  /// Use this function to launch pose landmark detection. Each time when mv_inference_pose_landmark_detect() is called, `detected_cb` will receive a list of pose landmark's locations in the media source.
   ///
-  /// @param[in] source         The handle to the source of the media
-  /// @param[in] infer          The handle to the inference
-  /// @param[in] roi            Rectangular area including a face in @a source which
-  /// will be analyzed. If NULL, then the whole source will be
-  /// analyzed.
-  /// @param[in] detected_cb    The callback which will receive the detection results.
-  /// @param[in] user_data      The user data passed from the code where
-  /// mv_inference_pose_landmark_detect() is invoked.
-  /// This data will be accessible in @a detected_cb callback.
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_INTERNAL          Internal error
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED_FORMAT Source colorspace isn't supported
+  /// **Since Tizen:**
+  /// - 6.0
   ///
-  /// @pre Create a source handle by calling mv_create_source()
-  /// @pre Create an inference handle by calling mv_inference_create()
-  /// @pre Configure an inference handle by calling mv_inference_configure()
-  /// @pre Prepare an inference by calling mv_inference_prepare()
-  /// @post @a detected_cb will be called to provide detection results
+  /// **Remarks:**
+  /// - This function is synchronous and may take considerable time to run.
   ///
-  /// @see mv_inference_pose_landmark_detected_cb()
+  /// **Parameters:**
+  /// - `source` (in): The handle to the source of the media
+  /// - `infer` (in): The handle to the inference
+  /// - `roi` (in): Rectangular area including a face in `source` which will be analyzed. If NULL, then the whole source will be analyzed.
+  /// - `detected_cb` (in): The callback which will receive the detection results.
+  /// - `user_data` (in): The user data passed from the code where mv_inference_pose_landmark_detect() is invoked. This data will be accessible in `detected_cb` callback.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_INTERNAL`: Internal error
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED_FORMAT`: Source colorspace isn't supported
+  ///
+  /// **Preconditions:**
+  /// - Create a source handle by calling mv_create_source()
+  /// - Create an inference handle by calling mv_inference_create()
+  /// - Configure an inference handle by calling mv_inference_configure()
+  /// - Prepare an inference by calling mv_inference_prepare()
+  ///
+  /// **Postconditions:**
+  /// - `detected_cb` will be called to provide detection results
+  ///
+  /// **See also:**
+  /// - `mv_inference_pose_landmark_detected_cb()`
   int mv_inference_pose_landmark_detect(
     mv_common.mv_source_h source,
     mv_inference_h infer,
@@ -515,20 +569,26 @@ class Tizen80MvInference {
               mv_inference_pose_landmark_detected_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Gets the number of poses.
+  /// Gets the number of poses.
   ///
-  /// @since_tizen 6.0
+  /// **Since Tizen:**
+  /// - 6.0
   ///
-  /// @param[in] result         		The handle to inference result
-  /// @param[out] number_of_poses   The pointer to the number of poses
+  /// **Parameters:**
+  /// - `result` (in): The handle to inference result
+  /// - `number_of_poses` (out): The pointer to the number of poses
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @see mv_inference_pose_landmark_detected_cb()
-  /// @see mv_inference_pose_result_h
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `mv_inference_pose_landmark_detected_cb()`
+  /// - `mv_inference_pose_result_h`
   int mv_inference_pose_get_number_of_poses(
     mv_inference_pose_result_h result,
     ffi.Pointer<ffi.Int> number_of_poses,
@@ -547,20 +607,26 @@ class Tizen80MvInference {
       _mv_inference_pose_get_number_of_posesPtr.asFunction<
           int Function(mv_inference_pose_result_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the number of landmarks per a pose.
+  /// Gets the number of landmarks per a pose.
   ///
-  /// @since_tizen 6.0
+  /// **Since Tizen:**
+  /// - 6.0
   ///
-  /// @param[in] result         			The handle to inference result
-  /// @param[out] number_of_landmarks   The pointer to the number of landmarks
+  /// **Parameters:**
+  /// - `result` (in): The handle to inference result
+  /// - `number_of_landmarks` (out): The pointer to the number of landmarks
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @see mv_inference_pose_landmark_detected_cb()
-  /// @see mv_inference_pose_result_h
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `mv_inference_pose_landmark_detected_cb()`
+  /// - `mv_inference_pose_result_h`
   int mv_inference_pose_get_number_of_landmarks(
     mv_inference_pose_result_h result,
     ffi.Pointer<ffi.Int> number_of_landmarks,
@@ -580,29 +646,31 @@ class Tizen80MvInference {
       _mv_inference_pose_get_number_of_landmarksPtr.asFunction<
           int Function(mv_inference_pose_result_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets landmark location of a part of a pose.
+  /// Gets landmark location of a part of a pose.
   ///
-  /// @since_tizen 6.0
+  /// **Since Tizen:**
+  /// - 6.0
   ///
-  /// @param[in] result            The handle to inference result
-  /// @param[in] pose_index        The pose index between 0 and
-  /// the number of poses which can be gotten by
-  /// mv_inference_pose_get_number_of_poses()
-  /// @param[in] pose_part         The landmark index between 0 and
-  /// the number of landmarks which can be gotten by
-  /// mv_inference_pose_get_number_of_landmarks()
-  /// @param[out] location      The location of a landmark
-  /// @param[out] score         The score of a landmark
+  /// **Parameters:**
+  /// - `result` (in): The handle to inference result
+  /// - `pose_index` (in): The pose index between 0 and the number of poses which can be gotten by mv_inference_pose_get_number_of_poses()
+  /// - `pose_part` (in): The landmark index between 0 and the number of landmarks which can be gotten by mv_inference_pose_get_number_of_landmarks()
+  /// - `location` (out): The location of a landmark
+  /// - `score` (out): The score of a landmark
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @see mv_inference_pose_get_number_of_poses()
-  /// @see mv_inference_pose_get_number_of_landmarks()
-  /// @see mv_inference_pose_landmark_detected_cb()
-  /// @see mv_inference_pose_result_h
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `mv_inference_pose_get_number_of_poses()`
+  /// - `mv_inference_pose_get_number_of_landmarks()`
+  /// - `mv_inference_pose_landmark_detected_cb()`
+  /// - `mv_inference_pose_result_h`
   int mv_inference_pose_get_landmark(
     mv_inference_pose_result_h result,
     int pose_index,
@@ -632,25 +700,29 @@ class Tizen80MvInference {
           int Function(mv_inference_pose_result_h, int, int,
               ffi.Pointer<mv_common.mv_point_s>, ffi.Pointer<ffi.Float>)>();
 
-  /// @brief Gets a label of a pose.
+  /// Gets a label of a pose.
   ///
-  /// @since_tizen 6.0
+  /// **Since Tizen:**
+  /// - 6.0
   ///
-  /// @param[in] result            The handle to inference result
-  /// @param[in] pose_index        The pose index between 0 and
-  /// the number of poses which can be gotten by
-  /// mv_inference_pose_get_number_of_poses()
-  /// @param[out] label         The label of a pose
+  /// **Parameters:**
+  /// - `result` (in): The handle to inference result
+  /// - `pose_index` (in): The pose index between 0 and the number of poses which can be gotten by mv_inference_pose_get_number_of_poses()
+  /// - `label` (out): The label of a pose
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @see mv_inference_pose_get_number_of_poses()
-  /// @see mv_inference_pose_get_number_of_landmarks()
-  /// @see mv_inference_pose_landmark_detected_cb()
-  /// @see mv_inference_pose_result_h
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `mv_inference_pose_get_number_of_poses()`
+  /// - `mv_inference_pose_get_number_of_landmarks()`
+  /// - `mv_inference_pose_landmark_detected_cb()`
+  /// - `mv_inference_pose_result_h`
   int mv_inference_pose_get_label(
     mv_inference_pose_result_h result,
     int pose_index,
@@ -672,22 +744,30 @@ class Tizen80MvInference {
           int Function(
               mv_inference_pose_result_h, int, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Creates pose handle.
-  /// @details Use this function to create a pose.
+  /// Creates pose handle.
   ///
-  /// @since_tizen 6.0
+  /// Use this function to create a pose.
   ///
-  /// @remarks The @a pose should be released using mv_pose_destroy().
+  /// **Since Tizen:**
+  /// - 6.0
   ///
-  /// @param[out] pose    The handle to the pose to be created
+  /// **Remarks:**
+  /// - The `pose` should be released using mv_pose_destroy().
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Parameters:**
+  /// - `pose` (out): The handle to the pose to be created
   ///
-  /// @see mv_pose_destroy()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `mv_pose_destroy()`
   int mv_pose_create(
     ffi.Pointer<mv_pose_h> pose,
   ) {
@@ -702,20 +782,27 @@ class Tizen80MvInference {
   late final _mv_pose_create =
       _mv_pose_createPtr.asFunction<int Function(ffi.Pointer<mv_pose_h>)>();
 
-  /// @brief Destroys pose handle and releases all its resources.
+  /// Destroys pose handle and releases all its resources.
   ///
-  /// @since_tizen 6.0
+  /// **Since Tizen:**
+  /// - 6.0
   ///
-  /// @param[in] pose    The handle to the pose to be destroyed
+  /// **Parameters:**
+  /// - `pose` (in): The handle to the pose to be destroyed
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @pre Create pose handle by using mv_pose_create()
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
   ///
-  /// @see mv_pose_create()
+  /// **Preconditions:**
+  /// - Create pose handle by using mv_pose_create()
+  ///
+  /// **See also:**
+  /// - `mv_pose_create()`
   int mv_pose_destroy(
     mv_pose_h pose,
   ) {
@@ -730,33 +817,38 @@ class Tizen80MvInference {
   late final _mv_pose_destroy =
       _mv_pose_destroyPtr.asFunction<int Function(mv_pose_h)>();
 
-  /// @brief Sets a motion capture file and its pose mapping file to the pose.
-  /// @details Use this function to set a motion capture file and
-  /// its pose mapping file. These are used by mv_pose_compare()
-  /// to compare a given pose by mv_inference_pose_landmark_estimation().
+  /// Sets a motion capture file and its pose mapping file to the pose.
   ///
+  /// Use this function to set a motion capture file and its pose mapping file. These are used by mv_pose_compare() to compare a given pose by mv_inference_pose_landmark_estimation().
   ///
-  /// @since_tizen 6.0
-  /// @remarks If the app sets paths to media storage,
-  /// then the media storage privilege
-  /// %http://tizen.org/privilege/mediastorage is needed.\n
-  /// If the app sets the paths to external storage,
-  /// then the external storage privilege
-  /// %http://tizen.org/privilege/externalstorage is needed.\n
-  /// If the required privileges aren't set properly,
-  /// mv_pose_set_from_file() will returned #MEDIA_VISION_ERROR_PERMISSION_DENIED.
+  /// **Since Tizen:**
+  /// - 6.0
   ///
-  /// @param[in] pose                  The handle to the pose
-  /// @param[in] motion_capture_file_path The file path to the motion capture file
-  /// @param[in] motion_mapping_file_path The file path to the motion mapping file
+  /// **Remarks:**
+  /// - If the app sets paths to media storage,
+  /// - then the media storage privilege
+  /// - <http://tizen.org/privilege/mediastorage is needed.>
+  /// - If the app sets the paths to external storage,
+  /// - then the external storage privilege
+  /// - <http://tizen.org/privilege/externalstorage is needed.>
+  /// - If the required privileges aren't set properly,
+  /// - mv_pose_set_from_file() will returned `MEDIA_VISION_ERROR_PERMISSION_DENIED`.
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MEDIA_VISION_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PATH Invalid path of capture or mapping file
-  /// @retval #MEDIA_VISION_ERROR_INTERNAL Internal error
+  /// **Parameters:**
+  /// - `pose` (in): The handle to the pose
+  /// - `motion_capture_file_path` (in): The file path to the motion capture file
+  /// - `motion_mapping_file_path` (in): The file path to the motion mapping file
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MEDIA_VISION_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_INVALID_PATH`: Invalid path of capture or mapping file
+  /// - `MEDIA_VISION_ERROR_INTERNAL`: Internal error
   int mv_pose_set_from_file(
     mv_pose_h pose,
     ffi.Pointer<ffi.Char> motion_capture_file_path,
@@ -776,28 +868,34 @@ class Tizen80MvInference {
   late final _mv_pose_set_from_file = _mv_pose_set_from_filePtr.asFunction<
       int Function(mv_pose_h, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Compares an action pose with the pose which is set by mv_pose_set_from_file().
-  /// @details Use this function to compare action pose with the pose
-  /// which is set by mv_pose_set_from_file().
-  /// Parts to be compared can be selected by #mv_inference_human_body_part_e.
-  /// Their similarity will be given by the score between 0 ~ 1.
+  /// Compares an action pose with the pose which is set by mv_pose_set_from_file().
   ///
-  /// @since_tizen 6.0
-  /// @remarks If @a action contains multiple poses, the first pose is used for comparison.
+  /// Use this function to compare action pose with the pose which is set by mv_pose_set_from_file(). Parts to be compared can be selected by `mv_inference_human_body_part_e`. Their similarity will be given by the score between 0 ~ 1.
   ///
-  /// @param[in] pose   The handle to the pose
-  /// @param[in] action The action pose
-  /// @param[in] parts  The parts to be compared
-  /// @param[out] score The similarity score
+  /// **Since Tizen:**
+  /// - 6.0
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_INVALID_OPERATION Invalid operation
+  /// **Remarks:**
+  /// - If `action` contains multiple poses, the first pose is used for comparison.
   ///
-  /// @pre Sets the pose by using mv_pose_set_from_file()
-  /// @pre Detects the pose by using mv_inference_pose_landmark_detect()
+  /// **Parameters:**
+  /// - `pose` (in): The handle to the pose
+  /// - `action` (in): The action pose
+  /// - `parts` (in): The parts to be compared
+  /// - `score` (out): The similarity score
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - Sets the pose by using mv_pose_set_from_file()
+  /// - Detects the pose by using mv_inference_pose_landmark_detect()
   int mv_pose_compare(
     mv_pose_h pose,
     mv_inference_pose_result_h action,
@@ -821,28 +919,14 @@ class Tizen80MvInference {
           ffi.Pointer<ffi.Float>)>();
 }
 
-/// @brief Enumeration for inference backend.
-/// #MV_INFERENCE_BACKEND_OPENCV An open source computer vision and machine learning
-/// software library.
-/// (https://opencv.org/about/)
-/// #MV_INFERENCE_BACKEND_TFLITE Google-introduced open source inference engine for embedded systems,
-/// which runs Tensorflow Lite model.
-/// (https://www.tensorflow.org/lite/guide/get_started)
-/// #MV_INFERENCE_BACKEND_ARMNN ARM-introduced open source inference engine for CPUs, GPUs and NPUs, which
-/// enables efficient translation of existing neural network frameworks
-/// such as TensorFlow, TensorFlow Lite and Caffes, allowing them to
-/// run efficiently without modification on Embedded hardware.
-/// (https://developer.arm.com/ip-products/processors/machine-learning/arm-nn)
-/// #MV_INFERENCE_BACKEND_MLAPI Samsung-introduced open source ML single API framework of NNStreamer, which
-/// runs various NN models via tensor filters of NNStreamer. (Deprecated since 7.0)
-/// (https://github.com/nnstreamer/nnstreamer)
-/// #MV_INFERENCE_BACKEND_ONE Samsung-introduced open source inference engine called On-device Neural Engine, which
-/// performs inference of a given NN model on various devices such as CPU, GPU, DSP and NPU.
-/// (https://github.com/Samsung/ONE)
+/// Enumeration for inference backend. `MV_INFERENCE_BACKEND_OPENCV` An open source computer vision and machine learning software library. (https://opencv.org/about/) `MV_INFERENCE_BACKEND_TFLITE` Google-introduced open source inference engine for embedded systems, which runs Tensorflow Lite model. (https://www.tensorflow.org/lite/guide/get_started) `MV_INFERENCE_BACKEND_ARMNN` ARM-introduced open source inference engine for CPUs, GPUs and NPUs, which enables efficient translation of existing neural network frameworks such as TensorFlow, TensorFlow Lite and Caffes, allowing them to run efficiently without modification on Embedded hardware. (https://developer.arm.com/ip-products/processors/machine-learning/arm-nn) `MV_INFERENCE_BACKEND_MLAPI` Samsung-introduced open source ML single API framework of NNStreamer, which runs various NN models via tensor filters of NNStreamer. (Deprecated since 7.0) (https://github.com/nnstreamer/nnstreamer) `MV_INFERENCE_BACKEND_ONE` Samsung-introduced open source inference engine called On-device Neural Engine, which performs inference of a given NN model on various devices such as CPU, GPU, DSP and NPU. (https://github.com/Samsung/ONE)
 ///
-/// @since_tizen 5.5
+/// **Since Tizen:**
+/// - 5.5
 ///
-/// @see mv_inference_prepare()
+/// **See also:**
+/// - `mv_inference_prepare()`
+/// @nodoc
 abstract class mv_inference_backend_type_e {
   /// < None
   static const int MV_INFERENCE_BACKEND_NONE = -1;
@@ -872,9 +956,11 @@ abstract class mv_inference_backend_type_e {
   static const int MV_INFERENCE_BACKEND_MAX = 7;
 }
 
-/// @brief Enumeration for inference target.
+/// Enumeration for inference target.
 ///
-/// @since_tizen 6.0
+/// **Since Tizen:**
+/// - 6.0
+/// @nodoc
 abstract class mv_inference_target_device_e {
   /// < None
   static const int MV_INFERENCE_TARGET_DEVICE_NONE = 0;
@@ -892,9 +978,11 @@ abstract class mv_inference_target_device_e {
   static const int MV_INFERENCE_TARGET_DEVICE_MAX = 8;
 }
 
-/// @brief Enumeration for input data type.
+/// Enumeration for input data type.
 ///
-/// @since_tizen 6.0
+/// **Since Tizen:**
+/// - 6.0
+/// @nodoc
 abstract class mv_inference_data_type_e {
   /// < Data type of a given pre-trained model is float.
   static const int MV_INFERENCE_DATA_FLOAT32 = 0;
@@ -903,9 +991,11 @@ abstract class mv_inference_data_type_e {
   static const int MV_INFERENCE_DATA_UINT8 = 1;
 }
 
-/// @brief Enumeration for human pose landmark.
+/// Enumeration for human pose landmark.
 ///
-/// @since_tizen 6.0
+/// **Since Tizen:**
+/// - 6.0
+/// @nodoc
 abstract class mv_inference_human_pose_landmark_e {
   /// < Head of human pose
   static const int MV_INFERENCE_HUMAN_POSE_HEAD = 1;
@@ -956,9 +1046,11 @@ abstract class mv_inference_human_pose_landmark_e {
   static const int MV_INFERENCE_HUMAN_POSE_LEFT_ANKLE = 16;
 }
 
-/// @brief Enumeration for human body parts.
+/// Enumeration for human body parts.
 ///
-/// @since_tizen 6.0
+/// **Since Tizen:**
+/// - 6.0
+/// @nodoc
 abstract class mv_inference_human_body_part_e {
   /// < HEAD, NECK, and THORAX
   static const int MV_INFERENCE_HUMAN_BODY_PART_HEAD = 1;
@@ -979,67 +1071,75 @@ abstract class mv_inference_human_body_part_e {
   static const int MV_INFERENCE_HUMAN_BODY_PART_LEG_LEFT = 32;
 }
 
-/// @brief The inference handle.
-/// @details Contains information about location of
-/// detected landmarks for one or more poses.
-/// @since_tizen 5.5
+/// The inference handle.
+///
+/// Contains information about location of detected landmarks for one or more poses.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 typedef mv_inference_h = ffi.Pointer<ffi.Void>;
 
-/// @brief Called to provide information for supported engines for inference.
+/// Called to provide information for supported engines for inference.
 ///
-/// @since_tizen 5.5
+/// **Since Tizen:**
+/// - 5.5
 ///
-/// @param[in] engine The supported engine.
-/// The @a engine can be used only in the callback.
-/// To use outside, make a copy.
-/// @param[in] supported The flag whether the engine
-/// is supported or not
-/// @param[in] user_data The user data passed from
-/// mv_inference_foreach_supported_engine()
-/// @return @c true to continue with the next iteration of the loop,
-/// otherwise @c false to break out of the loop
+/// **Parameters:**
+/// - `engine` (in): The supported engine. The `engine` can be used only in the callback. To use outside, make a copy.
+/// - `supported` (in): The flag whether the engine is supported or not
+/// - `user_data` (in): The user data passed from mv_inference_foreach_supported_engine()
 ///
-/// @pre mv_inference_foreach_supported_engine()
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - mv_inference_foreach_supported_engine()
+/// @nodoc
 typedef mv_inference_supported_engine_cb
     = ffi.Pointer<ffi.NativeFunction<mv_inference_supported_engine_cbFunction>>;
+/// @nodoc
 typedef mv_inference_supported_engine_cbFunction = ffi.Bool Function(
     ffi.Pointer<ffi.Char> engine,
     ffi.Bool supported,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmv_inference_supported_engine_cbFunction = bool Function(
     ffi.Pointer<ffi.Char> engine,
     bool supported,
     ffi.Pointer<ffi.Void> user_data);
 
-/// /
-/// /**
-/// @brief Called when @a source is classified.
-/// @details This callback is invoked each time when
-/// mv_inference_image_classify() is called to provide the results of
-/// image classification.
+/// / /**
 ///
-/// @since_tizen 5.5
-/// @remarks The @a indices, @a names, and @a confidences should not be released by the app.
-/// They can be used only in the callback. The number of elements in @a indices, @a names,
-/// and @a confidences is equal to @a number_of_classes.
+/// Called when `source` is classified.
 ///
-/// @param[in] source               The handle to the source of the media where
-/// an image was classified. @a source is the same object
-/// for which mv_inference_image_classify() was called.
-/// It should be released by calling mv_destroy_source()
-/// when it's not needed anymore.
-/// @param[in] number_of_classes    The number of classes
-/// @param[in] indices              The indices of the classified image.
-/// @param[in] names                Names corresponding to the indices.
-/// @param[in] confidences          Each element is the confidence that the corresponding image belongs to the corresponding class.
-/// @param[in] user_data            The user data passed from callback invoking code
+/// This callback is invoked each time when mv_inference_image_classify() is called to provide the results of image classification.
 ///
-/// @pre Call mv_inference_image_classify() function to perform classification of the image
-/// and to invoke this callback as a result
+/// **Since Tizen:**
+/// - 5.5
 ///
-/// @see mv_inference_image_classify()
+/// **Remarks:**
+/// - The `indices`, `names`, and `confidences` should not be released by the app.
+/// - They can be used only in the callback. The number of elements in `indices`, `names`,
+/// - and `confidences` is equal to `number_of_classes`.
+///
+/// **Parameters:**
+/// - `source` (in): The handle to the source of the media where an image was classified. `source` is the same object for which mv_inference_image_classify() was called. It should be released by calling mv_destroy_source() when it's not needed anymore.
+/// - `number_of_classes` (in): The number of classes
+/// - `indices` (in): The indices of the classified image.
+/// - `names` (in): Names corresponding to the indices.
+/// - `confidences` (in): Each element is the confidence that the corresponding image belongs to the corresponding class.
+/// - `user_data` (in): The user data passed from callback invoking code
+///
+/// **Preconditions:**
+/// - Call mv_inference_image_classify() function to perform classification of the image and to invoke this callback as a result
+///
+/// **See also:**
+/// - `mv_inference_image_classify()`
+/// @nodoc
 typedef mv_inference_image_classified_cb
     = ffi.Pointer<ffi.NativeFunction<mv_inference_image_classified_cbFunction>>;
+/// @nodoc
 typedef mv_inference_image_classified_cbFunction = ffi.Void Function(
     mv_common.mv_source_h source,
     ffi.Int number_of_classes,
@@ -1047,6 +1147,7 @@ typedef mv_inference_image_classified_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Pointer<ffi.Char>> names,
     ffi.Pointer<ffi.Float> confidences,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmv_inference_image_classified_cbFunction = void Function(
     mv_common.mv_source_h source,
     int number_of_classes,
@@ -1055,36 +1156,38 @@ typedef Dartmv_inference_image_classified_cbFunction = void Function(
     ffi.Pointer<ffi.Float> confidences,
     ffi.Pointer<ffi.Void> user_data);
 
-/// /
-/// /**
-/// @brief Called when objects in @a source are detected.
-/// @details This callback is invoked each time when
-/// mv_inference_object_detect() is called to provide the results of
-/// object detection.
+/// / /**
 ///
-/// @since_tizen 5.5
-/// @remarks The @a indices, @a names, @a confidences, and @a locations should not be released by app.
-/// They can be used only in the callback. The number of elements in @a indices, @a names,
-/// @a confidences, and @a locations is equal to @a number_of_objects.
+/// Called when objects in `source` are detected.
 ///
-/// @param[in] source               The handle to the source of the media where
-/// an image was classified. @a source is the same object
-/// for which mv_inference_object_detect() was called.
-/// It should be released by calling mv_destroy_source()
-/// when it's not needed anymore.
-/// @param[in] number_of_objects    The number of objects
-/// @param[in] indices              The indices of objects.
-/// @param[in] names                Names corresponding to the indices.
-/// @param[in] confidences          Confidences of the detected objects.
-/// @param[in] locations            Locations of the detected objects.
-/// @param[in] user_data            The user data passed from callback invoking code
+/// This callback is invoked each time when mv_inference_object_detect() is called to provide the results of object detection.
 ///
-/// @pre Call mv_inference_object_detect() function to perform detection of the objects
-/// in @a source and to invoke this callback as a result
+/// **Since Tizen:**
+/// - 5.5
 ///
-/// @see mv_inference_object_detect()
+/// **Remarks:**
+/// - The `indices`, `names`, `confidences`, and `locations` should not be released by app.
+/// - They can be used only in the callback. The number of elements in `indices`, `names`,
+/// - `confidences`, and `locations` is equal to `number_of_objects`.
+///
+/// **Parameters:**
+/// - `source` (in): The handle to the source of the media where an image was classified. `source` is the same object for which mv_inference_object_detect() was called. It should be released by calling mv_destroy_source() when it's not needed anymore.
+/// - `number_of_objects` (in): The number of objects
+/// - `indices` (in): The indices of objects.
+/// - `names` (in): Names corresponding to the indices.
+/// - `confidences` (in): Confidences of the detected objects.
+/// - `locations` (in): Locations of the detected objects.
+/// - `user_data` (in): The user data passed from callback invoking code
+///
+/// **Preconditions:**
+/// - Call mv_inference_object_detect() function to perform detection of the objects in `source` and to invoke this callback as a result
+///
+/// **See also:**
+/// - `mv_inference_object_detect()`
+/// @nodoc
 typedef mv_inference_object_detected_cb
     = ffi.Pointer<ffi.NativeFunction<mv_inference_object_detected_cbFunction>>;
+/// @nodoc
 typedef mv_inference_object_detected_cbFunction = ffi.Void Function(
     mv_common.mv_source_h source,
     ffi.Int number_of_objects,
@@ -1093,6 +1196,7 @@ typedef mv_inference_object_detected_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Float> confidences,
     ffi.Pointer<mv_common.mv_rectangle_s> locations,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmv_inference_object_detected_cbFunction = void Function(
     mv_common.mv_source_h source,
     int number_of_objects,
@@ -1102,40 +1206,43 @@ typedef Dartmv_inference_object_detected_cbFunction = void Function(
     ffi.Pointer<mv_common.mv_rectangle_s> locations,
     ffi.Pointer<ffi.Void> user_data);
 
-/// /
-/// /**
-/// @brief Called when faces in @a source are detected.
-/// @details This callback is invoked each time when
-/// mv_inference_face_detect() is called to provide the results of
-/// face detection.
+/// / /**
 ///
-/// @since_tizen 5.5
-/// @remarks The @a confidences and @a locations should not be released by app.
-/// They can be used only in the callback. The number of elements in @a confidences
-/// and @a locations is equal to @a number_of_faces.
+/// Called when faces in `source` are detected.
 ///
-/// @param[in] source               The handle to the source of the media where
-/// faces were detected. @a source is the same object
-/// for which mv_inference_face_detect() was called.
-/// It should be released by calling mv_destroy_source()
-/// when it's not needed anymore.
-/// @param[in] number_of_faces      The number of faces
-/// @param[in] confidences          Confidences of the detected faces.
-/// @param[in] locations            Locations of the detected faces.
-/// @param[in] user_data            The user data passed from callback invoking code
+/// This callback is invoked each time when mv_inference_face_detect() is called to provide the results of face detection.
 ///
-/// @pre Call mv_inference_face_detect() function to perform detection of the faces
-/// in @a source and to invoke this callback as a result
+/// **Since Tizen:**
+/// - 5.5
 ///
-/// @see mv_inference_face_detect()
+/// **Remarks:**
+/// - The `confidences` and `locations` should not be released by app.
+/// - They can be used only in the callback. The number of elements in `confidences`
+/// - and `locations` is equal to `number_of_faces`.
+///
+/// **Parameters:**
+/// - `source` (in): The handle to the source of the media where faces were detected. `source` is the same object for which mv_inference_face_detect() was called. It should be released by calling mv_destroy_source() when it's not needed anymore.
+/// - `number_of_faces` (in): The number of faces
+/// - `confidences` (in): Confidences of the detected faces.
+/// - `locations` (in): Locations of the detected faces.
+/// - `user_data` (in): The user data passed from callback invoking code
+///
+/// **Preconditions:**
+/// - Call mv_inference_face_detect() function to perform detection of the faces in `source` and to invoke this callback as a result
+///
+/// **See also:**
+/// - `mv_inference_face_detect()`
+/// @nodoc
 typedef mv_inference_face_detected_cb
     = ffi.Pointer<ffi.NativeFunction<mv_inference_face_detected_cbFunction>>;
+/// @nodoc
 typedef mv_inference_face_detected_cbFunction = ffi.Void Function(
     mv_common.mv_source_h source,
     ffi.Int number_of_faces,
     ffi.Pointer<ffi.Float> confidences,
     ffi.Pointer<mv_common.mv_rectangle_s> locations,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmv_inference_face_detected_cbFunction = void Function(
     mv_common.mv_source_h source,
     int number_of_faces,
@@ -1143,116 +1250,142 @@ typedef Dartmv_inference_face_detected_cbFunction = void Function(
     ffi.Pointer<mv_common.mv_rectangle_s> locations,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when facial landmarks in @a source are detected.
-/// @details This type callback is invoked each time when
-/// mv_inference_facial_landmark_detect() is called to provide
-/// the results of the landmarks detection.
+/// Called when facial landmarks in `source` are detected.
 ///
-/// @since_tizen 5.5
-/// @remarks The @a locations should not be released by app. They can be used only in the callback.
-/// The number of elements in @a locations is equal to @a number_of_landmarks.
+/// This type callback is invoked each time when mv_inference_facial_landmark_detect() is called to provide the results of the landmarks detection.
 ///
-/// @param[in] source               The handle to the source of the media where
-/// landmarks were detected. @a source is the same object
-/// for which mv_inference_facial_landmark_detect() was called.
-/// It should be released by calling mv_destroy_source()
-/// when it's not needed anymore.
-/// @param[in] number_of_landmarks  The number of landmarks
-/// @param[in] locations            Locations of the detected facial landmarks.
-/// @param[in] user_data            The user data passed from callback invoking code
+/// **Since Tizen:**
+/// - 5.5
 ///
-/// @pre Call mv_inference_face_detect() function to perform detection of the faces
-/// in @a source and to invoke this callback as a result
+/// **Remarks:**
+/// - The `locations` should not be released by app. They can be used only in the callback.
+/// - The number of elements in `locations` is equal to `number_of_landmarks`.
 ///
-/// @see mv_inference_face_detect()
+/// **Parameters:**
+/// - `source` (in): The handle to the source of the media where landmarks were detected. `source` is the same object for which mv_inference_facial_landmark_detect() was called. It should be released by calling mv_destroy_source() when it's not needed anymore.
+/// - `number_of_landmarks` (in): The number of landmarks
+/// - `locations` (in): Locations of the detected facial landmarks.
+/// - `user_data` (in): The user data passed from callback invoking code
+///
+/// **Preconditions:**
+/// - Call mv_inference_face_detect() function to perform detection of the faces in `source` and to invoke this callback as a result
+///
+/// **See also:**
+/// - `mv_inference_face_detect()`
+/// @nodoc
 typedef mv_inference_facial_landmark_detected_cb = ffi.Pointer<
     ffi.NativeFunction<mv_inference_facial_landmark_detected_cbFunction>>;
+/// @nodoc
 typedef mv_inference_facial_landmark_detected_cbFunction = ffi.Void Function(
     mv_common.mv_source_h source,
     ffi.Int number_of_landmarks,
     ffi.Pointer<mv_common.mv_point_s> locations,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmv_inference_facial_landmark_detected_cbFunction = void Function(
     mv_common.mv_source_h source,
     int number_of_landmarks,
     ffi.Pointer<mv_common.mv_point_s> locations,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when poses in @a source are detected.
-/// @details This type callback is invoked each time when
-/// mv_inference_pose_landmark_detect() is called to provide
-/// the results of the pose landmark detection.
+/// Called when poses in `source` are detected.
 ///
-/// @since_tizen 6.0
-/// @remarks The @a locations should not be released by app. They can be used only in the callback.
+/// This type callback is invoked each time when mv_inference_pose_landmark_detect() is called to provide the results of the pose landmark detection.
 ///
-/// @param[in] source               The handle to the source of the media where
-/// landmarks were detected. @a source is the same object
-/// for which mv_inference_pose_landmark_detect() was called.
-/// It should be released by calling mv_destroy_source()
-/// when it's not needed anymore.
-/// @param[in] locations            Locations of the detected pose landmarks.
-/// @param[in] user_data            The user data passed from callback invoking code
+/// **Since Tizen:**
+/// - 6.0
 ///
-/// @see mv_inference_pose_landmark_detect()
+/// **Remarks:**
+/// - The `locations` should not be released by app. They can be used only in the callback.
+///
+/// **Parameters:**
+/// - `source` (in): The handle to the source of the media where landmarks were detected. `source` is the same object for which mv_inference_pose_landmark_detect() was called. It should be released by calling mv_destroy_source() when it's not needed anymore.
+/// - `locations` (in): Locations of the detected pose landmarks.
+/// - `user_data` (in): The user data passed from callback invoking code
+///
+/// **See also:**
+/// - `mv_inference_pose_landmark_detect()`
+/// @nodoc
 typedef mv_inference_pose_landmark_detected_cb = ffi.Pointer<
     ffi.NativeFunction<mv_inference_pose_landmark_detected_cbFunction>>;
+/// @nodoc
 typedef mv_inference_pose_landmark_detected_cbFunction = ffi.Void Function(
     mv_common.mv_source_h source,
     mv_inference_pose_result_h locations,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmv_inference_pose_landmark_detected_cbFunction = void Function(
     mv_common.mv_source_h source,
     mv_inference_pose_result_h locations,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief The inference pose result handle.
+/// The inference pose result handle.
 ///
-/// @since_tizen 6.0
+/// **Since Tizen:**
+/// - 6.0
+/// @nodoc
 typedef mv_inference_pose_result_h = ffi.Pointer<ffi.Void>;
 
-/// @brief The pose handle.
+/// The pose handle.
 ///
-/// @since_tizen 6.0
+/// **Since Tizen:**
+/// - 6.0
+/// @nodoc
 typedef mv_pose_h = ffi.Pointer<ffi.Void>;
 
+/// @nodoc
 const String MV_INFERENCE_MODEL_CONFIGURATION_FILE_PATH =
     'MV_INFERENCE_MODEL_CONFIGURATION_FILE_PATH';
 
+/// @nodoc
 const String MV_INFERENCE_MODEL_WEIGHT_FILE_PATH =
     'MV_INFERENCE_MODEL_WEIGHT_FILE_PATH';
 
+/// @nodoc
 const String MV_INFERENCE_MODEL_USER_FILE_PATH =
     'MV_INFERENCE_MODEL_USER_FILE_PATH';
 
+/// @nodoc
 const String MV_INFERENCE_MODEL_META_FILE_PATH =
     'MV_INFERENCE_MODEL_META_FILE_PATH';
 
+/// @nodoc
 const String MV_INFERENCE_MODEL_MEAN_VALUE = 'MV_INFERENCE_MODEL_MEAN_VALUE';
 
+/// @nodoc
 const String MV_INFERENCE_MODEL_STD_VALUE = 'MV_INFERENCE_MODEL_STD_VALUE';
 
+/// @nodoc
 const String MV_INFERENCE_BACKEND_TYPE = 'MV_INFERENCE_BACKEND_TYPE';
 
+/// @nodoc
 const String MV_INFERENCE_TARGET_DEVICE_TYPE =
     'MV_INFERENCE_TARGET_DEVICE_TYPE';
 
+/// @nodoc
 const String MV_INFERENCE_INPUT_TENSOR_WIDTH =
     'MV_INFERENCE_INPUT_TENSOR_WIDTH';
 
+/// @nodoc
 const String MV_INFERENCE_INPUT_TENSOR_HEIGHT =
     'MV_INFERENCE_INPUT_TENSOR_HEIGHT';
 
+/// @nodoc
 const String MV_INFERENCE_INPUT_TENSOR_CHANNELS =
     'MV_INFERENCE_INPUT_TENSOR_CHANNELS';
 
+/// @nodoc
 const String MV_INFERENCE_INPUT_DATA_TYPE = 'MV_INFERENCE_INPUT_DATA_TYPE';
 
+/// @nodoc
 const String MV_INFERENCE_INPUT_NODE_NAME = 'MV_INFERENCE_INPUT_NODE_NAME';
 
+/// @nodoc
 const String MV_INFERENCE_OUTPUT_NODE_NAMES = 'MV_INFERENCE_OUTPUT_NODE_NAMES';
 
+/// @nodoc
 const String MV_INFERENCE_OUTPUT_MAX_NUMBER = 'MV_INFERENCE_OUTPUT_MAX_NUMBER';
 
+/// @nodoc
 const String MV_INFERENCE_CONFIDENCE_THRESHOLD =
     'MV_INFERENCE_CONFIDENCE_THRESHOLD';

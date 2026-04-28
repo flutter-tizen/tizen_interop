@@ -1,3 +1,6 @@
+/// {@category 6.5/tizen}
+library tizen_interop_6_5.tbm;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen tbm APIs.
+/// {@category 6.5/tizen}
 class Tizen65Tbm {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,23 +28,28 @@ class Tizen65Tbm {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Queries surface format list and number of format supported by the system.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// Queries surface format list and number of format supported by the system.
   ///
-  /// @remarks You must release the formats using free().
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @param[out] formats  The format array which the system can support \n
-  /// This pointer has to be freed by user.
-  /// @param[out] num      The number of formats
+  /// **Remarks:**
+  /// - You must release the formats using free().
   ///
-  /// @return  #TBM_SURFACE_ERROR_NONE if this function succeeds,
-  /// otherwise an error status value
+  /// **Parameters:**
+  /// - `formats` (out): The format array which the system can support This pointer has to be freed by user.
+  /// - `num` (out): The number of formats
   ///
-  /// @retval #TBM_SURFACE_ERROR_NONE               Success
-  /// @retval #TBM_SURFACE_ERROR_INVALID_OPERATION  Invalid operation
+  /// **Returns:**
+  /// - `TBM_SURFACE_ERROR_NONE` if this function succeeds, otherwise an error status value
   ///
-  /// @par Example
-  /// @code
+  /// **Return values:**
+  /// - `TBM_SURFACE_ERROR_NONE`: Success
+  /// - `TBM_SURFACE_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <tbm_surface.h>
   ///
   /// uint32_t *formats;
@@ -57,7 +66,7 @@ class Tizen65Tbm {
   /// ....
   ///
   /// free (formats);
-  /// @endcode
+  /// ```
   int tbm_surface_query_formats(
     ffi.Pointer<ffi.Pointer<ffi.Uint32>> formats,
     ffi.Pointer<ffi.Uint32> num,
@@ -77,30 +86,38 @@ class Tizen65Tbm {
           int Function(
               ffi.Pointer<ffi.Pointer<ffi.Uint32>>, ffi.Pointer<ffi.Uint32>)>();
 
-  /// @brief Creates the tbm_surface.
-  /// @details This function creates the tbm_surface with the given width, height, and format.
+  /// Creates the tbm_surface.
   ///
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// This function creates the tbm_surface with the given width, height, and format.
   ///
-  /// @remark The specific error code can be obtained using the get_last_result() method. Error codes are described in Exception section.
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @param[in] width   The width of surface
-  /// @param[in] height  The height of surface
-  /// @param[in] format  The format of surface
+  /// **Remarks:**
+  /// - The specific error code can be obtained using the get_last_result() method. Error codes are described in Exception section.
   ///
-  /// @return   #tbm_surface_h on success,
-  /// otherwise @c NULL
+  /// **Parameters:**
+  /// - `width` (in): The width of surface
+  /// - `height` (in): The height of surface
+  /// - `format` (in): The format of surface
   ///
-  /// @retval #tbm_surface_h  The TBM surface handle
+  /// **Returns:**
+  /// - `tbm_surface_h` on success, otherwise `NULL`
   ///
-  /// @exception #TBM_SURFACE_ERROR_NONE               Success
-  /// @exception #TBM_SURFACE_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @exception #TBM_SURFACE_ERROR_INVALID_OPERATION  Invalid operation
+  /// **Return values:**
+  /// - `tbm_surface_h`: The TBM surface handle
   ///
-  /// @see tbm_surface_destroy()
+  /// **Exceptions:**
+  /// - `TBM_SURFACE_ERROR_NONE`: Success
+  /// - `TBM_SURFACE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TBM_SURFACE_ERROR_INVALID_OPERATION`: Invalid operation
   ///
-  /// @par Example
-  /// @code
+  /// **See also:**
+  /// - `tbm_surface_destroy()`
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <tbm_surface.h>
   ///
   /// tbm_surface_h surface;
@@ -110,7 +127,7 @@ class Tizen65Tbm {
   /// ...
   ///
   /// tbm_surface_destroy (surface);
-  /// @endcode
+  /// ```
   tbm_surface_h tbm_surface_create(
     int width,
     int height,
@@ -130,21 +147,27 @@ class Tizen65Tbm {
   late final _tbm_surface_create = _tbm_surface_createPtr
       .asFunction<tbm_surface_h Function(int, int, int)>();
 
-  /// @brief Destroys the tbm_surface.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// Destroys the tbm_surface.
   ///
-  /// @param[in] surface  The #tbm_surface_h
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @return  #TBM_SURFACE_ERROR_NONE on success,
-  /// otherwise an error status value
+  /// **Parameters:**
+  /// - `surface` (in): The `tbm_surface_h`
   ///
-  /// @retval #TBM_SURFACE_ERROR_NONE               Success
-  /// @retval #TBM_SURFACE_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// **Returns:**
+  /// - `TBM_SURFACE_ERROR_NONE` on success, otherwise an error status value
   ///
-  /// @see tbm_surface_create()
+  /// **Return values:**
+  /// - `TBM_SURFACE_ERROR_NONE`: Success
+  /// - `TBM_SURFACE_ERROR_INVALID_PARAMETER`: Invalid parameter
   ///
-  /// @par Example
-  /// @code
+  /// **See also:**
+  /// - `tbm_surface_create()`
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <tbm_surface.h>
   ///
   /// tbm_surface_h surface;
@@ -154,7 +177,7 @@ class Tizen65Tbm {
   /// ...
   ///
   /// tbm_surface_destroy (surface);
-  /// @endcode
+  /// ```
   int tbm_surface_destroy(
     tbm_surface_h surface,
   ) {
@@ -169,30 +192,32 @@ class Tizen65Tbm {
   late final _tbm_surface_destroy =
       _tbm_surface_destroyPtr.asFunction<int Function(tbm_surface_h)>();
 
-  /// @brief Maps the tbm_surface according to the access option.
-  /// @details After mapping tbm_surface, the information of tbm_surface is assigned in #tbm_surface_info_s struct. \n
-  /// The information of tbm_surface has width, height, format, bpp, size, number of planes and information of planes. \n
-  /// The information of planes has stride, offset, size and pointer of plane. \n
-  /// #TBM_SURF_OPTION_READ indicates access option to read. \n
-  /// #TBM_SURF_OPTION_WRITE indicates access option to write.
+  /// Maps the tbm_surface according to the access option.
   ///
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// After mapping tbm_surface, the information of tbm_surface is assigned in `tbm_surface_info_s` struct. The information of tbm_surface has width, height, format, bpp, size, number of planes and information of planes. The information of planes has stride, offset, size and pointer of plane. `TBM_SURF_OPTION_READ` indicates access option to read. `TBM_SURF_OPTION_WRITE` indicates access option to write.
   ///
-  /// @param[in]  surface  The #tbm_surface_h
-  /// @param[in]  opt      The option to access the tbm_surface
-  /// @param[out] info     The information of the tbm_surface
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @return  #TBM_SURFACE_ERROR_NONE on success,
-  /// otherwise an error status value
+  /// **Parameters:**
+  /// - `surface` (in): The `tbm_surface_h`
+  /// - `opt` (in): The option to access the tbm_surface
+  /// - `info` (out): The information of the tbm_surface
   ///
-  /// @retval #TBM_SURFACE_ERROR_NONE               Success
-  /// @retval #TBM_SURFACE_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #TBM_SURFACE_ERROR_INVALID_OPERATION  Invalid operation
+  /// **Returns:**
+  /// - `TBM_SURFACE_ERROR_NONE` on success, otherwise an error status value
   ///
-  /// @see tbm_surface_unmap();
+  /// **Return values:**
+  /// - `TBM_SURFACE_ERROR_NONE`: Success
+  /// - `TBM_SURFACE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TBM_SURFACE_ERROR_INVALID_OPERATION`: Invalid operation
   ///
-  /// @par Example
-  /// @code
+  /// **See also:**
+  /// - tbm_surface_unmap();
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <tbm_surface.h>
   ///
   /// tbm_surface_h surface;
@@ -206,7 +231,7 @@ class Tizen65Tbm {
   ///
   /// tbm_surface_unmap (surface);
   /// tbm_surface_destroy (surface);
-  /// @endcode
+  /// ```
   int tbm_surface_map(
     tbm_surface_h surface,
     int opt,
@@ -226,21 +251,27 @@ class Tizen65Tbm {
   late final _tbm_surface_map = _tbm_surface_mapPtr.asFunction<
       int Function(tbm_surface_h, int, ffi.Pointer<tbm_surface_info_s>)>();
 
-  /// @brief Unmaps the tbm_surface.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// Unmaps the tbm_surface.
   ///
-  /// @param[in] surface  The #tbm_surface_h
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @return  #TBM_SURFACE_ERROR_NONE on success,
-  /// otherwise an error status value
+  /// **Parameters:**
+  /// - `surface` (in): The `tbm_surface_h`
   ///
-  /// @retval #TBM_SURFACE_ERROR_NONE               Success
-  /// @retval #TBM_SURFACE_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// **Returns:**
+  /// - `TBM_SURFACE_ERROR_NONE` on success, otherwise an error status value
   ///
-  /// @see tbm_surface_map()
+  /// **Return values:**
+  /// - `TBM_SURFACE_ERROR_NONE`: Success
+  /// - `TBM_SURFACE_ERROR_INVALID_PARAMETER`: Invalid parameter
   ///
-  /// @par Example
-  /// @code
+  /// **See also:**
+  /// - `tbm_surface_map()`
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <tbm_surface.h>
   ///
   /// tbm_surface_h surface;
@@ -254,7 +285,7 @@ class Tizen65Tbm {
   ///
   /// tbm_surface_unmap (surface);
   /// tbm_surface_destroy (surface);
-  /// @endcode
+  /// ```
   int tbm_surface_unmap(
     tbm_surface_h surface,
   ) {
@@ -269,27 +300,31 @@ class Tizen65Tbm {
   late final _tbm_surface_unmap =
       _tbm_surface_unmapPtr.asFunction<int Function(tbm_surface_h)>();
 
-  /// @brief Gets the information of the tbm_surface.
-  /// @details The information of tbm_surface is assigned in #tbm_surface_info_s struct. \n
-  /// The information of tbm_surface has width, height, format, bpp, size, number of planes and information of planes. \n
-  /// The information of planes has stride, offset, size and pointer of plane.
+  /// Gets the information of the tbm_surface.
   ///
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// The information of tbm_surface is assigned in `tbm_surface_info_s` struct. The information of tbm_surface has width, height, format, bpp, size, number of planes and information of planes. The information of planes has stride, offset, size and pointer of plane.
   ///
-  /// @param[in]   surface  The #tbm_surface_h
-  /// @param[out]  info     The information of the tbm_surface
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @return  #TBM_SURFACE_ERROR_NONE on success,
-  /// otherwise an error status value
+  /// **Parameters:**
+  /// - `surface` (in): The `tbm_surface_h`
+  /// - `info` (out): The information of the tbm_surface
   ///
-  /// @retval #TBM_SURFACE_ERROR_NONE               Success
-  /// @retval #TBM_SURFACE_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #TBM_SURFACE_ERROR_INVALID_OPERATION  Invalid operation
+  /// **Returns:**
+  /// - `TBM_SURFACE_ERROR_NONE` on success, otherwise an error status value
   ///
-  /// @see tbm_surface_map()
+  /// **Return values:**
+  /// - `TBM_SURFACE_ERROR_NONE`: Success
+  /// - `TBM_SURFACE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TBM_SURFACE_ERROR_INVALID_OPERATION`: Invalid operation
   ///
-  /// @par Example
-  /// @code
+  /// **See also:**
+  /// - `tbm_surface_map()`
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <tbm_surface.h>
   ///
   /// tbm_surface_h surface;
@@ -302,7 +337,7 @@ class Tizen65Tbm {
   /// ...
   ///
   /// tbm_surface_destroy (surface);
-  /// @endcode
+  /// ```
   int tbm_surface_get_info(
     tbm_surface_h surface,
     ffi.Pointer<tbm_surface_info_s> info,
@@ -320,18 +355,23 @@ class Tizen65Tbm {
   late final _tbm_surface_get_info = _tbm_surface_get_infoPtr.asFunction<
       int Function(tbm_surface_h, ffi.Pointer<tbm_surface_info_s>)>();
 
-  /// @brief Gets the width of the tbm_surface.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// Gets the width of the tbm_surface.
   ///
-  /// @param[in] surface  The #tbm_surface_h
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @return  The width of the tbm_surface on success,
-  /// otherwise an error status value
+  /// **Parameters:**
+  /// - `surface` (in): The `tbm_surface_h`
   ///
-  /// @retval #TBM_SURFACE_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// **Returns:**
+  /// - The width of the tbm_surface on success, otherwise an error status value
   ///
-  /// @par Example
-  /// @code
+  /// **Return values:**
+  /// - `TBM_SURFACE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <tbm_surface.h>
   ///
   /// tbm_surface_h surface;
@@ -346,7 +386,7 @@ class Tizen65Tbm {
   /// ...
   ///
   /// tbm_surface_destroy (surface);
-  /// @endcode
+  /// ```
   int tbm_surface_get_width(
     tbm_surface_h surface,
   ) {
@@ -361,18 +401,23 @@ class Tizen65Tbm {
   late final _tbm_surface_get_width =
       _tbm_surface_get_widthPtr.asFunction<int Function(tbm_surface_h)>();
 
-  /// @brief Gets the height of the tbm_surface.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// Gets the height of the tbm_surface.
   ///
-  /// @param[in] surface  The #tbm_surface_h
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @return  The height of the tbm_surface if this function succeeds,
-  /// otherwise an error status value
+  /// **Parameters:**
+  /// - `surface` (in): The `tbm_surface_h`
   ///
-  /// @retval #TBM_SURFACE_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// **Returns:**
+  /// - The height of the tbm_surface if this function succeeds, otherwise an error status value
   ///
-  /// @par Example
-  /// @code
+  /// **Return values:**
+  /// - `TBM_SURFACE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <tbm_surface.h>
   ///
   /// tbm_surface_h surface;
@@ -387,7 +432,7 @@ class Tizen65Tbm {
   /// ...
   ///
   /// tbm_surface_destroy (surface);
-  /// @endcode
+  /// ```
   int tbm_surface_get_height(
     tbm_surface_h surface,
   ) {
@@ -402,23 +447,30 @@ class Tizen65Tbm {
   late final _tbm_surface_get_height =
       _tbm_surface_get_heightPtr.asFunction<int Function(tbm_surface_h)>();
 
-  /// @brief Gets the format of the tbm_surface.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// Gets the format of the tbm_surface.
   ///
-  /// @remark The specific error code can be obtained using the get_last_result() method. Error codes are described in Exception section.
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @param[in] surface  The #tbm_surface_h
+  /// **Remarks:**
+  /// - The specific error code can be obtained using the get_last_result() method. Error codes are described in Exception section.
   ///
-  /// @return  The format of the tbm_surface on success,
-  /// otherwise @c 0 on failure
+  /// **Parameters:**
+  /// - `surface` (in): The `tbm_surface_h`
   ///
-  /// @retval #tbm_format  The format of surface
+  /// **Returns:**
+  /// - The format of the tbm_surface on success, otherwise `0` on failure
   ///
-  /// @exception #TBM_SURFACE_ERROR_NONE               Success
-  /// @exception #TBM_SURFACE_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// **Return values:**
+  /// - `tbm_format`: The format of surface
   ///
-  /// @par Example
-  /// @code
+  /// **Exceptions:**
+  /// - `TBM_SURFACE_ERROR_NONE`: Success
+  /// - `TBM_SURFACE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <tbm_surface.h>
   ///
   /// tbm_surface_s surface;
@@ -433,7 +485,7 @@ class Tizen65Tbm {
   /// ...
   ///
   /// tbm_surface_destroy (surface);
-  /// @endcode
+  /// ```
   int tbm_surface_get_format(
     tbm_surface_h surface,
   ) {
@@ -449,10 +501,14 @@ class Tizen65Tbm {
       _tbm_surface_get_formatPtr.asFunction<int Function(tbm_surface_h)>();
 }
 
+/// @nodoc
 final class _tbm_surface extends ffi.Opaque {}
 
-/// @brief Enumeration for tbm_surface error type.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration for tbm_surface error type.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class tbm_surface_error_e {
   /// < Successful
   static const int TBM_SURFACE_ERROR_NONE = 0;
@@ -464,8 +520,11 @@ abstract class tbm_surface_error_e {
   static const int TBM_SURFACE_ERROR_INVALID_OPERATION = -38;
 }
 
-/// @brief Definition for the TBM plane struct.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Definition for the TBM plane struct.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 final class _tbm_surface_plane extends ffi.Struct {
   /// < Plane pointer
   external ffi.Pointer<ffi.UnsignedChar> ptr;
@@ -492,8 +551,11 @@ final class _tbm_surface_plane extends ffi.Struct {
   external ffi.Pointer<ffi.Void> reserved3;
 }
 
-/// @brief Definition for the TBM surface information struct.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Definition for the TBM surface information struct.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 final class _tbm_surface_info extends ffi.Struct {
   /// < TBM surface width
   @ffi.Uint32()
@@ -533,143 +595,218 @@ final class _tbm_surface_info extends ffi.Struct {
   external ffi.Pointer<ffi.Void> reserved6;
 }
 
-/// @brief Definition for the Tizen buffer surface format.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Definition for the Tizen buffer surface format.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 typedef tbm_format = ffi.Uint32;
+/// @nodoc
 typedef Darttbm_format = int;
 
-/// @brief Definition for the TBM plane struct.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Definition for the TBM plane struct.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 typedef tbm_surface_plane_s = _tbm_surface_plane;
 
-/// @brief Definition for the Tizen buffer surface.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Definition for the Tizen buffer surface.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 typedef tbm_surface_h = ffi.Pointer<_tbm_surface>;
 
-/// @brief Definition for the TBM surface information struct.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Definition for the TBM surface information struct.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 typedef tbm_surface_info_s = _tbm_surface_info;
 
+/// @nodoc
 const int TBM_FORMAT_C8 = 538982467;
 
+/// @nodoc
 const int TBM_FORMAT_RGB332 = 943867730;
 
+/// @nodoc
 const int TBM_FORMAT_BGR233 = 944916290;
 
+/// @nodoc
 const int TBM_FORMAT_XRGB4444 = 842093144;
 
+/// @nodoc
 const int TBM_FORMAT_XBGR4444 = 842089048;
 
+/// @nodoc
 const int TBM_FORMAT_RGBX4444 = 842094674;
 
+/// @nodoc
 const int TBM_FORMAT_BGRX4444 = 842094658;
 
+/// @nodoc
 const int TBM_FORMAT_ARGB4444 = 842093121;
 
+/// @nodoc
 const int TBM_FORMAT_ABGR4444 = 842089025;
 
+/// @nodoc
 const int TBM_FORMAT_RGBA4444 = 842088786;
 
+/// @nodoc
 const int TBM_FORMAT_BGRA4444 = 842088770;
 
+/// @nodoc
 const int TBM_FORMAT_XRGB1555 = 892424792;
 
+/// @nodoc
 const int TBM_FORMAT_XBGR1555 = 892420696;
 
+/// @nodoc
 const int TBM_FORMAT_RGBX5551 = 892426322;
 
+/// @nodoc
 const int TBM_FORMAT_BGRX5551 = 892426306;
 
+/// @nodoc
 const int TBM_FORMAT_ARGB1555 = 892424769;
 
+/// @nodoc
 const int TBM_FORMAT_ABGR1555 = 892420673;
 
+/// @nodoc
 const int TBM_FORMAT_RGBA5551 = 892420434;
 
+/// @nodoc
 const int TBM_FORMAT_BGRA5551 = 892420418;
 
+/// @nodoc
 const int TBM_FORMAT_RGB565 = 909199186;
 
+/// @nodoc
 const int TBM_FORMAT_BGR565 = 909199170;
 
+/// @nodoc
 const int TBM_FORMAT_RGB888 = 875710290;
 
+/// @nodoc
 const int TBM_FORMAT_BGR888 = 875710274;
 
+/// @nodoc
 const int TBM_FORMAT_XRGB8888 = 875713112;
 
+/// @nodoc
 const int TBM_FORMAT_XBGR8888 = 875709016;
 
+/// @nodoc
 const int TBM_FORMAT_RGBX8888 = 875714642;
 
+/// @nodoc
 const int TBM_FORMAT_BGRX8888 = 875714626;
 
+/// @nodoc
 const int TBM_FORMAT_ARGB8888 = 875713089;
 
+/// @nodoc
 const int TBM_FORMAT_ABGR8888 = 875708993;
 
+/// @nodoc
 const int TBM_FORMAT_RGBA8888 = 875708754;
 
+/// @nodoc
 const int TBM_FORMAT_BGRA8888 = 875708738;
 
+/// @nodoc
 const int TBM_FORMAT_XRGB2101010 = 808669784;
 
+/// @nodoc
 const int TBM_FORMAT_XBGR2101010 = 808665688;
 
+/// @nodoc
 const int TBM_FORMAT_RGBX1010102 = 808671314;
 
+/// @nodoc
 const int TBM_FORMAT_BGRX1010102 = 808671298;
 
+/// @nodoc
 const int TBM_FORMAT_ARGB2101010 = 808669761;
 
+/// @nodoc
 const int TBM_FORMAT_ABGR2101010 = 808665665;
 
+/// @nodoc
 const int TBM_FORMAT_RGBA1010102 = 808665426;
 
+/// @nodoc
 const int TBM_FORMAT_BGRA1010102 = 808665410;
 
+/// @nodoc
 const int TBM_FORMAT_YUYV = 1448695129;
 
+/// @nodoc
 const int TBM_FORMAT_YVYU = 1431918169;
 
+/// @nodoc
 const int TBM_FORMAT_UYVY = 1498831189;
 
+/// @nodoc
 const int TBM_FORMAT_VYUY = 1498765654;
 
+/// @nodoc
 const int TBM_FORMAT_AYUV = 1448433985;
 
+/// @nodoc
 const int TBM_FORMAT_NV12 = 842094158;
 
+/// @nodoc
 const int TBM_FORMAT_NV21 = 825382478;
 
+/// @nodoc
 const int TBM_FORMAT_NV16 = 909203022;
 
+/// @nodoc
 const int TBM_FORMAT_NV61 = 825644622;
 
+/// @nodoc
 const int TBM_FORMAT_YUV410 = 961959257;
 
+/// @nodoc
 const int TBM_FORMAT_YVU410 = 961893977;
 
+/// @nodoc
 const int TBM_FORMAT_YUV411 = 825316697;
 
+/// @nodoc
 const int TBM_FORMAT_YVU411 = 825316953;
 
+/// @nodoc
 const int TBM_FORMAT_YUV420 = 842093913;
 
+/// @nodoc
 const int TBM_FORMAT_YVU420 = 842094169;
 
+/// @nodoc
 const int TBM_FORMAT_YUV422 = 909202777;
 
+/// @nodoc
 const int TBM_FORMAT_YVU422 = 909203033;
 
+/// @nodoc
 const int TBM_FORMAT_YUV444 = 875713881;
 
+/// @nodoc
 const int TBM_FORMAT_YVU444 = 875714137;
 
+/// @nodoc
 const int TBM_FORMAT_NV12MT = 842091860;
 
+/// @nodoc
 const int TBM_SURF_PLANE_MAX = 4;
 
+/// @nodoc
 const int TBM_SURF_OPTION_READ = 1;
 
+/// @nodoc
 const int TBM_SURF_OPTION_WRITE = 2;

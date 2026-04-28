@@ -1,3 +1,6 @@
+/// {@category 10.0/tizen}
+library tizen_interop_10_0.vc_manager;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -10,6 +13,7 @@ import 'dart:ffi' as ffi;
 import 'generated_bindings_vc.dart' as vc;
 
 /// Dart bindings for Tizen vc_manager APIs.
+/// {@category 10.0/tizen}
 class Tizen100VcManager {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -25,29 +29,43 @@ class Tizen100VcManager {
           lookup)
       : _lookup = lookup;
 
-  /// @platform
-  /// @brief Initializes the voice control manager.
-  /// @since_tizen 5.0
+  /// Initializes the voice control manager.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/voicecontrol.manager
+  /// **Privilege level:**
+  /// - public
+  /// - platform
   ///
-  /// @remarks If the function succeeds, VC manager must be released with vc_mgr_deinitialize().
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  /// - <http://tizen.org/privilege/voicecontrol.manager>
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VC_ERROR_NONE                Successful
-  /// @retval #VC_ERROR_NOT_SUPPORTED       VC not supported
-  /// @retval #VC_ERROR_PERMISSION_DENIED   Permission denied
-  /// @retval #VC_ERROR_OUT_OF_MEMORY       Out of memory
-  /// @retval #VC_ERROR_OPERATION_FAILED    Operation fail
+  /// **Remarks:**
+  /// - If the function succeeds, VC manager must be released with vc_mgr_deinitialize().
   ///
-  /// @pre The state should be #VC_STATE_NONE.
-  /// @post If this function is called, the state will be #VC_STATE_INITIALIZED.
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
   ///
-  /// @see vc_mgr_deinitialize()
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_NOT_SUPPORTED`: VC not supported
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `VC_ERROR_OPERATION_FAILED`: Operation fail
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_NONE`.
+  ///
+  /// **Postconditions:**
+  /// - If this function is called, the state will be `VC_STATE_INITIALIZED`.
+  ///
+  /// **See also:**
+  /// - `vc_mgr_deinitialize()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int vc_mgr_initialize() {
     return _vc_mgr_initialize();
   }
@@ -57,22 +75,34 @@ class Tizen100VcManager {
   late final _vc_mgr_initialize =
       _vc_mgr_initializePtr.asFunction<int Function()>();
 
-  /// @platform
-  /// @brief Deinitializes the voice control manager.
-  /// @since_tizen 5.0
+  /// Deinitializes the voice control manager.
   ///
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/voicecontrol.manager
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VC_ERROR_NONE                Successful
-  /// @retval #VC_ERROR_NOT_SUPPORTED       VC not supported
-  /// @retval #VC_ERROR_PERMISSION_DENIED   Permission denied
-  /// @retval #VC_ERROR_INVALID_STATE       Invalid state
+  /// **Privilege level:**
+  /// - platform
   ///
-  /// @post If this function is called, the state will be #VC_STATE_NONE.
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/voicecontrol.manager>
   ///
-  /// @see vc_mgr_initialize()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_NOT_SUPPORTED`: VC not supported
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Postconditions:**
+  /// - If this function is called, the state will be `VC_STATE_NONE`.
+  ///
+  /// **See also:**
+  /// - `vc_mgr_initialize()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int vc_mgr_deinitialize() {
     return _vc_mgr_deinitialize();
   }
@@ -82,23 +112,37 @@ class Tizen100VcManager {
   late final _vc_mgr_deinitialize =
       _vc_mgr_deinitializePtr.asFunction<int Function()>();
 
-  /// @platform
-  /// @brief Connects the voice control service.
-  /// @since_tizen 5.0
+  /// Connects the voice control service.
   ///
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/voicecontrol.manager
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VC_ERROR_NONE                Successful
-  /// @retval #VC_ERROR_NOT_SUPPORTED       VC not supported
-  /// @retval #VC_ERROR_PERMISSION_DENIED   Permission denied
-  /// @retval #VC_ERROR_INVALID_STATE       Invalid state
+  /// **Privilege level:**
+  /// - platform
   ///
-  /// @pre The state should be #VC_STATE_INITIALIZED.
-  /// @post If this function is called, the state will be #VC_STATE_READY.
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/voicecontrol.manager>
   ///
-  /// @see vc_mgr_unprepare()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_NOT_SUPPORTED`: VC not supported
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_INITIALIZED`.
+  ///
+  /// **Postconditions:**
+  /// - If this function is called, the state will be `VC_STATE_READY`.
+  ///
+  /// **See also:**
+  /// - `vc_mgr_unprepare()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int vc_mgr_prepare() {
     return _vc_mgr_prepare();
   }
@@ -107,23 +151,37 @@ class Tizen100VcManager {
       _lookup<ffi.NativeFunction<ffi.Int Function()>>('vc_mgr_prepare');
   late final _vc_mgr_prepare = _vc_mgr_preparePtr.asFunction<int Function()>();
 
-  /// @platform
-  /// @brief Disconnects the voice control service.
-  /// @since_tizen 5.0
+  /// Disconnects the voice control service.
   ///
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/voicecontrol.manager
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VC_ERROR_NONE                Successful
-  /// @retval #VC_ERROR_NOT_SUPPORTED       VC not supported
-  /// @retval #VC_ERROR_PERMISSION_DENIED   Permission denied
-  /// @retval #VC_ERROR_INVALID_STATE       Invalid state
+  /// **Privilege level:**
+  /// - platform
   ///
-  /// @pre The state should be #VC_STATE_READY.
-  /// @post If this function is called, the state will be #VC_STATE_INITIALIZED.
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/voicecontrol.manager>
   ///
-  /// @see vc_mgr_prepare()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_NOT_SUPPORTED`: VC not supported
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_READY`.
+  ///
+  /// **Postconditions:**
+  /// - If this function is called, the state will be `VC_STATE_INITIALIZED`.
+  ///
+  /// **See also:**
+  /// - `vc_mgr_prepare()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int vc_mgr_unprepare() {
     return _vc_mgr_unprepare();
   }
@@ -133,29 +191,44 @@ class Tizen100VcManager {
   late final _vc_mgr_unprepare =
       _vc_mgr_unpreparePtr.asFunction<int Function()>();
 
-  /// @platform
-  /// @brief Retrieves all supported languages using callback function.
-  /// @since_tizen 5.0
+  /// Retrieves all supported languages using callback function.
   ///
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/voicecontrol.manager
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @param[in] callback    Callback function to invoke
-  /// @param[in] user_data   The user data to be passed to the callback function
+  /// **Privilege level:**
+  /// - platform
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VC_ERROR_NONE                Successful
-  /// @retval #VC_ERROR_NOT_SUPPORTED       VC not supported
-  /// @retval #VC_ERROR_PERMISSION_DENIED   Permission denied
-  /// @retval #VC_ERROR_INVALID_PARAMETER   Invalid parameter
-  /// @retval #VC_ERROR_OPERATION_FAILED    Operation failure
-  /// @retval #VC_ERROR_INVALID_STATE       Invalid state
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/voicecontrol.manager>
   ///
-  /// @pre The state should NOT be #VC_SERVICE_STATE_NONE.
-  /// @post This function invokes vc_supported_language_cb() for each supported language.
+  /// **Parameters:**
+  /// - `callback` (in): Callback function to invoke
+  /// - `user_data` (in): The user data to be passed to the callback function
   ///
-  /// @see vc_supported_language_cb()
-  /// @see vc_mgr_get_current_language()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_NOT_SUPPORTED`: VC not supported
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_OPERATION_FAILED`: Operation failure
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should NOT be `VC_SERVICE_STATE_NONE`.
+  ///
+  /// **Postconditions:**
+  /// - This function invokes vc_supported_language_cb() for each supported language.
+  ///
+  /// **See also:**
+  /// - `vc_supported_language_cb()`
+  /// - `vc_mgr_get_current_language()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int vc_mgr_foreach_supported_languages(
     vc.vc_supported_language_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -174,31 +247,43 @@ class Tizen100VcManager {
       _vc_mgr_foreach_supported_languagesPtr.asFunction<
           int Function(vc.vc_supported_language_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @platform
-  /// @brief Gets the current language set by user.
-  /// @since_tizen 5.0
+  /// Gets the current language set by user.
   ///
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/voicecontrol.manager
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @remarks If the function succeeds, @a language must be released with free() by you when you no longer need it.
+  /// **Privilege level:**
+  /// - platform
   ///
-  /// @param[out] language   A language is specified as an ISO 3166 alpha-2 two letter country-code \n
-  /// followed by ISO 639-1 for the two-letter language code. \n
-  /// For example, "ko_KR" for Korean, "en_US" for American English.
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/voicecontrol.manager>
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VC_ERROR_NONE                Successful
-  /// @retval #VC_ERROR_NOT_SUPPORTED       VC not supported
-  /// @retval #VC_ERROR_PERMISSION_DENIED   Permission denied
-  /// @retval #VC_ERROR_INVALID_PARAMETER   Invalid parameter
-  /// @retval #VC_ERROR_OUT_OF_MEMORY       Out of memory
-  /// @retval #VC_ERROR_OPERATION_FAILED    Operation failure
-  /// @retval #VC_ERROR_INVALID_STATE       Invalid state
+  /// **Remarks:**
+  /// - If the function succeeds, `language` must be released with free() by you when you no longer need it.
   ///
-  /// @pre The state should NOT be #VC_SERVICE_STATE_NONE.
+  /// **Parameters:**
+  /// - `language` (out): A language is specified as an ISO 3166 alpha-2 two letter country-code followed by ISO 639-1 for the two-letter language code. For example, "ko_KR" for Korean, "en_US" for American English.
   ///
-  /// @see vc_mgr_foreach_supported_languages()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_NOT_SUPPORTED`: VC not supported
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `VC_ERROR_OPERATION_FAILED`: Operation failure
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should NOT be `VC_SERVICE_STATE_NONE`.
+  ///
+  /// **See also:**
+  /// - `vc_mgr_foreach_supported_languages()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int vc_mgr_get_current_language(
     ffi.Pointer<ffi.Pointer<ffi.Char>> language,
   ) {
@@ -214,26 +299,39 @@ class Tizen100VcManager {
   late final _vc_mgr_get_current_language = _vc_mgr_get_current_languagePtr
       .asFunction<int Function(ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @platform
-  /// @brief Gets the current state of voice control manager.
-  /// @since_tizen 5.0
+  /// Gets the current state of voice control manager.
   ///
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/voicecontrol.manager
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @param[out] state   The current state
+  /// **Privilege level:**
+  /// - platform
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VC_ERROR_NONE                Successful
-  /// @retval #VC_ERROR_NOT_SUPPORTED       VC not supported
-  /// @retval #VC_ERROR_PERMISSION_DENIED   Permission denied
-  /// @retval #VC_ERROR_INVALID_PARAMETER   Invalid parameter
-  /// @retval #VC_ERROR_INVALID_STATE       Invalid state
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/voicecontrol.manager>
   ///
-  /// @pre The state should NOT be #VC_SERVICE_STATE_NONE.
+  /// **Parameters:**
+  /// - `state` (out): The current state
   ///
-  /// @see vc_state_changed_cb()
-  /// @see vc_set_state_changed_cb()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_NOT_SUPPORTED`: VC not supported
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should NOT be `VC_SERVICE_STATE_NONE`.
+  ///
+  /// **See also:**
+  /// - `vc_state_changed_cb()`
+  /// - `vc_set_state_changed_cb()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int vc_mgr_get_state(
     ffi.Pointer<ffi.Int32> state,
   ) {
@@ -248,30 +346,43 @@ class Tizen100VcManager {
   late final _vc_mgr_get_state =
       _vc_mgr_get_statePtr.asFunction<int Function(ffi.Pointer<ffi.Int32>)>();
 
-  /// @platform
-  /// @brief Gets the current state of voice control service.
-  /// @since_tizen 5.0
+  /// Gets the current state of voice control service.
   ///
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/voicecontrol.manager
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @param[out] state   The current state
+  /// **Privilege level:**
+  /// - platform
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VC_ERROR_NONE                Successful
-  /// @retval #VC_ERROR_NOT_SUPPORTED       VC not supported
-  /// @retval #VC_ERROR_PERMISSION_DENIED   Permission denied
-  /// @retval #VC_ERROR_INVALID_PARAMETER   Invalid parameter
-  /// @retval #VC_ERROR_INVALID_STATE       Invalid state
-  /// @retval #VC_ERROR_OPERATION_FAILED    Operation failure
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/voicecontrol.manager>
   ///
-  /// @pre The state should be #VC_STATE_READY.
+  /// **Parameters:**
+  /// - `state` (out): The current state
   ///
-  /// @see vc_mgr_start()
-  /// @see vc_mgr_stop()
-  /// @see vc_mgr_cancel()
-  /// @see vc_set_service_state_changed_cb()
-  /// @see vc_unset_service_state_changed_cb()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_NOT_SUPPORTED`: VC not supported
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  /// - `VC_ERROR_OPERATION_FAILED`: Operation failure
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_READY`.
+  ///
+  /// **See also:**
+  /// - `vc_mgr_start()`
+  /// - `vc_mgr_stop()`
+  /// - `vc_mgr_cancel()`
+  /// - `vc_set_service_state_changed_cb()`
+  /// - `vc_unset_service_state_changed_cb()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int vc_mgr_get_service_state(
     ffi.Pointer<ffi.Int32> state,
   ) {
@@ -286,26 +397,39 @@ class Tizen100VcManager {
   late final _vc_mgr_get_service_state = _vc_mgr_get_service_statePtr
       .asFunction<int Function(ffi.Pointer<ffi.Int32>)>();
 
-  /// @platform
-  /// @brief Checks whether the command format is supported.
-  /// @since_tizen 5.0
+  /// Checks whether the command format is supported.
   ///
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/voicecontrol.manager
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @remarks The command formats are defined in @ref CAPI_UIX_VOICE_CONTROL_COMMAND_MODULE. (e.g. #VC_COMMAND_FORMAT_FIXED, #VC_COMMAND_FORMAT_FIXED_AND_NONFIXED, and so on). Please refer to @ref CAPI_UIX_VOICE_CONTROL_COMMAND_MODULE.
+  /// **Privilege level:**
+  /// - platform
   ///
-  /// @param[in]  format    The command format
-  /// @param[out] support   The result status @c true = supported, @c false = not supported
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/voicecontrol.manager>
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VC_ERROR_NONE                Successful
-  /// @retval #VC_ERROR_NOT_SUPPORTED       VC not supported
-  /// @retval #VC_ERROR_PERMISSION_DENIED   Permission denied
-  /// @retval #VC_ERROR_INVALID_PARAMETER   Invalid parameter
-  /// @retval #VC_ERROR_INVALID_STATE       Invalid state
+  /// **Remarks:**
+  /// - The command formats are defined in `CAPI_UIX_VOICE_CONTROL_COMMAND_MODULE.` (e.g. `VC_COMMAND_FORMAT_FIXED`, `VC_COMMAND_FORMAT_FIXED_AND_NONFIXED`, and so on). Please refer to `CAPI_UIX_VOICE_CONTROL_COMMAND_MODULE.`
   ///
-  /// @pre The state should be #VC_STATE_READY.
+  /// **Parameters:**
+  /// - `format` (in): The command format
+  /// - `support` (out): The result status `true` = supported, `false` = not supported
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_NOT_SUPPORTED`: VC not supported
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_READY`.
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int vc_mgr_is_command_format_supported(
     int format,
     ffi.Pointer<ffi.Bool> support,
@@ -323,28 +447,42 @@ class Tizen100VcManager {
       _vc_mgr_is_command_format_supportedPtr
           .asFunction<int Function(int, ffi.Pointer<ffi.Bool>)>();
 
-  /// @platform
-  /// @brief Sets all types of commands.
-  /// @since_tizen 5.0
+  /// Sets all types of commands.
   ///
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/voicecontrol.manager
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @remarks VC manager client can register all types of commands.
-  /// The commands should include type, command text, format.
+  /// **Privilege level:**
+  /// - platform
   ///
-  /// @param[in] vc_cmd_list   The command list handle
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/voicecontrol.manager>
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VC_ERROR_NONE                Successful
-  /// @retval #VC_ERROR_NOT_SUPPORTED       VC not supported
-  /// @retval #VC_ERROR_PERMISSION_DENIED   Permission denied
-  /// @retval #VC_ERROR_INVALID_PARAMETER   Invalid parameter
-  /// @retval #VC_ERROR_INVALID_STATE       Invalid state
+  /// **Remarks:**
+  /// - VC manager client can register all types of commands.
+  /// - The commands should include type, command text, format.
   ///
-  /// @pre The state should be #VC_STATE_READY.
+  /// **Parameters:**
+  /// - `vc_cmd_list` (in): The command list handle
   ///
-  /// @see vc_mgr_unset_command_list()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_NOT_SUPPORTED`: VC not supported
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_READY`.
+  ///
+  /// **See also:**
+  /// - `vc_mgr_unset_command_list()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int vc_mgr_set_command_list(
     vc.vc_cmd_list_h vc_cmd_list,
   ) {
@@ -359,24 +497,37 @@ class Tizen100VcManager {
   late final _vc_mgr_set_command_list =
       _vc_mgr_set_command_listPtr.asFunction<int Function(vc.vc_cmd_list_h)>();
 
-  /// @platform
-  /// @brief Unsets all types of commands.
-  /// @since_tizen 5.0
+  /// Unsets all types of commands.
   ///
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/voicecontrol.manager
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @remarks All previously registered commands will be unset.
+  /// **Privilege level:**
+  /// - platform
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VC_ERROR_NONE                Successful
-  /// @retval #VC_ERROR_NOT_SUPPORTED       VC not supported
-  /// @retval #VC_ERROR_PERMISSION_DENIED   Permission denied
-  /// @retval #VC_ERROR_INVALID_STATE       Invalid state
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/voicecontrol.manager>
   ///
-  /// @pre The state should be #VC_STATE_READY.
+  /// **Remarks:**
+  /// - All previously registered commands will be unset.
   ///
-  /// @see vc_mgr_set_command_list()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_NOT_SUPPORTED`: VC not supported
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_READY`.
+  ///
+  /// **See also:**
+  /// - `vc_mgr_set_command_list()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int vc_mgr_unset_command_list() {
     return _vc_mgr_unset_command_list();
   }
@@ -387,29 +538,43 @@ class Tizen100VcManager {
   late final _vc_mgr_unset_command_list =
       _vc_mgr_unset_command_listPtr.asFunction<int Function()>();
 
-  /// @platform
-  /// @brief Sets commands from file.
-  /// @since_tizen 5.0
+  /// Sets commands from file.
   ///
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/voicecontrol.manager
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @remarks The commands should include type, command text, format.
+  /// **Privilege level:**
+  /// - platform
   ///
-  /// @param[in] file_path   The directory of a file which has command list
-  /// @param[in] type          The command type (e.g. #VC_COMMAND_TYPE_FOREGROUND, #VC_COMMAND_TYPE_BACKGROUND, #VC_COMMAND_TYPE_WIDGET, #VC_COMMAND_TYPE_SYSTEM, #VC_COMMAND_TYPE_SYSTEM_BACKGROUND, #VC_COMMAND_TYPE_EXCLUSIVE)
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/voicecontrol.manager>
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VC_ERROR_NONE                Successful
-  /// @retval #VC_ERROR_NOT_SUPPORTED       VC not supported
-  /// @retval #VC_ERROR_PERMISSION_DENIED   Permission denied
-  /// @retval #VC_ERROR_INVALID_PARAMETER   Invalid parameter
-  /// @retval #VC_ERROR_INVALID_STATE       Invalid state
-  /// @retval #VC_ERROR_OPERATION_FAILED    Operation failure
+  /// **Remarks:**
+  /// - The commands should include type, command text, format.
   ///
-  /// @pre The state should be #VC_STATE_READY.
+  /// **Parameters:**
+  /// - `file_path` (in): The directory of a file which has command list
+  /// - `type` (in): The command type (e.g. `VC_COMMAND_TYPE_FOREGROUND`, `VC_COMMAND_TYPE_BACKGROUND`, `VC_COMMAND_TYPE_WIDGET`, `VC_COMMAND_TYPE_SYSTEM`, `VC_COMMAND_TYPE_SYSTEM_BACKGROUND`, `VC_COMMAND_TYPE_EXCLUSIVE`)
   ///
-  /// @see vc_mgr_unset_command_list()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_NOT_SUPPORTED`: VC not supported
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  /// - `VC_ERROR_OPERATION_FAILED`: Operation failure
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_READY`.
+  ///
+  /// **See also:**
+  /// - `vc_mgr_unset_command_list()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int vc_mgr_set_command_list_from_file(
     ffi.Pointer<ffi.Char> file_path,
     int type,
@@ -427,29 +592,43 @@ class Tizen100VcManager {
       _vc_mgr_set_command_list_from_filePtr
           .asFunction<int Function(ffi.Pointer<ffi.Char>, int)>();
 
-  /// @platform
-  /// @brief Sets background commands of preloaded app from file.
-  /// @since_tizen 5.0
+  /// Sets background commands of preloaded app from file.
   ///
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/voicecontrol.manager
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @remarks The command type is valid for #VC_COMMAND_TYPE_BACKGROUND.
-  /// The commands should include type, command text, format.
+  /// **Privilege level:**
+  /// - platform
   ///
-  /// @param[in] file_path   The directory of a file which has command list
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/voicecontrol.manager>
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VC_ERROR_NONE                Successful
-  /// @retval #VC_ERROR_NOT_SUPPORTED       VC not supported
-  /// @retval #VC_ERROR_PERMISSION_DENIED   Permission denied
-  /// @retval #VC_ERROR_INVALID_PARAMETER   Invalid parameter
-  /// @retval #VC_ERROR_INVALID_STATE       Invalid state
-  /// @retval #VC_ERROR_OPERATION_FAILED    Operation failure
+  /// **Remarks:**
+  /// - The command type is valid for `VC_COMMAND_TYPE_BACKGROUND`.
+  /// - The commands should include type, command text, format.
   ///
-  /// @pre The state should be #VC_STATE_READY.
+  /// **Parameters:**
+  /// - `file_path` (in): The directory of a file which has command list
   ///
-  /// @see vc_mgr_unset_command_list()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_NOT_SUPPORTED`: VC not supported
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  /// - `VC_ERROR_OPERATION_FAILED`: Operation failure
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_READY`.
+  ///
+  /// **See also:**
+  /// - `vc_mgr_unset_command_list()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int vc_mgr_set_preloaded_commands_from_file(
     ffi.Pointer<ffi.Char> file_path,
   ) {
@@ -465,26 +644,39 @@ class Tizen100VcManager {
       _vc_mgr_set_preloaded_commands_from_filePtr
           .asFunction<int Function(ffi.Pointer<ffi.Char>)>();
 
-  /// @platform
-  /// @brief Retrieves all available commands.
-  /// @since_tizen 5.0
+  /// Retrieves all available commands.
   ///
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/voicecontrol.manager
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @remarks If the function succeeds, @a vc_cmd_list must be released with vc_cmd_list_destroy(vc_cmd_list, true).
+  /// **Privilege level:**
+  /// - platform
   ///
-  /// @param[out] vc_cmd_list   The command list
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/voicecontrol.manager>
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VC_ERROR_NONE                Successful
-  /// @retval #VC_ERROR_NOT_SUPPORTED       VC not supported
-  /// @retval #VC_ERROR_PERMISSION_DENIED   Permission denied
-  /// @retval #VC_ERROR_INVALID_PARAMETER   Invalid parameter
-  /// @retval #VC_ERROR_INVALID_STATE       Invalid state
-  /// @retval #VC_ERROR_OPERATION_FAILED    Operation failure
+  /// **Remarks:**
+  /// - If the function succeeds, `vc_cmd_list` must be released with vc_cmd_list_destroy(vc_cmd_list, true).
   ///
-  /// @pre The state should be #VC_STATE_READY and the service state should be #VC_SERVICE_STATE_READY.
+  /// **Parameters:**
+  /// - `vc_cmd_list` (out): The command list
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_NOT_SUPPORTED`: VC not supported
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  /// - `VC_ERROR_OPERATION_FAILED`: Operation failure
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_READY` and the service state should be `VC_SERVICE_STATE_READY`.
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int vc_mgr_get_current_commands(
     ffi.Pointer<vc.vc_cmd_list_h> vc_cmd_list,
   ) {
@@ -499,26 +691,39 @@ class Tizen100VcManager {
   late final _vc_mgr_get_current_commands = _vc_mgr_get_current_commandsPtr
       .asFunction<int Function(ffi.Pointer<vc.vc_cmd_list_h>)>();
 
-  /// @platform
-  /// @brief Sets a type of audio-in.
-  /// @since_tizen 5.0
+  /// Sets a type of audio-in.
   ///
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/voicecontrol.manager
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @param[in] audio_id   The audio type (e.g. #VC_AUDIO_TYPE_BLUETOOTH or USB device ID)
+  /// **Privilege level:**
+  /// - platform
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VC_ERROR_NONE                Successful
-  /// @retval #VC_ERROR_NOT_SUPPORTED       VC not supported
-  /// @retval #VC_ERROR_PERMISSION_DENIED   Permission denied
-  /// @retval #VC_ERROR_INVALID_PARAMETER   Invalid parameter
-  /// @retval #VC_ERROR_INVALID_STATE       Invalid state
-  /// @retval #VC_ERROR_OPERATION_FAILED    Operation failure
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/voicecontrol.manager>
   ///
-  /// @pre The state should be #VC_STATE_READY and the service state should be #VC_SERVICE_STATE_READY.
+  /// **Parameters:**
+  /// - `audio_id` (in): The audio type (e.g. `VC_AUDIO_TYPE_BLUETOOTH` or USB device ID)
   ///
-  /// @see vc_mgr_get_audio_type()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_NOT_SUPPORTED`: VC not supported
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  /// - `VC_ERROR_OPERATION_FAILED`: Operation failure
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_READY` and the service state should be `VC_SERVICE_STATE_READY`.
+  ///
+  /// **See also:**
+  /// - `vc_mgr_get_audio_type()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int vc_mgr_set_audio_type(
     ffi.Pointer<ffi.Char> audio_id,
   ) {
@@ -533,27 +738,41 @@ class Tizen100VcManager {
   late final _vc_mgr_set_audio_type = _vc_mgr_set_audio_typePtr
       .asFunction<int Function(ffi.Pointer<ffi.Char>)>();
 
-  /// @platform
-  /// @brief Gets a type of audio-in.
-  /// @since_tizen 5.0
+  /// Gets a type of audio-in.
   ///
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/voicecontrol.manager
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @remarks audio_id must be released using free() when it is no longer required.
+  /// **Privilege level:**
+  /// - platform
   ///
-  /// @param[out] audio_id   The audio id (e.g. #VC_AUDIO_TYPE_BLUETOOTH or USB device ID)
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/voicecontrol.manager>
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VC_ERROR_NONE                Successful
-  /// @retval #VC_ERROR_NOT_SUPPORTED       VC not supported
-  /// @retval #VC_ERROR_PERMISSION_DENIED   Permission denied
-  /// @retval #VC_ERROR_INVALID_PARAMETER   Invalid parameter
-  /// @retval #VC_ERROR_INVALID_STATE       Invalid state
+  /// **Remarks:**
+  /// - audio_id must be released using free() when it is no longer required.
   ///
-  /// @pre The state should be #VC_STATE_READY and the service state should be #VC_SERVICE_STATE_READY.
+  /// **Parameters:**
+  /// - `audio_id` (out): The audio id (e.g. `VC_AUDIO_TYPE_BLUETOOTH` or USB device ID)
   ///
-  /// @see vc_mgr_set_audio_type()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_NOT_SUPPORTED`: VC not supported
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_READY` and the service state should be `VC_SERVICE_STATE_READY`.
+  ///
+  /// **See also:**
+  /// - `vc_mgr_set_audio_type()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int vc_mgr_get_audio_type(
     ffi.Pointer<ffi.Pointer<ffi.Char>> audio_id,
   ) {
@@ -569,25 +788,38 @@ class Tizen100VcManager {
   late final _vc_mgr_get_audio_type = _vc_mgr_get_audio_typePtr
       .asFunction<int Function(ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @platform
-  /// @brief Sets recognition mode.
-  /// @since_tizen 5.0
+  /// Sets recognition mode.
   ///
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/voicecontrol.manager
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @param[in] mode   Recognition mode (e.g. #VC_RECOGNITION_MODE_STOP_BY_SILENCE is default value)
+  /// **Privilege level:**
+  /// - platform
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VC_ERROR_NONE                Successful
-  /// @retval #VC_ERROR_NOT_SUPPORTED       VC not supported
-  /// @retval #VC_ERROR_PERMISSION_DENIED   Permission denied
-  /// @retval #VC_ERROR_INVALID_PARAMETER   Invalid parameter
-  /// @retval #VC_ERROR_INVALID_STATE       Invalid state
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/voicecontrol.manager>
   ///
-  /// @pre The state should be #VC_STATE_READY and the service state should be #VC_SERVICE_STATE_READY.
+  /// **Parameters:**
+  /// - `mode` (in): Recognition mode (e.g. `VC_RECOGNITION_MODE_STOP_BY_SILENCE` is default value)
   ///
-  /// @see vc_mgr_get_recognition_mode()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_NOT_SUPPORTED`: VC not supported
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_READY` and the service state should be `VC_SERVICE_STATE_READY`.
+  ///
+  /// **See also:**
+  /// - `vc_mgr_get_recognition_mode()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int vc_mgr_set_recognition_mode(
     int mode,
   ) {
@@ -602,25 +834,38 @@ class Tizen100VcManager {
   late final _vc_mgr_set_recognition_mode =
       _vc_mgr_set_recognition_modePtr.asFunction<int Function(int)>();
 
-  /// @platform
-  /// @brief Gets recognition mode.
-  /// @since_tizen 5.0
+  /// Gets recognition mode.
   ///
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/voicecontrol.manager
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @param[out] mode   Recognition mode
+  /// **Privilege level:**
+  /// - platform
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VC_ERROR_NONE                Successful
-  /// @retval #VC_ERROR_NOT_SUPPORTED       VC not supported
-  /// @retval #VC_ERROR_PERMISSION_DENIED   Permission denied
-  /// @retval #VC_ERROR_INVALID_PARAMETER   Invalid parameter
-  /// @retval #VC_ERROR_INVALID_STATE       Invalid state
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/voicecontrol.manager>
   ///
-  /// @pre The state should be #VC_STATE_READY.
+  /// **Parameters:**
+  /// - `mode` (out): Recognition mode
   ///
-  /// @see vc_mgr_set_recognition_mode()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_NOT_SUPPORTED`: VC not supported
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_READY`.
+  ///
+  /// **See also:**
+  /// - `vc_mgr_set_recognition_mode()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int vc_mgr_get_recognition_mode(
     ffi.Pointer<ffi.Int32> mode,
   ) {
@@ -635,27 +880,40 @@ class Tizen100VcManager {
   late final _vc_mgr_get_recognition_mode = _vc_mgr_get_recognition_modePtr
       .asFunction<int Function(ffi.Pointer<ffi.Int32>)>();
 
-  /// @platform
-  /// @brief Sets private data to VC engine.
-  /// @since_tizen 5.0
+  /// Sets private data to VC engine.
   ///
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/voicecontrol.manager
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @remarks VC manager client can set private data to VC engine using this function.
+  /// **Privilege level:**
+  /// - platform
   ///
-  /// @param[in] key    Private key
-  /// @param[in] data   Private data
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/voicecontrol.manager>
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VC_ERROR_NONE                Successful
-  /// @retval #VC_ERROR_NOT_SUPPORTED       VC not supported
-  /// @retval #VC_ERROR_PERMISSION_DENIED   Permission denied
-  /// @retval #VC_ERROR_INVALID_PARAMETER   Invalid parameter
-  /// @retval #VC_ERROR_OUT_OF_MEMORY       Not enough memory
-  /// @retval #VC_ERROR_INVALID_STATE       Invalid state
+  /// **Remarks:**
+  /// - VC manager client can set private data to VC engine using this function.
   ///
-  /// @pre The service state should be #VC_SERVICE_STATE_READY.
+  /// **Parameters:**
+  /// - `key` (in): Private key
+  /// - `data` (in): Private data
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_NOT_SUPPORTED`: VC not supported
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_OUT_OF_MEMORY`: Not enough memory
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The service state should be `VC_SERVICE_STATE_READY`.
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int vc_mgr_set_private_data(
     ffi.Pointer<ffi.Char> key,
     ffi.Pointer<ffi.Char> data,
@@ -673,28 +931,41 @@ class Tizen100VcManager {
   late final _vc_mgr_set_private_data = _vc_mgr_set_private_dataPtr
       .asFunction<int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>();
 
-  /// @platform
-  /// @brief Gets private data from VC engine.
-  /// @since_tizen 5.0
+  /// Gets private data from VC engine.
   ///
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/voicecontrol.manager
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @remarks VC manager client can get private data from VC engine using this function.
-  /// @a data must be released using free() when it is no longer required.
+  /// **Privilege level:**
+  /// - platform
   ///
-  /// @param[in]  key    Private key
-  /// @param[out] data   Private data
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/voicecontrol.manager>
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VC_ERROR_NONE                Successful
-  /// @retval #VC_ERROR_NOT_SUPPORTED       VC not supported
-  /// @retval #VC_ERROR_PERMISSION_DENIED   Permission denied
-  /// @retval #VC_ERROR_INVALID_PARAMETER   Invalid parameter
-  /// @retval #VC_ERROR_OUT_OF_MEMORY       Not enough memory
-  /// @retval #VC_ERROR_INVALID_STATE       Invalid state
+  /// **Remarks:**
+  /// - VC manager client can get private data from VC engine using this function.
+  /// - `data` must be released using free() when it is no longer required.
   ///
-  /// @pre The service state should be #VC_SERVICE_STATE_READY.
+  /// **Parameters:**
+  /// - `key` (in): Private key
+  /// - `data` (out): Private data
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_NOT_SUPPORTED`: VC not supported
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_OUT_OF_MEMORY`: Not enough memory
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The service state should be `VC_SERVICE_STATE_READY`.
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int vc_mgr_get_private_data(
     ffi.Pointer<ffi.Char> key,
     ffi.Pointer<ffi.Pointer<ffi.Char>> data,
@@ -713,25 +984,37 @@ class Tizen100VcManager {
       int Function(
           ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @platform
-  /// @brief Requests to do action as if utterance is spoken.
-  /// @since_tizen 5.0
+  /// Requests to do action as if utterance is spoken.
   ///
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/voicecontrol.manager
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @param[in] type         Event type
-  /// @param[in] send_event   The string for send event
+  /// **Privilege level:**
+  /// - platform
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VC_ERROR_NONE                Successful
-  /// @retval #VC_ERROR_NOT_SUPPORTED       VC not supported
-  /// @retval #VC_ERROR_PERMISSION_DENIED   Permission denied
-  /// @retval #VC_ERROR_INVALID_PARAMETER   Invalid parameter
-  /// @retval #VC_ERROR_OUT_OF_MEMORY       Not enough memory
-  /// @retval #VC_ERROR_INVALID_STATE       Invalid state
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/voicecontrol.manager>
   ///
-  /// @pre The service state should be #VC_SERVICE_STATE_READY.
+  /// **Parameters:**
+  /// - `type` (in): Event type
+  /// - `send_event` (in): The string for send event
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_NOT_SUPPORTED`: VC not supported
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_OUT_OF_MEMORY`: Not enough memory
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The service state should be `VC_SERVICE_STATE_READY`.
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int vc_mgr_do_action(
     int type,
     ffi.Pointer<ffi.Char> send_event,
@@ -749,25 +1032,36 @@ class Tizen100VcManager {
   late final _vc_mgr_do_action = _vc_mgr_do_actionPtr
       .asFunction<int Function(int, ffi.Pointer<ffi.Char>)>();
 
-  /// @platform
-  /// @brief Sends the specific engine request to the vc-service.
-  /// @since_tizen 5.0
+  /// Sends the specific engine request to the vc-service.
   ///
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/voicecontrol.manager
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @param[in] engine_app_id A specific engine's app id
-  /// @param[in] event A engine service user request event
-  /// @param[in] request A engine service user request text
+  /// **Privilege level:**
+  /// - platform
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VC_ERROR_NONE               Successful
-  /// @retval #VC_ERROR_NOT_SUPPORTED      VC not supported
-  /// @retval #VC_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #VC_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #VC_ERROR_OUT_OF_MEMORY      Not enough memory
-  /// @retval #VC_ERROR_INVALID_STATE      Invalid state
-  /// @retval #VC_ERROR_OPERATION_FAILED   Operation failure
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/voicecontrol.manager>
+  ///
+  /// **Parameters:**
+  /// - `engine_app_id` (in): A specific engine's app id
+  /// - `event` (in): A engine service user request event
+  /// - `request` (in): A engine service user request text
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_NOT_SUPPORTED`: VC not supported
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_OUT_OF_MEMORY`: Not enough memory
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  /// - `VC_ERROR_OPERATION_FAILED`: Operation failure
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int vc_mgr_send_specific_engine_request(
     ffi.Pointer<ffi.Char> engine_app_id,
     ffi.Pointer<ffi.Char> event,
@@ -789,36 +1083,51 @@ class Tizen100VcManager {
           int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Char>)>();
 
-  /// @platform
-  /// @brief Starts recognition.
-  /// @since_tizen 5.0
+  /// Starts recognition.
   ///
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/voicecontrol.manager
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @remarks The default recognition mode is #VC_RECOGNITION_MODE_STOP_BY_SILENCE. \n
-  /// If you want to use other mode, you can set mode with vc_mgr_set_recognition_mode().
+  /// **Privilege level:**
+  /// - platform
   ///
-  /// @param[in] exclusive_command_option   Exclusive command option
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/voicecontrol.manager>
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VC_ERROR_NONE                       Successful
-  /// @retval #VC_ERROR_NOT_SUPPORTED              VC not supported
-  /// @retval #VC_ERROR_PERMISSION_DENIED          Permission denied
-  /// @retval #VC_ERROR_INVALID_PARAMETER          Invalid parameter.
-  /// @retval #VC_ERROR_INVALID_STATE              Invalid state
-  /// @retval #VC_ERROR_OPERATION_FAILED           Operation failure
-  /// @retval #VC_ERROR_IN_PROGRESS_TO_RECORDING   In progress to recording
+  /// **Remarks:**
+  /// - The default recognition mode is `VC_RECOGNITION_MODE_STOP_BY_SILENCE`.
+  /// - If you want to use other mode, you can set mode with vc_mgr_set_recognition_mode().
   ///
-  /// @pre The state should be #VC_STATE_READY and the service state should be #VC_SERVICE_STATE_READY.
-  /// @post It will invoke vc_service_state_changed_cb(), if you register a callback with vc_service_state_changed_cb(). \n
-  /// If this function succeeds, the service state will be #VC_SERVICE_STATE_RECORDING.
+  /// **Parameters:**
+  /// - `exclusive_command_option` (in): Exclusive command option
   ///
-  /// @see vc_mgr_stop()
-  /// @see vc_mgr_cancel()
-  /// @see vc_service_state_changed_cb()
-  /// @see vc_mgr_set_recognition_mode()
-  /// @see vc_mgr_get_recognition_mode()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_NOT_SUPPORTED`: VC not supported
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter.
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  /// - `VC_ERROR_OPERATION_FAILED`: Operation failure
+  /// - `VC_ERROR_IN_PROGRESS_TO_RECORDING`: In progress to recording
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_READY` and the service state should be `VC_SERVICE_STATE_READY`.
+  ///
+  /// **Postconditions:**
+  /// - It will invoke vc_service_state_changed_cb(), if you register a callback with vc_service_state_changed_cb(). If this function succeeds, the service state will be `VC_SERVICE_STATE_RECORDING`.
+  ///
+  /// **See also:**
+  /// - `vc_mgr_stop()`
+  /// - `vc_mgr_cancel()`
+  /// - `vc_service_state_changed_cb()`
+  /// - `vc_mgr_set_recognition_mode()`
+  /// - `vc_mgr_get_recognition_mode()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int vc_mgr_start(
     bool exclusive_command_option,
   ) {
@@ -831,31 +1140,44 @@ class Tizen100VcManager {
       _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Bool)>>('vc_mgr_start');
   late final _vc_mgr_start = _vc_mgr_startPtr.asFunction<int Function(bool)>();
 
-  /// @platform
-  /// @brief Stops recognition.
-  /// @since_tizen 5.0
+  /// Stops recognition.
   ///
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/voicecontrol.manager
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VC_ERROR_NONE                        Successful
-  /// @retval #VC_ERROR_NOT_SUPPORTED               VC not supported
-  /// @retval #VC_ERROR_PERMISSION_DENIED           Permission denied
-  /// @retval #VC_ERROR_INVALID_STATE               Invalid state
-  /// @retval #VC_ERROR_OPERATION_FAILED            Operation failure
-  /// @retval #VC_ERROR_IN_PROGRESS_TO_READY        In progress to ready
-  /// @retval #VC_ERROR_IN_PROGRESS_TO_RECORDING    In progress to recording
-  /// @retval #VC_ERROR_IN_PROGRESS_TO_PROCESSING   In progress to processing
+  /// **Privilege level:**
+  /// - platform
   ///
-  /// @pre The service state should be #VC_SERVICE_STATE_RECORDING.
-  /// @post It will invoke vc_service_state_changed_cb(), if you register a callback with vc_service_state_changed_cb(). \n
-  /// If this function succeeds, the service state will be #VC_SERVICE_STATE_PROCESSING.
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/voicecontrol.manager>
   ///
-  /// @see vc_mgr_start()
-  /// @see vc_mgr_cancel()
-  /// @see vc_service_state_changed_cb()
-  /// @see vc_result_cb()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_NOT_SUPPORTED`: VC not supported
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  /// - `VC_ERROR_OPERATION_FAILED`: Operation failure
+  /// - `VC_ERROR_IN_PROGRESS_TO_READY`: In progress to ready
+  /// - `VC_ERROR_IN_PROGRESS_TO_RECORDING`: In progress to recording
+  /// - `VC_ERROR_IN_PROGRESS_TO_PROCESSING`: In progress to processing
+  ///
+  /// **Preconditions:**
+  /// - The service state should be `VC_SERVICE_STATE_RECORDING`.
+  ///
+  /// **Postconditions:**
+  /// - It will invoke vc_service_state_changed_cb(), if you register a callback with vc_service_state_changed_cb(). If this function succeeds, the service state will be `VC_SERVICE_STATE_PROCESSING`.
+  ///
+  /// **See also:**
+  /// - `vc_mgr_start()`
+  /// - `vc_mgr_cancel()`
+  /// - `vc_service_state_changed_cb()`
+  /// - `vc_result_cb()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int vc_mgr_stop() {
     return _vc_mgr_stop();
   }
@@ -864,31 +1186,44 @@ class Tizen100VcManager {
       _lookup<ffi.NativeFunction<ffi.Int Function()>>('vc_mgr_stop');
   late final _vc_mgr_stop = _vc_mgr_stopPtr.asFunction<int Function()>();
 
-  /// @platform
-  /// @brief Cancels recognition.
-  /// @since_tizen 5.0
+  /// Cancels recognition.
   ///
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/voicecontrol.manager
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VC_ERROR_NONE                        Successful
-  /// @retval #VC_ERROR_NOT_SUPPORTED               VC not supported
-  /// @retval #VC_ERROR_PERMISSION_DENIED           Permission denied
-  /// @retval #VC_ERROR_OUT_OF_MEMORY               Not enough memory
-  /// @retval #VC_ERROR_INVALID_STATE               Invalid state
-  /// @retval #VC_ERROR_OPERATION_FAILED            Operation failure
-  /// @retval #VC_ERROR_IN_PROGRESS_TO_READY        In progress to ready
-  /// @retval #VC_ERROR_IN_PROGRESS_TO_RECORDING    In progress to recording
-  /// @retval #VC_ERROR_IN_PROGRESS_TO_PROCESSING   In progress to processing
+  /// **Privilege level:**
+  /// - platform
   ///
-  /// @pre The service state should be #VC_SERVICE_STATE_RECORDING or #VC_SERVICE_STATE_PROCESSING.
-  /// @post It will invoke vc_service_state_changed_cb(), if you register a callback with vc_service_state_changed_cb(). \n
-  /// If this function succeeds, the service state will be #VC_SERVICE_STATE_READY.
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/voicecontrol.manager>
   ///
-  /// @see vc_mgr_start()
-  /// @see vc_mgr_stop()
-  /// @see vc_service_state_changed_cb()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_NOT_SUPPORTED`: VC not supported
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_OUT_OF_MEMORY`: Not enough memory
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  /// - `VC_ERROR_OPERATION_FAILED`: Operation failure
+  /// - `VC_ERROR_IN_PROGRESS_TO_READY`: In progress to ready
+  /// - `VC_ERROR_IN_PROGRESS_TO_RECORDING`: In progress to recording
+  /// - `VC_ERROR_IN_PROGRESS_TO_PROCESSING`: In progress to processing
+  ///
+  /// **Preconditions:**
+  /// - The service state should be `VC_SERVICE_STATE_RECORDING` or `VC_SERVICE_STATE_PROCESSING`.
+  ///
+  /// **Postconditions:**
+  /// - It will invoke vc_service_state_changed_cb(), if you register a callback with vc_service_state_changed_cb(). If this function succeeds, the service state will be `VC_SERVICE_STATE_READY`.
+  ///
+  /// **See also:**
+  /// - `vc_mgr_start()`
+  /// - `vc_mgr_stop()`
+  /// - `vc_service_state_changed_cb()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int vc_mgr_cancel() {
     return _vc_mgr_cancel();
   }
@@ -897,25 +1232,38 @@ class Tizen100VcManager {
       _lookup<ffi.NativeFunction<ffi.Int Function()>>('vc_mgr_cancel');
   late final _vc_mgr_cancel = _vc_mgr_cancelPtr.asFunction<int Function()>();
 
-  /// @platform
-  /// @brief Gets the microphone volume during recording.
-  /// @since_tizen 5.0
+  /// Gets the microphone volume during recording.
   ///
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/voicecontrol.manager
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @param[out] volume   Recording volume
+  /// **Privilege level:**
+  /// - platform
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VC_ERROR_NONE                Successful
-  /// @retval #VC_ERROR_NOT_SUPPORTED       VC not supported
-  /// @retval #VC_ERROR_PERMISSION_DENIED   Permission denied
-  /// @retval #VC_ERROR_INVALID_PARAMETER   Invalid parameter
-  /// @retval #VC_ERROR_INVALID_STATE       Invalid state
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/voicecontrol.manager>
   ///
-  /// @pre The service state should be #VC_SERVICE_STATE_RECORDING.
+  /// **Parameters:**
+  /// - `volume` (out): Recording volume
   ///
-  /// @see vc_mgr_start()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_NOT_SUPPORTED`: VC not supported
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The service state should be `VC_SERVICE_STATE_RECORDING`.
+  ///
+  /// **See also:**
+  /// - `vc_mgr_start()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int vc_mgr_get_recording_volume(
     ffi.Pointer<ffi.Float> volume,
   ) {
@@ -930,26 +1278,41 @@ class Tizen100VcManager {
   late final _vc_mgr_get_recording_volume = _vc_mgr_get_recording_volumePtr
       .asFunction<int Function(ffi.Pointer<ffi.Float>)>();
 
-  /// @platform
-  /// @brief Selects valid results from all results.
-  /// @since_tizen 5.0
+  /// Selects valid results from all results.
   ///
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/voicecontrol.manager
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @remarks This function should be called when vc_mgr_all_result_cb() returns @c false.
-  /// The @a vc_cmd_list can be NULL, in that case the function does nothing.
-  /// @param[in] vc_cmd_list   The valid result list
+  /// **Privilege level:**
+  /// - platform
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VC_ERROR_NONE                Successful
-  /// @retval #VC_ERROR_NOT_SUPPORTED       VC not supported
-  /// @retval #VC_ERROR_PERMISSION_DENIED   Permission denied
-  /// @retval #VC_ERROR_INVALID_STATE       Invalid state
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/voicecontrol.manager>
   ///
-  /// @pre vc_mgr_all_result_cb() should be called
+  /// **Remarks:**
+  /// - This function should be called when vc_mgr_all_result_cb() returns `false`.
+  /// - The `vc_cmd_list` can be NULL, in that case the function does nothing.
   ///
-  /// @see vc_mgr_all_result_cb()
+  /// **Parameters:**
+  /// - `vc_cmd_list` (in): The valid result list
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_NOT_SUPPORTED`: VC not supported
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - vc_mgr_all_result_cb() should be called
+  ///
+  /// **See also:**
+  /// - `vc_mgr_all_result_cb()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int vc_mgr_set_selected_results(
     vc.vc_cmd_list_h vc_cmd_list,
   ) {
@@ -964,29 +1327,43 @@ class Tizen100VcManager {
   late final _vc_mgr_set_selected_results = _vc_mgr_set_selected_resultsPtr
       .asFunction<int Function(vc.vc_cmd_list_h)>();
 
-  /// @platform
-  /// @brief Sets a callback function for getting recognition result.
-  /// @since_tizen 5.0
+  /// Sets a callback function for getting recognition result.
   ///
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/voicecontrol.manager
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @remarks This callback must be set. Without this callback, the framework can not deliver the result of voice recognition to proper client.
+  /// **Privilege level:**
+  /// - platform
   ///
-  /// @param[in] callback    Callback function to register
-  /// @param[in] user_data   The user data to be passed to the callback function
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/voicecontrol.manager>
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VC_ERROR_NONE                Successful
-  /// @retval #VC_ERROR_NOT_SUPPORTED       VC not supported
-  /// @retval #VC_ERROR_PERMISSION_DENIED   Permission denied
-  /// @retval #VC_ERROR_INVALID_PARAMETER   Invalid parameter
-  /// @retval #VC_ERROR_INVALID_STATE       Invalid state
+  /// **Remarks:**
+  /// - This callback must be set. Without this callback, the framework can not deliver the result of voice recognition to proper client.
   ///
-  /// @pre The state should be #VC_STATE_INITIALIZED.
+  /// **Parameters:**
+  /// - `callback` (in): Callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
   ///
-  /// @see vc_mgr_all_result_cb()
-  /// @see vc_mgr_unset_all_result_cb()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_NOT_SUPPORTED`: VC not supported
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_INITIALIZED`.
+  ///
+  /// **See also:**
+  /// - `vc_mgr_all_result_cb()`
+  /// - `vc_mgr_unset_all_result_cb()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int vc_mgr_set_all_result_cb(
     vc_mgr_all_result_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -1004,22 +1381,34 @@ class Tizen100VcManager {
   late final _vc_mgr_set_all_result_cb = _vc_mgr_set_all_result_cbPtr
       .asFunction<int Function(vc_mgr_all_result_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @platform
-  /// @brief Unsets the recognition result callback function.
-  /// @since_tizen 5.0
+  /// Unsets the recognition result callback function.
   ///
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/voicecontrol.manager
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VC_ERROR_NONE                Successful
-  /// @retval #VC_ERROR_NOT_SUPPORTED       VC not supported
-  /// @retval #VC_ERROR_PERMISSION_DENIED   Permission denied
-  /// @retval #VC_ERROR_INVALID_STATE       Invalid state
+  /// **Privilege level:**
+  /// - platform
   ///
-  /// @pre The state should be #VC_STATE_INITIALIZED.
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/voicecontrol.manager>
   ///
-  /// @see vc_mgr_set_all_result_cb()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_NOT_SUPPORTED`: VC not supported
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_INITIALIZED`.
+  ///
+  /// **See also:**
+  /// - `vc_mgr_set_all_result_cb()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int vc_mgr_unset_all_result_cb() {
     return _vc_mgr_unset_all_result_cb();
   }
@@ -1030,27 +1419,40 @@ class Tizen100VcManager {
   late final _vc_mgr_unset_all_result_cb =
       _vc_mgr_unset_all_result_cbPtr.asFunction<int Function()>();
 
-  /// @platform
-  /// @brief Sets a callback function for getting pre recognition result.
-  /// @since_tizen 5.0
+  /// Sets a callback function for getting pre recognition result.
   ///
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/voicecontrol.manager
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @param[in] callback    Callback function to register
-  /// @param[in] user_data   The user data to be passed to the callback function
+  /// **Privilege level:**
+  /// - platform
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VC_ERROR_NONE                Successful
-  /// @retval #VC_ERROR_NOT_SUPPORTED       VC not supported
-  /// @retval #VC_ERROR_PERMISSION_DENIED   Permission denied
-  /// @retval #VC_ERROR_INVALID_PARAMETER   Invalid parameter
-  /// @retval #VC_ERROR_INVALID_STATE       Invalid state
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/voicecontrol.manager>
   ///
-  /// @pre The state should be #VC_STATE_INITIALIZED.
+  /// **Parameters:**
+  /// - `callback` (in): Callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
   ///
-  /// @see vc_mgr_pre_result_cb()
-  /// @see vc_mgr_unset_pre_result_cb()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_NOT_SUPPORTED`: VC not supported
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_INITIALIZED`.
+  ///
+  /// **See also:**
+  /// - `vc_mgr_pre_result_cb()`
+  /// - `vc_mgr_unset_pre_result_cb()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int vc_mgr_set_pre_result_cb(
     vc_mgr_pre_result_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -1068,22 +1470,34 @@ class Tizen100VcManager {
   late final _vc_mgr_set_pre_result_cb = _vc_mgr_set_pre_result_cbPtr
       .asFunction<int Function(vc_mgr_pre_result_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @platform
-  /// @brief Unsets the pre recognition result callback function.
-  /// @since_tizen 5.0
+  /// Unsets the pre recognition result callback function.
   ///
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/voicecontrol.manager
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VC_ERROR_NONE                Successful
-  /// @retval #VC_ERROR_NOT_SUPPORTED       VC not supported
-  /// @retval #VC_ERROR_PERMISSION_DENIED   Permission denied
-  /// @retval #VC_ERROR_INVALID_STATE       Invalid state
+  /// **Privilege level:**
+  /// - platform
   ///
-  /// @pre The state should be #VC_STATE_INITIALIZED.
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/voicecontrol.manager>
   ///
-  /// @see vc_mgr_set_pre_result_cb()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_NOT_SUPPORTED`: VC not supported
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_INITIALIZED`.
+  ///
+  /// **See also:**
+  /// - `vc_mgr_set_pre_result_cb()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int vc_mgr_unset_pre_result_cb() {
     return _vc_mgr_unset_pre_result_cb();
   }
@@ -1094,26 +1508,39 @@ class Tizen100VcManager {
   late final _vc_mgr_unset_pre_result_cb =
       _vc_mgr_unset_pre_result_cbPtr.asFunction<int Function()>();
 
-  /// @platform
-  /// @brief Sets a callback function for getting specific engine result.
-  /// @since_tizen 5.0
+  /// Sets a callback function for getting specific engine result.
   ///
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/voicecontrol.manager
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @param[in] callback Callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
+  /// **Privilege level:**
+  /// - platform
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VC_ERROR_NONE               Successful
-  /// @retval #VC_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #VC_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #VC_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #VC_ERROR_INVALID_STATE      Invalid state
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/voicecontrol.manager>
   ///
-  /// @pre The state should be #VC_STATE_INITIALIZED.
+  /// **Parameters:**
+  /// - `callback` (in): Callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
   ///
-  /// @see vc_mgr_unset_specific_engine_result_cb()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_INITIALIZED`.
+  ///
+  /// **See also:**
+  /// - `vc_mgr_unset_specific_engine_result_cb()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int vc_mgr_set_specific_engine_result_cb(
     vc_mgr_specific_engine_result_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -1133,17 +1560,24 @@ class Tizen100VcManager {
           int Function(
               vc_mgr_specific_engine_result_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the specific engine result callback function.
-  /// @since_tizen 5.0
+  /// Unsets the specific engine result callback function.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VC_ERROR_NONE           Successful
-  /// @retval #VC_ERROR_NOT_SUPPORTED  Not supported
-  /// @retval #VC_ERROR_INVALID_STATE  Invalid state
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @pre The state should be #VC_STATE_INITIALIZED.
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
   ///
-  /// @see vc_mgr_set_specific_engine_result_cb()
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_INITIALIZED`.
+  ///
+  /// **See also:**
+  /// - `vc_mgr_set_specific_engine_result_cb()`
   int vc_mgr_unset_specific_engine_result_cb() {
     return _vc_mgr_unset_specific_engine_result_cb();
   }
@@ -1154,27 +1588,40 @@ class Tizen100VcManager {
   late final _vc_mgr_unset_specific_engine_result_cb =
       _vc_mgr_unset_specific_engine_result_cbPtr.asFunction<int Function()>();
 
-  /// @platform
-  /// @brief Sets a callback function for getting all types of recognition results.
-  /// @since_tizen 5.0
+  /// Sets a callback function for getting all types of recognition results.
   ///
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/voicecontrol.manager
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @param[in] callback    Callback function to register
-  /// @param[in] user_data   The user data to be passed to the callback function
+  /// **Privilege level:**
+  /// - platform
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VC_ERROR_NONE                Successful
-  /// @retval #VC_ERROR_NOT_SUPPORTED       VC not supported
-  /// @retval #VC_ERROR_PERMISSION_DENIED   Permission denied
-  /// @retval #VC_ERROR_INVALID_PARAMETER   Invalid parameter
-  /// @retval #VC_ERROR_INVALID_STATE       Invalid state
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/voicecontrol.manager>
   ///
-  /// @pre The state should be #VC_STATE_INITIALIZED.
+  /// **Parameters:**
+  /// - `callback` (in): Callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
   ///
-  /// @see vc_result_cb()
-  /// @see vc_mgr_unset_result_cb()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_NOT_SUPPORTED`: VC not supported
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_INITIALIZED`.
+  ///
+  /// **See also:**
+  /// - `vc_result_cb()`
+  /// - `vc_mgr_unset_result_cb()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int vc_mgr_set_result_cb(
     vc.vc_result_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -1192,22 +1639,34 @@ class Tizen100VcManager {
   late final _vc_mgr_set_result_cb = _vc_mgr_set_result_cbPtr
       .asFunction<int Function(vc.vc_result_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @platform
-  /// @brief Unsets the callback function for getting all types of recognition results.
-  /// @since_tizen 5.0
+  /// Unsets the callback function for getting all types of recognition results.
   ///
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/voicecontrol.manager
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VC_ERROR_NONE                Successful
-  /// @retval #VC_ERROR_NOT_SUPPORTED       VC not supported
-  /// @retval #VC_ERROR_PERMISSION_DENIED   Permission denied
-  /// @retval #VC_ERROR_INVALID_STATE       Invalid state
+  /// **Privilege level:**
+  /// - platform
   ///
-  /// @pre The state should be #VC_STATE_INITIALIZED.
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/voicecontrol.manager>
   ///
-  /// @see vc_mgr_set_result_cb()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_NOT_SUPPORTED`: VC not supported
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_INITIALIZED`.
+  ///
+  /// **See also:**
+  /// - `vc_mgr_set_result_cb()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int vc_mgr_unset_result_cb() {
     return _vc_mgr_unset_result_cb();
   }
@@ -1217,27 +1676,40 @@ class Tizen100VcManager {
   late final _vc_mgr_unset_result_cb =
       _vc_mgr_unset_result_cbPtr.asFunction<int Function()>();
 
-  /// @platform
-  /// @brief Sets a callback function to be called when state is changed.
-  /// @since_tizen 5.0
+  /// Sets a callback function to be called when state is changed.
   ///
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/voicecontrol.manager
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @param[in] callback    Callback function to register
-  /// @param[in] user_data   The user data to be passed to the callback function
+  /// **Privilege level:**
+  /// - platform
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VC_ERROR_NONE                Successful
-  /// @retval #VC_ERROR_NOT_SUPPORTED       VC not supported
-  /// @retval #VC_ERROR_PERMISSION_DENIED   Permission denied
-  /// @retval #VC_ERROR_INVALID_PARAMETER   Invalid parameter
-  /// @retval #VC_ERROR_INVALID_STATE       Invalid state
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/voicecontrol.manager>
   ///
-  /// @pre The state should be #VC_STATE_INITIALIZED.
+  /// **Parameters:**
+  /// - `callback` (in): Callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
   ///
-  /// @see vc_state_changed_cb()
-  /// @see vc_mgr_unset_state_changed_cb()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_NOT_SUPPORTED`: VC not supported
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_INITIALIZED`.
+  ///
+  /// **See also:**
+  /// - `vc_state_changed_cb()`
+  /// - `vc_mgr_unset_state_changed_cb()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int vc_mgr_set_state_changed_cb(
     vc.vc_state_changed_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -1256,22 +1728,34 @@ class Tizen100VcManager {
       _vc_mgr_set_state_changed_cbPtr.asFunction<
           int Function(vc.vc_state_changed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @platform
-  /// @brief Unsets the state changed callback function.
-  /// @since_tizen 5.0
+  /// Unsets the state changed callback function.
   ///
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/voicecontrol.manager
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VC_ERROR_NONE                Successful
-  /// @retval #VC_ERROR_NOT_SUPPORTED       VC not supported
-  /// @retval #VC_ERROR_PERMISSION_DENIED   Permission denied
-  /// @retval #VC_ERROR_INVALID_STATE       Invalid state
+  /// **Privilege level:**
+  /// - platform
   ///
-  /// @pre The state should be #VC_STATE_INITIALIZED.
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/voicecontrol.manager>
   ///
-  /// @see vc_mgr_set_state_changed_cb()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_NOT_SUPPORTED`: VC not supported
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_INITIALIZED`.
+  ///
+  /// **See also:**
+  /// - `vc_mgr_set_state_changed_cb()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int vc_mgr_unset_state_changed_cb() {
     return _vc_mgr_unset_state_changed_cb();
   }
@@ -1282,27 +1766,40 @@ class Tizen100VcManager {
   late final _vc_mgr_unset_state_changed_cb =
       _vc_mgr_unset_state_changed_cbPtr.asFunction<int Function()>();
 
-  /// @platform
-  /// @brief Sets a callback function to be called when service state is changed.
-  /// @since_tizen 5.0
+  /// Sets a callback function to be called when service state is changed.
   ///
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/voicecontrol.manager
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @param[in] callback    Callback function to register
-  /// @param[in] user_data   The user data to be passed to the callback function
+  /// **Privilege level:**
+  /// - platform
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VC_ERROR_NONE                Successful
-  /// @retval #VC_ERROR_NOT_SUPPORTED       VC not supported
-  /// @retval #VC_ERROR_PERMISSION_DENIED   Permission denied
-  /// @retval #VC_ERROR_INVALID_PARAMETER   Invalid parameter
-  /// @retval #VC_ERROR_INVALID_STATE       Invalid state
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/voicecontrol.manager>
   ///
-  /// @pre The state should be #VC_STATE_INITIALIZED.
+  /// **Parameters:**
+  /// - `callback` (in): Callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
   ///
-  /// @see vc_service_state_changed_cb()
-  /// @see vc_mgr_unset_service_state_changed_cb()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_NOT_SUPPORTED`: VC not supported
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_INITIALIZED`.
+  ///
+  /// **See also:**
+  /// - `vc_service_state_changed_cb()`
+  /// - `vc_mgr_unset_service_state_changed_cb()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int vc_mgr_set_service_state_changed_cb(
     vc.vc_service_state_changed_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -1322,22 +1819,34 @@ class Tizen100VcManager {
           int Function(
               vc.vc_service_state_changed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @platform
-  /// @brief Unsets the service state changed callback function.
-  /// @since_tizen 5.0
+  /// Unsets the service state changed callback function.
   ///
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/voicecontrol.manager
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VC_ERROR_NONE                Successful
-  /// @retval #VC_ERROR_NOT_SUPPORTED       VC not supported
-  /// @retval #VC_ERROR_PERMISSION_DENIED   Permission denied
-  /// @retval #VC_ERROR_INVALID_STATE       Invalid state
+  /// **Privilege level:**
+  /// - platform
   ///
-  /// @pre The state should be #VC_STATE_INITIALIZED.
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/voicecontrol.manager>
   ///
-  /// @see vc_mgr_set_service_state_changed_cb()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_NOT_SUPPORTED`: VC not supported
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_INITIALIZED`.
+  ///
+  /// **See also:**
+  /// - `vc_mgr_set_service_state_changed_cb()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int vc_mgr_unset_service_state_changed_cb() {
     return _vc_mgr_unset_service_state_changed_cb();
   }
@@ -1348,27 +1857,40 @@ class Tizen100VcManager {
   late final _vc_mgr_unset_service_state_changed_cb =
       _vc_mgr_unset_service_state_changed_cbPtr.asFunction<int Function()>();
 
-  /// @platform
-  /// @brief Sets a callback function to be called when begin of speech is detected.
-  /// @since_tizen 5.0
+  /// Sets a callback function to be called when begin of speech is detected.
   ///
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/voicecontrol.manager
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @param[in] callback    Callback function to register
-  /// @param[in] user_data   The user data to be passed to the callback function
+  /// **Privilege level:**
+  /// - platform
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VC_ERROR_NONE                Successful
-  /// @retval #VC_ERROR_NOT_SUPPORTED       VC not supported
-  /// @retval #VC_ERROR_PERMISSION_DENIED   Permission denied
-  /// @retval #VC_ERROR_INVALID_PARAMETER   Invalid parameter
-  /// @retval #VC_ERROR_INVALID_STATE       Invalid state
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/voicecontrol.manager>
   ///
-  /// @pre The state should be #VC_STATE_INITIALIZED.
+  /// **Parameters:**
+  /// - `callback` (in): Callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
   ///
-  /// @see vc_mgr_begin_speech_detected_cb()
-  /// @see vc_mgr_unset_speech_detected_cb()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_NOT_SUPPORTED`: VC not supported
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_INITIALIZED`.
+  ///
+  /// **See also:**
+  /// - `vc_mgr_begin_speech_detected_cb()`
+  /// - `vc_mgr_unset_speech_detected_cb()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int vc_mgr_set_speech_detected_cb(
     vc_mgr_begin_speech_detected_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -1388,22 +1910,34 @@ class Tizen100VcManager {
           int Function(
               vc_mgr_begin_speech_detected_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @platform
-  /// @brief Unsets the speech detected callback function.
-  /// @since_tizen 5.0
+  /// Unsets the speech detected callback function.
   ///
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/voicecontrol.manager
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VC_ERROR_NONE                Successful
-  /// @retval #VC_ERROR_NOT_SUPPORTED       VC not supported
-  /// @retval #VC_ERROR_PERMISSION_DENIED   Permission denied
-  /// @retval #VC_ERROR_INVALID_STATE       Invalid state
+  /// **Privilege level:**
+  /// - platform
   ///
-  /// @pre The state should be #VC_STATE_INITIALIZED.
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/voicecontrol.manager>
   ///
-  /// @see vc_mgr_set_speech_detected_cb()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_NOT_SUPPORTED`: VC not supported
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_INITIALIZED`.
+  ///
+  /// **See also:**
+  /// - `vc_mgr_set_speech_detected_cb()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int vc_mgr_unset_speech_detected_cb() {
     return _vc_mgr_unset_speech_detected_cb();
   }
@@ -1414,27 +1948,40 @@ class Tizen100VcManager {
   late final _vc_mgr_unset_speech_detected_cb =
       _vc_mgr_unset_speech_detected_cbPtr.asFunction<int Function()>();
 
-  /// @platform
-  /// @brief Sets a callback function to be called when current language is changed.
-  /// @since_tizen 5.0
+  /// Sets a callback function to be called when current language is changed.
   ///
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/voicecontrol.manager
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @param[in] callback    Callback function to register
-  /// @param[in] user_data   The user data to be passed to the callback function
+  /// **Privilege level:**
+  /// - platform
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VC_ERROR_NONE                Successful
-  /// @retval #VC_ERROR_NOT_SUPPORTED       VC not supported
-  /// @retval #VC_ERROR_PERMISSION_DENIED   Permission denied
-  /// @retval #VC_ERROR_INVALID_PARAMETER   Invalid parameter
-  /// @retval #VC_ERROR_INVALID_STATE       Invalid state
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/voicecontrol.manager>
   ///
-  /// @pre The state should be #VC_STATE_INITIALIZED.
+  /// **Parameters:**
+  /// - `callback` (in): Callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
   ///
-  /// @see vc_current_language_changed_cb()
-  /// @see vc_mgr_unset_current_language_changed_cb()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_NOT_SUPPORTED`: VC not supported
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_INITIALIZED`.
+  ///
+  /// **See also:**
+  /// - `vc_current_language_changed_cb()`
+  /// - `vc_mgr_unset_current_language_changed_cb()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int vc_mgr_set_current_language_changed_cb(
     vc.vc_current_language_changed_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -1455,22 +2002,34 @@ class Tizen100VcManager {
           int Function(
               vc.vc_current_language_changed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @platform
-  /// @brief Unsets the current language changed callback function.
-  /// @since_tizen 5.0
+  /// Unsets the current language changed callback function.
   ///
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/voicecontrol.manager
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VC_ERROR_NONE                Successful
-  /// @retval #VC_ERROR_NOT_SUPPORTED       VC not supported
-  /// @retval #VC_ERROR_PERMISSION_DENIED   Permission denied
-  /// @retval #VC_ERROR_INVALID_STATE       Invalid state
+  /// **Privilege level:**
+  /// - platform
   ///
-  /// @pre The state should be #VC_STATE_INITIALIZED.
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/voicecontrol.manager>
   ///
-  /// @see vc_mgr_set_current_language_changed_cb()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_NOT_SUPPORTED`: VC not supported
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_INITIALIZED`.
+  ///
+  /// **See also:**
+  /// - `vc_mgr_set_current_language_changed_cb()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int vc_mgr_unset_current_language_changed_cb() {
     return _vc_mgr_unset_current_language_changed_cb();
   }
@@ -1481,28 +2040,41 @@ class Tizen100VcManager {
   late final _vc_mgr_unset_current_language_changed_cb =
       _vc_mgr_unset_current_language_changed_cbPtr.asFunction<int Function()>();
 
-  /// @platform
-  /// @brief Gets the current error message.
-  /// @since_tizen 5.0
+  /// Gets the current error message.
   ///
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/voicecontrol.manager
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @remarks This function should be called during as vc error callback. If not, the error as operation failure will be returned. \n
-  /// If the function succeeds, @a err_msg must be released using free() when it is no longer required.
+  /// **Privilege level:**
+  /// - platform
   ///
-  /// @param[out] err_msg   The current error message
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/voicecontrol.manager>
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VC_ERROR_NONE                Successful
-  /// @retval #VC_ERROR_NOT_SUPPORTED       VC not supported
-  /// @retval #VC_ERROR_PERMISSION_DENIED   Permission denied
-  /// @retval #VC_ERROR_INVALID_PARAMETER   Invalid parameter
-  /// @retval #VC_ERROR_INVALID_STATE       Invalid state
-  /// @retval #VC_ERROR_OPERATION_FAILED    Operation failure
-  /// @retval #VC_ERROR_OUT_OF_MEMORY       Out of memory
+  /// **Remarks:**
+  /// - This function should be called during as vc error callback. If not, the error as operation failure will be returned.
+  /// - If the function succeeds, `err_msg` must be released using free() when it is no longer required.
   ///
-  /// @see vc_error_cb()
+  /// **Parameters:**
+  /// - `err_msg` (out): The current error message
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_NOT_SUPPORTED`: VC not supported
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  /// - `VC_ERROR_OPERATION_FAILED`: Operation failure
+  /// - `VC_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `vc_error_cb()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int vc_mgr_get_error_message(
     ffi.Pointer<ffi.Pointer<ffi.Char>> err_msg,
   ) {
@@ -1518,27 +2090,40 @@ class Tizen100VcManager {
   late final _vc_mgr_get_error_message = _vc_mgr_get_error_messagePtr
       .asFunction<int Function(ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @platform
-  /// @brief Sets a callback function to be called when an error occurred.
-  /// @since_tizen 5.0
+  /// Sets a callback function to be called when an error occurred.
   ///
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/voicecontrol.manager
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @param[in] callback    Callback function to register
-  /// @param[in] user_data   The user data to be passed to the callback function
+  /// **Privilege level:**
+  /// - platform
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VC_ERROR_NONE                Successful
-  /// @retval #VC_ERROR_NOT_SUPPORTED       VC not supported
-  /// @retval #VC_ERROR_PERMISSION_DENIED   Permission denied
-  /// @retval #VC_ERROR_INVALID_PARAMETER   Invalid parameter
-  /// @retval #VC_ERROR_INVALID_STATE       Invalid state
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/voicecontrol.manager>
   ///
-  /// @pre The state should be #VC_STATE_INITIALIZED.
+  /// **Parameters:**
+  /// - `callback` (in): Callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
   ///
-  /// @see vc_error_cb()
-  /// @see vc_mgr_unset_error_cb()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_NOT_SUPPORTED`: VC not supported
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_INITIALIZED`.
+  ///
+  /// **See also:**
+  /// - `vc_error_cb()`
+  /// - `vc_mgr_unset_error_cb()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int vc_mgr_set_error_cb(
     vc.vc_error_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -1556,22 +2141,34 @@ class Tizen100VcManager {
   late final _vc_mgr_set_error_cb = _vc_mgr_set_error_cbPtr
       .asFunction<int Function(vc.vc_error_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @platform
-  /// @brief Unsets the callback function to be called when an error occurred.
-  /// @since_tizen 5.0
+  /// Unsets the callback function to be called when an error occurred.
   ///
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/voicecontrol.manager
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VC_ERROR_NONE                Successful
-  /// @retval #VC_ERROR_NOT_SUPPORTED       VC not supported
-  /// @retval #VC_ERROR_PERMISSION_DENIED   Permission denied
-  /// @retval #VC_ERROR_INVALID_STATE       Invalid state
+  /// **Privilege level:**
+  /// - platform
   ///
-  /// @pre The state should be #VC_STATE_INITIALIZED.
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/voicecontrol.manager>
   ///
-  /// @see vc_mgr_set_error_cb()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_NOT_SUPPORTED`: VC not supported
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_INITIALIZED`.
+  ///
+  /// **See also:**
+  /// - `vc_mgr_set_error_cb()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int vc_mgr_unset_error_cb() {
     return _vc_mgr_unset_error_cb();
   }
@@ -1581,26 +2178,39 @@ class Tizen100VcManager {
   late final _vc_mgr_unset_error_cb =
       _vc_mgr_unset_error_cbPtr.asFunction<int Function()>();
 
-  /// @platform
-  /// @brief Sets a callback function to be called when dialog requests.
-  /// @since_tizen 5.0
+  /// Sets a callback function to be called when dialog requests.
   ///
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/voicecontrol.manager
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @param[in] callback    Callback function to register
-  /// @param[in] user_data   The user data to be passed to the callback function
+  /// **Privilege level:**
+  /// - platform
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VC_ERROR_NONE                Successful
-  /// @retval #VC_ERROR_NOT_SUPPORTED       VC not supported
-  /// @retval #VC_ERROR_PERMISSION_DENIED   Permission denied
-  /// @retval #VC_ERROR_INVALID_PARAMETER   Invalid parameter
-  /// @retval #VC_ERROR_INVALID_STATE       Invalid state
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/voicecontrol.manager>
   ///
-  /// @pre The state should be #VC_STATE_INITIALIZED.
+  /// **Parameters:**
+  /// - `callback` (in): Callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
   ///
-  /// @see vc_mgr_unset_dialog_request_cb()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_NOT_SUPPORTED`: VC not supported
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_INITIALIZED`.
+  ///
+  /// **See also:**
+  /// - `vc_mgr_unset_dialog_request_cb()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int vc_mgr_set_dialog_request_cb(
     vc_mgr_dialog_request_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -1619,22 +2229,34 @@ class Tizen100VcManager {
       _vc_mgr_set_dialog_request_cbPtr.asFunction<
           int Function(vc_mgr_dialog_request_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @platform
-  /// @brief Unsets the callback function to be called when dialog requests.
-  /// @since_tizen 5.0
+  /// Unsets the callback function to be called when dialog requests.
   ///
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/voicecontrol.manager
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VC_ERROR_NONE                Successful
-  /// @retval #VC_ERROR_NOT_SUPPORTED       VC not supported
-  /// @retval #VC_ERROR_PERMISSION_DENIED   Permission denied
-  /// @retval #VC_ERROR_INVALID_STATE       Invalid state
+  /// **Privilege level:**
+  /// - platform
   ///
-  /// @pre The state should be #VC_STATE_INITIALIZED.
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/voicecontrol.manager>
   ///
-  /// @see vc_mgr_set_dialog_request_cb()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_NOT_SUPPORTED`: VC not supported
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_INITIALIZED`.
+  ///
+  /// **See also:**
+  /// - `vc_mgr_set_dialog_request_cb()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int vc_mgr_unset_dialog_request_cb() {
     return _vc_mgr_unset_dialog_request_cb();
   }
@@ -1645,25 +2267,38 @@ class Tizen100VcManager {
   late final _vc_mgr_unset_dialog_request_cb =
       _vc_mgr_unset_dialog_request_cbPtr.asFunction<int Function()>();
 
-  /// @platform
-  /// @brief Enables command type as candidate command.
-  /// @since_tizen 5.0
+  /// Enables command type as candidate command.
   ///
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/voicecontrol.manager
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @param[in] cmd_type   The command type (e.g. #VC_COMMAND_TYPE_FOREGROUND, #VC_COMMAND_TYPE_BACKGROUND, #VC_COMMAND_TYPE_WIDGET, #VC_COMMAND_TYPE_SYSTEM, #VC_COMMAND_TYPE_SYSTEM_BACKGROUND, #VC_COMMAND_TYPE_EXCLUSIVE)
+  /// **Privilege level:**
+  /// - platform
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VC_ERROR_NONE                Successful
-  /// @retval #VC_ERROR_NOT_SUPPORTED       VC not supported
-  /// @retval #VC_ERROR_PERMISSION_DENIED   Permission denied
-  /// @retval #VC_ERROR_INVALID_PARAMETER   Invalid parameter
-  /// @retval #VC_ERROR_INVALID_STATE       Invalid state
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/voicecontrol.manager>
   ///
-  /// @pre The state should be #VC_STATE_READY.
+  /// **Parameters:**
+  /// - `cmd_type` (in): The command type (e.g. `VC_COMMAND_TYPE_FOREGROUND`, `VC_COMMAND_TYPE_BACKGROUND`, `VC_COMMAND_TYPE_WIDGET`, `VC_COMMAND_TYPE_SYSTEM`, `VC_COMMAND_TYPE_SYSTEM_BACKGROUND`, `VC_COMMAND_TYPE_EXCLUSIVE`)
   ///
-  /// @see vc_mgr_disable_command_type()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_NOT_SUPPORTED`: VC not supported
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_READY`.
+  ///
+  /// **See also:**
+  /// - `vc_mgr_disable_command_type()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int vc_mgr_enable_command_type(
     int cmd_type,
   ) {
@@ -1678,25 +2313,38 @@ class Tizen100VcManager {
   late final _vc_mgr_enable_command_type =
       _vc_mgr_enable_command_typePtr.asFunction<int Function(int)>();
 
-  /// @platform
-  /// @brief Disables command type as candidate command.
-  /// @since_tizen 5.0
+  /// Disables command type as candidate command.
   ///
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/voicecontrol.manager
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @param[in] cmd_type   The command type (e.g. #VC_COMMAND_TYPE_FOREGROUND, #VC_COMMAND_TYPE_BACKGROUND, #VC_COMMAND_TYPE_WIDGET, #VC_COMMAND_TYPE_SYSTEM, #VC_COMMAND_TYPE_SYSTEM_BACKGROUND, #VC_COMMAND_TYPE_EXCLUSIVE)
+  /// **Privilege level:**
+  /// - platform
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VC_ERROR_NONE                Successful
-  /// @retval #VC_ERROR_NOT_SUPPORTED       VC not supported
-  /// @retval #VC_ERROR_PERMISSION_DENIED   Permission denied
-  /// @retval #VC_ERROR_INVALID_PARAMETER   Invalid parameter
-  /// @retval #VC_ERROR_INVALID_STATE       Invalid state
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/voicecontrol.manager>
   ///
-  /// @pre The state should be #VC_STATE_READY.
+  /// **Parameters:**
+  /// - `cmd_type` (in): The command type (e.g. `VC_COMMAND_TYPE_FOREGROUND`, `VC_COMMAND_TYPE_BACKGROUND`, `VC_COMMAND_TYPE_WIDGET`, `VC_COMMAND_TYPE_SYSTEM`, `VC_COMMAND_TYPE_SYSTEM_BACKGROUND`, `VC_COMMAND_TYPE_EXCLUSIVE`)
   ///
-  /// @see vc_mgr_enable_command_type()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_NOT_SUPPORTED`: VC not supported
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_READY`.
+  ///
+  /// **See also:**
+  /// - `vc_mgr_enable_command_type()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int vc_mgr_disable_command_type(
     int cmd_type,
   ) {
@@ -1711,27 +2359,40 @@ class Tizen100VcManager {
   late final _vc_mgr_disable_command_type =
       _vc_mgr_disable_command_typePtr.asFunction<int Function(int)>();
 
-  /// @platform
-  /// @brief Sets a callback function to be called when engine set private data.
-  /// @since_tizen 5.0
+  /// Sets a callback function to be called when engine set private data.
   ///
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/voicecontrol.manager
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @param[in] callback    Callback function to register
-  /// @param[in] user_data   The user data to be passed to the callback function
+  /// **Privilege level:**
+  /// - platform
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VC_ERROR_NONE                Successful
-  /// @retval #VC_ERROR_NOT_SUPPORTED       VC not supported
-  /// @retval #VC_ERROR_PERMISSION_DENIED   Permission denied
-  /// @retval #VC_ERROR_INVALID_PARAMETER   Invalid parameter
-  /// @retval #VC_ERROR_INVALID_STATE       Invalid state
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/voicecontrol.manager>
   ///
-  /// @pre The state should be #VC_STATE_INITIALIZED.
+  /// **Parameters:**
+  /// - `callback` (in): Callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
   ///
-  /// @see vc_mgr_private_data_set_cb()
-  /// @see vc_mgr_unset_private_data_set_cb()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_NOT_SUPPORTED`: VC not supported
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_INITIALIZED`.
+  ///
+  /// **See also:**
+  /// - `vc_mgr_private_data_set_cb()`
+  /// - `vc_mgr_unset_private_data_set_cb()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int vc_mgr_set_private_data_set_cb(
     vc_mgr_private_data_set_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -1750,22 +2411,34 @@ class Tizen100VcManager {
       _vc_mgr_set_private_data_set_cbPtr.asFunction<
           int Function(vc_mgr_private_data_set_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @platform
-  /// @brief Unsets the callback function to be called when engine set private data.
-  /// @since_tizen 5.0
+  /// Unsets the callback function to be called when engine set private data.
   ///
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/voicecontrol.manager
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VC_ERROR_NONE                Successful
-  /// @retval #VC_ERROR_NOT_SUPPORTED       VC not supported
-  /// @retval #VC_ERROR_PERMISSION_DENIED   Permission denied
-  /// @retval #VC_ERROR_INVALID_STATE       Invalid state
+  /// **Privilege level:**
+  /// - platform
   ///
-  /// @pre The state should be #VC_STATE_INITIALIZED.
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/voicecontrol.manager>
   ///
-  /// @see vc_mgr_set_private_data_set_cb()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_NOT_SUPPORTED`: VC not supported
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_INITIALIZED`.
+  ///
+  /// **See also:**
+  /// - `vc_mgr_set_private_data_set_cb()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int vc_mgr_unset_private_data_set_cb() {
     return _vc_mgr_unset_private_data_set_cb();
   }
@@ -1776,27 +2449,40 @@ class Tizen100VcManager {
   late final _vc_mgr_unset_private_data_set_cb =
       _vc_mgr_unset_private_data_set_cbPtr.asFunction<int Function()>();
 
-  /// @platform
-  /// @brief Sets a callback function to be called when engine request private data.
-  /// @since_tizen 5.0
+  /// Sets a callback function to be called when engine request private data.
   ///
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/voicecontrol.manager
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @param[in] callback    Callback function to register
-  /// @param[in] user_data   The user data to be passed to the callback function
+  /// **Privilege level:**
+  /// - platform
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VC_ERROR_NONE                Successful
-  /// @retval #VC_ERROR_NOT_SUPPORTED       VC not supported
-  /// @retval #VC_ERROR_PERMISSION_DENIED   Permission denied
-  /// @retval #VC_ERROR_INVALID_PARAMETER   Invalid parameter
-  /// @retval #VC_ERROR_INVALID_STATE       Invalid state
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/voicecontrol.manager>
   ///
-  /// @pre The state should be #VC_STATE_INITIALIZED.
+  /// **Parameters:**
+  /// - `callback` (in): Callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
   ///
-  /// @see vc_mgr_private_data_requested_cb()
-  /// @see vc_mgr_unset_private_data_requested_cb()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_NOT_SUPPORTED`: VC not supported
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_INITIALIZED`.
+  ///
+  /// **See also:**
+  /// - `vc_mgr_private_data_requested_cb()`
+  /// - `vc_mgr_unset_private_data_requested_cb()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int vc_mgr_set_private_data_requested_cb(
     vc_mgr_private_data_requested_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -1816,22 +2502,34 @@ class Tizen100VcManager {
           int Function(
               vc_mgr_private_data_requested_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @platform
-  /// @brief Unsets the callback function to be called when engine request private data.
-  /// @since_tizen 5.0
+  /// Unsets the callback function to be called when engine request private data.
   ///
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/voicecontrol.manager
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VC_ERROR_NONE                Successful
-  /// @retval #VC_ERROR_NOT_SUPPORTED       VC not supported
-  /// @retval #VC_ERROR_PERMISSION_DENIED   Permission denied
-  /// @retval #VC_ERROR_INVALID_STATE       Invalid state
+  /// **Privilege level:**
+  /// - platform
   ///
-  /// @pre The state should be #VC_STATE_INITIALIZED.
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/voicecontrol.manager>
   ///
-  /// @see vc_mgr_set_private_data_requested_cb()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_NOT_SUPPORTED`: VC not supported
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_INITIALIZED`.
+  ///
+  /// **See also:**
+  /// - `vc_mgr_set_private_data_requested_cb()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int vc_mgr_unset_private_data_requested_cb() {
     return _vc_mgr_unset_private_data_requested_cb();
   }
@@ -1842,27 +2540,40 @@ class Tizen100VcManager {
   late final _vc_mgr_unset_private_data_requested_cb =
       _vc_mgr_unset_private_data_requested_cbPtr.asFunction<int Function()>();
 
-  /// @platform
-  /// @brief Sets a callback function to be called when engine sends audio formats necessary for playing TTS feedback.
-  /// @since_tizen 5.0
+  /// Sets a callback function to be called when engine sends audio formats necessary for playing TTS feedback.
   ///
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/voicecontrol.manager
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @param[in] callback Callback function to set
-  /// @param[in] user_data The user data to be passed to the callback function
+  /// **Privilege level:**
+  /// - platform
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VC_ERROR_NONE               Successful
-  /// @retval #VC_ERROR_NOT_SUPPORTED      VC not supported
-  /// @retval #VC_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #VC_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #VC_ERROR_INVALID_STATE      Invalid state
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/voicecontrol.manager>
   ///
-  /// @pre The state should be #VC_STATE_INITIALIZED.
+  /// **Parameters:**
+  /// - `callback` (in): Callback function to set
+  /// - `user_data` (in): The user data to be passed to the callback function
   ///
-  /// @see vc_mgr_feedback_audio_format_cb()
-  /// @see vc_mgr_unset_feedback_audio_format_cb()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_NOT_SUPPORTED`: VC not supported
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_INITIALIZED`.
+  ///
+  /// **See also:**
+  /// - `vc_mgr_feedback_audio_format_cb()`
+  /// - `vc_mgr_unset_feedback_audio_format_cb()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int vc_mgr_set_feedback_audio_format_cb(
     vc_mgr_feedback_audio_format_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -1882,23 +2593,35 @@ class Tizen100VcManager {
           int Function(
               vc_mgr_feedback_audio_format_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @platform
-  /// @brief Unsets a callback function to be called when engine sends audio formats necessary for playing TTS feedback.
-  /// @since_tizen 5.0
+  /// Unsets a callback function to be called when engine sends audio formats necessary for playing TTS feedback.
   ///
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/voicecontrol.manager
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VC_ERROR_NONE               Successful
-  /// @retval #VC_ERROR_NOT_SUPPORTED      VC not supported
-  /// @retval #VC_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #VC_ERROR_INVALID_STATE      Invalid state
+  /// **Privilege level:**
+  /// - platform
   ///
-  /// @pre The state should be #VC_STATE_INITIALIZED.
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/voicecontrol.manager>
   ///
-  /// @see vc_mgr_feedback_audio_format_cb()
-  /// @see vc_mgr_set_feedback_audio_format_cb()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_NOT_SUPPORTED`: VC not supported
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_INITIALIZED`.
+  ///
+  /// **See also:**
+  /// - `vc_mgr_feedback_audio_format_cb()`
+  /// - `vc_mgr_set_feedback_audio_format_cb()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int vc_mgr_unset_feedback_audio_format_cb() {
     return _vc_mgr_unset_feedback_audio_format_cb();
   }
@@ -1909,27 +2632,40 @@ class Tizen100VcManager {
   late final _vc_mgr_unset_feedback_audio_format_cb =
       _vc_mgr_unset_feedback_audio_format_cbPtr.asFunction<int Function()>();
 
-  /// @platform
-  /// @brief Sets a callback function to be called when engine sends audio streaming for TTS feedback.
-  /// @since_tizen 5.0
+  /// Sets a callback function to be called when engine sends audio streaming for TTS feedback.
   ///
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/voicecontrol.manager
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @param[in] callback Callback function to set
-  /// @param[in] user_data The user data to be passed to the callback function
+  /// **Privilege level:**
+  /// - platform
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VC_ERROR_NONE               Successful
-  /// @retval #VC_ERROR_NOT_SUPPORTED      VC not supported
-  /// @retval #VC_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #VC_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #VC_ERROR_INVALID_STATE      Invalid state
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/voicecontrol.manager>
   ///
-  /// @pre The state should be #VC_STATE_INITIALIZED.
+  /// **Parameters:**
+  /// - `callback` (in): Callback function to set
+  /// - `user_data` (in): The user data to be passed to the callback function
   ///
-  /// @see vc_mgr_feedback_streaming_cb()
-  /// @see vc_mgr_unset_feedback_streaming_cb()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_NOT_SUPPORTED`: VC not supported
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_INITIALIZED`.
+  ///
+  /// **See also:**
+  /// - `vc_mgr_feedback_streaming_cb()`
+  /// - `vc_mgr_unset_feedback_streaming_cb()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int vc_mgr_set_feedback_streaming_cb(
     vc_mgr_feedback_streaming_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -1948,23 +2684,35 @@ class Tizen100VcManager {
       _vc_mgr_set_feedback_streaming_cbPtr.asFunction<
           int Function(vc_mgr_feedback_streaming_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @platform
-  /// @brief Unsets a callback function to be called when engine sends audio streaming for TTS feedback.
-  /// @since_tizen 5.0
+  /// Unsets a callback function to be called when engine sends audio streaming for TTS feedback.
   ///
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/voicecontrol.manager
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VC_ERROR_NONE               Successful
-  /// @retval #VC_ERROR_NOT_SUPPORTED      VC not supported
-  /// @retval #VC_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #VC_ERROR_INVALID_STATE      Invalid state
+  /// **Privilege level:**
+  /// - platform
   ///
-  /// @pre The state should be #VC_STATE_INITIALIZED.
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/voicecontrol.manager>
   ///
-  /// @see vc_mgr_feedback_streaming_cb()
-  /// @see vc_mgr_set_feedback_streaming_cb()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_NOT_SUPPORTED`: VC not supported
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_INITIALIZED`.
+  ///
+  /// **See also:**
+  /// - `vc_mgr_feedback_streaming_cb()`
+  /// - `vc_mgr_set_feedback_streaming_cb()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int vc_mgr_unset_feedback_streaming_cb() {
     return _vc_mgr_unset_feedback_streaming_cb();
   }
@@ -1975,28 +2723,40 @@ class Tizen100VcManager {
   late final _vc_mgr_unset_feedback_streaming_cb =
       _vc_mgr_unset_feedback_streaming_cbPtr.asFunction<int Function()>();
 
-  /// @platform
-  /// @brief Starts getting TTS feedback streaming data from the buffer.
-  /// @since_tizen 5.0
+  /// Starts getting TTS feedback streaming data from the buffer.
   ///
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/voicecontrol.manager
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @remarks In order to get TTS feedback streaming data, the application should set 'vc_mgr_feedback_streaming_cb()' using vc_mgr_set_feedback_streaming_cb().
+  /// **Privilege level:**
+  /// - platform
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VC_ERROR_NONE               Successful
-  /// @retval #VC_ERROR_NOT_SUPPORTED      VC not supported
-  /// @retval #VC_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #VC_ERROR_INVALID_STATE      Invalid state
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/voicecontrol.manager>
   ///
-  /// @pre The state should be #VC_STATE_READY. \n
-  /// 'vc_mgr_feedback_streaming_cb()' should be registered.
+  /// **Remarks:**
+  /// - In order to get TTS feedback streaming data, the application should set 'vc_mgr_feedback_streaming_cb()' using vc_mgr_set_feedback_streaming_cb().
   ///
-  /// @see vc_mgr_feedback_streaming_cb()
-  /// @see vc_mgr_set_feedback_streaming_cb()
-  /// @see vc_mgr_unset_feedback_streaming_cb()
-  /// @see vc_mgr_stop_feedback()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_NOT_SUPPORTED`: VC not supported
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_READY`. 'vc_mgr_feedback_streaming_cb()' should be registered.
+  ///
+  /// **See also:**
+  /// - `vc_mgr_feedback_streaming_cb()`
+  /// - `vc_mgr_set_feedback_streaming_cb()`
+  /// - `vc_mgr_unset_feedback_streaming_cb()`
+  /// - `vc_mgr_stop_feedback()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int vc_mgr_start_feedback() {
     return _vc_mgr_start_feedback();
   }
@@ -2006,25 +2766,37 @@ class Tizen100VcManager {
   late final _vc_mgr_start_feedback =
       _vc_mgr_start_feedbackPtr.asFunction<int Function()>();
 
-  /// @platform
-  /// @brief Stops getting and removes TTS feedback streaming data from the buffer.
-  /// @since_tizen 5.0
+  /// Stops getting and removes TTS feedback streaming data from the buffer.
   ///
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/voicecontrol.manager
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VC_ERROR_NONE               Successful
-  /// @retval #VC_ERROR_NOT_SUPPORTED      VC not supported
-  /// @retval #VC_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #VC_ERROR_INVALID_STATE      Invalid state
+  /// **Privilege level:**
+  /// - platform
   ///
-  /// @pre The state should be #VC_STATE_READY.
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/voicecontrol.manager>
   ///
-  /// @see vc_mgr_feedback_streaming_cb()
-  /// @see vc_mgr_set_feedback_streaming_cb()
-  /// @see vc_mgr_unset_feedback_streaming_cb()
-  /// @see vc_mgr_start_feedback()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_NOT_SUPPORTED`: VC not supported
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_READY`.
+  ///
+  /// **See also:**
+  /// - `vc_mgr_feedback_streaming_cb()`
+  /// - `vc_mgr_set_feedback_streaming_cb()`
+  /// - `vc_mgr_unset_feedback_streaming_cb()`
+  /// - `vc_mgr_start_feedback()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int vc_mgr_stop_feedback() {
     return _vc_mgr_stop_feedback();
   }
@@ -2034,27 +2806,40 @@ class Tizen100VcManager {
   late final _vc_mgr_stop_feedback =
       _vc_mgr_stop_feedbackPtr.asFunction<int Function()>();
 
-  /// @platform
-  /// @brief Sets TTS streaming callback function.
-  /// @since_tizen 5.0
+  /// Sets TTS streaming callback function.
   ///
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/voicecontrol.manager
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @param[in] callback The callback function
-  /// @param[in] user_data The user data to be passed to the callback function
+  /// **Privilege level:**
+  /// - platform
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VC_ERROR_NONE               Successful
-  /// @retval #VC_ERROR_NOT_SUPPORTED      VC not supported
-  /// @retval #VC_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #VC_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #VC_ERROR_INVALID_STATE      Invalid state
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/voicecontrol.manager>
   ///
-  /// @pre The state should be #VC_STATE_INITIALIZED.
+  /// **Parameters:**
+  /// - `callback` (in): The callback function
+  /// - `user_data` (in): The user data to be passed to the callback function
   ///
-  /// @see vc_mgr_vc_tts_streaming_cb()
-  /// @see vc_mgr_unset_vc_tts_streaming_cb()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_NOT_SUPPORTED`: VC not supported
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_INITIALIZED`.
+  ///
+  /// **See also:**
+  /// - `vc_mgr_vc_tts_streaming_cb()`
+  /// - `vc_mgr_unset_vc_tts_streaming_cb()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int vc_mgr_set_vc_tts_streaming_cb(
     vc_mgr_vc_tts_streaming_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -2073,23 +2858,35 @@ class Tizen100VcManager {
       _vc_mgr_set_vc_tts_streaming_cbPtr.asFunction<
           int Function(vc_mgr_vc_tts_streaming_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @platform
-  /// @brief Unsets TTS streaming callback function.
-  /// @since_tizen 5.0
+  /// Unsets TTS streaming callback function.
   ///
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/voicecontrol.manager
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VC_ERROR_NONE               Successful
-  /// @retval #VC_ERROR_NOT_SUPPORTED      VC not supported
-  /// @retval #VC_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #VC_ERROR_INVALID_STATE      Invalid state
+  /// **Privilege level:**
+  /// - platform
   ///
-  /// @pre The state should be #VC_STATE_INITIALIZED.
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/voicecontrol.manager>
   ///
-  /// @see vc_mgr_vc_tts_streaming_cb()
-  /// @see vc_mgr_set_vc_tts_streaming_cb()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_NOT_SUPPORTED`: VC not supported
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_INITIALIZED`.
+  ///
+  /// **See also:**
+  /// - `vc_mgr_vc_tts_streaming_cb()`
+  /// - `vc_mgr_set_vc_tts_streaming_cb()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int vc_mgr_unset_vc_tts_streaming_cb() {
     return _vc_mgr_unset_vc_tts_streaming_cb();
   }
@@ -2100,27 +2897,39 @@ class Tizen100VcManager {
   late final _vc_mgr_unset_vc_tts_streaming_cb =
       _vc_mgr_unset_vc_tts_streaming_cbPtr.asFunction<int Function()>();
 
-  /// @platform
-  /// @brief Sends the utterance status to the VC client.
-  /// @since_tizen 6.0
+  /// Sends the utterance status to the VC client.
   ///
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/voicecontrol.manager
+  /// **Since Tizen:**
+  /// - 6.0
   ///
-  /// @param[in] pid The process id of the VC client
-  /// @param[in] utt_id The utterance id
-  /// @param[in] utt_status The utterance status
+  /// **Privilege level:**
+  /// - platform
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VC_ERROR_NONE                Successful
-  /// @retval #VC_ERROR_NOT_SUPPORTED       VC not supported
-  /// @retval #VC_ERROR_PERMISSION_DENIED   Permission denied
-  /// @retval #VC_ERROR_INVALID_PARAMETER   Invalid parameter
-  /// @retval #VC_ERROR_OUT_OF_MEMORY       Not enough memory
-  /// @retval #VC_ERROR_INVALID_STATE       Invalid state
-  /// @retval #VC_ERROR_OPERATION_FAILED    Operation fail
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/voicecontrol.manager>
   ///
-  /// @pre The service state should be #VC_SERVICE_STATE_READY.
+  /// **Parameters:**
+  /// - `pid` (in): The process id of the VC client
+  /// - `utt_id` (in): The utterance id
+  /// - `utt_status` (in): The utterance status
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_NOT_SUPPORTED`: VC not supported
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_OUT_OF_MEMORY`: Not enough memory
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  /// - `VC_ERROR_OPERATION_FAILED`: Operation fail
+  ///
+  /// **Preconditions:**
+  /// - The service state should be `VC_SERVICE_STATE_READY`.
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int vc_mgr_send_utterance_status(
     int pid,
     int utt_id,
@@ -2139,30 +2948,44 @@ class Tizen100VcManager {
   late final _vc_mgr_send_utterance_status = _vc_mgr_send_utterance_statusPtr
       .asFunction<int Function(int, int, int)>();
 
-  /// @platform
-  /// @brief Sends audio streaming to the engine service.
-  /// @details Using this function, the developer can send audio streaming after vc_mgr_start() function is called.
-  /// @since_tizen 6.0
+  /// Sends audio streaming to the engine service.
   ///
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/voicecontrol.manager
+  /// Using this function, the developer can send audio streaming after vc_mgr_start() function is called.
   ///
-  /// @param[in] event Audio streaming event (e.g. #VC_AUDIO_STREAMING_EVENT_START, #VC_AUDIO_STREAMING_EVENT_CONTINUE)
-  /// @param[in] buffer Audio streaming data
-  /// @param[in] len Length of the audio streaming data
+  /// **Since Tizen:**
+  /// - 6.0
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VC_ERROR_NONE                Successful
-  /// @retval #VC_ERROR_NOT_SUPPORTED       VC not supported
-  /// @retval #VC_ERROR_PERMISSION_DENIED   Permission denied
-  /// @retval #VC_ERROR_INVALID_PARAMETER   Invalid parameter
-  /// @retval #VC_ERROR_OUT_OF_MEMORY       Not enough memory
-  /// @retval #VC_ERROR_INVALID_STATE       Invalid state
-  /// @retval #VC_ERROR_OPERATION_FAILED    Operation fail
+  /// **Privilege level:**
+  /// - platform
   ///
-  /// @pre The state should be #VC_SERVICE_STATE_RECORDING.
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/voicecontrol.manager>
   ///
-  /// @see vc_mgr_set_audio_streaming_mode()
+  /// **Parameters:**
+  /// - `event` (in): Audio streaming event (e.g. `VC_AUDIO_STREAMING_EVENT_START`, `VC_AUDIO_STREAMING_EVENT_CONTINUE`)
+  /// - `buffer` (in): Audio streaming data
+  /// - `len` (in): Length of the audio streaming data
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_NOT_SUPPORTED`: VC not supported
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_OUT_OF_MEMORY`: Not enough memory
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  /// - `VC_ERROR_OPERATION_FAILED`: Operation fail
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_SERVICE_STATE_RECORDING`.
+  ///
+  /// **See also:**
+  /// - `vc_mgr_set_audio_streaming_mode()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int vc_mgr_send_audio_streaming(
     int event,
     ffi.Pointer<ffi.UnsignedChar> buffer,
@@ -2182,29 +3005,43 @@ class Tizen100VcManager {
   late final _vc_mgr_send_audio_streaming = _vc_mgr_send_audio_streamingPtr
       .asFunction<int Function(int, ffi.Pointer<ffi.UnsignedChar>, int)>();
 
-  /// @platform
-  /// @brief Sets audio streaming mode.
-  /// @since_tizen 6.0
+  /// Sets audio streaming mode.
   ///
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/voicecontrol.manager
+  /// **Since Tizen:**
+  /// - 6.0
   ///
-  /// @remarks The default audio streaming mode is #VC_AUDIO_STREAMING_MODE_VC_SERVICE. \n
-  /// If you want to use other mode, you can set mode with vc_mgr_set_audio_streaming_mode().
+  /// **Privilege level:**
+  /// - platform
   ///
-  /// @param[in] mode Audio streaming mode
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/voicecontrol.manager>
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VC_ERROR_NONE                Successful
-  /// @retval #VC_ERROR_NOT_SUPPORTED       VC not supported
-  /// @retval #VC_ERROR_PERMISSION_DENIED   Permission denied
-  /// @retval #VC_ERROR_INVALID_PARAMETER   Invalid parameter
-  /// @retval #VC_ERROR_INVALID_STATE       Invalid state
-  /// @retval #VC_ERROR_OPERATION_FAILED    Operation fail
+  /// **Remarks:**
+  /// - The default audio streaming mode is `VC_AUDIO_STREAMING_MODE_VC_SERVICE`.
+  /// - If you want to use other mode, you can set mode with vc_mgr_set_audio_streaming_mode().
   ///
-  /// @pre The state should be #VC_STATE_INITIALIZED or #VC_SERVICE_STATE_READY.
+  /// **Parameters:**
+  /// - `mode` (in): Audio streaming mode
   ///
-  /// @see vc_mgr_send_audio_streaming()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_NOT_SUPPORTED`: VC not supported
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  /// - `VC_ERROR_OPERATION_FAILED`: Operation fail
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_INITIALIZED` or `VC_SERVICE_STATE_READY`.
+  ///
+  /// **See also:**
+  /// - `vc_mgr_send_audio_streaming()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int vc_mgr_set_audio_streaming_mode(
     int mode,
   ) {
@@ -2219,33 +3056,46 @@ class Tizen100VcManager {
   late final _vc_mgr_set_audio_streaming_mode =
       _vc_mgr_set_audio_streaming_modePtr.asFunction<int Function(int)>();
 
-  /// @platform
-  /// @brief Changes background volume.
-  /// @since_tizen 6.0
+  /// Changes background volume.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/volume.set
+  /// **Since Tizen:**
+  /// - 6.0
   ///
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/voicecontrol.manager
+  /// **Privilege level:**
+  /// - public
+  /// - platform
   ///
-  /// @remarks If @a event is #VC_BACKGROUND_VOLUME_EVENT_CHANGE_FOR_NEARFIELD, the background volume will be reduced by 70%.
-  /// And, if @a event is #VC_BACKGROUND_VOLUME_EVENT_CHANGE_FOR_FARFIELD, the background volume will be muted.
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/volume.set>
+  /// - <http://tizen.org/privilege/voicecontrol.manager>
   ///
-  /// @param[in] event The background volume event
+  /// **Remarks:**
+  /// - If `event` is `VC_BACKGROUND_VOLUME_EVENT_CHANGE_FOR_NEARFIELD`, the background volume will be reduced by 70%.
+  /// - And, if `event` is `VC_BACKGROUND_VOLUME_EVENT_CHANGE_FOR_FARFIELD`, the background volume will be muted.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VC_ERROR_NONE                Successful
-  /// @retval #VC_ERROR_NOT_SUPPORTED       VC not supported
-  /// @retval #VC_ERROR_PERMISSION_DENIED   Permission denied
-  /// @retval #VC_ERROR_INVALID_PARAMETER   Invalid parameter
-  /// @retval #VC_ERROR_INVALID_STATE       Invalid state
-  /// @retval #VC_ERROR_OPERATION_FAILED    Operation fail
+  /// **Parameters:**
+  /// - `event` (in): The background volume event
   ///
-  /// @pre The state should be #VC_STATE_INITIALIZED or #VC_STATE_READY.
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
   ///
-  /// @see vc_mgr_reset_background_volume()
-  /// @see vc_mgr_change_background_volume_by_ratio()
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_NOT_SUPPORTED`: VC not supported
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  /// - `VC_ERROR_OPERATION_FAILED`: Operation fail
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_INITIALIZED` or `VC_STATE_READY`.
+  ///
+  /// **See also:**
+  /// - `vc_mgr_reset_background_volume()`
+  /// - `vc_mgr_change_background_volume_by_ratio()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int vc_mgr_change_background_volume(
     int event,
   ) {
@@ -2260,31 +3110,44 @@ class Tizen100VcManager {
   late final _vc_mgr_change_background_volume =
       _vc_mgr_change_background_volumePtr.asFunction<int Function(int)>();
 
-  /// @platform
-  /// @brief Changes background volume ratio.
-  /// @details Calling this function sets the background volume to a given percentage of its current value.
-  /// @since_tizen 6.0
+  /// Changes background volume ratio.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/volume.set
+  /// Calling this function sets the background volume to a given percentage of its current value.
   ///
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/voicecontrol.manager
+  /// **Since Tizen:**
+  /// - 6.0
   ///
-  /// @param[in] ratio Current background volume ratio (Range 0.0 ~ 1.0)
+  /// **Privilege level:**
+  /// - public
+  /// - platform
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VC_ERROR_NONE                Successful
-  /// @retval #VC_ERROR_NOT_SUPPORTED       VC not supported
-  /// @retval #VC_ERROR_PERMISSION_DENIED   Permission denied
-  /// @retval #VC_ERROR_INVALID_PARAMETER   Invalid parameter
-  /// @retval #VC_ERROR_INVALID_STATE       Invalid state
-  /// @retval #VC_ERROR_OPERATION_FAILED    Operation fail
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/volume.set>
+  /// - <http://tizen.org/privilege/voicecontrol.manager>
   ///
-  /// @pre The state should be #VC_STATE_INITIALIZED or #VC_STATE_READY.
+  /// **Parameters:**
+  /// - `ratio` (in): Current background volume ratio (Range 0.0 ~ 1.0)
   ///
-  /// @see vc_mgr_change_background_volume()
-  /// @see vc_mgr_reset_background_volume()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_NOT_SUPPORTED`: VC not supported
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  /// - `VC_ERROR_OPERATION_FAILED`: Operation fail
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_INITIALIZED` or `VC_STATE_READY`.
+  ///
+  /// **See also:**
+  /// - `vc_mgr_change_background_volume()`
+  /// - `vc_mgr_reset_background_volume()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int vc_mgr_change_background_volume_by_ratio(
     double ratio,
   ) {
@@ -2300,28 +3163,40 @@ class Tizen100VcManager {
       _vc_mgr_change_background_volume_by_ratioPtr
           .asFunction<int Function(double)>();
 
-  /// @platform
-  /// @brief Resets background volume.
-  /// @details This function reverts all changes made by vc_mgr_change_background_volume() and vc_mgr_change_background_volume_by_ratio().
-  /// @since_tizen 6.0
+  /// Resets background volume.
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/volume.set
+  /// This function reverts all changes made by vc_mgr_change_background_volume() and vc_mgr_change_background_volume_by_ratio().
   ///
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/voicecontrol.manager
+  /// **Since Tizen:**
+  /// - 6.0
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VC_ERROR_NONE                Successful
-  /// @retval #VC_ERROR_NOT_SUPPORTED       VC not supported
-  /// @retval #VC_ERROR_PERMISSION_DENIED   Permission denied
-  /// @retval #VC_ERROR_INVALID_STATE       Invalid state
-  /// @retval #VC_ERROR_OPERATION_FAILED    Operation fail
+  /// **Privilege level:**
+  /// - public
+  /// - platform
   ///
-  /// @pre The state should be #VC_STATE_INITIALIZED or #VC_STATE_READY.
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/volume.set>
+  /// - <http://tizen.org/privilege/voicecontrol.manager>
   ///
-  /// @see vc_mgr_change_background_volume()
-  /// @see vc_mgr_change_background_volume_by_ratio()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VC_ERROR_NONE`: Successful
+  /// - `VC_ERROR_NOT_SUPPORTED`: VC not supported
+  /// - `VC_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VC_ERROR_INVALID_STATE`: Invalid state
+  /// - `VC_ERROR_OPERATION_FAILED`: Operation fail
+  ///
+  /// **Preconditions:**
+  /// - The state should be `VC_STATE_INITIALIZED` or `VC_STATE_READY`.
+  ///
+  /// **See also:**
+  /// - `vc_mgr_change_background_volume()`
+  /// - `vc_mgr_change_background_volume_by_ratio()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int vc_mgr_reset_background_volume() {
     return _vc_mgr_reset_background_volume();
   }
@@ -2333,8 +3208,11 @@ class Tizen100VcManager {
       _vc_mgr_reset_background_volumePtr.asFunction<int Function()>();
 }
 
-/// @brief Enumeration of recognition mode.
-/// @since_tizen 5.0
+/// Enumeration of recognition mode.
+///
+/// **Since Tizen:**
+/// - 5.0
+/// @nodoc
 abstract class vc_recognition_mode_e {
   /// < Default mode
   static const int VC_RECOGNITION_MODE_STOP_BY_SILENCE = 0;
@@ -2349,8 +3227,11 @@ abstract class vc_recognition_mode_e {
   static const int VC_RECOGNITION_MODE_MANUAL = 3;
 }
 
-/// @brief Enumeration of send event type.
-/// @since_tizen 5.0
+/// Enumeration of send event type.
+///
+/// **Since Tizen:**
+/// - 5.0
+/// @nodoc
 abstract class vc_send_event_type_e {
   /// < Send text event to VC engine
   static const int VC_SEND_EVENT_TYPE_TEXT = 0;
@@ -2362,8 +3243,11 @@ abstract class vc_send_event_type_e {
   static const int VC_SEND_EVENT_TYPE_HAPTIC_EVENT = 2;
 }
 
-/// @brief Enumeration of pre result event.
-/// @since_tizen 5.0
+/// Enumeration of pre result event.
+///
+/// **Since Tizen:**
+/// - 5.0
+/// @nodoc
 abstract class vc_pre_result_event_e {
   /// < Pre-result event for final result
   static const int VC_PRE_RESULT_EVENT_FINAL_RESULT = 0;
@@ -2375,8 +3259,11 @@ abstract class vc_pre_result_event_e {
   static const int VC_PRE_RESULT_EVENT_ERROR = 2;
 }
 
-/// @brief Enumeration of audio streaming event.
-/// @since_tizen 6.0
+/// Enumeration of audio streaming event.
+///
+/// **Since Tizen:**
+/// - 6.0
+/// @nodoc
 abstract class vc_audio_streaming_event_e {
   /// < Failed
   static const int VC_AUDIO_STREAMING_EVENT_FAIL = -1;
@@ -2391,8 +3278,11 @@ abstract class vc_audio_streaming_event_e {
   static const int VC_AUDIO_STREAMING_EVENT_FINISH = 3;
 }
 
-/// @brief Enumeration of audio streaming mode.
-/// @since_tizen 6.0
+/// Enumeration of audio streaming mode.
+///
+/// **Since Tizen:**
+/// - 6.0
+/// @nodoc
 abstract class vc_audio_streaming_mode_e {
   /// < Use audio recording from VC service
   static const int VC_AUDIO_STREAMING_MODE_VC_SERVICE = 0;
@@ -2404,8 +3294,11 @@ abstract class vc_audio_streaming_mode_e {
   static const int VC_AUDIO_STREAMING_MODE_OUTSIDE = 2;
 }
 
-/// @brief Enumeration of background volume event.
-/// @since_tizen 6.0
+/// Enumeration of background volume event.
+///
+/// **Since Tizen:**
+/// - 6.0
+/// @nodoc
 abstract class vc_background_volume_event_e {
   /// < Background volume event for near-field
   static const int VC_BACKGROUND_VOLUME_EVENT_CHANGE_FOR_NEARFIELD = 0;
@@ -2414,8 +3307,11 @@ abstract class vc_background_volume_event_e {
   static const int VC_BACKGROUND_VOLUME_EVENT_CHANGE_FOR_FARFIELD = 1;
 }
 
-/// @brief Enumeration for client state.
-/// @since_tizen 2.4
+/// Enumeration for client state.
+///
+/// **Since Tizen:**
+/// - 2.4
+/// @nodoc
 abstract class _vc_state_e {
   /// < 'None' state
   static const int VC_STATE_NONE = 0;
@@ -2427,8 +3323,11 @@ abstract class _vc_state_e {
   static const int VC_STATE_READY = 2;
 }
 
-/// @brief Enumeration for service state.
-/// @since_tizen 2.4
+/// Enumeration for service state.
+///
+/// **Since Tizen:**
+/// - 2.4
+/// @nodoc
 abstract class _vc_service_state_e {
   /// < 'None' state
   static const int VC_SERVICE_STATE_NONE = 0;
@@ -2443,31 +3342,42 @@ abstract class _vc_service_state_e {
   static const int VC_SERVICE_STATE_PROCESSING = 3;
 }
 
-/// @brief Called when client gets the all recognition results from voice control service.
-/// @since_tizen 5.0
+/// Called when client gets the all recognition results from voice control service.
 ///
-/// @remarks The @a vc_cmd_list should not be released. It is managed by the framework and will be released when invoking this callback is finished. \n
-/// The @a result and @a msg are also managed by the framework and will be released when invoking this callback is finished.
+/// **Since Tizen:**
+/// - 5.0
 ///
-/// @param[in] event         The result event
-/// @param[in] vc_cmd_list   Command list handle
-/// @param[in] result        Command text
-/// @param[in] msg           Engine message (e.g. #VC_RESULT_MESSAGE_NONE, #VC_RESULT_MESSAGE_ERROR_TOO_LOUD)
-/// @param[in] user_data     The user data passed from the callback registration function
+/// **Remarks:**
+/// - The `vc_cmd_list` should not be released. It is managed by the framework and will be released when invoking this callback is finished.
+/// - The `result` and `msg` are also managed by the framework and will be released when invoking this callback is finished.
 ///
-/// @return @c true to release command to client, \n @c false to wait for selecting command.
-/// @pre An application registers callback function using vc_mgr_set_all_result_cb().
+/// **Parameters:**
+/// - `event` (in): The result event
+/// - `vc_cmd_list` (in): Command list handle
+/// - `result` (in): Command text
+/// - `msg` (in): Engine message (e.g. `VC_RESULT_MESSAGE_NONE`, `VC_RESULT_MESSAGE_ERROR_TOO_LOUD`)
+/// - `user_data` (in): The user data passed from the callback registration function
 ///
-/// @see vc_mgr_set_all_result_cb()
-/// @see vc_mgr_unset_all_result_cb()
+/// **Returns:**
+/// - `true` to release command to client, `false` to wait for selecting command.
+///
+/// **Preconditions:**
+/// - An application registers callback function using vc_mgr_set_all_result_cb().
+///
+/// **See also:**
+/// - `vc_mgr_set_all_result_cb()`
+/// - `vc_mgr_unset_all_result_cb()`
+/// @nodoc
 typedef vc_mgr_all_result_cb
     = ffi.Pointer<ffi.NativeFunction<vc_mgr_all_result_cbFunction>>;
+/// @nodoc
 typedef vc_mgr_all_result_cbFunction = ffi.Bool Function(
     ffi.Int32 event,
     vc.vc_cmd_list_h vc_cmd_list,
     ffi.Pointer<ffi.Char> result,
     ffi.Pointer<ffi.Char> msg,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartvc_mgr_all_result_cbFunction = bool Function(
     int event,
     vc.vc_cmd_list_h vc_cmd_list,
@@ -2475,8 +3385,11 @@ typedef Dartvc_mgr_all_result_cbFunction = bool Function(
     ffi.Pointer<ffi.Char> msg,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Enumeration for result event.
-/// @since_tizen 2.4
+/// Enumeration for result event.
+///
+/// **Since Tizen:**
+/// - 2.4
+/// @nodoc
 abstract class _vc_result_event_e {
   /// < Normal result
   static const int VC_RESULT_EVENT_RESULT_SUCCESS = 0;
@@ -2485,92 +3398,127 @@ abstract class _vc_result_event_e {
   static const int VC_RESULT_EVENT_REJECTED = 1;
 }
 
-/// @brief Called when client gets the pre recognition results (partial ASR) from voice control service.
-/// @since_tizen 5.0
+/// Called when client gets the pre recognition results (partial ASR) from voice control service.
 ///
-/// @remarks The @a result is managed by the framework and will be released when invoking this callback is finished.
+/// **Since Tizen:**
+/// - 5.0
 ///
-/// @param[in] event       The pre result event
-/// @param[in] result      ASR text
-/// @param[in] user_data   The user data passed from the callback registration function
+/// **Remarks:**
+/// - The `result` is managed by the framework and will be released when invoking this callback is finished.
 ///
-/// @pre An application registers callback function using vc_mgr_set_pre_result_cb().
+/// **Parameters:**
+/// - `event` (in): The pre result event
+/// - `result` (in): ASR text
+/// - `user_data` (in): The user data passed from the callback registration function
 ///
-/// @see vc_mgr_set_pre_result_cb()
-/// @see vc_mgr_unset_pre_result_cb()
+/// **Preconditions:**
+/// - An application registers callback function using vc_mgr_set_pre_result_cb().
+///
+/// **See also:**
+/// - `vc_mgr_set_pre_result_cb()`
+/// - `vc_mgr_unset_pre_result_cb()`
+/// @nodoc
 typedef vc_mgr_pre_result_cb
     = ffi.Pointer<ffi.NativeFunction<vc_mgr_pre_result_cbFunction>>;
+/// @nodoc
 typedef vc_mgr_pre_result_cbFunction = ffi.Void Function(ffi.Int32 event,
     ffi.Pointer<ffi.Char> result, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartvc_mgr_pre_result_cbFunction = void Function(
     int event, ffi.Pointer<ffi.Char> result, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when client gets the specific engine's result from vc-service.
-/// @since_tizen 5.0
+/// Called when client gets the specific engine's result from vc-service.
 ///
-/// @remarks The @a engine_app_id, @a event and @a result are managed by the framework and will be released when invoking this callback is finished.
+/// **Since Tizen:**
+/// - 5.0
 ///
-/// @param[in] engine_app_id The specific engine's app id
-/// @param[in] event The specific engine event type
-/// @param[in] result The specific engine result
-/// @param[in] user_data The user data passed from the callback registration function
+/// **Remarks:**
+/// - The `engine_app_id`, `event` and `result` are managed by the framework and will be released when invoking this callback is finished.
 ///
-/// @pre An application registers callback function using vc_mgr_set_specific_engine_result_cb().
+/// **Parameters:**
+/// - `engine_app_id` (in): The specific engine's app id
+/// - `event` (in): The specific engine event type
+/// - `result` (in): The specific engine result
+/// - `user_data` (in): The user data passed from the callback registration function
 ///
-/// @see vc_mgr_set_specific_engine_result_cb()
-/// @see vc_mgr_unset_specific_engine_result_cb()
+/// **Preconditions:**
+/// - An application registers callback function using vc_mgr_set_specific_engine_result_cb().
+///
+/// **See also:**
+/// - `vc_mgr_set_specific_engine_result_cb()`
+/// - `vc_mgr_unset_specific_engine_result_cb()`
+/// @nodoc
 typedef vc_mgr_specific_engine_result_cb
     = ffi.Pointer<ffi.NativeFunction<vc_mgr_specific_engine_result_cbFunction>>;
+/// @nodoc
 typedef vc_mgr_specific_engine_result_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> engine_app_id,
     ffi.Pointer<ffi.Char> event,
     ffi.Pointer<ffi.Char> result,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartvc_mgr_specific_engine_result_cbFunction = void Function(
     ffi.Pointer<ffi.Char> engine_app_id,
     ffi.Pointer<ffi.Char> event,
     ffi.Pointer<ffi.Char> result,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when user speaking is detected.
-/// @since_tizen 5.0
+/// Called when user speaking is detected.
 ///
-/// @param[in] user_data   The user data passed from the callback registration function
+/// **Since Tizen:**
+/// - 5.0
 ///
-/// @pre An application registers callback function using vc_mgr_set_speech_detected_cb().
+/// **Parameters:**
+/// - `user_data` (in): The user data passed from the callback registration function
 ///
-/// @see vc_mgr_set_speech_detected_cb()
-/// @see vc_mgr_unset_speech_detected_cb()
+/// **Preconditions:**
+/// - An application registers callback function using vc_mgr_set_speech_detected_cb().
+///
+/// **See also:**
+/// - `vc_mgr_set_speech_detected_cb()`
+/// - `vc_mgr_unset_speech_detected_cb()`
+/// @nodoc
 typedef vc_mgr_begin_speech_detected_cb
     = ffi.Pointer<ffi.NativeFunction<vc_mgr_begin_speech_detected_cbFunction>>;
+/// @nodoc
 typedef vc_mgr_begin_speech_detected_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartvc_mgr_begin_speech_detected_cbFunction = void Function(
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when an application (VC client) requests dialog.
-/// @since_tizen 5.0
+/// Called when an application (VC client) requests dialog.
 ///
-/// @remarks The @a disp_text and @a utt_text are managed by the framework and will be released when invoking this callback is finished.
+/// **Since Tizen:**
+/// - 5.0
 ///
-/// @param[in] pid          Pid of VC client to request dialog
-/// @param[in] disp_text    Text requested to be displayed
-/// @param[in] utt_text     Text requested to be spoken
-/// @param[in] continuous   Continue dialog session
-/// @param[in] user_data    The user data passed from the callback registration function
+/// **Remarks:**
+/// - The `disp_text` and `utt_text` are managed by the framework and will be released when invoking this callback is finished.
 ///
-/// @pre An application registers callback function using vc_mgr_set_dialog_request_cb().
+/// **Parameters:**
+/// - `pid` (in): Pid of VC client to request dialog
+/// - `disp_text` (in): Text requested to be displayed
+/// - `utt_text` (in): Text requested to be spoken
+/// - `continuous` (in): Continue dialog session
+/// - `user_data` (in): The user data passed from the callback registration function
 ///
-/// @see vc_mgr_set_dialog_request_cb()
-/// @see vc_mgr_unset_dialog_request_cb()
+/// **Preconditions:**
+/// - An application registers callback function using vc_mgr_set_dialog_request_cb().
+///
+/// **See also:**
+/// - `vc_mgr_set_dialog_request_cb()`
+/// - `vc_mgr_unset_dialog_request_cb()`
+/// @nodoc
 typedef vc_mgr_dialog_request_cb
     = ffi.Pointer<ffi.NativeFunction<vc_mgr_dialog_request_cbFunction>>;
+/// @nodoc
 typedef vc_mgr_dialog_request_cbFunction = ffi.Void Function(
     ffi.Int pid,
     ffi.Pointer<ffi.Char> disp_text,
     ffi.Pointer<ffi.Char> utt_text,
     ffi.Bool continuous,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartvc_mgr_dialog_request_cbFunction = void Function(
     int pid,
     ffi.Pointer<ffi.Char> disp_text,
@@ -2578,78 +3526,107 @@ typedef Dartvc_mgr_dialog_request_cbFunction = void Function(
     bool continuous,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when engine sets private data to manager client.
-/// @since_tizen 5.0
+/// Called when engine sets private data to manager client.
 ///
-/// @remarks The @a key and @a data are managed by the framework and will be released when invoking this callback is finished.
+/// **Since Tizen:**
+/// - 5.0
 ///
-/// @param[in] key         Private key
-/// @param[in] data        Private data
-/// @param[in] user_data   The user data passed from the callback registration function
+/// **Remarks:**
+/// - The `key` and `data` are managed by the framework and will be released when invoking this callback is finished.
 ///
-/// @pre An application registers callback function using vc_mgr_set_private_data_set_cb().
+/// **Parameters:**
+/// - `key` (in): Private key
+/// - `data` (in): Private data
+/// - `user_data` (in): The user data passed from the callback registration function
 ///
-/// @see vc_mgr_set_private_data_set_cb()
-/// @see vc_mgr_unset_private_data_set_cb()
+/// **Preconditions:**
+/// - An application registers callback function using vc_mgr_set_private_data_set_cb().
+///
+/// **See also:**
+/// - `vc_mgr_set_private_data_set_cb()`
+/// - `vc_mgr_unset_private_data_set_cb()`
+/// @nodoc
 typedef vc_mgr_private_data_set_cb
     = ffi.Pointer<ffi.NativeFunction<vc_mgr_private_data_set_cbFunction>>;
+/// @nodoc
 typedef vc_mgr_private_data_set_cbFunction = ffi.Int Function(
     ffi.Pointer<ffi.Char> key,
     ffi.Pointer<ffi.Char> data,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartvc_mgr_private_data_set_cbFunction = int Function(
     ffi.Pointer<ffi.Char> key,
     ffi.Pointer<ffi.Char> data,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when engine requests private data from manager client.
-/// @since_tizen 5.0
+/// Called when engine requests private data from manager client.
 ///
-/// @remarks The @a data should not be released. The @a data and @a key are managed by the framework and will be released when invoking this callback is finished.
+/// **Since Tizen:**
+/// - 5.0
 ///
-/// @param[in]  key         Private key
-/// @param[out] data        Private data
-/// @param[in]  user_data   The user data passed from the callback registration function
+/// **Remarks:**
+/// - The `data` should not be released. The `data` and `key` are managed by the framework and will be released when invoking this callback is finished.
 ///
-/// @pre An application registers callback function using vc_mgr_set_private_data_requested_cb().
+/// **Parameters:**
+/// - `key` (in): Private key
+/// - `data` (out): Private data
+/// - `user_data` (in): The user data passed from the callback registration function
 ///
-/// @see vc_mgr_set_private_data_requested_cb()
-/// @see vc_mgr_unset_private_data_requested_cb()
+/// **Preconditions:**
+/// - An application registers callback function using vc_mgr_set_private_data_requested_cb().
+///
+/// **See also:**
+/// - `vc_mgr_set_private_data_requested_cb()`
+/// - `vc_mgr_unset_private_data_requested_cb()`
+/// @nodoc
 typedef vc_mgr_private_data_requested_cb
     = ffi.Pointer<ffi.NativeFunction<vc_mgr_private_data_requested_cbFunction>>;
+/// @nodoc
 typedef vc_mgr_private_data_requested_cbFunction = ffi.Int Function(
     ffi.Pointer<ffi.Char> key,
     ffi.Pointer<ffi.Pointer<ffi.Char>> data,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartvc_mgr_private_data_requested_cbFunction = int Function(
     ffi.Pointer<ffi.Char> key,
     ffi.Pointer<ffi.Pointer<ffi.Char>> data,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when engine sends audio formats necessary for playing TTS feedback.
-/// @since_tizen 5.0
+/// Called when engine sends audio formats necessary for playing TTS feedback.
 ///
-/// @param[in] rate Audio sampling rate
-/// @param[in] channel Audio channel (e.g. #VC_AUDIO_CHANNEL_MONO, #VC_AUDIO_CHANNEL_STEREO)
-/// @param[in] audio_type Audio type (e.g. #VC_AUDIO_TYPE_PCM_S16_LE, #VC_AUDIO_TYPE_PCM_U8)
-/// @param[in] user_data The user data passed from the callback registration function
+/// **Since Tizen:**
+/// - 5.0
 ///
-/// @pre An application registers callback function using vc_mgr_set_feedback_audio_format_cb().
+/// **Parameters:**
+/// - `rate` (in): Audio sampling rate
+/// - `channel` (in): Audio channel (e.g. `VC_AUDIO_CHANNEL_MONO`, `VC_AUDIO_CHANNEL_STEREO`)
+/// - `audio_type` (in): Audio type (e.g. `VC_AUDIO_TYPE_PCM_S16_LE`, `VC_AUDIO_TYPE_PCM_U8`)
+/// - `user_data` (in): The user data passed from the callback registration function
 ///
-/// @see vc_mgr_set_feedback_audio_format_cb()
-/// @see vc_mgr_unset_feedback_audio_format_cb()
+/// **Preconditions:**
+/// - An application registers callback function using vc_mgr_set_feedback_audio_format_cb().
+///
+/// **See also:**
+/// - `vc_mgr_set_feedback_audio_format_cb()`
+/// - `vc_mgr_unset_feedback_audio_format_cb()`
+/// @nodoc
 typedef vc_mgr_feedback_audio_format_cb
     = ffi.Pointer<ffi.NativeFunction<vc_mgr_feedback_audio_format_cbFunction>>;
+/// @nodoc
 typedef vc_mgr_feedback_audio_format_cbFunction = ffi.Void Function(
     ffi.Int rate,
     ffi.Int32 channel,
     ffi.Int32 audio_type,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartvc_mgr_feedback_audio_format_cbFunction = void Function(
     int rate, int channel, int audio_type, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Enumerations for audio channels.
-/// @since_tizen 5.0
+/// Enumerations for audio channels.
+///
+/// **Since Tizen:**
+/// - 5.0
+/// @nodoc
 abstract class _vc_audio_channel_e {
   /// < 1 channel, mono
   static const int VC_AUDIO_CHANNEL_MONO = 0;
@@ -2658,8 +3635,11 @@ abstract class _vc_audio_channel_e {
   static const int VC_AUDIO_CHANNEL_STEREO = 1;
 }
 
-/// @brief Enumerations of audio types.
-/// @since_tizen 5.0
+/// Enumerations of audio types.
+///
+/// **Since Tizen:**
+/// - 5.0
+/// @nodoc
 abstract class _vc_audio_type_e {
   /// < Signed 16bit audio type, Little endian
   static const int VC_AUDIO_TYPE_PCM_S16_LE = 0;
@@ -2668,32 +3648,44 @@ abstract class _vc_audio_type_e {
   static const int VC_AUDIO_TYPE_PCM_U8 = 1;
 }
 
-/// @brief Called when engine sends audio streaming for TTS feedback.
-/// @since_tizen 5.0
+/// Called when engine sends audio streaming for TTS feedback.
 ///
-/// @remarks The @a buffer must be released with free() by you when you no longer need it.
+/// **Since Tizen:**
+/// - 5.0
 ///
-/// @param[in] event TTS feedback event (e.g. #VC_FEEDBACK_EVENT_START, #VC_FEEDBACK_EVENT_CONTINUE)
-/// @param[in] buffer Audio streaming data
-/// @param[in] len Length of the audio streaming data
-/// @param[in] user_data The user data passed from the callback registration function
+/// **Remarks:**
+/// - The `buffer` must be released with free() by you when you no longer need it.
 ///
-/// @pre An application registers callback function using vc_mgr_set_feedback_streaming_cb().
+/// **Parameters:**
+/// - `event` (in): TTS feedback event (e.g. `VC_FEEDBACK_EVENT_START`, `VC_FEEDBACK_EVENT_CONTINUE`)
+/// - `buffer` (in): Audio streaming data
+/// - `len` (in): Length of the audio streaming data
+/// - `user_data` (in): The user data passed from the callback registration function
 ///
-/// @see vc_mgr_set_feedback_streaming_cb()
-/// @see vc_mgr_unset_feedback_streaming_cb()
+/// **Preconditions:**
+/// - An application registers callback function using vc_mgr_set_feedback_streaming_cb().
+///
+/// **See also:**
+/// - `vc_mgr_set_feedback_streaming_cb()`
+/// - `vc_mgr_unset_feedback_streaming_cb()`
+/// @nodoc
 typedef vc_mgr_feedback_streaming_cb
     = ffi.Pointer<ffi.NativeFunction<vc_mgr_feedback_streaming_cbFunction>>;
+/// @nodoc
 typedef vc_mgr_feedback_streaming_cbFunction = ffi.Void Function(
     ffi.Int32 event,
     ffi.Pointer<ffi.Char> buffer,
     ffi.Int len,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartvc_mgr_feedback_streaming_cbFunction = void Function(int event,
     ffi.Pointer<ffi.Char> buffer, int len, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Enumeration for TTS feedback events.
-/// @since_tizen 5.0
+/// Enumeration for TTS feedback events.
+///
+/// **Since Tizen:**
+/// - 5.0
+/// @nodoc
 abstract class _vc_feedback_event_e {
   /// < Failed
   static const int VC_FEEDBACK_EVENT_FAIL = -1;
@@ -2708,24 +3700,32 @@ abstract class _vc_feedback_event_e {
   static const int VC_FEEDBACK_EVENT_FINISH = 3;
 }
 
-/// @brief Called when the vc client sends audio streaming for TTS feedback.
-/// @since_tizen 5.0
+/// Called when the vc client sends audio streaming for TTS feedback.
 ///
-/// @remarks The @a buffer must be released with free() by you when you no longer need it.
+/// **Since Tizen:**
+/// - 5.0
 ///
-/// @param[in] pid The process id of the vc client
-/// @param[in] utt_id The utterance id
-/// @param[in] event TTS feedback event (e.g. #VC_FEEDBACK_EVENT_START, #VC_FEEDBACK_EVENT_CONTINUE)
-/// @param[in] buffer Audio streaming data
-/// @param[in] len Length of the audio streaming data
-/// @param[in] user_data The user data passed from the callback registration function
+/// **Remarks:**
+/// - The `buffer` must be released with free() by you when you no longer need it.
 ///
-/// @pre An application registers callback function using vc_mgr_set_vc_tts_streaming_cb().
+/// **Parameters:**
+/// - `pid` (in): The process id of the vc client
+/// - `utt_id` (in): The utterance id
+/// - `event` (in): TTS feedback event (e.g. `VC_FEEDBACK_EVENT_START`, `VC_FEEDBACK_EVENT_CONTINUE`)
+/// - `buffer` (in): Audio streaming data
+/// - `len` (in): Length of the audio streaming data
+/// - `user_data` (in): The user data passed from the callback registration function
 ///
-/// @see vc_mgr_set_vc_tts_streaming_cb()
-/// @see vc_mgr_unset_vc_tts_streaming_cb()
+/// **Preconditions:**
+/// - An application registers callback function using vc_mgr_set_vc_tts_streaming_cb().
+///
+/// **See also:**
+/// - `vc_mgr_set_vc_tts_streaming_cb()`
+/// - `vc_mgr_unset_vc_tts_streaming_cb()`
+/// @nodoc
 typedef vc_mgr_vc_tts_streaming_cb
     = ffi.Pointer<ffi.NativeFunction<vc_mgr_vc_tts_streaming_cbFunction>>;
+/// @nodoc
 typedef vc_mgr_vc_tts_streaming_cbFunction = ffi.Void Function(
     ffi.Int pid,
     ffi.Int utt_id,
@@ -2733,6 +3733,7 @@ typedef vc_mgr_vc_tts_streaming_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> buffer,
     ffi.Int len,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartvc_mgr_vc_tts_streaming_cbFunction = void Function(
     int pid,
     int utt_id,
@@ -2741,8 +3742,11 @@ typedef Dartvc_mgr_vc_tts_streaming_cbFunction = void Function(
     int len,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Enumeration for requested TTS utterance status events.
-/// @since_tizen 5.5
+/// Enumeration for requested TTS utterance status events.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 abstract class _vc_tts_utterance_status_e {
   /// < None
   static const int VC_TTS_UTTERANCE_NONE = -1;
@@ -2757,14 +3761,20 @@ abstract class _vc_tts_utterance_status_e {
   static const int VC_TTS_UTTERANCE_CANCELED = 3;
 }
 
+/// @nodoc
 const String VC_AUDIO_TYPE_BLUETOOTH = 'VC_AUDIO_ID_BLUETOOTH';
 
+/// @nodoc
 const String VC_AUDIO_TYPE_WIFI = 'VC_AUDIO_ID_WIFI';
 
+/// @nodoc
 const int VC_COMMAND_TYPE_WIDGET = 3;
 
+/// @nodoc
 const int VC_COMMAND_TYPE_SYSTEM = 4;
 
+/// @nodoc
 const int VC_COMMAND_TYPE_SYSTEM_BACKGROUND = 5;
 
+/// @nodoc
 const int VC_COMMAND_TYPE_EXCLUSIVE = 6;

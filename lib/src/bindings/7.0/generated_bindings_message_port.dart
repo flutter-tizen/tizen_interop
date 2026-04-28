@@ -1,3 +1,6 @@
+/// {@category 7.0/tizen}
+library tizen_interop_7_0.message_port;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -10,6 +13,7 @@ import 'dart:ffi' as ffi;
 import 'generated_bindings_bundle.dart' as bundle;
 
 /// Dart bindings for Tizen message-port APIs.
+/// {@category 7.0/tizen}
 class Tizen70MessagePort {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -25,20 +29,31 @@ class Tizen70MessagePort {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Registers the local message port.
-  /// @details If the message port name is already registered, the previous local message port ID returns and the callback function is changed. \n
-  /// Multiple message ports can be registered.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks The specified callback is called only in the main thread.
-  /// @param[in] local_port The name of the local message port
-  /// @param[in] callback The callback function to be called when a message is received
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return A local message port ID on success,
-  /// otherwise a negative error value
-  /// @retval #MESSAGE_PORT_ERROR_INVALID_PARAMETER The specified @a local_port or @a callback is NULL
-  /// @retval #MESSAGE_PORT_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MESSAGE_PORT_ERROR_IO_ERROR Internal I/O error
-  /// @see message_port_unregister_local_port()
+  /// Registers the local message port.
+  ///
+  /// If the message port name is already registered, the previous local message port ID returns and the callback function is changed. Multiple message ports can be registered.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - The specified callback is called only in the main thread.
+  ///
+  /// **Parameters:**
+  /// - `local_port` (in): The name of the local message port
+  /// - `callback` (in): The callback function to be called when a message is received
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - A local message port ID on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MESSAGE_PORT_ERROR_INVALID_PARAMETER`: The specified `local_port` or `callback` is NULL
+  /// - `MESSAGE_PORT_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MESSAGE_PORT_ERROR_IO_ERROR`: Internal I/O error
+  ///
+  /// **See also:**
+  /// - `message_port_unregister_local_port()`
   int message_port_register_local_port(
     ffi.Pointer<ffi.Char> local_port,
     message_port_message_cb callback,
@@ -60,21 +75,31 @@ class Tizen70MessagePort {
           int Function(ffi.Pointer<ffi.Char>, message_port_message_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Registers the trusted local message port.
-  /// @details If the message port name is already registered, the previous local message port ID returns and the callback function is changed. @n
-  /// It allows communications only if the applications are signed with the same certificate, which is uniquely assigned to the developer. @n
-  /// Multiple message ports can be registered.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks The specified callback is called only in the main thread.
-  /// @param[in] trusted_local_port The name of the trusted local message port
-  /// @param[in] callback The callback function to be called when a trusted message is received
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return A trusted local message port ID on success,
-  /// otherwise a negative error value
-  /// @retval #MESSAGE_PORT_ERROR_INVALID_PARAMETER The specified @a trusted_local_port or @a callback is NULL
-  /// @retval #MESSAGE_PORT_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MESSAGE_PORT_ERROR_IO_ERROR Internal I/O error
-  /// @see message_port_unregister_trusted_local_port()
+  /// Registers the trusted local message port.
+  ///
+  /// If the message port name is already registered, the previous local message port ID returns and the callback function is changed. It allows communications only if the applications are signed with the same certificate, which is uniquely assigned to the developer. Multiple message ports can be registered.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - The specified callback is called only in the main thread.
+  ///
+  /// **Parameters:**
+  /// - `trusted_local_port` (in): The name of the trusted local message port
+  /// - `callback` (in): The callback function to be called when a trusted message is received
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - A trusted local message port ID on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MESSAGE_PORT_ERROR_INVALID_PARAMETER`: The specified `trusted_local_port` or `callback` is NULL
+  /// - `MESSAGE_PORT_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MESSAGE_PORT_ERROR_IO_ERROR`: Internal I/O error
+  ///
+  /// **See also:**
+  /// - `message_port_unregister_trusted_local_port()`
   int message_port_register_trusted_local_port(
     ffi.Pointer<ffi.Char> trusted_local_port,
     message_port_trusted_message_cb callback,
@@ -97,18 +122,28 @@ class Tizen70MessagePort {
           int Function(ffi.Pointer<ffi.Char>, message_port_trusted_message_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unregisters the local message port.
-  /// @details This method unregisters the callback function with the specified local port ID.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] local_port_id The local message port ID
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MESSAGE_PORT_ERROR_NONE Successful
-  /// @retval #MESSAGE_PORT_ERROR_INVALID_PARAMETER The specified @a local_port_id is not positive
-  /// @retval #MESSAGE_PORT_ERROR_PORT_NOT_FOUND The specified @a local_port_id cannot be found
-  /// @retval #MESSAGE_PORT_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MESSAGE_PORT_ERROR_IO_ERROR Internal I/O error
-  /// @see message_port_register_local_port()
+  /// Unregisters the local message port.
+  ///
+  /// This method unregisters the callback function with the specified local port ID.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `local_port_id` (in): The local message port ID
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MESSAGE_PORT_ERROR_NONE`: Successful
+  /// - `MESSAGE_PORT_ERROR_INVALID_PARAMETER`: The specified `local_port_id` is not positive
+  /// - `MESSAGE_PORT_ERROR_PORT_NOT_FOUND`: The specified `local_port_id` cannot be found
+  /// - `MESSAGE_PORT_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MESSAGE_PORT_ERROR_IO_ERROR`: Internal I/O error
+  ///
+  /// **See also:**
+  /// - `message_port_register_local_port()`
   int message_port_unregister_local_port(
     int local_port_id,
   ) {
@@ -123,19 +158,28 @@ class Tizen70MessagePort {
   late final _message_port_unregister_local_port =
       _message_port_unregister_local_portPtr.asFunction<int Function(int)>();
 
-  /// @brief Unregisters the trusted local message port.
-  /// @details This method unregisters the callback function with the specified local port ID. @n
-  /// It allows communications only if the applications are signed with the same certificate, which is uniquely assigned to the developer.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] trusted_local_port_id The trusted local message port ID
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MESSAGE_PORT_ERROR_NONE	Successful
-  /// @retval #MESSAGE_PORT_ERROR_INVALID_PARAMETER The specified @a trusted_local_port_id is not positive
-  /// @retval #MESSAGE_PORT_ERROR_PORT_NOT_FOUND The specified @a trusted_local_port_id cannot be found
-  /// @retval #MESSAGE_PORT_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MESSAGE_PORT_ERROR_IO_ERROR Internal I/O error
-  /// @see message_port_register_trusted_local_port()
+  /// Unregisters the trusted local message port.
+  ///
+  /// This method unregisters the callback function with the specified local port ID. It allows communications only if the applications are signed with the same certificate, which is uniquely assigned to the developer.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `trusted_local_port_id` (in): The trusted local message port ID
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MESSAGE_PORT_ERROR_NONE`: Successful
+  /// - `MESSAGE_PORT_ERROR_INVALID_PARAMETER`: The specified `trusted_local_port_id` is not positive
+  /// - `MESSAGE_PORT_ERROR_PORT_NOT_FOUND`: The specified `trusted_local_port_id` cannot be found
+  /// - `MESSAGE_PORT_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MESSAGE_PORT_ERROR_IO_ERROR`: Internal I/O error
+  ///
+  /// **See also:**
+  /// - `message_port_register_trusted_local_port()`
   int message_port_unregister_trusted_local_port(
     int trusted_local_port_id,
   ) {
@@ -151,19 +195,27 @@ class Tizen70MessagePort {
       _message_port_unregister_trusted_local_portPtr
           .asFunction<int Function(int)>();
 
-  /// @brief Checks whether the message port of a remote application is registered.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks If this function returns a negative error value, the out parameter @a exist will not be changed.
-  /// @param[in] remote_app_id The ID of the remote application
-  /// @param[in] remote_port The name of the remote message port
-  /// @param[out] exist If @c true, the message port of the remote application exists;
-  /// otherwise @c false
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MESSAGE_PORT_ERROR_NONE Successful
-  /// @retval #MESSAGE_PORT_ERROR_INVALID_PARAMETER The specified @a remote_app_id or @a remote_port is NULL
-  /// @retval #MESSAGE_PORT_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MESSAGE_PORT_ERROR_IO_ERROR Internal I/O error
+  /// Checks whether the message port of a remote application is registered.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - If this function returns a negative error value, the out parameter `exist` will not be changed.
+  ///
+  /// **Parameters:**
+  /// - `remote_app_id` (in): The ID of the remote application
+  /// - `remote_port` (in): The name of the remote message port
+  /// - `exist` (out): If `true`, the message port of the remote application exists; otherwise `false`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MESSAGE_PORT_ERROR_NONE`: Successful
+  /// - `MESSAGE_PORT_ERROR_INVALID_PARAMETER`: The specified `remote_app_id` or `remote_port` is NULL
+  /// - `MESSAGE_PORT_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MESSAGE_PORT_ERROR_IO_ERROR`: Internal I/O error
   int message_port_check_remote_port(
     ffi.Pointer<ffi.Char> remote_app_id,
     ffi.Pointer<ffi.Char> remote_port,
@@ -185,20 +237,28 @@ class Tizen70MessagePort {
           int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Checks whether the trusted message port of a remote application is registered.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks If this function returns a negative error value, the out parameter @a exist will not be changed.
-  /// @param[in] remote_app_id The ID of the remote application
-  /// @param[in] remote_port The name of the remote message port
-  /// @param[out] exist If @c true, the message port of the remote application exists;
-  /// otherwise @c false
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MESSAGE_PORT_ERROR_NONE Successful
-  /// @retval #MESSAGE_PORT_ERROR_INVALID_PARAMETER The specified @a remote_app_id or @a remote_port is @c NULL
-  /// @retval #MESSAGE_PORT_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MESSAGE_PORT_ERROR_CERTIFICATE_NOT_MATCH The remote application is not signed with the same certificate
-  /// @retval #MESSAGE_PORT_ERROR_IO_ERROR Internal I/O error
+  /// Checks whether the trusted message port of a remote application is registered.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - If this function returns a negative error value, the out parameter `exist` will not be changed.
+  ///
+  /// **Parameters:**
+  /// - `remote_app_id` (in): The ID of the remote application
+  /// - `remote_port` (in): The name of the remote message port
+  /// - `exist` (out): If `true`, the message port of the remote application exists; otherwise `false`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MESSAGE_PORT_ERROR_NONE`: Successful
+  /// - `MESSAGE_PORT_ERROR_INVALID_PARAMETER`: The specified `remote_app_id` or `remote_port` is `NULL`
+  /// - `MESSAGE_PORT_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MESSAGE_PORT_ERROR_CERTIFICATE_NOT_MATCH`: The remote application is not signed with the same certificate
+  /// - `MESSAGE_PORT_ERROR_IO_ERROR`: Internal I/O error
   int message_port_check_trusted_remote_port(
     ffi.Pointer<ffi.Char> remote_app_id,
     ffi.Pointer<ffi.Char> remote_port,
@@ -221,34 +281,47 @@ class Tizen70MessagePort {
           int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Sends a message to the message port of a remote application.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks @a message must be released with bundle_free() after sending the message.
-  /// @param[in] remote_app_id The ID of the remote application
-  /// @param[in] remote_port The name of the remote message port
-  /// @param[in] message The message to be passed to the remote application, the recommended message size is under 4KB
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MESSAGE_PORT_ERROR_NONE Successful
-  /// @retval #MESSAGE_PORT_ERROR_INVALID_PARAMETER The specified @a remote_app_id, @a remote_port or @a message is NULL
-  /// @retval #MESSAGE_PORT_ERROR_PORT_NOT_FOUND The message port of the remote application cannot be found
-  /// @retval #MESSAGE_PORT_ERROR_MAX_EXCEEDED The size of message has exceeded the maximum limit
-  /// @retval #MESSAGE_PORT_ERROR_RESOURCE_UNAVAILABLE Resource temporarily unavailable
-  /// @retval #MESSAGE_PORT_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MESSAGE_PORT_ERROR_IO_ERROR Internal I/O error
-  /// @post It invokes message_port_message_cb() on the remote application.
-  /// @see message_port_message_cb()
-  /// @see message_port_register_local_port()
-  /// @see message_port_unregister_local_port()
+  /// Sends a message to the message port of a remote application.
   ///
-  /// @code
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - `message` must be released with bundle_free() after sending the message.
+  ///
+  /// **Parameters:**
+  /// - `remote_app_id` (in): The ID of the remote application
+  /// - `remote_port` (in): The name of the remote message port
+  /// - `message` (in): The message to be passed to the remote application, the recommended message size is under 4KB
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MESSAGE_PORT_ERROR_NONE`: Successful
+  /// - `MESSAGE_PORT_ERROR_INVALID_PARAMETER`: The specified `remote_app_id`, `remote_port` or `message` is NULL
+  /// - `MESSAGE_PORT_ERROR_PORT_NOT_FOUND`: The message port of the remote application cannot be found
+  /// - `MESSAGE_PORT_ERROR_MAX_EXCEEDED`: The size of message has exceeded the maximum limit
+  /// - `MESSAGE_PORT_ERROR_RESOURCE_UNAVAILABLE`: Resource temporarily unavailable
+  /// - `MESSAGE_PORT_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MESSAGE_PORT_ERROR_IO_ERROR`: Internal I/O error
+  ///
+  /// **Postconditions:**
+  /// - It invokes message_port_message_cb() on the remote application.
+  ///
+  /// **See also:**
+  /// - `message_port_message_cb()`
+  /// - `message_port_register_local_port()`
+  /// - `message_port_unregister_local_port()`
+  ///
+  /// ```
   /// #include <message_port.h>
   /// bundle *b = bundle_create();
   /// bundle_add(b, "key1", "value1");
   /// bundle_add(b, "key2", "value2");
   /// int ret = message_port_send_message("0123456789.BasicApp", "BasicAppPort", b);
   /// bundle_free(b);
-  /// @endcode
+  /// ```
   int message_port_send_message(
     ffi.Pointer<ffi.Char> remote_app_id,
     ffi.Pointer<ffi.Char> remote_port,
@@ -270,27 +343,41 @@ class Tizen70MessagePort {
           int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
               ffi.Pointer<bundle.bundle>)>();
 
-  /// @brief Sends a trusted message to the message port of a remote application.
-  /// @details This method allows communication only if the applications are signed with the same certificate, which is uniquely assigned to the developer.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks You must release @a message using bundle_free() after sending the message.
-  /// @param[in] remote_app_id The ID of the remote application
-  /// @param[in] remote_port The name of the remote message port
-  /// @param[in] message The message to be passed to the remote application, the recommended message size is under 4KB
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MESSAGE_PORT_ERROR_NONE Successful
-  /// @retval #MESSAGE_PORT_ERROR_INVALID_PARAMETER The specified @a remote_app_id, @a remote_port or @a message is @c NULL
-  /// @retval #MESSAGE_PORT_ERROR_PORT_NOT_FOUND The message port of the remote application cannot be found
-  /// @retval #MESSAGE_PORT_ERROR_CERTIFICATE_NOT_MATCH The remote application is not signed with the same certificate
-  /// @retval #MESSAGE_PORT_ERROR_MAX_EXCEEDED The size of the message has exceeded the maximum limit
-  /// @retval #MESSAGE_PORT_ERROR_RESOURCE_UNAVAILABLE Resource is temporarily unavailable
-  /// @retval #MESSAGE_PORT_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MESSAGE_PORT_ERROR_IO_ERROR Internal I/O error
-  /// @post It invokes message_port_trusted_message_cb() on the remote application.
-  /// @see message_port_trusted_message_cb()
-  /// @see message_port_register_trusted_local_port()
-  /// @see message_port_unregister_trusted_local_port()
+  /// Sends a trusted message to the message port of a remote application.
+  ///
+  /// This method allows communication only if the applications are signed with the same certificate, which is uniquely assigned to the developer.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - You must release `message` using bundle_free() after sending the message.
+  ///
+  /// **Parameters:**
+  /// - `remote_app_id` (in): The ID of the remote application
+  /// - `remote_port` (in): The name of the remote message port
+  /// - `message` (in): The message to be passed to the remote application, the recommended message size is under 4KB
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MESSAGE_PORT_ERROR_NONE`: Successful
+  /// - `MESSAGE_PORT_ERROR_INVALID_PARAMETER`: The specified `remote_app_id`, `remote_port` or `message` is `NULL`
+  /// - `MESSAGE_PORT_ERROR_PORT_NOT_FOUND`: The message port of the remote application cannot be found
+  /// - `MESSAGE_PORT_ERROR_CERTIFICATE_NOT_MATCH`: The remote application is not signed with the same certificate
+  /// - `MESSAGE_PORT_ERROR_MAX_EXCEEDED`: The size of the message has exceeded the maximum limit
+  /// - `MESSAGE_PORT_ERROR_RESOURCE_UNAVAILABLE`: Resource is temporarily unavailable
+  /// - `MESSAGE_PORT_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MESSAGE_PORT_ERROR_IO_ERROR`: Internal I/O error
+  ///
+  /// **Postconditions:**
+  /// - It invokes message_port_trusted_message_cb() on the remote application.
+  ///
+  /// **See also:**
+  /// - `message_port_trusted_message_cb()`
+  /// - `message_port_register_trusted_local_port()`
+  /// - `message_port_unregister_trusted_local_port()`
   int message_port_send_trusted_message(
     ffi.Pointer<ffi.Char> remote_app_id,
     ffi.Pointer<ffi.Char> remote_port,
@@ -313,29 +400,42 @@ class Tizen70MessagePort {
           int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
               ffi.Pointer<bundle.bundle>)>();
 
-  /// @brief Sends a message with local port information to the message port of a remote application.
-  /// @details This method is used for bidirectional communication.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks You must release @a message using bundle_free() after sending the message.
-  /// @param[in] remote_app_id The ID of the remote application
-  /// @param[in] remote_port The name of the remote message port
-  /// @param[in] message The message to be passed to the remote application, the recommended message size is under 4KB
-  /// @param[in] local_port_id The message port ID returned by message_port_register_local_port() or message_port_register_trusted_local_port()
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MESSAGE_PORT_ERROR_NONE Successful
-  /// @retval #MESSAGE_PORT_ERROR_INVALID_PARAMETER The specified @a remote_app_id, @a remote_port or @a message is @c NULL and
-  /// The specified @a local_port_id is not positive
-  /// @retval #MESSAGE_PORT_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MESSAGE_PORT_ERROR_PORT_NOT_FOUND The port of the local or remote application cannot be found
-  /// @retval #MESSAGE_PORT_ERROR_MAX_EXCEEDED The size of the message has exceeded the maximum limit
-  /// @retval #MESSAGE_PORT_ERROR_IO_ERROR Internal I/O error
-  /// @post It invokes message_port_message_cb() on the remote application.
-  /// @see message_port_message_cb()
-  /// @see message_port_register_local_port()
-  /// @see message_port_unregister_local_port()
+  /// Sends a message with local port information to the message port of a remote application.
   ///
-  /// @code
+  /// This method is used for bidirectional communication.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - You must release `message` using bundle_free() after sending the message.
+  ///
+  /// **Parameters:**
+  /// - `remote_app_id` (in): The ID of the remote application
+  /// - `remote_port` (in): The name of the remote message port
+  /// - `message` (in): The message to be passed to the remote application, the recommended message size is under 4KB
+  /// - `local_port_id` (in): The message port ID returned by message_port_register_local_port() or message_port_register_trusted_local_port()
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MESSAGE_PORT_ERROR_NONE`: Successful
+  /// - `MESSAGE_PORT_ERROR_INVALID_PARAMETER`: The specified `remote_app_id`, `remote_port` or `message` is `NULL` and The specified `local_port_id` is not positive
+  /// - `MESSAGE_PORT_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MESSAGE_PORT_ERROR_PORT_NOT_FOUND`: The port of the local or remote application cannot be found
+  /// - `MESSAGE_PORT_ERROR_MAX_EXCEEDED`: The size of the message has exceeded the maximum limit
+  /// - `MESSAGE_PORT_ERROR_IO_ERROR`: Internal I/O error
+  ///
+  /// **Postconditions:**
+  /// - It invokes message_port_message_cb() on the remote application.
+  ///
+  /// **See also:**
+  /// - `message_port_message_cb()`
+  /// - `message_port_register_local_port()`
+  /// - `message_port_unregister_local_port()`
+  ///
+  /// ```
   /// #include <message_port.h>
   ///
   /// static void message_port_receive_cb(int local_port_id, const char *remote_app_id, const char *remote_port, bundle *message) {}
@@ -353,7 +453,7 @@ class Tizen70MessagePort {
   ///
   /// bundle_free(b);
   /// }
-  /// @endcode
+  /// ```
   int message_port_send_message_with_local_port(
     ffi.Pointer<ffi.Char> remote_app_id,
     ffi.Pointer<ffi.Char> remote_port,
@@ -380,29 +480,41 @@ class Tizen70MessagePort {
           int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
               ffi.Pointer<bundle.bundle>, int)>();
 
-  /// @brief Sends a trusted message with local port information to the message port of a remote application.
-  /// @details This method is used for bidirectional communication. @n
-  /// It allows communications only if the applications are signed with the same certificate, which is uniquely assigned to the developer.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks You muse release @a message using bundle_free() after sending the message.
-  /// @param[in] remote_app_id The ID of the remote application
-  /// @param[in] remote_port The name of the remote message port
-  /// @param[in] message The message to be passed to the remote application, the recommended message size is under 4KB
-  /// @param[in] local_port_id The message port ID returned by message_port_register_local_port() or message_port_register_trusted_local_port()
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MESSAGE_PORT_ERROR_NONE Successful
-  /// @retval #MESSAGE_PORT_ERROR_INVALID_PARAMETER The specified @a remote_app_id, @a remote_port or @a message is @c NULL and
-  /// specified @a local_port_id is not positive
-  /// @retval #MESSAGE_PORT_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MESSAGE_PORT_ERROR_PORT_NOT_FOUND The port of the local or remote application cannot be found
-  /// @retval #MESSAGE_PORT_ERROR_CERTIFICATE_NOT_MATCH The remote application is not signed with the same certificate
-  /// @retval #MESSAGE_PORT_ERROR_MAX_EXCEEDED The size of the message has exceeded the maximum limit
-  /// @retval #MESSAGE_PORT_ERROR_IO_ERROR Internal I/O error
-  /// @post It invokes message_port_trusted_message_cb() on the remote application.
-  /// @see message_port_trusted_message_cb()
-  /// @see message_port_register_trusted_local_port()
-  /// @see message_port_unregister_trusted_local_port()
+  /// Sends a trusted message with local port information to the message port of a remote application.
+  ///
+  /// This method is used for bidirectional communication. It allows communications only if the applications are signed with the same certificate, which is uniquely assigned to the developer.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - You muse release `message` using bundle_free() after sending the message.
+  ///
+  /// **Parameters:**
+  /// - `remote_app_id` (in): The ID of the remote application
+  /// - `remote_port` (in): The name of the remote message port
+  /// - `message` (in): The message to be passed to the remote application, the recommended message size is under 4KB
+  /// - `local_port_id` (in): The message port ID returned by message_port_register_local_port() or message_port_register_trusted_local_port()
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MESSAGE_PORT_ERROR_NONE`: Successful
+  /// - `MESSAGE_PORT_ERROR_INVALID_PARAMETER`: The specified `remote_app_id`, `remote_port` or `message` is `NULL` and specified `local_port_id` is not positive
+  /// - `MESSAGE_PORT_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MESSAGE_PORT_ERROR_PORT_NOT_FOUND`: The port of the local or remote application cannot be found
+  /// - `MESSAGE_PORT_ERROR_CERTIFICATE_NOT_MATCH`: The remote application is not signed with the same certificate
+  /// - `MESSAGE_PORT_ERROR_MAX_EXCEEDED`: The size of the message has exceeded the maximum limit
+  /// - `MESSAGE_PORT_ERROR_IO_ERROR`: Internal I/O error
+  ///
+  /// **Postconditions:**
+  /// - It invokes message_port_trusted_message_cb() on the remote application.
+  ///
+  /// **See also:**
+  /// - `message_port_trusted_message_cb()`
+  /// - `message_port_register_trusted_local_port()`
+  /// - `message_port_unregister_trusted_local_port()`
   int message_port_send_trusted_message_with_local_port(
     ffi.Pointer<ffi.Char> remote_app_id,
     ffi.Pointer<ffi.Char> remote_port,
@@ -429,28 +541,36 @@ class Tizen70MessagePort {
           int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
               ffi.Pointer<bundle.bundle>, int)>();
 
-  /// @brief Adds a callback called when a remote port is registered.
-  /// @details When remote port is registered, @a registered_cb function is called.
-  /// Each added callback has its own separate watcher.
-  /// @since_tizen 4.0
-  /// @remarks The specified callback is called only in the main thread.
-  /// @param[in] remote_app_id        The ID of the remote application
-  /// @param[in] remote_port          The name of the remote message port
-  /// @param[in] trusted_remote_port  Indicates whether remote port is trusted
-  /// @param[in] registered_cb        The callback function to be called
-  /// when remote port is registered
-  /// @param[in] user_data            The user data to be passed to the callback function
-  /// @param[out] watcher_id          The ID of the watcher which is monitoring the remote port
-  /// registration events
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MESSAGE_PORT_ERROR_INVALID_PARAMETER  The specified @a remote_app_id or @a remote_port
-  /// or @a registered_cb is NULL
-  /// @retval #MESSAGE_PORT_ERROR_OUT_OF_MEMORY     Out of memory
-  /// @retval #MESSAGE_PORT_ERROR_IO_ERROR          Internal I/O error
-  /// @see message_port_registration_event_cb()
-  /// @see message_port_add_unregistered_cb()
-  /// @see message_port_remove_registration_event_cb()
+  /// Adds a callback called when a remote port is registered.
+  ///
+  /// When remote port is registered, `registered_cb` function is called. Each added callback has its own separate watcher.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Remarks:**
+  /// - The specified callback is called only in the main thread.
+  ///
+  /// **Parameters:**
+  /// - `remote_app_id` (in): The ID of the remote application
+  /// - `remote_port` (in): The name of the remote message port
+  /// - `trusted_remote_port` (in): Indicates whether remote port is trusted
+  /// - `registered_cb` (in): The callback function to be called when remote port is registered
+  /// - `user_data` (in): The user data to be passed to the callback function
+  /// - `watcher_id` (out): The ID of the watcher which is monitoring the remote port registration events
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MESSAGE_PORT_ERROR_INVALID_PARAMETER`: The specified `remote_app_id` or `remote_port` or `registered_cb` is NULL
+  /// - `MESSAGE_PORT_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MESSAGE_PORT_ERROR_IO_ERROR`: Internal I/O error
+  ///
+  /// **See also:**
+  /// - `message_port_registration_event_cb()`
+  /// - `message_port_add_unregistered_cb()`
+  /// - `message_port_remove_registration_event_cb()`
   int message_port_add_registered_cb(
     ffi.Pointer<ffi.Char> remote_app_id,
     ffi.Pointer<ffi.Char> remote_port,
@@ -488,28 +608,36 @@ class Tizen70MessagePort {
               ffi.Pointer<ffi.Void>,
               ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Adds a callback called when a remote port is unregistered.
-  /// @details When the remote port is unregistered, @a unregistered_cb function is called.
-  /// Each added callback has its own separate watcher.
-  /// @since_tizen 4.0
-  /// @remarks The specified callback is called only in the main thread.
-  /// @param[in] remote_app_id        The ID of the remote application
-  /// @param[in] remote_port          The name of the remote message port
-  /// @param[in] trusted_remote_port  Indicates whether remote port is trusted
-  /// @param[in] unregistered_cb      The callback function to be called
-  /// when remote port is unregistered
-  /// @param[in] user_data            The user data to be passed to the callback function
-  /// @param[out] watcher_id          The ID of the watcher which is monitoring the remote port
-  /// unregistration events
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MESSAGE_PORT_ERROR_INVALID_PARAMETER The specified @a remote_app_id or @a remote_port
-  /// or @a unregistered_cb is NULL
-  /// @retval #MESSAGE_PORT_ERROR_OUT_OF_MEMORY     Out of memory
-  /// @retval #MESSAGE_PORT_ERROR_IO_ERROR          Internal I/O error
-  /// @see message_port_registration_event_cb()
-  /// @see message_port_add_registered_cb()
-  /// @see message_port_remove_registration_event_cb()
+  /// Adds a callback called when a remote port is unregistered.
+  ///
+  /// When the remote port is unregistered, `unregistered_cb` function is called. Each added callback has its own separate watcher.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Remarks:**
+  /// - The specified callback is called only in the main thread.
+  ///
+  /// **Parameters:**
+  /// - `remote_app_id` (in): The ID of the remote application
+  /// - `remote_port` (in): The name of the remote message port
+  /// - `trusted_remote_port` (in): Indicates whether remote port is trusted
+  /// - `unregistered_cb` (in): The callback function to be called when remote port is unregistered
+  /// - `user_data` (in): The user data to be passed to the callback function
+  /// - `watcher_id` (out): The ID of the watcher which is monitoring the remote port unregistration events
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MESSAGE_PORT_ERROR_INVALID_PARAMETER`: The specified `remote_app_id` or `remote_port` or `unregistered_cb` is NULL
+  /// - `MESSAGE_PORT_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MESSAGE_PORT_ERROR_IO_ERROR`: Internal I/O error
+  ///
+  /// **See also:**
+  /// - `message_port_registration_event_cb()`
+  /// - `message_port_add_registered_cb()`
+  /// - `message_port_remove_registration_event_cb()`
   int message_port_add_unregistered_cb(
     ffi.Pointer<ffi.Char> remote_app_id,
     ffi.Pointer<ffi.Char> remote_port,
@@ -547,17 +675,25 @@ class Tizen70MessagePort {
               ffi.Pointer<ffi.Void>,
               ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Removes the registration/unregistration callback associated with the given watcher.
-  /// @since_tizen 4.0
-  /// @param[in] watcher_id  The ID of watcher which is monitoring remote port
-  /// registration/unregistration events
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MESSAGE_PORT_ERROR_INVALID_PARAMETER  The specified @a watcher_id is not correct
-  /// @retval #MESSAGE_PORT_ERROR_IO_ERROR           Internal I/O error
-  /// @see message_port_registration_event_cb()
-  /// @see message_port_add_registered_cb()
-  /// @see message_port_add_unregistered_cb()
+  /// Removes the registration/unregistration callback associated with the given watcher.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `watcher_id` (in): The ID of watcher which is monitoring remote port registration/unregistration events
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MESSAGE_PORT_ERROR_INVALID_PARAMETER`: The specified `watcher_id` is not correct
+  /// - `MESSAGE_PORT_ERROR_IO_ERROR`: Internal I/O error
+  ///
+  /// **See also:**
+  /// - `message_port_registration_event_cb()`
+  /// - `message_port_add_registered_cb()`
+  /// - `message_port_add_unregistered_cb()`
   int message_port_remove_registration_event_cb(
     int watcher_id,
   ) {
@@ -574,8 +710,11 @@ class Tizen70MessagePort {
           .asFunction<int Function(int)>();
 }
 
-/// @brief Enumeration for error codes of a message port.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration for error codes of a message port.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class message_port_error_e {
   /// < Successful
   static const int MESSAGE_PORT_ERROR_NONE = 0;
@@ -602,26 +741,39 @@ abstract class message_port_error_e {
   static const int MESSAGE_PORT_ERROR_RESOURCE_UNAVAILABLE = -18022396;
 }
 
-/// @brief Called when a message is received.
-/// @details The function is called when a message is received from the remote application.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-/// @remarks @a message is automatically freed by framework when callback returned, you can keep @a message using bundle_dup() @n
-/// @a remote_port will be set only if the remote application sends a message with its port information using message_port_send_message_with_local_port(), otherwise it is @c NULL @n
-/// When message is sent from remote application by message_port_send_message_with_local_port() in bidirectional communication, trusted_remote_port is used to check whether remote port is trusted port or not
-/// This callback is called only in the main thread.
-/// @param[in] local_port_id The local message port ID returned by message_port_register_local_port()
-/// @param[in] remote_app_id The ID of the remote application that sent this message
-/// @param[in] remote_port The name of the remote message port
-/// @param[in] trusted_remote_port If @c true, the remote port is a trusted port; otherwise if @c false, it is not
-/// @param[in] message The message passed from the remote application
-/// @param[in] user_data The user data passed from the register function
-/// @pre Either message_port_send_message() or message_port_send_message_with_local_port() from the remote application will invoke this function if you register it using message_port_register_local_port()
-/// @see message_port_register_local_port()
-/// @see message_port_unregister_local_port()
-/// @see message_port_send_message()
-/// @see message_port_send_message_with_local_port()
+/// Called when a message is received.
+///
+/// The function is called when a message is received from the remote application.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+///
+/// **Remarks:**
+/// - `message` is automatically freed by framework when callback returned, you can keep `message` using bundle_dup()
+/// - `remote_port` will be set only if the remote application sends a message with its port information using message_port_send_message_with_local_port(), otherwise it is `NULL`
+/// - When message is sent from remote application by message_port_send_message_with_local_port() in bidirectional communication, trusted_remote_port is used to check whether remote port is trusted port or not
+/// - This callback is called only in the main thread.
+///
+/// **Parameters:**
+/// - `local_port_id` (in): The local message port ID returned by message_port_register_local_port()
+/// - `remote_app_id` (in): The ID of the remote application that sent this message
+/// - `remote_port` (in): The name of the remote message port
+/// - `trusted_remote_port` (in): If `true`, the remote port is a trusted port; otherwise if `false`, it is not
+/// - `message` (in): The message passed from the remote application
+/// - `user_data` (in): The user data passed from the register function
+///
+/// **Preconditions:**
+/// - Either message_port_send_message() or message_port_send_message_with_local_port() from the remote application will invoke this function if you register it using message_port_register_local_port()
+///
+/// **See also:**
+/// - `message_port_register_local_port()`
+/// - `message_port_unregister_local_port()`
+/// - `message_port_send_message()`
+/// - `message_port_send_message_with_local_port()`
+/// @nodoc
 typedef message_port_message_cb
     = ffi.Pointer<ffi.NativeFunction<message_port_message_cbFunction>>;
+/// @nodoc
 typedef message_port_message_cbFunction = ffi.Void Function(
     ffi.Int local_port_id,
     ffi.Pointer<ffi.Char> remote_app_id,
@@ -629,6 +781,7 @@ typedef message_port_message_cbFunction = ffi.Void Function(
     ffi.Bool trusted_remote_port,
     ffi.Pointer<bundle.bundle> message,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmessage_port_message_cbFunction = void Function(
     int local_port_id,
     ffi.Pointer<ffi.Char> remote_app_id,
@@ -637,26 +790,39 @@ typedef Dartmessage_port_message_cbFunction = void Function(
     ffi.Pointer<bundle.bundle> message,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when a trusted message is received.
-/// @details This function is called when a trusted message is received from the remote application.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-/// @remarks You can keep @a message using bundle_dup(). @n
-/// @a remote_port will be set only if the remote application sends a message with its port information using message_port_send_trusted_message_with_local_port(), otherwise it is @c NULL. @n
-/// When message is sent from remote application by message_port_send_trusted_message_with_local_port() in bidirectional communication, trusted_remote_port is used to check whether remote port is trusted port or not.
-/// This callback is called only in the main thread.
-/// @param[in] trusted_local_port_id The message port ID returned by message_port_register_trusted_local_port()
-/// @param[in] remote_app_id The ID of the remote application that sent this message
-/// @param[in] remote_port The name of the remote message port
-/// @param[in] trusted_remote_port If @c true, the remote port is a trusted port; otherwise if @c false, it is not
-/// @param[in] message The message passed from the remote application
-/// @param[in] user_data The user data passed from the register function
-/// @pre Either message_port_send_trusted_message() or message_port_send_trusted_message_with_local_port() from the remote application will invoke this function if you register it using message_port_register_trusted_local_port().
-/// @see message_port_register_trusted_local_port()
-/// @see message_port_unregister_trusted_local_port()
-/// @see message_port_send_trusted_message()
-/// @see message_port_send_trusted_message_with_local_port()
+/// Called when a trusted message is received.
+///
+/// This function is called when a trusted message is received from the remote application.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+///
+/// **Remarks:**
+/// - You can keep `message` using bundle_dup().
+/// - `remote_port` will be set only if the remote application sends a message with its port information using message_port_send_trusted_message_with_local_port(), otherwise it is `NULL`.
+/// - When message is sent from remote application by message_port_send_trusted_message_with_local_port() in bidirectional communication, trusted_remote_port is used to check whether remote port is trusted port or not.
+/// - This callback is called only in the main thread.
+///
+/// **Parameters:**
+/// - `trusted_local_port_id` (in): The message port ID returned by message_port_register_trusted_local_port()
+/// - `remote_app_id` (in): The ID of the remote application that sent this message
+/// - `remote_port` (in): The name of the remote message port
+/// - `trusted_remote_port` (in): If `true`, the remote port is a trusted port; otherwise if `false`, it is not
+/// - `message` (in): The message passed from the remote application
+/// - `user_data` (in): The user data passed from the register function
+///
+/// **Preconditions:**
+/// - Either message_port_send_trusted_message() or message_port_send_trusted_message_with_local_port() from the remote application will invoke this function if you register it using message_port_register_trusted_local_port().
+///
+/// **See also:**
+/// - `message_port_register_trusted_local_port()`
+/// - `message_port_unregister_trusted_local_port()`
+/// - `message_port_send_trusted_message()`
+/// - `message_port_send_trusted_message_with_local_port()`
+/// @nodoc
 typedef message_port_trusted_message_cb
     = ffi.Pointer<ffi.NativeFunction<message_port_trusted_message_cbFunction>>;
+/// @nodoc
 typedef message_port_trusted_message_cbFunction = ffi.Void Function(
     ffi.Int trusted_local_port_id,
     ffi.Pointer<ffi.Char> remote_app_id,
@@ -664,6 +830,7 @@ typedef message_port_trusted_message_cbFunction = ffi.Void Function(
     ffi.Bool trusted_remote_port,
     ffi.Pointer<bundle.bundle> message,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmessage_port_trusted_message_cbFunction = void Function(
     int trusted_local_port_id,
     ffi.Pointer<ffi.Char> remote_app_id,
@@ -672,29 +839,41 @@ typedef Dartmessage_port_trusted_message_cbFunction = void Function(
     ffi.Pointer<bundle.bundle> message,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when a remote port is registered or unregistered.
-/// @details The function is called when a remote port is registered or unregistered
-/// from the remote application.
-/// @since_tizen 4.0
-/// @remarks @a remote_app_id and @a remote_port can be used until
-/// message_port_remove_registration_event_cb() is called for the watcher which reported
-/// the event.
-/// @param[in] remote_app_id        The ID of the remote application that sent this message
-/// @param[in] remote_port          The name of the remote message port
-/// @param[in] trusted_remote_port  Indicates whether remote port is trusted
-/// @param[in] user_data            The user data passed from the register function
-/// @pre Called when a remote port is registered or unregistered if you add it using
-/// message_port_add_registered_cb() or message_port_add_unregistered_cb() respectively.
-/// @see message_port_add_registered_cb()
-/// @see message_port_add_unregistered_cb()
-/// @see message_port_remove_registration_event_cb()
+/// Called when a remote port is registered or unregistered.
+///
+/// The function is called when a remote port is registered or unregistered from the remote application.
+///
+/// **Since Tizen:**
+/// - 4.0
+///
+/// **Remarks:**
+/// - `remote_app_id` and `remote_port` can be used until
+/// - message_port_remove_registration_event_cb() is called for the watcher which reported
+/// - the event.
+///
+/// **Parameters:**
+/// - `remote_app_id` (in): The ID of the remote application that sent this message
+/// - `remote_port` (in): The name of the remote message port
+/// - `trusted_remote_port` (in): Indicates whether remote port is trusted
+/// - `user_data` (in): The user data passed from the register function
+///
+/// **Preconditions:**
+/// - Called when a remote port is registered or unregistered if you add it using message_port_add_registered_cb() or message_port_add_unregistered_cb() respectively.
+///
+/// **See also:**
+/// - `message_port_add_registered_cb()`
+/// - `message_port_add_unregistered_cb()`
+/// - `message_port_remove_registration_event_cb()`
+/// @nodoc
 typedef message_port_registration_event_cb = ffi
     .Pointer<ffi.NativeFunction<message_port_registration_event_cbFunction>>;
+/// @nodoc
 typedef message_port_registration_event_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> remote_app_id,
     ffi.Pointer<ffi.Char> remote_port,
     ffi.Bool trusted_remote_port,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmessage_port_registration_event_cbFunction = void Function(
     ffi.Pointer<ffi.Char> remote_app_id,
     ffi.Pointer<ffi.Char> remote_port,

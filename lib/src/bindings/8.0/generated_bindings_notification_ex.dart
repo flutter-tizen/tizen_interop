@@ -1,3 +1,6 @@
+/// {@category 8.0/tizen}
+library tizen_interop_8_0.notification_ex;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -12,6 +15,7 @@ import 'generated_bindings_bundle.dart' as bundle;
 import 'generated_bindings_capi_appfw_app_control.dart' as app_control;
 
 /// Dart bindings for Tizen notification-ex APIs.
+/// {@category 8.0/tizen}
 class Tizen80NotificationEx {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -27,24 +31,38 @@ class Tizen80NotificationEx {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Creates the notification_ex color handle.
-  /// @details Color information can be defined as a notification_ex color handle
-  /// with alpha, red, green, blue value.
-  /// @since_tizen 5.5
-  /// @remarks @a handle must be released using noti_ex_color_destroy().
-  /// @param[out] handle The notification_ex color handle
-  /// @param[in] a The alpha value
-  /// @param[in] r The red value
-  /// @param[in] g The green value
-  /// @param[in] b The blue value
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #NOTI_EX_ERROR_OUT_OF_MEMORY out of memory
-  /// @see #noti_ex_color_h
-  /// @see noti_ex_color_destroy()
-  /// @par Sample code:
-  /// @code
+  /// Creates the notification_ex color handle.
+  ///
+  /// Color information can be defined as a notification_ex color handle with alpha, red, green, blue value.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - `handle` must be released using noti_ex_color_destroy().
+  ///
+  /// **Parameters:**
+  /// - `handle` (out): The notification_ex color handle
+  /// - `a` (in): The alpha value
+  /// - `r` (in): The red value
+  /// - `g` (in): The green value
+  /// - `b` (in): The blue value
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `NOTI_EX_ERROR_OUT_OF_MEMORY`: out of memory
+  ///
+  /// **See also:**
+  /// - `noti_ex_color_h`
+  /// - `noti_ex_color_destroy()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -53,7 +71,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_color_create(&color, 0, 0, 0, 0);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_color_create(
     ffi.Pointer<noti_ex_color_h> handle,
     int a,
@@ -81,15 +99,27 @@ class Tizen80NotificationEx {
   late final _noti_ex_color_create = _noti_ex_color_createPtr.asFunction<
       int Function(ffi.Pointer<noti_ex_color_h>, int, int, int, int)>();
 
-  /// @brief Releases a notification_ex color handle.
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification_ex color handle
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_color_h
-  /// @par Sample code:
-  /// @code
+  /// Releases a notification_ex color handle.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex color handle
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_color_h`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -97,7 +127,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_color_destroy(color);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_color_destroy(
     noti_ex_color_h handle,
   ) {
@@ -112,17 +142,29 @@ class Tizen80NotificationEx {
   late final _noti_ex_color_destroy =
       _noti_ex_color_destroyPtr.asFunction<int Function(noti_ex_color_h)>();
 
-  /// @brief Gets the alpha value of a color.
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification_ex color handle
-  /// @param[out] val The alpha value
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_color_h
-  /// @see noti_ex_color_create()
-  /// @par Sample code:
-  /// @code
+  /// Gets the alpha value of a color.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex color handle
+  /// - `val` (out): The alpha value
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_color_h`
+  /// - `noti_ex_color_create()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -131,7 +173,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_color_get_alpha(color, &alpha);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_color_get_alpha(
     noti_ex_color_h handle,
     ffi.Pointer<ffi.UnsignedChar> val,
@@ -149,17 +191,29 @@ class Tizen80NotificationEx {
   late final _noti_ex_color_get_alpha = _noti_ex_color_get_alphaPtr.asFunction<
       int Function(noti_ex_color_h, ffi.Pointer<ffi.UnsignedChar>)>();
 
-  /// @brief Gets the red value of a color.
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification_ex color handle
-  /// @param[out] val The red value
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_color_h
-  /// @see noti_ex_color_create()
-  /// @par Sample code:
-  /// @code
+  /// Gets the red value of a color.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex color handle
+  /// - `val` (out): The red value
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_color_h`
+  /// - `noti_ex_color_create()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -168,7 +222,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_color_get_red(color, &red);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_color_get_red(
     noti_ex_color_h handle,
     ffi.Pointer<ffi.UnsignedChar> val,
@@ -186,17 +240,29 @@ class Tizen80NotificationEx {
   late final _noti_ex_color_get_red = _noti_ex_color_get_redPtr.asFunction<
       int Function(noti_ex_color_h, ffi.Pointer<ffi.UnsignedChar>)>();
 
-  /// @brief Gets the green value of a color.
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification_ex color handle
-  /// @param[out] val The green value
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_color_h
-  /// @see noti_ex_color_create()
-  /// @par Sample code:
-  /// @code
+  /// Gets the green value of a color.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex color handle
+  /// - `val` (out): The green value
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_color_h`
+  /// - `noti_ex_color_create()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -205,7 +271,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_color_get_green(color, &green);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_color_get_green(
     noti_ex_color_h handle,
     ffi.Pointer<ffi.UnsignedChar> val,
@@ -223,17 +289,29 @@ class Tizen80NotificationEx {
   late final _noti_ex_color_get_green = _noti_ex_color_get_greenPtr.asFunction<
       int Function(noti_ex_color_h, ffi.Pointer<ffi.UnsignedChar>)>();
 
-  /// @brief Gets the blue value of a color.
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification_ex color handle
-  /// @param[out] val The blue value
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_color_h
-  /// @see noti_ex_color_create()
-  /// @par Sample code:
-  /// @code
+  /// Gets the blue value of a color.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex color handle
+  /// - `val` (out): The blue value
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_color_h`
+  /// - `noti_ex_color_create()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -242,7 +320,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_color_get_blue(color, &blue);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_color_get_blue(
     noti_ex_color_h handle,
     ffi.Pointer<ffi.UnsignedChar> val,
@@ -260,24 +338,38 @@ class Tizen80NotificationEx {
   late final _noti_ex_color_get_blue = _noti_ex_color_get_bluePtr.asFunction<
       int Function(noti_ex_color_h, ffi.Pointer<ffi.UnsignedChar>)>();
 
-  /// @brief Creates the notification_ex padding handle.
-  /// @details Padding information can be defined as a notification_ex padding handle
-  /// with left, right, top and bottom values.
-  /// @since_tizen 5.5
-  /// @remarks @a handle must be released using noti_ex_padding_destroy().
-  /// @param[out] handle The notification_ex padding handle
-  /// @param[in] left The left value
-  /// @param[in] top The top value
-  /// @param[in] right The right value
-  /// @param[in] bottom The bottom value
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #NOTI_EX_ERROR_OUT_OF_MEMORY out of memory
-  /// @see #noti_ex_padding_h
-  /// @see noti_ex_padding_destroy()
-  /// @par Sample code:
-  /// @code
+  /// Creates the notification_ex padding handle.
+  ///
+  /// Padding information can be defined as a notification_ex padding handle with left, right, top and bottom values.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - `handle` must be released using noti_ex_padding_destroy().
+  ///
+  /// **Parameters:**
+  /// - `handle` (out): The notification_ex padding handle
+  /// - `left` (in): The left value
+  /// - `top` (in): The top value
+  /// - `right` (in): The right value
+  /// - `bottom` (in): The bottom value
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `NOTI_EX_ERROR_OUT_OF_MEMORY`: out of memory
+  ///
+  /// **See also:**
+  /// - `noti_ex_padding_h`
+  /// - `noti_ex_padding_destroy()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -286,7 +378,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_padding_create(&padding, 0, 0, 0, 0);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_padding_create(
     ffi.Pointer<noti_ex_padding_h> handle,
     int left,
@@ -310,15 +402,27 @@ class Tizen80NotificationEx {
   late final _noti_ex_padding_create = _noti_ex_padding_createPtr.asFunction<
       int Function(ffi.Pointer<noti_ex_padding_h>, int, int, int, int)>();
 
-  /// @brief Releases a notification_ex padding handle.
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification_ex padding handle
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_padding_h
-  /// @par Sample code:
-  /// @code
+  /// Releases a notification_ex padding handle.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex padding handle
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_padding_h`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -326,7 +430,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_padding_destroy(padding);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_padding_destroy(
     noti_ex_padding_h handle,
   ) {
@@ -341,17 +445,29 @@ class Tizen80NotificationEx {
   late final _noti_ex_padding_destroy =
       _noti_ex_padding_destroyPtr.asFunction<int Function(noti_ex_padding_h)>();
 
-  /// @brief Gets the left value of padding.
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification_ex padding handle
-  /// @param[out] val The left value
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_padding_h
-  /// @see noti_ex_padding_create()
-  /// @par Sample code:
-  /// @code
+  /// Gets the left value of padding.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex padding handle
+  /// - `val` (out): The left value
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_padding_h`
+  /// - `noti_ex_padding_create()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -360,7 +476,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_padding_get_left(padding, &left);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_padding_get_left(
     noti_ex_padding_h handle,
     ffi.Pointer<ffi.Int> val,
@@ -378,17 +494,29 @@ class Tizen80NotificationEx {
   late final _noti_ex_padding_get_left = _noti_ex_padding_get_leftPtr
       .asFunction<int Function(noti_ex_padding_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the top value of padding.
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification_ex padding handle
-  /// @param[out] val The top value
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_padding_h
-  /// @see noti_ex_padding_create()
-  /// @par Sample code:
-  /// @code
+  /// Gets the top value of padding.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex padding handle
+  /// - `val` (out): The top value
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_padding_h`
+  /// - `noti_ex_padding_create()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -397,7 +525,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_padding_get_top(padding, &top);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_padding_get_top(
     noti_ex_padding_h handle,
     ffi.Pointer<ffi.Int> val,
@@ -415,17 +543,29 @@ class Tizen80NotificationEx {
   late final _noti_ex_padding_get_top = _noti_ex_padding_get_topPtr
       .asFunction<int Function(noti_ex_padding_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the right value of padding.
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification_ex padding handle
-  /// @param[out] val The right value
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_padding_h
-  /// @see noti_ex_padding_create()
-  /// @par Sample code:
-  /// @code
+  /// Gets the right value of padding.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex padding handle
+  /// - `val` (out): The right value
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_padding_h`
+  /// - `noti_ex_padding_create()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -434,7 +574,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_padding_get_right(padding, &right);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_padding_get_right(
     noti_ex_padding_h handle,
     ffi.Pointer<ffi.Int> val,
@@ -452,17 +592,29 @@ class Tizen80NotificationEx {
   late final _noti_ex_padding_get_right = _noti_ex_padding_get_rightPtr
       .asFunction<int Function(noti_ex_padding_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the bottom value of padding.
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification_ex padding handle
-  /// @param[out] val The bottom value
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_padding_h
-  /// @see noti_ex_padding_create()
-  /// @par Sample code:
-  /// @code
+  /// Gets the bottom value of padding.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex padding handle
+  /// - `val` (out): The bottom value
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_padding_h`
+  /// - `noti_ex_padding_create()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -471,7 +623,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_padding_get_bottom(padding, &bottom);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_padding_get_bottom(
     noti_ex_padding_h handle,
     ffi.Pointer<ffi.Int> val,
@@ -489,24 +641,38 @@ class Tizen80NotificationEx {
   late final _noti_ex_padding_get_bottom = _noti_ex_padding_get_bottomPtr
       .asFunction<int Function(noti_ex_padding_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Creates the notification_ex geometry handle.
-  /// @details Geometry information can be defined as a notification_ex geometry handle
-  /// with x, y, width and height value.
-  /// @since_tizen 5.5
-  /// @remarks @a handle must be released using noti_ex_geometry_destroy().
-  /// @param[out] handle The notification_ex geometry handle
-  /// @param[in] x The x value
-  /// @param[in] y The y value
-  /// @param[in] w The width value
-  /// @param[in] h The height value
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #NOTI_EX_ERROR_OUT_OF_MEMORY out of memory
-  /// @see #noti_ex_geometry_h
-  /// @see noti_ex_geometry_destroy()
-  /// @par Sample code:
-  /// @code
+  /// Creates the notification_ex geometry handle.
+  ///
+  /// Geometry information can be defined as a notification_ex geometry handle with x, y, width and height value.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - `handle` must be released using noti_ex_geometry_destroy().
+  ///
+  /// **Parameters:**
+  /// - `handle` (out): The notification_ex geometry handle
+  /// - `x` (in): The x value
+  /// - `y` (in): The y value
+  /// - `w` (in): The width value
+  /// - `h` (in): The height value
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `NOTI_EX_ERROR_OUT_OF_MEMORY`: out of memory
+  ///
+  /// **See also:**
+  /// - `noti_ex_geometry_h`
+  /// - `noti_ex_geometry_destroy()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -515,7 +681,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_geometry_create(&geometry, 0, 0, 0, 0);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_geometry_create(
     ffi.Pointer<noti_ex_geometry_h> handle,
     int x,
@@ -539,15 +705,27 @@ class Tizen80NotificationEx {
   late final _noti_ex_geometry_create = _noti_ex_geometry_createPtr.asFunction<
       int Function(ffi.Pointer<noti_ex_geometry_h>, int, int, int, int)>();
 
-  /// @brief Releases the notification_ex geometry handle.
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification_ex geometry handle
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_geometry_h
-  /// @par Sample code:
-  /// @code
+  /// Releases the notification_ex geometry handle.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex geometry handle
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_geometry_h`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -555,7 +733,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_geometry_destroy(geometry);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_geometry_destroy(
     noti_ex_geometry_h handle,
   ) {
@@ -570,17 +748,29 @@ class Tizen80NotificationEx {
   late final _noti_ex_geometry_destroy = _noti_ex_geometry_destroyPtr
       .asFunction<int Function(noti_ex_geometry_h)>();
 
-  /// @brief Gets the x position value.
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification_ex geometry handle
-  /// @param[out] val The x value
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_geometry_h
-  /// @see noti_ex_geometry_create()
-  /// @par Sample code:
-  /// @code
+  /// Gets the x position value.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex geometry handle
+  /// - `val` (out): The x value
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_geometry_h`
+  /// - `noti_ex_geometry_create()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -589,7 +779,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_geometry_get_x(geometry, &x);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_geometry_get_x(
     noti_ex_geometry_h handle,
     ffi.Pointer<ffi.Int> val,
@@ -607,17 +797,29 @@ class Tizen80NotificationEx {
   late final _noti_ex_geometry_get_x = _noti_ex_geometry_get_xPtr
       .asFunction<int Function(noti_ex_geometry_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the y position value.
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification_ex geometry handle
-  /// @param[out] val The y value
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_geometry_h
-  /// @see noti_ex_geometry_create()
-  /// @par Sample code:
-  /// @code
+  /// Gets the y position value.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex geometry handle
+  /// - `val` (out): The y value
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_geometry_h`
+  /// - `noti_ex_geometry_create()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -626,7 +828,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_geometry_get_y(geometry, &y);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_geometry_get_y(
     noti_ex_geometry_h handle,
     ffi.Pointer<ffi.Int> val,
@@ -644,17 +846,29 @@ class Tizen80NotificationEx {
   late final _noti_ex_geometry_get_y = _noti_ex_geometry_get_yPtr
       .asFunction<int Function(noti_ex_geometry_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the width value.
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification_ex geometry handle
-  /// @param[out] val The width value
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_geometry_h
-  /// @see noti_ex_geometry_create()
-  /// @par Sample code:
-  /// @code
+  /// Gets the width value.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex geometry handle
+  /// - `val` (out): The width value
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_geometry_h`
+  /// - `noti_ex_geometry_create()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -663,7 +877,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_geometry_get_width(geometry, &width);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_geometry_get_width(
     noti_ex_geometry_h handle,
     ffi.Pointer<ffi.Int> val,
@@ -681,17 +895,29 @@ class Tizen80NotificationEx {
   late final _noti_ex_geometry_get_width = _noti_ex_geometry_get_widthPtr
       .asFunction<int Function(noti_ex_geometry_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the height value.
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification_ex geometry handle
-  /// @param[out] val The height value
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_geometry_h
-  /// @see noti_ex_geometry_create()
-  /// @par Sample code:
-  /// @code
+  /// Gets the height value.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex geometry handle
+  /// - `val` (out): The height value
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_geometry_h`
+  /// - `noti_ex_geometry_create()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -700,7 +926,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_geometry_get_height(geometry, &height);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_geometry_get_height(
     noti_ex_geometry_h handle,
     ffi.Pointer<ffi.Int> val,
@@ -718,31 +944,42 @@ class Tizen80NotificationEx {
   late final _noti_ex_geometry_get_height = _noti_ex_geometry_get_heightPtr
       .asFunction<int Function(noti_ex_geometry_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Creates the notification_ex style handle.
-  /// @details Style information can be defined as a notification_ex style handle
-  /// with color, padding and geometry information.
-  /// The color is the defined notification_ex color handle.
-  /// The padding is the defined notification_ex padding handle.
-  /// The geometry is the defined notification_ex geometry handle.
-  /// @since_tizen 5.5
-  /// @remarks @a handle must be released using noti_ex_style_destroy().
-  /// @a color, @a padding and @a geometry must not be released if the function returns #NOTI_EX_ERROR_NONE.
-  /// @a color, @a padding and @a geometry will be released when @a handle is released.
-  /// @param[out] handle The notification_ex padding handle
-  /// @param[in] color The notification_ex color handle
-  /// @param[in] padding The notification_ex padding handle
-  /// @param[in] geometry The notification_ex geometry handle
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #NOTI_EX_ERROR_OUT_OF_MEMORY out of memory
-  /// @see #noti_ex_style_h
-  /// @see #noti_ex_color_h
-  /// @see #noti_ex_padding_h
-  /// @see #noti_ex_geometry_h
-  /// @see noti_ex_style_destroy()
-  /// @par Sample code:
-  /// @code
+  /// Creates the notification_ex style handle.
+  ///
+  /// Style information can be defined as a notification_ex style handle with color, padding and geometry information. The color is the defined notification_ex color handle. The padding is the defined notification_ex padding handle. The geometry is the defined notification_ex geometry handle.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - `handle` must be released using noti_ex_style_destroy().
+  /// - `color`, `padding` and `geometry` must not be released if the function returns `NOTI_EX_ERROR_NONE`.
+  /// - `color`, `padding` and `geometry` will be released when `handle` is released.
+  ///
+  /// **Parameters:**
+  /// - `handle` (out): The notification_ex padding handle
+  /// - `color` (in): The notification_ex color handle
+  /// - `padding` (in): The notification_ex padding handle
+  /// - `geometry` (in): The notification_ex geometry handle
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `NOTI_EX_ERROR_OUT_OF_MEMORY`: out of memory
+  ///
+  /// **See also:**
+  /// - `noti_ex_style_h`
+  /// - `noti_ex_color_h`
+  /// - `noti_ex_padding_h`
+  /// - `noti_ex_geometry_h`
+  /// - `noti_ex_style_destroy()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -758,7 +995,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_style_create(&style, color, padding, geometry);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_style_create(
     ffi.Pointer<noti_ex_style_h> handle,
     noti_ex_color_h color,
@@ -781,15 +1018,27 @@ class Tizen80NotificationEx {
       int Function(ffi.Pointer<noti_ex_style_h>, noti_ex_color_h,
           noti_ex_padding_h, noti_ex_geometry_h)>();
 
-  /// @brief Releases the notification_ex style handle.
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification_ex style handle
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_style_h
-  /// @par Sample code:
-  /// @code
+  /// Releases the notification_ex style handle.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex style handle
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_style_h`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -797,7 +1046,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_style_destroy(style);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_style_destroy(
     noti_ex_style_h handle,
   ) {
@@ -812,19 +1061,33 @@ class Tizen80NotificationEx {
   late final _noti_ex_style_destroy =
       _noti_ex_style_destroyPtr.asFunction<int Function(noti_ex_style_h)>();
 
-  /// @brief Gets the padding information from a style.
-  /// @since_tizen 5.5
-  /// @remarks @a padding must be released using noti_ex_padding_destroy().
-  /// @param[in] handle The notification_ex style handle
-  /// @param[out] padding The notification_ex padding handle
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_style_h
-  /// @see #noti_ex_padding_h
-  /// @see noti_ex_style_create()
-  /// @par Sample code:
-  /// @code
+  /// Gets the padding information from a style.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - `padding` must be released using noti_ex_padding_destroy().
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex style handle
+  /// - `padding` (out): The notification_ex padding handle
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_style_h`
+  /// - `noti_ex_padding_h`
+  /// - `noti_ex_style_create()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -833,7 +1096,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_style_get_padding(style, &padding);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_style_get_padding(
     noti_ex_style_h handle,
     ffi.Pointer<noti_ex_padding_h> padding,
@@ -852,19 +1115,33 @@ class Tizen80NotificationEx {
       _noti_ex_style_get_paddingPtr.asFunction<
           int Function(noti_ex_style_h, ffi.Pointer<noti_ex_padding_h>)>();
 
-  /// @brief Gets the color information from a style.
-  /// @since_tizen 5.5
-  /// @remarks @a color must be released using noti_ex_color_destroy().
-  /// @param[in] handle The notification_ex style handle
-  /// @param[out] color The notification_ex color handle
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_style_h
-  /// @see #noti_ex_color_h
-  /// @see noti_ex_style_create()
-  /// @par Sample code:
-  /// @code
+  /// Gets the color information from a style.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - `color` must be released using noti_ex_color_destroy().
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex style handle
+  /// - `color` (out): The notification_ex color handle
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_style_h`
+  /// - `noti_ex_color_h`
+  /// - `noti_ex_style_create()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -873,7 +1150,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_style_get_color(style, &color);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_style_get_color(
     noti_ex_style_h handle,
     ffi.Pointer<noti_ex_color_h> color,
@@ -891,19 +1168,33 @@ class Tizen80NotificationEx {
   late final _noti_ex_style_get_color = _noti_ex_style_get_colorPtr.asFunction<
       int Function(noti_ex_style_h, ffi.Pointer<noti_ex_color_h>)>();
 
-  /// @brief Gets the geometry information from style.
-  /// @since_tizen 5.5
-  /// @remarks @a geometry must be released using noti_ex_geometry_destroy().
-  /// @param[in] handle The notification_ex style handle
-  /// @param[out] geometry The notification_ex geometry handle
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_style_h
-  /// @see #noti_ex_geometry_h
-  /// @see noti_ex_style_create()
-  /// @par Sample code:
-  /// @code
+  /// Gets the geometry information from style.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - `geometry` must be released using noti_ex_geometry_destroy().
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex style handle
+  /// - `geometry` (out): The notification_ex geometry handle
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_style_h`
+  /// - `noti_ex_geometry_h`
+  /// - `noti_ex_style_create()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -912,7 +1203,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_style_get_geometry(style, &geometry);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_style_get_geometry(
     noti_ex_style_h handle,
     ffi.Pointer<noti_ex_geometry_h> geometry,
@@ -931,18 +1222,32 @@ class Tizen80NotificationEx {
       _noti_ex_style_get_geometryPtr.asFunction<
           int Function(noti_ex_style_h, ffi.Pointer<noti_ex_geometry_h>)>();
 
-  /// @brief Gets the background image path from style.
-  /// @since_tizen 5.5
-  /// @remarks The @a image_path should be released using free().
-  /// @param[in] handle The notification_ex style handle
-  /// @param[out] image_path The background image path
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_style_h
-  /// @see noti_ex_style_create()
-  /// @par Sample code:
-  /// @code
+  /// Gets the background image path from style.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - The `image_path` should be released using free().
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex style handle
+  /// - `image_path` (out): The background image path
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_style_h`
+  /// - `noti_ex_style_create()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -951,7 +1256,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_style_get_background_image(style, &image_path);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_style_get_background_image(
     noti_ex_style_h handle,
     ffi.Pointer<ffi.Pointer<ffi.Char>> image_path,
@@ -971,17 +1276,29 @@ class Tizen80NotificationEx {
       _noti_ex_style_get_background_imagePtr.asFunction<
           int Function(noti_ex_style_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets the background image path of a style.
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification_ex style handle
-  /// @param[in] image_path The background image path
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_style_h
-  /// @see noti_ex_style_create()
-  /// @par Sample code:
-  /// @code
+  /// Sets the background image path of a style.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex style handle
+  /// - `image_path` (in): The background image path
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_style_h`
+  /// - `noti_ex_style_create()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -994,7 +1311,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_style_set_background_image(style, image_path);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_style_set_background_image(
     noti_ex_style_h handle,
     ffi.Pointer<ffi.Char> image_path,
@@ -1013,18 +1330,32 @@ class Tizen80NotificationEx {
       _noti_ex_style_set_background_imagePtr
           .asFunction<int Function(noti_ex_style_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the background color of a style.
-  /// @since_tizen 5.5
-  /// @remarks @a color must be released using noti_ex_color_destroy().
-  /// @param[in] handle The notification_ex style handle
-  /// @param[out] color The notification_ex color handle
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_style_h
-  /// @see noti_ex_style_create()
-  /// @par Sample code:
-  /// @code
+  /// Gets the background color of a style.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - `color` must be released using noti_ex_color_destroy().
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex style handle
+  /// - `color` (out): The notification_ex color handle
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_style_h`
+  /// - `noti_ex_style_create()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -1033,7 +1364,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_style_get_background_color(style, &color);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_style_get_background_color(
     noti_ex_style_h handle,
     ffi.Pointer<noti_ex_color_h> color,
@@ -1052,18 +1383,32 @@ class Tizen80NotificationEx {
       _noti_ex_style_get_background_colorPtr.asFunction<
           int Function(noti_ex_style_h, ffi.Pointer<noti_ex_color_h>)>();
 
-  /// @brief Sets the background color of a style.
-  /// @since_tizen 5.5
-  /// @remarks @a color must be released using noti_ex_color_destroy().
-  /// @param[in] handle The notification_ex style handle
-  /// @param[in] color The notification_ex color handle
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_style_h
-  /// @see noti_ex_style_create()
-  /// @par Sample code:
-  /// @code
+  /// Sets the background color of a style.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - `color` must be released using noti_ex_color_destroy().
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex style handle
+  /// - `color` (in): The notification_ex color handle
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_style_h`
+  /// - `noti_ex_style_create()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -1074,7 +1419,7 @@ class Tizen80NotificationEx {
   /// ret = noti_ex_style_set_background_color(style, color);
   /// ret = noti_ex_color_destroy(color);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_style_set_background_color(
     noti_ex_style_h handle,
     noti_ex_color_h color,
@@ -1093,25 +1438,38 @@ class Tizen80NotificationEx {
       _noti_ex_style_set_background_colorPtr
           .asFunction<int Function(noti_ex_style_h, noti_ex_color_h)>();
 
-  /// @brief Creates the notification_ex LED info handle.
-  /// @details LED information can be defined as a notification_ex LED handle
-  /// with color information.
-  /// The color is the defined notification_ex color handle.
-  /// @since_tizen 5.5
-  /// @remarks @a handle must be released using noti_ex_led_info_destroy().
-  /// @a color must not be released if the function returns #NOTI_EX_ERROR_NONE.
-  /// @a color will be released when @a handle is released.
-  /// @param[out] handle The notification_ex LED info handle
-  /// @param[in] color The notification_ex color handle
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #NOTI_EX_ERROR_OUT_OF_MEMORY out of memory
-  /// @see #noti_ex_led_info_h
-  /// @see #noti_ex_color_h
-  /// @see noti_ex_led_info_destroy()
-  /// @par Sample code:
-  /// @code
+  /// Creates the notification_ex LED info handle.
+  ///
+  /// LED information can be defined as a notification_ex LED handle with color information. The color is the defined notification_ex color handle.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - `handle` must be released using noti_ex_led_info_destroy().
+  /// - `color` must not be released if the function returns `NOTI_EX_ERROR_NONE`.
+  /// - `color` will be released when `handle` is released.
+  ///
+  /// **Parameters:**
+  /// - `handle` (out): The notification_ex LED info handle
+  /// - `color` (in): The notification_ex color handle
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `NOTI_EX_ERROR_OUT_OF_MEMORY`: out of memory
+  ///
+  /// **See also:**
+  /// - `noti_ex_led_info_h`
+  /// - `noti_ex_color_h`
+  /// - `noti_ex_led_info_destroy()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -1123,7 +1481,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_led_info_create(&led_info, color);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_led_info_create(
     ffi.Pointer<noti_ex_led_info_h> handle,
     noti_ex_color_h color,
@@ -1141,15 +1499,27 @@ class Tizen80NotificationEx {
   late final _noti_ex_led_info_create = _noti_ex_led_info_createPtr.asFunction<
       int Function(ffi.Pointer<noti_ex_led_info_h>, noti_ex_color_h)>();
 
-  /// @brief Releases the notification_ex LED info handle.
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification_ex LED info handle
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_led_info_h
-  /// @par Sample code:
-  /// @code
+  /// Releases the notification_ex LED info handle.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex LED info handle
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_led_info_h`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -1157,7 +1527,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_led_info_destroy(led_info);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_led_info_destroy(
     noti_ex_led_info_h handle,
   ) {
@@ -1172,17 +1542,29 @@ class Tizen80NotificationEx {
   late final _noti_ex_led_info_destroy = _noti_ex_led_info_destroyPtr
       .asFunction<int Function(noti_ex_led_info_h)>();
 
-  /// @brief Sets the time period for turning on the LED.
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification_ex LED info handle
-  /// @param[in] ms The time for turning on the LED, in milliseconds
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_led_info_h
-  /// @see noti_ex_led_info_create()
-  /// @par Sample code:
-  /// @code
+  /// Sets the time period for turning on the LED.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex LED info handle
+  /// - `ms` (in): The time for turning on the LED, in milliseconds
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_led_info_h`
+  /// - `noti_ex_led_info_create()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -1190,7 +1572,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_led_info_set_on_period(led_info, 5);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_led_info_set_on_period(
     noti_ex_led_info_h handle,
     int ms,
@@ -1208,17 +1590,29 @@ class Tizen80NotificationEx {
       _noti_ex_led_info_set_on_periodPtr
           .asFunction<int Function(noti_ex_led_info_h, int)>();
 
-  /// @brief Gets the time period for turning on the LED.
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification_ex LED info handle
-  /// @param[out] ms The time for turning on the LED, in milliseconds
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_led_info_h
-  /// @see noti_ex_led_info_create()
-  /// @par Sample code:
-  /// @code
+  /// Gets the time period for turning on the LED.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex LED info handle
+  /// - `ms` (out): The time for turning on the LED, in milliseconds
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_led_info_h`
+  /// - `noti_ex_led_info_create()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -1227,7 +1621,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_led_info_get_on_period(led_info, &ms);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_led_info_get_on_period(
     noti_ex_led_info_h handle,
     ffi.Pointer<ffi.Int> ms,
@@ -1246,17 +1640,29 @@ class Tizen80NotificationEx {
       _noti_ex_led_info_get_on_periodPtr
           .asFunction<int Function(noti_ex_led_info_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Sets the time period for turning off the LED.
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification_ex LED info handle
-  /// @param[in] ms The time for turning off the LED, in milliseconds
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_led_info_h
-  /// @see noti_ex_led_info_create()
-  /// @par Sample code:
-  /// @code
+  /// Sets the time period for turning off the LED.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex LED info handle
+  /// - `ms` (in): The time for turning off the LED, in milliseconds
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_led_info_h`
+  /// - `noti_ex_led_info_create()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -1264,7 +1670,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_led_info_set_off_period(led_info, 5);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_led_info_set_off_period(
     noti_ex_led_info_h handle,
     int ms,
@@ -1282,17 +1688,29 @@ class Tizen80NotificationEx {
       _noti_ex_led_info_set_off_periodPtr
           .asFunction<int Function(noti_ex_led_info_h, int)>();
 
-  /// @brief Gets the time period for turning off the LED.
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification_ex LED info handle
-  /// @param[out] ms The time for turning off the LED, in milliseconds
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_led_info_h
-  /// @see noti_ex_led_info_create()
-  /// @par Sample code:
-  /// @code
+  /// Gets the time period for turning off the LED.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex LED info handle
+  /// - `ms` (out): The time for turning off the LED, in milliseconds
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_led_info_h`
+  /// - `noti_ex_led_info_create()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -1301,7 +1719,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_led_info_get_off_period(led_info, &ms);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_led_info_get_off_period(
     noti_ex_led_info_h handle,
     ffi.Pointer<ffi.Int> ms,
@@ -1320,19 +1738,33 @@ class Tizen80NotificationEx {
       _noti_ex_led_info_get_off_periodPtr
           .asFunction<int Function(noti_ex_led_info_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the color information from LED info.
-  /// @since_tizen 5.5
-  /// @remarks @a color must be released using noti_ex_color_destroy().
-  /// @param[in] handle The notification_ex LED info handle
-  /// @param[out] color The notification_ex color handle
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_led_info_h
-  /// @see #noti_ex_color_h
-  /// @see noti_ex_led_info_create()
-  /// @par Sample code:
-  /// @code
+  /// Gets the color information from LED info.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - `color` must be released using noti_ex_color_destroy().
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex LED info handle
+  /// - `color` (out): The notification_ex color handle
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_led_info_h`
+  /// - `noti_ex_color_h`
+  /// - `noti_ex_led_info_create()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -1341,7 +1773,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_led_info_get_color(led_info, &color);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_led_info_get_color(
     noti_ex_led_info_h handle,
     ffi.Pointer<noti_ex_color_h> color,
@@ -1360,15 +1792,27 @@ class Tizen80NotificationEx {
       _noti_ex_led_info_get_colorPtr.asFunction<
           int Function(noti_ex_led_info_h, ffi.Pointer<noti_ex_color_h>)>();
 
-  /// @brief Releases the notification_ex action handle.
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification_ex action handle
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_action_h
-  /// @par Sample code:
-  /// @code
+  /// Releases the notification_ex action handle.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex action handle
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_action_h`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -1376,7 +1820,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_action_destroy(action);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_action_destroy(
     noti_ex_action_h handle,
   ) {
@@ -1391,18 +1835,31 @@ class Tizen80NotificationEx {
   late final _noti_ex_action_destroy =
       _noti_ex_action_destroyPtr.asFunction<int Function(noti_ex_action_h)>();
 
-  /// @brief Gets the type of an action.
-  /// @details The action type is equal to one of the values of #noti_ex_action_type_e
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification_ex action handle
-  /// @param[out] type The type of action \n
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_action_h
-  /// @see #noti_ex_action_type_e
-  /// @par Sample code:
-  /// @code
+  /// Gets the type of an action.
+  ///
+  /// The action type is equal to one of the values of `noti_ex_action_type_e`
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex action handle
+  /// - `type` (out): The type of action
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_action_h`
+  /// - `noti_ex_action_type_e`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -1415,7 +1872,7 @@ class Tizen80NotificationEx {
   /// // Do something
   /// }
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_action_get_type(
     noti_ex_action_h handle,
     ffi.Pointer<ffi.Int> type,
@@ -1433,16 +1890,28 @@ class Tizen80NotificationEx {
   late final _noti_ex_action_get_type = _noti_ex_action_get_typePtr
       .asFunction<int Function(noti_ex_action_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the local state of an action.
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification_ex action handle
-  /// @param[out] local The local state of action
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_action_h
-  /// @par Sample code:
-  /// @code
+  /// Gets the local state of an action.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex action handle
+  /// - `local` (out): The local state of action
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_action_h`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -1451,7 +1920,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_action_is_local(action, &local);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_action_is_local(
     noti_ex_action_h handle,
     ffi.Pointer<ffi.Bool> local,
@@ -1469,17 +1938,29 @@ class Tizen80NotificationEx {
   late final _noti_ex_action_is_local = _noti_ex_action_is_localPtr
       .asFunction<int Function(noti_ex_action_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Executes the action for a notification_ex item.
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification_ex action handle
-  /// @param[in] item The notification_ex item handle
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_action_h
-  /// @see #noti_ex_item_h
-  /// @par Sample code:
-  /// @code
+  /// Executes the action for a notification_ex item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex action handle
+  /// - `item` (in): The notification_ex item handle
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_action_h`
+  /// - `noti_ex_item_h`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -1493,7 +1974,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_action_execute(action, button_item);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_action_execute(
     noti_ex_action_h handle,
     noti_ex_item_h item,
@@ -1511,17 +1992,31 @@ class Tizen80NotificationEx {
   late final _noti_ex_action_execute = _noti_ex_action_executePtr
       .asFunction<int Function(noti_ex_action_h, noti_ex_item_h)>();
 
-  /// @brief Gets the extra data for an action.
-  /// @since_tizen 5.5
-  /// @remarks @a extra must be released using free().
-  /// @param[in] handle The notification_ex action handle
-  /// @param[out] extra The extra data
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_action_h
-  /// @par Sample code:
-  /// @code
+  /// Gets the extra data for an action.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - `extra` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex action handle
+  /// - `extra` (out): The extra data
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_action_h`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -1530,7 +2025,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_action_get_extra(action, &extra);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_action_get_extra(
     noti_ex_action_h handle,
     ffi.Pointer<ffi.Pointer<ffi.Char>> extra,
@@ -1549,17 +2044,29 @@ class Tizen80NotificationEx {
       _noti_ex_action_get_extraPtr.asFunction<
           int Function(noti_ex_action_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the time to hide the notification_ex item.
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification_ex item info handle
-  /// @param[out] hide_time The time to hide notification, in seconds
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_item_info_h
-  /// @see noti_ex_item_get_info()
-  /// @par Sample code:
-  /// @code
+  /// Gets the time to hide the notification_ex item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item info handle
+  /// - `hide_time` (out): The time to hide notification, in seconds
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_info_h`
+  /// - `noti_ex_item_get_info()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -1571,7 +2078,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_item_info_get_hide_time(item_info, &hide_time);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_info_get_hide_time(
     noti_ex_item_info_h handle,
     ffi.Pointer<ffi.Int> hide_time,
@@ -1590,17 +2097,29 @@ class Tizen80NotificationEx {
       _noti_ex_item_info_get_hide_timePtr.asFunction<
           int Function(noti_ex_item_info_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Sets the time to hide the notification_ex item.
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification_ex item info handle
-  /// @param[in] hide_time The time to hide notification, in seconds
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_item_info_h
-  /// @see noti_ex_item_get_info()
-  /// @par Sample code:
-  /// @code
+  /// Sets the time to hide the notification_ex item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item info handle
+  /// - `hide_time` (in): The time to hide notification, in seconds
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_info_h`
+  /// - `noti_ex_item_get_info()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -1611,7 +2130,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_item_info_set_hide_time(action, 5);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_info_set_hide_time(
     noti_ex_item_info_h handle,
     int hide_time,
@@ -1629,17 +2148,29 @@ class Tizen80NotificationEx {
       _noti_ex_item_info_set_hide_timePtr
           .asFunction<int Function(noti_ex_item_info_h, int)>();
 
-  /// @brief Gets the time to delete the notification_ex item.
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification_ex item info handle
-  /// @param[out] delete_time The time to delete notification, in seconds
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_item_info_h
-  /// @see noti_ex_item_get_info()
-  /// @par Sample code:
-  /// @code
+  /// Gets the time to delete the notification_ex item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item info handle
+  /// - `delete_time` (out): The time to delete notification, in seconds
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_info_h`
+  /// - `noti_ex_item_get_info()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -1651,7 +2182,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_item_info_get_delete_time(item_info, &delete_time);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_info_get_delete_time(
     noti_ex_item_info_h handle,
     ffi.Pointer<ffi.Int> delete_time,
@@ -1670,17 +2201,29 @@ class Tizen80NotificationEx {
       _noti_ex_item_info_get_delete_timePtr.asFunction<
           int Function(noti_ex_item_info_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Sets the time to delete the notification_ex item.
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification_ex item info handle
-  /// @param[in] delete_time The time to delete notification, in seconds
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_item_info_h
-  /// @see noti_ex_item_get_info()
-  /// @par Sample code:
-  /// @code
+  /// Sets the time to delete the notification_ex item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item info handle
+  /// - `delete_time` (in): The time to delete notification, in seconds
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_info_h`
+  /// - `noti_ex_item_get_info()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -1691,7 +2234,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_item_info_set_delete_time(item_info, 5);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_info_set_delete_time(
     noti_ex_item_info_h handle,
     int delete_time,
@@ -1709,17 +2252,29 @@ class Tizen80NotificationEx {
       _noti_ex_item_info_set_delete_timePtr
           .asFunction<int Function(noti_ex_item_info_h, int)>();
 
-  /// @brief Gets the time information.
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification_ex item info handle
-  /// @param[out] time The time information
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_item_info_h
-  /// @see noti_ex_item_get_info()
-  /// @par Sample code:
-  /// @code
+  /// Gets the time information.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item info handle
+  /// - `time` (out): The time information
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_info_h`
+  /// - `noti_ex_item_get_info()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -1731,7 +2286,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_item_info_get_time(item_info, &time);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_info_get_time(
     noti_ex_item_info_h handle,
     ffi.Pointer<ffi_lib.Long> time,
@@ -1750,15 +2305,27 @@ class Tizen80NotificationEx {
       _noti_ex_item_info_get_timePtr.asFunction<
           int Function(noti_ex_item_info_h, ffi.Pointer<ffi_lib.Long>)>();
 
-  /// @brief Releases the notification_ex item handle.
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification_ex item handle
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_item_h
-  /// @par Sample code:
-  /// @code
+  /// Releases the notification_ex item handle.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item handle
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -1766,7 +2333,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_item_destroy(item_handle);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_destroy(
     noti_ex_item_h handle,
   ) {
@@ -1781,17 +2348,29 @@ class Tizen80NotificationEx {
   late final _noti_ex_item_destroy =
       _noti_ex_item_destroyPtr.asFunction<int Function(noti_ex_item_h)>();
 
-  /// @brief Finds the notification_ex item handle by notification_ex item id.
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification_ex item handle
-  /// @param[in] id The id of notification_ex item
-  /// @param[in] item The notification_ex item handle
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_item_h
-  /// @par Sample code:
-  /// @code
+  /// Finds the notification_ex item handle by notification_ex item id.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item handle
+  /// - `id` (in): The id of notification_ex item
+  /// - `item` (in): The notification_ex item handle
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -1800,7 +2379,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_item_find_by_id(item_handle, "find_id", &item);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_find_by_id(
     noti_ex_item_h handle,
     ffi.Pointer<ffi.Char> id,
@@ -1821,18 +2400,31 @@ class Tizen80NotificationEx {
       int Function(noti_ex_item_h, ffi.Pointer<ffi.Char>,
           ffi.Pointer<noti_ex_item_h>)>();
 
-  /// @brief Gets the type of notification_ex item.
-  /// @details The item type is equal to one of the values of #noti_ex_item_type_e.
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification_ex item handle
-  /// @param[out] type The type of notification_ex item
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_item_h
-  /// @see #noti_ex_item_type_e
-  /// @par Sample code:
-  /// @code
+  /// Gets the type of notification_ex item.
+  ///
+  /// The item type is equal to one of the values of `noti_ex_item_type_e`.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item handle
+  /// - `type` (out): The type of notification_ex item
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  /// - `noti_ex_item_type_e`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -1845,7 +2437,7 @@ class Tizen80NotificationEx {
   /// // Do something
   /// }
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_get_type(
     noti_ex_item_h handle,
     ffi.Pointer<ffi.Int> type,
@@ -1863,17 +2455,31 @@ class Tizen80NotificationEx {
   late final _noti_ex_item_get_type = _noti_ex_item_get_typePtr
       .asFunction<int Function(noti_ex_item_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the id of a notification_ex item.
-  /// @since_tizen 5.5
-  /// @remarks @a id must be released using free().
-  /// @param[in] handle The notification_ex item handle
-  /// @param[out] id The id of notification_ex item
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_item_h
-  /// @par Sample code:
-  /// @code
+  /// Gets the id of a notification_ex item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - `id` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item handle
+  /// - `id` (out): The id of notification_ex item
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -1882,7 +2488,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_item_get_id(item_handle, &id);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_get_id(
     noti_ex_item_h handle,
     ffi.Pointer<ffi.Pointer<ffi.Char>> id,
@@ -1900,16 +2506,28 @@ class Tizen80NotificationEx {
   late final _noti_ex_item_get_id = _noti_ex_item_get_idPtr.asFunction<
       int Function(noti_ex_item_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets the id of a notification_ex item.
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification_ex item handle
-  /// @param[in] id The id of notification_ex item
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_item_h
-  /// @par Sample code:
-  /// @code
+  /// Sets the id of a notification_ex item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item handle
+  /// - `id` (in): The id of notification_ex item
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -1917,7 +2535,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_item_set_id(item_handle, "new_id");
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_set_id(
     noti_ex_item_h handle,
     ffi.Pointer<ffi.Char> id,
@@ -1935,19 +2553,34 @@ class Tizen80NotificationEx {
   late final _noti_ex_item_set_id = _noti_ex_item_set_idPtr
       .asFunction<int Function(noti_ex_item_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the action for a notification_ex item.
-  /// @details The action is defined as notification_ex action handle.
-  /// @since_tizen 5.5
-  /// @remarks @a action must be released using noti_ex_action_destroy().
-  /// @param[in] handle The notification_ex item handle
-  /// @param[out] action The notification_ex action handle
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_item_h
-  /// @see #noti_ex_action_h
-  /// @par Sample code:
-  /// @code
+  /// Gets the action for a notification_ex item.
+  ///
+  /// The action is defined as notification_ex action handle.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - `action` must be released using noti_ex_action_destroy().
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item handle
+  /// - `action` (out): The notification_ex action handle
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  /// - `noti_ex_action_h`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -1956,7 +2589,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_item_get_action(item_handle, &action);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_get_action(
     noti_ex_item_h handle,
     ffi.Pointer<noti_ex_action_h> action,
@@ -1974,18 +2607,31 @@ class Tizen80NotificationEx {
   late final _noti_ex_item_get_action = _noti_ex_item_get_actionPtr.asFunction<
       int Function(noti_ex_item_h, ffi.Pointer<noti_ex_action_h>)>();
 
-  /// @brief Sets the action of a notification_ex item.
-  /// @details The action is defined as notification_ex action handle.
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification_ex item handle
-  /// @param[in] action The notification_ex action handle
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_item_h
-  /// @see #noti_ex_action_h
-  /// @par Sample code:
-  /// @code
+  /// Sets the action of a notification_ex item.
+  ///
+  /// The action is defined as notification_ex action handle.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item handle
+  /// - `action` (in): The notification_ex action handle
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  /// - `noti_ex_action_h`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -2003,7 +2649,7 @@ class Tizen80NotificationEx {
   ///
   /// app_control_destroy(app_control);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_set_action(
     noti_ex_item_h handle,
     noti_ex_action_h action,
@@ -2021,19 +2667,34 @@ class Tizen80NotificationEx {
   late final _noti_ex_item_set_action = _noti_ex_item_set_actionPtr
       .asFunction<int Function(noti_ex_item_h, noti_ex_action_h)>();
 
-  /// @brief Gets the style of a notification_ex item.
-  /// @details The style is defined as notification_ex style handle.
-  /// @since_tizen 5.5
-  /// @remarks @a style must be released using noti_ex_style_destroy().
-  /// @param[in] handle The notification_ex item handle
-  /// @param[out] style The notification_ex style handle
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_item_h
-  /// @see #noti_ex_style_h
-  /// @par Sample code:
-  /// @code
+  /// Gets the style of a notification_ex item.
+  ///
+  /// The style is defined as notification_ex style handle.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - `style` must be released using noti_ex_style_destroy().
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item handle
+  /// - `style` (out): The notification_ex style handle
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  /// - `noti_ex_style_h`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -2042,7 +2703,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_item_get_style(item_handle, &style);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_get_style(
     noti_ex_item_h handle,
     ffi.Pointer<noti_ex_style_h> style,
@@ -2060,19 +2721,32 @@ class Tizen80NotificationEx {
   late final _noti_ex_item_get_style = _noti_ex_item_get_stylePtr
       .asFunction<int Function(noti_ex_item_h, ffi.Pointer<noti_ex_style_h>)>();
 
-  /// @brief Sets the style of a notification_ex item.
-  /// @details The style is defined as notification_ex style handle.
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification_ex item handle
-  /// @param[in] style The notification_ex style handle
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_item_h
-  /// @see #noti_ex_style_h
-  /// @see noti_ex_style_create()
-  /// @par Sample code:
-  /// @code
+  /// Sets the style of a notification_ex item.
+  ///
+  /// The style is defined as notification_ex style handle.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item handle
+  /// - `style` (in): The notification_ex style handle
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  /// - `noti_ex_style_h`
+  /// - `noti_ex_style_create()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -2080,7 +2754,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_item_set_style(item_handle, style);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_set_style(
     noti_ex_item_h handle,
     noti_ex_style_h style,
@@ -2098,16 +2772,28 @@ class Tizen80NotificationEx {
   late final _noti_ex_item_set_style = _noti_ex_item_set_stylePtr
       .asFunction<int Function(noti_ex_item_h, noti_ex_style_h)>();
 
-  /// @brief Sets the visibility state of a notification_ex item.
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification_ex item handle
-  /// @param[in] visible The visible state
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_item_h
-  /// @par Sample code:
-  /// @code
+  /// Sets the visibility state of a notification_ex item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item handle
+  /// - `visible` (in): The visible state
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -2115,7 +2801,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_item_set_visible(item_handle, true);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_set_visible(
     noti_ex_item_h handle,
     bool visible,
@@ -2132,16 +2818,28 @@ class Tizen80NotificationEx {
   late final _noti_ex_item_set_visible = _noti_ex_item_set_visiblePtr
       .asFunction<int Function(noti_ex_item_h, bool)>();
 
-  /// @brief Gets the visibility state of a notification_ex item.
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification_ex item handle
-  /// @param[out] visible The visible state
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_item_h
-  /// @par Sample code:
-  /// @code
+  /// Gets the visibility state of a notification_ex item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item handle
+  /// - `visible` (out): The visible state
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -2150,7 +2848,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_item_get_visible(item_handle, &visible);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_get_visible(
     noti_ex_item_h handle,
     ffi.Pointer<ffi.Bool> visible,
@@ -2168,16 +2866,28 @@ class Tizen80NotificationEx {
   late final _noti_ex_item_get_visible = _noti_ex_item_get_visiblePtr
       .asFunction<int Function(noti_ex_item_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Sets the enabled state of a notification_ex item.
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification_ex item handle
-  /// @param[in] enable The enable state
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_item_h
-  /// @par Sample code:
-  /// @code
+  /// Sets the enabled state of a notification_ex item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item handle
+  /// - `enable` (in): The enable state
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -2185,7 +2895,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_item_set_enable(item_handle, true);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_set_enable(
     noti_ex_item_h handle,
     bool enable,
@@ -2202,16 +2912,28 @@ class Tizen80NotificationEx {
   late final _noti_ex_item_set_enable = _noti_ex_item_set_enablePtr
       .asFunction<int Function(noti_ex_item_h, bool)>();
 
-  /// @brief Gets the enabled state of a notification_ex item.
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification_ex item handle
-  /// @param[in] enable The enable state
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_item_h
-  /// @par Sample code:
-  /// @code
+  /// Gets the enabled state of a notification_ex item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item handle
+  /// - `enable` (in): The enable state
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -2220,7 +2942,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_item_get_enable(item_handle, &enable);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_get_enable(
     noti_ex_item_h handle,
     ffi.Pointer<ffi.Bool> enable,
@@ -2238,16 +2960,28 @@ class Tizen80NotificationEx {
   late final _noti_ex_item_get_enable = _noti_ex_item_get_enablePtr
       .asFunction<int Function(noti_ex_item_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Adds the receiver group of a notification_ex item.
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification_ex item handle
-  /// @param[in] receiver_group The receiver group
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_item_h
-  /// @par Sample code:
-  /// @code
+  /// Adds the receiver group of a notification_ex item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item handle
+  /// - `receiver_group` (in): The receiver group
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -2255,7 +2989,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_item_add_receiver(item_handle, NOTI_EX_RECEIVER_GROUP_INDICATOR);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_add_receiver(
     noti_ex_item_h handle,
     ffi.Pointer<ffi.Char> receiver_group,
@@ -2273,16 +3007,28 @@ class Tizen80NotificationEx {
   late final _noti_ex_item_add_receiver = _noti_ex_item_add_receiverPtr
       .asFunction<int Function(noti_ex_item_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Removes the receiver group from a notification_ex item.
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification_ex item handle
-  /// @param[in] receiver_group The receiver group
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_item_h
-  /// @par Sample code:
-  /// @code
+  /// Removes the receiver group from a notification_ex item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item handle
+  /// - `receiver_group` (in): The receiver group
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -2290,7 +3036,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_item_remove_receiver(item_handle, NOTI_EX_RECEIVER_GROUP_INDICATOR);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_remove_receiver(
     noti_ex_item_h handle,
     ffi.Pointer<ffi.Char> receiver_group,
@@ -2308,18 +3054,32 @@ class Tizen80NotificationEx {
   late final _noti_ex_item_remove_receiver = _noti_ex_item_remove_receiverPtr
       .asFunction<int Function(noti_ex_item_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the list of receiver group of a notification_ex item.
-  /// @since_tizen 5.5
-  /// @remarks Each member of the list must be released using free(), then the @a list must be released using free().
-  /// @param[in] handle The notification_ex item handle
-  /// @param[out] list The list of receiver group
-  /// @param[out] count The count of list
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_item_h
-  /// @par Sample code:
-  /// @code
+  /// Gets the list of receiver group of a notification_ex item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - Each member of the list must be released using free(), then the `list` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item handle
+  /// - `list` (out): The list of receiver group
+  /// - `count` (out): The count of list
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -2329,7 +3089,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_item_get_receiver_list(item_handle, &list, &count);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_get_receiver_list(
     noti_ex_item_h handle,
     ffi.Pointer<ffi.Pointer<ffi.Pointer<ffi.Char>>> list,
@@ -2355,18 +3115,31 @@ class Tizen80NotificationEx {
               ffi.Pointer<ffi.Pointer<ffi.Pointer<ffi.Char>>>,
               ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Sets the policy of a notification_ex item.
-  /// @details @a policy should be set to values of #noti_ex_item_policy_e combined with bitwise 'or'.
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification_ex item handle
-  /// @param[in] policy The policy of a notification_ex item
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_item_h
-  /// @see #noti_ex_item_policy_e
-  /// @par Sample code:
-  /// @code
+  /// Sets the policy of a notification_ex item.
+  ///
+  /// `policy` should be set to values of `noti_ex_item_policy_e` combined with bitwise 'or'.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item handle
+  /// - `policy` (in): The policy of a notification_ex item
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  /// - `noti_ex_item_policy_e`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -2375,7 +3148,7 @@ class Tizen80NotificationEx {
   /// ret = noti_ex_item_set_policy(item_handle,
   /// NOTI_EX_ITEM_POLICY_ON_BOOT_CLEAR | NOTI_EX_ITEM_POLICY_SIM_MODE);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_set_policy(
     noti_ex_item_h handle,
     int policy,
@@ -2392,18 +3165,31 @@ class Tizen80NotificationEx {
   late final _noti_ex_item_set_policy = _noti_ex_item_set_policyPtr
       .asFunction<int Function(noti_ex_item_h, int)>();
 
-  /// @brief Gets the policy of a notification_ex item.
-  /// @details @a policy is equal to values of #noti_ex_item_policy_e combined with bitwise 'or'.
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification_ex item handle
-  /// @param[out] policy The policy of a notification_ex item
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_item_h
-  /// @see #noti_ex_item_policy_e
-  /// @par Sample code:
-  /// @code
+  /// Gets the policy of a notification_ex item.
+  ///
+  /// `policy` is equal to values of `noti_ex_item_policy_e` combined with bitwise 'or'.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item handle
+  /// - `policy` (out): The policy of a notification_ex item
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  /// - `noti_ex_item_policy_e`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -2412,7 +3198,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_item_get_policy(item_handle, &policy);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_get_policy(
     noti_ex_item_h handle,
     ffi.Pointer<ffi.Int> policy,
@@ -2430,17 +3216,31 @@ class Tizen80NotificationEx {
   late final _noti_ex_item_get_policy = _noti_ex_item_get_policyPtr
       .asFunction<int Function(noti_ex_item_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the channel of a notification_ex item.
-  /// @since_tizen 5.5
-  /// @remarks @a channel must be released using free().
-  /// @param[in] handle The notification_ex item handle
-  /// @param[out] channel The channel of a notification_ex item
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_item_h
-  /// @par Sample code:
-  /// @code
+  /// Gets the channel of a notification_ex item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - `channel` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item handle
+  /// - `channel` (out): The channel of a notification_ex item
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -2449,7 +3249,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_item_get_channel(item_handle, &channel);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_get_channel(
     noti_ex_item_h handle,
     ffi.Pointer<ffi.Pointer<ffi.Char>> channel,
@@ -2468,16 +3268,28 @@ class Tizen80NotificationEx {
       _noti_ex_item_get_channelPtr.asFunction<
           int Function(noti_ex_item_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets the channel of a notification_ex item.
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification_ex item handle
-  /// @param[in] channel The channel of a notification_ex item
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_item_h
-  /// @par Sample code:
-  /// @code
+  /// Sets the channel of a notification_ex item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item handle
+  /// - `channel` (in): The channel of a notification_ex item
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -2485,7 +3297,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_item_set_channel(item_handle, "channel");
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_set_channel(
     noti_ex_item_h handle,
     ffi.Pointer<ffi.Char> channel,
@@ -2503,19 +3315,32 @@ class Tizen80NotificationEx {
   late final _noti_ex_item_set_channel = _noti_ex_item_set_channelPtr
       .asFunction<int Function(noti_ex_item_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets the LED information of a notification_ex item.
-  /// @details The LED information is defined as notification_ex LED info handle
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification_ex item handle
-  /// @param[in] led The notification_ex LED info item
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_item_h
-  /// @see #noti_ex_led_info_h
-  /// @see noti_ex_led_info_create()
-  /// @par Sample code:
-  /// @code
+  /// Sets the LED information of a notification_ex item.
+  ///
+  /// The LED information is defined as notification_ex LED info handle
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item handle
+  /// - `led` (in): The notification_ex LED info item
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  /// - `noti_ex_led_info_h`
+  /// - `noti_ex_led_info_create()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -2523,7 +3348,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_item_set_led_info(item_handle, led_info);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_set_led_info(
     noti_ex_item_h handle,
     noti_ex_led_info_h led,
@@ -2541,19 +3366,34 @@ class Tizen80NotificationEx {
   late final _noti_ex_item_set_led_info = _noti_ex_item_set_led_infoPtr
       .asFunction<int Function(noti_ex_item_h, noti_ex_led_info_h)>();
 
-  /// @brief Gets the LED information of a notification_ex item.
-  /// @details The LED information is defined as notification_ex LED info handle
-  /// @since_tizen 5.5
-  /// @remarks @a led must be released using noti_ex_led_info_destroy().
-  /// @param[in] handle The notification_ex item handle
-  /// @param[out] led The notification_ex LED info item
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_item_h
-  /// @see #noti_ex_led_info_h
-  /// @par Sample code:
-  /// @code
+  /// Gets the LED information of a notification_ex item.
+  ///
+  /// The LED information is defined as notification_ex LED info handle
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - `led` must be released using noti_ex_led_info_destroy().
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item handle
+  /// - `led` (out): The notification_ex LED info item
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  /// - `noti_ex_led_info_h`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -2562,7 +3402,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_item_get_led_info(item_handle, &led_info);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_get_led_info(
     noti_ex_item_h handle,
     ffi.Pointer<noti_ex_led_info_h> led,
@@ -2581,17 +3421,28 @@ class Tizen80NotificationEx {
       _noti_ex_item_get_led_infoPtr.asFunction<
           int Function(noti_ex_item_h, ffi.Pointer<noti_ex_led_info_h>)>();
 
-  /// @brief Sets the sound path of a notification_ex item.
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification_ex item handle
-  /// @param[in] path The absolute path of sound for notification_ex item
-  /// If you want to set a default sound, enter #NOTI_EX_SOUND_TYPE_DEFAULT.
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_item_h
-  /// @par Sample code:
-  /// @code
+  /// Sets the sound path of a notification_ex item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item handle
+  /// - `path` (in): The absolute path of sound for notification_ex item If you want to set a default sound, enter `NOTI_EX_SOUND_TYPE_DEFAULT`.
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -2599,7 +3450,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_item_set_sound_path(item_handle, "sound_path");
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_set_sound_path(
     noti_ex_item_h handle,
     ffi.Pointer<ffi.Char> path,
@@ -2617,19 +3468,31 @@ class Tizen80NotificationEx {
   late final _noti_ex_item_set_sound_path = _noti_ex_item_set_sound_pathPtr
       .asFunction<int Function(noti_ex_item_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the sound path of a notification_ex item.
-  /// @since_tizen 5.5
-  /// @remarks @a path must be released using free().
-  /// @param[in] handle The notification_ex item handle
-  /// @param[out] path The absolute path of sound for notification_ex item
-  /// If not set, you will get NULL.
-  /// If set default, you will get #NOTI_EX_SOUND_TYPE_DEFAULT.
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_item_h
-  /// @par Sample code:
-  /// @code
+  /// Gets the sound path of a notification_ex item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - `path` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item handle
+  /// - `path` (out): The absolute path of sound for notification_ex item If not set, you will get NULL. If set default, you will get `NOTI_EX_SOUND_TYPE_DEFAULT`.
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -2638,7 +3501,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_item_get_sound_path(item_handle, &path);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_get_sound_path(
     noti_ex_item_h handle,
     ffi.Pointer<ffi.Pointer<ffi.Char>> path,
@@ -2658,17 +3521,28 @@ class Tizen80NotificationEx {
       _noti_ex_item_get_sound_pathPtr.asFunction<
           int Function(noti_ex_item_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets the vibration path of a notification_ex item.
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification_ex item handle
-  /// @param[in] path The absolute path of vibration for notification_ex item
-  /// If you want to set a default sound, enter #NOTI_EX_VIBRATION_TYPE_DEFAULT.
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_item_h
-  /// @par Sample code:
-  /// @code
+  /// Sets the vibration path of a notification_ex item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item handle
+  /// - `path` (in): The absolute path of vibration for notification_ex item If you want to set a default sound, enter `NOTI_EX_VIBRATION_TYPE_DEFAULT`.
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -2676,7 +3550,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_item_set_vibration_path(item_handle, "vibration_path");
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_set_vibration_path(
     noti_ex_item_h handle,
     ffi.Pointer<ffi.Char> path,
@@ -2695,19 +3569,31 @@ class Tizen80NotificationEx {
       _noti_ex_item_set_vibration_pathPtr
           .asFunction<int Function(noti_ex_item_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the vibration path of a notification_ex item.
-  /// @since_tizen 5.5
-  /// @remarks @a path must be released using free().
-  /// @param[in] handle The notification_ex item handle
-  /// @param[out] path The absolute path of vibration for a notification_ex item
-  /// If not set, you will get NULL.
-  /// If set default, you will get #NOTI_EX_VIBRATION_TYPE_DEFAULT.
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_item_h
-  /// @par Sample code:
-  /// @code
+  /// Gets the vibration path of a notification_ex item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - `path` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item handle
+  /// - `path` (out): The absolute path of vibration for a notification_ex item If not set, you will get NULL. If set default, you will get `NOTI_EX_VIBRATION_TYPE_DEFAULT`.
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -2716,7 +3602,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_item_get_vibration_path(item_handle, &path);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_get_vibration_path(
     noti_ex_item_h handle,
     ffi.Pointer<ffi.Pointer<ffi.Char>> path,
@@ -2736,21 +3622,35 @@ class Tizen80NotificationEx {
       _noti_ex_item_get_vibration_pathPtr.asFunction<
           int Function(noti_ex_item_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the information of a notification_ex item.
-  /// @details The information of notification_ex item is defined as
-  /// notification_ex item info handle.
-  /// @since_tizen 5.5
-  /// @remarks @a info should not be released.
-  /// @remarks @a info is available until @a handle is released.
-  /// @param[in] handle The notification_ex item handle
-  /// @param[out] info The notification_ex item info handle
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_item_h
-  /// @see #noti_ex_item_info_h
-  /// @par Sample code:
-  /// @code
+  /// Gets the information of a notification_ex item.
+  ///
+  /// The information of notification_ex item is defined as notification_ex item info handle.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - `info` should not be released.
+  /// - `info` is available until `handle` is released.
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item handle
+  /// - `info` (out): The notification_ex item info handle
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  /// - `noti_ex_item_info_h`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -2759,7 +3659,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_item_get_info(item_handle, &item_info);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_get_info(
     noti_ex_item_h handle,
     ffi.Pointer<noti_ex_item_info_h> info,
@@ -2777,17 +3677,31 @@ class Tizen80NotificationEx {
   late final _noti_ex_item_get_info = _noti_ex_item_get_infoPtr.asFunction<
       int Function(noti_ex_item_h, ffi.Pointer<noti_ex_item_info_h>)>();
 
-  /// @brief Gets the sender app id of a notification_ex item.
-  /// @since_tizen 5.5
-  /// @remarks @a id must be released using free().
-  /// @param[in] handle The notification_ex item handle
-  /// @param[out] id The sender app id of a notification_ex item
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_item_h
-  /// @par Sample code:
-  /// @code
+  /// Gets the sender app id of a notification_ex item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - `id` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item handle
+  /// - `id` (out): The sender app id of a notification_ex item
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -2796,7 +3710,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_item_get_sender_app_id(item_handle, &app_id);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_get_sender_app_id(
     noti_ex_item_h handle,
     ffi.Pointer<ffi.Pointer<ffi.Char>> id,
@@ -2816,17 +3730,31 @@ class Tizen80NotificationEx {
       _noti_ex_item_get_sender_app_idPtr.asFunction<
           int Function(noti_ex_item_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the tag of a notification_ex item.
-  /// @since_tizen 5.5
-  /// @remarks @a tag must be released using free().
-  /// @param[in] handle The notification_ex item handle
-  /// @param[out] tag The tag of a notification_ex item
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_item_h
-  /// @par Sample code:
-  /// @code
+  /// Gets the tag of a notification_ex item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - `tag` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item handle
+  /// - `tag` (out): The tag of a notification_ex item
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -2835,7 +3763,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_item_get_tag(item_handle, &tag);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_get_tag(
     noti_ex_item_h handle,
     ffi.Pointer<ffi.Pointer<ffi.Char>> tag,
@@ -2853,16 +3781,28 @@ class Tizen80NotificationEx {
   late final _noti_ex_item_get_tag = _noti_ex_item_get_tagPtr.asFunction<
       int Function(noti_ex_item_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets the tag of a notification_ex item.
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification_ex item handle
-  /// @param[in] tag The tag of a notification_ex item
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_item_h
-  /// @par Sample code:
-  /// @code
+  /// Sets the tag of a notification_ex item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item handle
+  /// - `tag` (in): The tag of a notification_ex item
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -2870,7 +3810,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_item_set_tag(item_handle, "item_tag");
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_set_tag(
     noti_ex_item_h handle,
     ffi.Pointer<ffi.Char> tag,
@@ -2888,16 +3828,28 @@ class Tizen80NotificationEx {
   late final _noti_ex_item_set_tag = _noti_ex_item_set_tagPtr
       .asFunction<int Function(noti_ex_item_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the value indicating whether a notification is currently ongoing.
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification_ex item handle
-  /// @param[out] ongoing The state of ongoing
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_item_h
-  /// @par Sample code:
-  /// @code
+  /// Gets the value indicating whether a notification is currently ongoing.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item handle
+  /// - `ongoing` (out): The state of ongoing
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -2906,7 +3858,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_item_get_ongoing_state(item_handle, &ongoing);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_get_ongoing_state(
     noti_ex_item_h handle,
     ffi.Pointer<ffi.Bool> ongoing,
@@ -2925,16 +3877,28 @@ class Tizen80NotificationEx {
       _noti_ex_item_get_ongoing_statePtr
           .asFunction<int Function(noti_ex_item_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Sets the value indicating whether a notification is currently ongoing.
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification_ex item handle
-  /// @param[in] ongoing The state of ongoing
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_item_h
-  /// @par Sample code:
-  /// @code
+  /// Sets the value indicating whether a notification is currently ongoing.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item handle
+  /// - `ongoing` (in): The state of ongoing
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -2942,7 +3906,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_item_set_ongoing_state(item_handle, true);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_set_ongoing_state(
     noti_ex_item_h handle,
     bool ongoing,
@@ -2960,18 +3924,30 @@ class Tizen80NotificationEx {
       _noti_ex_item_set_ongoing_statePtr
           .asFunction<int Function(noti_ex_item_h, bool)>();
 
-  /// @brief Checks if an item of a specified type is included in a notification_ex item.
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification_ex item handle
-  /// @param[in] type The type of a notification_ex item
-  /// @param[out] exist The state of if a type is included
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_item_h
-  /// @see #noti_ex_item_type_e
-  /// @par Sample code:
-  /// @code
+  /// Checks if an item of a specified type is included in a notification_ex item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item handle
+  /// - `type` (in): The type of a notification_ex item
+  /// - `exist` (out): The state of if a type is included
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  /// - `noti_ex_item_type_e`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -2981,7 +3957,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_item_check_type_exist(item_handle, type, &exist);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_check_type_exist(
     noti_ex_item_h handle,
     int type,
@@ -3001,18 +3977,31 @@ class Tizen80NotificationEx {
   late final _noti_ex_item_check_type_exist = _noti_ex_item_check_type_existPtr
       .asFunction<int Function(noti_ex_item_h, int, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Gets the main type of a notification item.
-  /// @details The type is equal to one of the values of #noti_ex_item_main_type_e.
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification_ex item handle
-  /// @param[out] type The main type
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_item_h
-  /// @see #noti_ex_item_main_type_e
-  /// @par Sample code:
-  /// @code
+  /// Gets the main type of a notification item.
+  ///
+  /// The type is equal to one of the values of `noti_ex_item_main_type_e`.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item handle
+  /// - `type` (out): The main type
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  /// - `noti_ex_item_main_type_e`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -3025,7 +4014,7 @@ class Tizen80NotificationEx {
   /// // Do something
   /// }
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_get_main_type(
     noti_ex_item_h handle,
     ffi.Pointer<ffi.Int> type,
@@ -3043,22 +4032,35 @@ class Tizen80NotificationEx {
   late final _noti_ex_item_get_main_type = _noti_ex_item_get_main_typePtr
       .asFunction<int Function(noti_ex_item_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Sets the main type of a notification item.
-  /// @details Use this function to configure main type among multiple items.
-  /// In other words, if there is only one item, it should not be used.
-  /// The type is equal to one of the values of #noti_ex_item_main_type_e.
-  /// @since_tizen 5.5
-  /// @remarks When set to a specific type, the previous main item of the same type is canceled.
-  /// @param[in] handle The notification_ex item handle
-  /// @param[in] id The ID of notification_ex item
-  /// @param[in] type The main type
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_item_h
-  /// @see #noti_ex_item_main_type_e
-  /// @par Sample code:
-  /// @code
+  /// Sets the main type of a notification item.
+  ///
+  /// Use this function to configure main type among multiple items. In other words, if there is only one item, it should not be used. The type is equal to one of the values of `noti_ex_item_main_type_e`.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - When set to a specific type, the previous main item of the same type is canceled.
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item handle
+  /// - `id` (in): The ID of notification_ex item
+  /// - `type` (in): The main type
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  /// - `noti_ex_item_main_type_e`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -3074,7 +4076,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_item_set_main_type(group_item, "text_id", type);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_set_main_type(
     noti_ex_item_h handle,
     ffi.Pointer<ffi.Char> id,
@@ -3094,20 +4096,35 @@ class Tizen80NotificationEx {
   late final _noti_ex_item_set_main_type = _noti_ex_item_set_main_typePtr
       .asFunction<int Function(noti_ex_item_h, ffi.Pointer<ffi.Char>, int)>();
 
-  /// @brief Finds the notification item of the specified main type.
-  /// @details Finds the item that matches the main type among the group items.
-  /// @since_tizen 5.5
-  /// @remarks @a handle must be released using noti_ex_item_destroy().
-  /// @param[in] handle The notification_ex item handle
-  /// @param[in] type The main type
-  /// @param[out] item The notification_ex item handle
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_item_h
-  /// @see #noti_ex_item_main_type_e
-  /// @par Sample code:
-  /// @code
+  /// Finds the notification item of the specified main type.
+  ///
+  /// Finds the item that matches the main type among the group items.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - `handle` must be released using noti_ex_item_destroy().
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item handle
+  /// - `type` (in): The main type
+  /// - `item` (out): The notification_ex item handle
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  /// - `noti_ex_item_main_type_e`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -3121,7 +4138,7 @@ class Tizen80NotificationEx {
   /// // Do something
   /// }
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_find_by_main_type(
     noti_ex_item_h handle,
     int type,
@@ -3142,18 +4159,32 @@ class Tizen80NotificationEx {
       _noti_ex_item_find_by_main_typePtr.asFunction<
           int Function(noti_ex_item_h, int, ffi.Pointer<noti_ex_item_h>)>();
 
-  /// @brief Gets the extension data.
-  /// @since_tizen 5.5
-  /// @remarks The @a value should be released using bundle_free().
-  /// @param[in] handle The notification_ex item handle
-  /// @param[in] key The key
-  /// @param[out] value The bundle data
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_item_h
-  /// @par Sample code:
-  /// @code
+  /// Gets the extension data.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - The `value` should be released using bundle_free().
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item handle
+  /// - `key` (in): The key
+  /// - `value` (out): The bundle data
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -3165,7 +4196,7 @@ class Tizen80NotificationEx {
   /// ...
   /// bundle_free(b);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_get_extension_data(
     noti_ex_item_h handle,
     ffi.Pointer<ffi.Char> key,
@@ -3188,17 +4219,29 @@ class Tizen80NotificationEx {
           int Function(noti_ex_item_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Pointer<bundle.bundle>>)>();
 
-  /// @brief Sets the extension data.
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification_ex item handle
-  /// @param[in] key The key
-  /// @param[in] value The bundle data
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_item_h
-  /// @par Sample code:
-  /// @code
+  /// Sets the extension data.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item handle
+  /// - `key` (in): The key
+  /// - `value` (in): The bundle data
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -3210,7 +4253,7 @@ class Tizen80NotificationEx {
   /// ret = noti_ex_item_set_extension_data(item_handle, key, b);
   /// bundle_free(b);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_set_extension_data(
     noti_ex_item_h handle,
     ffi.Pointer<ffi.Char> key,
@@ -3232,27 +4275,38 @@ class Tizen80NotificationEx {
           int Function(noti_ex_item_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<bundle.bundle>)>();
 
-  /// @brief Creates the notification_ex action handle with app control handle.
-  /// @details The notification_ex can define the action with #noti_ex_action_h.
-  /// If it is necessary to use app control handle for an action,
-  /// the app control handle must be set in notification_ex action handle.
-  /// @a extra can be used to pass user defined data
-  /// and the extra data can be obtained from an action handle using #noti_ex_action_get_extra().
-  /// @since_tizen 5.5
-  /// @remarks @a handle must be released using noti_ex_action_destroy().
-  /// @a app_control must be released after noti_ex_action_app_control_create() function is called.
-  /// @param[out] handle The notification_ex action handle
-  /// @param[in] app_control The app control handle
-  /// @param[in] extra The extra data
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #NOTI_EX_ERROR_OUT_OF_MEMORY out of memory
-  /// @see #noti_ex_action_h
-  /// @see noti_ex_action_destroy()
-  /// @see noti_ex_action_get_extra()
-  /// @par Sample code:
-  /// @code
+  /// Creates the notification_ex action handle with app control handle.
+  ///
+  /// The notification_ex can define the action with `noti_ex_action_h`. If it is necessary to use app control handle for an action, the app control handle must be set in notification_ex action handle. `extra` can be used to pass user defined data and the extra data can be obtained from an action handle using `noti_ex_action_get_extra()`.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - `handle` must be released using noti_ex_action_destroy().
+  /// - `app_control` must be released after noti_ex_action_app_control_create() function is called.
+  ///
+  /// **Parameters:**
+  /// - `handle` (out): The notification_ex action handle
+  /// - `app_control` (in): The app control handle
+  /// - `extra` (in): The extra data
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `NOTI_EX_ERROR_OUT_OF_MEMORY`: out of memory
+  ///
+  /// **See also:**
+  /// - `noti_ex_action_h`
+  /// - `noti_ex_action_destroy()`
+  /// - `noti_ex_action_get_extra()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -3267,7 +4321,7 @@ class Tizen80NotificationEx {
   ///
   /// app_control_destroy(app_control);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_action_app_control_create(
     ffi.Pointer<noti_ex_action_h> handle,
     app_control.app_control_h app_control,
@@ -3291,17 +4345,29 @@ class Tizen80NotificationEx {
           int Function(ffi.Pointer<noti_ex_action_h>, app_control.app_control_h,
               ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets the app control handle for notification_ex action.
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification_ex action handle
-  /// @param[in] app_control The app control handle
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_action_h
-  /// @see noti_ex_action_app_control_create()
-  /// @par Sample code:
-  /// @code
+  /// Sets the app control handle for notification_ex action.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex action handle
+  /// - `app_control` (in): The app control handle
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_action_h`
+  /// - `noti_ex_action_app_control_create()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -3313,7 +4379,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_action_app_control_set(appcontrol_action, app_control);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_action_app_control_set(
     noti_ex_action_h handle,
     app_control.app_control_h app_control,
@@ -3332,18 +4398,32 @@ class Tizen80NotificationEx {
       _noti_ex_action_app_control_setPtr.asFunction<
           int Function(noti_ex_action_h, app_control.app_control_h)>();
 
-  /// @brief Gets the app control handle from notification_ex action.
-  /// @since_tizen 5.5
-  /// @remarks The @a app_control should be released using app_control_destroy().
-  /// @param[in] handle The notification_ex action handle
-  /// @param[out] app_control The app control handle
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_action_h
-  /// @see noti_ex_action_app_control_create()
-  /// @par Sample code:
-  /// @code
+  /// Gets the app control handle from notification_ex action.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - The `app_control` should be released using app_control_destroy().
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex action handle
+  /// - `app_control` (out): The app control handle
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_action_h`
+  /// - `noti_ex_action_app_control_create()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -3352,7 +4432,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_action_app_control_get(appcontrol_action, &app_control);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_action_app_control_get(
     noti_ex_action_h handle,
     ffi.Pointer<app_control.app_control_h> app_control,
@@ -3373,28 +4453,35 @@ class Tizen80NotificationEx {
           int Function(
               noti_ex_action_h, ffi.Pointer<app_control.app_control_h>)>();
 
-  /// @brief Creates the multi-language item handle.
-  /// @since_tizen 5.5
-  /// @remarks @a handle must be released using noti_ex_multi_lang_destroy().
-  /// @param[out] handle The multi-language item handle
-  /// @param[in] msgid The identifier of the message to be translated. One of the identifiers declared in PO files. \n
-  /// The message of @a msgid and @a format must contain the same specifiers and in the same order.
-  /// @param[in] format The string that contains the text to be written. \n
-  /// It can optionally contain embedded format specifiers \n
-  /// that are replaced by the values specified in subsequent additional arguments and formatted as requested. \n
-  /// Valid specifiers are as follows. \n
-  /// %d : Signed decimal integer \n
-  /// %f : Decimal floating point \n
-  /// %s : String of characters
-  /// @param[in] ... The additional arguments. The values to be used to replace format specifiers in the format string.
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #NOTI_EX_ERROR_OUT_OF_MEMORY out of memory
-  /// @see #noti_ex_multi_lang_h
-  /// @see noti_ex_multi_lang_destroy()
-  /// @par Sample code:
-  /// @code
+  /// Creates the multi-language item handle.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - `handle` must be released using noti_ex_multi_lang_destroy().
+  ///
+  /// **Parameters:**
+  /// - `handle` (out): The multi-language item handle
+  /// - `msgid` (in): The identifier of the message to be translated. One of the identifiers declared in PO files. The message of `msgid` and `format` must contain the same specifiers and in the same order.
+  /// - `format` (in): The string that contains the text to be written. It can optionally contain embedded format specifiers that are replaced by the values specified in subsequent additional arguments and formatted as requested. Valid specifiers are as follows. %d : Signed decimal integer %f : Decimal floating point %s : String of characters
+  /// - `...` (in): The additional arguments. The values to be used to replace format specifiers in the format string.
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `NOTI_EX_ERROR_OUT_OF_MEMORY`: out of memory
+  ///
+  /// **See also:**
+  /// - `noti_ex_multi_lang_h`
+  /// - `noti_ex_multi_lang_destroy()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -3405,7 +4492,7 @@ class Tizen80NotificationEx {
   /// ret = noti_ex_multi_lang_create(&handle, "_IDS_TEST_", "Hi %s version %f", "Tizen", 5.5);
   /// noti_ex_multi_lang_destroy(handle);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_multi_lang_create(
     ffi.Pointer<noti_ex_multi_lang_h> handle,
     ffi.Pointer<ffi.Char> msgid,
@@ -3429,16 +4516,28 @@ class Tizen80NotificationEx {
           int Function(ffi.Pointer<noti_ex_multi_lang_h>, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Destroys the multi-language item handle.
-  /// @since_tizen 5.5
-  /// @param[in] handle The multi-language item handle
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_multi_lang_h
-  /// @see noti_ex_multi_lang_create()
-  /// @par Sample code:
-  /// @code
+  /// Destroys the multi-language item handle.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The multi-language item handle
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_multi_lang_h`
+  /// - `noti_ex_multi_lang_create()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -3449,7 +4548,7 @@ class Tizen80NotificationEx {
   /// ret = noti_ex_multi_lang_create(&handle, "_IDS_TEST_", "Hi %s version %f", "Tizen", 5.5);
   /// noti_ex_multi_lang_destroy(handle);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_multi_lang_destroy(
     noti_ex_multi_lang_h handle,
   ) {
@@ -3464,24 +4563,36 @@ class Tizen80NotificationEx {
   late final _noti_ex_multi_lang_destroy = _noti_ex_multi_lang_destroyPtr
       .asFunction<int Function(noti_ex_multi_lang_h)>();
 
-  /// @brief Creates the notification_ex item handle with a button.
-  /// @details The notification_ex item is the predefined type of notifications.
-  /// The notification can be created with one item or group of items.
-  /// If the user wants to display the notification with a button,
-  /// the notification_ex handle has to be created as a button item.
-  /// @since_tizen 5.5
-  /// @remarks @a handle must be released using noti_ex_item_destroy().
-  /// @param[out] handle The notification_ex item handle
-  /// @param[in] id The id of notification_ex item
-  /// @param[in] title The title of notification_ex item
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #NOTI_EX_ERROR_OUT_OF_MEMORY out of memory
-  /// @see #noti_ex_item_h
-  /// @see noti_ex_item_destroy()
-  /// @par Sample code:
-  /// @code
+  /// Creates the notification_ex item handle with a button.
+  ///
+  /// The notification_ex item is the predefined type of notifications. The notification can be created with one item or group of items. If the user wants to display the notification with a button, the notification_ex handle has to be created as a button item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - `handle` must be released using noti_ex_item_destroy().
+  ///
+  /// **Parameters:**
+  /// - `handle` (out): The notification_ex item handle
+  /// - `id` (in): The id of notification_ex item
+  /// - `title` (in): The title of notification_ex item
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `NOTI_EX_ERROR_OUT_OF_MEMORY`: out of memory
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  /// - `noti_ex_item_destroy()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -3490,7 +4601,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_item_button_create(&button_item, "button_id", "button_title");
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_button_create(
     ffi.Pointer<noti_ex_item_h> handle,
     ffi.Pointer<ffi.Char> id,
@@ -3512,21 +4623,35 @@ class Tizen80NotificationEx {
           int Function(ffi.Pointer<noti_ex_item_h>, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the title of a button item.
-  /// @since_tizen 5.5
-  /// @remarks @a title must be released using free().
-  /// @remarks If the multi-language handle is set by noti_ex_item_button_set_multi_language_title(), \n
-  /// it will return a multi-language title.
-  /// @param[in] handle The notification_ex item handle
-  /// @param[out] title The title of notification_ex item
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter, if the item type is not correct, this error is returned
-  /// @see #noti_ex_item_h
-  /// @see noti_ex_item_button_create()
-  /// @see noti_ex_item_button_set_multi_language_title()
-  /// @par Sample code:
-  /// @code
+  /// Gets the title of a button item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - `title` must be released using free().
+  /// - If the multi-language handle is set by noti_ex_item_button_set_multi_language_title(),
+  /// - it will return a multi-language title.
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item handle
+  /// - `title` (out): The title of notification_ex item
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter, if the item type is not correct, this error is returned
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  /// - `noti_ex_item_button_create()`
+  /// - `noti_ex_item_button_set_multi_language_title()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -3535,7 +4660,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_item_button_get_title(button_item, &title);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_button_get_title(
     noti_ex_item_h handle,
     ffi.Pointer<ffi.Pointer<ffi.Char>> title,
@@ -3555,23 +4680,37 @@ class Tizen80NotificationEx {
       _noti_ex_item_button_get_titlePtr.asFunction<
           int Function(noti_ex_item_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets the multi-language handle.
-  /// @since_tizen 5.5
-  /// @remarks After setting the multi-language handle successfully, noti_ex_item_button_get_title() \n
-  /// will return the multi-language text.
-  /// @remarks The #noti_ex_item_h handle keeps its own copy of #noti_ex_multi_lang_h. \n
-  /// Therefore, you can destroy @a multi after it was set for @a handle.
-  /// @remarks You can pass NULL to @a multi, if you want to remove multi-language text.
-  /// @param[in] handle The notification_ex button item handle
-  /// @param[in] multi The multi-language handle
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter, if the item type is not correct, this error is returned
-  /// @see #noti_ex_item_h
-  /// @see noti_ex_item_button_create()
-  /// @see noti_ex_multi_lang_create()
-  /// @par Sample code:
-  /// @code
+  /// Sets the multi-language handle.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - After setting the multi-language handle successfully, noti_ex_item_button_get_title()
+  /// - will return the multi-language text.
+  /// - The `noti_ex_item_h` handle keeps its own copy of `noti_ex_multi_lang_h`.
+  /// - Therefore, you can destroy `multi` after it was set for `handle`.
+  /// - You can pass NULL to `multi`, if you want to remove multi-language text.
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex button item handle
+  /// - `multi` (in): The multi-language handle
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter, if the item type is not correct, this error is returned
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  /// - `noti_ex_item_button_create()`
+  /// - `noti_ex_multi_lang_create()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -3584,7 +4723,7 @@ class Tizen80NotificationEx {
   /// ret = noti_ex_item_button_set_multi_language_title(button_item, multi);
   /// noti_ex_multi_lang_destroy(multi);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_button_set_multi_language_title(
     noti_ex_item_h handle,
     noti_ex_multi_lang_h multi,
@@ -3603,34 +4742,46 @@ class Tizen80NotificationEx {
       _noti_ex_item_button_set_multi_language_titlePtr
           .asFunction<int Function(noti_ex_item_h, noti_ex_multi_lang_h)>();
 
-  /// @brief Creates the notification_ex item handle for the chat message.
-  /// @details The notification_ex item is the predefined type of notifications.
-  /// The notification can be created with one item or group of items.
-  /// If the user wants to create a chat message notification,
-  /// notification_ex handle has to be created as a chat message item.
-  /// @since_tizen 5.5
-  /// @remarks @a handle must be released using noti_ex_item_destroy().
-  /// @a name, @a text, @a image and @a time must not be released if the function returns #NOTI_EX_ERROR_NONE.
-  /// @a name, @a text, @a image and @a time will be released when @a handle is released.
-  /// @a name and @a time are mandatory (cannot be null). Both @a text and @a image cannot be null.
-  /// @param[out] handle The noti ex item handle
-  /// @param[in] id The id of notification_ex item
-  /// @param[in] name The notification_ex item handle for name
-  /// @param[in] text The notification_ex item handle for text
-  /// @param[in] image The notification_ex item handle for image
-  /// @param[in] time The notification_ex item handle for time
-  /// @param[in] message_type The type of chat message
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #NOTI_EX_ERROR_OUT_OF_MEMORY out of memory
-  /// @see #noti_ex_item_h
-  /// @see #noti_ex_item_chat_message_type_e
-  /// @see noti_ex_item_text_create()
-  /// @see noti_ex_item_image_create()
-  /// @see noti_ex_item_destroy()
-  /// @par Sample code:
-  /// @code
+  /// Creates the notification_ex item handle for the chat message.
+  ///
+  /// The notification_ex item is the predefined type of notifications. The notification can be created with one item or group of items. If the user wants to create a chat message notification, notification_ex handle has to be created as a chat message item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - `handle` must be released using noti_ex_item_destroy().
+  /// - `name`, `text`, `image` and `time` must not be released if the function returns `NOTI_EX_ERROR_NONE`.
+  /// - `name`, `text`, `image` and `time` will be released when `handle` is released.
+  /// - `name` and `time` are mandatory (cannot be null). Both `text` and `image` cannot be null.
+  ///
+  /// **Parameters:**
+  /// - `handle` (out): The noti ex item handle
+  /// - `id` (in): The id of notification_ex item
+  /// - `name` (in): The notification_ex item handle for name
+  /// - `text` (in): The notification_ex item handle for text
+  /// - `image` (in): The notification_ex item handle for image
+  /// - `time` (in): The notification_ex item handle for time
+  /// - `message_type` (in): The type of chat message
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `NOTI_EX_ERROR_OUT_OF_MEMORY`: out of memory
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  /// - `noti_ex_item_chat_message_type_e`
+  /// - `noti_ex_item_text_create()`
+  /// - `noti_ex_item_image_create()`
+  /// - `noti_ex_item_destroy()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -3652,7 +4803,7 @@ class Tizen80NotificationEx {
   /// ret = noti_ex_item_chat_message_create(&chatmessage_item, "message_id", name_handle,
   /// text_handle, image_handle, time_handle, NOTI_EX_ITEM_CHAT_MESSAGE_TYPE_USER);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_chat_message_create(
     ffi.Pointer<noti_ex_item_h> handle,
     ffi.Pointer<ffi.Char> id,
@@ -3694,21 +4845,36 @@ class Tizen80NotificationEx {
               noti_ex_item_h,
               int)>();
 
-  /// @brief Gets the notification_ex item handle for the chat message name.
-  /// @details The name is a notification_ex item handle created with noti_ex_item_text_create().
-  /// @since_tizen 5.5
-  /// @remarks @a name must be released using noti_ex_item_destroy().
-  /// @remarks The @a name is available until @a handle is released.
-  /// @param[in] handle The notification_ex item handle
-  /// @param[out] name The notification_ex item handle with name
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter, if the item type is not correct, this error is returned
-  /// @see #noti_ex_item_h
-  /// @see noti_ex_item_chat_message_create()
-  /// @see noti_ex_item_text_get_contents()
-  /// @par Sample code:
-  /// @code
+  /// Gets the notification_ex item handle for the chat message name.
+  ///
+  /// The name is a notification_ex item handle created with noti_ex_item_text_create().
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - `name` must be released using noti_ex_item_destroy().
+  /// - The `name` is available until `handle` is released.
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item handle
+  /// - `name` (out): The notification_ex item handle with name
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter, if the item type is not correct, this error is returned
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  /// - `noti_ex_item_chat_message_create()`
+  /// - `noti_ex_item_text_get_contents()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -3719,7 +4885,7 @@ class Tizen80NotificationEx {
   /// ret = noti_ex_item_chat_message_get_name(chatmessage_item, &name_handle);
   /// ret = noti_ex_item_text_get_contents(name_handle, &name);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_chat_message_get_name(
     noti_ex_item_h handle,
     ffi.Pointer<noti_ex_item_h> name,
@@ -3738,21 +4904,36 @@ class Tizen80NotificationEx {
       _noti_ex_item_chat_message_get_namePtr.asFunction<
           int Function(noti_ex_item_h, ffi.Pointer<noti_ex_item_h>)>();
 
-  /// @brief Gets the notification_ex item handle for the chat message text.
-  /// @details The text is a notification_ex item handle created with noti_ex_item_text_create().
-  /// @since_tizen 5.5
-  /// @remarks @a text must be released using noti_ex_item_destroy().
-  /// @remarks The @a text is available until @a handle is released.
-  /// @param[in] handle The notification_ex item handle
-  /// @param[out] text The notification_ex item handle with text
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter, if the item type is not correct, this error is returned
-  /// @see #noti_ex_item_h
-  /// @see noti_ex_item_chat_message_create()
-  /// @see noti_ex_item_text_get_contents()
-  /// @par Sample code:
-  /// @code
+  /// Gets the notification_ex item handle for the chat message text.
+  ///
+  /// The text is a notification_ex item handle created with noti_ex_item_text_create().
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - `text` must be released using noti_ex_item_destroy().
+  /// - The `text` is available until `handle` is released.
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item handle
+  /// - `text` (out): The notification_ex item handle with text
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter, if the item type is not correct, this error is returned
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  /// - `noti_ex_item_chat_message_create()`
+  /// - `noti_ex_item_text_get_contents()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -3763,7 +4944,7 @@ class Tizen80NotificationEx {
   /// ret = noti_ex_item_chat_message_get_text(chatmessage_item, &text_handle);
   /// ret = noti_ex_item_text_get_contents(text_handle, &text);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_chat_message_get_text(
     noti_ex_item_h handle,
     ffi.Pointer<noti_ex_item_h> text,
@@ -3782,21 +4963,36 @@ class Tizen80NotificationEx {
       _noti_ex_item_chat_message_get_textPtr.asFunction<
           int Function(noti_ex_item_h, ffi.Pointer<noti_ex_item_h>)>();
 
-  /// @brief Gets the notification_ex item handle for the chat message image.
-  /// @details The image is a notification_ex item handle created with noti_ex_item_image_create().
-  /// @since_tizen 5.5
-  /// @remarks @a image must be released using noti_ex_item_destroy().
-  /// @remarks The @a image is available until @a handle is released.
-  /// @param[in] handle The notification_ex item handle
-  /// @param[out] image The notification_ex item handle with image
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter, if the item type is not correct, this error is returned
-  /// @see #noti_ex_item_h
-  /// @see noti_ex_item_chat_message_create()
-  /// @see noti_ex_item_image_get_image_path()
-  /// @par Sample code:
-  /// @code
+  /// Gets the notification_ex item handle for the chat message image.
+  ///
+  /// The image is a notification_ex item handle created with noti_ex_item_image_create().
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - `image` must be released using noti_ex_item_destroy().
+  /// - The `image` is available until `handle` is released.
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item handle
+  /// - `image` (out): The notification_ex item handle with image
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter, if the item type is not correct, this error is returned
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  /// - `noti_ex_item_chat_message_create()`
+  /// - `noti_ex_item_image_get_image_path()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -3807,7 +5003,7 @@ class Tizen80NotificationEx {
   /// ret = noti_ex_item_chat_message_get_image(chatmessage_item, &image_handle);
   /// ret = noti_ex_item_image_get_image_path(image_handle, &image_path);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_chat_message_get_image(
     noti_ex_item_h handle,
     ffi.Pointer<noti_ex_item_h> image,
@@ -3826,21 +5022,36 @@ class Tizen80NotificationEx {
       _noti_ex_item_chat_message_get_imagePtr.asFunction<
           int Function(noti_ex_item_h, ffi.Pointer<noti_ex_item_h>)>();
 
-  /// @brief Gets the notification_ex item handle for the chat message time.
-  /// @details The time is notification_ex item handle created with noti_ex_item_time_create().
-  /// @since_tizen 5.5
-  /// @remarks @a time must be released using noti_ex_item_destroy().
-  /// @remarks The @a time is available until @a handle is released.
-  /// @param[in] handle The notification_ex item handle
-  /// @param[out] time The notification_ex item handle with time
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter, if the item type is not correct, this error is returned
-  /// @see #noti_ex_item_h
-  /// @see noti_ex_item_chat_message_create()
-  /// @see noti_ex_item_time_get_time()
-  /// @par Sample code:
-  /// @code
+  /// Gets the notification_ex item handle for the chat message time.
+  ///
+  /// The time is notification_ex item handle created with noti_ex_item_time_create().
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - `time` must be released using noti_ex_item_destroy().
+  /// - The `time` is available until `handle` is released.
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item handle
+  /// - `time` (out): The notification_ex item handle with time
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter, if the item type is not correct, this error is returned
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  /// - `noti_ex_item_chat_message_create()`
+  /// - `noti_ex_item_time_get_time()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -3851,7 +5062,7 @@ class Tizen80NotificationEx {
   /// ret = noti_ex_item_chat_message_get_time(chatmessage_item, &time_handle);
   /// ret = noti_ex_item_time_get_time(time_handle, &time_info);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_chat_message_get_time(
     noti_ex_item_h handle,
     ffi.Pointer<noti_ex_item_h> time,
@@ -3870,18 +5081,30 @@ class Tizen80NotificationEx {
       _noti_ex_item_chat_message_get_timePtr.asFunction<
           int Function(noti_ex_item_h, ffi.Pointer<noti_ex_item_h>)>();
 
-  /// @brief Gets the type of chat message.
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification_ex item handle
-  /// @param[out] message_type The type of chat message
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter, if the item type is not correct, this error is returned
-  /// @see #noti_ex_item_h
-  /// @see #noti_ex_item_chat_message_type_e
-  /// @see noti_ex_item_chat_message_create()
-  /// @par Sample code:
-  /// @code
+  /// Gets the type of chat message.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item handle
+  /// - `message_type` (out): The type of chat message
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter, if the item type is not correct, this error is returned
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  /// - `noti_ex_item_chat_message_type_e`
+  /// - `noti_ex_item_chat_message_create()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -3890,7 +5113,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_item_chat_message_get_message_type(chatmessage_item, &type);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_chat_message_get_message_type(
     noti_ex_item_h handle,
     ffi.Pointer<ffi.Int32> message_type,
@@ -3909,25 +5132,37 @@ class Tizen80NotificationEx {
       _noti_ex_item_chat_message_get_message_typePtr
           .asFunction<int Function(noti_ex_item_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Creates the notification_ex item handle with checkbox.
-  /// @details The notification_ex item is the predefined type of notifications.
-  /// The notification can be created with one item or group of items.
-  /// If the user wants to display the notification with a checkbox,
-  /// the notification_ex handle has to be created as a checkbox item.
-  /// @since_tizen 5.5
-  /// @remarks @a handle must be released using noti_ex_item_destroy().
-  /// @param[out] handle The notification_ex item handle
-  /// @param[in] id The id of notification_ex item
-  /// @param[in] title The title of notification_ex item
-  /// @param[in] checked The check state of checkbox
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #NOTI_EX_ERROR_OUT_OF_MEMORY out of memory
-  /// @see #noti_ex_item_h
-  /// @see noti_ex_item_destroy()
-  /// @par Sample code:
-  /// @code
+  /// Creates the notification_ex item handle with checkbox.
+  ///
+  /// The notification_ex item is the predefined type of notifications. The notification can be created with one item or group of items. If the user wants to display the notification with a checkbox, the notification_ex handle has to be created as a checkbox item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - `handle` must be released using noti_ex_item_destroy().
+  ///
+  /// **Parameters:**
+  /// - `handle` (out): The notification_ex item handle
+  /// - `id` (in): The id of notification_ex item
+  /// - `title` (in): The title of notification_ex item
+  /// - `checked` (in): The check state of checkbox
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `NOTI_EX_ERROR_OUT_OF_MEMORY`: out of memory
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  /// - `noti_ex_item_destroy()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -3936,7 +5171,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_item_checkbox_create(&checkbox_item, "checkbox_id", "checkbox_title", false);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_checkbox_create(
     ffi.Pointer<noti_ex_item_h> handle,
     ffi.Pointer<ffi.Char> id,
@@ -3963,21 +5198,35 @@ class Tizen80NotificationEx {
           int Function(ffi.Pointer<noti_ex_item_h>, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Char>, bool)>();
 
-  /// @brief Gets the title of a checkbox.
-  /// @since_tizen 5.5
-  /// @remarks @a title must be released using free().
-  /// @remarks If the multi-language handle is set by noti_ex_item_checkbox_set_multi_language_title(), \n
-  /// it will return a multi-language title.
-  /// @param[in] handle The notification_ex item handle
-  /// @param[out] title The title of notification_ex item
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter, if the item type is not correct, this error is returned
-  /// @see #noti_ex_item_h
-  /// @see noti_ex_item_checkbox_create()
-  /// @see noti_ex_item_checkbox_set_multi_language_title()
-  /// @par Sample code:
-  /// @code
+  /// Gets the title of a checkbox.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - `title` must be released using free().
+  /// - If the multi-language handle is set by noti_ex_item_checkbox_set_multi_language_title(),
+  /// - it will return a multi-language title.
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item handle
+  /// - `title` (out): The title of notification_ex item
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter, if the item type is not correct, this error is returned
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  /// - `noti_ex_item_checkbox_create()`
+  /// - `noti_ex_item_checkbox_set_multi_language_title()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -3986,7 +5235,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_item_checkbox_get_title(checkbox_item, &title);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_checkbox_get_title(
     noti_ex_item_h handle,
     ffi.Pointer<ffi.Pointer<ffi.Char>> title,
@@ -4006,24 +5255,38 @@ class Tizen80NotificationEx {
       _noti_ex_item_checkbox_get_titlePtr.asFunction<
           int Function(noti_ex_item_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets the multi-language handle.
-  /// @since_tizen 5.5
-  /// @remarks After setting the multi-language handle successfully, \n
-  /// noti_ex_item_checkbox_get_title() will return the multi-language text.
-  /// @remarks The #noti_ex_item_h handle keeps its own copy of #noti_ex_multi_lang_h. \n
-  /// Therefore, you can destroy @a multi after it was set for @ handle.
-  /// @remarks You can pass NULL to @a multi, if you want to remove the multi-language text.
-  /// @param[in] handle The notification_ex item handle
-  /// @param[in] multi The multi-language handle
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter, if the item type is not correct, this error is returned
-  /// @see #noti_ex_item_h
-  /// @see noti_ex_item_checkbox_create()
-  /// @see noti_ex_item_checkbox_get_title()
-  /// @see noti_ex_multi_lang_create()
-  /// @par Sample code:
-  /// @code
+  /// Sets the multi-language handle.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - After setting the multi-language handle successfully,
+  /// - noti_ex_item_checkbox_get_title() will return the multi-language text.
+  /// - The `noti_ex_item_h` handle keeps its own copy of `noti_ex_multi_lang_h`.
+  /// - Therefore, you can destroy `multi` after it was set for @ handle.
+  /// - You can pass NULL to `multi`, if you want to remove the multi-language text.
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item handle
+  /// - `multi` (in): The multi-language handle
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter, if the item type is not correct, this error is returned
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  /// - `noti_ex_item_checkbox_create()`
+  /// - `noti_ex_item_checkbox_get_title()`
+  /// - `noti_ex_multi_lang_create()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -4036,7 +5299,7 @@ class Tizen80NotificationEx {
   /// ret = noti_ex_item_checkbox_set_multi_language_title(checkbox_item, multi);
   /// noti_ex_multi_lang_destroy(multi);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_checkbox_set_multi_language_title(
     noti_ex_item_h handle,
     noti_ex_multi_lang_h multi,
@@ -4055,17 +5318,29 @@ class Tizen80NotificationEx {
       _noti_ex_item_checkbox_set_multi_language_titlePtr
           .asFunction<int Function(noti_ex_item_h, noti_ex_multi_lang_h)>();
 
-  /// @brief Gets the check state of a checkbox.
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification_ex item handle
-  /// @param[out] checked The check state of a checkbox
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter, if the item type is not correct, this error is returned
-  /// @see #noti_ex_item_h
-  /// @see noti_ex_item_checkbox_create()
-  /// @par Sample code:
-  /// @code
+  /// Gets the check state of a checkbox.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item handle
+  /// - `checked` (out): The check state of a checkbox
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter, if the item type is not correct, this error is returned
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  /// - `noti_ex_item_checkbox_create()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -4074,7 +5349,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_item_checkbox_get_check_state(checkbox_item, &checked);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_checkbox_get_check_state(
     noti_ex_item_h handle,
     ffi.Pointer<ffi.Bool> checked,
@@ -4093,17 +5368,29 @@ class Tizen80NotificationEx {
       _noti_ex_item_checkbox_get_check_statePtr
           .asFunction<int Function(noti_ex_item_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Sets the check state of a checkbox.
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification_ex item handle
-  /// @param[in] checked The check state of a checkbox
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter, if the item type is not correct, this error is returned
-  /// @see #noti_ex_item_h
-  /// @see noti_ex_item_checkbox_create()
-  /// @par Sample code:
-  /// @code
+  /// Sets the check state of a checkbox.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item handle
+  /// - `checked` (in): The check state of a checkbox
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter, if the item type is not correct, this error is returned
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  /// - `noti_ex_item_checkbox_create()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -4111,7 +5398,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_item_checkbox_set_check_state(checkbox_item, true);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_checkbox_set_check_state(
     noti_ex_item_h handle,
     bool checked,
@@ -4129,23 +5416,35 @@ class Tizen80NotificationEx {
       _noti_ex_item_checkbox_set_check_statePtr
           .asFunction<int Function(noti_ex_item_h, bool)>();
 
-  /// @brief Creates the notification_ex item handle for an entry item.
-  /// @details The notification_ex item is the predefined type of notifications.
-  /// The notification can be created with one item or group of items.
-  /// If the user wants to get the text input directly from the notification,
-  /// the notification_ex handle has to be created as an entry item.
-  /// @since_tizen 5.5
-  /// @remarks @a handle must be released using noti_ex_item_destroy().
-  /// @param[out] handle The notification_ex item handle
-  /// @param[in] id The id of notification_ex item
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #NOTI_EX_ERROR_OUT_OF_MEMORY out of memory
-  /// @see #noti_ex_item_h
-  /// @see noti_ex_item_destroy()
-  /// @par Sample code:
-  /// @code
+  /// Creates the notification_ex item handle for an entry item.
+  ///
+  /// The notification_ex item is the predefined type of notifications. The notification can be created with one item or group of items. If the user wants to get the text input directly from the notification, the notification_ex handle has to be created as an entry item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - `handle` must be released using noti_ex_item_destroy().
+  ///
+  /// **Parameters:**
+  /// - `handle` (out): The notification_ex item handle
+  /// - `id` (in): The id of notification_ex item
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `NOTI_EX_ERROR_OUT_OF_MEMORY`: out of memory
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  /// - `noti_ex_item_destroy()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -4154,7 +5453,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_item_entry_create(&entry_item, "entry_id");
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_entry_create(
     ffi.Pointer<noti_ex_item_h> handle,
     ffi.Pointer<ffi.Char> id,
@@ -4173,21 +5472,35 @@ class Tizen80NotificationEx {
       _noti_ex_item_entry_createPtr.asFunction<
           int Function(ffi.Pointer<noti_ex_item_h>, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the text of an entry item.
-  /// @since_tizen 5.5
-  /// @remarks @a text must be released using free().
-  /// @remarks If the multi-language handle is set by \n
-  /// noti_ex_item_entry_set_multi_language(), it will return a multi-language text.
-  /// @param[in] handle The notification_ex item handle
-  /// @param[out] text The text of entry item
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter, if the item type is not correct, this error is returned
-  /// @see #noti_ex_item_h
-  /// @see noti_ex_item_entry_create()
-  /// @see noti_ex_item_entry_set_multi_language()
-  /// @par Sample code:
-  /// @code
+  /// Gets the text of an entry item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - `text` must be released using free().
+  /// - If the multi-language handle is set by
+  /// - noti_ex_item_entry_set_multi_language(), it will return a multi-language text.
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item handle
+  /// - `text` (out): The text of entry item
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter, if the item type is not correct, this error is returned
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  /// - `noti_ex_item_entry_create()`
+  /// - `noti_ex_item_entry_set_multi_language()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -4196,7 +5509,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_item_entry_get_text(entry_item, &text);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_entry_get_text(
     noti_ex_item_h handle,
     ffi.Pointer<ffi.Pointer<ffi.Char>> text,
@@ -4216,17 +5529,29 @@ class Tizen80NotificationEx {
       _noti_ex_item_entry_get_textPtr.asFunction<
           int Function(noti_ex_item_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets the text of an entry item.
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification_ex item handle
-  /// @param[in] text The text of entry item
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_item_h
-  /// @see noti_ex_item_entry_create()
-  /// @par Sample code:
-  /// @code
+  /// Sets the text of an entry item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item handle
+  /// - `text` (in): The text of entry item
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  /// - `noti_ex_item_entry_create()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -4234,7 +5559,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_item_entry_set_text(entry_item, "entry_text");
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_entry_set_text(
     noti_ex_item_h handle,
     ffi.Pointer<ffi.Char> text,
@@ -4252,24 +5577,38 @@ class Tizen80NotificationEx {
   late final _noti_ex_item_entry_set_text = _noti_ex_item_entry_set_textPtr
       .asFunction<int Function(noti_ex_item_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets the multi-language handle.
-  /// @since_tizen 5.5
-  /// @remarks After setting the multi-language handle successfully, \n
-  /// noti_ex_item_entry_get_text() will return the multi-language text. \n
-  /// @remarks The #noti_ex_item_h handle keeps its own copy of #noti_ex_multi_lang_h. \n
-  /// Therefore, you can destroy @a multi after it was set for @a handle.
-  /// @remarks You can pass NULL to @a multi, if you want to remove the multi-language text.
-  /// @param[in] handle The notification_ex item handle
-  /// @param[in] multi The multi-language handle
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter, if the item type is not correct, this error is returned
-  /// @see #noti_ex_item_h
-  /// @see noti_ex_item_text_create()
-  /// @see noti_ex_item_text_set_multi_language()
-  /// @see noti_ex_item_text_get_contents()
-  /// @par Sample code:
-  /// @code
+  /// Sets the multi-language handle.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - After setting the multi-language handle successfully,
+  /// - noti_ex_item_entry_get_text() will return the multi-language text.
+  /// - The `noti_ex_item_h` handle keeps its own copy of `noti_ex_multi_lang_h`.
+  /// - Therefore, you can destroy `multi` after it was set for `handle`.
+  /// - You can pass NULL to `multi`, if you want to remove the multi-language text.
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item handle
+  /// - `multi` (in): The multi-language handle
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter, if the item type is not correct, this error is returned
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  /// - `noti_ex_item_text_create()`
+  /// - `noti_ex_item_text_set_multi_language()`
+  /// - `noti_ex_item_text_get_contents()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -4281,7 +5620,7 @@ class Tizen80NotificationEx {
   /// ret = noti_ex_item_entry_set_multi_language(entry_item, multi);
   /// noti_ex_multi_lang_destroy(multi);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_entry_set_multi_language(
     noti_ex_item_h handle,
     noti_ex_multi_lang_h multi,
@@ -4300,21 +5639,35 @@ class Tizen80NotificationEx {
       _noti_ex_item_entry_set_multi_languagePtr
           .asFunction<int Function(noti_ex_item_h, noti_ex_multi_lang_h)>();
 
-  /// @brief Clones the notification event info handle.
-  /// @details The event for notification item is defined as
-  /// notification event info handle.
-  /// @since_tizen 5.5
-  /// @remarks @a cloned_handle must be released using noti_ex_event_info_destroy().
-  /// @param[in] handle The notification event info handle to be cloned
-  /// @param[out] cloned_handle The notification event info handle
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #NOTI_EX_ERROR_OUT_OF_MEMORY out of memory
-  /// @see #noti_ex_event_info_h
-  /// @see noti_ex_event_info_destroy()
-  /// @par Sample code:
-  /// @code
+  /// Clones the notification event info handle.
+  ///
+  /// The event for notification item is defined as notification event info handle.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - `cloned_handle` must be released using noti_ex_event_info_destroy().
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification event info handle to be cloned
+  /// - `cloned_handle` (out): The notification event info handle
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `NOTI_EX_ERROR_OUT_OF_MEMORY`: out of memory
+  ///
+  /// **See also:**
+  /// - `noti_ex_event_info_h`
+  /// - `noti_ex_event_info_destroy()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// void _manager_events_update_cb(noti_ex_manager_h handle,
@@ -4325,7 +5678,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_event_info_clone(info, &cloned);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_event_info_clone(
     noti_ex_event_info_h handle,
     ffi.Pointer<noti_ex_event_info_h> cloned_handle,
@@ -4345,15 +5698,27 @@ class Tizen80NotificationEx {
           int Function(
               noti_ex_event_info_h, ffi.Pointer<noti_ex_event_info_h>)>();
 
-  /// @brief Releases the notification event info handle.
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification event info handle
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_event_info_h
-  /// @par Sample code:
-  /// @code
+  /// Releases the notification event info handle.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification event info handle
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_event_info_h`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// void _manager_events_update_cb(noti_ex_manager_h handle,
@@ -4365,7 +5730,7 @@ class Tizen80NotificationEx {
   /// ret = noti_ex_event_info_clone(info, &cloned);
   /// ret = noti_ex_event_info_destroy(cloned);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_event_info_destroy(
     noti_ex_event_info_h handle,
   ) {
@@ -4380,17 +5745,29 @@ class Tizen80NotificationEx {
   late final _noti_ex_event_info_destroy = _noti_ex_event_info_destroyPtr
       .asFunction<int Function(noti_ex_event_info_h)>();
 
-  /// @brief Gets the type of an event.
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification event info handle
-  /// @param[out] event_type The type of event
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_event_info_h
-  /// @see noti_ex_event_info_clone()
-  /// @par Sample code:
-  /// @code
+  /// Gets the type of an event.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification event info handle
+  /// - `event_type` (out): The type of event
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_event_info_h`
+  /// - `noti_ex_event_info_clone()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -4399,7 +5776,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_event_info_get_event_type(event_handle, &type);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_event_info_get_event_type(
     noti_ex_event_info_h handle,
     ffi.Pointer<ffi.Int32> event_type,
@@ -4418,18 +5795,32 @@ class Tizen80NotificationEx {
       _noti_ex_event_info_get_event_typePtr.asFunction<
           int Function(noti_ex_event_info_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the app id of event owner.
-  /// @since_tizen 5.5
-  /// @remarks @a owner must be released using free().
-  /// @param[in] handle The notification event info handle
-  /// @param[out] owner The app id of event owner
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_event_info_h
-  /// @see noti_ex_event_info_clone()
-  /// @par Sample code:
-  /// @code
+  /// Gets the app id of event owner.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - `owner` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification event info handle
+  /// - `owner` (out): The app id of event owner
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_event_info_h`
+  /// - `noti_ex_event_info_clone()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -4438,7 +5829,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_event_info_get_owner(event_handle, &owner);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_event_info_get_owner(
     noti_ex_event_info_h handle,
     ffi.Pointer<ffi.Pointer<ffi.Char>> owner,
@@ -4459,18 +5850,32 @@ class Tizen80NotificationEx {
           int Function(
               noti_ex_event_info_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the channel of an event.
-  /// @since_tizen 5.5
-  /// @remarks @a channel must be released using free().
-  /// @param[in] handle The notification event info handle
-  /// @param[out] channel The channel of event
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_event_info_h
-  /// @see noti_ex_event_info_clone()
-  /// @par Sample code:
-  /// @code
+  /// Gets the channel of an event.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - `channel` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification event info handle
+  /// - `channel` (out): The channel of event
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_event_info_h`
+  /// - `noti_ex_event_info_clone()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -4479,7 +5884,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_event_info_get_channel(event_handle, &channel);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_event_info_get_channel(
     noti_ex_event_info_h handle,
     ffi.Pointer<ffi.Pointer<ffi.Char>> channel,
@@ -4500,18 +5905,32 @@ class Tizen80NotificationEx {
           int Function(
               noti_ex_event_info_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the id of a notification_ex item.
-  /// @since_tizen 5.5
-  /// @remarks @a item_id must be released using free().
-  /// @param[in] handle The notification event info handle
-  /// @param[out] item_id The id of notification_ex item
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_event_info_h
-  /// @see noti_ex_event_info_clone()
-  /// @par Sample code:
-  /// @code
+  /// Gets the id of a notification_ex item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - `item_id` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification event info handle
+  /// - `item_id` (out): The id of notification_ex item
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_event_info_h`
+  /// - `noti_ex_event_info_clone()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -4520,7 +5939,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_event_info_get_item_id(event_handle, &item_id);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_event_info_get_item_id(
     noti_ex_event_info_h handle,
     ffi.Pointer<ffi.Pointer<ffi.Char>> item_id,
@@ -4541,17 +5960,29 @@ class Tizen80NotificationEx {
           int Function(
               noti_ex_event_info_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the id of request for an event.
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification event info handle
-  /// @param[out] req_id The id of request for event
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_event_info_h
-  /// @see noti_ex_event_info_clone()
-  /// @par Sample code:
-  /// @code
+  /// Gets the id of request for an event.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification event info handle
+  /// - `req_id` (out): The id of request for event
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_event_info_h`
+  /// - `noti_ex_event_info_clone()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -4560,7 +5991,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_event_info_get_request_id(event_handle, &request_id);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_event_info_get_request_id(
     noti_ex_event_info_h handle,
     ffi.Pointer<ffi.Int> req_id,
@@ -4579,23 +6010,35 @@ class Tizen80NotificationEx {
       _noti_ex_event_info_get_request_idPtr.asFunction<
           int Function(noti_ex_event_info_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Creates the group of notification_ex items.
-  /// @details The notification_ex item is the predefined type of notifications.
-  /// The notification can be created with one item or group of items.
-  /// If the user wants to make the group of notification_ex items,
-  /// the notification_ex handle has to be created as a group item.
-  /// @since_tizen 5.5
-  /// @remarks @a handle must be released using noti_ex_item_destroy().
-  /// @param[out] handle The notification_ex item handle
-  /// @param[in] id The id of notification_ex item
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #NOTI_EX_ERROR_OUT_OF_MEMORY out of memory
-  /// @see #noti_ex_item_h
-  /// @see noti_ex_item_destroy()
-  /// @par Sample code:
-  /// @code
+  /// Creates the group of notification_ex items.
+  ///
+  /// The notification_ex item is the predefined type of notifications. The notification can be created with one item or group of items. If the user wants to make the group of notification_ex items, the notification_ex handle has to be created as a group item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - `handle` must be released using noti_ex_item_destroy().
+  ///
+  /// **Parameters:**
+  /// - `handle` (out): The notification_ex item handle
+  /// - `id` (in): The id of notification_ex item
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `NOTI_EX_ERROR_OUT_OF_MEMORY`: out of memory
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  /// - `noti_ex_item_destroy()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -4604,7 +6047,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_item_group_create(&group_item, "group_id");
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_group_create(
     ffi.Pointer<noti_ex_item_h> handle,
     ffi.Pointer<ffi.Char> id,
@@ -4623,20 +6066,32 @@ class Tizen80NotificationEx {
       _noti_ex_item_group_createPtr.asFunction<
           int Function(ffi.Pointer<noti_ex_item_h>, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets the direction of children in the group item.
-  /// @details If vertical state is true, the children of group item are placed vertically.
-  /// If vertical state is false, the children of group item are placed horizontally.
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification_ex item handle
-  /// @param[in] vertical The vertical state of group item
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_item_h
-  /// @see noti_ex_item_group_create()
-  /// @see noti_ex_item_group_is_vertical().
-  /// @par Sample code:
-  /// @code
+  /// Sets the direction of children in the group item.
+  ///
+  /// If vertical state is true, the children of group item are placed vertically. If vertical state is false, the children of group item are placed horizontally.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item handle
+  /// - `vertical` (in): The vertical state of group item
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  /// - `noti_ex_item_group_create()`
+  /// - noti_ex_item_group_is_vertical().
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -4644,7 +6099,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_item_group_set_direction(group_item, true);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_group_set_direction(
     noti_ex_item_h handle,
     bool vertical,
@@ -4662,18 +6117,30 @@ class Tizen80NotificationEx {
       _noti_ex_item_group_set_directionPtr
           .asFunction<int Function(noti_ex_item_h, bool)>();
 
-  /// @brief Gets the vertical state of group item.
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification_ex item handle
-  /// @param[out] vertical The vertical state of group item
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter, if the item type is not correct, this error is returned
-  /// @see #noti_ex_item_h
-  /// @see noti_ex_item_group_create()
-  /// @see noti_ex_item_group_set_direction()
-  /// @par Sample code:
-  /// @code
+  /// Gets the vertical state of group item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item handle
+  /// - `vertical` (out): The vertical state of group item
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter, if the item type is not correct, this error is returned
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  /// - `noti_ex_item_group_create()`
+  /// - `noti_ex_item_group_set_direction()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -4682,7 +6149,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_item_group_is_vertical(group_item, &vertical);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_group_is_vertical(
     noti_ex_item_h handle,
     ffi.Pointer<ffi.Bool> vertical,
@@ -4701,18 +6168,32 @@ class Tizen80NotificationEx {
       _noti_ex_item_group_is_verticalPtr
           .asFunction<int Function(noti_ex_item_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Gets the label of application.
-  /// @since_tizen 5.5
-  /// @remarks @a label must be released using free().
-  /// @param[in] handle The notification_ex item handle
-  /// @param[out] label The label of application
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter, if the item type is not correct, this error is returned
-  /// @see #noti_ex_item_h
-  /// @see noti_ex_item_group_create()
-  /// @par Sample code:
-  /// @code
+  /// Gets the label of application.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - `label` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item handle
+  /// - `label` (out): The label of application
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter, if the item type is not correct, this error is returned
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  /// - `noti_ex_item_group_create()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -4721,7 +6202,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_item_group_get_app_label(group_item, &label);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_group_get_app_label(
     noti_ex_item_h handle,
     ffi.Pointer<ffi.Pointer<ffi.Char>> label,
@@ -4741,18 +6222,32 @@ class Tizen80NotificationEx {
       _noti_ex_item_group_get_app_labelPtr.asFunction<
           int Function(noti_ex_item_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Adds the child to the group item.
-  /// @since_tizen 5.5
-  /// @remarks @a child must not be released after calling this function
-  /// @param[in] handle The notification_ex item handle
-  /// @param[in] child The child notification_ex item handle
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_item_h
-  /// @see noti_ex_item_group_create()
-  /// @par Sample code:
-  /// @code
+  /// Adds the child to the group item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - `child` must not be released after calling this function
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item handle
+  /// - `child` (in): The child notification_ex item handle
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  /// - `noti_ex_item_group_create()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -4766,7 +6261,7 @@ class Tizen80NotificationEx {
   ///
   /// noti_ex_item_destroy(child_item);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_group_add_child(
     noti_ex_item_h handle,
     noti_ex_item_h child,
@@ -4783,17 +6278,29 @@ class Tizen80NotificationEx {
   late final _noti_ex_item_group_add_child = _noti_ex_item_group_add_childPtr
       .asFunction<int Function(noti_ex_item_h, noti_ex_item_h)>();
 
-  /// @brief Removes the child from the group item by notification_ex item id.
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification_ex item handle
-  /// @param[in] item_id The id of notification_ex item that is child of group item
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_item_h
-  /// @see noti_ex_item_group_create()
-  /// @par Sample code:
-  /// @code
+  /// Removes the child from the group item by notification_ex item id.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item handle
+  /// - `item_id` (in): The id of notification_ex item that is child of group item
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  /// - `noti_ex_item_group_create()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -4801,7 +6308,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_item_group_remove_child(group_item, "child_id");
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_group_remove_child(
     noti_ex_item_h handle,
     ffi.Pointer<ffi.Char> item_id,
@@ -4820,19 +6327,32 @@ class Tizen80NotificationEx {
       _noti_ex_item_group_remove_childPtr
           .asFunction<int Function(noti_ex_item_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the data of children from the group item.
-  /// @details The noti_ex_item_group_foreach_child_cb() is called for each child of the group item.
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification_ex item handle
-  /// @param[in] callback The callback function to get the children data
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_item_h
-  /// @see noti_ex_item_group_foreach_child_cb()
-  /// @par Sample code:
-  /// @code
+  /// Gets the data of children from the group item.
+  ///
+  /// The noti_ex_item_group_foreach_child_cb() is called for each child of the group item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item handle
+  /// - `callback` (in): The callback function to get the children data
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  /// - `noti_ex_item_group_foreach_child_cb()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// int _ex_item_group_foreach_child_cb(noti_ex_item_h handle, void *user_data) {
@@ -4852,7 +6372,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_item_group_foreach_child(group_item, _ex_item_group_foreach_child_cb, NULL);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_group_foreach_child(
     noti_ex_item_h handle,
     noti_ex_item_group_foreach_child_cb callback,
@@ -4874,24 +6394,36 @@ class Tizen80NotificationEx {
           int Function(noti_ex_item_h, noti_ex_item_group_foreach_child_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Creates the notification_ex item handle with an image.
-  /// @details The notification_ex item is the predefined type of notifications.
-  /// The notification can be created with one item or group of items.
-  /// If the user wants to display the notification with an image,
-  /// the notification_ex handle has to be created as an image item.
-  /// @since_tizen 5.5
-  /// @remarks @a handle must be released using noti_ex_item_destroy().
-  /// @param[out] handle The notification_ex item handle
-  /// @param[in] id The id of notification_ex item
-  /// @param[in] image_path The absolute path of image
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #NOTI_EX_ERROR_OUT_OF_MEMORY out of memory
-  /// @see #noti_ex_item_h
-  /// @see noti_ex_item_destroy()
-  /// @par Sample code:
-  /// @code
+  /// Creates the notification_ex item handle with an image.
+  ///
+  /// The notification_ex item is the predefined type of notifications. The notification can be created with one item or group of items. If the user wants to display the notification with an image, the notification_ex handle has to be created as an image item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - `handle` must be released using noti_ex_item_destroy().
+  ///
+  /// **Parameters:**
+  /// - `handle` (out): The notification_ex item handle
+  /// - `id` (in): The id of notification_ex item
+  /// - `image_path` (in): The absolute path of image
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `NOTI_EX_ERROR_OUT_OF_MEMORY`: out of memory
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  /// - `noti_ex_item_destroy()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -4905,7 +6437,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_item_image_create(&image_item, "image_id", image_path);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_image_create(
     ffi.Pointer<noti_ex_item_h> handle,
     ffi.Pointer<ffi.Char> id,
@@ -4927,18 +6459,32 @@ class Tizen80NotificationEx {
           int Function(ffi.Pointer<noti_ex_item_h>, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the path of image.
-  /// @since_tizen 5.5
-  /// @remarks @a image_path must be released using free().
-  /// @param[in] handle The notification_ex item handle
-  /// @param[out] image_path The absolute path of image
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter, if the item type is not correct, this error is returned
-  /// @see #noti_ex_item_h
-  /// @see noti_ex_item_image_create()
-  /// @par Sample code:
-  /// @code
+  /// Gets the path of image.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - `image_path` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item handle
+  /// - `image_path` (out): The absolute path of image
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter, if the item type is not correct, this error is returned
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  /// - `noti_ex_item_image_create()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -4947,7 +6493,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_item_image_get_image_path(image_item, &path);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_image_get_image_path(
     noti_ex_item_h handle,
     ffi.Pointer<ffi.Pointer<ffi.Char>> image_path,
@@ -4967,23 +6513,35 @@ class Tizen80NotificationEx {
       _noti_ex_item_image_get_image_pathPtr.asFunction<
           int Function(noti_ex_item_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Creates the notification_ex item handle with input selector.
-  /// @details The notification_ex item is the predefined type of notifications.
-  /// The notification can be created with one item or group of items.
-  /// If the user wants to be display the notification with selector to select predefined input,
-  /// the notification_ex handle has to be created as an input selector item.
-  /// @since_tizen 5.5
-  /// @remarks @a handle must be released using noti_ex_item_destroy().
-  /// @param[out] handle The notification_ex item handle
-  /// @param[in] id The id of notification_ex item
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #NOTI_EX_ERROR_OUT_OF_MEMORY out of memory
-  /// @see #noti_ex_item_h
-  /// @see noti_ex_item_destroy()
-  /// @par Sample code:
-  /// @code
+  /// Creates the notification_ex item handle with input selector.
+  ///
+  /// The notification_ex item is the predefined type of notifications. The notification can be created with one item or group of items. If the user wants to be display the notification with selector to select predefined input, the notification_ex handle has to be created as an input selector item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - `handle` must be released using noti_ex_item_destroy().
+  ///
+  /// **Parameters:**
+  /// - `handle` (out): The notification_ex item handle
+  /// - `id` (in): The id of notification_ex item
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `NOTI_EX_ERROR_OUT_OF_MEMORY`: out of memory
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  /// - `noti_ex_item_destroy()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -4992,7 +6550,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_item_input_selector_create(&selector_item, "selector_id");
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_input_selector_create(
     ffi.Pointer<noti_ex_item_h> handle,
     ffi.Pointer<ffi.Char> id,
@@ -5011,23 +6569,37 @@ class Tizen80NotificationEx {
       _noti_ex_item_input_selector_createPtr.asFunction<
           int Function(ffi.Pointer<noti_ex_item_h>, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the contents that can be selected by input selector.
-  /// @since_tizen 5.5
-  /// @remarks Each item in the @a list must be released using free(), then the @a list must be released using free().
-  /// @remarks If the multi-language handle is set by noti_ex_item_input_selector_set_multi_language_contents(), \n
-  /// it will return a multi-language contents.
-  /// @param[in] handle The notification_ex item handle
-  /// @param[out] list The list of contents
-  /// @param[out] count The count of contents
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter, if the item type is not correct, this error is returned
-  /// @see #noti_ex_item_h
-  /// @see noti_ex_item_input_selector_create()
-  /// @see noti_ex_item_input_selector_set_contents()
-  /// @see noti_ex_item_input_selector_set_multi_language_contents()
-  /// @par Sample code:
-  /// @code
+  /// Gets the contents that can be selected by input selector.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - Each item in the `list` must be released using free(), then the `list` must be released using free().
+  /// - If the multi-language handle is set by noti_ex_item_input_selector_set_multi_language_contents(),
+  /// - it will return a multi-language contents.
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item handle
+  /// - `list` (out): The list of contents
+  /// - `count` (out): The count of contents
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter, if the item type is not correct, this error is returned
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  /// - `noti_ex_item_input_selector_create()`
+  /// - `noti_ex_item_input_selector_set_contents()`
+  /// - `noti_ex_item_input_selector_set_multi_language_contents()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -5037,7 +6609,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_item_input_selector_get_contents(selector_item, &list, &count);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_input_selector_get_contents(
     noti_ex_item_h handle,
     ffi.Pointer<ffi.Pointer<ffi.Pointer<ffi.Char>>> list,
@@ -5064,18 +6636,30 @@ class Tizen80NotificationEx {
               ffi.Pointer<ffi.Pointer<ffi.Pointer<ffi.Char>>>,
               ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Sets the contents for input selector item.
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification_ex item handle
-  /// @param[in] contents The list of contents
-  /// @param[in] count The count of contents
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_item_h
-  /// @see noti_ex_item_input_selector_create()
-  /// @par Sample code:
-  /// @code
+  /// Sets the contents for input selector item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item handle
+  /// - `contents` (in): The list of contents
+  /// - `count` (in): The count of contents
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  /// - `noti_ex_item_input_selector_create()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -5085,7 +6669,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_item_input_selector_set_contents(selector_item, contents, count);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_input_selector_set_contents(
     noti_ex_item_h handle,
     ffi.Pointer<ffi.Pointer<ffi.Char>> contents,
@@ -5107,24 +6691,38 @@ class Tizen80NotificationEx {
           int Function(
               noti_ex_item_h, ffi.Pointer<ffi.Pointer<ffi.Char>>, int)>();
 
-  /// @brief Sets the multi-language contents for input selector item.
-  /// @since_tizen 5.5
-  /// @remarks After setting the multi-language handle successfully, \n
-  /// noti_ex_item_input_selector_get_contents() will return the multi-language text. \n
-  /// @remarks The #noti_ex_item_h handle keeps its own copy of #noti_ex_multi_lang_h list. \n
-  /// Therefore, you can destroy @a multi_language_list after it was set for @a handle.
-  /// @remarks You can pass NULL to @a multi_language_list, if you want to remove the multi-language text.
-  /// @param[in] handle The notification_ex item handle
-  /// @param[in] multi_language_list The list of noti_ex_multi_lang_h
-  /// @param[in] count The count of contents
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_item_h
-  /// @see noti_ex_item_input_selector_create()
-  /// @see noti_ex_item_input_selector_get_contents()
-  /// @par Sample code:
-  /// @code
+  /// Sets the multi-language contents for input selector item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - After setting the multi-language handle successfully,
+  /// - noti_ex_item_input_selector_get_contents() will return the multi-language text.
+  /// - The `noti_ex_item_h` handle keeps its own copy of `noti_ex_multi_lang_h` list.
+  /// - Therefore, you can destroy `multi_language_list` after it was set for `handle`.
+  /// - You can pass NULL to `multi_language_list`, if you want to remove the multi-language text.
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item handle
+  /// - `multi_language_list` (in): The list of noti_ex_multi_lang_h
+  /// - `count` (in): The count of contents
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  /// - `noti_ex_item_input_selector_create()`
+  /// - `noti_ex_item_input_selector_get_contents()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -5134,7 +6732,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_item_input_selector_set_multi_language_contents(selector_item, contents, count);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_input_selector_set_multi_language_contents(
     noti_ex_item_h handle,
     ffi.Pointer<noti_ex_multi_lang_h> multi_language_list,
@@ -5158,26 +6756,38 @@ class Tizen80NotificationEx {
           int Function(
               noti_ex_item_h, ffi.Pointer<noti_ex_multi_lang_h>, int)>();
 
-  /// @brief Creates the notification_ex item handle with progress.
-  /// @details The notification_ex item is the predefined type of notifications.
-  /// The notification can be created with one item or group of items.
-  /// If the user wants to be display the notification with progress,
-  /// the notification_ex handle has to be created as a progress item.
-  /// @since_tizen 5.5
-  /// @remarks @a handle must be released using noti_ex_item_destroy().
-  /// @param[out] handle The notification_ex item handle
-  /// @param[in] id The id of notification_ex item
-  /// @param[in] min The minimum value of progress
-  /// @param[in] current The current value of progress
-  /// @param[in] max The maximum value of progress
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #NOTI_EX_ERROR_OUT_OF_MEMORY out of memory
-  /// @see #noti_ex_item_h
-  /// @see noti_ex_item_destroy()
-  /// @par Sample code:
-  /// @code
+  /// Creates the notification_ex item handle with progress.
+  ///
+  /// The notification_ex item is the predefined type of notifications. The notification can be created with one item or group of items. If the user wants to be display the notification with progress, the notification_ex handle has to be created as a progress item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - `handle` must be released using noti_ex_item_destroy().
+  ///
+  /// **Parameters:**
+  /// - `handle` (out): The notification_ex item handle
+  /// - `id` (in): The id of notification_ex item
+  /// - `min` (in): The minimum value of progress
+  /// - `current` (in): The current value of progress
+  /// - `max` (in): The maximum value of progress
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `NOTI_EX_ERROR_OUT_OF_MEMORY`: out of memory
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  /// - `noti_ex_item_destroy()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -5186,7 +6796,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_item_progress_create(&progress_item, "progress_id", 0, 50, 100);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_progress_create(
     ffi.Pointer<noti_ex_item_h> handle,
     ffi.Pointer<ffi.Char> id,
@@ -5216,17 +6826,29 @@ class Tizen80NotificationEx {
           int Function(ffi.Pointer<noti_ex_item_h>, ffi.Pointer<ffi.Char>,
               double, double, double)>();
 
-  /// @brief Gets the current value of progress.
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification_ex item handle
-  /// @param[out] current The current value of progress
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter, if the item type is not correct, this error is returned
-  /// @see #noti_ex_item_h
-  /// @see noti_ex_item_progress_create()
-  /// @par Sample code:
-  /// @code
+  /// Gets the current value of progress.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item handle
+  /// - `current` (out): The current value of progress
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter, if the item type is not correct, this error is returned
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  /// - `noti_ex_item_progress_create()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -5235,7 +6857,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_item_progress_get_current(progress_item, &current);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_progress_get_current(
     noti_ex_item_h handle,
     ffi.Pointer<ffi.Float> current,
@@ -5254,17 +6876,29 @@ class Tizen80NotificationEx {
       _noti_ex_item_progress_get_currentPtr
           .asFunction<int Function(noti_ex_item_h, ffi.Pointer<ffi.Float>)>();
 
-  /// @brief Sets the current value of progress.
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification_ex item handle
-  /// @param[in] current The current value of progress
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_item_h
-  /// @see noti_ex_item_progress_create()
-  /// @par Sample code:
-  /// @code
+  /// Sets the current value of progress.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item handle
+  /// - `current` (in): The current value of progress
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  /// - `noti_ex_item_progress_create()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -5272,7 +6906,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_item_progress_set_current(progress_item, 70);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_progress_set_current(
     noti_ex_item_h handle,
     double current,
@@ -5290,17 +6924,29 @@ class Tizen80NotificationEx {
       _noti_ex_item_progress_set_currentPtr
           .asFunction<int Function(noti_ex_item_h, double)>();
 
-  /// @brief Gets the minimum value of progress.
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification_ex item handle
-  /// @param[out] min The minimum value of progress
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter, if the item type is not correct, this error is returned
-  /// @see #noti_ex_item_h
-  /// @see noti_ex_item_progress_create()
-  /// @par Sample code:
-  /// @code
+  /// Gets the minimum value of progress.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item handle
+  /// - `min` (out): The minimum value of progress
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter, if the item type is not correct, this error is returned
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  /// - `noti_ex_item_progress_create()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -5309,7 +6955,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_item_progress_get_min(progress_item, &min);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_progress_get_min(
     noti_ex_item_h handle,
     ffi.Pointer<ffi.Float> min,
@@ -5327,17 +6973,29 @@ class Tizen80NotificationEx {
   late final _noti_ex_item_progress_get_min = _noti_ex_item_progress_get_minPtr
       .asFunction<int Function(noti_ex_item_h, ffi.Pointer<ffi.Float>)>();
 
-  /// @brief Gets the maximum value of progress.
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification_ex item handle
-  /// @param[out] max The maximum value of progress
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter, if the item type is not correct, this error is returned
-  /// @see #noti_ex_item_h
-  /// @see noti_ex_item_progress_create()
-  /// @par Sample code:
-  /// @code
+  /// Gets the maximum value of progress.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item handle
+  /// - `max` (out): The maximum value of progress
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter, if the item type is not correct, this error is returned
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  /// - `noti_ex_item_progress_create()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -5346,7 +7004,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_item_progress_get_max(progress_item, &max);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_progress_get_max(
     noti_ex_item_h handle,
     ffi.Pointer<ffi.Float> max,
@@ -5364,20 +7022,30 @@ class Tizen80NotificationEx {
   late final _noti_ex_item_progress_get_max = _noti_ex_item_progress_get_maxPtr
       .asFunction<int Function(noti_ex_item_h, ffi.Pointer<ffi.Float>)>();
 
-  /// @brief Gets the type of progress.
-  /// The type is equal to one of the values of #noti_ex_item_progress_type_e.
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification_ex item handle
-  /// @param[out] type The type of progress
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter,
-  /// if the item type is not correct, this error is returned
-  /// @see #noti_ex_item_h
-  /// @see #noti_ex_item_progress_type_e
-  /// @see noti_ex_item_progress_create()
-  /// @par Sample code:
-  /// @code
+  /// Gets the type of progress. The type is equal to one of the values of `noti_ex_item_progress_type_e`.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item handle
+  /// - `type` (out): The type of progress
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter, if the item type is not correct, this error is returned
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  /// - `noti_ex_item_progress_type_e`
+  /// - `noti_ex_item_progress_create()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -5386,7 +7054,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_item_progress_get_type(progress_item, &type);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_progress_get_type(
     noti_ex_item_h handle,
     ffi.Pointer<ffi.Int> type,
@@ -5405,20 +7073,32 @@ class Tizen80NotificationEx {
       _noti_ex_item_progress_get_typePtr
           .asFunction<int Function(noti_ex_item_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Sets the type of progress.
-  /// @details The type is equal to one of the values of #noti_ex_item_progress_type_e.
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification_ex item handle
-  /// @param[in] type The type of progress
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter,
-  /// if the item type is not correct, this error is returned
-  /// @see #noti_ex_item_h
-  /// @see #noti_ex_item_progress_type_e
-  /// @see noti_ex_item_progress_create()
-  /// @par Sample code:
-  /// @code
+  /// Sets the type of progress.
+  ///
+  /// The type is equal to one of the values of `noti_ex_item_progress_type_e`.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item handle
+  /// - `type` (in): The type of progress
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter, if the item type is not correct, this error is returned
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  /// - `noti_ex_item_progress_type_e`
+  /// - `noti_ex_item_progress_create()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -5429,7 +7109,7 @@ class Tizen80NotificationEx {
   /// ret = noti_ex_item_progress_create(&progress_item, "progress_id", 0, 50, 100);
   /// ret = noti_ex_item_progress_set_type(progress_item, type);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_progress_set_type(
     noti_ex_item_h handle,
     int type,
@@ -5447,36 +7127,53 @@ class Tizen80NotificationEx {
       _noti_ex_item_progress_set_typePtr
           .asFunction<int Function(noti_ex_item_h, int)>();
 
-  /// @partner
-  /// @brief Creates the notification_ex manager handle.
-  /// @details The manager handle is created with event callbacks and
-  /// the user can listen to notification events through the event callbacks.
-  /// If the user wants to manage notifications for specific group
-  /// the user should identify it with @a receiver_group
-  /// Callbacks in @a event_callbacks can be set to NULL, which will result in the corresponding events not being received.
-  /// @since_tizen 5.5
-  /// @privlevel partner
-  /// @privilege %http://tizen.org/privilege/notification.admin
-  /// @remarks @a handle must be released using noti_ex_manager_destroy().
-  /// @param[out] handle The notification manager handle
-  /// @param[in] receiver_group The notification group name of manager
-  /// @param[in] event_callbacks The callbacks for notification events
-  /// @param[in] user_data The user data for @a event_callbacks
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_PERMISSION_DENIED Permission deny
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #NOTI_EX_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #NOTI_EX_ERROR_IO_ERROR IO error
-  /// @see #noti_ex_manager_h
-  /// @see #noti_ex_manager_events_s
-  /// @see #NOTI_EX_RECEIVER_GROUP_TICKER
-  /// @see #NOTI_EX_RECEIVER_GROUP_LOCKSCREEN
-  /// @see #NOTI_EX_RECEIVER_GROUP_INDICATOR
-  /// @see #NOTI_EX_RECEIVER_GROUP_POPUP
-  /// @see noti_ex_manager_destroy()
-  /// @par Sample code:
-  /// @code
+  /// Creates the notification_ex manager handle.
+  ///
+  /// The manager handle is created with event callbacks and the user can listen to notification events through the event callbacks. If the user wants to manage notifications for specific group the user should identify it with `receiver_group` Callbacks in `event_callbacks` can be set to NULL, which will result in the corresponding events not being received.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/notification.admin>
+  ///
+  /// **Remarks:**
+  /// - `handle` must be released using noti_ex_manager_destroy().
+  ///
+  /// **Parameters:**
+  /// - `handle` (out): The notification manager handle
+  /// - `receiver_group` (in): The notification group name of manager
+  /// - `event_callbacks` (in): The callbacks for notification events
+  /// - `user_data` (in): The user data for `event_callbacks`
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_PERMISSION_DENIED`: Permission deny
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `NOTI_EX_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `NOTI_EX_ERROR_IO_ERROR`: IO error
+  ///
+  /// **See also:**
+  /// - `noti_ex_manager_h`
+  /// - `noti_ex_manager_events_s`
+  /// - `NOTI_EX_RECEIVER_GROUP_TICKER`
+  /// - `NOTI_EX_RECEIVER_GROUP_LOCKSCREEN`
+  /// - `NOTI_EX_RECEIVER_GROUP_INDICATOR`
+  /// - `NOTI_EX_RECEIVER_GROUP_POPUP`
+  /// - `noti_ex_manager_destroy()`
+  ///
+  /// **Paragraph:**
+  /// - tner
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// void _manager_events_add_cb(noti_ex_manager_h handle, noti_ex_event_info_h info,
@@ -5506,7 +7203,7 @@ class Tizen80NotificationEx {
   /// ev.error = _manager_events_error_cb;
   /// ret = noti_ex_manager_create(&handle, NOTI_EX_RECEIVER_GROUP_INDICATOR, ev, NULL);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_manager_create(
     ffi.Pointer<noti_ex_manager_h> handle,
     ffi.Pointer<ffi.Char> receiver_group,
@@ -5532,15 +7229,27 @@ class Tizen80NotificationEx {
       int Function(ffi.Pointer<noti_ex_manager_h>, ffi.Pointer<ffi.Char>,
           noti_ex_manager_events_s, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Destroys the notification_ex manager handle.
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification manager handle
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_item_h
-  /// @par Sample code:
-  /// @code
+  /// Destroys the notification_ex manager handle.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification manager handle
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// void _manager_events_error_cb(noti_ex_manager_h handle, noti_ex_error_e error,
@@ -5556,7 +7265,7 @@ class Tizen80NotificationEx {
   /// ret = noti_ex_manager_create(&handle, NOTI_EX_RECEIVER_GROUP_INDICATOR, ev, NULL);
   /// ret = noti_ex_manager_destroy(handle);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_manager_destroy(
     noti_ex_manager_h handle,
   ) {
@@ -5571,26 +7280,44 @@ class Tizen80NotificationEx {
   late final _noti_ex_manager_destroy =
       _noti_ex_manager_destroyPtr.asFunction<int Function(noti_ex_manager_h)>();
 
-  /// @partner
-  /// @brief Gets all notifications for the notification_ex manager.
-  /// @details Every notification that has been sent for the manager will be retrieved.
-  /// @since_tizen 5.5
-  /// @privlevel partner
-  /// @privilege %http://tizen.org/privilege/notification.admin
-  /// @param[in] handle The notification manager handle
-  /// @param[out] items The result of the get request \n
-  /// Each item in @a items must be released using noti_ex_item_destroy(), then @a items must be released using free().
-  /// @param[out] count The count of retrieved notification items
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_PERMISSION_DENIED Permission deny
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #NOTI_EX_ERROR_IO_ERROR IO error
-  /// @see #noti_ex_item_h
-  /// @see #noti_ex_manager_h
-  /// @see noti_ex_item_destroy()
-  /// @par Sample code:
-  /// @code
+  /// Gets all notifications for the notification_ex manager.
+  ///
+  /// Every notification that has been sent for the manager will be retrieved.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/notification.admin>
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification manager handle
+  /// - `items` (out): The result of the get request Each item in `items` must be released using noti_ex_item_destroy(), then `items` must be released using free().
+  /// - `count` (out): The count of retrieved notification items
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_PERMISSION_DENIED`: Permission deny
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `NOTI_EX_ERROR_IO_ERROR`: IO error
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  /// - `noti_ex_manager_h`
+  /// - `noti_ex_item_destroy()`
+  ///
+  /// **Paragraph:**
+  /// - tner
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// void _manager_events_error_cb(noti_ex_manager_h handle, noti_ex_error_e error,
@@ -5616,7 +7343,7 @@ class Tizen80NotificationEx {
   ///
   /// free(items);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_manager_get(
     noti_ex_manager_h handle,
     ffi.Pointer<ffi.Pointer<noti_ex_item_h>> items,
@@ -5639,27 +7366,45 @@ class Tizen80NotificationEx {
       int Function(noti_ex_manager_h, ffi.Pointer<ffi.Pointer<noti_ex_item_h>>,
           ffi.Pointer<ffi.Int>)>();
 
-  /// @partner
-  /// @brief Gets notifications with @a channel for the notification_ex manager.
-  /// @details Every notification that has been sent for the manager will be retrieved.
-  /// @since_tizen 5.5
-  /// @privlevel partner
-  /// @privilege %http://tizen.org/privilege/notification.admin
-  /// @param[in] handle The notification manager handle
-  /// @param[in] channel The channel of a notification_ex item
-  /// @param[out] items The result of the get request \n
-  /// Each item in @a items must be released using noti_ex_item_destroy(), then @a items must be released using free().
-  /// @param[out] count The count of retrieved notification items
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_PERMISSION_DENIED Permission deny
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #NOTI_EX_ERROR_IO_ERROR IO error
-  /// @see #noti_ex_item_h
-  /// @see #noti_ex_manager_h
-  /// @see noti_ex_item_destroy()
-  /// @par Sample code:
-  /// @code
+  /// Gets notifications with `channel` for the notification_ex manager.
+  ///
+  /// Every notification that has been sent for the manager will be retrieved.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/notification.admin>
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification manager handle
+  /// - `channel` (in): The channel of a notification_ex item
+  /// - `items` (out): The result of the get request Each item in `items` must be released using noti_ex_item_destroy(), then `items` must be released using free().
+  /// - `count` (out): The count of retrieved notification items
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_PERMISSION_DENIED`: Permission deny
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `NOTI_EX_ERROR_IO_ERROR`: IO error
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  /// - `noti_ex_manager_h`
+  /// - `noti_ex_item_destroy()`
+  ///
+  /// **Paragraph:**
+  /// - tner
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// void _manager_events_error_cb(noti_ex_manager_h handle, noti_ex_error_e error,
@@ -5687,7 +7432,7 @@ class Tizen80NotificationEx {
   ///
   /// free(items);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_manager_get_by_channel(
     noti_ex_manager_h handle,
     ffi.Pointer<ffi.Char> channel,
@@ -5717,23 +7462,41 @@ class Tizen80NotificationEx {
               ffi.Pointer<ffi.Pointer<noti_ex_item_h>>,
               ffi.Pointer<ffi.Int>)>();
 
-  /// @partner
-  /// @brief Updates notification.
-  /// @since_tizen 5.5
-  /// @privlevel partner
-  /// @privilege %http://tizen.org/privilege/notification.admin
-  /// @param[in] handle The notification manager handle
-  /// @param[in] item The notification item to be updated
-  /// @param[out] request_id The id of request
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_PERMISSION_DENIED Permission deny
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #NOTI_EX_ERROR_IO_ERROR IO error
-  /// @see #noti_ex_item_h
-  /// @see #noti_ex_manager_h
-  /// @par Sample code:
-  /// @code
+  /// Updates notification.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/notification.admin>
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification manager handle
+  /// - `item` (in): The notification item to be updated
+  /// - `request_id` (out): The id of request
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_PERMISSION_DENIED`: Permission deny
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `NOTI_EX_ERROR_IO_ERROR`: IO error
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  /// - `noti_ex_manager_h`
+  ///
+  /// **Paragraph:**
+  /// - tner
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// void _manager_events_error_cb(noti_ex_manager_h handle, noti_ex_error_e error,
@@ -5759,7 +7522,7 @@ class Tizen80NotificationEx {
   /// noti_ex_manager_update(handle, item, &request_id);
   /// }
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_manager_update(
     noti_ex_manager_h handle,
     noti_ex_item_h item,
@@ -5779,23 +7542,41 @@ class Tizen80NotificationEx {
   late final _noti_ex_manager_update = _noti_ex_manager_updatePtr.asFunction<
       int Function(noti_ex_manager_h, noti_ex_item_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @partner
-  /// @brief Deletes notification.
-  /// @since_tizen 5.5
-  /// @privlevel partner
-  /// @privilege %http://tizen.org/privilege/notification.admin
-  /// @param[in] handle The notification manager handle
-  /// @param[in] noti The notification item to be deleted
-  /// @param[out] request_id The id of request
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_PERMISSION_DENIED Permission deny
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #NOTI_EX_ERROR_IO_ERROR IO error
-  /// @see #noti_ex_manager_h
-  /// @see #noti_ex_error_e
-  /// @par Sample code:
-  /// @code
+  /// Deletes notification.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/notification.admin>
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification manager handle
+  /// - `noti` (in): The notification item to be deleted
+  /// - `request_id` (out): The id of request
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_PERMISSION_DENIED`: Permission deny
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `NOTI_EX_ERROR_IO_ERROR`: IO error
+  ///
+  /// **See also:**
+  /// - `noti_ex_manager_h`
+  /// - `noti_ex_error_e`
+  ///
+  /// **Paragraph:**
+  /// - tner
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// void _manager_events_error_cb(noti_ex_manager_h handle, noti_ex_error_e error,
@@ -5819,7 +7600,7 @@ class Tizen80NotificationEx {
   /// noti_ex_manager_delete(handle, item, &request_id);
   /// }
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_manager_delete(
     noti_ex_manager_h handle,
     noti_ex_item_h noti,
@@ -5839,22 +7620,40 @@ class Tizen80NotificationEx {
   late final _noti_ex_manager_delete = _noti_ex_manager_deletePtr.asFunction<
       int Function(noti_ex_manager_h, noti_ex_item_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @partner
-  /// @brief Deletes all notification.
-  /// @since_tizen 5.5
-  /// @privlevel partner
-  /// @privilege %http://tizen.org/privilege/notification.admin
-  /// @param[in] handle The notification manager handle
-  /// @param[out] request_id The id of request
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_PERMISSION_DENIED Permission deny
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #NOTI_EX_ERROR_IO_ERROR IO error
-  /// @see #noti_ex_manager_h
-  /// @see #noti_ex_error_e
-  /// @par Sample code:
-  /// @code
+  /// Deletes all notification.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/notification.admin>
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification manager handle
+  /// - `request_id` (out): The id of request
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_PERMISSION_DENIED`: Permission deny
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `NOTI_EX_ERROR_IO_ERROR`: IO error
+  ///
+  /// **See also:**
+  /// - `noti_ex_manager_h`
+  /// - `noti_ex_error_e`
+  ///
+  /// **Paragraph:**
+  /// - tner
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// void _manager_events_error_cb(noti_ex_manager_h handle, noti_ex_error_e error,
@@ -5874,7 +7673,7 @@ class Tizen80NotificationEx {
   /// ret = noti_ex_manager_create(&handle, NOTI_EX_RECEIVER_GROUP_INDICATOR, ev, NULL);
   /// ret = noti_ex_manager_delete_all(handle, &request_id);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_manager_delete_all(
     noti_ex_manager_h handle,
     ffi.Pointer<ffi.Int> request_id,
@@ -5892,23 +7691,41 @@ class Tizen80NotificationEx {
   late final _noti_ex_manager_delete_all = _noti_ex_manager_delete_allPtr
       .asFunction<int Function(noti_ex_manager_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @partner
-  /// @brief Hides notification.
-  /// @since_tizen 5.5
-  /// @privlevel partner
-  /// @privilege %http://tizen.org/privilege/notification.admin
-  /// @param[in] handle The notification manager handle
-  /// @param[in] item The notification item to be hidden
-  /// @param[out] request_id The id of request
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_PERMISSION_DENIED Permission deny
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #NOTI_EX_ERROR_IO_ERROR IO error
-  /// @see #noti_ex_item_h
-  /// @see #noti_ex_manager_h
-  /// @par Sample code:
-  /// @code
+  /// Hides notification.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/notification.admin>
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification manager handle
+  /// - `item` (in): The notification item to be hidden
+  /// - `request_id` (out): The id of request
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_PERMISSION_DENIED`: Permission deny
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `NOTI_EX_ERROR_IO_ERROR`: IO error
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  /// - `noti_ex_manager_h`
+  ///
+  /// **Paragraph:**
+  /// - tner
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// void _manager_events_error_cb(noti_ex_manager_h handle, noti_ex_error_e error,
@@ -5931,7 +7748,7 @@ class Tizen80NotificationEx {
   /// ret = noti_ex_manager_hide(handle, item, &request_id);
   /// }
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_manager_hide(
     noti_ex_manager_h handle,
     noti_ex_item_h item,
@@ -5951,26 +7768,45 @@ class Tizen80NotificationEx {
   late final _noti_ex_manager_hide = _noti_ex_manager_hidePtr.asFunction<
       int Function(noti_ex_manager_h, noti_ex_item_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @partner
-  /// @brief Finds notification by root id.
-  /// @since_tizen 5.5
-  /// @privlevel partner
-  /// @privilege %http://tizen.org/privilege/notification.admin
-  /// @remarks @a root_id is the id of the foremost notification item.
-  /// @param[in] handle The notification manager handle
-  /// @param[in] root_id The id of the foremost notification item to be retrieved
-  /// @param[out] item The result of the find operation \n
-  /// The @a item must be released using noti_ex_item_destroy().
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_PERMISSION_DENIED Permission deny
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #NOTI_EX_ERROR_IO_ERROR IO error
-  /// @see #noti_ex_manager_h
-  /// @see #noti_ex_item_h
-  /// @see noti_ex_item_destroy()
-  /// @par Sample code:
-  /// @code
+  /// Finds notification by root id.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/notification.admin>
+  ///
+  /// **Remarks:**
+  /// - `root_id` is the id of the foremost notification item.
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification manager handle
+  /// - `root_id` (in): The id of the foremost notification item to be retrieved
+  /// - `item` (out): The result of the find operation The `item` must be released using noti_ex_item_destroy().
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_PERMISSION_DENIED`: Permission deny
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `NOTI_EX_ERROR_IO_ERROR`: IO error
+  ///
+  /// **See also:**
+  /// - `noti_ex_manager_h`
+  /// - `noti_ex_item_h`
+  /// - `noti_ex_item_destroy()`
+  ///
+  /// **Paragraph:**
+  /// - tner
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// void _manager_events_error_cb(noti_ex_manager_h handle, noti_ex_error_e error,
@@ -5987,7 +7823,7 @@ class Tizen80NotificationEx {
   /// ret = noti_ex_manager_create(&handle, NOTI_EX_RECEIVER_GROUP_INDICATOR, ev, NULL);
   /// ret = noti_ex_manager_find_by_root_id(handle, "group1", &item);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_manager_find_by_root_id(
     noti_ex_manager_h handle,
     ffi.Pointer<ffi.Char> root_id,
@@ -6009,24 +7845,42 @@ class Tizen80NotificationEx {
           int Function(noti_ex_manager_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<noti_ex_item_h>)>();
 
-  /// @partner
-  /// @brief Sends error to the reporter.
-  /// @since_tizen 5.5
-  /// @privlevel partner
-  /// @privilege %http://tizen.org/privilege/notification.admin
-  /// @param[in] handle The notification manager handle
-  /// @param[in] info The handle that contains event information
-  /// @param[in] error The error type
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_PERMISSION_DENIED Permission deny
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #NOTI_EX_ERROR_IO_ERROR IO error
-  /// @see #noti_ex_event_info_h
-  /// @see #noti_ex_manager_h
-  /// @see #noti_ex_error_e
-  /// @par Sample code:
-  /// @code
+  /// Sends error to the reporter.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/notification.admin>
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification manager handle
+  /// - `info` (in): The handle that contains event information
+  /// - `error` (in): The error type
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_PERMISSION_DENIED`: Permission deny
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `NOTI_EX_ERROR_IO_ERROR`: IO error
+  ///
+  /// **See also:**
+  /// - `noti_ex_event_info_h`
+  /// - `noti_ex_manager_h`
+  /// - `noti_ex_error_e`
+  ///
+  /// **Paragraph:**
+  /// - tner
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// void _manager_events_add_cb(noti_ex_manager_h handle, noti_ex_event_info_h info,
@@ -6058,7 +7912,7 @@ class Tizen80NotificationEx {
   /// ev.error = _manager_events_error_cb;
   /// ret = noti_ex_manager_create(&handle, NOTI_EX_RECEIVER_GROUP_INDICATOR, ev, NULL);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_manager_send_error(
     noti_ex_manager_h handle,
     noti_ex_event_info_h info,
@@ -6078,25 +7932,43 @@ class Tizen80NotificationEx {
   late final _noti_ex_manager_send_error = _noti_ex_manager_send_errorPtr
       .asFunction<int Function(noti_ex_manager_h, noti_ex_event_info_h, int)>();
 
-  /// @partner
-  /// @brief Gets the count of notifications for the manager.
-  /// @since_tizen 5.5
-  /// @privlevel partner
-  /// @privilege %http://tizen.org/privilege/notification.admin
-  /// @param[in] handle The notification manager handle
-  /// @param[out] count The count of notifications
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_PERMISSION_DENIED Permission deny
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #NOTI_EX_ERROR_IO_ERROR IO error
-  /// @see #noti_ex_manager_h
-  /// @see #NOTI_EX_RECEIVER_GROUP_TICKER
-  /// @see #NOTI_EX_RECEIVER_GROUP_LOCKSCREEN
-  /// @see #NOTI_EX_RECEIVER_GROUP_INDICATOR
-  /// @see #NOTI_EX_RECEIVER_GROUP_POPUP
-  /// @par Sample code:
-  /// @code
+  /// Gets the count of notifications for the manager.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Privilege level:**
+  /// - partner
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/notification.admin>
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification manager handle
+  /// - `count` (out): The count of notifications
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_PERMISSION_DENIED`: Permission deny
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `NOTI_EX_ERROR_IO_ERROR`: IO error
+  ///
+  /// **See also:**
+  /// - `noti_ex_manager_h`
+  /// - `NOTI_EX_RECEIVER_GROUP_TICKER`
+  /// - `NOTI_EX_RECEIVER_GROUP_LOCKSCREEN`
+  /// - `NOTI_EX_RECEIVER_GROUP_INDICATOR`
+  /// - `NOTI_EX_RECEIVER_GROUP_POPUP`
+  ///
+  /// **Paragraph:**
+  /// - tner
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// void _manager_events_error_cb(noti_ex_manager_h handle, noti_ex_error_e error,
@@ -6113,7 +7985,7 @@ class Tizen80NotificationEx {
   /// ret = noti_ex_manager_create(&handle, NOTI_EX_RECEIVER_GROUP_INDICATOR, ev, NULL);
   /// ret = noti_ex_manager_get_notification_count(handle, &cnt);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_manager_get_notification_count(
     noti_ex_manager_h handle,
     ffi.Pointer<ffi.Int> count,
@@ -6132,28 +8004,45 @@ class Tizen80NotificationEx {
       _noti_ex_manager_get_notification_countPtr
           .asFunction<int Function(noti_ex_manager_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Creates the notification_ex reporter handle.
-  /// @details The reporter handle is created with event callbacks and
-  /// the user can listen notification events through the event callbacks.
-  /// Callbacks in @a event_callbacks can be set to NULL, which will result in the corresponding events not being received.
-  /// @since_tizen 5.5
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/notification
-  /// @remarks @a handle must be released using noti_ex_reporter_destroy().
-  /// @param[out] handle The notification reporter handle
-  /// @param[in] event_callbacks The callbacks for notification events
-  /// @param[in] user_data The user data for @a event_callbacks
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_PERMISSION_DENIED Permission deny
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #NOTI_EX_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #NOTI_EX_ERROR_IO_ERROR IO error
-  /// @see #noti_ex_item_h
-  /// @see #noti_ex_reporter_events_s
-  /// @see noti_ex_reporter_destroy()
-  /// @par Sample code:
-  /// @code
+  /// Creates the notification_ex reporter handle.
+  ///
+  /// The reporter handle is created with event callbacks and the user can listen notification events through the event callbacks. Callbacks in `event_callbacks` can be set to NULL, which will result in the corresponding events not being received.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/notification>
+  ///
+  /// **Remarks:**
+  /// - `handle` must be released using noti_ex_reporter_destroy().
+  ///
+  /// **Parameters:**
+  /// - `handle` (out): The notification reporter handle
+  /// - `event_callbacks` (in): The callbacks for notification events
+  /// - `user_data` (in): The user data for `event_callbacks`
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_PERMISSION_DENIED`: Permission deny
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `NOTI_EX_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `NOTI_EX_ERROR_IO_ERROR`: IO error
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  /// - `noti_ex_reporter_events_s`
+  /// - `noti_ex_reporter_destroy()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// void _reporter_events_event_cb(noti_ex_reporter_h handle, noti_ex_event_info_h info,
@@ -6173,7 +8062,7 @@ class Tizen80NotificationEx {
   /// ev.error = _reporter_events_error_cb;
   /// ret = noti_ex_reporter_create(&handle, ev, NULL);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_reporter_create(
     ffi.Pointer<noti_ex_reporter_h> handle,
     noti_ex_reporter_events_s event_callbacks,
@@ -6196,15 +8085,27 @@ class Tizen80NotificationEx {
       int Function(ffi.Pointer<noti_ex_reporter_h>, noti_ex_reporter_events_s,
           ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Destroys the notification_ex reporter handle.
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification reporter handle
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see noti_ex_reporter_create()
-  /// @par Sample code:
-  /// @code
+  /// Destroys the notification_ex reporter handle.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification reporter handle
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_reporter_create()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// void _reporter_events_error_cb(noti_ex_reporter_h handle, noti_ex_error_e error,
@@ -6220,7 +8121,7 @@ class Tizen80NotificationEx {
   /// ret = noti_ex_reporter_create(&handle, ev, NULL);
   /// ret = noti_ex_reporter_destroy(handle);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_reporter_destroy(
     noti_ex_reporter_h handle,
   ) {
@@ -6235,23 +8136,39 @@ class Tizen80NotificationEx {
   late final _noti_ex_reporter_destroy = _noti_ex_reporter_destroyPtr
       .asFunction<int Function(noti_ex_reporter_h)>();
 
-  /// @brief Sends error to the manager.
-  /// @since_tizen 5.5
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/notification
-  /// @param[out] handle The notification reporter handle
-  /// @param[in] info The handle that contains event information
-  /// @param[in] error The error type
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_PERMISSION_DENIED Permission deny
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #NOTI_EX_ERROR_IO_ERROR IO error
-  /// @see #noti_ex_event_info_h
-  /// @see #noti_ex_manager_events_s
-  /// @see #noti_ex_error_e
-  /// @par Sample code:
-  /// @code
+  /// Sends error to the manager.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/notification>
+  ///
+  /// **Parameters:**
+  /// - `handle` (out): The notification reporter handle
+  /// - `info` (in): The handle that contains event information
+  /// - `error` (in): The error type
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_PERMISSION_DENIED`: Permission deny
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `NOTI_EX_ERROR_IO_ERROR`: IO error
+  ///
+  /// **See also:**
+  /// - `noti_ex_event_info_h`
+  /// - `noti_ex_manager_events_s`
+  /// - `noti_ex_error_e`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// void _reporter_events_event_cb(noti_ex_reporter_h handle, noti_ex_event_info_h info,
@@ -6274,7 +8191,7 @@ class Tizen80NotificationEx {
   /// ev.error = _reporter_events_error_cb;
   /// ret = noti_ex_reporter_create(&handle, ev, NULL);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_reporter_send_error(
     noti_ex_reporter_h handle,
     noti_ex_event_info_h info,
@@ -6295,21 +8212,37 @@ class Tizen80NotificationEx {
       _noti_ex_reporter_send_errorPtr.asFunction<
           int Function(noti_ex_reporter_h, noti_ex_event_info_h, int)>();
 
-  /// @brief Posts a notification.
-  /// @since_tizen 5.5
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/notification
-  /// @param[in] handle The notification reporter handle
-  /// @param[in] noti The notification handle to be posted
-  /// @param[out] request_id The id of request
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_PERMISSION_DENIED Permission deny
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #NOTI_EX_ERROR_IO_ERROR IO error
-  /// @see noti_ex_reporter_create()
-  /// @par Sample code:
-  /// @code
+  /// Posts a notification.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/notification>
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification reporter handle
+  /// - `noti` (in): The notification handle to be posted
+  /// - `request_id` (out): The id of request
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_PERMISSION_DENIED`: Permission deny
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `NOTI_EX_ERROR_IO_ERROR`: IO error
+  ///
+  /// **See also:**
+  /// - `noti_ex_reporter_create()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// void _reporter_events_error_cb(noti_ex_reporter_h handle, noti_ex_error_e error,
@@ -6334,7 +8267,7 @@ class Tizen80NotificationEx {
   /// ret = noti_ex_reporter_post(handle, group_item, &request_id);
   /// noti_ex_item_destroy(group_item);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_reporter_post(
     noti_ex_reporter_h handle,
     noti_ex_item_h noti,
@@ -6354,22 +8287,38 @@ class Tizen80NotificationEx {
   late final _noti_ex_reporter_post = _noti_ex_reporter_postPtr.asFunction<
       int Function(noti_ex_reporter_h, noti_ex_item_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Posts notifications contained in a list.
-  /// @since_tizen 5.5
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/notification
-  /// @param[in] handle The notification reporter handle
-  /// @param[in] noti_list The notification handle list to be posted
-  /// @param[in] count The count of notifications in @a noti_list
-  /// @param[out] request_id The id of request
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_PERMISSION_DENIED Permission deny
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #NOTI_EX_ERROR_IO_ERROR IO error
-  /// @see noti_ex_reporter_create()
-  /// @par Sample code:
-  /// @code
+  /// Posts notifications contained in a list.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/notification>
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification reporter handle
+  /// - `noti_list` (in): The notification handle list to be posted
+  /// - `count` (in): The count of notifications in `noti_list`
+  /// - `request_id` (out): The id of request
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_PERMISSION_DENIED`: Permission deny
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `NOTI_EX_ERROR_IO_ERROR`: IO error
+  ///
+  /// **See also:**
+  /// - `noti_ex_reporter_create()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// void _reporter_events_error_cb(noti_ex_reporter_h handle, noti_ex_error_e error,
@@ -6403,7 +8352,7 @@ class Tizen80NotificationEx {
   ///
   /// free(noti_list);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_reporter_post_list(
     noti_ex_reporter_h handle,
     ffi.Pointer<noti_ex_item_h> noti_list,
@@ -6427,21 +8376,37 @@ class Tizen80NotificationEx {
           int Function(noti_ex_reporter_h, ffi.Pointer<noti_ex_item_h>, int,
               ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Updates a notification.
-  /// @since_tizen 5.5
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/notification
-  /// @param[in] handle The notification reporter handle
-  /// @param[in] noti The notification handle to be updated
-  /// @param[out] request_id The id of request
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_PERMISSION_DENIED Permission deny
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #NOTI_EX_ERROR_IO_ERROR IO error
-  /// @see noti_ex_reporter_create()
-  /// @par Sample code:
-  /// @code
+  /// Updates a notification.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/notification>
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification reporter handle
+  /// - `noti` (in): The notification handle to be updated
+  /// - `request_id` (out): The id of request
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_PERMISSION_DENIED`: Permission deny
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `NOTI_EX_ERROR_IO_ERROR`: IO error
+  ///
+  /// **See also:**
+  /// - `noti_ex_reporter_create()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// void _reporter_events_error_cb(noti_ex_reporter_h handle, noti_ex_error_e error,
@@ -6462,7 +8427,7 @@ class Tizen80NotificationEx {
   /// ret = noti_ex_item_group_set_direction(group_item, false);
   /// ret = noti_ex_reporter_update(handle, group_item, &request_id);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_reporter_update(
     noti_ex_reporter_h handle,
     noti_ex_item_h noti,
@@ -6482,21 +8447,37 @@ class Tizen80NotificationEx {
   late final _noti_ex_reporter_update = _noti_ex_reporter_updatePtr.asFunction<
       int Function(noti_ex_reporter_h, noti_ex_item_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Deletes a notification.
-  /// @since_tizen 5.5
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/notification
-  /// @param[in] handle The notification reporter handle
-  /// @param[in] noti The notification handle to be updated
-  /// @param[out] request_id The id of request
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_PERMISSION_DENIED Permission deny
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #NOTI_EX_ERROR_IO_ERROR IO error
-  /// @see noti_ex_reporter_create()
-  /// @par Sample code:
-  /// @code
+  /// Deletes a notification.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/notification>
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification reporter handle
+  /// - `noti` (in): The notification handle to be updated
+  /// - `request_id` (out): The id of request
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_PERMISSION_DENIED`: Permission deny
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `NOTI_EX_ERROR_IO_ERROR`: IO error
+  ///
+  /// **See also:**
+  /// - `noti_ex_reporter_create()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// void _reporter_events_error_cb(noti_ex_reporter_h handle, noti_ex_error_e error,
@@ -6516,7 +8497,7 @@ class Tizen80NotificationEx {
   /// ret = noti_ex_reporter_find_by_root_id(handle, "group_id", &group_item);
   /// ret = noti_ex_reporter_delete(handle, group_item, &request_id);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_reporter_delete(
     noti_ex_reporter_h handle,
     noti_ex_item_h noti,
@@ -6536,20 +8517,36 @@ class Tizen80NotificationEx {
   late final _noti_ex_reporter_delete = _noti_ex_reporter_deletePtr.asFunction<
       int Function(noti_ex_reporter_h, noti_ex_item_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Deletes all notifications.
-  /// @since_tizen 5.5
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/notification
-  /// @param[in] handle The notification reporter handle
-  /// @param[out] request_id The id of request
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_PERMISSION_DENIED Permission deny
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #NOTI_EX_ERROR_IO_ERROR IO error
-  /// @see noti_ex_reporter_create()
-  /// @par Sample code:
-  /// @code
+  /// Deletes all notifications.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/notification>
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification reporter handle
+  /// - `request_id` (out): The id of request
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_PERMISSION_DENIED`: Permission deny
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `NOTI_EX_ERROR_IO_ERROR`: IO error
+  ///
+  /// **See also:**
+  /// - `noti_ex_reporter_create()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// void _reporter_events_error_cb(noti_ex_reporter_h handle, noti_ex_error_e error,
@@ -6568,7 +8565,7 @@ class Tizen80NotificationEx {
   /// ret = noti_ex_reporter_create(&handle, ev, NULL);
   /// ret = noti_ex_reporter_delete_all(handle, &request_id);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_reporter_delete_all(
     noti_ex_reporter_h handle,
     ffi.Pointer<ffi.Int> request_id,
@@ -6586,23 +8583,38 @@ class Tizen80NotificationEx {
   late final _noti_ex_reporter_delete_all = _noti_ex_reporter_delete_allPtr
       .asFunction<int Function(noti_ex_reporter_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Finds notification by root id.
-  /// @since_tizen 5.5
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/notification
-  /// @param[in] handle The notification reporter handle
-  /// @param[in] root_id The id of the foremost notification item to be retrieved
-  /// @param[out] item The result of the find operation \n
-  /// The @a item must be released using noti_ex_item_destroy().
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_PERMISSION_DENIED Permission deny
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #NOTI_EX_ERROR_IO_ERROR IO error
-  /// @see noti_ex_reporter_create()
-  /// @see noti_ex_item_destroy()
-  /// @par Sample code:
-  /// @code
+  /// Finds notification by root id.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/notification>
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification reporter handle
+  /// - `root_id` (in): The id of the foremost notification item to be retrieved
+  /// - `item` (out): The result of the find operation The `item` must be released using noti_ex_item_destroy().
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_PERMISSION_DENIED`: Permission deny
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `NOTI_EX_ERROR_IO_ERROR`: IO error
+  ///
+  /// **See also:**
+  /// - `noti_ex_reporter_create()`
+  /// - `noti_ex_item_destroy()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// void _reporter_events_error_cb(noti_ex_reporter_h handle, noti_ex_error_e error,
@@ -6622,7 +8634,7 @@ class Tizen80NotificationEx {
   /// ret = noti_ex_reporter_find_by_root_id(handle, "group_id", &group_item);
   /// ret = noti_ex_reporter_delete(handle, group_item, &request_id);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_reporter_find_by_root_id(
     noti_ex_reporter_h handle,
     ffi.Pointer<ffi.Char> root_id,
@@ -6645,25 +8657,37 @@ class Tizen80NotificationEx {
           int Function(noti_ex_reporter_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<noti_ex_item_h>)>();
 
-  /// @brief Creates the notification_ex item handle with text.
-  /// @details The notification_ex item is the predefined type of notifications.
-  /// The notification can be created with one item or group of items.
-  /// If the user wants to be display the notification with text,
-  /// the notification_ex handle has to be created as a text item.
-  /// @since_tizen 5.5
-  /// @remarks @a handle must be released using noti_ex_item_destroy().
-  /// @param[out] handle The notification_ex item handle
-  /// @param[in] id The id of notification_ex item
-  /// @param[in] text The text of text item
-  /// @param[in] hyperlink The hyperlink of text item
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #NOTI_EX_ERROR_OUT_OF_MEMORY out of memory
-  /// @see #noti_ex_item_h
-  /// @see noti_ex_item_destroy()
-  /// @par Sample code:
-  /// @code
+  /// Creates the notification_ex item handle with text.
+  ///
+  /// The notification_ex item is the predefined type of notifications. The notification can be created with one item or group of items. If the user wants to be display the notification with text, the notification_ex handle has to be created as a text item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - `handle` must be released using noti_ex_item_destroy().
+  ///
+  /// **Parameters:**
+  /// - `handle` (out): The notification_ex item handle
+  /// - `id` (in): The id of notification_ex item
+  /// - `text` (in): The text of text item
+  /// - `hyperlink` (in): The hyperlink of text item
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `NOTI_EX_ERROR_OUT_OF_MEMORY`: out of memory
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  /// - `noti_ex_item_destroy()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -6672,7 +8696,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_item_text_create(&text_item, "text_id", "text", "hyperlink");
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_text_create(
     ffi.Pointer<noti_ex_item_h> handle,
     ffi.Pointer<ffi.Char> id,
@@ -6699,19 +8723,33 @@ class Tizen80NotificationEx {
           int Function(ffi.Pointer<noti_ex_item_h>, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets the text contents of the text item.
-  /// @since_tizen 5.5
-  /// @remarks If the multi-language handle is set by noti_ex_item_text_set_multi_language(), \n
-  /// it will return a multi-language content.
-  /// @param[in] handle The notification_ex item handle
-  /// @param[in] contents The text contents
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_item_h
-  /// @see noti_ex_item_text_create()
-  /// @par Sample code:
-  /// @code
+  /// Sets the text contents of the text item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - If the multi-language handle is set by noti_ex_item_text_set_multi_language(),
+  /// - it will return a multi-language content.
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item handle
+  /// - `contents` (in): The text contents
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  /// - `noti_ex_item_text_create()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -6719,7 +8757,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_item_text_set_contents(text_item, "text_contents");
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_text_set_contents(
     noti_ex_item_h handle,
     ffi.Pointer<ffi.Char> contents,
@@ -6738,21 +8776,35 @@ class Tizen80NotificationEx {
       _noti_ex_item_text_set_contentsPtr
           .asFunction<int Function(noti_ex_item_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the text contents of the text item.
-  /// @since_tizen 5.5
-  /// @remarks @a contents must be released using free().
-  /// @remarks If the multi-language handle is set by noti_ex_item_text_set_multi_language(), \n
-  /// it will return a multi-language content.
-  /// @param[in] handle The notification_ex item handle
-  /// @param[out] contents The text contents
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter, if the item type is not correct, this error is returned
-  /// @see #noti_ex_item_h
-  /// @see noti_ex_item_text_create()
-  /// @see noti_ex_item_text_set_multi_language()
-  /// @par Sample code:
-  /// @code
+  /// Gets the text contents of the text item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - `contents` must be released using free().
+  /// - If the multi-language handle is set by noti_ex_item_text_set_multi_language(),
+  /// - it will return a multi-language content.
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item handle
+  /// - `contents` (out): The text contents
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter, if the item type is not correct, this error is returned
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  /// - `noti_ex_item_text_create()`
+  /// - `noti_ex_item_text_set_multi_language()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -6761,7 +8813,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_item_text_get_contents(text_item, &contents);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_text_get_contents(
     noti_ex_item_h handle,
     ffi.Pointer<ffi.Pointer<ffi.Char>> contents,
@@ -6781,18 +8833,32 @@ class Tizen80NotificationEx {
       _noti_ex_item_text_get_contentsPtr.asFunction<
           int Function(noti_ex_item_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the hyperlink of the text item.
-  /// @since_tizen 5.5
-  /// @remarks @a hyperlink must be released using free().
-  /// @param[in] handle The notification_ex item handle
-  /// @param[out] hyperlink The hyperlink
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter, if the item type is not correct, this error is returned
-  /// @see #noti_ex_item_h
-  /// @see noti_ex_item_text_create()
-  /// @par Sample code:
-  /// @code
+  /// Gets the hyperlink of the text item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - `hyperlink` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item handle
+  /// - `hyperlink` (out): The hyperlink
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter, if the item type is not correct, this error is returned
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  /// - `noti_ex_item_text_create()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -6801,7 +8867,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_item_text_get_hyperlink(text_item, &hyperlink);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_text_get_hyperlink(
     noti_ex_item_h handle,
     ffi.Pointer<ffi.Pointer<ffi.Char>> hyperlink,
@@ -6821,24 +8887,38 @@ class Tizen80NotificationEx {
       _noti_ex_item_text_get_hyperlinkPtr.asFunction<
           int Function(noti_ex_item_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets the multi-language handle.
-  /// @since_tizen 5.5
-  /// @remarks After setting the multi-language handle successfully, \n
-  /// noti_ex_item_text_get_contents() will return the multi-language text. \n
-  /// @remarks The #noti_ex_item_h handle keeps its own copy of #noti_ex_multi_lang_h. \n
-  /// Therefore, you can destroy @a multi after it was set for @a handle.
-  /// @remarks You can pass NULL to @a multi, if you want to remove the multi-language text.
-  /// @param[in] handle The notification_ex item handle
-  /// @param[in] multi The multi-language handle
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter, if the item type is not correct, this error is returned
-  /// @see #noti_ex_item_h
-  /// @see noti_ex_item_text_create()
-  /// @see noti_ex_multi_lang_create()
-  /// @see noti_ex_item_text_get_contents()
-  /// @par Sample code:
-  /// @code
+  /// Sets the multi-language handle.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - After setting the multi-language handle successfully,
+  /// - noti_ex_item_text_get_contents() will return the multi-language text.
+  /// - The `noti_ex_item_h` handle keeps its own copy of `noti_ex_multi_lang_h`.
+  /// - Therefore, you can destroy `multi` after it was set for `handle`.
+  /// - You can pass NULL to `multi`, if you want to remove the multi-language text.
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item handle
+  /// - `multi` (in): The multi-language handle
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter, if the item type is not correct, this error is returned
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  /// - `noti_ex_item_text_create()`
+  /// - `noti_ex_multi_lang_create()`
+  /// - `noti_ex_item_text_get_contents()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -6851,7 +8931,7 @@ class Tizen80NotificationEx {
   /// ret = noti_ex_item_text_set_multi_language(text_item, multi);
   /// noti_ex_multi_lang_destroy(multi);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_text_set_multi_language(
     noti_ex_item_h handle,
     noti_ex_multi_lang_h multi,
@@ -6870,24 +8950,36 @@ class Tizen80NotificationEx {
       _noti_ex_item_text_set_multi_languagePtr
           .asFunction<int Function(noti_ex_item_h, noti_ex_multi_lang_h)>();
 
-  /// @brief Creates the notification_ex item handle with time.
-  /// @details The notification_ex item is the predefined type of notifications.
-  /// The notification can be created with one item or group of items.
-  /// If the user wants to be display the notification with time,
-  /// the notification_ex handle has to be created as a time item.
-  /// @since_tizen 5.5
-  /// @remarks @a handle must be released using noti_ex_item_destroy().
-  /// @param[out] handle The notification_ex item handle
-  /// @param[in] id The id of notification_ex item
-  /// @param[in] time The time information
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #NOTI_EX_ERROR_OUT_OF_MEMORY out of memory
-  /// @see #noti_ex_item_h
-  /// @see noti_ex_item_destroy()
-  /// @par Sample code:
-  /// @code
+  /// Creates the notification_ex item handle with time.
+  ///
+  /// The notification_ex item is the predefined type of notifications. The notification can be created with one item or group of items. If the user wants to be display the notification with time, the notification_ex handle has to be created as a time item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - `handle` must be released using noti_ex_item_destroy().
+  ///
+  /// **Parameters:**
+  /// - `handle` (out): The notification_ex item handle
+  /// - `id` (in): The id of notification_ex item
+  /// - `time` (in): The time information
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `NOTI_EX_ERROR_OUT_OF_MEMORY`: out of memory
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  /// - `noti_ex_item_destroy()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -6898,7 +8990,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_item_time_create(&time_item, "time_id", time_info);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_time_create(
     ffi.Pointer<noti_ex_item_h> handle,
     ffi.Pointer<ffi.Char> id,
@@ -6920,18 +9012,32 @@ class Tizen80NotificationEx {
           int Function(
               ffi.Pointer<noti_ex_item_h>, ffi.Pointer<ffi.Char>, int)>();
 
-  /// @brief Gets the time information of time item.
-  /// @since_tizen 5.5
-  /// @remarks @a handle must be released using noti_ex_item_destroy().
-  /// @param[in] handle The notification_ex item handle
-  /// @param[out] time The time information of time item
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter, if the item type is not correct, this error is returned
-  /// @see #noti_ex_item_h
-  /// @see noti_ex_item_time_create()
-  /// @par Sample code:
-  /// @code
+  /// Gets the time information of time item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - `handle` must be released using noti_ex_item_destroy().
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex item handle
+  /// - `time` (out): The time information of time item
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter, if the item type is not correct, this error is returned
+  ///
+  /// **See also:**
+  /// - `noti_ex_item_h`
+  /// - `noti_ex_item_time_create()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -6940,7 +9046,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_item_time_get_time(time_item, &time_info);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_item_time_get_time(
     noti_ex_item_h handle,
     ffi.Pointer<ffi_lib.Long> time,
@@ -6958,25 +9064,36 @@ class Tizen80NotificationEx {
   late final _noti_ex_item_time_get_time = _noti_ex_item_time_get_timePtr
       .asFunction<int Function(noti_ex_item_h, ffi.Pointer<ffi_lib.Long>)>();
 
-  /// @brief Creates the notification_ex action handle to control visibility.
-  /// @details The notification_ex can define the action with #noti_ex_action_h.
-  /// If it is necessary to control visibility of the notification_ex item,
-  /// the notification_ex action handle has to be created as a visibility action.
-  /// @a extra can be used to pass user defined data
-  /// and the extra data can be obtained from an action handle using #noti_ex_action_get_extra().
-  /// @since_tizen 5.5
-  /// @remarks @a handle must be released using noti_ex_action_destroy().
-  /// @param[out] handle The notification_ex action handle
-  /// @param[in] extra The extra data
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #NOTI_EX_ERROR_OUT_OF_MEMORY out of memory
-  /// @see #noti_ex_action_h
-  /// @see noti_ex_action_destroy()
-  /// @see noti_ex_action_get_extra()
-  /// @par Sample code:
-  /// @code
+  /// Creates the notification_ex action handle to control visibility.
+  ///
+  /// The notification_ex can define the action with `noti_ex_action_h`. If it is necessary to control visibility of the notification_ex item, the notification_ex action handle has to be created as a visibility action. `extra` can be used to pass user defined data and the extra data can be obtained from an action handle using `noti_ex_action_get_extra()`.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - `handle` must be released using noti_ex_action_destroy().
+  ///
+  /// **Parameters:**
+  /// - `handle` (out): The notification_ex action handle
+  /// - `extra` (in): The extra data
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `NOTI_EX_ERROR_OUT_OF_MEMORY`: out of memory
+  ///
+  /// **See also:**
+  /// - `noti_ex_action_h`
+  /// - `noti_ex_action_destroy()`
+  /// - `noti_ex_action_get_extra()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -6985,7 +9102,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_action_visibility_create(&visibility_action, NULL);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_action_visibility_create(
     ffi.Pointer<noti_ex_action_h> handle,
     ffi.Pointer<ffi.Char> extra,
@@ -7004,18 +9121,30 @@ class Tizen80NotificationEx {
       _noti_ex_action_visibility_createPtr.asFunction<
           int Function(ffi.Pointer<noti_ex_action_h>, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets the visibility state for notification_ex item.
-  /// @since_tizen 5.5
-  /// @param[in] handle The notification_ex action handle
-  /// @param[in] id The id of notification_ex item
-  /// @param[in] visible The visibility state
-  /// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-  /// @retval #NOTI_EX_ERROR_NONE Success
-  /// @retval #NOTI_EX_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #noti_ex_action_h
-  /// @see noti_ex_action_visibility_create()
-  /// @par Sample code:
-  /// @code
+  /// Sets the visibility state for notification_ex item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The notification_ex action handle
+  /// - `id` (in): The id of notification_ex item
+  /// - `visible` (in): The visibility state
+  ///
+  /// **Returns:**
+  /// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTI_EX_ERROR_NONE`: Success
+  /// - `NOTI_EX_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `noti_ex_action_h`
+  /// - `noti_ex_action_visibility_create()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification_ex.h>
   ///
   /// {
@@ -7031,7 +9160,7 @@ class Tizen80NotificationEx {
   ///
   /// ret = noti_ex_item_set_action(button_item, action);
   /// }
-  /// @endcode
+  /// ```
   int noti_ex_action_visibility_set(
     noti_ex_action_h handle,
     ffi.Pointer<ffi.Char> id,
@@ -7053,8 +9182,11 @@ class Tizen80NotificationEx {
           int Function(noti_ex_action_h, ffi.Pointer<ffi.Char>, bool)>();
 }
 
-/// @brief Enumeration for notification_ex item types.
-/// @since_tizen 5.5
+/// Enumeration for notification_ex item types.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 abstract class noti_ex_item_type {
   /// < Notification_ex item is null
   static const int NOTI_EX_ITEM_TYPE_NULL = 0;
@@ -7099,8 +9231,11 @@ abstract class noti_ex_item_type {
   static const int NOTI_EX_ITEM_TYPE_CUSTOM = 100;
 }
 
-/// @brief Enumeration for notification_ex action type.
-/// @since_tizen 5.5
+/// Enumeration for notification_ex action type.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 abstract class noti_ex_action_type {
   /// < Notification_ex action is null
   static const int NOTI_EX_ACTION_TYPE_NULL = 0;
@@ -7115,8 +9250,11 @@ abstract class noti_ex_action_type {
   static const int NOTI_EX_ACTION_TYPE_CUSTOM = 100;
 }
 
-/// @brief Enumeration for notification_ex item policy.
-/// @since_tizen 5.5
+/// Enumeration for notification_ex item policy.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 abstract class noti_ex_item_policy {
   /// < No policy
   static const int NOTI_EX_ITEM_POLICY_NONE = 0;
@@ -7131,8 +9269,11 @@ abstract class noti_ex_item_policy {
   static const int NOTI_EX_ITEM_POLICY_DISABLE_AUTO_DELETE = 4;
 }
 
-/// @brief Enumeration for main types of notification_ex item.
-/// @since_tizen 5.5
+/// Enumeration for main types of notification_ex item.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 abstract class noti_ex_item_main_type {
   /// None
   static const int NOTI_EX_ITEM_MAIN_TYPE_NONE = 0;
@@ -7154,44 +9295,74 @@ abstract class noti_ex_item_main_type {
   static const int NOTI_EX_ITEM_MAIN_TYPE_BUTTON = 4;
 }
 
-/// @brief The handle for the color information.
-/// @since_tizen 5.5
+/// The handle for the color information.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 typedef noti_ex_color_h = ffi.Pointer<ffi.Void>;
 
-/// @brief The handle for the padding information.
-/// @since_tizen 5.5
+/// The handle for the padding information.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 typedef noti_ex_padding_h = ffi.Pointer<ffi.Void>;
 
-/// @brief The handle for the geometry information.
-/// @since_tizen 5.5
+/// The handle for the geometry information.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 typedef noti_ex_geometry_h = ffi.Pointer<ffi.Void>;
 
-/// @brief The handle for the style information.
-/// @since_tizen 5.5
+/// The handle for the style information.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 typedef noti_ex_style_h = ffi.Pointer<ffi.Void>;
 
-/// @brief The handle for the LED information.
-/// @since_tizen 5.5
+/// The handle for the LED information.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 typedef noti_ex_led_info_h = ffi.Pointer<ffi.Void>;
 
-/// @brief The notification_ex action handle.
-/// @since_tizen 5.5
+/// The notification_ex action handle.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 typedef noti_ex_action_h = ffi.Pointer<ffi.Void>;
 
-/// @brief The notification_ex item handle.
-/// @since_tizen 5.5
+/// The notification_ex item handle.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 typedef noti_ex_item_h = ffi.Pointer<ffi.Void>;
 
-/// @brief The notification_ex item_info handle.
-/// @since_tizen 5.5
+/// The notification_ex item_info handle.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 typedef noti_ex_item_info_h = ffi.Pointer<ffi.Void>;
 
-/// @brief The notification_ex multi-language item handle.
-/// @since_tizen 5.5
+/// The notification_ex multi-language item handle.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 typedef noti_ex_multi_lang_h = ffi.Pointer<ffi.Void>;
 
-/// @brief Enumeration for notification_ex chat message type.
-/// @since_tizen 5.5
+/// Enumeration for notification_ex chat message type.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 abstract class noti_ex_item_chat_message_type {
   /// < The user of chat message
   static const int NOTI_EX_ITEM_CHAT_MESSAGE_TYPE_USER = 0;
@@ -7203,8 +9374,11 @@ abstract class noti_ex_item_chat_message_type {
   static const int NOTI_EX_ITEM_CHAT_MESSAGE_TYPE_NONE = 2;
 }
 
-/// @brief Enumeration for notification errors.
-/// @since_tizen 5.5
+/// Enumeration for notification errors.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 abstract class noti_ex_error {
   /// < Success
   static const int NOTI_EX_ERROR_NONE = 0;
@@ -7237,8 +9411,11 @@ abstract class noti_ex_error {
   static const int NOTI_EX_ERROR_SERVICE_NOT_READY = -18087931;
 }
 
-/// @brief Enumeration for the type of notification event.
-/// @since_tizen 5.5
+/// Enumeration for the type of notification event.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 abstract class noti_ex_event_info_type {
   /// < Post the notification
   static const int NOTI_EX_EVENT_POST = 0;
@@ -7259,30 +9436,51 @@ abstract class noti_ex_event_info_type {
   static const int NOTI_EX_EVENT_DELETE_ALL = 5;
 }
 
-/// @brief The handle for the notification event information.
-/// @since_tizen 5.5
+/// The handle for the notification event information.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 typedef noti_ex_event_info_h = ffi.Pointer<ffi.Void>;
 
-/// @brief Called to get the data of child item for each child of the group item.
-/// @since_tizen 5.5
-/// @remarks @a handle must not be released
-/// @remarks @a handle can be used only in the callback.
-/// @a handle will be freed after the callback exists.
-/// @param[in] handle The notification_ex item handle
-/// @param[in] user_data The user data
-/// @return #NOTI_EX_ERROR_NONE On success, other value on failure
-/// @retval #NOTI_EX_ERROR_NONE Success
-/// @see #noti_ex_item_h
-/// @see noti_ex_item_group_foreach_child()
+/// Called to get the data of child item for each child of the group item.
+///
+/// **Since Tizen:**
+/// - 5.5
+///
+/// **Remarks:**
+/// - `handle` must not be released
+/// - `handle` can be used only in the callback.
+/// - `handle` will be freed after the callback exists.
+///
+/// **Parameters:**
+/// - `handle` (in): The notification_ex item handle
+/// - `user_data` (in): The user data
+///
+/// **Returns:**
+/// - `NOTI_EX_ERROR_NONE` On success, other value on failure
+///
+/// **Return values:**
+/// - `NOTI_EX_ERROR_NONE`: Success
+///
+/// **See also:**
+/// - `noti_ex_item_h`
+/// - `noti_ex_item_group_foreach_child()`
+/// @nodoc
 typedef noti_ex_item_group_foreach_child_cb = ffi
     .Pointer<ffi.NativeFunction<noti_ex_item_group_foreach_child_cbFunction>>;
+/// @nodoc
 typedef noti_ex_item_group_foreach_child_cbFunction = ffi.Int Function(
     noti_ex_item_h handle, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartnoti_ex_item_group_foreach_child_cbFunction = int Function(
     noti_ex_item_h handle, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Enumeration for notification_ex progress item types.
-/// @since_tizen 5.5
+/// Enumeration for notification_ex progress item types.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 abstract class noti_ex_item_progress_type {
   /// < Default
   static const int NOTI_EX_ITEM_PROGRESS_TYPE_DEFAULT = 0;
@@ -7297,13 +9495,17 @@ abstract class noti_ex_item_progress_type {
   static const int NOTI_EX_ITEM_PROGRESS_TYPE_PENDING = 3;
 }
 
-/// @brief The structure type to contain the set of callback functions for handling the notification events.
-/// @since_tizen 5.5
+/// The structure type to contain the set of callback functions for handling the notification events.
 ///
-/// @see noti_ex_manager_events_add_cb()
-/// @see noti_ex_manager_events_update_cb()
-/// @see noti_ex_manager_events_delete_cb()
-/// @see noti_ex_manager_events_error_cb()
+/// **Since Tizen:**
+/// - 5.5
+///
+/// **See also:**
+/// - `noti_ex_manager_events_add_cb()`
+/// - `noti_ex_manager_events_update_cb()`
+/// - `noti_ex_manager_events_delete_cb()`
+/// - `noti_ex_manager_events_error_cb()`
+/// @nodoc
 final class noti_ex_manager_events_s extends ffi.Struct {
   /// < Called when a notification addition event is received
   external noti_ex_manager_events_add_cb added;
@@ -7318,31 +9520,37 @@ final class noti_ex_manager_events_s extends ffi.Struct {
   external noti_ex_manager_events_error_cb error;
 }
 
-/// @brief Called when a notification addition event is received.
-/// @details If this callback is set to NULL in @a event_callbacks, addition events cannot be received.
-/// @since_tizen 5.5
-/// @param[in] handle The manager handle \n
-/// The @a handle is the same handle for which the callback was set
-/// @param[in] info The handle that contains event information \n
-/// The @a info can be used only in the callback. To use outside, make a copy. \n
-/// The @a info will be freed after the callback exits.
-/// @param[in] added_items The item handles to be added \n
-/// Each item in @a added_items should be destroyed with using noti_ex_item_destroy(), then @a added_items should be released with free().
-/// @param[in] count The count of the item to be added
-/// @param[in] user_data The user data which was registered with callback
-/// @see #noti_ex_manager_h
-/// @see #noti_ex_event_info_h
-/// @see #noti_ex_item_h
-/// @see noti_ex_event_info_clone()
-/// @see noti_ex_item_destroy()
+/// Called when a notification addition event is received.
+///
+/// If this callback is set to NULL in `event_callbacks`, addition events cannot be received.
+///
+/// **Since Tizen:**
+/// - 5.5
+///
+/// **Parameters:**
+/// - `handle` (in): The manager handle The `handle` is the same handle for which the callback was set
+/// - `info` (in): The handle that contains event information The `info` can be used only in the callback. To use outside, make a copy. The `info` will be freed after the callback exits.
+/// - `added_items` (in): The item handles to be added Each item in `added_items` should be destroyed with using noti_ex_item_destroy(), then `added_items` should be released with free().
+/// - `count` (in): The count of the item to be added
+/// - `user_data` (in): The user data which was registered with callback
+///
+/// **See also:**
+/// - `noti_ex_manager_h`
+/// - `noti_ex_event_info_h`
+/// - `noti_ex_item_h`
+/// - `noti_ex_event_info_clone()`
+/// - `noti_ex_item_destroy()`
+/// @nodoc
 typedef noti_ex_manager_events_add_cb
     = ffi.Pointer<ffi.NativeFunction<noti_ex_manager_events_add_cbFunction>>;
+/// @nodoc
 typedef noti_ex_manager_events_add_cbFunction = ffi.Void Function(
     noti_ex_manager_h handle,
     noti_ex_event_info_h info,
     ffi.Pointer<noti_ex_item_h> added_items,
     ffi.Int count,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartnoti_ex_manager_events_add_cbFunction = void Function(
     noti_ex_manager_h handle,
     noti_ex_event_info_h info,
@@ -7350,97 +9558,124 @@ typedef Dartnoti_ex_manager_events_add_cbFunction = void Function(
     int count,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief The notification_ex manager handle.
-/// @since_tizen 5.5
+/// The notification_ex manager handle.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 typedef noti_ex_manager_h = ffi.Pointer<ffi.Void>;
 
-/// @brief Called when a notification update event is received.
-/// @details If this callback is set to NULL in @a event_callbacks, update events cannot be received.
-/// @since_tizen 5.5
-/// @param[in] handle The manager handle \n
-/// The @a handle is the same handle for which the callback was set
-/// @param[in] info The handle that contains event information \n
-/// The @a info can be used only in the callback. To use outside, make a copy. \n
-/// The @a info will be freed after the callback exits.
-/// @param[in] updated_item The item handle to be updated \n
-/// The @a updated_item must be released using noti_ex_item_destroy().
-/// @param[in] user_data The user data which was registered with callback
-/// @see #noti_ex_manager_h
-/// @see #noti_ex_event_info_h
-/// @see #noti_ex_item_h
-/// @see noti_ex_event_info_clone()
-/// @see noti_ex_item_destroy()
+/// Called when a notification update event is received.
+///
+/// If this callback is set to NULL in `event_callbacks`, update events cannot be received.
+///
+/// **Since Tizen:**
+/// - 5.5
+///
+/// **Parameters:**
+/// - `handle` (in): The manager handle The `handle` is the same handle for which the callback was set
+/// - `info` (in): The handle that contains event information The `info` can be used only in the callback. To use outside, make a copy. The `info` will be freed after the callback exits.
+/// - `updated_item` (in): The item handle to be updated The `updated_item` must be released using noti_ex_item_destroy().
+/// - `user_data` (in): The user data which was registered with callback
+///
+/// **See also:**
+/// - `noti_ex_manager_h`
+/// - `noti_ex_event_info_h`
+/// - `noti_ex_item_h`
+/// - `noti_ex_event_info_clone()`
+/// - `noti_ex_item_destroy()`
+/// @nodoc
 typedef noti_ex_manager_events_update_cb
     = ffi.Pointer<ffi.NativeFunction<noti_ex_manager_events_update_cbFunction>>;
+/// @nodoc
 typedef noti_ex_manager_events_update_cbFunction = ffi.Void Function(
     noti_ex_manager_h handle,
     noti_ex_event_info_h info,
     noti_ex_item_h updated_item,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartnoti_ex_manager_events_update_cbFunction = void Function(
     noti_ex_manager_h handle,
     noti_ex_event_info_h info,
     noti_ex_item_h updated_item,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when a notification deletion event is received.
-/// @details If this callback is set to NULL in @a event_callbacks, deletion events cannot be received.
-/// @since_tizen 5.5
-/// @param[in] handle The manager handle \n
-/// The @a handle is the same handle for which the callback was set
-/// @param[in] info The handle that contains event information \n
-/// The @a info can be used only in the callback. To use outside, make a copy. \n
-/// The @a info will be freed after the callback exits.
-/// @param[in] deleted_item The item handle to be deleted \n
-/// The @a deleted_item must be released using noti_ex_item_destroy().
-/// @param[in] user_data The user data which was registered with callback
-/// @see #noti_ex_manager_h
-/// @see #noti_ex_event_info_h
-/// @see #noti_ex_item_h
-/// @see noti_ex_event_info_clone()
-/// @see noti_ex_item_destroy()
+/// Called when a notification deletion event is received.
+///
+/// If this callback is set to NULL in `event_callbacks`, deletion events cannot be received.
+///
+/// **Since Tizen:**
+/// - 5.5
+///
+/// **Parameters:**
+/// - `handle` (in): The manager handle The `handle` is the same handle for which the callback was set
+/// - `info` (in): The handle that contains event information The `info` can be used only in the callback. To use outside, make a copy. The `info` will be freed after the callback exits.
+/// - `deleted_item` (in): The item handle to be deleted The `deleted_item` must be released using noti_ex_item_destroy().
+/// - `user_data` (in): The user data which was registered with callback
+///
+/// **See also:**
+/// - `noti_ex_manager_h`
+/// - `noti_ex_event_info_h`
+/// - `noti_ex_item_h`
+/// - `noti_ex_event_info_clone()`
+/// - `noti_ex_item_destroy()`
+/// @nodoc
 typedef noti_ex_manager_events_delete_cb
     = ffi.Pointer<ffi.NativeFunction<noti_ex_manager_events_delete_cbFunction>>;
+/// @nodoc
 typedef noti_ex_manager_events_delete_cbFunction = ffi.Void Function(
     noti_ex_manager_h handle,
     noti_ex_event_info_h info,
     noti_ex_item_h deleted_item,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartnoti_ex_manager_events_delete_cbFunction = void Function(
     noti_ex_manager_h handle,
     noti_ex_event_info_h info,
     noti_ex_item_h deleted_item,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when an error event is received.
-/// @details The errors are passed from noti_ex_reporter_send_error().
-/// If this callback is set to NULL in @a event_callbacks, error events cannot be received.
-/// @since_tizen 5.5
-/// @param[in] handle The manager handle \n
-/// The @a handle is the same handle for which the callback was set
-/// @param[in] error The error type
-/// @param[in] request_id The id of the request that occurred error
-/// @param[in] user_data The user data which was registered with callback
-/// @see #noti_ex_manager_h
-/// @see #noti_ex_error_e
+/// Called when an error event is received.
+///
+/// The errors are passed from noti_ex_reporter_send_error(). If this callback is set to NULL in `event_callbacks`, error events cannot be received.
+///
+/// **Since Tizen:**
+/// - 5.5
+///
+/// **Parameters:**
+/// - `handle` (in): The manager handle The `handle` is the same handle for which the callback was set
+/// - `error` (in): The error type
+/// - `request_id` (in): The id of the request that occurred error
+/// - `user_data` (in): The user data which was registered with callback
+///
+/// **See also:**
+/// - `noti_ex_manager_h`
+/// - `noti_ex_error_e`
+/// @nodoc
 typedef noti_ex_manager_events_error_cb
     = ffi.Pointer<ffi.NativeFunction<noti_ex_manager_events_error_cbFunction>>;
+/// @nodoc
 typedef noti_ex_manager_events_error_cbFunction = ffi.Void Function(
     noti_ex_manager_h handle,
     ffi.Int32 error,
     ffi.Int request_id,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartnoti_ex_manager_events_error_cbFunction = void Function(
     noti_ex_manager_h handle,
     int error,
     int request_id,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief The structure type to contain the set of callback functions for handling the notification events.
-/// @since_tizen 5.5
+/// The structure type to contain the set of callback functions for handling the notification events.
 ///
-/// @see noti_ex_reporter_events_event_cb()
-/// @see noti_ex_reporter_events_error_cb()
+/// **Since Tizen:**
+/// - 5.5
+///
+/// **See also:**
+/// - `noti_ex_reporter_events_event_cb()`
+/// - `noti_ex_reporter_events_error_cb()`
+/// @nodoc
 final class noti_ex_reporter_events_s extends ffi.Struct {
   /// < Called when a notification event is received
   external noti_ex_reporter_events_event_cb event;
@@ -7449,31 +9684,37 @@ final class noti_ex_reporter_events_s extends ffi.Struct {
   external noti_ex_reporter_events_error_cb error;
 }
 
-/// @brief Called when the notification event is received.
-/// @details If this callback is set to NULL in @a event_callbacks, notification events cannot be received.
-/// @since_tizen 5.5
-/// @param[in] handle The reporter handle \n
-/// The @a handle is the same handle for which the callback was set
-/// @param[in] info The handle that contains event information \n
-/// The @a info can be used only in the callback. To use outside, make a copy. \n
-/// The @a info will be freed after the callback exits.
-/// @param[in] items The target items of event \n
-/// Each item in @a items must be released using noti_ex_item_destroy(), then @a items must be released using free().
-/// @param[in] count The count of @a items
-/// @param[in] user_data The user data which was registered with callback
-/// @see #noti_ex_reporter_h
-/// @see #noti_ex_event_info_h
-/// @see #noti_ex_item_h
-/// @see noti_ex_event_info_clone()
-/// @see noti_ex_item_destroy()
+/// Called when the notification event is received.
+///
+/// If this callback is set to NULL in `event_callbacks`, notification events cannot be received.
+///
+/// **Since Tizen:**
+/// - 5.5
+///
+/// **Parameters:**
+/// - `handle` (in): The reporter handle The `handle` is the same handle for which the callback was set
+/// - `info` (in): The handle that contains event information The `info` can be used only in the callback. To use outside, make a copy. The `info` will be freed after the callback exits.
+/// - `items` (in): The target items of event Each item in `items` must be released using noti_ex_item_destroy(), then `items` must be released using free().
+/// - `count` (in): The count of `items`
+/// - `user_data` (in): The user data which was registered with callback
+///
+/// **See also:**
+/// - `noti_ex_reporter_h`
+/// - `noti_ex_event_info_h`
+/// - `noti_ex_item_h`
+/// - `noti_ex_event_info_clone()`
+/// - `noti_ex_item_destroy()`
+/// @nodoc
 typedef noti_ex_reporter_events_event_cb
     = ffi.Pointer<ffi.NativeFunction<noti_ex_reporter_events_event_cbFunction>>;
+/// @nodoc
 typedef noti_ex_reporter_events_event_cbFunction = ffi.Void Function(
     noti_ex_reporter_h handle,
     noti_ex_event_info_h info,
     ffi.Pointer<noti_ex_item_h> items,
     ffi.Int count,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartnoti_ex_reporter_events_event_cbFunction = void Function(
     noti_ex_reporter_h handle,
     noti_ex_event_info_h info,
@@ -7481,45 +9722,63 @@ typedef Dartnoti_ex_reporter_events_event_cbFunction = void Function(
     int count,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief The notification_ex reporter handle.
-/// @since_tizen 5.5
+/// The notification_ex reporter handle.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 typedef noti_ex_reporter_h = ffi.Pointer<ffi.Void>;
 
-/// @brief Called when the error event is received.
-/// @details The errors are passed from noti_ex_manager_send_error().
-/// If this callback is set to NULL in @a event_callbacks, error events cannot be received.
-/// @since_tizen 5.5
-/// @param[in] handle The reporter handle \n
-/// The @a handle is the same handle for which the callback was set
-/// @param[in] error The error type
-/// @param[in] request_id The id of the request that occurred error
-/// @param[in] user_data The user data which was registered with callback
-/// @see #noti_ex_reporter_h
-/// @see #noti_ex_error_e
+/// Called when the error event is received.
+///
+/// The errors are passed from noti_ex_manager_send_error(). If this callback is set to NULL in `event_callbacks`, error events cannot be received.
+///
+/// **Since Tizen:**
+/// - 5.5
+///
+/// **Parameters:**
+/// - `handle` (in): The reporter handle The `handle` is the same handle for which the callback was set
+/// - `error` (in): The error type
+/// - `request_id` (in): The id of the request that occurred error
+/// - `user_data` (in): The user data which was registered with callback
+///
+/// **See also:**
+/// - `noti_ex_reporter_h`
+/// - `noti_ex_error_e`
+/// @nodoc
 typedef noti_ex_reporter_events_error_cb
     = ffi.Pointer<ffi.NativeFunction<noti_ex_reporter_events_error_cbFunction>>;
+/// @nodoc
 typedef noti_ex_reporter_events_error_cbFunction = ffi.Void Function(
     noti_ex_reporter_h handle,
     ffi.Int32 error,
     ffi.Int request_id,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartnoti_ex_reporter_events_error_cbFunction = void Function(
     noti_ex_reporter_h handle,
     int error,
     int request_id,
     ffi.Pointer<ffi.Void> user_data);
 
+/// @nodoc
 const String NOTI_EX_RECEIVER_GROUP_PANEL = 'tizen.org/receiver/panel';
 
+/// @nodoc
 const String NOTI_EX_RECEIVER_GROUP_TICKER = 'tizen.org/receiver/ticker';
 
+/// @nodoc
 const String NOTI_EX_RECEIVER_GROUP_LOCKSCREEN =
     'tizen.org/receiver/lockscreen';
 
+/// @nodoc
 const String NOTI_EX_RECEIVER_GROUP_INDICATOR = 'tizen.org/receiver/indicator';
 
+/// @nodoc
 const String NOTI_EX_RECEIVER_GROUP_POPUP = 'tizen.org/receiver/popup';
 
+/// @nodoc
 const String NOTI_EX_SOUND_TYPE_DEFAULT = '__SOUND_TYPE_DEFAULT__';
 
+/// @nodoc
 const String NOTI_EX_VIBRATION_TYPE_DEFAULT = '__VIBRATION_TYPE_DEFAULT__';

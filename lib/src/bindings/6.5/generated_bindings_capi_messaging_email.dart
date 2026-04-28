@@ -1,3 +1,6 @@
+/// {@category 6.5/tizen}
+library tizen_interop_6_5.capi_messaging_email;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen capi-messaging-email APIs.
+/// {@category 6.5/tizen}
 class Tizen65CapiMessagingEmail {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,21 +28,38 @@ class Tizen65CapiMessagingEmail {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Creates an email message handle for sending an email message.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/email
-  /// @remarks You must release @a email using email_destroy_message().
-  /// @param[out] email A handle to the email message
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #EMAILS_ERROR_NONE Successful
-  /// @retval #EMAILS_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #EMAILS_ERROR_ACCOUNT_NOT_FOUND Email account not found
-  /// @retval #EMAILS_ERROR_PERMISSION_DENIED The application does not have the privilege to call this method
-  /// @retval #EMAILS_ERROR_NOT_SUPPORTED Not supported
-  /// @pre At least one email account should be set up on the device.
-  /// @see email_destroy_message()
+  /// Creates an email message handle for sending an email message.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/email>
+  ///
+  /// **Remarks:**
+  /// - You must release `email` using email_destroy_message().
+  ///
+  /// **Parameters:**
+  /// - `email` (out): A handle to the email message
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `EMAILS_ERROR_NONE`: Successful
+  /// - `EMAILS_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `EMAILS_ERROR_ACCOUNT_NOT_FOUND`: Email account not found
+  /// - `EMAILS_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this method
+  /// - `EMAILS_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - At least one email account should be set up on the device.
+  ///
+  /// **See also:**
+  /// - `email_destroy_message()`
   int email_create_message(
     ffi.Pointer<email_h> email,
   ) {
@@ -53,16 +74,25 @@ class Tizen65CapiMessagingEmail {
   late final _email_create_message =
       _email_create_messagePtr.asFunction<int Function(ffi.Pointer<email_h>)>();
 
-  /// @brief Destroys the email message handle and releases all its resources.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @param[in] email The handle to the email message
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #EMAILS_ERROR_NONE Successful
-  /// @retval #EMAILS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #EMAILS_ERROR_OPERATION_FAILED Operation failed
-  /// @retval #EMAILS_ERROR_NOT_SUPPORTED Not supported
-  /// @see email_create_message()
+  /// Destroys the email message handle and releases all its resources.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `email` (in): The handle to the email message
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `EMAILS_ERROR_NONE`: Successful
+  /// - `EMAILS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `EMAILS_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `EMAILS_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `email_create_message()`
   int email_destroy_message(
     email_h email,
   ) {
@@ -77,21 +107,36 @@ class Tizen65CapiMessagingEmail {
   late final _email_destroy_message =
       _email_destroy_messagePtr.asFunction<int Function(email_h)>();
 
-  /// @brief Sets a subject of the email message.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/email
-  /// @param[in] email The handle to the email message
-  /// @param[in] subject The subject of the email message
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #EMAILS_ERROR_NONE Successful
-  /// @retval #EMAILS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #EMAILS_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #EMAILS_ERROR_PERMISSION_DENIED The application does not have the privilege to call this method
-  /// @retval #EMAILS_ERROR_NOT_SUPPORTED Not supported
-  /// @pre An email message handle is created using email_create_message().
-  /// @see email_create_message()
+  /// Sets a subject of the email message.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/email>
+  ///
+  /// **Parameters:**
+  /// - `email` (in): The handle to the email message
+  /// - `subject` (in): The subject of the email message
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `EMAILS_ERROR_NONE`: Successful
+  /// - `EMAILS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `EMAILS_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `EMAILS_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this method
+  /// - `EMAILS_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - An email message handle is created using email_create_message().
+  ///
+  /// **See also:**
+  /// - `email_create_message()`
   int email_set_subject(
     email_h email,
     ffi.Pointer<ffi.Char> subject,
@@ -108,22 +153,38 @@ class Tizen65CapiMessagingEmail {
   late final _email_set_subject = _email_set_subjectPtr
       .asFunction<int Function(email_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Populates a body of the email message.
-  /// @details Email message body means the text data to be delivered.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediastorage
-  /// @param[in] email The handle to the email message
-  /// @param[in] body The message body
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #EMAILS_ERROR_NONE Successful
-  /// @retval #EMAILS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #EMAILS_ERROR_OPERATION_FAILED Operation failed
-  /// @retval #EMAILS_ERROR_PERMISSION_DENIED The application does not have the privilege to call this method
-  /// @retval #EMAILS_ERROR_NOT_SUPPORTED Not supported
-  /// @pre An email message handle is created using email_create_message().
-  /// @see email_create_message()
+  /// Populates a body of the email message.
+  ///
+  /// Email message body means the text data to be delivered.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediastorage>
+  ///
+  /// **Parameters:**
+  /// - `email` (in): The handle to the email message
+  /// - `body` (in): The message body
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `EMAILS_ERROR_NONE`: Successful
+  /// - `EMAILS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `EMAILS_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `EMAILS_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this method
+  /// - `EMAILS_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - An email message handle is created using email_create_message().
+  ///
+  /// **See also:**
+  /// - `email_create_message()`
   int email_set_body(
     email_h email,
     ffi.Pointer<ffi.Char> body,
@@ -140,23 +201,37 @@ class Tizen65CapiMessagingEmail {
   late final _email_set_body = _email_set_bodyPtr
       .asFunction<int Function(email_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Adds a recipient to the email message.
-  /// @details The email API supports sending an email message to multiple recipients.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @remarks Email address should be in standard format (as described in
-  /// Internet standards RFC 5321 and RFC 5322).
-  /// @param[in] email The handle to the email message
-  /// @param[in] type The recipient type
-  /// @param[in] address The recipient email address
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #EMAILS_ERROR_NONE Successful
-  /// @retval #EMAILS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #EMAILS_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #EMAILS_ERROR_NOT_SUPPORTED Not supported
-  /// @pre An email message handle is created using email_create_message().
-  /// @see email_create_message()
-  /// @see email_remove_all_recipients()
+  /// Adds a recipient to the email message.
+  ///
+  /// The email API supports sending an email message to multiple recipients.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Remarks:**
+  /// - Email address should be in standard format (as described in
+  /// - Internet standards RFC 5321 and RFC 5322).
+  ///
+  /// **Parameters:**
+  /// - `email` (in): The handle to the email message
+  /// - `type` (in): The recipient type
+  /// - `address` (in): The recipient email address
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `EMAILS_ERROR_NONE`: Successful
+  /// - `EMAILS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `EMAILS_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `EMAILS_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - An email message handle is created using email_create_message().
+  ///
+  /// **See also:**
+  /// - `email_create_message()`
+  /// - `email_remove_all_recipients()`
   int email_add_recipient(
     email_h email,
     int type,
@@ -176,16 +251,27 @@ class Tizen65CapiMessagingEmail {
   late final _email_add_recipient = _email_add_recipientPtr
       .asFunction<int Function(email_h, int, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Removes all recipients for the email message.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @param[in] email The handle to the email message
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #EMAILS_ERROR_NONE Successful
-  /// @retval #EMAILS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #EMAILS_ERROR_NOT_SUPPORTED Not supported
-  /// @pre An email message handle is created using email_create_message().
-  /// @see email_add_recipient()
+  /// Removes all recipients for the email message.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `email` (in): The handle to the email message
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `EMAILS_ERROR_NONE`: Successful
+  /// - `EMAILS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `EMAILS_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - An email message handle is created using email_create_message().
+  ///
+  /// **See also:**
+  /// - `email_add_recipient()`
   int email_remove_all_recipients(
     email_h email,
   ) {
@@ -200,24 +286,37 @@ class Tizen65CapiMessagingEmail {
   late final _email_remove_all_recipients =
       _email_remove_all_recipientsPtr.asFunction<int Function(email_h)>();
 
-  /// @brief Adds a file as an attachment to the email message.
-  /// @details It should be used to add a file to the attachment list
-  /// of the email message.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @remarks The maximum attachment file size is 10MB.
-  /// %http://tizen.org/privilege/mediastorage is needed if input or output path are relevant to media storage
-  /// %http://tizen.org/privilege/externalstorage is needed if input or output path are relevant to external storage.
-  /// @param[in] email The handle to the email message
-  /// @param[in] filepath The absolute full path of the file to be attached
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #EMAILS_ERROR_NONE Successful
-  /// @retval #EMAILS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #EMAILS_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #EMAILS_ERROR_PERMISSION_DENIED The application does not have the privilege to call this method
-  /// @retval #EMAILS_ERROR_NOT_SUPPORTED Not supported
-  /// @pre An email message handle is created using email_create_message().
-  /// @see email_remove_all_attachments()
+  /// Adds a file as an attachment to the email message.
+  ///
+  /// It should be used to add a file to the attachment list of the email message.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Remarks:**
+  /// - The maximum attachment file size is 10MB.
+  /// - <http://tizen.org/privilege/mediastorage is needed if input or output path are relevant to media storage>
+  /// - <http://tizen.org/privilege/externalstorage is needed if input or output path are relevant to external storage.>
+  ///
+  /// **Parameters:**
+  /// - `email` (in): The handle to the email message
+  /// - `filepath` (in): The absolute full path of the file to be attached
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `EMAILS_ERROR_NONE`: Successful
+  /// - `EMAILS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `EMAILS_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `EMAILS_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this method
+  /// - `EMAILS_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - An email message handle is created using email_create_message().
+  ///
+  /// **See also:**
+  /// - `email_remove_all_attachments()`
   int email_add_attach(
     email_h email,
     ffi.Pointer<ffi.Char> filepath,
@@ -234,17 +333,28 @@ class Tizen65CapiMessagingEmail {
   late final _email_add_attach = _email_add_attachPtr
       .asFunction<int Function(email_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Clears all attachments of the email message.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @param[in] email The handle to the email message
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #EMAILS_ERROR_NONE Successful
-  /// @retval #EMAILS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #EMAILS_ERROR_NOT_SUPPORTED Not supported
-  /// @pre An email message handle is created using email_create_message().
-  /// @see email_create_message()
-  /// @see email_add_attach()
+  /// Clears all attachments of the email message.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `email` (in): The handle to the email message
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `EMAILS_ERROR_NONE`: Successful
+  /// - `EMAILS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `EMAILS_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - An email message handle is created using email_create_message().
+  ///
+  /// **See also:**
+  /// - `email_create_message()`
+  /// - `email_add_attach()`
   int email_remove_all_attachments(
     email_h email,
   ) {
@@ -259,22 +369,37 @@ class Tizen65CapiMessagingEmail {
   late final _email_remove_all_attachments =
       _email_remove_all_attachmentsPtr.asFunction<int Function(email_h)>();
 
-  /// @brief Saves the email message at outbox.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/email
-  /// @param[in] email The handle to the email message
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #EMAILS_ERROR_NONE Successful
-  /// @retval #EMAILS_ERROR_COMMUNICATION_WITH_SERVER_FAILED Communication with server failed.
-  /// @retval #EMAILS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #EMAILS_ERROR_PERMISSION_DENIED The application does not have the privilege to call this method
-  /// @retval #EMAILS_ERROR_NOT_SUPPORTED Not supported
-  /// @pre An email message handle is created using email_create_message().
-  /// @see email_create_message()
-  /// @see email_add_recipient()
-  /// @see email_set_body()
+  /// Saves the email message at outbox.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/email>
+  ///
+  /// **Parameters:**
+  /// - `email` (in): The handle to the email message
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `EMAILS_ERROR_NONE`: Successful
+  /// - `EMAILS_ERROR_COMMUNICATION_WITH_SERVER_FAILED`: Communication with server failed.
+  /// - `EMAILS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `EMAILS_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this method
+  /// - `EMAILS_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - An email message handle is created using email_create_message().
+  ///
+  /// **See also:**
+  /// - `email_create_message()`
+  /// - `email_add_recipient()`
+  /// - `email_set_body()`
   int email_save_message(
     email_h email,
   ) {
@@ -289,22 +414,34 @@ class Tizen65CapiMessagingEmail {
   late final _email_save_message =
       _email_save_messagePtr.asFunction<int Function(email_h)>();
 
-  /// @brief Sends the email message.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @remarks In order to check whether sending a message succeeds,
-  /// you should register email_message_sent_cb() using email_set_message_sent_cb().
-  /// @param[in] email The handle to the email message
-  /// @param[in] save_to_sentbox Set to @c true to save the message in the sentbox,
-  /// otherwise set to @c false to not save the message in the sentbox
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #EMAILS_ERROR_NONE Successful
-  /// @retval #EMAILS_ERROR_COMMUNICATION_WITH_SERVER_FAILED Communication with server failed
-  /// @retval #EMAILS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #EMAILS_ERROR_NOT_SUPPORTED Not supported
-  /// @pre An email message is stored using email_save_message().
-  /// @see email_save_message()
-  /// @see email_set_message_sent_cb()
+  /// Sends the email message.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Remarks:**
+  /// - In order to check whether sending a message succeeds,
+  /// - you should register email_message_sent_cb() using email_set_message_sent_cb().
+  ///
+  /// **Parameters:**
+  /// - `email` (in): The handle to the email message
+  /// - `save_to_sentbox` (in): Set to `true` to save the message in the sentbox, otherwise set to `false` to not save the message in the sentbox
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `EMAILS_ERROR_NONE`: Successful
+  /// - `EMAILS_ERROR_COMMUNICATION_WITH_SERVER_FAILED`: Communication with server failed
+  /// - `EMAILS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `EMAILS_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - An email message is stored using email_save_message().
+  ///
+  /// **See also:**
+  /// - `email_save_message()`
+  /// - `email_set_message_sent_cb()`
   int email_send_message(
     email_h email,
     bool save_to_sentbox,
@@ -321,21 +458,33 @@ class Tizen65CapiMessagingEmail {
   late final _email_send_message =
       _email_send_messagePtr.asFunction<int Function(email_h, bool)>();
 
-  /// @brief Registers a callback function to be invoked when an email message is sent.
-  /// @details You will be notified when sending a message finishes and check whether it succeeds using this function.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @param[in] email The handle to the email message
-  /// @param[in] callback The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #EMAILS_ERROR_NONE Successful
-  /// @retval #EMAILS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #EMAILS_ERROR_NOT_SUPPORTED Not supported
-  /// @post It will invoke email_message_sent_cb().
-  /// @see email_message_sent_cb()
-  /// @see email_unset_message_sent_cb()
-  /// @see email_send_message()
+  /// Registers a callback function to be invoked when an email message is sent.
+  ///
+  /// You will be notified when sending a message finishes and check whether it succeeds using this function.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `email` (in): The handle to the email message
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `EMAILS_ERROR_NONE`: Successful
+  /// - `EMAILS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `EMAILS_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Postconditions:**
+  /// - It will invoke email_message_sent_cb().
+  ///
+  /// **See also:**
+  /// - `email_message_sent_cb()`
+  /// - `email_unset_message_sent_cb()`
+  /// - `email_send_message()`
   int email_set_message_sent_cb(
     email_h email,
     email_message_sent_cb callback,
@@ -357,17 +506,26 @@ class Tizen65CapiMessagingEmail {
           int Function(
               email_h, email_message_sent_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unregisters the callback function.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-  /// @param[in] msg The handle to the email message
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #EMAILS_ERROR_NONE Successful
-  /// @retval #EMAILS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #EMAILS_ERROR_NOT_SUPPORTED Not supported
-  /// @see email_message_sent_cb()
-  /// @see email_set_message_sent_cb()
-  /// @see email_send_message()
+  /// Unregisters the callback function.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `msg` (in): The handle to the email message
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `EMAILS_ERROR_NONE`: Successful
+  /// - `EMAILS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `EMAILS_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `email_message_sent_cb()`
+  /// - `email_set_message_sent_cb()`
+  /// - `email_send_message()`
   int email_unset_message_sent_cb(
     email_h msg,
   ) {
@@ -383,14 +541,21 @@ class Tizen65CapiMessagingEmail {
       _email_unset_message_sent_cbPtr.asFunction<int Function(email_h)>();
 }
 
-/// @brief The email message handle.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
+/// The email message handle.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 3.0
+/// @nodoc
 typedef email_h = ffi.Pointer<email_s>;
 
+/// @nodoc
 final class email_s extends ffi.Opaque {}
 
-/// @brief Enumeration for the email recipient types.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
+/// Enumeration for the email recipient types.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 3.0
+/// @nodoc
 abstract class email_recipient_type_e {
   /// < Normal recipient
   static const int EMAIL_RECIPIENT_TYPE_TO = 1;
@@ -402,26 +567,40 @@ abstract class email_recipient_type_e {
   static const int EMAIL_RECIPIENT_TYPE_BCC = 3;
 }
 
-/// @brief Called when the process of sending an email finishes.
-/// @details You can check whether sending an email succeeds using this function.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
-/// @param[in] email The handle to the email message
-/// @param[in] result The result of email message sending \n
-/// #EMAIL_SENDING_FAILED or #EMAIL_SENDING_SUCCEEDED
-/// @param[in] user_data The user data passed from the callback registration function
-/// @pre email_send_message() will invoke this callback if you register this callback using email_set_message_sent_cb().
-/// @see email_send_message()
-/// @see email_set_message_sent_cb()
-/// @see email_unset_message_sent_cb()
+/// Called when the process of sending an email finishes.
+///
+/// You can check whether sending an email succeeds using this function.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 3.0
+///
+/// **Parameters:**
+/// - `email` (in): The handle to the email message
+/// - `result` (in): The result of email message sending `EMAIL_SENDING_FAILED` or `EMAIL_SENDING_SUCCEEDED`
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - email_send_message() will invoke this callback if you register this callback using email_set_message_sent_cb().
+///
+/// **See also:**
+/// - `email_send_message()`
+/// - `email_set_message_sent_cb()`
+/// - `email_unset_message_sent_cb()`
+/// @nodoc
 typedef email_message_sent_cb
     = ffi.Pointer<ffi.NativeFunction<email_message_sent_cbFunction>>;
+/// @nodoc
 typedef email_message_sent_cbFunction = ffi.Void Function(
     email_h email, ffi.Int32 result, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartemail_message_sent_cbFunction = void Function(
     email_h email, int result, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Enumeration for the result values of email transport.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 3.0 @endif
+/// Enumeration for the result values of email transport.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 3.0
+/// @nodoc
 abstract class email_sending_e {
   /// < Email sending failed
   static const int EMAIL_SENDING_FAILED = -1;

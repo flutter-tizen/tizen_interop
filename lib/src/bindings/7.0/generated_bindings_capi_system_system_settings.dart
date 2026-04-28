@@ -1,3 +1,6 @@
+/// {@category 7.0/tizen}
+library tizen_interop_7_0.capi_system_system_settings;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen capi-system-system-settings APIs.
+/// {@category 7.0/tizen}
 class Tizen70CapiSystemSystemSettings {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,20 +28,36 @@ class Tizen70CapiSystemSystemSettings {
           lookup)
       : _lookup = lookup;
 
-  /// @platform
-  /// @brief Sets the system settings value associated with the given key as an integer.
-  /// @since_tizen 2.3
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/systemsettings.admin
-  /// @remarks When the feature related to the @a key is not supported on the device, #SYSTEM_SETTINGS_ERROR_NOT_SUPPORTED will be returned.
-  /// @param[in] key The key name of the system settings
-  /// @param[out] value The new system settings value of the given key
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #SYSTEM_SETTINGS_ERROR_NONE Successful
-  /// @retval #SYSTEM_SETTINGS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SYSTEM_SETTINGS_ERROR_IO_ERROR Internal I/O error
-  /// @retval #SYSTEM_SETTINGS_ERROR_PERMISSION_DENIED Permission violation error
-  /// @retval #SYSTEM_SETTINGS_ERROR_NOT_SUPPORTED The related feature is not supported on the device
+  /// Sets the system settings value associated with the given key as an integer.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/systemsettings.admin>
+  ///
+  /// **Remarks:**
+  /// - When the feature related to the `key` is not supported on the device, `SYSTEM_SETTINGS_ERROR_NOT_SUPPORTED` will be returned.
+  ///
+  /// **Parameters:**
+  /// - `key` (in): The key name of the system settings
+  /// - `value` (out): The new system settings value of the given key
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SYSTEM_SETTINGS_ERROR_NONE`: Successful
+  /// - `SYSTEM_SETTINGS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SYSTEM_SETTINGS_ERROR_IO_ERROR`: Internal I/O error
+  /// - `SYSTEM_SETTINGS_ERROR_PERMISSION_DENIED`: Permission violation error
+  /// - `SYSTEM_SETTINGS_ERROR_NOT_SUPPORTED`: The related feature is not supported on the device
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int system_settings_set_value_int(
     int key,
     int value,
@@ -54,18 +74,30 @@ class Tizen70CapiSystemSystemSettings {
   late final _system_settings_set_value_int =
       _system_settings_set_value_intPtr.asFunction<int Function(int, int)>();
 
-  /// @brief Gets the system settings value associated with the given key as an integer.
-  /// @since_tizen 2.3
-  /// @remarks When the feature related to the @a key is not supported on the device, #SYSTEM_SETTINGS_ERROR_NOT_SUPPORTED will be returned.
-  /// @param[in] key The key name of the system settings
-  /// @param[out] value The current system settings value of the given key
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #SYSTEM_SETTINGS_ERROR_NONE Successful
-  /// @retval #SYSTEM_SETTINGS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SYSTEM_SETTINGS_ERROR_IO_ERROR Internal I/O error
-  /// @retval #SYSTEM_SETTINGS_ERROR_PERMISSION_DENIED Permission violation error
-  /// @retval #SYSTEM_SETTINGS_ERROR_NOT_SUPPORTED The related feature is not supported on the device
-  /// @warning %http://tizen.org/privilege/systemsettings (public level privilege) <b>MUST NOT</b> be declared to use this function since 2.3.1.
+  /// Gets the system settings value associated with the given key as an integer.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - When the feature related to the `key` is not supported on the device, `SYSTEM_SETTINGS_ERROR_NOT_SUPPORTED` will be returned.
+  ///
+  /// **Parameters:**
+  /// - `key` (in): The key name of the system settings
+  /// - `value` (out): The current system settings value of the given key
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SYSTEM_SETTINGS_ERROR_NONE`: Successful
+  /// - `SYSTEM_SETTINGS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SYSTEM_SETTINGS_ERROR_IO_ERROR`: Internal I/O error
+  /// - `SYSTEM_SETTINGS_ERROR_PERMISSION_DENIED`: Permission violation error
+  /// - `SYSTEM_SETTINGS_ERROR_NOT_SUPPORTED`: The related feature is not supported on the device
+  ///
+  /// **Warnings:**
+  /// - <http://tizen.org/privilege/systemsettings (public level privilege) <b>MUST NOT</b> be declared to use this function since 2.3.1.>
   int system_settings_get_value_int(
     int key,
     ffi.Pointer<ffi.Int> value,
@@ -83,20 +115,36 @@ class Tizen70CapiSystemSystemSettings {
   late final _system_settings_get_value_int = _system_settings_get_value_intPtr
       .asFunction<int Function(int, ffi.Pointer<ffi.Int>)>();
 
-  /// @platform
-  /// @brief Sets the system settings value associated with the given key as a boolean.
-  /// @since_tizen 2.3
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/systemsettings.admin
-  /// @remarks When the feature related to the @a key is not supported on the device, #SYSTEM_SETTINGS_ERROR_NOT_SUPPORTED will be returned.
-  /// @param[in] key The key name of the system settings
-  /// @param[out] value The new system settings value of the given key
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #SYSTEM_SETTINGS_ERROR_NONE Successful
-  /// @retval #SYSTEM_SETTINGS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SYSTEM_SETTINGS_ERROR_IO_ERROR Internal I/O error
-  /// @retval #SYSTEM_SETTINGS_ERROR_PERMISSION_DENIED Permission violation error
-  /// @retval #SYSTEM_SETTINGS_ERROR_NOT_SUPPORTED The related feature is not supported on the device
+  /// Sets the system settings value associated with the given key as a boolean.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/systemsettings.admin>
+  ///
+  /// **Remarks:**
+  /// - When the feature related to the `key` is not supported on the device, `SYSTEM_SETTINGS_ERROR_NOT_SUPPORTED` will be returned.
+  ///
+  /// **Parameters:**
+  /// - `key` (in): The key name of the system settings
+  /// - `value` (out): The new system settings value of the given key
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SYSTEM_SETTINGS_ERROR_NONE`: Successful
+  /// - `SYSTEM_SETTINGS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SYSTEM_SETTINGS_ERROR_IO_ERROR`: Internal I/O error
+  /// - `SYSTEM_SETTINGS_ERROR_PERMISSION_DENIED`: Permission violation error
+  /// - `SYSTEM_SETTINGS_ERROR_NOT_SUPPORTED`: The related feature is not supported on the device
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int system_settings_set_value_bool(
     int key,
     bool value,
@@ -113,18 +161,30 @@ class Tizen70CapiSystemSystemSettings {
   late final _system_settings_set_value_bool =
       _system_settings_set_value_boolPtr.asFunction<int Function(int, bool)>();
 
-  /// @brief Gets the system settings value associated with the given key as a boolean.
-  /// @since_tizen 2.3
-  /// @remarks When the feature related to the @a key is not supported on the device, #SYSTEM_SETTINGS_ERROR_NOT_SUPPORTED will be returned.
-  /// @param[in] key The key name of the system settings
-  /// @param[out] value The current system settings value of the given key
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #SYSTEM_SETTINGS_ERROR_NONE Successful
-  /// @retval #SYSTEM_SETTINGS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SYSTEM_SETTINGS_ERROR_IO_ERROR Internal I/O error
-  /// @retval #SYSTEM_SETTINGS_ERROR_PERMISSION_DENIED Permission violation error
-  /// @retval #SYSTEM_SETTINGS_ERROR_NOT_SUPPORTED The related feature is not supported on the device
-  /// @warning %http://tizen.org/privilege/systemsettings (public level privilege) <b>MUST NOT</b> be declared to use this function since 2.3.1.
+  /// Gets the system settings value associated with the given key as a boolean.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - When the feature related to the `key` is not supported on the device, `SYSTEM_SETTINGS_ERROR_NOT_SUPPORTED` will be returned.
+  ///
+  /// **Parameters:**
+  /// - `key` (in): The key name of the system settings
+  /// - `value` (out): The current system settings value of the given key
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SYSTEM_SETTINGS_ERROR_NONE`: Successful
+  /// - `SYSTEM_SETTINGS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SYSTEM_SETTINGS_ERROR_IO_ERROR`: Internal I/O error
+  /// - `SYSTEM_SETTINGS_ERROR_PERMISSION_DENIED`: Permission violation error
+  /// - `SYSTEM_SETTINGS_ERROR_NOT_SUPPORTED`: The related feature is not supported on the device
+  ///
+  /// **Warnings:**
+  /// - <http://tizen.org/privilege/systemsettings (public level privilege) <b>MUST NOT</b> be declared to use this function since 2.3.1.>
   int system_settings_get_value_bool(
     int key,
     ffi.Pointer<ffi.Bool> value,
@@ -143,20 +203,36 @@ class Tizen70CapiSystemSystemSettings {
       _system_settings_get_value_boolPtr
           .asFunction<int Function(int, ffi.Pointer<ffi.Bool>)>();
 
-  /// @platform
-  /// @brief Sets the system settings value associated with the given key as a string.
-  /// @since_tizen 2.3
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/systemsettings.admin
-  /// @remarks #SYSTEM_SETTINGS_KEY_DEFAULT_FONT_TYPE is not available for setting. When the feature related to the @a key is not supported on the device, #SYSTEM_SETTINGS_ERROR_NOT_SUPPORTED will be returned.
-  /// @param[in] key The key name of the system settings
-  /// @param[out] value The new system settings value of the given key
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #SYSTEM_SETTINGS_ERROR_NONE Successful
-  /// @retval #SYSTEM_SETTINGS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SYSTEM_SETTINGS_ERROR_IO_ERROR Internal I/O error
-  /// @retval #SYSTEM_SETTINGS_ERROR_PERMISSION_DENIED Permission violation error
-  /// @retval #SYSTEM_SETTINGS_ERROR_NOT_SUPPORTED The related feature is not supported on the device
+  /// Sets the system settings value associated with the given key as a string.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/systemsettings.admin>
+  ///
+  /// **Remarks:**
+  /// - `SYSTEM_SETTINGS_KEY_DEFAULT_FONT_TYPE` is not available for setting. When the feature related to the `key` is not supported on the device, `SYSTEM_SETTINGS_ERROR_NOT_SUPPORTED` will be returned.
+  ///
+  /// **Parameters:**
+  /// - `key` (in): The key name of the system settings
+  /// - `value` (out): The new system settings value of the given key
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SYSTEM_SETTINGS_ERROR_NONE`: Successful
+  /// - `SYSTEM_SETTINGS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SYSTEM_SETTINGS_ERROR_IO_ERROR`: Internal I/O error
+  /// - `SYSTEM_SETTINGS_ERROR_PERMISSION_DENIED`: Permission violation error
+  /// - `SYSTEM_SETTINGS_ERROR_NOT_SUPPORTED`: The related feature is not supported on the device
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int system_settings_set_value_string(
     int key,
     ffi.Pointer<ffi.Char> value,
@@ -175,18 +251,30 @@ class Tizen70CapiSystemSystemSettings {
       _system_settings_set_value_stringPtr
           .asFunction<int Function(int, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the system settings value associated with the given key as a string.
-  /// @since_tizen 2.3
-  /// @remarks You must release @a value using free(). When the feature related to the @a key is not supported on the device, #SYSTEM_SETTINGS_ERROR_NOT_SUPPORTED will be returned.
-  /// @param[in] key The key name of the system settings
-  /// @param[out] value The current system settings value of the given key
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #SYSTEM_SETTINGS_ERROR_NONE Successful
-  /// @retval #SYSTEM_SETTINGS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SYSTEM_SETTINGS_ERROR_IO_ERROR Internal I/O error
-  /// @retval #SYSTEM_SETTINGS_ERROR_PERMISSION_DENIED Permission violation error
-  /// @retval #SYSTEM_SETTINGS_ERROR_NOT_SUPPORTED The related feature is not supported on the device
-  /// @warning %http://tizen.org/privilege/systemsettings (public level privilege) <b>MUST NOT</b> be declared to use this function since 2.3.1.
+  /// Gets the system settings value associated with the given key as a string.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - You must release `value` using free(). When the feature related to the `key` is not supported on the device, `SYSTEM_SETTINGS_ERROR_NOT_SUPPORTED` will be returned.
+  ///
+  /// **Parameters:**
+  /// - `key` (in): The key name of the system settings
+  /// - `value` (out): The current system settings value of the given key
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SYSTEM_SETTINGS_ERROR_NONE`: Successful
+  /// - `SYSTEM_SETTINGS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SYSTEM_SETTINGS_ERROR_IO_ERROR`: Internal I/O error
+  /// - `SYSTEM_SETTINGS_ERROR_PERMISSION_DENIED`: Permission violation error
+  /// - `SYSTEM_SETTINGS_ERROR_NOT_SUPPORTED`: The related feature is not supported on the device
+  ///
+  /// **Warnings:**
+  /// - <http://tizen.org/privilege/systemsettings (public level privilege) <b>MUST NOT</b> be declared to use this function since 2.3.1.>
   int system_settings_get_value_string(
     int key,
     ffi.Pointer<ffi.Pointer<ffi.Char>> value,
@@ -205,22 +293,37 @@ class Tizen70CapiSystemSystemSettings {
       _system_settings_get_value_stringPtr
           .asFunction<int Function(int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets a change event callback for the given system settings key.
-  /// @since_tizen 2.3
-  /// @remarks #SYSTEM_SETTINGS_KEY_DEFAULT_FONT_TYPE is not available for set_changed_cb. When the feature related to the @a key is not supported on the device, #SYSTEM_SETTINGS_ERROR_NOT_SUPPORTED will be returned.
-  /// @param[in] key The key name of the system settings
-  /// @param[in] callback The callback function to invoke
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #SYSTEM_SETTINGS_ERROR_NONE Successful
-  /// @retval #SYSTEM_SETTINGS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SYSTEM_SETTINGS_ERROR_PERMISSION_DENIED Permission violation error
-  /// @retval #SYSTEM_SETTINGS_ERROR_NOT_SUPPORTED The related feature is not supported on the device
-  /// @post system_settings_changed_cb() will be invoked.
+  /// Sets a change event callback for the given system settings key.
   ///
-  /// @see system_settings_unset_changed_cb()
-  /// @see system_settings_changed_cb()
-  /// @warning %http://tizen.org/privilege/systemsettings (public level privilege) <b>MUST NOT</b> be declared to use this function since 2.3.1.
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - `SYSTEM_SETTINGS_KEY_DEFAULT_FONT_TYPE` is not available for set_changed_cb. When the feature related to the `key` is not supported on the device, `SYSTEM_SETTINGS_ERROR_NOT_SUPPORTED` will be returned.
+  ///
+  /// **Parameters:**
+  /// - `key` (in): The key name of the system settings
+  /// - `callback` (in): The callback function to invoke
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SYSTEM_SETTINGS_ERROR_NONE`: Successful
+  /// - `SYSTEM_SETTINGS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SYSTEM_SETTINGS_ERROR_PERMISSION_DENIED`: Permission violation error
+  /// - `SYSTEM_SETTINGS_ERROR_NOT_SUPPORTED`: The related feature is not supported on the device
+  ///
+  /// **Postconditions:**
+  /// - system_settings_changed_cb() will be invoked.
+  ///
+  /// **Warnings:**
+  /// - <http://tizen.org/privilege/systemsettings (public level privilege) <b>MUST NOT</b> be declared to use this function since 2.3.1.>
+  ///
+  /// **See also:**
+  /// - `system_settings_unset_changed_cb()`
+  /// - `system_settings_changed_cb()`
   int system_settings_set_changed_cb(
     int key,
     system_settings_changed_cb callback,
@@ -242,18 +345,31 @@ class Tizen70CapiSystemSystemSettings {
           int Function(
               int, system_settings_changed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback function.
-  /// @since_tizen 2.3
-  /// @remarks #SYSTEM_SETTINGS_KEY_DEFAULT_FONT_TYPE is not available for set_changed_cb. When the feature related to the @a key is not supported on the device, #SYSTEM_SETTINGS_ERROR_NOT_SUPPORTED will be returned.
-  /// @param[in] key The key name of the system settings
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #SYSTEM_SETTINGS_ERROR_NONE Successful
-  /// @retval #SYSTEM_SETTINGS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SYSTEM_SETTINGS_ERROR_PERMISSION_DENIED Permission violation error
-  /// @retval #SYSTEM_SETTINGS_ERROR_NOT_SUPPORTED The related feature is not supported on the device
+  /// Unsets the callback function.
   ///
-  /// @see system_settings_set_changed_cb()
-  /// @warning %http://tizen.org/privilege/systemsettings (public level privilege) <b>MUST NOT</b> be declared to use this function since 2.3.1.
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - `SYSTEM_SETTINGS_KEY_DEFAULT_FONT_TYPE` is not available for set_changed_cb. When the feature related to the `key` is not supported on the device, `SYSTEM_SETTINGS_ERROR_NOT_SUPPORTED` will be returned.
+  ///
+  /// **Parameters:**
+  /// - `key` (in): The key name of the system settings
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SYSTEM_SETTINGS_ERROR_NONE`: Successful
+  /// - `SYSTEM_SETTINGS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SYSTEM_SETTINGS_ERROR_PERMISSION_DENIED`: Permission violation error
+  /// - `SYSTEM_SETTINGS_ERROR_NOT_SUPPORTED`: The related feature is not supported on the device
+  ///
+  /// **Warnings:**
+  /// - <http://tizen.org/privilege/systemsettings (public level privilege) <b>MUST NOT</b> be declared to use this function since 2.3.1.>
+  ///
+  /// **See also:**
+  /// - `system_settings_set_changed_cb()`
   int system_settings_unset_changed_cb(
     int key,
   ) {
@@ -268,21 +384,37 @@ class Tizen70CapiSystemSystemSettings {
   late final _system_settings_unset_changed_cb =
       _system_settings_unset_changed_cbPtr.asFunction<int Function(int)>();
 
-  /// @platform
-  /// @brief Iterate the system settings value associated with the given key as a string type.
-  /// @since_tizen 3.0
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/systemsettings.admin
-  /// @remarks When the feature related to the @a key is not supported on the device, #SYSTEM_SETTINGS_ERROR_NOT_SUPPORTED will be returned.
-  /// @param[in] key The key name of the system settings
-  /// @param[in] callback The callback-function name for iteration
-  /// @param[in] user_data  The user data passed from caller-side
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #SYSTEM_SETTINGS_ERROR_NONE Successful
-  /// @retval #SYSTEM_SETTINGS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SYSTEM_SETTINGS_ERROR_IO_ERROR Internal I/O error
-  /// @retval #SYSTEM_SETTINGS_ERROR_PERMISSION_DENIED Permission violation error
-  /// @retval #SYSTEM_SETTINGS_ERROR_NOT_SUPPORTED The related feature is not supported on the device
+  /// Iterate the system settings value associated with the given key as a string type.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/systemsettings.admin>
+  ///
+  /// **Remarks:**
+  /// - When the feature related to the `key` is not supported on the device, `SYSTEM_SETTINGS_ERROR_NOT_SUPPORTED` will be returned.
+  ///
+  /// **Parameters:**
+  /// - `key` (in): The key name of the system settings
+  /// - `callback` (in): The callback-function name for iteration
+  /// - `user_data` (in): The user data passed from caller-side
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SYSTEM_SETTINGS_ERROR_NONE`: Successful
+  /// - `SYSTEM_SETTINGS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SYSTEM_SETTINGS_ERROR_IO_ERROR`: Internal I/O error
+  /// - `SYSTEM_SETTINGS_ERROR_PERMISSION_DENIED`: Permission violation error
+  /// - `SYSTEM_SETTINGS_ERROR_NOT_SUPPORTED`: The related feature is not supported on the device
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int system_settings_foreach_value_string(
     int key,
     system_settings_iter_cb callback,
@@ -303,20 +435,36 @@ class Tizen70CapiSystemSystemSettings {
       _system_settings_foreach_value_stringPtr.asFunction<
           int Function(int, system_settings_iter_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @platform
-  /// @brief Adds the system settings value associated with the given key as a string type if it supports List iteration.
-  /// @since_tizen 3.0
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/systemsettings.admin
-  /// @remarks When the feature related to the @a key is not supported on the device, #SYSTEM_SETTINGS_ERROR_NOT_SUPPORTED will be returned.
-  /// @param[in] key The key name of the system settings
-  /// @param[in] value string typed value to be appended
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #SYSTEM_SETTINGS_ERROR_NONE Successful
-  /// @retval #SYSTEM_SETTINGS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SYSTEM_SETTINGS_ERROR_IO_ERROR Internal I/O error
-  /// @retval #SYSTEM_SETTINGS_ERROR_PERMISSION_DENIED Permission violation error
-  /// @retval #SYSTEM_SETTINGS_ERROR_NOT_SUPPORTED The related feature is not supported on the device
+  /// Adds the system settings value associated with the given key as a string type if it supports List iteration.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/systemsettings.admin>
+  ///
+  /// **Remarks:**
+  /// - When the feature related to the `key` is not supported on the device, `SYSTEM_SETTINGS_ERROR_NOT_SUPPORTED` will be returned.
+  ///
+  /// **Parameters:**
+  /// - `key` (in): The key name of the system settings
+  /// - `value` (in): string typed value to be appended
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SYSTEM_SETTINGS_ERROR_NONE`: Successful
+  /// - `SYSTEM_SETTINGS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SYSTEM_SETTINGS_ERROR_IO_ERROR`: Internal I/O error
+  /// - `SYSTEM_SETTINGS_ERROR_PERMISSION_DENIED`: Permission violation error
+  /// - `SYSTEM_SETTINGS_ERROR_NOT_SUPPORTED`: The related feature is not supported on the device
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int system_settings_add_value_string(
     int key,
     ffi.Pointer<ffi.Char> value,
@@ -335,20 +483,36 @@ class Tizen70CapiSystemSystemSettings {
       _system_settings_add_value_stringPtr
           .asFunction<int Function(int, ffi.Pointer<ffi.Char>)>();
 
-  /// @platform
-  /// @brief Delete the system settings value associated with the given key as an string type if it supports List iteration.
-  /// @since_tizen 3.0
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/systemsettings.admin
-  /// @remarks When the feature related to the @a key is not supported on the device, #SYSTEM_SETTINGS_ERROR_NOT_SUPPORTED will be returned.
-  /// @param[in] key The key name of the system settings
-  /// @param[in] value string typed value to be removed
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #SYSTEM_SETTINGS_ERROR_NONE Successful
-  /// @retval #SYSTEM_SETTINGS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SYSTEM_SETTINGS_ERROR_IO_ERROR Internal I/O error
-  /// @retval #SYSTEM_SETTINGS_ERROR_PERMISSION_DENIED Permission violation error
-  /// @retval #SYSTEM_SETTINGS_ERROR_NOT_SUPPORTED The related feature is not supported on the device
+  /// Delete the system settings value associated with the given key as an string type if it supports List iteration.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/systemsettings.admin>
+  ///
+  /// **Remarks:**
+  /// - When the feature related to the `key` is not supported on the device, `SYSTEM_SETTINGS_ERROR_NOT_SUPPORTED` will be returned.
+  ///
+  /// **Parameters:**
+  /// - `key` (in): The key name of the system settings
+  /// - `value` (in): string typed value to be removed
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SYSTEM_SETTINGS_ERROR_NONE`: Successful
+  /// - `SYSTEM_SETTINGS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SYSTEM_SETTINGS_ERROR_IO_ERROR`: Internal I/O error
+  /// - `SYSTEM_SETTINGS_ERROR_PERMISSION_DENIED`: Permission violation error
+  /// - `SYSTEM_SETTINGS_ERROR_NOT_SUPPORTED`: The related feature is not supported on the device
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int system_settings_delete_value_string(
     int key,
     ffi.Pointer<ffi.Char> value,
@@ -367,22 +531,35 @@ class Tizen70CapiSystemSystemSettings {
       _system_settings_delete_value_stringPtr
           .asFunction<int Function(int, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Adds a change event callback for the given system settings key.
-  /// @details The difference between this function and system_settings_set_changed_cb() is that system_settings_set_changed_cb() can set only one callback for a given key, while system_settings_add_changed_cb() can set multiple callbacks for a given key.
-  /// @since_tizen 5.0
-  /// @remarks The @a key cannot be #SYSTEM_SETTINGS_KEY_DEFAULT_FONT_TYPE. When the feature related to the @a key is not supported on the device, #SYSTEM_SETTINGS_ERROR_NOT_SUPPORTED will be returned.
+  /// Adds a change event callback for the given system settings key.
   ///
-  /// @param[in] key The key name of the system settings
-  /// @param[in] callback The callback function to invoke
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #SYSTEM_SETTINGS_ERROR_NONE Successful
-  /// @retval #SYSTEM_SETTINGS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SYSTEM_SETTINGS_ERROR_NOT_SUPPORTED The related feature is not supported on the device
-  /// @post system_settings_changed_cb() will be invoked.
+  /// The difference between this function and system_settings_set_changed_cb() is that system_settings_set_changed_cb() can set only one callback for a given key, while system_settings_add_changed_cb() can set multiple callbacks for a given key.
   ///
-  /// @see system_settings_remove_changed_cb()
-  /// @see system_settings_changed_cb()
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Remarks:**
+  /// - The `key` cannot be `SYSTEM_SETTINGS_KEY_DEFAULT_FONT_TYPE`. When the feature related to the `key` is not supported on the device, `SYSTEM_SETTINGS_ERROR_NOT_SUPPORTED` will be returned.
+  ///
+  /// **Parameters:**
+  /// - `key` (in): The key name of the system settings
+  /// - `callback` (in): The callback function to invoke
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SYSTEM_SETTINGS_ERROR_NONE`: Successful
+  /// - `SYSTEM_SETTINGS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SYSTEM_SETTINGS_ERROR_NOT_SUPPORTED`: The related feature is not supported on the device
+  ///
+  /// **Postconditions:**
+  /// - system_settings_changed_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `system_settings_remove_changed_cb()`
+  /// - `system_settings_changed_cb()`
   int system_settings_add_changed_cb(
     int key,
     system_settings_changed_cb callback,
@@ -404,18 +581,30 @@ class Tizen70CapiSystemSystemSettings {
           int Function(
               int, system_settings_changed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Removes a change event callback function.
-  /// @details The difference between this function and system_settings_unset_changed_cb() is that system_settings_unset_changed_cb() unsets the callback set with system_settings_set_changed_cb(), while system_settings_remove_changed_cb() removes callbacks added with system_settings_add_changed_cb()
-  /// @since_tizen 5.0
-  /// @remarks The @a key cannot be #SYSTEM_SETTINGS_KEY_DEFAULT_FONT_TYPE. When the feature related to the @a key is not supported on the device, #SYSTEM_SETTINGS_ERROR_NOT_SUPPORTED will be returned.
-  /// @param[in] key The key name of the system settings
-  /// @param[in] callback The callback function to be removed
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #SYSTEM_SETTINGS_ERROR_NONE Successful
-  /// @retval #SYSTEM_SETTINGS_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SYSTEM_SETTINGS_ERROR_NOT_SUPPORTED The related feature is not supported on the device
+  /// Removes a change event callback function.
   ///
-  /// @see system_settings_add_changed_cb()
+  /// The difference between this function and system_settings_unset_changed_cb() is that system_settings_unset_changed_cb() unsets the callback set with system_settings_set_changed_cb(), while system_settings_remove_changed_cb() removes callbacks added with system_settings_add_changed_cb()
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Remarks:**
+  /// - The `key` cannot be `SYSTEM_SETTINGS_KEY_DEFAULT_FONT_TYPE`. When the feature related to the `key` is not supported on the device, `SYSTEM_SETTINGS_ERROR_NOT_SUPPORTED` will be returned.
+  ///
+  /// **Parameters:**
+  /// - `key` (in): The key name of the system settings
+  /// - `callback` (in): The callback function to be removed
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SYSTEM_SETTINGS_ERROR_NONE`: Successful
+  /// - `SYSTEM_SETTINGS_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SYSTEM_SETTINGS_ERROR_NOT_SUPPORTED`: The related feature is not supported on the device
+  ///
+  /// **See also:**
+  /// - `system_settings_add_changed_cb()`
   int system_settings_remove_changed_cb(
     int key,
     system_settings_changed_cb callback,
@@ -435,8 +624,11 @@ class Tizen70CapiSystemSystemSettings {
           .asFunction<int Function(int, system_settings_changed_cb)>();
 }
 
-/// @brief Enumeration for system settings error.
-/// @since_tizen 2.3
+/// Enumeration for system settings error.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 abstract class system_settings_error_e {
   /// < Successful
   static const int SYSTEM_SETTINGS_ERROR_NONE = 0;
@@ -464,8 +656,11 @@ abstract class system_settings_error_e {
       -38141951;
 }
 
-/// @brief Enumeration for System Settings Key.
-/// @since_tizen 2.3
+/// Enumeration for System Settings Key.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 abstract class system_settings_key_e {
   /// < (string) The file path of the current ringtone
   static const int SYSTEM_SETTINGS_KEY_INCOMING_CALL_RINGTONE = 0;
@@ -506,7 +701,7 @@ abstract class system_settings_key_e {
   /// < (string) Indicates the current language setting in the <LANGUAGE>_<REGION> syntax. The language setting is in the ISO 639-2 format and the region setting is in the ISO 3166-1 alpha-2 format.
   static const int SYSTEM_SETTINGS_KEY_LOCALE_LANGUAGE = 13;
 
-  /// < (bool) Indicates whether the 24-hour clock is used. If the value is @c false, the 12-hour clock is used.
+  /// < (bool) Indicates whether the 24-hour clock is used. If the value is `false`, the 12-hour clock is used.
   static const int SYSTEM_SETTINGS_KEY_LOCALE_TIMEFORMAT_24HOUR = 14;
 
   /// < (string) Indicates the current time zone.
@@ -584,8 +779,11 @@ abstract class system_settings_key_e {
   static const int SYSTEM_SETTINGS_KEY_MAX = 39;
 }
 
-/// @brief Enumeration for Idle Lock State.
-/// @since_tizen 2.3.1
+/// Enumeration for Idle Lock State.
+///
+/// **Since Tizen:**
+/// - 2.3.1
+/// @nodoc
 abstract class system_settings_idle_lock_state_e {
   /// < Device is unlocked
   static const int SYSTEM_SETTINGS_LOCK_STATE_UNLOCK = 0;
@@ -597,8 +795,11 @@ abstract class system_settings_idle_lock_state_e {
   static const int SYSTEM_SETTINGS_LOCK_STATE_LAUNCHING_LOCK = 2;
 }
 
-/// @brief Enumeration for font size.
-/// @since_tizen 2.3
+/// Enumeration for font size.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 abstract class system_settings_font_size_e {
   /// < A small size
   static const int SYSTEM_SETTINGS_FONT_SIZE_SMALL = 0;
@@ -616,8 +817,11 @@ abstract class system_settings_font_size_e {
   static const int SYSTEM_SETTINGS_FONT_SIZE_GIANT = 4;
 }
 
-/// @brief Enumeration for Ultra Data Save.
-/// @since_tizen 4.0
+/// Enumeration for Ultra Data Save.
+///
+/// **Since Tizen:**
+/// - 4.0
+/// @nodoc
 abstract class system_settings_uds_state_e {
   /// < OFF
   static const int SYSTEM_SETTINGS_UDS_OFF = 0;
@@ -629,30 +833,52 @@ abstract class system_settings_uds_state_e {
   static const int SYSTEM_SETTINGS_UDS_ON_WHITELISTED = 2;
 }
 
-/// @brief Called when the system settings changes.
-/// @since_tizen 2.3
-/// @param[in] key The key name of the system settings changed system settings
-/// @param[in] user_data The user data passed from the callback registration function
-/// @pre system_settings_set_changed_cb() will invoke this callback function.
-/// @see system_settings_set_changed_cb()
-/// @see system_settings_unset_changed_cb()
+/// Called when the system settings changes.
+///
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **Parameters:**
+/// - `key` (in): The key name of the system settings changed system settings
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - system_settings_set_changed_cb() will invoke this callback function.
+///
+/// **See also:**
+/// - `system_settings_set_changed_cb()`
+/// - `system_settings_unset_changed_cb()`
+/// @nodoc
 typedef system_settings_changed_cb
     = ffi.Pointer<ffi.NativeFunction<system_settings_changed_cbFunction>>;
+/// @nodoc
 typedef system_settings_changed_cbFunction = ffi.Void Function(
     ffi.Int32 key, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartsystem_settings_changed_cbFunction = void Function(
     int key, ffi.Pointer<ffi.Void> user_data);
 
-/// @platform
-/// @brief Called to get each string value from string typed list.
-/// @since_tizen 3.0
-/// @param[in] index zero based number indicating index of node in a list
-/// @param[in] value value returned from the list
-/// @param[in] cb_data  The user data passed from the foreach function
-/// @return @c true to continue with the next iteration of the loop, otherwise false to break out of the loop
+/// Called to get each string value from string typed list.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `index` (in): zero based number indicating index of node in a list
+/// - `value` (in): value returned from the list
+/// - `cb_data` (in): The user data passed from the foreach function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise false to break out of the loop
+///
+/// **Platform:**
+/// - Platform API.
+/// @nodoc
 typedef system_settings_iter_cb
     = ffi.Pointer<ffi.NativeFunction<system_settings_iter_cbFunction>>;
+/// @nodoc
 typedef system_settings_iter_cbFunction = ffi.Bool Function(
     ffi.Int index, ffi.Pointer<ffi.Char> value, ffi.Pointer<ffi.Void> cb_data);
+/// @nodoc
 typedef Dartsystem_settings_iter_cbFunction = bool Function(
     int index, ffi.Pointer<ffi.Char> value, ffi.Pointer<ffi.Void> cb_data);

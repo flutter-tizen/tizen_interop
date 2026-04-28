@@ -1,3 +1,6 @@
+/// {@category 7.0/tizen}
+library tizen_interop_7_0.stt;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen stt APIs.
+/// {@category 7.0/tizen}
 class Tizen70Stt {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,22 +28,39 @@ class Tizen70Stt {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Creates a STT handle.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
-  /// @remarks If the function succeeds, @a stt handle must be released with stt_destroy().
-  /// @param[out] stt The STT handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #STT_ERROR_NONE Successful
-  /// @retval #STT_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #STT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STT_ERROR_OPERATION_FAILED Operation failure
-  /// @retval #STT_ERROR_NOT_SUPPORTED STT NOT supported
-  /// @retval #STT_ERROR_PERMISSION_DENIED Permission denied
-  /// @post If this function is called, the STT state will be #STT_STATE_CREATED.
-  /// @see stt_destroy()
+  /// Creates a STT handle.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Remarks:**
+  /// - If the function succeeds, `stt` handle must be released with stt_destroy().
+  ///
+  /// **Parameters:**
+  /// - `stt` (out): The STT handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STT_ERROR_NONE`: Successful
+  /// - `STT_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `STT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STT_ERROR_OPERATION_FAILED`: Operation failure
+  /// - `STT_ERROR_NOT_SUPPORTED`: STT NOT supported
+  /// - `STT_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **Postconditions:**
+  /// - If this function is called, the STT state will be `STT_STATE_CREATED`.
+  ///
+  /// **See also:**
+  /// - `stt_destroy()`
   int stt_create(
     ffi.Pointer<stt_h> stt,
   ) {
@@ -54,19 +75,32 @@ class Tizen70Stt {
   late final _stt_create =
       _stt_createPtr.asFunction<int Function(ffi.Pointer<stt_h>)>();
 
-  /// @brief Destroys a STT handle.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
-  /// @param[in] stt The STT handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #STT_ERROR_NONE Successful
-  /// @retval #STT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STT_ERROR_OPERATION_FAILED Operation failure
-  /// @retval #STT_ERROR_NOT_SUPPORTED STT NOT supported
-  /// @retval #STT_ERROR_PERMISSION_DENIED Permission denied
-  /// @see stt_create()
+  /// Destroys a STT handle.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Parameters:**
+  /// - `stt` (in): The STT handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STT_ERROR_NONE`: Successful
+  /// - `STT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STT_ERROR_OPERATION_FAILED`: Operation failure
+  /// - `STT_ERROR_NOT_SUPPORTED`: STT NOT supported
+  /// - `STT_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **See also:**
+  /// - `stt_create()`
   int stt_destroy(
     stt_h stt,
   ) {
@@ -79,24 +113,41 @@ class Tizen70Stt {
       _lookup<ffi.NativeFunction<ffi.Int Function(stt_h)>>('stt_destroy');
   late final _stt_destroy = _stt_destroyPtr.asFunction<int Function(stt_h)>();
 
-  /// @brief Retrieves supported engine information using a callback function.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
-  /// @param[in] stt The STT handle
-  /// @param[in] callback The callback function to invoke
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #STT_ERROR_NONE Success
-  /// @retval #STT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STT_ERROR_INVALID_STATE STT Not initialized
-  /// @retval #STT_ERROR_OPERATION_FAILED Operation failure
-  /// @retval #STT_ERROR_NOT_SUPPORTED STT NOT supported
-  /// @retval #STT_ERROR_PERMISSION_DENIED Permission denied
-  /// @pre The state should be #STT_STATE_CREATED.
-  /// @post This function invokes stt_supported_engine_cb() repeatedly for getting engine information.
-  /// @see stt_supported_engine_cb()
+  /// Retrieves supported engine information using a callback function.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Parameters:**
+  /// - `stt` (in): The STT handle
+  /// - `callback` (in): The callback function to invoke
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STT_ERROR_NONE`: Success
+  /// - `STT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STT_ERROR_INVALID_STATE`: STT Not initialized
+  /// - `STT_ERROR_OPERATION_FAILED`: Operation failure
+  /// - `STT_ERROR_NOT_SUPPORTED`: STT NOT supported
+  /// - `STT_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **Preconditions:**
+  /// - The state should be `STT_STATE_CREATED`.
+  ///
+  /// **Postconditions:**
+  /// - This function invokes stt_supported_engine_cb() repeatedly for getting engine information.
+  ///
+  /// **See also:**
+  /// - `stt_supported_engine_cb()`
   int stt_foreach_supported_engines(
     stt_h stt,
     stt_supported_engine_cb callback,
@@ -118,23 +169,40 @@ class Tizen70Stt {
           int Function(
               stt_h, stt_supported_engine_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Gets the current engine ID.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
-  /// @remarks If the function is success, @a engine_id must be released using free().
-  /// @param[in] stt The STT handle
-  /// @param[out] engine_id Engine ID
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #STT_ERROR_NONE Success
-  /// @retval #STT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STT_ERROR_INVALID_STATE STT Not initialized
-  /// @retval #STT_ERROR_OPERATION_FAILED Operation failure
-  /// @retval #STT_ERROR_NOT_SUPPORTED STT NOT supported
-  /// @retval #STT_ERROR_PERMISSION_DENIED Permission denied
-  /// @pre The state should be #STT_STATE_CREATED.
-  /// @see stt_set_engine()
+  /// Gets the current engine ID.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Remarks:**
+  /// - If the function is success, `engine_id` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `stt` (in): The STT handle
+  /// - `engine_id` (out): Engine ID
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STT_ERROR_NONE`: Success
+  /// - `STT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STT_ERROR_INVALID_STATE`: STT Not initialized
+  /// - `STT_ERROR_OPERATION_FAILED`: Operation failure
+  /// - `STT_ERROR_NOT_SUPPORTED`: STT NOT supported
+  /// - `STT_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **Preconditions:**
+  /// - The state should be `STT_STATE_CREATED`.
+  ///
+  /// **See also:**
+  /// - `stt_set_engine()`
   int stt_get_engine(
     stt_h stt,
     ffi.Pointer<ffi.Pointer<ffi.Char>> engine_id,
@@ -152,24 +220,41 @@ class Tizen70Stt {
   late final _stt_get_engine = _stt_get_enginePtr
       .asFunction<int Function(stt_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets the engine ID.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
-  /// @privilege %http://tizen.org/privilege/appmanager.launch
-  /// @remarks A privilege (%http://tizen.org/privilege/appmanager.launch) is necessary since 3.0.
-  /// @param[in] stt The STT handle
-  /// @param[in] engine_id Engine ID
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #STT_ERROR_NONE Success
-  /// @retval #STT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STT_ERROR_INVALID_STATE STT Not initialized
-  /// @retval #STT_ERROR_OPERATION_FAILED Operation failure
-  /// @retval #STT_ERROR_NOT_SUPPORTED STT NOT supported
-  /// @retval #STT_ERROR_PERMISSION_DENIED Permission denied
-  /// @pre The state should be #STT_STATE_CREATED.
-  /// @see stt_get_engine()
+  /// Sets the engine ID.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  /// - <http://tizen.org/privilege/appmanager.launch>
+  ///
+  /// **Remarks:**
+  /// - A privilege (http://tizen.org/privilege/appmanager.launch) is necessary since 3.0.
+  ///
+  /// **Parameters:**
+  /// - `stt` (in): The STT handle
+  /// - `engine_id` (in): Engine ID
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STT_ERROR_NONE`: Success
+  /// - `STT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STT_ERROR_INVALID_STATE`: STT Not initialized
+  /// - `STT_ERROR_OPERATION_FAILED`: Operation failure
+  /// - `STT_ERROR_NOT_SUPPORTED`: STT NOT supported
+  /// - `STT_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **Preconditions:**
+  /// - The state should be `STT_STATE_CREATED`.
+  ///
+  /// **See also:**
+  /// - `stt_get_engine()`
   int stt_set_engine(
     stt_h stt,
     ffi.Pointer<ffi.Char> engine_id,
@@ -186,23 +271,35 @@ class Tizen70Stt {
   late final _stt_set_engine = _stt_set_enginePtr
       .asFunction<int Function(stt_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets the app credential.
-  /// @details Using this API, the application can set a credential.
-  /// The credential is a key to verify the authorization about using the engine.
-  /// If the application sets the credential, it will be able to use functions of the engine entirely.
-  /// @since_tizen @if MOBILE 3.0 @elseif WEARABLE 2.3.2 @endif
-  /// @remarks The necessity of the credential depends on the engine. In case of the engine which is basically embedded in Tizen, the credential is not necessary so far.
-  /// However, if the user wants to apply the 3rd party's engine, the credential may be necessary. In that case, please follow the policy provided by the corresponding engine.
-  /// @param[in] stt The STT handle
-  /// @param[in] credential The app credential
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #STT_ERROR_NONE Success
-  /// @retval #STT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STT_ERROR_INVALID_STATE Invalid state
-  /// @retval #STT_ERROR_NOT_SUPPORTED STT NOT supported
-  /// @pre The state should be #STT_STATE_CREATED or #STT_STATE_READY.
-  /// @see stt_start()
+  /// Sets the app credential.
+  ///
+  /// Using this API, the application can set a credential. The credential is a key to verify the authorization about using the engine. If the application sets the credential, it will be able to use functions of the engine entirely.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 3.0; Wearable 2.3.2
+  ///
+  /// **Remarks:**
+  /// - The necessity of the credential depends on the engine. In case of the engine which is basically embedded in Tizen, the credential is not necessary so far.
+  /// - However, if the user wants to apply the 3rd party's engine, the credential may be necessary. In that case, please follow the policy provided by the corresponding engine.
+  ///
+  /// **Parameters:**
+  /// - `stt` (in): The STT handle
+  /// - `credential` (in): The app credential
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STT_ERROR_NONE`: Success
+  /// - `STT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STT_ERROR_INVALID_STATE`: Invalid state
+  /// - `STT_ERROR_NOT_SUPPORTED`: STT NOT supported
+  ///
+  /// **Preconditions:**
+  /// - The state should be `STT_STATE_CREATED` or `STT_STATE_READY`.
+  ///
+  /// **See also:**
+  /// - `stt_start()`
   int stt_set_credential(
     stt_h stt,
     ffi.Pointer<ffi.Char> credential,
@@ -219,25 +316,36 @@ class Tizen70Stt {
   late final _stt_set_credential = _stt_set_credentialPtr
       .asFunction<int Function(stt_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets the private data to stt engine.
-  /// @details The private data is the setting parameter for applying keys provided by the engine.
-  /// Using this API, the application can set the private data and use the corresponding key of the engine.
-  /// For example, if the engine provides 'partial recognition' as a recognition type, the application can set the private data as the following.
-  /// int ret = stt_set_private_data(stt_h, "recognition_type", "PARTIAL");
-  /// @since_tizen @if MOBILE 3.0 @elseif WEARABLE 2.3.2 @endif
-  /// @remarks If the engine is replaced with the other engine, the key may be ignored.
-  /// @param[in] stt The STT handle
-  /// @param[in] key The field name of private data
-  /// @param[in] data The data for set
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #STT_ERROR_NONE Successful
-  /// @retval #STT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STT_ERROR_INVALID_STATE Invalid state
-  /// @retval #STT_ERROR_NOT_SUPPORTED STT NOT supported
-  /// @retval #STT_ERROR_TIMED_OUT No answer from the STT service
-  /// @pre The state should be #STT_STATE_READY.
-  /// @see stt_get_private_data()
+  /// Sets the private data to stt engine.
+  ///
+  /// The private data is the setting parameter for applying keys provided by the engine. Using this API, the application can set the private data and use the corresponding key of the engine. For example, if the engine provides 'partial recognition' as a recognition type, the application can set the private data as the following. int ret = stt_set_private_data(stt_h, "recognition_type", "PARTIAL");
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 3.0; Wearable 2.3.2
+  ///
+  /// **Remarks:**
+  /// - If the engine is replaced with the other engine, the key may be ignored.
+  ///
+  /// **Parameters:**
+  /// - `stt` (in): The STT handle
+  /// - `key` (in): The field name of private data
+  /// - `data` (in): The data for set
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STT_ERROR_NONE`: Successful
+  /// - `STT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STT_ERROR_INVALID_STATE`: Invalid state
+  /// - `STT_ERROR_NOT_SUPPORTED`: STT NOT supported
+  /// - `STT_ERROR_TIMED_OUT`: No answer from the STT service
+  ///
+  /// **Preconditions:**
+  /// - The state should be `STT_STATE_READY`.
+  ///
+  /// **See also:**
+  /// - `stt_get_private_data()`
   int stt_set_private_data(
     stt_h stt,
     ffi.Pointer<ffi.Char> key,
@@ -257,24 +365,37 @@ class Tizen70Stt {
   late final _stt_set_private_data = _stt_set_private_dataPtr.asFunction<
       int Function(stt_h, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the private data from stt engine.
-  /// @details The private data is the information provided by the engine.
-  /// Using this API, the application can get the private data which corresponds to the key from the engine.
-  /// @since_tizen @if MOBILE 3.0 @elseif WEARABLE 2.3.2 @endif
-  /// @remarks If the engine is replaced with the other engine, the key may be ignored.
-  /// @remarks The @a data must be released using free() when it is no longer required.
-  /// @param[in] stt The STT handle
-  /// @param[in] key The field name of private data
-  /// @param[out] data The data field of private data
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #STT_ERROR_NONE Successful
-  /// @retval #STT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STT_ERROR_INVALID_STATE Invalid state
-  /// @retval #STT_ERROR_NOT_SUPPORTED STT NOT supported
-  /// @retval #STT_ERROR_TIMED_OUT No answer from the STT service
-  /// @pre The state should be #STT_STATE_READY.
-  /// @see stt_set_private_data()
+  /// Gets the private data from stt engine.
+  ///
+  /// The private data is the information provided by the engine. Using this API, the application can get the private data which corresponds to the key from the engine.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 3.0; Wearable 2.3.2
+  ///
+  /// **Remarks:**
+  /// - If the engine is replaced with the other engine, the key may be ignored.
+  /// - The `data` must be released using free() when it is no longer required.
+  ///
+  /// **Parameters:**
+  /// - `stt` (in): The STT handle
+  /// - `key` (in): The field name of private data
+  /// - `data` (out): The data field of private data
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STT_ERROR_NONE`: Successful
+  /// - `STT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STT_ERROR_INVALID_STATE`: Invalid state
+  /// - `STT_ERROR_NOT_SUPPORTED`: STT NOT supported
+  /// - `STT_ERROR_TIMED_OUT`: No answer from the STT service
+  ///
+  /// **Preconditions:**
+  /// - The state should be `STT_STATE_READY`.
+  ///
+  /// **See also:**
+  /// - `stt_set_private_data()`
   int stt_get_private_data(
     stt_h stt,
     ffi.Pointer<ffi.Char> key,
@@ -295,22 +416,38 @@ class Tizen70Stt {
       int Function(
           stt_h, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Connects the STT service asynchronously.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
-  /// @param[in] stt The STT handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #STT_ERROR_NONE Successful
-  /// @retval #STT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STT_ERROR_INVALID_STATE Invalid state
-  /// @retval #STT_ERROR_NOT_SUPPORTED STT NOT supported
-  /// @retval #STT_ERROR_PERMISSION_DENIED Permission denied
-  /// @pre The state should be #STT_STATE_CREATED.
-  /// @post If this function is successful, the STT state will be #STT_STATE_READY.
-  /// If this function is failed, the error callback is called. (e.g. #STT_ERROR_ENGINE_NOT_FOUND)
-  /// @see stt_unprepare()
+  /// Connects the STT service asynchronously.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Parameters:**
+  /// - `stt` (in): The STT handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STT_ERROR_NONE`: Successful
+  /// - `STT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STT_ERROR_INVALID_STATE`: Invalid state
+  /// - `STT_ERROR_NOT_SUPPORTED`: STT NOT supported
+  /// - `STT_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **Preconditions:**
+  /// - The state should be `STT_STATE_CREATED`.
+  ///
+  /// **Postconditions:**
+  /// - If this function is successful, the STT state will be `STT_STATE_READY`. If this function is failed, the error callback is called. (e.g. `STT_ERROR_ENGINE_NOT_FOUND`)
+  ///
+  /// **See also:**
+  /// - `stt_unprepare()`
   int stt_prepare(
     stt_h stt,
   ) {
@@ -323,21 +460,38 @@ class Tizen70Stt {
       _lookup<ffi.NativeFunction<ffi.Int Function(stt_h)>>('stt_prepare');
   late final _stt_prepare = _stt_preparePtr.asFunction<int Function(stt_h)>();
 
-  /// @brief Disconnects the STT service.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
-  /// @param[in] stt The STT handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #STT_ERROR_NONE Successful
-  /// @retval #STT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STT_ERROR_INVALID_STATE Invalid state
-  /// @retval #STT_ERROR_NOT_SUPPORTED STT NOT supported
-  /// @retval #STT_ERROR_PERMISSION_DENIED Permission denied
-  /// @pre The state should be #STT_STATE_READY.
-  /// @post If this function is called, the STT state will be #STT_STATE_CREATED.
-  /// @see stt_prepare()
+  /// Disconnects the STT service.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Parameters:**
+  /// - `stt` (in): The STT handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STT_ERROR_NONE`: Successful
+  /// - `STT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STT_ERROR_INVALID_STATE`: Invalid state
+  /// - `STT_ERROR_NOT_SUPPORTED`: STT NOT supported
+  /// - `STT_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **Preconditions:**
+  /// - The state should be `STT_STATE_READY`.
+  ///
+  /// **Postconditions:**
+  /// - If this function is called, the STT state will be `STT_STATE_CREATED`.
+  ///
+  /// **See also:**
+  /// - `stt_prepare()`
   int stt_unprepare(
     stt_h stt,
   ) {
@@ -351,25 +505,40 @@ class Tizen70Stt {
   late final _stt_unprepare =
       _stt_unpreparePtr.asFunction<int Function(stt_h)>();
 
-  /// @brief Retrieves all supported languages of current engine using callback function.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
-  /// @param[in] stt The STT handle
-  /// @param[in] callback The callback function to invoke
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #STT_ERROR_NONE Successful
-  /// @retval #STT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STT_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #STT_ERROR_OPERATION_FAILED Operation failure
-  /// @retval #STT_ERROR_ENGINE_NOT_FOUND No available engine
-  /// @retval #STT_ERROR_NOT_SUPPORTED STT NOT supported
-  /// @retval #STT_ERROR_PERMISSION_DENIED Permission denied
-  /// @post This function invokes stt_supported_language_cb() repeatedly for getting languages.
-  /// @see stt_supported_language_cb()
-  /// @see stt_get_default_language()
+  /// Retrieves all supported languages of current engine using callback function.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Parameters:**
+  /// - `stt` (in): The STT handle
+  /// - `callback` (in): The callback function to invoke
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STT_ERROR_NONE`: Successful
+  /// - `STT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STT_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `STT_ERROR_OPERATION_FAILED`: Operation failure
+  /// - `STT_ERROR_ENGINE_NOT_FOUND`: No available engine
+  /// - `STT_ERROR_NOT_SUPPORTED`: STT NOT supported
+  /// - `STT_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **Postconditions:**
+  /// - This function invokes stt_supported_language_cb() repeatedly for getting languages.
+  ///
+  /// **See also:**
+  /// - `stt_supported_language_cb()`
+  /// - `stt_get_default_language()`
   int stt_foreach_supported_languages(
     stt_h stt,
     stt_supported_language_cb callback,
@@ -391,23 +560,38 @@ class Tizen70Stt {
           int Function(
               stt_h, stt_supported_language_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Gets the default language set by the user.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
-  /// @remarks The language is specified as an ISO 3166 alpha-2 two letter country-code followed by ISO 639-1 for the two-letter language code.
-  /// For example, "ko_KR" for Korean, "en_US" for American English.
-  /// If the function succeeds, @a language must be released using free() when it is no longer required.
-  /// @param[in] stt The STT handle
-  /// @param[out] language The language
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #STT_ERROR_NONE Successful
-  /// @retval #STT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STT_ERROR_OPERATION_FAILED Operation failure
-  /// @retval #STT_ERROR_NOT_SUPPORTED STT NOT supported
-  /// @retval #STT_ERROR_PERMISSION_DENIED Permission denied
-  /// @see stt_foreach_supported_languages()
+  /// Gets the default language set by the user.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Remarks:**
+  /// - The language is specified as an ISO 3166 alpha-2 two letter country-code followed by ISO 639-1 for the two-letter language code.
+  /// - For example, "ko_KR" for Korean, "en_US" for American English.
+  /// - If the function succeeds, `language` must be released using free() when it is no longer required.
+  ///
+  /// **Parameters:**
+  /// - `stt` (in): The STT handle
+  /// - `language` (out): The language
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STT_ERROR_NONE`: Successful
+  /// - `STT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STT_ERROR_OPERATION_FAILED`: Operation failure
+  /// - `STT_ERROR_NOT_SUPPORTED`: STT NOT supported
+  /// - `STT_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **See also:**
+  /// - `stt_foreach_supported_languages()`
   int stt_get_default_language(
     stt_h stt,
     ffi.Pointer<ffi.Pointer<ffi.Char>> language,
@@ -425,22 +609,35 @@ class Tizen70Stt {
   late final _stt_get_default_language = _stt_get_default_languagePtr
       .asFunction<int Function(stt_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the current STT state.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
-  /// @param[in] stt The STT handle
-  /// @param[out] state The current STT state
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #STT_ERROR_NONE Successful
-  /// @retval #STT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STT_ERROR_NOT_SUPPORTED STT NOT supported
-  /// @retval #STT_ERROR_PERMISSION_DENIED Permission denied
-  /// @see stt_start()
-  /// @see stt_stop()
-  /// @see stt_cancel()
-  /// @see stt_state_changed_cb()
+  /// Gets the current STT state.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Parameters:**
+  /// - `stt` (in): The STT handle
+  /// - `state` (out): The current STT state
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STT_ERROR_NONE`: Successful
+  /// - `STT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STT_ERROR_NOT_SUPPORTED`: STT NOT supported
+  /// - `STT_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **See also:**
+  /// - `stt_start()`
+  /// - `stt_stop()`
+  /// - `stt_cancel()`
+  /// - `stt_state_changed_cb()`
   int stt_get_state(
     stt_h stt,
     ffi.Pointer<ffi.Int32> state,
@@ -457,20 +654,31 @@ class Tizen70Stt {
   late final _stt_get_state = _stt_get_statePtr
       .asFunction<int Function(stt_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the current error message.
-  /// @since_tizen @if MOBILE 3.0 @elseif WEARABLE 2.3.2 @endif
-  /// @remarks This function should be called during an stt error callback. If not, the error as operation failure will be returned.
-  /// If the function succeeds, @a err_msg must be released using free() when it is no longer required.
-  /// @param[in] stt The STT handle
-  /// @param[out] err_msg The current error message
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #STT_ERROR_NONE Successful
-  /// @retval #STT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STT_ERROR_NOT_SUPPORTED STT NOT supported
-  /// @retval #STT_ERROR_OPERATION_FAILED Operation failure
-  /// @see stt_set_error_cb()
-  /// @see stt_unset_error_cb()
+  /// Gets the current error message.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 3.0; Wearable 2.3.2
+  ///
+  /// **Remarks:**
+  /// - This function should be called during an stt error callback. If not, the error as operation failure will be returned.
+  /// - If the function succeeds, `err_msg` must be released using free() when it is no longer required.
+  ///
+  /// **Parameters:**
+  /// - `stt` (in): The STT handle
+  /// - `err_msg` (out): The current error message
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STT_ERROR_NONE`: Successful
+  /// - `STT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STT_ERROR_NOT_SUPPORTED`: STT NOT supported
+  /// - `STT_ERROR_OPERATION_FAILED`: Operation failure
+  ///
+  /// **See also:**
+  /// - `stt_set_error_cb()`
+  /// - `stt_unset_error_cb()`
   int stt_get_error_message(
     stt_h stt,
     ffi.Pointer<ffi.Pointer<ffi.Char>> err_msg,
@@ -488,23 +696,35 @@ class Tizen70Stt {
   late final _stt_get_error_message = _stt_get_error_messagePtr
       .asFunction<int Function(stt_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Checks whether the recognition type is supported.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
-  /// @param[in] stt The STT handle
-  /// @param[in] type The type for recognition (e.g. #STT_RECOGNITION_TYPE_FREE, #STT_RECOGNITION_TYPE_FREE_PARTIAL)
-  /// @param[out] support The result status @c true = supported,
-  /// @c false = not supported
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #STT_ERROR_NONE Successful
-  /// @retval #STT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STT_ERROR_OPERATION_FAILED Operation failure
-  /// @retval #STT_ERROR_INVALID_STATE Invalid state
-  /// @retval #STT_ERROR_NOT_SUPPORTED STT NOT supported
-  /// @retval #STT_ERROR_PERMISSION_DENIED Permission denied
-  /// @pre The state should be #STT_STATE_READY.
+  /// Checks whether the recognition type is supported.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Parameters:**
+  /// - `stt` (in): The STT handle
+  /// - `type` (in): The type for recognition (e.g. `STT_RECOGNITION_TYPE_FREE`, `STT_RECOGNITION_TYPE_FREE_PARTIAL`)
+  /// - `support` (out): The result status `true` = supported, `false` = not supported
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STT_ERROR_NONE`: Successful
+  /// - `STT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STT_ERROR_OPERATION_FAILED`: Operation failure
+  /// - `STT_ERROR_INVALID_STATE`: Invalid state
+  /// - `STT_ERROR_NOT_SUPPORTED`: STT NOT supported
+  /// - `STT_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **Preconditions:**
+  /// - The state should be `STT_STATE_READY`.
   int stt_is_recognition_type_supported(
     stt_h stt,
     ffi.Pointer<ffi.Char> type,
@@ -525,21 +745,34 @@ class Tizen70Stt {
       _stt_is_recognition_type_supportedPtr.asFunction<
           int Function(stt_h, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Sets the silence detection.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
-  /// @param[in] stt The STT handle
-  /// @param[in] type The option type
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #STT_ERROR_NONE Successful
-  /// @retval #STT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STT_ERROR_INVALID_STATE Invalid state
-  /// @retval #STT_ERROR_NOT_SUPPORTED_FEATURE Not supported feature of current engine
-  /// @retval #STT_ERROR_NOT_SUPPORTED STT NOT supported
-  /// @retval #STT_ERROR_PERMISSION_DENIED Permission denied
-  /// @pre The state should be #STT_STATE_READY.
+  /// Sets the silence detection.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Parameters:**
+  /// - `stt` (in): The STT handle
+  /// - `type` (in): The option type
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STT_ERROR_NONE`: Successful
+  /// - `STT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STT_ERROR_INVALID_STATE`: Invalid state
+  /// - `STT_ERROR_NOT_SUPPORTED_FEATURE`: Not supported feature of current engine
+  /// - `STT_ERROR_NOT_SUPPORTED`: STT NOT supported
+  /// - `STT_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **Preconditions:**
+  /// - The state should be `STT_STATE_READY`.
   int stt_set_silence_detection(
     stt_h stt,
     int type,
@@ -556,22 +789,37 @@ class Tizen70Stt {
   late final _stt_set_silence_detection =
       _stt_set_silence_detectionPtr.asFunction<int Function(stt_h, int)>();
 
-  /// @brief Sets the sound to start recording.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
-  /// @remarks Sound file type should be wav type.
-  /// @param[in] stt The STT handle
-  /// @param[in] filename The sound file path
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #STT_ERROR_NONE Successful
-  /// @retval #STT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STT_ERROR_INVALID_STATE Invalid state
-  /// @retval #STT_ERROR_OPERATION_FAILED Operation failure
-  /// @retval #STT_ERROR_NOT_SUPPORTED STT NOT supported
-  /// @retval #STT_ERROR_PERMISSION_DENIED Permission denied
-  /// @pre The state should be #STT_STATE_READY.
+  /// Sets the sound to start recording.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Remarks:**
+  /// - Sound file type should be wav type.
+  ///
+  /// **Parameters:**
+  /// - `stt` (in): The STT handle
+  /// - `filename` (in): The sound file path
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STT_ERROR_NONE`: Successful
+  /// - `STT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STT_ERROR_INVALID_STATE`: Invalid state
+  /// - `STT_ERROR_OPERATION_FAILED`: Operation failure
+  /// - `STT_ERROR_NOT_SUPPORTED`: STT NOT supported
+  /// - `STT_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **Preconditions:**
+  /// - The state should be `STT_STATE_READY`.
   int stt_set_start_sound(
     stt_h stt,
     ffi.Pointer<ffi.Char> filename,
@@ -588,20 +836,33 @@ class Tizen70Stt {
   late final _stt_set_start_sound = _stt_set_start_soundPtr
       .asFunction<int Function(stt_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Unsets the sound to start recording.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
-  /// @param[in] stt The STT handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #STT_ERROR_NONE Successful
-  /// @retval #STT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STT_ERROR_INVALID_STATE Invalid state
-  /// @retval #STT_ERROR_OPERATION_FAILED Operation failure
-  /// @retval #STT_ERROR_NOT_SUPPORTED STT NOT supported
-  /// @retval #STT_ERROR_PERMISSION_DENIED Permission denied
-  /// @pre The state should be #STT_STATE_READY.
+  /// Unsets the sound to start recording.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Parameters:**
+  /// - `stt` (in): The STT handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STT_ERROR_NONE`: Successful
+  /// - `STT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STT_ERROR_INVALID_STATE`: Invalid state
+  /// - `STT_ERROR_OPERATION_FAILED`: Operation failure
+  /// - `STT_ERROR_NOT_SUPPORTED`: STT NOT supported
+  /// - `STT_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **Preconditions:**
+  /// - The state should be `STT_STATE_READY`.
   int stt_unset_start_sound(
     stt_h stt,
   ) {
@@ -616,22 +877,37 @@ class Tizen70Stt {
   late final _stt_unset_start_sound =
       _stt_unset_start_soundPtr.asFunction<int Function(stt_h)>();
 
-  /// @brief Sets the sound to stop recording.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
-  /// @remarks Sound file type should be wav type.
-  /// @param[in] stt The STT handle
-  /// @param[in] filename The sound file path
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #STT_ERROR_NONE Successful
-  /// @retval #STT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STT_ERROR_INVALID_STATE Invalid state
-  /// @retval #STT_ERROR_OPERATION_FAILED Operation failure
-  /// @retval #STT_ERROR_NOT_SUPPORTED STT NOT supported
-  /// @retval #STT_ERROR_PERMISSION_DENIED Permission denied
-  /// @pre The state should be #STT_STATE_READY.
+  /// Sets the sound to stop recording.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Remarks:**
+  /// - Sound file type should be wav type.
+  ///
+  /// **Parameters:**
+  /// - `stt` (in): The STT handle
+  /// - `filename` (in): The sound file path
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STT_ERROR_NONE`: Successful
+  /// - `STT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STT_ERROR_INVALID_STATE`: Invalid state
+  /// - `STT_ERROR_OPERATION_FAILED`: Operation failure
+  /// - `STT_ERROR_NOT_SUPPORTED`: STT NOT supported
+  /// - `STT_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **Preconditions:**
+  /// - The state should be `STT_STATE_READY`.
   int stt_set_stop_sound(
     stt_h stt,
     ffi.Pointer<ffi.Char> filename,
@@ -648,20 +924,33 @@ class Tizen70Stt {
   late final _stt_set_stop_sound = _stt_set_stop_soundPtr
       .asFunction<int Function(stt_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Unsets the sound to stop recording.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
-  /// @param[in] stt The STT handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #STT_ERROR_NONE Successful
-  /// @retval #STT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STT_ERROR_INVALID_STATE Invalid state
-  /// @retval #STT_ERROR_OPERATION_FAILED Operation failure
-  /// @retval #STT_ERROR_NOT_SUPPORTED STT NOT supported
-  /// @retval #STT_ERROR_PERMISSION_DENIED Permission denied
-  /// @pre The state should be #STT_STATE_READY.
+  /// Unsets the sound to stop recording.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Parameters:**
+  /// - `stt` (in): The STT handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STT_ERROR_NONE`: Successful
+  /// - `STT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STT_ERROR_INVALID_STATE`: Invalid state
+  /// - `STT_ERROR_OPERATION_FAILED`: Operation failure
+  /// - `STT_ERROR_NOT_SUPPORTED`: STT NOT supported
+  /// - `STT_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **Preconditions:**
+  /// - The state should be `STT_STATE_READY`.
   int stt_unset_stop_sound(
     stt_h stt,
   ) {
@@ -676,33 +965,50 @@ class Tizen70Stt {
   late final _stt_unset_stop_sound =
       _stt_unset_stop_soundPtr.asFunction<int Function(stt_h)>();
 
-  /// @brief Starts recording and recognition asynchronously.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
-  /// @remarks This function starts recording in the STT service and sending recording data to engine.
-  /// This work continues until stt_stop(), stt_cancel() or silence detected by engine.
-  /// @param[in] stt The STT handle
-  /// @param[in] language The language selected from stt_foreach_supported_languages()
-  /// @param[in] type The type for recognition (e.g. #STT_RECOGNITION_TYPE_FREE, #STT_RECOGNITION_TYPE_FREE_PARTIAL)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #STT_ERROR_NONE Successful
-  /// @retval #STT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STT_ERROR_INVALID_STATE Invalid state
-  /// @retval #STT_ERROR_OPERATION_FAILED Operation failure
-  /// @retval #STT_ERROR_RECORDER_BUSY Recorder busy
-  /// @retval #STT_ERROR_INVALID_LANGUAGE Invalid language
-  /// @retval #STT_ERROR_NOT_SUPPORTED STT NOT supported
-  /// @retval #STT_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #STT_ERROR_IN_PROGRESS_TO_RECORDING Progress to recording is not finished
-  /// @pre The state should be #STT_STATE_READY.
-  /// @post It will invoke stt_state_changed_cb(), if you register a callback with stt_state_changed_cb().
-  /// If this function succeeds, the STT state will be #STT_STATE_RECORDING.
-  /// If you call this function again before state changes, you will receive #STT_ERROR_IN_PROGRESS_TO_RECORDING.
-  /// @see stt_stop()
-  /// @see stt_cancel()
-  /// @see stt_state_changed_cb()
+  /// Starts recording and recognition asynchronously.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Remarks:**
+  /// - This function starts recording in the STT service and sending recording data to engine.
+  /// - This work continues until stt_stop(), stt_cancel() or silence detected by engine.
+  ///
+  /// **Parameters:**
+  /// - `stt` (in): The STT handle
+  /// - `language` (in): The language selected from stt_foreach_supported_languages()
+  /// - `type` (in): The type for recognition (e.g. `STT_RECOGNITION_TYPE_FREE`, `STT_RECOGNITION_TYPE_FREE_PARTIAL`)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STT_ERROR_NONE`: Successful
+  /// - `STT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STT_ERROR_INVALID_STATE`: Invalid state
+  /// - `STT_ERROR_OPERATION_FAILED`: Operation failure
+  /// - `STT_ERROR_RECORDER_BUSY`: Recorder busy
+  /// - `STT_ERROR_INVALID_LANGUAGE`: Invalid language
+  /// - `STT_ERROR_NOT_SUPPORTED`: STT NOT supported
+  /// - `STT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `STT_ERROR_IN_PROGRESS_TO_RECORDING`: Progress to recording is not finished
+  ///
+  /// **Preconditions:**
+  /// - The state should be `STT_STATE_READY`.
+  ///
+  /// **Postconditions:**
+  /// - It will invoke stt_state_changed_cb(), if you register a callback with stt_state_changed_cb(). If this function succeeds, the STT state will be `STT_STATE_RECORDING`. If you call this function again before state changes, you will receive `STT_ERROR_IN_PROGRESS_TO_RECORDING`.
+  ///
+  /// **See also:**
+  /// - `stt_stop()`
+  /// - `stt_cancel()`
+  /// - `stt_state_changed_cb()`
   int stt_start(
     stt_h stt,
     ffi.Pointer<ffi.Char> language,
@@ -722,30 +1028,44 @@ class Tizen70Stt {
   late final _stt_start = _stt_startPtr.asFunction<
       int Function(stt_h, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Finishes the recording and starts recognition processing in engine asynchronously.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
-  /// @param[in] stt The STT handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #STT_ERROR_NONE Successful
-  /// @retval #STT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STT_ERROR_INVALID_STATE Invalid state
-  /// @retval #STT_ERROR_OPERATION_FAILED Operation failure
-  /// @retval #STT_ERROR_NOT_SUPPORTED STT NOT supported
-  /// @retval #STT_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #STT_ERROR_IN_PROGRESS_TO_READY Progress to ready is not finished
-  /// @retval #STT_ERROR_IN_PROGRESS_TO_RECORDING Progress to recording is not finished
-  /// @retval #STT_ERROR_IN_PROGRESS_TO_PROCESSING Progress to processing is not finished
-  /// @pre The state should be #STT_STATE_RECORDING.
-  /// @post It will invoke stt_state_changed_cb(), if you register a callback with stt_state_changed_cb().
-  /// If this function succeeds, the STT state will be #STT_STATE_PROCESSING.
-  /// If you call this function again before state changes, you will receive #STT_ERROR_IN_PROGRESS_TO_PROCESSING.
-  /// After processing of engine, stt_result_cb() is called.
-  /// @see stt_start()
-  /// @see stt_cancel()
-  /// @see stt_state_changed_cb()
+  /// Finishes the recording and starts recognition processing in engine asynchronously.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Parameters:**
+  /// - `stt` (in): The STT handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STT_ERROR_NONE`: Successful
+  /// - `STT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STT_ERROR_INVALID_STATE`: Invalid state
+  /// - `STT_ERROR_OPERATION_FAILED`: Operation failure
+  /// - `STT_ERROR_NOT_SUPPORTED`: STT NOT supported
+  /// - `STT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `STT_ERROR_IN_PROGRESS_TO_READY`: Progress to ready is not finished
+  /// - `STT_ERROR_IN_PROGRESS_TO_RECORDING`: Progress to recording is not finished
+  /// - `STT_ERROR_IN_PROGRESS_TO_PROCESSING`: Progress to processing is not finished
+  ///
+  /// **Preconditions:**
+  /// - The state should be `STT_STATE_RECORDING`.
+  ///
+  /// **Postconditions:**
+  /// - It will invoke stt_state_changed_cb(), if you register a callback with stt_state_changed_cb(). If this function succeeds, the STT state will be `STT_STATE_PROCESSING`. If you call this function again before state changes, you will receive `STT_ERROR_IN_PROGRESS_TO_PROCESSING`. After processing of engine, stt_result_cb() is called.
+  ///
+  /// **See also:**
+  /// - `stt_start()`
+  /// - `stt_cancel()`
+  /// - `stt_state_changed_cb()`
   int stt_stop(
     stt_h stt,
   ) {
@@ -758,31 +1078,48 @@ class Tizen70Stt {
       _lookup<ffi.NativeFunction<ffi.Int Function(stt_h)>>('stt_stop');
   late final _stt_stop = _stt_stopPtr.asFunction<int Function(stt_h)>();
 
-  /// @brief Cancels processing recognition and recording asynchronously.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
-  /// @remarks This function cancels recording and engine cancels recognition processing.
-  /// After successful cancel, stt_state_changed_cb() is called otherwise if error is occurred, stt_error_cb() is called.
-  /// @param[in] stt The STT handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #STT_ERROR_NONE Successful
-  /// @retval #STT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STT_ERROR_INVALID_STATE Invalid state
-  /// @retval #STT_ERROR_OPERATION_FAILED Operation failure
-  /// @retval #STT_ERROR_NOT_SUPPORTED STT NOT supported
-  /// @retval #STT_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #STT_ERROR_IN_PROGRESS_TO_READY Progress to ready is not finished
-  /// @retval #STT_ERROR_IN_PROGRESS_TO_RECORDING Progress to recording is not finished
-  /// @retval #STT_ERROR_IN_PROGRESS_TO_PROCESSING Progress to processing is not finished
-  /// @pre The state should be #STT_STATE_RECORDING or #STT_STATE_PROCESSING.
-  /// @post It will invoke stt_state_changed_cb(), if you register a callback with stt_state_changed_cb().
-  /// If this function succeeds, the STT state will be #STT_STATE_READY.
-  /// If you call this function again before state changes, you will receive #STT_ERROR_IN_PROGRESS_TO_READY.
-  /// @see stt_start()
-  /// @see stt_stop()
-  /// @see stt_state_changed_cb()
+  /// Cancels processing recognition and recording asynchronously.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Remarks:**
+  /// - This function cancels recording and engine cancels recognition processing.
+  /// - After successful cancel, stt_state_changed_cb() is called otherwise if error is occurred, stt_error_cb() is called.
+  ///
+  /// **Parameters:**
+  /// - `stt` (in): The STT handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STT_ERROR_NONE`: Successful
+  /// - `STT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STT_ERROR_INVALID_STATE`: Invalid state
+  /// - `STT_ERROR_OPERATION_FAILED`: Operation failure
+  /// - `STT_ERROR_NOT_SUPPORTED`: STT NOT supported
+  /// - `STT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `STT_ERROR_IN_PROGRESS_TO_READY`: Progress to ready is not finished
+  /// - `STT_ERROR_IN_PROGRESS_TO_RECORDING`: Progress to recording is not finished
+  /// - `STT_ERROR_IN_PROGRESS_TO_PROCESSING`: Progress to processing is not finished
+  ///
+  /// **Preconditions:**
+  /// - The state should be `STT_STATE_RECORDING` or `STT_STATE_PROCESSING`.
+  ///
+  /// **Postconditions:**
+  /// - It will invoke stt_state_changed_cb(), if you register a callback with stt_state_changed_cb(). If this function succeeds, the STT state will be `STT_STATE_READY`. If you call this function again before state changes, you will receive `STT_ERROR_IN_PROGRESS_TO_READY`.
+  ///
+  /// **See also:**
+  /// - `stt_start()`
+  /// - `stt_stop()`
+  /// - `stt_state_changed_cb()`
   int stt_cancel(
     stt_h stt,
   ) {
@@ -795,22 +1132,37 @@ class Tizen70Stt {
       _lookup<ffi.NativeFunction<ffi.Int Function(stt_h)>>('stt_cancel');
   late final _stt_cancel = _stt_cancelPtr.asFunction<int Function(stt_h)>();
 
-  /// @brief Gets the microphone volume during recording.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
-  /// @param[in] stt The STT handle
-  /// @param[out] volume Recording volume
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #STT_ERROR_NONE Successful
-  /// @retval #STT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STT_ERROR_INVALID_STATE Invalid state
-  /// @retval #STT_ERROR_OPERATION_FAILED Operation failure
-  /// @retval #STT_ERROR_NOT_SUPPORTED STT NOT supported
-  /// @retval #STT_ERROR_PERMISSION_DENIED Permission denied
-  /// @pre The state should be #STT_STATE_RECORDING.
-  /// @see stt_start()
+  /// Gets the microphone volume during recording.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Parameters:**
+  /// - `stt` (in): The STT handle
+  /// - `volume` (out): Recording volume
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STT_ERROR_NONE`: Successful
+  /// - `STT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STT_ERROR_INVALID_STATE`: Invalid state
+  /// - `STT_ERROR_OPERATION_FAILED`: Operation failure
+  /// - `STT_ERROR_NOT_SUPPORTED`: STT NOT supported
+  /// - `STT_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **Preconditions:**
+  /// - The state should be `STT_STATE_RECORDING`.
+  ///
+  /// **See also:**
+  /// - `stt_start()`
   int stt_get_recording_volume(
     stt_h stt,
     ffi.Pointer<ffi.Float> volume,
@@ -827,26 +1179,45 @@ class Tizen70Stt {
   late final _stt_get_recording_volume = _stt_get_recording_volumePtr
       .asFunction<int Function(stt_h, ffi.Pointer<ffi.Float>)>();
 
-  /// @brief Retrieves the time stamp of the current recognition result using the callback function.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
-  /// @remarks This function should be called in stt_recognition_result_cb().
-  /// After stt_recognition_result_cb(), result data is NOT valid.
-  /// @param[in] stt The STT handle
-  /// @param[in] callback The callback function to invoke
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #STT_ERROR_NONE Successful
-  /// @retval #STT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STT_ERROR_OPERATION_FAILED Operation failure
-  /// @retval #STT_ERROR_NOT_SUPPORTED STT NOT supported
-  /// @retval #STT_ERROR_PERMISSION_DENIED Permission denied
-  /// @pre This function should be called in stt_recognition_result_cb().
-  /// @post This function invokes stt_result_time_cb() repeatedly for getting time information.
-  /// @see stt_result_time_cb()
-  /// @see stt_recognition_result_cb()
+  /// Retrieves the time stamp of the current recognition result using the callback function.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Remarks:**
+  /// - This function should be called in stt_recognition_result_cb().
+  /// - After stt_recognition_result_cb(), result data is NOT valid.
+  ///
+  /// **Parameters:**
+  /// - `stt` (in): The STT handle
+  /// - `callback` (in): The callback function to invoke
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STT_ERROR_NONE`: Successful
+  /// - `STT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STT_ERROR_OPERATION_FAILED`: Operation failure
+  /// - `STT_ERROR_NOT_SUPPORTED`: STT NOT supported
+  /// - `STT_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **Preconditions:**
+  /// - This function should be called in stt_recognition_result_cb().
+  ///
+  /// **Postconditions:**
+  /// - This function invokes stt_result_time_cb() repeatedly for getting time information.
+  ///
+  /// **See also:**
+  /// - `stt_result_time_cb()`
+  /// - `stt_recognition_result_cb()`
   int stt_foreach_detailed_result(
     stt_h stt,
     stt_result_time_cb callback,
@@ -867,23 +1238,38 @@ class Tizen70Stt {
       _stt_foreach_detailed_resultPtr.asFunction<
           int Function(stt_h, stt_result_time_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Sets a callback function to get the recognition result.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
-  /// @param[in] stt The STT handle
-  /// @param[in] callback The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #STT_ERROR_NONE Successful
-  /// @retval #STT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STT_ERROR_INVALID_STATE Invalid state
-  /// @retval #STT_ERROR_NOT_SUPPORTED STT NOT supported
-  /// @retval #STT_ERROR_PERMISSION_DENIED Permission denied
-  /// @pre The state should be #STT_STATE_CREATED.
-  /// @see stt_recognition_result_cb()
-  /// @see stt_unset_recognition_result_cb()
+  /// Sets a callback function to get the recognition result.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Parameters:**
+  /// - `stt` (in): The STT handle
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STT_ERROR_NONE`: Successful
+  /// - `STT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STT_ERROR_INVALID_STATE`: Invalid state
+  /// - `STT_ERROR_NOT_SUPPORTED`: STT NOT supported
+  /// - `STT_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **Preconditions:**
+  /// - The state should be `STT_STATE_CREATED`.
+  ///
+  /// **See also:**
+  /// - `stt_recognition_result_cb()`
+  /// - `stt_unset_recognition_result_cb()`
   int stt_set_recognition_result_cb(
     stt_h stt,
     stt_recognition_result_cb callback,
@@ -905,20 +1291,35 @@ class Tizen70Stt {
           int Function(
               stt_h, stt_recognition_result_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback function.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
-  /// @param[in] stt The STT handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #STT_ERROR_NONE Successful
-  /// @retval #STT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STT_ERROR_INVALID_STATE Invalid state
-  /// @retval #STT_ERROR_NOT_SUPPORTED STT NOT supported
-  /// @retval #STT_ERROR_PERMISSION_DENIED Permission denied
-  /// @pre The state should be #STT_STATE_CREATED.
-  /// @see stt_set_recognition_result_cb()
+  /// Unsets the callback function.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Parameters:**
+  /// - `stt` (in): The STT handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STT_ERROR_NONE`: Successful
+  /// - `STT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STT_ERROR_INVALID_STATE`: Invalid state
+  /// - `STT_ERROR_NOT_SUPPORTED`: STT NOT supported
+  /// - `STT_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **Preconditions:**
+  /// - The state should be `STT_STATE_CREATED`.
+  ///
+  /// **See also:**
+  /// - `stt_set_recognition_result_cb()`
   int stt_unset_recognition_result_cb(
     stt_h stt,
   ) {
@@ -933,23 +1334,38 @@ class Tizen70Stt {
   late final _stt_unset_recognition_result_cb =
       _stt_unset_recognition_result_cbPtr.asFunction<int Function(stt_h)>();
 
-  /// @brief Sets a callback function to be called when STT state changes.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
-  /// @param[in] stt The STT handle
-  /// @param[in] callback The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #STT_ERROR_NONE Successful
-  /// @retval #STT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STT_ERROR_INVALID_STATE Invalid state
-  /// @retval #STT_ERROR_NOT_SUPPORTED STT NOT supported
-  /// @retval #STT_ERROR_PERMISSION_DENIED Permission denied
-  /// @pre The state should be #STT_STATE_CREATED.
-  /// @see stt_state_changed_cb()
-  /// @see stt_unset_state_changed_cb()
+  /// Sets a callback function to be called when STT state changes.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Parameters:**
+  /// - `stt` (in): The STT handle
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STT_ERROR_NONE`: Successful
+  /// - `STT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STT_ERROR_INVALID_STATE`: Invalid state
+  /// - `STT_ERROR_NOT_SUPPORTED`: STT NOT supported
+  /// - `STT_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **Preconditions:**
+  /// - The state should be `STT_STATE_CREATED`.
+  ///
+  /// **See also:**
+  /// - `stt_state_changed_cb()`
+  /// - `stt_unset_state_changed_cb()`
   int stt_set_state_changed_cb(
     stt_h stt,
     stt_state_changed_cb callback,
@@ -970,20 +1386,35 @@ class Tizen70Stt {
       _stt_set_state_changed_cbPtr.asFunction<
           int Function(stt_h, stt_state_changed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback function.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
-  /// @param[in] stt The STT handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #STT_ERROR_NONE Successful
-  /// @retval #STT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STT_ERROR_INVALID_STATE Invalid state
-  /// @retval #STT_ERROR_NOT_SUPPORTED STT NOT supported
-  /// @retval #STT_ERROR_PERMISSION_DENIED Permission denied
-  /// @pre The state should be #STT_STATE_CREATED.
-  /// @see stt_set_state_changed_cb()
+  /// Unsets the callback function.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Parameters:**
+  /// - `stt` (in): The STT handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STT_ERROR_NONE`: Successful
+  /// - `STT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STT_ERROR_INVALID_STATE`: Invalid state
+  /// - `STT_ERROR_NOT_SUPPORTED`: STT NOT supported
+  /// - `STT_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **Preconditions:**
+  /// - The state should be `STT_STATE_CREATED`.
+  ///
+  /// **See also:**
+  /// - `stt_set_state_changed_cb()`
   int stt_unset_state_changed_cb(
     stt_h stt,
   ) {
@@ -998,23 +1429,38 @@ class Tizen70Stt {
   late final _stt_unset_state_changed_cb =
       _stt_unset_state_changed_cbPtr.asFunction<int Function(stt_h)>();
 
-  /// @brief Sets a callback function to be called when an error occurred.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
-  /// @param[in] stt The STT handle
-  /// @param[in] callback The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #STT_ERROR_NONE Successful
-  /// @retval #STT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STT_ERROR_INVALID_STATE Invalid state
-  /// @retval #STT_ERROR_NOT_SUPPORTED STT NOT supported
-  /// @retval #STT_ERROR_PERMISSION_DENIED Permission denied
-  /// @pre The state should be #STT_STATE_CREATED.
-  /// @see stt_error_cb()
-  /// @see stt_unset_error_cb()
+  /// Sets a callback function to be called when an error occurred.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Parameters:**
+  /// - `stt` (in): The STT handle
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STT_ERROR_NONE`: Successful
+  /// - `STT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STT_ERROR_INVALID_STATE`: Invalid state
+  /// - `STT_ERROR_NOT_SUPPORTED`: STT NOT supported
+  /// - `STT_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **Preconditions:**
+  /// - The state should be `STT_STATE_CREATED`.
+  ///
+  /// **See also:**
+  /// - `stt_error_cb()`
+  /// - `stt_unset_error_cb()`
   int stt_set_error_cb(
     stt_h stt,
     stt_error_cb callback,
@@ -1034,20 +1480,35 @@ class Tizen70Stt {
   late final _stt_set_error_cb = _stt_set_error_cbPtr
       .asFunction<int Function(stt_h, stt_error_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback function.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
-  /// @param[in] stt The STT handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #STT_ERROR_NONE Successful
-  /// @retval #STT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STT_ERROR_INVALID_STATE Invalid state
-  /// @retval #STT_ERROR_NOT_SUPPORTED STT NOT supported
-  /// @retval #STT_ERROR_PERMISSION_DENIED Permission denied
-  /// @pre The state should be #STT_STATE_CREATED.
-  /// @see stt_set_error_cb()
+  /// Unsets the callback function.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Parameters:**
+  /// - `stt` (in): The STT handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STT_ERROR_NONE`: Successful
+  /// - `STT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STT_ERROR_INVALID_STATE`: Invalid state
+  /// - `STT_ERROR_NOT_SUPPORTED`: STT NOT supported
+  /// - `STT_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **Preconditions:**
+  /// - The state should be `STT_STATE_CREATED`.
+  ///
+  /// **See also:**
+  /// - `stt_set_error_cb()`
   int stt_unset_error_cb(
     stt_h stt,
   ) {
@@ -1062,23 +1523,38 @@ class Tizen70Stt {
   late final _stt_unset_error_cb =
       _stt_unset_error_cbPtr.asFunction<int Function(stt_h)>();
 
-  /// @brief Sets a callback function to detect the default language change.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
-  /// @param[in] stt The STT handle
-  /// @param[in] callback The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #STT_ERROR_NONE Successful
-  /// @retval #STT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STT_ERROR_INVALID_STATE Invalid state
-  /// @retval #STT_ERROR_NOT_SUPPORTED STT NOT supported
-  /// @retval #STT_ERROR_PERMISSION_DENIED Permission denied
-  /// @pre The state should be #STT_STATE_CREATED.
-  /// @see stt_default_language_changed_cb()
-  /// @see stt_unset_default_language_changed_cb()
+  /// Sets a callback function to detect the default language change.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Parameters:**
+  /// - `stt` (in): The STT handle
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STT_ERROR_NONE`: Successful
+  /// - `STT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STT_ERROR_INVALID_STATE`: Invalid state
+  /// - `STT_ERROR_NOT_SUPPORTED`: STT NOT supported
+  /// - `STT_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **Preconditions:**
+  /// - The state should be `STT_STATE_CREATED`.
+  ///
+  /// **See also:**
+  /// - `stt_default_language_changed_cb()`
+  /// - `stt_unset_default_language_changed_cb()`
   int stt_set_default_language_changed_cb(
     stt_h stt,
     stt_default_language_changed_cb callback,
@@ -1100,20 +1576,35 @@ class Tizen70Stt {
           int Function(
               stt_h, stt_default_language_changed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback function.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
-  /// @param[in] stt The STT handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #STT_ERROR_NONE Successful
-  /// @retval #STT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STT_ERROR_INVALID_STATE Invalid state
-  /// @retval #STT_ERROR_NOT_SUPPORTED STT NOT supported
-  /// @retval #STT_ERROR_PERMISSION_DENIED Permission denied
-  /// @pre The state should be #STT_STATE_CREATED.
-  /// @see stt_set_default_language_changed_cb()
+  /// Unsets the callback function.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Parameters:**
+  /// - `stt` (in): The STT handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STT_ERROR_NONE`: Successful
+  /// - `STT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STT_ERROR_INVALID_STATE`: Invalid state
+  /// - `STT_ERROR_NOT_SUPPORTED`: STT NOT supported
+  /// - `STT_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **Preconditions:**
+  /// - The state should be `STT_STATE_CREATED`.
+  ///
+  /// **See also:**
+  /// - `stt_set_default_language_changed_cb()`
   int stt_unset_default_language_changed_cb(
     stt_h stt,
   ) {
@@ -1129,20 +1620,31 @@ class Tizen70Stt {
       _stt_unset_default_language_changed_cbPtr
           .asFunction<int Function(stt_h)>();
 
-  /// @brief Sets a callback function to detect the engine change.
-  /// @since_tizen @if MOBILE 3.0 @elseif WEARABLE 2.3.2 @endif
-  /// @param[in] stt The STT handle
-  /// @param[in] callback The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #STT_ERROR_NONE Successful
-  /// @retval #STT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STT_ERROR_INVALID_STATE Invalid state
-  /// @retval #STT_ERROR_NOT_SUPPORTED STT NOT supported
-  /// @pre The state should be #STT_STATE_CREATED.
-  /// @see stt_engine_changed_cb()
-  /// @see stt_unset_engine_changed_cb()
+  /// Sets a callback function to detect the engine change.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 3.0; Wearable 2.3.2
+  ///
+  /// **Parameters:**
+  /// - `stt` (in): The STT handle
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STT_ERROR_NONE`: Successful
+  /// - `STT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STT_ERROR_INVALID_STATE`: Invalid state
+  /// - `STT_ERROR_NOT_SUPPORTED`: STT NOT supported
+  ///
+  /// **Preconditions:**
+  /// - The state should be `STT_STATE_CREATED`.
+  ///
+  /// **See also:**
+  /// - `stt_engine_changed_cb()`
+  /// - `stt_unset_engine_changed_cb()`
   int stt_set_engine_changed_cb(
     stt_h stt,
     stt_engine_changed_cb callback,
@@ -1163,17 +1665,28 @@ class Tizen70Stt {
       _stt_set_engine_changed_cbPtr.asFunction<
           int Function(stt_h, stt_engine_changed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback function.
-  /// @since_tizen @if MOBILE 3.0 @elseif WEARABLE 2.3.2 @endif
-  /// @param[in] stt The STT handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #STT_ERROR_NONE Successful
-  /// @retval #STT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STT_ERROR_INVALID_STATE Invalid state
-  /// @retval #STT_ERROR_NOT_SUPPORTED STT NOT supported
-  /// @pre The state should be #STT_STATE_CREATED.
-  /// @see stt_set_engine_changed_cb()
+  /// Unsets the callback function.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 3.0; Wearable 2.3.2
+  ///
+  /// **Parameters:**
+  /// - `stt` (in): The STT handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STT_ERROR_NONE`: Successful
+  /// - `STT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STT_ERROR_INVALID_STATE`: Invalid state
+  /// - `STT_ERROR_NOT_SUPPORTED`: STT NOT supported
+  ///
+  /// **Preconditions:**
+  /// - The state should be `STT_STATE_CREATED`.
+  ///
+  /// **See also:**
+  /// - `stt_set_engine_changed_cb()`
   int stt_unset_engine_changed_cb(
     stt_h stt,
   ) {
@@ -1188,23 +1701,38 @@ class Tizen70Stt {
   late final _stt_unset_engine_changed_cb =
       _stt_unset_engine_changed_cbPtr.asFunction<int Function(stt_h)>();
 
-  /// @brief Sets a callback function to detect the speech status is changed.
-  /// @since_tizen 5.5
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
-  /// @param[in] stt The STT handle
-  /// @param[in] callback The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #STT_ERROR_NONE Successful
-  /// @retval #STT_ERROR_NOT_SUPPORTED STT NOT supported
-  /// @retval #STT_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #STT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STT_ERROR_INVALID_STATE Invalid state
-  /// @pre The state should be #STT_STATE_CREATED.
-  /// @see stt_speech_status_cb()
-  /// @see stt_unset_speech_status_cb()
+  /// Sets a callback function to detect the speech status is changed.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Parameters:**
+  /// - `stt` (in): The STT handle
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STT_ERROR_NONE`: Successful
+  /// - `STT_ERROR_NOT_SUPPORTED`: STT NOT supported
+  /// - `STT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `STT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STT_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `STT_STATE_CREATED`.
+  ///
+  /// **See also:**
+  /// - `stt_speech_status_cb()`
+  /// - `stt_unset_speech_status_cb()`
   int stt_set_speech_status_cb(
     stt_h stt,
     stt_speech_status_cb callback,
@@ -1225,20 +1753,35 @@ class Tizen70Stt {
       _stt_set_speech_status_cbPtr.asFunction<
           int Function(stt_h, stt_speech_status_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback function to detect the speech status is changed.
-  /// @since_tizen 5.5
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
-  /// @param[in] stt The STT handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #STT_ERROR_NONE Successful
-  /// @retval #STT_ERROR_NOT_SUPPORTED STT NOT supported
-  /// @retval #STT_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #STT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STT_ERROR_INVALID_STATE Invalid state
-  /// @pre The state should be #STT_STATE_CREATED.
-  /// @see stt_set_speech_status_cb()
+  /// Unsets the callback function to detect the speech status is changed.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Parameters:**
+  /// - `stt` (in): The STT handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STT_ERROR_NONE`: Successful
+  /// - `STT_ERROR_NOT_SUPPORTED`: STT NOT supported
+  /// - `STT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `STT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STT_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The state should be `STT_STATE_CREATED`.
+  ///
+  /// **See also:**
+  /// - `stt_set_speech_status_cb()`
   int stt_unset_speech_status_cb(
     stt_h stt,
   ) {
@@ -1254,8 +1797,11 @@ class Tizen70Stt {
       _stt_unset_speech_status_cbPtr.asFunction<int Function(stt_h)>();
 }
 
-/// @brief Enumeration for error codes.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration for error codes.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class stt_error_e {
   /// < Successful
   static const int STT_ERROR_NONE = 0;
@@ -1318,8 +1864,11 @@ abstract class stt_error_e {
   static const int STT_ERROR_SERVICE_RESET = -49283055;
 }
 
-/// @brief Enumeration for state.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration for state.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class stt_state_e {
   /// < 'CREATED' state
   static const int STT_STATE_CREATED = 0;
@@ -1334,8 +1883,11 @@ abstract class stt_state_e {
   static const int STT_STATE_PROCESSING = 3;
 }
 
-/// @brief Enumeration for result event.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration for result event.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class stt_result_event_e {
   /// < Event when the recognition full or last result is ready
   static const int STT_RESULT_EVENT_FINAL_RESULT = 0;
@@ -1347,8 +1899,11 @@ abstract class stt_result_event_e {
   static const int STT_RESULT_EVENT_ERROR = 2;
 }
 
-/// @brief Enumeration for result time callback event.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration for result time callback event.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class stt_result_time_event_e {
   /// < Event when the token is beginning type
   static const int STT_RESULT_TIME_EVENT_BEGINNING = 0;
@@ -1360,8 +1915,11 @@ abstract class stt_result_time_event_e {
   static const int STT_RESULT_TIME_EVENT_END = 2;
 }
 
-/// @brief Enumeration for silence detection type.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration for silence detection type.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class stt_option_silence_detection_e {
   /// < Silence detection type - False
   static const int STT_OPTION_SILENCE_DETECTION_FALSE = 0;
@@ -1373,8 +1931,11 @@ abstract class stt_option_silence_detection_e {
   static const int STT_OPTION_SILENCE_DETECTION_AUTO = 2;
 }
 
-/// @brief Enumeration for speech status.
-/// @since_tizen 5.5
+/// Enumeration for speech status.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 abstract class stt_speech_status_e {
   /// < The beginning Of speech is detected
   static const int STT_SPEECH_STATUS_BEGINNING_OF_SPEECH_DETECTED = 0;
@@ -1383,67 +1944,108 @@ abstract class stt_speech_status_e {
   static const int STT_SPEECH_STATUS_END_OF_SPEECH_DETECTED = 1;
 }
 
+/// @nodoc
 final class stt_s extends ffi.Opaque {}
 
-/// @brief A structure of STT handle.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// A structure of STT handle.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 typedef stt_h = ffi.Pointer<stt_s>;
 
-/// @brief Called to get the engine information.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-/// @param[in] stt The STT handle
-/// @param[in] engine_id Engine ID
-/// @param[in] engine_name Engine name
-/// @param[in] user_data User data passed from the stt_setting_foreach_supported_engines()
-/// @return @c true to continue with the next iteration of the loop,
-/// otherwise @c false to break out of the loop
-/// @pre stt_foreach_supported_engines() will invoke this callback.
-/// @see stt_foreach_supported_engines()
+/// Called to get the engine information.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+///
+/// **Parameters:**
+/// - `stt` (in): The STT handle
+/// - `engine_id` (in): Engine ID
+/// - `engine_name` (in): Engine name
+/// - `user_data` (in): User data passed from the stt_setting_foreach_supported_engines()
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - stt_foreach_supported_engines() will invoke this callback.
+///
+/// **See also:**
+/// - `stt_foreach_supported_engines()`
+/// @nodoc
 typedef stt_supported_engine_cb
     = ffi.Pointer<ffi.NativeFunction<stt_supported_engine_cbFunction>>;
+/// @nodoc
 typedef stt_supported_engine_cbFunction = ffi.Bool Function(
     stt_h stt,
     ffi.Pointer<ffi.Char> engine_id,
     ffi.Pointer<ffi.Char> engine_name,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartstt_supported_engine_cbFunction = bool Function(
     stt_h stt,
     ffi.Pointer<ffi.Char> engine_id,
     ffi.Pointer<ffi.Char> engine_name,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called to retrieve the supported languages.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-/// @remarks The language is specified as an ISO 3166 alpha-2 two letter country-code followed by ISO 639-1 for the two-letter language code. For example, "ko_KR" for Korean, "en_US" for American English.
-/// @param[in] stt The STT handle
-/// @param[in] language The language
-/// @param[in] user_data The user data passed from the foreach function
-/// @return @c true to continue with the next iteration of the loop,
-/// @c false to break out of the loop
-/// @pre stt_foreach_supported_languages() will invoke this callback.
-/// @see stt_foreach_supported_languages()
+/// Called to retrieve the supported languages.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+///
+/// **Remarks:**
+/// - The language is specified as an ISO 3166 alpha-2 two letter country-code followed by ISO 639-1 for the two-letter language code. For example, "ko_KR" for Korean, "en_US" for American English.
+///
+/// **Parameters:**
+/// - `stt` (in): The STT handle
+/// - `language` (in): The language
+/// - `user_data` (in): The user data passed from the foreach function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - stt_foreach_supported_languages() will invoke this callback.
+///
+/// **See also:**
+/// - `stt_foreach_supported_languages()`
+/// @nodoc
 typedef stt_supported_language_cb
     = ffi.Pointer<ffi.NativeFunction<stt_supported_language_cbFunction>>;
+/// @nodoc
 typedef stt_supported_language_cbFunction = ffi.Bool Function(
     stt_h stt, ffi.Pointer<ffi.Char> language, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartstt_supported_language_cbFunction = bool Function(
     stt_h stt, ffi.Pointer<ffi.Char> language, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when STT get the result time stamp in free partial type.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-/// @param[in] stt The STT handle
-/// @param[in] index The result index
-/// @param[in] event The token event
-/// @param[in] text The result text
-/// @param[in] start_time The start time of result text
-/// @param[in] end_time The end time of result text
-/// @param[in] user_data The user data passed from the foreach function
-/// @return @c true to continue with the next iteration of the loop
-/// otherwise @c false to break out of the loop
-/// @pre stt_recognition_result_cb() should be called.
-/// @see stt_recognition_result_cb()
+/// Called when STT get the result time stamp in free partial type.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+///
+/// **Parameters:**
+/// - `stt` (in): The STT handle
+/// - `index` (in): The result index
+/// - `event` (in): The token event
+/// - `text` (in): The result text
+/// - `start_time` (in): The start time of result text
+/// - `end_time` (in): The end time of result text
+/// - `user_data` (in): The user data passed from the foreach function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop otherwise `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - stt_recognition_result_cb() should be called.
+///
+/// **See also:**
+/// - `stt_recognition_result_cb()`
+/// @nodoc
 typedef stt_result_time_cb
     = ffi.Pointer<ffi.NativeFunction<stt_result_time_cbFunction>>;
+/// @nodoc
 typedef stt_result_time_cbFunction = ffi.Bool Function(
     stt_h stt,
     ffi.Int index,
@@ -1452,6 +2054,7 @@ typedef stt_result_time_cbFunction = ffi.Bool Function(
     ffi.Long start_time,
     ffi.Long end_time,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartstt_result_time_cbFunction = bool Function(
     stt_h stt,
     int index,
@@ -1461,22 +2064,36 @@ typedef Dartstt_result_time_cbFunction = bool Function(
     int end_time,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when STT gets the recognition result from the engine.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-/// @remarks After stt_stop() is called, silence is detected from recording, or partial result is occurred, this function is called.
-/// @param[in] stt The STT handle
-/// @param[in] event The result event
-/// @param[in] data Result texts
-/// @param[in] data_count Result text count
-/// @param[in] msg Engine message (e.g. #STT_RESULT_MESSAGE_NONE, #STT_RESULT_MESSAGE_ERROR_TOO_SHORT)
-/// @param[in] user_data The user data passed from the callback registration function
-/// @pre stt_stop() will invoke this callback if you register it using stt_set_result_cb().
-/// @post If this function is called and event is #STT_RESULT_EVENT_FINAL_RESULT, the STT state will be #STT_STATE_READY.
-/// @see stt_stop()
-/// @see stt_set_recognition_result_cb()
-/// @see stt_unset_recognition_result_cb()
+/// Called when STT gets the recognition result from the engine.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+///
+/// **Remarks:**
+/// - After stt_stop() is called, silence is detected from recording, or partial result is occurred, this function is called.
+///
+/// **Parameters:**
+/// - `stt` (in): The STT handle
+/// - `event` (in): The result event
+/// - `data` (in): Result texts
+/// - `data_count` (in): Result text count
+/// - `msg` (in): Engine message (e.g. `STT_RESULT_MESSAGE_NONE`, `STT_RESULT_MESSAGE_ERROR_TOO_SHORT`)
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - stt_stop() will invoke this callback if you register it using stt_set_result_cb().
+///
+/// **Postconditions:**
+/// - If this function is called and event is `STT_RESULT_EVENT_FINAL_RESULT`, the STT state will be `STT_STATE_READY`.
+///
+/// **See also:**
+/// - `stt_stop()`
+/// - `stt_set_recognition_result_cb()`
+/// - `stt_unset_recognition_result_cb()`
+/// @nodoc
 typedef stt_recognition_result_cb
     = ffi.Pointer<ffi.NativeFunction<stt_recognition_result_cbFunction>>;
+/// @nodoc
 typedef stt_recognition_result_cbFunction = ffi.Void Function(
     stt_h stt,
     ffi.Int32 event,
@@ -1484,6 +2101,7 @@ typedef stt_recognition_result_cbFunction = ffi.Void Function(
     ffi.Int data_count,
     ffi.Pointer<ffi.Char> msg,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartstt_recognition_result_cbFunction = void Function(
     stt_h stt,
     int event,
@@ -1492,68 +2110,109 @@ typedef Dartstt_recognition_result_cbFunction = void Function(
     ffi.Pointer<ffi.Char> msg,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the state of STT is changed.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-/// @param[in] stt The STT handle
-/// @param[in] previous A previous state
-/// @param[in] current A current state
-/// @param[in] user_data The user data passed from the callback registration function
-/// @pre An application registers this callback using stt_set_state_changed_cb() to detect changing state.
-/// @see stt_set_state_changed_cb()
-/// @see stt_unset_state_changed_cb()
+/// Called when the state of STT is changed.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+///
+/// **Parameters:**
+/// - `stt` (in): The STT handle
+/// - `previous` (in): A previous state
+/// - `current` (in): A current state
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - An application registers this callback using stt_set_state_changed_cb() to detect changing state.
+///
+/// **See also:**
+/// - `stt_set_state_changed_cb()`
+/// - `stt_unset_state_changed_cb()`
+/// @nodoc
 typedef stt_state_changed_cb
     = ffi.Pointer<ffi.NativeFunction<stt_state_changed_cbFunction>>;
+/// @nodoc
 typedef stt_state_changed_cbFunction = ffi.Void Function(stt_h stt,
     ffi.Int32 previous, ffi.Int32 current, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartstt_state_changed_cbFunction = void Function(
     stt_h stt, int previous, int current, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when an error occurs.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-/// @param[in] stt The STT handle
-/// @param[in] reason The error type (e.g. #STT_ERROR_OUT_OF_NETWORK, #STT_ERROR_IO_ERROR)
-/// @param[in] user_data The user data passed from the callback registration function
-/// @pre An application registers this callback using stt_set_error_cb() to detect error.
-/// @see stt_set_error_cb()
-/// @see stt_unset_error_cb()
+/// Called when an error occurs.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+///
+/// **Parameters:**
+/// - `stt` (in): The STT handle
+/// - `reason` (in): The error type (e.g. `STT_ERROR_OUT_OF_NETWORK`, `STT_ERROR_IO_ERROR`)
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - An application registers this callback using stt_set_error_cb() to detect error.
+///
+/// **See also:**
+/// - `stt_set_error_cb()`
+/// - `stt_unset_error_cb()`
+/// @nodoc
 typedef stt_error_cb = ffi.Pointer<ffi.NativeFunction<stt_error_cbFunction>>;
+/// @nodoc
 typedef stt_error_cbFunction = ffi.Void Function(
     stt_h stt, ffi.Int32 reason, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartstt_error_cbFunction = void Function(
     stt_h stt, int reason, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the default language is changed.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-/// @param[in] stt The STT handle
-/// @param[in] previous_language A previous language
-/// @param[in] current_language A current language
-/// @param[in] user_data The user data passed from the callback registration function
-/// @see stt_set_default_language_changed_cb()
+/// Called when the default language is changed.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+///
+/// **Parameters:**
+/// - `stt` (in): The STT handle
+/// - `previous_language` (in): A previous language
+/// - `current_language` (in): A current language
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `stt_set_default_language_changed_cb()`
+/// @nodoc
 typedef stt_default_language_changed_cb
     = ffi.Pointer<ffi.NativeFunction<stt_default_language_changed_cbFunction>>;
+/// @nodoc
 typedef stt_default_language_changed_cbFunction = ffi.Void Function(
     stt_h stt,
     ffi.Pointer<ffi.Char> previous_language,
     ffi.Pointer<ffi.Char> current_language,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartstt_default_language_changed_cbFunction = void Function(
     stt_h stt,
     ffi.Pointer<ffi.Char> previous_language,
     ffi.Pointer<ffi.Char> current_language,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the engine is changed.
-/// @since_tizen @if MOBILE 3.0 @elseif WEARABLE 2.3.2 @endif
-/// @remarks The language is specified as an ISO 3166 alpha-2 two letter country-code followed by ISO 639-1 for the two-letter language code. For example, "ko_KR" for Korean, "en_US" for American English.
-/// @param[in] stt The STT handle
-/// @param[in] engine_id Engine ID
-/// @param[in] language The default language
-/// @param[in] support_silence Whether the silence detection is supported or not
-/// @param[in] need_credential The necessity of credential
-/// @param[in] user_data The user data passed from the callback registration function
-/// @see stt_set_engine_changed_cb()
+/// Called when the engine is changed.
+///
+/// **Since Tizen:**
+/// - Mobile 3.0; Wearable 2.3.2
+///
+/// **Remarks:**
+/// - The language is specified as an ISO 3166 alpha-2 two letter country-code followed by ISO 639-1 for the two-letter language code. For example, "ko_KR" for Korean, "en_US" for American English.
+///
+/// **Parameters:**
+/// - `stt` (in): The STT handle
+/// - `engine_id` (in): Engine ID
+/// - `language` (in): The default language
+/// - `support_silence` (in): Whether the silence detection is supported or not
+/// - `need_credential` (in): The necessity of credential
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `stt_set_engine_changed_cb()`
+/// @nodoc
 typedef stt_engine_changed_cb
     = ffi.Pointer<ffi.NativeFunction<stt_engine_changed_cbFunction>>;
+/// @nodoc
 typedef stt_engine_changed_cbFunction = ffi.Void Function(
     stt_h stt,
     ffi.Pointer<ffi.Char> engine_id,
@@ -1561,6 +2220,7 @@ typedef stt_engine_changed_cbFunction = ffi.Void Function(
     ffi.Bool support_silence,
     ffi.Bool need_credential,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartstt_engine_changed_cbFunction = void Function(
     stt_h stt,
     ffi.Pointer<ffi.Char> engine_id,
@@ -1569,47 +2229,68 @@ typedef Dartstt_engine_changed_cbFunction = void Function(
     bool need_credential,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when STT engine detects the beginning or end of the speech.
-/// @since_tizen 5.5
-/// @param[in] stt The STT handle
-/// @param[in] status The speech status
-/// @param[in] user_data The user data passed from the callback registration function
-/// @see stt_set_speech_status_cb()
+/// Called when STT engine detects the beginning or end of the speech.
+///
+/// **Since Tizen:**
+/// - 5.5
+///
+/// **Parameters:**
+/// - `stt` (in): The STT handle
+/// - `status` (in): The speech status
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `stt_set_speech_status_cb()`
+/// @nodoc
 typedef stt_speech_status_cb
     = ffi.Pointer<ffi.NativeFunction<stt_speech_status_cbFunction>>;
+/// @nodoc
 typedef stt_speech_status_cbFunction = ffi.Void Function(
     stt_h stt, ffi.Int32 status, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartstt_speech_status_cbFunction = void Function(
     stt_h stt, int status, ffi.Pointer<ffi.Void> user_data);
 
+/// @nodoc
 const String STT_RECOGNITION_TYPE_FREE = 'stt.recognition.type.FREE';
 
+/// @nodoc
 const String STT_RECOGNITION_TYPE_FREE_PARTIAL =
     'stt.recognition.type.FREE.PARTIAL';
 
+/// @nodoc
 const String STT_RECOGNITION_TYPE_SEARCH = 'stt.recognition.type.SEARCH';
 
+/// @nodoc
 const String STT_RECOGNITION_TYPE_WEB_SEARCH =
     'stt.recognition.type.WEB_SEARCH';
 
+/// @nodoc
 const String STT_RECOGNITION_TYPE_MAP = 'stt.recognition.type.MAP';
 
+/// @nodoc
 const String STT_RESULT_MESSAGE_NONE = 'stt.result.message.none';
 
+/// @nodoc
 const String STT_RESULT_MESSAGE_ERROR_TOO_SOON =
     'stt.result.message.error.too.soon';
 
+/// @nodoc
 const String STT_RESULT_MESSAGE_ERROR_TOO_SHORT =
     'stt.result.message.error.too.short';
 
+/// @nodoc
 const String STT_RESULT_MESSAGE_ERROR_TOO_LONG =
     'stt.result.message.error.too.long';
 
+/// @nodoc
 const String STT_RESULT_MESSAGE_ERROR_TOO_QUIET =
     'stt.result.message.error.too.quiet';
 
+/// @nodoc
 const String STT_RESULT_MESSAGE_ERROR_TOO_LOUD =
     'stt.result.message.error.too.loud';
 
+/// @nodoc
 const String STT_RESULT_MESSAGE_ERROR_TOO_FAST =
     'stt.result.message.error.too.fast';

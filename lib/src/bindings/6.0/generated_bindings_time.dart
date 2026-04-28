@@ -1,3 +1,6 @@
+/// {@category 6.0/tizen}
+library tizen_interop_6_0.time;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -10,6 +13,7 @@ import 'dart:ffi' as ffi;
 import 'dart:ffi' as ffi_lib;
 
 /// Dart bindings for Tizen time header.
+/// {@category 6.0/tizen}
 class Tizen60Time {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -683,6 +687,7 @@ class Tizen60Time {
       _futimesPtr.asFunction<int Function(int, ffi.Pointer<timeval>)>();
 }
 
+/// @nodoc
 final class sigevent extends ffi.Struct {
   external __sigval_t sigev_value;
 
@@ -695,8 +700,10 @@ final class sigevent extends ffi.Struct {
   external UnnamedUnion1 _sigev_un;
 }
 
+/// @nodoc
 typedef __sigval_t = sigval;
 
+/// @nodoc
 final class sigval extends ffi.Union {
   @ffi.Int()
   external int sival_int;
@@ -704,6 +711,7 @@ final class sigval extends ffi.Union {
   external ffi.Pointer<ffi.Void> sival_ptr;
 }
 
+/// @nodoc
 final class UnnamedUnion1 extends ffi.Union {
   @ffi.Array.multi([13])
   external ffi.Array<ffi.Int> _pad;
@@ -714,6 +722,7 @@ final class UnnamedUnion1 extends ffi.Union {
   external UnnamedStruct1 _sigev_thread;
 }
 
+/// @nodoc
 final class UnnamedStruct1 extends ffi.Struct {
   external ffi.Pointer<ffi.NativeFunction<ffi.Void Function(__sigval_t)>>
       _function;
@@ -721,6 +730,7 @@ final class UnnamedStruct1 extends ffi.Struct {
   external ffi.Pointer<pthread_attr_t> _attribute;
 }
 
+/// @nodoc
 final class pthread_attr_t extends ffi.Union {
   @ffi.Array.multi([36])
   external ffi.Array<ffi.Char> __size;
@@ -729,13 +739,20 @@ final class pthread_attr_t extends ffi.Union {
   external int __align;
 }
 
+/// @nodoc
 typedef clock_t = __clock_t;
+/// @nodoc
 typedef __clock_t = ffi.Long;
+/// @nodoc
 typedef Dart__clock_t = int;
+/// @nodoc
 typedef time_t = __time_t;
+/// @nodoc
 typedef __time_t = ffi.Long;
+/// @nodoc
 typedef Dart__time_t = int;
 
+/// @nodoc
 final class tm extends ffi.Struct {
   @ffi.Int()
   external int tm_sec;
@@ -770,9 +787,12 @@ final class tm extends ffi.Struct {
   external ffi.Pointer<ffi.Char> tm_zone;
 }
 
+/// @nodoc
 typedef locale_t = __locale_t;
+/// @nodoc
 typedef __locale_t = ffi.Pointer<__locale_struct>;
 
+/// @nodoc
 final class __locale_struct extends ffi.Struct {
   @ffi.Array.multi([13])
   external ffi.Array<ffi.Pointer<__locale_data>> __locales;
@@ -787,8 +807,10 @@ final class __locale_struct extends ffi.Struct {
   external ffi.Array<ffi.Pointer<ffi.Char>> __names;
 }
 
+/// @nodoc
 final class __locale_data extends ffi.Opaque {}
 
+/// @nodoc
 final class timespec extends ffi.Struct {
   @__time_t()
   external int tv_sec;
@@ -797,20 +819,29 @@ final class timespec extends ffi.Struct {
   external int tv_nsec;
 }
 
+/// @nodoc
 typedef __syscall_slong_t = ffi.Long;
+/// @nodoc
 typedef Dart__syscall_slong_t = int;
+/// @nodoc
 typedef clockid_t = __clockid_t;
+/// @nodoc
 typedef __clockid_t = ffi.Int;
+/// @nodoc
 typedef Dart__clockid_t = int;
+/// @nodoc
 typedef timer_t = __timer_t;
+/// @nodoc
 typedef __timer_t = ffi.Pointer<ffi.Void>;
 
+/// @nodoc
 final class itimerspec extends ffi.Struct {
   external timespec it_interval;
 
   external timespec it_value;
 }
 
+/// @nodoc
 final class timezone1 extends ffi.Struct {
   @ffi.Int()
   external int tz_minuteswest;
@@ -819,6 +850,7 @@ final class timezone1 extends ffi.Struct {
   external int tz_dsttime;
 }
 
+/// @nodoc
 final class timeval extends ffi.Struct {
   @__time_t()
   external int tv_sec;
@@ -827,61 +859,88 @@ final class timeval extends ffi.Struct {
   external int tv_usec;
 }
 
+/// @nodoc
 typedef __suseconds_t = ffi.Long;
+/// @nodoc
 typedef Dart__suseconds_t = int;
+/// @nodoc
 typedef __timezone_ptr_t = ffi.Pointer<timezone1>;
 
+/// @nodoc
 abstract class itimer_which {
   static const int ITIMER_REAL = 0;
   static const int ITIMER_VIRTUAL = 1;
   static const int ITIMER_PROF = 2;
 }
 
+/// @nodoc
 final class itimerval extends ffi.Struct {
   external timeval it_interval;
 
   external timeval it_value;
 }
 
+/// @nodoc
 typedef __itimer_which_t = ffi.Int;
+/// @nodoc
 typedef Dart__itimer_which_t = int;
 
+/// @nodoc
 const int _TIME_H = 1;
 
+/// @nodoc
 const int _BITS_TIME_H = 1;
 
+/// @nodoc
 const int CLOCKS_PER_SEC = 1000000;
 
+/// @nodoc
 const int CLOCK_REALTIME = 0;
 
+/// @nodoc
 const int CLOCK_MONOTONIC = 1;
 
+/// @nodoc
 const int CLOCK_PROCESS_CPUTIME_ID = 2;
 
+/// @nodoc
 const int CLOCK_THREAD_CPUTIME_ID = 3;
 
+/// @nodoc
 const int CLOCK_MONOTONIC_RAW = 4;
 
+/// @nodoc
 const int CLOCK_REALTIME_COARSE = 5;
 
+/// @nodoc
 const int CLOCK_MONOTONIC_COARSE = 6;
 
+/// @nodoc
 const int CLOCK_BOOTTIME = 7;
 
+/// @nodoc
 const int CLOCK_REALTIME_ALARM = 8;
 
+/// @nodoc
 const int CLOCK_BOOTTIME_ALARM = 9;
 
+/// @nodoc
 const int CLOCK_TAI = 11;
 
+/// @nodoc
 const int TIMER_ABSTIME = 1;
 
+/// @nodoc
 const int TIME_UTC = 1;
 
+/// @nodoc
 const int _SYS_TIME_H = 1;
 
+/// @nodoc
 const int ITIMER_REAL = 0;
 
+/// @nodoc
 const int ITIMER_VIRTUAL = 1;
 
+/// @nodoc
 const int ITIMER_PROF = 2;

@@ -1,3 +1,6 @@
+/// {@category 10.0/tizen}
+library tizen_interop_10_0.mmi;
+
 // Copyright 2026 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen mmi APIs.
+/// {@category 10.0/tizen}
 class Tizen100Mmi {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,29 +28,39 @@ class Tizen100Mmi {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Creates a primitive value handle for an integer.
-  /// @details This function creates a handle for an integer primitive value.
-  /// @since_tizen 9.0
-  /// @remarks The @a handle should be released using mmi_primitive_value_destroy().
+  /// Creates a primitive value handle for an integer.
   ///
-  /// @param[in] data The integer value to be stored in the handle.
-  /// @param[out] handle Pointer to the handle which will be populated with the newly created handle.
+  /// This function creates a handle for an integer primitive value.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MMI_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @par Example
-  /// @code
+  /// **Remarks:**
+  /// - The `handle` should be released using mmi_primitive_value_destroy().
+  ///
+  /// **Parameters:**
+  /// - `data` (in): The integer value to be stored in the handle.
+  /// - `handle` (out): Pointer to the handle which will be populated with the newly created handle.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MMI_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <mmi.h>
   /// ...
   /// mmi_primitive_value_h handle = NULL;
   /// mmi_primitive_value_create_int(3, &handle);
   /// ...
   /// mmi_primitive_value_destroy(handle);
-  /// @endcode
+  /// ```
   int mmi_primitive_value_create_int(
     int data,
     ffi.Pointer<mmi_primitive_value_h> handle,
@@ -65,29 +79,39 @@ class Tizen100Mmi {
       _mmi_primitive_value_create_intPtr
           .asFunction<int Function(int, ffi.Pointer<mmi_primitive_value_h>)>();
 
-  /// @brief Creates a primitive value handle for a floating-point number.
-  /// @details This function creates a handle for a floating-point primitive value.
-  /// @since_tizen 9.0
-  /// @remarks The @a handle should be released using mmi_primitive_value_destroy().
+  /// Creates a primitive value handle for a floating-point number.
   ///
-  /// @param[in] data The floating-point value to be stored in the handle.
-  /// @param[out] handle Pointer to the handle which will be populated with the newly created handle.
+  /// This function creates a handle for a floating-point primitive value.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MMI_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @par Example
-  /// @code
+  /// **Remarks:**
+  /// - The `handle` should be released using mmi_primitive_value_destroy().
+  ///
+  /// **Parameters:**
+  /// - `data` (in): The floating-point value to be stored in the handle.
+  /// - `handle` (out): Pointer to the handle which will be populated with the newly created handle.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MMI_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <mmi.h>
   /// ...
   /// mmi_primitive_value_h handle = NULL;
   /// mmi_primitive_value_create_float(3.14, &handle);
   /// ...
   /// mmi_primitive_value_destroy(handle);
-  /// @endcode
+  /// ```
   int mmi_primitive_value_create_float(
     double data,
     ffi.Pointer<mmi_primitive_value_h> handle,
@@ -106,29 +130,39 @@ class Tizen100Mmi {
       _mmi_primitive_value_create_floatPtr.asFunction<
           int Function(double, ffi.Pointer<mmi_primitive_value_h>)>();
 
-  /// @brief Creates a primitive value handle for a string.
-  /// @details This function creates a handle for a string primitive value.
-  /// @since_tizen 9.0
-  /// @remarks The @a handle should be released using mmi_primitive_value_destroy().
+  /// Creates a primitive value handle for a string.
   ///
-  /// @param[in] data The string value to be stored in the handle.
-  /// @param[out] handle Pointer to the handle which will be populated with the newly created handle.
+  /// This function creates a handle for a string primitive value.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MMI_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @par Example
-  /// @code
+  /// **Remarks:**
+  /// - The `handle` should be released using mmi_primitive_value_destroy().
+  ///
+  /// **Parameters:**
+  /// - `data` (in): The string value to be stored in the handle.
+  /// - `handle` (out): Pointer to the handle which will be populated with the newly created handle.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MMI_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <mmi.h>
   /// ...
   /// mmi_primitive_value_h handle = NULL;
   /// mmi_primitive_value_create_string("Test", &handle);
   /// ...
   /// mmi_primitive_value_destroy(handle);
-  /// @endcode
+  /// ```
   int mmi_primitive_value_create_string(
     ffi.Pointer<ffi.Char> data,
     ffi.Pointer<mmi_primitive_value_h> handle,
@@ -149,29 +183,39 @@ class Tizen100Mmi {
           int Function(
               ffi.Pointer<ffi.Char>, ffi.Pointer<mmi_primitive_value_h>)>();
 
-  /// @brief Creates a primitive value handle for a boolean.
-  /// @details This function creates a handle for a boolean primitive value.
-  /// @since_tizen 9.0
-  /// @remarks The @a handle should be released using mmi_primitive_value_destroy().
+  /// Creates a primitive value handle for a boolean.
   ///
-  /// @param[in] data The boolean value to be stored in the handle.
-  /// @param[out] handle Pointer to the handle which will be populated with the newly created handle.
+  /// This function creates a handle for a boolean primitive value.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MMI_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @par Example
-  /// @code
+  /// **Remarks:**
+  /// - The `handle` should be released using mmi_primitive_value_destroy().
+  ///
+  /// **Parameters:**
+  /// - `data` (in): The boolean value to be stored in the handle.
+  /// - `handle` (out): Pointer to the handle which will be populated with the newly created handle.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MMI_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <mmi.h>
   /// ...
   /// mmi_primitive_value_h handle = NULL;
   /// mmi_primitive_value_create_bool(true, &handle);
   /// ...
   /// mmi_primitive_value_destroy(handle);
-  /// @endcode
+  /// ```
   int mmi_primitive_value_create_bool(
     bool data,
     ffi.Pointer<mmi_primitive_value_h> handle,
@@ -190,28 +234,38 @@ class Tizen100Mmi {
       _mmi_primitive_value_create_boolPtr
           .asFunction<int Function(bool, ffi.Pointer<mmi_primitive_value_h>)>();
 
-  /// @brief Creates a primitive value handle for an array.
-  /// @details This function creates a handle for an array primitive value.
-  /// @since_tizen 9.0
-  /// @remarks The @a handle should be released using mmi_primitive_value_destroy().
+  /// Creates a primitive value handle for an array.
   ///
-  /// @param[out] handle Pointer to the handle which will be populated with the newly created handle.
+  /// This function creates a handle for an array primitive value.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MMI_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @par Example
-  /// @code
+  /// **Remarks:**
+  /// - The `handle` should be released using mmi_primitive_value_destroy().
+  ///
+  /// **Parameters:**
+  /// - `handle` (out): Pointer to the handle which will be populated with the newly created handle.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MMI_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <mmi.h>
   /// ...
   /// mmi_primitive_value_h handle = NULL;
   /// mmi_primitive_value_create_array(&handle);
   /// ...
   /// mmi_primitive_value_destroy(handle);
-  /// @endcode
+  /// ```
   int mmi_primitive_value_create_array(
     ffi.Pointer<mmi_primitive_value_h> handle,
   ) {
@@ -228,17 +282,24 @@ class Tizen100Mmi {
       _mmi_primitive_value_create_arrayPtr
           .asFunction<int Function(ffi.Pointer<mmi_primitive_value_h>)>();
 
-  /// @brief Adds an element to a primitive value array.
-  /// @details This function adds an element to a primitive value array.
-  /// @since_tizen 9.0
+  /// Adds an element to a primitive value array.
   ///
-  /// @param[in] array The handle of the array to which the element will be added.
-  /// @param[in] element The handle of the element to be added to the array.
+  /// This function adds an element to a primitive value array.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Parameters:**
+  /// - `array` (in): The handle of the array to which the element will be added.
+  /// - `element` (in): The handle of the element to be added to the array.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
   int mmi_primitive_value_add_array_element(
     mmi_primitive_value_h array,
     mmi_primitive_value_h element,
@@ -257,17 +318,24 @@ class Tizen100Mmi {
       _mmi_primitive_value_add_array_elementPtr.asFunction<
           int Function(mmi_primitive_value_h, mmi_primitive_value_h)>();
 
-  /// @brief Gets the type of the primitive value.
-  /// @details This function retrieves the type of the primitive value represented by the given handle.
-  /// @since_tizen 9.0
+  /// Gets the type of the primitive value.
   ///
-  /// @param[in] handle The handle to the primitive value.
-  /// @param[out] type A pointer to store the type of the primitive value.
+  /// This function retrieves the type of the primitive value represented by the given handle.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The handle to the primitive value.
+  /// - `type` (out): A pointer to store the type of the primitive value.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
   int mmi_primitive_value_get_type(
     mmi_primitive_value_h handle,
     ffi.Pointer<ffi.Int32> type,
@@ -286,17 +354,24 @@ class Tizen100Mmi {
       _mmi_primitive_value_get_typePtr.asFunction<
           int Function(mmi_primitive_value_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the integer value from the primitive value.
-  /// @details This function retrieves the integer value stored in the primitive value represented by the given handle.
-  /// @since_tizen 9.0
+  /// Gets the integer value from the primitive value.
   ///
-  /// @param[in] handle The handle to the primitive value.
-  /// @param[out] value A pointer to store the integer value.
+  /// This function retrieves the integer value stored in the primitive value represented by the given handle.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The handle to the primitive value.
+  /// - `value` (out): A pointer to store the integer value.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
   int mmi_primitive_value_get_int(
     mmi_primitive_value_h handle,
     ffi.Pointer<ffi.Int> value,
@@ -314,17 +389,24 @@ class Tizen100Mmi {
   late final _mmi_primitive_value_get_int = _mmi_primitive_value_get_intPtr
       .asFunction<int Function(mmi_primitive_value_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the floating-point value from the primitive value.
-  /// @details This function retrieves the floating-point value stored in the primitive value represented by the given handle.
-  /// @since_tizen 9.0
+  /// Gets the floating-point value from the primitive value.
   ///
-  /// @param[in] handle The handle to the primitive value.
-  /// @param[out] value A pointer to store the floating-point value.
+  /// This function retrieves the floating-point value stored in the primitive value represented by the given handle.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The handle to the primitive value.
+  /// - `value` (out): A pointer to store the floating-point value.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
   int mmi_primitive_value_get_float(
     mmi_primitive_value_h handle,
     ffi.Pointer<ffi.Float> value,
@@ -343,28 +425,38 @@ class Tizen100Mmi {
       _mmi_primitive_value_get_floatPtr.asFunction<
           int Function(mmi_primitive_value_h, ffi.Pointer<ffi.Float>)>();
 
-  /// @brief Gets the string value from the primitive value.
-  /// @details This function retrieves the string value stored in the primitive value represented by the given handle.
-  /// @since_tizen 9.0
-  /// @remarks The @a string should not be released.
-  /// The @a string is available until data is released.
+  /// Gets the string value from the primitive value.
   ///
-  /// @param[in] handle The handle to the primitive value.
-  /// @param[out] string A pointer to store the string value.
+  /// This function retrieves the string value stored in the primitive value represented by the given handle.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @par Example
-  /// @code
+  /// **Remarks:**
+  /// - The `string` should not be released.
+  /// - The `string` is available until data is released.
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The handle to the primitive value.
+  /// - `string` (out): A pointer to store the string value.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <mmi.h>
   /// ...
   /// mmi_primitive_value_h value; // Indicates the primitive value handle
   /// const char *string = NULL;
   /// mmi_primitive_value_get_string(value, &string);
-  /// @endcode
+  /// ```
   int mmi_primitive_value_get_string(
     mmi_primitive_value_h handle,
     ffi.Pointer<ffi.Pointer<ffi.Char>> string,
@@ -385,17 +477,24 @@ class Tizen100Mmi {
           int Function(
               mmi_primitive_value_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the boolean value from the primitive value.
-  /// @details This function retrieves the boolean value stored in the primitive value represented by the given handle.
-  /// @since_tizen 9.0
+  /// Gets the boolean value from the primitive value.
   ///
-  /// @param[in] handle The handle to the primitive value.
-  /// @param[out] value A pointer to store the boolean value.
+  /// This function retrieves the boolean value stored in the primitive value represented by the given handle.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The handle to the primitive value.
+  /// - `value` (out): A pointer to store the boolean value.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
   int mmi_primitive_value_get_bool(
     mmi_primitive_value_h handle,
     ffi.Pointer<ffi.Bool> value,
@@ -413,17 +512,24 @@ class Tizen100Mmi {
   late final _mmi_primitive_value_get_bool = _mmi_primitive_value_get_boolPtr
       .asFunction<int Function(mmi_primitive_value_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Gets the count of elements in the array.
-  /// @details This function retrieves the number of elements in the array represented by the given handle.
-  /// @since_tizen 9.0
+  /// Gets the count of elements in the array.
   ///
-  /// @param[in] array The handle to the array.
-  /// @param[out] count A pointer to store the number of elements in the array.
+  /// This function retrieves the number of elements in the array represented by the given handle.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Parameters:**
+  /// - `array` (in): The handle to the array.
+  /// - `count` (out): A pointer to store the number of elements in the array.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
   int mmi_primitive_value_get_array_count(
     mmi_primitive_value_h array,
     ffi.Pointer<ffi.Size> count,
@@ -442,30 +548,40 @@ class Tizen100Mmi {
       _mmi_primitive_value_get_array_countPtr.asFunction<
           int Function(mmi_primitive_value_h, ffi.Pointer<ffi.Size>)>();
 
-  /// @brief Gets the element at the specified index in the array.
-  /// @details This function retrieves the element at the specified index in the array represented by the given handle.
-  /// @since_tizen 9.0
-  /// @remarks The @a element should not be released.
-  /// The @a element is available until struct_handle is released.
+  /// Gets the element at the specified index in the array.
   ///
-  /// @param[in] array The handle to the array.
-  /// @param[in] index The index of the element to retrieve.
-  /// @param[out] element A pointer to store the handle of the retrieved element.
+  /// This function retrieves the element at the specified index in the array represented by the given handle.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @par Example
-  /// @code
+  /// **Remarks:**
+  /// - The `element` should not be released.
+  /// - The `element` is available until struct_handle is released.
+  ///
+  /// **Parameters:**
+  /// - `array` (in): The handle to the array.
+  /// - `index` (in): The index of the element to retrieve.
+  /// - `element` (out): A pointer to store the handle of the retrieved element.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <mmi.h>
   /// ...
   /// mmi_primitive_value_h value; // Indicates the handle of the primitive value
   /// mmi_primitive_value_h element = NULL;
   /// mmi_primitive_value_get_array_element(value, 1, &element);
   /// ...
-  /// @endcode
+  /// ```
   int mmi_primitive_value_get_array_element(
     mmi_primitive_value_h array,
     int index,
@@ -488,22 +604,32 @@ class Tizen100Mmi {
           int Function(mmi_primitive_value_h, int,
               ffi.Pointer<mmi_primitive_value_h>)>();
 
-  /// @brief Clones a primitive value handle.
-  /// @details This function creates a copy of the given primitive value handle.
-  /// @since_tizen 9.0
-  /// @remarks The @a cloned should be released using mmi_attribute_destroy().
+  /// Clones a primitive value handle.
   ///
-  /// @param[in] handle The handle of the primitive value to be cloned.
-  /// @param[out] cloned A pointer to store the cloned primitive value handle.
+  /// This function creates a copy of the given primitive value handle.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MMI_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @par Example
-  /// @code
+  /// **Remarks:**
+  /// - The `cloned` should be released using mmi_attribute_destroy().
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The handle of the primitive value to be cloned.
+  /// - `cloned` (out): A pointer to store the cloned primitive value handle.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MMI_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <mmi.h>
   /// ...
   /// mmi_primitive_value_h value; // Indicates the handle of the primitive value
@@ -511,7 +637,7 @@ class Tizen100Mmi {
   /// mmi_primitive_value_clone(value, &cloned);
   /// ...
   /// mmi_primitive_value_destroy(cloned);
-  /// @endcode
+  /// ```
   int mmi_primitive_value_clone(
     mmi_primitive_value_h handle,
     ffi.Pointer<mmi_primitive_value_h> cloned,
@@ -532,16 +658,23 @@ class Tizen100Mmi {
           int Function(
               mmi_primitive_value_h, ffi.Pointer<mmi_primitive_value_h>)>();
 
-  /// @brief Destroys a primitive value handle.
-  /// @details This function frees the resources associated with the given primitive value handle.
-  /// @since_tizen 9.0
+  /// Destroys a primitive value handle.
   ///
-  /// @param[in] handle The handle of the primitive value to be destroyed.
+  /// This function frees the resources associated with the given primitive value handle.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The handle of the primitive value to be destroyed.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
   int mmi_primitive_value_destroy(
     mmi_primitive_value_h handle,
   ) {
@@ -556,23 +689,33 @@ class Tizen100Mmi {
   late final _mmi_primitive_value_destroy = _mmi_primitive_value_destroyPtr
       .asFunction<int Function(mmi_primitive_value_h)>();
 
-  /// @brief Converts a primitive value handle to a byte array.
-  /// @details This function serializes the given primitive value handle into a byte array.
-  /// @since_tizen 9.0
-  /// @remarks The @a bytes should be released using free().
+  /// Converts a primitive value handle to a byte array.
   ///
-  /// @param[in] handle The handle of the primitive value to be converted.
-  /// @param[out] bytes A pointer to store the resulting byte array.
-  /// @param[out] size A pointer to store the size of the byte array.
+  /// This function serializes the given primitive value handle into a byte array.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MMI_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @par Example
-  /// @code
+  /// **Remarks:**
+  /// - The `bytes` should be released using free().
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The handle of the primitive value to be converted.
+  /// - `bytes` (out): A pointer to store the resulting byte array.
+  /// - `size` (out): A pointer to store the size of the byte array.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MMI_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <mmi.h>
   /// ...
   /// mmi_primitive_value_h value; // Indicates the handle of the primitive value
@@ -581,7 +724,7 @@ class Tizen100Mmi {
   /// mmi_primitive_value_to_bytes(value, &bytes, &size);
   /// ...
   /// free(bytes);
-  /// @endcode
+  /// ```
   int mmi_primitive_value_to_bytes(
     mmi_primitive_value_h handle,
     ffi.Pointer<ffi.Pointer<ffi.UnsignedChar>> bytes,
@@ -607,23 +750,33 @@ class Tizen100Mmi {
               ffi.Pointer<ffi.Pointer<ffi.UnsignedChar>>,
               ffi.Pointer<ffi.Size>)>();
 
-  /// @brief Creates a primitive value handle from a byte array.
-  /// @details This function deserializes a byte array into a primitive value handle.
-  /// @since_tizen 9.0
-  /// @remarks The @a handle should be released using mmi_primitive_value_destroy().
+  /// Creates a primitive value handle from a byte array.
   ///
-  /// @param[in] bytes The byte array containing the serialized primitive value.
-  /// @param[in] size The size of the byte array.
-  /// @param[out] handle A pointer to store the resulting primitive value handle.
+  /// This function deserializes a byte array into a primitive value handle.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MMI_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @par Example
-  /// @code
+  /// **Remarks:**
+  /// - The `handle` should be released using mmi_primitive_value_destroy().
+  ///
+  /// **Parameters:**
+  /// - `bytes` (in): The byte array containing the serialized primitive value.
+  /// - `size` (in): The size of the byte array.
+  /// - `handle` (out): A pointer to store the resulting primitive value handle.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MMI_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <mmi.h>
   /// ...
   /// unsigned char *bytes; // Indicates the byte array to be converted
@@ -632,7 +785,7 @@ class Tizen100Mmi {
   /// mmi_primitive_value_from_bytes(bytes, size, &value);
   /// ...
   /// mmi_primitive_value_destroy(data);
-  /// @endcode
+  /// ```
   int mmi_primitive_value_from_bytes(
     ffi.Pointer<ffi.UnsignedChar> bytes,
     int size,
@@ -655,23 +808,33 @@ class Tizen100Mmi {
           int Function(ffi.Pointer<ffi.UnsignedChar>, int,
               ffi.Pointer<mmi_primitive_value_h>)>();
 
-  /// @brief Creates a new MMI attribute with a given primitive value and name.
-  /// @details This function initializes a new MMI attribute with the provided primitive value and name.
-  /// @since_tizen 9.0
-  /// @remarks The @a attribute should be released using mmi_attribute_destroy().
+  /// Creates a new MMI attribute with a given primitive value and name.
   ///
-  /// @param[in] value The primitive value to set for the attribute.
-  /// @param[in] name The name to assign to the attribute.
-  /// @param[out] attribute A pointer to store the newly created attribute handle.
+  /// This function initializes a new MMI attribute with the provided primitive value and name.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MMI_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @par Example
-  /// @code
+  /// **Remarks:**
+  /// - The `attribute` should be released using mmi_attribute_destroy().
+  ///
+  /// **Parameters:**
+  /// - `value` (in): The primitive value to set for the attribute.
+  /// - `name` (in): The name to assign to the attribute.
+  /// - `attribute` (out): A pointer to store the newly created attribute handle.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MMI_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <mmi.h>
   /// ...
   /// mmi_primitive_value_h value; // Indicates the primitive value to be set in the attribute
@@ -679,7 +842,7 @@ class Tizen100Mmi {
   /// mmi_attribute_create(value, "Name", &attribute);
   /// ...
   /// mmi_attribute_destroy(attribute);
-  /// @endcode
+  /// ```
   int mmi_attribute_create(
     mmi_primitive_value_h value,
     ffi.Pointer<ffi.Char> name,
@@ -700,17 +863,24 @@ class Tizen100Mmi {
       int Function(mmi_primitive_value_h, ffi.Pointer<ffi.Char>,
           ffi.Pointer<mmi_attribute_h>)>();
 
-  /// @brief Sets the name of an MMI attribute.
-  /// @details This function updates the name of the specified MMI attribute.
-  /// @since_tizen 9.0
+  /// Sets the name of an MMI attribute.
   ///
-  /// @param[in] attribute The attribute handle whose name needs to be updated.
-  /// @param[in] name The new name to assign to the attribute.
+  /// This function updates the name of the specified MMI attribute.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Parameters:**
+  /// - `attribute` (in): The attribute handle whose name needs to be updated.
+  /// - `name` (in): The new name to assign to the attribute.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
   int mmi_attribute_set_name(
     mmi_attribute_h attribute,
     ffi.Pointer<ffi.Char> name,
@@ -728,22 +898,32 @@ class Tizen100Mmi {
   late final _mmi_attribute_set_name = _mmi_attribute_set_namePtr
       .asFunction<int Function(mmi_attribute_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Retrieves the name of an MMI attribute.
-  /// @details This function fetches the name associated with the specified MMI attribute.
-  /// @since_tizen 9.0
-  /// @remarks The @a name should be released using free().
+  /// Retrieves the name of an MMI attribute.
   ///
-  /// @param[in] attribute The attribute handle from which to retrieve the name.
-  /// @param[out] name A pointer to store the retrieved name.
+  /// This function fetches the name associated with the specified MMI attribute.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MMI_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @par Example
-  /// @code
+  /// **Remarks:**
+  /// - The `name` should be released using free().
+  ///
+  /// **Parameters:**
+  /// - `attribute` (in): The attribute handle from which to retrieve the name.
+  /// - `name` (out): A pointer to store the retrieved name.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MMI_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <mmi.h>
   /// ...
   /// mmi_attribute_h attribute; // Indicates the handle of the attribute
@@ -751,7 +931,7 @@ class Tizen100Mmi {
   /// mmi_attribute_get_name(attribute, &name):
   /// ...
   /// free(name);
-  /// @endcode
+  /// ```
   int mmi_attribute_get_name(
     mmi_attribute_h attribute,
     ffi.Pointer<ffi.Pointer<ffi.Char>> name,
@@ -769,21 +949,31 @@ class Tizen100Mmi {
   late final _mmi_attribute_get_name = _mmi_attribute_get_namePtr.asFunction<
       int Function(mmi_attribute_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Retrieves the primitive value of an MMI attribute.
-  /// @details This function fetches the primitive value stored in the specified MMI attribute.
-  /// @since_tizen 9.0
-  /// @remarks The @a value should be released using mmi_primitive_value_destroy().
+  /// Retrieves the primitive value of an MMI attribute.
   ///
-  /// @param[in] attribute The attribute handle from which to retrieve the value.
-  /// @param[out] value A pointer to store the retrieved primitive value handle.
+  /// This function fetches the primitive value stored in the specified MMI attribute.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @par Example
-  /// @code
+  /// **Remarks:**
+  /// - The `value` should be released using mmi_primitive_value_destroy().
+  ///
+  /// **Parameters:**
+  /// - `attribute` (in): The attribute handle from which to retrieve the value.
+  /// - `value` (out): A pointer to store the retrieved primitive value handle.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <mmi.h>
   /// ...
   /// mmi_attribute_h attribute; // Indicates the handle of the attribute
@@ -791,7 +981,7 @@ class Tizen100Mmi {
   /// mmi_attribute_get_value(attribute, &value);
   /// ...
   /// mmi_primitive_value_destroy(value);
-  /// @endcode
+  /// ```
   int mmi_attribute_get_value(
     mmi_attribute_h attribute,
     ffi.Pointer<mmi_primitive_value_h> value,
@@ -809,22 +999,32 @@ class Tizen100Mmi {
   late final _mmi_attribute_get_value = _mmi_attribute_get_valuePtr.asFunction<
       int Function(mmi_attribute_h, ffi.Pointer<mmi_primitive_value_h>)>();
 
-  /// @brief Clones an existing MMI attribute.
-  /// @details This function creates a deep copy of the specified MMI attribute.
-  /// @since_tizen 9.0
-  /// @remarks The @a cloned should be released using mmi_attribute_destroy().
+  /// Clones an existing MMI attribute.
   ///
-  /// @param[in] attribute The attribute handle to clone.
-  /// @param[out] cloned A pointer to store the handle of the cloned attribute.
+  /// This function creates a deep copy of the specified MMI attribute.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MMI_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @par Example
-  /// @code
+  /// **Remarks:**
+  /// - The `cloned` should be released using mmi_attribute_destroy().
+  ///
+  /// **Parameters:**
+  /// - `attribute` (in): The attribute handle to clone.
+  /// - `cloned` (out): A pointer to store the handle of the cloned attribute.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MMI_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <mmi.h>
   /// ...
   /// mmi_attribute_h attribute; // Indicates the handle of the attribute
@@ -832,7 +1032,7 @@ class Tizen100Mmi {
   /// mmi_attribute_clone(attribute, &cloned);
   /// ...
   /// mmi_attribute_destroy(cloned);
-  /// @endcode
+  /// ```
   int mmi_attribute_clone(
     mmi_attribute_h attribute,
     ffi.Pointer<mmi_attribute_h> cloned,
@@ -850,16 +1050,23 @@ class Tizen100Mmi {
   late final _mmi_attribute_clone = _mmi_attribute_clonePtr.asFunction<
       int Function(mmi_attribute_h, ffi.Pointer<mmi_attribute_h>)>();
 
-  /// @brief Destroys an MMI attribute.
-  /// @details This function releases all resources associated with the specified MMI attribute.
-  /// @since_tizen 9.0
+  /// Destroys an MMI attribute.
   ///
-  /// @param[in] attribute The attribute handle to destroy.
+  /// This function releases all resources associated with the specified MMI attribute.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Parameters:**
+  /// - `attribute` (in): The attribute handle to destroy.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
   int mmi_attribute_destroy(
     mmi_attribute_h attribute,
   ) {
@@ -874,23 +1081,33 @@ class Tizen100Mmi {
   late final _mmi_attribute_destroy =
       _mmi_attribute_destroyPtr.asFunction<int Function(mmi_attribute_h)>();
 
-  /// @brief Converts an MMI attribute to a byte array.
-  /// @details This function serializes the specified MMI attribute into a byte array.
-  /// @since_tizen 9.0
-  /// @remarks The @a bytes should be released using free().
+  /// Converts an MMI attribute to a byte array.
   ///
-  /// @param[in] attribute The attribute handle to serialize.
-  /// @param[out] bytes A pointer to store the serialized byte array.
-  /// @param[out] length A pointer to store the length of the serialized byte array.
+  /// This function serializes the specified MMI attribute into a byte array.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MMI_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @par Example
-  /// @code
+  /// **Remarks:**
+  /// - The `bytes` should be released using free().
+  ///
+  /// **Parameters:**
+  /// - `attribute` (in): The attribute handle to serialize.
+  /// - `bytes` (out): A pointer to store the serialized byte array.
+  /// - `length` (out): A pointer to store the length of the serialized byte array.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MMI_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <mmi.h>
   /// ...
   /// mmi_attribute_h attribute; // Indicates the handle of the attribute
@@ -899,7 +1116,7 @@ class Tizen100Mmi {
   /// mmi_attribute_to_bytes(attribute, &bytes, &size);
   /// ...
   /// free(bytes);
-  /// @endcode
+  /// ```
   int mmi_attribute_to_bytes(
     mmi_attribute_h attribute,
     ffi.Pointer<ffi.Pointer<ffi.UnsignedChar>> bytes,
@@ -922,23 +1139,33 @@ class Tizen100Mmi {
       int Function(mmi_attribute_h, ffi.Pointer<ffi.Pointer<ffi.UnsignedChar>>,
           ffi.Pointer<ffi.Size>)>();
 
-  /// @brief Reconstructs an MMI attribute from a byte array.
-  /// @details This function deserializes the specified byte array into an MMI attribute.
-  /// @since_tizen 9.0
-  /// @remarks The @a attribute should be released using mmi_attribute_destroy().
+  /// Reconstructs an MMI attribute from a byte array.
   ///
-  /// @param[in] bytes The byte array to deserialize.
-  /// @param[in] length The length of the byte array.
-  /// @param[out] attribute A pointer to store the reconstructed attribute handle.
+  /// This function deserializes the specified byte array into an MMI attribute.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MMI_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @par Example
-  /// @code
+  /// **Remarks:**
+  /// - The `attribute` should be released using mmi_attribute_destroy().
+  ///
+  /// **Parameters:**
+  /// - `bytes` (in): The byte array to deserialize.
+  /// - `length` (in): The length of the byte array.
+  /// - `attribute` (out): A pointer to store the reconstructed attribute handle.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MMI_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <mmi.h>
   /// ...
   /// unsigned char *bytes; // Indicates the byte array to be converted
@@ -947,7 +1174,7 @@ class Tizen100Mmi {
   /// mmi_attribute_from_bytes(bytes, size, &attribute);
   /// ...
   /// mmi_attribute_destroy(attribute);
-  /// @endcode
+  /// ```
   int mmi_attribute_from_bytes(
     ffi.Pointer<ffi.UnsignedChar> bytes,
     int length,
@@ -969,24 +1196,34 @@ class Tizen100Mmi {
           int Function(ffi.Pointer<ffi.UnsignedChar>, int,
               ffi.Pointer<mmi_attribute_h>)>();
 
-  /// @brief Creates a new MMI attribute containing a string array.
-  /// @details This function initializes a new MMI attribute with the provided string array and name.
-  /// @since_tizen 9.0
-  /// @remarks The @a attribute should be released using mmi_attribute_destroy().
+  /// Creates a new MMI attribute containing a string array.
   ///
-  /// @param[in] name The name to assign to the attribute.
-  /// @param[in] strings The array of strings to set for the attribute.
-  /// @param[in] count The number of strings in the array.
-  /// @param[out] attribute A pointer to store the newly created attribute handle.
+  /// This function initializes a new MMI attribute with the provided string array and name.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MMI_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @par Example
-  /// @code
+  /// **Remarks:**
+  /// - The `attribute` should be released using mmi_attribute_destroy().
+  ///
+  /// **Parameters:**
+  /// - `name` (in): The name to assign to the attribute.
+  /// - `strings` (in): The array of strings to set for the attribute.
+  /// - `count` (in): The number of strings in the array.
+  /// - `attribute` (out): A pointer to store the newly created attribute handle.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MMI_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <mmi.h>
   /// ...
   /// mmi_attribute_h attribute = NULL;
@@ -994,7 +1231,7 @@ class Tizen100Mmi {
   /// mmi_attribute_create_string_array("COMMANDS", commands, 2, &attribute);
   /// ...
   /// mmi_attribute_destroy(attribute);
-  /// @endcode
+  /// ```
   int mmi_attribute_create_string_array(
     ffi.Pointer<ffi.Char> name,
     ffi.Pointer<ffi.Pointer<ffi.Char>> strings,
@@ -1025,29 +1262,39 @@ class Tizen100Mmi {
               int,
               ffi.Pointer<mmi_attribute_h>)>();
 
-  /// @brief Creates a boolean data object.
-  /// @details This function creates a boolean data object with the specified value.
-  /// @since_tizen 9.0
-  /// @remarks The @a data should be released using mmi_data_destroy().
+  /// Creates a boolean data object.
   ///
-  /// @param[in] value The boolean value to set in the data object.
-  /// @param[out] data A pointer to store the handle of the created data object.
+  /// This function creates a boolean data object with the specified value.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MMI_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @par Example
-  /// @code
+  /// **Remarks:**
+  /// - The `data` should be released using mmi_data_destroy().
+  ///
+  /// **Parameters:**
+  /// - `value` (in): The boolean value to set in the data object.
+  /// - `data` (out): A pointer to store the handle of the created data object.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MMI_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <mmi.h>
   /// ...
   /// mmi_data_h data = NULL;
   /// mmi_data_create_bool(true, &data);
   /// ...
   /// mmi_data_destroy(data);
-  /// @endcode
+  /// ```
   int mmi_data_create_bool(
     bool value,
     ffi.Pointer<mmi_data_h> data,
@@ -1065,29 +1312,39 @@ class Tizen100Mmi {
   late final _mmi_data_create_bool = _mmi_data_create_boolPtr
       .asFunction<int Function(bool, ffi.Pointer<mmi_data_h>)>();
 
-  /// @brief Creates an integer data object.
-  /// @details This function creates an integer data object with the specified value.
-  /// @since_tizen 9.0
-  /// @remarks The @a data should be released using mmi_data_destroy().
+  /// Creates an integer data object.
   ///
-  /// @param[in] value The integer value to set in the data object.
-  /// @param[out] data A pointer to store the handle of the created data object.
+  /// This function creates an integer data object with the specified value.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MMI_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @par Example
-  /// @code
+  /// **Remarks:**
+  /// - The `data` should be released using mmi_data_destroy().
+  ///
+  /// **Parameters:**
+  /// - `value` (in): The integer value to set in the data object.
+  /// - `data` (out): A pointer to store the handle of the created data object.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MMI_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <mmi.h>
   /// ...
   /// mmi_data_h data = NULL;
   /// mmi_data_create_int(3, &data);
   /// ...
   /// mmi_data_destroy(data);
-  /// @endcode
+  /// ```
   int mmi_data_create_int(
     int value,
     ffi.Pointer<mmi_data_h> data,
@@ -1105,29 +1362,39 @@ class Tizen100Mmi {
   late final _mmi_data_create_int = _mmi_data_create_intPtr
       .asFunction<int Function(int, ffi.Pointer<mmi_data_h>)>();
 
-  /// @brief Creates a float data object.
-  /// @details This function creates a float data object with the specified value.
-  /// @since_tizen 9.0
-  /// @remarks The @a data should be released using mmi_data_destroy().
+  /// Creates a float data object.
   ///
-  /// @param[in] value The float value to set in the data object.
-  /// @param[out] data A pointer to store the handle of the created data object.
+  /// This function creates a float data object with the specified value.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MMI_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @par Example
-  /// @code
+  /// **Remarks:**
+  /// - The `data` should be released using mmi_data_destroy().
+  ///
+  /// **Parameters:**
+  /// - `value` (in): The float value to set in the data object.
+  /// - `data` (out): A pointer to store the handle of the created data object.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MMI_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <mmi.h>
   /// ...
   /// mmi_data_h data = NULL;
   /// mmi_data_create_float(3.14f, &data);
   /// ...
   /// mmi_data_destroy(data);
-  /// @endcode
+  /// ```
   int mmi_data_create_float(
     double value,
     ffi.Pointer<mmi_data_h> data,
@@ -1145,22 +1412,32 @@ class Tizen100Mmi {
   late final _mmi_data_create_float = _mmi_data_create_floatPtr
       .asFunction<int Function(double, ffi.Pointer<mmi_data_h>)>();
 
-  /// @brief Creates a text data object.
-  /// @details This function creates a text data object with the specified value.
-  /// @since_tizen 9.0
-  /// @remarks The @a data should be released using mmi_data_destroy().
+  /// Creates a text data object.
   ///
-  /// @param[in] value The text value to set in the data object.
-  /// @param[out] data A pointer to store the handle of the created data object.
+  /// This function creates a text data object with the specified value.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MMI_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @par Example
-  /// @code
+  /// **Remarks:**
+  /// - The `data` should be released using mmi_data_destroy().
+  ///
+  /// **Parameters:**
+  /// - `value` (in): The text value to set in the data object.
+  /// - `data` (out): A pointer to store the handle of the created data object.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MMI_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <mmi.h>
   /// ...
   /// const char *value; // Indicates the text to be set in the data object.
@@ -1168,7 +1445,7 @@ class Tizen100Mmi {
   /// mmi_data_create_text(value, &data);
   /// ...
   /// mmi_data_destroy(data);
-  /// @endcode
+  /// ```
   int mmi_data_create_text(
     ffi.Pointer<ffi.Char> value,
     ffi.Pointer<mmi_data_h> data,
@@ -1186,23 +1463,33 @@ class Tizen100Mmi {
   late final _mmi_data_create_text = _mmi_data_create_textPtr.asFunction<
       int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<mmi_data_h>)>();
 
-  /// @brief Creates an audio data object.
-  /// @details This function creates an audio data object with the specified buffer and length.
-  /// @since_tizen 9.0
-  /// @remarks The @a data should be released using mmi_data_destroy().
+  /// Creates an audio data object.
   ///
-  /// @param[in] ptr The pointer to the audio buffer.
-  /// @param[in] len The length of the audio buffer.
-  /// @param[out] data A pointer to store the handle of the created data object.
+  /// This function creates an audio data object with the specified buffer and length.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MMI_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @par Example
-  /// @code
+  /// **Remarks:**
+  /// - The `data` should be released using mmi_data_destroy().
+  ///
+  /// **Parameters:**
+  /// - `ptr` (in): The pointer to the audio buffer.
+  /// - `len` (in): The length of the audio buffer.
+  /// - `data` (out): A pointer to store the handle of the created data object.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MMI_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <mmi.h>
   /// ...
   /// const void *ptr; // Indicates the address of the data to be stored in the data object.
@@ -1211,7 +1498,7 @@ class Tizen100Mmi {
   /// mmi_data_create_audio(ptr, len, &data);
   /// ...
   /// mmi_data_destroy(data);
-  /// @endcode
+  /// ```
   int mmi_data_create_audio(
     ffi.Pointer<ffi.Void> ptr,
     int len,
@@ -1231,23 +1518,33 @@ class Tizen100Mmi {
   late final _mmi_data_create_audio = _mmi_data_create_audioPtr.asFunction<
       int Function(ffi.Pointer<ffi.Void>, int, ffi.Pointer<mmi_data_h>)>();
 
-  /// @brief Creates a video data object.
-  /// @details This function creates a video data object with the specified buffer and length.
-  /// @since_tizen 9.0
-  /// @remarks The @a data should be released using mmi_data_destroy().
+  /// Creates a video data object.
   ///
-  /// @param[in] ptr The pointer to the video buffer.
-  /// @param[in] len The length of the video buffer.
-  /// @param[out] data A pointer to store the handle of the created data object.
+  /// This function creates a video data object with the specified buffer and length.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MMI_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @par Example
-  /// @code
+  /// **Remarks:**
+  /// - The `data` should be released using mmi_data_destroy().
+  ///
+  /// **Parameters:**
+  /// - `ptr` (in): The pointer to the video buffer.
+  /// - `len` (in): The length of the video buffer.
+  /// - `data` (out): A pointer to store the handle of the created data object.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MMI_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <mmi.h>
   /// ...
   /// const void *ptr; // Indicates the address of the data to be stored in the data object.
@@ -1256,7 +1553,7 @@ class Tizen100Mmi {
   /// mmi_data_create_video(ptr, len, &data);
   /// ...
   /// mmi_data_destroy(data);
-  /// @endcode
+  /// ```
   int mmi_data_create_video(
     ffi.Pointer<ffi.Void> ptr,
     int len,
@@ -1276,23 +1573,33 @@ class Tizen100Mmi {
   late final _mmi_data_create_video = _mmi_data_create_videoPtr.asFunction<
       int Function(ffi.Pointer<ffi.Void>, int, ffi.Pointer<mmi_data_h>)>();
 
-  /// @brief Creates a user identification data object.
-  /// @details This function creates a user identification data object with the specified buffer and length.
-  /// @since_tizen 9.0
-  /// @remarks The @a data should be released using mmi_data_destroy().
+  /// Creates a user identification data object.
   ///
-  /// @param[in] ptr The pointer to the user identification buffer.
-  /// @param[in] len The length of the user identification buffer.
-  /// @param[out] data A pointer to store the handle of the created data object.
+  /// This function creates a user identification data object with the specified buffer and length.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MMI_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @par Example
-  /// @code
+  /// **Remarks:**
+  /// - The `data` should be released using mmi_data_destroy().
+  ///
+  /// **Parameters:**
+  /// - `ptr` (in): The pointer to the user identification buffer.
+  /// - `len` (in): The length of the user identification buffer.
+  /// - `data` (out): A pointer to store the handle of the created data object.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MMI_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <mmi.h>
   /// ...
   /// const void *ptr; // Indicates the address of the data to be stored in the data object.
@@ -1301,7 +1608,7 @@ class Tizen100Mmi {
   /// mmi_data_create_user_identification(ptr, len, &data);
   /// ...
   /// mmi_data_destroy(data);
-  /// @endcode
+  /// ```
   int mmi_data_create_user_identification(
     ffi.Pointer<ffi.Void> ptr,
     int len,
@@ -1322,30 +1629,40 @@ class Tizen100Mmi {
       _mmi_data_create_user_identificationPtr.asFunction<
           int Function(ffi.Pointer<ffi.Void>, int, ffi.Pointer<mmi_data_h>)>();
 
-  /// @brief Creates a coordinate data object.
-  /// @details This function creates a coordinate data object with the specified x and y values.
-  /// @since_tizen 9.0
-  /// @remarks The @a data should be released using mmi_data_destroy().
+  /// Creates a coordinate data object.
   ///
-  /// @param[in] x The x-coordinate value.
-  /// @param[in] y The y-coordinate value.
-  /// @param[out] data A pointer to store the handle of the created data object.
+  /// This function creates a coordinate data object with the specified x and y values.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MMI_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @par Example
-  /// @code
+  /// **Remarks:**
+  /// - The `data` should be released using mmi_data_destroy().
+  ///
+  /// **Parameters:**
+  /// - `x` (in): The x-coordinate value.
+  /// - `y` (in): The y-coordinate value.
+  /// - `data` (out): A pointer to store the handle of the created data object.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MMI_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <mmi.h>
   /// ...
   /// mmi_data_h data = NULL;
   /// mmi_data_create_coordinate(0, 0, &data);
   /// ...
   /// mmi_data_destroy(data);
-  /// @endcode
+  /// ```
   int mmi_data_create_coordinate(
     int x,
     int y,
@@ -1365,32 +1682,42 @@ class Tizen100Mmi {
   late final _mmi_data_create_coordinate = _mmi_data_create_coordinatePtr
       .asFunction<int Function(int, int, ffi.Pointer<mmi_data_h>)>();
 
-  /// @brief Creates a bounding box data object.
-  /// @details This function creates a bounding box data object with the specified x, y, width, and height values.
-  /// @since_tizen 9.0
-  /// @remarks The @a data should be released using mmi_data_destroy().
+  /// Creates a bounding box data object.
   ///
-  /// @param[in] x The x-coordinate value.
-  /// @param[in] y The y-coordinate value.
-  /// @param[in] w The width value.
-  /// @param[in] h The height value.
-  /// @param[out] data A pointer to store the handle of the created data object.
+  /// This function creates a bounding box data object with the specified x, y, width, and height values.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MMI_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @par Example
-  /// @code
+  /// **Remarks:**
+  /// - The `data` should be released using mmi_data_destroy().
+  ///
+  /// **Parameters:**
+  /// - `x` (in): The x-coordinate value.
+  /// - `y` (in): The y-coordinate value.
+  /// - `w` (in): The width value.
+  /// - `h` (in): The height value.
+  /// - `data` (out): A pointer to store the handle of the created data object.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MMI_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <mmi.h>
   /// ...
   /// mmi_data_h data = NULL;
   /// mmi_data_create_bounding_box(0, 0, 10, 10, &data);
   /// ...
   /// mmi_data_destroy(data);
-  /// @endcode
+  /// ```
   int mmi_data_create_bounding_box(
     int x,
     int y,
@@ -1414,28 +1741,38 @@ class Tizen100Mmi {
   late final _mmi_data_create_bounding_box = _mmi_data_create_bounding_boxPtr
       .asFunction<int Function(int, int, int, int, ffi.Pointer<mmi_data_h>)>();
 
-  /// @brief Creates a new data array handle.
-  /// @details This function allocates memory for a new data array handle and initializes it.
-  /// @since_tizen 9.0
-  /// @remarks The @a array_handle should be released using mmi_data_destroy().
+  /// Creates a new data array handle.
   ///
-  /// @param[out] array_handle A pointer to the newly created data array handle.
+  /// This function allocates memory for a new data array handle and initializes it.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MMI_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @par Example
-  /// @code
+  /// **Remarks:**
+  /// - The `array_handle` should be released using mmi_data_destroy().
+  ///
+  /// **Parameters:**
+  /// - `array_handle` (out): A pointer to the newly created data array handle.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MMI_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <mmi.h>
   /// ...
   /// mmi_data_h array_handle = NULL;
   /// mmi_data_create_array(&array_handle);
   /// ...
   /// mmi_data_destroy(array_handle);
-  /// @endcode
+  /// ```
   int mmi_data_create_array(
     ffi.Pointer<mmi_data_h> array_handle,
   ) {
@@ -1450,18 +1787,25 @@ class Tizen100Mmi {
   late final _mmi_data_create_array = _mmi_data_create_arrayPtr
       .asFunction<int Function(ffi.Pointer<mmi_data_h>)>();
 
-  /// @brief Adds an element to a data array.
-  /// @details This function adds a new element to the specified data array.
-  /// @since_tizen 9.0
+  /// Adds an element to a data array.
   ///
-  /// @param[in] array_handle The handle to the data array where the element will be added.
-  /// @param[in] element The handle to the element to be added to the array.
+  /// This function adds a new element to the specified data array.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MMI_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Parameters:**
+  /// - `array_handle` (in): The handle to the data array where the element will be added.
+  /// - `element` (in): The handle to the element to be added to the array.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MMI_ERROR_OUT_OF_MEMORY`: Out of memory
   int mmi_data_add_array_element(
     mmi_data_h array_handle,
     mmi_data_h element,
@@ -1478,28 +1822,38 @@ class Tizen100Mmi {
   late final _mmi_data_add_array_element = _mmi_data_add_array_elementPtr
       .asFunction<int Function(mmi_data_h, mmi_data_h)>();
 
-  /// @brief Creates a new data structure handle.
-  /// @details This function allocates memory for a new data structure handle and initializes it.
-  /// @since_tizen 9.0
-  /// @remarks The @a struct_handle should be released using mmi_data_destroy().
+  /// Creates a new data structure handle.
   ///
-  /// @param[out] struct_handle A pointer to the newly created data structure handle.
+  /// This function allocates memory for a new data structure handle and initializes it.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MMI_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @par Example
-  /// @code
+  /// **Remarks:**
+  /// - The `struct_handle` should be released using mmi_data_destroy().
+  ///
+  /// **Parameters:**
+  /// - `struct_handle` (out): A pointer to the newly created data structure handle.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MMI_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <mmi.h>
   /// ...
   /// mmi_data_h struct_handle = NULL;
   /// mmi_data_create_struct(&struct_handle);
   /// ...
   /// mmi_data_destroy(struct_handle);
-  /// @endcode
+  /// ```
   int mmi_data_create_struct(
     ffi.Pointer<mmi_data_h> struct_handle,
   ) {
@@ -1514,19 +1868,26 @@ class Tizen100Mmi {
   late final _mmi_data_create_struct = _mmi_data_create_structPtr
       .asFunction<int Function(ffi.Pointer<mmi_data_h>)>();
 
-  /// @brief Sets an element in a data structure.
-  /// @details This function sets the value of an element in the specified data structure.
-  /// @since_tizen 9.0
+  /// Sets an element in a data structure.
   ///
-  /// @param[in] struct_handle The handle to the data structure where the element will be set.
-  /// @param[in] name The name of the element to be set.
-  /// @param[in] element The handle to the element to be set in the structure.
+  /// This function sets the value of an element in the specified data structure.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MMI_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Parameters:**
+  /// - `struct_handle` (in): The handle to the data structure where the element will be set.
+  /// - `name` (in): The name of the element to be set.
+  /// - `element` (in): The handle to the element to be set in the structure.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MMI_ERROR_OUT_OF_MEMORY`: Out of memory
   int mmi_data_set_struct_element(
     mmi_data_h struct_handle,
     ffi.Pointer<ffi.Char> name,
@@ -1547,17 +1908,24 @@ class Tizen100Mmi {
       _mmi_data_set_struct_elementPtr.asFunction<
           int Function(mmi_data_h, ffi.Pointer<ffi.Char>, mmi_data_h)>();
 
-  /// @brief Retrieves the type of a data handle.
-  /// @details This function retrieves the type of the specified data handle.
-  /// @since_tizen 9.0
+  /// Retrieves the type of a data handle.
   ///
-  /// @param[in] data The handle to the data whose type is to be retrieved.
-  /// @param[out] type A pointer to the variable where the type will be stored.
+  /// This function retrieves the type of the specified data handle.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Parameters:**
+  /// - `data` (in): The handle to the data whose type is to be retrieved.
+  /// - `type` (out): A pointer to the variable where the type will be stored.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
   int mmi_data_get_type(
     mmi_data_h data,
     ffi.Pointer<ffi.Int32> type,
@@ -1575,17 +1943,24 @@ class Tizen100Mmi {
   late final _mmi_data_get_type = _mmi_data_get_typePtr
       .asFunction<int Function(mmi_data_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Retrieves the boolean value from a data handle.
-  /// @details This function retrieves the boolean value stored in the specified data handle.
-  /// @since_tizen 9.0
+  /// Retrieves the boolean value from a data handle.
   ///
-  /// @param[in] data The handle to the data from which the boolean value will be retrieved.
-  /// @param[out] value A pointer to the variable where the boolean value will be stored.
+  /// This function retrieves the boolean value stored in the specified data handle.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Parameters:**
+  /// - `data` (in): The handle to the data from which the boolean value will be retrieved.
+  /// - `value` (out): A pointer to the variable where the boolean value will be stored.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
   int mmi_data_get_bool(
     mmi_data_h data,
     ffi.Pointer<ffi.Bool> value,
@@ -1603,17 +1978,24 @@ class Tizen100Mmi {
   late final _mmi_data_get_bool = _mmi_data_get_boolPtr
       .asFunction<int Function(mmi_data_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Retrieves the integer value from a data handle.
-  /// @details This function retrieves the integer value stored in the specified data handle.
-  /// @since_tizen 9.0
+  /// Retrieves the integer value from a data handle.
   ///
-  /// @param[in] data The handle to the data from which the integer value will be retrieved.
-  /// @param[out] value A pointer to the variable where the integer value will be stored.
+  /// This function retrieves the integer value stored in the specified data handle.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Parameters:**
+  /// - `data` (in): The handle to the data from which the integer value will be retrieved.
+  /// - `value` (out): A pointer to the variable where the integer value will be stored.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
   int mmi_data_get_int(
     mmi_data_h data,
     ffi.Pointer<ffi.Int> value,
@@ -1631,17 +2013,24 @@ class Tizen100Mmi {
   late final _mmi_data_get_int = _mmi_data_get_intPtr
       .asFunction<int Function(mmi_data_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Retrieves the floating-point value from a data handle.
-  /// @details This function retrieves the floating-point value stored in the specified data handle.
-  /// @since_tizen 9.0
+  /// Retrieves the floating-point value from a data handle.
   ///
-  /// @param[in] data The handle to the data from which the floating-point value will be retrieved.
-  /// @param[out] value A pointer to the variable where the floating-point value will be stored.
+  /// This function retrieves the floating-point value stored in the specified data handle.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Parameters:**
+  /// - `data` (in): The handle to the data from which the floating-point value will be retrieved.
+  /// - `value` (out): A pointer to the variable where the floating-point value will be stored.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
   int mmi_data_get_float(
     mmi_data_h data,
     ffi.Pointer<ffi.Float> value,
@@ -1659,28 +2048,38 @@ class Tizen100Mmi {
   late final _mmi_data_get_float = _mmi_data_get_floatPtr
       .asFunction<int Function(mmi_data_h, ffi.Pointer<ffi.Float>)>();
 
-  /// @brief Retrieves the text string from a data handle.
-  /// @details This function retrieves the text string stored in the specified data handle.
-  /// @since_tizen 9.0
-  /// @remarks The @a text should not be released.
-  /// The @a text is available until data is released.
+  /// Retrieves the text string from a data handle.
   ///
-  /// @param[in] data The handle to the data from which the text string will be retrieved.
-  /// @param[out] text A pointer to the variable where the text string will be stored.
+  /// This function retrieves the text string stored in the specified data handle.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @par Example
-  /// @code
+  /// **Remarks:**
+  /// - The `text` should not be released.
+  /// - The `text` is available until data is released.
+  ///
+  /// **Parameters:**
+  /// - `data` (in): The handle to the data from which the text string will be retrieved.
+  /// - `text` (out): A pointer to the variable where the text string will be stored.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <mmi.h>
   /// ...
   /// mmi_data_h data; // Indicates the data handle
   /// const char *text = NULL;
   /// mmi_data_get_text(data, &text);
-  /// @endcode
+  /// ```
   int mmi_data_get_text(
     mmi_data_h data,
     ffi.Pointer<ffi.Pointer<ffi.Char>> text,
@@ -1698,30 +2097,40 @@ class Tizen100Mmi {
   late final _mmi_data_get_text = _mmi_data_get_textPtr.asFunction<
       int Function(mmi_data_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Retrieves the audio data from a data handle.
-  /// @details This function retrieves the audio data stored in the specified data handle.
-  /// @since_tizen 9.0
-  /// @remarks The @a ptr should not be released.
-  /// The @a ptr is available until data is released.
+  /// Retrieves the audio data from a data handle.
   ///
-  /// @param[in] data The handle to the data from which the audio data will be retrieved.
-  /// @param[out] ptr A pointer to the variable where the audio data will be stored.
-  /// @param[out] len A pointer to the variable where the length of the audio data will be stored.
+  /// This function retrieves the audio data stored in the specified data handle.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @par Example
-  /// @code
+  /// **Remarks:**
+  /// - The `ptr` should not be released.
+  /// - The `ptr` is available until data is released.
+  ///
+  /// **Parameters:**
+  /// - `data` (in): The handle to the data from which the audio data will be retrieved.
+  /// - `ptr` (out): A pointer to the variable where the audio data will be stored.
+  /// - `len` (out): A pointer to the variable where the length of the audio data will be stored.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <mmi.h>
   /// ...
   /// mmi_data_h data; // Indicates the data handle
   /// const void *ptr = NULL;
   /// size_t len = 0;
   /// mmi_data_get_audio(data, &ptr, &len);
-  /// @endcode
+  /// ```
   int mmi_data_get_audio(
     mmi_data_h data,
     ffi.Pointer<ffi.Pointer<ffi.Void>> ptr,
@@ -1742,30 +2151,40 @@ class Tizen100Mmi {
       int Function(mmi_data_h, ffi.Pointer<ffi.Pointer<ffi.Void>>,
           ffi.Pointer<ffi.Size>)>();
 
-  /// @brief Retrieves the video data from a data handle.
-  /// @details This function retrieves the video data stored in the specified data handle.
-  /// @since_tizen 9.0
-  /// @remarks The @a ptr should not be released.
-  /// The @a ptr is available until data is released.
+  /// Retrieves the video data from a data handle.
   ///
-  /// @param[in] data The handle to the data from which the video data will be retrieved.
-  /// @param[out] ptr A pointer to the variable where the video data will be stored.
-  /// @param[out] len A pointer to the variable where the length of the video data will be stored.
+  /// This function retrieves the video data stored in the specified data handle.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @par Example
-  /// @code
+  /// **Remarks:**
+  /// - The `ptr` should not be released.
+  /// - The `ptr` is available until data is released.
+  ///
+  /// **Parameters:**
+  /// - `data` (in): The handle to the data from which the video data will be retrieved.
+  /// - `ptr` (out): A pointer to the variable where the video data will be stored.
+  /// - `len` (out): A pointer to the variable where the length of the video data will be stored.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <mmi.h>
   /// ...
   /// mmi_data_h data; // Indicates the data handle
   /// const void *ptr = NULL;
   /// size_t len = 0;
   /// mmi_data_get_video(data, &ptr, &len);
-  /// @endcode
+  /// ```
   int mmi_data_get_video(
     mmi_data_h data,
     ffi.Pointer<ffi.Pointer<ffi.Void>> ptr,
@@ -1786,30 +2205,40 @@ class Tizen100Mmi {
       int Function(mmi_data_h, ffi.Pointer<ffi.Pointer<ffi.Void>>,
           ffi.Pointer<ffi.Size>)>();
 
-  /// @brief Retrieves the user identification data from a data handle.
-  /// @details This function retrieves the user identification data stored in the specified data handle.
-  /// @since_tizen 9.0
-  /// @remarks The @a ptr should not be released.
-  /// The @a ptr is available until data is released.
+  /// Retrieves the user identification data from a data handle.
   ///
-  /// @param[in] data The handle to the data from which the user identification data will be retrieved.
-  /// @param[out] ptr A pointer to the variable where the user identification data will be stored.
-  /// @param[out] len A pointer to the variable where the length of the user identification data will be stored.
+  /// This function retrieves the user identification data stored in the specified data handle.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @par Example
-  /// @code
+  /// **Remarks:**
+  /// - The `ptr` should not be released.
+  /// - The `ptr` is available until data is released.
+  ///
+  /// **Parameters:**
+  /// - `data` (in): The handle to the data from which the user identification data will be retrieved.
+  /// - `ptr` (out): A pointer to the variable where the user identification data will be stored.
+  /// - `len` (out): A pointer to the variable where the length of the user identification data will be stored.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <mmi.h>
   /// ...
   /// mmi_data_h data; // Indicates the data handle
   /// const void *ptr = NULL;
   /// size_t len = 0;
   /// mmi_data_get_user_identification(data, &ptr, &len);
-  /// @endcode
+  /// ```
   int mmi_data_get_user_identification(
     mmi_data_h data,
     ffi.Pointer<ffi.Pointer<ffi.Void>> ptr,
@@ -1831,18 +2260,25 @@ class Tizen100Mmi {
           int Function(mmi_data_h, ffi.Pointer<ffi.Pointer<ffi.Void>>,
               ffi.Pointer<ffi.Size>)>();
 
-  /// @brief Retrieves the coordinate data from a data handle.
-  /// @details This function retrieves the coordinate data stored in the specified data handle.
-  /// @since_tizen 9.0
+  /// Retrieves the coordinate data from a data handle.
   ///
-  /// @param[in] data The handle to the data from which the coordinate data will be retrieved.
-  /// @param[out] x A pointer to the variable where the x-coordinate value will be stored.
-  /// @param[out] y A pointer to the variable where the y-coordinate value will be stored.
+  /// This function retrieves the coordinate data stored in the specified data handle.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Parameters:**
+  /// - `data` (in): The handle to the data from which the coordinate data will be retrieved.
+  /// - `x` (out): A pointer to the variable where the x-coordinate value will be stored.
+  /// - `y` (out): A pointer to the variable where the y-coordinate value will be stored.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
   int mmi_data_get_coordinate(
     mmi_data_h data,
     ffi.Pointer<ffi.Int> x,
@@ -1862,22 +2298,28 @@ class Tizen100Mmi {
   late final _mmi_data_get_coordinate = _mmi_data_get_coordinatePtr.asFunction<
       int Function(mmi_data_h, ffi.Pointer<ffi.Int>, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Retrieves the bounding box of the given data.
-  /// @details This function retrieves the bounding box coordinates (x, y, width, height) of the specified data.
+  /// Retrieves the bounding box of the given data.
   ///
-  /// @since_tizen 9.0
+  /// This function retrieves the bounding box coordinates (x, y, width, height) of the specified data.
   ///
-  /// @param[in] data The handle to the data object.
-  /// @param[out] x Pointer to an integer where the x-coordinate will be stored.
-  /// @param[out] y Pointer to an integer where the y-coordinate will be stored.
-  /// @param[out] w Pointer to an integer where the width will be stored.
-  /// @param[out] h Pointer to an integer where the height will be stored.
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MMI_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Parameters:**
+  /// - `data` (in): The handle to the data object.
+  /// - `x` (out): Pointer to an integer where the x-coordinate will be stored.
+  /// - `y` (out): Pointer to an integer where the y-coordinate will be stored.
+  /// - `w` (out): Pointer to an integer where the width will be stored.
+  /// - `h` (out): Pointer to an integer where the height will be stored.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MMI_ERROR_OUT_OF_MEMORY`: Out of memory
   int mmi_data_get_bounding_box(
     mmi_data_h data,
     ffi.Pointer<ffi.Int> x,
@@ -1907,19 +2349,25 @@ class Tizen100Mmi {
           int Function(mmi_data_h, ffi.Pointer<ffi.Int>, ffi.Pointer<ffi.Int>,
               ffi.Pointer<ffi.Int>, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the number of elements in the array.
-  /// @details This function retrieves the total count of elements present in the specified array.
+  /// Gets the number of elements in the array.
   ///
-  /// @since_tizen 9.0
+  /// This function retrieves the total count of elements present in the specified array.
   ///
-  /// @param[in] array The handle to the array object.
-  /// @param[out] count Pointer to a size_t where the element count will be stored.
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MMI_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Parameters:**
+  /// - `array` (in): The handle to the array object.
+  /// - `count` (out): Pointer to a size_t where the element count will be stored.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MMI_ERROR_OUT_OF_MEMORY`: Out of memory
   int mmi_data_get_array_count(
     mmi_data_h array,
     ffi.Pointer<ffi.Size> count,
@@ -1937,31 +2385,41 @@ class Tizen100Mmi {
   late final _mmi_data_get_array_count = _mmi_data_get_array_countPtr
       .asFunction<int Function(mmi_data_h, ffi.Pointer<ffi.Size>)>();
 
-  /// @brief Retrieves an element from the array at the specified index.
-  /// @details This function retrieves a handle to the element located at the specified index in the array.
-  /// @since_tizen 9.0
-  /// @remarks The @a element should not be released.
-  /// The @a element is available until struct_handle is released.
+  /// Retrieves an element from the array at the specified index.
   ///
-  /// @param[in] array The handle to the array object.
-  /// @param[in] index The index of the element to retrieve.
-  /// @param[out] element Pointer to a #mmi_data_h where the element handle will be stored.
+  /// This function retrieves a handle to the element located at the specified index in the array.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MMI_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @par Example
-  /// @code
+  /// **Remarks:**
+  /// - The `element` should not be released.
+  /// - The `element` is available until struct_handle is released.
+  ///
+  /// **Parameters:**
+  /// - `array` (in): The handle to the array object.
+  /// - `index` (in): The index of the element to retrieve.
+  /// - `element` (out): Pointer to a `mmi_data_h` where the element handle will be stored.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MMI_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <mmi.h>
   /// ...
   /// mmi_data_h data; // Indicates the handle of the data
   /// mmi_data_h element = NULL;
   /// mmi_data_get_array_element(data, 1, &element);
   /// ...
-  /// @endcode
+  /// ```
   int mmi_data_get_array_element(
     mmi_data_h array,
     int index,
@@ -1981,31 +2439,41 @@ class Tizen100Mmi {
   late final _mmi_data_get_array_element = _mmi_data_get_array_elementPtr
       .asFunction<int Function(mmi_data_h, int, ffi.Pointer<mmi_data_h>)>();
 
-  /// @brief Retrieves an element from the structure by its name.
-  /// @details This function retrieves a handle to the element in the structure identified by the specified name.
-  /// @since_tizen 9.0
-  /// @remarks The @a element should not be released.
-  /// The @a element is available until struct_handle is released.
+  /// Retrieves an element from the structure by its name.
   ///
-  /// @param[in] struct_handle The handle to the structure object.
-  /// @param[in] name The name of the element to retrieve.
-  /// @param[out] element Pointer to a #mmi_data_h where the element handle will be stored.
+  /// This function retrieves a handle to the element in the structure identified by the specified name.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MMI_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @par Example
-  /// @code
+  /// **Remarks:**
+  /// - The `element` should not be released.
+  /// - The `element` is available until struct_handle is released.
+  ///
+  /// **Parameters:**
+  /// - `struct_handle` (in): The handle to the structure object.
+  /// - `name` (in): The name of the element to retrieve.
+  /// - `element` (out): Pointer to a `mmi_data_h` where the element handle will be stored.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MMI_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <mmi.h>
   /// ...
   /// mmi_data_h data; // Indicates the handle of the data
   /// mmi_data_h element = NULL;
   /// mmi_data_get_struct_element(data, "element_1", &element);
   /// ...
-  /// @endcode
+  /// ```
   int mmi_data_get_struct_element(
     mmi_data_h struct_handle,
     ffi.Pointer<ffi.Char> name,
@@ -2027,19 +2495,25 @@ class Tizen100Mmi {
           int Function(
               mmi_data_h, ffi.Pointer<ffi.Char>, ffi.Pointer<mmi_data_h>)>();
 
-  /// @brief Gets the number of elements in the structure.
-  /// @details This function retrieves the total count of elements present in the specified structure.
+  /// Gets the number of elements in the structure.
   ///
-  /// @since_tizen 9.0
+  /// This function retrieves the total count of elements present in the specified structure.
   ///
-  /// @param[in] struct_handle The handle to the structure object.
-  /// @param[out] count Pointer to a size_t where the element count will be stored.
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MMI_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Parameters:**
+  /// - `struct_handle` (in): The handle to the structure object.
+  /// - `count` (out): Pointer to a size_t where the element count will be stored.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MMI_ERROR_OUT_OF_MEMORY`: Out of memory
   int mmi_data_get_struct_count(
     mmi_data_h struct_handle,
     ffi.Pointer<ffi.Size> count,
@@ -2057,31 +2531,41 @@ class Tizen100Mmi {
   late final _mmi_data_get_struct_count = _mmi_data_get_struct_countPtr
       .asFunction<int Function(mmi_data_h, ffi.Pointer<ffi.Size>)>();
 
-  /// @brief Retrieves the name of the element at the specified index in the structure.
-  /// @details This function retrieves the name of the element located at the specified index in the structure.
-  /// @since_tizen 9.0
-  /// @remarks The @a name should not be released.
-  /// The @a name is available until struct_handle is released.
+  /// Retrieves the name of the element at the specified index in the structure.
   ///
-  /// @param[in] struct_handle The handle to the structure object.
-  /// @param[in] index The index of the element whose name is to be retrieved.
-  /// @param[out] name Pointer to a const char pointer where the name will be stored.
+  /// This function retrieves the name of the element located at the specified index in the structure.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MMI_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @par Example
-  /// @code
+  /// **Remarks:**
+  /// - The `name` should not be released.
+  /// - The `name` is available until struct_handle is released.
+  ///
+  /// **Parameters:**
+  /// - `struct_handle` (in): The handle to the structure object.
+  /// - `index` (in): The index of the element whose name is to be retrieved.
+  /// - `name` (out): Pointer to a const char pointer where the name will be stored.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MMI_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <mmi.h>
   /// ...
   /// mmi_data_h data; // Indicates the handle of the data structure
   /// char *name = NULL;
   /// mmi_data_get_struct_element_name(data, 1, &name):
   /// ...
-  /// @endcode
+  /// ```
   int mmi_data_get_struct_element_name(
     mmi_data_h struct_handle,
     int index,
@@ -2103,31 +2587,41 @@ class Tizen100Mmi {
       _mmi_data_get_struct_element_namePtr.asFunction<
           int Function(mmi_data_h, int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Retrieves the of the element at the specified index in the structure.
-  /// @details This function retrieves a handle to the value of the element located at the specified index in the structure.
-  /// @since_tizen 9.0
-  /// @remarks The @a element should not be released.
-  /// The @a element is available until struct_handle is released.
+  /// Retrieves the of the element at the specified index in the structure.
   ///
-  /// @param[in] struct_handle The handle to the structure object.
-  /// @param[in] index The index of the element whose value is to be retrieved.
-  /// @param[out] element Pointer to a #mmi_data_h where the element handle will be stored.
+  /// This function retrieves a handle to the value of the element located at the specified index in the structure.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MMI_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @par Example
-  /// @code
+  /// **Remarks:**
+  /// - The `element` should not be released.
+  /// - The `element` is available until struct_handle is released.
+  ///
+  /// **Parameters:**
+  /// - `struct_handle` (in): The handle to the structure object.
+  /// - `index` (in): The index of the element whose value is to be retrieved.
+  /// - `element` (out): Pointer to a `mmi_data_h` where the element handle will be stored.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MMI_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <mmi.h>
   /// ...
   /// mmi_data_h data; // Indicates the handle of the data structure
   /// mmi_data_h element = NULL;
   /// mmi_data_get_struct_element_value(data, 1, &element);
   /// ...
-  /// @endcode
+  /// ```
   int mmi_data_get_struct_element_value(
     mmi_data_h struct_handle,
     int index,
@@ -2148,23 +2642,33 @@ class Tizen100Mmi {
       _mmi_data_get_struct_element_valuePtr
           .asFunction<int Function(mmi_data_h, int, ffi.Pointer<mmi_data_h>)>();
 
-  /// @brief Converts the MMI data handle to a byte array.
-  /// @details This function converts the given MMI data handle into a byte array representation.
-  /// @since_tizen 9.0
-  /// @remarks The @a bytes should be released using free().
+  /// Converts the MMI data handle to a byte array.
   ///
-  /// @param[in] data The handle to the MMI data.
-  /// @param[out] bytes A pointer to store the resulting byte array.
-  /// @param[out] length A pointer to store the length of the byte array.
+  /// This function converts the given MMI data handle into a byte array representation.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MMI_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @par Example
-  /// @code
+  /// **Remarks:**
+  /// - The `bytes` should be released using free().
+  ///
+  /// **Parameters:**
+  /// - `data` (in): The handle to the MMI data.
+  /// - `bytes` (out): A pointer to store the resulting byte array.
+  /// - `length` (out): A pointer to store the length of the byte array.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MMI_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <mmi.h>
   /// ...
   /// mmi_data_h data; // Indicates the handle of the data
@@ -2173,7 +2677,7 @@ class Tizen100Mmi {
   /// mmi_data_to_bytes(data, &bytes, &size);
   /// ...
   /// free(bytes);
-  /// @endcode
+  /// ```
   int mmi_data_to_bytes(
     mmi_data_h data,
     ffi.Pointer<ffi.Pointer<ffi.UnsignedChar>> bytes,
@@ -2196,23 +2700,33 @@ class Tizen100Mmi {
       int Function(mmi_data_h, ffi.Pointer<ffi.Pointer<ffi.UnsignedChar>>,
           ffi.Pointer<ffi.Size>)>();
 
-  /// @brief Creates an MMI data handle from a byte array.
-  /// @details This function creates an MMI data handle from the provided byte array.
-  /// @since_tizen 9.0
-  /// @remarks The @a data should be released using mmi_data_destroy().
+  /// Creates an MMI data handle from a byte array.
   ///
-  /// @param[in] bytes The byte array containing the data.
-  /// @param[in] length The length of the byte array.
-  /// @param[out] data A pointer to store the resulting MMI data handle.
+  /// This function creates an MMI data handle from the provided byte array.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MMI_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @par Example
-  /// @code
+  /// **Remarks:**
+  /// - The `data` should be released using mmi_data_destroy().
+  ///
+  /// **Parameters:**
+  /// - `bytes` (in): The byte array containing the data.
+  /// - `length` (in): The length of the byte array.
+  /// - `data` (out): A pointer to store the resulting MMI data handle.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MMI_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <mmi.h>
   /// ...
   /// unsigned char *bytes; // Indicates the byte array to be converted
@@ -2221,7 +2735,7 @@ class Tizen100Mmi {
   /// mmi_data_from_bytes(bytes, size, &data);
   /// ...
   /// mmi_data_destroy(data);
-  /// @endcode
+  /// ```
   int mmi_data_from_bytes(
     ffi.Pointer<ffi.UnsignedChar> bytes,
     int length,
@@ -2242,16 +2756,23 @@ class Tizen100Mmi {
       int Function(
           ffi.Pointer<ffi.UnsignedChar>, int, ffi.Pointer<mmi_data_h>)>();
 
-  /// @brief Destroys the given MMI data handle.
-  /// @details This function destroys the specified MMI data handle and releases associated resources.
-  /// @since_tizen 9.0
+  /// Destroys the given MMI data handle.
   ///
-  /// @param[in] data The handle to the MMI data.
+  /// This function destroys the specified MMI data handle and releases associated resources.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Parameters:**
+  /// - `data` (in): The handle to the MMI data.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
   int mmi_data_destroy(
     mmi_data_h data,
   ) {
@@ -2266,30 +2787,41 @@ class Tizen100Mmi {
   late final _mmi_data_destroy =
       _mmi_data_destroyPtr.asFunction<int Function(mmi_data_h)>();
 
-  /// @brief Creates a new port.
-  /// @details This function creates a new port and initializes its resources.
-  /// @since_tizen 9.0
-  /// @remarks The @a port should be released using mmi_port_destroy().
+  /// Creates a new port.
   ///
-  /// @param[out] port A pointer to the newly created port handle.
+  /// This function creates a new port and initializes its resources.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MMI_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @par Example
-  /// @code
+  /// **Remarks:**
+  /// - The `port` should be released using mmi_port_destroy().
+  ///
+  /// **Parameters:**
+  /// - `port` (out): A pointer to the newly created port handle.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MMI_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `mmi_port_destroy()`
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <mmi.h>
   /// ...
   /// mmi_port_h port = NULL;
   /// mmi_port_create(&port);
   /// ...
   /// mmi_port_destroy(port);
-  /// @endcode
-  ///
-  /// @see mmi_port_destroy()
+  /// ```
   int mmi_port_create(
     ffi.Pointer<mmi_port_h> port,
   ) {
@@ -2304,25 +2836,41 @@ class Tizen100Mmi {
   late final _mmi_port_create =
       _mmi_port_createPtr.asFunction<int Function(ffi.Pointer<mmi_port_h>)>();
 
-  /// @brief Gets the name of a port.
-  /// @details This function retrieves the name associated with the specified port.
-  /// @since_tizen 9.0
-  /// @remarks The @a name should be released using free().
+  /// Gets the name of a port.
   ///
-  /// @param[in] port The port handle.
-  /// @param[out] name A pointer to the buffer where the name will be stored.
-  /// @param[out] length A pointer to the variable that will receive the length of the name.
+  /// This function retrieves the name associated with the specified port.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @pre The port handle must be valid and initialized.
-  /// @post The caller is responsible for freeing the allocated memory for the name.
+  /// **Remarks:**
+  /// - The `name` should be released using free().
   ///
-  /// @par Example
-  /// @code
+  /// **Parameters:**
+  /// - `port` (in): The port handle.
+  /// - `name` (out): A pointer to the buffer where the name will be stored.
+  /// - `length` (out): A pointer to the variable that will receive the length of the name.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - The port handle must be valid and initialized.
+  ///
+  /// **Postconditions:**
+  /// - The caller is responsible for freeing the allocated memory for the name.
+  ///
+  /// **See also:**
+  /// - `mmi_port_set_name()`
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <mmi.h>
   /// ...
   /// mmi_port_h port; // Indicates the handle of the port
@@ -2331,9 +2879,7 @@ class Tizen100Mmi {
   /// mmi_port_get_name(port, &name, &length);
   /// ...
   /// free(name);
-  /// @endcode
-  ///
-  /// @see mmi_port_set_name()
+  /// ```
   int mmi_port_get_name(
     mmi_port_h port,
     ffi.Pointer<ffi.Pointer<ffi.Char>> name,
@@ -2354,22 +2900,31 @@ class Tizen100Mmi {
       int Function(mmi_port_h, ffi.Pointer<ffi.Pointer<ffi.Char>>,
           ffi.Pointer<ffi.Size>)>();
 
-  /// @brief Gets the type of a port.
-  /// @details This function retrieves the type associated with the specified port.
-  /// @since_tizen 9.0
+  /// Gets the type of a port.
   ///
-  /// @param[in] port The port handle.
-  /// @param[out] type A pointer to the variable that will receive the type of the port.
+  /// This function retrieves the type associated with the specified port.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @pre The port handle must be valid and initialized.
+  /// **Parameters:**
+  /// - `port` (in): The port handle.
+  /// - `type` (out): A pointer to the variable that will receive the type of the port.
   ///
-  /// @see mmi_port_set_type()
-  /// @see mmi_port_type_e
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - The port handle must be valid and initialized.
+  ///
+  /// **See also:**
+  /// - `mmi_port_set_type()`
+  /// - `mmi_port_type_e`
   int mmi_port_get_type(
     mmi_port_h port,
     ffi.Pointer<ffi.Int32> type,
@@ -2387,22 +2942,31 @@ class Tizen100Mmi {
   late final _mmi_port_get_type = _mmi_port_get_typePtr
       .asFunction<int Function(mmi_port_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the data type of a port.
-  /// @details This function retrieves the data type associated with the specified port.
-  /// @since_tizen 9.0
+  /// Gets the data type of a port.
   ///
-  /// @param[in] port The port handle.
-  /// @param[out] data_type A pointer to the variable that will receive the data type of the port.
+  /// This function retrieves the data type associated with the specified port.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @pre The port handle must be valid and initialized.
+  /// **Parameters:**
+  /// - `port` (in): The port handle.
+  /// - `data_type` (out): A pointer to the variable that will receive the data type of the port.
   ///
-  /// @see mmi_port_set_data_type()
-  /// @see mmi_data_type_e
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - The port handle must be valid and initialized.
+  ///
+  /// **See also:**
+  /// - `mmi_port_set_data_type()`
+  /// - `mmi_data_type_e`
   int mmi_port_get_data_type(
     mmi_port_h port,
     ffi.Pointer<ffi.Int32> data_type,
@@ -2420,21 +2984,30 @@ class Tizen100Mmi {
   late final _mmi_port_get_data_type = _mmi_port_get_data_typePtr
       .asFunction<int Function(mmi_port_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Sets the name of a port.
-  /// @details This function sets the name for the specified port.
-  /// @since_tizen 9.0
+  /// Sets the name of a port.
   ///
-  /// @param[in] port The port handle.
-  /// @param[in] name The new name to be set for the port.
+  /// This function sets the name for the specified port.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @pre The port handle must be valid and initialized.
+  /// **Parameters:**
+  /// - `port` (in): The port handle.
+  /// - `name` (in): The new name to be set for the port.
   ///
-  /// @see mmi_port_get_name()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - The port handle must be valid and initialized.
+  ///
+  /// **See also:**
+  /// - `mmi_port_get_name()`
   int mmi_port_set_name(
     mmi_port_h port,
     ffi.Pointer<ffi.Char> name,
@@ -2452,22 +3025,31 @@ class Tizen100Mmi {
   late final _mmi_port_set_name = _mmi_port_set_namePtr
       .asFunction<int Function(mmi_port_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets the type of a port.
-  /// @details This function sets the type for the specified port.
-  /// @since_tizen 9.0
+  /// Sets the type of a port.
   ///
-  /// @param[in] port The port handle.
-  /// @param[in] type The new type to be set for the port.
+  /// This function sets the type for the specified port.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @pre The port handle must be valid and initialized.
+  /// **Parameters:**
+  /// - `port` (in): The port handle.
+  /// - `type` (in): The new type to be set for the port.
   ///
-  /// @see mmi_port_get_type()
-  /// @see mmi_port_type_e
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - The port handle must be valid and initialized.
+  ///
+  /// **See also:**
+  /// - `mmi_port_get_type()`
+  /// - `mmi_port_type_e`
   int mmi_port_set_type(
     mmi_port_h port,
     int type,
@@ -2484,22 +3066,31 @@ class Tizen100Mmi {
   late final _mmi_port_set_type =
       _mmi_port_set_typePtr.asFunction<int Function(mmi_port_h, int)>();
 
-  /// @brief Sets the data type of a port.
-  /// @details This function sets the data type for the specified port.
-  /// @since_tizen 9.0
+  /// Sets the data type of a port.
   ///
-  /// @param[in] port The port handle.
-  /// @param[in] data_type The new data type to be set for the port.
+  /// This function sets the data type for the specified port.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @pre The port handle must be valid and initialized.
+  /// **Parameters:**
+  /// - `port` (in): The port handle.
+  /// - `data_type` (in): The new data type to be set for the port.
   ///
-  /// @see mmi_port_get_data_type()
-  /// @see mmi_data_type_e
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - The port handle must be valid and initialized.
+  ///
+  /// **See also:**
+  /// - `mmi_port_get_data_type()`
+  /// - `mmi_data_type_e`
   int mmi_port_set_data_type(
     mmi_port_h port,
     int data_type,
@@ -2516,18 +3107,25 @@ class Tizen100Mmi {
   late final _mmi_port_set_data_type =
       _mmi_port_set_data_typePtr.asFunction<int Function(mmi_port_h, int)>();
 
-  /// @brief Sets the input data received callback function.
-  /// @details This function sets the callback function that will be invoked when input data is received on the specified port.
-  /// @since_tizen 9.0
+  /// Sets the input data received callback function.
   ///
-  /// @param[in] port The handle of the MMI port.
-  /// @param[in] callback The callback function to set.
-  /// @param[in] user_data The user data to be passed to the callback function.
+  /// This function sets the callback function that will be invoked when input data is received on the specified port.
   ///
-  /// @return @c 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful.
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter.
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Parameters:**
+  /// - `port` (in): The handle of the MMI port.
+  /// - `callback` (in): The callback function to set.
+  /// - `user_data` (in): The user data to be passed to the callback function.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful.
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter.
   int mmi_port_set_input_data_received_cb(
     mmi_port_h port,
     mmi_port_input_data_received_cb callback,
@@ -2549,25 +3147,42 @@ class Tizen100Mmi {
           int Function(mmi_port_h, mmi_port_input_data_received_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Clones a port.
-  /// @details This function creates a copy of the specified port.
-  /// @since_tizen 9.0
-  /// @remarks The @a cloned should be released using mmi_port_destroy().
+  /// Clones a port.
   ///
-  /// @param[in] port The port handle to be cloned.
-  /// @param[out] cloned A pointer to the newly created cloned port handle.
+  /// This function creates a copy of the specified port.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MMI_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @pre The port handle must be valid and initialized.
-  /// @post The cloned port handle must be destroyed using mmi_port_destroy() after use.
+  /// **Remarks:**
+  /// - The `cloned` should be released using mmi_port_destroy().
   ///
-  /// @par Example
-  /// @code
+  /// **Parameters:**
+  /// - `port` (in): The port handle to be cloned.
+  /// - `cloned` (out): A pointer to the newly created cloned port handle.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MMI_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - The port handle must be valid and initialized.
+  ///
+  /// **Postconditions:**
+  /// - The cloned port handle must be destroyed using mmi_port_destroy() after use.
+  ///
+  /// **See also:**
+  /// - `mmi_port_create()`
+  /// - `mmi_port_destroy()`
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <mmi.h>
   /// ...
   /// mmi_port_h port; // Indicates the handle of the port
@@ -2575,10 +3190,7 @@ class Tizen100Mmi {
   /// mmi_port_clone(port, &cloned);
   /// ...
   /// mmi_port_destroy(cloned);
-  /// @endcode
-  ///
-  /// @see mmi_port_create()
-  /// @see mmi_port_destroy()
+  /// ```
   int mmi_port_clone(
     mmi_port_h port,
     ffi.Pointer<mmi_port_h> cloned,
@@ -2596,17 +3208,24 @@ class Tizen100Mmi {
   late final _mmi_port_clone = _mmi_port_clonePtr
       .asFunction<int Function(mmi_port_h, ffi.Pointer<mmi_port_h>)>();
 
-  /// @brief Destroys a port.
-  /// @details This function destroys the specified port, releasing all associated resources.
-  /// @since_tizen 9.0
+  /// Destroys a port.
   ///
-  /// @param[in] port The handle of the port to be destroyed.
+  /// This function destroys the specified port, releasing all associated resources.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MMI_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Parameters:**
+  /// - `port` (in): The handle of the port to be destroyed.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MMI_ERROR_OUT_OF_MEMORY`: Out of memory
   int mmi_port_destroy(
     mmi_port_h port,
   ) {
@@ -2621,18 +3240,25 @@ class Tizen100Mmi {
   late final _mmi_port_destroy =
       _mmi_port_destroyPtr.asFunction<int Function(mmi_port_h)>();
 
-  /// @brief Generates data to the port with the given port instance.
-  /// @details This function generates data to the specified port using the provided port instance and data handle.
-  /// @since_tizen 9.0
+  /// Generates data to the port with the given port instance.
   ///
-  /// @param[in] instance The handle of the port instance.
-  /// @param[in] data The handle of the data to be generated.
+  /// This function generates data to the specified port using the provided port instance and data handle.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MMI_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Parameters:**
+  /// - `instance` (in): The handle of the port instance.
+  /// - `data` (in): The handle of the data to be generated.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MMI_ERROR_OUT_OF_MEMORY`: Out of memory
   int mmi_port_instance_generate_output(
     mmi_port_instance_h instance,
     mmi_data_h data,
@@ -2651,23 +3277,33 @@ class Tizen100Mmi {
       _mmi_port_instance_generate_outputPtr
           .asFunction<int Function(mmi_port_instance_h, mmi_data_h)>();
 
-  /// @brief Creates a new signal parameter.
-  /// @details This function creates a new signal parameter with the given primitive value and name.
-  /// @since_tizen 9.0
-  /// @remarks The @a parameter should be released using mmi_signal_parameter_destroy().
+  /// Creates a new signal parameter.
   ///
-  /// @param[in] value The primitive value to associate with the parameter.
-  /// @param[in] name The name of the parameter.
-  /// @param[out] parameter A pointer to store the newly created parameter handle.
+  /// This function creates a new signal parameter with the given primitive value and name.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MMI_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @par Example
-  /// @code
+  /// **Remarks:**
+  /// - The `parameter` should be released using mmi_signal_parameter_destroy().
+  ///
+  /// **Parameters:**
+  /// - `value` (in): The primitive value to associate with the parameter.
+  /// - `name` (in): The name of the parameter.
+  /// - `parameter` (out): A pointer to store the newly created parameter handle.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MMI_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <mmi.h>
   /// ...
   /// mmi_primitive_value_h value; // Indicates the primitive value to be set in the signal_parameter
@@ -2675,7 +3311,7 @@ class Tizen100Mmi {
   /// mmi_signal_parameter_create(value, "Name", &parameter);
   /// ...
   /// mmi_signal_parameter_destroy(parameter);
-  /// @endcode
+  /// ```
   int mmi_signal_parameter_create(
     mmi_primitive_value_h value,
     ffi.Pointer<ffi.Char> name,
@@ -2698,22 +3334,32 @@ class Tizen100Mmi {
           int Function(mmi_primitive_value_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<mmi_signal_parameter_h>)>();
 
-  /// @brief Retrieves the name of a signal parameter.
-  /// @details This function retrieves the name associated with the given signal parameter.
-  /// @since_tizen 9.0
-  /// @remarks The @a name should be released using free().
+  /// Retrieves the name of a signal parameter.
   ///
-  /// @param[in] parameter The signal parameter handle.
-  /// @param[out] name A pointer to store the name of the parameter.
+  /// This function retrieves the name associated with the given signal parameter.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MMI_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @par Example
-  /// @code
+  /// **Remarks:**
+  /// - The `name` should be released using free().
+  ///
+  /// **Parameters:**
+  /// - `parameter` (in): The signal parameter handle.
+  /// - `name` (out): A pointer to store the name of the parameter.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MMI_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <mmi.h>
   /// ...
   /// mmi_signal_parameter_h parameter; // Indicates the handle of the signal parameter
@@ -2721,7 +3367,7 @@ class Tizen100Mmi {
   /// mmi_signal_parameter_get_name(parameter, &name):
   /// ...
   /// free(name);
-  /// @endcode
+  /// ```
   int mmi_signal_parameter_get_name(
     mmi_signal_parameter_h parameter,
     ffi.Pointer<ffi.Pointer<ffi.Char>> name,
@@ -2742,22 +3388,32 @@ class Tizen100Mmi {
           int Function(
               mmi_signal_parameter_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Retrieves the primitive value of a signal parameter.
-  /// @details This function retrieves the primitive value associated with the given signal parameter.
-  /// @since_tizen 9.0
-  /// @remarks The @a value should be released using mmi_primitive_value_destroy().
+  /// Retrieves the primitive value of a signal parameter.
   ///
-  /// @param[in] parameter The signal parameter handle.
-  /// @param[out] value A pointer to store the primitive value of the parameter.
+  /// This function retrieves the primitive value associated with the given signal parameter.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MMI_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @par Example
-  /// @code
+  /// **Remarks:**
+  /// - The `value` should be released using mmi_primitive_value_destroy().
+  ///
+  /// **Parameters:**
+  /// - `parameter` (in): The signal parameter handle.
+  /// - `value` (out): A pointer to store the primitive value of the parameter.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MMI_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <mmi.h>
   /// ...
   /// mmi_signal_parameter_h parameter; // Indicates the handle of the signal parameter
@@ -2765,7 +3421,7 @@ class Tizen100Mmi {
   /// mmi_signal_parameter_get_value(parameter, &value);
   /// ...
   /// mmi_primitive_value_destroy(value);
-  /// @endcode
+  /// ```
   int mmi_signal_parameter_get_value(
     mmi_signal_parameter_h parameter,
     ffi.Pointer<mmi_primitive_value_h> value,
@@ -2786,22 +3442,32 @@ class Tizen100Mmi {
           int Function(
               mmi_signal_parameter_h, ffi.Pointer<mmi_primitive_value_h>)>();
 
-  /// @brief Clones a signal parameter.
-  /// @details This function creates a deep copy of the given signal parameter.
-  /// @since_tizen 9.0
-  /// @remarks The @a cloned should be released using mmi_signal_parameter_destroy().
+  /// Clones a signal parameter.
   ///
-  /// @param[in] parameter The signal parameter handle to clone.
-  /// @param[out] cloned A pointer to store the cloned parameter handle.
+  /// This function creates a deep copy of the given signal parameter.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MMI_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @par Example
-  /// @code
+  /// **Remarks:**
+  /// - The `cloned` should be released using mmi_signal_parameter_destroy().
+  ///
+  /// **Parameters:**
+  /// - `parameter` (in): The signal parameter handle to clone.
+  /// - `cloned` (out): A pointer to store the cloned parameter handle.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MMI_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <mmi.h>
   /// ...
   /// mmi_signal_parameter_h parameter; // Indicates the handle of the signal parameter
@@ -2809,7 +3475,7 @@ class Tizen100Mmi {
   /// mmi_signal_parameter_clone(parameter, &cloned);
   /// ...
   /// mmi_signal_parameter_destroy(cloned);
-  /// @endcode
+  /// ```
   int mmi_signal_parameter_clone(
     mmi_signal_parameter_h parameter,
     ffi.Pointer<mmi_signal_parameter_h> cloned,
@@ -2830,16 +3496,23 @@ class Tizen100Mmi {
           int Function(
               mmi_signal_parameter_h, ffi.Pointer<mmi_signal_parameter_h>)>();
 
-  /// @brief Destroys a signal parameter.
-  /// @details This function destroys the given signal parameter and releases its resources.
-  /// @since_tizen 9.0
+  /// Destroys a signal parameter.
   ///
-  /// @param[in] parameter The signal parameter handle to destroy.
+  /// This function destroys the given signal parameter and releases its resources.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Parameters:**
+  /// - `parameter` (in): The signal parameter handle to destroy.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
   int mmi_signal_parameter_destroy(
     mmi_signal_parameter_h parameter,
   ) {
@@ -2854,29 +3527,39 @@ class Tizen100Mmi {
   late final _mmi_signal_parameter_destroy = _mmi_signal_parameter_destroyPtr
       .asFunction<int Function(mmi_signal_parameter_h)>();
 
-  /// @brief Creates a new signal.
-  /// @details This function creates a new signal with the given name.
-  /// @since_tizen 9.0
-  /// @remarks The @a handle should be released using mmi_signal_destroy().
+  /// Creates a new signal.
   ///
-  /// @param[in] name The name of the signal.
-  /// @param[out] handle A pointer to store the newly created signal handle.
+  /// This function creates a new signal with the given name.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MMI_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @par Example
-  /// @code
+  /// **Remarks:**
+  /// - The `handle` should be released using mmi_signal_destroy().
+  ///
+  /// **Parameters:**
+  /// - `name` (in): The name of the signal.
+  /// - `handle` (out): A pointer to store the newly created signal handle.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MMI_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <mmi.h>
   /// ...
   /// mmi_signal_h handle = NULL;
   /// mmi_signal_create("Name", &handle);
   /// ...
   /// mmi_signal_destroy(handle);
-  /// @endcode
+  /// ```
   int mmi_signal_create(
     ffi.Pointer<ffi.Char> name,
     ffi.Pointer<mmi_signal_h> handle,
@@ -2894,17 +3577,24 @@ class Tizen100Mmi {
   late final _mmi_signal_create = _mmi_signal_createPtr.asFunction<
       int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<mmi_signal_h>)>();
 
-  /// @brief Adds a parameter to a signal.
-  /// @details This function adds the given parameter to the specified signal.
-  /// @since_tizen 9.0
+  /// Adds a parameter to a signal.
   ///
-  /// @param[in] handle The signal handle to which the parameter will be added.
-  /// @param[in] parameter The parameter handle to add to the signal.
+  /// This function adds the given parameter to the specified signal.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The signal handle to which the parameter will be added.
+  /// - `parameter` (in): The parameter handle to add to the signal.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
   int mmi_signal_add_parameter(
     mmi_signal_h handle,
     mmi_signal_parameter_h parameter,
@@ -2922,22 +3612,32 @@ class Tizen100Mmi {
   late final _mmi_signal_add_parameter = _mmi_signal_add_parameterPtr
       .asFunction<int Function(mmi_signal_h, mmi_signal_parameter_h)>();
 
-  /// @brief Retrieves the name of a signal.
-  /// @details This function retrieves the name associated with the given signal.
-  /// @since_tizen 9.0
-  /// @remarks The @a name should be released using free().
+  /// Retrieves the name of a signal.
   ///
-  /// @param[in] handle The signal handle.
-  /// @param[out] name A pointer to store the name of the signal.
+  /// This function retrieves the name associated with the given signal.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MMI_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @par Example
-  /// @code
+  /// **Remarks:**
+  /// - The `name` should be released using free().
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The signal handle.
+  /// - `name` (out): A pointer to store the name of the signal.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MMI_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <mmi.h>
   /// ...
   /// mmi_signal_h handle; // Indicates the handle of the signal
@@ -2945,7 +3645,7 @@ class Tizen100Mmi {
   /// mmi_signal_get_name(handle, &name):
   /// ...
   /// free(name);
-  /// @endcode
+  /// ```
   int mmi_signal_get_name(
     mmi_signal_h handle,
     ffi.Pointer<ffi.Pointer<ffi.Char>> name,
@@ -2963,17 +3663,24 @@ class Tizen100Mmi {
   late final _mmi_signal_get_name = _mmi_signal_get_namePtr.asFunction<
       int Function(mmi_signal_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Retrieves the number of parameters in a signal.
-  /// @details This function retrieves the count of parameters currently associated with the given signal.
-  /// @since_tizen 9.0
+  /// Retrieves the number of parameters in a signal.
   ///
-  /// @param[in] handle The signal handle.
-  /// @param[out] count A pointer to store the number of parameters.
+  /// This function retrieves the count of parameters currently associated with the given signal.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The signal handle.
+  /// - `count` (out): A pointer to store the number of parameters.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
   int mmi_signal_get_parameter_count(
     mmi_signal_h handle,
     ffi.Pointer<ffi.Int> count,
@@ -2992,22 +3699,32 @@ class Tizen100Mmi {
       _mmi_signal_get_parameter_countPtr
           .asFunction<int Function(mmi_signal_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Retrieves a parameter from a signal by index.
-  /// @details This function retrieves the parameter at the specified index from the given signal.
-  /// @since_tizen 9.0
-  /// @remarks The @a parameter should be released using mmi_signal_parameter_destroy().
+  /// Retrieves a parameter from a signal by index.
   ///
-  /// @param[in] handle The signal handle.
-  /// @param[in] index The index of the parameter to retrieve.
-  /// @param[out] parameter A pointer to store the retrieved parameter handle.
+  /// This function retrieves the parameter at the specified index from the given signal.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @par Example
-  /// @code
+  /// **Remarks:**
+  /// - The `parameter` should be released using mmi_signal_parameter_destroy().
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The signal handle.
+  /// - `index` (in): The index of the parameter to retrieve.
+  /// - `parameter` (out): A pointer to store the retrieved parameter handle.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <mmi.h>
   /// ...
   /// mmi_signal_h handle; // Indicates the handle of the signal
@@ -3015,7 +3732,7 @@ class Tizen100Mmi {
   /// mmi_signal_get_parameter(handle, 1, &parameter);
   /// ...
   /// mmi_signal_parameter_destroy(parameter);
-  /// @endcode
+  /// ```
   int mmi_signal_get_parameter(
     mmi_signal_h handle,
     int index,
@@ -3038,16 +3755,23 @@ class Tizen100Mmi {
           int Function(
               mmi_signal_h, int, ffi.Pointer<mmi_signal_parameter_h>)>();
 
-  /// @brief Destroys a signal.
-  /// @details This function destroys the given signal and releases its resources.
-  /// @since_tizen 9.0
+  /// Destroys a signal.
   ///
-  /// @param[in] handle The signal handle to destroy.
+  /// This function destroys the given signal and releases its resources.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The signal handle to destroy.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
   int mmi_signal_destroy(
     mmi_signal_h handle,
   ) {
@@ -3062,20 +3786,28 @@ class Tizen100Mmi {
   late final _mmi_signal_destroy =
       _mmi_signal_destroyPtr.asFunction<int Function(mmi_signal_h)>();
 
-  /// @brief Sets a callback function to be invoked when the node is initialized.
-  /// @details This function sets a callback function that will be called when the node is initialized.
-  /// @since_tizen 9.0
+  /// Sets a callback function to be invoked when the node is initialized.
   ///
-  /// @param[in] node The handle of the node for which the initialized callback function is to be set.
-  /// @param[in] callback The callback function to be called when the node is initialized.
-  /// @param[in] user_data The user data to be passed to the callback function.
+  /// This function sets a callback function that will be called when the node is initialized.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @see mmi_node_initialized_cb()
+  /// **Parameters:**
+  /// - `node` (in): The handle of the node for which the initialized callback function is to be set.
+  /// - `callback` (in): The callback function to be called when the node is initialized.
+  /// - `user_data` (in): The user data to be passed to the callback function.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `mmi_node_initialized_cb()`
   int mmi_node_set_initialized_cb(
     mmi_node_h node,
     mmi_node_initialized_cb callback,
@@ -3097,20 +3829,28 @@ class Tizen100Mmi {
           int Function(
               mmi_node_h, mmi_node_initialized_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Sets a callback function to be invoked when the node is deinitialized.
-  /// @details This function sets a callback function that will be called when the node is deinitialized.
-  /// @since_tizen 9.0
+  /// Sets a callback function to be invoked when the node is deinitialized.
   ///
-  /// @param[in] node The handle of the node for which the deinitialized callback function is to be set.
-  /// @param[in] callback The callback function to be called when the node is deinitialized.
-  /// @param[in] user_data The user data to be passed to the callback function.
+  /// This function sets a callback function that will be called when the node is deinitialized.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @see mmi_node_deinitialized_cb()
+  /// **Parameters:**
+  /// - `node` (in): The handle of the node for which the deinitialized callback function is to be set.
+  /// - `callback` (in): The callback function to be called when the node is deinitialized.
+  /// - `user_data` (in): The user data to be passed to the callback function.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `mmi_node_deinitialized_cb()`
   int mmi_node_set_deinitialized_cb(
     mmi_node_h node,
     mmi_node_deinitialized_cb callback,
@@ -3132,20 +3872,28 @@ class Tizen100Mmi {
           int Function(
               mmi_node_h, mmi_node_deinitialized_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Sets a callback function to be invoked when an attribute is set on the node.
-  /// @details This function sets a callback function that will be called when an attribute is set on the node.
-  /// @since_tizen 9.0
+  /// Sets a callback function to be invoked when an attribute is set on the node.
   ///
-  /// @param[in] node The handle of the node for which the attribute set callback function is to be set.
-  /// @param[in] callback The callback function to be called when an attribute is set on the node.
-  /// @param[in] user_data The user data to be passed to the callback function.
+  /// This function sets a callback function that will be called when an attribute is set on the node.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @see mmi_node_attribute_set_cb()
+  /// **Parameters:**
+  /// - `node` (in): The handle of the node for which the attribute set callback function is to be set.
+  /// - `callback` (in): The callback function to be called when an attribute is set on the node.
+  /// - `user_data` (in): The user data to be passed to the callback function.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `mmi_node_attribute_set_cb()`
   int mmi_node_set_attribute_set_cb(
     mmi_node_h node,
     mmi_node_attribute_set_cb callback,
@@ -3167,20 +3915,28 @@ class Tizen100Mmi {
           int Function(
               mmi_node_h, mmi_node_attribute_set_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Sets a callback function to be invoked when the node is activated.
-  /// @details This function sets a callback function that will be called when the node is activated.
-  /// @since_tizen 9.0
+  /// Sets a callback function to be invoked when the node is activated.
   ///
-  /// @param[in] node The handle of the node for which the activated callback function is to be set.
-  /// @param[in] callback The callback function to be called when the node is activated.
-  /// @param[in] user_data The user data to be passed to the callback function.
+  /// This function sets a callback function that will be called when the node is activated.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @see mmi_node_activated_cb()
+  /// **Parameters:**
+  /// - `node` (in): The handle of the node for which the activated callback function is to be set.
+  /// - `callback` (in): The callback function to be called when the node is activated.
+  /// - `user_data` (in): The user data to be passed to the callback function.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `mmi_node_activated_cb()`
   int mmi_node_set_activated_cb(
     mmi_node_h node,
     mmi_node_activated_cb callback,
@@ -3202,21 +3958,29 @@ class Tizen100Mmi {
           int Function(
               mmi_node_h, mmi_node_activated_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Sets a callback function to be invoked when the specified MMI node is deactivated.
-  /// @details This function sets a callback function that will be called whenever the specified node is deactivated.
-  /// @since_tizen 9.0
+  /// Sets a callback function to be invoked when the specified MMI node is deactivated.
   ///
-  /// @param[in] node The handle of the MMI node.
-  /// @param[in] callback The callback function to be called when the node is deactivated.
-  /// @param[in] user_data The user data to be passed to the callback function.
+  /// This function sets a callback function that will be called whenever the specified node is deactivated.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @see mmi_node_deactivated_cb()
-  /// @see mmi_node_unset_deactivated_cb()
+  /// **Parameters:**
+  /// - `node` (in): The handle of the MMI node.
+  /// - `callback` (in): The callback function to be called when the node is deactivated.
+  /// - `user_data` (in): The user data to be passed to the callback function.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `mmi_node_deactivated_cb()`
+  /// - `mmi_node_unset_deactivated_cb()`
   int mmi_node_set_deactivated_cb(
     mmi_node_h node,
     mmi_node_deactivated_cb callback,
@@ -3238,21 +4002,29 @@ class Tizen100Mmi {
           int Function(
               mmi_node_h, mmi_node_deactivated_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Sets a callback function to be invoked when a signal is received by the specified MMI node.
-  /// @details This function sets a callback function that will be called whenever a signal is received by the specified node.
-  /// @since_tizen 9.0
+  /// Sets a callback function to be invoked when a signal is received by the specified MMI node.
   ///
-  /// @param[in] node The handle of the MMI node.
-  /// @param[in] callback The callback function to be called when a signal is received.
-  /// @param[in] user_data The user data to be passed to the callback function.
+  /// This function sets a callback function that will be called whenever a signal is received by the specified node.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @see mmi_node_signal_received_cb()
-  /// @see mmi_node_unset_signal_received_cb()
+  /// **Parameters:**
+  /// - `node` (in): The handle of the MMI node.
+  /// - `callback` (in): The callback function to be called when a signal is received.
+  /// - `user_data` (in): The user data to be passed to the callback function.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `mmi_node_signal_received_cb()`
+  /// - `mmi_node_unset_signal_received_cb()`
   int mmi_node_set_signal_received_cb(
     mmi_node_h node,
     mmi_node_signal_received_cb callback,
@@ -3274,20 +4046,30 @@ class Tizen100Mmi {
           int Function(mmi_node_h, mmi_node_signal_received_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Adds a static port to a static node.
-  /// @details This function adds an already created port to a node. The port must be created before calling this function.
-  /// @since_tizen 9.0
+  /// Adds a static port to a static node.
   ///
-  /// @param[in] node The handle to the node where the port will be added.
-  /// @param[in] port The handle to the port that will be added to the node.
+  /// This function adds an already created port to a node. The port must be created before calling this function.
   ///
-  /// @return An integer value indicating the result of the operation.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @pre The port must be created before adding it to the node.
-  /// @post The port is added to the node.
+  /// **Parameters:**
+  /// - `node` (in): The handle to the node where the port will be added.
+  /// - `port` (in): The handle to the port that will be added to the node.
+  ///
+  /// **Returns:**
+  /// - An integer value indicating the result of the operation.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - The port must be created before adding it to the node.
+  ///
+  /// **Postconditions:**
+  /// - The port is added to the node.
   int mmi_node_add_port(
     mmi_node_h node,
     mmi_port_h port,
@@ -3304,33 +4086,46 @@ class Tizen100Mmi {
   late final _mmi_node_add_port =
       _mmi_node_add_portPtr.asFunction<int Function(mmi_node_h, mmi_port_h)>();
 
-  /// @brief Finds a port in a node matching the given name and type.
-  /// @details This function searches for a port in a node that matches the specified name and type.
-  /// @since_tizen 9.0
-  /// @remarks The @a port should not be released.
-  /// The @a port is available until node is released.
+  /// Finds a port in a node matching the given name and type.
   ///
-  /// @param[in] node The handle to the node where the search will be performed.
-  /// @param[in] port_type The type of the port to be found.
-  /// @param[in] port_name The name of the port to be found.
-  /// @param[out] port A pointer to store the handle of the found port.
+  /// This function searches for a port in a node that matches the specified name and type.
   ///
-  /// @return An integer value indicating the result of the operation.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @pre The node must exist and contain ports.
-  /// @post If the port is found, its handle is stored in the provided pointer.
+  /// **Remarks:**
+  /// - The `port` should not be released.
+  /// - The `port` is available until node is released.
   ///
-  /// @par Example
-  /// @code
+  /// **Parameters:**
+  /// - `node` (in): The handle to the node where the search will be performed.
+  /// - `port_type` (in): The type of the port to be found.
+  /// - `port_name` (in): The name of the port to be found.
+  /// - `port` (out): A pointer to store the handle of the found port.
+  ///
+  /// **Returns:**
+  /// - An integer value indicating the result of the operation.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - The node must exist and contain ports.
+  ///
+  /// **Postconditions:**
+  /// - If the port is found, its handle is stored in the provided pointer.
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <mmi.h>
   /// ...
   /// mmi_node_h node; // Indicates the data handle
   /// mmi_port_h port = NULL;
   /// mmi_node_find_port(node, MMI_PORT_TYPE_OUT, "OUTPUT", &port);
-  /// @endcode
+  /// ```
   int mmi_node_find_port(
     mmi_node_h node,
     int port_type,
@@ -3353,20 +4148,30 @@ class Tizen100Mmi {
       int Function(
           mmi_node_h, int, ffi.Pointer<ffi.Char>, ffi.Pointer<mmi_port_h>)>();
 
-  /// @brief Retrieves the type of a node.
-  /// @details This function retrieves the type of the node represented by the given handle.
-  /// @since_tizen 9.0
+  /// Retrieves the type of a node.
   ///
-  /// @param[in] node The handle to the node whose type will be retrieved.
-  /// @param[out] type A pointer to store the type of the node.
+  /// This function retrieves the type of the node represented by the given handle.
   ///
-  /// @return An integer value indicating the result of the operation.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @pre The node must exist.
-  /// @post The type of the node is stored in the provided pointer.
+  /// **Parameters:**
+  /// - `node` (in): The handle to the node whose type will be retrieved.
+  /// - `type` (out): A pointer to store the type of the node.
+  ///
+  /// **Returns:**
+  /// - An integer value indicating the result of the operation.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - The node must exist.
+  ///
+  /// **Postconditions:**
+  /// - The type of the node is stored in the provided pointer.
   int mmi_node_get_type(
     mmi_node_h node,
     ffi.Pointer<ffi.Int32> type,
@@ -3384,20 +4189,30 @@ class Tizen100Mmi {
   late final _mmi_node_get_type = _mmi_node_get_typePtr
       .asFunction<int Function(mmi_node_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Retrieves the number of ports in a node.
-  /// @details This function retrieves the total number of ports present in the node.
-  /// @since_tizen 9.0
+  /// Retrieves the number of ports in a node.
   ///
-  /// @param[in] node The handle the node whose port count will be retrieved.
-  /// @param[out] port_count A pointer to store the number of ports in the node.
+  /// This function retrieves the total number of ports present in the node.
   ///
-  /// @return An integer value indicating the result of the operation.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @pre The node must exist.
-  /// @post The number of ports in the node is stored in the provided pointer.
+  /// **Parameters:**
+  /// - `node` (in): The handle the node whose port count will be retrieved.
+  /// - `port_count` (out): A pointer to store the number of ports in the node.
+  ///
+  /// **Returns:**
+  /// - An integer value indicating the result of the operation.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - The node must exist.
+  ///
+  /// **Postconditions:**
+  /// - The number of ports in the node is stored in the provided pointer.
   int mmi_node_get_port_count(
     mmi_node_h node,
     ffi.Pointer<ffi.Size> port_count,
@@ -3415,32 +4230,45 @@ class Tizen100Mmi {
   late final _mmi_node_get_port_count = _mmi_node_get_port_countPtr
       .asFunction<int Function(mmi_node_h, ffi.Pointer<ffi.Size>)>();
 
-  /// @brief Retrieves the port at the given index.
-  /// @details This function retrieves the port at the specified index in the node.
-  /// @since_tizen 9.0
-  /// @remarks The @a port should not be released.
-  /// The @a port is available until node is released.
+  /// Retrieves the port at the given index.
   ///
-  /// @param[in] node The handle to the node from which the port will be retrieved.
-  /// @param[in] index The index of the port to be retrieved.
-  /// @param[out] port A pointer to store the handle of the retrieved port.
+  /// This function retrieves the port at the specified index in the node.
   ///
-  /// @return An integer value indicating the result of the operation.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @pre The node must exist and contain ports.
-  /// @post The handle of the port at the specified index is stored in the provided pointer.
+  /// **Remarks:**
+  /// - The `port` should not be released.
+  /// - The `port` is available until node is released.
   ///
-  /// @par Example
-  /// @code
+  /// **Parameters:**
+  /// - `node` (in): The handle to the node from which the port will be retrieved.
+  /// - `index` (in): The index of the port to be retrieved.
+  /// - `port` (out): A pointer to store the handle of the retrieved port.
+  ///
+  /// **Returns:**
+  /// - An integer value indicating the result of the operation.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - The node must exist and contain ports.
+  ///
+  /// **Postconditions:**
+  /// - The handle of the port at the specified index is stored in the provided pointer.
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <mmi.h>
   /// ...
   /// mmi_node_h node; // Indicates the data handle
   /// mmi_port_h port = NULL;
   /// mmi_node_get_port(node, 0, &port);
-  /// @endcode
+  /// ```
   int mmi_node_get_port(
     mmi_node_h node,
     int index,
@@ -3460,19 +4288,29 @@ class Tizen100Mmi {
   late final _mmi_node_get_port = _mmi_node_get_portPtr
       .asFunction<int Function(mmi_node_h, int, ffi.Pointer<mmi_port_h>)>();
 
-  /// @brief Registers a node.
-  /// @details This function registers the node within the MMI framework.
-  /// @since_tizen 9.0
+  /// Registers a node.
   ///
-  /// @param[in] node The handle to the node to be registered.
+  /// This function registers the node within the MMI framework.
   ///
-  /// @return An integer value indicating the result of the operation.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @pre The node must exist and be properly initialized.
-  /// @post The node is registered within the MMI framework.
+  /// **Parameters:**
+  /// - `node` (in): The handle to the node to be registered.
+  ///
+  /// **Returns:**
+  /// - An integer value indicating the result of the operation.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - The node must exist and be properly initialized.
+  ///
+  /// **Postconditions:**
+  /// - The node is registered within the MMI framework.
   int mmi_node_register(
     mmi_node_h node,
   ) {
@@ -3487,24 +4325,37 @@ class Tizen100Mmi {
   late final _mmi_node_register =
       _mmi_node_registerPtr.asFunction<int Function(mmi_node_h)>();
 
-  /// @brief Clones a node.
-  /// @details This function creates a copy of the node and returns a handle to the cloned node.
-  /// @since_tizen 9.0
-  /// @remarks The @a cloned should be released using mmi_attribute_destroy().
+  /// Clones a node.
   ///
-  /// @param[in] node The handle to the node to be cloned.
-  /// @param[out] cloned A pointer to store the handle of the cloned node.
+  /// This function creates a copy of the node and returns a handle to the cloned node.
   ///
-  /// @return An integer value indicating the result of the operation.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @pre The node must exist.
-  /// @post A clone of the node is created and its handle is stored in the provided pointer.
+  /// **Remarks:**
+  /// - The `cloned` should be released using mmi_attribute_destroy().
   ///
-  /// @par Example
-  /// @code
+  /// **Parameters:**
+  /// - `node` (in): The handle to the node to be cloned.
+  /// - `cloned` (out): A pointer to store the handle of the cloned node.
+  ///
+  /// **Returns:**
+  /// - An integer value indicating the result of the operation.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - The node must exist.
+  ///
+  /// **Postconditions:**
+  /// - A clone of the node is created and its handle is stored in the provided pointer.
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <mmi.h>
   /// ...
   /// mmi_node_h node; // Indicates the handle of the node
@@ -3512,7 +4363,7 @@ class Tizen100Mmi {
   /// mmi_node_clone(node, &cloned);
   /// ...
   /// mmi_node_destroy(cloned);
-  /// @endcode
+  /// ```
   int mmi_node_clone(
     mmi_node_h node,
     ffi.Pointer<mmi_node_h> cloned,
@@ -3530,19 +4381,29 @@ class Tizen100Mmi {
   late final _mmi_node_clone = _mmi_node_clonePtr
       .asFunction<int Function(mmi_node_h, ffi.Pointer<mmi_node_h>)>();
 
-  /// @brief Destroys a node.
-  /// @details This function destroys the node and releases all associated resources.
-  /// @since_tizen 9.0
+  /// Destroys a node.
   ///
-  /// @param[in] node The handle to the node to be destroyed.
+  /// This function destroys the node and releases all associated resources.
   ///
-  /// @return An integer value indicating the result of the operation.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @pre The node must exist.
-  /// @post The node is destroyed and all associated resources are released.
+  /// **Parameters:**
+  /// - `node` (in): The handle to the node to be destroyed.
+  ///
+  /// **Returns:**
+  /// - An integer value indicating the result of the operation.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - The node must exist.
+  ///
+  /// **Postconditions:**
+  /// - The node is destroyed and all associated resources are released.
   int mmi_node_destroy(
     mmi_node_h node,
   ) {
@@ -3557,18 +4418,25 @@ class Tizen100Mmi {
   late final _mmi_node_destroy =
       _mmi_node_destroyPtr.asFunction<int Function(mmi_node_h)>();
 
-  /// @brief Provides an attribute to a node instance.
-  /// @details This function sets an attribute to a specified node instance.
-  /// @since_tizen 9.0
+  /// Provides an attribute to a node instance.
   ///
-  /// @param[in] instance The handle to the node instance.
-  /// @param[in] attribute The handle to the attribute to be set.
+  /// This function sets an attribute to a specified node instance.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MMI_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Parameters:**
+  /// - `instance` (in): The handle to the node instance.
+  /// - `attribute` (in): The handle to the attribute to be set.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MMI_ERROR_OUT_OF_MEMORY`: Out of memory
   int mmi_node_instance_set_attribute(
     mmi_node_instance_h instance,
     mmi_attribute_h attribute,
@@ -3587,28 +4455,38 @@ class Tizen100Mmi {
       _mmi_node_instance_set_attributePtr
           .asFunction<int Function(mmi_node_instance_h, mmi_attribute_h)>();
 
-  /// @brief Retrieves a port instance of a node instance.
-  /// @details This function finds and retrieves a port instance of a specified node instance based on its type and name.
-  /// @since_tizen 9.0
-  /// @remarks The @a port_instance should not be released.
-  /// @remarks The @a port_instance is available until node_instance is released.
+  /// Retrieves a port instance of a node instance.
   ///
-  /// @param[in] node_instance The handle to the node instance.
-  /// @param[in] port_type The type of the port (input or output).
-  /// @param[in] port_name The name of the port.
-  /// @param[out] port_instance The handle to the retrieved port instance.
+  /// This function finds and retrieves a port instance of a specified node instance based on its type and name.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @par Example
-  /// @code
+  /// **Remarks:**
+  /// - The `port_instance` should not be released.
+  /// - The `port_instance` is available until node_instance is released.
+  ///
+  /// **Parameters:**
+  /// - `node_instance` (in): The handle to the node instance.
+  /// - `port_type` (in): The type of the port (input or output).
+  /// - `port_name` (in): The name of the port.
+  /// - `port_instance` (out): The handle to the retrieved port instance.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// mmi_node_instance_h node; // Indicates the node instance handle.
   /// mmi_port_instance_h port = NULL;
   /// mmi_node_instance_find_port_instance(node, MMI_PORT_TYPE_OUT, "OUTPUT", &port);
-  /// @endcode
+  /// ```
   int mmi_node_instance_find_port_instance(
     mmi_node_instance_h node_instance,
     int port_type,
@@ -3633,26 +4511,36 @@ class Tizen100Mmi {
           int Function(mmi_node_instance_h, int, ffi.Pointer<ffi.Char>,
               ffi.Pointer<mmi_port_instance_h>)>();
 
-  /// @brief Finds a node instance that has the given port instance.
-  /// @details This function finds and retrieves the node instance that contains the specified port instance.
-  /// @since_tizen 9.0
-  /// @remarks The @a node_instance should not be released.
-  /// @remarks The @a node_instance is available until port_instance is released.
+  /// Finds a node instance that has the given port instance.
   ///
-  /// @param[in] port_instance The handle to the port instance.
-  /// @param[out] node_instance The handle to the retrieved node instance.
+  /// This function finds and retrieves the node instance that contains the specified port instance.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @par Example
-  /// @code
+  /// **Remarks:**
+  /// - The `node_instance` should not be released.
+  /// - The `node_instance` is available until port_instance is released.
+  ///
+  /// **Parameters:**
+  /// - `port_instance` (in): The handle to the port instance.
+  /// - `node_instance` (out): The handle to the retrieved node instance.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// mmi_port_instance_h port; // Indicates the port instance of the node.
   /// mmi_node_instance_h node = NULL;
   /// mmi_node_instance_find_by_port_instance(port, &node);
-  /// @endcode
+  /// ```
   int mmi_node_instance_find_by_port_instance(
     mmi_port_instance_h port_instance,
     ffi.Pointer<mmi_node_instance_h> node_instance,
@@ -3673,27 +4561,37 @@ class Tizen100Mmi {
           int Function(
               mmi_port_instance_h, ffi.Pointer<mmi_node_instance_h>)>();
 
-  /// @brief Retrieves a sibling port instance of a port instance in a node.
-  /// @details This function finds and retrieves a sibling port instance of a specified port instance in a node, matching the given name.
-  /// @since_tizen 9.0
-  /// @remarks The @a sibling should not be released.
-  /// @remarks The @a sibling is available until node is released.
+  /// Retrieves a sibling port instance of a port instance in a node.
   ///
-  /// @param[in] instance The handle to the port instance.
-  /// @param[in] sibling_name The name of the sibling port.
-  /// @param[out] sibling The handle to the retrieved sibling port instance.
+  /// This function finds and retrieves a sibling port instance of a specified port instance in a node, matching the given name.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @par Example
-  /// @code
+  /// **Remarks:**
+  /// - The `sibling` should not be released.
+  /// - The `sibling` is available until node is released.
+  ///
+  /// **Parameters:**
+  /// - `instance` (in): The handle to the port instance.
+  /// - `sibling_name` (in): The name of the sibling port.
+  /// - `sibling` (out): The handle to the retrieved sibling port instance.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// mmi_port_instance_h port; // Indicates the port instance of the node.
   /// mmi_port_instance_h sibling = NULL;
   /// mmi_node_instance_find_sibling_port_instance(port, "PORT_2", &sibling);
-  /// @endcode
+  /// ```
   int mmi_node_instance_find_sibling_port_instance(
     mmi_port_instance_h instance,
     ffi.Pointer<ffi.Char> sibling_name,
@@ -3716,17 +4614,24 @@ class Tizen100Mmi {
           int Function(mmi_port_instance_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<mmi_port_instance_h>)>();
 
-  /// @brief Emits a signal from a node instance.
-  /// @details This function emits a signal from a specified node instance.
-  /// @since_tizen 9.0
+  /// Emits a signal from a node instance.
   ///
-  /// @param[in] instance The handle to the node instance.
-  /// @param[in] signal The handle to the signal to be emitted.
+  /// This function emits a signal from a specified node instance.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Parameters:**
+  /// - `instance` (in): The handle to the node instance.
+  /// - `signal` (in): The handle to the signal to be emitted.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
   int mmi_node_instance_emit_signal(
     mmi_node_instance_h instance,
     mmi_signal_h signal,
@@ -3744,17 +4649,24 @@ class Tizen100Mmi {
   late final _mmi_node_instance_emit_signal = _mmi_node_instance_emit_signalPtr
       .asFunction<int Function(mmi_node_instance_h, mmi_signal_h)>();
 
-  /// @brief Updates the pending activation result of a node instance.
-  /// @details This function updates the result of the last activation callback call for a specified node instance.
-  /// @since_tizen 9.0
+  /// Updates the pending activation result of a node instance.
   ///
-  /// @param[in] instance The handle to the node instance.
-  /// @param[in] result The result to be updated.
+  /// This function updates the result of the last activation callback call for a specified node instance.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Parameters:**
+  /// - `instance` (in): The handle to the node instance.
+  /// - `result` (in): The result to be updated.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
   int mmi_node_instance_update_pending_activation_result(
     mmi_node_instance_h instance,
     int result,
@@ -3772,30 +4684,41 @@ class Tizen100Mmi {
       _mmi_node_instance_update_pending_activation_resultPtr
           .asFunction<int Function(mmi_node_instance_h, int)>();
 
-  /// @brief Creates a new workflow prototype.
-  /// @details This function allocates memory for a new workflow prototype and returns its handle.
-  /// @since_tizen 9.0
-  /// @remarks The @a workflow should be released using mmi_workflow_destroy().
+  /// Creates a new workflow prototype.
   ///
-  /// @param[out] workflow A pointer to store the handle of the newly created workflow prototype.
+  /// This function allocates memory for a new workflow prototype and returns its handle.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MMI_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @par Example
-  /// @code
+  /// **Remarks:**
+  /// - The `workflow` should be released using mmi_workflow_destroy().
+  ///
+  /// **Parameters:**
+  /// - `workflow` (out): A pointer to store the handle of the newly created workflow prototype.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MMI_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `mmi_workflow_destroy()`
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <mmi.h>
   /// ...
   /// mmi_workflow_h workflow = NULL;
   /// mmi_workflow_create(&workflow);
   /// ...
   /// mmi_workflow_destroy(workflow);
-  /// @endcode
-  ///
-  /// @see mmi_workflow_destroy()
+  /// ```
   int mmi_workflow_create(
     ffi.Pointer<mmi_workflow_h> workflow,
   ) {
@@ -3810,20 +4733,28 @@ class Tizen100Mmi {
   late final _mmi_workflow_create = _mmi_workflow_createPtr
       .asFunction<int Function(ffi.Pointer<mmi_workflow_h>)>();
 
-  /// @brief Sets the type of a workflow prototype.
-  /// @details This function assigns a standard workflow type to the given workflow prototype.
-  /// @since_tizen 9.0
+  /// Sets the type of a workflow prototype.
   ///
-  /// @param[in] workflow The handle of the workflow prototype.
-  /// @param[in] type The standard workflow type to be set.
+  /// This function assigns a standard workflow type to the given workflow prototype.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @see mmi_standard_workflow_type_e
-  /// @see mmi_workflow_get_type()
+  /// **Parameters:**
+  /// - `workflow` (in): The handle of the workflow prototype.
+  /// - `type` (in): The standard workflow type to be set.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `mmi_standard_workflow_type_e`
+  /// - `mmi_workflow_get_type()`
   int mmi_workflow_set_type(
     mmi_workflow_h workflow,
     int type,
@@ -3840,20 +4771,28 @@ class Tizen100Mmi {
   late final _mmi_workflow_set_type =
       _mmi_workflow_set_typePtr.asFunction<int Function(mmi_workflow_h, int)>();
 
-  /// @brief Gets the type of a workflow prototype.
-  /// @details This function retrieves the standard workflow type assigned to the given workflow prototype.
-  /// @since_tizen 9.0
+  /// Gets the type of a workflow prototype.
   ///
-  /// @param[in] workflow The handle of the workflow prototype.
-  /// @param[out] type A pointer to store the retrieved standard workflow type.
+  /// This function retrieves the standard workflow type assigned to the given workflow prototype.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @see mmi_standard_workflow_type_e
-  /// @see mmi_workflow_set_type()
+  /// **Parameters:**
+  /// - `workflow` (in): The handle of the workflow prototype.
+  /// - `type` (out): A pointer to store the retrieved standard workflow type.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `mmi_standard_workflow_type_e`
+  /// - `mmi_workflow_set_type()`
   int mmi_workflow_get_type(
     mmi_workflow_h workflow,
     ffi.Pointer<ffi.Int32> type,
@@ -3871,20 +4810,28 @@ class Tizen100Mmi {
   late final _mmi_workflow_get_type = _mmi_workflow_get_typePtr
       .asFunction<int Function(mmi_workflow_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Adds a node to a workflow prototype.
-  /// @details This function adds a node with a given name to the workflow prototype.
-  /// @since_tizen 9.0
+  /// Adds a node to a workflow prototype.
   ///
-  /// @param[in] workflow The handle of the workflow prototype.
-  /// @param[in] node_name The name of the node to be added.
-  /// @param[in] node The handle of the node to be added.
+  /// This function adds a node with a given name to the workflow prototype.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @see mmi_node_h
+  /// **Parameters:**
+  /// - `workflow` (in): The handle of the workflow prototype.
+  /// - `node_name` (in): The name of the node to be added.
+  /// - `node` (in): The handle of the node to be added.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `mmi_node_h`
   int mmi_workflow_node_add(
     mmi_workflow_h workflow,
     ffi.Pointer<ffi.Char> node_name,
@@ -3904,22 +4851,30 @@ class Tizen100Mmi {
   late final _mmi_workflow_node_add = _mmi_workflow_node_addPtr.asFunction<
       int Function(mmi_workflow_h, ffi.Pointer<ffi.Char>, mmi_node_h)>();
 
-  /// @brief Links two nodes in a workflow prototype using their names and port names.
-  /// @details This function links the output port of one node to the input port of another node.
-  /// @since_tizen 9.0
+  /// Links two nodes in a workflow prototype using their names and port names.
   ///
-  /// @param[in] workflow The handle of the workflow prototype.
-  /// @param[in] from_node_name The name of the source node.
-  /// @param[in] from_port_name The name of the output port of the source node.
-  /// @param[in] to_node_name The name of the destination node.
-  /// @param[in] to_port_name The name of the input port of the destination node.
+  /// This function links the output port of one node to the input port of another node.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @see mmi_node_h
+  /// **Parameters:**
+  /// - `workflow` (in): The handle of the workflow prototype.
+  /// - `from_node_name` (in): The name of the source node.
+  /// - `from_port_name` (in): The name of the output port of the source node.
+  /// - `to_node_name` (in): The name of the destination node.
+  /// - `to_port_name` (in): The name of the input port of the destination node.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `mmi_node_h`
   int mmi_workflow_link_nodes_by_names(
     mmi_workflow_h workflow,
     ffi.Pointer<ffi.Char> from_node_name,
@@ -3953,21 +4908,29 @@ class Tizen100Mmi {
               ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Assigns an attribute of a workflow to an attribute of a specific node.
-  /// @details This function assigns a workflow attribute to a target attribute of a specific node in the workflow prototype.
-  /// @since_tizen 9.0
+  /// Assigns an attribute of a workflow to an attribute of a specific node.
   ///
-  /// @param[in] workflow The handle of the workflow prototype.
-  /// @param[in] attribute_name The name of the workflow attribute to be assigned.
-  /// @param[in] target_node_name The name of the target node.
-  /// @param[in] target_attribute_name The name of the target attribute in the node.
+  /// This function assigns a workflow attribute to a target attribute of a specific node in the workflow prototype.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @see mmi_attribute_h
+  /// **Parameters:**
+  /// - `workflow` (in): The handle of the workflow prototype.
+  /// - `attribute_name` (in): The name of the workflow attribute to be assigned.
+  /// - `target_node_name` (in): The name of the target node.
+  /// - `target_attribute_name` (in): The name of the target attribute in the node.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `mmi_attribute_h`
   int mmi_workflow_attribute_assign(
     mmi_workflow_h workflow,
     ffi.Pointer<ffi.Char> attribute_name,
@@ -3994,19 +4957,27 @@ class Tizen100Mmi {
           int Function(mmi_workflow_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets the default value of an attribute of a workflow.
-  /// @details This function sets the default value for a workflow attribute.
-  /// @since_tizen 9.0
+  /// Sets the default value of an attribute of a workflow.
   ///
-  /// @param[in] workflow The handle of the workflow prototype.
-  /// @param[in] default_value The handle of the default value to be set.
+  /// This function sets the default value for a workflow attribute.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @see mmi_attribute_h
+  /// **Parameters:**
+  /// - `workflow` (in): The handle of the workflow prototype.
+  /// - `default_value` (in): The handle of the default value to be set.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `mmi_attribute_h`
   int mmi_workflow_attribute_set_default_value(
     mmi_workflow_h workflow,
     mmi_attribute_h default_value,
@@ -4025,22 +4996,30 @@ class Tizen100Mmi {
       _mmi_workflow_attribute_set_default_valuePtr
           .asFunction<int Function(mmi_workflow_h, mmi_attribute_h)>();
 
-  /// @brief Assigns a signal of a workflow to a signal of a specific node in a workflow prototype.
-  /// @details This function assigns a signal from a workflow to a target signal of a specific node in the workflow prototype.
-  /// @since_tizen 9.0
+  /// Assigns a signal of a workflow to a signal of a specific node in a workflow prototype.
   ///
-  /// @param[in] workflow The handle to the workflow.
-  /// @param[in] signal_name The name of the signal to assign.
-  /// @param[in] target_node_name The name of the target node where the signal will be assigned.
-  /// @param[in] target_signal_name The name of the target signal in the target node.
+  /// This function assigns a signal from a workflow to a target signal of a specific node in the workflow prototype.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MMI_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @see mmi_workflow_h
+  /// **Parameters:**
+  /// - `workflow` (in): The handle to the workflow.
+  /// - `signal_name` (in): The name of the signal to assign.
+  /// - `target_node_name` (in): The name of the target node where the signal will be assigned.
+  /// - `target_signal_name` (in): The name of the target signal in the target node.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MMI_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `mmi_workflow_h`
   int mmi_workflow_signal_assign(
     mmi_workflow_h workflow,
     ffi.Pointer<ffi.Char> signal_name,
@@ -4067,22 +5046,30 @@ class Tizen100Mmi {
           int Function(mmi_workflow_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Assigns an output of a workflow to a OUT port of a specific node in a workflow prototype.
-  /// @details This function assigns an output from a workflow to a target OUT port of a specific node in the workflow prototype.
-  /// @since_tizen 9.0
+  /// Assigns an output of a workflow to a OUT port of a specific node in a workflow prototype.
   ///
-  /// @param[in] workflow The handle to the workflow.
-  /// @param[in] workflow_output The name of the output to assign.
-  /// @param[in] out_node_name The name of the target node where the output will be assigned.
-  /// @param[in] node_out_port_name The name of the target OUT port in the target node.
+  /// This function assigns an output from a workflow to a target OUT port of a specific node in the workflow prototype.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MMI_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @see mmi_workflow_h
+  /// **Parameters:**
+  /// - `workflow` (in): The handle to the workflow.
+  /// - `workflow_output` (in): The name of the output to assign.
+  /// - `out_node_name` (in): The name of the target node where the output will be assigned.
+  /// - `node_out_port_name` (in): The name of the target OUT port in the target node.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MMI_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `mmi_workflow_h`
   int mmi_workflow_output_assign(
     mmi_workflow_h workflow,
     ffi.Pointer<ffi.Char> workflow_output,
@@ -4109,22 +5096,30 @@ class Tizen100Mmi {
           int Function(mmi_workflow_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Assigns an output of a workflow to a OUT port of a specific node in a workflow prototype using a port handle.
-  /// @details This function assigns an output from a workflow to a target OUT port of a specific node in the workflow prototype using a port handle.
-  /// @since_tizen 9.0
+  /// Assigns an output of a workflow to a OUT port of a specific node in a workflow prototype using a port handle.
   ///
-  /// @param[in] workflow The handle to the workflow.
-  /// @param[in] workflow_output The name of the output to assign.
-  /// @param[in] port The handle to the target port where the output will be assigned.
+  /// This function assigns an output from a workflow to a target OUT port of a specific node in the workflow prototype using a port handle.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MMI_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @see mmi_workflow_h
-  /// @see mmi_port_h
+  /// **Parameters:**
+  /// - `workflow` (in): The handle to the workflow.
+  /// - `workflow_output` (in): The name of the output to assign.
+  /// - `port` (in): The handle to the target port where the output will be assigned.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MMI_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `mmi_workflow_h`
+  /// - `mmi_port_h`
   int mmi_workflow_output_assign_by_port(
     mmi_workflow_h workflow,
     ffi.Pointer<ffi.Char> workflow_output,
@@ -4145,19 +5140,27 @@ class Tizen100Mmi {
       _mmi_workflow_output_assign_by_portPtr.asFunction<
           int Function(mmi_workflow_h, ffi.Pointer<ffi.Char>, mmi_port_h)>();
 
-  /// @brief Registers a standard workflow prototype to the workflow manager.
-  /// @details This function registers a standard workflow prototype to the workflow manager for further use.
-  /// @since_tizen 9.0
+  /// Registers a standard workflow prototype to the workflow manager.
   ///
-  /// @param[in] workflow The handle to the workflow prototype to register.
+  /// This function registers a standard workflow prototype to the workflow manager for further use.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MMI_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @see mmi_workflow_h
+  /// **Parameters:**
+  /// - `workflow` (in): The handle to the workflow prototype to register.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MMI_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `mmi_workflow_h`
   int mmi_standard_workflow_register(
     mmi_workflow_h workflow,
   ) {
@@ -4173,22 +5176,35 @@ class Tizen100Mmi {
       _mmi_standard_workflow_registerPtr
           .asFunction<int Function(mmi_workflow_h)>();
 
-  /// @brief Clones a workflow.
-  /// @details This function creates a clone of the specified workflow.
-  /// @since_tizen 9.0
-  /// @remarks The @a cloned should be released using mmi_workflow_destroy().
+  /// Clones a workflow.
   ///
-  /// @param[in] workflow The handle to the workflow to clone.
-  /// @param[out] cloned A pointer to store the handle of the cloned workflow.
+  /// This function creates a clone of the specified workflow.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MMI_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @par Example
-  /// @code
+  /// **Remarks:**
+  /// - The `cloned` should be released using mmi_workflow_destroy().
+  ///
+  /// **Parameters:**
+  /// - `workflow` (in): The handle to the workflow to clone.
+  /// - `cloned` (out): A pointer to store the handle of the cloned workflow.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MMI_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `mmi_workflow_h`
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <mmi.h>
   /// ...
   /// mmi_workflow_h workflow; // Indicates the handle of the workflow
@@ -4196,9 +5212,7 @@ class Tizen100Mmi {
   /// mmi_workflow_clone(workflow, &cloned);
   /// ...
   /// mmi_workflow_destroy(cloned);
-  /// @endcode
-  ///
-  /// @see mmi_workflow_h
+  /// ```
   int mmi_workflow_clone(
     mmi_workflow_h workflow,
     ffi.Pointer<mmi_workflow_h> cloned,
@@ -4216,31 +5230,42 @@ class Tizen100Mmi {
   late final _mmi_workflow_clone = _mmi_workflow_clonePtr
       .asFunction<int Function(mmi_workflow_h, ffi.Pointer<mmi_workflow_h>)>();
 
-  /// @brief Creates a workflow prototype from a script.
-  /// @details This function creates a workflow prototype from the provided script.
-  /// @since_tizen 9.0
-  /// @remarks The @a workflow should be released using mmi_workflow_destroy().
+  /// Creates a workflow prototype from a script.
   ///
-  /// @param[in] script The script to create the workflow prototype from.
-  /// @param[out] workflow A pointer to store the handle of the created workflow prototype.
+  /// This function creates a workflow prototype from the provided script.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MMI_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @par Example
-  /// @code
+  /// **Remarks:**
+  /// - The `workflow` should be released using mmi_workflow_destroy().
+  ///
+  /// **Parameters:**
+  /// - `script` (in): The script to create the workflow prototype from.
+  /// - `workflow` (out): A pointer to store the handle of the created workflow prototype.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MMI_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `mmi_workflow_h`
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <mmi.h>
   /// ...
   /// mmi_workflow_h workflow = NULL;
   /// mmi_workflow_create_from_script("@workflow", &workflow);
   /// ...
   /// mmi_workflow_destroy(workflow);
-  /// @endcode
-  ///
-  /// @see mmi_workflow_h
+  /// ```
   int mmi_workflow_create_from_script(
     ffi.Pointer<ffi.Char> script,
     ffi.Pointer<mmi_workflow_h> workflow,
@@ -4259,19 +5284,27 @@ class Tizen100Mmi {
       _mmi_workflow_create_from_scriptPtr.asFunction<
           int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<mmi_workflow_h>)>();
 
-  /// @brief Destroys a workflow prototype.
-  /// @details This function destroys the specified workflow prototype.
-  /// @since_tizen 9.0
+  /// Destroys a workflow prototype.
   ///
-  /// @param[in] workflow The handle to the workflow prototype to destroy.
+  /// This function destroys the specified workflow prototype.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MMI_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @see mmi_workflow_h
+  /// **Parameters:**
+  /// - `workflow` (in): The handle to the workflow prototype to destroy.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MMI_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `mmi_workflow_h`
   int mmi_workflow_destroy(
     mmi_workflow_h workflow,
   ) {
@@ -4286,17 +5319,24 @@ class Tizen100Mmi {
   late final _mmi_workflow_destroy =
       _mmi_workflow_destroyPtr.asFunction<int Function(mmi_workflow_h)>();
 
-  /// @brief Initializes the MMI framework.
-  /// @details This function initializes the MMI (Multimodal Interaction) framework. It must be called before any other MMI functions.
-  /// @since_tizen 9.0
+  /// Initializes the MMI framework.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_OPERATION_FAILED Operation failed
-  /// @retval #MMI_ERROR_OUT_OF_MEMORY Out of memory
+  /// This function initializes the MMI (Multimodal Interaction) framework. It must be called before any other MMI functions.
   ///
-  /// @see mmi_deinitialize(void)
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `MMI_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - mmi_deinitialize(void)
   int mmi_initialize() {
     return _mmi_initialize();
   }
@@ -4305,16 +5345,23 @@ class Tizen100Mmi {
       _lookup<ffi.NativeFunction<ffi.Int Function()>>('mmi_initialize');
   late final _mmi_initialize = _mmi_initializePtr.asFunction<int Function()>();
 
-  /// @brief Deinitializes the MMI framework.
-  /// @details This function deinitializes the MMI (Multimodal Interaction) framework. It must be called after all MMI operations are completed.
-  /// @since_tizen 9.0
+  /// Deinitializes the MMI framework.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_OPERATION_FAILED Operation failed
+  /// This function deinitializes the MMI (Multimodal Interaction) framework. It must be called after all MMI operations are completed.
   ///
-  /// @see mmi_initialize(void)
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **See also:**
+  /// - mmi_initialize(void)
   int mmi_deinitialize() {
     return _mmi_deinitialize();
   }
@@ -4324,20 +5371,28 @@ class Tizen100Mmi {
   late final _mmi_deinitialize =
       _mmi_deinitializePtr.asFunction<int Function()>();
 
-  /// @brief Sets a callback function to be invoked when the MMI state changes.
-  /// @details This function sets a callback function that will be called whenever the state of the MMI framework changes.
-  /// @since_tizen 9.0
+  /// Sets a callback function to be invoked when the MMI state changes.
   ///
-  /// @param[in] callback The callback function to be called when state is changed
-  /// @param[in] user_data The user data to be passed to the callback function
+  /// This function sets a callback function that will be called whenever the state of the MMI framework changes.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @see mmi_state_changed_cb()
-  /// @see mmi_unset_state_changed_cb()
+  /// **Parameters:**
+  /// - `callback` (in): The callback function to be called when state is changed
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `mmi_state_changed_cb()`
+  /// - `mmi_unset_state_changed_cb()`
   int mmi_set_state_changed_cb(
     mmi_state_changed_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -4355,22 +5410,33 @@ class Tizen100Mmi {
   late final _mmi_set_state_changed_cb = _mmi_set_state_changed_cbPtr
       .asFunction<int Function(mmi_state_changed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the previously set callback function for MMI state changes.
-  /// @details This function removes the previously set callback function that was called whenever the state of the MMI framework changes.
-  /// @since_tizen 9.0
+  /// Unsets the previously set callback function for MMI state changes.
   ///
-  /// @param[in] callback The callback function to be unset
+  /// This function removes the previously set callback function that was called whenever the state of the MMI framework changes.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @pre A callback function must have been set using mmi_set_state_changed_cb() before calling this function.
-  /// @post The callback function will no longer be called when the MMI state changes.
+  /// **Parameters:**
+  /// - `callback` (in): The callback function to be unset
   ///
-  /// @see mmi_state_changed_cb()
-  /// @see mmi_set_state_changed_cb()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - A callback function must have been set using mmi_set_state_changed_cb() before calling this function.
+  ///
+  /// **Postconditions:**
+  /// - The callback function will no longer be called when the MMI state changes.
+  ///
+  /// **See also:**
+  /// - `mmi_state_changed_cb()`
+  /// - `mmi_set_state_changed_cb()`
   int mmi_unset_state_changed_cb(
     mmi_state_changed_cb callback,
   ) {
@@ -4385,32 +5451,43 @@ class Tizen100Mmi {
   late final _mmi_unset_state_changed_cb = _mmi_unset_state_changed_cbPtr
       .asFunction<int Function(mmi_state_changed_cb)>();
 
-  /// @brief Creates a new workflow instance from a standard workflow prototype.
-  /// @details This function creates a new workflow instance from a predefined standard workflow prototype.
-  /// @since_tizen 9.0
-  /// @remarks The @a instance should be released using mmi_workflow_instance_destroy().
+  /// Creates a new workflow instance from a standard workflow prototype.
   ///
-  /// @param[in] type The type of the standard workflow prototype
-  /// @param[out] instance A pointer to the created workflow instance handle
+  /// This function creates a new workflow instance from a predefined standard workflow prototype.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MMI_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @par Example
-  /// @code
+  /// **Remarks:**
+  /// - The `instance` should be released using mmi_workflow_instance_destroy().
+  ///
+  /// **Parameters:**
+  /// - `type` (in): The type of the standard workflow prototype
+  /// - `instance` (out): A pointer to the created workflow instance handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MMI_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `mmi_standard_workflow_type_e`
+  /// - `mmi_workflow_instance_destroy()`
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <mmi.h>
   /// ...
   /// mmi_workflow_instance_h instance;
   /// mmi_standard_workflow_instance_create(MMI_STANDARD_WORKFLOW_VOICE_TOUCH, &instance);
   /// ...
   /// mmi_workflow_instance_destroy(instance);
-  /// @endcode
-  ///
-  /// @see mmi_standard_workflow_type_e
-  /// @see mmi_workflow_instance_destroy()
+  /// ```
   int mmi_standard_workflow_instance_create(
     int type,
     ffi.Pointer<mmi_workflow_instance_h> instance,
@@ -4430,25 +5507,42 @@ class Tizen100Mmi {
       _mmi_standard_workflow_instance_createPtr.asFunction<
           int Function(int, ffi.Pointer<mmi_workflow_instance_h>)>();
 
-  /// @brief Instantiates a workflow from a custom workflow prototype.
-  /// @details This function creates an instance of a workflow based on a custom workflow prototype.
-  /// @since_tizen 9.0
-  /// @remarks The @a instance should be released using mmi_workflow_instance_destroy().
+  /// Instantiates a workflow from a custom workflow prototype.
   ///
-  /// @param[in] workflow The handle to the custom workflow prototype.
-  /// @param[out] instance The handle to the newly created workflow instance.
+  /// This function creates an instance of a workflow based on a custom workflow prototype.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #MMI_ERROR_NONE Successful
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MMI_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @pre The custom workflow prototype must be valid and properly configured.
-  /// @post A new workflow instance will be created and assigned to the provided instance handle.
+  /// **Remarks:**
+  /// - The `instance` should be released using mmi_workflow_instance_destroy().
   ///
-  /// @par Example
-  /// @code
+  /// **Parameters:**
+  /// - `workflow` (in): The handle to the custom workflow prototype.
+  /// - `instance` (out): The handle to the newly created workflow instance.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MMI_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - The custom workflow prototype must be valid and properly configured.
+  ///
+  /// **Postconditions:**
+  /// - A new workflow instance will be created and assigned to the provided instance handle.
+  ///
+  /// **See also:**
+  /// - `mmi_workflow_h`
+  /// - `mmi_workflow_instance_h`
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// #include <mmi.h>
   /// ...
   /// const char *workflow_script = "@workflow\n...";
@@ -4459,10 +5553,7 @@ class Tizen100Mmi {
   /// mmi_custom_workflow_instance_create(workflow, &instance);
   /// ...
   /// mmi_workflow_instance_destroy(instance);
-  /// @endcode
-  ///
-  /// @see mmi_workflow_h
-  /// @see mmi_workflow_instance_h
+  /// ```
   int mmi_custom_workflow_instance_create(
     mmi_workflow_h workflow,
     ffi.Pointer<mmi_workflow_instance_h> instance,
@@ -4482,23 +5573,34 @@ class Tizen100Mmi {
       _mmi_custom_workflow_instance_createPtr.asFunction<
           int Function(mmi_workflow_h, ffi.Pointer<mmi_workflow_instance_h>)>();
 
-  /// @brief Destroys a workflow instance.
-  /// @details This function destroys a workflow instance and releases all associated resources.
-  /// @since_tizen 9.0
+  /// Destroys a workflow instance.
   ///
-  /// @param[in] instance The handle to the workflow instance to be destroyed.
+  /// This function destroys a workflow instance and releases all associated resources.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful.
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter.
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @pre The workflow instance must have been created and activated before calling this function.
-  /// @post The workflow instance is destroyed and its handle becomes invalid.
+  /// **Parameters:**
+  /// - `instance` (in): The handle to the workflow instance to be destroyed.
   ///
-  /// @see mmi_standard_workflow_instance_create()
-  /// @see mmi_custom_workflow_instance_create()
-  /// @see mmi_workflow_instance_activate()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful.
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter.
+  ///
+  /// **Preconditions:**
+  /// - The workflow instance must have been created and activated before calling this function.
+  ///
+  /// **Postconditions:**
+  /// - The workflow instance is destroyed and its handle becomes invalid.
+  ///
+  /// **See also:**
+  /// - `mmi_standard_workflow_instance_create()`
+  /// - `mmi_custom_workflow_instance_create()`
+  /// - `mmi_workflow_instance_activate()`
   int mmi_workflow_instance_destroy(
     mmi_workflow_instance_h instance,
   ) {
@@ -4513,23 +5615,34 @@ class Tizen100Mmi {
   late final _mmi_workflow_instance_destroy = _mmi_workflow_instance_destroyPtr
       .asFunction<int Function(mmi_workflow_instance_h)>();
 
-  /// @brief Activates a workflow instance.
-  /// @details This function starts the execution of a workflow instance.
-  /// @since_tizen 9.0
+  /// Activates a workflow instance.
   ///
-  /// @param[in] instance The handle to the workflow instance to be activated.
+  /// This function starts the execution of a workflow instance.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful.
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter.
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @pre The workflow instance must have been created before calling this function.
-  /// @post The workflow instance is ready to process inputs and emit outputs.
+  /// **Parameters:**
+  /// - `instance` (in): The handle to the workflow instance to be activated.
   ///
-  /// @see mmi_standard_workflow_instance_create()
-  /// @see mmi_custom_workflow_instance_create()
-  /// @see mmi_workflow_instance_deactivate()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful.
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter.
+  ///
+  /// **Preconditions:**
+  /// - The workflow instance must have been created before calling this function.
+  ///
+  /// **Postconditions:**
+  /// - The workflow instance is ready to process inputs and emit outputs.
+  ///
+  /// **See also:**
+  /// - `mmi_standard_workflow_instance_create()`
+  /// - `mmi_custom_workflow_instance_create()`
+  /// - `mmi_workflow_instance_deactivate()`
   int mmi_workflow_instance_activate(
     mmi_workflow_instance_h instance,
   ) {
@@ -4545,21 +5658,32 @@ class Tizen100Mmi {
       _mmi_workflow_instance_activatePtr
           .asFunction<int Function(mmi_workflow_instance_h)>();
 
-  /// @brief Deactivates a workflow instance.
-  /// @details This function stops the execution of a workflow instance.
-  /// @since_tizen 9.0
+  /// Deactivates a workflow instance.
   ///
-  /// @param[in] instance The handle to the workflow instance to be deactivated.
+  /// This function stops the execution of a workflow instance.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful.
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter.
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @pre The workflow instance must have been created and activated before calling this function.
-  /// @post The workflow instance is stopped and cannot process inputs or emit outputs.
+  /// **Parameters:**
+  /// - `instance` (in): The handle to the workflow instance to be deactivated.
   ///
-  /// @see mmi_workflow_instance_activate()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful.
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter.
+  ///
+  /// **Preconditions:**
+  /// - The workflow instance must have been created and activated before calling this function.
+  ///
+  /// **Postconditions:**
+  /// - The workflow instance is stopped and cannot process inputs or emit outputs.
+  ///
+  /// **See also:**
+  /// - `mmi_workflow_instance_activate()`
   int mmi_workflow_instance_deactivate(
     mmi_workflow_instance_h instance,
   ) {
@@ -4575,22 +5699,33 @@ class Tizen100Mmi {
       _mmi_workflow_instance_deactivatePtr
           .asFunction<int Function(mmi_workflow_instance_h)>();
 
-  /// @brief Sets an attribute of a workflow instance.
-  /// @details This function sets an attribute to the workflow instance.
-  /// @since_tizen 9.0
+  /// Sets an attribute of a workflow instance.
   ///
-  /// @param[in] instance The handle to the workflow instance.
-  /// @param[in] attribute The handle to the attribute to be set.
+  /// This function sets an attribute to the workflow instance.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful.
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter.
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @pre The workflow instance must have been created before calling this function.
-  /// @post The attribute is set to the workflow instance.
+  /// **Parameters:**
+  /// - `instance` (in): The handle to the workflow instance.
+  /// - `attribute` (in): The handle to the attribute to be set.
   ///
-  /// @see mmi_attribute_create()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful.
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter.
+  ///
+  /// **Preconditions:**
+  /// - The workflow instance must have been created before calling this function.
+  ///
+  /// **Postconditions:**
+  /// - The attribute is set to the workflow instance.
+  ///
+  /// **See also:**
+  /// - `mmi_attribute_create()`
   int mmi_workflow_instance_set_attribute(
     mmi_workflow_instance_h instance,
     mmi_attribute_h attribute,
@@ -4609,22 +5744,33 @@ class Tizen100Mmi {
       _mmi_workflow_instance_set_attributePtr
           .asFunction<int Function(mmi_workflow_instance_h, mmi_attribute_h)>();
 
-  /// @brief Emits a signal to a workflow instance.
-  /// @details This function sends a signal to the workflow instance.
-  /// @since_tizen 9.0
+  /// Emits a signal to a workflow instance.
   ///
-  /// @param[in] instance The handle to the workflow instance.
-  /// @param[in] signal The handle to the signal to be emitted.
+  /// This function sends a signal to the workflow instance.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful.
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter.
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @pre The workflow instance must have been created and activated before calling this function.
-  /// @post The signal is processed by the workflow instance.
+  /// **Parameters:**
+  /// - `instance` (in): The handle to the workflow instance.
+  /// - `signal` (in): The handle to the signal to be emitted.
   ///
-  /// @see mmi_signal_create()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful.
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter.
+  ///
+  /// **Preconditions:**
+  /// - The workflow instance must have been created and activated before calling this function.
+  ///
+  /// **Postconditions:**
+  /// - The signal is processed by the workflow instance.
+  ///
+  /// **See also:**
+  /// - `mmi_signal_create()`
   int mmi_workflow_instance_emit_signal(
     mmi_workflow_instance_h instance,
     mmi_signal_h signal,
@@ -4643,25 +5789,36 @@ class Tizen100Mmi {
       _mmi_workflow_instance_emit_signalPtr
           .asFunction<int Function(mmi_workflow_instance_h, mmi_signal_h)>();
 
-  /// @brief Sets a callback function to receive workflow output.
-  /// @details This function sets a callback function that will be called when the workflow instance emits output.
-  /// @since_tizen 9.0
+  /// Sets a callback function to receive workflow output.
   ///
-  /// @param[in] instance The handle to the workflow instance.
-  /// @param[in] name The name associated with the callback.
-  /// @param[in] callback The callback function to be set.
-  /// @param[in] user_data The user data to be passed to the callback function.
+  /// This function sets a callback function that will be called when the workflow instance emits output.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #MMI_ERROR_NONE Successful.
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter.
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @pre The workflow instance must have been created before calling this function.
-  /// @post The callback function will be called when the workflow instance emits output.
+  /// **Parameters:**
+  /// - `instance` (in): The handle to the workflow instance.
+  /// - `name` (in): The name associated with the callback.
+  /// - `callback` (in): The callback function to be set.
+  /// - `user_data` (in): The user data to be passed to the callback function.
   ///
-  /// @see mmi_workflow_output_cb()
-  /// @see mmi_workflow_instance_unset_output_cb()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful.
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter.
+  ///
+  /// **Preconditions:**
+  /// - The workflow instance must have been created before calling this function.
+  ///
+  /// **Postconditions:**
+  /// - The callback function will be called when the workflow instance emits output.
+  ///
+  /// **See also:**
+  /// - `mmi_workflow_output_cb()`
+  /// - `mmi_workflow_instance_unset_output_cb()`
   int mmi_workflow_instance_set_output_cb(
     mmi_workflow_instance_h instance,
     ffi.Pointer<ffi.Char> name,
@@ -4688,24 +5845,34 @@ class Tizen100Mmi {
           int Function(mmi_workflow_instance_h, ffi.Pointer<ffi.Char>,
               mmi_workflow_output_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets a callback function for an output of a workflow instance.
-  /// @details This function unsets a callback function that was set by mmi_workflow_instance_set_output_cb().
-  /// After this function is called, the callback function will not be called when the workflow instance emits output.
-  /// @since_tizen 9.0
+  /// Unsets a callback function for an output of a workflow instance.
   ///
-  /// @param[in] instance The handle to the workflow instance
-  /// @param[in] callback The callback function pointer to unset
+  /// This function unsets a callback function that was set by mmi_workflow_instance_set_output_cb(). After this function is called, the callback function will not be called when the workflow instance emits output.
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MMI_ERROR_NONE Successful.
-  /// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter.
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @pre The workflow instance must have been created before calling this function.
-  /// @post The callback function will not be called when the workflow instance emits output.
+  /// **Parameters:**
+  /// - `instance` (in): The handle to the workflow instance
+  /// - `callback` (in): The callback function pointer to unset
   ///
-  /// @see mmi_workflow_output_cb()
-  /// @see mmi_workflow_instance_set_output_cb()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MMI_ERROR_NONE`: Successful.
+  /// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter.
+  ///
+  /// **Preconditions:**
+  /// - The workflow instance must have been created before calling this function.
+  ///
+  /// **Postconditions:**
+  /// - The callback function will not be called when the workflow instance emits output.
+  ///
+  /// **See also:**
+  /// - `mmi_workflow_output_cb()`
+  /// - `mmi_workflow_instance_set_output_cb()`
   int mmi_workflow_instance_unset_output_cb(
     mmi_workflow_instance_h instance,
     mmi_workflow_output_cb callback,
@@ -4726,9 +5893,13 @@ class Tizen100Mmi {
           int Function(mmi_workflow_instance_h, mmi_workflow_output_cb)>();
 }
 
-/// @brief Enumeration for primitive value types.
-/// @details This enumeration defines the different types of primitive values supported by the MMI framework.
-/// @since_tizen 9.0
+/// Enumeration for primitive value types.
+///
+/// This enumeration defines the different types of primitive values supported by the MMI framework.
+///
+/// **Since Tizen:**
+/// - 9.0
+/// @nodoc
 abstract class mmi_primitive_value_type_e {
   /// < Integer type
   static const int MMI_PRIMITIVE_VALUE_TYPE_INT = 0;
@@ -4746,23 +5917,37 @@ abstract class mmi_primitive_value_type_e {
   static const int MMI_PRIMITIVE_VALUE_TYPE_ARRAY = 4;
 }
 
+/// @nodoc
 final class mmi_primitive_value_s extends ffi.Opaque {}
 
-/// @brief Handle for MMI primitive value.
-/// @details This handle represents a primitive value that an attribute can store within the MMI framework.
-/// @since_tizen 9.0
+/// Handle for MMI primitive value.
+///
+/// This handle represents a primitive value that an attribute can store within the MMI framework.
+///
+/// **Since Tizen:**
+/// - 9.0
+/// @nodoc
 typedef mmi_primitive_value_h = ffi.Pointer<mmi_primitive_value_s>;
 
+/// @nodoc
 final class mmi_attribute_s extends ffi.Opaque {}
 
-/// @brief Handle for MMI attributes.
-/// @details This handle represents an attribute of a workflow or a node
-/// @since_tizen 9.0
+/// Handle for MMI attributes.
+///
+/// This handle represents an attribute of a workflow or a node
+///
+/// **Since Tizen:**
+/// - 9.0
+/// @nodoc
 typedef mmi_attribute_h = ffi.Pointer<mmi_attribute_s>;
 
-/// @brief Enumeration for MMI data types.
-/// @details This enumeration defines the different data types supported by the MMI framework.
-/// @since_tizen 9.0
+/// Enumeration for MMI data types.
+///
+/// This enumeration defines the different data types supported by the MMI framework.
+///
+/// **Since Tizen:**
+/// - 9.0
+/// @nodoc
 abstract class mmi_data_type_e {
   /// < Boolean data type
   static const int MMI_DATA_TYPE_BOOLEAN = 0;
@@ -4804,15 +5989,23 @@ abstract class mmi_data_type_e {
   static const int MMI_DATA_TYPE_ANY = 12;
 }
 
+/// @nodoc
 final class mmi_data_s extends ffi.Opaque {}
 
-/// @brief Handle for MMI data.
-/// @details This handle represents a data that can flow among nodes in MMI framework.
-/// @since_tizen 9.0
+/// Handle for MMI data.
+///
+/// This handle represents a data that can flow among nodes in MMI framework.
+///
+/// **Since Tizen:**
+/// - 9.0
+/// @nodoc
 typedef mmi_data_h = ffi.Pointer<mmi_data_s>;
 
-/// @brief Enumerations for MMI error codes.
-/// @since_tizen 9.0
+/// Enumerations for MMI error codes.
+///
+/// **Since Tizen:**
+/// - 9.0
+/// @nodoc
 abstract class mmi_error_e {
   /// < Successful
   static const int MMI_ERROR_NONE = 0;
@@ -4842,9 +6035,13 @@ abstract class mmi_error_e {
   static const int MMI_ERROR_RESOURCE_BUSY = -51511294;
 }
 
-/// @brief Enumeration for port types.
-/// @details This enumeration defines the different types of ports available in the MMI framework.
-/// @since_tizen 9.0
+/// Enumeration for port types.
+///
+/// This enumeration defines the different types of ports available in the MMI framework.
+///
+/// **Since Tizen:**
+/// - 9.0
+/// @nodoc
 abstract class mmi_port_type_e {
   /// < Indicates an input port.
   static const int MMI_PORT_TYPE_IN = 0;
@@ -4853,60 +6050,95 @@ abstract class mmi_port_type_e {
   static const int MMI_PORT_TYPE_OUT = 1;
 }
 
+/// @nodoc
 final class mmi_port_s extends ffi.Opaque {}
 
-/// @brief Handle for MMI port.
-/// @details This handle represents a port created within the MMI framework.
-/// @since_tizen 9.0
+/// Handle for MMI port.
+///
+/// This handle represents a port created within the MMI framework.
+///
+/// **Since Tizen:**
+/// - 9.0
+/// @nodoc
 typedef mmi_port_h = ffi.Pointer<mmi_port_s>;
 
-/// @brief Callback function type for input data reception.
-/// @details This callback function is called whenever input data is received for a port instance.
-/// @since_tizen 9.0
-/// @remarks The @a instance should not be released.
-/// The @a instance is available until the port instance is released.
-/// @remarks The @a data should not be released.
-/// The @a data can be used only in the callback. To use outside, make a copy.
+/// Callback function type for input data reception.
 ///
-/// @param[in] instance The port instance handle.
-/// @param[in] data The received input data.
-/// @param[in] user_data The user data passed from the registration function.
+/// This callback function is called whenever input data is received for a port instance.
 ///
-/// @return An integer value indicating the result of the callback execution.
-/// @retval 0 on success, otherwise a negative error value.
+/// **Since Tizen:**
+/// - 9.0
+///
+/// **Remarks:**
+/// - The `instance` should not be released.
+/// - The `instance` is available until the port instance is released.
+/// - The `data` should not be released.
+/// - The `data` can be used only in the callback. To use outside, make a copy.
+///
+/// **Parameters:**
+/// - `instance` (in): The port instance handle.
+/// - `data` (in): The received input data.
+/// - `user_data` (in): The user data passed from the registration function.
+///
+/// **Returns:**
+/// - An integer value indicating the result of the callback execution.
+///
+/// **Return values:**
+/// - `0`: on success, otherwise a negative error value.
+/// @nodoc
 typedef mmi_port_input_data_received_cb
     = ffi.Pointer<ffi.NativeFunction<mmi_port_input_data_received_cbFunction>>;
+/// @nodoc
 typedef mmi_port_input_data_received_cbFunction = ffi.Int Function(
     mmi_port_instance_h instance,
     mmi_data_h data,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmmi_port_input_data_received_cbFunction = int Function(
     mmi_port_instance_h instance,
     mmi_data_h data,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Handle for MMI port instance.
-/// @details This handle represents a port instance created within the MMI framework.
-/// @since_tizen 9.0
+/// Handle for MMI port instance.
+///
+/// This handle represents a port instance created within the MMI framework.
+///
+/// **Since Tizen:**
+/// - 9.0
+/// @nodoc
 typedef mmi_port_instance_h = ffi.Pointer<ffi.Void>;
 
+/// @nodoc
 final class mmi_signal_parameter_s extends ffi.Opaque {}
 
+/// @nodoc
 final class mmi_signal_s extends ffi.Opaque {}
 
-/// @brief Handle for MMI signal parameter.
-/// @details This handle represents a parameter that a signal can embed within the MMI framework.
-/// @since_tizen 9.0
+/// Handle for MMI signal parameter.
+///
+/// This handle represents a parameter that a signal can embed within the MMI framework.
+///
+/// **Since Tizen:**
+/// - 9.0
+/// @nodoc
 typedef mmi_signal_parameter_h = ffi.Pointer<mmi_signal_parameter_s>;
 
-/// @brief Handle for MMI signal.
-/// @details This handle represents a signal that can be sent to a workflow or a node within the MMI framework.
-/// @since_tizen 9.0
+/// Handle for MMI signal.
+///
+/// This handle represents a signal that can be sent to a workflow or a node within the MMI framework.
+///
+/// **Since Tizen:**
+/// - 9.0
+/// @nodoc
 typedef mmi_signal_h = ffi.Pointer<mmi_signal_s>;
 
-/// @brief Enumeration for MMI node types.
-/// @details This enumeration defines the different types of nodes in the MMI framework.
-/// @since_tizen 9.0
+/// Enumeration for MMI node types.
+///
+/// This enumeration defines the different types of nodes in the MMI framework.
+///
+/// **Since Tizen:**
+/// - 9.0
+/// @nodoc
 abstract class mmi_node_type_e {
   /// < Indicates no specific node type.
   static const int MMI_NODE_TYPE_NONE = 0;
@@ -4930,155 +6162,240 @@ abstract class mmi_node_type_e {
   static const int MMI_NODE_TYPE_CUSTOM = 6;
 }
 
+/// @nodoc
 final class mmi_node_s extends ffi.Opaque {}
 
-/// @brief Handle for MMI node.
-/// @details This handle represents a node created within the MMI framework.
-/// @since_tizen 9.0
+/// Handle for MMI node.
+///
+/// This handle represents a node created within the MMI framework.
+///
+/// **Since Tizen:**
+/// - 9.0
+/// @nodoc
 typedef mmi_node_h = ffi.Pointer<mmi_node_s>;
 
-/// @brief Callback function type for MMI node initialization.
-/// @details This callback function is called when a node instance is initialized.
-/// @since_tizen 9.0
-/// @remarks The @a instance should not be released.
-/// The @a instance is available until the node instance is released.
+/// Callback function type for MMI node initialization.
 ///
-/// @param[in] instance The handle of the initialized node instance.
-/// @param[in] user_data The user data passed from the callback registration function.
+/// This callback function is called when a node instance is initialized.
 ///
-/// @return An integer value indicating the result of the callback execution.
-/// @retval #MMI_ERROR_NONE Successful
-/// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-/// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
+/// **Since Tizen:**
+/// - 9.0
+///
+/// **Remarks:**
+/// - The `instance` should not be released.
+/// - The `instance` is available until the node instance is released.
+///
+/// **Parameters:**
+/// - `instance` (in): The handle of the initialized node instance.
+/// - `user_data` (in): The user data passed from the callback registration function.
+///
+/// **Returns:**
+/// - An integer value indicating the result of the callback execution.
+///
+/// **Return values:**
+/// - `MMI_ERROR_NONE`: Successful
+/// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+/// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+/// @nodoc
 typedef mmi_node_initialized_cb
     = ffi.Pointer<ffi.NativeFunction<mmi_node_initialized_cbFunction>>;
+/// @nodoc
 typedef mmi_node_initialized_cbFunction = ffi.Int Function(
     mmi_node_instance_h instance, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmmi_node_initialized_cbFunction = int Function(
     mmi_node_instance_h instance, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Handle for MMI node instance.
-/// @details This handle represents an instance of a node created within the MMI framework.
-/// @since_tizen 9.0
+/// Handle for MMI node instance.
+///
+/// This handle represents an instance of a node created within the MMI framework.
+///
+/// **Since Tizen:**
+/// - 9.0
+/// @nodoc
 typedef mmi_node_instance_h = ffi.Pointer<ffi.Void>;
 
-/// @brief Callback function type for MMI node deinitialization.
-/// @details This callback function is called when a node instance is deinitialized.
-/// @since_tizen 9.0
-/// @remarks The @a instance should not be released.
-/// The @a instance is available until the node instance is released.
+/// Callback function type for MMI node deinitialization.
 ///
-/// @param[in] instance The handle of the deinitialized node instance.
-/// @param[in] user_data The user data passed from the callback registration function.
+/// This callback function is called when a node instance is deinitialized.
 ///
-/// @return An integer value indicating the result of the callback execution.
-/// @retval #MMI_ERROR_NONE Successful
-/// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-/// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
+/// **Since Tizen:**
+/// - 9.0
+///
+/// **Remarks:**
+/// - The `instance` should not be released.
+/// - The `instance` is available until the node instance is released.
+///
+/// **Parameters:**
+/// - `instance` (in): The handle of the deinitialized node instance.
+/// - `user_data` (in): The user data passed from the callback registration function.
+///
+/// **Returns:**
+/// - An integer value indicating the result of the callback execution.
+///
+/// **Return values:**
+/// - `MMI_ERROR_NONE`: Successful
+/// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+/// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+/// @nodoc
 typedef mmi_node_deinitialized_cb
     = ffi.Pointer<ffi.NativeFunction<mmi_node_deinitialized_cbFunction>>;
+/// @nodoc
 typedef mmi_node_deinitialized_cbFunction = ffi.Int Function(
     mmi_node_instance_h instance, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmmi_node_deinitialized_cbFunction = int Function(
     mmi_node_instance_h instance, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Callback function type for setting MMI node attributes.
-/// @details This callback function is called when an attribute is set on a node instance.
-/// @since_tizen 9.0
-/// @remarks The @a instance should not be released.
-/// The @a instance is available until the node instance is released.
-/// @remarks The @a attribute should not be released.
-/// The @a attribute can be used only in the callback. To use outside, make a copy.
+/// Callback function type for setting MMI node attributes.
 ///
-/// @param[in] instance The handle of the node instance.
-/// @param[in] attribute The handle of the attribute being set.
-/// @param[in] user_data The user data passed from the callback registration function.
+/// This callback function is called when an attribute is set on a node instance.
 ///
-/// @return An integer value indicating the result of the callback execution.
-/// @retval #MMI_ERROR_NONE Successful
-/// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-/// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
+/// **Since Tizen:**
+/// - 9.0
+///
+/// **Remarks:**
+/// - The `instance` should not be released.
+/// - The `instance` is available until the node instance is released.
+/// - The `attribute` should not be released.
+/// - The `attribute` can be used only in the callback. To use outside, make a copy.
+///
+/// **Parameters:**
+/// - `instance` (in): The handle of the node instance.
+/// - `attribute` (in): The handle of the attribute being set.
+/// - `user_data` (in): The user data passed from the callback registration function.
+///
+/// **Returns:**
+/// - An integer value indicating the result of the callback execution.
+///
+/// **Return values:**
+/// - `MMI_ERROR_NONE`: Successful
+/// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+/// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+/// @nodoc
 typedef mmi_node_attribute_set_cb
     = ffi.Pointer<ffi.NativeFunction<mmi_node_attribute_set_cbFunction>>;
+/// @nodoc
 typedef mmi_node_attribute_set_cbFunction = ffi.Int Function(
     mmi_node_instance_h instance,
     mmi_attribute_h attribute,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmmi_node_attribute_set_cbFunction = int Function(
     mmi_node_instance_h instance,
     mmi_attribute_h attribute,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Callback function type for MMI node activation.
-/// @details This callback function is called when a node instance is activated.
-/// @since_tizen 9.0
-/// @remarks The @a instance should not be released.
-/// The @a instance is available until the node instance is released.
+/// Callback function type for MMI node activation.
 ///
-/// @param[in] instance The handle of the activated node instance.
-/// @param[in] user_data The user data passed from the callback registration function.
+/// This callback function is called when a node instance is activated.
 ///
-/// @return An integer value indicating the result of the callback execution.
-/// @retval #MMI_ERROR_NONE Successful
-/// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-/// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
+/// **Since Tizen:**
+/// - 9.0
+///
+/// **Remarks:**
+/// - The `instance` should not be released.
+/// - The `instance` is available until the node instance is released.
+///
+/// **Parameters:**
+/// - `instance` (in): The handle of the activated node instance.
+/// - `user_data` (in): The user data passed from the callback registration function.
+///
+/// **Returns:**
+/// - An integer value indicating the result of the callback execution.
+///
+/// **Return values:**
+/// - `MMI_ERROR_NONE`: Successful
+/// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+/// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+/// @nodoc
 typedef mmi_node_activated_cb
     = ffi.Pointer<ffi.NativeFunction<mmi_node_activated_cbFunction>>;
+/// @nodoc
 typedef mmi_node_activated_cbFunction = ffi.Int Function(
     mmi_node_instance_h instance, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmmi_node_activated_cbFunction = int Function(
     mmi_node_instance_h instance, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Callback function type for MMI node deactivation.
-/// @details This callback function is called when a node instance is deactivated.
-/// @since_tizen 9.0
-/// @remarks The @a instance should not be released.
-/// The @a instance is available until the node instance is released.
+/// Callback function type for MMI node deactivation.
 ///
-/// @param[in] instance The handle of the deactivated node instance.
-/// @param[in] user_data The user data passed from the callback registration function.
+/// This callback function is called when a node instance is deactivated.
 ///
-/// @return An integer value indicating the result of the callback execution.
-/// @retval #MMI_ERROR_NONE Successful
-/// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-/// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
+/// **Since Tizen:**
+/// - 9.0
+///
+/// **Remarks:**
+/// - The `instance` should not be released.
+/// - The `instance` is available until the node instance is released.
+///
+/// **Parameters:**
+/// - `instance` (in): The handle of the deactivated node instance.
+/// - `user_data` (in): The user data passed from the callback registration function.
+///
+/// **Returns:**
+/// - An integer value indicating the result of the callback execution.
+///
+/// **Return values:**
+/// - `MMI_ERROR_NONE`: Successful
+/// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+/// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+/// @nodoc
 typedef mmi_node_deactivated_cb
     = ffi.Pointer<ffi.NativeFunction<mmi_node_deactivated_cbFunction>>;
+/// @nodoc
 typedef mmi_node_deactivated_cbFunction = ffi.Int Function(
     mmi_node_instance_h instance, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmmi_node_deactivated_cbFunction = int Function(
     mmi_node_instance_h instance, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Callback function type for receiving MMI signals.
-/// @details This callback function is called when a signal is received by a node instance.
-/// @since_tizen 9.0
-/// @remarks The @a instance should not be released.
-/// The @a instance is available until the node instance is released.
-/// @remarks The @a signal should not be released.
-/// The @a signal can be used only in the callback. To use outside, make a copy.
+/// Callback function type for receiving MMI signals.
 ///
-/// @param[in] instance The handle of the node instance receiving the signal.
-/// @param[in] signal The handle of the received signal.
-/// @param[in] user_data The user data passed from the callback registration function.
+/// This callback function is called when a signal is received by a node instance.
 ///
-/// @return An integer value indicating the result of the callback execution.
-/// @retval #MMI_ERROR_NONE Successful
-/// @retval #MMI_ERROR_NOT_SUPPORTED Not supported
-/// @retval #MMI_ERROR_INVALID_PARAMETER Invalid parameter
+/// **Since Tizen:**
+/// - 9.0
+///
+/// **Remarks:**
+/// - The `instance` should not be released.
+/// - The `instance` is available until the node instance is released.
+/// - The `signal` should not be released.
+/// - The `signal` can be used only in the callback. To use outside, make a copy.
+///
+/// **Parameters:**
+/// - `instance` (in): The handle of the node instance receiving the signal.
+/// - `signal` (in): The handle of the received signal.
+/// - `user_data` (in): The user data passed from the callback registration function.
+///
+/// **Returns:**
+/// - An integer value indicating the result of the callback execution.
+///
+/// **Return values:**
+/// - `MMI_ERROR_NONE`: Successful
+/// - `MMI_ERROR_NOT_SUPPORTED`: Not supported
+/// - `MMI_ERROR_INVALID_PARAMETER`: Invalid parameter
+/// @nodoc
 typedef mmi_node_signal_received_cb
     = ffi.Pointer<ffi.NativeFunction<mmi_node_signal_received_cbFunction>>;
+/// @nodoc
 typedef mmi_node_signal_received_cbFunction = ffi.Int Function(
     mmi_node_instance_h instance,
     mmi_signal_h signal,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmmi_node_signal_received_cbFunction = int Function(
     mmi_node_instance_h instance,
     mmi_signal_h signal,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Enumeration for standard MMI workflows.
-/// @details This enumeration defines the different types of standard workflows supported by the MMI framework.
-/// @since_tizen 9.0
+/// Enumeration for standard MMI workflows.
+///
+/// This enumeration defines the different types of standard workflows supported by the MMI framework.
+///
+/// **Since Tizen:**
+/// - 9.0
+/// @nodoc
 abstract class mmi_standard_workflow_type_e {
   /// < Indicates that no standard workflow is selected.
   static const int MMI_STANDARD_WORKFLOW_NONE = 0;
@@ -5087,16 +6404,25 @@ abstract class mmi_standard_workflow_type_e {
   static const int MMI_STANDARD_WORKFLOW_VOICE_TOUCH = 1;
 }
 
+/// @nodoc
 final class mmi_workflow_s extends ffi.Opaque {}
 
-/// @brief Handle for MMI workflow prototypes.
-/// @details This handle represents a workflow prototype created within the MMI framework.
-/// @since_tizen 9.0
+/// Handle for MMI workflow prototypes.
+///
+/// This handle represents a workflow prototype created within the MMI framework.
+///
+/// **Since Tizen:**
+/// - 9.0
+/// @nodoc
 typedef mmi_workflow_h = ffi.Pointer<mmi_workflow_s>;
 
-/// @brief Enumeration for MMI state.
-/// @details This enumeration defines the different states of the MMI client.
-/// @since_tizen 9.0
+/// Enumeration for MMI state.
+///
+/// This enumeration defines the different states of the MMI client.
+///
+/// **Since Tizen:**
+/// - 9.0
+/// @nodoc
 abstract class mmi_state_e {
   /// < Indicates that there is no active state.
   static const int MMI_STATE_NONE = 0;
@@ -5105,53 +6431,75 @@ abstract class mmi_state_e {
   static const int MMI_STATE_READY = 1;
 }
 
-/// @brief Callback function type for MMI state change notifications.
-/// @details This callback function is called whenever the state of the MMI client changes.
-/// @since_tizen 9.0
+/// Callback function type for MMI state change notifications.
 ///
-/// @param[in] state The new state of the MMI client.
-/// @param[in] user_data User-provided data passed to the callback function.
+/// This callback function is called whenever the state of the MMI client changes.
 ///
-/// @return An integer value indicating the result of the callback execution.
-/// @retval 0 on success, otherwise a negative error value.
+/// **Since Tizen:**
+/// - 9.0
 ///
-/// @see mmi_state_e
+/// **Parameters:**
+/// - `state` (in): The new state of the MMI client.
+/// - `user_data` (in): User-provided data passed to the callback function.
+///
+/// **Returns:**
+/// - An integer value indicating the result of the callback execution.
+///
+/// **Return values:**
+/// - `0`: on success, otherwise a negative error value.
+///
+/// **See also:**
+/// - `mmi_state_e`
+/// @nodoc
 typedef mmi_state_changed_cb
     = ffi.Pointer<ffi.NativeFunction<mmi_state_changed_cbFunction>>;
+/// @nodoc
 typedef mmi_state_changed_cbFunction = ffi.Int Function(
     ffi.Int32 state, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmmi_state_changed_cbFunction = int Function(
     int state, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Handle for MMI workflow instance.
-/// @details This handle represents a workflow instance created within the MMI framework.
-/// @since_tizen 9.0
+/// Handle for MMI workflow instance.
+///
+/// This handle represents a workflow instance created within the MMI framework.
+///
+/// **Since Tizen:**
+/// - 9.0
+/// @nodoc
 typedef mmi_workflow_instance_h = ffi.Pointer<ffi.Void>;
 
-/// @brief Callback function type for handling workflow output.
-/// @details This callback function is called when the MMI framework generates output for a workflow instance.
-/// @since_tizen 9.0
-/// @remarks The @a instance should not be released.
-/// The @a data should not be released.
-/// The @a data can be used only in the callback. To use outside, make a copy.
+/// Callback function type for handling workflow output.
 ///
-/// @param[in] instance The workflow instance handle for which the output is generated.
-/// The @a instance is the same object for which the callback was set/added.
-/// The @a instance is available until the workflow instance is released.
-/// @param[in] name The name associated with the workflow output.
-/// The @a name can be used only in the callback. To use outside, make a copy.
-/// @param[in] data The output data generated by the workflow.
-/// @param[in] user_data User-provided data passed to the callback function.
+/// This callback function is called when the MMI framework generates output for a workflow instance.
 ///
-/// @see mmi_workflow_instance_set_output_cb()
-/// @see mmi_workflow_instance_unset_output_cb()
+/// **Since Tizen:**
+/// - 9.0
+///
+/// **Remarks:**
+/// - The `instance` should not be released.
+/// - The `data` should not be released.
+/// - The `data` can be used only in the callback. To use outside, make a copy.
+///
+/// **Parameters:**
+/// - `instance` (in): The workflow instance handle for which the output is generated. The `instance` is the same object for which the callback was set/added. The `instance` is available until the workflow instance is released.
+/// - `name` (in): The name associated with the workflow output. The `name` can be used only in the callback. To use outside, make a copy.
+/// - `data` (in): The output data generated by the workflow.
+/// - `user_data` (in): User-provided data passed to the callback function.
+///
+/// **See also:**
+/// - `mmi_workflow_instance_set_output_cb()`
+/// - `mmi_workflow_instance_unset_output_cb()`
+/// @nodoc
 typedef mmi_workflow_output_cb
     = ffi.Pointer<ffi.NativeFunction<mmi_workflow_output_cbFunction>>;
+/// @nodoc
 typedef mmi_workflow_output_cbFunction = ffi.Void Function(
     mmi_workflow_instance_h instance,
     ffi.Pointer<ffi.Char> name,
     mmi_data_h data,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmmi_workflow_output_cbFunction = void Function(
     mmi_workflow_instance_h instance,
     ffi.Pointer<ffi.Char> name,

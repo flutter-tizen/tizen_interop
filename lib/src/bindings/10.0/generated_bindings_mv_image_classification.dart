@@ -1,3 +1,6 @@
+/// {@category 10.0/tizen}
+library tizen_interop_10_0.mv_image_classification;
+
 // Copyright 2026 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -10,6 +13,7 @@ import 'dart:ffi' as ffi;
 import 'generated_bindings_mv_common.dart' as mv_common;
 
 /// Dart bindings for Tizen mv_image_classification APIs.
+/// {@category 10.0/tizen}
 class Tizen100MvImageClassification {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -25,34 +29,38 @@ class Tizen100MvImageClassification {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Creates image classification object handle.
-  /// @details Use this function to create an image classification object handle.
-  /// After creation the handle has to be prepared with
-  /// mv_image_classification_prepare() function to prepare
-  /// an image classification object.
+  /// Creates image classification object handle.
   ///
-  /// @since_tizen 9.0
+  /// Use this function to create an image classification object handle. After creation the handle has to be prepared with mv_image_classification_prepare() function to prepare an image classification object.
   ///
-  /// @param[out] handle    The handle to the image classification object to be created
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_INTERNAL Internal Error
+  /// **Parameters:**
+  /// - `handle` (out): The handle to the image classification object to be created
   ///
-  /// @post Release @a handle by using mv_image_classification_destroy() function when
-  /// it is not needed anymore.
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @code
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_INTERNAL`: Internal Error
+  ///
+  /// **Postconditions:**
+  /// - Release `handle` by using mv_image_classification_destroy() function when it is not needed anymore.
+  ///
+  /// **See also:**
+  /// - `mv_image_classification_destroy()`
+  ///
+  /// ```
   /// #include <mv_image_classification.h>
   /// ...
   /// mv_image_classification_h handle = NULL;
   /// mv_image_classification_create(&handle);
   /// ...
   /// mv_image_classification_destroy(handle);
-  /// @endcode
-  ///
-  /// @see mv_image_classification_destroy()
+  /// ```
   int mv_image_classification_create(
     ffi.Pointer<mv_image_classification_h> handle,
   ) {
@@ -69,19 +77,26 @@ class Tizen100MvImageClassification {
       _mv_image_classification_createPtr
           .asFunction<int Function(ffi.Pointer<mv_image_classification_h>)>();
 
-  /// @brief Destroys image classification handle and releases all its resources.
+  /// Destroys image classification handle and releases all its resources.
   ///
-  /// @since_tizen 9.0
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @param[in] handle    The handle to the image classification object to be destroyed.
+  /// **Parameters:**
+  /// - `handle` (in): The handle to the image classification object to be destroyed.
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @pre Create an image classification handle by using mv_image_classification_create()
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
   ///
-  /// @see mv_image_classification_create()
+  /// **Preconditions:**
+  /// - Create an image classification handle by using mv_image_classification_create()
+  ///
+  /// **See also:**
+  /// - `mv_image_classification_create()`
   int mv_image_classification_destroy(
     mv_image_classification_h handle,
   ) {
@@ -97,17 +112,22 @@ class Tizen100MvImageClassification {
       _mv_image_classification_destroyPtr
           .asFunction<int Function(mv_image_classification_h)>();
 
-  /// @brief Configures the backend to the inference handle.
+  /// Configures the backend to the inference handle.
   ///
-  /// @since_tizen 9.0
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @param[in] handle         The handle to the inference
+  /// **Parameters:**
+  /// - `handle` (in): The handle to the inference
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_OUT_OF_MEMORY`: Out of memory
   int mv_image_classification_configure(
     mv_image_classification_h handle,
   ) {
@@ -123,19 +143,24 @@ class Tizen100MvImageClassification {
       _mv_image_classification_configurePtr
           .asFunction<int Function(mv_image_classification_h)>();
 
-  /// @brief Prepares inference.
-  /// @details Use this function to prepare inference based on
-  /// the configured network.
+  /// Prepares inference.
   ///
-  /// @since_tizen 9.0
+  /// Use this function to prepare inference based on the configured network.
   ///
-  /// @param[in] handle         The handle to the inference
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_INVALID_DATA Invalid model data
-  /// @retval #MEDIA_VISION_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Parameters:**
+  /// - `handle` (in): The handle to the inference
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_INVALID_DATA`: Invalid model data
+  /// - `MEDIA_VISION_ERROR_OUT_OF_MEMORY`: Out of memory
   int mv_image_classification_prepare(
     mv_image_classification_h handle,
   ) {
@@ -151,28 +176,33 @@ class Tizen100MvImageClassification {
       _mv_image_classification_preparePtr
           .asFunction<int Function(mv_image_classification_h)>();
 
-  /// @brief Performs inference with a given face on the @a source.
-  /// @details Use this function to inference with a given source.
+  /// Performs inference with a given face on the `source`.
   ///
+  /// Use this function to inference with a given source.
   ///
-  /// @since_tizen 9.0
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @param[in] handle         The handle to the image classification object.
-  /// @param[in] source         The handle to the source of the media.
+  /// **Parameters:**
+  /// - `handle` (in): The handle to the image classification object.
+  /// - `source` (in): The handle to the source of the media.
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED_FORMAT Source colorspace
-  /// isn't supported
-  /// @retval #MEDIA_VISION_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @pre Create a source handle by calling mv_create_source()
-  /// @pre Create an image classification handle by calling mv_image_classification_create()
-  /// @pre Prepare an image classification by calling mv_image_classification_prepare()
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED_FORMAT`: Source colorspace isn't supported
+  /// - `MEDIA_VISION_ERROR_OUT_OF_MEMORY`: Out of memory
   ///
-  /// @par Inference Example
-  /// @snippet image_classification_sync.c IC sync
+  /// **Preconditions:**
+  /// - Create a source handle by calling mv_create_source()
+  /// - Create an image classification handle by calling mv_image_classification_create()
+  /// - Prepare an image classification by calling mv_image_classification_prepare()
+  ///
+  /// **Inference Example:**
+  /// - @snippet image_classification_sync.c IC sync
   int mv_image_classification_inference(
     mv_image_classification_h handle,
     mv_common.mv_source_h source,
@@ -191,30 +221,37 @@ class Tizen100MvImageClassification {
       _mv_image_classification_inferencePtr.asFunction<
           int Function(mv_image_classification_h, mv_common.mv_source_h)>();
 
-  /// @brief Performs asynchronously the image classification inference on the @a source.
+  /// Performs asynchronously the image classification inference on the `source`.
   ///
-  /// @since_tizen 9.0
-  /// @remarks This function operates asynchronously, so it returns immediately upon invocation.
-  /// The inference results are inserted into the outgoing queue within the framework
-  /// in the order of processing, and the results can be obtained through mv_image_classification_get_label().
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @param[in] handle         The handle to the inference
-  /// @param[in] source         The handle to the source of the media
+  /// **Remarks:**
+  /// - This function operates asynchronously, so it returns immediately upon invocation.
+  /// - The inference results are inserted into the outgoing queue within the framework
+  /// - in the order of processing, and the results can be obtained through mv_image_classification_get_label().
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED_FORMAT Source colorspace
-  /// isn't supported
+  /// **Parameters:**
+  /// - `handle` (in): The handle to the inference
+  /// - `source` (in): The handle to the source of the media
   ///
-  /// @pre Create a source handle by calling mv_create_source()
-  /// @pre Create an inference handle by calling mv_image_classification_create()
-  /// @pre Prepare an inference by calling mv_image_classification_configure()
-  /// @pre Prepare an inference by calling mv_image_classification_prepare()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @par Async Inference Example
-  /// @snippet image_classification_async.c IC async
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED_FORMAT`: Source colorspace isn't supported
+  ///
+  /// **Preconditions:**
+  /// - Create a source handle by calling mv_create_source()
+  /// - Create an inference handle by calling mv_image_classification_create()
+  /// - Prepare an inference by calling mv_image_classification_configure()
+  /// - Prepare an inference by calling mv_image_classification_prepare()
+  ///
+  /// **Async Inference Example:**
+  /// - @snippet image_classification_async.c IC async
   int mv_image_classification_inference_async(
     mv_image_classification_h handle,
     mv_common.mv_source_h source,
@@ -234,24 +271,30 @@ class Tizen100MvImageClassification {
       _mv_image_classification_inference_asyncPtr.asFunction<
           int Function(mv_image_classification_h, mv_common.mv_source_h)>();
 
-  /// @brief Gets the image classification inference result count on the @a handle.
+  /// Gets the image classification inference result count on the `handle`.
   ///
-  /// @since_tizen 9.0
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @param[in] handle       The handle to the inference
-  /// @param[out] frame_number       A frame number inferenced.
-  /// @param[out] result_cnt  A number of results.
+  /// **Parameters:**
+  /// - `handle` (in): The handle to the inference
+  /// - `frame_number` (out): A frame number inferenced.
+  /// - `result_cnt` (out): A number of results.
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @pre Create a source handle by calling mv_create_source()
-  /// @pre Create an inference handle by calling mv_image_classification_create()
-  /// @pre Prepare an inference by calling mv_image_classification_configure()
-  /// @pre Prepare an inference by calling mv_image_classification_prepare()
-  /// @pre Request an inference by calling mv_image_classification_inference()
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - Create a source handle by calling mv_create_source()
+  /// - Create an inference handle by calling mv_image_classification_create()
+  /// - Prepare an inference by calling mv_image_classification_configure()
+  /// - Prepare an inference by calling mv_image_classification_prepare()
+  /// - Request an inference by calling mv_image_classification_inference()
   int mv_image_classification_get_result_count(
     mv_image_classification_h handle,
     ffi.Pointer<ffi.UnsignedLong> frame_number,
@@ -276,30 +319,37 @@ class Tizen100MvImageClassification {
           int Function(mv_image_classification_h, ffi.Pointer<ffi.UnsignedLong>,
               ffi.Pointer<ffi.UnsignedInt>)>();
 
-  /// @brief Gets the image classification inference result to a given index.
+  /// Gets the image classification inference result to a given index.
   ///
-  /// @since_tizen 9.0
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @remarks The @a label should not be released.
-  /// @remarks The @a label is available until new inference is performed or @a handle is released.
+  /// **Remarks:**
+  /// - The `label` should not be released.
+  /// - The `label` is available until new inference is performed or `handle` is released.
   ///
-  /// @param[in] handle              The handle to the inference
-  /// @param[in] index               A result index.
-  /// @param[out] label              A label name to a detected object.
+  /// **Parameters:**
+  /// - `handle` (in): The handle to the inference
+  /// - `index` (in): A result index.
+  /// - `label` (out): A label name to a detected object.
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @pre Create a source handle by calling mv_create_source()
-  /// @pre Create an inference handle by calling mv_image_classification_create()
-  /// @pre Prepare an inference by calling mv_image_classification_configure()
-  /// @pre Prepare an inference by calling mv_image_classification_prepare()
-  /// @pre Request an inference by calling mv_image_classification_inference()
-  /// @pre Get result count by calling mv_image_classification_get_result_count()
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
   ///
-  /// @code
+  /// **Preconditions:**
+  /// - Create a source handle by calling mv_create_source()
+  /// - Create an inference handle by calling mv_image_classification_create()
+  /// - Prepare an inference by calling mv_image_classification_configure()
+  /// - Prepare an inference by calling mv_image_classification_prepare()
+  /// - Request an inference by calling mv_image_classification_inference()
+  /// - Get result count by calling mv_image_classification_get_result_count()
+  ///
+  /// ```
   /// #include <mv_image_classification.h>
   /// #include <stdio.h>
   /// ...
@@ -317,7 +367,7 @@ class Tizen100MvImageClassification {
   /// printf("frame number = %ld, label = %s\n", frame_number, label);
   /// }
   /// mv_image_classification_destroy(handle);
-  /// @endcode
+  /// ```
   int mv_image_classification_get_label(
     mv_image_classification_h handle,
     int index,
@@ -341,7 +391,9 @@ class Tizen100MvImageClassification {
               ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 }
 
-/// @brief The image classification object handle.
+/// The image classification object handle.
 ///
-/// @since_tizen 9.0
+/// **Since Tizen:**
+/// - 9.0
+/// @nodoc
 typedef mv_image_classification_h = ffi.Pointer<ffi.Void>;

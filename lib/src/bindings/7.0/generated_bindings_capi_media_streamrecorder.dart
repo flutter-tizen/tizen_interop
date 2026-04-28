@@ -1,3 +1,6 @@
+/// {@category 7.0/tizen}
+library tizen_interop_7_0.capi_media_streamrecorder;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -10,6 +13,7 @@ import 'dart:ffi' as ffi;
 import 'generated_bindings_capi_media_tool.dart' as media_tool;
 
 /// Dart bindings for Tizen capi-media-streamrecorder APIs.
+/// {@category 7.0/tizen}
 class Tizen70CapiMediaStreamrecorder {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -25,17 +29,28 @@ class Tizen70CapiMediaStreamrecorder {
           lookup)
       : _lookup = lookup;
 
-  /// @deprecated Deprecated since 7.0.
-  /// @brief Creates a streamrecorder handle to record a video or audio.
-  /// @since_tizen 3.0
-  /// @remarks You must release @a recorder using streamrecorder_destroy().
-  /// @param[out]  recorder	A handle to the streamrecorder
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #STREAMRECORDER_ERROR_NONE Successful
-  /// @retval #STREAMRECORDER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #STREAMRECORDER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STREAMRECORDER_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #STREAMRECORDER_ERROR_INVALID_OPERATION Invalid operation
+  /// **Deprecated:** Deprecated since 7.0.
+  ///
+  /// Creates a streamrecorder handle to record a video or audio.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - You must release `recorder` using streamrecorder_destroy().
+  ///
+  /// **Parameters:**
+  /// - `recorder` (out): A handle to the streamrecorder
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STREAMRECORDER_ERROR_NONE`: Successful
+  /// - `STREAMRECORDER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `STREAMRECORDER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STREAMRECORDER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `STREAMRECORDER_ERROR_INVALID_OPERATION`: Invalid operation
   int streamrecorder_create(
     ffi.Pointer<streamrecorder_h> recorder,
   ) {
@@ -50,20 +65,35 @@ class Tizen70CapiMediaStreamrecorder {
   late final _streamrecorder_create = _streamrecorder_createPtr
       .asFunction<int Function(ffi.Pointer<streamrecorder_h>)>();
 
-  /// @deprecated Deprecated since 7.0.
-  /// @brief Destroys the streamrecorder handle.
-  /// @since_tizen 3.0
-  /// @param[in]	recorder    The handle to the streamrecorder
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #STREAMRECORDER_ERROR_NONE Successful
-  /// @retval #STREAMRECORDER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #STREAMRECORDER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STREAMRECORDER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #STREAMRECORDER_ERROR_INVALID_STATE Invalid state
-  /// @pre Create a stream recorder handle by calling streamrecorder_create().
-  /// @pre  The recorder state should be #STREAMRECORDER_STATE_CREATED.
-  /// @post The recorder state will be #STREAMRECORDER_STATE_NONE.
-  /// @see streamrecorder_create()
+  /// **Deprecated:** Deprecated since 7.0.
+  ///
+  /// Destroys the streamrecorder handle.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `recorder` (in): The handle to the streamrecorder
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STREAMRECORDER_ERROR_NONE`: Successful
+  /// - `STREAMRECORDER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `STREAMRECORDER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STREAMRECORDER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `STREAMRECORDER_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - Create a stream recorder handle by calling streamrecorder_create().
+  /// - The recorder state should be `STREAMRECORDER_STATE_CREATED`.
+  ///
+  /// **Postconditions:**
+  /// - The recorder state will be `STREAMRECORDER_STATE_NONE`.
+  ///
+  /// **See also:**
+  /// - `streamrecorder_create()`
   int streamrecorder_destroy(
     streamrecorder_h recorder,
   ) {
@@ -78,28 +108,44 @@ class Tizen70CapiMediaStreamrecorder {
   late final _streamrecorder_destroy =
       _streamrecorder_destroyPtr.asFunction<int Function(streamrecorder_h)>();
 
-  /// @deprecated Deprecated since 7.0.
-  /// @brief Prepares the streamrecorder for recording.
-  /// @since_tizen 3.0
-  /// @remarks Before calling the function, it is required to properly set streamrecorder_enable_source_buffer(),
-  /// audio encoder (streamrecorder_set_audio_encoder()),
-  /// video encoder(streamrecorder_set_video_encoder()) and file format (streamrecorder_set_file_format()).
-  /// @param[in]	recorder  The handle to the streamrecorder
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #STREAMRECORDER_ERROR_NONE Successful
-  /// @retval #STREAMRECORDER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #STREAMRECORDER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STREAMRECORDER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #STREAMRECORDER_ERROR_INVALID_STATE Invalid state
-  /// @pre Create a stream recorder handle by calling streamrecorder_create().
-  /// @pre  The recorder state should be #STREAMRECORDER_STATE_CREATED. \n
-  /// The streamrecorder_enable_source_buffer() should be invoked before this function.
-  /// @post The streamrecorder state will be #STREAMRECORDER_STATE_PREPARED
-  /// @see streamrecorder_create()
-  /// @see	streamrecorder_unprepare()
-  /// @see	streamrecorder_set_audio_encoder()
-  /// @see	streamrecorder_set_video_encoder()
-  /// @see	streamrecorder_set_file_format()
+  /// **Deprecated:** Deprecated since 7.0.
+  ///
+  /// Prepares the streamrecorder for recording.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - Before calling the function, it is required to properly set streamrecorder_enable_source_buffer(),
+  /// - audio encoder (streamrecorder_set_audio_encoder()),
+  /// - video encoder(streamrecorder_set_video_encoder()) and file format (streamrecorder_set_file_format()).
+  ///
+  /// **Parameters:**
+  /// - `recorder` (in): The handle to the streamrecorder
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STREAMRECORDER_ERROR_NONE`: Successful
+  /// - `STREAMRECORDER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `STREAMRECORDER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STREAMRECORDER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `STREAMRECORDER_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - Create a stream recorder handle by calling streamrecorder_create().
+  /// - The recorder state should be `STREAMRECORDER_STATE_CREATED`. The streamrecorder_enable_source_buffer() should be invoked before this function.
+  ///
+  /// **Postconditions:**
+  /// - The streamrecorder state will be `STREAMRECORDER_STATE_PREPARED`
+  ///
+  /// **See also:**
+  /// - `streamrecorder_create()`
+  /// - `streamrecorder_unprepare()`
+  /// - `streamrecorder_set_audio_encoder()`
+  /// - `streamrecorder_set_video_encoder()`
+  /// - `streamrecorder_set_file_format()`
   int streamrecorder_prepare(
     streamrecorder_h recorder,
   ) {
@@ -114,23 +160,38 @@ class Tizen70CapiMediaStreamrecorder {
   late final _streamrecorder_prepare =
       _streamrecorder_preparePtr.asFunction<int Function(streamrecorder_h)>();
 
-  /// @deprecated Deprecated since 7.0.
-  /// @brief Resets the streamrecorder.
-  /// @since_tizen 3.0
-  /// @param[in]  recorder  The handle to the streamrecorder
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #STREAMRECORDER_ERROR_NONE Successful
-  /// @retval #STREAMRECORDER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #STREAMRECORDER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STREAMRECORDER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #STREAMRECORDER_ERROR_INVALID_STATE Invalid state
-  /// @pre Create a stream recorder handle by calling streamrecorder_create().
-  /// @pre  The streamrecorder state should be #STREAMRECORDER_STATE_PREPARED set by streamrecorder_prepare(), streamrecorder_cancel() or streamrecorder_commit().
-  /// @post The streamrecorder state will be #STREAMRECORDER_STATE_CREATED.
-  /// @see streamrecorder_create()
-  /// @see	streamrecorder_prepare()
-  /// @see	streamrecorder_cancel()
-  /// @see	streamrecorder_commit()
+  /// **Deprecated:** Deprecated since 7.0.
+  ///
+  /// Resets the streamrecorder.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `recorder` (in): The handle to the streamrecorder
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STREAMRECORDER_ERROR_NONE`: Successful
+  /// - `STREAMRECORDER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `STREAMRECORDER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STREAMRECORDER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `STREAMRECORDER_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - Create a stream recorder handle by calling streamrecorder_create().
+  /// - The streamrecorder state should be `STREAMRECORDER_STATE_PREPARED` set by streamrecorder_prepare(), streamrecorder_cancel() or streamrecorder_commit().
+  ///
+  /// **Postconditions:**
+  /// - The streamrecorder state will be `STREAMRECORDER_STATE_CREATED`.
+  ///
+  /// **See also:**
+  /// - `streamrecorder_create()`
+  /// - `streamrecorder_prepare()`
+  /// - `streamrecorder_cancel()`
+  /// - `streamrecorder_commit()`
   int streamrecorder_unprepare(
     streamrecorder_h recorder,
   ) {
@@ -145,34 +206,50 @@ class Tizen70CapiMediaStreamrecorder {
   late final _streamrecorder_unprepare =
       _streamrecorder_unpreparePtr.asFunction<int Function(streamrecorder_h)>();
 
-  /// @deprecated Deprecated since 7.0.
-  /// @brief Starts the recording.
-  /// @since_tizen 3.0
-  /// @remarks If file path has been set to an existing file, this file is removed automatically and updated by new one. \n
-  /// When you want to record audio or video file, you need to add privilege according to rules below additionally. \n
-  /// %http://tizen.org/privilege/mediastorage is needed if input or output path are relevant to media storage.\n
-  /// %http://tizen.org/privilege/externalstorage is needed if input or output path are relevant to external storage.
-  /// The filename should be set before this function is invoked.
-  /// @param[in]  recorder  The handle to the streamrecorder
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #STREAMRECORDER_ERROR_NONE Successful
-  /// @retval #STREAMRECORDER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #STREAMRECORDER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STREAMRECORDER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #STREAMRECORDER_ERROR_INVALID_STATE Invalid state
-  /// @retval #STREAMRECORDER_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @pre Create a stream recorder handle by calling streamrecorder_create().
-  /// @pre The streamrecorder state must be #STREAMRECORDER_STATE_PREPARED by streamrecorder_prepare() or #STREAMRECORDER_STATE_PAUSED by streamrecorder_pause(). \n
-  /// The filename should be set by streamrecorder_set_filename().
-  /// @post The recorder state will be #STREAMRECORDER_STATE_RECORDING.
-  /// @see streamrecorder_create()
-  /// @see	streamrecorder_pause()
-  /// @see	streamrecorder_commit()
-  /// @see	streamrecorder_cancel()
-  /// @see	streamrecorder_set_audio_encoder()
-  /// @see	streamrecorder_set_filename()
-  /// @see	streamrecorder_set_file_format()
-  /// @see	streamrecorder_recording_status_cb()
+  /// **Deprecated:** Deprecated since 7.0.
+  ///
+  /// Starts the recording.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - If file path has been set to an existing file, this file is removed automatically and updated by new one.
+  /// - When you want to record audio or video file, you need to add privilege according to rules below additionally.
+  /// - <http://tizen.org/privilege/mediastorage is needed if input or output path are relevant to media storage.>
+  /// - <http://tizen.org/privilege/externalstorage is needed if input or output path are relevant to external storage.>
+  /// - The filename should be set before this function is invoked.
+  ///
+  /// **Parameters:**
+  /// - `recorder` (in): The handle to the streamrecorder
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STREAMRECORDER_ERROR_NONE`: Successful
+  /// - `STREAMRECORDER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `STREAMRECORDER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STREAMRECORDER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `STREAMRECORDER_ERROR_INVALID_STATE`: Invalid state
+  /// - `STREAMRECORDER_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  ///
+  /// **Preconditions:**
+  /// - Create a stream recorder handle by calling streamrecorder_create().
+  /// - The streamrecorder state must be `STREAMRECORDER_STATE_PREPARED` by streamrecorder_prepare() or `STREAMRECORDER_STATE_PAUSED` by streamrecorder_pause(). The filename should be set by streamrecorder_set_filename().
+  ///
+  /// **Postconditions:**
+  /// - The recorder state will be `STREAMRECORDER_STATE_RECORDING`.
+  ///
+  /// **See also:**
+  /// - `streamrecorder_create()`
+  /// - `streamrecorder_pause()`
+  /// - `streamrecorder_commit()`
+  /// - `streamrecorder_cancel()`
+  /// - `streamrecorder_set_audio_encoder()`
+  /// - `streamrecorder_set_filename()`
+  /// - `streamrecorder_set_file_format()`
+  /// - `streamrecorder_recording_status_cb()`
   int streamrecorder_start(
     streamrecorder_h recorder,
   ) {
@@ -187,23 +264,40 @@ class Tizen70CapiMediaStreamrecorder {
   late final _streamrecorder_start =
       _streamrecorder_startPtr.asFunction<int Function(streamrecorder_h)>();
 
-  /// @deprecated Deprecated since 7.0.
-  /// @brief Pauses the recording.
-  /// @since_tizen 3.0
-  /// @remarks Recording can be resumed with streamrecorder_start().
-  /// @param[in]  recorder  The handle to the streamrecorder
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #STREAMRECORDER_ERROR_NONE Successful
-  /// @retval #STREAMRECORDER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #STREAMRECORDER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STREAMRECORDER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #STREAMRECORDER_ERROR_INVALID_STATE Invalid state
-  /// @pre Create a stream recorder handle by calling streamrecorder_create().
-  /// @pre The streamrecorder state must be #STREAMRECORDER_STATE_RECORDING.
-  /// @post The streamrecorder state will be #STREAMRECORDER_STATE_PAUSED.
-  /// @see streamrecorder_create()
-  /// @see streamrecorder_commit()
-  /// @see streamrecorder_cancel()
+  /// **Deprecated:** Deprecated since 7.0.
+  ///
+  /// Pauses the recording.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - Recording can be resumed with streamrecorder_start().
+  ///
+  /// **Parameters:**
+  /// - `recorder` (in): The handle to the streamrecorder
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STREAMRECORDER_ERROR_NONE`: Successful
+  /// - `STREAMRECORDER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `STREAMRECORDER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STREAMRECORDER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `STREAMRECORDER_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - Create a stream recorder handle by calling streamrecorder_create().
+  /// - The streamrecorder state must be `STREAMRECORDER_STATE_RECORDING`.
+  ///
+  /// **Postconditions:**
+  /// - The streamrecorder state will be `STREAMRECORDER_STATE_PAUSED`.
+  ///
+  /// **See also:**
+  /// - `streamrecorder_create()`
+  /// - `streamrecorder_commit()`
+  /// - `streamrecorder_cancel()`
   int streamrecorder_pause(
     streamrecorder_h recorder,
   ) {
@@ -218,28 +312,45 @@ class Tizen70CapiMediaStreamrecorder {
   late final _streamrecorder_pause =
       _streamrecorder_pausePtr.asFunction<int Function(streamrecorder_h)>();
 
-  /// @deprecated Deprecated since 7.0.
-  /// @brief Stops recording and saves the result.
-  /// @since_tizen 3.0
-  /// @remarks When you want to record audio or video file, you need to add privilege according to rules below additionally. \n
-  /// %http://tizen.org/privilege/mediastorage is needed if input or output path are relevant to media storage.\n
-  /// %http://tizen.org/privilege/externalstorage is needed if input or output path are relevant to external storage.
-  /// @param[in]  recorder  The handle to the streamrecorder
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #STREAMRECORDER_ERROR_NONE Successful
-  /// @retval #STREAMRECORDER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #STREAMRECORDER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STREAMRECORDER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #STREAMRECORDER_ERROR_INVALID_STATE Invalid state
-  /// @retval #STREAMRECORDER_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @pre Create a stream recorder handle by calling streamrecorder_create().
-  /// @pre The streamrecorder state must be #STREAMRECORDER_STATE_RECORDING set by streamrecorder_start() or #STREAMRECORDER_STATE_PAUSED by streamrecorder_pause().
-  /// @post The streamrecorder state will be #STREAMRECORDER_STATE_PREPARED.
-  /// @see streamrecorder_create()
-  /// @see streamrecorder_pause()
-  /// @see streamrecorder_cancel()
-  /// @see streamrecorder_set_filename()
-  /// @see streamrecorder_start()
+  /// **Deprecated:** Deprecated since 7.0.
+  ///
+  /// Stops recording and saves the result.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - When you want to record audio or video file, you need to add privilege according to rules below additionally.
+  /// - <http://tizen.org/privilege/mediastorage is needed if input or output path are relevant to media storage.>
+  /// - <http://tizen.org/privilege/externalstorage is needed if input or output path are relevant to external storage.>
+  ///
+  /// **Parameters:**
+  /// - `recorder` (in): The handle to the streamrecorder
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STREAMRECORDER_ERROR_NONE`: Successful
+  /// - `STREAMRECORDER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `STREAMRECORDER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STREAMRECORDER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `STREAMRECORDER_ERROR_INVALID_STATE`: Invalid state
+  /// - `STREAMRECORDER_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  ///
+  /// **Preconditions:**
+  /// - Create a stream recorder handle by calling streamrecorder_create().
+  /// - The streamrecorder state must be `STREAMRECORDER_STATE_RECORDING` set by streamrecorder_start() or `STREAMRECORDER_STATE_PAUSED` by streamrecorder_pause().
+  ///
+  /// **Postconditions:**
+  /// - The streamrecorder state will be `STREAMRECORDER_STATE_PREPARED`.
+  ///
+  /// **See also:**
+  /// - `streamrecorder_create()`
+  /// - `streamrecorder_pause()`
+  /// - `streamrecorder_cancel()`
+  /// - `streamrecorder_set_filename()`
+  /// - `streamrecorder_start()`
   int streamrecorder_commit(
     streamrecorder_h recorder,
   ) {
@@ -254,28 +365,46 @@ class Tizen70CapiMediaStreamrecorder {
   late final _streamrecorder_commit =
       _streamrecorder_commitPtr.asFunction<int Function(streamrecorder_h)>();
 
-  /// @deprecated Deprecated since 7.0.
-  /// @brief Cancels the recording.
-  /// @details The recording data is discarded and not written in the recording file.
-  /// @since_tizen 3.0
-  /// @remarks When you want to record audio or video file, you need to add privilege according to rules below additionally. \n
-  /// %http://tizen.org/privilege/mediastorage is needed if input or output path are relevant to media storage.\n
-  /// %http://tizen.org/privilege/externalstorage is needed if input or output path are relevant to external storage.
-  /// @param[in]  recorder  The handle to the streamrecorder
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #STREAMRECORDER_ERROR_NONE Successful
-  /// @retval #STREAMRECORDER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #STREAMRECORDER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STREAMRECORDER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #STREAMRECORDER_ERROR_INVALID_STATE Invalid state
-  /// @retval #STREAMRECORDER_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @pre Create a stream recorder handle by calling streamrecorder_create().
-  /// @pre The streamrecorder state must be #STREAMRECORDER_STATE_RECORDING set by streamrecorder_start() or #STREAMRECORDER_STATE_PAUSED by streamrecorder_pause().
-  /// @post The streamrecorder state will be #STREAMRECORDER_STATE_PREPARED.
-  /// @see streamrecorder_create()
-  /// @see streamrecorder_pause()
-  /// @see streamrecorder_commit()
-  /// @see streamrecorder_start()
+  /// **Deprecated:** Deprecated since 7.0.
+  ///
+  /// Cancels the recording.
+  ///
+  /// The recording data is discarded and not written in the recording file.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - When you want to record audio or video file, you need to add privilege according to rules below additionally.
+  /// - <http://tizen.org/privilege/mediastorage is needed if input or output path are relevant to media storage.>
+  /// - <http://tizen.org/privilege/externalstorage is needed if input or output path are relevant to external storage.>
+  ///
+  /// **Parameters:**
+  /// - `recorder` (in): The handle to the streamrecorder
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STREAMRECORDER_ERROR_NONE`: Successful
+  /// - `STREAMRECORDER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `STREAMRECORDER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STREAMRECORDER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `STREAMRECORDER_ERROR_INVALID_STATE`: Invalid state
+  /// - `STREAMRECORDER_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  ///
+  /// **Preconditions:**
+  /// - Create a stream recorder handle by calling streamrecorder_create().
+  /// - The streamrecorder state must be `STREAMRECORDER_STATE_RECORDING` set by streamrecorder_start() or `STREAMRECORDER_STATE_PAUSED` by streamrecorder_pause().
+  ///
+  /// **Postconditions:**
+  /// - The streamrecorder state will be `STREAMRECORDER_STATE_PREPARED`.
+  ///
+  /// **See also:**
+  /// - `streamrecorder_create()`
+  /// - `streamrecorder_pause()`
+  /// - `streamrecorder_commit()`
+  /// - `streamrecorder_start()`
   int streamrecorder_cancel(
     streamrecorder_h recorder,
   ) {
@@ -290,21 +419,36 @@ class Tizen70CapiMediaStreamrecorder {
   late final _streamrecorder_cancel =
       _streamrecorder_cancelPtr.asFunction<int Function(streamrecorder_h)>();
 
-  /// @deprecated Deprecated since 7.0.
-  /// @brief Pushes buffer to StreamRecorder to record audio/video.
-  /// @since_tizen 3.0
-  /// @remarks When you want to record audio or video file, you need to add privilege according to rules below additionally. \n
-  /// %http://tizen.org/privilege/mediastorage is needed if input or output path are relevant to media storage.\n
-  /// %http://tizen.org/privilege/externalstorage is needed if input or output path are relevant to external storage.
-  /// @param[in]	recorder	The handle to the streamrecorder
-  /// @param[in]	inbuf The media packet containing buffer and other associated values
-  /// @return  @c 0 on success, otherwise a negative error value
-  /// @retval #STREAMRECORDER_ERROR_NONE Successful
-  /// @retval #STREAMRECORDER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #STREAMRECORDER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STREAMRECORDER_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @pre Create a stream recorder handle by calling streamrecorder_create().
-  /// @see streamrecorder_create()
+  /// **Deprecated:** Deprecated since 7.0.
+  ///
+  /// Pushes buffer to StreamRecorder to record audio/video.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - When you want to record audio or video file, you need to add privilege according to rules below additionally.
+  /// - <http://tizen.org/privilege/mediastorage is needed if input or output path are relevant to media storage.>
+  /// - <http://tizen.org/privilege/externalstorage is needed if input or output path are relevant to external storage.>
+  ///
+  /// **Parameters:**
+  /// - `recorder` (in): The handle to the streamrecorder
+  /// - `inbuf` (in): The media packet containing buffer and other associated values
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STREAMRECORDER_ERROR_NONE`: Successful
+  /// - `STREAMRECORDER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `STREAMRECORDER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STREAMRECORDER_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  ///
+  /// **Preconditions:**
+  /// - Create a stream recorder handle by calling streamrecorder_create().
+  ///
+  /// **See also:**
+  /// - `streamrecorder_create()`
   int streamrecorder_push_stream_buffer(
     streamrecorder_h recorder,
     media_tool.media_packet_h inbuf,
@@ -323,20 +467,35 @@ class Tizen70CapiMediaStreamrecorder {
       _streamrecorder_push_stream_bufferPtr.asFunction<
           int Function(streamrecorder_h, media_tool.media_packet_h)>();
 
-  /// @deprecated Deprecated since 7.0.
-  /// @brief Sets the video source as live buffer to be used for recording.
-  /// @since_tizen 3.0
-  /// @remarks if you want to enable video or audio or both recording, call before streamrecorder_prepare()
-  /// @param[in]  recorder  A handle to the streamrecorder
-  /// @param[in]  type The type of source input
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #STREAMRECORDER_ERROR_NONE Successful
-  /// @retval #STREAMRECORDER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #STREAMRECORDER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STREAMRECORDER_ERROR_INVALID_STATE Invalid state
-  /// @pre Create a stream recorder handle by calling streamrecorder_create().
-  /// @pre The streamrecorder state must be only #STREAMRECORDER_STATE_CREATED
-  /// @see streamrecorder_create()
+  /// **Deprecated:** Deprecated since 7.0.
+  ///
+  /// Sets the video source as live buffer to be used for recording.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - if you want to enable video or audio or both recording, call before streamrecorder_prepare()
+  ///
+  /// **Parameters:**
+  /// - `recorder` (in): A handle to the streamrecorder
+  /// - `type` (in): The type of source input
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STREAMRECORDER_ERROR_NONE`: Successful
+  /// - `STREAMRECORDER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `STREAMRECORDER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STREAMRECORDER_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - Create a stream recorder handle by calling streamrecorder_create().
+  /// - The streamrecorder state must be only `STREAMRECORDER_STATE_CREATED`
+  ///
+  /// **See also:**
+  /// - `streamrecorder_create()`
   int streamrecorder_enable_source_buffer(
     streamrecorder_h recorder,
     int type,
@@ -354,17 +513,30 @@ class Tizen70CapiMediaStreamrecorder {
       _streamrecorder_enable_source_bufferPtr
           .asFunction<int Function(streamrecorder_h, int)>();
 
-  /// @deprecated Deprecated since 7.0.
-  /// @brief Gets the streamrecorder's current state.
-  /// @since_tizen 3.0
-  /// @param[in]  recorder The handle to the streamrecorder
-  /// @param[out]	state  The current state of the streamrecorder
-  /// @return  @c 0 on success, otherwise a negative error value
-  /// @retval #STREAMRECORDER_ERROR_NONE Successful
-  /// @retval #STREAMRECORDER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #STREAMRECORDER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre Create a stream recorder handle by calling streamrecorder_create().
-  /// @see streamrecorder_create()
+  /// **Deprecated:** Deprecated since 7.0.
+  ///
+  /// Gets the streamrecorder's current state.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `recorder` (in): The handle to the streamrecorder
+  /// - `state` (out): The current state of the streamrecorder
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STREAMRECORDER_ERROR_NONE`: Successful
+  /// - `STREAMRECORDER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `STREAMRECORDER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - Create a stream recorder handle by calling streamrecorder_create().
+  ///
+  /// **See also:**
+  /// - `streamrecorder_create()`
   int streamrecorder_get_state(
     streamrecorder_h recorder,
     ffi.Pointer<ffi.Int32> state,
@@ -382,23 +554,38 @@ class Tizen70CapiMediaStreamrecorder {
   late final _streamrecorder_get_state = _streamrecorder_get_statePtr
       .asFunction<int Function(streamrecorder_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @deprecated Deprecated since 7.0.
-  /// @brief Sets the file path to record.
-  /// @details This function sets file path which defines where newly recorded data should be stored.
-  /// @since_tizen 3.0
-  /// @remarks If the same file already exists in the file system, then old file will be overwritten.
-  /// @param[in]	recorder	The handle to the streamrecorder
-  /// @param[in]	path The recording file path
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #STREAMRECORDER_ERROR_NONE Successful
-  /// @retval #STREAMRECORDER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #STREAMRECORDER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STREAMRECORDER_ERROR_INVALID_STATE Invalid state
-  /// @pre Create a stream recorder handle by calling streamrecorder_create().
-  /// @pre The streamrecorder state must be #STREAMRECORDER_STATE_CREATED. \n
-  /// streamrecorder_enable_source_buffer() should be invoked before this function.
-  /// @see streamrecorder_create()
-  /// @see streamrecorder_get_filename()
+  /// **Deprecated:** Deprecated since 7.0.
+  ///
+  /// Sets the file path to record.
+  ///
+  /// This function sets file path which defines where newly recorded data should be stored.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - If the same file already exists in the file system, then old file will be overwritten.
+  ///
+  /// **Parameters:**
+  /// - `recorder` (in): The handle to the streamrecorder
+  /// - `path` (in): The recording file path
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STREAMRECORDER_ERROR_NONE`: Successful
+  /// - `STREAMRECORDER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `STREAMRECORDER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STREAMRECORDER_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - Create a stream recorder handle by calling streamrecorder_create().
+  /// - The streamrecorder state must be `STREAMRECORDER_STATE_CREATED`. streamrecorder_enable_source_buffer() should be invoked before this function.
+  ///
+  /// **See also:**
+  /// - `streamrecorder_create()`
+  /// - `streamrecorder_get_filename()`
   int streamrecorder_set_filename(
     streamrecorder_h recorder,
     ffi.Pointer<ffi.Char> path,
@@ -416,20 +603,34 @@ class Tizen70CapiMediaStreamrecorder {
   late final _streamrecorder_set_filename = _streamrecorder_set_filenamePtr
       .asFunction<int Function(streamrecorder_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @deprecated Deprecated since 7.0.
-  /// @brief Gets the file path to record.
-  /// @since_tizen 3.0
-  /// @remarks You must release @a path using free().
-  /// @param[in]	recorder    The handle to the streamrecorder
-  /// @param[out]	path    The recording file path
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #STREAMRECORDER_ERROR_NONE Successful
-  /// @retval #STREAMRECORDER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #STREAMRECORDER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// streamrecorder_enable_source_buffer() should be invoked before this function.
-  /// @pre Create a stream recorder handle by calling streamrecorder_create().
-  /// @see streamrecorder_create()
-  /// @see	streamrecorder_set_filename()
+  /// **Deprecated:** Deprecated since 7.0.
+  ///
+  /// Gets the file path to record.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - You must release `path` using free().
+  ///
+  /// **Parameters:**
+  /// - `recorder` (in): The handle to the streamrecorder
+  /// - `path` (out): The recording file path
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STREAMRECORDER_ERROR_NONE`: Successful
+  /// - `STREAMRECORDER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `STREAMRECORDER_ERROR_INVALID_PARAMETER`: Invalid parameter streamrecorder_enable_source_buffer() should be invoked before this function.
+  ///
+  /// **Preconditions:**
+  /// - Create a stream recorder handle by calling streamrecorder_create().
+  ///
+  /// **See also:**
+  /// - `streamrecorder_create()`
+  /// - `streamrecorder_set_filename()`
   int streamrecorder_get_filename(
     streamrecorder_h recorder,
     ffi.Pointer<ffi.Pointer<ffi.Char>> path,
@@ -449,23 +650,35 @@ class Tizen70CapiMediaStreamrecorder {
       _streamrecorder_get_filenamePtr.asFunction<
           int Function(streamrecorder_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @deprecated Deprecated since 7.0.
-  /// @brief Sets the file format for recording media stream.
-  /// @since_tizen 3.0
-  /// @param[in] recorder The handle to the streamrecorder
-  /// @param[in] format   The media file format
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #STREAMRECORDER_ERROR_NONE Successful
-  /// @retval #STREAMRECORDER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #STREAMRECORDER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STREAMRECORDER_ERROR_INVALID_STATE Invalid state
-  /// @retval #STREAMRECORDER_ERROR_INVALID_OPERATION Invalid operation
-  /// @pre Create a stream recorder handle by calling streamrecorder_create().
-  /// @pre The streamrecorder state must be #STREAMRECORDER_STATE_CREATED. \n
-  /// streamrecorder_enable_source_buffer() should be invoked before this function.
-  /// @see streamrecorder_create()
-  /// @see streamrecorder_get_file_format()
-  /// @see streamrecorder_foreach_supported_file_format()
+  /// **Deprecated:** Deprecated since 7.0.
+  ///
+  /// Sets the file format for recording media stream.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `recorder` (in): The handle to the streamrecorder
+  /// - `format` (in): The media file format
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STREAMRECORDER_ERROR_NONE`: Successful
+  /// - `STREAMRECORDER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `STREAMRECORDER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STREAMRECORDER_ERROR_INVALID_STATE`: Invalid state
+  /// - `STREAMRECORDER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - Create a stream recorder handle by calling streamrecorder_create().
+  /// - The streamrecorder state must be `STREAMRECORDER_STATE_CREATED`. streamrecorder_enable_source_buffer() should be invoked before this function.
+  ///
+  /// **See also:**
+  /// - `streamrecorder_create()`
+  /// - `streamrecorder_get_file_format()`
+  /// - `streamrecorder_foreach_supported_file_format()`
   int streamrecorder_set_file_format(
     streamrecorder_h recorder,
     int format,
@@ -483,20 +696,33 @@ class Tizen70CapiMediaStreamrecorder {
       _streamrecorder_set_file_formatPtr
           .asFunction<int Function(streamrecorder_h, int)>();
 
-  /// @deprecated Deprecated since 7.0.
-  /// @brief Gets the file format for recording media stream.
-  /// @since_tizen 3.0
-  /// @param[in] recorder The handle to the streamrecorder
-  /// @param[out] format   The media file format
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #STREAMRECORDER_ERROR_NONE Successful
-  /// @retval #STREAMRECORDER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #STREAMRECORDER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre Create a stream recorder handle by calling streamrecorder_create().
-  /// @pre The streamrecorder_enable_source_buffer() should be invoked before this function.
-  /// @see streamrecorder_create()
-  /// @see streamrecorder_set_file_format()
-  /// @see streamrecorder_foreach_supported_file_format()
+  /// **Deprecated:** Deprecated since 7.0.
+  ///
+  /// Gets the file format for recording media stream.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `recorder` (in): The handle to the streamrecorder
+  /// - `format` (out): The media file format
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STREAMRECORDER_ERROR_NONE`: Successful
+  /// - `STREAMRECORDER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `STREAMRECORDER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - Create a stream recorder handle by calling streamrecorder_create().
+  /// - The streamrecorder_enable_source_buffer() should be invoked before this function.
+  ///
+  /// **See also:**
+  /// - `streamrecorder_create()`
+  /// - `streamrecorder_set_file_format()`
+  /// - `streamrecorder_foreach_supported_file_format()`
   int streamrecorder_get_file_format(
     streamrecorder_h recorder,
     ffi.Pointer<ffi.Int32> format,
@@ -515,24 +741,38 @@ class Tizen70CapiMediaStreamrecorder {
       _streamrecorder_get_file_formatPtr
           .asFunction<int Function(streamrecorder_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @deprecated Deprecated since 7.0.
-  /// @brief Sets the audio codec for encoding an audio stream.
-  /// @since_tizen 3.0
-  /// @remarks You can get available audio encoders by using streamrecorder_foreach_supported_audio_encoder(). \n
-  /// @param[in] recorder The handle to the streamrecorder
-  /// @param[in] codec    The audio codec
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #STREAMRECORDER_ERROR_NONE Successful
-  /// @retval #STREAMRECORDER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #STREAMRECORDER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STREAMRECORDER_ERROR_INVALID_STATE Invalid state
-  /// @retval #STREAMRECORDER_ERROR_INVALID_OPERATION Invalid operation
-  /// @pre Create a stream recorder handle by calling streamrecorder_create().
-  /// @pre The streamrecorder state must be #STREAMRECORDER_STATE_CREATED. \n
-  /// streamrecorder_enable_source_buffer() should be invoked before this function.
-  /// @see streamrecorder_create()
-  /// @see	streamrecorder_get_audio_encoder()
-  /// @see streamrecorder_foreach_supported_audio_encoder()
+  /// **Deprecated:** Deprecated since 7.0.
+  ///
+  /// Sets the audio codec for encoding an audio stream.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - You can get available audio encoders by using streamrecorder_foreach_supported_audio_encoder().
+  ///
+  /// **Parameters:**
+  /// - `recorder` (in): The handle to the streamrecorder
+  /// - `codec` (in): The audio codec
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STREAMRECORDER_ERROR_NONE`: Successful
+  /// - `STREAMRECORDER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `STREAMRECORDER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STREAMRECORDER_ERROR_INVALID_STATE`: Invalid state
+  /// - `STREAMRECORDER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - Create a stream recorder handle by calling streamrecorder_create().
+  /// - The streamrecorder state must be `STREAMRECORDER_STATE_CREATED`. streamrecorder_enable_source_buffer() should be invoked before this function.
+  ///
+  /// **See also:**
+  /// - `streamrecorder_create()`
+  /// - `streamrecorder_get_audio_encoder()`
+  /// - `streamrecorder_foreach_supported_audio_encoder()`
   int streamrecorder_set_audio_encoder(
     streamrecorder_h recorder,
     int codec,
@@ -550,20 +790,33 @@ class Tizen70CapiMediaStreamrecorder {
       _streamrecorder_set_audio_encoderPtr
           .asFunction<int Function(streamrecorder_h, int)>();
 
-  /// @deprecated Deprecated since 7.0.
-  /// @brief Gets the audio codec for encoding an audio stream.
-  /// @since_tizen 3.0
-  /// @param[in] recorder The handle to the streamrecorder
-  /// @param[out] codec   The audio codec
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #STREAMRECORDER_ERROR_NONE Successful
-  /// @retval #STREAMRECORDER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #STREAMRECORDER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre Create a stream recorder handle by calling streamrecorder_create().
-  /// @pre The streamrecorder_enable_source_buffer() should be invoked before this function.
-  /// @see streamrecorder_create()
-  /// @see	streamrecorder_set_audio_encoder()
-  /// @see streamrecorder_foreach_supported_audio_encoder()
+  /// **Deprecated:** Deprecated since 7.0.
+  ///
+  /// Gets the audio codec for encoding an audio stream.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `recorder` (in): The handle to the streamrecorder
+  /// - `codec` (out): The audio codec
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STREAMRECORDER_ERROR_NONE`: Successful
+  /// - `STREAMRECORDER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `STREAMRECORDER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - Create a stream recorder handle by calling streamrecorder_create().
+  /// - The streamrecorder_enable_source_buffer() should be invoked before this function.
+  ///
+  /// **See also:**
+  /// - `streamrecorder_create()`
+  /// - `streamrecorder_set_audio_encoder()`
+  /// - `streamrecorder_foreach_supported_audio_encoder()`
   int streamrecorder_get_audio_encoder(
     streamrecorder_h recorder,
     ffi.Pointer<ffi.Int32> codec,
@@ -582,25 +835,39 @@ class Tizen70CapiMediaStreamrecorder {
       _streamrecorder_get_audio_encoderPtr
           .asFunction<int Function(streamrecorder_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @deprecated Deprecated since 7.0.
-  /// @brief Sets the resolution of the video recording.
-  /// @since_tizen 3.0
-  /// @remarks This function should be called before recording (streamrecorder_start()).
-  /// @param[in] recorder	The handle to the streamrecorder
-  /// @param[in] width	The input width
-  /// @param[in] height	The input height
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #STREAMRECORDER_ERROR_NONE Successful
-  /// @retval #STREAMRECORDER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #STREAMRECORDER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STREAMRECORDER_ERROR_INVALID_STATE Invalid state
-  /// @pre Create a stream recorder handle by calling streamrecorder_create().
-  /// @pre    The streamrecorder state must be #STREAMRECORDER_STATE_CREATED. \n
-  /// streamrecorder_enable_source_buffer() should be invoked before this function.
-  /// @see streamrecorder_create()
-  /// @see	streamrecorder_start()
-  /// @see	streamrecorder_get_video_resolution()
-  /// @see	streamrecorder_foreach_supported_video_resolution()
+  /// **Deprecated:** Deprecated since 7.0.
+  ///
+  /// Sets the resolution of the video recording.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - This function should be called before recording (streamrecorder_start()).
+  ///
+  /// **Parameters:**
+  /// - `recorder` (in): The handle to the streamrecorder
+  /// - `width` (in): The input width
+  /// - `height` (in): The input height
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STREAMRECORDER_ERROR_NONE`: Successful
+  /// - `STREAMRECORDER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `STREAMRECORDER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STREAMRECORDER_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - Create a stream recorder handle by calling streamrecorder_create().
+  /// - The streamrecorder state must be `STREAMRECORDER_STATE_CREATED`. streamrecorder_enable_source_buffer() should be invoked before this function.
+  ///
+  /// **See also:**
+  /// - `streamrecorder_create()`
+  /// - `streamrecorder_start()`
+  /// - `streamrecorder_get_video_resolution()`
+  /// - `streamrecorder_foreach_supported_video_resolution()`
   int streamrecorder_set_video_resolution(
     streamrecorder_h recorder,
     int width,
@@ -621,21 +888,34 @@ class Tizen70CapiMediaStreamrecorder {
       _streamrecorder_set_video_resolutionPtr
           .asFunction<int Function(streamrecorder_h, int, int)>();
 
-  /// @deprecated Deprecated since 7.0.
-  /// @brief Gets the resolution of the video recording.
-  /// @since_tizen 3.0
-  /// @param[in] recorder	The handle to the streamrecorder
-  /// @param[out] width	The video width
-  /// @param[out] height	The video height
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #STREAMRECORDER_ERROR_NONE Successful
-  /// @retval #STREAMRECORDER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #STREAMRECORDER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre Create a stream recorder handle by calling streamrecorder_create().
-  /// @pre The streamrecorder_enable_source_buffer() should be invoked before this function.
-  /// @see streamrecorder_create()
-  /// @see	streamrecorder_set_video_resolution()
-  /// @see	streamrecorder_foreach_supported_video_resolution()
+  /// **Deprecated:** Deprecated since 7.0.
+  ///
+  /// Gets the resolution of the video recording.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `recorder` (in): The handle to the streamrecorder
+  /// - `width` (out): The video width
+  /// - `height` (out): The video height
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STREAMRECORDER_ERROR_NONE`: Successful
+  /// - `STREAMRECORDER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `STREAMRECORDER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - Create a stream recorder handle by calling streamrecorder_create().
+  /// - The streamrecorder_enable_source_buffer() should be invoked before this function.
+  ///
+  /// **See also:**
+  /// - `streamrecorder_create()`
+  /// - `streamrecorder_set_video_resolution()`
+  /// - `streamrecorder_foreach_supported_video_resolution()`
   int streamrecorder_get_video_resolution(
     streamrecorder_h recorder,
     ffi.Pointer<ffi.Int> width,
@@ -657,23 +937,37 @@ class Tizen70CapiMediaStreamrecorder {
           int Function(
               streamrecorder_h, ffi.Pointer<ffi.Int>, ffi.Pointer<ffi.Int>)>();
 
-  /// @deprecated Deprecated since 7.0.
-  /// @brief Sets the video codec for encoding video stream.
-  /// @since_tizen 3.0
-  /// @remarks You can get available video encoders by using recorder_foreach_supported_video_encoder().
-  /// @param[in] recorder The handle to the streamrecorder
-  /// @param[in] codec    The video codec
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #STREAMRECORDER_ERROR_NONE Successful
-  /// @retval #STREAMRECORDER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #STREAMRECORDER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STREAMRECORDER_ERROR_INVALID_STATE Invalid state
-  /// @pre Create a stream recorder handle by calling streamrecorder_create().
-  /// @pre The streamrecorder state must be #STREAMRECORDER_STATE_CREATED. \n
-  /// streamrecorder_enable_source_buffer() should be invoked before this function.
-  /// @see streamrecorder_create()
-  /// @see streamrecorder_get_video_encoder()
-  /// @see streamrecorder_foreach_supported_video_encoder()
+  /// **Deprecated:** Deprecated since 7.0.
+  ///
+  /// Sets the video codec for encoding video stream.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - You can get available video encoders by using recorder_foreach_supported_video_encoder().
+  ///
+  /// **Parameters:**
+  /// - `recorder` (in): The handle to the streamrecorder
+  /// - `codec` (in): The video codec
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STREAMRECORDER_ERROR_NONE`: Successful
+  /// - `STREAMRECORDER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `STREAMRECORDER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STREAMRECORDER_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - Create a stream recorder handle by calling streamrecorder_create().
+  /// - The streamrecorder state must be `STREAMRECORDER_STATE_CREATED`. streamrecorder_enable_source_buffer() should be invoked before this function.
+  ///
+  /// **See also:**
+  /// - `streamrecorder_create()`
+  /// - `streamrecorder_get_video_encoder()`
+  /// - `streamrecorder_foreach_supported_video_encoder()`
   int streamrecorder_set_video_encoder(
     streamrecorder_h recorder,
     int codec,
@@ -691,20 +985,33 @@ class Tizen70CapiMediaStreamrecorder {
       _streamrecorder_set_video_encoderPtr
           .asFunction<int Function(streamrecorder_h, int)>();
 
-  /// @deprecated Deprecated since 7.0.
-  /// @brief Gets the video codec for encoding video stream.
-  /// @since_tizen 3.0
-  /// @param[in] recorder The handle to the streamrecorder
-  /// @param[out] codec   The video codec
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #STREAMRECORDER_ERROR_NONE Successful
-  /// @retval #STREAMRECORDER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #STREAMRECORDER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre Create a stream recorder handle by calling streamrecorder_create().
-  /// @pre The streamrecorder_enable_source_buffer() should be invoked before this function.
-  /// @see streamrecorder_create()
-  /// @see streamrecorder_set_video_encoder()
-  /// @see streamrecorder_foreach_supported_video_encoder()
+  /// **Deprecated:** Deprecated since 7.0.
+  ///
+  /// Gets the video codec for encoding video stream.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `recorder` (in): The handle to the streamrecorder
+  /// - `codec` (out): The video codec
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STREAMRECORDER_ERROR_NONE`: Successful
+  /// - `STREAMRECORDER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `STREAMRECORDER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - Create a stream recorder handle by calling streamrecorder_create().
+  /// - The streamrecorder_enable_source_buffer() should be invoked before this function.
+  ///
+  /// **See also:**
+  /// - `streamrecorder_create()`
+  /// - `streamrecorder_set_video_encoder()`
+  /// - `streamrecorder_foreach_supported_video_encoder()`
   int streamrecorder_get_video_encoder(
     streamrecorder_h recorder,
     ffi.Pointer<ffi.Int32> codec,
@@ -723,20 +1030,35 @@ class Tizen70CapiMediaStreamrecorder {
       _streamrecorder_get_video_encoderPtr
           .asFunction<int Function(streamrecorder_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @deprecated Deprecated since 7.0.
-  /// @brief Sets the recording frame rate.
-  /// @since_tizen 3.0
-  /// @remarks This function should be called before prepared state.
-  /// @param[in] recorder The handle to the streamrecorder
-  /// @param[in] framerate The frame rate for recording
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #STREAMRECORDER_ERROR_NONE Successful
-  /// @retval #STREAMRECORDER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #STREAMRECORDER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STREAMRECORDER_ERROR_INVALID_STATE Invalid state
-  /// @pre Create a stream recorder handle by calling streamrecorder_create().
-  /// @see streamrecorder_create()
-  /// @see streamrecorder_get_video_framerate()
+  /// **Deprecated:** Deprecated since 7.0.
+  ///
+  /// Sets the recording frame rate.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - This function should be called before prepared state.
+  ///
+  /// **Parameters:**
+  /// - `recorder` (in): The handle to the streamrecorder
+  /// - `framerate` (in): The frame rate for recording
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STREAMRECORDER_ERROR_NONE`: Successful
+  /// - `STREAMRECORDER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `STREAMRECORDER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STREAMRECORDER_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - Create a stream recorder handle by calling streamrecorder_create().
+  ///
+  /// **See also:**
+  /// - `streamrecorder_create()`
+  /// - `streamrecorder_get_video_framerate()`
   int streamrecorder_set_video_framerate(
     streamrecorder_h recorder,
     int framerate,
@@ -754,18 +1076,31 @@ class Tizen70CapiMediaStreamrecorder {
       _streamrecorder_set_video_frameratePtr
           .asFunction<int Function(streamrecorder_h, int)>();
 
-  /// @deprecated Deprecated since 7.0.
-  /// @brief Gets the recording frame rate.
-  /// @since_tizen 3.0
-  /// @param[in] recorder The handle to the camera
-  /// @param[out] framerate The frame rate for recording that already is set
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #STREAMRECORDER_ERROR_NONE Successful
-  /// @retval #STREAMRECORDER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #STREAMRECORDER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre Create a stream recorder handle by calling streamrecorder_create().
-  /// @see streamrecorder_create()
-  /// @see streamrecorder_set_video_framerate()
+  /// **Deprecated:** Deprecated since 7.0.
+  ///
+  /// Gets the recording frame rate.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `recorder` (in): The handle to the camera
+  /// - `framerate` (out): The frame rate for recording that already is set
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STREAMRECORDER_ERROR_NONE`: Successful
+  /// - `STREAMRECORDER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `STREAMRECORDER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - Create a stream recorder handle by calling streamrecorder_create().
+  ///
+  /// **See also:**
+  /// - `streamrecorder_create()`
+  /// - `streamrecorder_set_video_framerate()`
   int streamrecorder_get_video_framerate(
     streamrecorder_h recorder,
     ffi.Pointer<ffi.Int> framerate,
@@ -784,20 +1119,35 @@ class Tizen70CapiMediaStreamrecorder {
       _streamrecorder_get_video_frameratePtr
           .asFunction<int Function(streamrecorder_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @deprecated Deprecated since 7.0.
-  /// @brief Sets the video source format.
-  /// @since_tizen 3.0
-  /// @remarks This function should be called before prepared state.
-  /// @param[in] recorder The handle to the streamrecorder
-  /// @param[in] format The color type of video source
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #STREAMRECORDER_ERROR_NONE Successful
-  /// @retval #STREAMRECORDER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #STREAMRECORDER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STREAMRECORDER_ERROR_INVALID_STATE Invalid state
-  /// @pre Create a stream recorder handle by calling streamrecorder_create().
-  /// @see streamrecorder_create()
-  /// @see streamrecorder_get_video_source_format()
+  /// **Deprecated:** Deprecated since 7.0.
+  ///
+  /// Sets the video source format.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - This function should be called before prepared state.
+  ///
+  /// **Parameters:**
+  /// - `recorder` (in): The handle to the streamrecorder
+  /// - `format` (in): The color type of video source
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STREAMRECORDER_ERROR_NONE`: Successful
+  /// - `STREAMRECORDER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `STREAMRECORDER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STREAMRECORDER_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - Create a stream recorder handle by calling streamrecorder_create().
+  ///
+  /// **See also:**
+  /// - `streamrecorder_create()`
+  /// - `streamrecorder_get_video_source_format()`
   int streamrecorder_set_video_source_format(
     streamrecorder_h recorder,
     int format,
@@ -815,19 +1165,34 @@ class Tizen70CapiMediaStreamrecorder {
       _streamrecorder_set_video_source_formatPtr
           .asFunction<int Function(streamrecorder_h, int)>();
 
-  /// @deprecated Deprecated since 7.0.
-  /// @brief Gets the video source format.
-  /// @since_tizen 3.0
-  /// @remarks This function should be called before prepared state.
-  /// @param[in] recorder The handle to the streamrecorder
-  /// @param[out] format The color type of video source that already is set
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #STREAMRECORDER_ERROR_NONE Successful
-  /// @retval #STREAMRECORDER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #STREAMRECORDER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre Create a stream recorder handle by calling streamrecorder_create().
-  /// @see streamrecorder_create()
-  /// @see streamrecorder_set_video_source_format()
+  /// **Deprecated:** Deprecated since 7.0.
+  ///
+  /// Gets the video source format.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - This function should be called before prepared state.
+  ///
+  /// **Parameters:**
+  /// - `recorder` (in): The handle to the streamrecorder
+  /// - `format` (out): The color type of video source that already is set
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STREAMRECORDER_ERROR_NONE`: Successful
+  /// - `STREAMRECORDER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `STREAMRECORDER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - Create a stream recorder handle by calling streamrecorder_create().
+  ///
+  /// **See also:**
+  /// - `streamrecorder_create()`
+  /// - `streamrecorder_set_video_source_format()`
   int streamrecorder_get_video_source_format(
     streamrecorder_h recorder,
     ffi.Pointer<ffi.Int32> format,
@@ -846,25 +1211,37 @@ class Tizen70CapiMediaStreamrecorder {
       _streamrecorder_get_video_source_formatPtr
           .asFunction<int Function(streamrecorder_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @deprecated Deprecated since 7.0.
-  /// @brief Sets the maximum size of a recording file.
-  /// @since_tizen 3.0
-  /// @remarks After reaching the limitation, the recording data is discarded and not written in the recording file.
-  /// @param[in] recorder The handle to the streamrecorder
-  /// @param[in] type The recording limit type
-  /// @param[in] limit If limit type is #STREAMRECORDER_RECORDING_LIMIT_TYPE_SIZE, the limit value is the maximum size of the recording file(KB), \n
-  /// otherwise limit value is the maximum time of the recording file (in seconds) \n
-  /// @c 0 means unlimited recording size or time.
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #STREAMRECORDER_ERROR_NONE Successful
-  /// @retval #STREAMRECORDER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #STREAMRECORDER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STREAMRECORDER_ERROR_INVALID_STATE Invalid state
-  /// @pre Create a stream recorder handle by calling streamrecorder_create().
-  /// @pre The streamrecorder state must be #STREAMRECORDER_STATE_CREATED. \n
-  /// streamrecorder_enable_source_buffer() should be invoked before this function.
-  /// @see streamrecorder_create()
-  /// @see	streamrecorder_get_recording_limit()
+  /// **Deprecated:** Deprecated since 7.0.
+  ///
+  /// Sets the maximum size of a recording file.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - After reaching the limitation, the recording data is discarded and not written in the recording file.
+  ///
+  /// **Parameters:**
+  /// - `recorder` (in): The handle to the streamrecorder
+  /// - `type` (in): The recording limit type
+  /// - `limit` (in): If limit type is `STREAMRECORDER_RECORDING_LIMIT_TYPE_SIZE`, the limit value is the maximum size of the recording file(KB), otherwise limit value is the maximum time of the recording file (in seconds) `0` means unlimited recording size or time.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STREAMRECORDER_ERROR_NONE`: Successful
+  /// - `STREAMRECORDER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `STREAMRECORDER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STREAMRECORDER_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - Create a stream recorder handle by calling streamrecorder_create().
+  /// - The streamrecorder state must be `STREAMRECORDER_STATE_CREATED`. streamrecorder_enable_source_buffer() should be invoked before this function.
+  ///
+  /// **See also:**
+  /// - `streamrecorder_create()`
+  /// - `streamrecorder_get_recording_limit()`
   int streamrecorder_set_recording_limit(
     streamrecorder_h recorder,
     int type,
@@ -885,22 +1262,33 @@ class Tizen70CapiMediaStreamrecorder {
       _streamrecorder_set_recording_limitPtr
           .asFunction<int Function(streamrecorder_h, int, int)>();
 
-  /// @deprecated Deprecated since 7.0.
-  /// @brief Gets the maximum size of a recording file.
-  /// @since_tizen 3.0
-  /// @param[in] recorder The handle to the streamrecorder
-  /// @param[in] type The recording limit type
-  /// @param[out] limit If limit type is #STREAMRECORDER_RECORDING_LIMIT_TYPE_SIZE, the limit value is the maximum size of the recording file(KB), \n
-  /// otherwise limit value is the maximum time of the recording file (in seconds) \n
-  /// @c 0 means unlimited recording size or time.
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #STREAMRECORDER_ERROR_NONE Successful
-  /// @retval #STREAMRECORDER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #STREAMRECORDER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre Create a stream recorder handle by calling streamrecorder_create().
-  /// @pre The streamrecorder_enable_source_buffer() should be invoked before this function.
-  /// @see streamrecorder_create()
-  /// @see	streamrecorder_set_recording_limit()
+  /// **Deprecated:** Deprecated since 7.0.
+  ///
+  /// Gets the maximum size of a recording file.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `recorder` (in): The handle to the streamrecorder
+  /// - `type` (in): The recording limit type
+  /// - `limit` (out): If limit type is `STREAMRECORDER_RECORDING_LIMIT_TYPE_SIZE`, the limit value is the maximum size of the recording file(KB), otherwise limit value is the maximum time of the recording file (in seconds) `0` means unlimited recording size or time.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STREAMRECORDER_ERROR_NONE`: Successful
+  /// - `STREAMRECORDER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `STREAMRECORDER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - Create a stream recorder handle by calling streamrecorder_create().
+  /// - The streamrecorder_enable_source_buffer() should be invoked before this function.
+  ///
+  /// **See also:**
+  /// - `streamrecorder_create()`
+  /// - `streamrecorder_set_recording_limit()`
   int streamrecorder_get_recording_limit(
     streamrecorder_h recorder,
     int type,
@@ -921,21 +1309,33 @@ class Tizen70CapiMediaStreamrecorder {
       _streamrecorder_get_recording_limitPtr.asFunction<
           int Function(streamrecorder_h, int, ffi.Pointer<ffi.Int>)>();
 
-  /// @deprecated Deprecated since 7.0.
-  /// @brief Sets the sampling rate of an audio stream.
-  /// @since_tizen 3.0
-  /// @param[in] recorder    The handle to the streamrecorder
-  /// @param[in] samplerate The sample rate in Hertz
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #STREAMRECORDER_ERROR_NONE Successful
-  /// @retval #STREAMRECORDER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #STREAMRECORDER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STREAMRECORDER_ERROR_INVALID_STATE Invalid state
-  /// @pre Create a stream recorder handle by calling streamrecorder_create().
-  /// @pre The streamrecorder state must be #STREAMRECORDER_STATE_CREATED. \n
-  /// streamrecorder_enable_source_buffer() should be invoked before this function.
-  /// @see streamrecorder_create()
-  /// @see	streamrecorder_get_audio_samplerate()
+  /// **Deprecated:** Deprecated since 7.0.
+  ///
+  /// Sets the sampling rate of an audio stream.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `recorder` (in): The handle to the streamrecorder
+  /// - `samplerate` (in): The sample rate in Hertz
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STREAMRECORDER_ERROR_NONE`: Successful
+  /// - `STREAMRECORDER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `STREAMRECORDER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STREAMRECORDER_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - Create a stream recorder handle by calling streamrecorder_create().
+  /// - The streamrecorder state must be `STREAMRECORDER_STATE_CREATED`. streamrecorder_enable_source_buffer() should be invoked before this function.
+  ///
+  /// **See also:**
+  /// - `streamrecorder_create()`
+  /// - `streamrecorder_get_audio_samplerate()`
   int streamrecorder_set_audio_samplerate(
     streamrecorder_h recorder,
     int samplerate,
@@ -953,19 +1353,32 @@ class Tizen70CapiMediaStreamrecorder {
       _streamrecorder_set_audio_sampleratePtr
           .asFunction<int Function(streamrecorder_h, int)>();
 
-  /// @deprecated Deprecated since 7.0.
-  /// @brief Gets the sampling rate of an audio stream.
-  /// @since_tizen 3.0
-  /// @param[in]  recorder    The handle to the streamrecorder
-  /// @param[out] samplerate  The sample rate in Hertz
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #STREAMRECORDER_ERROR_NONE Successful
-  /// @retval #STREAMRECORDER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #STREAMRECORDER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre Create a stream recorder handle by calling streamrecorder_create().
-  /// @pre The streamrecorder_enable_source_buffer() should be invoked before this function.
-  /// @see streamrecorder_create()
-  /// @see	streamrecorder_set_audio_samplerate()
+  /// **Deprecated:** Deprecated since 7.0.
+  ///
+  /// Gets the sampling rate of an audio stream.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `recorder` (in): The handle to the streamrecorder
+  /// - `samplerate` (out): The sample rate in Hertz
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STREAMRECORDER_ERROR_NONE`: Successful
+  /// - `STREAMRECORDER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `STREAMRECORDER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - Create a stream recorder handle by calling streamrecorder_create().
+  /// - The streamrecorder_enable_source_buffer() should be invoked before this function.
+  ///
+  /// **See also:**
+  /// - `streamrecorder_create()`
+  /// - `streamrecorder_set_audio_samplerate()`
   int streamrecorder_get_audio_samplerate(
     streamrecorder_h recorder,
     ffi.Pointer<ffi.Int> samplerate,
@@ -984,21 +1397,33 @@ class Tizen70CapiMediaStreamrecorder {
       _streamrecorder_get_audio_sampleratePtr
           .asFunction<int Function(streamrecorder_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @deprecated Deprecated since 7.0.
-  /// @brief Sets the bitrate of an audio encoder.
-  /// @since_tizen 3.0
-  /// @param[in] recorder  The handle to the streamrecorder
-  /// @param[in] bitrate   The bitrate (for mms : 12200[bps], normal : 288000[bps])
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #STREAMRECORDER_ERROR_NONE Successful
-  /// @retval #STREAMRECORDER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #STREAMRECORDER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STREAMRECORDER_ERROR_INVALID_STATE Invalid state
-  /// @pre Create a stream recorder handle by calling streamrecorder_create().
-  /// @pre The streamrecorder state must be #STREAMRECORDER_STATE_CREATED. \n
-  /// streamrecorder_enable_source_buffer() should be invoked before this function.
-  /// @see streamrecorder_create()
-  /// @see	streamrecorder_get_audio_encoder_bitrate()
+  /// **Deprecated:** Deprecated since 7.0.
+  ///
+  /// Sets the bitrate of an audio encoder.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `recorder` (in): The handle to the streamrecorder
+  /// - `bitrate` (in): The bitrate (for mms : 12200`[bps]`, normal : 288000`[bps]`)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STREAMRECORDER_ERROR_NONE`: Successful
+  /// - `STREAMRECORDER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `STREAMRECORDER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STREAMRECORDER_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - Create a stream recorder handle by calling streamrecorder_create().
+  /// - The streamrecorder state must be `STREAMRECORDER_STATE_CREATED`. streamrecorder_enable_source_buffer() should be invoked before this function.
+  ///
+  /// **See also:**
+  /// - `streamrecorder_create()`
+  /// - `streamrecorder_get_audio_encoder_bitrate()`
   int streamrecorder_set_audio_encoder_bitrate(
     streamrecorder_h recorder,
     int bitrate,
@@ -1016,21 +1441,33 @@ class Tizen70CapiMediaStreamrecorder {
       _streamrecorder_set_audio_encoder_bitratePtr
           .asFunction<int Function(streamrecorder_h, int)>();
 
-  /// @deprecated Deprecated since 7.0.
-  /// @brief Sets the bitrate of a video encoder.
-  /// @since_tizen 3.0
-  /// @param[in] recorder  The handle to the streamrecorder
-  /// @param[in] bitrate   The bitrate in bits per second
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #STREAMRECORDER_ERROR_NONE Successful
-  /// @retval #STREAMRECORDER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #STREAMRECORDER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STREAMRECORDER_ERROR_INVALID_STATE Invalid state
-  /// @pre Create a stream recorder handle by calling streamrecorder_create().
-  /// @pre The streamrecorder state must be #STREAMRECORDER_STATE_CREATED. \n
-  /// streamrecorder_enable_source_buffer() should be invoked before this function.
-  /// @see streamrecorder_create()
-  /// @see	streamrecorder_get_video_encoder_bitrate()
+  /// **Deprecated:** Deprecated since 7.0.
+  ///
+  /// Sets the bitrate of a video encoder.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `recorder` (in): The handle to the streamrecorder
+  /// - `bitrate` (in): The bitrate in bits per second
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STREAMRECORDER_ERROR_NONE`: Successful
+  /// - `STREAMRECORDER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `STREAMRECORDER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STREAMRECORDER_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - Create a stream recorder handle by calling streamrecorder_create().
+  /// - The streamrecorder state must be `STREAMRECORDER_STATE_CREATED`. streamrecorder_enable_source_buffer() should be invoked before this function.
+  ///
+  /// **See also:**
+  /// - `streamrecorder_create()`
+  /// - `streamrecorder_get_video_encoder_bitrate()`
   int streamrecorder_set_video_encoder_bitrate(
     streamrecorder_h recorder,
     int bitrate,
@@ -1048,19 +1485,32 @@ class Tizen70CapiMediaStreamrecorder {
       _streamrecorder_set_video_encoder_bitratePtr
           .asFunction<int Function(streamrecorder_h, int)>();
 
-  /// @deprecated Deprecated since 7.0.
-  /// @brief Gets the bitrate of an audio encoder.
-  /// @since_tizen 3.0
-  /// @param[in]  recorder  The handle to the streamrecorder
-  /// @param[out] bitrate   The bitrate in bits per second
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #STREAMRECORDER_ERROR_NONE Successful
-  /// @retval #STREAMRECORDER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #STREAMRECORDER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre Create a stream recorder handle by calling streamrecorder_create().
-  /// @pre The streamrecorder_enable_source_buffer() should be invoked before this function.
-  /// @see streamrecorder_create()
-  /// @see	streamrecorder_set_audio_encoder_bitrate()
+  /// **Deprecated:** Deprecated since 7.0.
+  ///
+  /// Gets the bitrate of an audio encoder.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `recorder` (in): The handle to the streamrecorder
+  /// - `bitrate` (out): The bitrate in bits per second
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STREAMRECORDER_ERROR_NONE`: Successful
+  /// - `STREAMRECORDER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `STREAMRECORDER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - Create a stream recorder handle by calling streamrecorder_create().
+  /// - The streamrecorder_enable_source_buffer() should be invoked before this function.
+  ///
+  /// **See also:**
+  /// - `streamrecorder_create()`
+  /// - `streamrecorder_set_audio_encoder_bitrate()`
   int streamrecorder_get_audio_encoder_bitrate(
     streamrecorder_h recorder,
     ffi.Pointer<ffi.Int> bitrate,
@@ -1079,19 +1529,32 @@ class Tizen70CapiMediaStreamrecorder {
       _streamrecorder_get_audio_encoder_bitratePtr
           .asFunction<int Function(streamrecorder_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @deprecated Deprecated since 7.0.
-  /// @brief Gets the bitrate of a video encoder.
-  /// @since_tizen 3.0
-  /// @param[in]  recorder  The handle to the streamrecorder
-  /// @param[out] bitrate   The bitrate in bits per second
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #STREAMRECORDER_ERROR_NONE Successful
-  /// @retval #STREAMRECORDER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #STREAMRECORDER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre Create a stream recorder handle by calling streamrecorder_create().
-  /// @pre The streamrecorder_enable_source_buffer() should be invoked before this function.
-  /// @see streamrecorder_create()
-  /// @see	streamrecorder_set_audio_encoder_bitrate()
+  /// **Deprecated:** Deprecated since 7.0.
+  ///
+  /// Gets the bitrate of a video encoder.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `recorder` (in): The handle to the streamrecorder
+  /// - `bitrate` (out): The bitrate in bits per second
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STREAMRECORDER_ERROR_NONE`: Successful
+  /// - `STREAMRECORDER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `STREAMRECORDER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - Create a stream recorder handle by calling streamrecorder_create().
+  /// - The streamrecorder_enable_source_buffer() should be invoked before this function.
+  ///
+  /// **See also:**
+  /// - `streamrecorder_create()`
+  /// - `streamrecorder_set_audio_encoder_bitrate()`
   int streamrecorder_get_video_encoder_bitrate(
     streamrecorder_h recorder,
     ffi.Pointer<ffi.Int> bitrate,
@@ -1110,24 +1573,38 @@ class Tizen70CapiMediaStreamrecorder {
       _streamrecorder_get_video_encoder_bitratePtr
           .asFunction<int Function(streamrecorder_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @deprecated Deprecated since 7.0.
-  /// @brief Sets the number of the audio channel.
-  /// @since_tizen 3.0
-  /// @remarks This attribute is applied only in #STREAMRECORDER_STATE_CREATED state. \n
-  /// For mono recording, setting channel to @c 1. \n
-  /// For stereo recording, setting channel to @c 2.
-  /// @param[in] recorder       The handle to the streamrecorder
-  /// @param[in] channel_count  The number of the audio channel
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #STREAMRECORDER_ERROR_NONE Successful
-  /// @retval #STREAMRECORDER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #STREAMRECORDER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STREAMRECORDER_ERROR_INVALID_STATE Invalid state
-  /// @pre Create a stream recorder handle by calling streamrecorder_create().
-  /// @pre The streamrecorder state must be #STREAMRECORDER_STATE_CREATED.\n
-  /// streamrecorder_enable_source_buffer() should be invoked before this function.
-  /// @see streamrecorder_create()
-  /// @see	streamrecorder_get_audio_channel()
+  /// **Deprecated:** Deprecated since 7.0.
+  ///
+  /// Sets the number of the audio channel.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - This attribute is applied only in `STREAMRECORDER_STATE_CREATED` state.
+  /// - For mono recording, setting channel to `1`.
+  /// - For stereo recording, setting channel to `2`.
+  ///
+  /// **Parameters:**
+  /// - `recorder` (in): The handle to the streamrecorder
+  /// - `channel_count` (in): The number of the audio channel
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STREAMRECORDER_ERROR_NONE`: Successful
+  /// - `STREAMRECORDER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `STREAMRECORDER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STREAMRECORDER_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - Create a stream recorder handle by calling streamrecorder_create().
+  /// - The streamrecorder state must be `STREAMRECORDER_STATE_CREATED`. streamrecorder_enable_source_buffer() should be invoked before this function.
+  ///
+  /// **See also:**
+  /// - `streamrecorder_create()`
+  /// - `streamrecorder_get_audio_channel()`
   int streamrecorder_set_audio_channel(
     streamrecorder_h recorder,
     int channel_count,
@@ -1145,19 +1622,32 @@ class Tizen70CapiMediaStreamrecorder {
       _streamrecorder_set_audio_channelPtr
           .asFunction<int Function(streamrecorder_h, int)>();
 
-  /// @deprecated Deprecated since 7.0.
-  /// @brief Gets the number of the audio channel.
-  /// @since_tizen 3.0
-  /// @param[in] recorder  The handle to the streamrecorder
-  /// @param[out] channel_count  The number of the audio channel
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #STREAMRECORDER_ERROR_NONE Successful
-  /// @retval #STREAMRECORDER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #STREAMRECORDER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre Create a stream recorder handle by calling streamrecorder_create().
-  /// @pre The streamrecorder_enable_source_buffer() should be invoked before this function.
-  /// @see streamrecorder_create()
-  /// @see	streamrecorder_set_audio_channel()
+  /// **Deprecated:** Deprecated since 7.0.
+  ///
+  /// Gets the number of the audio channel.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `recorder` (in): The handle to the streamrecorder
+  /// - `channel_count` (out): The number of the audio channel
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STREAMRECORDER_ERROR_NONE`: Successful
+  /// - `STREAMRECORDER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `STREAMRECORDER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - Create a stream recorder handle by calling streamrecorder_create().
+  /// - The streamrecorder_enable_source_buffer() should be invoked before this function.
+  ///
+  /// **See also:**
+  /// - `streamrecorder_create()`
+  /// - `streamrecorder_set_audio_channel()`
   int streamrecorder_get_audio_channel(
     streamrecorder_h recorder,
     ffi.Pointer<ffi.Int> channel_count,
@@ -1176,22 +1666,37 @@ class Tizen70CapiMediaStreamrecorder {
       _streamrecorder_get_audio_channelPtr
           .asFunction<int Function(streamrecorder_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @deprecated Deprecated since 7.0.
-  /// @brief Sets the recording mode.
-  /// @since_tizen 6.0
-  /// @remarks This attribute can be set only in the #STREAMRECORDER_STATE_CREATED state. \n
-  /// To record with media buffer, set the mode to #STREAMRECORDER_MODE_STREAM_BUFFER. \n
-  /// To record with the device's own screen (display) and audio, set the mode to #STREAMRECORDER_MODE_DEVICE_LOOPBACK.
-  /// @param[in] recorder       The handle to the streamrecorder
-  /// @param[in] mode  The recording mode
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #STREAMRECORDER_ERROR_NONE Successful
-  /// @retval #STREAMRECORDER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #STREAMRECORDER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STREAMRECORDER_ERROR_INVALID_STATE Invalid state
-  /// @pre The streamrecorder state must be #STREAMRECORDER_STATE_CREATED.\n
-  /// @see streamrecorder_create()
-  /// @see streamrecorder_get_mode()
+  /// **Deprecated:** Deprecated since 7.0.
+  ///
+  /// Sets the recording mode.
+  ///
+  /// **Since Tizen:**
+  /// - 6.0
+  ///
+  /// **Remarks:**
+  /// - This attribute can be set only in the `STREAMRECORDER_STATE_CREATED` state.
+  /// - To record with media buffer, set the mode to `STREAMRECORDER_MODE_STREAM_BUFFER`.
+  /// - To record with the device's own screen (display) and audio, set the mode to `STREAMRECORDER_MODE_DEVICE_LOOPBACK`.
+  ///
+  /// **Parameters:**
+  /// - `recorder` (in): The handle to the streamrecorder
+  /// - `mode` (in): The recording mode
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STREAMRECORDER_ERROR_NONE`: Successful
+  /// - `STREAMRECORDER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `STREAMRECORDER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STREAMRECORDER_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The streamrecorder state must be `STREAMRECORDER_STATE_CREATED`.
+  ///
+  /// **See also:**
+  /// - `streamrecorder_create()`
+  /// - `streamrecorder_get_mode()`
   int streamrecorder_set_mode(
     streamrecorder_h recorder,
     int mode,
@@ -1208,21 +1713,36 @@ class Tizen70CapiMediaStreamrecorder {
   late final _streamrecorder_set_mode = _streamrecorder_set_modePtr
       .asFunction<int Function(streamrecorder_h, int)>();
 
-  /// @deprecated Deprecated since 7.0.
-  /// @brief Gets the recording mode.
-  /// @since_tizen 6.0
-  /// @remarks #STREAMRECORDER_MODE_STREAM_BUFFER indicates recording with media buffer. \n
-  /// #STREAMRECORDER_MODE_DEVICE_LOOPBACK indicates recording the device's own screen (display) and audio.
-  /// @param[in] recorder       The handle to the streamrecorder
-  /// @param[out] mode  The recording mode
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #STREAMRECORDER_ERROR_NONE Successful
-  /// @retval #STREAMRECORDER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #STREAMRECORDER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #STREAMRECORDER_ERROR_INVALID_STATE Invalid state
-  /// @pre The streamrecorder state must be #STREAMRECORDER_STATE_CREATED.\n
-  /// @see streamrecorder_create()
-  /// @see streamrecorder_set_mode()
+  /// **Deprecated:** Deprecated since 7.0.
+  ///
+  /// Gets the recording mode.
+  ///
+  /// **Since Tizen:**
+  /// - 6.0
+  ///
+  /// **Remarks:**
+  /// - `STREAMRECORDER_MODE_STREAM_BUFFER` indicates recording with media buffer.
+  /// - `STREAMRECORDER_MODE_DEVICE_LOOPBACK` indicates recording the device's own screen (display) and audio.
+  ///
+  /// **Parameters:**
+  /// - `recorder` (in): The handle to the streamrecorder
+  /// - `mode` (out): The recording mode
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STREAMRECORDER_ERROR_NONE`: Successful
+  /// - `STREAMRECORDER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `STREAMRECORDER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `STREAMRECORDER_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The streamrecorder state must be `STREAMRECORDER_STATE_CREATED`.
+  ///
+  /// **See also:**
+  /// - `streamrecorder_create()`
+  /// - `streamrecorder_set_mode()`
   int streamrecorder_get_mode(
     streamrecorder_h recorder,
     ffi.Pointer<ffi.Int32> mode,
@@ -1240,22 +1760,37 @@ class Tizen70CapiMediaStreamrecorder {
   late final _streamrecorder_get_mode = _streamrecorder_get_modePtr
       .asFunction<int Function(streamrecorder_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @deprecated Deprecated since 7.0.
-  /// @brief Retrieves all supported file formats by invoking a specific callback for each supported file format.
-  /// @since_tizen 3.0
-  /// @param[in] recorder  The handle to the streamrecorder
-  /// @param[in] callback The iteration callback
-  /// @param[in] user_data	The user data to be passed to the callback function
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #STREAMRECORDER_ERROR_NONE Successful
-  /// @retval #STREAMRECORDER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #STREAMRECORDER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre Create a stream recorder handle by calling streamrecorder_create().
-  /// @post  streamrecorder_supported_file_format_cb() will be invoked.
-  /// @see streamrecorder_create()
-  /// @see streamrecorder_get_file_format()
-  /// @see streamrecorder_set_file_format()
-  /// @see streamrecorder_supported_file_format_cb()
+  /// **Deprecated:** Deprecated since 7.0.
+  ///
+  /// Retrieves all supported file formats by invoking a specific callback for each supported file format.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `recorder` (in): The handle to the streamrecorder
+  /// - `callback` (in): The iteration callback
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STREAMRECORDER_ERROR_NONE`: Successful
+  /// - `STREAMRECORDER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `STREAMRECORDER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - Create a stream recorder handle by calling streamrecorder_create().
+  ///
+  /// **Postconditions:**
+  /// - streamrecorder_supported_file_format_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `streamrecorder_create()`
+  /// - `streamrecorder_get_file_format()`
+  /// - `streamrecorder_set_file_format()`
+  /// - `streamrecorder_supported_file_format_cb()`
   int streamrecorder_foreach_supported_file_format(
     streamrecorder_h recorder,
     streamrecorder_supported_file_format_cb callback,
@@ -1282,22 +1817,37 @@ class Tizen70CapiMediaStreamrecorder {
               streamrecorder_supported_file_format_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @deprecated Deprecated since 7.0.
-  /// @brief Retrieves all supported audio encoders by invoking a specific callback for each supported audio encoder.
-  /// @since_tizen 3.0
-  /// @param[in] recorder  The handle to the streamrecorder
-  /// @param[in] callback	The iteration callback
-  /// @param[in] user_data	The user data to be passed to the callback function
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #STREAMRECORDER_ERROR_NONE Successful
-  /// @retval #STREAMRECORDER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #STREAMRECORDER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre Create a stream recorder handle by calling streamrecorder_create().
-  /// @post  streamrecorder_supported_audio_encoder_cb() will be invoked.
-  /// @see streamrecorder_create()
-  /// @see	streamrecorder_set_audio_encoder()
-  /// @see	streamrecorder_get_audio_encoder()
-  /// @see	streamrecorder_supported_audio_encoder_cb()
+  /// **Deprecated:** Deprecated since 7.0.
+  ///
+  /// Retrieves all supported audio encoders by invoking a specific callback for each supported audio encoder.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `recorder` (in): The handle to the streamrecorder
+  /// - `callback` (in): The iteration callback
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STREAMRECORDER_ERROR_NONE`: Successful
+  /// - `STREAMRECORDER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `STREAMRECORDER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - Create a stream recorder handle by calling streamrecorder_create().
+  ///
+  /// **Postconditions:**
+  /// - streamrecorder_supported_audio_encoder_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `streamrecorder_create()`
+  /// - `streamrecorder_set_audio_encoder()`
+  /// - `streamrecorder_get_audio_encoder()`
+  /// - `streamrecorder_supported_audio_encoder_cb()`
   int streamrecorder_foreach_supported_audio_encoder(
     streamrecorder_h recorder,
     streamrecorder_supported_audio_encoder_cb callback,
@@ -1324,22 +1874,37 @@ class Tizen70CapiMediaStreamrecorder {
               streamrecorder_supported_audio_encoder_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @deprecated Deprecated since 7.0.
-  /// @brief Retrieves all supported video encoders by invoking a specific callback for each supported video encoder.
-  /// @since_tizen 3.0
-  /// @param[in] recorder	The handle to the streamrecorder
-  /// @param[in] callback	The iteration callback
-  /// @param[in] user_data	The user data to be passed to the callback function
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #STREAMRECORDER_ERROR_NONE Successful
-  /// @retval #STREAMRECORDER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #STREAMRECORDER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre Create a stream recorder handle by calling streamrecorder_create().
-  /// @post  streamrecorder_supported_video_encoder_cb() will be invoked.
-  /// @see streamrecorder_create()
-  /// @see streamrecorder_set_video_encoder()
-  /// @see streamrecorder_get_video_encoder()
-  /// @see	streamrecorder_supported_video_encoder_cb()
+  /// **Deprecated:** Deprecated since 7.0.
+  ///
+  /// Retrieves all supported video encoders by invoking a specific callback for each supported video encoder.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `recorder` (in): The handle to the streamrecorder
+  /// - `callback` (in): The iteration callback
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STREAMRECORDER_ERROR_NONE`: Successful
+  /// - `STREAMRECORDER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `STREAMRECORDER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - Create a stream recorder handle by calling streamrecorder_create().
+  ///
+  /// **Postconditions:**
+  /// - streamrecorder_supported_video_encoder_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `streamrecorder_create()`
+  /// - `streamrecorder_set_video_encoder()`
+  /// - `streamrecorder_get_video_encoder()`
+  /// - `streamrecorder_supported_video_encoder_cb()`
   int streamrecorder_foreach_supported_video_encoder(
     streamrecorder_h recorder,
     streamrecorder_supported_video_encoder_cb callback,
@@ -1366,22 +1931,37 @@ class Tizen70CapiMediaStreamrecorder {
               streamrecorder_supported_video_encoder_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @deprecated Deprecated since 7.0.
-  /// @brief Retrieves all supported video resolutions by invoking callback function once for each supported video resolution.
-  /// @since_tizen 3.0
-  /// @param[in] recorder	The handle to the streamrecorder
-  /// @param[in] foreach_cb	The callback function to be invoked
-  /// @param[in] user_data	The user data to be passed to the callback function
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #STREAMRECORDER_ERROR_NONE Successful
-  /// @retval #STREAMRECORDER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #STREAMRECORDER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre Create a stream recorder handle by calling streamrecorder_create().
-  /// @post	This function invokes streamrecorder_supported_video_resolution_cb() repeatedly to retrieve each supported video resolution.
-  /// @see streamrecorder_create()
-  /// @see	streamrecorder_set_video_resolution()
-  /// @see	streamrecorder_get_video_resolution()
-  /// @see	streamrecorder_supported_video_resolution_cb()
+  /// **Deprecated:** Deprecated since 7.0.
+  ///
+  /// Retrieves all supported video resolutions by invoking callback function once for each supported video resolution.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `recorder` (in): The handle to the streamrecorder
+  /// - `foreach_cb` (in): The callback function to be invoked
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STREAMRECORDER_ERROR_NONE`: Successful
+  /// - `STREAMRECORDER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `STREAMRECORDER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - Create a stream recorder handle by calling streamrecorder_create().
+  ///
+  /// **Postconditions:**
+  /// - This function invokes streamrecorder_supported_video_resolution_cb() repeatedly to retrieve each supported video resolution.
+  ///
+  /// **See also:**
+  /// - `streamrecorder_create()`
+  /// - `streamrecorder_set_video_resolution()`
+  /// - `streamrecorder_get_video_resolution()`
+  /// - `streamrecorder_supported_video_resolution_cb()`
   int streamrecorder_foreach_supported_video_resolution(
     streamrecorder_h recorder,
     streamrecorder_supported_video_resolution_cb foreach_cb,
@@ -1408,21 +1988,36 @@ class Tizen70CapiMediaStreamrecorder {
               streamrecorder_supported_video_resolution_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @deprecated Deprecated since 7.0.
-  /// @brief Registers the callback function that will be invoked when the streamrecorder get some notification.
-  /// @since_tizen 3.0
-  /// @param[in] recorder	The handle to the streamrecorder
-  /// @param[in] callback	The function pointer of user callback
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #STREAMRECORDER_ERROR_NONE Successful
-  /// @retval #STREAMRECORDER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #STREAMRECORDER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre Create a stream recorder handle by calling streamrecorder_create().
-  /// @post  streamrecorder_notify_cb() will be invoked.
-  /// @see streamrecorder_create()
-  /// @see streamrecorder_unset_notify_cb()
-  /// @see streamrecorder_notify_cb()
+  /// **Deprecated:** Deprecated since 7.0.
+  ///
+  /// Registers the callback function that will be invoked when the streamrecorder get some notification.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `recorder` (in): The handle to the streamrecorder
+  /// - `callback` (in): The function pointer of user callback
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STREAMRECORDER_ERROR_NONE`: Successful
+  /// - `STREAMRECORDER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `STREAMRECORDER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - Create a stream recorder handle by calling streamrecorder_create().
+  ///
+  /// **Postconditions:**
+  /// - streamrecorder_notify_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `streamrecorder_create()`
+  /// - `streamrecorder_unset_notify_cb()`
+  /// - `streamrecorder_notify_cb()`
   int streamrecorder_set_notify_cb(
     streamrecorder_h recorder,
     streamrecorder_notify_cb callback,
@@ -1444,17 +2039,30 @@ class Tizen70CapiMediaStreamrecorder {
           int Function(streamrecorder_h, streamrecorder_notify_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @deprecated Deprecated since 7.0.
-  /// @brief Unregisters the callback function.
-  /// @since_tizen 3.0
-  /// @param[in]  recorder The handle to the streamrecorder
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #STREAMRECORDER_ERROR_NONE Successful
-  /// @retval #STREAMRECORDER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #STREAMRECORDER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre Create a stream recorder handle by calling streamrecorder_create().
-  /// @see streamrecorder_create()
-  /// @see streamrecorder_set_notify_cb()
+  /// **Deprecated:** Deprecated since 7.0.
+  ///
+  /// Unregisters the callback function.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `recorder` (in): The handle to the streamrecorder
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STREAMRECORDER_ERROR_NONE`: Successful
+  /// - `STREAMRECORDER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `STREAMRECORDER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - Create a stream recorder handle by calling streamrecorder_create().
+  ///
+  /// **See also:**
+  /// - `streamrecorder_create()`
+  /// - `streamrecorder_set_notify_cb()`
   int streamrecorder_unset_notify_cb(
     streamrecorder_h recorder,
   ) {
@@ -1470,21 +2078,36 @@ class Tizen70CapiMediaStreamrecorder {
       _streamrecorder_unset_notify_cbPtr
           .asFunction<int Function(streamrecorder_h)>();
 
-  /// @deprecated Deprecated since 7.0.
-  /// @brief Registers a callback function to be invoked when the recording information changes.
-  /// @since_tizen 3.0
-  /// @param[in]  recorder   The handle to the streamrecorder
-  /// @param[in]  callback   The function pointer of user callback
-  /// @param[in]  user_data  The user data to be passed to the callback function
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #STREAMRECORDER_ERROR_NONE Successful
-  /// @retval #STREAMRECORDER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #STREAMRECORDER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre Create a stream recorder handle by calling streamrecorder_create().
-  /// @post  streamrecorder_recording_status_cb() will be invoked.
-  /// @see streamrecorder_create()
-  /// @see	streamrecorder_unset_recording_status_cb()
-  /// @see	streamrecorder_recording_status_cb()
+  /// **Deprecated:** Deprecated since 7.0.
+  ///
+  /// Registers a callback function to be invoked when the recording information changes.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `recorder` (in): The handle to the streamrecorder
+  /// - `callback` (in): The function pointer of user callback
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STREAMRECORDER_ERROR_NONE`: Successful
+  /// - `STREAMRECORDER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `STREAMRECORDER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - Create a stream recorder handle by calling streamrecorder_create().
+  ///
+  /// **Postconditions:**
+  /// - streamrecorder_recording_status_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `streamrecorder_create()`
+  /// - `streamrecorder_unset_recording_status_cb()`
+  /// - `streamrecorder_recording_status_cb()`
   int streamrecorder_set_recording_status_cb(
     streamrecorder_h recorder,
     streamrecorder_recording_status_cb callback,
@@ -1507,16 +2130,29 @@ class Tizen70CapiMediaStreamrecorder {
           int Function(streamrecorder_h, streamrecorder_recording_status_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @deprecated Deprecated since 7.0.
-  /// @brief Unregisters the callback function.
-  /// @since_tizen 3.0
-  /// @param[in]  recorder    The handle to the streamrecorder
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #STREAMRECORDER_ERROR_NONE Successful
-  /// @retval #STREAMRECORDER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #STREAMRECORDER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre Create a stream recorder handle by calling streamrecorder_create().
-  /// @see	streamrecorder_set_recording_status_cb()
+  /// **Deprecated:** Deprecated since 7.0.
+  ///
+  /// Unregisters the callback function.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `recorder` (in): The handle to the streamrecorder
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STREAMRECORDER_ERROR_NONE`: Successful
+  /// - `STREAMRECORDER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `STREAMRECORDER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - Create a stream recorder handle by calling streamrecorder_create().
+  ///
+  /// **See also:**
+  /// - `streamrecorder_set_recording_status_cb()`
   int streamrecorder_unset_recording_status_cb(
     streamrecorder_h recorder,
   ) {
@@ -1532,21 +2168,36 @@ class Tizen70CapiMediaStreamrecorder {
       _streamrecorder_unset_recording_status_cbPtr
           .asFunction<int Function(streamrecorder_h)>();
 
-  /// @deprecated Deprecated since 7.0.
-  /// @brief Registers the callback function to be run when reached the recording limit.
-  /// @since_tizen 3.0
-  /// @param[in]	recorder	The handle to streamrecorder
-  /// @param[in]	callback	The function pointer of user callback
-  /// @param[in]	user_data	The user data to be passed to the callback function
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #STREAMRECORDER_ERROR_NONE Successful
-  /// @retval #STREAMRECORDER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #STREAMRECORDER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre Create a stream recorder handle by calling streamrecorder_create().
-  /// @post  streamrecorder_recording_limit_reached_cb() will be invoked.
-  /// @see streamrecorder_create()
-  /// @see	streamrecorder_unset_recording_limit_reached_cb()
-  /// @see	streamrecorder_recording_limit_reached_cb()
+  /// **Deprecated:** Deprecated since 7.0.
+  ///
+  /// Registers the callback function to be run when reached the recording limit.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `recorder` (in): The handle to streamrecorder
+  /// - `callback` (in): The function pointer of user callback
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STREAMRECORDER_ERROR_NONE`: Successful
+  /// - `STREAMRECORDER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `STREAMRECORDER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - Create a stream recorder handle by calling streamrecorder_create().
+  ///
+  /// **Postconditions:**
+  /// - streamrecorder_recording_limit_reached_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `streamrecorder_create()`
+  /// - `streamrecorder_unset_recording_limit_reached_cb()`
+  /// - `streamrecorder_recording_limit_reached_cb()`
   int streamrecorder_set_recording_limit_reached_cb(
     streamrecorder_h recorder,
     streamrecorder_recording_limit_reached_cb callback,
@@ -1573,17 +2224,30 @@ class Tizen70CapiMediaStreamrecorder {
               streamrecorder_recording_limit_reached_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @deprecated Deprecated since 7.0.
-  /// @brief Unregisters the callback function.
-  /// @since_tizen 3.0
-  /// @param[in]  recorder  The handle to the streamrecorder
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #STREAMRECORDER_ERROR_NONE Successful
-  /// @retval #STREAMRECORDER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #STREAMRECORDER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre Create a stream recorder handle by calling streamrecorder_create().
-  /// @see streamrecorder_create()
-  /// @see	streamrecorder_set_recording_limit_reached_cb()
+  /// **Deprecated:** Deprecated since 7.0.
+  ///
+  /// Unregisters the callback function.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `recorder` (in): The handle to the streamrecorder
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STREAMRECORDER_ERROR_NONE`: Successful
+  /// - `STREAMRECORDER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `STREAMRECORDER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - Create a stream recorder handle by calling streamrecorder_create().
+  ///
+  /// **See also:**
+  /// - `streamrecorder_create()`
+  /// - `streamrecorder_set_recording_limit_reached_cb()`
   int streamrecorder_unset_recording_limit_reached_cb(
     streamrecorder_h recorder,
   ) {
@@ -1599,26 +2263,43 @@ class Tizen70CapiMediaStreamrecorder {
       _streamrecorder_unset_recording_limit_reached_cbPtr
           .asFunction<int Function(streamrecorder_h)>();
 
-  /// @deprecated Deprecated since 7.0.
-  /// @brief Registers a callback function to be called when an asynchronous operation error occurred.
-  /// @since_tizen 3.0
-  /// @remarks This callback informs critical error situation.\n
-  /// When this callback is invoked, user should release the resource and terminate the application. \n
-  /// These error codes will occur. \n
-  /// #STREAMRECORDER_ERROR_INVALID_OPERATION \n
-  /// #STREAMRECORDER_ERROR_OUT_OF_MEMORY
-  /// @param[in]	recorder	The handle to the streamrecorder
-  /// @param[in]	callback	The callback function to register
-  /// @param[in]	user_data	The user data to be passed to the callback function
-  /// @return  @c 0 on success, otherwise a negative error value
-  /// @retval #STREAMRECORDER_ERROR_NONE Successful
-  /// @retval #STREAMRECORDER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #STREAMRECORDER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre Create a stream recorder handle by calling streamrecorder_create().
-  /// @post	This function will invoke streamrecorder_error_cb() when an asynchronous operation error occur.
-  /// @see streamrecorder_create()
-  /// @see	streamrecorder_unset_error_cb()
-  /// @see	streamrecorder_error_cb()
+  /// **Deprecated:** Deprecated since 7.0.
+  ///
+  /// Registers a callback function to be called when an asynchronous operation error occurred.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - This callback informs critical error situation.
+  /// - When this callback is invoked, user should release the resource and terminate the application.
+  /// - These error codes will occur.
+  /// - `STREAMRECORDER_ERROR_INVALID_OPERATION`
+  /// - `STREAMRECORDER_ERROR_OUT_OF_MEMORY`
+  ///
+  /// **Parameters:**
+  /// - `recorder` (in): The handle to the streamrecorder
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STREAMRECORDER_ERROR_NONE`: Successful
+  /// - `STREAMRECORDER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `STREAMRECORDER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - Create a stream recorder handle by calling streamrecorder_create().
+  ///
+  /// **Postconditions:**
+  /// - This function will invoke streamrecorder_error_cb() when an asynchronous operation error occur.
+  ///
+  /// **See also:**
+  /// - `streamrecorder_create()`
+  /// - `streamrecorder_unset_error_cb()`
+  /// - `streamrecorder_error_cb()`
   int streamrecorder_set_error_cb(
     streamrecorder_h recorder,
     streamrecorder_error_cb callback,
@@ -1640,17 +2321,30 @@ class Tizen70CapiMediaStreamrecorder {
           int Function(streamrecorder_h, streamrecorder_error_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @deprecated Deprecated since 7.0.
-  /// @brief Unregisters the callback function.
-  /// @since_tizen 3.0
-  /// @param[in]	recorder	The handle to the streamrecorder
-  /// @return  @c on success, otherwise a negative error value
-  /// @retval    #STREAMRECORDER_ERROR_NONE Successful
-  /// @retval #STREAMRECORDER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval    #STREAMRECORDER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre Create a stream recorder handle by calling streamrecorder_create().
-  /// @see streamrecorder_create()
-  /// @see	streamrecorder_set_error_cb()
+  /// **Deprecated:** Deprecated since 7.0.
+  ///
+  /// Unregisters the callback function.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `recorder` (in): The handle to the streamrecorder
+  ///
+  /// **Returns:**
+  /// - `on` success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STREAMRECORDER_ERROR_NONE`: Successful
+  /// - `STREAMRECORDER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `STREAMRECORDER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - Create a stream recorder handle by calling streamrecorder_create().
+  ///
+  /// **See also:**
+  /// - `streamrecorder_create()`
+  /// - `streamrecorder_set_error_cb()`
   int streamrecorder_unset_error_cb(
     streamrecorder_h recorder,
   ) {
@@ -1665,22 +2359,37 @@ class Tizen70CapiMediaStreamrecorder {
   late final _streamrecorder_unset_error_cb = _streamrecorder_unset_error_cbPtr
       .asFunction<int Function(streamrecorder_h)>();
 
-  /// @deprecated Deprecated since 7.0.
-  /// @brief Registers a callback function to be called when asynchronous buffers are consumed.
-  /// @since_tizen 3.0
-  /// @remarks This callback informs to user dealloc buffer.\n
-  /// When this callback is invoked, user should release the buffer or media packet. \n
-  /// @param[in]	recorder	The handle to the streamrecorder
-  /// @param[in]	callback	The callback function to register
-  /// @param[in]	user_data	The user data to be passed to the callback function
-  /// @return  @c 0 on success, otherwise a negative error value
-  /// @retval #STREAMRECORDER_ERROR_NONE Successful
-  /// @retval #STREAMRECORDER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #STREAMRECORDER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre Create a stream recorder handle by calling streamrecorder_create().
-  /// @see streamrecorder_create()
-  /// @see	streamrecorder_unset_buffer_consume_completed_cb()
-  /// @see	streamrecorder_push_stream_buffer()
+  /// **Deprecated:** Deprecated since 7.0.
+  ///
+  /// Registers a callback function to be called when asynchronous buffers are consumed.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - This callback informs to user dealloc buffer.
+  /// - When this callback is invoked, user should release the buffer or media packet.
+  ///
+  /// **Parameters:**
+  /// - `recorder` (in): The handle to the streamrecorder
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STREAMRECORDER_ERROR_NONE`: Successful
+  /// - `STREAMRECORDER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `STREAMRECORDER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - Create a stream recorder handle by calling streamrecorder_create().
+  ///
+  /// **See also:**
+  /// - `streamrecorder_create()`
+  /// - `streamrecorder_unset_buffer_consume_completed_cb()`
+  /// - `streamrecorder_push_stream_buffer()`
   int streamrecorder_set_buffer_consume_completed_cb(
     streamrecorder_h recorder,
     streamrecorder_consume_completed_cb callback,
@@ -1703,17 +2412,30 @@ class Tizen70CapiMediaStreamrecorder {
           int Function(streamrecorder_h, streamrecorder_consume_completed_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @deprecated Deprecated since 7.0.
-  /// @brief Unregisters the callback function.
-  /// @since_tizen 3.0
-  /// @param[in]	recorder	The handle to the streamrecorder
-  /// @return  @c on success, otherwise a negative error value
-  /// @retval    #STREAMRECORDER_ERROR_NONE Successful
-  /// @retval #STREAMRECORDER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval    #STREAMRECORDER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre Create a stream recorder handle by calling streamrecorder_create().
-  /// @see streamrecorder_create()
-  /// @see	streamrecorder_set_buffer_consume_completed_cb()
+  /// **Deprecated:** Deprecated since 7.0.
+  ///
+  /// Unregisters the callback function.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `recorder` (in): The handle to the streamrecorder
+  ///
+  /// **Returns:**
+  /// - `on` success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `STREAMRECORDER_ERROR_NONE`: Successful
+  /// - `STREAMRECORDER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `STREAMRECORDER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - Create a stream recorder handle by calling streamrecorder_create().
+  ///
+  /// **See also:**
+  /// - `streamrecorder_create()`
+  /// - `streamrecorder_set_buffer_consume_completed_cb()`
   int streamrecorder_unset_buffer_consume_completed_cb(
     streamrecorder_h recorder,
   ) {
@@ -1730,11 +2452,16 @@ class Tizen70CapiMediaStreamrecorder {
           .asFunction<int Function(streamrecorder_h)>();
 }
 
+/// @nodoc
 final class streamrecorder_s extends ffi.Opaque {}
 
-/// @deprecated Deprecated since 7.0.
-/// @brief Enumeration for the source type.
-/// @since_tizen 3.0
+/// **Deprecated:** Deprecated since 7.0.
+///
+/// Enumeration for the source type.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class streamrecorder_source_e {
   /// < Video only
   static const int STREAMRECORDER_SOURCE_VIDEO = 0;
@@ -1746,9 +2473,13 @@ abstract class streamrecorder_source_e {
   static const int STREAMRECORDER_SOURCE_VIDEO_AUDIO = 2;
 }
 
-/// @deprecated Deprecated since 7.0.
-/// @brief Enumeration for the pixel format.
-/// @since_tizen 3.0
+/// **Deprecated:** Deprecated since 7.0.
+///
+/// Enumeration for the pixel format.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class streamrecorder_video_source_format_e {
   /// < Invalid pixel format
   static const int STREAMRECORDER_VIDEO_SOURCE_FORMAT_INVALID = -1;
@@ -1766,9 +2497,13 @@ abstract class streamrecorder_video_source_format_e {
   static const int STREAMRECORDER_VIDEO_SOURCE_FORMAT_NUM = 3;
 }
 
-/// @deprecated Deprecated since 7.0.
-/// @brief Enumeration for the file container format.
-/// @since_tizen 3.0
+/// **Deprecated:** Deprecated since 7.0.
+///
+/// Enumeration for the file container format.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class streamrecorder_file_format_e {
   /// < 3GP file format
   static const int STREAMRECORDER_FILE_FORMAT_3GP = 0;
@@ -1786,9 +2521,13 @@ abstract class streamrecorder_file_format_e {
   static const int STREAMRECORDER_FILE_FORMAT_WAV = 4;
 }
 
-/// @deprecated Deprecated since 7.0.
-/// @brief Enumeration for the audio codec.
-/// @since_tizen 3.0
+/// **Deprecated:** Deprecated since 7.0.
+///
+/// Enumeration for the audio codec.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class streamrecorder_audio_codec_e {
   /// < AMR codec
   static const int STREAMRECORDER_AUDIO_CODEC_AMR = 0;
@@ -1800,9 +2539,13 @@ abstract class streamrecorder_audio_codec_e {
   static const int STREAMRECORDER_AUDIO_CODEC_PCM = 2;
 }
 
-/// @deprecated Deprecated since 7.0.
-/// @brief Enumeration for the video codec.
-/// @since_tizen 3.0
+/// **Deprecated:** Deprecated since 7.0.
+///
+/// Enumeration for the video codec.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class streamrecorder_video_codec_e {
   /// < H263 codec
   static const int STREAMRECORDER_VIDEO_CODEC_H263 = 0;
@@ -1811,9 +2554,13 @@ abstract class streamrecorder_video_codec_e {
   static const int STREAMRECORDER_VIDEO_CODEC_MPEG4 = 1;
 }
 
-/// @deprecated Deprecated since 7.0.
-/// @brief Enumeration for the recording limit reached.
-/// @since_tizen 3.0
+/// **Deprecated:** Deprecated since 7.0.
+///
+/// Enumeration for the recording limit reached.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class streamrecorder_recording_limit_type_e {
   /// < Time limit (second) of recording file
   static const int STREAMRECORDER_RECORDING_LIMIT_TYPE_TIME = 0;
@@ -1822,9 +2569,13 @@ abstract class streamrecorder_recording_limit_type_e {
   static const int STREAMRECORDER_RECORDING_LIMIT_TYPE_SIZE = 1;
 }
 
-/// @deprecated Deprecated since 7.0.
-/// @brief Enumeration for Streamrecorder error type.
-/// @since_tizen 3.0
+/// **Deprecated:** Deprecated since 7.0.
+///
+/// Enumeration for Streamrecorder error type.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class streamrecorder_error_e {
   /// < Successful
   static const int STREAMRECORDER_ERROR_NONE = 0;
@@ -1851,9 +2602,13 @@ abstract class streamrecorder_error_e {
   static const int STREAMRECORDER_ERROR_NOT_SUPPORTED = -1073741822;
 }
 
-/// @deprecated Deprecated since 7.0.
-/// @brief Enumeration for the Streamrecorder notification.
-/// @since_tizen 3.0
+/// **Deprecated:** Deprecated since 7.0.
+///
+/// Enumeration for the Streamrecorder notification.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class streamrecorder_notify_e {
   /// < None
   static const int STREAMRECORDER_NOTIFY_NONE = 0;
@@ -1862,9 +2617,13 @@ abstract class streamrecorder_notify_e {
   static const int STREAMRECORDER_NOTIFY_STATE_CHANGED = 1;
 }
 
-/// @deprecated Deprecated since 7.0.
-/// @brief Enumeration for Streamrecorder states.
-/// @since_tizen 3.0
+/// **Deprecated:** Deprecated since 7.0.
+///
+/// Enumeration for Streamrecorder states.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class streamrecorder_state_e {
   /// < StreamRecorder is not created
   static const int STREAMRECORDER_STATE_NONE = 0;
@@ -1882,9 +2641,13 @@ abstract class streamrecorder_state_e {
   static const int STREAMRECORDER_STATE_PAUSED = 4;
 }
 
-/// @deprecated Deprecated since 7.0.
-/// @brief Enumeration for StreamRecorder recoding modes.
-/// @since_tizen 6.0
+/// **Deprecated:** Deprecated since 7.0.
+///
+/// Enumeration for StreamRecorder recoding modes.
+///
+/// **Since Tizen:**
+/// - 6.0
+/// @nodoc
 abstract class streamrecorder_mode_e {
   /// < Recording with media buffer
   static const int STREAMRECORDER_MODE_STREAM_BUFFER = 0;
@@ -1893,164 +2656,291 @@ abstract class streamrecorder_mode_e {
   static const int STREAMRECORDER_MODE_DEVICE_LOOPBACK = 1;
 }
 
-/// @deprecated Deprecated since 7.0.
-/// @brief The Streamrecorder handle.
-/// @since_tizen 3.0
+/// **Deprecated:** Deprecated since 7.0.
+///
+/// The Streamrecorder handle.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 typedef streamrecorder_h = ffi.Pointer<streamrecorder_s>;
 
-/// @deprecated Deprecated since 7.0.
-/// @brief Called iteratively to notify about the supported file formats.
-/// @since_tizen 3.0
-/// @param[in] format   The format of recording files
-/// @param[in] user_data	The user data passed from the foreach function
-/// @return @c true to continue with the next iteration of the loop, \n otherwise @c false to break out of the loop
-/// @pre streamrecorder_foreach_supported_file_format() will invoke this callback.
-/// @see	streamrecorder_foreach_supported_file_format()
+/// **Deprecated:** Deprecated since 7.0.
+///
+/// Called iteratively to notify about the supported file formats.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `format` (in): The format of recording files
+/// - `user_data` (in): The user data passed from the foreach function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - streamrecorder_foreach_supported_file_format() will invoke this callback.
+///
+/// **See also:**
+/// - `streamrecorder_foreach_supported_file_format()`
+/// @nodoc
 typedef streamrecorder_supported_file_format_cb = ffi.Pointer<
     ffi.NativeFunction<streamrecorder_supported_file_format_cbFunction>>;
+/// @nodoc
 typedef streamrecorder_supported_file_format_cbFunction = ffi.Bool Function(
     ffi.Int32 format, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartstreamrecorder_supported_file_format_cbFunction = bool Function(
     int format, ffi.Pointer<ffi.Void> user_data);
 
-/// @deprecated Deprecated since 7.0.
-/// @brief Called iteratively to notify about the supported audio encoders.
-/// @since_tizen 3.0
-/// @param[in] codec	The codec of audio encoder
-/// @param[in] user_data	The user data passed from the foreach function
-/// @return @c true to continue with the next iteration of the loop, \n otherwise @c false to break out of the loop
-/// @pre streamrecorder_foreach_supported_audio_encoder() will invoke this callback.
-/// @see	streamrecorder_foreach_supported_audio_encoder()
+/// **Deprecated:** Deprecated since 7.0.
+///
+/// Called iteratively to notify about the supported audio encoders.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `codec` (in): The codec of audio encoder
+/// - `user_data` (in): The user data passed from the foreach function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - streamrecorder_foreach_supported_audio_encoder() will invoke this callback.
+///
+/// **See also:**
+/// - `streamrecorder_foreach_supported_audio_encoder()`
+/// @nodoc
 typedef streamrecorder_supported_audio_encoder_cb = ffi.Pointer<
     ffi.NativeFunction<streamrecorder_supported_audio_encoder_cbFunction>>;
+/// @nodoc
 typedef streamrecorder_supported_audio_encoder_cbFunction = ffi.Bool Function(
     ffi.Int32 codec, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartstreamrecorder_supported_audio_encoder_cbFunction = bool Function(
     int codec, ffi.Pointer<ffi.Void> user_data);
 
-/// @deprecated Deprecated since 7.0.
-/// @brief Called iteratively to notify about the supported video encoders.
-/// @since_tizen 3.0
-/// @param[in] codec	The codec of video encoder
-/// @param[in] user_data	The user data passed from the foreach function
-/// @return @c true to continue with the next iteration of the loop, \n otherwise @c false to break out of the loop
-/// @pre streamrecorder_foreach_supported_video_encoder() will invoke this callback.
-/// @see	streamrecorder_foreach_supported_video_encoder()
+/// **Deprecated:** Deprecated since 7.0.
+///
+/// Called iteratively to notify about the supported video encoders.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `codec` (in): The codec of video encoder
+/// - `user_data` (in): The user data passed from the foreach function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - streamrecorder_foreach_supported_video_encoder() will invoke this callback.
+///
+/// **See also:**
+/// - `streamrecorder_foreach_supported_video_encoder()`
+/// @nodoc
 typedef streamrecorder_supported_video_encoder_cb = ffi.Pointer<
     ffi.NativeFunction<streamrecorder_supported_video_encoder_cbFunction>>;
+/// @nodoc
 typedef streamrecorder_supported_video_encoder_cbFunction = ffi.Bool Function(
     ffi.Int32 codec, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartstreamrecorder_supported_video_encoder_cbFunction = bool Function(
     int codec, ffi.Pointer<ffi.Void> user_data);
 
-/// @deprecated Deprecated since 7.0.
-/// @brief Called once for each supported video resolution.
-/// @since_tizen 3.0
-/// @param[in] width         The video image width
-/// @param[in] height        The video image height
-/// @param[in] user_data     The user data passed from the foreach function
-/// @return    @c true to continue with the next iteration of the loop, \n otherwise @c false to break out of the loop
-/// @pre	streamrecorder_foreach_supported_video_resolution() will invoke this callback.
-/// @see	streamrecorder_foreach_supported_video_resolution()
+/// **Deprecated:** Deprecated since 7.0.
+///
+/// Called once for each supported video resolution.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `width` (in): The video image width
+/// - `height` (in): The video image height
+/// - `user_data` (in): The user data passed from the foreach function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - streamrecorder_foreach_supported_video_resolution() will invoke this callback.
+///
+/// **See also:**
+/// - `streamrecorder_foreach_supported_video_resolution()`
+/// @nodoc
 typedef streamrecorder_supported_video_resolution_cb = ffi.Pointer<
     ffi.NativeFunction<streamrecorder_supported_video_resolution_cbFunction>>;
+/// @nodoc
 typedef streamrecorder_supported_video_resolution_cbFunction = ffi.Bool
     Function(ffi.Int width, ffi.Int height, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartstreamrecorder_supported_video_resolution_cbFunction = bool
     Function(int width, int height, ffi.Pointer<ffi.Void> user_data);
 
-/// @deprecated Deprecated since 7.0.
-/// @brief Called when the streamrecorder gets some notifications.
-/// @since_tizen 3.0
-/// @param[in] previous	The previous state of the streamrecorder
-/// @param[in] current	The current state of the streamrecorder
-/// @param[in] notification  The notification type of the streamrecorder
-/// @param[in] user_data	The user data passed from the callback registration function
-/// @pre This function is required to register a callback using streamrecorder_set_notify_cb().
-/// @see	streamrecorder_set_notify_cb()
-/// @see	streamrecorder_prepare()
-/// @see	streamrecorder_unprepare()
-/// @see	streamrecorder_start()
-/// @see	streamrecorder_pause()
-/// @see	streamrecorder_commit()
-/// @see	streamrecorder_cancel()
+/// **Deprecated:** Deprecated since 7.0.
+///
+/// Called when the streamrecorder gets some notifications.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `previous` (in): The previous state of the streamrecorder
+/// - `current` (in): The current state of the streamrecorder
+/// - `notification` (in): The notification type of the streamrecorder
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - This function is required to register a callback using streamrecorder_set_notify_cb().
+///
+/// **See also:**
+/// - `streamrecorder_set_notify_cb()`
+/// - `streamrecorder_prepare()`
+/// - `streamrecorder_unprepare()`
+/// - `streamrecorder_start()`
+/// - `streamrecorder_pause()`
+/// - `streamrecorder_commit()`
+/// - `streamrecorder_cancel()`
+/// @nodoc
 typedef streamrecorder_notify_cb
     = ffi.Pointer<ffi.NativeFunction<streamrecorder_notify_cbFunction>>;
+/// @nodoc
 typedef streamrecorder_notify_cbFunction = ffi.Void Function(ffi.Int32 previous,
     ffi.Int32 current, ffi.Int32 notification, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartstreamrecorder_notify_cbFunction = void Function(int previous,
     int current, int notification, ffi.Pointer<ffi.Void> user_data);
 
-/// @deprecated Deprecated since 7.0.
-/// @brief Called to indicate the recording status.
-/// @since_tizen 3.0
-/// @remarks This callback function is repeatedly invoked during the #STREAMRECORDER_STATE_RECORDING state.
-/// @param[in] elapsed_time  The time of the recording (milliseconds)
-/// @param[in] file_size     The size of the recording file (KB)
-/// @param[in] user_data     The user data passed from the callback registration function
-/// @pre streamrecorder_start() will invoke this callback if you register it using streamrecorder_set_recording_status_cb().
-/// @see	streamrecorder_set_recording_status_cb()
-/// @see	streamrecorder_unset_recording_status_cb()
-/// @see	streamrecorder_start()
+/// **Deprecated:** Deprecated since 7.0.
+///
+/// Called to indicate the recording status.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Remarks:**
+/// - This callback function is repeatedly invoked during the `STREAMRECORDER_STATE_RECORDING` state.
+///
+/// **Parameters:**
+/// - `elapsed_time` (in): The time of the recording (milliseconds)
+/// - `file_size` (in): The size of the recording file (KB)
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - streamrecorder_start() will invoke this callback if you register it using streamrecorder_set_recording_status_cb().
+///
+/// **See also:**
+/// - `streamrecorder_set_recording_status_cb()`
+/// - `streamrecorder_unset_recording_status_cb()`
+/// - `streamrecorder_start()`
+/// @nodoc
 typedef streamrecorder_recording_status_cb = ffi
     .Pointer<ffi.NativeFunction<streamrecorder_recording_status_cbFunction>>;
+/// @nodoc
 typedef streamrecorder_recording_status_cbFunction = ffi.Void Function(
     ffi.UnsignedLongLong elapsed_time,
     ffi.UnsignedLongLong file_size,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartstreamrecorder_recording_status_cbFunction = void Function(
     int elapsed_time, int file_size, ffi.Pointer<ffi.Void> user_data);
 
-/// @deprecated Deprecated since 7.0.
-/// @brief Called when limitation error occurs while recording.
-/// @details The callback function is possible to receive three types of limits: time and size.
-/// @since_tizen 3.0
-/// @remarks After being called, recording data except present recorded data will be discarded and not written in the recording file. Also the state of streamrecorder is not changed.
-/// @param[in] type The imitation type
-/// @param[in] user_data The user data passed from the callback registration function
-/// @pre You have to register a callback using streamrecorder_set_recording_limit_reached_cb().
-/// @see streamrecorder_set_recording_status_cb()
-/// @see streamrecorder_set_recording_limit_reached_cb()
-/// @see streamrecorder_unset_recording_limit_reached_cb()
+/// **Deprecated:** Deprecated since 7.0.
+///
+/// Called when limitation error occurs while recording.
+///
+/// The callback function is possible to receive three types of limits: time and size.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Remarks:**
+/// - After being called, recording data except present recorded data will be discarded and not written in the recording file. Also the state of streamrecorder is not changed.
+///
+/// **Parameters:**
+/// - `type` (in): The imitation type
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - You have to register a callback using streamrecorder_set_recording_limit_reached_cb().
+///
+/// **See also:**
+/// - `streamrecorder_set_recording_status_cb()`
+/// - `streamrecorder_set_recording_limit_reached_cb()`
+/// - `streamrecorder_unset_recording_limit_reached_cb()`
+/// @nodoc
 typedef streamrecorder_recording_limit_reached_cb = ffi.Pointer<
     ffi.NativeFunction<streamrecorder_recording_limit_reached_cbFunction>>;
+/// @nodoc
 typedef streamrecorder_recording_limit_reached_cbFunction = ffi.Void Function(
     ffi.Int32 type, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartstreamrecorder_recording_limit_reached_cbFunction = void Function(
     int type, ffi.Pointer<ffi.Void> user_data);
 
-/// @deprecated Deprecated since 7.0.
-/// @brief Called when the error occurred.
-/// @since_tizen 3.0
-/// @remarks This callback informs about the critical error situation. \n
-/// When being invoked, user should release the resource and terminate the application. \n
-/// This error code will be reported. \n
-/// #STREAMRECORDER_ERROR_INVALID_OPERATION \n
-/// #STREAMRECORDER_ERROR_OUT_OF_MEMORY
-/// @param[in] error          The error code
-/// @param[in] current_state  The current state of the streamrecorder
-/// @param[in] user_data      The user data passed from the callback registration function
-/// @pre	This callback function is invoked if you register this callback using streamrecorder_set_error_cb().
-/// @see	streamrecorder_set_error_cb()
-/// @see	streamrecorder_unset_error_cb()
+/// **Deprecated:** Deprecated since 7.0.
+///
+/// Called when the error occurred.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Remarks:**
+/// - This callback informs about the critical error situation.
+/// - When being invoked, user should release the resource and terminate the application.
+/// - This error code will be reported.
+/// - `STREAMRECORDER_ERROR_INVALID_OPERATION`
+/// - `STREAMRECORDER_ERROR_OUT_OF_MEMORY`
+///
+/// **Parameters:**
+/// - `error` (in): The error code
+/// - `current_state` (in): The current state of the streamrecorder
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - This callback function is invoked if you register this callback using streamrecorder_set_error_cb().
+///
+/// **See also:**
+/// - `streamrecorder_set_error_cb()`
+/// - `streamrecorder_unset_error_cb()`
+/// @nodoc
 typedef streamrecorder_error_cb
     = ffi.Pointer<ffi.NativeFunction<streamrecorder_error_cbFunction>>;
+/// @nodoc
 typedef streamrecorder_error_cbFunction = ffi.Void Function(
     ffi.Int32 error, ffi.Int32 current_state, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartstreamrecorder_error_cbFunction = void Function(
     int error, int current_state, ffi.Pointer<ffi.Void> user_data);
 
-/// @deprecated Deprecated since 7.0.
-/// @brief Called iteratively to notify about the buffer has been consumed.
-/// @since_tizen 3.0
-/// @remarks The user needs to release consumed buffer if buffer is allocated by user including media packet
-/// @param[in] buffer  The consumed buffer that user pushed
-/// @param[in] user_data	The user data passed
-/// @see streamrecorder_set_buffer_consume_completed_cb() will invoke this callback.
-/// @see streamrecorder_unset_buffer_consume_completed_cb()
+/// **Deprecated:** Deprecated since 7.0.
+///
+/// Called iteratively to notify about the buffer has been consumed.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Remarks:**
+/// - The user needs to release consumed buffer if buffer is allocated by user including media packet
+///
+/// **Parameters:**
+/// - `buffer` (in): The consumed buffer that user pushed
+/// - `user_data` (in): The user data passed
+///
+/// **See also:**
+/// - streamrecorder_set_buffer_consume_completed_cb() will invoke this callback.
+/// - `streamrecorder_unset_buffer_consume_completed_cb()`
+/// @nodoc
 typedef streamrecorder_consume_completed_cb = ffi
     .Pointer<ffi.NativeFunction<streamrecorder_consume_completed_cbFunction>>;
+/// @nodoc
 typedef streamrecorder_consume_completed_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Void> buffer, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartstreamrecorder_consume_completed_cbFunction = void Function(
     ffi.Pointer<ffi.Void> buffer, ffi.Pointer<ffi.Void> user_data);

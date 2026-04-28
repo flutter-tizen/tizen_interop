@@ -1,3 +1,6 @@
+/// {@category 6.0/tizen}
+library tizen_interop_6_0.capi_appfw_preference;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen capi-appfw-preference APIs.
+/// {@category 6.0/tizen}
 class Tizen60CapiAppfwPreference {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,17 +28,26 @@ class Tizen60CapiAppfwPreference {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Sets an integer value in the preference.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] key The name of the key to modify
-  /// @param[in] value  The new @c int value for the given key
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PREFERENCE_ERROR_NONE Successful
-  /// @retval #PREFERENCE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PREFERENCE_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #PREFERENCE_ERROR_IO_ERROR Internal I/O Error
-  /// @see preference_get_int()
+  /// Sets an integer value in the preference.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `key` (in): The name of the key to modify
+  /// - `value` (in): The new `int` value for the given key
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PREFERENCE_ERROR_NONE`: Successful
+  /// - `PREFERENCE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PREFERENCE_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `PREFERENCE_ERROR_IO_ERROR`: Internal I/O Error
+  ///
+  /// **See also:**
+  /// - `preference_get_int()`
   int preference_set_int(
     ffi.Pointer<ffi.Char> key,
     int value,
@@ -51,18 +64,27 @@ class Tizen60CapiAppfwPreference {
   late final _preference_set_int = _preference_set_intPtr
       .asFunction<int Function(ffi.Pointer<ffi.Char>, int)>();
 
-  /// @brief Gets an integer value from the preference.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] key The name of the key to retrieve
-  /// @param[out] value The @c int value for the given key
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PREFERENCE_ERROR_NONE Successful
-  /// @retval #PREFERENCE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PREFERENCE_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #PREFERENCE_ERROR_NO_KEY Required key not available
-  /// @retval #PREFERENCE_ERROR_IO_ERROR Internal I/O Error
-  /// @see preference_set_int()
+  /// Gets an integer value from the preference.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `key` (in): The name of the key to retrieve
+  /// - `value` (out): The `int` value for the given key
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PREFERENCE_ERROR_NONE`: Successful
+  /// - `PREFERENCE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PREFERENCE_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `PREFERENCE_ERROR_NO_KEY`: Required key not available
+  /// - `PREFERENCE_ERROR_IO_ERROR`: Internal I/O Error
+  ///
+  /// **See also:**
+  /// - `preference_set_int()`
   int preference_get_int(
     ffi.Pointer<ffi.Char> key,
     ffi.Pointer<ffi.Int> value,
@@ -80,17 +102,26 @@ class Tizen60CapiAppfwPreference {
   late final _preference_get_int = _preference_get_intPtr
       .asFunction<int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Sets a double value in the preference.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] key The name of the key to modify
-  /// @param[in] value  The new @c double value associated with the given key
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PREFERENCE_ERROR_NONE Successful
-  /// @retval #PREFERENCE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PREFERENCE_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #PREFERENCE_ERROR_IO_ERROR Internal I/O Error
-  /// @see preference_get_double()
+  /// Sets a double value in the preference.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `key` (in): The name of the key to modify
+  /// - `value` (in): The new `double` value associated with the given key
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PREFERENCE_ERROR_NONE`: Successful
+  /// - `PREFERENCE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PREFERENCE_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `PREFERENCE_ERROR_IO_ERROR`: Internal I/O Error
+  ///
+  /// **See also:**
+  /// - `preference_get_double()`
   int preference_set_double(
     ffi.Pointer<ffi.Char> key,
     double value,
@@ -108,18 +139,27 @@ class Tizen60CapiAppfwPreference {
   late final _preference_set_double = _preference_set_doublePtr
       .asFunction<int Function(ffi.Pointer<ffi.Char>, double)>();
 
-  /// @brief Gets a double value from the preference.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] key The name of the key to retrieve
-  /// @param[out] value The @c double value associated with the given key
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PREFERENCE_ERROR_NONE Successful
-  /// @retval #PREFERENCE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PREFERENCE_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #PREFERENCE_ERROR_NO_KEY Required key not available
-  /// @retval #PREFERENCE_ERROR_IO_ERROR Internal I/O Error
-  /// @see preference_set_double()
+  /// Gets a double value from the preference.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `key` (in): The name of the key to retrieve
+  /// - `value` (out): The `double` value associated with the given key
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PREFERENCE_ERROR_NONE`: Successful
+  /// - `PREFERENCE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PREFERENCE_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `PREFERENCE_ERROR_NO_KEY`: Required key not available
+  /// - `PREFERENCE_ERROR_IO_ERROR`: Internal I/O Error
+  ///
+  /// **See also:**
+  /// - `preference_set_double()`
   int preference_get_double(
     ffi.Pointer<ffi.Char> key,
     ffi.Pointer<ffi.Double> value,
@@ -137,18 +177,28 @@ class Tizen60CapiAppfwPreference {
   late final _preference_get_double = _preference_get_doublePtr.asFunction<
       int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Double>)>();
 
-  /// @brief Sets a string value in the preference.
-  /// @details It makes a deep copy of the added string value.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] key The name of the key to modify
-  /// @param[in] value The new @c string value associated with the given key
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PREFERENCE_ERROR_NONE Successful
-  /// @retval #PREFERENCE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PREFERENCE_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #PREFERENCE_ERROR_IO_ERROR Internal I/O Error
-  /// @see preference_get_string()
+  /// Sets a string value in the preference.
+  ///
+  /// It makes a deep copy of the added string value.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `key` (in): The name of the key to modify
+  /// - `value` (in): The new `string` value associated with the given key
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PREFERENCE_ERROR_NONE`: Successful
+  /// - `PREFERENCE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PREFERENCE_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `PREFERENCE_ERROR_IO_ERROR`: Internal I/O Error
+  ///
+  /// **See also:**
+  /// - `preference_get_string()`
   int preference_set_string(
     ffi.Pointer<ffi.Char> key,
     ffi.Pointer<ffi.Char> value,
@@ -166,19 +216,30 @@ class Tizen60CapiAppfwPreference {
   late final _preference_set_string = _preference_set_stringPtr
       .asFunction<int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets a string value from the preference.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks @a value must be released using free().
-  /// @param[in] key The name of the key to retrieve
-  /// @param[out] value The @c string value associated with the given key
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PREFERENCE_ERROR_NONE Successful
-  /// @retval #PREFERENCE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PREFERENCE_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #PREFERENCE_ERROR_NO_KEY Required key not available
-  /// @retval #PREFERENCE_ERROR_IO_ERROR Internal I/O Error
-  /// @see preference_set_string()
+  /// Gets a string value from the preference.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - `value` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `key` (in): The name of the key to retrieve
+  /// - `value` (out): The `string` value associated with the given key
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PREFERENCE_ERROR_NONE`: Successful
+  /// - `PREFERENCE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PREFERENCE_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `PREFERENCE_ERROR_NO_KEY`: Required key not available
+  /// - `PREFERENCE_ERROR_IO_ERROR`: Internal I/O Error
+  ///
+  /// **See also:**
+  /// - `preference_set_string()`
   int preference_get_string(
     ffi.Pointer<ffi.Char> key,
     ffi.Pointer<ffi.Pointer<ffi.Char>> value,
@@ -197,17 +258,26 @@ class Tizen60CapiAppfwPreference {
       int Function(
           ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets a boolean value in the preference.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] key The name of the key to modify
-  /// @param[in] value The new @c boolean value associated with the given key
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PREFERENCE_ERROR_NONE Successful
-  /// @retval #PREFERENCE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PREFERENCE_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #PREFERENCE_ERROR_IO_ERROR Internal I/O Error
-  /// @see preference_get_boolean()
+  /// Sets a boolean value in the preference.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `key` (in): The name of the key to modify
+  /// - `value` (in): The new `boolean` value associated with the given key
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PREFERENCE_ERROR_NONE`: Successful
+  /// - `PREFERENCE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PREFERENCE_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `PREFERENCE_ERROR_IO_ERROR`: Internal I/O Error
+  ///
+  /// **See also:**
+  /// - `preference_get_boolean()`
   int preference_set_boolean(
     ffi.Pointer<ffi.Char> key,
     bool value,
@@ -225,18 +295,27 @@ class Tizen60CapiAppfwPreference {
   late final _preference_set_boolean = _preference_set_booleanPtr
       .asFunction<int Function(ffi.Pointer<ffi.Char>, bool)>();
 
-  /// @brief Gets a boolean value from the preference.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] key The name of the key to retrieve
-  /// @param[out] value The @c boolean value associated with the given key
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PREFERENCE_ERROR_NONE Successful
-  /// @retval #PREFERENCE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PREFERENCE_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #PREFERENCE_ERROR_NO_KEY Required key not available
-  /// @retval #PREFERENCE_ERROR_IO_ERROR Internal I/O Error
-  /// @see preference_set_boolean()
+  /// Gets a boolean value from the preference.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `key` (in): The name of the key to retrieve
+  /// - `value` (out): The `boolean` value associated with the given key
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PREFERENCE_ERROR_NONE`: Successful
+  /// - `PREFERENCE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PREFERENCE_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `PREFERENCE_ERROR_NO_KEY`: Required key not available
+  /// - `PREFERENCE_ERROR_IO_ERROR`: Internal I/O Error
+  ///
+  /// **See also:**
+  /// - `preference_set_boolean()`
   int preference_get_boolean(
     ffi.Pointer<ffi.Char> key,
     ffi.Pointer<ffi.Bool> value,
@@ -254,16 +333,23 @@ class Tizen60CapiAppfwPreference {
   late final _preference_get_boolean = _preference_get_booleanPtr
       .asFunction<int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Removes any value with the given @a key from the preference.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] key The name of the key to remove
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PREFERENCE_ERROR_NONE Successful
-  /// @retval #PREFERENCE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PREFERENCE_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #PREFERENCE_ERROR_NO_KEY Required key not available
-  /// @retval #PREFERENCE_ERROR_IO_ERROR Internal I/O Error
+  /// Removes any value with the given `key` from the preference.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `key` (in): The name of the key to remove
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PREFERENCE_ERROR_NONE`: Successful
+  /// - `PREFERENCE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PREFERENCE_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `PREFERENCE_ERROR_NO_KEY`: Required key not available
+  /// - `PREFERENCE_ERROR_IO_ERROR`: Internal I/O Error
   int preference_remove(
     ffi.Pointer<ffi.Char> key,
   ) {
@@ -278,17 +364,23 @@ class Tizen60CapiAppfwPreference {
   late final _preference_remove =
       _preference_removePtr.asFunction<int Function(ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Checks whether the given @a key exists in the preference.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] key The name of the key to check
-  /// @param[out] existing If @c true the @a key exists in the preference,
-  /// otherwise @c false
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PREFERENCE_ERROR_NONE Successful
-  /// @retval #PREFERENCE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PREFERENCE_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #PREFERENCE_ERROR_IO_ERROR Internal I/O Error
+  /// Checks whether the given `key` exists in the preference.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `key` (in): The name of the key to check
+  /// - `existing` (out): If `true` the `key` exists in the preference, otherwise `false`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PREFERENCE_ERROR_NONE`: Successful
+  /// - `PREFERENCE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PREFERENCE_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `PREFERENCE_ERROR_IO_ERROR`: Internal I/O Error
   int preference_is_existing(
     ffi.Pointer<ffi.Char> key,
     ffi.Pointer<ffi.Bool> existing,
@@ -306,14 +398,21 @@ class Tizen60CapiAppfwPreference {
   late final _preference_is_existing = _preference_is_existingPtr
       .asFunction<int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Removes all key-value pairs from the preference.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PREFERENCE_ERROR_NONE Successful
-  /// @retval #PREFERENCE_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #PREFERENCE_ERROR_IO_ERROR Internal I/O Error
-  /// @see preference_remove()
+  /// Removes all key-value pairs from the preference.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PREFERENCE_ERROR_NONE`: Successful
+  /// - `PREFERENCE_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `PREFERENCE_ERROR_IO_ERROR`: Internal I/O Error
+  ///
+  /// **See also:**
+  /// - `preference_remove()`
   int preference_remove_all() {
     return _preference_remove_all();
   }
@@ -323,21 +422,32 @@ class Tizen60CapiAppfwPreference {
   late final _preference_remove_all =
       _preference_remove_allPtr.asFunction<int Function()>();
 
-  /// @brief Registers a callback function to be invoked when value of the given key in the preference changes.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] key The name of the key to monitor
-  /// @param[in] callback The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PREFERENCE_ERROR_NONE Successful
-  /// @retval #PREFERENCE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PREFERENCE_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #PREFERENCE_ERROR_NO_KEY Required key not available
-  /// @retval #PREFERENCE_ERROR_IO_ERROR Internal I/O Error
-  /// @post preference_changed_cb() will be invoked.
-  /// @see preference_unset_changed_cb()
-  /// @see preference_changed_cb()
+  /// Registers a callback function to be invoked when value of the given key in the preference changes.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `key` (in): The name of the key to monitor
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PREFERENCE_ERROR_NONE`: Successful
+  /// - `PREFERENCE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PREFERENCE_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `PREFERENCE_ERROR_NO_KEY`: Required key not available
+  /// - `PREFERENCE_ERROR_IO_ERROR`: Internal I/O Error
+  ///
+  /// **Postconditions:**
+  /// - preference_changed_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `preference_unset_changed_cb()`
+  /// - `preference_changed_cb()`
   int preference_set_changed_cb(
     ffi.Pointer<ffi.Char> key,
     preference_changed_cb callback,
@@ -359,17 +469,26 @@ class Tizen60CapiAppfwPreference {
           int Function(ffi.Pointer<ffi.Char>, preference_changed_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unregisters the callback function.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] key The name of the key to monitor
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PREFERENCE_ERROR_NONE Successful
-  /// @retval #PREFERENCE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PREFERENCE_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #PREFERENCE_ERROR_NO_KEY Required key not available
-  /// @retval #PREFERENCE_ERROR_IO_ERROR Internal I/O Error
-  /// @see preference_set_changed_cb()
+  /// Unregisters the callback function.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `key` (in): The name of the key to monitor
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PREFERENCE_ERROR_NONE`: Successful
+  /// - `PREFERENCE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PREFERENCE_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `PREFERENCE_ERROR_NO_KEY`: Required key not available
+  /// - `PREFERENCE_ERROR_IO_ERROR`: Internal I/O Error
+  ///
+  /// **See also:**
+  /// - `preference_set_changed_cb()`
   int preference_unset_changed_cb(
     ffi.Pointer<ffi.Char> key,
   ) {
@@ -384,17 +503,28 @@ class Tizen60CapiAppfwPreference {
   late final _preference_unset_changed_cb = _preference_unset_changed_cbPtr
       .asFunction<int Function(ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Retrieves all key-value pairs in the preference by invoking the callback function.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] callback The callback function to get key value once for each key-value pair in the preference
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PREFERENCE_ERROR_NONE Successful
-  /// @retval #PREFERENCE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PREFERENCE_ERROR_IO_ERROR Internal I/O Error
-  /// @post This function invokes preference_item_cb() repeatedly to get each key-value pair in the preference.
-  /// @see preference_item_cb()
+  /// Retrieves all key-value pairs in the preference by invoking the callback function.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): The callback function to get key value once for each key-value pair in the preference
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PREFERENCE_ERROR_NONE`: Successful
+  /// - `PREFERENCE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PREFERENCE_ERROR_IO_ERROR`: Internal I/O Error
+  ///
+  /// **Postconditions:**
+  /// - This function invokes preference_item_cb() repeatedly to get each key-value pair in the preference.
+  ///
+  /// **See also:**
+  /// - `preference_item_cb()`
   int preference_foreach_item(
     preference_item_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -412,18 +542,27 @@ class Tizen60CapiAppfwPreference {
   late final _preference_foreach_item = _preference_foreach_itemPtr
       .asFunction<int Function(preference_item_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Gets the type of a preference.
-  /// @since_tizen 5.5
-  /// @param[in] key The name of the key
-  /// @param[out] type The preference type
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PREFERENCE_ERROR_NONE Successful
-  /// @retval #PREFERENCE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PREFERENCE_ERROR_NO_KEY Required key not available
-  /// @retval #PREFERENCE_ERROR_IO_ERROR Internal I/O Error
-  /// @retval #PREFERENCE_ERROR_OUT_OF_MEMORY Out of memory
-  /// @see #preference_type_e
+  /// Gets the type of a preference.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `key` (in): The name of the key
+  /// - `type` (out): The preference type
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PREFERENCE_ERROR_NONE`: Successful
+  /// - `PREFERENCE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PREFERENCE_ERROR_NO_KEY`: Required key not available
+  /// - `PREFERENCE_ERROR_IO_ERROR`: Internal I/O Error
+  /// - `PREFERENCE_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `preference_type_e`
   int preference_get_type(
     ffi.Pointer<ffi.Char> key,
     ffi.Pointer<ffi.Int32> type,
@@ -442,8 +581,11 @@ class Tizen60CapiAppfwPreference {
       int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Int32>)>();
 }
 
-/// @brief Enumeration for Preference Error.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration for Preference Error.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class preference_error_e {
   /// < Successful
   static const int PREFERENCE_ERROR_NONE = 0;
@@ -461,8 +603,11 @@ abstract class preference_error_e {
   static const int PREFERENCE_ERROR_IO_ERROR = -5;
 }
 
-/// @brief Enumeration for Preference type.
-/// @since_tizen 5.5
+/// Enumeration for Preference type.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 abstract class preference_type_e {
   /// < None
   static const int PREFERENCE_TYPE_NONE = 0;
@@ -480,37 +625,63 @@ abstract class preference_type_e {
   static const int PREFERENCE_TYPE_BOOLEAN = 4;
 }
 
-/// @brief Called when the given key's value in the preference changes.
-/// @details When the @a key is added or removed, this callback function is skipped(only update can be handled).
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-/// @param[in] key The name of the key in the preference
-/// @param[in] user_data The user data passed from the callback registration function
-/// @pre This function is invoked when the value of the key is overwritten after you register this callback using preference_set_changed_cb().
-/// @see preference_set_changed_cb()
-/// @see preference_unset_changed_cb()
-/// @see preference_set_boolean()
-/// @see preference_set_int()
-/// @see preference_set_string()
-/// @see preference_set_double()
+/// Called when the given key's value in the preference changes.
+///
+/// When the `key` is added or removed, this callback function is skipped(only update can be handled).
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+///
+/// **Parameters:**
+/// - `key` (in): The name of the key in the preference
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - This function is invoked when the value of the key is overwritten after you register this callback using preference_set_changed_cb().
+///
+/// **See also:**
+/// - `preference_set_changed_cb()`
+/// - `preference_unset_changed_cb()`
+/// - `preference_set_boolean()`
+/// - `preference_set_int()`
+/// - `preference_set_string()`
+/// - `preference_set_double()`
+/// @nodoc
 typedef preference_changed_cb
     = ffi.Pointer<ffi.NativeFunction<preference_changed_cbFunction>>;
+/// @nodoc
 typedef preference_changed_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> key, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartpreference_changed_cbFunction = void Function(
     ffi.Pointer<ffi.Char> key, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called to get key string, once for each key-value pair in the preference.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-/// @remarks You should not free the @a key returned by this function.
-/// @param[in] key The key of the value added to the preference
-/// @param[in] user_data The user data passed from the foreach function
-/// @return @c true to continue with the next iteration of the loop,
-/// otherwise @c false to break out of the loop
-/// @pre preference_foreach_item() will invoke this callback function.
-/// @see preference_foreach_item()
+/// Called to get key string, once for each key-value pair in the preference.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+///
+/// **Remarks:**
+/// - You should not free the `key` returned by this function.
+///
+/// **Parameters:**
+/// - `key` (in): The key of the value added to the preference
+/// - `user_data` (in): The user data passed from the foreach function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - preference_foreach_item() will invoke this callback function.
+///
+/// **See also:**
+/// - `preference_foreach_item()`
+/// @nodoc
 typedef preference_item_cb
     = ffi.Pointer<ffi.NativeFunction<preference_item_cbFunction>>;
+/// @nodoc
 typedef preference_item_cbFunction = ffi.Bool Function(
     ffi.Pointer<ffi.Char> key, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartpreference_item_cbFunction = bool Function(
     ffi.Pointer<ffi.Char> key, ffi.Pointer<ffi.Void> user_data);

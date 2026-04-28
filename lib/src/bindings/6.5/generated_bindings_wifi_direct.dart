@@ -1,3 +1,6 @@
+/// {@category 6.5/tizen}
+library tizen_interop_6_5.wifi_direct;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen wifi-direct APIs.
+/// {@category 6.5/tizen}
 class Tizen65WifiDirect {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,23 +28,32 @@ class Tizen65WifiDirect {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Initializes Wi-Fi Direct service.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @see wifi_direct_deinitialize()
+  /// Initializes Wi-Fi Direct service.
   ///
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `wifi_direct_deinitialize()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -64,7 +77,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_initialize() {
     return _wifi_direct_initialize();
   }
@@ -74,21 +87,28 @@ class Tizen65WifiDirect {
   late final _wifi_direct_initialize =
       _wifi_direct_initializePtr.asFunction<int Function()>();
 
-  /// @brief Deinitializes Wi-Fi Direct service.
-  /// @since_tizen 2.3
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @pre Wi-Fi Direct service must be initialized by wifi_direct_initialize().
-  /// @see wifi_direct_initialize()
+  /// Deinitializes Wi-Fi Direct service.
   ///
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be initialized by wifi_direct_initialize().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_initialize()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -112,7 +132,7 @@ class Tizen65WifiDirect {
   /// function(); // deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_deinitialize() {
     return _wifi_direct_deinitialize();
   }
@@ -123,24 +143,33 @@ class Tizen65WifiDirect {
   late final _wifi_direct_deinitialize =
       _wifi_direct_deinitializePtr.asFunction<int Function()>();
 
-  /// @brief Sets the callback called when the state of device is changed.
-  /// @since_tizen 2.3
-  /// @param[in] cb         The callback function to invoke
-  /// @param[in] user_data  The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE               Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED      Not supported
-  /// @pre Wi-Fi Direct service must be initialized by wifi_direct_initialize().
-  /// @see wifi_direct_initialize()
-  /// @see wifi_direct_unset_device_state_changed_cb()
-  /// @see wifi_direct_device_state_changed_cb()
+  /// Sets the callback called when the state of device is changed.
   ///
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Parameters:**
+  /// - `cb` (in): The callback function to invoke
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be initialized by wifi_direct_initialize().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_initialize()`
+  /// - `wifi_direct_unset_device_state_changed_cb()`
+  /// - `wifi_direct_device_state_changed_cb()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -191,7 +220,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_set_device_state_changed_cb(
     wifi_direct_device_state_changed_cb cb,
     ffi.Pointer<ffi.Void> user_data,
@@ -212,20 +241,27 @@ class Tizen65WifiDirect {
           int Function(
               wifi_direct_device_state_changed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback called when the state of device is changed.
-  /// @since_tizen 2.3
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE             Successful
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED    Not supported
-  /// @pre Wi-Fi Direct service must be initialized by wifi_direct_initialize().
-  /// @see wifi_direct_initialize()
-  /// @see wifi_direct_set_device_state_changed_cb()
+  /// Unsets the callback called when the state of device is changed.
   ///
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be initialized by wifi_direct_initialize().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_initialize()`
+  /// - `wifi_direct_set_device_state_changed_cb()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -250,7 +286,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_unset_device_state_changed_cb() {
     return _wifi_direct_unset_device_state_changed_cb();
   }
@@ -262,24 +298,33 @@ class Tizen65WifiDirect {
       _wifi_direct_unset_device_state_changed_cbPtr
           .asFunction<int Function()>();
 
-  /// @brief Sets the callback called when the state of discovery is changed.
-  /// @since_tizen 2.3
-  /// @param[in] cb         The callback function to invoke
-  /// @param[in] user_data  The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE               Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED      Not supported
-  /// @pre Wi-Fi Direct service must be initialized by wifi_direct_initialize().
-  /// @see wifi_direct_initialize()
-  /// @see wifi_direct_unset_discovery_state_changed_cb()
-  /// @see wifi_direct_discovery_state_chagned_cb()
+  /// Sets the callback called when the state of discovery is changed.
   ///
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Parameters:**
+  /// - `cb` (in): The callback function to invoke
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be initialized by wifi_direct_initialize().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_initialize()`
+  /// - `wifi_direct_unset_discovery_state_changed_cb()`
+  /// - `wifi_direct_discovery_state_chagned_cb()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -337,7 +382,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_set_discovery_state_changed_cb(
     wifi_direct_discovery_state_chagned_cb cb,
     ffi.Pointer<ffi.Void> user_data,
@@ -358,20 +403,27 @@ class Tizen65WifiDirect {
           int Function(
               wifi_direct_discovery_state_chagned_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback called when the state of discovery is changed.
-  /// @since_tizen 2.3
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE             Successful
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED    Not supported
-  /// @pre Wi-Fi Direct service must be initialized by wifi_direct_initialize().
-  /// @see wifi_direct_initialize()
-  /// @see wifi_direct_set_discovery_state_changed_cb()
+  /// Unsets the callback called when the state of discovery is changed.
   ///
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be initialized by wifi_direct_initialize().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_initialize()`
+  /// - `wifi_direct_set_discovery_state_changed_cb()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -398,7 +450,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_unset_discovery_state_changed_cb() {
     return _wifi_direct_unset_discovery_state_changed_cb();
   }
@@ -410,24 +462,33 @@ class Tizen65WifiDirect {
       _wifi_direct_unset_discovery_state_changed_cbPtr
           .asFunction<int Function()>();
 
-  /// @brief Sets the callback called when the peer is found.
-  /// @since_tizen 2.3
-  /// @param[in] cb         The callback function to invoke
-  /// @param[in] user_data  The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE               Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED      Not supported
-  /// @pre Wi-Fi Direct service must be initialized by wifi_direct_initialize().
-  /// @see wifi_direct_initialize()
-  /// @see wifi_direct_unset_peer_found_cb()
-  /// @see wifi_direct_peer_found_cb()
+  /// Sets the callback called when the peer is found.
   ///
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Parameters:**
+  /// - `cb` (in): The callback function to invoke
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be initialized by wifi_direct_initialize().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_initialize()`
+  /// - `wifi_direct_unset_peer_found_cb()`
+  /// - `wifi_direct_peer_found_cb()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -473,7 +534,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_set_peer_found_cb(
     wifi_direct_peer_found_cb cb,
     ffi.Pointer<ffi.Void> user_data,
@@ -492,20 +553,27 @@ class Tizen65WifiDirect {
       _wifi_direct_set_peer_found_cbPtr.asFunction<
           int Function(wifi_direct_peer_found_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback called when the peer is found.
-  /// @since_tizen 2.3
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE             Successful
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED    Not supported
-  /// @pre Wi-Fi Direct service must be initialized by wifi_direct_initialize().
-  /// @see wifi_direct_initialize()
-  /// @see wifi_direct_set_peer_found_cb()
+  /// Unsets the callback called when the peer is found.
   ///
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be initialized by wifi_direct_initialize().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_initialize()`
+  /// - `wifi_direct_set_peer_found_cb()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -530,7 +598,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_unset_peer_found_cb() {
     return _wifi_direct_unset_peer_found_cb();
   }
@@ -541,24 +609,33 @@ class Tizen65WifiDirect {
   late final _wifi_direct_unset_peer_found_cb =
       _wifi_direct_unset_peer_found_cbPtr.asFunction<int Function()>();
 
-  /// @brief Sets the callback called when the state of connection is changed.
-  /// @since_tizen 2.3
-  /// @param[in] cb         The callback function to invoke
-  /// @param[in] user_data  The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE               Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED      Not supported
-  /// @pre Wi-Fi Direct service must be initialized by wifi_direct_initialize().
-  /// @see wifi_direct_initialize()
-  /// @see wifi_direct_unset_connection_state_changed_cb()
-  /// @see wifi_direct_connection_state_changed_cb()
+  /// Sets the callback called when the state of connection is changed.
   ///
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Parameters:**
+  /// - `cb` (in): The callback function to invoke
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be initialized by wifi_direct_initialize().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_initialize()`
+  /// - `wifi_direct_unset_connection_state_changed_cb()`
+  /// - `wifi_direct_connection_state_changed_cb()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -680,7 +757,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_set_connection_state_changed_cb(
     wifi_direct_connection_state_changed_cb cb,
     ffi.Pointer<ffi.Void> user_data,
@@ -701,20 +778,27 @@ class Tizen65WifiDirect {
           int Function(wifi_direct_connection_state_changed_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback called when the state of connection is changed.
-  /// @since_tizen 2.3
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE             Successful
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED    Not supported
-  /// @pre Wi-Fi Direct service must be initialized by wifi_direct_initialize().
-  /// @see wifi_direct_initialize()
-  /// @see wifi_direct_set_connection_state_changed_cb()
+  /// Unsets the callback called when the state of connection is changed.
   ///
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be initialized by wifi_direct_initialize().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_initialize()`
+  /// - `wifi_direct_set_connection_state_changed_cb()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -739,7 +823,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_unset_connection_state_changed_cb() {
     return _wifi_direct_unset_connection_state_changed_cb();
   }
@@ -751,20 +835,31 @@ class Tizen65WifiDirect {
       _wifi_direct_unset_connection_state_changed_cbPtr
           .asFunction<int Function()>();
 
-  /// @brief Sets the callback called when the state of connection is changed.
-  /// @since_tizen 5.0
-  /// @param[in] cb  The callback function to invoke
-  /// @param[in] user_data  The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE  Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED    Not supported
-  /// @pre Wi-Fi Direct service must be initialized by wifi_direct_initialize().
-  /// @see wifi_direct_initialize()
-  /// @see wifi_direct_unset_peer_info_connection_state_changed_cb()
-  /// @see wifi_direct_peer_info_connection_state_changed_cb()
+  /// Sets the callback called when the state of connection is changed.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `cb` (in): The callback function to invoke
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be initialized by wifi_direct_initialize().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_initialize()`
+  /// - `wifi_direct_unset_peer_info_connection_state_changed_cb()`
+  /// - `wifi_direct_peer_info_connection_state_changed_cb()`
   int wifi_direct_set_peer_info_connection_state_changed_cb(
     wifi_direct_peer_info_connection_state_changed_cb cb,
     ffi.Pointer<ffi.Void> user_data,
@@ -787,16 +882,25 @@ class Tizen65WifiDirect {
           int Function(wifi_direct_peer_info_connection_state_changed_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback called when the state of connection is changed.
-  /// @since_tizen 5.0
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE  Successful
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED    Not supported
-  /// @pre Wi-Fi Direct service must be initialized by wifi_direct_initialize().
-  /// @see wifi_direct_initialize()
-  /// @see wifi_direct_set_peer_info_connection_state_changed_cb()
+  /// Unsets the callback called when the state of connection is changed.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be initialized by wifi_direct_initialize().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_initialize()`
+  /// - `wifi_direct_set_peer_info_connection_state_changed_cb()`
   int wifi_direct_unset_peer_info_connection_state_changed_cb() {
     return _wifi_direct_unset_peer_info_connection_state_changed_cb();
   }
@@ -808,25 +912,33 @@ class Tizen65WifiDirect {
       _wifi_direct_unset_peer_info_connection_state_changed_cbPtr
           .asFunction<int Function()>();
 
-  /// @brief Sets the callback called when the IP address of the client is assigned
-  /// if your device is the group owner.
-  /// @since_tizen 2.3
-  /// @param[in] cb         The callback function to invoke
-  /// @param[in] user_data  The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE               Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED      Not supported
-  /// @pre Wi-Fi Direct service must be initialized by wifi_direct_initialize().
-  /// @see wifi_direct_initialize()
-  /// @see wifi_direct_unset_client_ip_address_assigned_cb()
-  /// @see wifi_direct_client_ip_address_assigned_cb()
+  /// Sets the callback called when the IP address of the client is assigned if your device is the group owner.
   ///
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Parameters:**
+  /// - `cb` (in): The callback function to invoke
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be initialized by wifi_direct_initialize().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_initialize()`
+  /// - `wifi_direct_unset_client_ip_address_assigned_cb()`
+  /// - `wifi_direct_client_ip_address_assigned_cb()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -867,7 +979,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_set_client_ip_address_assigned_cb(
     wifi_direct_client_ip_address_assigned_cb cb,
     ffi.Pointer<ffi.Void> user_data,
@@ -888,21 +1000,27 @@ class Tizen65WifiDirect {
           int Function(wifi_direct_client_ip_address_assigned_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback called when the IP address of the client is assigned
-  /// if your device is the group owner.
-  /// @since_tizen 2.3
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE             Successful
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED    Not supported
-  /// @pre Wi-Fi Direct service must be initialized by wifi_direct_initialize().
-  /// @see wifi_direct_initialize()
-  /// @see wifi_direct_set_connection_state_changed_cb()
+  /// Unsets the callback called when the IP address of the client is assigned if your device is the group owner.
   ///
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be initialized by wifi_direct_initialize().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_initialize()`
+  /// - `wifi_direct_set_connection_state_changed_cb()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -927,7 +1045,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_unset_client_ip_address_assigned_cb() {
     return _wifi_direct_unset_client_ip_address_assigned_cb();
   }
@@ -939,24 +1057,33 @@ class Tizen65WifiDirect {
       _wifi_direct_unset_client_ip_address_assigned_cbPtr
           .asFunction<int Function()>();
 
-  /// @brief Sets the callback called when the state of the service discovery is changed.
-  /// @since_tizen 2.3
-  /// @param[in] cb         The callback function to invoke
-  /// @param[in] user_data  The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE               Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED      Not supported
-  /// @pre Wi-Fi Direct service must be initialized by wifi_direct_initialize().
-  /// @see wifi_direct_initialize()
-  /// @see wifi_direct_unset_service_state_changed_cb()
-  /// @see wifi_direct_service_state_changed_cb()
+  /// Sets the callback called when the state of the service discovery is changed.
   ///
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Parameters:**
+  /// - `cb` (in): The callback function to invoke
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be initialized by wifi_direct_initialize().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_initialize()`
+  /// - `wifi_direct_unset_service_state_changed_cb()`
+  /// - `wifi_direct_service_state_changed_cb()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -1026,7 +1153,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_set_service_state_changed_cb(
     wifi_direct_service_state_changed_cb cb,
     ffi.Pointer<ffi.Void> user_data,
@@ -1047,20 +1174,27 @@ class Tizen65WifiDirect {
           int Function(
               wifi_direct_service_state_changed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback called when the state of the service discovery is changed.
-  /// @since_tizen 2.3
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE             Successful
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED    Not supported
-  /// @pre Wi-Fi Direct service must be initialized by wifi_direct_initialize().
-  /// @see wifi_direct_initialize()
-  /// @see wifi_direct_set_service_state_changed_cb()
+  /// Unsets the callback called when the state of the service discovery is changed.
   ///
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be initialized by wifi_direct_initialize().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_initialize()`
+  /// - `wifi_direct_set_service_state_changed_cb()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -1085,7 +1219,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_unset_service_state_changed_cb() {
     return _wifi_direct_unset_service_state_changed_cb();
   }
@@ -1097,21 +1231,28 @@ class Tizen65WifiDirect {
       _wifi_direct_unset_service_state_changed_cbPtr
           .asFunction<int Function()>();
 
-  /// @brief Sets the callback called when the state of Wi-Fi Direct is changed.
-  /// @since_tizen 3.0
-  /// @param[in] cb         The callback function to invoke
-  /// @param[in] user_data  The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE               Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED   Operation Failed
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED      Not supported
-  /// @see wifi_direct_unset_state_changed_cb()
+  /// Sets the callback called when the state of Wi-Fi Direct is changed.
   ///
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Parameters:**
+  /// - `cb` (in): The callback function to invoke
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation Failed
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `wifi_direct_unset_state_changed_cb()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -1167,7 +1308,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_set_state_changed_cb(
     wifi_direct_state_changed_cb cb,
     ffi.Pointer<ffi.Void> user_data,
@@ -1186,19 +1327,24 @@ class Tizen65WifiDirect {
       _wifi_direct_set_state_changed_cbPtr.asFunction<
           int Function(wifi_direct_state_changed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback called when the state of Wi-Fi Direct is changed.
-  /// @since_tizen 3.0
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE              Successful
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED  Operation Failed
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED     Not supported
-  /// @see wifi_direct_initialize()
-  /// @see wifi_direct_set_state_changed_cb()
+  /// Unsets the callback called when the state of Wi-Fi Direct is changed.
   ///
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation Failed
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `wifi_direct_initialize()`
+  /// - `wifi_direct_set_state_changed_cb()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -1223,7 +1369,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_unset_state_changed_cb() {
     return _wifi_direct_unset_state_changed_cb();
   }
@@ -1234,31 +1380,44 @@ class Tizen65WifiDirect {
   late final _wifi_direct_unset_state_changed_cb =
       _wifi_direct_unset_state_changed_cbPtr.asFunction<int Function()>();
 
-  /// @brief Activates the Wi-Fi Direct service, asynchronously.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @retval #WIFI_DIRECT_ERROR_WIFI_USED             Wi-Fi is being used
-  /// @retval #WIFI_DIRECT_ERROR_MOBILE_AP_USED        Mobile AP is being used
-  /// @pre Wi-Fi Direct service must be initialized by wifi_direct_initialize().
-  /// @post wifi_direct_device_state_changed_cb() will be invoked.
-  /// @see wifi_direct_initialize()
-  /// @see wifi_direct_deactivate()
-  /// @see wifi_direct_device_state_changed_cb()
+  /// Activates the Wi-Fi Direct service, asynchronously.
   ///
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  /// - `WIFI_DIRECT_ERROR_WIFI_USED`: Wi-Fi is being used
+  /// - `WIFI_DIRECT_ERROR_MOBILE_AP_USED`: Mobile AP is being used
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be initialized by wifi_direct_initialize().
+  ///
+  /// **Postconditions:**
+  /// - wifi_direct_device_state_changed_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `wifi_direct_initialize()`
+  /// - `wifi_direct_deactivate()`
+  /// - `wifi_direct_device_state_changed_cb()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -1286,7 +1445,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_activate() {
     return _wifi_direct_activate();
   }
@@ -1296,28 +1455,41 @@ class Tizen65WifiDirect {
   late final _wifi_direct_activate =
       _wifi_direct_activatePtr.asFunction<int Function()>();
 
-  /// @brief Deactivates the Wi-Fi Direct service, asynchronously.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @pre Wi-Fi Direct service must be activated by wifi_direct_activate().
-  /// @post wifi_direct_device_state_changed_cb() will be invoked.
-  /// @see wifi_direct_activate()
-  /// @see wifi_direct_device_state_changed_cb()
+  /// Deactivates the Wi-Fi Direct service, asynchronously.
   ///
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be activated by wifi_direct_activate().
+  ///
+  /// **Postconditions:**
+  /// - wifi_direct_device_state_changed_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `wifi_direct_activate()`
+  /// - `wifi_direct_device_state_changed_cb()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -1345,7 +1517,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_deactivate() {
     return _wifi_direct_deactivate();
   }
@@ -1355,47 +1527,59 @@ class Tizen65WifiDirect {
   late final _wifi_direct_deactivate =
       _wifi_direct_deactivatePtr.asFunction<int Function()>();
 
-  /// @brief Starts discovery to find all P2P capable devices, asynchronously.
-  /// @details If application developers call wifi_direct_start_discovery() with @a listen_only as @c true,
-  /// then skip the initial 802.11 Scan and then enter Listen state instead of
-  /// cycling between Scan and Listen.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @remarks The function can be called if the Wi-Fi Direct state is one of:\n
-  /// #WIFI_DIRECT_STATE_ACTIVATED\n
-  /// #WIFI_DIRECT_STATE_DISCOVERING\n
-  /// #WIFI_DIRECT_STATE_GROUP_OWNER\n
-  /// The function can be called even if there is another discovery in progress.
-  /// All started processes will run simultaneously. Each process will receive
-  /// #WIFI_DIRECT_DISCOVERY_FINISHED
-  /// event in wifi_direct_discovery_state_chagned_cb().
-  /// @param[in] listen_only  The status of listen only: (@c true = listen only,
-  /// @c false = cycling between Scan and Listen)
-  /// @param[in] timeout      Specifies the duration of discovery period, in seconds.
-  /// If @c 0, then there is no limit on how long the discovery takes.
-  /// The actual limit (and time after which discovery stops) depends on
-  /// the vendor's hardware and firmware
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @pre Wi-Fi Direct service must be activated by wifi_direct_activate().
-  /// @post wifi_direct_discovery_state_chagned_cb() will be invoked.
-  /// @see wifi_direct_activate()
-  /// @see wifi_direct_cancel_discovery()
-  /// @see wifi_direct_discovery_state_chagned_cb()
+  /// Starts discovery to find all P2P capable devices, asynchronously.
   ///
+  /// If application developers call wifi_direct_start_discovery() with `listen_only` as `true`, then skip the initial 802.11 Scan and then enter Listen state instead of cycling between Scan and Listen.
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Remarks:**
+  /// - The function can be called if the Wi-Fi Direct state is one of:
+  /// - `WIFI_DIRECT_STATE_ACTIVATED`
+  /// - `WIFI_DIRECT_STATE_DISCOVERING`
+  /// - `WIFI_DIRECT_STATE_GROUP_OWNER`
+  /// - The function can be called even if there is another discovery in progress.
+  /// - All started processes will run simultaneously. Each process will receive
+  /// - `WIFI_DIRECT_DISCOVERY_FINISHED`
+  /// - event in wifi_direct_discovery_state_chagned_cb().
+  ///
+  /// **Parameters:**
+  /// - `listen_only` (in): The status of listen only: (`true` = listen only, `false` = cycling between Scan and Listen)
+  /// - `timeout` (in): Specifies the duration of discovery period, in seconds. If `0`, then there is no limit on how long the discovery takes. The actual limit (and time after which discovery stops) depends on the vendor's hardware and firmware
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be activated by wifi_direct_activate().
+  ///
+  /// **Postconditions:**
+  /// - wifi_direct_discovery_state_chagned_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `wifi_direct_activate()`
+  /// - `wifi_direct_cancel_discovery()`
+  /// - `wifi_direct_discovery_state_chagned_cb()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -1458,7 +1642,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_start_discovery(
     bool listen_only,
     int timeout,
@@ -1475,55 +1659,60 @@ class Tizen65WifiDirect {
   late final _wifi_direct_start_discovery =
       _wifi_direct_start_discoveryPtr.asFunction<int Function(bool, int)>();
 
-  /// @brief Starts discovery to find all P2P capable devices with specified channel, asynchronously.
-  /// @details If you call this function with @a channel as @c #WIFI_DIRECT_DISCOVERY_FULL_SCAN
-  /// it works same as wifi_direct_start_discovery() API.
-  /// If application developers call this function with @a channel as @c #WIFI_DIRECT_DISCOVERY_SOCIAL_CHANNEL,
-  /// then will search only the devices on the social channels(channel 1 or 6 or 11).
-  /// If application developers call this function with @a channel as @c #WIFI_DIRECT_DISCOVERY_CHANNEL1,
-  /// then will search only the devices on the channel 1.
-  /// If application developers call this function with @a channel as @c #WIFI_DIRECT_DISCOVERY_CHANNEL6,
-  /// then will search only the devices on the channel 6.
-  /// If application developers call this function with @a channel as @c #WIFI_DIRECT_DISCOVERY_CHANNEL11,
-  /// then will search only the devices on the channel 11.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @remarks The function can be called if the Wi-Fi Direct state is one of:\n
-  /// #WIFI_DIRECT_STATE_ACTIVATED\n
-  /// #WIFI_DIRECT_STATE_DISCOVERING\n
-  /// #WIFI_DIRECT_STATE_GROUP_OWNER\n
-  /// The function can be called even if there is another discovery in progress.
-  /// All started processes will run simultaneously. Each process will receive
-  /// #WIFI_DIRECT_DISCOVERY_FINISHED
-  /// event in wifi_direct_discovery_state_chagned_cb().
-  /// @param[in] listen_only  The status of listen only: (@c true = listen only,
-  /// @c false = cycling between Scan and Listen)
-  /// @param[in] timeout      Specifies the duration of discovery period, in seconds.
-  /// If @c 0, then there is no limit on how long the discovery takes.
-  /// The actual limit (and time after which discovery stops) depends on
-  /// the vendor's hardware and firmware
-  /// @param[in] channel      Specifies the discovery channel. (Full scan, social channels, channel 1, 6, 11)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @pre Wi-Fi Direct service must be activated by wifi_direct_activate().
-  /// @post wifi_direct_discovery_state_chagned_cb() will be invoked.
-  /// @see wifi_direct_activate()
-  /// @see wifi_direct_cancel_discovery()
-  /// @see wifi_direct_discovery_state_chagned_cb()
+  /// Starts discovery to find all P2P capable devices with specified channel, asynchronously.
   ///
+  /// If you call this function with `channel` as ``WIFI_DIRECT_DISCOVERY_FULL_SCAN`` it works same as wifi_direct_start_discovery() API. If application developers call this function with `channel` as ``WIFI_DIRECT_DISCOVERY_SOCIAL_CHANNEL``, then will search only the devices on the social channels(channel 1 or 6 or 11). If application developers call this function with `channel` as ``WIFI_DIRECT_DISCOVERY_CHANNEL1``, then will search only the devices on the channel 1. If application developers call this function with `channel` as ``WIFI_DIRECT_DISCOVERY_CHANNEL6``, then will search only the devices on the channel 6. If application developers call this function with `channel` as ``WIFI_DIRECT_DISCOVERY_CHANNEL11``, then will search only the devices on the channel 11.
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Remarks:**
+  /// - The function can be called if the Wi-Fi Direct state is one of:
+  /// - `WIFI_DIRECT_STATE_ACTIVATED`
+  /// - `WIFI_DIRECT_STATE_DISCOVERING`
+  /// - `WIFI_DIRECT_STATE_GROUP_OWNER`
+  /// - The function can be called even if there is another discovery in progress.
+  /// - All started processes will run simultaneously. Each process will receive
+  /// - `WIFI_DIRECT_DISCOVERY_FINISHED`
+  /// - event in wifi_direct_discovery_state_chagned_cb().
+  ///
+  /// **Parameters:**
+  /// - `listen_only` (in): The status of listen only: (`true` = listen only, `false` = cycling between Scan and Listen)
+  /// - `timeout` (in): Specifies the duration of discovery period, in seconds. If `0`, then there is no limit on how long the discovery takes. The actual limit (and time after which discovery stops) depends on the vendor's hardware and firmware
+  /// - `channel` (in): Specifies the discovery channel. (Full scan, social channels, channel 1, 6, 11)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be activated by wifi_direct_activate().
+  ///
+  /// **Postconditions:**
+  /// - wifi_direct_discovery_state_chagned_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `wifi_direct_activate()`
+  /// - `wifi_direct_cancel_discovery()`
+  /// - `wifi_direct_discovery_state_chagned_cb()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -1587,7 +1776,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_start_discovery_specific_channel(
     bool listen_only,
     int timeout,
@@ -1607,47 +1796,59 @@ class Tizen65WifiDirect {
       _wifi_direct_start_discovery_specific_channelPtr
           .asFunction<int Function(bool, int, int)>();
 
-  /// @brief Starts discovery to find all P2P capable devices with specified frequency, asynchronously.
-  /// @since_tizen 4.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @remarks The function can be called if the Wi-Fi Direct state is one of:\n
-  /// #WIFI_DIRECT_STATE_ACTIVATED\n
-  /// #WIFI_DIRECT_STATE_DISCOVERING\n
-  /// #WIFI_DIRECT_STATE_GROUP_OWNER\n
-  /// The function can be called even if there is another discovery in progress.
-  /// All started processes will run simultaneously. Each process will receive
-  /// #WIFI_DIRECT_DISCOVERY_FINISHED
-  /// event in wifi_direct_discovery_state_chagned_cb().
-  /// @param[in] listen_only  Indicates mode in which the discovery service will work.
-  /// If @c true, the service will only listen, otherwise
-  /// it will cycle between scanning and listening
-  /// @param[in] timeout      Specifies the duration of discovery period, in seconds.
-  /// If @c 0, then there is no limit on how long the discovery takes.
-  /// The actual limit (and time after which discovery stops) depends on
-  /// the vendor's hardware and firmware
-  /// @param[in] frequency    Specifies the discovery frequency in MHz
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @pre Wi-Fi Direct service must be activated by wifi_direct_activate().
-  /// @post wifi_direct_discovery_state_chagned_cb() will be invoked.
-  /// @see wifi_direct_activate()
-  /// @see wifi_direct_cancel_discovery()
-  /// @see wifi_direct_discovery_state_chagned_cb()
-  /// @see wifi_direct_discovered_peer_cb()
+  /// Starts discovery to find all P2P capable devices with specified frequency, asynchronously.
   ///
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Remarks:**
+  /// - The function can be called if the Wi-Fi Direct state is one of:
+  /// - `WIFI_DIRECT_STATE_ACTIVATED`
+  /// - `WIFI_DIRECT_STATE_DISCOVERING`
+  /// - `WIFI_DIRECT_STATE_GROUP_OWNER`
+  /// - The function can be called even if there is another discovery in progress.
+  /// - All started processes will run simultaneously. Each process will receive
+  /// - `WIFI_DIRECT_DISCOVERY_FINISHED`
+  /// - event in wifi_direct_discovery_state_chagned_cb().
+  ///
+  /// **Parameters:**
+  /// - `listen_only` (in): Indicates mode in which the discovery service will work. If `true`, the service will only listen, otherwise it will cycle between scanning and listening
+  /// - `timeout` (in): Specifies the duration of discovery period, in seconds. If `0`, then there is no limit on how long the discovery takes. The actual limit (and time after which discovery stops) depends on the vendor's hardware and firmware
+  /// - `frequency` (in): Specifies the discovery frequency in MHz
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be activated by wifi_direct_activate().
+  ///
+  /// **Postconditions:**
+  /// - wifi_direct_discovery_state_chagned_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `wifi_direct_activate()`
+  /// - `wifi_direct_cancel_discovery()`
+  /// - `wifi_direct_discovery_state_chagned_cb()`
+  /// - `wifi_direct_discovered_peer_cb()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -1711,7 +1912,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_start_discovery_specific_freq(
     bool listen_only,
     int timeout,
@@ -1731,32 +1932,45 @@ class Tizen65WifiDirect {
       _wifi_direct_start_discovery_specific_freqPtr
           .asFunction<int Function(bool, int, int)>();
 
-  /// @brief Cancels discovery process, asynchronously.
-  /// @details This function stops all discovery processes started with
-  /// wifi_direct_start_discovery() functions.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @pre Discovery must be started by wifi_direct_start_discovery().
-  /// @post wifi_direct_discovery_state_chagned_cb() will be invoked.
-  /// @see wifi_direct_start_discovery()
-  /// @see wifi_direct_start_discovery_specific_channel()
-  /// @see wifi_direct_start_discovery_specific_freq()
-  /// @see wifi_direct_discovery_state_chagned_cb()
+  /// Cancels discovery process, asynchronously.
   ///
+  /// This function stops all discovery processes started with wifi_direct_start_discovery() functions.
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  ///
+  /// **Preconditions:**
+  /// - Discovery must be started by wifi_direct_start_discovery().
+  ///
+  /// **Postconditions:**
+  /// - wifi_direct_discovery_state_chagned_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `wifi_direct_start_discovery()`
+  /// - `wifi_direct_start_discovery_specific_channel()`
+  /// - `wifi_direct_start_discovery_specific_freq()`
+  /// - `wifi_direct_discovery_state_chagned_cb()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -1819,7 +2033,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_cancel_discovery() {
     return _wifi_direct_cancel_discovery();
   }
@@ -1830,30 +2044,43 @@ class Tizen65WifiDirect {
   late final _wifi_direct_cancel_discovery =
       _wifi_direct_cancel_discoveryPtr.asFunction<int Function()>();
 
-  /// @brief Gets the information of discovered peers.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @param[in] callback   The callback function to invoke
-  /// @param[in] user_data  The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @pre Wi-Fi Direct service must be activated by wifi_direct_activate().
-  /// @see wifi_direct_activate()
-  /// @see wifi_direct_discovered_peer_cb()
+  /// Gets the information of discovered peers.
   ///
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): The callback function to invoke
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be activated by wifi_direct_activate().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_activate()`
+  /// - `wifi_direct_discovered_peer_cb()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -1928,7 +2155,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_foreach_discovered_peers(
     wifi_direct_discovered_peer_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -1948,39 +2175,52 @@ class Tizen65WifiDirect {
           int Function(
               wifi_direct_discovered_peer_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Connects to a specified peer, asynchronously.
-  /// @details This function connects to specified peer by automatically determining
-  /// whether to perform group formation, join an existing group, invite, re-invoke a group.
-  /// The decision is based on the current state of the peers (i.e. GO, STA, not connected)
-  /// and the availability of persistent data.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @param[in] mac_address  The MAC address of remote device
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_TOO_MANY_CLIENT       Too many client
-  /// @retval #WIFI_DIRECT_ERROR_CONNECTION_TIME_OUT   Connection timed out
-  /// @retval #WIFI_DIRECT_ERROR_CONNECTION_FAILED     Connection failed
-  /// @retval #WIFI_DIRECT_ERROR_AUTH_FAILED           Authentication failed
-  /// @pre Wi-Fi Direct service must be activated by wifi_direct_activate().
-  /// @post wifi_direct_connection_state_changed_cb() will be invoked.
-  /// @see wifi_direct_activate()
-  /// @see wifi_direct_disconnect()
-  /// @see wifi_direct_disconnect_all()
-  /// @see wifi_direct_connection_state_changed_cb()
+  /// Connects to a specified peer, asynchronously.
   ///
+  /// This function connects to specified peer by automatically determining whether to perform group formation, join an existing group, invite, re-invoke a group. The decision is based on the current state of the peers (i.e. GO, STA, not connected) and the availability of persistent data.
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Parameters:**
+  /// - `mac_address` (in): The MAC address of remote device
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_TOO_MANY_CLIENT`: Too many client
+  /// - `WIFI_DIRECT_ERROR_CONNECTION_TIME_OUT`: Connection timed out
+  /// - `WIFI_DIRECT_ERROR_CONNECTION_FAILED`: Connection failed
+  /// - `WIFI_DIRECT_ERROR_AUTH_FAILED`: Authentication failed
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be activated by wifi_direct_activate().
+  ///
+  /// **Postconditions:**
+  /// - wifi_direct_connection_state_changed_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `wifi_direct_activate()`
+  /// - `wifi_direct_disconnect()`
+  /// - `wifi_direct_disconnect_all()`
+  /// - `wifi_direct_connection_state_changed_cb()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -2087,7 +2327,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_connect(
     ffi.Pointer<ffi.Char> mac_address,
   ) {
@@ -2102,26 +2342,35 @@ class Tizen65WifiDirect {
   late final _wifi_direct_connect =
       _wifi_direct_connectPtr.asFunction<int Function(ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Cancels the connection now in progress.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @param[in] mac_address  The MAC address of rejected device
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
+  /// Cancels the connection now in progress.
   ///
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Parameters:**
+  /// - `mac_address` (in): The MAC address of rejected device
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -2251,7 +2500,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_cancel_connection(
     ffi.Pointer<ffi.Char> mac_address,
   ) {
@@ -2266,29 +2515,42 @@ class Tizen65WifiDirect {
   late final _wifi_direct_cancel_connection = _wifi_direct_cancel_connectionPtr
       .asFunction<int Function(ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Disconnects all connected links to peers, asynchronously.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @pre Wi-Fi Direct service must be activated by wifi_direct_activate().
-  /// @post wifi_direct_connection_state_changed_cb() will be invoked.
-  /// @see wifi_direct_activate()
-  /// @see wifi_direct_disconnect()
-  /// @see wifi_direct_connection_state_changed_cb()
+  /// Disconnects all connected links to peers, asynchronously.
   ///
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be activated by wifi_direct_activate().
+  ///
+  /// **Postconditions:**
+  /// - wifi_direct_connection_state_changed_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `wifi_direct_activate()`
+  /// - `wifi_direct_disconnect()`
+  /// - `wifi_direct_connection_state_changed_cb()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -2346,7 +2608,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_disconnect_all() {
     return _wifi_direct_disconnect_all();
   }
@@ -2357,31 +2619,46 @@ class Tizen65WifiDirect {
   late final _wifi_direct_disconnect_all =
       _wifi_direct_disconnect_allPtr.asFunction<int Function()>();
 
-  /// @brief Disconnects the specified peer, asynchronously.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @param[in] mac_address  The MAC address of remote device
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @pre Wi-Fi Direct service must be activated by wifi_direct_activate().
-  /// @post wifi_direct_connection_state_changed_cb() will be invoked.
-  /// @see wifi_direct_activate()
-  /// @see wifi_direct_connect()
-  /// @see wifi_direct_connection_state_changed_cb()
+  /// Disconnects the specified peer, asynchronously.
   ///
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Parameters:**
+  /// - `mac_address` (in): The MAC address of remote device
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be activated by wifi_direct_activate().
+  ///
+  /// **Postconditions:**
+  /// - wifi_direct_connection_state_changed_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `wifi_direct_activate()`
+  /// - `wifi_direct_connect()`
+  /// - `wifi_direct_connection_state_changed_cb()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -2455,7 +2732,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_disconnect(
     ffi.Pointer<ffi.Char> mac_address,
   ) {
@@ -2470,30 +2747,43 @@ class Tizen65WifiDirect {
   late final _wifi_direct_disconnect = _wifi_direct_disconnectPtr
       .asFunction<int Function(ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the information of connected peers.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @param[in] callback   The callback function to invoke
-  /// @param[in] user_data  The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @pre Wi-Fi Direct service must be activated by wifi_direct_activate().
-  /// @see wifi_direct_activate()
-  /// @see wifi_direct_discovered_peer_cb()
+  /// Gets the information of connected peers.
   ///
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): The callback function to invoke
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be activated by wifi_direct_activate().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_activate()`
+  /// - `wifi_direct_discovered_peer_cb()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -2535,7 +2825,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_foreach_connected_peers(
     wifi_direct_connected_peer_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -2554,32 +2844,45 @@ class Tizen65WifiDirect {
       _wifi_direct_foreach_connected_peersPtr.asFunction<
           int Function(wifi_direct_connected_peer_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Creates a Wi-Fi Direct Group, asynchronously.
-  /// @details This function sets up device as the Group Owner and waits for clients to connect.
-  /// In addition, a soft AP will be created, the WPS registrar and the DHCP server will be started.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @retval #WIFI_DIRECT_ERROR_AUTH_FAILED           Authentication failed
-  /// @pre Wi-Fi Direct service must be activated by wifi_direct_activate().
-  /// @post wifi_direct_connection_state_changed_cb() will be invoked with #WIFI_DIRECT_GROUP_CREATED.
-  /// @see wifi_direct_activate()
-  /// @see wifi_direct_destroy_group()
-  /// @see wifi_direct_connection_state_changed_cb()
+  /// Creates a Wi-Fi Direct Group, asynchronously.
   ///
+  /// This function sets up device as the Group Owner and waits for clients to connect. In addition, a soft AP will be created, the WPS registrar and the DHCP server will be started.
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  /// - `WIFI_DIRECT_ERROR_AUTH_FAILED`: Authentication failed
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be activated by wifi_direct_activate().
+  ///
+  /// **Postconditions:**
+  /// - wifi_direct_connection_state_changed_cb() will be invoked with `WIFI_DIRECT_GROUP_CREATED`.
+  ///
+  /// **See also:**
+  /// - `wifi_direct_activate()`
+  /// - `wifi_direct_destroy_group()`
+  /// - `wifi_direct_connection_state_changed_cb()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -2623,7 +2926,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_create_group() {
     return _wifi_direct_create_group();
   }
@@ -2634,28 +2937,46 @@ class Tizen65WifiDirect {
   late final _wifi_direct_create_group =
       _wifi_direct_create_groupPtr.asFunction<int Function()>();
 
-  /// @brief Creates a Wi-Fi Direct Group, asynchronously with given SSID name.
-  /// @details This function sets up device as the Group Owner and waits for clients to connect.
-  /// In addition, a soft AP will be created, the WPS registrar and the DHCP server will be started.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @param[in] ssid  Referred to as a network name, it is a name that identifies a wireless network
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE  Successful
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER     Invalid parameters
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @retval #WIFI_DIRECT_ERROR_AUTH_FAILED           Authentication failed
-  /// @pre Wi-Fi Direct service must be activated by wifi_direct_activate().
-  /// @post wifi_direct_connection_state_changed_cb() will be invoked with #WIFI_DIRECT_GROUP_CREATED.
-  /// @see wifi_direct_activate()
-  /// @see wifi_direct_destroy_group()
-  /// @see wifi_direct_connection_state_changed_cb()
+  /// Creates a Wi-Fi Direct Group, asynchronously with given SSID name.
+  ///
+  /// This function sets up device as the Group Owner and waits for clients to connect. In addition, a soft AP will be created, the WPS registrar and the DHCP server will be started.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Parameters:**
+  /// - `ssid` (in): Referred to as a network name, it is a name that identifies a wireless network
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameters
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  /// - `WIFI_DIRECT_ERROR_AUTH_FAILED`: Authentication failed
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be activated by wifi_direct_activate().
+  ///
+  /// **Postconditions:**
+  /// - wifi_direct_connection_state_changed_cb() will be invoked with `WIFI_DIRECT_GROUP_CREATED`.
+  ///
+  /// **See also:**
+  /// - `wifi_direct_activate()`
+  /// - `wifi_direct_destroy_group()`
+  /// - `wifi_direct_connection_state_changed_cb()`
   int wifi_direct_create_group_with_ssid(
     ffi.Pointer<ffi.Char> ssid,
   ) {
@@ -2671,32 +2992,45 @@ class Tizen65WifiDirect {
       _wifi_direct_create_group_with_ssidPtr
           .asFunction<int Function(ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Destroys the Wi-Fi Direct Group, asynchronously.
-  /// @details This function destroys the Wi-Fi Direct Group owned by a local device.
-  /// If creating a Group is in progress, this function cancels that creating.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @retval #WIFI_DIRECT_ERROR_AUTH_FAILED           Authentication failed
-  /// @pre Wi-Fi Direct service must be activated by wifi_direct_activate().
-  /// @post wifi_direct_connection_state_changed_cb() will be invoked with #WIFI_DIRECT_GROUP_DESTROYED.
-  /// @see wifi_direct_activate()
-  /// @see wifi_direct_create_group()
-  /// @see wifi_direct_connection_state_changed_cb()
+  /// Destroys the Wi-Fi Direct Group, asynchronously.
   ///
+  /// This function destroys the Wi-Fi Direct Group owned by a local device. If creating a Group is in progress, this function cancels that creating.
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  /// - `WIFI_DIRECT_ERROR_AUTH_FAILED`: Authentication failed
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be activated by wifi_direct_activate().
+  ///
+  /// **Postconditions:**
+  /// - wifi_direct_connection_state_changed_cb() will be invoked with `WIFI_DIRECT_GROUP_DESTROYED`.
+  ///
+  /// **See also:**
+  /// - `wifi_direct_activate()`
+  /// - `wifi_direct_create_group()`
+  /// - `wifi_direct_connection_state_changed_cb()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -2740,7 +3074,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_destroy_group() {
     return _wifi_direct_destroy_group();
   }
@@ -2751,28 +3085,41 @@ class Tizen65WifiDirect {
   late final _wifi_direct_destroy_group =
       _wifi_direct_destroy_groupPtr.asFunction<int Function()>();
 
-  /// @brief Checks whether this device is the group owner or not.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @param[out] is_group_owner Indicates whether this device is the group owner or not
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @pre Wi-Fi Direct service must be activated by wifi_direct_activate().
-  /// @see wifi_direct_activate()
+  /// Checks whether this device is the group owner or not.
   ///
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Parameters:**
+  /// - `is_group_owner` (out): Indicates whether this device is the group owner or not
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be activated by wifi_direct_activate().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_activate()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -2828,7 +3175,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_is_group_owner(
     ffi.Pointer<ffi.Bool> is_group_owner,
   ) {
@@ -2843,32 +3190,45 @@ class Tizen65WifiDirect {
   late final _wifi_direct_is_group_owner = _wifi_direct_is_group_ownerPtr
       .asFunction<int Function(ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Checks whether the current group is the autonomous group or not.
-  /// @details If you create a group by wifi_direct_create_group(),
-  /// then the current group is the autonomous group.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @param[out] is_autonomous_group  Indicates whether the current group is the autonomous group or not
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @pre Wi-Fi Direct service must be activated by wifi_direct_activate().
-  /// @see wifi_direct_activate()
-  /// @see wifi_direct_create_group()
-  /// @see wifi_direct_destroy_group()
+  /// Checks whether the current group is the autonomous group or not.
   ///
+  /// If you create a group by wifi_direct_create_group(), then the current group is the autonomous group.
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Parameters:**
+  /// - `is_autonomous_group` (out): Indicates whether the current group is the autonomous group or not
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be activated by wifi_direct_activate().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_activate()`
+  /// - `wifi_direct_create_group()`
+  /// - `wifi_direct_destroy_group()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -2920,7 +3280,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_is_autonomous_group(
     ffi.Pointer<ffi.Bool> is_autonomous_group,
   ) {
@@ -2936,32 +3296,48 @@ class Tizen65WifiDirect {
       _wifi_direct_is_autonomous_groupPtr
           .asFunction<int Function(ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Sets the friendly name of a local device.
-  /// @details This device name is shown to other devices during device discovery.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @remarks The name set is only valid during activated state.
-  /// After Wi-Fi Direct is deactivated, this name will be same as the phone name.
-  /// @param[in] device_name  The name of a local device
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @pre Wi-Fi Direct must be activated by wifi_direct_activate().
-  /// @see wifi_direct_activate()
-  /// @see wifi_direct_get_device_name()
+  /// Sets the friendly name of a local device.
   ///
+  /// This device name is shown to other devices during device discovery.
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Remarks:**
+  /// - The name set is only valid during activated state.
+  /// - After Wi-Fi Direct is deactivated, this name will be same as the phone name.
+  ///
+  /// **Parameters:**
+  /// - `device_name` (in): The name of a local device
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct must be activated by wifi_direct_activate().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_activate()`
+  /// - `wifi_direct_get_device_name()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -2998,7 +3374,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_set_device_name(
     ffi.Pointer<ffi.Char> device_name,
   ) {
@@ -3013,29 +3389,44 @@ class Tizen65WifiDirect {
   late final _wifi_direct_set_device_name = _wifi_direct_set_device_namePtr
       .asFunction<int Function(ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the name of a local device.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @remarks @a device_name must be released with free().
-  /// @param[out] device_name  The name of a local device
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @pre Wi-Fi Direct service must be initialized by wifi_direct_initialize().
-  /// @see wifi_direct_initialize()
-  /// @see wifi_direct_set_device_name()
+  /// Gets the name of a local device.
   ///
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Remarks:**
+  /// - `device_name` must be released with free().
+  ///
+  /// **Parameters:**
+  /// - `device_name` (out): The name of a local device
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be initialized by wifi_direct_initialize().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_initialize()`
+  /// - `wifi_direct_set_device_name()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -3071,7 +3462,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_get_device_name(
     ffi.Pointer<ffi.Pointer<ffi.Char>> device_name,
   ) {
@@ -3087,30 +3478,45 @@ class Tizen65WifiDirect {
   late final _wifi_direct_get_device_name = _wifi_direct_get_device_namePtr
       .asFunction<int Function(ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets SSID (Service Set Identifier) of a local device.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @remarks @a ssid must be released using free().
-  /// @param[out] ssid  The SSID
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_OUT_OF_MEMORY         Out of memory
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @pre Wi-Fi Direct service must be initialized by wifi_direct_initialize().
-  /// @see wifi_direct_initialize()
+  /// Gets SSID (Service Set Identifier) of a local device.
   ///
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Remarks:**
+  /// - `ssid` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `ssid` (out): The SSID
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be initialized by wifi_direct_initialize().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_initialize()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -3146,7 +3552,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_get_ssid(
     ffi.Pointer<ffi.Pointer<ffi.Char>> ssid,
   ) {
@@ -3162,30 +3568,45 @@ class Tizen65WifiDirect {
   late final _wifi_direct_get_ssid = _wifi_direct_get_ssidPtr
       .asFunction<int Function(ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the name of network interface (for example: eth0, pdp0).
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @remarks @a name must be released using free().
-  /// @param[out] name  The name of the network interface
-  /// @return @c 0 on success,
-  /// otherwise negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_OUT_OF_MEMORY         Out of memory
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @pre Wi-Fi Direct service must be activated by wifi_direct_activate().
-  /// @see wifi_direct_activate()
+  /// Gets the name of network interface (for example: eth0, pdp0).
   ///
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Remarks:**
+  /// - `name` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `name` (out): The name of the network interface
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be activated by wifi_direct_activate().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_activate()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -3221,7 +3642,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_get_network_interface_name(
     ffi.Pointer<ffi.Pointer<ffi.Char>> name,
   ) {
@@ -3238,31 +3659,45 @@ class Tizen65WifiDirect {
       _wifi_direct_get_network_interface_namePtr
           .asFunction<int Function(ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets IP address of a local device.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @remarks @a ip_address must be released using free().
-  /// @param[out] ip_address  The IP address
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_OUT_OF_MEMORY         Out of memory
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @pre Wi-Fi Direct service must be activated by wifi_direct_activate().
-  /// @see wifi_direct_activate()
+  /// Gets IP address of a local device.
   ///
+  /// **Since Tizen:**
+  /// - 2.3
   ///
+  /// **Privilege level:**
+  /// - public
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Remarks:**
+  /// - `ip_address` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `ip_address` (out): The IP address
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be activated by wifi_direct_activate().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_activate()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -3375,7 +3810,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_get_ip_address(
     ffi.Pointer<ffi.Pointer<ffi.Char>> ip_address,
   ) {
@@ -3391,30 +3826,45 @@ class Tizen65WifiDirect {
   late final _wifi_direct_get_ip_address = _wifi_direct_get_ip_addressPtr
       .asFunction<int Function(ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the Subnet Mask.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @remarks @a subnet_mask must be released using free().
-  /// @param[out] subnet_mask  The subnet mask
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_OUT_OF_MEMORY         Out of memory
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @pre Wi-Fi Direct service must be activated by wifi_direct_activate().
-  /// @see wifi_direct_activate()
+  /// Gets the Subnet Mask.
   ///
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Remarks:**
+  /// - `subnet_mask` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `subnet_mask` (out): The subnet mask
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be activated by wifi_direct_activate().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_activate()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -3531,7 +3981,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_get_subnet_mask(
     ffi.Pointer<ffi.Pointer<ffi.Char>> subnet_mask,
   ) {
@@ -3547,30 +3997,45 @@ class Tizen65WifiDirect {
   late final _wifi_direct_get_subnet_mask = _wifi_direct_get_subnet_maskPtr
       .asFunction<int Function(ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the Gateway address.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @remarks @a gateway_address must be released using free().
-  /// @param[out] gateway_address  The gateway address
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_OUT_OF_MEMORY         Out of memory
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @pre Wi-Fi Direct service must be activated by wifi_direct_activate().
-  /// @see wifi_direct_activate()
+  /// Gets the Gateway address.
   ///
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Remarks:**
+  /// - `gateway_address` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `gateway_address` (out): The gateway address
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be activated by wifi_direct_activate().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_activate()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -3688,7 +4153,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_get_gateway_address(
     ffi.Pointer<ffi.Pointer<ffi.Char>> gateway_address,
   ) {
@@ -3705,30 +4170,45 @@ class Tizen65WifiDirect {
       _wifi_direct_get_gateway_addressPtr
           .asFunction<int Function(ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets MAC address of a local device.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @remarks @a mac_address must be released using free().
-  /// @param[out] mac_address  The MAC address
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_OUT_OF_MEMORY         Out of memory
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @pre Wi-Fi Direct service must be initialized by wifi_direct_initialize().
-  /// @see wifi_direct_initialize()
+  /// Gets MAC address of a local device.
   ///
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Remarks:**
+  /// - `mac_address` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `mac_address` (out): The MAC address
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be initialized by wifi_direct_initialize().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_initialize()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -3846,7 +4326,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_get_mac_address(
     ffi.Pointer<ffi.Pointer<ffi.Char>> mac_address,
   ) {
@@ -3862,21 +4342,26 @@ class Tizen65WifiDirect {
   late final _wifi_direct_get_mac_address = _wifi_direct_get_mac_addressPtr
       .asFunction<int Function(ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the state of Wi-Fi Direct service.
-  /// @since_tizen 2.3
-  /// @param[out] state  The state of Wi-Fi Direct service
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE               Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED   Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED      Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED      Not supported
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY      Device or resource busy
+  /// Gets the state of Wi-Fi Direct service.
   ///
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Parameters:**
+  /// - `state` (out): The state of Wi-Fi Direct service
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -3934,7 +4419,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_get_state(
     ffi.Pointer<ffi.Int32> state,
   ) {
@@ -3949,32 +4434,45 @@ class Tizen65WifiDirect {
   late final _wifi_direct_get_state = _wifi_direct_get_statePtr
       .asFunction<int Function(ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Checks whether this device is discoverable or not by P2P discovery.
-  /// @details If you call wifi_direct_start_discovery(), then your device can be discoverable.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @param[out] discoverable  The status of discoverable:
-  /// (@c true = discoverable, @c false = non-discoverable)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @pre Wi-Fi Direct service must be initialized by wifi_direct_initialize().
-  /// @see wifi_direct_initialize()
-  /// @see wifi_direct_start_discovery()
-  /// @see wifi_direct_cancel_discovery()
+  /// Checks whether this device is discoverable or not by P2P discovery.
   ///
+  /// If you call wifi_direct_start_discovery(), then your device can be discoverable.
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Parameters:**
+  /// - `discoverable` (out): The status of discoverable: (`true` = discoverable, `false` = non-discoverable)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be initialized by wifi_direct_initialize().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_initialize()`
+  /// - `wifi_direct_start_discovery()`
+  /// - `wifi_direct_cancel_discovery()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -4050,7 +4548,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_is_discoverable(
     ffi.Pointer<ffi.Bool> discoverable,
   ) {
@@ -4065,34 +4563,46 @@ class Tizen65WifiDirect {
   late final _wifi_direct_is_discoverable = _wifi_direct_is_discoverablePtr
       .asFunction<int Function(ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Checks whether the local device is listening only.
-  /// @details If you call wifi_direct_start_discovery() with @a listen_only as @c true,
-  /// it does not support specific channel but the initial 802.11.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @param[out] listen_only  The status of listen only:(@c true = listen only, @c false =
-  /// cycling between Scan and Listen or not in discovery state)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @pre Wi-Fi Direct service must be activated by wifi_direct_activate().
-  /// @see wifi_direct_activate()
-  /// @see wifi_direct_start_discovery()
-  /// @see wifi_direct_cancel_discovery()
-  /// @see wifi_direct_is_discoverable()
+  /// Checks whether the local device is listening only.
   ///
+  /// If you call wifi_direct_start_discovery() with `listen_only` as `true`, it does not support specific channel but the initial 802.11.
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Parameters:**
+  /// - `listen_only` (out): The status of listen only:(`true` = listen only, `false` = cycling between Scan and Listen or not in discovery state)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be activated by wifi_direct_activate().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_activate()`
+  /// - `wifi_direct_start_discovery()`
+  /// - `wifi_direct_cancel_discovery()`
+  /// - `wifi_direct_is_discoverable()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -4166,7 +4676,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_is_listening_only(
     ffi.Pointer<ffi.Bool> listen_only,
   ) {
@@ -4181,28 +4691,41 @@ class Tizen65WifiDirect {
   late final _wifi_direct_is_listening_only = _wifi_direct_is_listening_onlyPtr
       .asFunction<int Function(ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Gets the primary device type of a local device.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @param[out] type  The primary device type
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @pre Wi-Fi Direct service must be initialized by wifi_direct_initialize().
-  /// @see wifi_direct_initialize()
+  /// Gets the primary device type of a local device.
   ///
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Parameters:**
+  /// - `type` (out): The primary device type
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be initialized by wifi_direct_initialize().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_initialize()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -4254,7 +4777,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_get_primary_device_type(
     ffi.Pointer<ffi.Int32> type,
   ) {
@@ -4270,28 +4793,41 @@ class Tizen65WifiDirect {
       _wifi_direct_get_primary_device_typePtr
           .asFunction<int Function(ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the secondary device type of a local device.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @param[out] type  The secondary device type
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @pre Wi-Fi Direct service must be initialized by wifi_direct_initialize().
-  /// @see wifi_direct_initialize()
+  /// Gets the secondary device type of a local device.
   ///
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Parameters:**
+  /// - `type` (out): The secondary device type
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be initialized by wifi_direct_initialize().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_initialize()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -4343,7 +4879,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_get_secondary_device_type(
     ffi.Pointer<ffi.Int32> type,
   ) {
@@ -4359,26 +4895,37 @@ class Tizen65WifiDirect {
       _wifi_direct_get_secondary_device_typePtr
           .asFunction<int Function(ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Sets the WPS config PBC as preferred method for connection.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @pre Wi-Fi Direct service must be activated by wifi_direct_activate().
-  /// @see wifi_direct_activate()
+  /// Sets the WPS config PBC as preferred method for connection.
   ///
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be activated by wifi_direct_activate().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_activate()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -4413,7 +4960,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_activate_pushbutton() {
     return _wifi_direct_activate_pushbutton();
   }
@@ -4424,29 +4971,42 @@ class Tizen65WifiDirect {
   late final _wifi_direct_activate_pushbutton =
       _wifi_direct_activate_pushbuttonPtr.asFunction<int Function()>();
 
-  /// @brief Sets or updates the WPS PIN number user expects.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @param[in] pin  New pin to set. Application must set the new pin number before
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @pre Wi-Fi Direct service must be activated by wifi_direct_activate().
-  /// @see wifi_direct_activate()
-  /// @see wifi_direct_get_wps_pin()
+  /// Sets or updates the WPS PIN number user expects.
   ///
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Parameters:**
+  /// - `pin` (in): New pin to set. Application must set the new pin number before
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be activated by wifi_direct_activate().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_activate()`
+  /// - `wifi_direct_get_wps_pin()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -4587,7 +5147,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_set_wps_pin(
     ffi.Pointer<ffi.Char> pin,
   ) {
@@ -4602,30 +5162,45 @@ class Tizen65WifiDirect {
   late final _wifi_direct_set_wps_pin = _wifi_direct_set_wps_pinPtr
       .asFunction<int Function(ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the WPS PIN number.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @remarks @a pin must be released with free().
-  /// @param[out] pin  Pointer to store pin number. Application must free this memory
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @pre Wi-Fi Direct service must be activated by wifi_direct_activate().
-  /// @see wifi_direct_activate()
-  /// @see wifi_direct_set_wps_pin()
+  /// Gets the WPS PIN number.
   ///
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Remarks:**
+  /// - `pin` must be released with free().
+  ///
+  /// **Parameters:**
+  /// - `pin` (out): Pointer to store pin number. Application must free this memory
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be activated by wifi_direct_activate().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_activate()`
+  /// - `wifi_direct_set_wps_pin()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -4763,7 +5338,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_get_wps_pin(
     ffi.Pointer<ffi.Pointer<ffi.Char>> pin,
   ) {
@@ -4779,28 +5354,41 @@ class Tizen65WifiDirect {
   late final _wifi_direct_get_wps_pin = _wifi_direct_get_wps_pinPtr
       .asFunction<int Function(ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets all the supported WPS (Wi-Fi Protected Setup) types at local device.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @param[out] wps_mode  Supported WPS mode for local device
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @pre Wi-Fi Direct service must be initialized by wifi_direct_initialize().
-  /// @see wifi_direct_initialize()
+  /// Gets all the supported WPS (Wi-Fi Protected Setup) types at local device.
   ///
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Parameters:**
+  /// - `wps_mode` (out): Supported WPS mode for local device
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be initialized by wifi_direct_initialize().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_initialize()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -4848,7 +5436,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_get_supported_wps_mode(
     ffi.Pointer<ffi.Int> wps_mode,
   ) {
@@ -4864,30 +5452,43 @@ class Tizen65WifiDirect {
       _wifi_direct_get_supported_wps_modePtr
           .asFunction<int Function(ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the supported WPS (Wi-Fi Protected Setup) types.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @param[in] callback   The callback function to invoke
-  /// @param[in] user_data  The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @pre Wi-Fi Direct service must be initialized by wifi_direct_initialize().
-  /// @see wifi_direct_initialize()
-  /// @see wifi_direct_supported_wps_type_cb()
+  /// Gets the supported WPS (Wi-Fi Protected Setup) types.
   ///
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): The callback function to invoke
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be initialized by wifi_direct_initialize().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_initialize()`
+  /// - `wifi_direct_supported_wps_type_cb()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -4938,7 +5539,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_foreach_supported_wps_types(
     wifi_direct_supported_wps_type_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -4959,29 +5560,42 @@ class Tizen65WifiDirect {
           int Function(
               wifi_direct_supported_wps_type_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Gets the WPS (Wi-Fi Protected Setup) type.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @param[out] type  The type of WPS
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @pre Wi-Fi Direct service must be initialized by wifi_direct_initialize().
-  /// @see wifi_direct_initialize()
-  /// @see wifi_direct_foreach_supported_wps_types()
+  /// Gets the WPS (Wi-Fi Protected Setup) type.
   ///
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Parameters:**
+  /// - `type` (out): The type of WPS
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be initialized by wifi_direct_initialize().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_initialize()`
+  /// - `wifi_direct_foreach_supported_wps_types()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -5029,7 +5643,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_get_local_wps_type(
     ffi.Pointer<ffi.Int32> type,
   ) {
@@ -5045,29 +5659,42 @@ class Tizen65WifiDirect {
       _wifi_direct_get_local_wps_typePtr
           .asFunction<int Function(ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Sets the requested WPS (Wi-Fi Protected Setup) type.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @param[in] type  The type of WPS
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @pre Wi-Fi Direct service must be initialized by wifi_direct_initialize().
-  /// @see wifi_direct_initialize()
-  /// @see wifi_direct_foreach_supported_wps_types()
+  /// Sets the requested WPS (Wi-Fi Protected Setup) type.
   ///
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Parameters:**
+  /// - `type` (in): The type of WPS
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be initialized by wifi_direct_initialize().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_initialize()`
+  /// - `wifi_direct_foreach_supported_wps_types()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -5123,7 +5750,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_set_req_wps_type(
     int type,
   ) {
@@ -5138,29 +5765,42 @@ class Tizen65WifiDirect {
   late final _wifi_direct_set_req_wps_type =
       _wifi_direct_set_req_wps_typePtr.asFunction<int Function(int)>();
 
-  /// @brief Gets the requested WPS (Wi-Fi Protected Setup) type.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @param[out] type  The type of WPS
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @pre Wi-Fi Direct service must be initialized by wifi_direct_initialize().
-  /// @see wifi_direct_initialize()
-  /// @see wifi_direct_foreach_supported_wps_types()
+  /// Gets the requested WPS (Wi-Fi Protected Setup) type.
   ///
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Parameters:**
+  /// - `type` (out): The type of WPS
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be initialized by wifi_direct_initialize().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_initialize()`
+  /// - `wifi_direct_foreach_supported_wps_types()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -5208,7 +5848,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_get_req_wps_type(
     ffi.Pointer<ffi.Int32> type,
   ) {
@@ -5223,31 +5863,46 @@ class Tizen65WifiDirect {
   late final _wifi_direct_get_req_wps_type = _wifi_direct_get_req_wps_typePtr
       .asFunction<int Function(ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Sets the intent of the group owner.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @remarks The range of intent is 0 - 15. The higher the @a intent is,
-  /// the higher the probability to be the group owner is.
-  /// @param[in] intent The intent of the group owner
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @pre Wi-Fi Direct service must be initialized by wifi_direct_initialize().
-  /// @see wifi_direct_initialize()
-  /// @see wifi_direct_get_group_owner_intent()
+  /// Sets the intent of the group owner.
   ///
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Remarks:**
+  /// - The range of intent is 0 - 15. The higher the `intent` is,
+  /// - the higher the probability to be the group owner is.
+  ///
+  /// **Parameters:**
+  /// - `intent` (in): The intent of the group owner
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be initialized by wifi_direct_initialize().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_initialize()`
+  /// - `wifi_direct_get_group_owner_intent()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -5285,7 +5940,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_set_group_owner_intent(
     int intent,
   ) {
@@ -5300,26 +5955,44 @@ class Tizen65WifiDirect {
   late final _wifi_direct_set_group_owner_intent =
       _wifi_direct_set_group_owner_intentPtr.asFunction<int Function(int)>();
 
-  /// @brief Sets the intent of the group owner for each connection type.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @remarks The range of intent is 0 - 15. The higher the @a intent is, the higher the probability to be the group owner is.
-  /// @param[in] type  The type of connection for a peer device
-  /// @param[in] intent  The intent of the group owner
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @pre Wi-Fi Direct service must be initialized by wifi_direct_initialize().
-  /// @see wifi_direct_initialize()
-  /// @see wifi_direct_get_go_intent_per_type()
+  /// Sets the intent of the group owner for each connection type.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Remarks:**
+  /// - The range of intent is 0 - 15. The higher the `intent` is, the higher the probability to be the group owner is.
+  ///
+  /// **Parameters:**
+  /// - `type` (in): The type of connection for a peer device
+  /// - `intent` (in): The intent of the group owner
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be initialized by wifi_direct_initialize().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_initialize()`
+  /// - `wifi_direct_get_go_intent_per_type()`
   int wifi_direct_set_go_intent_per_type(
     int type,
     int intent,
@@ -5337,29 +6010,42 @@ class Tizen65WifiDirect {
       _wifi_direct_set_go_intent_per_typePtr
           .asFunction<int Function(int, int)>();
 
-  /// @brief Gets the intent of the group owner.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @param[out] intent  The intent of the group owner
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @pre Wi-Fi Direct service must be initialized by wifi_direct_initialize().
-  /// @see wifi_direct_initialize()
-  /// @see wifi_direct_set_group_owner_intent()
+  /// Gets the intent of the group owner.
   ///
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Parameters:**
+  /// - `intent` (out): The intent of the group owner
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be initialized by wifi_direct_initialize().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_initialize()`
+  /// - `wifi_direct_set_group_owner_intent()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -5395,7 +6081,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_get_group_owner_intent(
     ffi.Pointer<ffi.Int> intent,
   ) {
@@ -5411,25 +6097,41 @@ class Tizen65WifiDirect {
       _wifi_direct_get_group_owner_intentPtr
           .asFunction<int Function(ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the intent of the group owner for each connection type.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @param[in] type  The type of connection for a peer device
-  /// @param[out] intent  The intent of the group owner
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @pre Wi-Fi Direct service must be initialized by wifi_direct_initialize().
-  /// @see wifi_direct_initialize()
-  /// @see wifi_direct_set_go_intent_per_type()
+  /// Gets the intent of the group owner for each connection type.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Parameters:**
+  /// - `type` (in): The type of connection for a peer device
+  /// - `intent` (out): The intent of the group owner
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be initialized by wifi_direct_initialize().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_initialize()`
+  /// - `wifi_direct_set_go_intent_per_type()`
   int wifi_direct_get_go_intent_per_type(
     int type,
     ffi.Pointer<ffi.Int> intent,
@@ -5447,29 +6149,42 @@ class Tizen65WifiDirect {
       _wifi_direct_get_go_intent_per_typePtr
           .asFunction<int Function(int, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Sets the max number of clients.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @param[in] max  The max number of clients
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @pre Wi-Fi Direct service must be initialized by wifi_direct_initialize().
-  /// @see wifi_direct_initialize()
-  /// @see wifi_direct_get_max_clients()
+  /// Sets the max number of clients.
   ///
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Parameters:**
+  /// - `max` (in): The max number of clients
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be initialized by wifi_direct_initialize().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_initialize()`
+  /// - `wifi_direct_get_max_clients()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -5508,7 +6223,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_set_max_clients(
     int max,
   ) {
@@ -5523,29 +6238,42 @@ class Tizen65WifiDirect {
   late final _wifi_direct_set_max_clients =
       _wifi_direct_set_max_clientsPtr.asFunction<int Function(int)>();
 
-  /// @brief Gets the max number of clients.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @param[in] max  The max number of clients
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @pre Wi-Fi Direct service must be initialized by wifi_direct_initialize().
-  /// @see wifi_direct_initialize()
-  /// @see wifi_direct_set_max_clients()
+  /// Gets the max number of clients.
   ///
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Parameters:**
+  /// - `max` (in): The max number of clients
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be initialized by wifi_direct_initialize().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_initialize()`
+  /// - `wifi_direct_set_max_clients()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -5581,7 +6309,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_get_max_clients(
     ffi.Pointer<ffi.Int> max,
   ) {
@@ -5596,31 +6324,45 @@ class Tizen65WifiDirect {
   late final _wifi_direct_get_max_clients = _wifi_direct_get_max_clientsPtr
       .asFunction<int Function(ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Sets or updates Wi-Fi Protected Access (WPA) password.
-  /// When creating Wi-Fi Direct Group, this password will be used.
-  /// @since_tizen 2.4
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @remarks A peer can connect to this group as Wi-Fi Infrastructured mode with a passphrase.
-  /// @param[in] passphrase new wpa password to set. Application must set the new password before.
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @pre Wi-Fi Direct service must be activated by wifi_direct_activate().
-  /// @see wifi_direct_activate()
-  /// @see wifi_direct_get_passphrase()
+  /// Sets or updates Wi-Fi Protected Access (WPA) password. When creating Wi-Fi Direct Group, this password will be used.
   ///
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Remarks:**
+  /// - A peer can connect to this group as Wi-Fi Infrastructured mode with a passphrase.
+  ///
+  /// **Parameters:**
+  /// - `passphrase` (in): new wpa password to set. Application must set the new password before.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be activated by wifi_direct_activate().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_activate()`
+  /// - `wifi_direct_get_passphrase()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -5659,7 +6401,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_set_passphrase(
     ffi.Pointer<ffi.Char> passphrase,
   ) {
@@ -5674,30 +6416,45 @@ class Tizen65WifiDirect {
   late final _wifi_direct_set_passphrase = _wifi_direct_set_passphrasePtr
       .asFunction<int Function(ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the Wi-Fi Protected Access (WPA) password when creating Wi-Fi Direct Group.
-  /// @since_tizen 2.4
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @remarks @a passphrase must be released with free().
-  /// @param[out] passphrase  Pointer to store wpa password. Application must free this memory
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @pre Wi-Fi Direct service must be activated by wifi_direct_activate().
-  /// @see wifi_direct_activate()
-  /// @see wifi_direct_set_passphrase()
+  /// Gets the Wi-Fi Protected Access (WPA) password when creating Wi-Fi Direct Group.
   ///
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Remarks:**
+  /// - `passphrase` must be released with free().
+  ///
+  /// **Parameters:**
+  /// - `passphrase` (out): Pointer to store wpa password. Application must free this memory
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be activated by wifi_direct_activate().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_activate()`
+  /// - `wifi_direct_set_passphrase()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -5734,7 +6491,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_get_passphrase(
     ffi.Pointer<ffi.Pointer<ffi.Char>> passphrase,
   ) {
@@ -5750,28 +6507,41 @@ class Tizen65WifiDirect {
   late final _wifi_direct_get_passphrase = _wifi_direct_get_passphrasePtr
       .asFunction<int Function(ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the operating channel.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @param[out] channel  The operating channel
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @pre Wi-Fi Direct service must be initialized by wifi_direct_initialize().
-  /// @see wifi_direct_initialize()
+  /// Gets the operating channel.
   ///
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Parameters:**
+  /// - `channel` (out): The operating channel
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be initialized by wifi_direct_initialize().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_initialize()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -5807,7 +6577,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_get_operating_channel(
     ffi.Pointer<ffi.Int> channel,
   ) {
@@ -5823,25 +6593,37 @@ class Tizen65WifiDirect {
       _wifi_direct_get_operating_channelPtr
           .asFunction<int Function(ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Sets the Autoconnection mode.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @param[in] mode  Describes the mode of connection. In case of TRUE \n
-  /// auto-connection will be taken care by framework
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @pre Wi-Fi Direct service must be initialized by wifi_direct_initialize().
-  /// @see wifi_direct_foreach_supported_wps_types()
+  /// Sets the Autoconnection mode.
   ///
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Parameters:**
+  /// - `mode` (in): Describes the mode of connection. In case of TRUE auto-connection will be taken care by framework
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be initialized by wifi_direct_initialize().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_foreach_supported_wps_types()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -5883,7 +6665,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_set_autoconnection_mode(
     bool mode,
   ) {
@@ -5898,25 +6680,38 @@ class Tizen65WifiDirect {
   late final _wifi_direct_set_autoconnection_mode =
       _wifi_direct_set_autoconnection_modePtr.asFunction<int Function(bool)>();
 
-  /// @brief Gets the Autoconnection mode status.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @param[out] mode  Describes the auto connection mode of framework has set.
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @pre Wi-Fi Direct service must be initialized by wifi_direct_initialize().
-  /// @see wifi_direct_foreach_supported_wps_types()
-  /// @see wifi_direct_initialize()
+  /// Gets the Autoconnection mode status.
   ///
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Parameters:**
+  /// - `mode` (out): Describes the auto connection mode of framework has set.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be initialized by wifi_direct_initialize().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_foreach_supported_wps_types()`
+  /// - `wifi_direct_initialize()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -5952,7 +6747,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_is_autoconnection_mode(
     ffi.Pointer<ffi.Bool> mode,
   ) {
@@ -5968,28 +6763,41 @@ class Tizen65WifiDirect {
       _wifi_direct_is_autoconnection_modePtr
           .asFunction<int Function(ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Allows a device to connect automatically.
-  /// @since_tizen 2.4
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @param[in] mac_address  Device MAC address to allow autoconnection
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @pre Wi-Fi Direct service must be activated by wifi_direct_activate().
-  /// @see wifi_direct_activate()
+  /// Allows a device to connect automatically.
   ///
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Parameters:**
+  /// - `mac_address` (in): Device MAC address to allow autoconnection
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be activated by wifi_direct_activate().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_activate()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -6104,7 +6912,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_set_autoconnection_peer(
     ffi.Pointer<ffi.Char> mac_address,
   ) {
@@ -6120,30 +6928,43 @@ class Tizen65WifiDirect {
       _wifi_direct_set_autoconnection_peerPtr
           .asFunction<int Function(ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Enables the persistent group.
-  /// @details If @a enabled is true, then P2P persistent group will be used
-  /// while creating a group and establishing a connection.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @param[in] enabled  The status of persistent group: (@c true = enabled, @c false = disabled)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @pre Wi-Fi Direct service must be initialized by wifi_direct_initialize().
-  /// @see wifi_direct_initialize()
-  /// @see wifi_direct_is_persistent_group_enabled()
+  /// Enables the persistent group.
   ///
+  /// If `enabled` is true, then P2P persistent group will be used while creating a group and establishing a connection.
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Parameters:**
+  /// - `enabled` (in): The status of persistent group: (`true` = enabled, `false` = disabled)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be initialized by wifi_direct_initialize().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_initialize()`
+  /// - `wifi_direct_is_persistent_group_enabled()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -6178,7 +6999,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_set_persistent_group_enabled(
     bool enabled,
   ) {
@@ -6194,29 +7015,42 @@ class Tizen65WifiDirect {
       _wifi_direct_set_persistent_group_enabledPtr
           .asFunction<int Function(bool)>();
 
-  /// @brief Checks whether the persistent group is enabled or disabled.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @param[out] enabled  The status of the persistent group: (@c true = enabled, @c false = disabled)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @pre Wi-Fi Direct service must be initialized by wifi_direct_initialize().
-  /// @see wifi_direct_initialize()
-  /// @see wifi_direct_set_persistent_group_enabled()
+  /// Checks whether the persistent group is enabled or disabled.
   ///
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Parameters:**
+  /// - `enabled` (out): The status of the persistent group: (`true` = enabled, `false` = disabled)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be initialized by wifi_direct_initialize().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_initialize()`
+  /// - `wifi_direct_set_persistent_group_enabled()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -6252,7 +7086,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_is_persistent_group_enabled(
     ffi.Pointer<ffi.Bool> enabled,
   ) {
@@ -6268,31 +7102,46 @@ class Tizen65WifiDirect {
       _wifi_direct_is_persistent_group_enabledPtr
           .asFunction<int Function(ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Gets the persistent groups.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @param[in] callback   The callback function to invoke
-  /// @param[in] user_data  The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @pre Wi-Fi Direct service must be initialized by wifi_direct_initialize().
-  /// @post wifi_direct_persistent_group_cb() will be called.
-  /// @see wifi_direct_initialize()
-  /// @see wifi_direct_persistent_group_cb()
+  /// Gets the persistent groups.
   ///
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): The callback function to invoke
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be initialized by wifi_direct_initialize().
+  ///
+  /// **Postconditions:**
+  /// - wifi_direct_persistent_group_cb() will be called.
+  ///
+  /// **See also:**
+  /// - `wifi_direct_initialize()`
+  /// - `wifi_direct_persistent_group_cb()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -6339,7 +7188,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_foreach_persistent_groups(
     wifi_direct_persistent_group_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -6359,30 +7208,43 @@ class Tizen65WifiDirect {
           int Function(
               wifi_direct_persistent_group_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Removes a persistent group.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @param[in] mac_address  The MAC address of the persistent group owner
-  /// @param[in] ssid         The SSID (Service Set Identifier) of the persistent group owner
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @pre Wi-Fi Direct service must be initialized by wifi_direct_initialize().
-  /// @see wifi_direct_initialize()
-  /// @see wifi_direct_foreach_persistent_groups()
+  /// Removes a persistent group.
   ///
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Parameters:**
+  /// - `mac_address` (in): The MAC address of the persistent group owner
+  /// - `ssid` (in): The SSID (Service Set Identifier) of the persistent group owner
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be initialized by wifi_direct_initialize().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_initialize()`
+  /// - `wifi_direct_foreach_persistent_groups()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -6427,7 +7289,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_remove_persistent_group(
     ffi.Pointer<ffi.Char> mac_address,
     ffi.Pointer<ffi.Char> ssid,
@@ -6446,32 +7308,46 @@ class Tizen65WifiDirect {
       _wifi_direct_remove_persistent_groupPtr.asFunction<
           int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Starts wifi direct service discovery.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @param[in] mac_address   The MAC address of servicing device. A broadcast \n
-  /// will be sent when MAC is SET to ZERO
-  /// @param[in] service_type  Describes the type of service
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @pre Wi-Fi Direct service must be activated by wifi_direct_activate().
-  /// @post wifi_direct_set_service_state_changed_cb() will be invoked.
-  /// @see wifi_direct_activate()
-  /// @see wifi_direct_set_service_state_changed_cb()
+  /// Starts wifi direct service discovery.
   ///
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Parameters:**
+  /// - `mac_address` (in): The MAC address of servicing device. A broadcast will be sent when MAC is SET to ZERO
+  /// - `service_type` (in): Describes the type of service
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be activated by wifi_direct_activate().
+  ///
+  /// **Postconditions:**
+  /// - wifi_direct_set_service_state_changed_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `wifi_direct_activate()`
+  /// - `wifi_direct_set_service_state_changed_cb()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -6560,7 +7436,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_start_service_discovery(
     ffi.Pointer<ffi.Char> mac_address,
     int service_type,
@@ -6579,30 +7455,42 @@ class Tizen65WifiDirect {
       _wifi_direct_start_service_discoveryPtr
           .asFunction<int Function(ffi.Pointer<ffi.Char>, int)>();
 
-  /// @brief Cancels an ongoing wifi direct service discovery.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @param[in] mac_address  The MAC address of servicing device. A broadcast \n
-  /// will be sent when MAC is SET to ZERO
-  /// @param[in] service_type Describes the type of service
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @pre Wi-Fi Direct service must be activated by wifi_direct_activate().
-  /// @see wifi_direct_activate()
+  /// Cancels an ongoing wifi direct service discovery.
   ///
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Parameters:**
+  /// - `mac_address` (in): The MAC address of servicing device. A broadcast will be sent when MAC is SET to ZERO
+  /// - `service_type` (in): Describes the type of service
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be activated by wifi_direct_activate().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_activate()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -6662,7 +7550,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_cancel_service_discovery(
     ffi.Pointer<ffi.Char> mac_address,
     int service_type,
@@ -6681,31 +7569,44 @@ class Tizen65WifiDirect {
       _wifi_direct_cancel_service_discoveryPtr
           .asFunction<int Function(ffi.Pointer<ffi.Char>, int)>();
 
-  /// @brief Registers for a service using Wi-Fi Direct Service Discovery.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @param[in] service_type  Describes the type of service.
-  /// @param[in] info1         Describes the information of service. It is service-specific
-  /// @param[in] info2         Describes the information of service. It is service-specific
-  /// @param[out] service_id   A Service ID will be assigned to service getting registered
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @pre Wi-Fi Direct service must be activated by wifi_direct_activate().
-  /// @see wifi_direct_activate()
+  /// Registers for a service using Wi-Fi Direct Service Discovery.
   ///
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Parameters:**
+  /// - `service_type` (in): Describes the type of service.
+  /// - `info1` (in): Describes the information of service. It is service-specific
+  /// - `info2` (in): Describes the information of service. It is service-specific
+  /// - `service_id` (out): A Service ID will be assigned to service getting registered
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be activated by wifi_direct_activate().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_activate()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -6815,7 +7716,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_register_service(
     int service_type,
     ffi.Pointer<ffi.Char> info1,
@@ -6842,28 +7743,41 @@ class Tizen65WifiDirect {
           int Function(int, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.UnsignedInt>)>();
 
-  /// @brief Deregisters for a service used for Wi-Fi Direct Service Discovery.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @param[in] service_id  A Service ID for which service has to be deregistered
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @pre Wi-Fi Direct service must be activated by wifi_direct_activate().
-  /// @see wifi_direct_activate()
+  /// Deregisters for a service used for Wi-Fi Direct Service Discovery.
   ///
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Parameters:**
+  /// - `service_id` (in): A Service ID for which service has to be deregistered
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be activated by wifi_direct_activate().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_activate()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -6901,7 +7815,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_deregister_service(
     int service_id,
   ) {
@@ -6916,28 +7830,41 @@ class Tizen65WifiDirect {
   late final _wifi_direct_deregister_service =
       _wifi_direct_deregister_servicePtr.asFunction<int Function(int)>();
 
-  /// @brief Initializes OR Deintializes the WiFi Direct Display (MIRACAST) service.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @param[in] enable  Enables/Disables Service based on the value TRUE/FALSE
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @pre Wi-Fi Direct service must be activated by wifi_direct_activate().
-  /// @see wifi_direct_activate()
+  /// Initializes OR Deintializes the WiFi Direct Display (MIRACAST) service.
   ///
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Parameters:**
+  /// - `enable` (in): Enables/Disables Service based on the value TRUE/FALSE
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be activated by wifi_direct_activate().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_activate()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -6972,7 +7899,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_init_miracast(
     bool enable,
   ) {
@@ -6987,30 +7914,43 @@ class Tizen65WifiDirect {
   late final _wifi_direct_init_miracast =
       _wifi_direct_init_miracastPtr.asFunction<int Function(bool)>();
 
-  /// @brief Gets the information of a discovered peer.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @param[in] mac_address  The MAC address of peer to get
-  /// @param[out] peer_info   The peer information to be passed
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @pre Wi-Fi Direct service must be activated by wifi_direct_activate().
-  /// @see wifi_direct_activate()
-  /// @see wifi_direct_foreach_discovered_peers()
+  /// Gets the information of a discovered peer.
   ///
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Parameters:**
+  /// - `mac_address` (in): The MAC address of peer to get
+  /// - `peer_info` (out): The peer information to be passed
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be activated by wifi_direct_activate().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_activate()`
+  /// - `wifi_direct_foreach_discovered_peers()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -7050,7 +7990,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_get_peer_info(
     ffi.Pointer<ffi.Char> mac_address,
     ffi.Pointer<ffi.Pointer<wifi_direct_discovered_peer_info_s>> peer_info,
@@ -7073,30 +8013,41 @@ class Tizen65WifiDirect {
           int Function(ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Pointer<wifi_direct_discovered_peer_info_s>>)>();
 
-  /// @brief Enables Wi-Fi Display (WFD) functionality and initialize the various variables required for WFD.
-  /// @details Starts listening in only assigned channel. Device will be discoverable
-  /// only in assigned listen channel.
-  /// @since_tizen 2.4
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @pre Wi-Fi Direct service must be activated by wifi_direct_activate()
-  /// @see wifi_direct_activate()
-  /// @see wifi_direct_deinit_display()
-  /// @see wifi_direct_set_display()
+  /// Enables Wi-Fi Display (WFD) functionality and initialize the various variables required for WFD.
   ///
+  /// Starts listening in only assigned channel. Device will be discoverable only in assigned listen channel.
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be activated by wifi_direct_activate()
+  ///
+  /// **See also:**
+  /// - `wifi_direct_activate()`
+  /// - `wifi_direct_deinit_display()`
+  /// - `wifi_direct_set_display()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -7131,7 +8082,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_init_display() {
     return _wifi_direct_init_display();
   }
@@ -7142,29 +8093,39 @@ class Tizen65WifiDirect {
   late final _wifi_direct_init_display =
       _wifi_direct_init_displayPtr.asFunction<int Function()>();
 
-  /// @brief Disables Wi-Fi Display functionality & disables the support of WFD Information Element (IE).
-  /// @since_tizen 2.4
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @pre Wi-Fi Direct service must be activated by wifi_direct_activate()
-  /// and Wi-Fi Display must be enabled by wifi_direct_init_display().
-  /// @see wifi_direct_activate()
-  /// @see wifi_direct_init_display()
-  /// @see wifi_direct_set_display()
+  /// Disables Wi-Fi Display functionality & disables the support of WFD Information Element (IE).
   ///
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be activated by wifi_direct_activate() and Wi-Fi Display must be enabled by wifi_direct_init_display().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_activate()`
+  /// - `wifi_direct_init_display()`
+  /// - `wifi_direct_set_display()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -7201,7 +8162,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_deinit_display() {
     return _wifi_direct_deinit_display();
   }
@@ -7212,33 +8173,45 @@ class Tizen65WifiDirect {
   late final _wifi_direct_deinit_display =
       _wifi_direct_deinit_displayPtr.asFunction<int Function()>();
 
-  /// @brief Sets the Wi-Fi Display parameters for the WFD IE of local device.
-  /// @since_tizen 2.4
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @param[in] type  WFD Device Type: define the Role of WFD device like source or sink
-  /// @param[in] port  Specifies Session Management Control Port number. It should be 2 bytes (0~65535)
-  /// @param[in] hdcp  CP support bit: (@c 1 = enable the hdcp support, @c 0 = disable the hdcp support)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @pre Wi-Fi Direct service must be activated by wifi_direct_activate()
-  /// and Wi-Fi Display must be enabled by wifi_direct_init_display().
-  /// @see wifi_direct_activate()
-  /// @see wifi_direct_init_display()
-  /// @see wifi_direct_deinit_display()
+  /// Sets the Wi-Fi Display parameters for the WFD IE of local device.
   ///
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Parameters:**
+  /// - `type` (in): WFD Device Type: define the Role of WFD device like source or sink
+  /// - `port` (in): Specifies Session Management Control Port number. It should be 2 bytes (0~65535)
+  /// - `hdcp` (in): CP support bit: (`1` = enable the hdcp support, `0` = disable the hdcp support)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be activated by wifi_direct_activate() and Wi-Fi Display must be enabled by wifi_direct_init_display().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_activate()`
+  /// - `wifi_direct_init_display()`
+  /// - `wifi_direct_deinit_display()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -7273,7 +8246,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_set_display(
     int type,
     int port,
@@ -7292,31 +8265,43 @@ class Tizen65WifiDirect {
   late final _wifi_direct_set_display =
       _wifi_direct_set_displayPtr.asFunction<int Function(int, int, int)>();
 
-  /// @brief Sets the Wi-Fi Display Session Availability.
-  /// @since_tizen 2.4
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @param[in] availability  Wi-Fi Display Session Availability
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @pre Wi-Fi Direct service must be activated by wifi_direct_activate()
-  /// and enable Wi-Fi Display by wifi_direct_init_display().
-  /// @see wifi_direct_activate()
-  /// @see wifi_direct_init_display()
-  /// @see wifi_direct_deinit_display()
+  /// Sets the Wi-Fi Display Session Availability.
   ///
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Parameters:**
+  /// - `availability` (in): Wi-Fi Display Session Availability
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be activated by wifi_direct_activate() and enable Wi-Fi Display by wifi_direct_init_display().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_activate()`
+  /// - `wifi_direct_init_display()`
+  /// - `wifi_direct_deinit_display()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -7355,7 +8340,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_set_display_availability(
     bool availability,
   ) {
@@ -7370,33 +8355,45 @@ class Tizen65WifiDirect {
   late final _wifi_direct_set_display_availability =
       _wifi_direct_set_display_availabilityPtr.asFunction<int Function(bool)>();
 
-  /// @brief Gets the Wi-Fi Display parameters for the WFD IE of local device.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @param[out] type  WFD device type: role of WFD device like source or sink
-  /// @param[out] port  Session management control port number, it will be of 2 bytes (0~65535)
-  /// @param[out] hdcp  CP support bit: (@c 1 = hdcp support is enabled, @c 0 = hdcp support is disabled)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @pre Wi-Fi Direct service must be activated by wifi_direct_activate()
-  /// and enable Wi-Fi Display by wifi_direct_init_display().
-  /// @see wifi_direct_activate()
-  /// @see wifi_direct_init_display()
-  /// @see wifi_direct_deinit_display()
+  /// Gets the Wi-Fi Display parameters for the WFD IE of local device.
   ///
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Parameters:**
+  /// - `type` (out): WFD device type: role of WFD device like source or sink
+  /// - `port` (out): Session management control port number, it will be of 2 bytes (0~65535)
+  /// - `hdcp` (out): CP support bit: (`1` = hdcp support is enabled, `0` = hdcp support is disabled)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be activated by wifi_direct_activate() and enable Wi-Fi Display by wifi_direct_init_display().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_activate()`
+  /// - `wifi_direct_init_display()`
+  /// - `wifi_direct_deinit_display()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -7434,7 +8431,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_get_display(
     ffi.Pointer<ffi.Int32> type,
     ffi.Pointer<ffi.Int> port,
@@ -7455,31 +8452,43 @@ class Tizen65WifiDirect {
       int Function(ffi.Pointer<ffi.Int32>, ffi.Pointer<ffi.Int>,
           ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the Wi-Fi Display Session Availability.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @param[out] availability  Wi-Fi display session availability
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @pre Wi-Fi Direct service must be activated by wifi_direct_activate()
-  /// and enable Wi-Fi Display by wifi_direct_init_display().
-  /// @see wifi_direct_activate()
-  /// @see wifi_direct_init_display()
-  /// @see wifi_direct_deinit_display()
+  /// Gets the Wi-Fi Display Session Availability.
   ///
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Parameters:**
+  /// - `availability` (out): Wi-Fi display session availability
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be activated by wifi_direct_activate() and enable Wi-Fi Display by wifi_direct_init_display().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_activate()`
+  /// - `wifi_direct_init_display()`
+  /// - `wifi_direct_deinit_display()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -7515,7 +8524,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_get_display_availability(
     ffi.Pointer<ffi.Bool> availability,
   ) {
@@ -7531,31 +8540,43 @@ class Tizen65WifiDirect {
       _wifi_direct_get_display_availabilityPtr
           .asFunction<int Function(ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Gets the information of a peer's Wi-Fi Display device type.
-  /// @since_tizen 2.4
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @param[in] mac_address MAC Address of the PEER
-  /// @param[out] type  The information of a peer's Wi-Fi Display device type
-  /// if there's Wi-Fi Direct information, this will be NULL
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @pre Wi-Fi Direct service must be activated by wifi_direct_activate().
-  /// @see wifi_direct_activate()
-  /// @see wifi_direct_foreach_discovered_peers()
+  /// Gets the information of a peer's Wi-Fi Display device type.
   ///
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Parameters:**
+  /// - `mac_address` (in): MAC Address of the PEER
+  /// - `type` (out): The information of a peer's Wi-Fi Display device type if there's Wi-Fi Direct information, this will be NULL
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be activated by wifi_direct_activate().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_activate()`
+  /// - `wifi_direct_foreach_discovered_peers()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -7596,7 +8617,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_get_peer_display_type(
     ffi.Pointer<ffi.Char> mac_address,
     ffi.Pointer<ffi.Int32> type,
@@ -7615,31 +8636,43 @@ class Tizen65WifiDirect {
       _wifi_direct_get_peer_display_typePtr.asFunction<
           int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the information of a peer's Wi-Fi Display session availability.
-  /// @since_tizen 2.4
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @param[in] mac_address MAC Address of the PEER
-  /// @param[out] availability  The information of a peer's Wi-Fi Display session availability
-  /// if there's Wi-Fi Direct information, this will be NULL
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @pre Wi-Fi Direct service must be activated by wifi_direct_activate().
-  /// @see wifi_direct_activate()
-  /// @see wifi_direct_foreach_discovered_peers()
+  /// Gets the information of a peer's Wi-Fi Display session availability.
   ///
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Parameters:**
+  /// - `mac_address` (in): MAC Address of the PEER
+  /// - `availability` (out): The information of a peer's Wi-Fi Display session availability if there's Wi-Fi Direct information, this will be NULL
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be activated by wifi_direct_activate().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_activate()`
+  /// - `wifi_direct_foreach_discovered_peers()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -7680,7 +8713,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_get_peer_display_availability(
     ffi.Pointer<ffi.Char> mac_address,
     ffi.Pointer<ffi.Bool> availability,
@@ -7699,31 +8732,43 @@ class Tizen65WifiDirect {
       _wifi_direct_get_peer_display_availabilityPtr.asFunction<
           int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Gets the information of a peer's Wi-Fi Display HDCP support.
-  /// @since_tizen 2.4
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @param[in] mac_address MAC Address of the PEER
-  /// @param[out] hdcp  The information of a peer's Wi-Fi Display HDCP support
-  /// if there's Wi-Fi Direct information, this will be NULL
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @pre Wi-Fi Direct service must be activated by wifi_direct_activate().
-  /// @see wifi_direct_activate()
-  /// @see wifi_direct_foreach_discovered_peers()
+  /// Gets the information of a peer's Wi-Fi Display HDCP support.
   ///
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Parameters:**
+  /// - `mac_address` (in): MAC Address of the PEER
+  /// - `hdcp` (out): The information of a peer's Wi-Fi Display HDCP support if there's Wi-Fi Direct information, this will be NULL
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be activated by wifi_direct_activate().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_activate()`
+  /// - `wifi_direct_foreach_discovered_peers()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -7764,7 +8809,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_get_peer_display_hdcp(
     ffi.Pointer<ffi.Char> mac_address,
     ffi.Pointer<ffi.Int> hdcp,
@@ -7783,31 +8828,43 @@ class Tizen65WifiDirect {
       _wifi_direct_get_peer_display_hdcpPtr.asFunction<
           int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the information of a peer's Wi-Fi Display RTSP control port.
-  /// @since_tizen 2.4
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @param[in] mac_address MAC Address of the PEER
-  /// @param[out] port  The information of a peer's Wi-Fi Display RTSP control port
-  /// if there's Wi-Fi Direct information, this will be NULL
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @pre Wi-Fi Direct service must be activated by wifi_direct_activate().
-  /// @see wifi_direct_activate()
-  /// @see wifi_direct_foreach_discovered_peers()
+  /// Gets the information of a peer's Wi-Fi Display RTSP control port.
   ///
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Parameters:**
+  /// - `mac_address` (in): MAC Address of the PEER
+  /// - `port` (out): The information of a peer's Wi-Fi Display RTSP control port if there's Wi-Fi Direct information, this will be NULL
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be activated by wifi_direct_activate().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_activate()`
+  /// - `wifi_direct_foreach_discovered_peers()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -7848,7 +8905,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_get_peer_display_port(
     ffi.Pointer<ffi.Char> mac_address,
     ffi.Pointer<ffi.Int> port,
@@ -7867,31 +8924,43 @@ class Tizen65WifiDirect {
       _wifi_direct_get_peer_display_portPtr.asFunction<
           int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the information of a peer's Wi-Fi Display max throughput.
-  /// @since_tizen 2.4
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @param[in] mac_address MAC Address of the PEER
-  /// @param[out] throughput  The information of a peer's Wi-Fi Display max throughput (Mbps)
-  /// if there's Wi-Fi Direct information, this will be NULL
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @pre Wi-Fi Direct service must be activated by wifi_direct_activate().
-  /// @see wifi_direct_activate()
-  /// @see wifi_direct_foreach_discovered_peers()
+  /// Gets the information of a peer's Wi-Fi Display max throughput.
   ///
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Parameters:**
+  /// - `mac_address` (in): MAC Address of the PEER
+  /// - `throughput` (out): The information of a peer's Wi-Fi Display max throughput (Mbps) if there's Wi-Fi Direct information, this will be NULL
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be activated by wifi_direct_activate().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_activate()`
+  /// - `wifi_direct_foreach_discovered_peers()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -7932,7 +9001,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_get_peer_display_throughput(
     ffi.Pointer<ffi.Char> mac_address,
     ffi.Pointer<ffi.Int> throughput,
@@ -7951,31 +9020,44 @@ class Tizen65WifiDirect {
       _wifi_direct_get_peer_display_throughputPtr.asFunction<
           int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Enables / Disables automatic group removal feature when all peers are disconnected.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @param[in] enable  Enables/Disables Group Removal feature based on the value TRUE/FALSE
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @pre Wi-Fi Direct service must be activated by wifi_direct_activate().
-  /// @post wifi_direct_connection_state_changed_cb() will be invoked with
-  /// #WIFI_DIRECT_GROUP_DESTROYED when there's no connected Group Client
-  /// if device is Group Owner and this feature is enabled.
-  /// @see wifi_direct_activate()
-  /// @see wifi_direct_create_group()
-  /// @see wifi_direct_connection_state_changed_cb()
+  /// Enables / Disables automatic group removal feature when all peers are disconnected.
   ///
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Parameters:**
+  /// - `enable` (in): Enables/Disables Group Removal feature based on the value TRUE/FALSE
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be activated by wifi_direct_activate().
+  ///
+  /// **Postconditions:**
+  /// - wifi_direct_connection_state_changed_cb() will be invoked with `WIFI_DIRECT_GROUP_DESTROYED` when there's no connected Group Client if device is Group Owner and this feature is enabled.
+  ///
+  /// **See also:**
+  /// - `wifi_direct_activate()`
+  /// - `wifi_direct_create_group()`
+  /// - `wifi_direct_connection_state_changed_cb()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -8010,7 +9092,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_set_auto_group_removal(
     bool enable,
   ) {
@@ -8025,28 +9107,41 @@ class Tizen65WifiDirect {
   late final _wifi_direct_set_auto_group_removal =
       _wifi_direct_set_auto_group_removalPtr.asFunction<int Function(bool)>();
 
-  /// @brief Sets the timer which is used to expire the connection session.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @param[in] seconds  Set the connection session timer value in seconds
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @pre Wi-Fi Direct service must be activated by wifi_direct_activate().
-  /// @see wifi_direct_activate()
+  /// Sets the timer which is used to expire the connection session.
   ///
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Parameters:**
+  /// - `seconds` (in): Set the connection session timer value in seconds
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be activated by wifi_direct_activate().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_activate()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -8085,7 +9180,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_set_session_timer(
     int seconds,
   ) {
@@ -8100,28 +9195,41 @@ class Tizen65WifiDirect {
   late final _wifi_direct_set_session_timer =
       _wifi_direct_set_session_timerPtr.asFunction<int Function(int)>();
 
-  /// @brief Gets the timer which is used to expire the connection session.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @param[out] seconds  Connection session timer value
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @pre Wi-Fi Direct service must be activated by wifi_direct_activate().
-  /// @see wifi_direct_activate()
+  /// Gets the timer which is used to expire the connection session.
   ///
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Parameters:**
+  /// - `seconds` (out): Connection session timer value
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be activated by wifi_direct_activate().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_activate()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -8157,7 +9265,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_get_session_timer(
     ffi.Pointer<ffi.Int> seconds,
   ) {
@@ -8172,29 +9280,42 @@ class Tizen65WifiDirect {
   late final _wifi_direct_get_session_timer = _wifi_direct_get_session_timerPtr
       .asFunction<int Function(ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the information of a peer's RSSI value.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @param[in] mac_address  MAC Address of the peer device
-  /// @param[out] rssi        RSSI value of the peer device
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @pre Wi-Fi Direct service must be initialized by wifi_direct_initialize().
-  /// @see wifi_direct_activate()
+  /// Gets the information of a peer's RSSI value.
   ///
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Parameters:**
+  /// - `mac_address` (in): MAC Address of the peer device
+  /// - `rssi` (out): RSSI value of the peer device
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be initialized by wifi_direct_initialize().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_activate()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -8235,7 +9356,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_get_peer_rssi(
     ffi.Pointer<ffi.Char> mac_address,
     ffi.Pointer<ffi.Int> rssi,
@@ -8253,32 +9374,47 @@ class Tizen65WifiDirect {
   late final _wifi_direct_get_peer_rssi = _wifi_direct_get_peer_rssiPtr
       .asFunction<int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Adds the Wi-Fi Vendor Specific Information Element (VSIE) to specific frame type.
-  /// @since_tizen 4.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @remarks @a vsie_str for @a frame_id will be in effect until Wi-Fi Direct is deactivated.
-  /// @param[in] frame_id frame ID for setting VSIE
-  /// @param[in] vsie_str VSIE data
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @pre Wi-Fi Direct service must be activated by wifi_direct_activate().
-  /// @see wifi_direct_activate()
-  /// @see wifi_direct_remove_vsie()
-  /// @see wifi_direct_get_vsie()
+  /// Adds the Wi-Fi Vendor Specific Information Element (VSIE) to specific frame type.
   ///
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Remarks:**
+  /// - `vsie_str` for `frame_id` will be in effect until Wi-Fi Direct is deactivated.
+  ///
+  /// **Parameters:**
+  /// - `frame_id` (in): frame ID for setting VSIE
+  /// - `vsie_str` (in): VSIE data
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be activated by wifi_direct_activate().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_activate()`
+  /// - `wifi_direct_remove_vsie()`
+  /// - `wifi_direct_get_vsie()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -8322,7 +9458,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_add_vsie(
     int frame_id,
     ffi.Pointer<ffi.Char> vsie_str,
@@ -8340,33 +9476,47 @@ class Tizen65WifiDirect {
   late final _wifi_direct_add_vsie = _wifi_direct_add_vsiePtr
       .asFunction<int Function(int, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the Wi-Fi Vendor Specific Information Elements (VSIE) from specific frame.
-  /// @since_tizen 4.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @remarks @a vsie_str must be released with free().
-  /// @param[in] frame_id  frame ID for setting VSIE
-  /// @param[out] vsie_str VSIE data
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @pre Wi-Fi Direct service must be activated by wifi_direct_activate()
-  /// and set VSIE for specific frame by wifi_direct_add_vsie().
-  /// @see wifi_direct_activate()
-  /// @see wifi_direct_add_vsie()
-  /// @see wifi_direct_remove_vsie()
+  /// Gets the Wi-Fi Vendor Specific Information Elements (VSIE) from specific frame.
   ///
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Remarks:**
+  /// - `vsie_str` must be released with free().
+  ///
+  /// **Parameters:**
+  /// - `frame_id` (in): frame ID for setting VSIE
+  /// - `vsie_str` (out): VSIE data
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be activated by wifi_direct_activate() and set VSIE for specific frame by wifi_direct_add_vsie().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_activate()`
+  /// - `wifi_direct_add_vsie()`
+  /// - `wifi_direct_remove_vsie()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -8407,7 +9557,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_get_vsie(
     int frame_id,
     ffi.Pointer<ffi.Pointer<ffi.Char>> vsie_str,
@@ -8425,33 +9575,47 @@ class Tizen65WifiDirect {
   late final _wifi_direct_get_vsie = _wifi_direct_get_vsiePtr
       .asFunction<int Function(int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Removes the Wi-Fi Vendor Specific Information Element (VSIE) from specific frame.
-  /// @since_tizen 4.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @remarks @a vsie_str for @a frame_id will be in effect until Wi-Fi Direct is deactivated.
-  /// @param[in] frame_id frame ID for removing VSIE
-  /// @param[in] vsie_str VSIE data
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @pre Wi-Fi Direct service must be activated by wifi_direct_activate()
-  /// and set VSIE for specific frame by wifi_direct_add_vsie().
-  /// @see wifi_direct_activate()
-  /// @see wifi_direct_add_vsie()
-  /// @see wifi_direct_get_vsie()
+  /// Removes the Wi-Fi Vendor Specific Information Element (VSIE) from specific frame.
   ///
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Remarks:**
+  /// - `vsie_str` for `frame_id` will be in effect until Wi-Fi Direct is deactivated.
+  ///
+  /// **Parameters:**
+  /// - `frame_id` (in): frame ID for removing VSIE
+  /// - `vsie_str` (in): VSIE data
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be activated by wifi_direct_activate() and set VSIE for specific frame by wifi_direct_add_vsie().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_activate()`
+  /// - `wifi_direct_add_vsie()`
+  /// - `wifi_direct_get_vsie()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -8495,7 +9659,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_remove_vsie(
     int frame_id,
     ffi.Pointer<ffi.Char> vsie_str,
@@ -8513,31 +9677,45 @@ class Tizen65WifiDirect {
   late final _wifi_direct_remove_vsie = _wifi_direct_remove_vsiePtr
       .asFunction<int Function(int, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the information of peer devices which is in the connecting state.
-  /// @since_tizen 4.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @remarks @a peer_info must be released with free().
-  /// @param[out] peer_info connecting peer device data
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @pre Wi-Fi Direct service must be connecting state by wifi_direct_connect()
-  /// or by receiving connection request from p2p peer device.
-  /// @see wifi_direct_activate()
-  /// @see wifi_direct_connect()
+  /// Gets the information of peer devices which is in the connecting state.
   ///
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// Here is an example of the usage:
-  /// @code
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Remarks:**
+  /// - `peer_info` must be released with free().
+  ///
+  /// **Parameters:**
+  /// - `peer_info` (out): connecting peer device data
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be connecting state by wifi_direct_connect() or by receiving connection request from p2p peer device.
+  ///
+  /// **See also:**
+  /// - `wifi_direct_activate()`
+  /// - `wifi_direct_connect()` Here is an example of the usage:
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <wifi_direct.h>
   ///
@@ -8650,7 +9828,7 @@ class Tizen65WifiDirect {
   /// wifi_direct_deinitialize(); // Deinitialize Wi-Fi Direct
   /// return 0;
   /// }
-  /// @endcode
+  /// ```
   int wifi_direct_get_connecting_peer_info(
     ffi.Pointer<ffi.Pointer<wifi_direct_discovered_peer_info_s>> peer_info,
   ) {
@@ -8670,28 +9848,44 @@ class Tizen65WifiDirect {
           int Function(
               ffi.Pointer<ffi.Pointer<wifi_direct_discovered_peer_info_s>>)>();
 
-  /// @brief Gets the vendor specific information element (VSIE) of a peer.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @remarks @a vsie must be released with free().
-  /// @param[in] mac_address MAC Address of the PEER
-  /// @param[out] vsie  The vendor specific information element (VSIE) of peer
-  /// if Wi-Fi Direct information is available, else it will be NULL.
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @pre Wi-Fi Direct service must be activated by wifi_direct_activate().
-  /// @see wifi_direct_activate()
-  /// @see wifi_direct_foreach_discovered_peers()
+  /// Gets the vendor specific information element (VSIE) of a peer.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Remarks:**
+  /// - `vsie` must be released with free().
+  ///
+  /// **Parameters:**
+  /// - `mac_address` (in): MAC Address of the PEER
+  /// - `vsie` (out): The vendor specific information element (VSIE) of peer if Wi-Fi Direct information is available, else it will be NULL.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be activated by wifi_direct_activate().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_activate()`
+  /// - `wifi_direct_foreach_discovered_peers()`
   int wifi_direct_get_peer_vsie(
     ffi.Pointer<ffi.Char> mac_address,
     ffi.Pointer<ffi.Pointer<ffi.Char>> vsie,
@@ -8712,25 +9906,39 @@ class Tizen65WifiDirect {
           int Function(
               ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets the advertizing WPS (Wi-Fi Protected Setup) type.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @param[in] type  The type of WPS. composition of #wifi_direct_config_method_type_e
-  /// for example #WIFI_DIRECT_CONFIG_METHOD_PBC|#WIFI_DIRECT_CONFIG_METHOD_PIN_DISPLAY
-  /// Use #WIFI_DIRECT_CONFIG_METHOD_DEFAULT to reset to default value
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @pre Wi-Fi Direct service must be initialized by wifi_direct_activate().
-  /// @see wifi_direct_initialize()
+  /// Sets the advertizing WPS (Wi-Fi Protected Setup) type.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Parameters:**
+  /// - `type` (in): The type of WPS. composition of `wifi_direct_config_method_type_e` for example `WIFI_DIRECT_CONFIG_METHOD_PBC`|`WIFI_DIRECT_CONFIG_METHOD_PIN_DISPLAY` Use `WIFI_DIRECT_CONFIG_METHOD_DEFAULT` to reset to default value
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be initialized by wifi_direct_activate().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_initialize()`
   int wifi_direct_set_wps_config_method(
     int type,
   ) {
@@ -8745,24 +9953,40 @@ class Tizen65WifiDirect {
   late final _wifi_direct_set_wps_config_method =
       _wifi_direct_set_wps_config_methodPtr.asFunction<int Function(int)>();
 
-  /// @brief Gets the advertizing WPS (Wi-Fi Protected Setup) type.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @param[out] type  The type of WPS. composition of #wifi_direct_config_method_type_e
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @pre Wi-Fi Direct service must be initialized by wifi_direct_initialize().
-  /// @pre Wi-Fi Direct service must be activated by wifi_direct_activate().
-  /// @see wifi_direct_initialize()
+  /// Gets the advertizing WPS (Wi-Fi Protected Setup) type.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Parameters:**
+  /// - `type` (out): The type of WPS. composition of `wifi_direct_config_method_type_e`
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be initialized by wifi_direct_initialize().
+  /// - Wi-Fi Direct service must be activated by wifi_direct_activate().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_initialize()`
   int wifi_direct_get_wps_config_method(
     ffi.Pointer<ffi.Int> type,
   ) {
@@ -8778,23 +10002,39 @@ class Tizen65WifiDirect {
       _wifi_direct_get_wps_config_methodPtr
           .asFunction<int Function(ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Removes a persistent device.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @param[in] mac_address  The MAC address of the persistent group owner
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @pre Wi-Fi Direct service must be initialized by wifi_direct_initialize().
-  /// @see wifi_direct_initialize()
+  /// Removes a persistent device.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Parameters:**
+  /// - `mac_address` (in): The MAC address of the persistent group owner
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be initialized by wifi_direct_initialize().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_initialize()`
   int wifi_direct_remove_persistent_device(
     ffi.Pointer<ffi.Char> mac_address,
   ) {
@@ -8810,21 +10050,35 @@ class Tizen65WifiDirect {
       _wifi_direct_remove_persistent_devicePtr
           .asFunction<int Function(ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Removes all persistent devices.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/wifidirect
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #WIFI_DIRECT_ERROR_NONE                  Successful
-  /// @retval #WIFI_DIRECT_ERROR_OPERATION_FAILED      Operation failed
-  /// @retval #WIFI_DIRECT_ERROR_COMMUNICATION_FAILED  Communication failed
-  /// @retval #WIFI_DIRECT_ERROR_PERMISSION_DENIED     Permission denied
-  /// @retval #WIFI_DIRECT_ERROR_NOT_PERMITTED         Operation not permitted
-  /// @retval #WIFI_DIRECT_ERROR_NOT_SUPPORTED         Not supported
-  /// @retval #WIFI_DIRECT_ERROR_NOT_INITIALIZED       Not initialized
-  /// @retval #WIFI_DIRECT_ERROR_RESOURCE_BUSY         Device or resource busy
-  /// @pre Wi-Fi Direct service must be initialized by wifi_direct_initialize().
-  /// @see wifi_direct_initialize()
+  /// Removes all persistent devices.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/wifidirect>
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_DIRECT_ERROR_NONE`: Successful
+  /// - `WIFI_DIRECT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_DIRECT_ERROR_COMMUNICATION_FAILED`: Communication failed
+  /// - `WIFI_DIRECT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_DIRECT_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `WIFI_DIRECT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_DIRECT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_DIRECT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi Direct service must be initialized by wifi_direct_initialize().
+  ///
+  /// **See also:**
+  /// - `wifi_direct_initialize()`
   int wifi_direct_remove_all_persistent_devices() {
     return _wifi_direct_remove_all_persistent_devices();
   }
@@ -8837,8 +10091,11 @@ class Tizen65WifiDirect {
           .asFunction<int Function()>();
 }
 
-/// @brief Enumeration for Wi-Fi Direct error code.
-/// @since_tizen 2.3
+/// Enumeration for Wi-Fi Direct error code.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 abstract class wifi_direct_error_e {
   /// < Successful
   static const int WIFI_DIRECT_ERROR_NONE = 0;
@@ -8895,10 +10152,15 @@ abstract class wifi_direct_error_e {
   static const int WIFI_DIRECT_ERROR_CONNECTION_CANCELED = -29753328;
 }
 
-/// @brief Enumeration for Wi-Fi Direct link status.
-/// @since_tizen 2.3
-/// @see wifi_direct_state_changed_cb()
-/// @see wifi_direct_get_state()
+/// Enumeration for Wi-Fi Direct link status.
+///
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **See also:**
+/// - `wifi_direct_state_changed_cb()`
+/// - `wifi_direct_get_state()`
+/// @nodoc
 abstract class wifi_direct_state_e {
   /// < Deactivated
   static const int WIFI_DIRECT_STATE_DEACTIVATED = 0;
@@ -8928,9 +10190,14 @@ abstract class wifi_direct_state_e {
   static const int WIFI_DIRECT_STATE_GROUP_OWNER = 8;
 }
 
-/// @brief Enumeration for Wi-Fi Direct device state.
-/// @since_tizen 2.3
-/// @see wifi_direct_device_state_changed_cb()
+/// Enumeration for Wi-Fi Direct device state.
+///
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **See also:**
+/// - `wifi_direct_device_state_changed_cb()`
+/// @nodoc
 abstract class wifi_direct_device_state_e {
   /// < Activated
   static const int WIFI_DIRECT_DEVICE_STATE_ACTIVATED = 0;
@@ -8939,10 +10206,15 @@ abstract class wifi_direct_device_state_e {
   static const int WIFI_DIRECT_DEVICE_STATE_DEACTIVATED = 1;
 }
 
-/// @brief Enumeration for Wi-Fi Direct discovery state.
-/// @since_tizen 2.3
-/// @see wifi_direct_discovery_state_chagned_cb()
-/// @see wifi_direct_peer_found_cb()
+/// Enumeration for Wi-Fi Direct discovery state.
+///
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **See also:**
+/// - `wifi_direct_discovery_state_chagned_cb()`
+/// - `wifi_direct_peer_found_cb()`
+/// @nodoc
 abstract class wifi_direct_discovery_state_e {
   /// < Only listen started
   static const int WIFI_DIRECT_ONLY_LISTEN_STARTED = 0;
@@ -8960,9 +10232,14 @@ abstract class wifi_direct_discovery_state_e {
   static const int WIFI_DIRECT_DISCOVERY_LOST = 4;
 }
 
-/// @brief Enumeration for Wi-Fi Direct connection state.
-/// @since_tizen 2.3
-/// @see wifi_direct_connection_state_changed_cb()
+/// Enumeration for Wi-Fi Direct connection state.
+///
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **See also:**
+/// - `wifi_direct_connection_state_changed_cb()`
+/// @nodoc
 abstract class wifi_direct_connection_state_e {
   /// < Connection is requested
   static const int WIFI_DIRECT_CONNECTION_REQ = 0;
@@ -8992,8 +10269,11 @@ abstract class wifi_direct_connection_state_e {
   static const int WIFI_DIRECT_GROUP_DESTROYED = 8;
 }
 
-/// @brief Enumeration for WPS Config Method type.
-/// @since_tizen 5.0
+/// Enumeration for WPS Config Method type.
+///
+/// **Since Tizen:**
+/// - 5.0
+/// @nodoc
 abstract class wifi_direct_config_method_type_e {
   /// < Use default config method
   static const int WIFI_DIRECT_CONFIG_METHOD_DEFAULT = 0;
@@ -9008,9 +10288,14 @@ abstract class wifi_direct_config_method_type_e {
   static const int WIFI_DIRECT_CONFIG_METHOD_PIN_KEYPAD = 4;
 }
 
-/// @brief Enumeration for Wi-Fi Direct secondary device type.
-/// @since_tizen 2.3
-/// @see wifi_direct_get_secondary_device_type()
+/// Enumeration for Wi-Fi Direct secondary device type.
+///
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **See also:**
+/// - `wifi_direct_get_secondary_device_type()`
+/// @nodoc
 abstract class wifi_direct_secondary_device_type_e {
   /// < PC
   static const int WIFI_DIRECT_SECONDARY_DEVICE_TYPE_COMPUTER_PC = 1;
@@ -9187,9 +10472,14 @@ abstract class wifi_direct_secondary_device_type_e {
   static const int WIFI_DIRECT_SECONDARY_DEVICE_TYPE_AUDIO_MIC = 6;
 }
 
-/// @brief Enumeration for Wi-Fi Direct primary device type.
-/// @since_tizen 2.3
-/// @see wifi_direct_get_primary_device_type()
+/// Enumeration for Wi-Fi Direct primary device type.
+///
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **See also:**
+/// - `wifi_direct_get_primary_device_type()`
+/// @nodoc
 abstract class wifi_direct_primary_device_type_e {
   /// < Computer
   static const int WIFI_DIRECT_PRIMARY_DEVICE_TYPE_COMPUTER = 1;
@@ -9228,12 +10518,17 @@ abstract class wifi_direct_primary_device_type_e {
   static const int WIFI_DIRECT_PRIMARY_DEVICE_TYPE_OTHER = 255;
 }
 
-/// @brief Enumeration for Wi-Fi WPS type.
-/// @since_tizen 2.3
-/// @see wifi_direct_supported_wps_type_cb()
-/// @see wifi_direct_get_local_wps_type()
-/// @see wifi_direct_set_req_wps_type()
-/// @see wifi_direct_get_req_wps_type()
+/// Enumeration for Wi-Fi WPS type.
+///
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **See also:**
+/// - `wifi_direct_supported_wps_type_cb()`
+/// - `wifi_direct_get_local_wps_type()`
+/// - `wifi_direct_set_req_wps_type()`
+/// - `wifi_direct_get_req_wps_type()`
+/// @nodoc
 abstract class wifi_direct_wps_type_e {
   /// < No WPS type
   static const int WIFI_DIRECT_WPS_TYPE_NONE = 0;
@@ -9248,9 +10543,13 @@ abstract class wifi_direct_wps_type_e {
   static const int WIFI_DIRECT_WPS_TYPE_PIN_KEYPAD = 4;
 }
 
-/// @deprecated Deprecated since 5.0. Use #wifi_direct_display_type_e instead.
-/// @brief Enumeration for Wi-Fi Display device type.
-/// @since_tizen 2.3
+/// **Deprecated:** Deprecated since 5.0. Use `wifi_direct_display_type_e` instead.
+///
+/// Enumeration for Wi-Fi Display device type.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 abstract class wifi_display_type_e {
   /// < Configure as WFD Source
   static const int WIFI_DISPLAY_TYPE_NONE = 0;
@@ -9268,12 +10567,17 @@ abstract class wifi_display_type_e {
   static const int WIFI_DISPLAY_TYPE_MAX = 4;
 }
 
-/// @brief Enumeration for Service Discovery type.
-/// @since_tizen 2.3
-/// @see wifi_direct_service_state_changed_cb()
-/// @see wifi_direct_start_service_discovery()
-/// @see wifi_direct_cancel_service_discovery()
-/// @see wifi_direct_register_service()
+/// Enumeration for Service Discovery type.
+///
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **See also:**
+/// - `wifi_direct_service_state_changed_cb()`
+/// - `wifi_direct_start_service_discovery()`
+/// - `wifi_direct_cancel_service_discovery()`
+/// - `wifi_direct_register_service()`
+/// @nodoc
 abstract class wifi_direct_service_type_e {
   /// < Service discovery type all
   static const int WIFI_DIRECT_SERVICE_TYPE_ALL = 0;
@@ -9300,10 +10604,15 @@ abstract class wifi_direct_service_type_e {
   static const int WIFI_DIRECT_SERVICE_TYPE_VENDOR = 255;
 }
 
-/// @brief Enumeration for Wi-Fi Display device type.
-/// @since_tizen 2.4
-/// @see wifi_direct_set_display()
-/// @see wifi_direct_get_peer_display_type()
+/// Enumeration for Wi-Fi Display device type.
+///
+/// **Since Tizen:**
+/// - 2.4
+///
+/// **See also:**
+/// - `wifi_direct_set_display()`
+/// - `wifi_direct_get_peer_display_type()`
+/// @nodoc
 abstract class wifi_direct_display_type_e {
   /// < Configure as WFD Source
   static const int WIFI_DIRECT_DISPLAY_TYPE_SOURCE = 0;
@@ -9321,9 +10630,14 @@ abstract class wifi_direct_display_type_e {
   static const int WIFI_DIRECT_DISPLAY_TYPE_MAX = 4;
 }
 
-/// @brief Enumeration for Wi-Fi Direct service Discovery state.
-/// @since_tizen 2.3
-/// @see wifi_direct_service_state_changed_cb()
+/// Enumeration for Wi-Fi Direct service Discovery state.
+///
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **See also:**
+/// - `wifi_direct_service_state_changed_cb()`
+/// @nodoc
 abstract class wifi_direct_service_discovery_state_e {
   /// < Service discovery started
   static const int WIFI_DIRECT_SERVICE_DISCOVERY_STARTED = 0;
@@ -9335,9 +10649,14 @@ abstract class wifi_direct_service_discovery_state_e {
   static const int WIFI_DIRECT_SERVICE_DISCOVERY_FINISHED = 2;
 }
 
-/// @brief Enumeration for Wi-Fi Direct Discovery Channel.
-/// @since_tizen 2.3
-/// @see wifi_direct_start_discovery_specific_channel()
+/// Enumeration for Wi-Fi Direct Discovery Channel.
+///
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **See also:**
+/// - `wifi_direct_start_discovery_specific_channel()`
+/// @nodoc
 abstract class wifi_direct_discovery_channel_e {
   /// < Scan full channel
   static const int WIFI_DIRECT_DISCOVERY_FULL_SCAN = 0;
@@ -9355,11 +10674,16 @@ abstract class wifi_direct_discovery_channel_e {
   static const int WIFI_DIRECT_DISCOVERY_CHANNEL11 = 11;
 }
 
-/// @brief Enumeration for Wi-Fi Frame type.
-/// @since_tizen 4.0
-/// @see wifi_direct_add_vsie()
-/// @see wifi_direct_remove_vsie()
-/// @see wifi_direct_get_vsie()
+/// Enumeration for Wi-Fi Frame type.
+///
+/// **Since Tizen:**
+/// - 4.0
+///
+/// **See also:**
+/// - `wifi_direct_add_vsie()`
+/// - `wifi_direct_remove_vsie()`
+/// - `wifi_direct_get_vsie()`
+/// @nodoc
 abstract class wifi_direct_vsie_frames_e {
   /// P2P probe request frame
   static const int WIFI_DIRECT_VSIE_FRAME_P2P_PROBE_REQ = 0;
@@ -9404,8 +10728,11 @@ abstract class wifi_direct_vsie_frames_e {
   static const int WIFI_DIRECT_VSIE_FRAME_ASSOC_REQ = 13;
 }
 
-/// @brief Wi-Fi Direct connection state structure to store result of new connection state callback.
-/// @since_tizen 5.0
+/// Wi-Fi Direct connection state structure to store result of new connection state callback.
+///
+/// **Since Tizen:**
+/// - 5.0
+/// @nodoc
 final class wifi_direct_connection_state_cb_data_s extends ffi.Struct {
   /// < Null-terminated device friendly name.
   @ffi.Array.multi([33])
@@ -9416,13 +10743,20 @@ final class wifi_direct_connection_state_cb_data_s extends ffi.Struct {
   external ffi.Array<ffi.Char> mac_address;
 }
 
-/// @brief Wi-Fi Direct buffer structure to store result of peer discovery.
-/// @since_tizen 2.3
-/// @remarks You can use APIs for Wi-Fi Direct display function instead of is_miracast_device value
-/// which is deprecated since 2.4.
-/// @see wifi_direct_discovered_peer_cb()
-/// @see wifi_direct_get_peer_info()
-/// @see wifi_direct_get_connecting_peer_info()
+/// Wi-Fi Direct buffer structure to store result of peer discovery.
+///
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **Remarks:**
+/// - You can use APIs for Wi-Fi Direct display function instead of is_miracast_device value
+/// - which is deprecated since 2.4.
+///
+/// **See also:**
+/// - `wifi_direct_discovered_peer_cb()`
+/// - `wifi_direct_get_peer_info()`
+/// - `wifi_direct_get_connecting_peer_info()`
+/// @nodoc
 final class wifi_direct_discovered_peer_info_s extends ffi.Struct {
   /// Device's friendly name
   external ffi.Pointer<ffi.Char> device_name;
@@ -9474,23 +10808,30 @@ final class wifi_direct_discovered_peer_info_s extends ffi.Struct {
   /// The list of registered services
   external ffi.Pointer<ffi.Pointer<ffi.Char>> service_list;
 
+  /// **Deprecated:** Deprecated since 2.4, use wifi direct display APIs instead of is_miracast_device value.
+  ///
   /// Is a wifi display device
-  /// @deprecated Deprecated since 2.4, use wifi direct display APIs instead of
-  /// is_miracast_device value.
   @ffi.Bool()
   external bool is_miracast_device;
 
+  /// **Deprecated:** Deprecated since 5.0, use wifi_direct_get_peer_vsie() API instead of vsie_info value.
+  ///
   /// The information for vendor specific information element
-  /// @deprecated Deprecated since 5.0, use wifi_direct_get_peer_vsie() API instead of
-  /// vsie_info value.
   external ffi.Pointer<ffi.Void> vsie_info;
 }
 
-/// @brief Wi-Fi Direct buffer structure to store information of connected peer.
-/// @since_tizen 2.3
-/// @remarks You can use APIs for wifi-direct display function instead of is_miracast_device value
-/// which is deprecated since 2.4.
-/// @see wifi_direct_connected_peer_cb()
+/// Wi-Fi Direct buffer structure to store information of connected peer.
+///
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **Remarks:**
+/// - You can use APIs for wifi-direct display function instead of is_miracast_device value
+/// - which is deprecated since 2.4.
+///
+/// **See also:**
+/// - `wifi_direct_connected_peer_cb()`
+/// @nodoc
 final class wifi_direct_connected_peer_info_s extends ffi.Struct {
   /// Device's friendly name
   external ffi.Pointer<ffi.Char> device_name;
@@ -9527,155 +10868,192 @@ final class wifi_direct_connected_peer_info_s extends ffi.Struct {
   /// The list of registered services
   external ffi.Pointer<ffi.Pointer<ffi.Char>> service_list;
 
+  /// **Deprecated:** since tizen 2.4, use wifi direct display APIs instead of is_miracast_device value.
+  ///
   /// Is a wifi display device
-  /// @deprecated since tizen 2.4, use wifi direct display APIs instead of
-  /// is_miracast_device value.
   @ffi.Bool()
   external bool is_miracast_device;
 }
 
-/// @brief Called when the state of device is changed.
-/// @details The following error codes can be delivered
-/// #WIFI_DIRECT_ERROR_NONE
-/// #WIFI_DIRECT_ERROR_OPERATION_FAILED
-/// #WIFI_DIRECT_ERROR_NOT_PERMITTED
-/// @since_tizen 2.3
-/// @param[in] error_code    The error code
-/// @param[in] device_state  The device state
-/// @param[in] user_data     The user data passed from the callback registration function
-/// @pre Either wifi_direct_activate() or wifi_direct_deactivate() will invoke
-/// this callback in the thread-default main context of the thread from which you
-/// registered this callback using wifi_direct_set_device_state_changed_cb().
-/// @see wifi_direct_activate()
-/// @see wifi_direct_deactivate()
-/// @see wifi_direct_set_device_state_changed_cb()
-/// @see wifi_direct_unset_device_state_changed_cb()
+/// Called when the state of device is changed.
+///
+/// The following error codes can be delivered `WIFI_DIRECT_ERROR_NONE` `WIFI_DIRECT_ERROR_OPERATION_FAILED` `WIFI_DIRECT_ERROR_NOT_PERMITTED`
+///
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **Parameters:**
+/// - `error_code` (in): The error code
+/// - `device_state` (in): The device state
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - Either wifi_direct_activate() or wifi_direct_deactivate() will invoke this callback in the thread-default main context of the thread from which you registered this callback using wifi_direct_set_device_state_changed_cb().
+///
+/// **See also:**
+/// - `wifi_direct_activate()`
+/// - `wifi_direct_deactivate()`
+/// - `wifi_direct_set_device_state_changed_cb()`
+/// - `wifi_direct_unset_device_state_changed_cb()`
+/// @nodoc
 typedef wifi_direct_device_state_changed_cb = ffi
     .Pointer<ffi.NativeFunction<wifi_direct_device_state_changed_cbFunction>>;
+/// @nodoc
 typedef wifi_direct_device_state_changed_cbFunction = ffi.Void Function(
     ffi.Int error_code,
     ffi.Int32 device_state,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartwifi_direct_device_state_changed_cbFunction = void Function(
     int error_code, int device_state, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the state of discovery is changed.
-/// @details The following error codes can be delivered
-/// #WIFI_DIRECT_ERROR_NONE
-/// #WIFI_DIRECT_ERROR_OPERATION_FAILED
-/// #WIFI_DIRECT_ERROR_NOT_PERMITTED
-/// @since_tizen 2.3
-/// @param[in] error_code       The error code
-/// @param[in] discovery_state  The discovery state
-/// @param[in] user_data        The user data passed from the callback registration function
-/// @pre Either wifi_direct_start_discovery() or wifi_direct_cancel_discovery()
-/// will invoke this callback in the thread-default main context of the thread
-/// from which you registered this callback using wifi_direct_set_discovery_state_changed_cb().
-/// @see wifi_direct_start_discovery()
-/// @see wifi_direct_cancel_discovery()
-/// @see wifi_direct_set_discovery_state_changed_cb()
-/// @see wifi_direct_unset_discovery_state_changed_cb()
+/// Called when the state of discovery is changed.
+///
+/// The following error codes can be delivered `WIFI_DIRECT_ERROR_NONE` `WIFI_DIRECT_ERROR_OPERATION_FAILED` `WIFI_DIRECT_ERROR_NOT_PERMITTED`
+///
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **Parameters:**
+/// - `error_code` (in): The error code
+/// - `discovery_state` (in): The discovery state
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - Either wifi_direct_start_discovery() or wifi_direct_cancel_discovery() will invoke this callback in the thread-default main context of the thread from which you registered this callback using wifi_direct_set_discovery_state_changed_cb().
+///
+/// **See also:**
+/// - `wifi_direct_start_discovery()`
+/// - `wifi_direct_cancel_discovery()`
+/// - `wifi_direct_set_discovery_state_changed_cb()`
+/// - `wifi_direct_unset_discovery_state_changed_cb()`
+/// @nodoc
 typedef wifi_direct_discovery_state_chagned_cb = ffi.Pointer<
     ffi.NativeFunction<wifi_direct_discovery_state_chagned_cbFunction>>;
+/// @nodoc
 typedef wifi_direct_discovery_state_chagned_cbFunction = ffi.Void Function(
     ffi.Int error_code,
     ffi.Int32 discovery_state,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartwifi_direct_discovery_state_chagned_cbFunction = void Function(
     int error_code, int discovery_state, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the peer is found.
-/// @details The following error codes can be delivered
-/// #WIFI_DIRECT_ERROR_NONE
-/// #WIFI_DIRECT_ERROR_OPERATION_FAILED
-/// #WIFI_DIRECT_ERROR_NOT_PERMITTED
-/// @since_tizen 2.3
-/// @remarks The @a mac_address can be used only in the callback. To use outside, make a copy.
-/// @param[in] error_code       The error code
-/// @param[in] discovery_state  The discovery state
-/// @param[in] mac_address      The MAC address of found peer
-/// @param[in] user_data        The user data passed from the callback registration function
-/// @pre Either wifi_direct_start_discovery() or wifi_direct_cancel_discovery()
-/// will invoke this callback in the thread-default main context of the thread
-/// from which you registered this callback using wifi_direct_set_peer_found_cb().
-/// @see wifi_direct_start_discovery()
-/// @see wifi_direct_cancel_discovery()
-/// @see wifi_direct_set_peer_found_cb()
-/// @see wifi_direct_unset_peer_found_cb()
+/// Called when the peer is found.
+///
+/// The following error codes can be delivered `WIFI_DIRECT_ERROR_NONE` `WIFI_DIRECT_ERROR_OPERATION_FAILED` `WIFI_DIRECT_ERROR_NOT_PERMITTED`
+///
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **Remarks:**
+/// - The `mac_address` can be used only in the callback. To use outside, make a copy.
+///
+/// **Parameters:**
+/// - `error_code` (in): The error code
+/// - `discovery_state` (in): The discovery state
+/// - `mac_address` (in): The MAC address of found peer
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - Either wifi_direct_start_discovery() or wifi_direct_cancel_discovery() will invoke this callback in the thread-default main context of the thread from which you registered this callback using wifi_direct_set_peer_found_cb().
+///
+/// **See also:**
+/// - `wifi_direct_start_discovery()`
+/// - `wifi_direct_cancel_discovery()`
+/// - `wifi_direct_set_peer_found_cb()`
+/// - `wifi_direct_unset_peer_found_cb()`
+/// @nodoc
 typedef wifi_direct_peer_found_cb
     = ffi.Pointer<ffi.NativeFunction<wifi_direct_peer_found_cbFunction>>;
+/// @nodoc
 typedef wifi_direct_peer_found_cbFunction = ffi.Void Function(
     ffi.Int error_code,
     ffi.Int32 discovery_state,
     ffi.Pointer<ffi.Char> mac_address,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartwifi_direct_peer_found_cbFunction = void Function(
     int error_code,
     int discovery_state,
     ffi.Pointer<ffi.Char> mac_address,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the state of connection is changed.
-/// @details The following error codes can be delivered
-/// #WIFI_DIRECT_ERROR_NONE
-/// #WIFI_DIRECT_ERROR_OPERATION_FAILED
-/// #WIFI_DIRECT_ERROR_NOT_PERMITTED
-/// #WIFI_DIRECT_ERROR_CONNECTION_FAILED
-/// @since_tizen 2.3
-/// @remarks The @a mac_address can be used only in the callback. To use outside, make a copy.
-/// @param[in] error_code        The error code
-/// @param[in] connection_state  The connection state
-/// @param[in] mac_address       The MAC address of the connection peer
-/// @param[in] user_data         The user data passed from the callback registration function
-/// @pre wifi_direct_create_group(), wifi_direct_destroy_group(),
-/// wifi_direct_connect(), wifi_direct_disconnect() or
-/// wifi_direct_disconnect_all() will invoke this callback in the thread-default
-/// main context of the thread from which you registered this callback using
-/// using wifi_direct_set_connection_state_changed_cb().
-/// @see wifi_direct_connect()
-/// @see wifi_direct_disconnect()
-/// @see wifi_direct_disconnect_all()
-/// @see wifi_direct_set_connection_state_changed_cb()
-/// @see wifi_direct_unset_connection_state_changed_cb()
+/// Called when the state of connection is changed.
+///
+/// The following error codes can be delivered `WIFI_DIRECT_ERROR_NONE` `WIFI_DIRECT_ERROR_OPERATION_FAILED` `WIFI_DIRECT_ERROR_NOT_PERMITTED` `WIFI_DIRECT_ERROR_CONNECTION_FAILED`
+///
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **Remarks:**
+/// - The `mac_address` can be used only in the callback. To use outside, make a copy.
+///
+/// **Parameters:**
+/// - `error_code` (in): The error code
+/// - `connection_state` (in): The connection state
+/// - `mac_address` (in): The MAC address of the connection peer
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - wifi_direct_create_group(), wifi_direct_destroy_group(), wifi_direct_connect(), wifi_direct_disconnect() or wifi_direct_disconnect_all() will invoke this callback in the thread-default main context of the thread from which you registered this callback using using wifi_direct_set_connection_state_changed_cb().
+///
+/// **See also:**
+/// - `wifi_direct_connect()`
+/// - `wifi_direct_disconnect()`
+/// - `wifi_direct_disconnect_all()`
+/// - `wifi_direct_set_connection_state_changed_cb()`
+/// - `wifi_direct_unset_connection_state_changed_cb()`
+/// @nodoc
 typedef wifi_direct_connection_state_changed_cb = ffi.Pointer<
     ffi.NativeFunction<wifi_direct_connection_state_changed_cbFunction>>;
+/// @nodoc
 typedef wifi_direct_connection_state_changed_cbFunction = ffi.Void Function(
     ffi.Int error_code,
     ffi.Int32 connection_state,
     ffi.Pointer<ffi.Char> mac_address,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartwifi_direct_connection_state_changed_cbFunction = void Function(
     int error_code,
     int connection_state,
     ffi.Pointer<ffi.Char> mac_address,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the state of connection is changed.
-/// @details The following error codes can be delivered:\n
-/// #WIFI_DIRECT_ERROR_NONE\n
-/// #WIFI_DIRECT_ERROR_OPERATION_FAILED\n
-/// #WIFI_DIRECT_ERROR_NOT_PERMITTED
-/// @since_tizen 5.0
-/// @param[in] error_code  The error code
-/// @param[in] connection_state  The connection state
-/// @param[in] data_s The structure for peer data
-/// @param[in] user_data  The user data passed from the callback registration function
-/// @pre wifi_direct_create_group(), wifi_direct_destroy_group(), wifi_direct_connect(), wifi_direct_disconnect() or wifi_direct_disconnect_all() will invoke this callback
-/// if you register this callback using wifi_direct_set_peer_info_connection_state_changed_cb().
-/// @see wifi_direct_connect()
-/// @see wifi_direct_disconnect()
-/// @see wifi_direct_disconnect_all()
-/// @see wifi_direct_set_peer_info_connection_state_changed_cb()
-/// @see wifi_direct_unset_peer_info_connection_state_changed_cb()
+/// Called when the state of connection is changed.
+///
+/// The following error codes can be delivered: `WIFI_DIRECT_ERROR_NONE` `WIFI_DIRECT_ERROR_OPERATION_FAILED` `WIFI_DIRECT_ERROR_NOT_PERMITTED`
+///
+/// **Since Tizen:**
+/// - 5.0
+///
+/// **Parameters:**
+/// - `error_code` (in): The error code
+/// - `connection_state` (in): The connection state
+/// - `data_s` (in): The structure for peer data
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - wifi_direct_create_group(), wifi_direct_destroy_group(), wifi_direct_connect(), wifi_direct_disconnect() or wifi_direct_disconnect_all() will invoke this callback if you register this callback using wifi_direct_set_peer_info_connection_state_changed_cb().
+///
+/// **See also:**
+/// - `wifi_direct_connect()`
+/// - `wifi_direct_disconnect()`
+/// - `wifi_direct_disconnect_all()`
+/// - `wifi_direct_set_peer_info_connection_state_changed_cb()`
+/// - `wifi_direct_unset_peer_info_connection_state_changed_cb()`
+/// @nodoc
 typedef wifi_direct_peer_info_connection_state_changed_cb = ffi.Pointer<
     ffi
     .NativeFunction<wifi_direct_peer_info_connection_state_changed_cbFunction>>;
+/// @nodoc
 typedef wifi_direct_peer_info_connection_state_changed_cbFunction
     = ffi.Void Function(
         ffi.Int32 error_code,
         ffi.Int32 connection_state,
         wifi_direct_connection_state_cb_data_s data_s,
         ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartwifi_direct_peer_info_connection_state_changed_cbFunction
     = void Function(
         int error_code,
@@ -9683,59 +11061,76 @@ typedef Dartwifi_direct_peer_info_connection_state_changed_cbFunction
         wifi_direct_connection_state_cb_data_s data_s,
         ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when IP address of client is assigned when your device is the group owner.
-/// @details The following error codes can be delivered
-/// #WIFI_DIRECT_ERROR_NONE
-/// #WIFI_DIRECT_ERROR_OPERATION_FAILED
-/// #WIFI_DIRECT_ERROR_NOT_PERMITTED
-/// @since_tizen 2.3
-/// @remarks The @a mac_address can be used only in the callback. To use outside, make a copy.
-/// The @a ip_address can be used only in the callback. To use outside, make a copy.
-/// The @a interface_address can be used only in the callback. To use outside, make a copy.
-/// @param[in] mac_address        The MAC address of connection peer
-/// @param[in] ip_address         The IP address of connection peer
-/// @param[in] interface_address  The interface address of connection peer
-/// @param[in] user_data          The user data passed from the callback registration function
-/// @pre This callback will be invoked in the thread-default main context of the
-/// thread from which you registered this callback using wifi_direct_set_client_ip_address_assigned_cb().
-/// @see wifi_direct_set_client_ip_address_assigned_cb()
-/// @see wifi_direct_unset_client_ip_address_assigned_cb()
+/// Called when IP address of client is assigned when your device is the group owner.
+///
+/// The following error codes can be delivered `WIFI_DIRECT_ERROR_NONE` `WIFI_DIRECT_ERROR_OPERATION_FAILED` `WIFI_DIRECT_ERROR_NOT_PERMITTED`
+///
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **Remarks:**
+/// - The `mac_address` can be used only in the callback. To use outside, make a copy.
+/// - The `ip_address` can be used only in the callback. To use outside, make a copy.
+/// - The `interface_address` can be used only in the callback. To use outside, make a copy.
+///
+/// **Parameters:**
+/// - `mac_address` (in): The MAC address of connection peer
+/// - `ip_address` (in): The IP address of connection peer
+/// - `interface_address` (in): The interface address of connection peer
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - This callback will be invoked in the thread-default main context of the thread from which you registered this callback using wifi_direct_set_client_ip_address_assigned_cb().
+///
+/// **See also:**
+/// - `wifi_direct_set_client_ip_address_assigned_cb()`
+/// - `wifi_direct_unset_client_ip_address_assigned_cb()`
+/// @nodoc
 typedef wifi_direct_client_ip_address_assigned_cb = ffi.Pointer<
     ffi.NativeFunction<wifi_direct_client_ip_address_assigned_cbFunction>>;
+/// @nodoc
 typedef wifi_direct_client_ip_address_assigned_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> mac_address,
     ffi.Pointer<ffi.Char> ip_address,
     ffi.Pointer<ffi.Char> interface_address,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartwifi_direct_client_ip_address_assigned_cbFunction = void Function(
     ffi.Pointer<ffi.Char> mac_address,
     ffi.Pointer<ffi.Char> ip_address,
     ffi.Pointer<ffi.Char> interface_address,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the state of Service discovery is changed.
-/// @details The following error codes can be delivered
-/// #WIFI_DIRECT_ERROR_NONE
-/// #WIFI_DIRECT_ERROR_OPERATION_FAILED
-/// #WIFI_DIRECT_ERROR_NOT_PERMITTED
-/// @since_tizen 2.3
-/// @remarks The @a mac_address can be used only in the callback. To use outside, make a copy.
-/// @param[in] error_code     The error code
-/// @param[in] service_state  The service discovery state
-/// @param[in] service_type   Specifies the types of service
-/// @param[in] response_data  Received response
-/// @param[in] mac_address    The MAC address of the connection peer
-/// @param[in] user_data      User can transfer the user specific data in callback
-/// @pre Either wifi_direct_start_service_discovery() or
-/// wifi_direct_cancel_service_discovery() will invoke this callback in the
-/// thread-default main context of the thread from which you registered this
-/// callback using wifi_direct_set_service_state_changed_cb().
-/// @see wifi_direct_start_discovery()
-/// @see wifi_direct_cancel_discovery()
-/// @see wifi_direct_set_discovery_state_changed_cb()
-/// @see wifi_direct_unset_discovery_state_changed_cb()
+/// Called when the state of Service discovery is changed.
+///
+/// The following error codes can be delivered `WIFI_DIRECT_ERROR_NONE` `WIFI_DIRECT_ERROR_OPERATION_FAILED` `WIFI_DIRECT_ERROR_NOT_PERMITTED`
+///
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **Remarks:**
+/// - The `mac_address` can be used only in the callback. To use outside, make a copy.
+///
+/// **Parameters:**
+/// - `error_code` (in): The error code
+/// - `service_state` (in): The service discovery state
+/// - `service_type` (in): Specifies the types of service
+/// - `response_data` (in): Received response
+/// - `mac_address` (in): The MAC address of the connection peer
+/// - `user_data` (in): User can transfer the user specific data in callback
+///
+/// **Preconditions:**
+/// - Either wifi_direct_start_service_discovery() or wifi_direct_cancel_service_discovery() will invoke this callback in the thread-default main context of the thread from which you registered this callback using wifi_direct_set_service_state_changed_cb().
+///
+/// **See also:**
+/// - `wifi_direct_start_discovery()`
+/// - `wifi_direct_cancel_discovery()`
+/// - `wifi_direct_set_discovery_state_changed_cb()`
+/// - `wifi_direct_unset_discovery_state_changed_cb()`
+/// @nodoc
 typedef wifi_direct_service_state_changed_cb = ffi
     .Pointer<ffi.NativeFunction<wifi_direct_service_state_changed_cbFunction>>;
+/// @nodoc
 typedef wifi_direct_service_state_changed_cbFunction = ffi.Void Function(
     ffi.Int error_code,
     ffi.Int32 service_state,
@@ -9743,6 +11138,7 @@ typedef wifi_direct_service_state_changed_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Void> response_data,
     ffi.Pointer<ffi.Char> mac_address,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartwifi_direct_service_state_changed_cbFunction = void Function(
     int error_code,
     int service_state,
@@ -9751,92 +11147,154 @@ typedef Dartwifi_direct_service_state_changed_cbFunction = void Function(
     ffi.Pointer<ffi.Char> mac_address,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the state of Wi-FI Direct is changed.
-/// @since_tizen 3.0
-/// @param[in] state      The Wi-Fi Direct state
-/// @param[in] user_data  The user data passed from the callback registration function
-/// @pre Changes in Wi-Fi Direct state will invoke this callback
-/// if you register this callback using wifi_direct_set_state_changed_cb().
-/// @see wifi_direct_set_state_changed_cb()
-/// @see wifi_direct_unset_state_changed_cb()
+/// Called when the state of Wi-FI Direct is changed.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `state` (in): The Wi-Fi Direct state
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - Changes in Wi-Fi Direct state will invoke this callback if you register this callback using wifi_direct_set_state_changed_cb().
+///
+/// **See also:**
+/// - `wifi_direct_set_state_changed_cb()`
+/// - `wifi_direct_unset_state_changed_cb()`
+/// @nodoc
 typedef wifi_direct_state_changed_cb
     = ffi.Pointer<ffi.NativeFunction<wifi_direct_state_changed_cbFunction>>;
+/// @nodoc
 typedef wifi_direct_state_changed_cbFunction = ffi.Void Function(
     ffi.Int32 state, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartwifi_direct_state_changed_cbFunction = void Function(
     int state, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called repeatedly when you get the information of discovered peers.
-/// @since_tizen 2.3
-/// @remarks @a peer is valid only in this function.
-/// @param[in] peer       The information of the discovered peer
-/// @param[in] user_data  The user data passed from foreach function
-/// @return @c true to continue with the next iteration of the loop,
-/// @c false to break out of the loop
-/// @see wifi_direct_foreach_discovered_peers()
+/// Called repeatedly when you get the information of discovered peers.
+///
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **Remarks:**
+/// - `peer` is valid only in this function.
+///
+/// **Parameters:**
+/// - `peer` (in): The information of the discovered peer
+/// - `user_data` (in): The user data passed from foreach function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, `false` to break out of the loop
+///
+/// **See also:**
+/// - `wifi_direct_foreach_discovered_peers()`
+/// @nodoc
 typedef wifi_direct_discovered_peer_cb
     = ffi.Pointer<ffi.NativeFunction<wifi_direct_discovered_peer_cbFunction>>;
+/// @nodoc
 typedef wifi_direct_discovered_peer_cbFunction = ffi.Bool Function(
     ffi.Pointer<wifi_direct_discovered_peer_info_s> peer,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartwifi_direct_discovered_peer_cbFunction = bool Function(
     ffi.Pointer<wifi_direct_discovered_peer_info_s> peer,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called repeatedly when you get the information of connected peers.
-/// @since_tizen 2.3
-/// @remarks @a peer is valid only in this function.
-/// @param[in] peer       The information of discovered peer
-/// @param[in] user_data  The user data passed from foreach function
-/// @return @c true to continue with the next iteration of the loop,
-/// @c false to break out of the loop
-/// @see wifi_direct_foreach_connected_peers()
+/// Called repeatedly when you get the information of connected peers.
+///
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **Remarks:**
+/// - `peer` is valid only in this function.
+///
+/// **Parameters:**
+/// - `peer` (in): The information of discovered peer
+/// - `user_data` (in): The user data passed from foreach function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, `false` to break out of the loop
+///
+/// **See also:**
+/// - `wifi_direct_foreach_connected_peers()`
+/// @nodoc
 typedef wifi_direct_connected_peer_cb
     = ffi.Pointer<ffi.NativeFunction<wifi_direct_connected_peer_cbFunction>>;
+/// @nodoc
 typedef wifi_direct_connected_peer_cbFunction = ffi.Bool Function(
     ffi.Pointer<wifi_direct_connected_peer_info_s> peer,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartwifi_direct_connected_peer_cbFunction = bool Function(
     ffi.Pointer<wifi_direct_connected_peer_info_s> peer,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when you get the supported WPS (Wi-Fi Protected Setup) type repeatedly.
-/// @since_tizen 2.3
-/// @param[in] type       The type of WPS
-/// @param[in] user_data  The user data passed from the request function
-/// @return @c true to continue with the next iteration of the loop, \n
-/// @c false to break out of the loop
-/// @pre wifi_direct_foreach_supported_wps_types() will invoke this callback.
-/// @see wifi_direct_foreach_supported_wps_types()
+/// Called when you get the supported WPS (Wi-Fi Protected Setup) type repeatedly.
+///
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **Parameters:**
+/// - `type` (in): The type of WPS
+/// - `user_data` (in): The user data passed from the request function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - wifi_direct_foreach_supported_wps_types() will invoke this callback.
+///
+/// **See also:**
+/// - `wifi_direct_foreach_supported_wps_types()`
+/// @nodoc
 typedef wifi_direct_supported_wps_type_cb = ffi
     .Pointer<ffi.NativeFunction<wifi_direct_supported_wps_type_cbFunction>>;
+/// @nodoc
 typedef wifi_direct_supported_wps_type_cbFunction = ffi.Bool Function(
     ffi.Int32 type, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartwifi_direct_supported_wps_type_cbFunction = bool Function(
     int type, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when you get the persistent groups repeatedly.
-/// @since_tizen 2.3
-/// @remarks The @a mac_address can be used only in the callback. To use outside, make a copy.
-/// The @a ssid can be used only in the callback. To use outside, make a copy.
-/// @param[in] mac_address  The MAC address of the persistent group owner
-/// @param[in] ssid         The SSID (Service Set Identifier) of the persistent group owner
-/// @param[in] user_data    The user data passed from the request function
-/// @return @c true to continue with the next iteration of the loop, \n
-/// @c false to break out of the loop
-/// @pre wifi_direct_foreach_persistent_groups() will invoke this callback.
-/// @see wifi_direct_foreach_persistent_groups()
+/// Called when you get the persistent groups repeatedly.
+///
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **Remarks:**
+/// - The `mac_address` can be used only in the callback. To use outside, make a copy.
+/// - The `ssid` can be used only in the callback. To use outside, make a copy.
+///
+/// **Parameters:**
+/// - `mac_address` (in): The MAC address of the persistent group owner
+/// - `ssid` (in): The SSID (Service Set Identifier) of the persistent group owner
+/// - `user_data` (in): The user data passed from the request function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - wifi_direct_foreach_persistent_groups() will invoke this callback.
+///
+/// **See also:**
+/// - `wifi_direct_foreach_persistent_groups()`
+/// @nodoc
 typedef wifi_direct_persistent_group_cb
     = ffi.Pointer<ffi.NativeFunction<wifi_direct_persistent_group_cbFunction>>;
+/// @nodoc
 typedef wifi_direct_persistent_group_cbFunction = ffi.Bool Function(
     ffi.Pointer<ffi.Char> mac_address,
     ffi.Pointer<ffi.Char> ssid,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartwifi_direct_persistent_group_cbFunction = bool Function(
     ffi.Pointer<ffi.Char> mac_address,
     ffi.Pointer<ffi.Char> ssid,
     ffi.Pointer<ffi.Void> user_data);
 
+/// @nodoc
 const int WIFI_DIRECT_MAX_DEVICE_NAME_LEN = 32;
 
+/// @nodoc
 const int WIFI_DIRECT_MAC_ADDRESS_LEN = 18;

@@ -1,3 +1,6 @@
+/// {@category 7.0/tizen}
+library tizen_interop_7_0.capi_ml_common;
+
 // Copyright 2026 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen capi-ml-common APIs.
+/// {@category 7.0/tizen}
 class Tizen70CapiMlCommon {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,17 +28,24 @@ class Tizen70CapiMlCommon {
           lookup)
       : _lookup = lookup;
 
-  /// NNStreamer Utilities                           **
-  /// /
-  /// /**
-  /// @brief Creates a tensors information handle with default value.
-  /// @since_tizen 5.5
-  /// @param[out] info The handle of tensors information.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Given parameter is invalid.
-  /// @retval #ML_ERROR_OUT_OF_MEMORY Failed to allocate required memory.
+  /// NNStreamer Utilities ** / /**
+  ///
+  /// Creates a tensors information handle with default value.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `info` (out): The handle of tensors information.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Given parameter is invalid.
+  /// - `ML_ERROR_OUT_OF_MEMORY`: Failed to allocate required memory.
   int ml_tensors_info_create(
     ffi.Pointer<ml_tensors_info_h> info,
   ) {
@@ -49,13 +60,21 @@ class Tizen70CapiMlCommon {
   late final _ml_tensors_info_create = _ml_tensors_info_createPtr
       .asFunction<int Function(ffi.Pointer<ml_tensors_info_h>)>();
 
-  /// @brief Frees the given handle of a tensors information.
-  /// @since_tizen 5.5
-  /// @param[in] info The handle of tensors information.
-  /// @return 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Given parameter is invalid.
+  /// Frees the given handle of a tensors information.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `info` (in): The handle of tensors information.
+  ///
+  /// **Returns:**
+  /// - 0 on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Given parameter is invalid.
   int ml_tensors_info_destroy(
     ml_tensors_info_h info,
   ) {
@@ -70,15 +89,24 @@ class Tizen70CapiMlCommon {
   late final _ml_tensors_info_destroy =
       _ml_tensors_info_destroyPtr.asFunction<int Function(ml_tensors_info_h)>();
 
-  /// @brief Validates the given tensors information.
-  /// @details If the function returns an error, @a valid may not be changed.
-  /// @since_tizen 5.5
-  /// @param[in] info The handle of tensors information to be validated.
-  /// @param[out] valid @c true if it's valid, @c false if it's invalid.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Given parameter is invalid.
+  /// Validates the given tensors information.
+  ///
+  /// If the function returns an error, `valid` may not be changed.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `info` (in): The handle of tensors information to be validated.
+  /// - `valid` (out): `true` if it's valid, `false` if it's invalid.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Given parameter is invalid.
   int ml_tensors_info_validate(
     ml_tensors_info_h info,
     ffi.Pointer<ffi.Bool> valid,
@@ -96,14 +124,22 @@ class Tizen70CapiMlCommon {
   late final _ml_tensors_info_validate = _ml_tensors_info_validatePtr
       .asFunction<int Function(ml_tensors_info_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Copies the tensors information.
-  /// @since_tizen 5.5
-  /// @param[out] dest A destination handle of tensors information.
-  /// @param[in] src The tensors information to be copied.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Given parameter is invalid. Note that src should be a valid tensors info handle and dest should be a created (allocated) tensors info handle.
+  /// Copies the tensors information.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `dest` (out): A destination handle of tensors information.
+  /// - `src` (in): The tensors information to be copied.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Given parameter is invalid. Note that src should be a valid tensors info handle and dest should be a created (allocated) tensors info handle.
   int ml_tensors_info_clone(
     ml_tensors_info_h dest,
     ml_tensors_info_h src,
@@ -121,14 +157,22 @@ class Tizen70CapiMlCommon {
   late final _ml_tensors_info_clone = _ml_tensors_info_clonePtr
       .asFunction<int Function(ml_tensors_info_h, ml_tensors_info_h)>();
 
-  /// @brief Sets the number of tensors with given handle of tensors information.
-  /// @since_tizen 5.5
-  /// @param[in] info The handle of tensors information.
-  /// @param[in] count The number of tensors.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Given parameter is invalid.
+  /// Sets the number of tensors with given handle of tensors information.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `info` (in): The handle of tensors information.
+  /// - `count` (in): The number of tensors.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Given parameter is invalid.
   int ml_tensors_info_set_count(
     ml_tensors_info_h info,
     int count,
@@ -146,14 +190,22 @@ class Tizen70CapiMlCommon {
   late final _ml_tensors_info_set_count = _ml_tensors_info_set_countPtr
       .asFunction<int Function(ml_tensors_info_h, int)>();
 
-  /// @brief Gets the number of tensors with given handle of tensors information.
-  /// @since_tizen 5.5
-  /// @param[in] info The handle of tensors information.
-  /// @param[out] count The number of tensors.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Given parameter is invalid.
+  /// Gets the number of tensors with given handle of tensors information.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `info` (in): The handle of tensors information.
+  /// - `count` (out): The number of tensors.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Given parameter is invalid.
   int ml_tensors_info_get_count(
     ml_tensors_info_h info,
     ffi.Pointer<ffi.UnsignedInt> count,
@@ -172,15 +224,23 @@ class Tizen70CapiMlCommon {
       _ml_tensors_info_get_countPtr.asFunction<
           int Function(ml_tensors_info_h, ffi.Pointer<ffi.UnsignedInt>)>();
 
-  /// @brief Sets the tensor name with given handle of tensors information.
-  /// @since_tizen 5.5
-  /// @param[in] info The handle of tensors information.
-  /// @param[in] index The index of the tensor to be updated.
-  /// @param[in] name The tensor name to be set.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Given parameter is invalid.
+  /// Sets the tensor name with given handle of tensors information.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `info` (in): The handle of tensors information.
+  /// - `index` (in): The index of the tensor to be updated.
+  /// - `name` (in): The tensor name to be set.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Given parameter is invalid.
   int ml_tensors_info_set_tensor_name(
     ml_tensors_info_h info,
     int index,
@@ -201,16 +261,26 @@ class Tizen70CapiMlCommon {
       _ml_tensors_info_set_tensor_namePtr.asFunction<
           int Function(ml_tensors_info_h, int, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the tensor name with given handle of tensors information.
-  /// @since_tizen 5.5
-  /// @remarks Before 6.0 this function returned the internal pointer so application developers do not need to free. Since 6.0 the name string is internally copied and returned. So if the function succeeds, @a name should be released using g_free().
-  /// @param[in] info The handle of tensors information.
-  /// @param[in] index The index of the tensor.
-  /// @param[out] name The tensor name.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Given parameter is invalid.
+  /// Gets the tensor name with given handle of tensors information.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - Before 6.0 this function returned the internal pointer so application developers do not need to free. Since 6.0 the name string is internally copied and returned. So if the function succeeds, `name` should be released using g_free().
+  ///
+  /// **Parameters:**
+  /// - `info` (in): The handle of tensors information.
+  /// - `index` (in): The index of the tensor.
+  /// - `name` (out): The tensor name.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Given parameter is invalid.
   int ml_tensors_info_get_tensor_name(
     ml_tensors_info_h info,
     int index,
@@ -233,15 +303,23 @@ class Tizen70CapiMlCommon {
           int Function(
               ml_tensors_info_h, int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets the tensor type with given handle of tensors information.
-  /// @since_tizen 5.5
-  /// @param[in] info The handle of tensors information.
-  /// @param[in] index The index of the tensor to be updated.
-  /// @param[in] type The tensor type to be set.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported. E.g., in a machine without fp16 support, trying FLOAT16 is not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Given parameter is invalid.
+  /// Sets the tensor type with given handle of tensors information.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `info` (in): The handle of tensors information.
+  /// - `index` (in): The index of the tensor to be updated.
+  /// - `type` (in): The tensor type to be set.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported. E.g., in a machine without fp16 support, trying FLOAT16 is not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Given parameter is invalid.
   int ml_tensors_info_set_tensor_type(
     ml_tensors_info_h info,
     int index,
@@ -262,15 +340,23 @@ class Tizen70CapiMlCommon {
       _ml_tensors_info_set_tensor_typePtr
           .asFunction<int Function(ml_tensors_info_h, int, int)>();
 
-  /// @brief Gets the tensor type with given handle of tensors information.
-  /// @since_tizen 5.5
-  /// @param[in] info The handle of tensors information.
-  /// @param[in] index The index of the tensor.
-  /// @param[out] type The tensor type.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Given parameter is invalid.
+  /// Gets the tensor type with given handle of tensors information.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `info` (in): The handle of tensors information.
+  /// - `index` (in): The index of the tensor.
+  /// - `type` (out): The tensor type.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Given parameter is invalid.
   int ml_tensors_info_get_tensor_type(
     ml_tensors_info_h info,
     int index,
@@ -291,15 +377,23 @@ class Tizen70CapiMlCommon {
       _ml_tensors_info_get_tensor_typePtr.asFunction<
           int Function(ml_tensors_info_h, int, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Sets the tensor dimension with given handle of tensors information.
-  /// @since_tizen 5.5
-  /// @param[in] info The handle of tensors information.
-  /// @param[in] index The index of the tensor to be updated.
-  /// @param[in] dimension The tensor dimension to be set.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Given parameter is invalid.
+  /// Sets the tensor dimension with given handle of tensors information.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `info` (in): The handle of tensors information.
+  /// - `index` (in): The index of the tensor to be updated.
+  /// - `dimension` (in): The tensor dimension to be set.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Given parameter is invalid.
   int ml_tensors_info_set_tensor_dimension(
     ml_tensors_info_h info,
     int index,
@@ -321,15 +415,23 @@ class Tizen70CapiMlCommon {
       _ml_tensors_info_set_tensor_dimensionPtr.asFunction<
           int Function(ml_tensors_info_h, int, ffi.Pointer<ffi.UnsignedInt>)>();
 
-  /// @brief Gets the tensor dimension with given handle of tensors information.
-  /// @since_tizen 5.5
-  /// @param[in] info The handle of tensors information.
-  /// @param[in] index The index of the tensor.
-  /// @param[out] dimension The tensor dimension.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Given parameter is invalid.
+  /// Gets the tensor dimension with given handle of tensors information.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `info` (in): The handle of tensors information.
+  /// - `index` (in): The index of the tensor.
+  /// - `dimension` (out): The tensor dimension.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Given parameter is invalid.
   int ml_tensors_info_get_tensor_dimension(
     ml_tensors_info_h info,
     int index,
@@ -351,16 +453,25 @@ class Tizen70CapiMlCommon {
       _ml_tensors_info_get_tensor_dimensionPtr.asFunction<
           int Function(ml_tensors_info_h, int, ffi.Pointer<ffi.UnsignedInt>)>();
 
-  /// @brief Gets the size of tensors data in the given tensors information handle in bytes.
-  /// @details If an application needs to get the total byte size of tensors, set the @a index '-1'. Note that the maximum number of tensors is 16 (#ML_TENSOR_SIZE_LIMIT).
-  /// @since_tizen 5.5
-  /// @param[in] info The handle of tensors information.
-  /// @param[in] index The index of the tensor.
-  /// @param[out] data_size The byte size of tensor data.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Given parameter is invalid.
+  /// Gets the size of tensors data in the given tensors information handle in bytes.
+  ///
+  /// If an application needs to get the total byte size of tensors, set the `index` '-1'. Note that the maximum number of tensors is 16 (`ML_TENSOR_SIZE_LIMIT`).
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `info` (in): The handle of tensors information.
+  /// - `index` (in): The index of the tensor.
+  /// - `data_size` (out): The byte size of tensor data.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Given parameter is invalid.
   int ml_tensors_info_get_tensor_size(
     ml_tensors_info_h info,
     int index,
@@ -381,16 +492,26 @@ class Tizen70CapiMlCommon {
       _ml_tensors_info_get_tensor_sizePtr.asFunction<
           int Function(ml_tensors_info_h, int, ffi.Pointer<ffi.Size>)>();
 
-  /// @brief Creates a tensor data frame with the given tensors information.
-  /// @since_tizen 5.5
-  /// @remarks Before 6.0, this function returned #ML_ERROR_STREAMS_PIPE in case of an internal error. Since 6.0, #ML_ERROR_OUT_OF_MEMORY is returned in such cases, so #ML_ERROR_STREAMS_PIPE is not returned by this function anymore.
-  /// @param[in] info The handle of tensors information for the allocation.
-  /// @param[out] data The handle of tensors data. The caller is responsible for freeing the allocated data with ml_tensors_data_destroy().
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Given parameter is invalid.
-  /// @retval #ML_ERROR_OUT_OF_MEMORY Failed to allocate required memory.
+  /// Creates a tensor data frame with the given tensors information.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - Before 6.0, this function returned `ML_ERROR_STREAMS_PIPE` in case of an internal error. Since 6.0, `ML_ERROR_OUT_OF_MEMORY` is returned in such cases, so `ML_ERROR_STREAMS_PIPE` is not returned by this function anymore.
+  ///
+  /// **Parameters:**
+  /// - `info` (in): The handle of tensors information for the allocation.
+  /// - `data` (out): The handle of tensors data. The caller is responsible for freeing the allocated data with ml_tensors_data_destroy().
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Given parameter is invalid.
+  /// - `ML_ERROR_OUT_OF_MEMORY`: Failed to allocate required memory.
   int ml_tensors_data_create(
     ml_tensors_info_h info,
     ffi.Pointer<ml_tensors_data_h> data,
@@ -408,16 +529,23 @@ class Tizen70CapiMlCommon {
   late final _ml_tensors_data_create = _ml_tensors_data_createPtr.asFunction<
       int Function(ml_tensors_info_h, ffi.Pointer<ml_tensors_data_h>)>();
 
-  /// @brief Frees the given tensors' data handle.
-  /// @details Note that the opened handle should be closed before calling this function in the case of a single API.
-  /// If not, the inference engine might try to access the data that is already freed.
-  /// And it causes the segmentation fault.
-  /// @since_tizen 5.5
-  /// @param[in] data The handle of tensors data.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Given parameter is invalid.
+  /// Frees the given tensors' data handle.
+  ///
+  /// Note that the opened handle should be closed before calling this function in the case of a single API. If not, the inference engine might try to access the data that is already freed. And it causes the segmentation fault.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `data` (in): The handle of tensors data.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Given parameter is invalid.
   int ml_tensors_data_destroy(
     ml_tensors_data_h data,
   ) {
@@ -432,17 +560,26 @@ class Tizen70CapiMlCommon {
   late final _ml_tensors_data_destroy =
       _ml_tensors_data_destroyPtr.asFunction<int Function(ml_tensors_data_h)>();
 
-  /// @brief Gets a tensor data of given handle.
-  /// @details This returns the pointer of memory block in the handle. Do not deallocate the returned tensor data. The returned pointer (raw_data) directly points to the internal data of data. If you modify the returned memory block (raw_data), the contents of data is updated.
-  /// @since_tizen 5.5
-  /// @param[in] data The handle of tensors data.
-  /// @param[in] index The index of the tensor.
-  /// @param[out] raw_data Raw tensor data in the handle.
-  /// @param[out] data_size Byte size of tensor data.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Given parameter is invalid.
+  /// Gets a tensor data of given handle.
+  ///
+  /// This returns the pointer of memory block in the handle. Do not deallocate the returned tensor data. The returned pointer (raw_data) directly points to the internal data of data. If you modify the returned memory block (raw_data), the contents of data is updated.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `data` (in): The handle of tensors data.
+  /// - `index` (in): The index of the tensor.
+  /// - `raw_data` (out): Raw tensor data in the handle.
+  /// - `data_size` (out): Byte size of tensor data.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Given parameter is invalid.
   int ml_tensors_data_get_tensor_data(
     ml_tensors_data_h data,
     int index,
@@ -469,16 +606,24 @@ class Tizen70CapiMlCommon {
           int Function(ml_tensors_data_h, int,
               ffi.Pointer<ffi.Pointer<ffi.Void>>, ffi.Pointer<ffi.Size>)>();
 
-  /// @brief Copies a tensor data to given handle.
-  /// @since_tizen 5.5
-  /// @param[in] data The handle of tensors data.
-  /// @param[in] index The index of the tensor.
-  /// @param[in] raw_data Raw tensor data to be copied.
-  /// @param[in] data_size Byte size of raw data.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Given parameter is invalid.
+  /// Copies a tensor data to given handle.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `data` (in): The handle of tensors data.
+  /// - `index` (in): The index of the tensor.
+  /// - `raw_data` (in): Raw tensor data to be copied.
+  /// - `data_size` (in): Byte size of raw data.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Given parameter is invalid.
   int ml_tensors_data_set_tensor_data(
     ml_tensors_data_h data,
     int index,
@@ -504,14 +649,15 @@ class Tizen70CapiMlCommon {
       _ml_tensors_data_set_tensor_dataPtr.asFunction<
           int Function(ml_tensors_data_h, int, ffi.Pointer<ffi.Void>, int)>();
 
-  /// @brief Returns a human-readable string describing the last error.
-  /// @details This returns a human-readable, null-terminated string describing
-  /// the most recent error that occurred from a call to one of the
-  /// functions in the Machine Learning API since the last call to
-  /// ml_error(). The returned string should *not* be freed or
-  /// overwritten by the caller.
-  /// @since_tizen 7.0
-  /// @return @c NULL if no error to be reported. Otherwise the error description.
+  /// Returns a human-readable string describing the last error.
+  ///
+  /// This returns a human-readable, null-terminated string describing the most recent error that occurred from a call to one of the functions in the Machine Learning API since the last call to ml_error(). The returned string should *not* be freed or overwritten by the caller.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Returns:**
+  /// - `NULL` if no error to be reported. Otherwise the error description.
   ffi.Pointer<ffi.Char> ml_error() {
     return _ml_error();
   }
@@ -521,14 +667,18 @@ class Tizen70CapiMlCommon {
   late final _ml_error =
       _ml_errorPtr.asFunction<ffi.Pointer<ffi.Char> Function()>();
 
-  /// @brief Returns a human-readable string describing an error code.
-  /// @details This returns a human-readable, null-terminated string describing
-  /// the error code of machine learning API.
-  /// The returned string should *not* be freed or
-  /// overwritten by the caller.
-  /// @since_tizen 7.0
-  /// @param[in] error_code The error code of machine learning API.
-  /// @return @c NULL for invalid error code. Otherwise the error description.
+  /// Returns a human-readable string describing an error code.
+  ///
+  /// This returns a human-readable, null-terminated string describing the error code of machine learning API. The returned string should *not* be freed or overwritten by the caller.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Parameters:**
+  /// - `error_code` (in): The error code of machine learning API.
+  ///
+  /// **Returns:**
+  /// - `NULL` for invalid error code. Otherwise the error description.
   ffi.Pointer<ffi.Char> ml_strerror(
     int error_code,
   ) {
@@ -543,15 +693,25 @@ class Tizen70CapiMlCommon {
   late final _ml_strerror =
       _ml_strerrorPtr.asFunction<ffi.Pointer<ffi.Char> Function(int)>();
 
-  /// @brief Creates ml-option instance.
-  /// @since_tizen 7.0
-  /// @remarks The @a option should be released using ml_option_destroy().
-  /// @param[out] option Newly created option handle is returned.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Fail. The parameter is invalid.
-  /// @retval #ML_ERROR_OUT_OF_MEMORY Failed to allocate required memory.
+  /// Creates ml-option instance.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Remarks:**
+  /// - The `option` should be released using ml_option_destroy().
+  ///
+  /// **Parameters:**
+  /// - `option` (out): Newly created option handle is returned.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Fail. The parameter is invalid.
+  /// - `ML_ERROR_OUT_OF_MEMORY`: Failed to allocate required memory.
   int ml_option_create(
     ffi.Pointer<ml_option_h> option,
   ) {
@@ -566,14 +726,23 @@ class Tizen70CapiMlCommon {
   late final _ml_option_create =
       _ml_option_createPtr.asFunction<int Function(ffi.Pointer<ml_option_h>)>();
 
-  /// @brief Destroys the ml-option instance.
-  /// @details Note that, user should free the allocated values of ml-option in the case that destroy function is not given.
-  /// @since_tizen 7.0
-  /// @param[in] option The option handle to be destroyed.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Fail. The parameter is invalid.
+  /// Destroys the ml-option instance.
+  ///
+  /// Note that, user should free the allocated values of ml-option in the case that destroy function is not given.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Parameters:**
+  /// - `option` (in): The option handle to be destroyed.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Fail. The parameter is invalid.
   int ml_option_destroy(
     ml_option_h option,
   ) {
@@ -588,17 +757,26 @@ class Tizen70CapiMlCommon {
   late final _ml_option_destroy =
       _ml_option_destroyPtr.asFunction<int Function(ml_option_h)>();
 
-  /// @brief Sets a new key-value in ml-option instance.
-  /// @details Note that the @a value should be valid during single task and be freed after destroying the ml-option instance unless proper @a destroy function is given. When duplicated @a key is given, the corresponding @a value is updated with the new one.
-  /// @since_tizen 7.0
-  /// @param[in] option The handle of ml-option.
-  /// @param[in] key The key to be set.
-  /// @param[in] value The value to be set.
-  /// @param[in] destroy The function to destroy the value. It is called when the ml-option instance is destroyed.
-  /// @return @c 0 on success. Otherwise a negative error value.
-  /// @retval #ML_ERROR_NONE Successful.
-  /// @retval #ML_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval #ML_ERROR_INVALID_PARAMETER Fail. The parameter is invalid.
+  /// Sets a new key-value in ml-option instance.
+  ///
+  /// Note that the `value` should be valid during single task and be freed after destroying the ml-option instance unless proper `destroy` function is given. When duplicated `key` is given, the corresponding `value` is updated with the new one.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Parameters:**
+  /// - `option` (in): The handle of ml-option.
+  /// - `key` (in): The key to be set.
+  /// - `value` (in): The value to be set.
+  /// - `destroy` (in): The function to destroy the value. It is called when the ml-option instance is destroyed.
+  ///
+  /// **Returns:**
+  /// - `0` on success. Otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `ML_ERROR_NONE`: Successful.
+  /// - `ML_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `ML_ERROR_INVALID_PARAMETER`: Fail. The parameter is invalid.
   int ml_option_set(
     ml_option_h option,
     ffi.Pointer<ffi.Char> key,
@@ -637,8 +815,11 @@ class Tizen70CapiMlCommon {
           .asFunction<int Function(ml_custom_easy_invoke_cb)>();
 }
 
-/// @brief Enumeration for the error codes of NNStreamer.
-/// @since_tizen 5.5
+/// Enumeration for the error codes of NNStreamer.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 abstract class ml_error_e {
   /// < Success!
   static const int ML_ERROR_NONE = 0;
@@ -671,9 +852,13 @@ abstract class ml_error_e {
   static const int ML_ERROR_IO_ERROR = -5;
 }
 
-/// @brief Types of NNFWs.
-/// @details To check if a nnfw-type is supported in a system, an application may call the API, ml_check_nnfw_availability().
-/// @since_tizen 5.5
+/// Types of NNFWs.
+///
+/// To check if a nnfw-type is supported in a system, an application may call the API, ml_check_nnfw_availability().
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 abstract class ml_nnfw_type_e {
   /// < NNFW is not specified (Try to determine the NNFW with file extension).
   static const int ML_NNFW_TYPE_ANY = 0;
@@ -730,8 +915,11 @@ abstract class ml_nnfw_type_e {
   static const int ML_NNFW_TYPE_SNAP = 8193;
 }
 
-/// @brief Types of hardware resources to be used for NNFWs. Note that if the affinity (nnn) is not supported by the driver or hardware, it is ignored.
-/// @since_tizen 5.5
+/// Types of hardware resources to be used for NNFWs. Note that if the affinity (nnn) is not supported by the driver or hardware, it is ignored.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 abstract class ml_nnfw_hw_e {
   /// < Hardware resource is not specified.
   static const int ML_NNFW_HW_ANY = 0;
@@ -770,8 +958,11 @@ abstract class ml_nnfw_hw_e {
   static const int ML_NNFW_HW_NPU_SR = 77824;
 }
 
-/// @brief Possible data element types of tensor in NNStreamer.
-/// @since_tizen 5.5
+/// Possible data element types of tensor in NNStreamer.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 abstract class ml_tensor_type_e {
   /// < Integer 32bit
   static const int ML_TENSOR_TYPE_INT32 = 0;
@@ -810,49 +1001,78 @@ abstract class ml_tensor_type_e {
   static const int ML_TENSOR_TYPE_UNKNOWN = 11;
 }
 
-/// @brief A handle of a tensors metadata instance.
-/// @since_tizen 5.5
+/// A handle of a tensors metadata instance.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 typedef ml_tensors_info_h = ffi.Pointer<ffi.Void>;
 
-/// @brief A handle of input or output frames. #ml_tensors_info_h is the handle for tensors metadata.
-/// @since_tizen 5.5
+/// A handle of input or output frames. `ml_tensors_info_h` is the handle for tensors metadata.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 typedef ml_tensors_data_h = ffi.Pointer<ffi.Void>;
 
-/// @brief A handle of a ml-option instance.
-/// @since_tizen 7.0
+/// A handle of a ml-option instance.
+///
+/// **Since Tizen:**
+/// - 7.0
+/// @nodoc
 typedef ml_option_h = ffi.Pointer<ffi.Void>;
 
-/// @brief The function to be called when destroying the data in machine learning API.
-/// @since_tizen 7.0
-/// @param[in] data The data to be destroyed.
+/// The function to be called when destroying the data in machine learning API.
+///
+/// **Since Tizen:**
+/// - 7.0
+///
+/// **Parameters:**
+/// - `data` (in): The data to be destroyed.
+/// @nodoc
 typedef ml_data_destroy_cb
     = ffi.Pointer<ffi.NativeFunction<ml_data_destroy_cbFunction>>;
+/// @nodoc
 typedef ml_data_destroy_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Void> data);
+/// @nodoc
 typedef Dartml_data_destroy_cbFunction = void Function(
     ffi.Pointer<ffi.Void> data);
 
-/// @brief Callback to execute the custom-easy filter in NNStreamer pipelines.
-/// @details Note that if ml_custom_easy_invoke_cb() returns negative error values, the constructed pipeline does not work properly anymore.
-/// So developers should release the pipeline handle and recreate it again.
-/// @since_tizen 6.0
-/// @remarks The @a in can be used only in the callback. To use outside, make a copy.
-/// @remarks The @a out can be used only in the callback. To use outside, make a copy.
-/// @param[in] in The handle of the tensor input (a single frame. tensor/tensors).
-/// @param[out] out The handle of the tensor output to be filled (a single frame. tensor/tensors).
-/// @param[in,out] user_data User application's private data.
-/// @return @c 0 on success. @c 1 to ignore the input data. Otherwise a negative error value.
+/// Callback to execute the custom-easy filter in NNStreamer pipelines.
+///
+/// Note that if ml_custom_easy_invoke_cb() returns negative error values, the constructed pipeline does not work properly anymore. So developers should release the pipeline handle and recreate it again.
+///
+/// **Since Tizen:**
+/// - 6.0
+///
+/// **Remarks:**
+/// - The `in` can be used only in the callback. To use outside, make a copy.
+/// - The `out` can be used only in the callback. To use outside, make a copy.
+///
+/// **Parameters:**
+/// - `in` (in): The handle of the tensor input (a single frame. tensor/tensors).
+/// - `out` (out): The handle of the tensor output to be filled (a single frame. tensor/tensors).
+/// - `user_data` (in,out): User application's private data.
+///
+/// **Returns:**
+/// - `0` on success. `1` to ignore the input data. Otherwise a negative error value.
+/// @nodoc
 typedef ml_custom_easy_invoke_cb
     = ffi.Pointer<ffi.NativeFunction<ml_custom_easy_invoke_cbFunction>>;
+/// @nodoc
 typedef ml_custom_easy_invoke_cbFunction = ffi.Int Function(
     ml_tensors_data_h in1,
     ml_tensors_data_h out,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartml_custom_easy_invoke_cbFunction = int Function(
     ml_tensors_data_h in1,
     ml_tensors_data_h out,
     ffi.Pointer<ffi.Void> user_data);
 
+/// @nodoc
 const int ML_TENSOR_RANK_LIMIT = 4;
 
+/// @nodoc
 const int ML_TENSOR_SIZE_LIMIT = 16;

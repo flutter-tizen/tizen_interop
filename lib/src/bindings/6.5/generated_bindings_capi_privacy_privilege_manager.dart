@@ -1,3 +1,6 @@
+/// {@category 6.5/tizen}
+library tizen_interop_6_5.capi_privacy_privilege_manager;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen capi-privacy-privilege-manager APIs.
+/// {@category 6.5/tizen}
 class Tizen65CapiPrivacyPrivilegeManager {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,20 +28,24 @@ class Tizen65CapiPrivacyPrivilegeManager {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Checks if an application, which calls this function, has permission to use the
-  /// given privilege.
+  /// Checks if an application, which calls this function, has permission to use the given privilege.
   ///
-  /// @since_tizen 4.0
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @param[in]   privilege   The privilege that is to be checked.
-  /// @param[out]  result      The result of the privilege check.
+  /// **Parameters:**
+  /// - `privilege` (in): The privilege that is to be checked.
+  /// - `result` (out): The result of the privilege check.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #PRIVACY_PRIVILEGE_MANAGER_ERROR_NONE               Successful
-  /// @retval #PRIVACY_PRIVILEGE_MANAGER_ERROR_IO_ERROR           I/O error
-  /// @retval #PRIVACY_PRIVILEGE_MANAGER_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #PRIVACY_PRIVILEGE_MANAGER_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #PRIVACY_PRIVILEGE_MANAGER_ERROR_UNKNOWN            Unknown error
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PRIVACY_PRIVILEGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PRIVACY_PRIVILEGE_MANAGER_ERROR_IO_ERROR`: I/O error
+  /// - `PRIVACY_PRIVILEGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PRIVACY_PRIVILEGE_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `PRIVACY_PRIVILEGE_MANAGER_ERROR_UNKNOWN`: Unknown error
   int ppm_check_permission(
     ffi.Pointer<ffi.Char> privilege,
     ffi.Pointer<ffi.Int32> result,
@@ -55,26 +63,35 @@ class Tizen65CapiPrivacyPrivilegeManager {
   late final _ppm_check_permission = _ppm_check_permissionPtr.asFunction<
       int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Int32>)>();
 
-  /// @platform
-  /// @brief Checks if an application, with given app_id, has permission to use the
-  /// given privilege.
+  /// Checks if an application, with given app_id, has permission to use the given privilege.
   ///
-  /// @since_tizen 5.0
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/permission.check
+  /// **Privilege level:**
+  /// - platform
   ///
-  /// @param[in]   app_id      The app_id of the app that is to be checked.
-  /// @param[in]   privilege   The privilege that is to be checked.
-  /// @param[out]  result      The result of the privilege check.
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/permission.check>
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #PRIVACY_PRIVILEGE_MANAGER_ERROR_NONE               Successful
-  /// @retval #PRIVACY_PRIVILEGE_MANAGER_ERROR_IO_ERROR           I/O error
-  /// @retval #PRIVACY_PRIVILEGE_MANAGER_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #PRIVACY_PRIVILEGE_MANAGER_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #PRIVACY_PRIVILEGE_MANAGER_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #PRIVACY_PRIVILEGE_MANAGER_ERROR_UNKNOWN            Unknown error
+  /// **Parameters:**
+  /// - `app_id` (in): The app_id of the app that is to be checked.
+  /// - `privilege` (in): The privilege that is to be checked.
+  /// - `result` (out): The result of the privilege check.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PRIVACY_PRIVILEGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PRIVACY_PRIVILEGE_MANAGER_ERROR_IO_ERROR`: I/O error
+  /// - `PRIVACY_PRIVILEGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PRIVACY_PRIVILEGE_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `PRIVACY_PRIVILEGE_MANAGER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PRIVACY_PRIVILEGE_MANAGER_ERROR_UNKNOWN`: Unknown error
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int ppm_check_app_permission(
     ffi.Pointer<ffi.Char> app_id,
     ffi.Pointer<ffi.Char> privilege,
@@ -96,23 +113,25 @@ class Tizen65CapiPrivacyPrivilegeManager {
           int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Checks if an application, which calls this function, has permission to use the
-  /// given privileges.
+  /// Checks if an application, which calls this function, has permission to use the given privileges.
   ///
-  /// @since_tizen 5.0
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @param[in]   privileges        The privileges array that is to be checked.
-  /// @param[in]   privileges_count  The number of elements in the privileges and results arrays.
-  /// @param[out]  results           The results of the privilege check. Caller is responsible for
-  /// allocating this array with proper size and freeing it afterwards.
+  /// **Parameters:**
+  /// - `privileges` (in): The privileges array that is to be checked.
+  /// - `privileges_count` (in): The number of elements in the privileges and results arrays.
+  /// - `results` (out): The results of the privilege check. Caller is responsible for allocating this array with proper size and freeing it afterwards.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #PRIVACY_PRIVILEGE_MANAGER_ERROR_NONE               Successful
-  /// @retval #PRIVACY_PRIVILEGE_MANAGER_ERROR_IO_ERROR           I/O error
-  /// @retval #PRIVACY_PRIVILEGE_MANAGER_ERROR_INVALID_PARAMETER  Non unique privileges passed
-  /// in first argument, privileges_count is more than 100 or other invalid parameter
-  /// @retval #PRIVACY_PRIVILEGE_MANAGER_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #PRIVACY_PRIVILEGE_MANAGER_ERROR_UNKNOWN            Unknown error
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PRIVACY_PRIVILEGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PRIVACY_PRIVILEGE_MANAGER_ERROR_IO_ERROR`: I/O error
+  /// - `PRIVACY_PRIVILEGE_MANAGER_ERROR_INVALID_PARAMETER`: Non unique privileges passed in first argument, privileges_count is more than 100 or other invalid parameter
+  /// - `PRIVACY_PRIVILEGE_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `PRIVACY_PRIVILEGE_MANAGER_ERROR_UNKNOWN`: Unknown error
   int ppm_check_permissions(
     ffi.Pointer<ffi.Pointer<ffi.Char>> privileges,
     int privileges_count,
@@ -133,29 +152,36 @@ class Tizen65CapiPrivacyPrivilegeManager {
       int Function(
           ffi.Pointer<ffi.Pointer<ffi.Char>>, int, ffi.Pointer<ffi.Int32>)>();
 
-  /// @platform
-  /// @brief Checks if an application, with given app_id, has permission to use the
-  /// given privileges.
+  /// Checks if an application, with given app_id, has permission to use the given privileges.
   ///
-  /// @since_tizen 5.0
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/permission.check
+  /// **Privilege level:**
+  /// - platform
   ///
-  /// @param[in]   app_id            The app_id of the app that is to be checked.
-  /// @param[in]   privileges        The privileges array that is to be checked.
-  /// @param[in]   privileges_count  The number of elements in the privileges and results arrays.
-  /// @param[out]  results           The results of the privilege check. Caller is responsible for
-  /// allocating this array with proper size and freeing it afterwards.
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/permission.check>
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #PRIVACY_PRIVILEGE_MANAGER_ERROR_NONE               Successful
-  /// @retval #PRIVACY_PRIVILEGE_MANAGER_ERROR_IO_ERROR           I/O error
-  /// @retval #PRIVACY_PRIVILEGE_MANAGER_ERROR_INVALID_PARAMETER  Non unique privileges passed
-  /// in first argument, privileges_count is more than 100 or other invalid parameter
-  /// @retval #PRIVACY_PRIVILEGE_MANAGER_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #PRIVACY_PRIVILEGE_MANAGER_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #PRIVACY_PRIVILEGE_MANAGER_ERROR_UNKNOWN            Unknown error
+  /// **Parameters:**
+  /// - `app_id` (in): The app_id of the app that is to be checked.
+  /// - `privileges` (in): The privileges array that is to be checked.
+  /// - `privileges_count` (in): The number of elements in the privileges and results arrays.
+  /// - `results` (out): The results of the privilege check. Caller is responsible for allocating this array with proper size and freeing it afterwards.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PRIVACY_PRIVILEGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PRIVACY_PRIVILEGE_MANAGER_ERROR_IO_ERROR`: I/O error
+  /// - `PRIVACY_PRIVILEGE_MANAGER_ERROR_INVALID_PARAMETER`: Non unique privileges passed in first argument, privileges_count is more than 100 or other invalid parameter
+  /// - `PRIVACY_PRIVILEGE_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `PRIVACY_PRIVILEGE_MANAGER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PRIVACY_PRIVILEGE_MANAGER_ERROR_UNKNOWN`: Unknown error
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int ppm_check_app_permissions(
     ffi.Pointer<ffi.Char> app_id,
     ffi.Pointer<ffi.Pointer<ffi.Char>> privileges,
@@ -185,49 +211,40 @@ class Tizen65CapiPrivacyPrivilegeManager {
               int,
               ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Requests a user's response to obtain permission for using the given privilege.
+  /// Requests a user's response to obtain permission for using the given privilege.
   ///
-  /// @details When this function is called, an underlying service may show an appropriate
-  /// UI dialogue box (pop-up) with a question about granting the application access
-  /// to the given privilege. Once a user makes a decision, the service may modify
-  /// the privacy policy (when it is a definitive decision). After that, the service
-  /// sends the response back to the application. The possible response values are as follows:
-  /// #PRIVACY_PRIVILEGE_MANAGER_REQUEST_RESULT_ALLOW_FOREVER\n
-  /// #PRIVACY_PRIVILEGE_MANAGER_REQUEST_RESULT_DENY_FOREVER\n
-  /// #PRIVACY_PRIVILEGE_MANAGER_REQUEST_RESULT_DENY_ONCE\n
-  /// The application receives #PRIVACY_PRIVILEGE_MANAGER_REQUEST_RESULT_DENY_ONCE value after
-  /// pressing 'Deny' button while not having selected the 'Don't ask again?' checkbox. If the device
-  /// has the home and back buttons, pressing either of them gives the
-  /// #PRIVACY_PRIVILEGE_MANAGER_REQUEST_RESULT_DENY_ONCE response.
-  /// The application is informed about the user's decision by invoking ppm_request_response_cb().
-  /// When a privacy policy for the given privilege has already been resolved, no pop-up will
-  /// be shown and the service will reply immediately with an appropriate result:
-  /// #PRIVACY_PRIVILEGE_MANAGER_REQUEST_RESULT_ALLOW_FOREVER\n
-  /// #PRIVACY_PRIVILEGE_MANAGER_REQUEST_RESULT_DENY_FOREVER\n
+  /// When this function is called, an underlying service may show an appropriate UI dialogue box (pop-up) with a question about granting the application access to the given privilege. Once a user makes a decision, the service may modify the privacy policy (when it is a definitive decision). After that, the service sends the response back to the application. The possible response values are as follows: `PRIVACY_PRIVILEGE_MANAGER_REQUEST_RESULT_ALLOW_FOREVER` `PRIVACY_PRIVILEGE_MANAGER_REQUEST_RESULT_DENY_FOREVER` `PRIVACY_PRIVILEGE_MANAGER_REQUEST_RESULT_DENY_ONCE` The application receives `PRIVACY_PRIVILEGE_MANAGER_REQUEST_RESULT_DENY_ONCE` value after pressing 'Deny' button while not having selected the 'Don't ask again?' checkbox. If the device has the home and back buttons, pressing either of them gives the `PRIVACY_PRIVILEGE_MANAGER_REQUEST_RESULT_DENY_ONCE` response. The application is informed about the user's decision by invoking ppm_request_response_cb(). When a privacy policy for the given privilege has already been resolved, no pop-up will be shown and the service will reply immediately with an appropriate result: `PRIVACY_PRIVILEGE_MANAGER_REQUEST_RESULT_ALLOW_FOREVER` `PRIVACY_PRIVILEGE_MANAGER_REQUEST_RESULT_DENY_FOREVER`
   ///
-  /// @since_tizen 4.0
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @remarks Before calling this function, call ppm_check_permission() to check if the application has
-  /// permission to use the given privilege. If the result of calling ppm_check_permission() is
-  /// #PRIVACY_PRIVILEGE_MANAGER_CHECK_RESULT_ASK, the application should call
-  /// this function to determine access to the privilege.
+  /// **Remarks:**
+  /// - Before calling this function, call ppm_check_permission() to check if the application has
+  /// - permission to use the given privilege. If the result of calling ppm_check_permission() is
+  /// - `PRIVACY_PRIVILEGE_MANAGER_CHECK_RESULT_ASK`, the application should call
+  /// - this function to determine access to the privilege.
   ///
-  /// @param[in]   privilege   The given privilege for which a pop-up must be shown.
-  /// @param[in]   callback    The given callback function which will be invoked
-  /// when the API receives a response.
-  /// @param[in]   user_data   User specific data which will be passed to
-  /// the given callback.
+  /// **Parameters:**
+  /// - `privilege` (in): The given privilege for which a pop-up must be shown.
+  /// - `callback` (in): The given callback function which will be invoked when the API receives a response.
+  /// - `user_data` (in): User specific data which will be passed to the given callback.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #PRIVACY_PRIVILEGE_MANAGER_ERROR_NONE                Successful
-  /// @retval #PRIVACY_PRIVILEGE_MANAGER_ERROR_IO_ERROR            I/O error
-  /// @retval #PRIVACY_PRIVILEGE_MANAGER_ERROR_INVALID_PARAMETER   Invalid parameter
-  /// @retval #PRIVACY_PRIVILEGE_MANAGER_ERROR_OUT_OF_MEMORY       Out of memory
-  /// @retval #PRIVACY_PRIVILEGE_MANAGER_ERROR_ALREADY_IN_PROGRESS Operation already in progress
-  /// @retval #PRIVACY_PRIVILEGE_MANAGER_ERROR_UNKNOWN             Unknown error
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
   ///
-  /// @post ppm_request_response_cb() will be invoked.
-  /// @see ppm_request_response_cb()
+  /// **Return values:**
+  /// - `PRIVACY_PRIVILEGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PRIVACY_PRIVILEGE_MANAGER_ERROR_IO_ERROR`: I/O error
+  /// - `PRIVACY_PRIVILEGE_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PRIVACY_PRIVILEGE_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `PRIVACY_PRIVILEGE_MANAGER_ERROR_ALREADY_IN_PROGRESS`: Operation already in progress
+  /// - `PRIVACY_PRIVILEGE_MANAGER_ERROR_UNKNOWN`: Unknown error
+  ///
+  /// **Postconditions:**
+  /// - ppm_request_response_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `ppm_request_response_cb()`
   int ppm_request_permission(
     ffi.Pointer<ffi.Char> privilege,
     ppm_request_response_cb callback,
@@ -248,51 +265,41 @@ class Tizen65CapiPrivacyPrivilegeManager {
       int Function(ffi.Pointer<ffi.Char>, ppm_request_response_cb,
           ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Requests a user's response to obtain permission for using the given privileges.
+  /// Requests a user's response to obtain permission for using the given privileges.
   ///
-  /// @details When this function is called, an underlying service may show an appropriate
-  /// UI dialogue box (pop-up) with a question about granting the application access
-  /// to the given privileges. Once a user makes a decision, the service may modify
-  /// the privacy policy (when it is a definitive decision). After that, the service
-  /// sends the response back to the application. The possible response values are as follows:\n
-  /// #PRIVACY_PRIVILEGE_MANAGER_REQUEST_RESULT_ALLOW_FOREVER\n
-  /// #PRIVACY_PRIVILEGE_MANAGER_REQUEST_RESULT_DENY_FOREVER\n
-  /// #PRIVACY_PRIVILEGE_MANAGER_REQUEST_RESULT_DENY_ONCE\n
-  /// The application receives #PRIVACY_PRIVILEGE_MANAGER_REQUEST_RESULT_DENY_ONCE value after
-  /// pressing 'Deny' button while not having selected the 'Don't ask again?' checkbox. If the device
-  /// has the home and back buttons, pressing either of them gives the
-  /// #PRIVACY_PRIVILEGE_MANAGER_REQUEST_RESULT_DENY_ONCE response.
-  /// The application is informed about the user's decision by invoking ppm_request_multiple_response_cb().
-  /// When a privacy policy for the given privileges has already been resolved, no pop-up will
-  /// be shown and the service will reply immediately with an appropriate results:\n
-  /// #PRIVACY_PRIVILEGE_MANAGER_REQUEST_RESULT_ALLOW_FOREVER\n
-  /// #PRIVACY_PRIVILEGE_MANAGER_REQUEST_RESULT_DENY_FOREVER\n
+  /// When this function is called, an underlying service may show an appropriate UI dialogue box (pop-up) with a question about granting the application access to the given privileges. Once a user makes a decision, the service may modify the privacy policy (when it is a definitive decision). After that, the service sends the response back to the application. The possible response values are as follows: `PRIVACY_PRIVILEGE_MANAGER_REQUEST_RESULT_ALLOW_FOREVER` `PRIVACY_PRIVILEGE_MANAGER_REQUEST_RESULT_DENY_FOREVER` `PRIVACY_PRIVILEGE_MANAGER_REQUEST_RESULT_DENY_ONCE` The application receives `PRIVACY_PRIVILEGE_MANAGER_REQUEST_RESULT_DENY_ONCE` value after pressing 'Deny' button while not having selected the 'Don't ask again?' checkbox. If the device has the home and back buttons, pressing either of them gives the `PRIVACY_PRIVILEGE_MANAGER_REQUEST_RESULT_DENY_ONCE` response. The application is informed about the user's decision by invoking ppm_request_multiple_response_cb(). When a privacy policy for the given privileges has already been resolved, no pop-up will be shown and the service will reply immediately with an appropriate results: `PRIVACY_PRIVILEGE_MANAGER_REQUEST_RESULT_ALLOW_FOREVER` `PRIVACY_PRIVILEGE_MANAGER_REQUEST_RESULT_DENY_FOREVER`
   ///
-  /// @since_tizen 5.0
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @remarks Before calling this function, call ppm_check_permission() or ppm_check_permissions()
-  /// to check if the application has permission to use the given privileges.
-  /// This function should be called for each privilege with result
-  /// #PRIVACY_PRIVILEGE_MANAGER_CHECK_RESULT_ASK returned from ppm_check_permission() or ppm_check_permissions().
+  /// **Remarks:**
+  /// - Before calling this function, call ppm_check_permission() or ppm_check_permissions()
+  /// - to check if the application has permission to use the given privileges.
+  /// - This function should be called for each privilege with result
+  /// - `PRIVACY_PRIVILEGE_MANAGER_CHECK_RESULT_ASK` returned from ppm_check_permission() or ppm_check_permissions().
   ///
-  /// @param[in]   privileges        The given privileges array for which a pop-up must be shown.
-  /// @param[in]   privileges_count  The number of elements in the privileges array.
-  /// @param[in]   callback          The given callback function which will be invoked
-  /// when the API receives a response.
-  /// @param[in]   user_data         User specific data which will be passed to
-  /// the given callback.
+  /// **Parameters:**
+  /// - `privileges` (in): The given privileges array for which a pop-up must be shown.
+  /// - `privileges_count` (in): The number of elements in the privileges array.
+  /// - `callback` (in): The given callback function which will be invoked when the API receives a response.
+  /// - `user_data` (in): User specific data which will be passed to the given callback.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #PRIVACY_PRIVILEGE_MANAGER_ERROR_NONE                Successful
-  /// @retval #PRIVACY_PRIVILEGE_MANAGER_ERROR_IO_ERROR            I/O error
-  /// @retval #PRIVACY_PRIVILEGE_MANAGER_ERROR_INVALID_PARAMETER   Non unique privileges passed
-  /// in first argument, privileges_count is more than 100 or other invalid parameter
-  /// @retval #PRIVACY_PRIVILEGE_MANAGER_ERROR_OUT_OF_MEMORY       Out of memory
-  /// @retval #PRIVACY_PRIVILEGE_MANAGER_ERROR_ALREADY_IN_PROGRESS Operation already in progress
-  /// @retval #PRIVACY_PRIVILEGE_MANAGER_ERROR_UNKNOWN             Unknown error
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
   ///
-  /// @post ppm_request_multiple_response_cb() will be invoked.
-  /// @see ppm_request_multiple_response_cb()
+  /// **Return values:**
+  /// - `PRIVACY_PRIVILEGE_MANAGER_ERROR_NONE`: Successful
+  /// - `PRIVACY_PRIVILEGE_MANAGER_ERROR_IO_ERROR`: I/O error
+  /// - `PRIVACY_PRIVILEGE_MANAGER_ERROR_INVALID_PARAMETER`: Non unique privileges passed in first argument, privileges_count is more than 100 or other invalid parameter
+  /// - `PRIVACY_PRIVILEGE_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `PRIVACY_PRIVILEGE_MANAGER_ERROR_ALREADY_IN_PROGRESS`: Operation already in progress
+  /// - `PRIVACY_PRIVILEGE_MANAGER_ERROR_UNKNOWN`: Unknown error
+  ///
+  /// **Postconditions:**
+  /// - ppm_request_multiple_response_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `ppm_request_multiple_response_cb()`
   int ppm_request_permissions(
     ffi.Pointer<ffi.Pointer<ffi.Char>> privileges,
     int privileges_count,
@@ -319,8 +326,11 @@ class Tizen65CapiPrivacyPrivilegeManager {
           ppm_request_multiple_response_cb, ffi.Pointer<ffi.Void>)>();
 }
 
-/// @brief Enumeration for results of a permission check.
-/// @since_tizen 4.0
+/// Enumeration for results of a permission check.
+///
+/// **Since Tizen:**
+/// - 4.0
+/// @nodoc
 abstract class ppm_check_result_e {
   /// The application has permission to use a privilege.
   static const int PRIVACY_PRIVILEGE_MANAGER_CHECK_RESULT_ALLOW = 0;
@@ -332,8 +342,11 @@ abstract class ppm_check_result_e {
   static const int PRIVACY_PRIVILEGE_MANAGER_CHECK_RESULT_ASK = 2;
 }
 
-/// @brief Enumeration for results of a permission request.
-/// @since_tizen 4.0
+/// Enumeration for results of a permission request.
+///
+/// **Since Tizen:**
+/// - 4.0
+/// @nodoc
 abstract class ppm_request_result_e {
   /// The user granted permission to use a privilege for an indefinite period of time.
   static const int PRIVACY_PRIVILEGE_MANAGER_REQUEST_RESULT_ALLOW_FOREVER = 0;
@@ -345,8 +358,11 @@ abstract class ppm_request_result_e {
   static const int PRIVACY_PRIVILEGE_MANAGER_REQUEST_RESULT_DENY_ONCE = 2;
 }
 
-/// @brief Enumeration for status codes of a permission request.
-/// @since_tizen 4.0
+/// Enumeration for status codes of a permission request.
+///
+/// **Since Tizen:**
+/// - 4.0
+/// @nodoc
 abstract class ppm_call_cause_e {
   /// Callback was called with a valid answer.
   static const int PRIVACY_PRIVILEGE_MANAGER_CALL_CAUSE_ANSWER = 0;
@@ -355,58 +371,60 @@ abstract class ppm_call_cause_e {
   static const int PRIVACY_PRIVILEGE_MANAGER_CALL_CAUSE_ERROR = 1;
 }
 
-/// @brief Called when the application receives a response upon calling ppm_request_permission().
+/// Called when the application receives a response upon calling ppm_request_permission().
 ///
-/// @since_tizen 4.0
+/// **Since Tizen:**
+/// - 4.0
 ///
-/// @param[in]   cause       The value representing a reason why this callback
-/// has been called.
-/// @param[in]   result      The result of a response triggered by calling ppm_request_permission().
-/// This is a valid value only if the @a cause parameter is equal to
-/// #PRIVACY_PRIVILEGE_MANAGER_CALL_CAUSE_ANSWER.
-/// @param[in]   privilege   The privilege that has been checked. This pointer is managed by the API and
-/// it is valid only in the body of the callback function.
-/// @param[in]   user_data   User specific data, this pointer has been passed
-/// to ppm_request_permission().
+/// **Parameters:**
+/// - `cause` (in): The value representing a reason why this callback has been called.
+/// - `result` (in): The result of a response triggered by calling ppm_request_permission(). This is a valid value only if the `cause` parameter is equal to `PRIVACY_PRIVILEGE_MANAGER_CALL_CAUSE_ANSWER`.
+/// - `privilege` (in): The privilege that has been checked. This pointer is managed by the API and it is valid only in the body of the callback function.
+/// - `user_data` (in): User specific data, this pointer has been passed to ppm_request_permission().
 ///
-/// @see ppm_request_permission()
+/// **See also:**
+/// - `ppm_request_permission()`
+/// @nodoc
 typedef ppm_request_response_cb
     = ffi.Pointer<ffi.NativeFunction<ppm_request_response_cbFunction>>;
+/// @nodoc
 typedef ppm_request_response_cbFunction = ffi.Void Function(
     ffi.Int32 cause,
     ffi.Int32 result,
     ffi.Pointer<ffi.Char> privilege,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartppm_request_response_cbFunction = void Function(
     int cause,
     int result,
     ffi.Pointer<ffi.Char> privilege,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the application receives a response upon calling ppm_request_permissions().
+/// Called when the application receives a response upon calling ppm_request_permissions().
 ///
-/// @since_tizen 5.0
+/// **Since Tizen:**
+/// - 5.0
 ///
-/// @param[in]   cause             The value representing a reason why this callback
-/// has been called.
-/// @param[in]   results           The results of a response triggered by calling ppm_request_permissions().
-/// This is a valid value only if the @a cause parameter is equal to
-/// #PRIVACY_PRIVILEGE_MANAGER_CALL_CAUSE_ANSWER.
-/// @param[in]   privileges        The privileges array that has been checked. This pointer is managed
-/// by the API and it is valid only in the body of the callback function.
-/// @param[in]   privileges_count  The number of elements in the privileges and results arrays.
-/// @param[in]   user_data         User specific data, this pointer has been passed
-/// to ppm_request_permissions().
+/// **Parameters:**
+/// - `cause` (in): The value representing a reason why this callback has been called.
+/// - `results` (in): The results of a response triggered by calling ppm_request_permissions(). This is a valid value only if the `cause` parameter is equal to `PRIVACY_PRIVILEGE_MANAGER_CALL_CAUSE_ANSWER`.
+/// - `privileges` (in): The privileges array that has been checked. This pointer is managed by the API and it is valid only in the body of the callback function.
+/// - `privileges_count` (in): The number of elements in the privileges and results arrays.
+/// - `user_data` (in): User specific data, this pointer has been passed to ppm_request_permissions().
 ///
-/// @see ppm_request_permissions()
+/// **See also:**
+/// - `ppm_request_permissions()`
+/// @nodoc
 typedef ppm_request_multiple_response_cb
     = ffi.Pointer<ffi.NativeFunction<ppm_request_multiple_response_cbFunction>>;
+/// @nodoc
 typedef ppm_request_multiple_response_cbFunction = ffi.Void Function(
     ffi.Int32 cause,
     ffi.Pointer<ffi.Int32> results,
     ffi.Pointer<ffi.Pointer<ffi.Char>> privileges,
     ffi.Size privileges_count,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartppm_request_multiple_response_cbFunction = void Function(
     int cause,
     ffi.Pointer<ffi.Int32> results,

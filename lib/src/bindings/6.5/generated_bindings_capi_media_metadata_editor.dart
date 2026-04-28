@@ -1,3 +1,6 @@
+/// {@category 6.5/tizen}
+library tizen_interop_6_5.capi_media_metadata_editor;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen capi-media-metadata-editor APIs.
+/// {@category 6.5/tizen}
 class Tizen65CapiMediaMetadataEditor {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,17 +28,27 @@ class Tizen65CapiMediaMetadataEditor {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Creates metadata.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+  /// Creates metadata.
   ///
-  /// @remarks The @a metadata should be released using metadata_editor_destroy().
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
   ///
-  /// @param[in] metadata The handle to metadata
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #METADATA_EDITOR_ERROR_NONE Successful
-  /// @retval #METADATA_EDITOR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #METADATA_EDITOR_ERROR_OUT_OF_MEMORY Out of memory
-  /// @see metadata_editor_destroy()
+  /// **Remarks:**
+  /// - The `metadata` should be released using metadata_editor_destroy().
+  ///
+  /// **Parameters:**
+  /// - `metadata` (in): The handle to metadata
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `METADATA_EDITOR_ERROR_NONE`: Successful
+  /// - `METADATA_EDITOR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `METADATA_EDITOR_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `metadata_editor_destroy()`
   int metadata_editor_create(
     ffi.Pointer<metadata_editor_h> metadata,
   ) {
@@ -49,24 +63,36 @@ class Tizen65CapiMediaMetadataEditor {
   late final _metadata_editor_create = _metadata_editor_createPtr
       .asFunction<int Function(ffi.Pointer<metadata_editor_h>)>();
 
-  /// @brief Sets file path to read or write metadata.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+  /// Sets file path to read or write metadata.
   ///
-  /// @remarks In case of accessing specific path in internal storage or external storage, you may add the privilege for accessing the path. \n
-  /// For example, if you get the specific path by using storage_get_directory(). you should add privilege %http://tizen.org/privilege/mediastorage or %http://tizen.org/privilege/externalstorage.
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
   ///
-  /// @param[in] metadata The handle to metadata
-  /// @param[in] path path to read or write metadata
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #METADATA_EDITOR_ERROR_NONE Successful
-  /// @retval #METADATA_EDITOR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #METADATA_EDITOR_ERROR_FILE_EXISTS File not exist
-  /// @retval #METADATA_EDITOR_ERROR_NOT_SUPPORTED unsupported file type
-  /// @retval #METADATA_EDITOR_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #METADATA_EDITOR_ERROR_OPERATION_FAILED Internal Operation Fail
-  /// @pre Create metadata handle by calling metadata_editor_create()
-  /// @see metadata_editor_create()
-  /// @see metadata_editor_destroy()
+  /// **Remarks:**
+  /// - In case of accessing specific path in internal storage or external storage, you may add the privilege for accessing the path.
+  /// - For example, if you get the specific path by using storage_get_directory(). you should add privilege http://tizen.org/privilege/mediastorage or http://tizen.org/privilege/externalstorage.
+  ///
+  /// **Parameters:**
+  /// - `metadata` (in): The handle to metadata
+  /// - `path` (in): path to read or write metadata
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `METADATA_EDITOR_ERROR_NONE`: Successful
+  /// - `METADATA_EDITOR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `METADATA_EDITOR_ERROR_FILE_EXISTS`: File not exist
+  /// - `METADATA_EDITOR_ERROR_NOT_SUPPORTED`: unsupported file type
+  /// - `METADATA_EDITOR_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `METADATA_EDITOR_ERROR_OPERATION_FAILED`: Internal Operation Fail
+  ///
+  /// **Preconditions:**
+  /// - Create metadata handle by calling metadata_editor_create()
+  ///
+  /// **See also:**
+  /// - `metadata_editor_create()`
+  /// - `metadata_editor_destroy()`
   int metadata_editor_set_path(
     metadata_editor_h metadata,
     ffi.Pointer<ffi.Char> path,
@@ -84,27 +110,39 @@ class Tizen65CapiMediaMetadataEditor {
   late final _metadata_editor_set_path = _metadata_editor_set_pathPtr
       .asFunction<int Function(metadata_editor_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the metadata corresponding to the attribute.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+  /// Gets the metadata corresponding to the attribute.
   ///
-  /// @remarks The @a value should be released using free(). \n
-  /// If the attribute value of the metadata is empty, return value is NULL. \n
-  /// In case of accessing specific path in internal storage or external storage, you may add the privilege for accessing the path. \n
-  /// For example, if you get the specific path by using storage_get_directory(). you should add privilege %http://tizen.org/privilege/mediastorage or %http://tizen.org/privilege/externalstorage.
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
   ///
-  /// @param[in] metadata The handle to metadata
-  /// @param[in] attribute key attribute name to get
-  /// @param[out] value The value of the attribute
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #METADATA_EDITOR_ERROR_NONE Successful
-  /// @retval #METADATA_EDITOR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #METADATA_EDITOR_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #METADATA_EDITOR_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #METADATA_EDITOR_ERROR_OPERATION_FAILED Internal Operation Fail
-  /// @pre Set path to read or write metadata by calling metadata_editor_set_path()
-  /// @see metadata_editor_create()
-  /// @see metadata_editor_set_path()
-  /// @see metadata_editor_destroy()
+  /// **Remarks:**
+  /// - The `value` should be released using free().
+  /// - If the attribute value of the metadata is empty, return value is NULL.
+  /// - In case of accessing specific path in internal storage or external storage, you may add the privilege for accessing the path.
+  /// - For example, if you get the specific path by using storage_get_directory(). you should add privilege http://tizen.org/privilege/mediastorage or http://tizen.org/privilege/externalstorage.
+  ///
+  /// **Parameters:**
+  /// - `metadata` (in): The handle to metadata
+  /// - `attribute` (in): key attribute name to get
+  /// - `value` (out): The value of the attribute
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `METADATA_EDITOR_ERROR_NONE`: Successful
+  /// - `METADATA_EDITOR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `METADATA_EDITOR_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `METADATA_EDITOR_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `METADATA_EDITOR_ERROR_OPERATION_FAILED`: Internal Operation Fail
+  ///
+  /// **Preconditions:**
+  /// - Set path to read or write metadata by calling metadata_editor_set_path()
+  ///
+  /// **See also:**
+  /// - `metadata_editor_create()`
+  /// - `metadata_editor_set_path()`
+  /// - `metadata_editor_destroy()`
   int metadata_editor_get_metadata(
     metadata_editor_h metadata,
     int attribute,
@@ -127,30 +165,42 @@ class Tizen65CapiMediaMetadataEditor {
           int Function(
               metadata_editor_h, int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets the attribute of the metadata.
-  /// @details This function set the attribute of the metadata for updating the metadata. \n
-  /// If @a attribute is #METADATA_EDITOR_ATTR_PICTURE_NUM, this function returns #METADATA_EDITOR_ERROR_INVALID_PARAMETER.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+  /// Sets the attribute of the metadata.
   ///
-  /// @remarks The @a value should be released using free(). \n
-  /// You must call metadata_editor_update_metadata() to apply metadata changes to the media file. Otherwise, the previous metadata will be returned when you call metadata_editor_get_metadata().
-  /// This function doesn't support updating metadata of an invalid media file.
-  /// Before 6.0, this function returned #METADATA_EDITOR_ERROR_OPERATION_FAILED. Since 6.0, #METADATA_EDITOR_ERROR_METADATA_UPDATE_NOT_POSSIBLE is returned in such cases.
+  /// This function set the attribute of the metadata for updating the metadata. If `attribute` is `METADATA_EDITOR_ATTR_PICTURE_NUM`, this function returns `METADATA_EDITOR_ERROR_INVALID_PARAMETER`.
   ///
-  /// @param[in] metadata The handle to metadata
-  /// @param[in] attribute key attribute name to get
-  /// @param[in] value The value of the attribute
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #METADATA_EDITOR_ERROR_NONE Successful
-  /// @retval #METADATA_EDITOR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #METADATA_EDITOR_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #METADATA_EDITOR_ERROR_OPERATION_FAILED Internal Operation Fail
-  /// @retval #METADATA_EDITOR_ERROR_METADATA_UPDATE_NOT_POSSIBLE Update not possible
-  /// @pre Set path to read or write metadata by calling metadata_editor_set_path()
-  /// @see metadata_editor_create()
-  /// @see metadata_editor_set_path()
-  /// @see metadata_editor_update_metadata()
-  /// @see metadata_editor_destroy()
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Remarks:**
+  /// - The `value` should be released using free().
+  /// - You must call metadata_editor_update_metadata() to apply metadata changes to the media file. Otherwise, the previous metadata will be returned when you call metadata_editor_get_metadata().
+  /// - This function doesn't support updating metadata of an invalid media file.
+  /// - Before 6.0, this function returned `METADATA_EDITOR_ERROR_OPERATION_FAILED`. Since 6.0, `METADATA_EDITOR_ERROR_METADATA_UPDATE_NOT_POSSIBLE` is returned in such cases.
+  ///
+  /// **Parameters:**
+  /// - `metadata` (in): The handle to metadata
+  /// - `attribute` (in): key attribute name to get
+  /// - `value` (in): The value of the attribute
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `METADATA_EDITOR_ERROR_NONE`: Successful
+  /// - `METADATA_EDITOR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `METADATA_EDITOR_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `METADATA_EDITOR_ERROR_OPERATION_FAILED`: Internal Operation Fail
+  /// - `METADATA_EDITOR_ERROR_METADATA_UPDATE_NOT_POSSIBLE`: Update not possible
+  ///
+  /// **Preconditions:**
+  /// - Set path to read or write metadata by calling metadata_editor_set_path()
+  ///
+  /// **See also:**
+  /// - `metadata_editor_create()`
+  /// - `metadata_editor_set_path()`
+  /// - `metadata_editor_update_metadata()`
+  /// - `metadata_editor_destroy()`
   int metadata_editor_set_metadata(
     metadata_editor_h metadata,
     int attribute,
@@ -171,24 +221,37 @@ class Tizen65CapiMediaMetadataEditor {
       _metadata_editor_set_metadataPtr.asFunction<
           int Function(metadata_editor_h, int, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Updates the modified metadata.
-  /// @details This function update the metadata in the media file that is modified by metadata_editor_set_metadata().
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+  /// Updates the modified metadata.
   ///
-  /// @remarks In case of accessing specific path in internal storage or external storage, you may add the privilege for accessing the path. \n
-  /// For example, if you get the specific path by using storage_get_directory(). you should add privilege %http://tizen.org/privilege/mediastorage or %http://tizen.org/privilege/externalstorage.
+  /// This function update the metadata in the media file that is modified by metadata_editor_set_metadata().
   ///
-  /// @param[in] metadata The handle to metadata
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #METADATA_EDITOR_ERROR_NONE Successful
-  /// @retval #METADATA_EDITOR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #METADATA_EDITOR_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #METADATA_EDITOR_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #METADATA_EDITOR_ERROR_OPERATION_FAILED Internal Operation Fail
-  /// @pre Set path to read or write metadata by calling metadata_editor_set_path()
-  /// @see metadata_editor_create()
-  /// @see metadata_editor_set_path()
-  /// @see metadata_editor_destroy()
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Remarks:**
+  /// - In case of accessing specific path in internal storage or external storage, you may add the privilege for accessing the path.
+  /// - For example, if you get the specific path by using storage_get_directory(). you should add privilege http://tizen.org/privilege/mediastorage or http://tizen.org/privilege/externalstorage.
+  ///
+  /// **Parameters:**
+  /// - `metadata` (in): The handle to metadata
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `METADATA_EDITOR_ERROR_NONE`: Successful
+  /// - `METADATA_EDITOR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `METADATA_EDITOR_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `METADATA_EDITOR_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `METADATA_EDITOR_ERROR_OPERATION_FAILED`: Internal Operation Fail
+  ///
+  /// **Preconditions:**
+  /// - Set path to read or write metadata by calling metadata_editor_set_path()
+  ///
+  /// **See also:**
+  /// - `metadata_editor_create()`
+  /// - `metadata_editor_set_path()`
+  /// - `metadata_editor_destroy()`
   int metadata_editor_update_metadata(
     metadata_editor_h metadata,
   ) {
@@ -204,30 +267,42 @@ class Tizen65CapiMediaMetadataEditor {
       _metadata_editor_update_metadataPtr
           .asFunction<int Function(metadata_editor_h)>();
 
-  /// @brief Gets the picture in the media file.
-  /// @details If there is no picture or if the @a index is invalid, this function returns #METADATA_EDITOR_ERROR_INVALID_PARAMETER.\n
-  /// You can get picture number by using metadata_editor_get_metadata() and index starts with 0.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+  /// Gets the picture in the media file.
   ///
-  /// @remarks The @a picture and @a mime_type should be released using free(). \n
-  /// In case of accessing specific path in internal storage or external storage, you may add the privilege for accessing the path. \n
-  /// For example, if you get the specific path by using storage_get_directory(). you should add privilege %http://tizen.org/privilege/mediastorage or %http://tizen.org/privilege/externalstorage.
+  /// If there is no picture or if the `index` is invalid, this function returns `METADATA_EDITOR_ERROR_INVALID_PARAMETER`. You can get picture number by using metadata_editor_get_metadata() and index starts with 0.
   ///
-  /// @param[in] metadata The handle to metadata
-  /// @param[in] index picture order (starts with 0)
-  /// @param[out] picture encoded picture
-  /// @param[out] size encoded picture size
-  /// @param[out] mime_type the MIME of the picture
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #METADATA_EDITOR_ERROR_NONE Successful
-  /// @retval #METADATA_EDITOR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #METADATA_EDITOR_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #METADATA_EDITOR_ERROR_OPERATION_FAILED Internal Operation Fail
-  /// @retval #METADATA_EDITOR_ERROR_PERMISSION_DENIED Permission denied
-  /// @pre Set path to read or write metadata by calling metadata_editor_set_path()
-  /// @see metadata_editor_create()
-  /// @see metadata_editor_set_path()
-  /// @see metadata_editor_destroy()
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Remarks:**
+  /// - The `picture` and `mime_type` should be released using free().
+  /// - In case of accessing specific path in internal storage or external storage, you may add the privilege for accessing the path.
+  /// - For example, if you get the specific path by using storage_get_directory(). you should add privilege http://tizen.org/privilege/mediastorage or http://tizen.org/privilege/externalstorage.
+  ///
+  /// **Parameters:**
+  /// - `metadata` (in): The handle to metadata
+  /// - `index` (in): picture order (starts with 0)
+  /// - `picture` (out): encoded picture
+  /// - `size` (out): encoded picture size
+  /// - `mime_type` (out): the MIME of the picture
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `METADATA_EDITOR_ERROR_NONE`: Successful
+  /// - `METADATA_EDITOR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `METADATA_EDITOR_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `METADATA_EDITOR_ERROR_OPERATION_FAILED`: Internal Operation Fail
+  /// - `METADATA_EDITOR_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **Preconditions:**
+  /// - Set path to read or write metadata by calling metadata_editor_set_path()
+  ///
+  /// **See also:**
+  /// - `metadata_editor_create()`
+  /// - `metadata_editor_set_path()`
+  /// - `metadata_editor_destroy()`
   int metadata_editor_get_picture(
     metadata_editor_h metadata,
     int index,
@@ -262,31 +337,43 @@ class Tizen65CapiMediaMetadataEditor {
               ffi.Pointer<ffi.Int>,
               ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Appends the picture to the media file.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+  /// Appends the picture to the media file.
   ///
-  /// @remarks You must call metadata_editor_update_metadata() to apply metadata changes to the media file. Otherwise, the previous metadata will be returned when you call metadata_editor_get_metadata(). \n
-  /// Image type of the metadata supports jpeg and png. \n
-  /// In case of accessing specific path in internal storage or external storage, you may add the privilege for accessing the path. \n
-  /// For example, if you get the specific path by using storage_get_directory(). you should add privilege %http://tizen.org/privilege/mediastorage or %http://tizen.org/privilege/externalstorage.
-  /// This function doesn't support updating metadata of an invalid media file.
-  /// Before 6.0, this function returned #METADATA_EDITOR_ERROR_OPERATION_FAILED. Since 6.0, #METADATA_EDITOR_ERROR_METADATA_UPDATE_NOT_POSSIBLE is returned in such cases.
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
   ///
-  /// @param[in] metadata The handle to metadata
-  /// @param[in] picture_path The path of picture for adding to the metadata
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #METADATA_EDITOR_ERROR_NONE Successful
-  /// @retval #METADATA_EDITOR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #METADATA_EDITOR_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #METADATA_EDITOR_ERROR_NOT_SUPPORTED unsupported file type
-  /// @retval #METADATA_EDITOR_ERROR_OPERATION_FAILED Internal Operation Fail
-  /// @retval #METADATA_EDITOR_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #METADATA_EDITOR_ERROR_METADATA_UPDATE_NOT_POSSIBLE Update not possible
-  /// @pre Set path to read or write metadata by calling metadata_editor_set_path()
-  /// @see metadata_editor_create()
-  /// @see metadata_editor_set_path()
-  /// @see metadata_editor_update_metadata()
-  /// @see metadata_editor_destroy()
+  /// **Remarks:**
+  /// - You must call metadata_editor_update_metadata() to apply metadata changes to the media file. Otherwise, the previous metadata will be returned when you call metadata_editor_get_metadata().
+  /// - Image type of the metadata supports jpeg and png.
+  /// - In case of accessing specific path in internal storage or external storage, you may add the privilege for accessing the path.
+  /// - For example, if you get the specific path by using storage_get_directory(). you should add privilege http://tizen.org/privilege/mediastorage or http://tizen.org/privilege/externalstorage.
+  /// - This function doesn't support updating metadata of an invalid media file.
+  /// - Before 6.0, this function returned `METADATA_EDITOR_ERROR_OPERATION_FAILED`. Since 6.0, `METADATA_EDITOR_ERROR_METADATA_UPDATE_NOT_POSSIBLE` is returned in such cases.
+  ///
+  /// **Parameters:**
+  /// - `metadata` (in): The handle to metadata
+  /// - `picture_path` (in): The path of picture for adding to the metadata
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `METADATA_EDITOR_ERROR_NONE`: Successful
+  /// - `METADATA_EDITOR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `METADATA_EDITOR_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `METADATA_EDITOR_ERROR_NOT_SUPPORTED`: unsupported file type
+  /// - `METADATA_EDITOR_ERROR_OPERATION_FAILED`: Internal Operation Fail
+  /// - `METADATA_EDITOR_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `METADATA_EDITOR_ERROR_METADATA_UPDATE_NOT_POSSIBLE`: Update not possible
+  ///
+  /// **Preconditions:**
+  /// - Set path to read or write metadata by calling metadata_editor_set_path()
+  ///
+  /// **See also:**
+  /// - `metadata_editor_create()`
+  /// - `metadata_editor_set_path()`
+  /// - `metadata_editor_update_metadata()`
+  /// - `metadata_editor_destroy()`
   int metadata_editor_append_picture(
     metadata_editor_h metadata,
     ffi.Pointer<ffi.Char> picture_path,
@@ -305,26 +392,38 @@ class Tizen65CapiMediaMetadataEditor {
       _metadata_editor_append_picturePtr
           .asFunction<int Function(metadata_editor_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Removes artwork image from media file.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+  /// Removes artwork image from media file.
   ///
-  /// @remarks You must call metadata_editor_update_metadata() to apply metadata changes to the media file. Otherwise, the previous metadata will be returned when you call metadata_editor_get_metadata(). \n
-  /// In case of accessing specific path in internal storage or external storage, you may add the privilege for accessing the path. \n
-  /// For example, if you get the specific path by using storage_get_directory(). you should add privilege %http://tizen.org/privilege/mediastorage or %http://tizen.org/privilege/externalstorage.
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
   ///
-  /// @param[in] metadata The handle to metadata
-  /// @param[in] index artwork image order
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #METADATA_EDITOR_ERROR_NONE Successful
-  /// @retval #METADATA_EDITOR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #METADATA_EDITOR_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #METADATA_EDITOR_ERROR_OPERATION_FAILED Internal Operation Fail
-  /// @retval #METADATA_EDITOR_ERROR_PERMISSION_DENIED Permission denied
-  /// @pre Set path to read or write metadata by calling metadata_editor_set_path()
-  /// @see metadata_editor_create()
-  /// @see metadata_editor_set_path()
-  /// @see metadata_editor_update_metadata()
-  /// @see metadata_editor_destroy()
+  /// **Remarks:**
+  /// - You must call metadata_editor_update_metadata() to apply metadata changes to the media file. Otherwise, the previous metadata will be returned when you call metadata_editor_get_metadata().
+  /// - In case of accessing specific path in internal storage or external storage, you may add the privilege for accessing the path.
+  /// - For example, if you get the specific path by using storage_get_directory(). you should add privilege http://tizen.org/privilege/mediastorage or http://tizen.org/privilege/externalstorage.
+  ///
+  /// **Parameters:**
+  /// - `metadata` (in): The handle to metadata
+  /// - `index` (in): artwork image order
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `METADATA_EDITOR_ERROR_NONE`: Successful
+  /// - `METADATA_EDITOR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `METADATA_EDITOR_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `METADATA_EDITOR_ERROR_OPERATION_FAILED`: Internal Operation Fail
+  /// - `METADATA_EDITOR_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **Preconditions:**
+  /// - Set path to read or write metadata by calling metadata_editor_set_path()
+  ///
+  /// **See also:**
+  /// - `metadata_editor_create()`
+  /// - `metadata_editor_set_path()`
+  /// - `metadata_editor_update_metadata()`
+  /// - `metadata_editor_destroy()`
   int metadata_editor_remove_picture(
     metadata_editor_h metadata,
     int index,
@@ -342,16 +441,27 @@ class Tizen65CapiMediaMetadataEditor {
       _metadata_editor_remove_picturePtr
           .asFunction<int Function(metadata_editor_h, int)>();
 
-  /// @brief Destroys metadata.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+  /// Destroys metadata.
   ///
-  /// @param[in] metadata The handle to metadata
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #METADATA_EDITOR_ERROR_NONE Successful
-  /// @retval #METADATA_EDITOR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #METADATA_EDITOR_ERROR_OPERATION_FAILED Internal Operation Fail
-  /// @pre Create metadata handle by calling metadata_editor_create()
-  /// @see metadata_editor_create()
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `metadata` (in): The handle to metadata
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `METADATA_EDITOR_ERROR_NONE`: Successful
+  /// - `METADATA_EDITOR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `METADATA_EDITOR_ERROR_OPERATION_FAILED`: Internal Operation Fail
+  ///
+  /// **Preconditions:**
+  /// - Create metadata handle by calling metadata_editor_create()
+  ///
+  /// **See also:**
+  /// - `metadata_editor_create()`
   int metadata_editor_destroy(
     metadata_editor_h metadata,
   ) {
@@ -367,9 +477,14 @@ class Tizen65CapiMediaMetadataEditor {
       _metadata_editor_destroyPtr.asFunction<int Function(metadata_editor_h)>();
 }
 
-/// @ingroup CAPI_MEDIA_METADATA_EDITOR_MODULE
-/// @brief The enumerations of media metadata error.
-/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+/// The enumerations of media metadata error.
+///
+/// **Since Tizen:**
+/// - Mobile 2.4; Wearable 3.0
+///
+/// **Group:**
+/// - CAPI_MEDIA_METADATA_EDITOR_MODULE
+/// @nodoc
 abstract class metadata_editor_error_e {
   /// < Successful
   static const int METADATA_EDITOR_ERROR_NONE = 0;
@@ -397,9 +512,14 @@ abstract class metadata_editor_error_e {
       -27000830;
 }
 
-/// @ingroup CAPI_MEDIA_METADATA_EDITOR_MODULE
-/// @brief The enumerations of attribute.
-/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+/// The enumerations of attribute.
+///
+/// **Since Tizen:**
+/// - Mobile 2.4; Wearable 3.0
+///
+/// **Group:**
+/// - CAPI_MEDIA_METADATA_EDITOR_MODULE
+/// @nodoc
 abstract class metadata_editor_attr_e {
   /// < Artist
   static const int METADATA_EDITOR_ATTR_ARTIST = 0;
@@ -441,9 +561,15 @@ abstract class metadata_editor_attr_e {
   static const int METADATA_EDITOR_ATTR_UNSYNCLYRICS = 12;
 }
 
-/// @ingroup CAPI_MEDIA_METADATA_EDITOR_MODULE
-/// @brief The handle of media metadata.
-/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+/// The handle of media metadata.
+///
+/// **Since Tizen:**
+/// - Mobile 2.4; Wearable 3.0
+///
+/// **Group:**
+/// - CAPI_MEDIA_METADATA_EDITOR_MODULE
+/// @nodoc
 typedef metadata_editor_h = ffi.Pointer<ffi.Void>;
 
+/// @nodoc
 const int METADATA_EDITOR_ERROR_CLASS = -27000832;

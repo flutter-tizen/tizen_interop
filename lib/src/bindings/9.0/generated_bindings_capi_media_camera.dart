@@ -1,3 +1,6 @@
+/// {@category 9.0/tizen}
+library tizen_interop_9_0.capi_media_camera;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -10,6 +13,7 @@ import 'dart:ffi' as ffi;
 import 'generated_bindings_capi_media_tool.dart' as media_tool;
 
 /// Dart bindings for Tizen capi-media-camera APIs.
+/// {@category 9.0/tizen}
 class Tizen90CapiMediaCamera {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -25,27 +29,40 @@ class Tizen90CapiMediaCamera {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Creates a new camera handle for controlling a camera.
+  /// Creates a new camera handle for controlling a camera.
   ///
-  /// @since_tizen 2.3
-  /// @remarks Multiple handles on a context at the same time are allowed to be created. However,
-  /// camera cannot guarantee proper operation because of limited resources, such as
-  /// camera device, audio device, and display device.\n.
-  /// A @a camera must be released using camera_destroy().
-  /// @remarks The privilege %http://tizen.org/privilege/camera is not required since 4.0,\n
-  /// but it is required in all earlier versions.
-  /// @param[in]  device The hardware camera to access
-  /// @param[out] camera A newly returned handle to the camera
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CAMERA_ERROR_INVALID_OPERATION Invalid operation
-  /// @post If it succeeds, the camera state will be #CAMERA_STATE_CREATED.
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @see camera_destroy()
+  /// **Remarks:**
+  /// - Multiple handles on a context at the same time are allowed to be created. However,
+  /// - camera cannot guarantee proper operation because of limited resources, such as
+  /// - camera device, audio device, and display device.
+  /// - .
+  /// - A `camera` must be released using camera_destroy().
+  /// - The privilege http://tizen.org/privilege/camera is not required since 4.0,
+  /// - but it is required in all earlier versions.
+  ///
+  /// **Parameters:**
+  /// - `device` (in): The hardware camera to access
+  /// - `camera` (out): A newly returned handle to the camera
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CAMERA_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Postconditions:**
+  /// - If it succeeds, the camera state will be `CAMERA_STATE_CREATED`.
+  ///
+  /// **See also:**
+  /// - `camera_destroy()`
   int camera_create(
     int device,
     ffi.Pointer<camera_h> camera,
@@ -62,27 +79,41 @@ class Tizen90CapiMediaCamera {
   late final _camera_create =
       _camera_createPtr.asFunction<int Function(int, ffi.Pointer<camera_h>)>();
 
-  /// @brief Changes the camera device.
+  /// Changes the camera device.
   ///
-  /// @since_tizen 3.0
-  /// @remarks This function can be used to change camera device simply without camera_destroy() and camera_create().\n
-  /// If display reuse hint is set by camera_set_display_reuse_hint() before stopping the preview,\n
-  /// display handle will be reused and last frame on display can be kept even though camera device is changed.
-  /// @param[in] camera The handle to the camera
-  /// @param[in] device The hardware camera to access
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_STATE Invalid state
-  /// @retval #CAMERA_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CAMERA_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @pre    The camera state must be set to #CAMERA_STATE_CREATED.
-  /// @post   If it succeeds, the camera attributes and settings will be reset.
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @see camera_set_display_reuse_hint()
-  /// @see camera_get_display_reuse_hint()
+  /// **Remarks:**
+  /// - This function can be used to change camera device simply without camera_destroy() and camera_create().
+  /// - If display reuse hint is set by camera_set_display_reuse_hint() before stopping the preview,
+  /// - display handle will be reused and last frame on display can be kept even though camera device is changed.
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `device` (in): The hardware camera to access
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_STATE`: Invalid state
+  /// - `CAMERA_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CAMERA_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **Preconditions:**
+  /// - The camera state must be set to `CAMERA_STATE_CREATED`.
+  ///
+  /// **Postconditions:**
+  /// - If it succeeds, the camera attributes and settings will be reset.
+  ///
+  /// **See also:**
+  /// - `camera_set_display_reuse_hint()`
+  /// - `camera_get_display_reuse_hint()`
   int camera_change_device(
     camera_h camera,
     int device,
@@ -99,19 +130,28 @@ class Tizen90CapiMediaCamera {
   late final _camera_change_device =
       _camera_change_devicePtr.asFunction<int Function(camera_h, int)>();
 
-  /// @brief Destroys the camera handle and releases all its resources.
+  /// Destroys the camera handle and releases all its resources.
   ///
-  /// @since_tizen 2.3
-  /// @param[in] camera The handle to the camera
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_STATE Invalid state
-  /// @retval #CAMERA_ERROR_INVALID_OPERATION Invalid operation
-  /// @see camera_create()
-  /// @see camera_create_network()
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_STATE`: Invalid state
+  /// - `CAMERA_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `camera_create()`
+  /// - `camera_create_network()`
   int camera_destroy(
     camera_h camera,
   ) {
@@ -125,19 +165,33 @@ class Tizen90CapiMediaCamera {
   late final _camera_destroy =
       _camera_destroyPtr.asFunction<int Function(camera_h)>();
 
-  /// @brief Creates a new camera handle for controlling a network camera.
-  /// @since_tizen 7.0
-  /// @remarks A @a camera must be released using camera_destroy().
-  /// @param[in]  device The network camera to access
-  /// @param[out] camera A newly returned handle to the camera
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CAMERA_ERROR_INVALID_OPERATION Invalid operation
-  /// @post If it succeeds, the camera state will be #CAMERA_STATE_CREATED.
-  /// @see camera_destroy()
+  /// Creates a new camera handle for controlling a network camera.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Remarks:**
+  /// - A `camera` must be released using camera_destroy().
+  ///
+  /// **Parameters:**
+  /// - `device` (in): The network camera to access
+  /// - `camera` (out): A newly returned handle to the camera
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CAMERA_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Postconditions:**
+  /// - If it succeeds, the camera state will be `CAMERA_STATE_CREATED`.
+  ///
+  /// **See also:**
+  /// - `camera_destroy()`
   int camera_create_network(
     int device,
     ffi.Pointer<camera_h> camera,
@@ -155,17 +209,29 @@ class Tizen90CapiMediaCamera {
   late final _camera_create_network = _camera_create_networkPtr
       .asFunction<int Function(int, ffi.Pointer<camera_h>)>();
 
-  /// @brief Initializes a camera device manager.
-  /// @since_tizen 7.0
-  /// @remarks A @a manager must be released with camera_device_manager_deinitialize().
-  /// @param[out] manager A newly returned handle to the camera device manager
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CAMERA_ERROR_INVALID_OPERATION Invalid operation
-  /// @see camera_device_manager_deinitialize()
+  /// Initializes a camera device manager.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Remarks:**
+  /// - A `manager` must be released with camera_device_manager_deinitialize().
+  ///
+  /// **Parameters:**
+  /// - `manager` (out): A newly returned handle to the camera device manager
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CAMERA_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `camera_device_manager_deinitialize()`
   int camera_device_manager_initialize(
     ffi.Pointer<camera_device_manager_h> manager,
   ) {
@@ -182,15 +248,25 @@ class Tizen90CapiMediaCamera {
       _camera_device_manager_initializePtr
           .asFunction<int Function(ffi.Pointer<camera_device_manager_h>)>();
 
-  /// @brief Deinitializes the camera device manager handle.
-  /// @since_tizen 7.0
-  /// @param[in] manager The handle to the camera device manager
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_OPERATION Invalid operation
-  /// @see camera_device_manager_initialize()
+  /// Deinitializes the camera device manager handle.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Parameters:**
+  /// - `manager` (in): The handle to the camera device manager
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `camera_device_manager_initialize()`
   int camera_device_manager_deinitialize(
     camera_device_manager_h manager,
   ) {
@@ -206,20 +282,32 @@ class Tizen90CapiMediaCamera {
       _camera_device_manager_deinitializePtr
           .asFunction<int Function(camera_device_manager_h)>();
 
-  /// @brief Retrieves all supported devices by invoking the callback function once for each supported device.
-  /// @since_tizen 7.0
-  /// @param[in] manager   The handle to the camera device manager
-  /// @param[in] callback  The callback function to be invoked
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_OPERATION Invalid operation
-  /// @post This function invokes camera_supported_device_cb() repeatedly to retrieve each supported device.
-  /// @see camera_supported_device_cb()
-  /// @see camera_device_manager_initialize()
-  /// @see camera_device_manager_deinitialize()
+  /// Retrieves all supported devices by invoking the callback function once for each supported device.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Parameters:**
+  /// - `manager` (in): The handle to the camera device manager
+  /// - `callback` (in): The callback function to be invoked
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Postconditions:**
+  /// - This function invokes camera_supported_device_cb() repeatedly to retrieve each supported device.
+  ///
+  /// **See also:**
+  /// - `camera_supported_device_cb()`
+  /// - `camera_device_manager_initialize()`
+  /// - `camera_device_manager_deinitialize()`
   int camera_device_manager_foreach_supported_device(
     camera_device_manager_h manager,
     camera_supported_device_cb callback,
@@ -242,20 +330,32 @@ class Tizen90CapiMediaCamera {
           int Function(camera_device_manager_h, camera_supported_device_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Adds a callback function to be invoked when the connection state of camera device is changed.
-  /// @since_tizen 7.0
-  /// @param[in]  manager   The handle to the camera device manager
-  /// @param[in]  callback  The callback function to be invoked
-  /// @param[in]  user_data The user data to be passed to the callback function
-  /// @param[out] cb_id     The id of added callback
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_OPERATION Invalid operation
-  /// @post camera_device_connection_changed_cb() will be invoked when the connection state of camera device is changed.
-  /// @see camera_device_manager_remove_device_connection_changed_cb()
-  /// @see camera_device_connection_changed_cb()
+  /// Adds a callback function to be invoked when the connection state of camera device is changed.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Parameters:**
+  /// - `manager` (in): The handle to the camera device manager
+  /// - `callback` (in): The callback function to be invoked
+  /// - `user_data` (in): The user data to be passed to the callback function
+  /// - `cb_id` (out): The id of added callback
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Postconditions:**
+  /// - camera_device_connection_changed_cb() will be invoked when the connection state of camera device is changed.
+  ///
+  /// **See also:**
+  /// - `camera_device_manager_remove_device_connection_changed_cb()`
+  /// - `camera_device_connection_changed_cb()`
   int camera_device_manager_add_device_connection_changed_cb(
     camera_device_manager_h manager,
     camera_device_connection_changed_cb callback,
@@ -287,16 +387,26 @@ class Tizen90CapiMediaCamera {
               ffi.Pointer<ffi.Void>,
               ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Removes the device connection changed callback function.
-  /// @since_tizen 7.0
-  /// @param[in] manager The handle to the camera device manager
-  /// @param[in] cb_id   The id of added callback
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_OPERATION Invalid operation
-  /// @see camera_device_manager_add_device_changed_cb()
+  /// Removes the device connection changed callback function.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Parameters:**
+  /// - `manager` (in): The handle to the camera device manager
+  /// - `cb_id` (in): The id of added callback
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `camera_device_manager_add_device_changed_cb()`
   int camera_device_manager_remove_device_connection_changed_cb(
     camera_device_manager_h manager,
     int cb_id,
@@ -316,19 +426,29 @@ class Tizen90CapiMediaCamera {
       _camera_device_manager_remove_device_connection_changed_cbPtr
           .asFunction<int Function(camera_device_manager_h, int)>();
 
-  /// @brief Gets the product id of the camera device.
-  /// @since_tizen 8.0
-  /// @param[in]  manager    The handle to the camera device manager
-  /// @param[in]  device     The index of camera device
-  /// @param[out] product_id The product id of camera device
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_OPERATION Invalid operation
-  /// @see camera_device_manager_initialize()
-  /// @see camera_device_manager_deinitialize()
-  /// @see camera_supported_device_cb()
+  /// Gets the product id of the camera device.
+  ///
+  /// **Since Tizen:**
+  /// - 8.0
+  ///
+  /// **Parameters:**
+  /// - `manager` (in): The handle to the camera device manager
+  /// - `device` (in): The index of camera device
+  /// - `product_id` (out): The product id of camera device
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `camera_device_manager_initialize()`
+  /// - `camera_device_manager_deinitialize()`
+  /// - `camera_supported_device_cb()`
   int camera_device_manager_get_product_id(
     camera_device_manager_h manager,
     int device,
@@ -351,19 +471,29 @@ class Tizen90CapiMediaCamera {
           int Function(
               camera_device_manager_h, int, ffi.Pointer<ffi.UnsignedShort>)>();
 
-  /// @brief Gets the vendor id of the camera device.
-  /// @since_tizen 8.0
-  /// @param[in]  manager   The handle to the camera device manager
-  /// @param[in]  device    The index of camera device
-  /// @param[out] vendor_id The vendor id of camera device
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_OPERATION Invalid operation
-  /// @see camera_device_manager_initialize()
-  /// @see camera_device_manager_deinitialize()
-  /// @see camera_supported_device_cb()
+  /// Gets the vendor id of the camera device.
+  ///
+  /// **Since Tizen:**
+  /// - 8.0
+  ///
+  /// **Parameters:**
+  /// - `manager` (in): The handle to the camera device manager
+  /// - `device` (in): The index of camera device
+  /// - `vendor_id` (out): The vendor id of camera device
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `camera_device_manager_initialize()`
+  /// - `camera_device_manager_deinitialize()`
+  /// - `camera_supported_device_cb()`
   int camera_device_manager_get_vendor_id(
     camera_device_manager_h manager,
     int device,
@@ -386,43 +516,55 @@ class Tizen90CapiMediaCamera {
           int Function(
               camera_device_manager_h, int, ffi.Pointer<ffi.UnsignedShort>)>();
 
-  /// @brief Starts capturing and drawing preview frames on the screen.
+  /// Starts capturing and drawing preview frames on the screen.
   ///
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/camera
-  /// @param[in] camera The handle to the camera
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_STATE Invalid state
-  /// @retval #CAMERA_ERROR_RESOURCE_CONFLICT Resource conflict error
-  /// @retval #CAMERA_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #CAMERA_ERROR_DEVICE_BUSY The device is being used in another application or is performing other operations
-  /// @retval #CAMERA_ERROR_DEVICE_NOT_FOUND No camera device
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @pre    The camera state must be set to #CAMERA_STATE_CREATED or #CAMERA_STATE_CAPTURED.\n
-  /// You must set the display handle. \n
-  /// If needed, modify preview FPS(camera_attr_set_preview_fps()),
-  /// preview resolution(camera_set_preview_resolution()), or preview format(camera_set_preview_format()).
-  /// @post   If it succeeds, the camera state will be #CAMERA_STATE_PREVIEW.\n
-  /// camera_preview_cb() will be invoked when preview image data becomes available.
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @see camera_stop_preview()
-  /// @see camera_set_display()
-  /// @see camera_set_preview_cb()
-  /// @see camera_set_media_packet_preview_cb()
-  /// @see camera_foreach_supported_preview_resolution()
-  /// @see camera_set_preview_resolution()
-  /// @see camera_get_preview_resolution()
-  /// @see camera_foreach_supported_preview_format()
-  /// @see camera_set_preview_format()
-  /// @see camera_get_preview_format()
-  /// @see camera_attr_foreach_supported_fps()
-  /// @see camera_attr_set_preview_fps()
-  /// @see camera_attr_get_preview_fps()
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/camera>
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_STATE`: Invalid state
+  /// - `CAMERA_ERROR_RESOURCE_CONFLICT`: Resource conflict error
+  /// - `CAMERA_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `CAMERA_ERROR_DEVICE_BUSY`: The device is being used in another application or is performing other operations
+  /// - `CAMERA_ERROR_DEVICE_NOT_FOUND`: No camera device
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **Preconditions:**
+  /// - The camera state must be set to `CAMERA_STATE_CREATED` or `CAMERA_STATE_CAPTURED`. You must set the display handle. If needed, modify preview FPS(camera_attr_set_preview_fps()), preview resolution(camera_set_preview_resolution()), or preview format(camera_set_preview_format()).
+  ///
+  /// **Postconditions:**
+  /// - If it succeeds, the camera state will be `CAMERA_STATE_PREVIEW`. camera_preview_cb() will be invoked when preview image data becomes available.
+  ///
+  /// **See also:**
+  /// - `camera_stop_preview()`
+  /// - `camera_set_display()`
+  /// - `camera_set_preview_cb()`
+  /// - `camera_set_media_packet_preview_cb()`
+  /// - `camera_foreach_supported_preview_resolution()`
+  /// - `camera_set_preview_resolution()`
+  /// - `camera_get_preview_resolution()`
+  /// - `camera_foreach_supported_preview_format()`
+  /// - `camera_set_preview_format()`
+  /// - `camera_get_preview_format()`
+  /// - `camera_attr_foreach_supported_fps()`
+  /// - `camera_attr_set_preview_fps()`
+  /// - `camera_attr_get_preview_fps()`
   int camera_start_preview(
     camera_h camera,
   ) {
@@ -437,24 +579,42 @@ class Tizen90CapiMediaCamera {
   late final _camera_start_preview =
       _camera_start_previewPtr.asFunction<int Function(camera_h)>();
 
-  /// @brief Stops capturing and drawing preview frames.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/camera
-  /// @param[in] camera The handle to the camera
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_STATE Invalid state
-  /// @retval #CAMERA_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @pre The camera state must be set to #CAMERA_STATE_PREVIEW.
-  /// @post The camera state will be #CAMERA_STATE_CREATED.
-  /// @see camera_start_preview()
-  /// @see camera_unset_preview_cb()
-  /// @see camera_unset_media_packet_preview_cb()
+  /// Stops capturing and drawing preview frames.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/camera>
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_STATE`: Invalid state
+  /// - `CAMERA_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **Preconditions:**
+  /// - The camera state must be set to `CAMERA_STATE_PREVIEW`.
+  ///
+  /// **Postconditions:**
+  /// - The camera state will be `CAMERA_STATE_CREATED`.
+  ///
+  /// **See also:**
+  /// - `camera_start_preview()`
+  /// - `camera_unset_preview_cb()`
+  /// - `camera_unset_media_packet_preview_cb()`
   int camera_stop_preview(
     camera_h camera,
   ) {
@@ -469,43 +629,59 @@ class Tizen90CapiMediaCamera {
   late final _camera_stop_preview =
       _camera_stop_previewPtr.asFunction<int Function(camera_h)>();
 
-  /// @brief Starts capturing of still images.
+  /// Starts capturing of still images.
   ///
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/camera
-  /// @remarks This function causes the transition of the camera state from #CAMERA_STATE_CAPTURING to #CAMERA_STATE_CAPTURED automatically\n
-  /// and the corresponding callback function camera_capturing_cb() and camera_capture_completed_cb() will be invoked\n
-  /// The captured image will be delivered through camera_capturing_cb().\n
-  /// camera_capture_completed_cb() callback notifies about completion of camera_capturing_cb(). \n
-  /// The camera's preview should be restarted by calling camera_start_preview().
-  /// @param[in] camera       The handle to the camera
-  /// @param[in] capturing_cb The callback for capturing data
-  /// @param[in] completed_cb The callback for notification of completion
-  /// @param[in] user_data    The user data
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_STATE Invalid state
-  /// @retval #CAMERA_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @pre The camera state must be set to #CAMERA_STATE_PREVIEW. \n
-  /// If needed, modify capture resolution(camera_set_capture_resolution()),
-  /// capture format(camera_set_capture_format()), or image quality(camera_attr_set_image_quality()).
-  /// @post If it succeeds the camera state will be #CAMERA_STATE_CAPTURED.
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @see camera_start_preview()
-  /// @see camera_start_continuous_capture()
-  /// @see camera_foreach_supported_capture_resolution()
-  /// @see camera_set_capture_resolution()
-  /// @see camera_get_capture_resolution()
-  /// @see camera_foreach_supported_capture_format()
-  /// @see camera_set_capture_format()
-  /// @see camera_get_capture_format()
-  /// @see camera_attr_set_image_quality()
-  /// @see camera_attr_get_image_quality()
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/camera>
+  ///
+  /// **Remarks:**
+  /// - This function causes the transition of the camera state from `CAMERA_STATE_CAPTURING` to `CAMERA_STATE_CAPTURED` automatically
+  /// - and the corresponding callback function camera_capturing_cb() and camera_capture_completed_cb() will be invoked
+  /// - The captured image will be delivered through camera_capturing_cb().
+  /// - camera_capture_completed_cb() callback notifies about completion of camera_capturing_cb().
+  /// - The camera's preview should be restarted by calling camera_start_preview().
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `capturing_cb` (in): The callback for capturing data
+  /// - `completed_cb` (in): The callback for notification of completion
+  /// - `user_data` (in): The user data
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_STATE`: Invalid state
+  /// - `CAMERA_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **Preconditions:**
+  /// - The camera state must be set to `CAMERA_STATE_PREVIEW`. If needed, modify capture resolution(camera_set_capture_resolution()), capture format(camera_set_capture_format()), or image quality(camera_attr_set_image_quality()).
+  ///
+  /// **Postconditions:**
+  /// - If it succeeds the camera state will be `CAMERA_STATE_CAPTURED`.
+  ///
+  /// **See also:**
+  /// - `camera_start_preview()`
+  /// - `camera_start_continuous_capture()`
+  /// - `camera_foreach_supported_capture_resolution()`
+  /// - `camera_set_capture_resolution()`
+  /// - `camera_get_capture_resolution()`
+  /// - `camera_foreach_supported_capture_format()`
+  /// - `camera_set_capture_format()`
+  /// - `camera_get_capture_format()`
+  /// - `camera_attr_set_image_quality()`
+  /// - `camera_attr_get_image_quality()`
   int camera_start_capture(
     camera_h camera,
     camera_capturing_cb capturing_cb,
@@ -531,37 +707,54 @@ class Tizen90CapiMediaCamera {
       int Function(camera_h, camera_capturing_cb, camera_capture_completed_cb,
           ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Starts continuously capturing still images.
+  /// Starts continuously capturing still images.
   ///
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/camera
-  /// @remarks If this is not supported zero shutter lag occurs. The capture resolution could be changed to the preview resolution.\n
-  /// This function causes the transition of the camera state from #CAMERA_STATE_CAPTURING to #CAMERA_STATE_CAPTURED automatically\n
-  /// and the corresponding callback function camera_capturing_cb() and camera_capture_completed_cb() will be invoked\n
-  /// Each Captured image will be delivered through camera_capturing_cb().\n
-  /// The camera_capture_completed_cb() callback notifies about the completion of an entire capture.\n
-  /// The camera's preview should be restarted by calling camera_start_preview().\n.
-  /// @param[in] camera       The handle to the camera
-  /// @param[in] count        The number of still images
-  /// @param[in] interval     The interval of the capture (millisecond)
-  /// @param[in] capturing_cb The callback for capturing data
-  /// @param[in] completed_cb The callback for notification of completion
-  /// @param[in] user_data    The user data
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_STATE Invalid state
-  /// @retval #CAMERA_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @post   If it succeeds the camera state will be #CAMERA_STATE_CAPTURED.
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @see camera_start_preview()
-  /// @see camera_start_capture()
-  /// @see camera_stop_continuous_capture()
-  /// @see camera_is_supported_zero_shutter_lag()
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/camera>
+  ///
+  /// **Remarks:**
+  /// - If this is not supported zero shutter lag occurs. The capture resolution could be changed to the preview resolution.
+  /// - This function causes the transition of the camera state from `CAMERA_STATE_CAPTURING` to `CAMERA_STATE_CAPTURED` automatically
+  /// - and the corresponding callback function camera_capturing_cb() and camera_capture_completed_cb() will be invoked
+  /// - Each Captured image will be delivered through camera_capturing_cb().
+  /// - The camera_capture_completed_cb() callback notifies about the completion of an entire capture.
+  /// - The camera's preview should be restarted by calling camera_start_preview().
+  /// - .
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `count` (in): The number of still images
+  /// - `interval` (in): The interval of the capture (millisecond)
+  /// - `capturing_cb` (in): The callback for capturing data
+  /// - `completed_cb` (in): The callback for notification of completion
+  /// - `user_data` (in): The user data
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_STATE`: Invalid state
+  /// - `CAMERA_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **Postconditions:**
+  /// - If it succeeds the camera state will be `CAMERA_STATE_CAPTURED`.
+  ///
+  /// **See also:**
+  /// - `camera_start_preview()`
+  /// - `camera_start_capture()`
+  /// - `camera_stop_continuous_capture()`
+  /// - `camera_is_supported_zero_shutter_lag()`
   int camera_start_continuous_capture(
     camera_h camera,
     int count,
@@ -594,24 +787,40 @@ class Tizen90CapiMediaCamera {
           int Function(camera_h, int, int, camera_capturing_cb,
               camera_capture_completed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Aborts continuous capturing.
+  /// Aborts continuous capturing.
   ///
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/camera
-  /// @remarks The camera state will be changed to #CAMERA_STATE_CAPTURED.
-  /// @param[in] camera The handle to the camera
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_STATE Invalid state
-  /// @retval #CAMERA_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @pre The camera state must be set to #CAMERA_STATE_PREVIEW.
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @see camera_start_continuous_capture()
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/camera>
+  ///
+  /// **Remarks:**
+  /// - The camera state will be changed to `CAMERA_STATE_CAPTURED`.
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_STATE`: Invalid state
+  /// - `CAMERA_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **Preconditions:**
+  /// - The camera state must be set to `CAMERA_STATE_PREVIEW`.
+  ///
+  /// **See also:**
+  /// - `camera_start_continuous_capture()`
   int camera_stop_continuous_capture(
     camera_h camera,
   ) {
@@ -626,21 +835,30 @@ class Tizen90CapiMediaCamera {
   late final _camera_stop_continuous_capture =
       _camera_stop_continuous_capturePtr.asFunction<int Function(camera_h)>();
 
-  /// @brief Gets the state of the camera.
+  /// Gets the state of the camera.
   ///
-  /// @since_tizen 2.3
-  /// @param[in]  camera The handle to the camera
-  /// @param[out] state  The current state of the camera
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_create()
-  /// @see camera_start_preview()
-  /// @see camera_stop_preview()
-  /// @see camera_start_capture()
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `state` (out): The current state of the camera
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_create()`
+  /// - `camera_start_preview()`
+  /// - `camera_stop_preview()`
+  /// - `camera_start_capture()`
   int camera_get_state(
     camera_h camera,
     ffi.Pointer<ffi.Int32> state,
@@ -658,29 +876,47 @@ class Tizen90CapiMediaCamera {
   late final _camera_get_state = _camera_get_statePtr
       .asFunction<int Function(camera_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Starts camera auto-focusing, asynchronously.
+  /// Starts camera auto-focusing, asynchronously.
   ///
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/camera
-  /// @remarks If continuous status is @c true, the camera continuously tries to focus.
-  /// @param[in] camera     The handle to the camera
-  /// @param[in] continuous The status of continuous focusing
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_STATE Invalid state
-  /// @retval #CAMERA_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @pre The camera state must be set to #CAMERA_STATE_PREVIEW.
-  /// @post The camera focus state will be #CAMERA_FOCUS_STATE_ONGOING.
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @see camera_cancel_focusing()
-  /// @see camera_set_focus_changed_cb()
-  /// @see camera_focus_changed_cb()
-  /// @see camera_attr_set_af_mode()
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/camera>
+  ///
+  /// **Remarks:**
+  /// - If continuous status is `true`, the camera continuously tries to focus.
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `continuous` (in): The status of continuous focusing
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_STATE`: Invalid state
+  /// - `CAMERA_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **Preconditions:**
+  /// - The camera state must be set to `CAMERA_STATE_PREVIEW`.
+  ///
+  /// **Postconditions:**
+  /// - The camera focus state will be `CAMERA_FOCUS_STATE_ONGOING`.
+  ///
+  /// **See also:**
+  /// - `camera_cancel_focusing()`
+  /// - `camera_set_focus_changed_cb()`
+  /// - `camera_focus_changed_cb()`
+  /// - `camera_attr_set_af_mode()`
   int camera_start_focusing(
     camera_h camera,
     bool continuous,
@@ -697,23 +933,38 @@ class Tizen90CapiMediaCamera {
   late final _camera_start_focusing =
       _camera_start_focusingPtr.asFunction<int Function(camera_h, bool)>();
 
-  /// @brief Stops camera auto focusing.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/camera
-  /// @param[in] camera The handle to the camera
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_STATE Invalid state
-  /// @retval #CAMERA_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @pre The camera state must be set to #CAMERA_STATE_PREVIEW.
+  /// Stops camera auto focusing.
   ///
-  /// @see camera_start_focusing()
-  /// @see camera_focus_changed_cb()
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/camera>
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_STATE`: Invalid state
+  /// - `CAMERA_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **Preconditions:**
+  /// - The camera state must be set to `CAMERA_STATE_PREVIEW`.
+  ///
+  /// **See also:**
+  /// - `camera_start_focusing()`
+  /// - `camera_focus_changed_cb()`
   int camera_cancel_focusing(
     camera_h camera,
   ) {
@@ -728,33 +979,45 @@ class Tizen90CapiMediaCamera {
   late final _camera_cancel_focusing =
       _camera_cancel_focusingPtr.asFunction<int Function(camera_h)>();
 
-  /// @brief Sets the display handle to show preview images.
+  /// Sets the display handle to show preview images.
   ///
-  /// @since_tizen 2.3
-  /// @remarks This function must be called before previewing (see camera_start_preview()).
-  /// In Custom ROI display mode, camera_attr_set_display_roi_area() function must be called before calling this function.
-  /// @remarks This function must be called in main thread of the application.
-  /// Otherwise, it will return #CAMERA_ERROR_INVALID_OPERATION by internal restriction.
-  /// To avoid #CAMERA_ERROR_INVALID_OPERATION in sub thread, ecore_thread_main_loop_begin() and
-  /// ecore_thread_main_loop_end() can be used, but deadlock can occur if the main thread is busy.
-  /// So, it's not recommended to use them. (Since 5.0)
-  /// @param[in] camera  The handle to the camera
-  /// @param[in] type    The display type
-  /// @param[in] display The display handle from #GET_DISPLAY
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_STATE Invalid state
-  /// @retval #CAMERA_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @pre The camera state must be set to #CAMERA_STATE_CREATED.
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @see camera_start_preview()
-  /// @see #GET_DISPLAY
-  /// @see ecore_thread_main_loop_begin()
-  /// @see ecore_thread_main_loop_end()
+  /// **Remarks:**
+  /// - This function must be called before previewing (see camera_start_preview()).
+  /// - In Custom ROI display mode, camera_attr_set_display_roi_area() function must be called before calling this function.
+  /// - This function must be called in main thread of the application.
+  /// - Otherwise, it will return `CAMERA_ERROR_INVALID_OPERATION` by internal restriction.
+  /// - To avoid `CAMERA_ERROR_INVALID_OPERATION` in sub thread, ecore_thread_main_loop_begin() and
+  /// - ecore_thread_main_loop_end() can be used, but deadlock can occur if the main thread is busy.
+  /// - So, it's not recommended to use them. (Since 5.0)
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `type` (in): The display type
+  /// - `display` (in): The display handle from `GET_DISPLAY`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_STATE`: Invalid state
+  /// - `CAMERA_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **Preconditions:**
+  /// - The camera state must be set to `CAMERA_STATE_CREATED`.
+  ///
+  /// **See also:**
+  /// - `camera_start_preview()`
+  /// - `GET_DISPLAY`
+  /// - `ecore_thread_main_loop_begin()`
+  /// - `ecore_thread_main_loop_end()`
   int camera_set_display(
     camera_h camera,
     int type,
@@ -774,25 +1037,37 @@ class Tizen90CapiMediaCamera {
   late final _camera_set_display = _camera_set_displayPtr
       .asFunction<int Function(camera_h, int, camera_display_h)>();
 
-  /// @brief Sets the resolution of the preview.
+  /// Sets the resolution of the preview.
   ///
-  /// @since_tizen 2.3
-  /// @remarks This function should be called before previewing (camera_start_preview()).
-  /// @param[in] camera The handle to the camera
-  /// @param[in] width  The preview width
-  /// @param[in] height The preview height
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_STATE Invalid state
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @pre The camera state must be set to #CAMERA_STATE_CREATED or #CAMERA_STATE_PREVIEW.
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @see camera_start_preview()
-  /// @see camera_get_preview_resolution()
-  /// @see camera_foreach_supported_preview_resolution()
+  /// **Remarks:**
+  /// - This function should be called before previewing (camera_start_preview()).
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `width` (in): The preview width
+  /// - `height` (in): The preview height
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_STATE`: Invalid state
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **Preconditions:**
+  /// - The camera state must be set to `CAMERA_STATE_CREATED` or `CAMERA_STATE_PREVIEW`.
+  ///
+  /// **See also:**
+  /// - `camera_start_preview()`
+  /// - `camera_get_preview_resolution()`
+  /// - `camera_foreach_supported_preview_resolution()`
   int camera_set_preview_resolution(
     camera_h camera,
     int width,
@@ -811,20 +1086,29 @@ class Tizen90CapiMediaCamera {
   late final _camera_set_preview_resolution = _camera_set_preview_resolutionPtr
       .asFunction<int Function(camera_h, int, int)>();
 
-  /// @brief Gets the resolution of the preview.
+  /// Gets the resolution of the preview.
   ///
-  /// @since_tizen 2.3
-  /// @param[in]  camera The handle to the camera
-  /// @param[out] width  The preview width
-  /// @param[out] height The preview height
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_set_preview_resolution()
-  /// @see camera_foreach_supported_preview_resolution()
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `width` (out): The preview width
+  /// - `height` (out): The preview height
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_set_preview_resolution()`
+  /// - `camera_foreach_supported_preview_resolution()`
   int camera_get_preview_resolution(
     camera_h camera,
     ffi.Pointer<ffi.Int> width,
@@ -845,21 +1129,32 @@ class Tizen90CapiMediaCamera {
       _camera_get_preview_resolutionPtr.asFunction<
           int Function(camera_h, ffi.Pointer<ffi.Int>, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the recommended preview resolution.
+  /// Gets the recommended preview resolution.
   ///
-  /// @since_tizen 2.3
-  /// @remarks Depending on the capture resolution aspect ratio and display resolution, the recommended preview resolution is determined.
-  /// @param[in]  camera The handle to the camera
-  /// @param[out] width  The preview width
-  /// @param[out] height The preview height
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_set_preview_resolution()
-  /// @see camera_foreach_supported_preview_resolution()
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - Depending on the capture resolution aspect ratio and display resolution, the recommended preview resolution is determined.
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `width` (out): The preview width
+  /// - `height` (out): The preview height
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_set_preview_resolution()`
+  /// - `camera_foreach_supported_preview_resolution()`
   int camera_get_recommended_preview_resolution(
     camera_h camera,
     ffi.Pointer<ffi.Int> width,
@@ -881,32 +1176,48 @@ class Tizen90CapiMediaCamera {
       _camera_get_recommended_preview_resolutionPtr.asFunction<
           int Function(camera_h, ffi.Pointer<ffi.Int>, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Starts face detection.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/camera
-  /// @remarks This should be called after the preview is started.\n
-  /// This callback will be invoked when the face is detected in the preview frame.\n
-  /// Internally it starts continuous focus and focusing on the detected face.\n
-  /// When face detection is running, the camera_start_focusing(), camera_cancel_focusing(), camera_attr_set_af_mode(), camera_attr_set_af_area(), camera_attr_set_exposure_mode(), and camera_attr_set_whitebalance() settings are ignored.\n
-  /// If camera_stop_preview() is called, face detection is stopped and then preview is resumed using camera_start_preview(), this should be called again to resume face detection.
-  /// @param[in] camera    The handle to the camera
-  /// @param[in] callback  The callback to notify face detection
-  /// @param[in] user_data The user data to be passed to the callback function
+  /// Starts face detection.
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_STATE Not preview state
-  /// @retval #CAMERA_ERROR_INVALID_OPERATION Not supported this feature
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @pre The camera state must be #CAMERA_STATE_PREVIEW.
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @see camera_stop_face_detection()
-  /// @see camera_face_detected_cb()
-  /// @see camera_is_supported_face_detection()
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/camera>
+  ///
+  /// **Remarks:**
+  /// - This should be called after the preview is started.
+  /// - This callback will be invoked when the face is detected in the preview frame.
+  /// - Internally it starts continuous focus and focusing on the detected face.
+  /// - When face detection is running, the camera_start_focusing(), camera_cancel_focusing(), camera_attr_set_af_mode(), camera_attr_set_af_area(), camera_attr_set_exposure_mode(), and camera_attr_set_whitebalance() settings are ignored.
+  /// - If camera_stop_preview() is called, face detection is stopped and then preview is resumed using camera_start_preview(), this should be called again to resume face detection.
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `callback` (in): The callback to notify face detection
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_STATE`: Not preview state
+  /// - `CAMERA_ERROR_INVALID_OPERATION`: Not supported this feature
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **Preconditions:**
+  /// - The camera state must be `CAMERA_STATE_PREVIEW`.
+  ///
+  /// **See also:**
+  /// - `camera_stop_face_detection()`
+  /// - `camera_face_detected_cb()`
+  /// - `camera_is_supported_face_detection()`
   int camera_start_face_detection(
     camera_h camera,
     camera_face_detected_cb callback,
@@ -928,22 +1239,36 @@ class Tizen90CapiMediaCamera {
           int Function(
               camera_h, camera_face_detected_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Stops face detection.
+  /// Stops face detection.
   ///
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/camera
-  /// @param[in] camera The handle to the camera
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @pre This should be called after face detection is started.
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @see camera_start_face_detection()
-  /// @see camera_is_supported_face_detection()
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/camera>
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **Preconditions:**
+  /// - This should be called after face detection is started.
+  ///
+  /// **See also:**
+  /// - `camera_start_face_detection()`
+  /// - `camera_is_supported_face_detection()`
   int camera_stop_face_detection(
     camera_h camera,
   ) {
@@ -958,16 +1283,28 @@ class Tizen90CapiMediaCamera {
   late final _camera_stop_face_detection =
       _camera_stop_face_detectionPtr.asFunction<int Function(camera_h)>();
 
-  /// @brief Gets continuous capture feature's supported state.
-  /// @ingroup CAPI_MEDIA_CAMERA_CAPABILITY_MODULE
-  /// @since_tizen 2.3
-  /// @remarks The specific error code can be obtained using the get_last_result() method. Error codes are described in Exception section.
-  /// @param[in] camera The handle to the camera
-  /// @return @c true on supported, otherwise false
-  /// @exception #CAMERA_ERROR_NONE Successful
-  /// @exception #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @exception #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @exception #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Gets continuous capture feature's supported state.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - The specific error code can be obtained using the get_last_result() method. Error codes are described in Exception section.
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  ///
+  /// **Returns:**
+  /// - `true` on supported, otherwise false
+  ///
+  /// **Exceptions:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Group:**
+  /// - CAPI_MEDIA_CAMERA_CAPABILITY_MODULE
   bool camera_is_supported_continuous_capture(
     camera_h camera,
   ) {
@@ -983,23 +1320,33 @@ class Tizen90CapiMediaCamera {
       _camera_is_supported_continuous_capturePtr
           .asFunction<bool Function(camera_h)>();
 
-  /// @brief Retrieves all supported camera preview resolutions by invoking the callback function once for each supported camera preview resolution.
+  /// Retrieves all supported camera preview resolutions by invoking the callback function once for each supported camera preview resolution.
   ///
-  /// @since_tizen 2.3
-  /// @param[in] camera    The handle to the camera
-  /// @param[in] callback  The callback function to be invoked
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @post This function invokes camera_supported_preview_resolution_cb() repeatedly to retrieve each supported preview resolution.
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @see camera_set_preview_resolution()
-  /// @see camera_get_preview_resolution()
-  /// @see camera_supported_preview_resolution_cb()
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `callback` (in): The callback function to be invoked
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **Postconditions:**
+  /// - This function invokes camera_supported_preview_resolution_cb() repeatedly to retrieve each supported preview resolution.
+  ///
+  /// **See also:**
+  /// - `camera_set_preview_resolution()`
+  /// - `camera_get_preview_resolution()`
+  /// - `camera_supported_preview_resolution_cb()`
   int camera_foreach_supported_preview_resolution(
     camera_h camera,
     camera_supported_preview_resolution_cb callback,
@@ -1022,23 +1369,36 @@ class Tizen90CapiMediaCamera {
           int Function(camera_h, camera_supported_preview_resolution_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @ingroup CAPI_MEDIA_CAMERA_DISPLAY_MODULE
-  /// @brief Sets the display rotation.
+  /// Sets the display rotation.
   ///
-  /// @since_tizen 2.3
-  /// @remarks This function should be called before previewing (see camera_start_preview())
-  /// @param[in] camera   The handle to the camera
-  /// @param[in] rotation The display rotation
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_STATE Invalid state
-  /// @retval #CAMERA_ERROR_INVALID_OPERATION Display type is incorrect
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_start_preview()
-  /// @see camera_get_display_rotation()
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - This function should be called before previewing (see camera_start_preview())
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `rotation` (in): The display rotation
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_STATE`: Invalid state
+  /// - `CAMERA_ERROR_INVALID_OPERATION`: Display type is incorrect
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_start_preview()`
+  /// - `camera_get_display_rotation()`
+  ///
+  /// **Group:**
+  /// - CAPI_MEDIA_CAMERA_DISPLAY_MODULE
   int camera_set_display_rotation(
     camera_h camera,
     int rotation,
@@ -1055,19 +1415,30 @@ class Tizen90CapiMediaCamera {
   late final _camera_set_display_rotation =
       _camera_set_display_rotationPtr.asFunction<int Function(camera_h, int)>();
 
-  /// @ingroup CAPI_MEDIA_CAMERA_DISPLAY_MODULE
-  /// @brief Gets the display rotation.
+  /// Gets the display rotation.
   ///
-  /// @since_tizen 2.3
-  /// @param[in]  camera   The handle to the camera
-  /// @param[out] rotation The display rotation
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_set_display_rotation()
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `rotation` (out): The display rotation
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_set_display_rotation()`
+  ///
+  /// **Group:**
+  /// - CAPI_MEDIA_CAMERA_DISPLAY_MODULE
   int camera_get_display_rotation(
     camera_h camera,
     ffi.Pointer<ffi.Int32> rotation,
@@ -1085,21 +1456,32 @@ class Tizen90CapiMediaCamera {
   late final _camera_get_display_rotation = _camera_get_display_rotationPtr
       .asFunction<int Function(camera_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @ingroup CAPI_MEDIA_CAMERA_DISPLAY_MODULE
-  /// @brief Sets the display flip.
+  /// Sets the display flip.
   ///
-  /// @since_tizen 2.3
-  /// @param[in] camera The handle to the camera
-  /// @param[in] flip   The display flip
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_STATE Invalid state
-  /// @retval #CAMERA_ERROR_INVALID_OPERATION Display type is incorrect
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_get_display_flip()
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `flip` (in): The display flip
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_STATE`: Invalid state
+  /// - `CAMERA_ERROR_INVALID_OPERATION`: Display type is incorrect
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_get_display_flip()`
+  ///
+  /// **Group:**
+  /// - CAPI_MEDIA_CAMERA_DISPLAY_MODULE
   int camera_set_display_flip(
     camera_h camera,
     int flip,
@@ -1116,19 +1498,30 @@ class Tizen90CapiMediaCamera {
   late final _camera_set_display_flip =
       _camera_set_display_flipPtr.asFunction<int Function(camera_h, int)>();
 
-  /// @ingroup CAPI_MEDIA_CAMERA_DISPLAY_MODULE
-  /// @brief Gets the display flip.
+  /// Gets the display flip.
   ///
-  /// @since_tizen 2.3
-  /// @param[in]  camera The handle to the camera
-  /// @param[out] flip   The display flip
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_set_display_flip()
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `flip` (out): The display flip
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_set_display_flip()`
+  ///
+  /// **Group:**
+  /// - CAPI_MEDIA_CAMERA_DISPLAY_MODULE
   int camera_get_display_flip(
     camera_h camera,
     ffi.Pointer<ffi.Int32> flip,
@@ -1146,20 +1539,30 @@ class Tizen90CapiMediaCamera {
   late final _camera_get_display_flip = _camera_get_display_flipPtr
       .asFunction<int Function(camera_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @ingroup CAPI_MEDIA_CAMERA_DISPLAY_MODULE
-  /// @brief Sets the visible property for display.
+  /// Sets the visible property for display.
   ///
-  /// @since_tizen 2.3
-  /// @param[in] camera  The handle to the camera
-  /// @param[in] visible The display visibility property
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_is_display_visible()
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `visible` (in): The display visibility property
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_is_display_visible()`
+  ///
+  /// **Group:**
+  /// - CAPI_MEDIA_CAMERA_DISPLAY_MODULE
   int camera_set_display_visible(
     camera_h camera,
     bool visible,
@@ -1176,20 +1579,30 @@ class Tizen90CapiMediaCamera {
   late final _camera_set_display_visible =
       _camera_set_display_visiblePtr.asFunction<int Function(camera_h, bool)>();
 
-  /// @ingroup CAPI_MEDIA_CAMERA_DISPLAY_MODULE
-  /// @brief Gets the visible property of display.
+  /// Gets the visible property of display.
   ///
-  /// @since_tizen 2.3
-  /// @param[in]  camera  The handle to the camera
-  /// @param[out] visible @c true if camera display is visible, otherwise @c false
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_set_display_visible()
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `visible` (out): `true` if camera display is visible, otherwise `false`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_set_display_visible()`
+  ///
+  /// **Group:**
+  /// - CAPI_MEDIA_CAMERA_DISPLAY_MODULE
   int camera_is_display_visible(
     camera_h camera,
     ffi.Pointer<ffi.Bool> visible,
@@ -1207,20 +1620,30 @@ class Tizen90CapiMediaCamera {
   late final _camera_is_display_visible = _camera_is_display_visiblePtr
       .asFunction<int Function(camera_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @ingroup CAPI_MEDIA_CAMERA_DISPLAY_MODULE
-  /// @brief Sets the display mode.
+  /// Sets the display mode.
   ///
-  /// @since_tizen 2.3
-  /// @param[in] camera The handle to the camera
-  /// @param[in] mode   The display mode
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_get_display_mode()
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `mode` (in): The display mode
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_get_display_mode()`
+  ///
+  /// **Group:**
+  /// - CAPI_MEDIA_CAMERA_DISPLAY_MODULE
   int camera_set_display_mode(
     camera_h camera,
     int mode,
@@ -1237,20 +1660,30 @@ class Tizen90CapiMediaCamera {
   late final _camera_set_display_mode =
       _camera_set_display_modePtr.asFunction<int Function(camera_h, int)>();
 
-  /// @ingroup CAPI_MEDIA_CAMERA_DISPLAY_MODULE
-  /// @brief Gets the display mode.
+  /// Gets the display mode.
   ///
-  /// @since_tizen 2.3
-  /// @param[in]  camera The handle to the camera
-  /// @param[out] mode   The display mode
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_set_display_mode()
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `mode` (out): The display mode
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_set_display_mode()`
+  ///
+  /// **Group:**
+  /// - CAPI_MEDIA_CAMERA_DISPLAY_MODULE
   int camera_get_display_mode(
     camera_h camera,
     ffi.Pointer<ffi.Int32> mode,
@@ -1268,21 +1701,36 @@ class Tizen90CapiMediaCamera {
   late final _camera_get_display_mode = _camera_get_display_modePtr
       .asFunction<int Function(camera_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Sets the hint for display reuse.
-  /// @details If the hint is set to true, the display will be reused when the camera device is changed with camera_change_device().
-  /// @since_tizen 3.0
-  /// @remarks If the current display type is #CAMERA_DISPLAY_TYPE_NONE, this function will return #CAMERA_ERROR_INVALID_OPERATION.
-  /// @param[in] camera The handle to the camera
-  /// @param[in] hint   The hint for display reuse; true - reuse the display, false - do not reuse
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_STATE Invalid state
-  /// @retval #CAMERA_ERROR_INVALID_OPERATION Internal error
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @pre    The camera state must be set to #CAMERA_STATE_PREVIEW.
-  /// @see camera_get_display_reuse_hint()
-  /// @see camera_change_device()
+  /// Sets the hint for display reuse.
+  ///
+  /// If the hint is set to true, the display will be reused when the camera device is changed with camera_change_device().
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - If the current display type is `CAMERA_DISPLAY_TYPE_NONE`, this function will return `CAMERA_ERROR_INVALID_OPERATION`.
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `hint` (in): The hint for display reuse; true - reuse the display, false - do not reuse
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_STATE`: Invalid state
+  /// - `CAMERA_ERROR_INVALID_OPERATION`: Internal error
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **Preconditions:**
+  /// - The camera state must be set to `CAMERA_STATE_PREVIEW`.
+  ///
+  /// **See also:**
+  /// - `camera_get_display_reuse_hint()`
+  /// - `camera_change_device()`
   int camera_set_display_reuse_hint(
     camera_h camera,
     bool hint,
@@ -1299,18 +1747,30 @@ class Tizen90CapiMediaCamera {
   late final _camera_set_display_reuse_hint = _camera_set_display_reuse_hintPtr
       .asFunction<int Function(camera_h, bool)>();
 
-  /// @brief Gets the hint for display reuse.
-  /// @since_tizen 3.0
-  /// @remarks If the current display type is #CAMERA_DISPLAY_TYPE_NONE, this function will return #CAMERA_ERROR_INVALID_OPERATION.
-  /// @param[in]  camera The handle to the camera
-  /// @param[out] hint   The hint for display reuse; true - reuse the display, false - do not reuse
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_OPERATION Internal error
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_set_display_reuse_hint()
-  /// @see camera_change_device()
+  /// Gets the hint for display reuse.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - If the current display type is `CAMERA_DISPLAY_TYPE_NONE`, this function will return `CAMERA_ERROR_INVALID_OPERATION`.
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `hint` (out): The hint for display reuse; true - reuse the display, false - do not reuse
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_OPERATION`: Internal error
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_set_display_reuse_hint()`
+  /// - `camera_change_device()`
   int camera_get_display_reuse_hint(
     camera_h camera,
     ffi.Pointer<ffi.Bool> hint,
@@ -1328,22 +1788,34 @@ class Tizen90CapiMediaCamera {
   late final _camera_get_display_reuse_hint = _camera_get_display_reuse_hintPtr
       .asFunction<int Function(camera_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Sets the resolution of the captured image.
-  /// @since_tizen 2.3
-  /// @param[in] camera The handle to the camera
-  /// @param[in] width  The capture width
-  /// @param[in] height The capture height
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_STATE Invalid state
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @pre The camera state must be set to #CAMERA_STATE_CREATED or #CAMERA_STATE_PREVIEW.
-  /// @see camera_start_capture()
-  /// @see camera_get_capture_resolution()
-  /// @see camera_foreach_supported_capture_resolution()
+  /// Sets the resolution of the captured image.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `width` (in): The capture width
+  /// - `height` (in): The capture height
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_STATE`: Invalid state
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **Preconditions:**
+  /// - The camera state must be set to `CAMERA_STATE_CREATED` or `CAMERA_STATE_PREVIEW`.
+  ///
+  /// **See also:**
+  /// - `camera_start_capture()`
+  /// - `camera_get_capture_resolution()`
+  /// - `camera_foreach_supported_capture_resolution()`
   int camera_set_capture_resolution(
     camera_h camera,
     int width,
@@ -1362,19 +1834,29 @@ class Tizen90CapiMediaCamera {
   late final _camera_set_capture_resolution = _camera_set_capture_resolutionPtr
       .asFunction<int Function(camera_h, int, int)>();
 
-  /// @brief Gets the resolution of the captured image.
-  /// @since_tizen 2.3
-  /// @param[in]  camera The handle to the camera
-  /// @param[out] width  The capture width
-  /// @param[out] height The capture height
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_set_capture_resolution()
-  /// @see camera_foreach_supported_capture_resolution()
+  /// Gets the resolution of the captured image.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `width` (out): The capture width
+  /// - `height` (out): The capture height
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_set_capture_resolution()`
+  /// - `camera_foreach_supported_capture_resolution()`
   int camera_get_capture_resolution(
     camera_h camera,
     ffi.Pointer<ffi.Int> width,
@@ -1395,22 +1877,33 @@ class Tizen90CapiMediaCamera {
       _camera_get_capture_resolutionPtr.asFunction<
           int Function(camera_h, ffi.Pointer<ffi.Int>, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Retrieves all supported camera captured resolutions by invoking the callback function once for each supported camera capture resolution.
+  /// Retrieves all supported camera captured resolutions by invoking the callback function once for each supported camera capture resolution.
   ///
-  /// @since_tizen 2.3
-  /// @param[in] camera    The handle to the camera
-  /// @param[in] callback  The callback function to be invoked
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @post This function invokes camera_supported_capture_resolution_cb() repeatedly to retrieve each supported capture resolution.
-  /// @see camera_set_capture_resolution()
-  /// @see camera_get_capture_resolution()
-  /// @see camera_supported_capture_resolution_cb()
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `callback` (in): The callback function to be invoked
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **Postconditions:**
+  /// - This function invokes camera_supported_capture_resolution_cb() repeatedly to retrieve each supported capture resolution.
+  ///
+  /// **See also:**
+  /// - `camera_set_capture_resolution()`
+  /// - `camera_get_capture_resolution()`
+  /// - `camera_supported_capture_resolution_cb()`
   int camera_foreach_supported_capture_resolution(
     camera_h camera,
     camera_supported_capture_resolution_cb callback,
@@ -1433,23 +1926,36 @@ class Tizen90CapiMediaCamera {
           int Function(camera_h, camera_supported_capture_resolution_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Sets the format of an image to be captured.
+  /// Sets the format of an image to be captured.
   ///
-  /// @since_tizen 2.3
-  /// @remarks This function should be called before capturing (see camera_start_capture()).
-  /// @param[in] camera The handle to the camera
-  /// @param[in] format The format of the image to be captured
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_STATE Invalid state
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @pre The camera state must be set to #CAMERA_STATE_CREATED or #CAMERA_STATE_PREVIEW.
-  /// @see camera_start_capture()
-  /// @see camera_get_capture_format()
-  /// @see camera_foreach_supported_capture_format()
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - This function should be called before capturing (see camera_start_capture()).
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `format` (in): The format of the image to be captured
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_STATE`: Invalid state
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **Preconditions:**
+  /// - The camera state must be set to `CAMERA_STATE_CREATED` or `CAMERA_STATE_PREVIEW`.
+  ///
+  /// **See also:**
+  /// - `camera_start_capture()`
+  /// - `camera_get_capture_format()`
+  /// - `camera_foreach_supported_capture_format()`
   int camera_set_capture_format(
     camera_h camera,
     int format,
@@ -1466,19 +1972,28 @@ class Tizen90CapiMediaCamera {
   late final _camera_set_capture_format =
       _camera_set_capture_formatPtr.asFunction<int Function(camera_h, int)>();
 
-  /// @brief Gets the format of the image to be captured.
+  /// Gets the format of the image to be captured.
   ///
-  /// @since_tizen 2.3
-  /// @param[in]  camera The handle to the camera
-  /// @param[out] format The format of the image to be captured
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_set_capture_format()
-  /// @see camera_foreach_supported_capture_format()
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `format` (out): The format of the image to be captured
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_set_capture_format()`
+  /// - `camera_foreach_supported_capture_format()`
   int camera_get_capture_format(
     camera_h camera,
     ffi.Pointer<ffi.Int32> format,
@@ -1496,22 +2011,33 @@ class Tizen90CapiMediaCamera {
   late final _camera_get_capture_format = _camera_get_capture_formatPtr
       .asFunction<int Function(camera_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Retrieves all supported camera capture formats by invoking the callback function once for each supported camera capture format.
+  /// Retrieves all supported camera capture formats by invoking the callback function once for each supported camera capture format.
   ///
-  /// @since_tizen 2.3
-  /// @param[in] camera    The handle to the camera
-  /// @param[in] callback  The callback function to be invoked
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @post This function invokes camera_supported_capture_format_cb() repeatedly to retrieve each supported capture format.
-  /// @see camera_set_capture_format()
-  /// @see camera_get_capture_format()
-  /// @see camera_supported_capture_format_cb()
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `callback` (in): The callback function to be invoked
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **Postconditions:**
+  /// - This function invokes camera_supported_capture_format_cb() repeatedly to retrieve each supported capture format.
+  ///
+  /// **See also:**
+  /// - `camera_set_capture_format()`
+  /// - `camera_get_capture_format()`
+  /// - `camera_supported_capture_format_cb()`
   int camera_foreach_supported_capture_format(
     camera_h camera,
     camera_supported_capture_format_cb callback,
@@ -1534,22 +2060,36 @@ class Tizen90CapiMediaCamera {
           int Function(camera_h, camera_supported_capture_format_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Sets the preview data format.
-  /// @since_tizen 2.3
-  /// @remarks This function should be called before previewing (see camera_start_preview()).
-  /// @param[in] camera The handle to the camera
-  /// @param[in] format The preview data format
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_STATE Invalid state
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @pre The camera state must be set to #CAMERA_STATE_CREATED.
-  /// @see camera_start_preview()
-  /// @see camera_get_preview_format()
-  /// @see camera_foreach_supported_preview_format()
+  /// Sets the preview data format.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - This function should be called before previewing (see camera_start_preview()).
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `format` (in): The preview data format
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_STATE`: Invalid state
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **Preconditions:**
+  /// - The camera state must be set to `CAMERA_STATE_CREATED`.
+  ///
+  /// **See also:**
+  /// - `camera_start_preview()`
+  /// - `camera_get_preview_format()`
+  /// - `camera_foreach_supported_preview_format()`
   int camera_set_preview_format(
     camera_h camera,
     int format,
@@ -1566,18 +2106,28 @@ class Tizen90CapiMediaCamera {
   late final _camera_set_preview_format =
       _camera_set_preview_formatPtr.asFunction<int Function(camera_h, int)>();
 
-  /// @brief Gets the format of the preview stream.
-  /// @since_tizen 2.3
-  /// @param[in]  camera The handle to the camera
-  /// @param[out] format The preview data format
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_set_preview_format()
-  /// @see camera_foreach_supported_preview_format()
+  /// Gets the format of the preview stream.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `format` (out): The preview data format
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_set_preview_format()`
+  /// - `camera_foreach_supported_preview_format()`
   int camera_get_preview_format(
     camera_h camera,
     ffi.Pointer<ffi.Int32> format,
@@ -1595,16 +2145,24 @@ class Tizen90CapiMediaCamera {
   late final _camera_get_preview_format = _camera_get_preview_formatPtr
       .asFunction<int Function(camera_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the facing direction of camera module.
-  /// @since_tizen 3.0
-  /// @param[in]  camera           The handle to the camera
-  /// @param[out] facing_direction The facing direction of camera module
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_OPERATION Internal error
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
+  /// Gets the facing direction of camera module.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `facing_direction` (out): The facing direction of camera module
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_OPERATION`: Internal error
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
   int camera_get_facing_direction(
     camera_h camera,
     ffi.Pointer<ffi.Int32> facing_direction,
@@ -1622,17 +2180,27 @@ class Tizen90CapiMediaCamera {
   late final _camera_get_facing_direction = _camera_get_facing_directionPtr
       .asFunction<int Function(camera_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the camera's flash state.
-  /// @since_tizen 3.0
-  /// @param[in]  device The hardware camera to access
-  /// @param[out] state  The current flash state
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_OPERATION Internal error
-  /// @see camera_attr_set_flash_mode()
-  /// @see camera_attr_get_flash_mode()
+  /// Gets the camera's flash state.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `device` (in): The hardware camera to access
+  /// - `state` (out): The current flash state
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_OPERATION`: Internal error
+  ///
+  /// **See also:**
+  /// - `camera_attr_set_flash_mode()`
+  /// - `camera_attr_get_flash_mode()`
   int camera_get_flash_state(
     int device,
     ffi.Pointer<ffi.Int32> state,
@@ -1650,23 +2218,37 @@ class Tizen90CapiMediaCamera {
   late final _camera_get_flash_state = _camera_get_flash_statePtr
       .asFunction<int Function(int, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Sets a callback function to be invoked for extra preview frames.
-  /// @since_tizen 7.0
-  /// @remarks This function should not be called within a invoked @a callback,\n
-  /// otherwise #CAMERA_ERROR_INVALID_OPERATION is returned. (Since 9.0)
-  /// @param[in] camera    The handle to the camera
-  /// @param[in] callback  The callback function to be invoked
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @pre The camera state must be set to #CAMERA_STATE_CREATED or #CAMERA_STATE_PREVIEW.
-  /// @see camera_start_preview()
-  /// @see camera_unset_extra_preview_cb()
-  /// @see camera_extra_preview_cb()
+  /// Sets a callback function to be invoked for extra preview frames.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Remarks:**
+  /// - This function should not be called within a invoked `callback`,
+  /// - otherwise `CAMERA_ERROR_INVALID_OPERATION` is returned. (Since 9.0)
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `callback` (in): The callback function to be invoked
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **Preconditions:**
+  /// - The camera state must be set to `CAMERA_STATE_CREATED` or `CAMERA_STATE_PREVIEW`.
+  ///
+  /// **See also:**
+  /// - `camera_start_preview()`
+  /// - `camera_unset_extra_preview_cb()`
+  /// - `camera_extra_preview_cb()`
   int camera_set_extra_preview_cb(
     camera_h camera,
     camera_extra_preview_cb callback,
@@ -1688,18 +2270,30 @@ class Tizen90CapiMediaCamera {
           int Function(
               camera_h, camera_extra_preview_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the extra preview callback function.
-  /// @since_tizen 7.0
-  /// @remarks This function should not be called within a invoked @a callback,\n
-  /// otherwise #CAMERA_ERROR_INVALID_OPERATION is returned. (Since 9.0)
-  /// @param[in] camera The handle to the camera
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_set_extra_preview_cb()
+  /// Unsets the extra preview callback function.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Remarks:**
+  /// - This function should not be called within a invoked `callback`,
+  /// - otherwise `CAMERA_ERROR_INVALID_OPERATION` is returned. (Since 9.0)
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_set_extra_preview_cb()`
   int camera_unset_extra_preview_cb(
     camera_h camera,
   ) {
@@ -1714,25 +2308,37 @@ class Tizen90CapiMediaCamera {
   late final _camera_unset_extra_preview_cb =
       _camera_unset_extra_preview_cbPtr.asFunction<int Function(camera_h)>();
 
-  /// @brief Sets the extra preview stream format.
-  /// @since_tizen 7.0
-  /// @param[in] camera       The handle to the camera
-  /// @param[in] stream_id    The id of extra preview stream
-  /// @param[in] pixel_format The pixel format of extra preview stream
-  /// @param[in] width        The width of extra preview stream
-  /// @param[in] height       The height of extra preview stream
-  /// @param[in] fps          The fps of extra preview stream
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_STATE Invalid state
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @pre The camera state must be set to #CAMERA_STATE_CREATED or #CAMERA_STATE_PREVIEW.
-  /// @see camera_start_preview()
-  /// @see camera_set_extra_preview_cb()
-  /// @see camera_unset_extra_preview_cb()
-  /// @see camera_get_extra_preview_stream_format()
+  /// Sets the extra preview stream format.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `stream_id` (in): The id of extra preview stream
+  /// - `pixel_format` (in): The pixel format of extra preview stream
+  /// - `width` (in): The width of extra preview stream
+  /// - `height` (in): The height of extra preview stream
+  /// - `fps` (in): The fps of extra preview stream
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_STATE`: Invalid state
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **Preconditions:**
+  /// - The camera state must be set to `CAMERA_STATE_CREATED` or `CAMERA_STATE_PREVIEW`.
+  ///
+  /// **See also:**
+  /// - `camera_start_preview()`
+  /// - `camera_set_extra_preview_cb()`
+  /// - `camera_unset_extra_preview_cb()`
+  /// - `camera_get_extra_preview_stream_format()`
   int camera_set_extra_preview_stream_format(
     camera_h camera,
     int stream_id,
@@ -1759,25 +2365,37 @@ class Tizen90CapiMediaCamera {
       _camera_set_extra_preview_stream_formatPtr
           .asFunction<int Function(camera_h, int, int, int, int, int)>();
 
-  /// @brief Gets the extra preview stream format.
-  /// @since_tizen 7.0
-  /// @param[in] camera        The handle to the camera
-  /// @param[in] stream_id     The id of extra preview stream
-  /// @param[out] pixel_format The pixel format of extra preview stream
-  /// @param[out] width        The width of extra preview stream
-  /// @param[out] height       The height of extra preview stream
-  /// @param[out] fps          The fps of extra preview stream
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_STATE Invalid state
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @pre The camera state must be set to #CAMERA_STATE_PREVIEW.
-  /// @see camera_start_preview()
-  /// @see camera_set_extra_preview_cb()
-  /// @see camera_unset_extra_preview_cb()
-  /// @see camera_set_extra_preview_stream_format()
+  /// Gets the extra preview stream format.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `stream_id` (in): The id of extra preview stream
+  /// - `pixel_format` (out): The pixel format of extra preview stream
+  /// - `width` (out): The width of extra preview stream
+  /// - `height` (out): The height of extra preview stream
+  /// - `fps` (out): The fps of extra preview stream
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_STATE`: Invalid state
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **Preconditions:**
+  /// - The camera state must be set to `CAMERA_STATE_PREVIEW`.
+  ///
+  /// **See also:**
+  /// - `camera_start_preview()`
+  /// - `camera_set_extra_preview_cb()`
+  /// - `camera_unset_extra_preview_cb()`
+  /// - `camera_set_extra_preview_stream_format()`
   int camera_get_extra_preview_stream_format(
     camera_h camera,
     int stream_id,
@@ -1815,21 +2433,33 @@ class Tizen90CapiMediaCamera {
               ffi.Pointer<ffi.Int>,
               ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Retrieves all supported camera preview formats by invoking the callback function once for each supported camera preview format.
-  /// @since_tizen 2.3
-  /// @param[in] camera    The handle to the camera
-  /// @param[in] callback  The callback function to be invoked
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @post This function invokes camera_supported_preview_format_cb() repeatedly to retrieve each supported preview format.
-  /// @see camera_set_preview_format()
-  /// @see camera_get_preview_format()
-  /// @see camera_supported_preview_format_cb()
+  /// Retrieves all supported camera preview formats by invoking the callback function once for each supported camera preview format.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `callback` (in): The callback function to be invoked
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **Postconditions:**
+  /// - This function invokes camera_supported_preview_format_cb() repeatedly to retrieve each supported preview format.
+  ///
+  /// **See also:**
+  /// - `camera_set_preview_format()`
+  /// - `camera_get_preview_format()`
+  /// - `camera_supported_preview_format_cb()`
   int camera_foreach_supported_preview_format(
     camera_h camera,
     camera_supported_preview_format_cb callback,
@@ -1852,18 +2482,32 @@ class Tizen90CapiMediaCamera {
           int Function(camera_h, camera_supported_preview_format_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @ingroup CAPI_MEDIA_CAMERA_CAPABILITY_MODULE
-  /// @brief Gets the face detection feature's supported state.
-  /// @since_tizen 2.3
-  /// @remarks The specific error code can be obtained using the get_last_result() method. Error codes are described in Exception section.
-  /// @param[in] camera The handle to the camera
-  /// @return @c true if supported, otherwise @c false
-  /// @exception #CAMERA_ERROR_NONE Successful
-  /// @exception #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @exception #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @exception #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see camera_start_face_detection()
-  /// @see camera_stop_face_detection()
+  /// Gets the face detection feature's supported state.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - The specific error code can be obtained using the get_last_result() method. Error codes are described in Exception section.
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  ///
+  /// **Returns:**
+  /// - `true` if supported, otherwise `false`
+  ///
+  /// **Exceptions:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `camera_start_face_detection()`
+  /// - `camera_stop_face_detection()`
+  ///
+  /// **Group:**
+  /// - CAPI_MEDIA_CAMERA_CAPABILITY_MODULE
   bool camera_is_supported_face_detection(
     camera_h camera,
   ) {
@@ -1879,17 +2523,29 @@ class Tizen90CapiMediaCamera {
       _camera_is_supported_face_detectionPtr
           .asFunction<bool Function(camera_h)>();
 
-  /// @brief Gets the zero shutter lag feature's supported state.
-  /// @ingroup CAPI_MEDIA_CAMERA_CAPABILITY_MODULE
-  /// @since_tizen 2.3
-  /// @remarks If supporting zero shutter lag, continuous shot can be done with full capture size. \n
-  /// The specific error code can be obtained using the get_last_result() method. Error codes are described in Exception section.
-  /// @param[in] camera The handle to the camera
-  /// @return @c true if supported, otherwise @c false
-  /// @exception #CAMERA_ERROR_NONE Successful
-  /// @exception #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @exception #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @exception #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Gets the zero shutter lag feature's supported state.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - If supporting zero shutter lag, continuous shot can be done with full capture size.
+  /// - The specific error code can be obtained using the get_last_result() method. Error codes are described in Exception section.
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  ///
+  /// **Returns:**
+  /// - `true` if supported, otherwise `false`
+  ///
+  /// **Exceptions:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Group:**
+  /// - CAPI_MEDIA_CAMERA_CAPABILITY_MODULE
   bool camera_is_supported_zero_shutter_lag(
     camera_h camera,
   ) {
@@ -1905,18 +2561,30 @@ class Tizen90CapiMediaCamera {
       _camera_is_supported_zero_shutter_lagPtr
           .asFunction<bool Function(camera_h)>();
 
-  /// @ingroup CAPI_MEDIA_CAMERA_CAPABILITY_MODULE
-  /// @brief Gets the camera device count.
-  /// @since_tizen 2.3
-  /// @remarks If the device supports primary and secondary camera, this returns @c 2. If @c 1 is returned, the device only supports primary camera.
-  /// @param[in]  camera       The handle to the camera
-  /// @param[out] device_count The device count
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
+  /// Gets the camera device count.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - If the device supports primary and secondary camera, this returns `2`. If `1` is returned, the device only supports primary camera.
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `device_count` (out): The device count
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **Group:**
+  /// - CAPI_MEDIA_CAMERA_CAPABILITY_MODULE
   int camera_get_device_count(
     camera_h camera,
     ffi.Pointer<ffi.Int> device_count,
@@ -1933,16 +2601,28 @@ class Tizen90CapiMediaCamera {
   late final _camera_get_device_count = _camera_get_device_countPtr
       .asFunction<int Function(camera_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the media packet preview callback feature's supported state.
-  /// @ingroup CAPI_MEDIA_CAMERA_CAPABILITY_MODULE
-  /// @since_tizen 2.3
-  /// @remarks The specific error code can be obtained using the get_last_result() method. Error codes are described in Exception section.
-  /// @param[in] camera The handle to the camera
-  /// @return @c true if supported, otherwise @c false
-  /// @exception #CAMERA_ERROR_NONE Successful
-  /// @exception #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @exception #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @exception #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Gets the media packet preview callback feature's supported state.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - The specific error code can be obtained using the get_last_result() method. Error codes are described in Exception section.
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  ///
+  /// **Returns:**
+  /// - `true` if supported, otherwise `false`
+  ///
+  /// **Exceptions:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Group:**
+  /// - CAPI_MEDIA_CAMERA_CAPABILITY_MODULE
   bool camera_is_supported_media_packet_preview_cb(
     camera_h camera,
   ) {
@@ -1958,14 +2638,26 @@ class Tizen90CapiMediaCamera {
       _camera_is_supported_media_packet_preview_cbPtr
           .asFunction<bool Function(camera_h)>();
 
-  /// @brief Gets the extra preview feature's supported state.
-  /// @ingroup CAPI_MEDIA_CAMERA_CAPABILITY_MODULE
-  /// @since_tizen 7.0
-  /// @remarks The specific error code can be obtained using the get_last_result() method. Error codes are described in Exception section.
-  /// @param[in] camera The handle to the camera
-  /// @return @c true if supported, otherwise @c false
-  /// @exception #CAMERA_ERROR_NONE Successful
-  /// @exception #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Gets the extra preview feature's supported state.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Remarks:**
+  /// - The specific error code can be obtained using the get_last_result() method. Error codes are described in Exception section.
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  ///
+  /// **Returns:**
+  /// - `true` if supported, otherwise `false`
+  ///
+  /// **Exceptions:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Group:**
+  /// - CAPI_MEDIA_CAMERA_CAPABILITY_MODULE
   bool camera_is_supported_extra_preview(
     camera_h camera,
   ) {
@@ -1981,36 +2673,49 @@ class Tizen90CapiMediaCamera {
       _camera_is_supported_extra_previewPtr
           .asFunction<bool Function(camera_h)>();
 
-  /// @brief Sets a callback function to be invoked once per frame when previewing.
-  /// @since_tizen 2.3
-  /// @remarks This callback does not work in the video recorder mode.\n
-  /// Before 4.0, the only allowed state for calling this function was #CAMERA_STATE_CREATED.\n
-  /// Since 4.0, #CAMERA_STATE_PREVIEW has been added as an allowed state,\n
-  /// so that this function could be invoked before previewing or even while previewing.\n
-  /// A @a callback is invoked on the internal thread of the camera.\n
-  /// A video frame can be retrieved using a @a callback,\n
-  /// and the buffer is only available in a @a callback.\n
-  /// Since tizen 3.0, if you change the buffer in a @a callback,\n
-  /// it could not be displayed on the device in case of copied buffer.\n
-  /// and if camera_is_supported_media_packet_preview_cb() returns false,\n
-  /// it's copied buffer case.
-  /// @remarks This function should not be called within a invoked @a callback,\n
-  /// otherwise #CAMERA_ERROR_INVALID_OPERATION is returned. (Since 9.0)
-  /// @param[in] camera    The handle to the camera
-  /// @param[in] callback  The callback function to be invoked
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @pre Before 4.0 : The camera state must be set to #CAMERA_STATE_CREATED.\n
-  /// Since  4.0 : The camera state must be set to #CAMERA_STATE_CREATED or #CAMERA_STATE_PREVIEW.
-  /// @see camera_start_preview()
-  /// @see camera_unset_preview_cb()
-  /// @see camera_preview_cb()
+  /// Sets a callback function to be invoked once per frame when previewing.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - This callback does not work in the video recorder mode.
+  /// - Before 4.0, the only allowed state for calling this function was `CAMERA_STATE_CREATED`.
+  /// - Since 4.0, `CAMERA_STATE_PREVIEW` has been added as an allowed state,
+  /// - so that this function could be invoked before previewing or even while previewing.
+  /// - A `callback` is invoked on the internal thread of the camera.
+  /// - A video frame can be retrieved using a `callback`,
+  /// - and the buffer is only available in a `callback`.
+  /// - Since tizen 3.0, if you change the buffer in a `callback`,
+  /// - it could not be displayed on the device in case of copied buffer.
+  /// - and if camera_is_supported_media_packet_preview_cb() returns false,
+  /// - it's copied buffer case.
+  /// - This function should not be called within a invoked `callback`,
+  /// - otherwise `CAMERA_ERROR_INVALID_OPERATION` is returned. (Since 9.0)
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `callback` (in): The callback function to be invoked
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **Preconditions:**
+  /// - Before 4.0 : The camera state must be set to `CAMERA_STATE_CREATED`. Since 4.0 : The camera state must be set to `CAMERA_STATE_CREATED` or `CAMERA_STATE_PREVIEW`.
+  ///
+  /// **See also:**
+  /// - `camera_start_preview()`
+  /// - `camera_unset_preview_cb()`
+  /// - `camera_preview_cb()`
   int camera_set_preview_cb(
     camera_h camera,
     camera_preview_cb callback,
@@ -2030,19 +2735,31 @@ class Tizen90CapiMediaCamera {
   late final _camera_set_preview_cb = _camera_set_preview_cbPtr.asFunction<
       int Function(camera_h, camera_preview_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the preview callback function.
-  /// @since_tizen 2.3
-  /// @remarks This function should not be called within a invoked @a callback,\n
-  /// otherwise #CAMERA_ERROR_INVALID_OPERATION is returned. (Since 9.0)
-  /// @param[in] camera The handle to the camera
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_set_preview_cb()
+  /// Unsets the preview callback function.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - This function should not be called within a invoked `callback`,
+  /// - otherwise `CAMERA_ERROR_INVALID_OPERATION` is returned. (Since 9.0)
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_set_preview_cb()`
   int camera_unset_preview_cb(
     camera_h camera,
   ) {
@@ -2057,31 +2774,45 @@ class Tizen90CapiMediaCamera {
   late final _camera_unset_preview_cb =
       _camera_unset_preview_cbPtr.asFunction<int Function(camera_h)>();
 
-  /// @brief Sets a media packet callback function to be invoked once per frame when previewing.
-  /// @since_tizen 2.3
-  /// @remarks This callback does not work in video recorder mode.\n
-  /// This function should be called before previewing (see camera_start_preview())\n
-  /// A @a callback is invoked on the internal thread of the camera.\n
-  /// A video frame can be retrieved using a @a callback as a media packet.\n
-  /// The callback function holds the same buffer that will be drawn on the display device.\n
-  /// So if you change the media packet in a callback, it will be displayed on the device\n
-  /// and the media packet is available until it's destroyed by media_packet_destroy().
-  /// @remarks This function should not be called within a invoked @a callback,\n
-  /// otherwise #CAMERA_ERROR_INVALID_OPERATION is returned. (Since 9.0)
-  /// @param[in] camera    The handle to the camera
-  /// @param[in] callback  The callback function to be invoked
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @pre The camera's state should be #CAMERA_STATE_CREATED.
-  /// @see camera_start_preview()
-  /// @see camera_unset_media_packet_preview_cb()
-  /// @see camera_media_packet_preview_cb()
+  /// Sets a media packet callback function to be invoked once per frame when previewing.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - This callback does not work in video recorder mode.
+  /// - This function should be called before previewing (see camera_start_preview())
+  /// - A `callback` is invoked on the internal thread of the camera.
+  /// - A video frame can be retrieved using a `callback` as a media packet.
+  /// - The callback function holds the same buffer that will be drawn on the display device.
+  /// - So if you change the media packet in a callback, it will be displayed on the device
+  /// - and the media packet is available until it's destroyed by media_packet_destroy().
+  /// - This function should not be called within a invoked `callback`,
+  /// - otherwise `CAMERA_ERROR_INVALID_OPERATION` is returned. (Since 9.0)
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `callback` (in): The callback function to be invoked
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **Preconditions:**
+  /// - The camera's state should be `CAMERA_STATE_CREATED`.
+  ///
+  /// **See also:**
+  /// - `camera_start_preview()`
+  /// - `camera_unset_media_packet_preview_cb()`
+  /// - `camera_media_packet_preview_cb()`
   int camera_set_media_packet_preview_cb(
     camera_h camera,
     camera_media_packet_preview_cb callback,
@@ -2103,19 +2834,31 @@ class Tizen90CapiMediaCamera {
           int Function(camera_h, camera_media_packet_preview_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the media packet callback function.
-  /// @since_tizen 2.3
-  /// @remarks This function should not be called within a invoked @a callback,\n
-  /// otherwise #CAMERA_ERROR_INVALID_OPERATION is returned. (Since 9.0)
-  /// @param[in] camera The handle to the camera
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_set_media_packet_preview_cb()
+  /// Unsets the media packet callback function.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - This function should not be called within a invoked `callback`,
+  /// - otherwise `CAMERA_ERROR_INVALID_OPERATION` is returned. (Since 9.0)
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_set_media_packet_preview_cb()`
   int camera_unset_media_packet_preview_cb(
     camera_h camera,
   ) {
@@ -2131,20 +2874,32 @@ class Tizen90CapiMediaCamera {
       _camera_unset_media_packet_preview_cbPtr
           .asFunction<int Function(camera_h)>();
 
-  /// @brief Sets a callback function to be invoked when the camera state changes.
-  /// @since_tizen 2.3
-  /// @param[in] camera    The handle to the camera
-  /// @param[in] callback  The callback function to be invoked
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @post This function will invoke camera_state_changed_cb() when the camera state changes.
-  /// @see camera_unset_state_changed_cb()
-  /// @see camera_state_changed_cb()
+  /// Sets a callback function to be invoked when the camera state changes.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `callback` (in): The callback function to be invoked
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **Postconditions:**
+  /// - This function will invoke camera_state_changed_cb() when the camera state changes.
+  ///
+  /// **See also:**
+  /// - `camera_unset_state_changed_cb()`
+  /// - `camera_state_changed_cb()`
   int camera_set_state_changed_cb(
     camera_h camera,
     camera_state_changed_cb callback,
@@ -2166,16 +2921,26 @@ class Tizen90CapiMediaCamera {
           int Function(
               camera_h, camera_state_changed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the state changed callback function.
-  /// @since_tizen 2.3
-  /// @param[in] camera The handle to the camera
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_set_state_changed_cb()
+  /// Unsets the state changed callback function.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_set_state_changed_cb()`
   int camera_unset_state_changed_cb(
     camera_h camera,
   ) {
@@ -2190,19 +2955,29 @@ class Tizen90CapiMediaCamera {
   late final _camera_unset_state_changed_cb =
       _camera_unset_state_changed_cbPtr.asFunction<int Function(camera_h)>();
 
-  /// @brief Sets a callback function to be invoked when the camera is interrupted by policy.
-  /// @since_tizen 2.3
-  /// @param[in] camera    The handle to the camera
-  /// @param[in] callback  The callback function to be invoked
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_unset_interrupted_cb()
-  /// @see camera_interrupted_cb()
+  /// Sets a callback function to be invoked when the camera is interrupted by policy.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `callback` (in): The callback function to be invoked
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_unset_interrupted_cb()`
+  /// - `camera_interrupted_cb()`
   int camera_set_interrupted_cb(
     camera_h camera,
     camera_interrupted_cb callback,
@@ -2224,16 +2999,26 @@ class Tizen90CapiMediaCamera {
           int Function(
               camera_h, camera_interrupted_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the interrupted callback function.
-  /// @since_tizen 2.3
-  /// @param[in] camera The handle to the camera
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_set_interrupted_cb()
+  /// Unsets the interrupted callback function.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_set_interrupted_cb()`
   int camera_unset_interrupted_cb(
     camera_h camera,
   ) {
@@ -2248,16 +3033,26 @@ class Tizen90CapiMediaCamera {
   late final _camera_unset_interrupted_cb =
       _camera_unset_interrupted_cbPtr.asFunction<int Function(camera_h)>();
 
-  /// @brief Sets a callback function to be invoked when the camera interrupt is started by policy.
-  /// @since_tizen 4.0
-  /// @param[in] camera    The handle to the camera
-  /// @param[in] callback  The callback function to be invoked
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see camera_unset_interrupt_started_cb()
-  /// @see camera_interrupt_started_cb()
+  /// Sets a callback function to be invoked when the camera interrupt is started by policy.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `callback` (in): The callback function to be invoked
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `camera_unset_interrupt_started_cb()`
+  /// - `camera_interrupt_started_cb()`
   int camera_set_interrupt_started_cb(
     camera_h camera,
     camera_interrupt_started_cb callback,
@@ -2279,13 +3074,23 @@ class Tizen90CapiMediaCamera {
           int Function(
               camera_h, camera_interrupt_started_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the interrupt started callback function.
-  /// @since_tizen 4.0
-  /// @param[in] camera The handle to the camera
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see camera_set_interrupt_started_cb()
+  /// Unsets the interrupt started callback function.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `camera_set_interrupt_started_cb()`
   int camera_unset_interrupt_started_cb(
     camera_h camera,
   ) {
@@ -2301,22 +3106,34 @@ class Tizen90CapiMediaCamera {
       _camera_unset_interrupt_started_cbPtr
           .asFunction<int Function(camera_h)>();
 
-  /// @brief Sets a callback function to be invoked when the auto-focus state changes.
-  /// @since_tizen 2.3
-  /// @param[in] camera    The handle to the camera
-  /// @param[in] callback  The callback function to be invoked
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @post This function will invoke camera_focus_changed_cb() when the auto-focus state changes.
-  /// @see camera_start_focusing()
-  /// @see camera_cancel_focusing()
-  /// @see camera_unset_focus_changed_cb()
-  /// @see camera_focus_changed_cb()
+  /// Sets a callback function to be invoked when the auto-focus state changes.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `callback` (in): The callback function to be invoked
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **Postconditions:**
+  /// - This function will invoke camera_focus_changed_cb() when the auto-focus state changes.
+  ///
+  /// **See also:**
+  /// - `camera_start_focusing()`
+  /// - `camera_cancel_focusing()`
+  /// - `camera_unset_focus_changed_cb()`
+  /// - `camera_focus_changed_cb()`
   int camera_set_focus_changed_cb(
     camera_h camera,
     camera_focus_changed_cb callback,
@@ -2338,16 +3155,26 @@ class Tizen90CapiMediaCamera {
           int Function(
               camera_h, camera_focus_changed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the focus changed callback function.
-  /// @since_tizen 2.3
-  /// @param[in] camera The handle to the camera
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_set_focus_changed_cb()
+  /// Unsets the focus changed callback function.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_set_focus_changed_cb()`
   int camera_unset_focus_changed_cb(
     camera_h camera,
   ) {
@@ -2362,27 +3189,40 @@ class Tizen90CapiMediaCamera {
   late final _camera_unset_focus_changed_cb =
       _camera_unset_focus_changed_cbPtr.asFunction<int Function(camera_h)>();
 
-  /// @brief Sets a callback function to be invoked when an asynchronous operation error occurs.
-  /// @since_tizen 2.3
-  /// @remarks This callback informs about a critical error situation.\n
-  /// When this callback is invoked, the user should release the resource and terminate the application.\n
-  /// In case of errors, one of the following codes will occur:\n
-  /// #CAMERA_ERROR_DEVICE,\n
-  /// #CAMERA_ERROR_INVALID_OPERATION,\n
-  /// #CAMERA_ERROR_OUT_OF_MEMORY.
-  /// @param[in] camera    The handle to the camera
-  /// @param[in] callback  The callback function to be invoked
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @post This function will invoke camera_error_cb() when an asynchronous operation error occurs.
+  /// Sets a callback function to be invoked when an asynchronous operation error occurs.
   ///
-  /// @see camera_unset_error_cb()
-  /// @see camera_error_cb()
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - This callback informs about a critical error situation.
+  /// - When this callback is invoked, the user should release the resource and terminate the application.
+  /// - In case of errors, one of the following codes will occur:
+  /// - `CAMERA_ERROR_DEVICE`,
+  /// - `CAMERA_ERROR_INVALID_OPERATION`,
+  /// - `CAMERA_ERROR_OUT_OF_MEMORY`.
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `callback` (in): The callback function to be invoked
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **Postconditions:**
+  /// - This function will invoke camera_error_cb() when an asynchronous operation error occurs.
+  ///
+  /// **See also:**
+  /// - `camera_unset_error_cb()`
+  /// - `camera_error_cb()`
   int camera_set_error_cb(
     camera_h camera,
     camera_error_cb callback,
@@ -2402,16 +3242,26 @@ class Tizen90CapiMediaCamera {
   late final _camera_set_error_cb = _camera_set_error_cbPtr.asFunction<
       int Function(camera_h, camera_error_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the error callback function.
-  /// @since_tizen 2.3
-  /// @param[in] camera The handle to the camera
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_set_error_cb()
+  /// Unsets the error callback function.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_set_error_cb()`
   int camera_unset_error_cb(
     camera_h camera,
   ) {
@@ -2426,15 +3276,23 @@ class Tizen90CapiMediaCamera {
   late final _camera_unset_error_cb =
       _camera_unset_error_cbPtr.asFunction<int Function(camera_h)>();
 
-  /// @brief Gets the state of camera device.
-  /// @since_tizen 3.0
-  /// @param[in]  device The hardware camera type
-  /// @param[out] state  The current state of the device
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_OPERATION Invalid operation
+  /// Gets the state of camera device.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `device` (in): The hardware camera type
+  /// - `state` (out): The current state of the device
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_OPERATION`: Invalid operation
   int camera_get_device_state(
     int device,
     ffi.Pointer<ffi.Int32> state,
@@ -2452,20 +3310,32 @@ class Tizen90CapiMediaCamera {
   late final _camera_get_device_state = _camera_get_device_statePtr
       .asFunction<int Function(int, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Adds a callback function to be invoked when the camera device state changes.
-  /// @since_tizen 3.0
-  /// @param[in]  callback  The callback function to be invoked
-  /// @param[in]  user_data The user data to be passed to the callback function
-  /// @param[out] cb_id     The id of added callback
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #CAMERA_ERROR_OUT_OF_MEMORY Out of memory
-  /// @post This function will invoke camera_device_state_changed_cb() when the camera device's state changes.
-  /// @see camera_remove_device_state_changed_cb()
-  /// @see camera_device_state_changed_cb()
+  /// Adds a callback function to be invoked when the camera device state changes.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): The callback function to be invoked
+  /// - `user_data` (in): The user data to be passed to the callback function
+  /// - `cb_id` (out): The id of added callback
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `CAMERA_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Postconditions:**
+  /// - This function will invoke camera_device_state_changed_cb() when the camera device's state changes.
+  ///
+  /// **See also:**
+  /// - `camera_remove_device_state_changed_cb()`
+  /// - `camera_device_state_changed_cb()`
   int camera_add_device_state_changed_cb(
     camera_device_state_changed_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -2489,15 +3359,25 @@ class Tizen90CapiMediaCamera {
           int Function(camera_device_state_changed_cb, ffi.Pointer<ffi.Void>,
               ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Removes the device state changed callback function.
-  /// @since_tizen 3.0
-  /// @param[in] cb_id The id of added callback
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_OPERATION Invalid operation
-  /// @see camera_add_device_state_changed_cb()
+  /// Removes the device state changed callback function.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `cb_id` (in): The id of added callback
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `camera_add_device_state_changed_cb()`
   int camera_remove_device_state_changed_cb(
     int cb_id,
   ) {
@@ -2512,22 +3392,36 @@ class Tizen90CapiMediaCamera {
   late final _camera_remove_device_state_changed_cb =
       _camera_remove_device_state_changed_cbPtr.asFunction<int Function(int)>();
 
-  /// @brief Sets the preview frame rate.
-  /// @since_tizen 2.3
-  /// @remarks This function should be called before previewing (see camera_start_preview()).
-  /// @param[in] camera The handle to the camera
-  /// @param[in] fps    The frame rate
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_STATE Invalid state
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @pre The camera state must be set to #CAMERA_STATE_CREATED.
-  /// @see camera_start_preview()
-  /// @see camera_attr_get_preview_fps()
-  /// @see camera_attr_foreach_supported_fps()
+  /// Sets the preview frame rate.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - This function should be called before previewing (see camera_start_preview()).
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `fps` (in): The frame rate
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_STATE`: Invalid state
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **Preconditions:**
+  /// - The camera state must be set to `CAMERA_STATE_CREATED`.
+  ///
+  /// **See also:**
+  /// - `camera_start_preview()`
+  /// - `camera_attr_get_preview_fps()`
+  /// - `camera_attr_foreach_supported_fps()`
   int camera_attr_set_preview_fps(
     camera_h camera,
     int fps,
@@ -2544,18 +3438,28 @@ class Tizen90CapiMediaCamera {
   late final _camera_attr_set_preview_fps =
       _camera_attr_set_preview_fpsPtr.asFunction<int Function(camera_h, int)>();
 
-  /// @brief Gets the frames per second of a preview video stream.
-  /// @since_tizen 2.3
-  /// @param[in]  camera The handle to the camera
-  /// @param[out] fps    The frames per second of the preview video stream
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_attr_set_preview_fps()
-  /// @see camera_attr_foreach_supported_fps()
+  /// Gets the frames per second of a preview video stream.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `fps` (out): The frames per second of the preview video stream
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_attr_set_preview_fps()`
+  /// - `camera_attr_foreach_supported_fps()`
   int camera_attr_get_preview_fps(
     camera_h camera,
     ffi.Pointer<ffi.Int32> fps,
@@ -2573,18 +3477,28 @@ class Tizen90CapiMediaCamera {
   late final _camera_attr_get_preview_fps = _camera_attr_get_preview_fpsPtr
       .asFunction<int Function(camera_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Sets the bitrate of extra preview.
-  /// @since_tizen 7.0
-  /// @param[in] camera    The handle to the camera
-  /// @param[in] stream_id The id of extra preview stream
-  /// @param[in] bitrate   The bitrate(bps) of extra preview
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_OPERATION Internal error
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_attr_get_extra_preview_bitrate()
+  /// Sets the bitrate of extra preview.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `stream_id` (in): The id of extra preview stream
+  /// - `bitrate` (in): The bitrate(bps) of extra preview
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_OPERATION`: Internal error
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_attr_get_extra_preview_bitrate()`
   int camera_attr_set_extra_preview_bitrate(
     camera_h camera,
     int stream_id,
@@ -2604,18 +3518,28 @@ class Tizen90CapiMediaCamera {
       _camera_attr_set_extra_preview_bitratePtr
           .asFunction<int Function(camera_h, int, int)>();
 
-  /// @brief Gets the bitrate of extra preview.
-  /// @since_tizen 7.0
-  /// @param[in] camera    The handle to the camera
-  /// @param[in] stream_id The id of extra preview stream
-  /// @param[out] bitrate  The bitrate(bps) of extra preview stream
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_OPERATION Internal error
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_attr_set_extra_preview_bitrate()
+  /// Gets the bitrate of extra preview.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `stream_id` (in): The id of extra preview stream
+  /// - `bitrate` (out): The bitrate(bps) of extra preview stream
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_OPERATION`: Internal error
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_attr_set_extra_preview_bitrate()`
   int camera_attr_get_extra_preview_bitrate(
     camera_h camera,
     int stream_id,
@@ -2636,20 +3560,32 @@ class Tizen90CapiMediaCamera {
       _camera_attr_get_extra_preview_bitratePtr
           .asFunction<int Function(camera_h, int, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Sets the GOP (Group Of Pictures) interval of extra preview.
-  /// @since_tizen 7.0
-  /// @remarks The recommended range is from 1,000 (1 second) to 600,000 (10 minutes). \n
-  /// But, due to codec limitations, it may not apply.
-  /// @param[in] camera    The handle to the camera
-  /// @param[in] stream_id The id of extra preview stream
-  /// @param[in] interval  The GOP interval of extra preview (millisecond)
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_OPERATION Internal error
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_attr_get_extra_preview_gop_interval()
+  /// Sets the GOP (Group Of Pictures) interval of extra preview.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Remarks:**
+  /// - The recommended range is from 1,000 (1 second) to 600,000 (10 minutes).
+  /// - But, due to codec limitations, it may not apply.
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `stream_id` (in): The id of extra preview stream
+  /// - `interval` (in): The GOP interval of extra preview (millisecond)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_OPERATION`: Internal error
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_attr_get_extra_preview_gop_interval()`
   int camera_attr_set_extra_preview_gop_interval(
     camera_h camera,
     int stream_id,
@@ -2669,18 +3605,28 @@ class Tizen90CapiMediaCamera {
       _camera_attr_set_extra_preview_gop_intervalPtr
           .asFunction<int Function(camera_h, int, int)>();
 
-  /// @brief Gets the GOP (Group Of Pictures) interval of extra preview.
-  /// @since_tizen 7.0
-  /// @param[in] camera    The handle to the camera
-  /// @param[in] stream_id The id of extra preview stream
-  /// @param[out] interval The GOP interval of extra preview (millisecond)
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_OPERATION Internal error
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_attr_set_extra_preview_gop_interval()
+  /// Gets the GOP (Group Of Pictures) interval of extra preview.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `stream_id` (in): The id of extra preview stream
+  /// - `interval` (out): The GOP interval of extra preview (millisecond)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_OPERATION`: Internal error
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_attr_set_extra_preview_gop_interval()`
   int camera_attr_get_extra_preview_gop_interval(
     camera_h camera,
     int stream_id,
@@ -2701,17 +3647,27 @@ class Tizen90CapiMediaCamera {
       _camera_attr_get_extra_preview_gop_intervalPtr
           .asFunction<int Function(camera_h, int, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the rotation of preview frame.
-  /// @since_tizen 7.0
-  /// @remarks The function should be called in camera_preview_cb(),\n
-  /// otherwise, it will return #CAMERA_ERROR_INVALID_OPERATION.
-  /// @param[in] camera    The handle to the camera
-  /// @param[out] rotation The rotation of preview frame
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_OPERATION Internal error
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
+  /// Gets the rotation of preview frame.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Remarks:**
+  /// - The function should be called in camera_preview_cb(),
+  /// - otherwise, it will return `CAMERA_ERROR_INVALID_OPERATION`.
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `rotation` (out): The rotation of preview frame
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_OPERATION`: Internal error
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
   int camera_attr_get_preview_frame_rotation(
     camera_h camera,
     ffi.Pointer<ffi.Int32> rotation,
@@ -2730,21 +3686,33 @@ class Tizen90CapiMediaCamera {
       _camera_attr_get_preview_frame_rotationPtr
           .asFunction<int Function(camera_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Retrieves all supported FPS modes by invoking the callback function once for each supported FPS mode.
-  /// @since_tizen 2.3
-  /// @param[in] camera    The handle to the camera
-  /// @param[in] callback  The callback function to be invoked
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @post This function invokes camera_attr_supported_fps_cb() repeatedly to get each supported FPS mode.
-  /// @see camera_attr_set_preview_fps()
-  /// @see camera_attr_get_preview_fps()
-  /// @see camera_attr_supported_fps_cb()
+  /// Retrieves all supported FPS modes by invoking the callback function once for each supported FPS mode.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `callback` (in): The callback function to be invoked
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **Postconditions:**
+  /// - This function invokes camera_attr_supported_fps_cb() repeatedly to get each supported FPS mode.
+  ///
+  /// **See also:**
+  /// - `camera_attr_set_preview_fps()`
+  /// - `camera_attr_get_preview_fps()`
+  /// - `camera_attr_supported_fps_cb()`
   int camera_attr_foreach_supported_fps(
     camera_h camera,
     camera_attr_supported_fps_cb callback,
@@ -2766,23 +3734,35 @@ class Tizen90CapiMediaCamera {
           int Function(
               camera_h, camera_attr_supported_fps_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Retrieves all supported FPS modes by invoking the callback function once for each supported FPS mode by resolution.
-  /// @since_tizen 2.4
-  /// @param[in] camera    The handle to the camera
-  /// @param[in] width     Required preview resolution's width
-  /// @param[in] height    Required preview resolution's height
-  /// @param[in] callback  The callback function to be invoked
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @post This function invokes camera_attr_supported_fps_cb() repeatedly to get each supported FPS mode.
-  /// @see camera_attr_set_preview_fps()
-  /// @see camera_attr_get_preview_fps()
-  /// @see camera_attr_supported_fps_cb()
+  /// Retrieves all supported FPS modes by invoking the callback function once for each supported FPS mode by resolution.
+  ///
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `width` (in): Required preview resolution's width
+  /// - `height` (in): Required preview resolution's height
+  /// - `callback` (in): The callback function to be invoked
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **Postconditions:**
+  /// - This function invokes camera_attr_supported_fps_cb() repeatedly to get each supported FPS mode.
+  ///
+  /// **See also:**
+  /// - `camera_attr_set_preview_fps()`
+  /// - `camera_attr_get_preview_fps()`
+  /// - `camera_attr_supported_fps_cb()`
   int camera_attr_foreach_supported_fps_by_resolution(
     camera_h camera,
     int width,
@@ -2809,21 +3789,34 @@ class Tizen90CapiMediaCamera {
           int Function(camera_h, int, int, camera_attr_supported_fps_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Sets quality of the image.
-  /// @details The range for image quality is 1 to 100. If @a quality is out of range, #CAMERA_ERROR_INVALID_PARAMETER error occurred.
-  /// @since_tizen 2.3
-  /// @param[in] camera  The handle to the camera
-  /// @param[in] quality The quality of image (1 ~ 100)
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_STATE Invalid state
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @pre The camera state must be set to #CAMERA_STATE_CREATED or #CAMERA_STATE_PREVIEW.
-  /// @see camera_start_preview()
-  /// @see camera_attr_get_image_quality()
+  /// Sets quality of the image.
+  ///
+  /// The range for image quality is 1 to 100. If `quality` is out of range, `CAMERA_ERROR_INVALID_PARAMETER` error occurred.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `quality` (in): The quality of image (1 ~ 100)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_STATE`: Invalid state
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **Preconditions:**
+  /// - The camera state must be set to `CAMERA_STATE_CREATED` or `CAMERA_STATE_PREVIEW`.
+  ///
+  /// **See also:**
+  /// - `camera_start_preview()`
+  /// - `camera_attr_get_image_quality()`
   int camera_attr_set_image_quality(
     camera_h camera,
     int quality,
@@ -2840,17 +3833,27 @@ class Tizen90CapiMediaCamera {
   late final _camera_attr_set_image_quality = _camera_attr_set_image_qualityPtr
       .asFunction<int Function(camera_h, int)>();
 
-  /// @brief Gets the quality of a still image, which is captured.
-  /// @since_tizen 2.3
-  /// @param[in]  camera  The handle to the camera
-  /// @param[out] quality The quality of the image(1 ~ 100)
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_attr_set_image_quality()
+  /// Gets the quality of a still image, which is captured.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `quality` (out): The quality of the image(1 ~ 100)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_attr_set_image_quality()`
   int camera_attr_get_image_quality(
     camera_h camera,
     ffi.Pointer<ffi.Int> quality,
@@ -2867,17 +3870,27 @@ class Tizen90CapiMediaCamera {
   late final _camera_attr_get_image_quality = _camera_attr_get_image_qualityPtr
       .asFunction<int Function(camera_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the bit rate of encoded preview.
-  /// @since_tizen 3.0
-  /// @param[in]  camera  The handle to the camera
-  /// @param[out] bitrate The bit rate of encoded preview
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_OPERATION Internal error
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_attr_set_encoded_preview_bitrate()
+  /// Gets the bit rate of encoded preview.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `bitrate` (out): The bit rate of encoded preview
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_OPERATION`: Internal error
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_attr_set_encoded_preview_bitrate()`
   int camera_attr_get_encoded_preview_bitrate(
     camera_h camera,
     ffi.Pointer<ffi.Int> bitrate,
@@ -2895,19 +3908,31 @@ class Tizen90CapiMediaCamera {
       _camera_attr_get_encoded_preview_bitratePtr
           .asFunction<int Function(camera_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Sets the bit rate of encoded preview.
-  /// @since_tizen 3.0
-  /// @remarks The recommended range is from 1,000 (1 kbps) to 100,000,000 (100 Mbps). \n
-  /// But, due to codec limitations, it may not apply.
-  /// @param[in] camera  The handle to the camera
-  /// @param[in] bitrate The bit rate of encoded preview
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_OPERATION Internal error
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_attr_get_encoded_preview_bitrate()
+  /// Sets the bit rate of encoded preview.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The recommended range is from 1,000 (1 kbps) to 100,000,000 (100 Mbps).
+  /// - But, due to codec limitations, it may not apply.
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `bitrate` (in): The bit rate of encoded preview
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_OPERATION`: Internal error
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_attr_get_encoded_preview_bitrate()`
   int camera_attr_set_encoded_preview_bitrate(
     camera_h camera,
     int bitrate,
@@ -2925,17 +3950,27 @@ class Tizen90CapiMediaCamera {
       _camera_attr_set_encoded_preview_bitratePtr
           .asFunction<int Function(camera_h, int)>();
 
-  /// @brief Gets the GOP (Group Of Pictures) interval of encoded preview.
-  /// @since_tizen 3.0
-  /// @param[in]  camera   The handle to the camera
-  /// @param[out] interval The GOP interval of encoded preview (millisecond)
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_OPERATION Internal error
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_attr_set_encoded_preview_gop_interval()
+  /// Gets the GOP (Group Of Pictures) interval of encoded preview.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `interval` (out): The GOP interval of encoded preview (millisecond)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_OPERATION`: Internal error
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_attr_set_encoded_preview_gop_interval()`
   int camera_attr_get_encoded_preview_gop_interval(
     camera_h camera,
     ffi.Pointer<ffi.Int> interval,
@@ -2953,19 +3988,31 @@ class Tizen90CapiMediaCamera {
       _camera_attr_get_encoded_preview_gop_intervalPtr
           .asFunction<int Function(camera_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Sets the GOP (Group Of Pictures) interval of encoded preview.
-  /// @since_tizen 3.0
-  /// @remarks The recommended range is from 1,000 (1 second) to 600,000 (10 minutes). \n
-  /// But, due to codec limitations, it may not apply.
-  /// @param[in] camera   The handle to the camera
-  /// @param[in] interval The GOP interval of encoded preview (millisecond)
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_OPERATION Internal error
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_attr_get_encoded_preview_gop_interval()
+  /// Sets the GOP (Group Of Pictures) interval of encoded preview.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The recommended range is from 1,000 (1 second) to 600,000 (10 minutes).
+  /// - But, due to codec limitations, it may not apply.
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `interval` (in): The GOP interval of encoded preview (millisecond)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_OPERATION`: Internal error
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_attr_get_encoded_preview_gop_interval()`
   int camera_attr_set_encoded_preview_gop_interval(
     camera_h camera,
     int interval,
@@ -2983,21 +4030,34 @@ class Tizen90CapiMediaCamera {
       _camera_attr_set_encoded_preview_gop_intervalPtr
           .asFunction<int Function(camera_h, int)>();
 
-  /// @brief Sets the zoom level.
-  /// @details The range for the zoom level is received from camera_attr_get_zoom_range(). If @a zoom is out of range, the #CAMERA_ERROR_INVALID_PARAMETER error occurs.
-  /// @since_tizen 2.3
-  /// @param[in] camera The handle to the camera
-  /// @param[in] zoom   The zoom level
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_STATE Invalid state
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @pre The camera state must be set to #CAMERA_STATE_CREATED or #CAMERA_STATE_PREVIEW.
-  /// @see camera_attr_get_zoom()
-  /// @see camera_attr_get_zoom_range()
+  /// Sets the zoom level.
+  ///
+  /// The range for the zoom level is received from camera_attr_get_zoom_range(). If `zoom` is out of range, the `CAMERA_ERROR_INVALID_PARAMETER` error occurs.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `zoom` (in): The zoom level
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_STATE`: Invalid state
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **Preconditions:**
+  /// - The camera state must be set to `CAMERA_STATE_CREATED` or `CAMERA_STATE_PREVIEW`.
+  ///
+  /// **See also:**
+  /// - `camera_attr_get_zoom()`
+  /// - `camera_attr_get_zoom_range()`
   int camera_attr_set_zoom(
     camera_h camera,
     int zoom,
@@ -3014,18 +4074,28 @@ class Tizen90CapiMediaCamera {
   late final _camera_attr_set_zoom =
       _camera_attr_set_zoomPtr.asFunction<int Function(camera_h, int)>();
 
-  /// @brief Gets the zoom level.
-  /// @since_tizen 2.3
-  /// @param[in]  camera The handle to the camera
-  /// @param[out] zoom   The zoom level
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_attr_set_zoom()
-  /// @see camera_attr_get_zoom_range()
+  /// Gets the zoom level.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `zoom` (out): The zoom level
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_attr_set_zoom()`
+  /// - `camera_attr_get_zoom_range()`
   int camera_attr_get_zoom(
     camera_h camera,
     ffi.Pointer<ffi.Int> zoom,
@@ -3042,20 +4112,32 @@ class Tizen90CapiMediaCamera {
   late final _camera_attr_get_zoom = _camera_attr_get_zoomPtr
       .asFunction<int Function(camera_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the available zoom level.
-  /// @since_tizen 2.3
-  /// @remarks If the min value is greater than the max value, it means that this feature is not supported.
-  /// @param[in]  camera The handle to the camera
-  /// @param[out] min    The minimum zoom level
-  /// @param[out] max    The maximum zoom level
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_attr_set_zoom()
-  /// @see camera_attr_get_zoom()
+  /// Gets the available zoom level.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - If the min value is greater than the max value, it means that this feature is not supported.
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `min` (out): The minimum zoom level
+  /// - `max` (out): The maximum zoom level
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_attr_set_zoom()`
+  /// - `camera_attr_get_zoom()`
   int camera_attr_get_zoom_range(
     camera_h camera,
     ffi.Pointer<ffi.Int> min,
@@ -3076,21 +4158,33 @@ class Tizen90CapiMediaCamera {
       _camera_attr_get_zoom_rangePtr.asFunction<
           int Function(camera_h, ffi.Pointer<ffi.Int>, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Sets the auto focus mode.
-  /// @since_tizen 2.3
-  /// @param[in] camera The handle to the camera
-  /// @param[in] mode   The auto focus mode
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_STATE Invalid state
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @pre The camera state must be set to #CAMERA_STATE_CREATED or #CAMERA_STATE_PREVIEW.
-  /// @see camera_attr_get_af_mode()
-  /// @see camera_attr_foreach_supported_af_mode()
-  /// @see #camera_attr_af_mode_e
+  /// Sets the auto focus mode.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `mode` (in): The auto focus mode
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_STATE`: Invalid state
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **Preconditions:**
+  /// - The camera state must be set to `CAMERA_STATE_CREATED` or `CAMERA_STATE_PREVIEW`.
+  ///
+  /// **See also:**
+  /// - `camera_attr_get_af_mode()`
+  /// - `camera_attr_foreach_supported_af_mode()`
+  /// - `camera_attr_af_mode_e`
   int camera_attr_set_af_mode(
     camera_h camera,
     int mode,
@@ -3107,19 +4201,29 @@ class Tizen90CapiMediaCamera {
   late final _camera_attr_set_af_mode =
       _camera_attr_set_af_modePtr.asFunction<int Function(camera_h, int)>();
 
-  /// @brief Gets the auto focus mode.
-  /// @since_tizen 2.3
-  /// @param[in]  camera The handle to the camera
-  /// @param[out] mode   The auto focus mode
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_attr_foreach_supported_af_mode()
-  /// @see camera_attr_set_af_mode()
-  /// @see #camera_attr_af_mode_e
+  /// Gets the auto focus mode.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `mode` (out): The auto focus mode
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_attr_foreach_supported_af_mode()`
+  /// - `camera_attr_set_af_mode()`
+  /// - `camera_attr_af_mode_e`
   int camera_attr_get_af_mode(
     camera_h camera,
     ffi.Pointer<ffi.Int32> mode,
@@ -3137,24 +4241,38 @@ class Tizen90CapiMediaCamera {
   late final _camera_attr_get_af_mode = _camera_attr_get_af_modePtr
       .asFunction<int Function(camera_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Sets auto focus area.
-  /// @since_tizen 2.3
-  /// @remarks It will return #CAMERA_ERROR_INVALID_OPERATION in the #CAMERA_ATTR_AF_NONE mode.\n
-  /// The coordinates are mapped to preview area.
-  /// @param[in] camera The handle to the camera
-  /// @param[in] x      The x coordinates of the focus area
-  /// @param[in] y      The y coordinates of the focus area
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #CAMERA_ERROR_INVALID_STATE Invalid state
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @pre The camera state must be set to #CAMERA_STATE_CREATED or #CAMERA_STATE_PREVIEW.
-  /// @see camera_attr_set_af_mode()
-  /// @see camera_attr_clear_af_area()
+  /// Sets auto focus area.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - It will return `CAMERA_ERROR_INVALID_OPERATION` in the `CAMERA_ATTR_AF_NONE` mode.
+  /// - The coordinates are mapped to preview area.
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `x` (in): The x coordinates of the focus area
+  /// - `y` (in): The y coordinates of the focus area
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `CAMERA_ERROR_INVALID_STATE`: Invalid state
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **Preconditions:**
+  /// - The camera state must be set to `CAMERA_STATE_CREATED` or `CAMERA_STATE_PREVIEW`.
+  ///
+  /// **See also:**
+  /// - `camera_attr_set_af_mode()`
+  /// - `camera_attr_clear_af_area()`
   int camera_attr_set_af_area(
     camera_h camera,
     int x,
@@ -3173,19 +4291,31 @@ class Tizen90CapiMediaCamera {
   late final _camera_attr_set_af_area = _camera_attr_set_af_areaPtr
       .asFunction<int Function(camera_h, int, int)>();
 
-  /// @brief Clears the auto focus area.
-  /// @since_tizen 2.3
-  /// @remarks The focusing area is set to the center.
-  /// @param[in] camera The handle to the camera
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_attr_set_af_mode()
-  /// @see camera_attr_set_af_area()
+  /// Clears the auto focus area.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - The focusing area is set to the center.
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_attr_set_af_mode()`
+  /// - `camera_attr_set_af_area()`
   int camera_attr_clear_af_area(
     camera_h camera,
   ) {
@@ -3200,21 +4330,33 @@ class Tizen90CapiMediaCamera {
   late final _camera_attr_clear_af_area =
       _camera_attr_clear_af_areaPtr.asFunction<int Function(camera_h)>();
 
-  /// @brief Retrieves all supported auto focus modes by invoking the callback function once for each supported auto focus mode.
-  /// @since_tizen 2.3
-  /// @param[in] camera    The handle to the camera
-  /// @param[in] callback  The callback function to be invoked
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @post This function invokes camera_attr_supported_af_mode_cb() to get all the supported auto focus modes.
-  /// @see camera_attr_set_af_mode()
-  /// @see camera_attr_get_af_mode()
-  /// @see camera_attr_supported_af_mode_cb()
+  /// Retrieves all supported auto focus modes by invoking the callback function once for each supported auto focus mode.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `callback` (in): The callback function to be invoked
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **Postconditions:**
+  /// - This function invokes camera_attr_supported_af_mode_cb() to get all the supported auto focus modes.
+  ///
+  /// **See also:**
+  /// - `camera_attr_set_af_mode()`
+  /// - `camera_attr_get_af_mode()`
+  /// - `camera_attr_supported_af_mode_cb()`
   int camera_attr_foreach_supported_af_mode(
     camera_h camera,
     camera_attr_supported_af_mode_cb callback,
@@ -3236,20 +4378,32 @@ class Tizen90CapiMediaCamera {
           int Function(camera_h, camera_attr_supported_af_mode_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Sets the exposure mode.
-  /// @since_tizen 2.3
-  /// @param[in] camera The handle to the camera
-  /// @param[in] mode   The exposure mode
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_STATE Invalid state
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @pre The camera state must be set to #CAMERA_STATE_CREATED or #CAMERA_STATE_PREVIEW.
-  /// @see camera_attr_get_exposure_mode()
-  /// @see camera_attr_foreach_supported_exposure_mode()
+  /// Sets the exposure mode.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `mode` (in): The exposure mode
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_STATE`: Invalid state
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **Preconditions:**
+  /// - The camera state must be set to `CAMERA_STATE_CREATED` or `CAMERA_STATE_PREVIEW`.
+  ///
+  /// **See also:**
+  /// - `camera_attr_get_exposure_mode()`
+  /// - `camera_attr_foreach_supported_exposure_mode()`
   int camera_attr_set_exposure_mode(
     camera_h camera,
     int mode,
@@ -3266,18 +4420,28 @@ class Tizen90CapiMediaCamera {
   late final _camera_attr_set_exposure_mode = _camera_attr_set_exposure_modePtr
       .asFunction<int Function(camera_h, int)>();
 
-  /// @brief Gets the exposure mode.
-  /// @since_tizen 2.3
-  /// @param[in]  camera The handle to the camera
-  /// @param[out] mode   The exposure mode
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_attr_set_exposure_mode()
-  /// @see camera_attr_foreach_supported_exposure_mode()
+  /// Gets the exposure mode.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `mode` (out): The exposure mode
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_attr_set_exposure_mode()`
+  /// - `camera_attr_foreach_supported_exposure_mode()`
   int camera_attr_get_exposure_mode(
     camera_h camera,
     ffi.Pointer<ffi.Int32> mode,
@@ -3295,21 +4459,33 @@ class Tizen90CapiMediaCamera {
   late final _camera_attr_get_exposure_mode = _camera_attr_get_exposure_modePtr
       .asFunction<int Function(camera_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Retrieves all supported exposure modes by invoking the callback function once for each supported exposure mode.
-  /// @since_tizen 2.3
-  /// @param[in] camera    The handle to the camera
-  /// @param[in] callback  The callback function to be invoked
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @post This function invokes camera_attr_supported_exposure_mode_cb() to get all the supported exposure modes.
-  /// @see camera_attr_set_exposure_mode()
-  /// @see camera_attr_get_exposure_mode()
-  /// @see camera_attr_supported_exposure_mode_cb()
+  /// Retrieves all supported exposure modes by invoking the callback function once for each supported exposure mode.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `callback` (in): The callback function to be invoked
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **Postconditions:**
+  /// - This function invokes camera_attr_supported_exposure_mode_cb() to get all the supported exposure modes.
+  ///
+  /// **See also:**
+  /// - `camera_attr_set_exposure_mode()`
+  /// - `camera_attr_get_exposure_mode()`
+  /// - `camera_attr_supported_exposure_mode_cb()`
   int camera_attr_foreach_supported_exposure_mode(
     camera_h camera,
     camera_attr_supported_exposure_mode_cb callback,
@@ -3332,17 +4508,27 @@ class Tizen90CapiMediaCamera {
           int Function(camera_h, camera_attr_supported_exposure_mode_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Sets the exposure value.
-  /// @since_tizen 2.3
-  /// @param[in] camera The handle to the camera
-  /// @param[in] value  The exposure value
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_attr_get_exposure()
+  /// Sets the exposure value.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `value` (in): The exposure value
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_attr_get_exposure()`
   int camera_attr_set_exposure(
     camera_h camera,
     int value,
@@ -3359,17 +4545,27 @@ class Tizen90CapiMediaCamera {
   late final _camera_attr_set_exposure =
       _camera_attr_set_exposurePtr.asFunction<int Function(camera_h, int)>();
 
-  /// @brief Gets the exposure value.
-  /// @since_tizen 2.3
-  /// @param[in]  camera The handle to the camera
-  /// @param[out] value  The exposure value
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_attr_set_exposure()
+  /// Gets the exposure value.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `value` (out): The exposure value
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_attr_set_exposure()`
   int camera_attr_get_exposure(
     camera_h camera,
     ffi.Pointer<ffi.Int> value,
@@ -3386,19 +4582,31 @@ class Tizen90CapiMediaCamera {
   late final _camera_attr_get_exposure = _camera_attr_get_exposurePtr
       .asFunction<int Function(camera_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the available exposure value.
-  /// @since_tizen 2.3
-  /// @remarks If the min value is greater than the max value, it means that this feature is not supported.
-  /// @param[in]  camera The handle to the camera
-  /// @param[out] min    The minimum exposure value
-  /// @param[out] max    The maximum exposure value
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_attr_set_exposure()
+  /// Gets the available exposure value.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - If the min value is greater than the max value, it means that this feature is not supported.
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `min` (out): The minimum exposure value
+  /// - `max` (out): The maximum exposure value
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_attr_set_exposure()`
   int camera_attr_get_exposure_range(
     camera_h camera,
     ffi.Pointer<ffi.Int> min,
@@ -3419,20 +4627,32 @@ class Tizen90CapiMediaCamera {
       _camera_attr_get_exposure_rangePtr.asFunction<
           int Function(camera_h, ffi.Pointer<ffi.Int>, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Sets the ISO level.
-  /// @since_tizen 2.3
-  /// @param[in] camera The handle to the camera
-  /// @param[in] iso    The ISO level
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_STATE Invalid state
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @pre The camera state must be set to #CAMERA_STATE_CREATED or #CAMERA_STATE_PREVIEW.
-  /// @see camera_attr_get_iso()
-  /// @see camera_attr_foreach_supported_iso()
+  /// Sets the ISO level.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `iso` (in): The ISO level
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_STATE`: Invalid state
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **Preconditions:**
+  /// - The camera state must be set to `CAMERA_STATE_CREATED` or `CAMERA_STATE_PREVIEW`.
+  ///
+  /// **See also:**
+  /// - `camera_attr_get_iso()`
+  /// - `camera_attr_foreach_supported_iso()`
   int camera_attr_set_iso(
     camera_h camera,
     int iso,
@@ -3449,18 +4669,28 @@ class Tizen90CapiMediaCamera {
   late final _camera_attr_set_iso =
       _camera_attr_set_isoPtr.asFunction<int Function(camera_h, int)>();
 
-  /// @brief Gets the ISO level.
-  /// @since_tizen 2.3
-  /// @param[in]  camera The handle to the camera
-  /// @param[out] iso    The ISO level
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_attr_set_iso()
-  /// @see camera_attr_foreach_supported_iso()
+  /// Gets the ISO level.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `iso` (out): The ISO level
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_attr_set_iso()`
+  /// - `camera_attr_foreach_supported_iso()`
   int camera_attr_get_iso(
     camera_h camera,
     ffi.Pointer<ffi.Int32> iso,
@@ -3478,20 +4708,32 @@ class Tizen90CapiMediaCamera {
   late final _camera_attr_get_iso = _camera_attr_get_isoPtr
       .asFunction<int Function(camera_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Sets the gain level.
-  /// @since_tizen 8.0
-  /// @param[in] camera The handle to the camera
-  /// @param[in] level  The gain level
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_STATE Invalid state
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @pre The camera state must be set to #CAMERA_STATE_CREATED or #CAMERA_STATE_PREVIEW.
-  /// @see camera_attr_get_gain()
-  /// @see camera_attr_get_gain_range()
-  /// @see camera_attr_get_gain_step()
+  /// Sets the gain level.
+  ///
+  /// **Since Tizen:**
+  /// - 8.0
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `level` (in): The gain level
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_STATE`: Invalid state
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **Preconditions:**
+  /// - The camera state must be set to `CAMERA_STATE_CREATED` or `CAMERA_STATE_PREVIEW`.
+  ///
+  /// **See also:**
+  /// - `camera_attr_get_gain()`
+  /// - `camera_attr_get_gain_range()`
+  /// - `camera_attr_get_gain_step()`
   int camera_attr_set_gain(
     camera_h camera,
     int level,
@@ -3508,18 +4750,28 @@ class Tizen90CapiMediaCamera {
   late final _camera_attr_set_gain =
       _camera_attr_set_gainPtr.asFunction<int Function(camera_h, int)>();
 
-  /// @brief Gets the gain level.
-  /// @since_tizen 8.0
-  /// @param[in]  camera The handle to the camera
-  /// @param[out] level  The gain level
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_attr_set_gain()
-  /// @see camera_attr_get_gain_range()
-  /// @see camera_attr_get_gain_step()
+  /// Gets the gain level.
+  ///
+  /// **Since Tizen:**
+  /// - 8.0
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `level` (out): The gain level
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_attr_set_gain()`
+  /// - `camera_attr_get_gain_range()`
+  /// - `camera_attr_get_gain_step()`
   int camera_attr_get_gain(
     camera_h camera,
     ffi.Pointer<ffi.Int> level,
@@ -3536,20 +4788,32 @@ class Tizen90CapiMediaCamera {
   late final _camera_attr_get_gain = _camera_attr_get_gainPtr
       .asFunction<int Function(camera_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the available gain level.
-  /// @since_tizen 8.0
-  /// @remarks If the min value is greater than the max value, it means that this feature is not supported.
-  /// @param[in]  camera The handle to the camera
-  /// @param[out] min    The minimum gain level
-  /// @param[out] max    The maximum gain level
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_attr_set_gain()
-  /// @see camera_attr_get_gain()
-  /// @see camera_attr_get_gain_step()
+  /// Gets the available gain level.
+  ///
+  /// **Since Tizen:**
+  /// - 8.0
+  ///
+  /// **Remarks:**
+  /// - If the min value is greater than the max value, it means that this feature is not supported.
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `min` (out): The minimum gain level
+  /// - `max` (out): The maximum gain level
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_attr_set_gain()`
+  /// - `camera_attr_get_gain()`
+  /// - `camera_attr_get_gain_step()`
   int camera_attr_get_gain_range(
     camera_h camera,
     ffi.Pointer<ffi.Int> min,
@@ -3570,18 +4834,28 @@ class Tizen90CapiMediaCamera {
       _camera_attr_get_gain_rangePtr.asFunction<
           int Function(camera_h, ffi.Pointer<ffi.Int>, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the gain level step.
-  /// @since_tizen 8.0
-  /// @param[in]  camera The handle to the camera
-  /// @param[out] step   The gain level step
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_attr_set_gain()
-  /// @see camera_attr_get_gain()
-  /// @see camera_attr_get_gain_range()
+  /// Gets the gain level step.
+  ///
+  /// **Since Tizen:**
+  /// - 8.0
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `step` (out): The gain level step
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_attr_set_gain()`
+  /// - `camera_attr_get_gain()`
+  /// - `camera_attr_get_gain_range()`
   int camera_attr_get_gain_step(
     camera_h camera,
     ffi.Pointer<ffi.Int> step,
@@ -3598,21 +4872,33 @@ class Tizen90CapiMediaCamera {
   late final _camera_attr_get_gain_step = _camera_attr_get_gain_stepPtr
       .asFunction<int Function(camera_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Retrieves all supported ISO levels by invoking the callback function once for each supported ISO level.
-  /// @since_tizen 2.3
-  /// @param[in] camera    The handle to the camera
-  /// @param[in] callback  The callback function to be invoked
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @post This function invokes camera_attr_supported_iso_cb() to get all the supported ISO levels.
-  /// @see camera_attr_set_iso()
-  /// @see camera_attr_get_iso()
-  /// @see camera_attr_supported_iso_cb()
+  /// Retrieves all supported ISO levels by invoking the callback function once for each supported ISO level.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `callback` (in): The callback function to be invoked
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **Postconditions:**
+  /// - This function invokes camera_attr_supported_iso_cb() to get all the supported ISO levels.
+  ///
+  /// **See also:**
+  /// - `camera_attr_set_iso()`
+  /// - `camera_attr_get_iso()`
+  /// - `camera_attr_supported_iso_cb()`
   int camera_attr_foreach_supported_iso(
     camera_h camera,
     camera_attr_supported_iso_cb callback,
@@ -3634,19 +4920,33 @@ class Tizen90CapiMediaCamera {
           int Function(
               camera_h, camera_attr_supported_iso_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Sets the theater mode.
-  /// @since_tizen 2.3
-  /// @remarks If you want to display the preview image on the external display with the full screen mode, use this function.
-  /// @param[in] camera The handle to the camera
-  /// @param[in] mode   The theater mode
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @pre This function is valid only when the external display is connected.
-  /// @see camera_attr_get_theater_mode()
+  /// Sets the theater mode.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - If you want to display the preview image on the external display with the full screen mode, use this function.
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `mode` (in): The theater mode
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **Preconditions:**
+  /// - This function is valid only when the external display is connected.
+  ///
+  /// **See also:**
+  /// - `camera_attr_get_theater_mode()`
   int camera_attr_set_theater_mode(
     camera_h camera,
     int mode,
@@ -3663,17 +4963,27 @@ class Tizen90CapiMediaCamera {
   late final _camera_attr_set_theater_mode = _camera_attr_set_theater_modePtr
       .asFunction<int Function(camera_h, int)>();
 
-  /// @brief Gets the theater mode.
-  /// @since_tizen 2.3
-  /// @param[in]  camera The handle to the camera
-  /// @param[out] mode   The theater mode
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_attr_set_theater_mode()
+  /// Gets the theater mode.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `mode` (out): The theater mode
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_attr_set_theater_mode()`
   int camera_attr_get_theater_mode(
     camera_h camera,
     ffi.Pointer<ffi.Int32> mode,
@@ -3691,21 +5001,33 @@ class Tizen90CapiMediaCamera {
   late final _camera_attr_get_theater_mode = _camera_attr_get_theater_modePtr
       .asFunction<int Function(camera_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Retrieves all supported theater modes by invoking callback function once for each supported theater modes.
-  /// @since_tizen 2.3
-  /// @param[in] camera    The handle to the camera
-  /// @param[in] callback  The callback function to be invoked
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @post This function invokes camera_attr_supported_theater_mode_cb() to get all supported theater modes.
-  /// @see camera_attr_set_theater_mode()
-  /// @see camera_attr_get_theater_mode()
-  /// @see camera_attr_supported_theater_mode_cb()
+  /// Retrieves all supported theater modes by invoking callback function once for each supported theater modes.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `callback` (in): The callback function to be invoked
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **Postconditions:**
+  /// - This function invokes camera_attr_supported_theater_mode_cb() to get all supported theater modes.
+  ///
+  /// **See also:**
+  /// - `camera_attr_set_theater_mode()`
+  /// - `camera_attr_get_theater_mode()`
+  /// - `camera_attr_supported_theater_mode_cb()`
   int camera_attr_foreach_supported_theater_mode(
     camera_h camera,
     camera_attr_supported_theater_mode_cb callback,
@@ -3728,22 +5050,36 @@ class Tizen90CapiMediaCamera {
           int Function(camera_h, camera_attr_supported_theater_mode_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Sets the brightness level.
-  /// @since_tizen 2.3
-  /// @remarks If the min value is greater than the max value from camera_attr_get_brightness_range(), \n
-  /// it means that this feature is not supported.
-  /// @param[in] camera The handle to the camera
-  /// @param[in] level The brightness level
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_STATE Invalid state
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @pre The camera state must be set to #CAMERA_STATE_CREATED or #CAMERA_STATE_PREVIEW.
-  /// @see camera_attr_get_brightness()
-  /// @see camera_attr_get_brightness_range()
+  /// Sets the brightness level.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - If the min value is greater than the max value from camera_attr_get_brightness_range(),
+  /// - it means that this feature is not supported.
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `level` (in): The brightness level
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_STATE`: Invalid state
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **Preconditions:**
+  /// - The camera state must be set to `CAMERA_STATE_CREATED` or `CAMERA_STATE_PREVIEW`.
+  ///
+  /// **See also:**
+  /// - `camera_attr_get_brightness()`
+  /// - `camera_attr_get_brightness_range()`
   int camera_attr_set_brightness(
     camera_h camera,
     int level,
@@ -3760,18 +5096,28 @@ class Tizen90CapiMediaCamera {
   late final _camera_attr_set_brightness =
       _camera_attr_set_brightnessPtr.asFunction<int Function(camera_h, int)>();
 
-  /// @brief Gets the brightness level.
-  /// @since_tizen 2.3
-  /// @param[in]  camera The handle to the camera
-  /// @param[out] level  The brightness level
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_attr_set_brightness()
-  /// @see camera_attr_get_brightness_range()
+  /// Gets the brightness level.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `level` (out): The brightness level
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_attr_set_brightness()`
+  /// - `camera_attr_get_brightness_range()`
   int camera_attr_get_brightness(
     camera_h camera,
     ffi.Pointer<ffi.Int> level,
@@ -3788,20 +5134,32 @@ class Tizen90CapiMediaCamera {
   late final _camera_attr_get_brightness = _camera_attr_get_brightnessPtr
       .asFunction<int Function(camera_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the available brightness level.
-  /// @since_tizen 2.3
-  /// @remarks If the min value is greater than the max value, it means that this feature is not supported.
-  /// @param[in]  camera The handle to the camera
-  /// @param[out] min    The minimum brightness level
-  /// @param[out] max    The maximum brightness level
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_attr_set_brightness()
-  /// @see camera_attr_get_brightness()
+  /// Gets the available brightness level.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - If the min value is greater than the max value, it means that this feature is not supported.
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `min` (out): The minimum brightness level
+  /// - `max` (out): The maximum brightness level
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_attr_set_brightness()`
+  /// - `camera_attr_get_brightness()`
   int camera_attr_get_brightness_range(
     camera_h camera,
     ffi.Pointer<ffi.Int> min,
@@ -3822,20 +5180,32 @@ class Tizen90CapiMediaCamera {
       _camera_attr_get_brightness_rangePtr.asFunction<
           int Function(camera_h, ffi.Pointer<ffi.Int>, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Sets the contrast level.
-  /// @since_tizen 2.3
-  /// @param[in] camera The handle to the camera
-  /// @param[in] level  The contrast level
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_STATE Invalid state
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @pre The camera state must be set to #CAMERA_STATE_CREATED or #CAMERA_STATE_PREVIEW.
-  /// @see camera_attr_get_contrast()
-  /// @see camera_attr_get_contrast_range()
+  /// Sets the contrast level.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `level` (in): The contrast level
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_STATE`: Invalid state
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **Preconditions:**
+  /// - The camera state must be set to `CAMERA_STATE_CREATED` or `CAMERA_STATE_PREVIEW`.
+  ///
+  /// **See also:**
+  /// - `camera_attr_get_contrast()`
+  /// - `camera_attr_get_contrast_range()`
   int camera_attr_set_contrast(
     camera_h camera,
     int level,
@@ -3852,18 +5222,28 @@ class Tizen90CapiMediaCamera {
   late final _camera_attr_set_contrast =
       _camera_attr_set_contrastPtr.asFunction<int Function(camera_h, int)>();
 
-  /// @brief Gets the contrast level.
-  /// @since_tizen 2.3
-  /// @param[in]  camera The handle to the camera
-  /// @param[out] level  The contrast level
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_attr_set_contrast()
-  /// @see camera_attr_get_contrast_range()
+  /// Gets the contrast level.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `level` (out): The contrast level
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_attr_set_contrast()`
+  /// - `camera_attr_get_contrast_range()`
   int camera_attr_get_contrast(
     camera_h camera,
     ffi.Pointer<ffi.Int> level,
@@ -3880,20 +5260,32 @@ class Tizen90CapiMediaCamera {
   late final _camera_attr_get_contrast = _camera_attr_get_contrastPtr
       .asFunction<int Function(camera_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the available contrast level.
-  /// @since_tizen 2.3
-  /// @remarks If the min value is greater than the max value, it means that this feature is not supported.
-  /// @param[in]  camera The handle to the camera
-  /// @param[out] min    The minimum contrast level
-  /// @param[out] max    The maximum contrast level
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_attr_set_contrast()
-  /// @see camera_attr_get_contrast()
+  /// Gets the available contrast level.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - If the min value is greater than the max value, it means that this feature is not supported.
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `min` (out): The minimum contrast level
+  /// - `max` (out): The maximum contrast level
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_attr_set_contrast()`
+  /// - `camera_attr_get_contrast()`
   int camera_attr_get_contrast_range(
     camera_h camera,
     ffi.Pointer<ffi.Int> min,
@@ -3914,16 +5306,26 @@ class Tizen90CapiMediaCamera {
       _camera_attr_get_contrast_rangePtr.asFunction<
           int Function(camera_h, ffi.Pointer<ffi.Int>, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Sets the hue level.
-  /// @since_tizen 5.0
-  /// @param[in] camera The handle to the camera
-  /// @param[in] level  The hue level
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see camera_attr_get_hue()
-  /// @see camera_attr_get_hue_range()
+  /// Sets the hue level.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `level` (in): The hue level
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `camera_attr_get_hue()`
+  /// - `camera_attr_get_hue_range()`
   int camera_attr_set_hue(
     camera_h camera,
     int level,
@@ -3940,16 +5342,26 @@ class Tizen90CapiMediaCamera {
   late final _camera_attr_set_hue =
       _camera_attr_set_huePtr.asFunction<int Function(camera_h, int)>();
 
-  /// @brief Gets the hue level.
-  /// @since_tizen 5.0
-  /// @param[in]  camera The handle to the camera
-  /// @param[out] level  The hue level
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see camera_attr_set_hue()
-  /// @see camera_attr_get_hue_range()
+  /// Gets the hue level.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `level` (out): The hue level
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `camera_attr_set_hue()`
+  /// - `camera_attr_get_hue_range()`
   int camera_attr_get_hue(
     camera_h camera,
     ffi.Pointer<ffi.Int> level,
@@ -3966,18 +5378,30 @@ class Tizen90CapiMediaCamera {
   late final _camera_attr_get_hue = _camera_attr_get_huePtr
       .asFunction<int Function(camera_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the available hue level.
-  /// @since_tizen 5.0
-  /// @remarks If the min value is greater than the max value, it means that this feature is not supported.
-  /// @param[in]  camera The handle to the camera
-  /// @param[out] min    The minimum hue level
-  /// @param[out] max    The maximum hue level
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see camera_attr_set_hue()
-  /// @see camera_attr_get_hue()
+  /// Gets the available hue level.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Remarks:**
+  /// - If the min value is greater than the max value, it means that this feature is not supported.
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `min` (out): The minimum hue level
+  /// - `max` (out): The maximum hue level
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `camera_attr_set_hue()`
+  /// - `camera_attr_get_hue()`
   int camera_attr_get_hue_range(
     camera_h camera,
     ffi.Pointer<ffi.Int> min,
@@ -3998,20 +5422,32 @@ class Tizen90CapiMediaCamera {
       _camera_attr_get_hue_rangePtr.asFunction<
           int Function(camera_h, ffi.Pointer<ffi.Int>, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Sets the white balance mode.
-  /// @since_tizen 2.3
-  /// @param[in] camera       The handle to the camera
-  /// @param[in] whitebalance The white balance mode
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_STATE Invalid state
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @pre The camera state must be set to #CAMERA_STATE_CREATED or #CAMERA_STATE_PREVIEW.
-  /// @see camera_attr_foreach_supported_whitebalance()
-  /// @see camera_attr_get_whitebalance()
+  /// Sets the white balance mode.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `whitebalance` (in): The white balance mode
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_STATE`: Invalid state
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **Preconditions:**
+  /// - The camera state must be set to `CAMERA_STATE_CREATED` or `CAMERA_STATE_PREVIEW`.
+  ///
+  /// **See also:**
+  /// - `camera_attr_foreach_supported_whitebalance()`
+  /// - `camera_attr_get_whitebalance()`
   int camera_attr_set_whitebalance(
     camera_h camera,
     int whitebalance,
@@ -4028,18 +5464,28 @@ class Tizen90CapiMediaCamera {
   late final _camera_attr_set_whitebalance = _camera_attr_set_whitebalancePtr
       .asFunction<int Function(camera_h, int)>();
 
-  /// @brief Gets the white balance mode.
-  /// @since_tizen 2.3
-  /// @param[in]  camera       The handle to the camera
-  /// @param[out] whitebalance The white balance mode
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_attr_foreach_supported_whitebalance()
-  /// @see camera_attr_set_whitebalance()
+  /// Gets the white balance mode.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `whitebalance` (out): The white balance mode
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_attr_foreach_supported_whitebalance()`
+  /// - `camera_attr_set_whitebalance()`
   int camera_attr_get_whitebalance(
     camera_h camera,
     ffi.Pointer<ffi.Int32> whitebalance,
@@ -4057,18 +5503,28 @@ class Tizen90CapiMediaCamera {
   late final _camera_attr_get_whitebalance = _camera_attr_get_whitebalancePtr
       .asFunction<int Function(camera_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Sets the white balance temperature.
-  /// @since_tizen 8.0
-  /// @param[in] camera      The handle to the camera
-  /// @param[in] temperature The white balance temperature
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_attr_get_whitebalance_temperature()
-  /// @see camera_attr_get_whitebalance_temperature_range()
-  /// @see camera_attr_get_whitebalance_temperature_step()
+  /// Sets the white balance temperature.
+  ///
+  /// **Since Tizen:**
+  /// - 8.0
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `temperature` (in): The white balance temperature
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_attr_get_whitebalance_temperature()`
+  /// - `camera_attr_get_whitebalance_temperature_range()`
+  /// - `camera_attr_get_whitebalance_temperature_step()`
   int camera_attr_set_whitebalance_temperature(
     camera_h camera,
     int temperature,
@@ -4086,18 +5542,28 @@ class Tizen90CapiMediaCamera {
       _camera_attr_set_whitebalance_temperaturePtr
           .asFunction<int Function(camera_h, int)>();
 
-  /// @brief Gets the white balance temperature.
-  /// @since_tizen 8.0
-  /// @param[in]  camera      The handle to the camera
-  /// @param[out] temperature The white balance temperature
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_attr_set_whitebalance_temperature()
-  /// @see camera_attr_get_whitebalance_temperature_range()
-  /// @see camera_attr_get_whitebalance_temperature_step()
+  /// Gets the white balance temperature.
+  ///
+  /// **Since Tizen:**
+  /// - 8.0
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `temperature` (out): The white balance temperature
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_attr_set_whitebalance_temperature()`
+  /// - `camera_attr_get_whitebalance_temperature_range()`
+  /// - `camera_attr_get_whitebalance_temperature_step()`
   int camera_attr_get_whitebalance_temperature(
     camera_h camera,
     ffi.Pointer<ffi.Int> temperature,
@@ -4115,20 +5581,32 @@ class Tizen90CapiMediaCamera {
       _camera_attr_get_whitebalance_temperaturePtr
           .asFunction<int Function(camera_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the available white balance temperature.
-  /// @since_tizen 8.0
-  /// @remarks If the min value is greater than the max value, it means that this feature is not supported.
-  /// @param[in]  camera The handle to the camera
-  /// @param[out] min    The minimum white balance temperature
-  /// @param[out] max    The maximum white balance temperature
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_attr_set_whitebalance_temperature()
-  /// @see camera_attr_get_whitebalance_temperature()
-  /// @see camera_attr_get_whitebalance_temperature_step()
+  /// Gets the available white balance temperature.
+  ///
+  /// **Since Tizen:**
+  /// - 8.0
+  ///
+  /// **Remarks:**
+  /// - If the min value is greater than the max value, it means that this feature is not supported.
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `min` (out): The minimum white balance temperature
+  /// - `max` (out): The maximum white balance temperature
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_attr_set_whitebalance_temperature()`
+  /// - `camera_attr_get_whitebalance_temperature()`
+  /// - `camera_attr_get_whitebalance_temperature_step()`
   int camera_attr_get_whitebalance_temperature_range(
     camera_h camera,
     ffi.Pointer<ffi.Int> min,
@@ -4150,18 +5628,28 @@ class Tizen90CapiMediaCamera {
       _camera_attr_get_whitebalance_temperature_rangePtr.asFunction<
           int Function(camera_h, ffi.Pointer<ffi.Int>, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the step of white balance temperature.
-  /// @since_tizen 8.0
-  /// @param[in]  camera The handle to the camera
-  /// @param[out] step   The step of white balance temperature
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_attr_set_whitebalance_temperature()
-  /// @see camera_attr_get_whitebalance_temperature()
-  /// @see camera_attr_get_whitebalance_temperature_range()
+  /// Gets the step of white balance temperature.
+  ///
+  /// **Since Tizen:**
+  /// - 8.0
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `step` (out): The step of white balance temperature
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_attr_set_whitebalance_temperature()`
+  /// - `camera_attr_get_whitebalance_temperature()`
+  /// - `camera_attr_get_whitebalance_temperature_range()`
   int camera_attr_get_whitebalance_temperature_step(
     camera_h camera,
     ffi.Pointer<ffi.Int> step,
@@ -4179,17 +5667,27 @@ class Tizen90CapiMediaCamera {
       _camera_attr_get_whitebalance_temperature_stepPtr
           .asFunction<int Function(camera_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Sets the saturation level.
-  /// @since_tizen 8.0
-  /// @param[in] camera The handle to the camera
-  /// @param[in] level  The saturation level
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_attr_get_saturation()
-  /// @see camera_attr_get_saturation_range()
+  /// Sets the saturation level.
+  ///
+  /// **Since Tizen:**
+  /// - 8.0
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `level` (in): The saturation level
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_attr_get_saturation()`
+  /// - `camera_attr_get_saturation_range()`
   int camera_attr_set_saturation(
     camera_h camera,
     int level,
@@ -4206,17 +5704,27 @@ class Tizen90CapiMediaCamera {
   late final _camera_attr_set_saturation =
       _camera_attr_set_saturationPtr.asFunction<int Function(camera_h, int)>();
 
-  /// @brief Gets the saturation level.
-  /// @since_tizen 8.0
-  /// @param[in]  camera The handle to the camera
-  /// @param[out] level  The saturation level
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_attr_set_saturation()
-  /// @see camera_attr_get_saturation_range()
+  /// Gets the saturation level.
+  ///
+  /// **Since Tizen:**
+  /// - 8.0
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `level` (out): The saturation level
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_attr_set_saturation()`
+  /// - `camera_attr_get_saturation_range()`
   int camera_attr_get_saturation(
     camera_h camera,
     ffi.Pointer<ffi.Int> level,
@@ -4233,19 +5741,31 @@ class Tizen90CapiMediaCamera {
   late final _camera_attr_get_saturation = _camera_attr_get_saturationPtr
       .asFunction<int Function(camera_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the available saturation level.
-  /// @since_tizen 8.0
-  /// @remarks If the min value is greater than the max value, it means that this feature is not supported.
-  /// @param[in]  camera The handle to the camera
-  /// @param[out] min    The minimum saturation level
-  /// @param[out] max    The maximum saturation level
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_attr_set_saturation()
-  /// @see camera_attr_get_saturation()
+  /// Gets the available saturation level.
+  ///
+  /// **Since Tizen:**
+  /// - 8.0
+  ///
+  /// **Remarks:**
+  /// - If the min value is greater than the max value, it means that this feature is not supported.
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `min` (out): The minimum saturation level
+  /// - `max` (out): The maximum saturation level
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_attr_set_saturation()`
+  /// - `camera_attr_get_saturation()`
   int camera_attr_get_saturation_range(
     camera_h camera,
     ffi.Pointer<ffi.Int> min,
@@ -4266,17 +5786,27 @@ class Tizen90CapiMediaCamera {
       _camera_attr_get_saturation_rangePtr.asFunction<
           int Function(camera_h, ffi.Pointer<ffi.Int>, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Sets the sharpness level.
-  /// @since_tizen 8.0
-  /// @param[in] camera The handle to the camera
-  /// @param[in] level  The sharpness level
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_attr_get_sharpness()
-  /// @see camera_attr_get_sharpness_range()
+  /// Sets the sharpness level.
+  ///
+  /// **Since Tizen:**
+  /// - 8.0
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `level` (in): The sharpness level
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_attr_get_sharpness()`
+  /// - `camera_attr_get_sharpness_range()`
   int camera_attr_set_sharpness(
     camera_h camera,
     int level,
@@ -4293,17 +5823,27 @@ class Tizen90CapiMediaCamera {
   late final _camera_attr_set_sharpness =
       _camera_attr_set_sharpnessPtr.asFunction<int Function(camera_h, int)>();
 
-  /// @brief Gets the sharpness level.
-  /// @since_tizen 8.0
-  /// @param[in]  camera The handle to the camera
-  /// @param[out] level  The sharpness level
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_attr_set_sharpness()
-  /// @see camera_attr_get_sharpness_range()
+  /// Gets the sharpness level.
+  ///
+  /// **Since Tizen:**
+  /// - 8.0
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `level` (out): The sharpness level
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_attr_set_sharpness()`
+  /// - `camera_attr_get_sharpness_range()`
   int camera_attr_get_sharpness(
     camera_h camera,
     ffi.Pointer<ffi.Int> level,
@@ -4320,19 +5860,31 @@ class Tizen90CapiMediaCamera {
   late final _camera_attr_get_sharpness = _camera_attr_get_sharpnessPtr
       .asFunction<int Function(camera_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the available sharpness level.
-  /// @since_tizen 8.0
-  /// @remarks If the min value is greater than the max value, it means that this feature is not supported.
-  /// @param[in]  camera The handle to the camera
-  /// @param[out] min    The minimum sharpness level
-  /// @param[out] max    The maximum sharpness level
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_attr_set_sharpness()
-  /// @see camera_attr_get_sharpness()
+  /// Gets the available sharpness level.
+  ///
+  /// **Since Tizen:**
+  /// - 8.0
+  ///
+  /// **Remarks:**
+  /// - If the min value is greater than the max value, it means that this feature is not supported.
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `min` (out): The minimum sharpness level
+  /// - `max` (out): The maximum sharpness level
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_attr_set_sharpness()`
+  /// - `camera_attr_get_sharpness()`
   int camera_attr_get_sharpness_range(
     camera_h camera,
     ffi.Pointer<ffi.Int> min,
@@ -4353,19 +5905,31 @@ class Tizen90CapiMediaCamera {
       _camera_attr_get_sharpness_rangePtr.asFunction<
           int Function(camera_h, ffi.Pointer<ffi.Int>, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Sets the manual focus level.
-  /// @since_tizen 8.0
-  /// @remarks The auto focusing will be stopped when camera_attr_set_focus_level() is called.
-  /// @param[in] camera The handle to the camera
-  /// @param[in] level The manual focus level
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_OPERATION Internal error
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_attr_get_focus_level()
-  /// @see camera_attr_get_focus_level_range()
+  /// Sets the manual focus level.
+  ///
+  /// **Since Tizen:**
+  /// - 8.0
+  ///
+  /// **Remarks:**
+  /// - The auto focusing will be stopped when camera_attr_set_focus_level() is called.
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `level` (in): The manual focus level
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_OPERATION`: Internal error
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_attr_get_focus_level()`
+  /// - `camera_attr_get_focus_level_range()`
   int camera_attr_set_focus_level(
     camera_h camera,
     int level,
@@ -4382,18 +5946,28 @@ class Tizen90CapiMediaCamera {
   late final _camera_attr_set_focus_level =
       _camera_attr_set_focus_levelPtr.asFunction<int Function(camera_h, int)>();
 
-  /// @brief Gets the manual focus level.
-  /// @since_tizen 8.0
-  /// @param[in] camera The handle to the camera
-  /// @param[out] level The manual focus level
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_OPERATION Internal error
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_attr_set_focus_level()
-  /// @see camera_attr_get_focus_level_range()
+  /// Gets the manual focus level.
+  ///
+  /// **Since Tizen:**
+  /// - 8.0
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `level` (out): The manual focus level
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_OPERATION`: Internal error
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_attr_set_focus_level()`
+  /// - `camera_attr_get_focus_level_range()`
   int camera_attr_get_focus_level(
     camera_h camera,
     ffi.Pointer<ffi.Int> level,
@@ -4410,20 +5984,32 @@ class Tizen90CapiMediaCamera {
   late final _camera_attr_get_focus_level = _camera_attr_get_focus_levelPtr
       .asFunction<int Function(camera_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets lower limit and upper limit for manual focus level.
-  /// @since_tizen 8.0
-  /// @remarks If the min value is greater than the max value, it means that this feature is not supported.
-  /// @param[in] camera The handle to the camera
-  /// @param[out] min The lower limit for manual focus level
-  /// @param[out] max The upper limit for manual focus level
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_OPERATION Internal error
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_attr_set_focus_level()
-  /// @see camera_attr_get_focus_level()
+  /// Gets lower limit and upper limit for manual focus level.
+  ///
+  /// **Since Tizen:**
+  /// - 8.0
+  ///
+  /// **Remarks:**
+  /// - If the min value is greater than the max value, it means that this feature is not supported.
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `min` (out): The lower limit for manual focus level
+  /// - `max` (out): The upper limit for manual focus level
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_OPERATION`: Internal error
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_attr_set_focus_level()`
+  /// - `camera_attr_get_focus_level()`
   int camera_attr_get_focus_level_range(
     camera_h camera,
     ffi.Pointer<ffi.Int> min,
@@ -4444,21 +6030,33 @@ class Tizen90CapiMediaCamera {
       _camera_attr_get_focus_level_rangePtr.asFunction<
           int Function(camera_h, ffi.Pointer<ffi.Int>, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Retrieves all supported white balances by invoking the callback function once for each supported white balance.
-  /// @since_tizen 2.3
-  /// @param[in] camera    The handle to the camera
-  /// @param[in] callback  The callback function to be invoked
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @post This function invokes camera_attr_supported_whitebalance_cb() to get all the supported white balances.
-  /// @see camera_attr_set_whitebalance()
-  /// @see camera_attr_get_whitebalance()
-  /// @see camera_attr_supported_whitebalance_cb()
+  /// Retrieves all supported white balances by invoking the callback function once for each supported white balance.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `callback` (in): The callback function to be invoked
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **Postconditions:**
+  /// - This function invokes camera_attr_supported_whitebalance_cb() to get all the supported white balances.
+  ///
+  /// **See also:**
+  /// - `camera_attr_set_whitebalance()`
+  /// - `camera_attr_get_whitebalance()`
+  /// - `camera_attr_supported_whitebalance_cb()`
   int camera_attr_foreach_supported_whitebalance(
     camera_h camera,
     camera_attr_supported_whitebalance_cb callback,
@@ -4481,20 +6079,32 @@ class Tizen90CapiMediaCamera {
           int Function(camera_h, camera_attr_supported_whitebalance_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Sets the camera effect mode.
-  /// @since_tizen 2.3
-  /// @param[in] camera The handle to the camera
-  /// @param[in] effect The camera effect mode
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_STATE Invalid state
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @pre The camera state must be set to #CAMERA_STATE_CREATED or #CAMERA_STATE_PREVIEW.
-  /// @see camera_attr_foreach_supported_effect()
-  /// @see camera_attr_get_effect()
+  /// Sets the camera effect mode.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `effect` (in): The camera effect mode
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_STATE`: Invalid state
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **Preconditions:**
+  /// - The camera state must be set to `CAMERA_STATE_CREATED` or `CAMERA_STATE_PREVIEW`.
+  ///
+  /// **See also:**
+  /// - `camera_attr_foreach_supported_effect()`
+  /// - `camera_attr_get_effect()`
   int camera_attr_set_effect(
     camera_h camera,
     int effect,
@@ -4511,18 +6121,28 @@ class Tizen90CapiMediaCamera {
   late final _camera_attr_set_effect =
       _camera_attr_set_effectPtr.asFunction<int Function(camera_h, int)>();
 
-  /// @brief Gets the camera effect mode.
-  /// @since_tizen 2.3
-  /// @param[in]  camera The handle to the camera
-  /// @param[out] effect The camera effect mode
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_attr_foreach_supported_effect()
-  /// @see camera_attr_set_effect()
+  /// Gets the camera effect mode.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `effect` (out): The camera effect mode
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_attr_foreach_supported_effect()`
+  /// - `camera_attr_set_effect()`
   int camera_attr_get_effect(
     camera_h camera,
     ffi.Pointer<ffi.Int32> effect,
@@ -4540,21 +6160,33 @@ class Tizen90CapiMediaCamera {
   late final _camera_attr_get_effect = _camera_attr_get_effectPtr
       .asFunction<int Function(camera_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Retrieves all supported effect modes by invoking the callback function once for each supported effect mode.
-  /// @since_tizen 2.3
-  /// @param[in] camera    The handle to the camera
-  /// @param[in] callback  The callback function to be invoked
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @post This function invokes camera_attr_supported_effect_cb() to get all the supported effect modes.
-  /// @see camera_attr_set_effect()
-  /// @see camera_attr_get_effect()
-  /// @see camera_attr_supported_effect_cb()
+  /// Retrieves all supported effect modes by invoking the callback function once for each supported effect mode.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `callback` (in): The callback function to be invoked
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **Postconditions:**
+  /// - This function invokes camera_attr_supported_effect_cb() to get all the supported effect modes.
+  ///
+  /// **See also:**
+  /// - `camera_attr_set_effect()`
+  /// - `camera_attr_get_effect()`
+  /// - `camera_attr_supported_effect_cb()`
   int camera_attr_foreach_supported_effect(
     camera_h camera,
     camera_attr_supported_effect_cb callback,
@@ -4576,20 +6208,32 @@ class Tizen90CapiMediaCamera {
           int Function(camera_h, camera_attr_supported_effect_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Sets the scene mode.
-  /// @since_tizen 2.3
-  /// @param[in] camera The handle to the camera
-  /// @param[in] mode   The scene mode
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_STATE Invalid state
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @pre The camera state must be set to #CAMERA_STATE_CREATED or #CAMERA_STATE_PREVIEW.
-  /// @see camera_attr_foreach_supported_scene_mode()
-  /// @see camera_attr_get_scene_mode()
+  /// Sets the scene mode.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `mode` (in): The scene mode
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_STATE`: Invalid state
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **Preconditions:**
+  /// - The camera state must be set to `CAMERA_STATE_CREATED` or `CAMERA_STATE_PREVIEW`.
+  ///
+  /// **See also:**
+  /// - `camera_attr_foreach_supported_scene_mode()`
+  /// - `camera_attr_get_scene_mode()`
   int camera_attr_set_scene_mode(
     camera_h camera,
     int mode,
@@ -4606,18 +6250,28 @@ class Tizen90CapiMediaCamera {
   late final _camera_attr_set_scene_mode =
       _camera_attr_set_scene_modePtr.asFunction<int Function(camera_h, int)>();
 
-  /// @brief Gets the scene mode.
-  /// @since_tizen 2.3
-  /// @param[in]  camera The handle to the camera
-  /// @param[out] mode   The scene mode
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_attr_foreach_supported_scene_mode()
-  /// @see camera_attr_set_scene_mode()
+  /// Gets the scene mode.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `mode` (out): The scene mode
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_attr_foreach_supported_scene_mode()`
+  /// - `camera_attr_set_scene_mode()`
   int camera_attr_get_scene_mode(
     camera_h camera,
     ffi.Pointer<ffi.Int32> mode,
@@ -4635,21 +6289,33 @@ class Tizen90CapiMediaCamera {
   late final _camera_attr_get_scene_mode = _camera_attr_get_scene_modePtr
       .asFunction<int Function(camera_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Retrieves all supported scene modes by invoking the callback function once for each supported scene mode.
-  /// @since_tizen 2.3
-  /// @param[in] camera    The handle to the camera
-  /// @param[in] callback  The callback function to be invoked
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @post This function invokes camera_attr_supported_scene_mode_cb() to get all the supported scene modes.
-  /// @see camera_attr_set_scene_mode()
-  /// @see camera_attr_get_scene_mode()
-  /// @see camera_attr_supported_scene_mode_cb()
+  /// Retrieves all supported scene modes by invoking the callback function once for each supported scene mode.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `callback` (in): The callback function to be invoked
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **Postconditions:**
+  /// - This function invokes camera_attr_supported_scene_mode_cb() to get all the supported scene modes.
+  ///
+  /// **See also:**
+  /// - `camera_attr_set_scene_mode()`
+  /// - `camera_attr_get_scene_mode()`
+  /// - `camera_attr_supported_scene_mode_cb()`
   int camera_attr_foreach_supported_scene_mode(
     camera_h camera,
     camera_attr_supported_scene_mode_cb callback,
@@ -4672,17 +6338,27 @@ class Tizen90CapiMediaCamera {
           int Function(camera_h, camera_attr_supported_scene_mode_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Enables to write EXIF (Exchangeable image file format) tags in a JPEG file.
-  /// @since_tizen 2.3
-  /// @param[in] camera The handle to the camera
-  /// @param[in] enable If @c true writing EXIF tags in a JPEG file is enabled, otherwise @c false
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see         camera_attr_is_enabled_tag()
+  /// Enables to write EXIF (Exchangeable image file format) tags in a JPEG file.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `enable` (in): If `true` writing EXIF tags in a JPEG file is enabled, otherwise `false`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_attr_is_enabled_tag()`
   int camera_attr_enable_tag(
     camera_h camera,
     bool enable,
@@ -4699,17 +6375,27 @@ class Tizen90CapiMediaCamera {
   late final _camera_attr_enable_tag =
       _camera_attr_enable_tagPtr.asFunction<int Function(camera_h, bool)>();
 
-  /// @brief Gets the value that indicates whether writing EXIF (Exchangeable image file format) tags in a JPEG file is enabled.
-  /// @since_tizen 2.3
-  /// @param[in]  camera   The handle to the camera
-  /// @param[out] enabled  If @c true camera information is enabled, otherwise @c false
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see         camera_attr_enable_tag()
+  /// Gets the value that indicates whether writing EXIF (Exchangeable image file format) tags in a JPEG file is enabled.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `enabled` (out): If `true` camera information is enabled, otherwise `false`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_attr_enable_tag()`
   int camera_attr_is_enabled_tag(
     camera_h camera,
     ffi.Pointer<ffi.Bool> enabled,
@@ -4727,17 +6413,27 @@ class Tizen90CapiMediaCamera {
   late final _camera_attr_is_enabled_tag = _camera_attr_is_enabled_tagPtr
       .asFunction<int Function(camera_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Sets the camera image description in the EXIF (Exchangeable image file format) tag.
-  /// @since_tizen 2.3
-  /// @param[in] camera      The handle to the camera
-  /// @param[in] description The string with description
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_attr_get_tag_image_description()
+  /// Sets the camera image description in the EXIF (Exchangeable image file format) tag.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `description` (in): The string with description
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_attr_get_tag_image_description()`
   int camera_attr_set_tag_image_description(
     camera_h camera,
     ffi.Pointer<ffi.Char> description,
@@ -4756,18 +6452,30 @@ class Tizen90CapiMediaCamera {
       _camera_attr_set_tag_image_descriptionPtr
           .asFunction<int Function(camera_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the camera image description in EXIF (Exchangeable image file format) tag.
-  /// @since_tizen 2.3
-  /// @remarks You must release @a description using free().
-  /// @param[in]  camera      The handle to the camera
-  /// @param[out] description A pointer to a string
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_attr_set_tag_image_description()
+  /// Gets the camera image description in EXIF (Exchangeable image file format) tag.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - You must release `description` using free().
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `description` (out): A pointer to a string
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_attr_set_tag_image_description()`
   int camera_attr_get_tag_image_description(
     camera_h camera,
     ffi.Pointer<ffi.Pointer<ffi.Char>> description,
@@ -4786,17 +6494,27 @@ class Tizen90CapiMediaCamera {
       _camera_attr_get_tag_image_descriptionPtr.asFunction<
           int Function(camera_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets the camera orientation in the EXIF (Exchangeable image file format) tag.
-  /// @since_tizen 2.3
-  /// @param[in] camera      The handle to the camera
-  /// @param[in] orientation The camera orientation
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_attr_get_tag_orientation()
+  /// Sets the camera orientation in the EXIF (Exchangeable image file format) tag.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `orientation` (in): The camera orientation
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_attr_get_tag_orientation()`
   int camera_attr_set_tag_orientation(
     camera_h camera,
     int orientation,
@@ -4814,17 +6532,27 @@ class Tizen90CapiMediaCamera {
       _camera_attr_set_tag_orientationPtr
           .asFunction<int Function(camera_h, int)>();
 
-  /// @brief Gets the camera orientation in the EXIF (Exchangeable image file format) tag.
-  /// @since_tizen 2.3
-  /// @param[in]  camera      The handle to the camera
-  /// @param[out] orientation The camera orientation
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_attr_set_tag_orientation()
+  /// Gets the camera orientation in the EXIF (Exchangeable image file format) tag.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `orientation` (out): The camera orientation
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_attr_set_tag_orientation()`
   int camera_attr_get_tag_orientation(
     camera_h camera,
     ffi.Pointer<ffi.Int32> orientation,
@@ -4843,17 +6571,27 @@ class Tizen90CapiMediaCamera {
       _camera_attr_get_tag_orientationPtr
           .asFunction<int Function(camera_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Sets the software information in the EXIF (Exchangeable image file format) tag.
-  /// @since_tizen 2.3
-  /// @param[in] camera   The handle to the camera
-  /// @param[in] software The software information tag
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_attr_get_tag_software()
+  /// Sets the software information in the EXIF (Exchangeable image file format) tag.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `software` (in): The software information tag
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_attr_get_tag_software()`
   int camera_attr_set_tag_software(
     camera_h camera,
     ffi.Pointer<ffi.Char> software,
@@ -4871,18 +6609,30 @@ class Tizen90CapiMediaCamera {
   late final _camera_attr_set_tag_software = _camera_attr_set_tag_softwarePtr
       .asFunction<int Function(camera_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the software information in the EXIF (Exchangeable image file format) tag.
-  /// @since_tizen 2.3
-  /// @remarks You must release @a software using free().
-  /// @param[in]  camera   The handle to the camera
-  /// @param[out] software A pointer to a string
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_attr_set_tag_software()
+  /// Gets the software information in the EXIF (Exchangeable image file format) tag.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - You must release `software` using free().
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `software` (out): A pointer to a string
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_attr_set_tag_software()`
   int camera_attr_get_tag_software(
     camera_h camera,
     ffi.Pointer<ffi.Pointer<ffi.Char>> software,
@@ -4900,22 +6650,34 @@ class Tizen90CapiMediaCamera {
   late final _camera_attr_get_tag_software = _camera_attr_get_tag_softwarePtr
       .asFunction<int Function(camera_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets the geotag (GPS data) in the EXIF (Exchangeable image file format) tag.
-  /// @since_tizen 2.3
-  /// @param[in] camera    The handle to the camera
-  /// @param[in] latitude  The latitude data
-  /// @param[in] longitude The longitude data
-  /// @param[in] altitude  The altitude data
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_STATE Invalid state
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @pre The camera state must be set to #CAMERA_STATE_CREATED or #CAMERA_STATE_PREVIEW.
-  /// @see camera_attr_get_geotag()
-  /// @see camera_attr_remove_geotag()
+  /// Sets the geotag (GPS data) in the EXIF (Exchangeable image file format) tag.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `latitude` (in): The latitude data
+  /// - `longitude` (in): The longitude data
+  /// - `altitude` (in): The altitude data
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_STATE`: Invalid state
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **Preconditions:**
+  /// - The camera state must be set to `CAMERA_STATE_CREATED` or `CAMERA_STATE_PREVIEW`.
+  ///
+  /// **See also:**
+  /// - `camera_attr_get_geotag()`
+  /// - `camera_attr_remove_geotag()`
   int camera_attr_set_geotag(
     camera_h camera,
     double latitude,
@@ -4937,20 +6699,30 @@ class Tizen90CapiMediaCamera {
   late final _camera_attr_set_geotag = _camera_attr_set_geotagPtr
       .asFunction<int Function(camera_h, double, double, double)>();
 
-  /// @brief Gets the geotag (GPS data) in the EXIF (Exchangeable image file format) tag.
-  /// @since_tizen 2.3
-  /// @param[in]  camera    The handle to the camera
-  /// @param[out] latitude  The latitude data
-  /// @param[out] longitude The longitude data
-  /// @param[out] altitude  The altitude data
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_attr_set_geotag()
-  /// @see camera_attr_remove_geotag()
+  /// Gets the geotag (GPS data) in the EXIF (Exchangeable image file format) tag.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `latitude` (out): The latitude data
+  /// - `longitude` (out): The longitude data
+  /// - `altitude` (out): The altitude data
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_attr_set_geotag()`
+  /// - `camera_attr_remove_geotag()`
   int camera_attr_get_geotag(
     camera_h camera,
     ffi.Pointer<ffi.Double> latitude,
@@ -4976,19 +6748,31 @@ class Tizen90CapiMediaCamera {
       int Function(camera_h, ffi.Pointer<ffi.Double>, ffi.Pointer<ffi.Double>,
           ffi.Pointer<ffi.Double>)>();
 
-  /// @brief Removes the geotag (GPS data) in the EXIF (Exchangeable image file format) tag.
-  /// @since_tizen 2.3
-  /// @param[in] camera The handle to the camera
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_STATE Invalid state
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @pre The camera state must be set to #CAMERA_STATE_CREATED or #CAMERA_STATE_PREVIEW.
-  /// @see camera_attr_set_geotag()
-  /// @see camera_attr_get_geotag()
+  /// Removes the geotag (GPS data) in the EXIF (Exchangeable image file format) tag.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_STATE`: Invalid state
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **Preconditions:**
+  /// - The camera state must be set to `CAMERA_STATE_CREATED` or `CAMERA_STATE_PREVIEW`.
+  ///
+  /// **See also:**
+  /// - `camera_attr_set_geotag()`
+  /// - `camera_attr_get_geotag()`
   int camera_attr_remove_geotag(
     camera_h camera,
   ) {
@@ -5003,23 +6787,37 @@ class Tizen90CapiMediaCamera {
   late final _camera_attr_remove_geotag =
       _camera_attr_remove_geotagPtr.asFunction<int Function(camera_h)>();
 
-  /// @brief Sets the camera's flash mode.
-  /// @since_tizen 2.3
-  /// @remarks Since 2.4, while setting the flash mode, if the flash was preempted by other APIs,\n
-  /// then this function returns #CAMERA_ERROR_DEVICE_BUSY error.
-  /// @param[in] camera The handle to the camera
-  /// @param[in] mode   The flash mode
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_STATE Invalid state
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @retval #CAMERA_ERROR_DEVICE_BUSY The flash was preempted by other API
-  /// @pre The camera state must be set to #CAMERA_STATE_CREATED or #CAMERA_STATE_PREVIEW.
-  /// @see camera_attr_foreach_supported_flash_mode()
-  /// @see camera_attr_get_flash_mode()
+  /// Sets the camera's flash mode.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - Since 2.4, while setting the flash mode, if the flash was preempted by other APIs,
+  /// - then this function returns `CAMERA_ERROR_DEVICE_BUSY` error.
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `mode` (in): The flash mode
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_STATE`: Invalid state
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  /// - `CAMERA_ERROR_DEVICE_BUSY`: The flash was preempted by other API
+  ///
+  /// **Preconditions:**
+  /// - The camera state must be set to `CAMERA_STATE_CREATED` or `CAMERA_STATE_PREVIEW`.
+  ///
+  /// **See also:**
+  /// - `camera_attr_foreach_supported_flash_mode()`
+  /// - `camera_attr_get_flash_mode()`
   int camera_attr_set_flash_mode(
     camera_h camera,
     int mode,
@@ -5036,18 +6834,28 @@ class Tizen90CapiMediaCamera {
   late final _camera_attr_set_flash_mode =
       _camera_attr_set_flash_modePtr.asFunction<int Function(camera_h, int)>();
 
-  /// @brief Gets the camera's flash mode.
-  /// @since_tizen 2.3
-  /// @param[in]  camera The handle to the camera
-  /// @param[out] mode   The flash mode
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_attr_foreach_supported_flash_mode()
-  /// @see camera_attr_set_flash_mode()
+  /// Gets the camera's flash mode.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `mode` (out): The flash mode
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_attr_foreach_supported_flash_mode()`
+  /// - `camera_attr_set_flash_mode()`
   int camera_attr_get_flash_mode(
     camera_h camera,
     ffi.Pointer<ffi.Int32> mode,
@@ -5065,21 +6873,33 @@ class Tizen90CapiMediaCamera {
   late final _camera_attr_get_flash_mode = _camera_attr_get_flash_modePtr
       .asFunction<int Function(camera_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Retrieves all supported flash modes by invoking the callback function once for each supported flash mode.
-  /// @since_tizen 2.3
-  /// @param[in] camera    The handle to the camera
-  /// @param[in] callback  The callback function to be invoked
-  /// @param[in] user_data The user data passed to the callback registration function
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @post This function invokes camera_attr_supported_flash_mode_cb() to get all supported flash modes.
-  /// @see camera_attr_set_flash_mode()
-  /// @see camera_attr_get_flash_mode()
-  /// @see camera_attr_supported_flash_mode_cb()
+  /// Retrieves all supported flash modes by invoking the callback function once for each supported flash mode.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `callback` (in): The callback function to be invoked
+  /// - `user_data` (in): The user data passed to the callback registration function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **Postconditions:**
+  /// - This function invokes camera_attr_supported_flash_mode_cb() to get all supported flash modes.
+  ///
+  /// **See also:**
+  /// - `camera_attr_set_flash_mode()`
+  /// - `camera_attr_get_flash_mode()`
+  /// - `camera_attr_supported_flash_mode_cb()`
   int camera_attr_foreach_supported_flash_mode(
     camera_h camera,
     camera_attr_supported_flash_mode_cb callback,
@@ -5102,17 +6922,27 @@ class Tizen90CapiMediaCamera {
           int Function(camera_h, camera_attr_supported_flash_mode_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Gets the camera len's orientation angle.
-  /// @since_tizen 2.3
-  /// @param[in]  camera The handle to the camera
-  /// @param[out] angle  The orientation angle
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_set_display_rotation()
+  /// Gets the camera len's orientation angle.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `angle` (out): The orientation angle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_set_display_rotation()`
   int camera_attr_get_lens_orientation(
     camera_h camera,
     ffi.Pointer<ffi.Int> angle,
@@ -5130,18 +6960,30 @@ class Tizen90CapiMediaCamera {
       _camera_attr_get_lens_orientationPtr
           .asFunction<int Function(camera_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Sets the stream rotation.
-  /// @since_tizen 2.3
-  /// @param[in] camera   The handle to the camera
-  /// @param[in] rotation The stream rotation
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @pre The camera state must be set to #CAMERA_STATE_CREATED.
-  /// @see camera_attr_get_stream_rotation()
+  /// Sets the stream rotation.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `rotation` (in): The stream rotation
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **Preconditions:**
+  /// - The camera state must be set to `CAMERA_STATE_CREATED`.
+  ///
+  /// **See also:**
+  /// - `camera_attr_get_stream_rotation()`
   int camera_attr_set_stream_rotation(
     camera_h camera,
     int rotation,
@@ -5159,18 +7001,30 @@ class Tizen90CapiMediaCamera {
       _camera_attr_set_stream_rotationPtr
           .asFunction<int Function(camera_h, int)>();
 
-  /// @brief Gets the stream rotation.
-  /// @since_tizen 2.3
-  /// @param[in]  camera   The handle to the camera
-  /// @param[out] rotation The stream rotation
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @pre The camera state must be set to #CAMERA_STATE_CREATED.
-  /// @see camera_attr_set_stream_rotation()
+  /// Gets the stream rotation.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `rotation` (out): The stream rotation
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **Preconditions:**
+  /// - The camera state must be set to `CAMERA_STATE_CREATED`.
+  ///
+  /// **See also:**
+  /// - `camera_attr_set_stream_rotation()`
   int camera_attr_get_stream_rotation(
     camera_h camera,
     ffi.Pointer<ffi.Int32> rotation,
@@ -5189,21 +7043,33 @@ class Tizen90CapiMediaCamera {
       _camera_attr_get_stream_rotationPtr
           .asFunction<int Function(camera_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Retrieves all supported stream rotation modes by invoking callback function once for each supported stream rotation mode.
-  /// @since_tizen 2.3
-  /// @param[in] camera    The handle to the camera
-  /// @param[in] callback  The callback function to be invoked
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @post This function invokes camera_attr_supported_stream_rotation_cb() to get all supported stream rotation mode.
-  /// @see camera_attr_set_stream_rotation()
-  /// @see camera_attr_get_stream_rotation()
-  /// @see camera_attr_supported_stream_rotation_cb()
+  /// Retrieves all supported stream rotation modes by invoking callback function once for each supported stream rotation mode.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `callback` (in): The callback function to be invoked
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **Postconditions:**
+  /// - This function invokes camera_attr_supported_stream_rotation_cb() to get all supported stream rotation mode.
+  ///
+  /// **See also:**
+  /// - `camera_attr_set_stream_rotation()`
+  /// - `camera_attr_get_stream_rotation()`
+  /// - `camera_attr_supported_stream_rotation_cb()`
   int camera_attr_foreach_supported_stream_rotation(
     camera_h camera,
     camera_attr_supported_stream_rotation_cb callback,
@@ -5228,19 +7094,31 @@ class Tizen90CapiMediaCamera {
           int Function(camera_h, camera_attr_supported_stream_rotation_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Sets the stream flip.
-  /// @since_tizen 2.3
-  /// @param[in] camera The handle to the camera
-  /// @param[in] flip   The stream flip
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_STATE Invalid state
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @pre The camera state must be set to #CAMERA_STATE_CREATED.
-  /// @see camera_attr_set_stream_rotation()
+  /// Sets the stream flip.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `flip` (in): The stream flip
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_STATE`: Invalid state
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **Preconditions:**
+  /// - The camera state must be set to `CAMERA_STATE_CREATED`.
+  ///
+  /// **See also:**
+  /// - `camera_attr_set_stream_rotation()`
   int camera_attr_set_stream_flip(
     camera_h camera,
     int flip,
@@ -5257,18 +7135,30 @@ class Tizen90CapiMediaCamera {
   late final _camera_attr_set_stream_flip =
       _camera_attr_set_stream_flipPtr.asFunction<int Function(camera_h, int)>();
 
-  /// @brief Gets the stream flip.
-  /// @since_tizen 2.3
-  /// @param[in]  camera The handle to the camera
-  /// @param[out] flip   The stream flip
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @pre The camera state must be set to #CAMERA_STATE_CREATED.
-  /// @see camera_attr_set_stream_rotation()
+  /// Gets the stream flip.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `flip` (out): The stream flip
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **Preconditions:**
+  /// - The camera state must be set to `CAMERA_STATE_CREATED`.
+  ///
+  /// **See also:**
+  /// - `camera_attr_set_stream_rotation()`
   int camera_attr_get_stream_flip(
     camera_h camera,
     ffi.Pointer<ffi.Int32> flip,
@@ -5286,21 +7176,33 @@ class Tizen90CapiMediaCamera {
   late final _camera_attr_get_stream_flip = _camera_attr_get_stream_flipPtr
       .asFunction<int Function(camera_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Retrieves all supported stream flip modes by invoking callback function once for each supported stream flip mode.
-  /// @since_tizen 2.3
-  /// @param[in] camera    The handle to the camera
-  /// @param[in] callback  The callback function to be invoked
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @post This function invokes camera_attr_supported_stream_flip_cb() to get all supported stream flip mode.
-  /// @see camera_attr_set_stream_flip()
-  /// @see camera_attr_get_stream_flip()
-  /// @see camera_attr_supported_stream_flip_cb()
+  /// Retrieves all supported stream flip modes by invoking callback function once for each supported stream flip mode.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `callback` (in): The callback function to be invoked
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **Postconditions:**
+  /// - This function invokes camera_attr_supported_stream_flip_cb() to get all supported stream flip mode.
+  ///
+  /// **See also:**
+  /// - `camera_attr_set_stream_flip()`
+  /// - `camera_attr_get_stream_flip()`
+  /// - `camera_attr_supported_stream_flip_cb()`
   int camera_attr_foreach_supported_stream_flip(
     camera_h camera,
     camera_attr_supported_stream_flip_cb callback,
@@ -5323,25 +7225,39 @@ class Tizen90CapiMediaCamera {
           int Function(camera_h, camera_attr_supported_stream_flip_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Sets the mode of HDR (High Dynamic Range) capture.
-  /// @since_tizen 2.3
-  /// @remarks Taking multiple pictures at different exposure levels and intelligently stitching them together so that we eventually arrive at a picture that is representative in both dark and bright areas.\n
-  /// If this attribute is set to @c true. camera_attr_hdr_progress_cb() is invoked during capture.\n
-  /// If you set #CAMERA_ATTR_HDR_MODE_KEEP_ORIGINAL, the capturing callback is invoked twice. The first callback is delivering origin image data. The second callback is delivering improved image data.
-  /// @param[in] camera The handle to the camera
-  /// @param[in] mode   The mode of HDR capture
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_STATE Invalid state
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @pre The camera state must be set to #CAMERA_STATE_CREATED or #CAMERA_STATE_PREVIEW.
-  /// @see camera_attr_get_hdr_mode()
-  /// @see camera_attr_set_hdr_capture_progress_cb()
-  /// @see camera_attr_unset_hdr_capture_progress_cb()
-  /// @see camera_attr_is_supported_hdr_capture()
+  /// Sets the mode of HDR (High Dynamic Range) capture.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - Taking multiple pictures at different exposure levels and intelligently stitching them together so that we eventually arrive at a picture that is representative in both dark and bright areas.
+  /// - If this attribute is set to `true`. camera_attr_hdr_progress_cb() is invoked during capture.
+  /// - If you set `CAMERA_ATTR_HDR_MODE_KEEP_ORIGINAL`, the capturing callback is invoked twice. The first callback is delivering origin image data. The second callback is delivering improved image data.
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `mode` (in): The mode of HDR capture
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_STATE`: Invalid state
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **Preconditions:**
+  /// - The camera state must be set to `CAMERA_STATE_CREATED` or `CAMERA_STATE_PREVIEW`.
+  ///
+  /// **See also:**
+  /// - `camera_attr_get_hdr_mode()`
+  /// - `camera_attr_set_hdr_capture_progress_cb()`
+  /// - `camera_attr_unset_hdr_capture_progress_cb()`
+  /// - `camera_attr_is_supported_hdr_capture()`
   int camera_attr_set_hdr_mode(
     camera_h camera,
     int mode,
@@ -5358,20 +7274,30 @@ class Tizen90CapiMediaCamera {
   late final _camera_attr_set_hdr_mode =
       _camera_attr_set_hdr_modePtr.asFunction<int Function(camera_h, int)>();
 
-  /// @brief Gets the mode of HDR (High Dynamic Range) capture.
-  /// @since_tizen 2.3
-  /// @param[in]  camera The handle to the camera
-  /// @param[out] mode   The mode of HDR capture
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_attr_set_hdr_mode()
-  /// @see camera_attr_set_hdr_capture_progress_cb()
-  /// @see camera_attr_unset_hdr_capture_progress_cb()
-  /// @see camera_attr_is_supported_hdr_capture()
+  /// Gets the mode of HDR (High Dynamic Range) capture.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `mode` (out): The mode of HDR capture
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_attr_set_hdr_mode()`
+  /// - `camera_attr_set_hdr_capture_progress_cb()`
+  /// - `camera_attr_unset_hdr_capture_progress_cb()`
+  /// - `camera_attr_is_supported_hdr_capture()`
   int camera_attr_get_hdr_mode(
     camera_h camera,
     ffi.Pointer<ffi.Int32> mode,
@@ -5389,22 +7315,34 @@ class Tizen90CapiMediaCamera {
   late final _camera_attr_get_hdr_mode = _camera_attr_get_hdr_modePtr
       .asFunction<int Function(camera_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Sets a callback function to be invoked when HDR capture is progressing.
-  /// @since_tizen 2.3
-  /// @remarks This callback notifies progress of the HDR process.
-  /// @param[in] camera    The handle to the camera
-  /// @param[in] callback  The callback function to be invoked
-  /// @param[in] user_data The user data passed to the callback registration function
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_attr_set_hdr_mode()
-  /// @see camera_attr_get_hdr_mode()
-  /// @see camera_attr_unset_hdr_capture_progress_cb()
-  /// @see camera_attr_is_supported_hdr_capture()
+  /// Sets a callback function to be invoked when HDR capture is progressing.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - This callback notifies progress of the HDR process.
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `callback` (in): The callback function to be invoked
+  /// - `user_data` (in): The user data passed to the callback registration function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_attr_set_hdr_mode()`
+  /// - `camera_attr_get_hdr_mode()`
+  /// - `camera_attr_unset_hdr_capture_progress_cb()`
+  /// - `camera_attr_is_supported_hdr_capture()`
   int camera_attr_set_hdr_capture_progress_cb(
     camera_h camera,
     camera_attr_hdr_progress_cb callback,
@@ -5427,19 +7365,29 @@ class Tizen90CapiMediaCamera {
           int Function(
               camera_h, camera_attr_hdr_progress_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the HDR capture progress callback function.
-  /// @since_tizen 2.3
-  /// @param[in] camera The handle to the camera
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_attr_set_hdr_mode()
-  /// @see camera_attr_get_hdr_mode()
-  /// @see camera_attr_set_hdr_capture_progress_cb()
-  /// @see camera_attr_is_supported_hdr_capture()
+  /// Unsets the HDR capture progress callback function.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_attr_set_hdr_mode()`
+  /// - `camera_attr_get_hdr_mode()`
+  /// - `camera_attr_set_hdr_capture_progress_cb()`
+  /// - `camera_attr_is_supported_hdr_capture()`
   int camera_attr_unset_hdr_capture_progress_cb(
     camera_h camera,
   ) {
@@ -5455,20 +7403,34 @@ class Tizen90CapiMediaCamera {
       _camera_attr_unset_hdr_capture_progress_cbPtr
           .asFunction<int Function(camera_h)>();
 
-  /// @ingroup CAPI_MEDIA_CAMERA_CAPABILITY_MODULE
-  /// @brief Gets the support state of HDR capture.
-  /// @since_tizen 2.3
-  /// @remarks The specific error code can be obtained using the get_last_result() method. Error codes are described in Exception section.
-  /// @param[in] camera The handle to the camera
-  /// @return @c true if supported, otherwise @c false
-  /// @exception #CAMERA_ERROR_NONE Successful
-  /// @exception #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @exception #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @exception #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see camera_attr_set_hdr_mode()
-  /// @see camera_attr_get_hdr_mode()
-  /// @see camera_attr_set_hdr_capture_progress_cb()
-  /// @see camera_attr_unset_hdr_capture_progress_cb()
+  /// Gets the support state of HDR capture.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - The specific error code can be obtained using the get_last_result() method. Error codes are described in Exception section.
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  ///
+  /// **Returns:**
+  /// - `true` if supported, otherwise `false`
+  ///
+  /// **Exceptions:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `camera_attr_set_hdr_mode()`
+  /// - `camera_attr_get_hdr_mode()`
+  /// - `camera_attr_set_hdr_capture_progress_cb()`
+  /// - `camera_attr_unset_hdr_capture_progress_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_MEDIA_CAMERA_CAPABILITY_MODULE
   bool camera_attr_is_supported_hdr_capture(
     camera_h camera,
   ) {
@@ -5484,19 +7446,31 @@ class Tizen90CapiMediaCamera {
       _camera_attr_is_supported_hdr_capturePtr
           .asFunction<bool Function(camera_h)>();
 
-  /// @brief Enables/Disables the anti-shake feature.
-  /// @since_tizen 2.3
-  /// @remarks This feature is used for image capture.
-  /// @param[in] camera The handle to the camera
-  /// @param[in] enable If @c true the anti-shake feature is enabled, otherwise @c false
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_attr_is_enabled_anti_shake()
-  /// @see camera_attr_is_supported_anti_shake()
+  /// Enables/Disables the anti-shake feature.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - This feature is used for image capture.
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `enable` (in): If `true` the anti-shake feature is enabled, otherwise `false`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_attr_is_enabled_anti_shake()`
+  /// - `camera_attr_is_supported_anti_shake()`
   int camera_attr_enable_anti_shake(
     camera_h camera,
     bool enable,
@@ -5513,18 +7487,28 @@ class Tizen90CapiMediaCamera {
   late final _camera_attr_enable_anti_shake = _camera_attr_enable_anti_shakePtr
       .asFunction<int Function(camera_h, bool)>();
 
-  /// @brief Gets the state of the anti-shake feature.
-  /// @since_tizen 2.3
-  /// @param[in]  camera  The handle to the camera
-  /// @param[out] enabled The state of anti-shake
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_attr_enable_anti_shake()
-  /// @see camera_attr_is_supported_anti_shake()
+  /// Gets the state of the anti-shake feature.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `enabled` (out): The state of anti-shake
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_attr_enable_anti_shake()`
+  /// - `camera_attr_is_supported_anti_shake()`
   int camera_attr_is_enabled_anti_shake(
     camera_h camera,
     ffi.Pointer<ffi.Bool> enabled,
@@ -5543,18 +7527,32 @@ class Tizen90CapiMediaCamera {
       _camera_attr_is_enabled_anti_shakePtr
           .asFunction<int Function(camera_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @ingroup CAPI_MEDIA_CAMERA_CAPABILITY_MODULE
-  /// @brief Gets the support state of the anti-shake feature.
-  /// @since_tizen 2.3
-  /// @remarks The specific error code can be obtained using the get_last_result() method. Error codes are described in Exception section.
-  /// @param[in] camera The handle to the camera
-  /// @return @c true if supported, otherwise @c false
-  /// @exception #CAMERA_ERROR_NONE Successful
-  /// @exception #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @exception #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @exception #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see camera_attr_enable_anti_shake()
-  /// @see camera_attr_is_enabled_anti_shake()
+  /// Gets the support state of the anti-shake feature.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - The specific error code can be obtained using the get_last_result() method. Error codes are described in Exception section.
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  ///
+  /// **Returns:**
+  /// - `true` if supported, otherwise `false`
+  ///
+  /// **Exceptions:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `camera_attr_enable_anti_shake()`
+  /// - `camera_attr_is_enabled_anti_shake()`
+  ///
+  /// **Group:**
+  /// - CAPI_MEDIA_CAMERA_CAPABILITY_MODULE
   bool camera_attr_is_supported_anti_shake(
     camera_h camera,
   ) {
@@ -5570,20 +7568,32 @@ class Tizen90CapiMediaCamera {
       _camera_attr_is_supported_anti_shakePtr
           .asFunction<bool Function(camera_h)>();
 
-  /// @brief Enables/Disables the video stabilization feature.
-  /// @since_tizen 2.3
-  /// @remarks If video stabilization is enabled, zero shutter lag is disabled.\n
-  /// This feature is used to record a video.
-  /// @param[in] camera The handle to the camera
-  /// @param[in] enable If @c true video stabilization is enabled, otherwise @c false
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_attr_is_enabled_video_stabilization()
-  /// @see camera_attr_is_supported_video_stabilization()
+  /// Enables/Disables the video stabilization feature.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - If video stabilization is enabled, zero shutter lag is disabled.
+  /// - This feature is used to record a video.
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `enable` (in): If `true` video stabilization is enabled, otherwise `false`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_attr_is_enabled_video_stabilization()`
+  /// - `camera_attr_is_supported_video_stabilization()`
   int camera_attr_enable_video_stabilization(
     camera_h camera,
     bool enable,
@@ -5601,18 +7611,28 @@ class Tizen90CapiMediaCamera {
       _camera_attr_enable_video_stabilizationPtr
           .asFunction<int Function(camera_h, bool)>();
 
-  /// @brief Gets the state of the video stabilization feature.
-  /// @since_tizen 2.3
-  /// @param[in]  camera  The handle to the camera
-  /// @param[out] enabled The state of video stabilization
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_attr_enable_video_stabilization()
-  /// @see camera_attr_is_supported_video_stabilization()
+  /// Gets the state of the video stabilization feature.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `enabled` (out): The state of video stabilization
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_attr_enable_video_stabilization()`
+  /// - `camera_attr_is_supported_video_stabilization()`
   int camera_attr_is_enabled_video_stabilization(
     camera_h camera,
     ffi.Pointer<ffi.Bool> enabled,
@@ -5631,18 +7651,32 @@ class Tizen90CapiMediaCamera {
       _camera_attr_is_enabled_video_stabilizationPtr
           .asFunction<int Function(camera_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @ingroup CAPI_MEDIA_CAMERA_CAPABILITY_MODULE
-  /// @brief Gets the support state of the video stabilization feature.
-  /// @since_tizen 2.3
-  /// @remarks The specific error code can be obtained using the get_last_result() method. Error codes are described in Exception section.
-  /// @param[in] camera The handle to the camera
-  /// @return @c true if supported, otherwise @c false
-  /// @exception #CAMERA_ERROR_NONE Successful
-  /// @exception #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @exception #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @exception #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see camera_attr_enable_video_stabilization()
-  /// @see camera_attr_is_enabled_video_stabilization()
+  /// Gets the support state of the video stabilization feature.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - The specific error code can be obtained using the get_last_result() method. Error codes are described in Exception section.
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  ///
+  /// **Returns:**
+  /// - `true` if supported, otherwise `false`
+  ///
+  /// **Exceptions:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `camera_attr_enable_video_stabilization()`
+  /// - `camera_attr_is_enabled_video_stabilization()`
+  ///
+  /// **Group:**
+  /// - CAPI_MEDIA_CAMERA_CAPABILITY_MODULE
   bool camera_attr_is_supported_video_stabilization(
     camera_h camera,
   ) {
@@ -5658,19 +7692,31 @@ class Tizen90CapiMediaCamera {
       _camera_attr_is_supported_video_stabilizationPtr
           .asFunction<bool Function(camera_h)>();
 
-  /// @brief Enables/Disables auto contrast.
-  /// @since_tizen 2.3
-  /// @param[in] camera The handle to the camera
-  /// @param[in] enable If @c true auto contrast is enabled, otherwise @c false
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_STATE Invalid state
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @pre The camera state must be set to #CAMERA_STATE_CREATED or #CAMERA_STATE_PREVIEW.
-  /// @see camera_attr_is_enabled_auto_contrast()
+  /// Enables/Disables auto contrast.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `enable` (in): If `true` auto contrast is enabled, otherwise `false`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_STATE`: Invalid state
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **Preconditions:**
+  /// - The camera state must be set to `CAMERA_STATE_CREATED` or `CAMERA_STATE_PREVIEW`.
+  ///
+  /// **See also:**
+  /// - `camera_attr_is_enabled_auto_contrast()`
   int camera_attr_enable_auto_contrast(
     camera_h camera,
     bool enable,
@@ -5688,17 +7734,27 @@ class Tizen90CapiMediaCamera {
       _camera_attr_enable_auto_contrastPtr
           .asFunction<int Function(camera_h, bool)>();
 
-  /// @brief Gets the state of auto contrast.
-  /// @since_tizen 2.3
-  /// @param[in]  camera  The handle to the camera
-  /// @param[out] enabled The state of auto contrast
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_attr_enable_auto_contrast()
+  /// Gets the state of auto contrast.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `enabled` (out): The state of auto contrast
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_attr_enable_auto_contrast()`
   int camera_attr_is_enabled_auto_contrast(
     camera_h camera,
     ffi.Pointer<ffi.Bool> enabled,
@@ -5717,18 +7773,32 @@ class Tizen90CapiMediaCamera {
       _camera_attr_is_enabled_auto_contrastPtr
           .asFunction<int Function(camera_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Gets state of support of auto contrast feature.
-  /// @ingroup CAPI_MEDIA_CAMERA_CAPABILITY_MODULE
-  /// @since_tizen 2.3
-  /// @remarks The specific error code can be obtained using the get_last_result() method. Error codes are described in Exception section.
-  /// @param[in] camera The handle to the camera
-  /// @return true on supported, otherwise false
-  /// @exception #CAMERA_ERROR_NONE Successful
-  /// @exception #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @exception #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @exception #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see camera_attr_enable_auto_contrast()
-  /// @see camera_attr_is_enabled_auto_contrast()
+  /// Gets state of support of auto contrast feature.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - The specific error code can be obtained using the get_last_result() method. Error codes are described in Exception section.
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  ///
+  /// **Returns:**
+  /// - true on supported, otherwise false
+  ///
+  /// **Exceptions:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `camera_attr_enable_auto_contrast()`
+  /// - `camera_attr_is_enabled_auto_contrast()`
+  ///
+  /// **Group:**
+  /// - CAPI_MEDIA_CAMERA_CAPABILITY_MODULE
   bool camera_attr_is_supported_auto_contrast(
     camera_h camera,
   ) {
@@ -5744,18 +7814,28 @@ class Tizen90CapiMediaCamera {
       _camera_attr_is_supported_auto_contrastPtr
           .asFunction<bool Function(camera_h)>();
 
-  /// @brief Disables shutter sound.
-  /// @since_tizen 2.3
-  /// @remarks In some countries, this operation is not permitted.
-  /// @param[in] camera  The handle to the camera
-  /// @param[in] disable If @c true shutter sound is disabled, otherwise @c false
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_OPERATION Disabling shutter sound is not permitted
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
+  /// Disables shutter sound.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - In some countries, this operation is not permitted.
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `disable` (in): If `true` shutter sound is disabled, otherwise `false`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_OPERATION`: Disabling shutter sound is not permitted
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
   int camera_attr_disable_shutter_sound(
     camera_h camera,
     bool disable,
@@ -5773,21 +7853,33 @@ class Tizen90CapiMediaCamera {
       _camera_attr_disable_shutter_soundPtr
           .asFunction<int Function(camera_h, bool)>();
 
-  /// @brief Sets the position to move horizontally.
-  /// @since_tizen 3.0
-  /// @param[in] camera    The handle to the camera
-  /// @param[in] move_type The PTZ (Pan Tilt Zoom) move type
-  /// @param[in] pan_step  The step to move the camera
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_OPERATION Internal error
-  /// @retval #CAMERA_ERROR_INVALID_STATE Invalid state
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @pre The camera state must be set to #CAMERA_STATE_PREVIEW.
-  /// @see camera_attr_get_pan()
-  /// @see camera_attr_get_pan_range()
+  /// Sets the position to move horizontally.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `move_type` (in): The PTZ (Pan Tilt Zoom) move type
+  /// - `pan_step` (in): The step to move the camera
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_OPERATION`: Internal error
+  /// - `CAMERA_ERROR_INVALID_STATE`: Invalid state
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **Preconditions:**
+  /// - The camera state must be set to `CAMERA_STATE_PREVIEW`.
+  ///
+  /// **See also:**
+  /// - `camera_attr_get_pan()`
+  /// - `camera_attr_get_pan_range()`
   int camera_attr_set_pan(
     camera_h camera,
     int move_type,
@@ -5806,18 +7898,28 @@ class Tizen90CapiMediaCamera {
   late final _camera_attr_set_pan =
       _camera_attr_set_panPtr.asFunction<int Function(camera_h, int, int)>();
 
-  /// @brief Gets the current horizontal position of the camera.
-  /// @since_tizen 3.0
-  /// @param[in]  camera   The handle to the camera
-  /// @param[out] pan_step The current horizontal distance from the starting point.
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_OPERATION Internal error
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_attr_set_pan()
-  /// @see camera_attr_get_pan_range()
+  /// Gets the current horizontal position of the camera.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `pan_step` (out): The current horizontal distance from the starting point.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_OPERATION`: Internal error
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_attr_set_pan()`
+  /// - `camera_attr_get_pan_range()`
   int camera_attr_get_pan(
     camera_h camera,
     ffi.Pointer<ffi.Int> pan_step,
@@ -5834,20 +7936,32 @@ class Tizen90CapiMediaCamera {
   late final _camera_attr_get_pan = _camera_attr_get_panPtr
       .asFunction<int Function(camera_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets lower limit and upper limit for pan position.
-  /// @since_tizen 3.0
-  /// @remarks If the min value is greater than the max value, it means that this feature is not supported.
-  /// @param[in]  camera The handle to the camera
-  /// @param[out] min    The lower limit for pan
-  /// @param[out] max    The upper limit for pan
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_OPERATION Internal error
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_attr_set_pan()
-  /// @see camera_attr_get_pan()
+  /// Gets lower limit and upper limit for pan position.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - If the min value is greater than the max value, it means that this feature is not supported.
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `min` (out): The lower limit for pan
+  /// - `max` (out): The upper limit for pan
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_OPERATION`: Internal error
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_attr_set_pan()`
+  /// - `camera_attr_get_pan()`
   int camera_attr_get_pan_range(
     camera_h camera,
     ffi.Pointer<ffi.Int> min,
@@ -5868,21 +7982,33 @@ class Tizen90CapiMediaCamera {
       _camera_attr_get_pan_rangePtr.asFunction<
           int Function(camera_h, ffi.Pointer<ffi.Int>, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Sets the position to move vertically.
-  /// @since_tizen 3.0
-  /// @param[in] camera    The handle to the camera
-  /// @param[in] move_type The PTZ (Pan Tilt Zoom) move type
-  /// @param[in] tilt_step The step to move the camera
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_OPERATION Internal error
-  /// @retval #CAMERA_ERROR_INVALID_STATE Invalid state
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @pre The camera state must be set to #CAMERA_STATE_PREVIEW.
-  /// @see camera_attr_get_tilt()
-  /// @see camera_attr_get_tilt_range()
+  /// Sets the position to move vertically.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `move_type` (in): The PTZ (Pan Tilt Zoom) move type
+  /// - `tilt_step` (in): The step to move the camera
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_OPERATION`: Internal error
+  /// - `CAMERA_ERROR_INVALID_STATE`: Invalid state
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **Preconditions:**
+  /// - The camera state must be set to `CAMERA_STATE_PREVIEW`.
+  ///
+  /// **See also:**
+  /// - `camera_attr_get_tilt()`
+  /// - `camera_attr_get_tilt_range()`
   int camera_attr_set_tilt(
     camera_h camera,
     int move_type,
@@ -5901,18 +8027,28 @@ class Tizen90CapiMediaCamera {
   late final _camera_attr_set_tilt =
       _camera_attr_set_tiltPtr.asFunction<int Function(camera_h, int, int)>();
 
-  /// @brief Gets the current vertical position of the camera.
-  /// @since_tizen 3.0
-  /// @param[in]  camera    The handle to the camera
-  /// @param[out] tilt_step The current vertical distance from the starting point.
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_OPERATION Internal error
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_attr_set_tilt()
-  /// @see camera_attr_get_tilt_range()
+  /// Gets the current vertical position of the camera.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `tilt_step` (out): The current vertical distance from the starting point.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_OPERATION`: Internal error
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_attr_set_tilt()`
+  /// - `camera_attr_get_tilt_range()`
   int camera_attr_get_tilt(
     camera_h camera,
     ffi.Pointer<ffi.Int> tilt_step,
@@ -5929,20 +8065,32 @@ class Tizen90CapiMediaCamera {
   late final _camera_attr_get_tilt = _camera_attr_get_tiltPtr
       .asFunction<int Function(camera_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets lower limit and upper limit for tilt position.
-  /// @since_tizen 3.0
-  /// @remarks If the min value is greater than the max value, it means that this feature is not supported.
-  /// @param[in]  camera The handle to the camera
-  /// @param[out] min    The lower limit for tilt
-  /// @param[out] max    The upper limit for tilt
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_OPERATION Internal error
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_attr_set_tilt()
-  /// @see camera_attr_get_tilt()
+  /// Gets lower limit and upper limit for tilt position.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - If the min value is greater than the max value, it means that this feature is not supported.
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `min` (out): The lower limit for tilt
+  /// - `max` (out): The upper limit for tilt
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_OPERATION`: Internal error
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_attr_set_tilt()`
+  /// - `camera_attr_get_tilt()`
   int camera_attr_get_tilt_range(
     camera_h camera,
     ffi.Pointer<ffi.Int> min,
@@ -5963,25 +8111,37 @@ class Tizen90CapiMediaCamera {
       _camera_attr_get_tilt_rangePtr.asFunction<
           int Function(camera_h, ffi.Pointer<ffi.Int>, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Sets the type of PTZ (Pan Tilt Zoom).
-  /// @since_tizen 3.0
-  /// @param[in] camera   The handle to the camera
-  /// @param[in] ptz_type PTZ type
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_OPERATION Internal error
-  /// @retval #CAMERA_ERROR_INVALID_STATE Invalid state
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @pre The camera state must be set to #CAMERA_STATE_PREVIEW.
-  /// @see camera_attr_get_pan()
-  /// @see camera_attr_set_pan()
-  /// @see camera_attr_get_pan_range()
-  /// @see camera_attr_get_tilt()
-  /// @see camera_attr_set_tilt()
-  /// @see camera_attr_get_tilt_range()
-  /// @see camera_attr_foreach_supported_ptz_type()
+  /// Sets the type of PTZ (Pan Tilt Zoom).
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `ptz_type` (in): PTZ type
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_OPERATION`: Internal error
+  /// - `CAMERA_ERROR_INVALID_STATE`: Invalid state
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **Preconditions:**
+  /// - The camera state must be set to `CAMERA_STATE_PREVIEW`.
+  ///
+  /// **See also:**
+  /// - `camera_attr_get_pan()`
+  /// - `camera_attr_set_pan()`
+  /// - `camera_attr_get_pan_range()`
+  /// - `camera_attr_get_tilt()`
+  /// - `camera_attr_set_tilt()`
+  /// - `camera_attr_get_tilt_range()`
+  /// - `camera_attr_foreach_supported_ptz_type()`
   int camera_attr_set_ptz_type(
     camera_h camera,
     int ptz_type,
@@ -5998,19 +8158,31 @@ class Tizen90CapiMediaCamera {
   late final _camera_attr_set_ptz_type =
       _camera_attr_set_ptz_typePtr.asFunction<int Function(camera_h, int)>();
 
-  /// @brief Retrieves all supported PTZ (Pan Tilt Zoom) types by invoking callback function once for each supported ptz type.
-  /// @since_tizen 3.0
-  /// @param[in] camera    The handle to the camera
-  /// @param[in] callback  The callback function to be invoked
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @post This function invokes camera_attr_supported_ptz_type_cb() to get all supported ptz type.
-  /// @see camera_attr_set_ptz_type()
+  /// Retrieves all supported PTZ (Pan Tilt Zoom) types by invoking callback function once for each supported ptz type.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `callback` (in): The callback function to be invoked
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **Postconditions:**
+  /// - This function invokes camera_attr_supported_ptz_type_cb() to get all supported ptz type.
+  ///
+  /// **See also:**
+  /// - `camera_attr_set_ptz_type()`
   int camera_attr_foreach_supported_ptz_type(
     camera_h camera,
     camera_attr_supported_ptz_type_cb callback,
@@ -6033,24 +8205,36 @@ class Tizen90CapiMediaCamera {
           int Function(camera_h, camera_attr_supported_ptz_type_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Sets the ROI (Region Of Interest) area of display.
-  /// @since_tizen 3.0
-  /// @remarks If no display is set, no operation is performed and
-  /// the ROI area is valid only in #CAMERA_DISPLAY_MODE_CUSTOM_ROI display mode.
-  /// @remarks The minimum value of width and height are 1.
-  /// @remarks ROI area can be set before setting ROI display mode. (since 4.0)
-  /// @param[in] camera The handle to the camera
-  /// @param[in] x      X coordinate of area
-  /// @param[in] y      Y coordinate of area
-  /// @param[in] width  Width of area
-  /// @param[in] height Height of area
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_OPERATION Internal error
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_attr_get_display_roi_area()
+  /// Sets the ROI (Region Of Interest) area of display.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - If no display is set, no operation is performed and
+  /// - the ROI area is valid only in `CAMERA_DISPLAY_MODE_CUSTOM_ROI` display mode.
+  /// - The minimum value of width and height are 1.
+  /// - ROI area can be set before setting ROI display mode. (since 4.0)
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `x` (in): X coordinate of area
+  /// - `y` (in): Y coordinate of area
+  /// - `width` (in): Width of area
+  /// - `height` (in): Height of area
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_OPERATION`: Internal error
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_attr_get_display_roi_area()`
   int camera_attr_set_display_roi_area(
     camera_h camera,
     int x,
@@ -6075,20 +8259,30 @@ class Tizen90CapiMediaCamera {
       _camera_attr_set_display_roi_areaPtr
           .asFunction<int Function(camera_h, int, int, int, int)>();
 
-  /// @brief Gets the ROI (Region Of Interest) area of display.
-  /// @since_tizen 3.0
-  /// @param[in]  camera The handle to the camera
-  /// @param[out] x      X coordinate of area
-  /// @param[out] y      Y coordinate of area
-  /// @param[out] width  Width of area
-  /// @param[out] height Height of area
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CAMERA_ERROR_NONE Successful
-  /// @retval #CAMERA_ERROR_NOT_SUPPORTED The feature is not supported
-  /// @retval #CAMERA_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CAMERA_ERROR_INVALID_OPERATION Internal error
-  /// @retval #CAMERA_ERROR_SERVICE_DISCONNECTED The socket to multimedia server is disconnected
-  /// @see camera_attr_set_display_roi_area()
+  /// Gets the ROI (Region Of Interest) area of display.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `camera` (in): The handle to the camera
+  /// - `x` (out): X coordinate of area
+  /// - `y` (out): Y coordinate of area
+  /// - `width` (out): Width of area
+  /// - `height` (out): Height of area
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CAMERA_ERROR_NONE`: Successful
+  /// - `CAMERA_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `CAMERA_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CAMERA_ERROR_INVALID_OPERATION`: Internal error
+  /// - `CAMERA_ERROR_SERVICE_DISCONNECTED`: The socket to multimedia server is disconnected
+  ///
+  /// **See also:**
+  /// - `camera_attr_set_display_roi_area()`
   int camera_attr_get_display_roi_area(
     camera_h camera,
     ffi.Pointer<ffi.Int> x,
@@ -6119,8 +8313,11 @@ class Tizen90CapiMediaCamera {
               ffi.Pointer<ffi.Int>, ffi.Pointer<ffi.Int>)>();
 }
 
-/// @brief Enumeration for the error codes of Camera.
-/// @since_tizen 2.3
+/// Enumeration for the error codes of Camera.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 abstract class camera_error_e {
   /// < Successful
   static const int CAMERA_ERROR_NONE = 0;
@@ -6165,8 +8362,11 @@ abstract class camera_error_e {
   static const int CAMERA_ERROR_SERVICE_DISCONNECTED = -26279922;
 }
 
-/// @brief Enumeration for the camera state.
-/// @since_tizen 2.3
+/// Enumeration for the camera state.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 abstract class camera_state_e {
   /// < Before creating
   static const int CAMERA_STATE_NONE = 0;
@@ -6184,8 +8384,11 @@ abstract class camera_state_e {
   static const int CAMERA_STATE_CAPTURED = 4;
 }
 
-/// @brief Enumeration for the camera device state.
-/// @since_tizen 3.0
+/// Enumeration for the camera device state.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class camera_device_state_e {
   /// < Not opened
   static const int CAMERA_DEVICE_STATE_NULL = 0;
@@ -6197,8 +8400,11 @@ abstract class camera_device_state_e {
   static const int CAMERA_DEVICE_STATE_WORKING = 2;
 }
 
-/// @brief Enumeration for the camera device.
-/// @since_tizen 2.3
+/// Enumeration for the camera device.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 abstract class camera_device_e {
   /// < Primary camera
   static const int CAMERA_DEVICE_CAMERA0 = 0;
@@ -6231,10 +8437,15 @@ abstract class camera_device_e {
   static const int CAMERA_DEVICE_CAMERA9 = 9;
 }
 
-/// @brief Enumeration for the camera pixel format.
-/// @since_tizen 2.3
-/// @remarks If #CAMERA_PIXEL_FORMAT_INVZ is set, the type of display should be #CAMERA_DISPLAY_TYPE_NONE. \n
-/// Otherwise, camera_start_preview() will return #CAMERA_ERROR_INVALID_OPERATION. (Since 5.0)
+/// Enumeration for the camera pixel format.
+///
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **Remarks:**
+/// - If `CAMERA_PIXEL_FORMAT_INVZ` is set, the type of display should be `CAMERA_DISPLAY_TYPE_NONE`.
+/// - Otherwise, camera_start_preview() will return `CAMERA_ERROR_INVALID_OPERATION`. (Since 5.0)
+/// @nodoc
 abstract class camera_pixel_format_e {
   /// < Invalid pixel format
   static const int CAMERA_PIXEL_FORMAT_INVALID = -1;
@@ -6297,8 +8508,11 @@ abstract class camera_pixel_format_e {
   static const int CAMERA_PIXEL_FORMAT_VP9 = 19;
 }
 
-/// @brief Enumeration for the camera display type.
-/// @since_tizen 2.3
+/// Enumeration for the camera display type.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 abstract class camera_display_type_e {
   /// < Overlay surface display
   static const int CAMERA_DISPLAY_TYPE_OVERLAY = 0;
@@ -6310,8 +8524,11 @@ abstract class camera_display_type_e {
   static const int CAMERA_DISPLAY_TYPE_NONE = 2;
 }
 
-/// @brief Enumeration for the camera policy.
-/// @since_tizen 2.3
+/// Enumeration for the camera policy.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 abstract class camera_policy_e {
   /// < None
   static const int CAMERA_POLICY_NONE = 0;
@@ -6323,8 +8540,11 @@ abstract class camera_policy_e {
   static const int CAMERA_POLICY_RESOURCE_CONFLICT = 5;
 }
 
-/// @brief Enumeration for the camera rotation type.
-/// @since_tizen 2.3
+/// Enumeration for the camera rotation type.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 abstract class camera_rotation_e {
   /// < No rotation
   static const int CAMERA_ROTATION_NONE = 0;
@@ -6339,8 +8559,11 @@ abstract class camera_rotation_e {
   static const int CAMERA_ROTATION_270 = 3;
 }
 
-/// @brief Enumeration for the camera flip type.
-/// @since_tizen 2.3
+/// Enumeration for the camera flip type.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 abstract class camera_flip_e {
   /// < No Flip
   static const int CAMERA_FLIP_NONE = 0;
@@ -6355,8 +8578,11 @@ abstract class camera_flip_e {
   static const int CAMERA_FLIP_BOTH = 3;
 }
 
-/// @brief Enumeration for the camera focus state.
-/// @since_tizen 2.3
+/// Enumeration for the camera focus state.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 abstract class camera_focus_state_e {
   /// < Focus released
   static const int CAMERA_FOCUS_STATE_RELEASED = 0;
@@ -6371,8 +8597,11 @@ abstract class camera_focus_state_e {
   static const int CAMERA_FOCUS_STATE_FAILED = 3;
 }
 
-/// @brief Enumeration for the facing direction of camera module.
-/// @since_tizen 3.0
+/// Enumeration for the facing direction of camera module.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class camera_facing_direction_e {
   /// < Rear
   static const int CAMERA_FACING_DIRECTION_REAR = 0;
@@ -6381,8 +8610,11 @@ abstract class camera_facing_direction_e {
   static const int CAMERA_FACING_DIRECTION_FRONT = 1;
 }
 
-/// @brief Enumeration for the current flash state.
-/// @since_tizen 3.0
+/// Enumeration for the current flash state.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class camera_flash_state_e {
   /// < Flash is not used now through camera API
   static const int CAMERA_FLASH_STATE_NOT_USED = 0;
@@ -6391,8 +8623,11 @@ abstract class camera_flash_state_e {
   static const int CAMERA_FLASH_STATE_USED = 1;
 }
 
-/// @brief Enumeration for the device type.
-/// @since_tizen 7.0
+/// Enumeration for the device type.
+///
+/// **Since Tizen:**
+/// - 7.0
+/// @nodoc
 abstract class camera_device_type_e {
   /// < Built-in camera
   static const int CAMERA_DEVICE_TYPE_BUILTIN = 0;
@@ -6404,8 +8639,11 @@ abstract class camera_device_type_e {
   static const int CAMERA_DEVICE_TYPE_NETWORK = 2;
 }
 
-/// @brief The structure type of the image data.
-/// @since_tizen 2.3
+/// The structure type of the image data.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 final class camera_image_data_s extends ffi.Struct {
   /// < The image buffer
   external ffi.Pointer<ffi.UnsignedChar> data;
@@ -6434,8 +8672,11 @@ final class camera_image_data_s extends ffi.Struct {
   external int exif_size;
 }
 
-/// @brief The structure type for face detection.
-/// @since_tizen 2.3
+/// The structure type for face detection.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 final class camera_detected_face_s extends ffi.Struct {
   /// < The ID of each face
   @ffi.Int()
@@ -6462,8 +8703,11 @@ final class camera_detected_face_s extends ffi.Struct {
   external int height;
 }
 
-/// @brief The structure type to preview stream data.
-/// @since_tizen 2.3
+/// The structure type to preview stream data.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 final class camera_preview_data_s extends ffi.Struct {
   /// < The format of the frame pixel
   @ffi.Int32()
@@ -6489,6 +8733,7 @@ final class camera_preview_data_s extends ffi.Struct {
   external UnnamedUnion1 data;
 }
 
+/// @nodoc
 final class UnnamedUnion1 extends ffi.Union {
   /// < Single plane frame data
   external UnnamedStruct1 single_plane;
@@ -6509,6 +8754,7 @@ final class UnnamedUnion1 extends ffi.Union {
   external UnnamedStruct6 rgb_plane;
 }
 
+/// @nodoc
 final class UnnamedStruct1 extends ffi.Struct {
   /// < The yuv data pointer
   external ffi.Pointer<ffi.UnsignedChar> yuv;
@@ -6518,6 +8764,7 @@ final class UnnamedStruct1 extends ffi.Struct {
   external int size;
 }
 
+/// @nodoc
 final class UnnamedStruct2 extends ffi.Struct {
   /// < The y data pointer
   external ffi.Pointer<ffi.UnsignedChar> y;
@@ -6534,6 +8781,7 @@ final class UnnamedStruct2 extends ffi.Struct {
   external int uv_size;
 }
 
+/// @nodoc
 final class UnnamedStruct3 extends ffi.Struct {
   /// < The y data pointer
   external ffi.Pointer<ffi.UnsignedChar> y;
@@ -6557,6 +8805,7 @@ final class UnnamedStruct3 extends ffi.Struct {
   external int v_size;
 }
 
+/// @nodoc
 final class UnnamedStruct4 extends ffi.Struct {
   /// < The encoded data pointer
   external ffi.Pointer<ffi.UnsignedChar> data;
@@ -6570,6 +8819,7 @@ final class UnnamedStruct4 extends ffi.Struct {
   external bool is_delta_frame;
 }
 
+/// @nodoc
 final class UnnamedStruct5 extends ffi.Struct {
   /// < The depth data pointer
   external ffi.Pointer<ffi.UnsignedChar> data;
@@ -6579,6 +8829,7 @@ final class UnnamedStruct5 extends ffi.Struct {
   external int size;
 }
 
+/// @nodoc
 final class UnnamedStruct6 extends ffi.Struct {
   /// < The RGB data pointer
   external ffi.Pointer<ffi.UnsignedChar> data;
@@ -6588,8 +8839,11 @@ final class UnnamedStruct6 extends ffi.Struct {
   external int size;
 }
 
-/// @brief The structure type for the camera device.
-/// @since_tizen 7.0
+/// The structure type for the camera device.
+///
+/// **Since Tizen:**
+/// - 7.0
+/// @nodoc
 final class _camera_device_s extends ffi.Struct {
   /// < The type of camera device
   @ffi.Int32()
@@ -6612,10 +8866,14 @@ final class _camera_device_s extends ffi.Struct {
   external int extra_stream_num;
 }
 
+/// @nodoc
 final class camera_cli_s extends ffi.Opaque {}
 
-/// @brief Enumeration for the camera display mode.
-/// @since_tizen 2.3
+/// Enumeration for the camera display mode.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 abstract class camera_display_mode_e {
   /// < Letter box
   static const int CAMERA_DISPLAY_MODE_LETTER_BOX = 0;
@@ -6636,8 +8894,11 @@ abstract class camera_display_mode_e {
   static const int CAMERA_DISPLAY_MODE_CUSTOM_ROI = 5;
 }
 
-/// @brief Enumeration for the color tone, which provides the impression of looking through a tinted glass.
-/// @since_tizen 2.3
+/// Enumeration for the color tone, which provides the impression of looking through a tinted glass.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 abstract class camera_attr_effect_mode_e {
   /// < None
   static const int CAMERA_ATTR_EFFECT_NONE = 0;
@@ -6733,8 +8994,11 @@ abstract class camera_attr_effect_mode_e {
   static const int CAMERA_ATTR_EFFECT_OTHER_GRAPHICS = 30;
 }
 
-/// @brief Enumeration for the white balance levels of the camera.
-/// @since_tizen 2.3
+/// Enumeration for the white balance levels of the camera.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 abstract class camera_attr_whitebalance_e {
   /// < None
   static const int CAMERA_ATTR_WHITE_BALANCE_NONE = 0;
@@ -6767,9 +9031,13 @@ abstract class camera_attr_whitebalance_e {
   static const int CAMERA_ATTR_WHITE_BALANCE_CUSTOM = 9;
 }
 
-/// @brief Enumeration for the scene mode.
-/// @details The mode of operation can be in daylight, night, or back-light.
-/// @since_tizen 2.3
+/// Enumeration for the scene mode.
+///
+/// The mode of operation can be in daylight, night, or back-light.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 abstract class camera_attr_scene_mode_e {
   /// < Normal
   static const int CAMERA_ATTR_SCENE_MODE_NORMAL = 0;
@@ -6820,8 +9088,11 @@ abstract class camera_attr_scene_mode_e {
   static const int CAMERA_ATTR_SCENE_MODE_AQUA = 15;
 }
 
-/// @brief Enumeration for the auto focus mode.
-/// @since_tizen 2.3
+/// Enumeration for the auto focus mode.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 abstract class camera_attr_af_mode_e {
   /// < auto-focus is not set
   static const int CAMERA_ATTR_AF_NONE = 0;
@@ -6836,8 +9107,11 @@ abstract class camera_attr_af_mode_e {
   static const int CAMERA_ATTR_AF_FULL = 3;
 }
 
-/// @brief Enumeration for the ISO levels of the camera.
-/// @since_tizen 2.3
+/// Enumeration for the ISO levels of the camera.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 abstract class camera_attr_iso_e {
   /// < ISO auto mode
   static const int CAMERA_ATTR_ISO_AUTO = 0;
@@ -6864,8 +9138,11 @@ abstract class camera_attr_iso_e {
   static const int CAMERA_ATTR_ISO_3200 = 7;
 }
 
-/// @brief Enumeration for the camera exposure modes.
-/// @since_tizen 2.3
+/// Enumeration for the camera exposure modes.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 abstract class camera_attr_exposure_mode_e {
   /// < Off
   static const int CAMERA_ATTR_EXPOSURE_MODE_OFF = 0;
@@ -6889,8 +9166,11 @@ abstract class camera_attr_exposure_mode_e {
   static const int CAMERA_ATTR_EXPOSURE_MODE_APERTURE_PRIORITY = 6;
 }
 
-/// @brief Enumeration for the orientation values of tag.
-/// @since_tizen 2.3
+/// Enumeration for the orientation values of tag.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 abstract class camera_attr_tag_orientation_e {
   /// < Row #0 is at the top, Column #0 is to the left
   static const int CAMERA_ATTR_TAG_ORIENTATION_TOP_LEFT = 1;
@@ -6917,8 +9197,11 @@ abstract class camera_attr_tag_orientation_e {
   static const int CAMERA_ATTR_TAG_ORIENTATION_LEFT_BOTTOM = 8;
 }
 
-/// @brief Enumeration for the flash mode.
-/// @since_tizen 2.3
+/// Enumeration for the flash mode.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 abstract class camera_attr_flash_mode_e {
   /// < Always off
   static const int CAMERA_ATTR_FLASH_MODE_OFF = 0;
@@ -6945,8 +9228,11 @@ abstract class camera_attr_flash_mode_e {
   static const int CAMERA_ATTR_FLASH_MODE_PERMANENT = 7;
 }
 
-/// @brief Enumeration to preview FPS.
-/// @since_tizen 2.3
+/// Enumeration to preview FPS.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 abstract class camera_attr_fps_e {
   /// < AUTO FPS
   static const int CAMERA_ATTR_FPS_AUTO = 0;
@@ -6982,8 +9268,11 @@ abstract class camera_attr_fps_e {
   static const int CAMERA_ATTR_FPS_120 = 120;
 }
 
-/// @brief Enumeration for the theater mode.
-/// @since_tizen 2.3
+/// Enumeration for the theater mode.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 abstract class camera_attr_theater_mode_e {
   /// < Disable theater mode - External display shows same image as device display
   static const int CAMERA_ATTR_THEATER_MODE_DISABLE = 0;
@@ -6995,8 +9284,11 @@ abstract class camera_attr_theater_mode_e {
   static const int CAMERA_ATTR_THEATER_MODE_CLONE = 1;
 }
 
-/// @brief Enumeration for HDR capture mode.
-/// @since_tizen 2.3
+/// Enumeration for HDR capture mode.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 abstract class camera_attr_hdr_mode_e {
   /// < Disable HDR capture
   static const int CAMERA_ATTR_HDR_MODE_DISABLE = 0;
@@ -7008,8 +9300,11 @@ abstract class camera_attr_hdr_mode_e {
   static const int CAMERA_ATTR_HDR_MODE_KEEP_ORIGINAL = 2;
 }
 
-/// @brief Enumeration for PTZ (Pan Tilt Zoom) type.
-/// @since_tizen 3.0
+/// Enumeration for PTZ (Pan Tilt Zoom) type.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class camera_attr_ptz_type_e {
   /// < Move the camera device physically
   static const int CAMERA_ATTR_PTZ_TYPE_MECHANICAL = 0;
@@ -7018,8 +9313,11 @@ abstract class camera_attr_ptz_type_e {
   static const int CAMERA_ATTR_PTZ_TYPE_ELECTRONIC = 1;
 }
 
-/// @brief Enumeration for PTZ (Pan Tilt Zoom) movement type.
-/// @since_tizen 3.0
+/// Enumeration for PTZ (Pan Tilt Zoom) movement type.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class camera_attr_ptz_move_type_e {
   /// < Move to a specific coordinate position
   static const int CAMERA_ATTR_PTZ_MOVE_ABSOLUTE = 0;
@@ -7028,530 +9326,924 @@ abstract class camera_attr_ptz_move_type_e {
   static const int CAMERA_ATTR_PTZ_MOVE_RELATIVE = 1;
 }
 
-/// @brief The Camera handle.
-/// @since_tizen 2.3
-/// @see recorder_create_videorecorder()
+/// The Camera handle.
+///
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **See also:**
+/// - `recorder_create_videorecorder()`
+/// @nodoc
 typedef camera_h = ffi.Pointer<camera_cli_s>;
 
-/// @brief The Camera device manager handle.
-/// @since_tizen 7.0
+/// The Camera device manager handle.
+///
+/// **Since Tizen:**
+/// - 7.0
+/// @nodoc
 typedef camera_device_manager_h = ffi.Pointer<ffi.Void>;
 
-/// @brief Invoked once for the each supported device.
-/// @since_tizen 7.0
-/// @remarks The @a device should not be released and it can be used only in the callback. To use outside, make a copy.
-/// @param[in] device    The camera device
-/// @param[in] user_data The user data passed from the foreach function
-/// @return @c true to continue with the next iteration of the loop, \n otherwise @c false to break out of the loop
-/// @pre camera_device_manager_foreach_supported_device() will invoke this callback.
-/// @see camera_device_manager_foreach_supported_device()
+/// Invoked once for the each supported device.
+///
+/// **Since Tizen:**
+/// - 7.0
+///
+/// **Remarks:**
+/// - The `device` should not be released and it can be used only in the callback. To use outside, make a copy.
+///
+/// **Parameters:**
+/// - `device` (in): The camera device
+/// - `user_data` (in): The user data passed from the foreach function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - camera_device_manager_foreach_supported_device() will invoke this callback.
+///
+/// **See also:**
+/// - `camera_device_manager_foreach_supported_device()`
+/// @nodoc
 typedef camera_supported_device_cb
     = ffi.Pointer<ffi.NativeFunction<camera_supported_device_cbFunction>>;
+/// @nodoc
 typedef camera_supported_device_cbFunction = ffi.Bool Function(
     ffi.Pointer<camera_device_s> device, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartcamera_supported_device_cbFunction = bool Function(
     ffi.Pointer<camera_device_s> device, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief The structure type for the camera device.
-/// @since_tizen 7.0
+/// The structure type for the camera device.
+///
+/// **Since Tizen:**
+/// - 7.0
+/// @nodoc
 typedef camera_device_s = _camera_device_s;
 
-/// @brief Invoked when the connection state of a camera device was changed.
-/// @since_tizen 7.0
-/// @remarks The @a device should not be released and it can be used only in the callback. To use outside, make a copy.
-/// @param[in] device                    The camera device
-/// @param[in] is_connected              The state of device connection: (@c true = connected, @c false = disconnected)
-/// @param[in] user_data                 The user data passed from the callback registration function
-/// @see camera_device_manager_add_device_connection_changed_cb()
-/// @see camera_device_manager_remove_device_connection_changed_cb()
+/// Invoked when the connection state of a camera device was changed.
+///
+/// **Since Tizen:**
+/// - 7.0
+///
+/// **Remarks:**
+/// - The `device` should not be released and it can be used only in the callback. To use outside, make a copy.
+///
+/// **Parameters:**
+/// - `device` (in): The camera device
+/// - `is_connected` (in): The state of device connection: (`true` = connected, `false` = disconnected)
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `camera_device_manager_add_device_connection_changed_cb()`
+/// - `camera_device_manager_remove_device_connection_changed_cb()`
+/// @nodoc
 typedef camera_device_connection_changed_cb = ffi
     .Pointer<ffi.NativeFunction<camera_device_connection_changed_cbFunction>>;
+/// @nodoc
 typedef camera_device_connection_changed_cbFunction = ffi.Void Function(
     ffi.Pointer<camera_device_s> device,
     ffi.Bool is_connected,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartcamera_device_connection_changed_cbFunction = void Function(
     ffi.Pointer<camera_device_s> device,
     bool is_connected,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Invoked to get information about image data taken by the camera once per frame while capturing.
-/// @since_tizen 2.3
+/// Invoked to get information about image data taken by the camera once per frame while capturing.
 ///
-/// @remarks This function is invoked in the context of internal framework so the UI update code should not be directly called.
-/// You must not call camera_start_preview() within this callback. \n
-/// The @a image, @a postview and @a thumbnail should not be released and it can be used only in the callback. To use outside, make a copy.
-/// @param[in] image     The image data of the captured picture
-/// @param[in] postview  The image data of the postview
-/// @param[in] thumbnail The image data of the thumbnail (it should be @c NULL if the available thumbnail data does not exist)
-/// @param[in] user_data The user data passed from the callback registration function
-/// @pre camera_start_capture() or camera_start_continuous_capture() will invoke this callback function if it is set using camera_start_capture() or camera_start_continuous_capture().
-/// @see camera_start_capture()
-/// @see camera_start_continuous_capture()
-/// @see camera_capture_completed_cb()
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **Remarks:**
+/// - This function is invoked in the context of internal framework so the UI update code should not be directly called.
+/// - You must not call camera_start_preview() within this callback.
+/// - The `image`, `postview` and `thumbnail` should not be released and it can be used only in the callback. To use outside, make a copy.
+///
+/// **Parameters:**
+/// - `image` (in): The image data of the captured picture
+/// - `postview` (in): The image data of the postview
+/// - `thumbnail` (in): The image data of the thumbnail (it should be `NULL` if the available thumbnail data does not exist)
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - camera_start_capture() or camera_start_continuous_capture() will invoke this callback function if it is set using camera_start_capture() or camera_start_continuous_capture().
+///
+/// **See also:**
+/// - `camera_start_capture()`
+/// - `camera_start_continuous_capture()`
+/// - `camera_capture_completed_cb()`
+/// @nodoc
 typedef camera_capturing_cb
     = ffi.Pointer<ffi.NativeFunction<camera_capturing_cbFunction>>;
+/// @nodoc
 typedef camera_capturing_cbFunction = ffi.Void Function(
     ffi.Pointer<camera_image_data_s> image,
     ffi.Pointer<camera_image_data_s> postview,
     ffi.Pointer<camera_image_data_s> thumbnail,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartcamera_capturing_cbFunction = void Function(
     ffi.Pointer<camera_image_data_s> image,
     ffi.Pointer<camera_image_data_s> postview,
     ffi.Pointer<camera_image_data_s> thumbnail,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Invoked when the camera capturing completes.
-/// @since_tizen 2.3
+/// Invoked when the camera capturing completes.
 ///
-/// @remarks The callback is invoked after camera_capturing_cb() is completed.\n
-/// If you want to show the user a preview after capturing is finished, \n
-/// an application can use camera_start_preview() after calling this callback.
-/// @param[in] user_data The user data passed from the callback registration function
-/// @pre This callback function is invoked if it is set using camera_start_capture() or camera_start_continuous_capture().
-/// @see camera_start_capture()
-/// @see camera_start_continuous_capture()
-/// @see camera_capturing_cb()
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **Remarks:**
+/// - The callback is invoked after camera_capturing_cb() is completed.
+/// - If you want to show the user a preview after capturing is finished,
+/// - an application can use camera_start_preview() after calling this callback.
+///
+/// **Parameters:**
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - This callback function is invoked if it is set using camera_start_capture() or camera_start_continuous_capture().
+///
+/// **See also:**
+/// - `camera_start_capture()`
+/// - `camera_start_continuous_capture()`
+/// - `camera_capturing_cb()`
+/// @nodoc
 typedef camera_capture_completed_cb
     = ffi.Pointer<ffi.NativeFunction<camera_capture_completed_cbFunction>>;
+/// @nodoc
 typedef camera_capture_completed_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartcamera_capture_completed_cbFunction = void Function(
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief The Camera display handle.
-/// @since_tizen 2.3
+/// The Camera display handle.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 typedef camera_display_h = ffi.Pointer<ffi.Void>;
 
-/// @brief Invoked when a face is detected in the preview frame.
-/// @since_tizen 2.3
-/// @remarks The @a faces should not be released and it can be used only in the callback. To use outside, make a copy.
-/// @param[in] faces     The detected face array
-/// @param[in] count     The length of the array
-/// @param[in] user_data The user data passed from the callback registration function
-/// @see camera_start_face_detection()
+/// Invoked when a face is detected in the preview frame.
+///
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **Remarks:**
+/// - The `faces` should not be released and it can be used only in the callback. To use outside, make a copy.
+///
+/// **Parameters:**
+/// - `faces` (in): The detected face array
+/// - `count` (in): The length of the array
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `camera_start_face_detection()`
+/// @nodoc
 typedef camera_face_detected_cb
     = ffi.Pointer<ffi.NativeFunction<camera_face_detected_cbFunction>>;
+/// @nodoc
 typedef camera_face_detected_cbFunction = ffi.Void Function(
     ffi.Pointer<camera_detected_face_s> faces,
     ffi.Int count,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartcamera_face_detected_cbFunction = void Function(
     ffi.Pointer<camera_detected_face_s> faces,
     int count,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Invoked once for each supported preview resolution.
-/// @since_tizen 2.3
-/// @param[in] width     The preview image width
-/// @param[in] height    The preview image height
-/// @param[in] user_data The user data passed from the foreach function
-/// @return @c true to continue with the next iteration of the loop, \n otherwise @c false to break out of the loop
-/// @pre camera_foreach_supported_preview_resolution() will invoke this callback.
-/// @see camera_foreach_supported_preview_resolution()
+/// Invoked once for each supported preview resolution.
+///
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **Parameters:**
+/// - `width` (in): The preview image width
+/// - `height` (in): The preview image height
+/// - `user_data` (in): The user data passed from the foreach function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - camera_foreach_supported_preview_resolution() will invoke this callback.
+///
+/// **See also:**
+/// - `camera_foreach_supported_preview_resolution()`
+/// @nodoc
 typedef camera_supported_preview_resolution_cb = ffi.Pointer<
     ffi.NativeFunction<camera_supported_preview_resolution_cbFunction>>;
+/// @nodoc
 typedef camera_supported_preview_resolution_cbFunction = ffi.Bool Function(
     ffi.Int width, ffi.Int height, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartcamera_supported_preview_resolution_cbFunction = bool Function(
     int width, int height, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Invoked once for each supported capture resolution.
-/// @since_tizen 2.3
-/// @param[in] width     The capture resolution width
-/// @param[in] height    The capture resolution height
-/// @param[in] user_data The user data passed from the foreach function
-/// @return @c true to continue with the next iteration of the loop, \n otherwise @c false to break out of the loop
-/// @pre camera_foreach_supported_capture_resolution() will invoke this callback.
-/// @see camera_foreach_supported_capture_resolution()
+/// Invoked once for each supported capture resolution.
+///
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **Parameters:**
+/// - `width` (in): The capture resolution width
+/// - `height` (in): The capture resolution height
+/// - `user_data` (in): The user data passed from the foreach function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - camera_foreach_supported_capture_resolution() will invoke this callback.
+///
+/// **See also:**
+/// - `camera_foreach_supported_capture_resolution()`
+/// @nodoc
 typedef camera_supported_capture_resolution_cb = ffi.Pointer<
     ffi.NativeFunction<camera_supported_capture_resolution_cbFunction>>;
+/// @nodoc
 typedef camera_supported_capture_resolution_cbFunction = ffi.Bool Function(
     ffi.Int width, ffi.Int height, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartcamera_supported_capture_resolution_cbFunction = bool Function(
     int width, int height, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Invoked once for the pixel format of each supported capture format.
-/// @since_tizen 2.3
-/// @param[in] format    The supported pixel format
-/// @param[in] user_data The user data passed from the foreach function
-/// @return @c true to continue with the next iteration of the loop, \n otherwise @c false to break out of the loop
-/// @pre camera_foreach_supported_capture_format() will invoke this callback.
-/// @see camera_foreach_supported_capture_format()
+/// Invoked once for the pixel format of each supported capture format.
+///
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **Parameters:**
+/// - `format` (in): The supported pixel format
+/// - `user_data` (in): The user data passed from the foreach function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - camera_foreach_supported_capture_format() will invoke this callback.
+///
+/// **See also:**
+/// - `camera_foreach_supported_capture_format()`
+/// @nodoc
 typedef camera_supported_capture_format_cb = ffi
     .Pointer<ffi.NativeFunction<camera_supported_capture_format_cbFunction>>;
+/// @nodoc
 typedef camera_supported_capture_format_cbFunction = ffi.Bool Function(
     ffi.Int32 format, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartcamera_supported_capture_format_cbFunction = bool Function(
     int format, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Invoked when the extra preview frame is delivered from the camera device.
-/// @since_tizen 7.0
-/// @remarks The @a frame should not be released and it can be used only in the callback. To use outside, make a copy.
-/// @param[in] frame     The reference pointer to extra preview stream data
-/// @param[in] stream_id The ID of the preview stream
-/// @param[in] user_data The user data passed from the callback registration function
-/// @pre camera_start_preview() will invoke this callback function if you set this callback using camera_set_extra_preview_cb().
-/// @see camera_start_preview()
-/// @see camera_set_extra_preview_cb()
-/// @see camera_unset_extra_preview_cb()
+/// Invoked when the extra preview frame is delivered from the camera device.
+///
+/// **Since Tizen:**
+/// - 7.0
+///
+/// **Remarks:**
+/// - The `frame` should not be released and it can be used only in the callback. To use outside, make a copy.
+///
+/// **Parameters:**
+/// - `frame` (in): The reference pointer to extra preview stream data
+/// - `stream_id` (in): The ID of the preview stream
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - camera_start_preview() will invoke this callback function if you set this callback using camera_set_extra_preview_cb().
+///
+/// **See also:**
+/// - `camera_start_preview()`
+/// - `camera_set_extra_preview_cb()`
+/// - `camera_unset_extra_preview_cb()`
+/// @nodoc
 typedef camera_extra_preview_cb
     = ffi.Pointer<ffi.NativeFunction<camera_extra_preview_cbFunction>>;
+/// @nodoc
 typedef camera_extra_preview_cbFunction = ffi.Void Function(
     ffi.Pointer<camera_preview_data_s> frame,
     ffi.Int stream_id,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartcamera_extra_preview_cbFunction = void Function(
     ffi.Pointer<camera_preview_data_s> frame,
     int stream_id,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Invoked once for the pixel format of each supported preview format.
-/// @since_tizen 2.3
-/// @param[in] format    The supported preview data format
-/// @param[in] user_data The user data passed from the foreach function
-/// @return @c true to continue with the next iteration of the loop, \n otherwise @c false to break out of the loop
-/// @pre camera_foreach_supported_preview_format() will invoke this callback.
-/// @see camera_foreach_supported_preview_format()
+/// Invoked once for the pixel format of each supported preview format.
+///
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **Parameters:**
+/// - `format` (in): The supported preview data format
+/// - `user_data` (in): The user data passed from the foreach function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - camera_foreach_supported_preview_format() will invoke this callback.
+///
+/// **See also:**
+/// - `camera_foreach_supported_preview_format()`
+/// @nodoc
 typedef camera_supported_preview_format_cb = ffi
     .Pointer<ffi.NativeFunction<camera_supported_preview_format_cbFunction>>;
+/// @nodoc
 typedef camera_supported_preview_format_cbFunction = ffi.Bool Function(
     ffi.Int32 format, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartcamera_supported_preview_format_cbFunction = bool Function(
     int format, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Invoked for notifications about delivering a copy of the new preview frame when every preview frame is displayed.
-/// @since_tizen 2.3
+/// Invoked for notifications about delivering a copy of the new preview frame when every preview frame is displayed.
 ///
-/// @remarks This function is invoked in the context of internal framework so the UI update code should not be directly called.\n
-/// If the camera is used as a recorder then this callback function won't be invoked.
-/// @remarks The @a frame should not be released and it's available until the callback returns.
+/// **Since Tizen:**
+/// - 2.3
 ///
-/// @param[in] frame     The reference pointer to preview stream data
-/// @param[in] user_data The user data passed from the callback registration function
-/// @pre camera_start_preview() will invoke this callback function if you set this callback using camera_set_preview_cb().
-/// @see camera_start_preview()
-/// @see camera_set_preview_cb()
-/// @see camera_unset_preview_cb()
+/// **Remarks:**
+/// - This function is invoked in the context of internal framework so the UI update code should not be directly called.
+/// - If the camera is used as a recorder then this callback function won't be invoked.
+/// - The `frame` should not be released and it's available until the callback returns.
+///
+/// **Parameters:**
+/// - `frame` (in): The reference pointer to preview stream data
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - camera_start_preview() will invoke this callback function if you set this callback using camera_set_preview_cb().
+///
+/// **See also:**
+/// - `camera_start_preview()`
+/// - `camera_set_preview_cb()`
+/// - `camera_unset_preview_cb()`
+/// @nodoc
 typedef camera_preview_cb
     = ffi.Pointer<ffi.NativeFunction<camera_preview_cbFunction>>;
+/// @nodoc
 typedef camera_preview_cbFunction = ffi.Void Function(
     ffi.Pointer<camera_preview_data_s> frame, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartcamera_preview_cbFunction = void Function(
     ffi.Pointer<camera_preview_data_s> frame, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Invoked for notifications about delivering media packet when every preview frame is displayed.
-/// @since_tizen 2.3
+/// Invoked for notifications about delivering media packet when every preview frame is displayed.
 ///
-/// @remarks This function is invoked in the context of internal framework so the UI update code should not be directly called.\n
-/// If the camera is used as a recorder then this callback function won't be invoked.\n
-/// and the packet should be released by media_packet_destroy() after use.
+/// **Since Tizen:**
+/// - 2.3
 ///
-/// @param[in] pkt       Reference pointer to media packet
-/// @param[in] user_data The user data passed from the callback registration function
-/// @pre camera_start_preview() will invoke this callback function if you set this callback using camera_set_media_packet_preview_cb().
-/// @see camera_start_preview()
-/// @see camera_set_media_packet_preview_cb()
-/// @see camera_unset_media_packet_preview_cb()
+/// **Remarks:**
+/// - This function is invoked in the context of internal framework so the UI update code should not be directly called.
+/// - If the camera is used as a recorder then this callback function won't be invoked.
+/// - and the packet should be released by media_packet_destroy() after use.
+///
+/// **Parameters:**
+/// - `pkt` (in): Reference pointer to media packet
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - camera_start_preview() will invoke this callback function if you set this callback using camera_set_media_packet_preview_cb().
+///
+/// **See also:**
+/// - `camera_start_preview()`
+/// - `camera_set_media_packet_preview_cb()`
+/// - `camera_unset_media_packet_preview_cb()`
+/// @nodoc
 typedef camera_media_packet_preview_cb
     = ffi.Pointer<ffi.NativeFunction<camera_media_packet_preview_cbFunction>>;
+/// @nodoc
 typedef camera_media_packet_preview_cbFunction = ffi.Void Function(
     media_tool.media_packet_h pkt, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartcamera_media_packet_preview_cbFunction = void Function(
     media_tool.media_packet_h pkt, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Invoked when the camera state is changed.
-/// @since_tizen 2.3
-/// @param[in] previous  The previous state of the camera
-/// @param[in] current   The current state of the camera
-/// @param[in] by_policy If @c true the state is changed by policy, otherwise @c false
-/// @param[in] user_data The user data passed from the callback registration function
-/// @pre camera_start_preview(), camera_start_capture() or camera_stop_preview()
-/// will invoke this callback if you set this callback using camera_set_state_changed_cb().
-/// @see camera_set_state_changed_cb()
+/// Invoked when the camera state is changed.
+///
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **Parameters:**
+/// - `previous` (in): The previous state of the camera
+/// - `current` (in): The current state of the camera
+/// - `by_policy` (in): If `true` the state is changed by policy, otherwise `false`
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - camera_start_preview(), camera_start_capture() or camera_stop_preview() will invoke this callback if you set this callback using camera_set_state_changed_cb().
+///
+/// **See also:**
+/// - `camera_set_state_changed_cb()`
+/// @nodoc
 typedef camera_state_changed_cb
     = ffi.Pointer<ffi.NativeFunction<camera_state_changed_cbFunction>>;
+/// @nodoc
 typedef camera_state_changed_cbFunction = ffi.Void Function(ffi.Int32 previous,
     ffi.Int32 current, ffi.Bool by_policy, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartcamera_state_changed_cbFunction = void Function(
     int previous, int current, bool by_policy, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Invoked when the camera is interrupted by policy.
-/// @since_tizen 2.3
-/// @remarks This callback is invoked after interrupt handling is completed.
-/// @param[in] policy    The policy that interrupted the camera
-/// @param[in] previous  The previous state of the camera
-/// @param[in] current   The current state of the camera
-/// @param[in] user_data The user data passed from the callback registration function
-/// @see camera_set_interrupted_cb()
+/// Invoked when the camera is interrupted by policy.
+///
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **Remarks:**
+/// - This callback is invoked after interrupt handling is completed.
+///
+/// **Parameters:**
+/// - `policy` (in): The policy that interrupted the camera
+/// - `previous` (in): The previous state of the camera
+/// - `current` (in): The current state of the camera
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `camera_set_interrupted_cb()`
+/// @nodoc
 typedef camera_interrupted_cb
     = ffi.Pointer<ffi.NativeFunction<camera_interrupted_cbFunction>>;
+/// @nodoc
 typedef camera_interrupted_cbFunction = ffi.Void Function(ffi.Int32 policy,
     ffi.Int32 previous, ffi.Int32 current, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartcamera_interrupted_cbFunction = void Function(
     int policy, int previous, int current, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Invoked when the camera interrupt is started by policy.
-/// @since_tizen 4.0
-/// @remarks This callback is invoked before interrupt handling is started.
-/// @param[in] policy    The policy that is interrupting the camera
-/// @param[in] state     The current state of the camera
-/// @param[in] user_data The user data passed from the callback registration function
-/// @see camera_set_interrupt_started_cb()
+/// Invoked when the camera interrupt is started by policy.
+///
+/// **Since Tizen:**
+/// - 4.0
+///
+/// **Remarks:**
+/// - This callback is invoked before interrupt handling is started.
+///
+/// **Parameters:**
+/// - `policy` (in): The policy that is interrupting the camera
+/// - `state` (in): The current state of the camera
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `camera_set_interrupt_started_cb()`
+/// @nodoc
 typedef camera_interrupt_started_cb
     = ffi.Pointer<ffi.NativeFunction<camera_interrupt_started_cbFunction>>;
+/// @nodoc
 typedef camera_interrupt_started_cbFunction = ffi.Void Function(
     ffi.Int32 policy, ffi.Int32 state, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartcamera_interrupt_started_cbFunction = void Function(
     int policy, int state, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Invoked when the camera focus state is changed.
-/// @details When the camera auto focus completes or a change to the focus state occurs,
-/// this callback is invoked. \n \n
-/// Changes of focus state are as follows: \n
-/// #CAMERA_FOCUS_STATE_RELEASED -> start focusing -> #CAMERA_FOCUS_STATE_ONGOING -> working ->
-/// #CAMERA_FOCUS_STATE_FOCUSED or #CAMERA_FOCUS_STATE_FAILED.
-/// @since_tizen 2.3
+/// Invoked when the camera focus state is changed.
 ///
-/// @param[in] state     The current state of the auto-focus
-/// @param[in] user_data The user data passed from the callback registration function
-/// @pre camera_start_focusing() will invoke this callback if you set it using camera_set_focus_changed_cb().
-/// @see camera_set_focus_changed_cb()
-/// @see camera_unset_focus_changed_cb()
-/// @see camera_start_focusing()
-/// @see camera_cancel_focusing()
+/// When the camera auto focus completes or a change to the focus state occurs, this callback is invoked.
+///
+/// Changes of focus state are as follows: `CAMERA_FOCUS_STATE_RELEASED` -> start focusing -> `CAMERA_FOCUS_STATE_ONGOING` -> working -> `CAMERA_FOCUS_STATE_FOCUSED` or `CAMERA_FOCUS_STATE_FAILED`.
+///
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **Parameters:**
+/// - `state` (in): The current state of the auto-focus
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - camera_start_focusing() will invoke this callback if you set it using camera_set_focus_changed_cb().
+///
+/// **See also:**
+/// - `camera_set_focus_changed_cb()`
+/// - `camera_unset_focus_changed_cb()`
+/// - `camera_start_focusing()`
+/// - `camera_cancel_focusing()`
+/// @nodoc
 typedef camera_focus_changed_cb
     = ffi.Pointer<ffi.NativeFunction<camera_focus_changed_cbFunction>>;
+/// @nodoc
 typedef camera_focus_changed_cbFunction = ffi.Void Function(
     ffi.Int32 state, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartcamera_focus_changed_cbFunction = void Function(
     int state, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Invoked when an error occurs.
-/// @since_tizen 2.3
+/// Invoked when an error occurs.
 ///
-/// @remarks This callback informs about a critical error situation.\n
-/// When this callback is invoked, the user should release the resource and terminate the application.\n
-/// In case of errors, one of these codes occur:\n
-/// #CAMERA_ERROR_DEVICE,\n
-/// #CAMERA_ERROR_INVALID_OPERATION,\n
-/// #CAMERA_ERROR_OUT_OF_MEMORY.
-/// @param[in] error         The error code
-/// @param[in] current_state The current state of the camera
-/// @param[in] user_data     The user data passed from the callback registration function
-/// @pre This callback function is invoked if it is set using camera_set_error_cb().
-/// @see camera_set_error_cb()
-/// @see camera_unset_error_cb()
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **Remarks:**
+/// - This callback informs about a critical error situation.
+/// - When this callback is invoked, the user should release the resource and terminate the application.
+/// - In case of errors, one of these codes occur:
+/// - `CAMERA_ERROR_DEVICE`,
+/// - `CAMERA_ERROR_INVALID_OPERATION`,
+/// - `CAMERA_ERROR_OUT_OF_MEMORY`.
+///
+/// **Parameters:**
+/// - `error` (in): The error code
+/// - `current_state` (in): The current state of the camera
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - This callback function is invoked if it is set using camera_set_error_cb().
+///
+/// **See also:**
+/// - `camera_set_error_cb()`
+/// - `camera_unset_error_cb()`
+/// @nodoc
 typedef camera_error_cb
     = ffi.Pointer<ffi.NativeFunction<camera_error_cbFunction>>;
+/// @nodoc
 typedef camera_error_cbFunction = ffi.Void Function(
     ffi.Int32 error, ffi.Int32 current_state, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartcamera_error_cbFunction = void Function(
     int error, int current_state, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Invoked when the camera device state is changed.
-/// @since_tizen 3.0
-/// @param[in] device    The hardware camera type
-/// @param[in] state     The state of the camera device
-/// @param[in] user_data The user data passed from the callback registration function
-/// @see camera_add_device_state_changed_cb()
+/// Invoked when the camera device state is changed.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `device` (in): The hardware camera type
+/// - `state` (in): The state of the camera device
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `camera_add_device_state_changed_cb()`
+/// @nodoc
 typedef camera_device_state_changed_cb
     = ffi.Pointer<ffi.NativeFunction<camera_device_state_changed_cbFunction>>;
+/// @nodoc
 typedef camera_device_state_changed_cbFunction = ffi.Void Function(
     ffi.Int32 device, ffi.Int32 state, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartcamera_device_state_changed_cbFunction = void Function(
     int device, int state, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Invoked to get each supported FPS mode.
-/// @since_tizen 2.3
-/// @param[in] fps       The supported FPS mode
-/// @param[in] user_data The user data passed from the foreach function
-/// @return @c true to continue with the next iteration of the loop, \n otherwise @c false to break out of the loop
-/// @pre camera_attr_foreach_supported_fps() will invoke this callback.
-/// @see camera_attr_foreach_supported_fps()
+/// Invoked to get each supported FPS mode.
+///
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **Parameters:**
+/// - `fps` (in): The supported FPS mode
+/// - `user_data` (in): The user data passed from the foreach function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - camera_attr_foreach_supported_fps() will invoke this callback.
+///
+/// **See also:**
+/// - `camera_attr_foreach_supported_fps()`
+/// @nodoc
 typedef camera_attr_supported_fps_cb
     = ffi.Pointer<ffi.NativeFunction<camera_attr_supported_fps_cbFunction>>;
+/// @nodoc
 typedef camera_attr_supported_fps_cbFunction = ffi.Bool Function(
     ffi.Int32 fps, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartcamera_attr_supported_fps_cbFunction = bool Function(
     int fps, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Invoked to get each supported auto-focus mode.
-/// @since_tizen 2.3
-/// @param[in] mode      The supported auto-focus mode
-/// @param[in] user_data The user data passed from the foreach function
-/// @return @c true to continue with the next iteration of the loop, \n otherwise @c false to break out of the loop
-/// @pre camera_attr_foreach_supported_af_mode() will invoke this callback.
-/// @see camera_attr_foreach_supported_af_mode()
+/// Invoked to get each supported auto-focus mode.
+///
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **Parameters:**
+/// - `mode` (in): The supported auto-focus mode
+/// - `user_data` (in): The user data passed from the foreach function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - camera_attr_foreach_supported_af_mode() will invoke this callback.
+///
+/// **See also:**
+/// - `camera_attr_foreach_supported_af_mode()`
+/// @nodoc
 typedef camera_attr_supported_af_mode_cb
     = ffi.Pointer<ffi.NativeFunction<camera_attr_supported_af_mode_cbFunction>>;
+/// @nodoc
 typedef camera_attr_supported_af_mode_cbFunction = ffi.Bool Function(
     ffi.Int32 mode, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartcamera_attr_supported_af_mode_cbFunction = bool Function(
     int mode, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Invoked to get each supported exposure mode.
-/// @since_tizen 2.3
-/// @param[in] mode      The supported exposure mode
-/// @param[in] user_data The user data passed from the foreach function
-/// @return @c true to continue with the next iteration of the loop, \n otherwise @c false to break out of the loop
-/// @pre camera_attr_foreach_supported_exposure_mode() will invoke this callback.
-/// @see camera_attr_foreach_supported_exposure_mode()
-/// @see #camera_attr_exposure_mode_e
+/// Invoked to get each supported exposure mode.
+///
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **Parameters:**
+/// - `mode` (in): The supported exposure mode
+/// - `user_data` (in): The user data passed from the foreach function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - camera_attr_foreach_supported_exposure_mode() will invoke this callback.
+///
+/// **See also:**
+/// - `camera_attr_foreach_supported_exposure_mode()`
+/// - `camera_attr_exposure_mode_e`
+/// @nodoc
 typedef camera_attr_supported_exposure_mode_cb = ffi.Pointer<
     ffi.NativeFunction<camera_attr_supported_exposure_mode_cbFunction>>;
+/// @nodoc
 typedef camera_attr_supported_exposure_mode_cbFunction = ffi.Bool Function(
     ffi.Int32 mode, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartcamera_attr_supported_exposure_mode_cbFunction = bool Function(
     int mode, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Invoked to get each supported ISO mode.
-/// @since_tizen 2.3
-/// @param[in] iso       The supported ISO mode
-/// @param[in] user_data The user data passed from the foreach function
-/// @return @c true to continue with the next iteration of the loop, \n otherwise @c false to break out of the loop
-/// @pre camera_attr_foreach_supported_iso() will invoke this callback.
-/// @see camera_attr_foreach_supported_iso()
+/// Invoked to get each supported ISO mode.
+///
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **Parameters:**
+/// - `iso` (in): The supported ISO mode
+/// - `user_data` (in): The user data passed from the foreach function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - camera_attr_foreach_supported_iso() will invoke this callback.
+///
+/// **See also:**
+/// - `camera_attr_foreach_supported_iso()`
+/// @nodoc
 typedef camera_attr_supported_iso_cb
     = ffi.Pointer<ffi.NativeFunction<camera_attr_supported_iso_cbFunction>>;
+/// @nodoc
 typedef camera_attr_supported_iso_cbFunction = ffi.Bool Function(
     ffi.Int32 iso, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartcamera_attr_supported_iso_cbFunction = bool Function(
     int iso, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Invoked to get each supported theater mode.
-/// @since_tizen 2.3
-/// @param[in] mode      The supported theater mode
-/// @param[in] user_data The user data passed from the foreach function
-/// @return @c true to continue with the next iteration of the loop, \n @c false to break out of the loop
-/// @pre camera_attr_foreach_supported_theater_mode() will invoke this callback.
-/// @see camera_attr_foreach_supported_theater_mode()
+/// Invoked to get each supported theater mode.
+///
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **Parameters:**
+/// - `mode` (in): The supported theater mode
+/// - `user_data` (in): The user data passed from the foreach function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - camera_attr_foreach_supported_theater_mode() will invoke this callback.
+///
+/// **See also:**
+/// - `camera_attr_foreach_supported_theater_mode()`
+/// @nodoc
 typedef camera_attr_supported_theater_mode_cb = ffi
     .Pointer<ffi.NativeFunction<camera_attr_supported_theater_mode_cbFunction>>;
+/// @nodoc
 typedef camera_attr_supported_theater_mode_cbFunction = ffi.Bool Function(
     ffi.Int32 mode, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartcamera_attr_supported_theater_mode_cbFunction = bool Function(
     int mode, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Invoked to get each supported white balance.
-/// @since_tizen 2.3
-/// @param[in] wb        The supported white balance mode
-/// @param[in] user_data The user data passed from the foreach function
-/// @return @c true to continue with the next iteration of the loop, \n otherwise @c false to break out of the loop
-/// @pre camera_attr_foreach_supported_whitebalance() will invoke this callback.
-/// @see camera_attr_foreach_supported_whitebalance()
-/// @see #camera_attr_whitebalance_e
+/// Invoked to get each supported white balance.
+///
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **Parameters:**
+/// - `wb` (in): The supported white balance mode
+/// - `user_data` (in): The user data passed from the foreach function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - camera_attr_foreach_supported_whitebalance() will invoke this callback.
+///
+/// **See also:**
+/// - `camera_attr_foreach_supported_whitebalance()`
+/// - `camera_attr_whitebalance_e`
+/// @nodoc
 typedef camera_attr_supported_whitebalance_cb = ffi
     .Pointer<ffi.NativeFunction<camera_attr_supported_whitebalance_cbFunction>>;
+/// @nodoc
 typedef camera_attr_supported_whitebalance_cbFunction = ffi.Bool Function(
     ffi.Int32 wb, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartcamera_attr_supported_whitebalance_cbFunction = bool Function(
     int wb, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Invoked to get each supported effect mode.
-/// @since_tizen 2.3
-/// @param[in] effect    The supported effect mode
-/// @param[in] user_data The user data passed from the foreach function
-/// @return @c true to continue with the next iteration of the loop, \n otherwise @c false to break out of the loop
-/// @pre camera_attr_foreach_supported_effect() will invoke this callback.
-/// @see camera_attr_foreach_supported_effect()
+/// Invoked to get each supported effect mode.
+///
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **Parameters:**
+/// - `effect` (in): The supported effect mode
+/// - `user_data` (in): The user data passed from the foreach function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - camera_attr_foreach_supported_effect() will invoke this callback.
+///
+/// **See also:**
+/// - `camera_attr_foreach_supported_effect()`
+/// @nodoc
 typedef camera_attr_supported_effect_cb
     = ffi.Pointer<ffi.NativeFunction<camera_attr_supported_effect_cbFunction>>;
+/// @nodoc
 typedef camera_attr_supported_effect_cbFunction = ffi.Bool Function(
     ffi.Int32 effect, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartcamera_attr_supported_effect_cbFunction = bool Function(
     int effect, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Invoked to get each supported scene mode.
-/// @since_tizen 2.3
-/// @param[in] mode      The supported scene mode
-/// @param[in] user_data The user data passed from the foreach function
-/// @return @c true to continue with the next iteration of the loop, \n otherwise @c false to break out of the loop
-/// @pre camera_attr_foreach_supported_scene_mode() will invoke this callback.
-/// @see camera_attr_foreach_supported_scene_mode()
-/// @see #camera_attr_scene_mode_e
+/// Invoked to get each supported scene mode.
+///
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **Parameters:**
+/// - `mode` (in): The supported scene mode
+/// - `user_data` (in): The user data passed from the foreach function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - camera_attr_foreach_supported_scene_mode() will invoke this callback.
+///
+/// **See also:**
+/// - `camera_attr_foreach_supported_scene_mode()`
+/// - `camera_attr_scene_mode_e`
+/// @nodoc
 typedef camera_attr_supported_scene_mode_cb = ffi
     .Pointer<ffi.NativeFunction<camera_attr_supported_scene_mode_cbFunction>>;
+/// @nodoc
 typedef camera_attr_supported_scene_mode_cbFunction = ffi.Bool Function(
     ffi.Int32 mode, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartcamera_attr_supported_scene_mode_cbFunction = bool Function(
     int mode, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Invoked to get each supported flash mode.
-/// @since_tizen 2.3
-/// @param[in] mode      The supported flash mode
-/// @param[in] user_data The user data passed from the foreach function
-/// @return @c true to continue with the next iteration of the loop, \n otherwise @c false to break out of the loop
-/// @pre camera_attr_foreach_supported_flash_mode() will invoke this callback.
-/// @see camera_attr_foreach_supported_flash_mode()
+/// Invoked to get each supported flash mode.
+///
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **Parameters:**
+/// - `mode` (in): The supported flash mode
+/// - `user_data` (in): The user data passed from the foreach function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - camera_attr_foreach_supported_flash_mode() will invoke this callback.
+///
+/// **See also:**
+/// - `camera_attr_foreach_supported_flash_mode()`
+/// @nodoc
 typedef camera_attr_supported_flash_mode_cb = ffi
     .Pointer<ffi.NativeFunction<camera_attr_supported_flash_mode_cbFunction>>;
+/// @nodoc
 typedef camera_attr_supported_flash_mode_cbFunction = ffi.Bool Function(
     ffi.Int32 mode, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartcamera_attr_supported_flash_mode_cbFunction = bool Function(
     int mode, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Invoked to get each supported stream rotation mode.
-/// @since_tizen 2.3
-/// @param[in] rotation  The supported stream rotation mode
-/// @param[in] user_data The user data passed from the foreach function
-/// @return @c true to continue with the next iteration of the loop, \n @c false to break out of the loop
-/// @pre camera_attr_foreach_supported_stream_rotation() will invoke this callback.
-/// @see camera_attr_foreach_supported_stream_rotation()
+/// Invoked to get each supported stream rotation mode.
+///
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **Parameters:**
+/// - `rotation` (in): The supported stream rotation mode
+/// - `user_data` (in): The user data passed from the foreach function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - camera_attr_foreach_supported_stream_rotation() will invoke this callback.
+///
+/// **See also:**
+/// - `camera_attr_foreach_supported_stream_rotation()`
+/// @nodoc
 typedef camera_attr_supported_stream_rotation_cb = ffi.Pointer<
     ffi.NativeFunction<camera_attr_supported_stream_rotation_cbFunction>>;
+/// @nodoc
 typedef camera_attr_supported_stream_rotation_cbFunction = ffi.Bool Function(
     ffi.Int32 rotation, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartcamera_attr_supported_stream_rotation_cbFunction = bool Function(
     int rotation, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Invoked to get each supported stream flip mode.
-/// @since_tizen 2.3
-/// @param[in] flip      The supported stream flip mode
-/// @param[in] user_data The user data passed from the foreach function
-/// @return @c true to continue with the next iteration of the loop, \n @c false to break out of the loop
-/// @pre camera_attr_foreach_supported_stream_flip() will invoke this callback.
-/// @see camera_attr_foreach_supported_stream_flip()
+/// Invoked to get each supported stream flip mode.
+///
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **Parameters:**
+/// - `flip` (in): The supported stream flip mode
+/// - `user_data` (in): The user data passed from the foreach function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - camera_attr_foreach_supported_stream_flip() will invoke this callback.
+///
+/// **See also:**
+/// - `camera_attr_foreach_supported_stream_flip()`
+/// @nodoc
 typedef camera_attr_supported_stream_flip_cb = ffi
     .Pointer<ffi.NativeFunction<camera_attr_supported_stream_flip_cbFunction>>;
+/// @nodoc
 typedef camera_attr_supported_stream_flip_cbFunction = ffi.Bool Function(
     ffi.Int32 flip, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartcamera_attr_supported_stream_flip_cbFunction = bool Function(
     int flip, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Invoked when the HDR capture process is updated.
-/// @since_tizen 2.3
-/// @param[in] percent   The progress percentage of HDR capture
-/// @param[in] user_data The user data passed from the callback registration function
-/// @pre camera_start_capture() will invoke this callback if you set it using camera_attr_set_hdr_capture_progress_cb().
-/// @see camera_attr_get_hdr_mode()
-/// @see camera_attr_set_hdr_capture_progress_cb()
-/// @see camera_attr_unset_hdr_capture_progress_cb()
-/// @see camera_attr_is_supported_hdr_capture()
+/// Invoked when the HDR capture process is updated.
+///
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **Parameters:**
+/// - `percent` (in): The progress percentage of HDR capture
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - camera_start_capture() will invoke this callback if you set it using camera_attr_set_hdr_capture_progress_cb().
+///
+/// **See also:**
+/// - `camera_attr_get_hdr_mode()`
+/// - `camera_attr_set_hdr_capture_progress_cb()`
+/// - `camera_attr_unset_hdr_capture_progress_cb()`
+/// - `camera_attr_is_supported_hdr_capture()`
+/// @nodoc
 typedef camera_attr_hdr_progress_cb
     = ffi.Pointer<ffi.NativeFunction<camera_attr_hdr_progress_cbFunction>>;
+/// @nodoc
 typedef camera_attr_hdr_progress_cbFunction = ffi.Void Function(
     ffi.Int percent, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartcamera_attr_hdr_progress_cbFunction = void Function(
     int percent, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Invoked to get each supported PTZ (Pan Tilt Zoom) type.
-/// @since_tizen 3.0
-/// @param[in] type      The supported ptz type
-/// @param[in] user_data The user data passed from the foreach function
-/// @return @c true to continue with the next iteration of the loop, \n @c false to break out of the loop
-/// @pre camera_attr_foreach_supported_ptz_type() will invoke this callback.
-/// @see camera_attr_foreach_supported_ptz_type()
+/// Invoked to get each supported PTZ (Pan Tilt Zoom) type.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `type` (in): The supported ptz type
+/// - `user_data` (in): The user data passed from the foreach function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - camera_attr_foreach_supported_ptz_type() will invoke this callback.
+///
+/// **See also:**
+/// - `camera_attr_foreach_supported_ptz_type()`
+/// @nodoc
 typedef camera_attr_supported_ptz_type_cb = ffi
     .Pointer<ffi.NativeFunction<camera_attr_supported_ptz_type_cbFunction>>;
+/// @nodoc
 typedef camera_attr_supported_ptz_type_cbFunction = ffi.Bool Function(
     ffi.Int32 type, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartcamera_attr_supported_ptz_type_cbFunction = bool Function(
     int type, ffi.Pointer<ffi.Void> user_data);
 
+/// @nodoc
 const int CAMERA_ERROR_CLASS = -26279936;
 
+/// @nodoc
 const int CAMERA_DEVICE_NAME_MAX_LENGTH = 64;
 
+/// @nodoc
 const int CAMERA_DEVICE_ID_MAX_LENGTH = 64;

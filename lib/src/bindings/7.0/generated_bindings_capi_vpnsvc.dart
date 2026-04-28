@@ -1,3 +1,6 @@
+/// {@category 7.0/tizen}
+library tizen_interop_7_0.capi_vpnsvc;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen capi-vpnsvc APIs.
+/// {@category 7.0/tizen}
 class Tizen70CapiVpnsvc {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,30 +28,49 @@ class Tizen70CapiVpnsvc {
           lookup)
       : _lookup = lookup;
 
-  /// @brief  Initializes VPN interface.
-  /// @details You should call vpnsvc_get_iface_name() for checking the actual initialized VPN interface name. (In case of duplicated interface name)
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/vpnservice \n
-  /// %http://tizen.org/privilege/internet
-  /// @remarks The @a handle should be released using vpnsvc_deinit().
-  /// @param[in] iface_name The VPN interface name
-  /// @param[out] handle  The VPN interface handle
-  /// @return 0 on success. otherwise, a negative error value.
-  /// @retval #VPNSVC_ERROR_NONE                  Success
-  /// @retval #VPNSVC_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #VPNSVC_ERROR_IO_ERROR              I/O Error (e.g. socket I/O error)
-  /// @retval #VPNSVC_ERROR_IPC_FAILED            Cannot connect to service daemon
-  /// @retval #VPNSVC_ERROR_PERMISSION_DENIED     Permission Denied
-  /// @retval #VPNSVC_ERROR_NOT_SUPPORTED         Not Supported
-  /// @post Please call vpnsvc_deinit() if you want to de-initialize VPN interface.
-  /// @post Please call vpnsvc_get_iface_fd() if you want to know the fd(file descriptor) of VPN interface.
-  /// @post Please call vpnsvc_get_iface_index() if you want to know the index of VPN interface.
-  /// @post Please call vpnsvc_get_iface_name() if you want to know the name of VPN interface.
-  /// @see vpnsvc_deinit()
-  /// @see vpnsvc_get_iface_fd()
-  /// @see vpnsvc_get_iface_index()
-  /// @see vpnsvc_get_iface_name()
+  /// Initializes VPN interface.
+  ///
+  /// You should call vpnsvc_get_iface_name() for checking the actual initialized VPN interface name. (In case of duplicated interface name)
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/vpnservice>
+  /// - <http://tizen.org/privilege/internet>
+  ///
+  /// **Remarks:**
+  /// - The `handle` should be released using vpnsvc_deinit().
+  ///
+  /// **Parameters:**
+  /// - `iface_name` (in): The VPN interface name
+  /// - `handle` (out): The VPN interface handle
+  ///
+  /// **Returns:**
+  /// - 0 on success. otherwise, a negative error value.
+  ///
+  /// **Return values:**
+  /// - `VPNSVC_ERROR_NONE`: Success
+  /// - `VPNSVC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VPNSVC_ERROR_IO_ERROR`: I/O Error (e.g. socket I/O error)
+  /// - `VPNSVC_ERROR_IPC_FAILED`: Cannot connect to service daemon
+  /// - `VPNSVC_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `VPNSVC_ERROR_NOT_SUPPORTED`: Not Supported
+  ///
+  /// **Postconditions:**
+  /// - Please call vpnsvc_deinit() if you want to de-initialize VPN interface.
+  /// - Please call vpnsvc_get_iface_fd() if you want to know the fd(file descriptor) of VPN interface.
+  /// - Please call vpnsvc_get_iface_index() if you want to know the index of VPN interface.
+  /// - Please call vpnsvc_get_iface_name() if you want to know the name of VPN interface.
+  ///
+  /// **See also:**
+  /// - `vpnsvc_deinit()`
+  /// - `vpnsvc_get_iface_fd()`
+  /// - `vpnsvc_get_iface_index()`
+  /// - `vpnsvc_get_iface_name()`
   int vpnsvc_init(
     ffi.Pointer<ffi.Char> iface_name,
     ffi.Pointer<vpnsvc_h> handle,
@@ -65,20 +88,36 @@ class Tizen70CapiVpnsvc {
   late final _vpnsvc_init = _vpnsvc_initPtr
       .asFunction<int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<vpnsvc_h>)>();
 
-  /// @brief De-Initializes VPN interface.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/vpnservice \n
-  /// %http://tizen.org/privilege/internet
-  /// @param[in] handle The VPN interface handle
-  /// @return 0 on success. otherwise, a negative error value.
-  /// @retval #VPNSVC_ERROR_NONE                  Success
-  /// @retval #VPNSVC_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #VPNSVC_ERROR_IPC_FAILED            Cannot connect to service daemon
-  /// @retval #VPNSVC_ERROR_PERMISSION_DENIED     Permission Denied
-  /// @retval #VPNSVC_ERROR_NOT_SUPPORTED         Not Supported
-  /// @pre Before calling this function, VPN interface should be initialized already.
-  /// @see vpnsvc_init()
+  /// De-Initializes VPN interface.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/vpnservice>
+  /// - <http://tizen.org/privilege/internet>
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The VPN interface handle
+  ///
+  /// **Returns:**
+  /// - 0 on success. otherwise, a negative error value.
+  ///
+  /// **Return values:**
+  /// - `VPNSVC_ERROR_NONE`: Success
+  /// - `VPNSVC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VPNSVC_ERROR_IPC_FAILED`: Cannot connect to service daemon
+  /// - `VPNSVC_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `VPNSVC_ERROR_NOT_SUPPORTED`: Not Supported
+  ///
+  /// **Preconditions:**
+  /// - Before calling this function, VPN interface should be initialized already.
+  ///
+  /// **See also:**
+  /// - `vpnsvc_init()`
   int vpnsvc_deinit(
     vpnsvc_h handle,
   ) {
@@ -92,22 +131,35 @@ class Tizen70CapiVpnsvc {
   late final _vpnsvc_deinit =
       _vpnsvc_deinitPtr.asFunction<int Function(vpnsvc_h)>();
 
-  /// @brief Protect a socket from VPN connections.
-  /// @details After protecting, data sent through this socket will go directly to the underlying network.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/vpnservice \n
-  /// %http://tizen.org/privilege/internet
-  /// @param[in] handle    The VPN interface handle
-  /// @param[in] socket_fd The opened socket file descriptor
-  /// @param[in] iface_name  The network interface name (e.g., interface name such as eth0, ppp0, etc) through which the VPN is working
-  /// @return 0 on success. otherwise, a negative error value.
-  /// @retval #VPNSVC_ERROR_NONE                  Success
-  /// @retval #VPNSVC_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #VPNSVC_ERROR_IO_ERROR              I/O Error (e.g. socket I/O error)
-  /// @retval #VPNSVC_ERROR_IPC_FAILED            Cannot connect to service daemon
-  /// @retval #VPNSVC_ERROR_PERMISSION_DENIED     Permission Denied
-  /// @retval #VPNSVC_ERROR_NOT_SUPPORTED         Not Supported
+  /// Protect a socket from VPN connections.
+  ///
+  /// After protecting, data sent through this socket will go directly to the underlying network.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/vpnservice>
+  /// - <http://tizen.org/privilege/internet>
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The VPN interface handle
+  /// - `socket_fd` (in): The opened socket file descriptor
+  /// - `iface_name` (in): The network interface name (e.g., interface name such as eth0, ppp0, etc) through which the VPN is working
+  ///
+  /// **Returns:**
+  /// - 0 on success. otherwise, a negative error value.
+  ///
+  /// **Return values:**
+  /// - `VPNSVC_ERROR_NONE`: Success
+  /// - `VPNSVC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VPNSVC_ERROR_IO_ERROR`: I/O Error (e.g. socket I/O error)
+  /// - `VPNSVC_ERROR_IPC_FAILED`: Cannot connect to service daemon
+  /// - `VPNSVC_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `VPNSVC_ERROR_NOT_SUPPORTED`: Not Supported
   int vpnsvc_protect(
     vpnsvc_h handle,
     int socket_fd,
@@ -127,18 +179,30 @@ class Tizen70CapiVpnsvc {
   late final _vpnsvc_protect = _vpnsvc_protectPtr
       .asFunction<int Function(vpnsvc_h, int, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Waits for the read event on VPN interface descriptor, but no more than the indicated timeout in milliseconds.
-  /// @since_tizen 3.0
-  /// @param[in] handle      The VPN interface handle
-  /// @param[in] timeout_ms  The value of timeout (milliseconds)
-  /// @return 0 on success. otherwise, a negative error value.
-  /// @retval #VPNSVC_ERROR_NONE                  Success
-  /// @retval #VPNSVC_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #VPNSVC_ERROR_IO_ERROR              I/O Error (e.g. socket I/O error)
-  /// @retval #VPNSVC_ERROR_TIMEOUT               Timeout (no answer in timeout_ms)
-  /// @retval #VPNSVC_ERROR_NOT_SUPPORTED         Not Supported
-  /// @pre The VPN interface should be initialized already.
-  /// @see vpnsvc_init()
+  /// Waits for the read event on VPN interface descriptor, but no more than the indicated timeout in milliseconds.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The VPN interface handle
+  /// - `timeout_ms` (in): The value of timeout (milliseconds)
+  ///
+  /// **Returns:**
+  /// - 0 on success. otherwise, a negative error value.
+  ///
+  /// **Return values:**
+  /// - `VPNSVC_ERROR_NONE`: Success
+  /// - `VPNSVC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VPNSVC_ERROR_IO_ERROR`: I/O Error (e.g. socket I/O error)
+  /// - `VPNSVC_ERROR_TIMEOUT`: Timeout (no answer in timeout_ms)
+  /// - `VPNSVC_ERROR_NOT_SUPPORTED`: Not Supported
+  ///
+  /// **Preconditions:**
+  /// - The VPN interface should be initialized already.
+  ///
+  /// **See also:**
+  /// - `vpnsvc_init()`
   int vpnsvc_read(
     vpnsvc_h handle,
     int timeout_ms,
@@ -155,18 +219,30 @@ class Tizen70CapiVpnsvc {
   late final _vpnsvc_read =
       _vpnsvc_readPtr.asFunction<int Function(vpnsvc_h, int)>();
 
-  /// @brief Writes the data supplied into the VPN interface.
-  /// @since_tizen 3.0
-  /// @param[in] handle The VPN interface handle
-  /// @param[in] data   Data writing to VPN interface
-  /// @param[in] size   The size of data
-  /// @return On success, the number of bytes written is returned (zero indicates nothing was written). Otherwise, a negative error value.
-  /// @retval #VPNSVC_ERROR_NONE                  Success
-  /// @retval #VPNSVC_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #VPNSVC_ERROR_NOT_SUPPORTED         Not Supported
-  /// @retval In case of negative error, please refer to standard posix write API's error code.
-  /// @pre The VPN interface should be initialized already.
-  /// @see vpnsvc_init()
+  /// Writes the data supplied into the VPN interface.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The VPN interface handle
+  /// - `data` (in): Data writing to VPN interface
+  /// - `size` (in): The size of data
+  ///
+  /// **Returns:**
+  /// - On success, the number of bytes written is returned (zero indicates nothing was written). Otherwise, a negative error value.
+  ///
+  /// **Return values:**
+  /// - `VPNSVC_ERROR_NONE`: Success
+  /// - `VPNSVC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VPNSVC_ERROR_NOT_SUPPORTED`: Not Supported
+  /// - `In`: case of negative error, please refer to standard posix write API's error code.
+  ///
+  /// **Preconditions:**
+  /// - The VPN interface should be initialized already.
+  ///
+  /// **See also:**
+  /// - `vpnsvc_init()`
   int vpnsvc_write(
     vpnsvc_h handle,
     ffi.Pointer<ffi.Char> data,
@@ -186,26 +262,42 @@ class Tizen70CapiVpnsvc {
   late final _vpnsvc_write = _vpnsvc_writePtr
       .asFunction<int Function(vpnsvc_h, ffi.Pointer<ffi.Char>, int)>();
 
-  /// @brief Blocks all traffics except specified allowing networks.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/vpnservice \n
-  /// %http://tizen.org/privilege/internet
-  /// @param[in] handle                  The VPN interface handle
-  /// @param[in] routes_dest_vpn_addr    Destination address of the routes, the list of allowing networks over VPN interface (e.g., VPN interface such as tun0, etc).
-  /// @param[in] routes_vpn_prefix       The prefix of VPN interface, netmask length (also called a prefix, e.g. 8, 16, 24, 32).
-  /// @param[in] num_allow_routes_vpn    The number of allowing networks over VPN interface. Up to 255 addresses can be allowed.
-  /// @param[in] routes_dest_orig_addr   Destination address of the routes, the list of allowing networks over the original interface (e.g., original interface such as eth0, wlan0, etc).
-  /// @param[in] routes_orig_prefix      The prefix of Original interface, netmask length (also called a prefix, e.g. 8, 16, 24, 32).
-  /// @param[in] num_allow_routes_orig   The number of allowing networks over the original interface. Up to 255addresses can be allowed.
-  /// @return 0 on success. otherwise, a negative error value.
-  /// @retval #VPNSVC_ERROR_NONE                  Success
-  /// @retval #VPNSVC_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #VPNSVC_ERROR_IPC_FAILED            Cannot connect to service daemon
-  /// @retval #VPNSVC_ERROR_PERMISSION_DENIED     Permission Denied
-  /// @retval #VPNSVC_ERROR_NOT_SUPPORTED         Not Supported
-  /// @post Please call vpnsvc_unblock_networks() if you want to allow all traffics.
-  /// @see vpnsvc_unblock_networks()
+  /// Blocks all traffics except specified allowing networks.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/vpnservice>
+  /// - <http://tizen.org/privilege/internet>
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The VPN interface handle
+  /// - `routes_dest_vpn_addr` (in): Destination address of the routes, the list of allowing networks over VPN interface (e.g., VPN interface such as tun0, etc).
+  /// - `routes_vpn_prefix` (in): The prefix of VPN interface, netmask length (also called a prefix, e.g. 8, 16, 24, 32).
+  /// - `num_allow_routes_vpn` (in): The number of allowing networks over VPN interface. Up to 255 addresses can be allowed.
+  /// - `routes_dest_orig_addr` (in): Destination address of the routes, the list of allowing networks over the original interface (e.g., original interface such as eth0, wlan0, etc).
+  /// - `routes_orig_prefix` (in): The prefix of Original interface, netmask length (also called a prefix, e.g. 8, 16, 24, 32).
+  /// - `num_allow_routes_orig` (in): The number of allowing networks over the original interface. Up to 255addresses can be allowed.
+  ///
+  /// **Returns:**
+  /// - 0 on success. otherwise, a negative error value.
+  ///
+  /// **Return values:**
+  /// - `VPNSVC_ERROR_NONE`: Success
+  /// - `VPNSVC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VPNSVC_ERROR_IPC_FAILED`: Cannot connect to service daemon
+  /// - `VPNSVC_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `VPNSVC_ERROR_NOT_SUPPORTED`: Not Supported
+  ///
+  /// **Postconditions:**
+  /// - Please call vpnsvc_unblock_networks() if you want to allow all traffics.
+  ///
+  /// **See also:**
+  /// - `vpnsvc_unblock_networks()`
   int vpnsvc_block_networks(
     vpnsvc_h handle,
     ffi.Pointer<ffi.Pointer<ffi.Char>> routes_dest_vpn_addr,
@@ -246,18 +338,30 @@ class Tizen70CapiVpnsvc {
           ffi.Pointer<ffi.Int>,
           int)>();
 
-  /// @brief Removes any restrictions imposed by vpnsvc_block_networks().
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/vpnservice \n
-  /// %http://tizen.org/privilege/internet
-  /// @param[in] handle The VPN interface handle
-  /// @return 0 on success. otherwise, a negative error value.
-  /// @retval #VPNSVC_ERROR_NONE                  Success
-  /// @retval #VPNSVC_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #VPNSVC_ERROR_IPC_FAILED            Cannot connect to service daemon
-  /// @retval #VPNSVC_ERROR_PERMISSION_DENIED     Permission Denied
-  /// @retval #VPNSVC_ERROR_NOT_SUPPORTED         Not Supported
+  /// Removes any restrictions imposed by vpnsvc_block_networks().
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/vpnservice>
+  /// - <http://tizen.org/privilege/internet>
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The VPN interface handle
+  ///
+  /// **Returns:**
+  /// - 0 on success. otherwise, a negative error value.
+  ///
+  /// **Return values:**
+  /// - `VPNSVC_ERROR_NONE`: Success
+  /// - `VPNSVC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VPNSVC_ERROR_IPC_FAILED`: Cannot connect to service daemon
+  /// - `VPNSVC_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `VPNSVC_ERROR_NOT_SUPPORTED`: Not Supported
   int vpnsvc_unblock_networks(
     vpnsvc_h handle,
   ) {
@@ -272,19 +376,35 @@ class Tizen70CapiVpnsvc {
   late final _vpnsvc_unblock_networks =
       _vpnsvc_unblock_networksPtr.asFunction<int Function(vpnsvc_h)>();
 
-  /// @brief Updates settings (Local IP / Remote IP / MTU).
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/vpnservice
-  /// @param[in] handle The VPN interface handle
-  /// @return 0 on success. Otherwise, a negative error value.
-  /// @retval #VPNSVC_ERROR_NONE                  Success
-  /// @retval #VPNSVC_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #VPNSVC_ERROR_IPC_FAILED            Cannot connect to service daemon
-  /// @retval #VPNSVC_ERROR_PERMISSION_DENIED     Permission Denied
-  /// @retval #VPNSVC_ERROR_NOT_SUPPORTED         Not Supported
-  /// @pre The VPN interface should be initialized already.
-  /// @see vpnsvc_init()
+  /// Updates settings (Local IP / Remote IP / MTU).
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/vpnservice>
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The VPN interface handle
+  ///
+  /// **Returns:**
+  /// - 0 on success. Otherwise, a negative error value.
+  ///
+  /// **Return values:**
+  /// - `VPNSVC_ERROR_NONE`: Success
+  /// - `VPNSVC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VPNSVC_ERROR_IPC_FAILED`: Cannot connect to service daemon
+  /// - `VPNSVC_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `VPNSVC_ERROR_NOT_SUPPORTED`: Not Supported
+  ///
+  /// **Preconditions:**
+  /// - The VPN interface should be initialized already.
+  ///
+  /// **See also:**
+  /// - `vpnsvc_init()`
   int vpnsvc_update_settings(
     vpnsvc_h handle,
   ) {
@@ -299,14 +419,22 @@ class Tizen70CapiVpnsvc {
   late final _vpnsvc_update_settings =
       _vpnsvc_update_settingsPtr.asFunction<int Function(vpnsvc_h)>();
 
-  /// @brief Gets the fd of the VPN interface.
-  /// @since_tizen 3.0
-  /// @param[in] handle The VPN interface handle
-  /// @param[out] iface_fd The vpn interface fd
-  /// @return The fd value of VPN interface. Otherwise, a negative error value.
-  /// @retval #VPNSVC_ERROR_NONE                  Success
-  /// @retval #VPNSVC_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #VPNSVC_ERROR_NOT_SUPPORTED         Not Supported
+  /// Gets the fd of the VPN interface.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The VPN interface handle
+  /// - `iface_fd` (out): The vpn interface fd
+  ///
+  /// **Returns:**
+  /// - The fd value of VPN interface. Otherwise, a negative error value.
+  ///
+  /// **Return values:**
+  /// - `VPNSVC_ERROR_NONE`: Success
+  /// - `VPNSVC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VPNSVC_ERROR_NOT_SUPPORTED`: Not Supported
   int vpnsvc_get_iface_fd(
     vpnsvc_h handle,
     ffi.Pointer<ffi.Int> iface_fd,
@@ -323,16 +451,28 @@ class Tizen70CapiVpnsvc {
   late final _vpnsvc_get_iface_fd = _vpnsvc_get_iface_fdPtr
       .asFunction<int Function(vpnsvc_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the index of VPN interface.
-  /// @since_tizen 3.0
-  /// @param[in] handle The VPN interface handle
-  /// @param[out] iface_index The VPN interface index
-  /// @return The index of the VPN interface. otherwise, a negative error value.
-  /// @retval #VPNSVC_ERROR_NONE                  Success
-  /// @retval #VPNSVC_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #VPNSVC_ERROR_NOT_SUPPORTED         Not Supported
-  /// @pre Before calling this function, VPN interface should be initialized already.
-  /// @see vpnsvc_init()
+  /// Gets the index of VPN interface.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The VPN interface handle
+  /// - `iface_index` (out): The VPN interface index
+  ///
+  /// **Returns:**
+  /// - The index of the VPN interface. otherwise, a negative error value.
+  ///
+  /// **Return values:**
+  /// - `VPNSVC_ERROR_NONE`: Success
+  /// - `VPNSVC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VPNSVC_ERROR_NOT_SUPPORTED`: Not Supported
+  ///
+  /// **Preconditions:**
+  /// - Before calling this function, VPN interface should be initialized already.
+  ///
+  /// **See also:**
+  /// - `vpnsvc_init()`
   int vpnsvc_get_iface_index(
     vpnsvc_h handle,
     ffi.Pointer<ffi.Int> iface_index,
@@ -349,17 +489,31 @@ class Tizen70CapiVpnsvc {
   late final _vpnsvc_get_iface_index = _vpnsvc_get_iface_indexPtr
       .asFunction<int Function(vpnsvc_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the name of VPN interface.
-  /// @since_tizen 3.0
-  /// @remarks The @a iface_name should be released using free()
-  /// @param[in] handle    The VPN interface handle
-  /// @param[out] iface_name The name of VPN interface name
-  /// @return 0 on success. Otherwise, a negative error value.
-  /// @retval #VPNSVC_ERROR_NONE                  Success
-  /// @retval #VPNSVC_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #VPNSVC_ERROR_NOT_SUPPORTED         Not Supported
-  /// @pre Before calling this function, VPN interface should be initialized already.
-  /// @see vpnsvc_init()
+  /// Gets the name of VPN interface.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The `iface_name` should be released using free()
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The VPN interface handle
+  /// - `iface_name` (out): The name of VPN interface name
+  ///
+  /// **Returns:**
+  /// - 0 on success. Otherwise, a negative error value.
+  ///
+  /// **Return values:**
+  /// - `VPNSVC_ERROR_NONE`: Success
+  /// - `VPNSVC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VPNSVC_ERROR_NOT_SUPPORTED`: Not Supported
+  ///
+  /// **Preconditions:**
+  /// - Before calling this function, VPN interface should be initialized already.
+  ///
+  /// **See also:**
+  /// - `vpnsvc_init()`
   int vpnsvc_get_iface_name(
     vpnsvc_h handle,
     ffi.Pointer<ffi.Pointer<ffi.Char>> iface_name,
@@ -377,18 +531,32 @@ class Tizen70CapiVpnsvc {
   late final _vpnsvc_get_iface_name = _vpnsvc_get_iface_namePtr
       .asFunction<int Function(vpnsvc_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets the MTU of the VPN interface.
-  /// @since_tizen 3.0
-  /// @remarks vpnsvc_update_settings() should be invoked after setting MTU.
-  /// @param[in] handle The VPN interface handle
-  /// @param[in] mtu    The MTU (Maximum Transmission Unit) value to be set for VPN interface. Default MTU size is 1500.
-  /// @return 0 on success. Otherwise, a negative error value.
-  /// @retval #VPNSVC_ERROR_NONE                  Success
-  /// @retval #VPNSVC_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #VPNSVC_ERROR_IO_ERROR              I/O Error (e.g. socket I/O error)
-  /// @retval #VPNSVC_ERROR_NOT_SUPPORTED         Not Supported
-  /// @pre Before calling this function, VPN interface should be initialized already.
-  /// @see vpnsvc_init()
+  /// Sets the MTU of the VPN interface.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - vpnsvc_update_settings() should be invoked after setting MTU.
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The VPN interface handle
+  /// - `mtu` (in): The MTU (Maximum Transmission Unit) value to be set for VPN interface. Default MTU size is 1500.
+  ///
+  /// **Returns:**
+  /// - 0 on success. Otherwise, a negative error value.
+  ///
+  /// **Return values:**
+  /// - `VPNSVC_ERROR_NONE`: Success
+  /// - `VPNSVC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VPNSVC_ERROR_IO_ERROR`: I/O Error (e.g. socket I/O error)
+  /// - `VPNSVC_ERROR_NOT_SUPPORTED`: Not Supported
+  ///
+  /// **Preconditions:**
+  /// - Before calling this function, VPN interface should be initialized already.
+  ///
+  /// **See also:**
+  /// - `vpnsvc_init()`
   int vpnsvc_set_mtu(
     vpnsvc_h handle,
     int mtu,
@@ -405,17 +573,29 @@ class Tizen70CapiVpnsvc {
   late final _vpnsvc_set_mtu =
       _vpnsvc_set_mtuPtr.asFunction<int Function(vpnsvc_h, int)>();
 
-  /// @brief Sets blocking mode of the file descriptor of VPN interface.
-  /// @since_tizen 3.0
-  /// @param[in] handle    The VPN interface handle
-  /// @param[in] blocking  The blocking mode flag; True = BLOCKING, False = NON_BLOCKING (Default : BLOCKING)
-  /// @return 0 on success. Otherwise, a negative error value.
-  /// @retval #VPNSVC_ERROR_NONE                  Success
-  /// @retval #VPNSVC_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #VPNSVC_ERROR_IO_ERROR              Failed to set the blocking flags
-  /// @retval #VPNSVC_ERROR_NOT_SUPPORTED         Not Supported
-  /// @pre Before calling this function, VPN interface should be initialized already.
-  /// @see vpnsvc_init()
+  /// Sets blocking mode of the file descriptor of VPN interface.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The VPN interface handle
+  /// - `blocking` (in): The blocking mode flag; True = BLOCKING, False = NON_BLOCKING (Default : BLOCKING)
+  ///
+  /// **Returns:**
+  /// - 0 on success. Otherwise, a negative error value.
+  ///
+  /// **Return values:**
+  /// - `VPNSVC_ERROR_NONE`: Success
+  /// - `VPNSVC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VPNSVC_ERROR_IO_ERROR`: Failed to set the blocking flags
+  /// - `VPNSVC_ERROR_NOT_SUPPORTED`: Not Supported
+  ///
+  /// **Preconditions:**
+  /// - Before calling this function, VPN interface should be initialized already.
+  ///
+  /// **See also:**
+  /// - `vpnsvc_init()`
   int vpnsvc_set_blocking(
     vpnsvc_h handle,
     bool blocking,
@@ -432,16 +612,28 @@ class Tizen70CapiVpnsvc {
   late final _vpnsvc_set_blocking =
       _vpnsvc_set_blockingPtr.asFunction<int Function(vpnsvc_h, bool)>();
 
-  /// @brief Sets the session name for the VPN. (It will be displayed in system-managed dialogs and notifications.)
-  /// @since_tizen 3.0
-  /// @param[in] handle       The VPN interface handle
-  /// @param[in] session      The Session Name
-  /// @return 0 on success. Otherwise, a negative error value.
-  /// @retval #VPNSVC_ERROR_NONE                  Success
-  /// @retval #VPNSVC_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #VPNSVC_ERROR_NOT_SUPPORTED         Not Supported
-  /// @pre Before calling this function, VPN interface should be initialized already.
-  /// @see vpnsvc_init()
+  /// Sets the session name for the VPN. (It will be displayed in system-managed dialogs and notifications.)
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The VPN interface handle
+  /// - `session` (in): The Session Name
+  ///
+  /// **Returns:**
+  /// - 0 on success. Otherwise, a negative error value.
+  ///
+  /// **Return values:**
+  /// - `VPNSVC_ERROR_NONE`: Success
+  /// - `VPNSVC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VPNSVC_ERROR_NOT_SUPPORTED`: Not Supported
+  ///
+  /// **Preconditions:**
+  /// - Before calling this function, VPN interface should be initialized already.
+  ///
+  /// **See also:**
+  /// - `vpnsvc_init()`
   int vpnsvc_set_session(
     vpnsvc_h handle,
     ffi.Pointer<ffi.Char> session,
@@ -459,17 +651,31 @@ class Tizen70CapiVpnsvc {
   late final _vpnsvc_set_session = _vpnsvc_set_sessionPtr
       .asFunction<int Function(vpnsvc_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the session name for the VPN.
-  /// @since_tizen 3.0
-  /// @remarks The @a session should be released using free()
-  /// @param[in] handle   The VPN interface handle
-  /// @param[out] session The Session Name returned
-  /// @return 0 on success. Otherwise, a negative error value.
-  /// @retval #VPNSVC_ERROR_NONE                  Success
-  /// @retval #VPNSVC_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #VPNSVC_ERROR_NOT_SUPPORTED         Not Supported
-  /// @pre Before calling this function, VPN interface should be initialized already.
-  /// @see vpnsvc_init()
+  /// Gets the session name for the VPN.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The `session` should be released using free()
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The VPN interface handle
+  /// - `session` (out): The Session Name returned
+  ///
+  /// **Returns:**
+  /// - 0 on success. Otherwise, a negative error value.
+  ///
+  /// **Return values:**
+  /// - `VPNSVC_ERROR_NONE`: Success
+  /// - `VPNSVC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VPNSVC_ERROR_NOT_SUPPORTED`: Not Supported
+  ///
+  /// **Preconditions:**
+  /// - Before calling this function, VPN interface should be initialized already.
+  ///
+  /// **See also:**
+  /// - `vpnsvc_init()`
   int vpnsvc_get_session(
     vpnsvc_h handle,
     ffi.Pointer<ffi.Pointer<ffi.Char>> session,
@@ -487,20 +693,33 @@ class Tizen70CapiVpnsvc {
   late final _vpnsvc_get_session = _vpnsvc_get_sessionPtr
       .asFunction<int Function(vpnsvc_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets the VPN client IP address.
-  /// @since_tizen 3.0
-  /// @remarks The local address should be set before enabling VPN interface. \n
-  /// vpnsvc_update_settings() should be invoked after setting local IP address.
-  /// @param[in] handle		The VPN interface handle
-  /// @param[in] local_ip		The local (VPN client) IP address (IPv4 only)
+  /// Sets the VPN client IP address.
   ///
-  /// @return 0 on success. Otherwise, a negative error value.
-  /// @retval #VPNSVC_ERROR_NONE                  Success
-  /// @retval #VPNSVC_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #VPNSVC_ERROR_IO_ERROR              I/O Error (e.g. socket I/O error)
-  /// @retval #VPNSVC_ERROR_NOT_SUPPORTED         Not Supported
-  /// @pre The VPN interface should be initialized already.
-  /// @see vpnsvc_init()
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The local address should be set before enabling VPN interface.
+  /// - vpnsvc_update_settings() should be invoked after setting local IP address.
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The VPN interface handle
+  /// - `local_ip` (in): The local (VPN client) IP address (IPv4 only)
+  ///
+  /// **Returns:**
+  /// - 0 on success. Otherwise, a negative error value.
+  ///
+  /// **Return values:**
+  /// - `VPNSVC_ERROR_NONE`: Success
+  /// - `VPNSVC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VPNSVC_ERROR_IO_ERROR`: I/O Error (e.g. socket I/O error)
+  /// - `VPNSVC_ERROR_NOT_SUPPORTED`: Not Supported
+  ///
+  /// **Preconditions:**
+  /// - The VPN interface should be initialized already.
+  ///
+  /// **See also:**
+  /// - `vpnsvc_init()`
   int vpnsvc_set_local_ip_address(
     vpnsvc_h handle,
     ffi.Pointer<ffi.Char> local_ip,
@@ -518,19 +737,33 @@ class Tizen70CapiVpnsvc {
   late final _vpnsvc_set_local_ip_address = _vpnsvc_set_local_ip_addressPtr
       .asFunction<int Function(vpnsvc_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets the VPN server IP address.
-  /// @since_tizen 3.0
-  /// @remarks The remote address should be set before enabling VPN interface. \n
-  /// vpnsvc_update_settings() should be invoked after setting remote IP address.
-  /// @param[in] handle		The VPN interface handle
-  /// @param[in] remote_ip		The remote (VPN server) IP address (IPv4 only)
-  /// @return 0 on success. Otherwise, a negative error value.
-  /// @retval #VPNSVC_ERROR_NONE                  Success
-  /// @retval #VPNSVC_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #VPNSVC_ERROR_IO_ERROR              I/O Error (e.g. socket I/O error)
-  /// @retval #VPNSVC_ERROR_NOT_SUPPORTED         Not Supported
-  /// @pre The VPN interface should be initialized already.
-  /// @see vpnsvc_init()
+  /// Sets the VPN server IP address.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The remote address should be set before enabling VPN interface.
+  /// - vpnsvc_update_settings() should be invoked after setting remote IP address.
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The VPN interface handle
+  /// - `remote_ip` (in): The remote (VPN server) IP address (IPv4 only)
+  ///
+  /// **Returns:**
+  /// - 0 on success. Otherwise, a negative error value.
+  ///
+  /// **Return values:**
+  /// - `VPNSVC_ERROR_NONE`: Success
+  /// - `VPNSVC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VPNSVC_ERROR_IO_ERROR`: I/O Error (e.g. socket I/O error)
+  /// - `VPNSVC_ERROR_NOT_SUPPORTED`: Not Supported
+  ///
+  /// **Preconditions:**
+  /// - The VPN interface should be initialized already.
+  ///
+  /// **See also:**
+  /// - `vpnsvc_init()`
   int vpnsvc_set_remote_ip_address(
     vpnsvc_h handle,
     ffi.Pointer<ffi.Char> remote_ip,
@@ -548,21 +781,39 @@ class Tizen70CapiVpnsvc {
   late final _vpnsvc_set_remote_ip_address = _vpnsvc_set_remote_ip_addressPtr
       .asFunction<int Function(vpnsvc_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Adds the route address.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/vpnservice
-  /// @remarks The route address should be set after enabling VPN interface.
-  /// @param[in] handle		The VPN interface handle
-  /// @param[in] route_address	Destination address of the routes (IPv4 only)
-  /// @param[in] prefix		The prefix of routes, netmask length (also called a prefix, e.g. 8, 16, 24, 32)
-  /// @return 0 on success. Otherwise, a negative error value.
-  /// @retval #VPNSVC_ERROR_NONE                  Success
-  /// @retval #VPNSVC_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #VPNSVC_ERROR_IO_ERROR              I/O Error (e.g. socket I/O error)
-  /// @retval #VPNSVC_ERROR_NOT_SUPPORTED         Not Supported
-  /// @pre The VPN interface should be initialized already.
-  /// @see vpnsvc_init()
+  /// Adds the route address.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/vpnservice>
+  ///
+  /// **Remarks:**
+  /// - The route address should be set after enabling VPN interface.
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The VPN interface handle
+  /// - `route_address` (in): Destination address of the routes (IPv4 only)
+  /// - `prefix` (in): The prefix of routes, netmask length (also called a prefix, e.g. 8, 16, 24, 32)
+  ///
+  /// **Returns:**
+  /// - 0 on success. Otherwise, a negative error value.
+  ///
+  /// **Return values:**
+  /// - `VPNSVC_ERROR_NONE`: Success
+  /// - `VPNSVC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VPNSVC_ERROR_IO_ERROR`: I/O Error (e.g. socket I/O error)
+  /// - `VPNSVC_ERROR_NOT_SUPPORTED`: Not Supported
+  ///
+  /// **Preconditions:**
+  /// - The VPN interface should be initialized already.
+  ///
+  /// **See also:**
+  /// - `vpnsvc_init()`
   int vpnsvc_add_route(
     vpnsvc_h handle,
     ffi.Pointer<ffi.Char> route_address,
@@ -582,20 +833,36 @@ class Tizen70CapiVpnsvc {
   late final _vpnsvc_add_route = _vpnsvc_add_routePtr
       .asFunction<int Function(vpnsvc_h, ffi.Pointer<ffi.Char>, int)>();
 
-  /// @brief Removes the route address.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/vpnservice
-  /// @param[in] handle			The VPN interface handle
-  /// @param[in] route_address		Destination address of the routes (IPv4 only)
-  /// @param[in] prefix		The prefix of routes, netmask length (also called a prefix, e.g. 8, 16, 24, 32)
-  /// @return 0 on success. Otherwise, a negative error value.
-  /// @retval #VPNSVC_ERROR_NONE                  Success
-  /// @retval #VPNSVC_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #VPNSVC_ERROR_IO_ERROR              I/O Error (e.g. socket I/O error)
-  /// @retval #VPNSVC_ERROR_NOT_SUPPORTED         Not Supported
-  /// @pre The VPN interface should be initialized already.
-  /// @see vpnsvc_init()
+  /// Removes the route address.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/vpnservice>
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The VPN interface handle
+  /// - `route_address` (in): Destination address of the routes (IPv4 only)
+  /// - `prefix` (in): The prefix of routes, netmask length (also called a prefix, e.g. 8, 16, 24, 32)
+  ///
+  /// **Returns:**
+  /// - 0 on success. Otherwise, a negative error value.
+  ///
+  /// **Return values:**
+  /// - `VPNSVC_ERROR_NONE`: Success
+  /// - `VPNSVC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VPNSVC_ERROR_IO_ERROR`: I/O Error (e.g. socket I/O error)
+  /// - `VPNSVC_ERROR_NOT_SUPPORTED`: Not Supported
+  ///
+  /// **Preconditions:**
+  /// - The VPN interface should be initialized already.
+  ///
+  /// **See also:**
+  /// - `vpnsvc_init()`
   int vpnsvc_remove_route(
     vpnsvc_h handle,
     ffi.Pointer<ffi.Char> route_address,
@@ -615,20 +882,38 @@ class Tizen70CapiVpnsvc {
   late final _vpnsvc_remove_route = _vpnsvc_remove_routePtr
       .asFunction<int Function(vpnsvc_h, ffi.Pointer<ffi.Char>, int)>();
 
-  /// @brief Adds the DNS server name.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/vpnservice
-  /// @remarks The dns address should be set after enabling VPN interface.
-  /// @param[in] handle		The VPN interface handle
-  /// @param[in] dns_server	The DNS server address (IPv4 only)
-  /// @return 0 on success. Otherwise, a negative error value.
-  /// @retval #VPNSVC_ERROR_NONE                  Success
-  /// @retval #VPNSVC_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #VPNSVC_ERROR_IO_ERROR              I/O Error (e.g. socket I/O error)
-  /// @retval #VPNSVC_ERROR_NOT_SUPPORTED         Not Supported
-  /// @pre The VPN interface should be initialized already.
-  /// @see vpnsvc_init()
+  /// Adds the DNS server name.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/vpnservice>
+  ///
+  /// **Remarks:**
+  /// - The dns address should be set after enabling VPN interface.
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The VPN interface handle
+  /// - `dns_server` (in): The DNS server address (IPv4 only)
+  ///
+  /// **Returns:**
+  /// - 0 on success. Otherwise, a negative error value.
+  ///
+  /// **Return values:**
+  /// - `VPNSVC_ERROR_NONE`: Success
+  /// - `VPNSVC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VPNSVC_ERROR_IO_ERROR`: I/O Error (e.g. socket I/O error)
+  /// - `VPNSVC_ERROR_NOT_SUPPORTED`: Not Supported
+  ///
+  /// **Preconditions:**
+  /// - The VPN interface should be initialized already.
+  ///
+  /// **See also:**
+  /// - `vpnsvc_init()`
   int vpnsvc_add_dns_server(
     vpnsvc_h handle,
     ffi.Pointer<ffi.Char> dns_server,
@@ -646,19 +931,35 @@ class Tizen70CapiVpnsvc {
   late final _vpnsvc_add_dns_server = _vpnsvc_add_dns_serverPtr
       .asFunction<int Function(vpnsvc_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Removes the DNS server name.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/vpnservice
-  /// @param[in] handle		The VPN interface handle
-  /// @param[in] dns_server	The DNS server address (IPv4 only)
-  /// @return 0 on success. Otherwise, a negative error value.
-  /// @retval #VPNSVC_ERROR_NONE                  Success
-  /// @retval #VPNSVC_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #VPNSVC_ERROR_IO_ERROR              I/O Error (e.g. socket I/O error)
-  /// @retval #VPNSVC_ERROR_NOT_SUPPORTED         Not Supported
-  /// @pre The VPN interface should be initialized already.
-  /// @see vpnsvc_init()
+  /// Removes the DNS server name.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/vpnservice>
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The VPN interface handle
+  /// - `dns_server` (in): The DNS server address (IPv4 only)
+  ///
+  /// **Returns:**
+  /// - 0 on success. Otherwise, a negative error value.
+  ///
+  /// **Return values:**
+  /// - `VPNSVC_ERROR_NONE`: Success
+  /// - `VPNSVC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VPNSVC_ERROR_IO_ERROR`: I/O Error (e.g. socket I/O error)
+  /// - `VPNSVC_ERROR_NOT_SUPPORTED`: Not Supported
+  ///
+  /// **Preconditions:**
+  /// - The VPN interface should be initialized already.
+  ///
+  /// **See also:**
+  /// - `vpnsvc_init()`
   int vpnsvc_remove_dns_server(
     vpnsvc_h handle,
     ffi.Pointer<ffi.Char> dns_server,
@@ -677,8 +978,10 @@ class Tizen70CapiVpnsvc {
       .asFunction<int Function(vpnsvc_h, ffi.Pointer<ffi.Char>)>();
 }
 
-/// @brief   Enumeration for VPN service error types.
-/// @details Indicate formats of error type field
+/// Enumeration for VPN service error types.
+///
+/// Indicate formats of error type field
+/// @nodoc
 abstract class vpnsvc_error_e {
   /// < Successful
   static const int VPNSVC_ERROR_NONE = 0;
@@ -708,9 +1011,15 @@ abstract class vpnsvc_error_e {
   static const int VPNSVC_ERROR_NOT_SUPPORTED = -1073741822;
 }
 
-/// @brief   The VPN interface handle.
-/// @details This handle can be obtained by calling vpnsvc_init() and destroyed by calling vpnsvc_deinit().
-/// @since_tizen 3.0
-/// @see vpnsvc_init()
-/// @see vpnsvc_deinit()
+/// The VPN interface handle.
+///
+/// This handle can be obtained by calling vpnsvc_init() and destroyed by calling vpnsvc_deinit().
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **See also:**
+/// - `vpnsvc_init()`
+/// - `vpnsvc_deinit()`
+/// @nodoc
 typedef vpnsvc_h = ffi.Pointer<ffi.Void>;

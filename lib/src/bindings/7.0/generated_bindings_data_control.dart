@@ -1,3 +1,6 @@
+/// {@category 7.0/tizen}
+library tizen_interop_7_0.data_control;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -10,6 +13,7 @@ import 'dart:ffi' as ffi;
 import 'generated_bindings_bundle.dart' as bundle;
 
 /// Dart bindings for Tizen data-control APIs.
+/// {@category 7.0/tizen}
 class Tizen70DataControl {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -25,11 +29,26 @@ class Tizen70DataControl {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Moves the cursor to the first position.
-  /// @since_tizen 2.3
-  /// @remarks The following example demonstrates how to use the data_control_sql_step_first() method:
+  /// Moves the cursor to the first position.
   ///
-  /// @code
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - The following example demonstrates how to use the data_control_sql_step_first() method:
+  ///
+  /// **Parameters:**
+  /// - `cursor` (in): The cursor that navigates the result of the request for the select operation
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DATA_CONTROL_ERROR_IO_ERROR`: I/O error
+  ///
+  /// ```
   ///
   /// void
   /// sql_select_response_cb(int request_id, data_control_h provider, result_set_cursor cursor,
@@ -44,14 +63,7 @@ class Tizen70DataControl {
   /// printf("The person %s has the number %l", person_name, person_number);
   /// }
   ///
-  /// @endcode
-  ///
-  /// @param[in] cursor The cursor that navigates the result of the request for the select operation
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DATA_CONTROL_ERROR_IO_ERROR I/O error
+  /// ```
   int data_control_sql_step_first(
     result_set_cursor cursor,
   ) {
@@ -66,11 +78,26 @@ class Tizen70DataControl {
   late final _data_control_sql_step_first = _data_control_sql_step_firstPtr
       .asFunction<int Function(result_set_cursor)>();
 
-  /// @brief Moves the cursor to the last position.
-  /// @since_tizen 2.3
-  /// @remarks The following example demonstrates how to use the data_control_sql_step_last() method:
+  /// Moves the cursor to the last position.
   ///
-  /// @code
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - The following example demonstrates how to use the data_control_sql_step_last() method:
+  ///
+  /// **Parameters:**
+  /// - `cursor` (in): The cursor that navigates the result of data control select request
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DATA_CONTROL_ERROR_IO_ERROR`: I/O error
+  ///
+  /// ```
   ///
   /// void
   /// sql_select_response_cb(int request_id, data_control_h provider, result_set_cursor cursor,
@@ -85,14 +112,7 @@ class Tizen70DataControl {
   /// printf("The person %s has the number %l", person_name, person_number);
   /// }
   ///
-  /// @endcode
-  ///
-  /// @param[in] cursor The cursor that navigates the result of data control select request
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DATA_CONTROL_ERROR_IO_ERROR I/O error
+  /// ```
   int data_control_sql_step_last(
     result_set_cursor cursor,
   ) {
@@ -107,11 +127,26 @@ class Tizen70DataControl {
   late final _data_control_sql_step_last = _data_control_sql_step_lastPtr
       .asFunction<int Function(result_set_cursor)>();
 
-  /// @brief Moves the cursor to the next position.
-  /// @since_tizen 2.3
-  /// @remarks The following example demonstrates how to use the data_control_sql_step_next() method:
+  /// Moves the cursor to the next position.
   ///
-  /// @code
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - The following example demonstrates how to use the data_control_sql_step_next() method:
+  ///
+  /// **Parameters:**
+  /// - `cursor` (in): The cursor that navigates the result of the request for the select operation
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DATA_CONTROL_ERROR_IO_ERROR`: I/O error
+  ///
+  /// ```
   ///
   /// void
   /// sql_select_response_cb(int request_id, data_control_h provider, result_set_cursor cursor,
@@ -126,14 +161,7 @@ class Tizen70DataControl {
   /// }
   /// }
   ///
-  /// @endcode
-  ///
-  /// @param[in] cursor The cursor that navigates the result of the request for the select operation
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DATA_CONTROL_ERROR_IO_ERROR I/O error
+  /// ```
   int data_control_sql_step_next(
     result_set_cursor cursor,
   ) {
@@ -148,13 +176,20 @@ class Tizen70DataControl {
   late final _data_control_sql_step_next = _data_control_sql_step_nextPtr
       .asFunction<int Function(result_set_cursor)>();
 
-  /// @brief Moves the cursor to the previous position.
-  /// @since_tizen 2.3
-  /// @param[in] cursor The cursor that navigates the result of the request for the select operation
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Moves the cursor to the previous position.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `cursor` (in): The cursor that navigates the result of the request for the select operation
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
   int data_control_sql_step_previous(
     result_set_cursor cursor,
   ) {
@@ -170,11 +205,19 @@ class Tizen70DataControl {
       _data_control_sql_step_previousPtr
           .asFunction<int Function(result_set_cursor)>();
 
-  /// @brief Gets the number of columns for this cursor.
-  /// @since_tizen 2.3
-  /// @param[in] cursor The cursor that navigates the result of the request for the select operation
-  /// @return The number of columns in the calling cursor
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Gets the number of columns for this cursor.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `cursor` (in): The cursor that navigates the result of the request for the select operation
+  ///
+  /// **Returns:**
+  /// - The number of columns in the calling cursor
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
   int data_control_sql_get_column_count(
     result_set_cursor cursor,
   ) {
@@ -190,17 +233,24 @@ class Tizen70DataControl {
       _data_control_sql_get_column_countPtr
           .asFunction<int Function(result_set_cursor)>();
 
-  /// @brief Gets the name of the column indicated by the specified index.
-  /// @since_tizen 2.3
-  /// @param[in] cursor The cursor that navigates the result of the request for the select operation
-  /// @param[in] column_index The index of the destination column
-  /// @param[out] name The name of the destination column. You should provide a buffer for the column name. The limit of column name length is 4096 bytes
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DATA_CONTROL_ERROR_IO_ERROR I/O error
-  /// @retval #DATA_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
+  /// Gets the name of the column indicated by the specified index.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `cursor` (in): The cursor that navigates the result of the request for the select operation
+  /// - `column_index` (in): The index of the destination column
+  /// - `name` (out): The name of the destination column. You should provide a buffer for the column name. The limit of column name length is 4096 bytes
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DATA_CONTROL_ERROR_IO_ERROR`: I/O error
+  /// - `DATA_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
   int data_control_sql_get_column_name(
     result_set_cursor cursor,
     int column_index,
@@ -221,14 +271,21 @@ class Tizen70DataControl {
       _data_control_sql_get_column_namePtr.asFunction<
           int Function(result_set_cursor, int, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the size of the data in the column indicated by the specified index.
-  /// @since_tizen 2.3
-  /// @param[in] cursor The cursor that navigates the result of the request for the select operation
-  /// @param[in] column_index The index of the destination column
-  /// @return The size of data in the column indicated by the specified index \n
-  /// If an error is occurred, then a negative value is returned
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DATA_CONTROL_ERROR_IO_ERROR I/O error
+  /// Gets the size of the data in the column indicated by the specified index.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `cursor` (in): The cursor that navigates the result of the request for the select operation
+  /// - `column_index` (in): The index of the destination column
+  ///
+  /// **Returns:**
+  /// - The size of data in the column indicated by the specified index If an error is occurred, then a negative value is returned
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DATA_CONTROL_ERROR_IO_ERROR`: I/O error
   int data_control_sql_get_column_item_size(
     result_set_cursor cursor,
     int column_index,
@@ -246,16 +303,23 @@ class Tizen70DataControl {
       _data_control_sql_get_column_item_sizePtr
           .asFunction<int Function(result_set_cursor, int)>();
 
-  /// @brief Gets the type of the column indicated by the specified index.
-  /// @since_tizen 2.3
-  /// @param[in] cursor The cursor that navigates the result of the request for the select operation
-  /// @param[in] column_index The index of the destination column
-  /// @param[out] type The type of the destination column
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DATA_CONTROL_ERROR_IO_ERROR I/O error
+  /// Gets the type of the column indicated by the specified index.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `cursor` (in): The cursor that navigates the result of the request for the select operation
+  /// - `column_index` (in): The index of the destination column
+  /// - `type` (out): The type of the destination column
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DATA_CONTROL_ERROR_IO_ERROR`: I/O error
   int data_control_sql_get_column_item_type(
     result_set_cursor cursor,
     int column_index,
@@ -277,19 +341,26 @@ class Tizen70DataControl {
       _data_control_sql_get_column_item_typePtr.asFunction<
           int Function(result_set_cursor, int, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets a blob data from the column indicated by the specified index.
-  /// @since_tizen 2.3
-  /// @param[in] cursor The cursor that navigates the result of the request for the select operation
-  /// @param[in] column_index The index of the destination column
-  /// @param[out] data The blob value obtained from the column
-  /// @param[out] size The size of the data
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DATA_CONTROL_ERROR_IO_ERROR I/O error
-  /// @retval #DATA_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #DATA_CONTROL_ERROR_MAX_EXCEEDED Too long argument
+  /// Gets a blob data from the column indicated by the specified index.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `cursor` (in): The cursor that navigates the result of the request for the select operation
+  /// - `column_index` (in): The index of the destination column
+  /// - `data` (out): The blob value obtained from the column
+  /// - `size` (out): The size of the data
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DATA_CONTROL_ERROR_IO_ERROR`: I/O error
+  /// - `DATA_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `DATA_CONTROL_ERROR_MAX_EXCEEDED`: Too long argument
   int data_control_sql_get_blob_data(
     result_set_cursor cursor,
     int column_index,
@@ -312,16 +383,23 @@ class Tizen70DataControl {
       _data_control_sql_get_blob_dataPtr.asFunction<
           int Function(result_set_cursor, int, ffi.Pointer<ffi.Void>, int)>();
 
-  /// @brief Gets an int value from the column indicated by the specified index.
-  /// @since_tizen 2.3
-  /// @param[in] cursor The cursor that navigates the result of the request for the select operation
-  /// @param[in] column_index The index of the destination column
-  /// @param[out] data The integer value obtained from the column
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DATA_CONTROL_ERROR_IO_ERROR I/O error
+  /// Gets an int value from the column indicated by the specified index.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `cursor` (in): The cursor that navigates the result of the request for the select operation
+  /// - `column_index` (in): The index of the destination column
+  /// - `data` (out): The integer value obtained from the column
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DATA_CONTROL_ERROR_IO_ERROR`: I/O error
   int data_control_sql_get_int_data(
     result_set_cursor cursor,
     int column_index,
@@ -341,16 +419,23 @@ class Tizen70DataControl {
   late final _data_control_sql_get_int_data = _data_control_sql_get_int_dataPtr
       .asFunction<int Function(result_set_cursor, int, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets a long long value from the column indicated by the specified index.
-  /// @since_tizen 2.3
-  /// @param[in] cursor The cursor that navigates the result of the request for the select operation
-  /// @param[in] column_index The index of the destination column
-  /// @param[out] data The 64-bit integer value obtained from the column
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DATA_CONTROL_ERROR_IO_ERROR I/O error
+  /// Gets a long long value from the column indicated by the specified index.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `cursor` (in): The cursor that navigates the result of the request for the select operation
+  /// - `column_index` (in): The index of the destination column
+  /// - `data` (out): The 64-bit integer value obtained from the column
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DATA_CONTROL_ERROR_IO_ERROR`: I/O error
   int data_control_sql_get_int64_data(
     result_set_cursor cursor,
     int column_index,
@@ -371,16 +456,23 @@ class Tizen70DataControl {
       _data_control_sql_get_int64_dataPtr.asFunction<
           int Function(result_set_cursor, int, ffi.Pointer<ffi.LongLong>)>();
 
-  /// @brief Gets a double value from the column indicated by the specified index.
-  /// @since_tizen 2.3
-  /// @param[in] cursor The cursor that navigates the result of the request for the select operation
-  /// @param[in] column_index The index of the destination column
-  /// @param[out] data The value obtained from the column as double
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DATA_CONTROL_ERROR_IO_ERROR I/O error
+  /// Gets a double value from the column indicated by the specified index.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `cursor` (in): The cursor that navigates the result of the request for the select operation
+  /// - `column_index` (in): The index of the destination column
+  /// - `data` (out): The value obtained from the column as double
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DATA_CONTROL_ERROR_IO_ERROR`: I/O error
   int data_control_sql_get_double_data(
     result_set_cursor cursor,
     int column_index,
@@ -401,17 +493,24 @@ class Tizen70DataControl {
       _data_control_sql_get_double_dataPtr.asFunction<
           int Function(result_set_cursor, int, ffi.Pointer<ffi.Double>)>();
 
-  /// @brief Gets a text value from the column indicated by the specified index.
-  /// @since_tizen 2.3
-  /// @param[in] cursor The cursor that navigates the result of the request for the select operation
-  /// @param[in] column_index The index of the destination column
-  /// @param[out] data The value obtained from the column as text. You should provide a buffer for the data. You can get the size of data via data_control_sql_get_column_item_size()
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DATA_CONTROL_ERROR_IO_ERROR I/O error
-  /// @retval #DATA_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
+  /// Gets a text value from the column indicated by the specified index.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `cursor` (in): The cursor that navigates the result of the request for the select operation
+  /// - `column_index` (in): The index of the destination column
+  /// - `data` (out): The value obtained from the column as text. You should provide a buffer for the data. You can get the size of data via data_control_sql_get_column_item_size()
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DATA_CONTROL_ERROR_IO_ERROR`: I/O error
+  /// - `DATA_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
   int data_control_sql_get_text_data(
     result_set_cursor cursor,
     int column_index,
@@ -432,19 +531,30 @@ class Tizen70DataControl {
       _data_control_sql_get_text_dataPtr.asFunction<
           int Function(result_set_cursor, int, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the n-th bundle from bulk data.
-  /// @since_tizen 3.0
-  /// @remarks The @a data should not be released. \n
-  /// It will be released when data_control_bulk_data_destroy() is called.
-  /// @param[in] bulk_data The bulk data handle
-  /// @param[in] idx The bundle index. Index starts at 0
-  /// @param[out] data The n-th bundle.
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see data_control_bulk_data_add()
-  /// @see data_control_bulk_data_destroy()
+  /// Gets the n-th bundle from bulk data.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The `data` should not be released.
+  /// - It will be released when data_control_bulk_data_destroy() is called.
+  ///
+  /// **Parameters:**
+  /// - `bulk_data` (in): The bulk data handle
+  /// - `idx` (in): The bundle index. Index starts at 0
+  /// - `data` (out): The n-th bundle.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `data_control_bulk_data_add()`
+  /// - `data_control_bulk_data_destroy()`
   int data_control_bulk_data_get_data(
     data_control_bulk_data_h bulk_data,
     int idx,
@@ -467,14 +577,21 @@ class Tizen70DataControl {
           int Function(data_control_bulk_data_h, int,
               ffi.Pointer<ffi.Pointer<bundle.bundle>>)>();
 
-  /// @brief Gets the bulk data bundle count.
-  /// @since_tizen 3.0
-  /// @param[in] bulk_data The bulk data handle
-  /// @param[out] count The bundle count
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Gets the bulk data bundle count.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `bulk_data` (in): The bulk data handle
+  /// - `count` (out): The bundle count
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
   int data_control_bulk_data_get_count(
     data_control_bulk_data_h bulk_data,
     ffi.Pointer<ffi.Int> count,
@@ -493,16 +610,25 @@ class Tizen70DataControl {
       _data_control_bulk_data_get_countPtr.asFunction<
           int Function(data_control_bulk_data_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Adds a bundle to bulk data.
-  /// @since_tizen 3.0
-  /// @remarks The order in which bundles are added is preserved. Bundle indexes start from 0.
-  /// @param[in] bulk_data The bulk data handle
-  /// @param[in] data The bundle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DATA_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
+  /// Adds a bundle to bulk data.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The order in which bundles are added is preserved. Bundle indexes start from 0.
+  ///
+  /// **Parameters:**
+  /// - `bulk_data` (in): The bulk data handle
+  /// - `data` (in): The bundle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DATA_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
   int data_control_bulk_data_add(
     data_control_bulk_data_h bulk_data,
     ffi.Pointer<bundle.bundle> data,
@@ -521,15 +647,24 @@ class Tizen70DataControl {
       _data_control_bulk_data_addPtr.asFunction<
           int Function(data_control_bulk_data_h, ffi.Pointer<bundle.bundle>)>();
 
-  /// @brief Creates bulk data.
-  /// @since_tizen 3.0
-  /// @remarks The @a bulk_data should be released using data_control_bulk_data_destroy().
-  /// @param[out] bulk_data The bulk data handle
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DATA_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
+  /// Creates bulk data.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The `bulk_data` should be released using data_control_bulk_data_destroy().
+  ///
+  /// **Parameters:**
+  /// - `bulk_data` (out): The bulk data handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DATA_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
   int data_control_bulk_data_create(
     ffi.Pointer<data_control_bulk_data_h> bulk_data,
   ) {
@@ -545,13 +680,20 @@ class Tizen70DataControl {
   late final _data_control_bulk_data_create = _data_control_bulk_data_createPtr
       .asFunction<int Function(ffi.Pointer<data_control_bulk_data_h>)>();
 
-  /// @brief Destroys bulk data.
-  /// @since_tizen 3.0
-  /// @param[in] bulk_data The bulk data handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Destroys bulk data.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `bulk_data` (in): The bulk data handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
   int data_control_bulk_data_destroy(
     data_control_bulk_data_h bulk_data,
   ) {
@@ -567,20 +709,31 @@ class Tizen70DataControl {
       _data_control_bulk_data_destroyPtr
           .asFunction<int Function(data_control_bulk_data_h)>();
 
-  /// @brief Gets the n-th bundle from bulk result data.
-  /// @since_tizen 3.0
-  /// @remarks The @a data should not be released. \n
-  /// It will be released when data_control_bulk_result_data_destroy() is called.
-  /// @param[in] result_data The bulk result data handle
-  /// @param[in] idx The bundle index. Index starts at 0
-  /// @param[out] data The n-th bundle
-  /// @param[out] result Bulk operation result. Possible values and their meaning are defined by the developer.
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see data_control_bulk_result_data_add()
-  /// @see data_control_bulk_result_data_destroy()
+  /// Gets the n-th bundle from bulk result data.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The `data` should not be released.
+  /// - It will be released when data_control_bulk_result_data_destroy() is called.
+  ///
+  /// **Parameters:**
+  /// - `result_data` (in): The bulk result data handle
+  /// - `idx` (in): The bundle index. Index starts at 0
+  /// - `data` (out): The n-th bundle
+  /// - `result` (out): Bulk operation result. Possible values and their meaning are defined by the developer.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `data_control_bulk_result_data_add()`
+  /// - `data_control_bulk_result_data_destroy()`
   int data_control_bulk_result_data_get_result_data(
     data_control_bulk_result_data_h result_data,
     int idx,
@@ -608,14 +761,21 @@ class Tizen70DataControl {
           int Function(data_control_bulk_result_data_h, int,
               ffi.Pointer<ffi.Pointer<bundle.bundle>>, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the bulk result data bundle count.
-  /// @since_tizen 3.0
-  /// @param[in] result_data The bulk result data handle
-  /// @param[out] count The bundle count
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Gets the bulk result data bundle count.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `result_data` (in): The bulk result data handle
+  /// - `count` (out): The bundle count
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
   int data_control_bulk_result_data_get_count(
     data_control_bulk_result_data_h result_data,
     ffi.Pointer<ffi.Int> count,
@@ -636,18 +796,29 @@ class Tizen70DataControl {
           int Function(
               data_control_bulk_result_data_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Adds bulk data.
-  /// @since_tizen 3.0
-  /// @remarks The order in which bundles are added is preserved. Bundle indexes start from 0.
-  /// @param[in] result_data The bulk result data handle
-  /// @param[in] data The bundle
-  /// @param[in] result Bulk operation result. Possible values and their meaning are defined by the developer.
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DATA_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
-  /// @see data_control_bulk_result_data_get_result_data()
+  /// Adds bulk data.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The order in which bundles are added is preserved. Bundle indexes start from 0.
+  ///
+  /// **Parameters:**
+  /// - `result_data` (in): The bulk result data handle
+  /// - `data` (in): The bundle
+  /// - `result` (in): Bulk operation result. Possible values and their meaning are defined by the developer.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DATA_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `data_control_bulk_result_data_get_result_data()`
   int data_control_bulk_result_data_add(
     data_control_bulk_result_data_h result_data,
     ffi.Pointer<bundle.bundle> data,
@@ -671,15 +842,24 @@ class Tizen70DataControl {
           int Function(data_control_bulk_result_data_h,
               ffi.Pointer<bundle.bundle>, int)>();
 
-  /// @brief Creates bulk result data.
-  /// @since_tizen 3.0
-  /// @remarks The @a result_data should be released using data_control_bulk_result_data_destroy().
-  /// @param[out] result_data The bulk result data handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DATA_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
+  /// Creates bulk result data.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The `result_data` should be released using data_control_bulk_result_data_destroy().
+  ///
+  /// **Parameters:**
+  /// - `result_data` (out): The bulk result data handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DATA_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
   int data_control_bulk_result_data_create(
     ffi.Pointer<data_control_bulk_result_data_h> result_data,
   ) {
@@ -696,13 +876,20 @@ class Tizen70DataControl {
       _data_control_bulk_result_data_createPtr.asFunction<
           int Function(ffi.Pointer<data_control_bulk_result_data_h>)>();
 
-  /// @brief Destroys bulk result data.
-  /// @since_tizen 3.0
-  /// @param[in] result_data The bulk result data handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Destroys bulk result data.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `result_data` (in): The bulk result data handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
   int data_control_bulk_result_data_destroy(
     data_control_bulk_result_data_h result_data,
   ) {
@@ -719,13 +906,30 @@ class Tizen70DataControl {
       _data_control_bulk_result_data_destroyPtr
           .asFunction<int Function(data_control_bulk_result_data_h)>();
 
-  /// @brief Creates a provider handle.
-  /// @since_tizen 2.3
+  /// Creates a provider handle.
   ///
-  /// @remarks @a provider should be destroyed with data_control_sql_destroy().
-  /// The following example demonstrates how to use the data_control_sql_create() method:
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @code
+  /// **Remarks:**
+  /// - `provider` should be destroyed with data_control_sql_destroy().
+  /// - The following example demonstrates how to use the data_control_sql_create() method:
+  ///
+  /// **Parameters:**
+  /// - `provider` (out): The provider handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DATA_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `data_control_sql_destroy()`
+  ///
+  /// ```
   ///
   /// {
   /// const char *provider_id = "http://tizen.org/datacontrol/provider/example";
@@ -763,18 +967,7 @@ class Tizen70DataControl {
   /// return result;
   /// }
   ///
-  /// @endcode
-  ///
-  /// @param[out] provider The provider handle
-  ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  ///
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DATA_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
-  ///
-  /// @see data_control_sql_destroy()
+  /// ```
   int data_control_sql_create(
     ffi.Pointer<data_control_h> provider,
   ) {
@@ -789,19 +982,26 @@ class Tizen70DataControl {
   late final _data_control_sql_create = _data_control_sql_createPtr
       .asFunction<int Function(ffi.Pointer<data_control_h>)>();
 
-  /// @brief Destroys the provider handle and releases all its resources.
-  /// @since_tizen 2.3
+  /// Destroys the provider handle and releases all its resources.
   ///
-  /// @remarks When operations of data control are finished, this function must be called to prevent the memory leak.
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @param[in] provider The provider handle
+  /// **Remarks:**
+  /// - When operations of data control are finished, this function must be called to prevent the memory leak.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Parameters:**
+  /// - `provider` (in): The provider handle
   ///
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see data_control_sql_create()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `data_control_sql_create()`
   int data_control_sql_destroy(
     data_control_h provider,
   ) {
@@ -816,20 +1016,25 @@ class Tizen70DataControl {
   late final _data_control_sql_destroy =
       _data_control_sql_destroyPtr.asFunction<int Function(data_control_h)>();
 
-  /// @brief Sets the Provider ID.
-  /// @since_tizen 2.3
+  /// Sets the Provider ID.
   ///
-  /// @param[in] provider The provider handle
-  /// @param[in] provider_id The data control provider ID
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Parameters:**
+  /// - `provider` (in): The provider handle
+  /// - `provider_id` (in): The data control provider ID
   ///
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DATA_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @see data_control_sql_get_provider_id()
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DATA_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `data_control_sql_get_provider_id()`
   int data_control_sql_set_provider_id(
     data_control_h provider,
     ffi.Pointer<ffi.Char> provider_id,
@@ -848,22 +1053,28 @@ class Tizen70DataControl {
       _data_control_sql_set_provider_idPtr
           .asFunction<int Function(data_control_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the Provider ID.
-  /// @since_tizen 2.3
+  /// Gets the Provider ID.
   ///
-  /// @remarks You must release @a provider_id using free() after it is used.
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @param[in] provider The provider handle
-  /// @param[out] provider_id The data control provider ID
+  /// **Remarks:**
+  /// - You must release `provider_id` using free() after it is used.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Parameters:**
+  /// - `provider` (in): The provider handle
+  /// - `provider_id` (out): The data control provider ID
   ///
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DATA_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @see data_control_sql_set_provider_id()
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DATA_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `data_control_sql_set_provider_id()`
   int data_control_sql_get_provider_id(
     data_control_h provider,
     ffi.Pointer<ffi.Pointer<ffi.Char>> provider_id,
@@ -883,23 +1094,27 @@ class Tizen70DataControl {
       _data_control_sql_get_provider_idPtr.asFunction<
           int Function(data_control_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets the data ID.
-  /// @since_tizen 2.3
+  /// Sets the data ID.
   ///
-  /// @param[in] provider The provider handle
-  /// @param[in] data_id A string for identifying a specific table to operate \n
-  /// The string consists of one or more components separated by a slash('/')
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Parameters:**
+  /// - `provider` (in): The provider handle
+  /// - `data_id` (in): A string for identifying a specific table to operate The string consists of one or more components separated by a slash('/')
   ///
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DATA_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @see data_control_sql_get_data_id()
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DATA_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
   ///
-  /// @code
+  /// **See also:**
+  /// - `data_control_sql_get_data_id()`
+  ///
+  /// ```
   ///
   /// {
   /// bundle *b;
@@ -928,7 +1143,7 @@ class Tizen70DataControl {
   /// bundle_free(b);
   /// }
   ///
-  /// @endcode
+  /// ```
   int data_control_sql_set_data_id(
     data_control_h provider,
     ffi.Pointer<ffi.Char> data_id,
@@ -946,23 +1161,28 @@ class Tizen70DataControl {
   late final _data_control_sql_set_data_id = _data_control_sql_set_data_idPtr
       .asFunction<int Function(data_control_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the data ID.
-  /// @since_tizen 2.3
+  /// Gets the data ID.
   ///
-  /// @remarks You must release @a data_id using free() after it is used.
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @param[in] provider The provider handle
-  /// @param[out] data_id A string for identifying a specific table to operate \n
-  /// The string consists of one or more components separated by a slash('/')
+  /// **Remarks:**
+  /// - You must release `data_id` using free() after it is used.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Parameters:**
+  /// - `provider` (in): The provider handle
+  /// - `data_id` (out): A string for identifying a specific table to operate The string consists of one or more components separated by a slash('/')
   ///
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DATA_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @see data_control_sql_set_data_id()
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DATA_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `data_control_sql_set_data_id()`
   int data_control_sql_get_data_id(
     data_control_h provider,
     ffi.Pointer<ffi.Pointer<ffi.Char>> data_id,
@@ -982,28 +1202,33 @@ class Tizen70DataControl {
       _data_control_sql_get_data_idPtr.asFunction<
           int Function(data_control_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Registers a callback function for the SQL data control response.
-  /// @since_tizen 2.3
+  /// Registers a callback function for the SQL data control response.
   ///
-  /// @remarks The application is notified when a data control response is received from the @a provider.
-  /// @remarks Only one callback can be registered for each provider id with this function.
-  /// @remarks If you register multiple callback for same provider id, it will be overwritten by latest one.
+  /// **Since Tizen:**
+  /// - 2.3
   ///
+  /// **Remarks:**
+  /// - The application is notified when a data control response is received from the `provider`.
+  /// - Only one callback can be registered for each provider id with this function.
+  /// - If you register multiple callback for same provider id, it will be overwritten by latest one.
   ///
-  /// @param[in] provider The provider handle
-  /// @param[in] callback The callback function to be called when a response is received
-  /// @param[in] user_data The user data to be passed to the callback function
+  /// **Parameters:**
+  /// - `provider` (in): The provider handle
+  /// - `callback` (in): The callback function to be called when a response is received
+  /// - `user_data` (in): The user data to be passed to the callback function
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DATA_CONTROL_ERROR_IO_ERROR I/O error
-  /// @retval #DATA_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DATA_CONTROL_ERROR_IO_ERROR`: I/O error
+  /// - `DATA_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
   ///
-  /// @see data_control_sql_unregister_response_cb()
-  /// @see data_control_sql_bind_response_cb()
+  /// **See also:**
+  /// - `data_control_sql_unregister_response_cb()`
+  /// - `data_control_sql_bind_response_cb()`
   int data_control_sql_register_response_cb(
     data_control_h provider,
     ffi.Pointer<data_control_sql_response_cb> callback,
@@ -1029,18 +1254,23 @@ class Tizen70DataControl {
               ffi.Pointer<data_control_sql_response_cb>,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unregisters the callback function in the @a provider.
-  /// @since_tizen 2.3
+  /// Unregisters the callback function in the `provider`.
   ///
-  /// @param[in] provider The provider handle
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Parameters:**
+  /// - `provider` (in): The provider handle
   ///
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @see data_control_sql_register_response_cb()
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `data_control_sql_register_response_cb()`
   int data_control_sql_unregister_response_cb(
     data_control_h provider,
   ) {
@@ -1056,17 +1286,39 @@ class Tizen70DataControl {
       _data_control_sql_unregister_response_cbPtr
           .asFunction<int Function(data_control_h)>();
 
-  /// @brief Deletes rows of a table owned by the SQL-type data control provider.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/datasharing \n
-  /// %http://tizen.org/privilege/appmanager.launch
+  /// Deletes rows of a table owned by the SQL-type data control provider.
   ///
-  /// @remarks If you want to use this function, you must add privileges.
-  /// @remarks If the value is a string, then the value must be wrapped in single quotes, else it does not need to be wrapped in single quotes.
-  /// @remarks The following example demonstrates how to use the data_control_sql_delete() method:
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @code
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/datasharing>
+  /// - <http://tizen.org/privilege/appmanager.launch>
+  ///
+  /// **Remarks:**
+  /// - If you want to use this function, you must add privileges.
+  /// - If the value is a string, then the value must be wrapped in single quotes, else it does not need to be wrapped in single quotes.
+  /// - The following example demonstrates how to use the data_control_sql_delete() method:
+  ///
+  /// **Parameters:**
+  /// - `provider` (in): The provider handle
+  /// - `where` (in): A filter to select the desired rows to delete It is an SQL 'WHERE' clause excluding the 'WHERE' itself such as column1 = 'stringValue' and column2 = numericValue
+  /// - `request_id` (out): The request ID
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DATA_CONTROL_ERROR_IO_ERROR`: I/O error
+  /// - `DATA_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// ```
   ///
   /// void
   /// sql_delete_response_cb(int request_id, data_control_h provider, bool provider_result, const char *error, void *user_data)
@@ -1101,21 +1353,7 @@ class Tizen70DataControl {
   /// return result;
   /// }
   ///
-  /// @endcode
-  ///
-  /// @param[in] provider The provider handle
-  /// @param[in] where A filter to select the desired rows to delete \n
-  /// It is an SQL 'WHERE' clause excluding the 'WHERE' itself such as column1 = 'stringValue' and column2 = numericValue
-  /// @param[out] request_id The request ID
-  ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  ///
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DATA_CONTROL_ERROR_IO_ERROR I/O error
-  /// @retval #DATA_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
+  /// ```
   int data_control_sql_delete(
     data_control_h provider,
     ffi.Pointer<ffi.Char> where,
@@ -1136,16 +1374,39 @@ class Tizen70DataControl {
       int Function(
           data_control_h, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Inserts new rows in a table owned by the SQL-type data control provider.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/datasharing \n
-  /// %http://tizen.org/privilege/appmanager.launch
+  /// Inserts new rows in a table owned by the SQL-type data control provider.
   ///
-  /// @remarks If you want to use this function, you must add privileges.
-  /// The following example demonstrates how to use the data_control_sql_insert() method:
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @code
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/datasharing>
+  /// - <http://tizen.org/privilege/appmanager.launch>
+  ///
+  /// **Remarks:**
+  /// - If you want to use this function, you must add privileges.
+  /// - The following example demonstrates how to use the data_control_sql_insert() method:
+  ///
+  /// **Parameters:**
+  /// - `provider` (in): The provider handle
+  /// - `insert_data` (in): The column-value pairs to insert If the value is a string, then the value must be wrapped in single quotes, else it does not need to be wrapped in single quotes
+  /// - `request_id` (out): The request ID
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DATA_CONTROL_ERROR_IO_ERROR`: I/O error
+  /// - `DATA_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `DATA_CONTROL_ERROR_MAX_EXCEEDED`: Too long argument
+  ///
+  /// ```
   ///
   /// void
   /// sql_insert_response_cb(int request_id, data_control_h provider, long long inserted_row_id,
@@ -1187,23 +1448,7 @@ class Tizen70DataControl {
   /// return result;
   /// }
   ///
-  /// @endcode
-  ///
-  /// @param[in] provider The provider handle
-  /// @param[in] insert_data The column-value pairs to insert \n
-  /// If the value is a string, then the value must be wrapped in single quotes,
-  /// else it does not need to be wrapped in single quotes
-  /// @param[out] request_id The request ID
-  ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  ///
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DATA_CONTROL_ERROR_IO_ERROR I/O error
-  /// @retval #DATA_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #DATA_CONTROL_ERROR_MAX_EXCEEDED Too long argument
+  /// ```
   int data_control_sql_insert(
     data_control_h provider,
     ffi.Pointer<bundle.bundle> insert_data,
@@ -1224,16 +1469,41 @@ class Tizen70DataControl {
       int Function(
           data_control_h, ffi.Pointer<bundle.bundle>, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Selects the specified columns to be queried.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/datasharing \n
-  /// %http://tizen.org/privilege/appmanager.launch
+  /// Selects the specified columns to be queried.
   ///
-  /// @remarks If you want to use this function, you must add privileges.
-  /// @remarks The following example demonstrates how to use the data_control_sql_select() method:
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @code
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/datasharing>
+  /// - <http://tizen.org/privilege/appmanager.launch>
+  ///
+  /// **Remarks:**
+  /// - If you want to use this function, you must add privileges.
+  /// - The following example demonstrates how to use the data_control_sql_select() method:
+  ///
+  /// **Parameters:**
+  /// - `provider` (in): The provider handle
+  /// - `column_list` (in): The column list to query
+  /// - `column_count` (in): The total number of columns to be queried
+  /// - `where` (in): A filter to select the desired rows It is an SQL 'WHERE' clause excluding the 'WHERE' itself such as column1 = 'stringValue' and column2 = numericValue
+  /// - `order` (in): The sorting order of the rows to query It is an SQL 'ORDER BY' clause excluding the 'ORDER BY' itself.
+  /// - `request_id` (out): The request ID
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DATA_CONTROL_ERROR_IO_ERROR`: I/O error
+  /// - `DATA_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// ```
   ///
   /// void
   /// sql_select_response_cb(int request_id, data_control_h provider, result_set_cursor *enumerator,
@@ -1273,26 +1543,7 @@ class Tizen70DataControl {
   /// return result;
   /// }
   ///
-  /// @endcode
-  ///
-  ///
-  /// @param[in] provider The provider handle
-  /// @param[in] column_list The column list to query
-  /// @param[in] column_count The total number of columns to be queried
-  /// @param[in] where A filter to select the desired rows \n
-  /// It is an SQL 'WHERE' clause excluding the 'WHERE' itself such as column1 = 'stringValue' and column2 = numericValue
-  /// @param[in] order The sorting order of the rows to query \n
-  /// It is an SQL 'ORDER BY' clause excluding the 'ORDER BY' itself.
-  /// @param[out] request_id The request ID
-  ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  ///
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DATA_CONTROL_ERROR_IO_ERROR I/O error
-  /// @retval #DATA_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
+  /// ```
   int data_control_sql_select(
     data_control_h provider,
     ffi.Pointer<ffi.Pointer<ffi.Char>> column_list,
@@ -1329,35 +1580,43 @@ class Tizen70DataControl {
           ffi.Pointer<ffi.Char>,
           ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Selects the specified columns to be queried, with partition into pages.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/datasharing \n
-  /// %http://tizen.org/privilege/appmanager.launch
+  /// Selects the specified columns to be queried, with partition into pages.
   ///
-  /// @remarks If you want to use this function, you must add privileges.
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @param[in] provider The provider handle
-  /// @param[in] column_list The column list to query
-  /// @param[in] column_count The total number of columns to be queried
-  /// @param[in] where A filter to select the desired rows \n
-  /// It is an SQL 'WHERE' clause excluding the 'WHERE' itself such as column1 = 'stringValue' and column2 = numericValue
-  /// @param[in] order The sorting order of the rows to query \n
-  /// It is an SQL 'ORDER BY' clause excluding the 'ORDER BY' itself
-  /// @param[in] page_number The page number of the result set \n
-  /// It starts from @c 1
-  /// @param[in] count_per_page The desired maximum count of rows on a page
-  /// @param[out] request_id The request ID
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/datasharing>
+  /// - <http://tizen.org/privilege/appmanager.launch>
   ///
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DATA_CONTROL_ERROR_IO_ERROR I/O error
-  /// @retval #DATA_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
-  /// @see data_control_sql_select()
+  /// **Remarks:**
+  /// - If you want to use this function, you must add privileges.
+  ///
+  /// **Parameters:**
+  /// - `provider` (in): The provider handle
+  /// - `column_list` (in): The column list to query
+  /// - `column_count` (in): The total number of columns to be queried
+  /// - `where` (in): A filter to select the desired rows It is an SQL 'WHERE' clause excluding the 'WHERE' itself such as column1 = 'stringValue' and column2 = numericValue
+  /// - `order` (in): The sorting order of the rows to query It is an SQL 'ORDER BY' clause excluding the 'ORDER BY' itself
+  /// - `page_number` (in): The page number of the result set It starts from `1`
+  /// - `count_per_page` (in): The desired maximum count of rows on a page
+  /// - `request_id` (out): The request ID
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DATA_CONTROL_ERROR_IO_ERROR`: I/O error
+  /// - `DATA_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `data_control_sql_select()`
   int data_control_sql_select_with_page(
     data_control_h provider,
     ffi.Pointer<ffi.Pointer<ffi.Char>> column_list,
@@ -1403,16 +1662,40 @@ class Tizen70DataControl {
               int,
               ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Updates values of a table owned by the SQL-type data control provider.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/datasharing \n
-  /// %http://tizen.org/privilege/appmanager.launch
+  /// Updates values of a table owned by the SQL-type data control provider.
   ///
-  /// @remarks If you want to use this function, you must add privileges.
-  /// The following example demonstrates how to use the data_control_sql_update() method:
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @code
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/datasharing>
+  /// - <http://tizen.org/privilege/appmanager.launch>
+  ///
+  /// **Remarks:**
+  /// - If you want to use this function, you must add privileges.
+  /// - The following example demonstrates how to use the data_control_sql_update() method:
+  ///
+  /// **Parameters:**
+  /// - `provider` (in): The provider handle
+  /// - `update_data` (in): The column-value pairs to update If the value is a string, the value must be wrapped in single quotes, else it does not need to be wrapped in single quotes
+  /// - `where` (in): A filter to select the desired rows to update It is an SQL 'WHERE' clause excluding the 'WHERE' itself such as column1 = 'stringValue' and column2 = numericValue
+  /// - `request_id` (out): The request ID
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DATA_CONTROL_ERROR_IO_ERROR`: I/O error
+  /// - `DATA_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `DATA_CONTROL_ERROR_MAX_EXCEEDED`: Too long argument
+  ///
+  /// ```
   ///
   /// void
   /// sql_update_response_cb(int request_id, data_control_h provider, bool provider_result, const char *error, void *user_data)
@@ -1453,26 +1736,7 @@ class Tizen70DataControl {
   /// return result;
   /// }
   ///
-  /// @endcode
-  ///
-  ///
-  /// @param[in] provider The provider handle
-  /// @param[in] update_data The column-value pairs to update \n
-  /// If the value is a string, the value must be wrapped in single quotes,
-  /// else it does not need to be wrapped in single quotes
-  /// @param[in] where A filter to select the desired rows to update \n
-  /// It is an SQL 'WHERE' clause excluding the 'WHERE' itself such as column1 = 'stringValue' and column2 = numericValue
-  /// @param[out] request_id The request ID
-  ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  ///
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DATA_CONTROL_ERROR_IO_ERROR I/O error
-  /// @retval #DATA_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #DATA_CONTROL_ERROR_MAX_EXCEEDED Too long argument
+  /// ```
   int data_control_sql_update(
     data_control_h provider,
     ffi.Pointer<bundle.bundle> update_data,
@@ -1498,16 +1762,39 @@ class Tizen70DataControl {
       int Function(data_control_h, ffi.Pointer<bundle.bundle>,
           ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Inserts multiple rows in one request.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/datasharing \n
-  /// %http://tizen.org/privilege/appmanager.launch
+  /// Inserts multiple rows in one request.
   ///
-  /// @remarks If you want to use this function, you must add privileges.
-  /// @remarks The following example demonstrates how to use the data_control_sql_insert_bulk_data() method:
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @code
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/datasharing>
+  /// - <http://tizen.org/privilege/appmanager.launch>
+  ///
+  /// **Remarks:**
+  /// - If you want to use this function, you must add privileges.
+  /// - The following example demonstrates how to use the data_control_sql_insert_bulk_data() method:
+  ///
+  /// **Parameters:**
+  /// - `provider` (in): The provider handle
+  /// - `bulk_data` (in): The bulk data handle
+  /// - `request_id` (out): The request ID
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DATA_CONTROL_ERROR_IO_ERROR`: I/O error
+  /// - `DATA_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `DATA_CONTROL_ERROR_MAX_EXCEEDED`: Too long argument
+  ///
+  /// ```
   ///
   /// void
   /// sql_bulk_insert_response_cb(int request_id, data_control_h provider, data_control_bulk_result_data_h bulk_results,
@@ -1560,21 +1847,7 @@ class Tizen70DataControl {
   /// return result;
   /// }
   ///
-  /// @endcode
-  ///
-  /// @param[in] provider The provider handle
-  /// @param[in] bulk_data The bulk data handle
-  /// @param[out] request_id The request ID
-  ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  ///
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DATA_CONTROL_ERROR_IO_ERROR I/O error
-  /// @retval #DATA_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #DATA_CONTROL_ERROR_MAX_EXCEEDED Too long argument
+  /// ```
   int data_control_sql_insert_bulk_data(
     data_control_h provider,
     data_control_bulk_data_h bulk_data,
@@ -1596,29 +1869,33 @@ class Tizen70DataControl {
           int Function(data_control_h, data_control_bulk_data_h,
               ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Registers an insert bulk data callback for the SQL data control response.
-  /// The application is notified when a data control response is
-  /// received from the @a provider.
-  /// @since_tizen 3.0
+  /// Registers an insert bulk data callback for the SQL data control response. The application is notified when a data control response is received from the `provider`.
   ///
-  /// @remarks Only one callback can be registered for each provider id with this
-  /// function. If you call this function multiple times for the same
-  /// provider id, any previously set callback will be overwritten.
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @param[in] provider The provider handle
-  /// @param[in] callback The callback function to be called when a response is received
-  /// @param[in] user_data The user data to be passed to the callback function
+  /// **Remarks:**
+  /// - Only one callback can be registered for each provider id with this
+  /// - function. If you call this function multiple times for the same
+  /// - provider id, any previously set callback will be overwritten.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Parameters:**
+  /// - `provider` (in): The provider handle
+  /// - `callback` (in): The callback function to be called when a response is received
+  /// - `user_data` (in): The user data to be passed to the callback function
   ///
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DATA_CONTROL_ERROR_IO_ERROR I/O error
-  /// @retval #DATA_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @see  data_control_sql_unregister_insert_bulk_data_response_cb()
-  /// @see  data_control_sql_bind_insert_bulk_data_response_cb()
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DATA_CONTROL_ERROR_IO_ERROR`: I/O error
+  /// - `DATA_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `data_control_sql_unregister_insert_bulk_data_response_cb()`
+  /// - `data_control_sql_bind_insert_bulk_data_response_cb()`
   int data_control_sql_register_insert_bulk_data_response_cb(
     data_control_h provider,
     data_control_bulk_cb callback,
@@ -1642,17 +1919,23 @@ class Tizen70DataControl {
           int Function(
               data_control_h, data_control_bulk_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unregisters the insert bulk data callback.
-  /// @since_tizen 3.0
+  /// Unregisters the insert bulk data callback.
   ///
-  /// @param[in] provider The provider handle
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Parameters:**
+  /// - `provider` (in): The provider handle
   ///
-  /// @see  data_control_sql_register_insert_bulk_data_response_cb()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `data_control_sql_register_insert_bulk_data_response_cb()`
   int data_control_sql_unregister_insert_bulk_data_response_cb(
     data_control_h provider,
   ) {
@@ -1668,38 +1951,35 @@ class Tizen70DataControl {
       _data_control_sql_unregister_insert_bulk_data_response_cbPtr
           .asFunction<int Function(data_control_h)>();
 
-  /// @brief Binds a callback function to the SQL data control response.
-  /// @details This function is very similar to
-  /// data_control_sql_register_response_cb(), which can register a
-  /// callback for a given provider id. Calling
-  /// data_control_sql_register_response_cb() again overwrites the
-  /// callback previously set for the provider id, which means that only
-  /// one callback can be set for a given id.
-  /// data_control_sql_bind_response_cb() binds a callback to the handle
-  /// of a provider, which allows registering multiple callbacks for a
-  /// given provider id. To do that, you can create new #data_control_h
-  /// for the same provider id and register callback for the
-  /// #data_control_h.
+  /// Binds a callback function to the SQL data control response.
   ///
-  /// @since_tizen 4.0
-  /// @remarks You can bind a callback function to @a provider. If you call this
-  /// function multiple times for the same handle, any previously set
-  /// callback will be overwritten.
+  /// This function is very similar to data_control_sql_register_response_cb(), which can register a callback for a given provider id. Calling data_control_sql_register_response_cb() again overwrites the callback previously set for the provider id, which means that only one callback can be set for a given id. data_control_sql_bind_response_cb() binds a callback to the handle of a provider, which allows registering multiple callbacks for a given provider id. To do that, you can create new `data_control_h` for the same provider id and register callback for the `data_control_h`.
   ///
-  /// @param[in] provider  The provider handle
-  /// @param[in] callback  The callback function to be called
-  /// when a response is received
-  /// @param[in] user_data The user data to be passed to the callback function
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Remarks:**
+  /// - You can bind a callback function to `provider`. If you call this
+  /// - function multiple times for the same handle, any previously set
+  /// - callback will be overwritten.
   ///
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DATA_CONTROL_ERROR_IO_ERROR I/O error
-  /// @retval #DATA_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
-  /// @see data_control_sql_register_response_cb()
-  /// @see data_control_sql_unbind_response_cb()
+  /// **Parameters:**
+  /// - `provider` (in): The provider handle
+  /// - `callback` (in): The callback function to be called when a response is received
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DATA_CONTROL_ERROR_IO_ERROR`: I/O error
+  /// - `DATA_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `data_control_sql_register_response_cb()`
+  /// - `data_control_sql_unbind_response_cb()`
   int data_control_sql_bind_response_cb(
     data_control_h provider,
     ffi.Pointer<data_control_sql_response_cb> callback,
@@ -1725,16 +2005,23 @@ class Tizen70DataControl {
               ffi.Pointer<data_control_sql_response_cb>,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unbinds the callback function in the @a provider.
-  /// @since_tizen 4.0
+  /// Unbinds the callback function in the `provider`.
   ///
-  /// @param[in] provider The provider handle
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see data_control_sql_bind_response_cb()
+  /// **Parameters:**
+  /// - `provider` (in): The provider handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `data_control_sql_bind_response_cb()`
   int data_control_sql_unbind_response_cb(
     data_control_h provider,
   ) {
@@ -1750,39 +2037,35 @@ class Tizen70DataControl {
       _data_control_sql_unbind_response_cbPtr
           .asFunction<int Function(data_control_h)>();
 
-  /// @brief Binds the insert bulk data callback to the SQL data control response.
-  /// @details This function is very similar to
-  /// data_control_sql_register_insert_bulk_data_response_cb(), which can
-  /// register a callback for a given provider id. Calling
-  /// data_control_sql_register_insert_bulk_data_response_cb() again
-  /// overwrites the callback previously set for the provider id, which
-  /// means that only one callback can be set for a given id.
-  /// data_control_sql_bind_insert_bulk_data_response_cb() binds a
-  /// callback to the handle of a provider, which allows registering
-  /// multiple callbacks for a given provider id. To do that, you can
-  /// create new #data_control_h for the same provider id and register
-  /// callback for the #data_control_h.
+  /// Binds the insert bulk data callback to the SQL data control response.
   ///
-  /// @since_tizen 4.0
-  /// @remarks You can bind a callback function to @a provider. If you call this
-  /// function multiple times for the same handle, any previously set
-  /// callback will be overwritten.
+  /// This function is very similar to data_control_sql_register_insert_bulk_data_response_cb(), which can register a callback for a given provider id. Calling data_control_sql_register_insert_bulk_data_response_cb() again overwrites the callback previously set for the provider id, which means that only one callback can be set for a given id. data_control_sql_bind_insert_bulk_data_response_cb() binds a callback to the handle of a provider, which allows registering multiple callbacks for a given provider id. To do that, you can create new `data_control_h` for the same provider id and register callback for the `data_control_h`.
   ///
-  /// @param[in] provider  The provider handle
-  /// @param[in] callback  The callback function to be called
-  /// when a response is received
-  /// @param[in] user_data The user data to be passed to the callback function
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Remarks:**
+  /// - You can bind a callback function to `provider`. If you call this
+  /// - function multiple times for the same handle, any previously set
+  /// - callback will be overwritten.
   ///
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DATA_CONTROL_ERROR_IO_ERROR I/O error
-  /// @retval #DATA_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Parameters:**
+  /// - `provider` (in): The provider handle
+  /// - `callback` (in): The callback function to be called when a response is received
+  /// - `user_data` (in): The user data to be passed to the callback function
   ///
-  /// @see  data_control_sql_register_insert_bulk_data_response_cb()
-  /// @see  data_control_sql_unbind_insert_bulk_data_response_cb()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DATA_CONTROL_ERROR_IO_ERROR`: I/O error
+  /// - `DATA_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `data_control_sql_register_insert_bulk_data_response_cb()`
+  /// - `data_control_sql_unbind_insert_bulk_data_response_cb()`
   int data_control_sql_bind_insert_bulk_data_response_cb(
     data_control_h provider,
     data_control_bulk_cb callback,
@@ -1805,16 +2088,23 @@ class Tizen70DataControl {
           int Function(
               data_control_h, data_control_bulk_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unbinds the insert bulk data callback in the @a provider.
-  /// @since_tizen 4.0
+  /// Unbinds the insert bulk data callback in the `provider`.
   ///
-  /// @param[in] provider The provider handle
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see  data_control_sql_bind_insert_bulk_data_response_cb()
+  /// **Parameters:**
+  /// - `provider` (in): The provider handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `data_control_sql_bind_insert_bulk_data_response_cb()`
   int data_control_sql_unbind_insert_bulk_data_response_cb(
     data_control_h provider,
   ) {
@@ -1830,19 +2120,26 @@ class Tizen70DataControl {
       _data_control_sql_unbind_insert_bulk_data_response_cbPtr
           .asFunction<int Function(data_control_h)>();
 
-  /// @brief Gets the handle ID for @a provider.
-  /// @since_tizen 4.0
+  /// Gets the handle ID for `provider`.
   ///
-  /// @remarks @a handle_id is generated internally and it is unique for each
-  /// handle. This function can be used in callbacks to know for which
-  /// handle the callback was called.
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @param[in]  provider  The provider handle
-  /// @param[out] handle_id The handle ID for @a provider
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Remarks:**
+  /// - `handle_id` is generated internally and it is unique for each
+  /// - handle. This function can be used in callbacks to know for which
+  /// - handle the callback was called.
+  ///
+  /// **Parameters:**
+  /// - `provider` (in): The provider handle
+  /// - `handle_id` (out): The handle ID for `provider`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
   int data_control_sql_get_handle_id(
     data_control_h provider,
     ffi.Pointer<ffi.Int> handle_id,
@@ -1861,12 +2158,30 @@ class Tizen70DataControl {
       _data_control_sql_get_handle_idPtr
           .asFunction<int Function(data_control_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Creates a provider handle.
-  /// @since_tizen 2.3
-  /// @remarks @a provider should be destroyed with data_control_map_destroy().
-  /// The following example demonstrates how to use the data_control_map_create() method.
+  /// Creates a provider handle.
   ///
-  /// @code
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - `provider` should be destroyed with data_control_map_destroy().
+  /// - The following example demonstrates how to use the data_control_map_create() method.
+  ///
+  /// **Parameters:**
+  /// - `provider` (out): The provider handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DATA_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `data_control_map_destroy()`
+  ///
+  /// ```
   ///
   /// {
   /// const char *provider_id = "http://tizen.org/datacontrol/provider/example";
@@ -1904,15 +2219,7 @@ class Tizen70DataControl {
   /// return result;
   /// }
   ///
-  /// @endcode
-  ///
-  /// @param[out] provider The provider handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DATA_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
-  /// @see data_control_map_destroy()
+  /// ```
   int data_control_map_create(
     ffi.Pointer<data_control_h> provider,
   ) {
@@ -1927,15 +2234,26 @@ class Tizen70DataControl {
   late final _data_control_map_create = _data_control_map_createPtr
       .asFunction<int Function(ffi.Pointer<data_control_h>)>();
 
-  /// @brief Destroys the provider handle and releases all its resources.
-  /// @since_tizen 2.3
-  /// @remarks When operations of data control are finished, this function must be called to prevent memory leak.
-  /// @param[in] provider The provider handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see data_control_map_create()
+  /// Destroys the provider handle and releases all its resources.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - When operations of data control are finished, this function must be called to prevent memory leak.
+  ///
+  /// **Parameters:**
+  /// - `provider` (in): The provider handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `data_control_map_create()`
   int data_control_map_destroy(
     data_control_h provider,
   ) {
@@ -1950,16 +2268,25 @@ class Tizen70DataControl {
   late final _data_control_map_destroy =
       _data_control_map_destroyPtr.asFunction<int Function(data_control_h)>();
 
-  /// @brief Sets the Provider ID.
-  /// @since_tizen 2.3
-  /// @param[in] provider The provider handle
-  /// @param[in] provider_id The data control provider ID
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DATA_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
-  /// @see data_control_map_get_provider_id()
+  /// Sets the Provider ID.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `provider` (in): The provider handle
+  /// - `provider_id` (in): The data control provider ID
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DATA_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `data_control_map_get_provider_id()`
   int data_control_map_set_provider_id(
     data_control_h provider,
     ffi.Pointer<ffi.Char> provider_id,
@@ -1978,17 +2305,28 @@ class Tizen70DataControl {
       _data_control_map_set_provider_idPtr
           .asFunction<int Function(data_control_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the Provider ID.
-  /// @since_tizen 2.3
-  /// @remarks You must release @a provider_id using free() after it is used.
-  /// @param[in] provider The provider handle
-  /// @param[out] provider_id The data control provider ID
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DATA_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
-  /// @see data_control_map_set_provider_id()
+  /// Gets the Provider ID.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - You must release `provider_id` using free() after it is used.
+  ///
+  /// **Parameters:**
+  /// - `provider` (in): The provider handle
+  /// - `provider_id` (out): The data control provider ID
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DATA_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `data_control_map_set_provider_id()`
   int data_control_map_get_provider_id(
     data_control_h provider,
     ffi.Pointer<ffi.Pointer<ffi.Char>> provider_id,
@@ -2008,17 +2346,25 @@ class Tizen70DataControl {
       _data_control_map_get_provider_idPtr.asFunction<
           int Function(data_control_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets the Data ID.
-  /// @since_tizen 2.3
-  /// @param[in] provider The provider handle
-  /// @param[in] data_id A string for identifying a specific table to operate \n
-  /// The string consists of one or more components separated by a slash('/').
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DATA_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
-  /// @see data_control_map_get_data_id()
+  /// Sets the Data ID.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `provider` (in): The provider handle
+  /// - `data_id` (in): A string for identifying a specific table to operate The string consists of one or more components separated by a slash('/').
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DATA_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `data_control_map_get_data_id()`
   int data_control_map_set_data_id(
     data_control_h provider,
     ffi.Pointer<ffi.Char> data_id,
@@ -2036,18 +2382,28 @@ class Tizen70DataControl {
   late final _data_control_map_set_data_id = _data_control_map_set_data_idPtr
       .asFunction<int Function(data_control_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the data ID.
-  /// @since_tizen 2.3
-  /// @remarks You must release @a data_id using free() after it is used.
-  /// @param[in] provider The provider handle
-  /// @param[out] data_id A string for identifying a specific table to operate \n
-  /// The string consists of one or more components separated by a slash('/').
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DATA_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
-  /// @see data_control_map_set_data_id()
+  /// Gets the data ID.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - You must release `data_id` using free() after it is used.
+  ///
+  /// **Parameters:**
+  /// - `provider` (in): The provider handle
+  /// - `data_id` (out): A string for identifying a specific table to operate The string consists of one or more components separated by a slash('/').
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DATA_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `data_control_map_set_data_id()`
   int data_control_map_get_data_id(
     data_control_h provider,
     ffi.Pointer<ffi.Pointer<ffi.Char>> data_id,
@@ -2067,25 +2423,33 @@ class Tizen70DataControl {
       _data_control_map_get_data_idPtr.asFunction<
           int Function(data_control_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Registers a callback function for the key-value structured data control response.
-  /// The application is notified when a data control response is received from the @a provider.
-  /// @since_tizen 2.3
+  /// Registers a callback function for the key-value structured data control response. The application is notified when a data control response is received from the `provider`.
   ///
-  /// @remarks The application is notified when a data control response is received from the @a provider.
-  /// @remarks Only one callback can be registered for each provider id with this function.
-  /// @remarks If you register multiple callback for same provider id, it will be overwritten by latest one.
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @param[in] provider The provider handle
-  /// @param[in] callback The callback function to be called when a response is received
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DATA_CONTROL_ERROR_IO_ERROR I/O error
-  /// @retval #DATA_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
-  /// @see data_control_map_unregister_response_cb()
-  /// @see data_control_map_bind_response_cb()
+  /// **Remarks:**
+  /// - The application is notified when a data control response is received from the `provider`.
+  /// - Only one callback can be registered for each provider id with this function.
+  /// - If you register multiple callback for same provider id, it will be overwritten by latest one.
+  ///
+  /// **Parameters:**
+  /// - `provider` (in): The provider handle
+  /// - `callback` (in): The callback function to be called when a response is received
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DATA_CONTROL_ERROR_IO_ERROR`: I/O error
+  /// - `DATA_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `data_control_map_unregister_response_cb()`
+  /// - `data_control_map_bind_response_cb()`
   int data_control_map_register_response_cb(
     data_control_h provider,
     ffi.Pointer<data_control_map_response_cb> callback,
@@ -2111,14 +2475,23 @@ class Tizen70DataControl {
               ffi.Pointer<data_control_map_response_cb>,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unregisters the callback function in the @a provider.
-  /// @since_tizen 2.3
-  /// @param[in] provider The provider handle
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see data_control_map_register_response_cb()
+  /// Unregisters the callback function in the `provider`.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `provider` (in): The provider handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `data_control_map_register_response_cb()`
   int data_control_map_unregister_response_cb(
     data_control_h provider,
   ) {
@@ -2134,16 +2507,43 @@ class Tizen70DataControl {
       _data_control_map_unregister_response_cbPtr
           .asFunction<int Function(data_control_h)>();
 
-  /// @brief Gets the value list associated with the specified @a key from the key-values map owned by the key-value structured data control provider.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/datasharing \n
-  /// %http://tizen.org/privilege/appmanager.launch
-  /// @remarks If you want to use this function, you must add privileges.
-  /// @remarks If the length of value list associated with the @a key is larger than 20, this function only returns the first 20 values.
-  /// @remarks The following example demonstrates how to use the data_control_map_get() method.
+  /// Gets the value list associated with the specified `key` from the key-values map owned by the key-value structured data control provider.
   ///
-  /// @code
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/datasharing>
+  /// - <http://tizen.org/privilege/appmanager.launch>
+  ///
+  /// **Remarks:**
+  /// - If you want to use this function, you must add privileges.
+  /// - If the length of value list associated with the `key` is larger than 20, this function only returns the first 20 values.
+  /// - The following example demonstrates how to use the data_control_map_get() method.
+  ///
+  /// **Parameters:**
+  /// - `provider` (in): The provider handle
+  /// - `key` (in): The key of the value list to obtain
+  /// - `request_id` (out): The request ID
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DATA_CONTROL_ERROR_IO_ERROR`: I/O error
+  /// - `DATA_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `DATA_CONTROL_ERROR_MAX_EXCEEDED`: Too long argument
+  ///
+  /// **See also:**
+  /// - `data_control_map_get_with_page()`
+  ///
+  /// ```
   ///
   /// void
   /// map_get_response_cb(int request_id, data_control_h provider, char **result_value_list,
@@ -2179,20 +2579,7 @@ class Tizen70DataControl {
   /// return result;
   /// }
   ///
-  /// @endcode
-  ///
-  /// @param[in] provider The provider handle
-  /// @param[in] key The key of the value list to obtain
-  /// @param[out] request_id The request ID
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DATA_CONTROL_ERROR_IO_ERROR I/O error
-  /// @retval #DATA_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #DATA_CONTROL_ERROR_MAX_EXCEEDED Too long argument
-  /// @see data_control_map_get_with_page()
+  /// ```
   int data_control_map_get(
     data_control_h provider,
     ffi.Pointer<ffi.Char> key,
@@ -2213,28 +2600,41 @@ class Tizen70DataControl {
       int Function(
           data_control_h, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the value list associated with the specified @a key from the key-values map owned by the key-value structured data control provider, with partition into pages.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/datasharing \n
-  /// %http://tizen.org/privilege/appmanager.launch
+  /// Gets the value list associated with the specified `key` from the key-values map owned by the key-value structured data control provider, with partition into pages.
   ///
-  /// @remarks If you want to use this function, you must add privileges.
-  /// @param[in] provider The provider handle
-  /// @param[in] key The key of the value list to obtain
-  /// @param[out] request_id The request ID
-  /// @param[in] page_number The page number of the value set \n
-  /// It starts from @c 1.
-  /// @param[in] count_per_page The desired maximum count of the data items per page
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DATA_CONTROL_ERROR_IO_ERROR I/O error
-  /// @retval #DATA_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #DATA_CONTROL_ERROR_MAX_EXCEEDED Too long argument
-  /// @see data_control_map_get()
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/datasharing>
+  /// - <http://tizen.org/privilege/appmanager.launch>
+  ///
+  /// **Remarks:**
+  /// - If you want to use this function, you must add privileges.
+  ///
+  /// **Parameters:**
+  /// - `provider` (in): The provider handle
+  /// - `key` (in): The key of the value list to obtain
+  /// - `request_id` (out): The request ID
+  /// - `page_number` (in): The page number of the value set It starts from `1`.
+  /// - `count_per_page` (in): The desired maximum count of the data items per page
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DATA_CONTROL_ERROR_IO_ERROR`: I/O error
+  /// - `DATA_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `DATA_CONTROL_ERROR_MAX_EXCEEDED`: Too long argument
+  ///
+  /// **See also:**
+  /// - `data_control_map_get()`
   int data_control_map_get_with_page(
     data_control_h provider,
     ffi.Pointer<ffi.Char> key,
@@ -2264,15 +2664,41 @@ class Tizen70DataControl {
           int Function(data_control_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Int>, int, int)>();
 
-  /// @brief Sets the value associated with the specified @a key to a new value.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/datasharing \n
-  /// %http://tizen.org/privilege/appmanager.launch
-  /// @remarks If you want to use this function, you must add privileges.
-  /// @remarks The following example demonstrates how to use the data_control_map_set() method.
+  /// Sets the value associated with the specified `key` to a new value.
   ///
-  /// @code
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/datasharing>
+  /// - <http://tizen.org/privilege/appmanager.launch>
+  ///
+  /// **Remarks:**
+  /// - If you want to use this function, you must add privileges.
+  /// - The following example demonstrates how to use the data_control_map_set() method.
+  ///
+  /// **Parameters:**
+  /// - `provider` (in): The provider handle
+  /// - `key` (in): The key of the value to replace
+  /// - `old_value` (in): The value to replace
+  /// - `new_value` (in): The new value that replaces the existing value
+  /// - `request_id` (out): The request ID
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DATA_CONTROL_ERROR_IO_ERROR`: I/O error
+  /// - `DATA_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `DATA_CONTROL_ERROR_MAX_EXCEEDED`: Too long argument
+  ///
+  /// ```
   ///
   /// void
   /// map_set_response_cb(int request_id, data_control_h provider, bool provider_result, const char *error, void *user_data)
@@ -2309,21 +2735,7 @@ class Tizen70DataControl {
   /// return result;
   /// }
   ///
-  /// @endcode
-  ///
-  /// @param[in] provider The provider handle
-  /// @param[in] key The key of the value to replace
-  /// @param[in] old_value The value to replace
-  /// @param[in] new_value The new value that replaces the existing value
-  /// @param[out] request_id The request ID
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DATA_CONTROL_ERROR_IO_ERROR I/O error
-  /// @retval #DATA_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #DATA_CONTROL_ERROR_MAX_EXCEEDED Too long argument
+  /// ```
   int data_control_map_set(
     data_control_h provider,
     ffi.Pointer<ffi.Char> key,
@@ -2352,15 +2764,40 @@ class Tizen70DataControl {
       int Function(data_control_h, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
           ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Adds the @a value associated with the specified @a key to the key-values map owned by the key-value structured data control provider.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/datasharing \n
-  /// %http://tizen.org/privilege/appmanager.launch
-  /// @remarks If you want to use this function, you must add privileges.
-  /// @remarks The following example demonstrates how to use the data_control_map_add() method.
+  /// Adds the `value` associated with the specified `key` to the key-values map owned by the key-value structured data control provider.
   ///
-  /// @code
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/datasharing>
+  /// - <http://tizen.org/privilege/appmanager.launch>
+  ///
+  /// **Remarks:**
+  /// - If you want to use this function, you must add privileges.
+  /// - The following example demonstrates how to use the data_control_map_add() method.
+  ///
+  /// **Parameters:**
+  /// - `provider` (in): The provider handle
+  /// - `key` (in): The key of the value to add
+  /// - `value` (in): The value to add
+  /// - `request_id` (out): The request ID
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DATA_CONTROL_ERROR_IO_ERROR`: I/O error
+  /// - `DATA_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `DATA_CONTROL_ERROR_MAX_EXCEEDED`: Too long argument
+  ///
+  /// ```
   ///
   /// void
   /// map_add_response_cb(int request_id, data_control_h provider, bool provider_result, const char *error, void *user_data)
@@ -2396,20 +2833,7 @@ class Tizen70DataControl {
   /// return result;
   /// }
   ///
-  /// @endcode
-  ///
-  /// @param[in] provider The provider handle
-  /// @param[in] key The key of the value to add
-  /// @param[in] value The value to add
-  /// @param[out] request_id The request ID
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DATA_CONTROL_ERROR_IO_ERROR I/O error
-  /// @retval #DATA_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #DATA_CONTROL_ERROR_MAX_EXCEEDED Too long argument
+  /// ```
   int data_control_map_add(
     data_control_h provider,
     ffi.Pointer<ffi.Char> key,
@@ -2435,15 +2859,40 @@ class Tizen70DataControl {
       int Function(data_control_h, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
           ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Removes the @a value associated with the specified @a key from the key-values map owned by the key-value structured data control provider.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/datasharing \n
-  /// %http://tizen.org/privilege/appmanager.launch
-  /// @remarks If you want to use this function, you must add privileges.
-  /// @remarks The following example demonstrates how to use the data_control_map_remove() method.
+  /// Removes the `value` associated with the specified `key` from the key-values map owned by the key-value structured data control provider.
   ///
-  /// @code
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/datasharing>
+  /// - <http://tizen.org/privilege/appmanager.launch>
+  ///
+  /// **Remarks:**
+  /// - If you want to use this function, you must add privileges.
+  /// - The following example demonstrates how to use the data_control_map_remove() method.
+  ///
+  /// **Parameters:**
+  /// - `provider` (in): The provider handle
+  /// - `key` (in): The key of the value to remove
+  /// - `value` (in): The value to remove
+  /// - `request_id` (out): The request ID
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DATA_CONTROL_ERROR_IO_ERROR`: I/O error
+  /// - `DATA_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `DATA_CONTROL_ERROR_MAX_EXCEEDED`: Too long argument
+  ///
+  /// ```
   ///
   /// void
   /// map_remove_response_cb(int request_id, data_control_h provider, bool provider_result, const char *error, void *user_data)
@@ -2479,20 +2928,7 @@ class Tizen70DataControl {
   /// return result;
   /// }
   ///
-  /// @endcode
-  ///
-  /// @param[in] provider The provider handle
-  /// @param[in] key The key of the value to remove
-  /// @param[in] value The value to remove
-  /// @param[out] request_id The request ID
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DATA_CONTROL_ERROR_IO_ERROR I/O error
-  /// @retval #DATA_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #DATA_CONTROL_ERROR_MAX_EXCEEDED Too long argument
+  /// ```
   int data_control_map_remove(
     data_control_h provider,
     ffi.Pointer<ffi.Char> key,
@@ -2518,15 +2954,39 @@ class Tizen70DataControl {
       int Function(data_control_h, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
           ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Adds multiple key-value pairs in one request.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/datasharing \n
-  /// %http://tizen.org/privilege/appmanager.launch
-  /// @remarks If you want to use this function, you must add privileges.
-  /// @remarks The following example demonstrates how to use the data_control_map_add_bulk_data() method.
+  /// Adds multiple key-value pairs in one request.
   ///
-  /// @code
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/datasharing>
+  /// - <http://tizen.org/privilege/appmanager.launch>
+  ///
+  /// **Remarks:**
+  /// - If you want to use this function, you must add privileges.
+  /// - The following example demonstrates how to use the data_control_map_add_bulk_data() method.
+  ///
+  /// **Parameters:**
+  /// - `provider` (in): The provider handle
+  /// - `bulk_data` (in): The bulk data handle
+  /// - `request_id` (out): The request ID
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DATA_CONTROL_ERROR_IO_ERROR`: I/O error
+  /// - `DATA_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `DATA_CONTROL_ERROR_MAX_EXCEEDED`: Too long argument. Bulk data total length cannot exceed 1MB
+  ///
+  /// ```
   ///
   /// void
   /// map_bulk_add_response_cb(int request_id, data_control_h provider, data_control_bulk_result_data_h bulk_results,
@@ -2576,19 +3036,7 @@ class Tizen70DataControl {
   /// return result;
   /// }
   ///
-  /// @endcode
-  ///
-  /// @param[in] provider The provider handle
-  /// @param[in] bulk_data The bulk data handle
-  /// @param[out] request_id The request ID
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DATA_CONTROL_ERROR_IO_ERROR I/O error
-  /// @retval #DATA_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #DATA_CONTROL_ERROR_MAX_EXCEEDED Too long argument. Bulk data total length cannot exceed 1MB
+  /// ```
   int data_control_map_add_bulk_data(
     data_control_h provider,
     data_control_bulk_data_h bulk_data,
@@ -2610,25 +3058,33 @@ class Tizen70DataControl {
           int Function(data_control_h, data_control_bulk_data_h,
               ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Registers an add bulk data callback for the MAP data control response.
-  /// The application is notified when a data control response is received
-  /// from the @a provider.
-  /// @since_tizen 3.0
+  /// Registers an add bulk data callback for the MAP data control response. The application is notified when a data control response is received from the `provider`.
   ///
-  /// @remarks Only one callback can be registered for each provider id with this
-  /// function. If you call this function multiple times for the same
-  /// provider id, any previously set callback will be overwritten.
-  /// @param[in] provider The provider handle
-  /// @param[in] callback The callback function to be called when a response is received
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DATA_CONTROL_ERROR_IO_ERROR I/O error
-  /// @retval #DATA_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
-  /// @see data_control_map_unregister_add_bulk_data_response_cb()
-  /// @see data_control_map_bind_add_bulk_data_response_cb()
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - Only one callback can be registered for each provider id with this
+  /// - function. If you call this function multiple times for the same
+  /// - provider id, any previously set callback will be overwritten.
+  ///
+  /// **Parameters:**
+  /// - `provider` (in): The provider handle
+  /// - `callback` (in): The callback function to be called when a response is received
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DATA_CONTROL_ERROR_IO_ERROR`: I/O error
+  /// - `DATA_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `data_control_map_unregister_add_bulk_data_response_cb()`
+  /// - `data_control_map_bind_add_bulk_data_response_cb()`
   int data_control_map_register_add_bulk_data_response_cb(
     data_control_h provider,
     data_control_bulk_cb callback,
@@ -2651,14 +3107,23 @@ class Tizen70DataControl {
           int Function(
               data_control_h, data_control_bulk_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unregisters the add bulk data callback.
-  /// @since_tizen 3.0
-  /// @param[in] provider The provider handle
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see data_control_map_register_add_bulk_data_response_cb()
+  /// Unregisters the add bulk data callback.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `provider` (in): The provider handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `data_control_map_register_add_bulk_data_response_cb()`
   int data_control_map_unregister_add_bulk_data_response_cb(
     data_control_h provider,
   ) {
@@ -2674,38 +3139,34 @@ class Tizen70DataControl {
       _data_control_map_unregister_add_bulk_data_response_cbPtr
           .asFunction<int Function(data_control_h)>();
 
-  /// @brief Binds a response callback function to a data control provider handle.
-  /// The application is notified when a data control response is received
-  /// from the @a provider.
-  /// @details This function is very similar to
-  /// data_control_map_register_response_cb(), which can register a
-  /// callback for a given provider id. Calling
-  /// data_control_map_register_response_cb() again overwrites the
-  /// callback previously set for the provider id, which means that only
-  /// one callback can be set for a given id.
-  /// data_control_map_bind_response_cb() binds a callback to the handle
-  /// of a provider, which allows registering multiple callbacks for a
-  /// given provider id. To do that, you can create new #data_control_h
-  /// for the same provider id and register callback for the
-  /// #data_control_h.
+  /// Binds a response callback function to a data control provider handle. The application is notified when a data control response is received from the `provider`.
   ///
-  /// @since_tizen 4.0
+  /// This function is very similar to data_control_map_register_response_cb(), which can register a callback for a given provider id. Calling data_control_map_register_response_cb() again overwrites the callback previously set for the provider id, which means that only one callback can be set for a given id. data_control_map_bind_response_cb() binds a callback to the handle of a provider, which allows registering multiple callbacks for a given provider id. To do that, you can create new `data_control_h` for the same provider id and register callback for the `data_control_h`.
   ///
-  /// @remarks If you call this function multiple times for the same handle, any
-  /// previously set callback will be overwritten.
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @param[in] provider  The provider handle
-  /// @param[in] callback  The callback function to be called
-  /// when a response is received
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DATA_CONTROL_ERROR_IO_ERROR I/O error
-  /// @retval #DATA_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
-  /// @see data_control_map_register_response_cb()
-  /// @see data_control_map_unbind_response_cb()
+  /// **Remarks:**
+  /// - If you call this function multiple times for the same handle, any
+  /// - previously set callback will be overwritten.
+  ///
+  /// **Parameters:**
+  /// - `provider` (in): The provider handle
+  /// - `callback` (in): The callback function to be called when a response is received
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DATA_CONTROL_ERROR_IO_ERROR`: I/O error
+  /// - `DATA_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `data_control_map_register_response_cb()`
+  /// - `data_control_map_unbind_response_cb()`
   int data_control_map_bind_response_cb(
     data_control_h provider,
     ffi.Pointer<data_control_map_response_cb> callback,
@@ -2731,15 +3192,23 @@ class Tizen70DataControl {
               ffi.Pointer<data_control_map_response_cb>,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unbinds the callback function in the @a provider.
-  /// @since_tizen 4.0
+  /// Unbinds the callback function in the `provider`.
   ///
-  /// @param[in] provider The provider handle
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see data_control_map_bind_response_cb()
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `provider` (in): The provider handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `data_control_map_bind_response_cb()`
   int data_control_map_unbind_response_cb(
     data_control_h provider,
   ) {
@@ -2755,35 +3224,34 @@ class Tizen70DataControl {
       _data_control_map_unbind_response_cbPtr
           .asFunction<int Function(data_control_h)>();
 
-  /// @brief Binds the add bulk data callback to the map data control response.
-  /// @details This function is very similar to
-  /// data_control_map_register_add_bulk_data_response_cb(), which can
-  /// register a callback for a given provider id. Calling
-  /// data_control_map_register_add_bulk_data_response_cb() again
-  /// overwrites the callback previously set for the provider id, which
-  /// means that only one callback can be set for a given id.
-  /// data_control_map_bind_add_bulk_data_response_cb() binds a
-  /// callback to the handle of a provider, which allows registering
-  /// multiple callbacks for a given provider id. To do that, you can
-  /// create new #data_control_h for the same provider id and register
-  /// callback for the #data_control_h.
+  /// Binds the add bulk data callback to the map data control response.
   ///
-  /// @since_tizen 4.0
-  /// @remarks If you call this function multiple times for the same handle,
-  /// any previously set callback will be overwritten.
+  /// This function is very similar to data_control_map_register_add_bulk_data_response_cb(), which can register a callback for a given provider id. Calling data_control_map_register_add_bulk_data_response_cb() again overwrites the callback previously set for the provider id, which means that only one callback can be set for a given id. data_control_map_bind_add_bulk_data_response_cb() binds a callback to the handle of a provider, which allows registering multiple callbacks for a given provider id. To do that, you can create new `data_control_h` for the same provider id and register callback for the `data_control_h`.
   ///
-  /// @param[in] provider  The provider handle
-  /// @param[in] callback  The callback function to be called
-  /// when a response is received
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DATA_CONTROL_ERROR_IO_ERROR I/O error
-  /// @retval #DATA_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
-  /// @see data_control_map_register_add_bulk_data_response_cb()
-  /// @see data_control_map_unbind_add_bulk_data_response_cb()
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Remarks:**
+  /// - If you call this function multiple times for the same handle,
+  /// - any previously set callback will be overwritten.
+  ///
+  /// **Parameters:**
+  /// - `provider` (in): The provider handle
+  /// - `callback` (in): The callback function to be called when a response is received
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DATA_CONTROL_ERROR_IO_ERROR`: I/O error
+  /// - `DATA_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `data_control_map_register_add_bulk_data_response_cb()`
+  /// - `data_control_map_unbind_add_bulk_data_response_cb()`
   int data_control_map_bind_add_bulk_data_response_cb(
     data_control_h provider,
     data_control_bulk_cb callback,
@@ -2806,15 +3274,23 @@ class Tizen70DataControl {
           int Function(
               data_control_h, data_control_bulk_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unbinds the add bulk data callback in the @a provider.
-  /// @since_tizen 4.0
+  /// Unbinds the add bulk data callback in the `provider`.
   ///
-  /// @param[in] provider The provider handle
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see data_control_map_bind_add_bulk_data_response_cb()
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `provider` (in): The provider handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `data_control_map_bind_add_bulk_data_response_cb()`
   int data_control_map_unbind_add_bulk_data_response_cb(
     data_control_h provider,
   ) {
@@ -2830,19 +3306,26 @@ class Tizen70DataControl {
       _data_control_map_unbind_add_bulk_data_response_cbPtr
           .asFunction<int Function(data_control_h)>();
 
-  /// @brief Gets the handle ID for @a provider.
-  /// @since_tizen 4.0
+  /// Gets the handle ID for `provider`.
   ///
-  /// @remarks @a handle_id is generated internally and it is unique for each
-  /// handle. This function can be used in callbacks to know for which
-  /// handle the callback was called.
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @param[in]  provider  The provider handle
-  /// @param[out] handle_id The handle ID for @a provider
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Remarks:**
+  /// - `handle_id` is generated internally and it is unique for each
+  /// - handle. This function can be used in callbacks to know for which
+  /// - handle the callback was called.
+  ///
+  /// **Parameters:**
+  /// - `provider` (in): The provider handle
+  /// - `handle_id` (out): The handle ID for `provider`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
   int data_control_map_get_handle_id(
     data_control_h provider,
     ffi.Pointer<ffi.Int> handle_id,
@@ -2861,22 +3344,29 @@ class Tizen70DataControl {
       _data_control_map_get_handle_idPtr
           .asFunction<int Function(data_control_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Registers a callback function for the SQL data control request.
-  /// The provider is notified when a data control request is received from the client applications.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/datasharing
+  /// Registers a callback function for the SQL data control request. The provider is notified when a data control request is received from the client applications.
   ///
-  /// @param[in] callback The callback function to be called when a data control request is received
-  /// @param[in] user_data The user data to be passed to the callback function
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DATA_CONTROL_ERROR_IO_ERROR I/O error
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/datasharing>
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): The callback function to be called when a data control request is received
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DATA_CONTROL_ERROR_IO_ERROR`: I/O error
   int data_control_provider_sql_register_cb(
     ffi.Pointer<data_control_provider_sql_cb> callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -2896,13 +3386,16 @@ class Tizen70DataControl {
           int Function(ffi.Pointer<data_control_provider_sql_cb>,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unregisters the SQL data control request callback functions.
-  /// @since_tizen 2.3
+  /// Unregisters the SQL data control request callback functions.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
   int data_control_provider_sql_unregister_cb() {
     return _data_control_provider_sql_unregister_cb();
   }
@@ -2913,22 +3406,29 @@ class Tizen70DataControl {
   late final _data_control_provider_sql_unregister_cb =
       _data_control_provider_sql_unregister_cbPtr.asFunction<int Function()>();
 
-  /// @brief Registers a callback function for the map data control request.
-  /// The provider is notified when a data control request is received from the client applications.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/datasharing
+  /// Registers a callback function for the map data control request. The provider is notified when a data control request is received from the client applications.
   ///
-  /// @param[in] callback The callback function to be called when a data control request is received
-  /// @param[in] user_data The user data to be passed to the callback function
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DATA_CONTROL_ERROR_IO_ERROR I/O error
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/datasharing>
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): The callback function to be called when a data control request is received
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DATA_CONTROL_ERROR_IO_ERROR`: I/O error
   int data_control_provider_map_register_cb(
     ffi.Pointer<data_control_provider_map_cb> callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -2948,13 +3448,16 @@ class Tizen70DataControl {
           int Function(ffi.Pointer<data_control_provider_map_cb>,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unregisters the map data control request callback functions.
-  /// @since_tizen 2.3
+  /// Unregisters the map data control request callback functions.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
   int data_control_provider_map_unregister_cb() {
     return _data_control_provider_map_unregister_cb();
   }
@@ -2965,21 +3468,26 @@ class Tizen70DataControl {
   late final _data_control_provider_map_unregister_cb =
       _data_control_provider_map_unregister_cbPtr.asFunction<int Function()>();
 
-  /// @brief Gets the application ID which sends the data control request.
-  /// @since_tizen 2.3
+  /// Gets the application ID which sends the data control request.
   ///
-  /// @remarks You must release @a appid using free() after it is used.
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @param[in] request_id The request ID
-  /// @param[out] appid The application ID
+  /// **Remarks:**
+  /// - You must release `appid` using free() after it is used.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Parameters:**
+  /// - `request_id` (in): The request ID
+  /// - `appid` (out): The application ID
   ///
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DATA_CONTROL_ERROR_IO_ERROR I/O error
-  /// @retval #DATA_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DATA_CONTROL_ERROR_IO_ERROR`: I/O error
+  /// - `DATA_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
   int data_control_provider_get_client_appid(
     int request_id,
     ffi.Pointer<ffi.Pointer<ffi.Char>> appid,
@@ -2998,19 +3506,23 @@ class Tizen70DataControl {
       _data_control_provider_get_client_appidPtr
           .asFunction<int Function(int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sends the success result and the result set of the select request to the client application.
-  /// @since_tizen 2.3
+  /// Sends the success result and the result set of the select request to the client application.
   ///
-  /// @param[in] request_id The request ID
-  /// @param[in] db_handle The result DB handle for the result set
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Parameters:**
+  /// - `request_id` (in): The request ID
+  /// - `db_handle` (in): The result DB handle for the result set
   ///
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DATA_CONTROL_ERROR_IO_ERROR I/O error
-  /// @retval #DATA_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DATA_CONTROL_ERROR_IO_ERROR`: I/O error
+  /// - `DATA_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
   int data_control_provider_send_select_result(
     int request_id,
     ffi.Pointer<ffi.Void> db_handle,
@@ -3028,19 +3540,23 @@ class Tizen70DataControl {
       _data_control_provider_send_select_resultPtr
           .asFunction<int Function(int, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Sends the success result of the insert request and the last inserted row ID to the client application.
-  /// @since_tizen 2.3
+  /// Sends the success result of the insert request and the last inserted row ID to the client application.
   ///
-  /// @param[in] request_id The request ID
-  /// @param[in] row_id The row ID of the database changed by the insert request
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Parameters:**
+  /// - `request_id` (in): The request ID
+  /// - `row_id` (in): The row ID of the database changed by the insert request
   ///
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DATA_CONTROL_ERROR_IO_ERROR I/O error
-  /// @retval #DATA_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DATA_CONTROL_ERROR_IO_ERROR`: I/O error
+  /// - `DATA_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
   int data_control_provider_send_insert_result(
     int request_id,
     int row_id,
@@ -3058,18 +3574,22 @@ class Tizen70DataControl {
       _data_control_provider_send_insert_resultPtr
           .asFunction<int Function(int, int)>();
 
-  /// @brief Sends the success result of the update request to the client application.
-  /// @since_tizen 2.3
+  /// Sends the success result of the update request to the client application.
   ///
-  /// @param[in] request_id The request ID
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Parameters:**
+  /// - `request_id` (in): The request ID
   ///
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DATA_CONTROL_ERROR_IO_ERROR I/O error
-  /// @retval #DATA_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DATA_CONTROL_ERROR_IO_ERROR`: I/O error
+  /// - `DATA_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
   int data_control_provider_send_update_result(
     int request_id,
   ) {
@@ -3085,18 +3605,22 @@ class Tizen70DataControl {
       _data_control_provider_send_update_resultPtr
           .asFunction<int Function(int)>();
 
-  /// @brief Sends the success result of the delete request to the client application.
-  /// @since_tizen 2.3
+  /// Sends the success result of the delete request to the client application.
   ///
-  /// @param[in] request_id The request ID
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Parameters:**
+  /// - `request_id` (in): The request ID
   ///
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DATA_CONTROL_ERROR_IO_ERROR I/O error
-  /// @retval #DATA_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DATA_CONTROL_ERROR_IO_ERROR`: I/O error
+  /// - `DATA_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
   int data_control_provider_send_delete_result(
     int request_id,
   ) {
@@ -3112,19 +3636,23 @@ class Tizen70DataControl {
       _data_control_provider_send_delete_resultPtr
           .asFunction<int Function(int)>();
 
-  /// @brief Sends the provider error message to the client application.
-  /// @since_tizen 2.3
+  /// Sends the provider error message to the client application.
   ///
-  /// @param[in] request_id The request ID
-  /// @param[in] error The provider-defined error message
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Parameters:**
+  /// - `request_id` (in): The request ID
+  /// - `error` (in): The provider-defined error message
   ///
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DATA_CONTROL_ERROR_IO_ERROR I/O error
-  /// @retval #DATA_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DATA_CONTROL_ERROR_IO_ERROR`: I/O error
+  /// - `DATA_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
   int data_control_provider_send_error(
     int request_id,
     ffi.Pointer<ffi.Char> error,
@@ -3142,18 +3670,22 @@ class Tizen70DataControl {
       _data_control_provider_send_errorPtr
           .asFunction<int Function(int, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sends the success result of the request for setting, adding, and removing the key-value structured data to the client application.
-  /// @since_tizen 2.3
+  /// Sends the success result of the request for setting, adding, and removing the key-value structured data to the client application.
   ///
-  /// @param[in] request_id The request ID
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Parameters:**
+  /// - `request_id` (in): The request ID
   ///
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DATA_CONTROL_ERROR_IO_ERROR I/O error
-  /// @retval #DATA_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DATA_CONTROL_ERROR_IO_ERROR`: I/O error
+  /// - `DATA_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
   int data_control_provider_send_map_result(
     int request_id,
   ) {
@@ -3168,20 +3700,24 @@ class Tizen70DataControl {
   late final _data_control_provider_send_map_result =
       _data_control_provider_send_map_resultPtr.asFunction<int Function(int)>();
 
-  /// @brief Sends the success result of the request for getting the value list to the client application.
-  /// @since_tizen 2.3
+  /// Sends the success result of the request for getting the value list to the client application.
   ///
-  /// @param[in] request_id The request ID
-  /// @param[in] value_list The result value list
-  /// @param[in] value_count The number of the values
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Parameters:**
+  /// - `request_id` (in): The request ID
+  /// - `value_list` (in): The result value list
+  /// - `value_count` (in): The number of the values
   ///
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DATA_CONTROL_ERROR_IO_ERROR I/O error
-  /// @retval #DATA_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DATA_CONTROL_ERROR_IO_ERROR`: I/O error
+  /// - `DATA_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
   int data_control_provider_send_map_get_value_result(
     int request_id,
     ffi.Pointer<ffi.Pointer<ffi.Char>> value_list,
@@ -3202,19 +3738,25 @@ class Tizen70DataControl {
       _data_control_provider_send_map_get_value_resultPtr.asFunction<
           int Function(int, ffi.Pointer<ffi.Pointer<ffi.Char>>, int)>();
 
-  /// @brief Creates SQL INSERT statement.
+  /// Creates SQL INSERT statement.
   ///
-  /// @since_tizen 2.3
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @remarks The specific error code can be obtained using the get_last_result() method. Error codes are described in Exception section.
-  /// @param[in] provider The provider handle
-  /// @param[in] insert_map The column-value pairs to insert
+  /// **Remarks:**
+  /// - The specific error code can be obtained using the get_last_result() method. Error codes are described in Exception section.
   ///
-  /// @return The SQL INSERT statement on success,
-  /// otherwise NULL
-  /// @exception #DATA_CONTROL_ERROR_NONE Success
-  /// @exception #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @exception #DATA_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Parameters:**
+  /// - `provider` (in): The provider handle
+  /// - `insert_map` (in): The column-value pairs to insert
+  ///
+  /// **Returns:**
+  /// - The SQL INSERT statement on success, otherwise NULL
+  ///
+  /// **Exceptions:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Success
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DATA_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
   ffi.Pointer<ffi.Char> data_control_provider_create_insert_statement(
     data_control_h provider,
     ffi.Pointer<bundle.bundle> insert_map,
@@ -3235,20 +3777,25 @@ class Tizen70DataControl {
           ffi.Pointer<ffi.Char> Function(
               data_control_h, ffi.Pointer<bundle.bundle>)>();
 
-  /// @brief Creates SQL DELETE statement.
+  /// Creates SQL DELETE statement.
   ///
-  /// @since_tizen 2.3
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @remarks The specific error code can be obtained using the get_last_result() method. Error codes are described in Exception section.
-  /// @param[in] provider The provider handle
-  /// @param[in] where A filter to select the desired rows to delete \n
-  /// Pass @c NULL if all rows need to be deleted
+  /// **Remarks:**
+  /// - The specific error code can be obtained using the get_last_result() method. Error codes are described in Exception section.
   ///
-  /// @return The SQL DELETE statement on success,
-  /// otherwise NULL
-  /// @exception #DATA_CONTROL_ERROR_NONE Success
-  /// @exception #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @exception #DATA_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Parameters:**
+  /// - `provider` (in): The provider handle
+  /// - `where` (in): A filter to select the desired rows to delete Pass `NULL` if all rows need to be deleted
+  ///
+  /// **Returns:**
+  /// - The SQL DELETE statement on success, otherwise NULL
+  ///
+  /// **Exceptions:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Success
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DATA_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
   ffi.Pointer<ffi.Char> data_control_provider_create_delete_statement(
     data_control_h provider,
     ffi.Pointer<ffi.Char> where,
@@ -3269,20 +3816,26 @@ class Tizen70DataControl {
           ffi.Pointer<ffi.Char> Function(
               data_control_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Creates SQL UPDATE statement.
+  /// Creates SQL UPDATE statement.
   ///
-  /// @since_tizen 2.3
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @remarks The specific error code can be obtained using the get_last_result() method. Error codes are described in Exception section.
-  /// @param[in] provider The provider handle
-  /// @param[in] update_map The column-value pairs to update
-  /// @param[in] where A filter to select the desired rows to update
+  /// **Remarks:**
+  /// - The specific error code can be obtained using the get_last_result() method. Error codes are described in Exception section.
   ///
-  /// @return The SQL UPDATE statement on success,
-  /// otherwise NULL
-  /// @exception #DATA_CONTROL_ERROR_NONE Success
-  /// @exception #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @exception #DATA_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Parameters:**
+  /// - `provider` (in): The provider handle
+  /// - `update_map` (in): The column-value pairs to update
+  /// - `where` (in): A filter to select the desired rows to update
+  ///
+  /// **Returns:**
+  /// - The SQL UPDATE statement on success, otherwise NULL
+  ///
+  /// **Exceptions:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Success
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DATA_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
   ffi.Pointer<ffi.Char> data_control_provider_create_update_statement(
     data_control_h provider,
     ffi.Pointer<bundle.bundle> update_map,
@@ -3305,23 +3858,28 @@ class Tizen70DataControl {
           ffi.Pointer<ffi.Char> Function(data_control_h,
               ffi.Pointer<bundle.bundle>, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Creates SQL SELECT statement.
+  /// Creates SQL SELECT statement.
   ///
-  /// @since_tizen 2.3
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @remarks The specific error code can be obtained using the get_last_result() method. Error codes are described in Exception section.
-  /// @param[in] provider The provider handle
-  /// @param[in] column_list The column names to query \n
-  /// Pass @c NULL if all columns need to be selected
-  /// @param[in] column_count The total number of columns to be queried
-  /// @param[in] where A filter to select the desired rows
-  /// @param[in] order The sorting order of rows to query
+  /// **Remarks:**
+  /// - The specific error code can be obtained using the get_last_result() method. Error codes are described in Exception section.
   ///
-  /// @return The SQL SELECT statement on success,
-  /// otherwise NULL
-  /// @exception #DATA_CONTROL_ERROR_NONE Success
-  /// @exception #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @exception #DATA_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Parameters:**
+  /// - `provider` (in): The provider handle
+  /// - `column_list` (in): The column names to query Pass `NULL` if all columns need to be selected
+  /// - `column_count` (in): The total number of columns to be queried
+  /// - `where` (in): A filter to select the desired rows
+  /// - `order` (in): The sorting order of rows to query
+  ///
+  /// **Returns:**
+  /// - The SQL SELECT statement on success, otherwise NULL
+  ///
+  /// **Exceptions:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Success
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DATA_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
   ffi.Pointer<ffi.Char> data_control_provider_create_select_statement(
     data_control_h provider,
     ffi.Pointer<ffi.Pointer<ffi.Char>> column_list,
@@ -3356,19 +3914,25 @@ class Tizen70DataControl {
               ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Checks whether the given provider ID matches the provider handle's provider ID.
+  /// Checks whether the given provider ID matches the provider handle's provider ID.
   ///
-  /// @since_tizen 2.3
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @remarks The specific error code can be obtained using the get_last_result() method. Error codes are described in Exception section.
-  /// @param[in] provider The provider handle
-  /// @param[in] provider_id The provider ID to be compared with handle's provider ID
+  /// **Remarks:**
+  /// - The specific error code can be obtained using the get_last_result() method. Error codes are described in Exception section.
   ///
-  /// @return @c true if the provider_id matches,
-  /// otherwise @c false if it does not match
-  /// @exception #DATA_CONTROL_ERROR_NONE Success
-  /// @exception #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @exception #DATA_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Parameters:**
+  /// - `provider` (in): The provider handle
+  /// - `provider_id` (in): The provider ID to be compared with handle's provider ID
+  ///
+  /// **Returns:**
+  /// - `true` if the provider_id matches, otherwise `false` if it does not match
+  ///
+  /// **Exceptions:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Success
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DATA_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
   bool data_control_provider_match_provider_id(
     data_control_h provider,
     ffi.Pointer<ffi.Char> provider_id,
@@ -3387,19 +3951,25 @@ class Tizen70DataControl {
       _data_control_provider_match_provider_idPtr
           .asFunction<bool Function(data_control_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Checks whether the given data ID matches the provider handle's data ID.
+  /// Checks whether the given data ID matches the provider handle's data ID.
   ///
-  /// @since_tizen 2.3
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @remarks The specific error code can be obtained using the get_last_result() method. Error codes are described in Exception section.
-  /// @param[in] provider The provider handle
-  /// @param[in] data_id The data ID to be compared with handle's data ID
+  /// **Remarks:**
+  /// - The specific error code can be obtained using the get_last_result() method. Error codes are described in Exception section.
   ///
-  /// @return @c true if the @a data_id matches,
-  /// otherwise @c false if it does not match
-  /// @exception #DATA_CONTROL_ERROR_NONE Success
-  /// @exception #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @exception #DATA_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Parameters:**
+  /// - `provider` (in): The provider handle
+  /// - `data_id` (in): The data ID to be compared with handle's data ID
+  ///
+  /// **Returns:**
+  /// - `true` if the `data_id` matches, otherwise `false` if it does not match
+  ///
+  /// **Exceptions:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Success
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DATA_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
   bool data_control_provider_match_data_id(
     data_control_h provider,
     ffi.Pointer<ffi.Char> data_id,
@@ -3418,27 +3988,39 @@ class Tizen70DataControl {
       _data_control_provider_match_data_idPtr
           .asFunction<bool Function(data_control_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sends a data change notification to consumer applications which have successfully added a data change callback.
-  /// @details If the function is successful, data_control_data_change_cb() callback will be called under certain conditions.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/datasharing
+  /// Sends a data change notification to consumer applications which have successfully added a data change callback.
   ///
-  /// @param[in] provider Target provider handle
-  /// @param[in] type Changed data type
-  /// @param[in] data Customized information about changed data
+  /// If the function is successful, data_control_data_change_cb() callback will be called under certain conditions.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DATA_CONTROL_ERROR_IO_ERROR I/O error
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre The consumer should call data_control_add_data_change_cb() to receive data change notifications
-  /// @see data_control_data_change_cb()
-  /// @see data_control_add_data_change_cb()
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/datasharing>
+  ///
+  /// **Parameters:**
+  /// - `provider` (in): Target provider handle
+  /// - `type` (in): Changed data type
+  /// - `data` (in): Customized information about changed data
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DATA_CONTROL_ERROR_IO_ERROR`: I/O error
+  ///
+  /// **Preconditions:**
+  /// - The consumer should call data_control_add_data_change_cb() to receive data change notifications
+  ///
+  /// **See also:**
+  /// - `data_control_data_change_cb()`
+  /// - `data_control_add_data_change_cb()`
   int data_control_provider_send_data_change_noti(
     data_control_h provider,
     int type,
@@ -3460,22 +4042,30 @@ class Tizen70DataControl {
       _data_control_provider_send_data_change_notiPtr.asFunction<
           int Function(data_control_h, int, ffi.Pointer<bundle.bundle>)>();
 
-  /// @brief Adds a consumer filter for the data changed callback addition process.
-  /// @since_tizen 3.0
-  /// @remarks If the provider does not add any filters by calling this function, all requests to add a data change callback will be granted. \n
-  /// If filters are added, and at least one filter returns false for a consumer application, the application will not be able to add data change callbacks.
+  /// Adds a consumer filter for the data changed callback addition process.
   ///
-  /// @param[in] callback Consumer filter callback, filtering consumers which try to add data changed callback
-  /// @param[in] user_data The user data to be passed to the list_cb function
-  /// @param[out] callback_id Added callback ID
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Remarks:**
+  /// - If the provider does not add any filters by calling this function, all requests to add a data change callback will be granted.
+  /// - If filters are added, and at least one filter returns false for a consumer application, the application will not be able to add data change callbacks.
   ///
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DATA_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
-  /// @see data_control_provider_data_change_consumer_filter_cb()
+  /// **Parameters:**
+  /// - `callback` (in): Consumer filter callback, filtering consumers which try to add data changed callback
+  /// - `user_data` (in): The user data to be passed to the list_cb function
+  /// - `callback_id` (out): Added callback ID
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DATA_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `data_control_provider_data_change_consumer_filter_cb()`
   int data_control_provider_add_data_change_consumer_filter_cb(
     data_control_provider_data_change_consumer_filter_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -3501,16 +4091,20 @@ class Tizen70DataControl {
           int Function(data_control_provider_data_change_consumer_filter_cb,
               ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Removes a consumer filter for the data changed callback addition process.
-  /// @since_tizen 3.0
+  /// Removes a consumer filter for the data changed callback addition process.
   ///
-  /// @param[in] callback_id Target callback ID
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Parameters:**
+  /// - `callback_id` (in): Target callback ID
   ///
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
   int data_control_provider_remove_data_change_consumer_filter_cb(
     int callback_id,
   ) {
@@ -3526,23 +4120,31 @@ class Tizen70DataControl {
       _data_control_provider_remove_data_change_consumer_filter_cbPtr
           .asFunction<int Function(int)>();
 
-  /// @brief Retrieves ids of all applications which receive data change notifications from a given provider.
-  /// @details This function calls data_control_provider_data_change_consumer_cb() once for each provider's notification target consumer id. \n
-  /// If the data_control_provider_data_change_consumer_cb() callback function returns @c false, then iteration will be finished.
-  /// @since_tizen 3.0
+  /// Retrieves ids of all applications which receive data change notifications from a given provider.
   ///
-  /// @param[in] provider Target provider handle
-  /// @param[in] list_cb The iteration callback function
-  /// @param[in] user_data The user data to be passed to the list_cb function
+  /// This function calls data_control_provider_data_change_consumer_cb() once for each provider's notification target consumer id. If the data_control_provider_data_change_consumer_cb() callback function returns `false`, then iteration will be finished.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DATA_CONTROL_ERROR_IO_ERROR I/O error
-  /// @post This function invokes data_control_provider_data_change_consumer_cb().
-  /// @see data_control_provider_data_change_consumer_cb()
+  /// **Parameters:**
+  /// - `provider` (in): Target provider handle
+  /// - `list_cb` (in): The iteration callback function
+  /// - `user_data` (in): The user data to be passed to the list_cb function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DATA_CONTROL_ERROR_IO_ERROR`: I/O error
+  ///
+  /// **Postconditions:**
+  /// - This function invokes data_control_provider_data_change_consumer_cb().
+  ///
+  /// **See also:**
+  /// - `data_control_provider_data_change_consumer_cb()`
   int data_control_provider_foreach_data_change_consumer(
     data_control_h provider,
     data_control_provider_data_change_consumer_cb list_cb,
@@ -3569,19 +4171,23 @@ class Tizen70DataControl {
               data_control_provider_data_change_consumer_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Sends the result of the bulk insert request to the client application.
-  /// @since_tizen 3.0
+  /// Sends the result of the bulk insert request to the client application.
   ///
-  /// @param[in] request_id The request ID
-  /// @param[in] bulk_results The bulk add result for each data
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Parameters:**
+  /// - `request_id` (in): The request ID
+  /// - `bulk_results` (in): The bulk add result for each data
   ///
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DATA_CONTROL_ERROR_IO_ERROR I/O error
-  /// @retval #DATA_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DATA_CONTROL_ERROR_IO_ERROR`: I/O error
+  /// - `DATA_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
   int data_control_provider_send_bulk_insert_result(
     int request_id,
     data_control_bulk_result_data_h bulk_results,
@@ -3600,19 +4206,23 @@ class Tizen70DataControl {
       _data_control_provider_send_bulk_insert_resultPtr
           .asFunction<int Function(int, data_control_bulk_result_data_h)>();
 
-  /// @brief Sends the result of the bulk add request to the client application.
-  /// @since_tizen 3.0
+  /// Sends the result of the bulk add request to the client application.
   ///
-  /// @param[in] request_id The request ID
-  /// @param[in] bulk_results The bulk add result for each data
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Parameters:**
+  /// - `request_id` (in): The request ID
+  /// - `bulk_results` (in): The bulk add result for each data
   ///
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DATA_CONTROL_ERROR_IO_ERROR I/O error
-  /// @retval #DATA_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DATA_CONTROL_ERROR_IO_ERROR`: I/O error
+  /// - `DATA_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
   int data_control_provider_send_map_bulk_add_result(
     int request_id,
     data_control_bulk_result_data_h bulk_results,
@@ -3631,22 +4241,31 @@ class Tizen70DataControl {
       _data_control_provider_send_map_bulk_add_resultPtr
           .asFunction<int Function(int, data_control_bulk_result_data_h)>();
 
-  /// @brief Registers a callback for the SQL bulk data request.
-  /// @details The provider is notified when a data control request is received from the client applications.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/datasharing
+  /// Registers a callback for the SQL bulk data request.
   ///
-  /// @param[in] callback  The callback function to be called when a data control request is received
-  /// @param[in] user_data The user data to be passed to the callback function
+  /// The provider is notified when a data control request is received from the client applications.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DATA_CONTROL_ERROR_IO_ERROR I/O error
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/datasharing>
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): The callback function to be called when a data control request is received
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DATA_CONTROL_ERROR_IO_ERROR`: I/O error
   int data_control_provider_sql_register_insert_bulk_data_request_cb(
     data_control_provider_bulk_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -3669,14 +4288,19 @@ class Tizen70DataControl {
               int Function(
                   data_control_provider_bulk_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unregisters the callback for the SQL bulk data request.
-  /// @since_tizen 3.0
+  /// Unregisters the callback for the SQL bulk data request.
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @see data_control_provider_sql_register_insert_bulk_data_request_cb()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  ///
+  /// **See also:**
+  /// - `data_control_provider_sql_register_insert_bulk_data_request_cb()`
   int data_control_provider_sql_unregister_insert_bulk_data_request_cb() {
     return _data_control_provider_sql_unregister_insert_bulk_data_request_cb();
   }
@@ -3688,22 +4312,31 @@ class Tizen70DataControl {
       _data_control_provider_sql_unregister_insert_bulk_data_request_cbPtr
           .asFunction<int Function()>();
 
-  /// @brief Registers a callback for the MAP bulk data request.
-  /// @details The provider is notified when a data control request is received from the client applications.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/datasharing
+  /// Registers a callback for the MAP bulk data request.
   ///
-  /// @param[in]  callback  The callback function to be called when a data control request is received
-  /// @param[in]  user_data The user data to be passed to the callback function
+  /// The provider is notified when a data control request is received from the client applications.
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @retval #DATA_CONTROL_ERROR_NONE              Successful
-  /// @retval #DATA_CONTROL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DATA_CONTROL_ERROR_IO_ERROR I/O error
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/datasharing>
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): The callback function to be called when a data control request is received
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DATA_CONTROL_ERROR_IO_ERROR`: I/O error
   int data_control_provider_map_register_add_bulk_data_request_cb(
     data_control_provider_bulk_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -3726,14 +4359,19 @@ class Tizen70DataControl {
               int Function(
                   data_control_provider_bulk_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unregisters the callback for the MAP bulk data request.
-  /// @since_tizen 3.0
+  /// Unregisters the callback for the MAP bulk data request.
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @see data_control_provider_map_register_add_bulk_data_request_cb()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  ///
+  /// **See also:**
+  /// - `data_control_provider_map_register_add_bulk_data_request_cb()`
   int data_control_provider_map_unregister_add_bulk_data_request_cb() {
     return _data_control_provider_map_unregister_add_bulk_data_request_cb();
   }
@@ -3745,31 +4383,45 @@ class Tizen70DataControl {
       _data_control_provider_map_unregister_add_bulk_data_request_cbPtr
           .asFunction<int Function()>();
 
-  /// @brief Asynchronously adds a data changed callback, which is called whenever the provider's data is changed.
-  /// @details The function attempts to add the callback asynchronously and calls result_callback to inform about the result of the attempt. \n
-  /// If the function is successful, result_callback will be called. \n
-  /// The provider will call any filters which were added for the callback addition process.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/datasharing \n
-  /// %http://tizen.org/privilege/appmanager.launch
-  /// @remarks If you want to use this function, you must add privileges.
-  /// @param[in] provider  Target provider handle
-  /// @param[in] callback  The callback function to be called when consumer receives data change notification
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @param[in] result_callback The callback function to be called when consumer receives add data change callback process result
-  /// @param[in] result_cb_user_data The user data to be passed to the result_callback function
-  /// @param[out] callback_id Added callback ID, it can be used to remove the callback
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DATA_CONTROL_ERROR_IO_ERROR I/O error
-  /// @retval #DATA_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
-  /// @see data_control_data_change_cb()
-  /// @see data_control_add_callback_result_cb()
-  /// @see data_control_provider_add_data_change_consumer_filter_cb()
+  /// Asynchronously adds a data changed callback, which is called whenever the provider's data is changed.
+  ///
+  /// The function attempts to add the callback asynchronously and calls result_callback to inform about the result of the attempt. If the function is successful, result_callback will be called. The provider will call any filters which were added for the callback addition process.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/datasharing>
+  /// - <http://tizen.org/privilege/appmanager.launch>
+  ///
+  /// **Remarks:**
+  /// - If you want to use this function, you must add privileges.
+  ///
+  /// **Parameters:**
+  /// - `provider` (in): Target provider handle
+  /// - `callback` (in): The callback function to be called when consumer receives data change notification
+  /// - `user_data` (in): The user data to be passed to the callback function
+  /// - `result_callback` (in): The callback function to be called when consumer receives add data change callback process result
+  /// - `result_cb_user_data` (in): The user data to be passed to the result_callback function
+  /// - `callback_id` (out): Added callback ID, it can be used to remove the callback
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DATA_CONTROL_ERROR_IO_ERROR`: I/O error
+  /// - `DATA_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `data_control_data_change_cb()`
+  /// - `data_control_add_callback_result_cb()`
+  /// - `data_control_provider_add_data_change_consumer_filter_cb()`
   int data_control_add_data_change_cb(
     data_control_h provider,
     data_control_data_change_cb callback,
@@ -3807,21 +4459,34 @@ class Tizen70DataControl {
               ffi.Pointer<ffi.Void>,
               ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Removes data change callback function.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/datasharing \n
-  /// %http://tizen.org/privilege/appmanager.launch
-  /// @remarks If you want to use this function, you must add privileges.
-  /// @param[in] provider Target provider handle
-  /// @param[in] callback_id Target callback ID
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #DATA_CONTROL_ERROR_NONE Successful
-  /// @retval #DATA_CONTROL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DATA_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DATA_CONTROL_ERROR_IO_ERROR I/O error
-  /// @retval #DATA_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
+  /// Removes data change callback function.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/datasharing>
+  /// - <http://tizen.org/privilege/appmanager.launch>
+  ///
+  /// **Remarks:**
+  /// - If you want to use this function, you must add privileges.
+  ///
+  /// **Parameters:**
+  /// - `provider` (in): Target provider handle
+  /// - `callback_id` (in): Target callback ID
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DATA_CONTROL_ERROR_NONE`: Successful
+  /// - `DATA_CONTROL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DATA_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DATA_CONTROL_ERROR_IO_ERROR`: I/O error
+  /// - `DATA_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
   int data_control_remove_data_change_cb(
     data_control_h provider,
     int callback_id,
@@ -3840,15 +4505,23 @@ class Tizen70DataControl {
           .asFunction<int Function(data_control_h, int)>();
 }
 
+/// @nodoc
 final class result_set_s extends ffi.Opaque {}
 
-/// @brief The structure type to represent a SQL result set.
-/// @details This type can be used to enumerate through the result set of an SQL query.
-/// @since_tizen 2.3
+/// The structure type to represent a SQL result set.
+///
+/// This type can be used to enumerate through the result set of an SQL query.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 typedef result_set_cursor = ffi.Pointer<result_set_s>;
 
-/// @brief Enumeration for different types of columns in a SQL table.
-/// @since_tizen 2.3
+/// Enumeration for different types of columns in a SQL table.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 abstract class data_control_sql_column_type_e {
   /// < undefined type
   static const int DATA_CONTROL_SQL_COLUMN_TYPE_UNDEFINED = 0;
@@ -3869,26 +4542,38 @@ abstract class data_control_sql_column_type_e {
   static const int DATA_CONTROL_SQL_COLUMN_TYPE_NULL = 5;
 }
 
-/// @brief The bulk data handle.
-/// @since_tizen 3.0
+/// The bulk data handle.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 typedef data_control_bulk_data_h = ffi.Pointer<data_control_bulk_data_s>;
 
+/// @nodoc
 final class data_control_bulk_data_s extends ffi.Opaque {}
 
-/// @brief The bulk result data handle.
-/// @since_tizen 3.0
+/// The bulk result data handle.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 typedef data_control_bulk_result_data_h
     = ffi.Pointer<data_control_bulk_result_data_s>;
 
+/// @nodoc
 final class data_control_bulk_result_data_s extends ffi.Opaque {}
 
-/// @brief The structure type to contain the set of callback functions for handling the response events of the SQL-friendly interface based data control.
-/// @since_tizen 2.3
+/// The structure type to contain the set of callback functions for handling the response events of the SQL-friendly interface based data control.
 ///
-/// @see data_control_sql_select_response_cb()
-/// @see data_control_sql_insert_response_cb()
-/// @see data_control_sql_update_response_cb()
-/// @see data_control_sql_delete_response_cb()
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **See also:**
+/// - `data_control_sql_select_response_cb()`
+/// - `data_control_sql_insert_response_cb()`
+/// - `data_control_sql_update_response_cb()`
+/// - `data_control_sql_delete_response_cb()`
+/// @nodoc
 final class data_control_sql_response_cb extends ffi.Struct {
   /// < This callback function is called when a response is received for an select operation from an application using the SQL-friendly interface based data control.
   external data_control_sql_select_response_cb select_cb;
@@ -3903,21 +4588,25 @@ final class data_control_sql_response_cb extends ffi.Struct {
   external data_control_sql_delete_response_cb delete_cb;
 }
 
-/// @brief Called when a response is received for a select operation from an application using the SQL-friendly interface based data control.
-/// @since_tizen 2.3
+/// Called when a response is received for a select operation from an application using the SQL-friendly interface based data control.
 ///
-/// @remarks @a enumerator will be removed after the execution of this callback.
+/// **Since Tizen:**
+/// - 2.3
 ///
-/// @param[in] request_id The request ID
-/// @param[in] provider The provider handle. @a provider is valid only inside this function \n
-/// @a provider should not be destroyed
-/// @param[in] enumerator The enumerator for navigating the result of data control select request
-/// @param[in] provider_result Set to @c true if the data control provider successfully processed, \n
-/// otherwise set to @c false
-/// @param[in] error The error message from the data control provider
-/// @param[in] user_data The user data passed from the register function
+/// **Remarks:**
+/// - `enumerator` will be removed after the execution of this callback.
+///
+/// **Parameters:**
+/// - `request_id` (in): The request ID
+/// - `provider` (in): The provider handle. `provider` is valid only inside this function `provider` should not be destroyed
+/// - `enumerator` (in): The enumerator for navigating the result of data control select request
+/// - `provider_result` (in): Set to `true` if the data control provider successfully processed, otherwise set to `false`
+/// - `error` (in): The error message from the data control provider
+/// - `user_data` (in): The user data passed from the register function
+/// @nodoc
 typedef data_control_sql_select_response_cb = ffi
     .Pointer<ffi.NativeFunction<data_control_sql_select_response_cbFunction>>;
+/// @nodoc
 typedef data_control_sql_select_response_cbFunction = ffi.Void Function(
     ffi.Int request_id,
     data_control_h provider,
@@ -3925,6 +4614,7 @@ typedef data_control_sql_select_response_cbFunction = ffi.Void Function(
     ffi.Bool provider_result,
     ffi.Pointer<ffi.Char> error,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartdata_control_sql_select_response_cbFunction = void Function(
     int request_id,
     data_control_h provider,
@@ -3933,25 +4623,32 @@ typedef Dartdata_control_sql_select_response_cbFunction = void Function(
     ffi.Pointer<ffi.Char> error,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief The structure type for the provider handle.
-/// @since_tizen 2.3
+/// The structure type for the provider handle.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 typedef data_control_h = ffi.Pointer<data_control_s>;
 
+/// @nodoc
 final class data_control_s extends ffi.Opaque {}
 
-/// @brief Called when a response is received for an insert operation from an application using the SQL-friendly interface based data control.
-/// @since_tizen 2.3
+/// Called when a response is received for an insert operation from an application using the SQL-friendly interface based data control.
 ///
-/// @param[in] request_id The request ID
-/// @param[in] provider The provider handle. @a provider is valid only inside this function \n
-/// @a provider should not be destroyed
-/// @param[in] inserted_row_id The inserted row ID set by the data control
-/// @param[in] provider_result Set to @c true if the data control provider successfully processed, \n
-/// otherwise set to @c false
-/// @param[in] error The error message from the data control provider
-/// @param[in] user_data The user data passed from the register function
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **Parameters:**
+/// - `request_id` (in): The request ID
+/// - `provider` (in): The provider handle. `provider` is valid only inside this function `provider` should not be destroyed
+/// - `inserted_row_id` (in): The inserted row ID set by the data control
+/// - `provider_result` (in): Set to `true` if the data control provider successfully processed, otherwise set to `false`
+/// - `error` (in): The error message from the data control provider
+/// - `user_data` (in): The user data passed from the register function
+/// @nodoc
 typedef data_control_sql_insert_response_cb = ffi
     .Pointer<ffi.NativeFunction<data_control_sql_insert_response_cbFunction>>;
+/// @nodoc
 typedef data_control_sql_insert_response_cbFunction = ffi.Void Function(
     ffi.Int request_id,
     data_control_h provider,
@@ -3959,6 +4656,7 @@ typedef data_control_sql_insert_response_cbFunction = ffi.Void Function(
     ffi.Bool provider_result,
     ffi.Pointer<ffi.Char> error,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartdata_control_sql_insert_response_cbFunction = void Function(
     int request_id,
     data_control_h provider,
@@ -3967,24 +4665,28 @@ typedef Dartdata_control_sql_insert_response_cbFunction = void Function(
     ffi.Pointer<ffi.Char> error,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when a response is received for an update operation from an application using the SQL-friendly interface based data control.
-/// @since_tizen 2.3
+/// Called when a response is received for an update operation from an application using the SQL-friendly interface based data control.
 ///
-/// @param[in] request_id The request ID
-/// @param[in] provider The provider handle. @a provider is valid only inside this function \n
-/// @a provider should not be destroyed
-/// @param[in] provider_result Set to @c true if the data control provider successfully processed, \n
-/// otherwise set to @c false
-/// @param[in] error The error message from the data control provider
-/// @param[in] user_data The user data passed from the register function
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **Parameters:**
+/// - `request_id` (in): The request ID
+/// - `provider` (in): The provider handle. `provider` is valid only inside this function `provider` should not be destroyed
+/// - `provider_result` (in): Set to `true` if the data control provider successfully processed, otherwise set to `false`
+/// - `error` (in): The error message from the data control provider
+/// - `user_data` (in): The user data passed from the register function
+/// @nodoc
 typedef data_control_sql_update_response_cb = ffi
     .Pointer<ffi.NativeFunction<data_control_sql_update_response_cbFunction>>;
+/// @nodoc
 typedef data_control_sql_update_response_cbFunction = ffi.Void Function(
     ffi.Int request_id,
     data_control_h provider,
     ffi.Bool provider_result,
     ffi.Pointer<ffi.Char> error,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartdata_control_sql_update_response_cbFunction = void Function(
     int request_id,
     data_control_h provider,
@@ -3992,24 +4694,28 @@ typedef Dartdata_control_sql_update_response_cbFunction = void Function(
     ffi.Pointer<ffi.Char> error,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when a response is received for a delete operation from an application using the SQL-friendly interface based data control.
-/// @since_tizen 2.3
+/// Called when a response is received for a delete operation from an application using the SQL-friendly interface based data control.
 ///
-/// @param[in] request_id The request ID that identifies the data control
-/// @param[in] provider The provider handle. @a provider is valid only inside this function \n
-/// @a provider should not be destroyed
-/// @param[in] provider_result Set to @c true if the data control provider successfully processed, \n
-/// otherwise set to @c false
-/// @param[in] error The error message from the data control provider
-/// @param[in] user_data The user data passed from the register function
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **Parameters:**
+/// - `request_id` (in): The request ID that identifies the data control
+/// - `provider` (in): The provider handle. `provider` is valid only inside this function `provider` should not be destroyed
+/// - `provider_result` (in): Set to `true` if the data control provider successfully processed, otherwise set to `false`
+/// - `error` (in): The error message from the data control provider
+/// - `user_data` (in): The user data passed from the register function
+/// @nodoc
 typedef data_control_sql_delete_response_cb = ffi
     .Pointer<ffi.NativeFunction<data_control_sql_delete_response_cbFunction>>;
+/// @nodoc
 typedef data_control_sql_delete_response_cbFunction = ffi.Void Function(
     ffi.Int request_id,
     data_control_h provider,
     ffi.Bool provider_result,
     ffi.Pointer<ffi.Char> error,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartdata_control_sql_delete_response_cbFunction = void Function(
     int request_id,
     data_control_h provider,
@@ -4017,23 +4723,26 @@ typedef Dartdata_control_sql_delete_response_cbFunction = void Function(
     ffi.Pointer<ffi.Char> error,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when a response is received for a bulk operation from a provider application.
-/// @since_tizen 3.0
+/// Called when a response is received for a bulk operation from a provider application.
 ///
-/// @param[in] request_id The request ID
-/// @param[in] provider The provider handle. @a provider is valid only inside this function. \n
-/// @a provider should not be destroyed.
-/// @param[in] bulk_results The result data for each insert request. @a bulk_results is valid only inside this function. \n
-/// @a bulk_results should not be freed.
-/// @param[in] provider_result Set to @c true if the data control provider successfully processed, \n
-/// otherwise set to @c false
-/// @param[in] error The error message from the data control provider. @a error is valid only inside this function. \n
-/// @a error should not be freed.
-/// @param[in] user_data The user data passed from the register function
-/// @see data_control_sql_register_insert_bulk_data_response_cb()
-/// @see data_control_map_register_add_bulk_data_response_cb()
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `request_id` (in): The request ID
+/// - `provider` (in): The provider handle. `provider` is valid only inside this function. `provider` should not be destroyed.
+/// - `bulk_results` (in): The result data for each insert request. `bulk_results` is valid only inside this function. `bulk_results` should not be freed.
+/// - `provider_result` (in): Set to `true` if the data control provider successfully processed, otherwise set to `false`
+/// - `error` (in): The error message from the data control provider. `error` is valid only inside this function. `error` should not be freed.
+/// - `user_data` (in): The user data passed from the register function
+///
+/// **See also:**
+/// - `data_control_sql_register_insert_bulk_data_response_cb()`
+/// - `data_control_map_register_add_bulk_data_response_cb()`
+/// @nodoc
 typedef data_control_bulk_cb
     = ffi.Pointer<ffi.NativeFunction<data_control_bulk_cbFunction>>;
+/// @nodoc
 typedef data_control_bulk_cbFunction = ffi.Void Function(
     ffi.Int request_id,
     data_control_h provider,
@@ -4041,6 +4750,7 @@ typedef data_control_bulk_cbFunction = ffi.Void Function(
     ffi.Bool provider_result,
     ffi.Pointer<ffi.Char> error,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartdata_control_bulk_cbFunction = void Function(
     int request_id,
     data_control_h provider,
@@ -4049,13 +4759,17 @@ typedef Dartdata_control_bulk_cbFunction = void Function(
     ffi.Pointer<ffi.Char> error,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief  The structure type to contain the set of callback functions for handling the response events
-/// of the key-value structured data control.
-/// @since_tizen 2.3
-/// @see data_control_map_get_response_cb()
-/// @see data_control_map_set_response_cb()
-/// @see data_control_map_add_response_cb()
-/// @see data_control_map_remove_response_cb()
+/// The structure type to contain the set of callback functions for handling the response events of the key-value structured data control.
+///
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **See also:**
+/// - `data_control_map_get_response_cb()`
+/// - `data_control_map_set_response_cb()`
+/// - `data_control_map_add_response_cb()`
+/// - `data_control_map_remove_response_cb()`
+/// @nodoc
 final class data_control_map_response_cb extends ffi.Struct {
   /// < This callback function is called when the response is received for a getting value from the key-value structured data control provider.
   external data_control_map_get_response_cb get_cb;
@@ -4070,30 +4784,35 @@ final class data_control_map_response_cb extends ffi.Struct {
   external data_control_map_remove_response_cb remove_cb;
 }
 
-/// @brief Called when the result value list is received from the key-value structured data control provider.
-/// @since_tizen 2.3
-/// @remarks You must release @a result_value_list using free() after it is used. Note that @a result_value_list is an array of char *. Its length is @a result_value_count. You should release all the elements in the @a result_value_list array and @a result_value_list itself like the following code.
+/// Called when the result value list is received from the key-value structured data control provider.
 ///
-/// @code
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **Remarks:**
+/// - You must release `result_value_list` using free() after it is used. Note that `result_value_list` is an array of char *. Its length is `result_value_count`. You should release all the elements in the `result_value_list` array and `result_value_list` itself like the following code.
+///
+/// **Parameters:**
+/// - `request_id` (in): The request ID
+/// - `provider` (in): The provider handle. `provider` is valid only inside this function `provider` should not be destroyed.
+/// - `result_value_list` (in): The result value list of the data control request that gets the matching values
+/// - `result_value_count` (in): The number of the values
+/// - `provider_result` (in): Set to `true` if the data control provider is successfully processed, otherwise set to `false`
+/// - `error` (in): The error message from the data control provider
+/// - `user_data` (in): The user data passed from the register function
+///
+/// ```
 ///
 /// int i;
 /// for (i = 0; i < resule_value_count; i++)
 /// free(result_value_list[i]);
 /// free(result_value_list);
 ///
-/// @endcode
-///
-/// @param[in] request_id The request ID
-/// @param[in] provider The provider handle. @a provider is valid only inside this function \n
-/// @a provider should not be destroyed.
-/// @param[in] result_value_list The result value list of the data control request that gets the matching values
-/// @param[in] result_value_count The number of the values
-/// @param[in] provider_result Set to @c true if the data control provider is successfully processed, \n
-/// otherwise set to @c false
-/// @param[in] error The error message from the data control provider
-/// @param[in] user_data The user data passed from the register function
+/// ```
+/// @nodoc
 typedef data_control_map_get_response_cb
     = ffi.Pointer<ffi.NativeFunction<data_control_map_get_response_cbFunction>>;
+/// @nodoc
 typedef data_control_map_get_response_cbFunction = ffi.Void Function(
     ffi.Int request_id,
     data_control_h provider,
@@ -4102,6 +4821,7 @@ typedef data_control_map_get_response_cbFunction = ffi.Void Function(
     ffi.Bool provider_result,
     ffi.Pointer<ffi.Char> error,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartdata_control_map_get_response_cbFunction = void Function(
     int request_id,
     data_control_h provider,
@@ -4111,24 +4831,28 @@ typedef Dartdata_control_map_get_response_cbFunction = void Function(
     ffi.Pointer<ffi.Char> error,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the response is received for a set operation from the key-value structured data control provider.
-/// @since_tizen 2.3
+/// Called when the response is received for a set operation from the key-value structured data control provider.
 ///
-/// @param[in] request_id The request ID that identifies the data control
-/// @param[in] provider The provider handle. @a provider is valid only inside this function \n
-/// @a provider should not be destroyed.
-/// @param[in] provider_result Set to @c true if the data control provider successfully processed, \n
-/// otherwise @c false
-/// @param[in] error The error message from the data control provider
-/// @param[in] user_data The user data passed from the register function
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **Parameters:**
+/// - `request_id` (in): The request ID that identifies the data control
+/// - `provider` (in): The provider handle. `provider` is valid only inside this function `provider` should not be destroyed.
+/// - `provider_result` (in): Set to `true` if the data control provider successfully processed, otherwise `false`
+/// - `error` (in): The error message from the data control provider
+/// - `user_data` (in): The user data passed from the register function
+/// @nodoc
 typedef data_control_map_set_response_cb
     = ffi.Pointer<ffi.NativeFunction<data_control_map_set_response_cbFunction>>;
+/// @nodoc
 typedef data_control_map_set_response_cbFunction = ffi.Void Function(
     ffi.Int request_id,
     data_control_h provider,
     ffi.Bool provider_result,
     ffi.Pointer<ffi.Char> error,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartdata_control_map_set_response_cbFunction = void Function(
     int request_id,
     data_control_h provider,
@@ -4136,24 +4860,28 @@ typedef Dartdata_control_map_set_response_cbFunction = void Function(
     ffi.Pointer<ffi.Char> error,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the response is received for an add operation from the key-value structured data control provider.
-/// @since_tizen 2.3
+/// Called when the response is received for an add operation from the key-value structured data control provider.
 ///
-/// @param[in] request_id The request ID that identifies the data control
-/// @param[in] provider The provider handle. @a provider is valid only inside this function \n
-/// @a provider should not be destroyed.
-/// @param[in] provider_result Set to @c true if the data control provider successfully processed, \n
-/// otherwise set to @c false
-/// @param[in] error The error message from the data control provider
-/// @param[in] user_data The user data passed from the register function
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **Parameters:**
+/// - `request_id` (in): The request ID that identifies the data control
+/// - `provider` (in): The provider handle. `provider` is valid only inside this function `provider` should not be destroyed.
+/// - `provider_result` (in): Set to `true` if the data control provider successfully processed, otherwise set to `false`
+/// - `error` (in): The error message from the data control provider
+/// - `user_data` (in): The user data passed from the register function
+/// @nodoc
 typedef data_control_map_add_response_cb
     = ffi.Pointer<ffi.NativeFunction<data_control_map_add_response_cbFunction>>;
+/// @nodoc
 typedef data_control_map_add_response_cbFunction = ffi.Void Function(
     ffi.Int request_id,
     data_control_h provider,
     ffi.Bool provider_result,
     ffi.Pointer<ffi.Char> error,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartdata_control_map_add_response_cbFunction = void Function(
     int request_id,
     data_control_h provider,
@@ -4161,24 +4889,28 @@ typedef Dartdata_control_map_add_response_cbFunction = void Function(
     ffi.Pointer<ffi.Char> error,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the response is received for a remove operation from the key-value structured data control provider.
-/// @since_tizen 2.3
+/// Called when the response is received for a remove operation from the key-value structured data control provider.
 ///
-/// @param[in] request_id The request ID that identifies the data control
-/// @param[in] provider The provider handle. @a provider is valid only inside this function \n
-/// @a provider should not be destroyed.
-/// @param[in] provider_result Set to @c true if the data control provider successfully processed, \n
-/// otherwise set to @c false
-/// @param[in] error The error message from the data control provider
-/// @param[in] user_data The user data passed from the register function
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **Parameters:**
+/// - `request_id` (in): The request ID that identifies the data control
+/// - `provider` (in): The provider handle. `provider` is valid only inside this function `provider` should not be destroyed.
+/// - `provider_result` (in): Set to `true` if the data control provider successfully processed, otherwise set to `false`
+/// - `error` (in): The error message from the data control provider
+/// - `user_data` (in): The user data passed from the register function
+/// @nodoc
 typedef data_control_map_remove_response_cb = ffi
     .Pointer<ffi.NativeFunction<data_control_map_remove_response_cbFunction>>;
+/// @nodoc
 typedef data_control_map_remove_response_cbFunction = ffi.Void Function(
     ffi.Int request_id,
     data_control_h provider,
     ffi.Bool provider_result,
     ffi.Pointer<ffi.Char> error,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartdata_control_map_remove_response_cbFunction = void Function(
     int request_id,
     data_control_h provider,
@@ -4186,14 +4918,17 @@ typedef Dartdata_control_map_remove_response_cbFunction = void Function(
     ffi.Pointer<ffi.Char> error,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief  The structure type to contain the set of callback functions for handling the request events
-/// of SQL-friendly interface based data control.
-/// @since_tizen 2.3
+/// The structure type to contain the set of callback functions for handling the request events of SQL-friendly interface based data control.
 ///
-/// @see data_control_provider_sql_select_request_cb()
-/// @see data_control_provider_sql_insert_request_cb()
-/// @see data_control_provider_sql_update_request_cb()
-/// @see data_control_provider_sql_delete_request_cb()
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **See also:**
+/// - `data_control_provider_sql_select_request_cb()`
+/// - `data_control_provider_sql_insert_request_cb()`
+/// - `data_control_provider_sql_update_request_cb()`
+/// - `data_control_provider_sql_delete_request_cb()`
+/// @nodoc
 final class data_control_provider_sql_cb extends ffi.Struct {
   /// < This callback function is called when a request for insert operation is received from other application.
   external data_control_provider_sql_insert_request_cb insert_cb;
@@ -4208,46 +4943,49 @@ final class data_control_provider_sql_cb extends ffi.Struct {
   external data_control_provider_sql_delete_request_cb delete_cb;
 }
 
-/// @brief Called when the insert request is received from an application using SQL-friendly interface based data control.
-/// @since_tizen 2.3
+/// Called when the insert request is received from an application using SQL-friendly interface based data control.
 ///
-/// @param[in] request_id The request ID
-/// @param[in] provider The provider handle. @a provider is valid only inside this function. \n
-/// @a provider should not be freed
-/// @param[in] insert_data The column-value pairs to insert \n
-/// If the value is a string, the value must be wrapped in single quotes,
-/// otherwise it does not need to be wrapped in single quotes. \n
-/// To use outside the callback, make a copy by using bundle_dup().
-/// @a insert_data should not be freed.
-/// @param[in] user_data The user data passed from the register function
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **Parameters:**
+/// - `request_id` (in): The request ID
+/// - `provider` (in): The provider handle. `provider` is valid only inside this function. `provider` should not be freed
+/// - `insert_data` (in): The column-value pairs to insert If the value is a string, the value must be wrapped in single quotes, otherwise it does not need to be wrapped in single quotes. To use outside the callback, make a copy by using bundle_dup(). `insert_data` should not be freed.
+/// - `user_data` (in): The user data passed from the register function
+/// @nodoc
 typedef data_control_provider_sql_insert_request_cb = ffi.Pointer<
     ffi.NativeFunction<data_control_provider_sql_insert_request_cbFunction>>;
+/// @nodoc
 typedef data_control_provider_sql_insert_request_cbFunction = ffi.Void Function(
     ffi.Int request_id,
     data_control_h provider,
     ffi.Pointer<bundle.bundle> insert_data,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartdata_control_provider_sql_insert_request_cbFunction = void Function(
     int request_id,
     data_control_h provider,
     ffi.Pointer<bundle.bundle> insert_data,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the select request is received from an application using SQL-friendly interface based data control.
-/// @since_tizen 2.3
+/// Called when the select request is received from an application using SQL-friendly interface based data control.
 ///
-/// @param[in] request_id The request ID
-/// @param[in] provider The provider handle. @a provider is valid only inside this function. \n
-/// @a provider should not be freed
-/// @param[in] column_list The column list to query
-/// @param[in] column_count The total number of columns to be queried
-/// @param[in] where A filter to select the desired rows \n
-/// It is an SQL 'WHERE' clause excluding the 'WHERE' itself such as column1 = 'stringValue' and column2 = numericValue
-/// @param[in] order The sorting order of the rows to query \n
-/// It is an SQL 'ORDER BY' clause excluding the 'ORDER BY' itself
-/// @param[in] user_data The user data passed from the register function
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **Parameters:**
+/// - `request_id` (in): The request ID
+/// - `provider` (in): The provider handle. `provider` is valid only inside this function. `provider` should not be freed
+/// - `column_list` (in): The column list to query
+/// - `column_count` (in): The total number of columns to be queried
+/// - `where` (in): A filter to select the desired rows It is an SQL 'WHERE' clause excluding the 'WHERE' itself such as column1 = 'stringValue' and column2 = numericValue
+/// - `order` (in): The sorting order of the rows to query It is an SQL 'ORDER BY' clause excluding the 'ORDER BY' itself
+/// - `user_data` (in): The user data passed from the register function
+/// @nodoc
 typedef data_control_provider_sql_select_request_cb = ffi.Pointer<
     ffi.NativeFunction<data_control_provider_sql_select_request_cbFunction>>;
+/// @nodoc
 typedef data_control_provider_sql_select_request_cbFunction = ffi.Void Function(
     ffi.Int request_id,
     data_control_h provider,
@@ -4256,6 +4994,7 @@ typedef data_control_provider_sql_select_request_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> where,
     ffi.Pointer<ffi.Char> order,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartdata_control_provider_sql_select_request_cbFunction = void Function(
     int request_id,
     data_control_h provider,
@@ -4265,28 +5004,28 @@ typedef Dartdata_control_provider_sql_select_request_cbFunction = void Function(
     ffi.Pointer<ffi.Char> order,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the update request is received from an application using SQL-friendly interface based data control.
-/// @since_tizen 2.3
+/// Called when the update request is received from an application using SQL-friendly interface based data control.
 ///
-/// @param[in] request_id The request ID
-/// @param[in] provider The provider handle. @a provider is valid only inside this function. \n
-/// @a provider should not be freed
-/// @param[in] update_data The column-value pairs to update \n
-/// If the value is a string, the value must be wrapped in single quotes,
-/// otherwise it does not need to be wrapped in single quotes. \n
-/// To use outside the callback, make a copy by using bundle_dup().
-/// @a update_data should not be freed.
-/// @param[in] where A filter to select the desired rows to update \n
-/// It is an SQL 'WHERE' clause excluding the 'WHERE' itself such as column1 = 'stringValue' and column2 = numericValue
-/// @param[in] user_data The user data passed from the register function
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **Parameters:**
+/// - `request_id` (in): The request ID
+/// - `provider` (in): The provider handle. `provider` is valid only inside this function. `provider` should not be freed
+/// - `update_data` (in): The column-value pairs to update If the value is a string, the value must be wrapped in single quotes, otherwise it does not need to be wrapped in single quotes. To use outside the callback, make a copy by using bundle_dup(). `update_data` should not be freed.
+/// - `where` (in): A filter to select the desired rows to update It is an SQL 'WHERE' clause excluding the 'WHERE' itself such as column1 = 'stringValue' and column2 = numericValue
+/// - `user_data` (in): The user data passed from the register function
+/// @nodoc
 typedef data_control_provider_sql_update_request_cb = ffi.Pointer<
     ffi.NativeFunction<data_control_provider_sql_update_request_cbFunction>>;
+/// @nodoc
 typedef data_control_provider_sql_update_request_cbFunction = ffi.Void Function(
     ffi.Int request_id,
     data_control_h provider,
     ffi.Pointer<bundle.bundle> update_data,
     ffi.Pointer<ffi.Char> where,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartdata_control_provider_sql_update_request_cbFunction = void Function(
     int request_id,
     data_control_h provider,
@@ -4294,36 +5033,43 @@ typedef Dartdata_control_provider_sql_update_request_cbFunction = void Function(
     ffi.Pointer<ffi.Char> where,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the delete request is received from an application using SQL-friendly interface based data control.
-/// @since_tizen 2.3
+/// Called when the delete request is received from an application using SQL-friendly interface based data control.
 ///
-/// @param[in] request_id The request ID
-/// @param[in] provider The provider handle. @a provider is valid only inside this function. \n
-/// @a provider should not be freed
-/// @param[in] where A filter to select the desired rows to delete \n
-/// It is an SQL 'WHERE' clause excluding the 'WHERE' itself such as column1 = 'stringValue' and column2 = numericValue
-/// @param[in] user_data The user data passed from the register function
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **Parameters:**
+/// - `request_id` (in): The request ID
+/// - `provider` (in): The provider handle. `provider` is valid only inside this function. `provider` should not be freed
+/// - `where` (in): A filter to select the desired rows to delete It is an SQL 'WHERE' clause excluding the 'WHERE' itself such as column1 = 'stringValue' and column2 = numericValue
+/// - `user_data` (in): The user data passed from the register function
+/// @nodoc
 typedef data_control_provider_sql_delete_request_cb = ffi.Pointer<
     ffi.NativeFunction<data_control_provider_sql_delete_request_cbFunction>>;
+/// @nodoc
 typedef data_control_provider_sql_delete_request_cbFunction = ffi.Void Function(
     ffi.Int request_id,
     data_control_h provider,
     ffi.Pointer<ffi.Char> where,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartdata_control_provider_sql_delete_request_cbFunction = void Function(
     int request_id,
     data_control_h provider,
     ffi.Pointer<ffi.Char> where,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief  The structure type to contain the set of callback functions for handling the request events
-/// from the key-value structured data control consumer.
-/// @since_tizen 2.3
+/// The structure type to contain the set of callback functions for handling the request events from the key-value structured data control consumer.
 ///
-/// @see data_control_provider_map_get_value_request_cb()
-/// @see data_control_provider_map_set_value_request_cb()
-/// @see data_control_provider_map_add_value_request_cb()
-/// @see data_control_provider_map_remove_value_request_cb()
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **See also:**
+/// - `data_control_provider_map_get_value_request_cb()`
+/// - `data_control_provider_map_set_value_request_cb()`
+/// - `data_control_provider_map_add_value_request_cb()`
+/// - `data_control_provider_map_remove_value_request_cb()`
+/// @nodoc
 final class data_control_provider_map_cb extends ffi.Struct {
   /// < This callback function is called when a request for getting value is received from other application.
   external data_control_provider_map_get_value_request_cb get_cb;
@@ -4338,35 +5084,44 @@ final class data_control_provider_map_cb extends ffi.Struct {
   external data_control_provider_map_remove_value_request_cb remove_cb;
 }
 
-/// @brief Called when the request for obtaining the value list is received from the key-value structured data control consumer.
-/// @since_tizen 2.3
+/// Called when the request for obtaining the value list is received from the key-value structured data control consumer.
 ///
-/// @param[in] request_id The request ID
-/// @param[in] provider The provider handle. @a provider is valid only inside this function. \n
-/// @a provider should not be freed
-/// @param[in] key The key of the value list to obtain
-/// @param[in] user_data The user data passed from the register function
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **Parameters:**
+/// - `request_id` (in): The request ID
+/// - `provider` (in): The provider handle. `provider` is valid only inside this function. `provider` should not be freed
+/// - `key` (in): The key of the value list to obtain
+/// - `user_data` (in): The user data passed from the register function
+/// @nodoc
 typedef data_control_provider_map_get_value_request_cb = ffi.Pointer<
     ffi.NativeFunction<data_control_provider_map_get_value_request_cbFunction>>;
+/// @nodoc
 typedef data_control_provider_map_get_value_request_cbFunction
     = ffi.Void Function(ffi.Int request_id, data_control_h provider,
         ffi.Pointer<ffi.Char> key, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartdata_control_provider_map_get_value_request_cbFunction
     = void Function(int request_id, data_control_h provider,
         ffi.Pointer<ffi.Char> key, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the request for replacing the value is received from the key-value structured data control consumer.
-/// @since_tizen 2.3
+/// Called when the request for replacing the value is received from the key-value structured data control consumer.
 ///
-/// @param[in] request_id The request ID
-/// @param[in] provider The provider handle. @a provider is valid only inside this function. \n
-/// @a provider should not be freed
-/// @param[in] key The key of the value to replace
-/// @param[in] old_value The value to replace
-/// @param[in] new_value The new value that replaces the existing value
-/// @param[in] user_data The user data passed from the register function
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **Parameters:**
+/// - `request_id` (in): The request ID
+/// - `provider` (in): The provider handle. `provider` is valid only inside this function. `provider` should not be freed
+/// - `key` (in): The key of the value to replace
+/// - `old_value` (in): The value to replace
+/// - `new_value` (in): The new value that replaces the existing value
+/// - `user_data` (in): The user data passed from the register function
+/// @nodoc
 typedef data_control_provider_map_set_value_request_cb = ffi.Pointer<
     ffi.NativeFunction<data_control_provider_map_set_value_request_cbFunction>>;
+/// @nodoc
 typedef data_control_provider_map_set_value_request_cbFunction
     = ffi.Void Function(
         ffi.Int request_id,
@@ -4375,6 +5130,7 @@ typedef data_control_provider_map_set_value_request_cbFunction
         ffi.Pointer<ffi.Char> old_value,
         ffi.Pointer<ffi.Char> new_value,
         ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartdata_control_provider_map_set_value_request_cbFunction
     = void Function(
         int request_id,
@@ -4384,17 +5140,21 @@ typedef Dartdata_control_provider_map_set_value_request_cbFunction
         ffi.Pointer<ffi.Char> new_value,
         ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the request for adding the value is received from the key-value structured data control consumer.
-/// @since_tizen 2.3
+/// Called when the request for adding the value is received from the key-value structured data control consumer.
 ///
-/// @param[in] request_id The request ID
-/// @param[in] provider The provider handle. @a provider is valid only inside this function. \n
-/// @a provider should not be freed
-/// @param[in] key The key of the value to add
-/// @param[in] value The value to add
-/// @param[in] user_data The user data passed from the register function
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **Parameters:**
+/// - `request_id` (in): The request ID
+/// - `provider` (in): The provider handle. `provider` is valid only inside this function. `provider` should not be freed
+/// - `key` (in): The key of the value to add
+/// - `value` (in): The value to add
+/// - `user_data` (in): The user data passed from the register function
+/// @nodoc
 typedef data_control_provider_map_add_value_request_cb = ffi.Pointer<
     ffi.NativeFunction<data_control_provider_map_add_value_request_cbFunction>>;
+/// @nodoc
 typedef data_control_provider_map_add_value_request_cbFunction
     = ffi.Void Function(
         ffi.Int request_id,
@@ -4402,6 +5162,7 @@ typedef data_control_provider_map_add_value_request_cbFunction
         ffi.Pointer<ffi.Char> key,
         ffi.Pointer<ffi.Char> value,
         ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartdata_control_provider_map_add_value_request_cbFunction
     = void Function(
         int request_id,
@@ -4410,18 +5171,22 @@ typedef Dartdata_control_provider_map_add_value_request_cbFunction
         ffi.Pointer<ffi.Char> value,
         ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the request for removing the value is received from the key-value structured data control consumer.
-/// @since_tizen 2.3
+/// Called when the request for removing the value is received from the key-value structured data control consumer.
 ///
-/// @param[in] request_id The request ID
-/// @param[in] provider The provider handle. @a provider is valid only inside this function. \n
-/// @a provider should not be freed
-/// @param[in] key The key of the value to remove
-/// @param[in] value The value to remove
-/// @param[in] user_data The user data passed from the register function
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **Parameters:**
+/// - `request_id` (in): The request ID
+/// - `provider` (in): The provider handle. `provider` is valid only inside this function. `provider` should not be freed
+/// - `key` (in): The key of the value to remove
+/// - `value` (in): The value to remove
+/// - `user_data` (in): The user data passed from the register function
+/// @nodoc
 typedef data_control_provider_map_remove_value_request_cb = ffi.Pointer<
     ffi
     .NativeFunction<data_control_provider_map_remove_value_request_cbFunction>>;
+/// @nodoc
 typedef data_control_provider_map_remove_value_request_cbFunction
     = ffi.Void Function(
         ffi.Int request_id,
@@ -4429,6 +5194,7 @@ typedef data_control_provider_map_remove_value_request_cbFunction
         ffi.Pointer<ffi.Char> key,
         ffi.Pointer<ffi.Char> value,
         ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartdata_control_provider_map_remove_value_request_cbFunction
     = void Function(
         int request_id,
@@ -4437,8 +5203,11 @@ typedef Dartdata_control_provider_map_remove_value_request_cbFunction
         ffi.Pointer<ffi.Char> value,
         ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Enumeration for the various data changed notification types.
-/// @since_tizen 3.0
+/// Enumeration for the various data changed notification types.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class data_control_data_change_type_e {
   /// < Update notification
   static const int DATA_CONTROL_DATA_CHANGE_SQL_UPDATE = 0;
@@ -4459,141 +5228,178 @@ abstract class data_control_data_change_type_e {
   static const int DATA_CONTROL_DATA_CHANGE_MAP_REMOVE = 5;
 }
 
-/// @brief Called when a consumer requests a data change callback addition.
-/// @details The callback decides - through the return value - whether a consumer application should be allowed to add a data change callback. \n
-/// If it returns true, it means the application should be allowed to do so, if it returns false, it means it should be denied.
+/// Called when a consumer requests a data change callback addition.
 ///
-/// @since_tizen 3.0
-/// @param[in] provider The provider handle. @a provider is valid only inside this function. \n
-/// @a provider should not be freed
-/// @param[in] consumer_appid The id of the consumer application which requested to add the callback. @a consumer_appid is valid only inside this function. \n
-/// To use outside the callback, make a copy. @a consumer_appid should not be freed
-/// @param[in] user_data The user data.
-/// @return A boolean value indicating whether the consumer application should be allowed to add data change callbacks.
-/// @c true let the application add a data change callback,
-/// otherwise @c false application not allowed to add data change callback
+/// The callback decides - through the return value - whether a consumer application should be allowed to add a data change callback. If it returns true, it means the application should be allowed to do so, if it returns false, it means it should be denied.
 ///
-/// @pre The callback must be registered using data_control_provider_add_data_change_consumer_filter_cb(). \n
-/// data_control_add_data_change_cb() must be called to invoke this callback.
+/// **Since Tizen:**
+/// - 3.0
 ///
-/// @see data_control_provider_add_data_change_consumer_filter_cb()
-/// @see data_control_provider_remove_data_change_consumer_filter_cb()
+/// **Parameters:**
+/// - `provider` (in): The provider handle. `provider` is valid only inside this function. `provider` should not be freed
+/// - `consumer_appid` (in): The id of the consumer application which requested to add the callback. `consumer_appid` is valid only inside this function. To use outside the callback, make a copy. `consumer_appid` should not be freed
+/// - `user_data` (in): The user data.
+///
+/// **Returns:**
+/// - A boolean value indicating whether the consumer application should be allowed to add data change callbacks. `true` let the application add a data change callback, otherwise `false` application not allowed to add data change callback
+///
+/// **Preconditions:**
+/// - The callback must be registered using data_control_provider_add_data_change_consumer_filter_cb(). data_control_add_data_change_cb() must be called to invoke this callback.
+///
+/// **See also:**
+/// - `data_control_provider_add_data_change_consumer_filter_cb()`
+/// - `data_control_provider_remove_data_change_consumer_filter_cb()`
+/// @nodoc
 typedef data_control_provider_data_change_consumer_filter_cb = ffi.Pointer<
     ffi.NativeFunction<
         data_control_provider_data_change_consumer_filter_cbFunction>>;
+/// @nodoc
 typedef data_control_provider_data_change_consumer_filter_cbFunction
     = ffi.Bool Function(data_control_h provider,
         ffi.Pointer<ffi.Char> consumer_appid, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartdata_control_provider_data_change_consumer_filter_cbFunction
     = bool Function(data_control_h provider,
         ffi.Pointer<ffi.Char> consumer_appid, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called for each application which successfully added a data change callback.
-/// @since_tizen 3.0
+/// Called for each application which successfully added a data change callback.
 ///
-/// @param[in] provider The provider handle. @a provider is valid only inside this function \n
-/// @a provider should not be freed
-/// @param[in] consumer_appid The id of the consumer application. @a consumer_appid is valid only inside this function \n
-/// To use outside the callback, make a copy. @a consumer_appid should not be freed
-/// @param[in] user_data The user data
-/// @return @c true to continue with the next iteration of the loop,
-/// otherwise @c false to break out of the loop
+/// **Since Tizen:**
+/// - 3.0
 ///
-/// @pre data_control_provider_foreach_data_change_consumer() must be called to invoke this callback.
-/// @see data_control_provider_foreach_data_change_consumer()
+/// **Parameters:**
+/// - `provider` (in): The provider handle. `provider` is valid only inside this function `provider` should not be freed
+/// - `consumer_appid` (in): The id of the consumer application. `consumer_appid` is valid only inside this function To use outside the callback, make a copy. `consumer_appid` should not be freed
+/// - `user_data` (in): The user data
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - data_control_provider_foreach_data_change_consumer() must be called to invoke this callback.
+///
+/// **See also:**
+/// - `data_control_provider_foreach_data_change_consumer()`
+/// @nodoc
 typedef data_control_provider_data_change_consumer_cb = ffi.Pointer<
     ffi.NativeFunction<data_control_provider_data_change_consumer_cbFunction>>;
+/// @nodoc
 typedef data_control_provider_data_change_consumer_cbFunction
     = ffi.Bool Function(data_control_h provider,
         ffi.Pointer<ffi.Char> consumer_appid, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartdata_control_provider_data_change_consumer_cbFunction
     = bool Function(data_control_h provider,
         ffi.Pointer<ffi.Char> consumer_appid, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the bulk data request is received from an consumer application.
-/// @since_tizen 3.0
+/// Called when the bulk data request is received from an consumer application.
 ///
-/// @param[in] request_id The request ID
-/// @param[in] provider The provider handle. @a provider is valid only inside this function. \n
-/// @a provider should not be freed
-/// @param[in] bulk_data The bulk data handle which contains data to be inserted or added
-/// @param[in] user_data The user data passed from the register function
+/// **Since Tizen:**
+/// - 3.0
 ///
-/// @see data_control_provider_sql_register_insert_bulk_data_request_cb()
-/// @see data_control_provider_map_register_add_bulk_data_request_cb()
-/// @see data_control_sql_insert_bulk_data()
-/// @see data_control_map_add_bulk_data()
-/// @see data_control_bulk_data_add()
+/// **Parameters:**
+/// - `request_id` (in): The request ID
+/// - `provider` (in): The provider handle. `provider` is valid only inside this function. `provider` should not be freed
+/// - `bulk_data` (in): The bulk data handle which contains data to be inserted or added
+/// - `user_data` (in): The user data passed from the register function
+///
+/// **See also:**
+/// - `data_control_provider_sql_register_insert_bulk_data_request_cb()`
+/// - `data_control_provider_map_register_add_bulk_data_request_cb()`
+/// - `data_control_sql_insert_bulk_data()`
+/// - `data_control_map_add_bulk_data()`
+/// - `data_control_bulk_data_add()`
+/// @nodoc
 typedef data_control_provider_bulk_cb
     = ffi.Pointer<ffi.NativeFunction<data_control_provider_bulk_cbFunction>>;
+/// @nodoc
 typedef data_control_provider_bulk_cbFunction = ffi.Void Function(
     ffi.Int request_id,
     data_control_h provider,
     data_control_bulk_data_h bulk_data,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartdata_control_provider_bulk_cbFunction = void Function(
     int request_id,
     data_control_h provider,
     data_control_bulk_data_h bulk_data,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when received data changed notification from provider application.
-/// @since_tizen 3.0
-/// @param[in] provider The provider handle. @a provider is valid only inside this function \n
-/// @a provider should not be destroyed.
-/// @param[in] type Changed data type
-/// @param[in] data Data from provider, intended to contain information about changed data \n
-/// @a data is valid only inside this function \n
-/// To use outside the callback, make a copy. @a data should not be freed
-/// @param[in] user_data The user data passed from the add function
-/// @pre The callback must be registered using data_control_add_data_change_cb(). \n
-/// data_control_provider_send_data_change_noti() must be called to invoke this callback.
-/// @see data_control_add_data_change_cb()
-/// @see data_control_provider_send_data_change_noti()
+/// Called when received data changed notification from provider application.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `provider` (in): The provider handle. `provider` is valid only inside this function `provider` should not be destroyed.
+/// - `type` (in): Changed data type
+/// - `data` (in): Data from provider, intended to contain information about changed data `data` is valid only inside this function To use outside the callback, make a copy. `data` should not be freed
+/// - `user_data` (in): The user data passed from the add function
+///
+/// **Preconditions:**
+/// - The callback must be registered using data_control_add_data_change_cb(). data_control_provider_send_data_change_noti() must be called to invoke this callback.
+///
+/// **See also:**
+/// - `data_control_add_data_change_cb()`
+/// - `data_control_provider_send_data_change_noti()`
+/// @nodoc
 typedef data_control_data_change_cb
     = ffi.Pointer<ffi.NativeFunction<data_control_data_change_cbFunction>>;
+/// @nodoc
 typedef data_control_data_change_cbFunction = ffi.Void Function(
     data_control_h provider,
     ffi.Int32 type,
     ffi.Pointer<bundle.bundle> data,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartdata_control_data_change_cbFunction = void Function(
     data_control_h provider,
     int type,
     ffi.Pointer<bundle.bundle> data,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the consumer receives the result of the data change callback adding operation.
-/// @details The following error codes can be delivered: \n
-/// #DATA_CONTROL_ERROR_NONE, \n
-/// #DATA_CONTROL_ERROR_OUT_OF_MEMORY, \n
-/// #DATA_CONTROL_ERROR_IO_ERROR, \n
-/// #DATA_CONTROL_ERROR_PERMISSION_DENIED, \n
-/// #DATA_CONTROL_ERROR_MAX_EXCEEDED
-/// @since_tizen 3.0
-/// @remarks #DATA_CONTROL_ERROR_PERMISSION_DENIED will be returned when the provider denies to add the callback.
-/// @param[in] provider The provider handle. @a provider is valid only inside this function \n
-/// @a provider should not be destroyed.
-/// @param[in] result Add data change callback result
-/// @param[in] callback_id Added callback ID
-/// @param[in] user_data The user data passed from the add function
-/// @pre The callback must be registered using data_control_add_data_change_cb().
-/// @see data_control_add_data_change_cb()
+/// Called when the consumer receives the result of the data change callback adding operation.
+///
+/// The following error codes can be delivered: `DATA_CONTROL_ERROR_NONE`, `DATA_CONTROL_ERROR_OUT_OF_MEMORY`, `DATA_CONTROL_ERROR_IO_ERROR`, `DATA_CONTROL_ERROR_PERMISSION_DENIED`, `DATA_CONTROL_ERROR_MAX_EXCEEDED`
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Remarks:**
+/// - `DATA_CONTROL_ERROR_PERMISSION_DENIED` will be returned when the provider denies to add the callback.
+///
+/// **Parameters:**
+/// - `provider` (in): The provider handle. `provider` is valid only inside this function `provider` should not be destroyed.
+/// - `result` (in): Add data change callback result
+/// - `callback_id` (in): Added callback ID
+/// - `user_data` (in): The user data passed from the add function
+///
+/// **Preconditions:**
+/// - The callback must be registered using data_control_add_data_change_cb().
+///
+/// **See also:**
+/// - `data_control_add_data_change_cb()`
+/// @nodoc
 typedef data_control_add_callback_result_cb = ffi
     .Pointer<ffi.NativeFunction<data_control_add_callback_result_cbFunction>>;
+/// @nodoc
 typedef data_control_add_callback_result_cbFunction = ffi.Void Function(
     data_control_h provider,
     ffi.Int32 result,
     ffi.Int callback_id,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartdata_control_add_callback_result_cbFunction = void Function(
     data_control_h provider,
     int result,
     int callback_id,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Enumeration for the various error codes an API can return.
-/// @since_tizen 2.3
+/// Enumeration for the various error codes an API can return.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 abstract class data_control_error_e {
   /// < Successful
   static const int DATA_CONTROL_ERROR_NONE = 0;

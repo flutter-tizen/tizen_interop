@@ -1,3 +1,6 @@
+/// {@category 6.0/tizen}
+library tizen_interop_6_0.diagnostics;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen diagnostics APIs.
+/// {@category 6.0/tizen}
 class Tizen60Diagnostics {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,18 +28,24 @@ class Tizen60Diagnostics {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Sets the callback for bug report notification.
-  /// @since_tizen 6.0
+  /// Sets the callback for bug report notification.
   ///
-  /// @param[in] callback A callback function to set
-  /// @param[in] user_data The user data to be passed to the callback function
+  /// **Since Tizen:**
+  /// - 6.0
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #DIAGNOSTICS_ERROR_NONE Success
-  /// @retval #DIAGNOSTICS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #DIAGNOSTICS_ERROR_INVALID_PARAMETER Provided parameter is invalid
-  /// @retval #DIAGNOSTICS_ERROR_RESOURCE_BUSY Callback already registered
-  /// @retval #DIAGNOSTICS_ERROR_IO_ERROR Internal error occured
+  /// **Parameters:**
+  /// - `callback` (in): A callback function to set
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DIAGNOSTICS_ERROR_NONE`: Success
+  /// - `DIAGNOSTICS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `DIAGNOSTICS_ERROR_INVALID_PARAMETER`: Provided parameter is invalid
+  /// - `DIAGNOSTICS_ERROR_RESOURCE_BUSY`: Callback already registered
+  /// - `DIAGNOSTICS_ERROR_IO_ERROR`: Internal error occured
   int diagnostics_set_notification_cb(
     diagnostics_notification_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -54,13 +64,18 @@ class Tizen60Diagnostics {
       _diagnostics_set_notification_cbPtr.asFunction<
           int Function(diagnostics_notification_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback for bug report notification.
-  /// @since_tizen 6.0
+  /// Unsets the callback for bug report notification.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #DIAGNOSTICS_ERROR_NONE Success
-  /// @retval #DIAGNOSTICS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #DIAGNOSTICS_ERROR_IO_ERROR Internal error occured
+  /// **Since Tizen:**
+  /// - 6.0
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DIAGNOSTICS_ERROR_NONE`: Success
+  /// - `DIAGNOSTICS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `DIAGNOSTICS_ERROR_IO_ERROR`: Internal error occured
   int diagnostics_unset_notification_cb() {
     return _diagnostics_unset_notification_cb();
   }
@@ -71,26 +86,37 @@ class Tizen60Diagnostics {
   late final _diagnostics_unset_notification_cb =
       _diagnostics_unset_notification_cbPtr.asFunction<int Function()>();
 
-  /// @platform
-  /// @brief Requests client to dump data.
-  /// @since_tizen 6.0
-  /// @privlevel platform
-  /// @privilege
-  /// @remarks @a data should be released with diagnostics_data_destroy().
-  /// This function is permitted only to an app signed by platform level certificates.
+  /// Requests client to dump data.
   ///
-  /// @param[in] client_id An id of app or service to request
-  /// @param[in] params Array of parameters
-  /// @param[in] params_size Number of parameters
-  /// @param[out] data Dumpsys data handle
+  /// **Since Tizen:**
+  /// - 6.0
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #DIAGNOSTICS_ERROR_NONE Success
-  /// @retval #DIAGNOSTICS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #DIAGNOSTICS_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DIAGNOSTICS_ERROR_INVALID_PARAMETER Provided parameter is invalid
-  /// @retval #DIAGNOSTICS_ERROR_IO_ERROR Internal error occured
-  /// @retval #DIAGNOSTICS_ERROR_OUT_OF_MEMORY Not enough memory to create data handle
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Remarks:**
+  /// - `data` should be released with diagnostics_data_destroy().
+  /// - This function is permitted only to an app signed by platform level certificates.
+  ///
+  /// **Parameters:**
+  /// - `client_id` (in): An id of app or service to request
+  /// - `params` (in): Array of parameters
+  /// - `params_size` (in): Number of parameters
+  /// - `data` (out): Dumpsys data handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DIAGNOSTICS_ERROR_NONE`: Success
+  /// - `DIAGNOSTICS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `DIAGNOSTICS_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DIAGNOSTICS_ERROR_INVALID_PARAMETER`: Provided parameter is invalid
+  /// - `DIAGNOSTICS_ERROR_IO_ERROR`: Internal error occured
+  /// - `DIAGNOSTICS_ERROR_OUT_OF_MEMORY`: Not enough memory to create data handle
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int diagnostics_request_client_data(
     ffi.Pointer<ffi.Char> client_id,
     ffi.Pointer<ffi.Pointer<ffi.Char>> params,
@@ -121,25 +147,33 @@ class Tizen60Diagnostics {
               int,
               ffi.Pointer<diagnostics_data_h>)>();
 
-  /// @brief Reads diagnostics data.
-  /// @since_tizen 6.0
-  /// @remarks @a data should be released with diagnostics_data_destroy().
-  /// This function is intended for use in loop until EOF is reached.
-  /// EOF is when @a bytes_read == 0 and function returns #DIAGNOSTICS_ERROR_NONE.
-  /// @param[in] data Diagnostics data handle
-  /// @param[in,out] buf Buffer to store read data \n
-  /// Provided buffer must be large enough to contain @a count number of bytes
-  /// @param[in] count Number of bytes to read
-  /// @param[in] timeout_ms Timeout [ms] for reading requested number of bytes (timeout_ms <= 0 means to wait forever)
-  /// @param[out] bytes_read Real number of read bytes
+  /// Reads diagnostics data.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #DIAGNOSTICS_ERROR_NONE Success
-  /// @retval #DIAGNOSTICS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #DIAGNOSTICS_ERROR_INVALID_PARAMETER Provided parameter is invalid
-  /// @retval #DIAGNOSTICS_ERROR_TIMED_OUT Timeout occured
-  /// @retval #DIAGNOSTICS_ERROR_TRY_AGAIN Try again
-  /// @retval #DIAGNOSTICS_ERROR_IO_ERROR Internal error occured while trying to read data, result is unspecified and *bytes_read is not updated
+  /// **Since Tizen:**
+  /// - 6.0
+  ///
+  /// **Remarks:**
+  /// - `data` should be released with diagnostics_data_destroy().
+  /// - This function is intended for use in loop until EOF is reached.
+  /// - EOF is when `bytes_read` == 0 and function returns `DIAGNOSTICS_ERROR_NONE`.
+  ///
+  /// **Parameters:**
+  /// - `data` (in): Diagnostics data handle
+  /// - `buf` (in,out): Buffer to store read data Provided buffer must be large enough to contain `count` number of bytes
+  /// - `count` (in): Number of bytes to read
+  /// - `timeout_ms` (in): Timeout `[ms]` for reading requested number of bytes (timeout_ms <= 0 means to wait forever)
+  /// - `bytes_read` (out): Real number of read bytes
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DIAGNOSTICS_ERROR_NONE`: Success
+  /// - `DIAGNOSTICS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `DIAGNOSTICS_ERROR_INVALID_PARAMETER`: Provided parameter is invalid
+  /// - `DIAGNOSTICS_ERROR_TIMED_OUT`: Timeout occured
+  /// - `DIAGNOSTICS_ERROR_TRY_AGAIN`: Try again
+  /// - `DIAGNOSTICS_ERROR_IO_ERROR`: Internal error occured while trying to read data, result is unspecified and *bytes_read is not updated
   int diagnostics_data_read(
     diagnostics_data_h data,
     ffi.Pointer<ffi.Void> buf,
@@ -164,15 +198,21 @@ class Tizen60Diagnostics {
       int Function(diagnostics_data_h, ffi.Pointer<ffi.Void>, int, int,
           ffi.Pointer<ffi.Size>)>();
 
-  /// @brief Frees diagnostics data.
-  /// @since_tizen 6.0
+  /// Frees diagnostics data.
   ///
-  /// @param[in] data Diagnostics data handle
+  /// **Since Tizen:**
+  /// - 6.0
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #DIAGNOSTICS_ERROR_NONE Success
-  /// @retval #DIAGNOSTICS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #DIAGNOSTICS_ERROR_INVALID_PARAMETER Provided parameter is invalid
+  /// **Parameters:**
+  /// - `data` (in): Diagnostics data handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DIAGNOSTICS_ERROR_NONE`: Success
+  /// - `DIAGNOSTICS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `DIAGNOSTICS_ERROR_INVALID_PARAMETER`: Provided parameter is invalid
   int diagnostics_data_destroy(
     diagnostics_data_h data,
   ) {
@@ -187,17 +227,25 @@ class Tizen60Diagnostics {
   late final _diagnostics_data_destroy = _diagnostics_data_destroyPtr
       .asFunction<int Function(diagnostics_data_h)>();
 
-  /// @brief Gets diagnostics context provider's id.
-  /// @since_tizen 6.0
-  /// @remarks @a client_id should be released with free().
+  /// Gets diagnostics context provider's id.
   ///
-  /// @param[in] ctx Diagnostics context handle
-  /// @param[out] client_id An id of the context provider
+  /// **Since Tizen:**
+  /// - 6.0
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #DIAGNOSTICS_ERROR_NONE Success
-  /// @retval #DIAGNOSTICS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #DIAGNOSTICS_ERROR_INVALID_PARAMETER Provided parameter is invalid
+  /// **Remarks:**
+  /// - `client_id` should be released with free().
+  ///
+  /// **Parameters:**
+  /// - `ctx` (in): Diagnostics context handle
+  /// - `client_id` (out): An id of the context provider
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DIAGNOSTICS_ERROR_NONE`: Success
+  /// - `DIAGNOSTICS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `DIAGNOSTICS_ERROR_INVALID_PARAMETER`: Provided parameter is invalid
   int diagnostics_get_client_id(
     diagnostics_ctx_h ctx,
     ffi.Pointer<ffi.Pointer<ffi.Char>> client_id,
@@ -218,27 +266,37 @@ class Tizen60Diagnostics {
           int Function(
               diagnostics_ctx_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @platform
-  /// @brief Gets report data.
-  /// @since_tizen 6.0
-  /// @privlevel platform
-  /// @privilege
-  /// @remarks @a data should be released with diagnostics_data_destroy().
-  /// This function is permitted only to an app signed by platform level certificates.
+  /// Gets report data.
   ///
-  /// @param[in] ctx Diagnostics context handle
-  /// @param[in] params Array of parameters \n
-  /// Refer to context provider's documentation for available parameters
-  /// @param[in] params_size Number of parameters
-  /// @param[out] data Diagnostics data handle
+  /// **Since Tizen:**
+  /// - 6.0
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #DIAGNOSTICS_ERROR_NONE Success
-  /// @retval #DIAGNOSTICS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #DIAGNOSTICS_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DIAGNOSTICS_ERROR_INVALID_PARAMETER Provided parameter is invalid
-  /// @retval #DIAGNOSTICS_ERROR_IO_ERROR Internal error occured
-  /// @retval #DIAGNOSTICS_ERROR_OUT_OF_MEMORY Not enough memory to create data handle
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Remarks:**
+  /// - `data` should be released with diagnostics_data_destroy().
+  /// - This function is permitted only to an app signed by platform level certificates.
+  ///
+  /// **Parameters:**
+  /// - `ctx` (in): Diagnostics context handle
+  /// - `params` (in): Array of parameters Refer to context provider's documentation for available parameters
+  /// - `params_size` (in): Number of parameters
+  /// - `data` (out): Diagnostics data handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DIAGNOSTICS_ERROR_NONE`: Success
+  /// - `DIAGNOSTICS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `DIAGNOSTICS_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DIAGNOSTICS_ERROR_INVALID_PARAMETER`: Provided parameter is invalid
+  /// - `DIAGNOSTICS_ERROR_IO_ERROR`: Internal error occured
+  /// - `DIAGNOSTICS_ERROR_OUT_OF_MEMORY`: Not enough memory to create data handle
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int diagnostics_get_data(
     diagnostics_ctx_h ctx,
     ffi.Pointer<ffi.Pointer<ffi.Char>> params,
@@ -264,15 +322,21 @@ class Tizen60Diagnostics {
       int Function(diagnostics_ctx_h, ffi.Pointer<ffi.Pointer<ffi.Char>>, int,
           ffi.Pointer<diagnostics_data_h>)>();
 
-  /// @brief Frees diagnostics context.
-  /// @since_tizen 6.0
+  /// Frees diagnostics context.
   ///
-  /// @param[in] ctx Diagnostics context handle
+  /// **Since Tizen:**
+  /// - 6.0
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #DIAGNOSTICS_ERROR_NONE Success
-  /// @retval #DIAGNOSTICS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #DIAGNOSTICS_ERROR_INVALID_PARAMETER Provided parameter is invalid
+  /// **Parameters:**
+  /// - `ctx` (in): Diagnostics context handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DIAGNOSTICS_ERROR_NONE`: Success
+  /// - `DIAGNOSTICS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `DIAGNOSTICS_ERROR_INVALID_PARAMETER`: Provided parameter is invalid
   int diagnostics_destroy(
     diagnostics_ctx_h ctx,
   ) {
@@ -288,8 +352,11 @@ class Tizen60Diagnostics {
       _diagnostics_destroyPtr.asFunction<int Function(diagnostics_ctx_h)>();
 }
 
-/// @brief Enumeration for error codes of Diagnostics.
-/// @since_tizen 6.0
+/// Enumeration for error codes of Diagnostics.
+///
+/// **Since Tizen:**
+/// - 6.0
+/// @nodoc
 abstract class diagnostics_error_e {
   /// < Successful
   static const int DIAGNOSTICS_ERROR_NONE = 0;
@@ -319,23 +386,37 @@ abstract class diagnostics_error_e {
   static const int DIAGNOSTICS_ERROR_PERMISSION_DENIED = -13;
 }
 
-/// @brief Notification callback fired when new bug report arrives.
-/// @since_tizen 6.0
-/// @remarks @a ctx should be released with diagnostics_destroy()
+/// Notification callback fired when new bug report arrives.
 ///
-/// @param[in] ctx Diagnostics context handle
-/// @param[in] user_data The user data passed from the callback registration function
+/// **Since Tizen:**
+/// - 6.0
+///
+/// **Remarks:**
+/// - `ctx` should be released with diagnostics_destroy()
+///
+/// **Parameters:**
+/// - `ctx` (in): Diagnostics context handle
+/// - `user_data` (in): The user data passed from the callback registration function
+/// @nodoc
 typedef diagnostics_notification_cb
     = ffi.Pointer<ffi.NativeFunction<diagnostics_notification_cbFunction>>;
+/// @nodoc
 typedef diagnostics_notification_cbFunction = ffi.Void Function(
     diagnostics_ctx_h ctx, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartdiagnostics_notification_cbFunction = void Function(
     diagnostics_ctx_h ctx, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Diagnostics context.
-/// @since_tizen 6.0
+/// Diagnostics context.
+///
+/// **Since Tizen:**
+/// - 6.0
+/// @nodoc
 typedef diagnostics_ctx_h = ffi.Pointer<ffi.Void>;
 
-/// @brief Diagnostics data.
-/// @since_tizen 6.0
+/// Diagnostics data.
+///
+/// **Since Tizen:**
+/// - 6.0
+/// @nodoc
 typedef diagnostics_data_h = ffi.Pointer<ffi.Void>;

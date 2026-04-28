@@ -1,3 +1,6 @@
+/// {@category 6.5/tizen}
+library tizen_interop_6_5.capi_ui_autofill_common;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen capi-ui-autofill-common APIs.
+/// {@category 6.5/tizen}
 class Tizen65CapiUiAutofillCommon {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,15 +28,27 @@ class Tizen65CapiUiAutofillCommon {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Creates an autofill item.
-  /// @since_tizen 5.5
-  /// @remarks If the function succeeds, @a it handle must be released with autofill_item_destroy().
-  /// @param[out] it The autofill item handle
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUTOFILL_ERROR_OUT_OF_MEMORY Out of memory
-  /// @see autofill_item_destroy()
+  /// Creates an autofill item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - If the function succeeds, `it` handle must be released with autofill_item_destroy().
+  ///
+  /// **Parameters:**
+  /// - `it` (out): The autofill item handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUTOFILL_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `autofill_item_destroy()`
   int autofill_item_create(
     ffi.Pointer<autofill_item_h> it,
   ) {
@@ -47,12 +63,20 @@ class Tizen65CapiUiAutofillCommon {
   late final _autofill_item_create = _autofill_item_createPtr
       .asFunction<int Function(ffi.Pointer<autofill_item_h>)>();
 
-  /// @brief Destroys an autofill item.
-  /// @since_tizen 5.5
-  /// @param[in] it The autofill item handle
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Destroys an autofill item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `it` (in): The autofill item handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
   int autofill_item_destroy(
     autofill_item_h it,
   ) {
@@ -67,15 +91,25 @@ class Tizen65CapiUiAutofillCommon {
   late final _autofill_item_destroy =
       _autofill_item_destroyPtr.asFunction<int Function(autofill_item_h)>();
 
-  /// @brief Clones an autofill item.
-  /// @since_tizen 5.5
-  /// @remarks If the function succeeds, @a clone handle must be released with autofill_item_destroy().
-  /// @param[in] it The autofill item handle
-  /// @param[out] clone The autofill item handle to be cloned
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUTOFILL_ERROR_OUT_OF_MEMORY Out of memory
+  /// Clones an autofill item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - If the function succeeds, `clone` handle must be released with autofill_item_destroy().
+  ///
+  /// **Parameters:**
+  /// - `it` (in): The autofill item handle
+  /// - `clone` (out): The autofill item handle to be cloned
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUTOFILL_ERROR_OUT_OF_MEMORY`: Out of memory
   int autofill_item_clone(
     autofill_item_h it,
     ffi.Pointer<autofill_item_h> clone,
@@ -93,13 +127,21 @@ class Tizen65CapiUiAutofillCommon {
   late final _autofill_item_clone = _autofill_item_clonePtr.asFunction<
       int Function(autofill_item_h, ffi.Pointer<autofill_item_h>)>();
 
-  /// @brief Sets the autofill hint (id (username), name, password, phone, credit card number, organization, so on) in an autofill item.
-  /// @since_tizen 5.5
-  /// @param[in] it The autofill item handle
-  /// @param[in] hint The autofill hint
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Sets the autofill hint (id (username), name, password, phone, credit card number, organization, so on) in an autofill item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `it` (in): The autofill item handle
+  /// - `hint` (in): The autofill hint
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
   int autofill_item_set_autofill_hint(
     autofill_item_h it,
     int hint,
@@ -117,13 +159,21 @@ class Tizen65CapiUiAutofillCommon {
       _autofill_item_set_autofill_hintPtr
           .asFunction<int Function(autofill_item_h, int)>();
 
-  /// @brief Gets the autofill hint from an autofill item.
-  /// @since_tizen 5.5
-  /// @param[in] it The autofill item handle
-  /// @param[out] hint The autofill hint
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Gets the autofill hint from an autofill item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `it` (in): The autofill item handle
+  /// - `hint` (out): The autofill hint
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
   int autofill_item_get_autofill_hint(
     autofill_item_h it,
     ffi.Pointer<ffi.Int32> hint,
@@ -142,13 +192,21 @@ class Tizen65CapiUiAutofillCommon {
       _autofill_item_get_autofill_hintPtr
           .asFunction<int Function(autofill_item_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Sets the autofill ID in an autofill item.
-  /// @since_tizen 5.5
-  /// @param[in] it The autofill item handle
-  /// @param[in] id The autofill ID
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Sets the autofill ID in an autofill item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `it` (in): The autofill item handle
+  /// - `id` (in): The autofill ID
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
   int autofill_item_set_id(
     autofill_item_h it,
     ffi.Pointer<ffi.Char> id,
@@ -166,15 +224,25 @@ class Tizen65CapiUiAutofillCommon {
   late final _autofill_item_set_id = _autofill_item_set_idPtr
       .asFunction<int Function(autofill_item_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the autofill ID from an autofill item.
-  /// @since_tizen 5.5
-  /// @remarks @a id must be released using free().
-  /// @param[in] it The autofill item handle
-  /// @param[out] id The autofill ID
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUTOFILL_ERROR_OPERATION_FAILED Operation failure
+  /// Gets the autofill ID from an autofill item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - `id` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `it` (in): The autofill item handle
+  /// - `id` (out): The autofill ID
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUTOFILL_ERROR_OPERATION_FAILED`: Operation failure
   int autofill_item_get_id(
     autofill_item_h it,
     ffi.Pointer<ffi.Pointer<ffi.Char>> id,
@@ -192,13 +260,21 @@ class Tizen65CapiUiAutofillCommon {
   late final _autofill_item_get_id = _autofill_item_get_idPtr.asFunction<
       int Function(autofill_item_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets the autofill label in an autofill item.
-  /// @since_tizen 5.5
-  /// @param[in] it The autofill item handle
-  /// @param[in] label The autofill label
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Sets the autofill label in an autofill item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `it` (in): The autofill item handle
+  /// - `label` (in): The autofill label
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
   int autofill_item_set_label(
     autofill_item_h it,
     ffi.Pointer<ffi.Char> label,
@@ -216,15 +292,25 @@ class Tizen65CapiUiAutofillCommon {
   late final _autofill_item_set_label = _autofill_item_set_labelPtr
       .asFunction<int Function(autofill_item_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the autofill label from an autofill item.
-  /// @since_tizen 5.5
-  /// @remarks @a label must be released using free().
-  /// @param[in] it The autofill item handle
-  /// @param[out] label The autofill label
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUTOFILL_ERROR_OPERATION_FAILED Operation failure
+  /// Gets the autofill label from an autofill item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - `label` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `it` (in): The autofill item handle
+  /// - `label` (out): The autofill label
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUTOFILL_ERROR_OPERATION_FAILED`: Operation failure
   int autofill_item_get_label(
     autofill_item_h it,
     ffi.Pointer<ffi.Pointer<ffi.Char>> label,
@@ -242,13 +328,21 @@ class Tizen65CapiUiAutofillCommon {
   late final _autofill_item_get_label = _autofill_item_get_labelPtr.asFunction<
       int Function(autofill_item_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets the sensitive data in an autofill item.
-  /// @since_tizen 5.5
-  /// @param[in] it The autofill item handle
-  /// @param[in] sensitive The sensitive data or not
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Sets the sensitive data in an autofill item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `it` (in): The autofill item handle
+  /// - `sensitive` (in): The sensitive data or not
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
   int autofill_item_set_sensitive_data(
     autofill_item_h it,
     bool sensitive,
@@ -266,13 +360,21 @@ class Tizen65CapiUiAutofillCommon {
       _autofill_item_set_sensitive_dataPtr
           .asFunction<int Function(autofill_item_h, bool)>();
 
-  /// @brief Gets the sensitive data from an autofill item.
-  /// @since_tizen 5.5
-  /// @param[in] it The autofill item handle
-  /// @param[out] sensitive The sensitive data or not
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Gets the sensitive data from an autofill item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `it` (in): The autofill item handle
+  /// - `sensitive` (out): The sensitive data or not
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
   int autofill_item_get_sensitive_data(
     autofill_item_h it,
     ffi.Pointer<ffi.Bool> sensitive,
@@ -291,13 +393,21 @@ class Tizen65CapiUiAutofillCommon {
       _autofill_item_get_sensitive_dataPtr
           .asFunction<int Function(autofill_item_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Sets the autofill value in an autofill item.
-  /// @since_tizen 5.5
-  /// @param[in] it The autofill item handle
-  /// @param[in] value The autofill value
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Sets the autofill value in an autofill item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `it` (in): The autofill item handle
+  /// - `value` (in): The autofill value
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
   int autofill_item_set_value(
     autofill_item_h it,
     ffi.Pointer<ffi.Char> value,
@@ -315,15 +425,25 @@ class Tizen65CapiUiAutofillCommon {
   late final _autofill_item_set_value = _autofill_item_set_valuePtr
       .asFunction<int Function(autofill_item_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the autofill value from an autofill item.
-  /// @since_tizen 5.5
-  /// @remarks @a value must be released using free().
-  /// @param[in] it The autofill item handle
-  /// @param[out] value The autofill value
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUTOFILL_ERROR_OPERATION_FAILED Operation failure
+  /// Gets the autofill value from an autofill item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - `value` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `it` (in): The autofill item handle
+  /// - `value` (out): The autofill value
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUTOFILL_ERROR_OPERATION_FAILED`: Operation failure
   int autofill_item_get_value(
     autofill_item_h it,
     ffi.Pointer<ffi.Pointer<ffi.Char>> value,
@@ -341,14 +461,24 @@ class Tizen65CapiUiAutofillCommon {
   late final _autofill_item_get_value = _autofill_item_get_valuePtr.asFunction<
       int Function(autofill_item_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Creates autofill authentication information.
-  /// @since_tizen 5.5
-  /// @remarks If the function succeeds, @a ai handle must be released with autofill_auth_info_destroy().
-  /// @param[out] ai The autofill authentication information handle
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUTOFILL_ERROR_OUT_OF_MEMORY Out of memory
+  /// Creates autofill authentication information.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - If the function succeeds, `ai` handle must be released with autofill_auth_info_destroy().
+  ///
+  /// **Parameters:**
+  /// - `ai` (out): The autofill authentication information handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUTOFILL_ERROR_OUT_OF_MEMORY`: Out of memory
   int autofill_auth_info_create(
     ffi.Pointer<autofill_auth_info_h> ai,
   ) {
@@ -364,12 +494,20 @@ class Tizen65CapiUiAutofillCommon {
   late final _autofill_auth_info_create = _autofill_auth_info_createPtr
       .asFunction<int Function(ffi.Pointer<autofill_auth_info_h>)>();
 
-  /// @brief Destroys autofill authentication information.
-  /// @since_tizen 5.5
-  /// @param[in] ai The autofill authentication information handle
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Destroys autofill authentication information.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `ai` (in): The autofill authentication information handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
   int autofill_auth_info_destroy(
     autofill_auth_info_h ai,
   ) {
@@ -384,13 +522,21 @@ class Tizen65CapiUiAutofillCommon {
   late final _autofill_auth_info_destroy = _autofill_auth_info_destroyPtr
       .asFunction<int Function(autofill_auth_info_h)>();
 
-  /// @brief Sets the app id in autofill authentication information.
-  /// @since_tizen 5.5
-  /// @param[in] ai The autofill authentication information handle
-  /// @param[in] app_id The app ID
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Sets the app id in autofill authentication information.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `ai` (in): The autofill authentication information handle
+  /// - `app_id` (in): The app ID
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
   int autofill_auth_info_set_app_id(
     autofill_auth_info_h ai,
     ffi.Pointer<ffi.Char> app_id,
@@ -408,15 +554,25 @@ class Tizen65CapiUiAutofillCommon {
   late final _autofill_auth_info_set_app_id = _autofill_auth_info_set_app_idPtr
       .asFunction<int Function(autofill_auth_info_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the app id from autofill authentication information.
-  /// @since_tizen 5.5
-  /// @remarks @a app_id must be released using free().
-  /// @param[in] ai The autofill authentication information handle
-  /// @param[out] app_id The app ID
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUTOFILL_ERROR_OPERATION_FAILED Operation failure
+  /// Gets the app id from autofill authentication information.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - `app_id` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `ai` (in): The autofill authentication information handle
+  /// - `app_id` (out): The app ID
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUTOFILL_ERROR_OPERATION_FAILED`: Operation failure
   int autofill_auth_info_get_app_id(
     autofill_auth_info_h ai,
     ffi.Pointer<ffi.Pointer<ffi.Char>> app_id,
@@ -437,13 +593,21 @@ class Tizen65CapiUiAutofillCommon {
           int Function(
               autofill_auth_info_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets the view id in autofill authentication information.
-  /// @since_tizen 5.5
-  /// @param[in] ai The autofill authentication information handle
-  /// @param[in] view_id The view ID
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Sets the view id in autofill authentication information.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `ai` (in): The autofill authentication information handle
+  /// - `view_id` (in): The view ID
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
   int autofill_auth_info_set_view_id(
     autofill_auth_info_h ai,
     ffi.Pointer<ffi.Char> view_id,
@@ -462,15 +626,25 @@ class Tizen65CapiUiAutofillCommon {
       _autofill_auth_info_set_view_idPtr.asFunction<
           int Function(autofill_auth_info_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the view id from autofill authentication information.
-  /// @since_tizen 5.5
-  /// @remarks @a view_id must be released using free().
-  /// @param[in] ai The autofill authentication information handle
-  /// @param[in] view_id The view ID
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUTOFILL_ERROR_OPERATION_FAILED Operation failure
+  /// Gets the view id from autofill authentication information.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - `view_id` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `ai` (in): The autofill authentication information handle
+  /// - `view_id` (in): The view ID
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUTOFILL_ERROR_OPERATION_FAILED`: Operation failure
   int autofill_auth_info_get_view_id(
     autofill_auth_info_h ai,
     ffi.Pointer<ffi.Pointer<ffi.Char>> view_id,
@@ -491,13 +665,21 @@ class Tizen65CapiUiAutofillCommon {
           int Function(
               autofill_auth_info_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets the 'autofill data present' attribute in autofill authentication information.
-  /// @since_tizen 5.5
-  /// @param[in] ai The autofill authentication information handle
-  /// @param[in] autofill_data_present The autofill data presence
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Sets the 'autofill data present' attribute in autofill authentication information.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `ai` (in): The autofill authentication information handle
+  /// - `autofill_data_present` (in): The autofill data presence
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
   int autofill_auth_info_set_autofill_data_present(
     autofill_auth_info_h ai,
     bool autofill_data_present,
@@ -515,13 +697,21 @@ class Tizen65CapiUiAutofillCommon {
       _autofill_auth_info_set_autofill_data_presentPtr
           .asFunction<int Function(autofill_auth_info_h, bool)>();
 
-  /// @brief Gets the 'autofill data present' attribute from autofill authentication information.
-  /// @since_tizen 5.5
-  /// @param[in] ai The autofill authentication information handle
-  /// @param[out] autofill_data_present The autofill data presence
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Gets the 'autofill data present' attribute from autofill authentication information.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `ai` (in): The autofill authentication information handle
+  /// - `autofill_data_present` (out): The autofill data presence
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
   int autofill_auth_info_get_autofill_data_present(
     autofill_auth_info_h ai,
     ffi.Pointer<ffi.Bool> autofill_data_present,
@@ -540,13 +730,21 @@ class Tizen65CapiUiAutofillCommon {
       _autofill_auth_info_get_autofill_data_presentPtr.asFunction<
           int Function(autofill_auth_info_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Sets the 'authentication needed' attribute in autofill authentication information.
-  /// @since_tizen 5.5
-  /// @param[in] ai The autofill authentication information handle
-  /// @param[in] authentication_needed The authentication need
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Sets the 'authentication needed' attribute in autofill authentication information.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `ai` (in): The autofill authentication information handle
+  /// - `authentication_needed` (in): The authentication need
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
   int autofill_auth_info_set_authentication_needed(
     autofill_auth_info_h ai,
     bool authentication_needed,
@@ -564,13 +762,21 @@ class Tizen65CapiUiAutofillCommon {
       _autofill_auth_info_set_authentication_neededPtr
           .asFunction<int Function(autofill_auth_info_h, bool)>();
 
-  /// @brief Gets the 'authentication needed' attribute from autofill authentication information.
-  /// @since_tizen 5.5
-  /// @param[in] ai The autofill authentication information handle
-  /// @param[out] authentication_needed The authentication need
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Gets the 'authentication needed' attribute from autofill authentication information.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `ai` (in): The autofill authentication information handle
+  /// - `authentication_needed` (out): The authentication need
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
   int autofill_auth_info_get_authentication_needed(
     autofill_auth_info_h ai,
     ffi.Pointer<ffi.Bool> authentication_needed,
@@ -589,13 +795,21 @@ class Tizen65CapiUiAutofillCommon {
       _autofill_auth_info_get_authentication_neededPtr.asFunction<
           int Function(autofill_auth_info_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Sets the service name in autofill authentication information.
-  /// @since_tizen 5.5
-  /// @param[in] ai The autofill authentication information handle
-  /// @param[in] service_name The autofill service name
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Sets the service name in autofill authentication information.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `ai` (in): The autofill authentication information handle
+  /// - `service_name` (in): The autofill service name
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
   int autofill_auth_info_set_service_name(
     autofill_auth_info_h ai,
     ffi.Pointer<ffi.Char> service_name,
@@ -614,15 +828,25 @@ class Tizen65CapiUiAutofillCommon {
       _autofill_auth_info_set_service_namePtr.asFunction<
           int Function(autofill_auth_info_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the service name from autofill authentication information.
-  /// @since_tizen 5.5
-  /// @remarks @a service_name must be released using free().
-  /// @param[in] ai The autofill authentication information handle
-  /// @param[out] service_name The autofill service name
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUTOFILL_ERROR_OPERATION_FAILED Operation failure
+  /// Gets the service name from autofill authentication information.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - `service_name` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `ai` (in): The autofill authentication information handle
+  /// - `service_name` (out): The autofill service name
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUTOFILL_ERROR_OPERATION_FAILED`: Operation failure
   int autofill_auth_info_get_service_name(
     autofill_auth_info_h ai,
     ffi.Pointer<ffi.Pointer<ffi.Char>> service_name,
@@ -643,13 +867,21 @@ class Tizen65CapiUiAutofillCommon {
           int Function(
               autofill_auth_info_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets the service message in autofill authentication information.
-  /// @since_tizen 5.5
-  /// @param[in] ai The autofill authentication information handle
-  /// @param[in] service_message The autofill service message
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Sets the service message in autofill authentication information.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `ai` (in): The autofill authentication information handle
+  /// - `service_message` (in): The autofill service message
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
   int autofill_auth_info_set_service_message(
     autofill_auth_info_h ai,
     ffi.Pointer<ffi.Char> service_message,
@@ -668,15 +900,25 @@ class Tizen65CapiUiAutofillCommon {
       _autofill_auth_info_set_service_messagePtr.asFunction<
           int Function(autofill_auth_info_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the service message from autofill authentication information.
-  /// @since_tizen 5.5
-  /// @remarks @a service_message must be released using free().
-  /// @param[in] ai The autofill authentication information handle
-  /// @param[out] service_message The autofill service message
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUTOFILL_ERROR_OPERATION_FAILED Operation failure
+  /// Gets the service message from autofill authentication information.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - `service_message` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `ai` (in): The autofill authentication information handle
+  /// - `service_message` (out): The autofill service message
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUTOFILL_ERROR_OPERATION_FAILED`: Operation failure
   int autofill_auth_info_get_service_message(
     autofill_auth_info_h ai,
     ffi.Pointer<ffi.Pointer<ffi.Char>> service_message,
@@ -697,13 +939,21 @@ class Tizen65CapiUiAutofillCommon {
           int Function(
               autofill_auth_info_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets the service logo image path in autofill authentication information.
-  /// @since_tizen 5.5
-  /// @param[in] ai The autofill authentication information handle
-  /// @param[in] service_logo_image_path The autofill service logo image path
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Sets the service logo image path in autofill authentication information.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `ai` (in): The autofill authentication information handle
+  /// - `service_logo_image_path` (in): The autofill service logo image path
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
   int autofill_auth_info_set_service_logo_image_path(
     autofill_auth_info_h ai,
     ffi.Pointer<ffi.Char> service_logo_image_path,
@@ -722,15 +972,25 @@ class Tizen65CapiUiAutofillCommon {
       _autofill_auth_info_set_service_logo_image_pathPtr.asFunction<
           int Function(autofill_auth_info_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the service logo image path from autofill authentication information.
-  /// @since_tizen 5.5
-  /// @remarks @a service_logo_image_path must be released using free().
-  /// @param[in] ai The autofill authentication information handle
-  /// @param[out] service_logo_image_path The autofill service logo image path
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUTOFILL_ERROR_OPERATION_FAILED Operation failure
+  /// Gets the service logo image path from autofill authentication information.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - `service_logo_image_path` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `ai` (in): The autofill authentication information handle
+  /// - `service_logo_image_path` (out): The autofill service logo image path
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUTOFILL_ERROR_OPERATION_FAILED`: Operation failure
   int autofill_auth_info_get_service_logo_image_path(
     autofill_auth_info_h ai,
     ffi.Pointer<ffi.Pointer<ffi.Char>> service_logo_image_path,
@@ -751,14 +1011,24 @@ class Tizen65CapiUiAutofillCommon {
           int Function(
               autofill_auth_info_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Creates autofill view information.
-  /// @since_tizen 5.5
-  /// @remarks If the function succeeds, @a vi handle must be released with autofill_view_info_destroy().
-  /// @param[out] vi The autofill view info handle
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUTOFILL_ERROR_OUT_OF_MEMORY Out of memory
+  /// Creates autofill view information.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - If the function succeeds, `vi` handle must be released with autofill_view_info_destroy().
+  ///
+  /// **Parameters:**
+  /// - `vi` (out): The autofill view info handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUTOFILL_ERROR_OUT_OF_MEMORY`: Out of memory
   int autofill_view_info_create(
     ffi.Pointer<autofill_view_info_h> vi,
   ) {
@@ -774,12 +1044,20 @@ class Tizen65CapiUiAutofillCommon {
   late final _autofill_view_info_create = _autofill_view_info_createPtr
       .asFunction<int Function(ffi.Pointer<autofill_view_info_h>)>();
 
-  /// @brief Destroys autofill view information.
-  /// @since_tizen 5.5
-  /// @param[in] vi The autofill view info handle
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Destroys autofill view information.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `vi` (in): The autofill view info handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
   int autofill_view_info_destroy(
     autofill_view_info_h vi,
   ) {
@@ -794,13 +1072,21 @@ class Tizen65CapiUiAutofillCommon {
   late final _autofill_view_info_destroy = _autofill_view_info_destroyPtr
       .asFunction<int Function(autofill_view_info_h)>();
 
-  /// @brief Sets the app id in autofill view information.
-  /// @since_tizen 5.5
-  /// @param[in] vi The autofill view info handle
-  /// @param[in] app_id The app ID
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Sets the app id in autofill view information.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `vi` (in): The autofill view info handle
+  /// - `app_id` (in): The app ID
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
   int autofill_view_info_set_app_id(
     autofill_view_info_h vi,
     ffi.Pointer<ffi.Char> app_id,
@@ -818,15 +1104,25 @@ class Tizen65CapiUiAutofillCommon {
   late final _autofill_view_info_set_app_id = _autofill_view_info_set_app_idPtr
       .asFunction<int Function(autofill_view_info_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the app id from autofill view information.
-  /// @since_tizen 5.5
-  /// @remarks @a app_id must be released using free().
-  /// @param[in] vi The autofill view info handle
-  /// @param[out] app_id The app ID
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUTOFILL_ERROR_OPERATION_FAILED Operation failure
+  /// Gets the app id from autofill view information.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - `app_id` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `vi` (in): The autofill view info handle
+  /// - `app_id` (out): The app ID
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUTOFILL_ERROR_OPERATION_FAILED`: Operation failure
   int autofill_view_info_get_app_id(
     autofill_view_info_h vi,
     ffi.Pointer<ffi.Pointer<ffi.Char>> app_id,
@@ -847,13 +1143,21 @@ class Tizen65CapiUiAutofillCommon {
           int Function(
               autofill_view_info_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets the view id in autofill view information.
-  /// @since_tizen 5.5
-  /// @param[in] vi The autofill view info handle
-  /// @param[in] view_id The view ID
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Sets the view id in autofill view information.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `vi` (in): The autofill view info handle
+  /// - `view_id` (in): The view ID
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
   int autofill_view_info_set_view_id(
     autofill_view_info_h vi,
     ffi.Pointer<ffi.Char> view_id,
@@ -872,15 +1176,25 @@ class Tizen65CapiUiAutofillCommon {
       _autofill_view_info_set_view_idPtr.asFunction<
           int Function(autofill_view_info_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the view id from autofill view information.
-  /// @since_tizen 5.5
-  /// @remarks @a view_id must be released using free().
-  /// @param[in] vi The autofill view info handle
-  /// @param[out] view_id The view ID
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUTOFILL_ERROR_OPERATION_FAILED Operation failure
+  /// Gets the view id from autofill view information.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - `view_id` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `vi` (in): The autofill view info handle
+  /// - `view_id` (out): The view ID
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUTOFILL_ERROR_OPERATION_FAILED`: Operation failure
   int autofill_view_info_get_view_id(
     autofill_view_info_h vi,
     ffi.Pointer<ffi.Pointer<ffi.Char>> view_id,
@@ -901,13 +1215,21 @@ class Tizen65CapiUiAutofillCommon {
           int Function(
               autofill_view_info_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Adds autofill item in autofill view information.
-  /// @since_tizen 5.5
-  /// @param[in] vi The autofill view info handle
-  /// @param[in] it The autofill item handle
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Adds autofill item in autofill view information.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `vi` (in): The autofill view info handle
+  /// - `it` (in): The autofill item handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
   int autofill_view_info_add_item(
     autofill_view_info_h vi,
     autofill_item_h it,
@@ -925,14 +1247,22 @@ class Tizen65CapiUiAutofillCommon {
   late final _autofill_view_info_add_item = _autofill_view_info_add_itemPtr
       .asFunction<int Function(autofill_view_info_h, autofill_item_h)>();
 
-  /// @brief Retrieves all items in autofill view information.
-  /// @since_tizen 5.5
-  /// @param[in] vi The autofill view info handle
-  /// @param[in] callback The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Retrieves all items in autofill view information.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `vi` (in): The autofill view info handle
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
   int autofill_view_info_foreach_item(
     autofill_view_info_h vi,
     autofill_item_cb callback,
@@ -954,14 +1284,24 @@ class Tizen65CapiUiAutofillCommon {
           int Function(
               autofill_view_info_h, autofill_item_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Creates the view having autofill entries.
-  /// @since_tizen 5.5
-  /// @remarks If the function succeeds, @a vi handle must be released with autofill_save_view_info_destroy()
-  /// @param[out] vi The handle of autofill for the saving view
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUTOFILL_ERROR_OUT_OF_MEMORY Out of memory
+  /// Creates the view having autofill entries.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - If the function succeeds, `vi` handle must be released with autofill_save_view_info_destroy()
+  ///
+  /// **Parameters:**
+  /// - `vi` (out): The handle of autofill for the saving view
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUTOFILL_ERROR_OUT_OF_MEMORY`: Out of memory
   int autofill_save_view_info_create(
     ffi.Pointer<autofill_save_view_info_h> vi,
   ) {
@@ -978,12 +1318,20 @@ class Tizen65CapiUiAutofillCommon {
       _autofill_save_view_info_createPtr
           .asFunction<int Function(ffi.Pointer<autofill_save_view_info_h>)>();
 
-  /// @brief Destroys the view having autofill entries.
-  /// @since_tizen 5.5
-  /// @param[in] vi The autofill view info handle
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Destroys the view having autofill entries.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `vi` (in): The autofill view info handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
   int autofill_save_view_info_destroy(
     autofill_save_view_info_h vi,
   ) {
@@ -999,13 +1347,21 @@ class Tizen65CapiUiAutofillCommon {
       _autofill_save_view_info_destroyPtr
           .asFunction<int Function(autofill_save_view_info_h)>();
 
-  /// @brief Sets the app ID in the view having autofill entries.
-  /// @since_tizen 5.5
-  /// @param[in] vi The handle of autofill for the saving view
-  /// @param[in] app_id The app ID
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Sets the app ID in the view having autofill entries.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `vi` (in): The handle of autofill for the saving view
+  /// - `app_id` (in): The app ID
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
   int autofill_save_view_info_set_app_id(
     autofill_save_view_info_h vi,
     ffi.Pointer<ffi.Char> app_id,
@@ -1024,15 +1380,25 @@ class Tizen65CapiUiAutofillCommon {
       _autofill_save_view_info_set_app_idPtr.asFunction<
           int Function(autofill_save_view_info_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the app ID from the view having autofill entries.
-  /// @since_tizen 5.5
-  /// @remarks @a app_id must be released using free().
-  /// @param[in] vi The handle of autofill for the saving view
-  /// @param[out] app_id The app ID
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUTOFILL_ERROR_OPERATION_FAILED Operation failure
+  /// Gets the app ID from the view having autofill entries.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - `app_id` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `vi` (in): The handle of autofill for the saving view
+  /// - `app_id` (out): The app ID
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUTOFILL_ERROR_OPERATION_FAILED`: Operation failure
   int autofill_save_view_info_get_app_id(
     autofill_save_view_info_h vi,
     ffi.Pointer<ffi.Pointer<ffi.Char>> app_id,
@@ -1053,13 +1419,21 @@ class Tizen65CapiUiAutofillCommon {
           int Function(
               autofill_save_view_info_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets the view ID in the view having autofill entries.
-  /// @since_tizen 5.5
-  /// @param[in] vi The handle of autofill for the saving view
-  /// @param[in] view_id The view ID
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Sets the view ID in the view having autofill entries.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `vi` (in): The handle of autofill for the saving view
+  /// - `view_id` (in): The view ID
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
   int autofill_save_view_info_set_view_id(
     autofill_save_view_info_h vi,
     ffi.Pointer<ffi.Char> view_id,
@@ -1078,15 +1452,25 @@ class Tizen65CapiUiAutofillCommon {
       _autofill_save_view_info_set_view_idPtr.asFunction<
           int Function(autofill_save_view_info_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the view ID from the view having autofill entries.
-  /// @since_tizen 5.5
-  /// @remarks @a view_id must be released using free().
-  /// @param[in] vi The handle of autofill for the saving view
-  /// @param[out] view_id The view ID
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUTOFILL_ERROR_OPERATION_FAILED Operation failure
+  /// Gets the view ID from the view having autofill entries.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - `view_id` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `vi` (in): The handle of autofill for the saving view
+  /// - `view_id` (out): The view ID
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUTOFILL_ERROR_OPERATION_FAILED`: Operation failure
   int autofill_save_view_info_get_view_id(
     autofill_save_view_info_h vi,
     ffi.Pointer<ffi.Pointer<ffi.Char>> view_id,
@@ -1107,13 +1491,21 @@ class Tizen65CapiUiAutofillCommon {
           int Function(
               autofill_save_view_info_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets the title of the view having autofill entries.
-  /// @since_tizen 5.5
-  /// @param[in] vi The handle of autofill for the saving view
-  /// @param[in] view_title The view title
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Sets the title of the view having autofill entries.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `vi` (in): The handle of autofill for the saving view
+  /// - `view_title` (in): The view title
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
   int autofill_save_view_info_set_view_title(
     autofill_save_view_info_h vi,
     ffi.Pointer<ffi.Char> view_title,
@@ -1133,15 +1525,25 @@ class Tizen65CapiUiAutofillCommon {
       _autofill_save_view_info_set_view_titlePtr.asFunction<
           int Function(autofill_save_view_info_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the title of the view having autofill entries.
-  /// @since_tizen 5.5
-  /// @remarks @a view_title must be released using free().
-  /// @param[in] vi The handle of autofill for the saving view
-  /// @param[out] view_title The view title
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUTOFILL_ERROR_OPERATION_FAILED Operation failure
+  /// Gets the title of the view having autofill entries.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - `view_title` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `vi` (in): The handle of autofill for the saving view
+  /// - `view_title` (out): The view title
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUTOFILL_ERROR_OPERATION_FAILED`: Operation failure
   int autofill_save_view_info_get_view_title(
     autofill_save_view_info_h vi,
     ffi.Pointer<ffi.Pointer<ffi.Char>> view_title,
@@ -1162,13 +1564,21 @@ class Tizen65CapiUiAutofillCommon {
           int Function(
               autofill_save_view_info_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Adds autofill save item in the view having autofill entries.
-  /// @since_tizen 5.5
-  /// @param[in] vi The handle of autofill for the saving view
-  /// @param[in] it The autofill save item handle
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Adds autofill save item in the view having autofill entries.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `vi` (in): The handle of autofill for the saving view
+  /// - `it` (in): The autofill save item handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
   int autofill_save_view_info_add_item(
     autofill_save_view_info_h vi,
     autofill_save_item_h it,
@@ -1187,14 +1597,22 @@ class Tizen65CapiUiAutofillCommon {
       _autofill_save_view_info_add_itemPtr.asFunction<
           int Function(autofill_save_view_info_h, autofill_save_item_h)>();
 
-  /// @brief Retrieves all items in the view having autofill entries.
-  /// @since_tizen 5.5
-  /// @param[in] vi The handle of autofill for the saving view
-  /// @param[in] callback The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Retrieves all items in the view having autofill entries.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `vi` (in): The handle of autofill for the saving view
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
   int autofill_save_view_info_foreach_item(
     autofill_save_view_info_h vi,
     autofill_save_item_cb callback,
@@ -1216,13 +1634,23 @@ class Tizen65CapiUiAutofillCommon {
           int Function(autofill_save_view_info_h, autofill_save_item_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Creates a handle for having a response of the requested autofill.
-  /// @since_tizen 5.5
-  /// @remarks If the function succeeds, @a h handle must be released with autofill_fill_response_destroy().
-  /// @param[out] h The handle for having a response of the requested autofill
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Creates a handle for having a response of the requested autofill.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - If the function succeeds, `h` handle must be released with autofill_fill_response_destroy().
+  ///
+  /// **Parameters:**
+  /// - `h` (out): The handle for having a response of the requested autofill
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
   int autofill_fill_response_create(
     ffi.Pointer<autofill_fill_response_h> h,
   ) {
@@ -1238,12 +1666,20 @@ class Tizen65CapiUiAutofillCommon {
   late final _autofill_fill_response_create = _autofill_fill_response_createPtr
       .asFunction<int Function(ffi.Pointer<autofill_fill_response_h>)>();
 
-  /// @brief Destroys a handle for having a response of the requested autofill.
-  /// @since_tizen 5.5
-  /// @param[in] h The handle for having a response of the requested autofill
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Destroys a handle for having a response of the requested autofill.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `h` (in): The handle for having a response of the requested autofill
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
   int autofill_fill_response_destroy(
     autofill_fill_response_h h,
   ) {
@@ -1259,13 +1695,21 @@ class Tizen65CapiUiAutofillCommon {
       _autofill_fill_response_destroyPtr
           .asFunction<int Function(autofill_fill_response_h)>();
 
-  /// @brief Sets the app ID in the handle for having a response of the requested autofill.
-  /// @since_tizen 5.5
-  /// @param[in] h The handle for having a response of the requested autofill
-  /// @param[in] app_id The app ID
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Sets the app ID in the handle for having a response of the requested autofill.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `h` (in): The handle for having a response of the requested autofill
+  /// - `app_id` (in): The app ID
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
   int autofill_fill_response_set_app_id(
     autofill_fill_response_h h,
     ffi.Pointer<ffi.Char> app_id,
@@ -1284,15 +1728,25 @@ class Tizen65CapiUiAutofillCommon {
       _autofill_fill_response_set_app_idPtr.asFunction<
           int Function(autofill_fill_response_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the app ID from the handle for having a response of the requested autofill.
-  /// @since_tizen 5.5
-  /// @remarks @a app_id must be released using free().
-  /// @param[in] h The handle for having a response of the requested autofill
-  /// @param[out] app_id The app ID
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUTOFILL_ERROR_OPERATION_FAILED Operation failure
+  /// Gets the app ID from the handle for having a response of the requested autofill.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - `app_id` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `h` (in): The handle for having a response of the requested autofill
+  /// - `app_id` (out): The app ID
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUTOFILL_ERROR_OPERATION_FAILED`: Operation failure
   int autofill_fill_response_get_app_id(
     autofill_fill_response_h h,
     ffi.Pointer<ffi.Pointer<ffi.Char>> app_id,
@@ -1313,13 +1767,21 @@ class Tizen65CapiUiAutofillCommon {
           int Function(
               autofill_fill_response_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets the view ID in the handle for having a response of the requested autofill.
-  /// @since_tizen 5.5
-  /// @param[in] h The handle for having a response of the requested autofill
-  /// @param[in] view_id The view ID
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Sets the view ID in the handle for having a response of the requested autofill.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `h` (in): The handle for having a response of the requested autofill
+  /// - `view_id` (in): The view ID
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
   int autofill_fill_response_set_view_id(
     autofill_fill_response_h h,
     ffi.Pointer<ffi.Char> view_id,
@@ -1338,15 +1800,25 @@ class Tizen65CapiUiAutofillCommon {
       _autofill_fill_response_set_view_idPtr.asFunction<
           int Function(autofill_fill_response_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the view ID from the handle for having a response of the requested autofill.
-  /// @since_tizen 5.5
-  /// @remarks @a view_id must be released using free().
-  /// @param[in] h The handle for having a response of the requested autofill
-  /// @param[out] view_id The view ID
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUTOFILL_ERROR_OPERATION_FAILED Operation failure
+  /// Gets the view ID from the handle for having a response of the requested autofill.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - `view_id` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `h` (in): The handle for having a response of the requested autofill
+  /// - `view_id` (out): The view ID
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUTOFILL_ERROR_OPERATION_FAILED`: Operation failure
   int autofill_fill_response_get_view_id(
     autofill_fill_response_h h,
     ffi.Pointer<ffi.Pointer<ffi.Char>> view_id,
@@ -1367,13 +1839,21 @@ class Tizen65CapiUiAutofillCommon {
           int Function(
               autofill_fill_response_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Adds autofill fill response group.
-  /// @since_tizen 5.5
-  /// @param[in] h The handle for having a response of the requested autofill
-  /// @param[in] it The autofill fill response group handle
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Adds autofill fill response group.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `h` (in): The handle for having a response of the requested autofill
+  /// - `it` (in): The autofill fill response group handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
   int autofill_fill_response_add_group(
     autofill_fill_response_h h,
     autofill_fill_response_group_h it,
@@ -1394,14 +1874,22 @@ class Tizen65CapiUiAutofillCommon {
           int Function(
               autofill_fill_response_h, autofill_fill_response_group_h)>();
 
-  /// @brief Retrieves all groups of each fill response.
-  /// @since_tizen 5.5
-  /// @param[in] h The handle for having a response of the requested autofill
-  /// @param[in] callback The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Retrieves all groups of each fill response.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `h` (in): The handle for having a response of the requested autofill
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
   int autofill_fill_response_foreach_group(
     autofill_fill_response_h h,
     autofill_fill_response_group_cb callback,
@@ -1425,13 +1913,21 @@ class Tizen65CapiUiAutofillCommon {
           int Function(autofill_fill_response_h,
               autofill_fill_response_group_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Gets the number of fill response group.
-  /// @since_tizen 5.5
-  /// @param[in] h The handle for having a response of the requested autofill
-  /// @param[out] count The number of group
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Gets the number of fill response group.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `h` (in): The handle for having a response of the requested autofill
+  /// - `count` (out): The number of group
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
   int autofill_fill_response_get_group_count(
     autofill_fill_response_h h,
     ffi.Pointer<ffi.Int> count,
@@ -1450,14 +1946,24 @@ class Tizen65CapiUiAutofillCommon {
       _autofill_fill_response_get_group_countPtr.asFunction<
           int Function(autofill_fill_response_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Creates an autofill fill response group.
-  /// @since_tizen 5.5
-  /// @remarks If the function succeeds, @a h handle must be released with autofill_fill_response_group_destroy().
-  /// @param[out] h The autofill fill response group handle
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUTOFILL_ERROR_OUT_OF_MEMORY Out of memory
+  /// Creates an autofill fill response group.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - If the function succeeds, `h` handle must be released with autofill_fill_response_group_destroy().
+  ///
+  /// **Parameters:**
+  /// - `h` (out): The autofill fill response group handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUTOFILL_ERROR_OUT_OF_MEMORY`: Out of memory
   int autofill_fill_response_group_create(
     ffi.Pointer<autofill_fill_response_group_h> h,
   ) {
@@ -1474,12 +1980,20 @@ class Tizen65CapiUiAutofillCommon {
       _autofill_fill_response_group_createPtr.asFunction<
           int Function(ffi.Pointer<autofill_fill_response_group_h>)>();
 
-  /// @brief Destroys an autofill fill response group.
-  /// @since_tizen 5.5
-  /// @param[in] h The autofill fill response group handle
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Destroys an autofill fill response group.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `h` (in): The autofill fill response group handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
   int autofill_fill_response_group_destroy(
     autofill_fill_response_group_h h,
   ) {
@@ -1495,16 +2009,26 @@ class Tizen65CapiUiAutofillCommon {
       _autofill_fill_response_group_destroyPtr
           .asFunction<int Function(autofill_fill_response_group_h)>();
 
-  /// @brief Clones an autofill fill response group.
-  /// @since_tizen 5.5
-  /// @remarks If the function succeeds, @a clone handle must be released with autofill_fill_response_group_destroy().
-  /// @param[in] h The autofill fill response group handle
-  /// @param[in] clone The autofill fill response group handle to be cloned
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUTOFILL_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #AUTOFILL_ERROR_OPERATION_FAILED Operation failure
+  /// Clones an autofill fill response group.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - If the function succeeds, `clone` handle must be released with autofill_fill_response_group_destroy().
+  ///
+  /// **Parameters:**
+  /// - `h` (in): The autofill fill response group handle
+  /// - `clone` (in): The autofill fill response group handle to be cloned
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUTOFILL_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `AUTOFILL_ERROR_OPERATION_FAILED`: Operation failure
   int autofill_fill_response_group_clone(
     autofill_fill_response_group_h h,
     ffi.Pointer<autofill_fill_response_group_h> clone,
@@ -1525,14 +2049,22 @@ class Tizen65CapiUiAutofillCommon {
           int Function(autofill_fill_response_group_h,
               ffi.Pointer<autofill_fill_response_group_h>)>();
 
-  /// @brief Adds autofill item in an autofill fill response group.
-  /// @since_tizen 5.5
-  /// @param[in] h The autofill fill response group handle
-  /// @param[in] it The autofill fill response item handle
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUTOFILL_ERROR_OUT_OF_MEMORY Out of memory
+  /// Adds autofill item in an autofill fill response group.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `h` (in): The autofill fill response group handle
+  /// - `it` (in): The autofill fill response item handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUTOFILL_ERROR_OUT_OF_MEMORY`: Out of memory
   int autofill_fill_response_group_add_item(
     autofill_fill_response_group_h h,
     autofill_fill_response_item_h it,
@@ -1553,14 +2085,22 @@ class Tizen65CapiUiAutofillCommon {
           int Function(
               autofill_fill_response_group_h, autofill_fill_response_item_h)>();
 
-  /// @brief Retrieves all fill response items of each group.
-  /// @since_tizen 5.5
-  /// @param[in] h The autofill fill response group handle
-  /// @param[in] callback The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Retrieves all fill response items of each group.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `h` (in): The autofill fill response group handle
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
   int autofill_fill_response_group_foreach_item(
     autofill_fill_response_group_h h,
     autofill_fill_response_item_cb callback,
@@ -1583,14 +2123,24 @@ class Tizen65CapiUiAutofillCommon {
           int Function(autofill_fill_response_group_h,
               autofill_fill_response_item_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Creates a handle for fill response item.
-  /// @since_tizen 5.5
-  /// @remarks If the function succeeds, @a it handle must be released with autofill_fill_response_item_destroy().
-  /// @param[out] it The autofill fill response item handle
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUTOFILL_ERROR_OUT_OF_MEMORY Out of memory
+  /// Creates a handle for fill response item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - If the function succeeds, `it` handle must be released with autofill_fill_response_item_destroy().
+  ///
+  /// **Parameters:**
+  /// - `it` (out): The autofill fill response item handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUTOFILL_ERROR_OUT_OF_MEMORY`: Out of memory
   int autofill_fill_response_item_create(
     ffi.Pointer<autofill_fill_response_item_h> it,
   ) {
@@ -1607,12 +2157,20 @@ class Tizen65CapiUiAutofillCommon {
       _autofill_fill_response_item_createPtr.asFunction<
           int Function(ffi.Pointer<autofill_fill_response_item_h>)>();
 
-  /// @brief Destroys the handle for fill response item.
-  /// @since_tizen 5.5
-  /// @param[in] it The autofill fill response item handle
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Destroys the handle for fill response item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `it` (in): The autofill fill response item handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
   int autofill_fill_response_item_destroy(
     autofill_fill_response_item_h it,
   ) {
@@ -1628,16 +2186,22 @@ class Tizen65CapiUiAutofillCommon {
       _autofill_fill_response_item_destroyPtr
           .asFunction<int Function(autofill_fill_response_item_h)>();
 
-  /// @brief Clones a handle for fill response item.
+  /// Clones a handle for fill response item.
   ///
-  /// @since_tizen 5.5
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @param[in] it The autofill fill response item handle
-  /// @param[in] clone The autofill fill response item handle to be cloned
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUTOFILL_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Parameters:**
+  /// - `it` (in): The autofill fill response item handle
+  /// - `clone` (in): The autofill fill response item handle to be cloned
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUTOFILL_ERROR_OUT_OF_MEMORY`: Out of memory
   int autofill_fill_response_item_clone(
     autofill_fill_response_item_h it,
     ffi.Pointer<autofill_fill_response_item_h> clone,
@@ -1658,13 +2222,21 @@ class Tizen65CapiUiAutofillCommon {
           int Function(autofill_fill_response_item_h,
               ffi.Pointer<autofill_fill_response_item_h>)>();
 
-  /// @brief Sets the autofill ID in the handle for fill response item.
-  /// @since_tizen 5.5
-  /// @param[in] it The autofill fill response item handle
-  /// @param[in] id The autofill fill response item ID
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Sets the autofill ID in the handle for fill response item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `it` (in): The autofill fill response item handle
+  /// - `id` (in): The autofill fill response item ID
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
   int autofill_fill_response_item_set_id(
     autofill_fill_response_item_h it,
     ffi.Pointer<ffi.Char> id,
@@ -1683,15 +2255,25 @@ class Tizen65CapiUiAutofillCommon {
       _autofill_fill_response_item_set_idPtr.asFunction<
           int Function(autofill_fill_response_item_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the autofill ID from the handle for fill response item.
-  /// @since_tizen 5.5
-  /// @remarks @a id must be released using free().
-  /// @param[in] it The autofill fill response item handle
-  /// @param[out] id The autofill fill response item ID
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUTOFILL_ERROR_OPERATION_FAILED Operation failure
+  /// Gets the autofill ID from the handle for fill response item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - `id` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `it` (in): The autofill fill response item handle
+  /// - `id` (out): The autofill fill response item ID
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUTOFILL_ERROR_OPERATION_FAILED`: Operation failure
   int autofill_fill_response_item_get_id(
     autofill_fill_response_item_h it,
     ffi.Pointer<ffi.Pointer<ffi.Char>> id,
@@ -1712,13 +2294,21 @@ class Tizen65CapiUiAutofillCommon {
           int Function(autofill_fill_response_item_h,
               ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets the autofill value in the handle for fill response item.
-  /// @since_tizen 5.5
-  /// @param[in] it The autofill fill response item handle
-  /// @param[in] value The autofill fill response item value
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Sets the autofill value in the handle for fill response item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `it` (in): The autofill fill response item handle
+  /// - `value` (in): The autofill fill response item value
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
   int autofill_fill_response_item_set_value(
     autofill_fill_response_item_h it,
     ffi.Pointer<ffi.Char> value,
@@ -1737,15 +2327,25 @@ class Tizen65CapiUiAutofillCommon {
       _autofill_fill_response_item_set_valuePtr.asFunction<
           int Function(autofill_fill_response_item_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the autofill value from the handle for fill response item.
-  /// @since_tizen 5.5
-  /// @remarks @a value must be released using free().
-  /// @param[in] it The autofill fill response item handle
-  /// @param[out] value The autofill fill response item value
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUTOFILL_ERROR_OPERATION_FAILED Operation failure
+  /// Gets the autofill value from the handle for fill response item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - `value` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `it` (in): The autofill fill response item handle
+  /// - `value` (out): The autofill fill response item value
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUTOFILL_ERROR_OPERATION_FAILED`: Operation failure
   int autofill_fill_response_item_get_value(
     autofill_fill_response_item_h it,
     ffi.Pointer<ffi.Pointer<ffi.Char>> value,
@@ -1766,13 +2366,21 @@ class Tizen65CapiUiAutofillCommon {
           int Function(autofill_fill_response_item_h,
               ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets the presentation text in the handle for fill response item.
-  /// @since_tizen 5.5
-  /// @param[in] it The autofill fill response item handle
-  /// @param[in] presentation_text The presentation text
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Sets the presentation text in the handle for fill response item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `it` (in): The autofill fill response item handle
+  /// - `presentation_text` (in): The presentation text
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
   int autofill_fill_response_item_set_presentation_text(
     autofill_fill_response_item_h it,
     ffi.Pointer<ffi.Char> presentation_text,
@@ -1792,15 +2400,25 @@ class Tizen65CapiUiAutofillCommon {
       _autofill_fill_response_item_set_presentation_textPtr.asFunction<
           int Function(autofill_fill_response_item_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the presentation text from the handle for fill response item.
-  /// @since_tizen 5.5
-  /// @remarks @a presentation_text must be released using free().
-  /// @param[in] it The autofill fill response item handle
-  /// @param[out] presentation_text The presentation text
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUTOFILL_ERROR_OPERATION_FAILED Operation failure
+  /// Gets the presentation text from the handle for fill response item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - `presentation_text` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `it` (in): The autofill fill response item handle
+  /// - `presentation_text` (out): The presentation text
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUTOFILL_ERROR_OPERATION_FAILED`: Operation failure
   int autofill_fill_response_item_get_presentation_text(
     autofill_fill_response_item_h it,
     ffi.Pointer<ffi.Pointer<ffi.Char>> presentation_text,
@@ -1821,13 +2439,21 @@ class Tizen65CapiUiAutofillCommon {
           int Function(autofill_fill_response_item_h,
               ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets the type of autofill hint in the handle for fill response item.
-  /// @since_tizen 5.5
-  /// @param[in] it The autofill fill response item handle
-  /// @param[in] hint The autofill hint
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Sets the type of autofill hint in the handle for fill response item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `it` (in): The autofill fill response item handle
+  /// - `hint` (in): The autofill hint
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
   int autofill_fill_response_item_set_autofill_hint(
     autofill_fill_response_item_h it,
     int hint,
@@ -1846,14 +2472,22 @@ class Tizen65CapiUiAutofillCommon {
       _autofill_fill_response_item_set_autofill_hintPtr
           .asFunction<int Function(autofill_fill_response_item_h, int)>();
 
-  /// @brief Gets the type of autofill hint in the handle for fill response item.
-  /// @since_tizen 5.5
-  /// @param[in] it The autofill fill response item handle
-  /// @param[out] hint The autofill hint
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUTOFILL_ERROR_OPERATION_FAILED Operation failure
+  /// Gets the type of autofill hint in the handle for fill response item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `it` (in): The autofill fill response item handle
+  /// - `hint` (out): The autofill hint
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUTOFILL_ERROR_OPERATION_FAILED`: Operation failure
   int autofill_fill_response_item_get_autofill_hint(
     autofill_fill_response_item_h it,
     ffi.Pointer<ffi.Int32> hint,
@@ -1874,13 +2508,23 @@ class Tizen65CapiUiAutofillCommon {
           int Function(
               autofill_fill_response_item_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Creates autofill save item.
-  /// @since_tizen 5.5
-  /// @remarks If the function succeeds, @a it handle must be released with autofill_save_item_destroy().
-  /// @param[out] it The autofill save item handle
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Creates autofill save item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - If the function succeeds, `it` handle must be released with autofill_save_item_destroy().
+  ///
+  /// **Parameters:**
+  /// - `it` (out): The autofill save item handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
   int autofill_save_item_create(
     ffi.Pointer<autofill_save_item_h> it,
   ) {
@@ -1896,12 +2540,20 @@ class Tizen65CapiUiAutofillCommon {
   late final _autofill_save_item_create = _autofill_save_item_createPtr
       .asFunction<int Function(ffi.Pointer<autofill_save_item_h>)>();
 
-  /// @brief Destroys an autofill save item.
-  /// @since_tizen 5.5
-  /// @param[in] it The autofill save item handle
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Destroys an autofill save item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `it` (in): The autofill save item handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
   int autofill_save_item_destroy(
     autofill_save_item_h it,
   ) {
@@ -1916,14 +2568,22 @@ class Tizen65CapiUiAutofillCommon {
   late final _autofill_save_item_destroy = _autofill_save_item_destroyPtr
       .asFunction<int Function(autofill_save_item_h)>();
 
-  /// @brief Clones an autofill save item.
-  /// @since_tizen 5.5
-  /// @param[in] it The autofill save item handle
-  /// @param[in] clone The autofill save item handle to be cloned
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUTOFILL_ERROR_OUT_OF_MEMORY Out of memory
+  /// Clones an autofill save item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `it` (in): The autofill save item handle
+  /// - `clone` (in): The autofill save item handle to be cloned
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUTOFILL_ERROR_OUT_OF_MEMORY`: Out of memory
   int autofill_save_item_clone(
     autofill_save_item_h it,
     ffi.Pointer<autofill_save_item_h> clone,
@@ -1943,13 +2603,21 @@ class Tizen65CapiUiAutofillCommon {
           int Function(
               autofill_save_item_h, ffi.Pointer<autofill_save_item_h>)>();
 
-  /// @brief Sets the autofill hint (id(username), name, password, phone, credit card number, organization, so on) in an autofill save item.
-  /// @since_tizen 5.5
-  /// @param[in] it The autofill save item handle
-  /// @param[in] hint The autofill hint
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Sets the autofill hint (id(username), name, password, phone, credit card number, organization, so on) in an autofill save item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `it` (in): The autofill save item handle
+  /// - `hint` (in): The autofill hint
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
   int autofill_save_item_set_autofill_hint(
     autofill_save_item_h it,
     int hint,
@@ -1968,13 +2636,21 @@ class Tizen65CapiUiAutofillCommon {
       _autofill_save_item_set_autofill_hintPtr
           .asFunction<int Function(autofill_save_item_h, int)>();
 
-  /// @brief Gets the autofill hint from an autofill save item.
-  /// @since_tizen 5.5
-  /// @param[in] it The autofill save item handle
-  /// @param[out] hint The autofill hint
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Gets the autofill hint from an autofill save item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `it` (in): The autofill save item handle
+  /// - `hint` (out): The autofill hint
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
   int autofill_save_item_get_autofill_hint(
     autofill_save_item_h it,
     ffi.Pointer<ffi.Int32> hint,
@@ -1993,13 +2669,21 @@ class Tizen65CapiUiAutofillCommon {
       _autofill_save_item_get_autofill_hintPtr.asFunction<
           int Function(autofill_save_item_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Sets the autofill ID in an autofill save item.
-  /// @since_tizen 5.5
-  /// @param[in] it The autofill save item handle
-  /// @param[in] id The autofill ID
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Sets the autofill ID in an autofill save item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `it` (in): The autofill save item handle
+  /// - `id` (in): The autofill ID
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
   int autofill_save_item_set_id(
     autofill_save_item_h it,
     ffi.Pointer<ffi.Char> id,
@@ -2017,15 +2701,25 @@ class Tizen65CapiUiAutofillCommon {
   late final _autofill_save_item_set_id = _autofill_save_item_set_idPtr
       .asFunction<int Function(autofill_save_item_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the autofill ID from an autofill save item.
-  /// @since_tizen 5.5
-  /// @remarks @a id must be released using free().
-  /// @param[in] it The autofill save item handle
-  /// @param[out] id The autofill ID
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUTOFILL_ERROR_OPERATION_FAILED Operation failure
+  /// Gets the autofill ID from an autofill save item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - `id` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `it` (in): The autofill save item handle
+  /// - `id` (out): The autofill ID
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUTOFILL_ERROR_OPERATION_FAILED`: Operation failure
   int autofill_save_item_get_id(
     autofill_save_item_h it,
     ffi.Pointer<ffi.Pointer<ffi.Char>> id,
@@ -2046,13 +2740,21 @@ class Tizen65CapiUiAutofillCommon {
           int Function(
               autofill_save_item_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets the autofill label in an autofill save item.
-  /// @since_tizen 5.5
-  /// @param[in] it The autofill save item handle
-  /// @param[out] label The autofill label
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Sets the autofill label in an autofill save item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `it` (in): The autofill save item handle
+  /// - `label` (out): The autofill label
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
   int autofill_save_item_set_label(
     autofill_save_item_h it,
     ffi.Pointer<ffi.Char> label,
@@ -2070,15 +2772,25 @@ class Tizen65CapiUiAutofillCommon {
   late final _autofill_save_item_set_label = _autofill_save_item_set_labelPtr
       .asFunction<int Function(autofill_save_item_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the autofill label from an autofill save item.
-  /// @since_tizen 5.5
-  /// @remarks @a label must be released using free().
-  /// @param[in] it The autofill save item handle
-  /// @param[out] label The autofill label
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUTOFILL_ERROR_OPERATION_FAILED Operation failure
+  /// Gets the autofill label from an autofill save item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - `label` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `it` (in): The autofill save item handle
+  /// - `label` (out): The autofill label
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUTOFILL_ERROR_OPERATION_FAILED`: Operation failure
   int autofill_save_item_get_label(
     autofill_save_item_h it,
     ffi.Pointer<ffi.Pointer<ffi.Char>> label,
@@ -2099,13 +2811,21 @@ class Tizen65CapiUiAutofillCommon {
           int Function(
               autofill_save_item_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets the sensitive data in an autofill save item.
-  /// @since_tizen 5.5
-  /// @param[in] it The autofill save item handle
-  /// @param[in] sensitive The sensitive data or not
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Sets the sensitive data in an autofill save item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `it` (in): The autofill save item handle
+  /// - `sensitive` (in): The sensitive data or not
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
   int autofill_save_item_set_sensitive_data(
     autofill_save_item_h it,
     bool sensitive,
@@ -2123,13 +2843,21 @@ class Tizen65CapiUiAutofillCommon {
       _autofill_save_item_set_sensitive_dataPtr
           .asFunction<int Function(autofill_save_item_h, bool)>();
 
-  /// @brief Gets the sensitive data from an autofill save item.
-  /// @since_tizen 5.5
-  /// @param[in] it The autofill save item handle
-  /// @param[out] sensitive The sensitive data or not
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Gets the sensitive data from an autofill save item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `it` (in): The autofill save item handle
+  /// - `sensitive` (out): The sensitive data or not
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
   int autofill_save_item_get_sensitive_data(
     autofill_save_item_h it,
     ffi.Pointer<ffi.Bool> sensitive,
@@ -2148,13 +2876,21 @@ class Tizen65CapiUiAutofillCommon {
       _autofill_save_item_get_sensitive_dataPtr.asFunction<
           int Function(autofill_save_item_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Sets the autofill value in an autofill save item.
-  /// @since_tizen 5.5
-  /// @param[in] it The autofill save item handle
-  /// @param[in] value The autofill value
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Sets the autofill value in an autofill save item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `it` (in): The autofill save item handle
+  /// - `value` (in): The autofill value
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
   int autofill_save_item_set_value(
     autofill_save_item_h it,
     ffi.Pointer<ffi.Char> value,
@@ -2172,15 +2908,25 @@ class Tizen65CapiUiAutofillCommon {
   late final _autofill_save_item_set_value = _autofill_save_item_set_valuePtr
       .asFunction<int Function(autofill_save_item_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the autofill value from an autofill save item.
-  /// @since_tizen 5.5
-  /// @remarks @a value must be released using free().
-  /// @param[in] it The autofill save item handle
-  /// @param[out] value The autofill value
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUTOFILL_ERROR_OPERATION_FAILED Operation failure
+  /// Gets the autofill value from an autofill save item.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - `value` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `it` (in): The autofill save item handle
+  /// - `value` (out): The autofill value
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUTOFILL_ERROR_OPERATION_FAILED`: Operation failure
   int autofill_save_item_get_value(
     autofill_save_item_h it,
     ffi.Pointer<ffi.Pointer<ffi.Char>> value,
@@ -2201,14 +2947,24 @@ class Tizen65CapiUiAutofillCommon {
           int Function(
               autofill_save_item_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Creates autofill error information.
-  /// @since_tizen 5.5
-  /// @remarks If the function succeeds, @a ei handle must be released with autofill_error_info_destroy().
-  /// @param[out] ei The autofill error information handle
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUTOFILL_ERROR_OUT_OF_MEMORY Out of memory
+  /// Creates autofill error information.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - If the function succeeds, `ei` handle must be released with autofill_error_info_destroy().
+  ///
+  /// **Parameters:**
+  /// - `ei` (out): The autofill error information handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUTOFILL_ERROR_OUT_OF_MEMORY`: Out of memory
   int autofill_error_info_create(
     ffi.Pointer<autofill_error_info_h> ei,
   ) {
@@ -2224,12 +2980,20 @@ class Tizen65CapiUiAutofillCommon {
   late final _autofill_error_info_create = _autofill_error_info_createPtr
       .asFunction<int Function(ffi.Pointer<autofill_error_info_h>)>();
 
-  /// @brief Destroys autofill error information.
-  /// @since_tizen 5.5
-  /// @param[in] ei The autofill error information handle
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Destroys autofill error information.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `ei` (in): The autofill error information handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
   int autofill_error_info_destroy(
     autofill_error_info_h ei,
   ) {
@@ -2244,13 +3008,21 @@ class Tizen65CapiUiAutofillCommon {
   late final _autofill_error_info_destroy = _autofill_error_info_destroyPtr
       .asFunction<int Function(autofill_error_info_h)>();
 
-  /// @brief Sets the app id in autofill error information.
-  /// @since_tizen 5.5
-  /// @param[in] ei The autofill error information handle
-  /// @param[in] app_id The app ID
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Sets the app id in autofill error information.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `ei` (in): The autofill error information handle
+  /// - `app_id` (in): The app ID
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
   int autofill_error_info_set_app_id(
     autofill_error_info_h ei,
     ffi.Pointer<ffi.Char> app_id,
@@ -2269,15 +3041,25 @@ class Tizen65CapiUiAutofillCommon {
       _autofill_error_info_set_app_idPtr.asFunction<
           int Function(autofill_error_info_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the app id from autofill error information.
-  /// @since_tizen 5.5
-  /// @remarks @a app_id must be released using free().
-  /// @param[in] ei The autofill error information handle
-  /// @param[out] app_id The app ID
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUTOFILL_ERROR_OPERATION_FAILED Operation failure
+  /// Gets the app id from autofill error information.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - `app_id` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `ei` (in): The autofill error information handle
+  /// - `app_id` (out): The app ID
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUTOFILL_ERROR_OPERATION_FAILED`: Operation failure
   int autofill_error_info_get_app_id(
     autofill_error_info_h ei,
     ffi.Pointer<ffi.Pointer<ffi.Char>> app_id,
@@ -2298,13 +3080,21 @@ class Tizen65CapiUiAutofillCommon {
           int Function(
               autofill_error_info_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets the error code in autofill error information.
-  /// @since_tizen 5.5
-  /// @param[in] ei The autofill error information handle
-  /// @param[in] error_code The autofill error code
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Sets the error code in autofill error information.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `ei` (in): The autofill error information handle
+  /// - `error_code` (in): The autofill error code
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
   int autofill_error_info_set_error_code(
     autofill_error_info_h ei,
     int error_code,
@@ -2323,14 +3113,24 @@ class Tizen65CapiUiAutofillCommon {
       _autofill_error_info_set_error_codePtr
           .asFunction<int Function(autofill_error_info_h, int)>();
 
-  /// @brief Gets the error code from autofill error information.
-  /// @since_tizen 5.5
-  /// @param[in] ei The autofill error information handle
-  /// @param[out] error_code The autofill error code
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see get_error_message()
+  /// Gets the error code from autofill error information.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `ei` (in): The autofill error information handle
+  /// - `error_code` (out): The autofill error code
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `get_error_message()`
   int autofill_error_info_get_error_code(
     autofill_error_info_h ei,
     ffi.Pointer<ffi.Int32> error_code,
@@ -2350,9 +3150,11 @@ class Tizen65CapiUiAutofillCommon {
           int Function(autofill_error_info_h, ffi.Pointer<ffi.Int32>)>();
 }
 
-/// @brief Enumeration for autofill hint.
+/// Enumeration for autofill hint.
 ///
-/// @since_tizen 5.5
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 abstract class autofill_hint_e {
   /// < Autofill hint for a credit card expiration date
   static const int AUTOFILL_HINT_CREDIT_CARD_EXPIRATION_DATE = 0;
@@ -2394,128 +3196,222 @@ abstract class autofill_hint_e {
   static const int AUTOFILL_HINT_CREDIT_CARD_SECURITY_CODE = 12;
 }
 
+/// @nodoc
 final class autofill_item_s extends ffi.Opaque {}
 
+/// @nodoc
 final class autofill_auth_info_s extends ffi.Opaque {}
 
+/// @nodoc
 final class autofill_view_info_s extends ffi.Opaque {}
 
+/// @nodoc
 final class autofill_fill_response_s extends ffi.Opaque {}
 
+/// @nodoc
 final class autofill_fill_response_group_s extends ffi.Opaque {}
 
+/// @nodoc
 final class autofill_response_item_s extends ffi.Opaque {}
 
+/// @nodoc
 final class autofill_save_item_s extends ffi.Opaque {}
 
+/// @nodoc
 final class autofill_save_view_info_s extends ffi.Opaque {}
 
+/// @nodoc
 final class autofill_error_info_s extends ffi.Opaque {}
 
-/// @brief The autofill item handle.
-/// @since_tizen 5.5
+/// The autofill item handle.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 typedef autofill_item_h = ffi.Pointer<autofill_item_s>;
 
-/// @brief The autofill authentication information handle.
-/// @since_tizen 5.5
+/// The autofill authentication information handle.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 typedef autofill_auth_info_h = ffi.Pointer<autofill_auth_info_s>;
 
-/// @brief The autofill view information handle.
-/// @since_tizen 5.5
+/// The autofill view information handle.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 typedef autofill_view_info_h = ffi.Pointer<autofill_view_info_s>;
 
-/// @brief Called for each autofill information in view info.
-/// @since_tizen 5.5
-/// @remarks @a item should not be freed and can be used only in the callback.
-/// @param[in] item The autofill item handle
-/// @param[in] user_data The user data to be passed to the callback function
-/// @return @c true to continue with the next iteration of the loop,
-/// otherwise @c false to break out of the loop
-/// @pre autofill_view_info_foreach_item() will invoke this callback.
-/// @see autofill_view_info_foreach_item()
+/// Called for each autofill information in view info.
+///
+/// **Since Tizen:**
+/// - 5.5
+///
+/// **Remarks:**
+/// - `item` should not be freed and can be used only in the callback.
+///
+/// **Parameters:**
+/// - `item` (in): The autofill item handle
+/// - `user_data` (in): The user data to be passed to the callback function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - autofill_view_info_foreach_item() will invoke this callback.
+///
+/// **See also:**
+/// - `autofill_view_info_foreach_item()`
+/// @nodoc
 typedef autofill_item_cb
     = ffi.Pointer<ffi.NativeFunction<autofill_item_cbFunction>>;
+/// @nodoc
 typedef autofill_item_cbFunction = ffi.Bool Function(
     autofill_item_h item, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartautofill_item_cbFunction = bool Function(
     autofill_item_h item, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief The handle of the view having autofill entries.
-/// @since_tizen 5.5
+/// The handle of the view having autofill entries.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 typedef autofill_save_view_info_h = ffi.Pointer<autofill_save_view_info_s>;
 
-/// @brief The autofill save item handle.
-/// @since_tizen 5.5
+/// The autofill save item handle.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 typedef autofill_save_item_h = ffi.Pointer<autofill_save_item_s>;
 
-/// @brief Called for each autofill information in save view info.
-/// @since_tizen 5.5
-/// @remarks @a item should not be freed and can be used only in the callback.
-/// @param[in] item The autofill item handle
-/// @param[in] user_data The user data to be passed to the callback function
-/// @return @c true to continue with the next iteration of the loop,
-/// otherwise @c false to break out of the loop
-/// @pre autofill_view_info_foreach_item() will invoke this callback.
-/// @see autofill_view_info_foreach_item()
+/// Called for each autofill information in save view info.
+///
+/// **Since Tizen:**
+/// - 5.5
+///
+/// **Remarks:**
+/// - `item` should not be freed and can be used only in the callback.
+///
+/// **Parameters:**
+/// - `item` (in): The autofill item handle
+/// - `user_data` (in): The user data to be passed to the callback function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - autofill_view_info_foreach_item() will invoke this callback.
+///
+/// **See also:**
+/// - `autofill_view_info_foreach_item()`
+/// @nodoc
 typedef autofill_save_item_cb
     = ffi.Pointer<ffi.NativeFunction<autofill_save_item_cbFunction>>;
+/// @nodoc
 typedef autofill_save_item_cbFunction = ffi.Bool Function(
     autofill_save_item_h item, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartautofill_save_item_cbFunction = bool Function(
     autofill_save_item_h item, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief The handle for having a response of the requested autofill.
-/// @since_tizen 5.5
+/// The handle for having a response of the requested autofill.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 typedef autofill_fill_response_h = ffi.Pointer<autofill_fill_response_s>;
 
-/// @brief The autofill fill response group handle.
-/// @since_tizen 5.5
+/// The autofill fill response group handle.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 typedef autofill_fill_response_group_h
     = ffi.Pointer<autofill_fill_response_group_s>;
 
-/// @brief Called for each autofill fill response group information in fill response.
-/// @since_tizen 5.5
-/// @remarks @a item should not be freed and can be used only in the callback.
-/// @param[in] item The autofill fill response group handle
-/// @param[in] user_data The user data to be passed to the callback function
-/// @return @c true to continue with the next iteration of the loop,
-/// otherwise @c false to break out of the loop
-/// @pre autofill_fill_response_foreach_group() will invoke this callback.
-/// @see autofill_fill_response_foreach_group()
+/// Called for each autofill fill response group information in fill response.
+///
+/// **Since Tizen:**
+/// - 5.5
+///
+/// **Remarks:**
+/// - `item` should not be freed and can be used only in the callback.
+///
+/// **Parameters:**
+/// - `item` (in): The autofill fill response group handle
+/// - `user_data` (in): The user data to be passed to the callback function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - autofill_fill_response_foreach_group() will invoke this callback.
+///
+/// **See also:**
+/// - `autofill_fill_response_foreach_group()`
+/// @nodoc
 typedef autofill_fill_response_group_cb
     = ffi.Pointer<ffi.NativeFunction<autofill_fill_response_group_cbFunction>>;
+/// @nodoc
 typedef autofill_fill_response_group_cbFunction = ffi.Bool Function(
     autofill_fill_response_group_h item, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartautofill_fill_response_group_cbFunction = bool Function(
     autofill_fill_response_group_h item, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief The autofill fill response item handle.
-/// @since_tizen 5.5
+/// The autofill fill response item handle.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 typedef autofill_fill_response_item_h = ffi.Pointer<autofill_response_item_s>;
 
-/// @brief Called for each autofill fill response information in fill response group.
-/// @since_tizen 5.5
-/// @remarks @a item should not be freed and can be used only in the callback.
-/// @param[in] item The autofill fill response item handle
-/// @param[in] user_data The user data to be passed to the callback function
-/// @return @c true to continue with the next iteration of the loop,
-/// otherwise @c false to break out of the loop
-/// @pre autofill_fill_response_group_foreach_item() will invoke this callback.
-/// @see autofill_view_info_foreach_item()
+/// Called for each autofill fill response information in fill response group.
+///
+/// **Since Tizen:**
+/// - 5.5
+///
+/// **Remarks:**
+/// - `item` should not be freed and can be used only in the callback.
+///
+/// **Parameters:**
+/// - `item` (in): The autofill fill response item handle
+/// - `user_data` (in): The user data to be passed to the callback function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - autofill_fill_response_group_foreach_item() will invoke this callback.
+///
+/// **See also:**
+/// - `autofill_view_info_foreach_item()`
+/// @nodoc
 typedef autofill_fill_response_item_cb
     = ffi.Pointer<ffi.NativeFunction<autofill_fill_response_item_cbFunction>>;
+/// @nodoc
 typedef autofill_fill_response_item_cbFunction = ffi.Bool Function(
     autofill_fill_response_item_h item, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartautofill_fill_response_item_cbFunction = bool Function(
     autofill_fill_response_item_h item, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief The autofill error information handle.
-/// @since_tizen 5.5
+/// The autofill error information handle.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 typedef autofill_error_info_h = ffi.Pointer<autofill_error_info_s>;
 
-/// @brief Enumeration for autofill function error.
+/// Enumeration for autofill function error.
 ///
-/// @since_tizen 5.5
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 abstract class autofill_error_e {
   /// < Successful
   static const int AUTOFILL_ERROR_NONE = 0;

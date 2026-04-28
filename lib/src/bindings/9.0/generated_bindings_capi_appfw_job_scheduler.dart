@@ -1,3 +1,6 @@
+/// {@category 9.0/tizen}
+library tizen_interop_9_0.capi_appfw_job_scheduler;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen capi-appfw-job-scheduler APIs.
+/// {@category 9.0/tizen}
 class Tizen90CapiAppfwJobScheduler {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,19 +28,30 @@ class Tizen90CapiAppfwJobScheduler {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Creates the job info handle.
-  /// @since_tizen 4.0
-  /// @remarks The @a job_info must be released by using job_info_destroy().
-  /// The job will be started by the periodic interval or the trigger events.
-  /// @param[out]  job_info        The job info handle to be newly created on success
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #JOB_ERROR_NONE              Successful
-  /// @retval #JOB_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #JOB_ERROR_OUT_OF_MEMORY     Out of memory
-  /// @see    job_info_destroy()
-  /// @see    job_info_set_periodic()
-  /// @see    job_info_add_trigger_event()
+  /// Creates the job info handle.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Remarks:**
+  /// - The `job_info` must be released by using job_info_destroy().
+  /// - The job will be started by the periodic interval or the trigger events.
+  ///
+  /// **Parameters:**
+  /// - `job_info` (out): The job info handle to be newly created on success
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `JOB_ERROR_NONE`: Successful
+  /// - `JOB_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `JOB_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `job_info_destroy()`
+  /// - `job_info_set_periodic()`
+  /// - `job_info_add_trigger_event()`
   int job_info_create(
     ffi.Pointer<job_info_h> job_info,
   ) {
@@ -51,14 +66,23 @@ class Tizen90CapiAppfwJobScheduler {
   late final _job_info_create =
       _job_info_createPtr.asFunction<int Function(ffi.Pointer<job_info_h>)>();
 
-  /// @brief Destroys the job info handle and releases all its resources.
-  /// @since_tizen 4.0
-  /// @param[in]   job_info        The job info handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #JOB_ERROR_NONE              Successful
-  /// @retval #JOB_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see    job_info_create()
+  /// Destroys the job info handle and releases all its resources.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `job_info` (in): The job info handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `JOB_ERROR_NONE`: Successful
+  /// - `JOB_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `job_info_create()`
   int job_info_destroy(
     job_info_h job_info,
   ) {
@@ -73,19 +97,30 @@ class Tizen90CapiAppfwJobScheduler {
   late final _job_info_destroy =
       _job_info_destroyPtr.asFunction<int Function(job_info_h)>();
 
-  /// @brief Sets the periodic interval of the job.
-  /// @since_tizen 4.0
-  /// @remarks The platform does not guarantee the accuracy of the given interval for minimizing the wakeups of the device.
-  /// Thus you should not rely on it for timing.
-  /// If this function is called after adding the job trigger events by using job_info_add_trigger_event(),
-  /// the function returns a negative error value.
-  /// @param[in]   job_info        The job info handle
-  /// @param[in]   interval        The periodic interval (in minutes)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #JOB_ERROR_NONE              Successful
-  /// @retval #JOB_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see    job_info_destroy()
+  /// Sets the periodic interval of the job.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Remarks:**
+  /// - The platform does not guarantee the accuracy of the given interval for minimizing the wakeups of the device.
+  /// - Thus you should not rely on it for timing.
+  /// - If this function is called after adding the job trigger events by using job_info_add_trigger_event(),
+  /// - the function returns a negative error value.
+  ///
+  /// **Parameters:**
+  /// - `job_info` (in): The job info handle
+  /// - `interval` (in): The periodic interval (in minutes)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `JOB_ERROR_NONE`: Successful
+  /// - `JOB_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `job_info_destroy()`
   int job_info_set_periodic(
     job_info_h job_info,
     int interval,
@@ -102,18 +137,29 @@ class Tizen90CapiAppfwJobScheduler {
   late final _job_info_set_periodic =
       _job_info_set_periodicPtr.asFunction<int Function(job_info_h, int)>();
 
-  /// @brief Sets the job to be automatically scheduled after the device reboots.
-  /// @since_tizen 4.0
-  /// @remarks If it's a one-time job, setting it to a persistent job returns
-  /// a negative error value on scheduling by using job_scheduler_schedule().
-  /// @param[in]   job_info        The job info handle
-  /// @param[in]   persistent      @c true, if the job needs to be automatically scheduled
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #JOB_ERROR_NONE              Successful
-  /// @retval #JOB_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see    job_info_set_once()
-  /// @see    job_scheduler_schedule()
+  /// Sets the job to be automatically scheduled after the device reboots.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Remarks:**
+  /// - If it's a one-time job, setting it to a persistent job returns
+  /// - a negative error value on scheduling by using job_scheduler_schedule().
+  ///
+  /// **Parameters:**
+  /// - `job_info` (in): The job info handle
+  /// - `persistent` (in): `true`, if the job needs to be automatically scheduled
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `JOB_ERROR_NONE`: Successful
+  /// - `JOB_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `job_info_set_once()`
+  /// - `job_scheduler_schedule()`
   int job_info_set_persistent(
     job_info_h job_info,
     bool persistent,
@@ -130,18 +176,29 @@ class Tizen90CapiAppfwJobScheduler {
   late final _job_info_set_persistent =
       _job_info_set_persistentPtr.asFunction<int Function(job_info_h, bool)>();
 
-  /// @brief Sets the job not to be repeated.
-  /// @since_tizen 4.0
-  /// @remarks If it's a persistent job, setting it to a one-time job returns
-  /// a negative error value on scheduling by using job_scheduler_schedule().
-  /// @param[in]   job_info        The job info handle
-  /// @param[in]   once            @c true, if the job does not need to be repeated
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #JOB_ERROR_NONE              Successful
-  /// @retval #JOB_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see    job_info_set_persistent()
-  /// @see    job_scheduler_schedule()
+  /// Sets the job not to be repeated.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Remarks:**
+  /// - If it's a persistent job, setting it to a one-time job returns
+  /// - a negative error value on scheduling by using job_scheduler_schedule().
+  ///
+  /// **Parameters:**
+  /// - `job_info` (in): The job info handle
+  /// - `once` (in): `true`, if the job does not need to be repeated
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `JOB_ERROR_NONE`: Successful
+  /// - `JOB_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `job_info_set_persistent()`
+  /// - `job_scheduler_schedule()`
   int job_info_set_once(
     job_info_h job_info,
     bool once,
@@ -158,16 +215,25 @@ class Tizen90CapiAppfwJobScheduler {
   late final _job_info_set_once =
       _job_info_set_oncePtr.asFunction<int Function(job_info_h, bool)>();
 
-  /// @brief Sets the timeout interval of the requirements.
-  /// @since_tizen 4.0
-  /// @remarks If the requirements are not satisfied within the timeout value,
-  /// the job does not start.
-  /// @param[in]   job_info        The job info handle
-  /// @param[in]   timeout         The timeout interval (ms)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #JOB_ERROR_NONE              Successful
-  /// @retval #JOB_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Sets the timeout interval of the requirements.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Remarks:**
+  /// - If the requirements are not satisfied within the timeout value,
+  /// - the job does not start.
+  ///
+  /// **Parameters:**
+  /// - `job_info` (in): The job info handle
+  /// - `timeout` (in): The timeout interval (ms)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `JOB_ERROR_NONE`: Successful
+  /// - `JOB_ERROR_INVALID_PARAMETER`: Invalid parameter
   int job_info_set_requirement_timeout(
     job_info_h job_info,
     int timeout,
@@ -185,19 +251,30 @@ class Tizen90CapiAppfwJobScheduler {
       _job_info_set_requirement_timeoutPtr
           .asFunction<int Function(job_info_h, int)>();
 
-  /// @brief Sets that the battery level must not be low to run the job.
-  /// @since_tizen 4.0
-  /// @param[in]   job_info        The job info handle
-  /// @param[in]   battery_not_low @c true, the battery level must not be low.
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #JOB_ERROR_NONE              Successful
-  /// @retval #JOB_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #JOB_ERROR_IO_ERROR          IO error
-  /// @retval #JOB_ERROR_NOT_INITIALIZED   Not initialized
-  /// @retval #JOB_ERROR_NOT_SUPPORTED     Not supported
-  /// @pre    job_scheduler_init() must be called.
-  /// @see    job_scheduler_init()
+  /// Sets that the battery level must not be low to run the job.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `job_info` (in): The job info handle
+  /// - `battery_not_low` (in): `true`, the battery level must not be low.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `JOB_ERROR_NONE`: Successful
+  /// - `JOB_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `JOB_ERROR_IO_ERROR`: IO error
+  /// - `JOB_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `JOB_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - job_scheduler_init() must be called.
+  ///
+  /// **See also:**
+  /// - `job_scheduler_init()`
   int job_info_set_requires_battery_not_low(
     job_info_h job_info,
     bool battery_not_low,
@@ -215,19 +292,30 @@ class Tizen90CapiAppfwJobScheduler {
       _job_info_set_requires_battery_not_lowPtr
           .asFunction<int Function(job_info_h, bool)>();
 
-  /// @brief Sets that the battery must be charging to run the job.
-  /// @since_tizen 4.0
-  /// @param[in]   job_info        The job info handle
-  /// @param[in]   charging        @c true, the battery must be charging.
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #JOB_ERROR_NONE              Successful
-  /// @retval #JOB_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #JOB_ERROR_IO_ERROR          IO error
-  /// @retval #JOB_ERROR_NOT_INITIALIZED   Not initialized
-  /// @retval #JOB_ERROR_NOT_SUPPORTED     Not supported
-  /// @pre    job_scheduler_init() must be called.
-  /// @see    job_scheduler_init()
+  /// Sets that the battery must be charging to run the job.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `job_info` (in): The job info handle
+  /// - `charging` (in): `true`, the battery must be charging.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `JOB_ERROR_NONE`: Successful
+  /// - `JOB_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `JOB_ERROR_IO_ERROR`: IO error
+  /// - `JOB_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `JOB_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - job_scheduler_init() must be called.
+  ///
+  /// **See also:**
+  /// - `job_scheduler_init()`
   int job_info_set_requires_charging(
     job_info_h job_info,
     bool charging,
@@ -245,22 +333,37 @@ class Tizen90CapiAppfwJobScheduler {
       _job_info_set_requires_chargingPtr
           .asFunction<int Function(job_info_h, bool)>();
 
-  /// @brief Sets that the WiFi must be connected to run the job.
-  /// @since_tizen 4.0
-  /// @privlevel   public
-  /// @privilege   %http://tizen.org/privilege/network.get
-  /// @param[in]   job_info        The job info handle
-  /// @param[in]   wifi_connection @c true, the WiFi must be connected.
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #JOB_ERROR_NONE              Successful
-  /// @retval #JOB_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #JOB_ERROR_IO_ERROR          IO error
-  /// @retval #JOB_ERROR_NOT_INITIALIZED   Not initialized
-  /// @retval #JOB_ERROR_NOT_SUPPORTED     Not supported
-  /// @retval #JOB_ERROR_PERMISSION_DENIED Permission denied
-  /// @pre    job_scheduler_init() must be called.
-  /// @see    job_scheduler_init()
+  /// Sets that the WiFi must be connected to run the job.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Parameters:**
+  /// - `job_info` (in): The job info handle
+  /// - `wifi_connection` (in): `true`, the WiFi must be connected.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `JOB_ERROR_NONE`: Successful
+  /// - `JOB_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `JOB_ERROR_IO_ERROR`: IO error
+  /// - `JOB_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `JOB_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `JOB_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **Preconditions:**
+  /// - job_scheduler_init() must be called.
+  ///
+  /// **See also:**
+  /// - `job_scheduler_init()`
   int job_info_set_requires_wifi_connection(
     job_info_h job_info,
     bool wifi_connection,
@@ -278,29 +381,42 @@ class Tizen90CapiAppfwJobScheduler {
       _job_info_set_requires_wifi_connectionPtr
           .asFunction<int Function(job_info_h, bool)>();
 
-  /// @brief Adds the trigger event to the job info handle.
-  /// @since_tizen 4.0
-  /// @remarks The periodic interval of the job info handle must be 0.
-  /// If the interval of the job info handle is not 0, this function returns a negative error value.
-  /// Regarding the @a event, the application may require the following privilege:
-  /// %http://tizen.org/privilege/network.get @n
-  /// If the application does not have the necessary privilege, this function returns #JOB_ERROR_PERMISSION_DENIED.
-  /// See #job_trigger_event_e to find the corresponding privilege of each event.
-  /// @param[in]   job_info        The job info handle
-  /// @param[in]   event           The job trigger event
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #JOB_ERROR_NONE              Successful
-  /// @retval #JOB_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #JOB_ERROR_IO_ERROR          IO error
-  /// @retval #JOB_ERROR_NOT_INITIALIZED   Not initialized
-  /// @retval #JOB_ERROR_NOT_SUPPORTED     Not supported
-  /// @retval #JOB_ERROR_ALREADY_EXIST     Already exist
-  /// @retval #JOB_ERROR_PERMISSION_DENIED Permission denied
-  /// @pre    job_scheduler_init() must be called.
-  /// @see    job_scheduler_init()
-  /// @see    job_info_remove_trigger_event()
-  /// @see    job_trigger_event_e
+  /// Adds the trigger event to the job info handle.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Remarks:**
+  /// - The periodic interval of the job info handle must be 0.
+  /// - If the interval of the job info handle is not 0, this function returns a negative error value.
+  /// - Regarding the `event`, the application may require the following privilege:
+  /// - <http://tizen.org/privilege/network.get>
+  /// - If the application does not have the necessary privilege, this function returns `JOB_ERROR_PERMISSION_DENIED`.
+  /// - See `job_trigger_event_e` to find the corresponding privilege of each event.
+  ///
+  /// **Parameters:**
+  /// - `job_info` (in): The job info handle
+  /// - `event` (in): The job trigger event
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `JOB_ERROR_NONE`: Successful
+  /// - `JOB_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `JOB_ERROR_IO_ERROR`: IO error
+  /// - `JOB_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `JOB_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `JOB_ERROR_ALREADY_EXIST`: Already exist
+  /// - `JOB_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **Preconditions:**
+  /// - job_scheduler_init() must be called.
+  ///
+  /// **See also:**
+  /// - `job_scheduler_init()`
+  /// - `job_info_remove_trigger_event()`
+  /// - `job_trigger_event_e`
   int job_info_add_trigger_event(
     job_info_h job_info,
     int event,
@@ -317,18 +433,29 @@ class Tizen90CapiAppfwJobScheduler {
   late final _job_info_add_trigger_event = _job_info_add_trigger_eventPtr
       .asFunction<int Function(job_info_h, int)>();
 
-  /// @brief Removes the trigger event from the job info handle.
-  /// @since_tizen 4.0
-  /// @remarks The periodic interval of the job info handle must be 0.
-  /// If the interval of the job info handle is not 0, this function returns a negative error value.
-  /// @param[in]   job_info        The job info handle
-  /// @param[in]   event           The job trigger event
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #JOB_ERROR_NONE              Successful
-  /// @retval #JOB_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see    job_info_add_trigger_event()
-  /// @see    job_trigger_event_e
+  /// Removes the trigger event from the job info handle.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Remarks:**
+  /// - The periodic interval of the job info handle must be 0.
+  /// - If the interval of the job info handle is not 0, this function returns a negative error value.
+  ///
+  /// **Parameters:**
+  /// - `job_info` (in): The job info handle
+  /// - `event` (in): The job trigger event
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `JOB_ERROR_NONE`: Successful
+  /// - `JOB_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `job_info_add_trigger_event()`
+  /// - `job_trigger_event_e`
   int job_info_remove_trigger_event(
     job_info_h job_info,
     int event,
@@ -345,19 +472,30 @@ class Tizen90CapiAppfwJobScheduler {
   late final _job_info_remove_trigger_event = _job_info_remove_trigger_eventPtr
       .asFunction<int Function(job_info_h, int)>();
 
-  /// @brief Gets the ID of the job.
-  /// @since_tizen 4.0
-  /// @remarks The @a job_info must be scheduled by using job_scheduler_schedule().
-  /// If the job_info is not scheduled, this function returns a negative error value.
-  /// The @a job_id must be released by using free().
-  /// @param[in]   job_info        The job info handle
-  /// @param[out]  job_id          The ID of the job
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #JOB_ERROR_NONE              Successful
-  /// @retval #JOB_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #JOB_ERROR_OUT_OF_MEMORY     Out of memory
-  /// @see    job_scheduler_schedule()
+  /// Gets the ID of the job.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Remarks:**
+  /// - The `job_info` must be scheduled by using job_scheduler_schedule().
+  /// - If the job_info is not scheduled, this function returns a negative error value.
+  /// - The `job_id` must be released by using free().
+  ///
+  /// **Parameters:**
+  /// - `job_info` (in): The job info handle
+  /// - `job_id` (out): The ID of the job
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `JOB_ERROR_NONE`: Successful
+  /// - `JOB_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `JOB_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `job_scheduler_schedule()`
   int job_info_get_job_id(
     job_info_h job_info,
     ffi.Pointer<ffi.Pointer<ffi.Char>> job_id,
@@ -375,17 +513,28 @@ class Tizen90CapiAppfwJobScheduler {
   late final _job_info_get_job_id = _job_info_get_job_idPtr.asFunction<
       int Function(job_info_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Clones the given job_info handle.
-  /// @since_tizen 4.0
-  /// @remarks The newly created job_info handle must be released by using job_info_destroy().
-  /// @param[in]   job_info        The job info handle
-  /// @param[out]  clone           If successful, a newly created job info handle will be returned
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #JOB_ERROR_NONE              Successful
-  /// @retval #JOB_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #JOB_ERROR_OUT_OF_MEMORY     Out of memory
-  /// @see    job_info_destroy()
+  /// Clones the given job_info handle.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Remarks:**
+  /// - The newly created job_info handle must be released by using job_info_destroy().
+  ///
+  /// **Parameters:**
+  /// - `job_info` (in): The job info handle
+  /// - `clone` (out): If successful, a newly created job info handle will be returned
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `JOB_ERROR_NONE`: Successful
+  /// - `JOB_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `JOB_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `job_info_destroy()`
   int job_info_clone(
     job_info_h job_info,
     ffi.Pointer<job_info_h> clone,
@@ -403,14 +552,21 @@ class Tizen90CapiAppfwJobScheduler {
   late final _job_info_clone = _job_info_clonePtr
       .asFunction<int Function(job_info_h, ffi.Pointer<job_info_h>)>();
 
-  /// @brief Initializes the job scheduler.
-  /// @since_tizen 4.0
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #JOB_ERROR_NONE              Successful
-  /// @retval #JOB_ERROR_IO_ERROR          IO error
-  /// @retval #JOB_ERROR_OUT_OF_MEMORY     Out of memory
-  /// @see    job_scheduler_finish()
+  /// Initializes the job scheduler.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `JOB_ERROR_NONE`: Successful
+  /// - `JOB_ERROR_IO_ERROR`: IO error
+  /// - `JOB_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `job_scheduler_finish()`
   int job_scheduler_init() {
     return _job_scheduler_init();
   }
@@ -420,13 +576,20 @@ class Tizen90CapiAppfwJobScheduler {
   late final _job_scheduler_init =
       _job_scheduler_initPtr.asFunction<int Function()>();
 
-  /// @brief Finalizes the job scheduler.
-  /// @since_tizen 4.0
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #JOB_ERROR_NONE              Successful
-  /// @retval #JOB_ERROR_NOT_INITIALIZED   Not initialized
-  /// @see    job_scheduler_init()
+  /// Finalizes the job scheduler.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `JOB_ERROR_NONE`: Successful
+  /// - `JOB_ERROR_NOT_INITIALIZED`: Not initialized
+  ///
+  /// **See also:**
+  /// - `job_scheduler_init()`
   int job_scheduler_finish() {
     return _job_scheduler_finish();
   }
@@ -436,24 +599,39 @@ class Tizen90CapiAppfwJobScheduler {
   late final _job_scheduler_finish =
       _job_scheduler_finishPtr.asFunction<int Function()>();
 
-  /// @brief Schedules the job.
-  /// @since_tizen 4.0
-  /// @privlevel   public
-  /// @privilege   %http://tizen.org/privilege/appmanager.launch
-  /// @param[in]   job_info        The job info handle
-  /// @param[in]   job_id          The ID of the job
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #JOB_ERROR_NONE              Successful
-  /// @retval #JOB_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #JOB_ERROR_NOT_INITIALIZED   Not initialized
-  /// @retval #JOB_ERROR_IO_ERROR          IO error
-  /// @retval #JOB_ERROR_ALREADY_EXIST     Already exist
-  /// @retval #JOB_ERROR_OUT_OF_MEMORY     Out of memory
-  /// @retval #JOB_ERROR_PERMISSION_DENIED Permission denied
-  /// @pre    job_scheduler_init() MUST be called.
-  /// @see    job_scheduler_init()
-  /// @see    job_info_create()
+  /// Schedules the job.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/appmanager.launch>
+  ///
+  /// **Parameters:**
+  /// - `job_info` (in): The job info handle
+  /// - `job_id` (in): The ID of the job
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `JOB_ERROR_NONE`: Successful
+  /// - `JOB_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `JOB_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `JOB_ERROR_IO_ERROR`: IO error
+  /// - `JOB_ERROR_ALREADY_EXIST`: Already exist
+  /// - `JOB_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `JOB_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **Preconditions:**
+  /// - job_scheduler_init() MUST be called.
+  ///
+  /// **See also:**
+  /// - `job_scheduler_init()`
+  /// - `job_info_create()`
   int job_scheduler_schedule(
     job_info_h job_info,
     ffi.Pointer<ffi.Char> job_id,
@@ -471,18 +649,29 @@ class Tizen90CapiAppfwJobScheduler {
   late final _job_scheduler_schedule = _job_scheduler_schedulePtr
       .asFunction<int Function(job_info_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Cancels the scheduled job.
-  /// @since_tizen 4.0
-  /// @param[in]   job_id          The ID of the scheduled job
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #JOB_ERROR_NONE              Successful
-  /// @retval #JOB_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #JOB_ERROR_NOT_INITIALIZED   Not initialized
-  /// @retval #JOB_ERROR_IO_ERROR          IO error
-  /// @retval #JOB_ERROR_NO_SUCH_JOB       No such job
-  /// @pre    job_scheduler_init() MUST be called.
-  /// @see    job_scheduler_init()
+  /// Cancels the scheduled job.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `job_id` (in): The ID of the scheduled job
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `JOB_ERROR_NONE`: Successful
+  /// - `JOB_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `JOB_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `JOB_ERROR_IO_ERROR`: IO error
+  /// - `JOB_ERROR_NO_SUCH_JOB`: No such job
+  ///
+  /// **Preconditions:**
+  /// - job_scheduler_init() MUST be called.
+  ///
+  /// **See also:**
+  /// - `job_scheduler_init()`
   int job_scheduler_cancel(
     ffi.Pointer<ffi.Char> job_id,
   ) {
@@ -497,15 +686,24 @@ class Tizen90CapiAppfwJobScheduler {
   late final _job_scheduler_cancel = _job_scheduler_cancelPtr
       .asFunction<int Function(ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Cancels all scheduled jobs.
-  /// @since_tizen 4.0
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #JOB_ERROR_NONE              Successful
-  /// @retval #JOB_ERROR_NOT_INITIALIZED   Not initialized
-  /// @retval #JOB_ERROR_IO_ERROR          IO error
-  /// @pre    job_scheduler_init() MUST be called.
-  /// @see    job_scheduler_init()
+  /// Cancels all scheduled jobs.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `JOB_ERROR_NONE`: Successful
+  /// - `JOB_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `JOB_ERROR_IO_ERROR`: IO error
+  ///
+  /// **Preconditions:**
+  /// - job_scheduler_init() MUST be called.
+  ///
+  /// **See also:**
+  /// - `job_scheduler_init()`
   int job_scheduler_cancel_all() {
     return _job_scheduler_cancel_all();
   }
@@ -516,21 +714,34 @@ class Tizen90CapiAppfwJobScheduler {
   late final _job_scheduler_cancel_all =
       _job_scheduler_cancel_allPtr.asFunction<int Function()>();
 
-  /// @brief Notifies that the job is finished.
-  /// @since_tizen 4.0
-  /// @remarks If the job has been launched, the system kept awake for a while.
-  /// It is highly recommended to notify that the job is done,
-  /// the system thus knows it does not need to be kept awake.
-  /// @param[in]   job_id          The ID of the scheduled job
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #JOB_ERROR_NONE              Successful
-  /// @retval #JOB_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #JOB_ERROR_NOT_INITIALIZED   Not initialized
-  /// @retval #JOB_ERROR_NO_SUCH_JOB       No such job
-  /// @retval #JOB_ERROR_IO_ERROR          IO error
-  /// @pre    job_scheduler_init() MUST be called.
-  /// @see    job_scheduler_init()
+  /// Notifies that the job is finished.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Remarks:**
+  /// - If the job has been launched, the system kept awake for a while.
+  /// - It is highly recommended to notify that the job is done,
+  /// - the system thus knows it does not need to be kept awake.
+  ///
+  /// **Parameters:**
+  /// - `job_id` (in): The ID of the scheduled job
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `JOB_ERROR_NONE`: Successful
+  /// - `JOB_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `JOB_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `JOB_ERROR_NO_SUCH_JOB`: No such job
+  /// - `JOB_ERROR_IO_ERROR`: IO error
+  ///
+  /// **Preconditions:**
+  /// - job_scheduler_init() MUST be called.
+  ///
+  /// **See also:**
+  /// - `job_scheduler_init()`
   int job_scheduler_notify_job_finished(
     ffi.Pointer<ffi.Char> job_id,
   ) {
@@ -546,18 +757,29 @@ class Tizen90CapiAppfwJobScheduler {
       _job_scheduler_notify_job_finishedPtr
           .asFunction<int Function(ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Retrieves all scheduled jobs.
-  /// @since_tizen 4.0
-  /// @param[in]   callback        The iteration callback function
-  /// @param[in]   user_data       The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #JOB_ERROR_NONE              Successful
-  /// @retval #JOB_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #JOB_ERROR_NOT_INITIALIZED   Not initialized
-  /// @retval #JOB_ERROR_NO_SUCH_JOB       No scheduled jobs
-  /// @pre    job_scheduler_init() MUST be called.
-  /// @see    job_scheduler_init()
+  /// Retrieves all scheduled jobs.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): The iteration callback function
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `JOB_ERROR_NONE`: Successful
+  /// - `JOB_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `JOB_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `JOB_ERROR_NO_SUCH_JOB`: No scheduled jobs
+  ///
+  /// **Preconditions:**
+  /// - job_scheduler_init() MUST be called.
+  ///
+  /// **See also:**
+  /// - `job_scheduler_init()`
   int job_scheduler_foreach_job(
     job_scheduler_foreach_job_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -576,26 +798,39 @@ class Tizen90CapiAppfwJobScheduler {
       _job_scheduler_foreach_jobPtr.asFunction<
           int Function(job_scheduler_foreach_job_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Adds job service handler for receiving the information of the scheduled job.
-  /// @since_tizen 4.0
-  /// @remarks The @a job_service handle should be released using job_scheduler_service_remove().
-  /// @param[in]   job_id          The ID of the job
-  /// @param[in]   callback        The set of callback functions to handle jobs
-  /// @param[in]   user_data       The user data to be passed to the callback function
-  /// @param[out]  job_service     The job service handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #JOB_ERROR_NONE              Successful
-  /// @retval #JOB_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #JOB_ERROR_NOT_INITIALIZED   Not initialized
-  /// @retval #JOB_ERROR_OUT_OF_MEMORY     Out of memory
-  /// @pre    job_scheduler_init() MUST be called.
-  /// @see    job_scheduler_init()
-  /// @see    job_scheduler_service_remove()
-  /// @see    job_service_start_cb()
-  /// @see    job_service_stop_cb()
-  /// @see    job_scheduler_notify_job_finished()
-  /// @see    #job_service_callback_s
+  /// Adds job service handler for receiving the information of the scheduled job.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Remarks:**
+  /// - The `job_service` handle should be released using job_scheduler_service_remove().
+  ///
+  /// **Parameters:**
+  /// - `job_id` (in): The ID of the job
+  /// - `callback` (in): The set of callback functions to handle jobs
+  /// - `user_data` (in): The user data to be passed to the callback function
+  /// - `job_service` (out): The job service handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `JOB_ERROR_NONE`: Successful
+  /// - `JOB_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `JOB_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `JOB_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - job_scheduler_init() MUST be called.
+  ///
+  /// **See also:**
+  /// - `job_scheduler_init()`
+  /// - `job_scheduler_service_remove()`
+  /// - `job_service_start_cb()`
+  /// - `job_service_stop_cb()`
+  /// - `job_scheduler_notify_job_finished()`
+  /// - `job_service_callback_s`
   int job_scheduler_service_add(
     ffi.Pointer<ffi.Char> job_id,
     ffi.Pointer<job_service_callback_s> callback,
@@ -625,17 +860,28 @@ class Tizen90CapiAppfwJobScheduler {
               ffi.Pointer<ffi.Void>,
               ffi.Pointer<job_service_h>)>();
 
-  /// @brief Removes registered job service handler.
-  /// @since_tizen 4.0
-  /// @param[in]   job_service     The job service handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #JOB_ERROR_NONE              Successful
-  /// @retval #JOB_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #JOB_ERROR_NOT_INITIALIZED   Not initialized
-  /// @pre    job_scheduler_init() MUST be called.
-  /// @see    job_scheduler_init()
-  /// @see    job_scheduler_service_add()
+  /// Removes registered job service handler.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `job_service` (in): The job service handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `JOB_ERROR_NONE`: Successful
+  /// - `JOB_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `JOB_ERROR_NOT_INITIALIZED`: Not initialized
+  ///
+  /// **Preconditions:**
+  /// - job_scheduler_init() MUST be called.
+  ///
+  /// **See also:**
+  /// - `job_scheduler_init()`
+  /// - `job_scheduler_service_add()`
   int job_scheduler_service_remove(
     job_service_h job_service,
   ) {
@@ -651,8 +897,11 @@ class Tizen90CapiAppfwJobScheduler {
       .asFunction<int Function(job_service_h)>();
 }
 
-/// @brief Enumeration for job error.
-/// @since_tizen 4.0
+/// Enumeration for job error.
+///
+/// **Since Tizen:**
+/// - 4.0
+/// @nodoc
 abstract class job_error_e {
   /// < Successful
   static const int JOB_ERROR_NONE = 0;
@@ -682,8 +931,11 @@ abstract class job_error_e {
   static const int JOB_ERROR_NOT_SUPPORTED = -1073741822;
 }
 
-/// @brief Enumeration for the job trigger events.
-/// @since_tizen 4.0
+/// Enumeration for the job trigger events.
+///
+/// **Since Tizen:**
+/// - 4.0
+/// @nodoc
 abstract class job_trigger_event_e {
   /// < The battery level status: Empty
   static const int JOB_TRIGGER_EVENT_BATTERY_LEVEL_EMPTY = 0;
@@ -749,20 +1001,31 @@ abstract class job_trigger_event_e {
   static const int JOB_TRIGGER_EVENT_WIFI_STATE_CONNECTED = 20;
 }
 
+/// @nodoc
 final class job_info_s extends ffi.Opaque {}
 
-/// @brief The job info handle.
-/// @since_tizen 4.0
+/// The job info handle.
+///
+/// **Since Tizen:**
+/// - 4.0
+/// @nodoc
 typedef job_info_h = ffi.Pointer<job_info_s>;
 
+/// @nodoc
 final class job_service_s extends ffi.Opaque {}
 
-/// @brief The structure type containing the set of callback functions for handling jobs.
-/// @details It is one of the input parameter of the job_scheduler_service_add() function.
-/// @since_tizen 4.0
-/// @see    job_scheduler_service_add()
-/// @see    job_service_start_cb()
-/// @see    job_service_stop_cb()
+/// The structure type containing the set of callback functions for handling jobs.
+///
+/// It is one of the input parameter of the job_scheduler_service_add() function.
+///
+/// **Since Tizen:**
+/// - 4.0
+///
+/// **See also:**
+/// - `job_scheduler_service_add()`
+/// - `job_service_start_cb()`
+/// - `job_service_stop_cb()`
+/// @nodoc
 final class job_service_callback_s extends ffi.Struct {
   /// < This callback function is called at the start of the job.
   external job_service_start_cb start;
@@ -771,52 +1034,91 @@ final class job_service_callback_s extends ffi.Struct {
   external job_service_stop_cb stop;
 }
 
-/// @brief Called when the job starts.
-/// @since_tizen 4.0
-/// @remarks The @a job_info MUST NOT be deallocated by the application.
-/// The @a job_info is managed by the platform and is valid only in the callback.
-/// @param[in]   job_info        The job info handle
-/// @param[in]   user_data       The user data passed from the callback registration function
-/// @see    job_scheduler_service_add()
-/// @see    #job_service_callback_s
+/// Called when the job starts.
+///
+/// **Since Tizen:**
+/// - 4.0
+///
+/// **Remarks:**
+/// - The `job_info` MUST NOT be deallocated by the application.
+/// - The `job_info` is managed by the platform and is valid only in the callback.
+///
+/// **Parameters:**
+/// - `job_info` (in): The job info handle
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `job_scheduler_service_add()`
+/// - `job_service_callback_s`
+/// @nodoc
 typedef job_service_start_cb
     = ffi.Pointer<ffi.NativeFunction<job_service_start_cbFunction>>;
+/// @nodoc
 typedef job_service_start_cbFunction = ffi.Void Function(
     job_info_h job_info, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartjob_service_start_cbFunction = void Function(
     job_info_h job_info, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the job stops.
-/// @since_tizen 4.0
-/// @remarks The @a job_info MUST not be deallocated by the application.
-/// The @a job_info is managed by the platform and is valid only in the callback.
-/// @param[in]   job_info        The job info handle
-/// @param[in]   user_data       The user data passed from the callback registration function
-/// @see    job_scheduler_service_add()
-/// @see    #job_service_callback_s
+/// Called when the job stops.
+///
+/// **Since Tizen:**
+/// - 4.0
+///
+/// **Remarks:**
+/// - The `job_info` MUST not be deallocated by the application.
+/// - The `job_info` is managed by the platform and is valid only in the callback.
+///
+/// **Parameters:**
+/// - `job_info` (in): The job info handle
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `job_scheduler_service_add()`
+/// - `job_service_callback_s`
+/// @nodoc
 typedef job_service_stop_cb
     = ffi.Pointer<ffi.NativeFunction<job_service_stop_cbFunction>>;
+/// @nodoc
 typedef job_service_stop_cbFunction = ffi.Void Function(
     job_info_h job_info, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartjob_service_stop_cbFunction = void Function(
     job_info_h job_info, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called to retrieve the job information.
-/// @since_tizen 4.0
-/// @remarks The @a job_info must not be deallocated by the application.
-/// @param[in]   job_info        The job_info handle
-/// @param[in]   user_data       The user data passed from the foreach function
-/// @return @c true continue with the next iteration of the loop,
-/// otherwise @c false to break out of the loop
-/// @pre    job_scheduler_foreach_job() will invoke this callback.
-/// @see    job_scheduler_foreach_job()
+/// Called to retrieve the job information.
+///
+/// **Since Tizen:**
+/// - 4.0
+///
+/// **Remarks:**
+/// - The `job_info` must not be deallocated by the application.
+///
+/// **Parameters:**
+/// - `job_info` (in): The job_info handle
+/// - `user_data` (in): The user data passed from the foreach function
+///
+/// **Returns:**
+/// - `true` continue with the next iteration of the loop, otherwise `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - job_scheduler_foreach_job() will invoke this callback.
+///
+/// **See also:**
+/// - `job_scheduler_foreach_job()`
+/// @nodoc
 typedef job_scheduler_foreach_job_cb
     = ffi.Pointer<ffi.NativeFunction<job_scheduler_foreach_job_cbFunction>>;
+/// @nodoc
 typedef job_scheduler_foreach_job_cbFunction = ffi.Bool Function(
     job_info_h job_info, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartjob_scheduler_foreach_job_cbFunction = bool Function(
     job_info_h job_info, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief The job service handle.
-/// @since_tizen 4.0
+/// The job service handle.
+///
+/// **Since Tizen:**
+/// - 4.0
+/// @nodoc
 typedef job_service_h = ffi.Pointer<job_service_s>;

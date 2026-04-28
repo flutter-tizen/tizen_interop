@@ -1,3 +1,6 @@
+/// {@category 10.0/tizen}
+library tizen_interop_10_0.capi_network_softap;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -10,6 +13,7 @@ import 'dart:ffi' as ffi;
 import 'dart:ffi' as ffi_lib;
 
 /// Dart bindings for Tizen capi-network-softap APIs.
+/// {@category 10.0/tizen}
 class Tizen100CapiNetworkSoftap {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -25,19 +29,35 @@ class Tizen100CapiNetworkSoftap {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Creates the handle for SoftAP.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/softap
-  /// @remarks The @a softap should be released using softap_destroy().
-  /// @param[out]  softap A handle of a new mobile ap handle on success
-  /// @return  0 on success, otherwise a negative error value
-  /// @retval  #SOFTAP_ERROR_NONE              Successful
-  /// @retval  #SOFTAP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval  #SOFTAP_ERROR_OUT_OF_MEMORY  Out of memory
-  /// @retval  #SOFTAP_ERROR_NOT_SUPPORTED     API is not supported
-  /// @retval  #SOFTAP_ERROR_PERMISSION_DENIED Permission denied
-  /// @see  softap_destroy()
+  /// Creates the handle for SoftAP.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/softap>
+  ///
+  /// **Remarks:**
+  /// - The `softap` should be released using softap_destroy().
+  ///
+  /// **Parameters:**
+  /// - `softap` (out): A handle of a new mobile ap handle on success
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SOFTAP_ERROR_NONE`: Successful
+  /// - `SOFTAP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOFTAP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `SOFTAP_ERROR_NOT_SUPPORTED`: API is not supported
+  /// - `SOFTAP_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **See also:**
+  /// - `softap_destroy()`
   int softap_create(
     ffi.Pointer<softap_h> softap,
   ) {
@@ -52,17 +72,31 @@ class Tizen100CapiNetworkSoftap {
   late final _softap_create =
       _softap_createPtr.asFunction<int Function(ffi.Pointer<softap_h>)>();
 
-  /// @brief Destroys the handle for SoftAP.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/softap
-  /// @param[in]  softap  The SoftAP handle
-  /// @return  0 on success, otherwise a negative error value
-  /// @retval  #SOFTAP_ERROR_NONE              Successful
-  /// @retval  #SOFTAP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval  #SOFTAP_ERROR_NOT_SUPPORTED     API is not supported
-  /// @retval  #SOFTAP_ERROR_PERMISSION_DENIED Permission denied
-  /// @see  softap_create()
+  /// Destroys the handle for SoftAP.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/softap>
+  ///
+  /// **Parameters:**
+  /// - `softap` (in): The SoftAP handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SOFTAP_ERROR_NONE`: Successful
+  /// - `SOFTAP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOFTAP_ERROR_NOT_SUPPORTED`: API is not supported
+  /// - `SOFTAP_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **See also:**
+  /// - `softap_create()`
   int softap_destroy(
     softap_h softap,
   ) {
@@ -76,27 +110,43 @@ class Tizen100CapiNetworkSoftap {
   late final _softap_destroy =
       _softap_destroyPtr.asFunction<int Function(softap_h)>();
 
-  /// @platform
-  /// @brief Enables the SoftAP, asynchronously.
-  /// @details This function allows you to activate the SoftAP functionality on the device.
-  /// It's important to ensure that the required privileges have been obtained before invoking this function, as mentioned in the precondition.
-  /// Upon successful execution, the SoftAP will be enabled, allowing nearby devices to establish wireless connections.
-  /// Depending on the device, the user might need to manually turn off the current Wi-Fi connection before enabling the SoftAP.
-  /// @since_tizen 5.0
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/softap.admin
-  /// @param[in]  softap  The SoftAP handle
-  /// @return 0 on success, otherwise negative error value
-  /// @retval  #SOFTAP_ERROR_NONE              Successful
-  /// @retval  #SOFTAP_ERROR_NOT_PERMITTED  Operation not permitted
-  /// @retval  #SOFTAP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval  #SOFTAP_ERROR_INVALID_OPERATION  Invalid operation
-  /// @retval  #SOFTAP_ERROR_RESOURCE_BUSY Device or resource busy
-  /// @retval  #SOFTAP_ERROR_NOT_SUPPORTED     API is not supported
-  /// @retval  #SOFTAP_ERROR_PERMISSION_DENIED Permission denied
-  /// @post softap_enabled_cb() will be invoked.
-  /// @see  softap_is_enabled()
-  /// @see  softap_disable()
+  /// Enables the SoftAP, asynchronously.
+  ///
+  /// This function allows you to activate the SoftAP functionality on the device. It's important to ensure that the required privileges have been obtained before invoking this function, as mentioned in the precondition. Upon successful execution, the SoftAP will be enabled, allowing nearby devices to establish wireless connections. Depending on the device, the user might need to manually turn off the current Wi-Fi connection before enabling the SoftAP.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/softap.admin>
+  ///
+  /// **Parameters:**
+  /// - `softap` (in): The SoftAP handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `SOFTAP_ERROR_NONE`: Successful
+  /// - `SOFTAP_ERROR_NOT_PERMITTED`: Operation not permitted
+  /// - `SOFTAP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOFTAP_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `SOFTAP_ERROR_RESOURCE_BUSY`: Device or resource busy
+  /// - `SOFTAP_ERROR_NOT_SUPPORTED`: API is not supported
+  /// - `SOFTAP_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **Postconditions:**
+  /// - softap_enabled_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `softap_is_enabled()`
+  /// - `softap_disable()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int softap_enable(
     softap_h softap,
   ) {
@@ -110,23 +160,41 @@ class Tizen100CapiNetworkSoftap {
   late final _softap_enable =
       _softap_enablePtr.asFunction<int Function(softap_h)>();
 
-  /// @platform
-  /// @brief Disables the SoftAP, asynchronously.
-  /// @details This function enables you to deactivate the SoftAP functionality on the device.
-  /// Upon successful execution, the SoftAP will be disabled, preventing further wireless connections from being established.
-  /// @since_tizen 5.0
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/softap.admin
-  /// @param[in]  softap  The SoftAP handle
-  /// @return 0 on success, otherwise negative error value
-  /// @retval  #SOFTAP_ERROR_NONE              Successful
-  /// @retval  #SOFTAP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval  #SOFTAP_ERROR_INVALID_OPERATION  Invalid operation
-  /// @retval  #SOFTAP_ERROR_NOT_SUPPORTED     API is not supported
-  /// @retval  #SOFTAP_ERROR_PERMISSION_DENIED Permission denied
-  /// @post softap_disabled_cb() will be invoked.
-  /// @see  softap_is_enabled()
-  /// @see  softap_enable()
+  /// Disables the SoftAP, asynchronously.
+  ///
+  /// This function enables you to deactivate the SoftAP functionality on the device. Upon successful execution, the SoftAP will be disabled, preventing further wireless connections from being established.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/softap.admin>
+  ///
+  /// **Parameters:**
+  /// - `softap` (in): The SoftAP handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `SOFTAP_ERROR_NONE`: Successful
+  /// - `SOFTAP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOFTAP_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `SOFTAP_ERROR_NOT_SUPPORTED`: API is not supported
+  /// - `SOFTAP_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **Postconditions:**
+  /// - softap_disabled_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `softap_is_enabled()`
+  /// - `softap_enable()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int softap_disable(
     softap_h softap,
   ) {
@@ -140,18 +208,30 @@ class Tizen100CapiNetworkSoftap {
   late final _softap_disable =
       _softap_disablePtr.asFunction<int Function(softap_h)>();
 
-  /// @brief Checks whether the SoftAP is enabled or not.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/softap
-  /// @param[in]  softap  The SoftAP handle
-  /// @param[out] enable  @c true if SoftAP is enabled, \n @c false if SoftAP is disabled
-  /// @return 0 on success, otherwise negative error value
-  /// @retval  #SOFTAP_ERROR_NONE              Successful
-  /// @retval  #SOFTAP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval  #SOFTAP_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval  #SOFTAP_ERROR_NOT_SUPPORTED     API is not supported
-  /// @retval  #SOFTAP_ERROR_PERMISSION_DENIED Permission denied
+  /// Checks whether the SoftAP is enabled or not.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/softap>
+  ///
+  /// **Parameters:**
+  /// - `softap` (in): The SoftAP handle
+  /// - `enable` (out): `true` if SoftAP is enabled, `false` if SoftAP is disabled
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `SOFTAP_ERROR_NONE`: Successful
+  /// - `SOFTAP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOFTAP_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `SOFTAP_ERROR_NOT_SUPPORTED`: API is not supported
+  /// - `SOFTAP_ERROR_PERMISSION_DENIED`: Permission denied
   int softap_is_enabled(
     softap_h softap,
     ffi.Pointer<ffi.Bool> enable,
@@ -169,29 +249,44 @@ class Tizen100CapiNetworkSoftap {
   late final _softap_is_enabled = _softap_is_enabledPtr
       .asFunction<int Function(softap_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Gets the Media Access Control (MAC) address of the local device in the format "FC:A1:3E:D6:B1:B1".
-  /// @details This function allows you to obtain the MAC address of the local device.
-  /// Remember that the SoftAP must be enabled in order to use this function.
-  /// You can verify the SoftAP's activation state using the 'softap_is_enabled' function.
-  /// Upon successful execution, the MAC address will be returned in the form of a string,
-  /// which should be freed using the 'free' function once it's no longer needed.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/softap
-  /// @remarks The @a mac_address should be released using free().
-  /// @param[in]  softap  The SoftAP handle
-  /// @param[out]  mac_address  The MAC address
-  /// @return  0 on success, otherwise a negative error value
-  /// @retval  #SOFTAP_ERROR_NONE              Successful
-  /// @retval  #SOFTAP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval  #SOFTAP_ERROR_OUT_OF_MEMORY     Out of memory
-  /// @retval  #SOFTAP_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval  #SOFTAP_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval  #SOFTAP_ERROR_NOT_SUPPORTED     API is not supported
-  /// @retval  #SOFTAP_ERROR_PERMISSION_DENIED Permission denied
-  /// @pre  The SoftAP must be enabled.
-  /// @see  softap_is_enabled()
-  /// @see  softap_enable()
+  /// Gets the Media Access Control (MAC) address of the local device in the format "FC:A1:3E:D6:B1:B1".
+  ///
+  /// This function allows you to obtain the MAC address of the local device. Remember that the SoftAP must be enabled in order to use this function. You can verify the SoftAP's activation state using the 'softap_is_enabled' function. Upon successful execution, the MAC address will be returned in the form of a string, which should be freed using the 'free' function once it's no longer needed.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/softap>
+  ///
+  /// **Remarks:**
+  /// - The `mac_address` should be released using free().
+  ///
+  /// **Parameters:**
+  /// - `softap` (in): The SoftAP handle
+  /// - `mac_address` (out): The MAC address
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SOFTAP_ERROR_NONE`: Successful
+  /// - `SOFTAP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOFTAP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `SOFTAP_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `SOFTAP_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `SOFTAP_ERROR_NOT_SUPPORTED`: API is not supported
+  /// - `SOFTAP_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **Preconditions:**
+  /// - The SoftAP must be enabled.
+  ///
+  /// **See also:**
+  /// - `softap_is_enabled()`
+  /// - `softap_enable()`
   int softap_get_mac_address(
     softap_h softap,
     ffi.Pointer<ffi.Pointer<ffi.Char>> mac_address,
@@ -209,29 +304,44 @@ class Tizen100CapiNetworkSoftap {
   late final _softap_get_mac_address = _softap_get_mac_addressPtr
       .asFunction<int Function(softap_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the name of network interface (e.g. wlan0).
-  /// @details This function enables you to retrieve the name of the network interface associated with the SoftAP functionality.
-  /// Remember that the SoftAP must be enabled in order to use this function.
-  /// You can verify the SoftAP's activation state using the 'softap_is_enabled' function.
-  /// Upon successful execution, the name of the network interface will be returned as a string,
-  /// which should be freed using the 'free' function once it's no longer needed.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/softap
-  /// @remarks The @a interface_name should be released using free().
-  /// @param[in]  softap  The SoftAP handle
-  /// @param[out]  interface_name  The name of the network interface
-  /// @return 0 on success, otherwise negative error value
-  /// @retval  #SOFTAP_ERROR_NONE              Successful
-  /// @retval  #SOFTAP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval  #SOFTAP_ERROR_OUT_OF_MEMORY  Out of memory
-  /// @retval  #SOFTAP_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval  #SOFTAP_ERROR_INVALID_OPERATION  Invalid operation
-  /// @retval  #SOFTAP_ERROR_NOT_SUPPORTED     API is not supported
-  /// @retval  #SOFTAP_ERROR_PERMISSION_DENIED Permission denied
-  /// @pre  The SoftAP must be enabled.
-  /// @see  softap_is_enabled()
-  /// @see  softap_enable()
+  /// Gets the name of network interface (e.g. wlan0).
+  ///
+  /// This function enables you to retrieve the name of the network interface associated with the SoftAP functionality. Remember that the SoftAP must be enabled in order to use this function. You can verify the SoftAP's activation state using the 'softap_is_enabled' function. Upon successful execution, the name of the network interface will be returned as a string, which should be freed using the 'free' function once it's no longer needed.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/softap>
+  ///
+  /// **Remarks:**
+  /// - The `interface_name` should be released using free().
+  ///
+  /// **Parameters:**
+  /// - `softap` (in): The SoftAP handle
+  /// - `interface_name` (out): The name of the network interface
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `SOFTAP_ERROR_NONE`: Successful
+  /// - `SOFTAP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOFTAP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `SOFTAP_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `SOFTAP_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `SOFTAP_ERROR_NOT_SUPPORTED`: API is not supported
+  /// - `SOFTAP_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **Preconditions:**
+  /// - The SoftAP must be enabled.
+  ///
+  /// **See also:**
+  /// - `softap_is_enabled()`
+  /// - `softap_enable()`
   int softap_get_network_interface_name(
     softap_h softap,
     ffi.Pointer<ffi.Pointer<ffi.Char>> interface_name,
@@ -250,20 +360,34 @@ class Tizen100CapiNetworkSoftap {
       _softap_get_network_interface_namePtr.asFunction<
           int Function(softap_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets the local IP address.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/softap
-  /// @remarks This change is applied next time SoftAP is enabled.
-  /// You can use softap_enable() or softap_reload_settings() to enable SoftAP.
-  /// @param[in]  softap  The SoftAP handle
-  /// @param[in]  address_family  The address family of IP address (currently only #SOFTAP_ADDRESS_FAMILY_IPV4 is supported)
-  /// @param[in]  ip_address  The local IP address
-  /// @return 0 on success, otherwise negative error value
-  /// @retval  #SOFTAP_ERROR_NONE              Successful
-  /// @retval  #SOFTAP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval  #SOFTAP_ERROR_NOT_SUPPORTED     API is not supported
-  /// @retval  #SOFTAP_ERROR_PERMISSION_DENIED Permission denied
+  /// Sets the local IP address.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/softap>
+  ///
+  /// **Remarks:**
+  /// - This change is applied next time SoftAP is enabled.
+  /// - You can use softap_enable() or softap_reload_settings() to enable SoftAP.
+  ///
+  /// **Parameters:**
+  /// - `softap` (in): The SoftAP handle
+  /// - `address_family` (in): The address family of IP address (currently only `SOFTAP_ADDRESS_FAMILY_IPV4` is supported)
+  /// - `ip_address` (in): The local IP address
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `SOFTAP_ERROR_NONE`: Successful
+  /// - `SOFTAP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOFTAP_ERROR_NOT_SUPPORTED`: API is not supported
+  /// - `SOFTAP_ERROR_PERMISSION_DENIED`: Permission denied
   int softap_set_ip_address(
     softap_h softap,
     int address_family,
@@ -283,30 +407,45 @@ class Tizen100CapiNetworkSoftap {
   late final _softap_set_ip_address = _softap_set_ip_addressPtr
       .asFunction<int Function(softap_h, int, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the local IP address.
-  /// @details This function retrieves the IP address of the SoftAP.
-  /// Remember that the SoftAP must be enabled in order to use this function.
-  /// You can verify the SoftAP's activation state using the 'softap_is_enabled' function.
-  /// Upon successful execution, the IP address will be returned as a string,
-  /// which should be freed using the 'free' function once it's no longer needed.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/softap
-  /// @remarks The @a ip_address should be released using free().
-  /// @param[in]  softap  The SoftAP handle
-  /// @param[in]  address_family  The address family of IP address (currently only #SOFTAP_ADDRESS_FAMILY_IPV4 is supported)
-  /// @param[out]  ip_address  The local IP address
-  /// @return 0 on success, otherwise negative error value
-  /// @retval  #SOFTAP_ERROR_NONE              Successful
-  /// @retval  #SOFTAP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval  #SOFTAP_ERROR_OUT_OF_MEMORY  Out of memory
-  /// @retval  #SOFTAP_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval  #SOFTAP_ERROR_INVALID_OPERATION  Invalid operation
-  /// @retval  #SOFTAP_ERROR_NOT_SUPPORTED     API is not supported
-  /// @retval  #SOFTAP_ERROR_PERMISSION_DENIED Permission denied
-  /// @pre  The SoftAP must be enabled.
-  /// @see  softap_is_enabled()
-  /// @see  softap_enable()
+  /// Gets the local IP address.
+  ///
+  /// This function retrieves the IP address of the SoftAP. Remember that the SoftAP must be enabled in order to use this function. You can verify the SoftAP's activation state using the 'softap_is_enabled' function. Upon successful execution, the IP address will be returned as a string, which should be freed using the 'free' function once it's no longer needed.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/softap>
+  ///
+  /// **Remarks:**
+  /// - The `ip_address` should be released using free().
+  ///
+  /// **Parameters:**
+  /// - `softap` (in): The SoftAP handle
+  /// - `address_family` (in): The address family of IP address (currently only `SOFTAP_ADDRESS_FAMILY_IPV4` is supported)
+  /// - `ip_address` (out): The local IP address
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `SOFTAP_ERROR_NONE`: Successful
+  /// - `SOFTAP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOFTAP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `SOFTAP_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `SOFTAP_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `SOFTAP_ERROR_NOT_SUPPORTED`: API is not supported
+  /// - `SOFTAP_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **Preconditions:**
+  /// - The SoftAP must be enabled.
+  ///
+  /// **See also:**
+  /// - `softap_is_enabled()`
+  /// - `softap_enable()`
   int softap_get_ip_address(
     softap_h softap,
     int address_family,
@@ -326,30 +465,45 @@ class Tizen100CapiNetworkSoftap {
   late final _softap_get_ip_address = _softap_get_ip_addressPtr.asFunction<
       int Function(softap_h, int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the Gateway address.
-  /// @details This function retrieves the gateway address of the SoftAP.
-  /// Remember that the SoftAP must be enabled in order to use this function.
-  /// You can verify the SoftAP's activation state using the 'softap_is_enabled' function.
-  /// Upon successful execution, the gateway address will be returned as a string,
-  /// which should be freed using the 'free' function once it's no longer needed.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/softap
-  /// @remarks The @a gateway_address should be released using free().
-  /// @param[in]  softap  The SoftAP handle
-  /// @param[in]  address_family  The address family of IP address (currently only #SOFTAP_ADDRESS_FAMILY_IPV4 is supported)
-  /// @param[out]  gateway_address  Gateway address
-  /// @return 0 on success, otherwise negative error value
-  /// @retval  #SOFTAP_ERROR_NONE              Successful
-  /// @retval  #SOFTAP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval  #SOFTAP_ERROR_OUT_OF_MEMORY  Out of memory
-  /// @retval  #SOFTAP_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval  #SOFTAP_ERROR_INVALID_OPERATION  Invalid operation
-  /// @retval  #SOFTAP_ERROR_NOT_SUPPORTED     API is not supported
-  /// @retval  #SOFTAP_ERROR_PERMISSION_DENIED Permission denied
-  /// @pre  The SoftAP must be enabled.
-  /// @see  softap_is_enabled()
-  /// @see  softap_enable()
+  /// Gets the Gateway address.
+  ///
+  /// This function retrieves the gateway address of the SoftAP. Remember that the SoftAP must be enabled in order to use this function. You can verify the SoftAP's activation state using the 'softap_is_enabled' function. Upon successful execution, the gateway address will be returned as a string, which should be freed using the 'free' function once it's no longer needed.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/softap>
+  ///
+  /// **Remarks:**
+  /// - The `gateway_address` should be released using free().
+  ///
+  /// **Parameters:**
+  /// - `softap` (in): The SoftAP handle
+  /// - `address_family` (in): The address family of IP address (currently only `SOFTAP_ADDRESS_FAMILY_IPV4` is supported)
+  /// - `gateway_address` (out): Gateway address
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `SOFTAP_ERROR_NONE`: Successful
+  /// - `SOFTAP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOFTAP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `SOFTAP_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `SOFTAP_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `SOFTAP_ERROR_NOT_SUPPORTED`: API is not supported
+  /// - `SOFTAP_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **Preconditions:**
+  /// - The SoftAP must be enabled.
+  ///
+  /// **See also:**
+  /// - `softap_is_enabled()`
+  /// - `softap_enable()`
   int softap_get_gateway_address(
     softap_h softap,
     int address_family,
@@ -371,30 +525,45 @@ class Tizen100CapiNetworkSoftap {
       _softap_get_gateway_addressPtr.asFunction<
           int Function(softap_h, int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the Subnet Mask.
-  /// @details This function retrieves the subnet mask of the SoftAP.
-  /// Remember that the SoftAP must be enabled in order to use this function.
-  /// You can verify the SoftAP's activation state using the 'softap_is_enabled' function.
-  /// Upon successful execution, the subnet mask will be returned as a string,
-  /// which should be freed using the 'free' function once it's no longer needed.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/softap
-  /// @remarks The @a subnet_mask should be released using free().
-  /// @param[in]  softap  The SoftAP handle
-  /// @param[in]  address_family  The address family of IP address (currently only #SOFTAP_ADDRESS_FAMILY_IPV4 is supported)
-  /// @param[out]  subnet_mask  Subnet mask
-  /// @return 0 on success, otherwise negative error value
-  /// @retval  #SOFTAP_ERROR_NONE              Successful
-  /// @retval  #SOFTAP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval  #SOFTAP_ERROR_OUT_OF_MEMORY  Out of memory
-  /// @retval  #SOFTAP_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval  #SOFTAP_ERROR_INVALID_OPERATION  Invalid operation
-  /// @retval  #SOFTAP_ERROR_NOT_SUPPORTED     API is not supported
-  /// @retval  #SOFTAP_ERROR_PERMISSION_DENIED Permission denied
-  /// @pre  The SoftAP must be enabled.
-  /// @see  softap_is_enabled()
-  /// @see  softap_enable()
+  /// Gets the Subnet Mask.
+  ///
+  /// This function retrieves the subnet mask of the SoftAP. Remember that the SoftAP must be enabled in order to use this function. You can verify the SoftAP's activation state using the 'softap_is_enabled' function. Upon successful execution, the subnet mask will be returned as a string, which should be freed using the 'free' function once it's no longer needed.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/softap>
+  ///
+  /// **Remarks:**
+  /// - The `subnet_mask` should be released using free().
+  ///
+  /// **Parameters:**
+  /// - `softap` (in): The SoftAP handle
+  /// - `address_family` (in): The address family of IP address (currently only `SOFTAP_ADDRESS_FAMILY_IPV4` is supported)
+  /// - `subnet_mask` (out): Subnet mask
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `SOFTAP_ERROR_NONE`: Successful
+  /// - `SOFTAP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOFTAP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `SOFTAP_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `SOFTAP_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `SOFTAP_ERROR_NOT_SUPPORTED`: API is not supported
+  /// - `SOFTAP_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **Preconditions:**
+  /// - The SoftAP must be enabled.
+  ///
+  /// **See also:**
+  /// - `softap_is_enabled()`
+  /// - `softap_enable()`
   int softap_get_subnet_mask(
     softap_h softap,
     int address_family,
@@ -414,26 +583,41 @@ class Tizen100CapiNetworkSoftap {
   late final _softap_get_subnet_mask = _softap_get_subnet_maskPtr.asFunction<
       int Function(softap_h, int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the clients which are connected.
-  /// @details This function allows you to enumerate the clients that are currently connected to the SoftAP.
-  /// By providing the appropriate SoftAP handle as the 'softap' argument and specifying the callback function and user data, you can receive information about each connected client.
-  /// Upon successful execution, the callback function will be called for each connected client, giving you the opportunity to perform actions based on the received client information.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/softap
-  /// @param[in]  softap  The SoftAP handle
-  /// @param[in]  callback  The callback function to invoke
-  /// @param[in]  user_data  The user data to be passed to the callback function
-  /// @return 0 on success, otherwise negative error value
-  /// @retval  #SOFTAP_ERROR_NONE              Successful
-  /// @retval  #SOFTAP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval  #SOFTAP_ERROR_INVALID_OPERATION  Invalid operation
-  /// @retval  #SOFTAP_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval  #SOFTAP_ERROR_NOT_SUPPORTED     API is not supported
-  /// @retval  #SOFTAP_ERROR_PERMISSION_DENIED Permission denied
-  /// @pre  The SoftAP must be enabled.
-  /// @see  softap_is_enabled()
-  /// @see  softap_enable()
+  /// Gets the clients which are connected.
+  ///
+  /// This function allows you to enumerate the clients that are currently connected to the SoftAP. By providing the appropriate SoftAP handle as the 'softap' argument and specifying the callback function and user data, you can receive information about each connected client. Upon successful execution, the callback function will be called for each connected client, giving you the opportunity to perform actions based on the received client information.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/softap>
+  ///
+  /// **Parameters:**
+  /// - `softap` (in): The SoftAP handle
+  /// - `callback` (in): The callback function to invoke
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `SOFTAP_ERROR_NONE`: Successful
+  /// - `SOFTAP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOFTAP_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `SOFTAP_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `SOFTAP_ERROR_NOT_SUPPORTED`: API is not supported
+  /// - `SOFTAP_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **Preconditions:**
+  /// - The SoftAP must be enabled.
+  ///
+  /// **See also:**
+  /// - `softap_is_enabled()`
+  /// - `softap_enable()`
   int softap_foreach_connected_clients(
     softap_h softap,
     softap_connected_client_cb callback,
@@ -455,23 +639,36 @@ class Tizen100CapiNetworkSoftap {
           int Function(
               softap_h, softap_connected_client_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Sets a callback function to be called when the SoftAP is enabled.
-  /// @details This function allows you to associate a callback function with the SoftAP handle, which will be invoked when the SoftAP is successfully enabled or when an error occurs during the enabling process.
-  /// By providing the appropriate SoftAP handle as the 'softap' argument and specifying the callback function and user data, you can receive notification regarding the SoftAP's activation status.
-  /// Upon successful execution, the callback function will be registered, ensuring that your application receives timely updates regarding the SoftAP's enabling process.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/softap
-  /// @param[in]  softap The SoftAP handle
-  /// @param[in]  callback  The callback function to invoke
-  /// @param[in]  user_data  The user data to be passed to the callback function
-  /// @return 0 on success, otherwise negative error value
-  /// @retval  #SOFTAP_ERROR_NONE              Successful
-  /// @retval  #SOFTAP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval  #SOFTAP_ERROR_NOT_SUPPORTED     API is not supported
-  /// @retval  #SOFTAP_ERROR_PERMISSION_DENIED Permission denied
-  /// @see  softap_unset_enabled_cb()
-  /// @see  softap_enable()
+  /// Sets a callback function to be called when the SoftAP is enabled.
+  ///
+  /// This function allows you to associate a callback function with the SoftAP handle, which will be invoked when the SoftAP is successfully enabled or when an error occurs during the enabling process. By providing the appropriate SoftAP handle as the 'softap' argument and specifying the callback function and user data, you can receive notification regarding the SoftAP's activation status. Upon successful execution, the callback function will be registered, ensuring that your application receives timely updates regarding the SoftAP's enabling process.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/softap>
+  ///
+  /// **Parameters:**
+  /// - `softap` (in): The SoftAP handle
+  /// - `callback` (in): The callback function to invoke
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `SOFTAP_ERROR_NONE`: Successful
+  /// - `SOFTAP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOFTAP_ERROR_NOT_SUPPORTED`: API is not supported
+  /// - `SOFTAP_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **See also:**
+  /// - `softap_unset_enabled_cb()`
+  /// - `softap_enable()`
   int softap_set_enabled_cb(
     softap_h softap,
     softap_enabled_cb callback,
@@ -491,19 +688,33 @@ class Tizen100CapiNetworkSoftap {
   late final _softap_set_enabled_cb = _softap_set_enabled_cbPtr.asFunction<
       int Function(softap_h, softap_enabled_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback function, which is called when SoftAP is enabled.
-  /// @details This function enables you to unregister the callback function from the SoftAP handle, preventing it from receiving notifications regarding the SoftAP's activation status.
-  /// By providing the appropriate SoftAP handle as the'softap' argument, you can initiate the unregistration process.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/softap
-  /// @param[in]  softap  The SoftAP handle
-  /// @return 0 on success, otherwise negative error value
-  /// @retval  #SOFTAP_ERROR_NONE              Successful
-  /// @retval  #SOFTAP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval  #SOFTAP_ERROR_NOT_SUPPORTED     API is not supported
-  /// @retval  #SOFTAP_ERROR_PERMISSION_DENIED Permission denied
-  /// @see  softap_set_enabled_cb()
+  /// Unsets the callback function, which is called when SoftAP is enabled.
+  ///
+  /// This function enables you to unregister the callback function from the SoftAP handle, preventing it from receiving notifications regarding the SoftAP's activation status. By providing the appropriate SoftAP handle as the'softap' argument, you can initiate the unregistration process.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/softap>
+  ///
+  /// **Parameters:**
+  /// - `softap` (in): The SoftAP handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `SOFTAP_ERROR_NONE`: Successful
+  /// - `SOFTAP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOFTAP_ERROR_NOT_SUPPORTED`: API is not supported
+  /// - `SOFTAP_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **See also:**
+  /// - `softap_set_enabled_cb()`
   int softap_unset_enabled_cb(
     softap_h softap,
   ) {
@@ -518,22 +729,35 @@ class Tizen100CapiNetworkSoftap {
   late final _softap_unset_enabled_cb =
       _softap_unset_enabled_cbPtr.asFunction<int Function(softap_h)>();
 
-  /// @brief Sets the callback function called when SoftAP is disabled.
-  /// @details This function allows you to associate a callback function with the SoftAP handle, which will be invoked when the SoftAP is successfully disabled.
-  /// By providing the appropriate SoftAP handle as the'softap' argument and specifying the callback function and user data, you can receive notification regarding the SoftAP's deactivation status.
-  /// Upon successful execution, the callback function will be registered, ensuring that your application receives timely updates regarding the SoftAP's disabling process.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/softap
-  /// @param[in]  softap  The SoftAP handle
-  /// @param[in]  callback  The callback function to invoke
-  /// @param[in]  user_data  The user data to be passed to the callback function
-  /// @return 0 on success, otherwise negative error value
-  /// @retval  #SOFTAP_ERROR_NONE              Successful
-  /// @retval  #SOFTAP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval  #SOFTAP_ERROR_NOT_SUPPORTED     API is not supported
-  /// @retval  #SOFTAP_ERROR_PERMISSION_DENIED Permission denied
-  /// @see  softap_unset_disabled_cb()
+  /// Sets the callback function called when SoftAP is disabled.
+  ///
+  /// This function allows you to associate a callback function with the SoftAP handle, which will be invoked when the SoftAP is successfully disabled. By providing the appropriate SoftAP handle as the'softap' argument and specifying the callback function and user data, you can receive notification regarding the SoftAP's deactivation status. Upon successful execution, the callback function will be registered, ensuring that your application receives timely updates regarding the SoftAP's disabling process.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/softap>
+  ///
+  /// **Parameters:**
+  /// - `softap` (in): The SoftAP handle
+  /// - `callback` (in): The callback function to invoke
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `SOFTAP_ERROR_NONE`: Successful
+  /// - `SOFTAP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOFTAP_ERROR_NOT_SUPPORTED`: API is not supported
+  /// - `SOFTAP_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **See also:**
+  /// - `softap_unset_disabled_cb()`
   int softap_set_disabled_cb(
     softap_h softap,
     softap_disabled_cb callback,
@@ -553,21 +777,33 @@ class Tizen100CapiNetworkSoftap {
   late final _softap_set_disabled_cb = _softap_set_disabled_cbPtr.asFunction<
       int Function(softap_h, softap_disabled_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback function, which is called when SoftAP is disabled.
-  /// @details This function enables you to dissociate the callback function from the SoftAP handle,
-  /// preventing it from receiving notifications regarding the SoftAP's deactivation status.
-  /// By providing the appropriate SoftAP handle as the'softap' argument, you can initiate the unregistration process.
-  /// Upon successful execution, the callback function will be unregistered, allowing your application to focus solely on other aspects of the SoftAP functionality.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/softap
-  /// @param[in]  softap  The SoftAP handle
-  /// @return 0 on success, otherwise negative error value
-  /// @retval  #SOFTAP_ERROR_NONE              Successful
-  /// @retval  #SOFTAP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval  #SOFTAP_ERROR_NOT_SUPPORTED     API is not supported
-  /// @retval  #SOFTAP_ERROR_PERMISSION_DENIED Permission denied
-  /// @see  softap_set_disabled_cb()
+  /// Unsets the callback function, which is called when SoftAP is disabled.
+  ///
+  /// This function enables you to dissociate the callback function from the SoftAP handle, preventing it from receiving notifications regarding the SoftAP's deactivation status. By providing the appropriate SoftAP handle as the'softap' argument, you can initiate the unregistration process. Upon successful execution, the callback function will be unregistered, allowing your application to focus solely on other aspects of the SoftAP functionality.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/softap>
+  ///
+  /// **Parameters:**
+  /// - `softap` (in): The SoftAP handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `SOFTAP_ERROR_NONE`: Successful
+  /// - `SOFTAP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOFTAP_ERROR_NOT_SUPPORTED`: API is not supported
+  /// - `SOFTAP_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **See also:**
+  /// - `softap_set_disabled_cb()`
   int softap_unset_disabled_cb(
     softap_h softap,
   ) {
@@ -582,19 +818,33 @@ class Tizen100CapiNetworkSoftap {
   late final _softap_unset_disabled_cb =
       _softap_unset_disabled_cbPtr.asFunction<int Function(softap_h)>();
 
-  /// @brief Sets the callback function, which is called when the state of connection is changed.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/softap
-  /// @param[in]  softap  The SoftAP handle
-  /// @param[in]  callback  The callback function to invoke
-  /// @param[in]  user_data  The user data to be passed to the callback function
-  /// @return 0 on success, otherwise negative error value
-  /// @retval  #SOFTAP_ERROR_NONE              Successful
-  /// @retval  #SOFTAP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval  #SOFTAP_ERROR_NOT_SUPPORTED     API is not supported
-  /// @retval  #SOFTAP_ERROR_PERMISSION_DENIED Permission denied
-  /// @see  softap_unset_client_connection_state_changed_cb()
+  /// Sets the callback function, which is called when the state of connection is changed.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/softap>
+  ///
+  /// **Parameters:**
+  /// - `softap` (in): The SoftAP handle
+  /// - `callback` (in): The callback function to invoke
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `SOFTAP_ERROR_NONE`: Successful
+  /// - `SOFTAP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOFTAP_ERROR_NOT_SUPPORTED`: API is not supported
+  /// - `SOFTAP_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **See also:**
+  /// - `softap_unset_client_connection_state_changed_cb()`
   int softap_set_client_connection_state_changed_cb(
     softap_h softap,
     softap_client_connection_state_changed_cb callback,
@@ -619,17 +869,31 @@ class Tizen100CapiNetworkSoftap {
           int Function(softap_h, softap_client_connection_state_changed_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback function, which is called when the state of connection is changed.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/softap
-  /// @param[in]  softap  The SoftAP handle
-  /// @return 0 on success, otherwise negative error value
-  /// @retval  #SOFTAP_ERROR_NONE              Successful
-  /// @retval  #SOFTAP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval  #SOFTAP_ERROR_NOT_SUPPORTED     API is not supported
-  /// @retval  #SOFTAP_ERROR_PERMISSION_DENIED Permission denied
-  /// @see  softap_set_client_connection_state_changed_cb()
+  /// Unsets the callback function, which is called when the state of connection is changed.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/softap>
+  ///
+  /// **Parameters:**
+  /// - `softap` (in): The SoftAP handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `SOFTAP_ERROR_NONE`: Successful
+  /// - `SOFTAP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOFTAP_ERROR_NOT_SUPPORTED`: API is not supported
+  /// - `SOFTAP_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **See also:**
+  /// - `softap_set_client_connection_state_changed_cb()`
   int softap_unset_client_connection_state_changed_cb(
     softap_h softap,
   ) {
@@ -645,19 +909,33 @@ class Tizen100CapiNetworkSoftap {
       _softap_unset_client_connection_state_changed_cbPtr
           .asFunction<int Function(softap_h)>();
 
-  /// @brief Sets the callback function, which is called when the security type of SoftAP is changed.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/softap
-  /// @param[in]  softap  The SoftAP handle
-  /// @param[in]  callback  The callback function to invoke
-  /// @param[in]  user_data  The user data to be passed to the callback function
-  /// @return 0 on success, otherwise negative error value
-  /// @retval  #SOFTAP_ERROR_NONE              Successful
-  /// @retval  #SOFTAP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval  #SOFTAP_ERROR_NOT_SUPPORTED     API is not supported
-  /// @retval  #SOFTAP_ERROR_PERMISSION_DENIED Permission denied
-  /// @see  softap_unset_security_type_changed_cb()
+  /// Sets the callback function, which is called when the security type of SoftAP is changed.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/softap>
+  ///
+  /// **Parameters:**
+  /// - `softap` (in): The SoftAP handle
+  /// - `callback` (in): The callback function to invoke
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `SOFTAP_ERROR_NONE`: Successful
+  /// - `SOFTAP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOFTAP_ERROR_NOT_SUPPORTED`: API is not supported
+  /// - `SOFTAP_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **See also:**
+  /// - `softap_unset_security_type_changed_cb()`
   int softap_set_security_type_changed_cb(
     softap_h softap,
     softap_security_type_changed_cb callback,
@@ -679,17 +957,31 @@ class Tizen100CapiNetworkSoftap {
           int Function(softap_h, softap_security_type_changed_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback function, which is called when the security type of SoftAP is changed.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/softap
-  /// @param[in]  softap  The SoftAP handle
-  /// @return 0 on success, otherwise negative error value
-  /// @retval  #SOFTAP_ERROR_NONE              Successful
-  /// @retval  #SOFTAP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval  #SOFTAP_ERROR_NOT_SUPPORTED     API is not supported
-  /// @retval  #SOFTAP_ERROR_PERMISSION_DENIED Permission denied
-  /// @see  softap_set_security_type_changed_cb()
+  /// Unsets the callback function, which is called when the security type of SoftAP is changed.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/softap>
+  ///
+  /// **Parameters:**
+  /// - `softap` (in): The SoftAP handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `SOFTAP_ERROR_NONE`: Successful
+  /// - `SOFTAP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOFTAP_ERROR_NOT_SUPPORTED`: API is not supported
+  /// - `SOFTAP_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **See also:**
+  /// - `softap_set_security_type_changed_cb()`
   int softap_unset_security_type_changed_cb(
     softap_h softap,
   ) {
@@ -705,19 +997,33 @@ class Tizen100CapiNetworkSoftap {
       _softap_unset_security_type_changed_cbPtr
           .asFunction<int Function(softap_h)>();
 
-  /// @brief Sets the callback function , which is called when the visibility of SSID is changed.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/softap
-  /// @param[in]  softap  The SoftAP handle
-  /// @param[in]  callback  The callback function to invoke
-  /// @param[in]  user_data  The user data to be passed to the callback function
-  /// @return 0 on success, otherwise negative error value
-  /// @retval  #SOFTAP_ERROR_NONE              Successful
-  /// @retval  #SOFTAP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval  #SOFTAP_ERROR_NOT_SUPPORTED     API is not supported
-  /// @retval  #SOFTAP_ERROR_PERMISSION_DENIED Permission denied
-  /// @see  softap_unset_ssid_visibility_changed_cb()
+  /// Sets the callback function , which is called when the visibility of SSID is changed.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/softap>
+  ///
+  /// **Parameters:**
+  /// - `softap` (in): The SoftAP handle
+  /// - `callback` (in): The callback function to invoke
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `SOFTAP_ERROR_NONE`: Successful
+  /// - `SOFTAP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOFTAP_ERROR_NOT_SUPPORTED`: API is not supported
+  /// - `SOFTAP_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **See also:**
+  /// - `softap_unset_ssid_visibility_changed_cb()`
   int softap_set_ssid_visibility_changed_cb(
     softap_h softap,
     softap_ssid_visibility_changed_cb callback,
@@ -739,17 +1045,31 @@ class Tizen100CapiNetworkSoftap {
           int Function(softap_h, softap_ssid_visibility_changed_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback function, which is called when the visibility of SSID is changed.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/softap
-  /// @param[in]  softap  The SoftAP handle
-  /// @return  0 on success, otherwise a negative error value
-  /// @retval  #SOFTAP_ERROR_NONE              Successful
-  /// @retval  #SOFTAP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval  #SOFTAP_ERROR_NOT_SUPPORTED     API is not supported
-  /// @retval  #SOFTAP_ERROR_PERMISSION_DENIED Permission denied
-  /// @see  softap_set_ssid_visibility_changed_cb()
+  /// Unsets the callback function, which is called when the visibility of SSID is changed.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/softap>
+  ///
+  /// **Parameters:**
+  /// - `softap` (in): The SoftAP handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SOFTAP_ERROR_NONE`: Successful
+  /// - `SOFTAP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOFTAP_ERROR_NOT_SUPPORTED`: API is not supported
+  /// - `SOFTAP_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **See also:**
+  /// - `softap_set_ssid_visibility_changed_cb()`
   int softap_unset_ssid_visibility_changed_cb(
     softap_h softap,
   ) {
@@ -765,19 +1085,33 @@ class Tizen100CapiNetworkSoftap {
       _softap_unset_ssid_visibility_changed_cbPtr
           .asFunction<int Function(softap_h)>();
 
-  /// @brief Sets the callback function, which is called when the passphrase of SoftAP is changed.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/softap
-  /// @param[in]  softap  The SoftAP handle
-  /// @param[in]  callback  The callback function to invoke
-  /// @param[in]  user_data  The user data to be passed to the callback function
-  /// @return 0 on success, otherwise negative error value
-  /// @retval  #SOFTAP_ERROR_NONE              Successful
-  /// @retval  #SOFTAP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval  #SOFTAP_ERROR_NOT_SUPPORTED     API is not supported
-  /// @retval  #SOFTAP_ERROR_PERMISSION_DENIED Permission denied
-  /// @see  softap_unset_passphrase_changed_cb()
+  /// Sets the callback function, which is called when the passphrase of SoftAP is changed.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/softap>
+  ///
+  /// **Parameters:**
+  /// - `softap` (in): The SoftAP handle
+  /// - `callback` (in): The callback function to invoke
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `SOFTAP_ERROR_NONE`: Successful
+  /// - `SOFTAP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOFTAP_ERROR_NOT_SUPPORTED`: API is not supported
+  /// - `SOFTAP_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **See also:**
+  /// - `softap_unset_passphrase_changed_cb()`
   int softap_set_passphrase_changed_cb(
     softap_h softap,
     softap_passphrase_changed_cb callback,
@@ -799,17 +1133,31 @@ class Tizen100CapiNetworkSoftap {
           int Function(
               softap_h, softap_passphrase_changed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback function, which is called when the passphrase of SoftAP is changed.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/softap
-  /// @param[in]  softap  The SoftAP handle
-  /// @return  0 on success, otherwise a negative error value
-  /// @retval  #SOFTAP_ERROR_NONE              Successful
-  /// @retval  #SOFTAP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval  #SOFTAP_ERROR_NOT_SUPPORTED     API is not supported
-  /// @retval  #SOFTAP_ERROR_PERMISSION_DENIED Permission denied
-  /// @see  softap_set_passphrase_changed_cb()
+  /// Unsets the callback function, which is called when the passphrase of SoftAP is changed.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/softap>
+  ///
+  /// **Parameters:**
+  /// - `softap` (in): The SoftAP handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SOFTAP_ERROR_NONE`: Successful
+  /// - `SOFTAP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOFTAP_ERROR_NOT_SUPPORTED`: API is not supported
+  /// - `SOFTAP_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **See also:**
+  /// - `softap_set_passphrase_changed_cb()`
   int softap_unset_passphrase_changed_cb(
     softap_h softap,
   ) {
@@ -825,22 +1173,39 @@ class Tizen100CapiNetworkSoftap {
       _softap_unset_passphrase_changed_cbPtr
           .asFunction<int Function(softap_h)>();
 
-  /// @brief Sets the security type of SoftAP.
-  /// @details If security type is not set, WPA2_PSK is used.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/softap
-  /// @remarks This change is applied next time SoftAP is enabled. \
-  /// You can use softap_enable() or softap_reload_settings() to enable SoftAP.
-  /// @param[in]  softap  The SoftAP handle
-  /// @param[in]  type  The security type
-  /// @return 0 on success, otherwise negative error value
-  /// @retval  #SOFTAP_ERROR_NONE              Successful
-  /// @retval  #SOFTAP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval  #SOFTAP_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval  #SOFTAP_ERROR_NOT_SUPPORTED     API is not supported
-  /// @retval  #SOFTAP_ERROR_PERMISSION_DENIED Permission denied
-  /// @see  softap_get_security_type()
+  /// Sets the security type of SoftAP.
+  ///
+  /// If security type is not set, WPA2_PSK is used.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/softap>
+  ///
+  /// **Remarks:**
+  /// - This change is applied next time SoftAP is enabled. \
+  /// - You can use softap_enable() or softap_reload_settings() to enable SoftAP.
+  ///
+  /// **Parameters:**
+  /// - `softap` (in): The SoftAP handle
+  /// - `type` (in): The security type
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `SOFTAP_ERROR_NONE`: Successful
+  /// - `SOFTAP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOFTAP_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `SOFTAP_ERROR_NOT_SUPPORTED`: API is not supported
+  /// - `SOFTAP_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **See also:**
+  /// - `softap_get_security_type()`
   int softap_set_security_type(
     softap_h softap,
     int type,
@@ -857,19 +1222,34 @@ class Tizen100CapiNetworkSoftap {
   late final _softap_set_security_type =
       _softap_set_security_typePtr.asFunction<int Function(softap_h, int)>();
 
-  /// @brief Gets the security type of SoftAP.
-  /// @details If security type is not set, WPA2_PSK is used.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/softap
-  /// @param[in]  softap  The SoftAP handle
-  /// @param[out]  type  The security type
-  /// @return 0 on success, otherwise negative error value
-  /// @retval  #SOFTAP_ERROR_NONE              Successful
-  /// @retval  #SOFTAP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval  #SOFTAP_ERROR_NOT_SUPPORTED     API is not supported
-  /// @retval  #SOFTAP_ERROR_PERMISSION_DENIED Permission denied
-  /// @see  softap_set_security_type()
+  /// Gets the security type of SoftAP.
+  ///
+  /// If security type is not set, WPA2_PSK is used.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/softap>
+  ///
+  /// **Parameters:**
+  /// - `softap` (in): The SoftAP handle
+  /// - `type` (out): The security type
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `SOFTAP_ERROR_NONE`: Successful
+  /// - `SOFTAP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOFTAP_ERROR_NOT_SUPPORTED`: API is not supported
+  /// - `SOFTAP_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **See also:**
+  /// - `softap_set_security_type()`
   int softap_get_security_type(
     softap_h softap,
     ffi.Pointer<ffi.Int32> type,
@@ -887,22 +1267,39 @@ class Tizen100CapiNetworkSoftap {
   late final _softap_get_security_type = _softap_get_security_typePtr
       .asFunction<int Function(softap_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Sets the SSID (service set identifier) for SoftAP.
-  /// @details The SSID cannot exceed 32 bytes. If SSID is not set, device name is used as SSID.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/softap
-  /// @remarks This change is applied next time SoftAP is enabled. \n
-  /// You can use softap_enable() or softap_reload_settings() to enable SoftAP.
-  /// @param[in]  softap  The SoftAP handle
-  /// @param[in]  ssid  The SSID
-  /// @return 0 on success, otherwise negative error value
-  /// @retval  #SOFTAP_ERROR_NONE              Successful
-  /// @retval  #SOFTAP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval  #SOFTAP_ERROR_OUT_OF_MEMORY  Out of memory
-  /// @retval  #SOFTAP_ERROR_NOT_SUPPORTED     API is not supported
-  /// @retval  #SOFTAP_ERROR_PERMISSION_DENIED Permission denied
-  /// @see  softap_get_ssid()
+  /// Sets the SSID (service set identifier) for SoftAP.
+  ///
+  /// The SSID cannot exceed 32 bytes. If SSID is not set, device name is used as SSID.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/softap>
+  ///
+  /// **Remarks:**
+  /// - This change is applied next time SoftAP is enabled.
+  /// - You can use softap_enable() or softap_reload_settings() to enable SoftAP.
+  ///
+  /// **Parameters:**
+  /// - `softap` (in): The SoftAP handle
+  /// - `ssid` (in): The SSID
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `SOFTAP_ERROR_NONE`: Successful
+  /// - `SOFTAP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOFTAP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `SOFTAP_ERROR_NOT_SUPPORTED`: API is not supported
+  /// - `SOFTAP_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **See also:**
+  /// - `softap_get_ssid()`
   int softap_set_ssid(
     softap_h softap,
     ffi.Pointer<ffi.Char> ssid,
@@ -920,21 +1317,38 @@ class Tizen100CapiNetworkSoftap {
   late final _softap_set_ssid = _softap_set_ssidPtr
       .asFunction<int Function(softap_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the SSID (service set identifier) for SoftAP.
-  /// @details If SSID is not set, Device name is used as SSID.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/softap
-  /// @remarks The @a ssid should be released using free().
-  /// @param[in]  softap  The SoftAP handle
-  /// @param[out]  ssid  The SSID
-  /// @return 0 on success, otherwise negative error value
-  /// @retval  #SOFTAP_ERROR_NONE              Successful
-  /// @retval  #SOFTAP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval  #SOFTAP_ERROR_OUT_OF_MEMORY  Out of memory
-  /// @retval  #SOFTAP_ERROR_NOT_SUPPORTED     API is not supported
-  /// @retval  #SOFTAP_ERROR_PERMISSION_DENIED Permission denied
-  /// @see  softap_set_ssid()
+  /// Gets the SSID (service set identifier) for SoftAP.
+  ///
+  /// If SSID is not set, Device name is used as SSID.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/softap>
+  ///
+  /// **Remarks:**
+  /// - The `ssid` should be released using free().
+  ///
+  /// **Parameters:**
+  /// - `softap` (in): The SoftAP handle
+  /// - `ssid` (out): The SSID
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `SOFTAP_ERROR_NONE`: Successful
+  /// - `SOFTAP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOFTAP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `SOFTAP_ERROR_NOT_SUPPORTED`: API is not supported
+  /// - `SOFTAP_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **See also:**
+  /// - `softap_set_ssid()`
   int softap_get_ssid(
     softap_h softap,
     ffi.Pointer<ffi.Pointer<ffi.Char>> ssid,
@@ -952,23 +1366,41 @@ class Tizen100CapiNetworkSoftap {
   late final _softap_get_ssid = _softap_get_ssidPtr
       .asFunction<int Function(softap_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets the visibility of SSID (service set identifier) for SoftAP.
-  /// @details If you set the visibility to invisible, then the SSID of this device is hidden and Wi-Fi scan won't find your device.
-  /// @details By default visibility is set to @c true.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/softap
-  /// @remarks This change is applied next time SoftAP is enabled. \n
-  /// You can use softap_enable() or softap_reload_settings() to enable SoftAP.
-  /// @param[in]  softap  The SoftAP handle
-  /// @param[in]  visible  The visibility of SSID: (@c true = visible, @c false = invisible)
-  /// @return 0 on success, otherwise negative error value
-  /// @retval  #SOFTAP_ERROR_NONE              Successful
-  /// @retval  #SOFTAP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval  #SOFTAP_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval  #SOFTAP_ERROR_NOT_SUPPORTED     API is not supported
-  /// @retval  #SOFTAP_ERROR_PERMISSION_DENIED Permission denied
-  /// @see  softap_get_ssid_visibility()
+  /// Sets the visibility of SSID (service set identifier) for SoftAP.
+  ///
+  /// If you set the visibility to invisible, then the SSID of this device is hidden and Wi-Fi scan won't find your device.
+  ///
+  /// By default visibility is set to `true`.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/softap>
+  ///
+  /// **Remarks:**
+  /// - This change is applied next time SoftAP is enabled.
+  /// - You can use softap_enable() or softap_reload_settings() to enable SoftAP.
+  ///
+  /// **Parameters:**
+  /// - `softap` (in): The SoftAP handle
+  /// - `visible` (in): The visibility of SSID: (`true` = visible, `false` = invisible)
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `SOFTAP_ERROR_NONE`: Successful
+  /// - `SOFTAP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOFTAP_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `SOFTAP_ERROR_NOT_SUPPORTED`: API is not supported
+  /// - `SOFTAP_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **See also:**
+  /// - `softap_get_ssid_visibility()`
   int softap_set_ssid_visibility(
     softap_h softap,
     bool visible,
@@ -985,19 +1417,34 @@ class Tizen100CapiNetworkSoftap {
   late final _softap_set_ssid_visibility =
       _softap_set_ssid_visibilityPtr.asFunction<int Function(softap_h, bool)>();
 
-  /// @brief Gets the visibility of SSID (service set identifier) for SoftAP.
-  /// @details If the visibility is set to invisible, then the SSID of this device is hidden and Wi-Fi scan won't find your device.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/softap
-  /// @param[in]  softap  The SoftAP handle
-  /// @param[out]  visible  The visibility of SSID: (@c true = visible, @c false = invisible)
-  /// @return 0 on success, otherwise negative error value
-  /// @retval  #SOFTAP_ERROR_NONE              Successful
-  /// @retval  #SOFTAP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval  #SOFTAP_ERROR_NOT_SUPPORTED     API is not supported
-  /// @retval  #SOFTAP_ERROR_PERMISSION_DENIED Permission denied
-  /// @see  softap_set_ssid_visibility()
+  /// Gets the visibility of SSID (service set identifier) for SoftAP.
+  ///
+  /// If the visibility is set to invisible, then the SSID of this device is hidden and Wi-Fi scan won't find your device.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/softap>
+  ///
+  /// **Parameters:**
+  /// - `softap` (in): The SoftAP handle
+  /// - `visible` (out): The visibility of SSID: (`true` = visible, `false` = invisible)
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `SOFTAP_ERROR_NONE`: Successful
+  /// - `SOFTAP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOFTAP_ERROR_NOT_SUPPORTED`: API is not supported
+  /// - `SOFTAP_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **See also:**
+  /// - `softap_set_ssid_visibility()`
   int softap_get_ssid_visibility(
     softap_h softap,
     ffi.Pointer<ffi.Bool> visible,
@@ -1015,21 +1462,38 @@ class Tizen100CapiNetworkSoftap {
   late final _softap_get_ssid_visibility = _softap_get_ssid_visibilityPtr
       .asFunction<int Function(softap_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Sets the passphrase for SoftAP.
-  /// @details If the passphrase is not set, random string of 8 characters is used.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/softap
-  /// @remarks This change is applied next time SoftAP is enabled. \n
-  /// You can use softap_enable() or softap_reload_settings() to enable SoftAP.
-  /// @param[in]  softap  The SoftAP handle
-  /// @param[in]  passphrase  The passphrase
-  /// @return 0 on success, otherwise negative error value
-  /// @retval  #SOFTAP_ERROR_NONE              Successful
-  /// @retval  #SOFTAP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval  #SOFTAP_ERROR_NOT_SUPPORTED     API is not supported
-  /// @retval  #SOFTAP_ERROR_PERMISSION_DENIED Permission denied
-  /// @see  softap_get_passphrase()
+  /// Sets the passphrase for SoftAP.
+  ///
+  /// If the passphrase is not set, random string of 8 characters is used.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/softap>
+  ///
+  /// **Remarks:**
+  /// - This change is applied next time SoftAP is enabled.
+  /// - You can use softap_enable() or softap_reload_settings() to enable SoftAP.
+  ///
+  /// **Parameters:**
+  /// - `softap` (in): The SoftAP handle
+  /// - `passphrase` (in): The passphrase
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `SOFTAP_ERROR_NONE`: Successful
+  /// - `SOFTAP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOFTAP_ERROR_NOT_SUPPORTED`: API is not supported
+  /// - `SOFTAP_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **See also:**
+  /// - `softap_get_passphrase()`
   int softap_set_passphrase(
     softap_h softap,
     ffi.Pointer<ffi.Char> passphrase,
@@ -1047,21 +1511,38 @@ class Tizen100CapiNetworkSoftap {
   late final _softap_set_passphrase = _softap_set_passphrasePtr
       .asFunction<int Function(softap_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the passphrase for SoftAP.
-  /// @details If the passphrase is not set, random string of 8 characters will be used.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/softap
-  /// @remarks The @a passphrase should be released using free().
-  /// @param[in]  softap  The SoftAP handle
-  /// @param[out]  passphrase  The passphrase
-  /// @return 0 on success, otherwise negative error value
-  /// @retval  #SOFTAP_ERROR_NONE              Successful
-  /// @retval  #SOFTAP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval  #SOFTAP_ERROR_OUT_OF_MEMORY  Out of memory
-  /// @retval  #SOFTAP_ERROR_NOT_SUPPORTED     API is not supported
-  /// @retval  #SOFTAP_ERROR_PERMISSION_DENIED Permission denied
-  /// @see  softap_set_passphrase()
+  /// Gets the passphrase for SoftAP.
+  ///
+  /// If the passphrase is not set, random string of 8 characters will be used.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/softap>
+  ///
+  /// **Remarks:**
+  /// - The `passphrase` should be released using free().
+  ///
+  /// **Parameters:**
+  /// - `softap` (in): The SoftAP handle
+  /// - `passphrase` (out): The passphrase
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `SOFTAP_ERROR_NONE`: Successful
+  /// - `SOFTAP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOFTAP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `SOFTAP_ERROR_NOT_SUPPORTED`: API is not supported
+  /// - `SOFTAP_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **See also:**
+  /// - `softap_set_passphrase()`
   int softap_get_passphrase(
     softap_h softap,
     ffi.Pointer<ffi.Pointer<ffi.Char>> passphrase,
@@ -1079,22 +1560,38 @@ class Tizen100CapiNetworkSoftap {
   late final _softap_get_passphrase = _softap_get_passphrasePtr
       .asFunction<int Function(softap_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @platform
-  /// @brief Reloads the settings (SSID / Passphrase / Security type / SSID visibility) for SoftAP.
-  /// @since_tizen 5.0
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/softap.admin
-  /// @remarks Devices connected via MobileAP will be disconnected when the settings are reloaded.
-  /// @param[in]  softap  The SoftAP handle
-  /// @param[in]  callback  The callback function to invoke
-  /// @param[in]  user_data  The user data to be passed to the callback function
-  /// @return 0 on success, otherwise negative error value
-  /// @retval  #SOFTAP_ERROR_NONE              Successful
-  /// @retval  #SOFTAP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval  #SOFTAP_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval  #SOFTAP_ERROR_RESOURCE_BUSY     Device or resource busy
-  /// @retval  #SOFTAP_ERROR_NOT_SUPPORTED     API is not supported
-  /// @retval  #SOFTAP_ERROR_PERMISSION_DENIED Permission denied
+  /// Reloads the settings (SSID / Passphrase / Security type / SSID visibility) for SoftAP.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/softap.admin>
+  ///
+  /// **Remarks:**
+  /// - Devices connected via MobileAP will be disconnected when the settings are reloaded.
+  ///
+  /// **Parameters:**
+  /// - `softap` (in): The SoftAP handle
+  /// - `callback` (in): The callback function to invoke
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `SOFTAP_ERROR_NONE`: Successful
+  /// - `SOFTAP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOFTAP_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `SOFTAP_ERROR_RESOURCE_BUSY`: Device or resource busy
+  /// - `SOFTAP_ERROR_NOT_SUPPORTED`: API is not supported
+  /// - `SOFTAP_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int softap_reload_settings(
     softap_h softap,
     softap_settings_reloaded_cb callback,
@@ -1115,18 +1612,32 @@ class Tizen100CapiNetworkSoftap {
       int Function(
           softap_h, softap_settings_reloaded_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Pushes the WPS button to connect with SoftAP client(WPS PBC).
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/softap
-  /// @remarks The WPS button should be pushed when client tries to connect with SoftAP by using WPS PBC.
-  /// @param[in]  softap  The SoftAP handle
-  /// @return 0 on success, otherwise negative error value
-  /// @retval  #SOFTAP_ERROR_NONE              Successful
-  /// @retval  #SOFTAP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval  #SOFTAP_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval  #SOFTAP_ERROR_NOT_SUPPORTED     API is not supported
-  /// @retval  #SOFTAP_ERROR_PERMISSION_DENIED Permission denied
+  /// Pushes the WPS button to connect with SoftAP client(WPS PBC).
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/softap>
+  ///
+  /// **Remarks:**
+  /// - The WPS button should be pushed when client tries to connect with SoftAP by using WPS PBC.
+  ///
+  /// **Parameters:**
+  /// - `softap` (in): The SoftAP handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `SOFTAP_ERROR_NONE`: Successful
+  /// - `SOFTAP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOFTAP_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `SOFTAP_ERROR_NOT_SUPPORTED`: API is not supported
+  /// - `SOFTAP_ERROR_PERMISSION_DENIED`: Permission denied
   int softap_push_wps_button(
     softap_h softap,
   ) {
@@ -1141,19 +1652,33 @@ class Tizen100CapiNetworkSoftap {
   late final _softap_push_wps_button =
       _softap_push_wps_buttonPtr.asFunction<int Function(softap_h)>();
 
-  /// @brief Sets the WPS PIN to connect with SoftAP client(WPS PIN).
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/softap
-  /// @remarks The WPS PIN should be inserted when client tries to connect with SoftAP by using WPS PIN.
-  /// @param[in]  softap  The SoftAP handle
-  /// @param[in]  wps_pin  The WPS PIN
-  /// @return 0 on success, otherwise negative error value
-  /// @retval  #SOFTAP_ERROR_NONE              Successful
-  /// @retval  #SOFTAP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval  #SOFTAP_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval  #SOFTAP_ERROR_NOT_SUPPORTED     API is not supported
-  /// @retval  #SOFTAP_ERROR_PERMISSION_DENIED Permission denied
+  /// Sets the WPS PIN to connect with SoftAP client(WPS PIN).
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/softap>
+  ///
+  /// **Remarks:**
+  /// - The WPS PIN should be inserted when client tries to connect with SoftAP by using WPS PIN.
+  ///
+  /// **Parameters:**
+  /// - `softap` (in): The SoftAP handle
+  /// - `wps_pin` (in): The WPS PIN
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `SOFTAP_ERROR_NONE`: Successful
+  /// - `SOFTAP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOFTAP_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `SOFTAP_ERROR_NOT_SUPPORTED`: API is not supported
+  /// - `SOFTAP_ERROR_PERMISSION_DENIED`: Permission denied
   int softap_set_wps_pin(
     softap_h softap,
     ffi.Pointer<ffi.Char> wps_pin,
@@ -1171,21 +1696,37 @@ class Tizen100CapiNetworkSoftap {
   late final _softap_set_wps_pin = _softap_set_wps_pinPtr
       .asFunction<int Function(softap_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets vendor specific elements for Beacon and Probe Response frames.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/softap
-  /// @remarks The format for vendor parameter should be a hex dump of the raw information elements. \n
-  /// This change is applied next time SoftAP is enabled. \n
-  /// You can use softap_enable() or softap_reload_settings() to enable SoftAP.
-  /// @param[in]  softap  The SoftAP handle
-  /// @param[in]  vendor_element  The vendor specific elements
-  /// @return 0 on success, otherwise negative error value
-  /// @retval  #SOFTAP_ERROR_NONE              Successful
-  /// @retval  #SOFTAP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval  #SOFTAP_ERROR_NOT_SUPPORTED     API is not supported
-  /// @retval  #SOFTAP_ERROR_PERMISSION_DENIED Permission denied
-  /// @see  softap_get_vendor_element()
+  /// Sets vendor specific elements for Beacon and Probe Response frames.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/softap>
+  ///
+  /// **Remarks:**
+  /// - The format for vendor parameter should be a hex dump of the raw information elements.
+  /// - This change is applied next time SoftAP is enabled.
+  /// - You can use softap_enable() or softap_reload_settings() to enable SoftAP.
+  ///
+  /// **Parameters:**
+  /// - `softap` (in): The SoftAP handle
+  /// - `vendor_element` (in): The vendor specific elements
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `SOFTAP_ERROR_NONE`: Successful
+  /// - `SOFTAP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOFTAP_ERROR_NOT_SUPPORTED`: API is not supported
+  /// - `SOFTAP_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **See also:**
+  /// - `softap_get_vendor_element()`
   int softap_set_vendor_element(
     softap_h softap,
     ffi.Pointer<ffi.Char> vendor_element,
@@ -1203,20 +1744,36 @@ class Tizen100CapiNetworkSoftap {
   late final _softap_set_vendor_element = _softap_set_vendor_elementPtr
       .asFunction<int Function(softap_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets vendor specific elements for Beacon and Probe Response frames.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/softap
-  /// @remarks The format for vendor parameter should be a hex dump of the raw information elements. \n
-  /// The @a vendor_element should be released using free().
-  /// @param[in]  softap  The SoftAP handle
-  /// @param[out] vendor_element  The vendor specific elements
-  /// @return 0 on success, otherwise negative error value
-  /// @retval  #SOFTAP_ERROR_NONE              Successful
-  /// @retval  #SOFTAP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval  #SOFTAP_ERROR_NOT_SUPPORTED     API is not supported
-  /// @retval  #SOFTAP_ERROR_PERMISSION_DENIED Permission denied
-  /// @see  softap_set_vendor_element()
+  /// Gets vendor specific elements for Beacon and Probe Response frames.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/softap>
+  ///
+  /// **Remarks:**
+  /// - The format for vendor parameter should be a hex dump of the raw information elements.
+  /// - The `vendor_element` should be released using free().
+  ///
+  /// **Parameters:**
+  /// - `softap` (in): The SoftAP handle
+  /// - `vendor_element` (out): The vendor specific elements
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `SOFTAP_ERROR_NONE`: Successful
+  /// - `SOFTAP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOFTAP_ERROR_NOT_SUPPORTED`: API is not supported
+  /// - `SOFTAP_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **See also:**
+  /// - `softap_set_vendor_element()`
   int softap_get_vendor_element(
     softap_h softap,
     ffi.Pointer<ffi.Pointer<ffi.Char>> vendor_element,
@@ -1234,23 +1791,40 @@ class Tizen100CapiNetworkSoftap {
   late final _softap_get_vendor_element = _softap_get_vendor_elementPtr
       .asFunction<int Function(softap_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets the channel for SoftAP.
-  /// @details If channel is not set, channel 1 is used as default.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/softap
-  /// @remarks This change is applied next time SoftAP is enabled.\n
-  /// You can use softap_enable() or softap_reload_settings() to enable SoftAP.\n
-  /// If @a channel is 0, the channel can be selected automatically at run time.\n
-  /// (ACS: Automatic Channel Selection)
-  /// @param[in]  softap   The SoftAP handle
-  /// @param[in]  channel  The channel number
-  /// @return 0 on success, otherwise negative error value
-  /// @retval  #SOFTAP_ERROR_NONE              Successful
-  /// @retval  #SOFTAP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval  #SOFTAP_ERROR_NOT_SUPPORTED     API is not supported
-  /// @retval  #SOFTAP_ERROR_PERMISSION_DENIED Permission denied
-  /// @see  softap_get_channel()
+  /// Sets the channel for SoftAP.
+  ///
+  /// If channel is not set, channel 1 is used as default.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/softap>
+  ///
+  /// **Remarks:**
+  /// - This change is applied next time SoftAP is enabled.
+  /// - You can use softap_enable() or softap_reload_settings() to enable SoftAP.
+  /// - If `channel` is 0, the channel can be selected automatically at run time.
+  /// - (ACS: Automatic Channel Selection)
+  ///
+  /// **Parameters:**
+  /// - `softap` (in): The SoftAP handle
+  /// - `channel` (in): The channel number
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `SOFTAP_ERROR_NONE`: Successful
+  /// - `SOFTAP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOFTAP_ERROR_NOT_SUPPORTED`: API is not supported
+  /// - `SOFTAP_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **See also:**
+  /// - `softap_get_channel()`
   int softap_set_channel(
     softap_h softap,
     int channel,
@@ -1267,18 +1841,32 @@ class Tizen100CapiNetworkSoftap {
   late final _softap_set_channel =
       _softap_set_channelPtr.asFunction<int Function(softap_h, int)>();
 
-  /// @brief Gets the channel for SoftAP.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/softap
-  /// @param[in]   softap   The SoftAP handle
-  /// @param[out]  channel  The channel number
-  /// @return 0 on success, otherwise negative error value
-  /// @retval  #SOFTAP_ERROR_NONE              Successful
-  /// @retval  #SOFTAP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval  #SOFTAP_ERROR_NOT_SUPPORTED     API is not supported
-  /// @retval  #SOFTAP_ERROR_PERMISSION_DENIED Permission denied
-  /// @see  softap_set_channel()
+  /// Gets the channel for SoftAP.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/softap>
+  ///
+  /// **Parameters:**
+  /// - `softap` (in): The SoftAP handle
+  /// - `channel` (out): The channel number
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `SOFTAP_ERROR_NONE`: Successful
+  /// - `SOFTAP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOFTAP_ERROR_NOT_SUPPORTED`: API is not supported
+  /// - `SOFTAP_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **See also:**
+  /// - `softap_set_channel()`
   int softap_get_channel(
     softap_h softap,
     ffi.Pointer<ffi.Int> channel,
@@ -1295,18 +1883,33 @@ class Tizen100CapiNetworkSoftap {
   late final _softap_get_channel = _softap_get_channelPtr
       .asFunction<int Function(softap_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Enables the DHCP server.
-  /// @details Enable/disable the DHCP server.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/softap
-  /// @param[in]  softap   The SoftAP handle
-  /// @return 0 on success, otherwise negative error value.
-  /// @retval  #SOFTAP_ERROR_NONE              Successful
-  /// @retval  #SOFTAP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval  #SOFTAP_ERROR_NOT_SUPPORTED     API is not supported
-  /// @retval  #SOFTAP_ERROR_PERMISSION_DENIED Permission denied
-  /// @see  softap_disable_dhcp()
+  /// Enables the DHCP server.
+  ///
+  /// Enable/disable the DHCP server.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/softap>
+  ///
+  /// **Parameters:**
+  /// - `softap` (in): The SoftAP handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value.
+  ///
+  /// **Return values:**
+  /// - `SOFTAP_ERROR_NONE`: Successful
+  /// - `SOFTAP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOFTAP_ERROR_NOT_SUPPORTED`: API is not supported
+  /// - `SOFTAP_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **See also:**
+  /// - `softap_disable_dhcp()`
   int softap_enable_dhcp(
     softap_h softap,
   ) {
@@ -1321,19 +1924,34 @@ class Tizen100CapiNetworkSoftap {
   late final _softap_enable_dhcp =
       _softap_enable_dhcpPtr.asFunction<int Function(softap_h)>();
 
-  /// @brief Disables the DHCP server.
-  /// @details Enable/disable the DHCP server.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/softap
-  /// @param[in]  softap   The SoftAP handle
-  /// @return 0 on success, otherwise negative error value.
-  /// @retval  #SOFTAP_ERROR_NONE              Successful
-  /// @retval  #SOFTAP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval  #SOFTAP_ERROR_NOT_SUPPORTED     API is not supported
-  /// @retval  #SOFTAP_ERROR_PERMISSION_DENIED Permission denied
-  /// @see  softap_enable_dhcp()
-  /// @see  softap_enable_dhcp_with_range()
+  /// Disables the DHCP server.
+  ///
+  /// Enable/disable the DHCP server.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/softap>
+  ///
+  /// **Parameters:**
+  /// - `softap` (in): The SoftAP handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value.
+  ///
+  /// **Return values:**
+  /// - `SOFTAP_ERROR_NONE`: Successful
+  /// - `SOFTAP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOFTAP_ERROR_NOT_SUPPORTED`: API is not supported
+  /// - `SOFTAP_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **See also:**
+  /// - `softap_enable_dhcp()`
+  /// - `softap_enable_dhcp_with_range()`
   int softap_disable_dhcp(
     softap_h softap,
   ) {
@@ -1348,16 +1966,28 @@ class Tizen100CapiNetworkSoftap {
   late final _softap_disable_dhcp =
       _softap_disable_dhcpPtr.asFunction<int Function(softap_h)>();
 
-  /// @brief Checks whether the DHCP is enabled or not.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/softap
-  /// @param[in]  softap  The SoftAP handle
-  /// @param[out] dhcp_enabled  @c true if DHCP is enabled, \n @c false if DHCP is disabled
-  /// @return  0 on success, otherwise a negative error value
-  /// @retval  #SOFTAP_ERROR_NONE              Successful
-  /// @retval  #SOFTAP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval  #SOFTAP_ERROR_PERMISSION_DENIED Permission denied
+  /// Checks whether the DHCP is enabled or not.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/softap>
+  ///
+  /// **Parameters:**
+  /// - `softap` (in): The SoftAP handle
+  /// - `dhcp_enabled` (out): `true` if DHCP is enabled, `false` if DHCP is disabled
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SOFTAP_ERROR_NONE`: Successful
+  /// - `SOFTAP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOFTAP_ERROR_PERMISSION_DENIED`: Permission denied
   int softap_is_dhcp_enabled(
     softap_h softap,
     ffi.Pointer<ffi.Bool> dhcp_enabled,
@@ -1375,20 +2005,35 @@ class Tizen100CapiNetworkSoftap {
   late final _softap_is_dhcp_enabled = _softap_is_dhcp_enabledPtr
       .asFunction<int Function(softap_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Enables the DHCP server with the address range.
-  /// @details Enable the DHCP server with the address range.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/softap
-  /// @param[in]  softap  The handle of softap
-  /// @param[in]  rangestart Start address range
-  /// @param[in]  rangestop  End address range
-  /// @return 0 on success, otherwise negative error value.
-  /// @retval  #SOFTAP_ERROR_NONE              Successful
-  /// @retval  #SOFTAP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval  #SOFTAP_ERROR_NOT_SUPPORTED     API is not supported
-  /// @retval  #SOFTAP_ERROR_PERMISSION_DENIED Permission denied
-  /// @see  softap_disable_dhcp()
+  /// Enables the DHCP server with the address range.
+  ///
+  /// Enable the DHCP server with the address range.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/softap>
+  ///
+  /// **Parameters:**
+  /// - `softap` (in): The handle of softap
+  /// - `rangestart` (in): Start address range
+  /// - `rangestop` (in): End address range
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value.
+  ///
+  /// **Return values:**
+  /// - `SOFTAP_ERROR_NONE`: Successful
+  /// - `SOFTAP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOFTAP_ERROR_NOT_SUPPORTED`: API is not supported
+  /// - `SOFTAP_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **See also:**
+  /// - `softap_disable_dhcp()`
   int softap_enable_dhcp_with_range(
     softap_h softap,
     ffi.Pointer<ffi.Char> rangestart,
@@ -1410,19 +2055,34 @@ class Tizen100CapiNetworkSoftap {
           int Function(
               softap_h, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets the wireless mode for SoftAP.
-  /// @details If wireless mode is not set, IEEE 802.11g is used as default.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/softap
-  /// @param[in]  softap   The SoftAP handle
-  /// @param[in]  mode     The mode
-  /// @return 0 on success, otherwise negative error value
-  /// @retval  #SOFTAP_ERROR_NONE              Successful
-  /// @retval  #SOFTAP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval  #SOFTAP_ERROR_NOT_SUPPORTED     API is not supported
-  /// @retval  #SOFTAP_ERROR_PERMISSION_DENIED Permission denied
-  /// @see  softap_get_mode()
+  /// Sets the wireless mode for SoftAP.
+  ///
+  /// If wireless mode is not set, IEEE 802.11g is used as default.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/softap>
+  ///
+  /// **Parameters:**
+  /// - `softap` (in): The SoftAP handle
+  /// - `mode` (in): The mode
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `SOFTAP_ERROR_NONE`: Successful
+  /// - `SOFTAP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOFTAP_ERROR_NOT_SUPPORTED`: API is not supported
+  /// - `SOFTAP_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **See also:**
+  /// - `softap_get_mode()`
   int softap_set_mode(
     softap_h softap,
     int mode,
@@ -1439,18 +2099,32 @@ class Tizen100CapiNetworkSoftap {
   late final _softap_set_mode =
       _softap_set_modePtr.asFunction<int Function(softap_h, int)>();
 
-  /// @brief Gets the wireless mode for SoftAP.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/softap
-  /// @param[in]  softap   The SoftAP handle
-  /// @param[out] mode     The wireless mode
-  /// @return 0 on success, otherwise negative error value
-  /// @retval  #SOFTAP_ERROR_NONE              Successful
-  /// @retval  #SOFTAP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval  #SOFTAP_ERROR_NOT_SUPPORTED     API is not supported
-  /// @retval  #SOFTAP_ERROR_PERMISSION_DENIED Permission denied
-  /// @see  softap_set_mode()
+  /// Gets the wireless mode for SoftAP.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/softap>
+  ///
+  /// **Parameters:**
+  /// - `softap` (in): The SoftAP handle
+  /// - `mode` (out): The wireless mode
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `SOFTAP_ERROR_NONE`: Successful
+  /// - `SOFTAP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOFTAP_ERROR_NOT_SUPPORTED`: API is not supported
+  /// - `SOFTAP_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **See also:**
+  /// - `softap_set_mode()`
   int softap_get_mode(
     softap_h softap,
     ffi.Pointer<ffi.Int32> mode,
@@ -1468,20 +2142,36 @@ class Tizen100CapiNetworkSoftap {
   late final _softap_get_mode = _softap_get_modePtr
       .asFunction<int Function(softap_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Clones the handle of a client.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/softap
-  /// @remarks The @a dest should be released using softap_client_destroy().
-  /// @param[out]  dest  The cloned client handle
-  /// @param[in]  origin  The origin client handle
-  /// @return  0 on success, otherwise a negative error value
-  /// @retval  #SOFTAP_ERROR_NONE              Successful
-  /// @retval  #SOFTAP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval  #SOFTAP_ERROR_OUT_OF_MEMORY  Out of memory
-  /// @retval  #SOFTAP_ERROR_NOT_SUPPORTED     API is not supported
-  /// @retval  #SOFTAP_ERROR_PERMISSION_DENIED Permission denied
-  /// @see  softap_client_destroy()
+  /// Clones the handle of a client.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/softap>
+  ///
+  /// **Remarks:**
+  /// - The `dest` should be released using softap_client_destroy().
+  ///
+  /// **Parameters:**
+  /// - `dest` (out): The cloned client handle
+  /// - `origin` (in): The origin client handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SOFTAP_ERROR_NONE`: Successful
+  /// - `SOFTAP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOFTAP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `SOFTAP_ERROR_NOT_SUPPORTED`: API is not supported
+  /// - `SOFTAP_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **See also:**
+  /// - `softap_client_destroy()`
   int softap_client_clone(
     ffi.Pointer<softap_client_h> dest,
     softap_client_h origin,
@@ -1499,17 +2189,31 @@ class Tizen100CapiNetworkSoftap {
   late final _softap_client_clone = _softap_client_clonePtr.asFunction<
       int Function(ffi.Pointer<softap_client_h>, softap_client_h)>();
 
-  /// @brief Destroys the handle of a client.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/softap
-  /// @param[in]  client  The client handle
-  /// @return  0 on success, otherwise a negative error value
-  /// @retval  #SOFTAP_ERROR_NONE              Successful
-  /// @retval  #SOFTAP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval  #SOFTAP_ERROR_NOT_SUPPORTED     API is not supported
-  /// @retval  #SOFTAP_ERROR_PERMISSION_DENIED Permission denied
-  /// @see  softap_client_clone()
+  /// Destroys the handle of a client.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/softap>
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The client handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SOFTAP_ERROR_NONE`: Successful
+  /// - `SOFTAP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOFTAP_ERROR_NOT_SUPPORTED`: API is not supported
+  /// - `SOFTAP_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **See also:**
+  /// - `softap_client_clone()`
   int softap_client_destroy(
     softap_client_h client,
   ) {
@@ -1524,20 +2228,36 @@ class Tizen100CapiNetworkSoftap {
   late final _softap_client_destroy =
       _softap_client_destroyPtr.asFunction<int Function(softap_client_h)>();
 
-  /// @brief Gets the name of a client.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/softap
-  /// @remarks The @a name should be released using free().
-  /// @param[in]  client  The client handle
-  /// @param[out]  name  The name of the client
-  /// @return  0 on success, otherwise a negative error value
-  /// @retval  #SOFTAP_ERROR_NONE              Successful
-  /// @retval  #SOFTAP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval  #SOFTAP_ERROR_OUT_OF_MEMORY  Out of memory
-  /// @retval  #SOFTAP_ERROR_NOT_SUPPORTED     API is not supported
-  /// @retval  #SOFTAP_ERROR_PERMISSION_DENIED Permission denied
-  /// @see  softap_client_connection_state_changed_cb()
+  /// Gets the name of a client.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/softap>
+  ///
+  /// **Remarks:**
+  /// - The `name` should be released using free().
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The client handle
+  /// - `name` (out): The name of the client
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SOFTAP_ERROR_NONE`: Successful
+  /// - `SOFTAP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOFTAP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `SOFTAP_ERROR_NOT_SUPPORTED`: API is not supported
+  /// - `SOFTAP_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **See also:**
+  /// - `softap_client_connection_state_changed_cb()`
   int softap_client_get_name(
     softap_client_h client,
     ffi.Pointer<ffi.Pointer<ffi.Char>> name,
@@ -1555,21 +2275,37 @@ class Tizen100CapiNetworkSoftap {
   late final _softap_client_get_name = _softap_client_get_namePtr.asFunction<
       int Function(softap_client_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the IP address of a client.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/softap
-  /// @remarks The @a ip_address should be released using free().
-  /// @param[in]  client  The client handle
-  /// @param[in]  address_family  The address family of IP address. Currently, #SOFTAP_ADDRESS_FAMILY_IPV4 is only supported
-  /// @param[out]  ip_address  The IP address
-  /// @return  0 on success, otherwise a negative error value
-  /// @retval  #SOFTAP_ERROR_NONE              Successful
-  /// @retval  #SOFTAP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval  #SOFTAP_ERROR_OUT_OF_MEMORY  Out of memory
-  /// @retval  #SOFTAP_ERROR_NOT_SUPPORTED     API is not supported
-  /// @retval  #SOFTAP_ERROR_PERMISSION_DENIED Permission denied
-  /// @see  softap_client_connection_state_changed_cb()
+  /// Gets the IP address of a client.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/softap>
+  ///
+  /// **Remarks:**
+  /// - The `ip_address` should be released using free().
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The client handle
+  /// - `address_family` (in): The address family of IP address. Currently, `SOFTAP_ADDRESS_FAMILY_IPV4` is only supported
+  /// - `ip_address` (out): The IP address
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SOFTAP_ERROR_NONE`: Successful
+  /// - `SOFTAP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOFTAP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `SOFTAP_ERROR_NOT_SUPPORTED`: API is not supported
+  /// - `SOFTAP_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **See also:**
+  /// - `softap_client_connection_state_changed_cb()`
   int softap_client_get_ip_address(
     softap_client_h client,
     int address_family,
@@ -1592,20 +2328,36 @@ class Tizen100CapiNetworkSoftap {
           int Function(
               softap_client_h, int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the MAC address of a client.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/softap
-  /// @remarks The @a mac_address should be released using free().
-  /// @param[in]  client  The client handle
-  /// @param[out]  mac_address  The MAC address
-  /// @return  0 on success, otherwise a negative error value
-  /// @retval  #SOFTAP_ERROR_NONE              Successful
-  /// @retval  #SOFTAP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval  #SOFTAP_ERROR_OUT_OF_MEMORY  Out of memory
-  /// @retval  #SOFTAP_ERROR_NOT_SUPPORTED     API is not supported
-  /// @retval  #SOFTAP_ERROR_PERMISSION_DENIED Permission denied
-  /// @see  softap_client_connection_state_changed_cb()
+  /// Gets the MAC address of a client.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/softap>
+  ///
+  /// **Remarks:**
+  /// - The `mac_address` should be released using free().
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The client handle
+  /// - `mac_address` (out): The MAC address
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SOFTAP_ERROR_NONE`: Successful
+  /// - `SOFTAP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOFTAP_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `SOFTAP_ERROR_NOT_SUPPORTED`: API is not supported
+  /// - `SOFTAP_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **See also:**
+  /// - `softap_client_connection_state_changed_cb()`
   int softap_client_get_mac_address(
     softap_client_h client,
     ffi.Pointer<ffi.Pointer<ffi.Char>> mac_address,
@@ -1625,18 +2377,32 @@ class Tizen100CapiNetworkSoftap {
       _softap_client_get_mac_addressPtr.asFunction<
           int Function(softap_client_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the connection time of a client.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/softap
-  /// @param[in]  client    The client handle
-  /// @param[out] timestamp The connected time of the client
-  /// @return  0 on success, otherwise a negative error value
-  /// @retval  #SOFTAP_ERROR_NONE              Successful
-  /// @retval  #SOFTAP_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval  #SOFTAP_ERROR_NOT_SUPPORTED     API is not supported
-  /// @retval  #SOFTAP_ERROR_PERMISSION_DENIED Permission denied
-  /// @see  softap_client_connection_state_changed_cb()
+  /// Gets the connection time of a client.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/softap>
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The client handle
+  /// - `timestamp` (out): The connected time of the client
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SOFTAP_ERROR_NONE`: Successful
+  /// - `SOFTAP_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOFTAP_ERROR_NOT_SUPPORTED`: API is not supported
+  /// - `SOFTAP_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **See also:**
+  /// - `softap_client_connection_state_changed_cb()`
   int softap_client_get_time(
     softap_client_h client,
     ffi.Pointer<ffi_lib.Long> timestamp,
@@ -1655,8 +2421,11 @@ class Tizen100CapiNetworkSoftap {
       .asFunction<int Function(softap_client_h, ffi.Pointer<ffi_lib.Long>)>();
 }
 
-/// @brief Enumeration for the SoftAP.
-/// @since_tizen 5.0
+/// Enumeration for the SoftAP.
+///
+/// **Since Tizen:**
+/// - 5.0
+/// @nodoc
 abstract class softap_error_e {
   /// < Successful
   static const int SOFTAP_ERROR_NONE = 0;
@@ -1689,8 +2458,11 @@ abstract class softap_error_e {
   static const int SOFTAP_ERROR_PERMISSION_DENIED = -13;
 }
 
-/// @brief Enumeration for the cause of disabling the SoftAP.
-/// @since_tizen 5.0
+/// Enumeration for the cause of disabling the SoftAP.
+///
+/// **Since Tizen:**
+/// - 5.0
+/// @nodoc
 abstract class softap_disabled_cause_e {
   /// < Disabled due to flight mode
   static const int SOFTAP_DISABLED_BY_FLIGHT_MODE = 0;
@@ -1714,8 +2486,11 @@ abstract class softap_disabled_cause_e {
   static const int SOFTAP_DISABLED_BY_WIFI_ON = 6;
 }
 
-/// @brief Enumeration for the SoftAP security.
-/// @since_tizen 5.0
+/// Enumeration for the SoftAP security.
+///
+/// **Since Tizen:**
+/// - 5.0
+/// @nodoc
 abstract class softap_security_type_e {
   /// < No Security type
   static const int SOFTAP_SECURITY_TYPE_NONE = 0;
@@ -1727,8 +2502,11 @@ abstract class softap_security_type_e {
   static const int SOFTAP_SECURITY_TYPE_WPS = 2;
 }
 
-/// @brief Enumeration for the SoftAP HW mode.
-/// @since_tizen 5.0
+/// Enumeration for the SoftAP HW mode.
+///
+/// **Since Tizen:**
+/// - 5.0
+/// @nodoc
 abstract class softap_wireless_mode_e {
   /// < IEEE 802.11b
   static const int SOFTAP_WIRELESS_MODE_B = 0;
@@ -1743,8 +2521,11 @@ abstract class softap_wireless_mode_e {
   static const int SOFTAP_WIRELESS_MODE_AD = 3;
 }
 
-/// @brief Enumeration for address family.
-/// @since_tizen 5.0
+/// Enumeration for address family.
+///
+/// **Since Tizen:**
+/// - 5.0
+/// @nodoc
 abstract class softap_address_family_e {
   /// < IPv4 Address type
   static const int SOFTAP_ADDRESS_FAMILY_IPV4 = 0;
@@ -1753,141 +2534,221 @@ abstract class softap_address_family_e {
   static const int SOFTAP_ADDRESS_FAMILY_IPV6 = 1;
 }
 
-/// @brief The SoftAP handle.
-/// @since_tizen 5.0
+/// The SoftAP handle.
+///
+/// **Since Tizen:**
+/// - 5.0
+/// @nodoc
 typedef softap_h = ffi.Pointer<ffi.Void>;
 
-/// @brief Called when you get the connected client repeatedly.
-/// @since_tizen 5.0
-/// @remarks The @a client should not be released by the application and it is valid only in this function.\n
-/// In order to use the client outside this function, a user must copy the client with softap_client_clone().
-/// @param[in]  client  The connected client
-/// @param[in]  user_data  The user data passed from the request function
-/// @return  @c true to continue with the next iteration of the loop, \n @c false to break out of the loop
-/// @pre  softap_foreach_connected_clients() will invoke this callback.
-/// @see  softap_foreach_connected_clients()
+/// Called when you get the connected client repeatedly.
+///
+/// **Since Tizen:**
+/// - 5.0
+///
+/// **Remarks:**
+/// - The `client` should not be released by the application and it is valid only in this function.
+/// - In order to use the client outside this function, a user must copy the client with softap_client_clone().
+///
+/// **Parameters:**
+/// - `client` (in): The connected client
+/// - `user_data` (in): The user data passed from the request function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - softap_foreach_connected_clients() will invoke this callback.
+///
+/// **See also:**
+/// - `softap_foreach_connected_clients()`
+/// @nodoc
 typedef softap_connected_client_cb
     = ffi.Pointer<ffi.NativeFunction<softap_connected_client_cbFunction>>;
+/// @nodoc
 typedef softap_connected_client_cbFunction = ffi.Bool Function(
     softap_client_h client, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartsoftap_connected_client_cbFunction = bool Function(
     softap_client_h client, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief The SoftAP client handle.
-/// @since_tizen 5.0
+/// The SoftAP client handle.
+///
+/// **Since Tizen:**
+/// - 5.0
+/// @nodoc
 typedef softap_client_h = ffi.Pointer<ffi.Void>;
 
-/// @brief Called when the SoftAP is enabled.
-/// @details The following error codes can be received: \n
-/// #SOFTAP_ERROR_NONE:              Success \n
-/// #SOFTAP_ERROR_NOT_PERMITTED:     Operation not permitted \n
-/// #SOFTAP_ERROR_INVALID_PARAMETER: Invalid parameter \n
-/// #SOFTAP_ERROR_OUT_OF_MEMORY:     Out of memory \n
-/// #SOFTAP_ERROR_OPERATION_FAILED:  Operation failed \n
-/// #SOFTAP_ERROR_ALREADY_ENABLED:   Already enabled \n
-/// @since_tizen 5.0
-/// @param[in]  result  The result of enabling the SoftAP
-/// @param[in]  is_requested  Indicates whether this change is requested
-/// @param[in]  user_data  The user data passed from softap_set_enabled_cb()
-/// @pre  If you register callback function using softap_set_enabled_cb(), this will be invoked when the SoftAP is enabled.
-/// @see  softap_enable()
-/// @see  softap_unset_enabled_cb()
+/// Called when the SoftAP is enabled.
+///
+/// The following error codes can be received: `SOFTAP_ERROR_NONE`: Success `SOFTAP_ERROR_NOT_PERMITTED`: Operation not permitted `SOFTAP_ERROR_INVALID_PARAMETER`: Invalid parameter `SOFTAP_ERROR_OUT_OF_MEMORY`: Out of memory `SOFTAP_ERROR_OPERATION_FAILED`: Operation failed `SOFTAP_ERROR_ALREADY_ENABLED`: Already enabled
+///
+/// **Since Tizen:**
+/// - 5.0
+///
+/// **Parameters:**
+/// - `result` (in): The result of enabling the SoftAP
+/// - `is_requested` (in): Indicates whether this change is requested
+/// - `user_data` (in): The user data passed from softap_set_enabled_cb()
+///
+/// **Preconditions:**
+/// - If you register callback function using softap_set_enabled_cb(), this will be invoked when the SoftAP is enabled.
+///
+/// **See also:**
+/// - `softap_enable()`
+/// - `softap_unset_enabled_cb()`
+/// @nodoc
 typedef softap_enabled_cb
     = ffi.Pointer<ffi.NativeFunction<softap_enabled_cbFunction>>;
+/// @nodoc
 typedef softap_enabled_cbFunction = ffi.Void Function(
     ffi.Int32 result, ffi.Bool is_requested, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartsoftap_enabled_cbFunction = void Function(
     int result, bool is_requested, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the SoftAP is disabled.
-/// @details The following error codes can be received: \n
-/// #SOFTAP_ERROR_NONE:              Success \n
-/// #SOFTAP_ERROR_INVALID_PARAMETER: Invalid parameter \n
-/// #SOFTAP_ERROR_OUT_OF_MEMORY:     Out of memory \n
-/// #SOFTAP_ERROR_OPERATION_FAILED:  Operation failed \n
-/// @since_tizen 5.0
-/// @param[in]  result  The result of disabling the SoftAP
-/// @param[in]  cause  The cause of disabling
-/// @param[in]  user_data  The user data passed from softap_set_disabled_cb()
-/// @pre  If you register callback function using softap_set_disabled_cb(), this will be invoked when the SoftAP is disabled.
-/// @see  softap_set_disabled_cb()
-/// @see  softap_unset_disabled_cb()
+/// Called when the SoftAP is disabled.
+///
+/// The following error codes can be received: `SOFTAP_ERROR_NONE`: Success `SOFTAP_ERROR_INVALID_PARAMETER`: Invalid parameter `SOFTAP_ERROR_OUT_OF_MEMORY`: Out of memory `SOFTAP_ERROR_OPERATION_FAILED`: Operation failed
+///
+/// **Since Tizen:**
+/// - 5.0
+///
+/// **Parameters:**
+/// - `result` (in): The result of disabling the SoftAP
+/// - `cause` (in): The cause of disabling
+/// - `user_data` (in): The user data passed from softap_set_disabled_cb()
+///
+/// **Preconditions:**
+/// - If you register callback function using softap_set_disabled_cb(), this will be invoked when the SoftAP is disabled.
+///
+/// **See also:**
+/// - `softap_set_disabled_cb()`
+/// - `softap_unset_disabled_cb()`
+/// @nodoc
 typedef softap_disabled_cb
     = ffi.Pointer<ffi.NativeFunction<softap_disabled_cbFunction>>;
+/// @nodoc
 typedef softap_disabled_cbFunction = ffi.Void Function(
     ffi.Int32 result, ffi.Int32 cause, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartsoftap_disabled_cbFunction = void Function(
     int result, int cause, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the connection state is changed.
-/// @since_tizen 5.0
-/// @remarks The @a client should not be released by the application and it is valid only in this function.\n
-/// In order to use it outside this function, a user must copy the client with softap_client_clone().
-/// @param[in]  client  The client of which connection state is changed
-/// @param[in]  opened  @c true when connection is opened, otherwise false
-/// @param[in]  user_data  The user data passed from softap_set_client_connection_state_changed_cb()
-/// @pre  If you register callback function using softap_set_client_connection_state_changed_cb(), this will be invoked when the connection state is changed.
-/// @see  softap_set_client_connection_state_changed_cb()
-/// @see  softap_unset_client_connection_state_changed_cb()
+/// Called when the connection state is changed.
+///
+/// **Since Tizen:**
+/// - 5.0
+///
+/// **Remarks:**
+/// - The `client` should not be released by the application and it is valid only in this function.
+/// - In order to use it outside this function, a user must copy the client with softap_client_clone().
+///
+/// **Parameters:**
+/// - `client` (in): The client of which connection state is changed
+/// - `opened` (in): `true` when connection is opened, otherwise false
+/// - `user_data` (in): The user data passed from softap_set_client_connection_state_changed_cb()
+///
+/// **Preconditions:**
+/// - If you register callback function using softap_set_client_connection_state_changed_cb(), this will be invoked when the connection state is changed.
+///
+/// **See also:**
+/// - `softap_set_client_connection_state_changed_cb()`
+/// - `softap_unset_client_connection_state_changed_cb()`
+/// @nodoc
 typedef softap_client_connection_state_changed_cb = ffi.Pointer<
     ffi.NativeFunction<softap_client_connection_state_changed_cbFunction>>;
+/// @nodoc
 typedef softap_client_connection_state_changed_cbFunction = ffi.Void Function(
     softap_client_h client, ffi.Bool opened, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartsoftap_client_connection_state_changed_cbFunction = void Function(
     softap_client_h client, bool opened, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the security type of SoftAP is changed.
-/// @since_tizen 5.0
-/// @param[in]  changed_type  The changed security type
-/// @param[in]  user_data  The user data passed from the register function
-/// @see  softap_set_security_type_changed_cb()
-/// @see  softap_unset_security_type_changed_cb()
+/// Called when the security type of SoftAP is changed.
+///
+/// **Since Tizen:**
+/// - 5.0
+///
+/// **Parameters:**
+/// - `changed_type` (in): The changed security type
+/// - `user_data` (in): The user data passed from the register function
+///
+/// **See also:**
+/// - `softap_set_security_type_changed_cb()`
+/// - `softap_unset_security_type_changed_cb()`
+/// @nodoc
 typedef softap_security_type_changed_cb
     = ffi.Pointer<ffi.NativeFunction<softap_security_type_changed_cbFunction>>;
+/// @nodoc
 typedef softap_security_type_changed_cbFunction = ffi.Void Function(
     ffi.Int32 changed_type, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartsoftap_security_type_changed_cbFunction = void Function(
     int changed_type, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the visibility of SSID is changed.
-/// @since_tizen 5.0
-/// @param[in]  changed_visible  The changed visibility of SSID
-/// @param[in]  user_data  The user data passed from the register function
-/// @see  softap_set_ssid_visibility_changed_cb()
-/// @see  softap_unset_ssid_visibility_changed_cb()
+/// Called when the visibility of SSID is changed.
+///
+/// **Since Tizen:**
+/// - 5.0
+///
+/// **Parameters:**
+/// - `changed_visible` (in): The changed visibility of SSID
+/// - `user_data` (in): The user data passed from the register function
+///
+/// **See also:**
+/// - `softap_set_ssid_visibility_changed_cb()`
+/// - `softap_unset_ssid_visibility_changed_cb()`
+/// @nodoc
 typedef softap_ssid_visibility_changed_cb = ffi
     .Pointer<ffi.NativeFunction<softap_ssid_visibility_changed_cbFunction>>;
+/// @nodoc
 typedef softap_ssid_visibility_changed_cbFunction = ffi.Void Function(
     ffi.Bool changed_visible, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartsoftap_ssid_visibility_changed_cbFunction = void Function(
     bool changed_visible, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the passphrase is changed.
-/// @since_tizen 5.0
-/// @param[in]  user_data  The user data passed from the register function
-/// @see  softap_set_passphrase_changed_cb()
-/// @see  softap_unset_passphrase_changed_cb()
+/// Called when the passphrase is changed.
+///
+/// **Since Tizen:**
+/// - 5.0
+///
+/// **Parameters:**
+/// - `user_data` (in): The user data passed from the register function
+///
+/// **See also:**
+/// - `softap_set_passphrase_changed_cb()`
+/// - `softap_unset_passphrase_changed_cb()`
+/// @nodoc
 typedef softap_passphrase_changed_cb
     = ffi.Pointer<ffi.NativeFunction<softap_passphrase_changed_cbFunction>>;
+/// @nodoc
 typedef softap_passphrase_changed_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartsoftap_passphrase_changed_cbFunction = void Function(
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when SoftAP settings are reloaded.
-/// @details The following error codes can be received: \n
-/// #SOFTAP_ERROR_NONE:              Success \n
-/// #SOFTAP_ERROR_NOT_PERMITTED:     Operation not permitted \n
-/// #SOFTAP_ERROR_INVALID_PARAMETER: Invalid parameter \n
-/// #SOFTAP_ERROR_OUT_OF_MEMORY:     Out of memory \n
-/// #SOFTAP_ERROR_OPERATION_FAILED:  Operation failed \n
-/// @since_tizen 5.0
-/// @param[in]  result  The result of reloading the settings
-/// @param[in]  user_data  The user data passed from the request function
-/// @pre  softap_reload_settings() will invoke this callback.
+/// Called when SoftAP settings are reloaded.
+///
+/// The following error codes can be received: `SOFTAP_ERROR_NONE`: Success `SOFTAP_ERROR_NOT_PERMITTED`: Operation not permitted `SOFTAP_ERROR_INVALID_PARAMETER`: Invalid parameter `SOFTAP_ERROR_OUT_OF_MEMORY`: Out of memory `SOFTAP_ERROR_OPERATION_FAILED`: Operation failed
+///
+/// **Since Tizen:**
+/// - 5.0
+///
+/// **Parameters:**
+/// - `result` (in): The result of reloading the settings
+/// - `user_data` (in): The user data passed from the request function
+///
+/// **Preconditions:**
+/// - softap_reload_settings() will invoke this callback.
+/// @nodoc
 typedef softap_settings_reloaded_cb
     = ffi.Pointer<ffi.NativeFunction<softap_settings_reloaded_cbFunction>>;
+/// @nodoc
 typedef softap_settings_reloaded_cbFunction = ffi.Void Function(
     ffi.Int32 result, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartsoftap_settings_reloaded_cbFunction = void Function(
     int result, ffi.Pointer<ffi.Void> user_data);

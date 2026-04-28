@@ -1,3 +1,6 @@
+/// {@category 6.5/tizen}
+library tizen_interop_6_5.vc_engine;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen vc_engine APIs.
+/// {@category 6.5/tizen}
 class Tizen65VcEngine {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,26 +28,46 @@ class Tizen65VcEngine {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Starts the main function for Voice Control (VC) engine.
-  /// @details This function is the main function for operating VC engine.
-  /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
-  /// @remarks The service_app_main() should be used for working the engine after this function.
-  /// @param[in] argc The argument count(original)
-  /// @param[in] argv The argument(original)
-  /// @param[in] callback The structure of engine request callback function
-  /// @return This function returns @c zero on success, or negative with error code on failure
-  /// @retval #VCE_ERROR_NONE Successful
-  /// @retval #VCE_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #VCE_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #VCE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #VCE_ERROR_OUT_OF_MEMORY Out of Memory
-  /// @retval #VCE_ERROR_OPERATION_FAILED Operation failed
-  /// @pre The vce_get_info_cb() should be successful.
-  /// @see vce_get_info_cb()
-  /// @see vce_request_callback_s
-  /// @code
+  /// Starts the main function for Voice Control (VC) engine.
+  ///
+  /// This function is the main function for operating VC engine.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 4.0; Wearable 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Remarks:**
+  /// - The service_app_main() should be used for working the engine after this function.
+  ///
+  /// **Parameters:**
+  /// - `argc` (in): The argument count(original)
+  /// - `argv` (in): The argument(original)
+  /// - `callback` (in): The structure of engine request callback function
+  ///
+  /// **Returns:**
+  /// - This function returns `zero` on success, or negative with error code on failure
+  ///
+  /// **Return values:**
+  /// - `VCE_ERROR_NONE`: Successful
+  /// - `VCE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `VCE_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VCE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VCE_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `VCE_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **Preconditions:**
+  /// - The vce_get_info_cb() should be successful.
+  ///
+  /// **See also:**
+  /// - `vce_get_info_cb()`
+  /// - `vce_request_callback_s`
+  ///
+  /// ```
   /// #include <vce.h>
   ///
   /// // Required callback functions - MUST BE IMPLEMENTED
@@ -129,7 +153,7 @@ class Tizen65VcEngine {
   /// return service_app_main(argc, argv, &event_callback, ad);
   /// }
   ///
-  /// @endcode
+  /// ```
   int vce_main(
     int argc,
     ffi.Pointer<ffi.Pointer<ffi.Char>> argv,
@@ -150,26 +174,37 @@ class Tizen65VcEngine {
       int Function(int, ffi.Pointer<ffi.Pointer<ffi.Char>>,
           ffi.Pointer<vce_request_callback_s>)>();
 
-  /// @brief Sends the results to the engine service user.
-  /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
-  /// @param[in] event A result event
-  /// @param[in] result_id Result ids
-  /// @param[in] count Result count
-  /// @param[in] all_result All result text
-  /// @param[in] non_fixed_result Non-fixed command result text
-  /// @param[in] nlu_result NLU result text
-  /// @param[in] msg Engine message (e.g. #VC_RESULT_MESSAGE_NONE, #VC_RESULT_MESSAGE_ERROR_TOO_LOUD)
-  /// @param[out] user_info A user info (e.g. If ASR result is consumed, the value is 0x01. If not, the value is 0x00.)
-  /// @param[in] user_data The user data passed from set callback function
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #VCE_ERROR_NONE Successful
-  /// @retval #VCE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #VCE_ERROR_OUT_OF_MEMORY Out of Memory
-  /// @retval #VCE_ERROR_INVALID_STATE Invalid state
-  /// @retval #VCE_ERROR_OPERATION_FAILED Operation failure
-  /// @pre The vce_main() function should be invoked before this function is called.
-  /// vce_stop_cb() will invoke this callback.
-  /// @see vce_stop_cb()
+  /// Sends the results to the engine service user.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 4.0; Wearable 5.0
+  ///
+  /// **Parameters:**
+  /// - `event` (in): A result event
+  /// - `result_id` (in): Result ids
+  /// - `count` (in): Result count
+  /// - `all_result` (in): All result text
+  /// - `non_fixed_result` (in): Non-fixed command result text
+  /// - `nlu_result` (in): NLU result text
+  /// - `msg` (in): Engine message (e.g. `VC_RESULT_MESSAGE_NONE`, `VC_RESULT_MESSAGE_ERROR_TOO_LOUD`)
+  /// - `user_info` (out): A user info (e.g. If ASR result is consumed, the value is 0x01. If not, the value is 0x00.)
+  /// - `user_data` (in): The user data passed from set callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VCE_ERROR_NONE`: Successful
+  /// - `VCE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VCE_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `VCE_ERROR_INVALID_STATE`: Invalid state
+  /// - `VCE_ERROR_OPERATION_FAILED`: Operation failure
+  ///
+  /// **Preconditions:**
+  /// - The vce_main() function should be invoked before this function is called. vce_stop_cb() will invoke this callback.
+  ///
+  /// **See also:**
+  /// - `vce_stop_cb()`
   int vce_send_result(
     int event,
     ffi.Pointer<ffi.Int> result_id,
@@ -218,18 +253,30 @@ class Tizen65VcEngine {
           ffi.Pointer<ffi.Int>,
           ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Sends the ASR result to the engine service user.
-  /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
-  /// @param[in] event A asr result event
-  /// @param[in] asr_result A asr result text
-  /// @param[in] user_data The user data passed from the start
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #VCE_ERROR_NONE Successful
-  /// @retval #VCE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #VCE_ERROR_OUT_OF_MEMORY Out of Memory
-  /// @retval #VCE_ERROR_OPERATION_FAILED Operation failure
-  /// @pre The vce_main() function should be invoked before this function is called.
-  /// @see vce_start_cb()
+  /// Sends the ASR result to the engine service user.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 4.0; Wearable 5.0
+  ///
+  /// **Parameters:**
+  /// - `event` (in): A asr result event
+  /// - `asr_result` (in): A asr result text
+  /// - `user_data` (in): The user data passed from the start
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VCE_ERROR_NONE`: Successful
+  /// - `VCE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VCE_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `VCE_ERROR_OPERATION_FAILED`: Operation failure
+  ///
+  /// **Preconditions:**
+  /// - The vce_main() function should be invoked before this function is called.
+  ///
+  /// **See also:**
+  /// - `vce_start_cb()`
   int vce_send_asr_result(
     int event,
     ffi.Pointer<ffi.Char> asr_result,
@@ -249,17 +296,29 @@ class Tizen65VcEngine {
   late final _vce_send_asr_result = _vce_send_asr_resultPtr.asFunction<
       int Function(int, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Sends the NLG (Natural Language Generation) result to the engine service user.
-  /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
-  /// @param[in] nlg_result A nlg result
-  /// @param[in] user_data The user data passed from the start
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #VCE_ERROR_NONE Successful
-  /// @retval #VCE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #VCE_ERROR_OUT_OF_MEMORY Out of Memory
-  /// @retval #VCE_ERROR_OPERATION_FAILED Operation failure
-  /// @pre The vce_main() function should be invoked before this function is called.
-  /// @see vce_start_cb()
+  /// Sends the NLG (Natural Language Generation) result to the engine service user.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 4.0; Wearable 5.0
+  ///
+  /// **Parameters:**
+  /// - `nlg_result` (in): A nlg result
+  /// - `user_data` (in): The user data passed from the start
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VCE_ERROR_NONE`: Successful
+  /// - `VCE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VCE_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `VCE_ERROR_OPERATION_FAILED`: Operation failure
+  ///
+  /// **Preconditions:**
+  /// - The vce_main() function should be invoked before this function is called.
+  ///
+  /// **See also:**
+  /// - `vce_start_cb()`
   int vce_send_nlg_result(
     ffi.Pointer<ffi.Char> nlg_result,
     ffi.Pointer<ffi.Void> user_data,
@@ -277,20 +336,28 @@ class Tizen65VcEngine {
   late final _vce_send_nlg_result = _vce_send_nlg_resultPtr
       .asFunction<int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Sends the specific engine result to the engine service user.
-  /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+  /// Sends the specific engine result to the engine service user.
   ///
-  /// @param[in] engine_app_id A specific engine's app id
-  /// @param[in] event A specific engine result event
-  /// @param[in] result A specific engine result text
-  /// @param[in] user_info The user info passed from the start
+  /// **Since Tizen:**
+  /// - Mobile 4.0; Wearable 5.0
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VCE_ERROR_NONE Successful
-  /// @retval #VCE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #VCE_ERROR_OUT_OF_MEMORY Out of Memory
-  /// @retval #VCE_ERROR_OPERATION_FAILED Operation failure
-  /// @pre The vce_main() function should be invoked before this function is called.
+  /// **Parameters:**
+  /// - `engine_app_id` (in): A specific engine's app id
+  /// - `event` (in): A specific engine result event
+  /// - `result` (in): A specific engine result text
+  /// - `user_info` (in): The user info passed from the start
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VCE_ERROR_NONE`: Successful
+  /// - `VCE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VCE_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `VCE_ERROR_OPERATION_FAILED`: Operation failure
+  ///
+  /// **Preconditions:**
+  /// - The vce_main() function should be invoked before this function is called.
   int vce_send_specific_engine_result(
     ffi.Pointer<ffi.Char> engine_app_id,
     ffi.Pointer<ffi.Char> event,
@@ -317,30 +384,29 @@ class Tizen65VcEngine {
           int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Sends the error to the engine service user.
-  /// @details The following error codes can be delivered. \n
-  /// #VCE_ERROR_NONE, \n
-  /// #VCE_ERROR_OUT_OF_MEMORY, \n
-  /// #VCE_ERROR_IO_ERROR, \n
-  /// #VCE_ERROR_INVALID_PARAMETER, \n
-  /// #VCE_ERROR_OUT_OF_NETWORK, \n
-  /// #VCE_ERROR_RECORDER_BUSY, \n
-  /// #VCE_ERROR_NOT_SUPPORTED, \n
-  /// #VCE_ERROR_INVALID_STATE, \n
-  /// #VCE_ERROR_INVALID_LANGUAGE, \n
-  /// #VCE_ERROR_OPERATION_FAILED, \n
-  /// #VCE_ERROR_PERMISSION_DENIED, \n
-  /// #VCE_ERROR_NOT_SUPPORTED_FEATURE.
-  /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
-  /// @param[in] error Error type
-  /// @param[in] msg Error message
-  /// @param[in] user_data The user data passed from set callback function
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #VCE_ERROR_NONE Successful
-  /// @retval #VCE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #VCE_ERROR_OUT_OF_MEMORY Out of Memory
-  /// @retval #VCE_ERROR_OPERATION_FAILED Operation failure
-  /// @pre The vce_main() function should be invoked before this function is called.
+  /// Sends the error to the engine service user.
+  ///
+  /// The following error codes can be delivered. `VCE_ERROR_NONE`, `VCE_ERROR_OUT_OF_MEMORY`, `VCE_ERROR_IO_ERROR`, `VCE_ERROR_INVALID_PARAMETER`, `VCE_ERROR_OUT_OF_NETWORK`, `VCE_ERROR_RECORDER_BUSY`, `VCE_ERROR_NOT_SUPPORTED`, `VCE_ERROR_INVALID_STATE`, `VCE_ERROR_INVALID_LANGUAGE`, `VCE_ERROR_OPERATION_FAILED`, `VCE_ERROR_PERMISSION_DENIED`, `VCE_ERROR_NOT_SUPPORTED_FEATURE`.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 4.0; Wearable 5.0
+  ///
+  /// **Parameters:**
+  /// - `error` (in): Error type
+  /// - `msg` (in): Error message
+  /// - `user_data` (in): The user data passed from set callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VCE_ERROR_NONE`: Successful
+  /// - `VCE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VCE_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `VCE_ERROR_OPERATION_FAILED`: Operation failure
+  ///
+  /// **Preconditions:**
+  /// - The vce_main() function should be invoked before this function is called.
   int vce_send_error(
     int error,
     ffi.Pointer<ffi.Char> msg,
@@ -360,21 +426,39 @@ class Tizen65VcEngine {
   late final _vce_send_error = _vce_send_errorPtr.asFunction<
       int Function(int, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Sets a callback function for setting the private data to the engine service.
-  /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
-  /// @remarks The vce_private_data_set_cb() function is called when the engine service user sets the private data to the engine service.
-  /// @param[in] callback_func vce_private_data_set event callback function
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #VCE_ERROR_NONE Successful
-  /// @retval #VCE_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #VCE_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #VCE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #VCE_ERROR_OPERATION_FAILED Operation failure
-  /// @retval #VCE_ERROR_NOT_SUPPORTED_FEATURE Not supported feature
-  /// @pre The vce_main() function should be invoked before this function is called.
-  /// @see vce_private_data_set_cb()
+  /// Sets a callback function for setting the private data to the engine service.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 4.0; Wearable 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Remarks:**
+  /// - The vce_private_data_set_cb() function is called when the engine service user sets the private data to the engine service.
+  ///
+  /// **Parameters:**
+  /// - `callback_func` (in): vce_private_data_set event callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VCE_ERROR_NONE`: Successful
+  /// - `VCE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `VCE_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VCE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VCE_ERROR_OPERATION_FAILED`: Operation failure
+  /// - `VCE_ERROR_NOT_SUPPORTED_FEATURE`: Not supported feature
+  ///
+  /// **Preconditions:**
+  /// - The vce_main() function should be invoked before this function is called.
+  ///
+  /// **See also:**
+  /// - `vce_private_data_set_cb()`
   int vce_set_private_data_set_cb(
     vce_private_data_set_cb callback_func,
   ) {
@@ -389,19 +473,35 @@ class Tizen65VcEngine {
   late final _vce_set_private_data_set_cb = _vce_set_private_data_set_cbPtr
       .asFunction<int Function(vce_private_data_set_cb)>();
 
-  /// @brief Sets a callback function for requesting the private data to the engine service.
-  /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
-  /// @remarks The vce_private_data_requested_cb() function is called when the engine service user requests the private data to the engine service.
-  /// @param[in] callback_func vce_private_data_requested event callback function
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #VCE_ERROR_NONE Successful
-  /// @retval #VCE_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #VCE_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #VCE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #VCE_ERROR_OPERATION_FAILED Operation failure
-  /// @see vce_private_data_requested_cb()
+  /// Sets a callback function for requesting the private data to the engine service.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 4.0; Wearable 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Remarks:**
+  /// - The vce_private_data_requested_cb() function is called when the engine service user requests the private data to the engine service.
+  ///
+  /// **Parameters:**
+  /// - `callback_func` (in): vce_private_data_requested event callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VCE_ERROR_NONE`: Successful
+  /// - `VCE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `VCE_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VCE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VCE_ERROR_OPERATION_FAILED`: Operation failure
+  ///
+  /// **See also:**
+  /// - `vce_private_data_requested_cb()`
   int vce_set_private_data_requested_cb(
     vce_private_data_requested_cb callback_func,
   ) {
@@ -417,16 +517,28 @@ class Tizen65VcEngine {
       _vce_set_private_data_requested_cbPtr
           .asFunction<int Function(vce_private_data_requested_cb)>();
 
-  /// @brief Sets a callback function for requesting the NLU base information to the engine service.
-  /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
-  /// @remarks The vce_nlu_base_info_requested_cb() function is called when the engine service user requests the NLU base information to the engine service.
-  /// @param[in] callback_func vce_nlu_base_info_requested event callback function
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #VCE_ERROR_NONE Successful
-  /// @retval #VCE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #VCE_ERROR_OPERATION_FAILED Operation failure
-  /// @retval #VCE_ERROR_NOT_SUPPORTED_FEATURE Not supported feature
-  /// @see vce_nlu_base_info_requested_cb()
+  /// Sets a callback function for requesting the NLU base information to the engine service.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 4.0; Wearable 5.0
+  ///
+  /// **Remarks:**
+  /// - The vce_nlu_base_info_requested_cb() function is called when the engine service user requests the NLU base information to the engine service.
+  ///
+  /// **Parameters:**
+  /// - `callback_func` (in): vce_nlu_base_info_requested event callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VCE_ERROR_NONE`: Successful
+  /// - `VCE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VCE_ERROR_OPERATION_FAILED`: Operation failure
+  /// - `VCE_ERROR_NOT_SUPPORTED_FEATURE`: Not supported feature
+  ///
+  /// **See also:**
+  /// - `vce_nlu_base_info_requested_cb()`
   int vce_set_nlu_base_info_requested_cb(
     vce_nlu_base_info_requested_cb callback_func,
   ) {
@@ -442,17 +554,24 @@ class Tizen65VcEngine {
       _vce_set_nlu_base_info_requested_cbPtr
           .asFunction<int Function(vce_nlu_base_info_requested_cb)>();
 
-  /// @brief Sets a callback function for getting the engine service request.
-  /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+  /// Sets a callback function for getting the engine service request.
   ///
-  /// @param[in] callback_func Callback function to register
+  /// **Since Tizen:**
+  /// - Mobile 4.0; Wearable 5.0
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VCE_ERROR_NONE Successful
-  /// @retval #VCE_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #VCE_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Parameters:**
+  /// - `callback_func` (in): Callback function to register
   ///
-  /// @see vce_unset_specific_engine_request_cb()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VCE_ERROR_NONE`: Successful
+  /// - `VCE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `VCE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `vce_unset_specific_engine_request_cb()`
   int vce_set_specific_engine_request_cb(
     vce_specific_engine_request_cb callback_func,
   ) {
@@ -468,14 +587,20 @@ class Tizen65VcEngine {
       _vce_set_specific_engine_request_cbPtr
           .asFunction<int Function(vce_specific_engine_request_cb)>();
 
-  /// @brief Unsets the engine service request callback function.
-  /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+  /// Unsets the engine service request callback function.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VCE_ERROR_NONE Successful
-  /// @retval #VCE_ERROR_NOT_SUPPORTED Not supported
+  /// **Since Tizen:**
+  /// - Mobile 4.0; Wearable 5.0
   ///
-  /// @see vce_set_specific_engine_request_cb()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VCE_ERROR_NONE`: Successful
+  /// - `VCE_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `vce_set_specific_engine_request_cb()`
   int vce_unset_specific_engine_request_cb() {
     return _vce_unset_specific_engine_request_cb();
   }
@@ -486,21 +611,31 @@ class Tizen65VcEngine {
   late final _vce_unset_specific_engine_request_cb =
       _vce_unset_specific_engine_request_cbPtr.asFunction<int Function()>();
 
-  /// @brief Retrieves all commands using callback function.
-  /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+  /// Retrieves all commands using callback function.
   ///
-  /// @param[in] vce_command The handle to be passed to the vce_set_commands_cb() function
-  /// @param[in] callback The callback function to invoke
-  /// @param[in] user_data The user data to be passed to the callback function
+  /// **Since Tizen:**
+  /// - Mobile 4.0; Wearable 5.0
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VCE_ERROR_NONE Successful
-  /// @retval #VCE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #VCE_ERROR_OPERATION_FAILED Operation failure
-  /// @retval #VCE_ERROR_INVALID_STATE Invalid state
-  /// @post This function invokes vce_command_cb() repeatedly for getting commands.
-  /// @see vce_command_cb()
-  /// @see vce_set_commands_cb()
+  /// **Parameters:**
+  /// - `vce_command` (in): The handle to be passed to the vce_set_commands_cb() function
+  /// - `callback` (in): The callback function to invoke
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VCE_ERROR_NONE`: Successful
+  /// - `VCE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VCE_ERROR_OPERATION_FAILED`: Operation failure
+  /// - `VCE_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Postconditions:**
+  /// - This function invokes vce_command_cb() repeatedly for getting commands.
+  ///
+  /// **See also:**
+  /// - `vce_command_cb()`
+  /// - `vce_set_commands_cb()`
   int vce_get_foreach_command(
     vce_cmd_h vce_command,
     vce_command_cb callback,
@@ -520,17 +655,25 @@ class Tizen65VcEngine {
   late final _vce_get_foreach_command = _vce_get_foreach_commandPtr.asFunction<
       int Function(vce_cmd_h, vce_command_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Gets command length.
-  /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+  /// Gets command length.
   ///
-  /// @param[in] vce_command The handle to be passed to the vce_set_commands_cb() function
-  /// @param[out] count The command count value
+  /// **Since Tizen:**
+  /// - Mobile 4.0; Wearable 5.0
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #VCE_ERROR_NONE Successful
-  /// @retval #VCE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #VCE_ERROR_OPERATION_FAILED Operation failure
-  /// @see vce_set_commands_cb()
+  /// **Parameters:**
+  /// - `vce_command` (in): The handle to be passed to the vce_set_commands_cb() function
+  /// - `count` (out): The command count value
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `VCE_ERROR_NONE`: Successful
+  /// - `VCE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VCE_ERROR_OPERATION_FAILED`: Operation failure
+  ///
+  /// **See also:**
+  /// - `vce_set_commands_cb()`
   int vce_get_command_count(
     vce_cmd_h vce_command,
     ffi.Pointer<ffi.Int> count,
@@ -548,17 +691,31 @@ class Tizen65VcEngine {
   late final _vce_get_command_count = _vce_get_command_countPtr
       .asFunction<int Function(vce_cmd_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets current audio type.
-  /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
-  /// @remarks The @a audio_type must be released using free() when it is no longer required.
-  /// @param[in] audio_type Current audio type (e.g. #VCE_AUDIO_ID_BLUETOOTH or #VCE_AUDIO_ID_WIFI)
-  /// @return the value greater than 0 on success, otherwise a negative error value
-  /// @retval #VCE_ERROR_NONE Successful
-  /// @retval #VCE_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #VCE_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #VCE_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Gets current audio type.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 4.0; Wearable 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Remarks:**
+  /// - The `audio_type` must be released using free() when it is no longer required.
+  ///
+  /// **Parameters:**
+  /// - `audio_type` (in): Current audio type (e.g. `VCE_AUDIO_ID_BLUETOOTH` or `VCE_AUDIO_ID_WIFI`)
+  ///
+  /// **Returns:**
+  /// - the value greater than 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VCE_ERROR_NONE`: Successful
+  /// - `VCE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `VCE_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VCE_ERROR_INVALID_PARAMETER`: Invalid parameter
   int vce_get_audio_type(
     ffi.Pointer<ffi.Pointer<ffi.Char>> audio_type,
   ) {
@@ -574,20 +731,32 @@ class Tizen65VcEngine {
   late final _vce_get_audio_type = _vce_get_audio_typePtr
       .asFunction<int Function(ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets private data to a voice manager client.
-  /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
-  /// @param[in] key Private key
-  /// @param[in] data Private data
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #VCE_ERROR_NONE Successful
-  /// @retval #VCE_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #VCE_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #VCE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #VCE_ERROR_INVALID_STATE Invalid state
-  /// @retval #VCE_ERROR_OUT_OF_MEMORY Out of Memory
-  /// @retval #VCE_ERROR_OPERATION_FAILED Operation failed
+  /// Sets private data to a voice manager client.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 4.0; Wearable 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Parameters:**
+  /// - `key` (in): Private key
+  /// - `data` (in): Private data
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `VCE_ERROR_NONE`: Successful
+  /// - `VCE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `VCE_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VCE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VCE_ERROR_INVALID_STATE`: Invalid state
+  /// - `VCE_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `VCE_ERROR_OPERATION_FAILED`: Operation failed
   int vce_set_private_data(
     ffi.Pointer<ffi.Char> key,
     ffi.Pointer<ffi.Char> data,
@@ -605,21 +774,35 @@ class Tizen65VcEngine {
   late final _vce_set_private_data = _vce_set_private_dataPtr
       .asFunction<int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets private data from a voice manager client.
-  /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
-  /// @remarks The @a data must be released using free() when it is no longer required.
-  /// @param[in] key Private key
-  /// @param[out] data Private data
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #VCE_ERROR_NONE Successful
-  /// @retval #VCE_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #VCE_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #VCE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #VCE_ERROR_INVALID_STATE Invalid state
-  /// @retval #VCE_ERROR_OUT_OF_MEMORY Out of Memory
-  /// @retval #VCE_ERROR_OPERATION_FAILED Operation failed
+  /// Gets private data from a voice manager client.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 4.0; Wearable 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Remarks:**
+  /// - The `data` must be released using free() when it is no longer required.
+  ///
+  /// **Parameters:**
+  /// - `key` (in): Private key
+  /// - `data` (out): Private data
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `VCE_ERROR_NONE`: Successful
+  /// - `VCE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `VCE_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VCE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VCE_ERROR_INVALID_STATE`: Invalid state
+  /// - `VCE_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `VCE_ERROR_OPERATION_FAILED`: Operation failed
   int vce_get_private_data(
     ffi.Pointer<ffi.Char> key,
     ffi.Pointer<ffi.Pointer<ffi.Char>> data,
@@ -638,16 +821,26 @@ class Tizen65VcEngine {
       int Function(
           ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Starts recording voice.
-  /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #VCE_ERROR_NONE Successful
-  /// @retval #VCE_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #VCE_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #VCE_ERROR_OPERATION_FAILED Operation failure
-  /// @retval #VCE_ERROR_RECORDER_BUSY Busy recorder
+  /// Starts recording voice.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 4.0; Wearable 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `VCE_ERROR_NONE`: Successful
+  /// - `VCE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `VCE_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VCE_ERROR_OPERATION_FAILED`: Operation failure
+  /// - `VCE_ERROR_RECORDER_BUSY`: Busy recorder
   int vce_start_recording() {
     return _vce_start_recording();
   }
@@ -657,15 +850,25 @@ class Tizen65VcEngine {
   late final _vce_start_recording =
       _vce_start_recordingPtr.asFunction<int Function()>();
 
-  /// @brief Stops recording voice.
-  /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/recorder
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #VCE_ERROR_NONE Successful
-  /// @retval #VCE_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #VCE_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #VCE_ERROR_OPERATION_FAILED Operation failure
+  /// Stops recording voice.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 4.0; Wearable 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/recorder>
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `VCE_ERROR_NONE`: Successful
+  /// - `VCE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `VCE_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `VCE_ERROR_OPERATION_FAILED`: Operation failure
   int vce_stop_recording() {
     return _vce_stop_recording();
   }
@@ -675,19 +878,25 @@ class Tizen65VcEngine {
   late final _vce_stop_recording =
       _vce_stop_recordingPtr.asFunction<int Function()>();
 
-  /// @brief Sends audio formats necessary for playing TTS feedback.
-  /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+  /// Sends audio formats necessary for playing TTS feedback.
   ///
-  /// @param[in] rate A sampling rate
-  /// @param[in] channel The audio channel
-  /// @param[in] audio_type The audio type
+  /// **Since Tizen:**
+  /// - Mobile 4.0; Wearable 5.0
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #VCE_ERROR_NONE Successful
-  /// @retval #VCE_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #VCE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #VCE_ERROR_OPERATION_FAILED Operation failure
-  /// @retval #VCE_ERROR_OUT_OF_MEMORY Out of Memory
+  /// **Parameters:**
+  /// - `rate` (in): A sampling rate
+  /// - `channel` (in): The audio channel
+  /// - `audio_type` (in): The audio type
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `VCE_ERROR_NONE`: Successful
+  /// - `VCE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `VCE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VCE_ERROR_OPERATION_FAILED`: Operation failure
+  /// - `VCE_ERROR_OUT_OF_MEMORY`: Out of Memory
   int vce_send_feedback_audio_format(
     int rate,
     int channel,
@@ -707,19 +916,25 @@ class Tizen65VcEngine {
       _vce_send_feedback_audio_formatPtr
           .asFunction<int Function(int, int, int)>();
 
-  /// @brief Sends audio streaming necessary for playing TTS feedback.
-  /// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+  /// Sends audio streaming necessary for playing TTS feedback.
   ///
-  /// @param[in] event A feedback event
-  /// @param[in] buffer The feedback data
-  /// @param[in] len The length of the feedback data
+  /// **Since Tizen:**
+  /// - Mobile 4.0; Wearable 5.0
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #VCE_ERROR_NONE Successful
-  /// @retval #VCE_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #VCE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #VCE_ERROR_OPERATION_FAILED Operation failure
-  /// @retval #VCE_ERROR_OUT_OF_MEMORY Out of Memory
+  /// **Parameters:**
+  /// - `event` (in): A feedback event
+  /// - `buffer` (in): The feedback data
+  /// - `len` (in): The length of the feedback data
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `VCE_ERROR_NONE`: Successful
+  /// - `VCE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `VCE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `VCE_ERROR_OPERATION_FAILED`: Operation failure
+  /// - `VCE_ERROR_OUT_OF_MEMORY`: Out of Memory
   int vce_send_feedback_streaming(
     int event,
     ffi.Pointer<ffi.Char> buffer,
@@ -739,19 +954,26 @@ class Tizen65VcEngine {
   late final _vce_send_feedback_streaming = _vce_send_feedback_streamingPtr
       .asFunction<int Function(int, ffi.Pointer<ffi.Char>, int)>();
 
-  /// @brief Sets a callback function for getting the request of sending TTS feedback from the engine service user.
-  /// @since_tizen 5.0
+  /// Sets a callback function for getting the request of sending TTS feedback from the engine service user.
   ///
-  /// @param[in] callback_func Callback function to be registered
-  /// @param[in] user_data The user data passed to the callback function
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VCE_ERROR_NONE Successful
-  /// @retval #VCE_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #VCE_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Parameters:**
+  /// - `callback_func` (in): Callback function to be registered
+  /// - `user_data` (in): The user data passed to the callback function
   ///
-  /// @see vce_request_tts_cb()
-  /// @see vce_unset_request_tts_cb()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VCE_ERROR_NONE`: Successful
+  /// - `VCE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `VCE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `vce_request_tts_cb()`
+  /// - `vce_unset_request_tts_cb()`
   int vce_set_request_tts_cb(
     vce_request_tts_cb callback_func,
     ffi.Pointer<ffi.Void> user_data,
@@ -769,14 +991,20 @@ class Tizen65VcEngine {
   late final _vce_set_request_tts_cb = _vce_set_request_tts_cbPtr
       .asFunction<int Function(vce_request_tts_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the TTS feedback request callback function.
-  /// @since_tizen 5.0
+  /// Unsets the TTS feedback request callback function.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VCE_ERROR_NONE Successful
-  /// @retval #VCE_ERROR_NOT_SUPPORTED Not supported
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @see vce_set_request_tts_cb()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VCE_ERROR_NONE`: Successful
+  /// - `VCE_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `vce_set_request_tts_cb()`
   int vce_unset_request_tts_cb() {
     return _vce_unset_request_tts_cb();
   }
@@ -787,19 +1015,26 @@ class Tizen65VcEngine {
   late final _vce_unset_request_tts_cb =
       _vce_unset_request_tts_cbPtr.asFunction<int Function()>();
 
-  /// @brief Sets a callback function for getting the request of canceling TTS feedback from the engine service user.
-  /// @since_tizen 5.0
+  /// Sets a callback function for getting the request of canceling TTS feedback from the engine service user.
   ///
-  /// @param[in] callback_func Callback function to be registered
-  /// @param[in] user_data The user data passed to the callback function
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VCE_ERROR_NONE Successful
-  /// @retval #VCE_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #VCE_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Parameters:**
+  /// - `callback_func` (in): Callback function to be registered
+  /// - `user_data` (in): The user data passed to the callback function
   ///
-  /// @see vce_cancel_tts_cb()
-  /// @see vce_unset_cancel_tts_cb()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VCE_ERROR_NONE`: Successful
+  /// - `VCE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `VCE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `vce_cancel_tts_cb()`
+  /// - `vce_unset_cancel_tts_cb()`
   int vce_set_cancel_tts_cb(
     vce_cancel_tts_cb callback_func,
     ffi.Pointer<ffi.Void> user_data,
@@ -817,14 +1052,20 @@ class Tizen65VcEngine {
   late final _vce_set_cancel_tts_cb = _vce_set_cancel_tts_cbPtr
       .asFunction<int Function(vce_cancel_tts_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the TTS feedback cancellation callback function.
-  /// @since_tizen 5.0
+  /// Unsets the TTS feedback cancellation callback function.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VCE_ERROR_NONE Successful
-  /// @retval #VCE_ERROR_NOT_SUPPORTED Not supported
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @see vce_set_cancel_tts_cb()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VCE_ERROR_NONE`: Successful
+  /// - `VCE_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `vce_set_cancel_tts_cb()`
   int vce_unset_cancel_tts_cb() {
     return _vce_unset_cancel_tts_cb();
   }
@@ -835,19 +1076,26 @@ class Tizen65VcEngine {
   late final _vce_unset_cancel_tts_cb =
       _vce_unset_cancel_tts_cbPtr.asFunction<int Function()>();
 
-  /// @brief Sets a callback function for sending TTS audio format to the engine service user.
-  /// @since_tizen 5.0
+  /// Sets a callback function for sending TTS audio format to the engine service user.
   ///
-  /// @param[in] callback_func Callback function to be registered
-  /// @param[in] user_data The user data passed to the callback function
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VCE_ERROR_NONE Successful
-  /// @retval #VCE_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #VCE_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Parameters:**
+  /// - `callback_func` (in): Callback function to be registered
+  /// - `user_data` (in): The user data passed to the callback function
   ///
-  /// @see vce_tts_audio_format_request_cb()
-  /// @see vce_unset_get_tts_audio_format_cb()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VCE_ERROR_NONE`: Successful
+  /// - `VCE_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `VCE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `vce_tts_audio_format_request_cb()`
+  /// - `vce_unset_get_tts_audio_format_cb()`
   int vce_set_tts_audio_format_request_cb(
     vce_tts_audio_format_request_cb callback_func,
     ffi.Pointer<ffi.Void> user_data,
@@ -867,14 +1115,20 @@ class Tizen65VcEngine {
           int Function(
               vce_tts_audio_format_request_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the TTS audio format request callback function.
-  /// @since_tizen 5.0
+  /// Unsets the TTS audio format request callback function.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #VCE_ERROR_NONE Successful
-  /// @retval #VCE_ERROR_NOT_SUPPORTED Not supported
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @see vce_set_tts_audio_format_request_cb()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `VCE_ERROR_NONE`: Successful
+  /// - `VCE_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `vce_set_tts_audio_format_request_cb()`
   int vce_unset_get_tts_audio_format_cb() {
     return _vce_unset_get_tts_audio_format_cb();
   }
@@ -886,8 +1140,11 @@ class Tizen65VcEngine {
       _vce_unset_get_tts_audio_format_cbPtr.asFunction<int Function()>();
 }
 
-/// @brief Enumerations of error codes.
-/// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+/// Enumerations of error codes.
+///
+/// **Since Tizen:**
+/// - Mobile 4.0; Wearable 5.0
+/// @nodoc
 abstract class vce_error_e {
   /// < Successful
   static const int VCE_ERROR_NONE = 0;
@@ -926,8 +1183,11 @@ abstract class vce_error_e {
   static const int VCE_ERROR_NOT_SUPPORTED_FEATURE = -49610718;
 }
 
-/// @brief Enumerations of audio type.
-/// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+/// Enumerations of audio type.
+///
+/// **Since Tizen:**
+/// - Mobile 4.0; Wearable 5.0
+/// @nodoc
 abstract class vce_audio_type_e {
   /// < Signed 16bit audio type, Little endian
   static const int VCE_AUDIO_TYPE_PCM_S16_LE = 0;
@@ -936,8 +1196,11 @@ abstract class vce_audio_type_e {
   static const int VCE_AUDIO_TYPE_PCM_U8 = 1;
 }
 
-/// @brief Enumerations of callback event.
-/// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+/// Enumerations of callback event.
+///
+/// **Since Tizen:**
+/// - Mobile 4.0; Wearable 5.0
+/// @nodoc
 abstract class vce_result_event_e {
   /// < Event when the recognition full result is ready
   static const int VCE_RESULT_EVENT_SUCCESS = 0;
@@ -949,8 +1212,11 @@ abstract class vce_result_event_e {
   static const int VCE_RESULT_EVENT_ERROR = 2;
 }
 
-/// @brief Enumerations of command type.
-/// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+/// Enumerations of command type.
+///
+/// **Since Tizen:**
+/// - Mobile 4.0; Wearable 5.0
+/// @nodoc
 abstract class vce_command_format_e {
   /// < Fixed command
   static const int VCE_COMMAND_FORMAT_FIXED = 0;
@@ -974,8 +1240,11 @@ abstract class vce_command_format_e {
   static const int VCE_COMMAND_FORMAT_PARTIAL = 6;
 }
 
-/// @brief Enumerations of speech detect.
-/// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+/// Enumerations of speech detect.
+///
+/// **Since Tizen:**
+/// - Mobile 4.0; Wearable 5.0
+/// @nodoc
 abstract class vce_speech_detect_e {
   /// < No event
   static const int VCE_SPEECH_DETECT_NONE = 0;
@@ -987,8 +1256,11 @@ abstract class vce_speech_detect_e {
   static const int VCE_SPEECH_DETECT_END = 2;
 }
 
-/// @brief Enumerations of ASR result events.
-/// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+/// Enumerations of ASR result events.
+///
+/// **Since Tizen:**
+/// - Mobile 4.0; Wearable 5.0
+/// @nodoc
 abstract class vce_asr_result_event_e {
   /// < Event when the ASR result is last data or ASR result is only one result
   static const int VCE_ASR_RESULT_EVENT_FINAL_RESULT = 0;
@@ -1000,8 +1272,11 @@ abstract class vce_asr_result_event_e {
   static const int VCE_ASR_RESULT_EVENT_ERROR = 2;
 }
 
-/// @brief Enumerations of audio channels.
-/// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+/// Enumerations of audio channels.
+///
+/// **Since Tizen:**
+/// - Mobile 4.0; Wearable 5.0
+/// @nodoc
 abstract class vce_audio_channel_e {
   /// < 1 channel, mono
   static const int VCE_AUDIO_CHANNEL_MONO = 0;
@@ -1010,8 +1285,11 @@ abstract class vce_audio_channel_e {
   static const int VCE_AUDIO_CHANNEL_STEREO = 1;
 }
 
-/// @brief Enumeration for TTS feedback events.
-/// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+/// Enumeration for TTS feedback events.
+///
+/// **Since Tizen:**
+/// - Mobile 4.0; Wearable 5.0
+/// @nodoc
 abstract class vce_feedback_event_e {
   /// < Failed
   static const int VCE_FEEDBACK_EVENT_FAIL = -1;
@@ -1026,24 +1304,32 @@ abstract class vce_feedback_event_e {
   static const int VCE_FEEDBACK_EVENT_FINISH = 3;
 }
 
+/// @nodoc
 final class vce_cmd_s extends ffi.Opaque {}
 
-/// @brief A structure for the VC engine functions.
-/// @details This structure contains essential callback functions for operating VC engine.
-/// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
-/// @remarks You must register all callbacks except optional callbacks for operating VC engine.\n
-/// The following callbacks are optional callbacks : \n
-/// - vce_private_data_set_cb() \n
-/// - vce_private_data_requested_cb() \n
-/// - vce_nlu_base_info_requested_cb() \n
-/// - vce_specific_engine_request_cb() \n
-/// If you want to use the optional callbacks, you can set them using vce_set_private_data_set_cb(), vce_set_private_data_requested_cb(), vce_set_nlu_base_info_requested_cb(), and vce_set_specific_engine_request_cb() functions.
+/// A structure for the VC engine functions.
 ///
-/// @see vce_main()
-/// @see vce_set_private_data_set_cb()
-/// @see vce_set_private_data_requested_cb()
-/// @see vce_set_nlu_base_info_requested_cb()
-/// @see vce_set_specific_engine_request_cb()
+/// This structure contains essential callback functions for operating VC engine.
+///
+/// **Since Tizen:**
+/// - Mobile 4.0; Wearable 5.0
+///
+/// **Remarks:**
+/// - You must register all callbacks except optional callbacks for operating VC engine.
+/// - The following callbacks are optional callbacks :
+/// - - vce_private_data_set_cb()
+/// - - vce_private_data_requested_cb()
+/// - - vce_nlu_base_info_requested_cb()
+/// - - vce_specific_engine_request_cb()
+/// - If you want to use the optional callbacks, you can set them using vce_set_private_data_set_cb(), vce_set_private_data_requested_cb(), vce_set_nlu_base_info_requested_cb(), and vce_set_specific_engine_request_cb() functions.
+///
+/// **See also:**
+/// - `vce_main()`
+/// - `vce_set_private_data_set_cb()`
+/// - `vce_set_private_data_requested_cb()`
+/// - `vce_set_nlu_base_info_requested_cb()`
+/// - `vce_set_specific_engine_request_cb()`
+/// @nodoc
 final class vce_request_callback_s extends ffi.Struct {
   /// < Version
   @ffi.Int()
@@ -1119,452 +1405,792 @@ final class vce_request_callback_s extends ffi.Struct {
   external vce_specific_engine_request_cb specific_engine_request;
 }
 
-/// @brief Called when the engine service user requests the base information of VC engine.
-/// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
-/// @remarks This callback function is mandatory and must be registered using vce_main().
-/// The @a engine_uuid is managed by the platform and will be released when this callback function is completed.
-/// The @a engine_name is managed by the platform and will be released when this callback function is completed.
-/// The @a engine_settings_app_id is managed by the platform and will be released when this callback function is completed.
-/// The @a use_network is managed by the platform and will be released when this callback function is completed.
-/// In order to upload the engine to Tizen Appstore, both the service app and the UI app (engine settings) are necessary.
-/// Therefore, @a engine_settings_app_id should be set to the application ID of the UI application.
-/// If there is no UI application, then @a engine_settings_app_id should be set to NULL.
-/// @param[out] engine_uuid The engine id
-/// @param[out] engine_name The engine name
-/// @param[out] engine_settings_app_id The ID of the engine settings application (the UI application)
-/// @param[out] use_network @c true to need network @c false not to need network.
-/// @return @c 0 on success, otherwise a negative error code on failure
-/// @retval #VCE_ERROR_NONE Successful
-/// @retval #VCE_ERROR_INVALID_PARAMETER Invalid parameter
-/// @retval #VCE_ERROR_OPERATION_FAILED Operation failure
+/// Called when the engine service user requests the base information of VC engine.
+///
+/// **Since Tizen:**
+/// - Mobile 4.0; Wearable 5.0
+///
+/// **Remarks:**
+/// - This callback function is mandatory and must be registered using vce_main().
+/// - The `engine_uuid` is managed by the platform and will be released when this callback function is completed.
+/// - The `engine_name` is managed by the platform and will be released when this callback function is completed.
+/// - The `engine_settings_app_id` is managed by the platform and will be released when this callback function is completed.
+/// - The `use_network` is managed by the platform and will be released when this callback function is completed.
+/// - In order to upload the engine to Tizen Appstore, both the service app and the UI app (engine settings) are necessary.
+/// - Therefore, `engine_settings_app_id` should be set to the application ID of the UI application.
+/// - If there is no UI application, then `engine_settings_app_id` should be set to NULL.
+///
+/// **Parameters:**
+/// - `engine_uuid` (out): The engine id
+/// - `engine_name` (out): The engine name
+/// - `engine_settings_app_id` (out): The ID of the engine settings application (the UI application)
+/// - `use_network` (out): `true` to need network `false` not to need network.
+///
+/// **Returns:**
+/// - `0` on success, otherwise a negative error code on failure
+///
+/// **Return values:**
+/// - `VCE_ERROR_NONE`: Successful
+/// - `VCE_ERROR_INVALID_PARAMETER`: Invalid parameter
+/// - `VCE_ERROR_OPERATION_FAILED`: Operation failure
+/// @nodoc
 typedef vce_get_info_cb
     = ffi.Pointer<ffi.NativeFunction<vce_get_info_cbFunction>>;
+/// @nodoc
 typedef vce_get_info_cbFunction = ffi.Int Function(
     ffi.Pointer<ffi.Pointer<ffi.Char>> engine_uuid,
     ffi.Pointer<ffi.Pointer<ffi.Char>> engine_name,
     ffi.Pointer<ffi.Pointer<ffi.Char>> engine_settings_app_id,
     ffi.Pointer<ffi.Bool> use_network);
+/// @nodoc
 typedef Dartvce_get_info_cbFunction = int Function(
     ffi.Pointer<ffi.Pointer<ffi.Char>> engine_uuid,
     ffi.Pointer<ffi.Pointer<ffi.Char>> engine_name,
     ffi.Pointer<ffi.Pointer<ffi.Char>> engine_settings_app_id,
     ffi.Pointer<ffi.Bool> use_network);
 
-/// @brief Called when the engine service user requests the recording format of VC engine.
-/// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
-/// @remarks This callback function is mandatory and must be registered using vce_main().
-/// The @a audio_id can be used only in the callback. To use outside, make a copy.
-/// The @a types is managed by the platform and will be released when this callback function is completed.
-/// The @a rate is managed by the platform and will be released when this callback function is completed.
-/// The @a channels is managed by the platform and will be released when this callback function is completed.
-/// @param[in] audio_id The audio device id. (e.g. #VCE_AUDIO_ID_BLUETOOTH or #VCE_AUDIO_ID_WIFI)
-/// @param[out] types The format used by the recorder.
-/// @param[out] rate The sample rate used by the recorder.
-/// @param[out] channels The number of channels used by the recorder.
-/// @return 0 on success, otherwise a negative error value
-/// @retval #VCE_ERROR_NONE Successful
-/// @retval #VCE_ERROR_INVALID_PARAMETER Not initialized
+/// Called when the engine service user requests the recording format of VC engine.
+///
+/// **Since Tizen:**
+/// - Mobile 4.0; Wearable 5.0
+///
+/// **Remarks:**
+/// - This callback function is mandatory and must be registered using vce_main().
+/// - The `audio_id` can be used only in the callback. To use outside, make a copy.
+/// - The `types` is managed by the platform and will be released when this callback function is completed.
+/// - The `rate` is managed by the platform and will be released when this callback function is completed.
+/// - The `channels` is managed by the platform and will be released when this callback function is completed.
+///
+/// **Parameters:**
+/// - `audio_id` (in): The audio device id. (e.g. `VCE_AUDIO_ID_BLUETOOTH` or `VCE_AUDIO_ID_WIFI`)
+/// - `types` (out): The format used by the recorder.
+/// - `rate` (out): The sample rate used by the recorder.
+/// - `channels` (out): The number of channels used by the recorder.
+///
+/// **Returns:**
+/// - 0 on success, otherwise a negative error value
+///
+/// **Return values:**
+/// - `VCE_ERROR_NONE`: Successful
+/// - `VCE_ERROR_INVALID_PARAMETER`: Not initialized
+/// @nodoc
 typedef vce_get_recording_format_cb
     = ffi.Pointer<ffi.NativeFunction<vce_get_recording_format_cbFunction>>;
+/// @nodoc
 typedef vce_get_recording_format_cbFunction = ffi.Int Function(
     ffi.Pointer<ffi.Char> audio_id,
     ffi.Pointer<ffi.Int32> types,
     ffi.Pointer<ffi.Int> rate,
     ffi.Pointer<ffi.Int> channels);
+/// @nodoc
 typedef Dartvce_get_recording_format_cbFunction = int Function(
     ffi.Pointer<ffi.Char> audio_id,
     ffi.Pointer<ffi.Int32> types,
     ffi.Pointer<ffi.Int> rate,
     ffi.Pointer<ffi.Int> channels);
 
-/// @brief Called when the engine service user retrieves all supported languages of VC engine.
-/// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
-/// @remarks This callback function is mandatory and must be registered using vce_main().
-/// @param[in] callback a callback function
-/// @param[in] user_data The user data to be passed to the callback function
-/// @return 0 on success, otherwise a negative error value
-/// @retval #VCE_ERROR_NONE Successful
-/// @retval #VCE_ERROR_INVALID_PARAMETER Invalid parameter
-/// @retval #VCE_ERROR_INVALID_STATE Not initialized
-/// @post This function invokes vce_supported_language_cb() repeatedly for getting supported languages.
+/// Called when the engine service user retrieves all supported languages of VC engine.
 ///
-/// @see vce_supported_language_cb()
+/// **Since Tizen:**
+/// - Mobile 4.0; Wearable 5.0
+///
+/// **Remarks:**
+/// - This callback function is mandatory and must be registered using vce_main().
+///
+/// **Parameters:**
+/// - `callback` (in): a callback function
+/// - `user_data` (in): The user data to be passed to the callback function
+///
+/// **Returns:**
+/// - 0 on success, otherwise a negative error value
+///
+/// **Return values:**
+/// - `VCE_ERROR_NONE`: Successful
+/// - `VCE_ERROR_INVALID_PARAMETER`: Invalid parameter
+/// - `VCE_ERROR_INVALID_STATE`: Not initialized
+///
+/// **Postconditions:**
+/// - This function invokes vce_supported_language_cb() repeatedly for getting supported languages.
+///
+/// **See also:**
+/// - `vce_supported_language_cb()`
+/// @nodoc
 typedef vce_foreach_supported_languages_cb = ffi
     .Pointer<ffi.NativeFunction<vce_foreach_supported_languages_cbFunction>>;
+/// @nodoc
 typedef vce_foreach_supported_languages_cbFunction = ffi.Int Function(
     vce_supported_language_cb callback, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartvce_foreach_supported_languages_cbFunction = int Function(
     vce_supported_language_cb callback, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when VC engine informs the engine service user about whole supported languages.
-/// @details This callback function is implemented by the engine service user. Therefore, the engine developer does NOT have to implement this callback function.
-/// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
-/// @remarks This callback function is called by vce_foreach_supported_languages_cb() to retrieve the whole supported language list.
-/// The @a user_data must be transferred from vce_foreach_supported_languages_cb().
-/// The @a language can be used only in the callback. To use outside, make a copy.
-/// @param[in] language A language is specified as an ISO 3166 alpha-2 two letter country-code followed by ISO 639-1 for the two-letter language code \n
-/// For example, "ko_KR" for Korean, "en_US" for American English.
-/// @param[in] user_data The user data passed from the foreach function
-/// @return @c true to continue with the next iteration of the loop \n @c false to break out of the loop
-/// @pre vce_foreach_supported_languages_cb() will invoke this callback.
-/// @see vce_foreach_supported_languages_cb()
+/// Called when VC engine informs the engine service user about whole supported languages.
+///
+/// This callback function is implemented by the engine service user. Therefore, the engine developer does NOT have to implement this callback function.
+///
+/// **Since Tizen:**
+/// - Mobile 4.0; Wearable 5.0
+///
+/// **Remarks:**
+/// - This callback function is called by vce_foreach_supported_languages_cb() to retrieve the whole supported language list.
+/// - The `user_data` must be transferred from vce_foreach_supported_languages_cb().
+/// - The `language` can be used only in the callback. To use outside, make a copy.
+///
+/// **Parameters:**
+/// - `language` (in): A language is specified as an ISO 3166 alpha-2 two letter country-code followed by ISO 639-1 for the two-letter language code For example, "ko_KR" for Korean, "en_US" for American English.
+/// - `user_data` (in): The user data passed from the foreach function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - vce_foreach_supported_languages_cb() will invoke this callback.
+///
+/// **See also:**
+/// - `vce_foreach_supported_languages_cb()`
+/// @nodoc
 typedef vce_supported_language_cb
     = ffi.Pointer<ffi.NativeFunction<vce_supported_language_cbFunction>>;
+/// @nodoc
 typedef vce_supported_language_cbFunction = ffi.Bool Function(
     ffi.Pointer<ffi.Char> language, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartvce_supported_language_cbFunction = bool Function(
     ffi.Pointer<ffi.Char> language, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the engine service user checks whether a language is supported or not.
-/// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
-/// @remarks This callback function is mandatory and must be registered using vce_main().
-/// The @a language can be used only in the callback. To use outside, make a copy.
-/// @param[in] language A language
-/// @return @c true = supported, \n @c false = not supported.
+/// Called when the engine service user checks whether a language is supported or not.
+///
+/// **Since Tizen:**
+/// - Mobile 4.0; Wearable 5.0
+///
+/// **Remarks:**
+/// - This callback function is mandatory and must be registered using vce_main().
+/// - The `language` can be used only in the callback. To use outside, make a copy.
+///
+/// **Parameters:**
+/// - `language` (in): A language
+///
+/// **Returns:**
+/// - `true` = supported, `false` = not supported.
+/// @nodoc
 typedef vce_is_language_supported_cb
     = ffi.Pointer<ffi.NativeFunction<vce_is_language_supported_cbFunction>>;
+/// @nodoc
 typedef vce_is_language_supported_cbFunction = ffi.Bool Function(
     ffi.Pointer<ffi.Char> language);
+/// @nodoc
 typedef Dartvce_is_language_supported_cbFunction = bool Function(
     ffi.Pointer<ffi.Char> language);
 
-/// @brief Called when the engine service user initializes Voice Control (VC) engine.
-/// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
-/// @remarks This callback function is mandatory and must be registered using vce_main().
-/// @return 0 on success, otherwise a negative error value
-/// @retval #VCE_ERROR_NONE Successful
-/// @retval #VCE_ERROR_INVALID_PARAMETER Invalid parameter
-/// @retval #VCE_ERROR_INVALID_STATE Already initialized
-/// @retval #VCE_ERROR_OPERATION_FAILED Operation failed
-/// @see vce_deinitialize_cb()
+/// Called when the engine service user initializes Voice Control (VC) engine.
+///
+/// **Since Tizen:**
+/// - Mobile 4.0; Wearable 5.0
+///
+/// **Remarks:**
+/// - This callback function is mandatory and must be registered using vce_main().
+///
+/// **Returns:**
+/// - 0 on success, otherwise a negative error value
+///
+/// **Return values:**
+/// - `VCE_ERROR_NONE`: Successful
+/// - `VCE_ERROR_INVALID_PARAMETER`: Invalid parameter
+/// - `VCE_ERROR_INVALID_STATE`: Already initialized
+/// - `VCE_ERROR_OPERATION_FAILED`: Operation failed
+///
+/// **See also:**
+/// - `vce_deinitialize_cb()`
+/// @nodoc
 typedef vce_initialize_cb
     = ffi.Pointer<ffi.NativeFunction<vce_initialize_cbFunction>>;
+/// @nodoc
 typedef vce_initialize_cbFunction = ffi.Int Function();
+/// @nodoc
 typedef Dartvce_initialize_cbFunction = int Function();
 
-/// @brief Called when the engine service user deinitializes VC engine.
-/// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
-/// @remarks This callback function is mandatory and must be registered using vce_main().
-/// @return 0 on success, otherwise a negative error value
-/// @retval #VCE_ERROR_NONE Successful
-/// @retval #VCE_ERROR_INVALID_STATE Not initialized
-/// @see vce_initialize_cb()
+/// Called when the engine service user deinitializes VC engine.
+///
+/// **Since Tizen:**
+/// - Mobile 4.0; Wearable 5.0
+///
+/// **Remarks:**
+/// - This callback function is mandatory and must be registered using vce_main().
+///
+/// **Returns:**
+/// - 0 on success, otherwise a negative error value
+///
+/// **Return values:**
+/// - `VCE_ERROR_NONE`: Successful
+/// - `VCE_ERROR_INVALID_STATE`: Not initialized
+///
+/// **See also:**
+/// - `vce_initialize_cb()`
+/// @nodoc
 typedef vce_deinitialize_cb
     = ffi.Pointer<ffi.NativeFunction<vce_deinitialize_cbFunction>>;
+/// @nodoc
 typedef vce_deinitialize_cbFunction = ffi.Int Function();
+/// @nodoc
 typedef Dartvce_deinitialize_cbFunction = int Function();
 
-/// @brief Called when the engine service user sets language.
-/// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
-/// @remarks The @a language can be used only in the callback. To use outside, make a copy.
-/// @param[in] language A language.
-/// @return 0 on success, otherwise a negative error value
-/// @retval #VCE_ERROR_NONE Successful
-/// @retval #VCE_ERROR_INVALID_LANGUAGE Invalid language
-/// @retval #VCE_ERROR_INVALID_STATE Not initialized
-/// @retval #VCE_ERROR_NOT_SUPPORTED_FEATURE Not supported feature
+/// Called when the engine service user sets language.
+///
+/// **Since Tizen:**
+/// - Mobile 4.0; Wearable 5.0
+///
+/// **Remarks:**
+/// - The `language` can be used only in the callback. To use outside, make a copy.
+///
+/// **Parameters:**
+/// - `language` (in): A language.
+///
+/// **Returns:**
+/// - 0 on success, otherwise a negative error value
+///
+/// **Return values:**
+/// - `VCE_ERROR_NONE`: Successful
+/// - `VCE_ERROR_INVALID_LANGUAGE`: Invalid language
+/// - `VCE_ERROR_INVALID_STATE`: Not initialized
+/// - `VCE_ERROR_NOT_SUPPORTED_FEATURE`: Not supported feature
+/// @nodoc
 typedef vce_set_language_cb
     = ffi.Pointer<ffi.NativeFunction<vce_set_language_cbFunction>>;
+/// @nodoc
 typedef vce_set_language_cbFunction = ffi.Int Function(
     ffi.Pointer<ffi.Char> language);
+/// @nodoc
 typedef Dartvce_set_language_cbFunction = int Function(
     ffi.Pointer<ffi.Char> language);
 
-/// @brief Called when the engine service user sets command list before recognition.
-/// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
-/// @remarks This function should set commands via vcd_foreach_command().
-/// The @a vc_command should not be released.
-/// The @a vc_command can be used only in the callback. To use outside, make a copy.
-/// @param[in] vc_command command handle. The @a vc_command can be used only in the callback. To use outside, make a copy.
-/// @return 0 on success, otherwise a negative error value
-/// @retval #VCE_ERROR_NONE Successful
-/// @retval #VCE_ERROR_INVALID_PARAMETER Invalid parameter
-/// @retval #VCE_ERROR_INVALID_STATE Invalid state
-/// @retval #VCE_ERROR_OPERATION_FAILED Operation failed
-/// @retval #VCE_ERROR_NOT_SUPPORTED_FEATURE Not supported command type
-/// @post vce_start_cb() is called after this function is successful.
-/// @see vce_start_cb()
-/// @see vcd_foreach_command()
-/// @see vce_unset_commands()
-/// @see vce_get_command_count()
+/// Called when the engine service user sets command list before recognition.
+///
+/// **Since Tizen:**
+/// - Mobile 4.0; Wearable 5.0
+///
+/// **Remarks:**
+/// - This function should set commands via vcd_foreach_command().
+/// - The `vc_command` should not be released.
+/// - The `vc_command` can be used only in the callback. To use outside, make a copy.
+///
+/// **Parameters:**
+/// - `vc_command` (in): command handle. The `vc_command` can be used only in the callback. To use outside, make a copy.
+///
+/// **Returns:**
+/// - 0 on success, otherwise a negative error value
+///
+/// **Return values:**
+/// - `VCE_ERROR_NONE`: Successful
+/// - `VCE_ERROR_INVALID_PARAMETER`: Invalid parameter
+/// - `VCE_ERROR_INVALID_STATE`: Invalid state
+/// - `VCE_ERROR_OPERATION_FAILED`: Operation failed
+/// - `VCE_ERROR_NOT_SUPPORTED_FEATURE`: Not supported command type
+///
+/// **Postconditions:**
+/// - vce_start_cb() is called after this function is successful.
+///
+/// **See also:**
+/// - `vce_start_cb()`
+/// - `vcd_foreach_command()`
+/// - `vce_unset_commands()`
+/// - `vce_get_command_count()`
+/// @nodoc
 typedef vce_set_commands_cb
     = ffi.Pointer<ffi.NativeFunction<vce_set_commands_cbFunction>>;
+/// @nodoc
 typedef vce_set_commands_cbFunction = ffi.Int Function(vce_cmd_h vc_command);
+/// @nodoc
 typedef Dartvce_set_commands_cbFunction = int Function(vce_cmd_h vc_command);
 
-/// @brief A structure of handle for VC command.
-/// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
+/// A structure of handle for VC command.
+///
+/// **Since Tizen:**
+/// - Mobile 4.0; Wearable 5.0
+/// @nodoc
 typedef vce_cmd_h = ffi.Pointer<vce_cmd_s>;
 
-/// @brief Called when the engine service user unsets command list for reset.
-/// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
-/// @return 0 on success, otherwise a negative error value
-/// @retval #VCE_ERROR_NONE Successful
-/// @retval #VCE_ERROR_INVALID_PARAMETER Invalid parameter
-/// @retval #VCE_ERROR_INVALID_STATE Invalid state
-/// @retval #VCE_ERROR_OPERATION_FAILED Operation failed
-/// @retval #VCE_ERROR_NOT_SUPPORTED_FEATURE Not supported feature
-/// @see vce_set_commands_cb()
+/// Called when the engine service user unsets command list for reset.
+///
+/// **Since Tizen:**
+/// - Mobile 4.0; Wearable 5.0
+///
+/// **Returns:**
+/// - 0 on success, otherwise a negative error value
+///
+/// **Return values:**
+/// - `VCE_ERROR_NONE`: Successful
+/// - `VCE_ERROR_INVALID_PARAMETER`: Invalid parameter
+/// - `VCE_ERROR_INVALID_STATE`: Invalid state
+/// - `VCE_ERROR_OPERATION_FAILED`: Operation failed
+/// - `VCE_ERROR_NOT_SUPPORTED_FEATURE`: Not supported feature
+///
+/// **See also:**
+/// - `vce_set_commands_cb()`
+/// @nodoc
 typedef vce_unset_commands_cb
     = ffi.Pointer<ffi.NativeFunction<vce_unset_commands_cbFunction>>;
+/// @nodoc
 typedef vce_unset_commands_cbFunction = ffi.Int Function();
+/// @nodoc
 typedef Dartvce_unset_commands_cbFunction = int Function();
 
-/// @brief Called when the engine service user starts recognition.
-/// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
-/// @remarks This callback function is mandatory and must be registered using vce_main().
-/// @param[in] stop_by_silence Silence detection option.
-/// @c true to detect the silence,
-/// @c false not to detect the silence
-/// @return 0 on success, otherwise a negative error value
-/// @retval #VCE_ERROR_NONE Successful
-/// @retval #VCE_ERROR_INVALID_PARAMETER Invalid parameter
-/// @retval #VCE_ERROR_INVALID_STATE Invalid state
-/// @retval #VCE_ERROR_INVALID_LANGUAGE Invalid language
-/// @retval #VCE_ERROR_OUT_OF_NETWORK Out of network
-/// @retval #VCE_ERROR_OPERATION_FAILED Operation failed
-/// @pre vcd_foreach_command() is successful.
-/// @see vce_set_recording_data_cb()
-/// @see vce_stop_cb()
-/// @see vce_cancel_cb()
+/// Called when the engine service user starts recognition.
+///
+/// **Since Tizen:**
+/// - Mobile 4.0; Wearable 5.0
+///
+/// **Remarks:**
+/// - This callback function is mandatory and must be registered using vce_main().
+///
+/// **Parameters:**
+/// - `stop_by_silence` (in): Silence detection option. `true` to detect the silence, `false` not to detect the silence
+///
+/// **Returns:**
+/// - 0 on success, otherwise a negative error value
+///
+/// **Return values:**
+/// - `VCE_ERROR_NONE`: Successful
+/// - `VCE_ERROR_INVALID_PARAMETER`: Invalid parameter
+/// - `VCE_ERROR_INVALID_STATE`: Invalid state
+/// - `VCE_ERROR_INVALID_LANGUAGE`: Invalid language
+/// - `VCE_ERROR_OUT_OF_NETWORK`: Out of network
+/// - `VCE_ERROR_OPERATION_FAILED`: Operation failed
+///
+/// **Preconditions:**
+/// - vcd_foreach_command() is successful.
+///
+/// **See also:**
+/// - `vce_set_recording_data_cb()`
+/// - `vce_stop_cb()`
+/// - `vce_cancel_cb()`
+/// @nodoc
 typedef vce_start_cb = ffi.Pointer<ffi.NativeFunction<vce_start_cbFunction>>;
+/// @nodoc
 typedef vce_start_cbFunction = ffi.Int Function(ffi.Bool stop_by_silence);
+/// @nodoc
 typedef Dartvce_start_cbFunction = int Function(bool stop_by_silence);
 
-/// @brief Called when the engine service user sets recording data for speech recognition from recorder.
-/// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
-/// @remarks This function should be returned immediately after recording data copy.
-/// The @a data can be used only in the callback. To use outside, make a copy.
-/// The @a speech_detected should not be released. This is managed by the platform.
-/// @param[in] data A recording data
-/// @param[in] length A length of recording data
-/// @param[out] speech_detected The status of speech (e.g. #VCE_SPEECH_DETECT_BEGIN or #VCE_SPEECH_DETECT_END). The @a speech_detected can be used only in the callback. To use outside, make a copy.
-/// @return 0 on success, otherwise a negative error value
-/// @retval #VCE_ERROR_NONE Successful
-/// @retval #VCE_ERROR_INVALID_PARAMETER Invalid parameter
-/// @retval #VCE_ERROR_INVALID_STATE Invalid state
-/// @retval #VCE_ERROR_OPERATION_FAILED Operation failed
-/// @pre vce_start_cb() is successful.
-/// @see vce_start_cb()
-/// @see vce_cancel_cb()
-/// @see vce_stop_cb()
+/// Called when the engine service user sets recording data for speech recognition from recorder.
+///
+/// **Since Tizen:**
+/// - Mobile 4.0; Wearable 5.0
+///
+/// **Remarks:**
+/// - This function should be returned immediately after recording data copy.
+/// - The `data` can be used only in the callback. To use outside, make a copy.
+/// - The `speech_detected` should not be released. This is managed by the platform.
+///
+/// **Parameters:**
+/// - `data` (in): A recording data
+/// - `length` (in): A length of recording data
+/// - `speech_detected` (out): The status of speech (e.g. `VCE_SPEECH_DETECT_BEGIN` or `VCE_SPEECH_DETECT_END`). The `speech_detected` can be used only in the callback. To use outside, make a copy.
+///
+/// **Returns:**
+/// - 0 on success, otherwise a negative error value
+///
+/// **Return values:**
+/// - `VCE_ERROR_NONE`: Successful
+/// - `VCE_ERROR_INVALID_PARAMETER`: Invalid parameter
+/// - `VCE_ERROR_INVALID_STATE`: Invalid state
+/// - `VCE_ERROR_OPERATION_FAILED`: Operation failed
+///
+/// **Preconditions:**
+/// - vce_start_cb() is successful.
+///
+/// **See also:**
+/// - `vce_start_cb()`
+/// - `vce_cancel_cb()`
+/// - `vce_stop_cb()`
+/// @nodoc
 typedef vce_set_recording_data_cb
     = ffi.Pointer<ffi.NativeFunction<vce_set_recording_data_cbFunction>>;
+/// @nodoc
 typedef vce_set_recording_data_cbFunction = ffi.Int Function(
     ffi.Pointer<ffi.Void> data,
     ffi.UnsignedInt length,
     ffi.Pointer<ffi.Int32> speech_detected);
+/// @nodoc
 typedef Dartvce_set_recording_data_cbFunction = int Function(
     ffi.Pointer<ffi.Void> data,
     int length,
     ffi.Pointer<ffi.Int32> speech_detected);
 
-/// @brief Called when the engine service user stops to get the result of recognition.
-/// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
-/// @return 0 on success, otherwise a negative error value
-/// @retval #VCE_ERROR_NONE Successful
-/// @retval #VCE_ERROR_INVALID_STATE Invalid state
-/// @retval #VCE_ERROR_OPERATION_FAILED Operation failed
-/// @retval #VCE_ERROR_OUT_OF_NETWORK Out of network
-/// @pre vce_set_recording_data_cb() is successful.
-/// @see vce_start_cb()
-/// @see vce_set_recording_data_cb()
-/// @see vce_send_result()
-/// @see vce_cancel_cb()
+/// Called when the engine service user stops to get the result of recognition.
+///
+/// **Since Tizen:**
+/// - Mobile 4.0; Wearable 5.0
+///
+/// **Returns:**
+/// - 0 on success, otherwise a negative error value
+///
+/// **Return values:**
+/// - `VCE_ERROR_NONE`: Successful
+/// - `VCE_ERROR_INVALID_STATE`: Invalid state
+/// - `VCE_ERROR_OPERATION_FAILED`: Operation failed
+/// - `VCE_ERROR_OUT_OF_NETWORK`: Out of network
+///
+/// **Preconditions:**
+/// - vce_set_recording_data_cb() is successful.
+///
+/// **See also:**
+/// - `vce_start_cb()`
+/// - `vce_set_recording_data_cb()`
+/// - `vce_send_result()`
+/// - `vce_cancel_cb()`
+/// @nodoc
 typedef vce_stop_cb = ffi.Pointer<ffi.NativeFunction<vce_stop_cbFunction>>;
+/// @nodoc
 typedef vce_stop_cbFunction = ffi.Int Function();
+/// @nodoc
 typedef Dartvce_stop_cbFunction = int Function();
 
-/// @brief Called when the engine service user cancels the recognition process.
-/// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
-/// @return 0 on success, otherwise a negative error value.
-/// @retval #VCE_ERROR_NONE Successful.
-/// @retval #VCE_ERROR_INVALID_STATE Invalid state.
-/// @pre vce_start_cb() is successful.
-/// @see vce_start_cb()
-/// @see vce_stop_cb()
+/// Called when the engine service user cancels the recognition process.
+///
+/// **Since Tizen:**
+/// - Mobile 4.0; Wearable 5.0
+///
+/// **Returns:**
+/// - 0 on success, otherwise a negative error value.
+///
+/// **Return values:**
+/// - `VCE_ERROR_NONE`: Successful.
+/// - `VCE_ERROR_INVALID_STATE`: Invalid state.
+///
+/// **Preconditions:**
+/// - vce_start_cb() is successful.
+///
+/// **See also:**
+/// - `vce_start_cb()`
+/// - `vce_stop_cb()`
+/// @nodoc
 typedef vce_cancel_cb = ffi.Pointer<ffi.NativeFunction<vce_cancel_cbFunction>>;
+/// @nodoc
 typedef vce_cancel_cbFunction = ffi.Int Function();
+/// @nodoc
 typedef Dartvce_cancel_cbFunction = int Function();
 
-/// @brief Called when the engine service user sets audio recording type.
-/// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
-/// @remarks The @a audio_type can be used only in the callback. To use outside, make a copy.
-/// @param[in] audio_type Current audio type (e.g. #VCE_AUDIO_ID_BLUETOOTH or #VCE_AUDIO_ID_WIFI)
-/// @return 0 on success, otherwise a negative error value.
-/// @retval #VCE_ERROR_NONE Successful.
-/// @retval #VCE_ERROR_NOT_SUPPORTED_FEATURE Not supported feature.
+/// Called when the engine service user sets audio recording type.
+///
+/// **Since Tizen:**
+/// - Mobile 4.0; Wearable 5.0
+///
+/// **Remarks:**
+/// - The `audio_type` can be used only in the callback. To use outside, make a copy.
+///
+/// **Parameters:**
+/// - `audio_type` (in): Current audio type (e.g. `VCE_AUDIO_ID_BLUETOOTH` or `VCE_AUDIO_ID_WIFI`)
+///
+/// **Returns:**
+/// - 0 on success, otherwise a negative error value.
+///
+/// **Return values:**
+/// - `VCE_ERROR_NONE`: Successful.
+/// - `VCE_ERROR_NOT_SUPPORTED_FEATURE`: Not supported feature.
+/// @nodoc
 typedef vce_set_audio_type_cb
     = ffi.Pointer<ffi.NativeFunction<vce_set_audio_type_cbFunction>>;
+/// @nodoc
 typedef vce_set_audio_type_cbFunction = ffi.Int Function(
     ffi.Pointer<ffi.Char> audio_type);
+/// @nodoc
 typedef Dartvce_set_audio_type_cbFunction = int Function(
     ffi.Pointer<ffi.Char> audio_type);
 
-/// @brief Called when the engine service user sets app id which is want to ask server dialog.
-/// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
-/// @remarks The @a app_id and @a credential can be used only in the callback. To use outside, make a copy.
-/// @param[in] app_id App id which is to want to ask server dialog.
-/// @param[in] credential Credential key.
-/// @return 0 on success, otherwise a negative error value.
-/// @retval #VCE_ERROR_NONE Successful.
-/// @retval #VCE_ERROR_PERMISSION_DENIED Permission denied.
-/// @retval #VCE_ERROR_NOT_SUPPORTED_FEATURE Not supported feature.
+/// Called when the engine service user sets app id which is want to ask server dialog.
+///
+/// **Since Tizen:**
+/// - Mobile 4.0; Wearable 5.0
+///
+/// **Remarks:**
+/// - The `app_id` and `credential` can be used only in the callback. To use outside, make a copy.
+///
+/// **Parameters:**
+/// - `app_id` (in): App id which is to want to ask server dialog.
+/// - `credential` (in): Credential key.
+///
+/// **Returns:**
+/// - 0 on success, otherwise a negative error value.
+///
+/// **Return values:**
+/// - `VCE_ERROR_NONE`: Successful.
+/// - `VCE_ERROR_PERMISSION_DENIED`: Permission denied.
+/// - `VCE_ERROR_NOT_SUPPORTED_FEATURE`: Not supported feature.
+/// @nodoc
 typedef vce_set_server_dialog_cb
     = ffi.Pointer<ffi.NativeFunction<vce_set_server_dialog_cbFunction>>;
+/// @nodoc
 typedef vce_set_server_dialog_cbFunction = ffi.Int Function(
     ffi.Pointer<ffi.Char> app_id, ffi.Pointer<ffi.Char> credential);
+/// @nodoc
 typedef Dartvce_set_server_dialog_cbFunction = int Function(
     ffi.Pointer<ffi.Char> app_id, ffi.Pointer<ffi.Char> credential);
 
-/// @brief Called when the engine service user sets domain (agent or device type).
-/// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
-/// @remarks The @a domain can be used only in the callback. To use outside, make a copy.
-/// @param[in] domain Agent (e.g. "music", "news", etc) or device type (e.g. "tv", "mobile", etc) corresponding to the command
-/// @return 0 on success, otherwise a negative error value.
-/// @retval #VCE_ERROR_NONE Successful.
-/// @retval #VCE_ERROR_NOT_SUPPORTED_FEATURE Not supported feature
+/// Called when the engine service user sets domain (agent or device type).
+///
+/// **Since Tizen:**
+/// - Mobile 4.0; Wearable 5.0
+///
+/// **Remarks:**
+/// - The `domain` can be used only in the callback. To use outside, make a copy.
+///
+/// **Parameters:**
+/// - `domain` (in): Agent (e.g. "music", "news", etc) or device type (e.g. "tv", "mobile", etc) corresponding to the command
+///
+/// **Returns:**
+/// - 0 on success, otherwise a negative error value.
+///
+/// **Return values:**
+/// - `VCE_ERROR_NONE`: Successful.
+/// - `VCE_ERROR_NOT_SUPPORTED_FEATURE`: Not supported feature
+/// @nodoc
 typedef vce_set_domain_cb
     = ffi.Pointer<ffi.NativeFunction<vce_set_domain_cbFunction>>;
+/// @nodoc
 typedef vce_set_domain_cbFunction = ffi.Int Function(
     ffi.Pointer<ffi.Char> domain);
+/// @nodoc
 typedef Dartvce_set_domain_cbFunction = int Function(
     ffi.Pointer<ffi.Char> domain);
 
-/// @brief Called when the engine service user requests process text.
-/// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
-/// @remarks The @a text can be used only in the callback. To use outside, make a copy.
-/// @param[in] text Requested text
-/// @return 0 on success, otherwise a negative error value.
-/// @retval #VCE_ERROR_NONE Successful.
-/// @retval #VCE_ERROR_NOT_SUPPORTED_FEATURE Not supported feature.
+/// Called when the engine service user requests process text.
+///
+/// **Since Tizen:**
+/// - Mobile 4.0; Wearable 5.0
+///
+/// **Remarks:**
+/// - The `text` can be used only in the callback. To use outside, make a copy.
+///
+/// **Parameters:**
+/// - `text` (in): Requested text
+///
+/// **Returns:**
+/// - 0 on success, otherwise a negative error value.
+///
+/// **Return values:**
+/// - `VCE_ERROR_NONE`: Successful.
+/// - `VCE_ERROR_NOT_SUPPORTED_FEATURE`: Not supported feature.
+/// @nodoc
 typedef vce_process_text_cb
     = ffi.Pointer<ffi.NativeFunction<vce_process_text_cbFunction>>;
+/// @nodoc
 typedef vce_process_text_cbFunction = ffi.Int Function(
     ffi.Pointer<ffi.Char> text);
+/// @nodoc
 typedef Dartvce_process_text_cbFunction = int Function(
     ffi.Pointer<ffi.Char> text);
 
-/// @brief Called when the engine service user requests list event.
-/// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
-/// @remarks The @a event can be used only in the callback. To use outside, make a copy.
-/// @param[in] event Requested list event
-/// @return 0 on success, otherwise a negative error value.
-/// @retval #VCE_ERROR_NONE Successful.
-/// @retval #VCE_ERROR_NOT_SUPPORTED_FEATURE Not supported feature.
+/// Called when the engine service user requests list event.
+///
+/// **Since Tizen:**
+/// - Mobile 4.0; Wearable 5.0
+///
+/// **Remarks:**
+/// - The `event` can be used only in the callback. To use outside, make a copy.
+///
+/// **Parameters:**
+/// - `event` (in): Requested list event
+///
+/// **Returns:**
+/// - 0 on success, otherwise a negative error value.
+///
+/// **Return values:**
+/// - `VCE_ERROR_NONE`: Successful.
+/// - `VCE_ERROR_NOT_SUPPORTED_FEATURE`: Not supported feature.
+/// @nodoc
 typedef vce_process_list_event_cb
     = ffi.Pointer<ffi.NativeFunction<vce_process_list_event_cbFunction>>;
+/// @nodoc
 typedef vce_process_list_event_cbFunction = ffi.Int Function(
     ffi.Pointer<ffi.Char> event);
+/// @nodoc
 typedef Dartvce_process_list_event_cbFunction = int Function(
     ffi.Pointer<ffi.Char> event);
 
-/// @brief Called when the engine service user requests haptic event.
-/// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
-/// @remarks The @a event can be used only in the callback. To use outside, make a copy.
-/// @param[in] event Requested haptic event
-/// @return 0 on success, otherwise a negative error value.
-/// @retval #VCE_ERROR_NONE Successful.
-/// @retval #VCE_ERROR_NOT_SUPPORTED_FEATURE Not supported feature.
+/// Called when the engine service user requests haptic event.
+///
+/// **Since Tizen:**
+/// - Mobile 4.0; Wearable 5.0
+///
+/// **Remarks:**
+/// - The `event` can be used only in the callback. To use outside, make a copy.
+///
+/// **Parameters:**
+/// - `event` (in): Requested haptic event
+///
+/// **Returns:**
+/// - 0 on success, otherwise a negative error value.
+///
+/// **Return values:**
+/// - `VCE_ERROR_NONE`: Successful.
+/// - `VCE_ERROR_NOT_SUPPORTED_FEATURE`: Not supported feature.
+/// @nodoc
 typedef vce_process_haptic_event_cb
     = ffi.Pointer<ffi.NativeFunction<vce_process_haptic_event_cbFunction>>;
+/// @nodoc
 typedef vce_process_haptic_event_cbFunction = ffi.Int Function(
     ffi.Pointer<ffi.Char> event);
+/// @nodoc
 typedef Dartvce_process_haptic_event_cbFunction = int Function(
     ffi.Pointer<ffi.Char> event);
 
-/// @brief Called when the engine service user sets private data between app and engine.
-/// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
-/// @remarks The @a key, @a data can be used only in the callback. To use outside, make a copy.
-/// @param[in] key Private key.
-/// @param[in] data Private data.
-/// @return 0 on success, otherwise a negative error value.
-/// @retval #VCE_ERROR_NONE Successful.
-/// @retval #VCE_ERROR_NOT_SUPPORTED_FEATURE Not supported feature.
+/// Called when the engine service user sets private data between app and engine.
+///
+/// **Since Tizen:**
+/// - Mobile 4.0; Wearable 5.0
+///
+/// **Remarks:**
+/// - The `key`, `data` can be used only in the callback. To use outside, make a copy.
+///
+/// **Parameters:**
+/// - `key` (in): Private key.
+/// - `data` (in): Private data.
+///
+/// **Returns:**
+/// - 0 on success, otherwise a negative error value.
+///
+/// **Return values:**
+/// - `VCE_ERROR_NONE`: Successful.
+/// - `VCE_ERROR_NOT_SUPPORTED_FEATURE`: Not supported feature.
+/// @nodoc
 typedef vce_private_data_set_cb
     = ffi.Pointer<ffi.NativeFunction<vce_private_data_set_cbFunction>>;
+/// @nodoc
 typedef vce_private_data_set_cbFunction = ffi.Int Function(
     ffi.Pointer<ffi.Char> key, ffi.Pointer<ffi.Char> data);
+/// @nodoc
 typedef Dartvce_private_data_set_cbFunction = int Function(
     ffi.Pointer<ffi.Char> key, ffi.Pointer<ffi.Char> data);
 
-/// @brief Called when the engine service user requests private data between app and engine.
-/// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
-/// @remarks The @a key can be used only in the callback. To use outside, make a copy.
-/// The @a data is managed by the platform and will be released when this callback function is completed.
-/// @param[in] key Private key.
-/// @param[out] data Private data.
-/// @return 0 on success, otherwise a negative error value.
-/// @retval #VCE_ERROR_NONE Successful.
-/// @retval #VCE_ERROR_NOT_SUPPORTED_FEATURE Not supported feature.
+/// Called when the engine service user requests private data between app and engine.
+///
+/// **Since Tizen:**
+/// - Mobile 4.0; Wearable 5.0
+///
+/// **Remarks:**
+/// - The `key` can be used only in the callback. To use outside, make a copy.
+/// - The `data` is managed by the platform and will be released when this callback function is completed.
+///
+/// **Parameters:**
+/// - `key` (in): Private key.
+/// - `data` (out): Private data.
+///
+/// **Returns:**
+/// - 0 on success, otherwise a negative error value.
+///
+/// **Return values:**
+/// - `VCE_ERROR_NONE`: Successful.
+/// - `VCE_ERROR_NOT_SUPPORTED_FEATURE`: Not supported feature.
+/// @nodoc
 typedef vce_private_data_requested_cb
     = ffi.Pointer<ffi.NativeFunction<vce_private_data_requested_cbFunction>>;
+/// @nodoc
 typedef vce_private_data_requested_cbFunction = ffi.Int Function(
     ffi.Pointer<ffi.Char> key, ffi.Pointer<ffi.Pointer<ffi.Char>> data);
+/// @nodoc
 typedef Dartvce_private_data_requested_cbFunction = int Function(
     ffi.Pointer<ffi.Char> key, ffi.Pointer<ffi.Pointer<ffi.Char>> data);
 
-/// @brief Called when the engine service user requests essential value from NLU result.
-/// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
-/// @remarks The @a key can be used only in the callback. To use outside, make a copy.
-/// The @a value is managed by the platform and will be released when this callback function is completed.
-/// @param[in] key NLU base info key.
-/// @param[out] value NLU base info value.
-/// @return 0 on success, otherwise a negative error value.
-/// @retval #VCE_ERROR_NONE Successful.
-/// @retval #VCE_ERROR_NOT_SUPPORTED_FEATURE Not supported feature.
+/// Called when the engine service user requests essential value from NLU result.
+///
+/// **Since Tizen:**
+/// - Mobile 4.0; Wearable 5.0
+///
+/// **Remarks:**
+/// - The `key` can be used only in the callback. To use outside, make a copy.
+/// - The `value` is managed by the platform and will be released when this callback function is completed.
+///
+/// **Parameters:**
+/// - `key` (in): NLU base info key.
+/// - `value` (out): NLU base info value.
+///
+/// **Returns:**
+/// - 0 on success, otherwise a negative error value.
+///
+/// **Return values:**
+/// - `VCE_ERROR_NONE`: Successful.
+/// - `VCE_ERROR_NOT_SUPPORTED_FEATURE`: Not supported feature.
+/// @nodoc
 typedef vce_nlu_base_info_requested_cb
     = ffi.Pointer<ffi.NativeFunction<vce_nlu_base_info_requested_cbFunction>>;
+/// @nodoc
 typedef vce_nlu_base_info_requested_cbFunction = ffi.Int Function(
     ffi.Pointer<ffi.Char> key, ffi.Pointer<ffi.Pointer<ffi.Char>> value);
+/// @nodoc
 typedef Dartvce_nlu_base_info_requested_cbFunction = int Function(
     ffi.Pointer<ffi.Char> key, ffi.Pointer<ffi.Pointer<ffi.Char>> value);
 
-/// @brief Called when client gets the specific engine's request from the engine service user.
-/// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
-/// @remarks The @a engine_app_id is managed by the platform and will be released when this callback function is completed.
-/// The @a event is managed by the platform and will be released when this callback function is completed.
-/// The @a request is managed by the platform and will be released when this callback function is completed.
+/// Called when client gets the specific engine's request from the engine service user.
 ///
-/// @param[in] engine_app_id The specific engine's app id
-/// @param[in] event The specific engine event type
-/// @param[in] request The specific engine request
+/// **Since Tizen:**
+/// - Mobile 4.0; Wearable 5.0
 ///
-/// @return 0 on success, otherwise a negative error value.
-/// @retval #VCE_ERROR_NONE Successful
-/// @retval #VCE_ERROR_INVALID_PARAMETER Invalid parameter
-/// @retval #VCE_ERROR_OPERATION_FAILED Operation failure
+/// **Remarks:**
+/// - The `engine_app_id` is managed by the platform and will be released when this callback function is completed.
+/// - The `event` is managed by the platform and will be released when this callback function is completed.
+/// - The `request` is managed by the platform and will be released when this callback function is completed.
 ///
-/// @pre An application registers callback function using vce_set_specific_engine_request_cb().
+/// **Parameters:**
+/// - `engine_app_id` (in): The specific engine's app id
+/// - `event` (in): The specific engine event type
+/// - `request` (in): The specific engine request
 ///
-/// @see vce_set_specific_engine_request_cb()
-/// @see vce_unset_specific_engine_request_cb()
+/// **Returns:**
+/// - 0 on success, otherwise a negative error value.
+///
+/// **Return values:**
+/// - `VCE_ERROR_NONE`: Successful
+/// - `VCE_ERROR_INVALID_PARAMETER`: Invalid parameter
+/// - `VCE_ERROR_OPERATION_FAILED`: Operation failure
+///
+/// **Preconditions:**
+/// - An application registers callback function using vce_set_specific_engine_request_cb().
+///
+/// **See also:**
+/// - `vce_set_specific_engine_request_cb()`
+/// - `vce_unset_specific_engine_request_cb()`
+/// @nodoc
 typedef vce_specific_engine_request_cb
     = ffi.Pointer<ffi.NativeFunction<vce_specific_engine_request_cbFunction>>;
+/// @nodoc
 typedef vce_specific_engine_request_cbFunction = ffi.Int Function(
     ffi.Pointer<ffi.Char> engine_app_id,
     ffi.Pointer<ffi.Char> event,
     ffi.Pointer<ffi.Char> request);
+/// @nodoc
 typedef Dartvce_specific_engine_request_cbFunction = int Function(
     ffi.Pointer<ffi.Char> engine_app_id,
     ffi.Pointer<ffi.Char> event,
     ffi.Pointer<ffi.Char> request);
 
-/// @brief Called to retrieve the commands.
-/// @since_tizen @if MOBILE 4.0 @elseif WEARABLE 5.0 @endif
-/// @remarks The @a command, @a param can be used only in the callback. To use outside, make a copy.
-/// @param[in] id command id
-/// @param[in] type command type
-/// @param[in] format command format
-/// @param[in] command command text
-/// @param[in] param parameter text
-/// @param[in] domain command domain
-/// @param[in] user_data The user data passed from the foreach function
-/// @return @c true to continue with the next iteration of the loop, \n @c false to break out of the loop.
-/// @pre vce_get_foreach_command() will invoke this callback.
-/// @see vce_get_foreach_command()
+/// Called to retrieve the commands.
+///
+/// **Since Tizen:**
+/// - Mobile 4.0; Wearable 5.0
+///
+/// **Remarks:**
+/// - The `command`, `param` can be used only in the callback. To use outside, make a copy.
+///
+/// **Parameters:**
+/// - `id` (in): command id
+/// - `type` (in): command type
+/// - `format` (in): command format
+/// - `command` (in): command text
+/// - `param` (in): parameter text
+/// - `domain` (in): command domain
+/// - `user_data` (in): The user data passed from the foreach function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, `false` to break out of the loop.
+///
+/// **Preconditions:**
+/// - vce_get_foreach_command() will invoke this callback.
+///
+/// **See also:**
+/// - `vce_get_foreach_command()`
+/// @nodoc
 typedef vce_command_cb
     = ffi.Pointer<ffi.NativeFunction<vce_command_cbFunction>>;
+/// @nodoc
 typedef vce_command_cbFunction = ffi.Bool Function(
     ffi.Int id,
     ffi.Int type,
@@ -1573,6 +2199,7 @@ typedef vce_command_cbFunction = ffi.Bool Function(
     ffi.Pointer<ffi.Char> param,
     ffi.Int domain,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartvce_command_cbFunction = bool Function(
     int id,
     int type,
@@ -1582,33 +2209,46 @@ typedef Dartvce_command_cbFunction = bool Function(
     int domain,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the engine service user (voice control client) requests to send TTS feedback.
-/// @since_tizen 5.0
-/// @remarks The @a text and @a language can be used only in the callback. To use outside, make a copy.
+/// Called when the engine service user (voice control client) requests to send TTS feedback.
 ///
-/// @param[in] pid The process id of the engine service user (voice control client)
-/// @param[in] utt_id The utterance id
-/// @param[in] text The text for TTS feedback
-/// @param[in] language The language
-/// @param[in] user_data The user data passed from the callback setter function
+/// **Since Tizen:**
+/// - 5.0
 ///
-/// @return 0 on success, otherwise a negative error value.
-/// @retval #VCE_ERROR_NONE Successful
-/// @retval #VCE_ERROR_INVALID_PARAMETER Invalid parameter
-/// @retval #VCE_ERROR_OPERATION_FAILED Operation failure
+/// **Remarks:**
+/// - The `text` and `language` can be used only in the callback. To use outside, make a copy.
 ///
-/// @pre An application registers callback function using vce_set_request_tts_cb().
+/// **Parameters:**
+/// - `pid` (in): The process id of the engine service user (voice control client)
+/// - `utt_id` (in): The utterance id
+/// - `text` (in): The text for TTS feedback
+/// - `language` (in): The language
+/// - `user_data` (in): The user data passed from the callback setter function
 ///
-/// @see vce_set_request_tts_cb()
-/// @see vce_unset_request_tts_cb()
+/// **Returns:**
+/// - 0 on success, otherwise a negative error value.
+///
+/// **Return values:**
+/// - `VCE_ERROR_NONE`: Successful
+/// - `VCE_ERROR_INVALID_PARAMETER`: Invalid parameter
+/// - `VCE_ERROR_OPERATION_FAILED`: Operation failure
+///
+/// **Preconditions:**
+/// - An application registers callback function using vce_set_request_tts_cb().
+///
+/// **See also:**
+/// - `vce_set_request_tts_cb()`
+/// - `vce_unset_request_tts_cb()`
+/// @nodoc
 typedef vce_request_tts_cb
     = ffi.Pointer<ffi.NativeFunction<vce_request_tts_cbFunction>>;
+/// @nodoc
 typedef vce_request_tts_cbFunction = ffi.Int Function(
     ffi.Int pid,
     ffi.Int utt_id,
     ffi.Pointer<ffi.Char> text,
     ffi.Pointer<ffi.Char> language,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartvce_request_tts_cbFunction = int Function(
     int pid,
     int utt_id,
@@ -1616,78 +2256,112 @@ typedef Dartvce_request_tts_cbFunction = int Function(
     ffi.Pointer<ffi.Char> language,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the engine service user cancels TTS feedback.
-/// @since_tizen 5.0
+/// Called when the engine service user cancels TTS feedback.
 ///
-/// @param[in] pid The process id of the engine service user
-/// @param[in] utt_id The utterance id corresponding to the text
-/// @param[in] user_data The user data passed from the callback setter function
+/// **Since Tizen:**
+/// - 5.0
 ///
-/// @return 0 on success, otherwise a negative error value.
-/// @retval #VCE_ERROR_NONE Successful
-/// @retval #VCE_ERROR_INVALID_PARAMETER Invalid parameter
-/// @retval #VCE_ERROR_OPERATION_FAILED Operation failure
+/// **Parameters:**
+/// - `pid` (in): The process id of the engine service user
+/// - `utt_id` (in): The utterance id corresponding to the text
+/// - `user_data` (in): The user data passed from the callback setter function
 ///
-/// @pre An application registers callback function using vce_set_cancel_tts_cb().
+/// **Returns:**
+/// - 0 on success, otherwise a negative error value.
 ///
-/// @see vce_set_cancel_tts_cb()
-/// @see vce_unset_cancel_tts_cb()
+/// **Return values:**
+/// - `VCE_ERROR_NONE`: Successful
+/// - `VCE_ERROR_INVALID_PARAMETER`: Invalid parameter
+/// - `VCE_ERROR_OPERATION_FAILED`: Operation failure
+///
+/// **Preconditions:**
+/// - An application registers callback function using vce_set_cancel_tts_cb().
+///
+/// **See also:**
+/// - `vce_set_cancel_tts_cb()`
+/// - `vce_unset_cancel_tts_cb()`
+/// @nodoc
 typedef vce_cancel_tts_cb
     = ffi.Pointer<ffi.NativeFunction<vce_cancel_tts_cbFunction>>;
+/// @nodoc
 typedef vce_cancel_tts_cbFunction = ffi.Int Function(
     ffi.Int pid, ffi.Int utt_id, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartvce_cancel_tts_cbFunction = int Function(
     int pid, int utt_id, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the engine service user requests TTS audio format.
-/// @since_tizen 5.0
-/// @remarks The @a rate, @a channel, and @a audio_type should not be released.
-/// The @a rate, @a channel, and @a audio_type are managed by the platform and will be released after the audio format is transferred to the VC client.
+/// Called when the engine service user requests TTS audio format.
 ///
-/// @param[out] rate The audio sample rate
-/// @param[out] channel The audio channel
-/// @param[out] audio_type The audio type
-/// @param[in] user_data The user data passed from the callback setter function
+/// **Since Tizen:**
+/// - 5.0
 ///
-/// @return 0 on success, otherwise a negative error value.
-/// @retval #VCE_ERROR_NONE Successful
-/// @retval #VCE_ERROR_INVALID_PARAMETER Invalid parameter
-/// @retval #VCE_ERROR_OPERATION_FAILED Operation failure
+/// **Remarks:**
+/// - The `rate`, `channel`, and `audio_type` should not be released.
+/// - The `rate`, `channel`, and `audio_type` are managed by the platform and will be released after the audio format is transferred to the VC client.
 ///
-/// @pre An application registers callback function using vce_set_tts_audio_format_request_cb().
+/// **Parameters:**
+/// - `rate` (out): The audio sample rate
+/// - `channel` (out): The audio channel
+/// - `audio_type` (out): The audio type
+/// - `user_data` (in): The user data passed from the callback setter function
 ///
-/// @see vce_set_tts_audio_format_request_cb()
-/// @see vce_unset_get_tts_audio_format_cb()
+/// **Returns:**
+/// - 0 on success, otherwise a negative error value.
+///
+/// **Return values:**
+/// - `VCE_ERROR_NONE`: Successful
+/// - `VCE_ERROR_INVALID_PARAMETER`: Invalid parameter
+/// - `VCE_ERROR_OPERATION_FAILED`: Operation failure
+///
+/// **Preconditions:**
+/// - An application registers callback function using vce_set_tts_audio_format_request_cb().
+///
+/// **See also:**
+/// - `vce_set_tts_audio_format_request_cb()`
+/// - `vce_unset_get_tts_audio_format_cb()`
+/// @nodoc
 typedef vce_tts_audio_format_request_cb
     = ffi.Pointer<ffi.NativeFunction<vce_tts_audio_format_request_cbFunction>>;
+/// @nodoc
 typedef vce_tts_audio_format_request_cbFunction = ffi.Int Function(
     ffi.Pointer<ffi.Int> rate,
     ffi.Pointer<ffi.Int> channel,
     ffi.Pointer<ffi.Int> audio_type,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartvce_tts_audio_format_request_cbFunction = int Function(
     ffi.Pointer<ffi.Int> rate,
     ffi.Pointer<ffi.Int> channel,
     ffi.Pointer<ffi.Int> audio_type,
     ffi.Pointer<ffi.Void> user_data);
 
+/// @nodoc
 const int VCE_COMMAND_TYPE_FOREGROUND = 1;
 
+/// @nodoc
 const int VCE_COMMAND_TYPE_BACKGROUND = 2;
 
+/// @nodoc
 const int VCE_COMMAND_TYPE_WIDGET = 3;
 
+/// @nodoc
 const int VCE_COMMAND_TYPE_SYSTEM = 4;
 
+/// @nodoc
 const int VCE_COMMAND_TYPE_SYSTEM_BACKGROUND = 5;
 
+/// @nodoc
 const int VCE_COMMAND_TYPE_EXCLUSIVE = 6;
 
+/// @nodoc
 const String VCE_AUDIO_ID_BLUETOOTH = 'VC_AUDIO_ID_BLUETOOTH';
 
+/// @nodoc
 const String VCE_AUDIO_ID_WIFI = 'VC_AUDIO_ID_WIFI';
 
+/// @nodoc
 const String VC_RESULT_MESSAGE_NONE = 'vc.result.message.none';
 
+/// @nodoc
 const String VC_RESULT_MESSAGE_ERROR_TOO_LOUD =
     'vc.result.message.error.too.loud';

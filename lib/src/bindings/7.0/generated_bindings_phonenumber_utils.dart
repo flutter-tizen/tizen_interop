@@ -1,3 +1,6 @@
+/// {@category 7.0/tizen}
+library tizen_interop_7_0.phonenumber_utils;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen phonenumber-utils APIs.
+/// {@category 7.0/tizen}
 class Tizen70PhonenumberUtils {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,25 +28,32 @@ class Tizen70PhonenumberUtils {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Creates a blocking rule.
+  /// Creates a blocking rule.
   ///
-  /// @since_tizen 4.0
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @remarks You must release @a rule using phone_number_blocking_rule_destroy().
+  /// **Remarks:**
+  /// - You must release `rule` using phone_number_blocking_rule_destroy().
   ///
-  /// @param[out] rule      The blocking rule handle
+  /// **Parameters:**
+  /// - `rule` (out): The blocking rule handle
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PHONE_NUMBER_ERROR_NONE                Successful
-  /// @retval #PHONE_NUMBER_ERROR_OUT_OF_MEMORY       Out of memory
-  /// @retval #PHONE_NUMBER_ERROR_INVALID_PARAMETER   Invalid parameter
-  /// @retval #PHONE_NUMBER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #PHONE_NUMBER_ERROR_SYSTEM Internal error
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @pre     phone_number_connect() should be called to initialize.
+  /// **Return values:**
+  /// - `PHONE_NUMBER_ERROR_NONE`: Successful
+  /// - `PHONE_NUMBER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `PHONE_NUMBER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PHONE_NUMBER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `PHONE_NUMBER_ERROR_SYSTEM`: Internal error
   ///
-  /// @see phone_number_blocking_rule_destroy()
+  /// **Preconditions:**
+  /// - phone_number_connect() should be called to initialize.
+  ///
+  /// **See also:**
+  /// - `phone_number_blocking_rule_destroy()`
   int phone_number_blocking_rule_create(
     ffi.Pointer<phone_number_blocking_rule_h> rule,
   ) {
@@ -59,20 +70,25 @@ class Tizen70PhonenumberUtils {
       _phone_number_blocking_rule_createPtr.asFunction<
           int Function(ffi.Pointer<phone_number_blocking_rule_h>)>();
 
-  /// @brief Destroys a blocking rule and releases all its resources.
+  /// Destroys a blocking rule and releases all its resources.
   ///
-  /// @since_tizen 4.0
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @param[in] rule          The blocking rule handle
+  /// **Parameters:**
+  /// - `rule` (in): The blocking rule handle
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PHONE_NUMBER_ERROR_NONE                 Successful
-  /// @retval #PHONE_NUMBER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #PHONE_NUMBER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #PHONE_NUMBER_ERROR_SYSTEM Internal error
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @see phone_number_blocking_rule_create()
+  /// **Return values:**
+  /// - `PHONE_NUMBER_ERROR_NONE`: Successful
+  /// - `PHONE_NUMBER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PHONE_NUMBER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `PHONE_NUMBER_ERROR_SYSTEM`: Internal error
+  ///
+  /// **See also:**
+  /// - `phone_number_blocking_rule_create()`
   int phone_number_blocking_rule_destroy(
     phone_number_blocking_rule_h rule,
   ) {
@@ -88,23 +104,29 @@ class Tizen70PhonenumberUtils {
       _phone_number_blocking_rule_destroyPtr
           .asFunction<int Function(phone_number_blocking_rule_h)>();
 
-  /// @brief Gets a blocked number from a rule.
+  /// Gets a blocked number from a rule.
   ///
-  /// @since_tizen 4.0
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @remarks You must release @a number using free().
+  /// **Remarks:**
+  /// - You must release `number` using free().
   ///
-  /// @param[in]   rule        The blocking rule handle
-  /// @param[out]  number       The blocked number
+  /// **Parameters:**
+  /// - `rule` (in): The blocking rule handle
+  /// - `number` (out): The blocked number
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PHONE_NUMBER_ERROR_NONE                Successful
-  /// @retval #PHONE_NUMBER_ERROR_INVALID_PARAMETER   Invalid parameter
-  /// @retval #PHONE_NUMBER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #PHONE_NUMBER_ERROR_SYSTEM Internal error
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @see phone_number_blocking_rule_set_number()
+  /// **Return values:**
+  /// - `PHONE_NUMBER_ERROR_NONE`: Successful
+  /// - `PHONE_NUMBER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PHONE_NUMBER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `PHONE_NUMBER_ERROR_SYSTEM`: Internal error
+  ///
+  /// **See also:**
+  /// - `phone_number_blocking_rule_set_number()`
   int phone_number_blocking_rule_get_number(
     phone_number_blocking_rule_h rule,
     ffi.Pointer<ffi.Pointer<ffi.Char>> number,
@@ -125,21 +147,26 @@ class Tizen70PhonenumberUtils {
           int Function(phone_number_blocking_rule_h,
               ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets a rule's match type.
+  /// Gets a rule's match type.
   ///
-  /// @since_tizen 4.0
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @param[in]   rule         The blocking rule handle
-  /// @param[out]  match_type        The match type of blocked number
+  /// **Parameters:**
+  /// - `rule` (in): The blocking rule handle
+  /// - `match_type` (out): The match type of blocked number
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PHONE_NUMBER_ERROR_NONE                Successful
-  /// @retval #PHONE_NUMBER_ERROR_INVALID_PARAMETER   Invalid parameter
-  /// @retval #PHONE_NUMBER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #PHONE_NUMBER_ERROR_SYSTEM Internal error
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @see phone_number_blocking_rule_set_match_type()
+  /// **Return values:**
+  /// - `PHONE_NUMBER_ERROR_NONE`: Successful
+  /// - `PHONE_NUMBER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PHONE_NUMBER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `PHONE_NUMBER_ERROR_SYSTEM`: Internal error
+  ///
+  /// **See also:**
+  /// - `phone_number_blocking_rule_set_match_type()`
   int phone_number_blocking_rule_get_match_type(
     phone_number_blocking_rule_h rule,
     ffi.Pointer<ffi.Int32> match_type,
@@ -159,21 +186,26 @@ class Tizen70PhonenumberUtils {
       _phone_number_blocking_rule_get_match_typePtr.asFunction<
           int Function(phone_number_blocking_rule_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Sets a blocked number to a rule.
+  /// Sets a blocked number to a rule.
   ///
-  /// @since_tizen 4.0
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @param[in]   rule          The blocking rule handle
-  /// @param[in]  number       The blocked number
+  /// **Parameters:**
+  /// - `rule` (in): The blocking rule handle
+  /// - `number` (in): The blocked number
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PHONE_NUMBER_ERROR_NONE                Successful
-  /// @retval #PHONE_NUMBER_ERROR_INVALID_PARAMETER   Invalid parameter
-  /// @retval #PHONE_NUMBER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #PHONE_NUMBER_ERROR_SYSTEM Internal error
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @see phone_number_blocking_rule_get_number()
+  /// **Return values:**
+  /// - `PHONE_NUMBER_ERROR_NONE`: Successful
+  /// - `PHONE_NUMBER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PHONE_NUMBER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `PHONE_NUMBER_ERROR_SYSTEM`: Internal error
+  ///
+  /// **See also:**
+  /// - `phone_number_blocking_rule_get_number()`
   int phone_number_blocking_rule_set_number(
     phone_number_blocking_rule_h rule,
     ffi.Pointer<ffi.Char> number,
@@ -192,21 +224,26 @@ class Tizen70PhonenumberUtils {
       _phone_number_blocking_rule_set_numberPtr.asFunction<
           int Function(phone_number_blocking_rule_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets a rule's match type.
+  /// Sets a rule's match type.
   ///
-  /// @since_tizen 4.0
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @param[in] rule          The blocking rule handle
-  /// @param[in] match_type        The match type of blocked number
+  /// **Parameters:**
+  /// - `rule` (in): The blocking rule handle
+  /// - `match_type` (in): The match type of blocked number
   ///
-  /// @return      @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PHONE_NUMBER_ERROR_NONE                  Successful
-  /// @retval #PHONE_NUMBER_ERROR_INVALID_PARAMETER     Invalid parameter
-  /// @retval #PHONE_NUMBER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #PHONE_NUMBER_ERROR_SYSTEM Internal error
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @see phone_number_blocking_rule_get_match_type()
+  /// **Return values:**
+  /// - `PHONE_NUMBER_ERROR_NONE`: Successful
+  /// - `PHONE_NUMBER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PHONE_NUMBER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `PHONE_NUMBER_ERROR_SYSTEM`: Internal error
+  ///
+  /// **See also:**
+  /// - `phone_number_blocking_rule_get_match_type()`
   int phone_number_blocking_rule_set_match_type(
     phone_number_blocking_rule_h rule,
     int match_type,
@@ -225,14 +262,21 @@ class Tizen70PhonenumberUtils {
       _phone_number_blocking_rule_set_match_typePtr
           .asFunction<int Function(phone_number_blocking_rule_h, int)>();
 
-  /// @brief Connects to the phonenumber-utils service.
-  /// @since_tizen 3.0
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PHONE_NUMBER_ERROR_NONE Successful
-  /// @retval #PHONE_NUMBER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #PHONE_NUMBER_ERROR_SYSTEM Internal error
-  /// @see phone_number_disconnect()
+  /// Connects to the phonenumber-utils service.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PHONE_NUMBER_ERROR_NONE`: Successful
+  /// - `PHONE_NUMBER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `PHONE_NUMBER_ERROR_SYSTEM`: Internal error
+  ///
+  /// **See also:**
+  /// - `phone_number_disconnect()`
   int phone_number_connect() {
     return _phone_number_connect();
   }
@@ -242,14 +286,21 @@ class Tizen70PhonenumberUtils {
   late final _phone_number_connect =
       _phone_number_connectPtr.asFunction<int Function()>();
 
-  /// @brief Disconnects from the phonenumber-utils service.
-  /// @since_tizen 3.0
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PHONE_NUMBER_ERROR_NONE Successful
-  /// @retval #PHONE_NUMBER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #PHONE_NUMBER_ERROR_SYSTEM Internal error
-  /// @see phone_number_connect()
+  /// Disconnects from the phonenumber-utils service.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PHONE_NUMBER_ERROR_NONE`: Successful
+  /// - `PHONE_NUMBER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `PHONE_NUMBER_ERROR_SYSTEM`: Internal error
+  ///
+  /// **See also:**
+  /// - `phone_number_connect()`
   int phone_number_disconnect() {
     return _phone_number_disconnect();
   }
@@ -260,27 +311,40 @@ class Tizen70PhonenumberUtils {
   late final _phone_number_disconnect =
       _phone_number_disconnectPtr.asFunction<int Function()>();
 
-  /// @brief Gets the location string from number, region, and language.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @remarks You must release @a location using free().
-  /// @remarks The phonenumber-utils is changed to client/server architecture for performance improvement since 3.0.
-  /// phone_number_connect()/phone_number_disconnect() should be called.
-  /// @param[in]  number    The number
-  /// @param[in]  region    The region of number
-  /// @param[in]  language  The language of location
-  /// @param[out] location  The location string to be returned
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PHONE_NUMBER_ERROR_NONE Successful
-  /// @retval #PHONE_NUMBER_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #PHONE_NUMBER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PHONE_NUMBER_ERROR_FILE_NO_SPACE_ON_DEVICE FS Full
-  /// @retval #PHONE_NUMBER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PHONE_NUMBER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #PHONE_NUMBER_ERROR_NO_DATA Requested data does not exist
-  /// @retval #PHONE_NUMBER_ERROR_SYSTEM Internal error
-  /// @pre phone_number_connect() should be called to open a connection to the phonenumber-utils service. (Since 3.0)
-  /// @post phone_number_disconnect() should be called to close a connection to the phonenumber-utils service. (Since 3.0)
+  /// Gets the location string from number, region, and language.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Remarks:**
+  /// - You must release `location` using free().
+  /// - The phonenumber-utils is changed to client/server architecture for performance improvement since 3.0.
+  /// - phone_number_connect()/phone_number_disconnect() should be called.
+  ///
+  /// **Parameters:**
+  /// - `number` (in): The number
+  /// - `region` (in): The region of number
+  /// - `language` (in): The language of location
+  /// - `location` (out): The location string to be returned
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PHONE_NUMBER_ERROR_NONE`: Successful
+  /// - `PHONE_NUMBER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `PHONE_NUMBER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PHONE_NUMBER_ERROR_FILE_NO_SPACE_ON_DEVICE`: FS Full
+  /// - `PHONE_NUMBER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PHONE_NUMBER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `PHONE_NUMBER_ERROR_NO_DATA`: Requested data does not exist
+  /// - `PHONE_NUMBER_ERROR_SYSTEM`: Internal error
+  ///
+  /// **Preconditions:**
+  /// - phone_number_connect() should be called to open a connection to the phonenumber-utils service. (Since 3.0)
+  ///
+  /// **Postconditions:**
+  /// - phone_number_disconnect() should be called to close a connection to the phonenumber-utils service. (Since 3.0)
   int phone_number_get_location_from_number(
     ffi.Pointer<ffi.Char> number,
     int region,
@@ -305,26 +369,39 @@ class Tizen70PhonenumberUtils {
           int Function(ffi.Pointer<ffi.Char>, int, int,
               ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the formatted number.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @remarks You must release @a formatted_number using free().
-  /// @remarks The phonenumber-utils is changed to client/server architecture for performance improvement since 3.0.
-  /// phone_number_connect()/phone_number_disconnect() should be called.
-  /// @param[in]  number           The number
-  /// @param[in]  region           The region of number
-  /// @param[out] formatted_number The formatted number string to be returned
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PHONE_NUMBER_ERROR_NONE Successful
-  /// @retval #PHONE_NUMBER_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #PHONE_NUMBER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PHONE_NUMBER_ERROR_FILE_NO_SPACE_ON_DEVICE FS Full
-  /// @retval #PHONE_NUMBER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PHONE_NUMBER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #PHONE_NUMBER_ERROR_NO_DATA Requested data does not exist
-  /// @retval #PHONE_NUMBER_ERROR_SYSTEM Internal error
-  /// @pre phone_number_connect() should be called to open a connection to the phonenumber-utils service. (Since 3.0)
-  /// @post phone_number_disconnect() should be called to close a connection to the phonenumber-utils service. (Since 3.0)
+  /// Gets the formatted number.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Remarks:**
+  /// - You must release `formatted_number` using free().
+  /// - The phonenumber-utils is changed to client/server architecture for performance improvement since 3.0.
+  /// - phone_number_connect()/phone_number_disconnect() should be called.
+  ///
+  /// **Parameters:**
+  /// - `number` (in): The number
+  /// - `region` (in): The region of number
+  /// - `formatted_number` (out): The formatted number string to be returned
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PHONE_NUMBER_ERROR_NONE`: Successful
+  /// - `PHONE_NUMBER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `PHONE_NUMBER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PHONE_NUMBER_ERROR_FILE_NO_SPACE_ON_DEVICE`: FS Full
+  /// - `PHONE_NUMBER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PHONE_NUMBER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `PHONE_NUMBER_ERROR_NO_DATA`: Requested data does not exist
+  /// - `PHONE_NUMBER_ERROR_SYSTEM`: Internal error
+  ///
+  /// **Preconditions:**
+  /// - phone_number_connect() should be called to open a connection to the phonenumber-utils service. (Since 3.0)
+  ///
+  /// **Postconditions:**
+  /// - phone_number_disconnect() should be called to close a connection to the phonenumber-utils service. (Since 3.0)
   int phone_number_get_formatted_number(
     ffi.Pointer<ffi.Char> number,
     int region,
@@ -347,28 +424,45 @@ class Tizen70PhonenumberUtils {
           int Function(ffi.Pointer<ffi.Char>, int,
               ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the normalized number.
-  /// @details Normalized number starts with plus('+') and country code, and excludes the separators such
-  /// as dash or space. It is a format of E.164 standard including the country code based on current network.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/telephony
-  /// @remarks You must release @a normalized_number using free().
-  /// @remarks The phonenumber-utils is changed to client/server architecture for performance improvement since 3.0.
-  /// phone_number_connect()/phone_number_disconnect() should be called.
-  /// @param[in]  number            The number
-  /// @param[out] normalized_number The normalized number string to be returned
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PHONE_NUMBER_ERROR_NONE Successful
-  /// @retval #PHONE_NUMBER_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #PHONE_NUMBER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PHONE_NUMBER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PHONE_NUMBER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #PHONE_NUMBER_ERROR_NO_DATA Requested data does not exist
-  /// @retval #PHONE_NUMBER_ERROR_SYSTEM Internal error
-  /// @pre phone_number_connect() should be called to open a connection to the phonenumber-utils service. (Since 3.0)
-  /// @post phone_number_disconnect() should be called to close a connection to the phonenumber-utils service. (Since 3.0)
+  /// Gets the normalized number.
+  ///
+  /// Normalized number starts with plus('+') and country code, and excludes the separators such as dash or space. It is a format of E.164 standard including the country code based on current network.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/telephony>
+  ///
+  /// **Remarks:**
+  /// - You must release `normalized_number` using free().
+  /// - The phonenumber-utils is changed to client/server architecture for performance improvement since 3.0.
+  /// - phone_number_connect()/phone_number_disconnect() should be called.
+  ///
+  /// **Parameters:**
+  /// - `number` (in): The number
+  /// - `normalized_number` (out): The normalized number string to be returned
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PHONE_NUMBER_ERROR_NONE`: Successful
+  /// - `PHONE_NUMBER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `PHONE_NUMBER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PHONE_NUMBER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PHONE_NUMBER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `PHONE_NUMBER_ERROR_NO_DATA`: Requested data does not exist
+  /// - `PHONE_NUMBER_ERROR_SYSTEM`: Internal error
+  ///
+  /// **Preconditions:**
+  /// - phone_number_connect() should be called to open a connection to the phonenumber-utils service. (Since 3.0)
+  ///
+  /// **Postconditions:**
+  /// - phone_number_disconnect() should be called to close a connection to the phonenumber-utils service. (Since 3.0)
   int phone_number_get_normalized_number(
     ffi.Pointer<ffi.Char> number,
     ffi.Pointer<ffi.Pointer<ffi.Char>> normalized_number,
@@ -389,28 +483,44 @@ class Tizen70PhonenumberUtils {
           int Function(
               ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @partner
-  /// @brief Adds a blocking rule to the phone number database.
+  /// Adds a blocking rule to the phone number database.
   ///
-  /// @since_tizen 4.0
-  /// @privlevel partner
-  /// @privilege %http://tizen.org/privilege/blocknumber.write
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @param[in] rule     The blocking rule handle
+  /// **Privilege level:**
+  /// - partner
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PHONE_NUMBER_ERROR_NONE                Successful
-  /// @retval #PHONE_NUMBER_ERROR_INVALID_PARAMETER   Invalid parameter
-  /// @retval #PHONE_NUMBER_ERROR_DB_FAILED           Database operation failure
-  /// @retval #PHONE_NUMBER_ERROR_PERMISSION_DENIED   Permission denied. This application does not have the privilege to call this method.
-  /// @retval #PHONE_NUMBER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #PHONE_NUMBER_ERROR_IPC                 Unknown IPC error
-  /// @retval #PHONE_NUMBER_ERROR_OUT_OF_MEMORY       Out of memory
-  /// @retval #PHONE_NUMBER_ERROR_SYSTEM Internal error
-  /// @pre phone_number_connect() should be called to open a connection to the phonenumber-utils service.
-  /// @post phone_number_disconnect() should be called to close a connection to the phonenumber-utils service.
-  /// @see phone_number_remove_blocking_rule()
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/blocknumber.write>
+  ///
+  /// **Parameters:**
+  /// - `rule` (in): The blocking rule handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PHONE_NUMBER_ERROR_NONE`: Successful
+  /// - `PHONE_NUMBER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PHONE_NUMBER_ERROR_DB_FAILED`: Database operation failure
+  /// - `PHONE_NUMBER_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method.
+  /// - `PHONE_NUMBER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `PHONE_NUMBER_ERROR_IPC`: Unknown IPC error
+  /// - `PHONE_NUMBER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `PHONE_NUMBER_ERROR_SYSTEM`: Internal error
+  ///
+  /// **Preconditions:**
+  /// - phone_number_connect() should be called to open a connection to the phonenumber-utils service.
+  ///
+  /// **Postconditions:**
+  /// - phone_number_disconnect() should be called to close a connection to the phonenumber-utils service.
+  ///
+  /// **See also:**
+  /// - `phone_number_remove_blocking_rule()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int phone_number_add_blocking_rule(
     phone_number_blocking_rule_h rule,
   ) {
@@ -426,30 +536,47 @@ class Tizen70PhonenumberUtils {
       _phone_number_add_blocking_rulePtr
           .asFunction<int Function(phone_number_blocking_rule_h)>();
 
-  /// @partner
-  /// @brief Removes a blocking rule from the phone number database.
+  /// Removes a blocking rule from the phone number database.
   ///
-  /// @since_tizen 4.0
-  /// @privlevel partner
-  /// @privilege %http://tizen.org/privilege/blocknumber.write
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @remarks The blocking rule to remove should have been gotten from the phone number database using phone_number_get_blocking_rules().
+  /// **Privilege level:**
+  /// - partner
   ///
-  /// @param[in] rule     The blocking rule handle
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/blocknumber.write>
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PHONE_NUMBER_ERROR_NONE                Successful
-  /// @retval #PHONE_NUMBER_ERROR_INVALID_PARAMETER   Invalid parameter
-  /// @retval #PHONE_NUMBER_ERROR_DB_FAILED           Database operation failure
-  /// @retval #PHONE_NUMBER_ERROR_PERMISSION_DENIED   Permission denied. This application does not have the privilege to call this method.
-  /// @retval #PHONE_NUMBER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #PHONE_NUMBER_ERROR_IPC                 Unknown IPC error
-  /// @retval #PHONE_NUMBER_ERROR_OUT_OF_MEMORY       Out of memory
-  /// @retval #PHONE_NUMBER_ERROR_SYSTEM Internal error
-  /// @pre phone_number_connect() should be called to open a connection to the phonenumber-utils service.
-  /// @post phone_number_disconnect() should be called to close a connection to the phonenumber-utils service.
-  /// @see phone_number_add_blocking_rule()
+  /// **Remarks:**
+  /// - The blocking rule to remove should have been gotten from the phone number database using phone_number_get_blocking_rules().
+  ///
+  /// **Parameters:**
+  /// - `rule` (in): The blocking rule handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PHONE_NUMBER_ERROR_NONE`: Successful
+  /// - `PHONE_NUMBER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PHONE_NUMBER_ERROR_DB_FAILED`: Database operation failure
+  /// - `PHONE_NUMBER_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method.
+  /// - `PHONE_NUMBER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `PHONE_NUMBER_ERROR_IPC`: Unknown IPC error
+  /// - `PHONE_NUMBER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `PHONE_NUMBER_ERROR_SYSTEM`: Internal error
+  ///
+  /// **Preconditions:**
+  /// - phone_number_connect() should be called to open a connection to the phonenumber-utils service.
+  ///
+  /// **Postconditions:**
+  /// - phone_number_disconnect() should be called to close a connection to the phonenumber-utils service.
+  ///
+  /// **See also:**
+  /// - `phone_number_add_blocking_rule()`
+  ///
+  /// **Paragraph:**
+  /// - tner
   int phone_number_remove_blocking_rule(
     phone_number_blocking_rule_h rule,
   ) {
@@ -465,33 +592,48 @@ class Tizen70PhonenumberUtils {
       _phone_number_remove_blocking_rulePtr
           .asFunction<int Function(phone_number_blocking_rule_h)>();
 
-  /// @partner
-  /// @brief Retrieves blocking rules as an array.
+  /// Retrieves blocking rules as an array.
   ///
-  /// @since_tizen 4.0
-  /// @privlevel partner
-  /// @privilege %http://tizen.org/privilege/blocknumber.read
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @remarks You must release each blocking rule in the array with phone_number_blocking_rule_destroy() and @a rules using free().
+  /// **Privilege level:**
+  /// - partner
   ///
-  /// @param[in]  offset     The index from which to get results
-  /// @param[in]  limit      The number to limit results (value 0 is used for all blocking rules)
-  /// @param[out] rules      The array of blocking rule handles
-  /// @param[out] length     The number of blocking rule handles in the array
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/blocknumber.read>
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PHONE_NUMBER_ERROR_NONE                Successful
-  /// @retval #PHONE_NUMBER_ERROR_OUT_OF_MEMORY       Out of memory
-  /// @retval #PHONE_NUMBER_ERROR_INVALID_PARAMETER   Invalid parameter
-  /// @retval #PHONE_NUMBER_ERROR_DB_FAILED           Database operation failure
-  /// @retval #PHONE_NUMBER_ERROR_PERMISSION_DENIED   Permission denied. This application does not have the privilege to call this method.
-  /// @retval #PHONE_NUMBER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #PHONE_NUMBER_ERROR_IPC                 Unknown IPC error
-  /// @retval #PHONE_NUMBER_ERROR_NO_DATA             Data does not exist
-  /// @retval #PHONE_NUMBER_ERROR_SYSTEM Internal error
-  /// @pre phone_number_connect() should be called to open a connection to the phonenumber-utils service.
-  /// @post phone_number_disconnect() should be called to close a connection to the phonenumber-utils service.
+  /// **Remarks:**
+  /// - You must release each blocking rule in the array with phone_number_blocking_rule_destroy() and `rules` using free().
+  ///
+  /// **Parameters:**
+  /// - `offset` (in): The index from which to get results
+  /// - `limit` (in): The number to limit results (value 0 is used for all blocking rules)
+  /// - `rules` (out): The array of blocking rule handles
+  /// - `length` (out): The number of blocking rule handles in the array
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PHONE_NUMBER_ERROR_NONE`: Successful
+  /// - `PHONE_NUMBER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `PHONE_NUMBER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PHONE_NUMBER_ERROR_DB_FAILED`: Database operation failure
+  /// - `PHONE_NUMBER_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method.
+  /// - `PHONE_NUMBER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `PHONE_NUMBER_ERROR_IPC`: Unknown IPC error
+  /// - `PHONE_NUMBER_ERROR_NO_DATA`: Data does not exist
+  /// - `PHONE_NUMBER_ERROR_SYSTEM`: Internal error
+  ///
+  /// **Preconditions:**
+  /// - phone_number_connect() should be called to open a connection to the phonenumber-utils service.
+  ///
+  /// **Postconditions:**
+  /// - phone_number_disconnect() should be called to close a connection to the phonenumber-utils service.
+  ///
+  /// **Paragraph:**
+  /// - tner
   int phone_number_get_blocking_rules(
     int offset,
     int limit,
@@ -521,32 +663,47 @@ class Tizen70PhonenumberUtils {
               ffi.Pointer<ffi.Pointer<phone_number_blocking_rule_h>>,
               ffi.Pointer<ffi.Int>)>();
 
-  /// @partner
-  /// @brief Retrieves blocking rules that block a specific number.
+  /// Retrieves blocking rules that block a specific number.
   ///
-  /// @since_tizen 4.0
-  /// @privlevel partner
-  /// @privilege %http://tizen.org/privilege/blocknumber.read
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @remarks You must release each blocking rule in the array with phone_number_blocking_rule_destroy() and @a rules using free().
+  /// **Privilege level:**
+  /// - partner
   ///
-  /// @param[in]  number     The number to get blocking rules related with
-  /// @param[out] rules      The array of blocking rule handles
-  /// @param[out] length     The number of blocking rule handles in the array
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/blocknumber.read>
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PHONE_NUMBER_ERROR_NONE                Successful
-  /// @retval #PHONE_NUMBER_ERROR_OUT_OF_MEMORY       Out of memory
-  /// @retval #PHONE_NUMBER_ERROR_INVALID_PARAMETER   Invalid parameter
-  /// @retval #PHONE_NUMBER_ERROR_DB_FAILED           Database operation failure
-  /// @retval #PHONE_NUMBER_ERROR_PERMISSION_DENIED   Permission denied. This application does not have the privilege to call this method.
-  /// @retval #PHONE_NUMBER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #PHONE_NUMBER_ERROR_IPC                 Unknown IPC error
-  /// @retval #PHONE_NUMBER_ERROR_NO_DATA             Data does not exist
-  /// @retval #PHONE_NUMBER_ERROR_SYSTEM Internal error
-  /// @pre phone_number_connect() should be called to open a connection to the phonenumber-utils service.
-  /// @post phone_number_disconnect() should be called to close a connection to the phonenumber-utils service.
+  /// **Remarks:**
+  /// - You must release each blocking rule in the array with phone_number_blocking_rule_destroy() and `rules` using free().
+  ///
+  /// **Parameters:**
+  /// - `number` (in): The number to get blocking rules related with
+  /// - `rules` (out): The array of blocking rule handles
+  /// - `length` (out): The number of blocking rule handles in the array
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PHONE_NUMBER_ERROR_NONE`: Successful
+  /// - `PHONE_NUMBER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `PHONE_NUMBER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PHONE_NUMBER_ERROR_DB_FAILED`: Database operation failure
+  /// - `PHONE_NUMBER_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method.
+  /// - `PHONE_NUMBER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `PHONE_NUMBER_ERROR_IPC`: Unknown IPC error
+  /// - `PHONE_NUMBER_ERROR_NO_DATA`: Data does not exist
+  /// - `PHONE_NUMBER_ERROR_SYSTEM`: Internal error
+  ///
+  /// **Preconditions:**
+  /// - phone_number_connect() should be called to open a connection to the phonenumber-utils service.
+  ///
+  /// **Postconditions:**
+  /// - phone_number_disconnect() should be called to close a connection to the phonenumber-utils service.
+  ///
+  /// **Paragraph:**
+  /// - tner
   int phone_number_get_blocking_rules_related(
     ffi.Pointer<ffi.Char> number,
     ffi.Pointer<ffi.Pointer<phone_number_blocking_rule_h>> rules,
@@ -573,27 +730,41 @@ class Tizen70PhonenumberUtils {
               ffi.Pointer<ffi.Pointer<phone_number_blocking_rule_h>>,
               ffi.Pointer<ffi.Int>)>();
 
-  /// @partner
-  /// @brief Checks if a specific number is blocked or not.
+  /// Checks if a specific number is blocked or not.
   ///
-  /// @since_tizen 4.0
-  /// @privlevel partner
-  /// @privilege %http://tizen.org/privilege/blocknumber.read
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @param[in]  number     The number to check blocking
-  /// @param[out] is_blocked The blocking result
+  /// **Privilege level:**
+  /// - partner
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PHONE_NUMBER_ERROR_NONE                Successful
-  /// @retval #PHONE_NUMBER_ERROR_INVALID_PARAMETER   Invalid parameter
-  /// @retval #PHONE_NUMBER_ERROR_DB_FAILED           Database operation failure
-  /// @retval #PHONE_NUMBER_ERROR_PERMISSION_DENIED   Permission denied. This application does not have the privilege to call this method.
-  /// @retval #PHONE_NUMBER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #PHONE_NUMBER_ERROR_IPC                 Unknown IPC error
-  /// @retval #PHONE_NUMBER_ERROR_SYSTEM Internal error
-  /// @pre phone_number_connect() should be called to open a connection to the phonenumber-utils service.
-  /// @post phone_number_disconnect() should be called to close a connection to the phonenumber-utils service.
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/blocknumber.read>
+  ///
+  /// **Parameters:**
+  /// - `number` (in): The number to check blocking
+  /// - `is_blocked` (out): The blocking result
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PHONE_NUMBER_ERROR_NONE`: Successful
+  /// - `PHONE_NUMBER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PHONE_NUMBER_ERROR_DB_FAILED`: Database operation failure
+  /// - `PHONE_NUMBER_ERROR_PERMISSION_DENIED`: Permission denied. This application does not have the privilege to call this method.
+  /// - `PHONE_NUMBER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `PHONE_NUMBER_ERROR_IPC`: Unknown IPC error
+  /// - `PHONE_NUMBER_ERROR_SYSTEM`: Internal error
+  ///
+  /// **Preconditions:**
+  /// - phone_number_connect() should be called to open a connection to the phonenumber-utils service.
+  ///
+  /// **Postconditions:**
+  /// - phone_number_disconnect() should be called to close a connection to the phonenumber-utils service.
+  ///
+  /// **Paragraph:**
+  /// - tner
   int phone_number_check_blocking(
     ffi.Pointer<ffi.Char> number,
     ffi.Pointer<ffi.Bool> is_blocked,
@@ -612,8 +783,11 @@ class Tizen70PhonenumberUtils {
       .asFunction<int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Bool>)>();
 }
 
-/// @brief Enumeration for language type.
-/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+/// Enumeration for language type.
+///
+/// **Since Tizen:**
+/// - Mobile 2.4; Wearable 3.0
+/// @nodoc
 abstract class phone_number_lang_e {
   /// < Amharic
   static const int PHONE_NUMBER_LANG_AMHARIC = 0;
@@ -710,8 +884,11 @@ abstract class phone_number_lang_e {
   static const int PHONE_NUMBER_LANG_MAX = 31;
 }
 
-/// @brief Enumeration for region type.
-/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+/// Enumeration for region type.
+///
+/// **Since Tizen:**
+/// - Mobile 2.4; Wearable 3.0
+/// @nodoc
 abstract class phone_number_region_e {
   /// < Aland Islands
   static const int PHONE_NUMBER_REGION_ALAND_ISLANDS = 0;
@@ -1451,8 +1628,11 @@ abstract class phone_number_region_e {
   static const int PHONE_NUMBER_REGION_MAX = 245;
 }
 
-/// @brief Enumeration for match type.
-/// @since_tizen 4.0
+/// Enumeration for match type.
+///
+/// **Since Tizen:**
+/// - 4.0
+/// @nodoc
 abstract class phone_number_blocking_rule_match_type_e {
   /// < Exact match
   static const int PHONE_NUMBER_MATCH_TYPE_EXACTLY = 0;
@@ -1467,8 +1647,11 @@ abstract class phone_number_blocking_rule_match_type_e {
   static const int PHONE_NUMBER_MATCH_TYPE_ENDS_WITH = 3;
 }
 
-/// @brief Enumeration for phone number errors.
-/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+/// Enumeration for phone number errors.
+///
+/// **Since Tizen:**
+/// - Mobile 2.4; Wearable 3.0
+/// @nodoc
 abstract class phone_number_error_e {
   /// < Successful
   static const int PHONE_NUMBER_ERROR_NONE = 0;
@@ -1504,6 +1687,9 @@ abstract class phone_number_error_e {
   static const int PHONE_NUMBER_ERROR_IPC = -33685313;
 }
 
-/// @brief The blocking rule handle.
-/// @since_tizen 4.0
+/// The blocking rule handle.
+///
+/// **Since Tizen:**
+/// - 4.0
+/// @nodoc
 typedef phone_number_blocking_rule_h = ffi.Pointer<ffi.Void>;

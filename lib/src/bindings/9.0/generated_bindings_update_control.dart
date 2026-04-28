@@ -1,3 +1,6 @@
+/// {@category 9.0/tizen}
+library tizen_interop_9_0.update_control;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -10,6 +13,7 @@ import 'dart:ffi' as ffi;
 import 'generated_bindings_time.dart' as time;
 
 /// Dart bindings for Tizen update-control APIs.
+/// {@category 9.0/tizen}
 class Tizen90UpdateControl {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -25,17 +29,23 @@ class Tizen90UpdateControl {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Initializes the update controller.
+  /// Initializes the update controller.
   ///
-  /// @since_tizen 5.0
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #UPDATE_CONTROL_ERROR_NONE Successful
-  /// @retval #UPDATE_CONTROL_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #UPDATE_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #UPDATE_CONTROL_ERROR_SYSTEM_ERROR System error
-  /// @retval #UPDATE_CONTROL_ERROR_INVALID_OPERATION Function not implemented
-  /// @see update_control_deinitialize()
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `UPDATE_CONTROL_ERROR_NONE`: Successful
+  /// - `UPDATE_CONTROL_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `UPDATE_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `UPDATE_CONTROL_ERROR_SYSTEM_ERROR`: System error
+  /// - `UPDATE_CONTROL_ERROR_INVALID_OPERATION`: Function not implemented
+  ///
+  /// **See also:**
+  /// - `update_control_deinitialize()`
   int update_control_initialize() {
     return _update_control_initialize();
   }
@@ -46,17 +56,23 @@ class Tizen90UpdateControl {
   late final _update_control_initialize =
       _update_control_initializePtr.asFunction<int Function()>();
 
-  /// @brief Deinitializes the update controller.
+  /// Deinitializes the update controller.
   ///
-  /// @since_tizen 5.0
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #UPDATE_CONTROL_ERROR_NONE Successful
-  /// @retval #UPDATE_CONTROL_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #UPDATE_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #UPDATE_CONTROL_ERROR_SYSTEM_ERROR System error
-  /// @retval #UPDATE_CONTROL_ERROR_INVALID_OPERATION Function not implemented
-  /// @see update_control_initialize()
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `UPDATE_CONTROL_ERROR_NONE`: Successful
+  /// - `UPDATE_CONTROL_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `UPDATE_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `UPDATE_CONTROL_ERROR_SYSTEM_ERROR`: System error
+  /// - `UPDATE_CONTROL_ERROR_INVALID_OPERATION`: Function not implemented
+  ///
+  /// **See also:**
+  /// - `update_control_initialize()`
   int update_control_deinitialize() {
     return _update_control_deinitialize();
   }
@@ -67,16 +83,20 @@ class Tizen90UpdateControl {
   late final _update_control_deinitialize =
       _update_control_deinitializePtr.asFunction<int Function()>();
 
-  /// @brief Requests checking new version of firmware.
+  /// Requests checking new version of firmware.
   ///
-  /// @since_tizen 5.0
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #UPDATE_CONTROL_ERROR_NONE Successful
-  /// @retval #UPDATE_CONTROL_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #UPDATE_CONTROL_ERROR_CONNECTION_REFUSED Connection refused
-  /// @retval #UPDATE_CONTROL_ERROR_SYSTEM_ERROR System error
-  /// @retval #UPDATE_CONTROL_ERROR_INVALID_OPERATION Function not implemented
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `UPDATE_CONTROL_ERROR_NONE`: Successful
+  /// - `UPDATE_CONTROL_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `UPDATE_CONTROL_ERROR_CONNECTION_REFUSED`: Connection refused
+  /// - `UPDATE_CONTROL_ERROR_SYSTEM_ERROR`: System error
+  /// - `UPDATE_CONTROL_ERROR_INVALID_OPERATION`: Function not implemented
   int update_control_check_new_version() {
     return _update_control_check_new_version();
   }
@@ -87,21 +107,25 @@ class Tizen90UpdateControl {
   late final _update_control_check_new_version =
       _update_control_check_new_versionPtr.asFunction<int Function()>();
 
-  /// @brief Requests downloading new version of firmware.
+  /// Requests downloading new version of firmware.
   ///
-  /// @since_tizen 5.0
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #UPDATE_CONTROL_ERROR_NONE Successful
-  /// @retval #UPDATE_CONTROL_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #UPDATE_CONTROL_ERROR_FILE_NO_SPACE_ON_DEVICE No space left on device
-  /// @retval #UPDATE_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #UPDATE_CONTROL_ERROR_CONNECTION_REFUSED Connection refused
-  /// @retval #UPDATE_CONTROL_ERROR_CONNECTION_ABORTED Software caused connection abort
-  /// @retval #UPDATE_CONTROL_ERROR_PROTOCOL_NOT_SUPPORTED Protocol not supported
-  /// @retval #UPDATE_CONTROL_ERROR_INVALID_URI Invalid URI
-  /// @retval #UPDATE_CONTROL_ERROR_SYSTEM_ERROR System error
-  /// @retval #UPDATE_CONTROL_ERROR_INVALID_OPERATION Function not implemented
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `UPDATE_CONTROL_ERROR_NONE`: Successful
+  /// - `UPDATE_CONTROL_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `UPDATE_CONTROL_ERROR_FILE_NO_SPACE_ON_DEVICE`: No space left on device
+  /// - `UPDATE_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `UPDATE_CONTROL_ERROR_CONNECTION_REFUSED`: Connection refused
+  /// - `UPDATE_CONTROL_ERROR_CONNECTION_ABORTED`: Software caused connection abort
+  /// - `UPDATE_CONTROL_ERROR_PROTOCOL_NOT_SUPPORTED`: Protocol not supported
+  /// - `UPDATE_CONTROL_ERROR_INVALID_URI`: Invalid URI
+  /// - `UPDATE_CONTROL_ERROR_SYSTEM_ERROR`: System error
+  /// - `UPDATE_CONTROL_ERROR_INVALID_OPERATION`: Function not implemented
   int update_control_download_package() {
     return _update_control_download_package();
   }
@@ -112,22 +136,34 @@ class Tizen90UpdateControl {
   late final _update_control_download_package =
       _update_control_download_packagePtr.asFunction<int Function()>();
 
-  /// @platform
-  /// @brief Triggers upgrade script and tells it to perform RO update and finish update operations (full upgrade process).
-  /// @details This starts the script in the background and quickly returns. It doesn't check the return value of the script.
-  /// @since_tizen 5.0
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/updatecontrol.admin
-  /// @return @c 0 if RO update and finish were triggered successfully (doesn't guarantee upgrade script COMPLETED successfully),
-  /// otherwise a negative error value
-  /// @retval #UPDATE_CONTROL_ERROR_NONE Successful
-  /// @retval #UPDATE_CONTROL_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #UPDATE_CONTROL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #UPDATE_CONTROL_ERROR_TIMED_OUT Time out
-  /// @retval #UPDATE_CONTROL_ERROR_INVALID_PACKAGE Invalid package
-  /// @retval #UPDATE_CONTROL_ERROR_PACKAGE_NOT_SUPPORTED Package type not supported
-  /// @retval #UPDATE_CONTROL_ERROR_SYSTEM_ERROR System error
-  /// @retval #UPDATE_CONTROL_ERROR_INVALID_OPERATION Function not implemented
+  /// Triggers upgrade script and tells it to perform RO update and finish update operations (full upgrade process).
+  ///
+  /// This starts the script in the background and quickly returns. It doesn't check the return value of the script.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/updatecontrol.admin>
+  ///
+  /// **Returns:**
+  /// - `0` if RO update and finish were triggered successfully (doesn't guarantee upgrade script COMPLETED successfully), otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `UPDATE_CONTROL_ERROR_NONE`: Successful
+  /// - `UPDATE_CONTROL_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `UPDATE_CONTROL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `UPDATE_CONTROL_ERROR_TIMED_OUT`: Time out
+  /// - `UPDATE_CONTROL_ERROR_INVALID_PACKAGE`: Invalid package
+  /// - `UPDATE_CONTROL_ERROR_PACKAGE_NOT_SUPPORTED`: Package type not supported
+  /// - `UPDATE_CONTROL_ERROR_SYSTEM_ERROR`: System error
+  /// - `UPDATE_CONTROL_ERROR_INVALID_OPERATION`: Function not implemented
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int update_control_do_update() {
     return _update_control_do_update();
   }
@@ -138,20 +174,33 @@ class Tizen90UpdateControl {
   late final _update_control_do_update =
       _update_control_do_updatePtr.asFunction<int Function()>();
 
-  /// @brief Sets a callback to trigger once RO update has completed.
+  /// Sets a callback to trigger once RO update has completed.
   ///
-  /// @since_tizen 9.0
-  /// @remarks If there already is a callback set using this function, calling it again will overwrite it.
-  /// @param[in] user_cb The callback to be triggered once the operation has completed
-  /// @param[in] user_data Data to be passed to the callback
-  /// @return @c 0 if callback was set, otherwise a negative error value
-  /// @retval #UPDATE_CONTROL_ERROR_NONE Successful
-  /// @retval #UPDATE_CONTROL_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #UPDATE_CONTROL_ERROR_INVALID_PARAMETER @a user_cb is null
-  /// @retval #UPDATE_CONTROL_ERROR_SYSTEM_ERROR System error
-  /// @post @a user_cb will be called after an operation launched by update_control_do_ro_update_async() finishes.
-  /// @see update_control_unset_ro_update_cb()
-  /// @see update_control_do_ro_update_async()
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Remarks:**
+  /// - If there already is a callback set using this function, calling it again will overwrite it.
+  ///
+  /// **Parameters:**
+  /// - `user_cb` (in): The callback to be triggered once the operation has completed
+  /// - `user_data` (in): Data to be passed to the callback
+  ///
+  /// **Returns:**
+  /// - `0` if callback was set, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `UPDATE_CONTROL_ERROR_NONE`: Successful
+  /// - `UPDATE_CONTROL_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `UPDATE_CONTROL_ERROR_INVALID_PARAMETER`: `user_cb` is null
+  /// - `UPDATE_CONTROL_ERROR_SYSTEM_ERROR`: System error
+  ///
+  /// **Postconditions:**
+  /// - `user_cb` will be called after an operation launched by update_control_do_ro_update_async() finishes.
+  ///
+  /// **See also:**
+  /// - `update_control_unset_ro_update_cb()`
+  /// - `update_control_do_ro_update_async()`
   int update_control_set_ro_update_cb(
     update_control_cb user_cb,
     ffi.Pointer<ffi.Void> user_data,
@@ -170,20 +219,30 @@ class Tizen90UpdateControl {
       _update_control_set_ro_update_cbPtr
           .asFunction<int Function(update_control_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback set by update_control_set_ro_update_cb().
+  /// Unsets the callback set by update_control_set_ro_update_cb().
   ///
-  /// @since_tizen 9.0
-  /// @remarks Using this function after launching associated operation but before \n
-  /// receiving the callback will not cause any errors, but will make tracking the result of \n
-  /// the operation impossible.
-  /// @return @c 0 if callback was unset, otherwise a negative error value
-  /// @retval #UPDATE_CONTROL_ERROR_NONE Successful
-  /// @retval #UPDATE_CONTROL_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #UPDATE_CONTROL_ERROR_SYSTEM_ERROR System error
-  /// @retval #UPDATE_CONTROL_ERROR_INVALID_OPERATION No callback to unset
-  /// @pre A callback has to be set using update_control_set_ro_update_cb() before calling \n
-  /// this function.
-  /// @see update_control_set_ro_update_cb()
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Remarks:**
+  /// - Using this function after launching associated operation but before
+  /// - receiving the callback will not cause any errors, but will make tracking the result of
+  /// - the operation impossible.
+  ///
+  /// **Returns:**
+  /// - `0` if callback was unset, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `UPDATE_CONTROL_ERROR_NONE`: Successful
+  /// - `UPDATE_CONTROL_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `UPDATE_CONTROL_ERROR_SYSTEM_ERROR`: System error
+  /// - `UPDATE_CONTROL_ERROR_INVALID_OPERATION`: No callback to unset
+  ///
+  /// **Preconditions:**
+  /// - A callback has to be set using update_control_set_ro_update_cb() before calling this function.
+  ///
+  /// **See also:**
+  /// - `update_control_set_ro_update_cb()`
   int update_control_unset_ro_update_cb() {
     return _update_control_unset_ro_update_cb();
   }
@@ -194,30 +253,42 @@ class Tizen90UpdateControl {
   late final _update_control_unset_ro_update_cb =
       _update_control_unset_ro_update_cbPtr.asFunction<int Function()>();
 
-  /// @platform
-  /// @brief Triggers upgrade script and tells it to perform @b ONLY RO update asynchronously.
-  /// @details This function does not perform the finishing of update process (among others rebooting). \n
-  /// To finish the update use update_control_do_finish_update_async(). If you wish to trigger both operations synchronously, \n
-  /// use update_control_do_update().
+  /// Triggers upgrade script and tells it to perform **ONLY** RO update asynchronously.
   ///
-  /// @since_tizen 9.0
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/updatecontrol.admin
-  /// @return @c 0 if basic checks succeeded (does not guarantee the operation triggered completed successfully), \n
-  /// otherwise a negative error value
-  /// @retval #UPDATE_CONTROL_ERROR_NONE Successful
-  /// @retval #UPDATE_CONTROL_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #UPDATE_CONTROL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #UPDATE_CONTROL_ERROR_SYSTEM_ERROR System error
-  /// @retval #UPDATE_CONTROL_ERROR_INVALID_OPERATION Callback was not set
-  /// @pre update_control_initialize() has to be called before calling this function.
-  /// @pre A callback has to be set using update_control_set_ro_update_cb() before calling \n
-  /// this function.
-  /// @post A callback set by update_control_set_ro_update_cb() will be invoked \n
-  /// after RO update finishes (does not guarantee the process was successful). \n
-  /// To check the result of the operation, examine the result code passed to the callback.
-  /// @see update_control_initialize()
-  /// @see update_control_set_ro_update_cb()
+  /// This function does not perform the finishing of update process (among others rebooting). To finish the update use update_control_do_finish_update_async(). If you wish to trigger both operations synchronously, use update_control_do_update().
+  ///
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/updatecontrol.admin>
+  ///
+  /// **Returns:**
+  /// - `0` if basic checks succeeded (does not guarantee the operation triggered completed successfully), otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `UPDATE_CONTROL_ERROR_NONE`: Successful
+  /// - `UPDATE_CONTROL_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `UPDATE_CONTROL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `UPDATE_CONTROL_ERROR_SYSTEM_ERROR`: System error
+  /// - `UPDATE_CONTROL_ERROR_INVALID_OPERATION`: Callback was not set
+  ///
+  /// **Preconditions:**
+  /// - update_control_initialize() has to be called before calling this function.
+  /// - A callback has to be set using update_control_set_ro_update_cb() before calling this function.
+  ///
+  /// **Postconditions:**
+  /// - A callback set by update_control_set_ro_update_cb() will be invoked after RO update finishes (does not guarantee the process was successful). To check the result of the operation, examine the result code passed to the callback.
+  ///
+  /// **See also:**
+  /// - `update_control_initialize()`
+  /// - `update_control_set_ro_update_cb()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int update_control_do_ro_update_async() {
     return _update_control_do_ro_update_async();
   }
@@ -228,20 +299,33 @@ class Tizen90UpdateControl {
   late final _update_control_do_ro_update_async =
       _update_control_do_ro_update_asyncPtr.asFunction<int Function()>();
 
-  /// @brief Sets a callback to trigger once finish update operation has completed.
+  /// Sets a callback to trigger once finish update operation has completed.
   ///
-  /// @since_tizen 9.0
-  /// @remarks If there already is a callback set using this function, calling it again will overwrite it.
-  /// @param[in] user_cb The callback to be triggered once the operation has completed
-  /// @param[in] user_data Data to be passed to the callback
-  /// @return @c 0 if callback was set, otherwise a negative error value
-  /// @retval #UPDATE_CONTROL_ERROR_NONE Successful
-  /// @retval #UPDATE_CONTROL_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #UPDATE_CONTROL_ERROR_INVALID_PARAMETER @a user_cb is null
-  /// @retval #UPDATE_CONTROL_ERROR_SYSTEM_ERROR System error
-  /// @post @a user_cb will be called after an operation launched by update_control_do_finish_update_async() finishes.
-  /// @see update_control_unset_finish_update_cb()
-  /// @see update_control_do_finish_update_async()
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Remarks:**
+  /// - If there already is a callback set using this function, calling it again will overwrite it.
+  ///
+  /// **Parameters:**
+  /// - `user_cb` (in): The callback to be triggered once the operation has completed
+  /// - `user_data` (in): Data to be passed to the callback
+  ///
+  /// **Returns:**
+  /// - `0` if callback was set, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `UPDATE_CONTROL_ERROR_NONE`: Successful
+  /// - `UPDATE_CONTROL_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `UPDATE_CONTROL_ERROR_INVALID_PARAMETER`: `user_cb` is null
+  /// - `UPDATE_CONTROL_ERROR_SYSTEM_ERROR`: System error
+  ///
+  /// **Postconditions:**
+  /// - `user_cb` will be called after an operation launched by update_control_do_finish_update_async() finishes.
+  ///
+  /// **See also:**
+  /// - `update_control_unset_finish_update_cb()`
+  /// - `update_control_do_finish_update_async()`
   int update_control_set_finish_update_cb(
     update_control_cb user_cb,
     ffi.Pointer<ffi.Void> user_data,
@@ -260,20 +344,30 @@ class Tizen90UpdateControl {
       _update_control_set_finish_update_cbPtr
           .asFunction<int Function(update_control_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback set by update_control_set_finish_update_cb().
+  /// Unsets the callback set by update_control_set_finish_update_cb().
   ///
-  /// @since_tizen 9.0
-  /// @remarks Using this function after launching associated operation but before \n
-  /// receiving the callback will not cause any errors, but will make tracking the result of \n
-  /// the operation impossible.
-  /// @return @c 0 if callback was unset, otherwise a negative error value
-  /// @retval #UPDATE_CONTROL_ERROR_NONE Successful
-  /// @retval #UPDATE_CONTROL_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #UPDATE_CONTROL_ERROR_SYSTEM_ERROR System error
-  /// @retval #UPDATE_CONTROL_ERROR_INVALID_OPERATION No callback to unset
-  /// @pre A callback has to be set using update_control_set_finish_update_cb() before calling \n
-  /// this function.
-  /// @see update_control_set_finish_update_cb()
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Remarks:**
+  /// - Using this function after launching associated operation but before
+  /// - receiving the callback will not cause any errors, but will make tracking the result of
+  /// - the operation impossible.
+  ///
+  /// **Returns:**
+  /// - `0` if callback was unset, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `UPDATE_CONTROL_ERROR_NONE`: Successful
+  /// - `UPDATE_CONTROL_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `UPDATE_CONTROL_ERROR_SYSTEM_ERROR`: System error
+  /// - `UPDATE_CONTROL_ERROR_INVALID_OPERATION`: No callback to unset
+  ///
+  /// **Preconditions:**
+  /// - A callback has to be set using update_control_set_finish_update_cb() before calling this function.
+  ///
+  /// **See also:**
+  /// - `update_control_set_finish_update_cb()`
   int update_control_unset_finish_update_cb() {
     return _update_control_unset_finish_update_cb();
   }
@@ -284,36 +378,47 @@ class Tizen90UpdateControl {
   late final _update_control_unset_finish_update_cb =
       _update_control_unset_finish_update_cbPtr.asFunction<int Function()>();
 
-  /// @platform
-  /// @brief Triggers upgrade script and tells it to perform @b ONLY the finish update process asynchronously.
-  /// @details This function does not perform the RO update process. \n
-  /// To trigger RO use update_control_do_ro_update_async(). If you wish to trigger both operations synchronously, \n
-  /// use update_control_do_update().
+  /// Triggers upgrade script and tells it to perform **ONLY** the finish update process asynchronously.
   ///
-  /// @since_tizen 9.0
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/updatecontrol.admin
-  /// @remarks This function can be used to check whether the RO update process is still in progress.
-  /// @return @c 0 if basic checks succeeded (does not guarantee the operation triggered finished successfully), \n
-  /// otherwise a negative error value
-  /// @retval #UPDATE_CONTROL_ERROR_NONE Successful
-  /// @retval #UPDATE_CONTROL_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #UPDATE_CONTROL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #UPDATE_CONTROL_ERROR_SYSTEM_ERROR System error
-  /// @retval #UPDATE_CONTROL_ERROR_INVALID_OPERATION Callback was not set
-  /// @pre update_control_initialize() has to be called before calling this function.
-  /// @pre A callback has to be set using update_control_set_finish_update_cb() before calling \n
-  /// this function.
-  /// @pre In order for the finish update process to complete successfully, this function has \n
-  /// to be called after the RO update process launched by update_control_do_ro_update_async() \n
-  /// completes @b SUCCESSFULLY. Calling this function before that will not return an error.
-  /// @post A callback set by update_control_set_finish_update_cb() will be invoked \n
-  /// after the finish update process finishes. To check the result of the operation, examine \n
-  /// the result code passed to the callback. If the process was successful, the callback \n
-  /// will not be invoked, because the system will be rebooting.
-  /// @see update_control_initialize()
-  /// @see update_control_set_finish_update_cb()
-  /// @see update_control_do_ro_update_async()
+  /// This function does not perform the RO update process. To trigger RO use update_control_do_ro_update_async(). If you wish to trigger both operations synchronously, use update_control_do_update().
+  ///
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/updatecontrol.admin>
+  ///
+  /// **Remarks:**
+  /// - This function can be used to check whether the RO update process is still in progress.
+  ///
+  /// **Returns:**
+  /// - `0` if basic checks succeeded (does not guarantee the operation triggered finished successfully), otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `UPDATE_CONTROL_ERROR_NONE`: Successful
+  /// - `UPDATE_CONTROL_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `UPDATE_CONTROL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `UPDATE_CONTROL_ERROR_SYSTEM_ERROR`: System error
+  /// - `UPDATE_CONTROL_ERROR_INVALID_OPERATION`: Callback was not set
+  ///
+  /// **Preconditions:**
+  /// - update_control_initialize() has to be called before calling this function.
+  /// - A callback has to be set using update_control_set_finish_update_cb() before calling this function.
+  /// - In order for the finish update process to complete successfully, this function has to be called after the RO update process launched by update_control_do_ro_update_async() completes **SUCCESSFULLY**. Calling this function before that will not return an error.
+  ///
+  /// **Postconditions:**
+  /// - A callback set by update_control_set_finish_update_cb() will be invoked after the finish update process finishes. To check the result of the operation, examine the result code passed to the callback. If the process was successful, the callback will not be invoked, because the system will be rebooting.
+  ///
+  /// **See also:**
+  /// - `update_control_initialize()`
+  /// - `update_control_set_finish_update_cb()`
+  /// - `update_control_do_ro_update_async()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int update_control_do_finish_update_async() {
     return _update_control_do_finish_update_async();
   }
@@ -324,23 +429,38 @@ class Tizen90UpdateControl {
   late final _update_control_do_finish_update_async =
       _update_control_do_finish_update_asyncPtr.asFunction<int Function()>();
 
-  /// @platform
-  /// @brief Makes reservation for update.
-  /// @details Makes update reservation at a specific time. At the given time, it automatically checks, downloads and updates to a new version. To cancel the reservation, call update_control_cancel_reservation().
+  /// Makes reservation for update.
   ///
-  /// @since_tizen 5.0
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/updatecontrol.admin
-  /// @remarks Only one reservation can be used at any given time. If a new reservation is made, the previous one will be removed.
-  /// @param[in] reservation_time The time to start update
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #UPDATE_CONTROL_ERROR_NONE Successful
-  /// @retval #UPDATE_CONTROL_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #UPDATE_CONTROL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #UPDATE_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #UPDATE_CONTROL_ERROR_SYSTEM_ERROR System error
-  /// @retval #UPDATE_CONTROL_ERROR_INVALID_OPERATION Function not implemented
+  /// Makes update reservation at a specific time. At the given time, it automatically checks, downloads and updates to a new version. To cancel the reservation, call update_control_cancel_reservation().
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/updatecontrol.admin>
+  ///
+  /// **Remarks:**
+  /// - Only one reservation can be used at any given time. If a new reservation is made, the previous one will be removed.
+  ///
+  /// **Parameters:**
+  /// - `reservation_time` (in): The time to start update
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `UPDATE_CONTROL_ERROR_NONE`: Successful
+  /// - `UPDATE_CONTROL_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `UPDATE_CONTROL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `UPDATE_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `UPDATE_CONTROL_ERROR_SYSTEM_ERROR`: System error
+  /// - `UPDATE_CONTROL_ERROR_INVALID_OPERATION`: Function not implemented
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int update_control_make_reservation(
     ffi.Pointer<time.tm> reservation_time,
   ) {
@@ -356,19 +476,29 @@ class Tizen90UpdateControl {
       _update_control_make_reservationPtr
           .asFunction<int Function(ffi.Pointer<time.tm>)>();
 
-  /// @platform
-  /// @brief Cancels the update reservation.
+  /// Cancels the update reservation.
   ///
-  /// @since_tizen 5.0
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/updatecontrol.admin
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #UPDATE_CONTROL_ERROR_NONE Successful
-  /// @retval #UPDATE_CONTROL_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #UPDATE_CONTROL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #UPDATE_CONTROL_ERROR_SYSTEM_ERROR System error
-  /// @retval #UPDATE_CONTROL_ERROR_INVALID_OPERATION Function not implemented
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/updatecontrol.admin>
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `UPDATE_CONTROL_ERROR_NONE`: Successful
+  /// - `UPDATE_CONTROL_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `UPDATE_CONTROL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `UPDATE_CONTROL_ERROR_SYSTEM_ERROR`: System error
+  /// - `UPDATE_CONTROL_ERROR_INVALID_OPERATION`: Function not implemented
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int update_control_cancel_reservation() {
     return _update_control_cancel_reservation();
   }
@@ -379,22 +509,30 @@ class Tizen90UpdateControl {
   late final _update_control_cancel_reservation =
       _update_control_cancel_reservationPtr.asFunction<int Function()>();
 
-  /// @brief Gets the update property of the given key.
+  /// Gets the update property of the given key.
   ///
-  /// @since_tizen 5.0
-  /// @remarks The @a value must be released using free()
-  /// @param[in] property The key of property to get
-  /// @param[out] value The value of given property
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #UPDATE_CONTROL_ERROR_NONE Successful
-  /// @retval #UPDATE_CONTROL_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #UPDATE_CONTROL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #UPDATE_CONTROL_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #UPDATE_CONTROL_ERROR_KEY_NOT_FOUND Specified property not found
-  /// @retval #UPDATE_CONTROL_ERROR_KEY_REJECTED Specified property not available
-  /// @retval #UPDATE_CONTROL_ERROR_SYSTEM_ERROR System error
-  /// @retval #UPDATE_CONTROL_ERROR_INVALID_OPERATION Function not implemented
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Remarks:**
+  /// - The `value` must be released using free()
+  ///
+  /// **Parameters:**
+  /// - `property` (in): The key of property to get
+  /// - `value` (out): The value of given property
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `UPDATE_CONTROL_ERROR_NONE`: Successful
+  /// - `UPDATE_CONTROL_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `UPDATE_CONTROL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `UPDATE_CONTROL_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `UPDATE_CONTROL_ERROR_KEY_NOT_FOUND`: Specified property not found
+  /// - `UPDATE_CONTROL_ERROR_KEY_REJECTED`: Specified property not available
+  /// - `UPDATE_CONTROL_ERROR_SYSTEM_ERROR`: System error
+  /// - `UPDATE_CONTROL_ERROR_INVALID_OPERATION`: Function not implemented
   int update_control_get_property(
     int property,
     ffi.Pointer<ffi.Pointer<ffi.Void>> value,
@@ -413,8 +551,11 @@ class Tizen90UpdateControl {
       .asFunction<int Function(int, ffi.Pointer<ffi.Pointer<ffi.Void>>)>();
 }
 
-/// @brief Enumeration for the update control error.
-/// @since_tizen 5.0
+/// Enumeration for the update control error.
+///
+/// **Since Tizen:**
+/// - 5.0
+/// @nodoc
 abstract class update_control_error_e {
   /// < Successful
   static const int UPDATE_CONTROL_ERROR_NONE = 0;
@@ -477,8 +618,11 @@ abstract class update_control_error_e {
   static const int UPDATE_CONTROL_ERROR_RO_UPDATE_NOT_COMPLETED = -50266106;
 }
 
-/// @brief Enumeration for the update control properties.
-/// @since_tizen 5.0
+/// Enumeration for the update control properties.
+///
+/// **Since Tizen:**
+/// - 5.0
+/// @nodoc
 abstract class update_control_property_e {
   /// < New version
   static const int UPDATE_CONTROL_PROPERTY_NEW_VERSION = 0;
@@ -499,34 +643,42 @@ abstract class update_control_property_e {
   static const int UPDATE_CONTROL_PROPERTY_UPDATE_AVAILABLE = 5;
 }
 
-/// @brief Callback type to be invoked after the RO update or the finish update process finishes.
-/// @details The callback will be triggered when the operation triggered by update_control_do_ro_update_async() \n
-/// or update_control_do_finish_update_async() finishes (does not have to be successful). Examine the \p result parameter \n
-/// to get the result of the operation. Both RO update and finish update operations can have following results:
-/// - #UPDATE_CONTROL_ERROR_NONE Successful
-/// - #UPDATE_CONTROL_ERROR_SYSTEM_ERROR System error
-/// - #UPDATE_CONTROL_ERROR_INVALID_OPERATION Upgrade script returned an error
-/// - #UPDATE_CONTROL_ERROR_NOT_SUPPORTED Not supported
-/// Finish update operation can additionally result in following:
-/// - #UPDATE_CONTROL_ERROR_RO_UPDATE_IN_PROGRESS - RO update is still in progress
-/// - #UPDATE_CONTROL_ERROR_RO_UPDATE_NOT_COMPLETED - RO update has not finished (and is not currently in progress), \n
-/// most likely meaning the RO update has not been triggered yet
+/// Callback type to be invoked after the RO update or the finish update process finishes.
 ///
-/// @since_tizen 9.0
-/// @remarks This callback will be invoked in the main event loop of the client.
-/// @param[in] result Result of the operation that triggered the callback
-/// @param[in] user_data User data given when setting the callback
-/// @pre Register the callback using update_control_set_ro_update_cb() or update_control_set_finish_update_cb(). \n
-/// The callback will be invoked only when the operation associated with the registering function finishes. \n
-/// @see update_control_set_ro_update_cb()
-/// @see update_control_set_finish_update_cb()
-/// @see update_control_unset_ro_update_cb()
-/// @see update_control_unset_finish_update_cb()
-/// @see update_control_do_ro_update_async()
-/// @see update_control_do_finish_update_async()
+/// The callback will be triggered when the operation triggered by update_control_do_ro_update_async() or update_control_do_finish_update_async() finishes (does not have to be successful). Examine the \p result parameter to get the result of the operation. Both RO update and finish update operations can have following results:
+/// - `UPDATE_CONTROL_ERROR_NONE` Successful
+/// - `UPDATE_CONTROL_ERROR_SYSTEM_ERROR` System error
+/// - `UPDATE_CONTROL_ERROR_INVALID_OPERATION` Upgrade script returned an error
+/// - `UPDATE_CONTROL_ERROR_NOT_SUPPORTED` Not supported Finish update operation can additionally result in following:
+/// - `UPDATE_CONTROL_ERROR_RO_UPDATE_IN_PROGRESS` - RO update is still in progress
+/// - `UPDATE_CONTROL_ERROR_RO_UPDATE_NOT_COMPLETED` - RO update has not finished (and is not currently in progress), most likely meaning the RO update has not been triggered yet
+///
+/// **Since Tizen:**
+/// - 9.0
+///
+/// **Remarks:**
+/// - This callback will be invoked in the main event loop of the client.
+///
+/// **Parameters:**
+/// - `result` (in): Result of the operation that triggered the callback
+/// - `user_data` (in): User data given when setting the callback
+///
+/// **Preconditions:**
+/// - Register the callback using update_control_set_ro_update_cb() or update_control_set_finish_update_cb(). The callback will be invoked only when the operation associated with the registering function finishes.
+///
+/// **See also:**
+/// - `update_control_set_ro_update_cb()`
+/// - `update_control_set_finish_update_cb()`
+/// - `update_control_unset_ro_update_cb()`
+/// - `update_control_unset_finish_update_cb()`
+/// - `update_control_do_ro_update_async()`
+/// - `update_control_do_finish_update_async()`
+/// @nodoc
 typedef update_control_cb
     = ffi.Pointer<ffi.NativeFunction<update_control_cbFunction>>;
+/// @nodoc
 typedef update_control_cbFunction = ffi.Void Function(
     ffi.Int32 result, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartupdate_control_cbFunction = void Function(
     int result, ffi.Pointer<ffi.Void> user_data);

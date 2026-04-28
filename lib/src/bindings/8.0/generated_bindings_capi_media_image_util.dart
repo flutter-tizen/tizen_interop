@@ -1,3 +1,6 @@
+/// {@category 8.0/tizen}
+library tizen_interop_8_0.capi_media_image_util;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -10,6 +13,7 @@ import 'dart:ffi' as ffi;
 import 'generated_bindings_capi_media_tool.dart' as media_tool;
 
 /// Dart bindings for Tizen capi-media-image-util APIs.
+/// {@category 8.0/tizen}
 class Tizen80CapiMediaImageUtil {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -25,22 +29,29 @@ class Tizen80CapiMediaImageUtil {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Creates a handle of image util decoding.
-  /// @details This function creates a handle of image util decoding.
-  /// @since_tizen 3.0
+  /// Creates a handle of image util decoding.
   ///
-  /// @remarks The @a handle should be released using image_util_decode_destroy().
+  /// This function creates a handle of image util decoding.
   ///
-  /// @param[out] handle The handle of image util decoding
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Remarks:**
+  /// - The `handle` should be released using image_util_decode_destroy().
   ///
-  /// @retval #IMAGE_UTIL_ERROR_NONE Successful
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IMAGE_UTIL_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Parameters:**
+  /// - `handle` (out): The handle of image util decoding
   ///
-  /// @see image_util_decode_destroy()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IMAGE_UTIL_ERROR_NONE`: Successful
+  /// - `IMAGE_UTIL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IMAGE_UTIL_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `image_util_decode_destroy()`
   int image_util_decode_create(
     ffi.Pointer<image_util_decode_h> handle,
   ) {
@@ -56,41 +67,49 @@ class Tizen80CapiMediaImageUtil {
   late final _image_util_decode_create = _image_util_decode_createPtr
       .asFunction<int Function(ffi.Pointer<image_util_decode_h>)>();
 
-  /// @brief Sets the input file path from which to decode.
-  /// @since_tizen 3.0
+  /// Sets the input file path from which to decode.
   ///
-  /// @remarks One of image_util_decode_set_input_path() or image_util_decode_set_input_buffer() should be set.\n
-  /// If both are set then the latest input set, is considered.\n
-  /// %http://tizen.org/privilege/mediastorage is needed if input or output path are relevant to media storage.\n
-  /// %http://tizen.org/privilege/externalstorage is needed if input or output path are relevant to external storage.\n
-  /// Finds out image type by reading the header of the image provided in input path.\n
-  /// Since 6.0, this module supports WEBP image format.\n
-  /// Since 6.5, this module supports HEIF image format.\n
-  /// Since 7.0, this module supports JPEG-XL image format.
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @param[in] handle The handle of image util decoding
-  /// @param[in] path The path to input image
+  /// **Remarks:**
+  /// - One of image_util_decode_set_input_path() or image_util_decode_set_input_buffer() should be set.
+  /// - If both are set then the latest input set, is considered.
+  /// - <http://tizen.org/privilege/mediastorage is needed if input or output path are relevant to media storage.>
+  /// - <http://tizen.org/privilege/externalstorage is needed if input or output path are relevant to external storage.>
+  /// - Finds out image type by reading the header of the image provided in input path.
+  /// - Since 6.0, this module supports WEBP image format.
+  /// - Since 6.5, this module supports HEIF image format.
+  /// - Since 7.0, this module supports JPEG-XL image format.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Parameters:**
+  /// - `handle` (in): The handle of image util decoding
+  /// - `path` (in): The path to input image
   ///
-  /// @retval #IMAGE_UTIL_ERROR_NONE Successful
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #IMAGE_UTIL_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function
-  /// @retval #IMAGE_UTIL_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #IMAGE_UTIL_ERROR_NOT_SUPPORTED_FORMAT Not supported format
-  /// @retval #IMAGE_UTIL_ERROR_NO_SUCH_FILE No such file
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @pre image_util_decode_create()
+  /// **Return values:**
+  /// - `IMAGE_UTIL_ERROR_NONE`: Successful
+  /// - `IMAGE_UTIL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IMAGE_UTIL_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `IMAGE_UTIL_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function
+  /// - `IMAGE_UTIL_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `IMAGE_UTIL_ERROR_NOT_SUPPORTED_FORMAT`: Not supported format
+  /// - `IMAGE_UTIL_ERROR_NO_SUCH_FILE`: No such file
   ///
-  /// @post image_util_decode_run2() / image_util_decode_run_async2()
-  /// @post image_util_decode_destroy()
+  /// **Preconditions:**
+  /// - image_util_decode_create()
   ///
-  /// @see image_util_decode_create()
-  /// @see image_util_decode_run2()
-  /// @see image_util_decode_run_async2()
-  /// @see image_util_decode_destroy()
+  /// **Postconditions:**
+  /// - image_util_decode_run2() / image_util_decode_run_async2()
+  /// - image_util_decode_destroy()
+  ///
+  /// **See also:**
+  /// - `image_util_decode_create()`
+  /// - `image_util_decode_run2()`
+  /// - `image_util_decode_run_async2()`
+  /// - `image_util_decode_destroy()`
   int image_util_decode_set_input_path(
     image_util_decode_h handle,
     ffi.Pointer<ffi.Char> path,
@@ -109,38 +128,46 @@ class Tizen80CapiMediaImageUtil {
       _image_util_decode_set_input_pathPtr.asFunction<
           int Function(image_util_decode_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets the input buffer from which to decode.
-  /// @since_tizen 3.0
+  /// Sets the input buffer from which to decode.
   ///
-  /// @remarks One of image_util_decode_set_input_path() or image_util_decode_set_input_buffer() should be set.\n
-  /// If both are set then the latest input set, is considered.\n
-  /// Finds out image type by reading the header of the image provided in input buffer.\n
-  /// Since 6.0, this module supports WEBP image format.\n
-  /// Since 6.5, this module supports HEIF image format.\n
-  /// Since 7.0, this module supports JPEG-XL image format.
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @param[in] handle The handle of image util decoding
-  /// @param[in] src_buffer The input image buffer
-  /// @param[in] src_size The input image buffer size
+  /// **Remarks:**
+  /// - One of image_util_decode_set_input_path() or image_util_decode_set_input_buffer() should be set.
+  /// - If both are set then the latest input set, is considered.
+  /// - Finds out image type by reading the header of the image provided in input buffer.
+  /// - Since 6.0, this module supports WEBP image format.
+  /// - Since 6.5, this module supports HEIF image format.
+  /// - Since 7.0, this module supports JPEG-XL image format.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Parameters:**
+  /// - `handle` (in): The handle of image util decoding
+  /// - `src_buffer` (in): The input image buffer
+  /// - `src_size` (in): The input image buffer size
   ///
-  /// @retval #IMAGE_UTIL_ERROR_NONE Successful
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #IMAGE_UTIL_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #IMAGE_UTIL_ERROR_NOT_SUPPORTED_FORMAT Not supported format
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @pre image_util_decode_create()
+  /// **Return values:**
+  /// - `IMAGE_UTIL_ERROR_NONE`: Successful
+  /// - `IMAGE_UTIL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IMAGE_UTIL_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `IMAGE_UTIL_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `IMAGE_UTIL_ERROR_NOT_SUPPORTED_FORMAT`: Not supported format
   ///
-  /// @post image_util_decode_run2() / image_util_decode_run_async2()
-  /// @post image_util_decode_destroy()
+  /// **Preconditions:**
+  /// - image_util_decode_create()
   ///
-  /// @see image_util_decode_create()
-  /// @see image_util_decode_run2()
-  /// @see image_util_decode_run_async2()
-  /// @see image_util_decode_destroy()
+  /// **Postconditions:**
+  /// - image_util_decode_run2() / image_util_decode_run_async2()
+  /// - image_util_decode_destroy()
+  ///
+  /// **See also:**
+  /// - `image_util_decode_create()`
+  /// - `image_util_decode_run2()`
+  /// - `image_util_decode_run_async2()`
+  /// - `image_util_decode_destroy()`
   int image_util_decode_set_input_buffer(
     image_util_decode_h handle,
     ffi.Pointer<ffi.UnsignedChar> src_buffer,
@@ -162,36 +189,45 @@ class Tizen80CapiMediaImageUtil {
           int Function(
               image_util_decode_h, ffi.Pointer<ffi.UnsignedChar>, int)>();
 
-  /// @deprecated Deprecated since 5.5.
-  /// @brief Sets the output buffer to which the decoded buffer will be written to.
-  /// @since_tizen 3.0
+  /// **Deprecated:** Deprecated since 5.5.
   ///
-  /// @remarks Either image_util_decode_set_input_path() or image_util_decode_set_input_buffer() should be set.\n
-  /// By default the decoded output buffer colorspace will be #IMAGE_UTIL_COLORSPACE_RGBA8888.
-  /// Use image_util_decode_set_colorspace() to change the colorspace.
-  /// @a dst_buffer should be released after @c image_util_decode_run() or @c image_util_decode_run_async().
+  /// Sets the output buffer to which the decoded buffer will be written to.
   ///
-  /// @param[in] handle The handle of image util decoding
-  /// @param[in] dst_buffer The decoded output buffer
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Remarks:**
+  /// - Either image_util_decode_set_input_path() or image_util_decode_set_input_buffer() should be set.
+  /// - By default the decoded output buffer colorspace will be `IMAGE_UTIL_COLORSPACE_RGBA8888`.
+  /// - Use image_util_decode_set_colorspace() to change the colorspace.
+  /// - `dst_buffer` should be released after `image_util_decode_run(`) or `image_util_decode_run_async(`).
   ///
-  /// @retval #IMAGE_UTIL_ERROR_NONE Successful
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_OPERATION Invalid operation
+  /// **Parameters:**
+  /// - `handle` (in): The handle of image util decoding
+  /// - `dst_buffer` (in): The decoded output buffer
   ///
-  /// @pre image_util_decode_create()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @post image_util_decode_run() / image_util_decode_run_async()
-  /// @post image_util_decode_destroy()
+  /// **Return values:**
+  /// - `IMAGE_UTIL_ERROR_NONE`: Successful
+  /// - `IMAGE_UTIL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IMAGE_UTIL_ERROR_INVALID_OPERATION`: Invalid operation
   ///
-  /// @see image_util_decode_create()
-  /// @see image_util_decode_set_input_path()
-  /// @see image_util_decode_set_input_buffer()
-  /// @see image_util_decode_run()
-  /// @see image_util_decode_run_async()
-  /// @see image_util_decode_destroy()
+  /// **Preconditions:**
+  /// - image_util_decode_create()
+  ///
+  /// **Postconditions:**
+  /// - image_util_decode_run() / image_util_decode_run_async()
+  /// - image_util_decode_destroy()
+  ///
+  /// **See also:**
+  /// - `image_util_decode_create()`
+  /// - `image_util_decode_set_input_path()`
+  /// - `image_util_decode_set_input_buffer()`
+  /// - `image_util_decode_run()`
+  /// - `image_util_decode_run_async()`
+  /// - `image_util_decode_destroy()`
   int image_util_decode_set_output_buffer(
     image_util_decode_h handle,
     ffi.Pointer<ffi.Pointer<ffi.UnsignedChar>> dst_buffer,
@@ -212,37 +248,45 @@ class Tizen80CapiMediaImageUtil {
           int Function(image_util_decode_h,
               ffi.Pointer<ffi.Pointer<ffi.UnsignedChar>>)>();
 
-  /// @brief Sets the decoded image colorspace format.
-  /// @since_tizen 3.0
+  /// Sets the decoded image colorspace format.
   ///
-  /// @remarks The default colorspace is #IMAGE_UTIL_COLORSPACE_RGBA8888.\n
-  /// Use image_util_foreach_supported_colorspace to get supported colorspaces for each image format.\n
-  /// Errors would be returned if not supported.
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @param[in] handle The handle of image util decoding
-  /// @param[in] colorspace The decoded image colorspace
+  /// **Remarks:**
+  /// - The default colorspace is `IMAGE_UTIL_COLORSPACE_RGBA8888`.
+  /// - Use image_util_foreach_supported_colorspace to get supported colorspaces for each image format.
+  /// - Errors would be returned if not supported.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Parameters:**
+  /// - `handle` (in): The handle of image util decoding
+  /// - `colorspace` (in): The decoded image colorspace
   ///
-  /// @retval #IMAGE_UTIL_ERROR_NONE Successful
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IMAGE_UTIL_ERROR_NOT_SUPPORTED_FORMAT Not supported format
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @pre image_util_decode_create()
-  /// @pre image_util_decode_set_input_path() / image_util_decode_set_input_buffer()
+  /// **Return values:**
+  /// - `IMAGE_UTIL_ERROR_NONE`: Successful
+  /// - `IMAGE_UTIL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IMAGE_UTIL_ERROR_NOT_SUPPORTED_FORMAT`: Not supported format
   ///
-  /// @post image_util_decode_run2() / image_util_decode_run_async2()
-  /// @post image_util_decode_destroy()
+  /// **Preconditions:**
+  /// - image_util_decode_create()
+  /// - image_util_decode_set_input_path() / image_util_decode_set_input_buffer()
   ///
-  /// @see image_util_supported_colorspace_cb()
-  /// @see image_util_foreach_supported_colorspace()
-  /// @see image_util_decode_create()
-  /// @see image_util_decode_set_input_path()
-  /// @see image_util_decode_set_input_buffer()
-  /// @see image_util_decode_run2()
-  /// @see image_util_decode_run_async2()
-  /// @see image_util_decode_destroy()
+  /// **Postconditions:**
+  /// - image_util_decode_run2() / image_util_decode_run_async2()
+  /// - image_util_decode_destroy()
+  ///
+  /// **See also:**
+  /// - `image_util_supported_colorspace_cb()`
+  /// - `image_util_foreach_supported_colorspace()`
+  /// - `image_util_decode_create()`
+  /// - `image_util_decode_set_input_path()`
+  /// - `image_util_decode_set_input_buffer()`
+  /// - `image_util_decode_run2()`
+  /// - `image_util_decode_run_async2()`
+  /// - `image_util_decode_destroy()`
   int image_util_decode_set_colorspace(
     image_util_decode_h handle,
     int colorspace,
@@ -260,33 +304,41 @@ class Tizen80CapiMediaImageUtil {
       _image_util_decode_set_colorspacePtr
           .asFunction<int Function(image_util_decode_h, int)>();
 
-  /// @brief Sets the downscale value at which JPEG image should be decoded.
-  /// @since_tizen 3.0
+  /// Sets the downscale value at which JPEG image should be decoded.
   ///
-  /// @remarks This is API is supported only for JPEG decoding.
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @param[in] handle The handle of image util decoding
-  /// @param[in] down_scale The downscale at which image is to be decoded
+  /// **Remarks:**
+  /// - This is API is supported only for JPEG decoding.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Parameters:**
+  /// - `handle` (in): The handle of image util decoding
+  /// - `down_scale` (in): The downscale at which image is to be decoded
   ///
-  /// @retval #IMAGE_UTIL_ERROR_NONE Successful
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IMAGE_UTIL_ERROR_NOT_SUPPORTED_FORMAT Not supported format
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @pre image_util_decode_create()
-  /// @pre image_util_decode_set_input_path() / image_util_decode_set_input_buffer()
+  /// **Return values:**
+  /// - `IMAGE_UTIL_ERROR_NONE`: Successful
+  /// - `IMAGE_UTIL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IMAGE_UTIL_ERROR_NOT_SUPPORTED_FORMAT`: Not supported format
   ///
-  /// @post image_util_decode_run2() / image_util_decode_run_async2()
-  /// @post image_util_decode_destroy()
+  /// **Preconditions:**
+  /// - image_util_decode_create()
+  /// - image_util_decode_set_input_path() / image_util_decode_set_input_buffer()
   ///
-  /// @see image_util_decode_create()
-  /// @see image_util_decode_set_input_path()
-  /// @see image_util_decode_set_input_buffer()
-  /// @see image_util_decode_run2()
-  /// @see image_util_decode_run_async2()
-  /// @see image_util_decode_destroy()
+  /// **Postconditions:**
+  /// - image_util_decode_run2() / image_util_decode_run_async2()
+  /// - image_util_decode_destroy()
+  ///
+  /// **See also:**
+  /// - `image_util_decode_create()`
+  /// - `image_util_decode_set_input_path()`
+  /// - `image_util_decode_set_input_buffer()`
+  /// - `image_util_decode_run2()`
+  /// - `image_util_decode_run_async2()`
+  /// - `image_util_decode_destroy()`
   int image_util_decode_set_jpeg_downscale(
     image_util_decode_h handle,
     int down_scale,
@@ -304,37 +356,46 @@ class Tizen80CapiMediaImageUtil {
       _image_util_decode_set_jpeg_downscalePtr
           .asFunction<int Function(image_util_decode_h, int)>();
 
-  /// @deprecated Deprecated since 5.5. Use image_util_decode_run2() instead.
-  /// @brief Starts decoding of the image and fills the output buffer set using image_util_decode_set_output_buffer().
-  /// @since_tizen 3.0
+  /// **Deprecated:** Deprecated since 5.5. Use image_util_decode_run2() instead.
   ///
-  /// @remarks The output will be stored in the pointer set using image_util_decode_set_output_buffer().\n
-  /// The function executes synchronously.\n
-  /// When any of the pre-condition are not called, #IMAGE_UTIL_ERROR_INVALID_PARAMETER is returned.
+  /// Starts decoding of the image and fills the output buffer set using image_util_decode_set_output_buffer().
   ///
-  /// @param[in] handle The handle of image util decoding
-  /// @param[out] width Width of the decoded image
-  /// @param[out] height Height of the decoded image
-  /// @param[out] size Size of the decoded image
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Remarks:**
+  /// - The output will be stored in the pointer set using image_util_decode_set_output_buffer().
+  /// - The function executes synchronously.
+  /// - When any of the pre-condition are not called, `IMAGE_UTIL_ERROR_INVALID_PARAMETER` is returned.
   ///
-  /// @retval #IMAGE_UTIL_ERROR_NONE Successful
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_OPERATION Invalid operation
+  /// **Parameters:**
+  /// - `handle` (in): The handle of image util decoding
+  /// - `width` (out): Width of the decoded image
+  /// - `height` (out): Height of the decoded image
+  /// - `size` (out): Size of the decoded image
   ///
-  /// @pre image_util_decode_create()
-  /// @pre image_util_decode_set_input_buffer() / image_util_decode_set_input_path().
-  /// @pre image_util_decode_set_output_buffer()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @post image_util_decode_destroy()
+  /// **Return values:**
+  /// - `IMAGE_UTIL_ERROR_NONE`: Successful
+  /// - `IMAGE_UTIL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IMAGE_UTIL_ERROR_INVALID_OPERATION`: Invalid operation
   ///
-  /// @see image_util_decode_create()
-  /// @see image_util_decode_set_input_path()
-  /// @see image_util_decode_set_input_buffer()
-  /// @see image_util_decode_set_output_buffer()
-  /// @see image_util_decode_destroy()
+  /// **Preconditions:**
+  /// - image_util_decode_create()
+  /// - image_util_decode_set_input_buffer() / image_util_decode_set_input_path().
+  /// - image_util_decode_set_output_buffer()
+  ///
+  /// **Postconditions:**
+  /// - image_util_decode_destroy()
+  ///
+  /// **See also:**
+  /// - `image_util_decode_create()`
+  /// - `image_util_decode_set_input_path()`
+  /// - `image_util_decode_set_input_buffer()`
+  /// - `image_util_decode_set_output_buffer()`
+  /// - `image_util_decode_destroy()`
   int image_util_decode_run(
     image_util_decode_h handle,
     ffi.Pointer<ffi.UnsignedLong> width,
@@ -360,36 +421,45 @@ class Tizen80CapiMediaImageUtil {
       int Function(image_util_decode_h, ffi.Pointer<ffi.UnsignedLong>,
           ffi.Pointer<ffi.UnsignedLong>, ffi.Pointer<ffi.UnsignedLongLong>)>();
 
-  /// @deprecated Deprecated since 5.5. Use image_util_decode_run_async2() instead.
-  /// @brief Starts decoding of the image and fills the output buffer set using image_util_decode_set_output_buffer().
-  /// @since_tizen 3.0
+  /// **Deprecated:** Deprecated since 5.5. Use image_util_decode_run_async2() instead.
   ///
-  /// @remarks The output will be stored in the pointer set using image_util_decode_set_output_buffer().\n
-  /// The function executes asynchronously, which contains complete callback.\n
-  /// When any of the pre-condition are not called, #IMAGE_UTIL_ERROR_INVALID_PARAMETER is returned.
+  /// Starts decoding of the image and fills the output buffer set using image_util_decode_set_output_buffer().
   ///
-  /// @param[in] handle The handle of image util decoding
-  /// @param[in] callback The callback function to be invoked
-  /// @param[in] user_data The user data to be passed to the callback function
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Remarks:**
+  /// - The output will be stored in the pointer set using image_util_decode_set_output_buffer().
+  /// - The function executes asynchronously, which contains complete callback.
+  /// - When any of the pre-condition are not called, `IMAGE_UTIL_ERROR_INVALID_PARAMETER` is returned.
   ///
-  /// @retval #IMAGE_UTIL_ERROR_NONE Successful
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_OPERATION Invalid operation
+  /// **Parameters:**
+  /// - `handle` (in): The handle of image util decoding
+  /// - `callback` (in): The callback function to be invoked
+  /// - `user_data` (in): The user data to be passed to the callback function
   ///
-  /// @pre image_util_decode_create()
-  /// @pre image_util_decode_set_input_buffer() / image_util_decode_set_input_path().
-  /// @pre image_util_decode_set_output_buffer()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @post image_util_decode_destroy()
+  /// **Return values:**
+  /// - `IMAGE_UTIL_ERROR_NONE`: Successful
+  /// - `IMAGE_UTIL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IMAGE_UTIL_ERROR_INVALID_OPERATION`: Invalid operation
   ///
-  /// @see image_util_decode_create()
-  /// @see image_util_decode_set_input_path()
-  /// @see image_util_decode_set_input_buffer()
-  /// @see image_util_decode_set_output_buffer()
-  /// @see image_util_decode_destroy()
+  /// **Preconditions:**
+  /// - image_util_decode_create()
+  /// - image_util_decode_set_input_buffer() / image_util_decode_set_input_path().
+  /// - image_util_decode_set_output_buffer()
+  ///
+  /// **Postconditions:**
+  /// - image_util_decode_destroy()
+  ///
+  /// **See also:**
+  /// - `image_util_decode_create()`
+  /// - `image_util_decode_set_input_path()`
+  /// - `image_util_decode_set_input_buffer()`
+  /// - `image_util_decode_set_output_buffer()`
+  /// - `image_util_decode_destroy()`
   int image_util_decode_run_async(
     image_util_decode_h handle,
     image_util_decode_completed_cb callback,
@@ -411,36 +481,45 @@ class Tizen80CapiMediaImageUtil {
           int Function(image_util_decode_h, image_util_decode_completed_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Decodes the image with the given decode handle.
-  /// @details This function decodes the image synchronously.
-  /// @since_tizen 5.5
+  /// Decodes the image with the given decode handle.
   ///
-  /// @remarks If the decoding fails, the @a image will be @c NULL.\n
-  /// The @a image should be released using image_util_destroy_image().\n
-  /// If any of the required functions listed in the preconditions section has not been called, #IMAGE_UTIL_ERROR_INVALID_PARAMETER is returned.
+  /// This function decodes the image synchronously.
   ///
-  /// @param[in] handle The handle of image util decoding
-  /// @param[out] image The decoded image
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Remarks:**
+  /// - If the decoding fails, the `image` will be `NULL`.
+  /// - The `image` should be released using image_util_destroy_image().
+  /// - If any of the required functions listed in the preconditions section has not been called, `IMAGE_UTIL_ERROR_INVALID_PARAMETER` is returned.
   ///
-  /// @retval #IMAGE_UTIL_ERROR_NONE Successful
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #IMAGE_UTIL_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #IMAGE_UTIL_ERROR_NOT_SUPPORTED_FORMAT Not supported format
+  /// **Parameters:**
+  /// - `handle` (in): The handle of image util decoding
+  /// - `image` (out): The decoded image
   ///
-  /// @pre image_util_decode_create()
-  /// @pre image_util_decode_set_input_buffer() / image_util_decode_set_input_path().
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @post image_util_decode_destroy()
+  /// **Return values:**
+  /// - `IMAGE_UTIL_ERROR_NONE`: Successful
+  /// - `IMAGE_UTIL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IMAGE_UTIL_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `IMAGE_UTIL_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `IMAGE_UTIL_ERROR_NOT_SUPPORTED_FORMAT`: Not supported format
   ///
-  /// @see image_util_decode_create()
-  /// @see image_util_decode_set_input_path()
-  /// @see image_util_decode_set_input_buffer()
-  /// @see image_util_decode_destroy()
-  /// @see image_util_destroy_image()
+  /// **Preconditions:**
+  /// - image_util_decode_create()
+  /// - image_util_decode_set_input_buffer() / image_util_decode_set_input_path().
+  ///
+  /// **Postconditions:**
+  /// - image_util_decode_destroy()
+  ///
+  /// **See also:**
+  /// - `image_util_decode_create()`
+  /// - `image_util_decode_set_input_path()`
+  /// - `image_util_decode_set_input_buffer()`
+  /// - `image_util_decode_destroy()`
+  /// - `image_util_destroy_image()`
   int image_util_decode_run2(
     image_util_decode_h handle,
     ffi.Pointer<image_util_image_h> image,
@@ -458,37 +537,46 @@ class Tizen80CapiMediaImageUtil {
   late final _image_util_decode_run2 = _image_util_decode_run2Ptr.asFunction<
       int Function(image_util_decode_h, ffi.Pointer<image_util_image_h>)>();
 
-  /// @brief Starts decoding of the image with the given decode handle.
-  /// @details This function decodes the image asynchronously.
-  /// @since_tizen 5.5
+  /// Starts decoding of the image with the given decode handle.
   ///
-  /// @remarks If the decoding fails, the image_util_decode_completed2_cb() will be called with @c NULL image and a non-zero error_code.\n
-  /// If any of the required functions listed in the preconditions section has not been called, #IMAGE_UTIL_ERROR_INVALID_PARAMETER is returned.
+  /// This function decodes the image asynchronously.
   ///
-  /// @param[in] handle The handle of image util decoding
-  /// @param[in] callback The callback function to be invoked
-  /// @param[in] user_data The user data to be passed to the callback function
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Remarks:**
+  /// - If the decoding fails, the image_util_decode_completed2_cb() will be called with `NULL` image and a non-zero error_code.
+  /// - If any of the required functions listed in the preconditions section has not been called, `IMAGE_UTIL_ERROR_INVALID_PARAMETER` is returned.
   ///
-  /// @retval #IMAGE_UTIL_ERROR_NONE Successful
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #IMAGE_UTIL_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #IMAGE_UTIL_ERROR_NOT_SUPPORTED_FORMAT Not supported format
+  /// **Parameters:**
+  /// - `handle` (in): The handle of image util decoding
+  /// - `callback` (in): The callback function to be invoked
+  /// - `user_data` (in): The user data to be passed to the callback function
   ///
-  /// @pre image_util_decode_create()
-  /// @pre image_util_decode_set_input_buffer() / image_util_decode_set_input_path().
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @post image_util_decode_destroy()
+  /// **Return values:**
+  /// - `IMAGE_UTIL_ERROR_NONE`: Successful
+  /// - `IMAGE_UTIL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IMAGE_UTIL_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `IMAGE_UTIL_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `IMAGE_UTIL_ERROR_NOT_SUPPORTED_FORMAT`: Not supported format
   ///
-  /// @see image_util_decode_create()
-  /// @see image_util_decode_set_input_path()
-  /// @see image_util_decode_set_input_buffer()
-  /// @see image_util_decode_destroy()
-  /// @see image_util_destroy_image()
-  /// @see image_util_decode_completed2_cb()
+  /// **Preconditions:**
+  /// - image_util_decode_create()
+  /// - image_util_decode_set_input_buffer() / image_util_decode_set_input_path().
+  ///
+  /// **Postconditions:**
+  /// - image_util_decode_destroy()
+  ///
+  /// **See also:**
+  /// - `image_util_decode_create()`
+  /// - `image_util_decode_set_input_path()`
+  /// - `image_util_decode_set_input_buffer()`
+  /// - `image_util_decode_destroy()`
+  /// - `image_util_destroy_image()`
+  /// - `image_util_decode_completed2_cb()`
   int image_util_decode_run_async2(
     image_util_decode_h handle,
     image_util_decode_completed2_cb callback,
@@ -510,23 +598,30 @@ class Tizen80CapiMediaImageUtil {
           int Function(image_util_decode_h, image_util_decode_completed2_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Destroys the image decoding handle.
-  /// @since_tizen 3.0
+  /// Destroys the image decoding handle.
   ///
-  /// @remarks Any image handle created should be destroyed.
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @param[in] handle The handle of image util decoding
+  /// **Remarks:**
+  /// - Any image handle created should be destroyed.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Parameters:**
+  /// - `handle` (in): The handle of image util decoding
   ///
-  /// @retval #IMAGE_UTIL_ERROR_NONE Successful
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_OPERATION Invalid operation
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @pre image_util_decode_create()
+  /// **Return values:**
+  /// - `IMAGE_UTIL_ERROR_NONE`: Successful
+  /// - `IMAGE_UTIL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IMAGE_UTIL_ERROR_INVALID_OPERATION`: Invalid operation
   ///
-  /// @see image_util_decode_create()
+  /// **Preconditions:**
+  /// - image_util_decode_create()
+  ///
+  /// **See also:**
+  /// - `image_util_decode_create()`
   int image_util_decode_destroy(
     image_util_decode_h handle,
   ) {
@@ -541,33 +636,41 @@ class Tizen80CapiMediaImageUtil {
   late final _image_util_decode_destroy = _image_util_decode_destroyPtr
       .asFunction<int Function(image_util_decode_h)>();
 
-  /// @brief Creates a handle of image util encoding.
-  /// @details This function creates a handle of image util encoding.
-  /// @since_tizen 3.0
+  /// Creates a handle of image util encoding.
   ///
-  /// @remarks The @a handle should be released using image_util_encode_destroy().
+  /// This function creates a handle of image util encoding.
   ///
-  /// @param[in] image_type The type of output image for which to create encode handle.
-  /// @param[out] handle The handle of image util encoding
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Remarks:**
+  /// - The `handle` should be released using image_util_encode_destroy().
   ///
-  /// @retval #IMAGE_UTIL_ERROR_NONE Successful
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IMAGE_UTIL_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Parameters:**
+  /// - `image_type` (in): The type of output image for which to create encode handle.
+  /// - `handle` (out): The handle of image util encoding
   ///
-  /// @post image_util_encode_run_to_file()
-  /// @post image_util_encode_run_to_buffer()
-  /// @post image_util_encode_run_async_to_file()
-  /// @post image_util_encode_run_async_to_buffer()
-  /// @post image_util_encode_destroy()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @see image_util_encode_run_to_file()
-  /// @see image_util_encode_run_to_buffer()
-  /// @see image_util_encode_run_async_to_file()
-  /// @see image_util_encode_run_async_to_buffer()
-  /// @see image_util_encode_destroy()
+  /// **Return values:**
+  /// - `IMAGE_UTIL_ERROR_NONE`: Successful
+  /// - `IMAGE_UTIL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IMAGE_UTIL_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Postconditions:**
+  /// - image_util_encode_run_to_file()
+  /// - image_util_encode_run_to_buffer()
+  /// - image_util_encode_run_async_to_file()
+  /// - image_util_encode_run_async_to_buffer()
+  /// - image_util_encode_destroy()
+  ///
+  /// **See also:**
+  /// - `image_util_encode_run_to_file()`
+  /// - `image_util_encode_run_to_buffer()`
+  /// - `image_util_encode_run_async_to_file()`
+  /// - `image_util_encode_run_async_to_buffer()`
+  /// - `image_util_encode_destroy()`
   int image_util_encode_create(
     int image_type,
     ffi.Pointer<image_util_encode_h> handle,
@@ -585,36 +688,45 @@ class Tizen80CapiMediaImageUtil {
   late final _image_util_encode_create = _image_util_encode_createPtr
       .asFunction<int Function(int, ffi.Pointer<image_util_encode_h>)>();
 
-  /// @deprecated Deprecated since 5.5. Use image_util_create_image() instead.
-  /// @brief Sets the resolution of the encoded image.
-  /// @since_tizen 3.0
+  /// **Deprecated:** Deprecated since 5.5. Use image_util_create_image() instead.
   ///
-  /// @remarks This should be called before calling image_util_encode_run().\n
-  /// While encoding animated GIF image, resolution should be set for each frame.
+  /// Sets the resolution of the encoded image.
   ///
-  /// @param[in] handle The handle of image util encoding
-  /// @param[in] width Width of the original image
-  /// @param[in] height Height of the original image
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Remarks:**
+  /// - This should be called before calling image_util_encode_run().
+  /// - While encoding animated GIF image, resolution should be set for each frame.
   ///
-  /// @retval #IMAGE_UTIL_ERROR_NONE Successful
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_OPERATION Invalid operation
+  /// **Parameters:**
+  /// - `handle` (in): The handle of image util encoding
+  /// - `width` (in): Width of the original image
+  /// - `height` (in): Height of the original image
   ///
-  /// @pre image_util_encode_create()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @post image_util_encode_run() / image_util_encode_run_async()
-  /// @post image_util_encode_destroy()
+  /// **Return values:**
+  /// - `IMAGE_UTIL_ERROR_NONE`: Successful
+  /// - `IMAGE_UTIL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IMAGE_UTIL_ERROR_INVALID_OPERATION`: Invalid operation
   ///
-  /// @see image_util_encode_create()
-  /// @see image_util_encode_set_input_buffer()
-  /// @see image_util_encode_set_output_path()
-  /// @see image_util_encode_set_output_buffer()
-  /// @see image_util_encode_run()
-  /// @see image_util_encode_run_async()
-  /// @see image_util_encode_destroy()
+  /// **Preconditions:**
+  /// - image_util_encode_create()
+  ///
+  /// **Postconditions:**
+  /// - image_util_encode_run() / image_util_encode_run_async()
+  /// - image_util_encode_destroy()
+  ///
+  /// **See also:**
+  /// - `image_util_encode_create()`
+  /// - `image_util_encode_set_input_buffer()`
+  /// - `image_util_encode_set_output_path()`
+  /// - `image_util_encode_set_output_buffer()`
+  /// - `image_util_encode_run()`
+  /// - `image_util_encode_run_async()`
+  /// - `image_util_encode_destroy()`
   int image_util_encode_set_resolution(
     image_util_encode_h handle,
     int width,
@@ -635,39 +747,48 @@ class Tizen80CapiMediaImageUtil {
       _image_util_encode_set_resolutionPtr
           .asFunction<int Function(image_util_encode_h, int, int)>();
 
-  /// @deprecated Deprecated since 5.5. Use image_util_create_image() instead.
-  /// @brief Sets the colorspace format for image encoding.
-  /// @since_tizen 3.0
+  /// **Deprecated:** Deprecated since 5.5. Use image_util_create_image() instead.
   ///
-  /// @remarks The default colorspace is #IMAGE_UTIL_COLORSPACE_RGBA8888.\n
-  /// Use image_util_foreach_supported_colorspace() to get supported colorspaces for each image format.\n
-  /// Errors would be returned if not supported.
+  /// Sets the colorspace format for image encoding.
   ///
-  /// @param[in] handle The handle of image util encoding
-  /// @param[in] colorspace The colorspace of the input image to encode
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Remarks:**
+  /// - The default colorspace is `IMAGE_UTIL_COLORSPACE_RGBA8888`.
+  /// - Use image_util_foreach_supported_colorspace() to get supported colorspaces for each image format.
+  /// - Errors would be returned if not supported.
   ///
-  /// @retval #IMAGE_UTIL_ERROR_NONE Successful
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IMAGE_UTIL_ERROR_NOT_SUPPORTED_FORMAT Not supported format
+  /// **Parameters:**
+  /// - `handle` (in): The handle of image util encoding
+  /// - `colorspace` (in): The colorspace of the input image to encode
   ///
-  /// @pre image_util_encode_create()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @post image_util_encode_run() / image_util_encode_run_async()
-  /// @post image_util_encode_destroy()
+  /// **Return values:**
+  /// - `IMAGE_UTIL_ERROR_NONE`: Successful
+  /// - `IMAGE_UTIL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IMAGE_UTIL_ERROR_NOT_SUPPORTED_FORMAT`: Not supported format
   ///
-  /// @see image_util_supported_colorspace_cb()
-  /// @see image_util_foreach_supported_colorspace()
-  /// @see image_util_encode_create()
-  /// @see image_util_encode_set_resolution()
-  /// @see image_util_encode_set_input_buffer()
-  /// @see image_util_encode_set_output_path()
-  /// @see image_util_encode_set_output_buffer()
-  /// @see image_util_encode_run()
-  /// @see image_util_encode_run_async()
-  /// @see image_util_encode_destroy()
+  /// **Preconditions:**
+  /// - image_util_encode_create()
+  ///
+  /// **Postconditions:**
+  /// - image_util_encode_run() / image_util_encode_run_async()
+  /// - image_util_encode_destroy()
+  ///
+  /// **See also:**
+  /// - `image_util_supported_colorspace_cb()`
+  /// - `image_util_foreach_supported_colorspace()`
+  /// - `image_util_encode_create()`
+  /// - `image_util_encode_set_resolution()`
+  /// - `image_util_encode_set_input_buffer()`
+  /// - `image_util_encode_set_output_path()`
+  /// - `image_util_encode_set_output_buffer()`
+  /// - `image_util_encode_run()`
+  /// - `image_util_encode_run_async()`
+  /// - `image_util_encode_destroy()`
   int image_util_encode_set_colorspace(
     image_util_encode_h handle,
     int colorspace,
@@ -685,33 +806,41 @@ class Tizen80CapiMediaImageUtil {
       _image_util_encode_set_colorspacePtr
           .asFunction<int Function(image_util_encode_h, int)>();
 
-  /// @brief Sets the quality for image encoding.
-  /// @since_tizen 3.0
+  /// Sets the quality for image encoding.
   ///
-  /// @remarks If application does not set this, then by default quality of 75 is set.\n
-  /// Quality is supported for JPEG format. #IMAGE_UTIL_ERROR_NOT_SUPPORTED_FORMAT will be returned for other formats.
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @param[in] handle The handle of image util encoding
-  /// @param[in] quality Encoding quality from 1~100
+  /// **Remarks:**
+  /// - If application does not set this, then by default quality of 75 is set.
+  /// - Quality is supported for JPEG format. `IMAGE_UTIL_ERROR_NOT_SUPPORTED_FORMAT` will be returned for other formats.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Parameters:**
+  /// - `handle` (in): The handle of image util encoding
+  /// - `quality` (in): Encoding quality from 1~100
   ///
-  /// @retval #IMAGE_UTIL_ERROR_NONE Successful
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IMAGE_UTIL_ERROR_NOT_SUPPORTED_FORMAT Not supported format
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @pre image_util_encode_create()
+  /// **Return values:**
+  /// - `IMAGE_UTIL_ERROR_NONE`: Successful
+  /// - `IMAGE_UTIL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IMAGE_UTIL_ERROR_NOT_SUPPORTED_FORMAT`: Not supported format
   ///
-  /// @post image_util_encode_run() / image_util_encode_run_async()
-  /// @post image_util_encode_destroy()
+  /// **Preconditions:**
+  /// - image_util_encode_create()
   ///
-  /// @see image_util_encode_create()
-  /// @see image_util_encode_run_to_file()
-  /// @see image_util_encode_run_to_buffer()
-  /// @see image_util_encode_run_async_to_file()
-  /// @see image_util_encode_run_async_to_buffer()
-  /// @see image_util_encode_destroy()
+  /// **Postconditions:**
+  /// - image_util_encode_run() / image_util_encode_run_async()
+  /// - image_util_encode_destroy()
+  ///
+  /// **See also:**
+  /// - `image_util_encode_create()`
+  /// - `image_util_encode_run_to_file()`
+  /// - `image_util_encode_run_to_buffer()`
+  /// - `image_util_encode_run_async_to_file()`
+  /// - `image_util_encode_run_async_to_buffer()`
+  /// - `image_util_encode_destroy()`
   int image_util_encode_set_quality(
     image_util_encode_h handle,
     int quality,
@@ -728,33 +857,41 @@ class Tizen80CapiMediaImageUtil {
   late final _image_util_encode_set_quality = _image_util_encode_set_qualityPtr
       .asFunction<int Function(image_util_encode_h, int)>();
 
-  /// @brief Sets the compression value of PNG image encoding(0~9).
-  /// @since_tizen 3.0
+  /// Sets the compression value of PNG image encoding(0~9).
   ///
-  /// @remarks If application does not set this, then the default value is #IMAGE_UTIL_PNG_COMPRESSION_6.
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @param[in] handle The handle of image util encoding
-  /// @param[in] compression The compression value valid from 0~9
+  /// **Remarks:**
+  /// - If application does not set this, then the default value is `IMAGE_UTIL_PNG_COMPRESSION_6`.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Parameters:**
+  /// - `handle` (in): The handle of image util encoding
+  /// - `compression` (in): The compression value valid from 0~9
   ///
-  /// @retval #IMAGE_UTIL_ERROR_NONE Successful
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #IMAGE_UTIL_ERROR_NOT_SUPPORTED_FORMAT Not supported format
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @pre image_util_encode_create()
+  /// **Return values:**
+  /// - `IMAGE_UTIL_ERROR_NONE`: Successful
+  /// - `IMAGE_UTIL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IMAGE_UTIL_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `IMAGE_UTIL_ERROR_NOT_SUPPORTED_FORMAT`: Not supported format
   ///
-  /// @post image_util_encode_run() / image_util_encode_run_async()
-  /// @post image_util_encode_destroy()
+  /// **Preconditions:**
+  /// - image_util_encode_create()
   ///
-  /// @see image_util_encode_create()
-  /// @see image_util_encode_run_to_file()
-  /// @see image_util_encode_run_to_buffer()
-  /// @see image_util_encode_run_async_to_file()
-  /// @see image_util_encode_run_async_to_buffer()
-  /// @see image_util_encode_destroy()
+  /// **Postconditions:**
+  /// - image_util_encode_run() / image_util_encode_run_async()
+  /// - image_util_encode_destroy()
+  ///
+  /// **See also:**
+  /// - `image_util_encode_create()`
+  /// - `image_util_encode_run_to_file()`
+  /// - `image_util_encode_run_to_buffer()`
+  /// - `image_util_encode_run_async_to_file()`
+  /// - `image_util_encode_run_async_to_buffer()`
+  /// - `image_util_encode_destroy()`
   int image_util_encode_set_png_compression(
     image_util_encode_h handle,
     int compression,
@@ -772,34 +909,43 @@ class Tizen80CapiMediaImageUtil {
       _image_util_encode_set_png_compressionPtr
           .asFunction<int Function(image_util_encode_h, int)>();
 
-  /// @deprecated Deprecated since 7.0. Use image_util_encode_set_lossless() instead.
-  /// @brief Sets lossless compression of WEBP images.
-  /// @since_tizen 6.0
+  /// **Deprecated:** Deprecated since 7.0. Use image_util_encode_set_lossless() instead.
   ///
-  /// @remarks If application does not set this, then the default value is @c false.
+  /// Sets lossless compression of WEBP images.
   ///
-  /// @param[in] handle The handle of image util encoding
-  /// @param[in] lossless The flag determining whether the compression is lossless or lossy: @c true for lossless, @c false for lossy
+  /// **Since Tizen:**
+  /// - 6.0
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Remarks:**
+  /// - If application does not set this, then the default value is `false`.
   ///
-  /// @retval #IMAGE_UTIL_ERROR_NONE Successful
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #IMAGE_UTIL_ERROR_NOT_SUPPORTED_FORMAT Not supported format
+  /// **Parameters:**
+  /// - `handle` (in): The handle of image util encoding
+  /// - `lossless` (in): The flag determining whether the compression is lossless or lossy: `true` for lossless, `false` for lossy
   ///
-  /// @pre image_util_encode_create()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @post image_util_encode_run() / image_util_encode_run_async()
-  /// @post image_util_encode_destroy()
+  /// **Return values:**
+  /// - `IMAGE_UTIL_ERROR_NONE`: Successful
+  /// - `IMAGE_UTIL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IMAGE_UTIL_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `IMAGE_UTIL_ERROR_NOT_SUPPORTED_FORMAT`: Not supported format
   ///
-  /// @see image_util_encode_create()
-  /// @see image_util_encode_run_to_file()
-  /// @see image_util_encode_run_to_buffer()
-  /// @see image_util_encode_run_async_to_file()
-  /// @see image_util_encode_run_async_to_buffer()
-  /// @see image_util_encode_destroy()
+  /// **Preconditions:**
+  /// - image_util_encode_create()
+  ///
+  /// **Postconditions:**
+  /// - image_util_encode_run() / image_util_encode_run_async()
+  /// - image_util_encode_destroy()
+  ///
+  /// **See also:**
+  /// - `image_util_encode_create()`
+  /// - `image_util_encode_run_to_file()`
+  /// - `image_util_encode_run_to_buffer()`
+  /// - `image_util_encode_run_async_to_file()`
+  /// - `image_util_encode_run_async_to_buffer()`
+  /// - `image_util_encode_destroy()`
   int image_util_encode_set_webp_lossless(
     image_util_encode_h handle,
     bool lossless,
@@ -817,33 +963,41 @@ class Tizen80CapiMediaImageUtil {
       _image_util_encode_set_webp_losslessPtr
           .asFunction<int Function(image_util_encode_h, bool)>();
 
-  /// @brief Sets lossless compression of WEBP and JPEG-XL images.
-  /// @since_tizen 7.0
+  /// Sets lossless compression of WEBP and JPEG-XL images.
   ///
-  /// @remarks If application does not set this, then the default value is @c false.
+  /// **Since Tizen:**
+  /// - 7.0
   ///
-  /// @param[in] handle The handle of image util encoding
-  /// @param[in] lossless The flag determining whether the compression is lossless or lossy: @c true for lossless, @c false for lossy
+  /// **Remarks:**
+  /// - If application does not set this, then the default value is `false`.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Parameters:**
+  /// - `handle` (in): The handle of image util encoding
+  /// - `lossless` (in): The flag determining whether the compression is lossless or lossy: `true` for lossless, `false` for lossy
   ///
-  /// @retval #IMAGE_UTIL_ERROR_NONE Successful
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #IMAGE_UTIL_ERROR_NOT_SUPPORTED_FORMAT Not supported format
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @pre image_util_encode_create()
+  /// **Return values:**
+  /// - `IMAGE_UTIL_ERROR_NONE`: Successful
+  /// - `IMAGE_UTIL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IMAGE_UTIL_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `IMAGE_UTIL_ERROR_NOT_SUPPORTED_FORMAT`: Not supported format
   ///
-  /// @post image_util_encode_run() / image_util_encode_run_async()
-  /// @post image_util_encode_destroy()
+  /// **Preconditions:**
+  /// - image_util_encode_create()
   ///
-  /// @see image_util_encode_create()
-  /// @see image_util_encode_run_to_file()
-  /// @see image_util_encode_run_to_buffer()
-  /// @see image_util_encode_run_async_to_file()
-  /// @see image_util_encode_run_async_to_buffer()
-  /// @see image_util_encode_destroy()
+  /// **Postconditions:**
+  /// - image_util_encode_run() / image_util_encode_run_async()
+  /// - image_util_encode_destroy()
+  ///
+  /// **See also:**
+  /// - `image_util_encode_create()`
+  /// - `image_util_encode_run_to_file()`
+  /// - `image_util_encode_run_to_buffer()`
+  /// - `image_util_encode_run_async_to_file()`
+  /// - `image_util_encode_run_async_to_buffer()`
+  /// - `image_util_encode_destroy()`
   int image_util_encode_set_lossless(
     image_util_encode_h handle,
     bool lossless,
@@ -861,37 +1015,46 @@ class Tizen80CapiMediaImageUtil {
       _image_util_encode_set_losslessPtr
           .asFunction<int Function(image_util_encode_h, bool)>();
 
-  /// @deprecated Deprecated since 5.5. Use image_util_agif_encode_add_frame() instead.
-  /// @brief Sets the time delay between each frame in the encoded animated GIF image.
-  /// @since_tizen 3.0
+  /// **Deprecated:** Deprecated since 5.5. Use image_util_agif_encode_add_frame() instead.
   ///
-  /// @remarks In case animated GIF image if this is not set then there will be no delay between each frame.\n
-  /// This should be set for each frame in the animated GIF image.\n
-  /// This can be set a different value for each frame, which results in different delay time between different frames.
+  /// Sets the time delay between each frame in the encoded animated GIF image.
   ///
-  /// @param[in] handle The handle of image util encoding
-  /// @param[in] delay_time Time delay between each frame in the encoded image, in 0.01sec units.
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Remarks:**
+  /// - In case animated GIF image if this is not set then there will be no delay between each frame.
+  /// - This should be set for each frame in the animated GIF image.
+  /// - This can be set a different value for each frame, which results in different delay time between different frames.
   ///
-  /// @retval #IMAGE_UTIL_ERROR_NONE Successful
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IMAGE_UTIL_ERROR_NOT_SUPPORTED_FORMAT Not supported format
+  /// **Parameters:**
+  /// - `handle` (in): The handle of image util encoding
+  /// - `delay_time` (in): Time delay between each frame in the encoded image, in 0.01sec units.
   ///
-  /// @pre image_util_encode_create()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @post image_util_encode_run() / image_util_encode_run_async()
-  /// @post image_util_encode_destroy()
+  /// **Return values:**
+  /// - `IMAGE_UTIL_ERROR_NONE`: Successful
+  /// - `IMAGE_UTIL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IMAGE_UTIL_ERROR_NOT_SUPPORTED_FORMAT`: Not supported format
   ///
-  /// @see image_util_encode_create()
-  /// @see image_util_encode_set_resolution()
-  /// @see image_util_encode_set_input_buffer()
-  /// @see image_util_encode_set_output_path()
-  /// @see image_util_encode_set_output_buffer()
-  /// @see image_util_encode_run()
-  /// @see image_util_encode_run_async()
-  /// @see image_util_encode_destroy()
+  /// **Preconditions:**
+  /// - image_util_encode_create()
+  ///
+  /// **Postconditions:**
+  /// - image_util_encode_run() / image_util_encode_run_async()
+  /// - image_util_encode_destroy()
+  ///
+  /// **See also:**
+  /// - `image_util_encode_create()`
+  /// - `image_util_encode_set_resolution()`
+  /// - `image_util_encode_set_input_buffer()`
+  /// - `image_util_encode_set_output_path()`
+  /// - `image_util_encode_set_output_buffer()`
+  /// - `image_util_encode_run()`
+  /// - `image_util_encode_run_async()`
+  /// - `image_util_encode_destroy()`
   int image_util_encode_set_gif_frame_delay_time(
     image_util_encode_h handle,
     int delay_time,
@@ -910,37 +1073,46 @@ class Tizen80CapiMediaImageUtil {
       _image_util_encode_set_gif_frame_delay_timePtr
           .asFunction<int Function(image_util_encode_h, int)>();
 
-  /// @deprecated Deprecated since 5.5. Use image_util_create_image() instead.
-  /// @brief Sets the input buffer from which to encode.
-  /// @since_tizen 3.0
+  /// **Deprecated:** Deprecated since 5.5. Use image_util_create_image() instead.
   ///
-  /// @remarks Either image_util_encode_set_output_path() or image_util_encode_set_output_buffer() should be set.\n
-  /// By default the input buffer colorspace will be considered as #IMAGE_UTIL_COLORSPACE_RGBA8888.\n
-  /// Use image_util_encode_set_colorspace() to change the colorspace.\n
-  /// While encoding animated GIF image, input buffer should be set for each frame.
+  /// Sets the input buffer from which to encode.
   ///
-  /// @param[in] handle The handle of image util decoding
-  /// @param[in] src_buffer The input image buffer
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Remarks:**
+  /// - Either image_util_encode_set_output_path() or image_util_encode_set_output_buffer() should be set.
+  /// - By default the input buffer colorspace will be considered as `IMAGE_UTIL_COLORSPACE_RGBA8888`.
+  /// - Use image_util_encode_set_colorspace() to change the colorspace.
+  /// - While encoding animated GIF image, input buffer should be set for each frame.
   ///
-  /// @retval #IMAGE_UTIL_ERROR_NONE Successful
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_OPERATION Invalid operation
+  /// **Parameters:**
+  /// - `handle` (in): The handle of image util decoding
+  /// - `src_buffer` (in): The input image buffer
   ///
-  /// @pre image_util_encode_create()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @post image_util_encode_run() / image_util_encode_run_async()
-  /// @post image_util_encode_destroy()
+  /// **Return values:**
+  /// - `IMAGE_UTIL_ERROR_NONE`: Successful
+  /// - `IMAGE_UTIL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IMAGE_UTIL_ERROR_INVALID_OPERATION`: Invalid operation
   ///
-  /// @see image_util_encode_create()
-  /// @see image_util_encode_set_resolution()
-  /// @see image_util_encode_set_output_path()
-  /// @see image_util_encode_set_output_buffer()
-  /// @see image_util_encode_run()
-  /// @see image_util_encode_run_async()
-  /// @see image_util_encode_destroy()
+  /// **Preconditions:**
+  /// - image_util_encode_create()
+  ///
+  /// **Postconditions:**
+  /// - image_util_encode_run() / image_util_encode_run_async()
+  /// - image_util_encode_destroy()
+  ///
+  /// **See also:**
+  /// - `image_util_encode_create()`
+  /// - `image_util_encode_set_resolution()`
+  /// - `image_util_encode_set_output_path()`
+  /// - `image_util_encode_set_output_buffer()`
+  /// - `image_util_encode_run()`
+  /// - `image_util_encode_run_async()`
+  /// - `image_util_encode_destroy()`
   int image_util_encode_set_input_buffer(
     image_util_encode_h handle,
     ffi.Pointer<ffi.UnsignedChar> src_buffer,
@@ -960,38 +1132,47 @@ class Tizen80CapiMediaImageUtil {
       _image_util_encode_set_input_bufferPtr.asFunction<
           int Function(image_util_encode_h, ffi.Pointer<ffi.UnsignedChar>)>();
 
-  /// @deprecated Deprecated since 5.5. Use image_util_encode_run_to_file() or image_util_encode_run_async_to_file() instead.
-  /// @brief Sets the output path to which to encoded buffer will be written to.
-  /// @since_tizen 3.0
+  /// **Deprecated:** Deprecated since 5.5. Use image_util_encode_run_to_file() or image_util_encode_run_async_to_file() instead.
   ///
-  /// @remarks One of image_util_encode_set_output_path() or image_util_encode_set_output_buffer() should be set.\n
-  /// If both are set then the latest output set is considered.\n
-  /// %http://tizen.org/privilege/mediastorage is needed if input or output path are relevant to media storage.\n
-  /// %http://tizen.org/privilege/externalstorage is needed if input or output path are relevant to external storage.
+  /// Sets the output path to which to encoded buffer will be written to.
   ///
-  /// @param[in] handle The handle of image util encoding
-  /// @param[in] path The output file path
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Remarks:**
+  /// - One of image_util_encode_set_output_path() or image_util_encode_set_output_buffer() should be set.
+  /// - If both are set then the latest output set is considered.
+  /// - <http://tizen.org/privilege/mediastorage is needed if input or output path are relevant to media storage.>
+  /// - <http://tizen.org/privilege/externalstorage is needed if input or output path are relevant to external storage.>
   ///
-  /// @retval #IMAGE_UTIL_ERROR_NONE Successful
-  /// @retval #IMAGE_UTIL_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #IMAGE_UTIL_ERROR_NO_SUCH_FILE No such file
+  /// **Parameters:**
+  /// - `handle` (in): The handle of image util encoding
+  /// - `path` (in): The output file path
   ///
-  /// @pre image_util_encode_create()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @post image_util_encode_run() / image_util_encode_run_async()
-  /// @post image_util_encode_destroy()
+  /// **Return values:**
+  /// - `IMAGE_UTIL_ERROR_NONE`: Successful
+  /// - `IMAGE_UTIL_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function
+  /// - `IMAGE_UTIL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IMAGE_UTIL_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `IMAGE_UTIL_ERROR_NO_SUCH_FILE`: No such file
   ///
-  /// @see image_util_encode_create()
-  /// @see image_util_encode_set_resolution()
-  /// @see image_util_encode_set_input_buffer()
-  /// @see image_util_encode_run()
-  /// @see image_util_encode_run_async()
-  /// @see image_util_encode_destroy()
+  /// **Preconditions:**
+  /// - image_util_encode_create()
+  ///
+  /// **Postconditions:**
+  /// - image_util_encode_run() / image_util_encode_run_async()
+  /// - image_util_encode_destroy()
+  ///
+  /// **See also:**
+  /// - `image_util_encode_create()`
+  /// - `image_util_encode_set_resolution()`
+  /// - `image_util_encode_set_input_buffer()`
+  /// - `image_util_encode_run()`
+  /// - `image_util_encode_run_async()`
+  /// - `image_util_encode_destroy()`
   int image_util_encode_set_output_path(
     image_util_encode_h handle,
     ffi.Pointer<ffi.Char> path,
@@ -1010,39 +1191,48 @@ class Tizen80CapiMediaImageUtil {
       _image_util_encode_set_output_pathPtr.asFunction<
           int Function(image_util_encode_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @deprecated Deprecated since 5.5. Use image_util_encode_run_to_buffer() or image_util_encode_run_async_to_buffer() instead.
-  /// @brief Sets the output buffer to which to encoded buffer will be written to.
-  /// @since_tizen 3.0
+  /// **Deprecated:** Deprecated since 5.5. Use image_util_encode_run_to_buffer() or image_util_encode_run_async_to_buffer() instead.
   ///
-  /// @remarks One of image_util_encode_set_output_path() or image_util_encode_set_output_buffer() should be set.\n
-  /// If both are set then the latest output set is considered.\n
-  /// Before 4.0, output buffer setting is not supported for BMP. #IMAGE_UTIL_ERROR_NOT_SUPPORTED_FORMAT will be returned for BMP.\n
-  /// Since 4.0, output buffer setting has been supported for BMP. Applications can set the output buffer to write encoded BMP.\n
-  /// In case of GIF encoding, the output buffer will be completely available only after image_util_encode_destroy().
-  /// @a dst_buffer should be released after @c image_util_encode_run() or @c image_util_encode_run_async().
+  /// Sets the output buffer to which to encoded buffer will be written to.
   ///
-  /// @param[in] handle The handle of image util encoding
-  /// @param[in] dst_buffer The output image buffer
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Remarks:**
+  /// - One of image_util_encode_set_output_path() or image_util_encode_set_output_buffer() should be set.
+  /// - If both are set then the latest output set is considered.
+  /// - Before 4.0, output buffer setting is not supported for BMP. `IMAGE_UTIL_ERROR_NOT_SUPPORTED_FORMAT` will be returned for BMP.
+  /// - Since 4.0, output buffer setting has been supported for BMP. Applications can set the output buffer to write encoded BMP.
+  /// - In case of GIF encoding, the output buffer will be completely available only after image_util_encode_destroy().
+  /// - `dst_buffer` should be released after `image_util_encode_run(`) or `image_util_encode_run_async(`).
   ///
-  /// @retval #IMAGE_UTIL_ERROR_NONE Successful
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #IMAGE_UTIL_ERROR_NOT_SUPPORTED_FORMAT Not supported format
+  /// **Parameters:**
+  /// - `handle` (in): The handle of image util encoding
+  /// - `dst_buffer` (in): The output image buffer
   ///
-  /// @pre image_util_encode_create()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @post image_util_encode_run() / image_util_encode_run_async()
-  /// @post image_util_encode_destroy()
+  /// **Return values:**
+  /// - `IMAGE_UTIL_ERROR_NONE`: Successful
+  /// - `IMAGE_UTIL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IMAGE_UTIL_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `IMAGE_UTIL_ERROR_NOT_SUPPORTED_FORMAT`: Not supported format
   ///
-  /// @see image_util_encode_create()
-  /// @see image_util_encode_set_resolution()
-  /// @see image_util_encode_set_input_buffer()
-  /// @see image_util_encode_run()
-  /// @see image_util_encode_run_async()
-  /// @see image_util_encode_destroy()
+  /// **Preconditions:**
+  /// - image_util_encode_create()
+  ///
+  /// **Postconditions:**
+  /// - image_util_encode_run() / image_util_encode_run_async()
+  /// - image_util_encode_destroy()
+  ///
+  /// **See also:**
+  /// - `image_util_encode_create()`
+  /// - `image_util_encode_set_resolution()`
+  /// - `image_util_encode_set_input_buffer()`
+  /// - `image_util_encode_run()`
+  /// - `image_util_encode_run_async()`
+  /// - `image_util_encode_destroy()`
   int image_util_encode_set_output_buffer(
     image_util_encode_h handle,
     ffi.Pointer<ffi.Pointer<ffi.UnsignedChar>> dst_buffer,
@@ -1063,41 +1253,50 @@ class Tizen80CapiMediaImageUtil {
           int Function(image_util_encode_h,
               ffi.Pointer<ffi.Pointer<ffi.UnsignedChar>>)>();
 
-  /// @deprecated Deprecated since 5.5. Use image_util_encode_run_to_file() or image_util_encode_run_to_buffer() instead.
-  /// @brief Starts encoding of the image and fills the output buffer, set using image_util_encode_set_output_buffer() or image_util_encode_set_output_path().
-  /// @since_tizen 3.0
+  /// **Deprecated:** Deprecated since 5.5. Use image_util_encode_run_to_file() or image_util_encode_run_to_buffer() instead.
   ///
-  /// @remarks The output will be stored in the pointer set to image_util_encode_set_output_buffer() or image_util_encode_set_output_path().\n
-  /// The function executes synchronously.\n
-  /// When any of the functions at the pre-condition are not called, #IMAGE_UTIL_ERROR_INVALID_PARAMETER is returned.\n
-  /// In case of animated GIF encoding, image_util_encode_set_resolution(), image_util_encode_set_input_buffer() and\n
-  /// image_util_encode_set_gif_frame_delay_time() MUST be called for each frame.
-  /// In case of animated GIF encoding, call image_util_encode_run() for each frame to encode progressively.
+  /// Starts encoding of the image and fills the output buffer, set using image_util_encode_set_output_buffer() or image_util_encode_set_output_path().
   ///
-  /// @param[in] handle The handle of image util encoding
-  /// @param[out] size Size of the encoded image
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Remarks:**
+  /// - The output will be stored in the pointer set to image_util_encode_set_output_buffer() or image_util_encode_set_output_path().
+  /// - The function executes synchronously.
+  /// - When any of the functions at the pre-condition are not called, `IMAGE_UTIL_ERROR_INVALID_PARAMETER` is returned.
+  /// - In case of animated GIF encoding, image_util_encode_set_resolution(), image_util_encode_set_input_buffer() and
+  /// - image_util_encode_set_gif_frame_delay_time() MUST be called for each frame.
+  /// - In case of animated GIF encoding, call image_util_encode_run() for each frame to encode progressively.
   ///
-  /// @retval #IMAGE_UTIL_ERROR_NONE Successful
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_OPERATION Invalid operation
+  /// **Parameters:**
+  /// - `handle` (in): The handle of image util encoding
+  /// - `size` (out): Size of the encoded image
   ///
-  /// @pre image_util_encode_create()
-  /// @pre image_util_encode_set_resolution()
-  /// @pre image_util_encode_set_input_buffer()
-  /// @pre image_util_encode_set_output_buffer() / image_util_encode_set_output_path()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @post image_util_encode_destroy()
+  /// **Return values:**
+  /// - `IMAGE_UTIL_ERROR_NONE`: Successful
+  /// - `IMAGE_UTIL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IMAGE_UTIL_ERROR_INVALID_OPERATION`: Invalid operation
   ///
-  /// @see image_util_encode_create()
-  /// @see image_util_encode_set_resolution()
-  /// @see image_util_encode_set_input_buffer()
-  /// @see image_util_encode_set_gif_frame_delay_time()
-  /// @see image_util_encode_set_output_path()
-  /// @see image_util_encode_set_output_buffer()
-  /// @see image_util_encode_destroy()
+  /// **Preconditions:**
+  /// - image_util_encode_create()
+  /// - image_util_encode_set_resolution()
+  /// - image_util_encode_set_input_buffer()
+  /// - image_util_encode_set_output_buffer() / image_util_encode_set_output_path()
+  ///
+  /// **Postconditions:**
+  /// - image_util_encode_destroy()
+  ///
+  /// **See also:**
+  /// - `image_util_encode_create()`
+  /// - `image_util_encode_set_resolution()`
+  /// - `image_util_encode_set_input_buffer()`
+  /// - `image_util_encode_set_gif_frame_delay_time()`
+  /// - `image_util_encode_set_output_path()`
+  /// - `image_util_encode_set_output_buffer()`
+  /// - `image_util_encode_destroy()`
   int image_util_encode_run(
     image_util_encode_h handle,
     ffi.Pointer<ffi.UnsignedLongLong> size,
@@ -1115,42 +1314,51 @@ class Tizen80CapiMediaImageUtil {
   late final _image_util_encode_run = _image_util_encode_runPtr.asFunction<
       int Function(image_util_encode_h, ffi.Pointer<ffi.UnsignedLongLong>)>();
 
-  /// @deprecated Deprecated since 5.5. Use image_util_encode_run_async_to_file() or image_util_encode_run_async_to_buffer() instead.
-  /// @brief Starts encoding of the image and fills the output buffer, set using image_util_encode_set_output_buffer() or image_util_encode_set_output_path().
-  /// @since_tizen 3.0
+  /// **Deprecated:** Deprecated since 5.5. Use image_util_encode_run_async_to_file() or image_util_encode_run_async_to_buffer() instead.
   ///
-  /// @remarks The output will be stored in the pointer set to image_util_encode_set_output_buffer() or image_util_encode_set_output_path().\n
-  /// The function executes asynchronously, which contains complete callback.\n
-  /// When any of the functions at the pre-condition are not called, #IMAGE_UTIL_ERROR_INVALID_PARAMETER is returned.\n
-  /// In case of animated GIF encoding, image_util_encode_set_resolution(), image_util_encode_set_input_buffer() and\n
-  /// image_util_encode_set_gif_frame_delay_time() MUST be called for each frame.
-  /// In case of animated GIF encoding, call image_util_encode_run_async() for each frame to encode progressively.
+  /// Starts encoding of the image and fills the output buffer, set using image_util_encode_set_output_buffer() or image_util_encode_set_output_path().
   ///
-  /// @param[in] handle The handle of image util encoding
-  /// @param[in] callback The callback function to be invoked
-  /// @param[in] user_data The user data to be passed to the callback function
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Remarks:**
+  /// - The output will be stored in the pointer set to image_util_encode_set_output_buffer() or image_util_encode_set_output_path().
+  /// - The function executes asynchronously, which contains complete callback.
+  /// - When any of the functions at the pre-condition are not called, `IMAGE_UTIL_ERROR_INVALID_PARAMETER` is returned.
+  /// - In case of animated GIF encoding, image_util_encode_set_resolution(), image_util_encode_set_input_buffer() and
+  /// - image_util_encode_set_gif_frame_delay_time() MUST be called for each frame.
+  /// - In case of animated GIF encoding, call image_util_encode_run_async() for each frame to encode progressively.
   ///
-  /// @retval #IMAGE_UTIL_ERROR_NONE Successful
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_OPERATION Invalid operation
+  /// **Parameters:**
+  /// - `handle` (in): The handle of image util encoding
+  /// - `callback` (in): The callback function to be invoked
+  /// - `user_data` (in): The user data to be passed to the callback function
   ///
-  /// @pre image_util_encode_create()
-  /// @pre image_util_encode_set_resolution()
-  /// @pre image_util_encode_set_input_buffer()
-  /// @pre image_util_encode_set_output_buffer() / image_util_encode_set_output_path()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @post image_util_encode_destroy()
+  /// **Return values:**
+  /// - `IMAGE_UTIL_ERROR_NONE`: Successful
+  /// - `IMAGE_UTIL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IMAGE_UTIL_ERROR_INVALID_OPERATION`: Invalid operation
   ///
-  /// @see image_util_encode_create()
-  /// @see image_util_encode_set_resolution()
-  /// @see image_util_encode_set_input_buffer()
-  /// @see image_util_encode_set_gif_frame_delay_time()
-  /// @see image_util_encode_set_output_path()
-  /// @see image_util_encode_set_output_buffer()
-  /// @see image_util_encode_destroy()
+  /// **Preconditions:**
+  /// - image_util_encode_create()
+  /// - image_util_encode_set_resolution()
+  /// - image_util_encode_set_input_buffer()
+  /// - image_util_encode_set_output_buffer() / image_util_encode_set_output_path()
+  ///
+  /// **Postconditions:**
+  /// - image_util_encode_destroy()
+  ///
+  /// **See also:**
+  /// - `image_util_encode_create()`
+  /// - `image_util_encode_set_resolution()`
+  /// - `image_util_encode_set_input_buffer()`
+  /// - `image_util_encode_set_gif_frame_delay_time()`
+  /// - `image_util_encode_set_output_path()`
+  /// - `image_util_encode_set_output_buffer()`
+  /// - `image_util_encode_destroy()`
   int image_util_encode_run_async(
     image_util_encode_h handle,
     image_util_encode_completed_cb callback,
@@ -1172,40 +1380,49 @@ class Tizen80CapiMediaImageUtil {
           int Function(image_util_encode_h, image_util_encode_completed_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Encodes the image and save it to a file in the given encoding handle.
-  /// @details The function executes synchronously.
-  /// @since_tizen 5.5
+  /// Encodes the image and save it to a file in the given encoding handle.
   ///
-  /// @remarks If any functions at the pre-condition are not called first, #IMAGE_UTIL_ERROR_INVALID_PARAMETER is returned.\n
-  /// The only supported colorspace for BMP and GIF is #IMAGE_UTIL_COLORSPACE_RGBA8888.\n
-  /// To get supported colorspaces for JPEG format, you can use image_util_foreach_supported_colorspace().\n
-  /// %http://tizen.org/privilege/mediastorage is required if @a file_path value is media storage.\n
-  /// %http://tizen.org/privilege/externalstorage is required if @a file_path value is external storage.\n
-  /// Before 6.0, #IMAGE_UTIL_COLORSPACE_RGBA8888 was the only supported colorspace for PNG. But since 6.0, this module supports more colorspaces for PNG.
-  /// To get supported colorspaces for PNG, you can use image_util_foreach_supported_colorspace().\n
-  /// Since 6.0, this module supports WEBP, you can use image_util_foreach_supported_colorspace() to get supported colorspaces for WEBP.\n
-  /// Since 7.0, this module supports JPEG-XL, you can use image_util_foreach_supported_colorspace() to get supported colorspaces for JPEG-XL.
+  /// The function executes synchronously.
   ///
-  /// @param[in] handle The handle of image util encoding
-  /// @param[in] image The image handle for encoding
-  /// @param[in] file_path The file path for encoding image
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Remarks:**
+  /// - If any functions at the pre-condition are not called first, `IMAGE_UTIL_ERROR_INVALID_PARAMETER` is returned.
+  /// - The only supported colorspace for BMP and GIF is `IMAGE_UTIL_COLORSPACE_RGBA8888`.
+  /// - To get supported colorspaces for JPEG format, you can use image_util_foreach_supported_colorspace().
+  /// - <http://tizen.org/privilege/mediastorage is required if `file_path` value is media storage.>
+  /// - <http://tizen.org/privilege/externalstorage is required if `file_path` value is external storage.>
+  /// - Before 6.0, `IMAGE_UTIL_COLORSPACE_RGBA8888` was the only supported colorspace for PNG. But since 6.0, this module supports more colorspaces for PNG.
+  /// - To get supported colorspaces for PNG, you can use image_util_foreach_supported_colorspace().
+  /// - Since 6.0, this module supports WEBP, you can use image_util_foreach_supported_colorspace() to get supported colorspaces for WEBP.
+  /// - Since 7.0, this module supports JPEG-XL, you can use image_util_foreach_supported_colorspace() to get supported colorspaces for JPEG-XL.
   ///
-  /// @retval #IMAGE_UTIL_ERROR_NONE Successful
-  /// @retval #IMAGE_UTIL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #IMAGE_UTIL_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #IMAGE_UTIL_ERROR_NOT_SUPPORTED_FORMAT Not supported format
+  /// **Parameters:**
+  /// - `handle` (in): The handle of image util encoding
+  /// - `image` (in): The image handle for encoding
+  /// - `file_path` (in): The file path for encoding image
   ///
-  /// @pre image_util_encode_create()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @post image_util_encode_destroy()
+  /// **Return values:**
+  /// - `IMAGE_UTIL_ERROR_NONE`: Successful
+  /// - `IMAGE_UTIL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `IMAGE_UTIL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IMAGE_UTIL_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `IMAGE_UTIL_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `IMAGE_UTIL_ERROR_NOT_SUPPORTED_FORMAT`: Not supported format
   ///
-  /// @see image_util_encode_create()
-  /// @see image_util_encode_destroy()
+  /// **Preconditions:**
+  /// - image_util_encode_create()
+  ///
+  /// **Postconditions:**
+  /// - image_util_encode_destroy()
+  ///
+  /// **See also:**
+  /// - `image_util_encode_create()`
+  /// - `image_util_encode_destroy()`
   int image_util_encode_run_to_file(
     image_util_encode_h handle,
     image_util_image_h image,
@@ -1227,39 +1444,48 @@ class Tizen80CapiMediaImageUtil {
           int Function(image_util_encode_h, image_util_image_h,
               ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Encodes the image to save it to a buffer in the given encoding handle.
-  /// @details The function executes synchronously.
-  /// @since_tizen 5.5
+  /// Encodes the image to save it to a buffer in the given encoding handle.
   ///
-  /// @remarks If any functions at the pre-condition are not called first, #IMAGE_UTIL_ERROR_INVALID_PARAMETER is returned.\n
-  /// The @a buffer should be released using free().\n
-  /// The only supported colorspace for BMP and GIF is #IMAGE_UTIL_COLORSPACE_RGBA8888.\n
-  /// To get supported colorspaces for JPEG format, you can use image_util_foreach_supported_colorspace().\n
-  /// Before 6.0, #IMAGE_UTIL_COLORSPACE_RGBA8888 was the only supported colorspace for PNG. But since 6.0, this module supports more colorspaces for PNG.
-  /// To get supported colorspaces for PNG, you can use image_util_foreach_supported_colorspace().\n
-  /// Since 6.0, this module supports WEBP, you can use image_util_foreach_supported_colorspace() to get supported colorspaces for WEBP.\n
-  /// Since 7.0, this module supports JPEG-XL, you can use image_util_foreach_supported_colorspace() to get supported colorspaces for JPEG-XL.
+  /// The function executes synchronously.
   ///
-  /// @param[in] handle The handle of image util encoding
-  /// @param[in] image The image handle for encoding
-  /// @param[out] buffer The buffer that encoded image is stored
-  /// @param[out] buffer_size The size of the buffer
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Remarks:**
+  /// - If any functions at the pre-condition are not called first, `IMAGE_UTIL_ERROR_INVALID_PARAMETER` is returned.
+  /// - The `buffer` should be released using free().
+  /// - The only supported colorspace for BMP and GIF is `IMAGE_UTIL_COLORSPACE_RGBA8888`.
+  /// - To get supported colorspaces for JPEG format, you can use image_util_foreach_supported_colorspace().
+  /// - Before 6.0, `IMAGE_UTIL_COLORSPACE_RGBA8888` was the only supported colorspace for PNG. But since 6.0, this module supports more colorspaces for PNG.
+  /// - To get supported colorspaces for PNG, you can use image_util_foreach_supported_colorspace().
+  /// - Since 6.0, this module supports WEBP, you can use image_util_foreach_supported_colorspace() to get supported colorspaces for WEBP.
+  /// - Since 7.0, this module supports JPEG-XL, you can use image_util_foreach_supported_colorspace() to get supported colorspaces for JPEG-XL.
   ///
-  /// @retval #IMAGE_UTIL_ERROR_NONE Successful
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #IMAGE_UTIL_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #IMAGE_UTIL_ERROR_NOT_SUPPORTED_FORMAT Not supported format
+  /// **Parameters:**
+  /// - `handle` (in): The handle of image util encoding
+  /// - `image` (in): The image handle for encoding
+  /// - `buffer` (out): The buffer that encoded image is stored
+  /// - `buffer_size` (out): The size of the buffer
   ///
-  /// @pre image_util_encode_create()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @post image_util_encode_destroy()
+  /// **Return values:**
+  /// - `IMAGE_UTIL_ERROR_NONE`: Successful
+  /// - `IMAGE_UTIL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IMAGE_UTIL_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `IMAGE_UTIL_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `IMAGE_UTIL_ERROR_NOT_SUPPORTED_FORMAT`: Not supported format
   ///
-  /// @see image_util_encode_create()
-  /// @see image_util_encode_destroy()
+  /// **Preconditions:**
+  /// - image_util_encode_create()
+  ///
+  /// **Postconditions:**
+  /// - image_util_encode_destroy()
+  ///
+  /// **See also:**
+  /// - `image_util_encode_create()`
+  /// - `image_util_encode_destroy()`
   int image_util_encode_run_to_buffer(
     image_util_encode_h handle,
     image_util_image_h image,
@@ -1289,41 +1515,50 @@ class Tizen80CapiMediaImageUtil {
               ffi.Pointer<ffi.Pointer<ffi.UnsignedChar>>,
               ffi.Pointer<ffi.Size>)>();
 
-  /// @brief Encodes the image and save it to a file in the given encoding handle asynchronously.
-  /// @details The output will be stored in @a file_path. And the function executes asynchronously.
-  /// @since_tizen 5.5
+  /// Encodes the image and save it to a file in the given encoding handle asynchronously.
   ///
-  /// @remarks If any functions at the pre-condition are not called first, #IMAGE_UTIL_ERROR_INVALID_PARAMETER is returned.\n
-  /// The only supported colorspace for BMP and GIF is #IMAGE_UTIL_COLORSPACE_RGBA8888.\n
-  /// To get supported colorspaces for JPEG format, you can use image_util_foreach_supported_colorspace().\n
-  /// %http://tizen.org/privilege/mediastorage is required if @a file_path value is media storage.\n
-  /// %http://tizen.org/privilege/externalstorage is required if @a file_path value is external storage.\n
-  /// Before 6.0, #IMAGE_UTIL_COLORSPACE_RGBA8888 was the only supported colorspace for PNG. But since 6.0, this module supports more colorspaces for PNG.
-  /// To get supported colorspaces for PNG, you can use image_util_foreach_supported_colorspace().\n
-  /// Since 6.0, this module supports WEBP, you can use image_util_foreach_supported_colorspace() to get supported colorspaces for WEBP.\n
-  /// Since 7.0, this module supports JPEG-XL, you can use image_util_foreach_supported_colorspace() to get supported colorspaces for JPEG-XL.
+  /// The output will be stored in `file_path`. And the function executes asynchronously.
   ///
-  /// @param[in] handle The handle of image util encoding
-  /// @param[in] image The image handle for encoding
-  /// @param[in] file_path The file path for encoding image
-  /// @param[in] completed_cb The callback function to be invoked
-  /// @param[in] user_data The user data to be passed to the callback function
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Remarks:**
+  /// - If any functions at the pre-condition are not called first, `IMAGE_UTIL_ERROR_INVALID_PARAMETER` is returned.
+  /// - The only supported colorspace for BMP and GIF is `IMAGE_UTIL_COLORSPACE_RGBA8888`.
+  /// - To get supported colorspaces for JPEG format, you can use image_util_foreach_supported_colorspace().
+  /// - <http://tizen.org/privilege/mediastorage is required if `file_path` value is media storage.>
+  /// - <http://tizen.org/privilege/externalstorage is required if `file_path` value is external storage.>
+  /// - Before 6.0, `IMAGE_UTIL_COLORSPACE_RGBA8888` was the only supported colorspace for PNG. But since 6.0, this module supports more colorspaces for PNG.
+  /// - To get supported colorspaces for PNG, you can use image_util_foreach_supported_colorspace().
+  /// - Since 6.0, this module supports WEBP, you can use image_util_foreach_supported_colorspace() to get supported colorspaces for WEBP.
+  /// - Since 7.0, this module supports JPEG-XL, you can use image_util_foreach_supported_colorspace() to get supported colorspaces for JPEG-XL.
   ///
-  /// @retval #IMAGE_UTIL_ERROR_NONE Successful
-  /// @retval #IMAGE_UTIL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #IMAGE_UTIL_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Parameters:**
+  /// - `handle` (in): The handle of image util encoding
+  /// - `image` (in): The image handle for encoding
+  /// - `file_path` (in): The file path for encoding image
+  /// - `completed_cb` (in): The callback function to be invoked
+  /// - `user_data` (in): The user data to be passed to the callback function
   ///
-  /// @pre image_util_encode_create()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @post image_util_encode_destroy()
+  /// **Return values:**
+  /// - `IMAGE_UTIL_ERROR_NONE`: Successful
+  /// - `IMAGE_UTIL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `IMAGE_UTIL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IMAGE_UTIL_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `IMAGE_UTIL_ERROR_OUT_OF_MEMORY`: Out of memory
   ///
-  /// @see image_util_encode_create()
-  /// @see image_util_encode_destroy()
+  /// **Preconditions:**
+  /// - image_util_encode_create()
+  ///
+  /// **Postconditions:**
+  /// - image_util_encode_destroy()
+  ///
+  /// **See also:**
+  /// - `image_util_encode_create()`
+  /// - `image_util_encode_destroy()`
   int image_util_encode_run_async_to_file(
     image_util_encode_h handle,
     image_util_image_h image,
@@ -1357,37 +1592,46 @@ class Tizen80CapiMediaImageUtil {
               image_util_encode_to_file_completed_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Encodes the image and save it to a buffer in the given encoding handle asynchronously.
-  /// @details The output will be stored in a buffer provided by the @a completed_cb callback.
-  /// @since_tizen 5.5
+  /// Encodes the image and save it to a buffer in the given encoding handle asynchronously.
   ///
-  /// @remarks If any functions at the pre-condition are not called first, #IMAGE_UTIL_ERROR_INVALID_PARAMETER is returned.\n
-  /// The only supported colorspace for BMP and GIF is #IMAGE_UTIL_COLORSPACE_RGBA8888.\n
-  /// To get supported colorspaces for JPEG format, you can use image_util_foreach_supported_colorspace().\n
-  /// Before 6.0, #IMAGE_UTIL_COLORSPACE_RGBA8888 was the only supported colorspace for PNG. But since 6.0, this module supports more colorspaces for PNG.
-  /// To get supported colorspaces for PNG, you can use image_util_foreach_supported_colorspace().\n
-  /// Since 6.0, this module supports WEBP, you can use image_util_foreach_supported_colorspace() to get supported colorspaces for WEBP.\n
-  /// Since 7.0, this module supports JPEG-XL, you can use image_util_foreach_supported_colorspace() to get supported colorspaces for JPEG-XL.
+  /// The output will be stored in a buffer provided by the `completed_cb` callback.
   ///
-  /// @param[in] handle The handle of image util encoding
-  /// @param[in] image The image handle for encoding
-  /// @param[in] completed_cb The callback function to be invoked
-  /// @param[in] user_data The user data to be passed to the callback function
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Remarks:**
+  /// - If any functions at the pre-condition are not called first, `IMAGE_UTIL_ERROR_INVALID_PARAMETER` is returned.
+  /// - The only supported colorspace for BMP and GIF is `IMAGE_UTIL_COLORSPACE_RGBA8888`.
+  /// - To get supported colorspaces for JPEG format, you can use image_util_foreach_supported_colorspace().
+  /// - Before 6.0, `IMAGE_UTIL_COLORSPACE_RGBA8888` was the only supported colorspace for PNG. But since 6.0, this module supports more colorspaces for PNG.
+  /// - To get supported colorspaces for PNG, you can use image_util_foreach_supported_colorspace().
+  /// - Since 6.0, this module supports WEBP, you can use image_util_foreach_supported_colorspace() to get supported colorspaces for WEBP.
+  /// - Since 7.0, this module supports JPEG-XL, you can use image_util_foreach_supported_colorspace() to get supported colorspaces for JPEG-XL.
   ///
-  /// @retval #IMAGE_UTIL_ERROR_NONE Successful
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #IMAGE_UTIL_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Parameters:**
+  /// - `handle` (in): The handle of image util encoding
+  /// - `image` (in): The image handle for encoding
+  /// - `completed_cb` (in): The callback function to be invoked
+  /// - `user_data` (in): The user data to be passed to the callback function
   ///
-  /// @pre image_util_encode_create()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @post image_util_encode_destroy()
+  /// **Return values:**
+  /// - `IMAGE_UTIL_ERROR_NONE`: Successful
+  /// - `IMAGE_UTIL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IMAGE_UTIL_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `IMAGE_UTIL_ERROR_OUT_OF_MEMORY`: Out of memory
   ///
-  /// @see image_util_encode_create()
-  /// @see image_util_encode_destroy()
+  /// **Preconditions:**
+  /// - image_util_encode_create()
+  ///
+  /// **Postconditions:**
+  /// - image_util_encode_destroy()
+  ///
+  /// **See also:**
+  /// - `image_util_encode_create()`
+  /// - `image_util_encode_destroy()`
   int image_util_encode_run_async_to_buffer(
     image_util_encode_h handle,
     image_util_image_h image,
@@ -1417,23 +1661,30 @@ class Tizen80CapiMediaImageUtil {
               image_util_encode_to_buffer_completed_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Destroys the image encoding handle.
-  /// @since_tizen 3.0
+  /// Destroys the image encoding handle.
   ///
-  /// @remarks Any image handle created should be destroyed.
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @param[in] handle The handle of image util encoding
+  /// **Remarks:**
+  /// - Any image handle created should be destroyed.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Parameters:**
+  /// - `handle` (in): The handle of image util encoding
   ///
-  /// @retval #IMAGE_UTIL_ERROR_NONE Successful
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_OPERATION Invalid operation
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @pre image_util_encode_create()
+  /// **Return values:**
+  /// - `IMAGE_UTIL_ERROR_NONE`: Successful
+  /// - `IMAGE_UTIL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IMAGE_UTIL_ERROR_INVALID_OPERATION`: Invalid operation
   ///
-  /// @see image_util_encode_create()
+  /// **Preconditions:**
+  /// - image_util_encode_create()
+  ///
+  /// **See also:**
+  /// - `image_util_encode_create()`
   int image_util_encode_destroy(
     image_util_encode_h handle,
   ) {
@@ -1448,26 +1699,33 @@ class Tizen80CapiMediaImageUtil {
   late final _image_util_encode_destroy = _image_util_encode_destroyPtr
       .asFunction<int Function(image_util_encode_h)>();
 
-  /// @brief Creates a handle for encoding an animated GIF.
-  /// @since_tizen 5.5
+  /// Creates a handle for encoding an animated GIF.
   ///
-  /// @remarks The @a handle should be released using image_util_agif_encode_destroy().
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @param[out] handle The handle of encoding an animated GIF
+  /// **Remarks:**
+  /// - The `handle` should be released using image_util_agif_encode_destroy().
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Parameters:**
+  /// - `handle` (out): The handle of encoding an animated GIF
   ///
-  /// @retval #IMAGE_UTIL_ERROR_NONE Successful
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IMAGE_UTIL_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @post image_util_agif_encode_destroy()
+  /// **Return values:**
+  /// - `IMAGE_UTIL_ERROR_NONE`: Successful
+  /// - `IMAGE_UTIL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IMAGE_UTIL_ERROR_OUT_OF_MEMORY`: Out of memory
   ///
-  /// @see image_util_agif_encode_add_frame()
-  /// @see image_util_agif_encode_save_to_file()
-  /// @see image_util_agif_encode_save_to_buffer()
-  /// @see image_util_agif_encode_destroy()
+  /// **Postconditions:**
+  /// - image_util_agif_encode_destroy()
+  ///
+  /// **See also:**
+  /// - `image_util_agif_encode_add_frame()`
+  /// - `image_util_agif_encode_save_to_file()`
+  /// - `image_util_agif_encode_save_to_buffer()`
+  /// - `image_util_agif_encode_destroy()`
   int image_util_agif_encode_create(
     ffi.Pointer<image_util_agif_encode_h> handle,
   ) {
@@ -1483,38 +1741,46 @@ class Tizen80CapiMediaImageUtil {
   late final _image_util_agif_encode_create = _image_util_agif_encode_createPtr
       .asFunction<int Function(ffi.Pointer<image_util_agif_encode_h>)>();
 
-  /// @brief Encodes an image and adds the encoded image to the frames of the animated GIF.
-  /// @since_tizen 5.5
+  /// Encodes an image and adds the encoded image to the frames of the animated GIF.
   ///
-  /// @remarks This function should be called for each @a image which you want to add to the animated GIF. Each @a image should be the same size.\n
-  /// The supported colorspace is #IMAGE_UTIL_COLORSPACE_RGBA8888.\n
-  /// You should call image_util_agif_encode_save_to_file() or image_util_agif_encode_save_to_buffer() to save the animated GIF.\n
-  /// If you call this function after image_util_agif_encode_save_to_file() or image_util_agif_encode_save_to_buffer() function is called,
-  /// this function will encode a new animated GIF.
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @param[in] handle The handle of encoding an animated GIF
-  /// @param[in] image The handle of the image for each frame
-  /// @param[in] time_delay The time delay between @a image and the next image (in 0.01sec increments)
+  /// **Remarks:**
+  /// - This function should be called for each `image` which you want to add to the animated GIF. Each `image` should be the same size.
+  /// - The supported colorspace is `IMAGE_UTIL_COLORSPACE_RGBA8888`.
+  /// - You should call image_util_agif_encode_save_to_file() or image_util_agif_encode_save_to_buffer() to save the animated GIF.
+  /// - If you call this function after image_util_agif_encode_save_to_file() or image_util_agif_encode_save_to_buffer() function is called,
+  /// - this function will encode a new animated GIF.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Parameters:**
+  /// - `handle` (in): The handle of encoding an animated GIF
+  /// - `image` (in): The handle of the image for each frame
+  /// - `time_delay` (in): The time delay between `image` and the next image (in 0.01sec increments)
   ///
-  /// @retval #IMAGE_UTIL_ERROR_NONE Successful
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #IMAGE_UTIL_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #IMAGE_UTIL_ERROR_NOT_SUPPORTED_FORMAT Not supported format
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @pre image_util_agif_encode_create()
+  /// **Return values:**
+  /// - `IMAGE_UTIL_ERROR_NONE`: Successful
+  /// - `IMAGE_UTIL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IMAGE_UTIL_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `IMAGE_UTIL_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `IMAGE_UTIL_ERROR_NOT_SUPPORTED_FORMAT`: Not supported format
   ///
-  /// @post image_util_agif_encode_save_to_file()
-  /// @post image_util_agif_encode_save_to_buffer()
-  /// @post image_util_agif_encode_destroy()
+  /// **Preconditions:**
+  /// - image_util_agif_encode_create()
   ///
-  /// @see image_util_agif_encode_create()
-  /// @see image_util_agif_encode_save_to_file()
-  /// @see image_util_agif_encode_save_to_buffer()
-  /// @see image_util_agif_encode_destroy()
+  /// **Postconditions:**
+  /// - image_util_agif_encode_save_to_file()
+  /// - image_util_agif_encode_save_to_buffer()
+  /// - image_util_agif_encode_destroy()
+  ///
+  /// **See also:**
+  /// - `image_util_agif_encode_create()`
+  /// - `image_util_agif_encode_save_to_file()`
+  /// - `image_util_agif_encode_save_to_buffer()`
+  /// - `image_util_agif_encode_destroy()`
   int image_util_agif_encode_add_frame(
     image_util_agif_encode_h handle,
     image_util_image_h image,
@@ -1535,44 +1801,45 @@ class Tizen80CapiMediaImageUtil {
       _image_util_agif_encode_add_framePtr.asFunction<
           int Function(image_util_agif_encode_h, image_util_image_h, int)>();
 
-  /// @brief Saves the animated GIF image to the file.
-  /// @details After the data has been written to a file,
-  /// the file cannot be modified. In other words,\n
-  /// it is not possible to add frames to the file.\n
-  /// Saving animation flushes the frames that has been added to the encoder.\n
-  /// However, the encoder can be still used after the data is written.\n
-  /// For example, although you write the data to one file(B0),\n
-  /// you can do the following operations:\n
+  /// Saves the animated GIF image to the file.
   ///
-  /// 1. Add frames 1-10 to the encoder.\n
-  /// 2. Save the data in the encoder to another file(B1). 10 frames will be saved.\n
-  /// 3. Add more frames (11-20) to the same encoder.\n
-  /// 4. Save the data in the encoder to the other file (B2)\n
-  /// It is not possible to save the changed data to B1 file used in step 4.
-  /// @since_tizen 5.5
+  /// After the data has been written to a file, the file cannot be modified. In other words, it is not possible to add frames to the file. Saving animation flushes the frames that has been added to the encoder. However, the encoder can be still used after the data is written. For example, although you write the data to one file(B0), you can do the following operations:
+  /// 1. Add frames 1-10 to the encoder.
+  /// 2. Save the data in the encoder to another file(B1). 10 frames will be saved.
+  /// 3. Add more frames (11-20) to the same encoder.
+  /// 4. Save the data in the encoder to the other file (B2) It is not possible to save the changed data to B1 file used in step 4.
   ///
-  /// @remarks %http://tizen.org/privilege/mediastorage is required if @a file_path value is media storage.\n
-  /// %http://tizen.org/privilege/externalstorage is required if @a file_path value is external storage.
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @param[in] handle The handle of encoding an animated GIF
-  /// @param[in] file_path The file path for saving the animated GIF
+  /// **Remarks:**
+  /// - <http://tizen.org/privilege/mediastorage is required if `file_path` value is media storage.>
+  /// - <http://tizen.org/privilege/externalstorage is required if `file_path` value is external storage.>
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Parameters:**
+  /// - `handle` (in): The handle of encoding an animated GIF
+  /// - `file_path` (in): The file path for saving the animated GIF
   ///
-  /// @retval #IMAGE_UTIL_ERROR_NONE Successful
-  /// @retval #IMAGE_UTIL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IMAGE_UTIL_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #IMAGE_UTIL_ERROR_NO_SUCH_FILE No such file
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @pre image_util_agif_encode_create()
+  /// **Return values:**
+  /// - `IMAGE_UTIL_ERROR_NONE`: Successful
+  /// - `IMAGE_UTIL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `IMAGE_UTIL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IMAGE_UTIL_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `IMAGE_UTIL_ERROR_NO_SUCH_FILE`: No such file
   ///
-  /// @post image_util_agif_encode_destroy()
+  /// **Preconditions:**
+  /// - image_util_agif_encode_create()
   ///
-  /// @see image_util_agif_encode_create()
-  /// @see image_util_agif_encode_add_frame()
-  /// @see image_util_agif_encode_destroy()
+  /// **Postconditions:**
+  /// - image_util_agif_encode_destroy()
+  ///
+  /// **See also:**
+  /// - `image_util_agif_encode_create()`
+  /// - `image_util_agif_encode_add_frame()`
+  /// - `image_util_agif_encode_destroy()`
   int image_util_agif_encode_save_to_file(
     image_util_agif_encode_h handle,
     ffi.Pointer<ffi.Char> file_path,
@@ -1591,42 +1858,43 @@ class Tizen80CapiMediaImageUtil {
       _image_util_agif_encode_save_to_filePtr.asFunction<
           int Function(image_util_agif_encode_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Saves the animated GIF image to the buffer.
-  /// @details After the data has been written to a buffer,
-  /// the file cannot be modified. In other words,\n
-  /// it is not possible to add frames to the buffer.\n
-  /// Saving animation flushes the frames that has been added to the encoder.\n
-  /// However, the encoder can be still used after the data is written.\n
-  /// For example, although you write the data to one buffer(B0),\n
-  /// you can do the following operations:\n
+  /// Saves the animated GIF image to the buffer.
   ///
-  /// 1. Add frames 1-10 to the encoder.\n
-  /// 2. Save the data in the encoder to another buffer(B1). 10 frames will be saved.\n
-  /// 3. Add more frames (11-20) to the same encoder.\n
-  /// 4. Save the data in the encoder to the other buffer (B2)\n
-  /// It is not possible to save the changed data to B1 file used in step 4.
-  /// @since_tizen 5.5
+  /// After the data has been written to a buffer, the file cannot be modified. In other words, it is not possible to add frames to the buffer. Saving animation flushes the frames that has been added to the encoder. However, the encoder can be still used after the data is written. For example, although you write the data to one buffer(B0), you can do the following operations:
+  /// 1. Add frames 1-10 to the encoder.
+  /// 2. Save the data in the encoder to another buffer(B1). 10 frames will be saved.
+  /// 3. Add more frames (11-20) to the same encoder.
+  /// 4. Save the data in the encoder to the other buffer (B2) It is not possible to save the changed data to B1 file used in step 4.
   ///
-  /// @remarks The @a buffer should be released using free() after using it.
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @param[in] handle The handle of encoding an animated GIF
-  /// @param[out] buffer The buffer in which the animated GIF is saved
-  /// @param[out] buffer_size The size of the buffer
+  /// **Remarks:**
+  /// - The `buffer` should be released using free() after using it.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Parameters:**
+  /// - `handle` (in): The handle of encoding an animated GIF
+  /// - `buffer` (out): The buffer in which the animated GIF is saved
+  /// - `buffer_size` (out): The size of the buffer
   ///
-  /// @retval #IMAGE_UTIL_ERROR_NONE Successful
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IMAGE_UTIL_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @pre image_util_agif_encode_create()
+  /// **Return values:**
+  /// - `IMAGE_UTIL_ERROR_NONE`: Successful
+  /// - `IMAGE_UTIL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IMAGE_UTIL_ERROR_OUT_OF_MEMORY`: Out of memory
   ///
-  /// @post image_util_agif_encode_destroy()
+  /// **Preconditions:**
+  /// - image_util_agif_encode_create()
   ///
-  /// @see image_util_agif_encode_create()
-  /// @see image_util_agif_encode_add_frame()
-  /// @see image_util_agif_encode_destroy()
+  /// **Postconditions:**
+  /// - image_util_agif_encode_destroy()
+  ///
+  /// **See also:**
+  /// - `image_util_agif_encode_create()`
+  /// - `image_util_agif_encode_add_frame()`
+  /// - `image_util_agif_encode_destroy()`
   int image_util_agif_encode_save_to_buffer(
     image_util_agif_encode_h handle,
     ffi.Pointer<ffi.Pointer<ffi.UnsignedChar>> buffer,
@@ -1652,22 +1920,29 @@ class Tizen80CapiMediaImageUtil {
               ffi.Pointer<ffi.Pointer<ffi.UnsignedChar>>,
               ffi.Pointer<ffi.Size>)>();
 
-  /// @brief Destroys the handle for encoding an animated GIF.
-  /// @since_tizen 5.5
+  /// Destroys the handle for encoding an animated GIF.
   ///
-  /// @remarks Any created animated GIF encoding handle created should be destroyed.
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @param[in] handle The handle of encoding an animated GIF
+  /// **Remarks:**
+  /// - Any created animated GIF encoding handle created should be destroyed.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Parameters:**
+  /// - `handle` (in): The handle of encoding an animated GIF
   ///
-  /// @retval #IMAGE_UTIL_ERROR_NONE Successful
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @pre image_util_agif_encode_create()
+  /// **Return values:**
+  /// - `IMAGE_UTIL_ERROR_NONE`: Successful
+  /// - `IMAGE_UTIL_ERROR_INVALID_PARAMETER`: Invalid parameter
   ///
-  /// @see image_util_agif_encode_create()
+  /// **Preconditions:**
+  /// - image_util_agif_encode_create()
+  ///
+  /// **See also:**
+  /// - `image_util_agif_encode_create()`
   int image_util_agif_encode_destroy(
     image_util_agif_encode_h handle,
   ) {
@@ -1683,25 +1958,31 @@ class Tizen80CapiMediaImageUtil {
       _image_util_agif_encode_destroyPtr
           .asFunction<int Function(image_util_agif_encode_h)>();
 
-  /// @brief Creates a handle for encoding animation.
-  /// @since_tizen 6.0
+  /// Creates a handle for encoding animation.
   ///
-  /// @remarks The @a handle should be released using image_util_anim_encode_destroy().
+  /// **Since Tizen:**
+  /// - 6.0
   ///
-  /// @param[in] image_type The type of output image to create animation
-  /// @param[out] handle The handle of animation encoder
+  /// **Remarks:**
+  /// - The `handle` should be released using image_util_anim_encode_destroy().
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Parameters:**
+  /// - `image_type` (in): The type of output image to create animation
+  /// - `handle` (out): The handle of animation encoder
   ///
-  /// @retval #IMAGE_UTIL_ERROR_NONE Successful
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IMAGE_UTIL_ERROR_NOT_SUPPORTED_FORMAT Not supported format
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @see image_util_anim_encode_add_frame()
-  /// @see image_util_anim_encode_save_to_file()
-  /// @see image_util_anim_encode_save_to_buffer()
-  /// @see image_util_anim_encode_destroy()
+  /// **Return values:**
+  /// - `IMAGE_UTIL_ERROR_NONE`: Successful
+  /// - `IMAGE_UTIL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IMAGE_UTIL_ERROR_NOT_SUPPORTED_FORMAT`: Not supported format
+  ///
+  /// **See also:**
+  /// - `image_util_anim_encode_add_frame()`
+  /// - `image_util_anim_encode_save_to_file()`
+  /// - `image_util_anim_encode_save_to_buffer()`
+  /// - `image_util_anim_encode_destroy()`
   int image_util_anim_encode_create(
     int image_type,
     ffi.Pointer<image_util_anim_encode_h> handle,
@@ -1720,22 +2001,28 @@ class Tizen80CapiMediaImageUtil {
   late final _image_util_anim_encode_create = _image_util_anim_encode_createPtr
       .asFunction<int Function(int, ffi.Pointer<image_util_anim_encode_h>)>();
 
-  /// @brief Sets a number of times to repeat the animation.
-  /// @since_tizen 6.0
+  /// Sets a number of times to repeat the animation.
   ///
-  /// @remarks This function should be called before image_util_anim_encode_add_frame() is called.
+  /// **Since Tizen:**
+  /// - 6.0
   ///
-  /// @param[in] handle The handle of animation encoder
-  /// @param[in] loop_count The number of times to repeat the animation
+  /// **Remarks:**
+  /// - This function should be called before image_util_anim_encode_add_frame() is called.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Parameters:**
+  /// - `handle` (in): The handle of animation encoder
+  /// - `loop_count` (in): The number of times to repeat the animation
   ///
-  /// @retval #IMAGE_UTIL_ERROR_NONE Successful
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IMAGE_UTIL_ERROR_NOT_SUPPORTED_FORMAT Not supported format
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @pre image_util_anim_encode_create()
+  /// **Return values:**
+  /// - `IMAGE_UTIL_ERROR_NONE`: Successful
+  /// - `IMAGE_UTIL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IMAGE_UTIL_ERROR_NOT_SUPPORTED_FORMAT`: Not supported format
+  ///
+  /// **Preconditions:**
+  /// - image_util_anim_encode_create()
   int image_util_anim_encode_set_loop_count(
     image_util_anim_encode_h handle,
     int loop_count,
@@ -1754,25 +2041,31 @@ class Tizen80CapiMediaImageUtil {
       _image_util_anim_encode_set_loop_countPtr
           .asFunction<int Function(image_util_anim_encode_h, int)>();
 
-  /// @brief Sets a background color of the animation.
-  /// @since_tizen 6.0
+  /// Sets a background color of the animation.
   ///
-  /// @remarks This function should be called before image_util_anim_encode_add_frame() is called.
+  /// **Since Tizen:**
+  /// - 6.0
   ///
-  /// @param[in] handle The handle of animation encoder
-  /// @param[in] r The red color of the background
-  /// @param[in] g The green color of the background
-  /// @param[in] b The blue color of the background
-  /// @param[in] a The alpha color of the background
+  /// **Remarks:**
+  /// - This function should be called before image_util_anim_encode_add_frame() is called.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Parameters:**
+  /// - `handle` (in): The handle of animation encoder
+  /// - `r` (in): The red color of the background
+  /// - `g` (in): The green color of the background
+  /// - `b` (in): The blue color of the background
+  /// - `a` (in): The alpha color of the background
   ///
-  /// @retval #IMAGE_UTIL_ERROR_NONE Successful
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IMAGE_UTIL_ERROR_NOT_SUPPORTED_FORMAT Not supported format
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @pre image_util_anim_encode_create()
+  /// **Return values:**
+  /// - `IMAGE_UTIL_ERROR_NONE`: Successful
+  /// - `IMAGE_UTIL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IMAGE_UTIL_ERROR_NOT_SUPPORTED_FORMAT`: Not supported format
+  ///
+  /// **Preconditions:**
+  /// - image_util_anim_encode_create()
   int image_util_anim_encode_set_background_color(
     image_util_anim_encode_h handle,
     int r,
@@ -1798,22 +2091,28 @@ class Tizen80CapiMediaImageUtil {
       _image_util_anim_encode_set_background_colorPtr.asFunction<
           int Function(image_util_anim_encode_h, int, int, int, int)>();
 
-  /// @brief Sets lossless compression of animation.
-  /// @since_tizen 6.0
+  /// Sets lossless compression of animation.
   ///
-  /// @remarks This function should be called before image_util_anim_encode_add_frame() is called.
+  /// **Since Tizen:**
+  /// - 6.0
   ///
-  /// @param[in] handle The handle of animation encoder
-  /// @param[in] lossless The flag determining whether the compression is lossless or lossy: true for lossless, false for lossy
+  /// **Remarks:**
+  /// - This function should be called before image_util_anim_encode_add_frame() is called.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Parameters:**
+  /// - `handle` (in): The handle of animation encoder
+  /// - `lossless` (in): The flag determining whether the compression is lossless or lossy: true for lossless, false for lossy
   ///
-  /// @retval #IMAGE_UTIL_ERROR_NONE Successful
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IMAGE_UTIL_ERROR_NOT_SUPPORTED_FORMAT Not supported format
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @pre image_util_anim_encode_create()
+  /// **Return values:**
+  /// - `IMAGE_UTIL_ERROR_NONE`: Successful
+  /// - `IMAGE_UTIL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IMAGE_UTIL_ERROR_NOT_SUPPORTED_FORMAT`: Not supported format
+  ///
+  /// **Preconditions:**
+  /// - image_util_anim_encode_create()
   int image_util_anim_encode_set_lossless(
     image_util_anim_encode_h handle,
     bool lossless,
@@ -1832,35 +2131,43 @@ class Tizen80CapiMediaImageUtil {
       _image_util_anim_encode_set_losslessPtr
           .asFunction<int Function(image_util_anim_encode_h, bool)>();
 
-  /// @brief Encodes an image and adds image to the frame of the animated image.
-  /// @since_tizen 6.0
+  /// Encodes an image and adds image to the frame of the animated image.
   ///
-  /// @remarks This function should be called for each @a image which you want to add to the animated WEBP or GIF. Each @a image should be the same size.\n
-  /// The supported colorspaces are #IMAGE_UTIL_COLORSPACE_RGBA8888, #IMAGE_UTIL_COLORSPACE_ARGB8888, #IMAGE_UTIL_COLORSPACE_BGRA8888 and #IMAGE_UTIL_COLORSPACE_RGBA8888 for animated WEBP.\n
-  /// The supported colorspace is #IMAGE_UTIL_COLORSPACE_RGBA8888 for animated GIF.\n
-  /// You should call image_util_anim_encode_save_to_file() or image_util_anim_encode_save_to_buffer() to save the animated WEBP.\n
-  /// If you call this function after image_util_anim_encode_save_to_file() or image_util_anim_encode_save_to_buffer() function is called,
-  /// this function will encode a new animated WEBP and GIF.
+  /// **Since Tizen:**
+  /// - 6.0
   ///
-  /// @param[in] handle The handle of animation encoder
-  /// @param[in] image The handle of the image for each frame
-  /// @param[in] time_delay The time delay between @a image and the next image (in 1ms increments for WEBP and 10ms increments for GIF)
+  /// **Remarks:**
+  /// - This function should be called for each `image` which you want to add to the animated WEBP or GIF. Each `image` should be the same size.
+  /// - The supported colorspaces are `IMAGE_UTIL_COLORSPACE_RGBA8888`, `IMAGE_UTIL_COLORSPACE_ARGB8888`, `IMAGE_UTIL_COLORSPACE_BGRA8888` and `IMAGE_UTIL_COLORSPACE_RGBA8888` for animated WEBP.
+  /// - The supported colorspace is `IMAGE_UTIL_COLORSPACE_RGBA8888` for animated GIF.
+  /// - You should call image_util_anim_encode_save_to_file() or image_util_anim_encode_save_to_buffer() to save the animated WEBP.
+  /// - If you call this function after image_util_anim_encode_save_to_file() or image_util_anim_encode_save_to_buffer() function is called,
+  /// - this function will encode a new animated WEBP and GIF.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Parameters:**
+  /// - `handle` (in): The handle of animation encoder
+  /// - `image` (in): The handle of the image for each frame
+  /// - `time_delay` (in): The time delay between `image` and the next image (in 1ms increments for WEBP and 10ms increments for GIF)
   ///
-  /// @retval #IMAGE_UTIL_ERROR_NONE Successful
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #IMAGE_UTIL_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @pre image_util_anim_encode_create()
+  /// **Return values:**
+  /// - `IMAGE_UTIL_ERROR_NONE`: Successful
+  /// - `IMAGE_UTIL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IMAGE_UTIL_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `IMAGE_UTIL_ERROR_OUT_OF_MEMORY`: Out of memory
   ///
-  /// @post image_util_anim_encode_save_to_file()
-  /// @post image_util_anim_encode_save_to_buffer()
+  /// **Preconditions:**
+  /// - image_util_anim_encode_create()
   ///
-  /// @see image_util_anim_encode_save_to_file()
-  /// @see image_util_anim_encode_save_to_buffer()
+  /// **Postconditions:**
+  /// - image_util_anim_encode_save_to_file()
+  /// - image_util_anim_encode_save_to_buffer()
+  ///
+  /// **See also:**
+  /// - `image_util_anim_encode_save_to_file()`
+  /// - `image_util_anim_encode_save_to_buffer()`
   int image_util_anim_encode_add_frame(
     image_util_anim_encode_h handle,
     image_util_image_h image,
@@ -1881,40 +2188,40 @@ class Tizen80CapiMediaImageUtil {
       _image_util_anim_encode_add_framePtr.asFunction<
           int Function(image_util_anim_encode_h, image_util_image_h, int)>();
 
-  /// @brief Saves the animated WEBP or GIF image to the file.
-  /// @details After the data has been written to a file,
-  /// the file cannot be modified. In other words,\n
-  /// it is not possible to add frames to the file.\n
-  /// Saving animation flushes the frames that has been added to the encoder.\n
-  /// However, the encoder can be still used after the data is written.\n
-  /// For example, although you write the data to one file(B0),\n
-  /// you can do the following operations:\n
+  /// Saves the animated WEBP or GIF image to the file.
   ///
-  /// 1. Add frames 1-10 to the encoder.\n
-  /// 2. Save the data in the encoder to another file(B1). 10 frames will be saved.\n
-  /// 3. Add more frames (11-20) to the same encoder.\n
-  /// 4. Save the data in the encoder to the other file (B2)\n
-  /// It is not possible to save the changed data to B1 file used in step 4.
-  /// @since_tizen 6.0
+  /// After the data has been written to a file, the file cannot be modified. In other words, it is not possible to add frames to the file. Saving animation flushes the frames that has been added to the encoder. However, the encoder can be still used after the data is written. For example, although you write the data to one file(B0), you can do the following operations:
+  /// 1. Add frames 1-10 to the encoder.
+  /// 2. Save the data in the encoder to another file(B1). 10 frames will be saved.
+  /// 3. Add more frames (11-20) to the same encoder.
+  /// 4. Save the data in the encoder to the other file (B2) It is not possible to save the changed data to B1 file used in step 4.
   ///
-  /// @remarks %http://tizen.org/privilege/mediastorage is required if @a file_path value is media storage.\n
-  /// %http://tizen.org/privilege/externalstorage is required if @a file_path value is external storage.
+  /// **Since Tizen:**
+  /// - 6.0
   ///
-  /// @param[in] handle The handle of encoding an animated WEBP or GIF
-  /// @param[in] file_path The file path for saving the animated WEBP or GIF
+  /// **Remarks:**
+  /// - <http://tizen.org/privilege/mediastorage is required if `file_path` value is media storage.>
+  /// - <http://tizen.org/privilege/externalstorage is required if `file_path` value is external storage.>
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Parameters:**
+  /// - `handle` (in): The handle of encoding an animated WEBP or GIF
+  /// - `file_path` (in): The file path for saving the animated WEBP or GIF
   ///
-  /// @retval #IMAGE_UTIL_ERROR_NONE Successful
-  /// @retval #IMAGE_UTIL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #IMAGE_UTIL_ERROR_NO_SUCH_FILE No such file
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @pre image_util_anim_encode_create()
+  /// **Return values:**
+  /// - `IMAGE_UTIL_ERROR_NONE`: Successful
+  /// - `IMAGE_UTIL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `IMAGE_UTIL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IMAGE_UTIL_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `IMAGE_UTIL_ERROR_NO_SUCH_FILE`: No such file
   ///
-  /// @see image_util_anim_encode_add_frame()
+  /// **Preconditions:**
+  /// - image_util_anim_encode_create()
+  ///
+  /// **See also:**
+  /// - `image_util_anim_encode_add_frame()`
   int image_util_anim_encode_save_to_file(
     image_util_anim_encode_h handle,
     ffi.Pointer<ffi.Char> file_path,
@@ -1933,38 +2240,38 @@ class Tizen80CapiMediaImageUtil {
       _image_util_anim_encode_save_to_filePtr.asFunction<
           int Function(image_util_anim_encode_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Saves the animation WEBP or GIF image to the buffer.
-  /// @details After the data has been written to a buffer,
-  /// the file cannot be modified. In other words,\n
-  /// it is not possible to add frames to the buffer.\n
-  /// Saving animation flushes the frames that has been added to the encoder.\n
-  /// However, the encoder can be still used after the data is written.\n
-  /// For example, although you write the data to one buffer(B0),\n
-  /// you can do the following operations:\n
+  /// Saves the animation WEBP or GIF image to the buffer.
   ///
-  /// 1. Add frames 1-10 to the encoder.\n
-  /// 2. Save the data in the encoder to another buffer(B1). 10 frames will be saved.\n
-  /// 3. Add more frames (11-20) to the same encoder.\n
-  /// 4. Save the data in the encoder to the other buffer (B2)\n
-  /// It is not possible to save the changed data to B1 file used in step 4.
-  /// @since_tizen 6.0
+  /// After the data has been written to a buffer, the file cannot be modified. In other words, it is not possible to add frames to the buffer. Saving animation flushes the frames that has been added to the encoder. However, the encoder can be still used after the data is written. For example, although you write the data to one buffer(B0), you can do the following operations:
+  /// 1. Add frames 1-10 to the encoder.
+  /// 2. Save the data in the encoder to another buffer(B1). 10 frames will be saved.
+  /// 3. Add more frames (11-20) to the same encoder.
+  /// 4. Save the data in the encoder to the other buffer (B2) It is not possible to save the changed data to B1 file used in step 4.
   ///
-  /// @remarks The @a buffer should be released using free() after using it.
+  /// **Since Tizen:**
+  /// - 6.0
   ///
-  /// @param[in] handle The handle of encoding an animated WEBP or GIF
-  /// @param[out] buffer The buffer in which the animated WEBP or GIF is saved
-  /// @param[out] buffer_size The size of the buffer
+  /// **Remarks:**
+  /// - The `buffer` should be released using free() after using it.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Parameters:**
+  /// - `handle` (in): The handle of encoding an animated WEBP or GIF
+  /// - `buffer` (out): The buffer in which the animated WEBP or GIF is saved
+  /// - `buffer_size` (out): The size of the buffer
   ///
-  /// @retval #IMAGE_UTIL_ERROR_NONE Successful
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_OPERATION Invalid operation
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @pre image_util_anim_encode_create()
+  /// **Return values:**
+  /// - `IMAGE_UTIL_ERROR_NONE`: Successful
+  /// - `IMAGE_UTIL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IMAGE_UTIL_ERROR_INVALID_OPERATION`: Invalid operation
   ///
-  /// @see image_util_anim_encode_add_frame()
+  /// **Preconditions:**
+  /// - image_util_anim_encode_create()
+  ///
+  /// **See also:**
+  /// - `image_util_anim_encode_add_frame()`
   int image_util_anim_encode_save_to_buffer(
     image_util_anim_encode_h handle,
     ffi.Pointer<ffi.Pointer<ffi.UnsignedChar>> buffer,
@@ -1990,22 +2297,29 @@ class Tizen80CapiMediaImageUtil {
               ffi.Pointer<ffi.Pointer<ffi.UnsignedChar>>,
               ffi.Pointer<ffi.Size>)>();
 
-  /// @brief Destroys the handle for encoding animation.
-  /// @since_tizen 6.0
+  /// Destroys the handle for encoding animation.
   ///
-  /// @remarks Any created animated encoder handle created should be destroyed.
+  /// **Since Tizen:**
+  /// - 6.0
   ///
-  /// @param[in] handle The handle of animation encoder
+  /// **Remarks:**
+  /// - Any created animated encoder handle created should be destroyed.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Parameters:**
+  /// - `handle` (in): The handle of animation encoder
   ///
-  /// @retval #IMAGE_UTIL_ERROR_NONE Successful
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @pre image_util_anim_encode_create()
+  /// **Return values:**
+  /// - `IMAGE_UTIL_ERROR_NONE`: Successful
+  /// - `IMAGE_UTIL_ERROR_INVALID_PARAMETER`: Invalid parameter
   ///
-  /// @see image_util_anim_encode_create()
+  /// **Preconditions:**
+  /// - image_util_anim_encode_create()
+  ///
+  /// **See also:**
+  /// - `image_util_anim_encode_create()`
   int image_util_anim_encode_destroy(
     image_util_anim_encode_h handle,
   ) {
@@ -2021,22 +2335,28 @@ class Tizen80CapiMediaImageUtil {
       _image_util_anim_encode_destroyPtr
           .asFunction<int Function(image_util_anim_encode_h)>();
 
-  /// @deprecated Deprecated since 5.5.
-  /// @brief Calculates the size of the image buffer for the specified resolution and colorspace.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// **Deprecated:** Deprecated since 5.5.
   ///
-  /// @param[in] width The image width
-  /// @param[in] height The image height
-  /// @param[in] colorspace The image colorspace
-  /// @param[out] size The Calculated buffer size
+  /// Calculates the size of the image buffer for the specified resolution and colorspace.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @retval #IMAGE_UTIL_ERROR_NONE Successful
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Parameters:**
+  /// - `width` (in): The image width
+  /// - `height` (in): The image height
+  /// - `colorspace` (in): The image colorspace
+  /// - `size` (out): The Calculated buffer size
   ///
-  /// @see image_util_transform_run()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IMAGE_UTIL_ERROR_NONE`: Successful
+  /// - `IMAGE_UTIL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `image_util_transform_run()`
   int image_util_calculate_buffer_size(
     int width,
     int height,
@@ -2060,24 +2380,30 @@ class Tizen80CapiMediaImageUtil {
       _image_util_calculate_buffer_sizePtr.asFunction<
           int Function(int, int, int, ffi.Pointer<ffi.UnsignedInt>)>();
 
-  /// @brief Extracts representative color from an image buffer.
-  /// @since_tizen 3.0
-  /// @remarks @a image_buffer should be RGB888 colorspace.
+  /// Extracts representative color from an image buffer.
   ///
-  /// @param[in] image_buffer The original image buffer
-  /// @param[in] width The image width
-  /// @param[in] height The image height
-  /// @param[out] rgb_r The red color in RGB color space
-  /// @param[out] rgb_g The green color in RGB color space
-  /// @param[out] rgb_b The blue color in RGB color space
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return 0 on success,
-  /// otherwise a negative error value
+  /// **Remarks:**
+  /// - `image_buffer` should be RGB888 colorspace.
   ///
-  /// @retval #IMAGE_UTIL_ERROR_NONE Successful
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #IMAGE_UTIL_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Parameters:**
+  /// - `image_buffer` (in): The original image buffer
+  /// - `width` (in): The image width
+  /// - `height` (in): The image height
+  /// - `rgb_r` (out): The red color in RGB color space
+  /// - `rgb_g` (out): The green color in RGB color space
+  /// - `rgb_b` (out): The blue color in RGB color space
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IMAGE_UTIL_ERROR_NONE`: Successful
+  /// - `IMAGE_UTIL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IMAGE_UTIL_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `IMAGE_UTIL_ERROR_OUT_OF_MEMORY`: Out of memory
   int image_util_extract_color_from_memory(
     ffi.Pointer<ffi.UnsignedChar> image_buffer,
     int width,
@@ -2116,22 +2442,29 @@ class Tizen80CapiMediaImageUtil {
               ffi.Pointer<ffi.UnsignedChar>,
               ffi.Pointer<ffi.UnsignedChar>)>();
 
-  /// @brief Creates a handle of image util transform.
-  /// @details This function creates a handle of image util transform.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// Creates a handle of image util transform.
   ///
-  /// @remarks The @a handle should be released using image_util_transform_destroy().
+  /// This function creates a handle of image util transform.
   ///
-  /// @param[out] handle The handle for transforming an image
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Remarks:**
+  /// - The `handle` should be released using image_util_transform_destroy().
   ///
-  /// @retval #IMAGE_UTIL_ERROR_NONE Successful
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IMAGE_UTIL_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Parameters:**
+  /// - `handle` (out): The handle for transforming an image
   ///
-  /// @see image_util_transform_destroy()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IMAGE_UTIL_ERROR_NONE`: Successful
+  /// - `IMAGE_UTIL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IMAGE_UTIL_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `image_util_transform_destroy()`
   int image_util_transform_create(
     ffi.Pointer<transformation_h> handle,
   ) {
@@ -2146,30 +2479,37 @@ class Tizen80CapiMediaImageUtil {
   late final _image_util_transform_create = _image_util_transform_createPtr
       .asFunction<int Function(ffi.Pointer<transformation_h>)>();
 
-  /// @deprecated Deprecated since 5.0.
-  /// @brief Sets the image util's accurate mode.
-  /// @details This function set if you use hardware acceleration or not.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// **Deprecated:** Deprecated since 5.0.
   ///
+  /// Sets the image util's accurate mode.
   ///
-  /// @remarks The value returned will be #IMAGE_UTIL_ERROR_NOT_SUPPORTED, if H/W acceleration doesn't support on the device.
+  /// This function set if you use hardware acceleration or not.
   ///
-  /// @param[in] handle The handle for transforming an image
-  /// @param[in] mode Set @c true, user can use the hardware acceleration\n
-  /// otherwise set @c false if user can only software image processing
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Remarks:**
+  /// - The value returned will be `IMAGE_UTIL_ERROR_NOT_SUPPORTED`, if H/W acceleration doesn't support on the device.
   ///
-  /// @retval #IMAGE_UTIL_ERROR_NONE Successful
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #IMAGE_UTIL_ERROR_NOT_SUPPORTED The application does not have the hardware acceleration
+  /// **Parameters:**
+  /// - `handle` (in): The handle for transforming an image
+  /// - `mode` (in): Set `true`, user can use the hardware acceleration otherwise set `false` if user can only software image processing
   ///
-  /// @pre image_util_transform_create().
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @see image_util_transform_create()
-  /// @see image_util_transform_destroy()
+  /// **Return values:**
+  /// - `IMAGE_UTIL_ERROR_NONE`: Successful
+  /// - `IMAGE_UTIL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IMAGE_UTIL_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `IMAGE_UTIL_ERROR_NOT_SUPPORTED`: The application does not have the hardware acceleration
+  ///
+  /// **Preconditions:**
+  /// - image_util_transform_create().
+  ///
+  /// **See also:**
+  /// - `image_util_transform_create()`
+  /// - `image_util_transform_destroy()`
   int image_util_transform_set_hardware_acceleration(
     transformation_h handle,
     bool mode,
@@ -2187,25 +2527,31 @@ class Tizen80CapiMediaImageUtil {
       _image_util_transform_set_hardware_accelerationPtr
           .asFunction<int Function(transformation_h, bool)>();
 
-  /// @brief Sets the information of the converting.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// Sets the information of the converting.
   ///
-  /// @param[in] handle The handle for transforming an image
-  /// @param[in] colorspace The colorspace of the image buffer
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Parameters:**
+  /// - `handle` (in): The handle for transforming an image
+  /// - `colorspace` (in): The colorspace of the image buffer
   ///
-  /// @retval #IMAGE_UTIL_ERROR_NONE Successful
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #IMAGE_UTIL_ERROR_NOT_SUPPORTED_FORMAT Not supported format
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @pre image_util_transform_create().
+  /// **Return values:**
+  /// - `IMAGE_UTIL_ERROR_NONE`: Successful
+  /// - `IMAGE_UTIL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IMAGE_UTIL_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `IMAGE_UTIL_ERROR_NOT_SUPPORTED_FORMAT`: Not supported format
   ///
-  /// @see image_util_transform_create()
-  /// @see image_util_transform_run()
-  /// @see image_util_transform_destroy()
+  /// **Preconditions:**
+  /// - image_util_transform_create().
+  ///
+  /// **See also:**
+  /// - `image_util_transform_create()`
+  /// - `image_util_transform_run()`
+  /// - `image_util_transform_destroy()`
   int image_util_transform_set_colorspace(
     transformation_h handle,
     int colorspace,
@@ -2223,27 +2569,34 @@ class Tizen80CapiMediaImageUtil {
       _image_util_transform_set_colorspacePtr
           .asFunction<int Function(transformation_h, int)>();
 
-  /// @brief Sets the information of the resizing.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// Sets the information of the resizing.
   ///
-  /// @remarks image_util_transform_set_resolution() and image_util_transform_set_crop_area() can't do that at the same time.
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @param[in] handle The handle for transforming an image
-  /// @param[in] width The width of image buffer
-  /// @param[in] height The height of image buffer
+  /// **Remarks:**
+  /// - image_util_transform_set_resolution() and image_util_transform_set_crop_area() can't do that at the same time.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Parameters:**
+  /// - `handle` (in): The handle for transforming an image
+  /// - `width` (in): The width of image buffer
+  /// - `height` (in): The height of image buffer
   ///
-  /// @retval #IMAGE_UTIL_ERROR_NONE Successful
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_OPERATION Invalid operation
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @pre image_util_transform_create().
+  /// **Return values:**
+  /// - `IMAGE_UTIL_ERROR_NONE`: Successful
+  /// - `IMAGE_UTIL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IMAGE_UTIL_ERROR_INVALID_OPERATION`: Invalid operation
   ///
-  /// @see image_util_transform_create()
-  /// @see image_util_transform_run()
-  /// @see image_util_transform_destroy()
+  /// **Preconditions:**
+  /// - image_util_transform_create().
+  ///
+  /// **See also:**
+  /// - `image_util_transform_create()`
+  /// - `image_util_transform_run()`
+  /// - `image_util_transform_destroy()`
   int image_util_transform_set_resolution(
     transformation_h handle,
     int width,
@@ -2264,24 +2617,30 @@ class Tizen80CapiMediaImageUtil {
       _image_util_transform_set_resolutionPtr
           .asFunction<int Function(transformation_h, int, int)>();
 
-  /// @brief Sets the information of the rotating.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// Sets the information of the rotating.
   ///
-  /// @param[in] handle The handle for transforming an image
-  /// @param[in] rotation The rotation value of image buffer
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Parameters:**
+  /// - `handle` (in): The handle for transforming an image
+  /// - `rotation` (in): The rotation value of image buffer
   ///
-  /// @retval #IMAGE_UTIL_ERROR_NONE Successful
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_OPERATION Invalid operation
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @pre image_util_transform_create().
+  /// **Return values:**
+  /// - `IMAGE_UTIL_ERROR_NONE`: Successful
+  /// - `IMAGE_UTIL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IMAGE_UTIL_ERROR_INVALID_OPERATION`: Invalid operation
   ///
-  /// @see image_util_transform_create()
-  /// @see image_util_transform_run()
-  /// @see image_util_transform_destroy()
+  /// **Preconditions:**
+  /// - image_util_transform_create().
+  ///
+  /// **See also:**
+  /// - `image_util_transform_create()`
+  /// - `image_util_transform_run()`
+  /// - `image_util_transform_destroy()`
   int image_util_transform_set_rotation(
     transformation_h handle,
     int rotation,
@@ -2299,29 +2658,36 @@ class Tizen80CapiMediaImageUtil {
       _image_util_transform_set_rotationPtr
           .asFunction<int Function(transformation_h, int)>();
 
-  /// @brief Sets the information of the cropping.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// Sets the information of the cropping.
   ///
-  /// @remarks image_util_transform_set_resolution() and image_util_transform_set_crop_area() can't do that at the same time.
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @param[in] handle The handle for transforming an image
-  /// @param[in] start_x The start x position of cropped image buffer
-  /// @param[in] start_y The start y position of cropped image buffer
-  /// @param[in] end_x The end x position of cropped image buffer
-  /// @param[in] end_y The end y position of cropped image buffer
+  /// **Remarks:**
+  /// - image_util_transform_set_resolution() and image_util_transform_set_crop_area() can't do that at the same time.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Parameters:**
+  /// - `handle` (in): The handle for transforming an image
+  /// - `start_x` (in): The start x position of cropped image buffer
+  /// - `start_y` (in): The start y position of cropped image buffer
+  /// - `end_x` (in): The end x position of cropped image buffer
+  /// - `end_y` (in): The end y position of cropped image buffer
   ///
-  /// @retval #IMAGE_UTIL_ERROR_NONE Successful
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_OPERATION Invalid operation
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @pre image_util_transform_create().
+  /// **Return values:**
+  /// - `IMAGE_UTIL_ERROR_NONE`: Successful
+  /// - `IMAGE_UTIL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IMAGE_UTIL_ERROR_INVALID_OPERATION`: Invalid operation
   ///
-  /// @see image_util_transform_create()
-  /// @see image_util_transform_run()
-  /// @see image_util_transform_destroy()
+  /// **Preconditions:**
+  /// - image_util_transform_create().
+  ///
+  /// **See also:**
+  /// - `image_util_transform_create()`
+  /// - `image_util_transform_run()`
+  /// - `image_util_transform_destroy()`
   int image_util_transform_set_crop_area(
     transformation_h handle,
     int start_x,
@@ -2350,25 +2716,30 @@ class Tizen80CapiMediaImageUtil {
       _image_util_transform_set_crop_areaPtr
           .asFunction<int Function(transformation_h, int, int, int, int)>();
 
-  /// @brief Gets the colorspace of the image buffer.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// Gets the colorspace of the image buffer.
   ///
-  /// @param[in] handle The handle for transforming an image
-  /// @param[in,out] colorspace The colorspace of the image buffer
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Parameters:**
+  /// - `handle` (in): The handle for transforming an image
+  /// - `colorspace` (in,out): The colorspace of the image buffer
   ///
-  /// @retval #IMAGE_UTIL_ERROR_NONE Successful
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #IMAGE_UTIL_ERROR_NOT_SUPPORTED_FORMAT Not supported format
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @pre image_util_transform_create().\n
-  /// image_util_transform_set_crop_area().
+  /// **Return values:**
+  /// - `IMAGE_UTIL_ERROR_NONE`: Successful
+  /// - `IMAGE_UTIL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IMAGE_UTIL_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `IMAGE_UTIL_ERROR_NOT_SUPPORTED_FORMAT`: Not supported format
   ///
-  /// @see image_util_transform_create()
-  /// @see image_util_transform_destroy()
+  /// **Preconditions:**
+  /// - image_util_transform_create(). image_util_transform_set_crop_area().
+  ///
+  /// **See also:**
+  /// - `image_util_transform_create()`
+  /// - `image_util_transform_destroy()`
   int image_util_transform_get_colorspace(
     transformation_h handle,
     ffi.Pointer<ffi.Int32> colorspace,
@@ -2387,25 +2758,30 @@ class Tizen80CapiMediaImageUtil {
       _image_util_transform_get_colorspacePtr
           .asFunction<int Function(transformation_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the resolution of the image buffer.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// Gets the resolution of the image buffer.
   ///
-  /// @param[in] handle The handle for transforming an image
-  /// @param[in,out] width The width of source image buffer
-  /// @param[in,out] height The height of source image buffer
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Parameters:**
+  /// - `handle` (in): The handle for transforming an image
+  /// - `width` (in,out): The width of source image buffer
+  /// - `height` (in,out): The height of source image buffer
   ///
-  /// @retval #IMAGE_UTIL_ERROR_NONE Successful
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_OPERATION Invalid operation
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @pre image_util_transform_create().\n
-  /// image_util_transform_set_resolution().
+  /// **Return values:**
+  /// - `IMAGE_UTIL_ERROR_NONE`: Successful
+  /// - `IMAGE_UTIL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IMAGE_UTIL_ERROR_INVALID_OPERATION`: Invalid operation
   ///
-  /// @see image_util_transform_create()
-  /// @see image_util_transform_destroy()
+  /// **Preconditions:**
+  /// - image_util_transform_create(). image_util_transform_set_resolution().
+  ///
+  /// **See also:**
+  /// - `image_util_transform_create()`
+  /// - `image_util_transform_destroy()`
   int image_util_transform_get_resolution(
     transformation_h handle,
     ffi.Pointer<ffi.UnsignedInt> width,
@@ -2428,24 +2804,29 @@ class Tizen80CapiMediaImageUtil {
           int Function(transformation_h, ffi.Pointer<ffi.UnsignedInt>,
               ffi.Pointer<ffi.UnsignedInt>)>();
 
-  /// @brief Gets the information of the rotating.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// Gets the information of the rotating.
   ///
-  /// @param[in] handle The handle for transforming an image
-  /// @param[in,out] rotation The rotation value of image buffer
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Parameters:**
+  /// - `handle` (in): The handle for transforming an image
+  /// - `rotation` (in,out): The rotation value of image buffer
   ///
-  /// @retval #IMAGE_UTIL_ERROR_NONE Successful
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_OPERATION Invalid operation
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @pre image_util_transform_create().\n
-  /// image_util_transform_set_rotation().
+  /// **Return values:**
+  /// - `IMAGE_UTIL_ERROR_NONE`: Successful
+  /// - `IMAGE_UTIL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IMAGE_UTIL_ERROR_INVALID_OPERATION`: Invalid operation
   ///
-  /// @see image_util_transform_create()
-  /// @see image_util_transform_destroy()
+  /// **Preconditions:**
+  /// - image_util_transform_create(). image_util_transform_set_rotation().
+  ///
+  /// **See also:**
+  /// - `image_util_transform_create()`
+  /// - `image_util_transform_destroy()`
   int image_util_transform_get_rotation(
     transformation_h handle,
     ffi.Pointer<ffi.Int32> rotation,
@@ -2464,27 +2845,32 @@ class Tizen80CapiMediaImageUtil {
       _image_util_transform_get_rotationPtr
           .asFunction<int Function(transformation_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the information of the cropping.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// Gets the information of the cropping.
   ///
-  /// @param[in] handle The handle for transforming an image
-  /// @param[in,out] start_x The start x position of cropped source image buffer
-  /// @param[in,out] start_y The start y position of cropped source image buffer
-  /// @param[in,out] end_x The end x position of cropped source image buffer
-  /// @param[in,out] end_y The end y position of cropped source image buffer
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Parameters:**
+  /// - `handle` (in): The handle for transforming an image
+  /// - `start_x` (in,out): The start x position of cropped source image buffer
+  /// - `start_y` (in,out): The start y position of cropped source image buffer
+  /// - `end_x` (in,out): The end x position of cropped source image buffer
+  /// - `end_y` (in,out): The end y position of cropped source image buffer
   ///
-  /// @retval #IMAGE_UTIL_ERROR_NONE Successful
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_OPERATION Invalid operation
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @pre image_util_transform_create().\n
-  /// image_util_transform_set_crop_area().
+  /// **Return values:**
+  /// - `IMAGE_UTIL_ERROR_NONE`: Successful
+  /// - `IMAGE_UTIL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IMAGE_UTIL_ERROR_INVALID_OPERATION`: Invalid operation
   ///
-  /// @see image_util_transform_create()
-  /// @see image_util_transform_destroy()
+  /// **Preconditions:**
+  /// - image_util_transform_create(). image_util_transform_set_crop_area().
+  ///
+  /// **See also:**
+  /// - `image_util_transform_create()`
+  /// - `image_util_transform_destroy()`
   int image_util_transform_get_crop_area(
     transformation_h handle,
     ffi.Pointer<ffi.UnsignedInt> start_x,
@@ -2519,27 +2905,33 @@ class Tizen80CapiMediaImageUtil {
               ffi.Pointer<ffi.UnsignedInt>,
               ffi.Pointer<ffi.UnsignedInt>)>();
 
-  /// @brief Transforms the image for given image util handle.
-  /// @details The function execute asynchronously, which contains complete callback \n
-  /// If you set more than two transforming, the order of running is crop or resolution, colorspace converting, rotation. \n
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// Transforms the image for given image util handle.
   ///
-  /// @remarks If H/W acceleration is not set, transformation is done via S/W acceleration.
+  /// The function execute asynchronously, which contains complete callback If you set more than two transforming, the order of running is crop or resolution, colorspace converting, rotation.
   ///
-  /// @param[in] handle The handle for transforming an image
-  /// @param[in] src The handle of source
-  /// @param[in] callback The callback function to be invoked
-  /// @param[in] user_data The user data to be passed to the callback function
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Remarks:**
+  /// - If H/W acceleration is not set, transformation is done via S/W acceleration.
   ///
-  /// @retval #IMAGE_UTIL_ERROR_NONE Successful
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_OPERATION Invalid operation
+  /// **Parameters:**
+  /// - `handle` (in): The handle for transforming an image
+  /// - `src` (in): The handle of source
+  /// - `callback` (in): The callback function to be invoked
+  /// - `user_data` (in): The user data to be passed to the callback function
   ///
-  /// @see image_util_transform_create()
-  /// @see image_util_transform_destroy()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IMAGE_UTIL_ERROR_NONE`: Successful
+  /// - `IMAGE_UTIL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IMAGE_UTIL_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `image_util_transform_create()`
+  /// - `image_util_transform_destroy()`
   int image_util_transform_run(
     transformation_h handle,
     media_tool.media_packet_h src,
@@ -2566,35 +2958,42 @@ class Tizen80CapiMediaImageUtil {
           int Function(transformation_h, media_tool.media_packet_h,
               image_util_transform_completed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Synchronously transforms an image with the given transformation handle.
-  /// @details This function transforms an image synchronously using the @a src image handle, which has image information such as size, resolution.\n
-  /// A transformed image is stored into the @a dst image handle.\n
-  /// @since_tizen 5.5
+  /// Synchronously transforms an image with the given transformation handle.
   ///
-  /// @remarks If transforming is failed, the @a dst will be null.
-  /// The @a dst should be released using image_util_destroy_image().
+  /// This function transforms an image synchronously using the `src` image handle, which has image information such as size, resolution. A transformed image is stored into the `dst` image handle.
   ///
-  /// @param[in] handle The handle for transforming an image
-  /// @param[in] src The handle of the src image
-  /// @param[out] dst The transformed image
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Remarks:**
+  /// - If transforming is failed, the `dst` will be null.
+  /// - The `dst` should be released using image_util_destroy_image().
   ///
-  /// @retval #IMAGE_UTIL_ERROR_NONE Successful
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #IMAGE_UTIL_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Parameters:**
+  /// - `handle` (in): The handle for transforming an image
+  /// - `src` (in): The handle of the src image
+  /// - `dst` (out): The transformed image
   ///
-  /// @pre Create a transformation handle by calling image_util_transform_create().
-  /// @pre Set the transformation information by calling image_util_transform_set_colorspace(), image_util_transform_set_resolution(), \n
-  /// image_util_transform_set_rotation(), image_util_transform_set_crop_area().
-  /// @see image_util_transform_create()
-  /// @see image_util_transform_destroy()
-  /// @see image_util_transform_set_colorspace()
-  /// @see image_util_transform_set_resolution()
-  /// @see image_util_transform_set_rotation()
-  /// @see image_util_transform_set_crop_area()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IMAGE_UTIL_ERROR_NONE`: Successful
+  /// - `IMAGE_UTIL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IMAGE_UTIL_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `IMAGE_UTIL_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a transformation handle by calling image_util_transform_create().
+  /// - Set the transformation information by calling image_util_transform_set_colorspace(), image_util_transform_set_resolution(), image_util_transform_set_rotation(), image_util_transform_set_crop_area().
+  ///
+  /// **See also:**
+  /// - `image_util_transform_create()`
+  /// - `image_util_transform_destroy()`
+  /// - `image_util_transform_set_colorspace()`
+  /// - `image_util_transform_set_resolution()`
+  /// - `image_util_transform_set_rotation()`
+  /// - `image_util_transform_set_crop_area()`
   int image_util_transform_run2(
     transformation_h handle,
     image_util_image_h src,
@@ -2616,36 +3015,43 @@ class Tizen80CapiMediaImageUtil {
           int Function(transformation_h, image_util_image_h,
               ffi.Pointer<image_util_image_h>)>();
 
-  /// @brief Synchronously transforms an image with the given transformation handle.
-  /// @details This function transforms an image asynchronously using the @a src image handle, which has image information such as size, resolution.\n
-  /// @a callback will be called after completing transform. \n
-  /// @since_tizen 5.5
+  /// Synchronously transforms an image with the given transformation handle.
   ///
-  /// @remarks If transforming is failed, the dst of callback parameter will be null.
+  /// This function transforms an image asynchronously using the `src` image handle, which has image information such as size, resolution. `callback` will be called after completing transform.
   ///
-  /// @param[in] handle The handle for transforming an image
-  /// @param[in] src The handle of the src image
-  /// @param[in] callback The callback function to be invoked
-  /// @param[in] user_data The user data to be passed to the callback function
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Remarks:**
+  /// - If transforming is failed, the dst of callback parameter will be null.
   ///
-  /// @retval #IMAGE_UTIL_ERROR_NONE Successful
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #IMAGE_UTIL_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Parameters:**
+  /// - `handle` (in): The handle for transforming an image
+  /// - `src` (in): The handle of the src image
+  /// - `callback` (in): The callback function to be invoked
+  /// - `user_data` (in): The user data to be passed to the callback function
   ///
-  /// @pre Create a transformation handle by calling image_util_transform_create().
-  /// @pre Set the transformation information by calling image_util_transform_set_colorspace(), image_util_transform_set_resolution(), \n
-  /// image_util_transform_set_rotation(), image_util_transform_set_crop_area().
-  /// @see image_util_transform_create()
-  /// @see image_util_transform_destroy()
-  /// @see image_util_transform_set_colorspace()
-  /// @see image_util_transform_set_resolution()
-  /// @see image_util_transform_set_rotation()
-  /// @see image_util_transform_set_crop_area()
-  /// @see image_util_transform_completed2_cb()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IMAGE_UTIL_ERROR_NONE`: Successful
+  /// - `IMAGE_UTIL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IMAGE_UTIL_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `IMAGE_UTIL_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - Create a transformation handle by calling image_util_transform_create().
+  /// - Set the transformation information by calling image_util_transform_set_colorspace(), image_util_transform_set_resolution(), image_util_transform_set_rotation(), image_util_transform_set_crop_area().
+  ///
+  /// **See also:**
+  /// - `image_util_transform_create()`
+  /// - `image_util_transform_destroy()`
+  /// - `image_util_transform_set_colorspace()`
+  /// - `image_util_transform_set_resolution()`
+  /// - `image_util_transform_set_rotation()`
+  /// - `image_util_transform_set_crop_area()`
+  /// - `image_util_transform_completed2_cb()`
   int image_util_transform_run2_async(
     transformation_h handle,
     image_util_image_h src,
@@ -2672,21 +3078,25 @@ class Tizen80CapiMediaImageUtil {
           int Function(transformation_h, image_util_image_h,
               image_util_transform_completed2_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Destroys a handle to image util.
-  /// @details The function frees all resources related to the image util handle. The image util
-  /// handle no longer can be used to perform any operations. A new image util handle
-  /// has to be created before the next usage.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// Destroys a handle to image util.
   ///
-  /// @param[in] handle The handle for transforming an image
+  /// The function frees all resources related to the image util handle. The image util handle no longer can be used to perform any operations. A new image util handle has to be created before the next usage.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @retval #IMAGE_UTIL_ERROR_NONE Successful
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Parameters:**
+  /// - `handle` (in): The handle for transforming an image
   ///
-  /// @see image_util_transform_create()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IMAGE_UTIL_ERROR_NONE`: Successful
+  /// - `IMAGE_UTIL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `image_util_transform_create()`
   int image_util_transform_destroy(
     transformation_h handle,
   ) {
@@ -2701,28 +3111,34 @@ class Tizen80CapiMediaImageUtil {
   late final _image_util_transform_destroy = _image_util_transform_destroyPtr
       .asFunction<int Function(transformation_h)>();
 
-  /// @brief Creates an image handle.
-  /// @since_tizen 5.5
+  /// Creates an image handle.
   ///
-  /// @remarks The @a image should be released using image_util_destroy_image().
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @param[in] width		The width of image
-  /// @param[in] height		The height of image
-  /// @param[in] colorspace	The colorspace of image
-  /// @param[in] data		The data of image
-  /// @param[in] data_size	The size of data
-  /// @param[out] image		A handle of image
+  /// **Remarks:**
+  /// - The `image` should be released using image_util_destroy_image().
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Parameters:**
+  /// - `width` (in): The width of image
+  /// - `height` (in): The height of image
+  /// - `colorspace` (in): The colorspace of image
+  /// - `data` (in): The data of image
+  /// - `data_size` (in): The size of data
+  /// - `image` (out): A handle of image
   ///
-  /// @retval #IMAGE_UTIL_ERROR_NONE Successful
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IMAGE_UTIL_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @see image_util_destroy_image()
-  /// @see image_util_get_image()
-  /// @see image_util_clone_image()
+  /// **Return values:**
+  /// - `IMAGE_UTIL_ERROR_NONE`: Successful
+  /// - `IMAGE_UTIL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IMAGE_UTIL_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `image_util_destroy_image()`
+  /// - `image_util_get_image()`
+  /// - `image_util_clone_image()`
   int image_util_create_image(
     int width,
     int height,
@@ -2754,23 +3170,29 @@ class Tizen80CapiMediaImageUtil {
       int Function(int, int, int, ffi.Pointer<ffi.UnsignedChar>, int,
           ffi.Pointer<image_util_image_h>)>();
 
-  /// @brief Clones an image handle.
-  /// @since_tizen 5.5
+  /// Clones an image handle.
   ///
-  /// @remarks The @a dst should be released using image_util_destroy_image().
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @param[in] src		The handle of the image
-  /// @param[out] dst		A handle of the cloned image
+  /// **Remarks:**
+  /// - The `dst` should be released using image_util_destroy_image().
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Parameters:**
+  /// - `src` (in): The handle of the image
+  /// - `dst` (out): A handle of the cloned image
   ///
-  /// @retval #IMAGE_UTIL_ERROR_NONE Successful
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IMAGE_UTIL_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @see image_util_destroy_image()
-  /// @see image_util_get_image()
+  /// **Return values:**
+  /// - `IMAGE_UTIL_ERROR_NONE`: Successful
+  /// - `IMAGE_UTIL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IMAGE_UTIL_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `image_util_destroy_image()`
+  /// - `image_util_get_image()`
   int image_util_clone_image(
     image_util_image_h src,
     ffi.Pointer<image_util_image_h> dst,
@@ -2788,26 +3210,32 @@ class Tizen80CapiMediaImageUtil {
   late final _image_util_clone_image = _image_util_clone_imagePtr.asFunction<
       int Function(image_util_image_h, ffi.Pointer<image_util_image_h>)>();
 
-  /// @brief Gets the information from the image.
-  /// @since_tizen 5.5
+  /// Gets the information from the image.
   ///
-  /// @remarks The @a data should be released using free() if that's not NULL. And if you don't want to get specific information, you can set parameters to NULL.
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @param[in] image		The handle of the image
-  /// @param[out] width		The width of image
-  /// @param[out] height		The height of image
-  /// @param[out] colorspace	The colorspace of image
-  /// @param[out] data		The data of image
-  /// @param[out] data_size	The size of data
+  /// **Remarks:**
+  /// - The `data` should be released using free() if that's not NULL. And if you don't want to get specific information, you can set parameters to NULL.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Parameters:**
+  /// - `image` (in): The handle of the image
+  /// - `width` (out): The width of image
+  /// - `height` (out): The height of image
+  /// - `colorspace` (out): The colorspace of image
+  /// - `data` (out): The data of image
+  /// - `data_size` (out): The size of data
   ///
-  /// @retval #IMAGE_UTIL_ERROR_NONE Successful
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IMAGE_UTIL_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @see image_util_create_image()
+  /// **Return values:**
+  /// - `IMAGE_UTIL_ERROR_NONE`: Successful
+  /// - `IMAGE_UTIL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IMAGE_UTIL_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `image_util_create_image()`
   int image_util_get_image(
     image_util_image_h image,
     ffi.Pointer<ffi.UnsignedInt> width,
@@ -2844,20 +3272,25 @@ class Tizen80CapiMediaImageUtil {
           ffi.Pointer<ffi.Pointer<ffi.UnsignedChar>>,
           ffi.Pointer<ffi.Size>)>();
 
-  /// @brief Destroys an image handle.
-  /// @details The function frees all resources related to the @a image. The image handle no longer can be used to perform any operations.
-  /// A new image handle has to be created before the next usage.
-  /// @since_tizen 5.5
+  /// Destroys an image handle.
   ///
-  /// @param[in] image The handle of the image
+  /// The function frees all resources related to the `image`. The image handle no longer can be used to perform any operations. A new image handle has to be created before the next usage.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @retval #IMAGE_UTIL_ERROR_NONE Successful
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Parameters:**
+  /// - `image` (in): The handle of the image
   ///
-  /// @see image_util_create_image()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IMAGE_UTIL_ERROR_NONE`: Successful
+  /// - `IMAGE_UTIL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `image_util_create_image()`
   int image_util_destroy_image(
     image_util_image_h image,
   ) {
@@ -2872,23 +3305,30 @@ class Tizen80CapiMediaImageUtil {
   late final _image_util_destroy_image = _image_util_destroy_imagePtr
       .asFunction<int Function(image_util_image_h)>();
 
-  /// @brief Retrieves all supported image encoding/decoding colorspace by invoking a callback function once for each one.
-  /// @since_tizen 3.0
+  /// Retrieves all supported image encoding/decoding colorspace by invoking a callback function once for each one.
   ///
-  /// @param[in] image_type The type of supported image for which to create encode/decode handle
-  /// @param[in] callback The callback function to invoke
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return 0 on success,
-  /// otherwise a negative error value
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @retval #IMAGE_UTIL_ERROR_NONE Successful
-  /// @retval #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Parameters:**
+  /// - `image_type` (in): The type of supported image for which to create encode/decode handle
+  /// - `callback` (in): The callback function to invoke
+  /// - `user_data` (in): The user data to be passed to the callback function
   ///
-  /// @post This function invokes image_util_supported_colorspace_cb() repeatedly to retrieve each supported image encoding/decoding colorspace.
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
   ///
-  /// @see image_util_supported_colorspace_cb()
-  /// @see image_util_encode_create()
-  /// @see image_util_decode_create()
+  /// **Return values:**
+  /// - `IMAGE_UTIL_ERROR_NONE`: Successful
+  /// - `IMAGE_UTIL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Postconditions:**
+  /// - This function invokes image_util_supported_colorspace_cb() repeatedly to retrieve each supported image encoding/decoding colorspace.
+  ///
+  /// **See also:**
+  /// - `image_util_supported_colorspace_cb()`
+  /// - `image_util_encode_create()`
+  /// - `image_util_decode_create()`
   int image_util_foreach_supported_colorspace(
     int image_type,
     image_util_supported_colorspace_cb callback,
@@ -2912,8 +3352,11 @@ class Tizen80CapiMediaImageUtil {
               ffi.Pointer<ffi.Void>)>();
 }
 
-/// @brief Enumeration for error.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration for error.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class image_util_error_e {
   /// < Successful
   static const int IMAGE_UTIL_ERROR_NONE = 0;
@@ -2940,8 +3383,11 @@ abstract class image_util_error_e {
   static const int IMAGE_UTIL_ERROR_NOT_SUPPORTED = -1073741822;
 }
 
-/// @brief Enumeration for colorspace.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration for colorspace.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class image_util_colorspace_e {
   /// < YV12 - YCrCb planar format
   static const int IMAGE_UTIL_COLORSPACE_YV12 = 0;
@@ -2989,8 +3435,11 @@ abstract class image_util_colorspace_e {
   static const int IMAGE_UTIL_COLORSPACE_NV61 = 14;
 }
 
-/// @brief Enumeration for rotation.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration for rotation.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class image_util_rotation_e {
   /// < None
   static const int IMAGE_UTIL_ROTATION_NONE = 0;
@@ -3011,10 +3460,14 @@ abstract class image_util_rotation_e {
   static const int IMAGE_UTIL_ROTATION_FLIP_VERT = 5;
 }
 
+/// @nodoc
 final class transformation_s extends ffi.Opaque {}
 
-/// @brief Enumeration for image types.
-/// @since_tizen 3.0
+/// Enumeration for image types.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class image_util_type_e {
   /// < Image format JPEG
   static const int IMAGE_UTIL_JPEG = 0;
@@ -3038,8 +3491,11 @@ abstract class image_util_type_e {
   static const int IMAGE_UTIL_JPEG_XL = 6;
 }
 
-/// @brief Enumeration for animated image type.
-/// @since_tizen 6.0
+/// Enumeration for animated image type.
+///
+/// **Since Tizen:**
+/// - 6.0
+/// @nodoc
 abstract class image_util_anim_type_e {
   /// < Image format animated GIF
   static const int IMAGE_UTIL_ANIM_GIF = 0;
@@ -3048,8 +3504,11 @@ abstract class image_util_anim_type_e {
   static const int IMAGE_UTIL_ANIM_WEBP = 1;
 }
 
-/// @brief Enumeration for scale decoding.
-/// @since_tizen @if WEARABLE 3.0 @else 2.4 @endif
+/// Enumeration for scale decoding.
+///
+/// **Since Tizen:**
+/// - Wearable 3.0; Otherwise 2.4
+/// @nodoc
 abstract class image_util_scale_e {
   /// < 1/1 downscale
   static const int IMAGE_UTIL_DOWNSCALE_1_1 = 0;
@@ -3064,8 +3523,11 @@ abstract class image_util_scale_e {
   static const int IMAGE_UTIL_DOWNSCALE_1_8 = 3;
 }
 
-/// @brief Enumeration for PNG compression values.
-/// @since_tizen 3.0
+/// Enumeration for PNG compression values.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class image_util_png_compression_e {
   /// < No compression
   static const int IMAGE_UTIL_PNG_COMPRESSION_0 = 0;
@@ -3098,37 +3560,50 @@ abstract class image_util_png_compression_e {
   static const int IMAGE_UTIL_PNG_COMPRESSION_9 = 9;
 }
 
-/// @ingroup CAPI_MEDIA_IMAGE_UTIL_ENCODE_DECODE_MODULE
-/// @brief Image-util decoding handle.
-/// @since_tizen 3.0
+/// Image-util decoding handle.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Group:**
+/// - CAPI_MEDIA_IMAGE_UTIL_ENCODE_DECODE_MODULE
+/// @nodoc
 typedef image_util_decode_h = ffi.Pointer<ffi.Void>;
 
-/// @ingroup CAPI_MEDIA_IMAGE_UTIL_ENCODE_DECODE_MODULE
-/// @deprecated Deprecated since 5.5.
-/// @brief Called when Image-util decoding is finished just before returning the output.
-/// @since_tizen 3.0
+/// **Deprecated:** Deprecated since 5.5.
 ///
-/// @remarks The output will be stored in the pointer set using image_util_decode_set_output_buffer() after this callback. \n
-/// The callback is called in a separate thread(not in the main loop).
+/// Called when Image-util decoding is finished just before returning the output.
 ///
-/// @param[in] error_code The error code of image util decoding
-/// #IMAGE_UTIL_ERROR_NONE Successful
-/// #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
-/// #IMAGE_UTIL_ERROR_INVALID_OPERATION Invalid operation
-/// @param[in] user_data The user data passed from the callback registration function
-/// @param[in] width Width of the decoded image
-/// @param[in] height Height of the decoded image
-/// @param[in] size Size of the decoded image
+/// **Since Tizen:**
+/// - 3.0
 ///
-/// @pre image_util_decode_run_async() will invoke this function.
+/// **Remarks:**
+/// - The output will be stored in the pointer set using image_util_decode_set_output_buffer() after this callback.
+/// - The callback is called in a separate thread(not in the main loop).
+///
+/// **Parameters:**
+/// - `error_code` (in): The error code of image util decoding `IMAGE_UTIL_ERROR_NONE` Successful `IMAGE_UTIL_ERROR_INVALID_PARAMETER` Invalid parameter `IMAGE_UTIL_ERROR_INVALID_OPERATION` Invalid operation
+/// - `user_data` (in): The user data passed from the callback registration function
+/// - `width` (in): Width of the decoded image
+/// - `height` (in): Height of the decoded image
+/// - `size` (in): Size of the decoded image
+///
+/// **Preconditions:**
+/// - image_util_decode_run_async() will invoke this function.
+///
+/// **Group:**
+/// - CAPI_MEDIA_IMAGE_UTIL_ENCODE_DECODE_MODULE
+/// @nodoc
 typedef image_util_decode_completed_cb
     = ffi.Pointer<ffi.NativeFunction<image_util_decode_completed_cbFunction>>;
+/// @nodoc
 typedef image_util_decode_completed_cbFunction = ffi.Void Function(
     ffi.Int error_code,
     ffi.Pointer<ffi.Void> user_data,
     ffi.UnsignedLong width,
     ffi.UnsignedLong height,
     ffi.UnsignedLongLong size);
+/// @nodoc
 typedef Dartimage_util_decode_completed_cbFunction = void Function(
     int error_code,
     ffi.Pointer<ffi.Void> user_data,
@@ -3136,205 +3611,280 @@ typedef Dartimage_util_decode_completed_cbFunction = void Function(
     int height,
     int size);
 
-/// @brief Image handle.
-/// @since_tizen 5.5
+/// Image handle.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 typedef image_util_image_h = ffi.Pointer<ffi.Void>;
 
-/// @ingroup CAPI_MEDIA_IMAGE_UTIL_ENCODE_DECODE_MODULE
-/// @brief Called when image_util_decode_run_async2() finishes decoding an image.
-/// @since_tizen 5.5
+/// Called when image_util_decode_run_async2() finishes decoding an image.
 ///
-/// @remarks The callback is called in a separate thread(not in the main loop). \n
-/// The @a image should not be released by the application. \n
-/// The @a image can be used only in the callback. To use outside, make a copy using image_util_clone_image().
+/// **Since Tizen:**
+/// - 5.5
 ///
-/// @param[in] error_code The error code of image util decoding
-/// #IMAGE_UTIL_ERROR_NONE Successful
-/// #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
-/// #IMAGE_UTIL_ERROR_INVALID_OPERATION Invalid operation
-/// #IMAGE_UTIL_ERROR_OUT_OF_MEMORY Out of memory
-/// #IMAGE_UTIL_ERROR_NOT_SUPPORTED_FORMAT Format not supported
+/// **Remarks:**
+/// - The callback is called in a separate thread(not in the main loop).
+/// - The `image` should not be released by the application.
+/// - The `image` can be used only in the callback. To use outside, make a copy using image_util_clone_image().
 ///
-/// @param[in] image The decoded image (or @c NULL if decoding failed)
-/// @param[in] user_data The user data passed from the callback registration function
+/// **Parameters:**
+/// - `error_code` (in): The error code of image util decoding `IMAGE_UTIL_ERROR_NONE` Successful `IMAGE_UTIL_ERROR_INVALID_PARAMETER` Invalid parameter `IMAGE_UTIL_ERROR_INVALID_OPERATION` Invalid operation `IMAGE_UTIL_ERROR_OUT_OF_MEMORY` Out of memory `IMAGE_UTIL_ERROR_NOT_SUPPORTED_FORMAT` Format not supported
+/// - `image` (in): The decoded image (or `NULL` if decoding failed)
+/// - `user_data` (in): The user data passed from the callback registration function
 ///
-/// @pre image_util_decode_run_async2() will invoke this function.
+/// **Preconditions:**
+/// - image_util_decode_run_async2() will invoke this function.
+///
+/// **Group:**
+/// - CAPI_MEDIA_IMAGE_UTIL_ENCODE_DECODE_MODULE
+/// @nodoc
 typedef image_util_decode_completed2_cb
     = ffi.Pointer<ffi.NativeFunction<image_util_decode_completed2_cbFunction>>;
+/// @nodoc
 typedef image_util_decode_completed2_cbFunction = ffi.Void Function(
     ffi.Int error_code,
     image_util_image_h image,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartimage_util_decode_completed2_cbFunction = void Function(
     int error_code, image_util_image_h image, ffi.Pointer<ffi.Void> user_data);
 
-/// @ingroup CAPI_MEDIA_IMAGE_UTIL_ENCODE_DECODE_MODULE
-/// @brief Image-util encoding handle.
-/// @since_tizen 3.0
+/// Image-util encoding handle.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Group:**
+/// - CAPI_MEDIA_IMAGE_UTIL_ENCODE_DECODE_MODULE
+/// @nodoc
 typedef image_util_encode_h = ffi.Pointer<ffi.Void>;
 
-/// @ingroup CAPI_MEDIA_IMAGE_UTIL_ENCODE_DECODE_MODULE
-/// @deprecated Deprecated since 5.5. Use image_util_encode_run_async_to_file() or image_util_encode_run_async_to_buffer() instead.
-/// @brief Called when Image-util encoding is finished just before returning the output.
-/// @since_tizen 3.0
+/// **Deprecated:** Deprecated since 5.5. Use image_util_encode_run_async_to_file() or image_util_encode_run_async_to_buffer() instead.
 ///
-/// @remarks The output will be stored in the pointer set using image_util_encode_set_output_buffer() or image_util_encode_set_output_path() after this callback. \n
-/// The callback is called in a separate thread(not in the main loop).
+/// Called when Image-util encoding is finished just before returning the output.
 ///
-/// @param[in] error_code The error code of image util encoding
-/// #IMAGE_UTIL_ERROR_NONE Successful
-/// #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter
-/// #IMAGE_UTIL_ERROR_INVALID_OPERATION Invalid operation
-/// @param[in] user_data The user data passed from the callback registration function
-/// @param[in] size Size of the encoded image
+/// **Since Tizen:**
+/// - 3.0
 ///
-/// @pre image_util_encode_run() will invoke this function.
+/// **Remarks:**
+/// - The output will be stored in the pointer set using image_util_encode_set_output_buffer() or image_util_encode_set_output_path() after this callback.
+/// - The callback is called in a separate thread(not in the main loop).
+///
+/// **Parameters:**
+/// - `error_code` (in): The error code of image util encoding `IMAGE_UTIL_ERROR_NONE` Successful `IMAGE_UTIL_ERROR_INVALID_PARAMETER` Invalid parameter `IMAGE_UTIL_ERROR_INVALID_OPERATION` Invalid operation
+/// - `user_data` (in): The user data passed from the callback registration function
+/// - `size` (in): Size of the encoded image
+///
+/// **Preconditions:**
+/// - image_util_encode_run() will invoke this function.
+///
+/// **Group:**
+/// - CAPI_MEDIA_IMAGE_UTIL_ENCODE_DECODE_MODULE
+/// @nodoc
 typedef image_util_encode_completed_cb
     = ffi.Pointer<ffi.NativeFunction<image_util_encode_completed_cbFunction>>;
+/// @nodoc
 typedef image_util_encode_completed_cbFunction = ffi.Void Function(
     ffi.Int error_code,
     ffi.Pointer<ffi.Void> user_data,
     ffi.UnsignedLongLong size);
+/// @nodoc
 typedef Dartimage_util_encode_completed_cbFunction = void Function(
     int error_code, ffi.Pointer<ffi.Void> user_data, int size);
 
-/// @ingroup CAPI_MEDIA_IMAGE_UTIL_ENCODE_DECODE_MODULE
-/// @brief Called when image encoding is finished just after storing the output to the file.
-/// @since_tizen 5.5
+/// Called when image encoding is finished just after storing the output to the file.
 ///
-/// @remarks The output will be stored in the file set using image_util_encode_run_to_file(). \n
-/// The callback is called in a separate thread (not in the main loop).
+/// **Since Tizen:**
+/// - 5.5
 ///
-/// @param[in] error_code The error code of image util encoding \n
-/// #IMAGE_UTIL_ERROR_NONE Successful \n
-/// #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter \n
-/// #IMAGE_UTIL_ERROR_INVALID_OPERATION Invalid operation \n
-/// #IMAGE_UTIL_ERROR_OUT_OF_MEMORY Out of memory \n
-/// #IMAGE_UTIL_ERROR_NOT_SUPPORTED_FORMAT Not supported format
-/// @param[in] user_data The user data passed from the callback registration function
+/// **Remarks:**
+/// - The output will be stored in the file set using image_util_encode_run_to_file().
+/// - The callback is called in a separate thread (not in the main loop).
 ///
-/// @pre image_util_encode_run_to_file() will invoke this function.
+/// **Parameters:**
+/// - `error_code` (in): The error code of image util encoding `IMAGE_UTIL_ERROR_NONE` Successful `IMAGE_UTIL_ERROR_INVALID_PARAMETER` Invalid parameter `IMAGE_UTIL_ERROR_INVALID_OPERATION` Invalid operation `IMAGE_UTIL_ERROR_OUT_OF_MEMORY` Out of memory `IMAGE_UTIL_ERROR_NOT_SUPPORTED_FORMAT` Not supported format
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - image_util_encode_run_to_file() will invoke this function.
+///
+/// **Group:**
+/// - CAPI_MEDIA_IMAGE_UTIL_ENCODE_DECODE_MODULE
+/// @nodoc
 typedef image_util_encode_to_file_completed_cb = ffi.Pointer<
     ffi.NativeFunction<image_util_encode_to_file_completed_cbFunction>>;
+/// @nodoc
 typedef image_util_encode_to_file_completed_cbFunction = ffi.Void Function(
     ffi.Int32 error_code, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartimage_util_encode_to_file_completed_cbFunction = void Function(
     int error_code, ffi.Pointer<ffi.Void> user_data);
 
-/// @ingroup CAPI_MEDIA_IMAGE_UTIL_ENCODE_DECODE_MODULE
-/// @brief Called when image encoding is finished just after storing the output to the buffer.
-/// @since_tizen 5.5
+/// Called when image encoding is finished just after storing the output to the buffer.
 ///
-/// @remarks The output will be stored in the @a buffer. \n
-/// The callback is called in a separate thread (not in the main loop).\n
-/// The @a buffer should not be released by the application.\n
-/// The @a buffer can be used only in the callback. To use outside, make a copy.
+/// **Since Tizen:**
+/// - 5.5
 ///
-/// @param[in] error_code The error code of image util encoding \n
-/// #IMAGE_UTIL_ERROR_NONE Successful \n
-/// #IMAGE_UTIL_ERROR_INVALID_PARAMETER Invalid parameter \n
-/// #IMAGE_UTIL_ERROR_INVALID_OPERATION Invalid operation \n
-/// #IMAGE_UTIL_ERROR_OUT_OF_MEMORY Out of memory \n
-/// #IMAGE_UTIL_ERROR_NOT_SUPPORTED_FORMAT Not supported format
-/// @param[in] buffer The buffer for the encoded image
-/// @param[in] buffer_size The size of the buffer for the encoded image
-/// @param[in] user_data The user data passed from the callback registration function
+/// **Remarks:**
+/// - The output will be stored in the `buffer`.
+/// - The callback is called in a separate thread (not in the main loop).
+/// - The `buffer` should not be released by the application.
+/// - The `buffer` can be used only in the callback. To use outside, make a copy.
 ///
-/// @pre image_util_encode_run_to_buffer() will invoke this function.
+/// **Parameters:**
+/// - `error_code` (in): The error code of image util encoding `IMAGE_UTIL_ERROR_NONE` Successful `IMAGE_UTIL_ERROR_INVALID_PARAMETER` Invalid parameter `IMAGE_UTIL_ERROR_INVALID_OPERATION` Invalid operation `IMAGE_UTIL_ERROR_OUT_OF_MEMORY` Out of memory `IMAGE_UTIL_ERROR_NOT_SUPPORTED_FORMAT` Not supported format
+/// - `buffer` (in): The buffer for the encoded image
+/// - `buffer_size` (in): The size of the buffer for the encoded image
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - image_util_encode_run_to_buffer() will invoke this function.
+///
+/// **Group:**
+/// - CAPI_MEDIA_IMAGE_UTIL_ENCODE_DECODE_MODULE
+/// @nodoc
 typedef image_util_encode_to_buffer_completed_cb = ffi.Pointer<
     ffi.NativeFunction<image_util_encode_to_buffer_completed_cbFunction>>;
+/// @nodoc
 typedef image_util_encode_to_buffer_completed_cbFunction = ffi.Void Function(
     ffi.Int32 error_code,
     ffi.Pointer<ffi.UnsignedChar> buffer,
     ffi.Size buffer_size,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartimage_util_encode_to_buffer_completed_cbFunction = void Function(
     int error_code,
     ffi.Pointer<ffi.UnsignedChar> buffer,
     int buffer_size,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @ingroup CAPI_MEDIA_IMAGE_UTIL_ENCODE_DECODE_MODULE
-/// @brief Image-util animation GIF encoding handle.
-/// @since_tizen 5.5
+/// Image-util animation GIF encoding handle.
+///
+/// **Since Tizen:**
+/// - 5.5
+///
+/// **Group:**
+/// - CAPI_MEDIA_IMAGE_UTIL_ENCODE_DECODE_MODULE
+/// @nodoc
 typedef image_util_agif_encode_h = ffi.Pointer<ffi.Void>;
 
-/// @ingroup CAPI_MEDIA_IMAGE_UTIL_ENCODE_DECODE_MODULE
-/// @brief Image-util animation encoding handle.
-/// @since_tizen 6.0
+/// Image-util animation encoding handle.
+///
+/// **Since Tizen:**
+/// - 6.0
+///
+/// **Group:**
+/// - CAPI_MEDIA_IMAGE_UTIL_ENCODE_DECODE_MODULE
+/// @nodoc
 typedef image_util_anim_encode_h = ffi.Pointer<ffi.Void>;
 
-/// @ingroup CAPI_MEDIA_IMAGE_UTIL_TRANSFORM_MODULE
-/// @brief Image util handle.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Image util handle.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+///
+/// **Group:**
+/// - CAPI_MEDIA_IMAGE_UTIL_TRANSFORM_MODULE
+/// @nodoc
 typedef transformation_h = ffi.Pointer<transformation_s>;
 
-/// @ingroup CAPI_MEDIA_IMAGE_UTIL_TRANSFORM_MODULE
-/// @brief Called when transform is finished just before returning the output.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Called when transform is finished just before returning the output.
 ///
-/// @remarks The @a dst should be released using media_packet_destroy(). \n
-/// The callback is called in a separate thread(not in the main loop).
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
 ///
-/// @param[in,out] dst The result buffer of image util transform
-/// @param[in] error_code The error code of image util transform
-/// @param[in] user_data The user data passed from the callback registration function
-/// @pre image_util_transform_run() will invoke this function.
+/// **Remarks:**
+/// - The `dst` should be released using media_packet_destroy().
+/// - The callback is called in a separate thread(not in the main loop).
+///
+/// **Parameters:**
+/// - `dst` (in,out): The result buffer of image util transform
+/// - `error_code` (in): The error code of image util transform
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - image_util_transform_run() will invoke this function.
+///
+/// **Group:**
+/// - CAPI_MEDIA_IMAGE_UTIL_TRANSFORM_MODULE
+/// @nodoc
 typedef image_util_transform_completed_cb = ffi
     .Pointer<ffi.NativeFunction<image_util_transform_completed_cbFunction>>;
+/// @nodoc
 typedef image_util_transform_completed_cbFunction = ffi.Void Function(
     ffi.Pointer<media_tool.media_packet_h> dst,
     ffi.Int error_code,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartimage_util_transform_completed_cbFunction = void Function(
     ffi.Pointer<media_tool.media_packet_h> dst,
     int error_code,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @ingroup CAPI_MEDIA_IMAGE_UTIL_TRANSFORM_MODULE
-/// @brief Called when transforming an image is completed.
+/// Called when transforming an image is completed.
 ///
-/// @since_tizen 5.5
+/// **Since Tizen:**
+/// - 5.5
 ///
-/// @remarks The @a dst can be used only in the callback. To use outside, make a copy using image_util_clone_image(). \n
-/// The callback is called in a separate thread(not in the main loop).
+/// **Remarks:**
+/// - The `dst` can be used only in the callback. To use outside, make a copy using image_util_clone_image().
+/// - The callback is called in a separate thread(not in the main loop).
 ///
-/// @param[in] dst The transformed image
-/// @param[in] error_code The error code of transformation
-/// @param[in] user_data The user data passed from the callback registration function
+/// **Parameters:**
+/// - `dst` (in): The transformed image
+/// - `error_code` (in): The error code of transformation
+/// - `user_data` (in): The user data passed from the callback registration function
 ///
-/// @pre image_util_transform_run2_async()
+/// **Preconditions:**
+/// - image_util_transform_run2_async()
 ///
-/// @see image_util_transform_run2_async()
-/// @see image_util_clone_image()
+/// **See also:**
+/// - `image_util_transform_run2_async()`
+/// - `image_util_clone_image()`
+///
+/// **Group:**
+/// - CAPI_MEDIA_IMAGE_UTIL_TRANSFORM_MODULE
+/// @nodoc
 typedef image_util_transform_completed2_cb = ffi
     .Pointer<ffi.NativeFunction<image_util_transform_completed2_cbFunction>>;
+/// @nodoc
 typedef image_util_transform_completed2_cbFunction = ffi.Void Function(
     image_util_image_h dst,
     ffi.Int error_code,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartimage_util_transform_completed2_cbFunction = void Function(
     image_util_image_h dst, int error_code, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called once for each supported image encode/decode colorspace.
-/// @since_tizen 3.0
+/// Called once for each supported image encode/decode colorspace.
 ///
-/// @param[in] colorspace The colorspace
-/// @param[in] user_data The user data passed from the foreach function
+/// **Since Tizen:**
+/// - 3.0
 ///
-/// @return @c true to continue with the next iteration of the loop, \n
-/// otherwise @c false to break out of the loop
+/// **Parameters:**
+/// - `colorspace` (in): The colorspace
+/// - `user_data` (in): The user data passed from the foreach function
 ///
-/// @pre image_util_foreach_supported_colorspace() invokes this callback.
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop
 ///
-/// @see image_util_foreach_supported_colorspace()
-/// @see image_util_encode_create()
-/// @see image_util_decode_create()
+/// **Preconditions:**
+/// - image_util_foreach_supported_colorspace() invokes this callback.
+///
+/// **See also:**
+/// - `image_util_foreach_supported_colorspace()`
+/// - `image_util_encode_create()`
+/// - `image_util_decode_create()`
+/// @nodoc
 typedef image_util_supported_colorspace_cb = ffi
     .Pointer<ffi.NativeFunction<image_util_supported_colorspace_cbFunction>>;
+/// @nodoc
 typedef image_util_supported_colorspace_cbFunction = ffi.Bool Function(
     ffi.Int32 colorspace, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartimage_util_supported_colorspace_cbFunction = bool Function(
     int colorspace, ffi.Pointer<ffi.Void> user_data);
 
+/// @nodoc
 const int IMAGE_UTIL_ERROR_CLASS = -26345472;

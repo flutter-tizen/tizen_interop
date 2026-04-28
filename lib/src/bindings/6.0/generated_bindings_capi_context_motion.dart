@@ -1,3 +1,6 @@
+/// {@category 6.0/tizen}
+library tizen_interop_6_0.capi_context_motion;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen capi-context-motion APIs.
+/// {@category 6.0/tizen}
 class Tizen60CapiContextMotion {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,22 +28,28 @@ class Tizen60CapiContextMotion {
           lookup)
       : _lookup = lookup;
 
-  /// @deprecated Deprecated since 6.0.
-  /// @brief	Check whether the activity is supported or not.
-  /// @details	Check if the given activity type is supported in the current device.
+  /// **Deprecated:** Deprecated since 6.0.
   ///
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// Check whether the activity is supported or not.
   ///
-  /// @param[in]	activity	Activity type to be checked
-  /// @param[out]	supported	@c true if the activity is recognizable in the current device,@n
-  /// @c false otherwise
+  /// Check if the given activity type is supported in the current device.
   ///
-  /// @return	@c 0 if the @c activity is supported, otherwise a negative error value
-  /// @retval	#ACTIVITY_ERROR_NONE				Supported
-  /// @retval	#ACTIVITY_ERROR_INVALID_PARAMETER	Invalid parameter used
-  /// @retval	#ACTIVITY_ERROR_NOT_SUPPORTED		The @c activity is not supported
-  /// @retval	#ACTIVITY_ERROR_OPERATION_FAILED	Operation failed because of a system error
-  /// @retval	#ACTIVITY_ERROR_PERMISSION_DENIED	Does not have permission to use this
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `activity` (in): Activity type to be checked
+  /// - `supported` (out): `true` if the activity is recognizable in the current device, `false` otherwise
+  ///
+  /// **Returns:**
+  /// - `0` if the `activity` is supported, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACTIVITY_ERROR_NONE`: Supported
+  /// - `ACTIVITY_ERROR_INVALID_PARAMETER`: Invalid parameter used
+  /// - `ACTIVITY_ERROR_NOT_SUPPORTED`: The `activity` is not supported
+  /// - `ACTIVITY_ERROR_OPERATION_FAILED`: Operation failed because of a system error
+  /// - `ACTIVITY_ERROR_PERMISSION_DENIED`: Does not have permission to use this
   int activity_is_supported(
     int activity,
     ffi.Pointer<ffi.Bool> supported,
@@ -57,20 +67,27 @@ class Tizen60CapiContextMotion {
   late final _activity_is_supported = _activity_is_supportedPtr
       .asFunction<int Function(int, ffi.Pointer<ffi.Bool>)>();
 
-  /// @deprecated Deprecated since 6.0.
-  /// @brief	Initializes an activity handle.
+  /// **Deprecated:** Deprecated since 6.0.
   ///
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// Initializes an activity handle.
   ///
-  /// @param[out]	handle		Activity handle to be initialized
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @return	@c 0 on success, otherwise a negative error value
-  /// @retval	#ACTIVITY_ERROR_NONE				Successful
-  /// @retval	#ACTIVITY_ERROR_INVALID_PARAMETER	Invalid parameter used
-  /// @retval	#ACTIVITY_ERROR_NOT_SUPPORTED		Activity recognition is not supported
-  /// @retval	#ACTIVITY_ERROR_OPERATION_FAILED	Operation failed because of a system error, e.g., out of memory
+  /// **Parameters:**
+  /// - `handle` (out): Activity handle to be initialized
   ///
-  /// @see		activity_release()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACTIVITY_ERROR_NONE`: Successful
+  /// - `ACTIVITY_ERROR_INVALID_PARAMETER`: Invalid parameter used
+  /// - `ACTIVITY_ERROR_NOT_SUPPORTED`: Activity recognition is not supported
+  /// - `ACTIVITY_ERROR_OPERATION_FAILED`: Operation failed because of a system error, e.g., out of memory
+  ///
+  /// **See also:**
+  /// - `activity_release()`
   int activity_create(
     ffi.Pointer<activity_h> handle,
   ) {
@@ -85,20 +102,27 @@ class Tizen60CapiContextMotion {
   late final _activity_create =
       _activity_createPtr.asFunction<int Function(ffi.Pointer<activity_h>)>();
 
-  /// @deprecated Deprecated since 6.0.
-  /// @brief	Releases the resources occupied by the activity handle.
+  /// **Deprecated:** Deprecated since 6.0.
   ///
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// Releases the resources occupied by the activity handle.
   ///
-  /// @param[in]	handle		Activity handle to be released
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @return	@c 0 on success, otherwise a negative error value
-  /// @retval	#ACTIVITY_ERROR_NONE				Successful
-  /// @retval	#ACTIVITY_ERROR_INVALID_PARAMETER	Invalid parameter used
-  /// @retval	#ACTIVITY_ERROR_NOT_SUPPORTED		Activity recognition is not supported
-  /// @retval	#ACTIVITY_ERROR_OPERATION_FAILED	Operation failed because of a system error
+  /// **Parameters:**
+  /// - `handle` (in): Activity handle to be released
   ///
-  /// @pre		activity_create()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACTIVITY_ERROR_NONE`: Successful
+  /// - `ACTIVITY_ERROR_INVALID_PARAMETER`: Invalid parameter used
+  /// - `ACTIVITY_ERROR_NOT_SUPPORTED`: Activity recognition is not supported
+  /// - `ACTIVITY_ERROR_OPERATION_FAILED`: Operation failed because of a system error
+  ///
+  /// **Preconditions:**
+  /// - activity_create()
   int activity_release(
     activity_h handle,
   ) {
@@ -113,29 +137,40 @@ class Tizen60CapiContextMotion {
   late final _activity_release =
       _activity_releasePtr.asFunction<int Function(activity_h)>();
 
-  /// @deprecated Deprecated since 6.0.
-  /// @brief	Starts to recognize an activity.
-  /// @details	Sets a callback function to be invoked when the activity is detected,
-  /// and starts to monitor occurrences of the activity.
+  /// **Deprecated:** Deprecated since 6.0.
   ///
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// Starts to recognize an activity.
   ///
-  /// @param[in]	handle		Activity handle to be used to control the activity event
-  /// @param[in]	activity	Activity type to be monitored
-  /// @param[in]	callback	Callback function to receive activity events
-  /// @param[in]	user_data	User data to be passed to the callback function
+  /// Sets a callback function to be invoked when the activity is detected, and starts to monitor occurrences of the activity.
   ///
-  /// @return	@c 0 on success, otherwise a negative error value
-  /// @retval	#ACTIVITY_ERROR_NONE				Successful
-  /// @retval	#ACTIVITY_ERROR_INVALID_PARAMETER	Invalid parameter used
-  /// @retval	#ACTIVITY_ERROR_NOT_SUPPORTED		Activity recognition is not supported
-  /// @retval	#ACTIVITY_ERROR_ALREADY_STARTED		The @c handle is being used already
-  /// @retval	#ACTIVITY_ERROR_OPERATION_FAILED	Operation failed because of a system error
-  /// @retval	#ACTIVITY_ERROR_PERMISSION_DENIED	Does not have permission to use this
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @pre		activity_create()
-  /// @post	activity_recognition_cb()
-  /// @see		activity_stop_recognition()
+  /// **Parameters:**
+  /// - `handle` (in): Activity handle to be used to control the activity event
+  /// - `activity` (in): Activity type to be monitored
+  /// - `callback` (in): Callback function to receive activity events
+  /// - `user_data` (in): User data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACTIVITY_ERROR_NONE`: Successful
+  /// - `ACTIVITY_ERROR_INVALID_PARAMETER`: Invalid parameter used
+  /// - `ACTIVITY_ERROR_NOT_SUPPORTED`: Activity recognition is not supported
+  /// - `ACTIVITY_ERROR_ALREADY_STARTED`: The `handle` is being used already
+  /// - `ACTIVITY_ERROR_OPERATION_FAILED`: Operation failed because of a system error
+  /// - `ACTIVITY_ERROR_PERMISSION_DENIED`: Does not have permission to use this
+  ///
+  /// **Preconditions:**
+  /// - activity_create()
+  ///
+  /// **Postconditions:**
+  /// - activity_recognition_cb()
+  ///
+  /// **See also:**
+  /// - `activity_stop_recognition()`
   int activity_start_recognition(
     activity_h handle,
     int activity,
@@ -159,19 +194,25 @@ class Tizen60CapiContextMotion {
           int Function(activity_h, int, activity_recognition_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @deprecated Deprecated since 6.0.
-  /// @brief	Stops recognizing the activity registered to the activity handle.
+  /// **Deprecated:** Deprecated since 6.0.
   ///
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// Stops recognizing the activity registered to the activity handle.
   ///
-  /// @param[in]	handle		Activity handle to release its callback function registered
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @return	@c 0 on success, otherwise a negative error value
-  /// @retval	#ACTIVITY_ERROR_NONE				Successful
-  /// @retval	#ACTIVITY_ERROR_INVALID_PARAMETER	Invalid parameter used
-  /// @retval	#ACTIVITY_ERROR_NOT_SUPPORTED		Activity recognition is not supported
-  /// @retval	#ACTIVITY_ERROR_NOT_STARTED			Nothing is started using the @c handle
-  /// @retval	#ACTIVITY_ERROR_OPERATION_FAILED	Operation failed because of a system error
+  /// **Parameters:**
+  /// - `handle` (in): Activity handle to release its callback function registered
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACTIVITY_ERROR_NONE`: Successful
+  /// - `ACTIVITY_ERROR_INVALID_PARAMETER`: Invalid parameter used
+  /// - `ACTIVITY_ERROR_NOT_SUPPORTED`: Activity recognition is not supported
+  /// - `ACTIVITY_ERROR_NOT_STARTED`: Nothing is started using the `handle`
+  /// - `ACTIVITY_ERROR_OPERATION_FAILED`: Operation failed because of a system error
   int activity_stop_recognition(
     activity_h handle,
   ) {
@@ -186,19 +227,25 @@ class Tizen60CapiContextMotion {
   late final _activity_stop_recognition =
       _activity_stop_recognitionPtr.asFunction<int Function(activity_h)>();
 
-  /// @deprecated Deprecated since 6.0.
-  /// @brief	Gets the recognition accuracy.
+  /// **Deprecated:** Deprecated since 6.0.
   ///
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// Gets the recognition accuracy.
   ///
-  /// @param[in]	data		Activity data received through activity_cb()
-  /// @param[out]	accuracy	Accuracy
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @return	@c 0 on success, otherwise a negative error value
-  /// @retval	#ACTIVITY_ERROR_NONE				Successful
-  /// @retval	#ACTIVITY_ERROR_INVALID_PARAMETER	Invalid parameter used
-  /// @retval	#ACTIVITY_ERROR_NOT_SUPPORTED		Activity recognition is not supported
-  /// @retval	#ACTIVITY_ERROR_OPERATION_FAILED	Operation failed because of a system error
+  /// **Parameters:**
+  /// - `data` (in): Activity data received through activity_cb()
+  /// - `accuracy` (out): Accuracy
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ACTIVITY_ERROR_NONE`: Successful
+  /// - `ACTIVITY_ERROR_INVALID_PARAMETER`: Invalid parameter used
+  /// - `ACTIVITY_ERROR_NOT_SUPPORTED`: Activity recognition is not supported
+  /// - `ACTIVITY_ERROR_OPERATION_FAILED`: Operation failed because of a system error
   int activity_get_accuracy(
     activity_data_h data,
     ffi.Pointer<ffi.Int32> accuracy,
@@ -216,22 +263,28 @@ class Tizen60CapiContextMotion {
   late final _activity_get_accuracy = _activity_get_accuracyPtr
       .asFunction<int Function(activity_data_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @deprecated Deprecated since 6.0.
-  /// @brief	Check whether the gesture is supported or not.
-  /// @details	Check if the given gesture type is supported in the current device.
+  /// **Deprecated:** Deprecated since 6.0.
   ///
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// Check whether the gesture is supported or not.
   ///
-  /// @param[in]	gesture		Gesture type to be checked
-  /// @param[out]	supported	@c true if the gesture is recognizable in the current device,@n
-  /// @c false otherwise
+  /// Check if the given gesture type is supported in the current device.
   ///
-  /// @return	@c 0 if the @c gesture is supported, otherwise a negative error value
-  /// @retval	#GESTURE_ERROR_NONE					Supported
-  /// @retval	#GESTURE_ERROR_INVALID_PARAMETER	Invalid parameter used
-  /// @retval	#GESTURE_ERROR_NOT_SUPPORTED		The @c gesture is not supported
-  /// @retval	#GESTURE_ERROR_OPERATION_FAILED		Operation failed because of a system error
-  /// @retval	#GESTURE_ERROR_PERMISSION_DENIED	Does not have permission to use this
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `gesture` (in): Gesture type to be checked
+  /// - `supported` (out): `true` if the gesture is recognizable in the current device, `false` otherwise
+  ///
+  /// **Returns:**
+  /// - `0` if the `gesture` is supported, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `GESTURE_ERROR_NONE`: Supported
+  /// - `GESTURE_ERROR_INVALID_PARAMETER`: Invalid parameter used
+  /// - `GESTURE_ERROR_NOT_SUPPORTED`: The `gesture` is not supported
+  /// - `GESTURE_ERROR_OPERATION_FAILED`: Operation failed because of a system error
+  /// - `GESTURE_ERROR_PERMISSION_DENIED`: Does not have permission to use this
   int gesture_is_supported(
     int gesture,
     ffi.Pointer<ffi.Bool> supported,
@@ -249,20 +302,27 @@ class Tizen60CapiContextMotion {
   late final _gesture_is_supported = _gesture_is_supportedPtr
       .asFunction<int Function(int, ffi.Pointer<ffi.Bool>)>();
 
-  /// @deprecated Deprecated since 6.0.
-  /// @brief	Initializes a gesture handle.
+  /// **Deprecated:** Deprecated since 6.0.
   ///
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// Initializes a gesture handle.
   ///
-  /// @param[out]	handle		Gesture handle to be initialized
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @return	@c 0 on success, otherwise a negative error value
-  /// @retval	#GESTURE_ERROR_NONE					Successful
-  /// @retval	#GESTURE_ERROR_INVALID_PARAMETER	Invalid parameter used
-  /// @retval	#GESTURE_ERROR_NOT_SUPPORTED		Gesture recognition is not supported
-  /// @retval	#GESTURE_ERROR_OPERATION_FAILED		Operation failed because of a system error, e.g., out of memory
+  /// **Parameters:**
+  /// - `handle` (out): Gesture handle to be initialized
   ///
-  /// @see		gesture_release()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `GESTURE_ERROR_NONE`: Successful
+  /// - `GESTURE_ERROR_INVALID_PARAMETER`: Invalid parameter used
+  /// - `GESTURE_ERROR_NOT_SUPPORTED`: Gesture recognition is not supported
+  /// - `GESTURE_ERROR_OPERATION_FAILED`: Operation failed because of a system error, e.g., out of memory
+  ///
+  /// **See also:**
+  /// - `gesture_release()`
   int gesture_create(
     ffi.Pointer<gesture_h> handle,
   ) {
@@ -277,20 +337,27 @@ class Tizen60CapiContextMotion {
   late final _gesture_create =
       _gesture_createPtr.asFunction<int Function(ffi.Pointer<gesture_h>)>();
 
-  /// @deprecated Deprecated since 6.0.
-  /// @brief	Releases the resources occupied by the gesture handle.
+  /// **Deprecated:** Deprecated since 6.0.
   ///
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// Releases the resources occupied by the gesture handle.
   ///
-  /// @param[in]	handle		Gesture handle to be released
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @return	@c 0 on success, otherwise a negative error value
-  /// @retval	#GESTURE_ERROR_NONE					Successful
-  /// @retval	#GESTURE_ERROR_INVALID_PARAMETER	Invalid parameter used
-  /// @retval	#GESTURE_ERROR_NOT_SUPPORTED		Gesture recognition is not supported
-  /// @retval	#GESTURE_ERROR_OPERATION_FAILED		Operation failed because of a system error
+  /// **Parameters:**
+  /// - `handle` (in): Gesture handle to be released
   ///
-  /// @pre		gesture_create()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `GESTURE_ERROR_NONE`: Successful
+  /// - `GESTURE_ERROR_INVALID_PARAMETER`: Invalid parameter used
+  /// - `GESTURE_ERROR_NOT_SUPPORTED`: Gesture recognition is not supported
+  /// - `GESTURE_ERROR_OPERATION_FAILED`: Operation failed because of a system error
+  ///
+  /// **Preconditions:**
+  /// - gesture_create()
   int gesture_release(
     gesture_h handle,
   ) {
@@ -305,30 +372,41 @@ class Tizen60CapiContextMotion {
   late final _gesture_release =
       _gesture_releasePtr.asFunction<int Function(gesture_h)>();
 
-  /// @deprecated Deprecated since 6.0.
-  /// @brief	Starts to recognize a gesture.
-  /// @details	Sets a callback function to be invoked when the gesture is detected,
-  /// and starts to monitor occurrences of the gesture.
+  /// **Deprecated:** Deprecated since 6.0.
   ///
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// Starts to recognize a gesture.
   ///
-  /// @param[in]	handle		Gesture handle to be used to control the gesture event
-  /// @param[in]	gesture		Gesture type to be monitored
-  /// @param[in]	option		Detection option
-  /// @param[in]	callback	Callback function to receive gesture events
-  /// @param[in]	user_data	User data to be passed to the callback function
+  /// Sets a callback function to be invoked when the gesture is detected, and starts to monitor occurrences of the gesture.
   ///
-  /// @return	@c 0 on success, otherwise a negative error value
-  /// @retval	#GESTURE_ERROR_NONE					Successful
-  /// @retval	#GESTURE_ERROR_INVALID_PARAMETER	Invalid parameter used
-  /// @retval	#GESTURE_ERROR_NOT_SUPPORTED		Gesture recognition is not supported
-  /// @retval	#GESTURE_ERROR_ALREADY_STARTED		The @c handle is being used already
-  /// @retval	#GESTURE_ERROR_OPERATION_FAILED		Operation failed because of a system error
-  /// @retval	#GESTURE_ERROR_PERMISSION_DENIED	Does not have permission to use this
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @pre		gesture_create()
-  /// @post	gesture_recognition_cb()
-  /// @see		gesture_stop_recognition()
+  /// **Parameters:**
+  /// - `handle` (in): Gesture handle to be used to control the gesture event
+  /// - `gesture` (in): Gesture type to be monitored
+  /// - `option` (in): Detection option
+  /// - `callback` (in): Callback function to receive gesture events
+  /// - `user_data` (in): User data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `GESTURE_ERROR_NONE`: Successful
+  /// - `GESTURE_ERROR_INVALID_PARAMETER`: Invalid parameter used
+  /// - `GESTURE_ERROR_NOT_SUPPORTED`: Gesture recognition is not supported
+  /// - `GESTURE_ERROR_ALREADY_STARTED`: The `handle` is being used already
+  /// - `GESTURE_ERROR_OPERATION_FAILED`: Operation failed because of a system error
+  /// - `GESTURE_ERROR_PERMISSION_DENIED`: Does not have permission to use this
+  ///
+  /// **Preconditions:**
+  /// - gesture_create()
+  ///
+  /// **Postconditions:**
+  /// - gesture_recognition_cb()
+  ///
+  /// **See also:**
+  /// - `gesture_stop_recognition()`
   int gesture_start_recognition(
     gesture_h handle,
     int gesture,
@@ -358,19 +436,25 @@ class Tizen60CapiContextMotion {
           int Function(gesture_h, int, int, gesture_recognition_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @deprecated Deprecated since 6.0.
-  /// @brief	Stops recognizing the gesture registered to the gesture handle.
+  /// **Deprecated:** Deprecated since 6.0.
   ///
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// Stops recognizing the gesture registered to the gesture handle.
   ///
-  /// @param[in]	handle		Gesture handle to release its callback function registered
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @return	@c 0 on success, otherwise a negative error value
-  /// @retval	#GESTURE_ERROR_NONE					Successful
-  /// @retval	#GESTURE_ERROR_INVALID_PARAMETER	Invalid parameter used
-  /// @retval	#GESTURE_ERROR_NOT_SUPPORTED		Gesture recognition is not supported
-  /// @retval	#GESTURE_ERROR_NOT_STARTED			Nothing is started using the @c handle
-  /// @retval	#GESTURE_ERROR_OPERATION_FAILED		Operation failed because of a system error
+  /// **Parameters:**
+  /// - `handle` (in): Gesture handle to release its callback function registered
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `GESTURE_ERROR_NONE`: Successful
+  /// - `GESTURE_ERROR_INVALID_PARAMETER`: Invalid parameter used
+  /// - `GESTURE_ERROR_NOT_SUPPORTED`: Gesture recognition is not supported
+  /// - `GESTURE_ERROR_NOT_STARTED`: Nothing is started using the `handle`
+  /// - `GESTURE_ERROR_OPERATION_FAILED`: Operation failed because of a system error
   int gesture_stop_recognition(
     gesture_h handle,
   ) {
@@ -385,19 +469,25 @@ class Tizen60CapiContextMotion {
   late final _gesture_stop_recognition =
       _gesture_stop_recognitionPtr.asFunction<int Function(gesture_h)>();
 
-  /// @deprecated Deprecated since 6.0.
-  /// @brief	Gets the gesture event from the gesture data received.
+  /// **Deprecated:** Deprecated since 6.0.
   ///
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// Gets the gesture event from the gesture data received.
   ///
-  /// @param[in]	data		Gesture data received through a callback function
-  /// @param[out]	event		Gesture event data
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @return	@c 0 on success, otherwise a negative error value
-  /// @retval	#GESTURE_ERROR_NONE					Successful
-  /// @retval	#GESTURE_ERROR_INVALID_PARAMETER	Invalid parameter used
-  /// @retval	#GESTURE_ERROR_NOT_SUPPORTED		Gesture recognition is not supported
-  /// @retval	#GESTURE_ERROR_OPERATION_FAILED		Operation failed because of a system error
+  /// **Parameters:**
+  /// - `data` (in): Gesture data received through a callback function
+  /// - `event` (out): Gesture event data
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `GESTURE_ERROR_NONE`: Successful
+  /// - `GESTURE_ERROR_INVALID_PARAMETER`: Invalid parameter used
+  /// - `GESTURE_ERROR_NOT_SUPPORTED`: Gesture recognition is not supported
+  /// - `GESTURE_ERROR_OPERATION_FAILED`: Operation failed because of a system error
   int gesture_get_event(
     gesture_data_h data,
     ffi.Pointer<ffi.Int32> event,
@@ -415,20 +505,26 @@ class Tizen60CapiContextMotion {
   late final _gesture_get_event = _gesture_get_eventPtr
       .asFunction<int Function(gesture_data_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @deprecated Deprecated since 6.0.
-  /// @brief	Gets the tilting degrees from #GESTURE_TILT data received.
+  /// **Deprecated:** Deprecated since 6.0.
   ///
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// Gets the tilting degrees from `GESTURE_TILT` data received.
   ///
-  /// @param[in]	data		Tilt gesture data received through a callback function
-  /// @param[out]	x			Tilting degree on X-axis
-  /// @param[out]	y			Tilting degree on Y-axis
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @return	@c 0 on success, otherwise a negative error value
-  /// @retval	#GESTURE_ERROR_NONE					Successful
-  /// @retval	#GESTURE_ERROR_INVALID_PARAMETER	Invalid parameter used
-  /// @retval	#GESTURE_ERROR_NOT_SUPPORTED		Gesture recognition is not supported
-  /// @retval	#GESTURE_ERROR_OPERATION_FAILED		Operation failed because of a system error
+  /// **Parameters:**
+  /// - `data` (in): Tilt gesture data received through a callback function
+  /// - `x` (out): Tilting degree on X-axis
+  /// - `y` (out): Tilting degree on Y-axis
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `GESTURE_ERROR_NONE`: Successful
+  /// - `GESTURE_ERROR_INVALID_PARAMETER`: Invalid parameter used
+  /// - `GESTURE_ERROR_NOT_SUPPORTED`: Gesture recognition is not supported
+  /// - `GESTURE_ERROR_OPERATION_FAILED`: Operation failed because of a system error
   int gesture_get_tilt(
     gesture_data_h data,
     ffi.Pointer<ffi.Int> x,
@@ -450,13 +546,19 @@ class Tizen60CapiContextMotion {
           gesture_data_h, ffi.Pointer<ffi.Int>, ffi.Pointer<ffi.Int>)>();
 }
 
+/// @nodoc
 final class _activity_handle_s extends ffi.Opaque {}
 
+/// @nodoc
 final class _activity_data_s extends ffi.Opaque {}
 
-/// @deprecated Deprecated since 6.0.
-/// @brief	Enumeration for error codes.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// **Deprecated:** Deprecated since 6.0.
+///
+/// Enumeration for error codes.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class activity_error_e {
   /// < Successful
   static const int ACTIVITY_ERROR_NONE = 0;
@@ -486,9 +588,13 @@ abstract class activity_error_e {
   static const int ACTIVITY_ERROR_OPERATION_FAILED = -38273020;
 }
 
-/// @deprecated Deprecated since 6.0.
-/// @brief	Enumeration for activity types.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// **Deprecated:** Deprecated since 6.0.
+///
+/// Enumeration for activity types.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class activity_type_e {
   /// < Stationary
   static const int ACTIVITY_STATIONARY = 1;
@@ -503,9 +609,13 @@ abstract class activity_type_e {
   static const int ACTIVITY_IN_VEHICLE = 4;
 }
 
-/// @deprecated Deprecated since 6.0.
-/// @brief	Enumeration for recognition accuracy.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// **Deprecated:** Deprecated since 6.0.
+///
+/// Enumeration for recognition accuracy.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class activity_accuracy_e {
   /// < Not accurate
   static const int ACTIVITY_ACCURACY_LOW = 0;
@@ -517,36 +627,45 @@ abstract class activity_accuracy_e {
   static const int ACTIVITY_ACCURACY_HIGH = 2;
 }
 
-/// @deprecated Deprecated since 6.0.
-/// @brief	The activity recognizer controlling handle.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// **Deprecated:** Deprecated since 6.0.
+///
+/// The activity recognizer controlling handle.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 typedef activity_h = ffi.Pointer<_activity_handle_s>;
 
-/// @deprecated Deprecated since 6.0.
-/// @brief	Called when a activity is recognized.
+/// **Deprecated:** Deprecated since 6.0.
 ///
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Called when a activity is recognized.
 ///
-/// @param[in]	activity	Activity recognized
-/// @param[in]	data		Detailed information of the recognized activity
-/// @param[in]	timestamp	The time when the activity is recognized. Epoch time in seconds.
-/// @param[in]	error		An error value. It can be one of the following error values:@n
-/// #ACTIVITY_ERROR_NONE, if the operation succeeded.@n
-/// #ACTIVITY_ERROR_NOT_SUPPORTED, if the activity is not supported in the current profile.@n
-/// #ACTIVITY_ERROR_OPERATION_FAILED, if the operation failed because of a system error.@n
-/// #ACTIVITY_ERROR_PERMISSION_DENIED, if the application has no permission to use this.
-/// @param[in]	user_data	The user data had passed to activity_start_recognition()
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
 ///
-/// @pre		activity_start_recognition()
-/// @see		activity_get_accuracy()
+/// **Parameters:**
+/// - `activity` (in): Activity recognized
+/// - `data` (in): Detailed information of the recognized activity
+/// - `timestamp` (in): The time when the activity is recognized. Epoch time in seconds.
+/// - `error` (in): An error value. It can be one of the following error values: `ACTIVITY_ERROR_NONE`, if the operation succeeded. `ACTIVITY_ERROR_NOT_SUPPORTED`, if the activity is not supported in the current profile. `ACTIVITY_ERROR_OPERATION_FAILED`, if the operation failed because of a system error. `ACTIVITY_ERROR_PERMISSION_DENIED`, if the application has no permission to use this.
+/// - `user_data` (in): The user data had passed to activity_start_recognition()
+///
+/// **Preconditions:**
+/// - activity_start_recognition()
+///
+/// **See also:**
+/// - `activity_get_accuracy()`
+/// @nodoc
 typedef activity_recognition_cb
     = ffi.Pointer<ffi.NativeFunction<activity_recognition_cbFunction>>;
+/// @nodoc
 typedef activity_recognition_cbFunction = ffi.Void Function(
     ffi.Int32 activity,
     activity_data_h data,
     ffi.Double timestamp,
     ffi.Int32 error,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartactivity_recognition_cbFunction = void Function(
     int activity,
     activity_data_h data,
@@ -554,18 +673,28 @@ typedef Dartactivity_recognition_cbFunction = void Function(
     int error,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @deprecated Deprecated since 6.0.
-/// @brief	Delivery through activity_recognition_cb() of activity data handle.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// **Deprecated:** Deprecated since 6.0.
+///
+/// Delivery through activity_recognition_cb() of activity data handle.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 typedef activity_data_h = ffi.Pointer<_activity_data_s>;
 
+/// @nodoc
 final class _gesture_handle_s extends ffi.Opaque {}
 
+/// @nodoc
 final class _gesture_data_s extends ffi.Opaque {}
 
-/// @deprecated Deprecated since 6.0.
-/// @brief	Enumeration for error codes.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// **Deprecated:** Deprecated since 6.0.
+///
+/// Enumeration for error codes.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class gesture_error_e {
   /// < Successful
   static const int GESTURE_ERROR_NONE = 0;
@@ -595,9 +724,13 @@ abstract class gesture_error_e {
   static const int GESTURE_ERROR_OPERATION_FAILED = -38273020;
 }
 
-/// @deprecated Deprecated since 6.0.
-/// @brief	Enumeration for gesture types.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// **Deprecated:** Deprecated since 6.0.
+///
+/// Enumeration for gesture types.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class gesture_type_e {
   /// < The mobile device is tapped twice
   static const int GESTURE_DOUBLE_TAP = 1;
@@ -627,13 +760,15 @@ abstract class gesture_type_e {
   static const int GESTURE_WRIST_UP = 9;
 }
 
-/// @deprecated Deprecated since 6.0.
-/// @brief	Enumeration for gesture recognition option.
-/// @details	If the default option is used, the system tries to reduce power consumption.
-/// For example, the recognition engine may stop detecting gestures if the display is turned off.
-/// Using #GESTURE_OPTION_ALWAYS_ON disables such power-saving functionalities.
+/// **Deprecated:** Deprecated since 6.0.
 ///
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration for gesture recognition option.
+///
+/// If the default option is used, the system tries to reduce power consumption. For example, the recognition engine may stop detecting gestures if the display is turned off. Using `GESTURE_OPTION_ALWAYS_ON` disables such power-saving functionalities.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class gesture_option_e {
   /// < Running in the default setting
   static const int GESTURE_OPTION_DEFAULT = 0;
@@ -642,10 +777,15 @@ abstract class gesture_option_e {
   static const int GESTURE_OPTION_ALWAYS_ON = 1;
 }
 
-/// @deprecated Deprecated since 6.0.
-/// @brief	Enumeration for gesture event types.
-/// @details With regards to type of the gesture, gesture_get_event() returns one of the followings.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// **Deprecated:** Deprecated since 6.0.
+///
+/// Enumeration for gesture event types.
+///
+/// With regards to type of the gesture, gesture_get_event() returns one of the followings.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class gesture_event_e {
   /// < Detected nothing
   static const int GESTURE_EVENT_NONE = 0;
@@ -678,37 +818,42 @@ abstract class gesture_event_e {
   static const int GESTURE_SNAP_Z_POSITIVE = 6;
 }
 
-/// @deprecated Deprecated since 6.0.
-/// @brief	The gesture recognizer controlling handle.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// **Deprecated:** Deprecated since 6.0.
+///
+/// The gesture recognizer controlling handle.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 typedef gesture_h = ffi.Pointer<_gesture_handle_s>;
 
-/// @deprecated Deprecated since 6.0.
-/// @brief	Called when a gesture is detected.
+/// **Deprecated:** Deprecated since 6.0.
 ///
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Called when a gesture is detected.
 ///
-/// @param[in]	gesture		Gesture type detected
-/// @param[in]	data		Detailed information of the detected gesture.@n
-/// gesture_get_event() or gesture_get_tilt()
-/// can be used to extract the information from @c data.
-/// @param[in]	timestamp	The time when the gesture is detected. Epoch time in seconds.
-/// @param[in]	error		An error value. It can be one of the following error values:@n
-/// #GESTURE_ERROR_NONE, if the operation succeeded.@n
-/// #GESTURE_ERROR_NOT_SUPPORTED, if the gesture is not supported in the current profile.@n
-/// #GESTURE_ERROR_OPERATION_FAILED, if the operation failed because of a system error.@n
-/// #GESTURE_ERROR_PERMISSION_DENIED, if the application has no permission to use this.
-/// @param[in]	user_data	The user data had passed to gesture_start_recognition()
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
 ///
-/// @pre		gesture_start_recognition()
+/// **Parameters:**
+/// - `gesture` (in): Gesture type detected
+/// - `data` (in): Detailed information of the detected gesture. gesture_get_event() or gesture_get_tilt() can be used to extract the information from `data`.
+/// - `timestamp` (in): The time when the gesture is detected. Epoch time in seconds.
+/// - `error` (in): An error value. It can be one of the following error values: `GESTURE_ERROR_NONE`, if the operation succeeded. `GESTURE_ERROR_NOT_SUPPORTED`, if the gesture is not supported in the current profile. `GESTURE_ERROR_OPERATION_FAILED`, if the operation failed because of a system error. `GESTURE_ERROR_PERMISSION_DENIED`, if the application has no permission to use this.
+/// - `user_data` (in): The user data had passed to gesture_start_recognition()
+///
+/// **Preconditions:**
+/// - gesture_start_recognition()
+/// @nodoc
 typedef gesture_recognition_cb
     = ffi.Pointer<ffi.NativeFunction<gesture_recognition_cbFunction>>;
+/// @nodoc
 typedef gesture_recognition_cbFunction = ffi.Void Function(
     ffi.Int32 gesture,
     gesture_data_h data,
     ffi.Double timestamp,
     ffi.Int32 error,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartgesture_recognition_cbFunction = void Function(
     int gesture,
     gesture_data_h data,
@@ -716,7 +861,11 @@ typedef Dartgesture_recognition_cbFunction = void Function(
     int error,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @deprecated Deprecated since 6.0.
-/// @brief	Delivery through gesture_recognition_cb() of gesture data handle.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// **Deprecated:** Deprecated since 6.0.
+///
+/// Delivery through gesture_recognition_cb() of gesture data handle.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 typedef gesture_data_h = ffi.Pointer<_gesture_data_s>;

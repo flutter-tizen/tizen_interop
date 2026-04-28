@@ -1,3 +1,6 @@
+/// {@category 6.5/tizen}
+library tizen_interop_6_5.key_manager_client;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen key-manager-client APIs.
+/// {@category 6.5/tizen}
 class Tizen65KeyManagerClient {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,51 +28,81 @@ class Tizen65KeyManagerClient {
           lookup)
       : _lookup = lookup;
 
-  /// @deprecated Deprecated since 3.0. [Use ckmc_owner_id_separator instead]
-  /// @brief Separator between alias and label.
-  /// @since_tizen 2.3
-  /// @remarks Alias can be provided as an alias alone, or together with label - in this
-  /// case, separator " " (space bar) is used to separate label and alias.
-  /// @see #ckmc_owner_id_separator
+  /// **Deprecated:** Deprecated since 3.0. `[Use ckmc_owner_id_separator instead]`
+  ///
+  /// Separator between alias and label.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - Alias can be provided as an alias alone, or together with label - in this
+  /// - case, separator " " (space bar) is used to separate label and alias.
+  ///
+  /// **See also:**
+  /// - `ckmc_owner_id_separator`
   late final ffi.Pointer<ffi.Pointer<ffi.Char>> _ckmc_label_name_separator =
       _lookup<ffi.Pointer<ffi.Char>>('ckmc_label_name_separator');
 
   ffi.Pointer<ffi.Char> get ckmc_label_name_separator =>
       _ckmc_label_name_separator.value;
 
-  /// @brief Separator between alias and owner id.
-  /// @since_tizen 3.0
-  /// @remarks Alias can be provided as an alias alone, or together with owner id.
-  /// In this case, separator " " (space bar) is used to separate id and alias.
-  /// @see ckmc_alias_new()
+  /// Separator between alias and owner id.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - Alias can be provided as an alias alone, or together with owner id.
+  /// - In this case, separator " " (space bar) is used to separate id and alias.
+  ///
+  /// **See also:**
+  /// - `ckmc_alias_new()`
   late final ffi.Pointer<ffi.Pointer<ffi.Char>> _ckmc_owner_id_separator =
       _lookup<ffi.Pointer<ffi.Char>>('ckmc_owner_id_separator');
 
   ffi.Pointer<ffi.Char> get ckmc_owner_id_separator =>
       _ckmc_owner_id_separator.value;
 
-  /// @brief The owner of system database.
-  /// @since_tizen 3.0
-  /// @remarks #ckmc_owner_id_system contains id connected with all system applications that run with uid less than 5000.
-  /// Client should use #ckmc_owner_id_system to access data owned by system application and stored in system database.
-  /// Client must have permission to access proper row.
-  /// @see ckmc_alias_new()
+  /// The owner of system database.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - `ckmc_owner_id_system` contains id connected with all system applications that run with uid less than 5000.
+  /// - Client should use `ckmc_owner_id_system` to access data owned by system application and stored in system database.
+  /// - Client must have permission to access proper row.
+  ///
+  /// **See also:**
+  /// - `ckmc_alias_new()`
   late final ffi.Pointer<ffi.Pointer<ffi.Char>> _ckmc_owner_id_system =
       _lookup<ffi.Pointer<ffi.Char>>('ckmc_owner_id_system');
 
   ffi.Pointer<ffi.Char> get ckmc_owner_id_system => _ckmc_owner_id_system.value;
 
-  /// @brief Gets the alias from #ckmc_alias_info_s structure.
-  /// @since_tizen 5.5
-  /// @remarks The @a alias should not be released.
-  /// The @a alias can be used until #ckmc_alias_info_s is released.
-  /// @param[in] info The pointer to the #ckmc_alias_info_s structure
-  /// @param[out] alias The pointer to the alias
-  /// @return #CKMC_ERROR_NONE on success,
-  /// othervise a negative error value
-  /// @retval #CKMC_ERROR_NONE Successful
-  /// @retval #CKMC_ERROR_INVALID_PARAMETER Input parameter is invalid
-  /// @see #ckmc_alias_info_s
+  /// Gets the alias from `ckmc_alias_info_s` structure.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - The `alias` should not be released.
+  /// - The `alias` can be used until `ckmc_alias_info_s` is released.
+  ///
+  /// **Parameters:**
+  /// - `info` (in): The pointer to the `ckmc_alias_info_s` structure
+  /// - `alias` (out): The pointer to the alias
+  ///
+  /// **Returns:**
+  /// - `CKMC_ERROR_NONE` on success, othervise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CKMC_ERROR_NONE`: Successful
+  /// - `CKMC_ERROR_INVALID_PARAMETER`: Input parameter is invalid
+  ///
+  /// **See also:**
+  /// - `ckmc_alias_info_s`
   int ckmc_alias_info_get_alias(
     ffi.Pointer<ckmc_alias_info_s> info,
     ffi.Pointer<ffi.Pointer<ffi.Char>> alias,
@@ -89,15 +123,24 @@ class Tizen65KeyManagerClient {
           int Function(ffi.Pointer<ckmc_alias_info_s>,
               ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the password protection status from #ckmc_alias_info_s structure.
-  /// @since_tizen 5.5
-  /// @param[in] info The pointer to the #ckmc_alias_info_s structure
-  /// @param[out] is_password_protected The pointer to the password protection flag
-  /// @return #CKMC_ERROR_NONE on success,
-  /// othervise a negative error value
-  /// @retval #CKMC_ERROR_NONE Successful
-  /// @retval #CKMC_ERROR_INVALID_PARAMETER Input parameter is invalid
-  /// @see #ckmc_alias_info_s
+  /// Gets the password protection status from `ckmc_alias_info_s` structure.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `info` (in): The pointer to the `ckmc_alias_info_s` structure
+  /// - `is_password_protected` (out): The pointer to the password protection flag
+  ///
+  /// **Returns:**
+  /// - `CKMC_ERROR_NONE` on success, othervise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CKMC_ERROR_NONE`: Successful
+  /// - `CKMC_ERROR_INVALID_PARAMETER`: Input parameter is invalid
+  ///
+  /// **See also:**
+  /// - `ckmc_alias_info_s`
   int ckmc_alias_info_is_password_protected(
     ffi.Pointer<ckmc_alias_info_s> info,
     ffi.Pointer<ffi.Bool> is_password_protected,
@@ -117,10 +160,16 @@ class Tizen65KeyManagerClient {
           int Function(
               ffi.Pointer<ckmc_alias_info_s>, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Destroys the #ckmc_alias_info_list_s handle and releases resources of #ckmc_alias_info_list_s from the provided first handle cascadingly.
-  /// @since_tizen 5.5
-  /// @param[in] first The first #ckmc_alias_info_list_s handle to destroy
-  /// @see #ckmc_alias_info_list_s
+  /// Destroys the `ckmc_alias_info_list_s` handle and releases resources of `ckmc_alias_info_list_s` from the provided first handle cascadingly.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `first` (in): The first `ckmc_alias_info_list_s` handle to destroy
+  ///
+  /// **See also:**
+  /// - `ckmc_alias_info_list_s`
   void ckmc_alias_info_list_all_free(
     ffi.Pointer<ckmc_alias_info_list_s> first,
   ) {
@@ -136,25 +185,32 @@ class Tizen65KeyManagerClient {
   late final _ckmc_alias_info_list_all_free = _ckmc_alias_info_list_all_freePtr
       .asFunction<void Function(ffi.Pointer<ckmc_alias_info_list_s>)>();
 
-  /// @brief Creates a new full alias which is a concatenation of @a owner_id and @a alias.
-  /// @since_tizen 3.0
-  /// @remarks @a full_alias should be freed with free() after use.
-  /// @remarks Returns #CKMC_ERROR_INVALID_PARAMETER if any of parameter is NULL.
-  /// @remarks Returns #CKMC_ERROR_INVALID_PARAMETER if @a owner_id is empty.
-  /// @param[in] owner_id Data owner's id. This should be package id if data owner is
-  /// application. If you want to access data stored by system
-  /// services, it should be #ckmc_owner_id_system
-  /// @param[in] alias Data alias
-  /// @param[out] full_alias The newly created alias which is a concatenation of
-  /// @a owner_id, #ckmc_owner_id_separator and @a alias.
-  /// Destroy by free() after use
-  /// @return #CKMC_ERROR_NONE on success,
-  /// otherwise a negative error value
-  /// @retval #CKMC_ERROR_NONE Successful
-  /// @retval #CKMC_ERROR_INVALID_PARAMETER Input parameter is invalid
-  /// @retval #CKMC_ERROR_OUT_OF_MEMORY Not enough memory
-  /// @see #ckmc_owner_id_separator
-  /// @see #ckmc_owner_id_system
+  /// Creates a new full alias which is a concatenation of `owner_id` and `alias`.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - `full_alias` should be freed with free() after use.
+  /// - Returns `CKMC_ERROR_INVALID_PARAMETER` if any of parameter is NULL.
+  /// - Returns `CKMC_ERROR_INVALID_PARAMETER` if `owner_id` is empty.
+  ///
+  /// **Parameters:**
+  /// - `owner_id` (in): Data owner's id. This should be package id if data owner is application. If you want to access data stored by system services, it should be `ckmc_owner_id_system`
+  /// - `alias` (in): Data alias
+  /// - `full_alias` (out): The newly created alias which is a concatenation of `owner_id`, `ckmc_owner_id_separator` and `alias`. Destroy by free() after use
+  ///
+  /// **Returns:**
+  /// - `CKMC_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CKMC_ERROR_NONE`: Successful
+  /// - `CKMC_ERROR_INVALID_PARAMETER`: Input parameter is invalid
+  /// - `CKMC_ERROR_OUT_OF_MEMORY`: Not enough memory
+  ///
+  /// **See also:**
+  /// - `ckmc_owner_id_separator`
+  /// - `ckmc_owner_id_system`
   int ckmc_alias_new(
     ffi.Pointer<ffi.Char> owner_id,
     ffi.Pointer<ffi.Char> alias,
@@ -175,23 +231,32 @@ class Tizen65KeyManagerClient {
       int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
           ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Creates a new #ckmc_key_s handle and returns it.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @remarks You must destroy the newly created #ckmc_key_s by calling ckmc_key_free() if it is no longer needed.
-  /// @param[in] raw_key The byte array of key \n
-  /// @a raw_key may be encrypted with password
-  /// @param[in] key_size The byte size of @a raw_key
-  /// @param[in] key_type The @a raw_key's type
-  /// @param[in] password The byte array used to decrypt @a raw_key inside key manager \n
-  /// If @a raw_key is not encrypted, @a password can be null
-  /// @param[out] ppkey The pointer to a newly created #ckmc_key_s handle
-  /// @return #CKMC_ERROR_NONE on success,
-  /// otherwise a negative error value
-  /// @retval #CKMC_ERROR_NONE Successful
-  /// @retval #CKMC_ERROR_INVALID_PARAMETER Input parameter is invalid
-  /// @retval #CKMC_ERROR_OUT_OF_MEMORY Not enough memory
-  /// @see ckmc_key_free()
-  /// @see #ckmc_key_s
+  /// Creates a new `ckmc_key_s` handle and returns it.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Remarks:**
+  /// - You must destroy the newly created `ckmc_key_s` by calling ckmc_key_free() if it is no longer needed.
+  ///
+  /// **Parameters:**
+  /// - `raw_key` (in): The byte array of key `raw_key` may be encrypted with password
+  /// - `key_size` (in): The byte size of `raw_key`
+  /// - `key_type` (in): The `raw_key's` type
+  /// - `password` (in): The byte array used to decrypt `raw_key` inside key manager If `raw_key` is not encrypted, `password` can be null
+  /// - `ppkey` (out): The pointer to a newly created `ckmc_key_s` handle
+  ///
+  /// **Returns:**
+  /// - `CKMC_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CKMC_ERROR_NONE`: Successful
+  /// - `CKMC_ERROR_INVALID_PARAMETER`: Input parameter is invalid
+  /// - `CKMC_ERROR_OUT_OF_MEMORY`: Not enough memory
+  ///
+  /// **See also:**
+  /// - `ckmc_key_free()`
+  /// - `ckmc_key_s`
   int ckmc_key_new(
     ffi.Pointer<ffi.UnsignedChar> raw_key,
     int key_size,
@@ -220,9 +285,13 @@ class Tizen65KeyManagerClient {
       int Function(ffi.Pointer<ffi.UnsignedChar>, int, int,
           ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Pointer<ckmc_key_s>>)>();
 
-  /// @brief Destroys the #ckmc_key_s handle and releases all its resources.
-  /// @since_tizen 2.3
-  /// @param[in] key The #ckmc_key_s handle to destroy
+  /// Destroys the `ckmc_key_s` handle and releases all its resources.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `key` (in): The `ckmc_key_s` handle to destroy
   void ckmc_key_free(
     ffi.Pointer<ckmc_key_s> key,
   ) {
@@ -237,19 +306,30 @@ class Tizen65KeyManagerClient {
   late final _ckmc_key_free =
       _ckmc_key_freePtr.asFunction<void Function(ffi.Pointer<ckmc_key_s>)>();
 
-  /// @brief Creates a new #ckmc_raw_buffer_s handle and returns it.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @remarks You must destroy the newly created #ckmc_raw_buffer_s by calling ckmc_buffer_free() if it is no longer needed.
-  /// @param[in] data The byte array of buffer
-  /// @param[in] size The byte size of buffer
-  /// @param[out] ppbuffer The pointer to a newly created #ckmc_raw_buffer_s handle
-  /// @return #CKMC_ERROR_NONE on success,
-  /// otherwise a negative error value
-  /// @retval #CKMC_ERROR_NONE Successful
-  /// @retval #CKMC_ERROR_INVALID_PARAMETER Input parameter is invalid
-  /// @retval #CKMC_ERROR_OUT_OF_MEMORY Not enough memory
-  /// @see ckmc_buffer_free()
-  /// @see #ckmc_raw_buffer_s
+  /// Creates a new `ckmc_raw_buffer_s` handle and returns it.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Remarks:**
+  /// - You must destroy the newly created `ckmc_raw_buffer_s` by calling ckmc_buffer_free() if it is no longer needed.
+  ///
+  /// **Parameters:**
+  /// - `data` (in): The byte array of buffer
+  /// - `size` (in): The byte size of buffer
+  /// - `ppbuffer` (out): The pointer to a newly created `ckmc_raw_buffer_s` handle
+  ///
+  /// **Returns:**
+  /// - `CKMC_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CKMC_ERROR_NONE`: Successful
+  /// - `CKMC_ERROR_INVALID_PARAMETER`: Input parameter is invalid
+  /// - `CKMC_ERROR_OUT_OF_MEMORY`: Not enough memory
+  ///
+  /// **See also:**
+  /// - `ckmc_buffer_free()`
+  /// - `ckmc_raw_buffer_s`
   int ckmc_buffer_new(
     ffi.Pointer<ffi.UnsignedChar> data,
     int size,
@@ -270,9 +350,13 @@ class Tizen65KeyManagerClient {
       int Function(ffi.Pointer<ffi.UnsignedChar>, int,
           ffi.Pointer<ffi.Pointer<ckmc_raw_buffer_s>>)>();
 
-  /// @brief Destroys the #ckmc_raw_buffer_s handle and releases all its resources.
-  /// @since_tizen 2.3
-  /// @param[in] buffer The #ckmc_raw_buffer_s structure to destroy
+  /// Destroys the `ckmc_raw_buffer_s` handle and releases all its resources.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `buffer` (in): The `ckmc_raw_buffer_s` structure to destroy
   void ckmc_buffer_free(
     ffi.Pointer<ckmc_raw_buffer_s> buffer,
   ) {
@@ -288,21 +372,32 @@ class Tizen65KeyManagerClient {
   late final _ckmc_buffer_free = _ckmc_buffer_freePtr
       .asFunction<void Function(ffi.Pointer<ckmc_raw_buffer_s>)>();
 
-  /// @brief Creates a new #ckmc_cert_s handle and returns it.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @remarks You must destroy the newly created #ckmc_cert_s by calling ckmc_cert_free() if it is no longer needed.
-  /// @param[in] raw_cert The byte array of certificate
-  /// @param[in] cert_size The byte size of raw_cert
-  /// @param[in] data_format The encoding format of raw_cert
-  /// @param[out] ppcert The pointer to a newly created #ckmc_cert_s handle
-  /// @return #CKMC_ERROR_NONE on success,
-  /// otherwise a negative error value
-  /// @retval #CKMC_ERROR_NONE Successful
-  /// @retval #CKMC_ERROR_INVALID_PARAMETER Input parameter is invalid
-  /// @retval #CKMC_ERROR_OUT_OF_MEMORY Not enough memory
-  /// @see ckmc_cert_free()
-  /// @see ckmc_load_cert_from_file()
-  /// @see #ckmc_cert_s
+  /// Creates a new `ckmc_cert_s` handle and returns it.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Remarks:**
+  /// - You must destroy the newly created `ckmc_cert_s` by calling ckmc_cert_free() if it is no longer needed.
+  ///
+  /// **Parameters:**
+  /// - `raw_cert` (in): The byte array of certificate
+  /// - `cert_size` (in): The byte size of raw_cert
+  /// - `data_format` (in): The encoding format of raw_cert
+  /// - `ppcert` (out): The pointer to a newly created `ckmc_cert_s` handle
+  ///
+  /// **Returns:**
+  /// - `CKMC_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CKMC_ERROR_NONE`: Successful
+  /// - `CKMC_ERROR_INVALID_PARAMETER`: Input parameter is invalid
+  /// - `CKMC_ERROR_OUT_OF_MEMORY`: Not enough memory
+  ///
+  /// **See also:**
+  /// - `ckmc_cert_free()`
+  /// - `ckmc_load_cert_from_file()`
+  /// - `ckmc_cert_s`
   int ckmc_cert_new(
     ffi.Pointer<ffi.UnsignedChar> raw_cert,
     int cert_size,
@@ -325,10 +420,16 @@ class Tizen65KeyManagerClient {
       int Function(ffi.Pointer<ffi.UnsignedChar>, int, int,
           ffi.Pointer<ffi.Pointer<ckmc_cert_s>>)>();
 
-  /// @brief Destroys the #ckmc_cert_s handle and releases all its resources.
-  /// @since_tizen 2.3
-  /// @param[in] cert The #ckmc_cert_s handle to destroy
-  /// @see ckmc_load_cert_from_file()
+  /// Destroys the `ckmc_cert_s` handle and releases all its resources.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `cert` (in): The `ckmc_cert_s` handle to destroy
+  ///
+  /// **See also:**
+  /// - `ckmc_load_cert_from_file()`
   void ckmc_cert_free(
     ffi.Pointer<ckmc_cert_s> cert,
   ) {
@@ -343,20 +444,30 @@ class Tizen65KeyManagerClient {
   late final _ckmc_cert_free =
       _ckmc_cert_freePtr.asFunction<void Function(ffi.Pointer<ckmc_cert_s>)>();
 
-  /// @brief Creates a new #ckmc_cert_s handle from a given file and returns it.
-  /// @since_tizen 2.3
-  /// @remarks You must destroy the newly created #ckmc_cert_s by calling ckmc_cert_free() if it is no longer needed.
-  /// @param[in] file_path The path of certificate file to be loaded \n
-  /// The only DER or PEM encoded certificate file is supported
-  /// @param[out] cert The pointer of newly created #ckmc_cert_s handle
-  /// @return #CKMC_ERROR_NONE on success,
-  /// otherwise a negative error value
-  /// @retval #CKMC_ERROR_NONE Successful
-  /// @retval #CKMC_ERROR_OUT_OF_MEMORY Not enough memory space
-  /// @retval #CKMC_ERROR_INVALID_FORMAT Invalid certificate file format
-  /// @retval #CKMC_ERROR_FILE_ACCESS_DENIED Provided file does not exist or cannot be accessed
-  /// @see ckmc_cert_free()
-  /// @see #ckmc_cert_s
+  /// Creates a new `ckmc_cert_s` handle from a given file and returns it.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - You must destroy the newly created `ckmc_cert_s` by calling ckmc_cert_free() if it is no longer needed.
+  ///
+  /// **Parameters:**
+  /// - `file_path` (in): The path of certificate file to be loaded The only DER or PEM encoded certificate file is supported
+  /// - `cert` (out): The pointer of newly created `ckmc_cert_s` handle
+  ///
+  /// **Returns:**
+  /// - `CKMC_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CKMC_ERROR_NONE`: Successful
+  /// - `CKMC_ERROR_OUT_OF_MEMORY`: Not enough memory space
+  /// - `CKMC_ERROR_INVALID_FORMAT`: Invalid certificate file format
+  /// - `CKMC_ERROR_FILE_ACCESS_DENIED`: Provided file does not exist or cannot be accessed
+  ///
+  /// **See also:**
+  /// - `ckmc_cert_free()`
+  /// - `ckmc_cert_s`
   int ckmc_load_cert_from_file(
     ffi.Pointer<ffi.Char> file_path,
     ffi.Pointer<ffi.Pointer<ckmc_cert_s>> cert,
@@ -377,25 +488,36 @@ class Tizen65KeyManagerClient {
           int Function(
               ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Pointer<ckmc_cert_s>>)>();
 
-  /// @brief Creates a new #ckmc_pkcs12_s handle and returns it.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @remarks You must destroy the newly created #ckmc_pkcs12_s by calling ckmc_pkcs12_free() if it is no longer needed.
-  /// @remarks On success, private_key, cert && ca_cert_list ownership is transferred into newly returned ckmc_pkcs12_s.
-  /// @param[in] private_key #ckmc_key_s handle to the private key (optional)
-  /// @param[in] cert #ckmc_cert_s handle to the certificate (optional)
-  /// @param[in] ca_cert_list #ckmc_cert_list_s list of chain certificate handles (optional)
-  /// @param[out] pkcs12_bundle The pointer to a newly created #ckmc_pkcs12_s handle
-  /// @return #CKMC_ERROR_NONE on success,
-  /// otherwise a negative error value
-  /// @retval #CKMC_ERROR_NONE Successful
-  /// @retval #CKMC_ERROR_INVALID_PARAMETER Input parameter is invalid or private_key, cert and ca_cert_list all are null
-  /// @retval #CKMC_ERROR_OUT_OF_MEMORY Not enough memory
-  /// @see ckmc_pkcs12_free()
-  /// @see ckmc_pkcs12_load()
-  /// @see #ckmc_key_s
-  /// @see #ckmc_cert_s
-  /// @see #ckmc_cert_list_s
-  /// @see #ckmc_pkcs12_s
+  /// Creates a new `ckmc_pkcs12_s` handle and returns it.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Remarks:**
+  /// - You must destroy the newly created `ckmc_pkcs12_s` by calling ckmc_pkcs12_free() if it is no longer needed.
+  /// - On success, private_key, cert && ca_cert_list ownership is transferred into newly returned ckmc_pkcs12_s.
+  ///
+  /// **Parameters:**
+  /// - `private_key` (in): `ckmc_key_s` handle to the private key (optional)
+  /// - `cert` (in): `ckmc_cert_s` handle to the certificate (optional)
+  /// - `ca_cert_list` (in): `ckmc_cert_list_s` list of chain certificate handles (optional)
+  /// - `pkcs12_bundle` (out): The pointer to a newly created `ckmc_pkcs12_s` handle
+  ///
+  /// **Returns:**
+  /// - `CKMC_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CKMC_ERROR_NONE`: Successful
+  /// - `CKMC_ERROR_INVALID_PARAMETER`: Input parameter is invalid or private_key, cert and ca_cert_list all are null
+  /// - `CKMC_ERROR_OUT_OF_MEMORY`: Not enough memory
+  ///
+  /// **See also:**
+  /// - `ckmc_pkcs12_free()`
+  /// - `ckmc_pkcs12_load()`
+  /// - `ckmc_key_s`
+  /// - `ckmc_cert_s`
+  /// - `ckmc_cert_list_s`
+  /// - `ckmc_pkcs12_s`
   int ckmc_pkcs12_new(
     ffi.Pointer<ckmc_key_s> private_key,
     ffi.Pointer<ckmc_cert_s> cert,
@@ -424,34 +546,43 @@ class Tizen65KeyManagerClient {
           ffi.Pointer<ckmc_cert_list_s>,
           ffi.Pointer<ffi.Pointer<ckmc_pkcs12_s>>)>();
 
-  /// @deprecated Deprecated since @if MOBILE 2.4. @elseif WEARABLE 3.0. @endif [Use ckmc_pkcs12_load() instead]
-  /// @brief Creates a new #ckmc_key_s (@a private_key), #ckmc_cert_s (@a cert), and #ckmc_cert_list_s (@a ca_cert_list) handle from a given PKCS#12 file and returns them.
-  /// @since_tizen 2.3
-  /// @remarks You must destroy the newly created #ckmc_key_s, #ckmc_cert_s, and
-  /// #ckmc_cert_list_s by calling ckmc_key_free(), ckmc_cert_free(), and
-  /// ckmc_cert_list_all_free() if they are no longer needed.
-  /// @param[in] file_path The path of PKCS12 file to be loaded
-  /// @param[in] passphrase The passphrase used to decrypt the PCKS12 file \n
-  /// If PKCS12 file is not encrypted, passphrase can be null
-  /// @param[out] private_key The pointer of newly created #ckmc_key_s handle for a private key
-  /// @param[out] cert The pointer of newly created #ckmc_cert_s handle for a certificate \n
-  /// It is null if the PKCS12 file does not contain a certificate
-  /// @param[out] ca_cert_list The pointer of newly created #ckmc_cert_list_s handle for CA certificates \n
-  /// It is null if the PKCS12 file does not contain CA certificates
-  /// @return #CKMC_ERROR_NONE on success,
-  /// otherwise a negative error value
-  /// @retval #CKMC_ERROR_NONE Successful
-  /// @retval #CKMC_ERROR_OUT_OF_MEMORY Not enough memory space
-  /// @retval #CKMC_ERROR_INVALID_FORMAT Invalid PKCS12 file format
-  /// @retval #CKMC_ERROR_FILE_ACCESS_DENIED Provided file does not exist or cannot be accessed
-  /// @see ckmc_pkcs12_new()
-  /// @see ckmc_pkcs12_load()
-  /// @see ckmc_key_free()
-  /// @see ckmc_cert_free()
-  /// @see ckmc_cert_list_all_free()
-  /// @see #ckmc_key_s
-  /// @see #ckmc_cert_s
-  /// @see #ckmc_cert_list_s
+  /// **Deprecated:** Deprecated since Mobile 2.4.; Wearable 3.0. `[Use ckmc_pkcs12_load() instead]`
+  ///
+  /// Creates a new `ckmc_key_s` (`private_key`), `ckmc_cert_s` (`cert`), and `ckmc_cert_list_s` (`ca_cert_list`) handle from a given PKCS#12 file and returns them.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - You must destroy the newly created `ckmc_key_s`, `ckmc_cert_s`, and
+  /// - `ckmc_cert_list_s` by calling ckmc_key_free(), ckmc_cert_free(), and
+  /// - ckmc_cert_list_all_free() if they are no longer needed.
+  ///
+  /// **Parameters:**
+  /// - `file_path` (in): The path of PKCS12 file to be loaded
+  /// - `passphrase` (in): The passphrase used to decrypt the PCKS12 file If PKCS12 file is not encrypted, passphrase can be null
+  /// - `private_key` (out): The pointer of newly created `ckmc_key_s` handle for a private key
+  /// - `cert` (out): The pointer of newly created `ckmc_cert_s` handle for a certificate It is null if the PKCS12 file does not contain a certificate
+  /// - `ca_cert_list` (out): The pointer of newly created `ckmc_cert_list_s` handle for CA certificates It is null if the PKCS12 file does not contain CA certificates
+  ///
+  /// **Returns:**
+  /// - `CKMC_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CKMC_ERROR_NONE`: Successful
+  /// - `CKMC_ERROR_OUT_OF_MEMORY`: Not enough memory space
+  /// - `CKMC_ERROR_INVALID_FORMAT`: Invalid PKCS12 file format
+  /// - `CKMC_ERROR_FILE_ACCESS_DENIED`: Provided file does not exist or cannot be accessed
+  ///
+  /// **See also:**
+  /// - `ckmc_pkcs12_new()`
+  /// - `ckmc_pkcs12_load()`
+  /// - `ckmc_key_free()`
+  /// - `ckmc_cert_free()`
+  /// - `ckmc_cert_list_all_free()`
+  /// - `ckmc_key_s`
+  /// - `ckmc_cert_s`
+  /// - `ckmc_cert_list_s`
   int ckmc_load_from_pkcs12_file(
     ffi.Pointer<ffi.Char> file_path,
     ffi.Pointer<ffi.Char> passphrase,
@@ -486,22 +617,31 @@ class Tizen65KeyManagerClient {
               ffi.Pointer<ffi.Pointer<ckmc_cert_s>>,
               ffi.Pointer<ffi.Pointer<ckmc_cert_list_s>>)>();
 
-  /// @brief Creates a new #ckmc_pkcs12_s handle from a given PKCS#12 file and returns it.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @remarks You must destroy the newly created #ckmc_pkcs12_s by calling ckmc_pkcs12_free() if they are no longer needed.
-  /// @param[in] file_path The path of PKCS12 file to be loaded
-  /// @param[in] passphrase The passphrase used to decrypt the PCKS12 file \n
-  /// If PKCS12 file is not encrypted, passphrase can be null
-  /// @param[out] pkcs12_bundle The pointer of newly created #ckmc_cert_list_s handle for CA certificates \n
-  /// It is null if the PKCS12 file does not contain CA certificates
-  /// @return #CKMC_ERROR_NONE on success,
-  /// otherwise a negative error value
-  /// @retval #CKMC_ERROR_NONE Successful
-  /// @retval #CKMC_ERROR_OUT_OF_MEMORY Not enough memory space
-  /// @retval #CKMC_ERROR_INVALID_FORMAT Invalid PKCS12 file format
-  /// @retval #CKMC_ERROR_FILE_ACCESS_DENIED Provided file does not exist or cannot be accessed
-  /// @see ckmc_pkcs12_free()
-  /// @see #ckmc_pkcs12_s
+  /// Creates a new `ckmc_pkcs12_s` handle from a given PKCS#12 file and returns it.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Remarks:**
+  /// - You must destroy the newly created `ckmc_pkcs12_s` by calling ckmc_pkcs12_free() if they are no longer needed.
+  ///
+  /// **Parameters:**
+  /// - `file_path` (in): The path of PKCS12 file to be loaded
+  /// - `passphrase` (in): The passphrase used to decrypt the PCKS12 file If PKCS12 file is not encrypted, passphrase can be null
+  /// - `pkcs12_bundle` (out): The pointer of newly created `ckmc_cert_list_s` handle for CA certificates It is null if the PKCS12 file does not contain CA certificates
+  ///
+  /// **Returns:**
+  /// - `CKMC_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CKMC_ERROR_NONE`: Successful
+  /// - `CKMC_ERROR_OUT_OF_MEMORY`: Not enough memory space
+  /// - `CKMC_ERROR_INVALID_FORMAT`: Invalid PKCS12 file format
+  /// - `CKMC_ERROR_FILE_ACCESS_DENIED`: Provided file does not exist or cannot be accessed
+  ///
+  /// **See also:**
+  /// - `ckmc_pkcs12_free()`
+  /// - `ckmc_pkcs12_s`
   int ckmc_pkcs12_load(
     ffi.Pointer<ffi.Char> file_path,
     ffi.Pointer<ffi.Char> passphrase,
@@ -522,11 +662,17 @@ class Tizen65KeyManagerClient {
       int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
           ffi.Pointer<ffi.Pointer<ckmc_pkcs12_s>>)>();
 
-  /// @brief Destroys the #ckmc_pkcs12_s handle and releases all its resources.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @param[in] pkcs12 The #ckmc_pkcs12_s handle to destroy
-  /// @see ckmc_pkcs12_new()
-  /// @see ckmc_pkcs12_load()
+  /// Destroys the `ckmc_pkcs12_s` handle and releases all its resources.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `pkcs12` (in): The `ckmc_pkcs12_s` handle to destroy
+  ///
+  /// **See also:**
+  /// - `ckmc_pkcs12_new()`
+  /// - `ckmc_pkcs12_load()`
   void ckmc_pkcs12_free(
     ffi.Pointer<ckmc_pkcs12_s> pkcs12,
   ) {
@@ -541,20 +687,30 @@ class Tizen65KeyManagerClient {
   late final _ckmc_pkcs12_free = _ckmc_pkcs12_freePtr
       .asFunction<void Function(ffi.Pointer<ckmc_pkcs12_s>)>();
 
-  /// @brief Creates a new #ckmc_alias_list_s handle and returns it.
-  /// The alias pointer in the returned #ckmc_alias_list_s handle points to the provided characters and next is null.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @remarks You must destroy the newly created #ckmc_alias_list_s
-  /// by calling ckmc_alias_list_free() or ckmc_alias_list_all_free() if it is no longer needed.
-  /// @param[in] alias The first item to be set in the newly created #ckmc_alias_list_s
-  /// @param[out] ppalias_list The pointer to a newly created #ckmc_alias_list_s handle
-  /// @return #CKMC_ERROR_NONE on success,
-  /// otherwise a negative error value
-  /// @retval #CKMC_ERROR_NONE Successful
-  /// @retval #CKMC_ERROR_INVALID_PARAMETER Input parameter is invalid
-  /// @retval #CKMC_ERROR_OUT_OF_MEMORY Not enough memory
-  /// @see ckmc_alias_list_all_free()
-  /// @see #ckmc_alias_list_s
+  /// Creates a new `ckmc_alias_list_s` handle and returns it. The alias pointer in the returned `ckmc_alias_list_s` handle points to the provided characters and next is null.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Remarks:**
+  /// - You must destroy the newly created `ckmc_alias_list_s`
+  /// - by calling ckmc_alias_list_free() or ckmc_alias_list_all_free() if it is no longer needed.
+  ///
+  /// **Parameters:**
+  /// - `alias` (in): The first item to be set in the newly created `ckmc_alias_list_s`
+  /// - `ppalias_list` (out): The pointer to a newly created `ckmc_alias_list_s` handle
+  ///
+  /// **Returns:**
+  /// - `CKMC_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CKMC_ERROR_NONE`: Successful
+  /// - `CKMC_ERROR_INVALID_PARAMETER`: Input parameter is invalid
+  /// - `CKMC_ERROR_OUT_OF_MEMORY`: Not enough memory
+  ///
+  /// **See also:**
+  /// - `ckmc_alias_list_all_free()`
+  /// - `ckmc_alias_list_s`
   int ckmc_alias_list_new(
     ffi.Pointer<ffi.Char> alias,
     ffi.Pointer<ffi.Pointer<ckmc_alias_list_s>> ppalias_list,
@@ -574,19 +730,27 @@ class Tizen65KeyManagerClient {
       int Function(ffi.Pointer<ffi.Char>,
           ffi.Pointer<ffi.Pointer<ckmc_alias_list_s>>)>();
 
-  /// @brief Creates a new #ckmc_alias_list_s handle, adds it to a previous #ckmc_alias_list_s and returns it.
-  /// The alias pointer in the returned #ckmc_alias_list_s handle points to the provided characters and next is null.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @param[in] previous The last #ckmc_alias_list_s handle to which a newly created #ckmc_alias_list_s is added
-  /// @param[in] alias The item to be set in the newly created #ckmc_alias_list_s
-  /// @param[out] pplast The pointer to a newly created and added #ckmc_alias_list_s handle
-  /// @return #CKMC_ERROR_NONE on success,
-  /// otherwise a negative error value
-  /// @retval #CKMC_ERROR_NONE Successful
-  /// @retval #CKMC_ERROR_INVALID_PARAMETER Input parameter is invalid
-  /// @retval #CKMC_ERROR_OUT_OF_MEMORY Not enough memory
-  /// @see ckmc_alias_list_all_free()
-  /// @see #ckmc_alias_list_s
+  /// Creates a new `ckmc_alias_list_s` handle, adds it to a previous `ckmc_alias_list_s` and returns it. The alias pointer in the returned `ckmc_alias_list_s` handle points to the provided characters and next is null.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `previous` (in): The last `ckmc_alias_list_s` handle to which a newly created `ckmc_alias_list_s` is added
+  /// - `alias` (in): The item to be set in the newly created `ckmc_alias_list_s`
+  /// - `pplast` (out): The pointer to a newly created and added `ckmc_alias_list_s` handle
+  ///
+  /// **Returns:**
+  /// - `CKMC_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CKMC_ERROR_NONE`: Successful
+  /// - `CKMC_ERROR_INVALID_PARAMETER`: Input parameter is invalid
+  /// - `CKMC_ERROR_OUT_OF_MEMORY`: Not enough memory
+  ///
+  /// **See also:**
+  /// - `ckmc_alias_list_all_free()`
+  /// - `ckmc_alias_list_s`
   int ckmc_alias_list_add(
     ffi.Pointer<ckmc_alias_list_s> previous,
     ffi.Pointer<ffi.Char> alias,
@@ -610,12 +774,20 @@ class Tizen65KeyManagerClient {
       int Function(ffi.Pointer<ckmc_alias_list_s>, ffi.Pointer<ffi.Char>,
           ffi.Pointer<ffi.Pointer<ckmc_alias_list_s>>)>();
 
-  /// @brief Destroys the #ckmc_alias_list_s handle and releases resources of #ckmc_alias_list_s from the provided first handle cascadingly.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @remarks It does not destroy an alias itself in #ckmc_alias_list_s.
-  /// @param[in] first The first #ckmc_alias_list_s handle to destroy
-  /// @see ckmc_alias_list_all_free()
-  /// @see #ckmc_alias_list_s
+  /// Destroys the `ckmc_alias_list_s` handle and releases resources of `ckmc_alias_list_s` from the provided first handle cascadingly.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Remarks:**
+  /// - It does not destroy an alias itself in `ckmc_alias_list_s`.
+  ///
+  /// **Parameters:**
+  /// - `first` (in): The first `ckmc_alias_list_s` handle to destroy
+  ///
+  /// **See also:**
+  /// - `ckmc_alias_list_all_free()`
+  /// - `ckmc_alias_list_s`
   void ckmc_alias_list_free(
     ffi.Pointer<ckmc_alias_list_s> first,
   ) {
@@ -631,11 +803,19 @@ class Tizen65KeyManagerClient {
   late final _ckmc_alias_list_free = _ckmc_alias_list_freePtr
       .asFunction<void Function(ffi.Pointer<ckmc_alias_list_s>)>();
 
-  /// @brief Destroys the #ckmc_alias_list_s handle and releases all its resources from the provided first handle cascadingly.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @remarks It also destroys the alias in #ckmc_alias_list_s.
-  /// @param[in] first The first #ckmc_alias_list_s handle to destroy
-  /// @see #ckmc_alias_list_s
+  /// Destroys the `ckmc_alias_list_s` handle and releases all its resources from the provided first handle cascadingly.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Remarks:**
+  /// - It also destroys the alias in `ckmc_alias_list_s`.
+  ///
+  /// **Parameters:**
+  /// - `first` (in): The first `ckmc_alias_list_s` handle to destroy
+  ///
+  /// **See also:**
+  /// - `ckmc_alias_list_s`
   void ckmc_alias_list_all_free(
     ffi.Pointer<ckmc_alias_list_s> first,
   ) {
@@ -651,19 +831,29 @@ class Tizen65KeyManagerClient {
   late final _ckmc_alias_list_all_free = _ckmc_alias_list_all_freePtr
       .asFunction<void Function(ffi.Pointer<ckmc_alias_list_s>)>();
 
-  /// @brief Creates a new #ckmc_cert_list_s handle and returns it.
-  /// The cert pointer in the returned #ckmc_cert_list_s handle points to the provided #ckmc_cert_s and next is null.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @remarks You must destroy the newly created #ckmc_cert_list_s by calling ckmc_cert_list_free() or ckmc_cert_list_all_free() if it is no longer needed.
-  /// @param[in] cert The first item to be set in the newly created #ckmc_cert_list_s
-  /// @param[out] ppalias_list The pointer to a newly created #ckmc_alias_list_s handle
-  /// @return #CKMC_ERROR_NONE on success,
-  /// otherwise a negative error value
-  /// @retval #CKMC_ERROR_NONE Successful
-  /// @retval #CKMC_ERROR_INVALID_PARAMETER Input parameter is invalid
-  /// @retval #CKMC_ERROR_OUT_OF_MEMORY Not enough memory
-  /// @see ckmc_cert_list_all_free()
-  /// @see #ckmc_cert_list_s
+  /// Creates a new `ckmc_cert_list_s` handle and returns it. The cert pointer in the returned `ckmc_cert_list_s` handle points to the provided `ckmc_cert_s` and next is null.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Remarks:**
+  /// - You must destroy the newly created `ckmc_cert_list_s` by calling ckmc_cert_list_free() or ckmc_cert_list_all_free() if it is no longer needed.
+  ///
+  /// **Parameters:**
+  /// - `cert` (in): The first item to be set in the newly created `ckmc_cert_list_s`
+  /// - `ppalias_list` (out): The pointer to a newly created `ckmc_alias_list_s` handle
+  ///
+  /// **Returns:**
+  /// - `CKMC_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CKMC_ERROR_NONE`: Successful
+  /// - `CKMC_ERROR_INVALID_PARAMETER`: Input parameter is invalid
+  /// - `CKMC_ERROR_OUT_OF_MEMORY`: Not enough memory
+  ///
+  /// **See also:**
+  /// - `ckmc_cert_list_all_free()`
+  /// - `ckmc_cert_list_s`
   int ckmc_cert_list_new(
     ffi.Pointer<ckmc_cert_s> cert,
     ffi.Pointer<ffi.Pointer<ckmc_cert_list_s>> ppalias_list,
@@ -683,19 +873,27 @@ class Tizen65KeyManagerClient {
       int Function(ffi.Pointer<ckmc_cert_s>,
           ffi.Pointer<ffi.Pointer<ckmc_cert_list_s>>)>();
 
-  /// @brief Creates a new #ckmc_cert_list_s handle, adds it to a previous #ckmc_cert_list_s and returns it.
-  /// The cert pointer in the returned #ckmc_alias_list_s handle points to the provided #ckmc_cert_s and next is null.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @param[in] previous The last #ckmc_cert_list_s handle to which a newly created #ckmc_cert_list_s is added
-  /// @param[in] cert The item to be set in the newly created #ckmc_cert_list_s
-  /// @param[out] pplast The pointer to a newly created and added #ckmc_alias_list_s handle
-  /// @return #CKMC_ERROR_NONE on success,
-  /// otherwise a negative error value
-  /// @retval #CKMC_ERROR_NONE Successful
-  /// @retval #CKMC_ERROR_INVALID_PARAMETER Input parameter is invalid
-  /// @retval #CKMC_ERROR_OUT_OF_MEMORY Not enough memory
-  /// @see ckmc_cert_list_all_free()
-  /// @see #ckmc_cert_list_s
+  /// Creates a new `ckmc_cert_list_s` handle, adds it to a previous `ckmc_cert_list_s` and returns it. The cert pointer in the returned `ckmc_alias_list_s` handle points to the provided `ckmc_cert_s` and next is null.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `previous` (in): The last `ckmc_cert_list_s` handle to which a newly created `ckmc_cert_list_s` is added
+  /// - `cert` (in): The item to be set in the newly created `ckmc_cert_list_s`
+  /// - `pplast` (out): The pointer to a newly created and added `ckmc_alias_list_s` handle
+  ///
+  /// **Returns:**
+  /// - `CKMC_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CKMC_ERROR_NONE`: Successful
+  /// - `CKMC_ERROR_INVALID_PARAMETER`: Input parameter is invalid
+  /// - `CKMC_ERROR_OUT_OF_MEMORY`: Not enough memory
+  ///
+  /// **See also:**
+  /// - `ckmc_cert_list_all_free()`
+  /// - `ckmc_cert_list_s`
   int ckmc_cert_list_add(
     ffi.Pointer<ckmc_cert_list_s> previous,
     ffi.Pointer<ckmc_cert_s> cert,
@@ -719,12 +917,20 @@ class Tizen65KeyManagerClient {
       int Function(ffi.Pointer<ckmc_cert_list_s>, ffi.Pointer<ckmc_cert_s>,
           ffi.Pointer<ffi.Pointer<ckmc_cert_list_s>>)>();
 
-  /// @brief Destroys the #ckmc_cert_list_s handle and releases resources of #ckmc_cert_list_s from the provided first handle cascadingly.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @remarks It does not destroy #ckmc_cert_s itself in #ckmc_cert_list_s.
-  /// @param[in] first The first #ckmc_cert_list_s handle to destroy
-  /// @see ckmc_cert_list_all_free()
-  /// @see #ckmc_cert_list_s
+  /// Destroys the `ckmc_cert_list_s` handle and releases resources of `ckmc_cert_list_s` from the provided first handle cascadingly.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Remarks:**
+  /// - It does not destroy `ckmc_cert_s` itself in `ckmc_cert_list_s`.
+  ///
+  /// **Parameters:**
+  /// - `first` (in): The first `ckmc_cert_list_s` handle to destroy
+  ///
+  /// **See also:**
+  /// - `ckmc_cert_list_all_free()`
+  /// - `ckmc_cert_list_s`
   void ckmc_cert_list_free(
     ffi.Pointer<ckmc_cert_list_s> first,
   ) {
@@ -739,11 +945,19 @@ class Tizen65KeyManagerClient {
   late final _ckmc_cert_list_free = _ckmc_cert_list_freePtr
       .asFunction<void Function(ffi.Pointer<ckmc_cert_list_s>)>();
 
-  /// @brief Destroys the #ckmc_cert_list_s handle and releases all its resources from the provided first handle cascadingly.
-  /// @since_tizen 2.3
-  /// @remarks It also destroys #ckmc_cert_s in #ckmc_cert_list_s.
-  /// @param[in] first The first #ckmc_cert_list_s handle to destroy
-  /// @see #ckmc_cert_list_s
+  /// Destroys the `ckmc_cert_list_s` handle and releases all its resources from the provided first handle cascadingly.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - It also destroys `ckmc_cert_s` in `ckmc_cert_list_s`.
+  ///
+  /// **Parameters:**
+  /// - `first` (in): The first `ckmc_cert_list_s` handle to destroy
+  ///
+  /// **See also:**
+  /// - `ckmc_cert_list_s`
   void ckmc_cert_list_all_free(
     ffi.Pointer<ckmc_cert_list_s> first,
   ) {
@@ -758,21 +972,32 @@ class Tizen65KeyManagerClient {
   late final _ckmc_cert_list_all_free = _ckmc_cert_list_all_freePtr
       .asFunction<void Function(ffi.Pointer<ckmc_cert_list_s>)>();
 
-  /// @brief Creates new parameter list.
-  /// @since_tizen 3.0
-  /// @remarks Caller is responsible for freeing it with ckmc_param_list_free().
-  /// @param[in] pparams Double pointer to the handle of param list to which the newly created algorithm param list will be assigned
-  /// @return #CKMC_ERROR_NONE on success,
-  /// otherwise a negative error value
-  /// @retval #CKMC_ERROR_NONE Successful
-  /// @retval #CKMC_ERROR_INVALID_PARAMETER Input parameter is invalid
-  /// @see ckmc_param_list_set_integer()
-  /// @see ckmc_param_list_set_buffer()
-  /// @see ckmc_param_list_free()
-  /// @see ckmc_generate_new_params()
-  /// @see #ckmc_param_list_h
-  /// @see #ckmc_param_name_e
-  /// @see #ckmc_algo_type_e
+  /// Creates new parameter list.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - Caller is responsible for freeing it with ckmc_param_list_free().
+  ///
+  /// **Parameters:**
+  /// - `pparams` (in): Double pointer to the handle of param list to which the newly created algorithm param list will be assigned
+  ///
+  /// **Returns:**
+  /// - `CKMC_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CKMC_ERROR_NONE`: Successful
+  /// - `CKMC_ERROR_INVALID_PARAMETER`: Input parameter is invalid
+  ///
+  /// **See also:**
+  /// - `ckmc_param_list_set_integer()`
+  /// - `ckmc_param_list_set_buffer()`
+  /// - `ckmc_param_list_free()`
+  /// - `ckmc_generate_new_params()`
+  /// - `ckmc_param_list_h`
+  /// - `ckmc_param_name_e`
+  /// - `ckmc_algo_type_e`
   int ckmc_param_list_new(
     ffi.Pointer<ckmc_param_list_h> pparams,
   ) {
@@ -787,28 +1012,36 @@ class Tizen65KeyManagerClient {
   late final _ckmc_param_list_new = _ckmc_param_list_newPtr
       .asFunction<int Function(ffi.Pointer<ckmc_param_list_h>)>();
 
-  /// @brief Sets integer parameter to the list.
-  /// @since_tizen 3.0
-  /// @remarks Caller is responsible for #ckmc_param_list_h creation.
-  /// @param[in] params Algorithm param list handle created with ckmc_param_list_new() or ckmc_generate_new_params() \n
-  /// New param with @a name and @a value will be set here
-  /// @param[in] name Name of parameter to set \n
-  /// Existing parameter will be overwritten \n
-  /// Passing invalid parameter name will result in an error
-  /// @param[in] value Value of the parameter in form of a integer
-  /// @return #CKMC_ERROR_NONE on success,
-  /// otherwise a negative error value
-  /// @retval #CKMC_ERROR_NONE Successful
-  /// @retval #CKMC_ERROR_INVALID_PARAMETER Input parameter is invalid
-  /// @see ckmc_param_list_new()
-  /// @see ckmc_param_list_set_buffer()
-  /// @see ckmc_param_list_get_integer()
-  /// @see ckmc_param_list_get_buffer()
-  /// @see ckmc_param_list_free()
-  /// @see ckmc_generate_new_params()
-  /// @see #ckmc_param_list_h
-  /// @see #ckmc_param_name_e
-  /// @see #ckmc_algo_type_e
+  /// Sets integer parameter to the list.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - Caller is responsible for `ckmc_param_list_h` creation.
+  ///
+  /// **Parameters:**
+  /// - `params` (in): Algorithm param list handle created with ckmc_param_list_new() or ckmc_generate_new_params() New param with `name` and `value` will be set here
+  /// - `name` (in): Name of parameter to set Existing parameter will be overwritten Passing invalid parameter name will result in an error
+  /// - `value` (in): Value of the parameter in form of a integer
+  ///
+  /// **Returns:**
+  /// - `CKMC_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CKMC_ERROR_NONE`: Successful
+  /// - `CKMC_ERROR_INVALID_PARAMETER`: Input parameter is invalid
+  ///
+  /// **See also:**
+  /// - `ckmc_param_list_new()`
+  /// - `ckmc_param_list_set_buffer()`
+  /// - `ckmc_param_list_get_integer()`
+  /// - `ckmc_param_list_get_buffer()`
+  /// - `ckmc_param_list_free()`
+  /// - `ckmc_generate_new_params()`
+  /// - `ckmc_param_list_h`
+  /// - `ckmc_param_name_e`
+  /// - `ckmc_algo_type_e`
   int ckmc_param_list_set_integer(
     ckmc_param_list_h params,
     int name,
@@ -828,29 +1061,36 @@ class Tizen65KeyManagerClient {
   late final _ckmc_param_list_set_integer = _ckmc_param_list_set_integerPtr
       .asFunction<int Function(ckmc_param_list_h, int, int)>();
 
-  /// @brief Sets buffer parameter to the list.
-  /// @since_tizen 3.0
-  /// @remarks Caller is responsible for #ckmc_param_list_h creation.
-  /// @param[in] params Algorithm param list handle created with ckmc_param_list_new() or ckmc_generate_new_params()
-  /// New param with @a name and @a buffer will be set here
-  /// @param[in] name Name of parameter to set \n
-  /// Existing parameter will be overwritten \n
-  /// Passing invalid parameter name will result in an error
-  /// @param[in] buffer Value of the parameter in form of a buffer \n
-  /// Caller is responsible for creating and freeing the buffer
-  /// @return #CKMC_ERROR_NONE on success,
-  /// otherwise a negative error value
-  /// @retval #CKMC_ERROR_NONE Successful
-  /// @retval #CKMC_ERROR_INVALID_PARAMETER Input parameter is invalid
-  /// @see ckmc_param_list_new()
-  /// @see ckmc_param_list_set_integer()
-  /// @see ckmc_param_list_get_integer()
-  /// @see ckmc_param_list_get_buffer()
-  /// @see ckmc_param_list_free()
-  /// @see ckmc_generate_new_params()
-  /// @see #ckmc_param_list_h
-  /// @see #ckmc_param_name_e
-  /// @see #ckmc_algo_type_e
+  /// Sets buffer parameter to the list.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - Caller is responsible for `ckmc_param_list_h` creation.
+  ///
+  /// **Parameters:**
+  /// - `params` (in): Algorithm param list handle created with ckmc_param_list_new() or ckmc_generate_new_params() New param with `name` and `buffer` will be set here
+  /// - `name` (in): Name of parameter to set Existing parameter will be overwritten Passing invalid parameter name will result in an error
+  /// - `buffer` (in): Value of the parameter in form of a buffer Caller is responsible for creating and freeing the buffer
+  ///
+  /// **Returns:**
+  /// - `CKMC_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CKMC_ERROR_NONE`: Successful
+  /// - `CKMC_ERROR_INVALID_PARAMETER`: Input parameter is invalid
+  ///
+  /// **See also:**
+  /// - `ckmc_param_list_new()`
+  /// - `ckmc_param_list_set_integer()`
+  /// - `ckmc_param_list_get_integer()`
+  /// - `ckmc_param_list_get_buffer()`
+  /// - `ckmc_param_list_free()`
+  /// - `ckmc_generate_new_params()`
+  /// - `ckmc_param_list_h`
+  /// - `ckmc_param_name_e`
+  /// - `ckmc_algo_type_e`
   int ckmc_param_list_set_buffer(
     ckmc_param_list_h params,
     int name,
@@ -872,26 +1112,36 @@ class Tizen65KeyManagerClient {
           int Function(
               ckmc_param_list_h, int, ffi.Pointer<ckmc_raw_buffer_s>)>();
 
-  /// @brief Gets integer parameter from the list.
-  /// @since_tizen 3.0
-  /// @remarks Caller is responsible for #ckmc_param_list_h creation.
-  /// @param[in] params Algorithm param list handle created with ckmc_param_list_new() or ckmc_generate_new_params()
-  /// which contains param with @a name
-  /// @param[in] name Name of parameter to get
-  /// @param[out] pvalue Value of the parameter in form of a integer
-  /// @return #CKMC_ERROR_NONE on success,
-  /// otherwise a negative error value
-  /// @retval #CKMC_ERROR_NONE Successful
-  /// @retval #CKMC_ERROR_INVALID_PARAMETER Input parameter is invalid
-  /// @see ckmc_param_list_new()
-  /// @see ckmc_param_list_set_integer()
-  /// @see ckmc_param_list_set_buffer()
-  /// @see ckmc_param_list_get_buffer()
-  /// @see ckmc_param_list_free()
-  /// @see ckmc_generate_new_params()
-  /// @see #ckmc_param_list_h
-  /// @see #ckmc_param_name_e
-  /// @see #ckmc_algo_type_e
+  /// Gets integer parameter from the list.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - Caller is responsible for `ckmc_param_list_h` creation.
+  ///
+  /// **Parameters:**
+  /// - `params` (in): Algorithm param list handle created with ckmc_param_list_new() or ckmc_generate_new_params() which contains param with `name`
+  /// - `name` (in): Name of parameter to get
+  /// - `pvalue` (out): Value of the parameter in form of a integer
+  ///
+  /// **Returns:**
+  /// - `CKMC_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CKMC_ERROR_NONE`: Successful
+  /// - `CKMC_ERROR_INVALID_PARAMETER`: Input parameter is invalid
+  ///
+  /// **See also:**
+  /// - `ckmc_param_list_new()`
+  /// - `ckmc_param_list_set_integer()`
+  /// - `ckmc_param_list_set_buffer()`
+  /// - `ckmc_param_list_get_buffer()`
+  /// - `ckmc_param_list_free()`
+  /// - `ckmc_generate_new_params()`
+  /// - `ckmc_param_list_h`
+  /// - `ckmc_param_name_e`
+  /// - `ckmc_algo_type_e`
   int ckmc_param_list_get_integer(
     ckmc_param_list_h params,
     int name,
@@ -912,28 +1162,37 @@ class Tizen65KeyManagerClient {
       _ckmc_param_list_get_integerPtr.asFunction<
           int Function(ckmc_param_list_h, int, ffi.Pointer<ffi.Uint64>)>();
 
-  /// @brief Gets buffer parameter from the list.
-  /// @since_tizen 3.0
-  /// @remarks Caller is responsible for #ckmc_param_list_h creation.
-  /// @param[in] params Algorithm param list handle created with ckmc_param_list_new() or ckmc_generate_new_params()
-  /// which contains param with @a name
-  /// @param[in] name Name of parameter to get
-  /// @param[out] ppbuffer Value of the parameter in form of a buffer \n
-  /// Caller is responsible for creating and freeing the buffer
-  /// @return #CKMC_ERROR_NONE on success,
-  /// otherwise a negative error value
-  /// @retval #CKMC_ERROR_NONE Successful
-  /// @retval #CKMC_ERROR_INVALID_PARAMETER Input parameter is invalid
-  /// @see ckmc_param_list_new()
-  /// @see ckmc_param_list_set_integer()
-  /// @see ckmc_param_list_set_buffer()
-  /// @see ckmc_param_list_get_integer()
-  /// @see ckmc_param_list_free()
-  /// @see ckmc_generate_new_params()
-  /// @see ckmc_buffer_free()
-  /// @see #ckmc_param_list_h
-  /// @see #ckmc_param_name_e
-  /// @see #ckmc_algo_type_e
+  /// Gets buffer parameter from the list.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - Caller is responsible for `ckmc_param_list_h` creation.
+  ///
+  /// **Parameters:**
+  /// - `params` (in): Algorithm param list handle created with ckmc_param_list_new() or ckmc_generate_new_params() which contains param with `name`
+  /// - `name` (in): Name of parameter to get
+  /// - `ppbuffer` (out): Value of the parameter in form of a buffer Caller is responsible for creating and freeing the buffer
+  ///
+  /// **Returns:**
+  /// - `CKMC_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CKMC_ERROR_NONE`: Successful
+  /// - `CKMC_ERROR_INVALID_PARAMETER`: Input parameter is invalid
+  ///
+  /// **See also:**
+  /// - `ckmc_param_list_new()`
+  /// - `ckmc_param_list_set_integer()`
+  /// - `ckmc_param_list_set_buffer()`
+  /// - `ckmc_param_list_get_integer()`
+  /// - `ckmc_param_list_free()`
+  /// - `ckmc_generate_new_params()`
+  /// - `ckmc_buffer_free()`
+  /// - `ckmc_param_list_h`
+  /// - `ckmc_param_name_e`
+  /// - `ckmc_algo_type_e`
   int ckmc_param_list_get_buffer(
     ckmc_param_list_h params,
     int name,
@@ -956,18 +1215,24 @@ class Tizen65KeyManagerClient {
           int Function(ckmc_param_list_h, int,
               ffi.Pointer<ffi.Pointer<ckmc_raw_buffer_s>>)>();
 
-  /// @brief Frees previously allocated list of algorithm params.
-  /// @since_tizen 3.0
-  /// @param[in] params First element of the list to be freed
-  /// @see ckmc_param_list_new()
-  /// @see ckmc_param_list_set_integer()
-  /// @see ckmc_param_list_set_buffer()
-  /// @see ckmc_param_list_get_integer()
-  /// @see ckmc_param_list_get_buffer()
-  /// @see ckmc_generate_new_params()
-  /// @see #ckmc_param_list_h
-  /// @see #ckmc_param_name_e
-  /// @see #ckmc_algo_type_e
+  /// Frees previously allocated list of algorithm params.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `params` (in): First element of the list to be freed
+  ///
+  /// **See also:**
+  /// - `ckmc_param_list_new()`
+  /// - `ckmc_param_list_set_integer()`
+  /// - `ckmc_param_list_set_buffer()`
+  /// - `ckmc_param_list_get_integer()`
+  /// - `ckmc_param_list_get_buffer()`
+  /// - `ckmc_generate_new_params()`
+  /// - `ckmc_param_list_h`
+  /// - `ckmc_param_name_e`
+  /// - `ckmc_algo_type_e`
   void ckmc_param_list_free(
     ckmc_param_list_h params,
   ) {
@@ -982,28 +1247,39 @@ class Tizen65KeyManagerClient {
   late final _ckmc_param_list_free =
       _ckmc_param_list_freePtr.asFunction<void Function(ckmc_param_list_h)>();
 
-  /// @brief Generates algorithm parameters for a given algorithm type and set them to the list.
-  /// @since_tizen 3.0
-  /// @remarks Caller is responsible for #ckmc_param_list_h destruction.
-  /// @remarks Algorithm parameters are set to default values. Optional fields are left empty.
-  /// Initialization vectors are left empty (they have to be set manually).
-  /// Caller is responsible for freeing the list with ckmc_param_list_free().
-  /// @remarks If the function returns error, provided param list may contain some of default parameters.
-  /// @param[in] type Type of the algorithm
-  /// @param[out] pparams Newly generated handle of param list which should be freed by caller after use
-  /// @return #CKMC_ERROR_NONE on success,
-  /// otherwise a negative error value
-  /// @retval #CKMC_ERROR_NONE Successful
-  /// @retval #CKMC_ERROR_INVALID_PARAMETER Input parameter is invalid
-  /// @see ckmc_param_list_new()
-  /// @see ckmc_param_list_set_integer()
-  /// @see ckmc_param_list_set_buffer()
-  /// @see ckmc_param_list_get_integer()
-  /// @see ckmc_param_list_get_buffer()
-  /// @see ckmc_param_list_free()
-  /// @see #ckmc_param_list_h
-  /// @see #ckmc_param_name_e
-  /// @see #ckmc_algo_type_e
+  /// Generates algorithm parameters for a given algorithm type and set them to the list.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - Caller is responsible for `ckmc_param_list_h` destruction.
+  /// - Algorithm parameters are set to default values. Optional fields are left empty.
+  /// - Initialization vectors are left empty (they have to be set manually).
+  /// - Caller is responsible for freeing the list with ckmc_param_list_free().
+  /// - If the function returns error, provided param list may contain some of default parameters.
+  ///
+  /// **Parameters:**
+  /// - `type` (in): Type of the algorithm
+  /// - `pparams` (out): Newly generated handle of param list which should be freed by caller after use
+  ///
+  /// **Returns:**
+  /// - `CKMC_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CKMC_ERROR_NONE`: Successful
+  /// - `CKMC_ERROR_INVALID_PARAMETER`: Input parameter is invalid
+  ///
+  /// **See also:**
+  /// - `ckmc_param_list_new()`
+  /// - `ckmc_param_list_set_integer()`
+  /// - `ckmc_param_list_set_buffer()`
+  /// - `ckmc_param_list_get_integer()`
+  /// - `ckmc_param_list_get_buffer()`
+  /// - `ckmc_param_list_free()`
+  /// - `ckmc_param_list_h`
+  /// - `ckmc_param_name_e`
+  /// - `ckmc_algo_type_e`
   int ckmc_generate_new_params(
     int type,
     ffi.Pointer<ckmc_param_list_h> pparams,
@@ -1021,31 +1297,44 @@ class Tizen65KeyManagerClient {
   late final _ckmc_generate_new_params = _ckmc_generate_new_paramsPtr
       .asFunction<int Function(int, ffi.Pointer<ckmc_param_list_h>)>();
 
-  /// @brief Stores a key inside key manager based on the provided policy.
-  /// @since_tizen 2.3
-  /// @remarks %http://tizen.org/privilege/keymanager (public level privilege) is no longer required to use this API since 3.0.
-  /// @remarks Currently API supports seven types of keys. These are RSA public/private key, DSA public/private key, ECDSA public/private key, and AES symmetric key.
-  /// @remarks key_type in key may be set to #CKMC_KEY_NONE as an input. key_type is determined inside key manager during storing keys.
-  /// @remarks Some private key files are protected by a password. If raw_key in key read from those encrypted files is encrypted with a password, the password should be provided in the #ckmc_key_s structure.
-  /// @remarks If password in policy is provided, the key is additionally encrypted with the password in the policy.
-  /// @param[in] alias The name of a key to be stored
-  /// @param[in] key The key's binary value to be stored
-  /// @param[in] policy The policy about how to store a key securely
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CKMC_ERROR_NONE Successful
-  /// @retval #CKMC_ERROR_INVALID_PARAMETER Input parameter is invalid
-  /// @retval #CKMC_ERROR_DB_LOCKED A user key is not loaded in memory (a user is not logged in)
-  /// @retval #CKMC_ERROR_DB_ALIAS_EXISTS Alias already exists
-  /// @retval #CKMC_ERROR_INVALID_FORMAT The format of raw_key is not valid
-  /// @retval #CKMC_ERROR_DB_ERROR Failed due to a database error
-  /// @retval #CKMC_ERROR_PERMISSION_DENIED Failed to access key manager
-  /// @pre User is already logged in and the user key is already loaded into memory in plain text form.
-  /// @see ckmc_remove_alias()
-  /// @see ckmc_get_key()
-  /// @see ckmc_get_key_alias_list()
-  /// @see #ckmc_key_s
-  /// @see #ckmc_policy_s
+  /// Stores a key inside key manager based on the provided policy.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - <http://tizen.org/privilege/keymanager (public level privilege) is no longer required to use this API since 3.0.>
+  /// - Currently API supports seven types of keys. These are RSA public/private key, DSA public/private key, ECDSA public/private key, and AES symmetric key.
+  /// - key_type in key may be set to `CKMC_KEY_NONE` as an input. key_type is determined inside key manager during storing keys.
+  /// - Some private key files are protected by a password. If raw_key in key read from those encrypted files is encrypted with a password, the password should be provided in the `ckmc_key_s` structure.
+  /// - If password in policy is provided, the key is additionally encrypted with the password in the policy.
+  ///
+  /// **Parameters:**
+  /// - `alias` (in): The name of a key to be stored
+  /// - `key` (in): The key's binary value to be stored
+  /// - `policy` (in): The policy about how to store a key securely
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CKMC_ERROR_NONE`: Successful
+  /// - `CKMC_ERROR_INVALID_PARAMETER`: Input parameter is invalid
+  /// - `CKMC_ERROR_DB_LOCKED`: A user key is not loaded in memory (a user is not logged in)
+  /// - `CKMC_ERROR_DB_ALIAS_EXISTS`: Alias already exists
+  /// - `CKMC_ERROR_INVALID_FORMAT`: The format of raw_key is not valid
+  /// - `CKMC_ERROR_DB_ERROR`: Failed due to a database error
+  /// - `CKMC_ERROR_PERMISSION_DENIED`: Failed to access key manager
+  ///
+  /// **Preconditions:**
+  /// - User is already logged in and the user key is already loaded into memory in plain text form.
+  ///
+  /// **See also:**
+  /// - `ckmc_remove_alias()`
+  /// - `ckmc_get_key()`
+  /// - `ckmc_get_key_alias_list()`
+  /// - `ckmc_key_s`
+  /// - `ckmc_policy_s`
   int ckmc_save_key(
     ffi.Pointer<ffi.Char> alias,
     ckmc_key_s key,
@@ -1065,25 +1354,39 @@ class Tizen65KeyManagerClient {
   late final _ckmc_save_key = _ckmc_save_keyPtr.asFunction<
       int Function(ffi.Pointer<ffi.Char>, ckmc_key_s, ckmc_policy_s)>();
 
-  /// @deprecated Deprecated since @if MOBILE 2.4. @elseif WEARABLE 3.0. @endif [Use ckmc_remove_alias() instead]
-  /// @brief Removes a key from key manager.
-  /// @since_tizen 2.3
-  /// @remarks %http://tizen.org/privilege/keymanager (public level privilege) is no longer required to use this API since 3.0.
-  /// @remarks To remove key, client must have remove permission to the specified key.
-  /// @remarks The key owner can remove by default.
-  /// @param[in] alias The name of a key to be removed
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CKMC_ERROR_NONE Successful
-  /// @retval #CKMC_ERROR_INVALID_PARAMETER Input parameter is invalid
-  /// @retval #CKMC_ERROR_DB_LOCKED A user key is not loaded in memory (a user is not logged in)
-  /// @retval #CKMC_ERROR_DB_ERROR Failed due to a database error
-  /// @retval #CKMC_ERROR_DB_ALIAS_UNKNOWN Alias does not exist
-  /// @retval #CKMC_ERROR_PERMISSION_DENIED Failed to access key manager
-  /// @pre User is already logged in and the user key is already loaded into memory in plain text form.
-  /// @see ckmc_save_key()
-  /// @see ckmc_get_key()
-  /// @see ckmc_get_key_alias_list()
+  /// **Deprecated:** Deprecated since Mobile 2.4.; Wearable 3.0. `[Use ckmc_remove_alias() instead]`
+  ///
+  /// Removes a key from key manager.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - <http://tizen.org/privilege/keymanager (public level privilege) is no longer required to use this API since 3.0.>
+  /// - To remove key, client must have remove permission to the specified key.
+  /// - The key owner can remove by default.
+  ///
+  /// **Parameters:**
+  /// - `alias` (in): The name of a key to be removed
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CKMC_ERROR_NONE`: Successful
+  /// - `CKMC_ERROR_INVALID_PARAMETER`: Input parameter is invalid
+  /// - `CKMC_ERROR_DB_LOCKED`: A user key is not loaded in memory (a user is not logged in)
+  /// - `CKMC_ERROR_DB_ERROR`: Failed due to a database error
+  /// - `CKMC_ERROR_DB_ALIAS_UNKNOWN`: Alias does not exist
+  /// - `CKMC_ERROR_PERMISSION_DENIED`: Failed to access key manager
+  ///
+  /// **Preconditions:**
+  /// - User is already logged in and the user key is already loaded into memory in plain text form.
+  ///
+  /// **See also:**
+  /// - `ckmc_save_key()`
+  /// - `ckmc_get_key()`
+  /// - `ckmc_get_key_alias_list()`
   int ckmc_remove_key(
     ffi.Pointer<ffi.Char> alias,
   ) {
@@ -1098,28 +1401,40 @@ class Tizen65KeyManagerClient {
   late final _ckmc_remove_key =
       _ckmc_remove_keyPtr.asFunction<int Function(ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets a key from key manager.
-  /// @since_tizen 2.3
-  /// @remarks %http://tizen.org/privilege/keymanager (public level privilege) is no longer required to use this API since 3.0.
-  /// @remarks A client can access only data stored by the client.
-  /// @remarks You must destroy the newly created @a ppkey by calling ckmc_key_free() if it is no longer needed.
-  /// @param[in] alias The name of a key to retrieve
-  /// @param[in] password The password used in decrypting a key value \n
-  /// If password of policy is provided in ckmc_save_key(), the same password should be provided
-  /// @param[out] ppkey The pointer to a newly created ckmc_key_s handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CKMC_ERROR_NONE Successful
-  /// @retval #CKMC_ERROR_INVALID_PARAMETER Input parameter is invalid
-  /// @retval #CKMC_ERROR_DB_LOCKED A user key is not loaded in memory (a user is not logged in)
-  /// @retval #CKMC_ERROR_DB_ERROR Failed due to a database error
-  /// @retval #CKMC_ERROR_DB_ALIAS_UNKNOWN Alias does not exist
-  /// @retval #CKMC_ERROR_PERMISSION_DENIED Failed to access key manager
-  /// @retval #CKMC_ERROR_AUTHENTICATION_FAILED Decryption failed because password is incorrect
-  /// @pre User is already logged in and the user key is already loaded into memory in plain text form.
-  /// @see ckmc_save_key()
-  /// @see ckmc_remove_alias()
-  /// @see ckmc_get_key_alias_list()
+  /// Gets a key from key manager.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - <http://tizen.org/privilege/keymanager (public level privilege) is no longer required to use this API since 3.0.>
+  /// - A client can access only data stored by the client.
+  /// - You must destroy the newly created `ppkey` by calling ckmc_key_free() if it is no longer needed.
+  ///
+  /// **Parameters:**
+  /// - `alias` (in): The name of a key to retrieve
+  /// - `password` (in): The password used in decrypting a key value If password of policy is provided in ckmc_save_key(), the same password should be provided
+  /// - `ppkey` (out): The pointer to a newly created ckmc_key_s handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CKMC_ERROR_NONE`: Successful
+  /// - `CKMC_ERROR_INVALID_PARAMETER`: Input parameter is invalid
+  /// - `CKMC_ERROR_DB_LOCKED`: A user key is not loaded in memory (a user is not logged in)
+  /// - `CKMC_ERROR_DB_ERROR`: Failed due to a database error
+  /// - `CKMC_ERROR_DB_ALIAS_UNKNOWN`: Alias does not exist
+  /// - `CKMC_ERROR_PERMISSION_DENIED`: Failed to access key manager
+  /// - `CKMC_ERROR_AUTHENTICATION_FAILED`: Decryption failed because password is incorrect
+  ///
+  /// **Preconditions:**
+  /// - User is already logged in and the user key is already loaded into memory in plain text form.
+  ///
+  /// **See also:**
+  /// - `ckmc_save_key()`
+  /// - `ckmc_remove_alias()`
+  /// - `ckmc_get_key_alias_list()`
   int ckmc_get_key(
     ffi.Pointer<ffi.Char> alias,
     ffi.Pointer<ffi.Char> password,
@@ -1140,27 +1455,38 @@ class Tizen65KeyManagerClient {
       int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
           ffi.Pointer<ffi.Pointer<ckmc_key_s>>)>();
 
-  /// @brief Gets all the alias of keys that the client can access.
-  /// @since_tizen 2.3
-  /// @remarks %http://tizen.org/privilege/keymanager (public level privilege) is no longer required to use this API since 3.0.
-  /// @remarks A client can access only data stored by the client.
-  /// @remarks You must destroy the newly created @a ppalias_list by calling ckmc_alias_list_all_free()
-  /// if it is no longer needed.
-  /// @param[out] ppalias_list The pointer to a newly created ckmc_alias_list_s handle containing all
-  /// available alias of keys \n
-  /// If there is no available key alias, *ppalias_list will be null
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CKMC_ERROR_NONE Successful
-  /// @retval #CKMC_ERROR_INVALID_PARAMETER Input parameter is invalid
-  /// @retval #CKMC_ERROR_DB_LOCKED A user key is not loaded in memory (a user is not logged in)
-  /// @retval #CKMC_ERROR_DB_ERROR Failed due to a database error
-  /// @retval #CKMC_ERROR_DB_ALIAS_UNKNOWN Alias does not exist
-  /// @retval #CKMC_ERROR_PERMISSION_DENIED Failed to access key manager
-  /// @pre User is already logged in and the user key is already loaded into memory in plain text form.
-  /// @see ckmc_save_key()
-  /// @see ckmc_remove_alias()
-  /// @see ckmc_get_key()
+  /// Gets all the alias of keys that the client can access.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - <http://tizen.org/privilege/keymanager (public level privilege) is no longer required to use this API since 3.0.>
+  /// - A client can access only data stored by the client.
+  /// - You must destroy the newly created `ppalias_list` by calling ckmc_alias_list_all_free()
+  /// - if it is no longer needed.
+  ///
+  /// **Parameters:**
+  /// - `ppalias_list` (out): The pointer to a newly created ckmc_alias_list_s handle containing all available alias of keys If there is no available key alias, *ppalias_list will be null
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CKMC_ERROR_NONE`: Successful
+  /// - `CKMC_ERROR_INVALID_PARAMETER`: Input parameter is invalid
+  /// - `CKMC_ERROR_DB_LOCKED`: A user key is not loaded in memory (a user is not logged in)
+  /// - `CKMC_ERROR_DB_ERROR`: Failed due to a database error
+  /// - `CKMC_ERROR_DB_ALIAS_UNKNOWN`: Alias does not exist
+  /// - `CKMC_ERROR_PERMISSION_DENIED`: Failed to access key manager
+  ///
+  /// **Preconditions:**
+  /// - User is already logged in and the user key is already loaded into memory in plain text form.
+  ///
+  /// **See also:**
+  /// - `ckmc_save_key()`
+  /// - `ckmc_remove_alias()`
+  /// - `ckmc_get_key()`
   int ckmc_get_key_alias_list(
     ffi.Pointer<ffi.Pointer<ckmc_alias_list_s>> ppalias_list,
   ) {
@@ -1176,27 +1502,38 @@ class Tizen65KeyManagerClient {
   late final _ckmc_get_key_alias_list = _ckmc_get_key_alias_listPtr
       .asFunction<int Function(ffi.Pointer<ffi.Pointer<ckmc_alias_list_s>>)>();
 
-  /// @brief Gets the information about all the aliases of keys that the client can access.
-  /// @since_tizen 5.5
-  /// @remarks A client can access only data stored by the client and the entries from system database
-  /// if it was explicitly permitted to.
-  /// @remarks You must destroy the newly created @a ppalias_list by calling ckmc_alias_info_list_all_free()
-  /// if it is no longer needed.
-  /// @param[out] ppalias_list The pointer to a newly created ckmc_alias_info_list_s handle containing
-  /// information about all key aliases \n
-  /// If there is no available key alias, *ppalias_list will be null
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CKMC_ERROR_NONE Successful
-  /// @retval #CKMC_ERROR_INVALID_PARAMETER Input parameter is invalid
-  /// @retval #CKMC_ERROR_DB_LOCKED A user key is not loaded in memory (a user is not logged in)
-  /// @retval #CKMC_ERROR_DB_ERROR Failed due to a database error
-  /// @retval #CKMC_ERROR_DB_ALIAS_UNKNOWN Alias does not exist
-  /// @retval #CKMC_ERROR_PERMISSION_DENIED Failed to access key manager
-  /// @pre User is already logged in and the user key is already loaded into memory in plain text form.
-  /// @see ckmc_save_key()
-  /// @see ckmc_remove_alias()
-  /// @see ckmc_get_key()
+  /// Gets the information about all the aliases of keys that the client can access.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - A client can access only data stored by the client and the entries from system database
+  /// - if it was explicitly permitted to.
+  /// - You must destroy the newly created `ppalias_list` by calling ckmc_alias_info_list_all_free()
+  /// - if it is no longer needed.
+  ///
+  /// **Parameters:**
+  /// - `ppalias_list` (out): The pointer to a newly created ckmc_alias_info_list_s handle containing information about all key aliases If there is no available key alias, *ppalias_list will be null
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CKMC_ERROR_NONE`: Successful
+  /// - `CKMC_ERROR_INVALID_PARAMETER`: Input parameter is invalid
+  /// - `CKMC_ERROR_DB_LOCKED`: A user key is not loaded in memory (a user is not logged in)
+  /// - `CKMC_ERROR_DB_ERROR`: Failed due to a database error
+  /// - `CKMC_ERROR_DB_ALIAS_UNKNOWN`: Alias does not exist
+  /// - `CKMC_ERROR_PERMISSION_DENIED`: Failed to access key manager
+  ///
+  /// **Preconditions:**
+  /// - User is already logged in and the user key is already loaded into memory in plain text form.
+  ///
+  /// **See also:**
+  /// - `ckmc_save_key()`
+  /// - `ckmc_remove_alias()`
+  /// - `ckmc_get_key()`
   int ckmc_get_key_alias_info_list(
     ffi.Pointer<ffi.Pointer<ckmc_alias_info_list_s>> ppalias_list,
   ) {
@@ -1214,28 +1551,41 @@ class Tizen65KeyManagerClient {
       _ckmc_get_key_alias_info_listPtr.asFunction<
           int Function(ffi.Pointer<ffi.Pointer<ckmc_alias_info_list_s>>)>();
 
-  /// @brief Stores a certificate inside key manager based on the provided policy.
-  /// @since_tizen 2.3
-  /// @remarks %http://tizen.org/privilege/keymanager (public level privilege) is no longer required to use this API since 3.0
-  /// @remarks The certificate's binary value will be converted and saved as binary DER encoded certificates.
-  /// @param[in] alias The name of a certificate to be stored
-  /// @param[in] cert The certificate's binary value to be stored
-  /// @param[in] policy The policy about how to store a certificate securely
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CKMC_ERROR_NONE Successful
-  /// @retval #CKMC_ERROR_INVALID_PARAMETER Input parameter is invalid
-  /// @retval #CKMC_ERROR_DB_LOCKED A user key is not loaded in memory (a user is not logged in)
-  /// @retval #CKMC_ERROR_DB_ALIAS_EXISTS Alias already exists
-  /// @retval #CKMC_ERROR_INVALID_FORMAT The format of raw_cert is not valid
-  /// @retval #CKMC_ERROR_DB_ERROR Failed due to a database error
-  /// @retval #CKMC_ERROR_PERMISSION_DENIED Failed to access key manager
-  /// @pre User is already logged in and the user key is already loaded into memory in plain text form.
-  /// @see ckmc_remove_alias()
-  /// @see ckmc_get_cert()
-  /// @see ckmc_get_cert_alias_list()
-  /// @see #ckmc_cert_s
-  /// @see #ckmc_policy_s
+  /// Stores a certificate inside key manager based on the provided policy.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - <http://tizen.org/privilege/keymanager (public level privilege) is no longer required to use this API since 3.0>
+  /// - The certificate's binary value will be converted and saved as binary DER encoded certificates.
+  ///
+  /// **Parameters:**
+  /// - `alias` (in): The name of a certificate to be stored
+  /// - `cert` (in): The certificate's binary value to be stored
+  /// - `policy` (in): The policy about how to store a certificate securely
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CKMC_ERROR_NONE`: Successful
+  /// - `CKMC_ERROR_INVALID_PARAMETER`: Input parameter is invalid
+  /// - `CKMC_ERROR_DB_LOCKED`: A user key is not loaded in memory (a user is not logged in)
+  /// - `CKMC_ERROR_DB_ALIAS_EXISTS`: Alias already exists
+  /// - `CKMC_ERROR_INVALID_FORMAT`: The format of raw_cert is not valid
+  /// - `CKMC_ERROR_DB_ERROR`: Failed due to a database error
+  /// - `CKMC_ERROR_PERMISSION_DENIED`: Failed to access key manager
+  ///
+  /// **Preconditions:**
+  /// - User is already logged in and the user key is already loaded into memory in plain text form.
+  ///
+  /// **See also:**
+  /// - `ckmc_remove_alias()`
+  /// - `ckmc_get_cert()`
+  /// - `ckmc_get_cert_alias_list()`
+  /// - `ckmc_cert_s`
+  /// - `ckmc_policy_s`
   int ckmc_save_cert(
     ffi.Pointer<ffi.Char> alias,
     ckmc_cert_s cert,
@@ -1255,25 +1605,39 @@ class Tizen65KeyManagerClient {
   late final _ckmc_save_cert = _ckmc_save_certPtr.asFunction<
       int Function(ffi.Pointer<ffi.Char>, ckmc_cert_s, ckmc_policy_s)>();
 
-  /// @deprecated Deprecated since @if MOBILE 2.4. @elseif WEARABLE 3.0. @endif [Use ckmc_remove_alias() instead]
-  /// @brief Removes a certificate from key manager.
-  /// @since_tizen 2.3
-  /// @remarks %http://tizen.org/privilege/keymanager (public level privilege) is no longer required to use this API since 3.0.
-  /// @remarks To remove certificate, client must have remove permission to the specified certificate.
-  /// @remarks The key owner can remove by default.
-  /// @param[in] alias The name of a certificate to be removed
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CKMC_ERROR_NONE Successful
-  /// @retval #CKMC_ERROR_INVALID_PARAMETER Input parameter is invalid
-  /// @retval #CKMC_ERROR_DB_LOCKED A user key is not loaded in memory (a user is not logged in)
-  /// @retval #CKMC_ERROR_DB_ERROR Failed due to a database error
-  /// @retval #CKMC_ERROR_DB_ALIAS_UNKNOWN Alias does not exist
-  /// @retval #CKMC_ERROR_PERMISSION_DENIED Failed to access key manager
-  /// @pre User is already logged in and the user key is already loaded into memory in plain text form.
-  /// @see ckmc_save_cert()
-  /// @see ckmc_get_cert()
-  /// @see ckmc_get_cert_alias_list()
+  /// **Deprecated:** Deprecated since Mobile 2.4.; Wearable 3.0. `[Use ckmc_remove_alias() instead]`
+  ///
+  /// Removes a certificate from key manager.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - <http://tizen.org/privilege/keymanager (public level privilege) is no longer required to use this API since 3.0.>
+  /// - To remove certificate, client must have remove permission to the specified certificate.
+  /// - The key owner can remove by default.
+  ///
+  /// **Parameters:**
+  /// - `alias` (in): The name of a certificate to be removed
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CKMC_ERROR_NONE`: Successful
+  /// - `CKMC_ERROR_INVALID_PARAMETER`: Input parameter is invalid
+  /// - `CKMC_ERROR_DB_LOCKED`: A user key is not loaded in memory (a user is not logged in)
+  /// - `CKMC_ERROR_DB_ERROR`: Failed due to a database error
+  /// - `CKMC_ERROR_DB_ALIAS_UNKNOWN`: Alias does not exist
+  /// - `CKMC_ERROR_PERMISSION_DENIED`: Failed to access key manager
+  ///
+  /// **Preconditions:**
+  /// - User is already logged in and the user key is already loaded into memory in plain text form.
+  ///
+  /// **See also:**
+  /// - `ckmc_save_cert()`
+  /// - `ckmc_get_cert()`
+  /// - `ckmc_get_cert_alias_list()`
   int ckmc_remove_cert(
     ffi.Pointer<ffi.Char> alias,
   ) {
@@ -1288,30 +1652,41 @@ class Tizen65KeyManagerClient {
   late final _ckmc_remove_cert =
       _ckmc_remove_certPtr.asFunction<int Function(ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets a certificate from key manager.
-  /// @since_tizen 2.3
-  /// @remarks %http://tizen.org/privilege/keymanager (public level privilege) is no longer required to use this API since 3.0.
-  /// @remarks A client can access only certificate stored by the client.
-  /// @remarks A DER encoded certificate will be returned as a return value.
-  /// @remarks You must destroy the newly created @a ppcert by calling ckmc_cert_free() if it is no longer needed.
-  /// @param[in] alias The name of a certificate to retrieve
-  /// @param[in] password The password used in decrypting a certificate value \n
-  /// If password of policy is provided in ckmc_save_cert(), the same password
-  /// should be provided
-  /// @param[out] ppcert The pointer to a newly created ckmc_cert_s handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CKMC_ERROR_NONE Successful
-  /// @retval #CKMC_ERROR_INVALID_PARAMETER Input parameter is invalid
-  /// @retval #CKMC_ERROR_DB_LOCKED A user key is not loaded in memory (a user is not logged in)
-  /// @retval #CKMC_ERROR_DB_ERROR Failed due to a database error
-  /// @retval #CKMC_ERROR_DB_ALIAS_UNKNOWN Alias does not exists
-  /// @retval #CKMC_ERROR_PERMISSION_DENIED Failed to access key manager
-  /// @retval #CKMC_ERROR_AUTHENTICATION_FAILED Decryption failed because password is incorrect
-  /// @pre User is already logged in and the user key is already loaded into memory in plain text form.
-  /// @see ckmc_save_cert()
-  /// @see ckmc_remove_alias()
-  /// @see ckmc_get_cert_alias_list()
+  /// Gets a certificate from key manager.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - <http://tizen.org/privilege/keymanager (public level privilege) is no longer required to use this API since 3.0.>
+  /// - A client can access only certificate stored by the client.
+  /// - A DER encoded certificate will be returned as a return value.
+  /// - You must destroy the newly created `ppcert` by calling ckmc_cert_free() if it is no longer needed.
+  ///
+  /// **Parameters:**
+  /// - `alias` (in): The name of a certificate to retrieve
+  /// - `password` (in): The password used in decrypting a certificate value If password of policy is provided in ckmc_save_cert(), the same password should be provided
+  /// - `ppcert` (out): The pointer to a newly created ckmc_cert_s handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CKMC_ERROR_NONE`: Successful
+  /// - `CKMC_ERROR_INVALID_PARAMETER`: Input parameter is invalid
+  /// - `CKMC_ERROR_DB_LOCKED`: A user key is not loaded in memory (a user is not logged in)
+  /// - `CKMC_ERROR_DB_ERROR`: Failed due to a database error
+  /// - `CKMC_ERROR_DB_ALIAS_UNKNOWN`: Alias does not exists
+  /// - `CKMC_ERROR_PERMISSION_DENIED`: Failed to access key manager
+  /// - `CKMC_ERROR_AUTHENTICATION_FAILED`: Decryption failed because password is incorrect
+  ///
+  /// **Preconditions:**
+  /// - User is already logged in and the user key is already loaded into memory in plain text form.
+  ///
+  /// **See also:**
+  /// - `ckmc_save_cert()`
+  /// - `ckmc_remove_alias()`
+  /// - `ckmc_get_cert_alias_list()`
   int ckmc_get_cert(
     ffi.Pointer<ffi.Char> alias,
     ffi.Pointer<ffi.Char> password,
@@ -1332,25 +1707,37 @@ class Tizen65KeyManagerClient {
       int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
           ffi.Pointer<ffi.Pointer<ckmc_cert_s>>)>();
 
-  /// @brief Gets all alias of certificates which the client can access.
-  /// @since_tizen 2.3
-  /// @remarks %http://tizen.org/privilege/keymanager (public level privilege) is no longer required to use this API since 3.0.
-  /// @remarks A client can access only data stored by the client.
-  /// @remarks You must destroy the newly created @a ppalias_list by calling ckmc_alias_list_all_free() if it is no longer needed.
-  /// @param[out] ppalias_list The pointer to a newly created ckmc_alias_list_s handle containing all available alias of keys \n
-  /// If there is no available key alias, *ppalias_list will be null
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CKMC_ERROR_NONE Successful
-  /// @retval #CKMC_ERROR_INVALID_PARAMETER Input parameter is invalid
-  /// @retval #CKMC_ERROR_DB_LOCKED A user key is not loaded in memory (a user is not logged in)
-  /// @retval #CKMC_ERROR_DB_ERROR Failed due to a database error
-  /// @retval #CKMC_ERROR_DB_ALIAS_UNKNOWN Alias does not exist
-  /// @retval #CKMC_ERROR_PERMISSION_DENIED Failed to access key manager
-  /// @pre User is already logged in and the user key is already loaded into memory in plain text form.
-  /// @see ckmc_save_cert()
-  /// @see ckmc_remove_alias()
-  /// @see ckmc_get_cert()
+  /// Gets all alias of certificates which the client can access.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - <http://tizen.org/privilege/keymanager (public level privilege) is no longer required to use this API since 3.0.>
+  /// - A client can access only data stored by the client.
+  /// - You must destroy the newly created `ppalias_list` by calling ckmc_alias_list_all_free() if it is no longer needed.
+  ///
+  /// **Parameters:**
+  /// - `ppalias_list` (out): The pointer to a newly created ckmc_alias_list_s handle containing all available alias of keys If there is no available key alias, *ppalias_list will be null
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CKMC_ERROR_NONE`: Successful
+  /// - `CKMC_ERROR_INVALID_PARAMETER`: Input parameter is invalid
+  /// - `CKMC_ERROR_DB_LOCKED`: A user key is not loaded in memory (a user is not logged in)
+  /// - `CKMC_ERROR_DB_ERROR`: Failed due to a database error
+  /// - `CKMC_ERROR_DB_ALIAS_UNKNOWN`: Alias does not exist
+  /// - `CKMC_ERROR_PERMISSION_DENIED`: Failed to access key manager
+  ///
+  /// **Preconditions:**
+  /// - User is already logged in and the user key is already loaded into memory in plain text form.
+  ///
+  /// **See also:**
+  /// - `ckmc_save_cert()`
+  /// - `ckmc_remove_alias()`
+  /// - `ckmc_get_cert()`
   int ckmc_get_cert_alias_list(
     ffi.Pointer<ffi.Pointer<ckmc_alias_list_s>> ppalias_list,
   ) {
@@ -1366,27 +1753,38 @@ class Tizen65KeyManagerClient {
   late final _ckmc_get_cert_alias_list = _ckmc_get_cert_alias_listPtr
       .asFunction<int Function(ffi.Pointer<ffi.Pointer<ckmc_alias_list_s>>)>();
 
-  /// @brief Gets the information about all the aliases of certificates that the client can access.
-  /// @since_tizen 5.5
-  /// @remarks A client can access only data stored by the client and the entries from system database
-  /// if it was explicitly permitted to.
-  /// @remarks You must destroy the newly created @a ppalias_list by calling ckmc_alias_info_list_all_free()
-  /// if it is no longer needed.
-  /// @param[out] ppalias_list The pointer to a newly created ckmc_alias_info_list_s handle containing
-  /// information about all certificate aliases \n
-  /// If there is no available certificate alias, *ppalias_list will be null
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CKMC_ERROR_NONE Successful
-  /// @retval #CKMC_ERROR_INVALID_PARAMETER Input parameter is invalid
-  /// @retval #CKMC_ERROR_DB_LOCKED A user key is not loaded in memory (a user is not logged in)
-  /// @retval #CKMC_ERROR_DB_ERROR Failed due to a database error
-  /// @retval #CKMC_ERROR_DB_ALIAS_UNKNOWN Alias does not exist
-  /// @retval #CKMC_ERROR_PERMISSION_DENIED Failed to access key manager
-  /// @pre User is already logged in and the user key is already loaded into memory in plain text form.
-  /// @see ckmc_save_cert()
-  /// @see ckmc_remove_alias()
-  /// @see ckmc_get_cert()
+  /// Gets the information about all the aliases of certificates that the client can access.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - A client can access only data stored by the client and the entries from system database
+  /// - if it was explicitly permitted to.
+  /// - You must destroy the newly created `ppalias_list` by calling ckmc_alias_info_list_all_free()
+  /// - if it is no longer needed.
+  ///
+  /// **Parameters:**
+  /// - `ppalias_list` (out): The pointer to a newly created ckmc_alias_info_list_s handle containing information about all certificate aliases If there is no available certificate alias, *ppalias_list will be null
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CKMC_ERROR_NONE`: Successful
+  /// - `CKMC_ERROR_INVALID_PARAMETER`: Input parameter is invalid
+  /// - `CKMC_ERROR_DB_LOCKED`: A user key is not loaded in memory (a user is not logged in)
+  /// - `CKMC_ERROR_DB_ERROR`: Failed due to a database error
+  /// - `CKMC_ERROR_DB_ALIAS_UNKNOWN`: Alias does not exist
+  /// - `CKMC_ERROR_PERMISSION_DENIED`: Failed to access key manager
+  ///
+  /// **Preconditions:**
+  /// - User is already logged in and the user key is already loaded into memory in plain text form.
+  ///
+  /// **See also:**
+  /// - `ckmc_save_cert()`
+  /// - `ckmc_remove_alias()`
+  /// - `ckmc_get_cert()`
   int ckmc_get_cert_alias_info_list(
     ffi.Pointer<ffi.Pointer<ckmc_alias_info_list_s>> ppalias_list,
   ) {
@@ -1404,28 +1802,41 @@ class Tizen65KeyManagerClient {
       _ckmc_get_cert_alias_info_listPtr.asFunction<
           int Function(ffi.Pointer<ffi.Pointer<ckmc_alias_info_list_s>>)>();
 
-  /// @brief Stores PKCS12's contents inside key manager based on the provided policies. All items from the PKCS12 will use the same alias.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @remarks %http://tizen.org/privilege/keymanager (public level privilege) is no longer required to use this API since 3.0.
-  /// @param[in] alias The name of a data to be stored
-  /// @param[in] pkcs Pointer to the pkcs12 structure to be saved
-  /// @param[in] key_policy The policy about how to store pkcs's private key
-  /// @param[in] cert_policy The policy about how to store pkcs's certificate
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CKMC_ERROR_NONE Successful
-  /// @retval #CKMC_ERROR_INVALID_PARAMETER Input parameter is invalid
-  /// @retval #CKMC_ERROR_DB_LOCKED A user key is not loaded in memory (a user is not logged in)
-  /// @retval #CKMC_ERROR_DB_ALIAS_EXISTS Alias already exists
-  /// @retval #CKMC_ERROR_DB_ERROR Failed due to a database error
-  /// @retval #CKMC_ERROR_PERMISSION_DENIED Failed to access key manager
-  /// @pre User is already logged in and the user key is already loaded into memory in plain text form.
-  /// @see ckmc_remove_alias()
-  /// @see ckmc_get_pkcs12()
-  /// @see ckmc_get_data_alias_list()
-  /// @see ckmc_pkcs12_load()
-  /// @see #ckmc_pkcs12_s
-  /// @see #ckmc_policy_s
+  /// Stores PKCS12's contents inside key manager based on the provided policies. All items from the PKCS12 will use the same alias.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Remarks:**
+  /// - <http://tizen.org/privilege/keymanager (public level privilege) is no longer required to use this API since 3.0.>
+  ///
+  /// **Parameters:**
+  /// - `alias` (in): The name of a data to be stored
+  /// - `pkcs` (in): Pointer to the pkcs12 structure to be saved
+  /// - `key_policy` (in): The policy about how to store pkcs's private key
+  /// - `cert_policy` (in): The policy about how to store pkcs's certificate
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CKMC_ERROR_NONE`: Successful
+  /// - `CKMC_ERROR_INVALID_PARAMETER`: Input parameter is invalid
+  /// - `CKMC_ERROR_DB_LOCKED`: A user key is not loaded in memory (a user is not logged in)
+  /// - `CKMC_ERROR_DB_ALIAS_EXISTS`: Alias already exists
+  /// - `CKMC_ERROR_DB_ERROR`: Failed due to a database error
+  /// - `CKMC_ERROR_PERMISSION_DENIED`: Failed to access key manager
+  ///
+  /// **Preconditions:**
+  /// - User is already logged in and the user key is already loaded into memory in plain text form.
+  ///
+  /// **See also:**
+  /// - `ckmc_remove_alias()`
+  /// - `ckmc_get_pkcs12()`
+  /// - `ckmc_get_data_alias_list()`
+  /// - `ckmc_pkcs12_load()`
+  /// - `ckmc_pkcs12_s`
+  /// - `ckmc_policy_s`
   int ckmc_save_pkcs12(
     ffi.Pointer<ffi.Char> alias,
     ffi.Pointer<ckmc_pkcs12_s> pkcs,
@@ -1448,27 +1859,40 @@ class Tizen65KeyManagerClient {
       int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ckmc_pkcs12_s>,
           ckmc_policy_s, ckmc_policy_s)>();
 
-  /// @brief Gets a pkcs12 from key manager.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @remarks %http://tizen.org/privilege/keymanager (public level privilege) is no longer required to use this API since 3.0.
-  /// @remarks A client can access only data stored by the client.
-  /// @remarks You must destroy the newly created @a pkcs12 by calling ckmc_pkcs12_free() if it is no longer needed.
-  /// @param[in] alias The name of a data to retrieve
-  /// @param[in] key_password Password that was used to encrypt privateKey (may be NULL)
-  /// @param[in] cert_password Password used to encrypt certificates (may be NULL)
-  /// @param[out] pkcs12 The pointer to a newly created ckmc_pkcs12_s handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CKMC_ERROR_NONE Successful
-  /// @retval #CKMC_ERROR_INVALID_PARAMETER Input parameter is invalid
-  /// @retval #CKMC_ERROR_DB_LOCKED A user key is not loaded in memory (a user is not logged in)
-  /// @retval #CKMC_ERROR_DB_ERROR Failed due to a database error
-  /// @retval #CKMC_ERROR_DB_ALIAS_UNKNOWN Alias does not exist
-  /// @retval #CKMC_ERROR_PERMISSION_DENIED Failed to access key manager
-  /// @retval #CKMC_ERROR_AUTHENTICATION_FAILED key_password or cert_password does not match with password used to encrypt data
-  /// @pre User is already logged in and the user key is already loaded into memory in plain text form.
-  /// @see ckmc_save_pkcs12()
-  /// @see ckmc_remove_alias()
+  /// Gets a pkcs12 from key manager.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Remarks:**
+  /// - <http://tizen.org/privilege/keymanager (public level privilege) is no longer required to use this API since 3.0.>
+  /// - A client can access only data stored by the client.
+  /// - You must destroy the newly created `pkcs12` by calling ckmc_pkcs12_free() if it is no longer needed.
+  ///
+  /// **Parameters:**
+  /// - `alias` (in): The name of a data to retrieve
+  /// - `key_password` (in): Password that was used to encrypt privateKey (may be NULL)
+  /// - `cert_password` (in): Password used to encrypt certificates (may be NULL)
+  /// - `pkcs12` (out): The pointer to a newly created ckmc_pkcs12_s handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CKMC_ERROR_NONE`: Successful
+  /// - `CKMC_ERROR_INVALID_PARAMETER`: Input parameter is invalid
+  /// - `CKMC_ERROR_DB_LOCKED`: A user key is not loaded in memory (a user is not logged in)
+  /// - `CKMC_ERROR_DB_ERROR`: Failed due to a database error
+  /// - `CKMC_ERROR_DB_ALIAS_UNKNOWN`: Alias does not exist
+  /// - `CKMC_ERROR_PERMISSION_DENIED`: Failed to access key manager
+  /// - `CKMC_ERROR_AUTHENTICATION_FAILED`: key_password or cert_password does not match with password used to encrypt data
+  ///
+  /// **Preconditions:**
+  /// - User is already logged in and the user key is already loaded into memory in plain text form.
+  ///
+  /// **See also:**
+  /// - `ckmc_save_pkcs12()`
+  /// - `ckmc_remove_alias()`
   int ckmc_get_pkcs12(
     ffi.Pointer<ffi.Char> alias,
     ffi.Pointer<ffi.Char> key_password,
@@ -1494,26 +1918,39 @@ class Tizen65KeyManagerClient {
       int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
           ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Pointer<ckmc_pkcs12_s>>)>();
 
-  /// @brief Stores a data inside key manager based on the provided policy.
-  /// @since_tizen 2.3
-  /// @remarks %http://tizen.org/privilege/keymanager (public level privilege) is no longer required to use this API since 3.0.
-  /// @param[in] alias The name of a data to be stored
-  /// @param[in] data The binary value to be stored
-  /// @param[in] policy The policy about how to store a data securely
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CKMC_ERROR_NONE Successful
-  /// @retval #CKMC_ERROR_INVALID_PARAMETER Input parameter is invalid
-  /// @retval #CKMC_ERROR_DB_LOCKED A user key is not loaded in memory (a user is not logged in)
-  /// @retval #CKMC_ERROR_DB_ALIAS_EXISTS Alias already exists
-  /// @retval #CKMC_ERROR_DB_ERROR Failed due to a database error
-  /// @retval #CKMC_ERROR_PERMISSION_DENIED Failed to access key manager
-  /// @pre User is already logged in and the user key is already loaded into memory in plain text form.
-  /// @see ckmc_remove_alias()
-  /// @see ckmc_get_data()
-  /// @see ckmc_get_data_alias_list()
-  /// @see #ckmc_raw_buffer_s
-  /// @see #ckmc_policy_s
+  /// Stores a data inside key manager based on the provided policy.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - <http://tizen.org/privilege/keymanager (public level privilege) is no longer required to use this API since 3.0.>
+  ///
+  /// **Parameters:**
+  /// - `alias` (in): The name of a data to be stored
+  /// - `data` (in): The binary value to be stored
+  /// - `policy` (in): The policy about how to store a data securely
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CKMC_ERROR_NONE`: Successful
+  /// - `CKMC_ERROR_INVALID_PARAMETER`: Input parameter is invalid
+  /// - `CKMC_ERROR_DB_LOCKED`: A user key is not loaded in memory (a user is not logged in)
+  /// - `CKMC_ERROR_DB_ALIAS_EXISTS`: Alias already exists
+  /// - `CKMC_ERROR_DB_ERROR`: Failed due to a database error
+  /// - `CKMC_ERROR_PERMISSION_DENIED`: Failed to access key manager
+  ///
+  /// **Preconditions:**
+  /// - User is already logged in and the user key is already loaded into memory in plain text form.
+  ///
+  /// **See also:**
+  /// - `ckmc_remove_alias()`
+  /// - `ckmc_get_data()`
+  /// - `ckmc_get_data_alias_list()`
+  /// - `ckmc_raw_buffer_s`
+  /// - `ckmc_policy_s`
   int ckmc_save_data(
     ffi.Pointer<ffi.Char> alias,
     ckmc_raw_buffer_s data,
@@ -1533,25 +1970,39 @@ class Tizen65KeyManagerClient {
   late final _ckmc_save_data = _ckmc_save_dataPtr.asFunction<
       int Function(ffi.Pointer<ffi.Char>, ckmc_raw_buffer_s, ckmc_policy_s)>();
 
-  /// @deprecated Deprecated since @if MOBILE 2.4. @elseif WEARABLE 3.0. @endif [Use ckmc_remove_alias() instead]
-  /// @brief Removes a data from key manager.
-  /// @since_tizen 2.3
-  /// @remarks %http://tizen.org/privilege/keymanager (public level privilege) is no longer required to use this API since 3.0.
-  /// @remarks To remove data, client must have remove permission to the specified data object.
-  /// @remarks The data owner can remove by default.
-  /// @param[in] alias The name of a data to be removed
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CKMC_ERROR_NONE Successful
-  /// @retval #CKMC_ERROR_INVALID_PARAMETER Input parameter is invalid
-  /// @retval #CKMC_ERROR_DB_LOCKED A user key is not loaded in memory (a user is not logged in)
-  /// @retval #CKMC_ERROR_DB_ERROR Failed due to the error with unknown reason
-  /// @retval #CKMC_ERROR_DB_ALIAS_UNKNOWN Alias does not exist
-  /// @retval #CKMC_ERROR_PERMISSION_DENIED Failed to access key manager
-  /// @pre User is already logged in and the user key is already loaded into memory in plain text form.
-  /// @see ckmc_save_data()
-  /// @see ckmc_get_data()
-  /// @see ckmc_get_data_alias_list()
+  /// **Deprecated:** Deprecated since Mobile 2.4.; Wearable 3.0. `[Use ckmc_remove_alias() instead]`
+  ///
+  /// Removes a data from key manager.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - <http://tizen.org/privilege/keymanager (public level privilege) is no longer required to use this API since 3.0.>
+  /// - To remove data, client must have remove permission to the specified data object.
+  /// - The data owner can remove by default.
+  ///
+  /// **Parameters:**
+  /// - `alias` (in): The name of a data to be removed
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CKMC_ERROR_NONE`: Successful
+  /// - `CKMC_ERROR_INVALID_PARAMETER`: Input parameter is invalid
+  /// - `CKMC_ERROR_DB_LOCKED`: A user key is not loaded in memory (a user is not logged in)
+  /// - `CKMC_ERROR_DB_ERROR`: Failed due to the error with unknown reason
+  /// - `CKMC_ERROR_DB_ALIAS_UNKNOWN`: Alias does not exist
+  /// - `CKMC_ERROR_PERMISSION_DENIED`: Failed to access key manager
+  ///
+  /// **Preconditions:**
+  /// - User is already logged in and the user key is already loaded into memory in plain text form.
+  ///
+  /// **See also:**
+  /// - `ckmc_save_data()`
+  /// - `ckmc_get_data()`
+  /// - `ckmc_get_data_alias_list()`
   int ckmc_remove_data(
     ffi.Pointer<ffi.Char> alias,
   ) {
@@ -1566,29 +2017,40 @@ class Tizen65KeyManagerClient {
   late final _ckmc_remove_data =
       _ckmc_remove_dataPtr.asFunction<int Function(ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets a data from key manager.
-  /// @since_tizen 2.3
-  /// @remarks %http://tizen.org/privilege/keymanager (public level privilege) is no longer required to use this API since 3.0.
-  /// @remarks A client can access only data stored by the client.
-  /// @remarks You must destroy the newly created @a ppdata by calling ckmc_buffer_free() if it is no longer needed.
-  /// @param[in] alias The name of a data to retrieve
-  /// @param[in] password The password used in decrypting a data value \n
-  /// If password of policy is provided in ckmc_save_data(), the same password
-  /// should be provided
-  /// @param[out] ppdata The pointer to a newly created ckmc_raw_buffer_s handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CKMC_ERROR_NONE Successful
-  /// @retval #CKMC_ERROR_INVALID_PARAMETER Input parameter is invalid
-  /// @retval #CKMC_ERROR_DB_LOCKED A user key is not loaded in memory (a user is not logged in)
-  /// @retval #CKMC_ERROR_DB_ERROR Failed due to the error with unknown reason
-  /// @retval #CKMC_ERROR_DB_ALIAS_UNKNOWN Alias does not exist
-  /// @retval #CKMC_ERROR_PERMISSION_DENIED Failed to access key manager
-  /// @retval #CKMC_ERROR_AUTHENTICATION_FAILED Decryption failed because password is incorrect
-  /// @pre User is already logged in and the user key is already loaded into memory in plain text form.
-  /// @see ckmc_save_data()
-  /// @see ckmc_remove_alias()
-  /// @see ckmc_get_data_alias_list()
+  /// Gets a data from key manager.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - <http://tizen.org/privilege/keymanager (public level privilege) is no longer required to use this API since 3.0.>
+  /// - A client can access only data stored by the client.
+  /// - You must destroy the newly created `ppdata` by calling ckmc_buffer_free() if it is no longer needed.
+  ///
+  /// **Parameters:**
+  /// - `alias` (in): The name of a data to retrieve
+  /// - `password` (in): The password used in decrypting a data value If password of policy is provided in ckmc_save_data(), the same password should be provided
+  /// - `ppdata` (out): The pointer to a newly created ckmc_raw_buffer_s handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CKMC_ERROR_NONE`: Successful
+  /// - `CKMC_ERROR_INVALID_PARAMETER`: Input parameter is invalid
+  /// - `CKMC_ERROR_DB_LOCKED`: A user key is not loaded in memory (a user is not logged in)
+  /// - `CKMC_ERROR_DB_ERROR`: Failed due to the error with unknown reason
+  /// - `CKMC_ERROR_DB_ALIAS_UNKNOWN`: Alias does not exist
+  /// - `CKMC_ERROR_PERMISSION_DENIED`: Failed to access key manager
+  /// - `CKMC_ERROR_AUTHENTICATION_FAILED`: Decryption failed because password is incorrect
+  ///
+  /// **Preconditions:**
+  /// - User is already logged in and the user key is already loaded into memory in plain text form.
+  ///
+  /// **See also:**
+  /// - `ckmc_save_data()`
+  /// - `ckmc_remove_alias()`
+  /// - `ckmc_get_data_alias_list()`
   int ckmc_get_data(
     ffi.Pointer<ffi.Char> alias,
     ffi.Pointer<ffi.Char> password,
@@ -1609,25 +2071,37 @@ class Tizen65KeyManagerClient {
       int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
           ffi.Pointer<ffi.Pointer<ckmc_raw_buffer_s>>)>();
 
-  /// @brief Gets all alias of data which the client can access.
-  /// @since_tizen 2.3
-  /// @remarks %http://tizen.org/privilege/keymanager (public level privilege) is no longer required to use this API since 3.0.
-  /// @remarks A client can access only data stored by the client.
-  /// @remarks You must destroy the newly created @a ppalias_list by calling ckmc_alias_list_all_free() if it is no longer needed.
-  /// @param[out] ppalias_list The pointer to a newly created ckmc_alias_list_s handle containing all available alias of keys \n
-  /// If there is no available key alias, *ppalias_list will be null
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CKMC_ERROR_NONE Successful
-  /// @retval #CKMC_ERROR_INVALID_PARAMETER Input parameter is invalid
-  /// @retval #CKMC_ERROR_DB_LOCKED A user key is not loaded in memory (a user is not logged in)
-  /// @retval #CKMC_ERROR_DB_ERROR Failed due to the error with unknown reason
-  /// @retval #CKMC_ERROR_DB_ALIAS_UNKNOWN Alias does not exist
-  /// @retval #CKMC_ERROR_PERMISSION_DENIED Failed to access key manager
-  /// @pre User is already logged in and the user key is already loaded into memory in plain text form.
-  /// @see ckmc_save_data()
-  /// @see ckmc_remove_alias()
-  /// @see ckmc_get_data()
+  /// Gets all alias of data which the client can access.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - <http://tizen.org/privilege/keymanager (public level privilege) is no longer required to use this API since 3.0.>
+  /// - A client can access only data stored by the client.
+  /// - You must destroy the newly created `ppalias_list` by calling ckmc_alias_list_all_free() if it is no longer needed.
+  ///
+  /// **Parameters:**
+  /// - `ppalias_list` (out): The pointer to a newly created ckmc_alias_list_s handle containing all available alias of keys If there is no available key alias, *ppalias_list will be null
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CKMC_ERROR_NONE`: Successful
+  /// - `CKMC_ERROR_INVALID_PARAMETER`: Input parameter is invalid
+  /// - `CKMC_ERROR_DB_LOCKED`: A user key is not loaded in memory (a user is not logged in)
+  /// - `CKMC_ERROR_DB_ERROR`: Failed due to the error with unknown reason
+  /// - `CKMC_ERROR_DB_ALIAS_UNKNOWN`: Alias does not exist
+  /// - `CKMC_ERROR_PERMISSION_DENIED`: Failed to access key manager
+  ///
+  /// **Preconditions:**
+  /// - User is already logged in and the user key is already loaded into memory in plain text form.
+  ///
+  /// **See also:**
+  /// - `ckmc_save_data()`
+  /// - `ckmc_remove_alias()`
+  /// - `ckmc_get_data()`
   int ckmc_get_data_alias_list(
     ffi.Pointer<ffi.Pointer<ckmc_alias_list_s>> ppalias_list,
   ) {
@@ -1643,27 +2117,38 @@ class Tizen65KeyManagerClient {
   late final _ckmc_get_data_alias_list = _ckmc_get_data_alias_listPtr
       .asFunction<int Function(ffi.Pointer<ffi.Pointer<ckmc_alias_list_s>>)>();
 
-  /// @brief Gets the information about all the aliases of data that the client can access.
-  /// @since_tizen 5.5
-  /// @remarks A client can access only data stored by the client and the entries from system database
-  /// if it was explicitly permitted to.
-  /// @remarks You must destroy the newly created @a ppalias_list by calling ckmc_alias_info_list_all_free()
-  /// if it is no longer needed.
-  /// @param[out] ppalias_list The pointer to a newly created ckmc_alias_info_list_s handle containing
-  /// information about all data aliases \n
-  /// If there is no available data alias, *ppalias_list will be null
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CKMC_ERROR_NONE Successful
-  /// @retval #CKMC_ERROR_INVALID_PARAMETER Input parameter is invalid
-  /// @retval #CKMC_ERROR_DB_LOCKED A user key is not loaded in memory (a user is not logged in)
-  /// @retval #CKMC_ERROR_DB_ERROR Failed due to the error with unknown reason
-  /// @retval #CKMC_ERROR_DB_ALIAS_UNKNOWN Alias does not exist
-  /// @retval #CKMC_ERROR_PERMISSION_DENIED Failed to access key manager
-  /// @pre User is already logged in and the user key is already loaded into memory in plain text form.
-  /// @see ckmc_save_data()
-  /// @see ckmc_remove_alias()
-  /// @see ckmc_get_data()
+  /// Gets the information about all the aliases of data that the client can access.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - A client can access only data stored by the client and the entries from system database
+  /// - if it was explicitly permitted to.
+  /// - You must destroy the newly created `ppalias_list` by calling ckmc_alias_info_list_all_free()
+  /// - if it is no longer needed.
+  ///
+  /// **Parameters:**
+  /// - `ppalias_list` (out): The pointer to a newly created ckmc_alias_info_list_s handle containing information about all data aliases If there is no available data alias, *ppalias_list will be null
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CKMC_ERROR_NONE`: Successful
+  /// - `CKMC_ERROR_INVALID_PARAMETER`: Input parameter is invalid
+  /// - `CKMC_ERROR_DB_LOCKED`: A user key is not loaded in memory (a user is not logged in)
+  /// - `CKMC_ERROR_DB_ERROR`: Failed due to the error with unknown reason
+  /// - `CKMC_ERROR_DB_ALIAS_UNKNOWN`: Alias does not exist
+  /// - `CKMC_ERROR_PERMISSION_DENIED`: Failed to access key manager
+  ///
+  /// **Preconditions:**
+  /// - User is already logged in and the user key is already loaded into memory in plain text form.
+  ///
+  /// **See also:**
+  /// - `ckmc_save_data()`
+  /// - `ckmc_remove_alias()`
+  /// - `ckmc_get_data()`
   int ckmc_get_data_alias_info_list(
     ffi.Pointer<ffi.Pointer<ckmc_alias_info_list_s>> ppalias_list,
   ) {
@@ -1681,29 +2166,41 @@ class Tizen65KeyManagerClient {
       _ckmc_get_data_alias_info_listPtr.asFunction<
           int Function(ffi.Pointer<ffi.Pointer<ckmc_alias_info_list_s>>)>();
 
-  /// @brief Creates RSA private/public key pair and stores them inside key manager based on each policy.
-  /// @since_tizen 2.3
-  /// @remarks %http://tizen.org/privilege/keymanager (public level privilege) is no longer required to use this API since 3.0.
-  /// @remarks If password in the policy is provided, the key is additionally encrypted with the password in the policy.
-  /// @param[in] size The size of key strength to be created \n
-  /// @c 1024, @c 2048, and @c 4096 are supported
-  /// @param[in] private_key_alias The name of private key to be stored
-  /// @param[in] public_key_alias The name of public key to be stored
-  /// @param[in] policy_private_key The policy about how to store a private key securely
-  /// @param[in] policy_public_key The policy about how to store a public key securely
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CKMC_ERROR_NONE Successful
-  /// @retval #CKMC_ERROR_INVALID_PARAMETER Input parameter is invalid
-  /// @retval #CKMC_ERROR_DB_LOCKED A user key is not loaded in memory (a user is not logged in)
-  /// @retval #CKMC_ERROR_DB_ALIAS_EXISTS Alias already exists
-  /// @retval #CKMC_ERROR_DB_ERROR Failed due to other DB transaction unexpectedly
-  /// @retval #CKMC_ERROR_PERMISSION_DENIED Failed to access key manager
-  /// @pre User is already logged in and the user key is already loaded into memory in plain text form.
-  /// @see ckmc_create_key_pair_dsa()
-  /// @see ckmc_create_key_pair_ecdsa()
-  /// @see ckmc_create_signature()
-  /// @see ckmc_verify_signature()
+  /// Creates RSA private/public key pair and stores them inside key manager based on each policy.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - <http://tizen.org/privilege/keymanager (public level privilege) is no longer required to use this API since 3.0.>
+  /// - If password in the policy is provided, the key is additionally encrypted with the password in the policy.
+  ///
+  /// **Parameters:**
+  /// - `size` (in): The size of key strength to be created `1024`, `2048`, and `4096` are supported
+  /// - `private_key_alias` (in): The name of private key to be stored
+  /// - `public_key_alias` (in): The name of public key to be stored
+  /// - `policy_private_key` (in): The policy about how to store a private key securely
+  /// - `policy_public_key` (in): The policy about how to store a public key securely
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CKMC_ERROR_NONE`: Successful
+  /// - `CKMC_ERROR_INVALID_PARAMETER`: Input parameter is invalid
+  /// - `CKMC_ERROR_DB_LOCKED`: A user key is not loaded in memory (a user is not logged in)
+  /// - `CKMC_ERROR_DB_ALIAS_EXISTS`: Alias already exists
+  /// - `CKMC_ERROR_DB_ERROR`: Failed due to other DB transaction unexpectedly
+  /// - `CKMC_ERROR_PERMISSION_DENIED`: Failed to access key manager
+  ///
+  /// **Preconditions:**
+  /// - User is already logged in and the user key is already loaded into memory in plain text form.
+  ///
+  /// **See also:**
+  /// - `ckmc_create_key_pair_dsa()`
+  /// - `ckmc_create_key_pair_ecdsa()`
+  /// - `ckmc_create_signature()`
+  /// - `ckmc_verify_signature()`
   int ckmc_create_key_pair_rsa(
     int size,
     ffi.Pointer<ffi.Char> private_key_alias,
@@ -1733,29 +2230,41 @@ class Tizen65KeyManagerClient {
           int Function(int, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
               ckmc_policy_s, ckmc_policy_s)>();
 
-  /// @brief Creates DSA private/public key pair and stores them inside key manager based on each policy.
-  /// @since_tizen 2.3
-  /// @remarks %http://tizen.org/privilege/keymanager (public level privilege) is no longer required to use this API since 3.0.
-  /// @remarks If password in the policy is provided, the key is additionally encrypted with the password in the policy.
-  /// @param[in] size The size of key strength to be created \n
-  /// @c 1024, @c 2048, @c 3072 and @c 4096 are supported
-  /// @param[in] private_key_alias The name of private key to be stored
-  /// @param[in] public_key_alias The name of public key to be stored
-  /// @param[in] policy_private_key The policy about how to store a private key securely
-  /// @param[in] policy_public_key The policy about how to store a public key securely
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CKMC_ERROR_NONE Successful
-  /// @retval #CKMC_ERROR_INVALID_PARAMETER Input parameter is invalid
-  /// @retval #CKMC_ERROR_DB_LOCKED A user key is not loaded in memory (a user is not logged in)
-  /// @retval #CKMC_ERROR_DB_ALIAS_EXISTS Alias already exists
-  /// @retval #CKMC_ERROR_DB_ERROR Failed due to other DB transaction unexpectedly
-  /// @retval #CKMC_ERROR_PERMISSION_DENIED Failed to access key manager
-  /// @pre User is already logged in and the user key is already loaded into memory in plain text form.
-  /// @see ckmc_create_key_pair_rsa()
-  /// @see ckmc_create_key_pair_ecdsa()
-  /// @see ckmc_create_signature()
-  /// @see ckmc_verify_signature()
+  /// Creates DSA private/public key pair and stores them inside key manager based on each policy.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - <http://tizen.org/privilege/keymanager (public level privilege) is no longer required to use this API since 3.0.>
+  /// - If password in the policy is provided, the key is additionally encrypted with the password in the policy.
+  ///
+  /// **Parameters:**
+  /// - `size` (in): The size of key strength to be created `1024`, `2048`, `3072` and `4096` are supported
+  /// - `private_key_alias` (in): The name of private key to be stored
+  /// - `public_key_alias` (in): The name of public key to be stored
+  /// - `policy_private_key` (in): The policy about how to store a private key securely
+  /// - `policy_public_key` (in): The policy about how to store a public key securely
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CKMC_ERROR_NONE`: Successful
+  /// - `CKMC_ERROR_INVALID_PARAMETER`: Input parameter is invalid
+  /// - `CKMC_ERROR_DB_LOCKED`: A user key is not loaded in memory (a user is not logged in)
+  /// - `CKMC_ERROR_DB_ALIAS_EXISTS`: Alias already exists
+  /// - `CKMC_ERROR_DB_ERROR`: Failed due to other DB transaction unexpectedly
+  /// - `CKMC_ERROR_PERMISSION_DENIED`: Failed to access key manager
+  ///
+  /// **Preconditions:**
+  /// - User is already logged in and the user key is already loaded into memory in plain text form.
+  ///
+  /// **See also:**
+  /// - `ckmc_create_key_pair_rsa()`
+  /// - `ckmc_create_key_pair_ecdsa()`
+  /// - `ckmc_create_signature()`
+  /// - `ckmc_verify_signature()`
   int ckmc_create_key_pair_dsa(
     int size,
     ffi.Pointer<ffi.Char> private_key_alias,
@@ -1785,29 +2294,42 @@ class Tizen65KeyManagerClient {
           int Function(int, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
               ckmc_policy_s, ckmc_policy_s)>();
 
-  /// @brief Creates ECDSA private/public key pair and stores them inside key manager based on each policy.
-  /// @since_tizen 2.3
-  /// @remarks %http://tizen.org/privilege/keymanager (public level privilege) is no longer required to use this API since 3.0.
-  /// @remarks If password in the policy is provided, the key is additionally encrypted with the password in the policy.
-  /// @param[in] type The type of elliptic curve of ECDSA
-  /// @param[in] private_key_alias The name of private key to be stored
-  /// @param[in] public_key_alias The name of public key to be stored
-  /// @param[in] policy_private_key The policy about how to store a private key securely
-  /// @param[in] policy_public_key The policy about how to store a public key securely
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CKMC_ERROR_NONE Successful
-  /// @retval #CKMC_ERROR_INVALID_PARAMETER Input parameter is invalid
-  /// @retval #CKMC_ERROR_DB_LOCKED A user key is not loaded in memory (a user is not logged in)
-  /// @retval #CKMC_ERROR_DB_ALIAS_EXISTS Alias already exists
-  /// @retval #CKMC_ERROR_DB_ERROR Failed due to other DB transaction unexpectedly
-  /// @retval #CKMC_ERROR_PERMISSION_DENIED Failed to access key manager
-  /// @pre User is already logged in and the user key is already loaded into memory in plain text form.
-  /// @see ckmc_create_key_pair_rsa()
-  /// @see ckmc_create_key_pair_dsa()
-  /// @see ckmc_create_signature()
-  /// @see ckmc_verify_signature()
-  /// @see #ckmc_ec_type_e
+  /// Creates ECDSA private/public key pair and stores them inside key manager based on each policy.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - <http://tizen.org/privilege/keymanager (public level privilege) is no longer required to use this API since 3.0.>
+  /// - If password in the policy is provided, the key is additionally encrypted with the password in the policy.
+  ///
+  /// **Parameters:**
+  /// - `type` (in): The type of elliptic curve of ECDSA
+  /// - `private_key_alias` (in): The name of private key to be stored
+  /// - `public_key_alias` (in): The name of public key to be stored
+  /// - `policy_private_key` (in): The policy about how to store a private key securely
+  /// - `policy_public_key` (in): The policy about how to store a public key securely
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CKMC_ERROR_NONE`: Successful
+  /// - `CKMC_ERROR_INVALID_PARAMETER`: Input parameter is invalid
+  /// - `CKMC_ERROR_DB_LOCKED`: A user key is not loaded in memory (a user is not logged in)
+  /// - `CKMC_ERROR_DB_ALIAS_EXISTS`: Alias already exists
+  /// - `CKMC_ERROR_DB_ERROR`: Failed due to other DB transaction unexpectedly
+  /// - `CKMC_ERROR_PERMISSION_DENIED`: Failed to access key manager
+  ///
+  /// **Preconditions:**
+  /// - User is already logged in and the user key is already loaded into memory in plain text form.
+  ///
+  /// **See also:**
+  /// - `ckmc_create_key_pair_rsa()`
+  /// - `ckmc_create_key_pair_dsa()`
+  /// - `ckmc_create_signature()`
+  /// - `ckmc_verify_signature()`
+  /// - `ckmc_ec_type_e`
   int ckmc_create_key_pair_ecdsa(
     int type,
     ffi.Pointer<ffi.Char> private_key_alias,
@@ -1837,26 +2359,38 @@ class Tizen65KeyManagerClient {
           int Function(int, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
               ckmc_policy_s, ckmc_policy_s)>();
 
-  /// @brief Creates AES key and stores it inside key manager based on the policy.
-  /// @since_tizen 3.0
-  /// @remarks If password in the policy is provided, the key is additionally encrypted with the password in the policy.
-  /// @param[in] size The size of key strength to be created \n
-  /// @c 128, @c 192 and @c 256 are supported
-  /// @param[in] key_alias The name of key to be stored
-  /// @param[in] key_policy The policy about how to store the key securely
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CKMC_ERROR_NONE Successful
-  /// @retval #CKMC_ERROR_INVALID_PARAMETER Input parameter is invalid
-  /// @retval #CKMC_ERROR_DB_LOCKED A user key is not loaded in memory (a user is not logged in)
-  /// @retval #CKMC_ERROR_DB_ALIAS_EXISTS Alias already exists
-  /// @retval #CKMC_ERROR_DB_ERROR Failed due to other DB transaction unexpectedly
-  /// @retval #CKMC_ERROR_PERMISSION_DENIED Failed to access key manager
-  /// @pre User is already logged in and the user key is already loaded into memory in plain text form.
-  /// @see ckmc_create_key_pair_rsa()
-  /// @see ckmc_create_key_pair_dsa()
-  /// @see ckmc_create_key_pair_ecdsa()
-  /// @see #ckmc_policy_s
+  /// Creates AES key and stores it inside key manager based on the policy.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - If password in the policy is provided, the key is additionally encrypted with the password in the policy.
+  ///
+  /// **Parameters:**
+  /// - `size` (in): The size of key strength to be created `128`, `192` and `256` are supported
+  /// - `key_alias` (in): The name of key to be stored
+  /// - `key_policy` (in): The policy about how to store the key securely
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CKMC_ERROR_NONE`: Successful
+  /// - `CKMC_ERROR_INVALID_PARAMETER`: Input parameter is invalid
+  /// - `CKMC_ERROR_DB_LOCKED`: A user key is not loaded in memory (a user is not logged in)
+  /// - `CKMC_ERROR_DB_ALIAS_EXISTS`: Alias already exists
+  /// - `CKMC_ERROR_DB_ERROR`: Failed due to other DB transaction unexpectedly
+  /// - `CKMC_ERROR_PERMISSION_DENIED`: Failed to access key manager
+  ///
+  /// **Preconditions:**
+  /// - User is already logged in and the user key is already loaded into memory in plain text form.
+  ///
+  /// **See also:**
+  /// - `ckmc_create_key_pair_rsa()`
+  /// - `ckmc_create_key_pair_dsa()`
+  /// - `ckmc_create_key_pair_ecdsa()`
+  /// - `ckmc_policy_s`
   int ckmc_create_key_aes(
     int size,
     ffi.Pointer<ffi.Char> key_alias,
@@ -1876,37 +2410,46 @@ class Tizen65KeyManagerClient {
   late final _ckmc_create_key_aes = _ckmc_create_key_aesPtr
       .asFunction<int Function(int, ffi.Pointer<ffi.Char>, ckmc_policy_s)>();
 
-  /// @brief Creates a signature on a given message using a private key and returns the signature.
-  /// @since_tizen 2.3
-  /// @remarks %http://tizen.org/privilege/keymanager (public level privilege) is no longer required to use this API since 3.0.
-  /// @remarks If password of policy is provided during storing a key, the same password should be provided.
-  /// @remarks You must destroy the newly created @a ppsignature by calling ckmc_buffer_free() if it is no longer needed.
-  /// @param[in] private_key_alias The name of private key
-  /// @param[in] password The password used in decrypting a private key value
-  /// @param[in] message The message that is signed with a private key
-  /// @param[in] hash The hash algorithm used in creating signature. CKMC_HASH_NONE is invalid for DSA & ECDSA
-  /// @param[in] padding The RSA padding algorithm used in creating signature \n
-  /// It is used only when the signature algorithm is RSA. If
-  /// @a padding is CKMC_NONE_PADDING you must use CKMC_HASH_NONE
-  /// and the message must be equal to key length
-  /// @param[out] ppsignature The pointer to a newly created signature \n
-  /// If an error occurs, @a *ppsignature will be null
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CKMC_ERROR_NONE Successful
-  /// @retval #CKMC_ERROR_INVALID_PARAMETER Input parameter is invalid
-  /// @retval #CKMC_ERROR_DB_LOCKED A user key is not loaded in memory (a user is not logged in)
-  /// @retval #CKMC_ERROR_DB_ERROR Failed due to the error with unknown reason
-  /// @retval #CKMC_ERROR_DB_ALIAS_UNKNOWN Alias does not exist
-  /// @retval #CKMC_ERROR_PERMISSION_DENIED Failed to access key manager
-  /// @retval #CKMC_ERROR_AUTHENTICATION_FAILED Decryption failed because password is incorrect
-  /// @pre User is already logged in and the user key is already loaded into memory in plain text form.
-  /// @see ckmc_create_key_pair_rsa()
-  /// @see ckmc_create_key_pair_ecdsa()
-  /// @see ckmc_verify_signature()
-  /// @see ckmc_buffer_free()
-  /// @see #ckmc_hash_algo_e
-  /// @see #ckmc_rsa_padding_algo_e
+  /// Creates a signature on a given message using a private key and returns the signature.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - <http://tizen.org/privilege/keymanager (public level privilege) is no longer required to use this API since 3.0.>
+  /// - If password of policy is provided during storing a key, the same password should be provided.
+  /// - You must destroy the newly created `ppsignature` by calling ckmc_buffer_free() if it is no longer needed.
+  ///
+  /// **Parameters:**
+  /// - `private_key_alias` (in): The name of private key
+  /// - `password` (in): The password used in decrypting a private key value
+  /// - `message` (in): The message that is signed with a private key
+  /// - `hash` (in): The hash algorithm used in creating signature. CKMC_HASH_NONE is invalid for DSA & ECDSA
+  /// - `padding` (in): The RSA padding algorithm used in creating signature It is used only when the signature algorithm is RSA. If `padding` is CKMC_NONE_PADDING you must use CKMC_HASH_NONE and the message must be equal to key length
+  /// - `ppsignature` (out): The pointer to a newly created signature If an error occurs, `*ppsignature` will be null
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CKMC_ERROR_NONE`: Successful
+  /// - `CKMC_ERROR_INVALID_PARAMETER`: Input parameter is invalid
+  /// - `CKMC_ERROR_DB_LOCKED`: A user key is not loaded in memory (a user is not logged in)
+  /// - `CKMC_ERROR_DB_ERROR`: Failed due to the error with unknown reason
+  /// - `CKMC_ERROR_DB_ALIAS_UNKNOWN`: Alias does not exist
+  /// - `CKMC_ERROR_PERMISSION_DENIED`: Failed to access key manager
+  /// - `CKMC_ERROR_AUTHENTICATION_FAILED`: Decryption failed because password is incorrect
+  ///
+  /// **Preconditions:**
+  /// - User is already logged in and the user key is already loaded into memory in plain text form.
+  ///
+  /// **See also:**
+  /// - `ckmc_create_key_pair_rsa()`
+  /// - `ckmc_create_key_pair_ecdsa()`
+  /// - `ckmc_verify_signature()`
+  /// - `ckmc_buffer_free()`
+  /// - `ckmc_hash_algo_e`
+  /// - `ckmc_rsa_padding_algo_e`
   int ckmc_create_signature(
     ffi.Pointer<ffi.Char> private_key_alias,
     ffi.Pointer<ffi.Char> password,
@@ -1944,35 +2487,45 @@ class Tizen65KeyManagerClient {
           int,
           ffi.Pointer<ffi.Pointer<ckmc_raw_buffer_s>>)>();
 
-  /// @brief Verifies a given signature on a given message using a public key and returns the signature status.
-  /// @since_tizen 2.3
-  /// @remarks %http://tizen.org/privilege/keymanager (public level privilege) is no longer required to use this API since 3.0.
-  /// @remarks If password of policy is provided during storing a key, the same password should be provided.
-  /// @param[in] public_key_alias The name of public key
-  /// @param[in] password The password used in decrypting a public key value
-  /// @param[in] message The input on which the signature is created
-  /// @param[in] signature The signature that is verified with public key
-  /// @param[in] hash The hash algorithm used in verifying signature. CKMC_HASH_NONE is invalid for DSA & ECDSA
-  /// @param[in] padding The RSA padding algorithm used in verifying signature \n
-  /// It is used only when the signature algorithm is RSA. If
-  /// @a padding is CKMC_NONE_PADDING you must use CKMC_HASH_NONE
-  /// and the message must be equal to key length
-  /// @return @c 0 on success and the signature is valid,
-  /// otherwise a negative error value
-  /// @retval #CKMC_ERROR_NONE Successful
-  /// @retval #CKMC_ERROR_VERIFICATION_FAILED The signature is invalid
-  /// @retval #CKMC_ERROR_INVALID_PARAMETER Input parameter is invalid
-  /// @retval #CKMC_ERROR_DB_LOCKED A user key is not loaded in memory (a user is not logged in)
-  /// @retval #CKMC_ERROR_DB_ERROR Failed due to the error with unknown reason
-  /// @retval #CKMC_ERROR_DB_ALIAS_UNKNOWN Alias does not exist
-  /// @retval #CKMC_ERROR_PERMISSION_DENIED Failed to access key manager
-  /// @retval #CKMC_ERROR_AUTHENTICATION_FAILED Decryption failed because password is incorrect
-  /// @pre User is already logged in and the user key is already loaded into memory in plain text form.
-  /// @see ckmc_create_key_pair_rsa()
-  /// @see ckmc_create_key_pair_ecdsa()
-  /// @see ckmc_create_signature()
-  /// @see #ckmc_hash_algo_e
-  /// @see #ckmc_rsa_padding_algo_e
+  /// Verifies a given signature on a given message using a public key and returns the signature status.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - <http://tizen.org/privilege/keymanager (public level privilege) is no longer required to use this API since 3.0.>
+  /// - If password of policy is provided during storing a key, the same password should be provided.
+  ///
+  /// **Parameters:**
+  /// - `public_key_alias` (in): The name of public key
+  /// - `password` (in): The password used in decrypting a public key value
+  /// - `message` (in): The input on which the signature is created
+  /// - `signature` (in): The signature that is verified with public key
+  /// - `hash` (in): The hash algorithm used in verifying signature. CKMC_HASH_NONE is invalid for DSA & ECDSA
+  /// - `padding` (in): The RSA padding algorithm used in verifying signature It is used only when the signature algorithm is RSA. If `padding` is CKMC_NONE_PADDING you must use CKMC_HASH_NONE and the message must be equal to key length
+  ///
+  /// **Returns:**
+  /// - `0` on success and the signature is valid, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CKMC_ERROR_NONE`: Successful
+  /// - `CKMC_ERROR_VERIFICATION_FAILED`: The signature is invalid
+  /// - `CKMC_ERROR_INVALID_PARAMETER`: Input parameter is invalid
+  /// - `CKMC_ERROR_DB_LOCKED`: A user key is not loaded in memory (a user is not logged in)
+  /// - `CKMC_ERROR_DB_ERROR`: Failed due to the error with unknown reason
+  /// - `CKMC_ERROR_DB_ALIAS_UNKNOWN`: Alias does not exist
+  /// - `CKMC_ERROR_PERMISSION_DENIED`: Failed to access key manager
+  /// - `CKMC_ERROR_AUTHENTICATION_FAILED`: Decryption failed because password is incorrect
+  ///
+  /// **Preconditions:**
+  /// - User is already logged in and the user key is already loaded into memory in plain text form.
+  ///
+  /// **See also:**
+  /// - `ckmc_create_key_pair_rsa()`
+  /// - `ckmc_create_key_pair_ecdsa()`
+  /// - `ckmc_create_signature()`
+  /// - `ckmc_hash_algo_e`
+  /// - `ckmc_rsa_padding_algo_e`
   int ckmc_verify_signature(
     ffi.Pointer<ffi.Char> public_key_alias,
     ffi.Pointer<ffi.Char> password,
@@ -2004,27 +2557,39 @@ class Tizen65KeyManagerClient {
       int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
           ckmc_raw_buffer_s, ckmc_raw_buffer_s, int, int)>();
 
-  /// @brief Verifies a certificate chain and returns that chain.
-  /// @since_tizen 2.3
-  /// @remarks %http://tizen.org/privilege/keymanager (public level privilege) is no longer required to use this API since 3.0.
-  /// @remarks The trusted root certificate of the chain should exist in the system's certificate storage.
-  /// @remarks You must destroy the newly created @a ppcert_chain_list by calling ckmc_cert_list_all_free() if it is no longer needed.
-  /// @param[in] cert The certificate to be verified
-  /// @param[in] untrustedcerts The untrusted CA certificates to be used in verifying a certificate chain
-  /// @param[out] ppcert_chain_list The pointer to a newly created certificate chain's handle \n
-  /// If an error occurs, @a *ppcert_chain_list will be null
-  /// @return @c 0 on success and the signature is valid,
-  /// otherwise a negative error value
-  /// @retval #CKMC_ERROR_NONE Successful
-  /// @retval #CKMC_ERROR_VERIFICATION_FAILED The certificate chain is not valid
-  /// @retval #CKMC_ERROR_INVALID_PARAMETER Input parameter is invalid
-  /// @retval #CKMC_ERROR_DB_LOCKED A user key is not loaded in memory (a user is not logged in)
-  /// @retval #CKMC_ERROR_DB_ERROR Failed due to the error with unknown reason
-  /// @retval #CKMC_ERROR_INVALID_FORMAT The format of certificate is not valid
-  /// @retval #CKMC_ERROR_PERMISSION_DENIED Failed to access key manager
-  /// @retval #CKMC_ERROR_AUTHENTICATION_FAILED Decryption failed because password is incorrect
-  /// @pre User is already logged in and the user key is already loaded into memory in plain text form.
-  /// @see ckmc_cert_list_all_free()
+  /// Verifies a certificate chain and returns that chain.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - <http://tizen.org/privilege/keymanager (public level privilege) is no longer required to use this API since 3.0.>
+  /// - The trusted root certificate of the chain should exist in the system's certificate storage.
+  /// - You must destroy the newly created `ppcert_chain_list` by calling ckmc_cert_list_all_free() if it is no longer needed.
+  ///
+  /// **Parameters:**
+  /// - `cert` (in): The certificate to be verified
+  /// - `untrustedcerts` (in): The untrusted CA certificates to be used in verifying a certificate chain
+  /// - `ppcert_chain_list` (out): The pointer to a newly created certificate chain's handle If an error occurs, `*ppcert_chain_list` will be null
+  ///
+  /// **Returns:**
+  /// - `0` on success and the signature is valid, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CKMC_ERROR_NONE`: Successful
+  /// - `CKMC_ERROR_VERIFICATION_FAILED`: The certificate chain is not valid
+  /// - `CKMC_ERROR_INVALID_PARAMETER`: Input parameter is invalid
+  /// - `CKMC_ERROR_DB_LOCKED`: A user key is not loaded in memory (a user is not logged in)
+  /// - `CKMC_ERROR_DB_ERROR`: Failed due to the error with unknown reason
+  /// - `CKMC_ERROR_INVALID_FORMAT`: The format of certificate is not valid
+  /// - `CKMC_ERROR_PERMISSION_DENIED`: Failed to access key manager
+  /// - `CKMC_ERROR_AUTHENTICATION_FAILED`: Decryption failed because password is incorrect
+  ///
+  /// **Preconditions:**
+  /// - User is already logged in and the user key is already loaded into memory in plain text form.
+  ///
+  /// **See also:**
+  /// - `ckmc_cert_list_all_free()`
   int ckmc_get_cert_chain(
     ffi.Pointer<ckmc_cert_s> cert,
     ffi.Pointer<ckmc_cert_list_s> untrustedcerts,
@@ -2048,31 +2613,44 @@ class Tizen65KeyManagerClient {
       int Function(ffi.Pointer<ckmc_cert_s>, ffi.Pointer<ckmc_cert_list_s>,
           ffi.Pointer<ffi.Pointer<ckmc_cert_list_s>>)>();
 
-  /// @deprecated Deprecated since @if MOBILE 2.4. @elseif WEARABLE 3.0. @endif [Use ckmc_get_cert_chain() instead]
-  /// @brief Verifies a certificate chain using an alias list of untrusted certificates and return that chain.
-  /// @since_tizen 2.3
-  /// @remarks %http://tizen.org/privilege/keymanager (public level privilege) is no longer required to use this API since 3.0.
-  /// @remarks The trusted root certificate of the chain should exist in the system's certificate storage.
-  /// @remarks You must destroy the newly created @a ppcert_chain_list by calling ckmc_cert_list_all_free() if it is no longer needed.
-  /// @remarks @a untrustedcerts shouldn't be protected with optional password.
-  /// @param[in] cert The certificate to be verified
-  /// @param[in] untrustedcerts The alias list of untrusted CA certificates stored in key manager to be used in verifying a certificate chain
-  /// @param[out] ppcert_chain_list The pointer to a newly created certificate chain's handle \n
-  /// If an error occurs, @a *ppcert_chain_list will be null
-  /// @return @c 0 on success and the signature is valid,
-  /// otherwise a negative error value
-  /// @retval #CKMC_ERROR_NONE Successful
-  /// @retval #CKMC_ERROR_VERIFICATION_FAILED The certificate chain is not valid
-  /// @retval #CKMC_ERROR_INVALID_PARAMETER Input parameter is invalid
-  /// @retval #CKMC_ERROR_DB_LOCKED A user key is not loaded in memory (a user is not logged in)
-  /// @retval #CKMC_ERROR_DB_ERROR Failed due to the error with unknown reason
-  /// @retval #CKMC_ERROR_DB_ALIAS_UNKNOWN Alias does not exist
-  /// @retval #CKMC_ERROR_INVALID_FORMAT The format of certificate is not valid
-  /// @retval #CKMC_ERROR_PERMISSION_DENIED Failed to access key manager
-  /// @retval #CKMC_ERROR_AUTHENTICATION_FAILED Some certificates were encrypted with password and could not be used
-  /// @pre User is already logged in and the user key is already loaded into memory in plain text form.
-  /// @see ckmc_get_cert_chain()
-  /// @see ckmc_cert_list_all_free()
+  /// **Deprecated:** Deprecated since Mobile 2.4.; Wearable 3.0. `[Use ckmc_get_cert_chain() instead]`
+  ///
+  /// Verifies a certificate chain using an alias list of untrusted certificates and return that chain.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - <http://tizen.org/privilege/keymanager (public level privilege) is no longer required to use this API since 3.0.>
+  /// - The trusted root certificate of the chain should exist in the system's certificate storage.
+  /// - You must destroy the newly created `ppcert_chain_list` by calling ckmc_cert_list_all_free() if it is no longer needed.
+  /// - `untrustedcerts` shouldn't be protected with optional password.
+  ///
+  /// **Parameters:**
+  /// - `cert` (in): The certificate to be verified
+  /// - `untrustedcerts` (in): The alias list of untrusted CA certificates stored in key manager to be used in verifying a certificate chain
+  /// - `ppcert_chain_list` (out): The pointer to a newly created certificate chain's handle If an error occurs, `*ppcert_chain_list` will be null
+  ///
+  /// **Returns:**
+  /// - `0` on success and the signature is valid, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CKMC_ERROR_NONE`: Successful
+  /// - `CKMC_ERROR_VERIFICATION_FAILED`: The certificate chain is not valid
+  /// - `CKMC_ERROR_INVALID_PARAMETER`: Input parameter is invalid
+  /// - `CKMC_ERROR_DB_LOCKED`: A user key is not loaded in memory (a user is not logged in)
+  /// - `CKMC_ERROR_DB_ERROR`: Failed due to the error with unknown reason
+  /// - `CKMC_ERROR_DB_ALIAS_UNKNOWN`: Alias does not exist
+  /// - `CKMC_ERROR_INVALID_FORMAT`: The format of certificate is not valid
+  /// - `CKMC_ERROR_PERMISSION_DENIED`: Failed to access key manager
+  /// - `CKMC_ERROR_AUTHENTICATION_FAILED`: Some certificates were encrypted with password and could not be used
+  ///
+  /// **Preconditions:**
+  /// - User is already logged in and the user key is already loaded into memory in plain text form.
+  ///
+  /// **See also:**
+  /// - `ckmc_get_cert_chain()`
+  /// - `ckmc_cert_list_all_free()`
   int ckmc_get_cert_chain_with_alias(
     ffi.Pointer<ckmc_cert_s> cert,
     ffi.Pointer<ckmc_alias_list_s> untrustedcerts,
@@ -2097,28 +2675,40 @@ class Tizen65KeyManagerClient {
           int Function(ffi.Pointer<ckmc_cert_s>, ffi.Pointer<ckmc_alias_list_s>,
               ffi.Pointer<ffi.Pointer<ckmc_cert_list_s>>)>();
 
-  /// @brief Verifies a certificate chain and returns that chain using user-entered, trusted, and untrusted CA certificates.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @remarks %http://tizen.org/privilege/keymanager (public level privilege) is no longer required to use this API since 3.0.
-  /// @remarks If the trusted root certificates are provided as a user input, these certificates do not need to exist in the system's certificate storage.
-  /// @remarks You must destroy the newly created @a ppcert_chain_list by calling ckmc_cert_list_all_free() if it is no longer needed.
-  /// @param[in] cert The certificate to be verified
-  /// @param[in] untrustedcerts The untrusted CA certificates to be used in verifying a certificate chain
-  /// @param[in] trustedcerts The trusted CA certificates to be used in verifying a certificate chain
-  /// @param[in] use_trustedsystemcerts The flag indicating the use of the trusted root certificates in the system's certificate storage
-  /// @param[out] ppcert_chain_list The pointer to a newly created certificate chain's handle \n
-  /// If an error occurs, @a *ppcert_chain_list will be null
-  /// @return @c 0 on success and the signature is valid,
-  /// otherwise a negative error value
-  /// @retval #CKMC_ERROR_NONE Successful
-  /// @retval #CKMC_ERROR_VERIFICATION_FAILED The certificate chain is not valid
-  /// @retval #CKMC_ERROR_INVALID_PARAMETER Input parameter is invalid
-  /// @retval #CKMC_ERROR_DB_LOCKED A user key is not loaded in memory (a user is not logged in)
-  /// @retval #CKMC_ERROR_DB_ERROR Failed due to the error with unknown reason
-  /// @retval #CKMC_ERROR_INVALID_FORMAT The format of certificate is not valid
-  /// @retval #CKMC_ERROR_PERMISSION_DENIED Failed to access key manager
-  /// @pre User is already logged in and the user key is already loaded into memory in plain text form.
-  /// @see ckmc_cert_list_all_free()
+  /// Verifies a certificate chain and returns that chain using user-entered, trusted, and untrusted CA certificates.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Remarks:**
+  /// - <http://tizen.org/privilege/keymanager (public level privilege) is no longer required to use this API since 3.0.>
+  /// - If the trusted root certificates are provided as a user input, these certificates do not need to exist in the system's certificate storage.
+  /// - You must destroy the newly created `ppcert_chain_list` by calling ckmc_cert_list_all_free() if it is no longer needed.
+  ///
+  /// **Parameters:**
+  /// - `cert` (in): The certificate to be verified
+  /// - `untrustedcerts` (in): The untrusted CA certificates to be used in verifying a certificate chain
+  /// - `trustedcerts` (in): The trusted CA certificates to be used in verifying a certificate chain
+  /// - `use_trustedsystemcerts` (in): The flag indicating the use of the trusted root certificates in the system's certificate storage
+  /// - `ppcert_chain_list` (out): The pointer to a newly created certificate chain's handle If an error occurs, `*ppcert_chain_list` will be null
+  ///
+  /// **Returns:**
+  /// - `0` on success and the signature is valid, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CKMC_ERROR_NONE`: Successful
+  /// - `CKMC_ERROR_VERIFICATION_FAILED`: The certificate chain is not valid
+  /// - `CKMC_ERROR_INVALID_PARAMETER`: Input parameter is invalid
+  /// - `CKMC_ERROR_DB_LOCKED`: A user key is not loaded in memory (a user is not logged in)
+  /// - `CKMC_ERROR_DB_ERROR`: Failed due to the error with unknown reason
+  /// - `CKMC_ERROR_INVALID_FORMAT`: The format of certificate is not valid
+  /// - `CKMC_ERROR_PERMISSION_DENIED`: Failed to access key manager
+  ///
+  /// **Preconditions:**
+  /// - User is already logged in and the user key is already loaded into memory in plain text form.
+  ///
+  /// **See also:**
+  /// - `ckmc_cert_list_all_free()`
   int ckmc_get_cert_chain_with_trustedcert(
     ffi.Pointer<ckmc_cert_s> cert,
     ffi.Pointer<ckmc_cert_list_s> untrustedcerts,
@@ -2153,25 +2743,42 @@ class Tizen65KeyManagerClient {
               bool,
               ffi.Pointer<ffi.Pointer<ckmc_cert_list_s>>)>();
 
-  /// @deprecated Deprecated since 6.5. Use raw OpenSSL instead.
-  /// @brief Perform OCSP that checks certificate is whether revoked or not.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/internet
-  /// @remarks %http://tizen.org/privilege/internet (public level privilege) is required to use this API instead of %http://tizen.org/privilege/keymanager (public level privilege) since 3.0.
-  /// @param[in] pcert_chain_list Valid certificate chain to perform OCSP check
-  /// @param[out] ocsp_status The pointer to status result of OCSP check
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CKMC_ERROR_NONE Successful
-  /// @retval #CKMC_ERROR_INVALID_PARAMETER Input parameter is invalid
-  /// @retval #CKMC_ERROR_PERMISSION_DENIED Failed to access key manager
-  /// @retval #CKMC_ERROR_NOT_SUPPORTED Device needed to run API is not supported
-  /// @pre User is already logged in and the user key is already loaded into memory in plain text form.
-  /// @pre @a pcert_chain_list is created with ckmc_get_certificate_chain() or
-  /// ckmc_get_certificate_chain_with_alias().
-  /// @see ckmc_get_cert_chain())
-  /// @see ckmc_cert_list_all_free()
+  /// **Deprecated:** Deprecated since 6.5. Use raw OpenSSL instead.
+  ///
+  /// Perform OCSP that checks certificate is whether revoked or not.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/internet>
+  ///
+  /// **Remarks:**
+  /// - <http://tizen.org/privilege/internet (public level privilege) is required to use this API instead of http://tizen.org/privilege/keymanager (public level privilege) since 3.0.>
+  ///
+  /// **Parameters:**
+  /// - `pcert_chain_list` (in): Valid certificate chain to perform OCSP check
+  /// - `ocsp_status` (out): The pointer to status result of OCSP check
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CKMC_ERROR_NONE`: Successful
+  /// - `CKMC_ERROR_INVALID_PARAMETER`: Input parameter is invalid
+  /// - `CKMC_ERROR_PERMISSION_DENIED`: Failed to access key manager
+  /// - `CKMC_ERROR_NOT_SUPPORTED`: Device needed to run API is not supported
+  ///
+  /// **Preconditions:**
+  /// - User is already logged in and the user key is already loaded into memory in plain text form.
+  /// - `pcert_chain_list` is created with ckmc_get_certificate_chain() or ckmc_get_certificate_chain_with_alias().
+  ///
+  /// **See also:**
+  /// - ckmc_get_cert_chain())
+  /// - `ckmc_cert_list_all_free()`
   int ckmc_ocsp_check(
     ffi.Pointer<ckmc_cert_list_s> pcert_chain_list,
     ffi.Pointer<ffi.Int32> ocsp_status,
@@ -2189,24 +2796,38 @@ class Tizen65KeyManagerClient {
   late final _ckmc_ocsp_check = _ckmc_ocsp_checkPtr.asFunction<
       int Function(ffi.Pointer<ckmc_cert_list_s>, ffi.Pointer<ffi.Int32>)>();
 
-  /// @deprecated Deprecated since @if MOBILE 2.4. @elseif WEARABLE 3.0. @endif [Use ckmc_set_permission() instead]
-  /// @brief Allows another application to access client's application data.
-  /// @since_tizen 2.3
-  /// @remarks %http://tizen.org/privilege/keymanager (public level privilege) is no longer required to use this API since 3.0.
-  /// @remarks Data identified by @a alias should exist.
-  /// @param[in] alias Data alias for which access will be granted
-  /// @param[in] accessor Package id of the application that will gain access rights
-  /// @param[in] granted Rights granted for @a accessor application
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CKMC_ERROR_NONE Successful
-  /// @retval #CKMC_ERROR_INVALID_PARAMETER Input parameter is invalid
-  /// @retval #CKMC_ERROR_DB_LOCKED A user key is not loaded in memory (a user is not logged in)
-  /// @retval #CKMC_ERROR_DB_ERROR Failed due to the error with unknown reason
-  /// @retval #CKMC_ERROR_DB_ALIAS_UNKNOWN Alias does not exist
-  /// @retval #CKMC_ERROR_PERMISSION_DENIED Failed to access key manager
-  /// @pre User is already logged in and the user key is already loaded into memory in plain text form.
-  /// @see ckmc_deny_access()
+  /// **Deprecated:** Deprecated since Mobile 2.4.; Wearable 3.0. `[Use ckmc_set_permission() instead]`
+  ///
+  /// Allows another application to access client's application data.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - <http://tizen.org/privilege/keymanager (public level privilege) is no longer required to use this API since 3.0.>
+  /// - Data identified by `alias` should exist.
+  ///
+  /// **Parameters:**
+  /// - `alias` (in): Data alias for which access will be granted
+  /// - `accessor` (in): Package id of the application that will gain access rights
+  /// - `granted` (in): Rights granted for `accessor` application
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CKMC_ERROR_NONE`: Successful
+  /// - `CKMC_ERROR_INVALID_PARAMETER`: Input parameter is invalid
+  /// - `CKMC_ERROR_DB_LOCKED`: A user key is not loaded in memory (a user is not logged in)
+  /// - `CKMC_ERROR_DB_ERROR`: Failed due to the error with unknown reason
+  /// - `CKMC_ERROR_DB_ALIAS_UNKNOWN`: Alias does not exist
+  /// - `CKMC_ERROR_PERMISSION_DENIED`: Failed to access key manager
+  ///
+  /// **Preconditions:**
+  /// - User is already logged in and the user key is already loaded into memory in plain text form.
+  ///
+  /// **See also:**
+  /// - `ckmc_deny_access()`
   int ckmc_allow_access(
     ffi.Pointer<ffi.Char> alias,
     ffi.Pointer<ffi.Char> accessor,
@@ -2226,24 +2847,33 @@ class Tizen65KeyManagerClient {
   late final _ckmc_allow_access = _ckmc_allow_accessPtr.asFunction<
       int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>, int)>();
 
-  /// @brief Allows another application to access client's application data.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @remarks %http://tizen.org/privilege/keymanager (public level privilege) is no longer required to use this API since 3.0.
-  /// @remarks Data identified by @a alias should exist.
-  /// @param[in] alias Data alias for which access will be granted
-  /// @param[in] accessor Package id of the application that will gain access rights
-  /// @param[in] permissions Mask of permissions granted for @a accessor application
-  /// (#ckmc_permission_e)
-  /// (previous permission mask will be replaced with the new mask value)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CKMC_ERROR_NONE Successful
-  /// @retval #CKMC_ERROR_INVALID_PARAMETER Input parameter is invalid
-  /// @retval #CKMC_ERROR_DB_LOCKED A user key is not loaded in memory (a user is not logged in)
-  /// @retval #CKMC_ERROR_DB_ERROR Failed due to the error with unknown reason
-  /// @retval #CKMC_ERROR_DB_ALIAS_UNKNOWN Alias does not exist
-  /// @retval #CKMC_ERROR_PERMISSION_DENIED Failed to access key manager
-  /// @pre User is already logged in and the user key is already loaded into memory in plain text form.
+  /// Allows another application to access client's application data.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Remarks:**
+  /// - <http://tizen.org/privilege/keymanager (public level privilege) is no longer required to use this API since 3.0.>
+  /// - Data identified by `alias` should exist.
+  ///
+  /// **Parameters:**
+  /// - `alias` (in): Data alias for which access will be granted
+  /// - `accessor` (in): Package id of the application that will gain access rights
+  /// - `permissions` (in): Mask of permissions granted for `accessor` application (`ckmc_permission_e`) (previous permission mask will be replaced with the new mask value)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CKMC_ERROR_NONE`: Successful
+  /// - `CKMC_ERROR_INVALID_PARAMETER`: Input parameter is invalid
+  /// - `CKMC_ERROR_DB_LOCKED`: A user key is not loaded in memory (a user is not logged in)
+  /// - `CKMC_ERROR_DB_ERROR`: Failed due to the error with unknown reason
+  /// - `CKMC_ERROR_DB_ALIAS_UNKNOWN`: Alias does not exist
+  /// - `CKMC_ERROR_PERMISSION_DENIED`: Failed to access key manager
+  ///
+  /// **Preconditions:**
+  /// - User is already logged in and the user key is already loaded into memory in plain text form.
   int ckmc_set_permission(
     ffi.Pointer<ffi.Char> alias,
     ffi.Pointer<ffi.Char> accessor,
@@ -2263,25 +2893,39 @@ class Tizen65KeyManagerClient {
   late final _ckmc_set_permission = _ckmc_set_permissionPtr.asFunction<
       int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>, int)>();
 
-  /// @deprecated Deprecated since @if MOBILE 2.4. @elseif WEARABLE 3.0. @endif [Use ckmc_set_permission() instead]
-  /// @brief Revokes another application's access to client's application data.
-  /// @since_tizen 2.3
-  /// @remarks %http://tizen.org/privilege/keymanager (public level privilege) is no longer required to use this API since 3.0.
-  /// @remarks Data identified by @a alias should exist.
-  /// @remarks Only access previously granted with ckmc_allow_access can be revoked.
-  /// @param[in] alias Data alias for which access will be revoked
-  /// @param[in] accessor Package id of the application that will lose access rights
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CKMC_ERROR_NONE Successful
-  /// @retval #CKMC_ERROR_INVALID_PARAMETER Input parameter is invalid or the @a accessor doesn't have access to @a alias
-  /// @retval #CKMC_ERROR_DB_LOCKED A user key is not loaded in memory (a user is not logged in)
-  /// @retval #CKMC_ERROR_DB_ERROR Failed due to the error with unknown reason
-  /// @retval #CKMC_ERROR_DB_ALIAS_UNKNOWN Alias does not exist
-  /// @retval #CKMC_ERROR_PERMISSION_DENIED Failed to access key manager
-  /// @pre User is already logged in and the user key is already loaded into memory in plain text form.
-  /// @see ckmc_allow_access()
-  /// @see ckmc_set_permission()
+  /// **Deprecated:** Deprecated since Mobile 2.4.; Wearable 3.0. `[Use ckmc_set_permission() instead]`
+  ///
+  /// Revokes another application's access to client's application data.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - <http://tizen.org/privilege/keymanager (public level privilege) is no longer required to use this API since 3.0.>
+  /// - Data identified by `alias` should exist.
+  /// - Only access previously granted with ckmc_allow_access can be revoked.
+  ///
+  /// **Parameters:**
+  /// - `alias` (in): Data alias for which access will be revoked
+  /// - `accessor` (in): Package id of the application that will lose access rights
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CKMC_ERROR_NONE`: Successful
+  /// - `CKMC_ERROR_INVALID_PARAMETER`: Input parameter is invalid or the `accessor` doesn't have access to `alias`
+  /// - `CKMC_ERROR_DB_LOCKED`: A user key is not loaded in memory (a user is not logged in)
+  /// - `CKMC_ERROR_DB_ERROR`: Failed due to the error with unknown reason
+  /// - `CKMC_ERROR_DB_ALIAS_UNKNOWN`: Alias does not exist
+  /// - `CKMC_ERROR_PERMISSION_DENIED`: Failed to access key manager
+  ///
+  /// **Preconditions:**
+  /// - User is already logged in and the user key is already loaded into memory in plain text form.
+  ///
+  /// **See also:**
+  /// - `ckmc_allow_access()`
+  /// - `ckmc_set_permission()`
   int ckmc_deny_access(
     ffi.Pointer<ffi.Char> alias,
     ffi.Pointer<ffi.Char> accessor,
@@ -2299,28 +2943,41 @@ class Tizen65KeyManagerClient {
   late final _ckmc_deny_access = _ckmc_deny_accessPtr
       .asFunction<int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Removes an entry (no matter of type) from the key manager.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @remarks %http://tizen.org/privilege/keymanager (public level privilege) is no longer required to use this API since 3.0.
-  /// @remarks To remove item, client must have remove permission to the specified item.
-  /// @remarks The item owner can remove by default.
-  /// @param[in] alias Item alias to be removed
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CKMC_ERROR_NONE Successful
-  /// @retval #CKMC_ERROR_INVALID_PARAMETER Input parameter is invalid
-  /// @retval #CKMC_ERROR_DB_LOCKED A user key is not loaded in memory (a user is not logged in)
-  /// @retval #CKMC_ERROR_DB_ERROR Failed due to a database error
-  /// @retval #CKMC_ERROR_DB_ALIAS_UNKNOWN Alias does not exist
-  /// @retval #CKMC_ERROR_PERMISSION_DENIED Failed to access key manager
-  /// @pre User is already logged in and the user key is already loaded into memory in plain text form.
-  /// @see ckmc_save_key()
-  /// @see ckmc_save_cert()
-  /// @see ckmc_save_data()
-  /// @see ckmc_save_pkcs12()
-  /// @see ckmc_create_key_pair_rsa()
-  /// @see ckmc_create_key_pair_dsa()
-  /// @see ckmc_create_key_pair_ecdsa()
+  /// Removes an entry (no matter of type) from the key manager.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Remarks:**
+  /// - <http://tizen.org/privilege/keymanager (public level privilege) is no longer required to use this API since 3.0.>
+  /// - To remove item, client must have remove permission to the specified item.
+  /// - The item owner can remove by default.
+  ///
+  /// **Parameters:**
+  /// - `alias` (in): Item alias to be removed
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CKMC_ERROR_NONE`: Successful
+  /// - `CKMC_ERROR_INVALID_PARAMETER`: Input parameter is invalid
+  /// - `CKMC_ERROR_DB_LOCKED`: A user key is not loaded in memory (a user is not logged in)
+  /// - `CKMC_ERROR_DB_ERROR`: Failed due to a database error
+  /// - `CKMC_ERROR_DB_ALIAS_UNKNOWN`: Alias does not exist
+  /// - `CKMC_ERROR_PERMISSION_DENIED`: Failed to access key manager
+  ///
+  /// **Preconditions:**
+  /// - User is already logged in and the user key is already loaded into memory in plain text form.
+  ///
+  /// **See also:**
+  /// - `ckmc_save_key()`
+  /// - `ckmc_save_cert()`
+  /// - `ckmc_save_data()`
+  /// - `ckmc_save_pkcs12()`
+  /// - `ckmc_create_key_pair_rsa()`
+  /// - `ckmc_create_key_pair_dsa()`
+  /// - `ckmc_create_key_pair_ecdsa()`
   int ckmc_remove_alias(
     ffi.Pointer<ffi.Char> alias,
   ) {
@@ -2335,45 +2992,47 @@ class Tizen65KeyManagerClient {
   late final _ckmc_remove_alias =
       _ckmc_remove_aliasPtr.asFunction<int Function(ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Encrypts data using selected key and algorithm.
-  /// @since_tizen 3.0
-  /// @remarks Key identified by @a key_alias should exist.
-  /// @param[in] params Algorithm parameter list handle. See #ckmc_param_list_h and
-  /// #ckmc_algo_type_e for details
-  /// @param[in] key_alias Alias of the key to be used for encryption
-  /// @param[in] password The password used in decrypting a key value \n
-  /// If password of the policy is provided in ckmc_save_key(), the same
-  /// password should be provided
-  /// @param[in] decrypted Data to be encrypted. In case of AES algorithm there are no restrictions on the size of data,
-  /// if S/W backend is used. If module uses TEE backend (since Tizen 5.0 on chosen images),
-  /// maximum size of data is implementation-specific and at least 500 kB.
-  /// For RSA the size must be smaller or equal to key size in bytes - 42.
-  /// Example: for 1024 RSA key the maximum data size is 1024/8 - 42 = 86.
-  /// @param[out] ppencrypted Encrypted data (some algorithms may return additional information embedded in encrypted data.
-  /// AES GCM is an example) \n
-  /// The caller is responsible for freeing @a encrypted with ckmc_buffer_free()
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CKMC_ERROR_NONE Successful
-  /// @retval #CKMC_ERROR_INVALID_PARAMETER Input parameter is invalid (missing or invalid
-  /// mandatory algorithm parameter or RSA data too long, decrypted = NULL,
-  /// ppencrypted = NULL)
-  /// @retval #CKMC_ERROR_DB_LOCKED A user key is not loaded in memory (a user is not logged in)
-  /// @retval #CKMC_ERROR_DB_ERROR Failed due to the error with unknown reason
-  /// @retval #CKMC_ERROR_DB_ALIAS_UNKNOWN Key with given alias does not exist
-  /// @retval #CKMC_ERROR_PERMISSION_DENIED Failed to access key manager
-  /// @retval #CKMC_ERROR_AUTHENTICATION_FAILED Key decryption failed because password is incorrect
-  /// @retval #CKMC_ERROR_SERVER_ERROR Too big data size or unsupported GCM mode (32 and 64 bit tag lengths not supported on TEE backend) or internal error
-  /// @pre User is already logged in and the user key is already loaded into memory in plain text form.
-  /// @see ckmc_buffer_free()
-  /// @see ckmc_param_list_new()
-  /// @see ckmc_param_list_free()
-  /// @see ckmc_param_list_set_integer()
-  /// @see ckmc_param_list_set_buffer()
-  /// @see ckmc_generate_new_params()
-  /// @see #ckmc_param_list_h
-  /// @see #ckmc_param_name_e
-  /// @see #ckmc_algo_type_e
+  /// Encrypts data using selected key and algorithm.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - Key identified by `key_alias` should exist.
+  ///
+  /// **Parameters:**
+  /// - `params` (in): Algorithm parameter list handle. See `ckmc_param_list_h` and `ckmc_algo_type_e` for details
+  /// - `key_alias` (in): Alias of the key to be used for encryption
+  /// - `password` (in): The password used in decrypting a key value If password of the policy is provided in ckmc_save_key(), the same password should be provided
+  /// - `decrypted` (in): Data to be encrypted. In case of AES algorithm there are no restrictions on the size of data, if S/W backend is used. If module uses TEE backend (since Tizen 5.0 on chosen images), maximum size of data is implementation-specific and at least 500 kB. For RSA the size must be smaller or equal to key size in bytes - 42. Example: for 1024 RSA key the maximum data size is 1024/8 - 42 = 86.
+  /// - `ppencrypted` (out): Encrypted data (some algorithms may return additional information embedded in encrypted data. AES GCM is an example) The caller is responsible for freeing `encrypted` with ckmc_buffer_free()
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CKMC_ERROR_NONE`: Successful
+  /// - `CKMC_ERROR_INVALID_PARAMETER`: Input parameter is invalid (missing or invalid mandatory algorithm parameter or RSA data too long, decrypted = NULL, ppencrypted = NULL)
+  /// - `CKMC_ERROR_DB_LOCKED`: A user key is not loaded in memory (a user is not logged in)
+  /// - `CKMC_ERROR_DB_ERROR`: Failed due to the error with unknown reason
+  /// - `CKMC_ERROR_DB_ALIAS_UNKNOWN`: Key with given alias does not exist
+  /// - `CKMC_ERROR_PERMISSION_DENIED`: Failed to access key manager
+  /// - `CKMC_ERROR_AUTHENTICATION_FAILED`: Key decryption failed because password is incorrect
+  /// - `CKMC_ERROR_SERVER_ERROR`: Too big data size or unsupported GCM mode (32 and 64 bit tag lengths not supported on TEE backend) or internal error
+  ///
+  /// **Preconditions:**
+  /// - User is already logged in and the user key is already loaded into memory in plain text form.
+  ///
+  /// **See also:**
+  /// - `ckmc_buffer_free()`
+  /// - `ckmc_param_list_new()`
+  /// - `ckmc_param_list_free()`
+  /// - `ckmc_param_list_set_integer()`
+  /// - `ckmc_param_list_set_buffer()`
+  /// - `ckmc_generate_new_params()`
+  /// - `ckmc_param_list_h`
+  /// - `ckmc_param_name_e`
+  /// - `ckmc_algo_type_e`
   int ckmc_encrypt_data(
     ckmc_param_list_h params,
     ffi.Pointer<ffi.Char> key_alias,
@@ -2407,41 +3066,47 @@ class Tizen65KeyManagerClient {
           ckmc_raw_buffer_s,
           ffi.Pointer<ffi.Pointer<ckmc_raw_buffer_s>>)>();
 
-  /// @brief Decrypts data using selected key and algorithm.
-  /// @since_tizen 3.0
-  /// @remarks Key identified by @a key_alias should exist.
-  /// @param[in] params Algorithm parameter list handle. You should use the same parameters that were used for encryption.
-  /// See #ckmc_param_list_h and #ckmc_algo_type_e for details
-  /// @param[in] key_alias Alias of the key to be used for encryption
-  /// @param[in] password The password used in decrypting a key value \n
-  /// If password of the policy is provided in ckmc_save_key(), the same password should be provided
-  /// @param[in] encrypted Data to be decrypted (some algorithms may require additional information embedded in encrypted data. AES GCM is an example)
-  /// Since Tizen 5.0, on chosen images where module is using TEE backend, data size is limited to at least 500 kB
-  /// (TEE implementation-specific).
-  /// @param[out] ppdecrypted Decrypted data \n
-  /// The caller is responsible for freeing @a decrypted with ckmc_buffer_free()
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #CKMC_ERROR_NONE Successful
-  /// @retval #CKMC_ERROR_INVALID_PARAMETER Input parameter is invalid (missing or invalid
-  /// mandatory algorithm parameter, GCM tag authentication failed, key or data is wrong,
-  /// in case of RSA key is wrong or data too long, encrypted = NULL, ppdecrypted = NULL)
-  /// @retval #CKMC_ERROR_DB_LOCKED A user key is not loaded in memory (a user is not logged in)
-  /// @retval #CKMC_ERROR_DB_ERROR Failed due to the error with unknown reason
-  /// @retval #CKMC_ERROR_DB_ALIAS_UNKNOWN Key with given alias does not exist
-  /// @retval #CKMC_ERROR_PERMISSION_DENIED Failed to access key manager
-  /// @retval #CKMC_ERROR_AUTHENTICATION_FAILED Key decryption failed because password is incorrect
-  /// @retval #CKMC_ERROR_SERVER_ERROR Too big data size or unsupported GCM mode (32 and 64 bit tag lengths not supported on TEE backend) or internal error
-  /// @pre User is already logged in and the user key is already loaded into memory in plain text form.
-  /// @see ckmc_buffer_free()
-  /// @see ckmc_param_list_new()
-  /// @see ckmc_param_list_free()
-  /// @see ckmc_param_list_set_integer()
-  /// @see ckmc_param_list_set_buffer()
-  /// @see ckmc_generate_new_params()
-  /// @see #ckmc_param_list_h
-  /// @see #ckmc_param_name_e
-  /// @see #ckmc_algo_type_e
+  /// Decrypts data using selected key and algorithm.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - Key identified by `key_alias` should exist.
+  ///
+  /// **Parameters:**
+  /// - `params` (in): Algorithm parameter list handle. You should use the same parameters that were used for encryption. See `ckmc_param_list_h` and `ckmc_algo_type_e` for details
+  /// - `key_alias` (in): Alias of the key to be used for encryption
+  /// - `password` (in): The password used in decrypting a key value If password of the policy is provided in ckmc_save_key(), the same password should be provided
+  /// - `encrypted` (in): Data to be decrypted (some algorithms may require additional information embedded in encrypted data. AES GCM is an example) Since Tizen 5.0, on chosen images where module is using TEE backend, data size is limited to at least 500 kB (TEE implementation-specific).
+  /// - `ppdecrypted` (out): Decrypted data The caller is responsible for freeing `decrypted` with ckmc_buffer_free()
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CKMC_ERROR_NONE`: Successful
+  /// - `CKMC_ERROR_INVALID_PARAMETER`: Input parameter is invalid (missing or invalid mandatory algorithm parameter, GCM tag authentication failed, key or data is wrong, in case of RSA key is wrong or data too long, encrypted = NULL, ppdecrypted = NULL)
+  /// - `CKMC_ERROR_DB_LOCKED`: A user key is not loaded in memory (a user is not logged in)
+  /// - `CKMC_ERROR_DB_ERROR`: Failed due to the error with unknown reason
+  /// - `CKMC_ERROR_DB_ALIAS_UNKNOWN`: Key with given alias does not exist
+  /// - `CKMC_ERROR_PERMISSION_DENIED`: Failed to access key manager
+  /// - `CKMC_ERROR_AUTHENTICATION_FAILED`: Key decryption failed because password is incorrect
+  /// - `CKMC_ERROR_SERVER_ERROR`: Too big data size or unsupported GCM mode (32 and 64 bit tag lengths not supported on TEE backend) or internal error
+  ///
+  /// **Preconditions:**
+  /// - User is already logged in and the user key is already loaded into memory in plain text form.
+  ///
+  /// **See also:**
+  /// - `ckmc_buffer_free()`
+  /// - `ckmc_param_list_new()`
+  /// - `ckmc_param_list_free()`
+  /// - `ckmc_param_list_set_integer()`
+  /// - `ckmc_param_list_set_buffer()`
+  /// - `ckmc_generate_new_params()`
+  /// - `ckmc_param_list_h`
+  /// - `ckmc_param_name_e`
+  /// - `ckmc_algo_type_e`
   int ckmc_decrypt_data(
     ckmc_param_list_h params,
     ffi.Pointer<ffi.Char> key_alias,
@@ -2476,8 +3141,11 @@ class Tizen65KeyManagerClient {
           ffi.Pointer<ffi.Pointer<ckmc_raw_buffer_s>>)>();
 }
 
-/// @brief Enumeration for Key Manager Errors.
-/// @since_tizen 2.3
+/// Enumeration for Key Manager Errors.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 abstract class key_manager_error_e {
   /// < Successful
   static const int CKMC_ERROR_NONE = 0;
@@ -2549,8 +3217,11 @@ abstract class key_manager_error_e {
   static const int CKMC_ERROR_UNKNOWN = -31522561;
 }
 
-/// @brief Enumeration for key types of key manager.
-/// @since_tizen 2.3
+/// Enumeration for key types of key manager.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 abstract class ckmc_key_type {
   /// < Key type not specified
   static const int CKMC_KEY_NONE = 0;
@@ -2577,8 +3248,11 @@ abstract class ckmc_key_type {
   static const int CKMC_KEY_AES = 7;
 }
 
-/// @brief Enumeration for data format.
-/// @since_tizen 2.3
+/// Enumeration for data format.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 abstract class ckmc_data_format {
   /// < DER format base64 encoded data
   static const int CKMC_FORM_DER_BASE64 = 0;
@@ -2591,8 +3265,11 @@ abstract class ckmc_data_format {
   static const int CKMC_FORM_PEM = 2;
 }
 
-/// @brief Enumeration for elliptic curve.
-/// @since_tizen 2.3
+/// Enumeration for elliptic curve.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 abstract class ckmc_ec_type {
   /// < Elliptic curve domain "secp192r1" listed in "SEC 2" recommended
   /// elliptic curve domain
@@ -2606,8 +3283,11 @@ abstract class ckmc_ec_type {
   static const int CKMC_EC_SECP384R1 = 2;
 }
 
-/// @brief Enumeration for hash algorithm.
-/// @since_tizen 2.3
+/// Enumeration for hash algorithm.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 abstract class ckmc_hash_algo {
   /// < No Hash Algorithm
   static const int CKMC_HASH_NONE = 0;
@@ -2625,8 +3305,11 @@ abstract class ckmc_hash_algo {
   static const int CKMC_HASH_SHA512 = 4;
 }
 
-/// @brief Enumeration for RSA padding algorithm.
-/// @since_tizen 2.3
+/// Enumeration for RSA padding algorithm.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 abstract class ckmc_rsa_padding_algo {
   /// < No Padding
   static const int CKMC_NONE_PADDING = 0;
@@ -2638,9 +3321,13 @@ abstract class ckmc_rsa_padding_algo {
   static const int CKMC_X931_PADDING = 2;
 }
 
-/// @deprecated Deprecated since @if MOBILE 2.4. @elseif WEARABLE 3.0. @endif [Use ckmc_permission_e() instead]
-/// @brief Enumeration for database access rights.
-/// @since_tizen 2.3
+/// **Deprecated:** Deprecated since Mobile 2.4.; Wearable 3.0. `[Use ckmc_permission_e() instead]`
+///
+/// Enumeration for database access rights.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 abstract class ckmc_access_right {
   /// < Access right for read
   static const int CKMC_AR_READ = 0;
@@ -2649,8 +3336,11 @@ abstract class ckmc_access_right {
   static const int CKMC_AR_READ_REMOVE = 1;
 }
 
-/// @brief Enumeration for permissions to access/modify alias.
-/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+/// Enumeration for permissions to access/modify alias.
+///
+/// **Since Tizen:**
+/// - Mobile 2.4; Wearable 3.0
+/// @nodoc
 abstract class ckmc_permission {
   /// < Clear permissions
   static const int CKMC_PERMISSION_NONE = 0;
@@ -2662,8 +3352,11 @@ abstract class ckmc_permission {
   static const int CKMC_PERMISSION_REMOVE = 2;
 }
 
-/// @brief The structure for binary buffer used in key manager CAPI.
-/// @since_tizen 2.3
+/// The structure for binary buffer used in key manager CAPI.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 final class __ckmc_raw_buff extends ffi.Struct {
   /// < Byte array containing binary data
   external ffi.Pointer<ffi.UnsignedChar> data;
@@ -2673,8 +3366,11 @@ final class __ckmc_raw_buff extends ffi.Struct {
   external int size;
 }
 
-/// @brief The structure for a policy for storing key/certificate/binary data.
-/// @since_tizen 2.3
+/// The structure for a policy for storing key/certificate/binary data.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 final class __ckmc_policy extends ffi.Struct {
   /// < Byte array used to encrypt data inside CKM. If it is not null, the data
   /// (or key, or certificate) is stored encrypted with this password inside
@@ -2686,8 +3382,11 @@ final class __ckmc_policy extends ffi.Struct {
   external bool extractable;
 }
 
-/// @brief The structure for key used in key manager CAPI.
-/// @since_tizen 2.3
+/// The structure for key used in key manager CAPI.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 final class __ckmc_key extends ffi.Struct {
   /// < Byte array of key. raw_key may be encrypted with password
   external ffi.Pointer<ffi.UnsignedChar> raw_key;
@@ -2704,8 +3403,11 @@ final class __ckmc_key extends ffi.Struct {
   external ffi.Pointer<ffi.Char> password;
 }
 
-/// @brief The structure for certificate used in key manager CAPI.
-/// @since_tizen 2.3
+/// The structure for certificate used in key manager CAPI.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 final class __ckmc_cert extends ffi.Struct {
   /// < Byte array of certificate
   external ffi.Pointer<ffi.UnsignedChar> raw_cert;
@@ -2719,8 +3421,11 @@ final class __ckmc_cert extends ffi.Struct {
   external int data_format;
 }
 
-/// @brief The structure for linked list of alias.
-/// @since_tizen 2.3
+/// The structure for linked list of alias.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 final class __ckmc_alias_list extends ffi.Struct {
   /// < The name of key, certificate or data stored in key manager
   external ffi.Pointer<ffi.Char> alias;
@@ -2729,10 +3434,14 @@ final class __ckmc_alias_list extends ffi.Struct {
   external ffi.Pointer<__ckmc_alias_list> next;
 }
 
+/// @nodoc
 final class ckmc_alias_info_s extends ffi.Opaque {}
 
-/// @brief The structure for linked list of alias with additional information.
-/// @since_tizen 5.5
+/// The structure for linked list of alias with additional information.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 final class __ckmc_alias_info_list_s extends ffi.Struct {
   /// < The pointer pointing to the alias structure
   /// with additional information
@@ -2742,8 +3451,11 @@ final class __ckmc_alias_info_list_s extends ffi.Struct {
   external ffi.Pointer<__ckmc_alias_info_list_s> next;
 }
 
-/// @brief The structure for linked list of ckmc_cert_s
-/// @since_tizen 2.3
+/// The structure for linked list of ckmc_cert_s
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 final class __ckmc_cert_list extends ffi.Struct {
   /// < The pointer of ckmc_cert_s
   external ffi.Pointer<ckmc_cert_s> cert;
@@ -2752,12 +3464,18 @@ final class __ckmc_cert_list extends ffi.Struct {
   external ffi.Pointer<__ckmc_cert_list> next;
 }
 
-/// @brief The structure for certificate used in key manager CAPI.
-/// @since_tizen 2.3
+/// The structure for certificate used in key manager CAPI.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 typedef ckmc_cert_s = __ckmc_cert;
 
-/// @brief Enumeration for OCSP status.
-/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+/// Enumeration for OCSP status.
+///
+/// **Since Tizen:**
+/// - Mobile 2.4; Wearable 3.0
+/// @nodoc
 abstract class ckmc_ocsp_status {
   /// < OCSP status is good
   static const int CKMC_OCSP_STATUS_GOOD = 0;
@@ -2787,8 +3505,11 @@ abstract class ckmc_ocsp_status {
   static const int CKMC_OCSP_ERROR_INTERNAL = 8;
 }
 
-/// @brief The structure for PKCS12 used in key manager CAPI.
-/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+/// The structure for PKCS12 used in key manager CAPI.
+///
+/// **Since Tizen:**
+/// - Mobile 2.4; Wearable 3.0
+/// @nodoc
 final class __ckmc_pkcs12 extends ffi.Struct {
   /// < The private key, may be null
   external ffi.Pointer<ckmc_key_s> priv_key;
@@ -2800,17 +3521,28 @@ final class __ckmc_pkcs12 extends ffi.Struct {
   external ffi.Pointer<ckmc_cert_list_s> ca_chain;
 }
 
-/// @brief The structure for key used in key manager CAPI.
-/// @since_tizen 2.3
+/// The structure for key used in key manager CAPI.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 typedef ckmc_key_s = __ckmc_key;
 
-/// @brief The structure for linked list of ckmc_cert_s
-/// @since_tizen 2.3
+/// The structure for linked list of ckmc_cert_s
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 typedef ckmc_cert_list_s = __ckmc_cert_list;
 
-/// @brief Enumeration for crypto algorithm parameters.
-/// @since_tizen 3.0
-/// @see #ckmc_algo_type_e
+/// Enumeration for crypto algorithm parameters.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **See also:**
+/// - `ckmc_algo_type_e`
+/// @nodoc
 abstract class ckmc_param_name {
   static const int CKMC_PARAM_ALGO_TYPE = 1;
 
@@ -2830,11 +3562,17 @@ abstract class ckmc_param_name {
   static const int CKMC_PARAM_ED_LABEL = 105;
 }
 
+/// @nodoc
 final class __ckmc_param_list extends ffi.Opaque {}
 
-/// @brief Enumeration for crypto algorithm types.
-/// @since_tizen 3.0
-/// @see #ckmc_param_name_e
+/// Enumeration for crypto algorithm types.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **See also:**
+/// - `ckmc_param_name_e`
+/// @nodoc
 abstract class ckmc_algo_type {
   /// < AES-CTR algorithm
   /// Supported parameters:
@@ -2875,37 +3613,59 @@ abstract class ckmc_algo_type {
   static const int CKMC_ALGO_RSA_OAEP = 5;
 }
 
-/// @brief The structure for linked list of alias with additional information.
-/// @since_tizen 5.5
+/// The structure for linked list of alias with additional information.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 typedef ckmc_alias_info_list_s = __ckmc_alias_info_list_s;
 
-/// @brief The structure for binary buffer used in key manager CAPI.
-/// @since_tizen 2.3
+/// The structure for binary buffer used in key manager CAPI.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 typedef ckmc_raw_buffer_s = __ckmc_raw_buff;
 
-/// @brief The structure for PKCS12 used in key manager CAPI.
-/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+/// The structure for PKCS12 used in key manager CAPI.
+///
+/// **Since Tizen:**
+/// - Mobile 2.4; Wearable 3.0
+/// @nodoc
 typedef ckmc_pkcs12_s = __ckmc_pkcs12;
 
-/// @brief The structure for linked list of alias.
-/// @since_tizen 2.3
+/// The structure for linked list of alias.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 typedef ckmc_alias_list_s = __ckmc_alias_list;
 
-/// @brief Algorithm parameter list handle.
-/// @since_tizen 3.0
-/// @remarks Each parameter list must have at least one CKMC_PARAM_ALGO_TYPE parameter that identifies the algorithm.
-/// See #ckmc_algo_type_e for available algorithms and additional parameters they support.
-/// @see ckmc_generate_new_params()
-/// @see ckmc_param_list_new()
-/// @see ckmc_param_list_set_integer()
-/// @see ckmc_param_list_set_buffer()
-/// @see ckmc_param_list_get_integer()
-/// @see ckmc_param_list_get_buffer()
-/// @see ckmc_param_list_free()
-/// @see #ckmc_algo_type_e
-/// @see #ckmc_param_name_e
+/// Algorithm parameter list handle.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Remarks:**
+/// - Each parameter list must have at least one CKMC_PARAM_ALGO_TYPE parameter that identifies the algorithm.
+/// - See `ckmc_algo_type_e` for available algorithms and additional parameters they support.
+///
+/// **See also:**
+/// - `ckmc_generate_new_params()`
+/// - `ckmc_param_list_new()`
+/// - `ckmc_param_list_set_integer()`
+/// - `ckmc_param_list_set_buffer()`
+/// - `ckmc_param_list_get_integer()`
+/// - `ckmc_param_list_get_buffer()`
+/// - `ckmc_param_list_free()`
+/// - `ckmc_algo_type_e`
+/// - `ckmc_param_name_e`
+/// @nodoc
 typedef ckmc_param_list_h = ffi.Pointer<__ckmc_param_list>;
 
-/// @brief The structure for a policy for storing key/certificate/binary data.
-/// @since_tizen 2.3
+/// The structure for a policy for storing key/certificate/binary data.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 typedef ckmc_policy_s = __ckmc_policy;

@@ -1,3 +1,6 @@
+/// {@category 7.0/tizen}
+library tizen_interop_7_0.capi_media_editor;
+
 // Copyright 2026 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen capi-media-editor APIs.
+/// {@category 7.0/tizen}
 class Tizen70CapiMediaEditor {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,19 +28,32 @@ class Tizen70CapiMediaEditor {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Creates a new media editor handle.
-  /// @since_tizen 7.0
-  /// @remarks The @a editor must be released using mediaeditor_destroy().\n
-  /// The timeline which is composed of a set of layers and clips will be created.
-  /// @param[out] editor A newly returned handle to the media editor
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIAEDITOR_ERROR_NONE Successful
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIAEDITOR_ERROR_RESOURCE_FAILED   Resource manager initialization error
-  /// @post @a editor state will be #MEDIAEDITOR_STATE_IDLE.
+  /// Creates a new media editor handle.
   ///
-  /// @see mediaeditor_destroy()
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Remarks:**
+  /// - The `editor` must be released using mediaeditor_destroy().
+  /// - The timeline which is composed of a set of layers and clips will be created.
+  ///
+  /// **Parameters:**
+  /// - `editor` (out): A newly returned handle to the media editor
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIAEDITOR_ERROR_NONE`: Successful
+  /// - `MEDIAEDITOR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIAEDITOR_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIAEDITOR_ERROR_RESOURCE_FAILED`: Resource manager initialization error
+  ///
+  /// **Postconditions:**
+  /// - `editor` state will be `MEDIAEDITOR_STATE_IDLE`.
+  ///
+  /// **See also:**
+  /// - `mediaeditor_destroy()`
   int mediaeditor_create(
     ffi.Pointer<mediaeditor_h> editor,
   ) {
@@ -51,16 +68,25 @@ class Tizen70CapiMediaEditor {
   late final _mediaeditor_create = _mediaeditor_createPtr
       .asFunction<int Function(ffi.Pointer<mediaeditor_h>)>();
 
-  /// @brief Destroys a media editor handle and releases all its resources.
-  /// @since_tizen 7.0
-  /// @param[in] editor The media editor handle
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIAEDITOR_ERROR_NONE Successful
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIAEDITOR_ERROR_RESOURCE_FAILED   Resource manager deinitialization error
+  /// Destroys a media editor handle and releases all its resources.
   ///
-  /// @see mediaeditor_create()
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Parameters:**
+  /// - `editor` (in): The media editor handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIAEDITOR_ERROR_NONE`: Successful
+  /// - `MEDIAEDITOR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIAEDITOR_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIAEDITOR_ERROR_RESOURCE_FAILED`: Resource manager deinitialization error
+  ///
+  /// **See also:**
+  /// - `mediaeditor_create()`
   int mediaeditor_destroy(
     mediaeditor_h editor,
   ) {
@@ -75,20 +101,31 @@ class Tizen70CapiMediaEditor {
   late final _mediaeditor_destroy =
       _mediaeditor_destroyPtr.asFunction<int Function(mediaeditor_h)>();
 
-  /// @brief Sets a display for preview.
-  /// @since_tizen 7.0
-  /// @param[in] editor  The media editor handle
-  /// @param[in] type    The display type
-  /// @param[in] display The display handle
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIAEDITOR_ERROR_NONE Successful
-  /// @retval #MEDIAEDITOR_ERROR_NOT_SUPPORTED     The feature is not supported
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_STATE     Invalid state
-  /// @pre @a editor state must be set to #MEDIAEDITOR_STATE_IDLE.
+  /// Sets a display for preview.
   ///
-  /// @see mediaeditor_start_preview()
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Parameters:**
+  /// - `editor` (in): The media editor handle
+  /// - `type` (in): The display type
+  /// - `display` (in): The display handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIAEDITOR_ERROR_NONE`: Successful
+  /// - `MEDIAEDITOR_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `MEDIAEDITOR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIAEDITOR_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIAEDITOR_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - `editor` state must be set to `MEDIAEDITOR_STATE_IDLE`.
+  ///
+  /// **See also:**
+  /// - `mediaeditor_start_preview()`
   int mediaeditor_set_display(
     mediaeditor_h editor,
     int type,
@@ -108,15 +145,24 @@ class Tizen70CapiMediaEditor {
   late final _mediaeditor_set_display = _mediaeditor_set_displayPtr
       .asFunction<int Function(mediaeditor_h, int, mediaeditor_display_h)>();
 
-  /// @brief Gets the current state.
-  /// @since_tizen 7.0
-  /// @param[in] editor The media editor handle
-  /// @param[out] state The media editor state
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIAEDITOR_ERROR_NONE Successful
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Gets the current state.
   ///
-  /// @see #mediaeditor_state_e
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Parameters:**
+  /// - `editor` (in): The media editor handle
+  /// - `state` (out): The media editor state
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIAEDITOR_ERROR_NONE`: Successful
+  /// - `MEDIAEDITOR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `mediaeditor_state_e`
   int mediaeditor_get_state(
     mediaeditor_h editor,
     ffi.Pointer<ffi.Int32> state,
@@ -134,30 +180,50 @@ class Tizen70CapiMediaEditor {
   late final _mediaeditor_get_state = _mediaeditor_get_statePtr
       .asFunction<int Function(mediaeditor_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Starts to render with given path, asynchronously.
-  /// @since_tizen 7.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediastorage
-  /// @privilege %http://tizen.org/privilege/externalstorage
-  /// @remarks If you want to access only internal storage by using this function, you should add privilege %http://tizen.org/privilege/mediastorage.\n
-  /// Or if you want to access only external storage by using this function, you should add privilege %http://tizen.org/privilege/externalstorage.\n
-  /// If you want to access both storage, you must add both privileges.
-  /// @param[in] editor    The media editor handle
-  /// @param[in] path      The path to save rendered output
-  /// @param[in] callback  The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIAEDITOR_ERROR_NONE Successful
-  /// @retval #MEDIAEDITOR_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_STATE     Invalid state
-  /// @pre User must add clip by calling mediaeditor_add_clip().
-  /// @pre @a editor state must be set to #MEDIAEDITOR_STATE_IDLE.
-  /// @post @a editor state will be #MEDIAEDITOR_STATE_RENDERING.
-  /// @post mediaeditor_render_completed_cb() will be invoked.
-  /// @see mediaeditor_add_clip()
-  /// @see mediaeditor_cancel_render()
+  /// Starts to render with given path, asynchronously.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediastorage>
+  /// - <http://tizen.org/privilege/externalstorage>
+  ///
+  /// **Remarks:**
+  /// - If you want to access only internal storage by using this function, you should add privilege http://tizen.org/privilege/mediastorage.
+  /// - Or if you want to access only external storage by using this function, you should add privilege http://tizen.org/privilege/externalstorage.
+  /// - If you want to access both storage, you must add both privileges.
+  ///
+  /// **Parameters:**
+  /// - `editor` (in): The media editor handle
+  /// - `path` (in): The path to save rendered output
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIAEDITOR_ERROR_NONE`: Successful
+  /// - `MEDIAEDITOR_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIAEDITOR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIAEDITOR_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIAEDITOR_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - User must add clip by calling mediaeditor_add_clip().
+  /// - `editor` state must be set to `MEDIAEDITOR_STATE_IDLE`.
+  ///
+  /// **Postconditions:**
+  /// - `editor` state will be `MEDIAEDITOR_STATE_RENDERING`.
+  /// - mediaeditor_render_completed_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `mediaeditor_add_clip()`
+  /// - `mediaeditor_cancel_render()`
   int mediaeditor_start_render(
     mediaeditor_h editor,
     ffi.Pointer<ffi.Char> path,
@@ -184,17 +250,31 @@ class Tizen70CapiMediaEditor {
           int Function(mediaeditor_h, ffi.Pointer<ffi.Char>,
               mediaeditor_render_completed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Cancels rendering.
-  /// @since_tizen 7.0
-  /// @param[in] editor The media editor handle
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIAEDITOR_ERROR_NONE Successful
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_STATE     Invalid state
-  /// @pre @a editor state must be set to #MEDIAEDITOR_STATE_RENDERING.
-  /// @post @a editor state will be #MEDIAEDITOR_STATE_IDLE.
-  /// @see mediaeditor_start_render()
+  /// Cancels rendering.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Parameters:**
+  /// - `editor` (in): The media editor handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIAEDITOR_ERROR_NONE`: Successful
+  /// - `MEDIAEDITOR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIAEDITOR_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIAEDITOR_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - `editor` state must be set to `MEDIAEDITOR_STATE_RENDERING`.
+  ///
+  /// **Postconditions:**
+  /// - `editor` state will be `MEDIAEDITOR_STATE_IDLE`.
+  ///
+  /// **See also:**
+  /// - `mediaeditor_start_render()`
   int mediaeditor_cancel_render(
     mediaeditor_h editor,
   ) {
@@ -209,19 +289,33 @@ class Tizen70CapiMediaEditor {
   late final _mediaeditor_cancel_render =
       _mediaeditor_cancel_renderPtr.asFunction<int Function(mediaeditor_h)>();
 
-  /// @brief Starts to preview.
-  /// @since_tizen 7.0
-  /// @param[in] editor The media editor handle
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIAEDITOR_ERROR_NONE Successful
-  /// @retval #MEDIAEDITOR_ERROR_NOT_SUPPORTED     The feature is not supported
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_STATE     Invalid state
-  /// @pre The display handle must be set by calling mediaeditor_set_display()
-  /// @pre @a editor state must be set to #MEDIAEDITOR_STATE_IDLE.
-  /// @post @a editor state will be #MEDIAEDITOR_STATE_PREVIEW.
-  /// @see mediaeditor_set_display()
+  /// Starts to preview.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Parameters:**
+  /// - `editor` (in): The media editor handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIAEDITOR_ERROR_NONE`: Successful
+  /// - `MEDIAEDITOR_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `MEDIAEDITOR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIAEDITOR_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIAEDITOR_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The display handle must be set by calling mediaeditor_set_display()
+  /// - `editor` state must be set to `MEDIAEDITOR_STATE_IDLE`.
+  ///
+  /// **Postconditions:**
+  /// - `editor` state will be `MEDIAEDITOR_STATE_PREVIEW`.
+  ///
+  /// **See also:**
+  /// - `mediaeditor_set_display()`
   int mediaeditor_start_preview(
     mediaeditor_h editor,
   ) {
@@ -236,18 +330,32 @@ class Tizen70CapiMediaEditor {
   late final _mediaeditor_start_preview =
       _mediaeditor_start_previewPtr.asFunction<int Function(mediaeditor_h)>();
 
-  /// @brief Stops to preview.
-  /// @since_tizen 7.0
-  /// @param[in] editor The media editor handle
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIAEDITOR_ERROR_NONE Successful
-  /// @retval #MEDIAEDITOR_ERROR_NOT_SUPPORTED     The feature is not supported
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_STATE     Invalid state
-  /// @pre @a editor state must be set to #MEDIAEDITOR_STATE_PREVIEW.
-  /// @post @a editor state will be #MEDIAEDITOR_STATE_IDLE.
-  /// @see mediaeditor_start_preview()
+  /// Stops to preview.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Parameters:**
+  /// - `editor` (in): The media editor handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIAEDITOR_ERROR_NONE`: Successful
+  /// - `MEDIAEDITOR_ERROR_NOT_SUPPORTED`: The feature is not supported
+  /// - `MEDIAEDITOR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIAEDITOR_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIAEDITOR_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - `editor` state must be set to `MEDIAEDITOR_STATE_PREVIEW`.
+  ///
+  /// **Postconditions:**
+  /// - `editor` state will be `MEDIAEDITOR_STATE_IDLE`.
+  ///
+  /// **See also:**
+  /// - `mediaeditor_start_preview()`
   int mediaeditor_stop_preview(
     mediaeditor_h editor,
   ) {
@@ -262,20 +370,33 @@ class Tizen70CapiMediaEditor {
   late final _mediaeditor_stop_preview =
       _mediaeditor_stop_previewPtr.asFunction<int Function(mediaeditor_h)>();
 
-  /// @brief Sets a callback function to be invoked when an asynchronous operation error occurs.
-  /// @since_tizen 7.0
-  /// @param[in] editor    The media editor handle
-  /// @param[in] callback  Callback function pointer
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIAEDITOR_ERROR_NONE    Successful
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_STATE     Invalid state
-  /// @pre @a editor state must be set to #MEDIAEDITOR_STATE_IDLE.
-  /// @post mediaeditor_error_cb() will be invoked.
-  /// @see mediaeditor_unset_error_cb()
-  /// @see mediaeditor_error_cb()
+  /// Sets a callback function to be invoked when an asynchronous operation error occurs.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Parameters:**
+  /// - `editor` (in): The media editor handle
+  /// - `callback` (in): Callback function pointer
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIAEDITOR_ERROR_NONE`: Successful
+  /// - `MEDIAEDITOR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIAEDITOR_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - `editor` state must be set to `MEDIAEDITOR_STATE_IDLE`.
+  ///
+  /// **Postconditions:**
+  /// - mediaeditor_error_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `mediaeditor_unset_error_cb()`
+  /// - `mediaeditor_error_cb()`
   int mediaeditor_set_error_cb(
     mediaeditor_h editor,
     mediaeditor_error_cb callback,
@@ -297,17 +418,28 @@ class Tizen70CapiMediaEditor {
           int Function(
               mediaeditor_h, mediaeditor_error_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets an error callback function.
-  /// @since_tizen 7.0
-  /// @param[in] editor The media editor handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIAEDITOR_ERROR_NONE    Successful
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_STATE     Invalid state
-  /// @pre @a editor state must be set to #MEDIAEDITOR_STATE_IDLE.
-  /// @see mediaeditor_set_error_cb()
+  /// Unsets an error callback function.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Parameters:**
+  /// - `editor` (in): The media editor handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIAEDITOR_ERROR_NONE`: Successful
+  /// - `MEDIAEDITOR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIAEDITOR_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIAEDITOR_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - `editor` state must be set to `MEDIAEDITOR_STATE_IDLE`.
+  ///
+  /// **See also:**
+  /// - `mediaeditor_set_error_cb()`
   int mediaeditor_unset_error_cb(
     mediaeditor_h editor,
   ) {
@@ -322,20 +454,33 @@ class Tizen70CapiMediaEditor {
   late final _mediaeditor_unset_error_cb =
       _mediaeditor_unset_error_cbPtr.asFunction<int Function(mediaeditor_h)>();
 
-  /// @brief Sets a callback function to be invoked when the media editor state is changed.
-  /// @since_tizen 7.0
-  /// @param[in] editor    The media editor handle
-  /// @param[in] callback  Callback function pointer
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIAEDITOR_ERROR_NONE    Successful
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_STATE     Invalid state
-  /// @pre @a editor state must be set to #MEDIAEDITOR_STATE_IDLE.
-  /// @post mediaeditor_state_changed_cb() will be invoked.
-  /// @see mediaeditor_unset_state_changed_cb()
-  /// @see mediaeditor_state_changed_cb()
+  /// Sets a callback function to be invoked when the media editor state is changed.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Parameters:**
+  /// - `editor` (in): The media editor handle
+  /// - `callback` (in): Callback function pointer
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIAEDITOR_ERROR_NONE`: Successful
+  /// - `MEDIAEDITOR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIAEDITOR_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - `editor` state must be set to `MEDIAEDITOR_STATE_IDLE`.
+  ///
+  /// **Postconditions:**
+  /// - mediaeditor_state_changed_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `mediaeditor_unset_state_changed_cb()`
+  /// - `mediaeditor_state_changed_cb()`
   int mediaeditor_set_state_changed_cb(
     mediaeditor_h editor,
     mediaeditor_state_changed_cb callback,
@@ -357,17 +502,28 @@ class Tizen70CapiMediaEditor {
           int Function(mediaeditor_h, mediaeditor_state_changed_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets a state changed callback function.
-  /// @since_tizen 7.0
-  /// @param[in] editor The media editor handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIAEDITOR_ERROR_NONE    Successful
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_STATE     Invalid state
-  /// @pre @a editor state must be set to #MEDIAEDITOR_STATE_IDLE.
-  /// @see mediaeditor_set_state_changed_cb()
+  /// Unsets a state changed callback function.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Parameters:**
+  /// - `editor` (in): The media editor handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIAEDITOR_ERROR_NONE`: Successful
+  /// - `MEDIAEDITOR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIAEDITOR_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIAEDITOR_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - `editor` state must be set to `MEDIAEDITOR_STATE_IDLE`.
+  ///
+  /// **See also:**
+  /// - `mediaeditor_set_state_changed_cb()`
   int mediaeditor_unset_state_changed_cb(
     mediaeditor_h editor,
   ) {
@@ -383,33 +539,47 @@ class Tizen70CapiMediaEditor {
       _mediaeditor_unset_state_changed_cbPtr
           .asFunction<int Function(mediaeditor_h)>();
 
-  /// @brief Adds a layer to timeline.
-  /// @since_tizen 7.0
-  /// @remarks Layers are responsible for ordering of contained clips. The order is determined by layers' priorities.\n
-  /// The layers are stacked in a hierarchical structure.\n
-  /// e.g. If we have 3 layers, it will have the following hierarchy.\n
-  /// <pre>
-  /// Top    : layer ID 1, layer priority 0 (The highest priority)
-  /// layer ID 2, layer priority 1
-  /// Bottom : layer ID 3, layer priority 2 (The lowest priority)
-  /// </pre>
-  /// Priorities are always a continuous sequence, with no numbers missing in-between.\n
-  /// For example, priorities 0, 1, 3, 4 are not possible.\n
-  /// But, layer Id could be a discontinuous sequence. Please refer to examples of mediaeditor_remove_layer().\n
-  /// The @a layer_priority of newly added layer will be lowest priority.
-  /// @param[in] editor          The media editor handle
-  /// @param[out] layer_id       The layer ID. It'll be used when you want to control this layer.
-  /// @param[out] layer_priority The layer priority represents the hierarchical ordering of contained clips.
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIAEDITOR_ERROR_NONE Successful
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_STATE     Invalid state
-  /// @pre @a editor state must be set to #MEDIAEDITOR_STATE_IDLE.
-  /// @see mediaeditor_remove_layer()
-  /// @see mediaeditor_move_layer()
-  /// @see mediaeditor_activate_layer()
-  /// @see mediaeditor_deactivate_layer()
+  /// Adds a layer to timeline.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Remarks:**
+  /// - Layers are responsible for ordering of contained clips. The order is determined by layers' priorities.
+  /// - The layers are stacked in a hierarchical structure.
+  /// - e.g. If we have 3 layers, it will have the following hierarchy.
+  /// - <pre>
+  /// - Top : layer ID 1, layer priority 0 (The highest priority)
+  /// - layer ID 2, layer priority 1
+  /// - Bottom : layer ID 3, layer priority 2 (The lowest priority)
+  /// - </pre>
+  /// - Priorities are always a continuous sequence, with no numbers missing in-between.
+  /// - For example, priorities 0, 1, 3, 4 are not possible.
+  /// - But, layer Id could be a discontinuous sequence. Please refer to examples of mediaeditor_remove_layer().
+  /// - The `layer_priority` of newly added layer will be lowest priority.
+  ///
+  /// **Parameters:**
+  /// - `editor` (in): The media editor handle
+  /// - `layer_id` (out): The layer ID. It'll be used when you want to control this layer.
+  /// - `layer_priority` (out): The layer priority represents the hierarchical ordering of contained clips.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIAEDITOR_ERROR_NONE`: Successful
+  /// - `MEDIAEDITOR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIAEDITOR_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIAEDITOR_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - `editor` state must be set to `MEDIAEDITOR_STATE_IDLE`.
+  ///
+  /// **See also:**
+  /// - `mediaeditor_remove_layer()`
+  /// - `mediaeditor_move_layer()`
+  /// - `mediaeditor_activate_layer()`
+  /// - `mediaeditor_deactivate_layer()`
   int mediaeditor_add_layer(
     mediaeditor_h editor,
     ffi.Pointer<ffi.UnsignedInt> layer_id,
@@ -430,58 +600,71 @@ class Tizen70CapiMediaEditor {
       int Function(mediaeditor_h, ffi.Pointer<ffi.UnsignedInt>,
           ffi.Pointer<ffi.UnsignedInt>)>();
 
-  /// @brief Removes a layer from timeline.
-  /// @since_tizen 7.0
-  /// @remarks The other layer's layer ID is not changed after removing @a layer_id.\n
-  /// If @a layer_id is not bottom layer, layer priority will be rearranged.\n
-  /// e.g. There're 3 layers like the followings.\n
-  /// \n
-  /// case 1 : remove layer ID 3.\n
-  /// The layer ID 3 is removed and other layers' priorities are not rearranged.\n
-  /// <pre>
-  /// | top    : layer ID 1, layer priority 0 (including 1 clips)
-  /// Before   |          layer ID 2, layer priority 1 (including 3 clips)
-  /// removing | bottom : layer ID 3, layer priority 2 (including 5 clips)
-  /// --------------------------------------------------------------------
-  /// After    | top    : layer ID 1, layer priority 0 (including 1 clips)
-  /// removing | bottom : layer ID 2, layer priority 1 (including 3 clips)
-  /// </pre>
-  /// \n
-  /// case 2 : remove layer ID 1.\n
-  /// <pre>
-  /// | top    : layer ID 1, layer priority 0 (including 1 clips)
-  /// Before   |          layer ID 2, layer priority 1 (including 3 clips)
-  /// removing | bottom : layer ID 3, layer priority 2 (including 5 clips)
-  /// --------------------------------------------------------------------
-  /// After    | top    : layer ID 2, layer priority 0 (including 3 clips)
-  /// removing | bottom : layer ID 3, layer priority 1 (including 5 clips)
-  /// </pre>
-  /// \n
-  /// *        case 3 : remove layer ID 2 and add a new layer.\n
-  /// <pre>
-  /// | top    : layer ID 1, layer priority 0 (including 1 clips)
-  /// Before   |          layer ID 2, layer priority 1 (including 3 clips)
-  /// removing | bottom : layer ID 3, layer priority 2 (including 5 clips)
-  /// --------------------------------------------------------------------
-  /// After    | top    : layer ID 1, layer priority 0 (including 1 clips)
-  /// removing | bottom : layer ID 3, layer priority 1 (including 5 clips)
-  /// --------------------------------------------------------------------
-  /// After    | top    : layer ID 1, layer priority 0 (including 1 clips)
-  /// adding   |        : layer ID 3, layer priority 1 (including 5 clips)
-  /// a layer  | bottom : layer ID 4, layer priority 2 (including 7 clips)
-  /// </pre>
-  /// @param[in] editor   The media editor handle
-  /// @param[in] layer_id The layer ID
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIAEDITOR_ERROR_NONE Successful
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_STATE     Invalid state
-  /// @pre @a editor state must be set to #MEDIAEDITOR_STATE_IDLE.
-  /// @post mediaeditor_layer_priority_changed_cb() will be invoked if it's set.
-  /// @see mediaeditor_add_layer()
-  /// @see mediaeditor_set_layer_priority_changed_cb()
-  /// @see mediaeditor_unset_layer_priority_changed_cb()
+  /// Removes a layer from timeline.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Remarks:**
+  /// - The other layer's layer ID is not changed after removing `layer_id`.
+  /// - If `layer_id` is not bottom layer, layer priority will be rearranged.
+  /// - e.g. There're 3 layers like the followings.
+  /// - case 1 : remove layer ID 3.
+  /// - The layer ID 3 is removed and other layers' priorities are not rearranged.
+  /// - <pre>
+  /// - | top : layer ID 1, layer priority 0 (including 1 clips)
+  /// - Before | layer ID 2, layer priority 1 (including 3 clips)
+  /// - removing | bottom : layer ID 3, layer priority 2 (including 5 clips)
+  /// - --------------------------------------------------------------------
+  /// - After | top : layer ID 1, layer priority 0 (including 1 clips)
+  /// - removing | bottom : layer ID 2, layer priority 1 (including 3 clips)
+  /// - </pre>
+  /// - case 2 : remove layer ID 1.
+  /// - <pre>
+  /// - | top : layer ID 1, layer priority 0 (including 1 clips)
+  /// - Before | layer ID 2, layer priority 1 (including 3 clips)
+  /// - removing | bottom : layer ID 3, layer priority 2 (including 5 clips)
+  /// - --------------------------------------------------------------------
+  /// - After | top : layer ID 2, layer priority 0 (including 3 clips)
+  /// - removing | bottom : layer ID 3, layer priority 1 (including 5 clips)
+  /// - </pre>
+  /// - * case 3 : remove layer ID 2 and add a new layer.
+  /// - <pre>
+  /// - | top : layer ID 1, layer priority 0 (including 1 clips)
+  /// - Before | layer ID 2, layer priority 1 (including 3 clips)
+  /// - removing | bottom : layer ID 3, layer priority 2 (including 5 clips)
+  /// - --------------------------------------------------------------------
+  /// - After | top : layer ID 1, layer priority 0 (including 1 clips)
+  /// - removing | bottom : layer ID 3, layer priority 1 (including 5 clips)
+  /// - --------------------------------------------------------------------
+  /// - After | top : layer ID 1, layer priority 0 (including 1 clips)
+  /// - adding | : layer ID 3, layer priority 1 (including 5 clips)
+  /// - a layer | bottom : layer ID 4, layer priority 2 (including 7 clips)
+  /// - </pre>
+  ///
+  /// **Parameters:**
+  /// - `editor` (in): The media editor handle
+  /// - `layer_id` (in): The layer ID
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIAEDITOR_ERROR_NONE`: Successful
+  /// - `MEDIAEDITOR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIAEDITOR_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIAEDITOR_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - `editor` state must be set to `MEDIAEDITOR_STATE_IDLE`.
+  ///
+  /// **Postconditions:**
+  /// - mediaeditor_layer_priority_changed_cb() will be invoked if it's set.
+  ///
+  /// **See also:**
+  /// - `mediaeditor_add_layer()`
+  /// - `mediaeditor_set_layer_priority_changed_cb()`
+  /// - `mediaeditor_unset_layer_priority_changed_cb()`
   int mediaeditor_remove_layer(
     mediaeditor_h editor,
     int layer_id,
@@ -498,71 +681,83 @@ class Tizen70CapiMediaEditor {
   late final _mediaeditor_remove_layer = _mediaeditor_remove_layerPtr
       .asFunction<int Function(mediaeditor_h, int)>();
 
-  /// @brief Moves a @a layer_id layer to @a layer_priority position.
-  /// @since_tizen 7.0
-  /// @remarks e.g. There're 3 layers.\n
-  /// case 1 : move layer ID 1 to layer priority 0.\n
-  /// Nothing happens.\n
-  /// <pre>
-  /// | top    : layer ID 1, layer priority 0 (including 1 clips)
-  /// Before |          layer ID 2, layer priority 1 (including 3 clips)
-  /// moving | bottom : layer ID 3, layer priority 2 (including 5 clips)
-  /// ------------------------------------------------------------------
-  /// | top    : layer ID 1, layer priority 0 (including 1 clips)
-  /// After  |          layer ID 2, layer priority 1 (including 3 clips)
-  /// moving | bottom : layer ID 3, layer priority 2 (including 5 clips)
-  /// </pre>
-  /// \n
-  /// case 2 : move layer ID 3 to layer priority 1.\n
-  /// <pre>
-  /// | top    : layer ID 1, layer priority 0 (including 1 clips)
-  /// Before |          layer ID 2, layer priority 1 (including 3 clips)
-  /// moving | bottom : layer ID 3, layer priority 2 (including 5 clips)
-  /// ------------------------------------------------------------------
-  /// | top    : layer ID 1, layer priority 0 (including 1 clips)
-  /// After  |          layer ID 3, layer priority 1 (including 5 clips)
-  /// moving | bottom : layer ID 2, layer priority 2 (including 3 clips)
-  /// </pre>
-  /// \n
-  /// case 3 : move layer ID 1 to layer priority 3.\n
-  /// (Currently, there's no priority 3 layer.)\n
-  /// <pre>
-  /// | top    : layer ID 1, layer priority 0 (including 1 clips)
-  /// Before |          layer ID 2, layer priority 1 (including 3 clips)
-  /// moving | bottom : layer ID 3, layer priority 2 (including 5 clips)
-  /// ------------------------------------------------------------------
-  /// | top    : layer ID 2, layer priority 0 (including 3 clips)
-  /// After  |          layer ID 3, layer priority 1 (including 5 clips)
-  /// moving | bottom : layer ID 1, layer priority 2 (including 1 clips)
-  /// </pre>
-  /// \n
-  /// case 4 : move layer ID 1 to layer priority 5.\n
-  /// (Currently, there's no priority 5 layer and it's not continuous sequence.)\n
-  /// <pre>
-  /// | top    : layer ID 1, layer priority 0 (including 1 clips)
-  /// Before |          layer ID 2, layer priority 1 (including 3 clips)
-  /// moving | bottom : layer ID 3, layer priority 2 (including 5 clips)
-  /// ------------------------------------------------------------------
-  /// | top    : layer ID 2, layer priority 0 (including 3 clips)
-  /// After  |          layer ID 3, layer priority 1 (including 5 clips)
-  /// moving | bottom : layer ID 1, layer priority 2 (including 1 clips)
-  /// </pre>
-  /// \n
-  /// If you can move layer to the lowest priority position, you can get the lowest priority using mediaeditor_get_layer_lowest_priority()
-  /// @param[in] editor         The media editor handle
-  /// @param[in] layer_id       The layer ID
-  /// @param[in] layer_priority The target layer priority that @a layer_id is moved
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIAEDITOR_ERROR_NONE Successful
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_STATE     Invalid state
-  /// @pre @a editor state must be set to #MEDIAEDITOR_STATE_IDLE.
-  /// @post mediaeditor_layer_priority_changed_cb() will be invoked if it's set.
-  /// @see mediaeditor_add_layer()
-  /// @see mediaeditor_get_layer_lowest_priority()
-  /// @see mediaeditor_set_layer_priority_changed_cb()
-  /// @see mediaeditor_unset_layer_priority_changed_cb()
+  /// Moves a `layer_id` layer to `layer_priority` position.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Remarks:**
+  /// - e.g. There're 3 layers.
+  /// - case 1 : move layer ID 1 to layer priority 0.
+  /// - Nothing happens.
+  /// - <pre>
+  /// - | top : layer ID 1, layer priority 0 (including 1 clips)
+  /// - Before | layer ID 2, layer priority 1 (including 3 clips)
+  /// - moving | bottom : layer ID 3, layer priority 2 (including 5 clips)
+  /// - ------------------------------------------------------------------
+  /// - | top : layer ID 1, layer priority 0 (including 1 clips)
+  /// - After | layer ID 2, layer priority 1 (including 3 clips)
+  /// - moving | bottom : layer ID 3, layer priority 2 (including 5 clips)
+  /// - </pre>
+  /// - case 2 : move layer ID 3 to layer priority 1.
+  /// - <pre>
+  /// - | top : layer ID 1, layer priority 0 (including 1 clips)
+  /// - Before | layer ID 2, layer priority 1 (including 3 clips)
+  /// - moving | bottom : layer ID 3, layer priority 2 (including 5 clips)
+  /// - ------------------------------------------------------------------
+  /// - | top : layer ID 1, layer priority 0 (including 1 clips)
+  /// - After | layer ID 3, layer priority 1 (including 5 clips)
+  /// - moving | bottom : layer ID 2, layer priority 2 (including 3 clips)
+  /// - </pre>
+  /// - case 3 : move layer ID 1 to layer priority 3.
+  /// - (Currently, there's no priority 3 layer.)
+  /// - <pre>
+  /// - | top : layer ID 1, layer priority 0 (including 1 clips)
+  /// - Before | layer ID 2, layer priority 1 (including 3 clips)
+  /// - moving | bottom : layer ID 3, layer priority 2 (including 5 clips)
+  /// - ------------------------------------------------------------------
+  /// - | top : layer ID 2, layer priority 0 (including 3 clips)
+  /// - After | layer ID 3, layer priority 1 (including 5 clips)
+  /// - moving | bottom : layer ID 1, layer priority 2 (including 1 clips)
+  /// - </pre>
+  /// - case 4 : move layer ID 1 to layer priority 5.
+  /// - (Currently, there's no priority 5 layer and it's not continuous sequence.)
+  /// - <pre>
+  /// - | top : layer ID 1, layer priority 0 (including 1 clips)
+  /// - Before | layer ID 2, layer priority 1 (including 3 clips)
+  /// - moving | bottom : layer ID 3, layer priority 2 (including 5 clips)
+  /// - ------------------------------------------------------------------
+  /// - | top : layer ID 2, layer priority 0 (including 3 clips)
+  /// - After | layer ID 3, layer priority 1 (including 5 clips)
+  /// - moving | bottom : layer ID 1, layer priority 2 (including 1 clips)
+  /// - </pre>
+  /// - If you can move layer to the lowest priority position, you can get the lowest priority using mediaeditor_get_layer_lowest_priority()
+  ///
+  /// **Parameters:**
+  /// - `editor` (in): The media editor handle
+  /// - `layer_id` (in): The layer ID
+  /// - `layer_priority` (in): The target layer priority that `layer_id` is moved
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIAEDITOR_ERROR_NONE`: Successful
+  /// - `MEDIAEDITOR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIAEDITOR_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIAEDITOR_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - `editor` state must be set to `MEDIAEDITOR_STATE_IDLE`.
+  ///
+  /// **Postconditions:**
+  /// - mediaeditor_layer_priority_changed_cb() will be invoked if it's set.
+  ///
+  /// **See also:**
+  /// - `mediaeditor_add_layer()`
+  /// - `mediaeditor_get_layer_lowest_priority()`
+  /// - `mediaeditor_set_layer_priority_changed_cb()`
+  /// - `mediaeditor_unset_layer_priority_changed_cb()`
   int mediaeditor_move_layer(
     mediaeditor_h editor,
     int layer_id,
@@ -582,18 +777,32 @@ class Tizen70CapiMediaEditor {
   late final _mediaeditor_move_layer = _mediaeditor_move_layerPtr
       .asFunction<int Function(mediaeditor_h, int, int)>();
 
-  /// @brief Activates given layer on timeline. The layer will be included when it's rendered.
-  /// @since_tizen 7.0
-  /// @remarks Note that the newly created layer will be activated by default.
-  /// @param[in] editor   The media editor handle
-  /// @param[in] layer_id The layer ID
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIAEDITOR_ERROR_NONE Successful
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_STATE     Invalid state
-  /// @pre @a editor state must be set to #MEDIAEDITOR_STATE_IDLE.
-  /// @see mediaeditor_deactivate_layer()
+  /// Activates given layer on timeline. The layer will be included when it's rendered.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Remarks:**
+  /// - Note that the newly created layer will be activated by default.
+  ///
+  /// **Parameters:**
+  /// - `editor` (in): The media editor handle
+  /// - `layer_id` (in): The layer ID
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIAEDITOR_ERROR_NONE`: Successful
+  /// - `MEDIAEDITOR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIAEDITOR_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIAEDITOR_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - `editor` state must be set to `MEDIAEDITOR_STATE_IDLE`.
+  ///
+  /// **See also:**
+  /// - `mediaeditor_deactivate_layer()`
   int mediaeditor_activate_layer(
     mediaeditor_h editor,
     int layer_id,
@@ -610,18 +819,32 @@ class Tizen70CapiMediaEditor {
   late final _mediaeditor_activate_layer = _mediaeditor_activate_layerPtr
       .asFunction<int Function(mediaeditor_h, int)>();
 
-  /// @brief Deactivates given layer on timeline.
-  /// @since_tizen 7.0
-  /// @remarks The layer is not removed actually but just excluded when it's rendered.
-  /// @param[in] editor   The media editor handle
-  /// @param[in] layer_id The layer ID
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIAEDITOR_ERROR_NONE Successful
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_STATE     Invalid state
-  /// @pre @a editor state must be set to #MEDIAEDITOR_STATE_IDLE.
-  /// @see mediaeditor_activate_layer()
+  /// Deactivates given layer on timeline.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Remarks:**
+  /// - The layer is not removed actually but just excluded when it's rendered.
+  ///
+  /// **Parameters:**
+  /// - `editor` (in): The media editor handle
+  /// - `layer_id` (in): The layer ID
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIAEDITOR_ERROR_NONE`: Successful
+  /// - `MEDIAEDITOR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIAEDITOR_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIAEDITOR_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - `editor` state must be set to `MEDIAEDITOR_STATE_IDLE`.
+  ///
+  /// **See also:**
+  /// - `mediaeditor_activate_layer()`
   int mediaeditor_deactivate_layer(
     mediaeditor_h editor,
     int layer_id,
@@ -638,18 +861,28 @@ class Tizen70CapiMediaEditor {
   late final _mediaeditor_deactivate_layer = _mediaeditor_deactivate_layerPtr
       .asFunction<int Function(mediaeditor_h, int)>();
 
-  /// @brief Gets the priority of @a layer_id layer.
-  /// @since_tizen 7.0
-  /// @param[in] editor          The media editor handle
-  /// @param[in] layer_id        The layer ID
-  /// @param[out] layer_priority The layer priority
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIAEDITOR_ERROR_NONE Successful
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_OPERATION Invalid operation
-  /// @see mediaeditor_add_layer()
-  /// @see mediaeditor_get_layer_lowest_priority()
-  /// @see mediaeditor_get_layer_id()
+  /// Gets the priority of `layer_id` layer.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Parameters:**
+  /// - `editor` (in): The media editor handle
+  /// - `layer_id` (in): The layer ID
+  /// - `layer_priority` (out): The layer priority
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIAEDITOR_ERROR_NONE`: Successful
+  /// - `MEDIAEDITOR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIAEDITOR_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `mediaeditor_add_layer()`
+  /// - `mediaeditor_get_layer_lowest_priority()`
+  /// - `mediaeditor_get_layer_id()`
   int mediaeditor_get_layer_priority(
     mediaeditor_h editor,
     int layer_id,
@@ -670,17 +903,27 @@ class Tizen70CapiMediaEditor {
       _mediaeditor_get_layer_priorityPtr.asFunction<
           int Function(mediaeditor_h, int, ffi.Pointer<ffi.UnsignedInt>)>();
 
-  /// @brief Gets the lowest priority of all layers.
-  /// @since_tizen 7.0
-  /// @param[in] editor          The media editor handle
-  /// @param[out] layer_priority The lowest layer priority
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIAEDITOR_ERROR_NONE Successful
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_OPERATION Invalid operation
-  /// @see mediaeditor_add_layer()
-  /// @see mediaeditor_get_layer_priority()
-  /// @see mediaeditor_get_layer_id()
+  /// Gets the lowest priority of all layers.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Parameters:**
+  /// - `editor` (in): The media editor handle
+  /// - `layer_priority` (out): The lowest layer priority
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIAEDITOR_ERROR_NONE`: Successful
+  /// - `MEDIAEDITOR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIAEDITOR_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `mediaeditor_add_layer()`
+  /// - `mediaeditor_get_layer_priority()`
+  /// - `mediaeditor_get_layer_id()`
   int mediaeditor_get_layer_lowest_priority(
     mediaeditor_h editor,
     ffi.Pointer<ffi.UnsignedInt> layer_priority,
@@ -699,18 +942,28 @@ class Tizen70CapiMediaEditor {
       _mediaeditor_get_layer_lowest_priorityPtr.asFunction<
           int Function(mediaeditor_h, ffi.Pointer<ffi.UnsignedInt>)>();
 
-  /// @brief Gets the layer ID of @a layer_priority layer.
-  /// @since_tizen 7.0
-  /// @param[in] editor         The media editor handle
-  /// @param[in] layer_priority The layer priority
-  /// @param[out] layer_id      The layer ID
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIAEDITOR_ERROR_NONE Successful
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_OPERATION Invalid operation
-  /// @see mediaeditor_add_layer()
-  /// @see mediaeditor_get_layer_priority()
-  /// @see mediaeditor_get_layer_lowest_priority()
+  /// Gets the layer ID of `layer_priority` layer.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Parameters:**
+  /// - `editor` (in): The media editor handle
+  /// - `layer_priority` (in): The layer priority
+  /// - `layer_id` (out): The layer ID
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIAEDITOR_ERROR_NONE`: Successful
+  /// - `MEDIAEDITOR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIAEDITOR_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `mediaeditor_add_layer()`
+  /// - `mediaeditor_get_layer_priority()`
+  /// - `mediaeditor_get_layer_lowest_priority()`
   int mediaeditor_get_layer_id(
     mediaeditor_h editor,
     int layer_priority,
@@ -731,20 +984,33 @@ class Tizen70CapiMediaEditor {
       _mediaeditor_get_layer_idPtr.asFunction<
           int Function(mediaeditor_h, int, ffi.Pointer<ffi.UnsignedInt>)>();
 
-  /// @brief Sets a callback function to be invoked when a layer priority is changed.
-  /// @since_tizen 7.0
-  /// @param[in] editor    The media editor handle
-  /// @param[in] callback  Callback function pointer
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIAEDITOR_ERROR_NONE    Successful
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_STATE     Invalid state
-  /// @pre @a editor state must be set to #MEDIAEDITOR_STATE_IDLE.
-  /// @post mediaeditor_layer_priority_changed_cb() will be invoked.
-  /// @see mediaeditor_unset_layer_priority_changed_cb()
-  /// @see mediaeditor_layer_priority_changed_cb()
+  /// Sets a callback function to be invoked when a layer priority is changed.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Parameters:**
+  /// - `editor` (in): The media editor handle
+  /// - `callback` (in): Callback function pointer
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIAEDITOR_ERROR_NONE`: Successful
+  /// - `MEDIAEDITOR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIAEDITOR_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - `editor` state must be set to `MEDIAEDITOR_STATE_IDLE`.
+  ///
+  /// **Postconditions:**
+  /// - mediaeditor_layer_priority_changed_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `mediaeditor_unset_layer_priority_changed_cb()`
+  /// - `mediaeditor_layer_priority_changed_cb()`
   int mediaeditor_set_layer_priority_changed_cb(
     mediaeditor_h editor,
     mediaeditor_layer_priority_changed_cb callback,
@@ -769,17 +1035,28 @@ class Tizen70CapiMediaEditor {
           int Function(mediaeditor_h, mediaeditor_layer_priority_changed_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets a layer priority changed callback function.
-  /// @since_tizen 7.0
-  /// @param[in] editor The media editor handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #MEDIAEDITOR_ERROR_NONE    Successful
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_STATE     Invalid state
-  /// @pre @a editor state must be set to #MEDIAEDITOR_STATE_IDLE.
-  /// @see mediaeditor_set_layer_priority_changed_cb()
+  /// Unsets a layer priority changed callback function.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Parameters:**
+  /// - `editor` (in): The media editor handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIAEDITOR_ERROR_NONE`: Successful
+  /// - `MEDIAEDITOR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIAEDITOR_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIAEDITOR_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - `editor` state must be set to `MEDIAEDITOR_STATE_IDLE`.
+  ///
+  /// **See also:**
+  /// - `mediaeditor_set_layer_priority_changed_cb()`
   int mediaeditor_unset_layer_priority_changed_cb(
     mediaeditor_h editor,
   ) {
@@ -795,34 +1072,49 @@ class Tizen70CapiMediaEditor {
       _mediaeditor_unset_layer_priority_changed_cbPtr
           .asFunction<int Function(mediaeditor_h)>();
 
-  /// @brief Adds a clip to timeline.
-  /// @since_tizen 7.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediastorage
-  /// @privilege %http://tizen.org/privilege/externalstorage
-  /// @remarks If you want to access only internal storage by using this function, you should add privilege %http://tizen.org/privilege/mediastorage.\n
-  /// Or if you want to access only external storage by using this function, you should add privilege %http://tizen.org/privilege/externalstorage.\n
-  /// If you want to access both storage, you must add both privileges.
-  /// @param[in] editor   The media editor handle
-  /// @param[in] path     The content location to add
-  /// @param[in] layer_id The layer ID to add clip
-  /// @param[in] start    The starting position of @a path clip which is placed in timeline (in milliseconds)\n
-  /// If this is less than 0, clip will be added to the end of layer. i.e. it will be set to layer's duration
-  /// @param[in] duration The duration that the clip is in effect for in the timeline (in milliseconds)\n
-  /// It should be lesser than or equal to clip's duration. If not, error will be occurred in runtime.\n
-  /// The clip should have enough internal content greater than @a duration.
-  /// @param[in] in_point The initial offset of @a path clip to use internally when outputting content (in milliseconds)
-  /// @param[out] clip_id The ID of added clip. It'll be used when you want to delete this clip.
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIAEDITOR_ERROR_NONE Successful
-  /// @retval #MEDIAEDITOR_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_STATE     Invalid state
-  /// @pre The layer must be added by calling mediaeditor_add_layer().
-  /// @pre @a editor state must be set to #MEDIAEDITOR_STATE_IDLE.
-  /// @see mediaeditor_add_layer()
-  /// @see mediaeditor_remove_clip()
+  /// Adds a clip to timeline.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediastorage>
+  /// - <http://tizen.org/privilege/externalstorage>
+  ///
+  /// **Remarks:**
+  /// - If you want to access only internal storage by using this function, you should add privilege http://tizen.org/privilege/mediastorage.
+  /// - Or if you want to access only external storage by using this function, you should add privilege http://tizen.org/privilege/externalstorage.
+  /// - If you want to access both storage, you must add both privileges.
+  ///
+  /// **Parameters:**
+  /// - `editor` (in): The media editor handle
+  /// - `path` (in): The content location to add
+  /// - `layer_id` (in): The layer ID to add clip
+  /// - `start` (in): The starting position of `path` clip which is placed in timeline (in milliseconds) If this is less than 0, clip will be added to the end of layer. i.e. it will be set to layer's duration
+  /// - `duration` (in): The duration that the clip is in effect for in the timeline (in milliseconds) It should be lesser than or equal to clip's duration. If not, error will be occurred in runtime. The clip should have enough internal content greater than `duration`.
+  /// - `in_point` (in): The initial offset of `path` clip to use internally when outputting content (in milliseconds)
+  /// - `clip_id` (out): The ID of added clip. It'll be used when you want to delete this clip.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIAEDITOR_ERROR_NONE`: Successful
+  /// - `MEDIAEDITOR_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIAEDITOR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIAEDITOR_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIAEDITOR_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The layer must be added by calling mediaeditor_add_layer().
+  /// - `editor` state must be set to `MEDIAEDITOR_STATE_IDLE`.
+  ///
+  /// **See also:**
+  /// - `mediaeditor_add_layer()`
+  /// - `mediaeditor_remove_clip()`
   int mediaeditor_add_clip(
     mediaeditor_h editor,
     ffi.Pointer<ffi.Char> path,
@@ -857,17 +1149,29 @@ class Tizen70CapiMediaEditor {
       int Function(mediaeditor_h, ffi.Pointer<ffi.Char>, int, int, int, int,
           ffi.Pointer<ffi.UnsignedInt>)>();
 
-  /// @brief Removes a clip from timeline.
-  /// @since_tizen 7.0
-  /// @param[in] editor  The media editor handle
-  /// @param[in] clip_id The clip ID that will be removed.
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIAEDITOR_ERROR_NONE Successful
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_STATE     Invalid state
-  /// @pre @a editor state must be set to #MEDIAEDITOR_STATE_IDLE.
-  /// @see mediaeditor_add_clip()
+  /// Removes a clip from timeline.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Parameters:**
+  /// - `editor` (in): The media editor handle
+  /// - `clip_id` (in): The clip ID that will be removed.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIAEDITOR_ERROR_NONE`: Successful
+  /// - `MEDIAEDITOR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIAEDITOR_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIAEDITOR_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - `editor` state must be set to `MEDIAEDITOR_STATE_IDLE`.
+  ///
+  /// **See also:**
+  /// - `mediaeditor_add_clip()`
   int mediaeditor_remove_clip(
     mediaeditor_h editor,
     int clip_id,
@@ -884,20 +1188,34 @@ class Tizen70CapiMediaEditor {
   late final _mediaeditor_remove_clip = _mediaeditor_remove_clipPtr
       .asFunction<int Function(mediaeditor_h, int)>();
 
-  /// @brief Splits a clip.
-  /// @since_tizen 7.0
-  /// @remarks After splitting the clip into two clips, the source clip's duration will be changed.
-  /// @param[in] editor       The media editor handle
-  /// @param[in] src_clip_id  The current clip ID that will be split.
-  /// @param[in] position     The time position at which the source clip will be split. (in milliseconds)
-  /// @param[out] new_clip_id The newly created clip ID.
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIAEDITOR_ERROR_NONE Successful
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_STATE     Invalid state
-  /// @pre @a editor state must be set to #MEDIAEDITOR_STATE_IDLE.
-  /// @see mediaeditor_add_clip()
+  /// Splits a clip.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Remarks:**
+  /// - After splitting the clip into two clips, the source clip's duration will be changed.
+  ///
+  /// **Parameters:**
+  /// - `editor` (in): The media editor handle
+  /// - `src_clip_id` (in): The current clip ID that will be split.
+  /// - `position` (in): The time position at which the source clip will be split. (in milliseconds)
+  /// - `new_clip_id` (out): The newly created clip ID.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIAEDITOR_ERROR_NONE`: Successful
+  /// - `MEDIAEDITOR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIAEDITOR_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIAEDITOR_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - `editor` state must be set to `MEDIAEDITOR_STATE_IDLE`.
+  ///
+  /// **See also:**
+  /// - `mediaeditor_add_clip()`
   int mediaeditor_split_clip(
     mediaeditor_h editor,
     int src_clip_id,
@@ -919,20 +1237,32 @@ class Tizen70CapiMediaEditor {
   late final _mediaeditor_split_clip = _mediaeditor_split_clipPtr.asFunction<
       int Function(mediaeditor_h, int, int, ffi.Pointer<ffi.UnsignedInt>)>();
 
-  /// @brief Groups clips.
-  /// @since_tizen 7.0
-  /// @param[in] editor    The media editor handle
-  /// @param[in] clip_ids  The clip IDs to be grouped. Array.
-  /// @param[in] size      The number of clips
-  /// @param[out] group_id The grouped clip ID.
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIAEDITOR_ERROR_NONE Successful
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_STATE     Invalid state
-  /// @pre @a editor state must be set to #MEDIAEDITOR_STATE_IDLE.
-  /// @see mediaeditor_add_clip()
-  /// @see mediaeditor_ungroup_clip()
+  /// Groups clips.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Parameters:**
+  /// - `editor` (in): The media editor handle
+  /// - `clip_ids` (in): The clip IDs to be grouped. Array.
+  /// - `size` (in): The number of clips
+  /// - `group_id` (out): The grouped clip ID.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIAEDITOR_ERROR_NONE`: Successful
+  /// - `MEDIAEDITOR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIAEDITOR_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIAEDITOR_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - `editor` state must be set to `MEDIAEDITOR_STATE_IDLE`.
+  ///
+  /// **See also:**
+  /// - `mediaeditor_add_clip()`
+  /// - `mediaeditor_ungroup_clip()`
   int mediaeditor_group_clip(
     mediaeditor_h editor,
     ffi.Pointer<ffi.UnsignedInt> clip_ids,
@@ -958,22 +1288,36 @@ class Tizen70CapiMediaEditor {
       int Function(mediaeditor_h, ffi.Pointer<ffi.UnsignedInt>, int,
           ffi.Pointer<ffi.UnsignedInt>)>();
 
-  /// @brief Ungroups a clip.
-  /// @since_tizen 7.0
-  /// @remarks Layer priorities of ungrouped clips are the same as before grouping.\n
-  /// If there's no matched @a group_id, #MEDIAEDITOR_ERROR_INVALID_PARAMETER will be returned.\n
-  /// @a clip_ids should be released using free().
-  /// @param[in] editor    The media editor handle
-  /// @param[in] group_id  The grouped clip ID
-  /// @param[out] clip_ids The ungrouped clip IDs. Array
-  /// @param[out] size     The size of ungrouped clips
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIAEDITOR_ERROR_NONE Successful
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_STATE     Invalid state
-  /// @pre @a editor state must be set to #MEDIAEDITOR_STATE_IDLE.
-  /// @see mediaeditor_group_clip()
+  /// Ungroups a clip.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Remarks:**
+  /// - Layer priorities of ungrouped clips are the same as before grouping.
+  /// - If there's no matched `group_id`, `MEDIAEDITOR_ERROR_INVALID_PARAMETER` will be returned.
+  /// - `clip_ids` should be released using free().
+  ///
+  /// **Parameters:**
+  /// - `editor` (in): The media editor handle
+  /// - `group_id` (in): The grouped clip ID
+  /// - `clip_ids` (out): The ungrouped clip IDs. Array
+  /// - `size` (out): The size of ungrouped clips
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIAEDITOR_ERROR_NONE`: Successful
+  /// - `MEDIAEDITOR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIAEDITOR_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIAEDITOR_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - `editor` state must be set to `MEDIAEDITOR_STATE_IDLE`.
+  ///
+  /// **See also:**
+  /// - `mediaeditor_group_clip()`
   int mediaeditor_ungroup_clip(
     mediaeditor_h editor,
     int group_id,
@@ -1003,18 +1347,30 @@ class Tizen70CapiMediaEditor {
               ffi.Pointer<ffi.Pointer<ffi.UnsignedInt>>,
               ffi.Pointer<ffi.UnsignedInt>)>();
 
-  /// @brief Moves a clip to different layer.
-  /// @since_tizen 7.0
-  /// @param[in] editor         The media editor handle
-  /// @param[in] clip_id        The clip ID that will be moved
-  /// @param[in] layer_priority The destination layer priority
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIAEDITOR_ERROR_NONE Successful
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_STATE     Invalid state
-  /// @pre @a editor state must be set to #MEDIAEDITOR_STATE_IDLE.
-  /// @see mediaeditor_add_clip()
+  /// Moves a clip to different layer.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Parameters:**
+  /// - `editor` (in): The media editor handle
+  /// - `clip_id` (in): The clip ID that will be moved
+  /// - `layer_priority` (in): The destination layer priority
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIAEDITOR_ERROR_NONE`: Successful
+  /// - `MEDIAEDITOR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIAEDITOR_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIAEDITOR_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - `editor` state must be set to `MEDIAEDITOR_STATE_IDLE`.
+  ///
+  /// **See also:**
+  /// - `mediaeditor_add_clip()`
   int mediaeditor_move_clip_layer(
     mediaeditor_h editor,
     int clip_id,
@@ -1034,21 +1390,33 @@ class Tizen70CapiMediaEditor {
   late final _mediaeditor_move_clip_layer = _mediaeditor_move_clip_layerPtr
       .asFunction<int Function(mediaeditor_h, int, int)>();
 
-  /// @brief Gets the start position of clip.
-  /// @since_tizen 7.0
-  /// @remarks @a start will return value set by mediaeditor_add_clip() or mediaeditor_set_clip_start().
-  /// @param[in] editor  The media editor handle
-  /// @param[in] clip_id The clip ID
-  /// @param[out] start  The current start position of clip (in milliseconds)
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIAEDITOR_ERROR_NONE Successful
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see mediaeditor_add_clip()
-  /// @see mediaeditor_set_clip_start()
-  /// @see mediaeditor_get_clip_duration()
-  /// @see mediaeditor_set_clip_duration()
-  /// @see mediaeditor_get_clip_in_point()
-  /// @see mediaeditor_set_clip_in_point()
+  /// Gets the start position of clip.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Remarks:**
+  /// - `start` will return value set by mediaeditor_add_clip() or mediaeditor_set_clip_start().
+  ///
+  /// **Parameters:**
+  /// - `editor` (in): The media editor handle
+  /// - `clip_id` (in): The clip ID
+  /// - `start` (out): The current start position of clip (in milliseconds)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIAEDITOR_ERROR_NONE`: Successful
+  /// - `MEDIAEDITOR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `mediaeditor_add_clip()`
+  /// - `mediaeditor_set_clip_start()`
+  /// - `mediaeditor_get_clip_duration()`
+  /// - `mediaeditor_set_clip_duration()`
+  /// - `mediaeditor_get_clip_in_point()`
+  /// - `mediaeditor_set_clip_in_point()`
   int mediaeditor_get_clip_start(
     mediaeditor_h editor,
     int clip_id,
@@ -1069,23 +1437,35 @@ class Tizen70CapiMediaEditor {
       _mediaeditor_get_clip_startPtr.asFunction<
           int Function(mediaeditor_h, int, ffi.Pointer<ffi.UnsignedInt>)>();
 
-  /// @brief Sets the start position of clip.
-  /// @since_tizen 7.0
-  /// @param[in] editor  The media editor handle
-  /// @param[in] clip_id The clip ID that will be changed
-  /// @param[in] start   The new start position (in milliseconds)
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIAEDITOR_ERROR_NONE Successful
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_STATE     Invalid state
-  /// @pre @a editor state must be set to #MEDIAEDITOR_STATE_IDLE.
-  /// @see mediaeditor_add_clip()
-  /// @see mediaeditor_get_clip_start()
-  /// @see mediaeditor_get_clip_duration()
-  /// @see mediaeditor_set_clip_duration()
-  /// @see mediaeditor_get_clip_in_point()
-  /// @see mediaeditor_set_clip_in_point()
+  /// Sets the start position of clip.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Parameters:**
+  /// - `editor` (in): The media editor handle
+  /// - `clip_id` (in): The clip ID that will be changed
+  /// - `start` (in): The new start position (in milliseconds)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIAEDITOR_ERROR_NONE`: Successful
+  /// - `MEDIAEDITOR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIAEDITOR_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIAEDITOR_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - `editor` state must be set to `MEDIAEDITOR_STATE_IDLE`.
+  ///
+  /// **See also:**
+  /// - `mediaeditor_add_clip()`
+  /// - `mediaeditor_get_clip_start()`
+  /// - `mediaeditor_get_clip_duration()`
+  /// - `mediaeditor_set_clip_duration()`
+  /// - `mediaeditor_get_clip_in_point()`
+  /// - `mediaeditor_set_clip_in_point()`
   int mediaeditor_set_clip_start(
     mediaeditor_h editor,
     int clip_id,
@@ -1105,21 +1485,33 @@ class Tizen70CapiMediaEditor {
   late final _mediaeditor_set_clip_start = _mediaeditor_set_clip_startPtr
       .asFunction<int Function(mediaeditor_h, int, int)>();
 
-  /// @brief Gets the duration of clip.
-  /// @since_tizen 7.0
-  /// @remarks @a duration will return value set by mediaeditor_add_clip() or mediaeditor_set_clip_duration().
-  /// @param[in] editor    The media editor handle
-  /// @param[in] clip_id   The clip ID
-  /// @param[out] duration The current time duration of clip (in milliseconds)
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIAEDITOR_ERROR_NONE Successful
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see mediaeditor_add_clip()
-  /// @see mediaeditor_get_clip_start()
-  /// @see mediaeditor_set_clip_start()
-  /// @see mediaeditor_set_clip_duration()
-  /// @see mediaeditor_get_clip_in_point()
-  /// @see mediaeditor_set_clip_in_point()
+  /// Gets the duration of clip.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Remarks:**
+  /// - `duration` will return value set by mediaeditor_add_clip() or mediaeditor_set_clip_duration().
+  ///
+  /// **Parameters:**
+  /// - `editor` (in): The media editor handle
+  /// - `clip_id` (in): The clip ID
+  /// - `duration` (out): The current time duration of clip (in milliseconds)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIAEDITOR_ERROR_NONE`: Successful
+  /// - `MEDIAEDITOR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `mediaeditor_add_clip()`
+  /// - `mediaeditor_get_clip_start()`
+  /// - `mediaeditor_set_clip_start()`
+  /// - `mediaeditor_set_clip_duration()`
+  /// - `mediaeditor_get_clip_in_point()`
+  /// - `mediaeditor_set_clip_in_point()`
   int mediaeditor_get_clip_duration(
     mediaeditor_h editor,
     int clip_id,
@@ -1140,23 +1532,35 @@ class Tizen70CapiMediaEditor {
       _mediaeditor_get_clip_durationPtr.asFunction<
           int Function(mediaeditor_h, int, ffi.Pointer<ffi.UnsignedInt>)>();
 
-  /// @brief Sets the duration of clip.
-  /// @since_tizen 7.0
-  /// @param[in] editor   The media editor handle
-  /// @param[in] clip_id  The clip ID that will be changed
-  /// @param[in] duration The new time duration (in milliseconds)
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIAEDITOR_ERROR_NONE Successful
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_STATE     Invalid state
-  /// @pre @a editor state must be set to #MEDIAEDITOR_STATE_IDLE.
-  /// @see mediaeditor_add_clip()
-  /// @see mediaeditor_get_clip_start()
-  /// @see mediaeditor_set_clip_start()
-  /// @see mediaeditor_get_clip_duration()
-  /// @see mediaeditor_get_clip_in_point()
-  /// @see mediaeditor_set_clip_in_point()
+  /// Sets the duration of clip.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Parameters:**
+  /// - `editor` (in): The media editor handle
+  /// - `clip_id` (in): The clip ID that will be changed
+  /// - `duration` (in): The new time duration (in milliseconds)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIAEDITOR_ERROR_NONE`: Successful
+  /// - `MEDIAEDITOR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIAEDITOR_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIAEDITOR_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - `editor` state must be set to `MEDIAEDITOR_STATE_IDLE`.
+  ///
+  /// **See also:**
+  /// - `mediaeditor_add_clip()`
+  /// - `mediaeditor_get_clip_start()`
+  /// - `mediaeditor_set_clip_start()`
+  /// - `mediaeditor_get_clip_duration()`
+  /// - `mediaeditor_get_clip_in_point()`
+  /// - `mediaeditor_set_clip_in_point()`
   int mediaeditor_set_clip_duration(
     mediaeditor_h editor,
     int clip_id,
@@ -1176,22 +1580,34 @@ class Tizen70CapiMediaEditor {
   late final _mediaeditor_set_clip_duration = _mediaeditor_set_clip_durationPtr
       .asFunction<int Function(mediaeditor_h, int, int)>();
 
-  /// @brief Gets the offset of clip.
-  /// @since_tizen 7.0
-  /// @remarks @a in_point will return value set by mediaeditor_add_clip() or mediaeditor_set_clip_in_point().
-  /// @param[in] editor    The media editor handle
-  /// @param[in] clip_id   The clip ID that will be changed
-  /// @param[out] in_point The offset of clip to use internally when outputting content (in milliseconds)
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIAEDITOR_ERROR_NONE Successful
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_OPERATION Invalid operation
-  /// @see mediaeditor_add_clip()
-  /// @see mediaeditor_get_clip_start()
-  /// @see mediaeditor_set_clip_start()
-  /// @see mediaeditor_get_clip_duration()
-  /// @see mediaeditor_set_clip_duration()
-  /// @see mediaeditor_set_clip_in_point()
+  /// Gets the offset of clip.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Remarks:**
+  /// - `in_point` will return value set by mediaeditor_add_clip() or mediaeditor_set_clip_in_point().
+  ///
+  /// **Parameters:**
+  /// - `editor` (in): The media editor handle
+  /// - `clip_id` (in): The clip ID that will be changed
+  /// - `in_point` (out): The offset of clip to use internally when outputting content (in milliseconds)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIAEDITOR_ERROR_NONE`: Successful
+  /// - `MEDIAEDITOR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIAEDITOR_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `mediaeditor_add_clip()`
+  /// - `mediaeditor_get_clip_start()`
+  /// - `mediaeditor_set_clip_start()`
+  /// - `mediaeditor_get_clip_duration()`
+  /// - `mediaeditor_set_clip_duration()`
+  /// - `mediaeditor_set_clip_in_point()`
   int mediaeditor_get_clip_in_point(
     mediaeditor_h editor,
     int clip_id,
@@ -1212,23 +1628,35 @@ class Tizen70CapiMediaEditor {
       _mediaeditor_get_clip_in_pointPtr.asFunction<
           int Function(mediaeditor_h, int, ffi.Pointer<ffi.UnsignedInt>)>();
 
-  /// @brief Sets the offset of clip.
-  /// @since_tizen 7.0
-  /// @param[in] editor    The media editor handle
-  /// @param[in] clip_id   The clip ID
-  /// @param[in] in_point The offset of clip to use internally when outputting content (in milliseconds)
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIAEDITOR_ERROR_NONE Successful
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_STATE     Invalid state
-  /// @pre @a editor state must be set to #MEDIAEDITOR_STATE_IDLE.
-  /// @see mediaeditor_add_clip()
-  /// @see mediaeditor_get_clip_start()
-  /// @see mediaeditor_set_clip_start()
-  /// @see mediaeditor_get_clip_duration()
-  /// @see mediaeditor_set_clip_duration()
-  /// @see mediaeditor_get_clip_in_point()
+  /// Sets the offset of clip.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Parameters:**
+  /// - `editor` (in): The media editor handle
+  /// - `clip_id` (in): The clip ID
+  /// - `in_point` (in): The offset of clip to use internally when outputting content (in milliseconds)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIAEDITOR_ERROR_NONE`: Successful
+  /// - `MEDIAEDITOR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIAEDITOR_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIAEDITOR_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - `editor` state must be set to `MEDIAEDITOR_STATE_IDLE`.
+  ///
+  /// **See also:**
+  /// - `mediaeditor_add_clip()`
+  /// - `mediaeditor_get_clip_start()`
+  /// - `mediaeditor_set_clip_start()`
+  /// - `mediaeditor_get_clip_duration()`
+  /// - `mediaeditor_set_clip_duration()`
+  /// - `mediaeditor_get_clip_in_point()`
   int mediaeditor_set_clip_in_point(
     mediaeditor_h editor,
     int clip_id,
@@ -1248,20 +1676,32 @@ class Tizen70CapiMediaEditor {
   late final _mediaeditor_set_clip_in_point = _mediaeditor_set_clip_in_pointPtr
       .asFunction<int Function(mediaeditor_h, int, int)>();
 
-  /// @brief Gets the resolution of clip.
-  /// @since_tizen 7.0
-  /// @remarks If the clip doesn't have video, #MEDIAEDITOR_ERROR_INVALID_OPERATION will be returned.\n
-  /// @a width and @a height will return its original size if it's not changed by mediaeditor_set_clip_resolution().
-  /// @param[in] editor  The media editor handle
-  /// @param[in] clip_id The clip ID
-  /// @param[out] width  The width
-  /// @param[out] height The height
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIAEDITOR_ERROR_NONE Successful
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_OPERATION Invalid operation
-  /// @see mediaeditor_add_clip()
-  /// @see mediaeditor_set_clip_resolution()
+  /// Gets the resolution of clip.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Remarks:**
+  /// - If the clip doesn't have video, `MEDIAEDITOR_ERROR_INVALID_OPERATION` will be returned.
+  /// - `width` and `height` will return its original size if it's not changed by mediaeditor_set_clip_resolution().
+  ///
+  /// **Parameters:**
+  /// - `editor` (in): The media editor handle
+  /// - `clip_id` (in): The clip ID
+  /// - `width` (out): The width
+  /// - `height` (out): The height
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIAEDITOR_ERROR_NONE`: Successful
+  /// - `MEDIAEDITOR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIAEDITOR_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `mediaeditor_add_clip()`
+  /// - `mediaeditor_set_clip_resolution()`
   int mediaeditor_get_clip_resolution(
     mediaeditor_h editor,
     int clip_id,
@@ -1286,21 +1726,35 @@ class Tizen70CapiMediaEditor {
           int Function(mediaeditor_h, int, ffi.Pointer<ffi.UnsignedInt>,
               ffi.Pointer<ffi.UnsignedInt>)>();
 
-  /// @brief Sets the resolution of clip.
-  /// @since_tizen 7.0
-  /// @remarks If the clip doesn't have video, #MEDIAEDITOR_ERROR_INVALID_OPERATION will be returned.
-  /// @param[in] editor  The media editor handle
-  /// @param[in] clip_id The clip ID
-  /// @param[in] width   The width
-  /// @param[in] height  The height
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIAEDITOR_ERROR_NONE Successful
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_STATE     Invalid state
-  /// @pre @a editor state must be set to #MEDIAEDITOR_STATE_IDLE.
-  /// @see mediaeditor_add_clip()
-  /// @see mediaeditor_get_clip_resolution()
+  /// Sets the resolution of clip.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Remarks:**
+  /// - If the clip doesn't have video, `MEDIAEDITOR_ERROR_INVALID_OPERATION` will be returned.
+  ///
+  /// **Parameters:**
+  /// - `editor` (in): The media editor handle
+  /// - `clip_id` (in): The clip ID
+  /// - `width` (in): The width
+  /// - `height` (in): The height
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIAEDITOR_ERROR_NONE`: Successful
+  /// - `MEDIAEDITOR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIAEDITOR_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIAEDITOR_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - `editor` state must be set to `MEDIAEDITOR_STATE_IDLE`.
+  ///
+  /// **See also:**
+  /// - `mediaeditor_add_clip()`
+  /// - `mediaeditor_get_clip_resolution()`
   int mediaeditor_set_clip_resolution(
     mediaeditor_h editor,
     int clip_id,
@@ -1323,20 +1777,32 @@ class Tizen70CapiMediaEditor {
       _mediaeditor_set_clip_resolutionPtr
           .asFunction<int Function(mediaeditor_h, int, int, int)>();
 
-  /// @brief Gets the position of clip.
-  /// @since_tizen 7.0
-  /// @remarks If the clip doesn't have video, #MEDIAEDITOR_ERROR_INVALID_OPERATION will be returned.\n
-  /// The default position is the top-left corner(0, 0).
-  /// @param[in] editor  The media editor handle
-  /// @param[in] clip_id The clip ID
-  /// @param[out] pos_x  The horizontal position
-  /// @param[out] pos_y  The vertical position
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIAEDITOR_ERROR_NONE Successful
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_OPERATION Invalid operation
-  /// @see mediaeditor_add_clip()
-  /// @see mediaeditor_set_clip_position()
+  /// Gets the position of clip.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Remarks:**
+  /// - If the clip doesn't have video, `MEDIAEDITOR_ERROR_INVALID_OPERATION` will be returned.
+  /// - The default position is the top-left corner(0, 0).
+  ///
+  /// **Parameters:**
+  /// - `editor` (in): The media editor handle
+  /// - `clip_id` (in): The clip ID
+  /// - `pos_x` (out): The horizontal position
+  /// - `pos_y` (out): The vertical position
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIAEDITOR_ERROR_NONE`: Successful
+  /// - `MEDIAEDITOR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIAEDITOR_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `mediaeditor_add_clip()`
+  /// - `mediaeditor_set_clip_position()`
   int mediaeditor_get_clip_position(
     mediaeditor_h editor,
     int clip_id,
@@ -1363,21 +1829,35 @@ class Tizen70CapiMediaEditor {
           int Function(mediaeditor_h, int, ffi.Pointer<ffi.UnsignedInt>,
               ffi.Pointer<ffi.UnsignedInt>)>();
 
-  /// @brief Sets the position of clip.
-  /// @since_tizen 7.0
-  /// @remarks If the clip doesn't have video, #MEDIAEDITOR_ERROR_INVALID_OPERATION will be returned.
-  /// @param[in] editor  The media editor handle
-  /// @param[in] clip_id The clip ID
-  /// @param[in] pos_x   The horizontal position
-  /// @param[in] pos_y   The vertical position
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIAEDITOR_ERROR_NONE Successful
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_STATE     Invalid state
-  /// @pre @a editor state must be set to #MEDIAEDITOR_STATE_IDLE.
-  /// @see mediaeditor_add_clip()
-  /// @see mediaeditor_get_clip_position()
+  /// Sets the position of clip.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Remarks:**
+  /// - If the clip doesn't have video, `MEDIAEDITOR_ERROR_INVALID_OPERATION` will be returned.
+  ///
+  /// **Parameters:**
+  /// - `editor` (in): The media editor handle
+  /// - `clip_id` (in): The clip ID
+  /// - `pos_x` (in): The horizontal position
+  /// - `pos_y` (in): The vertical position
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIAEDITOR_ERROR_NONE`: Successful
+  /// - `MEDIAEDITOR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIAEDITOR_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIAEDITOR_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - `editor` state must be set to `MEDIAEDITOR_STATE_IDLE`.
+  ///
+  /// **See also:**
+  /// - `mediaeditor_add_clip()`
+  /// - `mediaeditor_get_clip_position()`
   int mediaeditor_set_clip_position(
     mediaeditor_h editor,
     int clip_id,
@@ -1399,19 +1879,30 @@ class Tizen70CapiMediaEditor {
   late final _mediaeditor_set_clip_position = _mediaeditor_set_clip_positionPtr
       .asFunction<int Function(mediaeditor_h, int, int, int)>();
 
-  /// @brief Gets the volume of clip.
-  /// @since_tizen 7.0
-  /// @remarks If the clip doesn't have audio, #MEDIAEDITOR_ERROR_INVALID_OPERATION will be returned.
-  /// @param[in] editor   The media editor handle
-  /// @param[in] clip_id  The clip ID
-  /// @param[out] volume  The current audio volume (0.0 ~ 10.0)
-  /// The default value is 1.0 (100%)
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIAEDITOR_ERROR_NONE Successful
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_OPERATION Invalid operation
-  /// @see mediaeditor_add_clip()
-  /// @see mediaeditor_set_clip_volume()
+  /// Gets the volume of clip.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Remarks:**
+  /// - If the clip doesn't have audio, `MEDIAEDITOR_ERROR_INVALID_OPERATION` will be returned.
+  ///
+  /// **Parameters:**
+  /// - `editor` (in): The media editor handle
+  /// - `clip_id` (in): The clip ID
+  /// - `volume` (out): The current audio volume (0.0 ~ 10.0) The default value is 1.0 (100%)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIAEDITOR_ERROR_NONE`: Successful
+  /// - `MEDIAEDITOR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIAEDITOR_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `mediaeditor_add_clip()`
+  /// - `mediaeditor_set_clip_volume()`
   int mediaeditor_get_clip_volume(
     mediaeditor_h editor,
     int clip_id,
@@ -1431,20 +1922,34 @@ class Tizen70CapiMediaEditor {
   late final _mediaeditor_get_clip_volume = _mediaeditor_get_clip_volumePtr
       .asFunction<int Function(mediaeditor_h, int, ffi.Pointer<ffi.Double>)>();
 
-  /// @brief Sets the volume of clip.
-  /// @since_tizen 7.0
-  /// @remarks If the clip doesn't have audio, #MEDIAEDITOR_ERROR_INVALID_OPERATION will be returned.
-  /// @param[in] editor  The media editor handle
-  /// @param[in] clip_id The clip ID
-  /// @param[in] volume  The new audio volume (0.0 ~ 10.0)\n
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIAEDITOR_ERROR_NONE Successful
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_STATE     Invalid state
-  /// @pre @a editor state must be set to #MEDIAEDITOR_STATE_IDLE.
-  /// @see mediaeditor_add_clip()
-  /// @see mediaeditor_get_clip_volume()
+  /// Sets the volume of clip.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Remarks:**
+  /// - If the clip doesn't have audio, `MEDIAEDITOR_ERROR_INVALID_OPERATION` will be returned.
+  ///
+  /// **Parameters:**
+  /// - `editor` (in): The media editor handle
+  /// - `clip_id` (in): The clip ID
+  /// - `volume` (in): The new audio volume (0.0 ~ 10.0)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIAEDITOR_ERROR_NONE`: Successful
+  /// - `MEDIAEDITOR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIAEDITOR_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIAEDITOR_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - `editor` state must be set to `MEDIAEDITOR_STATE_IDLE`.
+  ///
+  /// **See also:**
+  /// - `mediaeditor_add_clip()`
+  /// - `mediaeditor_get_clip_volume()`
   int mediaeditor_set_clip_volume(
     mediaeditor_h editor,
     int clip_id,
@@ -1464,24 +1969,38 @@ class Tizen70CapiMediaEditor {
   late final _mediaeditor_set_clip_volume = _mediaeditor_set_clip_volumePtr
       .asFunction<int Function(mediaeditor_h, int, double)>();
 
-  /// @brief Adds transition effect to the overlapped clip section.
-  /// @since_tizen 7.0
-  /// @remarks Note that clips should be already overlapped. If not, error will be occurred.\n
-  /// Only one transition effect can be applied in the overlapped section.\n
-  /// For each overlapped section, this function should be called to apply transition effect.
-  /// @param[in] editor   The media editor handle
-  /// @param[in] type     The transition type
-  /// @param[in] layer_id The layer ID
-  /// @param[in] start    The start position of overlapped clip area to be applied transition effect
-  /// @param[in] duration The duration of overlapped clip area to be applied transition effect
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIAEDITOR_ERROR_NONE Successful
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_STATE     Invalid state
-  /// @pre @a editor state must be set to #MEDIAEDITOR_STATE_IDLE.
-  /// @see mediaeditor_add_layer()
-  /// @see mediaeditor_add_clip()
+  /// Adds transition effect to the overlapped clip section.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Remarks:**
+  /// - Note that clips should be already overlapped. If not, error will be occurred.
+  /// - Only one transition effect can be applied in the overlapped section.
+  /// - For each overlapped section, this function should be called to apply transition effect.
+  ///
+  /// **Parameters:**
+  /// - `editor` (in): The media editor handle
+  /// - `type` (in): The transition type
+  /// - `layer_id` (in): The layer ID
+  /// - `start` (in): The start position of overlapped clip area to be applied transition effect
+  /// - `duration` (in): The duration of overlapped clip area to be applied transition effect
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIAEDITOR_ERROR_NONE`: Successful
+  /// - `MEDIAEDITOR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIAEDITOR_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIAEDITOR_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - `editor` state must be set to `MEDIAEDITOR_STATE_IDLE`.
+  ///
+  /// **See also:**
+  /// - `mediaeditor_add_layer()`
+  /// - `mediaeditor_add_clip()`
   int mediaeditor_add_transition(
     mediaeditor_h editor,
     int type,
@@ -1505,23 +2024,37 @@ class Tizen70CapiMediaEditor {
   late final _mediaeditor_add_transition = _mediaeditor_add_transitionPtr
       .asFunction<int Function(mediaeditor_h, int, int, int, int)>();
 
-  /// @brief Adds a new effect.
-  /// @since_tizen 7.0
-  /// @remarks #MEDIAEDITOR_EFFECT_AUDIO_TYPE_FADE_IN and #MEDIAEDITOR_EFFECT_AUDIO_TYPE_FADE_OUT can not be rolled back using
-  /// mediaeditor_remove_effect().
-  /// @param[in] editor     The media editor handle
-  /// @param[in] type       The effect type
-  /// @param[in] layer_id   The layer priority
-  /// @param[in] start      The starting position of effect which is placed in timeline (in milliseconds)
-  /// @param[in] duration   The duration of effect (in milliseconds)
-  /// @param[out] effect_id The effect ID
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIAEDITOR_ERROR_NONE Successful
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_STATE     Invalid state
-  /// @pre @a editor state must be set to #MEDIAEDITOR_STATE_IDLE.
-  /// @see mediaeditor_remove_effect()
+  /// Adds a new effect.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Remarks:**
+  /// - `MEDIAEDITOR_EFFECT_AUDIO_TYPE_FADE_IN` and `MEDIAEDITOR_EFFECT_AUDIO_TYPE_FADE_OUT` can not be rolled back using
+  /// - mediaeditor_remove_effect().
+  ///
+  /// **Parameters:**
+  /// - `editor` (in): The media editor handle
+  /// - `type` (in): The effect type
+  /// - `layer_id` (in): The layer priority
+  /// - `start` (in): The starting position of effect which is placed in timeline (in milliseconds)
+  /// - `duration` (in): The duration of effect (in milliseconds)
+  /// - `effect_id` (out): The effect ID
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIAEDITOR_ERROR_NONE`: Successful
+  /// - `MEDIAEDITOR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIAEDITOR_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIAEDITOR_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - `editor` state must be set to `MEDIAEDITOR_STATE_IDLE`.
+  ///
+  /// **See also:**
+  /// - `mediaeditor_remove_effect()`
   int mediaeditor_add_effect(
     mediaeditor_h editor,
     int type,
@@ -1553,17 +2086,29 @@ class Tizen70CapiMediaEditor {
       int Function(
           mediaeditor_h, int, int, int, int, ffi.Pointer<ffi.UnsignedInt>)>();
 
-  /// @brief Removes an effect from timeline.
-  /// @since_tizen 7.0
-  /// @param[in] editor    The media editor handle
-  /// @param[in] effect_id The effect ID
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIAEDITOR_ERROR_NONE Successful
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_STATE     Invalid state
-  /// @pre @a editor state must be set to #MEDIAEDITOR_STATE_IDLE.
-  /// @see mediaeditor_add_effect()
+  /// Removes an effect from timeline.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Parameters:**
+  /// - `editor` (in): The media editor handle
+  /// - `effect_id` (in): The effect ID
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIAEDITOR_ERROR_NONE`: Successful
+  /// - `MEDIAEDITOR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIAEDITOR_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIAEDITOR_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - `editor` state must be set to `MEDIAEDITOR_STATE_IDLE`.
+  ///
+  /// **See also:**
+  /// - `mediaeditor_add_effect()`
   int mediaeditor_remove_effect(
     mediaeditor_h editor,
     int effect_id,
@@ -1580,24 +2125,42 @@ class Tizen70CapiMediaEditor {
   late final _mediaeditor_remove_effect = _mediaeditor_remove_effectPtr
       .asFunction<int Function(mediaeditor_h, int)>();
 
-  /// @brief Creates a project to @a path.
-  /// @since_tizen 7.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediastorage
-  /// @privilege %http://tizen.org/privilege/externalstorage
-  /// @remarks If you want to access only internal storage by using this function, you should add privilege %http://tizen.org/privilege/mediastorage.\n
-  /// Or if you want to access only external storage by using this function, you should add privilege %http://tizen.org/privilege/externalstorage.\n
-  /// If you want to access both storage, you must add both privileges.
-  /// @param[in] editor The media editor handle
-  /// @param[in] path   The path to create project
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIAEDITOR_ERROR_NONE Successful
-  /// @retval #MEDIAEDITOR_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_STATE     Invalid state
-  /// @pre @a editor state must be set to #MEDIAEDITOR_STATE_IDLE.
-  /// @see mediaeditor_save_project()
+  /// Creates a project to `path`.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediastorage>
+  /// - <http://tizen.org/privilege/externalstorage>
+  ///
+  /// **Remarks:**
+  /// - If you want to access only internal storage by using this function, you should add privilege http://tizen.org/privilege/mediastorage.
+  /// - Or if you want to access only external storage by using this function, you should add privilege http://tizen.org/privilege/externalstorage.
+  /// - If you want to access both storage, you must add both privileges.
+  ///
+  /// **Parameters:**
+  /// - `editor` (in): The media editor handle
+  /// - `path` (in): The path to create project
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIAEDITOR_ERROR_NONE`: Successful
+  /// - `MEDIAEDITOR_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `MEDIAEDITOR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIAEDITOR_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIAEDITOR_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - `editor` state must be set to `MEDIAEDITOR_STATE_IDLE`.
+  ///
+  /// **See also:**
+  /// - `mediaeditor_save_project()`
   int mediaeditor_create_project(
     mediaeditor_h editor,
     ffi.Pointer<ffi.Char> path,
@@ -1615,27 +2178,47 @@ class Tizen70CapiMediaEditor {
   late final _mediaeditor_create_project = _mediaeditor_create_projectPtr
       .asFunction<int Function(mediaeditor_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Loads a project from @a path, asynchronously.
-  /// @since_tizen 7.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/mediastorage
-  /// @privilege %http://tizen.org/privilege/externalstorage
-  /// @remarks If you want to access only internal storage by using this function, you should add privilege %http://tizen.org/privilege/mediastorage.\n
-  /// Or if you want to access only external storage by using this function, you should add privilege %http://tizen.org/privilege/externalstorage.\n
-  /// If you want to access both storage, you must add both privileges.
-  /// @param[in] editor The media editor handle
-  /// @param[in] path   The path to the saved project
-  /// @param[in] callback  The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIAEDITOR_ERROR_NONE Successful
-  /// @retval #MEDIAEDITOR_ERROR_PERMISSION_DENIED The access to the resources can not be granted
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_STATE     Invalid state
-  /// @pre @a editor state must be set to #MEDIAEDITOR_STATE_IDLE.
-  /// @post mediaeditor_project_loaded_cb() will be invoked.
-  /// @see mediaeditor_save_project()
+  /// Loads a project from `path`, asynchronously.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/mediastorage>
+  /// - <http://tizen.org/privilege/externalstorage>
+  ///
+  /// **Remarks:**
+  /// - If you want to access only internal storage by using this function, you should add privilege http://tizen.org/privilege/mediastorage.
+  /// - Or if you want to access only external storage by using this function, you should add privilege http://tizen.org/privilege/externalstorage.
+  /// - If you want to access both storage, you must add both privileges.
+  ///
+  /// **Parameters:**
+  /// - `editor` (in): The media editor handle
+  /// - `path` (in): The path to the saved project
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIAEDITOR_ERROR_NONE`: Successful
+  /// - `MEDIAEDITOR_ERROR_PERMISSION_DENIED`: The access to the resources can not be granted
+  /// - `MEDIAEDITOR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIAEDITOR_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIAEDITOR_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - `editor` state must be set to `MEDIAEDITOR_STATE_IDLE`.
+  ///
+  /// **Postconditions:**
+  /// - mediaeditor_project_loaded_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `mediaeditor_save_project()`
   int mediaeditor_load_project(
     mediaeditor_h editor,
     ffi.Pointer<ffi.Char> path,
@@ -1662,19 +2245,33 @@ class Tizen70CapiMediaEditor {
           int Function(mediaeditor_h, ffi.Pointer<ffi.Char>,
               mediaeditor_project_loaded_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Saves the current editing information.
-  /// @since_tizen 7.0
-  /// @remarks The project will be saved to the project's path, which was set during creation or loading.
-  /// @param[in] editor The media editor handle
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIAEDITOR_ERROR_NONE Successful
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIAEDITOR_ERROR_INVALID_STATE     Invalid state
-  /// @pre @a editor state must be set to #MEDIAEDITOR_STATE_IDLE.
-  /// @pre The project must be created or loaded.
-  /// @see mediaeditor_create_project()
-  /// @see mediaeditor_load_project()
+  /// Saves the current editing information.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Remarks:**
+  /// - The project will be saved to the project's path, which was set during creation or loading.
+  ///
+  /// **Parameters:**
+  /// - `editor` (in): The media editor handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIAEDITOR_ERROR_NONE`: Successful
+  /// - `MEDIAEDITOR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIAEDITOR_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIAEDITOR_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - `editor` state must be set to `MEDIAEDITOR_STATE_IDLE`.
+  /// - The project must be created or loaded.
+  ///
+  /// **See also:**
+  /// - `mediaeditor_create_project()`
+  /// - `mediaeditor_load_project()`
   int mediaeditor_save_project(
     mediaeditor_h editor,
   ) {
@@ -1690,8 +2287,11 @@ class Tizen70CapiMediaEditor {
       _mediaeditor_save_projectPtr.asFunction<int Function(mediaeditor_h)>();
 }
 
-/// @brief Enumeration for the error codes of media editor.
-/// @since_tizen 7.0
+/// Enumeration for the error codes of media editor.
+///
+/// **Since Tizen:**
+/// - 7.0
+/// @nodoc
 abstract class mediaeditor_error_e {
   /// < Successful
   static const int MEDIAEDITOR_ERROR_NONE = 0;
@@ -1718,8 +2318,11 @@ abstract class mediaeditor_error_e {
   static const int MEDIAEDITOR_ERROR_RESOURCE_FAILED = -51183613;
 }
 
-/// @brief Enumeration for the media editor state.
-/// @since_tizen 7.0
+/// Enumeration for the media editor state.
+///
+/// **Since Tizen:**
+/// - 7.0
+/// @nodoc
 abstract class mediaeditor_state_e {
   /// < Created, but not started to render
   static const int MEDIAEDITOR_STATE_IDLE = 0;
@@ -1731,8 +2334,11 @@ abstract class mediaeditor_state_e {
   static const int MEDIAEDITOR_STATE_PREVIEW = 2;
 }
 
-/// @brief Enumeration for the media editor display type.
-/// @since_tizen 7.0
+/// Enumeration for the media editor display type.
+///
+/// **Since Tizen:**
+/// - 7.0
+/// @nodoc
 abstract class mediaeditor_display_type_e {
   /// < Overlay surface display
   static const int MEDIAEDITOR_DISPLAY_TYPE_OVERLAY = 0;
@@ -1747,8 +2353,11 @@ abstract class mediaeditor_display_type_e {
   static const int MEDIAEDITOR_DISPLAY_TYPE_NONE = 3;
 }
 
-/// @brief Enumeration for the transition type.
-/// @since_tizen 7.0
+/// Enumeration for the transition type.
+///
+/// **Since Tizen:**
+/// - 7.0
+/// @nodoc
 abstract class mediaeditor_transition_type_e {
   /// < Transition none
   static const int MEDIAEDITOR_TRANSITION_TYPE_NONE = 0;
@@ -1967,9 +2576,14 @@ abstract class mediaeditor_transition_type_e {
   static const int MEDIAEDITOR_TRANSITION_TYPE_CROSSFADE = 512;
 }
 
-/// @brief Enumeration for the effect type.
-/// @since_tizen 7.0
-/// @remarks #MEDIAEDITOR_EFFECT_AUDIO_TYPE_FADE_IN and #MEDIAEDITOR_EFFECT_AUDIO_TYPE_FADE_OUT Can not be rolled back *
+/// Enumeration for the effect type.
+///
+/// **Since Tizen:**
+/// - 7.0
+///
+/// **Remarks:**
+/// - `MEDIAEDITOR_EFFECT_AUDIO_TYPE_FADE_IN` and `MEDIAEDITOR_EFFECT_AUDIO_TYPE_FADE_OUT` Can not be rolled back *
+/// @nodoc
 abstract class mediaeditor_effect_type_e {
   /// < None
   static const int MEDIAEDITOR_EFFECT_TYPE_NONE = 0;
@@ -2020,61 +2634,93 @@ abstract class mediaeditor_effect_type_e {
   static const int MEDIAEDITOR_EFFECT_AUDIO_TYPE_ECHO = 15;
 }
 
-/// @brief The media editor handle.
-/// @since_tizen 7.0
+/// The media editor handle.
+///
+/// **Since Tizen:**
+/// - 7.0
+/// @nodoc
 typedef mediaeditor_h = ffi.Pointer<ffi.Void>;
 
-/// @brief The media editor display handle type.
-/// @since_tizen 7.0
+/// The media editor display handle type.
+///
+/// **Since Tizen:**
+/// - 7.0
+/// @nodoc
 typedef mediaeditor_display_h = ffi.Pointer<ffi.Void>;
 
-/// @brief Called when rendering output is completed.
-/// @since_tizen 7.0
-/// @param[in] user_data The user data passed from the callback registration function
-/// @see mediaeditor_start_render()
+/// Called when rendering output is completed.
+///
+/// **Since Tizen:**
+/// - 7.0
+///
+/// **Parameters:**
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `mediaeditor_start_render()`
+/// @nodoc
 typedef mediaeditor_render_completed_cb
     = ffi.Pointer<ffi.NativeFunction<mediaeditor_render_completed_cbFunction>>;
+/// @nodoc
 typedef mediaeditor_render_completed_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmediaeditor_render_completed_cbFunction = void Function(
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when an error occurs.
-/// @details The following error codes can be received:\n
-/// #MEDIAEDITOR_ERROR_INVALID_OPERATION\n
-/// #MEDIAEDITOR_ERROR_INVALID_STATE\n
-/// #MEDIAEDITOR_ERROR_RESOURCE_CONFLICT\n
-/// #MEDIAEDITOR_ERROR_RESOURCE_FAILED
+/// Called when an error occurs.
 ///
-/// @since_tizen 7.0
-/// @param[in] error     The error code
-/// @param[in] state     The state when error was occurred
-/// @param[in] user_data The user data passed from the callback registration function
-/// @see mediaeditor_set_error_cb()
-/// @see mediaeditor_unset_error_cb()
+/// The following error codes can be received: `MEDIAEDITOR_ERROR_INVALID_OPERATION` `MEDIAEDITOR_ERROR_INVALID_STATE` `MEDIAEDITOR_ERROR_RESOURCE_CONFLICT` `MEDIAEDITOR_ERROR_RESOURCE_FAILED`
+///
+/// **Since Tizen:**
+/// - 7.0
+///
+/// **Parameters:**
+/// - `error` (in): The error code
+/// - `state` (in): The state when error was occurred
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `mediaeditor_set_error_cb()`
+/// - `mediaeditor_unset_error_cb()`
+/// @nodoc
 typedef mediaeditor_error_cb
     = ffi.Pointer<ffi.NativeFunction<mediaeditor_error_cbFunction>>;
+/// @nodoc
 typedef mediaeditor_error_cbFunction = ffi.Void Function(
     ffi.Int32 error, ffi.Int32 state, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmediaeditor_error_cbFunction = void Function(
     int error, int state, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the state of media editor is changed.
-/// @since_tizen 7.0
-/// @param[in] previous  The previous state
-/// @param[in] current   The current state
-/// @param[in] user_data The user data passed from the callback registration function
-/// @see mediaeditor_set_state_changed_cb()
-/// @see mediaeditor_unset_state_changed_cb()
+/// Called when the state of media editor is changed.
+///
+/// **Since Tizen:**
+/// - 7.0
+///
+/// **Parameters:**
+/// - `previous` (in): The previous state
+/// - `current` (in): The current state
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `mediaeditor_set_state_changed_cb()`
+/// - `mediaeditor_unset_state_changed_cb()`
+/// @nodoc
 typedef mediaeditor_state_changed_cb
     = ffi.Pointer<ffi.NativeFunction<mediaeditor_state_changed_cbFunction>>;
+/// @nodoc
 typedef mediaeditor_state_changed_cbFunction = ffi.Void Function(
     ffi.Int32 previous, ffi.Int32 current, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmediaeditor_state_changed_cbFunction = void Function(
     int previous, int current, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief The structure type of the layer information.
-/// @since_tizen 7.0
+/// The structure type of the layer information.
+///
+/// **Since Tizen:**
+/// - 7.0
+/// @nodoc
 final class mediaeditor_layer_info_s extends ffi.Struct {
   /// < The layer ID
   @ffi.UnsignedInt()
@@ -2085,32 +2731,52 @@ final class mediaeditor_layer_info_s extends ffi.Struct {
   external int priority;
 }
 
-/// @brief Called when the priority of layers is changed.
-/// @since_tizen 7.0
-/// @remarks @a layer_info should be released using free().
-/// @param[in] layer_infos The layer information including layer id and its priority. It's array.
-/// @param[in] size        The number of layer_infos array
-/// @param[in] user_data   The user data passed from the callback registration function
-/// @see mediaeditor_set_layer_priority_changed_cb()
-/// @see mediaeditor_unset_layer_priority_changed_cb()
+/// Called when the priority of layers is changed.
+///
+/// **Since Tizen:**
+/// - 7.0
+///
+/// **Remarks:**
+/// - `layer_info` should be released using free().
+///
+/// **Parameters:**
+/// - `layer_infos` (in): The layer information including layer id and its priority. It's array.
+/// - `size` (in): The number of layer_infos array
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `mediaeditor_set_layer_priority_changed_cb()`
+/// - `mediaeditor_unset_layer_priority_changed_cb()`
+/// @nodoc
 typedef mediaeditor_layer_priority_changed_cb = ffi
     .Pointer<ffi.NativeFunction<mediaeditor_layer_priority_changed_cbFunction>>;
+/// @nodoc
 typedef mediaeditor_layer_priority_changed_cbFunction = ffi.Void Function(
     ffi.Pointer<mediaeditor_layer_info_s> layer_infos,
     ffi.UnsignedInt size,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmediaeditor_layer_priority_changed_cbFunction = void Function(
     ffi.Pointer<mediaeditor_layer_info_s> layer_infos,
     int size,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when a timeline of the project is loaded.
-/// @since_tizen 7.0
-/// @param[in] user_data The user data passed from the callback registration function
-/// @see mediaeditor_load_project()
+/// Called when a timeline of the project is loaded.
+///
+/// **Since Tizen:**
+/// - 7.0
+///
+/// **Parameters:**
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `mediaeditor_load_project()`
+/// @nodoc
 typedef mediaeditor_project_loaded_cb
     = ffi.Pointer<ffi.NativeFunction<mediaeditor_project_loaded_cbFunction>>;
+/// @nodoc
 typedef mediaeditor_project_loaded_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmediaeditor_project_loaded_cbFunction = void Function(
     ffi.Pointer<ffi.Void> user_data);

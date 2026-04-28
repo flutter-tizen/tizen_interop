@@ -1,3 +1,6 @@
+/// {@category 10.0/tizen}
+library tizen_interop_10_0.capi_system_usbhost;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen capi-system-usbhost APIs.
+/// {@category 10.0/tizen}
 class Tizen100CapiSystemUsbhost {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,19 +28,34 @@ class Tizen100CapiSystemUsbhost {
           lookup)
       : _lookup = lookup;
 
-  /// @ingroup CAPI_USB_HOST_MODULE
-  /// @brief Initializes a USB host context, providing a handle to it
-  /// @details This function must be called before any other function from this module.
-  /// @since_tizen 3.0
-  /// @remarks @a ctx should be destroyed by calling usb_host_destroy() when no longer needed.
-  /// @param[out] ctx Context pointer
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #USB_HOST_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @post usb_host_destroy() should be called to free resources allocated for ctx by this function.
+  /// Initializes a USB host context, providing a handle to it
   ///
-  /// @code
+  /// This function must be called before any other function from this module.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - `ctx` should be destroyed by calling usb_host_destroy() when no longer needed.
+  ///
+  /// **Parameters:**
+  /// - `ctx` (out): Context pointer
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  ///
+  /// **Postconditions:**
+  /// - usb_host_destroy() should be called to free resources allocated for ctx by this function.
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   ///
   /// int main(void)
@@ -54,7 +73,7 @@ class Tizen100CapiSystemUsbhost {
   /// if (ret != USB_HOST_ERROR_NONE)
   /// handle_error(ret);
   /// }
-  /// @endcode
+  /// ```
   int usb_host_create(
     ffi.Pointer<usb_host_context_h> ctx,
   ) {
@@ -70,19 +89,30 @@ class Tizen100CapiSystemUsbhost {
   late final _usb_host_create = _usb_host_createPtr
       .asFunction<int Function(ffi.Pointer<usb_host_context_h>)>();
 
-  /// @ingroup CAPI_USB_HOST_MODULE
-  /// @brief Deinitializes a USB host context, invalidating a handle
-  /// @details This function must be called after closing all devices
-  /// and before application close. It has to be called to clean
-  /// the memory used by library.
-  /// @since_tizen 3.0
-  /// @param[in] ctx Context to deinitialize
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #USB_HOST_ERROR_NONE Success
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
-  /// @pre Context must be initialized by usb_host_create().
+  /// Deinitializes a USB host context, invalidating a handle
   ///
-  /// @code
+  /// This function must be called after closing all devices and before application close. It has to be called to clean the memory used by library.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `ctx` (in): Context to deinitialize
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Success
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  ///
+  /// **Preconditions:**
+  /// - Context must be initialized by usb_host_create().
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   ///
   /// int main(void)
@@ -100,7 +130,7 @@ class Tizen100CapiSystemUsbhost {
   /// if (ret != USB_HOST_ERROR_NONE)
   /// handle_error(ret);
   /// }
-  /// @endcode
+  /// ```
   int usb_host_destroy(
     usb_host_context_h ctx,
   ) {
@@ -115,32 +145,34 @@ class Tizen100CapiSystemUsbhost {
   late final _usb_host_destroy =
       _usb_host_destroyPtr.asFunction<int Function(usb_host_context_h)>();
 
-  /// @ingroup CAPI_USB_HOST_DEV_MODULE
-  /// @brief Returns a list of USB devices attached to the system.
-  /// @details This function returns list of USB devices attached to system.
-  /// To free obtained device list usb_host_free_device_list() should be used, this
-  /// function can also unref devices. Do not unref device and then open it.
+  /// Returns a list of USB devices attached to the system.
   ///
-  /// All devices have reference counter. Functions usb_host_ref_device() and
-  /// usb_host_unref_device() are used to ref or unref device. When ref counter
-  /// reaches 0 device will be freed.
-  /// Devices reached by calling usb_host_get_device_list() have a reference count of
-  /// 1, and usb_host_free_device_list() can optionally decrease the reference count
-  /// on all devices in the list. usb_host_device_open() adds another reference which is
-  /// later destroyed by usb_host_device_close().
+  /// This function returns list of USB devices attached to system. To free obtained device list usb_host_free_device_list() should be used, this function can also unref devices. Do not unref device and then open it. All devices have reference counter. Functions usb_host_ref_device() and usb_host_unref_device() are used to ref or unref device. When ref counter reaches 0 device will be freed. Devices reached by calling usb_host_get_device_list() have a reference count of 1, and usb_host_free_device_list() can optionally decrease the reference count on all devices in the list. usb_host_device_open() adds another reference which is later destroyed by usb_host_device_close().
   ///
-  /// @since_tizen 3.0
-  /// @param[in] ctx Context handle
-  /// @param[out] devs An array of devices
-  /// @param[out] length Number of devices
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #USB_HOST_ERROR_NOT_SUPPORTED Operation not supported
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
-  /// @post @a devs must be freed with usb_host_free_device_list() when no longer needed.
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @code
+  /// **Parameters:**
+  /// - `ctx` (in): Context handle
+  /// - `devs` (out): An array of devices
+  /// - `length` (out): Number of devices
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `USB_HOST_ERROR_NOT_SUPPORTED`: Operation not supported
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  ///
+  /// **Postconditions:**
+  /// - `devs` must be freed with usb_host_free_device_list() when no longer needed.
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_DEV_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   ///
   /// void iterate_devices(usb_host_context_h ctx)
@@ -161,7 +193,7 @@ class Tizen100CapiSystemUsbhost {
   /// if (ret != USB_HOST_ERROR_NONE)
   /// handle_error(ret);
   /// }
-  /// @endcode
+  /// ```
   int usb_host_get_device_list(
     usb_host_context_h ctx,
     ffi.Pointer<ffi.Pointer<usb_host_device_h>> devs,
@@ -187,20 +219,31 @@ class Tizen100CapiSystemUsbhost {
               ffi.Pointer<ffi.Pointer<usb_host_device_h>>,
               ffi.Pointer<ffi.Int>)>();
 
-  /// @ingroup CAPI_USB_HOST_DEV_MODULE
-  /// @brief Frees devices list and optionally unrefs its contents
-  /// @details This function needs to be called to free device list. This
-  /// function can also unref devices if unref_devices is set to non-zero value.
-  /// Do not unref device and then open it.
-  /// @since_tizen 3.0
-  /// @param[in] devs List of devices
-  /// @param[in] unref_devices Set to true to unreference devices, set to false to not unref
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
-  /// @pre usb_host_get_device_list() must be called before using this function.
+  /// Frees devices list and optionally unrefs its contents
   ///
-  /// @code
+  /// This function needs to be called to free device list. This function can also unref devices if unref_devices is set to non-zero value. Do not unref device and then open it.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `devs` (in): List of devices
+  /// - `unref_devices` (in): Set to true to unreference devices, set to false to not unref
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  ///
+  /// **Preconditions:**
+  /// - usb_host_get_device_list() must be called before using this function.
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_DEV_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   ///
   /// void iterate_devices(usb_host_context_h ctx)
@@ -221,7 +264,7 @@ class Tizen100CapiSystemUsbhost {
   /// if (ret != USB_HOST_ERROR_NONE)
   /// handle_error(ret);
   /// }
-  /// @endcode
+  /// ```
   int usb_host_free_device_list(
     ffi.Pointer<usb_host_device_h> devs,
     bool unref_devices,
@@ -239,17 +282,27 @@ class Tizen100CapiSystemUsbhost {
   late final _usb_host_free_device_list = _usb_host_free_device_listPtr
       .asFunction<int Function(ffi.Pointer<usb_host_device_h>, bool)>();
 
-  /// @ingroup CAPI_USB_HOST_DEV_MODULE
-  /// @brief Increments the reference counter of given USB device
-  /// @details Increment ref count of device. If ref count reaches zero,
-  /// device will be destroyed.
-  /// @since_tizen 3.0
-  /// @param[in] dev Device to reference
-  /// @return 0 on success, error code otherwise
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
+  /// Increments the reference counter of given USB device
   ///
-  /// @code
+  /// Increment ref count of device. If ref count reaches zero, device will be destroyed.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `dev` (in): Device to reference
+  ///
+  /// **Returns:**
+  /// - 0 on success, error code otherwise
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_DEV_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   ///
   /// usb_host_device_h pick_device(usb_host_device_h *device_list, int list_len)
@@ -277,7 +330,7 @@ class Tizen100CapiSystemUsbhost {
   /// // The device we referenced is the only device that remains valid
   /// return out;
   /// }
-  /// @endcode
+  /// ```
   int usb_host_ref_device(
     usb_host_device_h dev,
   ) {
@@ -292,17 +345,27 @@ class Tizen100CapiSystemUsbhost {
   late final _usb_host_ref_device =
       _usb_host_ref_devicePtr.asFunction<int Function(usb_host_device_h)>();
 
-  /// @ingroup CAPI_USB_HOST_DEV_MODULE
-  /// @brief Decrements the reference counter of given USB device
-  /// @details Decrements ref count of device. If ref count reaches zero,
-  /// device will be destroyed.
-  /// @since_tizen 3.0
-  /// @param[in] dev Device to unreference
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
+  /// Decrements the reference counter of given USB device
   ///
-  /// @code
+  /// Decrements ref count of device. If ref count reaches zero, device will be destroyed.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `dev` (in): Device to unreference
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_DEV_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   ///
   /// void free_device_list_manually(usb_host_device_h *device_list, int list_len)
@@ -320,7 +383,7 @@ class Tizen100CapiSystemUsbhost {
   /// if (ret != USB_HOST_ERROR_NONE)
   /// handle_error(ret);
   /// }
-  /// @endcode
+  /// ```
   int usb_host_unref_device(
     usb_host_device_h dev,
   ) {
@@ -335,24 +398,38 @@ class Tizen100CapiSystemUsbhost {
   late final _usb_host_unref_device =
       _usb_host_unref_devicePtr.asFunction<int Function(usb_host_device_h)>();
 
-  /// @ingroup CAPI_USB_HOST_DEV_MODULE
-  /// @brief Opens a device obtained from the list of devices to allow operations.
-  /// @details This function opens a device, which allows performing operations on it
-  /// (including transfer operations and strings introspection).
-  /// @since_tizen 3.0
-  /// @remarks An application having platform privilege level can use this api without user confirmation
-  /// by declaring %http://tizen.org/privilege/usb.host, which has been added since 6.5.
-  /// @param[in] dev Device to open
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_OUT_OF_MEMORY Memory allocation failure
-  /// @retval #USB_HOST_ERROR_NO_SUCH_DEVICE There is no device connected
-  /// @retval #USB_HOST_ERROR_PERMISSION_DENIED No proper permission to access device
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
-  /// @retval #USB_HOST_ERROR_NOT_SUPPORTED Operation not supported
-  /// @see usb_host_is_device_opened()
+  /// Opens a device obtained from the list of devices to allow operations.
   ///
-  /// @code
+  /// This function opens a device, which allows performing operations on it (including transfer operations and strings introspection).
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - An application having platform privilege level can use this api without user confirmation
+  /// - by declaring http://tizen.org/privilege/usb.host, which has been added since 6.5.
+  ///
+  /// **Parameters:**
+  /// - `dev` (in): Device to open
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_OUT_OF_MEMORY`: Memory allocation failure
+  /// - `USB_HOST_ERROR_NO_SUCH_DEVICE`: There is no device connected
+  /// - `USB_HOST_ERROR_PERMISSION_DENIED`: No proper permission to access device
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  /// - `USB_HOST_ERROR_NOT_SUPPORTED`: Operation not supported
+  ///
+  /// **See also:**
+  /// - `usb_host_is_device_opened()`
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_DEV_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   ///
   /// void work_on_device(usb_host_device_h dev)
@@ -369,7 +446,7 @@ class Tizen100CapiSystemUsbhost {
   /// if (ret != USB_HOST_ERROR_NONE)
   /// handle_error(ret);
   /// }
-  /// @endcode
+  /// ```
   int usb_host_device_open(
     usb_host_device_h dev,
   ) {
@@ -384,17 +461,28 @@ class Tizen100CapiSystemUsbhost {
   late final _usb_host_device_open =
       _usb_host_device_openPtr.asFunction<int Function(usb_host_device_h)>();
 
-  /// @ingroup CAPI_USB_HOST_DEV_MODULE
-  /// @brief Closes an opened but not destroyed USB device handle.
-  /// @details Function should be called before usb_host_destroy().
-  /// @since_tizen 3.0
-  /// @param[in] dev Device that should be closed
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_DEVICE_NOT_OPENED If device is not opened
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
+  /// Closes an opened but not destroyed USB device handle.
   ///
-  /// @code
+  /// Function should be called before usb_host_destroy().
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `dev` (in): Device that should be closed
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_DEVICE_NOT_OPENED`: If device is not opened
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_DEV_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   ///
   /// void work_on_device(usb_host_device_h dev)
@@ -411,7 +499,7 @@ class Tizen100CapiSystemUsbhost {
   /// if (ret != USB_HOST_ERROR_NONE)
   /// handle_error(ret);
   /// }
-  /// @endcode
+  /// ```
   int usb_host_device_close(
     usb_host_device_h dev,
   ) {
@@ -426,25 +514,36 @@ class Tizen100CapiSystemUsbhost {
   late final _usb_host_device_close =
       _usb_host_device_closePtr.asFunction<int Function(usb_host_device_h)>();
 
-  /// @ingroup CAPI_USB_HOST_DEV_MODULE
-  /// @brief Opens device with valid, known idVendor and idProduct.
-  /// @details This function can be used to open device with known idVendor and
-  /// idProduct. If two or more devices have same vendor and product id only
-  /// first will be opened.
-  /// @since_tizen 3.0
-  /// @remarks An application having platform privilege level can use this api without user confirmation
-  /// by declaring %http://tizen.org/privilege/usb.host, which has been added since 6.5.
-  /// @param[in] ctx Context
-  /// @param[in] vendor_id idVendor of connected device
-  /// @param[in] product_id idProduct of connected device
-  /// @param[out] device_handle Opened device handle
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_OUT_OF_MEMORY Insufficient memory
-  /// @retval #USB_HOST_ERROR_NO_SUCH_DEVICE No device
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
+  /// Opens device with valid, known idVendor and idProduct.
   ///
-  /// @code
+  /// This function can be used to open device with known idVendor and idProduct. If two or more devices have same vendor and product id only first will be opened.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - An application having platform privilege level can use this api without user confirmation
+  /// - by declaring http://tizen.org/privilege/usb.host, which has been added since 6.5.
+  ///
+  /// **Parameters:**
+  /// - `ctx` (in): Context
+  /// - `vendor_id` (in): idVendor of connected device
+  /// - `product_id` (in): idProduct of connected device
+  /// - `device_handle` (out): Opened device handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_OUT_OF_MEMORY`: Insufficient memory
+  /// - `USB_HOST_ERROR_NO_SUCH_DEVICE`: No device
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_DEV_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   ///
   /// #define VENDOR_ID 0x04e8
@@ -472,7 +571,7 @@ class Tizen100CapiSystemUsbhost {
   /// if (ret != USB_HOST_ERROR_NONE)
   /// handle_error(ret);
   /// }
-  /// @endcode
+  /// ```
   int usb_host_device_open_with_vid_pid(
     usb_host_context_h ctx,
     int vendor_id,
@@ -497,19 +596,29 @@ class Tizen100CapiSystemUsbhost {
           int Function(
               usb_host_context_h, int, int, ffi.Pointer<usb_host_device_h>)>();
 
-  /// @ingroup CAPI_USB_HOST_DEV_MODULE
-  /// @brief Gets the number of the bus the given device is connected to.
-  /// @details Gets device bus number. This is number of the bus
-  /// that device is connected to.
-  /// @since_tizen 3.0
-  /// @param[in] dev Device handle
-  /// @param[out] bus_number Device bus number
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
-  /// @retval #USB_HOST_ERROR_NOT_SUPPORTED Not supported
+  /// Gets the number of the bus the given device is connected to.
   ///
-  /// @code
+  /// Gets device bus number. This is number of the bus that device is connected to.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `dev` (in): Device handle
+  /// - `bus_number` (out): Device bus number
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  /// - `USB_HOST_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_DEV_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   /// #include <stdio.h>
   ///
@@ -523,7 +632,7 @@ class Tizen100CapiSystemUsbhost {
   ///
   /// printf("Bus number: %d\n", bus_number);
   /// }
-  /// @endcode
+  /// ```
   int usb_host_device_get_bus_number(
     usb_host_device_h dev,
     ffi.Pointer<ffi.Int> bus_number,
@@ -542,19 +651,29 @@ class Tizen100CapiSystemUsbhost {
       _usb_host_device_get_bus_numberPtr
           .asFunction<int Function(usb_host_device_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @ingroup CAPI_USB_HOST_DEV_MODULE
-  /// @brief Gets the address on the bus the given device is connected to.
-  /// @details Gets device address. This is address of device on the bus
-  /// that device is connected to.
-  /// @since_tizen 3.0
-  /// @param[in] dev Device
-  /// @param[out] device_address Device address
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
-  /// @retval #USB_HOST_ERROR_NOT_SUPPORTED Not supported
+  /// Gets the address on the bus the given device is connected to.
   ///
-  /// @code
+  /// Gets device address. This is address of device on the bus that device is connected to.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `dev` (in): Device
+  /// - `device_address` (out): Device address
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  /// - `USB_HOST_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_DEV_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   /// #include <stdio.h>
   ///
@@ -568,7 +687,7 @@ class Tizen100CapiSystemUsbhost {
   ///
   /// printf("Device address: %d\n", device_address);
   /// }
-  /// @endcode
+  /// ```
   int usb_host_device_get_address(
     usb_host_device_h dev,
     ffi.Pointer<ffi.Int> device_address,
@@ -586,21 +705,32 @@ class Tizen100CapiSystemUsbhost {
   late final _usb_host_device_get_address = _usb_host_device_get_addressPtr
       .asFunction<int Function(usb_host_device_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @ingroup CAPI_USB_HOST_DEV_MODULE
-  /// @brief Gets list of port numbers available from a device.
-  /// @details Gets list of all port numbers from a device.
-  /// @since_tizen 3.0
-  /// @param[in] dev Device
-  /// @param[out] port_numbers Array to be filled with port numbers
-  /// @param[in] port_numbers_len Max length of array
-  /// @param[out] ports_count Number of all ports obtained from device
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
-  /// @retval #USB_HOST_ERROR_OUT_OF_MEMORY Insufficient memory
-  /// @retval #USB_HOST_ERROR_NOT_SUPPORTED Not supported
+  /// Gets list of port numbers available from a device.
   ///
-  /// @code
+  /// Gets list of all port numbers from a device.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `dev` (in): Device
+  /// - `port_numbers` (out): Array to be filled with port numbers
+  /// - `port_numbers_len` (in): Max length of array
+  /// - `ports_count` (out): Number of all ports obtained from device
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  /// - `USB_HOST_ERROR_OUT_OF_MEMORY`: Insufficient memory
+  /// - `USB_HOST_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_DEV_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   /// #include <stdio.h>
   ///
@@ -617,7 +747,7 @@ class Tizen100CapiSystemUsbhost {
   /// for (int i = 0; i < ports_count; ++i)
   /// printf("Available port: %d\n", port_numbers[i]);
   /// }
-  /// @endcode
+  /// ```
   int usb_host_device_get_port_numbers(
     usb_host_device_h dev,
     ffi.Pointer<ffi.Int> port_numbers,
@@ -641,23 +771,37 @@ class Tizen100CapiSystemUsbhost {
           int Function(usb_host_device_h, ffi.Pointer<ffi.Int>, int,
               ffi.Pointer<ffi.Int>)>();
 
-  /// @ingroup CAPI_USB_HOST_DEV_MODULE
-  /// @brief Gets one of the USB configurations for an USB device.
-  /// @details Gets one of the USB configurations by its index.
-  /// @since_tizen 3.0
-  /// @remarks @a config must be freed with usb_host_config_destroy().
-  /// @param[in] dev Device
-  /// @param[in] config_index index of configuration to retrieve (counting from 0)
-  /// @param[out] config Output location for USB configuration
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_NOT_FOUND The configuration does not exist
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
-  /// @retval #USB_HOST_ERROR_NOT_SUPPORTED Not supported
-  /// @post Returned configuration should be destroyed by usb_host_config_destroy()
-  /// when no longer needed.
+  /// Gets one of the USB configurations for an USB device.
   ///
-  /// @code
+  /// Gets one of the USB configurations by its index.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - `config` must be freed with usb_host_config_destroy().
+  ///
+  /// **Parameters:**
+  /// - `dev` (in): Device
+  /// - `config_index` (in): index of configuration to retrieve (counting from 0)
+  /// - `config` (out): Output location for USB configuration
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_NOT_FOUND`: The configuration does not exist
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  /// - `USB_HOST_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Postconditions:**
+  /// - Returned configuration should be destroyed by usb_host_config_destroy() when no longer needed.
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_DEV_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   ///
   /// void select_configuration(usb_host_device_h dev)
@@ -685,7 +829,7 @@ class Tizen100CapiSystemUsbhost {
   /// handle_error(ret);
   /// }
   /// }
-  /// @endcode
+  /// ```
   int usb_host_device_get_config(
     usb_host_device_h dev,
     int config_index,
@@ -707,23 +851,34 @@ class Tizen100CapiSystemUsbhost {
           int Function(
               usb_host_device_h, int, ffi.Pointer<usb_host_config_h>)>();
 
-  /// @ingroup CAPI_USB_HOST_DEV_MODULE
-  /// @brief Gets a handle to the configuration currently active on the device.
-  /// @details Gets handle to the currently active configuration.
-  /// This function will return 0 value in config parameter :if device is unconfigured.
-  /// @since_tizen 3.0
-  /// @param[in] dev A device
-  /// @param[out] config Handle to active configuration
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_NO_SUCH_DEVICE the dev has been disconnected
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
-  /// @retval #USB_HOST_ERROR_DEVICE_NOT_OPENED The device was not opened
-  /// @retval #USB_HOST_ERROR_NOT_SUPPORTED Not supported
-  /// @post Obtained configuration should be destroyed by usb_host_config_destroy()
-  /// when no longer needed.
+  /// Gets a handle to the configuration currently active on the device.
   ///
-  /// @code
+  /// Gets handle to the currently active configuration. This function will return 0 value in config parameter :if device is unconfigured.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `dev` (in): A device
+  /// - `config` (out): Handle to active configuration
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_NO_SUCH_DEVICE`: the dev has been disconnected
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  /// - `USB_HOST_ERROR_DEVICE_NOT_OPENED`: The device was not opened
+  /// - `USB_HOST_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Postconditions:**
+  /// - Obtained configuration should be destroyed by usb_host_config_destroy() when no longer needed.
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_DEV_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   ///
   /// void inspect_configuration(usb_host_device_h dev)
@@ -741,7 +896,7 @@ class Tizen100CapiSystemUsbhost {
   /// if (ret != USB_HOST_ERROR_NONE)
   /// handle_error(ret);
   /// }
-  /// @endcode
+  /// ```
   int usb_host_get_active_config(
     usb_host_device_h dev,
     ffi.Pointer<usb_host_config_h> config,
@@ -760,22 +915,35 @@ class Tizen100CapiSystemUsbhost {
       _usb_host_get_active_configPtr.asFunction<
           int Function(usb_host_device_h, ffi.Pointer<usb_host_config_h>)>();
 
-  /// @ingroup CAPI_USB_HOST_DEV_MODULE
-  /// @brief Sets a configuration as the currently active on a device.
-  /// @details Makes one of the configurations currently active on the device.
-  /// @since_tizen 3.0
-  /// @param[in] configuration Handle to configuration to be activated
-  /// @remarks Initially, the device might be configured with any configuration.
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_NOT_FOUND Requested configuration does not exist
-  /// @retval #USB_HOST_ERROR_RESOURCE_BUSY Interfaces are currently claimed
-  /// @retval #USB_HOST_ERROR_NO_SUCH_DEVICE The device has been disconnected
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
-  /// @retval #USB_HOST_ERROR_DEVICE_NOT_OPENED The device was not opened
-  /// @retval #USB_HOST_ERROR_NOT_SUPPORTED Not supported
+  /// Sets a configuration as the currently active on a device.
   ///
-  /// @code
+  /// Makes one of the configurations currently active on the device.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - Initially, the device might be configured with any configuration.
+  ///
+  /// **Parameters:**
+  /// - `configuration` (in): Handle to configuration to be activated
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_NOT_FOUND`: Requested configuration does not exist
+  /// - `USB_HOST_ERROR_RESOURCE_BUSY`: Interfaces are currently claimed
+  /// - `USB_HOST_ERROR_NO_SUCH_DEVICE`: The device has been disconnected
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  /// - `USB_HOST_ERROR_DEVICE_NOT_OPENED`: The device was not opened
+  /// - `USB_HOST_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_DEV_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   ///
   /// void select_configuration(usb_host_device_h dev)
@@ -803,7 +971,7 @@ class Tizen100CapiSystemUsbhost {
   /// handle_error(ret);
   /// }
   /// }
-  /// @endcode
+  /// ```
   int usb_host_set_config(
     usb_host_config_h configuration,
   ) {
@@ -818,19 +986,30 @@ class Tizen100CapiSystemUsbhost {
   late final _usb_host_set_config =
       _usb_host_set_configPtr.asFunction<int Function(usb_host_config_h)>();
 
-  /// @ingroup CAPI_USB_HOST_DEV_MODULE
-  /// @brief Returns a USB device back to the unconfigured state.
-  /// @details Make the device not configured with any configuration.
-  /// @since_tizen 4.0
-  /// @param[in] dev Device to be unconfigured
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #USB_HOST_ERROR_RESOURCE_BUSY Interfaces are currently claimed
-  /// @retval #USB_HOST_ERROR_NO_SUCH_DEVICE Device has been disconnected
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
+  /// Returns a USB device back to the unconfigured state.
   ///
-  /// @code
+  /// Make the device not configured with any configuration.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `dev` (in): Device to be unconfigured
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `USB_HOST_ERROR_RESOURCE_BUSY`: Interfaces are currently claimed
+  /// - `USB_HOST_ERROR_NO_SUCH_DEVICE`: Device has been disconnected
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_DEV_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   ///
   /// void unconfigure_device(usb_host_device_h dev)
@@ -841,7 +1020,7 @@ class Tizen100CapiSystemUsbhost {
   /// if (ret != USB_HOST_ERROR_NONE)
   /// handle_error(ret);
   /// }
-  /// @endcode
+  /// ```
   int usb_host_device_unconfigure(
     usb_host_device_h dev,
   ) {
@@ -856,23 +1035,34 @@ class Tizen100CapiSystemUsbhost {
   late final _usb_host_device_unconfigure = _usb_host_device_unconfigurePtr
       .asFunction<int Function(usb_host_device_h)>();
 
-  /// @ingroup CAPI_USB_HOST_DEV_MODULE
-  /// @brief Gets USB specification release number supported by given device.
-  /// @details Gets binary-coded decimal USB specification release number.
-  /// This value is equal to bcdUSB field of device descriptor. See USB specification
-  /// for more info.
-  /// @since_tizen 3.0
-  /// @param[in] dev A device
-  /// @param[out] bcd_usb Bcd release number of USB
-  /// @remarks Each hexadecimal digit represents a single decimal digit, and there are
-  /// two major version digits and two minor version digits. For instance, 0x1234 represents
-  /// version 12.34.
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
+  /// Gets USB specification release number supported by given device.
   ///
-  /// @code
+  /// Gets binary-coded decimal USB specification release number. This value is equal to bcdUSB field of device descriptor. See USB specification for more info.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - Each hexadecimal digit represents a single decimal digit, and there are
+  /// - two major version digits and two minor version digits. For instance, 0x1234 represents
+  /// - version 12.34.
+  ///
+  /// **Parameters:**
+  /// - `dev` (in): A device
+  /// - `bcd_usb` (out): Bcd release number of USB
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_DEV_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   /// #include <stdio.h>
   ///
@@ -891,7 +1081,7 @@ class Tizen100CapiSystemUsbhost {
   /// (bcd_usb << 0) & 0xf,
   /// );
   /// }
-  /// @endcode
+  /// ```
   int usb_host_device_get_bcd_usb(
     usb_host_device_h dev,
     ffi.Pointer<ffi.Int> bcd_usb,
@@ -909,19 +1099,29 @@ class Tizen100CapiSystemUsbhost {
   late final _usb_host_device_get_bcd_usb = _usb_host_device_get_bcd_usbPtr
       .asFunction<int Function(usb_host_device_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @ingroup CAPI_USB_HOST_DEV_MODULE
-  /// @brief Gets the numerical device class of given USB device.
-  /// @details Returns the numerical device class, which represents in high level
-  /// the functionality of the device.
-  /// @since_tizen 3.0
-  /// @param[in] dev A device
-  /// @param[out] device_class Device class
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
+  /// Gets the numerical device class of given USB device.
   ///
-  /// @code
+  /// Returns the numerical device class, which represents in high level the functionality of the device.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `dev` (in): A device
+  /// - `device_class` (out): Device class
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_DEV_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   /// #include <stdio.h>
   ///
@@ -935,7 +1135,7 @@ class Tizen100CapiSystemUsbhost {
   ///
   /// printf("Device class: %d\n", device_class);
   /// }
-  /// @endcode
+  /// ```
   int usb_host_device_get_class(
     usb_host_device_h dev,
     ffi.Pointer<ffi.Int> device_class,
@@ -953,19 +1153,29 @@ class Tizen100CapiSystemUsbhost {
   late final _usb_host_device_get_class = _usb_host_device_get_classPtr
       .asFunction<int Function(usb_host_device_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @ingroup CAPI_USB_HOST_DEV_MODULE
-  /// @brief Gets the numerical subclass of given USB device.
-  /// @details Returns the numerical device subclass, which refines the class code
-  /// returned by usb_host_device_get_class().
-  /// @since_tizen 3.0
-  /// @param[in] dev A device
-  /// @param[out] subclass Device subclass
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
+  /// Gets the numerical subclass of given USB device.
   ///
-  /// @code
+  /// Returns the numerical device subclass, which refines the class code returned by usb_host_device_get_class().
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `dev` (in): A device
+  /// - `subclass` (out): Device subclass
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_DEV_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   /// #include <stdio.h>
   ///
@@ -979,7 +1189,7 @@ class Tizen100CapiSystemUsbhost {
   ///
   /// printf("Device subclass: %d\n", subclass);
   /// }
-  /// @endcode
+  /// ```
   int usb_host_device_get_sub_class(
     usb_host_device_h dev,
     ffi.Pointer<ffi.Int> subclass,
@@ -997,19 +1207,29 @@ class Tizen100CapiSystemUsbhost {
   late final _usb_host_device_get_sub_class = _usb_host_device_get_sub_classPtr
       .asFunction<int Function(usb_host_device_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @ingroup CAPI_USB_HOST_DEV_MODULE
-  /// @brief Gets the protocol being used by the given USB device.
-  /// @details Returns the ID of the protocol, which refines the subclass code
-  /// returned by usb_host_device_get_sub_class().
-  /// @since_tizen 3.0
-  /// @param[in] dev A device
-  /// @param[out] protocol Device protocol
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
+  /// Gets the protocol being used by the given USB device.
   ///
-  /// @code
+  /// Returns the ID of the protocol, which refines the subclass code returned by usb_host_device_get_sub_class().
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `dev` (in): A device
+  /// - `protocol` (out): Device protocol
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_DEV_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   /// #include <stdio.h>
   ///
@@ -1023,7 +1243,7 @@ class Tizen100CapiSystemUsbhost {
   ///
   /// printf("Device protocol ID: %d\n", protocol);
   /// }
-  /// @endcode
+  /// ```
   int usb_host_device_get_protocol(
     usb_host_device_h dev,
     ffi.Pointer<ffi.Int> protocol,
@@ -1041,18 +1261,29 @@ class Tizen100CapiSystemUsbhost {
   late final _usb_host_device_get_protocol = _usb_host_device_get_protocolPtr
       .asFunction<int Function(usb_host_device_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @ingroup CAPI_USB_HOST_DEV_MODULE
-  /// @brief Gets the maximum packet size for endpoint 0 of this device.
-  /// @details Returns the maximum packet size for endpoint 0 on the given USB device.
-  /// @since_tizen 3.0
-  /// @param[in] dev A device
-  /// @param[out] max_packet_size Maximum size of single packet, in bytes
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
+  /// Gets the maximum packet size for endpoint 0 of this device.
   ///
-  /// @code
+  /// Returns the maximum packet size for endpoint 0 on the given USB device.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `dev` (in): A device
+  /// - `max_packet_size` (out): Maximum size of single packet, in bytes
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_DEV_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   /// #include <stdio.h>
   ///
@@ -1066,7 +1297,7 @@ class Tizen100CapiSystemUsbhost {
   ///
   /// printf("Maximum packet size for endpoint 0: %d bytes\n", max_packet_size);
   /// }
-  /// @endcode
+  /// ```
   int usb_host_device_get_max_packet_size_0(
     usb_host_device_h dev,
     ffi.Pointer<ffi.Int> max_packet_size,
@@ -1085,18 +1316,29 @@ class Tizen100CapiSystemUsbhost {
       _usb_host_device_get_max_packet_size_0Ptr
           .asFunction<int Function(usb_host_device_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @ingroup CAPI_USB_HOST_DEV_MODULE
-  /// @brief Gets the numerical vendor identifier of the given USB device.
-  /// @details Returns the numerical vendor identifier, representing the vendor who produced the device.
-  /// @since_tizen 3.0
-  /// @param[in] dev A device
-  /// @param[out] vendor_id Vendor id of @a dev
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
+  /// Gets the numerical vendor identifier of the given USB device.
   ///
-  /// @code
+  /// Returns the numerical vendor identifier, representing the vendor who produced the device.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `dev` (in): A device
+  /// - `vendor_id` (out): Vendor id of `dev`
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_DEV_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   /// #include <stdio.h>
   ///
@@ -1110,7 +1352,7 @@ class Tizen100CapiSystemUsbhost {
   ///
   /// printf("Vendor ID: %d\n", vendor_id);
   /// }
-  /// @endcode
+  /// ```
   int usb_host_device_get_id_vendor(
     usb_host_device_h dev,
     ffi.Pointer<ffi.Int> vendor_id,
@@ -1128,18 +1370,29 @@ class Tizen100CapiSystemUsbhost {
   late final _usb_host_device_get_id_vendor = _usb_host_device_get_id_vendorPtr
       .asFunction<int Function(usb_host_device_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @ingroup CAPI_USB_HOST_DEV_MODULE
-  /// @brief Gets the numerical product identifier of the given USB device.
-  /// @details Returns the numerical product identifier, representing a specific product of a vendor.
-  /// @since_tizen 3.0
-  /// @param[in] dev A device
-  /// @param[out] product_id Product id of @a dev
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
+  /// Gets the numerical product identifier of the given USB device.
   ///
-  /// @code
+  /// Returns the numerical product identifier, representing a specific product of a vendor.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `dev` (in): A device
+  /// - `product_id` (out): Product id of `dev`
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_DEV_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   /// #include <stdio.h>
   ///
@@ -1153,7 +1406,7 @@ class Tizen100CapiSystemUsbhost {
   ///
   /// printf("Product ID: %d\n", product_id);
   /// }
-  /// @endcode
+  /// ```
   int usb_host_device_get_id_product(
     usb_host_device_h dev,
     ffi.Pointer<ffi.Int> product_id,
@@ -1172,20 +1425,33 @@ class Tizen100CapiSystemUsbhost {
       _usb_host_device_get_id_productPtr
           .asFunction<int Function(usb_host_device_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @ingroup CAPI_USB_HOST_DEV_MODULE
-  /// @brief Gets device release number for the given USB device.
-  /// @details Gets device release number. The number will be returned as a binary-coded decimal.
-  /// @since_tizen 3.0
-  /// @param[in] dev A device
-  /// @param[out] device_bcd Device release number
-  /// @remarks Each hexadecimal digit corresponds to a single decimal digit, so you should expect
-  /// only digits between 0x0 and 0x9 inclusively. The meaning of the value depends on the device.
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
+  /// Gets device release number for the given USB device.
   ///
-  /// @code
+  /// Gets device release number. The number will be returned as a binary-coded decimal.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - Each hexadecimal digit corresponds to a single decimal digit, so you should expect
+  /// - only digits between 0x0 and 0x9 inclusively. The meaning of the value depends on the device.
+  ///
+  /// **Parameters:**
+  /// - `dev` (in): A device
+  /// - `device_bcd` (out): Device release number
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_DEV_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   /// #include <stdio.h>
   ///
@@ -1208,7 +1474,7 @@ class Tizen100CapiSystemUsbhost {
   ///
   /// printf("Release number: %d\n", release_number);
   /// }
-  /// @endcode
+  /// ```
   int usb_host_device_get_bcd_device(
     usb_host_device_h dev,
     ffi.Pointer<ffi.Int> device_bcd,
@@ -1227,18 +1493,29 @@ class Tizen100CapiSystemUsbhost {
       _usb_host_device_get_bcd_devicePtr
           .asFunction<int Function(usb_host_device_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @ingroup CAPI_USB_HOST_DEV_MODULE
-  /// @brief Gets the number of configurations for given USB device.
-  /// @details Returns the number of configurations supported by the device.
-  /// @since_tizen 3.0
-  /// @param[in] dev A device
-  /// @param[out] num_configurations Number of configurations for given device
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
+  /// Gets the number of configurations for given USB device.
   ///
-  /// @code
+  /// Returns the number of configurations supported by the device.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `dev` (in): A device
+  /// - `num_configurations` (out): Number of configurations for given device
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_DEV_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   ///
   /// void select_configuration(usb_host_device_h dev)
@@ -1266,7 +1543,7 @@ class Tizen100CapiSystemUsbhost {
   /// handle_error(ret);
   /// }
   /// }
-  /// @endcode
+  /// ```
   int usb_host_device_get_num_configurations(
     usb_host_device_h dev,
     ffi.Pointer<ffi.Int> num_configurations,
@@ -1285,18 +1562,29 @@ class Tizen100CapiSystemUsbhost {
       _usb_host_device_get_num_configurationsPtr
           .asFunction<int Function(usb_host_device_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @ingroup CAPI_USB_HOST_DEV_MODULE
-  /// @brief Checks whether given USB device is currently opened.
-  /// @details Returns information about if the device is opened at the moment.
-  /// @since_tizen 3.0
-  /// @param[in] dev A device
-  /// @param[out] is_opened True if device is opened, false otherwise
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
+  /// Checks whether given USB device is currently opened.
   ///
-  /// @code
+  /// Returns information about if the device is opened at the moment.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `dev` (in): A device
+  /// - `is_opened` (out): True if device is opened, false otherwise
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_DEV_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   /// #include <stdio.h>
   ///
@@ -1311,7 +1599,7 @@ class Tizen100CapiSystemUsbhost {
   ///
   /// printf("Device is %s\n", is_opened ? "opened" : "closed");
   /// }
-  /// @endcode
+  /// ```
   int usb_host_is_device_opened(
     usb_host_device_h dev,
     ffi.Pointer<ffi.Bool> is_opened,
@@ -1329,22 +1617,34 @@ class Tizen100CapiSystemUsbhost {
   late final _usb_host_is_device_opened = _usb_host_is_device_openedPtr
       .asFunction<int Function(usb_host_device_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @ingroup CAPI_USB_HOST_DEV_MODULE
-  /// @brief Gets the manufacturer string for the connected device.
-  /// @details Gets string describing an open device's manufacturer, in ASCII.
-  /// @since_tizen 3.0
-  /// @param[in] dev A handle to opened device
-  /// @param[in, out] length Pointer to a variable containing the current size of the buffer,
-  /// which will be modified to actual usage
-  /// @param[out] data Buffer to store string
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_OVERFLOW There was no space in buffer
-  /// @retval #USB_HOST_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
-  /// @pre dev must point to device opened by usb_host_device_open() or usb_host_device_open_with_vid_pid().
+  /// Gets the manufacturer string for the connected device.
   ///
-  /// @code
+  /// Gets string describing an open device's manufacturer, in ASCII.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `dev` (in): A handle to opened device
+  /// - `length` (in, out): Pointer to a variable containing the current size of the buffer, which will be modified to actual usage
+  /// - `data` (out): Buffer to store string
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_OVERFLOW`: There was no space in buffer
+  /// - `USB_HOST_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  ///
+  /// **Preconditions:**
+  /// - dev must point to device opened by usb_host_device_open() or usb_host_device_open_with_vid_pid().
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_DEV_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   /// #include <stdio.h>
   ///
@@ -1363,7 +1663,7 @@ class Tizen100CapiSystemUsbhost {
   ///
   /// printf("Manufacturer: %s\n", data);
   /// }
-  /// @endcode
+  /// ```
   int usb_host_device_get_manufacturer_str(
     usb_host_device_h dev,
     ffi.Pointer<ffi.Int> length,
@@ -1386,22 +1686,34 @@ class Tizen100CapiSystemUsbhost {
           int Function(usb_host_device_h, ffi.Pointer<ffi.Int>,
               ffi.Pointer<ffi.UnsignedChar>)>();
 
-  /// @ingroup CAPI_USB_HOST_DEV_MODULE
-  /// @brief Gets the product string for the connected device.
-  /// @details Gets the product string of an open USB device, in ASCII.
-  /// @since_tizen 3.0
-  /// @param[in] dev A handle to opened device
-  /// @param[in, out] length Pointer to a variable containing the current size of the buffer,
-  /// which will be modified to actual usage
-  /// @param[out] data Buffer to store string
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_OVERFLOW There was no space in buffer
-  /// @retval #USB_HOST_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
-  /// @pre dev must point to device opened by usb_host_device_open() or usb_host_device_open_with_vid_pid().
+  /// Gets the product string for the connected device.
   ///
-  /// @code
+  /// Gets the product string of an open USB device, in ASCII.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `dev` (in): A handle to opened device
+  /// - `length` (in, out): Pointer to a variable containing the current size of the buffer, which will be modified to actual usage
+  /// - `data` (out): Buffer to store string
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_OVERFLOW`: There was no space in buffer
+  /// - `USB_HOST_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  ///
+  /// **Preconditions:**
+  /// - dev must point to device opened by usb_host_device_open() or usb_host_device_open_with_vid_pid().
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_DEV_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   /// #include <stdio.h>
   ///
@@ -1420,7 +1732,7 @@ class Tizen100CapiSystemUsbhost {
   ///
   /// printf("Product: %s\n", data);
   /// }
-  /// @endcode
+  /// ```
   int usb_host_device_get_product_str(
     usb_host_device_h dev,
     ffi.Pointer<ffi.Int> length,
@@ -1443,22 +1755,34 @@ class Tizen100CapiSystemUsbhost {
           int Function(usb_host_device_h, ffi.Pointer<ffi.Int>,
               ffi.Pointer<ffi.UnsignedChar>)>();
 
-  /// @ingroup CAPI_USB_HOST_DEV_MODULE
-  /// @brief Gets the serial number string for the connected device.
-  /// @details Gets the serial number of an open USB device, in ASCII.
-  /// @since_tizen 3.0
-  /// @param[in] dev A handle to opened device
-  /// @param[in, out] length Pointer to a variable containing the current size of the buffer,
-  /// which will be modified to actual usage
-  /// @param[out] data Buffer to store string
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_OVERFLOW There was no space in buffer
-  /// @retval #USB_HOST_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
-  /// @pre dev must point to device opened by usb_host_device_open() or usb_host_device_open_with_vid_pid().
+  /// Gets the serial number string for the connected device.
   ///
-  /// @code
+  /// Gets the serial number of an open USB device, in ASCII.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `dev` (in): A handle to opened device
+  /// - `length` (in, out): Pointer to a variable containing the current size of the buffer, which will be modified to actual usage
+  /// - `data` (out): Buffer to store string
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_OVERFLOW`: There was no space in buffer
+  /// - `USB_HOST_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  ///
+  /// **Preconditions:**
+  /// - dev must point to device opened by usb_host_device_open() or usb_host_device_open_with_vid_pid().
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_DEV_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   /// #include <stdio.h>
   ///
@@ -1477,7 +1801,7 @@ class Tizen100CapiSystemUsbhost {
   ///
   /// printf("Serial number: %s\n", data);
   /// }
-  /// @endcode
+  /// ```
   int usb_host_device_get_serial_number_str(
     usb_host_device_h dev,
     ffi.Pointer<ffi.Int> length,
@@ -1500,18 +1824,29 @@ class Tizen100CapiSystemUsbhost {
           int Function(usb_host_device_h, ffi.Pointer<ffi.Int>,
               ffi.Pointer<ffi.UnsignedChar>)>();
 
-  /// @ingroup CAPI_USB_HOST_CONFIG_MODULE
-  /// @brief Gets number of interfaces for given configuration.
-  /// @details Gets the number of interfaces supported by the provided configuration.
-  /// @since_tizen 3.0
-  /// @param[in] config A configuration
-  /// @param[out] num_interfaces Number of interfaces
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
+  /// Gets number of interfaces for given configuration.
   ///
-  /// @code
+  /// Gets the number of interfaces supported by the provided configuration.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `config` (in): A configuration
+  /// - `num_interfaces` (out): Number of interfaces
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_CONFIG_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   /// #include <stdio.h>
   ///
@@ -1525,7 +1860,7 @@ class Tizen100CapiSystemUsbhost {
   ///
   /// printf("Number of interfaces: %d\n", num_interfaces);
   /// }
-  /// @endcode
+  /// ```
   int usb_host_config_get_num_interfaces(
     usb_host_config_h config,
     ffi.Pointer<ffi.Int> num_interfaces,
@@ -1544,19 +1879,29 @@ class Tizen100CapiSystemUsbhost {
       _usb_host_config_get_num_interfacesPtr
           .asFunction<int Function(usb_host_config_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @ingroup CAPI_USB_HOST_CONFIG_MODULE
-  /// @brief Checks if the device is self-powered in given configuration.
-  /// @details Checks if the device in provided configuration is self-powered.
-  /// @since_tizen 3.0
-  /// @param[in] config A configuration
-  /// @param[out] self_powered True if device is self-powered in given configuration,
-  /// false otherwise
-  /// @return 0 on success, negative error code otherwise
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
-  /// @retval #USB_HOST_ERROR_NOT_SUPPORTED Not supported
+  /// Checks if the device is self-powered in given configuration.
   ///
-  /// @code
+  /// Checks if the device in provided configuration is self-powered.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `config` (in): A configuration
+  /// - `self_powered` (out): True if device is self-powered in given configuration, false otherwise
+  ///
+  /// **Returns:**
+  /// - 0 on success, negative error code otherwise
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  /// - `USB_HOST_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_CONFIG_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   /// #include <stdio.h>
   ///
@@ -1571,7 +1916,7 @@ class Tizen100CapiSystemUsbhost {
   ///
   /// printf("Configuration is %sself-powered\n", self_powered ? "" : "not ");
   /// }
-  /// @endcode
+  /// ```
   int usb_host_config_is_self_powered(
     usb_host_config_h config,
     ffi.Pointer<ffi.Bool> self_powered,
@@ -1590,19 +1935,29 @@ class Tizen100CapiSystemUsbhost {
       _usb_host_config_is_self_poweredPtr
           .asFunction<int Function(usb_host_config_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @ingroup CAPI_USB_HOST_CONFIG_MODULE
-  /// @brief Checks if the device supports remote wakeup in given configuration.
-  /// @details Checks if the device in provided configuration supports remote wakeup.
-  /// @since_tizen 3.0
-  /// @param[in] config A configuration
-  /// @param[out] remote_wakeup True if device supports remote wakeup in given configuration,
-  /// false otherwise
-  /// @return 0 on success, negative error code otherwise
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
-  /// @retval #USB_HOST_ERROR_NOT_SUPPORTED Not supported
+  /// Checks if the device supports remote wakeup in given configuration.
   ///
-  /// @code
+  /// Checks if the device in provided configuration supports remote wakeup.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `config` (in): A configuration
+  /// - `remote_wakeup` (out): True if device supports remote wakeup in given configuration, false otherwise
+  ///
+  /// **Returns:**
+  /// - 0 on success, negative error code otherwise
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  /// - `USB_HOST_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_CONFIG_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   /// #include <stdio.h>
   ///
@@ -1617,7 +1972,7 @@ class Tizen100CapiSystemUsbhost {
   ///
   /// printf("Configuration %s remote wakeup\n", self_powered ? "supports" : "does not support");
   /// }
-  /// @endcode
+  /// ```
   int usb_host_config_support_remote_wakeup(
     usb_host_config_h config,
     ffi.Pointer<ffi.Bool> remote_wakeup,
@@ -1636,18 +1991,29 @@ class Tizen100CapiSystemUsbhost {
       _usb_host_config_support_remote_wakeupPtr
           .asFunction<int Function(usb_host_config_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @ingroup CAPI_USB_HOST_CONFIG_MODULE
-  /// @brief Gets maximum power in given USB configuration.
-  /// @details Returns the maximum power drawn by the device in the provided USB configuration, in mA.
-  /// @since_tizen 3.0
-  /// @param[in] config A configuration
-  /// @param[out] max_power Maximum power, in mA
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
+  /// Gets maximum power in given USB configuration.
   ///
-  /// @code
+  /// Returns the maximum power drawn by the device in the provided USB configuration, in mA.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `config` (in): A configuration
+  /// - `max_power` (out): Maximum power, in mA
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_CONFIG_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   /// #include <stdio.h>
   ///
@@ -1661,7 +2027,7 @@ class Tizen100CapiSystemUsbhost {
   ///
   /// printf("Max power: %d mA\n", max_power);
   /// }
-  /// @endcode
+  /// ```
   int usb_host_config_get_max_power(
     usb_host_config_h config,
     ffi.Pointer<ffi.Int> max_power,
@@ -1679,24 +2045,35 @@ class Tizen100CapiSystemUsbhost {
   late final _usb_host_config_get_max_power = _usb_host_config_get_max_powerPtr
       .asFunction<int Function(usb_host_config_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @ingroup CAPI_USB_HOST_CONFIG_MODULE
-  /// @brief Gets a string describing a USB configuration into given buffer.
-  /// @details Puts a string representation of the USB configuration into the given buffer.
-  /// @since_tizen 3.0
-  /// @param[in] config A configuration
-  /// @param[in, out] length Pointer to a variable containing the current size of the buffer,
-  /// which will be modified to actual usage
-  /// @param[out] data Buffer to store string
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #USB_HOST_ERROR_OVERFLOW There was no space in buffer
-  /// @retval #USB_HOST_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
-  /// @pre config must be configuration of device opened by usb_host_device_open() or
-  /// usb_host_device_open_with_vid_pid()
+  /// Gets a string describing a USB configuration into given buffer.
   ///
-  /// @code
+  /// Puts a string representation of the USB configuration into the given buffer.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `config` (in): A configuration
+  /// - `length` (in, out): Pointer to a variable containing the current size of the buffer, which will be modified to actual usage
+  /// - `data` (out): Buffer to store string
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `USB_HOST_ERROR_OVERFLOW`: There was no space in buffer
+  /// - `USB_HOST_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  ///
+  /// **Preconditions:**
+  /// - config must be configuration of device opened by usb_host_device_open() or usb_host_device_open_with_vid_pid()
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_CONFIG_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   /// #include <stdio.h>
   ///
@@ -1715,7 +2092,7 @@ class Tizen100CapiSystemUsbhost {
   ///
   /// printf("Configuration description: %s\n", data);
   /// }
-  /// @endcode
+  /// ```
   int usb_host_device_get_config_str(
     usb_host_config_h config,
     ffi.Pointer<ffi.Int> length,
@@ -1738,22 +2115,35 @@ class Tizen100CapiSystemUsbhost {
           int Function(usb_host_config_h, ffi.Pointer<ffi.Int>,
               ffi.Pointer<ffi.UnsignedChar>)>();
 
-  /// @ingroup CAPI_USB_HOST_CONFIG_MODULE
-  /// @brief Gets a USB interface from given USB configuration.
-  /// @details Gets a USB interface from configuration by its index.
-  /// @since_tizen 3.0
-  /// @param[in] config Configuration handle
-  /// @param[in] interface_index index of interface to retrieve (counting from 0)
-  /// @param[out] interface Interface handle
-  /// @remarks There is no need to destroy the @a interface handle. It is no longer valid
-  /// when config is destroyed.
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_NOT_FOUND Configuration does not exist
-  /// @retval #USB_HOST_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
+  /// Gets a USB interface from given USB configuration.
   ///
-  /// @code
+  /// Gets a USB interface from configuration by its index.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - There is no need to destroy the `interface` handle. It is no longer valid
+  /// - when config is destroyed.
+  ///
+  /// **Parameters:**
+  /// - `config` (in): Configuration handle
+  /// - `interface_index` (in): index of interface to retrieve (counting from 0)
+  /// - `interface` (out): Interface handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_NOT_FOUND`: Configuration does not exist
+  /// - `USB_HOST_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_CONFIG_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   ///
   /// #define INTERFACE_INDEX 3
@@ -1769,7 +2159,7 @@ class Tizen100CapiSystemUsbhost {
   ///
   /// return ret;
   /// }
-  /// @endcode
+  /// ```
   int usb_host_config_get_interface(
     usb_host_config_h config,
     int interface_index,
@@ -1792,17 +2182,30 @@ class Tizen100CapiSystemUsbhost {
           int Function(
               usb_host_config_h, int, ffi.Pointer<usb_host_interface_h>)>();
 
-  /// @ingroup CAPI_USB_HOST_CONFIG_MODULE
-  /// @brief Frees a configuration struct and its associated data.
-  /// @details Frees configuration obtained from usb_host_device_get_config().
-  /// @since_tizen 3.0
-  /// @param[in] config Configuration to free
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
-  /// @pre config must be obtained by usb_host_device_get_config().
+  /// Frees a configuration struct and its associated data.
   ///
-  /// @code
+  /// Frees configuration obtained from usb_host_device_get_config().
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `config` (in): Configuration to free
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  ///
+  /// **Preconditions:**
+  /// - config must be obtained by usb_host_device_get_config().
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_CONFIG_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   ///
   /// void select_configuration(usb_host_device_h dev)
@@ -1830,7 +2233,7 @@ class Tizen100CapiSystemUsbhost {
   /// handle_error(ret);
   /// }
   /// }
-  /// @endcode
+  /// ```
   int usb_host_config_destroy(
     usb_host_config_h config,
   ) {
@@ -1845,25 +2248,32 @@ class Tizen100CapiSystemUsbhost {
   late final _usb_host_config_destroy =
       _usb_host_config_destroyPtr.asFunction<int Function(usb_host_config_h)>();
 
-  /// @ingroup CAPI_USB_HOST_INTERFACE_MODULE
-  /// @brief Claims a USB interface on a device for further I/O.
-  /// @details Claims interface on a device.
-  /// To perform I/O operations on interface user has to claim it.
-  /// Remember to call usb_host_release_interface() when communication
-  /// with the device is finished.
-  /// @since_tizen 3.0
-  /// @param[in] interface The bInterfaceNumber of interface to claim
-  /// @param[in] force Set to true to auto detach kernel driver, set to false to not detach it
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_NOT_FOUND Requested interface does not exist
-  /// @retval #USB_HOST_ERROR_RESOURCE_BUSY Another program or driver has claimed the
-  /// interface
-  /// @retval #USB_HOST_ERROR_NO_SUCH_DEVICE Device has been disconnected
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
-  /// @retval #USB_HOST_ERROR_DEVICE_NOT_OPENED The device was not opened
+  /// Claims a USB interface on a device for further I/O.
   ///
-  /// @code
+  /// Claims interface on a device. To perform I/O operations on interface user has to claim it. Remember to call usb_host_release_interface() when communication with the device is finished.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `interface` (in): The bInterfaceNumber of interface to claim
+  /// - `force` (in): Set to true to auto detach kernel driver, set to false to not detach it
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_NOT_FOUND`: Requested interface does not exist
+  /// - `USB_HOST_ERROR_RESOURCE_BUSY`: Another program or driver has claimed the interface
+  /// - `USB_HOST_ERROR_NO_SUCH_DEVICE`: Device has been disconnected
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  /// - `USB_HOST_ERROR_DEVICE_NOT_OPENED`: The device was not opened
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_INTERFACE_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   ///
   /// void use_interface(usb_host_interface_h interface)
@@ -1880,7 +2290,7 @@ class Tizen100CapiSystemUsbhost {
   /// if (ret != USB_HOST_ERROR_NONE)
   /// handle_error(ret);
   /// }
-  /// @endcode
+  /// ```
   int usb_host_claim_interface(
     usb_host_interface_h interface1,
     bool force,
@@ -1897,21 +2307,31 @@ class Tizen100CapiSystemUsbhost {
   late final _usb_host_claim_interface = _usb_host_claim_interfacePtr
       .asFunction<int Function(usb_host_interface_h, bool)>();
 
-  /// @ingroup CAPI_USB_HOST_INTERFACE_MODULE
-  /// @brief Releases a previously claimed interface on a device.
-  /// @details Releases interface previously claimed by usb_host_claim_interface().
-  /// This is a blocking function.
-  /// @since_tizen 3.0
-  /// @param[in] interface The bInterfaceNumber of interface to release
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_NOT_FOUND Interface was not claimed
-  /// @retval #USB_HOST_ERROR_NO_SUCH_DEVICE Device has been disconnected
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
-  /// @retval #USB_HOST_ERROR_DEVICE_NOT_OPENED The device was not opened
-  /// @retval #USB_HOST_ERROR_NOT_SUPPORTED Not supported
+  /// Releases a previously claimed interface on a device.
   ///
-  /// @code
+  /// Releases interface previously claimed by usb_host_claim_interface(). This is a blocking function.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `interface` (in): The bInterfaceNumber of interface to release
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_NOT_FOUND`: Interface was not claimed
+  /// - `USB_HOST_ERROR_NO_SUCH_DEVICE`: Device has been disconnected
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  /// - `USB_HOST_ERROR_DEVICE_NOT_OPENED`: The device was not opened
+  /// - `USB_HOST_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_INTERFACE_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   ///
   /// void use_interface(usb_host_interface_h interface)
@@ -1928,7 +2348,7 @@ class Tizen100CapiSystemUsbhost {
   /// if (ret != USB_HOST_ERROR_NONE)
   /// handle_error(ret);
   /// }
-  /// @endcode
+  /// ```
   int usb_host_release_interface(
     usb_host_interface_h interface1,
   ) {
@@ -1943,18 +2363,29 @@ class Tizen100CapiSystemUsbhost {
   late final _usb_host_release_interface = _usb_host_release_interfacePtr
       .asFunction<int Function(usb_host_interface_h)>();
 
-  /// @ingroup CAPI_USB_HOST_INTERFACE_MODULE
-  /// @brief Gets the "number" of the given USB interface handle.
-  /// @details Gets the index of the interface, as passed to usb_host_config_get_interface().
-  /// @since_tizen 3.0
-  /// @param[in] interface An interface
-  /// @param[out] number Number of given interface
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
+  /// Gets the "number" of the given USB interface handle.
   ///
-  /// @code
+  /// Gets the index of the interface, as passed to usb_host_config_get_interface().
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `interface` (in): An interface
+  /// - `number` (out): Number of given interface
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_INTERFACE_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   /// #include <stdio.h>
   ///
@@ -1968,7 +2399,7 @@ class Tizen100CapiSystemUsbhost {
   ///
   /// printf("Interface index: %d\n", number);
   /// }
-  /// @endcode
+  /// ```
   int usb_host_interface_get_number(
     usb_host_interface_h interface1,
     ffi.Pointer<ffi.Int> number,
@@ -1986,18 +2417,29 @@ class Tizen100CapiSystemUsbhost {
   late final _usb_host_interface_get_number = _usb_host_interface_get_numberPtr
       .asFunction<int Function(usb_host_interface_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @ingroup CAPI_USB_HOST_INTERFACE_MODULE
-  /// @brief Gets the number of endpoints in given USB interface.
-  /// @details Gets the number of endpoints supported by the provided interface.
-  /// @since_tizen 3.0
-  /// @param[in] interface An interface
-  /// @param[out] num_endpoints Number of endpoints in @a interface
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
+  /// Gets the number of endpoints in given USB interface.
   ///
-  /// @code
+  /// Gets the number of endpoints supported by the provided interface.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `interface` (in): An interface
+  /// - `num_endpoints` (out): Number of endpoints in `interface`
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_INTERFACE_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   /// #include <stdio.h>
   ///
@@ -2011,7 +2453,7 @@ class Tizen100CapiSystemUsbhost {
   ///
   /// printf("Number of endpoints: %d\n", num_endpoints);
   /// }
-  /// @endcode
+  /// ```
   int usb_host_interface_get_num_endpoints(
     usb_host_interface_h interface1,
     ffi.Pointer<ffi.Int> num_endpoints,
@@ -2030,20 +2472,33 @@ class Tizen100CapiSystemUsbhost {
       _usb_host_interface_get_num_endpointsPtr.asFunction<
           int Function(usb_host_interface_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @ingroup CAPI_USB_HOST_INTERFACE_MODULE
-  /// @brief Gets an endpoint via index from given USB interface.
-  /// @details Returns the correct endpoint of the provided interface by its index.
-  /// @since_tizen 3.0
-  /// @param[in] interface Interface handle
-  /// @param[in] ep_index index of endpoint to retrieve (counting from 0)
-  /// @param[out] ep Endpoint handle
-  /// @remarks @a ep handle is no longer valid when config will be destroyed. There is no need to destroy it,
-  /// it is done automatically when the configuration is destroyed.
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
+  /// Gets an endpoint via index from given USB interface.
   ///
-  /// @code
+  /// Returns the correct endpoint of the provided interface by its index.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - `ep` handle is no longer valid when config will be destroyed. There is no need to destroy it,
+  /// - it is done automatically when the configuration is destroyed.
+  ///
+  /// **Parameters:**
+  /// - `interface` (in): Interface handle
+  /// - `ep_index` (in): index of endpoint to retrieve (counting from 0)
+  /// - `ep` (out): Endpoint handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_INTERFACE_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   ///
   /// #define ENDPOINT_INDEX 3
@@ -2059,7 +2514,7 @@ class Tizen100CapiSystemUsbhost {
   ///
   /// return ret;
   /// }
-  /// @endcode
+  /// ```
   int usb_host_interface_get_endpoint(
     usb_host_interface_h interface1,
     int ep_index,
@@ -2082,17 +2537,28 @@ class Tizen100CapiSystemUsbhost {
           int Function(
               usb_host_interface_h, int, ffi.Pointer<usb_host_endpoint_h>)>();
 
-  /// @ingroup CAPI_USB_HOST_INTERFACE_MODULE
-  /// @brief Sets an alternative setting for given USB interface.
-  /// @details Selects an alternative setting represented by the provided index.
-  /// @since_tizen 3.0
-  /// @param[in] interface Interface handle
-  /// @param[in] altsetting Index of new alternative setting for given interface
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
+  /// Sets an alternative setting for given USB interface.
   ///
-  /// @code
+  /// Selects an alternative setting represented by the provided index.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `interface` (in): Interface handle
+  /// - `altsetting` (in): Index of new alternative setting for given interface
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_INTERFACE_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   ///
   /// void set_0_altsetting(usb_host_interface_h interface)
@@ -2101,7 +2567,7 @@ class Tizen100CapiSystemUsbhost {
   /// if (ret != USB_HOST_ERROR_NONE)
   /// handle_error(ret);
   /// }
-  /// @endcode
+  /// ```
   int usb_host_interface_set_altsetting(
     usb_host_interface_h interface1,
     int altsetting,
@@ -2119,18 +2585,29 @@ class Tizen100CapiSystemUsbhost {
       _usb_host_interface_set_altsettingPtr
           .asFunction<int Function(usb_host_interface_h, int)>();
 
-  /// @ingroup CAPI_USB_HOST_INTERFACE_MODULE
-  /// @brief Gets current alternative setting from an interface.
-  /// @details Retrieves the currently selected alternative setting.
-  /// @since_tizen 4.0
-  /// @param[in] interface Interface handle
-  /// @param[out] altsetting Index of alternative setting set for the given interface
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
+  /// Gets current alternative setting from an interface.
   ///
-  /// @code
+  /// Retrieves the currently selected alternative setting.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `interface` (in): Interface handle
+  /// - `altsetting` (out): Index of alternative setting set for the given interface
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_INTERFACE_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   /// #include <stdio.h>
   ///
@@ -2144,7 +2621,7 @@ class Tizen100CapiSystemUsbhost {
   ///
   /// printf("Current alternative setting index: %d\n");
   /// }
-  /// @endcode
+  /// ```
   int usb_host_interface_get_altsetting(
     usb_host_interface_h interface1,
     ffi.Pointer<ffi.Int> altsetting,
@@ -2163,23 +2640,34 @@ class Tizen100CapiSystemUsbhost {
       _usb_host_interface_get_altsettingPtr.asFunction<
           int Function(usb_host_interface_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @ingroup CAPI_USB_HOST_INTERFACE_MODULE
-  /// @brief Gets a string describing the given USB interface into a buffer.
-  /// @details Returns a string representation of the given USB interface.
-  /// @since_tizen 3.0
-  /// @param[in] interface An interface
-  /// @param[in, out] length Pointer to a variable containing the current size of the buffer,
-  /// which will be modified to actual usage
-  /// @param[out] data Buffer to store string
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #USB_HOST_ERROR_OVERFLOW There was no space in buffer
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
-  /// @pre device which interface is part of must be opened by usb_host_device_open() or
-  /// usb_host_device_open_with_vid_pid()
+  /// Gets a string describing the given USB interface into a buffer.
   ///
-  /// @code
+  /// Returns a string representation of the given USB interface.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `interface` (in): An interface
+  /// - `length` (in, out): Pointer to a variable containing the current size of the buffer, which will be modified to actual usage
+  /// - `data` (out): Buffer to store string
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `USB_HOST_ERROR_OVERFLOW`: There was no space in buffer
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  ///
+  /// **Preconditions:**
+  /// - device which interface is part of must be opened by usb_host_device_open() or usb_host_device_open_with_vid_pid()
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_INTERFACE_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   /// #include <stdio.h>
   ///
@@ -2198,7 +2686,7 @@ class Tizen100CapiSystemUsbhost {
   ///
   /// printf("Interface: %s\n", data);
   /// }
-  /// @endcode
+  /// ```
   int usb_host_interface_get_str(
     usb_host_interface_h interface1,
     ffi.Pointer<ffi.Int> length,
@@ -2220,18 +2708,29 @@ class Tizen100CapiSystemUsbhost {
           int Function(usb_host_interface_h, ffi.Pointer<ffi.Int>,
               ffi.Pointer<ffi.UnsignedChar>)>();
 
-  /// @ingroup CAPI_USB_HOST_ENDPOINT_MODULE
-  /// @brief Gets the "number" of the given USB endpoint handle.
-  /// @details Gets the index of the endpoint handle, as passed to usb_host_interface_get_endpoint().
-  /// @since_tizen 3.0
-  /// @param[in] ep An endpoint
-  /// @param[out] number Number of given endpoint
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
+  /// Gets the "number" of the given USB endpoint handle.
   ///
-  /// @code
+  /// Gets the index of the endpoint handle, as passed to usb_host_interface_get_endpoint().
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `ep` (in): An endpoint
+  /// - `number` (out): Number of given endpoint
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_ENDPOINT_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   /// #include <stdio.h>
   ///
@@ -2245,7 +2744,7 @@ class Tizen100CapiSystemUsbhost {
   ///
   /// printf("Endpoint index: %d\n", number);
   /// }
-  /// @endcode
+  /// ```
   int usb_host_endpoint_get_number(
     usb_host_endpoint_h ep,
     ffi.Pointer<ffi.Int> number,
@@ -2263,18 +2762,29 @@ class Tizen100CapiSystemUsbhost {
   late final _usb_host_endpoint_get_number = _usb_host_endpoint_get_numberPtr
       .asFunction<int Function(usb_host_endpoint_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @ingroup CAPI_USB_HOST_ENDPOINT_MODULE
-  /// @brief Gets the direction of the given USB endpoint handle.
-  /// @details Returns the direction of the provided USB endpoint handle.
-  /// @since_tizen 3.0
-  /// @param[in] ep An endpoint
-  /// @param[out] direction Direction of endpoint (a value from enum #usb_host_endpoint_direction_e)
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
+  /// Gets the direction of the given USB endpoint handle.
   ///
-  /// @code
+  /// Returns the direction of the provided USB endpoint handle.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `ep` (in): An endpoint
+  /// - `direction` (out): Direction of endpoint (a value from enum `usb_host_endpoint_direction_e`)
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_ENDPOINT_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   /// #include <stdio.h>
   ///
@@ -2296,7 +2806,7 @@ class Tizen100CapiSystemUsbhost {
   /// break;
   /// }
   /// }
-  /// @endcode
+  /// ```
   int usb_host_endpoint_get_direction(
     usb_host_endpoint_h ep,
     ffi.Pointer<ffi.Int32> direction,
@@ -2315,18 +2825,29 @@ class Tizen100CapiSystemUsbhost {
       _usb_host_endpoint_get_directionPtr.asFunction<
           int Function(usb_host_endpoint_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @ingroup CAPI_USB_HOST_ENDPOINT_MODULE
-  /// @brief Gets transfer type of the given USB endpoint handle.
-  /// @details Returns the transfer type of the provided USB endpoint handle.
-  /// @since_tizen 3.0
-  /// @param[in] ep An endpoint
-  /// @param[out] transfer_type Transfer type (a value from enum #usb_host_transfer_type_e)
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
+  /// Gets transfer type of the given USB endpoint handle.
   ///
-  /// @code
+  /// Returns the transfer type of the provided USB endpoint handle.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `ep` (in): An endpoint
+  /// - `transfer_type` (out): Transfer type (a value from enum `usb_host_transfer_type_e`)
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_ENDPOINT_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   /// #include <stdio.h>
   ///
@@ -2354,7 +2875,7 @@ class Tizen100CapiSystemUsbhost {
   /// break;
   /// }
   /// }
-  /// @endcode
+  /// ```
   int usb_host_endpoint_get_transfer_type(
     usb_host_endpoint_h ep,
     ffi.Pointer<ffi.Int32> transfer_type,
@@ -2373,18 +2894,29 @@ class Tizen100CapiSystemUsbhost {
       _usb_host_endpoint_get_transfer_typePtr.asFunction<
           int Function(usb_host_endpoint_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @ingroup CAPI_USB_HOST_ENDPOINT_MODULE
-  /// @brief Gets synchronization type of given USB endpoint handle.
-  /// @details Returns the synchronization type of provided USB endpoint handle.
-  /// @since_tizen 3.0
-  /// @param[in] ep An endpoint
-  /// @param[out] synch_type Synch type (a value from enum #usb_host_iso_sync_type_e)
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
+  /// Gets synchronization type of given USB endpoint handle.
   ///
-  /// @code
+  /// Returns the synchronization type of provided USB endpoint handle.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `ep` (in): An endpoint
+  /// - `synch_type` (out): Synch type (a value from enum `usb_host_iso_sync_type_e`)
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_ENDPOINT_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   /// #include <stdio.h>
   ///
@@ -2412,7 +2944,7 @@ class Tizen100CapiSystemUsbhost {
   /// break;
   /// }
   /// }
-  /// @endcode
+  /// ```
   int usb_host_endpoint_get_synch_type(
     usb_host_endpoint_h ep,
     ffi.Pointer<ffi.Int32> synch_type,
@@ -2431,18 +2963,29 @@ class Tizen100CapiSystemUsbhost {
       _usb_host_endpoint_get_synch_typePtr.asFunction<
           int Function(usb_host_endpoint_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @ingroup CAPI_USB_HOST_ENDPOINT_MODULE
-  /// @brief Gets the usage type of the given USB endpoint handle.
-  /// @details Returns the usage type of the provided USB endpoint handle.
-  /// @since_tizen 3.0
-  /// @param[in] ep An endpoint
-  /// @param[out] usage_type Usage type (a value from enum #usb_host_usage_type_e)
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
+  /// Gets the usage type of the given USB endpoint handle.
   ///
-  /// @code
+  /// Returns the usage type of the provided USB endpoint handle.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `ep` (in): An endpoint
+  /// - `usage_type` (out): Usage type (a value from enum `usb_host_usage_type_e`)
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_ENDPOINT_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   /// #include <stdio.h>
   ///
@@ -2467,7 +3010,7 @@ class Tizen100CapiSystemUsbhost {
   /// break;
   /// }
   /// }
-  /// @endcode
+  /// ```
   int usb_host_endpoint_get_usage_type(
     usb_host_endpoint_h ep,
     ffi.Pointer<ffi.Int32> usage_type,
@@ -2486,17 +3029,28 @@ class Tizen100CapiSystemUsbhost {
       _usb_host_endpoint_get_usage_typePtr.asFunction<
           int Function(usb_host_endpoint_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @ingroup CAPI_USB_HOST_ENDPOINT_MODULE
-  /// @brief Gets max packet size from given USB endpoint handle.
-  /// @details Gets max packet size from given USB endpoint handle.
-  /// @since_tizen 3.0
-  /// @param[in] ep An endpoint
-  /// @param[out] max_packet_size Max packet size, in bytes
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
+  /// Gets max packet size from given USB endpoint handle.
   ///
-  /// @code
+  /// Gets max packet size from given USB endpoint handle.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `ep` (in): An endpoint
+  /// - `max_packet_size` (out): Max packet size, in bytes
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_ENDPOINT_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   /// #include <stdio.h>
   ///
@@ -2510,7 +3064,7 @@ class Tizen100CapiSystemUsbhost {
   ///
   /// printf("Maximum packet size: %d bytes\n", max_packet_size);
   /// }
-  /// @endcode
+  /// ```
   int usb_host_endpoint_get_max_packet_size(
     usb_host_endpoint_h ep,
     ffi.Pointer<ffi.Int> max_packet_size,
@@ -2529,17 +3083,28 @@ class Tizen100CapiSystemUsbhost {
       _usb_host_endpoint_get_max_packet_sizePtr.asFunction<
           int Function(usb_host_endpoint_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @ingroup CAPI_USB_HOST_ENDPOINT_MODULE
-  /// @brief Gets interval for polling endpoint for data transfers.
-  /// @details Returns the interval for polling endpoint for data transfers.
-  /// @since_tizen 3.0
-  /// @param[in] ep An endpoint
-  /// @param[out] interval Interval for polling, in frame counts (refer to USB protocol specification)
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
+  /// Gets interval for polling endpoint for data transfers.
   ///
-  /// @code
+  /// Returns the interval for polling endpoint for data transfers.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `ep` (in): An endpoint
+  /// - `interval` (out): Interval for polling, in frame counts (refer to USB protocol specification)
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_ENDPOINT_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   /// #include <stdio.h>
   ///
@@ -2553,7 +3118,7 @@ class Tizen100CapiSystemUsbhost {
   ///
   /// printf("Polling interval: %d frames\n", interval);
   /// }
-  /// @endcode
+  /// ```
   int usb_host_endpoint_get_interval(
     usb_host_endpoint_h ep,
     ffi.Pointer<ffi.Int> interval,
@@ -2572,37 +3137,48 @@ class Tizen100CapiSystemUsbhost {
       _usb_host_endpoint_get_intervalPtr.asFunction<
           int Function(usb_host_endpoint_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @ingroup CAPI_USB_HOST_SYNCIO_MODULE
-  /// @brief Performs unidirectional USB control transfer on given device.
-  /// @details For more explanation about the values please refer to USB protocol specification
-  /// @since_tizen 3.0
-  /// @remarks The wValue, wIndex and wLength fields values should be given in host-endian
-  /// byte order.
-  /// @param[in] dev Device handle
-  /// @param[in] bm_request_type bmRequestType type field for the setup packet
-  /// @param[in] b_request bRequest field for the setup packet
-  /// @param[in] w_value wValue field for the setup packet
-  /// @param[in] w_index wIndex field for the setup packet
-  /// @param[in] data Suitably-sized data buffer for either input or output
-  /// (depending on direction bits within bmRequestType)
-  /// @param[in] w_length wLength field for the setup packet. The data buffer should
-  /// be at least this size
-  /// @param[in] timeout Timeout (in milliseconds) that this function should wait
-  /// before giving up due to no response being received. For an unlimited
-  /// @param[out] transferred Number of transferred bytes
-  /// timeout, 0 value should be used.
-  /// @return  0 on success, negative error code otherwise
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_TIMED_OUT Transfer timed out
-  /// @retval #USB_HOST_ERROR_BROKEN_PIPE Control request was not supported by the device
-  /// @retval #USB_HOST_ERROR_NO_SUCH_DEVICE The device has been disconnected
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
-  /// @retval #USB_HOST_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #USB_HOST_ERROR_DEVICE_NOT_OPENED The device was not opened
-  /// @retval #USB_HOST_ERROR_OVERFLOW Device offered more data
-  /// @pre dev must point to device opened by usb_host_device_open() or usb_host_device_open_with_vid_pid()
+  /// Performs unidirectional USB control transfer on given device.
   ///
-  /// @code
+  /// For more explanation about the values please refer to USB protocol specification
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The wValue, wIndex and wLength fields values should be given in host-endian
+  /// - byte order.
+  ///
+  /// **Parameters:**
+  /// - `dev` (in): Device handle
+  /// - `bm_request_type` (in): bmRequestType type field for the setup packet
+  /// - `b_request` (in): bRequest field for the setup packet
+  /// - `w_value` (in): wValue field for the setup packet
+  /// - `w_index` (in): wIndex field for the setup packet
+  /// - `data` (in): Suitably-sized data buffer for either input or output (depending on direction bits within bmRequestType)
+  /// - `w_length` (in): wLength field for the setup packet. The data buffer should be at least this size
+  /// - `timeout` (in): Timeout (in milliseconds) that this function should wait before giving up due to no response being received. For an unlimited
+  /// - `transferred` (out): Number of transferred bytes timeout, 0 value should be used.
+  ///
+  /// **Returns:**
+  /// - 0 on success, negative error code otherwise
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_TIMED_OUT`: Transfer timed out
+  /// - `USB_HOST_ERROR_BROKEN_PIPE`: Control request was not supported by the device
+  /// - `USB_HOST_ERROR_NO_SUCH_DEVICE`: The device has been disconnected
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  /// - `USB_HOST_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `USB_HOST_ERROR_DEVICE_NOT_OPENED`: The device was not opened
+  /// - `USB_HOST_ERROR_OVERFLOW`: Device offered more data
+  ///
+  /// **Preconditions:**
+  /// - dev must point to device opened by usb_host_device_open() or usb_host_device_open_with_vid_pid()
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_SYNCIO_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   ///
   /// #define REQUEST_TYPE_FOR_WRITING 0x40
@@ -2631,7 +3207,7 @@ class Tizen100CapiSystemUsbhost {
   /// if (ret != USB_HOST_ERROR_NONE)
   /// handle_error(ret);
   /// }
-  /// @endcode
+  /// ```
   int usb_host_control_transfer(
     usb_host_device_h dev,
     int bm_request_type,
@@ -2673,34 +3249,41 @@ class Tizen100CapiSystemUsbhost {
           int Function(usb_host_device_h, int, int, int, int,
               ffi.Pointer<ffi.UnsignedChar>, int, int, ffi.Pointer<ffi.Int>)>();
 
-  /// @ingroup CAPI_USB_HOST_SYNCIO_MODULE
-  /// @brief Performs unidirectional transfer on given endpoint.
-  /// @details Performs a USB transfer on given endpoint. Direction of transfer is
-  /// determined by the endpoint.
-  /// @since_tizen 3.0
-  /// @param[in] ep Endpoint handle
-  /// @param[in] data Suitably-sized data buffer for either input or output
-  /// (depending on endpoint)
-  /// @param[in] length For writes, the number of bytes from data to be sent, for
-  /// reads the maximum number of bytes to receive into the data buffer
-  /// @param[out] transferred number of bytes actually transferred
-  /// @param[in] timeout Timeout (in milliseconds) that this function should wait
-  /// before giving up due to no response being received (for an unlimited
-  /// timeout 0 value should be used)
-  /// @return 0 on success (and populates @a transferred), negative error code on error
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_TIMED_OUT Transfer timed out
-  /// @retval #USB_HOST_ERROR_BROKEN_PIPE Endpoint halted
-  /// @retval #USB_HOST_ERROR_OVERFLOW Device offered more data
-  /// @retval #USB_HOST_ERROR_NO_SUCH_DEVICE Device has been disconnected
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
-  /// @retval #USB_HOST_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #USB_HOST_ERROR_DEVICE_NOT_OPENED The device was not opened
-  /// @pre ep must be a valid endpoint received from usb_host_interface_get_endpoint().
-  /// @pre ep must be an endpoint of device opened by usb_host_device_open() or
-  /// usb_host_device_open_with_vid_pid().
+  /// Performs unidirectional transfer on given endpoint.
   ///
-  /// @code
+  /// Performs a USB transfer on given endpoint. Direction of transfer is determined by the endpoint.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `ep` (in): Endpoint handle
+  /// - `data` (in): Suitably-sized data buffer for either input or output (depending on endpoint)
+  /// - `length` (in): For writes, the number of bytes from data to be sent, for reads the maximum number of bytes to receive into the data buffer
+  /// - `transferred` (out): number of bytes actually transferred
+  /// - `timeout` (in): Timeout (in milliseconds) that this function should wait before giving up due to no response being received (for an unlimited timeout 0 value should be used)
+  ///
+  /// **Returns:**
+  /// - 0 on success (and populates `transferred`), negative error code on error
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_TIMED_OUT`: Transfer timed out
+  /// - `USB_HOST_ERROR_BROKEN_PIPE`: Endpoint halted
+  /// - `USB_HOST_ERROR_OVERFLOW`: Device offered more data
+  /// - `USB_HOST_ERROR_NO_SUCH_DEVICE`: Device has been disconnected
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  /// - `USB_HOST_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `USB_HOST_ERROR_DEVICE_NOT_OPENED`: The device was not opened
+  ///
+  /// **Preconditions:**
+  /// - ep must be a valid endpoint received from usb_host_interface_get_endpoint().
+  /// - ep must be an endpoint of device opened by usb_host_device_open() or usb_host_device_open_with_vid_pid().
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_SYNCIO_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   ///
   /// #define REQUEST_TYPE_FOR_WRITING 0x40
@@ -2727,7 +3310,7 @@ class Tizen100CapiSystemUsbhost {
   /// if (ret != USB_HOST_ERROR_NONE)
   /// handle_error(ret);
   /// }
-  /// @endcode
+  /// ```
   int usb_host_transfer(
     usb_host_endpoint_h ep,
     ffi.Pointer<ffi.UnsignedChar> data,
@@ -2756,23 +3339,33 @@ class Tizen100CapiSystemUsbhost {
       int Function(usb_host_endpoint_h, ffi.Pointer<ffi.UnsignedChar>, int,
           ffi.Pointer<ffi.Int>, int)>();
 
-  /// @ingroup CAPI_USB_HOST_HOTPLUG_MODULE
-  /// @brief Sets a callback function to be invoked when a device is connected or disconnected.
-  /// @details After this call, a callback function will be invoked whenever a device
-  /// is connected or disconnected.
-  /// @since_tizen 4.0
-  /// @param[in] ctx Context handle
-  /// @param[in] cb The callback function to be registered
-  /// @param[in] event Event that will trigger registered callback
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @param[out] handle Handle of the registered callback
-  /// @return 0 on success, negative error code on error
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
-  /// @retval #USB_HOST_ERROR_OUT_OF_MEMORY Out of memory
+  /// Sets a callback function to be invoked when a device is connected or disconnected.
   ///
-  /// @code
+  /// After this call, a callback function will be invoked whenever a device is connected or disconnected.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `ctx` (in): Context handle
+  /// - `cb` (in): The callback function to be registered
+  /// - `event` (in): Event that will trigger registered callback
+  /// - `user_data` (in): The user data to be passed to the callback function
+  /// - `handle` (out): Handle of the registered callback
+  ///
+  /// **Returns:**
+  /// - 0 on success, negative error code on error
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  /// - `USB_HOST_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_HOTPLUG_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   ///
   /// void hotplug_callback(usb_host_device_h dev, void *user_data)
@@ -2794,7 +3387,7 @@ class Tizen100CapiSystemUsbhost {
   ///
   /// return handle;
   /// }
-  /// @endcode
+  /// ```
   int usb_host_set_hotplug_cb(
     usb_host_context_h ctx,
     usb_host_hotplug_cb cb,
@@ -2823,17 +3416,28 @@ class Tizen100CapiSystemUsbhost {
       int Function(usb_host_context_h, usb_host_hotplug_cb, int,
           ffi.Pointer<ffi.Void>, ffi.Pointer<usb_host_hotplug_h>)>();
 
-  /// @ingroup CAPI_USB_HOST_HOTPLUG_MODULE
-  /// @brief Unsets the (dis)connection hotplug callback function.
-  /// @details After this call, the callback will not be connected anymore.
-  /// @since_tizen 4.0
-  /// @param[in] handle Handle of the callback to be unregistered
-  /// @return 0 on success, negative error code on error
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
-  /// @retval #USB_HOST_ERROR_NOT_SUPPORTED Not supported
+  /// Unsets the (dis)connection hotplug callback function.
   ///
-  /// @code
+  /// After this call, the callback will not be connected anymore.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): Handle of the callback to be unregistered
+  ///
+  /// **Returns:**
+  /// - 0 on success, negative error code on error
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  /// - `USB_HOST_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_HOTPLUG_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   ///
   /// void unset_callback(usb_host_hotplug_h handle, struct our_data_type *callback_data)
@@ -2845,7 +3449,7 @@ class Tizen100CapiSystemUsbhost {
   /// // Make sure the callback is not running in parallel!
   /// destroy_callback_data(callback_data);
   /// }
-  /// @endcode
+  /// ```
   int usb_host_unset_hotplug_cb(
     usb_host_hotplug_h handle,
   ) {
@@ -2860,29 +3464,41 @@ class Tizen100CapiSystemUsbhost {
   late final _usb_host_unset_hotplug_cb = _usb_host_unset_hotplug_cbPtr
       .asFunction<int Function(usb_host_hotplug_h)>();
 
-  /// @ingroup CAPI_USB_HOST_ASYNC_MODULE
-  /// @brief Prepares an asynchronous USB transfer and provides a handle to it.
-  /// @details This function prepares transfer handle for asynchronous communication.
-  /// Transfer handle can be used for multiple transfers after this initialization.
-  /// @since_tizen 5.0
-  /// @param[in] ep Endpoint handle
-  /// @param[in] callback Callback to be called when transfer is finished
-  /// @param[in] data Suitably-sized data buffer, similar to synchronized transfer
-  /// @param[in] length For writes, the number of bytes from data to be sent; for
-  /// reads, the maximum number of bytes to receive into the data buffer
-  /// @param[in] user_data Pointer to data which will be passed to callback function later on
-  /// @param[in] timeout Timeout (in milliseconds) that transfer should wait before giving up
-  /// due to no response being received (for an unlimited timeout use value of 0)
-  /// @param[out] transfer Transfer handle
-  /// @return 0 on success, negative error code on error
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
-  /// @retval #USB_HOST_ERROR_OUT_OF_MEMORY Out of memory
-  /// @pre @a ep must be a valid endpoint received from usb_host_interface_get_endpoint().
-  /// @post @a transfer should be destroyed by calling usb_host_transfer_destroy() when it's no longer needed.
+  /// Prepares an asynchronous USB transfer and provides a handle to it.
   ///
-  /// @code
+  /// This function prepares transfer handle for asynchronous communication. Transfer handle can be used for multiple transfers after this initialization.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `ep` (in): Endpoint handle
+  /// - `callback` (in): Callback to be called when transfer is finished
+  /// - `data` (in): Suitably-sized data buffer, similar to synchronized transfer
+  /// - `length` (in): For writes, the number of bytes from data to be sent; for reads, the maximum number of bytes to receive into the data buffer
+  /// - `user_data` (in): Pointer to data which will be passed to callback function later on
+  /// - `timeout` (in): Timeout (in milliseconds) that transfer should wait before giving up due to no response being received (for an unlimited timeout use value of 0)
+  /// - `transfer` (out): Transfer handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, negative error code on error
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  /// - `USB_HOST_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - `ep` must be a valid endpoint received from usb_host_interface_get_endpoint().
+  ///
+  /// **Postconditions:**
+  /// - `transfer` should be destroyed by calling usb_host_transfer_destroy() when it's no longer needed.
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_ASYNC_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   ///
   /// static unsigned char data_to_send[] = { 0x1, 0x2, 0x3, 0x4 };
@@ -2933,7 +3549,7 @@ class Tizen100CapiSystemUsbhost {
   /// if (ret != USB_HOST_ERROR_NONE)
   /// handle_error(ret);
   /// }
-  /// @endcode
+  /// ```
   int usb_host_create_transfer(
     usb_host_endpoint_h ep,
     usb_host_transferred_cb callback,
@@ -2975,33 +3591,42 @@ class Tizen100CapiSystemUsbhost {
               int,
               ffi.Pointer<usb_host_transfer_h>)>();
 
-  /// @ingroup CAPI_USB_HOST_ASYNC_MODULE
-  /// @brief Prepares an asynchronous USB isochronous transfer and provides a handle to it.
-  /// @details This function prepares transfer handle for asynchronous communication.
-  /// Usage is similar to usb_host_create_transfer(), except this function is intended for
-  /// isochronous endpoints. Transfer handle can be used for multiple transfers after this initialization.
-  /// Note however, that this function needs to allocate memory for @a num_iso_packets isochronous packets and
-  /// it will be the limit for number of them in this transfer.
-  /// @since_tizen 5.0
-  /// @param[in] ep Endpoint handle
-  /// @param[in] callback Callback to be called when transfer is finished
-  /// @param[in] data Suitably-sized data buffer, similar to synchronized transfer
-  /// @param[in] length For writes, the number of bytes from data to be sent; for
-  /// reads, the maximum number of bytes to receive into the data buffer
-  /// @param[in] num_iso_packets Number of isochronous packets
-  /// @param[in] user_data Pointer to data which will be passed to callback function later on
-  /// @param[in] timeout Timeout (in milliseconds) that transfer should wait before giving up
-  /// due to no response being received (for an unlimited timeout use value of 0)
-  /// @param[out] transfer Transfer handle
-  /// @return 0 on success, negative error code on error
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
-  /// @retval #USB_HOST_ERROR_OUT_OF_MEMORY Out of memory
-  /// @pre @a ep must be a valid endpoint received from usb_host_interface_get_endpoint().
-  /// @post @a transfer should be destroyed by calling usb_host_transfer_destroy() when it's no longer needed.
+  /// Prepares an asynchronous USB isochronous transfer and provides a handle to it.
   ///
-  /// @code
+  /// This function prepares transfer handle for asynchronous communication. Usage is similar to usb_host_create_transfer(), except this function is intended for isochronous endpoints. Transfer handle can be used for multiple transfers after this initialization. Note however, that this function needs to allocate memory for `num_iso_packets` isochronous packets and it will be the limit for number of them in this transfer.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `ep` (in): Endpoint handle
+  /// - `callback` (in): Callback to be called when transfer is finished
+  /// - `data` (in): Suitably-sized data buffer, similar to synchronized transfer
+  /// - `length` (in): For writes, the number of bytes from data to be sent; for reads, the maximum number of bytes to receive into the data buffer
+  /// - `num_iso_packets` (in): Number of isochronous packets
+  /// - `user_data` (in): Pointer to data which will be passed to callback function later on
+  /// - `timeout` (in): Timeout (in milliseconds) that transfer should wait before giving up due to no response being received (for an unlimited timeout use value of 0)
+  /// - `transfer` (out): Transfer handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, negative error code on error
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  /// - `USB_HOST_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - `ep` must be a valid endpoint received from usb_host_interface_get_endpoint().
+  ///
+  /// **Postconditions:**
+  /// - `transfer` should be destroyed by calling usb_host_transfer_destroy() when it's no longer needed.
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_ASYNC_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   ///
   /// static unsigned char data_to_send[] = { 0x1, 0x2, 0x3, 0x4 };
@@ -3053,7 +3678,7 @@ class Tizen100CapiSystemUsbhost {
   /// if (ret != USB_HOST_ERROR_NONE)
   /// handle_error(ret);
   /// }
-  /// @endcode
+  /// ```
   int usb_host_create_isochronous_transfer(
     usb_host_endpoint_h ep,
     usb_host_transferred_cb callback,
@@ -3100,31 +3725,41 @@ class Tizen100CapiSystemUsbhost {
               int,
               ffi.Pointer<usb_host_transfer_h>)>();
 
-  /// @ingroup CAPI_USB_HOST_ASYNC_MODULE
-  /// @brief Prepares an asynchronous USB control transfer and provides a handle to it.
-  /// @details This function prepares control transfer handle. Transfer handle can
-  /// be used for multiple transfers after this initialization. Note, that first
-  /// 8 bytes of data buffer are interpreted as control setup packet. You may use
-  /// usb_host_control_transfer_set_* functions to set the setup packet fields.
-  /// @since_tizen 5.0
-  /// @param[in] dev Device handle
-  /// @param[in] callback Callback to be called when transfer is finished
-  /// @param[in] data Suitably-sized data buffer
-  /// @param[in] length For writes, the number of bytes from data to be sent, for
-  /// reads, the maximum number of bytes to receive into the data buffer
-  /// @param[in] user_data Pointer to data which will be passed to callback function later on
-  /// @param[in] timeout Timeout (in milliseconds) that transfer should wait before giving up
-  /// due to no response being received (for an unlimited timeout use value of 0)
-  /// @param[out] transfer Transfer handle
-  /// @return 0 on success, negative error code on error
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
-  /// @retval #USB_HOST_ERROR_OUT_OF_MEMORY Out of memory
-  /// @pre @a dev must be an opened device handle
-  /// @post @a transfer should be destroyed by calling usb_host_transfer_destroy() when it's no longer needed.
+  /// Prepares an asynchronous USB control transfer and provides a handle to it.
   ///
-  /// @code
+  /// This function prepares control transfer handle. Transfer handle can be used for multiple transfers after this initialization. Note, that first 8 bytes of data buffer are interpreted as control setup packet. You may use usb_host_control_transfer_set_* functions to set the setup packet fields.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `dev` (in): Device handle
+  /// - `callback` (in): Callback to be called when transfer is finished
+  /// - `data` (in): Suitably-sized data buffer
+  /// - `length` (in): For writes, the number of bytes from data to be sent, for reads, the maximum number of bytes to receive into the data buffer
+  /// - `user_data` (in): Pointer to data which will be passed to callback function later on
+  /// - `timeout` (in): Timeout (in milliseconds) that transfer should wait before giving up due to no response being received (for an unlimited timeout use value of 0)
+  /// - `transfer` (out): Transfer handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, negative error code on error
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  /// - `USB_HOST_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - `dev` must be an opened device handle
+  ///
+  /// **Postconditions:**
+  /// - `transfer` should be destroyed by calling usb_host_transfer_destroy() when it's no longer needed.
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_ASYNC_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   ///
   /// static unsigned char data_to_send[] = { 0x1, 0x2, 0x3, 0x4 };
@@ -3176,7 +3811,7 @@ class Tizen100CapiSystemUsbhost {
   /// if (ret != USB_HOST_ERROR_NONE)
   /// handle_error(ret);
   /// }
-  /// @endcode
+  /// ```
   int usb_host_create_control_transfer(
     usb_host_device_h dev,
     usb_host_transferred_cb callback,
@@ -3219,20 +3854,32 @@ class Tizen100CapiSystemUsbhost {
               int,
               ffi.Pointer<usb_host_transfer_h>)>();
 
-  /// @ingroup CAPI_USB_HOST_ASYNC_MODULE
-  /// @brief Sets an endpoint for asynchronous transfer for a transfer handle.
-  /// @details This function changes the endpoint on which given transfer is performed. Next submissions will be
-  /// performed on this endpoint.
-  /// @since_tizen 5.0
-  /// @param[in] transfer A transfer handle
-  /// @param[in] ep An endpoint handle
-  /// @return 0 on success, negative error code on error
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
-  /// @pre @a transfer should be created by usb_host_create_transfer() or usb_host_create_isochronous_transfer().
+  /// Sets an endpoint for asynchronous transfer for a transfer handle.
   ///
-  /// @code
+  /// This function changes the endpoint on which given transfer is performed. Next submissions will be performed on this endpoint.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `transfer` (in): A transfer handle
+  /// - `ep` (in): An endpoint handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, negative error code on error
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  ///
+  /// **Preconditions:**
+  /// - `transfer` should be created by usb_host_create_transfer() or usb_host_create_isochronous_transfer().
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_ASYNC_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   ///
   /// void change_endpoint(usb_host_transfer_h transfer, usb_host_endpoint_h ep)
@@ -3241,7 +3888,7 @@ class Tizen100CapiSystemUsbhost {
   /// if (ret != USB_HOST_ERROR_NONE)
   /// handle_error(ret);
   /// }
-  /// @endcode
+  /// ```
   int usb_host_transfer_set_ep(
     usb_host_transfer_h transfer,
     usb_host_endpoint_h ep,
@@ -3259,20 +3906,35 @@ class Tizen100CapiSystemUsbhost {
   late final _usb_host_transfer_set_ep = _usb_host_transfer_set_epPtr
       .asFunction<int Function(usb_host_transfer_h, usb_host_endpoint_h)>();
 
-  /// @ingroup CAPI_USB_HOST_ASYNC_MODULE
-  /// @brief Sets a callback for asynchronous transfer for a transfer handle.
-  /// @details This function changes the callback to be called on transfer completion.
-  /// @since_tizen 5.0
-  /// @remarks The user_data provided to the callback does not change.
-  /// @param[in] transfer A transfer handle
-  /// @param[in] callback A callback function
-  /// @return 0 on success, negative error code on error
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
-  /// @pre @a transfer should be created by usb_host_create_transfer() or usb_host_create_isochronous_transfer().
+  /// Sets a callback for asynchronous transfer for a transfer handle.
   ///
-  /// @code
+  /// This function changes the callback to be called on transfer completion.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Remarks:**
+  /// - The user_data provided to the callback does not change.
+  ///
+  /// **Parameters:**
+  /// - `transfer` (in): A transfer handle
+  /// - `callback` (in): A callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, negative error code on error
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  ///
+  /// **Preconditions:**
+  /// - `transfer` should be created by usb_host_create_transfer() or usb_host_create_isochronous_transfer().
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_ASYNC_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   ///
   /// void transfer_completion_cb(usb_host_transfer_h transfer, void *user_data);
@@ -3287,7 +3949,7 @@ class Tizen100CapiSystemUsbhost {
   /// if (ret != USB_HOST_ERROR_NONE)
   /// handle_error(ret);
   /// }
-  /// @endcode
+  /// ```
   int usb_host_transfer_set_callback(
     usb_host_transfer_h transfer,
     usb_host_transferred_cb callback,
@@ -3306,20 +3968,33 @@ class Tizen100CapiSystemUsbhost {
       _usb_host_transfer_set_callbackPtr.asFunction<
           int Function(usb_host_transfer_h, usb_host_transferred_cb)>();
 
-  /// @ingroup CAPI_USB_HOST_ASYNC_MODULE
-  /// @brief Sets data buffer for asynchronous transfer for a transfer handle.
-  /// @details This function changes the data buffer used for this transfer.
-  /// @since_tizen 5.0
-  /// @param[in] transfer A transfer handle
-  /// @param[in] data A data buffer
-  /// @param[in] length Length of data buffer
-  /// @return 0 on success, negative error code on error
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
-  /// @pre @a transfer should be created by usb_host_create_transfer() or usb_host_create_isochronous_transfer().
+  /// Sets data buffer for asynchronous transfer for a transfer handle.
   ///
-  /// @code
+  /// This function changes the data buffer used for this transfer.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `transfer` (in): A transfer handle
+  /// - `data` (in): A data buffer
+  /// - `length` (in): Length of data buffer
+  ///
+  /// **Returns:**
+  /// - 0 on success, negative error code on error
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  ///
+  /// **Preconditions:**
+  /// - `transfer` should be created by usb_host_create_transfer() or usb_host_create_isochronous_transfer().
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_ASYNC_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   ///
   /// #define BUFFER_SIZE 4096
@@ -3334,7 +4009,7 @@ class Tizen100CapiSystemUsbhost {
   /// if (ret != USB_HOST_ERROR_NONE)
   /// handle_error(ret);
   /// }
-  /// @endcode
+  /// ```
   int usb_host_transfer_set_data(
     usb_host_transfer_h transfer,
     ffi.Pointer<ffi.UnsignedChar> data,
@@ -3356,20 +4031,32 @@ class Tizen100CapiSystemUsbhost {
           int Function(
               usb_host_transfer_h, ffi.Pointer<ffi.UnsignedChar>, int)>();
 
-  /// @ingroup CAPI_USB_HOST_ASYNC_MODULE
-  /// @brief Sets timeout for asynchronous transfer for a transfer handle.
-  /// @details This function changes the timeout after which transfer will be stopped due to
-  /// no response being received.
-  /// @since_tizen 5.0
-  /// @param[in] transfer A transfer handle
-  /// @param[in] timeout A timeout in milliseconds
-  /// @return 0 on success, negative error code on error
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
-  /// @pre @a transfer should be created by usb_host_create_transfer() or usb_host_create_isochronous_transfer().
+  /// Sets timeout for asynchronous transfer for a transfer handle.
   ///
-  /// @code
+  /// This function changes the timeout after which transfer will be stopped due to no response being received.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `transfer` (in): A transfer handle
+  /// - `timeout` (in): A timeout in milliseconds
+  ///
+  /// **Returns:**
+  /// - 0 on success, negative error code on error
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  ///
+  /// **Preconditions:**
+  /// - `transfer` should be created by usb_host_create_transfer() or usb_host_create_isochronous_transfer().
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_ASYNC_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   ///
   /// void set_1_second_timeout(usb_host_transfer_h transfer)
@@ -3378,7 +4065,7 @@ class Tizen100CapiSystemUsbhost {
   /// if (ret != USB_HOST_ERROR_NONE)
   /// handle_error(ret);
   /// }
-  /// @endcode
+  /// ```
   int usb_host_transfer_set_timeout(
     usb_host_transfer_h transfer,
     int timeout,
@@ -3396,22 +4083,33 @@ class Tizen100CapiSystemUsbhost {
   late final _usb_host_transfer_set_timeout = _usb_host_transfer_set_timeoutPtr
       .asFunction<int Function(usb_host_transfer_h, int)>();
 
-  /// @ingroup CAPI_USB_HOST_ASYNC_MODULE
-  /// @brief Sets number of isochronous packet for isochronous transfer.
-  /// @details This function changes the number of isochronous packets in transfer.
-  /// This parameter affects only isochronous transfers (i.e. transfers on isochronous endpoints).
-  /// Use usb_host_endpoint_get_transfer_type() for checking types of your endpoints.
-  /// @since_tizen 5.0
-  /// @param[in] transfer A transfer handle
-  /// @param[in] num_iso_packets Number of isochronous packets in this transfer
-  /// @return 0 on success, negative error code on error
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
-  /// @retval #USB_HOST_ERROR_OUT_OF_MEMORY Out of memory (too many packets)
-  /// @pre @a transfer should be created by usb_host_create_transfer() or usb_host_create_isochronous_transfer().
+  /// Sets number of isochronous packet for isochronous transfer.
   ///
-  /// @code
+  /// This function changes the number of isochronous packets in transfer. This parameter affects only isochronous transfers (i.e. transfers on isochronous endpoints). Use usb_host_endpoint_get_transfer_type() for checking types of your endpoints.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `transfer` (in): A transfer handle
+  /// - `num_iso_packets` (in): Number of isochronous packets in this transfer
+  ///
+  /// **Returns:**
+  /// - 0 on success, negative error code on error
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  /// - `USB_HOST_ERROR_OUT_OF_MEMORY`: Out of memory (too many packets)
+  ///
+  /// **Preconditions:**
+  /// - `transfer` should be created by usb_host_create_transfer() or usb_host_create_isochronous_transfer().
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_ASYNC_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   ///
   /// void set_4_packets(usb_host_transfer_h transfer)
@@ -3420,7 +4118,7 @@ class Tizen100CapiSystemUsbhost {
   /// if (ret != USB_HOST_ERROR_NONE)
   /// handle_error(ret);
   /// }
-  /// @endcode
+  /// ```
   int usb_host_transfer_set_num_iso_packets(
     usb_host_transfer_h transfer,
     int num_iso_packets,
@@ -3439,19 +4137,32 @@ class Tizen100CapiSystemUsbhost {
       _usb_host_transfer_set_num_iso_packetsPtr
           .asFunction<int Function(usb_host_transfer_h, int)>();
 
-  /// @ingroup CAPI_USB_HOST_ASYNC_MODULE
-  /// @brief Sets request type for control transfer setup packet.
-  /// @details Switches the request type, which will be used for the control transfer setup packet.
-  /// @since_tizen 5.0
-  /// @param[in] transfer A transfer handle
-  /// @param[in] bm_request_type bmRequestType type field for the setup packet
-  /// @return 0 on success, negative error code on error
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
-  /// @pre @a transfer should be created by usb_host_create_control_transfer().
+  /// Sets request type for control transfer setup packet.
   ///
-  /// @code
+  /// Switches the request type, which will be used for the control transfer setup packet.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `transfer` (in): A transfer handle
+  /// - `bm_request_type` (in): bmRequestType type field for the setup packet
+  ///
+  /// **Returns:**
+  /// - 0 on success, negative error code on error
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  ///
+  /// **Preconditions:**
+  /// - `transfer` should be created by usb_host_create_control_transfer().
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_ASYNC_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   ///
   /// #define REQUEST_TYPE_FOR_WRITING 0x40
@@ -3467,7 +4178,7 @@ class Tizen100CapiSystemUsbhost {
   /// if (ret != USB_HOST_ERROR_NONE)
   /// handle_error(ret);
   /// }
-  /// @endcode
+  /// ```
   int usb_host_control_transfer_set_request_type(
     usb_host_transfer_h transfer,
     int bm_request_type,
@@ -3485,19 +4196,32 @@ class Tizen100CapiSystemUsbhost {
       _usb_host_control_transfer_set_request_typePtr
           .asFunction<int Function(usb_host_transfer_h, int)>();
 
-  /// @ingroup CAPI_USB_HOST_ASYNC_MODULE
-  /// @brief Sets request field for control transfer setup packet.
-  /// @details Switches the request code, which will be used for the control transfer setup packet.
-  /// @since_tizen 5.0
-  /// @param[in] transfer A transfer handle
-  /// @param[in] b_request Request field for the setup packet
-  /// @return 0 on success, negative error code on error
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
-  /// @pre @a transfer should be created by usb_host_create_control_transfer().
+  /// Sets request field for control transfer setup packet.
   ///
-  /// @code
+  /// Switches the request code, which will be used for the control transfer setup packet.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `transfer` (in): A transfer handle
+  /// - `b_request` (in): Request field for the setup packet
+  ///
+  /// **Returns:**
+  /// - 0 on success, negative error code on error
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  ///
+  /// **Preconditions:**
+  /// - `transfer` should be created by usb_host_create_control_transfer().
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_ASYNC_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   ///
   /// #define REQUEST 0x04
@@ -3508,7 +4232,7 @@ class Tizen100CapiSystemUsbhost {
   /// if (ret != USB_HOST_ERROR_NONE)
   /// handle_error(ret);
   /// }
-  /// @endcode
+  /// ```
   int usb_host_control_transfer_set_request(
     usb_host_transfer_h transfer,
     int b_request,
@@ -3526,19 +4250,32 @@ class Tizen100CapiSystemUsbhost {
       _usb_host_control_transfer_set_requestPtr
           .asFunction<int Function(usb_host_transfer_h, int)>();
 
-  /// @ingroup CAPI_USB_HOST_ASYNC_MODULE
-  /// @brief Sets w_value field for control transfer setup packet.
-  /// @details Sets the value of the w_value parameter of the control transfer setup packet.
-  /// @since_tizen 5.0
-  /// @param[in] transfer A transfer handle
-  /// @param[in] w_value wValue field for the setup packet
-  /// @return 0 on success, negative error code on error
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
-  /// @pre @a transfer should be created by usb_host_create_control_transfer().
+  /// Sets w_value field for control transfer setup packet.
   ///
-  /// @code
+  /// Sets the value of the w_value parameter of the control transfer setup packet.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `transfer` (in): A transfer handle
+  /// - `w_value` (in): wValue field for the setup packet
+  ///
+  /// **Returns:**
+  /// - 0 on success, negative error code on error
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  ///
+  /// **Preconditions:**
+  /// - `transfer` should be created by usb_host_create_control_transfer().
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_ASYNC_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   ///
   /// #define VALUE 0x20
@@ -3549,7 +4286,7 @@ class Tizen100CapiSystemUsbhost {
   /// if (ret != USB_HOST_ERROR_NONE)
   /// handle_error(ret);
   /// }
-  /// @endcode
+  /// ```
   int usb_host_control_transfer_set_value(
     usb_host_transfer_h transfer,
     int w_value,
@@ -3568,19 +4305,32 @@ class Tizen100CapiSystemUsbhost {
       _usb_host_control_transfer_set_valuePtr
           .asFunction<int Function(usb_host_transfer_h, int)>();
 
-  /// @ingroup CAPI_USB_HOST_ASYNC_MODULE
-  /// @brief Sets w_index field for control transfer setup packet.
-  /// @details Sets the value of the w_index parameter of the control transfer setup packet.
-  /// @since_tizen 5.0
-  /// @param[in] transfer A transfer handle
-  /// @param[in] w_index wIndex field for the setup packet
-  /// @return 0 on success, negative error code on error
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
-  /// @pre @a transfer should be created by usb_host_create_control_transfer().
+  /// Sets w_index field for control transfer setup packet.
   ///
-  /// @code
+  /// Sets the value of the w_index parameter of the control transfer setup packet.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `transfer` (in): A transfer handle
+  /// - `w_index` (in): wIndex field for the setup packet
+  ///
+  /// **Returns:**
+  /// - 0 on success, negative error code on error
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  ///
+  /// **Preconditions:**
+  /// - `transfer` should be created by usb_host_create_control_transfer().
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_ASYNC_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   ///
   /// #define INDEX 5
@@ -3591,7 +4341,7 @@ class Tizen100CapiSystemUsbhost {
   /// if (ret != USB_HOST_ERROR_NONE)
   /// handle_error(ret);
   /// }
-  /// @endcode
+  /// ```
   int usb_host_control_transfer_set_index(
     usb_host_transfer_h transfer,
     int w_index,
@@ -3610,18 +4360,29 @@ class Tizen100CapiSystemUsbhost {
       _usb_host_control_transfer_set_indexPtr
           .asFunction<int Function(usb_host_transfer_h, int)>();
 
-  /// @ingroup CAPI_USB_HOST_ASYNC_MODULE
-  /// @brief Gets the status of a transfer from a transfer handle.
-  /// @details Gets the transfer status, specified as a value of the #usb_host_transfer_status_e type.
-  /// @since_tizen 5.0
-  /// @param[in] transfer Transfer handle
-  /// @param[out] status Status of this transfer
-  /// @return 0 on success, negative error code on error
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
+  /// Gets the status of a transfer from a transfer handle.
   ///
-  /// @code
+  /// Gets the transfer status, specified as a value of the `usb_host_transfer_status_e` type.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `transfer` (in): Transfer handle
+  /// - `status` (out): Status of this transfer
+  ///
+  /// **Returns:**
+  /// - 0 on success, negative error code on error
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_ASYNC_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   /// #include <stdio.h>
   ///
@@ -3640,7 +4401,7 @@ class Tizen100CapiSystemUsbhost {
   /// printf("Transfer not completed successfully\n");
   /// }
   /// }
-  /// @endcode
+  /// ```
   int usb_host_transfer_get_status(
     usb_host_transfer_h transfer,
     ffi.Pointer<ffi.Int> status,
@@ -3658,21 +4419,34 @@ class Tizen100CapiSystemUsbhost {
   late final _usb_host_transfer_get_status = _usb_host_transfer_get_statusPtr
       .asFunction<int Function(usb_host_transfer_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @ingroup CAPI_USB_HOST_ASYNC_MODULE
-  /// @brief Gets the data from the asynchronous USB transfer.
-  /// @details Borrows a handle to the transfer data from a transfer handle.
-  /// @since_tizen 5.0
-  /// @remarks @a data is part of the transfer object and should not be released
-  /// separately. It should not be accessed after @a transfer is destroyed.
-  /// @param[in] transfer Transfer handle
-  /// @param[out] data Data buffer of this transfer
-  /// @param[out] actual_length Actual length of transferred data
-  /// @return 0 on success, negative error code on error
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
+  /// Gets the data from the asynchronous USB transfer.
   ///
-  /// @code
+  /// Borrows a handle to the transfer data from a transfer handle.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Remarks:**
+  /// - `data` is part of the transfer object and should not be released
+  /// - separately. It should not be accessed after `transfer` is destroyed.
+  ///
+  /// **Parameters:**
+  /// - `transfer` (in): Transfer handle
+  /// - `data` (out): Data buffer of this transfer
+  /// - `actual_length` (out): Actual length of transferred data
+  ///
+  /// **Returns:**
+  /// - 0 on success, negative error code on error
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_ASYNC_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   /// #include <stdio.h>
   ///
@@ -3690,7 +4464,7 @@ class Tizen100CapiSystemUsbhost {
   /// printf("%02x", data[i]);
   /// printf("\n");
   /// }
-  /// @endcode
+  /// ```
   int usb_host_transfer_get_data(
     usb_host_transfer_h transfer,
     ffi.Pointer<ffi.Pointer<ffi.UnsignedChar>> data,
@@ -3716,21 +4490,34 @@ class Tizen100CapiSystemUsbhost {
               ffi.Pointer<ffi.Pointer<ffi.UnsignedChar>>,
               ffi.Pointer<ffi.UnsignedInt>)>();
 
-  /// @ingroup CAPI_USB_HOST_ASYNC_MODULE
-  /// @brief Gets the *control* data from the asynchronous USB transfer.
-  /// @details Borrows a handle to the *control* transfer data from a transfer handle.
-  /// @since_tizen 5.0
-  /// @remarks @a data is part of the transfer object and should not be released
-  /// separately. It should not be accessed after @a transfer is destroyed.
-  /// @param[in] transfer Control transfer handle
-  /// @param[out] data Data buffer of this transfer
-  /// @param[out] actual_length Actual length of transferred data
-  /// @return 0 on success, negative error code on error
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
+  /// Gets the *control* data from the asynchronous USB transfer.
   ///
-  /// @code
+  /// Borrows a handle to the *control* transfer data from a transfer handle.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Remarks:**
+  /// - `data` is part of the transfer object and should not be released
+  /// - separately. It should not be accessed after `transfer` is destroyed.
+  ///
+  /// **Parameters:**
+  /// - `transfer` (in): Control transfer handle
+  /// - `data` (out): Data buffer of this transfer
+  /// - `actual_length` (out): Actual length of transferred data
+  ///
+  /// **Returns:**
+  /// - 0 on success, negative error code on error
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_ASYNC_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   /// #include <stdio.h>
   ///
@@ -3748,7 +4535,7 @@ class Tizen100CapiSystemUsbhost {
   /// printf("%02x", data[i]);
   /// printf("\n");
   /// }
-  /// @endcode
+  /// ```
   int usb_host_control_transfer_get_data(
     usb_host_transfer_h transfer,
     ffi.Pointer<ffi.Pointer<ffi.UnsignedChar>> data,
@@ -3775,19 +4562,29 @@ class Tizen100CapiSystemUsbhost {
               ffi.Pointer<ffi.Pointer<ffi.UnsignedChar>>,
               ffi.Pointer<ffi.UnsignedInt>)>();
 
-  /// @ingroup CAPI_USB_HOST_ASYNC_MODULE
-  /// @brief Gets nominal length of data buffer from a transfer handle.
-  /// @details This functions gets length that was set for data buffer, not the actual transferred data length.
-  /// For length of transferred data see usb_host_transfer_get_data().
-  /// @since_tizen 5.0
-  /// @param[in] transfer Transfer handle
-  /// @param[out] length Length of data buffer for this transfer
-  /// @return 0 on success, negative error code on error
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
+  /// Gets nominal length of data buffer from a transfer handle.
   ///
-  /// @code
+  /// This functions gets length that was set for data buffer, not the actual transferred data length. For length of transferred data see usb_host_transfer_get_data().
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `transfer` (in): Transfer handle
+  /// - `length` (out): Length of data buffer for this transfer
+  ///
+  /// **Returns:**
+  /// - 0 on success, negative error code on error
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_ASYNC_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   /// #include <stdio.h>
   ///
@@ -3802,7 +4599,7 @@ class Tizen100CapiSystemUsbhost {
   ///
   /// printf("Buffer length: %d bytes\n", length);
   /// }
-  /// @endcode
+  /// ```
   int usb_host_transfer_get_length(
     usb_host_transfer_h transfer,
     ffi.Pointer<ffi.UnsignedInt> length,
@@ -3821,18 +4618,29 @@ class Tizen100CapiSystemUsbhost {
       _usb_host_transfer_get_lengthPtr.asFunction<
           int Function(usb_host_transfer_h, ffi.Pointer<ffi.UnsignedInt>)>();
 
-  /// @ingroup CAPI_USB_HOST_ASYNC_MODULE
-  /// @brief Gets number of isochronous packets for this transfer.
-  /// @details Returns the number of isochronous packets reserved for this transfer.
-  /// @since_tizen 5.0
-  /// @param[in] transfer Transfer handle
-  /// @param[out] num_iso_packets Number of isochronous packets
-  /// @return 0 on success, negative error code on error
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
+  /// Gets number of isochronous packets for this transfer.
   ///
-  /// @code
+  /// Returns the number of isochronous packets reserved for this transfer.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `transfer` (in): Transfer handle
+  /// - `num_iso_packets` (out): Number of isochronous packets
+  ///
+  /// **Returns:**
+  /// - 0 on success, negative error code on error
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_ASYNC_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   /// #include <stdio.h>
   ///
@@ -3847,7 +4655,7 @@ class Tizen100CapiSystemUsbhost {
   ///
   /// printf("Isochronous packets capacity: %d packets\n", num_iso_packets);
   /// }
-  /// @endcode
+  /// ```
   int usb_host_transfer_get_num_iso_packets(
     usb_host_transfer_h transfer,
     ffi.Pointer<ffi.UnsignedInt> num_iso_packets,
@@ -3867,21 +4675,32 @@ class Tizen100CapiSystemUsbhost {
       _usb_host_transfer_get_num_iso_packetsPtr.asFunction<
           int Function(usb_host_transfer_h, ffi.Pointer<ffi.UnsignedInt>)>();
 
-  /// @ingroup CAPI_USB_HOST_ASYNC_MODULE
-  /// @brief Sets an isochronous individual packet length for a transfer handle.
-  /// @details Sets the length of an packet within an isochronous transfer.
-  /// @since_tizen 5.0
-  /// @param[in] transfer Transfer handle
-  /// @param[in] packet_number Number of isochronous packet
-  /// @param[in] length Length of the packet handle
-  /// @return 0 on success, negative error code on error
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
-  /// @retval #USB_HOST_ERROR_NOT_FOUND Packet of given number not found
-  /// @retval #USB_HOST_ERROR_OVERFLOW Not enough space for this packet in data buffer
+  /// Sets an isochronous individual packet length for a transfer handle.
   ///
-  /// @code
+  /// Sets the length of an packet within an isochronous transfer.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `transfer` (in): Transfer handle
+  /// - `packet_number` (in): Number of isochronous packet
+  /// - `length` (in): Length of the packet handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, negative error code on error
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  /// - `USB_HOST_ERROR_NOT_FOUND`: Packet of given number not found
+  /// - `USB_HOST_ERROR_OVERFLOW`: Not enough space for this packet in data buffer
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_ASYNC_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   /// #include <stdio.h>
   ///
@@ -3900,7 +4719,7 @@ class Tizen100CapiSystemUsbhost {
   /// handle_error(ret);
   /// }
   /// }
-  /// @endcode
+  /// ```
   int usb_host_transfer_set_iso_packet_length(
     usb_host_transfer_h transfer,
     int packet_number,
@@ -3921,20 +4740,31 @@ class Tizen100CapiSystemUsbhost {
       _usb_host_transfer_set_iso_packet_lengthPtr
           .asFunction<int Function(usb_host_transfer_h, int, int)>();
 
-  /// @ingroup CAPI_USB_HOST_ASYNC_MODULE
-  /// @brief Gets an isochronous packet status from a transfer handle.
-  /// @details Gets the status of the packet, specified as a value of the #usb_host_transfer_status_e type.
-  /// @since_tizen 5.0
-  /// @param[in] transfer Transfer handle
-  /// @param[in] packet_number Number of isochronous packet
-  /// @param[out] status Status of selected packet
-  /// @return 0 on success, negative error code on error
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
-  /// @retval #USB_HOST_ERROR_NOT_FOUND Packet of given number not found
+  /// Gets an isochronous packet status from a transfer handle.
   ///
-  /// @code
+  /// Gets the status of the packet, specified as a value of the `usb_host_transfer_status_e` type.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `transfer` (in): Transfer handle
+  /// - `packet_number` (in): Number of isochronous packet
+  /// - `status` (out): Status of selected packet
+  ///
+  /// **Returns:**
+  /// - 0 on success, negative error code on error
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  /// - `USB_HOST_ERROR_NOT_FOUND`: Packet of given number not found
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_ASYNC_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   /// #include <stdio.h>
   ///
@@ -3960,7 +4790,7 @@ class Tizen100CapiSystemUsbhost {
   /// }
   /// }
   /// }
-  /// @endcode
+  /// ```
   int usb_host_transfer_get_iso_packet_status(
     usb_host_transfer_h transfer,
     int packet_number,
@@ -3982,23 +4812,36 @@ class Tizen100CapiSystemUsbhost {
       _usb_host_transfer_get_iso_packet_statusPtr.asFunction<
           int Function(usb_host_transfer_h, int, ffi.Pointer<ffi.Int>)>();
 
-  /// @ingroup CAPI_USB_HOST_ASYNC_MODULE
-  /// @brief Gets data buffer of isochronous packet from a transfer handle.
-  /// @details Gets the buffer underlying the isochronous packet.
-  /// @since_tizen 5.0
-  /// @remarks @a data is part of the transfer object and should not be released
-  /// separately. It should not be accessed after @a transfer is destroyed.
-  /// @param[in] transfer Transfer handle
-  /// @param[in] packet_number Number of isochronous packet
-  /// @param[out] data Data buffer for this packet
-  /// @param[out] actual_length Length of transferred data
-  /// @return 0 on success, negative error code on error
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
-  /// @retval #USB_HOST_ERROR_NOT_FOUND Packet of given number not found
+  /// Gets data buffer of isochronous packet from a transfer handle.
   ///
-  /// @code
+  /// Gets the buffer underlying the isochronous packet.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Remarks:**
+  /// - `data` is part of the transfer object and should not be released
+  /// - separately. It should not be accessed after `transfer` is destroyed.
+  ///
+  /// **Parameters:**
+  /// - `transfer` (in): Transfer handle
+  /// - `packet_number` (in): Number of isochronous packet
+  /// - `data` (out): Data buffer for this packet
+  /// - `actual_length` (out): Length of transferred data
+  ///
+  /// **Returns:**
+  /// - 0 on success, negative error code on error
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  /// - `USB_HOST_ERROR_NOT_FOUND`: Packet of given number not found
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_ASYNC_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   /// #include <stdio.h>
   ///
@@ -4024,7 +4867,7 @@ class Tizen100CapiSystemUsbhost {
   /// printf("\n");
   /// }
   /// }
-  /// @endcode
+  /// ```
   int usb_host_transfer_get_iso_packet_data(
     usb_host_transfer_h transfer,
     int packet_number,
@@ -4054,20 +4897,31 @@ class Tizen100CapiSystemUsbhost {
               ffi.Pointer<ffi.Pointer<ffi.UnsignedChar>>,
               ffi.Pointer<ffi.Int>)>();
 
-  /// @ingroup CAPI_USB_HOST_ASYNC_MODULE
-  /// @brief Gets isochronous packet data buffer length from a transfer handle.
-  /// @details Gets the length of the buffer underlying the isochronous packet.
-  /// @since_tizen 5.0
-  /// @param[in] transfer Transfer handle
-  /// @param[in] packet_number Number of isochronous packet
-  /// @param[out] length Length of data buffer
-  /// @return 0 on success, negative error code on error
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
-  /// @retval #USB_HOST_ERROR_NOT_FOUND Packet of given number not found
+  /// Gets isochronous packet data buffer length from a transfer handle.
   ///
-  /// @code
+  /// Gets the length of the buffer underlying the isochronous packet.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `transfer` (in): Transfer handle
+  /// - `packet_number` (in): Number of isochronous packet
+  /// - `length` (out): Length of data buffer
+  ///
+  /// **Returns:**
+  /// - 0 on success, negative error code on error
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  /// - `USB_HOST_ERROR_NOT_FOUND`: Packet of given number not found
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_ASYNC_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   /// #include <stdio.h>
   ///
@@ -4088,7 +4942,7 @@ class Tizen100CapiSystemUsbhost {
   /// printf("Packet #%d size: %d bytes\n", i + 1, length);
   /// }
   /// }
-  /// @endcode
+  /// ```
   int usb_host_transfer_get_iso_packet_length(
     usb_host_transfer_h transfer,
     int packet_number,
@@ -4110,18 +4964,29 @@ class Tizen100CapiSystemUsbhost {
       _usb_host_transfer_get_iso_packet_lengthPtr.asFunction<
           int Function(usb_host_transfer_h, int, ffi.Pointer<ffi.Int>)>();
 
-  /// @ingroup CAPI_USB_HOST_ENDPOINT_MODULE
-  /// @brief Gets type of a transfer from a given transfer handle.
-  /// @details Gets the type of the transfer provided by its handle.
-  /// @since_tizen 5.0
-  /// @param[in] transfer Transfer handle
-  /// @param[out] transfer_type Transfer type (a value from enum #usb_host_transfer_type_e)
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
+  /// Gets type of a transfer from a given transfer handle.
   ///
-  /// @code
+  /// Gets the type of the transfer provided by its handle.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `transfer` (in): Transfer handle
+  /// - `transfer_type` (out): Transfer type (a value from enum `usb_host_transfer_type_e`)
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_ENDPOINT_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   /// #include <stdio.h>
   ///
@@ -4149,7 +5014,7 @@ class Tizen100CapiSystemUsbhost {
   /// break;
   /// }
   /// }
-  /// @endcode
+  /// ```
   int usb_host_transfer_get_type(
     usb_host_transfer_h transfer,
     ffi.Pointer<ffi.Int32> transfer_type,
@@ -4167,19 +5032,28 @@ class Tizen100CapiSystemUsbhost {
   late final _usb_host_transfer_get_type = _usb_host_transfer_get_typePtr
       .asFunction<int Function(usb_host_transfer_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @ingroup CAPI_USB_HOST_ASYNC_MODULE
-  /// @brief Destroys a finished or cancelled asynchronous transfer structure.
-  /// @details When no longer needed, transfer should be destroyed by this function.
-  /// It frees memory allocated for the transfer. You cannot destroy unfinished transfer,
-  /// wait for its completion or cancel it.
-  /// @since_tizen 5.0
-  /// @param[in] transfer Transfer handle to be destroyed
-  /// @return 0 on success, negative error code on error
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
+  /// Destroys a finished or cancelled asynchronous transfer structure.
   ///
-  /// @code
+  /// When no longer needed, transfer should be destroyed by this function. It frees memory allocated for the transfer. You cannot destroy unfinished transfer, wait for its completion or cancel it.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `transfer` (in): Transfer handle to be destroyed
+  ///
+  /// **Returns:**
+  /// - 0 on success, negative error code on error
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_ASYNC_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   ///
   /// void transfer_completion_cb(usb_host_transfer_h transfer, void *user_data);
@@ -4188,7 +5062,7 @@ class Tizen100CapiSystemUsbhost {
   /// // Make sure all other copies are not used anymore!
   /// usb_host_transfer_destroy(transfer);
   /// }
-  /// @endcode
+  /// ```
   int usb_host_transfer_destroy(
     usb_host_transfer_h transfer,
   ) {
@@ -4203,19 +5077,31 @@ class Tizen100CapiSystemUsbhost {
   late final _usb_host_transfer_destroy = _usb_host_transfer_destroyPtr
       .asFunction<int Function(usb_host_transfer_h)>();
 
-  /// @ingroup CAPI_USB_HOST_ASYNC_MODULE
-  /// @brief Submits an initialized, asynchronous USB transfer.
-  /// @details Calling this will start the actual process of the transfer.
-  /// @since_tizen 5.0
-  /// @param[in] transfer Transfer handle to be submitted
-  /// @return 0 on success, negative error code on error
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
-  /// @pre @a transfer should be initialized by one of initialization functions:
-  /// usb_host_create_transfer(), usb_host_create_isochronous_transfer() or usb_host_create_control_transfer().
+  /// Submits an initialized, asynchronous USB transfer.
   ///
-  /// @code
+  /// Calling this will start the actual process of the transfer.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `transfer` (in): Transfer handle to be submitted
+  ///
+  /// **Returns:**
+  /// - 0 on success, negative error code on error
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  ///
+  /// **Preconditions:**
+  /// - `transfer` should be initialized by one of initialization functions: usb_host_create_transfer(), usb_host_create_isochronous_transfer() or usb_host_create_control_transfer().
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_ASYNC_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   ///
   /// void submit(usb_host_transfer_h transfer)
@@ -4224,7 +5110,7 @@ class Tizen100CapiSystemUsbhost {
   /// if (ret != USB_HOST_ERROR_NONE)
   /// handle_error(ret);
   /// }
-  /// @endcode
+  /// ```
   int usb_host_transfer_submit(
     usb_host_transfer_h transfer,
   ) {
@@ -4239,18 +5125,28 @@ class Tizen100CapiSystemUsbhost {
   late final _usb_host_transfer_submit = _usb_host_transfer_submitPtr
       .asFunction<int Function(usb_host_transfer_h)>();
 
-  /// @ingroup CAPI_USB_HOST_ASYNC_MODULE
-  /// @brief Attempts to cancel an ongoing asynchronous USB transfer.
-  /// @details After calling this function the transfer will be cancelled, if only
-  /// it was not finished already. The transfer callback will be called with #USB_HOST_TRANSFER_CANCELLED status.
-  /// @since_tizen 5.0
-  /// @param[in] transfer Transfer handle to be cancelled
-  /// @return 0 on success, negative error code on error
-  /// @retval #USB_HOST_ERROR_NONE Successful
-  /// @retval #USB_HOST_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #USB_HOST_ERROR_INVALID_PARAMETER Invalid parameter was passed
+  /// Attempts to cancel an ongoing asynchronous USB transfer.
   ///
-  /// @code
+  /// After calling this function the transfer will be cancelled, if only it was not finished already. The transfer callback will be called with `USB_HOST_TRANSFER_CANCELLED` status.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `transfer` (in): Transfer handle to be cancelled
+  ///
+  /// **Returns:**
+  /// - 0 on success, negative error code on error
+  ///
+  /// **Return values:**
+  /// - `USB_HOST_ERROR_NONE`: Successful
+  /// - `USB_HOST_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `USB_HOST_ERROR_INVALID_PARAMETER`: Invalid parameter was passed
+  ///
+  /// **Group:**
+  /// - CAPI_USB_HOST_ASYNC_MODULE
+  ///
+  /// ```
   /// #include <usb_host.h>
   ///
   /// void cancel_transfer(usb_host_transfer_h transfer)
@@ -4259,7 +5155,7 @@ class Tizen100CapiSystemUsbhost {
   /// if (ret != USB_HOST_ERROR_NONE)
   /// handle_error(ret);
   /// }
-  /// @endcode
+  /// ```
   int usb_host_transfer_cancel(
     usb_host_transfer_h transfer,
   ) {
@@ -4275,10 +5171,16 @@ class Tizen100CapiSystemUsbhost {
       .asFunction<int Function(usb_host_transfer_h)>();
 }
 
-/// @ingroup CAPI_USB_HOST_ENDPOINT_MODULE
-/// @brief An enumeration representing USB endpoint direction.
-/// @details Used to control whether an endpoint writes or reads data.
-/// @since_tizen 3.0
+/// An enumeration representing USB endpoint direction.
+///
+/// Used to control whether an endpoint writes or reads data.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Group:**
+/// - CAPI_USB_HOST_ENDPOINT_MODULE
+/// @nodoc
 abstract class usb_host_endpoint_direction_e {
   /// < IN direction
   static const int USB_HOST_DIRECTION_IN = 0;
@@ -4287,10 +5189,16 @@ abstract class usb_host_endpoint_direction_e {
   static const int USB_HOST_DIRECTION_OUT = 1;
 }
 
-/// @ingroup CAPI_USB_HOST_ENDPOINT_MODULE
-/// @brief An enumeration representing USB endpoint transfer type.
-/// @details Used to control how a data transfer request is going to operate.
-/// @since_tizen 3.0
+/// An enumeration representing USB endpoint transfer type.
+///
+/// Used to control how a data transfer request is going to operate.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Group:**
+/// - CAPI_USB_HOST_ENDPOINT_MODULE
+/// @nodoc
 abstract class usb_host_transfer_type_e {
   /// < Control transfer
   static const int USB_HOST_TRANSFER_TYPE_CONTROL = 0;
@@ -4305,10 +5213,16 @@ abstract class usb_host_transfer_type_e {
   static const int USB_HOST_TRANSFER_TYPE_INTERRUPT = 3;
 }
 
-/// @ingroup CAPI_USB_HOST_ENDPOINT_MODULE
-/// @brief Enumeration of isochronous endpoint's synchronization type.
-/// @details Used to control how a data transfer request is going to be synchronized.
-/// @since_tizen 3.0
+/// Enumeration of isochronous endpoint's synchronization type.
+///
+/// Used to control how a data transfer request is going to be synchronized.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Group:**
+/// - CAPI_USB_HOST_ENDPOINT_MODULE
+/// @nodoc
 abstract class usb_host_iso_sync_type_e {
   /// < No synchronization
   static const int USB_HOST_ISO_SYNC_TYPE_NONE = 0;
@@ -4323,10 +5237,16 @@ abstract class usb_host_iso_sync_type_e {
   static const int USB_HOST_ISO_SYNC_TYPE_SYNC = 3;
 }
 
-/// @ingroup CAPI_USB_HOST_ENDPOINT_MODULE
-/// @brief An enumeration representing USB endpoint usage type.
-/// @details Used to control what sort of tasks an endpoint is up to.
-/// @since_tizen 3.0
+/// An enumeration representing USB endpoint usage type.
+///
+/// Used to control what sort of tasks an endpoint is up to.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Group:**
+/// - CAPI_USB_HOST_ENDPOINT_MODULE
+/// @nodoc
 abstract class usb_host_usage_type_e {
   /// < Data endpoint
   static const int USB_HOST_USAGE_TYPE_DATA = 0;
@@ -4338,10 +5258,16 @@ abstract class usb_host_usage_type_e {
   static const int USB_HOST_USAGE_TYPE_IMPLICIT = 2;
 }
 
-/// @ingroup CAPI_USB_HOST_MODULE
-/// @brief Enumeration of error codes reported by USB host API.
-/// @details Most USB Host functions will return those errors to denote what happened.
-/// @since_tizen 3.0
+/// Enumeration of error codes reported by USB host API.
+///
+/// Most USB Host functions will return those errors to denote what happened.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Group:**
+/// - CAPI_USB_HOST_MODULE
+/// @nodoc
 abstract class usb_host_error_e {
   /// < Successful
   static const int USB_HOST_ERROR_NONE = 0;
@@ -4389,10 +5315,16 @@ abstract class usb_host_error_e {
   static const int USB_HOST_ERROR_UNKNOWN = -1073741824;
 }
 
-/// @ingroup CAPI_USB_HOST_HOTPLUG_MODULE
-/// @brief An enumeration representing USB hotplug event types.
-/// @details Says whether a hotplug event was about attachment or detachment.
-/// @since_tizen 4.0
+/// An enumeration representing USB hotplug event types.
+///
+/// Says whether a hotplug event was about attachment or detachment.
+///
+/// **Since Tizen:**
+/// - 4.0
+///
+/// **Group:**
+/// - CAPI_USB_HOST_HOTPLUG_MODULE
+/// @nodoc
 abstract class usb_host_hotplug_event_e {
   /// < Device was connected
   static const int USB_HOST_HOTPLUG_EVENT_ATTACH = 0;
@@ -4404,10 +5336,16 @@ abstract class usb_host_hotplug_event_e {
   static const int USB_HOST_HOTPLUG_EVENT_ANY = 2;
 }
 
-/// @ingroup CAPI_USB_HOST_ASYNC_MODULE
-/// @brief An enumeration representing USB async transfer status codes.
-/// @details Used to give the current status of a USB transfer handle.
-/// @since_tizen 5.0
+/// An enumeration representing USB async transfer status codes.
+///
+/// Used to give the current status of a USB transfer handle.
+///
+/// **Since Tizen:**
+/// - 5.0
+///
+/// **Group:**
+/// - CAPI_USB_HOST_ASYNC_MODULE
+/// @nodoc
 abstract class usb_host_transfer_status_e {
   /// < Transfer completed without error
   static const int USB_HOST_TRANSFER_COMPLETED = 0;
@@ -4434,102 +5372,153 @@ abstract class usb_host_transfer_status_e {
   static const int USB_HOST_TRANSFER_UNKNOWN = 7;
 }
 
+/// @nodoc
 final class usb_host_context_s extends ffi.Opaque {}
 
+/// @nodoc
 final class usb_host_device_s extends ffi.Opaque {}
 
+/// @nodoc
 final class usb_host_config_s extends ffi.Opaque {}
 
+/// @nodoc
 final class usb_host_interface_s extends ffi.Opaque {}
 
+/// @nodoc
 final class usb_host_endpoint_s extends ffi.Opaque {}
 
+/// @nodoc
 final class usb_host_hotplug_s extends ffi.Opaque {}
 
+/// @nodoc
 final class usb_host_transfer_s extends ffi.Opaque {}
 
-/// @ingroup CAPI_USB_HOST_MODULE
-/// @brief An opaque handle representing the USB host context.
-/// @details This structure represents usb_host session.
-/// Using own session allows to use this API independently.
-/// For example calling usb_host_destroy() will not destroy resources
-/// that are being used by another user of the library.
+/// An opaque handle representing the USB host context.
 ///
-/// To create session there is need to call usb_host_create(),
-/// to destroy call usb_host_destroy(). Each session created by usb_host_create()
-/// has to be destroyed using usb_host_destroy()
-/// @since_tizen 3.0
+/// This structure represents usb_host session. Using own session allows to use this API independently. For example calling usb_host_destroy() will not destroy resources that are being used by another user of the library. To create session there is need to call usb_host_create(), to destroy call usb_host_destroy(). Each session created by usb_host_create() has to be destroyed using usb_host_destroy()
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Group:**
+/// - CAPI_USB_HOST_MODULE
+/// @nodoc
 typedef usb_host_context_h = ffi.Pointer<usb_host_context_s>;
 
-/// @ingroup CAPI_USB_HOST_DEV_MODULE
-/// @brief An opaque handle representing a USB device on the bus.
-/// @details This structure represents USB device found on USB bus.
+/// An opaque handle representing a USB device on the bus.
 ///
-/// This can be obtained by usb_host_get_device_list() or usb_host_device_open_with_vid_pid().
-/// Some basic operations can be performed on closed device obtained by usb_host_get_device_list().
-/// To perform any I/O operations the device must be opened by calling usb_host_device_open()
-/// or usb_host_device_open_with_vid_pid().
+/// This structure represents USB device found on USB bus. This can be obtained by usb_host_get_device_list() or usb_host_device_open_with_vid_pid(). Some basic operations can be performed on closed device obtained by usb_host_get_device_list(). To perform any I/O operations the device must be opened by calling usb_host_device_open() or usb_host_device_open_with_vid_pid().
 ///
-/// @since_tizen 3.0
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Group:**
+/// - CAPI_USB_HOST_DEV_MODULE
+/// @nodoc
 typedef usb_host_device_h = ffi.Pointer<usb_host_device_s>;
 
-/// @ingroup CAPI_USB_HOST_CONFIG_MODULE
-/// @brief An opaque handle representing a USB device configuration.
-/// @details This type represents USB device configuration. Device can have multiple configurations,
-/// a configuration can have multiple interfaces. This handle can be obtained by
-/// usb_host_device_get_config().
-/// @since_tizen 3.0
+/// An opaque handle representing a USB device configuration.
+///
+/// This type represents USB device configuration. Device can have multiple configurations, a configuration can have multiple interfaces. This handle can be obtained by usb_host_device_get_config().
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Group:**
+/// - CAPI_USB_HOST_CONFIG_MODULE
+/// @nodoc
 typedef usb_host_config_h = ffi.Pointer<usb_host_config_s>;
 
-/// @ingroup CAPI_USB_HOST_INTERFACE_MODULE
-/// @brief An opaque handle representing a USB configuration interface.
-/// @details This type represents USB interface. An interface is a part of configuration and
-/// can have multiple endpoints. This handle can be obtained by usb_host_config_get_interface().
-/// @since_tizen 3.0
+/// An opaque handle representing a USB configuration interface.
+///
+/// This type represents USB interface. An interface is a part of configuration and can have multiple endpoints. This handle can be obtained by usb_host_config_get_interface().
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Group:**
+/// - CAPI_USB_HOST_INTERFACE_MODULE
+/// @nodoc
 typedef usb_host_interface_h = ffi.Pointer<usb_host_interface_s>;
 
-/// @ingroup CAPI_USB_HOST_ENDPOINT_MODULE
-/// @brief An opaque handle representing a USB interface endpoint.
-/// @details This type represents USB endpoint. This handle can be obtained by
-/// usb_host_interface_get_endpoint().
-/// @since_tizen 3.0
+/// An opaque handle representing a USB interface endpoint.
+///
+/// This type represents USB endpoint. This handle can be obtained by usb_host_interface_get_endpoint().
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Group:**
+/// - CAPI_USB_HOST_ENDPOINT_MODULE
+/// @nodoc
 typedef usb_host_endpoint_h = ffi.Pointer<usb_host_endpoint_s>;
 
-/// @ingroup CAPI_USB_HOST_HOTPLUG_MODULE
-/// @brief An type representing a USB hotplug callback handler.
-/// @details The device handle should be unreffed with usb_host_unref_device()
-/// when no longer needed.
-/// @since_tizen 4.0
-/// @param[in] dev Device which was connected/disconnected
-/// @param[in] user_data User data pointer passed on callback registration
+/// An type representing a USB hotplug callback handler.
+///
+/// The device handle should be unreffed with usb_host_unref_device() when no longer needed.
+///
+/// **Since Tizen:**
+/// - 4.0
+///
+/// **Parameters:**
+/// - `dev` (in): Device which was connected/disconnected
+/// - `user_data` (in): User data pointer passed on callback registration
+///
+/// **Group:**
+/// - CAPI_USB_HOST_HOTPLUG_MODULE
+/// @nodoc
 typedef usb_host_hotplug_cb
     = ffi.Pointer<ffi.NativeFunction<usb_host_hotplug_cbFunction>>;
+/// @nodoc
 typedef usb_host_hotplug_cbFunction = ffi.Void Function(
     usb_host_device_h dev, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartusb_host_hotplug_cbFunction = void Function(
     usb_host_device_h dev, ffi.Pointer<ffi.Void> user_data);
 
-/// @ingroup CAPI_USB_HOST_HOTPLUG_MODULE
-/// @brief An opaque handle representing a USB hotplug callback manager.
-/// @details This handle is used for managing registered hotplug callbacks.
-/// @since_tizen 4.0
+/// An opaque handle representing a USB hotplug callback manager.
+///
+/// This handle is used for managing registered hotplug callbacks.
+///
+/// **Since Tizen:**
+/// - 4.0
+///
+/// **Group:**
+/// - CAPI_USB_HOST_HOTPLUG_MODULE
+/// @nodoc
 typedef usb_host_hotplug_h = ffi.Pointer<usb_host_hotplug_s>;
 
-/// @ingroup CAPI_USB_HOST_ASYNC_MODULE
-/// @brief An type representing a USB transfer finish callback.
-/// @details Use to be notified for when a USB transfer is done.
-/// @since_tizen 5.0
-/// @param[in] transfer Transfer for which this callback was set
-/// @param[in] user_data User data pointer passed on callback registration
+/// An type representing a USB transfer finish callback.
+///
+/// Use to be notified for when a USB transfer is done.
+///
+/// **Since Tizen:**
+/// - 5.0
+///
+/// **Parameters:**
+/// - `transfer` (in): Transfer for which this callback was set
+/// - `user_data` (in): User data pointer passed on callback registration
+///
+/// **Group:**
+/// - CAPI_USB_HOST_ASYNC_MODULE
+/// @nodoc
 typedef usb_host_transferred_cb
     = ffi.Pointer<ffi.NativeFunction<usb_host_transferred_cbFunction>>;
+/// @nodoc
 typedef usb_host_transferred_cbFunction = ffi.Void Function(
     usb_host_transfer_h transfer, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartusb_host_transferred_cbFunction = void Function(
     usb_host_transfer_h transfer, ffi.Pointer<ffi.Void> user_data);
 
-/// @ingroup CAPI_USB_HOST_ASYNC_MODULE
-/// @brief An opaque handle representing an asynchronous USB transfer.
-/// @details This type represents an asynchronous USB transfer.
-/// @since_tizen 5.0
+/// An opaque handle representing an asynchronous USB transfer.
+///
+/// This type represents an asynchronous USB transfer.
+///
+/// **Since Tizen:**
+/// - 5.0
+///
+/// **Group:**
+/// - CAPI_USB_HOST_ASYNC_MODULE
+/// @nodoc
 typedef usb_host_transfer_h = ffi.Pointer<usb_host_transfer_s>;

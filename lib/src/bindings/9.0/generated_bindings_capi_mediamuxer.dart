@@ -1,3 +1,6 @@
+/// {@category 9.0/tizen}
+library tizen_interop_9_0.capi_mediamuxer;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -10,6 +13,7 @@ import 'dart:ffi' as ffi;
 import 'generated_bindings_capi_media_tool.dart' as media_tool;
 
 /// Dart bindings for Tizen capi-mediamuxer APIs.
+/// {@category 9.0/tizen}
 class Tizen90CapiMediamuxer {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -25,17 +29,31 @@ class Tizen90CapiMediamuxer {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Creates a media muxer handle for muxing.
-  /// @since_tizen 3.0
-  /// @remarks You must release @a muxer using mediamuxer_destroy() function.
-  /// @param[out] muxer A new handle to media muxer
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIAMUXER_ERROR_NONE Successful
-  /// @retval #MEDIAMUXER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIAMUXER_ERROR_INVALID_OPERATION Invalid Operation
-  /// @retval #MEDIAMUXER_ERROR_OUT_OF_MEMORY Allocation Failed, Out of Memory.
-  /// @post The media muxer state will be #MEDIAMUXER_STATE_IDLE.
-  /// @see mediamuxer_destroy()
+  /// Creates a media muxer handle for muxing.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - You must release `muxer` using mediamuxer_destroy() function.
+  ///
+  /// **Parameters:**
+  /// - `muxer` (out): A new handle to media muxer
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIAMUXER_ERROR_NONE`: Successful
+  /// - `MEDIAMUXER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIAMUXER_ERROR_INVALID_OPERATION`: Invalid Operation
+  /// - `MEDIAMUXER_ERROR_OUT_OF_MEMORY`: Allocation Failed, Out of Memory.
+  ///
+  /// **Postconditions:**
+  /// - The media muxer state will be `MEDIAMUXER_STATE_IDLE`.
+  ///
+  /// **See also:**
+  /// - `mediamuxer_destroy()`
   int mediamuxer_create(
     ffi.Pointer<mediamuxer_h> muxer,
   ) {
@@ -50,22 +68,35 @@ class Tizen90CapiMediamuxer {
   late final _mediamuxer_create = _mediamuxer_createPtr
       .asFunction<int Function(ffi.Pointer<mediamuxer_h>)>();
 
-  /// @brief Sets the sink path of output stream.
-  /// @since_tizen 3.0
-  /// @remarks The mediastorage privilege(http://tizen.org/privilege/mediastorage) should be added if any video/audio files are to be saved in the internal storage.
-  /// @remarks The externalstorage privilege(http://tizen.org/privilege/externalstorage) should be added if any video/audio files are to be saved in the external storage.
-  /// @param[in] muxer  A new handle to media muxer
-  /// @param[in] path   The location of the output media file, such as the file path
-  /// This is the path at which the muxed file should be saved.
-  /// @param[in] format The format of the output media file
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIAMUXER_ERROR_NONE Successful
-  /// @retval #MEDIAMUXER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIAMUXER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIAMUXER_ERROR_INVALID_STATE Invalid state
-  /// @retval #MEDIAMUXER_ERROR_INVALID_PATH Invalid path
-  /// @pre The media muxer state will be #MEDIAMUXER_STATE_IDLE by calling mediamuxer_create()
-  /// @see #mediamuxer_output_format_e
+  /// Sets the sink path of output stream.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The mediastorage privilege(http://tizen.org/privilege/mediastorage) should be added if any video/audio files are to be saved in the internal storage.
+  /// - The externalstorage privilege(http://tizen.org/privilege/externalstorage) should be added if any video/audio files are to be saved in the external storage.
+  ///
+  /// **Parameters:**
+  /// - `muxer` (in): A new handle to media muxer
+  /// - `path` (in): The location of the output media file, such as the file path This is the path at which the muxed file should be saved.
+  /// - `format` (in): The format of the output media file
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIAMUXER_ERROR_NONE`: Successful
+  /// - `MEDIAMUXER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIAMUXER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIAMUXER_ERROR_INVALID_STATE`: Invalid state
+  /// - `MEDIAMUXER_ERROR_INVALID_PATH`: Invalid path
+  ///
+  /// **Preconditions:**
+  /// - The media muxer state will be `MEDIAMUXER_STATE_IDLE` by calling mediamuxer_create()
+  ///
+  /// **See also:**
+  /// - `mediamuxer_output_format_e`
   int mediamuxer_set_data_sink(
     mediamuxer_h muxer,
     ffi.Pointer<ffi.Char> path,
@@ -85,20 +116,32 @@ class Tizen90CapiMediamuxer {
   late final _mediamuxer_set_data_sink = _mediamuxer_set_data_sinkPtr
       .asFunction<int Function(mediamuxer_h, ffi.Pointer<ffi.Char>, int)>();
 
-  /// @brief Adds the media track of interest to the muxer handle.
-  /// @since_tizen 3.0
-  /// @param[in]  muxer        The media muxer handle
-  /// @param[in]  media_format The format of media muxer
-  /// @param[out] track_index  The index of the media track
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIAMUXER_ERROR_NONE Successful
-  /// @retval #MEDIAMUXER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIAMUXER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIAMUXER_ERROR_INVALID_STATE Invalid state
-  /// @pre The media muxer state must be set to #MEDIAMUXER_STATE_IDLE.
-  /// @see #media_format_h
-  /// @see mediamuxer_create()
-  /// @see mediamuxer_prepare()
+  /// Adds the media track of interest to the muxer handle.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `muxer` (in): The media muxer handle
+  /// - `media_format` (in): The format of media muxer
+  /// - `track_index` (out): The index of the media track
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIAMUXER_ERROR_NONE`: Successful
+  /// - `MEDIAMUXER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIAMUXER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIAMUXER_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The media muxer state must be set to `MEDIAMUXER_STATE_IDLE`.
+  ///
+  /// **See also:**
+  /// - `media_format_h`
+  /// - `mediamuxer_create()`
+  /// - `mediamuxer_prepare()`
   int mediamuxer_add_track(
     mediamuxer_h muxer,
     media_tool.media_format_h media_format,
@@ -119,19 +162,35 @@ class Tizen90CapiMediamuxer {
       int Function(
           mediamuxer_h, media_tool.media_format_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Prepares the media muxer.
-  /// @since_tizen 3.0
-  /// @remarks Initiates the necessary parameters.
-  /// @param[in] muxer The media muxer handle
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIAMUXER_ERROR_NONE Successful
-  /// @retval #MEDIAMUXER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIAMUXER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIAMUXER_ERROR_INVALID_STATE Invalid state
-  /// @pre The media muxer state must be set to #MEDIAMUXER_STATE_IDLE.
-  /// @post The media muxer state will be #MEDIAMUXER_STATE_READY.
-  /// @see mediamuxer_create()
-  /// @see mediamuxer_unprepare()
+  /// Prepares the media muxer.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - Initiates the necessary parameters.
+  ///
+  /// **Parameters:**
+  /// - `muxer` (in): The media muxer handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIAMUXER_ERROR_NONE`: Successful
+  /// - `MEDIAMUXER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIAMUXER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIAMUXER_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The media muxer state must be set to `MEDIAMUXER_STATE_IDLE`.
+  ///
+  /// **Postconditions:**
+  /// - The media muxer state will be `MEDIAMUXER_STATE_READY`.
+  ///
+  /// **See also:**
+  /// - `mediamuxer_create()`
+  /// - `mediamuxer_unprepare()`
   int mediamuxer_prepare(
     mediamuxer_h muxer,
   ) {
@@ -146,19 +205,35 @@ class Tizen90CapiMediamuxer {
   late final _mediamuxer_prepare =
       _mediamuxer_preparePtr.asFunction<int Function(mediamuxer_h)>();
 
-  /// @brief Starts the media muxer.
-  /// @since_tizen 3.0
-  /// @remarks Keeps the muxer ready for writing data.
-  /// @param[in] muxer The media muxer handle
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIAMUXER_ERROR_NONE Successful
-  /// @retval #MEDIAMUXER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIAMUXER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIAMUXER_ERROR_INVALID_STATE Invalid state
-  /// @pre The media muxer state must be set to #MEDIAMUXER_STATE_READY.
-  /// @post The media muxer state will be #MEDIAMUXER_STATE_MUXING.
-  /// @see mediamuxer_prepare()
-  /// @see mediamuxer_stop()
+  /// Starts the media muxer.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - Keeps the muxer ready for writing data.
+  ///
+  /// **Parameters:**
+  /// - `muxer` (in): The media muxer handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIAMUXER_ERROR_NONE`: Successful
+  /// - `MEDIAMUXER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIAMUXER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIAMUXER_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The media muxer state must be set to `MEDIAMUXER_STATE_READY`.
+  ///
+  /// **Postconditions:**
+  /// - The media muxer state will be `MEDIAMUXER_STATE_MUXING`.
+  ///
+  /// **See also:**
+  /// - `mediamuxer_prepare()`
+  /// - `mediamuxer_stop()`
   int mediamuxer_start(
     mediamuxer_h muxer,
   ) {
@@ -173,23 +248,36 @@ class Tizen90CapiMediamuxer {
   late final _mediamuxer_start =
       _mediamuxer_startPtr.asFunction<int Function(mediamuxer_h)>();
 
-  /// @brief Writes the media packet of interest to the muxer handle.
-  /// @since_tizen 3.0
-  /// @param[in] muxer       The media muxer handle
-  /// @param[in] track_index The index of the media track
-  /// @param[in] inbuf       The packet of media muxer
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIAMUXER_ERROR_NONE Successful
-  /// @retval #MEDIAMUXER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIAMUXER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIAMUXER_ERROR_INVALID_STATE Invalid state
-  /// @pre The media muxer state must be set to #MEDIAMUXER_STATE_READY by calling mediamuxer_prepare() or
-  /// set to #MEDIAMUXER_STATE_PAUSED by calling mediamuxer_pause().
-  /// @post The media muxer state will be #MEDIAMUXER_STATE_MUXING.
-  /// @see mediamuxer_prepare()
-  /// @see mediamuxer_close_track()
-  /// @see mediamuxer_pause()
-  /// @see #media_packet_h
+  /// Writes the media packet of interest to the muxer handle.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `muxer` (in): The media muxer handle
+  /// - `track_index` (in): The index of the media track
+  /// - `inbuf` (in): The packet of media muxer
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIAMUXER_ERROR_NONE`: Successful
+  /// - `MEDIAMUXER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIAMUXER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIAMUXER_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The media muxer state must be set to `MEDIAMUXER_STATE_READY` by calling mediamuxer_prepare() or set to `MEDIAMUXER_STATE_PAUSED` by calling mediamuxer_pause().
+  ///
+  /// **Postconditions:**
+  /// - The media muxer state will be `MEDIAMUXER_STATE_MUXING`.
+  ///
+  /// **See also:**
+  /// - `mediamuxer_prepare()`
+  /// - `mediamuxer_close_track()`
+  /// - `mediamuxer_pause()`
+  /// - `media_packet_h`
   int mediamuxer_write_sample(
     mediamuxer_h muxer,
     int track_index,
@@ -209,21 +297,35 @@ class Tizen90CapiMediamuxer {
   late final _mediamuxer_write_sample = _mediamuxer_write_samplePtr
       .asFunction<int Function(mediamuxer_h, int, media_tool.media_packet_h)>();
 
-  /// @brief Closes the track from further writing of data.
-  /// @since_tizen 3.0
-  /// @remarks For each added track, user needs to call this function to indicate the end of stream.
-  /// @param[in] muxer       The media muxer handle
-  /// @param[in] track_index The selected track index
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIAMUXER_ERROR_NONE Successful
-  /// @retval #MEDIAMUXER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIAMUXER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIAMUXER_ERROR_INVALID_STATE Invalid state
-  /// @pre The media muxer state must be set to #MEDIAMUXER_STATE_MUXING.
-  /// @see mediamuxer_write_sample()
-  /// @see mediamuxer_pause()
-  /// @see mediamuxer_unprepare()
-  /// @see #mediamuxer_error_e
+  /// Closes the track from further writing of data.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - For each added track, user needs to call this function to indicate the end of stream.
+  ///
+  /// **Parameters:**
+  /// - `muxer` (in): The media muxer handle
+  /// - `track_index` (in): The selected track index
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIAMUXER_ERROR_NONE`: Successful
+  /// - `MEDIAMUXER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIAMUXER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIAMUXER_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The media muxer state must be set to `MEDIAMUXER_STATE_MUXING`.
+  ///
+  /// **See also:**
+  /// - `mediamuxer_write_sample()`
+  /// - `mediamuxer_pause()`
+  /// - `mediamuxer_unprepare()`
+  /// - `mediamuxer_error_e`
   int mediamuxer_close_track(
     mediamuxer_h muxer,
     int track_index,
@@ -240,20 +342,36 @@ class Tizen90CapiMediamuxer {
   late final _mediamuxer_close_track =
       _mediamuxer_close_trackPtr.asFunction<int Function(mediamuxer_h, int)>();
 
-  /// @brief Pauses the media muxer.
-  /// @since_tizen 3.0
-  /// @remarks To temporarily disable writing data for muxing. This function pauses a playing muxer
-  /// If the prior state of the muxer is not in PLAYING, no action will be taken.
-  /// @param[in] muxer The media muxer handle
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIAMUXER_ERROR_NONE Successful
-  /// @retval #MEDIAMUXER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIAMUXER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIAMUXER_ERROR_INVALID_STATE Invalid state
-  /// @pre The media muxer state must be set to #MEDIAMUXER_STATE_MUXING.
-  /// @post The media muxer state will be #MEDIAMUXER_STATE_PAUSED.
-  /// @see mediamuxer_write_sample()
-  /// @see mediamuxer_resume()
+  /// Pauses the media muxer.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - To temporarily disable writing data for muxing. This function pauses a playing muxer
+  /// - If the prior state of the muxer is not in PLAYING, no action will be taken.
+  ///
+  /// **Parameters:**
+  /// - `muxer` (in): The media muxer handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIAMUXER_ERROR_NONE`: Successful
+  /// - `MEDIAMUXER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIAMUXER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIAMUXER_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The media muxer state must be set to `MEDIAMUXER_STATE_MUXING`.
+  ///
+  /// **Postconditions:**
+  /// - The media muxer state will be `MEDIAMUXER_STATE_PAUSED`.
+  ///
+  /// **See also:**
+  /// - `mediamuxer_write_sample()`
+  /// - `mediamuxer_resume()`
   int mediamuxer_pause(
     mediamuxer_h muxer,
   ) {
@@ -268,19 +386,35 @@ class Tizen90CapiMediamuxer {
   late final _mediamuxer_pause =
       _mediamuxer_pausePtr.asFunction<int Function(mediamuxer_h)>();
 
-  /// @brief Resumes the media muxer.
-  /// @since_tizen 3.0
-  /// @remarks Make it ready for any further writing. This function will resume a paused muxer.
-  /// If the prior state of the muxer is not playing, no action will be taken.
-  /// @param[in] muxer The media muxer handle
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIAMUXER_ERROR_NONE Successful
-  /// @retval #MEDIAMUXER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIAMUXER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIAMUXER_ERROR_INVALID_STATE Invalid state
-  /// @pre The media muxer state must be set to #MEDIAMUXER_STATE_PAUSED.
-  /// @post The media muxer state will be #MEDIAMUXER_STATE_MUXING.
-  /// @see mediamuxer_pause()
+  /// Resumes the media muxer.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - Make it ready for any further writing. This function will resume a paused muxer.
+  /// - If the prior state of the muxer is not playing, no action will be taken.
+  ///
+  /// **Parameters:**
+  /// - `muxer` (in): The media muxer handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIAMUXER_ERROR_NONE`: Successful
+  /// - `MEDIAMUXER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIAMUXER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIAMUXER_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The media muxer state must be set to `MEDIAMUXER_STATE_PAUSED`.
+  ///
+  /// **Postconditions:**
+  /// - The media muxer state will be `MEDIAMUXER_STATE_MUXING`.
+  ///
+  /// **See also:**
+  /// - `mediamuxer_pause()`
   int mediamuxer_resume(
     mediamuxer_h muxer,
   ) {
@@ -295,20 +429,35 @@ class Tizen90CapiMediamuxer {
   late final _mediamuxer_resume =
       _mediamuxer_resumePtr.asFunction<int Function(mediamuxer_h)>();
 
-  /// @brief Stops the media muxer.
-  /// @since_tizen 3.0
-  /// @remarks Keeps the muxer ready for writing data.
-  /// @param[in] muxer The media muxer handle
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIAMUXER_ERROR_NONE Successful
-  /// @retval #MEDIAMUXER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIAMUXER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIAMUXER_ERROR_INVALID_STATE Invalid state
-  /// @pre The media muxer state must be set to #MEDIAMUXER_STATE_MUXING
-  /// or #MEDIAMUXER_STATE_PAUSED.
-  /// @post The media muxer state will be #MEDIAMUXER_STATE_READY.
-  /// @see mediamuxer_start()
-  /// @see mediamuxer_unprepare()
+  /// Stops the media muxer.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - Keeps the muxer ready for writing data.
+  ///
+  /// **Parameters:**
+  /// - `muxer` (in): The media muxer handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIAMUXER_ERROR_NONE`: Successful
+  /// - `MEDIAMUXER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIAMUXER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIAMUXER_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The media muxer state must be set to `MEDIAMUXER_STATE_MUXING` or `MEDIAMUXER_STATE_PAUSED`.
+  ///
+  /// **Postconditions:**
+  /// - The media muxer state will be `MEDIAMUXER_STATE_READY`.
+  ///
+  /// **See also:**
+  /// - `mediamuxer_start()`
+  /// - `mediamuxer_unprepare()`
   int mediamuxer_stop(
     mediamuxer_h muxer,
   ) {
@@ -323,21 +472,36 @@ class Tizen90CapiMediamuxer {
   late final _mediamuxer_stop =
       _mediamuxer_stopPtr.asFunction<int Function(mediamuxer_h)>();
 
-  /// @brief Unprepares the media muxer.
-  /// @since_tizen 3.0
-  /// @remarks Unrefs the variables created after calling mediamuxer_prepare().
-  /// @param[in] muxer The media muxer handle
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIAMUXER_ERROR_NONE Successful
-  /// @retval #MEDIAMUXER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIAMUXER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIAMUXER_ERROR_INVALID_STATE Invalid state
-  /// @pre The media muxer state must be set to #MEDIAMUXER_STATE_READY or
-  /// set to #MEDIAMUXER_STATE_PAUSED by calling mediamuxer_pause().
-  /// @post The media muxer state will be #MEDIAMUXER_STATE_IDLE.
-  /// @see mediamuxer_write_sample()
-  /// @see mediamuxer_pause()
-  /// @see mediamuxer_destroy()
+  /// Unprepares the media muxer.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - Unrefs the variables created after calling mediamuxer_prepare().
+  ///
+  /// **Parameters:**
+  /// - `muxer` (in): The media muxer handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIAMUXER_ERROR_NONE`: Successful
+  /// - `MEDIAMUXER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIAMUXER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIAMUXER_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - The media muxer state must be set to `MEDIAMUXER_STATE_READY` or set to `MEDIAMUXER_STATE_PAUSED` by calling mediamuxer_pause().
+  ///
+  /// **Postconditions:**
+  /// - The media muxer state will be `MEDIAMUXER_STATE_IDLE`.
+  ///
+  /// **See also:**
+  /// - `mediamuxer_write_sample()`
+  /// - `mediamuxer_pause()`
+  /// - `mediamuxer_destroy()`
   int mediamuxer_unprepare(
     mediamuxer_h muxer,
   ) {
@@ -352,17 +516,31 @@ class Tizen90CapiMediamuxer {
   late final _mediamuxer_unprepare =
       _mediamuxer_unpreparePtr.asFunction<int Function(mediamuxer_h)>();
 
-  /// @brief Removes the instance of media muxer and clear all its context memory.
-  /// @since_tizen 3.0
-  /// @param[in] muxer The media muxer handle
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIAMUXER_ERROR_NONE Successful
-  /// @retval #MEDIAMUXER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIAMUXER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIAMUXER_ERROR_INVALID_STATE Invalid state
-  /// @pre Create a media muxer handle by calling mediamuxer_create() function.
-  /// @post The media muxer state will be #MEDIAMUXER_STATE_NONE.
-  /// @see mediamuxer_create()
+  /// Removes the instance of media muxer and clear all its context memory.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `muxer` (in): The media muxer handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIAMUXER_ERROR_NONE`: Successful
+  /// - `MEDIAMUXER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIAMUXER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIAMUXER_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - Create a media muxer handle by calling mediamuxer_create() function.
+  ///
+  /// **Postconditions:**
+  /// - The media muxer state will be `MEDIAMUXER_STATE_NONE`.
+  ///
+  /// **See also:**
+  /// - `mediamuxer_create()`
   int mediamuxer_destroy(
     mediamuxer_h muxer,
   ) {
@@ -377,16 +555,28 @@ class Tizen90CapiMediamuxer {
   late final _mediamuxer_destroy =
       _mediamuxer_destroyPtr.asFunction<int Function(mediamuxer_h)>();
 
-  /// @brief Gets media muxer state.
-  /// @since_tizen 3.0
-  /// @param[in]  muxer The media muxer handle
-  /// @param[out] state The media muxer sate
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIAMUXER_ERROR_NONE Successful
-  /// @retval #MEDIAMUXER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIAMUXER_ERROR_INVALID_OPERATION Invalid operation
-  /// @pre Create a media muxer handle by calling mediamuxer_create() function.
-  /// @see #mediamuxer_state_e
+  /// Gets media muxer state.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `muxer` (in): The media muxer handle
+  /// - `state` (out): The media muxer sate
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIAMUXER_ERROR_NONE`: Successful
+  /// - `MEDIAMUXER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIAMUXER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Preconditions:**
+  /// - Create a media muxer handle by calling mediamuxer_create() function.
+  ///
+  /// **See also:**
+  /// - `mediamuxer_state_e`
   int mediamuxer_get_state(
     mediamuxer_h muxer,
     ffi.Pointer<ffi.Int32> state,
@@ -404,20 +594,32 @@ class Tizen90CapiMediamuxer {
   late final _mediamuxer_get_state = _mediamuxer_get_statePtr
       .asFunction<int Function(mediamuxer_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Sets a error callback function to be invoked when an error occurs.
-  /// @since_tizen 3.0
-  /// @param[in] muxer     The media muxer handle
-  /// @param[in] callback  Callback function pointer
-  /// @param[in] user_data The user data passed from the code where
-  /// mediamuxer_set_error_cb() was invoked
-  /// This data will be accessible from @a user_data mediamuxer_error_cb()
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIAMUXER_ERROR_NONE Successful
-  /// @retval #MEDIAMUXER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre Create a media muxer handle by calling mediamuxer_create() function.
-  /// @post mediamuxer_error_cb() will be invoked.
-  /// @see mediamuxer_unset_error_cb()
-  /// @see mediamuxer_error_cb()
+  /// Sets a error callback function to be invoked when an error occurs.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `muxer` (in): The media muxer handle
+  /// - `callback` (in): Callback function pointer
+  /// - `user_data` (in): The user data passed from the code where mediamuxer_set_error_cb() was invoked This data will be accessible from `user_data` mediamuxer_error_cb()
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIAMUXER_ERROR_NONE`: Successful
+  /// - `MEDIAMUXER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - Create a media muxer handle by calling mediamuxer_create() function.
+  ///
+  /// **Postconditions:**
+  /// - mediamuxer_error_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `mediamuxer_unset_error_cb()`
+  /// - `mediamuxer_error_cb()`
   int mediamuxer_set_error_cb(
     mediamuxer_h muxer,
     mediamuxer_error_cb callback,
@@ -437,13 +639,23 @@ class Tizen90CapiMediamuxer {
   late final _mediamuxer_set_error_cb = _mediamuxer_set_error_cbPtr.asFunction<
       int Function(mediamuxer_h, mediamuxer_error_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the error callback function.
-  /// @since_tizen 3.0
-  /// @param[in] muxer The media muxer handle
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIAMUXER_ERROR_NONE Successful
-  /// @retval #MEDIAMUXER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see mediamuxer_error_cb()
+  /// Unsets the error callback function.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `muxer` (in): The media muxer handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIAMUXER_ERROR_NONE`: Successful
+  /// - `MEDIAMUXER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `mediamuxer_error_cb()`
   int mediamuxer_unset_error_cb(
     mediamuxer_h muxer,
   ) {
@@ -458,21 +670,33 @@ class Tizen90CapiMediamuxer {
   late final _mediamuxer_unset_error_cb =
       _mediamuxer_unset_error_cbPtr.asFunction<int Function(mediamuxer_h)>();
 
-  /// @brief Sets an EOS (end of stream) callback function to be invoked when an EOS occurs.
-  /// @since_tizen 4.0
-  /// @param[in] muxer     The media muxer handle
-  /// @param[in] callback  Callback function pointer
-  /// @param[in] user_data The user data passed from the code where
-  /// mediamuxer_set_eos_cb() was invoked;\n
-  /// this data will be accessible from mediamuxer_eos_cb()
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIAMUXER_ERROR_NONE Successful
-  /// @retval #MEDIAMUXER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIAMUXER_ERROR_INVALID_STATE Invalid state
-  /// @pre Create a media muxer handle by calling mediamuxer_create() function.
-  /// @post mediamuxer_eos_cb() will be invoked.
-  /// @see mediamuxer_unset_eos_cb()
-  /// @see mediamuxer_eos_cb()
+  /// Sets an EOS (end of stream) callback function to be invoked when an EOS occurs.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `muxer` (in): The media muxer handle
+  /// - `callback` (in): Callback function pointer
+  /// - `user_data` (in): The user data passed from the code where mediamuxer_set_eos_cb() was invoked; this data will be accessible from mediamuxer_eos_cb()
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIAMUXER_ERROR_NONE`: Successful
+  /// - `MEDIAMUXER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIAMUXER_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **Preconditions:**
+  /// - Create a media muxer handle by calling mediamuxer_create() function.
+  ///
+  /// **Postconditions:**
+  /// - mediamuxer_eos_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `mediamuxer_unset_eos_cb()`
+  /// - `mediamuxer_eos_cb()`
   int mediamuxer_set_eos_cb(
     mediamuxer_h muxer,
     mediamuxer_eos_cb callback,
@@ -492,14 +716,24 @@ class Tizen90CapiMediamuxer {
   late final _mediamuxer_set_eos_cb = _mediamuxer_set_eos_cbPtr.asFunction<
       int Function(mediamuxer_h, mediamuxer_eos_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the EOS (end of stream) callback function.
-  /// @since_tizen 4.0
-  /// @param[in] muxer The media muxer handle
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIAMUXER_ERROR_NONE Successful
-  /// @retval #MEDIAMUXER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIAMUXER_ERROR_INVALID_STATE Invalid state
-  /// @see mediamuxer_eos_cb()
+  /// Unsets the EOS (end of stream) callback function.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `muxer` (in): The media muxer handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIAMUXER_ERROR_NONE`: Successful
+  /// - `MEDIAMUXER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIAMUXER_ERROR_INVALID_STATE`: Invalid state
+  ///
+  /// **See also:**
+  /// - `mediamuxer_eos_cb()`
   int mediamuxer_unset_eos_cb(
     mediamuxer_h muxer,
   ) {
@@ -515,10 +749,14 @@ class Tizen90CapiMediamuxer {
       _mediamuxer_unset_eos_cbPtr.asFunction<int Function(mediamuxer_h)>();
 }
 
+/// @nodoc
 final class mediamuxer_s extends ffi.Opaque {}
 
-/// @brief Enumeration for media muxer state.
-/// @since_tizen 3.0
+/// Enumeration for media muxer state.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class mediamuxer_state_e {
   /// < The mediamuxer is not created
   static const int MEDIAMUXER_STATE_NONE = 0;
@@ -536,8 +774,11 @@ abstract class mediamuxer_state_e {
   static const int MEDIAMUXER_STATE_PAUSED = 4;
 }
 
-/// @brief Enumeration for media muxer error.
-/// @since_tizen 3.0
+/// Enumeration for media muxer error.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class mediamuxer_error_e {
   /// < Successful
   static const int MEDIAMUXER_ERROR_NONE = 0;
@@ -567,8 +808,11 @@ abstract class mediamuxer_error_e {
   static const int MEDIAMUXER_ERROR_RESOURCE_LIMIT = -27197437;
 }
 
-/// @brief Enumeration for media muxer output format.
-/// @since_tizen 3.0
+/// Enumeration for media muxer output format.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class mediamuxer_output_format_e {
   /// < The mediamuxer output format is MP4 container
   static const int MEDIAMUXER_CONTAINER_FORMAT_MP4 = 67121168;
@@ -589,42 +833,60 @@ abstract class mediamuxer_output_format_e {
   static const int MEDIAMUXER_CONTAINER_FORMAT_AAC_ADTS = 67125296;
 }
 
-/// @brief Media Muxer handle type.
-/// @since_tizen 3.0
+/// Media Muxer handle type.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 typedef mediamuxer_h = ffi.Pointer<mediamuxer_s>;
 
-/// @brief Called when error occurs in media muxer.
-/// @details Following error codes can be delivered.
-/// #MEDIAMUXER_ERROR_INVALID_OPERATION,
-/// #MEDIAMUXER_ERROR_NOT_SUPPORTED,
-/// #MEDIAMUXER_ERROR_INVALID_PATH,
-/// #MEDIAMUXER_ERROR_RESOURCE_LIMIT
-/// @since_tizen 3.0
-/// @param[in] error     The error that occurred in media muxer
-/// @param[in] user_data The user data passed from the code where
-/// mediamuxer_set_error_cb() was invoked
-/// This data will be accessible from @a user_data mediamuxer_error_cb()
-/// @pre Create media muxer handle by calling mediamuxer_create() function.
-/// @see mediamuxer_set_error_cb()
-/// @see mediamuxer_unset_error_cb()
+/// Called when error occurs in media muxer.
+///
+/// Following error codes can be delivered. `MEDIAMUXER_ERROR_INVALID_OPERATION`, `MEDIAMUXER_ERROR_NOT_SUPPORTED`, `MEDIAMUXER_ERROR_INVALID_PATH`, `MEDIAMUXER_ERROR_RESOURCE_LIMIT`
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `error` (in): The error that occurred in media muxer
+/// - `user_data` (in): The user data passed from the code where mediamuxer_set_error_cb() was invoked This data will be accessible from `user_data` mediamuxer_error_cb()
+///
+/// **Preconditions:**
+/// - Create media muxer handle by calling mediamuxer_create() function.
+///
+/// **See also:**
+/// - `mediamuxer_set_error_cb()`
+/// - `mediamuxer_unset_error_cb()`
+/// @nodoc
 typedef mediamuxer_error_cb
     = ffi.Pointer<ffi.NativeFunction<mediamuxer_error_cbFunction>>;
+/// @nodoc
 typedef mediamuxer_error_cbFunction = ffi.Void Function(
     ffi.Int32 error, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmediamuxer_error_cbFunction = void Function(
     int error, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when end of stream occurs in media muxer.
-/// @since_tizen 4.0
-/// @param[in] user_data The user data passed from the code where
-/// mediamuxer_set_eos_cb() was invoked;\n
-/// this data will be accessible from mediamuxer_eos_cb()
-/// @pre Create media muxer handle by calling mediamuxer_create() function.
-/// @see mediamuxer_set_eos_cb()
-/// @see mediamuxer_unset_eos_cb()
+/// Called when end of stream occurs in media muxer.
+///
+/// **Since Tizen:**
+/// - 4.0
+///
+/// **Parameters:**
+/// - `user_data` (in): The user data passed from the code where mediamuxer_set_eos_cb() was invoked; this data will be accessible from mediamuxer_eos_cb()
+///
+/// **Preconditions:**
+/// - Create media muxer handle by calling mediamuxer_create() function.
+///
+/// **See also:**
+/// - `mediamuxer_set_eos_cb()`
+/// - `mediamuxer_unset_eos_cb()`
+/// @nodoc
 typedef mediamuxer_eos_cb
     = ffi.Pointer<ffi.NativeFunction<mediamuxer_eos_cbFunction>>;
+/// @nodoc
 typedef mediamuxer_eos_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmediamuxer_eos_cbFunction = void Function(
     ffi.Pointer<ffi.Void> user_data);

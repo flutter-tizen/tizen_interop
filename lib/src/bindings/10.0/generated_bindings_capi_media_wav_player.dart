@@ -1,3 +1,6 @@
+/// {@category 10.0/tizen}
+library tizen_interop_10_0.capi_media_wav_player;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -10,6 +13,7 @@ import 'dart:ffi' as ffi;
 import 'generated_bindings_capi_media_sound_manager.dart' as sound_manager;
 
 /// Dart bindings for Tizen capi-media-wav-player APIs.
+/// {@category 10.0/tizen}
 class Tizen100CapiMediaWavPlayer {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -25,30 +29,39 @@ class Tizen100CapiMediaWavPlayer {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Plays a WAV file with stream information of sound-manager.
-  /// @since_tizen 3.0
+  /// Plays a WAV file with stream information of sound-manager.
   ///
-  /// @remarks Voice Recognition and VOIP stream types are not supported by this function.
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @param[in] path	The file path to play
-  /// @param[in] stream_info	The sound stream information handle
-  /// @param[in] callback	The callback function to be invoked when the WAV file is no longer being played
-  /// @param[in] user_data	The user data to be passed to the callback function
-  /// @param[out] id	The WAV player ID (can be set to @c NULL)
+  /// **Remarks:**
+  /// - Voice Recognition and VOIP stream types are not supported by this function.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WAV_PLAYER_ERROR_NONE Successful
-  /// @retval #WAV_PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #WAV_PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #WAV_PLAYER_ERROR_FORMAT_NOT_SUPPORTED Not supported format
-  /// @retval #WAV_PLAYER_ERROR_NOT_SUPPORTED_TYPE Not supported stream type
+  /// **Parameters:**
+  /// - `path` (in): The file path to play
+  /// - `stream_info` (in): The sound stream information handle
+  /// - `callback` (in): The callback function to be invoked when the WAV file is no longer being played
+  /// - `user_data` (in): The user data to be passed to the callback function
+  /// - `id` (out): The WAV player ID (can be set to `NULL`)
   ///
-  /// @post	It invokes wav_player_playback_completed_cb() when the WAV file is no longer being played.
-  /// @see wav_player_stop()
-  /// @see wav_player_playback_completed_cb()
-  /// @see sound_manager_create_stream_information()
-  /// @see sound_manager_destroy_stream_information()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WAV_PLAYER_ERROR_NONE`: Successful
+  /// - `WAV_PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WAV_PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WAV_PLAYER_ERROR_FORMAT_NOT_SUPPORTED`: Not supported format
+  /// - `WAV_PLAYER_ERROR_NOT_SUPPORTED_TYPE`: Not supported stream type
+  ///
+  /// **Postconditions:**
+  /// - It invokes wav_player_playback_completed_cb() when the WAV file is no longer being played.
+  ///
+  /// **See also:**
+  /// - `wav_player_stop()`
+  /// - `wav_player_playback_completed_cb()`
+  /// - `sound_manager_create_stream_information()`
+  /// - `sound_manager_destroy_stream_information()`
   int wav_player_start_new(
     ffi.Pointer<ffi.Char> path,
     sound_manager.sound_stream_info_h stream_info,
@@ -81,31 +94,40 @@ class Tizen100CapiMediaWavPlayer {
           ffi.Pointer<ffi.Void>,
           ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Plays a WAV file multiple times.
-  /// @since_tizen 6.0
+  /// Plays a WAV file multiple times.
   ///
-  /// @remarks Voice Recognition and VOIP stream types are not supported by this function.
+  /// **Since Tizen:**
+  /// - 6.0
   ///
-  /// @param[in] path	The file path to play
-  /// @param[in] stream_info	The sound stream information handle
-  /// @param[in] loop_count	The number of times the file should be played (@c 0 indicates infinite loops)
-  /// @param[in] callback	The callback function to be invoked when the WAV file is no longer being played
-  /// @param[in] user_data	The user data to be passed to the callback function
-  /// @param[out] id	The WAV player ID (can be set to @c NULL)
+  /// **Remarks:**
+  /// - Voice Recognition and VOIP stream types are not supported by this function.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WAV_PLAYER_ERROR_NONE Successful
-  /// @retval #WAV_PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #WAV_PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #WAV_PLAYER_ERROR_FORMAT_NOT_SUPPORTED Not supported format
-  /// @retval #WAV_PLAYER_ERROR_NOT_SUPPORTED_TYPE Not supported stream type
+  /// **Parameters:**
+  /// - `path` (in): The file path to play
+  /// - `stream_info` (in): The sound stream information handle
+  /// - `loop_count` (in): The number of times the file should be played (`0` indicates infinite loops)
+  /// - `callback` (in): The callback function to be invoked when the WAV file is no longer being played
+  /// - `user_data` (in): The user data to be passed to the callback function
+  /// - `id` (out): The WAV player ID (can be set to `NULL`)
   ///
-  /// @post	It invokes wav_player_playback_completed_cb() when the WAV file is no longer being played.
-  /// @see wav_player_stop()
-  /// @see wav_player_playback_completed_cb()
-  /// @see sound_manager_create_stream_information()
-  /// @see sound_manager_destroy_stream_information()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `WAV_PLAYER_ERROR_NONE`: Successful
+  /// - `WAV_PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WAV_PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WAV_PLAYER_ERROR_FORMAT_NOT_SUPPORTED`: Not supported format
+  /// - `WAV_PLAYER_ERROR_NOT_SUPPORTED_TYPE`: Not supported stream type
+  ///
+  /// **Postconditions:**
+  /// - It invokes wav_player_playback_completed_cb() when the WAV file is no longer being played.
+  ///
+  /// **See also:**
+  /// - `wav_player_stop()`
+  /// - `wav_player_playback_completed_cb()`
+  /// - `sound_manager_create_stream_information()`
+  /// - `sound_manager_destroy_stream_information()`
   int wav_player_start_loop(
     ffi.Pointer<ffi.Char> path,
     sound_manager.sound_stream_info_h stream_info,
@@ -142,20 +164,28 @@ class Tizen100CapiMediaWavPlayer {
           ffi.Pointer<ffi.Void>,
           ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Stops playing the WAV file.
-  /// @since_tizen 2.3
+  /// Stops playing the WAV file.
   ///
-  /// @remarks If the playback of @a id has been already finished at the server side and\n
-  /// wav_player_playback_completed_cb() is not invoked yet, #WAV_PLAYER_ERROR_INVALID_OPERATION will be returned.
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @param[in] id	The WAV player ID to stop
+  /// **Remarks:**
+  /// - If the playback of `id` has been already finished at the server side and
+  /// - wav_player_playback_completed_cb() is not invoked yet, `WAV_PLAYER_ERROR_INVALID_OPERATION` will be returned.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #WAV_PLAYER_ERROR_NONE Successful
-  /// @retval #WAV_PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #WAV_PLAYER_ERROR_INVALID_OPERATION Invalid operation
+  /// **Parameters:**
+  /// - `id` (in): The WAV player ID to stop
   ///
-  /// @see	wav_player_start_new()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `WAV_PLAYER_ERROR_NONE`: Successful
+  /// - `WAV_PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WAV_PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `wav_player_start_new()`
   int wav_player_stop(
     int id,
   ) {
@@ -170,8 +200,11 @@ class Tizen100CapiMediaWavPlayer {
       _wav_player_stopPtr.asFunction<int Function(int)>();
 }
 
-/// @brief Enumeration of error codes for WAV player.
-/// @since_tizen 2.3
+/// Enumeration of error codes for WAV player.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 abstract class wav_player_error_e {
   /// < Successful
   static const int WAV_PLAYER_ERROR_NONE = 0;
@@ -189,17 +222,28 @@ abstract class wav_player_error_e {
   static const int WAV_PLAYER_ERROR_NOT_SUPPORTED_TYPE = -26804222;
 }
 
-/// @brief Called when a WAV file has finished playing.
-/// @details This callback is not invoked by calling wav_player_stop().
-/// @since_tizen 2.3
-/// @param[in] id	The completed wav player ID
-/// @param[in] user_data	The user data passed from the callback registration function
-/// @see wav_player_start_new()
+/// Called when a WAV file has finished playing.
+///
+/// This callback is not invoked by calling wav_player_stop().
+///
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **Parameters:**
+/// - `id` (in): The completed wav player ID
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `wav_player_start_new()`
+/// @nodoc
 typedef wav_player_playback_completed_cb
     = ffi.Pointer<ffi.NativeFunction<wav_player_playback_completed_cbFunction>>;
+/// @nodoc
 typedef wav_player_playback_completed_cbFunction = ffi.Void Function(
     ffi.Int id, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartwav_player_playback_completed_cbFunction = void Function(
     int id, ffi.Pointer<ffi.Void> user_data);
 
+/// @nodoc
 const int WAV_PLAYER_ERROR_CLASS = -8112;

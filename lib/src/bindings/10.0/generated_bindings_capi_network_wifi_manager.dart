@@ -1,3 +1,6 @@
+/// {@category 10.0/tizen}
+library tizen_interop_10_0.capi_network_wifi_manager;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen capi-network-wifi-manager APIs.
+/// {@category 10.0/tizen}
 class Tizen100CapiNetworkWifiManager {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,24 +28,37 @@ class Tizen100CapiNetworkWifiManager {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Initializes the Wi-Fi service and prepares it for use.
-  /// @details This function initializes the Wi-Fi service,
-  /// allocating necessary resources and preparing it for subsequent Wi-Fi management operations such as scanning for networks,
-  /// connecting to a network, or retrieving Wi-Fi information.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.get
-  /// @remarks You must release @a wifi using wifi_manager_deinitialize().
-  /// @param[out] wifi        The Wi-Fi handle
-  /// @return @c 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_ALREADY_INITIALIZED  Already initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION    Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed
-  /// @retval #WIFI_MANAGER_ERROR_PERMISSION_DENIED    Permission Denied
-  /// @retval #WIFI_MANAGER_ERROR_OUT_OF_MEMORY        Out of memory
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// Initializes the Wi-Fi service and prepares it for use.
+  ///
+  /// This function initializes the Wi-Fi service, allocating necessary resources and preparing it for subsequent Wi-Fi management operations such as scanning for networks, connecting to a network, or retrieving Wi-Fi information.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Remarks:**
+  /// - You must release `wifi` using wifi_manager_deinitialize().
+  ///
+  /// **Parameters:**
+  /// - `wifi` (out): The Wi-Fi handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_ALREADY_INITIALIZED`: Already initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_MANAGER_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `WIFI_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_initialize(
     ffi.Pointer<wifi_manager_h> wifi,
   ) {
@@ -56,17 +73,26 @@ class Tizen100CapiNetworkWifiManager {
   late final _wifi_manager_initialize = _wifi_manager_initializePtr
       .asFunction<int Function(ffi.Pointer<wifi_manager_h>)>();
 
-  /// @brief Terminates the Wi-Fi service and releases all resources associated with it.
-  /// @details This function deinitializes the Wi-Fi service, releasing all allocated resources and terminating any ongoing operations related to Wi-Fi management.
-  /// @since_tizen 3.0
-  /// @param[in] wifi        The Wi-Fi handle
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE               Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED    Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION  Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_OPERATION_FAILED   Operation failed
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED      Not supported
+  /// Terminates the Wi-Fi service and releases all resources associated with it.
+  ///
+  /// This function deinitializes the Wi-Fi service, releasing all allocated resources and terminating any ongoing operations related to Wi-Fi management.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `wifi` (in): The Wi-Fi handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_deinitialize(
     wifi_manager_h wifi,
   ) {
@@ -81,32 +107,48 @@ class Tizen100CapiNetworkWifiManager {
   late final _wifi_manager_deinitialize =
       _wifi_manager_deinitializePtr.asFunction<int Function(wifi_manager_h)>();
 
-  /// @brief Activates Wi-Fi asynchronously.
-  /// @details This function initiates the process to activate the Wi-Fi service.
-  /// When Wi-Fi is activated, the Wi-Fi radio is turned on,
-  /// and the device becomes capable of connecting to wireless networks.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.set \n
-  /// %http://tizen.org/privilege/network.get
-  /// @remarks This function needs both privileges.
-  /// @param[in] wifi          The Wi-Fi handle
-  /// @param[in] callback      The callback function to be called \n
-  /// This can be @c NULL if you don't want to get the notification.
-  /// @param[in] user_data     The user data passed to the callback function
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION    Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_NOW_IN_PROGRESS      Now in progress
-  /// @retval #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed
-  /// @retval #WIFI_MANAGER_ERROR_SECURITY_RESTRICTED  Restricted by security system policy
-  /// @retval #WIFI_MANAGER_ERROR_PERMISSION_DENIED    Permission Denied
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
-  /// @post wifi_manager_activated_cb() will be invoked.
-  /// @see wifi_manager_activated_cb()
-  /// @see wifi_manager_deactivate()
+  /// Activates Wi-Fi asynchronously.
+  ///
+  /// This function initiates the process to activate the Wi-Fi service. When Wi-Fi is activated, the Wi-Fi radio is turned on, and the device becomes capable of connecting to wireless networks.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.set>
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Remarks:**
+  /// - This function needs both privileges.
+  ///
+  /// **Parameters:**
+  /// - `wifi` (in): The Wi-Fi handle
+  /// - `callback` (in): The callback function to be called This can be `NULL` if you don't want to get the notification.
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_NOW_IN_PROGRESS`: Now in progress
+  /// - `WIFI_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_MANAGER_ERROR_SECURITY_RESTRICTED`: Restricted by security system policy
+  /// - `WIFI_MANAGER_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Postconditions:**
+  /// - wifi_manager_activated_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `wifi_manager_activated_cb()`
+  /// - `wifi_manager_deactivate()`
   int wifi_manager_activate(
     wifi_manager_h wifi,
     wifi_manager_activated_cb callback,
@@ -127,31 +169,48 @@ class Tizen100CapiNetworkWifiManager {
       int Function(
           wifi_manager_h, wifi_manager_activated_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Activates Wi-Fi asynchronously and displays Wi-Fi picker (popup) when Wi-Fi is not automatically connected.
-  /// @details This function activates the Wi-Fi service and, if Wi-Fi does not automatically connect to a known network,
-  /// it will display a Wi-Fi picker (popup) allowing the user to manually select a network to connect to.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.set \n
-  /// %http://tizen.org/privilege/network.get
-  /// @remarks This function needs both privileges.
-  /// @param[in] wifi          The Wi-Fi handle
-  /// @param[in] callback      The callback function to be called \n
-  /// This can be @c NULL if you don't want to get the notification.
-  /// @param[in] user_data     The user data passed to the callback function
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION    Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_NOW_IN_PROGRESS      Now in progress
-  /// @retval #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed
-  /// @retval #WIFI_MANAGER_ERROR_SECURITY_RESTRICTED  Restricted by security system policy
-  /// @retval #WIFI_MANAGER_ERROR_PERMISSION_DENIED    Permission Denied
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
-  /// @post wifi_manager_activated_cb() will be invoked.
-  /// @see wifi_manager_activated_cb()
-  /// @see wifi_manager_deactivate()
+  /// Activates Wi-Fi asynchronously and displays Wi-Fi picker (popup) when Wi-Fi is not automatically connected.
+  ///
+  /// This function activates the Wi-Fi service and, if Wi-Fi does not automatically connect to a known network, it will display a Wi-Fi picker (popup) allowing the user to manually select a network to connect to.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.set>
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Remarks:**
+  /// - This function needs both privileges.
+  ///
+  /// **Parameters:**
+  /// - `wifi` (in): The Wi-Fi handle
+  /// - `callback` (in): The callback function to be called This can be `NULL` if you don't want to get the notification.
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_NOW_IN_PROGRESS`: Now in progress
+  /// - `WIFI_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_MANAGER_ERROR_SECURITY_RESTRICTED`: Restricted by security system policy
+  /// - `WIFI_MANAGER_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Postconditions:**
+  /// - wifi_manager_activated_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `wifi_manager_activated_cb()`
+  /// - `wifi_manager_deactivate()`
   int wifi_manager_activate_with_wifi_picker_tested(
     wifi_manager_h wifi,
     wifi_manager_activated_cb callback,
@@ -174,29 +233,46 @@ class Tizen100CapiNetworkWifiManager {
           int Function(wifi_manager_h, wifi_manager_activated_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Deactivates Wi-Fi asynchronously.
-  /// @details This function initiates the process to deactivate the Wi-Fi service. When Wi-Fi is deactivated,
-  /// the Wi-Fi radio is turned off, and the device will no longer be able to connect to wireless networks.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.set \n
-  /// %http://tizen.org/privilege/network.get
-  /// @remarks This function needs both privileges.
-  /// @param[in] wifi          The Wi-Fi handle
-  /// @param[in] callback      The callback function to be called \n
-  /// This can be @c NULL if you don't want to get the notification.
-  /// @param[in] user_data     The user data passed to the callback function
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION    Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed
-  /// @retval #WIFI_MANAGER_ERROR_PERMISSION_DENIED    Permission Denied
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
-  /// @post wifi_manager_deactivated_cb() will be invoked.
-  /// @see wifi_manager_deactivated_cb()
-  /// @see wifi_manager_activate()
+  /// Deactivates Wi-Fi asynchronously.
+  ///
+  /// This function initiates the process to deactivate the Wi-Fi service. When Wi-Fi is deactivated, the Wi-Fi radio is turned off, and the device will no longer be able to connect to wireless networks.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.set>
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Remarks:**
+  /// - This function needs both privileges.
+  ///
+  /// **Parameters:**
+  /// - `wifi` (in): The Wi-Fi handle
+  /// - `callback` (in): The callback function to be called This can be `NULL` if you don't want to get the notification.
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_MANAGER_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Postconditions:**
+  /// - wifi_manager_deactivated_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `wifi_manager_deactivated_cb()`
+  /// - `wifi_manager_activate()`
   int wifi_manager_deactivate(
     wifi_manager_h wifi,
     wifi_manager_deactivated_cb callback,
@@ -217,22 +293,33 @@ class Tizen100CapiNetworkWifiManager {
       int Function(wifi_manager_h, wifi_manager_deactivated_cb,
           ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Checks whether Wi-Fi is activated.
-  /// @details This function checks the status of the Wi-Fi service to determine if it is currently activated.
-  /// If Wi-Fi is activated, it means that the Wi-Fi radio is turned on and ready to connect to wireless networks.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.get
-  /// @param[in] wifi        The Wi-Fi handle
-  /// @param[out] activated  @c true if Wi-Fi is activated,
-  /// otherwise @c false if Wi-Fi is not activated.
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed
-  /// @retval #WIFI_MANAGER_ERROR_PERMISSION_DENIED    Permission Denied
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// Checks whether Wi-Fi is activated.
+  ///
+  /// This function checks the status of the Wi-Fi service to determine if it is currently activated. If Wi-Fi is activated, it means that the Wi-Fi radio is turned on and ready to connect to wireless networks.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Parameters:**
+  /// - `wifi` (in): The Wi-Fi handle
+  /// - `activated` (out): `true` if Wi-Fi is activated, otherwise `false` if Wi-Fi is not activated.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_MANAGER_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_is_activated(
     wifi_manager_h wifi,
     ffi.Pointer<ffi.Bool> activated,
@@ -250,19 +337,29 @@ class Tizen100CapiNetworkWifiManager {
   late final _wifi_manager_is_activated = _wifi_manager_is_activatedPtr
       .asFunction<int Function(wifi_manager_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Gets the local MAC address.
-  /// @details This function queries the Wi-Fi manager to obtain the MAC address of the Wi-Fi device.
-  /// The MAC address is a unique identifier assigned to network interfaces for communications on a physical network segment.
-  /// @since_tizen 3.0
-  /// @remarks You must release @a mac_address using free().
-  /// @param[in] wifi          The Wi-Fi handle
-  /// @param[out] mac_address  The MAC address
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// Gets the local MAC address.
+  ///
+  /// This function queries the Wi-Fi manager to obtain the MAC address of the Wi-Fi device. The MAC address is a unique identifier assigned to network interfaces for communications on a physical network segment.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - You must release `mac_address` using free().
+  ///
+  /// **Parameters:**
+  /// - `wifi` (in): The Wi-Fi handle
+  /// - `mac_address` (out): The MAC address
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_get_mac_address(
     wifi_manager_h wifi,
     ffi.Pointer<ffi.Pointer<ffi.Char>> mac_address,
@@ -282,23 +379,37 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_get_mac_addressPtr.asFunction<
           int Function(wifi_manager_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the name of the network interface.
-  /// @details This function queries the Wi-Fi manager to obtain the name of the network interface that is currently being used for the Wi-Fi connection.
-  /// The network interface name is typically a string identifier like 'wlan0' or 'eth0', which can be used for various networking operations.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.get
-  /// @remarks You must release @a name using free().
-  /// @param[in] wifi        The Wi-Fi handle
-  /// @param[out] name       The name of network interface
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OUT_OF_MEMORY        Out of memory
-  /// @retval #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed
-  /// @retval #WIFI_MANAGER_ERROR_PERMISSION_DENIED    Permission Denied
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// Gets the name of the network interface.
+  ///
+  /// This function queries the Wi-Fi manager to obtain the name of the network interface that is currently being used for the Wi-Fi connection. The network interface name is typically a string identifier like 'wlan0' or 'eth0', which can be used for various networking operations.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Remarks:**
+  /// - You must release `name` using free().
+  ///
+  /// **Parameters:**
+  /// - `wifi` (in): The Wi-Fi handle
+  /// - `name` (out): The name of network interface
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `WIFI_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_MANAGER_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_get_network_interface_name(
     wifi_manager_h wifi,
     ffi.Pointer<ffi.Pointer<ffi.Char>> name,
@@ -318,26 +429,42 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_get_network_interface_namePtr.asFunction<
           int Function(wifi_manager_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Starts scan asynchronously.
-  /// @details This function starts a Wi-Fi scan to discover all available access points (APs) in the vicinity.
-  /// The scan results will include information about each detected AP, such as its SSID, signal strength, and security type.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.set \n
-  /// %http://tizen.org/privilege/network.get
-  /// @remarks This function needs both privileges.
-  /// @param[in] wifi            The Wi-Fi handle
-  /// @param[in] callback        The callback function to be called
-  /// @param[in] user_data       The user data passed to the callback function
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION    Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed
-  /// @retval #WIFI_MANAGER_ERROR_PERMISSION_DENIED    Permission Denied
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
-  /// @post This function invokes wifi_manager_scan_finished_cb().
+  /// Starts scan asynchronously.
+  ///
+  /// This function starts a Wi-Fi scan to discover all available access points (APs) in the vicinity. The scan results will include information about each detected AP, such as its SSID, signal strength, and security type.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.set>
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Remarks:**
+  /// - This function needs both privileges.
+  ///
+  /// **Parameters:**
+  /// - `wifi` (in): The Wi-Fi handle
+  /// - `callback` (in): The callback function to be called
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_MANAGER_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Postconditions:**
+  /// - This function invokes wifi_manager_scan_finished_cb().
   int wifi_manager_scan(
     wifi_manager_h wifi,
     wifi_manager_scan_finished_cb callback,
@@ -358,18 +485,26 @@ class Tizen100CapiNetworkWifiManager {
       int Function(wifi_manager_h, wifi_manager_scan_finished_cb,
           ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Gets the Wi-Fi scan state.
-  /// @details This function queries the Wi-Fi manager to determine the current state of the Wi-Fi scan operation.
-  /// The scan state indicates whether a scan is currently in progress or if the results from the last scan are still valid.
-  /// @since_tizen 4.0
-  /// @param[in] wifi            The Wi-Fi handle
-  /// @param[in] scan_state      The Wi-Fi scan state
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION    Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// Gets the Wi-Fi scan state.
+  ///
+  /// This function queries the Wi-Fi manager to determine the current state of the Wi-Fi scan operation. The scan state indicates whether a scan is currently in progress or if the results from the last scan are still valid.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `wifi` (in): The Wi-Fi handle
+  /// - `scan_state` (in): The Wi-Fi scan state
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_get_scan_state(
     wifi_manager_h wifi,
     ffi.Pointer<ffi.Int32> scan_state,
@@ -387,28 +522,43 @@ class Tizen100CapiNetworkWifiManager {
   late final _wifi_manager_get_scan_state = _wifi_manager_get_scan_statePtr
       .asFunction<int Function(wifi_manager_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Starts specific AP scan, asynchronously.
-  /// @details This function starts a Wi-Fi scan targeting a specific access point (AP) with the given ESSID (Extended Service Set Identifier).
-  /// Unlike a regular scan, which searches for all available APs in the vicinity, a specific scan focuses on a single AP with the specified ESSID,
-  /// potentially improving scan performance and reducing scan time.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.set \n
-  /// %http://tizen.org/privilege/network.get
-  /// @remarks This function needs both privileges.
-  /// @param[in] wifi            The Wi-Fi handle
-  /// @param[in] essid           The essid of specific AP
-  /// @param[in] callback        The callback function to be called
-  /// @param[in] user_data       The user data passed to the callback function
-  /// @return 0 on success, otherwise negative error value.
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION    Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed
-  /// @retval #WIFI_MANAGER_ERROR_PERMISSION_DENIED    Permission Denied
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
-  /// @post This function invokes wifi_manager_scan_finished_cb().
+  /// Starts specific AP scan, asynchronously.
+  ///
+  /// This function starts a Wi-Fi scan targeting a specific access point (AP) with the given ESSID (Extended Service Set Identifier). Unlike a regular scan, which searches for all available APs in the vicinity, a specific scan focuses on a single AP with the specified ESSID, potentially improving scan performance and reducing scan time.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.set>
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Remarks:**
+  /// - This function needs both privileges.
+  ///
+  /// **Parameters:**
+  /// - `wifi` (in): The Wi-Fi handle
+  /// - `essid` (in): The essid of specific AP
+  /// - `callback` (in): The callback function to be called
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value.
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_MANAGER_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Postconditions:**
+  /// - This function invokes wifi_manager_scan_finished_cb().
   int wifi_manager_scan_specific_ap(
     wifi_manager_h wifi,
     ffi.Pointer<ffi.Char> essid,
@@ -435,22 +585,35 @@ class Tizen100CapiNetworkWifiManager {
           int Function(wifi_manager_h, ffi.Pointer<ffi.Char>,
               wifi_manager_scan_finished_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Creates a Wi-Fi specific AP scan handle.
-  /// @details This function creates a new specific AP scan handle, which can be used to configure and initiate specific AP scans.
-  /// The handle is required for setting up specific scan parameters such as SSID and channel frequency.
-  /// @since_tizen 4.0
-  /// @remarks You must release @a specific_scan using wifi_manager_specific_scan_destroy().
-  /// @param[in] wifi              The Wi-Fi handle
-  /// @param[out] specific_scan    The Wi-Fi specific AP scan handle
+  /// Creates a Wi-Fi specific AP scan handle.
   ///
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OUT_OF_MEMORY        Out of memory
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
-  /// @pre This function needs a wifi_manager_initialize() call before use.
-  /// @see wifi_manager_specific_scan_destroy()
+  /// This function creates a new specific AP scan handle, which can be used to configure and initiate specific AP scans. The handle is required for setting up specific scan parameters such as SSID and channel frequency.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Remarks:**
+  /// - You must release `specific_scan` using wifi_manager_specific_scan_destroy().
+  ///
+  /// **Parameters:**
+  /// - `wifi` (in): The Wi-Fi handle
+  /// - `specific_scan` (out): The Wi-Fi specific AP scan handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - This function needs a wifi_manager_initialize() call before use.
+  ///
+  /// **See also:**
+  /// - `wifi_manager_specific_scan_destroy()`
   int wifi_manager_specific_scan_create(
     wifi_manager_h wifi,
     ffi.Pointer<wifi_manager_specific_scan_h> specific_scan,
@@ -471,22 +634,32 @@ class Tizen100CapiNetworkWifiManager {
           int Function(
               wifi_manager_h, ffi.Pointer<wifi_manager_specific_scan_h>)>();
 
-  /// @brief Destroys a Wi-Fi specific AP scan handle.
-  /// @details This function releases the memory allocated for a specific AP scan handle,
-  /// which was created using `wifi_manager_specific_scan_create()`.
-  /// It is important to destroy the handle when it is no longer needed to avoid memory leaks.
-  /// @since_tizen 4.0
-  /// @param[in] wifi              The Wi-Fi handle
-  /// @param[in] specific_scan     The Wi-Fi specific AP scan handle
+  /// Destroys a Wi-Fi specific AP scan handle.
   ///
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OUT_OF_MEMORY        Out of memory
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
-  /// @pre This function needs a wifi_manager_initialize() call before use.
-  /// @see wifi_manager_specific_scan_create()
+  /// This function releases the memory allocated for a specific AP scan handle, which was created using `wifi_manager_specific_scan_create()`. It is important to destroy the handle when it is no longer needed to avoid memory leaks.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `wifi` (in): The Wi-Fi handle
+  /// - `specific_scan` (in): The Wi-Fi specific AP scan handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - This function needs a wifi_manager_initialize() call before use.
+  ///
+  /// **See also:**
+  /// - `wifi_manager_specific_scan_create()`
   int wifi_manager_specific_scan_destroy(
     wifi_manager_h wifi,
     wifi_manager_specific_scan_h specific_scan,
@@ -505,23 +678,36 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_specific_scan_destroyPtr.asFunction<
           int Function(wifi_manager_h, wifi_manager_specific_scan_h)>();
 
-  /// @brief Gets the maximum number of SSIDs supported by the Wi-Fi chipset for the scan operation.
-  /// @details This function queries the Wi-Fi manager to determine the maximum number of SSIDs that the Wi-Fi chipset can support during a single scan operation.
-  /// This value is important when configuring specific AP scans, as it limits the number of SSIDs that can be targeted in a single scan request.
-  /// @since_tizen 5.5
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.get
-  /// @param[in] wifi		The Wi-Fi handle
-  /// @param[out] max_scan_ssids	The maximum number of SSIDs supported by the Wi-Fi \n
-  /// chipset for the scan operation.
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed
-  /// @retval #WIFI_MANAGER_ERROR_PERMISSION_DENIED    Permission Denied
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
-  /// @see wifi_manager_specific_scan_set_ssid()
+  /// Gets the maximum number of SSIDs supported by the Wi-Fi chipset for the scan operation.
+  ///
+  /// This function queries the Wi-Fi manager to determine the maximum number of SSIDs that the Wi-Fi chipset can support during a single scan operation. This value is important when configuring specific AP scans, as it limits the number of SSIDs that can be targeted in a single scan request.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Parameters:**
+  /// - `wifi` (in): The Wi-Fi handle
+  /// - `max_scan_ssids` (out): The maximum number of SSIDs supported by the Wi-Fi chipset for the scan operation.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_MANAGER_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `wifi_manager_specific_scan_set_ssid()`
   int wifi_manager_specific_scan_get_max_ssids(
     wifi_manager_h wifi,
     ffi.Pointer<ffi.Int> max_scan_ssids,
@@ -540,21 +726,29 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_specific_scan_get_max_ssidsPtr
           .asFunction<int Function(wifi_manager_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Sets the SSID of a specific AP scan.
-  /// @details This function sets the SSID for a specific AP scan, which determines the target access point to be scanned.
-  /// By specifying the SSID, the scan can focus on a particular AP rather than scanning for all available APs in the vicinity,
-  /// potentially improving scan performance and reducing scan time.
-  /// @since_tizen 4.0
-  /// @param[in] specific_scan     The Wi-Fi specific AP scan handle
-  /// @param[in] essid             The SSID of specific AP scan
+  /// Sets the SSID of a specific AP scan.
   ///
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OUT_OF_MEMORY        Out of memory
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
-  /// @see wifi_manager_specific_scan_get_max_ssids()
+  /// This function sets the SSID for a specific AP scan, which determines the target access point to be scanned. By specifying the SSID, the scan can focus on a particular AP rather than scanning for all available APs in the vicinity, potentially improving scan performance and reducing scan time.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `specific_scan` (in): The Wi-Fi specific AP scan handle
+  /// - `essid` (in): The SSID of specific AP scan
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `wifi_manager_specific_scan_get_max_ssids()`
   int wifi_manager_specific_scan_set_ssid(
     wifi_manager_specific_scan_h specific_scan,
     ffi.Pointer<ffi.Char> essid,
@@ -573,19 +767,26 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_specific_scan_set_ssidPtr.asFunction<
           int Function(wifi_manager_specific_scan_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets the channel frequency of a specific AP scan.
-  /// @details This function sets the channel frequency for a specific AP scan, which determines the radio frequency band on which the scan will be performed.
-  /// By specifying the channel frequency, the scan can be focused on a particular frequency band, potentially improving scan performance and reducing scan time.
-  /// @since_tizen 4.0
-  /// @param[in] specific_scan     The Wi-Fi specific AP scan handle
-  /// @param[in] freq              The channel frequency of specific AP scan
+  /// Sets the channel frequency of a specific AP scan.
   ///
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OUT_OF_MEMORY        Out of memory
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// This function sets the channel frequency for a specific AP scan, which determines the radio frequency band on which the scan will be performed. By specifying the channel frequency, the scan can be focused on a particular frequency band, potentially improving scan performance and reducing scan time.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `specific_scan` (in): The Wi-Fi specific AP scan handle
+  /// - `freq` (in): The channel frequency of specific AP scan
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_specific_scan_set_freq(
     wifi_manager_specific_scan_h specific_scan,
     int freq,
@@ -604,30 +805,44 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_specific_scan_set_freqPtr
           .asFunction<int Function(wifi_manager_specific_scan_h, int)>();
 
-  /// @brief Starts multi SSID and multi channel specific scan, asynchronously.
-  /// @details This function starts a Wi-Fi scan targeting multiple specific access points (APs) across multiple channels simultaneously.
-  /// Unlike a regular scan, which searches for all available APs in the vicinity,
-  /// a specific scan focuses on a predefined set of APs, which can improve scan efficiency and reduce scan time.
-  /// The multi-SSID and multi-channel specific scan extends this concept further by allowing the scan to target multiple sets of APs across different channels at once.
-  /// @since_tizen 4.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.set \n
-  /// %http://tizen.org/privilege/network.get
-  /// @remarks This function needs both privileges.
-  /// @param[in] wifi            The Wi-Fi handle
-  /// @param[in] specific_scan   The Wi-Fi specific AP scan handle
-  /// @param[in] callback        The callback function to be called
-  /// @param[in] user_data       The user data passed to the callback function
-  /// @return 0 on success, otherwise negative error value.
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION    Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed
-  /// @retval #WIFI_MANAGER_ERROR_PERMISSION_DENIED    Permission Denied
-  /// @retval #WIFI_MANAGER_ERROR_OUT_OF_MEMORY        Out of memory
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
-  /// @post This function invokes wifi_manager_scan_finished_cb().
+  /// Starts multi SSID and multi channel specific scan, asynchronously.
+  ///
+  /// This function starts a Wi-Fi scan targeting multiple specific access points (APs) across multiple channels simultaneously. Unlike a regular scan, which searches for all available APs in the vicinity, a specific scan focuses on a predefined set of APs, which can improve scan efficiency and reduce scan time. The multi-SSID and multi-channel specific scan extends this concept further by allowing the scan to target multiple sets of APs across different channels at once.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.set>
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Remarks:**
+  /// - This function needs both privileges.
+  ///
+  /// **Parameters:**
+  /// - `wifi` (in): The Wi-Fi handle
+  /// - `specific_scan` (in): The Wi-Fi specific AP scan handle
+  /// - `callback` (in): The callback function to be called
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value.
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_MANAGER_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `WIFI_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Postconditions:**
+  /// - This function invokes wifi_manager_scan_finished_cb().
   int wifi_manager_specific_ap_start_multi_scan(
     wifi_manager_h wifi,
     wifi_manager_specific_scan_h specific_scan,
@@ -652,24 +867,36 @@ class Tizen100CapiNetworkWifiManager {
           int Function(wifi_manager_h, wifi_manager_specific_scan_h,
               wifi_manager_scan_finished_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Flushes BSS entries from the cache.
-  /// @details This function removes all previously discovered BSS entries from the Wi-Fi manager's internal cache.
-  /// BSS entries include information about nearby Wi-Fi access points (APs) that have been scanned and stored by the Wi-Fi manager.
-  /// By flushing these entries, the Wi-Fi manager effectively forgets about previously discovered APs,
-  /// which can be useful in scenarios where the environment has changed significantly or when privacy concerns dictate that old scan results should be discarded.
-  /// @since_tizen 7.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.set \n
-  /// %http://tizen.org/privilege/network.get
-  /// @remarks This function needs both privileges.
-  /// @param[in] wifi           The Wi-Fi handle
-  /// @return 0 on success, otherwise negative error value.
-  /// @retval #WIFI_MANAGER_ERROR_NONE  Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
-  /// @retval #WIFI_MANAGER_ERROR_PERMISSION_DENIED    Permission Denied
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION    Invalid operation
+  /// Flushes BSS entries from the cache.
+  ///
+  /// This function removes all previously discovered BSS entries from the Wi-Fi manager's internal cache. BSS entries include information about nearby Wi-Fi access points (APs) that have been scanned and stored by the Wi-Fi manager. By flushing these entries, the Wi-Fi manager effectively forgets about previously discovered APs, which can be useful in scenarios where the environment has changed significantly or when privacy concerns dictate that old scan results should be discarded.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.set>
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Remarks:**
+  /// - This function needs both privileges.
+  ///
+  /// **Parameters:**
+  /// - `wifi` (in): The Wi-Fi handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value.
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_MANAGER_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
   int wifi_manager_flush_bss(
     wifi_manager_h wifi,
   ) {
@@ -684,33 +911,49 @@ class Tizen100CapiNetworkWifiManager {
   late final _wifi_manager_flush_bss =
       _wifi_manager_flush_bssPtr.asFunction<int Function(wifi_manager_h)>();
 
-  /// @brief Connects to the hidden AP, asynchronously.
-  /// @details This function attempts to connect to a hidden Wi-Fi access point (AP) with the specified ESSID, security type, and passphrase.
-  /// Hidden APs do not broadcast their presence, so the ESSID must be explicitly provided to the function.
-  /// The connection process is performed asynchronously, meaning that the function returns immediately,
-  /// and the result of the connection attempt is reported via the provided callback function.
-  /// @since_tizen 4.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.set \n
-  /// %http://tizen.org/privilege/network.get \n
-  /// %http://tizen.org/privilege/network.profile
-  /// @remarks This function needs all listed privileges.
-  /// @param[in] wifi            The Wi-Fi handle
-  /// @param[in] essid           The ESSID of the hidden AP
-  /// @param[in] sec_type        The security type of the hidden AP
-  /// @param[in] passphrase      The passphrase of the hidden AP
-  /// @param[in] callback        The callback function to be called
-  /// @param[in] user_data       The user data passed to the callback function
-  /// @return 0 on success, otherwise negative error value.
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION    Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed
-  /// @retval #WIFI_MANAGER_ERROR_PERMISSION_DENIED    Permission Denied
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
-  /// @pre This function needs wifi_manager_scan() before use.
-  /// @post This function invokes wifi_manager_connected_cb().
+  /// Connects to the hidden AP, asynchronously.
+  ///
+  /// This function attempts to connect to a hidden Wi-Fi access point (AP) with the specified ESSID, security type, and passphrase. Hidden APs do not broadcast their presence, so the ESSID must be explicitly provided to the function. The connection process is performed asynchronously, meaning that the function returns immediately, and the result of the connection attempt is reported via the provided callback function.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.set>
+  /// - <http://tizen.org/privilege/network.get>
+  /// - <http://tizen.org/privilege/network.profile>
+  ///
+  /// **Remarks:**
+  /// - This function needs all listed privileges.
+  ///
+  /// **Parameters:**
+  /// - `wifi` (in): The Wi-Fi handle
+  /// - `essid` (in): The ESSID of the hidden AP
+  /// - `sec_type` (in): The security type of the hidden AP
+  /// - `passphrase` (in): The passphrase of the hidden AP
+  /// - `callback` (in): The callback function to be called
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value.
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_MANAGER_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - This function needs wifi_manager_scan() before use.
+  ///
+  /// **Postconditions:**
+  /// - This function invokes wifi_manager_connected_cb().
   int wifi_manager_connect_hidden_ap(
     wifi_manager_h wifi,
     ffi.Pointer<ffi.Char> essid,
@@ -748,24 +991,38 @@ class Tizen100CapiNetworkWifiManager {
               wifi_manager_connected_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Gets the handle of the connected access point.
-  /// @details This function retrieves the handle of the access point to which the Wi-Fi interface is currently connected.
-  /// If there is no active connection, the function will return an error.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.get
-  /// @remarks You must release @a ap using wifi_manager_ap_destroy().
-  /// @param[in] wifi            The Wi-Fi handle
-  /// @param[out] ap             The access point handle
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed
-  /// @retval #WIFI_MANAGER_ERROR_OUT_OF_MEMORY        Out of memory
-  /// @retval #WIFI_MANAGER_ERROR_NO_CONNECTION        There is no connected AP
-  /// @retval #WIFI_MANAGER_ERROR_PERMISSION_DENIED    Permission Denied
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// Gets the handle of the connected access point.
+  ///
+  /// This function retrieves the handle of the access point to which the Wi-Fi interface is currently connected. If there is no active connection, the function will return an error.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Remarks:**
+  /// - You must release `ap` using wifi_manager_ap_destroy().
+  ///
+  /// **Parameters:**
+  /// - `wifi` (in): The Wi-Fi handle
+  /// - `ap` (out): The access point handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `WIFI_MANAGER_ERROR_NO_CONNECTION`: There is no connected AP
+  /// - `WIFI_MANAGER_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_get_connected_ap(
     wifi_manager_h wifi,
     ffi.Pointer<wifi_manager_ap_h> ap,
@@ -785,23 +1042,37 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_get_connected_apPtr.asFunction<
           int Function(wifi_manager_h, ffi.Pointer<wifi_manager_ap_h>)>();
 
-  /// @brief Gets the result of the scan.
-  /// @details This function iterates through the list of access points found during a general Wi-Fi scan and provides their details to the caller via the provided callback function.
-  /// A general Wi-Fi scan searches for all available access points in the vicinity, regardless of whether they are known or unknown to the device.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.get
-  /// @param[in] wifi            The Wi-Fi handle
-  /// @param[in] callback        The callback to be called
-  /// @param[in] user_data       The user data passed to the callback function
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed
-  /// @retval #WIFI_MANAGER_ERROR_PERMISSION_DENIED    Permission Denied
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
-  /// @post This function invokes wifi_manager_found_ap_cb().
+  /// Gets the result of the scan.
+  ///
+  /// This function iterates through the list of access points found during a general Wi-Fi scan and provides their details to the caller via the provided callback function. A general Wi-Fi scan searches for all available access points in the vicinity, regardless of whether they are known or unknown to the device.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Parameters:**
+  /// - `wifi` (in): The Wi-Fi handle
+  /// - `callback` (in): The callback to be called
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_MANAGER_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Postconditions:**
+  /// - This function invokes wifi_manager_found_ap_cb().
   int wifi_manager_foreach_found_ap(
     wifi_manager_h wifi,
     wifi_manager_found_ap_cb callback,
@@ -823,26 +1094,40 @@ class Tizen100CapiNetworkWifiManager {
           int Function(wifi_manager_h, wifi_manager_found_ap_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Gets the result of specific AP scan.
-  /// @details This function iterates through the list of access points found during a specific access point scan
-  /// and provides their details to the caller via the provided callback function.
-  /// A specific access point scan is used to focus on a particular access point,
-  /// rather than scanning all available access points in the vicinity.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.get
-  /// @param[in] wifi            The Wi-Fi handle
-  /// @param[in] callback        The callback to be called
-  /// @param[in] user_data       The user data passed to the callback function
-  /// @return 0 on success, otherwise negative error value.
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed
-  /// @retval #WIFI_MANAGER_ERROR_PERMISSION_DENIED    Permission Denied
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
-  /// @post This function invokes wifi_manager_found_ap_cb().
-  /// @see wifi_manager_scan_specific_ap()
+  /// Gets the result of specific AP scan.
+  ///
+  /// This function iterates through the list of access points found during a specific access point scan and provides their details to the caller via the provided callback function. A specific access point scan is used to focus on a particular access point, rather than scanning all available access points in the vicinity.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Parameters:**
+  /// - `wifi` (in): The Wi-Fi handle
+  /// - `callback` (in): The callback to be called
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value.
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_MANAGER_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Postconditions:**
+  /// - This function invokes wifi_manager_found_ap_cb().
+  ///
+  /// **See also:**
+  /// - `wifi_manager_scan_specific_ap()`
   int wifi_manager_foreach_found_specific_ap(
     wifi_manager_h wifi,
     wifi_manager_found_ap_cb callback,
@@ -865,25 +1150,41 @@ class Tizen100CapiNetworkWifiManager {
           int Function(wifi_manager_h, wifi_manager_found_ap_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Gets the result of the BSSID scan (i.e. BSSID, ESSID & RSSI).
-  /// @details This function iterates through the list of access points found during a BSSID scan and provides their details to the caller via the provided callback function.
-  /// The BSSID scan focuses on identifying access points based on their unique MAC addresses (BSSID), allowing for more precise identification compared to a regular scan.
-  /// @since_tizen 4.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.get
-  /// @param[in] wifi            The Wi-Fi handle
-  /// @param[in] callback        The callback to be called
-  /// @param[in] user_data       The user data passed to the callback function
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed
-  /// @retval #WIFI_MANAGER_ERROR_PERMISSION_DENIED    Permission Denied
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
-  /// @post This function invokes wifi_manager_found_ap_cb().
-  /// @see wifi_manager_scan()
-  /// @see wifi_manager_scan_specific_ap()
+  /// Gets the result of the BSSID scan (i.e. BSSID, ESSID & RSSI).
+  ///
+  /// This function iterates through the list of access points found during a BSSID scan and provides their details to the caller via the provided callback function. The BSSID scan focuses on identifying access points based on their unique MAC addresses (BSSID), allowing for more precise identification compared to a regular scan.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Parameters:**
+  /// - `wifi` (in): The Wi-Fi handle
+  /// - `callback` (in): The callback to be called
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_MANAGER_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Postconditions:**
+  /// - This function invokes wifi_manager_found_ap_cb().
+  ///
+  /// **See also:**
+  /// - `wifi_manager_scan()`
+  /// - `wifi_manager_scan_specific_ap()`
   int wifi_manager_foreach_found_bssid_ap(
     wifi_manager_h wifi,
     wifi_manager_found_ap_cb callback,
@@ -905,34 +1206,50 @@ class Tizen100CapiNetworkWifiManager {
           int Function(wifi_manager_h, wifi_manager_found_ap_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Connects to the access point asynchronously.
-  /// @details This function initiates a connection to the specified Wi-Fi access point.
-  /// The connection process is performed asynchronously, meaning that the function returns immediately,
-  /// and the result of the connection attempt is reported via the provided callback function.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.set \n
-  /// %http://tizen.org/privilege/network.get
-  /// @remarks This function needs both privileges.
-  /// @param[in] wifi            The Wi-Fi handle
-  /// @param[in] ap              The access point handle
-  /// @param[in] callback        The callback function to be called \n
-  /// This can be @c NULL if you don't want to get the notification.
-  /// @param[in] user_data       The user data passed to the callback function
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION    Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_NOW_IN_PROGRESS      Now in progress
-  /// @retval #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed
-  /// @retval #WIFI_MANAGER_ERROR_PERMISSION_DENIED    Permission Denied
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
-  /// @post This function invokes wifi_manager_connected_cb().
-  /// @see wifi_manager_connected_cb()
-  /// @see wifi_manager_connect_by_wps_pbc()
-  /// @see wifi_manager_connect_by_wps_pin()
-  /// @see wifi_manager_disconnect()
+  /// Connects to the access point asynchronously.
+  ///
+  /// This function initiates a connection to the specified Wi-Fi access point. The connection process is performed asynchronously, meaning that the function returns immediately, and the result of the connection attempt is reported via the provided callback function.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.set>
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Remarks:**
+  /// - This function needs both privileges.
+  ///
+  /// **Parameters:**
+  /// - `wifi` (in): The Wi-Fi handle
+  /// - `ap` (in): The access point handle
+  /// - `callback` (in): The callback function to be called This can be `NULL` if you don't want to get the notification.
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_NOW_IN_PROGRESS`: Now in progress
+  /// - `WIFI_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_MANAGER_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Postconditions:**
+  /// - This function invokes wifi_manager_connected_cb().
+  ///
+  /// **See also:**
+  /// - `wifi_manager_connected_cb()`
+  /// - `wifi_manager_connect_by_wps_pbc()`
+  /// - `wifi_manager_connect_by_wps_pin()`
+  /// - `wifi_manager_disconnect()`
   int wifi_manager_connect(
     wifi_manager_h wifi,
     wifi_manager_ap_h ap,
@@ -958,33 +1275,49 @@ class Tizen100CapiNetworkWifiManager {
       int Function(wifi_manager_h, wifi_manager_ap_h, wifi_manager_connected_cb,
           ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Disconnects to the access point asynchronously.
-  /// @details This function disrupts the existing connection to the specified Wi-Fi access point.
-  /// The disconnection process is performed asynchronously, meaning that the function returns immediately,
-  /// and the result of the disconnection attempt is reported via the provided callback function.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.set \n
-  /// %http://tizen.org/privilege/network.get
-  /// @remarks This function needs both privileges.
-  /// @param[in] wifi            The Wi-Fi handle
-  /// @param[in] ap              The access point handle
-  /// @param[in] callback        The callback function to be called \n
-  /// This can be @c NULL if you don't want to get the notification.
-  /// @param[in] user_data        The user data passed to the callback function
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION    Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed
-  /// @retval #WIFI_MANAGER_ERROR_PERMISSION_DENIED    Permission Denied
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
-  /// @post This function invokes wifi_manager_disconnected_cb().
-  /// @see wifi_manager_disconnected_cb()
-  /// @see wifi_manager_connect_by_wps_pbc()
-  /// @see wifi_manager_connect_by_wps_pin()
-  /// @see wifi_manager_connect()
+  /// Disconnects to the access point asynchronously.
+  ///
+  /// This function disrupts the existing connection to the specified Wi-Fi access point. The disconnection process is performed asynchronously, meaning that the function returns immediately, and the result of the disconnection attempt is reported via the provided callback function.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.set>
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Remarks:**
+  /// - This function needs both privileges.
+  ///
+  /// **Parameters:**
+  /// - `wifi` (in): The Wi-Fi handle
+  /// - `ap` (in): The access point handle
+  /// - `callback` (in): The callback function to be called This can be `NULL` if you don't want to get the notification.
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_MANAGER_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Postconditions:**
+  /// - This function invokes wifi_manager_disconnected_cb().
+  ///
+  /// **See also:**
+  /// - `wifi_manager_disconnected_cb()`
+  /// - `wifi_manager_connect_by_wps_pbc()`
+  /// - `wifi_manager_connect_by_wps_pin()`
+  /// - `wifi_manager_connect()`
   int wifi_manager_disconnect(
     wifi_manager_h wifi,
     wifi_manager_ap_h ap,
@@ -1010,34 +1343,50 @@ class Tizen100CapiNetworkWifiManager {
       int Function(wifi_manager_h, wifi_manager_ap_h,
           wifi_manager_disconnected_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Connects to the access point with WPS PBC asynchronously.
-  /// @details This function initiates a connection to a Wi-Fi access point using WPS PBC authentication.
-  /// The connection process is performed asynchronously, meaning that the function returns immediately,
-  /// and the result of the connection attempt is reported via the provided callback function.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.profile \n
-  /// %http://tizen.org/privilege/network.get
-  /// @remarks This function needs both privileges.
-  /// @param[in] wifi            The Wi-Fi handle
-  /// @param[in] ap              The access point handle
-  /// @param[in] callback        The callback function to be called \n
-  /// This can be NULL if you don't want to get the notification.
-  /// @param[in] user_data       The user data passed to the callback function
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION    Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_NOW_IN_PROGRESS      Now in progress
-  /// @retval #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed
-  /// @retval #WIFI_MANAGER_ERROR_PERMISSION_DENIED    Permission Denied
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
-  /// @post This function invokes wifi_manager_connected_cb().
-  /// @see wifi_manager_connected_cb()
-  /// @see wifi_manager_connect()
-  /// @see wifi_manager_disconnect()
-  /// @see wifi_manager_ap_is_wps_supported()
+  /// Connects to the access point with WPS PBC asynchronously.
+  ///
+  /// This function initiates a connection to a Wi-Fi access point using WPS PBC authentication. The connection process is performed asynchronously, meaning that the function returns immediately, and the result of the connection attempt is reported via the provided callback function.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.profile>
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Remarks:**
+  /// - This function needs both privileges.
+  ///
+  /// **Parameters:**
+  /// - `wifi` (in): The Wi-Fi handle
+  /// - `ap` (in): The access point handle
+  /// - `callback` (in): The callback function to be called This can be NULL if you don't want to get the notification.
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_NOW_IN_PROGRESS`: Now in progress
+  /// - `WIFI_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_MANAGER_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Postconditions:**
+  /// - This function invokes wifi_manager_connected_cb().
+  ///
+  /// **See also:**
+  /// - `wifi_manager_connected_cb()`
+  /// - `wifi_manager_connect()`
+  /// - `wifi_manager_disconnect()`
+  /// - `wifi_manager_ap_is_wps_supported()`
   int wifi_manager_connect_by_wps_pbc(
     wifi_manager_h wifi,
     wifi_manager_ap_h ap,
@@ -1064,34 +1413,51 @@ class Tizen100CapiNetworkWifiManager {
           int Function(wifi_manager_h, wifi_manager_ap_h,
               wifi_manager_connected_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Connects to the access point with WPS PIN asynchronously.
-  /// @details This function initiates a connection to a Wi-Fi access point using WPS PIN authentication.
-  /// The connection process is performed asynchronously, meaning that the function returns immediately,
-  /// and the result of the connection attempt is reported via the provided callback function.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.profile \n
-  /// %http://tizen.org/privilege/network.get
-  /// @remarks This function needs both privileges.
-  /// @param[in] wifi            The Wi-Fi handle
-  /// @param[in] ap              The access point handle
-  /// @param[in] pin             The WPS PIN is a non-NULL string with length greater than 0 and less than or equal to 8
-  /// @param[in] callback        The callback function to be called (this can be NULL if you don't want to get the notification)
-  /// @param[in] user_data       The user data passed to the callback function
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION    Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_NOW_IN_PROGRESS      Now in progress
-  /// @retval #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed
-  /// @retval #WIFI_MANAGER_ERROR_PERMISSION_DENIED    Permission Denied
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
-  /// @post This function invokes wifi_manager_connected_cb().
-  /// @see wifi_manager_connected_cb()
-  /// @see wifi_manager_connect()
-  /// @see wifi_manager_disconnect()
-  /// @see wifi_manager_ap_is_wps_supported()
+  /// Connects to the access point with WPS PIN asynchronously.
+  ///
+  /// This function initiates a connection to a Wi-Fi access point using WPS PIN authentication. The connection process is performed asynchronously, meaning that the function returns immediately, and the result of the connection attempt is reported via the provided callback function.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.profile>
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Remarks:**
+  /// - This function needs both privileges.
+  ///
+  /// **Parameters:**
+  /// - `wifi` (in): The Wi-Fi handle
+  /// - `ap` (in): The access point handle
+  /// - `pin` (in): The WPS PIN is a non-NULL string with length greater than 0 and less than or equal to 8
+  /// - `callback` (in): The callback function to be called (this can be NULL if you don't want to get the notification)
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_NOW_IN_PROGRESS`: Now in progress
+  /// - `WIFI_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_MANAGER_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Postconditions:**
+  /// - This function invokes wifi_manager_connected_cb().
+  ///
+  /// **See also:**
+  /// - `wifi_manager_connected_cb()`
+  /// - `wifi_manager_connect()`
+  /// - `wifi_manager_disconnect()`
+  /// - `wifi_manager_ap_is_wps_supported()`
   int wifi_manager_connect_by_wps_pin(
     wifi_manager_h wifi,
     wifi_manager_ap_h ap,
@@ -1121,34 +1487,50 @@ class Tizen100CapiNetworkWifiManager {
           int Function(wifi_manager_h, wifi_manager_ap_h, ffi.Pointer<ffi.Char>,
               wifi_manager_connected_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Connects to the access point with WPS PBC without entering SSID.
-  /// @details This function initiates a connection to a Wi-Fi access point using WPS PBC authentication.
-  /// The SSID of the access point does not need to be known;
-  /// the Wi-Fi module will search for and connect to the access point based on the WPS PBC signal.
-  /// @since_tizen 4.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.set \n
-  /// %http://tizen.org/privilege/network.get \n
-  /// %http://tizen.org/privilege/network.profile
-  /// @remarks This function needs all listed privileges.
-  /// @param[in] wifi      The Wi-Fi handle
-  /// @param[in] callback  The callback function to be called \n
-  /// This can be NULL if you don't want to get the notification.
-  /// @param[in] user_data The user data passed to the callback function
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION    Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_NOW_IN_PROGRESS      Now in progress
-  /// @retval #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed
-  /// @retval #WIFI_MANAGER_ERROR_PERMISSION_DENIED    Permission denied
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
-  /// @post This function invokes wifi_manager_connected_cb().
-  /// @see wifi_manager_connected_cb()
-  /// @see wifi_manager_connect()
-  /// @see wifi_manager_disconnect()
-  /// @see wifi_manager_ap_is_wps_supported()
+  /// Connects to the access point with WPS PBC without entering SSID.
+  ///
+  /// This function initiates a connection to a Wi-Fi access point using WPS PBC authentication. The SSID of the access point does not need to be known; the Wi-Fi module will search for and connect to the access point based on the WPS PBC signal.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.set>
+  /// - <http://tizen.org/privilege/network.get>
+  /// - <http://tizen.org/privilege/network.profile>
+  ///
+  /// **Remarks:**
+  /// - This function needs all listed privileges.
+  ///
+  /// **Parameters:**
+  /// - `wifi` (in): The Wi-Fi handle
+  /// - `callback` (in): The callback function to be called This can be NULL if you don't want to get the notification.
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_NOW_IN_PROGRESS`: Now in progress
+  /// - `WIFI_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_MANAGER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Postconditions:**
+  /// - This function invokes wifi_manager_connected_cb().
+  ///
+  /// **See also:**
+  /// - `wifi_manager_connected_cb()`
+  /// - `wifi_manager_connect()`
+  /// - `wifi_manager_disconnect()`
+  /// - `wifi_manager_ap_is_wps_supported()`
   int wifi_manager_connect_by_wps_pbc_without_ssid(
     wifi_manager_h wifi,
     wifi_manager_connected_cb callback,
@@ -1171,36 +1553,51 @@ class Tizen100CapiNetworkWifiManager {
           int Function(wifi_manager_h, wifi_manager_connected_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Connects to the access point with WPS PIN without entering SSID.
-  /// @details This function initiates a connection to a Wi-Fi access point using WPS PIN authentication.
-  /// The SSID of the access point does not need to be known;
-  /// the Wi-Fi module will search for and connect to the access point based on the provided WPS PIN.
-  /// @since_tizen 4.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.set \n
-  /// %http://tizen.org/privilege/network.get \n
-  /// %http://tizen.org/privilege/network.profile
-  /// @remarks This function needs all listed privileges.
-  /// @param[in] wifi      The Wi-Fi handle
-  /// @param[in] pin       The WPS PIN, a non-NULL string with length greater \n
-  /// than 0 and less than or equal to 8
-  /// @param[in] callback  The callback function to be called \n
-  /// This can be NULL if you don't want to get the notification.
-  /// @param[in] user_data The user data passed to the callback function
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION    Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_NOW_IN_PROGRESS      Now in progress
-  /// @retval #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed
-  /// @retval #WIFI_MANAGER_ERROR_PERMISSION_DENIED    Permission denied
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
-  /// @post This function invokes wifi_manager_connected_cb().
-  /// @see wifi_manager_connected_cb()
-  /// @see wifi_manager_connect()
-  /// @see wifi_manager_disconnect()
-  /// @see wifi_manager_ap_is_wps_supported()
+  /// Connects to the access point with WPS PIN without entering SSID.
+  ///
+  /// This function initiates a connection to a Wi-Fi access point using WPS PIN authentication. The SSID of the access point does not need to be known; the Wi-Fi module will search for and connect to the access point based on the provided WPS PIN.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.set>
+  /// - <http://tizen.org/privilege/network.get>
+  /// - <http://tizen.org/privilege/network.profile>
+  ///
+  /// **Remarks:**
+  /// - This function needs all listed privileges.
+  ///
+  /// **Parameters:**
+  /// - `wifi` (in): The Wi-Fi handle
+  /// - `pin` (in): The WPS PIN, a non-NULL string with length greater than 0 and less than or equal to 8
+  /// - `callback` (in): The callback function to be called This can be NULL if you don't want to get the notification.
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_NOW_IN_PROGRESS`: Now in progress
+  /// - `WIFI_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_MANAGER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Postconditions:**
+  /// - This function invokes wifi_manager_connected_cb().
+  ///
+  /// **See also:**
+  /// - `wifi_manager_connected_cb()`
+  /// - `wifi_manager_connect()`
+  /// - `wifi_manager_disconnect()`
+  /// - `wifi_manager_ap_is_wps_supported()`
   int wifi_manager_connect_by_wps_pin_without_ssid(
     wifi_manager_h wifi,
     ffi.Pointer<ffi.Char> pin,
@@ -1225,23 +1622,37 @@ class Tizen100CapiNetworkWifiManager {
           int Function(wifi_manager_h, ffi.Pointer<ffi.Char>,
               wifi_manager_connected_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Stops ongoing WPS provisioning / disconnects from the connected access point.
-  /// @details This function stops any ongoing WPS provisioning process initiated by `wifi_manager_start_wps()` or disconnects
-  /// from the currently connected access point if there is no ongoing WPS provisioning.
-  /// @since_tizen 4.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.set \n
-  /// %http://tizen.org/privilege/network.get
-  /// @remarks This function needs both privileges.
-  /// @param[in] wifi      The Wi-Fi handle
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION    Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed
-  /// @retval #WIFI_MANAGER_ERROR_PERMISSION_DENIED    Permission denied
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// Stops ongoing WPS provisioning / disconnects from the connected access point.
+  ///
+  /// This function stops any ongoing WPS provisioning process initiated by `wifi_manager_start_wps()` or disconnects from the currently connected access point if there is no ongoing WPS provisioning.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.set>
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Remarks:**
+  /// - This function needs both privileges.
+  ///
+  /// **Parameters:**
+  /// - `wifi` (in): The Wi-Fi handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_MANAGER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_cancel_wps(
     wifi_manager_h wifi,
   ) {
@@ -1256,22 +1667,36 @@ class Tizen100CapiNetworkWifiManager {
   late final _wifi_manager_cancel_wps =
       _wifi_manager_cancel_wpsPtr.asFunction<int Function(wifi_manager_h)>();
 
-  /// @brief Gets the WPS generated PIN code.
-  /// @details This function queries the Wi-Fi manager to obtain the WPS-generated PIN code.
-  /// The retrieved PIN code can be used for WPS-based authentication when connecting to a Wi-Fi access point.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.get
-  /// @remarks You must release @a wps_pin using free().
-  /// @param[in] wifi            The Wi-Fi handle
-  /// @param[out] wps_pin        The WPS PIN
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed
-  /// @retval #WIFI_MANAGER_ERROR_PERMISSION_DENIED    Permission Denied
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// Gets the WPS generated PIN code.
+  ///
+  /// This function queries the Wi-Fi manager to obtain the WPS-generated PIN code. The retrieved PIN code can be used for WPS-based authentication when connecting to a Wi-Fi access point.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Remarks:**
+  /// - You must release `wps_pin` using free().
+  ///
+  /// **Parameters:**
+  /// - `wifi` (in): The Wi-Fi handle
+  /// - `wps_pin` (out): The WPS PIN
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_MANAGER_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_get_wps_generated_pin(
     wifi_manager_h wifi,
     ffi.Pointer<ffi.Pointer<ffi.Char>> wps_pin,
@@ -1291,24 +1716,38 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_get_wps_generated_pinPtr.asFunction<
           int Function(wifi_manager_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Deletes the information of a stored access point and disconnects from it if it was connected to.
-  /// @details If an AP is connected to, then connection information will be stored.
-  /// This information is used when a connection to that AP is established automatically.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.profile \n
-  /// %http://tizen.org/privilege/network.get
-  /// @remarks This function needs both privileges.
-  /// @param[in] wifi            The Wi-Fi handle
-  /// @param[in] ap              The access point handle
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION    Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed
-  /// @retval #WIFI_MANAGER_ERROR_PERMISSION_DENIED    Permission Denied
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// Deletes the information of a stored access point and disconnects from it if it was connected to.
+  ///
+  /// If an AP is connected to, then connection information will be stored. This information is used when a connection to that AP is established automatically.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.profile>
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Remarks:**
+  /// - This function needs both privileges.
+  ///
+  /// **Parameters:**
+  /// - `wifi` (in): The Wi-Fi handle
+  /// - `ap` (in): The access point handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_MANAGER_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_forget_ap(
     wifi_manager_h wifi,
     wifi_manager_ap_h ap,
@@ -1326,27 +1765,43 @@ class Tizen100CapiNetworkWifiManager {
   late final _wifi_manager_forget_ap = _wifi_manager_forget_apPtr
       .asFunction<int Function(wifi_manager_h, wifi_manager_ap_h)>();
 
-  /// @brief Deletes stored access point's information and disconnects from it if connected, asynchronously.
-  /// @details This function initiates an asynchronous process to delete the stored information of the specified access point and disconnect from it if currently connected.
-  /// The result of the operation is reported via the provided callback function.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.profile \n
-  /// %http://tizen.org/privilege/network.get
-  /// @remarks This function needs both privileges.
-  /// @param[in] wifi            The Wi-Fi handle
-  /// @param[in] ap              The access point handle
-  /// @param[in] callback        The callback function to be called
-  /// @param[in] user_data       The user data passed to the callback function
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION    Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed
-  /// @retval #WIFI_MANAGER_ERROR_PERMISSION_DENIED    Permission Denied
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
-  /// @post This function invokes wifi_manager_forget_ap_finished_cb().
+  /// Deletes stored access point's information and disconnects from it if connected, asynchronously.
+  ///
+  /// This function initiates an asynchronous process to delete the stored information of the specified access point and disconnect from it if currently connected. The result of the operation is reported via the provided callback function.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.profile>
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Remarks:**
+  /// - This function needs both privileges.
+  ///
+  /// **Parameters:**
+  /// - `wifi` (in): The Wi-Fi handle
+  /// - `ap` (in): The access point handle
+  /// - `callback` (in): The callback function to be called
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_MANAGER_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Postconditions:**
+  /// - This function invokes wifi_manager_forget_ap_finished_cb().
   int wifi_manager_forget_ap_async(
     wifi_manager_h wifi,
     wifi_manager_ap_h ap,
@@ -1373,23 +1828,37 @@ class Tizen100CapiNetworkWifiManager {
           int Function(wifi_manager_h, wifi_manager_ap_h,
               wifi_manager_forget_ap_finished_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Updates an existing AP.
-  /// @details When a AP is changed, these changes will be not applied to the Connection Manager immediately.
-  /// When you call this function, your changes affect the Connection Manager and the existing AP is updated.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.profile \n
-  /// %http://tizen.org/privilege/network.get
-  /// @remarks This function needs both privileges.
-  /// @param[in] wifi            The Wi-Fi handle
-  /// @param[in] ap              The access point handle
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION    Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_PERMISSION_DENIED    Permission Denied
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// Updates an existing AP.
+  ///
+  /// When a AP is changed, these changes will be not applied to the Connection Manager immediately. When you call this function, your changes affect the Connection Manager and the existing AP is updated.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.profile>
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Remarks:**
+  /// - This function needs both privileges.
+  ///
+  /// **Parameters:**
+  /// - `wifi` (in): The Wi-Fi handle
+  /// - `ap` (in): The access point handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_update_ap(
     wifi_manager_h wifi,
     wifi_manager_ap_h ap,
@@ -1407,30 +1876,46 @@ class Tizen100CapiNetworkWifiManager {
   late final _wifi_manager_update_ap = _wifi_manager_update_apPtr
       .asFunction<int Function(wifi_manager_h, wifi_manager_ap_h)>();
 
-  /// @brief Adds the Wi-Fi Vendor Specific Information Element (VSIE) to a specific frame type.
-  /// @details This function adds the specified VSIE data to the given frame ID.
-  /// The VSIE data will be included in the corresponding frame when transmitted by the Wi-Fi module.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.set
-  /// @remarks @a vsie_str for @a frame_id will be in effect until Wi-Fi is deactivated.
+  /// Adds the Wi-Fi Vendor Specific Information Element (VSIE) to a specific frame type.
   ///
-  /// @param[in] wifi           The Wi-Fi handle
-  /// @param[in] frame_id       The frame ID for setting VSIE
-  /// @param[in] vsie_str       The VSIE data
+  /// This function adds the specified VSIE data to the given frame ID. The VSIE data will be included in the corresponding frame when transmitted by the Wi-Fi module.
   ///
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION    Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed
-  /// @retval #WIFI_MANAGER_ERROR_PERMISSION_DENIED    Permission Denied
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
-  /// @pre Wi-Fi service must be activated by wifi_manager_activate().
-  /// @see wifi_manager_activate()
-  /// @see wifi_manager_remove_vsie()
-  /// @see wifi_manager_get_vsie()
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.set>
+  ///
+  /// **Remarks:**
+  /// - `vsie_str` for `frame_id` will be in effect until Wi-Fi is deactivated.
+  ///
+  /// **Parameters:**
+  /// - `wifi` (in): The Wi-Fi handle
+  /// - `frame_id` (in): The frame ID for setting VSIE
+  /// - `vsie_str` (in): The VSIE data
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_MANAGER_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi service must be activated by wifi_manager_activate().
+  ///
+  /// **See also:**
+  /// - `wifi_manager_activate()`
+  /// - `wifi_manager_remove_vsie()`
+  /// - `wifi_manager_get_vsie()`
   int wifi_manager_add_vsie(
     wifi_manager_h wifi,
     int frame_id,
@@ -1450,31 +1935,46 @@ class Tizen100CapiNetworkWifiManager {
   late final _wifi_manager_add_vsie = _wifi_manager_add_vsiePtr
       .asFunction<int Function(wifi_manager_h, int, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the Wi-Fi Vendor Specific Information Elements (VSIE) from a specific frame.
-  /// @details This function retrieves the VSIE data associated with the given frame ID.
-  /// The retrieved VSIE data can be used to inspect or modify the contents of the VSIE element within the specified frame.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.get
-  /// @remarks @a vsie_str must be released with free().
+  /// Gets the Wi-Fi Vendor Specific Information Elements (VSIE) from a specific frame.
   ///
-  /// @param[in] wifi           The Wi-Fi handle
-  /// @param[in] frame_id       The frame ID for getting VSIE
-  /// @param[out] vsie_str      The VSIE data
+  /// This function retrieves the VSIE data associated with the given frame ID. The retrieved VSIE data can be used to inspect or modify the contents of the VSIE element within the specified frame.
   ///
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION    Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed
-  /// @retval #WIFI_MANAGER_ERROR_PERMISSION_DENIED    Permission Denied
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
-  /// @pre Wi-Fi service must be activated by wifi_manager_activate()
-  /// and VSIE for a specific frame must be set with wifi_manager_add_vsie().
-  /// @see wifi_manager_activate()
-  /// @see wifi_manager_remove_vsie()
-  /// @see wifi_manager_add_vsie()
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Remarks:**
+  /// - `vsie_str` must be released with free().
+  ///
+  /// **Parameters:**
+  /// - `wifi` (in): The Wi-Fi handle
+  /// - `frame_id` (in): The frame ID for getting VSIE
+  /// - `vsie_str` (out): The VSIE data
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_MANAGER_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi service must be activated by wifi_manager_activate() and VSIE for a specific frame must be set with wifi_manager_add_vsie().
+  ///
+  /// **See also:**
+  /// - `wifi_manager_activate()`
+  /// - `wifi_manager_remove_vsie()`
+  /// - `wifi_manager_add_vsie()`
   int wifi_manager_get_vsie(
     wifi_manager_h wifi,
     int frame_id,
@@ -1494,31 +1994,46 @@ class Tizen100CapiNetworkWifiManager {
   late final _wifi_manager_get_vsie = _wifi_manager_get_vsiePtr.asFunction<
       int Function(wifi_manager_h, int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Removes the Wi-Fi Vendor Specific Information Element (VSIE) from specific frame.
-  /// @details This function removes the specified VSIE data from the given frame ID.
-  /// The VSIE data will no longer be included in the corresponding frame when transmitted by the Wi-Fi module.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.set
-  /// @remarks @a vsie_str for @a frame_id will be in effect until Wi-Fi is deactivated.
+  /// Removes the Wi-Fi Vendor Specific Information Element (VSIE) from specific frame.
   ///
-  /// @param[in] wifi           The wifi handle
-  /// @param[in] frame_id       The frame ID for removing VSIE
-  /// @param[in] vsie_str       The VSIE data
+  /// This function removes the specified VSIE data from the given frame ID. The VSIE data will no longer be included in the corresponding frame when transmitted by the Wi-Fi module.
   ///
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION    Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed
-  /// @retval #WIFI_MANAGER_ERROR_PERMISSION_DENIED    Permission Denied
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
-  /// @pre Wi-Fi service must be activated by wifi_manager_activate()
-  /// and VSIE for a specific frame must be set with wifi_manager_add_vsie().
-  /// @see wifi_manager_activate()
-  /// @see wifi_manager_get_vsie()
-  /// @see wifi_manager_add_vsie()
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.set>
+  ///
+  /// **Remarks:**
+  /// - `vsie_str` for `frame_id` will be in effect until Wi-Fi is deactivated.
+  ///
+  /// **Parameters:**
+  /// - `wifi` (in): The wifi handle
+  /// - `frame_id` (in): The frame ID for removing VSIE
+  /// - `vsie_str` (in): The VSIE data
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_MANAGER_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - Wi-Fi service must be activated by wifi_manager_activate() and VSIE for a specific frame must be set with wifi_manager_add_vsie().
+  ///
+  /// **See also:**
+  /// - `wifi_manager_activate()`
+  /// - `wifi_manager_get_vsie()`
+  /// - `wifi_manager_add_vsie()`
   int wifi_manager_remove_vsie(
     wifi_manager_h wifi,
     int frame_id,
@@ -1538,20 +2053,32 @@ class Tizen100CapiNetworkWifiManager {
   late final _wifi_manager_remove_vsie = _wifi_manager_remove_vsiePtr
       .asFunction<int Function(wifi_manager_h, int, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the connection state.
-  /// @details This function queries the Wi-Fi manager to obtain the current connection state of the Wi-Fi network associated with the given Wi-Fi handle.
-  /// The retrieved connection state can be one of the following: DISCONNECTED, CONNECTED, or CONNECTING.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.get
-  /// @param[in] wifi                The Wi-Fi handle
-  /// @param[out] connection_state   The connection state
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed
-  /// @retval #WIFI_MANAGER_ERROR_PERMISSION_DENIED    Permission Denied
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// Gets the connection state.
+  ///
+  /// This function queries the Wi-Fi manager to obtain the current connection state of the Wi-Fi network associated with the given Wi-Fi handle. The retrieved connection state can be one of the following: DISCONNECTED, CONNECTED, or CONNECTING.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Parameters:**
+  /// - `wifi` (in): The Wi-Fi handle
+  /// - `connection_state` (out): The connection state
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_MANAGER_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_get_connection_state(
     wifi_manager_h wifi,
     ffi.Pointer<ffi.Int32> connection_state,
@@ -1570,20 +2097,27 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_get_connection_statePtr
           .asFunction<int Function(wifi_manager_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Registers the callback called when the device state is changed.
-  /// @details This function registers a callback function to monitor changes in the Wi-Fi device state.
-  /// When the Wi-Fi device state changes (e.g., enabled, disabled, or enabling/disabling in progress),
-  /// the registered callback function will be invoked with the updated device state and the provided user data.
-  /// @since_tizen 3.0
-  /// @param[in] wifi            The Wi-Fi handle
-  /// @param[in] callback        The callback function to be called
-  /// @param[in] user_data       The user data passed to the callback function
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION    Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// Registers the callback called when the device state is changed.
+  ///
+  /// This function registers a callback function to monitor changes in the Wi-Fi device state. When the Wi-Fi device state changes (e.g., enabled, disabled, or enabling/disabling in progress), the registered callback function will be invoked with the updated device state and the provided user data.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `wifi` (in): The Wi-Fi handle
+  /// - `callback` (in): The callback function to be called
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_set_device_state_changed_cb(
     wifi_manager_h wifi,
     wifi_manager_device_state_changed_cb callback,
@@ -1608,17 +2142,25 @@ class Tizen100CapiNetworkWifiManager {
           int Function(wifi_manager_h, wifi_manager_device_state_changed_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unregisters the callback called when the device state is changed.
-  /// @details This function removes the previously registered callback for monitoring changes in the Wi-Fi device state.
-  /// The callback will no longer be invoked when the device state changes after this function is called.
-  /// @since_tizen 3.0
-  /// @param[in] wifi            The Wi-Fi handle
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION    Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// Unregisters the callback called when the device state is changed.
+  ///
+  /// This function removes the previously registered callback for monitoring changes in the Wi-Fi device state. The callback will no longer be invoked when the device state changes after this function is called.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `wifi` (in): The Wi-Fi handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_unset_device_state_changed_cb(
     wifi_manager_h wifi,
   ) {
@@ -1634,19 +2176,27 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_unset_device_state_changed_cbPtr
           .asFunction<int Function(wifi_manager_h)>();
 
-  /// @brief Registers the callback called when the background scan is finished.
-  /// @details This function registers a callback function to monitor the completion of background scans initiated by the Wi-Fi manager.
-  /// When a background scan finishes, the registered callback function will be invoked with the scan results and the provided user data.
-  /// @since_tizen 3.0
-  /// @param[in] wifi            The Wi-Fi handle
-  /// @param[in] callback        The callback function to be called
-  /// @param[in] user_data       The user data passed to the callback function
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION    Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// Registers the callback called when the background scan is finished.
+  ///
+  /// This function registers a callback function to monitor the completion of background scans initiated by the Wi-Fi manager. When a background scan finishes, the registered callback function will be invoked with the scan results and the provided user data.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `wifi` (in): The Wi-Fi handle
+  /// - `callback` (in): The callback function to be called
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_set_background_scan_cb(
     wifi_manager_h wifi,
     wifi_manager_scan_finished_cb callback,
@@ -1668,17 +2218,25 @@ class Tizen100CapiNetworkWifiManager {
           int Function(wifi_manager_h, wifi_manager_scan_finished_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unregisters the callback called when the scan is finished.
-  /// @details This function removes the previously registered callback for monitoring the completion of background scans initiated by the Wi-Fi manager.
-  /// The callback will no longer be invoked when a background scan finishes after this function is called.
-  /// @since_tizen 3.0
-  /// @param[in] wifi            The Wi-Fi handle
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION    Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// Unregisters the callback called when the scan is finished.
+  ///
+  /// This function removes the previously registered callback for monitoring the completion of background scans initiated by the Wi-Fi manager. The callback will no longer be invoked when a background scan finishes after this function is called.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `wifi` (in): The Wi-Fi handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_unset_background_scan_cb(
     wifi_manager_h wifi,
   ) {
@@ -1694,20 +2252,27 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_unset_background_scan_cbPtr
           .asFunction<int Function(wifi_manager_h)>();
 
-  /// @brief Registers the callback called when the scanning state is changed.
-  /// @details This function registers a callback function to monitor changes in the scanning state of the Wi-Fi network.
-  /// When the scanning state changes (e.g., scan started or scan finished),
-  /// the registered callback function will be invoked with the updated scanning state and the provided user data.
-  /// @since_tizen 4.0
-  /// @param[in] wifi            The Wi-Fi handle
-  /// @param[in] callback        The callback function to be called
-  /// @param[in] user_data       The user data passed to the callback function
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION    Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// Registers the callback called when the scanning state is changed.
+  ///
+  /// This function registers a callback function to monitor changes in the scanning state of the Wi-Fi network. When the scanning state changes (e.g., scan started or scan finished), the registered callback function will be invoked with the updated scanning state and the provided user data.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `wifi` (in): The Wi-Fi handle
+  /// - `callback` (in): The callback function to be called
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_set_scan_state_changed_cb(
     wifi_manager_h wifi,
     wifi_manager_scan_state_changed_cb callback,
@@ -1730,17 +2295,25 @@ class Tizen100CapiNetworkWifiManager {
           int Function(wifi_manager_h, wifi_manager_scan_state_changed_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unregisters the callback called when the scanning state is changed.
-  /// @details This function removes the previously registered callback for monitoring changes in the scanning state of the Wi-Fi network.
-  /// The callback will no longer be invoked when the scanning state changes after this function is called.
-  /// @since_tizen 4.0
-  /// @param[in] wifi            The Wi-Fi handle
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION    Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// Unregisters the callback called when the scanning state is changed.
+  ///
+  /// This function removes the previously registered callback for monitoring changes in the scanning state of the Wi-Fi network. The callback will no longer be invoked when the scanning state changes after this function is called.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `wifi` (in): The Wi-Fi handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_unset_scan_state_changed_cb(
     wifi_manager_h wifi,
   ) {
@@ -1756,20 +2329,27 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_unset_scan_state_changed_cbPtr
           .asFunction<int Function(wifi_manager_h)>();
 
-  /// @brief Registers the callback called when the connection state is changed.
-  /// @details This function registers a callback function to monitor changes in the connection state of the Wi-Fi network.
-  /// When the connection state changes (e.g., connected, disconnected, or connection failure),
-  /// the registered callback function will be invoked with the updated connection state and the provided user data.
-  /// @since_tizen 3.0
-  /// @param[in] wifi            The Wi-Fi handle
-  /// @param[in] callback        The callback function to be called
-  /// @param[in] user_data       The user data passed to the callback function
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION    Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// Registers the callback called when the connection state is changed.
+  ///
+  /// This function registers a callback function to monitor changes in the connection state of the Wi-Fi network. When the connection state changes (e.g., connected, disconnected, or connection failure), the registered callback function will be invoked with the updated connection state and the provided user data.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `wifi` (in): The Wi-Fi handle
+  /// - `callback` (in): The callback function to be called
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_set_connection_state_changed_cb(
     wifi_manager_h wifi,
     wifi_manager_connection_state_changed_cb callback,
@@ -1794,17 +2374,25 @@ class Tizen100CapiNetworkWifiManager {
           int Function(wifi_manager_h, wifi_manager_connection_state_changed_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unregisters the callback called when the connection state is changed.
-  /// @details This function removes the previously registered callback for monitoring changes in the connection state of the Wi-Fi network.
-  /// The callback will no longer be invoked when the connection state changes after this function is called.
-  /// @since_tizen 3.0
-  /// @param[in] wifi            The Wi-Fi handle
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION    Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// Unregisters the callback called when the connection state is changed.
+  ///
+  /// This function removes the previously registered callback for monitoring changes in the connection state of the Wi-Fi network. The callback will no longer be invoked when the connection state changes after this function is called.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `wifi` (in): The Wi-Fi handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_unset_connection_state_changed_cb(
     wifi_manager_h wifi,
   ) {
@@ -1820,19 +2408,27 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_unset_connection_state_changed_cbPtr
           .asFunction<int Function(wifi_manager_h)>();
 
-  /// @brief Registers callback called when the RSSI of connected Wi-Fi is changed.
-  /// @details This function registers a callback function to monitor changes in the Received Signal Strength Indication (RSSI) level of the currently connected Wi-Fi network.
-  /// When the RSSI level changes, the registered callback function will be invoked with the updated RSSI level and the provided user data.
-  /// @since_tizen 3.0
-  /// @param[in] wifi            The Wi-Fi handle
-  /// @param[in] callback        The callback function to be called
-  /// @param[in] user_data       The user data passed to the callback function
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION    Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// Registers callback called when the RSSI of connected Wi-Fi is changed.
+  ///
+  /// This function registers a callback function to monitor changes in the Received Signal Strength Indication (RSSI) level of the currently connected Wi-Fi network. When the RSSI level changes, the registered callback function will be invoked with the updated RSSI level and the provided user data.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `wifi` (in): The Wi-Fi handle
+  /// - `callback` (in): The callback function to be called
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_set_rssi_level_changed_cb(
     wifi_manager_h wifi,
     wifi_manager_rssi_level_changed_cb callback,
@@ -1855,16 +2451,24 @@ class Tizen100CapiNetworkWifiManager {
           int Function(wifi_manager_h, wifi_manager_rssi_level_changed_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unregisters callback called when the RSSI of connected Wi-Fi is changed.
-  /// @details This function removes the previously registered callback for monitoring changes in the Received Signal Strength Indication (RSSI) level of the currently connected Wi-Fi network.
-  /// The callback will no longer be invoked when the RSSI level changes after this function is called.
-  /// @since_tizen 3.0
-  /// @param[in] wifi            The Wi-Fi handle
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION    Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// Unregisters callback called when the RSSI of connected Wi-Fi is changed.
+  ///
+  /// This function removes the previously registered callback for monitoring changes in the Received Signal Strength Indication (RSSI) level of the currently connected Wi-Fi network. The callback will no longer be invoked when the RSSI level changes after this function is called.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `wifi` (in): The Wi-Fi handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_unset_rssi_level_changed_cb(
     wifi_manager_h wifi,
   ) {
@@ -1880,23 +2484,32 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_unset_rssi_level_changed_cbPtr
           .asFunction<int Function(wifi_manager_h)>();
 
-  /// @brief Registers a callback called when the Wi-Fi Module state is changed.
-  /// @details This function registers a callback function to monitor changes in the Wi-Fi module state.
-  /// When the state of the Wi-Fi module changes (e.g., enabled or disabled),
-  /// the registered callback function will be invoked with the updated state and the provided user data.
-  /// @since_tizen 4.0
-  /// @param[in] wifi            The Wi-Fi handle
-  /// @param[in] callback        The callback function to be called
-  /// @param[in] user_data       The user data passed to the callback function
-  /// @return @c 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION    Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
-  /// @see wifi_manager_module_state_changed_cb()
-  /// @see wifi_manager_unset_module_state_changed_cb()
+  /// Registers a callback called when the Wi-Fi Module state is changed.
+  ///
+  /// This function registers a callback function to monitor changes in the Wi-Fi module state. When the state of the Wi-Fi module changes (e.g., enabled or disabled), the registered callback function will be invoked with the updated state and the provided user data.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `wifi` (in): The Wi-Fi handle
+  /// - `callback` (in): The callback function to be called
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `wifi_manager_module_state_changed_cb()`
+  /// - `wifi_manager_unset_module_state_changed_cb()`
   int wifi_manager_set_module_state_changed_cb(
     wifi_manager_h wifi,
     wifi_manager_module_state_changed_cb callback,
@@ -1921,20 +2534,30 @@ class Tizen100CapiNetworkWifiManager {
           int Function(wifi_manager_h, wifi_manager_module_state_changed_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unregisters the callback called when the Wi-Fi Module state is changed.
-  /// @details This function removes the previously registered callback for monitoring changes in the Wi-Fi module state.
-  /// The callback will no longer be invoked when the Wi-Fi module state changes after this function is called.
-  /// @since_tizen 4.0
-  /// @param[in] wifi            The Wi-Fi handle
-  /// @return @c 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION    Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
-  /// @see wifi_manager_module_state_changed_cb()
-  /// @see wifi_manager_set_module_state_changed_cb()
+  /// Unregisters the callback called when the Wi-Fi Module state is changed.
+  ///
+  /// This function removes the previously registered callback for monitoring changes in the Wi-Fi module state. The callback will no longer be invoked when the Wi-Fi module state changes after this function is called.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `wifi` (in): The Wi-Fi handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `wifi_manager_module_state_changed_cb()`
+  /// - `wifi_manager_set_module_state_changed_cb()`
   int wifi_manager_unset_module_state_changed_cb(
     wifi_manager_h wifi,
   ) {
@@ -1950,20 +2573,27 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_unset_module_state_changed_cbPtr
           .asFunction<int Function(wifi_manager_h)>();
 
-  /// @brief Gets the Wi-Fi Module state.
-  /// @details This function retrieves the current state of the Wi-Fi module.
-  /// The Wi-Fi module state indicates whether the Wi-Fi hardware is enabled or disabled.
-  /// This information is useful for determining if the device is capable of connecting to wireless networks.
-  /// @since_tizen 4.0
-  /// @param[in] wifi            The Wi-Fi handle
-  /// @param[out] state          The Wi-Fi Module state
-  /// @return @c 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION    Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// Gets the Wi-Fi Module state.
+  ///
+  /// This function retrieves the current state of the Wi-Fi module. The Wi-Fi module state indicates whether the Wi-Fi hardware is enabled or disabled. This information is useful for determining if the device is capable of connecting to wireless networks.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `wifi` (in): The Wi-Fi handle
+  /// - `state` (out): The Wi-Fi Module state
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_get_module_state(
     wifi_manager_h wifi,
     ffi.Pointer<ffi.Int32> state,
@@ -1981,27 +2611,42 @@ class Tizen100CapiNetworkWifiManager {
   late final _wifi_manager_get_module_state = _wifi_manager_get_module_statePtr
       .asFunction<int Function(wifi_manager_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Starts BSSID scan asynchronously.
-  /// @details This function starts a BSSID (Basic Service Set Identifier) scan to discover wireless access points.
-  /// A BSSID scan focuses on finding specific access points based on their MAC addresses rather than scanning for all available networks.
-  /// The scan is performed asynchronously, and the result is reported through the provided callback function.
-  /// @since_tizen 4.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.set \n
-  /// %http://tizen.org/privilege/network.get
-  /// @remarks This function needs both privileges.
-  /// @param[in] wifi            The Wi-Fi handle
-  /// @param[in] callback        The callback function to be called
-  /// @param[in] user_data       The user data passed to the callback function
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION    Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed
-  /// @retval #WIFI_MANAGER_ERROR_PERMISSION_DENIED    Permission Denied
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
-  /// @post This function invokes wifi_manager_bssid_scan_finished_cb().
+  /// Starts BSSID scan asynchronously.
+  ///
+  /// This function starts a BSSID (Basic Service Set Identifier) scan to discover wireless access points. A BSSID scan focuses on finding specific access points based on their MAC addresses rather than scanning for all available networks. The scan is performed asynchronously, and the result is reported through the provided callback function.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.set>
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Remarks:**
+  /// - This function needs both privileges.
+  ///
+  /// **Parameters:**
+  /// - `wifi` (in): The Wi-Fi handle
+  /// - `callback` (in): The callback function to be called
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_MANAGER_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Postconditions:**
+  /// - This function invokes wifi_manager_bssid_scan_finished_cb().
   int wifi_manager_bssid_scan(
     wifi_manager_h wifi,
     wifi_manager_bssid_scan_finished_cb callback,
@@ -2022,23 +2667,34 @@ class Tizen100CapiNetworkWifiManager {
       int Function(wifi_manager_h, wifi_manager_bssid_scan_finished_cb,
           ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Creates the access point handle.
-  /// @details This function creates a new access point handle for a visible wireless network.
-  /// The ESSID (Extended Service Set Identifier) should be provided as a null-terminated string and can be encoded in UTF-8.
-  /// The created access point handle can be used to connect to the specified wireless network using the Wi-Fi handle.
-  /// @since_tizen 3.0
-  /// @remarks You must release @a ap using wifi_manager_ap_destroy().
-  /// @param[in] wifi            The Wi-Fi handle
-  /// @param[in] essid           The ESSID (Extended Service Set Identifier) should be null-terminated and can be UTF-8 encoded
-  /// @param[out] ap             The access point handle
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OUT_OF_MEMORY        Out of memory
-  /// @retval #WIFI_MANAGER_ERROR_PERMISSION_DENIED    Permission Denied
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
-  /// @see wifi_manager_ap_destroy()
+  /// Creates the access point handle.
+  ///
+  /// This function creates a new access point handle for a visible wireless network. The ESSID (Extended Service Set Identifier) should be provided as a null-terminated string and can be encoded in UTF-8. The created access point handle can be used to connect to the specified wireless network using the Wi-Fi handle.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - You must release `ap` using wifi_manager_ap_destroy().
+  ///
+  /// **Parameters:**
+  /// - `wifi` (in): The Wi-Fi handle
+  /// - `essid` (in): The ESSID (Extended Service Set Identifier) should be null-terminated and can be UTF-8 encoded
+  /// - `ap` (out): The access point handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `WIFI_MANAGER_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `wifi_manager_ap_destroy()`
   int wifi_manager_ap_create(
     wifi_manager_h wifi,
     ffi.Pointer<ffi.Char> essid,
@@ -2059,23 +2715,33 @@ class Tizen100CapiNetworkWifiManager {
       int Function(wifi_manager_h, ffi.Pointer<ffi.Char>,
           ffi.Pointer<wifi_manager_ap_h>)>();
 
-  /// @brief Creates the hidden access point handle.
-  /// @details This function creates a new access point handle for a hidden wireless network.
-  /// Hidden networks do not broadcast their SSID (Service Set Identifier),
-  /// so you need to provide the ESSID (Extended Service Set Identifier) explicitly when creating the access point handle.
-  /// The ESSID should be a null-terminated string and can be encoded in UTF-8.
-  /// @since_tizen 3.0
-  /// @remarks You must release @a ap using wifi_manager_ap_destroy().
-  /// @param[in] wifi            The Wi-Fi handle
-  /// @param[in] essid           The ESSID (Extended Service Set Identifier) should be null-terminated and can be UTF-8 encoded
-  /// @param[out] ap             The access point handle
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OUT_OF_MEMORY        Out of memory
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
-  /// @see wifi_manager_ap_destroy()
+  /// Creates the hidden access point handle.
+  ///
+  /// This function creates a new access point handle for a hidden wireless network. Hidden networks do not broadcast their SSID (Service Set Identifier), so you need to provide the ESSID (Extended Service Set Identifier) explicitly when creating the access point handle. The ESSID should be a null-terminated string and can be encoded in UTF-8.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - You must release `ap` using wifi_manager_ap_destroy().
+  ///
+  /// **Parameters:**
+  /// - `wifi` (in): The Wi-Fi handle
+  /// - `essid` (in): The ESSID (Extended Service Set Identifier) should be null-terminated and can be UTF-8 encoded
+  /// - `ap` (out): The access point handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `wifi_manager_ap_destroy()`
   int wifi_manager_ap_hidden_create(
     wifi_manager_h wifi,
     ffi.Pointer<ffi.Char> essid,
@@ -2098,16 +2764,26 @@ class Tizen100CapiNetworkWifiManager {
           int Function(wifi_manager_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<wifi_manager_ap_h>)>();
 
-  /// @brief Destroys the access point handle.
-  /// @details This function releases all resources allocated for the given access point handle.
-  /// After calling this function, the access point handle becomes invalid and cannot be used for any further operations.
-  /// @since_tizen 3.0
-  /// @param[in] ap              The access point handle
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
-  /// @see wifi_manager_ap_create()
+  /// Destroys the access point handle.
+  ///
+  /// This function releases all resources allocated for the given access point handle. After calling this function, the access point handle becomes invalid and cannot be used for any further operations.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `wifi_manager_ap_create()`
   int wifi_manager_ap_destroy(
     wifi_manager_ap_h ap,
   ) {
@@ -2122,21 +2798,32 @@ class Tizen100CapiNetworkWifiManager {
   late final _wifi_manager_ap_destroy =
       _wifi_manager_ap_destroyPtr.asFunction<int Function(wifi_manager_ap_h)>();
 
-  /// @brief Clones the access point handle.
-  /// @details This function creates a new access point handle that is a copy of the given access point handle.
-  /// The cloned access point handle contains the same information as the original handle,
-  /// allowing you to work with the same access point data without modifying the original handle.
-  /// @since_tizen 3.0
-  /// @remarks You must release @a cloned_ap using wifi_manager_ap_destroy().
-  /// @param[out] cloned_ap      The cloned access point handle
-  /// @param[in] origin          The origin access point handle
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OUT_OF_MEMORY        Out of memory
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
-  /// @see wifi_manager_ap_destroy()
+  /// Clones the access point handle.
+  ///
+  /// This function creates a new access point handle that is a copy of the given access point handle. The cloned access point handle contains the same information as the original handle, allowing you to work with the same access point data without modifying the original handle.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - You must release `cloned_ap` using wifi_manager_ap_destroy().
+  ///
+  /// **Parameters:**
+  /// - `cloned_ap` (out): The cloned access point handle
+  /// - `origin` (in): The origin access point handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `wifi_manager_ap_destroy()`
   int wifi_manager_ap_clone(
     ffi.Pointer<wifi_manager_ap_h> cloned_ap,
     wifi_manager_ap_h origin,
@@ -2154,24 +2841,36 @@ class Tizen100CapiNetworkWifiManager {
   late final _wifi_manager_ap_clone = _wifi_manager_ap_clonePtr.asFunction<
       int Function(ffi.Pointer<wifi_manager_ap_h>, wifi_manager_ap_h)>();
 
-  /// @brief Refreshes the access point information.
-  /// @details This function refreshes the access point information.
-  /// Access point information can change over time due to various factors such as changes in the environment,
-  /// network configuration updates, or other network events.
-  /// By calling this function, you ensure that the latest information about the access point is retrieved and stored in the given access point handle.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.get
-  /// @remarks You should call this function in order to get the current access point information, because the information can be changed.
-  /// @param[in] ap              The access point handle
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed
-  /// @retval #WIFI_MANAGER_ERROR_OUT_OF_MEMORY        Out of memory
-  /// @retval #WIFI_MANAGER_ERROR_PERMISSION_DENIED    Permission Denied
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// Refreshes the access point information.
+  ///
+  /// This function refreshes the access point information. Access point information can change over time due to various factors such as changes in the environment, network configuration updates, or other network events. By calling this function, you ensure that the latest information about the access point is retrieved and stored in the given access point handle.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Remarks:**
+  /// - You should call this function in order to get the current access point information, because the information can be changed.
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `WIFI_MANAGER_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_ap_refresh(
     wifi_manager_ap_h ap,
   ) {
@@ -2186,21 +2885,29 @@ class Tizen100CapiNetworkWifiManager {
   late final _wifi_manager_ap_refresh =
       _wifi_manager_ap_refreshPtr.asFunction<int Function(wifi_manager_ap_h)>();
 
-  /// @brief Gets ESSID (Extended Service Set Identifier).
-  /// @details This function retrieves the Extended Service Set Identifier (ESSID) for the access point.
-  /// The ESSID is a unique identifier assigned to a group of wireless access points that form an extended service set,
-  /// typically represented as a sequence of characters (e.g., "MyHomeNetwork").
-  /// In most cases, the ESSID is identical to the SSID of the primary access point within the extended service set.
-  /// @since_tizen 3.0
-  /// @remarks You must release @a essid using free().
-  /// @param[in] ap              The access point handle
-  /// @param[out] essid          The ESSID
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OUT_OF_MEMORY        Out of memory
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// Gets ESSID (Extended Service Set Identifier).
+  ///
+  /// This function retrieves the Extended Service Set Identifier (ESSID) for the access point. The ESSID is a unique identifier assigned to a group of wireless access points that form an extended service set, typically represented as a sequence of characters (e.g., "MyHomeNetwork"). In most cases, the ESSID is identical to the SSID of the primary access point within the extended service set.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - You must release `essid` using free().
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `essid` (out): The ESSID
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_ap_get_essid(
     wifi_manager_ap_h ap,
     ffi.Pointer<ffi.Pointer<ffi.Char>> essid,
@@ -2221,21 +2928,30 @@ class Tizen100CapiNetworkWifiManager {
           int Function(
               wifi_manager_ap_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets raw SSID (Service Set Identifier).
-  /// @details This function retrieves the raw Service Set Identifier (SSID) for the access point.
-  /// The SSID is a unique identifier assigned to a wireless network, typically represented as a sequence of characters (e.g., "MyHomeNetwork").
-  /// This function returns the raw SSID as a byte array, allowing direct access to the underlying data without any character encoding considerations.
-  /// @since_tizen 4.0
-  /// @remarks You must release @a ssid using free().
-  /// @param[in] ap              The access point handle
-  /// @param[out] ssid           The raw SSID bytes
-  /// @param[out] ssid_len       The raw SSID length
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OUT_OF_MEMORY        Out of memory
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// Gets raw SSID (Service Set Identifier).
+  ///
+  /// This function retrieves the raw Service Set Identifier (SSID) for the access point. The SSID is a unique identifier assigned to a wireless network, typically represented as a sequence of characters (e.g., "MyHomeNetwork"). This function returns the raw SSID as a byte array, allowing direct access to the underlying data without any character encoding considerations.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Remarks:**
+  /// - You must release `ssid` using free().
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `ssid` (out): The raw SSID bytes
+  /// - `ssid_len` (out): The raw SSID length
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_ap_get_raw_ssid(
     wifi_manager_ap_h ap,
     ffi.Pointer<ffi.Pointer<ffi.Char>> ssid,
@@ -2259,20 +2975,29 @@ class Tizen100CapiNetworkWifiManager {
           int Function(wifi_manager_ap_h, ffi.Pointer<ffi.Pointer<ffi.Char>>,
               ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets BSSID (Basic Service Set Identifier).
-  /// @details This function retrieves the Basic Service Set Identifier (BSSID) for the access point.
-  /// The BSSID is a unique identifier assigned to each wireless access point,
-  /// consisting of a MAC address formatted as a string (e.g., "00:1A:2B:3C:4D:5E").
-  /// @since_tizen 3.0
-  /// @remarks You must release @a bssid using free().
-  /// @param[in] ap              The access point handle
-  /// @param[out] bssid          The BSSID
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OUT_OF_MEMORY        Out of memory
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// Gets BSSID (Basic Service Set Identifier).
+  ///
+  /// This function retrieves the Basic Service Set Identifier (BSSID) for the access point. The BSSID is a unique identifier assigned to each wireless access point, consisting of a MAC address formatted as a string (e.g., "00:1A:2B:3C:4D:5E").
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - You must release `bssid` using free().
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `bssid` (out): The BSSID
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_ap_get_bssid(
     wifi_manager_ap_h ap,
     ffi.Pointer<ffi.Pointer<ffi.Char>> bssid,
@@ -2293,19 +3018,26 @@ class Tizen100CapiNetworkWifiManager {
           int Function(
               wifi_manager_ap_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the RSSI.
-  /// @details This function retrieves the Received Signal Strength Indication (RSSI) value for the access point.
-  /// The RSSI value indicates the strength of the received signal from the access point, measured in decibels relative to milliwatts (dBm).
-  /// A higher RSSI value generally indicates a stronger signal and better connection quality.
-  /// @since_tizen 3.0
-  /// @param[in] ap              The access point handle
-  /// @param[out] rssi           The RSSI value (in dBm)
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// Gets the RSSI.
+  ///
+  /// This function retrieves the Received Signal Strength Indication (RSSI) value for the access point. The RSSI value indicates the strength of the received signal from the access point, measured in decibels relative to milliwatts (dBm). A higher RSSI value generally indicates a stronger signal and better connection quality.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `rssi` (out): The RSSI value (in dBm)
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_ap_get_rssi(
     wifi_manager_ap_h ap,
     ffi.Pointer<ffi.Int> rssi,
@@ -2323,19 +3055,26 @@ class Tizen100CapiNetworkWifiManager {
   late final _wifi_manager_ap_get_rssi = _wifi_manager_ap_get_rssiPtr
       .asFunction<int Function(wifi_manager_ap_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the RSSI level.
-  /// @details This function retrieves the Received Signal Strength Indication (RSSI) level for the access point.
-  /// The RSSI level indicates the strength of the received signal from the access point,
-  /// which can be used to determine the quality of the wireless connection.
-  /// @since_tizen 4.0
-  /// @param[in] ap              The access point handle
-  /// @param[out] rssi_level     The RSSI level
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// Gets the RSSI level.
+  ///
+  /// This function retrieves the Received Signal Strength Indication (RSSI) level for the access point. The RSSI level indicates the strength of the received signal from the access point, which can be used to determine the quality of the wireless connection.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `rssi_level` (out): The RSSI level
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_ap_get_rssi_level(
     wifi_manager_ap_h ap,
     ffi.Pointer<ffi.Int32> rssi_level,
@@ -2354,18 +3093,26 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_ap_get_rssi_levelPtr.asFunction<
           int Function(wifi_manager_ap_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the frequency band (MHz).
-  /// @details This function retrieves the frequency band (in megahertz, MHz) for the access point.
-  /// The frequency band indicates the specific radio frequency range used by the access point to transmit and receive wireless signals.
-  /// @since_tizen 3.0
-  /// @param[in] ap              The access point handle
-  /// @param[out] frequency      The frequency
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// Gets the frequency band (MHz).
+  ///
+  /// This function retrieves the frequency band (in megahertz, MHz) for the access point. The frequency band indicates the specific radio frequency range used by the access point to transmit and receive wireless signals.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `frequency` (out): The frequency
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_ap_get_frequency(
     wifi_manager_ap_h ap,
     ffi.Pointer<ffi.Int> frequency,
@@ -2383,18 +3130,26 @@ class Tizen100CapiNetworkWifiManager {
   late final _wifi_manager_ap_get_frequency = _wifi_manager_ap_get_frequencyPtr
       .asFunction<int Function(wifi_manager_ap_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the max speed (Mbps).
-  /// @details This function retrieves the maximum achievable speed (in megabits per second, Mbps) for the access point.
-  /// The maximum speed indicates the highest possible data transfer rate that can be achieved when connected to the access point.
-  /// @since_tizen 3.0
-  /// @param[in] ap              The access point handle
-  /// @param[out] max_speed      The max speed
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// Gets the max speed (Mbps).
+  ///
+  /// This function retrieves the maximum achievable speed (in megabits per second, Mbps) for the access point. The maximum speed indicates the highest possible data transfer rate that can be achieved when connected to the access point.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `max_speed` (out): The max speed
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_ap_get_max_speed(
     wifi_manager_ap_h ap,
     ffi.Pointer<ffi.Int> max_speed,
@@ -2412,19 +3167,26 @@ class Tizen100CapiNetworkWifiManager {
   late final _wifi_manager_ap_get_max_speed = _wifi_manager_ap_get_max_speedPtr
       .asFunction<int Function(wifi_manager_ap_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Checks whether the access point is favorite or not.
-  /// @details This function determines whether the access point is marked as a favorite or not.
-  /// A favorite access point is one that the user has explicitly chosen to connect to frequently or has saved for future use.
-  /// @since_tizen 3.0
-  /// @param[in] ap              The access point handle
-  /// @param[out] favorite  @c true if access point is favorite,
-  /// otherwise @c false if access point is not favorite
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// Checks whether the access point is favorite or not.
+  ///
+  /// This function determines whether the access point is marked as a favorite or not. A favorite access point is one that the user has explicitly chosen to connect to frequently or has saved for future use.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `favorite` (out): `true` if access point is favorite, otherwise `false` if access point is not favorite
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_ap_is_favorite(
     wifi_manager_ap_h ap,
     ffi.Pointer<ffi.Bool> favorite,
@@ -2442,20 +3204,26 @@ class Tizen100CapiNetworkWifiManager {
   late final _wifi_manager_ap_is_favorite = _wifi_manager_ap_is_favoritePtr
       .asFunction<int Function(wifi_manager_ap_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Checks whether the access point is passpoint or not.
-  /// @details This function determines whether the access point is a Passpoint or not.
-  /// A Passpoint access point is a type of Wi-Fi hotspot that supports the Hotspot 2.0 standard,
-  /// providing seamless and secure connectivity across various networks.
-  /// @since_tizen 3.0
-  /// @param[in] ap              The access point handle
-  /// @param[out] passpoint  @c true if access point is passpoint,
-  /// otherwise @c false if access point is not passpoint.
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// Checks whether the access point is passpoint or not.
+  ///
+  /// This function determines whether the access point is a Passpoint or not. A Passpoint access point is a type of Wi-Fi hotspot that supports the Hotspot 2.0 standard, providing seamless and secure connectivity across various networks.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `passpoint` (out): `true` if access point is passpoint, otherwise `false` if access point is not passpoint.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_ap_is_passpoint(
     wifi_manager_ap_h ap,
     ffi.Pointer<ffi.Bool> passpoint,
@@ -2473,19 +3241,26 @@ class Tizen100CapiNetworkWifiManager {
   late final _wifi_manager_ap_is_passpoint = _wifi_manager_ap_is_passpointPtr
       .asFunction<int Function(wifi_manager_ap_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Checks whether the access point is hidden or not.
-  /// @details This function determines whether the access point is hidden or not.
-  /// A hidden access point does not broadcast its SSID (Service Set Identifier), making it less visible to potential clients.
-  /// @since_tizen 5.5
-  /// @param[in] ap              The access point handle
-  /// @param[out] is_hidden  @c true if the access point is hidden,
-  /// @c false if the access point is not hidden.
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// Checks whether the access point is hidden or not.
+  ///
+  /// This function determines whether the access point is hidden or not. A hidden access point does not broadcast its SSID (Service Set Identifier), making it less visible to potential clients.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `is_hidden` (out): `true` if the access point is hidden, `false` if the access point is not hidden.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_ap_is_hidden(
     wifi_manager_ap_h ap,
     ffi.Pointer<ffi.Bool> is_hidden,
@@ -2503,18 +3278,26 @@ class Tizen100CapiNetworkWifiManager {
   late final _wifi_manager_ap_is_hidden = _wifi_manager_ap_is_hiddenPtr
       .asFunction<int Function(wifi_manager_ap_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Gets the connection state.
-  /// @details This function retrieves the current connection state of the access point.
-  /// The connection state indicates whether the access point is currently connected, connecting, or disconnected.
-  /// @since_tizen 3.0
-  /// @param[in] ap              The access point handle
-  /// @param[out] state          The connection state
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// Gets the connection state.
+  ///
+  /// This function retrieves the current connection state of the access point. The connection state indicates whether the access point is currently connected, connecting, or disconnected.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `state` (out): The connection state
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_ap_get_connection_state(
     wifi_manager_ap_h ap,
     ffi.Pointer<ffi.Int32> state,
@@ -2533,20 +3316,28 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_ap_get_connection_statePtr.asFunction<
           int Function(wifi_manager_ap_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the config type of IP.
-  /// @details This function retrieves the configuration type of the IP for the specified address family.
-  /// The IP configuration type indicates whether the IP address is statically configured or dynamically assigned via DHCP.
-  /// @since_tizen 3.0
-  /// @param[in] ap              The access point handle
-  /// @param[in] address_family  The address family
-  /// @param[out] type           The type of IP config
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed
-  /// @retval #WIFI_MANAGER_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED  Address family not supported
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED           Not supported
+  /// Gets the config type of IP.
+  ///
+  /// This function retrieves the configuration type of the IP for the specified address family. The IP configuration type indicates whether the IP address is statically configured or dynamically assigned via DHCP.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `address_family` (in): The address family
+  /// - `type` (out): The type of IP config
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_MANAGER_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED`: Address family not supported
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_ap_get_ip_config_type(
     wifi_manager_ap_h ap,
     int address_family,
@@ -2567,22 +3358,32 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_ap_get_ip_config_typePtr.asFunction<
           int Function(wifi_manager_ap_h, int, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Sets the config type of IP.
-  /// @details If you set IP config type to #WIFI_MANAGER_IP_CONFIG_TYPE_STATIC,
-  /// then IP address, Gateway and Subnet mask will be set to the initial value "0.0.0.0".
-  /// @since_tizen 3.0
-  /// @param[in] ap              The access point handle
-  /// @param[in] address_family  The address family
-  /// @param[in] type            The type of IP config
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed
-  /// @retval #WIFI_MANAGER_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED  Address family not supported
-  /// @retval #WIFI_MANAGER_ERROR_PERMISSION_DENIED    Permission Denied
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
-  /// @see wifi_manager_update_ap()
+  /// Sets the config type of IP.
+  ///
+  /// If you set IP config type to `WIFI_MANAGER_IP_CONFIG_TYPE_STATIC`, then IP address, Gateway and Subnet mask will be set to the initial value "0.0.0.0".
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `address_family` (in): The address family
+  /// - `type` (in): The type of IP config
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_MANAGER_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED`: Address family not supported
+  /// - `WIFI_MANAGER_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `wifi_manager_update_ap()`
   int wifi_manager_ap_set_ip_config_type(
     wifi_manager_ap_h ap,
     int address_family,
@@ -2603,26 +3404,35 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_ap_set_ip_config_typePtr
           .asFunction<int Function(wifi_manager_ap_h, int, int)>();
 
-  /// @brief Gets the IP address.
-  /// @details This function retrieves the IP address for the specified address family.
-  /// The IP address is the unique identifier assigned to a device on a network,
-  /// allowing it to communicate with other devices on the same network or across different networks.
-  /// @since_tizen 3.0
-  /// @remarks You must release @a ip_address using free().
-  /// @param[in] ap              The access point handle
-  /// @param[in] address_family  The address family
-  /// @param[out] ip_address     The IP address; this value is for default address \n
-  /// e.g, IPv6 can have multiple addresses. but you can only obtain a representative address \n
-  /// if you want to get all IPv6 address, you can use the wifi_manager_ap_foreach_ipv6_address().
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OUT_OF_MEMORY        Out of memory
-  /// @retval #WIFI_MANAGER_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED  Address family not supported
-  /// @retval #WIFI_MANAGER_ERROR_NO_CONNECTION        There is no connected AP
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
-  /// @see  wifi_manager_ap_foreach_ipv6_address()
+  /// Gets the IP address.
+  ///
+  /// This function retrieves the IP address for the specified address family. The IP address is the unique identifier assigned to a device on a network, allowing it to communicate with other devices on the same network or across different networks.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - You must release `ip_address` using free().
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `address_family` (in): The address family
+  /// - `ip_address` (out): The IP address; this value is for default address e.g, IPv6 can have multiple addresses. but you can only obtain a representative address if you want to get all IPv6 address, you can use the wifi_manager_ap_foreach_ipv6_address().
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `WIFI_MANAGER_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED`: Address family not supported
+  /// - `WIFI_MANAGER_ERROR_NO_CONNECTION`: There is no connected AP
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `wifi_manager_ap_foreach_ipv6_address()`
   int wifi_manager_ap_get_ip_address(
     wifi_manager_ap_h ap,
     int address_family,
@@ -2645,22 +3455,32 @@ class Tizen100CapiNetworkWifiManager {
           int Function(
               wifi_manager_ap_h, int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets the IP address.
-  /// @details This function sets the IP address for the specified address family.
-  /// If the IP address is set to NULL, the existing IP address for that address family will be deleted.
-  /// @since_tizen 3.0
-  /// @param[in] ap              The access point handle
-  /// @param[in] address_family  The address family
-  /// @param[in] ip_address      The IP address; if you set this value to NULL, then the existing value will be deleted
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed
-  /// @retval #WIFI_MANAGER_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED  Address family not supported
-  /// @retval #WIFI_MANAGER_ERROR_PERMISSION_DENIED    Permission Denied
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
-  /// @see wifi_manager_update_ap()
+  /// Sets the IP address.
+  ///
+  /// This function sets the IP address for the specified address family. If the IP address is set to NULL, the existing IP address for that address family will be deleted.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `address_family` (in): The address family
+  /// - `ip_address` (in): The IP address; if you set this value to NULL, then the existing value will be deleted
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_MANAGER_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED`: Address family not supported
+  /// - `WIFI_MANAGER_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `wifi_manager_update_ap()`
   int wifi_manager_ap_set_ip_address(
     wifi_manager_ap_h ap,
     int address_family,
@@ -2681,19 +3501,27 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_ap_set_ip_addressPtr.asFunction<
           int Function(wifi_manager_ap_h, int, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets all IPv6 addresses assigned to the Wi-Fi interface.
-  /// @details This function retrieves all IPv6 addresses assigned to the Wi-Fi interface for the specified access point.
-  /// It uses a callback function to iterate over each IPv6 address and provide it to the caller.
-  /// @since_tizen 4.0
-  /// @param[in] ap        The access point handle
-  /// @param[in] callback  The callback to be called for each IPv6 address
-  /// @param[in] user_data The user data passed to the callback function
-  /// @return 0 on success, otherwise negative error value.
-  /// @retval #WIFI_MANAGER_ERROR_NONE               Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OPERATION_FAILED   Operation failed
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED      Not supported
+  /// Gets all IPv6 addresses assigned to the Wi-Fi interface.
+  ///
+  /// This function retrieves all IPv6 addresses assigned to the Wi-Fi interface for the specified access point. It uses a callback function to iterate over each IPv6 address and provide it to the caller.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `callback` (in): The callback to be called for each IPv6 address
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value.
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_ap_foreach_ipv6_address(
     wifi_manager_ap_h ap,
     wifi_manager_ap_ipv6_address_cb callback,
@@ -2715,21 +3543,31 @@ class Tizen100CapiNetworkWifiManager {
           int Function(wifi_manager_ap_h, wifi_manager_ap_ipv6_address_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Gets the subnet mask.
-  /// @details This function retrieves the subnet mask for the specified address family.
-  /// The subnet mask is used to determine which part of an IP address represents the network portion and which part represents the host portion.
-  /// @since_tizen 3.0
-  /// @remarks You must release @a subnet_mask using free().
-  /// @param[in] ap              The access point handle
-  /// @param[in] address_family  The address family
-  /// @param[out] subnet_mask    The subnet mask
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OUT_OF_MEMORY        Out of memory
-  /// @retval #WIFI_MANAGER_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED  Address family not supported
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// Gets the subnet mask.
+  ///
+  /// This function retrieves the subnet mask for the specified address family. The subnet mask is used to determine which part of an IP address represents the network portion and which part represents the host portion.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - You must release `subnet_mask` using free().
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `address_family` (in): The address family
+  /// - `subnet_mask` (out): The subnet mask
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `WIFI_MANAGER_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED`: Address family not supported
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_ap_get_subnet_mask(
     wifi_manager_ap_h ap,
     int address_family,
@@ -2752,22 +3590,32 @@ class Tizen100CapiNetworkWifiManager {
           int Function(
               wifi_manager_ap_h, int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets the subnet mask.
-  /// @details This function sets the subnet mask for the specified address family.
-  /// If the subnet mask is set to NULL, the existing subnet mask for that address family will be deleted.
-  /// @since_tizen 3.0
-  /// @param[in] ap              The access point handle
-  /// @param[in] address_family  The address family
-  /// @param[in] subnet_mask     The subnet mask; if you set this value to NULL, then the existing value will be deleted
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed
-  /// @retval #WIFI_MANAGER_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED  Address family not supported
-  /// @retval #WIFI_MANAGER_ERROR_PERMISSION_DENIED    Permission Denied
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
-  /// @see wifi_manager_update_ap()
+  /// Sets the subnet mask.
+  ///
+  /// This function sets the subnet mask for the specified address family. If the subnet mask is set to NULL, the existing subnet mask for that address family will be deleted.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `address_family` (in): The address family
+  /// - `subnet_mask` (in): The subnet mask; if you set this value to NULL, then the existing value will be deleted
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_MANAGER_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED`: Address family not supported
+  /// - `WIFI_MANAGER_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `wifi_manager_update_ap()`
   int wifi_manager_ap_set_subnet_mask(
     wifi_manager_ap_h ap,
     int address_family,
@@ -2788,21 +3636,31 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_ap_set_subnet_maskPtr.asFunction<
           int Function(wifi_manager_ap_h, int, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the gateway address.
-  /// @details This function retrieves the gateway address for the specified address family.
-  /// The gateway address is the IP address of the router or gateway that acts as the entry point to the wider internet or network.
-  /// @since_tizen 3.0
-  /// @remarks You must release @a gateway_address using free().
-  /// @param[in] ap                The access point handle
-  /// @param[in] address_family    The address family
-  /// @param[out] gateway_address  The gateway address
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OUT_OF_MEMORY        Out of memory
-  /// @retval #WIFI_MANAGER_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED  Address family not supported
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// Gets the gateway address.
+  ///
+  /// This function retrieves the gateway address for the specified address family. The gateway address is the IP address of the router or gateway that acts as the entry point to the wider internet or network.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - You must release `gateway_address` using free().
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `address_family` (in): The address family
+  /// - `gateway_address` (out): The gateway address
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `WIFI_MANAGER_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED`: Address family not supported
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_ap_get_gateway_address(
     wifi_manager_ap_h ap,
     int address_family,
@@ -2825,23 +3683,32 @@ class Tizen100CapiNetworkWifiManager {
           int Function(
               wifi_manager_ap_h, int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets the gateway address.
-  /// @details This function sets the gateway address for the specified address family.
-  /// If the gateway address is set to NULL, the existing gateway address for that address family will be deleted.
-  /// @since_tizen 3.0
-  /// @param[in] ap                The access point handle
-  /// @param[in] address_family    The address family
-  /// @param[in] gateway_address   The gateway address \n
-  /// If you set this value to @c NULL, then the existing value will be deleted.
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed
-  /// @retval #WIFI_MANAGER_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED  Address family not supported
-  /// @retval #WIFI_MANAGER_ERROR_PERMISSION_DENIED    Permission Denied
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
-  /// @see wifi_manager_update_ap()
+  /// Sets the gateway address.
+  ///
+  /// This function sets the gateway address for the specified address family. If the gateway address is set to NULL, the existing gateway address for that address family will be deleted.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `address_family` (in): The address family
+  /// - `gateway_address` (in): The gateway address If you set this value to `NULL`, then the existing value will be deleted.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_MANAGER_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED`: Address family not supported
+  /// - `WIFI_MANAGER_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `wifi_manager_update_ap()`
   int wifi_manager_ap_set_gateway_address(
     wifi_manager_ap_h ap,
     int address_family,
@@ -2862,21 +3729,31 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_ap_set_gateway_addressPtr.asFunction<
           int Function(wifi_manager_ap_h, int, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the DHCP Server address.
-  /// @details This function retrieves the DHCP server address for the specified address family.
-  /// The DHCP server address is the IP address of the server that provides dynamic IP addresses to devices on the network.
-  /// @since_tizen 4.0
-  /// @remarks You must release @a dhcp_server using g_free().
-  /// This function is supported only for IPv4 address family.
-  /// @param[in] ap                The access point handle
-  /// @param[in] address_family    The address family
-  /// @param[out] dhcp_server      The DHCP server address
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OUT_OF_MEMORY        Out of memory
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// Gets the DHCP Server address.
+  ///
+  /// This function retrieves the DHCP server address for the specified address family. The DHCP server address is the IP address of the server that provides dynamic IP addresses to devices on the network.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Remarks:**
+  /// - You must release `dhcp_server` using g_free().
+  /// - This function is supported only for IPv4 address family.
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `address_family` (in): The address family
+  /// - `dhcp_server` (out): The DHCP server address
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_ap_get_dhcp_server_address(
     wifi_manager_ap_h ap,
     int address_family,
@@ -2899,18 +3776,26 @@ class Tizen100CapiNetworkWifiManager {
           int Function(
               wifi_manager_ap_h, int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the DHCP lease duration.
-  /// @details This function retrieves the DHCP lease duration for the specified address family.
-  /// The DHCP lease duration indicates the time period for which the IP address assigned to the device through DHCP will remain valid.
-  /// @since_tizen 4.0
-  /// @param[in] ap                        The access point handle
-  /// @param[in] address_family            The address family
-  /// @param[out] dhcp_lease_duration      The DHCP lease duration in seconds
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// Gets the DHCP lease duration.
+  ///
+  /// This function retrieves the DHCP lease duration for the specified address family. The DHCP lease duration indicates the time period for which the IP address assigned to the device through DHCP will remain valid.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `address_family` (in): The address family
+  /// - `dhcp_lease_duration` (out): The DHCP lease duration in seconds
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_ap_get_dhcp_lease_duration(
     wifi_manager_ap_h ap,
     int address_family,
@@ -2932,21 +3817,31 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_ap_get_dhcp_lease_durationPtr.asFunction<
           int Function(wifi_manager_ap_h, int, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the proxy address.
-  /// @details This function retrieves the proxy address for the specified address family.
-  /// The retrieved proxy address can be used to configure the proxy settings for the network interface.
-  /// @since_tizen 3.0
-  /// @remarks You must release @a proxy_address using free().
-  /// @param[in] ap                The access point handle
-  /// @param[in] address_family    The address family
-  /// @param[out] proxy_address    The proxy address
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OUT_OF_MEMORY        Out of memory
-  /// @retval #WIFI_MANAGER_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED  Address family not supported
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// Gets the proxy address.
+  ///
+  /// This function retrieves the proxy address for the specified address family. The retrieved proxy address can be used to configure the proxy settings for the network interface.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - You must release `proxy_address` using free().
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `address_family` (in): The address family
+  /// - `proxy_address` (out): The proxy address
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `WIFI_MANAGER_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED`: Address family not supported
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_ap_get_proxy_address(
     wifi_manager_ap_h ap,
     int address_family,
@@ -2969,23 +3864,32 @@ class Tizen100CapiNetworkWifiManager {
           int Function(
               wifi_manager_ap_h, int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets the proxy address.
-  /// @details This function sets the proxy address for the specified address family.
-  /// If the proxy address is set to NULL, the existing proxy address for that address family will be deleted.
-  /// @since_tizen 3.0
-  /// @param[in] ap                The access point handle
-  /// @param[in] address_family    The address family
-  /// @param[in] proxy_address        The proxy address \n
-  /// If you set this value to @c NULL, then the existing value will be deleted.
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed
-  /// @retval #WIFI_MANAGER_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED  Address family not supported
-  /// @retval #WIFI_MANAGER_ERROR_PERMISSION_DENIED    Permission Denied
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
-  /// @see wifi_manager_update_ap()
+  /// Sets the proxy address.
+  ///
+  /// This function sets the proxy address for the specified address family. If the proxy address is set to NULL, the existing proxy address for that address family will be deleted.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `address_family` (in): The address family
+  /// - `proxy_address` (in): The proxy address If you set this value to `NULL`, then the existing value will be deleted.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_MANAGER_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED`: Address family not supported
+  /// - `WIFI_MANAGER_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `wifi_manager_update_ap()`
   int wifi_manager_ap_set_proxy_address(
     wifi_manager_ap_h ap,
     int address_family,
@@ -3006,18 +3910,26 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_ap_set_proxy_addressPtr.asFunction<
           int Function(wifi_manager_ap_h, int, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the Proxy type.
-  /// @details This function retrieves the proxy address type for the access point.
-  /// The proxy type indicates whether the proxy settings are disabled, set to automatic, or set to manual.
-  /// @since_tizen 3.0
-  /// @param[in] ap                The access point handle
-  /// @param[out] proxy_type       The type of proxy
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// Gets the Proxy type.
+  ///
+  /// This function retrieves the proxy address type for the access point. The proxy type indicates whether the proxy settings are disabled, set to automatic, or set to manual.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `proxy_type` (out): The type of proxy
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_ap_get_proxy_type(
     wifi_manager_ap_h ap,
     ffi.Pointer<ffi.Int32> proxy_type,
@@ -3036,19 +3948,30 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_ap_get_proxy_typePtr.asFunction<
           int Function(wifi_manager_ap_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Sets the Proxy address.
-  /// @details If you set Proxy type to #WIFI_MANAGER_PROXY_TYPE_AUTO or #WIFI_MANAGER_PROXY_TYPE_MANUAL, then Proxy will be restored.
-  /// @since_tizen 3.0
-  /// @param[in] ap                The access point handle
-  /// @param[in] proxy_type        The type of proxy
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed
-  /// @retval #WIFI_MANAGER_ERROR_PERMISSION_DENIED    Permission Denied
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
-  /// @see wifi_manager_update_ap()
+  /// Sets the Proxy address.
+  ///
+  /// If you set Proxy type to `WIFI_MANAGER_PROXY_TYPE_AUTO` or `WIFI_MANAGER_PROXY_TYPE_MANUAL`, then Proxy will be restored.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `proxy_type` (in): The type of proxy
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_MANAGER_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `wifi_manager_update_ap()`
   int wifi_manager_ap_set_proxy_type(
     wifi_manager_ap_h ap,
     int proxy_type,
@@ -3066,22 +3989,32 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_ap_set_proxy_typePtr
           .asFunction<int Function(wifi_manager_ap_h, int)>();
 
-  /// @brief Gets the DNS address.
-  /// @details This function retrieves the DNS address for the specified order and address family.
-  /// Up to two DNS addresses can be retrieved for each address family.
-  /// @since_tizen 3.0
-  /// @remarks The allowance of DNS address is @c 2.You must release @a dns_address using free().
-  /// @param[in] ap                The access point handle
-  /// @param[in] order             The order of DNS address; it starts from 1, which means first DNS address
-  /// @param[in] address_family    The address family
-  /// @param[out] dns_address      The DNS address
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OUT_OF_MEMORY        Out of memory
-  /// @retval #WIFI_MANAGER_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED  Address family not supported
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// Gets the DNS address.
+  ///
+  /// This function retrieves the DNS address for the specified order and address family. Up to two DNS addresses can be retrieved for each address family.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The allowance of DNS address is `2.You` must release `dns_address` using free().
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `order` (in): The order of DNS address; it starts from 1, which means first DNS address
+  /// - `address_family` (in): The address family
+  /// - `dns_address` (out): The DNS address
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `WIFI_MANAGER_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED`: Address family not supported
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_ap_get_dns_address(
     wifi_manager_ap_h ap,
     int order,
@@ -3106,27 +4039,36 @@ class Tizen100CapiNetworkWifiManager {
           int Function(wifi_manager_ap_h, int, int,
               ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets the DNS address.
-  /// @details This function sets the DNS address for the specified order and address family.
-  /// Up to two DNS addresses can be set for each address family.
-  /// If the DNS address is set to NULL, the existing DNS address for that order and address family will be deleted.
-  /// @since_tizen 3.0
-  /// @remarks The allowance of DNS address is @c 2 \n
-  /// @param[in] ap                The access point handle
-  /// @param[in] order             The order of DNS address \n
-  /// It starts from @c 1, which means first DNS address.
-  /// @param[in] address_family    The address family
-  /// @param[in] dns_address       The DNS address \n
-  /// If you set this value to @c NULL, then the existing value will be deleted.
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed
-  /// @retval #WIFI_MANAGER_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED  Address family not supported
-  /// @retval #WIFI_MANAGER_ERROR_PERMISSION_DENIED    Permission Denied
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
-  /// @see wifi_manager_update_ap()
+  /// Sets the DNS address.
+  ///
+  /// This function sets the DNS address for the specified order and address family. Up to two DNS addresses can be set for each address family. If the DNS address is set to NULL, the existing DNS address for that order and address family will be deleted.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The allowance of DNS address is `2`
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `order` (in): The order of DNS address It starts from `1`, which means first DNS address.
+  /// - `address_family` (in): The address family
+  /// - `dns_address` (in): The DNS address If you set this value to `NULL`, then the existing value will be deleted.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_MANAGER_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED`: Address family not supported
+  /// - `WIFI_MANAGER_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `wifi_manager_update_ap()`
   int wifi_manager_ap_set_dns_address(
     wifi_manager_ap_h ap,
     int order,
@@ -3149,19 +4091,27 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_ap_set_dns_addressPtr.asFunction<
           int Function(wifi_manager_ap_h, int, int, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the DNS config type.
-  /// @details This function retrieves the DNS configuration type for the specified address family.
-  /// The DNS configuration type indicates how the DNS server addresses are configured for the network interface.
-  /// @since_tizen 4.0
-  /// @param[in] ap              The access point handle
-  /// @param[in] address_family  The address family
-  /// @param[out] type           The DNS config type
-  /// @return 0 on success, otherwise negative error value.
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// Gets the DNS config type.
+  ///
+  /// This function retrieves the DNS configuration type for the specified address family. The DNS configuration type indicates how the DNS server addresses are configured for the network interface.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `address_family` (in): The address family
+  /// - `type` (out): The DNS config type
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value.
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_ap_get_dns_config_type(
     wifi_manager_ap_h ap,
     int address_family,
@@ -3182,20 +4132,30 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_ap_get_dns_config_typePtr.asFunction<
           int Function(wifi_manager_ap_h, int, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Sets the DNS config type.
-  /// @details This function sets the DNS configuration type for the specified address family.
-  /// The DNS configuration type determines how the DNS server addresses are configured for the network interface.
-  /// @since_tizen 4.0
-  /// @param[in] ap              The access point handle
-  /// @param[in] address_family  The address family
-  /// @param[in] type            The DNS config type
-  /// @return 0 on success, otherwise negative error value.
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
-  /// @see wifi_manager_update_ap()
+  /// Sets the DNS config type.
+  ///
+  /// This function sets the DNS configuration type for the specified address family. The DNS configuration type determines how the DNS server addresses are configured for the network interface.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `address_family` (in): The address family
+  /// - `type` (in): The DNS config type
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value.
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `wifi_manager_update_ap()`
   int wifi_manager_ap_set_dns_config_type(
     wifi_manager_ap_h ap,
     int address_family,
@@ -3216,21 +4176,26 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_ap_set_dns_config_typePtr
           .asFunction<int Function(wifi_manager_ap_h, int, int)>();
 
-  /// @brief Gets the network prefix length.
-  /// @details This function retrieves the network prefix length for the specified address family.
-  /// The network prefix length defines the subnet mask for the network interface,
-  /// determining the range of IP addresses available for devices connected to the network.
-  /// @since_tizen 4.0
-  /// @param[in] ap              The access point handle
-  /// @param[in] address_family  The address family
-  /// @param[out] prefix_len     The network prefix length. \n
-  /// In case of IPv4, it means netmask length \n
-  /// (also called a prefix, e.g. 8, 16, 24, 32)
-  /// @return 0 on success, otherwise negative error value.
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// Gets the network prefix length.
+  ///
+  /// This function retrieves the network prefix length for the specified address family. The network prefix length defines the subnet mask for the network interface, determining the range of IP addresses available for devices connected to the network.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `address_family` (in): The address family
+  /// - `prefix_len` (out): The network prefix length. In case of IPv4, it means netmask length (also called a prefix, e.g. 8, 16, 24, 32)
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value.
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_ap_get_prefix_length(
     wifi_manager_ap_h ap,
     int address_family,
@@ -3251,22 +4216,29 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_ap_get_prefix_lengthPtr.asFunction<
           int Function(wifi_manager_ap_h, int, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Sets the network prefix length.
-  /// @details This function sets the network prefix length for the specified address family.
-  /// The network prefix length is used to define the subnet mask for the network interface,
-  /// which determines the range of IP addresses available for devices connected to the network.
-  /// @since_tizen 4.0
-  /// @param[in] ap              The access point handle
-  /// @param[in] address_family  The address family
-  /// @param[in] prefix_len      The network prefix length. \n
-  /// In case of IPv4, it means netmask length \n
-  /// (also called a prefix, e.g. 8, 16, 24, 32)
-  /// @return 0 on success, otherwise negative error value.
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
-  /// @see wifi_manager_update_ap()
+  /// Sets the network prefix length.
+  ///
+  /// This function sets the network prefix length for the specified address family. The network prefix length is used to define the subnet mask for the network interface, which determines the range of IP addresses available for devices connected to the network.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `address_family` (in): The address family
+  /// - `prefix_len` (in): The network prefix length. In case of IPv4, it means netmask length (also called a prefix, e.g. 8, 16, 24, 32)
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value.
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `wifi_manager_update_ap()`
   int wifi_manager_ap_set_prefix_length(
     wifi_manager_ap_h ap,
     int address_family,
@@ -3287,18 +4259,26 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_ap_set_prefix_lengthPtr
           .asFunction<int Function(wifi_manager_ap_h, int, int)>();
 
-  /// @brief Gets the Wi-Fi disconnect reason from the supplicant.
-  /// @details This function retrieves the Wi-Fi disconnect reason from the supplicant.
-  /// The disconnect reason provides detailed information about the cause of the disconnection between the device and the access point.
-  /// @since_tizen 3.0
-  /// @param[in] ap                    The access point handle
-  /// @param[out] disconnect_reason    The supplicant disconnect reason
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// Gets the Wi-Fi disconnect reason from the supplicant.
+  ///
+  /// This function retrieves the Wi-Fi disconnect reason from the supplicant. The disconnect reason provides detailed information about the cause of the disconnection between the device and the access point.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `disconnect_reason` (out): The supplicant disconnect reason
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_ap_get_disconnect_reason(
     wifi_manager_ap_h ap,
     ffi.Pointer<ffi.Int32> disconnect_reason,
@@ -3317,18 +4297,26 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_ap_get_disconnect_reasonPtr.asFunction<
           int Function(wifi_manager_ap_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the error state.
-  /// @details This function retrieves the Wi-Fi connection error state for the access point.
-  /// The error state indicates any issues encountered during the connection process to the access point.
-  /// @since_tizen 4.0
-  /// @param[in] ap              The access point handle
-  /// @param[out] error_state    The Wi-Fi connection error state
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION    Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// Gets the error state.
+  ///
+  /// This function retrieves the Wi-Fi connection error state for the access point. The error state indicates any issues encountered during the connection process to the access point.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `error_state` (out): The Wi-Fi connection error state
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_ap_get_error_state(
     wifi_manager_ap_h ap,
     ffi.Pointer<ffi.Int32> error_state,
@@ -3347,18 +4335,26 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_ap_get_error_statePtr.asFunction<
           int Function(wifi_manager_ap_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the Wi-Fi Association Status Code from the supplicant.
-  /// @details This function retrieves the Wi-Fi Association Status Code from the supplicant.
-  /// The status code provides detailed information about the result of the association process between the device and the access point.
-  /// @since_tizen 5.0
-  /// @param[in] ap              The access point handle
-  /// @param[out] status_code    The supplicant Wi-Fi association status code
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION    Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// Gets the Wi-Fi Association Status Code from the supplicant.
+  ///
+  /// This function retrieves the Wi-Fi Association Status Code from the supplicant. The status code provides detailed information about the result of the association process between the device and the access point.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `status_code` (out): The supplicant Wi-Fi association status code
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_ap_get_assoc_status_code(
     wifi_manager_ap_h ap,
     ffi.Pointer<ffi.Int32> status_code,
@@ -3377,18 +4373,26 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_ap_get_assoc_status_codePtr.asFunction<
           int Function(wifi_manager_ap_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets all VSIE of AP.
-  /// @details This function retrieves all Vendor-Specific Information Elements (VSIE) associated with the access point.
-  /// VSIE are custom elements added by vendors to provide additional information about the access point.
-  /// @since_tizen 5.0
-  /// @param[in] ap               The access point handle
-  /// @param[in] callback         The callback to be called for each VSIE of AP
-  /// @param[in] user_data        The user data passed to the callback function
-  /// @return 0 on success, otherwise negative error value.
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// Gets all VSIE of AP.
+  ///
+  /// This function retrieves all Vendor-Specific Information Elements (VSIE) associated with the access point. VSIE are custom elements added by vendors to provide additional information about the access point.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `callback` (in): The callback to be called for each VSIE of AP
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value.
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_ap_foreach_vsie(
     wifi_manager_ap_h ap,
     wifi_manager_ap_vsie_cb callback,
@@ -3410,19 +4414,29 @@ class Tizen100CapiNetworkWifiManager {
           int Function(wifi_manager_ap_h, wifi_manager_ap_vsie_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Gets the raw country code.
-  /// @details This function retrieves the raw country code associated with the access point.
-  /// The country code is a two-letter ISO 3166-1 alpha-2 country code that identifies the country where the access point is located.
-  /// @since_tizen 5.0
-  /// @remarks You must release @a country_code using free().
-  /// @param[in] ap  The access point handle
-  /// @param[out] country_code  The country code, NULL if M/W does not have the country code
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OUT_OF_MEMORY        Out of memory
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// Gets the raw country code.
+  ///
+  /// This function retrieves the raw country code associated with the access point. The country code is a two-letter ISO 3166-1 alpha-2 country code that identifies the country where the access point is located.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Remarks:**
+  /// - You must release `country_code` using free().
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `country_code` (out): The country code, NULL if M/W does not have the country code
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_ap_get_countrycode(
     wifi_manager_ap_h ap,
     ffi.Pointer<ffi.Pointer<ffi.Char>> country_code,
@@ -3443,21 +4457,30 @@ class Tizen100CapiNetworkWifiManager {
           int Function(
               wifi_manager_ap_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the BSSID list.
-  /// @details This function retrieves the BSSID list associated with the access point.
-  /// Each BSSID represents a unique identifier for a wireless network interface,
-  /// typically corresponding to a specific access point or router.
-  /// @since_tizen 5.0
-  /// @param[in] ap  The access point handle
-  /// @param[in] callback  The callback to be called
-  /// @param[in] user_data The user data passed to the callback function
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
-  /// @post This function invokes wifi_manager_found_bssid_cb().
+  /// Gets the BSSID list.
+  ///
+  /// This function retrieves the BSSID list associated with the access point. Each BSSID represents a unique identifier for a wireless network interface, typically corresponding to a specific access point or router.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `callback` (in): The callback to be called
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Postconditions:**
+  /// - This function invokes wifi_manager_found_bssid_cb().
   int wifi_manager_foreach_found_bssid(
     wifi_manager_ap_h ap,
     wifi_manager_found_bssid_cb callback,
@@ -3479,18 +4502,26 @@ class Tizen100CapiNetworkWifiManager {
           int Function(wifi_manager_ap_h, wifi_manager_found_bssid_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Gets the Wi-Fi security mode.
-  /// @details This function retrieves the Wi-Fi security mode for the access point.
-  /// The security mode determines the level of protection provided to the Wi-Fi network against unauthorized access and attacks.
-  /// @since_tizen 3.0
-  /// @param[in] ap                The access point handle
-  /// @param[out] type             The type of Wi-Fi security
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// Gets the Wi-Fi security mode.
+  ///
+  /// This function retrieves the Wi-Fi security mode for the access point. The security mode determines the level of protection provided to the Wi-Fi network against unauthorized access and attacks.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `type` (out): The type of Wi-Fi security
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_ap_get_security_type(
     wifi_manager_ap_h ap,
     ffi.Pointer<ffi.Int32> type,
@@ -3509,17 +4540,25 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_ap_get_security_typePtr.asFunction<
           int Function(wifi_manager_ap_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Checks whether a given security type is available in a given AP..
-  /// @details An AP may support several types of security modes together.
-  /// You can check all supported security modes with this function.
-  /// @since_tizen 7.0
-  /// @param[in] ap             The access point handle
-  /// @param[in] type           Wi-Fi security type
-  /// @param[out] supported     true when enabled and false when disabled
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
+  /// Checks whether a given security type is available in a given AP..
+  ///
+  /// An AP may support several types of security modes together. You can check all supported security modes with this function.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `type` (in): Wi-Fi security type
+  /// - `supported` (out): true when enabled and false when disabled
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
   int wifi_manager_ap_is_security_type_supported(
     wifi_manager_ap_h ap,
     int type,
@@ -3541,18 +4580,26 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_ap_is_security_type_supportedPtr.asFunction<
           int Function(wifi_manager_ap_h, int, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Sets the Wi-Fi security mode.
-  /// @details This function sets the Wi-Fi security mode for the access point.
-  /// The security mode determines the level of protection provided to the Wi-Fi network against unauthorized access and attacks.
-  /// @since_tizen 3.0
-  /// @param[in] ap                The access point handle
-  /// @param[in] type              The type of Wi-Fi security
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// Sets the Wi-Fi security mode.
+  ///
+  /// This function sets the Wi-Fi security mode for the access point. The security mode determines the level of protection provided to the Wi-Fi network against unauthorized access and attacks.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `type` (in): The type of Wi-Fi security
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_ap_set_security_type(
     wifi_manager_ap_h ap,
     int type,
@@ -3570,18 +4617,26 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_ap_set_security_typePtr
           .asFunction<int Function(wifi_manager_ap_h, int)>();
 
-  /// @brief Gets the Wi-Fi encryption type.
-  /// @details This function retrieves the Wi-Fi encryption type for the access point.
-  /// The encryption type determines how data transmitted over the Wi-Fi network is protected from unauthorized access.
-  /// @since_tizen 3.0
-  /// @param[in] ap                The access point handle
-  /// @param[out] type             The type of Wi-Fi encryption
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// Gets the Wi-Fi encryption type.
+  ///
+  /// This function retrieves the Wi-Fi encryption type for the access point. The encryption type determines how data transmitted over the Wi-Fi network is protected from unauthorized access.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `type` (out): The type of Wi-Fi encryption
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_ap_get_encryption_type(
     wifi_manager_ap_h ap,
     ffi.Pointer<ffi.Int32> type,
@@ -3600,18 +4655,26 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_ap_get_encryption_typePtr.asFunction<
           int Function(wifi_manager_ap_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Sets the Wi-Fi encryption type.
-  /// @details This function sets the Wi-Fi encryption type for the access point.
-  /// The encryption type determines how data transmitted over the Wi-Fi network is protected from unauthorized access.
-  /// @since_tizen 3.0
-  /// @param[in] ap                The access point handle
-  /// @param[in] type              The type of Wi-Fi encryption
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// Sets the Wi-Fi encryption type.
+  ///
+  /// This function sets the Wi-Fi encryption type for the access point. The encryption type determines how data transmitted over the Wi-Fi network is protected from unauthorized access.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `type` (in): The type of Wi-Fi encryption
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_ap_set_encryption_type(
     wifi_manager_ap_h ap,
     int type,
@@ -3629,20 +4692,29 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_ap_set_encryption_typePtr
           .asFunction<int Function(wifi_manager_ap_h, int)>();
 
-  /// @brief Checks whether the passphrase is required or not.
-  /// @details This function checks whether a passphrase is required for the access point.
-  /// A passphrase is necessary to authenticate and establish a secure connection with the access point.
-  /// @since_tizen 3.0
-  /// @remarks This function is not valid if security type is #WIFI_MANAGER_SECURITY_TYPE_EAP.
-  /// @param[in] ap                The access point handle
-  /// @param[out] required  @c true if passphrase is required,
-  /// @c false if passphrase is not required.
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// Checks whether the passphrase is required or not.
+  ///
+  /// This function checks whether a passphrase is required for the access point. A passphrase is necessary to authenticate and establish a secure connection with the access point.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - This function is not valid if security type is `WIFI_MANAGER_SECURITY_TYPE_EAP`.
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `required` (out): `true` if passphrase is required, `false` if passphrase is not required.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_ap_is_passphrase_required(
     wifi_manager_ap_h ap,
     ffi.Pointer<ffi.Bool> required1,
@@ -3661,18 +4733,26 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_ap_is_passphrase_requiredPtr
           .asFunction<int Function(wifi_manager_ap_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief sets the passphrase for a Wi-Fi access point
-  /// @details This function sets the passphrase for a Wi-Fi access point.
-  /// The passphrase is used to authenticate and establish a secure connection with the access point.
-  /// @since_tizen 3.0
-  /// @param[in] ap                The access point handle
-  /// @param[in] passphrase        The passphrase of access point
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// sets the passphrase for a Wi-Fi access point
+  ///
+  /// This function sets the passphrase for a Wi-Fi access point. The passphrase is used to authenticate and establish a secure connection with the access point.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `passphrase` (in): The passphrase of access point
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_ap_set_passphrase(
     wifi_manager_ap_h ap,
     ffi.Pointer<ffi.Char> passphrase,
@@ -3691,22 +4771,30 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_ap_set_passphrasePtr
           .asFunction<int Function(wifi_manager_ap_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Checks whether the WPS(Wi-Fi Protected Setup) is supported or not.
-  /// @details This function checks whether WPS is supported by the access point.
-  /// WPS is a standard that simplifies the process of setting up secure Wi-Fi connections
-  /// by allowing devices to connect to each other without entering passwords manually.
-  /// @since_tizen 3.0
-  /// @param[in] ap                The access point handle
-  /// @param[out] supported  @c true if WPS is supported,
-  /// otherwise @c false is WPS is not supported.
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
-  /// @see wifi_manager_connect_by_wps_pbc()
-  /// @see wifi_manager_connect_by_wps_pin()
+  /// Checks whether the WPS(Wi-Fi Protected Setup) is supported or not.
+  ///
+  /// This function checks whether WPS is supported by the access point. WPS is a standard that simplifies the process of setting up secure Wi-Fi connections by allowing devices to connect to each other without entering passwords manually.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `supported` (out): `true` if WPS is supported, otherwise `false` is WPS is not supported.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `wifi_manager_connect_by_wps_pbc()`
+  /// - `wifi_manager_connect_by_wps_pin()`
   int wifi_manager_ap_is_wps_supported(
     wifi_manager_ap_h ap,
     ffi.Pointer<ffi.Bool> supported,
@@ -3725,17 +4813,24 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_ap_is_wps_supportedPtr
           .asFunction<int Function(wifi_manager_ap_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Checks whether Protected Management Frame is required.
-  /// @details This function checks whether PMF is required for the access point.
-  /// PMF is a security feature that protects wireless networks from various types of attacks,
-  /// such as deauthentication and disassociation attacks.
-  /// @since_tizen 7.0
-  /// @param[in] ap             The access point handle
-  /// @param[out] required      true when required and false when not required
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
+  /// Checks whether Protected Management Frame is required.
+  ///
+  /// This function checks whether PMF is required for the access point. PMF is a security feature that protects wireless networks from various types of attacks, such as deauthentication and disassociation attacks.
+  ///
+  /// **Since Tizen:**
+  /// - 7.0
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `required` (out): true when required and false when not required
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
   int wifi_manager_ap_is_pmf_required(
     wifi_manager_ap_h ap,
     ffi.Pointer<ffi.Bool> required1,
@@ -3754,23 +4849,30 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_ap_is_pmf_requiredPtr
           .asFunction<int Function(wifi_manager_ap_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Sets the passphrase of EAP.
-  /// @details You can set one of @a user_name and @a password as @c NULL.
-  /// In this case, the value of a parameter which is set as @c NULL will be the previous value.
-  /// But it is not allowed that both @a user_name and @a password are set as @c NULL.
-  /// @since_tizen 3.0
-  /// @remarks This function is valid only if the EAP type is #WIFI_MANAGER_EAP_TYPE_PEAP or #WIFI_MANAGER_EAP_TYPE_TTLS.
-  /// @param[in] ap                The access point handle
-  /// @param[in] user_name         The user name \n
-  /// This value can be @c NULL.
-  /// @param[in] password          The password \n
-  /// This value can be @c NULL.
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION    Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// Sets the passphrase of EAP.
+  ///
+  /// You can set one of `user_name` and `password` as `NULL`. In this case, the value of a parameter which is set as `NULL` will be the previous value. But it is not allowed that both `user_name` and `password` are set as `NULL`.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - This function is valid only if the EAP type is `WIFI_MANAGER_EAP_TYPE_PEAP` or `WIFI_MANAGER_EAP_TYPE_TTLS`.
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `user_name` (in): The user name This value can be `NULL`.
+  /// - `password` (in): The password This value can be `NULL`.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_ap_set_eap_passphrase(
     wifi_manager_ap_h ap,
     ffi.Pointer<ffi.Char> user_name,
@@ -3792,23 +4894,32 @@ class Tizen100CapiNetworkWifiManager {
           int Function(wifi_manager_ap_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the passphrase of EAP.
-  /// @details This function retrieves the user name and password status used for EAP authentication.
-  /// It is only valid if the EAP type is set to #WIFI_MANAGER_EAP_TYPE_PEAP or #WIFI_MANAGER_EAP_TYPE_TTLS.
-  /// @since_tizen 3.0
-  /// @remarks This function is valid only if the EAP type is #WIFI_MANAGER_EAP_TYPE_PEAP or #WIFI_MANAGER_EAP_TYPE_TTLS.
-  /// You must release @a user_name using free().
-  /// @param[in] ap                The access point handle
-  /// @param[out] user_name        The user name
-  /// @param[out] is_password_set  @c true if password is set,
-  /// otherwise @c false if password is not set.
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OUT_OF_MEMORY        Out of memory
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION    Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// Gets the passphrase of EAP.
+  ///
+  /// This function retrieves the user name and password status used for EAP authentication. It is only valid if the EAP type is set to `WIFI_MANAGER_EAP_TYPE_PEAP` or `WIFI_MANAGER_EAP_TYPE_TTLS`.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - This function is valid only if the EAP type is `WIFI_MANAGER_EAP_TYPE_PEAP` or `WIFI_MANAGER_EAP_TYPE_TTLS`.
+  /// - You must release `user_name` using free().
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `user_name` (out): The user name
+  /// - `is_password_set` (out): `true` if password is set, otherwise `false` if password is not set.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_ap_get_eap_passphrase(
     wifi_manager_ap_h ap,
     ffi.Pointer<ffi.Pointer<ffi.Char>> user_name,
@@ -3832,17 +4943,25 @@ class Tizen100CapiNetworkWifiManager {
           int Function(wifi_manager_ap_h, ffi.Pointer<ffi.Pointer<ffi.Char>>,
               ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Sets access point anonymous identity.
-  /// @details This function sets the anonymous identity for EAP authentication.
-  /// The anonymous identity is an optional field that can be used to provide additional information about the client during the EAP authentication process.
-  /// @since_tizen 5.5
-  /// @param[in] ap                    The access point handle
-  /// @param[in] anonymous_identity    The anonymous identity
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION            Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED                Not supported
+  /// Sets access point anonymous identity.
+  ///
+  /// This function sets the anonymous identity for EAP authentication. The anonymous identity is an optional field that can be used to provide additional information about the client during the EAP authentication process.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `anonymous_identity` (in): The anonymous identity
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_ap_set_eap_anonymous_identity(
     wifi_manager_ap_h ap,
     ffi.Pointer<ffi.Char> anonymous_identity,
@@ -3861,19 +4980,29 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_ap_set_eap_anonymous_identityPtr
           .asFunction<int Function(wifi_manager_ap_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets access point anonymous identity.
-  /// @details This function retrieves the anonymous identity used for EAP authentication.
-  /// The anonymous identity is an optional field that can be used to provide additional information about the client during the EAP authentication process.
-  /// @since_tizen 5.5
-  /// @remarks You must release @a anonymous_identity using free().
-  /// @param[in] ap                    The access point handle
-  /// @param[out] anonymous_identity   The anonymous identity of access point
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OUT_OF_MEMORY                Out of memory
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION            Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED                Not supported
+  /// Gets access point anonymous identity.
+  ///
+  /// This function retrieves the anonymous identity used for EAP authentication. The anonymous identity is an optional field that can be used to provide additional information about the client during the EAP authentication process.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - You must release `anonymous_identity` using free().
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `anonymous_identity` (out): The anonymous identity of access point
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_ap_get_eap_anonymous_identity(
     wifi_manager_ap_h ap,
     ffi.Pointer<ffi.Pointer<ffi.Char>> anonymous_identity,
@@ -3894,21 +5023,31 @@ class Tizen100CapiNetworkWifiManager {
           int Function(
               wifi_manager_ap_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the CA Certificate of EAP.
-  /// @details This function retrieves the file path of the CA certificate used for EAP authentication.
-  /// It is only valid if the EAP type is set to #WIFI_MANAGER_EAP_TYPE_TLS.
-  /// @since_tizen 3.0
-  /// @remarks This function is valid only if the EAP type is #WIFI_MANAGER_EAP_TYPE_TLS.
-  /// You must release @a file using free().
-  /// @param[in] ap                The access point handle
-  /// @param[out] file             The file path of CA Certificate
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OUT_OF_MEMORY        Out of memory
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION    Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// Gets the CA Certificate of EAP.
+  ///
+  /// This function retrieves the file path of the CA certificate used for EAP authentication. It is only valid if the EAP type is set to `WIFI_MANAGER_EAP_TYPE_TLS`.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - This function is valid only if the EAP type is `WIFI_MANAGER_EAP_TYPE_TLS`.
+  /// - You must release `file` using free().
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `file` (out): The file path of CA Certificate
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_ap_get_eap_ca_cert_file(
     wifi_manager_ap_h ap,
     ffi.Pointer<ffi.Pointer<ffi.Char>> file,
@@ -3929,20 +5068,29 @@ class Tizen100CapiNetworkWifiManager {
           int Function(
               wifi_manager_ap_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets the CA Certificate of EAP.
-  /// @details This function sets the CA certificate for EAP authentication.
-  /// It is only valid if the EAP type is set to #WIFI_MANAGER_EAP_TYPE_TLS.
-  /// The CA certificate is used to verify the server's identity during the EAP authentication process.
-  /// @since_tizen 3.0
-  /// @remarks This function is valid only if the EAP type is #WIFI_MANAGER_EAP_TYPE_TLS.
-  /// @param[in] ap                The access point handle
-  /// @param[in] file              The file path of CA Certificate
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION    Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// Sets the CA Certificate of EAP.
+  ///
+  /// This function sets the CA certificate for EAP authentication. It is only valid if the EAP type is set to `WIFI_MANAGER_EAP_TYPE_TLS`. The CA certificate is used to verify the server's identity during the EAP authentication process.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - This function is valid only if the EAP type is `WIFI_MANAGER_EAP_TYPE_TLS`.
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `file` (in): The file path of CA Certificate
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_ap_set_eap_ca_cert_file(
     wifi_manager_ap_h ap,
     ffi.Pointer<ffi.Char> file,
@@ -3961,21 +5109,31 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_ap_set_eap_ca_cert_filePtr
           .asFunction<int Function(wifi_manager_ap_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the Client Certificate of EAP.
-  /// @details This function retrieves the file path of the client certificate used for EAP authentication.
-  /// It is only valid if the EAP type is set to #WIFI_MANAGER_EAP_TYPE_TLS.
-  /// @since_tizen 3.0
-  /// @remarks This function is valid only if the EAP type is #WIFI_MANAGER_EAP_TYPE_TLS.
-  /// You must release @a file using free().
-  /// @param[in] ap                The access point handle
-  /// @param[out] file             The file path of Client Certificate
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OUT_OF_MEMORY        Out of memory
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION    Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// Gets the Client Certificate of EAP.
+  ///
+  /// This function retrieves the file path of the client certificate used for EAP authentication. It is only valid if the EAP type is set to `WIFI_MANAGER_EAP_TYPE_TLS`.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - This function is valid only if the EAP type is `WIFI_MANAGER_EAP_TYPE_TLS`.
+  /// - You must release `file` using free().
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `file` (out): The file path of Client Certificate
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_ap_get_eap_client_cert_file(
     wifi_manager_ap_h ap,
     ffi.Pointer<ffi.Pointer<ffi.Char>> file,
@@ -3996,20 +5154,29 @@ class Tizen100CapiNetworkWifiManager {
           int Function(
               wifi_manager_ap_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets the Client Certificate of EAP.
-  /// @details This function sets the client certificate for EAP authentication.
-  /// It is only valid if the EAP type is set to #WIFI_MANAGER_EAP_TYPE_TLS.
-  /// The client certificate is used to verify the client's identity during the EAP authentication process.
-  /// @since_tizen 3.0
-  /// @remarks This function is valid only if the EAP type is #WIFI_MANAGER_EAP_TYPE_TLS.
-  /// @param[in] ap                The access point handle
-  /// @param[in] file              The file path of Client Certificate
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION    Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// Sets the Client Certificate of EAP.
+  ///
+  /// This function sets the client certificate for EAP authentication. It is only valid if the EAP type is set to `WIFI_MANAGER_EAP_TYPE_TLS`. The client certificate is used to verify the client's identity during the EAP authentication process.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - This function is valid only if the EAP type is `WIFI_MANAGER_EAP_TYPE_TLS`.
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `file` (in): The file path of Client Certificate
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_ap_set_eap_client_cert_file(
     wifi_manager_ap_h ap,
     ffi.Pointer<ffi.Char> file,
@@ -4028,21 +5195,31 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_ap_set_eap_client_cert_filePtr
           .asFunction<int Function(wifi_manager_ap_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the private key file of EAP.
-  /// @details This function retrieves the file path of the private key used for EAP authentication.
-  /// It is only valid if the EAP type is set to #WIFI_MANAGER_EAP_TYPE_TLS.
-  /// @since_tizen 3.0
-  /// @remarks This function is valid only if the EAP type is #WIFI_MANAGER_EAP_TYPE_TLS.
-  /// You must release @a file using free().
-  /// @param[in] ap                The access point handle
-  /// @param[out] file             The file path of private key
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OUT_OF_MEMORY        Out of memory
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION    Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// Gets the private key file of EAP.
+  ///
+  /// This function retrieves the file path of the private key used for EAP authentication. It is only valid if the EAP type is set to `WIFI_MANAGER_EAP_TYPE_TLS`.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - This function is valid only if the EAP type is `WIFI_MANAGER_EAP_TYPE_TLS`.
+  /// - You must release `file` using free().
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `file` (out): The file path of private key
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_ap_get_eap_private_key_file(
     wifi_manager_ap_h ap,
     ffi.Pointer<ffi.Pointer<ffi.Char>> file,
@@ -4063,21 +5240,30 @@ class Tizen100CapiNetworkWifiManager {
           int Function(
               wifi_manager_ap_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets the private key information of EAP.
-  /// @details This function sets the private key information for EAP authentication.
-  /// It is only valid if the EAP type is set to #WIFI_MANAGER_EAP_TYPE_TLS.
-  /// The private key information includes the file path of the private key and its corresponding password.
-  /// @since_tizen 3.0
-  /// @remarks This function is valid only if the EAP type is #WIFI_MANAGER_EAP_TYPE_TLS.
-  /// @param[in] ap                The access point handle
-  /// @param[in] file              The file path of private key
-  /// @param[in] password          The password
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION    Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// Sets the private key information of EAP.
+  ///
+  /// This function sets the private key information for EAP authentication. It is only valid if the EAP type is set to `WIFI_MANAGER_EAP_TYPE_TLS`. The private key information includes the file path of the private key and its corresponding password.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - This function is valid only if the EAP type is `WIFI_MANAGER_EAP_TYPE_TLS`.
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `file` (in): The file path of private key
+  /// - `password` (in): The password
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_ap_set_eap_private_key_info(
     wifi_manager_ap_h ap,
     ffi.Pointer<ffi.Char> file,
@@ -4100,19 +5286,27 @@ class Tizen100CapiNetworkWifiManager {
           int Function(wifi_manager_ap_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the EAP type of Wi-Fi.
-  /// @details This function retrieves the EAP type set for the given Wi-Fi access point.
-  /// The EAP type specifies the EAP method that should be used during the EAP authentication process.
-  /// @since_tizen 3.0
-  /// @param[in] ap                The access point handle
-  /// @param[out] type             The type of EAP
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION    Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// Gets the EAP type of Wi-Fi.
+  ///
+  /// This function retrieves the EAP type set for the given Wi-Fi access point. The EAP type specifies the EAP method that should be used during the EAP authentication process.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `type` (out): The type of EAP
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_ap_get_eap_type(
     wifi_manager_ap_h ap,
     ffi.Pointer<ffi.Int32> type,
@@ -4130,18 +5324,26 @@ class Tizen100CapiNetworkWifiManager {
   late final _wifi_manager_ap_get_eap_type = _wifi_manager_ap_get_eap_typePtr
       .asFunction<int Function(wifi_manager_ap_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Sets the EAP type of Wi-Fi.
-  /// @details This function sets the EAP type for the given Wi-Fi access point.
-  /// The EAP type specifies the EAP method that should be used during the EAP authentication process.
-  /// @since_tizen 3.0
-  /// @param[in] ap                The access point handle
-  /// @param[in] type              The type of EAP
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION    Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// Sets the EAP type of Wi-Fi.
+  ///
+  /// This function sets the EAP type for the given Wi-Fi access point. The EAP type specifies the EAP method that should be used during the EAP authentication process.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `type` (in): The type of EAP
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_ap_set_eap_type(
     wifi_manager_ap_h ap,
     int type,
@@ -4158,19 +5360,27 @@ class Tizen100CapiNetworkWifiManager {
   late final _wifi_manager_ap_set_eap_type = _wifi_manager_ap_set_eap_typePtr
       .asFunction<int Function(wifi_manager_ap_h, int)>();
 
-  /// @brief Gets the type of EAP phase2 authentication of Wi-Fi.
-  /// @details This function retrieves the EAP Phase 2 authentication type set for the given Wi-Fi access point.
-  /// The EAP Phase 2 authentication type specifies how the client should authenticate itself during the second phase of the EAP authentication process.
-  /// @since_tizen 3.0
-  /// @param[in] ap                The access point handle
-  /// @param[out] type             The type of EAP phase2 authentication
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION    Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// Gets the type of EAP phase2 authentication of Wi-Fi.
+  ///
+  /// This function retrieves the EAP Phase 2 authentication type set for the given Wi-Fi access point. The EAP Phase 2 authentication type specifies how the client should authenticate itself during the second phase of the EAP authentication process.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `type` (out): The type of EAP phase2 authentication
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_ap_get_eap_auth_type(
     wifi_manager_ap_h ap,
     ffi.Pointer<ffi.Int32> type,
@@ -4189,18 +5399,26 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_ap_get_eap_auth_typePtr.asFunction<
           int Function(wifi_manager_ap_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Sets the type of EAP phase2 authentication of Wi-Fi.
-  /// @details This function sets the EAP Phase 2 authentication type for the given Wi-Fi access point.
-  /// The EAP Phase 2 authentication type specifies how the client should authenticate itself during the second phase of the EAP authentication process.
-  /// @since_tizen 3.0
-  /// @param[in] ap                The access point handle
-  /// @param[in] type              The type of EAP phase2 authentication
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION    Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// Sets the type of EAP phase2 authentication of Wi-Fi.
+  ///
+  /// This function sets the EAP Phase 2 authentication type for the given Wi-Fi access point. The EAP Phase 2 authentication type specifies how the client should authenticate itself during the second phase of the EAP authentication process.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `ap` (in): The access point handle
+  /// - `type` (in): The type of EAP phase2 authentication
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_ap_set_eap_auth_type(
     wifi_manager_ap_h ap,
     int type,
@@ -4218,27 +5436,39 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_ap_set_eap_auth_typePtr
           .asFunction<int Function(wifi_manager_ap_h, int)>();
 
-  /// @brief Gets access point configuration handle.
-  /// @details This function creates a new access point configuration handle with the provided parameters.
-  /// The handle can be used to save or update the access point configuration.
-  /// @since_tizen 3.0
-  /// @remarks You must release @a config using wifi_manager_config_destroy().
+  /// Gets access point configuration handle.
   ///
-  /// @param[in] wifi              The Wi-Fi handle
-  /// @param[in] name              The access point name
-  /// @param[in] passphrase        The access point passphrase
-  /// @param[in] security_type     The access point security type
-  /// @param[out] config           The access point configuration handle
+  /// This function creates a new access point configuration handle with the provided parameters. The handle can be used to save or update the access point configuration.
   ///
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION    Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OUT_OF_MEMORY        Out of memory
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
-  /// @pre This function needs a wifi_manager_initialize() call before use
-  /// @see wifi_manager_config_destroy()
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - You must release `config` using wifi_manager_config_destroy().
+  ///
+  /// **Parameters:**
+  /// - `wifi` (in): The Wi-Fi handle
+  /// - `name` (in): The access point name
+  /// - `passphrase` (in): The access point passphrase
+  /// - `security_type` (in): The access point security type
+  /// - `config` (out): The access point configuration handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - This function needs a wifi_manager_initialize() call before use
+  ///
+  /// **See also:**
+  /// - `wifi_manager_config_destroy()`
   int wifi_manager_config_create(
     wifi_manager_h wifi,
     ffi.Pointer<ffi.Char> name,
@@ -4273,23 +5503,33 @@ class Tizen100CapiNetworkWifiManager {
               int,
               ffi.Pointer<wifi_manager_config_h>)>();
 
-  /// @brief Clones the access point configuration handle.
-  /// @details This function creates a copy of the given access point configuration handle.
-  /// The new handle has the same properties as the original handle.
-  /// @since_tizen 3.0
-  /// @remarks You must release @a cloned_config using wifi_manager_config_destroy().
+  /// Clones the access point configuration handle.
   ///
-  /// @param[in] origin            The origin access point configuration handle
-  /// @param[out] cloned_config    The cloned access point configuration handle
+  /// This function creates a copy of the given access point configuration handle. The new handle has the same properties as the original handle.
   ///
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION    Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OUT_OF_MEMORY        Out of memory
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
-  /// @see wifi_manager_config_destroy()
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - You must release `cloned_config` using wifi_manager_config_destroy().
+  ///
+  /// **Parameters:**
+  /// - `origin` (in): The origin access point configuration handle
+  /// - `cloned_config` (out): The cloned access point configuration handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `wifi_manager_config_destroy()`
   int wifi_manager_config_clone(
     wifi_manager_config_h origin,
     ffi.Pointer<wifi_manager_config_h> cloned_config,
@@ -4310,21 +5550,29 @@ class Tizen100CapiNetworkWifiManager {
           int Function(
               wifi_manager_config_h, ffi.Pointer<wifi_manager_config_h>)>();
 
-  /// @brief Destroys the access point configuration handle.
-  /// @details This function destroys the access point configuration handle and releases all its associated resources.
-  /// After calling this function, the handle is no longer valid.
-  /// @since_tizen 3.0
+  /// Destroys the access point configuration handle.
   ///
-  /// @param[in] config            The access point configuration handle
+  /// This function destroys the access point configuration handle and releases all its associated resources. After calling this function, the handle is no longer valid.
   ///
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION    Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
-  /// @see wifi_manager_config_create()
-  /// @see wifi_manager_config_clone()
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `config` (in): The access point configuration handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `wifi_manager_config_create()`
+  /// - `wifi_manager_config_clone()`
   int wifi_manager_config_destroy(
     wifi_manager_config_h config,
   ) {
@@ -4339,24 +5587,36 @@ class Tizen100CapiNetworkWifiManager {
   late final _wifi_manager_config_destroy = _wifi_manager_config_destroyPtr
       .asFunction<int Function(wifi_manager_config_h)>();
 
-  /// @brief Saves Wi-Fi configuration of access point.
-  /// @details When a configuration is changed, these changes will be not applied to the Connection Manager immediately.\n
-  /// When you call this function, your changes affect the Connection Manager and the existing configuration is updated.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.profile
+  /// Saves Wi-Fi configuration of access point.
   ///
-  /// @param[in] wifi              The Wi-Fi handle
-  /// @param[in] config            The access point configuration handle
+  /// When a configuration is changed, these changes will be not applied to the Connection Manager immediately. When you call this function, your changes affect the Connection Manager and the existing configuration is updated.
   ///
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION    Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_PERMISSION_DENIED    Permission denied
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
-  /// @see wifi_manager_config_create()
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.profile>
+  ///
+  /// **Parameters:**
+  /// - `wifi` (in): The Wi-Fi handle
+  /// - `config` (in): The access point configuration handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `wifi_manager_config_create()`
   int wifi_manager_config_save(
     wifi_manager_h wifi,
     wifi_manager_config_h config,
@@ -4374,25 +5634,37 @@ class Tizen100CapiNetworkWifiManager {
   late final _wifi_manager_config_save = _wifi_manager_config_savePtr
       .asFunction<int Function(wifi_manager_h, wifi_manager_config_h)>();
 
-  /// @brief Removes Wi-Fi configuration of access point.
-  /// @details This function deletes the specified access point configuration from the system.
-  /// After this function is called, the access point configuration will no longer be available.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.profile
+  /// Removes Wi-Fi configuration of access point.
   ///
-  /// @param[in] wifi              The Wi-Fi handle
-  /// @param[in] config            The access point configuration handle
+  /// This function deletes the specified access point configuration from the system. After this function is called, the access point configuration will no longer be available.
   ///
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION    Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_PERMISSION_DENIED    Permission denied
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
-  /// @see wifi_manager_config_create()
-  /// @see wifi_manager_config_foreach_configuration()
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.profile>
+  ///
+  /// **Parameters:**
+  /// - `wifi` (in): The Wi-Fi handle
+  /// - `config` (in): The access point configuration handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `wifi_manager_config_create()`
+  /// - `wifi_manager_config_foreach_configuration()`
   int wifi_manager_config_remove(
     wifi_manager_h wifi,
     wifi_manager_config_h config,
@@ -4410,27 +5682,40 @@ class Tizen100CapiNetworkWifiManager {
   late final _wifi_manager_config_remove = _wifi_manager_config_removePtr
       .asFunction<int Function(wifi_manager_h, wifi_manager_config_h)>();
 
-  /// @brief Gets configurations of an access point.
-  /// @details This function retrieves all access point configurations stored in the system.
-  /// Each access point configuration is represented by a handle,
-  /// which can be used to get detailed information about the access point.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.profile
+  /// Gets configurations of an access point.
   ///
-  /// @param[in] wifi              The Wi-Fi handle
-  /// @param[in] callback          The callback to be called
-  /// @param[in] user_data         The user data passed to the callback function
+  /// This function retrieves all access point configurations stored in the system. Each access point configuration is represented by a handle, which can be used to get detailed information about the access point.
   ///
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION    Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_PERMISSION_DENIED    Permission denied
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
-  /// @pre This function needs wifi_manager_initialize() before use.
-  /// @post This function invokes wifi_manager_config_list_cb().
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.profile>
+  ///
+  /// **Parameters:**
+  /// - `wifi` (in): The Wi-Fi handle
+  /// - `callback` (in): The callback to be called
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - This function needs wifi_manager_initialize() before use.
+  ///
+  /// **Postconditions:**
+  /// - This function invokes wifi_manager_config_list_cb().
   int wifi_manager_config_foreach_configuration(
     wifi_manager_h wifi,
     wifi_manager_config_list_cb callback,
@@ -4453,22 +5738,30 @@ class Tizen100CapiNetworkWifiManager {
           int Function(wifi_manager_h, wifi_manager_config_list_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Gets the name of access point from configuration.
-  /// @details This function retrieves the name set for the given access point configuration.
-  /// The name is a user-friendly identifier for the access point.
-  /// @since_tizen 3.0
-  /// @remarks You must release @a name using free().
+  /// Gets the name of access point from configuration.
   ///
-  /// @param[in] config            The access point configuration handle
-  /// @param[out] name             The name of access point
+  /// This function retrieves the name set for the given access point configuration. The name is a user-friendly identifier for the access point.
   ///
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION    Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OUT_OF_MEMORY        Out of memory
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - You must release `name` using free().
+  ///
+  /// **Parameters:**
+  /// - `config` (in): The access point configuration handle
+  /// - `name` (out): The name of access point
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_config_get_name(
     wifi_manager_config_h config,
     ffi.Pointer<ffi.Pointer<ffi.Char>> name,
@@ -4489,20 +5782,26 @@ class Tizen100CapiNetworkWifiManager {
           int Function(
               wifi_manager_config_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the security type of access point from configuration.
-  /// @details This function retrieves the security type set for the given access point configuration.
-  /// The security type determines the type of security mechanism used to protect the wireless network.
-  /// @since_tizen 3.0
+  /// Gets the security type of access point from configuration.
   ///
-  /// @param[in] config            The access point configuration handle
-  /// @param[out] security_type    The security type of access point
+  /// This function retrieves the security type set for the given access point configuration. The security type determines the type of security mechanism used to protect the wireless network.
   ///
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION    Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `config` (in): The access point configuration handle
+  /// - `security_type` (out): The security type of access point
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_config_get_security_type(
     wifi_manager_config_h config,
     ffi.Pointer<ffi.Int32> security_type,
@@ -4521,24 +5820,32 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_config_get_security_typePtr.asFunction<
           int Function(wifi_manager_config_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Sets access point proxy address configuration.
-  /// @details This function sets the proxy address for the given access point configuration.
-  /// The proxy address is used to route traffic through a proxy server.
-  /// @since_tizen 3.0
+  /// Sets access point proxy address configuration.
   ///
-  /// @param[in] config            The access point configuration handle
-  /// @param[in] address_family    The address family
-  /// @param[in] proxy_address     The proxy address
+  /// This function sets the proxy address for the given access point configuration. The proxy address is used to route traffic through a proxy server.
   ///
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION    Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_PERMISSION_DENIED    Permission denied
-  /// @retval #WIFI_MANAGER_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED Not supported address family
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
-  /// @see wifi_manager_config_save()
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `config` (in): The access point configuration handle
+  /// - `address_family` (in): The address family
+  /// - `proxy_address` (in): The proxy address
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_MANAGER_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED`: Not supported address family
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `wifi_manager_config_save()`
   int wifi_manager_config_set_proxy_address(
     wifi_manager_config_h config,
     int address_family,
@@ -4559,23 +5866,31 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_config_set_proxy_addressPtr.asFunction<
           int Function(wifi_manager_config_h, int, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the proxy address of access point from configuration.
-  /// @details This function retrieves the proxy address set for the given access point configuration.
-  /// The proxy address is used to route traffic through a proxy server.
-  /// @since_tizen 3.0
-  /// @remarks You must release @a proxy_address using free().
+  /// Gets the proxy address of access point from configuration.
   ///
-  /// @param[in] config            The access point configuration handle
-  /// @param[out] address_family   The address family
-  /// @param[out] proxy_address    The proxy address
+  /// This function retrieves the proxy address set for the given access point configuration. The proxy address is used to route traffic through a proxy server.
   ///
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION    Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OUT_OF_MEMORY        Out of memory
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - You must release `proxy_address` using free().
+  ///
+  /// **Parameters:**
+  /// - `config` (in): The access point configuration handle
+  /// - `address_family` (out): The address family
+  /// - `proxy_address` (out): The proxy address
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_config_get_proxy_address(
     wifi_manager_config_h config,
     ffi.Pointer<ffi.Int32> address_family,
@@ -4598,22 +5913,30 @@ class Tizen100CapiNetworkWifiManager {
           int Function(wifi_manager_config_h, ffi.Pointer<ffi.Int32>,
               ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets the hidden property of access point from the configuration.
-  /// @details This function sets the hidden property of the access point in the given access point configuration.
-  /// The hidden property indicates whether the access point is hidden or not.
-  /// @since_tizen 3.0
+  /// Sets the hidden property of access point from the configuration.
   ///
-  /// @param[in] config            The access point configuration handle
-  /// @param[in] is_hidden         The new value of the hidden property
+  /// This function sets the hidden property of the access point in the given access point configuration. The hidden property indicates whether the access point is hidden or not.
   ///
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION    Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_PERMISSION_DENIED    Permission denied
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
-  /// @see wifi_manager_config_save()
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `config` (in): The access point configuration handle
+  /// - `is_hidden` (in): The new value of the hidden property
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `wifi_manager_config_save()`
   int wifi_manager_config_set_hidden_ap_property(
     wifi_manager_config_h config,
     bool is_hidden,
@@ -4632,20 +5955,26 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_config_set_hidden_ap_propertyPtr
           .asFunction<int Function(wifi_manager_config_h, bool)>();
 
-  /// @brief Gets the hidden property of access point from the configuration.
-  /// @details This function retrieves the hidden property of the access point set in the given access point configuration.
-  /// The hidden property indicates whether the access point is hidden or not.
-  /// @since_tizen 3.0
+  /// Gets the hidden property of access point from the configuration.
   ///
-  /// @param[in] config            The access point configuration handle
-  /// @param[out] is_hidden        The hidden property of access point
+  /// This function retrieves the hidden property of the access point set in the given access point configuration. The hidden property indicates whether the access point is hidden or not.
   ///
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION    Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `config` (in): The access point configuration handle
+  /// - `is_hidden` (out): The hidden property of access point
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_config_get_hidden_ap_property(
     wifi_manager_config_h config,
     ffi.Pointer<ffi.Bool> is_hidden,
@@ -4664,21 +5993,27 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_config_get_hidden_ap_propertyPtr.asFunction<
           int Function(wifi_manager_config_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Gets access point IP config type from configuration.
-  /// @details This function retrieves the IP configuration type set for the given access point configuration.
-  /// The IP configuration type determines how the IP address and related information (e.g., subnet mask, gateway) are obtained.
-  /// @since_tizen 5.0
+  /// Gets access point IP config type from configuration.
   ///
-  /// @param[in] config		The access point configuration handle
-  /// @param[in] address_family	The address family
-  /// @param[out] type		The type of IP configuration
+  /// This function retrieves the IP configuration type set for the given access point configuration. The IP configuration type determines how the IP address and related information (e.g., subnet mask, gateway) are obtained.
   ///
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE			Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED		Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER	Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED	Address family not supported
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED		Not supported
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `config` (in): The access point configuration handle
+  /// - `address_family` (in): The address family
+  /// - `type` (out): The type of IP configuration
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED`: Address family not supported
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_config_get_ip_config_type(
     wifi_manager_config_h config,
     int address_family,
@@ -4700,22 +6035,30 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_config_get_ip_config_typePtr.asFunction<
           int Function(wifi_manager_config_h, int, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Sets access point IP config type to configuration.
-  /// @details This function sets the IP configuration type for the given access point configuration.
-  /// The IP configuration type determines how the IP address and related information (e.g., subnet mask, gateway) are obtained.
-  /// @since_tizen 5.0
+  /// Sets access point IP config type to configuration.
   ///
-  /// @param[in] config            The access point configuration handle
-  /// @param[in] address_family    The address family
-  /// @param[in] type		The type of IP configuration
+  /// This function sets the IP configuration type for the given access point configuration. The IP configuration type determines how the IP address and related information (e.g., subnet mask, gateway) are obtained.
   ///
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED Not supported address family
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
-  /// @see wifi_manager_config_save()
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `config` (in): The access point configuration handle
+  /// - `address_family` (in): The address family
+  /// - `type` (in): The type of IP configuration
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED`: Not supported address family
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `wifi_manager_config_save()`
   int wifi_manager_config_set_ip_config_type(
     wifi_manager_config_h config,
     int address_family,
@@ -4736,23 +6079,31 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_config_set_ip_config_typePtr
           .asFunction<int Function(wifi_manager_config_h, int, int)>();
 
-  /// @brief Gets access point IP address from configuration.
-  /// @details This function retrieves the IP address set for the given access point configuration.
-  /// The IP address is used as the local address for the device when connected to the access point.
-  /// @since_tizen 5.0
-  /// @remarks You must release @a ip_address using free().
+  /// Gets access point IP address from configuration.
   ///
-  /// @param[in] config		The access point configuration handle
-  /// @param[in] address_family	The address family
-  /// @param[out] ip_address	The IP address; this value is for default address
+  /// This function retrieves the IP address set for the given access point configuration. The IP address is used as the local address for the device when connected to the access point.
   ///
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OUT_OF_MEMORY        Out of memory
-  /// @retval #WIFI_MANAGER_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED  Address family not supported
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Remarks:**
+  /// - You must release `ip_address` using free().
+  ///
+  /// **Parameters:**
+  /// - `config` (in): The access point configuration handle
+  /// - `address_family` (in): The address family
+  /// - `ip_address` (out): The IP address; this value is for default address
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `WIFI_MANAGER_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED`: Address family not supported
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_config_get_ip_address(
     wifi_manager_config_h config,
     int address_family,
@@ -4775,23 +6126,30 @@ class Tizen100CapiNetworkWifiManager {
           int Function(wifi_manager_config_h, int,
               ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets access point IP address to configuration.
-  /// @details This function sets the IP address for the given access point configuration.
-  /// The IP address is used as the local address for the device when connected to the access point.
-  /// @since_tizen 5.0
+  /// Sets access point IP address to configuration.
   ///
-  /// @param[in] config			The access point configuration handle
-  /// @param[in] address_family	The address family
-  /// @param[in] ip_address		The IP address; if you set this value to NULL, then
-  /// the existing value will be deleted.
+  /// This function sets the IP address for the given access point configuration. The IP address is used as the local address for the device when connected to the access point.
   ///
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED Not supported address family
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
-  /// @see wifi_manager_config_save()
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `config` (in): The access point configuration handle
+  /// - `address_family` (in): The address family
+  /// - `ip_address` (in): The IP address; if you set this value to NULL, then the existing value will be deleted.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED`: Not supported address family
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `wifi_manager_config_save()`
   int wifi_manager_config_set_ip_address(
     wifi_manager_config_h config,
     int address_family,
@@ -4812,23 +6170,31 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_config_set_ip_addressPtr.asFunction<
           int Function(wifi_manager_config_h, int, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets access point subnet mask from configuration.
-  /// @details This function retrieves the subnet mask set for the given access point configuration.
-  /// The subnet mask is used to specify the network portion of an IP address.
-  /// @since_tizen 5.0
-  /// @remarks You must release @a subnet_mask using free().
+  /// Gets access point subnet mask from configuration.
   ///
-  /// @param[in] config            The access point configuration handle
-  /// @param[in] address_family	The address family
-  /// @param[out] subnet_mask	The subnet mask
+  /// This function retrieves the subnet mask set for the given access point configuration. The subnet mask is used to specify the network portion of an IP address.
   ///
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OUT_OF_MEMORY        Out of memory
-  /// @retval #WIFI_MANAGER_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED  Address family not supported
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Remarks:**
+  /// - You must release `subnet_mask` using free().
+  ///
+  /// **Parameters:**
+  /// - `config` (in): The access point configuration handle
+  /// - `address_family` (in): The address family
+  /// - `subnet_mask` (out): The subnet mask
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `WIFI_MANAGER_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED`: Address family not supported
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_config_get_subnet_mask(
     wifi_manager_config_h config,
     int address_family,
@@ -4851,23 +6217,30 @@ class Tizen100CapiNetworkWifiManager {
           int Function(wifi_manager_config_h, int,
               ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets access point subnet mask to configuration.
-  /// @details This function sets the subnet mask for the given access point configuration.
-  /// The subnet mask is used to specify the network portion of an IP address.
-  /// @since_tizen 5.0
+  /// Sets access point subnet mask to configuration.
   ///
-  /// @param[in] config            The access point configuration handle
-  /// @param[in] address_family    The address family
-  /// @param[in] subnet_mask	The subnet mask; if you set this value to NULL, then
-  /// the existing value will be deleted.
+  /// This function sets the subnet mask for the given access point configuration. The subnet mask is used to specify the network portion of an IP address.
   ///
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED Not supported address family
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
-  /// @see wifi_manager_config_save()
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `config` (in): The access point configuration handle
+  /// - `address_family` (in): The address family
+  /// - `subnet_mask` (in): The subnet mask; if you set this value to NULL, then the existing value will be deleted.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED`: Not supported address family
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `wifi_manager_config_save()`
   int wifi_manager_config_set_subnet_mask(
     wifi_manager_config_h config,
     int address_family,
@@ -4888,24 +6261,28 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_config_set_subnet_maskPtr.asFunction<
           int Function(wifi_manager_config_h, int, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the network prefix length from configuration.
-  /// @details This function retrieves the network prefix length set for the given access point configuration.
-  /// The network prefix length specifies the number of leading bits in the IP address that are used to determine the network portion of the address.
-  /// @since_tizen 5.0
+  /// Gets the network prefix length from configuration.
   ///
-  /// @param[in] config          The access point configuration handle
-  /// @param[in] address_family  The address family
-  /// @param[out] prefix_len     The network prefix length. \n
-  /// In case of IPv4, it means netmask length \n
-  /// (also called a prefix, e.g. 8, 16, 24, 32)
+  /// This function retrieves the network prefix length set for the given access point configuration. The network prefix length specifies the number of leading bits in the IP address that are used to determine the network portion of the address.
   ///
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OUT_OF_MEMORY        Out of memory
-  /// @retval #WIFI_MANAGER_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED  Address family not supported
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `config` (in): The access point configuration handle
+  /// - `address_family` (in): The address family
+  /// - `prefix_len` (out): The network prefix length. In case of IPv4, it means netmask length (also called a prefix, e.g. 8, 16, 24, 32)
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `WIFI_MANAGER_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED`: Address family not supported
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_config_get_prefix_length(
     wifi_manager_config_h config,
     int address_family,
@@ -4926,24 +6303,30 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_config_get_prefix_lengthPtr.asFunction<
           int Function(wifi_manager_config_h, int, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Sets the network prefix length to configuration.
-  /// @details This function sets the network prefix length for the given access point configuration.
-  /// The network prefix length specifies the number of leading bits in the IP address that are used to determine the network portion of the address.
-  /// @since_tizen 5.0
+  /// Sets the network prefix length to configuration.
   ///
-  /// @param[in] config          The access point configuration handle
-  /// @param[in] address_family  The address family
-  /// @param[in] prefix_len      The network prefix length. \n
-  /// In case of IPv4, it means netmask length \n
-  /// (also called a prefix, e.g. 8, 16, 24, 32)
+  /// This function sets the network prefix length for the given access point configuration. The network prefix length specifies the number of leading bits in the IP address that are used to determine the network portion of the address.
   ///
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED Not supported address family
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
-  /// @see wifi_manager_config_save()
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `config` (in): The access point configuration handle
+  /// - `address_family` (in): The address family
+  /// - `prefix_len` (in): The network prefix length. In case of IPv4, it means netmask length (also called a prefix, e.g. 8, 16, 24, 32)
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED`: Not supported address family
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `wifi_manager_config_save()`
   int wifi_manager_config_set_prefix_length(
     wifi_manager_config_h config,
     int address_family,
@@ -4964,23 +6347,31 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_config_set_prefix_lengthPtr
           .asFunction<int Function(wifi_manager_config_h, int, int)>();
 
-  /// @brief Gets access point gateway address from configuration.
-  /// @details This function retrieves the gateway address set for the given access point configuration.
-  /// The gateway address is used as the default route for the network traffic.
-  /// @since_tizen 5.0
-  /// @remarks You must release @a gateway_address using free().
+  /// Gets access point gateway address from configuration.
   ///
-  /// @param[in] config            The access point configuration handle
-  /// @param[in] address_family	The address family
-  /// @param[out] gateway_address	The gateway address; this value is for default address
+  /// This function retrieves the gateway address set for the given access point configuration. The gateway address is used as the default route for the network traffic.
   ///
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OUT_OF_MEMORY        Out of memory
-  /// @retval #WIFI_MANAGER_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED  Address family not supported
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Remarks:**
+  /// - You must release `gateway_address` using free().
+  ///
+  /// **Parameters:**
+  /// - `config` (in): The access point configuration handle
+  /// - `address_family` (in): The address family
+  /// - `gateway_address` (out): The gateway address; this value is for default address
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `WIFI_MANAGER_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED`: Address family not supported
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_config_get_gateway_address(
     wifi_manager_config_h config,
     int address_family,
@@ -5003,23 +6394,30 @@ class Tizen100CapiNetworkWifiManager {
           int Function(wifi_manager_config_h, int,
               ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets access point gateway address to configuration.
-  /// @details This function sets the gateway address for the given access point configuration.
-  /// The gateway address is used as the default route for the network traffic.
-  /// @since_tizen 5.0
+  /// Sets access point gateway address to configuration.
   ///
-  /// @param[in] config            The access point configuration handle
-  /// @param[in] address_family    The address family
-  /// @param[in] gateway_address	The gateway address; if you set this value to NULL, then
-  /// the existing value will be deleted.
+  /// This function sets the gateway address for the given access point configuration. The gateway address is used as the default route for the network traffic.
   ///
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED Not supported address family
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
-  /// @see wifi_manager_config_save()
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `config` (in): The access point configuration handle
+  /// - `address_family` (in): The address family
+  /// - `gateway_address` (in): The gateway address; if you set this value to NULL, then the existing value will be deleted.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED`: Not supported address family
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `wifi_manager_config_save()`
   int wifi_manager_config_set_gateway_address(
     wifi_manager_config_h config,
     int address_family,
@@ -5041,21 +6439,27 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_config_set_gateway_addressPtr.asFunction<
           int Function(wifi_manager_config_h, int, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets access point dns config type from configuration.
-  /// @details This function retrieves the DNS configuration type set for the given access point configuration.
-  /// The DNS configuration type specifies how the DNS addresses are configured for the access point.
-  /// @since_tizen 5.0
+  /// Gets access point dns config type from configuration.
   ///
-  /// @param[in] config		The access point configuration handle
-  /// @param[in] address_family	The address family
-  /// @param[out] type		The type of dns configuration
+  /// This function retrieves the DNS configuration type set for the given access point configuration. The DNS configuration type specifies how the DNS addresses are configured for the access point.
   ///
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE			Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED		Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER	Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED	Address family not supported
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED		Not supported
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `config` (in): The access point configuration handle
+  /// - `address_family` (in): The address family
+  /// - `type` (out): The type of dns configuration
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED`: Address family not supported
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_config_get_dns_config_type(
     wifi_manager_config_h config,
     int address_family,
@@ -5077,22 +6481,30 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_config_get_dns_config_typePtr.asFunction<
           int Function(wifi_manager_config_h, int, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Sets access point dns config type to configuration.
-  /// @details This function sets the DNS configuration type for the given access point configuration.
-  /// The DNS configuration type specifies how the DNS addresses are configured for the access point.
-  /// @since_tizen 5.0
+  /// Sets access point dns config type to configuration.
   ///
-  /// @param[in] config            The access point configuration handle
-  /// @param[in] address_family    The address family
-  /// @param[in] type		The type of DNS configuration
+  /// This function sets the DNS configuration type for the given access point configuration. The DNS configuration type specifies how the DNS addresses are configured for the access point.
   ///
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED Not supported address family
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
-  /// @see wifi_manager_config_save()
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `config` (in): The access point configuration handle
+  /// - `address_family` (in): The address family
+  /// - `type` (in): The type of DNS configuration
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED`: Not supported address family
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `wifi_manager_config_save()`
   int wifi_manager_config_set_dns_config_type(
     wifi_manager_config_h config,
     int address_family,
@@ -5113,24 +6525,32 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_config_set_dns_config_typePtr
           .asFunction<int Function(wifi_manager_config_h, int, int)>();
 
-  /// @brief Gets access point dns address from configuration.
-  /// @details This function retrieves the DNS address set for the given access point configuration.
-  /// The DNS address is used to resolve domain names to IP addresses during the network communication process.
-  /// @since_tizen 5.0
-  /// @remarks The allowance of DNS address is @c 2.You must release @a dns_address using free().
+  /// Gets access point dns address from configuration.
   ///
-  /// @param[in] config            The access point configuration handle
-  /// @param[in] order             The order of DNS address; it starts from 1, which means first DNS address
-  /// @param[in] address_family    The address family
-  /// @param[out] dns_address      The DNS address
+  /// This function retrieves the DNS address set for the given access point configuration. The DNS address is used to resolve domain names to IP addresses during the network communication process.
   ///
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OUT_OF_MEMORY        Out of memory
-  /// @retval #WIFI_MANAGER_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED  Address family not supported
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Remarks:**
+  /// - The allowance of DNS address is `2.You` must release `dns_address` using free().
+  ///
+  /// **Parameters:**
+  /// - `config` (in): The access point configuration handle
+  /// - `order` (in): The order of DNS address; it starts from 1, which means first DNS address
+  /// - `address_family` (in): The address family
+  /// - `dns_address` (out): The DNS address
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `WIFI_MANAGER_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED`: Address family not supported
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_config_get_dns_address(
     wifi_manager_config_h config,
     int order,
@@ -5155,25 +6575,31 @@ class Tizen100CapiNetworkWifiManager {
           int Function(wifi_manager_config_h, int, int,
               ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets access point dns address to configuration.
-  /// @details This function sets the DNS address for the given access point configuration.
-  /// The DNS address is used to resolve domain names to IP addresses during the network communication process.
-  /// @since_tizen 5.0
+  /// Sets access point dns address to configuration.
   ///
-  /// @param[in] config            The access point configuration handle
-  /// @param[in] order             The order of DNS address \n
-  /// It starts from 1, which means first DNS address.
-  /// @param[in] address_family    The address family
-  /// @param[in] dns_address	The dns address; if you set this value to NULL, then
-  /// the existing value will be deleted.
+  /// This function sets the DNS address for the given access point configuration. The DNS address is used to resolve domain names to IP addresses during the network communication process.
   ///
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED Not supported address family
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
-  /// @see wifi_manager_config_save()
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `config` (in): The access point configuration handle
+  /// - `order` (in): The order of DNS address It starts from 1, which means first DNS address.
+  /// - `address_family` (in): The address family
+  /// - `dns_address` (in): The dns address; if you set this value to NULL, then the existing value will be deleted.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_ADDRESS_FAMILY_NOT_SUPPORTED`: Not supported address family
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `wifi_manager_config_save()`
   int wifi_manager_config_set_dns_address(
     wifi_manager_config_h config,
     int order,
@@ -5197,19 +6623,27 @@ class Tizen100CapiNetworkWifiManager {
           int Function(
               wifi_manager_config_h, int, int, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets access point anonymous identity from configuration.
-  /// @details This function retrieves the anonymous identity set for the given access point configuration.
-  /// The anonymous identity is used during the authentication process to identify the client anonymously when connecting to the access point.
-  /// @since_tizen 3.0
-  /// @remarks You must release @a anonymous_identity using free().
+  /// Gets access point anonymous identity from configuration.
   ///
-  /// @param[in] config                The access point configuration handle
-  /// @param[out] anonymous_identity   The anonymous identity of access point
+  /// This function retrieves the anonymous identity set for the given access point configuration. The anonymous identity is used during the authentication process to identify the client anonymously when connecting to the access point.
   ///
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - You must release `anonymous_identity` using free().
+  ///
+  /// **Parameters:**
+  /// - `config` (in): The access point configuration handle
+  /// - `anonymous_identity` (out): The anonymous identity of access point
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
   int wifi_manager_config_get_eap_anonymous_identity(
     wifi_manager_config_h config,
     ffi.Pointer<ffi.Pointer<ffi.Char>> anonymous_identity,
@@ -5230,20 +6664,28 @@ class Tizen100CapiNetworkWifiManager {
           int Function(
               wifi_manager_config_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets access point anonymous identity to configuration.
-  /// @details This function sets the anonymous identity for the given access point configuration.
-  /// The anonymous identity is used during the authentication process to identify the client anonymously when connecting to the access point.
-  /// @since_tizen 3.0
+  /// Sets access point anonymous identity to configuration.
   ///
-  /// @param[in] config                The access point configuration handle
-  /// @param[in] anonymous_identity    The anonymous identity
+  /// This function sets the anonymous identity for the given access point configuration. The anonymous identity is used during the authentication process to identify the client anonymously when connecting to the access point.
   ///
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_PERMISSION_DENIED    Permission Denied
-  /// @see wifi_manager_config_save()
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `config` (in): The access point configuration handle
+  /// - `anonymous_identity` (in): The anonymous identity
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_PERMISSION_DENIED`: Permission Denied
+  ///
+  /// **See also:**
+  /// - `wifi_manager_config_save()`
   int wifi_manager_config_set_eap_anonymous_identity(
     wifi_manager_config_h config,
     ffi.Pointer<ffi.Char> anonymous_identity,
@@ -5262,23 +6704,31 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_config_set_eap_anonymous_identityPtr.asFunction<
           int Function(wifi_manager_config_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets access point cacert file from configuration.
-  /// @details This function retrieves the CA certificate file path set for the given access point configuration.
-  /// The CA certificate file contains the trusted root certificates used to verify the server's certificate during the authentication process.
-  /// @since_tizen 3.0
-  /// @remarks You must release @a ca_cert using free().
-  /// @remarks The mediastorage privilege %http://tizen.org/privilege/mediastorage is needed \n
-  /// if @a ca_cert is relevant to media storage.\n
-  /// The externalstorage privilege %http://tizen.org/privilege/externalstorage is needed \n
-  /// if @a ca_cert is relevant to external storage.
+  /// Gets access point cacert file from configuration.
   ///
-  /// @param[in] config           The access point configuration handle
-  /// @param[out] ca_cert         The certification authority(CA) certificates file of access point
+  /// This function retrieves the CA certificate file path set for the given access point configuration. The CA certificate file contains the trusted root certificates used to verify the server's certificate during the authentication process.
   ///
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - You must release `ca_cert` using free().
+  /// - The mediastorage privilege http://tizen.org/privilege/mediastorage is needed
+  /// - if `ca_cert` is relevant to media storage.
+  /// - The externalstorage privilege http://tizen.org/privilege/externalstorage is needed
+  /// - if `ca_cert` is relevant to external storage.
+  ///
+  /// **Parameters:**
+  /// - `config` (in): The access point configuration handle
+  /// - `ca_cert` (out): The certification authority(CA) certificates file of access point
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
   int wifi_manager_config_get_eap_ca_cert_file(
     wifi_manager_config_h config,
     ffi.Pointer<ffi.Pointer<ffi.Char>> ca_cert,
@@ -5299,24 +6749,34 @@ class Tizen100CapiNetworkWifiManager {
           int Function(
               wifi_manager_config_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets access point cacert file to configuration.
-  /// @details This function sets the CA certificate file required for EAP authentication.
-  /// The CA certificate file contains the trusted root certificates used to verify the server's certificate during the authentication process.
-  /// @since_tizen 3.0
-  /// @remarks The mediastorage privilege %http://tizen.org/privilege/mediastorage is needed \n
-  /// if @a ca_cert is relevant to media storage.\n
-  /// The externalstorage privilege %http://tizen.org/privilege/externalstorage is needed \n
-  /// if @a ca_cert is relevant to external storage.
+  /// Sets access point cacert file to configuration.
   ///
-  /// @param[in] config           The access point configuration handle
-  /// @param[in] ca_cert          The certification authority(CA) certificates file of access point
+  /// This function sets the CA certificate file required for EAP authentication. The CA certificate file contains the trusted root certificates used to verify the server's certificate during the authentication process.
   ///
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_PERMISSION_DENIED    Permission Denied
-  /// @see wifi_manager_config_save()
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The mediastorage privilege http://tizen.org/privilege/mediastorage is needed
+  /// - if `ca_cert` is relevant to media storage.
+  /// - The externalstorage privilege http://tizen.org/privilege/externalstorage is needed
+  /// - if `ca_cert` is relevant to external storage.
+  ///
+  /// **Parameters:**
+  /// - `config` (in): The access point configuration handle
+  /// - `ca_cert` (in): The certification authority(CA) certificates file of access point
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_PERMISSION_DENIED`: Permission Denied
+  ///
+  /// **See also:**
+  /// - `wifi_manager_config_save()`
   int wifi_manager_config_set_eap_ca_cert_file(
     wifi_manager_config_h config,
     ffi.Pointer<ffi.Char> ca_cert,
@@ -5335,19 +6795,27 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_config_set_eap_ca_cert_filePtr.asFunction<
           int Function(wifi_manager_config_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets access point client cert file from configuration.
-  /// @details This function retrieves the client certificate file path set for the given access point configuration.
-  /// The client certificate file is used for EAP authentication to establish a secure connection with the access point.
-  /// @since_tizen 3.0
-  /// @remarks You must release @a client_cert using free().
+  /// Gets access point client cert file from configuration.
   ///
-  /// @param[in] config           The access point configuration handle
-  /// @param[out] client_cert     The certification authority(CA) certificates file of access point
+  /// This function retrieves the client certificate file path set for the given access point configuration. The client certificate file is used for EAP authentication to establish a secure connection with the access point.
   ///
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - You must release `client_cert` using free().
+  ///
+  /// **Parameters:**
+  /// - `config` (in): The access point configuration handle
+  /// - `client_cert` (out): The certification authority(CA) certificates file of access point
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
   int wifi_manager_config_get_eap_client_cert_file(
     wifi_manager_config_h config,
     ffi.Pointer<ffi.Pointer<ffi.Char>> client_cert,
@@ -5368,21 +6836,29 @@ class Tizen100CapiNetworkWifiManager {
           int Function(
               wifi_manager_config_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets access point client cert file to configuration.
-  /// @details This function sets the client certificate and private key files required for EAP authentication.
-  /// These files are used to establish a secure connection with the access point.
-  /// @since_tizen 3.0
+  /// Sets access point client cert file to configuration.
   ///
-  /// @param[in] config           The access point configuration handle
-  /// @param[in] private_key      The private key file
-  /// @param[in] client_cert      The certification authority(CA) certificates file of access point
+  /// This function sets the client certificate and private key files required for EAP authentication. These files are used to establish a secure connection with the access point.
   ///
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_PERMISSION_DENIED    Permission Denied
-  /// @see wifi_manager_config_save()
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `config` (in): The access point configuration handle
+  /// - `private_key` (in): The private key file
+  /// - `client_cert` (in): The certification authority(CA) certificates file of access point
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_PERMISSION_DENIED`: Permission Denied
+  ///
+  /// **See also:**
+  /// - `wifi_manager_config_save()`
   int wifi_manager_config_set_eap_client_cert_file(
     wifi_manager_config_h config,
     ffi.Pointer<ffi.Char> private_key,
@@ -5405,22 +6881,30 @@ class Tizen100CapiNetworkWifiManager {
           int Function(wifi_manager_config_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the private key file of EAP.
-  /// @details This function retrieves the file path of the private key used for EAP-TLS authentication.
-  /// This function is only valid if the EAP type is set to #WIFI_MANAGER_EAP_TYPE_TLS.
-  /// @since_tizen 5.0
-  /// @remarks This function is valid only if the EAP type is #WIFI_MANAGER_EAP_TYPE_TLS.
-  /// You must release @a file using free().
+  /// Gets the private key file of EAP.
   ///
-  /// @param[in] config           The access point configuration handle
-  /// @param[out] file            The file path of private key
+  /// This function retrieves the file path of the private key used for EAP-TLS authentication. This function is only valid if the EAP type is set to `WIFI_MANAGER_EAP_TYPE_TLS`.
   ///
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OUT_OF_MEMORY        Out of memory
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Remarks:**
+  /// - This function is valid only if the EAP type is `WIFI_MANAGER_EAP_TYPE_TLS`.
+  /// - You must release `file` using free().
+  ///
+  /// **Parameters:**
+  /// - `config` (in): The access point configuration handle
+  /// - `file` (out): The file path of private key
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_config_get_eap_private_key_file(
     wifi_manager_config_h config,
     ffi.Pointer<ffi.Pointer<ffi.Char>> file,
@@ -5441,23 +6925,32 @@ class Tizen100CapiNetworkWifiManager {
           int Function(
               wifi_manager_config_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets the private key information of EAP.
-  /// @details This function sets the private key information required for EAP-TLS authentication.
-  /// It includes the file path of the private key and its corresponding password.
-  /// This function is only valid if the EAP type is set to #WIFI_MANAGER_EAP_TYPE_TLS.
-  /// @since_tizen 5.0
-  /// @remarks This function is valid only if the EAP type is #WIFI_MANAGER_EAP_TYPE_TLS.
+  /// Sets the private key information of EAP.
   ///
-  /// @param[in] config           The access point configuration handle
-  /// @param[in] file             The file path of private key
-  /// @param[in] password         The password
+  /// This function sets the private key information required for EAP-TLS authentication. It includes the file path of the private key and its corresponding password. This function is only valid if the EAP type is set to `WIFI_MANAGER_EAP_TYPE_TLS`.
   ///
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
-  /// @see wifi_manager_config_save()
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Remarks:**
+  /// - This function is valid only if the EAP type is `WIFI_MANAGER_EAP_TYPE_TLS`.
+  ///
+  /// **Parameters:**
+  /// - `config` (in): The access point configuration handle
+  /// - `file` (in): The file path of private key
+  /// - `password` (in): The password
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `wifi_manager_config_save()`
   int wifi_manager_config_set_eap_private_key_info(
     wifi_manager_config_h config,
     ffi.Pointer<ffi.Char> file,
@@ -5480,19 +6973,27 @@ class Tizen100CapiNetworkWifiManager {
           int Function(wifi_manager_config_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets access point identity from configuration.
-  /// @details This function retrieves the EAP identity set for the given access point configuration.
-  /// The EAP identity is used during the authentication process to identify the client when connecting to the access point.
-  /// @since_tizen 3.0
-  /// @remarks You must release @a identity using free().
+  /// Gets access point identity from configuration.
   ///
-  /// @param[in] config           The access point configuration handle
-  /// @param[out] identity        The identity of access point
+  /// This function retrieves the EAP identity set for the given access point configuration. The EAP identity is used during the authentication process to identify the client when connecting to the access point.
   ///
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - You must release `identity` using free().
+  ///
+  /// **Parameters:**
+  /// - `config` (in): The access point configuration handle
+  /// - `identity` (out): The identity of access point
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
   int wifi_manager_config_get_eap_identity(
     wifi_manager_config_h config,
     ffi.Pointer<ffi.Pointer<ffi.Char>> identity,
@@ -5513,20 +7014,28 @@ class Tizen100CapiNetworkWifiManager {
           int Function(
               wifi_manager_config_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets access point identity to configuration.
-  /// @details This function sets the EAP identity for the given access point configuration.
-  /// The EAP identity is used during the authentication process to identify the client when connecting to the access point.
-  /// @since_tizen 3.0
+  /// Sets access point identity to configuration.
   ///
-  /// @param[in] config           The access point configuration handle
-  /// @param[in] identity         The identity
+  /// This function sets the EAP identity for the given access point configuration. The EAP identity is used during the authentication process to identify the client when connecting to the access point.
   ///
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_PERMISSION_DENIED    Permission Denied
-  /// @see wifi_manager_config_save()
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `config` (in): The access point configuration handle
+  /// - `identity` (in): The identity
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_PERMISSION_DENIED`: Permission Denied
+  ///
+  /// **See also:**
+  /// - `wifi_manager_config_save()`
   int wifi_manager_config_set_eap_identity(
     wifi_manager_config_h config,
     ffi.Pointer<ffi.Char> identity,
@@ -5545,18 +7054,24 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_config_set_eap_identityPtr.asFunction<
           int Function(wifi_manager_config_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets access point EAP type from configuration.
-  /// @details This function retrieves the EAP type set for the given access point configuration.
-  /// The EAP type specifies the EAP protocol used to authenticate the client when connecting to the access point.
-  /// @since_tizen 3.0
+  /// Gets access point EAP type from configuration.
   ///
-  /// @param[in] config           The access point configuration handle
-  /// @param[out] eap_type        The EAP type of access point
+  /// This function retrieves the EAP type set for the given access point configuration. The EAP type specifies the EAP protocol used to authenticate the client when connecting to the access point.
   ///
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `config` (in): The access point configuration handle
+  /// - `eap_type` (out): The EAP type of access point
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
   int wifi_manager_config_get_eap_type(
     wifi_manager_config_h config,
     ffi.Pointer<ffi.Int32> eap_type,
@@ -5575,20 +7090,28 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_config_get_eap_typePtr.asFunction<
           int Function(wifi_manager_config_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Sets access point EAP type to configuration.
-  /// @details This function sets the EAP type for the given access point configuration.
-  /// The EAP type specifies the EAP protocol used to authenticate the client when connecting to the access point.
-  /// @since_tizen 3.0
+  /// Sets access point EAP type to configuration.
   ///
-  /// @param[in] config           The access point configuration handle
-  /// @param[in] eap_type         The EAP type
+  /// This function sets the EAP type for the given access point configuration. The EAP type specifies the EAP protocol used to authenticate the client when connecting to the access point.
   ///
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_PERMISSION_DENIED    Permission Denied
-  /// @see wifi_manager_config_save()
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `config` (in): The access point configuration handle
+  /// - `eap_type` (in): The EAP type
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_PERMISSION_DENIED`: Permission Denied
+  ///
+  /// **See also:**
+  /// - `wifi_manager_config_save()`
   int wifi_manager_config_set_eap_type(
     wifi_manager_config_h config,
     int eap_type,
@@ -5607,18 +7130,24 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_config_set_eap_typePtr
           .asFunction<int Function(wifi_manager_config_h, int)>();
 
-  /// @brief Gets access point EAP auth type from configuration.
-  /// @details This function retrieves the EAP authentication type set for the given access point configuration.
-  /// The EAP authentication type specifies the method used to authenticate the client when connecting to the access point.
-  /// @since_tizen 3.0
+  /// Gets access point EAP auth type from configuration.
   ///
-  /// @param[in] config           The access point configuration handle
-  /// @param[out] eap_auth_type   The EAP auth type of access point
+  /// This function retrieves the EAP authentication type set for the given access point configuration. The EAP authentication type specifies the method used to authenticate the client when connecting to the access point.
   ///
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `config` (in): The access point configuration handle
+  /// - `eap_auth_type` (out): The EAP auth type of access point
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
   int wifi_manager_config_get_eap_auth_type(
     wifi_manager_config_h config,
     ffi.Pointer<ffi.Int32> eap_auth_type,
@@ -5637,20 +7166,28 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_config_get_eap_auth_typePtr.asFunction<
           int Function(wifi_manager_config_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Sets access point EAP auth type to configuration.
-  /// @details This function sets the EAP authentication type for the given access point configuration.
-  /// The EAP authentication type specifies the method used to authenticate the client when connecting to the access point.
-  /// @since_tizen 3.0
+  /// Sets access point EAP auth type to configuration.
   ///
-  /// @param[in] config           The access point configuration handle
-  /// @param[in] eap_auth_type    The EAP auth type
+  /// This function sets the EAP authentication type for the given access point configuration. The EAP authentication type specifies the method used to authenticate the client when connecting to the access point.
   ///
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_PERMISSION_DENIED    Permission Denied
-  /// @see wifi_manager_config_save()
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `config` (in): The access point configuration handle
+  /// - `eap_auth_type` (in): The EAP auth type
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_PERMISSION_DENIED`: Permission Denied
+  ///
+  /// **See also:**
+  /// - `wifi_manager_config_save()`
   int wifi_manager_config_set_eap_auth_type(
     wifi_manager_config_h config,
     int eap_auth_type,
@@ -5669,19 +7206,27 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_config_set_eap_auth_typePtr
           .asFunction<int Function(wifi_manager_config_h, int)>();
 
-  /// @brief Gets access point subject match from configuration.
-  /// @details This function retrieves the EAP subject match set for the given access point configuration.
-  /// The EAP subject match specifies which certificates to trust when connecting to the access point.
-  /// @since_tizen 3.0
-  /// @remarks You must release @a subject_match using free().
+  /// Gets access point subject match from configuration.
   ///
-  /// @param[in] config           The access point configuration handle
-  /// @param[out] subject_match   The subject match of access point
+  /// This function retrieves the EAP subject match set for the given access point configuration. The EAP subject match specifies which certificates to trust when connecting to the access point.
   ///
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - You must release `subject_match` using free().
+  ///
+  /// **Parameters:**
+  /// - `config` (in): The access point configuration handle
+  /// - `subject_match` (out): The subject match of access point
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
   int wifi_manager_config_get_eap_subject_match(
     wifi_manager_config_h config,
     ffi.Pointer<ffi.Pointer<ffi.Char>> subject_match,
@@ -5702,19 +7247,27 @@ class Tizen100CapiNetworkWifiManager {
           int Function(
               wifi_manager_config_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets access point subject match to configuration.
-  /// @details This function sets the EAP subject match for the given access point configuration.
-  /// The EAP subject match is used to specify which certificates to trust when connecting to the access point.
-  /// @since_tizen 3.0
+  /// Sets access point subject match to configuration.
   ///
-  /// @param[in] config           The access point configuration handle
-  /// @param[in] subject_match    The subject match
+  /// This function sets the EAP subject match for the given access point configuration. The EAP subject match is used to specify which certificates to trust when connecting to the access point.
   ///
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @see wifi_manager_config_save()
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `config` (in): The access point configuration handle
+  /// - `subject_match` (in): The subject match
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `wifi_manager_config_save()`
   int wifi_manager_config_set_eap_subject_match(
     wifi_manager_config_h config,
     ffi.Pointer<ffi.Char> subject_match,
@@ -5733,18 +7286,24 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_config_set_eap_subject_matchPtr.asFunction<
           int Function(wifi_manager_config_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets access point frequency from configuration.
-  /// @details This function gets the frequency band (MHz) for the given access point configuration.
-  /// The frequency band indicates the radio frequency used by the access point.
-  /// @since_tizen 10.0
+  /// Gets access point frequency from configuration.
   ///
-  /// @param[in] config        The access point configuration handle
-  /// @param[out] frequency    The frequency of access point
+  /// This function gets the frequency band (MHz) for the given access point configuration. The frequency band indicates the radio frequency used by the access point.
   ///
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// **Since Tizen:**
+  /// - 10.0
+  ///
+  /// **Parameters:**
+  /// - `config` (in): The access point configuration handle
+  /// - `frequency` (out): The frequency of access point
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_config_get_frequency(
     wifi_manager_config_h config,
     ffi.Pointer<ffi.Int> frequency,
@@ -5763,19 +7322,27 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_config_get_frequencyPtr.asFunction<
           int Function(wifi_manager_config_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Sets access point frequency to configuration.
-  /// @details This function sets the frequency band (MHz) for the given access point configuration.
-  /// The frequency band determines the radio frequency the access point will use.
-  /// @since_tizen 10.0
+  /// Sets access point frequency to configuration.
   ///
-  /// @param[in] config        The access point configuration handle
-  /// @param[in] frequency     The frequency of access point
+  /// This function sets the frequency band (MHz) for the given access point configuration. The frequency band determines the radio frequency the access point will use.
   ///
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
-  /// @see wifi_manager_config_save()
+  /// **Since Tizen:**
+  /// - 10.0
+  ///
+  /// **Parameters:**
+  /// - `config` (in): The access point configuration handle
+  /// - `frequency` (in): The frequency of access point
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `wifi_manager_config_save()`
   int wifi_manager_config_set_frequency(
     wifi_manager_config_h config,
     int frequency,
@@ -5793,21 +7360,27 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_config_set_frequencyPtr
           .asFunction<int Function(wifi_manager_config_h, int)>();
 
-  /// @brief Registers the callback called when a TDLS device is found.
-  /// @details This function registers a callback function to receive notifications about discovered TDLS (802.11z) devices.
-  /// When a TDLS device is found, the provided callback function will be called with the device information as an argument.
-  /// @since_tizen 4.0
+  /// Registers the callback called when a TDLS device is found.
   ///
-  /// @param[in] wifi             The Wi-Fi handle
-  /// @param[in] callback         The callback function to be called
-  /// @param[in] user_data The user data passed to the callback function
+  /// This function registers a callback function to receive notifications about discovered TDLS (802.11z) devices. When a TDLS device is found, the provided callback function will be called with the device information as an argument.
   ///
-  /// @return @c 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION    Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `wifi` (in): The Wi-Fi handle
+  /// - `callback` (in): The callback function to be called
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_tdls_set_discovered_cb(
     wifi_manager_h wifi,
     wifi_manager_tdls_discovered_cb callback,
@@ -5829,17 +7402,23 @@ class Tizen100CapiNetworkWifiManager {
           int Function(wifi_manager_h, wifi_manager_tdls_discovered_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unregisters the callback called when TDLS device is found.
-  /// @details This function unregisters the callback that was previously registered using wifi_manager_tdls_set_discovered_cb().
-  /// After calling this function, the application will no longer receive notifications about discovered TDLS devices.
-  /// @since_tizen 4.0
+  /// Unregisters the callback called when TDLS device is found.
   ///
-  /// @param[in] wifi             The Wi-Fi handle
+  /// This function unregisters the callback that was previously registered using wifi_manager_tdls_set_discovered_cb(). After calling this function, the application will no longer receive notifications about discovered TDLS devices.
   ///
-  /// @return @c 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION    Invalid operation
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `wifi` (in): The Wi-Fi handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
   int wifi_manager_tdls_unset_discovered_cb(
     wifi_manager_h wifi,
   ) {
@@ -5855,23 +7434,32 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_tdls_unset_discovered_cbPtr
           .asFunction<int Function(wifi_manager_h)>();
 
-  /// @brief Discovers devices that support TDLS.
-  /// @details This function initiates a discovery process to find TDLS (802.11z)-capable devices within range.
-  /// The MAC address of the peer device to be discovered can be optionally provided as an argument.
-  /// @since_tizen 4.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.set
+  /// Discovers devices that support TDLS.
   ///
-  /// @param[in] wifi             The Wi-Fi handle
-  /// @param[in] peer_mac_addr    The MAC address (e.g., ff:ff:ff:ff:ff:ff,
-  /// AA:BB:CC:DD:EE:FF) of the peer to be discovered
+  /// This function initiates a discovery process to find TDLS (802.11z)-capable devices within range. The MAC address of the peer device to be discovered can be optionally provided as an argument.
   ///
-  /// @return @c 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION    Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed
-  /// @retval #WIFI_MANAGER_ERROR_PERMISSION_DENIED    Permission Denied
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.set>
+  ///
+  /// **Parameters:**
+  /// - `wifi` (in): The Wi-Fi handle
+  /// - `peer_mac_addr` (in): The MAC address (e.g., ff:ff:ff:ff:ff:ff, AA:BB:CC:DD:EE:FF) of the peer to be discovered
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_MANAGER_ERROR_PERMISSION_DENIED`: Permission Denied
   int wifi_manager_tdls_start_discovery(
     wifi_manager_h wifi,
     ffi.Pointer<ffi.Char> peer_mac_addr,
@@ -5890,24 +7478,34 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_tdls_start_discoveryPtr
           .asFunction<int Function(wifi_manager_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Connects to a peer device.
-  /// @details This function establishes a TDLS (802.11z) connection with the specified peer device.
-  /// The MAC address of the peer device to be connected must be provided as an argument.
-  /// @since_tizen 4.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.set
+  /// Connects to a peer device.
   ///
-  /// @param[in] wifi             The Wi-Fi handle
-  /// @param[in] peer_mac_addr    The MAC address of the peer device to be connected
+  /// This function establishes a TDLS (802.11z) connection with the specified peer device. The MAC address of the peer device to be connected must be provided as an argument.
   ///
-  /// @return @c 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION    Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed
-  /// @retval #WIFI_MANAGER_ERROR_PERMISSION_DENIED    Permission Denied
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.set>
+  ///
+  /// **Parameters:**
+  /// - `wifi` (in): The Wi-Fi handle
+  /// - `peer_mac_addr` (in): The MAC address of the peer device to be connected
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_MANAGER_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_tdls_connect(
     wifi_manager_h wifi,
     ffi.Pointer<ffi.Char> peer_mac_addr,
@@ -5925,24 +7523,34 @@ class Tizen100CapiNetworkWifiManager {
   late final _wifi_manager_tdls_connect = _wifi_manager_tdls_connectPtr
       .asFunction<int Function(wifi_manager_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Disconnects the connected peer.
-  /// @details This function disconnects the currently connected TDLS (802.11z) peer.
-  /// The MAC address of the peer to be disconnected must be provided as an argument.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.set
+  /// Disconnects the connected peer.
   ///
-  /// @param[in] wifi                The Wi-Fi handle
-  /// @param[in] peer_mac_addr       The MAC address of the connected peer
+  /// This function disconnects the currently connected TDLS (802.11z) peer. The MAC address of the peer to be disconnected must be provided as an argument.
   ///
-  /// @return @c 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION    Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed
-  /// @retval #WIFI_MANAGER_ERROR_PERMISSION_DENIED    Permission Denied
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.set>
+  ///
+  /// **Parameters:**
+  /// - `wifi` (in): The Wi-Fi handle
+  /// - `peer_mac_addr` (in): The MAC address of the connected peer
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_MANAGER_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_tdls_disconnect(
     wifi_manager_h wifi,
     ffi.Pointer<ffi.Char> peer_mac_addr,
@@ -5960,26 +7568,38 @@ class Tizen100CapiNetworkWifiManager {
   late final _wifi_manager_tdls_disconnect = _wifi_manager_tdls_disconnectPtr
       .asFunction<int Function(wifi_manager_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets Peer Mac address of Connected peer.
-  /// @details This function retrieves the MAC address of the currently connected TDLS (802.11z) peer.
-  /// The MAC address is returned as a null-terminated string and must be freed by the caller after use
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.get
+  /// Gets Peer Mac address of Connected peer.
   ///
-  /// @remarks The @a peer_mac_addr should be freed using free().
-  /// @param[in] wifi                The Wi-Fi handle
-  /// @param[out] peer_mac_addr      The MAC address of the connected peer
+  /// This function retrieves the MAC address of the currently connected TDLS (802.11z) peer. The MAC address is returned as a null-terminated string and must be freed by the caller after use
   ///
-  /// @return @c 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION    Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed
-  /// @retval #WIFI_MANAGER_ERROR_NO_CONNECTION        No active TDLS Connection
-  /// @retval #WIFI_MANAGER_ERROR_PERMISSION_DENIED    Permission Denied
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Remarks:**
+  /// - The `peer_mac_addr` should be freed using free().
+  ///
+  /// **Parameters:**
+  /// - `wifi` (in): The Wi-Fi handle
+  /// - `peer_mac_addr` (out): The MAC address of the connected peer
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_MANAGER_ERROR_NO_CONNECTION`: No active TDLS Connection
+  /// - `WIFI_MANAGER_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_tdls_get_connected_peer(
     wifi_manager_h wifi,
     ffi.Pointer<ffi.Pointer<ffi.Char>> peer_mac_addr,
@@ -5999,21 +7619,27 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_tdls_get_connected_peerPtr.asFunction<
           int Function(wifi_manager_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Registers the callback called when TDLS state is changed.
-  /// @details This function registers a callback function to receive notifications about changes in the TDLS (802.11z) state.
-  /// When the TDLS state changes, the provided callback function will be called with the new state as an argument.
-  /// @since_tizen 3.0
+  /// Registers the callback called when TDLS state is changed.
   ///
-  /// @param[in] wifi            The Wi-Fi handle
-  /// @param[in] callback        The callback function to be called
-  /// @param[in] user_data       The user data passed to the callback function
+  /// This function registers a callback function to receive notifications about changes in the TDLS (802.11z) state. When the TDLS state changes, the provided callback function will be called with the new state as an argument.
   ///
-  /// @return @c 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION    Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `wifi` (in): The Wi-Fi handle
+  /// - `callback` (in): The callback function to be called
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_tdls_set_state_changed_cb(
     wifi_manager_h wifi,
     wifi_manager_tdls_state_changed_cb callback,
@@ -6036,18 +7662,25 @@ class Tizen100CapiNetworkWifiManager {
           int Function(wifi_manager_h, wifi_manager_tdls_state_changed_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unregisters the callback called when TDLS state is changed.
-  /// @details This function unregisters the callback that was previously registered using wifi_manager_tdls_set_state_changed_cb().
-  /// After calling this function, the application will no longer receive notifications about changes in the TDLS state.
-  /// @since_tizen 3.0
+  /// Unregisters the callback called when TDLS state is changed.
   ///
-  /// @param[in] wifi            The Wi-Fi handle
-  /// @return @c 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION    Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// This function unregisters the callback that was previously registered using wifi_manager_tdls_set_state_changed_cb(). After calling this function, the application will no longer receive notifications about changes in the TDLS state.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `wifi` (in): The Wi-Fi handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_tdls_unset_state_changed_cb(
     wifi_manager_h wifi,
   ) {
@@ -6063,24 +7696,34 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_tdls_unset_state_changed_cbPtr
           .asFunction<int Function(wifi_manager_h)>();
 
-  /// @brief Enables a TDLS channel switching request.
-  /// @details This function enables the TDLS (802.11z) channel switching request for the specified TDLS peer.
-  /// Channel switching allows the two peers to switch to a different channel to improve communication performance.
-  /// @since_tizen 4.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.set
+  /// Enables a TDLS channel switching request.
   ///
-  /// @param[in] wifi            The Wi-Fi handle
-  /// @param[in] peer_mac_addr   The MAC address of the connected TDLS peer
-  /// @param[in] freq            The new frequency [MHz]
+  /// This function enables the TDLS (802.11z) channel switching request for the specified TDLS peer. Channel switching allows the two peers to switch to a different channel to improve communication performance.
   ///
-  /// @return @c 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION    Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_PERMISSION_DENIED    Permission denied
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.set>
+  ///
+  /// **Parameters:**
+  /// - `wifi` (in): The Wi-Fi handle
+  /// - `peer_mac_addr` (in): The MAC address of the connected TDLS peer
+  /// - `freq` (in): The new frequency `[MHz]`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_tdls_enable_channel_switching(
     wifi_manager_h wifi,
     ffi.Pointer<ffi.Char> peer_mac_addr,
@@ -6101,23 +7744,33 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_tdls_enable_channel_switchingPtr.asFunction<
           int Function(wifi_manager_h, ffi.Pointer<ffi.Char>, int)>();
 
-  /// @brief Disables a TDLS channel switching request.
-  /// @details This function disables the TDLS (802.11z) channel switching request for the specified TDLS peer.
-  /// Channel switching allows the two peers to switch to a different channel to improve communication performance.
-  /// @since_tizen 4.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.set
+  /// Disables a TDLS channel switching request.
   ///
-  /// @param[in] wifi            The Wi-Fi handle
-  /// @param[in] peer_mac_addr   The MAC address of the connected TDLS peer
+  /// This function disables the TDLS (802.11z) channel switching request for the specified TDLS peer. Channel switching allows the two peers to switch to a different channel to improve communication performance.
   ///
-  /// @return @c 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION    Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_PERMISSION_DENIED    Permission denied
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.set>
+  ///
+  /// **Parameters:**
+  /// - `wifi` (in): The Wi-Fi handle
+  /// - `peer_mac_addr` (in): The MAC address of the connected TDLS peer
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_tdls_disable_channel_switching(
     wifi_manager_h wifi,
     ffi.Pointer<ffi.Char> peer_mac_addr,
@@ -6136,19 +7789,27 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_tdls_disable_channel_switchingPtr
           .asFunction<int Function(wifi_manager_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Registers the callback called when IP conflict state is changed.
-  /// @details This function registers a callback function to receive notifications about changes in the IP conflict state.
-  /// When the IP conflict state changes, the provided callback function will be called with the new state as an argument.
-  /// @since_tizen 5.0
-  /// @param[in] wifi            The Wi-Fi handle
-  /// @param[in] callback        The callback function to be called
-  /// @param[in] user_data       The user data passed to the callback function
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION    Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// Registers the callback called when IP conflict state is changed.
+  ///
+  /// This function registers a callback function to receive notifications about changes in the IP conflict state. When the IP conflict state changes, the provided callback function will be called with the new state as an argument.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `wifi` (in): The Wi-Fi handle
+  /// - `callback` (in): The callback function to be called
+  /// - `user_data` (in): The user data passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_set_ip_conflict_cb(
     wifi_manager_h wifi,
     wifi_manager_ip_conflict_cb callback,
@@ -6170,17 +7831,25 @@ class Tizen100CapiNetworkWifiManager {
           int Function(wifi_manager_h, wifi_manager_ip_conflict_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unregisters the callback called when IP conflict state is changed.
-  /// @details This function unregisters the callback that was previously registered using wifi_manager_set_ip_conflict_cb().
-  /// After calling this function, the application will no longer receive notifications about changes in the IP conflict state.
-  /// @since_tizen 5.0
-  /// @param[in] wifi            The Wi-Fi handle
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION    Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// Unregisters the callback called when IP conflict state is changed.
+  ///
+  /// This function unregisters the callback that was previously registered using wifi_manager_set_ip_conflict_cb(). After calling this function, the application will no longer receive notifications about changes in the IP conflict state.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `wifi` (in): The Wi-Fi handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_unset_ip_conflict_cb(
     wifi_manager_h wifi,
   ) {
@@ -6196,23 +7865,33 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_unset_ip_conflict_cbPtr
           .asFunction<int Function(wifi_manager_h)>();
 
-  /// @brief Enables or disables IP conflict detection.
-  /// @details This function enables or disables the IP conflict detection feature on the device. When enabled,
-  /// the device periodically checks for IP address conflicts with other devices on the same network.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.set
+  /// Enables or disables IP conflict detection.
   ///
-  /// @param[in] wifi            The Wi-Fi handle
-  /// @param[in] detect          True or false boolean to enable or disable
+  /// This function enables or disables the IP conflict detection feature on the device. When enabled, the device periodically checks for IP address conflicts with other devices on the same network.
   ///
-  /// @return @c 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_OPERATION    Invalid operation
-  /// @retval #WIFI_MANAGER_ERROR_PERMISSION_DENIED    Permission denied
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.set>
+  ///
+  /// **Parameters:**
+  /// - `wifi` (in): The Wi-Fi handle
+  /// - `detect` (in): True or false boolean to enable or disable
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `WIFI_MANAGER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_set_ip_conflict_detect_enable(
     wifi_manager_h wifi,
     bool detect,
@@ -6230,23 +7909,33 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_set_ip_conflict_detect_enablePtr
           .asFunction<int Function(wifi_manager_h, bool)>();
 
-  /// @brief Checks whether IP conflict detection is enabled.
-  /// @details This function checks if the IP conflict detection feature is enabled on the device.
-  /// If the feature is enabled, the function sets the @a state parameter to @c true;
-  /// otherwise, it sets it to @c false.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.get
-  /// @param[in] wifi        The Wi-Fi handle
-  /// @param[out] state     @c true if IP conflict detection is enabled,
-  /// otherwise @c false if IP conflict detection is disabled.
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed
-  /// @retval #WIFI_MANAGER_ERROR_PERMISSION_DENIED    Permission Denied
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// Checks whether IP conflict detection is enabled.
+  ///
+  /// This function checks if the IP conflict detection feature is enabled on the device. If the feature is enabled, the function sets the `state` parameter to `true`; otherwise, it sets it to `false`.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Parameters:**
+  /// - `wifi` (in): The Wi-Fi handle
+  /// - `state` (out): `true` if IP conflict detection is enabled, otherwise `false` if IP conflict detection is disabled.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_MANAGER_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_ip_conflict_detect_is_enabled(
     wifi_manager_h wifi,
     ffi.Pointer<ffi.Bool> state,
@@ -6265,22 +7954,33 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_ip_conflict_detect_is_enabledPtr
           .asFunction<int Function(wifi_manager_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Gets the state of the IP conflict.
-  /// @details This function retrieves the current state of the IP conflict detection feature.
-  /// The IP conflict state indicates whether there is an IP address conflict
-  /// with other devices on the same network.
-  /// @since_tizen 5.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.get
-  /// @param[in] wifi          The Wi-Fi handle
-  /// @param[out] state        The current state of IP conflict
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed
-  /// @retval #WIFI_MANAGER_ERROR_PERMISSION_DENIED    Permission Denied
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// Gets the state of the IP conflict.
+  ///
+  /// This function retrieves the current state of the IP conflict detection feature. The IP conflict state indicates whether there is an IP address conflict with other devices on the same network.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Parameters:**
+  /// - `wifi` (in): The Wi-Fi handle
+  /// - `state` (out): The current state of IP conflict
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_MANAGER_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_get_ip_conflict_state(
     wifi_manager_h wifi,
     ffi.Pointer<ffi.Int32> state,
@@ -6299,23 +7999,33 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_get_ip_conflict_statePtr
           .asFunction<int Function(wifi_manager_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets whether 5Ghz Wi-Fi band is supported.
-  /// @details This function checks if the device supports the 5Ghz Wi-Fi band.
-  /// If the device supports it, the function sets the @a supported parameter to @c true;
-  /// otherwise, it sets it to @c false.
-  /// @since_tizen 5.5
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.get
-  /// @param[in] wifi          The Wi-Fi handle
-  /// @param[out] supported   @c true if 5Ghz Wi-Fi band is supported,
-  /// otherwise   @c false if 5Ghz Wi-Fi band is not supported.
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed
-  /// @retval #WIFI_MANAGER_ERROR_PERMISSION_DENIED    Permission Denied
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// Gets whether 5Ghz Wi-Fi band is supported.
+  ///
+  /// This function checks if the device supports the 5Ghz Wi-Fi band. If the device supports it, the function sets the `supported` parameter to `true`; otherwise, it sets it to `false`.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Parameters:**
+  /// - `wifi` (in): The Wi-Fi handle
+  /// - `supported` (out): `true` if 5Ghz Wi-Fi band is supported, otherwise `false` if 5Ghz Wi-Fi band is not supported.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_MANAGER_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_is_5ghz_band_supported(
     wifi_manager_h wifi,
     ffi.Pointer<ffi.Bool> supported,
@@ -6334,23 +8044,33 @@ class Tizen100CapiNetworkWifiManager {
       _wifi_manager_is_5ghz_band_supportedPtr
           .asFunction<int Function(wifi_manager_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Gets whether 6Ghz Wi-Fi band is supported.
-  /// @details This function checks if the device supports the 6Ghz Wi-Fi band.
-  /// If the device supports it, the function sets the @a supported parameter to @c true;
-  /// otherwise, it sets it to @c false.
-  /// @since_tizen 8.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.get
-  /// @param[in] wifi          The Wi-Fi handle
-  /// @param[out] supported   @c true if 6Ghz Wi-Fi band is supported,
-  /// otherwise   @c false if 6Ghz Wi-Fi band is not supported.
-  /// @return 0 on success, otherwise negative error value
-  /// @retval #WIFI_MANAGER_ERROR_NONE                 Successful
-  /// @retval #WIFI_MANAGER_ERROR_NOT_INITIALIZED      Not initialized
-  /// @retval #WIFI_MANAGER_ERROR_INVALID_PARAMETER    Invalid parameter
-  /// @retval #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed
-  /// @retval #WIFI_MANAGER_ERROR_PERMISSION_DENIED    Permission Denied
-  /// @retval #WIFI_MANAGER_ERROR_NOT_SUPPORTED        Not supported
+  /// Gets whether 6Ghz Wi-Fi band is supported.
+  ///
+  /// This function checks if the device supports the 6Ghz Wi-Fi band. If the device supports it, the function sets the `supported` parameter to `true`; otherwise, it sets it to `false`.
+  ///
+  /// **Since Tizen:**
+  /// - 8.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.get>
+  ///
+  /// **Parameters:**
+  /// - `wifi` (in): The Wi-Fi handle
+  /// - `supported` (out): `true` if 6Ghz Wi-Fi band is supported, otherwise `false` if 6Ghz Wi-Fi band is not supported.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise negative error value
+  ///
+  /// **Return values:**
+  /// - `WIFI_MANAGER_ERROR_NONE`: Successful
+  /// - `WIFI_MANAGER_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `WIFI_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `WIFI_MANAGER_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `WIFI_MANAGER_ERROR_PERMISSION_DENIED`: Permission Denied
+  /// - `WIFI_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
   int wifi_manager_is_6ghz_band_supported(
     wifi_manager_h wifi,
     ffi.Pointer<ffi.Bool> supported,
@@ -6370,8 +8090,11 @@ class Tizen100CapiNetworkWifiManager {
           .asFunction<int Function(wifi_manager_h, ffi.Pointer<ffi.Bool>)>();
 }
 
-/// @brief Enumeration for the Wi-Fi error type.
-/// @since_tizen 3.0
+/// Enumeration for the Wi-Fi error type.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class wifi_manager_error_e {
   /// Successful
   static const int WIFI_MANAGER_ERROR_NONE = 0;
@@ -6464,8 +8187,11 @@ abstract class wifi_manager_error_e {
   static const int WIFI_MANAGER_ERROR_NO_CARRIER = -30277610;
 }
 
-/// @brief Enumeration for the state of the Wi-Fi device.
-/// @since_tizen 3.0
+/// Enumeration for the state of the Wi-Fi device.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class wifi_manager_device_state_e {
   /// < Wi-Fi is Deactivated
   static const int WIFI_MANAGER_DEVICE_STATE_DEACTIVATED = 0;
@@ -6474,8 +8200,11 @@ abstract class wifi_manager_device_state_e {
   static const int WIFI_MANAGER_DEVICE_STATE_ACTIVATED = 1;
 }
 
-/// @brief Enumeration for the state of the Wi-Fi connection.
-/// @since_tizen 3.0
+/// Enumeration for the state of the Wi-Fi connection.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class wifi_manager_connection_state_e {
   /// < Connection failed state
   static const int WIFI_MANAGER_CONNECTION_STATE_FAILURE = -1;
@@ -6493,8 +8222,11 @@ abstract class wifi_manager_connection_state_e {
   static const int WIFI_MANAGER_CONNECTION_STATE_CONNECTED = 3;
 }
 
-/// @brief Enumeration for the state of the static IP conflict.
-/// @since_tizen 5.0
+/// Enumeration for the state of the static IP conflict.
+///
+/// **Since Tizen:**
+/// - 5.0
+/// @nodoc
 abstract class wifi_manager_ip_conflict_state_e {
   /// < Unknown state
   static const int WIFI_MANAGER_IP_CONFLICT_STATE_UNKNOWN = 0;
@@ -6506,8 +8238,11 @@ abstract class wifi_manager_ip_conflict_state_e {
   static const int WIFI_MANAGER_IP_CONFLICT_STATE_CONFLICT_DETECTED = 2;
 }
 
-/// @brief Enumeration for the RSSI level.
-/// @since_tizen 3.0
+/// Enumeration for the RSSI level.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class wifi_manager_rssi_level_e {
   /// < No signal
   static const int WIFI_MANAGER_RSSI_LEVEL_0 = 0;
@@ -6525,8 +8260,11 @@ abstract class wifi_manager_rssi_level_e {
   static const int WIFI_MANAGER_RSSI_LEVEL_4 = 4;
 }
 
-/// @brief Enumeration for the wifi scanning state.
-/// @since_tizen 4.0
+/// Enumeration for the wifi scanning state.
+///
+/// **Since Tizen:**
+/// - 4.0
+/// @nodoc
 abstract class wifi_manager_scan_state_e {
   /// < Scan is not running
   static const int WIFI_MANAGER_SCAN_STATE_NOT_SCANNING = 0;
@@ -6535,8 +8273,11 @@ abstract class wifi_manager_scan_state_e {
   static const int WIFI_MANAGER_SCAN_STATE_SCANNING = 1;
 }
 
-/// @brief Enumeration for the TDLS Discovery State.
-/// @since_tizen 4.0
+/// Enumeration for the TDLS Discovery State.
+///
+/// **Since Tizen:**
+/// - 4.0
+/// @nodoc
 abstract class wifi_manager_tdls_discovery_state_e {
   /// < Discovery is in progress
   static const int WIFI_MANAGER_TDLS_DISCOVERY_STATE_ONGOING = 0;
@@ -6545,8 +8286,11 @@ abstract class wifi_manager_tdls_discovery_state_e {
   static const int WIFI_MANAGER_TDLS_DISCOVERY_STATE_FINISHED = 1;
 }
 
-/// @brief Enumeration for the Wi-Fi Module state.
-/// @since_tizen 4.0
+/// Enumeration for the Wi-Fi Module state.
+///
+/// **Since Tizen:**
+/// - 4.0
+/// @nodoc
 abstract class wifi_manager_module_state_e {
   /// < Wi-Fi Module is detached
   static const int WIFI_MANAGER_MODULE_STATE_DETACHED = 0;
@@ -6555,8 +8299,11 @@ abstract class wifi_manager_module_state_e {
   static const int WIFI_MANAGER_MODULE_STATE_ATTACHED = 1;
 }
 
-/// @brief Enumeration for the Net IP configuration type.
-/// @since_tizen 3.0
+/// Enumeration for the Net IP configuration type.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class wifi_manager_ip_config_type_e {
   /// Not defined
   static const int WIFI_MANAGER_IP_CONFIG_TYPE_NONE = 0;
@@ -6574,8 +8321,11 @@ abstract class wifi_manager_ip_config_type_e {
   static const int WIFI_MANAGER_IP_CONFIG_TYPE_FIXED = 4;
 }
 
-/// @brief Enumeration for DNS Configuration type.
-/// @since_tizen 4.0
+/// Enumeration for DNS Configuration type.
+///
+/// **Since Tizen:**
+/// - 4.0
+/// @nodoc
 abstract class wifi_manager_dns_config_type_e {
   /// < Not defined
   static const int WIFI_MANAGER_DNS_CONFIG_TYPE_NONE = 0;
@@ -6587,8 +8337,11 @@ abstract class wifi_manager_dns_config_type_e {
   static const int WIFI_MANAGER_DNS_CONFIG_TYPE_DYNAMIC = 2;
 }
 
-/// @brief Enumeration for the address type.
-/// @since_tizen 3.0
+/// Enumeration for the address type.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class wifi_manager_address_family_e {
   /// < IPV4 Address family
   static const int WIFI_MANAGER_ADDRESS_FAMILY_IPV4 = 0;
@@ -6597,8 +8350,11 @@ abstract class wifi_manager_address_family_e {
   static const int WIFI_MANAGER_ADDRESS_FAMILY_IPV6 = 1;
 }
 
-/// @brief Enumeration for the proxy method type.
-/// @since_tizen 3.0
+/// Enumeration for the proxy method type.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class wifi_manager_proxy_type_e {
   /// Direct connection
   static const int WIFI_MANAGER_PROXY_TYPE_DIRECT = 0;
@@ -6611,11 +8367,13 @@ abstract class wifi_manager_proxy_type_e {
   static const int WIFI_MANAGER_PROXY_TYPE_MANUAL = 2;
 }
 
-/// @brief Enumeration for Wi-Fi security type.
-/// @details The following security modes are used in infrastructure and ad-hoc mode.
-/// For now all EAP security mechanisms are provided only in infrastructure mode.
+/// Enumeration for Wi-Fi security type.
 ///
-/// @since_tizen 3.0
+/// The following security modes are used in infrastructure and ad-hoc mode. For now all EAP security mechanisms are provided only in infrastructure mode.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class wifi_manager_security_type_e {
   /// < Security disabled
   static const int WIFI_MANAGER_SECURITY_TYPE_NONE = 0;
@@ -6648,9 +8406,13 @@ abstract class wifi_manager_security_type_e {
   static const int WIFI_MANAGER_SECURITY_TYPE_FT_SAE = 9;
 }
 
-/// @brief Enumeration for Wi-Fi encryption type.
-/// @details The following encryption modes are used in infrastructure and ad-hoc mode.
-/// @since_tizen 3.0
+/// Enumeration for Wi-Fi encryption type.
+///
+/// The following encryption modes are used in infrastructure and ad-hoc mode.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class wifi_manager_encryption_type_e {
   /// < Encryption disabled
   static const int WIFI_MANAGER_ENCRYPTION_TYPE_NONE = 0;
@@ -6668,8 +8430,11 @@ abstract class wifi_manager_encryption_type_e {
   static const int WIFI_MANAGER_ENCRYPTION_TYPE_TKIP_AES_MIXED = 4;
 }
 
-/// @brief Enumeration for EAP type.
-/// @since_tizen 3.0
+/// Enumeration for EAP type.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class wifi_manager_eap_type_e {
   /// < EAP PEAP type
   static const int WIFI_MANAGER_EAP_TYPE_PEAP = 0;
@@ -6696,8 +8461,11 @@ abstract class wifi_manager_eap_type_e {
   static const int WIFI_MANAGER_EAP_TYPE_PWD = 7;
 }
 
-/// @brief Enumeration for EAP phase2 authentication type.
-/// @since_tizen 3.0
+/// Enumeration for EAP phase2 authentication type.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class wifi_manager_eap_auth_type_e {
   /// < EAP phase2 authentication none
   static const int WIFI_MANAGER_EAP_AUTH_TYPE_NONE = 0;
@@ -6718,8 +8486,11 @@ abstract class wifi_manager_eap_auth_type_e {
   static const int WIFI_MANAGER_EAP_AUTH_TYPE_MD5 = 5;
 }
 
-/// @brief Enumeration for Wi-Fi disconnect reason, provided by the supplicant.
-/// @since_tizen 4.0
+/// Enumeration for Wi-Fi disconnect reason, provided by the supplicant.
+///
+/// **Since Tizen:**
+/// - 4.0
+/// @nodoc
 abstract class wifi_manager_disconnect_reason_e {
   /// Locally Generate Disconnect from user side (Since 5.0)
   static const int WIFI_REASON_LOCAL_GENERATE_FROM_USER = -3;
@@ -6842,9 +8613,13 @@ abstract class wifi_manager_disconnect_reason_e {
   static const int WIFI_REASON_MESH_INVALID_SECURITY_CAP = 60;
 }
 
-/// @brief Enumeration for Wi-Fi Association Status code, provided by the supplicant.
-/// @details The Wi-Fi Standard Reference : Status codes (IEEE 802.11-2007, 7.3.1.9, Table 7-23).
-/// @since_tizen 5.0
+/// Enumeration for Wi-Fi Association Status code, provided by the supplicant.
+///
+/// The Wi-Fi Standard Reference : Status codes (IEEE 802.11-2007, 7.3.1.9, Table 7-23).
+///
+/// **Since Tizen:**
+/// - 5.0
+/// @nodoc
 abstract class wifi_manager_assoc_status_code_e {
   /// Successful
   static const int WLAN_STATUS_SUCCESS = 0;
@@ -6902,8 +8677,11 @@ abstract class wifi_manager_assoc_status_code_e {
   static const int WLAN_STATUS_ASSOC_DENIED_NO_VHT = 104;
 }
 
-/// @brief Enumeration for the state of the Wi-Fi TDLS.
-/// @since_tizen 3.0
+/// Enumeration for the state of the Wi-Fi TDLS.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class wifi_manager_tdls_state_e {
   /// < Wi-Fi TDLS is Disconnected
   static const int WIFI_MANAGER_TDLS_STATE_DISCONNECTED = 0;
@@ -6912,11 +8690,16 @@ abstract class wifi_manager_tdls_state_e {
   static const int WIFI_MANAGER_TDLS_STATE_CONNECTED = 1;
 }
 
-/// @brief Enumeration for Wi-Fi Frame type.
-/// @since_tizen 5.0
-/// @see wifi_manager_add_vsie()
-/// @see wifi_manager_remove_vsie()
-/// @see wifi_manager_get_vsie()
+/// Enumeration for Wi-Fi Frame type.
+///
+/// **Since Tizen:**
+/// - 5.0
+///
+/// **See also:**
+/// - `wifi_manager_add_vsie()`
+/// - `wifi_manager_remove_vsie()`
+/// - `wifi_manager_get_vsie()`
+/// @nodoc
 abstract class wifi_manager_vsie_frames_e {
   /// WiFi probe request frame
   static const int WIFI_MANAGER_VSIE_FRAME_PROBE_REQ = 0;
@@ -6934,402 +8717,612 @@ abstract class wifi_manager_vsie_frames_e {
   static const int WIFI_MANAGER_VSIE_FRAME_ACTION = 4;
 }
 
-/// @brief The Wi-Fi manager handle.
-/// @since_tizen 3.0
+/// The Wi-Fi manager handle.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 typedef wifi_manager_h = ffi.Pointer<ffi.Void>;
 
-/// @brief Called after wifi_manager_activate() or wifi_manager_activate_with_wifi_picker_tested() is completed.
-/// @details The following error codes can be received: \n
-/// #WIFI_MANAGER_ERROR_NONE                 Successful \n
-/// #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed \n
-/// #WIFI_MANAGER_ERROR_SECURITY_RESTRICTED  Restricted by security system policy
-/// @since_tizen 3.0
-/// @param[in] result        The result
-/// @param[in] user_data     The user data passed from wifi_manager_activate() and wifi_manager_activate_with_wifi_picker_tested()
-/// @pre wifi_manager_activate() or wifi_manager_activate_with_wifi_picker_tested() will invoke this callback function.
-/// @see wifi_manager_activate()
-/// @see wifi_manager_activate_with_wifi_picker_tested()
+/// Called after wifi_manager_activate() or wifi_manager_activate_with_wifi_picker_tested() is completed.
+///
+/// The following error codes can be received: `WIFI_MANAGER_ERROR_NONE` Successful `WIFI_MANAGER_ERROR_OPERATION_FAILED` Operation failed `WIFI_MANAGER_ERROR_SECURITY_RESTRICTED` Restricted by security system policy
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `result` (in): The result
+/// - `user_data` (in): The user data passed from wifi_manager_activate() and wifi_manager_activate_with_wifi_picker_tested()
+///
+/// **Preconditions:**
+/// - wifi_manager_activate() or wifi_manager_activate_with_wifi_picker_tested() will invoke this callback function.
+///
+/// **See also:**
+/// - `wifi_manager_activate()`
+/// - `wifi_manager_activate_with_wifi_picker_tested()`
+/// @nodoc
 typedef wifi_manager_activated_cb
     = ffi.Pointer<ffi.NativeFunction<wifi_manager_activated_cbFunction>>;
+/// @nodoc
 typedef wifi_manager_activated_cbFunction = ffi.Void Function(
     ffi.Int32 result, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartwifi_manager_activated_cbFunction = void Function(
     int result, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called after wifi_manager_deactivate() is completed.
-/// @details The following error codes can be received: \n
-/// #WIFI_MANAGER_ERROR_NONE                 Successful \n
-/// #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed \n
-/// #WIFI_MANAGER_ERROR_SECURITY_RESTRICTED  Restricted by security system policy
-/// @since_tizen 3.0
-/// @param[in] result        The result
-/// @param[in] user_data     The user data passed from wifi_manager_deactivate()
-/// @pre wifi_manager_deactivate() will invoke this callback function.
-/// @see wifi_manager_deactivate()
+/// Called after wifi_manager_deactivate() is completed.
+///
+/// The following error codes can be received: `WIFI_MANAGER_ERROR_NONE` Successful `WIFI_MANAGER_ERROR_OPERATION_FAILED` Operation failed `WIFI_MANAGER_ERROR_SECURITY_RESTRICTED` Restricted by security system policy
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `result` (in): The result
+/// - `user_data` (in): The user data passed from wifi_manager_deactivate()
+///
+/// **Preconditions:**
+/// - wifi_manager_deactivate() will invoke this callback function.
+///
+/// **See also:**
+/// - `wifi_manager_deactivate()`
+/// @nodoc
 typedef wifi_manager_deactivated_cb
     = ffi.Pointer<ffi.NativeFunction<wifi_manager_deactivated_cbFunction>>;
+/// @nodoc
 typedef wifi_manager_deactivated_cbFunction = ffi.Void Function(
     ffi.Int32 result, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartwifi_manager_deactivated_cbFunction = void Function(
     int result, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the scan is finished.
-/// @details The following error codes can be received: \n
-/// #WIFI_MANAGER_ERROR_NONE                 Successful \n
-/// #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed \n
-/// @since_tizen 3.0
-/// @param[in] error_code    The error code
-/// @param[in] user_data     The user data passed from the callback registration function
-/// @see wifi_manager_scan()
-/// @see wifi_manager_set_background_scan_cb()
-/// @see wifi_manager_unset_background_scan_cb()
+/// Called when the scan is finished.
+///
+/// The following error codes can be received: `WIFI_MANAGER_ERROR_NONE` Successful `WIFI_MANAGER_ERROR_OPERATION_FAILED` Operation failed
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `error_code` (in): The error code
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `wifi_manager_scan()`
+/// - `wifi_manager_set_background_scan_cb()`
+/// - `wifi_manager_unset_background_scan_cb()`
+/// @nodoc
 typedef wifi_manager_scan_finished_cb
     = ffi.Pointer<ffi.NativeFunction<wifi_manager_scan_finished_cbFunction>>;
+/// @nodoc
 typedef wifi_manager_scan_finished_cbFunction = ffi.Void Function(
     ffi.Int32 error_code, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartwifi_manager_scan_finished_cbFunction = void Function(
     int error_code, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief The Wi-Fi specific ap scan handle.
-/// @since_tizen 4.0
+/// The Wi-Fi specific ap scan handle.
+///
+/// **Since Tizen:**
+/// - 4.0
+/// @nodoc
 typedef wifi_manager_specific_scan_h = ffi.Pointer<ffi.Void>;
 
-/// @brief Called when the connection process is completed.
-/// @details The following functions start the connection process and will
-/// result in the callback being called:
+/// Called when the connection process is completed.
+///
+/// The following functions start the connection process and will result in the callback being called:
 /// - wifi_manager_connect()
 /// - wifi_manager_connect_by_wps_pbc()
 /// - wifi_manager_connect_by_wps_pin()
 /// - wifi_manager_connect_by_wps_pbc_without_ssid()
 /// - wifi_manager_connect_by_wps_pin_without_ssid()
-/// - wifi_manager_connect_hidden_ap() \n\n
-/// The following error codes can be received: \n
-/// #WIFI_MANAGER_ERROR_NONE                     Successful \n
-/// #WIFI_MANAGER_ERROR_OPERATION_FAILED         Operation failed \n
-/// #WIFI_MANAGER_ERROR_OPERATION_ABORTED        Operation aborted \n
-/// #WIFI_MANAGER_ERROR_ALREADY_EXISTS           Connection already exists \n
-/// #WIFI_MANAGER_ERROR_OUT_OF_RANGE             Out of range \n
-/// #WIFI_MANAGER_ERROR_DHCP_FAILED              DHCP failed \n
-/// #WIFI_MANAGER_ERROR_CONNECT_FAILED           Connect failed \n
-/// #WIFI_MANAGER_ERROR_LOGIN_FAILED             Login failed \n
-/// #WIFI_MANAGER_ERROR_AUTHENTICATION_FAILED    Authentication failed \n
-/// #WIFI_MANAGER_ERROR_ASSOCIATION_FAILED       Association failed \n
-/// #WIFI_MANAGER_ERROR_INVALID_KEY              Invalid key \n
-/// #WIFI_MANAGER_ERROR_PIN_MISSING              PIN missing \n
-/// #WIFI_MANAGER_ERROR_WPS_OVERLAP              WPS Overlap \n
-/// #WIFI_MANAGER_ERROR_WPS_TIMEOUT              WPS Timeout \n
-/// #WIFI_MANAGER_ERROR_WPS_WEP_PROHIBITED       WPS WEP Prohibited
-/// @since_tizen 3.0
-/// @param[in] result        The result
-/// @param[in] user_data     The user data passed from the connection function.
-/// @pre Any connection function will invoke this callback.
-/// @see wifi_manager_connect()
-/// @see wifi_manager_connect_by_wps_pbc()
-/// @see wifi_manager_connect_by_wps_pin()
-/// @see wifi_manager_connect_by_wps_pbc_without_ssid()
-/// @see wifi_manager_connect_by_wps_pin_without_ssid()
-/// @see wifi_manager_connect_hidden_ap()
+/// - wifi_manager_connect_hidden_ap() The following error codes can be received: `WIFI_MANAGER_ERROR_NONE` Successful `WIFI_MANAGER_ERROR_OPERATION_FAILED` Operation failed `WIFI_MANAGER_ERROR_OPERATION_ABORTED` Operation aborted `WIFI_MANAGER_ERROR_ALREADY_EXISTS` Connection already exists `WIFI_MANAGER_ERROR_OUT_OF_RANGE` Out of range `WIFI_MANAGER_ERROR_DHCP_FAILED` DHCP failed `WIFI_MANAGER_ERROR_CONNECT_FAILED` Connect failed `WIFI_MANAGER_ERROR_LOGIN_FAILED` Login failed `WIFI_MANAGER_ERROR_AUTHENTICATION_FAILED` Authentication failed `WIFI_MANAGER_ERROR_ASSOCIATION_FAILED` Association failed `WIFI_MANAGER_ERROR_INVALID_KEY` Invalid key `WIFI_MANAGER_ERROR_PIN_MISSING` PIN missing `WIFI_MANAGER_ERROR_WPS_OVERLAP` WPS Overlap `WIFI_MANAGER_ERROR_WPS_TIMEOUT` WPS Timeout `WIFI_MANAGER_ERROR_WPS_WEP_PROHIBITED` WPS WEP Prohibited
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `result` (in): The result
+/// - `user_data` (in): The user data passed from the connection function.
+///
+/// **Preconditions:**
+/// - Any connection function will invoke this callback.
+///
+/// **See also:**
+/// - `wifi_manager_connect()`
+/// - `wifi_manager_connect_by_wps_pbc()`
+/// - `wifi_manager_connect_by_wps_pin()`
+/// - `wifi_manager_connect_by_wps_pbc_without_ssid()`
+/// - `wifi_manager_connect_by_wps_pin_without_ssid()`
+/// - `wifi_manager_connect_hidden_ap()`
+/// @nodoc
 typedef wifi_manager_connected_cb
     = ffi.Pointer<ffi.NativeFunction<wifi_manager_connected_cbFunction>>;
+/// @nodoc
 typedef wifi_manager_connected_cbFunction = ffi.Void Function(
     ffi.Int32 result, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartwifi_manager_connected_cbFunction = void Function(
     int result, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief The Wi-Fi access point handle.
-/// @since_tizen 3.0
+/// The Wi-Fi access point handle.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 typedef wifi_manager_ap_h = ffi.Pointer<ffi.Void>;
 
-/// @brief Called for each found access point.
-/// @details This callback function is used in conjunction with `wifi_manager_foreach_found_ap()` or `wifi_manager_foreach_found_specific_ap()` to iterate through all discovered access points.
-/// @since_tizen 3.0
-/// @remarks @a ap is valid only in this function. In order to use @a ap outside this function, you must copy the @a ap with wifi_manager_ap_clone().
-/// @param[in]  ap           The access point
-/// @param[in]  user_data    The user data passed from the request function
-/// @return  @c true to continue with the next iteration of the loop, \n
-/// otherwise @c false to break out of the loop
-/// @pre  wifi_manager_foreach_found_ap() will invoke this callback.
-/// @pre  wifi_manager_foreach_found_specific_ap() will invoke this callback.
-/// @see  wifi_manager_foreach_found_ap()
-/// @see  wifi_manager_foreach_found_specific_ap()
+/// Called for each found access point.
+///
+/// This callback function is used in conjunction with `wifi_manager_foreach_found_ap()` or `wifi_manager_foreach_found_specific_ap()` to iterate through all discovered access points.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Remarks:**
+/// - `ap` is valid only in this function. In order to use `ap` outside this function, you must copy the `ap` with wifi_manager_ap_clone().
+///
+/// **Parameters:**
+/// - `ap` (in): The access point
+/// - `user_data` (in): The user data passed from the request function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - wifi_manager_foreach_found_ap() will invoke this callback.
+/// - wifi_manager_foreach_found_specific_ap() will invoke this callback.
+///
+/// **See also:**
+/// - `wifi_manager_foreach_found_ap()`
+/// - `wifi_manager_foreach_found_specific_ap()`
+/// @nodoc
 typedef wifi_manager_found_ap_cb
     = ffi.Pointer<ffi.NativeFunction<wifi_manager_found_ap_cbFunction>>;
+/// @nodoc
 typedef wifi_manager_found_ap_cbFunction = ffi.Bool Function(
     wifi_manager_ap_h ap, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartwifi_manager_found_ap_cbFunction = bool Function(
     wifi_manager_ap_h ap, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called after wifi_manager_disconnect() is completed.
-/// @details The following error codes can be received: \n
-/// #WIFI_MANAGER_ERROR_NONE                 Successful \n
-/// #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed
-/// @since_tizen 3.0
-/// @param[in] result        The result
-/// @param[in] user_data     The user data passed from wifi_manager_disconnect()
-/// @pre wifi_manager_disconnect() will invoke this callback function.
-/// @see wifi_manager_disconnect()
+/// Called after wifi_manager_disconnect() is completed.
+///
+/// The following error codes can be received: `WIFI_MANAGER_ERROR_NONE` Successful `WIFI_MANAGER_ERROR_OPERATION_FAILED` Operation failed
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `result` (in): The result
+/// - `user_data` (in): The user data passed from wifi_manager_disconnect()
+///
+/// **Preconditions:**
+/// - wifi_manager_disconnect() will invoke this callback function.
+///
+/// **See also:**
+/// - `wifi_manager_disconnect()`
+/// @nodoc
 typedef wifi_manager_disconnected_cb
     = ffi.Pointer<ffi.NativeFunction<wifi_manager_disconnected_cbFunction>>;
+/// @nodoc
 typedef wifi_manager_disconnected_cbFunction = ffi.Void Function(
     ffi.Int32 result, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartwifi_manager_disconnected_cbFunction = void Function(
     int result, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called after wifi_manager_forget_ap_async() is completed.
-/// @details The following error codes can be received: \n
-/// #WIFI_MANAGER_ERROR_NONE                 Successful \n
-/// #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed
-/// @since_tizen 5.0
-/// @param[in] result        The result
-/// @param[in] user_data     The user data passed from wifi_manager_forget_ap_async()
-/// @pre wifi_manager_forget_ap_async() will invoke this callback function.
-/// @see wifi_manager_forget_ap_async()
+/// Called after wifi_manager_forget_ap_async() is completed.
+///
+/// The following error codes can be received: `WIFI_MANAGER_ERROR_NONE` Successful `WIFI_MANAGER_ERROR_OPERATION_FAILED` Operation failed
+///
+/// **Since Tizen:**
+/// - 5.0
+///
+/// **Parameters:**
+/// - `result` (in): The result
+/// - `user_data` (in): The user data passed from wifi_manager_forget_ap_async()
+///
+/// **Preconditions:**
+/// - wifi_manager_forget_ap_async() will invoke this callback function.
+///
+/// **See also:**
+/// - `wifi_manager_forget_ap_async()`
+/// @nodoc
 typedef wifi_manager_forget_ap_finished_cb = ffi
     .Pointer<ffi.NativeFunction<wifi_manager_forget_ap_finished_cbFunction>>;
+/// @nodoc
 typedef wifi_manager_forget_ap_finished_cbFunction = ffi.Void Function(
     ffi.Int32 result, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartwifi_manager_forget_ap_finished_cbFunction = void Function(
     int result, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the device state is changed.
-/// @details This callback function is registered using `wifi_manager_set_device_state_changed_cb()` and will be called whenever the state of the Wi-Fi device changes.
-/// @since_tizen 3.0
-/// @param[in] state         The device state
-/// @param[in] user_data     The user data passed from the callback registration function
-/// @see wifi_manager_set_device_state_changed_cb()
-/// @see wifi_manager_unset_device_state_changed_cb()
+/// Called when the device state is changed.
+///
+/// This callback function is registered using `wifi_manager_set_device_state_changed_cb()` and will be called whenever the state of the Wi-Fi device changes.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `state` (in): The device state
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `wifi_manager_set_device_state_changed_cb()`
+/// - `wifi_manager_unset_device_state_changed_cb()`
+/// @nodoc
 typedef wifi_manager_device_state_changed_cb = ffi
     .Pointer<ffi.NativeFunction<wifi_manager_device_state_changed_cbFunction>>;
+/// @nodoc
 typedef wifi_manager_device_state_changed_cbFunction = ffi.Void Function(
     ffi.Int32 state, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartwifi_manager_device_state_changed_cbFunction = void Function(
     int state, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the scanning state is changed.
-/// @details This callback function is registered using `wifi_manager_set_scan_state_changed_cb()` and will be called whenever the scanning state of the Wi-Fi manager changes.
-/// @since_tizen 4.0
-/// @param[in] state         The wifi scanning state
-/// @param[in] user_data     The user data passed from the callback registration function
-/// @see wifi_manager_set_scan_state_changed_cb()
-/// @see wifi_manager_unset_scan_state_changed_cb()
+/// Called when the scanning state is changed.
+///
+/// This callback function is registered using `wifi_manager_set_scan_state_changed_cb()` and will be called whenever the scanning state of the Wi-Fi manager changes.
+///
+/// **Since Tizen:**
+/// - 4.0
+///
+/// **Parameters:**
+/// - `state` (in): The wifi scanning state
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `wifi_manager_set_scan_state_changed_cb()`
+/// - `wifi_manager_unset_scan_state_changed_cb()`
+/// @nodoc
 typedef wifi_manager_scan_state_changed_cb = ffi
     .Pointer<ffi.NativeFunction<wifi_manager_scan_state_changed_cbFunction>>;
+/// @nodoc
 typedef wifi_manager_scan_state_changed_cbFunction = ffi.Void Function(
     ffi.Int32 state, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartwifi_manager_scan_state_changed_cbFunction = void Function(
     int state, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the connection state is changed.
-/// @details This callback function is registered using `wifi_manager_set_connection_state_changed_cb()` and will be called whenever the connection state of a Wi-Fi access point changes.
-/// @since_tizen 3.0
-/// @param[in] state         The connection state
-/// @param[in] ap            The access point
-/// @param[in] user_data     The user data passed from the callback registration function
-/// @see wifi_manager_set_connection_state_changed_cb()
-/// @see wifi_manager_unset_connection_state_changed_cb()
+/// Called when the connection state is changed.
+///
+/// This callback function is registered using `wifi_manager_set_connection_state_changed_cb()` and will be called whenever the connection state of a Wi-Fi access point changes.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `state` (in): The connection state
+/// - `ap` (in): The access point
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `wifi_manager_set_connection_state_changed_cb()`
+/// - `wifi_manager_unset_connection_state_changed_cb()`
+/// @nodoc
 typedef wifi_manager_connection_state_changed_cb = ffi.Pointer<
     ffi.NativeFunction<wifi_manager_connection_state_changed_cbFunction>>;
+/// @nodoc
 typedef wifi_manager_connection_state_changed_cbFunction = ffi.Void Function(
     ffi.Int32 state, wifi_manager_ap_h ap, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartwifi_manager_connection_state_changed_cbFunction = void Function(
     int state, wifi_manager_ap_h ap, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the RSSI of connected Wi-Fi is changed.
-/// @details This callback function is registered using `wifi_manager_set_rssi_level_changed_cb()` and will be called whenever the RSSI level of the connected Wi-Fi network changes.
-/// @since_tizen 3.0
-/// @param[in] rssi_level    The level of RSSI
-/// @param[in] user_data     The user data passed from the callback registration function
-/// @see wifi_manager_set_rssi_level_changed_cb()
-/// @see wifi_manager_unset_rssi_level_changed_cb()
+/// Called when the RSSI of connected Wi-Fi is changed.
+///
+/// This callback function is registered using `wifi_manager_set_rssi_level_changed_cb()` and will be called whenever the RSSI level of the connected Wi-Fi network changes.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `rssi_level` (in): The level of RSSI
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `wifi_manager_set_rssi_level_changed_cb()`
+/// - `wifi_manager_unset_rssi_level_changed_cb()`
+/// @nodoc
 typedef wifi_manager_rssi_level_changed_cb = ffi
     .Pointer<ffi.NativeFunction<wifi_manager_rssi_level_changed_cbFunction>>;
+/// @nodoc
 typedef wifi_manager_rssi_level_changed_cbFunction = ffi.Void Function(
     ffi.Int32 rssi_level, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartwifi_manager_rssi_level_changed_cbFunction = void Function(
     int rssi_level, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the Wi-Fi Module state is changed.
-/// @details This callback function is registered using `wifi_manager_set_module_state_changed_cb()` and will be called whenever the state of the Wi-Fi module changes.
-/// @since_tizen 4.0
-/// @param[in] wifi_module_state    The Wi-Fi Module state
-/// @param[in] user_data            The user data passed from the callback registration function
-/// @see wifi_manager_set_module_state_changed_cb()
-/// @see wifi_manager_unset_module_state_changed_cb()
+/// Called when the Wi-Fi Module state is changed.
+///
+/// This callback function is registered using `wifi_manager_set_module_state_changed_cb()` and will be called whenever the state of the Wi-Fi module changes.
+///
+/// **Since Tizen:**
+/// - 4.0
+///
+/// **Parameters:**
+/// - `wifi_module_state` (in): The Wi-Fi Module state
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `wifi_manager_set_module_state_changed_cb()`
+/// - `wifi_manager_unset_module_state_changed_cb()`
+/// @nodoc
 typedef wifi_manager_module_state_changed_cb = ffi
     .Pointer<ffi.NativeFunction<wifi_manager_module_state_changed_cbFunction>>;
+/// @nodoc
 typedef wifi_manager_module_state_changed_cbFunction = ffi.Void Function(
     ffi.Int32 wifi_module_state, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartwifi_manager_module_state_changed_cbFunction = void Function(
     int wifi_module_state, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the BSSID scan is finished.
-/// @details The following error codes can be received: \n
-/// #WIFI_MANAGER_ERROR_NONE                 Successful \n
-/// #WIFI_MANAGER_ERROR_OPERATION_FAILED     Operation failed
-/// @since_tizen 4.0
-/// @param[in] error_code    The error code
-/// @param[in] user_data     The user data passed from the callback registration function
-/// @see wifi_manager_scan()
-/// @see wifi_manager_bssid_scan()
-/// @see wifi_manager_set_background_scan_cb()
-/// @see wifi_manager_unset_background_scan_cb()
+/// Called when the BSSID scan is finished.
+///
+/// The following error codes can be received: `WIFI_MANAGER_ERROR_NONE` Successful `WIFI_MANAGER_ERROR_OPERATION_FAILED` Operation failed
+///
+/// **Since Tizen:**
+/// - 4.0
+///
+/// **Parameters:**
+/// - `error_code` (in): The error code
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `wifi_manager_scan()`
+/// - `wifi_manager_bssid_scan()`
+/// - `wifi_manager_set_background_scan_cb()`
+/// - `wifi_manager_unset_background_scan_cb()`
+/// @nodoc
 typedef wifi_manager_bssid_scan_finished_cb = ffi
     .Pointer<ffi.NativeFunction<wifi_manager_bssid_scan_finished_cbFunction>>;
+/// @nodoc
 typedef wifi_manager_bssid_scan_finished_cbFunction = ffi.Void Function(
     ffi.Int32 error_code, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartwifi_manager_bssid_scan_finished_cbFunction = void Function(
     int error_code, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called with an IPv6 address.
-/// @details This callback function type is used by the `wifi_manager_ap_foreach_ipv6_address()` function
-/// to iterate over each IPv6 address assigned to the Wi-Fi interface for the specified access point.
-/// The callback function receives the IPv6 address as a parameter and returns a boolean value indicating whether to continue iterating or to stop.
-/// @since_tizen 4.0
-/// @remarks  If @a ipv6_address is needed outside the callback, a copy should be
-/// made. @a ipv6_address will be freed automatically after the execution
-/// of this callback.
-/// @param[in]  ipv6_address  The IPv6 address
-/// @param[in]  user_data  The user data passed from the foreach function
-/// @return  @c true to continue with the next iteration of the loop, \n
-/// @c false to break out of the loop
-/// @pre  wifi_manager_ap_foreach_ipv6_address() will invoke this callback.
-/// @see  wifi_manager_ap_foreach_ipv6_address()
+/// Called with an IPv6 address.
+///
+/// This callback function type is used by the `wifi_manager_ap_foreach_ipv6_address()` function to iterate over each IPv6 address assigned to the Wi-Fi interface for the specified access point. The callback function receives the IPv6 address as a parameter and returns a boolean value indicating whether to continue iterating or to stop.
+///
+/// **Since Tizen:**
+/// - 4.0
+///
+/// **Remarks:**
+/// - If `ipv6_address` is needed outside the callback, a copy should be
+/// - made. `ipv6_address` will be freed automatically after the execution
+/// - of this callback.
+///
+/// **Parameters:**
+/// - `ipv6_address` (in): The IPv6 address
+/// - `user_data` (in): The user data passed from the foreach function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - wifi_manager_ap_foreach_ipv6_address() will invoke this callback.
+///
+/// **See also:**
+/// - `wifi_manager_ap_foreach_ipv6_address()`
+/// @nodoc
 typedef wifi_manager_ap_ipv6_address_cb
     = ffi.Pointer<ffi.NativeFunction<wifi_manager_ap_ipv6_address_cbFunction>>;
+/// @nodoc
 typedef wifi_manager_ap_ipv6_address_cbFunction = ffi.Bool Function(
     ffi.Pointer<ffi.Char> ipv6_address, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartwifi_manager_ap_ipv6_address_cbFunction = bool Function(
     ffi.Pointer<ffi.Char> ipv6_address, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called with VSIE data and length of VSIE.
-/// @details This callback function type is used to iterate through the Vendor-Specific Information Element (VSIE) list.
-/// It is called once for each VSIE found, providing the VSIE data and its length.
-/// @since_tizen 5.0
-/// @remarks  If @a vsie is needed outside the callback, a copy should be
-/// made. @a vsie will be freed automatically after the execution
-/// of this callback.
-/// @param[in] vsie             The vendor specific data
-/// @param[in] length         The length of vendor specific data
-/// @param[in] user_data        The user data passed from the foreach function
-/// @return  @c true to continue with the next iteration of the loop, \n
-/// @c false to break out of the loop
-/// @pre  wifi_manager_ap_foreach_vsie() will invoke this callback.
-/// @see  wifi_manager_ap_foreach_vsie().
+/// Called with VSIE data and length of VSIE.
+///
+/// This callback function type is used to iterate through the Vendor-Specific Information Element (VSIE) list. It is called once for each VSIE found, providing the VSIE data and its length.
+///
+/// **Since Tizen:**
+/// - 5.0
+///
+/// **Remarks:**
+/// - If `vsie` is needed outside the callback, a copy should be
+/// - made. `vsie` will be freed automatically after the execution
+/// - of this callback.
+///
+/// **Parameters:**
+/// - `vsie` (in): The vendor specific data
+/// - `length` (in): The length of vendor specific data
+/// - `user_data` (in): The user data passed from the foreach function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - wifi_manager_ap_foreach_vsie() will invoke this callback.
+///
+/// **See also:**
+/// - wifi_manager_ap_foreach_vsie().
+/// @nodoc
 typedef wifi_manager_ap_vsie_cb
     = ffi.Pointer<ffi.NativeFunction<wifi_manager_ap_vsie_cbFunction>>;
+/// @nodoc
 typedef wifi_manager_ap_vsie_cbFunction = ffi.Bool Function(
     ffi.Pointer<ffi.UnsignedChar> vsie,
     ffi.Int length,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartwifi_manager_ap_vsie_cbFunction = bool Function(
     ffi.Pointer<ffi.UnsignedChar> vsie,
     int length,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called for each found BSSID.
-/// @details This callback function type is used to iterate through the found BSSID list.
-/// It is called once for each BSSID found, providing information about the BSSID,
-/// its signal strength (RSSI), and its operating frequency.
-/// @since_tizen 5.0
-/// @remarks  The @a bssid can be used only in the callback. To use it outside, make a copy.
-/// @a bssid is managed by the platform and will be released after the execution
-/// of this callback.
-/// @param[in]  bssid  The BSSID
-/// @param[in]  rssi  The RSSI
-/// @param[in]  freq  The frequency
-/// @param[in]  user_data  The user data passed from the foreach function
-/// @return  @c true to continue with the next iteration of the loop, otherwise @c false to break out of the loop
-/// @pre  wifi_manager_foreach_found_bssid() will invoke this callback.
+/// Called for each found BSSID.
+///
+/// This callback function type is used to iterate through the found BSSID list. It is called once for each BSSID found, providing information about the BSSID, its signal strength (RSSI), and its operating frequency.
+///
+/// **Since Tizen:**
+/// - 5.0
+///
+/// **Remarks:**
+/// - The `bssid` can be used only in the callback. To use it outside, make a copy.
+/// - `bssid` is managed by the platform and will be released after the execution
+/// - of this callback.
+///
+/// **Parameters:**
+/// - `bssid` (in): The BSSID
+/// - `rssi` (in): The RSSI
+/// - `freq` (in): The frequency
+/// - `user_data` (in): The user data passed from the foreach function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - wifi_manager_foreach_found_bssid() will invoke this callback.
+/// @nodoc
 typedef wifi_manager_found_bssid_cb
     = ffi.Pointer<ffi.NativeFunction<wifi_manager_found_bssid_cbFunction>>;
+/// @nodoc
 typedef wifi_manager_found_bssid_cbFunction = ffi.Bool Function(
     ffi.Pointer<ffi.Char> bssid,
     ffi.Int rssi,
     ffi.Int freq,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartwifi_manager_found_bssid_cbFunction = bool Function(
     ffi.Pointer<ffi.Char> bssid,
     int rssi,
     int freq,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief The Wi-Fi access point configuration handle.
-/// @since_tizen 3.0
+/// The Wi-Fi access point configuration handle.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 typedef wifi_manager_config_h = ffi.Pointer<ffi.Void>;
 
-/// @brief Called for each found access point configuration.
-/// @details This callback function is used in conjunction with `wifi_manager_config_foreach_configuration()` to iterate through all saved access point configurations.
-/// @since_tizen 3.0
-/// @remarks @a config is valid only in this function. In order to use @a config outside this function, you must copy the config with wifi_manager_config_clone().
+/// Called for each found access point configuration.
 ///
-/// @param[in]  config       The access point configuration handle
-/// @param[in]  user_data    The user data passed from the request function
+/// This callback function is used in conjunction with `wifi_manager_config_foreach_configuration()` to iterate through all saved access point configurations.
 ///
-/// @return  @c true to continue with the next iteration of the loop, otherwise @c false to break out of the loop \n
-/// @pre  wifi_manager_config_foreach_configuration() will invoke this callback.
-/// @see  wifi_manager_config_foreach_configuration()
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Remarks:**
+/// - `config` is valid only in this function. In order to use `config` outside this function, you must copy the config with wifi_manager_config_clone().
+///
+/// **Parameters:**
+/// - `config` (in): The access point configuration handle
+/// - `user_data` (in): The user data passed from the request function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - wifi_manager_config_foreach_configuration() will invoke this callback.
+///
+/// **See also:**
+/// - `wifi_manager_config_foreach_configuration()`
+/// @nodoc
 typedef wifi_manager_config_list_cb
     = ffi.Pointer<ffi.NativeFunction<wifi_manager_config_list_cbFunction>>;
+/// @nodoc
 typedef wifi_manager_config_list_cbFunction = ffi.Bool Function(
     wifi_manager_config_h config, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartwifi_manager_config_list_cbFunction = bool Function(
     wifi_manager_config_h config, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the Wi-Fi TDLS is discovered.
-/// @details This callback function is registered using `wifi_manager_tdls_set_discovered_cb()` and
-/// will be called when the TDLS discovery process is completed.
-/// @since_tizen 4.0
-/// @remarks @a peer_mac_addr is usable only in the callback. To use outside the callback, make a copy.
-/// @param[in] state          The TDLS state
-/// @param[in] peer_mac_addr  The MAC address of the TDLS peer
-/// @param[in] user_data      The user data passed from the callback registration function
-/// @see wifi_manager_tdls_set_discovered_cb()
-/// @see wifi_manager_tdls_unset_discovered_cb()
+/// Called when the Wi-Fi TDLS is discovered.
+///
+/// This callback function is registered using `wifi_manager_tdls_set_discovered_cb()` and will be called when the TDLS discovery process is completed.
+///
+/// **Since Tizen:**
+/// - 4.0
+///
+/// **Remarks:**
+/// - `peer_mac_addr` is usable only in the callback. To use outside the callback, make a copy.
+///
+/// **Parameters:**
+/// - `state` (in): The TDLS state
+/// - `peer_mac_addr` (in): The MAC address of the TDLS peer
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `wifi_manager_tdls_set_discovered_cb()`
+/// - `wifi_manager_tdls_unset_discovered_cb()`
+/// @nodoc
 typedef wifi_manager_tdls_discovered_cb
     = ffi.Pointer<ffi.NativeFunction<wifi_manager_tdls_discovered_cbFunction>>;
+/// @nodoc
 typedef wifi_manager_tdls_discovered_cbFunction = ffi.Void Function(
     ffi.Int32 state,
     ffi.Pointer<ffi.Char> peer_mac_addr,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartwifi_manager_tdls_discovered_cbFunction = void Function(int state,
     ffi.Pointer<ffi.Char> peer_mac_addr, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the Wi-Fi TDLS state is changed.
-/// @details This callback function is registered using `wifi_manager_tdls_set_state_changed_cb()` and
-/// will be called whenever the state of a TDLS connection changes.
-/// @since_tizen 3.0
+/// Called when the Wi-Fi TDLS state is changed.
 ///
-/// @param[in] state          The TDLS state
-/// @param[in] peer_mac_addr  The MAC address of the TDLS peer
-/// @param[in] user_data      The user data passed from the callback registration function
-/// @see wifi_manager_tdls_set_state_changed_cb()
-/// @see wifi_manager_tdls_unset_state_changed_cb()
+/// This callback function is registered using `wifi_manager_tdls_set_state_changed_cb()` and will be called whenever the state of a TDLS connection changes.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `state` (in): The TDLS state
+/// - `peer_mac_addr` (in): The MAC address of the TDLS peer
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `wifi_manager_tdls_set_state_changed_cb()`
+/// - `wifi_manager_tdls_unset_state_changed_cb()`
+/// @nodoc
 typedef wifi_manager_tdls_state_changed_cb = ffi
     .Pointer<ffi.NativeFunction<wifi_manager_tdls_state_changed_cbFunction>>;
+/// @nodoc
 typedef wifi_manager_tdls_state_changed_cbFunction = ffi.Void Function(
     ffi.Int32 state,
     ffi.Pointer<ffi.Char> peer_mac_addr,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartwifi_manager_tdls_state_changed_cbFunction = void Function(
     int state,
     ffi.Pointer<ffi.Char> peer_mac_addr,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the IP conflict state is changed.
-/// @details This callback function is registered using `wifi_manager_set_ip_conflict_cb()` and will be called whenever the IP conflict state changes.
-/// @since_tizen 5.0
-/// @remarks @a mac should not be freed. @a mac is available only in the callback. To use
-/// outside the callback, make a copy.
-/// @param[in] mac           The destination MAC address causing conflict
-/// @param[in] state         The current state
-/// @param[in] user_data     The user data passed from the callback registration function
-/// @see wifi_manager_set_ip_conflict_cb()
-/// @see wifi_manager_unset_ip_conflict_cb()
+/// Called when the IP conflict state is changed.
+///
+/// This callback function is registered using `wifi_manager_set_ip_conflict_cb()` and will be called whenever the IP conflict state changes.
+///
+/// **Since Tizen:**
+/// - 5.0
+///
+/// **Remarks:**
+/// - `mac` should not be freed. `mac` is available only in the callback. To use
+/// - outside the callback, make a copy.
+///
+/// **Parameters:**
+/// - `mac` (in): The destination MAC address causing conflict
+/// - `state` (in): The current state
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `wifi_manager_set_ip_conflict_cb()`
+/// - `wifi_manager_unset_ip_conflict_cb()`
+/// @nodoc
 typedef wifi_manager_ip_conflict_cb
     = ffi.Pointer<ffi.NativeFunction<wifi_manager_ip_conflict_cbFunction>>;
+/// @nodoc
 typedef wifi_manager_ip_conflict_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> mac,
     ffi.Int32 state,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartwifi_manager_ip_conflict_cbFunction = void Function(
     ffi.Pointer<ffi.Char> mac, int state, ffi.Pointer<ffi.Void> user_data);

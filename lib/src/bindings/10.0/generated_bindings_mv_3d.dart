@@ -1,3 +1,6 @@
+/// {@category 10.0/tizen}
+library tizen_interop_10_0.mv_3d;
+
 // Copyright 2026 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -10,6 +13,7 @@ import 'dart:ffi' as ffi;
 import 'generated_bindings_mv_common.dart' as mv_common;
 
 /// Dart bindings for Tizen mv_3d APIs.
+/// {@category 10.0/tizen}
 class Tizen100Mv3d {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -25,19 +29,28 @@ class Tizen100Mv3d {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Creates mv3d handle.
+  /// Creates mv3d handle.
   ///
-  /// @since_tizen 7.0
-  /// @remarks The @a mv3d should be released using mv_3d_destroy()
-  /// if there is no more usage of @a mv3d.
-  /// @param[out] mv3d    The created mv3d handle
+  /// **Since Tizen:**
+  /// - 7.0
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Remarks:**
+  /// - The `mv3d` should be released using mv_3d_destroy()
+  /// - if there is no more usage of `mv3d`.
   ///
-  /// @see mv_3d_destroy()
+  /// **Parameters:**
+  /// - `mv3d` (out): The created mv3d handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `mv_3d_destroy()`
   int mv_3d_create(
     ffi.Pointer<mv_3d_h> mv3d,
   ) {
@@ -52,20 +65,27 @@ class Tizen100Mv3d {
   late final _mv_3d_create =
       _mv_3d_createPtr.asFunction<int Function(ffi.Pointer<mv_3d_h>)>();
 
-  /// @brief Destroys mv3d handle and release all its resources.
+  /// Destroys mv3d handle and release all its resources.
   ///
-  /// @since_tizen 7.0
+  /// **Since Tizen:**
+  /// - 7.0
   ///
-  /// @param[in] mv3d    The handle to the mv3d to be destroyed
+  /// **Parameters:**
+  /// - `mv3d` (in): The handle to the mv3d to be destroyed
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @pre Create mv3d handle by using mv_3d_create()
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
   ///
-  /// @see mv_3d_create()
+  /// **Preconditions:**
+  /// - Create mv3d handle by using mv_3d_create()
+  ///
+  /// **See also:**
+  /// - `mv_3d_create()`
   int mv_3d_destroy(
     mv_3d_h mv3d,
   ) {
@@ -79,25 +99,32 @@ class Tizen100Mv3d {
   late final _mv_3d_destroy =
       _mv_3d_destroyPtr.asFunction<int Function(mv_3d_h)>();
 
-  /// @brief Configures handle.
-  /// @details Use this function to configure parameters of the mv3d
-  /// which is set to @a engine_config.
+  /// Configures handle.
   ///
-  /// @since_tizen 7.0
+  /// Use this function to configure parameters of the mv3d which is set to `engine_config`.
   ///
-  /// @param[in] mv3d          The handle to the mv3d
-  /// @param[in] engine_config The handle to the configuration of engine
+  /// **Since Tizen:**
+  /// - 7.0
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Parameters:**
+  /// - `mv3d` (in): The handle to the mv3d
+  /// - `engine_config` (in): The handle to the configuration of engine
   ///
-  /// @pre Create mv3d handle by using mv_3d_create()
-  /// @pre Create engine_config handle by using mv_create_engine_config()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @see mv_3d_create()
-  /// @see mv_create_engine_config()
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - Create mv3d handle by using mv_3d_create()
+  /// - Create engine_config handle by using mv_create_engine_config()
+  ///
+  /// **See also:**
+  /// - `mv_3d_create()`
+  /// - `mv_create_engine_config()`
   int mv_3d_configure(
     mv_3d_h mv3d,
     mv_common.mv_engine_config_h engine_config,
@@ -115,21 +142,28 @@ class Tizen100Mv3d {
   late final _mv_3d_configure = _mv_3d_configurePtr
       .asFunction<int Function(mv_3d_h, mv_common.mv_engine_config_h)>();
 
-  /// @brief Prepares handle.
+  /// Prepares handle.
   ///
-  /// @since_tizen 7.0
+  /// **Since Tizen:**
+  /// - 7.0
   ///
-  /// @param[in] mv3d    The handle to the mv3d
+  /// **Parameters:**
+  /// - `mv3d` (in): The handle to the mv3d
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_INVALID_OPERATION Invalid operation
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @pre Configure mv3d handle by using mv_3d_configure()
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_INVALID_OPERATION`: Invalid operation
   ///
-  /// @see mv_3d_configure()
+  /// **Preconditions:**
+  /// - Configure mv3d handle by using mv_3d_configure()
+  ///
+  /// **See also:**
+  /// - `mv_3d_configure()`
   int mv_3d_prepare(
     mv_3d_h mv3d,
   ) {
@@ -143,29 +177,35 @@ class Tizen100Mv3d {
   late final _mv_3d_prepare =
       _mv_3d_preparePtr.asFunction<int Function(mv_3d_h)>();
 
-  /// @brief Sets mv_3d_depth_cb() callback.
-  /// @details Use this function to set mv_3d_depth_cb() callback.
+  /// Sets mv_3d_depth_cb() callback.
   ///
-  /// @since_tizen 7.0
+  /// Use this function to set mv_3d_depth_cb() callback.
   ///
-  /// @param[in] mv3d       The handle to the mv3d
-  /// @param[in] depth_cb   The callback which will be invoked for
-  /// getting depth data
-  /// @param[in] user_data  The user data passed from the code where
-  /// mv_3d_run() or mv_3d_run_async() is invoked. This data will be
-  /// accessible in @a depth_cb callback
+  /// **Since Tizen:**
+  /// - 7.0
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Parameters:**
+  /// - `mv3d` (in): The handle to the mv3d
+  /// - `depth_cb` (in): The callback which will be invoked for getting depth data
+  /// - `user_data` (in): The user data passed from the code where mv_3d_run() or mv_3d_run_async() is invoked. This data will be accessible in `depth_cb` callback
   ///
-  /// @pre Create mv3d handle by using mv_3d_create()
-  /// @pre Create engine_config handle by using mv_create_engine_config()
-  /// @pre Configure mv3d handle by using mv_3d_configure()
-  /// @see mv_3d_create()
-  /// @see mv_create_engine_config()
-  /// @see mv_3d_configure()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - Create mv3d handle by using mv_3d_create()
+  /// - Create engine_config handle by using mv_create_engine_config()
+  /// - Configure mv3d handle by using mv_3d_configure()
+  ///
+  /// **See also:**
+  /// - `mv_3d_create()`
+  /// - `mv_create_engine_config()`
+  /// - `mv_3d_configure()`
   int mv_3d_set_depth_cb(
     mv_3d_h mv3d,
     mv_3d_depth_cb depth_cb,
@@ -185,29 +225,35 @@ class Tizen100Mv3d {
   late final _mv_3d_set_depth_cb = _mv_3d_set_depth_cbPtr.asFunction<
       int Function(mv_3d_h, mv_3d_depth_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Sets mv_3d_pointcloud_cb() callback.
-  /// @details Use this function to set mv_3d_pointcloud_cb() callback.
+  /// Sets mv_3d_pointcloud_cb() callback.
   ///
-  /// @since_tizen 7.0
+  /// Use this function to set mv_3d_pointcloud_cb() callback.
   ///
-  /// @param[in] mv3d              The handle to the mv3d
-  /// @param[in] pointcloud_cb     The callback which will be invoked for
-  /// getting pointcloud data
-  /// @param[in] user_data         The user data passed from the code where
-  /// mv_3d_run() or mv_3d_run_async() is invoked. This data will be
-  /// accessible in @a pointcloud_cb callback
+  /// **Since Tizen:**
+  /// - 7.0
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Parameters:**
+  /// - `mv3d` (in): The handle to the mv3d
+  /// - `pointcloud_cb` (in): The callback which will be invoked for getting pointcloud data
+  /// - `user_data` (in): The user data passed from the code where mv_3d_run() or mv_3d_run_async() is invoked. This data will be accessible in `pointcloud_cb` callback
   ///
-  /// @pre Create mv3d handle by using mv_3d_create()
-  /// @pre Create engine_config handle by using mv_create_engine_config()
-  /// @pre Configure mv3d handle by using mv_3d_configure()
-  /// @see mv_3d_create()
-  /// @see mv_create_engine_config()
-  /// @see mv_3d_configure()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - Create mv3d handle by using mv_3d_create()
+  /// - Create engine_config handle by using mv_create_engine_config()
+  /// - Configure mv3d handle by using mv_3d_configure()
+  ///
+  /// **See also:**
+  /// - `mv_3d_create()`
+  /// - `mv_create_engine_config()`
+  /// - `mv_3d_configure()`
   int mv_3d_set_pointcloud_cb(
     mv_3d_h mv3d,
     mv_3d_pointcloud_cb pointcloud_cb,
@@ -227,42 +273,41 @@ class Tizen100Mv3d {
   late final _mv_3d_set_pointcloud_cb = _mv_3d_set_pointcloud_cbPtr.asFunction<
       int Function(mv_3d_h, mv_3d_pointcloud_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Gets depth or pointcloud synchronously from given @a source
-  /// or @a source_extra.
-  /// @details Use this function to get depth data.
-  /// @a source_extra can be null if @a source is a stereoscopic format
-  /// media, for example a left and a right media are concatenated
-  /// as a side-by-side format and then it should be given to @a source
-  /// but @a source_extra should be null.
-  /// @a source_extra should not be null if @a source is a mono format media or
-  /// a single side/channel of a stereoscopic format, for example a left
-  /// and a right media are separated and then they should be given to @a source
-  /// and @a source_extra, respectively.
-  /// @a color may not be null if pointcloud data includes color.
+  /// Gets depth or pointcloud synchronously from given `source` or `source_extra`.
   ///
-  /// @since_tizen 7.0
+  /// Use this function to get depth data. `source_extra` can be null if `source` is a stereoscopic format media, for example a left and a right media are concatenated as a side-by-side format and then it should be given to `source` but `source_extra` should be null. `source_extra` should not be null if `source` is a mono format media or a single side/channel of a stereoscopic format, for example a left and a right media are separated and then they should be given to `source` and `source_extra`, respectively. `color` may not be null if pointcloud data includes color.
   ///
-  /// @param[in] mv3d            The handle to the mv3d
-  /// @param[in] source          The handle to the source of the media
-  /// @param[in] source_extra    The handle to the extra source of the media
-  /// @param[in] color           The handle to the color of the media
+  /// **Since Tizen:**
+  /// - 7.0
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Parameters:**
+  /// - `mv3d` (in): The handle to the mv3d
+  /// - `source` (in): The handle to the source of the media
+  /// - `source_extra` (in): The handle to the extra source of the media
+  /// - `color` (in): The handle to the color of the media
   ///
-  /// @pre Create a source handle by using mv_create_source()
-  /// @pre Create a source_extra handle by using mv_create_source()
-  /// @pre Create a mv3d handle by using mv_3d_create()
-  /// @pre Configure a mv3d handle by using mv_3d_configure()
-  /// @pre Set depth callback to a depth handle by using mv_3d_set_depth_cb()
-  /// @pre Prepare a mv3d handle by using mv_3d_prepare()
-  /// @post Callback which is set by mv_3d_set_depth_cb() will be invoked
-  /// to provide depth data
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @see mv_3d_set_depth_cb()
-  /// @see mv_3d_depth_cb()
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - Create a source handle by using mv_create_source()
+  /// - Create a source_extra handle by using mv_create_source()
+  /// - Create a mv3d handle by using mv_3d_create()
+  /// - Configure a mv3d handle by using mv_3d_configure()
+  /// - Set depth callback to a depth handle by using mv_3d_set_depth_cb()
+  /// - Prepare a mv3d handle by using mv_3d_prepare()
+  ///
+  /// **Postconditions:**
+  /// - Callback which is set by mv_3d_set_depth_cb() will be invoked to provide depth data
+  ///
+  /// **See also:**
+  /// - `mv_3d_set_depth_cb()`
+  /// - `mv_3d_depth_cb()`
   int mv_3d_run(
     mv_3d_h mv3d,
     mv_common.mv_source_h source,
@@ -285,42 +330,41 @@ class Tizen100Mv3d {
       int Function(mv_3d_h, mv_common.mv_source_h, mv_common.mv_source_h,
           mv_common.mv_source_h)>();
 
-  /// @brief Gets depth or pointcloud asynchronously from given @a source
-  /// or @a source_extra.
-  /// @details Use this function to get depth data.
-  /// @a source_extra can be null if @a source is a stereoscopic format
-  /// media, for example a left and a right media are concatenated
-  /// as a side-by-side format and then it should be given to @a source
-  /// but @a source_extra should be null.
-  /// @a source_extra should not be null if @a source is a mono format media or
-  /// a single side/channel of a stereoscopic format, for example a left
-  /// and a right media are separated and then they should be given to @a source
-  /// and @a source_extra, respectively.
-  /// @a color may not be null if pointcloud data includes color.
+  /// Gets depth or pointcloud asynchronously from given `source` or `source_extra`.
   ///
-  /// @since_tizen 7.0
+  /// Use this function to get depth data. `source_extra` can be null if `source` is a stereoscopic format media, for example a left and a right media are concatenated as a side-by-side format and then it should be given to `source` but `source_extra` should be null. `source_extra` should not be null if `source` is a mono format media or a single side/channel of a stereoscopic format, for example a left and a right media are separated and then they should be given to `source` and `source_extra`, respectively. `color` may not be null if pointcloud data includes color.
   ///
-  /// @param[in] mv3d            The handle to the mv3d
-  /// @param[in] source          The handle to the source of the media
-  /// @param[in] source_extra    The handle to the extra source of the media
-  /// @param[in] color           The handle to the color of the media
+  /// **Since Tizen:**
+  /// - 7.0
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Parameters:**
+  /// - `mv3d` (in): The handle to the mv3d
+  /// - `source` (in): The handle to the source of the media
+  /// - `source_extra` (in): The handle to the extra source of the media
+  /// - `color` (in): The handle to the color of the media
   ///
-  /// @pre Create a source handle by using mv_create_source()
-  /// @pre Create a source_extra handle by using mv_create_source()
-  /// @pre Create a mv3d handle by using mv_3d_create()
-  /// @pre Configure a mv3d handle by using mv_3d_configure()
-  /// @pre Set depth callback to a depth handle by using mv_3d_set_depth_cb()
-  /// @pre Prepare a mv3d handle by using mv_3d_prepare()
-  /// @post Callback which is set by mv_3d_set_depth_cb() will be invoked
-  /// to provide depth data
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @see mv_3d_set_depth_cb()
-  /// @see mv_3d_depth_cb()
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - Create a source handle by using mv_create_source()
+  /// - Create a source_extra handle by using mv_create_source()
+  /// - Create a mv3d handle by using mv_3d_create()
+  /// - Configure a mv3d handle by using mv_3d_configure()
+  /// - Set depth callback to a depth handle by using mv_3d_set_depth_cb()
+  /// - Prepare a mv3d handle by using mv_3d_prepare()
+  ///
+  /// **Postconditions:**
+  /// - Callback which is set by mv_3d_set_depth_cb() will be invoked to provide depth data
+  ///
+  /// **See also:**
+  /// - `mv_3d_set_depth_cb()`
+  /// - `mv_3d_depth_cb()`
   int mv_3d_run_async(
     mv_3d_h mv3d,
     mv_common.mv_source_h source,
@@ -346,32 +390,44 @@ class Tizen100Mv3d {
       int Function(mv_3d_h, mv_common.mv_source_h, mv_common.mv_source_h,
           mv_common.mv_source_h)>();
 
-  /// @brief Writes pointcloud data to a file.
-  /// @details Use this function to write pointcloud data to a file.
+  /// Writes pointcloud data to a file.
   ///
-  /// @since_tizen 7.0
-  /// @remarks The mediastorage privilege %http://tizen.org/privilege/mediastorage
-  /// is needed if @a filename is relevant to media storage.\n
-  /// The externalstorage privilege %http://tizen.org/privilege/externalstorage
-  /// is needed if @a filename is relevant to external storage.
-  /// @param[in] mv3d         The handle to the mv3d
-  /// @param[in] pointcloud   The handle to the pointcloud
-  /// @param[in] type         The file format type to be written
-  /// @param[in] filename     The filename to save @a pointcloud
+  /// Use this function to write pointcloud data to a file.
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIA_VISION_ERROR_NONE Successful
-  /// @retval #MEDIA_VISION_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIA_VISION_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #MEDIA_VISION_ERROR_INVALID_PATH Invalid path
+  /// **Since Tizen:**
+  /// - 7.0
   ///
-  /// @pre Create mv3d handle by using mv_3d_create()
-  /// @pre Create engine_config handle by using mv_create_engine_config()
-  /// @pre Configure mv3d handle by using mv_3d_configure()
-  /// @see mv_3d_create()
-  /// @see mv_create_engine_config()
-  /// @see mv_3d_configure()
+  /// **Remarks:**
+  /// - The mediastorage privilege http://tizen.org/privilege/mediastorage
+  /// - is needed if `filename` is relevant to media storage.
+  /// - The externalstorage privilege http://tizen.org/privilege/externalstorage
+  /// - is needed if `filename` is relevant to external storage.
+  ///
+  /// **Parameters:**
+  /// - `mv3d` (in): The handle to the mv3d
+  /// - `pointcloud` (in): The handle to the pointcloud
+  /// - `type` (in): The file format type to be written
+  /// - `filename` (in): The filename to save `pointcloud`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_VISION_ERROR_NONE`: Successful
+  /// - `MEDIA_VISION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `MEDIA_VISION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_VISION_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `MEDIA_VISION_ERROR_INVALID_PATH`: Invalid path
+  ///
+  /// **Preconditions:**
+  /// - Create mv3d handle by using mv_3d_create()
+  /// - Create engine_config handle by using mv_create_engine_config()
+  /// - Configure mv3d handle by using mv_3d_configure()
+  ///
+  /// **See also:**
+  /// - `mv_3d_create()`
+  /// - `mv_create_engine_config()`
+  /// - `mv_3d_configure()`
   int mv_3d_pointcloud_write_file(
     mv_3d_h mv3d,
     mv_3d_pointcloud_h pointcloud,
@@ -396,8 +452,11 @@ class Tizen100Mv3d {
               mv_3d_h, mv_3d_pointcloud_h, int, ffi.Pointer<ffi.Char>)>();
 }
 
-/// @brief Enumeration for mv3d depth mode.
-/// @since_tizen 7.0
+/// Enumeration for mv3d depth mode.
+///
+/// **Since Tizen:**
+/// - 7.0
+/// @nodoc
 abstract class mv_3d_depth_mode_e {
   /// < NONE
   static const int MV_3D_DEPTH_MODE_NONE = 0;
@@ -406,8 +465,11 @@ abstract class mv_3d_depth_mode_e {
   static const int MV_3D_DEPTH_MODE_STEREO = 1;
 }
 
-/// @brief Enumeration for mv3d pointcloud file format type.
-/// @since_tizen 7.0
+/// Enumeration for mv3d pointcloud file format type.
+///
+/// **Since Tizen:**
+/// - 7.0
+/// @nodoc
 abstract class mv_3d_pointcloud_type_e {
   /// < PointCloudData format as text
   static const int MV_3D_POINTCLOUD_TYPE_PCD_TXT = 0;
@@ -422,40 +484,50 @@ abstract class mv_3d_pointcloud_type_e {
   static const int MV_3D_POINTCLOUD_TYPE_PLY_BIN = 3;
 }
 
-/// @brief The mv3d handle.
-/// @since_tizen 7.0
+/// The mv3d handle.
+///
+/// **Since Tizen:**
+/// - 7.0
+/// @nodoc
 typedef mv_3d_h = ffi.Pointer<ffi.Void>;
 
-/// @brief Invoked when @a depth is ready.
-/// @details This callback is invoked each time when
-/// mv_3d_run() or mv3d_run_async() is called
-/// to report estimated depth from given source(s).
+/// Invoked when `depth` is ready.
 ///
-/// @since_tizen 7.0
-/// @remarks The @a source is available until it is released by mv_destroy_source().
-/// The @a depth can be used only in the callback.
-/// To use outside, make a copy. The @a depth is managed by the platform
-/// and should not be freed.
-/// @param[in] source    The handle to the source of the media where
-/// the depth data comes from
-/// @param[in] depth     The pointer of the depth data
-/// @param[in] width     The width of @a depth
-/// @param[in] height    The height of @a depth
-/// @param[in] user_data The user data passed from callback invoking code
+/// This callback is invoked each time when mv_3d_run() or mv3d_run_async() is called to report estimated depth from given source(s).
 ///
-/// @pre Call mv_3d_run() or mv_3d_run_async() function to get depth data
-/// and to invoke this callback as a result
+/// **Since Tizen:**
+/// - 7.0
 ///
-/// @see mv_3d_run()
-/// @see mv_3d_run_async()
+/// **Remarks:**
+/// - The `source` is available until it is released by mv_destroy_source().
+/// - The `depth` can be used only in the callback.
+/// - To use outside, make a copy. The `depth` is managed by the platform
+/// - and should not be freed.
+///
+/// **Parameters:**
+/// - `source` (in): The handle to the source of the media where the depth data comes from
+/// - `depth` (in): The pointer of the depth data
+/// - `width` (in): The width of `depth`
+/// - `height` (in): The height of `depth`
+/// - `user_data` (in): The user data passed from callback invoking code
+///
+/// **Preconditions:**
+/// - Call mv_3d_run() or mv_3d_run_async() function to get depth data and to invoke this callback as a result
+///
+/// **See also:**
+/// - `mv_3d_run()`
+/// - `mv_3d_run_async()`
+/// @nodoc
 typedef mv_3d_depth_cb
     = ffi.Pointer<ffi.NativeFunction<mv_3d_depth_cbFunction>>;
+/// @nodoc
 typedef mv_3d_depth_cbFunction = ffi.Void Function(
     mv_common.mv_source_h source,
     ffi.Pointer<ffi.UnsignedShort> depth,
     ffi.UnsignedInt width,
     ffi.UnsignedInt height,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmv_3d_depth_cbFunction = void Function(
     mv_common.mv_source_h source,
     ffi.Pointer<ffi.UnsignedShort> depth,
@@ -463,62 +535,82 @@ typedef Dartmv_3d_depth_cbFunction = void Function(
     int height,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Invoked when @a pointcloud is ready.
-/// @details This callback is invoked each time when
-/// mv_3d_run() or mv3d_run_async() is called
-/// to report estimated pointcloud from given source(s).
+/// Invoked when `pointcloud` is ready.
 ///
-/// @since_tizen 7.0
-/// @remarks The @a source is available until it is released by mv_destroy_source().
-/// The @a pointcloud can be used only in the callback.
-/// To use outside, make a copy. The @a pointcloud is managed by the platform
-/// and should not be freed.
-/// @param[in] source     The handle to the source of the media where
-/// the pointcloud data comes from
-/// @param[in] pointcloud The pointer of the pointcloud result
-/// @param[in] user_data  The user data passed from callback invoking code
+/// This callback is invoked each time when mv_3d_run() or mv3d_run_async() is called to report estimated pointcloud from given source(s).
 ///
-/// @pre Call mv_3d_run() or mv_3d_run_async() function to get pointcloud data
-/// and to invoke this callback as a result
+/// **Since Tizen:**
+/// - 7.0
 ///
-/// @see mv_3d_run()
-/// @see mv_3d_run_async()
+/// **Remarks:**
+/// - The `source` is available until it is released by mv_destroy_source().
+/// - The `pointcloud` can be used only in the callback.
+/// - To use outside, make a copy. The `pointcloud` is managed by the platform
+/// - and should not be freed.
+///
+/// **Parameters:**
+/// - `source` (in): The handle to the source of the media where the pointcloud data comes from
+/// - `pointcloud` (in): The pointer of the pointcloud result
+/// - `user_data` (in): The user data passed from callback invoking code
+///
+/// **Preconditions:**
+/// - Call mv_3d_run() or mv_3d_run_async() function to get pointcloud data and to invoke this callback as a result
+///
+/// **See also:**
+/// - `mv_3d_run()`
+/// - `mv_3d_run_async()`
+/// @nodoc
 typedef mv_3d_pointcloud_cb
     = ffi.Pointer<ffi.NativeFunction<mv_3d_pointcloud_cbFunction>>;
+/// @nodoc
 typedef mv_3d_pointcloud_cbFunction = ffi.Void Function(
     mv_common.mv_source_h source,
     mv_3d_pointcloud_h pointcloud,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmv_3d_pointcloud_cbFunction = void Function(
     mv_common.mv_source_h source,
     mv_3d_pointcloud_h pointcloud,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief The pointcloud result handle.
-/// @since_tizen 7.0
+/// The pointcloud result handle.
+///
+/// **Since Tizen:**
+/// - 7.0
+/// @nodoc
 typedef mv_3d_pointcloud_h = ffi.Pointer<ffi.Void>;
 
+/// @nodoc
 const String MV_3D_DEPTH_MODE = 'MV_3D_DEPTH_MODE';
 
+/// @nodoc
 const String MV_3D_DEPTH_WIDTH = 'MV_3D_DEPTH_WIDTH';
 
+/// @nodoc
 const String MV_3D_DEPTH_HEIGHT = 'MV_3D_DEPTH_HEIGHT';
 
+/// @nodoc
 const String MV_3D_DEPTH_MIN_DISPARITY = 'MV_3D_DEPTH_MIN_DISPARITY';
 
+/// @nodoc
 const String MV_3D_DEPTH_MAX_DISPARITY = 'MV_3D_DEPTH_MAX_DISPARITY';
 
+/// @nodoc
 const String MV_3D_DEPTH_STEREO_CONFIG_FILE_PATH =
     'MV_3D_DEPTH_STEREO_CONFIG_FILE_PATH';
 
+/// @nodoc
 const String MV_3D_POINTCLOUD_OUTPUT_FILE_PATH =
     'MV_3D_POINTCLOUD_OUTPUT_FILE_PATH';
 
+/// @nodoc
 const String MV_3D_POINTCLOUD_SAMPLING_RATIO =
     'MV_3D_POINTCLOUD_SAMPLING_RATIO';
 
+/// @nodoc
 const String MV_3D_POINTCLOUD_OUTLIER_REMOVAL_POINTS =
     'MV_3D_POINTCLOUD_OUTLIER_REMOVAL_POINTS';
 
+/// @nodoc
 const String MV_3D_POINTCLOUD_OUTLIER_REMOVAL_RADIUS =
     'MV_3D_POINTCLOUD_OUTLIER_REMOVAL_RADIUS';

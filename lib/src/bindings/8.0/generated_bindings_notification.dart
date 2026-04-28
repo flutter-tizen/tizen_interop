@@ -1,3 +1,6 @@
+/// {@category 8.0/tizen}
+library tizen_interop_8_0.notification;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -11,6 +14,7 @@ import 'dart:ffi' as ffi_lib;
 import 'generated_bindings_capi_appfw_app_control.dart' as app_control;
 
 /// Dart bindings for Tizen notification APIs.
+/// {@category 8.0/tizen}
 class Tizen80Notification {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -26,14 +30,23 @@ class Tizen80Notification {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Shows a toast popup window with given message.
-  /// @since_tizen @if WEARABLE 2.3.1 @elseif MOBILE 2.3 @endif
-  /// @param[in] message The messages to be posted
-  /// @return #NOTIFICATION_ERROR_NONE on success,
-  /// otherwise any other value on failure
-  /// @retval #NOTIFICATION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #NOTIFICATION_ERROR_FROM_DBUS Error from DBus
-  /// @see #notification_error_e
+  /// Shows a toast popup window with given message.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Mobile 2.3
+  ///
+  /// **Parameters:**
+  /// - `message` (in): The messages to be posted
+  ///
+  /// **Returns:**
+  /// - `NOTIFICATION_ERROR_NONE` on success, otherwise any other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTIFICATION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `NOTIFICATION_ERROR_FROM_DBUS`: Error from DBus
+  ///
+  /// **See also:**
+  /// - `notification_error_e`
   int notification_status_message_post(
     ffi.Pointer<ffi.Char> message,
   ) {
@@ -49,20 +62,33 @@ class Tizen80Notification {
       _notification_status_message_postPtr
           .asFunction<int Function(ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets an absolute path for an image file to display on the notification view.
-  /// @since_tizen @if WEARABLE 2.3.1 @elseif MOBILE 2.3 @endif
-  /// @param[in] noti The notification handle
-  /// @param[in] type The notification image type
-  /// @param[in] image_path The image file full path
-  /// @return #NOTIFICATION_ERROR_NONE on success,
-  /// otherwise any other value on failure
-  /// @retval #NOTIFICATION_ERROR_NONE Success
-  /// @retval #NOTIFICATION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre Notification handle should be created by notification_create().
-  /// @see #notification_image_type_e
-  /// @see notification_create()
-  /// @par Sample code:
-  /// @code
+  /// Sets an absolute path for an image file to display on the notification view.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Mobile 2.3
+  ///
+  /// **Parameters:**
+  /// - `noti` (in): The notification handle
+  /// - `type` (in): The notification image type
+  /// - `image_path` (in): The image file full path
+  ///
+  /// **Returns:**
+  /// - `NOTIFICATION_ERROR_NONE` on success, otherwise any other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTIFICATION_ERROR_NONE`: Success
+  /// - `NOTIFICATION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - Notification handle should be created by notification_create().
+  ///
+  /// **See also:**
+  /// - `notification_image_type_e`
+  /// - `notification_create()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification.h>
   ///
   /// {
@@ -79,7 +105,7 @@ class Tizen80Notification {
   /// return;
   /// }
   /// }
-  /// @endcode
+  /// ```
   int notification_set_image(
     notification_h noti,
     int type,
@@ -99,21 +125,36 @@ class Tizen80Notification {
   late final _notification_set_image = _notification_set_imagePtr
       .asFunction<int Function(notification_h, int, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the absolute path of an image file.
-  /// @since_tizen @if WEARABLE 2.3.1 @elseif MOBILE 2.3 @endif
-  /// @remarks Do not free @a image_path. It will be freed when notification_free() is called.
-  /// @param[in] noti Notification handle
-  /// @param[in] type Notification image type
-  /// @param[out] image_path Image file full path
-  /// @return #NOTIFICATION_ERROR_NONE on success,
-  /// other value on failure
-  /// @retval #NOTIFICATION_ERROR_NONE Success
-  /// @retval #NOTIFICATION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre Notification handle should be created by notification_create().
-  /// @see #notification_image_type_e
-  /// @see notification_create()
-  /// @par Sample code:
-  /// @code
+  /// Gets the absolute path of an image file.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Mobile 2.3
+  ///
+  /// **Remarks:**
+  /// - Do not free `image_path`. It will be freed when notification_free() is called.
+  ///
+  /// **Parameters:**
+  /// - `noti` (in): Notification handle
+  /// - `type` (in): Notification image type
+  /// - `image_path` (out): Image file full path
+  ///
+  /// **Returns:**
+  /// - `NOTIFICATION_ERROR_NONE` on success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTIFICATION_ERROR_NONE`: Success
+  /// - `NOTIFICATION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - Notification handle should be created by notification_create().
+  ///
+  /// **See also:**
+  /// - `notification_image_type_e`
+  /// - `notification_create()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification.h>
   ///
   /// {
@@ -124,7 +165,7 @@ class Tizen80Notification {
   /// if (noti_err != NOTIFICATION_ERROR_NONE)
   /// return;
   /// }
-  /// @endcode
+  /// ```
   int notification_get_image(
     notification_h noti,
     int type,
@@ -144,20 +185,34 @@ class Tizen80Notification {
   late final _notification_get_image = _notification_get_imagePtr.asFunction<
       int Function(notification_h, int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets a timestamp.
-  /// @details If input_time is @c 0, time information is taken from the current time.
-  /// @since_tizen @if WEARABLE 2.3.1 @elseif MOBILE 2.3 @endif
-  /// @param[in] noti The notification handle
-  /// @param[in] input_time The input time. If you want the time stamp to not be shown, set this as #NOTIFICATION_DO_NOT_SHOW_TIME_STAMP
-  /// @return #NOTIFICATION_ERROR_NONE on success,
-  /// otherwise any other value on failure
-  /// @retval #NOTIFICATION_ERROR_NONE Success
-  /// @retval #NOTIFICATION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre Notification handle should be created by notification_create().
-  /// @see notification_create()
-  /// @see #NOTIFICATION_DO_NOT_SHOW_TIME_STAMP
-  /// @par Sample code:
-  /// @code
+  /// Sets a timestamp.
+  ///
+  /// If input_time is `0`, time information is taken from the current time.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Mobile 2.3
+  ///
+  /// **Parameters:**
+  /// - `noti` (in): The notification handle
+  /// - `input_time` (in): The input time. If you want the time stamp to not be shown, set this as `NOTIFICATION_DO_NOT_SHOW_TIME_STAMP`
+  ///
+  /// **Returns:**
+  /// - `NOTIFICATION_ERROR_NONE` on success, otherwise any other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTIFICATION_ERROR_NONE`: Success
+  /// - `NOTIFICATION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - Notification handle should be created by notification_create().
+  ///
+  /// **See also:**
+  /// - `notification_create()`
+  /// - `NOTIFICATION_DO_NOT_SHOW_TIME_STAMP`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification.h>
   ///
   /// {
@@ -174,7 +229,7 @@ class Tizen80Notification {
   /// return;
   /// }
   /// }
-  /// @endcode
+  /// ```
   int notification_set_time(
     notification_h noti,
     int input_time,
@@ -191,19 +246,33 @@ class Tizen80Notification {
   late final _notification_set_time =
       _notification_set_timePtr.asFunction<int Function(notification_h, int)>();
 
-  /// @brief Gets a timestamp.
-  /// @details If ret_time is @c 0, time information is not set before.
-  /// @since_tizen @if WEARABLE 2.3.1 @elseif MOBILE 2.3 @endif
-  /// @param[in] noti The notification handle
-  /// @param[out] ret_time The return time value
-  /// @return #NOTIFICATION_ERROR_NONE on success,
-  /// otherwise any other value on failure
-  /// @retval #NOTIFICATION_ERROR_NONE Success
-  /// @retval #NOTIFICATION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre Notification handle should be created by notification_create().
-  /// @see notification_create()
-  /// @par Sample code:
-  /// @code
+  /// Gets a timestamp.
+  ///
+  /// If ret_time is `0`, time information is not set before.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Mobile 2.3
+  ///
+  /// **Parameters:**
+  /// - `noti` (in): The notification handle
+  /// - `ret_time` (out): The return time value
+  ///
+  /// **Returns:**
+  /// - `NOTIFICATION_ERROR_NONE` on success, otherwise any other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTIFICATION_ERROR_NONE`: Success
+  /// - `NOTIFICATION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - Notification handle should be created by notification_create().
+  ///
+  /// **See also:**
+  /// - `notification_create()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification.h>
   ///
   /// {
@@ -214,7 +283,7 @@ class Tizen80Notification {
   /// if (noti_err != NOTIFICATION_ERROR_NONE)
   /// return;
   /// }
-  /// @endcode
+  /// ```
   int notification_get_time(
     notification_h noti,
     ffi.Pointer<ffi_lib.Long> ret_time,
@@ -232,17 +301,27 @@ class Tizen80Notification {
   late final _notification_get_time = _notification_get_timePtr
       .asFunction<int Function(notification_h, ffi.Pointer<ffi_lib.Long>)>();
 
-  /// @brief Gets an insertion timestamp of the notification.
-  /// @details If ret_time is @c 0, this notification data is not inserted before.
-  /// @since_tizen @if WEARABLE 2.3.1 @elseif MOBILE 2.3 @endif
-  /// @param[in] noti The notification handle
-  /// @param[out] ret_time The return time value
-  /// @return #NOTIFICATION_ERROR_NONE on success,
-  /// otherwise any other value on failure
-  /// @retval #NOTIFICATION_ERROR_NONE Success
-  /// @retval #NOTIFICATION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @par Sample code:
-  /// @code
+  /// Gets an insertion timestamp of the notification.
+  ///
+  /// If ret_time is `0`, this notification data is not inserted before.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Mobile 2.3
+  ///
+  /// **Parameters:**
+  /// - `noti` (in): The notification handle
+  /// - `ret_time` (out): The return time value
+  ///
+  /// **Returns:**
+  /// - `NOTIFICATION_ERROR_NONE` on success, otherwise any other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTIFICATION_ERROR_NONE`: Success
+  /// - `NOTIFICATION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification.h>
   ///
   /// {
@@ -253,7 +332,7 @@ class Tizen80Notification {
   /// if (noti_err != NOTIFICATION_ERROR_NONE)
   /// return;
   /// }
-  /// @endcode
+  /// ```
   int notification_get_insert_time(
     notification_h noti,
     ffi.Pointer<ffi_lib.Long> ret_time,
@@ -271,34 +350,33 @@ class Tizen80Notification {
   late final _notification_get_insert_time = _notification_get_insert_timePtr
       .asFunction<int Function(notification_h, ffi.Pointer<ffi_lib.Long>)>();
 
-  /// @brief Sets the text to display on the notification view.
-  /// @details Sets title, content string. If the text is formatted data (only %d, %f, %s are supported), type - value pair should be set.
-  /// If %d, the type #NOTIFICATION_VARIABLE_TYPE_INT and the value is an integer.
-  /// If %f, the type #NOTIFICATION_VARIABLE_TYPE_DOUBLE and the value is a double.
-  /// If %s, the type #NOTIFICATION_VARIABLE_TYPE_STRING and the value is a string.
-  /// If the type is #NOTIFICATION_VARIABLE_TYPE_COUNT, notification count is displaying with text.
-  /// If the value is #NOTIFICATION_COUNT_POS_LEFT, count is displayed at the left of the text.
-  /// If the value is #NOTIFICATION_COUNT_POS_IN, count is displayed in the text when text has %d format.
-  /// If the value is #NOTIFICATION_COUNT_POS_RIGHT, count is displayed at the right of the text.
-  /// Variable parameters should be terminated #NOTIFICATION_VARIABLE_TYPE_NONE.
+  /// Sets the text to display on the notification view.
   ///
-  /// Note that You can display the translated contents according to the language of the system.
-  /// The application must supply a String KEY as the fourth argument to support localization.
-  /// If the language on the system changes, the contents of the notification are also translated.
+  /// Sets title, content string. If the text is formatted data (only %d, %f, %s are supported), type - value pair should be set. If %d, the type `NOTIFICATION_VARIABLE_TYPE_INT` and the value is an integer. If %f, the type `NOTIFICATION_VARIABLE_TYPE_DOUBLE` and the value is a double. If %s, the type `NOTIFICATION_VARIABLE_TYPE_STRING` and the value is a string. If the type is `NOTIFICATION_VARIABLE_TYPE_COUNT`, notification count is displaying with text. If the value is `NOTIFICATION_COUNT_POS_LEFT`, count is displayed at the left of the text. If the value is `NOTIFICATION_COUNT_POS_IN`, count is displayed in the text when text has %d format. If the value is `NOTIFICATION_COUNT_POS_RIGHT`, count is displayed at the right of the text. Variable parameters should be terminated `NOTIFICATION_VARIABLE_TYPE_NONE`. Note that You can display the translated contents according to the language of the system. The application must supply a String KEY as the fourth argument to support localization. If the language on the system changes, the contents of the notification are also translated.
   ///
-  /// @since_tizen @if WEARABLE 2.3.1 @elseif MOBILE 2.3 @endif
-  /// @param[in] noti The notification handle
-  /// @param[in] type The notification text type
-  /// @param[in] text The basic text
-  /// @param[in] key The text key for localization
-  /// @param[in] args_type The variable parameter that type - value pair
-  /// @return #NOTIFICATION_ERROR_NONE on success,
-  /// otherwise any other value on failure
-  /// @retval #NOTIFICATION_ERROR_NONE Success
-  /// @retval #NOTIFICATION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre notification handle should be created by notification_create().
-  /// @par Sample code:
-  /// @code
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Mobile 2.3
+  ///
+  /// **Parameters:**
+  /// - `noti` (in): The notification handle
+  /// - `type` (in): The notification text type
+  /// - `text` (in): The basic text
+  /// - `key` (in): The text key for localization
+  /// - `args_type` (in): The variable parameter that type - value pair
+  ///
+  /// **Returns:**
+  /// - `NOTIFICATION_ERROR_NONE` on success, otherwise any other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTIFICATION_ERROR_NONE`: Success
+  /// - `NOTIFICATION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - notification handle should be created by notification_create().
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification.h>
   ///
   /// {
@@ -316,7 +394,7 @@ class Tizen80Notification {
   /// return;
   /// }
   /// }
-  /// @endcode
+  /// ```
   int notification_set_text(
     notification_h noti,
     int type,
@@ -341,18 +419,29 @@ class Tizen80Notification {
       int Function(notification_h, int, ffi.Pointer<ffi.Char>,
           ffi.Pointer<ffi.Char>, int)>();
 
-  /// @brief Gets the text from the notification handle.
-  /// @since_tizen @if WEARABLE 2.3.1 @elseif MOBILE 2.3 @endif
-  /// @remarks Do not free @a text. It will be freed when notification_free() is called.
-  /// @param[in] noti The notification handle
-  /// @param[in] type The notification text type
-  /// @param[out] text The notification text
-  /// @return #NOTIFICATION_ERROR_NONE on success,
-  /// otherwise any other value on failure
-  /// @retval #NOTIFICATION_ERROR_NONE Success
-  /// @retval #NOTIFICATION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @par Sample code:
-  /// @code
+  /// Gets the text from the notification handle.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Mobile 2.3
+  ///
+  /// **Remarks:**
+  /// - Do not free `text`. It will be freed when notification_free() is called.
+  ///
+  /// **Parameters:**
+  /// - `noti` (in): The notification handle
+  /// - `type` (in): The notification text type
+  /// - `text` (out): The notification text
+  ///
+  /// **Returns:**
+  /// - `NOTIFICATION_ERROR_NONE` on success, otherwise any other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTIFICATION_ERROR_NONE`: Success
+  /// - `NOTIFICATION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification.h>
   ///
   /// {
@@ -365,7 +454,7 @@ class Tizen80Notification {
   /// return;
   ///
   /// }
-  /// @endcode
+  /// ```
   int notification_get_text(
     notification_h noti,
     int type,
@@ -385,17 +474,27 @@ class Tizen80Notification {
   late final _notification_get_text = _notification_get_textPtr.asFunction<
       int Function(notification_h, int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets the timestamp to display on the notification view.
-  /// @details The timestamp will be converted to a formatted string and it will be displayed on the set text area.
-  /// @since_tizen @if WEARABLE 2.3.1 @elseif MOBILE 2.3 @endif
-  /// @param[in] noti The notification handle
-  /// @param[in] type The notification text type
-  /// @param[in] time The timestamp
-  /// @return #NOTIFICATION_ERROR_NONE on success,
-  /// otherwise any other value on failure
-  /// @retval #NOTIFICATION_ERROR_NONE Success
-  /// @retval #NOTIFICATION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre Notification handle should be created by notification_create().
+  /// Sets the timestamp to display on the notification view.
+  ///
+  /// The timestamp will be converted to a formatted string and it will be displayed on the set text area.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Mobile 2.3
+  ///
+  /// **Parameters:**
+  /// - `noti` (in): The notification handle
+  /// - `type` (in): The notification text type
+  /// - `time` (in): The timestamp
+  ///
+  /// **Returns:**
+  /// - `NOTIFICATION_ERROR_NONE` on success, otherwise any other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTIFICATION_ERROR_NONE`: Success
+  /// - `NOTIFICATION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - Notification handle should be created by notification_create().
   int notification_set_time_to_text(
     notification_h noti,
     int type,
@@ -415,16 +514,25 @@ class Tizen80Notification {
   late final _notification_set_time_to_text = _notification_set_time_to_textPtr
       .asFunction<int Function(notification_h, int, int)>();
 
-  /// @brief Gets the timestamp from the notification handle.
-  /// @since_tizen @if WEARABLE 2.3.1 @elseif MOBILE 2.3 @endif
-  /// @param[in] noti The notification handle
-  /// @param[in] type The notification text type
-  /// @param[in] time The pointer of time stamp
-  /// @return #NOTIFICATION_ERROR_NONE on success,
-  /// otherwise any other value on failure
-  /// @retval #NOTIFICATION_ERROR_NONE Success
-  /// @retval #NOTIFICATION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre Notification handle should be created by notification_create().
+  /// Gets the timestamp from the notification handle.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Mobile 2.3
+  ///
+  /// **Parameters:**
+  /// - `noti` (in): The notification handle
+  /// - `type` (in): The notification text type
+  /// - `time` (in): The pointer of time stamp
+  ///
+  /// **Returns:**
+  /// - `NOTIFICATION_ERROR_NONE` on success, otherwise any other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTIFICATION_ERROR_NONE`: Success
+  /// - `NOTIFICATION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - Notification handle should be created by notification_create().
   int notification_get_time_from_text(
     notification_h noti,
     int type,
@@ -445,17 +553,26 @@ class Tizen80Notification {
       _notification_get_time_from_textPtr.asFunction<
           int Function(notification_h, int, ffi.Pointer<ffi_lib.Long>)>();
 
-  /// @brief Sets the sound type for the notification.
-  /// @since_tizen @if WEARABLE 2.3.1 @elseif MOBILE 2.3 @endif
-  /// @param[in] noti The notification handle
-  /// @param[in] type The notification sound type
-  /// @param[in] path The user sound file path
-  /// @return #NOTIFICATION_ERROR_NONE on success,
-  /// otherwise any other value on failure
-  /// @retval #NOTIFICATION_ERROR_NONE Success
-  /// @retval #NOTIFICATION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @par Sample code:
-  /// @code
+  /// Sets the sound type for the notification.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Mobile 2.3
+  ///
+  /// **Parameters:**
+  /// - `noti` (in): The notification handle
+  /// - `type` (in): The notification sound type
+  /// - `path` (in): The user sound file path
+  ///
+  /// **Returns:**
+  /// - `NOTIFICATION_ERROR_NONE` on success, otherwise any other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTIFICATION_ERROR_NONE`: Success
+  /// - `NOTIFICATION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification.h>
   ///
   /// {
@@ -467,7 +584,7 @@ class Tizen80Notification {
   /// return;
   ///
   /// }
-  /// @endcode
+  /// ```
   int notification_set_sound(
     notification_h noti,
     int type,
@@ -487,18 +604,29 @@ class Tizen80Notification {
   late final _notification_set_sound = _notification_set_soundPtr
       .asFunction<int Function(notification_h, int, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the sound type from the notification handle.
-  /// @since_tizen @if WEARABLE 2.3.1 @elseif MOBILE 2.3 @endif
-  /// @remarks Do not free @a path. It will be freed when notification_free() is called.
-  /// @param[in] noti The notification handle
-  /// @param[out] type The notification sound type
-  /// @param[out] path The user sound file path
-  /// @return #NOTIFICATION_ERROR_NONE on success,
-  /// otherwise any other value on failure
-  /// @retval #NOTIFICATION_ERROR_NONE Success
-  /// @retval #NOTIFICATION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @par Sample code:
-  /// @code
+  /// Gets the sound type from the notification handle.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Mobile 2.3
+  ///
+  /// **Remarks:**
+  /// - Do not free `path`. It will be freed when notification_free() is called.
+  ///
+  /// **Parameters:**
+  /// - `noti` (in): The notification handle
+  /// - `type` (out): The notification sound type
+  /// - `path` (out): The user sound file path
+  ///
+  /// **Returns:**
+  /// - `NOTIFICATION_ERROR_NONE` on success, otherwise any other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTIFICATION_ERROR_NONE`: Success
+  /// - `NOTIFICATION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification.h>
   ///
   /// {
@@ -511,7 +639,7 @@ class Tizen80Notification {
   /// return;
   ///
   /// }
-  /// @endcode
+  /// ```
   int notification_get_sound(
     notification_h noti,
     ffi.Pointer<ffi.Int32> type,
@@ -532,17 +660,26 @@ class Tizen80Notification {
       int Function(notification_h, ffi.Pointer<ffi.Int32>,
           ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets the vibration type for the notification.
-  /// @since_tizen @if WEARABLE 2.3.1 @elseif MOBILE 2.3 @endif
-  /// @param[in] noti The notification handle
-  /// @param[in] type The notification vibration type
-  /// @param[in] path The user vibration file path
-  /// @return #NOTIFICATION_ERROR_NONE on success,
-  /// otherwise any other value on failure
-  /// @retval #NOTIFICATION_ERROR_NONE Success
-  /// @retval #NOTIFICATION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @par Sample code:
-  /// @code
+  /// Sets the vibration type for the notification.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Mobile 2.3
+  ///
+  /// **Parameters:**
+  /// - `noti` (in): The notification handle
+  /// - `type` (in): The notification vibration type
+  /// - `path` (in): The user vibration file path
+  ///
+  /// **Returns:**
+  /// - `NOTIFICATION_ERROR_NONE` on success, otherwise any other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTIFICATION_ERROR_NONE`: Success
+  /// - `NOTIFICATION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification.h>
   ///
   /// {
@@ -554,7 +691,7 @@ class Tizen80Notification {
   /// return;
   ///
   /// }
-  /// @endcode
+  /// ```
   int notification_set_vibration(
     notification_h noti,
     int type,
@@ -574,18 +711,29 @@ class Tizen80Notification {
   late final _notification_set_vibration = _notification_set_vibrationPtr
       .asFunction<int Function(notification_h, int, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the vibrate type from the notification handle.
-  /// @since_tizen @if WEARABLE 2.3.1 @elseif MOBILE 2.3 @endif
-  /// @remarks Do not free @a path. It will be freed when notification_free() is called.
-  /// @param[in] noti The notification handle
-  /// @param[out] type The notification sound type
-  /// @param[out] path The user vibration file path
-  /// @return #NOTIFICATION_ERROR_NONE on success,
-  /// otherwise other value on failure
-  /// @retval #NOTIFICATION_ERROR_NONE Success
-  /// @retval #NOTIFICATION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @par Sample code:
-  /// @code
+  /// Gets the vibrate type from the notification handle.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Mobile 2.3
+  ///
+  /// **Remarks:**
+  /// - Do not free `path`. It will be freed when notification_free() is called.
+  ///
+  /// **Parameters:**
+  /// - `noti` (in): The notification handle
+  /// - `type` (out): The notification sound type
+  /// - `path` (out): The user vibration file path
+  ///
+  /// **Returns:**
+  /// - `NOTIFICATION_ERROR_NONE` on success, otherwise other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTIFICATION_ERROR_NONE`: Success
+  /// - `NOTIFICATION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification.h>
   ///
   /// {
@@ -598,7 +746,7 @@ class Tizen80Notification {
   /// return;
   ///
   /// }
-  /// @endcode
+  /// ```
   int notification_get_vibration(
     notification_h noti,
     ffi.Pointer<ffi.Int32> type,
@@ -621,17 +769,26 @@ class Tizen80Notification {
           int Function(notification_h, ffi.Pointer<ffi.Int32>,
               ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets the LED displaying option.
-  /// @since_tizen @if WEARABLE 2.3.1 @elseif MOBILE 2.3 @endif
-  /// @param[in] noti The notification handle
-  /// @param[in] operation The LED notification operation
-  /// @param[in] led_argb The notification LED color
-  /// @return #NOTIFICATION_ERROR_NONE on success,
-  /// otherwise other value on failure
-  /// @retval #NOTIFICATION_ERROR_NONE Success
-  /// @retval #NOTIFICATION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @par Sample code:
-  /// @code
+  /// Sets the LED displaying option.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Mobile 2.3
+  ///
+  /// **Parameters:**
+  /// - `noti` (in): The notification handle
+  /// - `operation` (in): The LED notification operation
+  /// - `led_argb` (in): The notification LED color
+  ///
+  /// **Returns:**
+  /// - `NOTIFICATION_ERROR_NONE` on success, otherwise other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTIFICATION_ERROR_NONE`: Success
+  /// - `NOTIFICATION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification.h>
   ///
   /// {
@@ -643,7 +800,7 @@ class Tizen80Notification {
   /// return;
   ///
   /// }
-  /// @endcode
+  /// ```
   int notification_set_led(
     notification_h noti,
     int operation,
@@ -663,17 +820,26 @@ class Tizen80Notification {
   late final _notification_set_led = _notification_set_ledPtr
       .asFunction<int Function(notification_h, int, int)>();
 
-  /// @brief Gets the LED displaying option from the notification handle.
-  /// @since_tizen @if WEARABLE 2.3.1 @elseif MOBILE 2.3 @endif
-  /// @param[in] noti The notification handle
-  /// @param[out] operation The LED notification operation
-  /// @param[out] led_argb The notification LED color
-  /// @return #NOTIFICATION_ERROR_NONE on success,
-  /// otherwise any other value on failure
-  /// @retval #NOTIFICATION_ERROR_NONE Success
-  /// @retval #NOTIFICATION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @par Sample code:
-  /// @code
+  /// Gets the LED displaying option from the notification handle.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Mobile 2.3
+  ///
+  /// **Parameters:**
+  /// - `noti` (in): The notification handle
+  /// - `operation` (out): The LED notification operation
+  /// - `led_argb` (out): The notification LED color
+  ///
+  /// **Returns:**
+  /// - `NOTIFICATION_ERROR_NONE` on success, otherwise any other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTIFICATION_ERROR_NONE`: Success
+  /// - `NOTIFICATION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification.h>
   ///
   /// {
@@ -686,7 +852,7 @@ class Tizen80Notification {
   /// return;
   ///
   /// }
-  /// @endcode
+  /// ```
   int notification_get_led(
     notification_h noti,
     ffi.Pointer<ffi.Int32> operation,
@@ -707,17 +873,26 @@ class Tizen80Notification {
       int Function(
           notification_h, ffi.Pointer<ffi.Int32>, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Sets the time period of flashing the LED.
-  /// @since_tizen @if WEARABLE 2.3.1 @elseif MOBILE 2.3 @endif
-  /// @param[in] noti The notification handle
-  /// @param[in] on_ms The time for turning on the LED
-  /// @param[in] off_ms The time for turning off the LED
-  /// @return #NOTIFICATION_ERROR_NONE on success,
-  /// otherwise any other value on failure
-  /// @retval #NOTIFICATION_ERROR_NONE Success
-  /// @retval #NOTIFICATION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @par Sample code:
-  /// @code
+  /// Sets the time period of flashing the LED.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Mobile 2.3
+  ///
+  /// **Parameters:**
+  /// - `noti` (in): The notification handle
+  /// - `on_ms` (in): The time for turning on the LED
+  /// - `off_ms` (in): The time for turning off the LED
+  ///
+  /// **Returns:**
+  /// - `NOTIFICATION_ERROR_NONE` on success, otherwise any other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTIFICATION_ERROR_NONE`: Success
+  /// - `NOTIFICATION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification.h>
   ///
   /// {
@@ -729,7 +904,7 @@ class Tizen80Notification {
   /// return;
   ///
   /// }
-  /// @endcode
+  /// ```
   int notification_set_led_time_period(
     notification_h noti,
     int on_ms,
@@ -750,17 +925,26 @@ class Tizen80Notification {
       _notification_set_led_time_periodPtr
           .asFunction<int Function(notification_h, int, int)>();
 
-  /// @brief Gets the time period of flashing the LED from the notification handle.
-  /// @since_tizen @if WEARABLE 2.3.1 @elseif MOBILE 2.3 @endif
-  /// @param[in] noti The notification handle
-  /// @param[out] on_ms The time for turning on the LED
-  /// @param[out] off_ms The time for turning on the LED
-  /// @return #NOTIFICATION_ERROR_NONE on success,
-  /// otherwise any other value on failure
-  /// @retval #NOTIFICATION_ERROR_NONE Success
-  /// @retval #NOTIFICATION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @par Sample code:
-  /// @code
+  /// Gets the time period of flashing the LED from the notification handle.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Mobile 2.3
+  ///
+  /// **Parameters:**
+  /// - `noti` (in): The notification handle
+  /// - `on_ms` (out): The time for turning on the LED
+  /// - `off_ms` (out): The time for turning on the LED
+  ///
+  /// **Returns:**
+  /// - `NOTIFICATION_ERROR_NONE` on success, otherwise any other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTIFICATION_ERROR_NONE`: Success
+  /// - `NOTIFICATION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification.h>
   ///
   /// {
@@ -774,7 +958,7 @@ class Tizen80Notification {
   /// return;
   ///
   /// }
-  /// @endcode
+  /// ```
   int notification_get_led_time_period(
     notification_h noti,
     ffi.Pointer<ffi.Int> on_ms,
@@ -796,21 +980,37 @@ class Tizen80Notification {
           int Function(
               notification_h, ffi.Pointer<ffi.Int>, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Sets the launch option for a notification.
-  /// @details When notification data selected in display application, application launched by app_control_send_launch_request with app_control handle.
-  /// @since_tizen @if WEARABLE 2.3.1 @elseif MOBILE 2.3 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/appmanager.launch
-  /// @remarks Since 4.0, %http://tizen.org/privilege/appmanager.launch privilege is additionally required.
-  /// @param[in] noti The notification handle
-  /// @param[in] type Launching option type
-  /// @param[in] option App Control handler
-  /// @return #NOTIFICATION_ERROR_NONE on success,
-  /// otherwise any other value on failure
-  /// @retval #NOTIFICATION_ERROR_NONE Success
-  /// @retval #NOTIFICATION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @par Sample code:
-  /// @code
+  /// Sets the launch option for a notification.
+  ///
+  /// When notification data selected in display application, application launched by app_control_send_launch_request with app_control handle.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Mobile 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/appmanager.launch>
+  ///
+  /// **Remarks:**
+  /// - Since 4.0, http://tizen.org/privilege/appmanager.launch privilege is additionally required.
+  ///
+  /// **Parameters:**
+  /// - `noti` (in): The notification handle
+  /// - `type` (in): Launching option type
+  /// - `option` (in): App Control handler
+  ///
+  /// **Returns:**
+  /// - `NOTIFICATION_ERROR_NONE` on success, otherwise any other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTIFICATION_ERROR_NONE`: Success
+  /// - `NOTIFICATION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification.h>
   ///
   /// {
@@ -834,7 +1034,7 @@ class Tizen80Notification {
   ///
   /// app_control_destroy(app_control);
   /// }
-  /// @endcode
+  /// ```
   int notification_set_launch_option(
     notification_h noti,
     int type,
@@ -855,18 +1055,29 @@ class Tizen80Notification {
       _notification_set_launch_optionPtr.asFunction<
           int Function(notification_h, int, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Gets the launch option from the notification handle.
-  /// @since_tizen @if WEARABLE 2.3.1 @elseif MOBILE 2.3 @endif
-  /// @remarks You must release @a option using app_control_destroy().
-  /// @param[in] noti The notification handle
-  /// @param[in] type Launching option type
-  /// @param[out] option The pointer of App Control handler
-  /// @return #NOTIFICATION_ERROR_NONE on success,
-  /// otherwise any other value on failure
-  /// @retval #NOTIFICATION_ERROR_NONE Success
-  /// @retval #NOTIFICATION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @par Sample code:
-  /// @code
+  /// Gets the launch option from the notification handle.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Mobile 2.3
+  ///
+  /// **Remarks:**
+  /// - You must release `option` using app_control_destroy().
+  ///
+  /// **Parameters:**
+  /// - `noti` (in): The notification handle
+  /// - `type` (in): Launching option type
+  /// - `option` (out): The pointer of App Control handler
+  ///
+  /// **Returns:**
+  /// - `NOTIFICATION_ERROR_NONE` on success, otherwise any other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTIFICATION_ERROR_NONE`: Success
+  /// - `NOTIFICATION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification.h>
   ///
   /// {
@@ -880,7 +1091,7 @@ class Tizen80Notification {
   ///
   /// app_control_destroy(app_control);
   /// }
-  /// @endcode
+  /// ```
   int notification_get_launch_option(
     notification_h noti,
     int type,
@@ -901,23 +1112,40 @@ class Tizen80Notification {
       _notification_get_launch_optionPtr.asFunction<
           int Function(notification_h, int, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Sets the handler for a specific event.
-  /// @details When some event occurs on notification, application launched by app_control_send_launch_request with app_control handle. \n
-  /// Setting event handler of a button means that the notification will show the button.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/appmanager.launch
-  /// @remarks Since 4.0, %http://tizen.org/privilege/appmanager.launch privilege is additionally required.
-  /// @param[in] noti The notification handle
-  /// @param[in] event_type Event type
-  /// @param[in] event_handler App control handle
-  /// @return #NOTIFICATION_ERROR_NONE on success,
-  /// otherwise any other value on failure
-  /// @retval #NOTIFICATION_ERROR_NONE Success
-  /// @retval #NOTIFICATION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #notification_event_type_e
-  /// @par Sample code:
-  /// @code
+  /// Sets the handler for a specific event.
+  ///
+  /// When some event occurs on notification, application launched by app_control_send_launch_request with app_control handle. Setting event handler of a button means that the notification will show the button.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/appmanager.launch>
+  ///
+  /// **Remarks:**
+  /// - Since 4.0, http://tizen.org/privilege/appmanager.launch privilege is additionally required.
+  ///
+  /// **Parameters:**
+  /// - `noti` (in): The notification handle
+  /// - `event_type` (in): Event type
+  /// - `event_handler` (in): App control handle
+  ///
+  /// **Returns:**
+  /// - `NOTIFICATION_ERROR_NONE` on success, otherwise any other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTIFICATION_ERROR_NONE`: Success
+  /// - `NOTIFICATION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `notification_event_type_e`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification.h>
   ///
   /// {
@@ -941,7 +1169,7 @@ class Tizen80Notification {
   ///
   /// app_control_destroy(app_control);
   /// }
-  /// @endcode
+  /// ```
   int notification_set_event_handler(
     notification_h noti,
     int event_type,
@@ -962,19 +1190,32 @@ class Tizen80Notification {
       _notification_set_event_handlerPtr.asFunction<
           int Function(notification_h, int, app_control.app_control_h)>();
 
-  /// @brief Gets the event handler of a specific event.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @remarks You must release @a event_handler using app_control_destroy().
-  /// @param[in] noti The notification handle
-  /// @param[in] event_type Launching option type
-  /// @param[out] event_handler The handler of App Control
-  /// @return #NOTIFICATION_ERROR_NONE on success,
-  /// otherwise any other value on failure
-  /// @retval #NOTIFICATION_ERROR_NONE Success
-  /// @retval #NOTIFICATION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #notification_event_type_e
-  /// @par Sample code:
-  /// @code
+  /// Gets the event handler of a specific event.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Remarks:**
+  /// - You must release `event_handler` using app_control_destroy().
+  ///
+  /// **Parameters:**
+  /// - `noti` (in): The notification handle
+  /// - `event_type` (in): Launching option type
+  /// - `event_handler` (out): The handler of App Control
+  ///
+  /// **Returns:**
+  /// - `NOTIFICATION_ERROR_NONE` on success, otherwise any other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTIFICATION_ERROR_NONE`: Success
+  /// - `NOTIFICATION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `notification_event_type_e`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification.h>
   ///
   /// {
@@ -990,7 +1231,7 @@ class Tizen80Notification {
   ///
   /// app_control_destroy(app_control);
   /// }
-  /// @endcode
+  /// ```
   int notification_get_event_handler(
     notification_h noti,
     int event_type,
@@ -1013,16 +1254,25 @@ class Tizen80Notification {
           int Function(
               notification_h, int, ffi.Pointer<app_control.app_control_h>)>();
 
-  /// @brief Sets the property of the notification.
-  /// @since_tizen @if WEARABLE 2.3.1 @elseif MOBILE 2.3 @endif
-  /// @param[in] noti The notification handle
-  /// @param[in] flags The property with | operation
-  /// @return #NOTIFICATION_ERROR_NONE on success,
-  /// otherwise any other value on failure
-  /// @retval #NOTIFICATION_ERROR_NONE Success
-  /// @retval #NOTIFICATION_ERROR_INVALID_PARAMETER Invalid input value
-  /// @par Sample code:
-  /// @code
+  /// Sets the property of the notification.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Mobile 2.3
+  ///
+  /// **Parameters:**
+  /// - `noti` (in): The notification handle
+  /// - `flags` (in): The property with | operation
+  ///
+  /// **Returns:**
+  /// - `NOTIFICATION_ERROR_NONE` on success, otherwise any other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTIFICATION_ERROR_NONE`: Success
+  /// - `NOTIFICATION_ERROR_INVALID_PARAMETER`: Invalid input value
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification.h>
   ///
   /// {
@@ -1040,7 +1290,7 @@ class Tizen80Notification {
   /// return;
   /// }
   /// }
-  /// @endcode
+  /// ```
   int notification_set_property(
     notification_h noti,
     int flags,
@@ -1057,16 +1307,25 @@ class Tizen80Notification {
   late final _notification_set_property = _notification_set_propertyPtr
       .asFunction<int Function(notification_h, int)>();
 
-  /// @brief Gets the property of the notification from the notification handle.
-  /// @since_tizen @if WEARABLE 2.3.1 @elseif MOBILE 2.3 @endif
-  /// @param[in] noti The notification handle
-  /// @param[out] flags The notification property
-  /// @return #NOTIFICATION_ERROR_NONE on success,
-  /// otherwise any other value on failure
-  /// @retval #NOTIFICATION_ERROR_NONE Success
-  /// @retval #NOTIFICATION_ERROR_INVALID_PARAMETER Invalid input value
-  /// @par Sample code:
-  /// @code
+  /// Gets the property of the notification from the notification handle.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Mobile 2.3
+  ///
+  /// **Parameters:**
+  /// - `noti` (in): The notification handle
+  /// - `flags` (out): The notification property
+  ///
+  /// **Returns:**
+  /// - `NOTIFICATION_ERROR_NONE` on success, otherwise any other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTIFICATION_ERROR_NONE`: Success
+  /// - `NOTIFICATION_ERROR_INVALID_PARAMETER`: Invalid input value
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification.h>
   ///
   /// {
@@ -1079,7 +1338,7 @@ class Tizen80Notification {
   /// return;
   ///
   /// }
-  /// @endcode
+  /// ```
   int notification_get_property(
     notification_h noti,
     ffi.Pointer<ffi.Int> flags,
@@ -1097,17 +1356,27 @@ class Tizen80Notification {
   late final _notification_get_property = _notification_get_propertyPtr
       .asFunction<int Function(notification_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Sets applications to display the notification.
-  /// @details All display application is enabled(#NOTIFICATION_DISPLAY_APP_ALL) if you do not call this function.
-  /// @since_tizen @if WEARABLE 2.3.1 @elseif MOBILE 2.3 @endif
-  /// @param[in] noti The notification handle
-  /// @param[in] applist The with | operation
-  /// @return #NOTIFICATION_ERROR_NONE on success,
-  /// otherwise any other value on failure
-  /// @retval #NOTIFICATION_ERROR_NONE Success
-  /// @retval #NOTIFICATION_ERROR_INVALID_PARAMETER Invalid input value
-  /// @par Sample code:
-  /// @code
+  /// Sets applications to display the notification.
+  ///
+  /// All display application is enabled(`NOTIFICATION_DISPLAY_APP_ALL`) if you do not call this function.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Mobile 2.3
+  ///
+  /// **Parameters:**
+  /// - `noti` (in): The notification handle
+  /// - `applist` (in): The with | operation
+  ///
+  /// **Returns:**
+  /// - `NOTIFICATION_ERROR_NONE` on success, otherwise any other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTIFICATION_ERROR_NONE`: Success
+  /// - `NOTIFICATION_ERROR_INVALID_PARAMETER`: Invalid input value
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification.h>
   ///
   /// {
@@ -1126,7 +1395,7 @@ class Tizen80Notification {
   /// return;
   /// }
   /// }
-  /// @endcode
+  /// ```
   int notification_set_display_applist(
     notification_h noti,
     int applist,
@@ -1144,16 +1413,25 @@ class Tizen80Notification {
       _notification_set_display_applistPtr
           .asFunction<int Function(notification_h, int)>();
 
-  /// @brief Gets the application list displaying the notification from the notification handle.
-  /// @since_tizen @if WEARABLE 2.3.1 @elseif MOBILE 2.3 @endif
-  /// @param[in] noti The notification handle
-  /// @param[out] applist The display application list
-  /// @return #NOTIFICATION_ERROR_NONE on success,
-  /// otherwise any other value on failure
-  /// @retval #NOTIFICATION_ERROR_NONE Success
-  /// @retval #NOTIFICATION_ERROR_INVALID_PARAMETER Invalid input value
-  /// @par Sample code:
-  /// @code
+  /// Gets the application list displaying the notification from the notification handle.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Mobile 2.3
+  ///
+  /// **Parameters:**
+  /// - `noti` (in): The notification handle
+  /// - `applist` (out): The display application list
+  ///
+  /// **Returns:**
+  /// - `NOTIFICATION_ERROR_NONE` on success, otherwise any other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTIFICATION_ERROR_NONE`: Success
+  /// - `NOTIFICATION_ERROR_INVALID_PARAMETER`: Invalid input value
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification.h>
   ///
   /// {
@@ -1166,7 +1444,7 @@ class Tizen80Notification {
   /// return;
   ///
   /// }
-  /// @endcode
+  /// ```
   int notification_get_display_applist(
     notification_h noti,
     ffi.Pointer<ffi.Int> applist,
@@ -1185,17 +1463,27 @@ class Tizen80Notification {
       _notification_get_display_applistPtr
           .asFunction<int Function(notification_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Sets the initial size for the ongoing type.
-  /// @details After notification_post() call, the size is not updated.
-  /// @since_tizen @if WEARABLE 2.3.1 @elseif MOBILE 2.3 @endif
-  /// @param[in] noti The notification handle
-  /// @param[in] size The double type size
-  /// @return #NOTIFICATION_ERROR_NONE on success,
-  /// otherwise any other value on failure
-  /// @retval #NOTIFICATION_ERROR_NONE Success
-  /// @retval #NOTIFICATION_ERROR_INVALID_PARAMETER Invalid input value
-  /// @par Sample code:
-  /// @code
+  /// Sets the initial size for the ongoing type.
+  ///
+  /// After notification_post() call, the size is not updated.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Mobile 2.3
+  ///
+  /// **Parameters:**
+  /// - `noti` (in): The notification handle
+  /// - `size` (in): The double type size
+  ///
+  /// **Returns:**
+  /// - `NOTIFICATION_ERROR_NONE` on success, otherwise any other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTIFICATION_ERROR_NONE`: Success
+  /// - `NOTIFICATION_ERROR_INVALID_PARAMETER`: Invalid input value
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification.h>
   ///
   /// {
@@ -1212,7 +1500,7 @@ class Tizen80Notification {
   /// return;
   /// }
   /// }
-  /// @endcode
+  /// ```
   int notification_set_size(
     notification_h noti,
     double size,
@@ -1229,16 +1517,25 @@ class Tizen80Notification {
   late final _notification_set_size = _notification_set_sizePtr
       .asFunction<int Function(notification_h, double)>();
 
-  /// @brief Gets the progress size.
-  /// @since_tizen @if WEARABLE 2.3.1 @elseif MOBILE 2.3 @endif
-  /// @param[in] noti The notification handle
-  /// @param[out] size The progress size
-  /// @return #NOTIFICATION_ERROR_NONE on success,
-  /// otherwise any other value on failure
-  /// @retval #NOTIFICATION_ERROR_NONE Success
-  /// @retval #NOTIFICATION_ERROR_INVALID_PARAMETER Invalid input value
-  /// @par Sample code:
-  /// @code
+  /// Gets the progress size.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Mobile 2.3
+  ///
+  /// **Parameters:**
+  /// - `noti` (in): The notification handle
+  /// - `size` (out): The progress size
+  ///
+  /// **Returns:**
+  /// - `NOTIFICATION_ERROR_NONE` on success, otherwise any other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTIFICATION_ERROR_NONE`: Success
+  /// - `NOTIFICATION_ERROR_INVALID_PARAMETER`: Invalid input value
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification.h>
   ///
   /// {
@@ -1250,7 +1547,7 @@ class Tizen80Notification {
   /// if (noti_err != NOTIFICATION_ERROR_NONE)
   /// return;
   /// }
-  /// @endcode
+  /// ```
   int notification_get_size(
     notification_h noti,
     ffi.Pointer<ffi.Double> size,
@@ -1268,17 +1565,27 @@ class Tizen80Notification {
   late final _notification_get_size = _notification_get_sizePtr
       .asFunction<int Function(notification_h, ffi.Pointer<ffi.Double>)>();
 
-  /// @brief Sets the initial progress for the ongoing type.
-  /// @details After the notification_post() call, the progress is not updated.
-  /// @since_tizen @if WEARABLE 2.3.1 @elseif MOBILE 2.3 @endif
-  /// @param[in] noti The notification handle
-  /// @param[in] percentage The progress percentage
-  /// @return #NOTIFICATION_ERROR_NONE on success,
-  /// otherwise any other value on failure
-  /// @retval #NOTIFICATION_ERROR_NONE Success
-  /// @retval #NOTIFICATION_ERROR_INVALID_PARAMETER Invalid input value
-  /// @par Sample code:
-  /// @code
+  /// Sets the initial progress for the ongoing type.
+  ///
+  /// After the notification_post() call, the progress is not updated.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Mobile 2.3
+  ///
+  /// **Parameters:**
+  /// - `noti` (in): The notification handle
+  /// - `percentage` (in): The progress percentage
+  ///
+  /// **Returns:**
+  /// - `NOTIFICATION_ERROR_NONE` on success, otherwise any other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTIFICATION_ERROR_NONE`: Success
+  /// - `NOTIFICATION_ERROR_INVALID_PARAMETER`: Invalid input value
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification.h>
   ///
   /// {
@@ -1295,7 +1602,7 @@ class Tizen80Notification {
   /// return;
   /// }
   /// }
-  /// @endcode
+  /// ```
   int notification_set_progress(
     notification_h noti,
     double percentage,
@@ -1312,17 +1619,28 @@ class Tizen80Notification {
   late final _notification_set_progress = _notification_set_progressPtr
       .asFunction<int Function(notification_h, double)>();
 
-  /// @brief Gets the progress from the notification handle.
-  /// @since_tizen @if WEARABLE 2.3.1 @elseif MOBILE 2.3 @endif
-  /// @remarks At the end of the operation, the progress should be @c 1.0.
-  /// @param[in] noti The notification handle
-  /// @param[out] percentage The progress percentage
-  /// @return #NOTIFICATION_ERROR_NONE on success,
-  /// otherwise any other value on failure
-  /// @retval #NOTIFICATION_ERROR_NONE Success
-  /// @retval #NOTIFICATION_ERROR_INVALID_PARAMETER Invalid input value
-  /// @par Sample code:
-  /// @code
+  /// Gets the progress from the notification handle.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Mobile 2.3
+  ///
+  /// **Remarks:**
+  /// - At the end of the operation, the progress should be `1.0`.
+  ///
+  /// **Parameters:**
+  /// - `noti` (in): The notification handle
+  /// - `percentage` (out): The progress percentage
+  ///
+  /// **Returns:**
+  /// - `NOTIFICATION_ERROR_NONE` on success, otherwise any other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTIFICATION_ERROR_NONE`: Success
+  /// - `NOTIFICATION_ERROR_INVALID_PARAMETER`: Invalid input value
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification.h>
   ///
   /// {
@@ -1335,7 +1653,7 @@ class Tizen80Notification {
   /// return;
   ///
   /// }
-  /// @endcode
+  /// ```
   int notification_get_progress(
     notification_h noti,
     ffi.Pointer<ffi.Double> percentage,
@@ -1353,16 +1671,26 @@ class Tizen80Notification {
   late final _notification_get_progress = _notification_get_progressPtr
       .asFunction<int Function(notification_h, ffi.Pointer<ffi.Double>)>();
 
-  /// @brief Sets the layout of the notification view.
-  /// @details Caller can set displaying layout of notification.
-  /// @since_tizen @if WEARABLE 2.3.1 @elseif MOBILE 2.3 @endif
-  /// @param[in] noti The notification handle
-  /// @param[in] layout The type of layout
-  /// @return #NOTIFICATION_ERROR_NONE on success,
-  /// otherwise any other value on failure
-  /// @retval #NOTIFICATION_ERROR_NONE Success
-  /// @retval #NOTIFICATION_ERROR_INVALID_PARAMETER Invalid input value
-  /// @see #notification_ly_type_e
+  /// Sets the layout of the notification view.
+  ///
+  /// Caller can set displaying layout of notification.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Mobile 2.3
+  ///
+  /// **Parameters:**
+  /// - `noti` (in): The notification handle
+  /// - `layout` (in): The type of layout
+  ///
+  /// **Returns:**
+  /// - `NOTIFICATION_ERROR_NONE` on success, otherwise any other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTIFICATION_ERROR_NONE`: Success
+  /// - `NOTIFICATION_ERROR_INVALID_PARAMETER`: Invalid input value
+  ///
+  /// **See also:**
+  /// - `notification_ly_type_e`
   int notification_set_layout(
     notification_h noti,
     int layout,
@@ -1379,15 +1707,24 @@ class Tizen80Notification {
   late final _notification_set_layout = _notification_set_layoutPtr
       .asFunction<int Function(notification_h, int)>();
 
-  /// @brief Gets the layout of the notification view from the notification handle.
-  /// @since_tizen @if WEARABLE 2.3.1 @elseif MOBILE 2.3 @endif
-  /// @param[in] noti The notification handle
-  /// @param[out] layout The type of layout
-  /// @return #NOTIFICATION_ERROR_NONE on success,
-  /// otherwise any other value on failure
-  /// @retval #NOTIFICATION_ERROR_NONE Success
-  /// @retval #NOTIFICATION_ERROR_INVALID_PARAMETER Invalid input value
-  /// @see #notification_ly_type_e
+  /// Gets the layout of the notification view from the notification handle.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Mobile 2.3
+  ///
+  /// **Parameters:**
+  /// - `noti` (in): The notification handle
+  /// - `layout` (out): The type of layout
+  ///
+  /// **Returns:**
+  /// - `NOTIFICATION_ERROR_NONE` on success, otherwise any other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTIFICATION_ERROR_NONE`: Success
+  /// - `NOTIFICATION_ERROR_INVALID_PARAMETER`: Invalid input value
+  ///
+  /// **See also:**
+  /// - `notification_ly_type_e`
   int notification_get_layout(
     notification_h noti,
     ffi.Pointer<ffi.Int32> layout,
@@ -1405,16 +1742,25 @@ class Tizen80Notification {
   late final _notification_get_layout = _notification_get_layoutPtr
       .asFunction<int Function(notification_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the type of a notification.
-  /// @since_tizen @if WEARABLE 2.3.1 @elseif MOBILE 2.3 @endif
-  /// @param[in] noti The notification handle
-  /// @param[out] type The notification type
-  /// @return #NOTIFICATION_ERROR_NONE on success,
-  /// otherwise any other value on failure
-  /// @retval #NOTIFICATION_ERROR_NONE Success
-  /// @retval #NOTIFICATION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @par Sample code:
-  /// @code
+  /// Gets the type of a notification.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Mobile 2.3
+  ///
+  /// **Parameters:**
+  /// - `noti` (in): The notification handle
+  /// - `type` (out): The notification type
+  ///
+  /// **Returns:**
+  /// - `NOTIFICATION_ERROR_NONE` on success, otherwise any other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTIFICATION_ERROR_NONE`: Success
+  /// - `NOTIFICATION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification.h>
   ///
   /// {
@@ -1425,7 +1771,7 @@ class Tizen80Notification {
   /// if (noti_err != NOTIFICATION_ERROR_NONE)
   /// return;
   /// }
-  /// @endcode
+  /// ```
   int notification_get_type(
     notification_h noti,
     ffi.Pointer<ffi.Int32> type,
@@ -1443,20 +1789,34 @@ class Tizen80Notification {
   late final _notification_get_type = _notification_get_typePtr
       .asFunction<int Function(notification_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Updates notification data.
-  /// @details The updated notification will appear in the notification area.
-  /// @since_tizen @if WEARABLE 2.3.1 @elseif MOBILE 2.3 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/notification
-  /// @param[in] noti The notification handle that is created by notification_create()
-  /// @return #NOTIFICATION_ERROR_NONE on success,
-  /// otherwise any other value on failure
-  /// @retval #NOTIFICATION_ERROR_NONE Success
-  /// @retval #NOTIFICATION_ERROR_PERMISSION_DENIED The Permission denied
-  /// @retval #NOTIFICATION_ERROR_INVALID_PARAMETER Invalid input value
-  /// @retval #NOTIFICATION_ERROR_NOT_EXIST_ID Priv ID does not exist
-  /// @par Sample code:
-  /// @code
+  /// Updates notification data.
+  ///
+  /// The updated notification will appear in the notification area.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Mobile 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/notification>
+  ///
+  /// **Parameters:**
+  /// - `noti` (in): The notification handle that is created by notification_create()
+  ///
+  /// **Returns:**
+  /// - `NOTIFICATION_ERROR_NONE` on success, otherwise any other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTIFICATION_ERROR_NONE`: Success
+  /// - `NOTIFICATION_ERROR_PERMISSION_DENIED`: The Permission denied
+  /// - `NOTIFICATION_ERROR_INVALID_PARAMETER`: Invalid input value
+  /// - `NOTIFICATION_ERROR_NOT_EXIST_ID`: Priv ID does not exist
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification.h>
   ///
   /// {
@@ -1466,7 +1826,7 @@ class Tizen80Notification {
   /// if (noti_err != NOTIFICATION_ERROR_NONE)
   /// return;
   /// }
-  /// @endcode
+  /// ```
   int notification_update(
     notification_h noti,
   ) {
@@ -1481,19 +1841,33 @@ class Tizen80Notification {
   late final _notification_update =
       _notification_updatePtr.asFunction<int Function(notification_h)>();
 
-  /// @brief Deletes a notification with the given handle.
-  /// @details notification_delete() removes notification data from database and notification_free() releases memory of notification data.
-  /// @since_tizen @if WEARABLE 2.3.1 @elseif MOBILE 2.3 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/notification
-  /// @param[in] noti The notification handle
-  /// @return #NOTIFICATION_ERROR_NONE on success,
-  /// otherwise any other value on failure
-  /// @retval #NOTIFICATION_ERROR_NONE Success
-  /// @retval #NOTIFICATION_ERROR_PERMISSION_DENIED The Permission denied
-  /// @retval #NOTIFICATION_ERROR_INVALID_PARAMETER Invalid input value
-  /// @par Sample code:
-  /// @code
+  /// Deletes a notification with the given handle.
+  ///
+  /// notification_delete() removes notification data from database and notification_free() releases memory of notification data.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Mobile 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/notification>
+  ///
+  /// **Parameters:**
+  /// - `noti` (in): The notification handle
+  ///
+  /// **Returns:**
+  /// - `NOTIFICATION_ERROR_NONE` on success, otherwise any other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTIFICATION_ERROR_NONE`: Success
+  /// - `NOTIFICATION_ERROR_PERMISSION_DENIED`: The Permission denied
+  /// - `NOTIFICATION_ERROR_INVALID_PARAMETER`: Invalid input value
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification.h>
   ///
   /// {
@@ -1507,7 +1881,7 @@ class Tizen80Notification {
   /// return;
   ///
   /// }
-  /// @endcode
+  /// ```
   int notification_delete(
     notification_h noti,
   ) {
@@ -1522,23 +1896,35 @@ class Tizen80Notification {
   late final _notification_delete =
       _notification_deletePtr.asFunction<int Function(notification_h)>();
 
-  /// @brief Creates internal structure data and returns a notification handle.
-  /// @details Available type is #NOTIFICATION_TYPE_NOTI and #NOTIFICATION_TYPE_ONGOING.
-  /// #NOTIFICATION_TYPE_NOTI is remaining notification data even if device is restarted.
-  /// #NOTIFICATION_TYPE_ONGOING can display progress on a notification with #NOTIFICATION_LY_ONGOING_PROGRESS layout.
-  /// @since_tizen @if WEARABLE 2.3.1 @elseif MOBILE 2.3 @endif
-  /// @remarks The specific error code can be obtained using the get_last_result() method. Error codes are described in Exception section.
-  /// The returned value should be released using notification_free().
-  /// @param[in] type The notification type
-  /// @return Notification handle(#notification_h) on success,
-  /// otherwise @c NULL on failure
-  /// @exception #NOTIFICATION_ERROR_NONE Success
-  /// @exception #NOTIFICATION_ERROR_INVALID_PARAMETER Invalid input value
-  /// @exception #NOTIFICATION_ERROR_OUT_OF_MEMORY Out of memory
-  /// @exception #NOTIFICATION_ERROR_IO_ERROR I/O error
-  /// @see #notification_type_e
-  /// @par Sample code:
-  /// @code
+  /// Creates internal structure data and returns a notification handle.
+  ///
+  /// Available type is `NOTIFICATION_TYPE_NOTI` and `NOTIFICATION_TYPE_ONGOING`. `NOTIFICATION_TYPE_NOTI` is remaining notification data even if device is restarted. `NOTIFICATION_TYPE_ONGOING` can display progress on a notification with `NOTIFICATION_LY_ONGOING_PROGRESS` layout.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Mobile 2.3
+  ///
+  /// **Remarks:**
+  /// - The specific error code can be obtained using the get_last_result() method. Error codes are described in Exception section.
+  /// - The returned value should be released using notification_free().
+  ///
+  /// **Parameters:**
+  /// - `type` (in): The notification type
+  ///
+  /// **Returns:**
+  /// - Notification handle(`notification_h`) on success, otherwise `NULL` on failure
+  ///
+  /// **Exceptions:**
+  /// - `NOTIFICATION_ERROR_NONE`: Success
+  /// - `NOTIFICATION_ERROR_INVALID_PARAMETER`: Invalid input value
+  /// - `NOTIFICATION_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `NOTIFICATION_ERROR_IO_ERROR`: I/O error
+  ///
+  /// **See also:**
+  /// - `notification_type_e`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification.h>
   ///
   /// {
@@ -1552,7 +1938,7 @@ class Tizen80Notification {
   ///
   /// notification_free(noti);
   /// }
-  /// @endcode
+  /// ```
   notification_h notification_create(
     int type,
   ) {
@@ -1567,19 +1953,33 @@ class Tizen80Notification {
   late final _notification_create =
       _notification_createPtr.asFunction<notification_h Function(int)>();
 
-  /// @brief Creates a notification clone.
-  /// @details Newly created notification handle is returned.
-  /// @since_tizen @if WEARABLE 2.3.1 @elseif MOBILE 2.3 @endif
-  /// @remarks This cloned notification handle should be freed using notification_free().
-  /// @param[in] noti The notification handle
-  /// @param[out] clone The newly created notification handle that has same with input @a noti
-  /// @return #NOTIFICATION_ERROR_NONE if success,
-  /// otherwise any other value if failure
-  /// @retval #NOTIFICATION_ERROR_NONE Success
-  /// @retval #NOTIFICATION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #notification_type_e
-  /// @par Sample code:
-  /// @code
+  /// Creates a notification clone.
+  ///
+  /// Newly created notification handle is returned.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Mobile 2.3
+  ///
+  /// **Remarks:**
+  /// - This cloned notification handle should be freed using notification_free().
+  ///
+  /// **Parameters:**
+  /// - `noti` (in): The notification handle
+  /// - `clone` (out): The newly created notification handle that has same with input `noti`
+  ///
+  /// **Returns:**
+  /// - `NOTIFICATION_ERROR_NONE` if success, otherwise any other value if failure
+  ///
+  /// **Return values:**
+  /// - `NOTIFICATION_ERROR_NONE`: Success
+  /// - `NOTIFICATION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `notification_type_e`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification.h>
   ///
   /// {
@@ -1591,7 +1991,7 @@ class Tizen80Notification {
   /// // Do something
   ///
   /// }
-  /// @endcode
+  /// ```
   int notification_clone(
     notification_h noti,
     ffi.Pointer<notification_h> clone,
@@ -1609,17 +2009,29 @@ class Tizen80Notification {
   late final _notification_clone = _notification_clonePtr
       .asFunction<int Function(notification_h, ffi.Pointer<notification_h>)>();
 
-  /// @brief Frees the internal structure data of a notification handle.
-  /// @details Internal data of a notification handle is released. Data of the inserted notification is not deleted.
-  /// @since_tizen @if WEARABLE 2.3.1 @elseif MOBILE 2.3 @endif
-  /// @param[in] noti The notification handle
-  /// @return #NOTIFICATION_ERROR_NONE on success,
-  /// otherwise any other value on failure
-  /// @retval #NOTIFICATION_ERROR_NONE Success
-  /// @retval #NOTIFICATION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre Notification handle should be created by notification_create().
-  /// @par Sample code:
-  /// @code
+  /// Frees the internal structure data of a notification handle.
+  ///
+  /// Internal data of a notification handle is released. Data of the inserted notification is not deleted.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Mobile 2.3
+  ///
+  /// **Parameters:**
+  /// - `noti` (in): The notification handle
+  ///
+  /// **Returns:**
+  /// - `NOTIFICATION_ERROR_NONE` on success, otherwise any other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTIFICATION_ERROR_NONE`: Success
+  /// - `NOTIFICATION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - Notification handle should be created by notification_create().
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification.h>
   ///
   /// {
@@ -1637,7 +2049,7 @@ class Tizen80Notification {
   /// return;
   ///
   /// }
-  /// @endcode
+  /// ```
   int notification_free(
     notification_h noti,
   ) {
@@ -1652,17 +2064,28 @@ class Tizen80Notification {
   late final _notification_free =
       _notification_freePtr.asFunction<int Function(notification_h)>();
 
-  /// @brief Sets the tag of the notification handle.
-  /// @since_tizen @if WEARABLE 2.3.1 @elseif MOBILE 2.3 @endif
-  /// @param[in] noti Notification handle
-  /// @param[in] tag Tag for loading notification handle
-  /// @return #NOTIFICATION_ERROR_NONE on success,
-  /// other value on failure
-  /// @retval #NOTIFICATION_ERROR_NONE Success
-  /// @retval #NOTIFICATION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see notification_get_tag()
-  /// @par Sample code:
-  /// @code
+  /// Sets the tag of the notification handle.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Mobile 2.3
+  ///
+  /// **Parameters:**
+  /// - `noti` (in): Notification handle
+  /// - `tag` (in): Tag for loading notification handle
+  ///
+  /// **Returns:**
+  /// - `NOTIFICATION_ERROR_NONE` on success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTIFICATION_ERROR_NONE`: Success
+  /// - `NOTIFICATION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `notification_get_tag()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification.h>
   ///
   /// {
@@ -1680,7 +2103,7 @@ class Tizen80Notification {
   /// return;
   ///
   /// }
-  /// @endcode
+  /// ```
   int notification_set_tag(
     notification_h noti,
     ffi.Pointer<ffi.Char> tag,
@@ -1698,18 +2121,31 @@ class Tizen80Notification {
   late final _notification_set_tag = _notification_set_tagPtr
       .asFunction<int Function(notification_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the tag of the notification handle.
-  /// @since_tizen @if WEARABLE 2.3.1 @elseif MOBILE 2.3 @endif
-  /// @remarks Do not free @a tag. It will be freed when notification_free() is called.
-  /// @param[in] noti Notification handle
-  /// @param[out] tag Tag for loading notification handle
-  /// @return #NOTIFICATION_ERROR_NONE on success,
-  /// other value on failure
-  /// @retval #NOTIFICATION_ERROR_NONE Success
-  /// @retval #NOTIFICATION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see notification_set_tag()
-  /// @par Sample code:
-  /// @code
+  /// Gets the tag of the notification handle.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Mobile 2.3
+  ///
+  /// **Remarks:**
+  /// - Do not free `tag`. It will be freed when notification_free() is called.
+  ///
+  /// **Parameters:**
+  /// - `noti` (in): Notification handle
+  /// - `tag` (out): Tag for loading notification handle
+  ///
+  /// **Returns:**
+  /// - `NOTIFICATION_ERROR_NONE` on success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTIFICATION_ERROR_NONE`: Success
+  /// - `NOTIFICATION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `notification_set_tag()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification.h>
   ///
   /// {
@@ -1723,7 +2159,7 @@ class Tizen80Notification {
   /// return;
   ///
   /// }
-  /// @endcode
+  /// ```
   int notification_get_tag(
     notification_h noti,
     ffi.Pointer<ffi.Pointer<ffi.Char>> tag,
@@ -1741,22 +2177,39 @@ class Tizen80Notification {
   late final _notification_get_tag = _notification_get_tagPtr.asFunction<
       int Function(notification_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Loads a notification from the notification's database with the tag.
-  /// @since_tizen @if WEARABLE 2.3.1 @elseif MOBILE 2.3 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/notification
-  /// @remarks The specific error code can be obtained using the get_last_result() method. Error codes are described in Exception section.
-  /// The returned value should be released using notification_free().
-  /// @param[in] tag Tag for loading notification handle
-  /// @return Notification handle(#notification_h) on success,
-  /// NULL on failure
-  /// @exception #NOTIFICATION_ERROR_NONE Success
-  /// @exception #NOTIFICATION_ERROR_PERMISSION_DENIED The Permission denied
-  /// @exception #NOTIFICATION_ERROR_INVALID_PARAMETER Invalid input value
-  /// @exception #NOTIFICATION_ERROR_OUT_OF_MEMORY Out of memory
-  /// @see #notification_type_e
-  /// @par Sample code:
-  /// @code
+  /// Loads a notification from the notification's database with the tag.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Mobile 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/notification>
+  ///
+  /// **Remarks:**
+  /// - The specific error code can be obtained using the get_last_result() method. Error codes are described in Exception section.
+  /// - The returned value should be released using notification_free().
+  ///
+  /// **Parameters:**
+  /// - `tag` (in): Tag for loading notification handle
+  ///
+  /// **Returns:**
+  /// - Notification handle(`notification_h`) on success, NULL on failure
+  ///
+  /// **Exceptions:**
+  /// - `NOTIFICATION_ERROR_NONE`: Success
+  /// - `NOTIFICATION_ERROR_PERMISSION_DENIED`: The Permission denied
+  /// - `NOTIFICATION_ERROR_INVALID_PARAMETER`: Invalid input value
+  /// - `NOTIFICATION_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `notification_type_e`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification.h>
   ///
   /// {
@@ -1769,7 +2222,7 @@ class Tizen80Notification {
   /// // Do something
   ///
   /// }
-  /// @endcode
+  /// ```
   notification_h notification_load_by_tag(
     ffi.Pointer<ffi.Char> tag,
   ) {
@@ -1784,18 +2237,31 @@ class Tizen80Notification {
   late final _notification_load_by_tag = _notification_load_by_tagPtr
       .asFunction<notification_h Function(ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Deletes all notifications of the given type.
-  /// @since_tizen @if WEARABLE 2.3.1 @elseif MOBILE 2.3 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/notification
-  /// @param[in] type Notification type
-  /// @return #NOTIFICATION_ERROR_NONE if success,
-  /// other value if failure
-  /// @retval #NOTIFICATION_ERROR_NONE Success
-  /// @retval #NOTIFICATION_ERROR_PERMISSION_DENIED The Permission denied
-  /// @retval #NOTIFICATION_ERROR_INVALID_PARAMETER Invalid input value
-  /// @par Sample code:
-  /// @code
+  /// Deletes all notifications of the given type.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Mobile 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/notification>
+  ///
+  /// **Parameters:**
+  /// - `type` (in): Notification type
+  ///
+  /// **Returns:**
+  /// - `NOTIFICATION_ERROR_NONE` if success, other value if failure
+  ///
+  /// **Return values:**
+  /// - `NOTIFICATION_ERROR_NONE`: Success
+  /// - `NOTIFICATION_ERROR_PERMISSION_DENIED`: The Permission denied
+  /// - `NOTIFICATION_ERROR_INVALID_PARAMETER`: Invalid input value
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification.h>
   ///
   /// {
@@ -1806,7 +2272,7 @@ class Tizen80Notification {
   /// return;
   ///
   /// }
-  /// @endcode
+  /// ```
   int notification_delete_all(
     int type,
   ) {
@@ -1821,20 +2287,37 @@ class Tizen80Notification {
   late final _notification_delete_all =
       _notification_delete_allPtr.asFunction<int Function(int)>();
 
-  /// @brief Posts a notification.
-  /// @since_tizen @if WEARABLE 2.3.1 @elseif MOBILE 2.3 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/notification
-  /// @param[in] noti Notification handle
-  /// @return #NOTIFICATION_ERROR_NONE if success,
-  /// other value if failure
-  /// @retval #NOTIFICATION_ERROR_NONE Success
-  /// @retval #NOTIFICATION_ERROR_PERMISSION_DENIED The Permission denied
-  /// @retval #NOTIFICATION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre Notification handle should be created by notification_create().
-  /// @post notification_free().
-  /// @par Sample code:
-  /// @code
+  /// Posts a notification.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Mobile 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/notification>
+  ///
+  /// **Parameters:**
+  /// - `noti` (in): Notification handle
+  ///
+  /// **Returns:**
+  /// - `NOTIFICATION_ERROR_NONE` if success, other value if failure
+  ///
+  /// **Return values:**
+  /// - `NOTIFICATION_ERROR_NONE`: Success
+  /// - `NOTIFICATION_ERROR_PERMISSION_DENIED`: The Permission denied
+  /// - `NOTIFICATION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - Notification handle should be created by notification_create().
+  ///
+  /// **Postconditions:**
+  /// - notification_free().
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification.h>
   ///
   /// {
@@ -1845,7 +2328,7 @@ class Tizen80Notification {
   /// return;
   ///
   /// }
-  /// @endcode
+  /// ```
   int notification_post(
     notification_h noti,
   ) {
@@ -1860,17 +2343,28 @@ class Tizen80Notification {
   late final _notification_post =
       _notification_postPtr.asFunction<int Function(notification_h)>();
 
-  /// @brief Gets the package name of the notification.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @remarks Do not free @a pkgname. It will be freed when notification_free() is called.
-  /// @param[in] noti Notification handle
-  /// @param[out] pkgname The package name of the notification
-  /// @return #NOTIFICATION_ERROR_NONE on success,
-  /// otherwise a negative error value
-  /// @retval #NOTIFICATION_ERROR_NONE Success
-  /// @retval #NOTIFICATION_ERROR_INVALID_PARAMETER Invalid input value
-  /// @par Sample code:
-  /// @code
+  /// Gets the package name of the notification.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Remarks:**
+  /// - Do not free `pkgname`. It will be freed when notification_free() is called.
+  ///
+  /// **Parameters:**
+  /// - `noti` (in): Notification handle
+  /// - `pkgname` (out): The package name of the notification
+  ///
+  /// **Returns:**
+  /// - `NOTIFICATION_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `NOTIFICATION_ERROR_NONE`: Success
+  /// - `NOTIFICATION_ERROR_INVALID_PARAMETER`: Invalid input value
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification.h>
   ///
   /// {
@@ -1888,7 +2382,7 @@ class Tizen80Notification {
   /// }
   ///
   /// }
-  /// @endcode
+  /// ```
   int notification_get_pkgname(
     notification_h noti,
     ffi.Pointer<ffi.Pointer<ffi.Char>> pkgname,
@@ -1907,16 +2401,25 @@ class Tizen80Notification {
       _notification_get_pkgnamePtr.asFunction<
           int Function(notification_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Adds a button on the notification.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @param[in] noti Notification handle
-  /// @param[in] button_index Button index
-  /// @return #NOTIFICATION_ERROR_NONE on success,
-  /// otherwise a negative error value
-  /// @retval #NOTIFICATION_ERROR_NONE Success
-  /// @retval #NOTIFICATION_ERROR_INVALID_PARAMETER Invalid input value
-  /// @par Sample code:
-  /// @code
+  /// Adds a button on the notification.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `noti` (in): Notification handle
+  /// - `button_index` (in): Button index
+  ///
+  /// **Returns:**
+  /// - `NOTIFICATION_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `NOTIFICATION_ERROR_NONE`: Success
+  /// - `NOTIFICATION_ERROR_INVALID_PARAMETER`: Invalid input value
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification.h>
   ///
   /// {
@@ -1933,7 +2436,7 @@ class Tizen80Notification {
   /// return;
   /// }
   /// }
-  /// @endcode
+  /// ```
   int notification_add_button(
     notification_h noti,
     int button_index,
@@ -1950,16 +2453,25 @@ class Tizen80Notification {
   late final _notification_add_button = _notification_add_buttonPtr
       .asFunction<int Function(notification_h, int)>();
 
-  /// @brief Removes a button on the notification.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @param[in] noti Notification handle
-  /// @param[in] button_index Button index
-  /// @return #NOTIFICATION_ERROR_NONE on success,
-  /// otherwise a negative error value
-  /// @retval #NOTIFICATION_ERROR_NONE Success
-  /// @retval #NOTIFICATION_ERROR_INVALID_PARAMETER Invalid input value
-  /// @par Sample code:
-  /// @code
+  /// Removes a button on the notification.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `noti` (in): Notification handle
+  /// - `button_index` (in): Button index
+  ///
+  /// **Returns:**
+  /// - `NOTIFICATION_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `NOTIFICATION_ERROR_NONE`: Success
+  /// - `NOTIFICATION_ERROR_INVALID_PARAMETER`: Invalid input value
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification.h>
   ///
   /// {
@@ -1976,7 +2488,7 @@ class Tizen80Notification {
   /// return;
   /// }
   /// }
-  /// @endcode
+  /// ```
   int notification_remove_button(
     notification_h noti,
     int button_index,
@@ -1993,20 +2505,34 @@ class Tizen80Notification {
   late final _notification_remove_button = _notification_remove_buttonPtr
       .asFunction<int Function(notification_h, int)>();
 
-  /// @brief Sets the 'auto remove' option of the active notification.
-  /// @details The 'auto remove' option lets the active notification be removed several seconds after it shows. Default value is true.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @remarks When 'auto_remove' is set as false, the active notification will not be removed
-  /// as long as the user removes the active notification or the app which posted the active notification removes the active notification.
-  /// @param[in] noti Notification handle
-  /// @param[in] auto_remove Auto remove option
-  /// @return #NOTIFICATION_ERROR_NONE On success,
-  /// other value if failure
-  /// @retval #NOTIFICATION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #notification_h
-  /// @see #notification_get_auto_remove
-  /// @par Sample code:
-  /// @code
+  /// Sets the 'auto remove' option of the active notification.
+  ///
+  /// The 'auto remove' option lets the active notification be removed several seconds after it shows. Default value is true.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Remarks:**
+  /// - When 'auto_remove' is set as false, the active notification will not be removed
+  /// - as long as the user removes the active notification or the app which posted the active notification removes the active notification.
+  ///
+  /// **Parameters:**
+  /// - `noti` (in): Notification handle
+  /// - `auto_remove` (in): Auto remove option
+  ///
+  /// **Returns:**
+  /// - `NOTIFICATION_ERROR_NONE` On success, other value if failure
+  ///
+  /// **Return values:**
+  /// - `NOTIFICATION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `notification_h`
+  /// - `notification_get_auto_remove`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification.h>
   ///
   /// {
@@ -2020,7 +2546,7 @@ class Tizen80Notification {
   /// return;
   ///
   /// }
-  /// @endcode
+  /// ```
   int notification_set_auto_remove(
     notification_h noti,
     bool auto_remove,
@@ -2037,16 +2563,29 @@ class Tizen80Notification {
   late final _notification_set_auto_remove = _notification_set_auto_removePtr
       .asFunction<int Function(notification_h, bool)>();
 
-  /// @brief Gets the 'auto remove' option of the active notification.
-  /// @details The 'auto remove' option lets the active notification be removed several seconds after it shows. Default value is true.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @param[in] noti Notification handle
-  /// @param[out] auto_remove Auto remove option
-  /// @return #NOTIFICATION_ERROR_NONE On success, other value on failure
-  /// @retval #NOTIFICATION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #notification_h
-  /// @par Sample code:
-  /// @code
+  /// Gets the 'auto remove' option of the active notification.
+  ///
+  /// The 'auto remove' option lets the active notification be removed several seconds after it shows. Default value is true.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `noti` (in): Notification handle
+  /// - `auto_remove` (out): Auto remove option
+  ///
+  /// **Returns:**
+  /// - `NOTIFICATION_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTIFICATION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `notification_h`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification.h>
   ///
   /// {
@@ -2060,7 +2599,7 @@ class Tizen80Notification {
   /// return;
   ///
   /// }
-  /// @endcode
+  /// ```
   int notification_get_auto_remove(
     notification_h noti,
     ffi.Pointer<ffi.Bool> auto_remove,
@@ -2078,28 +2617,44 @@ class Tizen80Notification {
   late final _notification_get_auto_remove = _notification_get_auto_removePtr
       .asFunction<int Function(notification_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Saves a notification template to the notification database.
-  /// @details An application can save the created notification as a template for later reuse.
-  /// If the template has the same name as a saved one, the saved template will be overwritten.
-  /// A saved template can be loaded only by the application which saved it.
-  /// All templates are removed when the application package is uninstalled.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/notification
-  /// @remarks The number of templates is limited to 10.
-  /// When you try to add more than 10 templates, #NOTIFICATION_ERROR_MAX_EXCEEDED will be returned.
-  /// @param[in] noti Notification handle
-  /// @param[in] template_name Template name
-  /// @return #NOTIFICATION_ERROR_NONE On success, other value on failure
-  /// @retval #NOTIFICATION_ERROR_PERMISSION_DENIED The Permission denied
-  /// @retval #NOTIFICATION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #NOTIFICATION_ERROR_IO_ERROR I/O error
-  /// @retval #NOTIFICATION_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #NOTIFICATION_ERROR_MAX_EXCEEDED Max notification count exceeded
-  /// @see #notification_h
-  /// @see notification_create_from_template()
-  /// @par Sample code:
-  /// @code
+  /// Saves a notification template to the notification database.
+  ///
+  /// An application can save the created notification as a template for later reuse. If the template has the same name as a saved one, the saved template will be overwritten. A saved template can be loaded only by the application which saved it. All templates are removed when the application package is uninstalled.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/notification>
+  ///
+  /// **Remarks:**
+  /// - The number of templates is limited to 10.
+  /// - When you try to add more than 10 templates, `NOTIFICATION_ERROR_MAX_EXCEEDED` will be returned.
+  ///
+  /// **Parameters:**
+  /// - `noti` (in): Notification handle
+  /// - `template_name` (in): Template name
+  ///
+  /// **Returns:**
+  /// - `NOTIFICATION_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTIFICATION_ERROR_PERMISSION_DENIED`: The Permission denied
+  /// - `NOTIFICATION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `NOTIFICATION_ERROR_IO_ERROR`: I/O error
+  /// - `NOTIFICATION_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `NOTIFICATION_ERROR_MAX_EXCEEDED`: Max notification count exceeded
+  ///
+  /// **See also:**
+  /// - `notification_h`
+  /// - `notification_create_from_template()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification.h>
   ///
   /// {
@@ -2120,7 +2675,7 @@ class Tizen80Notification {
   /// if (noti_err != NOTIFICATION_ERROR_NONE)
   /// return;
   /// }
-  /// @endcode
+  /// ```
   int notification_save_as_template(
     notification_h noti,
     ffi.Pointer<ffi.Char> template_name,
@@ -2138,27 +2693,45 @@ class Tizen80Notification {
   late final _notification_save_as_template = _notification_save_as_templatePtr
       .asFunction<int Function(notification_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Loads a notification template from the notification database.
-  /// @details An application can load a saved template and post it.
-  /// An application can load only templates that it has saved.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/notification
-  /// @remarks The returned handle should be destroyed using notification_free().
-  /// The specific error code can be obtained using get_last_result().
-  /// Error codes are described in the Exception section.
-  /// If an invalid template name is given, the result will be set to #NOTIFICATION_ERROR_FROM_DB.
-  /// @param[in] template_name Template name
-  /// @return Notification handle on success, NULL on failure
-  /// @exception #NOTIFICATION_ERROR_NONE Success
-  /// @exception #NOTIFICATION_ERROR_PERMISSION_DENIED The Permission denied
-  /// @exception #NOTIFICATION_ERROR_INVALID_PARAMETER Invalid input value
-  /// @exception #NOTIFICATION_ERROR_OUT_OF_MEMORY Out of memory
-  /// @exception #NOTIFICATION_ERROR_FROM_DB Error from DB query
-  /// @see #notification_h
-  /// @see notification_save_as_template()
-  /// @par Sample code:
-  /// @code
+  /// Loads a notification template from the notification database.
+  ///
+  /// An application can load a saved template and post it. An application can load only templates that it has saved.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/notification>
+  ///
+  /// **Remarks:**
+  /// - The returned handle should be destroyed using notification_free().
+  /// - The specific error code can be obtained using get_last_result().
+  /// - Error codes are described in the Exception section.
+  /// - If an invalid template name is given, the result will be set to `NOTIFICATION_ERROR_FROM_DB`.
+  ///
+  /// **Parameters:**
+  /// - `template_name` (in): Template name
+  ///
+  /// **Returns:**
+  /// - Notification handle on success, NULL on failure
+  ///
+  /// **Exceptions:**
+  /// - `NOTIFICATION_ERROR_NONE`: Success
+  /// - `NOTIFICATION_ERROR_PERMISSION_DENIED`: The Permission denied
+  /// - `NOTIFICATION_ERROR_INVALID_PARAMETER`: Invalid input value
+  /// - `NOTIFICATION_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `NOTIFICATION_ERROR_FROM_DB`: Error from DB query
+  ///
+  /// **See also:**
+  /// - `notification_h`
+  /// - `notification_save_as_template()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification.h>
   ///
   /// {
@@ -2169,7 +2742,7 @@ class Tizen80Notification {
   /// return;
   ///
   /// }
-  /// @endcode
+  /// ```
   notification_h notification_create_from_template(
     ffi.Pointer<ffi.Char> template_name,
   ) {
@@ -2185,26 +2758,39 @@ class Tizen80Notification {
       _notification_create_from_templatePtr
           .asFunction<notification_h Function(ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets notification block state.
-  /// @details The user can set the notification block state in settings.
-  /// The block state indicates whether or not notifications can be posted.
-  /// Additionally only notifications to the notification panel are
-  /// allowed in "Do not disturb mode". Sound, Vibrate and
-  /// Active/Instant notifications are blocked.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/notification
-  /// @param[out] state Notification block state
-  /// @return #NOTIFICATION_ERROR_NONE On success, other value on failure
-  /// @retval #NOTIFICATION_ERROR_NONE Success
-  /// @retval #NOTIFICATION_ERROR_PERMISSION_DENIED The Permission denied
-  /// @retval #NOTIFICATION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #NOTIFICATION_ERROR_OUT_OF_MEMORY out of memory
-  /// @retval #NOTIFICATION_ERROR_IO_ERROR I/O Error
-  /// @retval #NOTIFICATION_ERROR_SERVICE_NOT_READY No response from notification service
-  /// @see #notification_block_state_e
-  /// @par Sample code:
-  /// @code
+  /// Gets notification block state.
+  ///
+  /// The user can set the notification block state in settings. The block state indicates whether or not notifications can be posted. Additionally only notifications to the notification panel are allowed in "Do not disturb mode". Sound, Vibrate and Active/Instant notifications are blocked.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/notification>
+  ///
+  /// **Parameters:**
+  /// - `state` (out): Notification block state
+  ///
+  /// **Returns:**
+  /// - `NOTIFICATION_ERROR_NONE` On success, other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTIFICATION_ERROR_NONE`: Success
+  /// - `NOTIFICATION_ERROR_PERMISSION_DENIED`: The Permission denied
+  /// - `NOTIFICATION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `NOTIFICATION_ERROR_OUT_OF_MEMORY`: out of memory
+  /// - `NOTIFICATION_ERROR_IO_ERROR`: I/O Error
+  /// - `NOTIFICATION_ERROR_SERVICE_NOT_READY`: No response from notification service
+  ///
+  /// **See also:**
+  /// - `notification_block_state_e`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification.h>
   ///
   /// {
@@ -2218,7 +2804,7 @@ class Tizen80Notification {
   /// return;
   ///
   /// }
-  /// @endcode
+  /// ```
   int notification_get_noti_block_state(
     ffi.Pointer<ffi.Int32> state,
   ) {
@@ -2234,33 +2820,27 @@ class Tizen80Notification {
       _notification_get_noti_block_statePtr
           .asFunction<int Function(ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Sets a text input box to reply directly on the notification.
-  /// @details When you add a text input to the active notification, the notification UI will show a text input with a button.
-  /// So, the user can enter any text and press the button to confirm the text as a input.
-  /// You can edit some UI component that is related to the text input.
-  /// First, you can add placeholder text to guide the user using notification_set_text() with #NOTIFICATION_TEXT_TYPE_TEXT_INPUT_PLACEHOLDER type.
-  /// You also can edit button for the text input.
-  /// For setting just a text to the button, you can set the text using notification_set_text() with #NOTIFICATION_TEXT_TYPE_TEXT_INPUT_BUTTON type.
-  /// If you want to show image button, you can set an image for the button using notification_set_image() with #NOTIFICATION_IMAGE_TYPE_TEXT_INPUT_BUTTON type.
+  /// Sets a text input box to reply directly on the notification.
   ///
-  /// Note that you should set an app_control for handling the event for user input using notification_set_event_handler().
-  /// #NOTIFICATION_EVENT_TYPE_CLICK_ON_TEXT_INPUT_BUTTON is the event type for the text input.
-  /// You can get the text the user enters in the app_control handle that is passed as a result of the event.
-  /// The app_control will contain #APP_CONTROL_DATA_TEXT key, so you can get the text using app_control_get_extra_data() using APP_CONTROL_DATA_TEXT key.
-  /// The value will contain the text user enters.
+  /// When you add a text input to the active notification, the notification UI will show a text input with a button. So, the user can enter any text and press the button to confirm the text as a input. You can edit some UI component that is related to the text input. First, you can add placeholder text to guide the user using notification_set_text() with `NOTIFICATION_TEXT_TYPE_TEXT_INPUT_PLACEHOLDER` type. You also can edit button for the text input. For setting just a text to the button, you can set the text using notification_set_text() with `NOTIFICATION_TEXT_TYPE_TEXT_INPUT_BUTTON` type. If you want to show image button, you can set an image for the button using notification_set_image() with `NOTIFICATION_IMAGE_TYPE_TEXT_INPUT_BUTTON` type. Note that you should set an app_control for handling the event for user input using notification_set_event_handler(). `NOTIFICATION_EVENT_TYPE_CLICK_ON_TEXT_INPUT_BUTTON` is the event type for the text input. You can get the text the user enters in the app_control handle that is passed as a result of the event. The app_control will contain `APP_CONTROL_DATA_TEXT` key, so you can get the text using app_control_get_extra_data() using APP_CONTROL_DATA_TEXT key. The value will contain the text user enters. Note that you are able to make the switching button to the text input box. You have to set the app_control which you will set in a text input box to the switching button. Refer to the second sample code.
   ///
-  /// Note that you are able to make the switching button to the text input box.
-  /// You have to set the app_control which you will set in a text input box to the switching button.
-  /// Refer to the second sample code.
-  /// @since_tizen 3.0
-  /// @param[in] noti Notification handle
-  /// @param[in] text_input_max_length The maximum value which can be inputted
-  /// @return #NOTIFICATION_ERROR_NONE on success,
-  /// otherwise any other value on failure
-  /// @retval #NOTIFICATION_ERROR_NONE         Success
-  /// @retval #NOTIFICATION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @par Sample code:
-  /// @code
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `noti` (in): Notification handle
+  /// - `text_input_max_length` (in): The maximum value which can be inputted
+  ///
+  /// **Returns:**
+  /// - `NOTIFICATION_ERROR_NONE` on success, otherwise any other value on failure
+  ///
+  /// **Return values:**
+  /// - `NOTIFICATION_ERROR_NONE`: Success
+  /// - `NOTIFICATION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification.h>
   ///
   /// {
@@ -2409,7 +2989,7 @@ class Tizen80Notification {
   /// if(noti_err != NOTIFICATION_ERROR_NONE)
   /// return;
   /// }
-  /// @endcode
+  /// ```
   int notification_set_text_input(
     notification_h noti,
     int text_input_max_length,
@@ -2426,21 +3006,30 @@ class Tizen80Notification {
   late final _notification_set_text_input = _notification_set_text_inputPtr
       .asFunction<int Function(notification_h, int)>();
 
-  /// @brief Sets the image height for the extended notification.
-  /// @details The image is shown under the notification's text. The application can set the image height.
-  /// The image is modified to fit into the height set by this function.
-  /// The image can be scaled down and/or cropped.
-  /// If @a height is 0, the default value is used. The default height depends on the screen size.
-  /// @since_tizen 4.0
-  /// @param[in] noti   The notification handle
-  /// @param[in] height The image height
-  /// @return #NOTIFICATION_ERROR_NONE On success,
-  /// otherwise a negative error value
-  /// @retval #NOTIFICATION_ERROR_NONE Success
-  /// @retval #NOTIFICATION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see notification_get_extension_image_size()
-  /// @par Sample code:
-  /// @code
+  /// Sets the image height for the extended notification.
+  ///
+  /// The image is shown under the notification's text. The application can set the image height. The image is modified to fit into the height set by this function. The image can be scaled down and/or cropped. If `height` is 0, the default value is used. The default height depends on the screen size.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `noti` (in): The notification handle
+  /// - `height` (in): The image height
+  ///
+  /// **Returns:**
+  /// - `NOTIFICATION_ERROR_NONE` On success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `NOTIFICATION_ERROR_NONE`: Success
+  /// - `NOTIFICATION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `notification_get_extension_image_size()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification.h>
   ///
   /// {
@@ -2475,7 +3064,7 @@ class Tizen80Notification {
   ///
   /// // Do something
   /// }
-  /// @endcode
+  /// ```
   int notification_set_extension_image_size(
     notification_h noti,
     int height,
@@ -2493,16 +3082,28 @@ class Tizen80Notification {
       _notification_set_extension_image_sizePtr
           .asFunction<int Function(notification_h, int)>();
 
-  /// @brief Gets the image height for the extended notification.
-  /// @since_tizen 4.0
-  /// @param[in] noti The notification handle
-  /// @param[out] height The image height
-  /// @return #NOTIFICATION_ERROR_NONE On success, otherwise a negative error value
-  /// @retval #NOTIFICATION_ERROR_NONE Success
-  /// @retval #NOTIFICATION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see notification_set_extension_image_size()
-  /// @par Sample code:
-  /// @code
+  /// Gets the image height for the extended notification.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `noti` (in): The notification handle
+  /// - `height` (out): The image height
+  ///
+  /// **Returns:**
+  /// - `NOTIFICATION_ERROR_NONE` On success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `NOTIFICATION_ERROR_NONE`: Success
+  /// - `NOTIFICATION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `notification_set_extension_image_size()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <notification.h>
   ///
   /// {
@@ -2515,7 +3116,7 @@ class Tizen80Notification {
   /// if (noti_err != NOTIFICATION_ERROR_NONE)
   /// return;
   /// }
-  /// @endcode
+  /// ```
   int notification_get_extension_image_size(
     notification_h noti,
     ffi.Pointer<ffi.Int> height,
@@ -2535,8 +3136,11 @@ class Tizen80Notification {
           .asFunction<int Function(notification_h, ffi.Pointer<ffi.Int>)>();
 }
 
-/// @brief Enumeration for notification errors.
-/// @since_tizen @if WEARABLE 2.3.1 @elseif MOBILE 2.3 @endif
+/// Enumeration for notification errors.
+///
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Mobile 2.3
+/// @nodoc
 abstract class notification_error {
   /// < Success
   static const int NOTIFICATION_ERROR_NONE = 0;
@@ -2553,7 +3157,7 @@ abstract class notification_error {
   /// < Permission denied
   static const int NOTIFICATION_ERROR_PERMISSION_DENIED = -13;
 
-  /// < Function not implemented (@b Since: @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif)
+  /// < Function not implemented (**Since**: @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif)
   static const int NOTIFICATION_ERROR_INVALID_OPERATION = -38;
 
   /// < Error from DB query
@@ -2571,12 +3175,15 @@ abstract class notification_error {
   /// < No response from notification service
   static const int NOTIFICATION_ERROR_SERVICE_NOT_READY = -18087931;
 
-  /// < Max notification count exceeded (@b Since: 3.0)
+  /// < Max notification count exceeded (**Since**: 3.0)
   static const int NOTIFICATION_ERROR_MAX_EXCEEDED = -18087930;
 }
 
-/// @brief Enumeration for notification layout type.
-/// @since_tizen @if WEARABLE 2.3.1 @elseif MOBILE 2.3 @endif
+/// Enumeration for notification layout type.
+///
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Mobile 2.3
+/// @nodoc
 abstract class notification_ly_type {
   /// < Default
   static const int NOTIFICATION_LY_NONE = 0;
@@ -2590,9 +3197,7 @@ abstract class notification_ly_type {
   /// < Layout for notification. Used to display images
   static const int NOTIFICATION_LY_NOTI_THUMBNAIL = 3;
 
-  /// < Layout for ongoing notification. Used to display text message.
-  /// notifications with #NOTIFICATION_LY_ONGOING_EVENT can not be protected from
-  /// removing by user since tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+  /// < Layout for ongoing notification. Used to display text message. notifications with `NOTIFICATION_LY_ONGOING_EVENT` can not be protected from removing by user since tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
   static const int NOTIFICATION_LY_ONGOING_EVENT = 4;
 
   /// < Layout for ongoing notification. Used to display progress
@@ -2602,15 +3207,21 @@ abstract class notification_ly_type {
   static const int NOTIFICATION_LY_EXTENSION = 6;
 }
 
-/// @brief Enumeration for notification launch option type.
-/// @since_tizen @if WEARABLE 2.3.1 @elseif MOBILE 2.3 @endif
+/// Enumeration for notification launch option type.
+///
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Mobile 2.3
+/// @nodoc
 abstract class notification_launch_option_type {
   /// < Launching with app control
   static const int NOTIFICATION_LAUNCH_OPTION_APP_CONTROL = 1;
 }
 
-/// @brief Enumeration for event type on notification.
-/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+/// Enumeration for event type on notification.
+///
+/// **Since Tizen:**
+/// - Mobile 2.4; Wearable 3.0
+/// @nodoc
 abstract class notification_event_type {
   /// < Event type : Click on button 1
   static const int NOTIFICATION_EVENT_TYPE_CLICK_ON_BUTTON_1 = 0;
@@ -2652,8 +3263,11 @@ abstract class notification_event_type {
   static const int NOTIFICATION_EVENT_TYPE_CLICK_ON_BUTTON_10 = 12;
 }
 
-/// @brief Enumeration for notification sound type.
-/// @since_tizen @if WEARABLE 2.3.1 @elseif MOBILE 2.3 @endif
+/// Enumeration for notification sound type.
+///
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Mobile 2.3
+/// @nodoc
 abstract class notification_sound_type {
   /// < Default value. no sound
   static const int NOTIFICATION_SOUND_TYPE_NONE = -1;
@@ -2665,8 +3279,11 @@ abstract class notification_sound_type {
   static const int NOTIFICATION_SOUND_TYPE_USER_DATA = 1;
 }
 
-/// @brief Enumeration for notification vibration type.
-/// @since_tizen @if WEARABLE 2.3.1 @elseif MOBILE 2.3 @endif
+/// Enumeration for notification vibration type.
+///
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Mobile 2.3
+/// @nodoc
 abstract class notification_vibration_type {
   /// < Default value. No vibration
   static const int NOTIFICATION_VIBRATION_TYPE_NONE = -1;
@@ -2678,8 +3295,11 @@ abstract class notification_vibration_type {
   static const int NOTIFICATION_VIBRATION_TYPE_USER_DATA = 1;
 }
 
-/// @brief Enumeration for notification LED operation.
-/// @since_tizen @if WEARABLE 2.3.1 @elseif MOBILE 2.3 @endif
+/// Enumeration for notification LED operation.
+///
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Mobile 2.3
+/// @nodoc
 abstract class notification_led_op {
   /// < Default value. Disable the LED notification
   static const int NOTIFICATION_LED_OP_OFF = -1;
@@ -2691,9 +3311,13 @@ abstract class notification_led_op {
   static const int NOTIFICATION_LED_OP_ON_CUSTOM_COLOR = 1;
 }
 
-/// @deprecated Deprecated since 2.3.1
-/// @brief Enumeration for setting display type of count.
-/// @since_tizen 2.3
+/// **Deprecated:** Deprecated since 2.3.1
+///
+/// Enumeration for setting display type of count.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 abstract class notification_count_display_type {
   /// < None
   static const int NOTIFICATION_COUNT_DISPLAY_TYPE_NONE = -1;
@@ -2708,8 +3332,11 @@ abstract class notification_count_display_type {
   static const int NOTIFICATION_COUNT_DISPLAY_TYPE_RIGHT = 2;
 }
 
-/// @brief Enumeration for button.
-/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+/// Enumeration for button.
+///
+/// **Since Tizen:**
+/// - Mobile 2.4; Wearable 3.0
+/// @nodoc
 abstract class notification_button_index {
   /// < button 1
   static const int NOTIFICATION_BUTTON_1 = 1;
@@ -2742,8 +3369,11 @@ abstract class notification_button_index {
   static const int NOTIFICATION_BUTTON_10 = 13;
 }
 
-/// @brief Enumeration for notification text type.
-/// @since_tizen @if WEARABLE 2.3.1 @elseif MOBILE 2.3 @endif
+/// Enumeration for notification text type.
+///
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Mobile 2.3
+/// @nodoc
 abstract class notification_text_type {
   /// < None
   static const int NOTIFICATION_TEXT_TYPE_NONE = -1;
@@ -2828,8 +3458,11 @@ abstract class notification_text_type {
   static const int NOTIFICATION_TEXT_TYPE_BUTTON_10 = 25;
 }
 
-/// @brief Enumeration for image type.
-/// @since_tizen @if WEARABLE 2.3.1 @elseif MOBILE 2.3 @endif
+/// Enumeration for image type.
+///
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Mobile 2.3
+/// @nodoc
 abstract class notification_image_type {
   /// < None
   static const int NOTIFICATION_IMAGE_TYPE_NONE = -1;
@@ -2907,8 +3540,11 @@ abstract class notification_image_type {
   static const int NOTIFICATION_IMAGE_TYPE_BUTTON_10 = 23;
 }
 
-/// @brief Enumeration for application execution type.
-/// @since_tizen @if WEARABLE 2.3.1 @elseif MOBILE 2.3 @endif
+/// Enumeration for application execution type.
+///
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Mobile 2.3
+/// @nodoc
 abstract class notification_execute_type {
   /// < No operation
   static const int NOTIFICATION_EXECUTE_TYPE_NONE = -1;
@@ -2923,8 +3559,11 @@ abstract class notification_execute_type {
   static const int NOTIFICATION_EXECUTE_TYPE_MULTI_LAUNCH = 2;
 }
 
-/// @brief Enumeration for notification type.
-/// @since_tizen @if WEARABLE 2.3.1 @elseif MOBILE 2.3 @endif
+/// Enumeration for notification type.
+///
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Mobile 2.3
+/// @nodoc
 abstract class notification_type {
   /// < None
   static const int NOTIFICATION_TYPE_NONE = -1;
@@ -2936,8 +3575,11 @@ abstract class notification_type {
   static const int NOTIFICATION_TYPE_ONGOING = 1;
 }
 
-/// @brief Enumeration for Group ID.
-/// @since_tizen @if WEARABLE 2.3.1 @elseif MOBILE 2.3 @endif
+/// Enumeration for Group ID.
+///
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Mobile 2.3
+/// @nodoc
 abstract class notification_group_id {
   /// < Not Grouping
   static const int NOTIFICATION_GROUP_ID_NONE = -1;
@@ -2946,15 +3588,21 @@ abstract class notification_group_id {
   static const int NOTIFICATION_GROUP_ID_DEFAULT = 0;
 }
 
-/// @brief Enumeration for Private ID.
-/// @since_tizen @if WEARABLE 2.3.1 @elseif MOBILE 2.3 @endif
+/// Enumeration for Private ID.
+///
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Mobile 2.3
+/// @nodoc
 abstract class notification_priv_id {
   /// < Internally set priv_id
   static const int NOTIFICATION_PRIV_ID_NONE = -1;
 }
 
-/// @brief Enumeration for notification property.
-/// @since_tizen @if WEARABLE 2.3.1 @elseif MOBILE 2.3 @endif
+/// Enumeration for notification property.
+///
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Mobile 2.3
+/// @nodoc
 abstract class notification_property {
   /// < Display only SIM card inserted
   static const int NOTIFICATION_PROP_DISPLAY_ONLY_SIMMODE = 1;
@@ -2984,8 +3632,11 @@ abstract class notification_property {
   static const int NOTIFICATION_PROP_VOLATILE_DISPLAY = 256;
 }
 
-/// @brief Enumeration for display application list.
-/// @since_tizen @if WEARABLE 2.3.1 @elseif MOBILE 2.3 @endif
+/// Enumeration for display application list.
+///
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Mobile 2.3
+/// @nodoc
 abstract class notification_display_applist {
   /// < Notification Tray(Quickpanel)
   static const int NOTIFICATION_DISPLAY_APP_NOTIFICATION_TRAY = 1;
@@ -3006,8 +3657,11 @@ abstract class notification_display_applist {
   static const int NOTIFICATION_DISPLAY_APP_ALL = 15;
 }
 
-/// @brief Enumeration for notification operation code.
-/// @since_tizen @if WEARABLE 2.3.1 @elseif MOBILE 2.3 @endif
+/// Enumeration for notification operation code.
+///
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Mobile 2.3
+/// @nodoc
 abstract class notification_op_type {
   /// < Default
   static const int NOTIFICATION_OP_NONE = 0;
@@ -3031,8 +3685,11 @@ abstract class notification_op_type {
   static const int NOTIFICATION_OP_SERVICE_READY = 6;
 }
 
-/// @brief Enumeration for notification operation data code.
-/// @since_tizen @if WEARABLE 2.3.1 @elseif MOBILE 2.3 @endif
+/// Enumeration for notification operation data code.
+///
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Mobile 2.3
+/// @nodoc
 abstract class notification_op_data_type {
   /// < Default
   static const int NOTIFICATION_OP_DATA_MIN = 0;
@@ -3053,8 +3710,11 @@ abstract class notification_op_data_type {
   static const int NOTIFICATION_OP_DATA_EXTRA_INFO_2 = 5;
 }
 
-/// @brief Enumeration for notification count position in the text.
-/// @since_tizen @if WEARABLE 2.3.1 @elseif MOBILE 2.3 @endif
+/// Enumeration for notification count position in the text.
+///
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Mobile 2.3
+/// @nodoc
 abstract class notifcation_count_pos_type {
   /// < Count data is not displaying in the text
   static const int NOTIFICATION_COUNT_POS_NONE = -1;
@@ -3069,8 +3729,11 @@ abstract class notifcation_count_pos_type {
   static const int NOTIFICATION_COUNT_POS_RIGHT = 2;
 }
 
-/// @brief Enumeration for notification variable parameter type.
-/// @since_tizen @if WEARABLE 2.3.1 @elseif MOBILE 2.3 @endif
+/// Enumeration for notification variable parameter type.
+///
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Mobile 2.3
+/// @nodoc
 abstract class notification_variable_type {
   /// < Variable parameter type is NONE
   static const int NOTIFICATION_VARIABLE_TYPE_NONE = -1;
@@ -3088,10 +3751,14 @@ abstract class notification_variable_type {
   static const int NOTIFICATION_VARIABLE_TYPE_COUNT = 3;
 }
 
+/// @nodoc
 final class _notification extends ffi.Opaque {}
 
-/// @brief The structure for notification operation.
-/// @since_tizen @if WEARABLE 2.3.1 @elseif MOBILE 2.3 @endif
+/// The structure for notification operation.
+///
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Mobile 2.3
+/// @nodoc
 final class _notification_op extends ffi.Struct {
   /// < Notification operation type
   @ffi.Int32()
@@ -3113,12 +3780,18 @@ final class _notification_op extends ffi.Struct {
   external notification_h noti;
 }
 
-/// @brief Notification handle.
-/// @since_tizen @if WEARABLE 2.3.1 @elseif MOBILE 2.3 @endif
+/// Notification handle.
+///
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Mobile 2.3
+/// @nodoc
 typedef notification_h = ffi.Pointer<_notification>;
 
-/// @brief Enumeration for permission.
-/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+/// Enumeration for permission.
+///
+/// **Since Tizen:**
+/// - Mobile 2.4; Wearable 3.0
+/// @nodoc
 abstract class notification_permission_type {
   /// < None
   static const int NOTIFICATION_PERMISSION_TYPE_NONE = 0;
@@ -3130,8 +3803,11 @@ abstract class notification_permission_type {
   static const int NOTIFICATION_PERMISSION_TYPE_UPDATE = 2;
 }
 
-/// @brief Enumeration for notification block state.
-/// @since_tizen 3.0
+/// Enumeration for notification block state.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class notification_block_state {
   /// < The app is allowed to post notifications
   static const int NOTIFICATION_BLOCK_STATE_ALLOWED = 0;
@@ -3143,4 +3819,5 @@ abstract class notification_block_state {
   static const int NOTIFICATION_BLOCK_STATE_DO_NOT_DISTURB = 2;
 }
 
+/// @nodoc
 const int NOTIFICATION_DO_NOT_SHOW_TIME_STAMP = -1;

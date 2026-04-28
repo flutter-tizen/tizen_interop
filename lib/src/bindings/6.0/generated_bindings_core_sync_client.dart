@@ -1,3 +1,6 @@
+/// {@category 6.0/tizen}
+library tizen_interop_6_0.core_sync_client;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -11,6 +14,7 @@ import 'generated_bindings_accounts_svc.dart' as account;
 import 'generated_bindings_bundle.dart' as bundle;
 
 /// Dart bindings for Tizen core-sync-client APIs.
+/// {@category 6.0/tizen}
 class Tizen60CoreSyncClient {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -26,28 +30,34 @@ class Tizen60CoreSyncClient {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Sets client (Sync Adapter) callback functions
+  /// Sets client (Sync Adapter) callback functions
   ///
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @remarks	This API only can be called by a service application. And it can be set by only one service application per a package.
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
   ///
-  /// @param[in] on_start_cb       A callback function to be called by Sync Manager for performing sync operation
-  /// @param[in] on_cancel_cb      A callback function to be called by Sync Manager for cancelling sync operation
+  /// **Remarks:**
+  /// - This API only can be called by a service application. And it can be set by only one service application per a package.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Parameters:**
+  /// - `on_start_cb` (in): A callback function to be called by Sync Manager for performing sync operation
+  /// - `on_cancel_cb` (in): A callback function to be called by Sync Manager for cancelling sync operation
   ///
-  /// @retval #SYNC_ERROR_NONE					Successful
-  /// @retval #SYNC_ERROR_NOT_SUPPORTED		Not supported
-  /// @retval #SYNC_ERROR_OUT_OF_MEMORY		Out of memory
-  /// @retval #SYNC_ERROR_IO_ERROR				I/O error
-  /// @retval #SYNC_ERROR_INVALID_PARAMETER	Invalid parameter
-  /// @retval #SYNC_ERROR_QUOTA_EXCEEDED		Quota exceeded
-  /// @retval #SYNC_ERROR_SYSTEM				System error
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @see sync_adapter_start_sync_cb()
-  /// @see sync_adapter_cancel_sync_cb()
-  /// @see sync_adapter_unset_callbacks()
+  /// **Return values:**
+  /// - `SYNC_ERROR_NONE`: Successful
+  /// - `SYNC_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `SYNC_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `SYNC_ERROR_IO_ERROR`: I/O error
+  /// - `SYNC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SYNC_ERROR_QUOTA_EXCEEDED`: Quota exceeded
+  /// - `SYNC_ERROR_SYSTEM`: System error
+  ///
+  /// **See also:**
+  /// - `sync_adapter_start_sync_cb()`
+  /// - `sync_adapter_cancel_sync_cb()`
+  /// - `sync_adapter_unset_callbacks()`
   int sync_adapter_set_callbacks(
     sync_adapter_start_sync_cb on_start_cb,
     sync_adapter_cancel_sync_cb on_cancel_cb,
@@ -67,22 +77,26 @@ class Tizen60CoreSyncClient {
           int Function(
               sync_adapter_start_sync_cb, sync_adapter_cancel_sync_cb)>();
 
-  /// @brief Unsets client (Sync Adapter) callback functions
+  /// Unsets client (Sync Adapter) callback functions
   ///
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @retval #SYNC_ERROR_NONE					Successful
-  /// @retval #SYNC_ERROR_NOT_SUPPORTED		Not supported
-  /// @retval #SYNC_ERROR_SYSTEM				System error
+  /// **Return values:**
+  /// - `SYNC_ERROR_NONE`: Successful
+  /// - `SYNC_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `SYNC_ERROR_SYSTEM`: System error
   ///
-  /// @pre Call sync_adapter_set_callbacks() before calling this function.
+  /// **Preconditions:**
+  /// - Call sync_adapter_set_callbacks() before calling this function.
   ///
-  /// @see sync_adapter_start_sync_cb()
-  /// @see sync_adapter_cancel_sync_cb()
-  /// @see sync_adapter_set_callbacks()
+  /// **See also:**
+  /// - `sync_adapter_start_sync_cb()`
+  /// - `sync_adapter_cancel_sync_cb()`
+  /// - `sync_adapter_set_callbacks()`
   int sync_adapter_unset_callbacks() {
     return _sync_adapter_unset_callbacks();
   }
@@ -93,30 +107,36 @@ class Tizen60CoreSyncClient {
   late final _sync_adapter_unset_callbacks =
       _sync_adapter_unset_callbacksPtr.asFunction<int Function()>();
 
-  /// @brief Requests Sync Manager to perform one time sync operation.
+  /// Requests Sync Manager to perform one time sync operation.
   ///
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
   ///
-  /// @param[in] account				An account handle on which sync operation was requested or @c NULL in the case of accountless sync operation
-  /// @param[in] sync_job_name			A string representing a sync job which will be operated just one time
-  /// @param[in] sync_option			sync options determine an way to operate sync job and can be used as ORing.
-  /// @param[in] sync_job_user_data	User data which contains additional information related registered sync job or it can be @c NULL in the case of requesting without sync_job_user_data
-  /// @param[out] sync_job_id			A unique value which can manage sync jobs. The number of sync job id is limited as less than a hundred.
+  /// **Parameters:**
+  /// - `account` (in): An account handle on which sync operation was requested or `NULL` in the case of accountless sync operation
+  /// - `sync_job_name` (in): A string representing a sync job which will be operated just one time
+  /// - `sync_option` (in): sync options determine an way to operate sync job and can be used as ORing.
+  /// - `sync_job_user_data` (in): User data which contains additional information related registered sync job or it can be `NULL` in the case of requesting without sync_job_user_data
+  /// - `sync_job_id` (out): A unique value which can manage sync jobs. The number of sync job id is limited as less than a hundred.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SYNC_ERROR_NONE									Successful
-  /// @retval #SYNC_ERROR_NOT_SUPPORTED						Not supported
-  /// @retval #SYNC_ERROR_INVALID_PARAMETER					Invalid parameter
-  /// @retval #SYNC_ERROR_QUOTA_EXCEEDED						Quota exceeded
-  /// @retval #SYNC_ERROR_SYSTEM								Internal system error
-  /// @retval #SYNC_ERROR_SYNC_ADAPTER_NOT_FOUND				Sync adapter is not registered
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @pre This function requires calling below Sync Adapter's APIs by a service application before it is called.
-  /// @pre Call sync_adapter_set_callbacks() before calling this function.
+  /// **Return values:**
+  /// - `SYNC_ERROR_NONE`: Successful
+  /// - `SYNC_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `SYNC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SYNC_ERROR_QUOTA_EXCEEDED`: Quota exceeded
+  /// - `SYNC_ERROR_SYSTEM`: Internal system error
+  /// - `SYNC_ERROR_SYNC_ADAPTER_NOT_FOUND`: Sync adapter is not registered
   ///
-  /// @see sync_manager_remove_sync_job()
-  /// @see sync_option_e
+  /// **Preconditions:**
+  /// - This function requires calling below Sync Adapter's APIs by a service application before it is called.
+  /// - Call sync_adapter_set_callbacks() before calling this function.
+  ///
+  /// **See also:**
+  /// - `sync_manager_remove_sync_job()`
+  /// - `sync_option_e`
   int sync_manager_on_demand_sync_job(
     account.account_h account,
     ffi.Pointer<ffi.Char> sync_job_name,
@@ -146,37 +166,47 @@ class Tizen60CoreSyncClient {
           int Function(account.account_h, ffi.Pointer<ffi.Char>, int,
               ffi.Pointer<bundle.bundle>, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Requests Sync Manager to perform periodic sync operations.
+  /// Requests Sync Manager to perform periodic sync operations.
   ///
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
   ///
-  /// @privlevel	public
-  /// @privilege	%http://tizen.org/privilege/alarm.set
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @remarks Sync job can be added with its name. In the case of adding periodic sync job with same sync job, it will replace previous setting with new one.
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/alarm.set>
   ///
-  /// @param[in] account				An account handle on which sync operation was requested or @c NULL in the case of accountless sync operation
-  /// @param[in] sync_job_name			A string representing a sync job which will be operated with period interval
-  /// @param[in] sync_period			Determines time interval of periodic sync. The periodic sync operation can be triggered in that interval, but it does not guarantee exact time. The minimum value is 30 minutes.
-  /// @param[in] sync_option			sync options determine an way to operate sync job and can be used as ORing.
-  /// @param[in] sync_job_user_data	User data which contains additional information related registered sync job or it can be @c NULL in the case of requesting without sync_job_user_data
-  /// @param[out] sync_job_id			A unique value which can manage sync jobs. The number of sync job id is limited as less than a hundred.
+  /// **Remarks:**
+  /// - Sync job can be added with its name. In the case of adding periodic sync job with same sync job, it will replace previous setting with new one.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SYNC_ERROR_NONE								Successful
-  /// @retval #SYNC_ERROR_NOT_SUPPORTED					Not supported
-  /// @retval #SYNC_ERROR_INVALID_PARAMETER				Invalid parameter
-  /// @retval #SYNC_ERROR_QUOTA_EXCEEDED					Quota exceeded
-  /// @retval #SYNC_ERROR_SYSTEM							Internal system error
-  /// @retval #SYNC_ERROR_SYNC_ADAPTER_NOT_FOUND			Sync adapter is not registered
+  /// **Parameters:**
+  /// - `account` (in): An account handle on which sync operation was requested or `NULL` in the case of accountless sync operation
+  /// - `sync_job_name` (in): A string representing a sync job which will be operated with period interval
+  /// - `sync_period` (in): Determines time interval of periodic sync. The periodic sync operation can be triggered in that interval, but it does not guarantee exact time. The minimum value is 30 minutes.
+  /// - `sync_option` (in): sync options determine an way to operate sync job and can be used as ORing.
+  /// - `sync_job_user_data` (in): User data which contains additional information related registered sync job or it can be `NULL` in the case of requesting without sync_job_user_data
+  /// - `sync_job_id` (out): A unique value which can manage sync jobs. The number of sync job id is limited as less than a hundred.
   ///
-  /// @pre This function requires calling below Sync Adapter's APIs by a service application before it is called.
-  /// @pre Call sync_adapter_set_callbacks() before calling this function.
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @see sync_manager_remove_sync_job()
-  /// @see sync_option_e
-  /// @see sync_period_e
+  /// **Return values:**
+  /// - `SYNC_ERROR_NONE`: Successful
+  /// - `SYNC_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `SYNC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SYNC_ERROR_QUOTA_EXCEEDED`: Quota exceeded
+  /// - `SYNC_ERROR_SYSTEM`: Internal system error
+  /// - `SYNC_ERROR_SYNC_ADAPTER_NOT_FOUND`: Sync adapter is not registered
+  ///
+  /// **Preconditions:**
+  /// - This function requires calling below Sync Adapter's APIs by a service application before it is called.
+  /// - Call sync_adapter_set_callbacks() before calling this function.
+  ///
+  /// **See also:**
+  /// - `sync_manager_remove_sync_job()`
+  /// - `sync_option_e`
+  /// - `sync_period_e`
   int sync_manager_add_periodic_sync_job(
     account.account_h account,
     ffi.Pointer<ffi.Char> sync_job_name,
@@ -209,37 +239,49 @@ class Tizen60CoreSyncClient {
           int Function(account.account_h, ffi.Pointer<ffi.Char>, int, int,
               ffi.Pointer<bundle.bundle>, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Requests Sync Manager to perform sync operations whenever corresponding DB changed.
+  /// Requests Sync Manager to perform sync operations whenever corresponding DB changed.
   ///
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @privlevel	public
-  /// @privilege	%http://tizen.org/privilege/calendar.read since @if MOBILE 2.4 @endif
-  /// @privilege	%http://tizen.org/privilege/contact.read
+  /// since @if MOBILE 2.4 @endif http://tizen.org/privilege/contact.read is needed to add data change sync job for receiving notification with `SYNC_SUPPORTS_CAPABILITY_CONTACT.`
   ///
-  /// @remarks Data change sync job can be added by using its capability. In the case of adding a sync job with same capability, it will replace previous setting with new one. \n\n
-  /// %http://tizen.org/privilege/calendar.read is needed to add data change sync job for receiving notification with @ref SYNC_SUPPORTS_CAPABILITY_CALENDAR. This capability is supported on Mobile profile only. \n\n since @if MOBILE 2.4 @endif
-  /// %http://tizen.org/privilege/contact.read is needed to add data change sync job for receiving notification with @ref SYNC_SUPPORTS_CAPABILITY_CONTACT.
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
   ///
-  /// @param[in] account				An account handle on which sync operation was requested or @c NULL in the case of accountless sync operation
-  /// @param[in] sync_capability		A string representing a sync job which will be operated whenever data change of this capability
-  /// @param[in] sync_option			sync options determine an way to operate sync job and can be used as ORing.
-  /// @param[in] sync_job_user_data	User data which contains additional information related registered sync job or it can be @c NULL in the case of requesting without sync_job_user_data
-  /// @param[out] sync_job_id			A unique value which can manage sync jobs. The number of sync job id is limited as less than a hundred.
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SYNC_ERROR_NONE							Successful
-  /// @retval #SYNC_ERROR_NOT_SUPPORTED				Not supported
-  /// @retval #SYNC_ERROR_INVALID_PARAMETER			Invalid parameter
-  /// @retval #SYNC_ERROR_QUOTA_EXCEEDED				Quota exceeded
-  /// @retval #SYNC_ERROR_SYSTEM						Internal system error
-  /// @retval #SYNC_ERROR_SYNC_ADAPTER_NOT_FOUND		Sync adapter is not registered
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/calendar.read since @if MOBILE 2.4 @endif>
+  /// - <http://tizen.org/privilege/contact.read>
   ///
-  /// @pre This function requires calling below Sync Adapter's APIs by a service application before it is called.
-  /// @pre Call sync_adapter_set_callbacks() before calling this function.
+  /// **Remarks:**
+  /// - Data change sync job can be added by using its capability. In the case of adding a sync job with same capability, it will replace previous setting with new one.
+  /// - <http://tizen.org/privilege/calendar.read is needed to add data change sync job for receiving notification with `SYNC_SUPPORTS_CAPABILITY_CALENDAR.` This capability is supported on Mobile profile only.>
   ///
-  /// @see sync_manager_remove_sync_job()
-  /// @see sync_option_e
+  /// **Parameters:**
+  /// - `account` (in): An account handle on which sync operation was requested or `NULL` in the case of accountless sync operation
+  /// - `sync_capability` (in): A string representing a sync job which will be operated whenever data change of this capability
+  /// - `sync_option` (in): sync options determine an way to operate sync job and can be used as ORing.
+  /// - `sync_job_user_data` (in): User data which contains additional information related registered sync job or it can be `NULL` in the case of requesting without sync_job_user_data
+  /// - `sync_job_id` (out): A unique value which can manage sync jobs. The number of sync job id is limited as less than a hundred.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SYNC_ERROR_NONE`: Successful
+  /// - `SYNC_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `SYNC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SYNC_ERROR_QUOTA_EXCEEDED`: Quota exceeded
+  /// - `SYNC_ERROR_SYSTEM`: Internal system error
+  /// - `SYNC_ERROR_SYNC_ADAPTER_NOT_FOUND`: Sync adapter is not registered
+  ///
+  /// **Preconditions:**
+  /// - This function requires calling below Sync Adapter's APIs by a service application before it is called.
+  /// - Call sync_adapter_set_callbacks() before calling this function.
+  ///
+  /// **See also:**
+  /// - `sync_manager_remove_sync_job()`
+  /// - `sync_option_e`
   int sync_manager_add_data_change_sync_job(
     account.account_h account,
     ffi.Pointer<ffi.Char> sync_capability,
@@ -269,29 +311,36 @@ class Tizen60CoreSyncClient {
           int Function(account.account_h, ffi.Pointer<ffi.Char>, int,
               ffi.Pointer<bundle.bundle>, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Requests Sync Manager to remove corresponding sync job id.
+  /// Requests Sync Manager to remove corresponding sync job id.
   ///
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
   ///
-  /// @remarks			sync_job_id can not be @c NULL.
+  /// **Remarks:**
+  /// - sync_job_id can not be `NULL`.
   ///
-  /// @param[in] sync_job_id			A unique value of each sync job, it can be used to search specific sync job and remove it
+  /// **Parameters:**
+  /// - `sync_job_id` (in): A unique value of each sync job, it can be used to search specific sync job and remove it
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SYNC_ERROR_NONE					Successful
-  /// @retval #SYNC_ERROR_NOT_SUPPORTED		Not supported
-  /// @retval #SYNC_ERROR_INVALID_PARAMETER	Invalid parameter
-  /// @retval #SYNC_ERROR_SYSTEM				Internal system error
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @pre This function requires calling at least one of the below Sync Manager's APIs before it is called.
-  /// @pre sync_manager_on_demand_sync_job()
-  /// @pre sync_manager_add_periodic_sync_job()
-  /// @pre sync_manager_add_data_change_sync_job()
+  /// **Return values:**
+  /// - `SYNC_ERROR_NONE`: Successful
+  /// - `SYNC_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `SYNC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SYNC_ERROR_SYSTEM`: Internal system error
   ///
-  /// @see sync_manager_on_demand_sync_job()
-  /// @see sync_manager_add_periodic_sync_job()
-  /// @see sync_manager_add_data_change_sync_job()
+  /// **Preconditions:**
+  /// - This function requires calling at least one of the below Sync Manager's APIs before it is called.
+  /// - sync_manager_on_demand_sync_job()
+  /// - sync_manager_add_periodic_sync_job()
+  /// - sync_manager_add_data_change_sync_job()
+  ///
+  /// **See also:**
+  /// - `sync_manager_on_demand_sync_job()`
+  /// - `sync_manager_add_periodic_sync_job()`
+  /// - `sync_manager_add_data_change_sync_job()`
   int sync_manager_remove_sync_job(
     int sync_job_id,
   ) {
@@ -306,29 +355,35 @@ class Tizen60CoreSyncClient {
   late final _sync_manager_remove_sync_job =
       _sync_manager_remove_sync_jobPtr.asFunction<int Function(int)>();
 
-  /// @brief Requests Sync Manager to query corresponding sync request.
+  /// Requests Sync Manager to query corresponding sync request.
   ///
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
   ///
-  /// @param[in] sync_job_cb			A callback function for receiving the result of this API
-  /// @param[in] user_data				User data which contains additional information related foreach job or @c NULL if do not want to transfer user data
+  /// **Parameters:**
+  /// - `sync_job_cb` (in): A callback function for receiving the result of this API
+  /// - `user_data` (in): User data which contains additional information related foreach job or `NULL` if do not want to transfer user data
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SYNC_ERROR_NONE					Successful
-  /// @retval #SYNC_ERROR_NOT_SUPPORTED		Not supported
-  /// @retval #SYNC_ERROR_INVALID_PARAMETER	Invalid parameter
-  /// @retval #SYNC_ERROR_SYSTEM				Internal system error
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @pre This function requires calling at least one of the below Sync Manager's APIs before it is called.
-  /// @pre sync_manager_on_demand_sync_job()
-  /// @pre sync_manager_add_periodic_sync_job()
-  /// @pre sync_manager_add_data_change_sync_job()
+  /// **Return values:**
+  /// - `SYNC_ERROR_NONE`: Successful
+  /// - `SYNC_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `SYNC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SYNC_ERROR_SYSTEM`: Internal system error
   ///
-  /// @see sync_manager_sync_job_cb()
-  /// @see sync_manager_on_demand_sync_job()
-  /// @see sync_manager_add_periodic_sync_job()
-  /// @see sync_manager_add_data_change_sync_job()
+  /// **Preconditions:**
+  /// - This function requires calling at least one of the below Sync Manager's APIs before it is called.
+  /// - sync_manager_on_demand_sync_job()
+  /// - sync_manager_add_periodic_sync_job()
+  /// - sync_manager_add_data_change_sync_job()
+  ///
+  /// **See also:**
+  /// - `sync_manager_sync_job_cb()`
+  /// - `sync_manager_on_demand_sync_job()`
+  /// - `sync_manager_add_periodic_sync_job()`
+  /// - `sync_manager_add_data_change_sync_job()`
   int sync_manager_foreach_sync_job(
     sync_manager_sync_job_cb sync_job_cb,
     ffi.Pointer<ffi.Void> user_data,
@@ -348,74 +403,96 @@ class Tizen60CoreSyncClient {
           int Function(sync_manager_sync_job_cb, ffi.Pointer<ffi.Void>)>();
 }
 
-/// @brief Callback function for Sync Adapter's start sync request.
+/// Callback function for Sync Adapter's start sync request.
 ///
-/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-/// @remarks	This API only can be called at a service application.\n\n
-/// @a Release account with account_destroy() after using it.\n\n
-/// @a Release sync_job_user_data with bundle_free() after using it.
+/// **Since Tizen:**
+/// - Mobile 2.4; Wearable 3.0
 ///
-/// @param[in] account				An account handle on which sync operation was requested or @c NULL in the case of accountless sync operation
-/// @param[in] sync_job_name			A string representing a sync job which has been operated or @c NULL in the case of data change sync operation
-/// @param[in] sync_capability		A string representing a sync job which has been operated because of data change or @c NULL in the case of on demand or periodic sync operation
-/// @param[in] sync_job_user_data	User data which contains additional information related registered sync job
+/// **Remarks:**
+/// - This API only can be called at a service application.
+/// - `Release` account with account_destroy() after using it.
+/// - `Release` sync_job_user_data with bundle_free() after using it.
 ///
-/// @return @c true if sync operation is success, @c false otherwise
+/// **Parameters:**
+/// - `account` (in): An account handle on which sync operation was requested or `NULL` in the case of accountless sync operation
+/// - `sync_job_name` (in): A string representing a sync job which has been operated or `NULL` in the case of data change sync operation
+/// - `sync_capability` (in): A string representing a sync job which has been operated because of data change or `NULL` in the case of on demand or periodic sync operation
+/// - `sync_job_user_data` (in): User data which contains additional information related registered sync job
 ///
-/// @pre The callback must be set by using sync_adapter_set_callbacks().
-/// @pre sync_manager_on_demand_sync_job() calls this callback.
-/// @pre sync_manager_add_periodic_sync_job() calls this callback.
-/// @pre sync_manager_add_data_change_sync_job() calls this callback.
+/// **Returns:**
+/// - `true` if sync operation is success, `false` otherwise
 ///
-/// @see sync_adapter_set_callbacks()
-/// @see sync_manager_on_demand_sync_job()
-/// @see sync_manager_add_periodic_sync_job()
-/// @see sync_manager_add_data_change_sync_job()
+/// **Preconditions:**
+/// - The callback must be set by using sync_adapter_set_callbacks().
+/// - sync_manager_on_demand_sync_job() calls this callback.
+/// - sync_manager_add_periodic_sync_job() calls this callback.
+/// - sync_manager_add_data_change_sync_job() calls this callback.
+///
+/// **See also:**
+/// - `sync_adapter_set_callbacks()`
+/// - `sync_manager_on_demand_sync_job()`
+/// - `sync_manager_add_periodic_sync_job()`
+/// - `sync_manager_add_data_change_sync_job()`
+/// @nodoc
 typedef sync_adapter_start_sync_cb
     = ffi.Pointer<ffi.NativeFunction<sync_adapter_start_sync_cbFunction>>;
+/// @nodoc
 typedef sync_adapter_start_sync_cbFunction = ffi.Bool Function(
     account.account_h account,
     ffi.Pointer<ffi.Char> sync_job_name,
     ffi.Pointer<ffi.Char> sync_capability,
     ffi.Pointer<bundle.bundle> sync_job_user_data);
+/// @nodoc
 typedef Dartsync_adapter_start_sync_cbFunction = bool Function(
     account.account_h account,
     ffi.Pointer<ffi.Char> sync_job_name,
     ffi.Pointer<ffi.Char> sync_capability,
     ffi.Pointer<bundle.bundle> sync_job_user_data);
 
-/// @brief Callback function for Sync Adapter's cancel sync request.
+/// Callback function for Sync Adapter's cancel sync request.
 ///
-/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-/// @remarks	This API only can be called at a service application after calling sync_manager_remove_sync_job().\n\n
-/// @a Release account with account_destroy() after using it.\n\n
-/// @a Release sync_job_user_data with bundle_free() after using it.
+/// **Since Tizen:**
+/// - Mobile 2.4; Wearable 3.0
 ///
-/// @param[in] account				An account handle on which sync operation was requested or @c NULL in the case of accountless sync operation
-/// @param[in] sync_job_name			A string representing a sync job which has been operated or @c NULL in the case of data change sync operation
-/// @param[in] sync_capability		A string representing a sync job which has been operated because of data change or @c NULL in the case of on demand and periodic sync operation
-/// @param[in] sync_job_user_data	User data which contains additional information related registered sync job
+/// **Remarks:**
+/// - This API only can be called at a service application after calling sync_manager_remove_sync_job().
+/// - `Release` account with account_destroy() after using it.
+/// - `Release` sync_job_user_data with bundle_free() after using it.
 ///
-/// @pre The callback must be set by using sync_adapter_set_callbacks().
-/// @pre sync_manager_remove_sync_job() calls this callback in the case there is removable sync job.
+/// **Parameters:**
+/// - `account` (in): An account handle on which sync operation was requested or `NULL` in the case of accountless sync operation
+/// - `sync_job_name` (in): A string representing a sync job which has been operated or `NULL` in the case of data change sync operation
+/// - `sync_capability` (in): A string representing a sync job which has been operated because of data change or `NULL` in the case of on demand and periodic sync operation
+/// - `sync_job_user_data` (in): User data which contains additional information related registered sync job
 ///
-/// @see sync_adapter_set_callbacks()
-/// @see sync_manager_remove_sync_job()
+/// **Preconditions:**
+/// - The callback must be set by using sync_adapter_set_callbacks().
+/// - sync_manager_remove_sync_job() calls this callback in the case there is removable sync job.
+///
+/// **See also:**
+/// - `sync_adapter_set_callbacks()`
+/// - `sync_manager_remove_sync_job()`
+/// @nodoc
 typedef sync_adapter_cancel_sync_cb
     = ffi.Pointer<ffi.NativeFunction<sync_adapter_cancel_sync_cbFunction>>;
+/// @nodoc
 typedef sync_adapter_cancel_sync_cbFunction = ffi.Void Function(
     account.account_h account,
     ffi.Pointer<ffi.Char> sync_job_name,
     ffi.Pointer<ffi.Char> sync_capability,
     ffi.Pointer<bundle.bundle> sync_job_user_data);
+/// @nodoc
 typedef Dartsync_adapter_cancel_sync_cbFunction = void Function(
     account.account_h account,
     ffi.Pointer<ffi.Char> sync_job_name,
     ffi.Pointer<ffi.Char> sync_capability,
     ffi.Pointer<bundle.bundle> sync_job_user_data);
 
-/// @brief   Enumerations for sync options of sync job request APIs.
-/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+/// Enumerations for sync options of sync job request APIs.
+///
+/// **Since Tizen:**
+/// - Mobile 2.4; Wearable 3.0
+/// @nodoc
 abstract class sync_option_e {
   /// < Sync job will be operated normally
   static const int SYNC_OPTION_NONE = 0;
@@ -427,8 +504,11 @@ abstract class sync_option_e {
   static const int SYNC_OPTION_NO_RETRY = 2;
 }
 
-/// @brief   Enumerations for time intervals of a periodic sync.
-/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+/// Enumerations for time intervals of a periodic sync.
+///
+/// **Since Tizen:**
+/// - Mobile 2.4; Wearable 3.0
+/// @nodoc
 abstract class sync_period_e {
   /// < Sync within 30 minutes
   static const int SYNC_PERIOD_INTERVAL_30MIN = 0;
@@ -453,28 +533,36 @@ abstract class sync_period_e {
   static const int SYNC_PERIOD_INTERVAL_MAX = 7;
 }
 
-/// @brief Called to get the information once for each sync job.
+/// Called to get the information once for each sync job.
 ///
-/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+/// **Since Tizen:**
+/// - Mobile 2.4; Wearable 3.0
 ///
-/// @remarks @a Release account with account_destroy() after using it.\n\n
-/// @a Release sync_job_user_data with bundle_free() after using it.
+/// **Remarks:**
+/// - `Release` account with account_destroy() after using it.
+/// - `Release` sync_job_user_data with bundle_free() after using it.
 ///
-/// @param[in] account				An account handle on which sync operation was requested or @c NULL in the case of accountless sync operation
-/// @param[in] sync_job_name			A string representing a sync job which has been operated or @c NULL in the case of data change sync operation
-/// @param[in] sync_capability		A string representing a sync job which has been operated because of data change or @c NULL in the case of on demand and periodic sync operation
-/// @param[in] sync_job_id			A unique value which can manage sync jobs
-/// @param[in] sync_job_user_data	User data which contains additional information related registered sync job or it can be @c NULL in the case of requesting without sync_job_user_data
-/// @param[in] user_data				User data which contains additional information related foreach job or it can be @c NULL in the case of querying without user_data
+/// **Parameters:**
+/// - `account` (in): An account handle on which sync operation was requested or `NULL` in the case of accountless sync operation
+/// - `sync_job_name` (in): A string representing a sync job which has been operated or `NULL` in the case of data change sync operation
+/// - `sync_capability` (in): A string representing a sync job which has been operated because of data change or `NULL` in the case of on demand and periodic sync operation
+/// - `sync_job_id` (in): A unique value which can manage sync jobs
+/// - `sync_job_user_data` (in): User data which contains additional information related registered sync job or it can be `NULL` in the case of requesting without sync_job_user_data
+/// - `user_data` (in): User data which contains additional information related foreach job or it can be `NULL` in the case of querying without user_data
 ///
-/// @return @c true to continue with the next iteration of the loop, otherwise @c false to break out of the loop
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop
 ///
-/// @pre sync_manager_foreach_sync_job() calls this callback.
+/// **Preconditions:**
+/// - sync_manager_foreach_sync_job() calls this callback.
 ///
-/// @see sync_adapter_set_callbacks()
-/// @see sync_manager_foreach_sync_job()
+/// **See also:**
+/// - `sync_adapter_set_callbacks()`
+/// - `sync_manager_foreach_sync_job()`
+/// @nodoc
 typedef sync_manager_sync_job_cb
     = ffi.Pointer<ffi.NativeFunction<sync_manager_sync_job_cbFunction>>;
+/// @nodoc
 typedef sync_manager_sync_job_cbFunction = ffi.Bool Function(
     account.account_h account,
     ffi.Pointer<ffi.Char> sync_job_name,
@@ -482,6 +570,7 @@ typedef sync_manager_sync_job_cbFunction = ffi.Bool Function(
     ffi.Int sync_job_id,
     ffi.Pointer<bundle.bundle> sync_job_user_data,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartsync_manager_sync_job_cbFunction = bool Function(
     account.account_h account,
     ffi.Pointer<ffi.Char> sync_job_name,
@@ -490,20 +579,26 @@ typedef Dartsync_manager_sync_job_cbFunction = bool Function(
     ffi.Pointer<bundle.bundle> sync_job_user_data,
     ffi.Pointer<ffi.Void> user_data);
 
+/// @nodoc
 const String SYNC_SUPPORTS_CAPABILITY_CALENDAR =
     'http://tizen.org/sync/capability/calendar';
 
+/// @nodoc
 const String SYNC_SUPPORTS_CAPABILITY_CONTACT =
     'http://tizen.org/sync/capability/contact';
 
+/// @nodoc
 const String SYNC_SUPPORTS_CAPABILITY_IMAGE =
     'http://tizen.org/sync/capability/image';
 
+/// @nodoc
 const String SYNC_SUPPORTS_CAPABILITY_VIDEO =
     'http://tizen.org/sync/capability/video';
 
+/// @nodoc
 const String SYNC_SUPPORTS_CAPABILITY_SOUND =
     'http://tizen.org/sync/capability/sound';
 
+/// @nodoc
 const String SYNC_SUPPORTS_CAPABILITY_MUSIC =
     'http://tizen.org/sync/capability/music';

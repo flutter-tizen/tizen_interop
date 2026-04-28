@@ -1,3 +1,6 @@
+/// {@category 6.5/tizen}
+library tizen_interop_6_5.capi_media_metadata_extractor;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen capi-media-metadata-extractor APIs.
+/// {@category 6.5/tizen}
 class Tizen65CapiMediaMetadataExtractor {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,18 +28,27 @@ class Tizen65CapiMediaMetadataExtractor {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Creates metadata.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks The @a metadata should be released using metadata_extractor_destroy().
+  /// Creates metadata.
   ///
-  /// @param[in] metadata The handle to metadata
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #METADATA_EXTRACTOR_ERROR_NONE Successful
-  /// @retval #METADATA_EXTRACTOR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #METADATA_EXTRACTOR_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Remarks:**
+  /// - The `metadata` should be released using metadata_extractor_destroy().
   ///
-  /// @see metadata_extractor_destroy()
+  /// **Parameters:**
+  /// - `metadata` (in): The handle to metadata
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `METADATA_EXTRACTOR_ERROR_NONE`: Successful
+  /// - `METADATA_EXTRACTOR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `METADATA_EXTRACTOR_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `metadata_extractor_destroy()`
   int metadata_extractor_create(
     ffi.Pointer<metadata_extractor_h> metadata,
   ) {
@@ -51,21 +64,30 @@ class Tizen65CapiMediaMetadataExtractor {
   late final _metadata_extractor_create = _metadata_extractor_createPtr
       .asFunction<int Function(ffi.Pointer<metadata_extractor_h>)>();
 
-  /// @brief Sets the file path to extract.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// Sets the file path to extract.
   ///
-  /// @param[in] metadata The handle to metadata
-  /// @param[in] path The path to extract metadata
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #METADATA_EXTRACTOR_ERROR_NONE Successful
-  /// @retval #METADATA_EXTRACTOR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #METADATA_EXTRACTOR_ERROR_FILE_EXISTS File does not exist
-  /// @retval #METADATA_EXTRACTOR_ERROR_OPERATION_FAILED Internal operation failed
+  /// **Parameters:**
+  /// - `metadata` (in): The handle to metadata
+  /// - `path` (in): The path to extract metadata
   ///
-  /// @pre Create a metadata handle by calling metadata_extractor_create().
-  /// @see metadata_extractor_create()
-  /// @see metadata_extractor_destroy()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `METADATA_EXTRACTOR_ERROR_NONE`: Successful
+  /// - `METADATA_EXTRACTOR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `METADATA_EXTRACTOR_ERROR_FILE_EXISTS`: File does not exist
+  /// - `METADATA_EXTRACTOR_ERROR_OPERATION_FAILED`: Internal operation failed
+  ///
+  /// **Preconditions:**
+  /// - Create a metadata handle by calling metadata_extractor_create().
+  ///
+  /// **See also:**
+  /// - `metadata_extractor_create()`
+  /// - `metadata_extractor_destroy()`
   int metadata_extractor_set_path(
     metadata_extractor_h metadata,
     ffi.Pointer<ffi.Char> path,
@@ -83,21 +105,30 @@ class Tizen65CapiMediaMetadataExtractor {
   late final _metadata_extractor_set_path = _metadata_extractor_set_pathPtr
       .asFunction<int Function(metadata_extractor_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets the buffer to extract.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// Sets the buffer to extract.
   ///
-  /// @param[in] metadata The handle to metadata
-  /// @param[in] buffer The buffer to extract metadata
-  /// @param[in] size The buffer size
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #METADATA_EXTRACTOR_ERROR_NONE Successful
-  /// @retval #METADATA_EXTRACTOR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #METADATA_EXTRACTOR_ERROR_OPERATION_FAILED Internal operation failed
+  /// **Parameters:**
+  /// - `metadata` (in): The handle to metadata
+  /// - `buffer` (in): The buffer to extract metadata
+  /// - `size` (in): The buffer size
   ///
-  /// @pre Create a metadata handle by calling metadata_extractor_create().
-  /// @see metadata_extractor_create()
-  /// @see metadata_extractor_destroy()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `METADATA_EXTRACTOR_ERROR_NONE`: Successful
+  /// - `METADATA_EXTRACTOR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `METADATA_EXTRACTOR_ERROR_OPERATION_FAILED`: Internal operation failed
+  ///
+  /// **Preconditions:**
+  /// - Create a metadata handle by calling metadata_extractor_create().
+  ///
+  /// **See also:**
+  /// - `metadata_extractor_create()`
+  /// - `metadata_extractor_destroy()`
   int metadata_extractor_set_buffer(
     metadata_extractor_h metadata,
     ffi.Pointer<ffi.Void> buffer,
@@ -118,18 +149,27 @@ class Tizen65CapiMediaMetadataExtractor {
       _metadata_extractor_set_bufferPtr.asFunction<
           int Function(metadata_extractor_h, ffi.Pointer<ffi.Void>, int)>();
 
-  /// @brief Destroys metadata.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// Destroys metadata.
   ///
-  /// @param[in] metadata The handle to metadata
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #METADATA_EXTRACTOR_ERROR_NONE Successful
-  /// @retval #METADATA_EXTRACTOR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #METADATA_EXTRACTOR_ERROR_OPERATION_FAILED Internal operation failed
+  /// **Parameters:**
+  /// - `metadata` (in): The handle to metadata
   ///
-  /// @pre Create a metadata handle by calling metadata_extractor_create().
-  /// @see metadata_extractor_create()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `METADATA_EXTRACTOR_ERROR_NONE`: Successful
+  /// - `METADATA_EXTRACTOR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `METADATA_EXTRACTOR_ERROR_OPERATION_FAILED`: Internal operation failed
+  ///
+  /// **Preconditions:**
+  /// - Create a metadata handle by calling metadata_extractor_create().
+  ///
+  /// **See also:**
+  /// - `metadata_extractor_create()`
   int metadata_extractor_destroy(
     metadata_extractor_h metadata,
   ) {
@@ -144,27 +184,37 @@ class Tizen65CapiMediaMetadataExtractor {
   late final _metadata_extractor_destroy = _metadata_extractor_destroyPtr
       .asFunction<int Function(metadata_extractor_h)>();
 
-  /// @brief Gets metadata.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// Gets metadata.
   ///
-  /// @remarks The @a value should be released using free(). \n
-  /// In case of accessing specific path in internal storage or external storage, you may add the privilege for accessing the path. \n
-  /// For example, if you get the specific path by using storage_get_directory(). you should add privilege %http://tizen.org/privilege/mediastorage or %http://tizen.org/privilege/externalstorage.
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @param[in] metadata The handle to metadata
-  /// @param[in] attribute The key attribute name to get
-  /// @param[out] value The value of the attribute
+  /// **Remarks:**
+  /// - The `value` should be released using free().
+  /// - In case of accessing specific path in internal storage or external storage, you may add the privilege for accessing the path.
+  /// - For example, if you get the specific path by using storage_get_directory(). you should add privilege http://tizen.org/privilege/mediastorage or http://tizen.org/privilege/externalstorage.
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #METADATA_EXTRACTOR_ERROR_NONE Successful
-  /// @retval #METADATA_EXTRACTOR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #METADATA_EXTRACTOR_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #METADATA_EXTRACTOR_ERROR_OPERATION_FAILED Internal operation failed
-  /// @retval #METADATA_EXTRACTOR_ERROR_PERMISSION_DENIED Permission denied
+  /// **Parameters:**
+  /// - `metadata` (in): The handle to metadata
+  /// - `attribute` (in): The key attribute name to get
+  /// - `value` (out): The value of the attribute
   ///
-  /// @pre Set the path to extract by calling metadata_extractor_set_path().
-  /// @see metadata_extractor_create()
-  /// @see metadata_extractor_destroy()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `METADATA_EXTRACTOR_ERROR_NONE`: Successful
+  /// - `METADATA_EXTRACTOR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `METADATA_EXTRACTOR_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `METADATA_EXTRACTOR_ERROR_OPERATION_FAILED`: Internal operation failed
+  /// - `METADATA_EXTRACTOR_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **Preconditions:**
+  /// - Set the path to extract by calling metadata_extractor_set_path().
+  ///
+  /// **See also:**
+  /// - `metadata_extractor_create()`
+  /// - `metadata_extractor_destroy()`
   int metadata_extractor_get_metadata(
     metadata_extractor_h metadata,
     int attribute,
@@ -187,28 +237,38 @@ class Tizen65CapiMediaMetadataExtractor {
           int Function(
               metadata_extractor_h, int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the artwork image in a media file.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// Gets the artwork image in a media file.
   ///
-  /// @remarks The @a artwork and @a mime_type should be released using free(). \n
-  /// In case of accessing specific path in internal storage or external storage, you may add the privilege for accessing the path. \n
-  /// For example, if you get the specific path by using storage_get_directory(). you should add privilege %http://tizen.org/privilege/mediastorage or %http://tizen.org/privilege/externalstorage.
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @param[in] metadata The handle to metadata
-  /// @param[out] artwork The encoded artwork image
-  /// @param[out] size The encoded artwork size
-  /// @param[out] mime_type The MIME of the artwork
-  /// @return @c 0 on success, otherwise a negative error value
+  /// **Remarks:**
+  /// - The `artwork` and `mime_type` should be released using free().
+  /// - In case of accessing specific path in internal storage or external storage, you may add the privilege for accessing the path.
+  /// - For example, if you get the specific path by using storage_get_directory(). you should add privilege http://tizen.org/privilege/mediastorage or http://tizen.org/privilege/externalstorage.
   ///
-  /// @retval #METADATA_EXTRACTOR_ERROR_NONE Successful
-  /// @retval #METADATA_EXTRACTOR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #METADATA_EXTRACTOR_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #METADATA_EXTRACTOR_ERROR_OPERATION_FAILED Internal operation failed
-  /// @retval #METADATA_EXTRACTOR_ERROR_PERMISSION_DENIED Permission denied
+  /// **Parameters:**
+  /// - `metadata` (in): The handle to metadata
+  /// - `artwork` (out): The encoded artwork image
+  /// - `size` (out): The encoded artwork size
+  /// - `mime_type` (out): The MIME of the artwork
   ///
-  /// @pre Set the path to extract by calling metadata_extractor_set_path().
-  /// @see metadata_extractor_create()
-  /// @see metadata_extractor_destroy()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `METADATA_EXTRACTOR_ERROR_NONE`: Successful
+  /// - `METADATA_EXTRACTOR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `METADATA_EXTRACTOR_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `METADATA_EXTRACTOR_ERROR_OPERATION_FAILED`: Internal operation failed
+  /// - `METADATA_EXTRACTOR_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **Preconditions:**
+  /// - Set the path to extract by calling metadata_extractor_set_path().
+  ///
+  /// **See also:**
+  /// - `metadata_extractor_create()`
+  /// - `metadata_extractor_destroy()`
   int metadata_extractor_get_artwork(
     metadata_extractor_h metadata,
     ffi.Pointer<ffi.Pointer<ffi.Void>> artwork,
@@ -236,27 +296,37 @@ class Tizen65CapiMediaMetadataExtractor {
           int Function(metadata_extractor_h, ffi.Pointer<ffi.Pointer<ffi.Void>>,
               ffi.Pointer<ffi.Int>, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the frame of a video media file.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// Gets the frame of a video media file.
   ///
-  /// @remarks The @a frame should be released using free().
-  /// In case of accessing specific path in internal storage or external storage, you may add the privilege for accessing the path. \n
-  /// For example, if you get the specific path by using storage_get_directory(). you should add privilege %http://tizen.org/privilege/mediastorage or %http://tizen.org/privilege/externalstorage.
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @param[in] metadata The handle to metadata
-  /// @param[out] frame The raw frame data in RGB888
-  /// @param[out] size The frame data size
+  /// **Remarks:**
+  /// - The `frame` should be released using free().
+  /// - In case of accessing specific path in internal storage or external storage, you may add the privilege for accessing the path.
+  /// - For example, if you get the specific path by using storage_get_directory(). you should add privilege http://tizen.org/privilege/mediastorage or http://tizen.org/privilege/externalstorage.
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #METADATA_EXTRACTOR_ERROR_NONE Successful
-  /// @retval #METADATA_EXTRACTOR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #METADATA_EXTRACTOR_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #METADATA_EXTRACTOR_ERROR_OPERATION_FAILED Internal operation failed
-  /// @retval #METADATA_EXTRACTOR_ERROR_PERMISSION_DENIED Permission denied
+  /// **Parameters:**
+  /// - `metadata` (in): The handle to metadata
+  /// - `frame` (out): The raw frame data in RGB888
+  /// - `size` (out): The frame data size
   ///
-  /// @pre Set the path to extract by calling metadata_extractor_set_path().
-  /// @see metadata_extractor_create()
-  /// @see metadata_extractor_destroy()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `METADATA_EXTRACTOR_ERROR_NONE`: Successful
+  /// - `METADATA_EXTRACTOR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `METADATA_EXTRACTOR_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `METADATA_EXTRACTOR_ERROR_OPERATION_FAILED`: Internal operation failed
+  /// - `METADATA_EXTRACTOR_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **Preconditions:**
+  /// - Set the path to extract by calling metadata_extractor_set_path().
+  ///
+  /// **See also:**
+  /// - `metadata_extractor_create()`
+  /// - `metadata_extractor_destroy()`
   int metadata_extractor_get_frame(
     metadata_extractor_h metadata,
     ffi.Pointer<ffi.Pointer<ffi.Void>> frame,
@@ -280,28 +350,38 @@ class Tizen65CapiMediaMetadataExtractor {
           int Function(metadata_extractor_h, ffi.Pointer<ffi.Pointer<ffi.Void>>,
               ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the synclyrics of a media file.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// Gets the synclyrics of a media file.
   ///
-  /// @remarks The @a lyrics should be released using free().
-  /// In case of accessing specific path in internal storage or external storage, you may add the privilege for accessing the path. \n
-  /// For example, if you get the specific path by using storage_get_directory(). you should add privilege %http://tizen.org/privilege/mediastorage or %http://tizen.org/privilege/externalstorage.
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @param[in] metadata The handle to metadata
-  /// @param[in] index The index of time/lyrics to set
-  /// @param[out] time_stamp The time information of the index
-  /// @param[out] lyrics The lyrics of the index
+  /// **Remarks:**
+  /// - The `lyrics` should be released using free().
+  /// - In case of accessing specific path in internal storage or external storage, you may add the privilege for accessing the path.
+  /// - For example, if you get the specific path by using storage_get_directory(). you should add privilege http://tizen.org/privilege/mediastorage or http://tizen.org/privilege/externalstorage.
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #METADATA_EXTRACTOR_ERROR_NONE Successful
-  /// @retval #METADATA_EXTRACTOR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #METADATA_EXTRACTOR_ERROR_OPERATION_FAILED Internal operation failed
-  /// @retval #METADATA_EXTRACTOR_ERROR_PERMISSION_DENIED Permission denied
+  /// **Parameters:**
+  /// - `metadata` (in): The handle to metadata
+  /// - `index` (in): The index of time/lyrics to set
+  /// - `time_stamp` (out): The time information of the index
+  /// - `lyrics` (out): The lyrics of the index
   ///
-  /// @pre Set the path to extract by calling metadata_extractor_set_path().
-  /// @pre Get the time/lyrics set number by calling metadata_extractor_get_metadata(METADATA_SYNCLYRICS_NUM).
-  /// @see metadata_extractor_create()
-  /// @see metadata_extractor_destroy()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `METADATA_EXTRACTOR_ERROR_NONE`: Successful
+  /// - `METADATA_EXTRACTOR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `METADATA_EXTRACTOR_ERROR_OPERATION_FAILED`: Internal operation failed
+  /// - `METADATA_EXTRACTOR_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **Preconditions:**
+  /// - Set the path to extract by calling metadata_extractor_set_path().
+  /// - Get the time/lyrics set number by calling metadata_extractor_get_metadata(METADATA_SYNCLYRICS_NUM).
+  ///
+  /// **See also:**
+  /// - `metadata_extractor_create()`
+  /// - `metadata_extractor_destroy()`
   int metadata_extractor_get_synclyrics(
     metadata_extractor_h metadata,
     int index,
@@ -329,30 +409,39 @@ class Tizen65CapiMediaMetadataExtractor {
           int Function(metadata_extractor_h, int, ffi.Pointer<ffi.UnsignedLong>,
               ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the frame of a video media.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// Gets the frame of a video media.
   ///
-  /// @remarks The @a frame should be released using free().
-  /// In case of accessing specific path in internal storage or external storage, you may add the privilege for accessing the path. \n
-  /// For example, if you get the specific path by using storage_get_directory(). you should add privilege %http://tizen.org/privilege/mediastorage or %http://tizen.org/privilege/externalstorage.
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @param[in] metadata The handle to metadata
-  /// @param[in] timestamp The timestamp in milliseconds
-  /// @param[in] is_accurate If @c true the user can get an accurate frame for the given timestamp,\n
-  /// otherwise @c false if the user can only get the nearest i-frame of the video rapidly
-  /// @param[out] frame The raw frame data in RGB888
-  /// @param[out] size The frame data size
+  /// **Remarks:**
+  /// - The `frame` should be released using free().
+  /// - In case of accessing specific path in internal storage or external storage, you may add the privilege for accessing the path.
+  /// - For example, if you get the specific path by using storage_get_directory(). you should add privilege http://tizen.org/privilege/mediastorage or http://tizen.org/privilege/externalstorage.
   ///
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #METADATA_EXTRACTOR_ERROR_NONE Successful
-  /// @retval #METADATA_EXTRACTOR_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #METADATA_EXTRACTOR_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #METADATA_EXTRACTOR_ERROR_OPERATION_FAILED Internal operation failed
-  /// @retval #METADATA_EXTRACTOR_ERROR_PERMISSION_DENIED Permission denied
+  /// **Parameters:**
+  /// - `metadata` (in): The handle to metadata
+  /// - `timestamp` (in): The timestamp in milliseconds
+  /// - `is_accurate` (in): If `true` the user can get an accurate frame for the given timestamp, otherwise `false` if the user can only get the nearest i-frame of the video rapidly
+  /// - `frame` (out): The raw frame data in RGB888
+  /// - `size` (out): The frame data size
   ///
-  /// @pre Set the path to extract by calling metadata_extractor_set_path().
-  /// @see metadata_extractor_create()
-  /// @see metadata_extractor_destroy()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `METADATA_EXTRACTOR_ERROR_NONE`: Successful
+  /// - `METADATA_EXTRACTOR_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `METADATA_EXTRACTOR_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `METADATA_EXTRACTOR_ERROR_OPERATION_FAILED`: Internal operation failed
+  /// - `METADATA_EXTRACTOR_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **Preconditions:**
+  /// - Set the path to extract by calling metadata_extractor_set_path().
+  ///
+  /// **See also:**
+  /// - `metadata_extractor_create()`
+  /// - `metadata_extractor_destroy()`
   int metadata_extractor_get_frame_at_time(
     metadata_extractor_h metadata,
     int timestamp,
@@ -383,9 +472,14 @@ class Tizen65CapiMediaMetadataExtractor {
               ffi.Pointer<ffi.Pointer<ffi.Void>>, ffi.Pointer<ffi.Int>)>();
 }
 
-/// @ingroup CAPI_METADATA_EXTRACTOR_MODULE
-/// @brief Enumeration for metadata extractor error.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration for metadata extractor error.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+///
+/// **Group:**
+/// - CAPI_METADATA_EXTRACTOR_MODULE
+/// @nodoc
 abstract class metadata_extractor_error_e {
   /// < Successful
   static const int METADATA_EXTRACTOR_ERROR_NONE = 0;
@@ -406,9 +500,14 @@ abstract class metadata_extractor_error_e {
   static const int METADATA_EXTRACTOR_ERROR_OPERATION_FAILED = -26411007;
 }
 
-/// @ingroup CAPI_METADATA_EXTRACTOR_MODULE
-/// @brief Enumeration for attribute.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration for attribute.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+///
+/// **Group:**
+/// - CAPI_METADATA_EXTRACTOR_MODULE
+/// @nodoc
 abstract class metadata_extractor_attr_e {
   /// < Duration
   static const int METADATA_DURATION = 0;
@@ -516,11 +615,18 @@ abstract class metadata_extractor_attr_e {
   static const int METADATA_360 = 34;
 }
 
+/// @nodoc
 final class metadata_extractor_s extends ffi.Opaque {}
 
-/// @ingroup CAPI_METADATA_EXTRACTOR_MODULE
-/// @brief The metadata extractor handle.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// The metadata extractor handle.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+///
+/// **Group:**
+/// - CAPI_METADATA_EXTRACTOR_MODULE
+/// @nodoc
 typedef metadata_extractor_h = ffi.Pointer<metadata_extractor_s>;
 
+/// @nodoc
 const int METADATA_EXTRACTOR_ERROR_CLASS = -26411008;

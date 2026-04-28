@@ -1,3 +1,6 @@
+/// {@category 9.0/tizen}
+library tizen_interop_9_0.tizen_core;
+
 // Copyright 2026 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen tizen-core APIs.
+/// {@category 9.0/tizen}
 class Tizen90TizenCore {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,21 +28,33 @@ class Tizen90TizenCore {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Makes a pair of channel sender and receiver.
-  /// @since_tizen 9.0
-  /// @remarks The @a sender should be released using tizen_core_channel_sender_destroy().
-  /// @remarks The @a receiver should be released using tizen_core_channel_receiver_destroy().
+  /// Makes a pair of channel sender and receiver.
   ///
-  /// @param[out] sender The tizen core channel sender handle
-  /// @param[out] receiver The tizen core channel receiver handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TIZEN_CORE_ERROR_NONE Successful
-  /// @retval #TIZEN_CORE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TIZEN_CORE_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #TIZEN_CORE_ERROR_INVALID_CONTEXT Invalid context
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @code
+  /// **Remarks:**
+  /// - The `sender` should be released using tizen_core_channel_sender_destroy().
+  /// - The `receiver` should be released using tizen_core_channel_receiver_destroy().
+  ///
+  /// **Parameters:**
+  /// - `sender` (out): The tizen core channel sender handle
+  /// - `receiver` (out): The tizen core channel receiver handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TIZEN_CORE_ERROR_NONE`: Successful
+  /// - `TIZEN_CORE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TIZEN_CORE_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `TIZEN_CORE_ERROR_INVALID_CONTEXT`: Invalid context
+  ///
+  /// **See also:**
+  /// - `tizen_core_channel_sender_destroy()`
+  /// - `tizen_core_channel_receiver_destroy()`
+  ///
+  /// ```
   /// #include <tizen_core.h>
   /// {
   /// tizen_core_channel_sender_h sender = NULL;
@@ -51,10 +67,7 @@ class Tizen90TizenCore {
   /// return;
   /// }
   /// }
-  /// @endcode
-  ///
-  /// @see tizen_core_channel_sender_destroy()
-  /// @see tizen_core_channel_receiver_destroy()
+  /// ```
   int tizen_core_channel_make_pair(
     ffi.Pointer<tizen_core_channel_sender_h> sender,
     ffi.Pointer<tizen_core_channel_receiver_h> receiver,
@@ -75,17 +88,26 @@ class Tizen90TizenCore {
           int Function(ffi.Pointer<tizen_core_channel_sender_h>,
               ffi.Pointer<tizen_core_channel_receiver_h>)>();
 
-  /// @brief Sends the channel object to the receiver.
-  /// @since_tizen 9.0
+  /// Sends the channel object to the receiver.
   ///
-  /// @param[in] sender The tizen core channel sender handle
-  /// @param[in] object The tizen core channel object handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TIZEN_CORE_ERROR_NONE Successful
-  /// @retval #TIZEN_CORE_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @code
+  /// **Parameters:**
+  /// - `sender` (in): The tizen core channel sender handle
+  /// - `object` (in): The tizen core channel object handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TIZEN_CORE_ERROR_NONE`: Successful
+  /// - `TIZEN_CORE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `tizen_core_channel_object_create()`
+  ///
+  /// ```
   /// #include <tizen_core.h>
   /// {
   /// tizen_core_channel_sender_h sender = NULL;
@@ -104,9 +126,7 @@ class Tizen90TizenCore {
   ///
   /// tizen_core_channel_object_destroy(object);
   /// }
-  /// @endcode
-  ///
-  /// @see tizen_core_channel_object_create()
+  /// ```
   int tizen_core_channel_sender_send(
     tizen_core_channel_sender_h sender,
     tizen_core_channel_object_h object,
@@ -126,16 +146,26 @@ class Tizen90TizenCore {
           int Function(
               tizen_core_channel_sender_h, tizen_core_channel_object_h)>();
 
-  /// @brief Destroys the channel sender handle.
-  /// @since_tizen 9.0
+  /// Destroys the channel sender handle.
   ///
-  /// @param[in] sender The tizen core channel sender handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TIZEN_CORE_ERROR_NONE Successful
-  /// @retval #TIZEN_CORE_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @code
+  /// **Parameters:**
+  /// - `sender` (in): The tizen core channel sender handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TIZEN_CORE_ERROR_NONE`: Successful
+  /// - `TIZEN_CORE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `tizen_core_channel_make_pair()`
+  /// - `tizen_core_channel_sender_clone()`
+  ///
+  /// ```
   /// #include <tizen_core.h>
   /// {
   /// tizen_core_channel_sender_h sender = NULL;
@@ -149,10 +179,7 @@ class Tizen90TizenCore {
   /// if (ret != TIZEN_CORE_ERROR_NONE)
   /// dlog_print(DLOG_ERROR, LOG_TAG, "Failed to destroy channel sender");
   /// }
-  /// @endcode
-  ///
-  /// @see tizen_core_channel_make_pair()
-  /// @see tizen_core_channel_sender_clone()
+  /// ```
   int tizen_core_channel_sender_destroy(
     tizen_core_channel_sender_h sender,
   ) {
@@ -168,19 +195,30 @@ class Tizen90TizenCore {
       _tizen_core_channel_sender_destroyPtr
           .asFunction<int Function(tizen_core_channel_sender_h)>();
 
-  /// @brief Creates and returns a copy of the given the @a sender handle.
-  /// @since_tizen 9.0
-  /// @remarks The @a cloned_sender should be released using tizen_core_channel_sender_destroy().
+  /// Creates and returns a copy of the given the `sender` handle.
   ///
-  /// @param[in] sender The tizen core channel sender handle
-  /// @param[out] cloned_sender If successful, a newly created tizen core channel sender handle will be returned
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TIZEN_CORE_ERROR_NONE Successful
-  /// @retval #TIZEN_CORE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TIZEN_CORE_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @code
+  /// **Remarks:**
+  /// - The `cloned_sender` should be released using tizen_core_channel_sender_destroy().
+  ///
+  /// **Parameters:**
+  /// - `sender` (in): The tizen core channel sender handle
+  /// - `cloned_sender` (out): If successful, a newly created tizen core channel sender handle will be returned
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TIZEN_CORE_ERROR_NONE`: Successful
+  /// - `TIZEN_CORE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TIZEN_CORE_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `tizen_core_channel_sender_destroy()`
+  ///
+  /// ```
   /// #include <tizen_core.h>
   /// {
   /// tizen_core_channel_sender_h sender = NULL;
@@ -194,9 +232,7 @@ class Tizen90TizenCore {
   /// if (ret != TIZEN_CORE_ERROR_NONE)
   /// dlog_print(DLOG_ERROR, LOG_TAG, "Failed to clone channel sender");
   /// }
-  /// @endcode
-  ///
-  /// @see tizen_core_channel_sender_destroy()
+  /// ```
   int tizen_core_channel_sender_clone(
     tizen_core_channel_sender_h sender,
     ffi.Pointer<tizen_core_channel_sender_h> cloned_sender,
@@ -217,19 +253,30 @@ class Tizen90TizenCore {
           int Function(tizen_core_channel_sender_h,
               ffi.Pointer<tizen_core_channel_sender_h>)>();
 
-  /// @brief Receives the channel object from the sender.
-  /// @since_tizen 9.0
-  /// @remarks The @a object should be released using tizen_core_channel_object_destroy().
+  /// Receives the channel object from the sender.
   ///
-  /// @param[in] receiver The tizen core channel receiver handle
-  /// @param[out] object The tizen core channel object handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TIZEN_CORE_ERROR_NONE Successful
-  /// @retval #TIZEN_CORE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TIZEN_CORE_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @code
+  /// **Remarks:**
+  /// - The `object` should be released using tizen_core_channel_object_destroy().
+  ///
+  /// **Parameters:**
+  /// - `receiver` (in): The tizen core channel receiver handle
+  /// - `object` (out): The tizen core channel object handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TIZEN_CORE_ERROR_NONE`: Successful
+  /// - `TIZEN_CORE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TIZEN_CORE_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `tizen_core_channel_object_destroy()`
+  ///
+  /// ```
   /// #include <tizen_core.h>
   /// {
   /// tizen_core_channel_sender_h sender = NULL;
@@ -260,9 +307,7 @@ class Tizen90TizenCore {
   /// tizen_core_channel_sender_destroy(sender);
   /// tizen_core_channel_receiver_destroy(receiver);
   /// }
-  /// @endcode
-  ///
-  /// @see tizen_core_channel_object_destroy()
+  /// ```
   int tizen_core_channel_receiver_receive(
     tizen_core_channel_receiver_h receiver,
     ffi.Pointer<tizen_core_channel_object_h> object,
@@ -283,16 +328,25 @@ class Tizen90TizenCore {
           int Function(tizen_core_channel_receiver_h,
               ffi.Pointer<tizen_core_channel_object_h>)>();
 
-  /// @brief Destroys the tizen core channel receiver handle.
-  /// @since_tizen 9.0
+  /// Destroys the tizen core channel receiver handle.
   ///
-  /// @param[in] receiver The tizen core channel receiver handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TIZEN_CORE_ERROR_NONE Successful
-  /// @retval #TIZEN_CORE_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @code
+  /// **Parameters:**
+  /// - `receiver` (in): The tizen core channel receiver handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TIZEN_CORE_ERROR_NONE`: Successful
+  /// - `TIZEN_CORE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `tizen_core_channel_make_pair()`
+  ///
+  /// ```
   /// #include <tizen_core.h>
   /// {
   /// tizen_core_channel_sender_h sender = NULL;
@@ -306,9 +360,7 @@ class Tizen90TizenCore {
   /// if (ret != TIZEN_CORE_ERROR_NONE)
   /// dlog_print(DLOG_ERROR, LOG_TAG, "Failed to destroy channel receiver");
   /// }
-  /// @endcode
-  ///
-  /// @see tizen_core_channel_make_pair()
+  /// ```
   int tizen_core_channel_receiver_destroy(
     tizen_core_channel_receiver_h receiver,
   ) {
@@ -324,19 +376,30 @@ class Tizen90TizenCore {
       _tizen_core_channel_receiver_destroyPtr
           .asFunction<int Function(tizen_core_channel_receiver_h)>();
 
-  /// @brief Creates the tizen core channel object handle.
-  /// @since_tizen 9.0
-  /// @remarks The @a object should be released using tizen_core_channel_object_destroy().
+  /// Creates the tizen core channel object handle.
   ///
-  /// @param[out] object The tizen core channel object handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TIZEN_CORE_ERROR_NONE Successful
-  /// @retval #TIZEN_CORE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TIZEN_CORE_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #TIZEN_CORE_ERROR_INVALID_CONTEXT Invalid context
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @code
+  /// **Remarks:**
+  /// - The `object` should be released using tizen_core_channel_object_destroy().
+  ///
+  /// **Parameters:**
+  /// - `object` (out): The tizen core channel object handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TIZEN_CORE_ERROR_NONE`: Successful
+  /// - `TIZEN_CORE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TIZEN_CORE_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `TIZEN_CORE_ERROR_INVALID_CONTEXT`: Invalid context
+  ///
+  /// **See also:**
+  /// - `tizen_core_channel_object_destroy()`
+  ///
+  /// ```
   /// #include <tizen_core.h>
   /// {
   /// tizen_core_channel_object_h object = NULL;
@@ -350,9 +413,7 @@ class Tizen90TizenCore {
   ///
   /// tizen_core_channel_object_destroy(object);
   /// }
-  /// @endcode
-  ///
-  /// @see tizen_core_channel_object_destroy()
+  /// ```
   int tizen_core_channel_object_create(
     ffi.Pointer<tizen_core_channel_object_h> object,
   ) {
@@ -369,16 +430,25 @@ class Tizen90TizenCore {
       _tizen_core_channel_object_createPtr
           .asFunction<int Function(ffi.Pointer<tizen_core_channel_object_h>)>();
 
-  /// @brief Destroys the tizen core channel object handle.
-  /// @since_tizen 9.0
+  /// Destroys the tizen core channel object handle.
   ///
-  /// @param[in] object The tizen core channel object handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TIZEN_CORE_ERROR_NONE Successful
-  /// @retval #TIZEN_CORE_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @code
+  /// **Parameters:**
+  /// - `object` (in): The tizen core channel object handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TIZEN_CORE_ERROR_NONE`: Successful
+  /// - `TIZEN_CORE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `tizen_core_channel_object_create()`
+  ///
+  /// ```
   /// #include <tizen_core.h>
   /// {
   /// tizen_core_channel_object_h object = NULL;
@@ -390,9 +460,7 @@ class Tizen90TizenCore {
   /// if (ret != TIZEN_CORE_ERROR_NONE)
   /// dlog_print(DLOG_ERROR, LOG_TAG, "Failed to destroy channel object");
   /// }
-  /// @endcode
-  ///
-  /// @see tizen_core_channel_object_create()
+  /// ```
   int tizen_core_channel_object_destroy(
     tizen_core_channel_object_h object,
   ) {
@@ -408,18 +476,26 @@ class Tizen90TizenCore {
       _tizen_core_channel_object_destroyPtr
           .asFunction<int Function(tizen_core_channel_object_h)>();
 
-  /// @brief Sets the ID to the tizen core channel object handle.
-  /// @since_tizen 9.0
+  /// Sets the ID to the tizen core channel object handle.
   ///
-  /// @param[in] object The tizen core channel object handle
-  /// @param[in] id  The channel ID
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TIZEN_CORE_ERROR_NONE Successful
-  /// @retval #TIZEN_CORE_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Parameters:**
+  /// - `object` (in): The tizen core channel object handle
+  /// - `id` (in): The channel ID
   ///
-  /// @code
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TIZEN_CORE_ERROR_NONE`: Successful
+  /// - `TIZEN_CORE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `tizen_core_channel_object_get_type()`
+  ///
+  /// ```
   /// #include <tizen_core.h>
   /// {
   /// tizen_core_channel_object_h object = NULL;
@@ -436,9 +512,7 @@ class Tizen90TizenCore {
   ///
   /// tizen_core_channel_object_destroy(object);
   /// }
-  /// @endcode
-  ///
-  /// @see tizen_core_channel_object_get_type()
+  /// ```
   int tizen_core_channel_object_set_id(
     tizen_core_channel_object_h object,
     int id,
@@ -457,17 +531,26 @@ class Tizen90TizenCore {
       _tizen_core_channel_object_set_idPtr
           .asFunction<int Function(tizen_core_channel_object_h, int)>();
 
-  /// @brief Gets the ID from the tizen core channel object handle.
-  /// @since_tizen 9.0
+  /// Gets the ID from the tizen core channel object handle.
   ///
-  /// @param[in] object The tizen core channel object handle
-  /// @param[out] id The channel ID
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TIZEN_CORE_ERROR_NONE Successful
-  /// @retval #TIZEN_CORE_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @code
+  /// **Parameters:**
+  /// - `object` (in): The tizen core channel object handle
+  /// - `id` (out): The channel ID
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TIZEN_CORE_ERROR_NONE`: Successful
+  /// - `TIZEN_CORE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `tizen_core_channel_object_set_id()`
+  ///
+  /// ```
   /// #include <tizen_core.h>
   /// {
   /// tizen_core_channel_object_h object = NULL;
@@ -485,9 +568,7 @@ class Tizen90TizenCore {
   ///
   /// tizen_core_channel_object_destroy(object);
   /// }
-  /// @endcode
-  ///
-  /// @see tizen_core_channel_object_set_id()
+  /// ```
   int tizen_core_channel_object_get_id(
     tizen_core_channel_object_h object,
     ffi.Pointer<ffi.Int> id,
@@ -506,19 +587,30 @@ class Tizen90TizenCore {
       _tizen_core_channel_object_get_idPtr.asFunction<
           int Function(tizen_core_channel_object_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Sets the data to the tizen core channel object handle.
-  /// @since_tizen 9.0
-  /// @remarks The @a data should be released using release function
-  /// if the @a data is created by the memory allocation.
+  /// Sets the data to the tizen core channel object handle.
   ///
-  /// @param[in] object The tizen core channel object handle
-  /// @param[in] data The channel data
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TIZEN_CORE_ERROR_NONE Successful
-  /// @retval #TIZEN_CORE_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @code
+  /// **Remarks:**
+  /// - The `data` should be released using release function
+  /// - if the `data` is created by the memory allocation.
+  ///
+  /// **Parameters:**
+  /// - `object` (in): The tizen core channel object handle
+  /// - `data` (in): The channel data
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TIZEN_CORE_ERROR_NONE`: Successful
+  /// - `TIZEN_CORE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `tizen_core_channel_object_get_data()`
+  ///
+  /// ```
   /// #include <tizen_core.h>
   /// {
   /// tizen_core_channel_object_h object = NULL;
@@ -538,9 +630,7 @@ class Tizen90TizenCore {
   /// free(data);
   /// tizen_core_channel_object_destroy(object);
   /// }
-  /// @endcode
-  ///
-  /// @see tizen_core_channel_object_get_data()
+  /// ```
   int tizen_core_channel_object_set_data(
     tizen_core_channel_object_h object,
     ffi.Pointer<ffi.Void> data,
@@ -559,18 +649,29 @@ class Tizen90TizenCore {
       _tizen_core_channel_object_set_dataPtr.asFunction<
           int Function(tizen_core_channel_object_h, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Gets the data from the tizen core channel object handle.
-  /// @since_tizen 9.0
-  /// @remarks The @a data should be released using release function.
+  /// Gets the data from the tizen core channel object handle.
   ///
-  /// @param[in] object The tizen core channel object handle
-  /// @param[out] data The channel data
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TIZEN_CORE_ERROR_NONE Successful
-  /// @retval #TIZEN_CORE_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @code
+  /// **Remarks:**
+  /// - The `data` should be released using release function.
+  ///
+  /// **Parameters:**
+  /// - `object` (in): The tizen core channel object handle
+  /// - `data` (out): The channel data
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TIZEN_CORE_ERROR_NONE`: Successful
+  /// - `TIZEN_CORE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `tizen_core_channel_object_set_data()`
+  ///
+  /// ```
   /// #include <tizen_core.h>
   /// {
   /// tizen_core_channel_object_h object = NULL;
@@ -591,9 +692,7 @@ class Tizen90TizenCore {
   /// free(data);
   /// tizen_core_channel_object_destroy(object);
   /// }
-  /// @endcode
-  ///
-  /// @see tizen_core_channel_object_set_data()
+  /// ```
   int tizen_core_channel_object_get_data(
     tizen_core_channel_object_h object,
     ffi.Pointer<ffi.Pointer<ffi.Void>> data,
@@ -614,19 +713,31 @@ class Tizen90TizenCore {
           int Function(tizen_core_channel_object_h,
               ffi.Pointer<ffi.Pointer<ffi.Void>>)>();
 
-  /// @brief Gets the sender task name from the tizen core channel object handle.
-  /// @since_tizen 9.0
-  /// @remarks The @a task_name must not be deallocated by the application.
+  /// Gets the sender task name from the tizen core channel object handle.
   ///
-  /// @param[in] object The tizen core channel object handle
-  /// @param[out] task_name The sender task name
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TIZEN_CORE_ERROR_NONE Successful
-  /// @retval #TIZEN_CORE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TIZEN_CORE_ERROR_INVALID_CONTEXT Invalid context
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @code
+  /// **Remarks:**
+  /// - The `task_name` must not be deallocated by the application.
+  ///
+  /// **Parameters:**
+  /// - `object` (in): The tizen core channel object handle
+  /// - `task_name` (out): The sender task name
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TIZEN_CORE_ERROR_NONE`: Successful
+  /// - `TIZEN_CORE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TIZEN_CORE_ERROR_INVALID_CONTEXT`: Invalid context
+  ///
+  /// **See also:**
+  /// - `tizen_core_channel_sender_send()`
+  /// - `tizen_core_channel_receiver_receive()`
+  ///
+  /// ```
   /// #include <tizen_core.h>
   ///
   /// static void print_task_name(tizen_core_channel_object_h object)
@@ -642,10 +753,7 @@ class Tizen90TizenCore {
   ///
   /// dlog_print(DLOG_INFO, LOG_TAG, "sender task=%s", task_name");
   /// }
-  /// @endcode
-  ///
-  /// @see tizen_core_channel_sender_send()
-  /// @see tizen_core_channel_receiver_receive()
+  /// ```
   int tizen_core_channel_object_get_sender_task_name(
     tizen_core_channel_object_h object,
     ffi.Pointer<ffi.Pointer<ffi.Char>> task_name,
@@ -666,19 +774,30 @@ class Tizen90TizenCore {
           int Function(tizen_core_channel_object_h,
               ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Creates the tizen core event handle.
-  /// @since_tizen 9.0
-  /// @remarks The @a event should be released using tizen_core_event_destroy().
+  /// Creates the tizen core event handle.
   ///
-  /// @param[out] event The tizen core event handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TIZEN_CORE_ERROR_NONE Successful
-  /// @retval #TIZEN_CORE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TIZEN_CORE_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #TIZEN_CORE_ERROR_INVALID_CONTEXT Invalid context
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @code
+  /// **Remarks:**
+  /// - The `event` should be released using tizen_core_event_destroy().
+  ///
+  /// **Parameters:**
+  /// - `event` (out): The tizen core event handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TIZEN_CORE_ERROR_NONE`: Successful
+  /// - `TIZEN_CORE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TIZEN_CORE_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `TIZEN_CORE_ERROR_INVALID_CONTEXT`: Invalid context
+  ///
+  /// **See also:**
+  /// - `tizen_core_event_destroy()`
+  ///
+  /// ```
   /// #include <tizen_core.h>
   /// {
   /// tizen_core_event_h event = NULL;
@@ -692,9 +811,7 @@ class Tizen90TizenCore {
   ///
   /// tizen_core_event_destroy(event);
   /// }
-  /// @endcode
-  ///
-  /// @see tizen_core_event_destroy()
+  /// ```
   int tizen_core_event_create(
     ffi.Pointer<tizen_core_event_h> event,
   ) {
@@ -710,16 +827,25 @@ class Tizen90TizenCore {
   late final _tizen_core_event_create = _tizen_core_event_createPtr
       .asFunction<int Function(ffi.Pointer<tizen_core_event_h>)>();
 
-  /// @brief Destroys the tizen core event handle.
-  /// @since_tizen 9.0
+  /// Destroys the tizen core event handle.
   ///
-  /// @param[in] event The tizen core event handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TIZEN_CORE_ERROR_NONE Successful
-  /// @retval #TIZEN_CORE_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @code
+  /// **Parameters:**
+  /// - `event` (in): The tizen core event handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TIZEN_CORE_ERROR_NONE`: Successful
+  /// - `TIZEN_CORE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `tizen_core_event_create()`
+  ///
+  /// ```
   /// #include <tizen_core.h>
   /// {
   /// tizen_core_event_h event = NULL;
@@ -733,9 +859,7 @@ class Tizen90TizenCore {
   /// return;
   /// }
   /// }
-  /// @endcode
-  ///
-  /// @see tizen_core_event_create()
+  /// ```
   int tizen_core_event_destroy(
     tizen_core_event_h event,
   ) {
@@ -750,23 +874,36 @@ class Tizen90TizenCore {
   late final _tizen_core_event_destroy = _tizen_core_event_destroyPtr
       .asFunction<int Function(tizen_core_event_h)>();
 
-  /// @brief Adds the event handler to the tizen core event.
-  /// @details The @a event_handler is added at the back of the handler list of the tizen core event.
-  /// When tizen_core_emit_event() is called, the @a callback function of the @a event_handler is called first.
-  /// @since_tizen 9.0
-  /// @remarks The @a event_handler should be released using tizen_core_event_remove_handler().
+  /// Adds the event handler to the tizen core event.
   ///
-  /// @param[in] event The tizen core event handle
-  /// @param[in] callback The callback function to be invoked when the event is emitted
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @param[out] event_handler The tizen core event handler handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TIZEN_CORE_ERROR_NONE Successful
-  /// @retval #TIZEN_CORE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TIZEN_CORE_ERROR_OUT_OF_MEMORY Out of memory
+  /// The `event_handler` is added at the back of the handler list of the tizen core event. When tizen_core_emit_event() is called, the `callback` function of the `event_handler` is called first.
   ///
-  /// @code
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Remarks:**
+  /// - The `event_handler` should be released using tizen_core_event_remove_handler().
+  ///
+  /// **Parameters:**
+  /// - `event` (in): The tizen core event handle
+  /// - `callback` (in): The callback function to be invoked when the event is emitted
+  /// - `user_data` (in): The user data to be passed to the callback function
+  /// - `event_handler` (out): The tizen core event handler handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TIZEN_CORE_ERROR_NONE`: Successful
+  /// - `TIZEN_CORE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TIZEN_CORE_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `tizen_core_event_emit()`
+  /// - `tizen_core_emit_event()`
+  /// - `tizen_core_event_remove_handler()`
+  ///
+  /// ```
   /// #include <tizen_core.h>
   /// static void event_handler_cb(tizen_core_event_object_h object, void *user_data)
   /// {
@@ -790,11 +927,7 @@ class Tizen90TizenCore {
   /// return;
   /// }
   /// }
-  /// @endcode
-  ///
-  /// @see tizen_core_event_emit()
-  /// @see tizen_core_emit_event()
-  /// @see tizen_core_event_remove_handler()
+  /// ```
   int tizen_core_event_add_handler(
     tizen_core_event_h event,
     tizen_core_event_handler_cb callback,
@@ -825,23 +958,36 @@ class Tizen90TizenCore {
               ffi.Pointer<ffi.Void>,
               ffi.Pointer<tizen_core_event_handler_h>)>();
 
-  /// @brief Prepends the event handler to the tizen core event.
-  /// @details The @a event_handler is added to the front of the handler list of the tizen core event.
-  /// When tizen_core_emit_event() is called, the @a callback function of the @a event_handler is called first.
-  /// @since_tizen 9.0
-  /// @remarks The @a event_handler should be released using tizen_core_event_remove_handler().
+  /// Prepends the event handler to the tizen core event.
   ///
-  /// @param[in] event The tizen core event handle
-  /// @param[in] callback The callback function to be invoked when the event is emitted
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @param[out] event_handler The tizen core event handler handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TIZEN_CORE_ERROR_NONE Successful
-  /// @retval #TIZEN_CORE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TIZEN_CORE_ERROR_OUT_OF_MEMORY Out of memory
+  /// The `event_handler` is added to the front of the handler list of the tizen core event. When tizen_core_emit_event() is called, the `callback` function of the `event_handler` is called first.
   ///
-  /// @code
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Remarks:**
+  /// - The `event_handler` should be released using tizen_core_event_remove_handler().
+  ///
+  /// **Parameters:**
+  /// - `event` (in): The tizen core event handle
+  /// - `callback` (in): The callback function to be invoked when the event is emitted
+  /// - `user_data` (in): The user data to be passed to the callback function
+  /// - `event_handler` (out): The tizen core event handler handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TIZEN_CORE_ERROR_NONE`: Successful
+  /// - `TIZEN_CORE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TIZEN_CORE_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `tizen_core_event_emit()`
+  /// - `tizen_core_emit_event()`
+  /// - `tizen_core_event_remove_handler()`
+  ///
+  /// ```
   /// #include <tizen_core.h>
   /// static void event_handler_cb(tizen_core_event_object_h object, void *user_data)
   /// {
@@ -865,11 +1011,7 @@ class Tizen90TizenCore {
   /// return;
   /// }
   /// }
-  /// @endcode
-  ///
-  /// @see tizen_core_event_emit()
-  /// @see tizen_core_emit_event()
-  /// @see tizen_core_event_remove_handler()
+  /// ```
   int tizen_core_event_prepend_handler(
     tizen_core_event_h event,
     tizen_core_event_handler_cb callback,
@@ -900,17 +1042,26 @@ class Tizen90TizenCore {
               ffi.Pointer<ffi.Void>,
               ffi.Pointer<tizen_core_event_handler_h>)>();
 
-  /// @brief Removes the event handler from the tizen core event.
-  /// @since_tizen 9.0
+  /// Removes the event handler from the tizen core event.
   ///
-  /// @param[in] event The tizen core event handle
-  /// @param[in] event_handler The tizen core event handler handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TIZEN_CORE_ERROR_NONE Successful
-  /// @retval #TIZEN_CORE_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @code
+  /// **Parameters:**
+  /// - `event` (in): The tizen core event handle
+  /// - `event_handler` (in): The tizen core event handler handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TIZEN_CORE_ERROR_NONE`: Successful
+  /// - `TIZEN_CORE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `tizen_core_event_add_handler()`
+  ///
+  /// ```
   /// #include <tizen_core.h>
   /// static void remove_event_handler(tizen_core_event_h event, tizen_core_event_handler_h handler)
   /// {
@@ -920,9 +1071,7 @@ class Tizen90TizenCore {
   /// if (ret != TIZEN_CORE_ERROR_NONE)
   /// dlog_print(DLOG_ERROR, LOG_TAG, "Failed to remove event handler");
   /// }
-  /// @endcode
-  ///
-  /// @see tizen_core_event_add_handler()
+  /// ```
   int tizen_core_event_remove_handler(
     tizen_core_event_h event,
     tizen_core_event_handler_h event_handler,
@@ -941,23 +1090,35 @@ class Tizen90TizenCore {
       _tizen_core_event_remove_handlerPtr.asFunction<
           int Function(tizen_core_event_h, tizen_core_event_handler_h)>();
 
-  /// @brief Emits the event to the tizen core event.
-  /// @details The event is emitted to the tizen core event.
-  /// @since_tizen 9.0
-  /// @remarks The @a object will be released automatically.
-  /// You MUST NOT release the @a object using tizen_core_event_object_destroy()
-  /// when calling the function is successful.
-  /// If this function returns an error, the @a object should be released
-  /// using tizen_core_event_object_destroy().
+  /// Emits the event to the tizen core event.
   ///
-  /// @param[in] event The tizen core event handle
-  /// @param[in] object The tizen core event object handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TIZEN_CORE_ERROR_NONE Successful
-  /// @retval #TIZEN_CORE_ERROR_INVALID_PARAMETER Invalid parameter
+  /// The event is emitted to the tizen core event.
   ///
-  /// @code
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Remarks:**
+  /// - The `object` will be released automatically.
+  /// - You MUST NOT release the `object` using tizen_core_event_object_destroy()
+  /// - when calling the function is successful.
+  /// - If this function returns an error, the `object` should be released
+  /// - using tizen_core_event_object_destroy().
+  ///
+  /// **Parameters:**
+  /// - `event` (in): The tizen core event handle
+  /// - `object` (in): The tizen core event object handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TIZEN_CORE_ERROR_NONE`: Successful
+  /// - `TIZEN_CORE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `tizen_core_event_add_handler()`
+  ///
+  /// ```
   /// #include <tizen_core.h>
   /// static void object_destroy_cb(void *event_data, void *user_data)
   /// {
@@ -985,9 +1146,7 @@ class Tizen90TizenCore {
   /// return;
   /// }
   /// }
-  /// @endcode
-  ///
-  /// @see tizen_core_event_add_handler()
+  /// ```
   int tizen_core_event_emit(
     tizen_core_event_h event,
     tizen_core_event_object_h object,
@@ -1005,28 +1164,38 @@ class Tizen90TizenCore {
   late final _tizen_core_event_emit = _tizen_core_event_emitPtr.asFunction<
       int Function(tizen_core_event_h, tizen_core_event_object_h)>();
 
-  /// @brief Creates the tizen core event object handle.
-  /// @details The @a data can be nullptr.
-  /// If the @a data is memory allocated, the @a data can be released
-  /// using the tizen_core_event_object_set_destroy_cb() function.
-  /// When tizen_core_event_object_destroy() calls, the callback function
-  /// set in tizen_core_event_object_set_destroy_cb() is called.
-  /// @since_tizen 9.0
-  /// @remarks The @a object should be released using tizen_core_event_object_destroy().
-  /// @remarks The @a object should not be released when the @a object is emitted
-  /// using tizen_core_event_emit().
+  /// Creates the tizen core event object handle.
   ///
-  /// @param[out] object The tizen core event object handle
-  /// @param[in] id The event ID
-  /// @param[in] data The event data
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TIZEN_CORE_ERROR_NONE Successful
-  /// @retval #TIZEN_CORE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TIZEN_CORE_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #TIZEN_CORE_ERROR_INVALID_CONTEXT Invalid context
+  /// The `data` can be nullptr. If the `data` is memory allocated, the `data` can be released using the tizen_core_event_object_set_destroy_cb() function. When tizen_core_event_object_destroy() calls, the callback function set in tizen_core_event_object_set_destroy_cb() is called.
   ///
-  /// @code
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Remarks:**
+  /// - The `object` should be released using tizen_core_event_object_destroy().
+  /// - The `object` should not be released when the `object` is emitted
+  /// - using tizen_core_event_emit().
+  ///
+  /// **Parameters:**
+  /// - `object` (out): The tizen core event object handle
+  /// - `id` (in): The event ID
+  /// - `data` (in): The event data
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TIZEN_CORE_ERROR_NONE`: Successful
+  /// - `TIZEN_CORE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TIZEN_CORE_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `TIZEN_CORE_ERROR_INVALID_CONTEXT`: Invalid context
+  ///
+  /// **See also:**
+  /// - `tizen_core_event_object_set_destroy_cb()`
+  /// - `tizen_core_event_object_destroy()`
+  /// - `tizen_core_event_emit()`
+  ///
+  /// ```
   /// #include <tizen_core.h>
   ///
   /// static void object_destroy_cb(void *event_data, void *user_data)
@@ -1055,11 +1224,7 @@ class Tizen90TizenCore {
   ///
   /// return object;
   /// }
-  /// @endcode
-  ///
-  /// @see tizen_core_event_object_set_destroy_cb()
-  /// @see tizen_core_event_object_destroy()
-  /// @see tizen_core_event_emit()
+  /// ```
   int tizen_core_event_object_create(
     ffi.Pointer<tizen_core_event_object_h> object,
     int id,
@@ -1081,16 +1246,26 @@ class Tizen90TizenCore {
           int Function(ffi.Pointer<tizen_core_event_object_h>, int,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Destroys the tizen core event object handle.
-  /// @since_tizen 9.0
+  /// Destroys the tizen core event object handle.
   ///
-  /// @param[in] object The tizen core event object handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TIZEN_CORE_ERROR_NONE Successful
-  /// @retval #TIZEN_CORE_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @code
+  /// **Parameters:**
+  /// - `object` (in): The tizen core event object handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TIZEN_CORE_ERROR_NONE`: Successful
+  /// - `TIZEN_CORE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `tizen_core_event_object_create()`
+  /// - `tizen_core_event_object_set_destroy_cb()`
+  ///
+  /// ```
   /// #include <tizen_core.h>
   /// {
   /// tizen_core_event_object_h object = NULL;
@@ -1103,10 +1278,7 @@ class Tizen90TizenCore {
   /// if (ret != TIZEN_CORE_ERROR_NONE)
   /// dlog_print(DLOG_ERROR, LOG_TAG, "Failed to destroy event object");
   /// }
-  /// @endcode
-  ///
-  /// @see tizen_core_event_object_create()
-  /// @see tizen_core_event_object_set_destroy_cb()
+  /// ```
   int tizen_core_event_object_destroy(
     tizen_core_event_object_h object,
   ) {
@@ -1122,18 +1294,27 @@ class Tizen90TizenCore {
       _tizen_core_event_object_destroyPtr
           .asFunction<int Function(tizen_core_event_object_h)>();
 
-  /// @brief Sets the destroy callback function to invoke when the event object is destroyed.
-  /// @since_tizen 9.0
+  /// Sets the destroy callback function to invoke when the event object is destroyed.
   ///
-  /// @param[in] object The tizen core event object handle
-  /// @param[in] callback The callback function to be invoked when the event object is destroyed
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TIZEN_CORE_ERROR_NONE Successful
-  /// @retval #TIZEN_CORE_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @code
+  /// **Parameters:**
+  /// - `object` (in): The tizen core event object handle
+  /// - `callback` (in): The callback function to be invoked when the event object is destroyed
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TIZEN_CORE_ERROR_NONE`: Successful
+  /// - `TIZEN_CORE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `tizen_core_event_object_destroy()`
+  ///
+  /// ```
   /// #include <tizen_core.h>
   /// static void object_destroy_cb(void *data, void *user_data)
   /// {
@@ -1159,9 +1340,7 @@ class Tizen90TizenCore {
   ///
   /// return object;
   /// }
-  /// @endcode
-  ///
-  /// @see tizen_core_event_object_destroy()
+  /// ```
   int tizen_core_event_object_set_destroy_cb(
     tizen_core_event_object_h object,
     tizen_core_event_object_destroy_cb callback,
@@ -1184,17 +1363,26 @@ class Tizen90TizenCore {
           int Function(tizen_core_event_object_h,
               tizen_core_event_object_destroy_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Gets the event ID from the tizen core event object handle.
-  /// @since_tizen 9.0
+  /// Gets the event ID from the tizen core event object handle.
   ///
-  /// @param[in] object The tizen core event object handle
-  /// @param[out] id The event ID
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TIZEN_CORE_ERROR_NONE Successful
-  /// @retval #TIZEN_CORE_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @code
+  /// **Parameters:**
+  /// - `object` (in): The tizen core event object handle
+  /// - `id` (out): The event ID
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TIZEN_CORE_ERROR_NONE`: Successful
+  /// - `TIZEN_CORE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `tizen_core_event_object_create()`
+  ///
+  /// ```
   /// #include <tizen_core.h>
   /// {
   /// tizen_core_event_object_h object = NULL;
@@ -1209,9 +1397,7 @@ class Tizen90TizenCore {
   ///
   /// tizen_core_event_object_destroy(object);
   /// }
-  /// @endcode
-  ///
-  /// @see tizen_core_event_object_create()
+  /// ```
   int tizen_core_event_object_get_id(
     tizen_core_event_object_h object,
     ffi.Pointer<ffi.Int> id,
@@ -1230,20 +1416,28 @@ class Tizen90TizenCore {
       _tizen_core_event_object_get_idPtr.asFunction<
           int Function(tizen_core_event_object_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the event data from the tizen core event object handle.
-  /// @since_tizen 9.0
-  /// @remarks The @a data should not be released if the @a object is emitted
-  /// using tizen_core_event_emit().
-  /// @remarks The @a data is available until the @a object is released.
+  /// Gets the event data from the tizen core event object handle.
   ///
-  /// @param[in] object The tizen core event object handle
-  /// @param[out] data The event data
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TIZEN_CORE_ERROR_NONE Successful
-  /// @retval #TIZEN_CORE_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @code
+  /// **Remarks:**
+  /// - The `data` should not be released if the `object` is emitted
+  /// - using tizen_core_event_emit().
+  /// - The `data` is available until the `object` is released.
+  ///
+  /// **Parameters:**
+  /// - `object` (in): The tizen core event object handle
+  /// - `data` (out): The event data
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TIZEN_CORE_ERROR_NONE`: Successful
+  /// - `TIZEN_CORE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// ```
   /// #include <tizen_core.h>
   /// static void event_object_destroy_cb(void *event_data, void *user_data)
   /// {
@@ -1269,7 +1463,7 @@ class Tizen90TizenCore {
   ///
   /// tizen_core_event_object_destroy(object);
   /// }
-  /// @endcode
+  /// ```
   int tizen_core_event_object_get_data(
     tizen_core_event_object_h object,
     ffi.Pointer<ffi.Pointer<ffi.Void>> data,
@@ -1290,11 +1484,14 @@ class Tizen90TizenCore {
           int Function(
               tizen_core_event_object_h, ffi.Pointer<ffi.Pointer<ffi.Void>>)>();
 
-  /// @brief Initializes the tizen core.
-  /// @since_tizen 9.0
+  /// Initializes the tizen core.
   ///
-  /// @see tizen_core_shutdown()
-  /// @see tizen_core_ready()
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **See also:**
+  /// - `tizen_core_shutdown()`
+  /// - `tizen_core_ready()`
   void tizen_core_init() {
     return _tizen_core_init();
   }
@@ -1304,11 +1501,14 @@ class Tizen90TizenCore {
   late final _tizen_core_init =
       _tizen_core_initPtr.asFunction<void Function()>();
 
-  /// @brief Shutdowns the tizen core.
-  /// @since_tizen 9.0
+  /// Shutdowns the tizen core.
   ///
-  /// @see tizen_core_init()
-  /// @see tizen_core_ready()
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **See also:**
+  /// - `tizen_core_init()`
+  /// - `tizen_core_ready()`
   void tizen_core_shutdown() {
     return _tizen_core_shutdown();
   }
@@ -1318,13 +1518,17 @@ class Tizen90TizenCore {
   late final _tizen_core_shutdown =
       _tizen_core_shutdownPtr.asFunction<void Function()>();
 
-  /// @brief Checks whether the tizen core is ready or not.
-  /// @since_tizen 9.0
+  /// Checks whether the tizen core is ready or not.
   ///
-  /// @return @c true if the tizen core is ready, otherwise @c false.
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @see tizen_core_init()
-  /// @see tizen_core_shutdown()
+  /// **Returns:**
+  /// - `true` if the tizen core is ready, otherwise `false`.
+  ///
+  /// **See also:**
+  /// - `tizen_core_init()`
+  /// - `tizen_core_shutdown()`
   bool tizen_core_ready() {
     return _tizen_core_ready();
   }
@@ -1334,23 +1538,34 @@ class Tizen90TizenCore {
   late final _tizen_core_ready =
       _tizen_core_readyPtr.asFunction<bool Function()>();
 
-  /// @brief Creates the tizen core task handle.
-  /// @details If the @a name is "main", the @a use_thread should be set to 'false'.
-  /// Otherwise, it returns #TIZEN_CORE_ERROR_INVALID_PARAMETER.
-  /// @since_tizen 9.0
-  /// @remarks The @a task should be released using tizen_core_task_destroy().
+  /// Creates the tizen core task handle.
   ///
-  /// @param[in] name The name of the task
-  /// @param[in] use_thread true, if the task should be run in a separate thread, otherwise @c false
-  /// @param[out] task The tizen core task handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TIZEN_CORE_ERROR_NONE Successful
-  /// @retval #TIZEN_CORE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TIZEN_CORE_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #TIZEN_CORE_ERROR_INVALID_CONTEXT Invalid context
+  /// If the `name` is "main", the `use_thread` should be set to 'false'. Otherwise, it returns `TIZEN_CORE_ERROR_INVALID_PARAMETER`.
   ///
-  /// @code
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Remarks:**
+  /// - The `task` should be released using tizen_core_task_destroy().
+  ///
+  /// **Parameters:**
+  /// - `name` (in): The name of the task
+  /// - `use_thread` (in): true, if the task should be run in a separate thread, otherwise `false`
+  /// - `task` (out): The tizen core task handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TIZEN_CORE_ERROR_NONE`: Successful
+  /// - `TIZEN_CORE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TIZEN_CORE_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `TIZEN_CORE_ERROR_INVALID_CONTEXT`: Invalid context
+  ///
+  /// **See also:**
+  /// - `tizen_core_task_destroy()`
+  ///
+  /// ```
   /// #include <tizen_core.h>
   /// {
   /// tizen_core_task_h task = NULL;
@@ -1363,9 +1578,7 @@ class Tizen90TizenCore {
   /// return -1;
   /// }
   /// }
-  /// @endcode
-  ///
-  /// @see tizen_core_task_destroy()
+  /// ```
   int tizen_core_task_create(
     ffi.Pointer<ffi.Char> name,
     bool use_thread,
@@ -1386,16 +1599,25 @@ class Tizen90TizenCore {
       int Function(
           ffi.Pointer<ffi.Char>, bool, ffi.Pointer<tizen_core_task_h>)>();
 
-  /// @brief Destroys the tizen core task handle.
-  /// @since_tizen 9.0
+  /// Destroys the tizen core task handle.
   ///
-  /// @param[in] task The tizen core task handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TIZEN_CORE_ERROR_NONE Successful
-  /// @retval #TIZEN_CORE_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @code
+  /// **Parameters:**
+  /// - `task` (in): The tizen core task handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TIZEN_CORE_ERROR_NONE`: Successful
+  /// - `TIZEN_CORE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `tizen_core_task_create()`
+  ///
+  /// ```
   /// #include <tizen_core.h>
   /// {
   /// tizen_core_task_h task = NULL;
@@ -1410,9 +1632,7 @@ class Tizen90TizenCore {
   /// if (ret != TIZEN_CORE_ERROR_NONE)
   /// return ret;
   /// }
-  /// @endcode
-  ///
-  /// @see tizen_core_task_create()
+  /// ```
   int tizen_core_task_destroy(
     tizen_core_task_h task,
   ) {
@@ -1427,17 +1647,26 @@ class Tizen90TizenCore {
   late final _tizen_core_task_destroy =
       _tizen_core_task_destroyPtr.asFunction<int Function(tizen_core_task_h)>();
 
-  /// @brief Runs the main loop of the tizen core task.
-  /// @since_tizen 9.0
+  /// Runs the main loop of the tizen core task.
   ///
-  /// @param[in] task The tizen core task handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TIZEN_CORE_ERROR_NONE Successful
-  /// @retval #TIZEN_CORE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TIZEN_CORE_ERROR_INVALID_CONTEXT Invalid context
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @code
+  /// **Parameters:**
+  /// - `task` (in): The tizen core task handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TIZEN_CORE_ERROR_NONE`: Successful
+  /// - `TIZEN_CORE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TIZEN_CORE_ERROR_INVALID_CONTEXT`: Invalid context
+  ///
+  /// **See also:**
+  /// - `tizen_core_task_quit()`
+  ///
+  /// ```
   /// #include <tizen_core.h>
   /// {
   /// tizen_core_task_h task = NULL;
@@ -1454,9 +1683,7 @@ class Tizen90TizenCore {
   /// if (ret != TIZEN_CORE_ERROR_NONE)
   /// dlog_print(DLOG_ERROR, LOG_TAG, "Failed to run task");
   /// }
-  /// @endcode
-  ///
-  /// @see tizen_core_task_quit()
+  /// ```
   int tizen_core_task_run(
     tizen_core_task_h task,
   ) {
@@ -1471,18 +1698,27 @@ class Tizen90TizenCore {
   late final _tizen_core_task_run =
       _tizen_core_task_runPtr.asFunction<int Function(tizen_core_task_h)>();
 
-  /// @brief Checks whether the tizen core task is running or not.
-  /// @since_tizen 9.0
+  /// Checks whether the tizen core task is running or not.
   ///
-  /// @param[in] task The tizen core task handle
-  /// @param[out] running @c true if the core task is running, \n
-  /// otherwise @c false if not running
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TIZEN_CORE_ERROR_NONE Successful
-  /// @retval #TIZEN_CORE_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @code
+  /// **Parameters:**
+  /// - `task` (in): The tizen core task handle
+  /// - `running` (out): `true` if the core task is running, otherwise `false` if not running
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TIZEN_CORE_ERROR_NONE`: Successful
+  /// - `TIZEN_CORE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `tizen_core_task_run()`
+  /// - `tizen_core_task_quit()`
+  ///
+  /// ```
   /// #include <tizen_core.h>
   /// {
   /// tizen_core_task_h task = NULL;
@@ -1510,10 +1746,7 @@ class Tizen90TizenCore {
   /// else
   /// dlog_print(DLOG_INFO, LOG_TAG, "worker task is %s", running ? "running" : "not running");
   /// }
-  /// @endcode
-  ///
-  /// @see tizen_core_task_run()
-  /// @see tizen_core_task_quit()
+  /// ```
   int tizen_core_task_is_running(
     tizen_core_task_h task,
     ffi.Pointer<ffi.Bool> running,
@@ -1531,16 +1764,25 @@ class Tizen90TizenCore {
   late final _tizen_core_task_is_running = _tizen_core_task_is_runningPtr
       .asFunction<int Function(tizen_core_task_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Exits the main loop of the tizen core task.
-  /// @since_tizen 9.0
+  /// Exits the main loop of the tizen core task.
   ///
-  /// @param[in] task The tizen core task handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TIZEN_CORE_ERROR_NONE Successful
-  /// @retval #TIZEN_CORE_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @code
+  /// **Parameters:**
+  /// - `task` (in): The tizen core task handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TIZEN_CORE_ERROR_NONE`: Successful
+  /// - `TIZEN_CORE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `tizen_core_task_run()`
+  ///
+  /// ```
   /// #include <tizen_core.h>
   /// {
   /// tizen_core_task_h task = NULL;
@@ -1553,9 +1795,7 @@ class Tizen90TizenCore {
   /// if (ret != TIZEN_CORE_ERROR_NONE)
   /// dlog_print(DLOG_ERROR, LOG_TAG, "Failed to exit the main loop");
   /// }
-  /// @endcode
-  ///
-  /// @see tizen_core_task_run()
+  /// ```
   int tizen_core_task_quit(
     tizen_core_task_h task,
   ) {
@@ -1570,19 +1810,27 @@ class Tizen90TizenCore {
   late final _tizen_core_task_quit =
       _tizen_core_task_quitPtr.asFunction<int Function(tizen_core_task_h)>();
 
-  /// @brief Gets the tizen core from the tizen core task handle.
-  /// @since_tizen 9.0
-  /// @remarks The @a core should not be released.
-  /// @remarks The @a core is available until the @a task is released.
+  /// Gets the tizen core from the tizen core task handle.
   ///
-  /// @param[in] task The tizen core task handle
-  /// @param[out] core The tizen core handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TIZEN_CORE_ERROR_NONE Successful
-  /// @retval #TIZEN_CORE_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @code
+  /// **Remarks:**
+  /// - The `core` should not be released.
+  /// - The `core` is available until the `task` is released.
+  ///
+  /// **Parameters:**
+  /// - `task` (in): The tizen core task handle
+  /// - `core` (out): The tizen core handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TIZEN_CORE_ERROR_NONE`: Successful
+  /// - `TIZEN_CORE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// ```
   /// #include <tizen_core.h>
   /// {
   /// tizen_core_task_h task = NULL;
@@ -1595,7 +1843,7 @@ class Tizen90TizenCore {
   /// if (ret != TIZEN_CORE_ERROR_NONE)
   /// dlog_print(DLOG_ERROR, LOG_TAG, "Failed to get tizen core");
   /// }
-  /// @endcode
+  /// ```
   int tizen_core_task_get_tizen_core(
     tizen_core_task_h task,
     ffi.Pointer<tizen_core_h> core,
@@ -1614,20 +1862,28 @@ class Tizen90TizenCore {
       _tizen_core_task_get_tizen_corePtr.asFunction<
           int Function(tizen_core_task_h, ffi.Pointer<tizen_core_h>)>();
 
-  /// @brief Finds the tizen core from the name.
-  /// @since_tizen 9.0
-  /// @remarks The @a core should not be released.
-  /// @remarks The @a core is available until #tizen_core_task_h of the @a core is released.
+  /// Finds the tizen core from the name.
   ///
-  /// @param[in] name The tizen core task name
-  /// @param[out] core The tizen core handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TIZEN_CORE_ERROR_NONE Successful
-  /// @retval #TIZEN_CORE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TIZEN_CORE_ERROR_INVALID_CONTEXT Invalid context
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @code
+  /// **Remarks:**
+  /// - The `core` should not be released.
+  /// - The `core` is available until `tizen_core_task_h` of the `core` is released.
+  ///
+  /// **Parameters:**
+  /// - `name` (in): The tizen core task name
+  /// - `core` (out): The tizen core handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TIZEN_CORE_ERROR_NONE`: Successful
+  /// - `TIZEN_CORE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TIZEN_CORE_ERROR_INVALID_CONTEXT`: Invalid context
+  ///
+  /// ```
   /// #include <tizen_core.h>
   /// {
   /// tizen_core_h core = NULL;
@@ -1637,7 +1893,7 @@ class Tizen90TizenCore {
   /// if (ret != TIZEN_CORE_ERROR_NONE)
   /// dlog_print(DLOG_ERROR, LOG_TAG, "Failed to find tizen core");
   /// }
-  /// @endcode
+  /// ```
   int tizen_core_find(
     ffi.Pointer<ffi.Char> name,
     ffi.Pointer<tizen_core_h> core,
@@ -1655,19 +1911,27 @@ class Tizen90TizenCore {
   late final _tizen_core_find = _tizen_core_findPtr.asFunction<
       int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<tizen_core_h>)>();
 
-  /// @brief Finds the tizen core from this thread.
-  /// @since_tizen 9.0
-  /// @remarks The @a core should not be released.
-  /// @remarks The @a core is available until #tizen_core_task_h of the @a core is released.
+  /// Finds the tizen core from this thread.
   ///
-  /// @param[out] core The tizen core handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TIZEN_CORE_ERROR_NONE Successful
-  /// @retval #TIZEN_CORE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TIZEN_CORE_ERROR_INVALID_CONTEXT Invalid context
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @code
+  /// **Remarks:**
+  /// - The `core` should not be released.
+  /// - The `core` is available until `tizen_core_task_h` of the `core` is released.
+  ///
+  /// **Parameters:**
+  /// - `core` (out): The tizen core handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TIZEN_CORE_ERROR_NONE`: Successful
+  /// - `TIZEN_CORE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TIZEN_CORE_ERROR_INVALID_CONTEXT`: Invalid context
+  ///
+  /// ```
   /// #include <tizen_core.h>
   /// {
   /// tizen_core_h core = NULL;
@@ -1677,7 +1941,7 @@ class Tizen90TizenCore {
   /// if (ret != TIZEN_CORE_ERROR_NONE)
   /// dlog_print(DLOG_ERROR, LOG_TAG, "Failed to find tizen core from this thread");
   /// }
-  /// @endcode
+  /// ```
   int tizen_core_find_from_this_thread(
     ffi.Pointer<tizen_core_h> core,
   ) {
@@ -1693,26 +1957,35 @@ class Tizen90TizenCore {
       _tizen_core_find_from_this_threadPtr
           .asFunction<int Function(ffi.Pointer<tizen_core_h>)>();
 
-  /// @brief Adds an idle job to the tizen core.
-  /// @details The callback function will be called whenever there are
-  /// no higher priority events pending to the tizen core.
-  /// The given callback function is called repeatedly until it returns false,
-  /// at which point the idler @a source is automatically destroyed and
-  /// the callback function will not be called again.
-  /// @since_tizen 9.0
-  /// @remarks The @a source should be released using tizen_core_remove_source().
+  /// Adds an idle job to the tizen core.
   ///
-  /// @param[in] core The tizen core handle
-  /// @param[in] callback The callback function to be invoked when the idle job is emitted
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @param[out] source The tizen core source handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TIZEN_CORE_ERROR_NONE Successful
-  /// @retval #TIZEN_CORE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TIZEN_CORE_ERROR_OUT_OF_MEMORY Out of memory
+  /// The callback function will be called whenever there are no higher priority events pending to the tizen core. The given callback function is called repeatedly until it returns false, at which point the idler `source` is automatically destroyed and the callback function will not be called again.
   ///
-  /// @code
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Remarks:**
+  /// - The `source` should be released using tizen_core_remove_source().
+  ///
+  /// **Parameters:**
+  /// - `core` (in): The tizen core handle
+  /// - `callback` (in): The callback function to be invoked when the idle job is emitted
+  /// - `user_data` (in): The user data to be passed to the callback function
+  /// - `source` (out): The tizen core source handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TIZEN_CORE_ERROR_NONE`: Successful
+  /// - `TIZEN_CORE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TIZEN_CORE_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `tizen_core_remove_source()`
+  /// - `tizen_core_task_cb()`
+  ///
+  /// ```
   /// #include <tizen_core.h>
   /// static bool idle_cb(void *user_data)
   /// {
@@ -1735,10 +2008,7 @@ class Tizen90TizenCore {
   ///
   /// return source;
   /// }
-  /// @endcode
-  ///
-  /// @see tizen_core_remove_source()
-  /// @see tizen_core_task_cb()
+  /// ```
   int tizen_core_add_idle_job(
     tizen_core_h core,
     tizen_core_task_cb callback,
@@ -1764,26 +2034,36 @@ class Tizen90TizenCore {
       int Function(tizen_core_h, tizen_core_task_cb, ffi.Pointer<ffi.Void>,
           ffi.Pointer<tizen_core_source_h>)>();
 
-  /// @brief Adds a timer to the tizen core.
-  /// @details The callback function will be called at regular intervals.
-  /// The given callback function is called repeatedly until it returns false,
-  /// at which point the timer @a source is automatically destroyed and
-  /// the callback function will not be called again.
-  /// @since_tizen 9.0
-  /// @remarks The @a source should be released using tizen_core_remove_source().
+  /// Adds a timer to the tizen core.
   ///
-  /// @param[in] core The tizen core handle
-  /// @param[in] interval The interval of the timer in milliseconds
-  /// @param[in] callback The callback function to be invoked when the timer is expired
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @param[out] source The tizen core source handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TIZEN_CORE_ERROR_NONE Successful
-  /// @retval #TIZEN_CORE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TIZEN_CORE_ERROR_OUT_OF_MEMORY Out of memory
+  /// The callback function will be called at regular intervals. The given callback function is called repeatedly until it returns false, at which point the timer `source` is automatically destroyed and the callback function will not be called again.
   ///
-  /// @code
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Remarks:**
+  /// - The `source` should be released using tizen_core_remove_source().
+  ///
+  /// **Parameters:**
+  /// - `core` (in): The tizen core handle
+  /// - `interval` (in): The interval of the timer in milliseconds
+  /// - `callback` (in): The callback function to be invoked when the timer is expired
+  /// - `user_data` (in): The user data to be passed to the callback function
+  /// - `source` (out): The tizen core source handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TIZEN_CORE_ERROR_NONE`: Successful
+  /// - `TIZEN_CORE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TIZEN_CORE_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `tizen_core_remove_source()`
+  /// - `tizen_core_task_cb()`
+  ///
+  /// ```
   /// #include <tizen_core.h>
   ///
   /// static bool timeout_cb(void *user_data)
@@ -1807,10 +2087,7 @@ class Tizen90TizenCore {
   ///
   /// return source;
   /// }
-  /// @endcode
-  ///
-  /// @see tizen_core_remove_source()
-  /// @see tizen_core_task_cb()
+  /// ```
   int tizen_core_add_timer(
     tizen_core_h core,
     int interval,
@@ -1839,23 +2116,35 @@ class Tizen90TizenCore {
       int Function(tizen_core_h, int, tizen_core_task_cb, ffi.Pointer<ffi.Void>,
           ffi.Pointer<tizen_core_source_h>)>();
 
-  /// @brief Adds a channel receiver to the tizen core.
-  /// @details The callback function will be called when the channel event is received.
-  /// @since_tizen 9.0
-  /// @remarks The @a source should be released using tizen_core_remove_source().
+  /// Adds a channel receiver to the tizen core.
   ///
-  /// @param[in] core The tizen core handle
-  /// @param[in] receiver The channel receiver handle
-  /// @param[in] callback The callback function to be invoked when the channel event is received
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @param[out] source The tizen core source handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TIZEN_CORE_ERROR_NONE Successful
-  /// @retval #TIZEN_CORE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TIZEN_CORE_ERROR_OUT_OF_MEMORY Out of memory
+  /// The callback function will be called when the channel event is received.
   ///
-  /// @code
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Remarks:**
+  /// - The `source` should be released using tizen_core_remove_source().
+  ///
+  /// **Parameters:**
+  /// - `core` (in): The tizen core handle
+  /// - `receiver` (in): The channel receiver handle
+  /// - `callback` (in): The callback function to be invoked when the channel event is received
+  /// - `user_data` (in): The user data to be passed to the callback function
+  /// - `source` (out): The tizen core source handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TIZEN_CORE_ERROR_NONE`: Successful
+  /// - `TIZEN_CORE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TIZEN_CORE_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `tizen_core_remove_source()`
+  ///
+  /// ```
   /// #include <tizen_core.h>
   /// static void channel_receiver_cb(tizen_core_channel_object_h object, void *user_data)
   /// {
@@ -1877,9 +2166,7 @@ class Tizen90TizenCore {
   ///
   /// return source;
   /// }
-  /// @endcode
-  ///
-  /// @see tizen_core_remove_source()
+  /// ```
   int tizen_core_add_channel(
     tizen_core_h core,
     tizen_core_channel_receiver_h receiver,
@@ -1912,27 +2199,35 @@ class Tizen90TizenCore {
           ffi.Pointer<ffi.Void>,
           ffi.Pointer<tizen_core_source_h>)>();
 
-  /// @brief Adds an event to the tizen core.
-  /// @details The event handler added to the event handle is called
-  /// using the corresponding core loop when the event emit occurs.
-  /// When this function is called the ownership of the @a event is moved
-  /// to the tizen core. The @a event will be released when the @a source
-  /// is removed using tizen_core_remove_source().
-  /// @since_tizen 9.0
-  /// @remarks The @a source should be released using tizen_core_remove_source().
-  /// @remarks The @a event MUST not be released using tizen_core_event_destroy()
-  /// after adding to the tizen core using this function.
+  /// Adds an event to the tizen core.
   ///
-  /// @param[in] core The tizen core handle
-  /// @param[in] event The tizen core event handle
-  /// @param[out] source The tizen core source handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TIZEN_CORE_ERROR_NONE Successful
-  /// @retval #TIZEN_CORE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TIZEN_CORE_ERROR_OUT_OF_MEMORY Out of memory
+  /// The event handler added to the event handle is called using the corresponding core loop when the event emit occurs. When this function is called the ownership of the `event` is moved to the tizen core. The `event` will be released when the `source` is removed using tizen_core_remove_source().
   ///
-  /// @code
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Remarks:**
+  /// - The `source` should be released using tizen_core_remove_source().
+  /// - The `event` MUST not be released using tizen_core_event_destroy()
+  /// - after adding to the tizen core using this function.
+  ///
+  /// **Parameters:**
+  /// - `core` (in): The tizen core handle
+  /// - `event` (in): The tizen core event handle
+  /// - `source` (out): The tizen core source handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TIZEN_CORE_ERROR_NONE`: Successful
+  /// - `TIZEN_CORE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TIZEN_CORE_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `tizen_core_remove_source()`
+  ///
+  /// ```
   /// #include <tizen_core.h>
   /// static tizen_core_source_h add_event_source(tizen_core_event_h event)
   /// {
@@ -1949,9 +2244,7 @@ class Tizen90TizenCore {
   ///
   /// return source;
   /// }
-  /// @endcode
-  ///
-  /// @see tizen_core_remove_source()
+  /// ```
   int tizen_core_add_event(
     tizen_core_h core,
     tizen_core_event_h event,
@@ -1972,18 +2265,28 @@ class Tizen90TizenCore {
       int Function(tizen_core_h, tizen_core_event_h,
           ffi.Pointer<tizen_core_source_h>)>();
 
-  /// @brief Emits the event to the tizen core.
-  /// @details The event is emitted to the event handler registered in the corresponding tizen_core.
-  /// @since_tizen 9.0
+  /// Emits the event to the tizen core.
   ///
-  /// @param[in] core The tizen core handle
-  /// @param[in] object The tizen core event object handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TIZEN_CORE_ERROR_NONE Successful
-  /// @retval #TIZEN_CORE_ERROR_INVALID_PARAMETER Invalid parameter
+  /// The event is emitted to the event handler registered in the corresponding tizen_core.
   ///
-  /// @code
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Parameters:**
+  /// - `core` (in): The tizen core handle
+  /// - `object` (in): The tizen core event object handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TIZEN_CORE_ERROR_NONE`: Successful
+  /// - `TIZEN_CORE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `tizen_core_add_event()`
+  ///
+  /// ```
   /// #include <tizen_core.h>
   /// static int emit_event(tizen_core_event_object_h object)
   /// {
@@ -1997,9 +2300,7 @@ class Tizen90TizenCore {
   ///
   /// return ret;
   /// }
-  /// @endcode
-  ///
-  /// @see tizen_core_add_event()
+  /// ```
   int tizen_core_emit_event(
     tizen_core_h core,
     tizen_core_event_object_h object,
@@ -2017,18 +2318,29 @@ class Tizen90TizenCore {
   late final _tizen_core_emit_event = _tizen_core_emit_eventPtr
       .asFunction<int Function(tizen_core_h, tizen_core_event_object_h)>();
 
-  /// @brief Adds a source to the tizen core.
-  /// @since_tizen 9.0
-  /// @remarks The @a source should be removed using tizen_core_remove_source().
+  /// Adds a source to the tizen core.
   ///
-  /// @param[in] core The tizen core handle
-  /// @param[in] source The tizen core source handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TIZEN_CORE_ERROR_NONE Successful
-  /// @retval #TIZEN_CORE_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @code
+  /// **Remarks:**
+  /// - The `source` should be removed using tizen_core_remove_source().
+  ///
+  /// **Parameters:**
+  /// - `core` (in): The tizen core handle
+  /// - `source` (in): The tizen core source handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TIZEN_CORE_ERROR_NONE`: Successful
+  /// - `TIZEN_CORE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `tizen_core_remove_source()`
+  ///
+  /// ```
   /// #include <tizen_core.h>
   /// {
   /// tizen_core_source_h source = NULL;
@@ -2041,9 +2353,7 @@ class Tizen90TizenCore {
   /// if (ret != TIZEN_CORE_ERROR_NONE)
   /// dlog_print(DLOG_ERROR, LOG_TAG, "Failed to add source");
   /// }
-  /// @endcode
-  ///
-  /// @see tizen_core_remove_source()
+  /// ```
   int tizen_core_add_source(
     tizen_core_h core,
     tizen_core_source_h source,
@@ -2061,20 +2371,31 @@ class Tizen90TizenCore {
   late final _tizen_core_add_source = _tizen_core_add_sourcePtr
       .asFunction<int Function(tizen_core_h, tizen_core_source_h)>();
 
-  /// @brief Removes the source from the tizen core.
-  /// @since_tizen 9.0
-  /// @remarks If the source is not added to the tizen core, this function returns
-  /// #TIZEN_CORE_ERROR_INVALID_CONTEXT.
+  /// Removes the source from the tizen core.
   ///
-  /// @param[in] core The tizen core handle
-  /// @param[in] source The tizen core source handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TIZEN_CORE_ERROR_NONE Successful
-  /// @retval #TIZEN_CORE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TIZEN_CORE_ERROR_INVALID_CONTEXT Invalid context
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @code
+  /// **Remarks:**
+  /// - If the source is not added to the tizen core, this function returns
+  /// - `TIZEN_CORE_ERROR_INVALID_CONTEXT`.
+  ///
+  /// **Parameters:**
+  /// - `core` (in): The tizen core handle
+  /// - `source` (in): The tizen core source handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TIZEN_CORE_ERROR_NONE`: Successful
+  /// - `TIZEN_CORE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TIZEN_CORE_ERROR_INVALID_CONTEXT`: Invalid context
+  ///
+  /// **See also:**
+  /// - `tizen_core_add_source()`
+  ///
+  /// ```
   /// #include <tizen_core.h>
   /// static void remove_source(tizen_core_source_h source)
   /// {
@@ -2088,9 +2409,7 @@ class Tizen90TizenCore {
   /// else
   /// dlog_print(DLOG_INFO, LOG_TAG, "source is removed");
   /// }
-  /// @endcode
-  ///
-  /// @see tizen_core_add_source()
+  /// ```
   int tizen_core_remove_source(
     tizen_core_h core,
     tizen_core_source_h source,
@@ -2108,19 +2427,32 @@ class Tizen90TizenCore {
   late final _tizen_core_remove_source = _tizen_core_remove_sourcePtr
       .asFunction<int Function(tizen_core_h, tizen_core_source_h)>();
 
-  /// @brief Creates a tizen core source handle.
-  /// @since_tizen 9.0
-  /// @remarks The @a source should be released using tizen_core_source_destroy().
+  /// Creates a tizen core source handle.
   ///
-  /// @param[out] source The tizen core source handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TIZEN_CORE_ERROR_NONE Successful
-  /// @retval #TIZEN_CORE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TIZEN_CORE_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #TIZEN_CORE_ERROR_INVALID_CONTEXT Invalid context
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @code
+  /// **Remarks:**
+  /// - The `source` should be released using tizen_core_source_destroy().
+  ///
+  /// **Parameters:**
+  /// - `source` (out): The tizen core source handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TIZEN_CORE_ERROR_NONE`: Successful
+  /// - `TIZEN_CORE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TIZEN_CORE_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `TIZEN_CORE_ERROR_INVALID_CONTEXT`: Invalid context
+  ///
+  /// **See also:**
+  /// - `tizen_core_add_source()`
+  /// - `tizen_core_remove_source()`
+  /// - `tizen_core_source_destroy()`
+  ///
+  /// ```
   /// #include <tizen_core.h>
   /// {
   /// tizen_core_source_h source = NULL;
@@ -2132,11 +2464,7 @@ class Tizen90TizenCore {
   /// return ret;
   /// }
   /// }
-  /// @endcode
-  ///
-  /// @see tizen_core_add_source()
-  /// @see tizen_core_remove_source()
-  /// @see tizen_core_source_destroy()
+  /// ```
   int tizen_core_source_create(
     ffi.Pointer<tizen_core_source_h> source,
   ) {
@@ -2152,16 +2480,26 @@ class Tizen90TizenCore {
   late final _tizen_core_source_create = _tizen_core_source_createPtr
       .asFunction<int Function(ffi.Pointer<tizen_core_source_h>)>();
 
-  /// @brief Destroys the tizen core source handle.
-  /// @since_tizen 9.0
+  /// Destroys the tizen core source handle.
   ///
-  /// @param[in] source The tizen core source handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TIZEN_CORE_ERROR_NONE Successful
-  /// @retval #TIZEN_CORE_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @code
+  /// **Parameters:**
+  /// - `source` (in): The tizen core source handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TIZEN_CORE_ERROR_NONE`: Successful
+  /// - `TIZEN_CORE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `tizen_core_source_create()`
+  /// - `tizen_core_remove_source()`
+  ///
+  /// ```
   /// #include <tizen_core.h>
   /// {
   /// tizen_core_source_h source = NULL;
@@ -2177,9 +2515,7 @@ class Tizen90TizenCore {
   /// if (ret != TIZEN_CORE_ERROR_NONE)
   /// dlog_print(DLOG_ERROR, LOG_TAG, "Failed to destroy source");
   /// }
-  /// @endcode
-  /// @see tizen_core_source_create()
-  /// @see tizen_core_remove_source()
+  /// ```
   int tizen_core_source_destroy(
     tizen_core_source_h source,
   ) {
@@ -2194,19 +2530,34 @@ class Tizen90TizenCore {
   late final _tizen_core_source_destroy = _tizen_core_source_destroyPtr
       .asFunction<int Function(tizen_core_source_h)>();
 
-  /// @brief Waits for some events on the file descriptor.
-  /// @details The tizen core source must be created using the tizen_core_source_create().
-  /// @since_tizen 9.0
+  /// Waits for some events on the file descriptor.
   ///
-  /// @param[in] source The tizen core source handle
-  /// @param[in] poll_fd The poll fd handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TIZEN_CORE_ERROR_NONE Successful
-  /// @retval #TIZEN_CORE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TIZEN_CORE_ERROR_INVALID_CONTEXT Invalid context
+  /// The tizen core source must be created using the tizen_core_source_create().
   ///
-  /// @code
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Parameters:**
+  /// - `source` (in): The tizen core source handle
+  /// - `poll_fd` (in): The poll fd handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TIZEN_CORE_ERROR_NONE`: Successful
+  /// - `TIZEN_CORE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TIZEN_CORE_ERROR_INVALID_CONTEXT`: Invalid context
+  ///
+  /// **See also:**
+  /// - `tizen_core_source_create()`
+  /// - `tizen_core_source_set_prepare_cb()`
+  /// - `tizen_core_source_set_check_cb()`
+  /// - `tizen_core_source_set_dispatch_cb()`
+  /// - `tizen_core_source_set_finalize_cb()`
+  /// - `tizen_core_source_remove_poll()`
+  ///
+  /// ```
   /// #include <tizen_core.h>
   /// static tizen_core_poll_fd_h add_poll_fd_to_source(tizen_core_source_h source, int fd)
   /// {
@@ -2225,14 +2576,7 @@ class Tizen90TizenCore {
   ///
   /// return poll_fd;
   /// }
-  /// @endcode
-  ///
-  /// @see tizen_core_source_create()
-  /// @see tizen_core_source_set_prepare_cb()
-  /// @see tizen_core_source_set_check_cb()
-  /// @see tizen_core_source_set_dispatch_cb()
-  /// @see tizen_core_source_set_finalize_cb()
-  /// @see tizen_core_source_remove_poll()
+  /// ```
   int tizen_core_source_add_poll(
     tizen_core_source_h source,
     tizen_core_poll_fd_h poll_fd,
@@ -2250,18 +2594,28 @@ class Tizen90TizenCore {
   late final _tizen_core_source_add_poll = _tizen_core_source_add_pollPtr
       .asFunction<int Function(tizen_core_source_h, tizen_core_poll_fd_h)>();
 
-  /// @brief Removes to wait for some events on the file descriptor.
-  /// @since_tizen 9.0
+  /// Removes to wait for some events on the file descriptor.
   ///
-  /// @param[in] source The tizen core source handle
-  /// @param[in] poll_fd The poll fd handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TIZEN_CORE_ERROR_NONE Successful
-  /// @retval #TIZEN_CORE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TIZEN_CORE_ERROR_INVALID_CONTEXT Invalid context
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @code
+  /// **Parameters:**
+  /// - `source` (in): The tizen core source handle
+  /// - `poll_fd` (in): The poll fd handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TIZEN_CORE_ERROR_NONE`: Successful
+  /// - `TIZEN_CORE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TIZEN_CORE_ERROR_INVALID_CONTEXT`: Invalid context
+  ///
+  /// **See also:**
+  /// - `tizen_core_source_create()`
+  /// - `tizen_core_source_add_poll()`
+  ///
+  /// ```
   /// #include <tizen_core.h>
   /// static void remove_poll_from_source(tizen_core_source_h source, tizen_core_poll_fd_h poll_fd)
   /// {
@@ -2273,10 +2627,7 @@ class Tizen90TizenCore {
   /// else
   /// dlog_print(DLOG_INFO, LOG_TAG, "Poll fd is removed");
   /// }
-  /// @endcode
-  ///
-  /// @see tizen_core_source_create()
-  /// @see tizen_core_source_add_poll()
+  /// ```
   int tizen_core_source_remove_poll(
     tizen_core_source_h source,
     tizen_core_poll_fd_h poll_fd,
@@ -2294,21 +2645,31 @@ class Tizen90TizenCore {
   late final _tizen_core_source_remove_poll = _tizen_core_source_remove_pollPtr
       .asFunction<int Function(tizen_core_source_h, tizen_core_poll_fd_h)>();
 
-  /// @brief Sets the prepare callback function to the tizen core source.
-  /// @details This function is not mandatory.
-  /// If you want to set a timeout value to ensure that the poll(),
-  /// the @a callback function should be set.
-  /// @since_tizen 9.0
+  /// Sets the prepare callback function to the tizen core source.
   ///
-  /// @param[in] source The tizen core source handle
-  /// @param[in] callback The callback function to be invoked when the source is ready to be processed
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TIZEN_CORE_ERROR_NONE Successful
-  /// @retval #TIZEN_CORE_ERROR_INVALID_PARAMETER Invalid parameter
+  /// This function is not mandatory. If you want to set a timeout value to ensure that the poll(), the `callback` function should be set.
   ///
-  /// @code
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Parameters:**
+  /// - `source` (in): The tizen core source handle
+  /// - `callback` (in): The callback function to be invoked when the source is ready to be processed
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TIZEN_CORE_ERROR_NONE`: Successful
+  /// - `TIZEN_CORE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `tizen_core_source_create()`
+  /// - `tizen_core_source_prepare_cb()`
+  /// - `tizen_core_source_add_poll()`
+  ///
+  /// ```
   /// #include <tizen_core.h>
   /// static bool source_prepare_cb(tizen_core_source_h source, int *timeout, void *user_data)
   /// {
@@ -2351,11 +2712,7 @@ class Tizen90TizenCore {
   ///
   /// return source;
   /// }
-  /// @endcode
-  ///
-  /// @see tizen_core_source_create()
-  /// @see tizen_core_source_prepare_cb()
-  /// @see tizen_core_source_add_poll()
+  /// ```
   int tizen_core_source_set_prepare_cb(
     tizen_core_source_h source,
     tizen_core_source_prepare_cb callback,
@@ -2377,20 +2734,30 @@ class Tizen90TizenCore {
           int Function(tizen_core_source_h, tizen_core_source_prepare_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Sets the check callback function to the tizen core source.
-  /// @details This function is not mandatory.
-  /// If the @a callback function is not set, the tizen core source is processed.
-  /// @since_tizen 9.0
+  /// Sets the check callback function to the tizen core source.
   ///
-  /// @param[in] source The tizen core source handle
-  /// @param[in] callback The callback function to be invoked when the source is ready to be processed
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TIZEN_CORE_ERROR_NONE Successful
-  /// @retval #TIZEN_CORE_ERROR_INVALID_PARAMETER Invalid parameter
+  /// This function is not mandatory. If the `callback` function is not set, the tizen core source is processed.
   ///
-  /// @code
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Parameters:**
+  /// - `source` (in): The tizen core source handle
+  /// - `callback` (in): The callback function to be invoked when the source is ready to be processed
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TIZEN_CORE_ERROR_NONE`: Successful
+  /// - `TIZEN_CORE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `tizen_core_source_create()`
+  /// - `tizen_core_source_check_cb()`
+  ///
+  /// ```
   /// #include <tizen_core.h>
   /// static bool source_prepare_cb(tizen_core_source_h source, int *timeout, void *user_data)
   /// {
@@ -2433,10 +2800,7 @@ class Tizen90TizenCore {
   ///
   /// return source;
   /// }
-  /// @endcode
-  ///
-  /// @see tizen_core_source_create()
-  /// @see tizen_core_source_check_cb()
+  /// ```
   int tizen_core_source_set_check_cb(
     tizen_core_source_h source,
     tizen_core_source_check_cb callback,
@@ -2458,21 +2822,30 @@ class Tizen90TizenCore {
           int Function(tizen_core_source_h, tizen_core_source_check_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Sets the dispatch callback function to the tizen core source.
-  /// @details This function is mandatory. Before adding the @a source handle to
-  /// the #tizen_core_h using tizen_core_add_source(),
-  /// the @a callback function should be set.
-  /// @since_tizen 9.0
+  /// Sets the dispatch callback function to the tizen core source.
   ///
-  /// @param[in] source The tizen core source handle
-  /// @param[in] callback The callback function to be dispatched events
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TIZEN_CORE_ERROR_NONE Successful
-  /// @retval #TIZEN_CORE_ERROR_INVALID_PARAMETER Invalid parameter
+  /// This function is mandatory. Before adding the `source` handle to the `tizen_core_h` using tizen_core_add_source(), the `callback` function should be set.
   ///
-  /// @code
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Parameters:**
+  /// - `source` (in): The tizen core source handle
+  /// - `callback` (in): The callback function to be dispatched events
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TIZEN_CORE_ERROR_NONE`: Successful
+  /// - `TIZEN_CORE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `tizen_core_source_create()`
+  /// - `tizen_core_source_dispatch_cb()`
+  ///
+  /// ```
   /// #include <tizen_core.h>
   /// static bool source_prepare_cb(tizen_core_source_h source, int *timeout, void *user_data)
   /// {
@@ -2515,10 +2888,7 @@ class Tizen90TizenCore {
   ///
   /// return source;
   /// }
-  /// @endcode
-  ///
-  /// @see tizen_core_source_create()
-  /// @see tizen_core_source_dispatch_cb()
+  /// ```
   int tizen_core_source_set_dispatch_cb(
     tizen_core_source_h source,
     tizen_core_source_dispatch_cb callback,
@@ -2540,21 +2910,32 @@ class Tizen90TizenCore {
           int Function(tizen_core_source_h, tizen_core_source_dispatch_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Sets the finalize callback function to the tizen core source.
-  /// @details This function is not mandatory.
-  /// If there is anything you need to do when the source is removed,
-  /// use this function to set the callback function.
-  /// @since_tizen 9.0
+  /// Sets the finalize callback function to the tizen core source.
   ///
-  /// @param[in] source The tizen core source handle
-  /// @param[in] callback The callback function to finalize the source
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TIZEN_CORE_ERROR_NONE Successful
-  /// @retval #TIZEN_CORE_ERROR_INVALID_PARAMETER Invalid parameter
+  /// This function is not mandatory. If there is anything you need to do when the source is removed, use this function to set the callback function.
   ///
-  /// @code
+  /// **Since Tizen:**
+  /// - 9.0
+  ///
+  /// **Parameters:**
+  /// - `source` (in): The tizen core source handle
+  /// - `callback` (in): The callback function to finalize the source
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TIZEN_CORE_ERROR_NONE`: Successful
+  /// - `TIZEN_CORE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `tizen_core_source_create()`
+  /// - `tizen_core_source_finalize_cb()`
+  /// - `tizen_core_remove_source()`
+  /// - `tizen_core_source_destroy()`
+  ///
+  /// ```
   /// #include <tizen_core.h>
   /// static bool source_prepare_cb(tizen_core_source_h source, int *timeout, void *user_data)
   /// {
@@ -2603,12 +2984,7 @@ class Tizen90TizenCore {
   ///
   /// return source;
   /// }
-  /// @endcode
-  ///
-  /// @see tizen_core_source_create()
-  /// @see tizen_core_source_finalize_cb()
-  /// @see tizen_core_remove_source()
-  /// @see tizen_core_source_destroy()
+  /// ```
   int tizen_core_source_set_finalize_cb(
     tizen_core_source_h source,
     tizen_core_source_finalize_cb callback,
@@ -2630,17 +3006,26 @@ class Tizen90TizenCore {
           int Function(tizen_core_source_h, tizen_core_source_finalize_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Sets the priority to the tizen core source.
-  /// @since_tizen 9.0
+  /// Sets the priority to the tizen core source.
   ///
-  /// @param[in] source The tizen core source handle
-  /// @param[in] priority The priority value
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TIZEN_CORE_ERROR_NONE Successful
-  /// @retval #TIZEN_CORE_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @code
+  /// **Parameters:**
+  /// - `source` (in): The tizen core source handle
+  /// - `priority` (in): The priority value
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TIZEN_CORE_ERROR_NONE`: Successful
+  /// - `TIZEN_CORE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `tizen_core_priority_e`
+  ///
+  /// ```
   /// #include <tizen_core.h>
   /// static bool idle_job_cb(void *user_data)
   /// {
@@ -2670,9 +3055,7 @@ class Tizen90TizenCore {
   ///
   /// return source;
   /// }
-  /// @endcode
-  ///
-  /// @see tizen_core_priority_e
+  /// ```
   int tizen_core_source_set_priority(
     tizen_core_source_h source,
     int priority,
@@ -2690,18 +3073,29 @@ class Tizen90TizenCore {
       _tizen_core_source_set_priorityPtr
           .asFunction<int Function(tizen_core_source_h, int)>();
 
-  /// @brief Creates a tizen core poll fd handle.
-  /// @since_tizen 9.0
-  /// @remarks The @a poll_fd should be released using tizen_core_poll_fd_destroy().
+  /// Creates a tizen core poll fd handle.
   ///
-  /// @param[out] poll_fd The tizen core poll fd handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TIZEN_CORE_ERROR_NONE Successful
-  /// @retval #TIZEN_CORE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TIZEN_CORE_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @code
+  /// **Remarks:**
+  /// - The `poll_fd` should be released using tizen_core_poll_fd_destroy().
+  ///
+  /// **Parameters:**
+  /// - `poll_fd` (out): The tizen core poll fd handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TIZEN_CORE_ERROR_NONE`: Successful
+  /// - `TIZEN_CORE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TIZEN_CORE_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `tizen_core_poll_fd_destroy()`
+  ///
+  /// ```
   /// #include <tizen_core.h>
   /// {
   /// tizen_core_poll_fd_h poll_fd = NULL;
@@ -2713,9 +3107,7 @@ class Tizen90TizenCore {
   /// return;
   /// }
   /// }
-  /// @endcode
-  ///
-  /// @see tizen_core_poll_fd_destroy()
+  /// ```
   int tizen_core_poll_fd_create(
     ffi.Pointer<tizen_core_poll_fd_h> poll_fd,
   ) {
@@ -2731,18 +3123,29 @@ class Tizen90TizenCore {
   late final _tizen_core_poll_fd_create = _tizen_core_poll_fd_createPtr
       .asFunction<int Function(ffi.Pointer<tizen_core_poll_fd_h>)>();
 
-  /// @brief Destroys the tizen core poll fd (file descriptor) handle.
-  /// @since_tizen 9.0
-  /// @remarks If the handle is already added to the source using the tizen_core_source_add_poll(),
-  /// the handle will be removed from the source automatically after this function is called.
+  /// Destroys the tizen core poll fd (file descriptor) handle.
   ///
-  /// @param[in] poll_fd The tizen core poll fd handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TIZEN_CORE_ERROR_NONE Successful
-  /// @retval #TIZEN_CORE_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @code
+  /// **Remarks:**
+  /// - If the handle is already added to the source using the tizen_core_source_add_poll(),
+  /// - the handle will be removed from the source automatically after this function is called.
+  ///
+  /// **Parameters:**
+  /// - `poll_fd` (in): The tizen core poll fd handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TIZEN_CORE_ERROR_NONE`: Successful
+  /// - `TIZEN_CORE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `tizen_core_poll_fd_create()`
+  ///
+  /// ```
   /// #include <tizen_core.h>
   /// {
   /// tizen_core_poll_fd_h poll_fd = NULL;
@@ -2759,9 +3162,7 @@ class Tizen90TizenCore {
   /// dlog_print(DLOG_ERROR, LOG_TAG, "Failed to destroy poll fd");
   /// }
   /// }
-  /// @endcode
-  ///
-  /// @see tizen_core_poll_fd_create()
+  /// ```
   int tizen_core_poll_fd_destroy(
     tizen_core_poll_fd_h poll_fd,
   ) {
@@ -2776,17 +3177,26 @@ class Tizen90TizenCore {
   late final _tizen_core_poll_fd_destroy = _tizen_core_poll_fd_destroyPtr
       .asFunction<int Function(tizen_core_poll_fd_h)>();
 
-  /// @brief Sets the file descriptor to the poll fd handle.
-  /// @since_tizen 9.0
+  /// Sets the file descriptor to the poll fd handle.
   ///
-  /// @param[in] poll_fd The tizen core poll fd handle
-  /// @param[in] fd The file descriptor
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TIZEN_CORE_ERROR_NONE Successful
-  /// @retval #TIZEN_CORE_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @code
+  /// **Parameters:**
+  /// - `poll_fd` (in): The tizen core poll fd handle
+  /// - `fd` (in): The file descriptor
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TIZEN_CORE_ERROR_NONE`: Successful
+  /// - `TIZEN_CORE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `tizen_core_poll_fd_get_fd()`
+  ///
+  /// ```
   /// #include <tizen_core.h>
   /// {
   /// tizen_core_poll_fd_h poll_fd = NULL;
@@ -2805,9 +3215,7 @@ class Tizen90TizenCore {
   /// return;
   /// }
   /// }
-  /// @endcode
-  ///
-  /// @see tizen_core_poll_fd_get_fd()
+  /// ```
   int tizen_core_poll_fd_set_fd(
     tizen_core_poll_fd_h poll_fd,
     int fd,
@@ -2824,17 +3232,26 @@ class Tizen90TizenCore {
   late final _tizen_core_poll_fd_set_fd = _tizen_core_poll_fd_set_fdPtr
       .asFunction<int Function(tizen_core_poll_fd_h, int)>();
 
-  /// @brief Gets the file descriptor from the poll fd handle.
-  /// @since_tizen 9.0
+  /// Gets the file descriptor from the poll fd handle.
   ///
-  /// @param[in] poll_fd The tizen core poll fd handle
-  /// @param[out] fd The file descriptor
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TIZEN_CORE_ERROR_NONE Successful
-  /// @retval #TIZEN_CORE_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @code
+  /// **Parameters:**
+  /// - `poll_fd` (in): The tizen core poll fd handle
+  /// - `fd` (out): The file descriptor
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TIZEN_CORE_ERROR_NONE`: Successful
+  /// - `TIZEN_CORE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `tizen_core_poll_fd_set_fd()`
+  ///
+  /// ```
   /// #include <tizen_core.h>
   /// {
   /// tizen_core_poll_fd_h poll_fd = NULL;
@@ -2856,9 +3273,7 @@ class Tizen90TizenCore {
   /// return;
   /// }
   /// }
-  /// @endcode
-  ///
-  /// @see tizen_core_poll_fd_set_fd()
+  /// ```
   int tizen_core_poll_fd_get_fd(
     tizen_core_poll_fd_h poll_fd,
     ffi.Pointer<ffi.Int> fd,
@@ -2876,17 +3291,27 @@ class Tizen90TizenCore {
   late final _tizen_core_poll_fd_get_fd = _tizen_core_poll_fd_get_fdPtr
       .asFunction<int Function(tizen_core_poll_fd_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Sets the requested events to the poll fd handle.
-  /// @since_tizen 9.0
+  /// Sets the requested events to the poll fd handle.
   ///
-  /// @param[in] poll_fd The tizen core poll fd handle
-  /// @param[in] events The requested events
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TIZEN_CORE_ERROR_NONE Successful
-  /// @retval #TIZEN_CORE_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @code
+  /// **Parameters:**
+  /// - `poll_fd` (in): The tizen core poll fd handle
+  /// - `events` (in): The requested events
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TIZEN_CORE_ERROR_NONE`: Successful
+  /// - `TIZEN_CORE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `tizen_core_poll_fd_get_events()`
+  /// - `tizen_core_poll_event_e`
+  ///
+  /// ```
   /// #include <tizen_core.h>
   /// {
   /// tizen_core_poll_fd_h poll_fd = NULL;
@@ -2908,10 +3333,7 @@ class Tizen90TizenCore {
   /// return;
   /// }
   /// }
-  /// @endcode
-  ///
-  /// @see tizen_core_poll_fd_get_events()
-  /// @see tizen_core_poll_event_e
+  /// ```
   int tizen_core_poll_fd_set_events(
     tizen_core_poll_fd_h poll_fd,
     int events,
@@ -2929,17 +3351,27 @@ class Tizen90TizenCore {
   late final _tizen_core_poll_fd_set_events = _tizen_core_poll_fd_set_eventsPtr
       .asFunction<int Function(tizen_core_poll_fd_h, int)>();
 
-  /// @brief Gets the requested events from the poll fd handle.
-  /// @since_tizen 9.0
+  /// Gets the requested events from the poll fd handle.
   ///
-  /// @param[in] poll_fd The tizen core poll fd handle
-  /// @param[out] events The requested events
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TIZEN_CORE_ERROR_NONE Successful
-  /// @retval #TIZEN_CORE_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @code
+  /// **Parameters:**
+  /// - `poll_fd` (in): The tizen core poll fd handle
+  /// - `events` (out): The requested events
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TIZEN_CORE_ERROR_NONE`: Successful
+  /// - `TIZEN_CORE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `tizen_core_poll_fd_set_events()`
+  /// - `tizen_core_poll_event_e`
+  ///
+  /// ```
   /// #include <tizen_core.h>
   /// {
   /// tizen_core_poll_fd_h poll_fd = NULL;
@@ -2963,10 +3395,7 @@ class Tizen90TizenCore {
   /// return;
   /// }
   /// }
-  /// @endcode
-  ///
-  /// @see tizen_core_poll_fd_set_events()
-  /// @see tizen_core_poll_event_e
+  /// ```
   int tizen_core_poll_fd_get_events(
     tizen_core_poll_fd_h poll_fd,
     ffi.Pointer<ffi.Uint16> events,
@@ -2985,17 +3414,27 @@ class Tizen90TizenCore {
       _tizen_core_poll_fd_get_eventsPtr.asFunction<
           int Function(tizen_core_poll_fd_h, ffi.Pointer<ffi.Uint16>)>();
 
-  /// @brief Sets the returned events to the poll fd handle.
-  /// @since_tizen 9.0
+  /// Sets the returned events to the poll fd handle.
   ///
-  /// @param[in] poll_fd The tizen core poll fd handle
-  /// @param[in] returned_events The returned events
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TIZEN_CORE_ERROR_NONE Successful
-  /// @retval #TIZEN_CORE_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @code
+  /// **Parameters:**
+  /// - `poll_fd` (in): The tizen core poll fd handle
+  /// - `returned_events` (in): The returned events
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TIZEN_CORE_ERROR_NONE`: Successful
+  /// - `TIZEN_CORE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `tizen_core_poll_fd_get_events()`
+  /// - `tizen_core_poll_event_e`
+  ///
+  /// ```
   /// #include <tizen_core.h>
   /// {
   /// tizen_core_poll_fd_h poll_fd = NULL;
@@ -3015,10 +3454,7 @@ class Tizen90TizenCore {
   /// return;
   /// }
   /// }
-  /// @endcode
-  ///
-  /// @see tizen_core_poll_fd_get_events()
-  /// @see tizen_core_poll_event_e
+  /// ```
   int tizen_core_poll_fd_set_returned_events(
     tizen_core_poll_fd_h poll_fd,
     int returned_events,
@@ -3037,17 +3473,27 @@ class Tizen90TizenCore {
       _tizen_core_poll_fd_set_returned_eventsPtr
           .asFunction<int Function(tizen_core_poll_fd_h, int)>();
 
-  /// @brief Gets the returned events from the poll fd handle.
-  /// @since_tizen 9.0
+  /// Gets the returned events from the poll fd handle.
   ///
-  /// @param[in] poll_fd The tizen core poll fd handle
-  /// @param[out] returned_events The returned events
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TIZEN_CORE_ERROR_NONE Successful
-  /// @retval #TIZEN_CORE_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @code
+  /// **Parameters:**
+  /// - `poll_fd` (in): The tizen core poll fd handle
+  /// - `returned_events` (out): The returned events
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `TIZEN_CORE_ERROR_NONE`: Successful
+  /// - `TIZEN_CORE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `tizen_core_poll_fd_set_events()`
+  /// - `tizen_core_poll_event_e`
+  ///
+  /// ```
   /// #include <tizen_core.h>
   /// static bool source_prepare_cb(tizen_core_source_h source, int *timeout, void *user_data)
   /// {
@@ -3116,10 +3562,7 @@ class Tizen90TizenCore {
   ///
   /// return source;
   /// }
-  /// @endcode
-  ///
-  /// @see tizen_core_poll_fd_set_events()
-  /// @see tizen_core_poll_event_e
+  /// ```
   int tizen_core_poll_fd_get_returned_events(
     tizen_core_poll_fd_h poll_fd,
     ffi.Pointer<ffi.Uint16> returned_events,
@@ -3139,63 +3582,105 @@ class Tizen90TizenCore {
           int Function(tizen_core_poll_fd_h, ffi.Pointer<ffi.Uint16>)>();
 }
 
-/// @brief The tizen core channel sender handle.
-/// @since_tizen 9.0
+/// The tizen core channel sender handle.
+///
+/// **Since Tizen:**
+/// - 9.0
+/// @nodoc
 typedef tizen_core_channel_sender_h = ffi.Pointer<ffi.Void>;
 
-/// @brief The tizen core channel receiver handle.
-/// @since_tizen 9.0
+/// The tizen core channel receiver handle.
+///
+/// **Since Tizen:**
+/// - 9.0
+/// @nodoc
 typedef tizen_core_channel_receiver_h = ffi.Pointer<ffi.Void>;
 
-/// @brief The tizen core channel object handle.
-/// @since_tizen 9.0
+/// The tizen core channel object handle.
+///
+/// **Since Tizen:**
+/// - 9.0
+/// @nodoc
 typedef tizen_core_channel_object_h = ffi.Pointer<ffi.Void>;
 
-/// @brief The tizen core event handle.
-/// @since_tizen 9.0
+/// The tizen core event handle.
+///
+/// **Since Tizen:**
+/// - 9.0
+/// @nodoc
 typedef tizen_core_event_h = ffi.Pointer<ffi.Void>;
 
-/// @brief Called when the event is emitted.
-/// @since_tizen 9.0
-/// @remarks The @a object must not be deallocated by the application.
+/// Called when the event is emitted.
 ///
-/// @param[in] object The tizen core event object handle
-/// @param[in] user_data The user data passed from the callback registration function
-/// @return @c true to continue with the next iteration of the loop,
-/// otherwise @c false to break out of the loop
-/// @see tizen_core_event_add_handler()
+/// **Since Tizen:**
+/// - 9.0
+///
+/// **Remarks:**
+/// - The `object` must not be deallocated by the application.
+///
+/// **Parameters:**
+/// - `object` (in): The tizen core event object handle
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop
+///
+/// **See also:**
+/// - `tizen_core_event_add_handler()`
+/// @nodoc
 typedef tizen_core_event_handler_cb
     = ffi.Pointer<ffi.NativeFunction<tizen_core_event_handler_cbFunction>>;
+/// @nodoc
 typedef tizen_core_event_handler_cbFunction = ffi.Bool Function(
     tizen_core_event_object_h object, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Darttizen_core_event_handler_cbFunction = bool Function(
     tizen_core_event_object_h object, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief The tizen core event object handle.
-/// @since_tizen 9.0
+/// The tizen core event object handle.
+///
+/// **Since Tizen:**
+/// - 9.0
+/// @nodoc
 typedef tizen_core_event_object_h = ffi.Pointer<ffi.Void>;
 
-/// @brief The tizen core event handler handle.
-/// @since_tizen 9.0
+/// The tizen core event handler handle.
+///
+/// **Since Tizen:**
+/// - 9.0
+/// @nodoc
 typedef tizen_core_event_handler_h = ffi.Pointer<ffi.Void>;
 
-/// @brief Called when the event object is destroyed.
-/// @since_tizen 9.0
-/// @remarks The @a event_data should be released using release function if it's needed.
+/// Called when the event object is destroyed.
 ///
-/// @param[in] event_data The event data of the event object
-/// @param[in] user_data The user data passed from the callback registration function
-/// @see tizen_core_event_object_set_destroy_cb()
-/// @see tizen_core_event_object_destroy()
+/// **Since Tizen:**
+/// - 9.0
+///
+/// **Remarks:**
+/// - The `event_data` should be released using release function if it's needed.
+///
+/// **Parameters:**
+/// - `event_data` (in): The event data of the event object
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `tizen_core_event_object_set_destroy_cb()`
+/// - `tizen_core_event_object_destroy()`
+/// @nodoc
 typedef tizen_core_event_object_destroy_cb = ffi
     .Pointer<ffi.NativeFunction<tizen_core_event_object_destroy_cbFunction>>;
+/// @nodoc
 typedef tizen_core_event_object_destroy_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Void> event_data, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Darttizen_core_event_object_destroy_cbFunction = void Function(
     ffi.Pointer<ffi.Void> event_data, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Enumeration for the tizen core result.
-/// @since_tizen 9.0
+/// Enumeration for the tizen core result.
+///
+/// **Since Tizen:**
+/// - 9.0
+/// @nodoc
 abstract class tizen_core_error_e {
   /// < Successful
   static const int TIZEN_CORE_ERROR_NONE = 0;
@@ -3210,8 +3695,11 @@ abstract class tizen_core_error_e {
   static const int TIZEN_CORE_ERROR_INVALID_CONTEXT = -17825791;
 }
 
-/// @brief Enumeration for the priority of tizen core source.
-/// @since_tizen 9.0
+/// Enumeration for the priority of tizen core source.
+///
+/// **Since Tizen:**
+/// - 9.0
+/// @nodoc
 abstract class tizen_core_priority_e {
   /// < High priority
   static const int TIZEN_CORE_PRIORITY_HIGH = -100;
@@ -3229,12 +3717,17 @@ abstract class tizen_core_priority_e {
   static const int TIZEN_CORE_PRIORITY_LOW = 300;
 }
 
-/// @brief Enumeration for the event of tizen core poll fd.
-/// @since_tizen 9.0
-/// @see tizen_core_poll_fd_set_events()
-/// @see tizen_core_poll_fd_get_events()
-/// @see tizen_core_poll_fd_set_returned_events()
-/// @see tizen_core_poll_fd_get_returned_events()
+/// Enumeration for the event of tizen core poll fd.
+///
+/// **Since Tizen:**
+/// - 9.0
+///
+/// **See also:**
+/// - `tizen_core_poll_fd_set_events()`
+/// - `tizen_core_poll_fd_get_events()`
+/// - `tizen_core_poll_fd_set_returned_events()`
+/// - `tizen_core_poll_fd_get_returned_events()`
+/// @nodoc
 abstract class tizen_core_poll_event_e {
   /// < There is data to read
   static const int TIZEN_CORE_POLL_EVENT_IN = 1;
@@ -3255,124 +3748,202 @@ abstract class tizen_core_poll_event_e {
   static const int TIZEN_CORE_POLL_EVENT_NVAL = 32;
 }
 
-/// @brief The tizen core task handle.
-/// @since_tizen 9.0
+/// The tizen core task handle.
+///
+/// **Since Tizen:**
+/// - 9.0
+/// @nodoc
 typedef tizen_core_task_h = ffi.Pointer<ffi.Void>;
 
-/// @brief The tizen core handle.
-/// @since_tizen 9.0
+/// The tizen core handle.
+///
+/// **Since Tizen:**
+/// - 9.0
+/// @nodoc
 typedef tizen_core_h = ffi.Pointer<ffi.Void>;
 
-/// @brief Called when the tizen core idle or timer event is emitted.
-/// @since_tizen 9.0
+/// Called when the tizen core idle or timer event is emitted.
 ///
-/// @param[in] user_data The user data passed from the callback registration function
-/// @return @c true to repeat calling the callback function,
-/// otherwise @c false to remove the added source.
-/// @see tizen_core_add_idle_job()
-/// @see tizen_core_add_timer()
+/// **Since Tizen:**
+/// - 9.0
+///
+/// **Parameters:**
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Returns:**
+/// - `true` to repeat calling the callback function, otherwise `false` to remove the added source.
+///
+/// **See also:**
+/// - `tizen_core_add_idle_job()`
+/// - `tizen_core_add_timer()`
+/// @nodoc
 typedef tizen_core_task_cb
     = ffi.Pointer<ffi.NativeFunction<tizen_core_task_cbFunction>>;
+/// @nodoc
 typedef tizen_core_task_cbFunction = ffi.Bool Function(
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Darttizen_core_task_cbFunction = bool Function(
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief The tizen core source handle.
-/// @since_tizen 9.0
+/// The tizen core source handle.
+///
+/// **Since Tizen:**
+/// - 9.0
+/// @nodoc
 typedef tizen_core_source_h = ffi.Pointer<ffi.Void>;
 
-/// @brief Called when the channel object is received.
-/// @since_tizen 9.0
-/// @remarks The @a object must not be deallocated by the application.
+/// Called when the channel object is received.
 ///
-/// @param[in] object The tizen core channel object handle
-/// @param[in] user_data The user data passed from the registration function
-/// @see tizen_core_add_channel()
+/// **Since Tizen:**
+/// - 9.0
+///
+/// **Remarks:**
+/// - The `object` must not be deallocated by the application.
+///
+/// **Parameters:**
+/// - `object` (in): The tizen core channel object handle
+/// - `user_data` (in): The user data passed from the registration function
+///
+/// **See also:**
+/// - `tizen_core_add_channel()`
+/// @nodoc
 typedef tizen_core_channel_receive_cb
     = ffi.Pointer<ffi.NativeFunction<tizen_core_channel_receive_cbFunction>>;
+/// @nodoc
 typedef tizen_core_channel_receive_cbFunction = ffi.Void Function(
     tizen_core_channel_object_h object, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Darttizen_core_channel_receive_cbFunction = void Function(
     tizen_core_channel_object_h object, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief The tizen core poll fd handle.
-/// @since_tizen 9.0
+/// The tizen core poll fd handle.
+///
+/// **Since Tizen:**
+/// - 9.0
+/// @nodoc
 typedef tizen_core_poll_fd_h = ffi.Pointer<ffi.Void>;
 
-/// @brief Called before all file descriptors are polled.
-/// @details The @a source is the same object for which the callback was set.
-/// @details The function returns a timeout value to ensure that the poll()
-/// call doesn't block too long and miss the next timeout.
-/// The timeout value is -1 to indicate that it doesn't mind how long
-/// the poll() call blocks.
-/// @since_tizen 9.0
-/// @remarks The @a source should be released using tizen_core_source_destroy() when no longer needed.
-/// The @a timeout should not be released. The @a timeout can be used only in the callback.
+/// Called before all file descriptors are polled.
 ///
-/// @param[in] source The tizen core source handle
-/// @param[out] timeout The timeout
-/// @param[in] user_data The user data passed from the callback registration function
-/// @return @c true to indicate that the source is always ready to be processed,
-/// otherwise @c false to wait until poll() has been called before it knows whether any events need to be processed.
-/// @see tizen_core_source_set_prepare_cb()
+/// The `source` is the same object for which the callback was set.
+///
+/// The function returns a timeout value to ensure that the poll() call doesn't block too long and miss the next timeout. The timeout value is -1 to indicate that it doesn't mind how long the poll() call blocks.
+///
+/// **Since Tizen:**
+/// - 9.0
+///
+/// **Remarks:**
+/// - The `source` should be released using tizen_core_source_destroy() when no longer needed.
+/// - The `timeout` should not be released. The `timeout` can be used only in the callback.
+///
+/// **Parameters:**
+/// - `source` (in): The tizen core source handle
+/// - `timeout` (out): The timeout
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Returns:**
+/// - `true` to indicate that the source is always ready to be processed, otherwise `false` to wait until poll() has been called before it knows whether any events need to be processed.
+///
+/// **See also:**
+/// - `tizen_core_source_set_prepare_cb()`
+/// @nodoc
 typedef tizen_core_source_prepare_cb
     = ffi.Pointer<ffi.NativeFunction<tizen_core_source_prepare_cbFunction>>;
+/// @nodoc
 typedef tizen_core_source_prepare_cbFunction = ffi.Bool Function(
     tizen_core_source_h source,
     ffi.Pointer<ffi.Int> timeout,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Darttizen_core_source_prepare_cbFunction = bool Function(
     tizen_core_source_h source,
     ffi.Pointer<ffi.Int> timeout,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when checks whether the source is ready to be processed or not.
-/// @details The @a source is the same object for which the callback was set.
-/// @details The function should return 'true' if it's ready to be dispatched.
-/// @since_tizen 9.0
-/// @remarks The @a source should be released using tizen_core_source_destroy() when no longer needed.
+/// Called when checks whether the source is ready to be processed or not.
 ///
-/// @param[in] source The tizen core source handle
-/// @param[in] user_data The user data passed from the callback registration function
-/// @return @c true to indicate that the source is always ready to be processed,
-/// otherwise @c false to indicate that the source is not ready to be processed.
-/// @see tizen_core_source_set_check_cb()
+/// The `source` is the same object for which the callback was set.
+///
+/// The function should return 'true' if it's ready to be dispatched.
+///
+/// **Since Tizen:**
+/// - 9.0
+///
+/// **Remarks:**
+/// - The `source` should be released using tizen_core_source_destroy() when no longer needed.
+///
+/// **Parameters:**
+/// - `source` (in): The tizen core source handle
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Returns:**
+/// - `true` to indicate that the source is always ready to be processed, otherwise `false` to indicate that the source is not ready to be processed.
+///
+/// **See also:**
+/// - `tizen_core_source_set_check_cb()`
+/// @nodoc
 typedef tizen_core_source_check_cb
     = ffi.Pointer<ffi.NativeFunction<tizen_core_source_check_cbFunction>>;
+/// @nodoc
 typedef tizen_core_source_check_cbFunction = ffi.Bool Function(
     tizen_core_source_h source, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Darttizen_core_source_check_cbFunction = bool Function(
     tizen_core_source_h source, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when dispatches events.
-/// @details The @a source is the same object for which the callback was set.
-/// @since_tizen 9.0
-/// @remarks The @a source should be released using tizen_core_source_destroy() when no longer needed.
+/// Called when dispatches events.
 ///
-/// @param[in] source The tizen core source handle
-/// @param[in] user_data The user data passed from the callback registration function
-/// @return @c true to indicate that the process is ready to dispatch the event.
-/// @see tizen_core_source_set_dispatch_cb()
+/// The `source` is the same object for which the callback was set.
+///
+/// **Since Tizen:**
+/// - 9.0
+///
+/// **Remarks:**
+/// - The `source` should be released using tizen_core_source_destroy() when no longer needed.
+///
+/// **Parameters:**
+/// - `source` (in): The tizen core source handle
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Returns:**
+/// - `true` to indicate that the process is ready to dispatch the event.
+///
+/// **See also:**
+/// - `tizen_core_source_set_dispatch_cb()`
+/// @nodoc
 typedef tizen_core_source_dispatch_cb
     = ffi.Pointer<ffi.NativeFunction<tizen_core_source_dispatch_cbFunction>>;
+/// @nodoc
 typedef tizen_core_source_dispatch_cbFunction = ffi.Bool Function(
     tizen_core_source_h source, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Darttizen_core_source_dispatch_cbFunction = bool Function(
     tizen_core_source_h source, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the source is finalized.
-/// @details The @a source is the same object for which the callback was set.
-/// @since_tizen 9.0
-/// @remarks The @a source should not be released. The @a source is managed by the platform.
-/// @remarks The @a source is managed by the platform and will be released when the callback returns.
+/// Called when the source is finalized.
 ///
-/// @param[in] source The tizen core source handle
-/// @param[in] user_data The user data passed from the callback registration function
-/// @see tizen_core_source_set_finalize_cb()
+/// The `source` is the same object for which the callback was set.
+///
+/// **Since Tizen:**
+/// - 9.0
+///
+/// **Remarks:**
+/// - The `source` should not be released. The `source` is managed by the platform.
+/// - The `source` is managed by the platform and will be released when the callback returns.
+///
+/// **Parameters:**
+/// - `source` (in): The tizen core source handle
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `tizen_core_source_set_finalize_cb()`
+/// @nodoc
 typedef tizen_core_source_finalize_cb
     = ffi.Pointer<ffi.NativeFunction<tizen_core_source_finalize_cbFunction>>;
+/// @nodoc
 typedef tizen_core_source_finalize_cbFunction = ffi.Void Function(
     tizen_core_source_h source, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Darttizen_core_source_finalize_cbFunction = void Function(
     tizen_core_source_h source, ffi.Pointer<ffi.Void> user_data);

@@ -1,3 +1,6 @@
+/// {@category 10.0/tizen}
+library tizen_interop_10_0.capi_system_device;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen capi-system-device APIs.
+/// {@category 10.0/tizen}
 class Tizen100CapiSystemDevice {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,20 +28,30 @@ class Tizen100CapiSystemDevice {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Gets the current device's battery charge percentage as an integer value.
-  /// @details It returns an integer value from @c 0 to @c 100 that indicates remaining battery charge
-  /// as a percentage of the maximum level.
-  /// @since_tizen 2.3
-  /// @remarks Ensure that the provided @a percent pointer is valid and has enough memory allocated.
-  /// @param[out] percent The remaining battery charge percentage (@c 0 ~ @c 100)
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #DEVICE_ERROR_NONE Successful
-  /// @retval #DEVICE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DEVICE_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DEVICE_ERROR_OPERATION_FAILED Operation failed
-  /// @retval #DEVICE_ERROR_NOT_SUPPORTED Not supported device
+  /// Gets the current device's battery charge percentage as an integer value.
   ///
-  /// @code
+  /// It returns an integer value from `0` to `100` that indicates remaining battery charge as a percentage of the maximum level.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - Ensure that the provided `percent` pointer is valid and has enough memory allocated.
+  ///
+  /// **Parameters:**
+  /// - `percent` (out): The remaining battery charge percentage (`0` ~ `100`)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DEVICE_ERROR_NONE`: Successful
+  /// - `DEVICE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DEVICE_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DEVICE_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `DEVICE_ERROR_NOT_SUPPORTED`: Not supported device
+  ///
+  /// ```
   /// #include <device/battery.h>
   /// ...
   /// int percent = 0;
@@ -45,7 +59,7 @@ class Tizen100CapiSystemDevice {
   /// ...
   /// ret = device_battery_get_info(&percent);
   /// ...
-  /// @endcode
+  /// ```
   int device_battery_get_percent(
     ffi.Pointer<ffi.Int> percent,
   ) {
@@ -60,18 +74,34 @@ class Tizen100CapiSystemDevice {
   late final _device_battery_get_percent = _device_battery_get_percentPtr
       .asFunction<int Function(ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the current device's charging state which the battery is charging.
-  /// @details Checks whether the battery is currently being charged or not.
-  /// @since_tizen 2.3
-  /// @remarks Ensure that the provided @a charging pointer is valid and has enough memory allocated.
-  /// @param[out] charging The battery charging state
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #DEVICE_ERROR_NONE Successful
-  /// @retval #DEVICE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DEVICE_ERROR_OPERATION_FAILED Operation failed
-  /// @retval #DEVICE_ERROR_NOT_SUPPORTED Not supported device
+  /// Gets the current device's charging state which the battery is charging.
   ///
-  /// @code
+  /// Checks whether the battery is currently being charged or not.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - Ensure that the provided `charging` pointer is valid and has enough memory allocated.
+  ///
+  /// **Parameters:**
+  /// - `charging` (out): The battery charging state
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DEVICE_ERROR_NONE`: Successful
+  /// - `DEVICE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DEVICE_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `DEVICE_ERROR_NOT_SUPPORTED`: Not supported device
+  ///
+  /// **See also:**
+  /// - `device_add_callback`
+  /// - `device_remove_callback`
+  /// - `DEVICE_CALLBACK_BATTERY_CHARGING`
+  ///
+  /// ```
   /// #include <device/battery.h>
   /// ...
   /// bool is_charging = false;
@@ -79,10 +109,7 @@ class Tizen100CapiSystemDevice {
   /// ...
   /// ret = device_battery_is_charging(&is_charging);
   /// ...
-  /// @endcode
-  /// @see device_add_callback
-  /// @see device_remove_callback
-  /// @see #DEVICE_CALLBACK_BATTERY_CHARGING
+  /// ```
   int device_battery_is_charging(
     ffi.Pointer<ffi.Bool> charging,
   ) {
@@ -97,18 +124,35 @@ class Tizen100CapiSystemDevice {
   late final _device_battery_is_charging = _device_battery_is_chargingPtr
       .asFunction<int Function(ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Gets the current device's battery level status as a @a device_battery_level_e.
-  /// @details Retrieves the current battery level status based on remaining battery capacity.
-  /// @since_tizen 2.3
-  /// @remarks Ensure that the provided @a status pointer is valid and has enough memory allocated.
-  /// @param[out] status The battery level status
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #DEVICE_ERROR_NONE Successful
-  /// @retval #DEVICE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DEVICE_ERROR_OPERATION_FAILED Operation failed
-  /// @retval #DEVICE_ERROR_NOT_SUPPORTED Not supported device
+  /// Gets the current device's battery level status as a `device_battery_level_e`.
   ///
-  /// @code
+  /// Retrieves the current battery level status based on remaining battery capacity.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - Ensure that the provided `status` pointer is valid and has enough memory allocated.
+  ///
+  /// **Parameters:**
+  /// - `status` (out): The battery level status
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DEVICE_ERROR_NONE`: Successful
+  /// - `DEVICE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DEVICE_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `DEVICE_ERROR_NOT_SUPPORTED`: Not supported device
+  ///
+  /// **See also:**
+  /// - `device_battery_level_e`
+  /// - `device_add_callback`
+  /// - `device_remove_callback`
+  /// - `DEVICE_CALLBACK_BATTERY_LEVEL`
+  ///
+  /// ```
   /// #include <device/battery.h>
   /// ...
   /// device_battery_level_e batt_lev_status = DEVICE_BATTERY_LEVEL_EMPTY;
@@ -116,11 +160,7 @@ class Tizen100CapiSystemDevice {
   /// ...
   /// ret = device_battery_get_level_status(&batt_lev_status);
   /// ...
-  /// @endcode
-  /// @see device_battery_level_e
-  /// @see device_add_callback
-  /// @see device_remove_callback
-  /// @see #DEVICE_CALLBACK_BATTERY_LEVEL
+  /// ```
   int device_battery_get_level_status(
     ffi.Pointer<ffi.Int32> status,
   ) {
@@ -136,18 +176,32 @@ class Tizen100CapiSystemDevice {
       _device_battery_get_level_statusPtr
           .asFunction<int Function(ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the current device's battery health information as a @a device_battery_health_e.
-  /// @details Retrieves the current battery health status information (e.g., good, overheat, dead, etc).
-  /// @since_tizen 3.0
-  /// @remarks Ensure that the provided @a health pointer is valid and has enough memory allocated.
-  /// @param[out] health The battery health information
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #DEVICE_ERROR_NONE Successful
-  /// @retval #DEVICE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DEVICE_ERROR_OPERATION_FAILED Operation failed
-  /// @retval #DEVICE_ERROR_NOT_SUPPORTED Not supported device
+  /// Gets the current device's battery health information as a `device_battery_health_e`.
   ///
-  /// @code
+  /// Retrieves the current battery health status information (e.g., good, overheat, dead, etc).
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - Ensure that the provided `health` pointer is valid and has enough memory allocated.
+  ///
+  /// **Parameters:**
+  /// - `health` (out): The battery health information
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DEVICE_ERROR_NONE`: Successful
+  /// - `DEVICE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DEVICE_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `DEVICE_ERROR_NOT_SUPPORTED`: Not supported device
+  ///
+  /// **See also:**
+  /// - `device_battery_health_e`
+  ///
+  /// ```
   /// #include <device/battery.h>
   /// ...
   /// device_battery_health_e batt_health = DEVICE_BATTERY_HEALTH_GOOD;
@@ -155,8 +209,7 @@ class Tizen100CapiSystemDevice {
   /// ...
   /// ret = device_battery_get_health(&batt_health);
   /// ...
-  /// @endcode
-  /// @see device_battery_health_e
+  /// ```
   int device_battery_get_health(
     ffi.Pointer<ffi.Int32> health,
   ) {
@@ -171,18 +224,32 @@ class Tizen100CapiSystemDevice {
   late final _device_battery_get_health = _device_battery_get_healthPtr
       .asFunction<int Function(ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the current device's power source information from the battery.
-  /// @details Retrieves the current battery power source information (e.g., ac, usb, etc).
-  /// @since_tizen 3.0
-  /// @remarks Ensure that the provided @a source pointer is valid and has enough memory allocated.
-  /// @param[out] source The battery power source information
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #DEVICE_ERROR_NONE Successful
-  /// @retval #DEVICE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DEVICE_ERROR_OPERATION_FAILED Operation failed
-  /// @retval #DEVICE_ERROR_NOT_SUPPORTED Not supported device
+  /// Gets the current device's power source information from the battery.
   ///
-  /// @code
+  /// Retrieves the current battery power source information (e.g., ac, usb, etc).
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - Ensure that the provided `source` pointer is valid and has enough memory allocated.
+  ///
+  /// **Parameters:**
+  /// - `source` (out): The battery power source information
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DEVICE_ERROR_NONE`: Successful
+  /// - `DEVICE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DEVICE_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `DEVICE_ERROR_NOT_SUPPORTED`: Not supported device
+  ///
+  /// **See also:**
+  /// - `device_battery_power_source_e`
+  ///
+  /// ```
   /// #include <device/battery.h>
   /// ...
   /// device_battery_power_source_e batt_power_src = DEVICE_BATTERY_POWER_SOURCE_NONE;
@@ -190,8 +257,7 @@ class Tizen100CapiSystemDevice {
   /// ...
   /// ret = device_battery_get_power_source(&batt_power_src);
   /// ...
-  /// @endcode
-  /// @see device_battery_power_source_e
+  /// ```
   int device_battery_get_power_source(
     ffi.Pointer<ffi.Int32> source,
   ) {
@@ -207,19 +273,33 @@ class Tizen100CapiSystemDevice {
       _device_battery_get_power_sourcePtr
           .asFunction<int Function(ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the current device's specified battery property as an integer value.
-  /// @details Retrieves the current battery property information (e.g., capacity, current_average, temperature, etc).
-  /// @since_tizen 3.0
-  /// @remarks Ensure that the provided @a value pointer is valid and has enough memory allocated.
-  /// @param[in] property The property type
-  /// @param[out] value The battery information for the property given
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #DEVICE_ERROR_NONE Successful
-  /// @retval #DEVICE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DEVICE_ERROR_OPERATION_FAILED Operation failed
-  /// @retval #DEVICE_ERROR_NOT_SUPPORTED Not supported device
+  /// Gets the current device's specified battery property as an integer value.
   ///
-  /// @code
+  /// Retrieves the current battery property information (e.g., capacity, current_average, temperature, etc).
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - Ensure that the provided `value` pointer is valid and has enough memory allocated.
+  ///
+  /// **Parameters:**
+  /// - `property` (in): The property type
+  /// - `value` (out): The battery information for the property given
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DEVICE_ERROR_NONE`: Successful
+  /// - `DEVICE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DEVICE_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `DEVICE_ERROR_NOT_SUPPORTED`: Not supported device
+  ///
+  /// **See also:**
+  /// - `device_battery_property_e`
+  ///
+  /// ```
   /// #include <device/battery.h>
   /// ...
   /// int value = 0;
@@ -227,8 +307,7 @@ class Tizen100CapiSystemDevice {
   /// ...
   /// ret = device_battery_get_property(DEVICE_BATTERY_PROPERTY_CAPACITY, &value);
   /// ...
-  /// @endcode
-  /// @see device_battery_property_e
+  /// ```
   int device_battery_get_property(
     int property,
     ffi.Pointer<ffi.Int> value,
@@ -246,18 +325,32 @@ class Tizen100CapiSystemDevice {
   late final _device_battery_get_property = _device_battery_get_propertyPtr
       .asFunction<int Function(int, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the current device's battery status according to the degree of charge.
-  /// @details Retrieves the current battery status information (e.g., charging, discharging, full, etc).
-  /// @since_tizen 3.0
-  /// @remarks Ensure that the provided @a status pointer is valid and has enough memory allocated.
-  /// @param[out] status The battery status information
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #DEVICE_ERROR_NONE Successful
-  /// @retval #DEVICE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DEVICE_ERROR_OPERATION_FAILED Operation failed
-  /// @retval #DEVICE_ERROR_NOT_SUPPORTED Not supported device
+  /// Gets the current device's battery status according to the degree of charge.
   ///
-  /// @code
+  /// Retrieves the current battery status information (e.g., charging, discharging, full, etc).
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - Ensure that the provided `status` pointer is valid and has enough memory allocated.
+  ///
+  /// **Parameters:**
+  /// - `status` (out): The battery status information
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DEVICE_ERROR_NONE`: Successful
+  /// - `DEVICE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DEVICE_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `DEVICE_ERROR_NOT_SUPPORTED`: Not supported device
+  ///
+  /// **See also:**
+  /// - `device_battery_status_e`
+  ///
+  /// ```
   /// #include <device/battery.h>
   /// ...
   /// device_battery_status_e batt_status = DEVICE_BATTERY_STATUS_CHARGING;
@@ -265,8 +358,7 @@ class Tizen100CapiSystemDevice {
   /// ...
   /// ret = device_battery_get_property(&batt_status);
   /// ...
-  /// @endcode
-  /// @see device_battery_status_e
+  /// ```
   int device_battery_get_status(
     ffi.Pointer<ffi.Int32> status,
   ) {
@@ -281,29 +373,46 @@ class Tizen100CapiSystemDevice {
   late final _device_battery_get_status = _device_battery_get_statusPtr
       .asFunction<int Function(ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Adds a callback to the observing device state (e.g., battery, display, etc).
-  /// @details Registers a callback function to be invoked when a specified device status changes. \n
-  /// When the device status changes, the registered callback function will be called with the new status value as an argument.
-  /// @since_tizen 2.3
-  /// @privilege %http://tizen.org/privilege/internal/default/platform
-  /// @privilege %http://tizen.org/privilege/led
-  /// @remarks The following feature should be supported for #DEVICE_CALLBACK_DISPLAY_STATE: %http://tizen.org/feature/display. \n
-  /// #DEVICE_CALLBACK_BATTERY_CAPACITY: %http://tizen.org/feature/battery. \n
-  /// #DEVICE_CALLBACK_BATTERY_LEVEL: %http://tizen.org/feature/battery. \n
-  /// #DEVICE_CALLBACK_BATTERY_CHARGING: %http://tizen.org/feature/battery. \n
-  /// #DEVICE_CALLBACK_FLASH_BRIGHTNESS: %http://tizen.org/feature/camera.back.flash. \n
-  /// Otherwise #DEVICE_ERROR_NOT_SUPPORTED is returned.
-  /// @param[in] type The device type to monitor
-  /// @param[in] callback The callback function to add
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #DEVICE_ERROR_NONE Successful
-  /// @retval #DEVICE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DEVICE_ERROR_ALREADY_IN_PROGRESS Operation already
-  /// @retval #DEVICE_ERROR_OPERATION_FAILED Operation failed
-  /// @retval #DEVICE_ERROR_NOT_SUPPORTED Not supported device
+  /// Adds a callback to the observing device state (e.g., battery, display, etc).
   ///
-  /// @code
+  /// Registers a callback function to be invoked when a specified device status changes. When the device status changes, the registered callback function will be called with the new status value as an argument.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/internal/default/platform>
+  /// - <http://tizen.org/privilege/led>
+  ///
+  /// **Remarks:**
+  /// - The following feature should be supported for `DEVICE_CALLBACK_DISPLAY_STATE`: http://tizen.org/feature/display.
+  /// - `DEVICE_CALLBACK_BATTERY_CAPACITY`: http://tizen.org/feature/battery.
+  /// - `DEVICE_CALLBACK_BATTERY_LEVEL`: http://tizen.org/feature/battery.
+  /// - `DEVICE_CALLBACK_BATTERY_CHARGING`: http://tizen.org/feature/battery.
+  /// - `DEVICE_CALLBACK_FLASH_BRIGHTNESS`: http://tizen.org/feature/camera.back.flash.
+  /// - Otherwise `DEVICE_ERROR_NOT_SUPPORTED` is returned.
+  ///
+  /// **Parameters:**
+  /// - `type` (in): The device type to monitor
+  /// - `callback` (in): The callback function to add
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DEVICE_ERROR_NONE`: Successful
+  /// - `DEVICE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DEVICE_ERROR_ALREADY_IN_PROGRESS`: Operation already
+  /// - `DEVICE_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `DEVICE_ERROR_NOT_SUPPORTED`: Not supported device
+  ///
+  /// **See also:**
+  /// - `device_callback_e`
+  /// - `device_changed_cb`
+  /// - `device_remove_callback`
+  ///
+  /// ```
   /// #include <device/callback.h>
   /// ...
   /// static void device_display_state_changed_cb(device_callback_e type, void *value, void *user_data)
@@ -319,10 +428,7 @@ class Tizen100CapiSystemDevice {
   /// ...
   /// }
   /// ...
-  /// @endcode
-  /// @see device_callback_e
-  /// @see device_changed_cb
-  /// @see device_remove_callback
+  /// ```
   int device_add_callback(
     int type,
     device_changed_cb callback,
@@ -342,24 +448,40 @@ class Tizen100CapiSystemDevice {
   late final _device_add_callback = _device_add_callbackPtr.asFunction<
       int Function(int, device_changed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Removes a device callback function that was added with device_add_callback().
-  /// @details After calling this, the specified callback function will no longer be called when the device status changes.
-  /// @since_tizen 2.3
-  /// @remarks The following feature should be supported for #DEVICE_CALLBACK_DISPLAY_STATE: %http://tizen.org/feature/display. \n
-  /// #DEVICE_CALLBACK_BATTERY_CAPACITY: %http://tizen.org/feature/battery. \n
-  /// #DEVICE_CALLBACK_BATTERY_LEVEL: %http://tizen.org/feature/battery. \n
-  /// #DEVICE_CALLBACK_BATTERY_CHARGING: %http://tizen.org/feature/battery. \n
-  /// #DEVICE_CALLBACK_FLASH_BRIGHTNESS: %http://tizen.org/feature/camera.back.flash. \n
-  /// Otherwise #DEVICE_ERROR_NOT_SUPPORTED is returned.
-  /// @param[in] type The device type to monitor
-  /// @param[in] callback The callback function to remove
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #DEVICE_ERROR_NONE Successful
-  /// @retval #DEVICE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DEVICE_ERROR_OPERATION_FAILED Operation failed
-  /// @retval #DEVICE_ERROR_NOT_SUPPORTED Not supported device
+  /// Removes a device callback function that was added with device_add_callback().
   ///
-  /// @code
+  /// After calling this, the specified callback function will no longer be called when the device status changes.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - The following feature should be supported for `DEVICE_CALLBACK_DISPLAY_STATE`: http://tizen.org/feature/display.
+  /// - `DEVICE_CALLBACK_BATTERY_CAPACITY`: http://tizen.org/feature/battery.
+  /// - `DEVICE_CALLBACK_BATTERY_LEVEL`: http://tizen.org/feature/battery.
+  /// - `DEVICE_CALLBACK_BATTERY_CHARGING`: http://tizen.org/feature/battery.
+  /// - `DEVICE_CALLBACK_FLASH_BRIGHTNESS`: http://tizen.org/feature/camera.back.flash.
+  /// - Otherwise `DEVICE_ERROR_NOT_SUPPORTED` is returned.
+  ///
+  /// **Parameters:**
+  /// - `type` (in): The device type to monitor
+  /// - `callback` (in): The callback function to remove
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DEVICE_ERROR_NONE`: Successful
+  /// - `DEVICE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DEVICE_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `DEVICE_ERROR_NOT_SUPPORTED`: Not supported device
+  ///
+  /// **See also:**
+  /// - `device_callback_e`
+  /// - `device_changed_cb`
+  /// - `device_add_callback`
+  ///
+  /// ```
   /// #include <device/callback.h>
   /// ...
   /// static void device_display_state_changed_cb(device_callback_e type, void *value, void *user_data)
@@ -376,10 +498,7 @@ class Tizen100CapiSystemDevice {
   /// device_remove_callback(DEVICE_CALLBACK_DISPLAY_STATE, device_display_state_changed_cb);
   /// }
   /// ...
-  /// @endcode
-  /// @see device_callback_e
-  /// @see device_changed_cb
-  /// @see device_add_callback
+  /// ```
   int device_remove_callback(
     int type,
     device_changed_cb callback,
@@ -396,22 +515,41 @@ class Tizen100CapiSystemDevice {
   late final _device_remove_callback = _device_remove_callbackPtr
       .asFunction<int Function(int, device_changed_cb)>();
 
-  /// @brief Gets the number of display devices connected to current device.
-  /// @details Retrieves the number of display devices connected to the system.\n
-  /// The number of displays is returned in the @a device_number parameter.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/display
-  /// @remarks #DEVICE_ERROR_NOT_SUPPORTED is returned, when the following feature is not supported: %http://tizen.org/feature/display
-  /// @param[out] device_number A pointer to an integer where the total number of displays will be stored
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #DEVICE_ERROR_NONE Successful
-  /// @retval #DEVICE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DEVICE_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DEVICE_ERROR_OPERATION_FAILED Operation failed
-  /// @retval #DEVICE_ERROR_NOT_SUPPORTED Not supported device
+  /// Gets the number of display devices connected to current device.
   ///
-  /// @code
+  /// Retrieves the number of display devices connected to the system. The number of displays is returned in the `device_number` parameter.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/display>
+  ///
+  /// **Remarks:**
+  /// - `DEVICE_ERROR_NOT_SUPPORTED` is returned, when the following feature is not supported: http://tizen.org/feature/display
+  ///
+  /// **Parameters:**
+  /// - `device_number` (out): A pointer to an integer where the total number of displays will be stored
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DEVICE_ERROR_NONE`: Successful
+  /// - `DEVICE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DEVICE_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DEVICE_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `DEVICE_ERROR_NOT_SUPPORTED`: Not supported device
+  ///
+  /// **See also:**
+  /// - `device_display_get_brightness()`
+  /// - `device_display_set_brightness()`
+  /// - `device_display_get_max_brightness()`
+  ///
+  /// ```
   /// #include <device/display.h>
   /// ...
   /// int number_of_display = 0;
@@ -419,10 +557,7 @@ class Tizen100CapiSystemDevice {
   /// ...
   /// ret = device_display_get_numbers(&number_of_display);
   /// ...
-  /// @endcode
-  /// @see device_display_get_brightness()
-  /// @see device_display_set_brightness()
-  /// @see device_display_get_max_brightness()
+  /// ```
   int device_display_get_numbers(
     ffi.Pointer<ffi.Int> device_number,
   ) {
@@ -437,27 +572,43 @@ class Tizen100CapiSystemDevice {
   late final _device_display_get_numbers = _device_display_get_numbersPtr
       .asFunction<int Function(ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the maximum brightness value that can be set based on the display index.
-  /// @details Retrieves the maximum brightness level of a specific display device.\n
-  /// The display device is identified by its index, which can be obtained using the device_get_display_numbers() function.\n
-  /// The maximum brightness level is returned in the @a max_brightness parameter.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/display
-  /// @remarks #DEVICE_ERROR_NOT_SUPPORTED is returned, when the following feature is not supported: %http://tizen.org/feature/display \n
-  /// or when the display HW module (e.g., plug-in touchscreen) is detached.
-  /// @param[in] display_index The index of the display \n
-  /// It can be greater than or equal to @c 0 and less than the number of displays returned by device_display_get_numbers(). \n
-  /// The index zero is always assigned to the main display
-  /// @param[out] max_brightness The maximum brightness value of the display
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #DEVICE_ERROR_NONE Successful
-  /// @retval #DEVICE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DEVICE_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DEVICE_ERROR_OPERATION_FAILED Operation failed
-  /// @retval #DEVICE_ERROR_NOT_SUPPORTED Not supported device
+  /// Gets the maximum brightness value that can be set based on the display index.
   ///
-  /// @code
+  /// Retrieves the maximum brightness level of a specific display device. The display device is identified by its index, which can be obtained using the device_get_display_numbers() function. The maximum brightness level is returned in the `max_brightness` parameter.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/display>
+  ///
+  /// **Remarks:**
+  /// - `DEVICE_ERROR_NOT_SUPPORTED` is returned, when the following feature is not supported: http://tizen.org/feature/display
+  /// - or when the display HW module (e.g., plug-in touchscreen) is detached.
+  ///
+  /// **Parameters:**
+  /// - `display_index` (in): The index of the display It can be greater than or equal to `0` and less than the number of displays returned by device_display_get_numbers(). The index zero is always assigned to the main display
+  /// - `max_brightness` (out): The maximum brightness value of the display
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DEVICE_ERROR_NONE`: Successful
+  /// - `DEVICE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DEVICE_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DEVICE_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `DEVICE_ERROR_NOT_SUPPORTED`: Not supported device
+  ///
+  /// **See also:**
+  /// - `device_display_get_numbers()`
+  /// - `device_display_set_brightness()`
+  /// - `device_display_get_brightness()`
+  ///
+  /// ```
   /// #include <device/display.h>
   /// ...
   /// int number_of_display = 0, brightness = 0, display_index = 0;
@@ -470,10 +621,7 @@ class Tizen100CapiSystemDevice {
   /// ...
   /// }
   /// ...
-  /// @endcode
-  /// @see device_display_get_numbers()
-  /// @see device_display_set_brightness()
-  /// @see device_display_get_brightness()
+  /// ```
   int device_display_get_max_brightness(
     int display_index,
     ffi.Pointer<ffi.Int> max_brightness,
@@ -491,27 +639,43 @@ class Tizen100CapiSystemDevice {
       _device_display_get_max_brightnessPtr
           .asFunction<int Function(int, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the display brightness value based on the display index.
-  /// @details Retrieves the current brightness level of a specific display device.\n
-  /// The display device is identified by its index, which can be obtained using the device_get_display_numbers().
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/display
-  /// @remarks #DEVICE_ERROR_NOT_SUPPORTED is returned, when the following feature is not supported: %http://tizen.org/feature/display \n
-  /// or when the display HW module (e.g., plug-in touchscreen) is detached.
-  /// @param[in] display_index The index of the display \n
-  /// It can be greater than or equal to @c 0 and less than the number of displays returned by device_display_get_numbers(). \n
-  /// The index zero is always assigned to the main display
-  /// @param[out] brightness The current brightness value of the display
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #DEVICE_ERROR_NONE Successful
-  /// @retval #DEVICE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DEVICE_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DEVICE_ERROR_OPERATION_FAILED Operation failed
-  /// @retval #DEVICE_ERROR_NOT_SUPPORTED Not supported device
+  /// Gets the display brightness value based on the display index.
   ///
-  /// @code
+  /// Retrieves the current brightness level of a specific display device. The display device is identified by its index, which can be obtained using the device_get_display_numbers().
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/display>
+  ///
+  /// **Remarks:**
+  /// - `DEVICE_ERROR_NOT_SUPPORTED` is returned, when the following feature is not supported: http://tizen.org/feature/display
+  /// - or when the display HW module (e.g., plug-in touchscreen) is detached.
+  ///
+  /// **Parameters:**
+  /// - `display_index` (in): The index of the display It can be greater than or equal to `0` and less than the number of displays returned by device_display_get_numbers(). The index zero is always assigned to the main display
+  /// - `brightness` (out): The current brightness value of the display
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DEVICE_ERROR_NONE`: Successful
+  /// - `DEVICE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DEVICE_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DEVICE_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `DEVICE_ERROR_NOT_SUPPORTED`: Not supported device
+  ///
+  /// **See also:**
+  /// - `device_display_get_numbers()`
+  /// - `device_display_set_brightness()`
+  /// - `device_display_get_max_brightness()`
+  ///
+  /// ```
   /// #include <device/display.h>
   /// ...
   /// int number_of_display = 0, brightness = 0, display_index = 0;
@@ -524,10 +688,7 @@ class Tizen100CapiSystemDevice {
   /// ...
   /// }
   /// ...
-  /// @endcode
-  /// @see device_display_get_numbers()
-  /// @see device_display_set_brightness()
-  /// @see device_display_get_max_brightness()
+  /// ```
   int device_display_get_brightness(
     int display_index,
     ffi.Pointer<ffi.Int> brightness,
@@ -544,27 +705,43 @@ class Tizen100CapiSystemDevice {
   late final _device_display_get_brightness = _device_display_get_brightnessPtr
       .asFunction<int Function(int, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Sets the display brightness value based on the display index.
-  /// @details Sets the brightness level of a specific display device.\n
-  /// The display device is identified by its index, which can be obtained using the device_get_display_numbers().
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/display
-  /// @remarks #DEVICE_ERROR_NOT_SUPPORTED is returned, when the following feature is not supported: %http://tizen.org/feature/display \n
-  /// or when the display HW module (e.g., plug-in touchscreen) is detached.
-  /// @param[in] display_index The index of the display \n
-  /// It can be greater than or equal to @c 0 and less than the number of displays returned by device_display_get_numbers(). \n
-  /// The index zero is always assigned to the main display
-  /// @param[in] brightness The new brightness value to set \n
-  /// The maximum value can be represented by device_display_get_max_brightness()
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #DEVICE_ERROR_NONE Successful
-  /// @retval #DEVICE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DEVICE_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DEVICE_ERROR_OPERATION_FAILED Operation failed
-  /// @retval #DEVICE_ERROR_NOT_SUPPORTED Not supported device
+  /// Sets the display brightness value based on the display index.
   ///
-  /// @code
+  /// Sets the brightness level of a specific display device. The display device is identified by its index, which can be obtained using the device_get_display_numbers().
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/display>
+  ///
+  /// **Remarks:**
+  /// - `DEVICE_ERROR_NOT_SUPPORTED` is returned, when the following feature is not supported: http://tizen.org/feature/display
+  /// - or when the display HW module (e.g., plug-in touchscreen) is detached.
+  ///
+  /// **Parameters:**
+  /// - `display_index` (in): The index of the display It can be greater than or equal to `0` and less than the number of displays returned by device_display_get_numbers(). The index zero is always assigned to the main display
+  /// - `brightness` (in): The new brightness value to set The maximum value can be represented by device_display_get_max_brightness()
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DEVICE_ERROR_NONE`: Successful
+  /// - `DEVICE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DEVICE_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DEVICE_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `DEVICE_ERROR_NOT_SUPPORTED`: Not supported device
+  ///
+  /// **See also:**
+  /// - `device_display_get_numbers()`
+  /// - `device_display_get_max_brightness()`
+  /// - `device_display_get_brightness()`
+  ///
+  /// ```
   /// #include <system/device.h>
   /// ...
   /// int number_of_display = 0, brightness = 100, display_index = 0;
@@ -577,10 +754,7 @@ class Tizen100CapiSystemDevice {
   /// ...
   /// }
   /// ...
-  /// @endcode
-  /// @see device_display_get_numbers()
-  /// @see device_display_get_max_brightness()
-  /// @see device_display_get_brightness()
+  /// ```
   int device_display_set_brightness(
     int display_index,
     int brightness,
@@ -597,22 +771,37 @@ class Tizen100CapiSystemDevice {
   late final _device_display_set_brightness =
       _device_display_set_brightnessPtr.asFunction<int Function(int, int)>();
 
-  /// @brief Gets the current device's display state, including normal, dim, and off states.
-  /// @details Gets the current state of the display.\n
-  /// The current display state is returned in the @a state parameter.
-  /// @since_tizen 2.3
-  /// @remarks #DEVICE_ERROR_NOT_SUPPORTED is returned, when the following feature is not supported: %http://tizen.org/feature/display
-  /// @param[out] state The display state
-  /// - DISPLAY_STATE_NORMAL: The normal display state.\n
-  /// - DISPLAY_STATE_DIM: The dimmed display state.\n
-  /// - DISPLAY_STATE_OFF: The off display state.
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #DEVICE_ERROR_NONE Successful
-  /// @retval #DEVICE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DEVICE_ERROR_OPERATION_FAILED Operation failed
-  /// @retval #DEVICE_ERROR_NOT_SUPPORTED Not supported device
+  /// Gets the current device's display state, including normal, dim, and off states.
   ///
-  /// @code
+  /// Gets the current state of the display. The current display state is returned in the `state` parameter.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Remarks:**
+  /// - `DEVICE_ERROR_NOT_SUPPORTED` is returned, when the following feature is not supported: http://tizen.org/feature/display
+  ///
+  /// **Parameters:**
+  /// - `state` (out): The display state
+  ///   - DISPLAY_STATE_NORMAL: The normal display state.
+  ///   - DISPLAY_STATE_DIM: The dimmed display state.
+  ///   - DISPLAY_STATE_OFF: The off display state.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DEVICE_ERROR_NONE`: Successful
+  /// - `DEVICE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DEVICE_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `DEVICE_ERROR_NOT_SUPPORTED`: Not supported device
+  ///
+  /// **See also:**
+  /// - `device_add_callback`
+  /// - `device_remove_callback`
+  /// - `DEVICE_CALLBACK_DISPLAY_STATE`
+  ///
+  /// ```
   /// #include <system/device.h>
   /// ...
   /// display_state_e state;
@@ -623,10 +812,7 @@ class Tizen100CapiSystemDevice {
   /// ...
   /// }
   /// ...
-  /// @endcode
-  /// @see device_add_callback
-  /// @see device_remove_callback
-  /// @see #DEVICE_CALLBACK_DISPLAY_STATE
+  /// ```
   int device_display_get_state(
     ffi.Pointer<ffi.Int32> state,
   ) {
@@ -641,23 +827,46 @@ class Tizen100CapiSystemDevice {
   late final _device_display_get_state = _device_display_get_statePtr
       .asFunction<int Function(ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Changes the current device's display state to the specified state by force.
-  /// @details It should be checked the profile version and supported display state.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/display
-  /// @remarks This API triggers display change process and then updates the status when it completes. While the operation is on-going, the device_display_get_state() function returns previous display state.
-  /// @remarks #DEVICE_ERROR_NOT_SUPPORTED is returned, when the following feature is not supported: %http://tizen.org/feature/display.state.
-  /// @param[in] state The display state
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #DEVICE_ERROR_NONE Successful
-  /// @retval #DEVICE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DEVICE_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DEVICE_ERROR_OPERATION_FAILED Operation failed
-  /// @retval #DEVICE_ERROR_NOT_SUPPORTED Not supported device
-  /// @par Example
+  /// Changes the current device's display state to the specified state by force.
   ///
-  /// @code
+  /// It should be checked the profile version and supported display state.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/display>
+  ///
+  /// **Remarks:**
+  /// - This API triggers display change process and then updates the status when it completes. While the operation is on-going, the device_display_get_state() function returns previous display state.
+  /// - `DEVICE_ERROR_NOT_SUPPORTED` is returned, when the following feature is not supported: http://tizen.org/feature/display.state.
+  ///
+  /// **Parameters:**
+  /// - `state` (in): The display state
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DEVICE_ERROR_NONE`: Successful
+  /// - `DEVICE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DEVICE_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DEVICE_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `DEVICE_ERROR_NOT_SUPPORTED`: Not supported device
+  ///
+  /// **See also:**
+  /// - `device_power_request_lock()`
+  /// - `device_power_release_lock()`
+  /// - `device_add_callback`
+  /// - `device_remove_callback`
+  /// - `DEVICE_CALLBACK_DISPLAY_STATE`
+  ///
+  /// **Example:**
+  ///
+  /// ```
   /// ...
   /// result = device_display_change_state(DISPLAY_STATE_SCREEN_OFF);
   /// if (result < 0)
@@ -665,12 +874,7 @@ class Tizen100CapiSystemDevice {
   /// else
   /// dlog_print(DLOG_DEBUG, LOG_TAG, "[SUCCESS] return value result =%d \n",result);
   /// ...
-  /// @endcode
-  /// @see device_power_request_lock()
-  /// @see device_power_release_lock()
-  /// @see device_add_callback
-  /// @see device_remove_callback
-  /// @see #DEVICE_CALLBACK_DISPLAY_STATE
+  /// ```
   int device_display_change_state(
     int state,
   ) {
@@ -685,29 +889,43 @@ class Tizen100CapiSystemDevice {
   late final _device_display_change_state =
       _device_display_change_statePtr.asFunction<int Function(int)>();
 
-  /// @brief Gets the number of vibrators available on the current device.
-  /// @details Retrieves the total number of vibrators available on the device.
-  /// The number of vibrators is returned in the @a device_number parameter.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/haptic
-  /// @remarks Ensure that the provided @a device_number pointer is valid and has enough memory allocated.
-  /// @param[in] device_number The number of vibrators
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #DEVICE_ERROR_NONE Successful
-  /// @retval #DEVICE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DEVICE_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DEVICE_ERROR_OPERATION_FAILED Operation failed
-  /// @retval #DEVICE_ERROR_NOT_SUPPORTED Not supported device
+  /// Gets the number of vibrators available on the current device.
   ///
-  /// @code
+  /// Retrieves the total number of vibrators available on the device. The number of vibrators is returned in the `device_number` parameter.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/haptic>
+  ///
+  /// **Remarks:**
+  /// - Ensure that the provided `device_number` pointer is valid and has enough memory allocated.
+  ///
+  /// **Parameters:**
+  /// - `device_number` (in): The number of vibrators
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DEVICE_ERROR_NONE`: Successful
+  /// - `DEVICE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DEVICE_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DEVICE_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `DEVICE_ERROR_NOT_SUPPORTED`: Not supported device
+  ///
+  /// ```
   /// #include <device/haptic.h>
   /// ...
   /// int num_of_haptic_device = 0;
   /// int ret = 0;
   /// ...
   /// ret = device_haptic_get_count(&num_of_haptic_device);
-  /// @endcode
+  /// ```
   int device_haptic_get_count(
     ffi.Pointer<ffi.Int> device_number,
   ) {
@@ -722,24 +940,42 @@ class Tizen100CapiSystemDevice {
   late final _device_haptic_get_count = _device_haptic_get_countPtr
       .asFunction<int Function(ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Opens a haptic-vibration device with the given @a device_index.
-  /// @details Internally, it makes a connection to control the vibrator.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/haptic
-  /// @remarks You must close the Haptic API using device_haptic_close().
-  /// @remarks The @a device_handle should be released using device_haptic_close().
-  /// @param[in] device_index The index of device what you want to vibrate \n
-  /// The index starts from @c 0
-  /// @param[out] device_handle The handle of vibrator
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #DEVICE_ERROR_NONE Successful
-  /// @retval #DEVICE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DEVICE_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DEVICE_ERROR_OPERATION_FAILED Operation failed
-  /// @retval #DEVICE_ERROR_NOT_SUPPORTED Not supported device
+  /// Opens a haptic-vibration device with the given `device_index`.
   ///
-  /// @code
+  /// Internally, it makes a connection to control the vibrator.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/haptic>
+  ///
+  /// **Remarks:**
+  /// - You must close the Haptic API using device_haptic_close().
+  /// - The `device_handle` should be released using device_haptic_close().
+  ///
+  /// **Parameters:**
+  /// - `device_index` (in): The index of device what you want to vibrate The index starts from `0`
+  /// - `device_handle` (out): The handle of vibrator
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DEVICE_ERROR_NONE`: Successful
+  /// - `DEVICE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DEVICE_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DEVICE_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `DEVICE_ERROR_NOT_SUPPORTED`: Not supported device
+  ///
+  /// **See also:**
+  /// - `device_haptic_close()`
+  /// - `haptic_device_h`
+  ///
+  /// ```
   /// #include <device/haptic.h>
   /// ...
   /// haptic_device_h haptic_device;
@@ -747,9 +983,7 @@ class Tizen100CapiSystemDevice {
   /// ...
   /// ret = device_haptic_close(haptic_device);
   /// ...
-  /// @endcode
-  /// @see device_haptic_close()
-  /// @see haptic_device_h
+  /// ```
   int device_haptic_open(
     int device_index,
     ffi.Pointer<haptic_device_h> device_handle,
@@ -767,21 +1001,40 @@ class Tizen100CapiSystemDevice {
   late final _device_haptic_open = _device_haptic_openPtr
       .asFunction<int Function(int, ffi.Pointer<haptic_device_h>)>();
 
-  /// @brief Closes a haptic-vibration device by haptic device handler.
-  /// @details Internally, it disconnects the connection to the vibrator by haptic device handler.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/haptic
-  /// @remarks Ensure The @a device_handle should be get properly by device_haptic_open().
-  /// @param[in] device_handle The device handle from device_haptic_open()
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #DEVICE_ERROR_NONE Successful
-  /// @retval #DEVICE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DEVICE_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DEVICE_ERROR_OPERATION_FAILED Operation failed
-  /// @retval #DEVICE_ERROR_NOT_SUPPORTED Not supported device
+  /// Closes a haptic-vibration device by haptic device handler.
   ///
-  /// @code
+  /// Internally, it disconnects the connection to the vibrator by haptic device handler.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/haptic>
+  ///
+  /// **Remarks:**
+  /// - Ensure The `device_handle` should be get properly by device_haptic_open().
+  ///
+  /// **Parameters:**
+  /// - `device_handle` (in): The device handle from device_haptic_open()
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DEVICE_ERROR_NONE`: Successful
+  /// - `DEVICE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DEVICE_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DEVICE_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `DEVICE_ERROR_NOT_SUPPORTED`: Not supported device
+  ///
+  /// **See also:**
+  /// - `device_haptic_open()`
+  /// - `haptic_device_h`
+  ///
+  /// ```
   /// #include <device/haptic.h>
   /// ...
   /// haptic_device_h haptic_device;
@@ -789,9 +1042,7 @@ class Tizen100CapiSystemDevice {
   /// ...
   /// ret = device_haptic_close(haptic_device);
   /// ...
-  /// @endcode
-  /// @see device_haptic_open()
-  /// @see haptic_device_h
+  /// ```
   int device_haptic_close(
     haptic_device_h device_handle,
   ) {
@@ -806,26 +1057,46 @@ class Tizen100CapiSystemDevice {
   late final _device_haptic_close =
       _device_haptic_closePtr.asFunction<int Function(haptic_device_h)>();
 
-  /// @brief Vibrates during the specified time with a constant intensity.
-  /// @details This function can be used to start monotonous vibration for the specified time.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/haptic
-  /// @remarks @a feedback level is reserved for auto changing to save variable in the settings.
-  /// @remarks @a effect_handle value can be @c 0(zero).
-  /// @remarks To prevent unexpected sleep (suspend) during vibration, please use @ref CAPI_SYSTEM_DEVICE_POWER_MODULE.
-  /// @param[in] device_handle The device handle from device_haptic_open()
-  /// @param[in] duration The play duration in milliseconds
-  /// @param[in] feedback The amount of the intensity variation (@c 0 ~ @c 100)
-  /// @param[out] effect_handle The pointer to the variable that will receive a handle to the playing effect
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #DEVICE_ERROR_NONE Successful
-  /// @retval #DEVICE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DEVICE_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DEVICE_ERROR_OPERATION_FAILED Operation failed
-  /// @retval #DEVICE_ERROR_NOT_SUPPORTED Not supported device
+  /// Vibrates during the specified time with a constant intensity.
   ///
-  /// @code
+  /// This function can be used to start monotonous vibration for the specified time.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/haptic>
+  ///
+  /// **Remarks:**
+  /// - `feedback` level is reserved for auto changing to save variable in the settings.
+  /// - `effect_handle` value can be `0(zero`).
+  /// - To prevent unexpected sleep (suspend) during vibration, please use `CAPI_SYSTEM_DEVICE_POWER_MODULE.`
+  ///
+  /// **Parameters:**
+  /// - `device_handle` (in): The device handle from device_haptic_open()
+  /// - `duration` (in): The play duration in milliseconds
+  /// - `feedback` (in): The amount of the intensity variation (`0` ~ `100`)
+  /// - `effect_handle` (out): The pointer to the variable that will receive a handle to the playing effect
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DEVICE_ERROR_NONE`: Successful
+  /// - `DEVICE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DEVICE_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DEVICE_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `DEVICE_ERROR_NOT_SUPPORTED`: Not supported device
+  ///
+  /// **See also:**
+  /// - `device_haptic_stop()`
+  /// - `haptic_device_h`
+  /// - `haptic_effect_h`
+  ///
+  /// ```
   /// #include <device/haptic.h>
   /// ...
   /// haptic_device_h haptic_device;
@@ -836,10 +1107,7 @@ class Tizen100CapiSystemDevice {
   /// ...
   /// ret = device_haptic_close(haptic_device);
   /// ...
-  /// @endcode
-  /// @see device_haptic_stop()
-  /// @see haptic_device_h
-  /// @see haptic_effect_h
+  /// ```
   int device_haptic_vibrate(
     haptic_device_h device_handle,
     int duration,
@@ -861,21 +1129,39 @@ class Tizen100CapiSystemDevice {
   late final _device_haptic_vibrate = _device_haptic_vibratePtr.asFunction<
       int Function(haptic_device_h, int, int, ffi.Pointer<haptic_effect_h>)>();
 
-  /// @brief Stops all vibration effects which are being played by haptic device handler.
-  /// @details This function can be used to stop all effects started by device_haptic_vibrate().
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/haptic
-  /// @param[in] device_handle The device handle from device_haptic_open()
-  /// @param[in] effect_handle The effect handle from device_haptic_vibrate()
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #DEVICE_ERROR_NONE Successful
-  /// @retval #DEVICE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DEVICE_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DEVICE_ERROR_OPERATION_FAILED Operation failed
-  /// @retval #DEVICE_ERROR_NOT_SUPPORTED Not supported device
+  /// Stops all vibration effects which are being played by haptic device handler.
   ///
-  /// @code
+  /// This function can be used to stop all effects started by device_haptic_vibrate().
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/haptic>
+  ///
+  /// **Parameters:**
+  /// - `device_handle` (in): The device handle from device_haptic_open()
+  /// - `effect_handle` (in): The effect handle from device_haptic_vibrate()
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DEVICE_ERROR_NONE`: Successful
+  /// - `DEVICE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DEVICE_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DEVICE_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `DEVICE_ERROR_NOT_SUPPORTED`: Not supported device
+  ///
+  /// **See also:**
+  /// - `device_haptic_vibrate()`
+  /// - `haptic_device_h`
+  /// - `haptic_effect_h`
+  ///
+  /// ```
   /// #include <device/haptic.h>
   /// ...
   /// haptic_device_h haptic_device;
@@ -888,10 +1174,7 @@ class Tizen100CapiSystemDevice {
   /// ...
   /// ret = device_haptic_close(haptic_device);
   /// ...
-  /// @endcode
-  /// @see device_haptic_vibrate()
-  /// @see haptic_device_h
-  /// @see haptic_effect_h
+  /// ```
   int device_haptic_stop(
     haptic_device_h device_handle,
     haptic_effect_h effect_handle,
@@ -909,23 +1192,36 @@ class Tizen100CapiSystemDevice {
   late final _device_haptic_stop = _device_haptic_stopPtr
       .asFunction<int Function(haptic_device_h, haptic_effect_h)>();
 
-  /// @brief Gets the information the IR module is available on the device.
-  /// @details Gets the boolean value whether the IR module is available on the device. \n
-  /// If the IR module is available, the function returns @c true in the @a available parameter. \n
-  /// Otherwise, it returns @c false.
-  /// @since_tizen 3.0
-  /// @remarks Ensure that the provided @a available pointer is valid and has enough memory allocated.
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/use_ir
-  /// @param[out] available The information whether IR is available
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #DEVICE_ERROR_NONE Successful
-  /// @retval #DEVICE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DEVICE_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DEVICE_ERROR_OPERATION_FAILED Operation failed
-  /// @retval #DEVICE_ERROR_NOT_SUPPORTED Not supported device
+  /// Gets the information the IR module is available on the device.
   ///
-  /// @code
+  /// Gets the boolean value whether the IR module is available on the device. If the IR module is available, the function returns `true` in the `available` parameter. Otherwise, it returns `false`.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/use_ir>
+  ///
+  /// **Remarks:**
+  /// - Ensure that the provided `available` pointer is valid and has enough memory allocated.
+  ///
+  /// **Parameters:**
+  /// - `available` (out): The information whether IR is available
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DEVICE_ERROR_NONE`: Successful
+  /// - `DEVICE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DEVICE_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DEVICE_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `DEVICE_ERROR_NOT_SUPPORTED`: Not supported device
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <device/ir.h>
   /// ...
@@ -941,7 +1237,7 @@ class Tizen100CapiSystemDevice {
   /// printf("IR module is not available.\n");
   /// }
   /// ...
-  /// @endcode
+  /// ```
   int device_ir_is_available(
     ffi.Pointer<ffi.Bool> available,
   ) {
@@ -956,21 +1252,36 @@ class Tizen100CapiSystemDevice {
   late final _device_ir_is_available = _device_ir_is_availablePtr
       .asFunction<int Function(ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Transmits IR command with the specified carrier frequency and pattern.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/use_ir
-  /// @param[in] carrier_frequency Carrier frequency to transmit IR command (Hertz)
-  /// @param[in] pattern Integer array of IR command
-  /// @param[in] size Size of IR command pattern
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #DEVICE_ERROR_NONE Successful
-  /// @retval #DEVICE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DEVICE_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DEVICE_ERROR_OPERATION_FAILED Operation failed
-  /// @retval #DEVICE_ERROR_NOT_SUPPORTED Not supported device
+  /// Transmits IR command with the specified carrier frequency and pattern.
   ///
-  /// @code
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/use_ir>
+  ///
+  /// **Parameters:**
+  /// - `carrier_frequency` (in): Carrier frequency to transmit IR command (Hertz)
+  /// - `pattern` (in): Integer array of IR command
+  /// - `size` (in): Size of IR command pattern
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DEVICE_ERROR_NONE`: Successful
+  /// - `DEVICE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DEVICE_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DEVICE_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `DEVICE_ERROR_NOT_SUPPORTED`: Not supported device
+  ///
+  /// **See also:**
+  /// - `device_ir_is_available()`
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <device/ir.h>
   /// ...
@@ -983,8 +1294,7 @@ class Tizen100CapiSystemDevice {
   /// }
   /// printf("IR command transmitted successfully.\n");
   /// ...
-  /// @endcode
-  /// @see device_ir_is_available()
+  /// ```
   int device_ir_transmit(
     int carrier_frequency,
     ffi.Pointer<ffi.Int> pattern,
@@ -1004,21 +1314,36 @@ class Tizen100CapiSystemDevice {
   late final _device_ir_transmit = _device_ir_transmitPtr
       .asFunction<int Function(int, ffi.Pointer<ffi.Int>, int)>();
 
-  /// @brief Gets the max brightness value of a LED that is located next to the camera.
-  /// @details Retrieves the maximum brightness level of the back camera flash.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/led
-  /// @remarks This API is related to the following feature: %http://tizen.org/feature/camera.back.flash
-  /// @param[out] max_brightness The max brightness value of the LED
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #DEVICE_ERROR_NONE Successful
-  /// @retval #DEVICE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DEVICE_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DEVICE_ERROR_OPERATION_FAILED Operation failed
-  /// @retval #DEVICE_ERROR_NOT_SUPPORTED Not supported device
+  /// Gets the max brightness value of a LED that is located next to the camera.
   ///
-  /// @code
+  /// Retrieves the maximum brightness level of the back camera flash.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/led>
+  ///
+  /// **Remarks:**
+  /// - This API is related to the following feature: http://tizen.org/feature/camera.back.flash
+  ///
+  /// **Parameters:**
+  /// - `max_brightness` (out): The max brightness value of the LED
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DEVICE_ERROR_NONE`: Successful
+  /// - `DEVICE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DEVICE_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DEVICE_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `DEVICE_ERROR_NOT_SUPPORTED`: Not supported device
+  ///
+  /// ```
   /// #include <device/led.h>
   /// ...
   /// int max_brightness = 0;
@@ -1026,7 +1351,7 @@ class Tizen100CapiSystemDevice {
   /// ...
   /// ret = device_flash_get_max_brightness(&max_brightness);
   /// ...
-  /// @endcode
+  /// ```
   int device_flash_get_max_brightness(
     ffi.Pointer<ffi.Int> max_brightness,
   ) {
@@ -1042,22 +1367,39 @@ class Tizen100CapiSystemDevice {
       _device_flash_get_max_brightnessPtr
           .asFunction<int Function(ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the brightness value of a LED that is located next to the camera.
-  /// @details Retrieves the current brightness level of the back camera flash. \n
-  /// The brightness level is filled in the @a brightness parameter.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/led
-  /// @remarks This API is related to the following feature: %http://tizen.org/feature/camera.back.flash
-  /// @param[out] brightness The brightness value of LED (@c 0 ~ MAX)
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #DEVICE_ERROR_NONE Successful
-  /// @retval #DEVICE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DEVICE_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DEVICE_ERROR_OPERATION_FAILED Operation failed
-  /// @retval #DEVICE_ERROR_NOT_SUPPORTED Not supported device
+  /// Gets the brightness value of a LED that is located next to the camera.
   ///
-  /// @code
+  /// Retrieves the current brightness level of the back camera flash. The brightness level is filled in the `brightness` parameter.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/led>
+  ///
+  /// **Remarks:**
+  /// - This API is related to the following feature: http://tizen.org/feature/camera.back.flash
+  ///
+  /// **Parameters:**
+  /// - `brightness` (out): The brightness value of LED (`0` ~ MAX)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DEVICE_ERROR_NONE`: Successful
+  /// - `DEVICE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DEVICE_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DEVICE_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `DEVICE_ERROR_NOT_SUPPORTED`: Not supported device
+  ///
+  /// **See also:**
+  /// - `device_flash_set_brightness()`
+  ///
+  /// ```
   /// #include <device/led.h>
   /// ...
   /// int brightness = 0;
@@ -1065,8 +1407,7 @@ class Tizen100CapiSystemDevice {
   /// ...
   /// ret = device_flash_get_brightness(&brightness);
   /// ...
-  /// @endcode
-  /// @see device_flash_set_brightness()
+  /// ```
   int device_flash_get_brightness(
     ffi.Pointer<ffi.Int> brightness,
   ) {
@@ -1081,24 +1422,42 @@ class Tizen100CapiSystemDevice {
   late final _device_flash_get_brightness = _device_flash_get_brightnessPtr
       .asFunction<int Function(ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Sets the brightness value of a LED that is located next to the camera.
-  /// @details Sets the brightness level of the back camera flash. \n
-  /// The desired brightness level is specified in the @a brightness parameter.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/led
-  /// @remarks Since 2.4, this API check camera flash status whether camera API preempted flash or not, so it could be failed if flash was preempted by camera API. In this case, API will return #DEVICE_ERROR_RESOURCE_BUSY error.
-  /// This API is related to the following feature: %http://tizen.org/feature/camera.back.flash
-  /// @param[in] brightness The brightness value of LED (@c 0 ~ MAX)
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #DEVICE_ERROR_NONE Successful
-  /// @retval #DEVICE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DEVICE_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DEVICE_ERROR_OPERATION_FAILED Operation failed
-  /// @retval #DEVICE_ERROR_NOT_SUPPORTED Not supported device
-  /// @retval #DEVICE_ERROR_RESOURCE_BUSY Device or resource busy
+  /// Sets the brightness value of a LED that is located next to the camera.
   ///
-  /// @code
+  /// Sets the brightness level of the back camera flash. The desired brightness level is specified in the `brightness` parameter.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/led>
+  ///
+  /// **Remarks:**
+  /// - Since 2.4, this API check camera flash status whether camera API preempted flash or not, so it could be failed if flash was preempted by camera API. In this case, API will return `DEVICE_ERROR_RESOURCE_BUSY` error.
+  /// - This API is related to the following feature: http://tizen.org/feature/camera.back.flash
+  ///
+  /// **Parameters:**
+  /// - `brightness` (in): The brightness value of LED (`0` ~ MAX)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DEVICE_ERROR_NONE`: Successful
+  /// - `DEVICE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DEVICE_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DEVICE_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `DEVICE_ERROR_NOT_SUPPORTED`: Not supported device
+  /// - `DEVICE_ERROR_RESOURCE_BUSY`: Device or resource busy
+  ///
+  /// **See also:**
+  /// - `device_flash_get_max_brightness()`
+  /// - `device_flash_get_brightness()`
+  ///
+  /// ```
   /// #include <device/led.h>
   /// ...
   /// int brightness = 0;
@@ -1106,9 +1465,7 @@ class Tizen100CapiSystemDevice {
   /// ...
   /// ret = device_flash_set_brightness(brightness);
   /// ...
-  /// @endcode
-  /// @see device_flash_get_max_brightness()
-  /// @see device_flash_get_brightness()
+  /// ```
   int device_flash_set_brightness(
     int brightness,
   ) {
@@ -1123,24 +1480,40 @@ class Tizen100CapiSystemDevice {
   late final _device_flash_set_brightness =
       _device_flash_set_brightnessPtr.asFunction<int Function(int)>();
 
-  /// @brief Plays the custom effect of the service LED that is located to the front of a device.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/led
-  /// @remarks This API is related to the following feature: %http://tizen.org/feature/led
-  /// @param[in] on Turn on time in milliseconds
-  /// @param[in] off Turn off time in milliseconds
-  /// @param[in] color The Color value \n
-  /// The first byte means opaque and the other 3 bytes are RGB values
-  /// @param[in] flags The combination of enum #led_custom_flags
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #DEVICE_ERROR_NONE Successful
-  /// @retval #DEVICE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DEVICE_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DEVICE_ERROR_OPERATION_FAILED Operation failed
-  /// @retval #DEVICE_ERROR_NOT_SUPPORTED Not supported device
+  /// Plays the custom effect of the service LED that is located to the front of a device.
   ///
-  /// @code
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/led>
+  ///
+  /// **Remarks:**
+  /// - This API is related to the following feature: http://tizen.org/feature/led
+  ///
+  /// **Parameters:**
+  /// - `on` (in): Turn on time in milliseconds
+  /// - `off` (in): Turn off time in milliseconds
+  /// - `color` (in): The Color value The first byte means opaque and the other 3 bytes are RGB values
+  /// - `flags` (in): The combination of enum `led_custom_flags`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DEVICE_ERROR_NONE`: Successful
+  /// - `DEVICE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DEVICE_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DEVICE_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `DEVICE_ERROR_NOT_SUPPORTED`: Not supported device
+  ///
+  /// **See also:**
+  /// - `device_led_stop_custom()`
+  ///
+  /// ```
   /// #include <stdio.h>
   /// #include <device/led.h>
   /// ...
@@ -1155,8 +1528,7 @@ class Tizen100CapiSystemDevice {
   /// }
   /// printf("Custom effect played successfully.\n");
   /// ...
-  /// @endcode
-  /// @see device_led_stop_custom()
+  /// ```
   int device_led_play_custom(
     int on1,
     int off,
@@ -1178,22 +1550,37 @@ class Tizen100CapiSystemDevice {
   late final _device_led_play_custom =
       _device_led_play_customPtr.asFunction<int Function(int, int, int, int)>();
 
-  /// @brief Stops the custom effect of the service LED that is located to the front of a device.
-  /// @details Stops the custom effect of the service LED located at the front of the device.
-  /// The custom effect was started by calling device_led_play_custom().
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/led
-  /// @remarks This API is related to the following feature: %http://tizen.org/feature/led \n
-  /// Requested custom effects by device_led_play_custom() are removed.
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #DEVICE_ERROR_NONE Successful
-  /// @retval #DEVICE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DEVICE_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DEVICE_ERROR_OPERATION_FAILED Operation failed
-  /// @retval #DEVICE_ERROR_NOT_SUPPORTED Not supported device
+  /// Stops the custom effect of the service LED that is located to the front of a device.
   ///
-  /// @code
+  /// Stops the custom effect of the service LED located at the front of the device. The custom effect was started by calling device_led_play_custom().
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/led>
+  ///
+  /// **Remarks:**
+  /// - This API is related to the following feature: http://tizen.org/feature/led
+  /// - Requested custom effects by device_led_play_custom() are removed.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DEVICE_ERROR_NONE`: Successful
+  /// - `DEVICE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DEVICE_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DEVICE_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `DEVICE_ERROR_NOT_SUPPORTED`: Not supported device
+  ///
+  /// **See also:**
+  /// - `device_led_play_custom()`
+  ///
+  /// ```
   /// #include <device/led.h>
   /// ...
   /// int ret = device_led_play_custom(100, 200, 0xFF0000, LED_CUSTOM_DEFAULT);
@@ -1203,8 +1590,7 @@ class Tizen100CapiSystemDevice {
   /// sleep(5); // Wait for 5 seconds
   /// ret = device_led_stop_custom();
   /// ...
-  /// @endcode
-  /// @see device_led_play_custom()
+  /// ```
   int device_led_stop_custom() {
     return _device_led_stop_custom();
   }
@@ -1214,41 +1600,43 @@ class Tizen100CapiSystemDevice {
   late final _device_led_stop_custom =
       _device_led_stop_customPtr.asFunction<int Function()>();
 
-  /// @brief Locks the given specific power lock type for a specified time.
-  /// @details After the given @a timeout_ms (in milliseconds), unlock the given lock state automatically.
-  /// Scenario 1. If the same application requests the same power lock more than twice before it is released or expired, \n
-  /// the timeout will be updated to the latest requested time. \n
-  /// For example:
-  /// The first request has a timeout of 5000ms. \n
-  /// The second request has a timeout of 1000ms. \n
-  /// If the second request is made before the first request is released or expired, \n
-  /// the timeout will be updated to the latest requested time, which is 1000ms.
+  /// Locks the given specific power lock type for a specified time.
   ///
-  /// Scenario 2. If different applications request the same power lock type, \n
-  /// the power state timeout will be set to the maximum of the requested timeouts. \n
-  /// For example:
-  /// Application A requests POWER_LOCK_CPU with a timeout of 5000ms. \n
-  /// Application B requests the same POWER_LOCK_CPU with a timeout of 1000ms. \n
-  /// Unless Application A releases the POWER_LOCK_CPU lock, \n
-  /// the timeout for POWER_LOCK_CPU will remain at the maximum requested time, which is 5000ms.
+  /// After the given `timeout_ms` (in milliseconds), unlock the given lock state automatically. Scenario 1. If the same application requests the same power lock more than twice before it is released or expired, the timeout will be updated to the latest requested time. For example: The first request has a timeout of 5000ms. The second request has a timeout of 1000ms. If the second request is made before the first request is released or expired, the timeout will be updated to the latest requested time, which is 1000ms. Scenario 2. If different applications request the same power lock type, the power state timeout will be set to the maximum of the requested timeouts. For example: Application A requests POWER_LOCK_CPU with a timeout of 5000ms. Application B requests the same POWER_LOCK_CPU with a timeout of 1000ms. Unless Application A releases the POWER_LOCK_CPU lock, the timeout for POWER_LOCK_CPU will remain at the maximum requested time, which is 5000ms.
   ///
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/display
-  /// @remarks If the process dies after success request lock, then every lock will be removed.
-  /// If display feature(http://tizen.org/feature/display) is false, then only the type POWER_LOCK_CPU is effective,
-  /// and the other type returns DEVICE_ERROR_NOT_SUPPORTED. And even thoguh the display feature is false, it requires
-  /// display privilege(http://tizen.org/privilege/display).
-  /// @param[in] type The power type to request lock
-  /// @param[in] timeout_ms The positive number in milliseconds or @c 0 for permanent lock \n
-  /// So you must release the permanent lock of power state with #device_power_release_lock() if @a timeout_ms is zero
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #DEVICE_ERROR_NONE Successful
-  /// @retval #DEVICE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DEVICE_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DEVICE_ERROR_OPERATION_FAILED Operation failed
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @code
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/display>
+  ///
+  /// **Remarks:**
+  /// - If the process dies after success request lock, then every lock will be removed.
+  /// - If display feature(http://tizen.org/feature/display) is false, then only the type POWER_LOCK_CPU is effective,
+  /// - and the other type returns DEVICE_ERROR_NOT_SUPPORTED. And even thoguh the display feature is false, it requires
+  /// - display privilege(http://tizen.org/privilege/display).
+  ///
+  /// **Parameters:**
+  /// - `type` (in): The power type to request lock
+  /// - `timeout_ms` (in): The positive number in milliseconds or `0` for permanent lock So you must release the permanent lock of power state with `device_power_release_lock()` if `timeout_ms` is zero
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DEVICE_ERROR_NONE`: Successful
+  /// - `DEVICE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DEVICE_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DEVICE_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **See also:**
+  /// - `device_power_release_lock()`
+  /// - `power_lock_e`
+  ///
+  /// ```
   /// #include <device/power.h>
   /// ...
   /// int ret = 0;
@@ -1257,9 +1645,7 @@ class Tizen100CapiSystemDevice {
   /// ....
   /// }
   /// ...
-  /// @endcode
-  /// @see device_power_release_lock()
-  /// @see power_lock_e
+  /// ```
   int device_power_request_lock(
     int type,
     int timeout_ms,
@@ -1276,22 +1662,41 @@ class Tizen100CapiSystemDevice {
   late final _device_power_request_lock =
       _device_power_request_lockPtr.asFunction<int Function(int, int)>();
 
-  /// @brief Releases the given specific power lock type which was locked before.
-  /// @details Releases the lock of specific power lock type that was previously acquired using device_power_request_lock().
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/display
-  /// @remarks If display feature(http://tizen.org/feature/display) is false, then only the type POWER_LOCK_CPU is effective,
-  /// and the other type returns DEVICE_ERROR_NOT_SUPPORTED. And even thoguh the display feature is false, it requires
-  /// display privilege(http://tizen.org/privilege/display).
-  /// @param[in] type The power type to release lock
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #DEVICE_ERROR_NONE Successful
-  /// @retval #DEVICE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DEVICE_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DEVICE_ERROR_OPERATION_FAILED Operation failed
+  /// Releases the given specific power lock type which was locked before.
   ///
-  /// @code
+  /// Releases the lock of specific power lock type that was previously acquired using device_power_request_lock().
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/display>
+  ///
+  /// **Remarks:**
+  /// - If display feature(http://tizen.org/feature/display) is false, then only the type POWER_LOCK_CPU is effective,
+  /// - and the other type returns DEVICE_ERROR_NOT_SUPPORTED. And even thoguh the display feature is false, it requires
+  /// - display privilege(http://tizen.org/privilege/display).
+  ///
+  /// **Parameters:**
+  /// - `type` (in): The power type to release lock
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DEVICE_ERROR_NONE`: Successful
+  /// - `DEVICE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DEVICE_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DEVICE_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **See also:**
+  /// - `device_power_request_lock()`
+  /// - `power_lock_e`
+  ///
+  /// ```
   /// #include <device/power.h>
   /// ...
   /// int ret = 0;
@@ -1301,9 +1706,7 @@ class Tizen100CapiSystemDevice {
   /// }
   /// ret = device_power_release_lock(POWER_LOCK_DISPLAY);
   /// ...
-  /// @endcode
-  /// @see device_power_request_lock()
-  /// @see power_lock_e
+  /// ```
   int device_power_release_lock(
     int type,
   ) {
@@ -1318,23 +1721,38 @@ class Tizen100CapiSystemDevice {
   late final _device_power_release_lock =
       _device_power_release_lockPtr.asFunction<int Function(int)>();
 
-  /// @deprecated Deprecated Since 2.4. [Use device_display_change_state() instead.]
-  /// @brief Changes the current power state to the normal/dim state.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/display
-  /// @remarks This API triggers turn on process and then updates the status when it completes. While the operation is on-going, the device_display_get_state() function returns previous display state.
-  /// @remarks #DEVICE_ERROR_NOT_SUPPORTED is returned, when the following feature is not supported: %http://tizen.org/feature/display.state.
-  /// @param[in] dim Set @c true to set the dim state,
-  /// otherwise set @c false to not set the dim state
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #DEVICE_ERROR_NONE Successful
-  /// @retval #DEVICE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DEVICE_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DEVICE_ERROR_OPERATION_FAILED Operation failed
-  /// @retval #DEVICE_ERROR_NOT_SUPPORTED Not supported device
-  /// @post The device will be in #DISPLAY_STATE_NORMAL state.
+  /// **Deprecated:** Deprecated Since 2.4. `[Use device_display_change_state() instead.]`
+  ///
+  /// Changes the current power state to the normal/dim state.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/display>
+  ///
+  /// **Remarks:**
+  /// - This API triggers turn on process and then updates the status when it completes. While the operation is on-going, the device_display_get_state() function returns previous display state.
+  /// - `DEVICE_ERROR_NOT_SUPPORTED` is returned, when the following feature is not supported: http://tizen.org/feature/display.state.
+  ///
+  /// **Parameters:**
+  /// - `dim` (in): Set `true` to set the dim state, otherwise set `false` to not set the dim state
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DEVICE_ERROR_NONE`: Successful
+  /// - `DEVICE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DEVICE_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DEVICE_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `DEVICE_ERROR_NOT_SUPPORTED`: Not supported device
+  ///
+  /// **Postconditions:**
+  /// - The device will be in `DISPLAY_STATE_NORMAL` state.
   int device_power_wakeup(
     bool dim,
   ) {
@@ -1349,22 +1767,41 @@ class Tizen100CapiSystemDevice {
   late final _device_power_wakeup =
       _device_power_wakeupPtr.asFunction<int Function(bool)>();
 
-  /// @platform
-  /// @brief Sends a request to the deviced Rebooting the current device.
-  /// @details Will not return if the reboot is successful. \n
-  /// It operates asynchronously.
-  /// @since_tizen 2.3.1
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/reboot
-  /// @remarks If the power reboot @a reason is NULL, then it will be set as @c "Unknown".
-  /// @param[in] reason Pass to the platform and kernel to request special reboot reason, or null
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #DEVICE_ERROR_NONE Successful
-  /// @retval #DEVICE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DEVICE_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DEVICE_ERROR_OPERATION_FAILED Operation failed
+  /// Sends a request to the deviced Rebooting the current device.
   ///
-  /// @code
+  /// Will not return if the reboot is successful. It operates asynchronously.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/reboot>
+  ///
+  /// **Remarks:**
+  /// - If the power reboot `reason` is NULL, then it will be set as `"Unknown"`.
+  ///
+  /// **Parameters:**
+  /// - `reason` (in): Pass to the platform and kernel to request special reboot reason, or null
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DEVICE_ERROR_NONE`: Successful
+  /// - `DEVICE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DEVICE_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DEVICE_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **See also:**
+  /// - `device_power_check_reboot_allowed()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
+  ///
+  /// ```
   /// #include <device/power.h>
   /// ...
   /// int ret = device_power_reboot("Reason_for_reboot");
@@ -1372,8 +1809,7 @@ class Tizen100CapiSystemDevice {
   /// ...
   /// }
   /// ...
-  /// @endcode
-  /// @see device_power_check_reboot_allowed()
+  /// ```
   int device_power_reboot(
     ffi.Pointer<ffi.Char> reason,
   ) {
@@ -1388,22 +1824,33 @@ class Tizen100CapiSystemDevice {
   late final _device_power_reboot =
       _device_power_rebootPtr.asFunction<int Function(ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the temperature value based on the specified device type.
-  /// @details Retrieves the current temperature value of a specified device.
-  /// @since_tizen 5.5
-  /// @remarks Ensure that the provided @a temp pointer is valid and has enough memory allocated.
-  /// @param[in] type The index of the device
-  /// DEVICE_THERMAL_AP \n
-  /// DEVICE_THERMAL_CP \n
-  /// DEVICE_THERMAL_BATTERY
-  /// @param[out] temp The temperature value in degrees Celsius
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #DEVICE_ERROR_NONE Successful
-  /// @retval #DEVICE_ERROR_NOT_SUPPORTED Not supported device
-  /// @retval #DEVICE_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #DEVICE_ERROR_OPERATION_FAILED Operation failed
+  /// Gets the temperature value based on the specified device type.
   ///
-  /// @code
+  /// Retrieves the current temperature value of a specified device.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Remarks:**
+  /// - Ensure that the provided `temp` pointer is valid and has enough memory allocated.
+  ///
+  /// **Parameters:**
+  /// - `type` (in): The index of the device DEVICE_THERMAL_AP DEVICE_THERMAL_CP DEVICE_THERMAL_BATTERY
+  /// - `temp` (out): The temperature value in degrees Celsius
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DEVICE_ERROR_NONE`: Successful
+  /// - `DEVICE_ERROR_NOT_SUPPORTED`: Not supported device
+  /// - `DEVICE_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `DEVICE_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **See also:**
+  /// - `device_thermal_e`
+  ///
+  /// ```
   /// #include <device/temperature.h>
   /// ...
   /// int temperature = 0;
@@ -1414,8 +1861,7 @@ class Tizen100CapiSystemDevice {
   /// ...
   /// }
   /// ...
-  /// @endcode
-  /// @see device_thermal_e
+  /// ```
   int device_thermal_get_temperature(
     int type,
     ffi.Pointer<ffi.Int> temp,
@@ -1435,8 +1881,11 @@ class Tizen100CapiSystemDevice {
           .asFunction<int Function(int, ffi.Pointer<ffi.Int>)>();
 }
 
-/// @brief Enumeration for device's error code.
-/// @since_tizen 2.3
+/// Enumeration for device's error code.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 abstract class device_error_e {
   /// < Successful
   static const int DEVICE_ERROR_NONE = 0;
@@ -1463,8 +1912,11 @@ abstract class device_error_e {
   static const int DEVICE_ERROR_NOT_INITIALIZED = -37748717;
 }
 
-/// @brief Enumeration for the battery level status.
-/// @since_tizen 2.3
+/// Enumeration for the battery level status.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 abstract class device_battery_level_e {
   /// < The battery goes empty. Prepare for the safe termination of the application, because the device starts a shutdown process soon after entering this level.
   static const int DEVICE_BATTERY_LEVEL_EMPTY = 0;
@@ -1482,8 +1934,11 @@ abstract class device_battery_level_e {
   static const int DEVICE_BATTERY_LEVEL_FULL = 4;
 }
 
-/// @brief Enumeration for battery health information.
-/// @since_tizen 3.0
+/// Enumeration for battery health information.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class device_battery_health_e {
   /// < The battery health is good
   static const int DEVICE_BATTERY_HEALTH_GOOD = 0;
@@ -1501,8 +1956,11 @@ abstract class device_battery_health_e {
   static const int DEVICE_BATTERY_HEALTH_OVER_VOLTAGE = 4;
 }
 
-/// @brief Enumeration for power source information.
-/// @since_tizen 3.0
+/// Enumeration for power source information.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class device_battery_power_source_e {
   /// < There is no power source
   static const int DEVICE_BATTERY_POWER_SOURCE_NONE = 0;
@@ -1517,10 +1975,15 @@ abstract class device_battery_power_source_e {
   static const int DEVICE_BATTERY_POWER_SOURCE_WIRELESS = 3;
 }
 
-/// @brief Enumeration for battery property information.
-/// @since_tizen 3.0
-/// @remarks If the fuel gauge hardware does not provide average current or average voltage,
-/// CURRENT_AVERAGE/VOLTAGE_AVERAGE can be substituted by CURRENT_NOW/VOLTAGE_NOW, respectively.
+/// Enumeration for battery property information.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Remarks:**
+/// - If the fuel gauge hardware does not provide average current or average voltage,
+/// - CURRENT_AVERAGE/VOLTAGE_AVERAGE can be substituted by CURRENT_NOW/VOLTAGE_NOW, respectively.
+/// @nodoc
 abstract class device_battery_property_e {
   /// < The battery capacity (0 ~ 100 %)
   static const int DEVICE_BATTERY_PROPERTY_CAPACITY = 0;
@@ -1541,8 +2004,11 @@ abstract class device_battery_property_e {
   static const int DEVICE_BATTERY_PROPERTY_TEMPERATURE = 5;
 }
 
-/// @brief Enumeration for battery status information.
-/// @since_tizen 3.0
+/// Enumeration for battery status information.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class device_battery_status_e {
   /// < Battery is charging
   static const int DEVICE_BATTERY_STATUS_CHARGING = 0;
@@ -1557,8 +2023,11 @@ abstract class device_battery_status_e {
   static const int DEVICE_BATTERY_STATUS_NOT_CHARGING = 3;
 }
 
-/// @brief Enumeration for the device state callback.
-/// @since_tizen 2.3
+/// Enumeration for the device state callback.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 abstract class device_callback_e {
   /// < Called when a battery charge percentage is changed
   static const int DEVICE_CALLBACK_BATTERY_CAPACITY = 0;
@@ -1577,36 +2046,45 @@ abstract class device_callback_e {
   static const int DEVICE_CALLBACK_MAX = 5;
 }
 
-/// @brief Called when a device status is changed (e.g., battery_capacity, display_state, etc).
-/// @details Each device callback has a different output parameter type. \n
-/// So you need to check below output parameter before using this function. \n
-/// callback enum / output type \n
-/// #DEVICE_CALLBACK_BATTERY_CAPACITY / int \n
-/// #DEVICE_CALLBACK_BATTERY_LEVEL / int \n
-/// #DEVICE_CALLBACK_BATTERY_CHARGING / bool \n
-/// #DEVICE_CALLBACK_DISPLAY_STATE / int \n
-/// #DEVICE_CALLBACK_FLASH_BRIGHTNESS / int
-/// @since_tizen 2.3
-/// @remarks #DEVICE_CALLBACK_FLASH_BRIGHTNESS callback invoked when user set flash brightness by using device_flash_set_brightness(). It does not work by camera flash operation. To register #DEVICE_CALLBACK_FLASH_BRIGHTNESS callback, you need to declare the LED privilege (%http://tizen.org/privilege/led).
-/// @param[out] type The device type to monitor
-/// @param[out] value The changed value
-/// @param[out] user_data The user data passed from the callback registration function
-/// @see device_add_callback
-/// @see device_remove_callback
+/// Called when a device status is changed (e.g., battery_capacity, display_state, etc).
+///
+/// Each device callback has a different output parameter type. So you need to check below output parameter before using this function. callback enum / output type `DEVICE_CALLBACK_BATTERY_CAPACITY` / int `DEVICE_CALLBACK_BATTERY_LEVEL` / int `DEVICE_CALLBACK_BATTERY_CHARGING` / bool `DEVICE_CALLBACK_DISPLAY_STATE` / int `DEVICE_CALLBACK_FLASH_BRIGHTNESS` / int
+///
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **Remarks:**
+/// - `DEVICE_CALLBACK_FLASH_BRIGHTNESS` callback invoked when user set flash brightness by using device_flash_set_brightness(). It does not work by camera flash operation. To register `DEVICE_CALLBACK_FLASH_BRIGHTNESS` callback, you need to declare the LED privilege (http://tizen.org/privilege/led).
+///
+/// **Parameters:**
+/// - `type` (out): The device type to monitor
+/// - `value` (out): The changed value
+/// - `user_data` (out): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `device_add_callback`
+/// - `device_remove_callback`
+/// @nodoc
 typedef device_changed_cb
     = ffi.Pointer<ffi.NativeFunction<device_changed_cbFunction>>;
+/// @nodoc
 typedef device_changed_cbFunction = ffi.Void Function(ffi.Int32 type,
     ffi.Pointer<ffi.Void> value, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartdevice_changed_cbFunction = void Function(
     int type, ffi.Pointer<ffi.Void> value, ffi.Pointer<ffi.Void> user_data);
 
-/// @addtogroup CAPI_SYSTEM_DEVICE_DISPLAY_MODULE
-/// @{
-/// /
-/// /**
-/// @brief Enumeration for the available display states.
-/// @since_tizen 2.3
-/// @remarks #DISPLAY_STATE_SCREEN_DIM may be ignored if the DIM state is disabled on the platform.
+/// Enumeration for the available display states.
+///
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **Remarks:**
+/// - `DISPLAY_STATE_SCREEN_DIM` may be ignored if the DIM state is disabled on the platform.
+///
+/// **Group:**
+/// - CAPI_SYSTEM_DEVICE_DISPLAY_MODULE @{ / /**
+/// @nodoc
 abstract class display_state_e {
   /// < Normal state
   static const int DISPLAY_STATE_NORMAL = 0;
@@ -1618,16 +2096,25 @@ abstract class display_state_e {
   static const int DISPLAY_STATE_SCREEN_OFF = 2;
 }
 
-/// @brief The haptic device handle.
-/// @since_tizen 2.3
+/// The haptic device handle.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 typedef haptic_device_h = ffi.Pointer<ffi.Void>;
 
-/// @brief The haptic effect handle.
-/// @since_tizen 2.3
+/// The haptic effect handle.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 typedef haptic_effect_h = ffi.Pointer<ffi.Void>;
 
-/// @brief Enumeration for custom LED flags.
-/// @since_tizen 2.3
+/// Enumeration for custom LED flags.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 abstract class led_custom_flags {
   /// < blink LED
   static const int LED_CUSTOM_DUTY_ON = 1;
@@ -1636,19 +2123,19 @@ abstract class led_custom_flags {
   static const int LED_CUSTOM_DEFAULT = 1;
 }
 
-/// @brief Enumeration for lock type.
-/// @details Each enum ensures that the suitable device is on until all the lock requests have been released or after a timeout.
-/// <TABLE>
-/// <TR><TH>Enum Type</TH><TH>CPU</TH><TH>Brightness(Display)</TH></TR>
-/// <TR><TD>POWER_LOCK_CPU</TD><TD>ON</TD><TD>OFF</TD></TR>
-/// <TR><TD>POWER_LOCK_DISPLAY</TD><TD>ON</TD><TD>ON(Normal)</TD></TR>
-/// <TR><TD>POWER_LOCK_DISPLAY_DIM</TD><TD>ON</TD><TD>ON(Dim)</TD></TR>
-/// </TABLE>
-/// @since_tizen 2.3
-/// @remarks An application can lock the specific type.
-/// @remarks These enums are mutually exclusive.
-/// @remarks You cannot combine with an enum below.
-/// @remarks #POWER_LOCK_DISPLAY_DIM may be ignored if the DIM state is disabled on the platform.
+/// Enumeration for lock type.
+///
+/// Each enum ensures that the suitable device is on until all the lock requests have been released or after a timeout. <TABLE> <TR><TH>Enum Type</TH><TH>CPU</TH><TH>Brightness(Display)</TH></TR> <TR><TD>POWER_LOCK_CPU</TD><TD>ON</TD><TD>OFF</TD></TR> <TR><TD>POWER_LOCK_DISPLAY</TD><TD>ON</TD><TD>ON(Normal)</TD></TR> <TR><TD>POWER_LOCK_DISPLAY_DIM</TD><TD>ON</TD><TD>ON(Dim)</TD></TR> </TABLE>
+///
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **Remarks:**
+/// - An application can lock the specific type.
+/// - These enums are mutually exclusive.
+/// - You cannot combine with an enum below.
+/// - `POWER_LOCK_DISPLAY_DIM` may be ignored if the DIM state is disabled on the platform.
+/// @nodoc
 abstract class power_lock_e {
   /// < CPU lock
   static const int POWER_LOCK_CPU = 0;
@@ -1660,8 +2147,11 @@ abstract class power_lock_e {
   static const int POWER_LOCK_DISPLAY_DIM = 2;
 }
 
-/// @brief Enumeration for the device temperature.
-/// @since_tizen 5.5
+/// Enumeration for the device temperature.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 abstract class device_thermal_e {
   /// < Temperature for Application Processor
   static const int DEVICE_THERMAL_AP = 0;

@@ -1,3 +1,6 @@
+/// {@category 9.0/tizen}
+library tizen_interop_9_0.capi_appfw_alarm;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -12,6 +15,7 @@ import 'generated_bindings_time.dart' as time;
 import 'generated_bindings_notification.dart' as notification;
 
 /// Dart bindings for Tizen capi-appfw-alarm APIs.
+/// {@category 9.0/tizen}
 class Tizen90CapiAppfwAlarm {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -27,41 +31,54 @@ class Tizen90CapiAppfwAlarm {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Sets an alarm to be triggered after a specific time.
-  /// @details The alarm will first go off @a delay seconds later and then will go off every certain amount of time defined using @a period seconds. To cancel the alarm, call alarm_cancel() with @a alarm_id.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/alarm.set
-  /// @privilege %http://tizen.org/privilege/appmanager.launch
-  /// @remarks If the application is uninstalled after setting an alarm, the alarm is cancelled automatically.
-  /// If the operation of @a app_control is not specified, #APP_CONTROL_OPERATION_DEFAULT is used for the launch request.
-  /// If the operation of @a app_control is #APP_CONTROL_OPERATION_DEFAULT, the package information is mandatory to explicitly launch the application.
-  /// Since 2.4, this function does not support exact period and delay for minimizing the wakeups of the device. The system can adjust when the alarm expires.
-  /// If you want to trigger an alarm exactly, see @see alarm_schedule_once_after_delay()
-  /// Since 2.4 If @a app_control is specified with service-application, the application is only allowed to run on which has Background Category.
-  /// Since 2.4 If the appid of @a app_control is not specified, this function is not allowed. In other words, the explicit @a app_control is only allowed.
-  /// Since 4.0, %http://tizen.org/privilege/appmanager.launch privilege is additionally required.
-  /// Since 6.0, You can use #alarm_standard_interval_e for @a period. If you use it, the period of alarm is guaranteed.
+  /// Sets an alarm to be triggered after a specific time.
   ///
-  /// @param[in] app_control The destination app_control to perform a specific task when the alarm is triggered
-  /// @param[in] delay The amount of time before the first execution (in seconds). Since 2.4, Although this is inexact, the alarm will not fire before this time
-  /// @param[in] period The amount of time between subsequent alarms (in seconds). Since 2.4, This value does not guarantee the accuracy. The actual interval is calculated by the OS.
-  /// Since 6.0 this can be one of the values of #alarm_standard_interval_e. If you uses raw integer value, the value will be phase-aligned with other period of alarm.
+  /// The alarm will first go off `delay` seconds later and then will go off every certain amount of time defined using `period` seconds. To cancel the alarm, call alarm_cancel() with `alarm_id`.
   ///
-  /// @param[out] alarm_id The alarm ID that uniquely identifies an alarm
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #ALARM_ERROR_NONE Successful
-  /// @retval #ALARM_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #ALARM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #ALARM_ERROR_INVALID_TIME Triggered time is invalid
-  /// @retval #ALARM_ERROR_CONNECTION_FAIL Failed to connect to an alarm server
-  /// @retval #ALARM_ERROR_NOT_PERMITTED_APP @a app_control is not permitted
-  /// @see alarm_cancel()
-  /// @see alarm_cancel_all()
-  /// @see alarm_get_scheduled_date()
-  /// @see alarm_get_scheduled_period()
-  /// @see alarm_schedule_once_after_delay()
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/alarm.set>
+  /// - <http://tizen.org/privilege/appmanager.launch>
+  ///
+  /// **Remarks:**
+  /// - If the application is uninstalled after setting an alarm, the alarm is cancelled automatically.
+  /// - If the operation of `app_control` is not specified, `APP_CONTROL_OPERATION_DEFAULT` is used for the launch request.
+  /// - If the operation of `app_control` is `APP_CONTROL_OPERATION_DEFAULT`, the package information is mandatory to explicitly launch the application.
+  /// - Since 2.4, this function does not support exact period and delay for minimizing the wakeups of the device. The system can adjust when the alarm expires.
+  /// - If you want to trigger an alarm exactly, see @see alarm_schedule_once_after_delay()
+  /// - Since 2.4 If `app_control` is specified with service-application, the application is only allowed to run on which has Background Category.
+  /// - Since 2.4 If the appid of `app_control` is not specified, this function is not allowed. In other words, the explicit `app_control` is only allowed.
+  /// - Since 4.0, http://tizen.org/privilege/appmanager.launch privilege is additionally required.
+  /// - Since 6.0, You can use `alarm_standard_interval_e` for `period`. If you use it, the period of alarm is guaranteed.
+  ///
+  /// **Parameters:**
+  /// - `app_control` (in): The destination app_control to perform a specific task when the alarm is triggered
+  /// - `delay` (in): The amount of time before the first execution (in seconds). Since 2.4, Although this is inexact, the alarm will not fire before this time
+  /// - `period` (in): The amount of time between subsequent alarms (in seconds). Since 2.4, This value does not guarantee the accuracy. The actual interval is calculated by the OS. Since 6.0 this can be one of the values of `alarm_standard_interval_e`. If you uses raw integer value, the value will be phase-aligned with other period of alarm.
+  /// - `alarm_id` (out): The alarm ID that uniquely identifies an alarm
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ALARM_ERROR_NONE`: Successful
+  /// - `ALARM_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `ALARM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ALARM_ERROR_INVALID_TIME`: Triggered time is invalid
+  /// - `ALARM_ERROR_CONNECTION_FAIL`: Failed to connect to an alarm server
+  /// - `ALARM_ERROR_NOT_PERMITTED_APP`: `app_control` is not permitted
+  ///
+  /// **See also:**
+  /// - `alarm_cancel()`
+  /// - `alarm_cancel_all()`
+  /// - `alarm_get_scheduled_date()`
+  /// - `alarm_get_scheduled_period()`
+  /// - `alarm_schedule_once_after_delay()`
   int alarm_schedule_after_delay(
     app_control.app_control_h app_control,
     int delay,
@@ -85,34 +102,47 @@ class Tizen90CapiAppfwAlarm {
           int Function(
               app_control.app_control_h, int, int, ffi.Pointer<ffi.Int>)>();
 
-  /// @deprecated Deprecated since 2.4. [Use alarm_schedule_once_at_date() instead]
-  /// @brief Sets an alarm to be triggered at a specific time.
-  /// @details The @a date describes the time of the first occurrence.
-  /// If @a period is bigger than @c 0, the alarm will be scheduled after the @a period time.
-  /// If @a period is set to @c 0, the alarm will go off just once without repetition.
-  /// To cancel the alarm, call alarm_cancel() with @a alarm_id.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/alarm.set
-  /// @remarks If application is uninstalled after setting an alarm, the alarm is cancelled automatically.
-  /// If the operation of @a app_control is not specified, #APP_CONTROL_OPERATION_DEFAULT is used for the launch request.
-  /// If the operation of @a app_control is #APP_CONTROL_OPERATION_DEFAULT, the package information is mandatory to explicitly launch the application.
+  /// **Deprecated:** Deprecated since 2.4. `[Use alarm_schedule_once_at_date() instead]`
   ///
-  /// @param[in] app_control The destination app_control to perform specific work when the alarm is triggered
-  /// @param[in] date The first active alarm time
-  /// @param[in] period The amount of time between subsequent alarms(in second)
-  /// @param[out] alarm_id The alarm ID that uniquely identifies an alarm
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #ALARM_ERROR_NONE Successful
-  /// @retval #ALARM_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #ALARM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #ALARM_ERROR_INVALID_DATE Triggered date is invalid
-  /// @retval #ALARM_ERROR_CONNECTION_FAIL Failed to connect to an alarm server
-  /// @see alarm_cancel()
-  /// @see alarm_cancel_all()
-  /// @see alarm_get_scheduled_date()
-  /// @see alarm_get_scheduled_period()
+  /// Sets an alarm to be triggered at a specific time.
+  ///
+  /// The `date` describes the time of the first occurrence. If `period` is bigger than `0`, the alarm will be scheduled after the `period` time. If `period` is set to `0`, the alarm will go off just once without repetition. To cancel the alarm, call alarm_cancel() with `alarm_id`.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/alarm.set>
+  ///
+  /// **Remarks:**
+  /// - If application is uninstalled after setting an alarm, the alarm is cancelled automatically.
+  /// - If the operation of `app_control` is not specified, `APP_CONTROL_OPERATION_DEFAULT` is used for the launch request.
+  /// - If the operation of `app_control` is `APP_CONTROL_OPERATION_DEFAULT`, the package information is mandatory to explicitly launch the application.
+  ///
+  /// **Parameters:**
+  /// - `app_control` (in): The destination app_control to perform specific work when the alarm is triggered
+  /// - `date` (in): The first active alarm time
+  /// - `period` (in): The amount of time between subsequent alarms(in second)
+  /// - `alarm_id` (out): The alarm ID that uniquely identifies an alarm
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ALARM_ERROR_NONE`: Successful
+  /// - `ALARM_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `ALARM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ALARM_ERROR_INVALID_DATE`: Triggered date is invalid
+  /// - `ALARM_ERROR_CONNECTION_FAIL`: Failed to connect to an alarm server
+  ///
+  /// **See also:**
+  /// - `alarm_cancel()`
+  /// - `alarm_cancel_all()`
+  /// - `alarm_get_scheduled_date()`
+  /// - `alarm_get_scheduled_period()`
   int alarm_schedule_at_date(
     app_control.app_control_h app_control,
     ffi.Pointer<time.tm> date,
@@ -135,34 +165,49 @@ class Tizen90CapiAppfwAlarm {
       int Function(app_control.app_control_h, ffi.Pointer<time.tm>, int,
           ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Sets an alarm to be triggered after a specific time.
-  /// @details The alarm will go off @a delay seconds later. To cancel the alarm, call alarm_cancel() with @a alarm_id.
-  /// @since_tizen 2.4
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/alarm.set
-  /// @privilege %http://tizen.org/privilege/appmanager.launch
-  /// @remarks If the application is uninstalled after setting an alarm, the alarm is cancelled automatically.
-  /// If the operation of @a app_control is not specified, #APP_CONTROL_OPERATION_DEFAULT is used for the launch request.
-  /// If the operation of @a app_control is #APP_CONTROL_OPERATION_DEFAULT, the package information is mandatory to explicitly launch the application.
-  /// If the appid of @a app_control is not specified, this function is not allowed. In other words, the explicit @a app_control is only allowed.
-  /// The @a app_control only supports UI application with this function. If @a app_control is not UI application, #ALARM_ERROR_NOT_PERMITTED_APP returned.
-  /// When the alarm is expired, Alarm Manager will turn on LCD to prohibit background jobs.
-  /// Since 4.0, %http://tizen.org/privilege/appmanager.launch privilege is additionally required.
+  /// Sets an alarm to be triggered after a specific time.
   ///
-  /// @param[in] app_control The destination app_control to perform a specific task when the alarm is triggered
-  /// @param[in] delay The amount of time before the execution (in seconds)
-  /// @param[out] alarm_id The alarm ID that uniquely identifies an alarm
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #ALARM_ERROR_NONE Successful
-  /// @retval #ALARM_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #ALARM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #ALARM_ERROR_INVALID_TIME Triggered time is invalid
-  /// @retval #ALARM_ERROR_CONNECTION_FAIL Failed to connect to an alarm server
-  /// @retval #ALARM_ERROR_NOT_PERMITTED_APP @a app_control is not permitted. @a app_control for UI application is only permitted.
-  /// @see alarm_cancel()
-  /// @see alarm_cancel_all()
-  /// @see alarm_get_scheduled_date()
+  /// The alarm will go off `delay` seconds later. To cancel the alarm, call alarm_cancel() with `alarm_id`.
+  ///
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/alarm.set>
+  /// - <http://tizen.org/privilege/appmanager.launch>
+  ///
+  /// **Remarks:**
+  /// - If the application is uninstalled after setting an alarm, the alarm is cancelled automatically.
+  /// - If the operation of `app_control` is not specified, `APP_CONTROL_OPERATION_DEFAULT` is used for the launch request.
+  /// - If the operation of `app_control` is `APP_CONTROL_OPERATION_DEFAULT`, the package information is mandatory to explicitly launch the application.
+  /// - If the appid of `app_control` is not specified, this function is not allowed. In other words, the explicit `app_control` is only allowed.
+  /// - The `app_control` only supports UI application with this function. If `app_control` is not UI application, `ALARM_ERROR_NOT_PERMITTED_APP` returned.
+  /// - When the alarm is expired, Alarm Manager will turn on LCD to prohibit background jobs.
+  /// - Since 4.0, http://tizen.org/privilege/appmanager.launch privilege is additionally required.
+  ///
+  /// **Parameters:**
+  /// - `app_control` (in): The destination app_control to perform a specific task when the alarm is triggered
+  /// - `delay` (in): The amount of time before the execution (in seconds)
+  /// - `alarm_id` (out): The alarm ID that uniquely identifies an alarm
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ALARM_ERROR_NONE`: Successful
+  /// - `ALARM_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `ALARM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ALARM_ERROR_INVALID_TIME`: Triggered time is invalid
+  /// - `ALARM_ERROR_CONNECTION_FAIL`: Failed to connect to an alarm server
+  /// - `ALARM_ERROR_NOT_PERMITTED_APP`: `app_control` is not permitted. `app_control` for UI application is only permitted.
+  ///
+  /// **See also:**
+  /// - `alarm_cancel()`
+  /// - `alarm_cancel_all()`
+  /// - `alarm_get_scheduled_date()`
   int alarm_schedule_once_after_delay(
     app_control.app_control_h app_control,
     int delay,
@@ -183,34 +228,49 @@ class Tizen90CapiAppfwAlarm {
       _alarm_schedule_once_after_delayPtr.asFunction<
           int Function(app_control.app_control_h, int, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Sets an alarm to be triggered at a specific time.
-  /// @details The @a date describes the time of the first occurrence. To cancel the alarm, call alarm_cancel() with @a alarm_id.
-  /// @since_tizen 2.4
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/alarm.set
-  /// @privilege %http://tizen.org/privilege/appmanager.launch
-  /// @remarks If application is uninstalled after setting an alarm, the alarm is cancelled automatically.
-  /// If the operation of @a app_control is not specified, #APP_CONTROL_OPERATION_DEFAULT is used for the launch request.
-  /// If the operation of @a app_control is #APP_CONTROL_OPERATION_DEFAULT, the package information is mandatory to explicitly launch the application.
-  /// If the appid of @a app_control is not specified, this function is not allowed. In other words, the explicit @a app_control is only allowed.
-  /// The @a app_control only supports UI application with this function. If @a app_control is not UI application, #ALARM_ERROR_NOT_PERMITTED_APP returned.
-  /// When the alarm is expired, Alarm Manager will turn on LCD to prohibit background jobs.
-  /// Since 4.0, %http://tizen.org/privilege/appmanager.launch privilege is additionally required.
+  /// Sets an alarm to be triggered at a specific time.
   ///
-  /// @param[in] app_control The destination app_control to perform specific work when the alarm is triggered
-  /// @param[in] date The first active alarm time
-  /// @param[out] alarm_id The alarm ID that uniquely identifies an alarm
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #ALARM_ERROR_NONE   Successful
-  /// @retval #ALARM_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #ALARM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #ALARM_ERROR_INVALID_DATE Triggered date is invalid
-  /// @retval #ALARM_ERROR_CONNECTION_FAIL Failed to connect to an alarm server
-  /// @retval #ALARM_ERROR_NOT_PERMITTED_APP @a app_control is not permitted. @a app_control for UI application is only permitted.
-  /// @see alarm_cancel()
-  /// @see alarm_cancel_all()
-  /// @see alarm_get_scheduled_date()
+  /// The `date` describes the time of the first occurrence. To cancel the alarm, call alarm_cancel() with `alarm_id`.
+  ///
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/alarm.set>
+  /// - <http://tizen.org/privilege/appmanager.launch>
+  ///
+  /// **Remarks:**
+  /// - If application is uninstalled after setting an alarm, the alarm is cancelled automatically.
+  /// - If the operation of `app_control` is not specified, `APP_CONTROL_OPERATION_DEFAULT` is used for the launch request.
+  /// - If the operation of `app_control` is `APP_CONTROL_OPERATION_DEFAULT`, the package information is mandatory to explicitly launch the application.
+  /// - If the appid of `app_control` is not specified, this function is not allowed. In other words, the explicit `app_control` is only allowed.
+  /// - The `app_control` only supports UI application with this function. If `app_control` is not UI application, `ALARM_ERROR_NOT_PERMITTED_APP` returned.
+  /// - When the alarm is expired, Alarm Manager will turn on LCD to prohibit background jobs.
+  /// - Since 4.0, http://tizen.org/privilege/appmanager.launch privilege is additionally required.
+  ///
+  /// **Parameters:**
+  /// - `app_control` (in): The destination app_control to perform specific work when the alarm is triggered
+  /// - `date` (in): The first active alarm time
+  /// - `alarm_id` (out): The alarm ID that uniquely identifies an alarm
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ALARM_ERROR_NONE`: Successful
+  /// - `ALARM_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `ALARM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ALARM_ERROR_INVALID_DATE`: Triggered date is invalid
+  /// - `ALARM_ERROR_CONNECTION_FAIL`: Failed to connect to an alarm server
+  /// - `ALARM_ERROR_NOT_PERMITTED_APP`: `app_control` is not permitted. `app_control` for UI application is only permitted.
+  ///
+  /// **See also:**
+  /// - `alarm_cancel()`
+  /// - `alarm_cancel_all()`
+  /// - `alarm_get_scheduled_date()`
   int alarm_schedule_once_at_date(
     app_control.app_control_h app_control,
     ffi.Pointer<time.tm> date,
@@ -232,40 +292,52 @@ class Tizen90CapiAppfwAlarm {
           int Function(app_control.app_control_h, ffi.Pointer<time.tm>,
               ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Sets an alarm to be triggered periodically, starting at a specific time.
-  /// @details The @a date describes the time of the first occurrence.
-  /// @a week_flag is the repeat value of the days of the week.
-  /// If @a week_flag is #ALARM_WEEK_FLAG_TUESDAY, the alarm will repeat every Tuesday at a specific time.
-  /// To cancel the alarm, call alarm_cancel() with @a alarm_id.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/alarm.set
-  /// @privilege %http://tizen.org/privilege/appmanager.launch
-  /// @remarks If the application is uninstalled after setting an alarm, the alarm is cancelled automatically.
-  /// If the operation of @a app_control is not specified, #APP_CONTROL_OPERATION_DEFAULT is used for the launch request.
-  /// If the operation of @a app_control is #APP_CONTROL_OPERATION_DEFAULT, the package information is mandatory to explicitly launch the application.
-  /// Since 2.4, The @a app_control only supports UI application with this function. If @a app_control is not UI application, #ALARM_ERROR_NOT_PERMITTED_APP returned.
-  /// When the alarm is expired, Alarm Manager will turn on LCD to prohibit background jobs.
-  /// Since 2.4, If the appid of @a app_control is not specified, this function is not allowed. In other words, the explicit @a app_control is only allowed.
-  /// Since 4.0, %http://tizen.org/privilege/appmanager.launch privilege is additionally required.
+  /// Sets an alarm to be triggered periodically, starting at a specific time.
   ///
-  /// @param[in] app_control The destination app_control to perform specific work when the alarm is triggered
-  /// @param[in] date The first active alarm time
-  /// @param[in] week_flag The day of the week, @a week_flag may be a combination of days, like #ALARM_WEEK_FLAG_TUESDAY | #ALARM_WEEK_FLAG_FRIDAY
-  /// @param[out] alarm_id The alarm ID that uniquely identifies an alarm
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #ALARM_ERROR_NONE Successful
-  /// @retval #ALARM_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #ALARM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #ALARM_ERROR_INVALID_DATE Triggered date is invalid
-  /// @retval #ALARM_ERROR_CONNECTION_FAIL Failed to connect to an alarm server
-  /// @retval #ALARM_ERROR_NOT_PERMITTED_APP @a app_control is not permitted. @a app_control for UI application is only permitted.
-  /// @see alarm_cancel()
-  /// @see alarm_cancel_all()
-  /// @see alarm_get_scheduled_recurrence_week_flag()
-  /// @see alarm_get_scheduled_date()
-  /// @see #alarm_week_flag_e
+  /// The `date` describes the time of the first occurrence. `week_flag` is the repeat value of the days of the week. If `week_flag` is `ALARM_WEEK_FLAG_TUESDAY`, the alarm will repeat every Tuesday at a specific time. To cancel the alarm, call alarm_cancel() with `alarm_id`.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/alarm.set>
+  /// - <http://tizen.org/privilege/appmanager.launch>
+  ///
+  /// **Remarks:**
+  /// - If the application is uninstalled after setting an alarm, the alarm is cancelled automatically.
+  /// - If the operation of `app_control` is not specified, `APP_CONTROL_OPERATION_DEFAULT` is used for the launch request.
+  /// - If the operation of `app_control` is `APP_CONTROL_OPERATION_DEFAULT`, the package information is mandatory to explicitly launch the application.
+  /// - Since 2.4, The `app_control` only supports UI application with this function. If `app_control` is not UI application, `ALARM_ERROR_NOT_PERMITTED_APP` returned.
+  /// - When the alarm is expired, Alarm Manager will turn on LCD to prohibit background jobs.
+  /// - Since 2.4, If the appid of `app_control` is not specified, this function is not allowed. In other words, the explicit `app_control` is only allowed.
+  /// - Since 4.0, http://tizen.org/privilege/appmanager.launch privilege is additionally required.
+  ///
+  /// **Parameters:**
+  /// - `app_control` (in): The destination app_control to perform specific work when the alarm is triggered
+  /// - `date` (in): The first active alarm time
+  /// - `week_flag` (in): The day of the week, `week_flag` may be a combination of days, like `ALARM_WEEK_FLAG_TUESDAY` | `ALARM_WEEK_FLAG_FRIDAY`
+  /// - `alarm_id` (out): The alarm ID that uniquely identifies an alarm
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ALARM_ERROR_NONE`: Successful
+  /// - `ALARM_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `ALARM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ALARM_ERROR_INVALID_DATE`: Triggered date is invalid
+  /// - `ALARM_ERROR_CONNECTION_FAIL`: Failed to connect to an alarm server
+  /// - `ALARM_ERROR_NOT_PERMITTED_APP`: `app_control` is not permitted. `app_control` for UI application is only permitted.
+  ///
+  /// **See also:**
+  /// - `alarm_cancel()`
+  /// - `alarm_cancel_all()`
+  /// - `alarm_get_scheduled_recurrence_week_flag()`
+  /// - `alarm_get_scheduled_date()`
+  /// - `alarm_week_flag_e`
   int alarm_schedule_with_recurrence_week_flag(
     app_control.app_control_h app_control,
     ffi.Pointer<time.tm> date,
@@ -290,21 +362,36 @@ class Tizen90CapiAppfwAlarm {
           int Function(app_control.app_control_h, ffi.Pointer<time.tm>, int,
               ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the recurrence days of the week.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/alarm.get
-  /// @remarks If the given @a alarm_id is not obtained by using the alarm_schedule_with_recurrence_week_flag() function,
-  /// an error (error code #ALARM_ERROR_INVALID_PARAMETER) will occur because this alarm is scheduled with no recurrence.
-  /// @param[in] alarm_id The alarm ID returned when the alarm is scheduled
-  /// @param[out] week_flag The recurrence days of the week, @a week_flag may be a combination of days, like #ALARM_WEEK_FLAG_TUESDAY | #ALARM_WEEK_FLAG_FRIDAY
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #ALARM_ERROR_NONE Successful
-  /// @retval #ALARM_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #ALARM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see alarm_schedule_with_recurrence_week_flag()
-  /// @see #alarm_week_flag_e
+  /// Gets the recurrence days of the week.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/alarm.get>
+  ///
+  /// **Remarks:**
+  /// - If the given `alarm_id` is not obtained by using the alarm_schedule_with_recurrence_week_flag() function,
+  /// - an error (error code `ALARM_ERROR_INVALID_PARAMETER`) will occur because this alarm is scheduled with no recurrence.
+  ///
+  /// **Parameters:**
+  /// - `alarm_id` (in): The alarm ID returned when the alarm is scheduled
+  /// - `week_flag` (out): The recurrence days of the week, `week_flag` may be a combination of days, like `ALARM_WEEK_FLAG_TUESDAY` | `ALARM_WEEK_FLAG_FRIDAY`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ALARM_ERROR_NONE`: Successful
+  /// - `ALARM_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `ALARM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `alarm_schedule_with_recurrence_week_flag()`
+  /// - `alarm_week_flag_e`
   int alarm_get_scheduled_recurrence_week_flag(
     int alarm_id,
     ffi.Pointer<ffi.Int> week_flag,
@@ -322,21 +409,34 @@ class Tizen90CapiAppfwAlarm {
       _alarm_get_scheduled_recurrence_week_flagPtr
           .asFunction<int Function(int, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Cancels the alarm with the specific alarm ID.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/alarm.set
-  /// @param[in] alarm_id The alarm ID that is cancelled
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #ALARM_ERROR_NONE Successful
-  /// @retval #ALARM_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #ALARM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #ALARM_ERROR_CONNECTION_FAIL Failed to connect to an alarm server
-  /// @see alarm_schedule_once_at_date()
-  /// @see alarm_schedule_after_delay()
-  /// @see alarm_schedule_with_recurrence_week_flag()
-  /// @see alarm_cancel_all()
+  /// Cancels the alarm with the specific alarm ID.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/alarm.set>
+  ///
+  /// **Parameters:**
+  /// - `alarm_id` (in): The alarm ID that is cancelled
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ALARM_ERROR_NONE`: Successful
+  /// - `ALARM_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `ALARM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ALARM_ERROR_CONNECTION_FAIL`: Failed to connect to an alarm server
+  ///
+  /// **See also:**
+  /// - `alarm_schedule_once_at_date()`
+  /// - `alarm_schedule_after_delay()`
+  /// - `alarm_schedule_with_recurrence_week_flag()`
+  /// - `alarm_cancel_all()`
   int alarm_cancel(
     int alarm_id,
   ) {
@@ -349,19 +449,30 @@ class Tizen90CapiAppfwAlarm {
       _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int)>>('alarm_cancel');
   late final _alarm_cancel = _alarm_cancelPtr.asFunction<int Function(int)>();
 
-  /// @brief Cancels all scheduled alarms that are registered by the application that calls this function.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/alarm.set
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #ALARM_ERROR_NONE Successful
-  /// @retval #ALARM_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #ALARM_ERROR_CONNECTION_FAIL Failed to connect to an alarm server
-  /// @see alarm_schedule_once_at_date()
-  /// @see alarm_schedule_after_delay()
-  /// @see alarm_schedule_with_recurrence_week_flag()
-  /// @see alarm_cancel()
+  /// Cancels all scheduled alarms that are registered by the application that calls this function.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/alarm.set>
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ALARM_ERROR_NONE`: Successful
+  /// - `ALARM_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `ALARM_ERROR_CONNECTION_FAIL`: Failed to connect to an alarm server
+  ///
+  /// **See also:**
+  /// - `alarm_schedule_once_at_date()`
+  /// - `alarm_schedule_after_delay()`
+  /// - `alarm_schedule_with_recurrence_week_flag()`
+  /// - `alarm_cancel()`
   int alarm_cancel_all() {
     return _alarm_cancel_all();
   }
@@ -371,20 +482,35 @@ class Tizen90CapiAppfwAlarm {
   late final _alarm_cancel_all =
       _alarm_cancel_allPtr.asFunction<int Function()>();
 
-  /// @brief Retrieves the IDs of all registered alarms by invoking a callback once for each scheduled alarm.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/alarm.get
-  /// @param[in] callback The callback function to invoke
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #ALARM_ERROR_NONE Successful
-  /// @retval #ALARM_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #ALARM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #ALARM_ERROR_CONNECTION_FAIL Failed to connect to an alarm server
-  /// @post This function invokes alarm_registered_alarm_cb() repeatedly for each registered alarm.
-  /// @see alarm_registered_alarm_cb()
+  /// Retrieves the IDs of all registered alarms by invoking a callback once for each scheduled alarm.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/alarm.get>
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): The callback function to invoke
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ALARM_ERROR_NONE`: Successful
+  /// - `ALARM_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `ALARM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ALARM_ERROR_CONNECTION_FAIL`: Failed to connect to an alarm server
+  ///
+  /// **Postconditions:**
+  /// - This function invokes alarm_registered_alarm_cb() repeatedly for each registered alarm.
+  ///
+  /// **See also:**
+  /// - `alarm_registered_alarm_cb()`
   int alarm_foreach_registered_alarm(
     alarm_registered_alarm_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -403,22 +529,37 @@ class Tizen90CapiAppfwAlarm {
       _alarm_foreach_registered_alarmPtr.asFunction<
           int Function(alarm_registered_alarm_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Gets the scheduled time from the given alarm ID in C standard time struct.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/alarm.get
-  /// @remarks @a date is not needed by the function after the call.
-  /// @param[in] alarm_id The alarm ID returned when the alarm is scheduled
-  /// @param[out] date The time value of the next alarm event
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #ALARM_ERROR_NONE Successful
-  /// @retval #ALARM_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #ALARM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #ALARM_ERROR_CONNECTION_FAIL Failed to connect to an alarm server
-  /// @see alarm_schedule_once_at_date()
-  /// @see alarm_schedule_after_delay()
-  /// @see alarm_schedule_with_recurrence_week_flag()
+  /// Gets the scheduled time from the given alarm ID in C standard time struct.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/alarm.get>
+  ///
+  /// **Remarks:**
+  /// - `date` is not needed by the function after the call.
+  ///
+  /// **Parameters:**
+  /// - `alarm_id` (in): The alarm ID returned when the alarm is scheduled
+  /// - `date` (out): The time value of the next alarm event
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ALARM_ERROR_NONE`: Successful
+  /// - `ALARM_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `ALARM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ALARM_ERROR_CONNECTION_FAIL`: Failed to connect to an alarm server
+  ///
+  /// **See also:**
+  /// - `alarm_schedule_once_at_date()`
+  /// - `alarm_schedule_after_delay()`
+  /// - `alarm_schedule_with_recurrence_week_flag()`
   int alarm_get_scheduled_date(
     int alarm_id,
     ffi.Pointer<time.tm> date,
@@ -435,23 +576,38 @@ class Tizen90CapiAppfwAlarm {
   late final _alarm_get_scheduled_date = _alarm_get_scheduled_datePtr
       .asFunction<int Function(int, ffi.Pointer<time.tm>)>();
 
-  /// @brief Gets the period of time between the recurrent alarms.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/alarm.get
-  /// @remarks If the given @a alarm_id is not obtained by using the alarm_schedule_once_at_date() or alarm_schedule_after_delay() function,
-  /// an error (error code #ALARM_ERROR_INVALID_PARAMETER) will occur.
-  /// @param[in] alarm_id The alarm ID returned when the alarm is scheduled
-  /// @param[out] period The period of time between recurrent alarms in seconds
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #ALARM_ERROR_NONE Successful
-  /// @retval #ALARM_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #ALARM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #ALARM_ERROR_CONNECTION_FAIL Failed to connect to an alarm server
-  /// @see alarm_schedule_once_at_date()
-  /// @see alarm_schedule_after_delay()
-  /// @see alarm_schedule_with_recurrence_week_flag()
+  /// Gets the period of time between the recurrent alarms.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/alarm.get>
+  ///
+  /// **Remarks:**
+  /// - If the given `alarm_id` is not obtained by using the alarm_schedule_once_at_date() or alarm_schedule_after_delay() function,
+  /// - an error (error code `ALARM_ERROR_INVALID_PARAMETER`) will occur.
+  ///
+  /// **Parameters:**
+  /// - `alarm_id` (in): The alarm ID returned when the alarm is scheduled
+  /// - `period` (out): The period of time between recurrent alarms in seconds
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ALARM_ERROR_NONE`: Successful
+  /// - `ALARM_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `ALARM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ALARM_ERROR_CONNECTION_FAIL`: Failed to connect to an alarm server
+  ///
+  /// **See also:**
+  /// - `alarm_schedule_once_at_date()`
+  /// - `alarm_schedule_after_delay()`
+  /// - `alarm_schedule_with_recurrence_week_flag()`
   int alarm_get_scheduled_period(
     int alarm_id,
     ffi.Pointer<ffi.Int> period,
@@ -468,13 +624,20 @@ class Tizen90CapiAppfwAlarm {
   late final _alarm_get_scheduled_period = _alarm_get_scheduled_periodPtr
       .asFunction<int Function(int, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the current system time using C standard time struct.
-  /// @since_tizen 2.3
-  /// @param[out] date The current system time
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #ALARM_ERROR_NONE Successful
-  /// @retval #ALARM_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Gets the current system time using C standard time struct.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Parameters:**
+  /// - `date` (out): The current system time
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ALARM_ERROR_NONE`: Successful
+  /// - `ALARM_ERROR_INVALID_PARAMETER`: Invalid parameter
   int alarm_get_current_time(
     ffi.Pointer<time.tm> date,
   ) {
@@ -489,22 +652,37 @@ class Tizen90CapiAppfwAlarm {
   late final _alarm_get_current_time = _alarm_get_current_timePtr
       .asFunction<int Function(ffi.Pointer<time.tm>)>();
 
-  /// @brief Gets the app_control to be invoked when the alarm is triggered.
-  /// @since_tizen 2.3
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/alarm.get
-  /// @remarks The @a app_control must be released using app_control_destroy().
-  /// @param[in] alarm_id The alarm ID uniquely identifies an alarm
-  /// @param[out] app_control The app_control handle to launch when the alarm is triggered
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #ALARM_ERROR_NONE Successful
-  /// @retval #ALARM_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #ALARM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #ALARM_ERROR_OUT_OF_MEMORY Out of memory
-  /// @see alarm_schedule_once_at_date()
-  /// @see alarm_schedule_after_delay()
-  /// @see alarm_schedule_with_recurrence_week_flag()
+  /// Gets the app_control to be invoked when the alarm is triggered.
+  ///
+  /// **Since Tizen:**
+  /// - 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/alarm.get>
+  ///
+  /// **Remarks:**
+  /// - The `app_control` must be released using app_control_destroy().
+  ///
+  /// **Parameters:**
+  /// - `alarm_id` (in): The alarm ID uniquely identifies an alarm
+  /// - `app_control` (out): The app_control handle to launch when the alarm is triggered
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ALARM_ERROR_NONE`: Successful
+  /// - `ALARM_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `ALARM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ALARM_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `alarm_schedule_once_at_date()`
+  /// - `alarm_schedule_after_delay()`
+  /// - `alarm_schedule_with_recurrence_week_flag()`
   int alarm_get_app_control(
     int alarm_id,
     ffi.Pointer<app_control.app_control_h> app_control,
@@ -523,29 +701,45 @@ class Tizen90CapiAppfwAlarm {
   late final _alarm_get_app_control = _alarm_get_app_controlPtr
       .asFunction<int Function(int, ffi.Pointer<app_control.app_control_h>)>();
 
-  /// @brief Sets global flag in the alarm.
-  /// @details Sets @a global flag to set/unset alarm globally.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/alarm.set
-  /// @remarks The @a alarm_id must be id of alarm which will launch global application.
-  /// The function returns an error (error code #ALARM_ERROR_NOT_PERMITTED_APP) if it is not.
-  /// Note that the application which is launched by global alarm runs in the user session that is logged in currently.
-  /// It doesn't run in the session for the user who registers the global alarm.
-  /// So, if the application uses application's private data for each user to handling the app_control for the alarm, it might not show proper data to the user.
-  /// Therefore, We recommend to contain all the data for the alarm to the app_control handle for the global alarm.
-  /// Then, the launched application would be able to use the data to show proper alarm UX to the user.
-  /// @param[in] alarm_id The alarm ID uniquely identifies an alarm
-  /// @param[in] global The global flag to set/unset alarm globally
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #ALARM_ERROR_NONE Successful
-  /// @retval #ALARM_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #ALARM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #ALARM_ERROR_NOT_PERMITTED_APP @a alarm_id is not permitted
-  /// @see alarm_schedule_once_at_date()
-  /// @see alarm_schedule_after_delay()
-  /// @see alarm_schedule_with_recurrence_week_flag()
+  /// Sets global flag in the alarm.
+  ///
+  /// Sets `global` flag to set/unset alarm globally.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/alarm.set>
+  ///
+  /// **Remarks:**
+  /// - The `alarm_id` must be id of alarm which will launch global application.
+  /// - The function returns an error (error code `ALARM_ERROR_NOT_PERMITTED_APP`) if it is not.
+  /// - Note that the application which is launched by global alarm runs in the user session that is logged in currently.
+  /// - It doesn't run in the session for the user who registers the global alarm.
+  /// - So, if the application uses application's private data for each user to handling the app_control for the alarm, it might not show proper data to the user.
+  /// - Therefore, We recommend to contain all the data for the alarm to the app_control handle for the global alarm.
+  /// - Then, the launched application would be able to use the data to show proper alarm UX to the user.
+  ///
+  /// **Parameters:**
+  /// - `alarm_id` (in): The alarm ID uniquely identifies an alarm
+  /// - `global` (in): The global flag to set/unset alarm globally
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ALARM_ERROR_NONE`: Successful
+  /// - `ALARM_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `ALARM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ALARM_ERROR_NOT_PERMITTED_APP`: `alarm_id` is not permitted
+  ///
+  /// **See also:**
+  /// - `alarm_schedule_once_at_date()`
+  /// - `alarm_schedule_after_delay()`
+  /// - `alarm_schedule_with_recurrence_week_flag()`
   int alarm_set_global(
     int alarm_id,
     bool global,
@@ -562,18 +756,31 @@ class Tizen90CapiAppfwAlarm {
   late final _alarm_set_global =
       _alarm_set_globalPtr.asFunction<int Function(int, bool)>();
 
-  /// @brief Gets whether the alarm will launch global application or not.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/alarm.get
-  /// @param[in] alarm_id The alarm ID uniquely identifies an alarm
-  /// @param[out] global Whether the alarm will launch global application or not
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #ALARM_ERROR_NONE Successful
-  /// @retval #ALARM_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #ALARM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see alarm_set_global()
+  /// Gets whether the alarm will launch global application or not.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/alarm.get>
+  ///
+  /// **Parameters:**
+  /// - `alarm_id` (in): The alarm ID uniquely identifies an alarm
+  /// - `global` (out): Whether the alarm will launch global application or not
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ALARM_ERROR_NONE`: Successful
+  /// - `ALARM_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `ALARM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `alarm_set_global()`
   int alarm_get_global(
     int alarm_id,
     ffi.Pointer<ffi.Bool> global,
@@ -590,29 +797,43 @@ class Tizen90CapiAppfwAlarm {
   late final _alarm_get_global = _alarm_get_globalPtr
       .asFunction<int Function(int, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Sets a notification alarm to be triggered at a specific time.
-  /// @details The @a date describes the time of the alarm occurrence.
-  /// To cancel the alarm, call alarm_cancel() with @a alarm_id.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/alarm.set
-  /// @privilege %http://tizen.org/privilege/notification
-  /// @remarks If application is uninstalled after setting an alarm, the alarm is cancelled automatically.
-  /// When the alarm goes off, Alarm Manager will turn on LCD to prohibit background jobs.
+  /// Sets a notification alarm to be triggered at a specific time.
   ///
-  /// @param[in] noti The notification to be posted when the alarm is triggered
-  /// @param[in] date The active alarm time
-  /// @param[out] alarm_id The ID which uniquely identifies the scheduled alarm
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #ALARM_ERROR_NONE   Successful
-  /// @retval #ALARM_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval  #ALARM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #ALARM_ERROR_INVALID_DATE Triggered date is invalid
-  /// @retval  #ALARM_ERROR_CONNECTION_FAIL Failed to connect to an alarm server
-  /// @see alarm_cancel()
-  /// @see alarm_cancel_all()
-  /// @see alarm_get_scheduled_date()
+  /// The `date` describes the time of the alarm occurrence. To cancel the alarm, call alarm_cancel() with `alarm_id`.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/alarm.set>
+  /// - <http://tizen.org/privilege/notification>
+  ///
+  /// **Remarks:**
+  /// - If application is uninstalled after setting an alarm, the alarm is cancelled automatically.
+  /// - When the alarm goes off, Alarm Manager will turn on LCD to prohibit background jobs.
+  ///
+  /// **Parameters:**
+  /// - `noti` (in): The notification to be posted when the alarm is triggered
+  /// - `date` (in): The active alarm time
+  /// - `alarm_id` (out): The ID which uniquely identifies the scheduled alarm
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ALARM_ERROR_NONE`: Successful
+  /// - `ALARM_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `ALARM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ALARM_ERROR_INVALID_DATE`: Triggered date is invalid
+  /// - `ALARM_ERROR_CONNECTION_FAIL`: Failed to connect to an alarm server
+  ///
+  /// **See also:**
+  /// - `alarm_cancel()`
+  /// - `alarm_cancel_all()`
+  /// - `alarm_get_scheduled_date()`
   int alarm_schedule_noti_once_at_date(
     notification.notification_h noti,
     ffi.Pointer<time.tm> date,
@@ -634,40 +855,52 @@ class Tizen90CapiAppfwAlarm {
           int Function(notification.notification_h, ffi.Pointer<time.tm>,
               ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Sets a notification alarm to be triggered after a specific delay.
-  /// @details The alarm will first go off after @a delay seconds.
-  /// The alarm will then go off every period seconds until canceled.
-  /// To cancel the alarm, call alarm_cancel() with @a alarm_id.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/alarm.set
-  /// @privilege %http://tizen.org/privilege/notification
-  /// @remarks If the application is uninstalled after setting an alarm, the alarm is cancelled automatically.
-  /// This function is a minimally intrusive way to trigger alarms when precision is not important.
-  /// The system will adjust the @a delay and @a period requests to suit internal needs; the requests
-  /// will be treated as minimum values. Note that @a period cannot be less than 600 seconds, if
-  /// a smaller request is supplied it will be silently adjusted to a request of 600.
-  /// When the alarm goes off, Alarm Manager will turn on LCD to prohibit background jobs.
-  /// Since 6.0, You can use #alarm_standard_interval_e for @a period. If you use it, the period of alarm is guaranteed.
-  /// Since 6.0, Note that @a period cannot be less than 900 seconds.
+  /// Sets a notification alarm to be triggered after a specific delay.
   ///
-  /// @param[in] noti The notification to be posted when the alarm is triggered
-  /// @param[in] delay The amount of time before the first execution (in seconds).
-  /// @param[in] period The amount of time between subsequent alarms (in seconds).
-  /// Since 6.0 this can be one of the values of #alarm_standard_interval_e. If you uses raw integer value, the value will be phase-aligned with other period of alarm.
-  /// @param[out] alarm_id The ID which uniquely identifies the scheduled alarm
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #ALARM_ERROR_NONE Successful
-  /// @retval #ALARM_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #ALARM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #ALARM_ERROR_INVALID_TIME Triggered time is invalid
-  /// @retval #ALARM_ERROR_CONNECTION_FAIL Failed to connect to an alarm server
-  /// @see alarm_cancel()
-  /// @see alarm_cancel_all()
-  /// @see alarm_get_scheduled_date()
-  /// @see alarm_get_scheduled_period()
-  /// @see alarm_schedule_noti_once_after_delay()
+  /// The alarm will first go off after `delay` seconds. The alarm will then go off every period seconds until canceled. To cancel the alarm, call alarm_cancel() with `alarm_id`.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/alarm.set>
+  /// - <http://tizen.org/privilege/notification>
+  ///
+  /// **Remarks:**
+  /// - If the application is uninstalled after setting an alarm, the alarm is cancelled automatically.
+  /// - This function is a minimally intrusive way to trigger alarms when precision is not important.
+  /// - The system will adjust the `delay` and `period` requests to suit internal needs; the requests
+  /// - will be treated as minimum values. Note that `period` cannot be less than 600 seconds, if
+  /// - a smaller request is supplied it will be silently adjusted to a request of 600.
+  /// - When the alarm goes off, Alarm Manager will turn on LCD to prohibit background jobs.
+  /// - Since 6.0, You can use `alarm_standard_interval_e` for `period`. If you use it, the period of alarm is guaranteed.
+  /// - Since 6.0, Note that `period` cannot be less than 900 seconds.
+  ///
+  /// **Parameters:**
+  /// - `noti` (in): The notification to be posted when the alarm is triggered
+  /// - `delay` (in): The amount of time before the first execution (in seconds).
+  /// - `period` (in): The amount of time between subsequent alarms (in seconds). Since 6.0 this can be one of the values of `alarm_standard_interval_e`. If you uses raw integer value, the value will be phase-aligned with other period of alarm.
+  /// - `alarm_id` (out): The ID which uniquely identifies the scheduled alarm
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ALARM_ERROR_NONE`: Successful
+  /// - `ALARM_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `ALARM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ALARM_ERROR_INVALID_TIME`: Triggered time is invalid
+  /// - `ALARM_ERROR_CONNECTION_FAIL`: Failed to connect to an alarm server
+  ///
+  /// **See also:**
+  /// - `alarm_cancel()`
+  /// - `alarm_cancel_all()`
+  /// - `alarm_get_scheduled_date()`
+  /// - `alarm_get_scheduled_period()`
+  /// - `alarm_schedule_noti_once_after_delay()`
   int alarm_schedule_noti_after_delay(
     notification.notification_h noti,
     int delay,
@@ -691,29 +924,43 @@ class Tizen90CapiAppfwAlarm {
           int Function(
               notification.notification_h, int, int, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Sets a notification alarm to be triggered after a specific delay.
-  /// @details The alarm will go off @a delay seconds later.
-  /// To cancel the alarm, call alarm_cancel() with @a alarm_id.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/alarm.set
-  /// @privilege %http://tizen.org/privilege/notification
-  /// @remarks If the application is uninstalled after setting an alarm, the alarm is cancelled automatically.
-  /// When the alarm goes off, Alarm Manager will turn on LCD to prohibit background jobs.
+  /// Sets a notification alarm to be triggered after a specific delay.
   ///
-  /// @param[in] noti The notification to be posted when the alarm is triggered
-  /// @param[in] delay The amount of time before the execution (in seconds)
-  /// @param[out] alarm_id The ID which uniquely identifies the scheduled alarm
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #ALARM_ERROR_NONE Successful
-  /// @retval #ALARM_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #ALARM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #ALARM_ERROR_INVALID_TIME Triggered time is invalid
-  /// @retval #ALARM_ERROR_CONNECTION_FAIL Failed to connect to an alarm server
-  /// @see alarm_cancel()
-  /// @see alarm_cancel_all()
-  /// @see alarm_get_scheduled_date()
+  /// The alarm will go off `delay` seconds later. To cancel the alarm, call alarm_cancel() with `alarm_id`.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/alarm.set>
+  /// - <http://tizen.org/privilege/notification>
+  ///
+  /// **Remarks:**
+  /// - If the application is uninstalled after setting an alarm, the alarm is cancelled automatically.
+  /// - When the alarm goes off, Alarm Manager will turn on LCD to prohibit background jobs.
+  ///
+  /// **Parameters:**
+  /// - `noti` (in): The notification to be posted when the alarm is triggered
+  /// - `delay` (in): The amount of time before the execution (in seconds)
+  /// - `alarm_id` (out): The ID which uniquely identifies the scheduled alarm
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ALARM_ERROR_NONE`: Successful
+  /// - `ALARM_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `ALARM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ALARM_ERROR_INVALID_TIME`: Triggered time is invalid
+  /// - `ALARM_ERROR_CONNECTION_FAIL`: Failed to connect to an alarm server
+  ///
+  /// **See also:**
+  /// - `alarm_cancel()`
+  /// - `alarm_cancel_all()`
+  /// - `alarm_get_scheduled_date()`
   int alarm_schedule_noti_once_after_delay(
     notification.notification_h noti,
     int delay,
@@ -735,34 +982,45 @@ class Tizen90CapiAppfwAlarm {
           int Function(
               notification.notification_h, int, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Sets a notification to be triggered periodically, starting at a specific time.
-  /// @details The @a date describes the time of the first occurrence.
-  /// @a week_flag describes the day(s) of the week when the notification recurs.
-  /// If @a week_flag is #ALARM_WEEK_FLAG_TUESDAY, the alarm will repeat every Tuesday at a specific time.
-  /// If @a week_flag is less than or equal to zero, the alarm is not repeated.
-  /// To cancel the alarm, call alarm_cancel() with @a alarm_id.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/alarm.set
-  /// @privilege %http://tizen.org/privilege/notification
-  /// @remarks If the application is uninstalled after setting an alarm, the alarm is cancelled automatically.
+  /// Sets a notification to be triggered periodically, starting at a specific time.
   ///
-  /// @param[in] noti The notification to be posted when the alarm is triggered
-  /// @param[in] date The first active alarm time
-  /// @param[in] week_flag The day of the week the notification recurs. @a week_flag may be a combination of days, like #ALARM_WEEK_FLAG_TUESDAY | #ALARM_WEEK_FLAG_FRIDAY
-  /// @param[out] alarm_id The ID which uniquely identifies the scheduled alarm
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #ALARM_ERROR_NONE Successful
-  /// @retval #ALARM_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #ALARM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #ALARM_ERROR_INVALID_DATE Triggered date is invalid
-  /// @retval #ALARM_ERROR_CONNECTION_FAIL Failed to connect to an alarm server
-  /// @see alarm_cancel()
-  /// @see alarm_cancel_all()
-  /// @see alarm_get_scheduled_recurrence_week_flag()
-  /// @see alarm_get_scheduled_date()
-  /// @see #alarm_week_flag_e
+  /// The `date` describes the time of the first occurrence. `week_flag` describes the day(s) of the week when the notification recurs. If `week_flag` is `ALARM_WEEK_FLAG_TUESDAY`, the alarm will repeat every Tuesday at a specific time. If `week_flag` is less than or equal to zero, the alarm is not repeated. To cancel the alarm, call alarm_cancel() with `alarm_id`.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/alarm.set>
+  /// - <http://tizen.org/privilege/notification>
+  ///
+  /// **Remarks:**
+  /// - If the application is uninstalled after setting an alarm, the alarm is cancelled automatically.
+  ///
+  /// **Parameters:**
+  /// - `noti` (in): The notification to be posted when the alarm is triggered
+  /// - `date` (in): The first active alarm time
+  /// - `week_flag` (in): The day of the week the notification recurs. `week_flag` may be a combination of days, like `ALARM_WEEK_FLAG_TUESDAY` | `ALARM_WEEK_FLAG_FRIDAY`
+  /// - `alarm_id` (out): The ID which uniquely identifies the scheduled alarm
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ALARM_ERROR_NONE`: Successful
+  /// - `ALARM_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `ALARM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ALARM_ERROR_INVALID_DATE`: Triggered date is invalid
+  /// - `ALARM_ERROR_CONNECTION_FAIL`: Failed to connect to an alarm server
+  ///
+  /// **See also:**
+  /// - `alarm_cancel()`
+  /// - `alarm_cancel_all()`
+  /// - `alarm_get_scheduled_recurrence_week_flag()`
+  /// - `alarm_get_scheduled_date()`
+  /// - `alarm_week_flag_e`
   int alarm_schedule_noti_with_recurrence_week_flag(
     notification.notification_h noti,
     ffi.Pointer<time.tm> date,
@@ -787,24 +1045,38 @@ class Tizen90CapiAppfwAlarm {
           int Function(notification.notification_h, ffi.Pointer<time.tm>, int,
               ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the notification to be posted when an alarm is triggered.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/alarm.get
-  /// @remarks @a noti must be released using notification_free().
+  /// Gets the notification to be posted when an alarm is triggered.
   ///
-  /// @param[in] alarm_id The ID which uniquely identifies a scheduled alarm
-  /// @param[out] noti The notification to be posted when the alarm is triggered
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #ALARM_ERROR_NONE Successful
-  /// @retval #ALARM_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #ALARM_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #ALARM_ERROR_OUT_OF_MEMORY Out of memory
-  /// @see alarm_schedule_noti_once_at_date()
-  /// @see alarm_schedule_noti_after_delay()
-  /// @see alarm_schedule_noti_once_after_delay()
-  /// @see alarm_schedule_noti_with_recurrence_week_flag()
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/alarm.get>
+  ///
+  /// **Remarks:**
+  /// - `noti` must be released using notification_free().
+  ///
+  /// **Parameters:**
+  /// - `alarm_id` (in): The ID which uniquely identifies a scheduled alarm
+  /// - `noti` (out): The notification to be posted when the alarm is triggered
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ALARM_ERROR_NONE`: Successful
+  /// - `ALARM_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `ALARM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ALARM_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `alarm_schedule_noti_once_at_date()`
+  /// - `alarm_schedule_noti_after_delay()`
+  /// - `alarm_schedule_noti_once_after_delay()`
+  /// - `alarm_schedule_noti_with_recurrence_week_flag()`
   int alarm_get_notification(
     int alarm_id,
     ffi.Pointer<notification.notification_h> noti,
@@ -823,26 +1095,37 @@ class Tizen90CapiAppfwAlarm {
   late final _alarm_get_notification = _alarm_get_notificationPtr.asFunction<
       int Function(int, ffi.Pointer<notification.notification_h>)>();
 
-  /// @brief Updates the delay of the registered alarm.
-  /// @details The @a delay is the time (in seconds) before the alarm's first setting off.
-  /// The delay is an exact value, see alarm_schedule_once_after_delay() for details.
-  /// This function can be called for any alarm.
-  /// If the delay was set before, it will be overwritten. If it was not, it will be set.
-  /// @since_tizen 4.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/alarm.set
-  /// @remarks This function can be called only for alarms whose app control launches an UI application.
-  /// If this condition is not met, #ALARM_ERROR_NOT_PERMITTED_APP is returned.
-  /// @param[in] alarm_id  The ID which uniquely identifies the scheduled alarm
-  /// @param[in] delay     The amount of time before the first execution (in seconds).
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #ALARM_ERROR_NONE               Successful
-  /// @retval #ALARM_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #ALARM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #ALARM_ERROR_CONNECTION_FAIL    Failed to connect to an alarm server
-  /// @retval #ALARM_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #ALARM_ERROR_NOT_PERMITTED_APP  App control does not launch an UI application
+  /// Updates the delay of the registered alarm.
+  ///
+  /// The `delay` is the time (in seconds) before the alarm's first setting off. The delay is an exact value, see alarm_schedule_once_after_delay() for details. This function can be called for any alarm. If the delay was set before, it will be overwritten. If it was not, it will be set.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/alarm.set>
+  ///
+  /// **Remarks:**
+  /// - This function can be called only for alarms whose app control launches an UI application.
+  /// - If this condition is not met, `ALARM_ERROR_NOT_PERMITTED_APP` is returned.
+  ///
+  /// **Parameters:**
+  /// - `alarm_id` (in): The ID which uniquely identifies the scheduled alarm
+  /// - `delay` (in): The amount of time before the first execution (in seconds).
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ALARM_ERROR_NONE`: Successful
+  /// - `ALARM_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `ALARM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ALARM_ERROR_CONNECTION_FAIL`: Failed to connect to an alarm server
+  /// - `ALARM_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `ALARM_ERROR_NOT_PERMITTED_APP`: App control does not launch an UI application
   int alarm_update_delay(
     int alarm_id,
     int delay,
@@ -859,27 +1142,39 @@ class Tizen90CapiAppfwAlarm {
   late final _alarm_update_delay =
       _alarm_update_delayPtr.asFunction<int Function(int, int)>();
 
-  /// @brief Updates the date of the registered alarm.
-  /// @details The @a date describes the date on which the alarm is set off for the first time.
-  /// This function can be called for any alarm.
-  /// If the date was set before, it will be overwritten. If it was not, it will be set.
-  /// @since_tizen 4.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/alarm.set
-  /// @remarks This function can be called only for alarms whose app control launches an UI application.
-  /// If this condition is not met, #ALARM_ERROR_NOT_PERMITTED_APP is returned.
-  /// @param[in] alarm_id  The ID which uniquely identifies the scheduled alarm
-  /// @param[in] date      The time value of the next alarm event
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #ALARM_ERROR_NONE               Successful
-  /// @retval #ALARM_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #ALARM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #ALARM_ERROR_INVALID_TIME       Triggered time is invalid
-  /// @retval #ALARM_ERROR_INVALID_DATE       Triggered time is invalid
-  /// @retval #ALARM_ERROR_CONNECTION_FAIL    Failed to connect to an alarm server
-  /// @retval #ALARM_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #ALARM_ERROR_NOT_PERMITTED_APP  App control does not launch an UI application
+  /// Updates the date of the registered alarm.
+  ///
+  /// The `date` describes the date on which the alarm is set off for the first time. This function can be called for any alarm. If the date was set before, it will be overwritten. If it was not, it will be set.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/alarm.set>
+  ///
+  /// **Remarks:**
+  /// - This function can be called only for alarms whose app control launches an UI application.
+  /// - If this condition is not met, `ALARM_ERROR_NOT_PERMITTED_APP` is returned.
+  ///
+  /// **Parameters:**
+  /// - `alarm_id` (in): The ID which uniquely identifies the scheduled alarm
+  /// - `date` (in): The time value of the next alarm event
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ALARM_ERROR_NONE`: Successful
+  /// - `ALARM_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `ALARM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ALARM_ERROR_INVALID_TIME`: Triggered time is invalid
+  /// - `ALARM_ERROR_INVALID_DATE`: Triggered time is invalid
+  /// - `ALARM_ERROR_CONNECTION_FAIL`: Failed to connect to an alarm server
+  /// - `ALARM_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `ALARM_ERROR_NOT_PERMITTED_APP`: App control does not launch an UI application
   int alarm_update_date(
     int alarm_id,
     ffi.Pointer<time.tm> date,
@@ -896,30 +1191,32 @@ class Tizen90CapiAppfwAlarm {
   late final _alarm_update_date = _alarm_update_datePtr
       .asFunction<int Function(int, ffi.Pointer<time.tm>)>();
 
-  /// @brief Updates the period of the registered alarm.
-  /// @details The alarm will then go off every @a period seconds until canceled.
-  /// This function can be called for any alarm.
-  /// If the week recurrence flag was set before, it will be removed and the period will be set.
-  /// If the period was set before, it will be overwritten. If it was not, it will be set.
-  /// If the @a period argument is 0 and the period was previously set,
-  /// the period attribute will be cleared and the alarm will be changed to one-time.
-  /// If the @a period argument is 0 and the period was not set,
-  /// or the week recurrence flag was set, the alarm will be unchanged.
-  /// @since_tizen 4.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/alarm.set
-  /// @param[in] alarm_id  The ID which uniquely identifies the scheduled alarm
-  /// @param[in] period    The amount of time between subsequent alarms (in seconds).
-  /// Since 2.4, this
-  /// value does not guarantee the accuracy. The actual interval
-  /// is calculated by the OS. The minimum value is 600sec.
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #ALARM_ERROR_NONE               Successful
-  /// @retval #ALARM_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #ALARM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #ALARM_ERROR_CONNECTION_FAIL    Failed to connect to an alarm server
-  /// @retval #ALARM_ERROR_OUT_OF_MEMORY      Out of memory
+  /// Updates the period of the registered alarm.
+  ///
+  /// The alarm will then go off every `period` seconds until canceled. This function can be called for any alarm. If the week recurrence flag was set before, it will be removed and the period will be set. If the period was set before, it will be overwritten. If it was not, it will be set. If the `period` argument is 0 and the period was previously set, the period attribute will be cleared and the alarm will be changed to one-time. If the `period` argument is 0 and the period was not set, or the week recurrence flag was set, the alarm will be unchanged.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/alarm.set>
+  ///
+  /// **Parameters:**
+  /// - `alarm_id` (in): The ID which uniquely identifies the scheduled alarm
+  /// - `period` (in): The amount of time between subsequent alarms (in seconds). Since 2.4, this value does not guarantee the accuracy. The actual interval is calculated by the OS. The minimum value is 600sec.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ALARM_ERROR_NONE`: Successful
+  /// - `ALARM_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `ALARM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ALARM_ERROR_CONNECTION_FAIL`: Failed to connect to an alarm server
+  /// - `ALARM_ERROR_OUT_OF_MEMORY`: Out of memory
   int alarm_update_period(
     int alarm_id,
     int period,
@@ -936,33 +1233,37 @@ class Tizen90CapiAppfwAlarm {
   late final _alarm_update_period =
       _alarm_update_periodPtr.asFunction<int Function(int, int)>();
 
-  /// @brief Updates the week recurrence flag of the registered alarm.
-  /// @details @a week_flag is the repeat value of the days of the week.
-  /// For example, if @a week_flag is #ALARM_WEEK_FLAG_TUESDAY, the alarm will repeat every
-  /// Tuesday at a specific time.
-  /// This function can be called for any alarm.
-  /// If the period was set before, it will be removed and the week recurrence flag will be set.
-  /// If the week recurrence flag was set before, it will be overwritten. If it was not, it will be set.
-  /// If the @a week_flag argument is 0 and the flag was previously set,
-  /// the flag attribute will be cleared and the alarm will be changed to one-time.
-  /// If the @a week_flag argument is 0 and the flag was not set,
-  /// or the period was set, the alarm will be unchanged.
-  /// @since_tizen 4.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/alarm.set
-  /// @remarks This function can be called only for alarms whose app control launches an UI application.
-  /// If this condition is not met, #ALARM_ERROR_NOT_PERMITTED_APP is returned.
-  /// @param[in] alarm_id   The ID which uniquely identifies the scheduled alarm
-  /// @param[in] week_flag  The day of the week, @a week_flag may be a combination
-  /// of days, like #ALARM_WEEK_FLAG_TUESDAY | #ALARM_WEEK_FLAG_FRIDAY
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #ALARM_ERROR_NONE               Successful
-  /// @retval #ALARM_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #ALARM_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #ALARM_ERROR_CONNECTION_FAIL    Failed to connect to an alarm server
-  /// @retval #ALARM_ERROR_OUT_OF_MEMORY      Out of memory
-  /// @retval #ALARM_ERROR_NOT_PERMITTED_APP  App control does not launch an UI application
+  /// Updates the week recurrence flag of the registered alarm.
+  ///
+  /// `week_flag` is the repeat value of the days of the week. For example, if `week_flag` is `ALARM_WEEK_FLAG_TUESDAY`, the alarm will repeat every Tuesday at a specific time. This function can be called for any alarm. If the period was set before, it will be removed and the week recurrence flag will be set. If the week recurrence flag was set before, it will be overwritten. If it was not, it will be set. If the `week_flag` argument is 0 and the flag was previously set, the flag attribute will be cleared and the alarm will be changed to one-time. If the `week_flag` argument is 0 and the flag was not set, or the period was set, the alarm will be unchanged.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/alarm.set>
+  ///
+  /// **Remarks:**
+  /// - This function can be called only for alarms whose app control launches an UI application.
+  /// - If this condition is not met, `ALARM_ERROR_NOT_PERMITTED_APP` is returned.
+  ///
+  /// **Parameters:**
+  /// - `alarm_id` (in): The ID which uniquely identifies the scheduled alarm
+  /// - `week_flag` (in): The day of the week, `week_flag` may be a combination of days, like `ALARM_WEEK_FLAG_TUESDAY` | `ALARM_WEEK_FLAG_FRIDAY`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `ALARM_ERROR_NONE`: Successful
+  /// - `ALARM_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `ALARM_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `ALARM_ERROR_CONNECTION_FAIL`: Failed to connect to an alarm server
+  /// - `ALARM_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `ALARM_ERROR_NOT_PERMITTED_APP`: App control does not launch an UI application
   int alarm_update_week_flag(
     int alarm_id,
     int week_flag,
@@ -980,8 +1281,11 @@ class Tizen90CapiAppfwAlarm {
       _alarm_update_week_flagPtr.asFunction<int Function(int, int)>();
 }
 
-/// @brief Enumeration for Alarm Error.
-/// @since_tizen 2.3
+/// Enumeration for Alarm Error.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 abstract class alarm_error_e {
   /// < Successful
   static const int ALARM_ERROR_NONE = 0;
@@ -1008,8 +1312,11 @@ abstract class alarm_error_e {
   static const int ALARM_ERROR_PERMISSION_DENIED = -13;
 }
 
-/// @brief Enumeration for Alarm Week Flag, the days of the week.
-/// @since_tizen 2.3
+/// Enumeration for Alarm Week Flag, the days of the week.
+///
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 abstract class alarm_week_flag_e {
   /// < Sunday
   static const int ALARM_WEEK_FLAG_SUNDAY = 1;
@@ -1033,8 +1340,11 @@ abstract class alarm_week_flag_e {
   static const int ALARM_WEEK_FLAG_SATURDAY = 64;
 }
 
-/// @brief Enumeration for inexact interval.
-/// @since_tizen 6.0
+/// Enumeration for inexact interval.
+///
+/// **Since Tizen:**
+/// - 6.0
+/// @nodoc
 abstract class alarm_standard_interval_e {
   /// < 900 seconds
   static const int ALARM_STANDARD_INTERVAL_FIFTEEN_MINUTES = 900;
@@ -1049,21 +1359,33 @@ abstract class alarm_standard_interval_e {
   static const int ALARM_STANDARD_INTERVAL_DAY = 86400;
 }
 
-/// @brief Called once for each scheduled alarm to get the alarm ID.
+/// Called once for each scheduled alarm to get the alarm ID.
 ///
-/// @since_tizen 2.3
-/// @param[in] alarm_id The alarm ID returned when the alarm is scheduled
-/// @param[in] user_data The user data passed from the foreach function
-/// @return @c true to continue with the next iteration of the loop,
-/// otherwise @c false to break out of the loop
-/// @pre   alarm_foreach_registered_alarm() will invoke this callback to get all the registered alarm IDs.
-/// @see   alarm_foreach_registered_alarm()
+/// **Since Tizen:**
+/// - 2.3
+///
+/// **Parameters:**
+/// - `alarm_id` (in): The alarm ID returned when the alarm is scheduled
+/// - `user_data` (in): The user data passed from the foreach function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - alarm_foreach_registered_alarm() will invoke this callback to get all the registered alarm IDs.
+///
+/// **See also:**
+/// - `alarm_foreach_registered_alarm()`
+/// @nodoc
 typedef alarm_registered_alarm_cb
     = ffi.Pointer<ffi.NativeFunction<alarm_registered_alarm_cbFunction>>;
+/// @nodoc
 typedef alarm_registered_alarm_cbFunction = ffi.Bool Function(
     ffi.Int alarm_id, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartalarm_registered_alarm_cbFunction = bool Function(
     int alarm_id, ffi.Pointer<ffi.Void> user_data);
 
+/// @nodoc
 const String APP_CONTROL_DATA_ALARM_ID =
     'http://tizen.org/appcontrol/data/alarm_id';

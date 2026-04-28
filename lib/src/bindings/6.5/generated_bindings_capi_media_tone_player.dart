@@ -1,3 +1,6 @@
+/// {@category 6.5/tizen}
+library tizen_interop_6_5.capi_media_tone_player;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -10,6 +13,7 @@ import 'dart:ffi' as ffi;
 import 'generated_bindings_capi_media_sound_manager.dart' as sound_manager;
 
 /// Dart bindings for Tizen capi-media-tone-player APIs.
+/// {@category 6.5/tizen}
 class Tizen65CapiMediaTonePlayer {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -25,28 +29,33 @@ class Tizen65CapiMediaTonePlayer {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Plays a tone with stream information of sound-manager.
+  /// Plays a tone with stream information of sound-manager.
   ///
-  /// @since_tizen 3.0
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @remarks Voice Recognition stream type is not supported in this API.
+  /// **Remarks:**
+  /// - Voice Recognition stream type is not supported in this API.
   ///
-  /// @param[in] tone	The tone type to play
-  /// @param[in] stream_info	The sound stream information handle
-  /// @param[in] duration_ms	The tone duration in milliseconds \n
-  /// @c -1 indicates an infinite duration.
-  /// @param[out] id	The tone player ID ( can be set to @c NULL )
+  /// **Parameters:**
+  /// - `tone` (in): The tone type to play
+  /// - `stream_info` (in): The sound stream information handle
+  /// - `duration_ms` (in): The tone duration in milliseconds `-1` indicates an infinite duration.
+  /// - `id` (out): The tone player ID ( can be set to `NULL` )
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #TONE_PLAYER_ERROR_NONE Successful
-  /// @retval #TONE_PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TONE_PLAYER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #TONE_PLAYER_ERROR_NOT_SUPPORTED_TYPE Not supported stream type
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @see tone_player_stop()
-  /// @see sound_manager_create_stream_information()
-  /// @see sound_manager_destroy_stream_information()
+  /// **Return values:**
+  /// - `TONE_PLAYER_ERROR_NONE`: Successful
+  /// - `TONE_PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TONE_PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `TONE_PLAYER_ERROR_NOT_SUPPORTED_TYPE`: Not supported stream type
+  ///
+  /// **See also:**
+  /// - `tone_player_stop()`
+  /// - `sound_manager_create_stream_information()`
+  /// - `sound_manager_destroy_stream_information()`
   int tone_player_start_new(
     int tone,
     sound_manager.sound_stream_info_h stream_info,
@@ -69,18 +78,24 @@ class Tizen65CapiMediaTonePlayer {
       int Function(
           int, sound_manager.sound_stream_info_h, int, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Stops playing the tone.
+  /// Stops playing the tone.
   ///
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
   ///
-  /// @param[in] id	The tone player ID to stop
+  /// **Parameters:**
+  /// - `id` (in): The tone player ID to stop
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #TONE_PLAYER_ERROR_NONE Successful
-  /// @retval #TONE_PLAYER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #TONE_PLAYER_ERROR_INVALID_OPERATION Invalid operation
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
   ///
-  /// @see tone_player_start_new()
+  /// **Return values:**
+  /// - `TONE_PLAYER_ERROR_NONE`: Successful
+  /// - `TONE_PLAYER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `TONE_PLAYER_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `tone_player_start_new()`
   int tone_player_stop(
     int id,
   ) {
@@ -96,8 +111,11 @@ class Tizen65CapiMediaTonePlayer {
       _tone_player_stopPtr.asFunction<int Function(int)>();
 }
 
-/// @brief Enumeration of error codes for tone player.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration of error codes for tone player.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class tone_player_error_e {
   /// < Successful
   static const int TONE_PLAYER_ERROR_NONE = 0;
@@ -112,8 +130,11 @@ abstract class tone_player_error_e {
   static const int TONE_PLAYER_ERROR_NOT_SUPPORTED_TYPE = -26673151;
 }
 
-/// @brief Enumeration of tone.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration of tone.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class tone_type_e {
   /// < The default tone
   static const int TONE_TYPE_DEFAULT = 0;
@@ -449,4 +470,5 @@ abstract class tone_type_e {
   static const int TONE_TYPE_USER_DEFINED_HIGH_FRE = 109;
 }
 
+/// @nodoc
 const int TONE_PLAYER_ERROR_CLASS = -8096;

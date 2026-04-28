@@ -1,3 +1,6 @@
+/// {@category 7.0/tizen}
+library tizen_interop_7_0.feedback;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen feedback APIs.
+/// {@category 7.0/tizen}
 class Tizen70Feedback {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,18 +28,29 @@ class Tizen70Feedback {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Initializes feedback API.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @remarks If this function is not called in advance, other function will return #FEEDBACK_ERROR_NOT_INITIALIZED.
-  /// And for controlling haptic device, the privilege should be set to, %http://tizen.org/privilege/haptic.
-  /// If you don't have the haptic privilege, this function initializes only sound.
-  /// It does not return any error in this case.
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #FEEDBACK_ERROR_NONE Successful
-  /// @retval #FEEDBACK_ERROR_NOT_SUPPORTED Not supported device
-  /// @post feedback_deinitialize()
-  /// @see feedback_deinitialize()
+  /// Initializes feedback API.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Remarks:**
+  /// - If this function is not called in advance, other function will return `FEEDBACK_ERROR_NOT_INITIALIZED`.
+  /// - And for controlling haptic device, the privilege should be set to, http://tizen.org/privilege/haptic.
+  /// - If you don't have the haptic privilege, this function initializes only sound.
+  /// - It does not return any error in this case.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `FEEDBACK_ERROR_NONE`: Successful
+  /// - `FEEDBACK_ERROR_NOT_SUPPORTED`: Not supported device
+  ///
+  /// **Postconditions:**
+  /// - feedback_deinitialize()
+  ///
+  /// **See also:**
+  /// - `feedback_deinitialize()`
   int feedback_initialize() {
     return _feedback_initialize();
   }
@@ -45,20 +60,32 @@ class Tizen70Feedback {
   late final _feedback_initialize =
       _feedback_initializePtr.asFunction<int Function()>();
 
-  /// @brief Deinitializes feedback API.
-  /// @details This function must be called when feedback functions are no longer needed.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @remarks If you don't want to use feedback anymore, you need to deinitialize with this function.
-  /// And for controlling haptic device, the privilege should be set to, %http://tizen.org/privilege/haptic.
-  /// If you don't have the haptic privilege, this function deinitializes only sound.
-  /// It does not return any error in this case.
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #FEEDBACK_ERROR_NONE Successful
-  /// @retval #FEEDBACK_ERROR_NOT_INITIALIZED Not initialized
-  /// @retval #FEEDBACK_ERROR_NOT_SUPPORTED Not supported device
-  /// @pre feedback_initialize()
-  /// @see feedback_initialize()
+  /// Deinitializes feedback API.
+  ///
+  /// This function must be called when feedback functions are no longer needed.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Remarks:**
+  /// - If you don't want to use feedback anymore, you need to deinitialize with this function.
+  /// - And for controlling haptic device, the privilege should be set to, http://tizen.org/privilege/haptic.
+  /// - If you don't have the haptic privilege, this function deinitializes only sound.
+  /// - It does not return any error in this case.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `FEEDBACK_ERROR_NONE`: Successful
+  /// - `FEEDBACK_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `FEEDBACK_ERROR_NOT_SUPPORTED`: Not supported device
+  ///
+  /// **Preconditions:**
+  /// - feedback_initialize()
+  ///
+  /// **See also:**
+  /// - `feedback_initialize()`
   int feedback_deinitialize() {
     return _feedback_deinitialize();
   }
@@ -68,26 +95,37 @@ class Tizen70Feedback {
   late final _feedback_deinitialize =
       _feedback_deinitializePtr.asFunction<int Function()>();
 
-  /// @brief Plays various types of reactions that are pre-defined.
-  /// @details This function can be used to react to pre-defined actions. \n
-  /// It play various types of system pre-defined media or vibration patterns.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @remarks Currently, there are two types of reactions: sound and vibration. \n
-  /// Depending on the settings, some types cannot operate.
-  /// For example, when set to silent mode, the device doesn't produce any sound.
-  /// If to play one of the devices is successful, this function regards as success.
-  /// And for controlling haptic device, the privilege should be set to, %http://tizen.org/privilege/haptic.
-  /// If you don't have the haptic privilege, it only works sound operation.
-  /// It does not return any error in this case.
-  /// @param[in] pattern The pre-defined pattern
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #FEEDBACK_ERROR_NONE Successful
-  /// @retval #FEEDBACK_ERROR_OPERATION_FAILED Operation not permitted
-  /// @retval #FEEDBACK_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #FEEDBACK_ERROR_NOT_SUPPORTED Not supported device
-  /// @retval #FEEDBACK_ERROR_NOT_INITIALIZED Not initialized
-  /// @pre feedback_initialize()
+  /// Plays various types of reactions that are pre-defined.
+  ///
+  /// This function can be used to react to pre-defined actions. It play various types of system pre-defined media or vibration patterns.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Remarks:**
+  /// - Currently, there are two types of reactions: sound and vibration.
+  /// - Depending on the settings, some types cannot operate.
+  /// - For example, when set to silent mode, the device doesn't produce any sound.
+  /// - If to play one of the devices is successful, this function regards as success.
+  /// - And for controlling haptic device, the privilege should be set to, http://tizen.org/privilege/haptic.
+  /// - If you don't have the haptic privilege, it only works sound operation.
+  /// - It does not return any error in this case.
+  ///
+  /// **Parameters:**
+  /// - `pattern` (in): The pre-defined pattern
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `FEEDBACK_ERROR_NONE`: Successful
+  /// - `FEEDBACK_ERROR_OPERATION_FAILED`: Operation not permitted
+  /// - `FEEDBACK_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `FEEDBACK_ERROR_NOT_SUPPORTED`: Not supported device
+  /// - `FEEDBACK_ERROR_NOT_INITIALIZED`: Not initialized
+  ///
+  /// **Preconditions:**
+  /// - feedback_initialize()
   int feedback_play(
     int pattern,
   ) {
@@ -100,26 +138,37 @@ class Tizen70Feedback {
       _lookup<ffi.NativeFunction<ffi.Int Function(ffi.Int32)>>('feedback_play');
   late final _feedback_play = _feedback_playPtr.asFunction<int Function(int)>();
 
-  /// @brief Plays specific type of reactions that are pre-defined.
-  /// @details This function can be used to react to pre-defined actions. \n
-  /// It play specific type of system pre-defined pattern.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @remarks Currently, there are two types of reactions: sound and vibration. \n
-  /// Depending on the settings, some types cannot operate.
-  /// For example, when set to silent mode, the device doesn't produce any sound.
-  /// And for controlling haptic device, the privilege should be set to, %http://tizen.org/privilege/haptic.
-  /// If you don't have the haptic privilege, it returns FEEDBACK_ERROR_PERMISSION_DENIED error.
-  /// @param[in] type The pattern type
-  /// @param[in] pattern The pre-defined pattern
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #FEEDBACK_ERROR_NONE Successful
-  /// @retval #FEEDBACK_ERROR_OPERATION_FAILED Operation not permitted
-  /// @retval #FEEDBACK_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #FEEDBACK_ERROR_NOT_SUPPORTED Not supported device
-  /// @retval #FEEDBACK_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #FEEDBACK_ERROR_NOT_INITIALIZED Not initialized
-  /// @pre feedback_initialize()
+  /// Plays specific type of reactions that are pre-defined.
+  ///
+  /// This function can be used to react to pre-defined actions. It play specific type of system pre-defined pattern.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Remarks:**
+  /// - Currently, there are two types of reactions: sound and vibration.
+  /// - Depending on the settings, some types cannot operate.
+  /// - For example, when set to silent mode, the device doesn't produce any sound.
+  /// - And for controlling haptic device, the privilege should be set to, http://tizen.org/privilege/haptic.
+  /// - If you don't have the haptic privilege, it returns FEEDBACK_ERROR_PERMISSION_DENIED error.
+  ///
+  /// **Parameters:**
+  /// - `type` (in): The pattern type
+  /// - `pattern` (in): The pre-defined pattern
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `FEEDBACK_ERROR_NONE`: Successful
+  /// - `FEEDBACK_ERROR_OPERATION_FAILED`: Operation not permitted
+  /// - `FEEDBACK_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `FEEDBACK_ERROR_NOT_SUPPORTED`: Not supported device
+  /// - `FEEDBACK_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `FEEDBACK_ERROR_NOT_INITIALIZED`: Not initialized
+  ///
+  /// **Preconditions:**
+  /// - feedback_initialize()
   int feedback_play_type(
     int type,
     int pattern,
@@ -136,23 +185,32 @@ class Tizen70Feedback {
   late final _feedback_play_type =
       _feedback_play_typePtr.asFunction<int Function(int, int)>();
 
-  /// @brief Stops various types of reactions.
-  /// @details This function can be used to stop reaction to pre-defined actions. \n
-  /// It stops system pre-defined vibration patterns.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @remarks This function does not support to stop media sound actions. \n
-  /// In this case, it will return FEEDBACK_ERROR_NOT_SUPPORTED error.
-  /// And for controlling haptic device, the privilege should be set to, %http://tizen.org/privilege/haptic.
-  /// If you don't have the haptic privilege, it only works sound operation.
-  /// It does not return any error in this case.
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #FEEDBACK_ERROR_NONE Successful
-  /// @retval #FEEDBACK_ERROR_OPERATION_FAILED Operation not permitted
-  /// @retval #FEEDBACK_ERROR_NOT_SUPPORTED Not supported device
-  /// @retval #FEEDBACK_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #FEEDBACK_ERROR_NOT_INITIALIZED Not initialized
-  /// @pre feedback_initialize()
+  /// Stops various types of reactions.
+  ///
+  /// This function can be used to stop reaction to pre-defined actions. It stops system pre-defined vibration patterns.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Remarks:**
+  /// - This function does not support to stop media sound actions.
+  /// - In this case, it will return FEEDBACK_ERROR_NOT_SUPPORTED error.
+  /// - And for controlling haptic device, the privilege should be set to, http://tizen.org/privilege/haptic.
+  /// - If you don't have the haptic privilege, it only works sound operation.
+  /// - It does not return any error in this case.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `FEEDBACK_ERROR_NONE`: Successful
+  /// - `FEEDBACK_ERROR_OPERATION_FAILED`: Operation not permitted
+  /// - `FEEDBACK_ERROR_NOT_SUPPORTED`: Not supported device
+  /// - `FEEDBACK_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `FEEDBACK_ERROR_NOT_INITIALIZED`: Not initialized
+  ///
+  /// **Preconditions:**
+  /// - feedback_initialize()
   int feedback_stop() {
     return _feedback_stop();
   }
@@ -161,21 +219,30 @@ class Tizen70Feedback {
       _lookup<ffi.NativeFunction<ffi.Int Function()>>('feedback_stop');
   late final _feedback_stop = _feedback_stopPtr.asFunction<int Function()>();
 
-  /// @brief Checks if the pattern is supported.
-  /// @details This function can be used to check if a specific pattern is supported.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @param[in] type The pattern type
-  /// @param[in] pattern The pre-defined pattern
-  /// @param[out] status True means the pattern is supported,
-  /// otherwise not supported
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #FEEDBACK_ERROR_NONE Successful
-  /// @retval #FEEDBACK_ERROR_OPERATION_FAILED Operation not permitted
-  /// @retval #FEEDBACK_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #FEEDBACK_ERROR_NOT_SUPPORTED Not supported device
-  /// @retval #FEEDBACK_ERROR_NOT_INITIALIZED Not initialized
-  /// @pre feedback_initialize()
+  /// Checks if the pattern is supported.
+  ///
+  /// This function can be used to check if a specific pattern is supported.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `type` (in): The pattern type
+  /// - `pattern` (in): The pre-defined pattern
+  /// - `status` (out): True means the pattern is supported, otherwise not supported
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `FEEDBACK_ERROR_NONE`: Successful
+  /// - `FEEDBACK_ERROR_OPERATION_FAILED`: Operation not permitted
+  /// - `FEEDBACK_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `FEEDBACK_ERROR_NOT_SUPPORTED`: Not supported device
+  /// - `FEEDBACK_ERROR_NOT_INITIALIZED`: Not initialized
+  ///
+  /// **Preconditions:**
+  /// - feedback_initialize()
   int feedback_is_supported_pattern(
     int type,
     int pattern,
@@ -196,8 +263,11 @@ class Tizen70Feedback {
       .asFunction<int Function(int, int, ffi.Pointer<ffi.Bool>)>();
 }
 
-/// @brief Enumeration for the Feedback API error codes.
-/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+/// Enumeration for the Feedback API error codes.
+///
+/// **Since Tizen:**
+/// - Mobile 2.4; Wearable 3.0
+/// @nodoc
 abstract class feedback_error_e {
   /// < Successful
   static const int FEEDBACK_ERROR_NONE = 0;
@@ -218,10 +288,13 @@ abstract class feedback_error_e {
   static const int FEEDBACK_ERROR_NOT_INITIALIZED = -38404095;
 }
 
-/// @brief Enumeration for feedback interface of the system pre-defined patterns.
-/// @details Each feedback pattern can have separate media files of each types.
-/// But depending on vendor design, pattern may not have any type of file.
-/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+/// Enumeration for feedback interface of the system pre-defined patterns.
+///
+/// Each feedback pattern can have separate media files of each types. But depending on vendor design, pattern may not have any type of file.
+///
+/// **Since Tizen:**
+/// - Mobile 2.4; Wearable 3.0
+/// @nodoc
 abstract class feedback_pattern_e {
   static const int FEEDBACK_PATTERN_NONE = -1;
 
@@ -362,8 +435,11 @@ abstract class feedback_pattern_e {
   static const int FEEDBACK_PATTERN_END = 10000;
 }
 
-/// @brief Enumeration for feedback interface type.
-/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+/// Enumeration for feedback interface type.
+///
+/// **Since Tizen:**
+/// - Mobile 2.4; Wearable 3.0
+/// @nodoc
 abstract class feedback_type_e {
   /// < Feedback type none
   static const int FEEDBACK_TYPE_NONE = 0;

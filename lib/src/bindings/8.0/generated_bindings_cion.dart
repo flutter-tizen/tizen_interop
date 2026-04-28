@@ -1,3 +1,6 @@
+/// {@category 8.0/tizen}
+library tizen_interop_8_0.cion;
+
 // Copyright 2026 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen cion APIs.
+/// {@category 8.0/tizen}
 class Tizen80Cion {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,18 +28,32 @@ class Tizen80Cion {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Creates a payload handle.
-  /// @since_tizen 6.5
-  /// @remarks @a payload must be released using cion_payload_destroy().
-  /// @param[out] payload The payload handle
-  /// @param[in] type The type of payload
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CION_ERROR_OUT_OF_MEMORY Out of memory
-  /// @see cion_payload_destroy()
-  /// @par Sample code:
-  /// @code
+  /// Creates a payload handle.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Remarks:**
+  /// - `payload` must be released using cion_payload_destroy().
+  ///
+  /// **Parameters:**
+  /// - `payload` (out): The payload handle
+  /// - `type` (in): The type of payload
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CION_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `cion_payload_destroy()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -44,7 +62,7 @@ class Tizen80Cion {
   ///
   /// ret = cion_payload_create(&payload, CION_PAYLOAD_TYPE_DATA);
   /// }
-  /// @endcode
+  /// ```
   int cion_payload_create(
     ffi.Pointer<cion_payload_h> payload,
     int type,
@@ -62,15 +80,27 @@ class Tizen80Cion {
   late final _cion_payload_create = _cion_payload_createPtr
       .asFunction<int Function(ffi.Pointer<cion_payload_h>, int)>();
 
-  /// @brief Destroys the payload handle.
-  /// @since_tizen 6.5
-  /// @param[in] payload The payload handle
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see cion_payload_create()
-  /// @par Sample code:
-  /// @code
+  /// Destroys the payload handle.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Parameters:**
+  /// - `payload` (in): The payload handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `cion_payload_create()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -78,7 +108,7 @@ class Tizen80Cion {
   ///
   /// ret = cion_payload_destroy(payload);
   /// }
-  /// @endcode
+  /// ```
   int cion_payload_destroy(
     cion_payload_h payload,
   ) {
@@ -93,16 +123,28 @@ class Tizen80Cion {
   late final _cion_payload_destroy =
       _cion_payload_destroyPtr.asFunction<int Function(cion_payload_h)>();
 
-  /// @brief Gets the type of payload.
-  /// @since_tizen 6.5
-  /// @param[in] payload The payload handle
-  /// @param[out] type The type of payload
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #cion_payload_type_e
-  /// @par Sample code:
-  /// @code
+  /// Gets the type of payload.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Parameters:**
+  /// - `payload` (in): The payload handle
+  /// - `type` (out): The type of payload
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `cion_payload_type_e`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -111,7 +153,7 @@ class Tizen80Cion {
   ///
   /// ret = cion_payload_get_type(payload, &type);
   /// }
-  /// @endcode
+  /// ```
   int cion_payload_get_type(
     cion_payload_h payload,
     ffi.Pointer<ffi.Int32> type,
@@ -129,20 +171,34 @@ class Tizen80Cion {
   late final _cion_payload_get_type = _cion_payload_get_typePtr
       .asFunction<int Function(cion_payload_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the data from payload.
-  /// @since_tizen 6.5
-  /// @remarks This can be used when the payload type is #CION_PAYLOAD_TYPE_DATA.
-  /// @remarks @a data must be released using free().
-  /// @param[in] payload The payload handle
-  /// @param[out] data The data
-  /// @param[out] data_size The size of data
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CION_ERROR_OUT_OF_MEMORY Out of memory
-  /// @see #CION_PAYLOAD_TYPE_DATA
-  /// @par Sample code:
-  /// @code
+  /// Gets the data from payload.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Remarks:**
+  /// - This can be used when the payload type is `CION_PAYLOAD_TYPE_DATA`.
+  /// - `data` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `payload` (in): The payload handle
+  /// - `data` (out): The data
+  /// - `data_size` (out): The size of data
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CION_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `CION_PAYLOAD_TYPE_DATA`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -152,7 +208,7 @@ class Tizen80Cion {
   ///
   /// ret = cion_payload_get_data(payload, &data, &data_size);
   /// }
-  /// @endcode
+  /// ```
   int cion_payload_get_data(
     cion_payload_h payload,
     ffi.Pointer<ffi.Pointer<ffi.UnsignedChar>> data,
@@ -175,18 +231,32 @@ class Tizen80Cion {
       int Function(cion_payload_h, ffi.Pointer<ffi.Pointer<ffi.UnsignedChar>>,
           ffi.Pointer<ffi.UnsignedInt>)>();
 
-  /// @brief Sets the data to payload.
-  /// @since_tizen 6.5
-  /// @remarks This can be used when the payload type is #CION_PAYLOAD_TYPE_DATA.
-  /// @param[in] payload The payload handle
-  /// @param[in] data The data
-  /// @param[in] data_size The size of data
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #CION_PAYLOAD_TYPE_DATA
-  /// @par Sample code:
-  /// @code
+  /// Sets the data to payload.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Remarks:**
+  /// - This can be used when the payload type is `CION_PAYLOAD_TYPE_DATA`.
+  ///
+  /// **Parameters:**
+  /// - `payload` (in): The payload handle
+  /// - `data` (in): The data
+  /// - `data_size` (in): The size of data
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `CION_PAYLOAD_TYPE_DATA`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -194,7 +264,7 @@ class Tizen80Cion {
   ///
   /// ret = cion_payload_set_data(payload, "mydata", 6);
   /// }
-  /// @endcode
+  /// ```
   int cion_payload_set_data(
     cion_payload_h payload,
     ffi.Pointer<ffi.UnsignedChar> data,
@@ -214,22 +284,36 @@ class Tizen80Cion {
   late final _cion_payload_set_data = _cion_payload_set_dataPtr.asFunction<
       int Function(cion_payload_h, ffi.Pointer<ffi.UnsignedChar>, int)>();
 
-  /// @brief Saves the payload as a file.
-  /// @since_tizen 6.5
-  /// @remarks This can be used when the payload type is #CION_PAYLOAD_TYPE_FILE.
-  /// @remarks The @a path is absolute path.
-  /// @remarks If the media storage is used, %http://tizen.org/privilege/mediastorage privilege is necessary. \n
-  /// If the external storage is used, %http://tizen.org/privilege/externalstorage privilege is necessary.
-  /// @param[in] payload The payload handle
-  /// @param[in] path The path of file
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CION_ERROR_OPERATION_FAILED Operation failed
-  /// @see #CION_PAYLOAD_TYPE_FILE
-  /// @par Sample code:
-  /// @code
+  /// Saves the payload as a file.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Remarks:**
+  /// - This can be used when the payload type is `CION_PAYLOAD_TYPE_FILE`.
+  /// - The `path` is absolute path.
+  /// - If the media storage is used, http://tizen.org/privilege/mediastorage privilege is necessary.
+  /// - If the external storage is used, http://tizen.org/privilege/externalstorage privilege is necessary.
+  ///
+  /// **Parameters:**
+  /// - `payload` (in): The payload handle
+  /// - `path` (in): The path of file
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CION_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **See also:**
+  /// - `CION_PAYLOAD_TYPE_FILE`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -237,7 +321,7 @@ class Tizen80Cion {
   ///
   /// ret = cion_payload_save_as_file(payload, "filepath");
   /// }
-  /// @endcode
+  /// ```
   int cion_payload_save_as_file(
     cion_payload_h payload,
     ffi.Pointer<ffi.Char> path,
@@ -255,19 +339,33 @@ class Tizen80Cion {
   late final _cion_payload_save_as_file = _cion_payload_save_as_filePtr
       .asFunction<int Function(cion_payload_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the name of received file from the payload.
-  /// @since_tizen 6.5
-  /// @remarks This can be used when the payload type is #CION_PAYLOAD_TYPE_FILE.
-  /// @remarks @a file_name must be released using free().
-  /// @param[in] payload The payload handle
-  /// @param[out] file_name The name of file
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CION_ERROR_OUT_OF_MEMORY Out of memory
-  /// @see #CION_PAYLOAD_TYPE_FILE
-  /// @par Sample code:
-  /// @code
+  /// Gets the name of received file from the payload.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Remarks:**
+  /// - This can be used when the payload type is `CION_PAYLOAD_TYPE_FILE`.
+  /// - `file_name` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `payload` (in): The payload handle
+  /// - `file_name` (out): The name of file
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CION_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `CION_PAYLOAD_TYPE_FILE`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -276,7 +374,7 @@ class Tizen80Cion {
   ///
   /// ret = cion_payload_get_received_file_name(payload, &file_name);
   /// }
-  /// @endcode
+  /// ```
   int cion_payload_get_received_file_name(
     cion_payload_h payload,
     ffi.Pointer<ffi.Pointer<ffi.Char>> file_name,
@@ -296,17 +394,31 @@ class Tizen80Cion {
       _cion_payload_get_received_file_namePtr.asFunction<
           int Function(cion_payload_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the size of currently received file from the payload.
-  /// @since_tizen 6.5
-  /// @remarks This can be used when the payload type is #CION_PAYLOAD_TYPE_FILE.
-  /// @param[in] payload The payload handle
-  /// @param[out] bytes The size of file
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #CION_PAYLOAD_TYPE_FILE
-  /// @par Sample code:
-  /// @code
+  /// Gets the size of currently received file from the payload.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Remarks:**
+  /// - This can be used when the payload type is `CION_PAYLOAD_TYPE_FILE`.
+  ///
+  /// **Parameters:**
+  /// - `payload` (in): The payload handle
+  /// - `bytes` (out): The size of file
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `CION_PAYLOAD_TYPE_FILE`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -315,7 +427,7 @@ class Tizen80Cion {
   ///
   /// ret = cion_payload_get_received_bytes(payload, &bytes);
   /// }
-  /// @endcode
+  /// ```
   int cion_payload_get_received_bytes(
     cion_payload_h payload,
     ffi.Pointer<ffi.Uint64> bytes,
@@ -334,17 +446,31 @@ class Tizen80Cion {
       _cion_payload_get_received_bytesPtr
           .asFunction<int Function(cion_payload_h, ffi.Pointer<ffi.Uint64>)>();
 
-  /// @brief Gets the total size of file from the payload.
-  /// @since_tizen 6.5
-  /// @remarks This can be used when the payload type is #CION_PAYLOAD_TYPE_FILE.
-  /// @param[in] payload The payload handle
-  /// @param[out] bytes The size of file
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #CION_PAYLOAD_TYPE_FILE
-  /// @par Sample code:
-  /// @code
+  /// Gets the total size of file from the payload.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Remarks:**
+  /// - This can be used when the payload type is `CION_PAYLOAD_TYPE_FILE`.
+  ///
+  /// **Parameters:**
+  /// - `payload` (in): The payload handle
+  /// - `bytes` (out): The size of file
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `CION_PAYLOAD_TYPE_FILE`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -353,7 +479,7 @@ class Tizen80Cion {
   ///
   /// ret = cion_payload_get_total_bytes(payload, &bytes);
   /// }
-  /// @endcode
+  /// ```
   int cion_payload_get_total_bytes(
     cion_payload_h payload,
     ffi.Pointer<ffi.Uint64> bytes,
@@ -371,20 +497,34 @@ class Tizen80Cion {
   late final _cion_payload_get_total_bytes = _cion_payload_get_total_bytesPtr
       .asFunction<int Function(cion_payload_h, ffi.Pointer<ffi.Uint64>)>();
 
-  /// @brief Sets the file path to send payload.
-  /// @since_tizen 6.5
-  /// @remarks This can be used when the payload type is #CION_PAYLOAD_TYPE_FILE.
-  /// @remarks If media storage is used, %http://tizen.org/privilege/mediastorage privilege is necessary. \n
-  /// If external storage is used, %http://tizen.org/privilege/externalstorage privilege is necessary.
-  /// @param[in] payload The payload handle
-  /// @param[in] path The path of file
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #CION_PAYLOAD_TYPE_FILE
-  /// @par Sample code:
-  /// @code
+  /// Sets the file path to send payload.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Remarks:**
+  /// - This can be used when the payload type is `CION_PAYLOAD_TYPE_FILE`.
+  /// - If media storage is used, http://tizen.org/privilege/mediastorage privilege is necessary.
+  /// - If external storage is used, http://tizen.org/privilege/externalstorage privilege is necessary.
+  ///
+  /// **Parameters:**
+  /// - `payload` (in): The payload handle
+  /// - `path` (in): The path of file
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `CION_PAYLOAD_TYPE_FILE`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -392,7 +532,7 @@ class Tizen80Cion {
   ///
   /// ret = cion_payload_set_file_path(payload, "filepath");
   /// }
-  /// @endcode
+  /// ```
   int cion_payload_set_file_path(
     cion_payload_h payload,
     ffi.Pointer<ffi.Char> path,
@@ -410,17 +550,29 @@ class Tizen80Cion {
   late final _cion_payload_set_file_path = _cion_payload_set_file_pathPtr
       .asFunction<int Function(cion_payload_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the ID of payload.
-  /// @since_tizen 6.5
-  /// @remarks @a payload_id must be released using free().
-  /// @param[in] payload The payload handle
-  /// @param[out] payload_id The ID of payload
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CION_ERROR_OUT_OF_MEMORY Out of memory
-  /// @par Sample code:
-  /// @code
+  /// Gets the ID of payload.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Remarks:**
+  /// - `payload_id` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `payload` (in): The payload handle
+  /// - `payload_id` (out): The ID of payload
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CION_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -428,7 +580,7 @@ class Tizen80Cion {
   ///
   /// ret = cion_payload_get_payload_id(payload, &payload_id);
   /// }
-  /// @endcode
+  /// ```
   int cion_payload_get_payload_id(
     cion_payload_h payload,
     ffi.Pointer<ffi.Pointer<ffi.Char>> payload_id,
@@ -448,19 +600,33 @@ class Tizen80Cion {
       _cion_payload_get_payload_idPtr.asFunction<
           int Function(cion_payload_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Creates a clone of peer info handle.
-  /// @since_tizen 6.5
-  /// @remarks @a peer_info_clone must be released using cion_peer_info_destroy().
-  /// @param[in] peer_info The Cion peer information handle
-  /// @param[out] peer_info_clone The cloned peer information handle
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CION_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CION_ERROR_IO_ERROR IO error
-  /// @see cion_peer_info_destroy()
-  /// @par Sample code:
-  /// @code
+  /// Creates a clone of peer info handle.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Remarks:**
+  /// - `peer_info_clone` must be released using cion_peer_info_destroy().
+  ///
+  /// **Parameters:**
+  /// - `peer_info` (in): The Cion peer information handle
+  /// - `peer_info_clone` (out): The cloned peer information handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CION_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CION_ERROR_IO_ERROR`: IO error
+  ///
+  /// **See also:**
+  /// - `cion_peer_info_destroy()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -469,7 +635,7 @@ class Tizen80Cion {
   ///
   /// ret = cion_peer_info_clone(peer_info, &peer_info_cloned);
   /// }
-  /// @endcode
+  /// ```
   int cion_peer_info_clone(
     cion_peer_info_h peer_info,
     ffi.Pointer<cion_peer_info_h> peer_info_clone,
@@ -487,15 +653,27 @@ class Tizen80Cion {
   late final _cion_peer_info_clone = _cion_peer_info_clonePtr.asFunction<
       int Function(cion_peer_info_h, ffi.Pointer<cion_peer_info_h>)>();
 
-  /// @brief Destroys the peer info handle and releases all its resources.
-  /// @since_tizen 6.5
-  /// @param[in] peer_info The Cion peer information handle
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see cion_peer_info_clone()
-  /// @par Sample code:
-  /// @code
+  /// Destroys the peer info handle and releases all its resources.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Parameters:**
+  /// - `peer_info` (in): The Cion peer information handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `cion_peer_info_clone()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -503,7 +681,7 @@ class Tizen80Cion {
   ///
   /// ret = cion_peer_info_destroy(peer_info);
   /// }
-  /// @endcode
+  /// ```
   int cion_peer_info_destroy(
     cion_peer_info_h peer_info,
   ) {
@@ -518,17 +696,29 @@ class Tizen80Cion {
   late final _cion_peer_info_destroy =
       _cion_peer_info_destroyPtr.asFunction<int Function(cion_peer_info_h)>();
 
-  /// @brief Gets the device ID.
-  /// @since_tizen 6.5
-  /// @remarks @a device_id must be released using free().
-  /// @param[in] peer_info The Cion peer information handle
-  /// @param[out] device_id The device ID
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CION_ERROR_OUT_OF_MEMORY Out of memory
-  /// @par Sample code:
-  /// @code
+  /// Gets the device ID.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Remarks:**
+  /// - `device_id` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `peer_info` (in): The Cion peer information handle
+  /// - `device_id` (out): The device ID
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CION_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -537,7 +727,7 @@ class Tizen80Cion {
   ///
   /// ret = cion_peer_info_get_device_id(peer_info, &device_id);
   /// }
-  /// @endcode
+  /// ```
   int cion_peer_info_get_device_id(
     cion_peer_info_h peer_info,
     ffi.Pointer<ffi.Pointer<ffi.Char>> device_id,
@@ -557,17 +747,29 @@ class Tizen80Cion {
       _cion_peer_info_get_device_idPtr.asFunction<
           int Function(cion_peer_info_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the device name.
-  /// @since_tizen 6.5
-  /// @remarks @a device_name must be released using free().
-  /// @param[in] peer_info The Cion peer information handle
-  /// @param[out] device_name The device name
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CION_ERROR_OUT_OF_MEMORY Out of memory
-  /// @par Sample code:
-  /// @code
+  /// Gets the device name.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Remarks:**
+  /// - `device_name` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `peer_info` (in): The Cion peer information handle
+  /// - `device_name` (out): The device name
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CION_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -576,7 +778,7 @@ class Tizen80Cion {
   ///
   /// ret = cion_peer_info_get_device_name(peer_info, &device_name);
   /// }
-  /// @endcode
+  /// ```
   int cion_peer_info_get_device_name(
     cion_peer_info_h peer_info,
     ffi.Pointer<ffi.Pointer<ffi.Char>> device_name,
@@ -596,17 +798,29 @@ class Tizen80Cion {
       _cion_peer_info_get_device_namePtr.asFunction<
           int Function(cion_peer_info_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the device's platform.
-  /// @since_tizen 6.5
-  /// @remarks @a device_platform must be released using free().
-  /// @param[in] peer_info The Cion peer information handle
-  /// @param[out] device_platform The platform name
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CION_ERROR_OUT_OF_MEMORY Out of memory
-  /// @par Sample code:
-  /// @code
+  /// Gets the device's platform.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Remarks:**
+  /// - `device_platform` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `peer_info` (in): The Cion peer information handle
+  /// - `device_platform` (out): The platform name
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CION_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -615,7 +829,7 @@ class Tizen80Cion {
   ///
   /// ret = cion_peer_info_get_device_platform(peer_info, &device_platform);
   /// }
-  /// @endcode
+  /// ```
   int cion_peer_info_get_device_platform(
     cion_peer_info_h peer_info,
     ffi.Pointer<ffi.Pointer<ffi.Char>> device_platform,
@@ -635,17 +849,29 @@ class Tizen80Cion {
       _cion_peer_info_get_device_platformPtr.asFunction<
           int Function(cion_peer_info_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the device's platform version.
-  /// @since_tizen 6.5
-  /// @remarks @a device_platform_version must be released using free().
-  /// @param[in] peer_info The Cion peer information handle
-  /// @param[out] device_platform_version The platform version
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CION_ERROR_OUT_OF_MEMORY Out of memory
-  /// @par Sample code:
-  /// @code
+  /// Gets the device's platform version.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Remarks:**
+  /// - `device_platform_version` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `peer_info` (in): The Cion peer information handle
+  /// - `device_platform_version` (out): The platform version
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CION_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -654,7 +880,7 @@ class Tizen80Cion {
   ///
   /// ret = cion_peer_info_get_device_platform_version(peer_info, &device_type);
   /// }
-  /// @endcode
+  /// ```
   int cion_peer_info_get_device_platform_version(
     cion_peer_info_h peer_info,
     ffi.Pointer<ffi.Pointer<ffi.Char>> device_platform_version,
@@ -674,17 +900,29 @@ class Tizen80Cion {
       _cion_peer_info_get_device_platform_versionPtr.asFunction<
           int Function(cion_peer_info_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the device's type.
-  /// @since_tizen 6.5
-  /// @remarks @a device_type must be released using free().
-  /// @param[in] peer_info The Cion peer information handle
-  /// @param[out] device_type Device type
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CION_ERROR_OUT_OF_MEMORY Out of memory
-  /// @par Sample code:
-  /// @code
+  /// Gets the device's type.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Remarks:**
+  /// - `device_type` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `peer_info` (in): The Cion peer information handle
+  /// - `device_type` (out): Device type
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CION_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -693,7 +931,7 @@ class Tizen80Cion {
   ///
   /// ret = cion_peer_info_get_device_type(peer_info, &device_type);
   /// }
-  /// @endcode
+  /// ```
   int cion_peer_info_get_device_type(
     cion_peer_info_h peer_info,
     ffi.Pointer<ffi.Pointer<ffi.Char>> device_type,
@@ -713,17 +951,29 @@ class Tizen80Cion {
       _cion_peer_info_get_device_typePtr.asFunction<
           int Function(cion_peer_info_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets application ID of peer.
-  /// @since_tizen 6.5
-  /// @remarks @a app_id must be released using free().
-  /// @param[in] peer_info The Cion peer information handle
-  /// @param[out] app_id The application ID
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CION_ERROR_OUT_OF_MEMORY Out of memory
-  /// @par Sample code:
-  /// @code
+  /// Gets application ID of peer.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Remarks:**
+  /// - `app_id` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `peer_info` (in): The Cion peer information handle
+  /// - `app_id` (out): The application ID
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CION_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -732,7 +982,7 @@ class Tizen80Cion {
   ///
   /// ret = cion_peer_info_get_app_id(peer_info, &app_id);
   /// }
-  /// @endcode
+  /// ```
   int cion_peer_info_get_app_id(
     cion_peer_info_h peer_info,
     ffi.Pointer<ffi.Pointer<ffi.Char>> app_id,
@@ -752,17 +1002,29 @@ class Tizen80Cion {
       _cion_peer_info_get_app_idPtr.asFunction<
           int Function(cion_peer_info_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets application version of peer.
-  /// @since_tizen 6.5
-  /// @remarks @a app_version must be released using free().
-  /// @param[in] peer_info The Cion peer information handle
-  /// @param[out] app_version The application version
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CION_ERROR_OUT_OF_MEMORY Out of memory
-  /// @par Sample code:
-  /// @code
+  /// Gets application version of peer.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Remarks:**
+  /// - `app_version` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `peer_info` (in): The Cion peer information handle
+  /// - `app_version` (out): The application version
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CION_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -771,7 +1033,7 @@ class Tizen80Cion {
   ///
   /// ret = cion_peer_info_get_app_version(peer_info, &app_version);
   /// }
-  /// @endcode
+  /// ```
   int cion_peer_info_get_app_version(
     cion_peer_info_h peer_info,
     ffi.Pointer<ffi.Pointer<ffi.Char>> app_version,
@@ -791,17 +1053,29 @@ class Tizen80Cion {
       _cion_peer_info_get_app_versionPtr.asFunction<
           int Function(cion_peer_info_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets UUID of peer.
-  /// @since_tizen 6.5
-  /// @remarks @a uuid must be released using free().
-  /// @param[in] peer_info The Cion peer information handle
-  /// @param[out] uuid The UUID
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CION_ERROR_OUT_OF_MEMORY Out of memory
-  /// @par Sample code:
-  /// @code
+  /// Gets UUID of peer.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Remarks:**
+  /// - `uuid` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `peer_info` (in): The Cion peer information handle
+  /// - `uuid` (out): The UUID
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CION_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -810,7 +1084,7 @@ class Tizen80Cion {
   ///
   /// ret = cion_peer_info_get_uuid(peer_info, &uuid);
   /// }
-  /// @endcode
+  /// ```
   int cion_peer_info_get_uuid(
     cion_peer_info_h peer_info,
     ffi.Pointer<ffi.Pointer<ffi.Char>> uuid,
@@ -828,20 +1102,34 @@ class Tizen80Cion {
   late final _cion_peer_info_get_uuid = _cion_peer_info_get_uuidPtr.asFunction<
       int Function(cion_peer_info_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets display name of peer.
-  /// @details The custom name for service name. \n
-  /// It is possible that @a display_name does not exist.
-  /// @since_tizen 6.5
-  /// @remarks @a display_name must be released using free().
-  /// @param[in] peer_info The Cion peer information handle
-  /// @param[out] display_name The display name
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CION_ERROR_OUT_OF_MEMORY Out of memory
-  /// @see cion_security_set_ca_path()
-  /// @par Sample code:
-  /// @code
+  /// Gets display name of peer.
+  ///
+  /// The custom name for service name. It is possible that `display_name` does not exist.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Remarks:**
+  /// - `display_name` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `peer_info` (in): The Cion peer information handle
+  /// - `display_name` (out): The display name
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CION_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `cion_security_set_ca_path()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -850,7 +1138,7 @@ class Tizen80Cion {
   ///
   /// ret = cion_peer_info_get_display_name(peer_info, &display_name);
   /// }
-  /// @endcode
+  /// ```
   int cion_peer_info_get_display_name(
     cion_peer_info_h peer_info,
     ffi.Pointer<ffi.Pointer<ffi.Char>> display_name,
@@ -870,16 +1158,30 @@ class Tizen80Cion {
       _cion_peer_info_get_display_namePtr.asFunction<
           int Function(cion_peer_info_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Creates the Cion security handle.
-  /// @since_tizen 6.5
-  /// @remarks @a security must be released using cion_security_destroy().
-  /// @param[out] security The Cion security handle
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see cion_security_destroy()
-  /// @par Sample code:
-  /// @code
+  /// Creates the Cion security handle.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Remarks:**
+  /// - `security` must be released using cion_security_destroy().
+  ///
+  /// **Parameters:**
+  /// - `security` (out): The Cion security handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `cion_security_destroy()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -889,7 +1191,7 @@ class Tizen80Cion {
   ///
   /// ret = cion_security_create(&security);
   /// }
-  /// @endcode
+  /// ```
   int cion_security_create(
     ffi.Pointer<cion_security_h> security,
   ) {
@@ -904,15 +1206,27 @@ class Tizen80Cion {
   late final _cion_security_create = _cion_security_createPtr
       .asFunction<int Function(ffi.Pointer<cion_security_h>)>();
 
-  /// @brief Destroys the Cion security handle.
-  /// @since_tizen 6.5
-  /// @param[in] security The Cion security handle
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see cion_security_create();
-  /// @par Sample code:
-  /// @code
+  /// Destroys the Cion security handle.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Parameters:**
+  /// - `security` (in): The Cion security handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - cion_security_create();
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -920,7 +1234,7 @@ class Tizen80Cion {
   ///
   /// ret = cion_security_destroy(security);
   /// }
-  /// @endcode
+  /// ```
   int cion_security_destroy(
     cion_security_h security,
   ) {
@@ -935,18 +1249,30 @@ class Tizen80Cion {
   late final _cion_security_destroy =
       _cion_security_destroyPtr.asFunction<int Function(cion_security_h)>();
 
-  /// @brief Sets the path of certificate authority certificates.
-  /// @since_tizen 6.5
-  /// @remarks If the media storage is used, %http://tizen.org/privilege/mediastorage privilege is necessary. \n
-  /// If the external storage is used, %http://tizen.org/privilege/externalstorage privilege is necessary.
-  /// @param[in] security The Cion security handle
-  /// @param[in] ca_path The path of certificate authority certificates
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @par Sample code:
-  /// @code
+  /// Sets the path of certificate authority certificates.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Remarks:**
+  /// - If the media storage is used, http://tizen.org/privilege/mediastorage privilege is necessary.
+  /// - If the external storage is used, http://tizen.org/privilege/externalstorage privilege is necessary.
+  ///
+  /// **Parameters:**
+  /// - `security` (in): The Cion security handle
+  /// - `ca_path` (in): The path of certificate authority certificates
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -955,7 +1281,7 @@ class Tizen80Cion {
   /// ret = cion_security_set_ca_path(security, "CaPath");
   /// }
   ///
-  /// @endcode
+  /// ```
   int cion_security_set_ca_path(
     cion_security_h security,
     ffi.Pointer<ffi.Char> ca_path,
@@ -973,18 +1299,30 @@ class Tizen80Cion {
   late final _cion_security_set_ca_path = _cion_security_set_ca_pathPtr
       .asFunction<int Function(cion_security_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets the path of certificate.
-  /// @since_tizen 6.5
-  /// @remarks If the media storage is used, %http://tizen.org/privilege/mediastorage privilege is necessary. \n
-  /// If the external storage is used, %http://tizen.org/privilege/externalstorage privilege is necessary.
-  /// @param[in] security The Cion security handle
-  /// @param[in] cert_path The path of certificate
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @par Sample code:
-  /// @code
+  /// Sets the path of certificate.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Remarks:**
+  /// - If the media storage is used, http://tizen.org/privilege/mediastorage privilege is necessary.
+  /// - If the external storage is used, http://tizen.org/privilege/externalstorage privilege is necessary.
+  ///
+  /// **Parameters:**
+  /// - `security` (in): The Cion security handle
+  /// - `cert_path` (in): The path of certificate
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -992,7 +1330,7 @@ class Tizen80Cion {
   ///
   /// ret = cion_security_set_cert_path(security, "CertPath");
   /// }
-  /// @endcode
+  /// ```
   int cion_security_set_cert_path(
     cion_security_h security,
     ffi.Pointer<ffi.Char> cert_path,
@@ -1010,18 +1348,30 @@ class Tizen80Cion {
   late final _cion_security_set_cert_path = _cion_security_set_cert_pathPtr
       .asFunction<int Function(cion_security_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets the path of private key.
-  /// @since_tizen 6.5
-  /// @remarks If the media storage is used, %http://tizen.org/privilege/mediastorage privilege is necessary. \n
-  /// If the external storage is used, %http://tizen.org/privilege/externalstorage privilege is necessary.
-  /// @param[in] security The Cion security handle
-  /// @param[in] key_path The path of private key
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @par Sample code:
-  /// @code
+  /// Sets the path of private key.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Remarks:**
+  /// - If the media storage is used, http://tizen.org/privilege/mediastorage privilege is necessary.
+  /// - If the external storage is used, http://tizen.org/privilege/externalstorage privilege is necessary.
+  ///
+  /// **Parameters:**
+  /// - `security` (in): The Cion security handle
+  /// - `key_path` (in): The path of private key
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -1029,7 +1379,7 @@ class Tizen80Cion {
   /// ret = cion_security_set_private_key_path(security, "KeyPath");
   /// }
   ///
-  /// @endcode
+  /// ```
   int cion_security_set_private_key_path(
     cion_security_h security,
     ffi.Pointer<ffi.Char> key_path,
@@ -1048,18 +1398,32 @@ class Tizen80Cion {
       _cion_security_set_private_key_pathPtr
           .asFunction<int Function(cion_security_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the path of certificate authority certificates.
-  /// @since_tizen 6.5
-  /// @remarks @a ca_path must be released using free().
-  /// @param[in] security The Cion security handle
-  /// @param[out] ca_path The path of certificate authority certificates
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CION_ERROR_OUT_OF_MEMORY Out of memory
-  /// @see cion_security_set_ca_path()
-  /// @par Sample code:
-  /// @code
+  /// Gets the path of certificate authority certificates.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Remarks:**
+  /// - `ca_path` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `security` (in): The Cion security handle
+  /// - `ca_path` (out): The path of certificate authority certificates
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CION_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `cion_security_set_ca_path()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -1068,7 +1432,7 @@ class Tizen80Cion {
   ///
   /// ret = cion_security_get_ca_path(security, &ca_path);
   /// }
-  /// @endcode
+  /// ```
   int cion_security_get_ca_path(
     cion_security_h security,
     ffi.Pointer<ffi.Pointer<ffi.Char>> ca_path,
@@ -1088,18 +1452,32 @@ class Tizen80Cion {
       _cion_security_get_ca_pathPtr.asFunction<
           int Function(cion_security_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the path of certificate.
-  /// @since_tizen 6.5
-  /// @remarks @a cert_path must be released using free().
-  /// @param[in] security The Cion security handle
-  /// @param[out] cert_path The path of certificate
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CION_ERROR_OUT_OF_MEMORY Out of memory
-  /// @see cion_security_set_cert_path()
-  /// @par Sample code:
-  /// @code
+  /// Gets the path of certificate.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Remarks:**
+  /// - `cert_path` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `security` (in): The Cion security handle
+  /// - `cert_path` (out): The path of certificate
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CION_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `cion_security_set_cert_path()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -1109,7 +1487,7 @@ class Tizen80Cion {
   /// ret = cion_security_get_cert_path(security, &cert_path);
   /// }
   ///
-  /// @endcode
+  /// ```
   int cion_security_get_cert_path(
     cion_security_h security,
     ffi.Pointer<ffi.Pointer<ffi.Char>> cert_path,
@@ -1129,18 +1507,32 @@ class Tizen80Cion {
       _cion_security_get_cert_pathPtr.asFunction<
           int Function(cion_security_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the path of private key.
-  /// @since_tizen 6.5
-  /// @remarks @a key_path must be released using free().
-  /// @param[in] security The Cion security handle
-  /// @param[out] key_path The path of private key
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CION_ERROR_OUT_OF_MEMORY Out of memory
-  /// @see cion_security_set_private_key_path()
-  /// @par Sample code:
-  /// @code
+  /// Gets the path of private key.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Remarks:**
+  /// - `key_path` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `security` (in): The Cion security handle
+  /// - `key_path` (out): The path of private key
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CION_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `cion_security_set_private_key_path()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -1149,7 +1541,7 @@ class Tizen80Cion {
   ///
   /// ret = cion_security_get_private_key_path(security, &key_path);
   /// }
-  /// @endcode
+  /// ```
   int cion_security_get_private_key_path(
     cion_security_h security,
     ffi.Pointer<ffi.Pointer<ffi.Char>> key_path,
@@ -1169,24 +1561,38 @@ class Tizen80Cion {
       _cion_security_get_private_key_pathPtr.asFunction<
           int Function(cion_security_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Creates a Cion group handle.
-  /// @details The Cion group is the group to share data. \n
-  /// The users can subscribe the group that named topic and publish the data to share. \n
-  /// @since_tizen 6.5
-  /// @remarks @a group must be released using cion_group_destroy().
-  /// @remarks Max length of @a topic_name including the null terminator is 512.
-  /// @param[out] group The Cion group handle
-  /// @param[in] topic_name The name of topic
-  /// @param[in] security The Cion security handle
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CION_ERROR_OUT_OF_MEMORY Out of memory
-  /// @see cion_group_destroy()
-  /// @see cion_security_create()
-  /// @par Sample code:
-  /// @code
+  /// Creates a Cion group handle.
+  ///
+  /// The Cion group is the group to share data. The users can subscribe the group that named topic and publish the data to share.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Remarks:**
+  /// - `group` must be released using cion_group_destroy().
+  /// - Max length of `topic_name` including the null terminator is 512.
+  ///
+  /// **Parameters:**
+  /// - `group` (out): The Cion group handle
+  /// - `topic_name` (in): The name of topic
+  /// - `security` (in): The Cion security handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CION_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `cion_group_destroy()`
+  /// - `cion_security_create()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -1195,7 +1601,7 @@ class Tizen80Cion {
   ///
   /// ret = cion_group_create(&group, "mytopic", NULL);
   /// }
-  /// @endcode
+  /// ```
   int cion_group_create(
     ffi.Pointer<cion_group_h> group,
     ffi.Pointer<ffi.Char> topic_name,
@@ -1216,15 +1622,27 @@ class Tizen80Cion {
       int Function(
           ffi.Pointer<cion_group_h>, ffi.Pointer<ffi.Char>, cion_security_h)>();
 
-  /// @brief Destroys the group handle.
-  /// @since_tizen 6.5
-  /// @param[in] group The Cion group handle
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see cion_group_create()
-  /// @par Sample code:
-  /// @code
+  /// Destroys the group handle.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Parameters:**
+  /// - `group` (in): The Cion group handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `cion_group_create()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -1232,7 +1650,7 @@ class Tizen80Cion {
   ///
   /// ret = cion_group_destroy(group);
   /// }
-  /// @endcode
+  /// ```
   int cion_group_destroy(
     cion_group_h group,
   ) {
@@ -1247,18 +1665,32 @@ class Tizen80Cion {
   late final _cion_group_destroy =
       _cion_group_destroyPtr.asFunction<int Function(cion_group_h)>();
 
-  /// @brief Subscribes to a topic that the group handle has.
-  /// @since_tizen 6.5
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/d2d.datasharing \n
-  /// %http://tizen.org/privilege/internet
-  /// @param[in] group The Cion group handle
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @par Sample code:
-  /// @code
+  /// Subscribes to a topic that the group handle has.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/d2d.datasharing>
+  /// - <http://tizen.org/privilege/internet>
+  ///
+  /// **Parameters:**
+  /// - `group` (in): The Cion group handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -1266,7 +1698,7 @@ class Tizen80Cion {
   ///
   /// ret = cion_group_subscribe(group);
   /// }
-  /// @endcode
+  /// ```
   int cion_group_subscribe(
     cion_group_h group,
   ) {
@@ -1281,14 +1713,24 @@ class Tizen80Cion {
   late final _cion_group_subscribe =
       _cion_group_subscribePtr.asFunction<int Function(cion_group_h)>();
 
-  /// @brief Unsubscribes from topic that the group handle has.
-  /// @since_tizen 6.5
-  /// @param[in] group The Cion group handle
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @par Sample code:
-  /// @code
+  /// Unsubscribes from topic that the group handle has.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Parameters:**
+  /// - `group` (in): The Cion group handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -1296,7 +1738,7 @@ class Tizen80Cion {
   ///
   /// ret = cion_group_unsubscribe(group);
   /// }
-  /// @endcode
+  /// ```
   int cion_group_unsubscribe(
     cion_group_h group,
   ) {
@@ -1311,16 +1753,26 @@ class Tizen80Cion {
   late final _cion_group_unsubscribe =
       _cion_group_unsubscribePtr.asFunction<int Function(cion_group_h)>();
 
-  /// @brief Publishes data to the group.
-  /// @since_tizen 6.5
-  /// @param[in] group The Cion group handle
-  /// @param[in] data The data
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CION_ERROR_INVALID_OPERATION Invalid operation
-  /// @par Sample code:
-  /// @code
+  /// Publishes data to the group.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Parameters:**
+  /// - `group` (in): The Cion group handle
+  /// - `data` (in): The data
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CION_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -1328,7 +1780,7 @@ class Tizen80Cion {
   ///
   /// ret = cion_group_publish(group, payload);
   /// }
-  /// @endcode
+  /// ```
   int cion_group_publish(
     cion_group_h group,
     cion_payload_h data,
@@ -1345,18 +1797,30 @@ class Tizen80Cion {
   late final _cion_group_publish = _cion_group_publishPtr
       .asFunction<int Function(cion_group_h, cion_payload_h)>();
 
-  /// @brief Adds callback function to receive payload.
-  /// @since_tizen 6.5
-  /// @param[in] group The Cion group handle
-  /// @param[in] cb The callback function
-  /// @param[in] user_data The user data
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see cion_server_payload_received_cb()
-  /// @see cion_group_remove_payload_received_cb()
-  /// @par Sample code:
-  /// @code
+  /// Adds callback function to receive payload.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Parameters:**
+  /// - `group` (in): The Cion group handle
+  /// - `cb` (in): The callback function
+  /// - `user_data` (in): The user data
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `cion_server_payload_received_cb()`
+  /// - `cion_group_remove_payload_received_cb()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -1365,7 +1829,7 @@ class Tizen80Cion {
   /// ret = cion_group_add_payload_received_cb(group,
   /// _cion_group_payload_received_cb, NULL);
   /// }
-  /// @endcode
+  /// ```
   int cion_group_add_payload_received_cb(
     cion_group_h group,
     cion_group_payload_received_cb cb,
@@ -1387,17 +1851,29 @@ class Tizen80Cion {
           int Function(cion_group_h, cion_group_payload_received_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Removes callback function to receive payload.
-  /// @since_tizen 6.5
-  /// @param[in] group The Cion group handle
-  /// @param[in] cb The callback function
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see cion_server_payload_received_cb()
-  /// @see cion_group_add_payload_received_cb()
-  /// @par Sample code:
-  /// @code
+  /// Removes callback function to receive payload.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Parameters:**
+  /// - `group` (in): The Cion group handle
+  /// - `cb` (in): The callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `cion_server_payload_received_cb()`
+  /// - `cion_group_add_payload_received_cb()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -1406,7 +1882,7 @@ class Tizen80Cion {
   /// ret = cion_group_remove_payload_received_cb(group,
   /// _cion_group_payload_received_cb);
   /// }
-  /// @endcode
+  /// ```
   int cion_group_remove_payload_received_cb(
     cion_group_h group,
     cion_group_payload_received_cb cb,
@@ -1425,18 +1901,30 @@ class Tizen80Cion {
       _cion_group_remove_payload_received_cbPtr.asFunction<
           int Function(cion_group_h, cion_group_payload_received_cb)>();
 
-  /// @brief Adds callback function for join event.
-  /// @since_tizen 6.5
-  /// @param[in] group The Cion group handle
-  /// @param[in] cb The callback function
-  /// @param[in] user_data The user data
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see cion_group_joined_cb()
-  /// @see cion_group_remove_joined_cb()
-  /// @par Sample code:
-  /// @code
+  /// Adds callback function for join event.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Parameters:**
+  /// - `group` (in): The Cion group handle
+  /// - `cb` (in): The callback function
+  /// - `user_data` (in): The user data
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `cion_group_joined_cb()`
+  /// - `cion_group_remove_joined_cb()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -1444,7 +1932,7 @@ class Tizen80Cion {
   ///
   /// ret = cion_group_add_joined_cb(group, _cion_group_joined_cb, NULL);
   /// }
-  /// @endcode
+  /// ```
   int cion_group_add_joined_cb(
     cion_group_h group,
     cion_group_joined_cb cb,
@@ -1466,17 +1954,29 @@ class Tizen80Cion {
           int Function(
               cion_group_h, cion_group_joined_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Removes callback function for join event.
-  /// @since_tizen 6.5
-  /// @param[in] group The Cion group handle
-  /// @param[in] cb The callback function
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see cion_group_joined_cb()
-  /// @see cion_group_add_joined_cb()
-  /// @par Sample code:
-  /// @code
+  /// Removes callback function for join event.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Parameters:**
+  /// - `group` (in): The Cion group handle
+  /// - `cb` (in): The callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `cion_group_joined_cb()`
+  /// - `cion_group_add_joined_cb()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -1484,7 +1984,7 @@ class Tizen80Cion {
   ///
   /// ret = cion_group_remove_joined_cb(group, _cion_group_joined_cb);
   /// }
-  /// @endcode
+  /// ```
   int cion_group_remove_joined_cb(
     cion_group_h group,
     cion_group_joined_cb cb,
@@ -1502,18 +2002,30 @@ class Tizen80Cion {
   late final _cion_group_remove_joined_cb = _cion_group_remove_joined_cbPtr
       .asFunction<int Function(cion_group_h, cion_group_joined_cb)>();
 
-  /// @brief Adds callback function to get peer leaving information.
-  /// @since_tizen 6.5
-  /// @param[in] group The Cion group handle
-  /// @param[in] cb The callback function
-  /// @param[in] user_data The user_data
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see cion_group_left_cb()
-  /// @see cion_group_remove_left_cb()
-  /// @par Sample code:
-  /// @code
+  /// Adds callback function to get peer leaving information.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Parameters:**
+  /// - `group` (in): The Cion group handle
+  /// - `cb` (in): The callback function
+  /// - `user_data` (in): The user_data
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `cion_group_left_cb()`
+  /// - `cion_group_remove_left_cb()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -1521,7 +2033,7 @@ class Tizen80Cion {
   ///
   /// ret = cion_group_add_left_cb(group, _cion_group_left_cb, NULL);
   /// }
-  /// @endcode
+  /// ```
   int cion_group_add_left_cb(
     cion_group_h group,
     cion_group_left_cb cb,
@@ -1541,17 +2053,29 @@ class Tizen80Cion {
   late final _cion_group_add_left_cb = _cion_group_add_left_cbPtr.asFunction<
       int Function(cion_group_h, cion_group_left_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Removes callback function to get peer leaving information.
-  /// @since_tizen 6.5
-  /// @param[in] group The Cion group handle
-  /// @param[in] cb The callback function
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see cion_group_left_cb()
-  /// @see cion_group_add_left_cb()
-  /// @par Sample code:
-  /// @code
+  /// Removes callback function to get peer leaving information.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Parameters:**
+  /// - `group` (in): The Cion group handle
+  /// - `cb` (in): The callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `cion_group_left_cb()`
+  /// - `cion_group_add_left_cb()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -1559,7 +2083,7 @@ class Tizen80Cion {
   ///
   /// ret = cion_group_remove_left_cb(group, _cion_group_left_cb);
   /// }
-  /// @endcode
+  /// ```
   int cion_group_remove_left_cb(
     cion_group_h group,
     cion_group_left_cb cb,
@@ -1577,15 +2101,25 @@ class Tizen80Cion {
   late final _cion_group_remove_left_cb = _cion_group_remove_left_cbPtr
       .asFunction<int Function(cion_group_h, cion_group_left_cb)>();
 
-  /// @brief Gets the connection result status.
-  /// @since_tizen 6.5
-  /// @param[in] result The connection result handle
-  /// @param[out] status Connection result status
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @par Sample code:
-  /// @code
+  /// Gets the connection result status.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Parameters:**
+  /// - `result` (in): The connection result handle
+  /// - `status` (out): Connection result status
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -1594,7 +2128,7 @@ class Tizen80Cion {
   ///
   /// ret = cion_connection_result_get_status(result, &status);
   /// }
-  /// @endcode
+  /// ```
   int cion_connection_result_get_status(
     cion_connection_result_h result,
     ffi.Pointer<ffi.Int32> status,
@@ -1613,17 +2147,29 @@ class Tizen80Cion {
       _cion_connection_result_get_statusPtr.asFunction<
           int Function(cion_connection_result_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the connection result reason.
-  /// @since_tizen 6.5
-  /// @remarks @a reason must be released using free().
-  /// @param[in] result The connection result handle
-  /// @param[out] reason Connection result reason, should be freed after use
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CION_ERROR_OUT_OF_MEMORY Out of memory
-  /// @par Sample code:
-  /// @code
+  /// Gets the connection result reason.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Remarks:**
+  /// - `reason` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `result` (in): The connection result handle
+  /// - `reason` (out): Connection result reason, should be freed after use
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CION_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -1632,7 +2178,7 @@ class Tizen80Cion {
   ///
   /// ret = cion_connection_result_get_reason(result, &reason);
   /// }
-  /// @endcode
+  /// ```
   int cion_connection_result_get_reason(
     cion_connection_result_h result,
     ffi.Pointer<ffi.Pointer<ffi.Char>> reason,
@@ -1653,18 +2199,32 @@ class Tizen80Cion {
           int Function(
               cion_connection_result_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Creates a clone of payload async result.
-  /// @since_tizen 6.5
-  /// @remarks @a result_clone must be released using cion_payload_async_result_destroy()
-  /// @param[in] result The payload async result handle
-  /// @param[out] result_clone The cloned handle of payload async result
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CION_ERROR_OUT_OF_MEMORY Out of memory
-  /// @see cion_payload_async_result_destroy()
-  /// @par Sample code:
-  /// @code
+  /// Creates a clone of payload async result.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Remarks:**
+  /// - `result_clone` must be released using cion_payload_async_result_destroy()
+  ///
+  /// **Parameters:**
+  /// - `result` (in): The payload async result handle
+  /// - `result_clone` (out): The cloned handle of payload async result
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CION_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `cion_payload_async_result_destroy()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -1673,7 +2233,7 @@ class Tizen80Cion {
   ///
   /// ret = cion_payload_async_result_clone(result, &result_clone);
   /// }
-  /// @endcode
+  /// ```
   int cion_payload_async_result_clone(
     cion_payload_async_result_h result,
     ffi.Pointer<cion_payload_async_result_h> result_clone,
@@ -1694,15 +2254,27 @@ class Tizen80Cion {
           int Function(cion_payload_async_result_h,
               ffi.Pointer<cion_payload_async_result_h>)>();
 
-  /// @brief Destroys the payload async result.
-  /// @since_tizen 6.5
-  /// @param[in] result The payload async result handle
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see cion_payload_async_result_clone()
-  /// @par Sample code:
-  /// @code
+  /// Destroys the payload async result.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Parameters:**
+  /// - `result` (in): The payload async result handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `cion_payload_async_result_clone()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -1710,7 +2282,7 @@ class Tizen80Cion {
   ///
   /// ret = cion_payload_async_result_destroy(result);
   /// }
-  /// @endcode
+  /// ```
   int cion_payload_async_result_destroy(
     cion_payload_async_result_h result,
   ) {
@@ -1726,16 +2298,28 @@ class Tizen80Cion {
       _cion_payload_async_result_destroyPtr
           .asFunction<int Function(cion_payload_async_result_h)>();
 
-  /// @brief Gets the result status from payload async result handle.
-  /// @since_tizen 6.5
-  /// @param[in] result The payload async result handle
-  /// @param[out] code The result state of payload async result
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see #cion_payload_async_result_e
-  /// @par Sample code:
-  /// @code
+  /// Gets the result status from payload async result handle.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Parameters:**
+  /// - `result` (in): The payload async result handle
+  /// - `code` (out): The result state of payload async result
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `cion_payload_async_result_e`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -1744,7 +2328,7 @@ class Tizen80Cion {
   ///
   /// ret = cion_payload_async_result_get_result(result, &code);
   /// }
-  /// @endcode
+  /// ```
   int cion_payload_async_result_get_result(
     cion_payload_async_result_h result,
     ffi.Pointer<ffi.Int32> code,
@@ -1763,19 +2347,33 @@ class Tizen80Cion {
       _cion_payload_async_result_get_resultPtr.asFunction<
           int Function(cion_payload_async_result_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the peer information from async result.
-  /// @since_tizen 6.5
-  /// @remarks @a peer_info must be released using cion_peer_info_destroy().
-  /// @param[in] result The result of payload async
-  /// @param[out] peer_info The Cion peer information handle
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CION_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CION_ERROR_IO_ERROR IO error
-  /// @see cion_peer_info_destroy()
-  /// @par Sample code:
-  /// @code
+  /// Gets the peer information from async result.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Remarks:**
+  /// - `peer_info` must be released using cion_peer_info_destroy().
+  ///
+  /// **Parameters:**
+  /// - `result` (in): The result of payload async
+  /// - `peer_info` (out): The Cion peer information handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CION_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CION_ERROR_IO_ERROR`: IO error
+  ///
+  /// **See also:**
+  /// - `cion_peer_info_destroy()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -1784,7 +2382,7 @@ class Tizen80Cion {
   ///
   /// ret = cion_payload_async_result_get_peer_info(result, &peer_info);
   /// }
-  /// @endcode
+  /// ```
   int cion_payload_async_result_get_peer_info(
     cion_payload_async_result_h result,
     ffi.Pointer<cion_peer_info_h> peer_info,
@@ -1805,16 +2403,28 @@ class Tizen80Cion {
           int Function(
               cion_payload_async_result_h, ffi.Pointer<cion_peer_info_h>)>();
 
-  /// @brief Gets the payload ID.
-  /// @since_tizen 6.5
-  /// @remarks @a payload_id must be released using free().
-  /// @param[in] result The result of payload async
-  /// @param[out] payload_id The ID of payload
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @par Sample code:
-  /// @code
+  /// Gets the payload ID.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Remarks:**
+  /// - `payload_id` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `result` (in): The result of payload async
+  /// - `payload_id` (out): The ID of payload
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -1823,7 +2433,7 @@ class Tizen80Cion {
   ///
   /// ret = cion_payload_async_result_get_payload_id(result, &payload_id);
   /// }
-  /// @endcode
+  /// ```
   int cion_payload_async_result_get_payload_id(
     cion_payload_async_result_h result,
     ffi.Pointer<ffi.Pointer<ffi.Char>> payload_id,
@@ -1844,25 +2454,40 @@ class Tizen80Cion {
           int Function(cion_payload_async_result_h,
               ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Creates a Cion client handle.
-  /// @details The Cion client requests connection to server.
-  /// @since_tizen 6.5
-  /// @remarks @a client must be released using cion_client_destroy().
-  /// @remarks Max length of @a service_name including the null terminator is 512.
-  /// @param[out] client The Cion client handle
-  /// @param[in] service_name The name of service
-  /// @param[in] security The Cion security handle
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CION_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CION_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #CION_ERROR_OPERATION_FAILED Operation failed
-  /// @see cion_server_destroy()
-  /// @see cion_security_create()
-  /// @par Sample code:
-  /// @code
+  /// Creates a Cion client handle.
+  ///
+  /// The Cion client requests connection to server.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Remarks:**
+  /// - `client` must be released using cion_client_destroy().
+  /// - Max length of `service_name` including the null terminator is 512.
+  ///
+  /// **Parameters:**
+  /// - `client` (out): The Cion client handle
+  /// - `service_name` (in): The name of service
+  /// - `security` (in): The Cion security handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CION_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CION_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `CION_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **See also:**
+  /// - `cion_server_destroy()`
+  /// - `cion_security_create()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -1871,7 +2496,7 @@ class Tizen80Cion {
   ///
   /// ret = cion_client_create(&client, "myclient", NULL);
   /// }
-  /// @endcode
+  /// ```
   int cion_client_create(
     ffi.Pointer<cion_client_h> client,
     ffi.Pointer<ffi.Char> service_name,
@@ -1892,15 +2517,27 @@ class Tizen80Cion {
       int Function(ffi.Pointer<cion_client_h>, ffi.Pointer<ffi.Char>,
           cion_security_h)>();
 
-  /// @brief Destroys the Cion client handle.
-  /// @since_tizen 6.5
-  /// @param[in] client The Cion client handle
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see cion_security_create()
-  /// @par Sample code:
-  /// @code
+  /// Destroys the Cion client handle.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The Cion client handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `cion_security_create()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -1908,7 +2545,7 @@ class Tizen80Cion {
   ///
   /// ret = cion_client_destroy(client);
   /// }
-  /// @endcode
+  /// ```
   int cion_client_destroy(
     cion_client_h client,
   ) {
@@ -1923,24 +2560,42 @@ class Tizen80Cion {
   late final _cion_client_destroy =
       _cion_client_destroyPtr.asFunction<int Function(cion_client_h)>();
 
-  /// @brief Tries to discover a Cion server.
-  /// @since_tizen 6.5
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/d2d.datasharing \n
-  /// %http://tizen.org/privilege/internet
-  /// @remarks Tries to discover the server with service name that the client handle has.
-  /// @param[in] client The Cion client handle
-  /// @param[in] cb The callback function
-  /// @param[in] user_data The user data
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CION_ERROR_ALREADY_IN_PROGRESS Already in progress
-  /// @retval #CION_ERROR_IO_ERROR IO error
-  /// @see cion_client_server_discovered_cb()
-  /// @par Sample code:
-  /// @code
+  /// Tries to discover a Cion server.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/d2d.datasharing>
+  /// - <http://tizen.org/privilege/internet>
+  ///
+  /// **Remarks:**
+  /// - Tries to discover the server with service name that the client handle has.
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The Cion client handle
+  /// - `cb` (in): The callback function
+  /// - `user_data` (in): The user data
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CION_ERROR_ALREADY_IN_PROGRESS`: Already in progress
+  /// - `CION_ERROR_IO_ERROR`: IO error
+  ///
+  /// **See also:**
+  /// - `cion_client_server_discovered_cb()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -1949,7 +2604,7 @@ class Tizen80Cion {
   /// ret = cion_client_try_discovery(client,
   /// _cion_client_server_discovered_cb, NULL);
   /// }
-  /// @endcode
+  /// ```
   int cion_client_try_discovery(
     cion_client_h client,
     cion_client_server_discovered_cb cb,
@@ -1971,15 +2626,25 @@ class Tizen80Cion {
           int Function(cion_client_h, cion_client_server_discovered_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Stops to discovery Cion server.
-  /// @since_tizen 6.5
-  /// @param[in] client The Cion client handle
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CION_ERROR_INVALID_OPERATION Invalid
-  /// @par Sample code:
-  /// @code
+  /// Stops to discovery Cion server.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The Cion client handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CION_ERROR_INVALID_OPERATION`: Invalid
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -1987,7 +2652,7 @@ class Tizen80Cion {
   ///
   /// ret = cion_client_stop_discovery(client);
   /// }
-  /// @endcode
+  /// ```
   int cion_client_stop_discovery(
     cion_client_h client,
   ) {
@@ -2002,21 +2667,35 @@ class Tizen80Cion {
   late final _cion_client_stop_discovery =
       _cion_client_stop_discoveryPtr.asFunction<int Function(cion_client_h)>();
 
-  /// @brief Tries to connect to the Cion server.
-  /// @since_tizen 6.5
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/d2d.datasharing \n
-  /// %http://tizen.org/privilege/internet
-  /// @param[in] client The Cion client handle
-  /// @param[in] peer_info The Cion peer information handle
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CION_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #CION_ERROR_IO_ERROR IO error
-  /// @par Sample code:
-  /// @code
+  /// Tries to connect to the Cion server.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/d2d.datasharing>
+  /// - <http://tizen.org/privilege/internet>
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The Cion client handle
+  /// - `peer_info` (in): The Cion peer information handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CION_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `CION_ERROR_IO_ERROR`: IO error
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -2024,7 +2703,7 @@ class Tizen80Cion {
   ///
   /// ret = cion_client_connect(client, peer_info);
   /// }
-  /// @endcode
+  /// ```
   int cion_client_connect(
     cion_client_h client,
     cion_peer_info_h peer_info,
@@ -2042,14 +2721,24 @@ class Tizen80Cion {
   late final _cion_client_connect = _cion_client_connectPtr
       .asFunction<int Function(cion_client_h, cion_peer_info_h)>();
 
-  /// @brief Disconnects from a server.
-  /// @since_tizen 6.5
-  /// @param[in] client The Cion client handle
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @par Sample code:
-  /// @code
+  /// Disconnects from a server.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The Cion client handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -2057,7 +2746,7 @@ class Tizen80Cion {
   ///
   /// ret = cion_client_disconnect(client);
   /// }
-  /// @endcode
+  /// ```
   int cion_client_disconnect(
     cion_client_h client,
   ) {
@@ -2072,24 +2761,36 @@ class Tizen80Cion {
   late final _cion_client_disconnect =
       _cion_client_disconnectPtr.asFunction<int Function(cion_client_h)>();
 
-  /// @brief Sends the data.
-  /// @since_tizen 6.5
-  /// @remarks @a return_data must be released using free().
-  /// @param[in] client The Cion client handle
-  /// @param[in] data The data to send
-  /// @param[in] data_size The size of data
-  /// @param[in] timeout The time(milliseconds) to check time out
-  /// @param[out] return_data The returned data
-  /// @param[out] return_data_size The size of returned data
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CION_ERROR_IO_ERROR IO error
-  /// @retval #CION_ERROR_TIMED_OUT Timed out
-  /// @retval #CION_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #CION_ERROR_OUT_OF_MEMORY Out of memory
-  /// @par Sample code:
-  /// @code
+  /// Sends the data.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Remarks:**
+  /// - `return_data` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The Cion client handle
+  /// - `data` (in): The data to send
+  /// - `data_size` (in): The size of data
+  /// - `timeout` (in): The time(milliseconds) to check time out
+  /// - `return_data` (out): The returned data
+  /// - `return_data_size` (out): The size of returned data
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CION_ERROR_IO_ERROR`: IO error
+  /// - `CION_ERROR_TIMED_OUT`: Timed out
+  /// - `CION_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `CION_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -2100,7 +2801,7 @@ class Tizen80Cion {
   /// ret = cion_client_send_data(client, "senddata", 8, 10,
   /// &return_data, &return_size);
   /// }
-  /// @endcode
+  /// ```
   int cion_client_send_data(
     cion_client_h client,
     ffi.Pointer<ffi.UnsignedChar> data,
@@ -2137,20 +2838,32 @@ class Tizen80Cion {
           ffi.Pointer<ffi.Pointer<ffi.UnsignedChar>>,
           ffi.Pointer<ffi.UnsignedInt>)>();
 
-  /// @brief Sends the payload asynchronously.
-  /// @since_tizen 6.5
-  /// @param[in] client The Cion client handle
-  /// @param[in] payload The payload handle
-  /// @param[in] cb The callback function
-  /// @param[in] user_data The user data
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CION_ERROR_INVALID_OPERATION Invalid Operation
-  /// @see cion_payload_create()
-  /// @see cion_client_payload_async_result_cb()
-  /// @par Sample code:
-  /// @code
+  /// Sends the payload asynchronously.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The Cion client handle
+  /// - `payload` (in): The payload handle
+  /// - `cb` (in): The callback function
+  /// - `user_data` (in): The user data
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CION_ERROR_INVALID_OPERATION`: Invalid Operation
+  ///
+  /// **See also:**
+  /// - `cion_payload_create()`
+  /// - `cion_client_payload_async_result_cb()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -2159,7 +2872,7 @@ class Tizen80Cion {
   /// ret = cion_client_send_payload_async(client, payload,
   /// _cion_client_payload_async_result_cb, NULL);
   /// }
-  /// @endcode
+  /// ```
   int cion_client_send_payload_async(
     cion_client_h client,
     cion_payload_h payload,
@@ -2186,18 +2899,30 @@ class Tizen80Cion {
           int Function(cion_client_h, cion_payload_h,
               cion_client_payload_async_result_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Adds callback function for connection result.
-  /// @since_tizen 6.5
-  /// @param[in] client The Cion client handle
-  /// @param[in] cb The callback function
-  /// @param[in] user_data The user data
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see cion_client_connection_result_cb()
-  /// @see cion_client_remove_connection_result_cb()
-  /// @par Sample code:
-  /// @code
+  /// Adds callback function for connection result.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The Cion client handle
+  /// - `cb` (in): The callback function
+  /// - `user_data` (in): The user data
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `cion_client_connection_result_cb()`
+  /// - `cion_client_remove_connection_result_cb()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -2206,7 +2931,7 @@ class Tizen80Cion {
   /// ret = cion_client_add_connection_result_cb(client,
   /// _cion_client_connection_result_cb, NULL);
   /// }
-  /// @endcode
+  /// ```
   int cion_client_add_connection_result_cb(
     cion_client_h client,
     cion_client_connection_result_cb cb,
@@ -2228,17 +2953,29 @@ class Tizen80Cion {
           int Function(cion_client_h, cion_client_connection_result_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Removes callback function for connection result.
-  /// @since_tizen 6.5
-  /// @param[in] client The Cion client handle
-  /// @param[in] cb The callback function
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see cion_client_connection_result_cb()
-  /// @see cion_client_add_connection_result_cb()
-  /// @par Sample code:
-  /// @code
+  /// Removes callback function for connection result.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The Cion client handle
+  /// - `cb` (in): The callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `cion_client_connection_result_cb()`
+  /// - `cion_client_add_connection_result_cb()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -2247,7 +2984,7 @@ class Tizen80Cion {
   /// ret = cion_client_remove_connection_result_cb(client,
   /// _cion_client_connection_result_cb);
   /// }
-  /// @endcode
+  /// ```
   int cion_client_remove_connection_result_cb(
     cion_client_h client,
     cion_client_connection_result_cb cb,
@@ -2267,18 +3004,30 @@ class Tizen80Cion {
       _cion_client_remove_connection_result_cbPtr.asFunction<
           int Function(cion_client_h, cion_client_connection_result_cb)>();
 
-  /// @brief Adds callback function to receive payload.
-  /// @since_tizen 6.5
-  /// @param[in] client The Cion client handle
-  /// @param[in] cb The callback function
-  /// @param[in] user_data The user data
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see cion_client_payload_received_cb()
-  /// @see cion_client_remove_payload_received_cb()
-  /// @par Sample code:
-  /// @code
+  /// Adds callback function to receive payload.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The Cion client handle
+  /// - `cb` (in): The callback function
+  /// - `user_data` (in): The user data
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `cion_client_payload_received_cb()`
+  /// - `cion_client_remove_payload_received_cb()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -2287,7 +3036,7 @@ class Tizen80Cion {
   /// ret = cion_client_add_payload_received_cb(client,
   /// _cion_client_payload_received_cb, NULL);
   /// }
-  /// @endcode
+  /// ```
   int cion_client_add_payload_received_cb(
     cion_client_h client,
     cion_client_payload_received_cb cb,
@@ -2309,17 +3058,29 @@ class Tizen80Cion {
           int Function(cion_client_h, cion_client_payload_received_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Removes callback function to receive payload.
-  /// @since_tizen 6.5
-  /// @param[in] client The Cion client handle
-  /// @param[in] cb The callback function
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see cion_client_payload_received_cb()
-  /// @see cion_client_add_payload_received_cb()
-  /// @par Sample code:
-  /// @code
+  /// Removes callback function to receive payload.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The Cion client handle
+  /// - `cb` (in): The callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `cion_client_payload_received_cb()`
+  /// - `cion_client_add_payload_received_cb()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -2328,7 +3089,7 @@ class Tizen80Cion {
   /// ret = cion_client_remove_payload_received_cb(client,
   /// _cion_client_payload_received_cb);
   /// }
-  /// @endcode
+  /// ```
   int cion_client_remove_payload_received_cb(
     cion_client_h client,
     cion_client_payload_received_cb cb,
@@ -2348,18 +3109,30 @@ class Tizen80Cion {
       _cion_client_remove_payload_received_cbPtr.asFunction<
           int Function(cion_client_h, cion_client_payload_received_cb)>();
 
-  /// @brief Adds callback function for disconnection event.
-  /// @since_tizen 6.5
-  /// @param[in] client The Cion client handle
-  /// @param[in] cb The callback function
-  /// @param[in] user_data The user data
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see cion_client_disconnected_cb()
-  /// @see cion_client_remove_disconnected_cb()
-  /// @par Sample code:
-  /// @code
+  /// Adds callback function for disconnection event.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The Cion client handle
+  /// - `cb` (in): The callback function
+  /// - `user_data` (in): The user data
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `cion_client_disconnected_cb()`
+  /// - `cion_client_remove_disconnected_cb()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -2368,7 +3141,7 @@ class Tizen80Cion {
   /// ret = cion_client_add_disconnected_cb(client,
   /// _cion_client_disconnected_cb, NULL);
   /// }
-  /// @endcode
+  /// ```
   int cion_client_add_disconnected_cb(
     cion_client_h client,
     cion_client_disconnected_cb cb,
@@ -2390,17 +3163,29 @@ class Tizen80Cion {
           int Function(cion_client_h, cion_client_disconnected_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Removes callback function for disconnection event.
-  /// @since_tizen 6.5
-  /// @param[in] client The Cion client handle
-  /// @param[in] cb The callback function
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see cion_client_disconnected_cb()
-  /// @see cion_client_add_disconnected_cb()
-  /// @par Sample code:
-  /// @code
+  /// Removes callback function for disconnection event.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The Cion client handle
+  /// - `cb` (in): The callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `cion_client_disconnected_cb()`
+  /// - `cion_client_add_disconnected_cb()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -2409,7 +3194,7 @@ class Tizen80Cion {
   /// ret = cion_client_remove_disconnected_cb(client,
   /// _cion_client_disconnected_cb);
   /// }
-  /// @endcode
+  /// ```
   int cion_client_remove_disconnected_cb(
     cion_client_h client,
     cion_client_disconnected_cb cb,
@@ -2428,27 +3213,42 @@ class Tizen80Cion {
       _cion_client_remove_disconnected_cbPtr.asFunction<
           int Function(cion_client_h, cion_client_disconnected_cb)>();
 
-  /// @brief Creates the Cion server handle.
-  /// @details The Cion server listens client requests.
-  /// @since_tizen 6.5
-  /// @remarks @a server must be released using cion_server_destroy().
-  /// @remarks Max length of @a service_name including the null terminator is 512.
-  /// @param[out] server The Cion server handle
-  /// @param[in] service_name The name of service
-  /// @param[in] display_name The display name of service
-  /// @param[in] security The Cion security handle
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CION_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CION_ERROR_IO_ERROR IO error
-  /// @retval #CION_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #CION_ERROR_OPERATION_FAILED Operation failed
-  /// @see cion_server_destroy()
-  /// @see cion_security_create()
-  /// @par Sample code:
-  /// @code
+  /// Creates the Cion server handle.
+  ///
+  /// The Cion server listens client requests.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Remarks:**
+  /// - `server` must be released using cion_server_destroy().
+  /// - Max length of `service_name` including the null terminator is 512.
+  ///
+  /// **Parameters:**
+  /// - `server` (out): The Cion server handle
+  /// - `service_name` (in): The name of service
+  /// - `display_name` (in): The display name of service
+  /// - `security` (in): The Cion security handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CION_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CION_ERROR_IO_ERROR`: IO error
+  /// - `CION_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `CION_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **See also:**
+  /// - `cion_server_destroy()`
+  /// - `cion_security_create()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -2458,7 +3258,7 @@ class Tizen80Cion {
   ///
   /// ret = cion_server_create(&server, "myservice", "mydisplayname", NULL);
   /// }
-  /// @endcode
+  /// ```
   int cion_server_create(
     ffi.Pointer<cion_server_h> server,
     ffi.Pointer<ffi.Char> service_name,
@@ -2481,15 +3281,27 @@ class Tizen80Cion {
       int Function(ffi.Pointer<cion_server_h>, ffi.Pointer<ffi.Char>,
           ffi.Pointer<ffi.Char>, cion_security_h)>();
 
-  /// @brief Destroys the Cion server handle.
-  /// @since_tizen 6.5
-  /// @param[in] server The Cion server handle.
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see cion_server_create()
-  /// @par Sample code:
-  /// @code
+  /// Destroys the Cion server handle.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Parameters:**
+  /// - `server` (in): The Cion server handle.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `cion_server_create()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   /// {
   /// int ret;
@@ -2497,7 +3309,7 @@ class Tizen80Cion {
   /// ret = cion_server_destroy(server);
   /// }
   ///
-  /// @endcode
+  /// ```
   int cion_server_destroy(
     cion_server_h server,
   ) {
@@ -2512,22 +3324,38 @@ class Tizen80Cion {
   late final _cion_server_destroy =
       _cion_server_destroyPtr.asFunction<int Function(cion_server_h)>();
 
-  /// @brief Starts listening to connection requests from clients.
-  /// @since_tizen 6.5
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/d2d.datasharing \n
-  /// %http://tizen.org/privilege/internet
-  /// @param[in] server The Cion server handle
-  /// @param[in] cb The callback function
-  /// @param[in] user_data The user data
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CION_ERROR_ALREADY_IN_PROGRESS Already in progress
-  /// @see cion_server_connection_request_cb()
-  /// @par Sample code:
-  /// @code
+  /// Starts listening to connection requests from clients.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/d2d.datasharing>
+  /// - <http://tizen.org/privilege/internet>
+  ///
+  /// **Parameters:**
+  /// - `server` (in): The Cion server handle
+  /// - `cb` (in): The callback function
+  /// - `user_data` (in): The user data
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CION_ERROR_ALREADY_IN_PROGRESS`: Already in progress
+  ///
+  /// **See also:**
+  /// - `cion_server_connection_request_cb()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -2535,7 +3363,7 @@ class Tizen80Cion {
   ///
   /// ret = cion_server_listen(server, _cion_server_connection_request_cb, NULL);
   /// }
-  /// @endcode
+  /// ```
   int cion_server_listen(
     cion_server_h server,
     cion_server_connection_request_cb cb,
@@ -2556,16 +3384,28 @@ class Tizen80Cion {
       int Function(cion_server_h, cion_server_connection_request_cb,
           ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Stops listening to connection requests from clients.
-  /// @since_tizen 6.5
-  /// @param[in] server The Cion server handle
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CION_ERROR_INVALID_OPERATION Invalid operation
-  /// @see cion_server_listen()
-  /// @par Sample code:
-  /// @code
+  /// Stops listening to connection requests from clients.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Parameters:**
+  /// - `server` (in): The Cion server handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CION_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `cion_server_listen()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -2573,7 +3413,7 @@ class Tizen80Cion {
   ///
   /// ret = cion_server_stop(server);
   /// }
-  /// @endcode
+  /// ```
   int cion_server_stop(
     cion_server_h server,
   ) {
@@ -2588,15 +3428,25 @@ class Tizen80Cion {
   late final _cion_server_stop =
       _cion_server_stopPtr.asFunction<int Function(cion_server_h)>();
 
-  /// @brief Disconnects from a client.
-  /// @since_tizen 6.5
-  /// @param[in] server The Cion server handle
-  /// @param[in] peer_info The Cion peer information handle
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @par Sample code:
-  /// @code
+  /// Disconnects from a client.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Parameters:**
+  /// - `server` (in): The Cion server handle
+  /// - `peer_info` (in): The Cion peer information handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -2604,7 +3454,7 @@ class Tizen80Cion {
   ///
   /// ret = cion_server_disconnect(server, peer_info);
   /// }
-  /// @endcode
+  /// ```
   int cion_server_disconnect(
     cion_server_h server,
     cion_peer_info_h peer_info,
@@ -2622,21 +3472,33 @@ class Tizen80Cion {
   late final _cion_server_disconnect = _cion_server_disconnectPtr
       .asFunction<int Function(cion_server_h, cion_peer_info_h)>();
 
-  /// @brief Sends payload asynchronously.
-  /// @since_tizen 6.5
-  /// @param[in] server The Cion server handle
-  /// @param[in] peer_info The Cion peer information handle
-  /// @param[in] payload The payload to send
-  /// @param[in] cb The callback function for result
-  /// @param[in] user_data The user data
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CION_ERROR_INVALID_OPERATION Invalid operation
-  /// @see cion_payload_create()
-  /// @see cion_server_payload_async_result_cb()
-  /// @par Sample code:
-  /// @code
+  /// Sends payload asynchronously.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Parameters:**
+  /// - `server` (in): The Cion server handle
+  /// - `peer_info` (in): The Cion peer information handle
+  /// - `payload` (in): The payload to send
+  /// - `cb` (in): The callback function for result
+  /// - `user_data` (in): The user data
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CION_ERROR_INVALID_OPERATION`: Invalid operation
+  ///
+  /// **See also:**
+  /// - `cion_payload_create()`
+  /// - `cion_server_payload_async_result_cb()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -2645,7 +3507,7 @@ class Tizen80Cion {
   /// ret = cion_server_send_payload_async(server, peer_info, payload,
   /// _cion_server_payload_async_result_cb, NULL);
   /// }
-  /// @endcode
+  /// ```
   int cion_server_send_payload_async(
     cion_server_h server,
     cion_peer_info_h peer_info,
@@ -2675,17 +3537,29 @@ class Tizen80Cion {
           int Function(cion_server_h, cion_peer_info_h, cion_payload_h,
               cion_server_payload_async_result_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Gets connected peers information.
-  /// @since_tizen 6.5
-  /// @param[in] server The Cion server handle
-  /// @param[in] callback The callback function
-  /// @param[in] user_data The user data
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see cion_server_connected_peer_info_cb()
-  /// @par Sample code:
-  /// @code
+  /// Gets connected peers information.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Parameters:**
+  /// - `server` (in): The Cion server handle
+  /// - `callback` (in): The callback function
+  /// - `user_data` (in): The user data
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `cion_server_connected_peer_info_cb()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -2695,7 +3569,7 @@ class Tizen80Cion {
   /// _cion_server_connected_peer_info_cb, NULL);
   /// }
   ///
-  /// @endcode
+  /// ```
   int cion_server_foreach_connected_peer_info(
     cion_server_h server,
     cion_server_connected_peer_info_cb callback,
@@ -2718,18 +3592,30 @@ class Tizen80Cion {
           int Function(cion_server_h, cion_server_connected_peer_info_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Adds callback function for connection result.
-  /// @since_tizen 6.5
-  /// @param[in] server The Cion server handle.
-  /// @param[in] cb The callback function
-  /// @param[in] user_data The user data
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see cion_server_connection_result_cb()
-  /// @see cion_server_remove_connection_result_cb()
-  /// @par Sample code:
-  /// @code
+  /// Adds callback function for connection result.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Parameters:**
+  /// - `server` (in): The Cion server handle.
+  /// - `cb` (in): The callback function
+  /// - `user_data` (in): The user data
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `cion_server_connection_result_cb()`
+  /// - `cion_server_remove_connection_result_cb()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -2739,7 +3625,7 @@ class Tizen80Cion {
   /// _cion_server_connection_result_cb, NULL);
   /// }
   ///
-  /// @endcode
+  /// ```
   int cion_server_add_connection_result_cb(
     cion_server_h server,
     cion_server_connection_result_cb cb,
@@ -2761,17 +3647,29 @@ class Tizen80Cion {
           int Function(cion_server_h, cion_server_connection_result_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Removes callback function for connection result.
-  /// @since_tizen 6.5
-  /// @param[in] server The Cion server handle.
-  /// @param[in] cb The callback function
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see cion_server_connection_result_cb()
-  /// @see cion_server_add_connection_result_cb()
-  /// @par Sample code:
-  /// @code
+  /// Removes callback function for connection result.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Parameters:**
+  /// - `server` (in): The Cion server handle.
+  /// - `cb` (in): The callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `cion_server_connection_result_cb()`
+  /// - `cion_server_add_connection_result_cb()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -2781,7 +3679,7 @@ class Tizen80Cion {
   /// _cion_server_connection_result_cb);
   /// }
   ///
-  /// @endcode
+  /// ```
   int cion_server_remove_connection_result_cb(
     cion_server_h server,
     cion_server_connection_result_cb cb,
@@ -2801,18 +3699,30 @@ class Tizen80Cion {
       _cion_server_remove_connection_result_cbPtr.asFunction<
           int Function(cion_server_h, cion_server_connection_result_cb)>();
 
-  /// @brief Adds callback function to receive payload.
-  /// @since_tizen 6.5
-  /// @param[in] server The Cion server
-  /// @param[in] cb The callback function
-  /// @param[in] user_data The user data
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see cion_server_payload_received_cb()
-  /// @see cion_server_remove_payload_received_cb()
-  /// @par Sample code:
-  /// @code
+  /// Adds callback function to receive payload.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Parameters:**
+  /// - `server` (in): The Cion server
+  /// - `cb` (in): The callback function
+  /// - `user_data` (in): The user data
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `cion_server_payload_received_cb()`
+  /// - `cion_server_remove_payload_received_cb()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -2821,7 +3731,7 @@ class Tizen80Cion {
   /// ret = cion_server_add_payload_received_cb(server,
   /// _cion_server_payload_received_cb, NULL);
   /// }
-  /// @endcode
+  /// ```
   int cion_server_add_payload_received_cb(
     cion_server_h server,
     cion_server_payload_received_cb cb,
@@ -2843,17 +3753,29 @@ class Tizen80Cion {
           int Function(cion_server_h, cion_server_payload_received_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Removes callback function to receive payload.
-  /// @since_tizen 6.5
-  /// @param[in] server The Cion server
-  /// @param[in] cb The callback function
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see cion_server_payload_received_cb()
-  /// @see cion_server_add_payload_received_cb()
-  /// @par Sample code:
-  /// @code
+  /// Removes callback function to receive payload.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Parameters:**
+  /// - `server` (in): The Cion server
+  /// - `cb` (in): The callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `cion_server_payload_received_cb()`
+  /// - `cion_server_add_payload_received_cb()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -2862,7 +3784,7 @@ class Tizen80Cion {
   /// ret = cion_server_remove_payload_received_cb(server,
   /// _cion_server_payload_received_cb);
   /// }
-  /// @endcode
+  /// ```
   int cion_server_remove_payload_received_cb(
     cion_server_h server,
     cion_server_payload_received_cb cb,
@@ -2882,18 +3804,30 @@ class Tizen80Cion {
       _cion_server_remove_payload_received_cbPtr.asFunction<
           int Function(cion_server_h, cion_server_payload_received_cb)>();
 
-  /// @brief Sets callback function to receive data.
-  /// @since_tizen 6.5
-  /// @param[in] server The Cion server handle
-  /// @param[in] cb The callback function
-  /// @param[in] user_data The user data
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see cion_server_data_received_cb()
-  /// @see cion_server_unset_data_received_cb()
-  /// @par Sample code:
-  /// @code
+  /// Sets callback function to receive data.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Parameters:**
+  /// - `server` (in): The Cion server handle
+  /// - `cb` (in): The callback function
+  /// - `user_data` (in): The user data
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `cion_server_data_received_cb()`
+  /// - `cion_server_unset_data_received_cb()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -2903,7 +3837,7 @@ class Tizen80Cion {
   /// _cion_server_data_received_cb, NULL);
   /// }
   ///
-  /// @endcode
+  /// ```
   int cion_server_set_data_received_cb(
     cion_server_h server,
     cion_server_data_received_cb cb,
@@ -2925,16 +3859,28 @@ class Tizen80Cion {
           int Function(cion_server_h, cion_server_data_received_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets callback function to receive data.
-  /// @since_tizen 6.5
-  /// @param[in] server The Cion server handle
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see cion_server_data_received_cb()
-  /// @see cion_server_set_data_received_cb()
-  /// @par Sample code:
-  /// @code
+  /// Unsets callback function to receive data.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Parameters:**
+  /// - `server` (in): The Cion server handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `cion_server_data_received_cb()`
+  /// - `cion_server_set_data_received_cb()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -2943,7 +3889,7 @@ class Tizen80Cion {
   /// ret = cion_server_unset_data_received_cb(server);
   /// }
   ///
-  /// @endcode
+  /// ```
   int cion_server_unset_data_received_cb(
     cion_server_h server,
   ) {
@@ -2959,18 +3905,30 @@ class Tizen80Cion {
       _cion_server_unset_data_received_cbPtr
           .asFunction<int Function(cion_server_h)>();
 
-  /// @brief Adds callback function for disconnection event.
-  /// @since_tizen 6.5
-  /// @param[in] server The Cion server handle
-  /// @param[in] cb The callback function
-  /// @param[in] user_data The user data
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see cion_server_disconnected_cb()
-  /// @see cion_server_remove_disconnected_cb()
-  /// @par Sample code:
-  /// @code
+  /// Adds callback function for disconnection event.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Parameters:**
+  /// - `server` (in): The Cion server handle
+  /// - `cb` (in): The callback function
+  /// - `user_data` (in): The user data
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `cion_server_disconnected_cb()`
+  /// - `cion_server_remove_disconnected_cb()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -2979,7 +3937,7 @@ class Tizen80Cion {
   /// ret = cion_server_add_disconnected_cb(server,
   /// _cion_server_disconnected_cb, NULL);
   /// }
-  /// @endcode
+  /// ```
   int cion_server_add_disconnected_cb(
     cion_server_h server,
     cion_server_disconnected_cb cb,
@@ -3001,17 +3959,29 @@ class Tizen80Cion {
           int Function(cion_server_h, cion_server_disconnected_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Removes callback function for disconnection event.
-  /// @since_tizen 6.5
-  /// @param[in] server The Cion server handle
-  /// @param[in] cb The callback function
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see cion_server_disconnected_cb()
-  /// @see cion_server_add_disconnected_cb()
-  /// @par Sample code:
-  /// @code
+  /// Removes callback function for disconnection event.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Parameters:**
+  /// - `server` (in): The Cion server handle
+  /// - `cb` (in): The callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `cion_server_disconnected_cb()`
+  /// - `cion_server_add_disconnected_cb()`
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -3020,7 +3990,7 @@ class Tizen80Cion {
   /// ret = cion_server_remove_disconnected_cb(server,
   /// _cion_server_disconnected_cb);
   /// }
-  /// @endcode
+  /// ```
   int cion_server_remove_disconnected_cb(
     cion_server_h server,
     cion_server_disconnected_cb cb,
@@ -3039,15 +4009,25 @@ class Tizen80Cion {
       _cion_server_remove_disconnected_cbPtr.asFunction<
           int Function(cion_server_h, cion_server_disconnected_cb)>();
 
-  /// @brief Accepts the connection request from a peer.
-  /// @since_tizen 6.5
-  /// @param[in] server The Cion server handle
-  /// @param[in] peer_info The Cion peer information handle
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @par Sample code:
-  /// @code
+  /// Accepts the connection request from a peer.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Parameters:**
+  /// - `server` (in): The Cion server handle
+  /// - `peer_info` (in): The Cion peer information handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -3055,7 +4035,7 @@ class Tizen80Cion {
   ///
   /// ret = cion_server_accept(server, peer_info);
   /// }
-  /// @endcode
+  /// ```
   int cion_server_accept(
     cion_server_h server,
     cion_peer_info_h peer_info,
@@ -3073,16 +4053,26 @@ class Tizen80Cion {
   late final _cion_server_accept = _cion_server_acceptPtr
       .asFunction<int Function(cion_server_h, cion_peer_info_h)>();
 
-  /// @brief Rejects the connection request from a peer.
-  /// @since_tizen 6.5
-  /// @param[in] server The Cion server handle
-  /// @param[in] peer_info The Cion peer information handle
-  /// @param[in] reason The reason of reject
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @par Sample code:
-  /// @code
+  /// Rejects the connection request from a peer.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Parameters:**
+  /// - `server` (in): The Cion server handle
+  /// - `peer_info` (in): The Cion peer information handle
+  /// - `reason` (in): The reason of reject
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -3090,7 +4080,7 @@ class Tizen80Cion {
   ///
   /// ret = cion_server_reject(server, peer_info, "NOT_ALLOWED");
   /// }
-  /// @endcode
+  /// ```
   int cion_server_reject(
     cion_server_h server,
     cion_peer_info_h peer_info,
@@ -3110,18 +4100,29 @@ class Tizen80Cion {
   late final _cion_server_reject = _cion_server_rejectPtr.asFunction<
       int Function(cion_server_h, cion_peer_info_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets the server display name.
-  /// @details The display name is a customized name for server.
-  /// @since_tizen 6.5
-  /// @param[in] server The Cion server handle
-  /// @param[in] display_name The display name
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CION_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CION_ERROR_IO_ERROR IO error
-  /// @par Sample code:
-  /// @code
+  /// Sets the server display name.
+  ///
+  /// The display name is a customized name for server.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Parameters:**
+  /// - `server` (in): The Cion server handle
+  /// - `display_name` (in): The display name
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CION_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CION_ERROR_IO_ERROR`: IO error
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -3129,7 +4130,7 @@ class Tizen80Cion {
   ///
   /// ret = cion_server_set_display_name(server, "MyDPName");
   /// }
-  /// @endcode
+  /// ```
   int cion_server_set_display_name(
     cion_server_h server,
     ffi.Pointer<ffi.Char> display_name,
@@ -3147,22 +4148,36 @@ class Tizen80Cion {
   late final _cion_server_set_display_name = _cion_server_set_display_namePtr
       .asFunction<int Function(cion_server_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets on-demand launch state.
-  /// @details If the on-demand launch state is enabled, the server is launched on demand
-  /// when the request comes.
-  /// @since_tizen 6.5
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/d2d.remotelaunch
-  /// @param[in] server The Cion server handle
-  /// @param[in] enabled The enable state
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #CION_ERROR_NONE Successful
-  /// @retval #CION_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #CION_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #CION_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #CION_ERROR_IO_ERROR IO error
-  /// @par Sample code:
-  /// @code
+  /// Sets on-demand launch state.
+  ///
+  /// If the on-demand launch state is enabled, the server is launched on demand when the request comes.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/d2d.remotelaunch>
+  ///
+  /// **Parameters:**
+  /// - `server` (in): The Cion server handle
+  /// - `enabled` (in): The enable state
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `CION_ERROR_NONE`: Successful
+  /// - `CION_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `CION_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `CION_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `CION_ERROR_IO_ERROR`: IO error
+  ///
+  /// **Sample code:**
+  ///
+  /// ```
   /// #include <cion.h>
   ///
   /// {
@@ -3171,7 +4186,7 @@ class Tizen80Cion {
   /// ret = cion_server_set_on_demand_launch_enabled(server, true);
   /// }
   ///
-  /// @endcode
+  /// ```
   int cion_server_set_on_demand_launch_enabled(
     cion_server_h server,
     bool enabled,
@@ -3190,8 +4205,11 @@ class Tizen80Cion {
           .asFunction<int Function(cion_server_h, bool)>();
 }
 
-/// @brief Enumeration for payload types.
-/// @since_tizen 6.5
+/// Enumeration for payload types.
+///
+/// **Since Tizen:**
+/// - 6.5
+/// @nodoc
 abstract class payload_type_e {
   /// < Data type payload
   static const int CION_PAYLOAD_TYPE_DATA = 0;
@@ -3200,8 +4218,11 @@ abstract class payload_type_e {
   static const int CION_PAYLOAD_TYPE_FILE = 1;
 }
 
-/// @brief Enumeration for payload transfer status types.
-/// @since_tizen 6.5
+/// Enumeration for payload transfer status types.
+///
+/// **Since Tizen:**
+/// - 6.5
+/// @nodoc
 abstract class payload_transfer_status_e {
   /// < Transfer is success
   static const int CION_PAYLOAD_TRANSFER_STATUS_SUCCESS = 0;
@@ -3213,90 +4234,124 @@ abstract class payload_transfer_status_e {
   static const int CION_PAYLOAD_TRANSFER_STATUS_IN_PROGRESS = 2;
 }
 
-/// @brief The Cion payload handle.
-/// @since_tizen 6.5
+/// The Cion payload handle.
+///
+/// **Since Tizen:**
+/// - 6.5
+/// @nodoc
 typedef cion_payload_h = ffi.Pointer<ffi.Void>;
 
-/// @brief The Cion peer info handle.
-/// @since_tizen 6.5
+/// The Cion peer info handle.
+///
+/// **Since Tizen:**
+/// - 6.5
+/// @nodoc
 typedef cion_peer_info_h = ffi.Pointer<ffi.Void>;
 
-/// @brief The Cion security handle.
-/// @since_tizen 6.5
+/// The Cion security handle.
+///
+/// **Since Tizen:**
+/// - 6.5
+/// @nodoc
 typedef cion_security_h = ffi.Pointer<ffi.Void>;
 
-/// @brief The Cion group handle.
-/// @since_tizen 6.5
+/// The Cion group handle.
+///
+/// **Since Tizen:**
+/// - 6.5
+/// @nodoc
 typedef cion_group_h = ffi.Pointer<ffi.Void>;
 
-/// @brief Called when the payload is received.
-/// @since_tizen 6.5
-/// @param[in] topic_name The name of topic \n
-/// The @a topic_name can be used only in the callback. To use outside, make a copy.
-/// @param[in] peer_info The Cion peer information handle \n
-/// The @a peer_info can be used only in the callback. To use outside, make a copy.
-/// @param[in] payload The received payload \n
-/// The @a payload can be used only in the callback. \n
-/// The @a payload should not be released.
-/// @param[in] user_data The user data
-/// @see cion_group_add_payload_received_cb()
-/// @see #cion_peer_info_h
-/// @see #cion_payload_h
+/// Called when the payload is received.
+///
+/// **Since Tizen:**
+/// - 6.5
+///
+/// **Parameters:**
+/// - `topic_name` (in): The name of topic The `topic_name` can be used only in the callback. To use outside, make a copy.
+/// - `peer_info` (in): The Cion peer information handle The `peer_info` can be used only in the callback. To use outside, make a copy.
+/// - `payload` (in): The received payload The `payload` can be used only in the callback. The `payload` should not be released.
+/// - `user_data` (in): The user data
+///
+/// **See also:**
+/// - `cion_group_add_payload_received_cb()`
+/// - `cion_peer_info_h`
+/// - `cion_payload_h`
+/// @nodoc
 typedef cion_group_payload_received_cb
     = ffi.Pointer<ffi.NativeFunction<cion_group_payload_received_cbFunction>>;
+/// @nodoc
 typedef cion_group_payload_received_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> topic_name,
     cion_peer_info_h peer_info,
     cion_payload_h payload,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartcion_group_payload_received_cbFunction = void Function(
     ffi.Pointer<ffi.Char> topic_name,
     cion_peer_info_h peer_info,
     cion_payload_h payload,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when a peer joins a topic.
-/// @since_tizen 6.5
-/// @param[in] topic_name The name of topic \n
-/// The @a topic_name can be used only in the callback. To use outside, make a copy.
-/// @param[in] peer_info The Cion peer information handle \n
-/// The @a peer_info can be used only in the callback. To use outside, make a copy.
-/// @param[in] user_data The user data
-/// @see cion_group_add_joined_cb()
-/// @see #cion_peer_info_h
+/// Called when a peer joins a topic.
+///
+/// **Since Tizen:**
+/// - 6.5
+///
+/// **Parameters:**
+/// - `topic_name` (in): The name of topic The `topic_name` can be used only in the callback. To use outside, make a copy.
+/// - `peer_info` (in): The Cion peer information handle The `peer_info` can be used only in the callback. To use outside, make a copy.
+/// - `user_data` (in): The user data
+///
+/// **See also:**
+/// - `cion_group_add_joined_cb()`
+/// - `cion_peer_info_h`
+/// @nodoc
 typedef cion_group_joined_cb
     = ffi.Pointer<ffi.NativeFunction<cion_group_joined_cbFunction>>;
+/// @nodoc
 typedef cion_group_joined_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> topic_name,
     cion_peer_info_h peer_info,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartcion_group_joined_cbFunction = void Function(
     ffi.Pointer<ffi.Char> topic_name,
     cion_peer_info_h peer_info,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when a peer leaves a topic.
-/// @since_tizen 6.5
-/// @param[in] topic_name The name of topic \n
-/// The @a topic_name can be used only in the callback. To use outside, make a copy.
-/// @param[in] peer_info The Cion peer information handle \n
-/// The @a peer_info can be used only in the callback. To use outside, make a copy.
-/// @param[in] user_data The user data
-/// @see cion_group_add_left_cb()
-/// @see #cion_peer_info_h
+/// Called when a peer leaves a topic.
+///
+/// **Since Tizen:**
+/// - 6.5
+///
+/// **Parameters:**
+/// - `topic_name` (in): The name of topic The `topic_name` can be used only in the callback. To use outside, make a copy.
+/// - `peer_info` (in): The Cion peer information handle The `peer_info` can be used only in the callback. To use outside, make a copy.
+/// - `user_data` (in): The user data
+///
+/// **See also:**
+/// - `cion_group_add_left_cb()`
+/// - `cion_peer_info_h`
+/// @nodoc
 typedef cion_group_left_cb
     = ffi.Pointer<ffi.NativeFunction<cion_group_left_cbFunction>>;
+/// @nodoc
 typedef cion_group_left_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> topic_name,
     cion_peer_info_h peer_info,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartcion_group_left_cbFunction = void Function(
     ffi.Pointer<ffi.Char> topic_name,
     cion_peer_info_h peer_info,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Enumeration for Cion connection status types.
-/// @since_tizen 6.5
+/// Enumeration for Cion connection status types.
+///
+/// **Since Tizen:**
+/// - 6.5
+/// @nodoc
 abstract class connection_status_e {
   /// < Connection is ok
   static const int CION_CONNECTION_STATUS_OK = 0;
@@ -3308,12 +4363,18 @@ abstract class connection_status_e {
   static const int CION_CONNECTION_STATUS_ERROR = 2;
 }
 
-/// @brief  The Cion connection result handle.
-/// @since_tizen 6.5
+/// The Cion connection result handle.
+///
+/// **Since Tizen:**
+/// - 6.5
+/// @nodoc
 typedef cion_connection_result_h = ffi.Pointer<ffi.Void>;
 
-/// @brief Enumeration for payload async result types.
-/// @since_tizen 6.5
+/// Enumeration for payload async result types.
+///
+/// **Since Tizen:**
+/// - 6.5
+/// @nodoc
 abstract class payload_async_result_e {
   /// < Pending
   static const int CION_PAYLOAD_ASYNC_RESULT_PENDING = 0;
@@ -3325,97 +4386,128 @@ abstract class payload_async_result_e {
   static const int CION_PAYLOAD_ASYNC_RESULT_FAIL = 2;
 }
 
-/// @brief The Cion payload async result handle.
-/// @since_tizen 6.5
+/// The Cion payload async result handle.
+///
+/// **Since Tizen:**
+/// - 6.5
+/// @nodoc
 typedef cion_payload_async_result_h = ffi.Pointer<ffi.Void>;
 
-/// @brief The Cion client handle.
-/// @since_tizen 6.5
+/// The Cion client handle.
+///
+/// **Since Tizen:**
+/// - 6.5
+/// @nodoc
 typedef cion_client_h = ffi.Pointer<ffi.Void>;
 
-/// @brief Called when the server is discovered.
-/// @since_tizen 6.5
-/// @param[in] service_name The name of service \n
-/// The @a service_name can be used only in the callback. To use outside, make a copy.
-/// @param[in] peer_info The Cion peer information handle \n
-/// The @a peer_info can be used only in the callback. To use outside, make a copy.
-/// @param[in] user_data The user data
-/// @see cion_client_try_discovery()
-/// @see #cion_peer_info_h
+/// Called when the server is discovered.
+///
+/// **Since Tizen:**
+/// - 6.5
+///
+/// **Parameters:**
+/// - `service_name` (in): The name of service The `service_name` can be used only in the callback. To use outside, make a copy.
+/// - `peer_info` (in): The Cion peer information handle The `peer_info` can be used only in the callback. To use outside, make a copy.
+/// - `user_data` (in): The user data
+///
+/// **See also:**
+/// - `cion_client_try_discovery()`
+/// - `cion_peer_info_h`
+/// @nodoc
 typedef cion_client_server_discovered_cb
     = ffi.Pointer<ffi.NativeFunction<cion_client_server_discovered_cbFunction>>;
+/// @nodoc
 typedef cion_client_server_discovered_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> service_name,
     cion_peer_info_h peer_info,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartcion_client_server_discovered_cbFunction = void Function(
     ffi.Pointer<ffi.Char> service_name,
     cion_peer_info_h peer_info,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called after sending payload asynchronously.
-/// @since_tizen 6.5
-/// @param[in] result The result of sending payload \n
-/// The @a result can be used only in the callback. To use outside, make a copy.
-/// @param[in] user_data The user data
-/// @see cion_client_send_payload_async()
-/// @see #cion_payload_async_result_h
+/// Called after sending payload asynchronously.
+///
+/// **Since Tizen:**
+/// - 6.5
+///
+/// **Parameters:**
+/// - `result` (in): The result of sending payload The `result` can be used only in the callback. To use outside, make a copy.
+/// - `user_data` (in): The user data
+///
+/// **See also:**
+/// - `cion_client_send_payload_async()`
+/// - `cion_payload_async_result_h`
+/// @nodoc
 typedef cion_client_payload_async_result_cb = ffi
     .Pointer<ffi.NativeFunction<cion_client_payload_async_result_cbFunction>>;
+/// @nodoc
 typedef cion_client_payload_async_result_cbFunction = ffi.Void Function(
     cion_payload_async_result_h result, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartcion_client_payload_async_result_cbFunction = void Function(
     cion_payload_async_result_h result, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the connection is accepted or rejected.
-/// @since_tizen 6.5
-/// @param[in] service_name The name of service \n
-/// The @a service_name can be used only in the callback. To use outside, make a copy.
-/// @param[in] peer_info The Cion peer information handle \n
-/// The @a peer_info can be used only in the callback. To use outside, make a copy.
-/// @param[in] result The handle for connection result \n
-/// The @a result can be used only in the callback. To use outside, make a copy.
-/// @param[in] user_data The user data
-/// @see cion_client_add_connection_result_cb()
-/// @see #cion_peer_info_h
-/// @see #cion_connection_result_h
+/// Called when the connection is accepted or rejected.
+///
+/// **Since Tizen:**
+/// - 6.5
+///
+/// **Parameters:**
+/// - `service_name` (in): The name of service The `service_name` can be used only in the callback. To use outside, make a copy.
+/// - `peer_info` (in): The Cion peer information handle The `peer_info` can be used only in the callback. To use outside, make a copy.
+/// - `result` (in): The handle for connection result The `result` can be used only in the callback. To use outside, make a copy.
+/// - `user_data` (in): The user data
+///
+/// **See also:**
+/// - `cion_client_add_connection_result_cb()`
+/// - `cion_peer_info_h`
+/// - `cion_connection_result_h`
+/// @nodoc
 typedef cion_client_connection_result_cb
     = ffi.Pointer<ffi.NativeFunction<cion_client_connection_result_cbFunction>>;
+/// @nodoc
 typedef cion_client_connection_result_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> service_name,
     cion_peer_info_h peer_info,
     cion_connection_result_h result,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartcion_client_connection_result_cbFunction = void Function(
     ffi.Pointer<ffi.Char> service_name,
     cion_peer_info_h peer_info,
     cion_connection_result_h result,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the payload is received.
-/// @since_tizen 6.5
-/// @param[in] service_name The name of service \n
-/// The @a service_name is the name of connected service that sent the payload.
-/// The @a service_name can be used only in the callback. To use outside, make a copy.
-/// @param[in] peer_info The Cion peer information handle \n
-/// The @a peer_info can be used only in the callback. To use outside, make a copy.
-/// @param[in] payload The received payload \n
-/// The @a payload can be used only in the callback. \n
-/// The @a payload should not be released.
-/// @param[in] status The status of transfer
-/// @param[in] user_data The user data
-/// @see cion_client_add_payload_received_cb()
-/// @see #cion_peer_info_h
-/// @see #cion_payload_h
-/// @see #cion_payload_transfer_status_e
+/// Called when the payload is received.
+///
+/// **Since Tizen:**
+/// - 6.5
+///
+/// **Parameters:**
+/// - `service_name` (in): The name of service The `service_name` is the name of connected service that sent the payload. The `service_name` can be used only in the callback. To use outside, make a copy.
+/// - `peer_info` (in): The Cion peer information handle The `peer_info` can be used only in the callback. To use outside, make a copy.
+/// - `payload` (in): The received payload The `payload` can be used only in the callback. The `payload` should not be released.
+/// - `status` (in): The status of transfer
+/// - `user_data` (in): The user data
+///
+/// **See also:**
+/// - `cion_client_add_payload_received_cb()`
+/// - `cion_peer_info_h`
+/// - `cion_payload_h`
+/// - `cion_payload_transfer_status_e`
+/// @nodoc
 typedef cion_client_payload_received_cb
     = ffi.Pointer<ffi.NativeFunction<cion_client_payload_received_cbFunction>>;
+/// @nodoc
 typedef cion_client_payload_received_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> service_name,
     cion_peer_info_h peer_info,
     cion_payload_h payload,
     ffi.Int32 status,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartcion_client_payload_received_cbFunction = void Function(
     ffi.Pointer<ffi.Char> service_name,
     cion_peer_info_h peer_info,
@@ -3423,28 +4515,38 @@ typedef Dartcion_client_payload_received_cbFunction = void Function(
     int status,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the connection is disconnected.
-/// @since_tizen 6.5
-/// @param[in] service_name The name of service \n
-/// The @a service_name can be used only in the callback. To use outside, make a copy.
-/// @param[in] peer_info The cion peer information handle \n
-/// The @a peer_info can be used only in the callback. To use outside, make a copy.
-/// @param[in] user_data The user data
-/// @see cion_client_add_disconnected_cb()
-/// @see #cion_peer_info_h
+/// Called when the connection is disconnected.
+///
+/// **Since Tizen:**
+/// - 6.5
+///
+/// **Parameters:**
+/// - `service_name` (in): The name of service The `service_name` can be used only in the callback. To use outside, make a copy.
+/// - `peer_info` (in): The cion peer information handle The `peer_info` can be used only in the callback. To use outside, make a copy.
+/// - `user_data` (in): The user data
+///
+/// **See also:**
+/// - `cion_client_add_disconnected_cb()`
+/// - `cion_peer_info_h`
+/// @nodoc
 typedef cion_client_disconnected_cb
     = ffi.Pointer<ffi.NativeFunction<cion_client_disconnected_cbFunction>>;
+/// @nodoc
 typedef cion_client_disconnected_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> service_name,
     cion_peer_info_h peer_info,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartcion_client_disconnected_cbFunction = void Function(
     ffi.Pointer<ffi.Char> service_name,
     cion_peer_info_h peer_info,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Enumeration for Cion errors.
-/// @since_tizen 6.5
+/// Enumeration for Cion errors.
+///
+/// **Since Tizen:**
+/// - 6.5
+/// @nodoc
 abstract class cion_error {
   /// < Success
   static const int CION_ERROR_NONE = 0;
@@ -3477,107 +4579,146 @@ abstract class cion_error {
   static const int CION_ERROR_OPERATION_FAILED = -51118079;
 }
 
-/// @brief The Cion server handle.
-/// @since_tizen 6.5
+/// The Cion server handle.
+///
+/// **Since Tizen:**
+/// - 6.5
+/// @nodoc
 typedef cion_server_h = ffi.Pointer<ffi.Void>;
 
-/// @brief Called when a connection is requested.
-/// @since_tizen 6.5
-/// @param[in] service_name The name of service \n
-/// The @a service_name can be used only in the callback. To use outside, make a copy.
-/// @param[in] peer_info The Cion peer information handle \n
-/// The @a peer_info can be used only in the callback. To use outside, make a copy.
-/// @param[in] user_data The user data
-/// @see cion_server_listen()
-/// @see #cion_peer_info_h
+/// Called when a connection is requested.
+///
+/// **Since Tizen:**
+/// - 6.5
+///
+/// **Parameters:**
+/// - `service_name` (in): The name of service The `service_name` can be used only in the callback. To use outside, make a copy.
+/// - `peer_info` (in): The Cion peer information handle The `peer_info` can be used only in the callback. To use outside, make a copy.
+/// - `user_data` (in): The user data
+///
+/// **See also:**
+/// - `cion_server_listen()`
+/// - `cion_peer_info_h`
+/// @nodoc
 typedef cion_server_connection_request_cb = ffi
     .Pointer<ffi.NativeFunction<cion_server_connection_request_cbFunction>>;
+/// @nodoc
 typedef cion_server_connection_request_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> service_name,
     cion_peer_info_h peer_info,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartcion_server_connection_request_cbFunction = void Function(
     ffi.Pointer<ffi.Char> service_name,
     cion_peer_info_h peer_info,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called after sending payload asynchronously.
-/// @since_tizen 6.5
-/// @param[in] result The result of sending payload \n
-/// The @a result can be used only in the callback. To use outside, make a copy.
-/// @param[in] user_data The user data
-/// @see cion_server_send_payload_async()
-/// @see #cion_payload_async_result_h
+/// Called after sending payload asynchronously.
+///
+/// **Since Tizen:**
+/// - 6.5
+///
+/// **Parameters:**
+/// - `result` (in): The result of sending payload The `result` can be used only in the callback. To use outside, make a copy.
+/// - `user_data` (in): The user data
+///
+/// **See also:**
+/// - `cion_server_send_payload_async()`
+/// - `cion_payload_async_result_h`
+/// @nodoc
 typedef cion_server_payload_async_result_cb = ffi
     .Pointer<ffi.NativeFunction<cion_server_payload_async_result_cbFunction>>;
+/// @nodoc
 typedef cion_server_payload_async_result_cbFunction = ffi.Void Function(
     cion_payload_async_result_h result, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartcion_server_payload_async_result_cbFunction = void Function(
     cion_payload_async_result_h result, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called to get the connected peer information.
-/// @since_tizen 6.5
-/// @param[in] peer_info The Cion peer information handle \n
-/// The @a peer_info can be used only in the callback. To use outside, make a copy.
-/// @param[in] user_data The user data
-/// @return @c true to continue with the next iteration of the loop, otherwise @c false to break out of the loop.
-/// @see cion_server_foreach_connected_peer_info()
-/// @see #cion_peer_info_h
+/// Called to get the connected peer information.
+///
+/// **Since Tizen:**
+/// - 6.5
+///
+/// **Parameters:**
+/// - `peer_info` (in): The Cion peer information handle The `peer_info` can be used only in the callback. To use outside, make a copy.
+/// - `user_data` (in): The user data
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop.
+///
+/// **See also:**
+/// - `cion_server_foreach_connected_peer_info()`
+/// - `cion_peer_info_h`
+/// @nodoc
 typedef cion_server_connected_peer_info_cb = ffi
     .Pointer<ffi.NativeFunction<cion_server_connected_peer_info_cbFunction>>;
+/// @nodoc
 typedef cion_server_connected_peer_info_cbFunction = ffi.Bool Function(
     cion_peer_info_h peer_info, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartcion_server_connected_peer_info_cbFunction = bool Function(
     cion_peer_info_h peer_info, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the connection is accepted or rejected.
-/// @since_tizen 6.5
-/// @param[in] service_name The name of service \n
-/// The @a service_name can be used only in the callback. To use outside, make a copy.
-/// @param[in] peer_info The Cion peer information handle \n
-/// The @a peer_info can be used only in the callback. To use outside, make a copy.
-/// @param[in] result The handle for connection result \n
-/// The @a result can be used only in the callback. To use outside, make a copy.
-/// @param[in] user_data The user data
-/// @see cion_server_add_connection_result_cb()
-/// @see #cion_peer_info_h
-/// @see #cion_connection_result_h
+/// Called when the connection is accepted or rejected.
+///
+/// **Since Tizen:**
+/// - 6.5
+///
+/// **Parameters:**
+/// - `service_name` (in): The name of service The `service_name` can be used only in the callback. To use outside, make a copy.
+/// - `peer_info` (in): The Cion peer information handle The `peer_info` can be used only in the callback. To use outside, make a copy.
+/// - `result` (in): The handle for connection result The `result` can be used only in the callback. To use outside, make a copy.
+/// - `user_data` (in): The user data
+///
+/// **See also:**
+/// - `cion_server_add_connection_result_cb()`
+/// - `cion_peer_info_h`
+/// - `cion_connection_result_h`
+/// @nodoc
 typedef cion_server_connection_result_cb
     = ffi.Pointer<ffi.NativeFunction<cion_server_connection_result_cbFunction>>;
+/// @nodoc
 typedef cion_server_connection_result_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> service_name,
     cion_peer_info_h peer_info,
     cion_connection_result_h result,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartcion_server_connection_result_cbFunction = void Function(
     ffi.Pointer<ffi.Char> service_name,
     cion_peer_info_h peer_info,
     cion_connection_result_h result,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when payload is received.
-/// @since_tizen 6.5
-/// @param[in] service_name The name of service \n
-/// The @a service_name can be used only in the callback. To use outside, make a copy.
-/// @param[in] peer_info The Cion peer information handle \n
-/// The @a peer_info can be used only in the callback. To use outside, make a copy.
-/// @param[in] payload The received payload \n
-/// The @a payload can be used only in the callback. \n
-/// The @a payload should not be released.
-/// @param[in] status The status of transfer
-/// @param[in] user_data The user data
-/// @see cion_server_add_payload_received_cb()
-/// @see #cion_peer_info_h
-/// @see #cion_payload_h
-/// @see #cion_payload_transfer_status_e
+/// Called when payload is received.
+///
+/// **Since Tizen:**
+/// - 6.5
+///
+/// **Parameters:**
+/// - `service_name` (in): The name of service The `service_name` can be used only in the callback. To use outside, make a copy.
+/// - `peer_info` (in): The Cion peer information handle The `peer_info` can be used only in the callback. To use outside, make a copy.
+/// - `payload` (in): The received payload The `payload` can be used only in the callback. The `payload` should not be released.
+/// - `status` (in): The status of transfer
+/// - `user_data` (in): The user data
+///
+/// **See also:**
+/// - `cion_server_add_payload_received_cb()`
+/// - `cion_peer_info_h`
+/// - `cion_payload_h`
+/// - `cion_payload_transfer_status_e`
+/// @nodoc
 typedef cion_server_payload_received_cb
     = ffi.Pointer<ffi.NativeFunction<cion_server_payload_received_cbFunction>>;
+/// @nodoc
 typedef cion_server_payload_received_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> service_name,
     cion_peer_info_h peer_info,
     cion_payload_h payload,
     ffi.Int32 status,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartcion_server_payload_received_cbFunction = void Function(
     ffi.Pointer<ffi.Char> service_name,
     cion_peer_info_h peer_info,
@@ -3585,23 +4726,30 @@ typedef Dartcion_server_payload_received_cbFunction = void Function(
     int status,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when data is received.
-/// @since_tizen 6.5
-/// @remarks The server should return reply by setting @a return_data and @a return_data_size.
-/// @param[in] service_name The name of service \n
-/// The @a service_name can be used only in the callback. To use outside, make a copy.
-/// @param[in] peer_info The Cion peer information handle \n
-/// The @a peer_info can be used only in the callback. To use outside, make a copy.
-/// @param[in] data The data \n
-/// The @a peer_info can be used only in the callback. To use outside, make a copy.
-/// @param[in] data_size The size of data
-/// @param[out] return_data The data to return
-/// @param[out] return_data_size The size of return data
-/// @param[in] user_data The user data
-/// @see cion_server_set_data_received_cb()
-/// @see #cion_peer_info_h
+/// Called when data is received.
+///
+/// **Since Tizen:**
+/// - 6.5
+///
+/// **Remarks:**
+/// - The server should return reply by setting `return_data` and `return_data_size`.
+///
+/// **Parameters:**
+/// - `service_name` (in): The name of service The `service_name` can be used only in the callback. To use outside, make a copy.
+/// - `peer_info` (in): The Cion peer information handle The `peer_info` can be used only in the callback. To use outside, make a copy.
+/// - `data` (in): The data The `peer_info` can be used only in the callback. To use outside, make a copy.
+/// - `data_size` (in): The size of data
+/// - `return_data` (out): The data to return
+/// - `return_data_size` (out): The size of return data
+/// - `user_data` (in): The user data
+///
+/// **See also:**
+/// - `cion_server_set_data_received_cb()`
+/// - `cion_peer_info_h`
+/// @nodoc
 typedef cion_server_data_received_cb
     = ffi.Pointer<ffi.NativeFunction<cion_server_data_received_cbFunction>>;
+/// @nodoc
 typedef cion_server_data_received_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> service_name,
     cion_peer_info_h peer_info,
@@ -3610,6 +4758,7 @@ typedef cion_server_data_received_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Pointer<ffi.UnsignedChar>> return_data,
     ffi.Pointer<ffi.UnsignedInt> return_data_size,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartcion_server_data_received_cbFunction = void Function(
     ffi.Pointer<ffi.Char> service_name,
     cion_peer_info_h peer_info,
@@ -3619,21 +4768,28 @@ typedef Dartcion_server_data_received_cbFunction = void Function(
     ffi.Pointer<ffi.UnsignedInt> return_data_size,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when a peer disconnects.
-/// @since_tizen 6.5
-/// @param[in] service_name The name of service \n
-/// The @a service_name can be used only in the callback. To use outside, make a copy.
-/// @param[in] peer_info The Cion peer information handle \n
-/// The @a peer_info can be used only in the callback. To use outside, make a copy.
-/// @param[in] user_data The user data
-/// @see cion_server_add_disconnected_cb()
-/// @see #cion_peer_info_h
+/// Called when a peer disconnects.
+///
+/// **Since Tizen:**
+/// - 6.5
+///
+/// **Parameters:**
+/// - `service_name` (in): The name of service The `service_name` can be used only in the callback. To use outside, make a copy.
+/// - `peer_info` (in): The Cion peer information handle The `peer_info` can be used only in the callback. To use outside, make a copy.
+/// - `user_data` (in): The user data
+///
+/// **See also:**
+/// - `cion_server_add_disconnected_cb()`
+/// - `cion_peer_info_h`
+/// @nodoc
 typedef cion_server_disconnected_cb
     = ffi.Pointer<ffi.NativeFunction<cion_server_disconnected_cbFunction>>;
+/// @nodoc
 typedef cion_server_disconnected_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> service_name,
     cion_peer_info_h peer_info,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartcion_server_disconnected_cbFunction = void Function(
     ffi.Pointer<ffi.Char> service_name,
     cion_peer_info_h peer_info,

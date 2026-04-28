@@ -1,3 +1,6 @@
+/// {@category 10.0/tizen}
+library tizen_interop_10_0.webauthn_client;
+
 // Copyright 2026 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen webauthn-client APIs.
+/// {@category 10.0/tizen}
 class Tizen100WebauthnClient {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,23 +28,25 @@ class Tizen100WebauthnClient {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Sets API version that the caller uses.
+  /// Sets API version that the caller uses.
   ///
-  /// @since_tizen 7.0
+  /// **Since Tizen:**
+  /// - 7.0
   ///
-  /// @remarks This function is related with following feature:\n
-  /// - %http://tizen.org/feature/security.webauthn\n
+  /// **Remarks:**
+  /// - This function is related with following feature:
+  /// - - http://tizen.org/feature/security.webauthn
+  /// - This function must be called before other functions are called.
   ///
-  /// @remarks This function must be called before other functions are called.
+  /// **Parameters:**
+  /// - `api_version_number` (in): API version number to set. Use `WAUTHN_API_VERSION_NUMBER` as an input.
   ///
-  /// @param[in] api_version_number API version number to set.
-  /// Use #WAUTHN_API_VERSION_NUMBER as an input.
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WAUTHN_ERROR_NONE Successful
-  /// @retval #WAUTHN_ERROR_NOT_SUPPORTED The specified API version or required feature is not
-  /// supported
+  /// **Return values:**
+  /// - `WAUTHN_ERROR_NONE`: Successful
+  /// - `WAUTHN_ERROR_NOT_SUPPORTED`: The specified API version or required feature is not supported
   int wauthn_set_api_version(
     int api_version_number,
   ) {
@@ -55,27 +61,34 @@ class Tizen100WebauthnClient {
   late final _wauthn_set_api_version =
       _wauthn_set_api_versionPtr.asFunction<int Function(int)>();
 
-  /// @brief Gets information on authenticator types that the client platform supports.
+  /// Gets information on authenticator types that the client platform supports.
   ///
-  /// @since_tizen 7.0
+  /// **Since Tizen:**
+  /// - 7.0
   ///
-  /// @remarks This function is related with following feature:\n
-  /// - %http://tizen.org/feature/security.webauthn\n
+  /// **Remarks:**
+  /// - This function is related with following feature:
+  /// - - http://tizen.org/feature/security.webauthn
+  /// - This version of API only support hybrid roaming authenticator.
+  /// - So the bit for `WAUTHN_TRANSPORT_HYBRID` is set 1 and
+  /// - bits for other authenticators set 0.
+  /// - Each authenticators can be checked using bitwise operation.
   ///
-  /// @remarks This version of API only support hybrid roaming authenticator.
-  /// So the bit for #WAUTHN_TRANSPORT_HYBRID is set 1 and
-  /// bits for other authenticators set 0.
-  /// Each authenticators can be checked using bitwise operation.
+  /// **Parameters:**
+  /// - `supported` (out): The pointer to an unsigned int for return supported authenticators
   ///
-  /// @param[out] supported The pointer to an unsigned int for return supported authenticators
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WAUTHN_ERROR_NONE Successful
-  /// @retval #WAUTHN_ERROR_NOT_SUPPORTED The required feature is not supported
-  /// @retval #WAUTHN_ERROR_INVALID_PARAMETER The @a supported is NULL
+  /// **Return values:**
+  /// - `WAUTHN_ERROR_NONE`: Successful
+  /// - `WAUTHN_ERROR_NOT_SUPPORTED`: The required feature is not supported
+  /// - `WAUTHN_ERROR_INVALID_PARAMETER`: The `supported` is NULL
   ///
-  /// @code
+  /// **See also:**
+  /// - `wauthn_authenticator_transport_e`
+  ///
+  /// ```
   /// unsigned int supported = 0;
   /// auto ret = wauthn_supported_authenticators(&supported);
   /// if (ret != WAUTHN_ERROR_NONE)
@@ -86,9 +99,7 @@ class Tizen100WebauthnClient {
   /// } else {
   /// // hybrid transport is not supported
   /// }
-  /// @endcode
-  ///
-  /// @see #wauthn_authenticator_transport_e
+  /// ```
   int wauthn_supported_authenticators(
     ffi.Pointer<ffi.UnsignedInt> supported,
   ) {
@@ -104,47 +115,54 @@ class Tizen100WebauthnClient {
       _wauthn_supported_authenticatorsPtr
           .asFunction<int Function(ffi.Pointer<ffi.UnsignedInt>)>();
 
-  /// @brief Makes a new web authentication credential and store it to authenticator.
+  /// Makes a new web authentication credential and store it to authenticator.
   ///
-  /// @since_tizen 7.0
+  /// **Since Tizen:**
+  /// - 7.0
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth\n
-  /// %http://tizen.org/privilege/internet
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @remarks This function is related with following features:\n
-  /// - %http://tizen.org/feature/security.webauthn\n
-  /// - %http://tizen.org/feature/network.bluetooth.le\n
-  /// - and at least one of the below features:\n
-  /// - %http://tizen.org/feature/network.wifi\n
-  /// - %http://tizen.org/feature/network.ethernet\n
-  /// - %http://tizen.org/feature/network.telephony\n
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
+  /// - <http://tizen.org/privilege/internet>
   ///
-  /// @remarks Refer to the following W3C specification for more information.
-  /// https://www.w3.org/TR/webauthn-3/#sctn-createCredential
+  /// **Remarks:**
+  /// - This function is related with following features:
+  /// - - http://tizen.org/feature/security.webauthn
+  /// - - http://tizen.org/feature/network.bluetooth.le
+  /// - - and at least one of the below features:
+  /// - - http://tizen.org/feature/network.wifi
+  /// - - http://tizen.org/feature/network.ethernet
+  /// - - http://tizen.org/feature/network.telephony
+  /// - Refer to the following W3C specification for more information.
+  /// - <https://www.w3.org/TR/webauthn-3/`sctn`-createCredential>
   ///
-  /// @param[in]  client_data UTF-8 encoded JSON serialization of the client data.
-  /// @param[in]  options This argument is a #wauthn_pubkey_cred_creation_options_s object specifying the
-  /// desired attributes of the to-be-created public key credential
-  /// @param[in]  callbacks The callback functions to be invoked
+  /// **Parameters:**
+  /// - `client_data` (in): UTF-8 encoded JSON serialization of the client data.
+  /// - `options` (in): This argument is a `wauthn_pubkey_cred_creation_options_s` object specifying the desired attributes of the to-be-created public key credential
+  /// - `callbacks` (in): The callback functions to be invoked
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #WAUTHN_ERROR_NONE Successful
-  /// @retval #WAUTHN_ERROR_NOT_SUPPORTED The required feature is not supported
-  /// @retval #WAUTHN_ERROR_PERMISSION_DENIED Required privilege is missing
-  /// @retval #WAUTHN_ERROR_INVALID_PARAMETER Input parameter is invalid
-  /// @retval #WAUTHN_ERROR_NOT_ALLOWED Not allowed in the current context including busy state
-  /// @retval #WAUTHN_ERROR_INVALID_STATE Get in an invalid state
-  /// @retval #WAUTHN_ERROR_CANCELED Cancelled by cancel request
-  /// @retval #WAUTHN_ERROR_CONNECTION_REFUSED Authenticator is permanently uncontactable. Forget link info
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
   ///
-  /// @pre API version must be set with wauthn_set_api_version() and required authenticator type must
-  /// be supported (can be checked with wauthn_supported_authenticators()).
+  /// **Return values:**
+  /// - `WAUTHN_ERROR_NONE`: Successful
+  /// - `WAUTHN_ERROR_NOT_SUPPORTED`: The required feature is not supported
+  /// - `WAUTHN_ERROR_PERMISSION_DENIED`: Required privilege is missing
+  /// - `WAUTHN_ERROR_INVALID_PARAMETER`: Input parameter is invalid
+  /// - `WAUTHN_ERROR_NOT_ALLOWED`: Not allowed in the current context including busy state
+  /// - `WAUTHN_ERROR_INVALID_STATE`: Get in an invalid state
+  /// - `WAUTHN_ERROR_CANCELED`: Cancelled by cancel request
+  /// - `WAUTHN_ERROR_CONNECTION_REFUSED`: Authenticator is permanently uncontactable. Forget link info
   ///
-  /// @see wauthn_get_assertion()
-  /// @see #wauthn_pubkey_cred_creation_options_s
-  /// @see #wauthn_mc_callbacks_s
+  /// **Preconditions:**
+  /// - API version must be set with wauthn_set_api_version() and required authenticator type must be supported (can be checked with wauthn_supported_authenticators()).
+  ///
+  /// **See also:**
+  /// - `wauthn_get_assertion()`
+  /// - `wauthn_pubkey_cred_creation_options_s`
+  /// - `wauthn_mc_callbacks_s`
   int wauthn_make_credential(
     ffi.Pointer<wauthn_client_data_s> client_data,
     ffi.Pointer<wauthn_pubkey_cred_creation_options_s> options,
@@ -169,45 +187,53 @@ class Tizen100WebauthnClient {
           ffi.Pointer<wauthn_pubkey_cred_creation_options_s>,
           ffi.Pointer<wauthn_mc_callbacks_s>)>();
 
-  /// @brief Gets assertion from authenticator.
+  /// Gets assertion from authenticator.
   ///
-  /// @since_tizen 7.0
+  /// **Since Tizen:**
+  /// - 7.0
   ///
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth\n
-  /// %http://tizen.org/privilege/internet
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @remarks This function is related with following features:\n
-  /// - %http://tizen.org/feature/security.webauthn\n
-  /// - %http://tizen.org/feature/network.bluetooth.le\n
-  /// - and at least one of the below features:\n
-  /// - %http://tizen.org/feature/network.wifi\n
-  /// - %http://tizen.org/feature/network.ethernet\n
-  /// - %http://tizen.org/feature/network.telephony\n
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
+  /// - <http://tizen.org/privilege/internet>
   ///
-  /// @remarks Refer to the following W3C specification for more information.
-  /// https://www.w3.org/TR/webauthn-3/#sctn-getAssertion
+  /// **Remarks:**
+  /// - This function is related with following features:
+  /// - - http://tizen.org/feature/security.webauthn
+  /// - - http://tizen.org/feature/network.bluetooth.le
+  /// - - and at least one of the below features:
+  /// - - http://tizen.org/feature/network.wifi
+  /// - - http://tizen.org/feature/network.ethernet
+  /// - - http://tizen.org/feature/network.telephony
+  /// - Refer to the following W3C specification for more information.
+  /// - <https://www.w3.org/TR/webauthn-3/`sctn`-getAssertion>
   ///
-  /// @param[in]  client_data UTF-8 encoded JSON serialization of the client data
-  /// @param[in]  options This argument is a #wauthn_pubkey_cred_request_options_s object specifying the
-  /// desired attributes of the public key credential to discover
-  /// @param[in]  callbacks The callback functions to be invoked
+  /// **Parameters:**
+  /// - `client_data` (in): UTF-8 encoded JSON serialization of the client data
+  /// - `options` (in): This argument is a `wauthn_pubkey_cred_request_options_s` object specifying the desired attributes of the public key credential to discover
+  /// - `callbacks` (in): The callback functions to be invoked
   ///
-  /// @return @c 0 on success,
-  /// @retval #WAUTHN_ERROR_NONE Successful
-  /// @retval #WAUTHN_ERROR_NOT_SUPPORTED The required feature is not supported
-  /// @retval #WAUTHN_ERROR_PERMISSION_DENIED Required privilege is missing
-  /// @retval #WAUTHN_ERROR_INVALID_PARAMETER Input parameter is invalid
-  /// @retval #WAUTHN_ERROR_NOT_ALLOWED Not allowed in the current context including busy state
-  /// @retval #WAUTHN_ERROR_CANCELED Cancelled by cancel request
-  /// @retval #WAUTHN_ERROR_CONNECTION_REFUSED Authenticator is permanently uncontactable. Forget link info
+  /// **Returns:**
+  /// - `0` on success,
   ///
-  /// @pre API version must be set with wauthn_set_api_version() and required authenticator type must
-  /// be supported (can be checked with wauthn_supported_authenticators()).
+  /// **Return values:**
+  /// - `WAUTHN_ERROR_NONE`: Successful
+  /// - `WAUTHN_ERROR_NOT_SUPPORTED`: The required feature is not supported
+  /// - `WAUTHN_ERROR_PERMISSION_DENIED`: Required privilege is missing
+  /// - `WAUTHN_ERROR_INVALID_PARAMETER`: Input parameter is invalid
+  /// - `WAUTHN_ERROR_NOT_ALLOWED`: Not allowed in the current context including busy state
+  /// - `WAUTHN_ERROR_CANCELED`: Cancelled by cancel request
+  /// - `WAUTHN_ERROR_CONNECTION_REFUSED`: Authenticator is permanently uncontactable. Forget link info
   ///
-  /// @see wauthn_make_credential()
-  /// @see #wauthn_pubkey_cred_request_options_s
-  /// @see #wauthn_ga_callbacks_s
+  /// **Preconditions:**
+  /// - API version must be set with wauthn_set_api_version() and required authenticator type must be supported (can be checked with wauthn_supported_authenticators()).
+  ///
+  /// **See also:**
+  /// - `wauthn_make_credential()`
+  /// - `wauthn_pubkey_cred_request_options_s`
+  /// - `wauthn_ga_callbacks_s`
   int wauthn_get_assertion(
     ffi.Pointer<wauthn_client_data_s> client_data,
     ffi.Pointer<wauthn_pubkey_cred_request_options_s> options,
@@ -232,20 +258,26 @@ class Tizen100WebauthnClient {
           ffi.Pointer<wauthn_pubkey_cred_request_options_s>,
           ffi.Pointer<wauthn_ga_callbacks_s>)>();
 
-  /// @brief Stops operation of the previous wauthn_make_credential() or wauthn_get_assertion() call.
+  /// Stops operation of the previous wauthn_make_credential() or wauthn_get_assertion() call.
   ///
-  /// @since_tizen 7.0
+  /// **Since Tizen:**
+  /// - 7.0
   ///
-  /// @remarks This function is related with following feature:\n
-  /// - %http://tizen.org/feature/security.webauthn\n
+  /// **Remarks:**
+  /// - This function is related with following feature:
+  /// - - http://tizen.org/feature/security.webauthn
   ///
-  /// @return @c 0 on success,
-  /// @retval #WAUTHN_ERROR_NONE Successful
-  /// @retval #WAUTHN_ERROR_NOT_SUPPORTED The required feature is not supported
-  /// @retval #WAUTHN_ERROR_NOT_ALLOWED Not allowed in the current context
+  /// **Returns:**
+  /// - `0` on success,
   ///
-  /// @see wauthn_make_credential()
-  /// @see wauthn_get_assertion()
+  /// **Return values:**
+  /// - `WAUTHN_ERROR_NONE`: Successful
+  /// - `WAUTHN_ERROR_NOT_SUPPORTED`: The required feature is not supported
+  /// - `WAUTHN_ERROR_NOT_ALLOWED`: Not allowed in the current context
+  ///
+  /// **See also:**
+  /// - `wauthn_make_credential()`
+  /// - `wauthn_get_assertion()`
   int wauthn_cancel() {
     return _wauthn_cancel();
   }
@@ -255,8 +287,11 @@ class Tizen100WebauthnClient {
   late final _wauthn_cancel = _wauthn_cancelPtr.asFunction<int Function()>();
 }
 
-/// @brief WebAuthn Errors.
-/// @since_tizen 7.0
+/// WebAuthn Errors.
+///
+/// **Since Tizen:**
+/// - 7.0
+/// @nodoc
 abstract class wauthn_error_e {
   /// < Successful
   static const int WAUTHN_ERROR_NONE = 0;
@@ -307,13 +342,16 @@ abstract class wauthn_error_e {
   static const int WAUTHN_ERROR_ACCESS_DENIED = -51380217;
 }
 
-/// @brief WebAuthn authenticator transports.
-/// @since_tizen 7.0
+/// WebAuthn authenticator transports.
 ///
-/// @remarks Refer to the following W3C specification for more information.
-/// https://www.w3.org/TR/webauthn-3/#enum-transport
+/// **Since Tizen:**
+/// - 7.0
 ///
-/// @remarks Multiple transport values can be combined using bit-wise operation.
+/// **Remarks:**
+/// - Refer to the following W3C specification for more information.
+/// - <https://www.w3.org/TR/webauthn-3/`enum`-transport>
+/// - Multiple transport values can be combined using bit-wise operation.
+/// @nodoc
 abstract class wauthn_authenticator_transport {
   /// < No transport specified
   static const int WAUTHN_TRANSPORT_NONE = 0;
@@ -337,22 +375,29 @@ abstract class wauthn_authenticator_transport {
   static const int WAUTHN_TRANSPORT_INTERNAL = 32;
 }
 
-/// @brief WebAuthn hash algorithms.
-/// Currently one hash algorithm is used, namely "SHA-256".
-/// @since_tizen 7.0
+/// WebAuthn hash algorithms. Currently one hash algorithm is used, namely "SHA-256".
 ///
-/// @remarks Refer to the following W3C specification for more information.
-/// https://www.w3.org/TR/webauthn-3/#collectedclientdata-hash-of-the-serialized-client-data
+/// **Since Tizen:**
+/// - 7.0
+///
+/// **Remarks:**
+/// - Refer to the following W3C specification for more information.
+/// - <https://www.w3.org/TR/webauthn-3/`collectedclientdata`-hash-of-the-serialized-client-data>
+/// @nodoc
 abstract class wauthn_hash_algorithm {
   /// < SHA-256
   static const int WAUTHN_HASH_ALGORITHM_SHA_256 = 1;
 }
 
-/// @brief WebAuthn COSE (CBOR Object Signing and Encryption) algorithms.
-/// @since_tizen 7.0
+/// WebAuthn COSE (CBOR Object Signing and Encryption) algorithms.
 ///
-/// @remarks Refer to the following W3C specification for more information.
-/// https://www.w3.org/TR/webauthn-3/#sctn-alg-identifier
+/// **Since Tizen:**
+/// - 7.0
+///
+/// **Remarks:**
+/// - Refer to the following W3C specification for more information.
+/// - <https://www.w3.org/TR/webauthn-3/`sctn`-alg-identifier>
+/// @nodoc
 abstract class wauthn_cose_algorithm {
   /// < ES256
   static const int WAUTHN_COSE_ALGORITHM_ECDSA_P256_WITH_SHA256 = -7;
@@ -385,11 +430,15 @@ abstract class wauthn_cose_algorithm {
   static const int WAUTHN_COSE_ALGORITHM_RSASSA_PKCS1_V1_5_WITH_SHA512 = -259;
 }
 
-/// @brief WebAuthn attestation preference.
-/// @since_tizen 7.0
+/// WebAuthn attestation preference.
 ///
-/// @remarks Refer to the following W3C specification for more information.
-/// https://www.w3.org/TR/webauthn-3/#enumdef-attestationconveyancepreference
+/// **Since Tizen:**
+/// - 7.0
+///
+/// **Remarks:**
+/// - Refer to the following W3C specification for more information.
+/// - <https://www.w3.org/TR/webauthn-3/`enumdef`-attestationconveyancepreference>
+/// @nodoc
 abstract class wauthn_attestation_pref {
   /// < None
   static const int WAUTHN_ATTESTATION_PREF_NONE = 0;
@@ -404,11 +453,15 @@ abstract class wauthn_attestation_pref {
   static const int WAUTHN_ATTESTATION_PREF_ENTERPRISE = 3;
 }
 
-/// @brief WebAuthn public key credential hint value.
-/// @since_tizen 7.0
+/// WebAuthn public key credential hint value.
 ///
-/// @remarks Refer to the following W3C specification for more information.
-/// https://www.w3.org/TR/webauthn-3/#enumdef-publickeycredentialhints
+/// **Since Tizen:**
+/// - 7.0
+///
+/// **Remarks:**
+/// - Refer to the following W3C specification for more information.
+/// - <https://www.w3.org/TR/webauthn-3/`enumdef`-publickeycredentialhints>
+/// @nodoc
 abstract class wauthn_pubkey_cred_hint {
   /// < None
   static const int WAUTHN_PUBKEY_CRED_HINT_NONE = 0;
@@ -423,11 +476,15 @@ abstract class wauthn_pubkey_cred_hint {
   static const int WAUTHN_PUBKEY_CRED_HINT_HYBRID = 3;
 }
 
-/// @brief WebAuthn user verification requirement value.
-/// @since_tizen 7.0
+/// WebAuthn user verification requirement value.
 ///
-/// @remarks Refer to the following W3C specification for more information.
-/// https://www.w3.org/TR/webauthn-3/#enumdef-userverificationrequirement
+/// **Since Tizen:**
+/// - 7.0
+///
+/// **Remarks:**
+/// - Refer to the following W3C specification for more information.
+/// - <https://www.w3.org/TR/webauthn-3/`enumdef`-userverificationrequirement>
+/// @nodoc
 abstract class wauthn_user_verification_requirement {
   /// < None
   static const int WAUTHN_USER_VERIFICATION_REQUIREMENT_NONE = 0;
@@ -442,11 +499,15 @@ abstract class wauthn_user_verification_requirement {
   static const int WAUTHN_USER_VERIFICATION_REQUIREMENT_DISCOURAGED = 3;
 }
 
-/// @brief WebAuthn resident key requirement value.
-/// @since_tizen 7.0
+/// WebAuthn resident key requirement value.
 ///
-/// @remarks Refer to the following W3C specification for more information.
-/// https://www.w3.org/TR/webauthn-3/#enum-residentKeyRequirement
+/// **Since Tizen:**
+/// - 7.0
+///
+/// **Remarks:**
+/// - Refer to the following W3C specification for more information.
+/// - <https://www.w3.org/TR/webauthn-3/`enum`-residentKeyRequirement>
+/// @nodoc
 abstract class wauthn_resident_key_requirement {
   /// < None
   static const int WAUTHN_RESIDENT_KEY_REQUIREMENT_NONE = 0;
@@ -461,11 +522,15 @@ abstract class wauthn_resident_key_requirement {
   static const int WAUTHN_RESIDENT_KEY_REQUIREMENT_REQUIRED = 3;
 }
 
-/// @brief WebAuthn authentication attachment value.
-/// @since_tizen 7.0
+/// WebAuthn authentication attachment value.
 ///
-/// @remarks Refer to the following W3C specification for more information.
-/// https://www.w3.org/TR/webauthn-3/#enumdef-authenticatorattachment
+/// **Since Tizen:**
+/// - 7.0
+///
+/// **Remarks:**
+/// - Refer to the following W3C specification for more information.
+/// - <https://www.w3.org/TR/webauthn-3/`enumdef`-authenticatorattachment>
+/// @nodoc
 abstract class wauthn_authenticator_attachment {
   /// < None
   static const int WAUTHN_AUTHENTICATOR_ATTACHMENT_NONE = 0;
@@ -477,19 +542,25 @@ abstract class wauthn_authenticator_attachment {
   static const int WAUTHN_AUTHENTICATOR_ATTACHMENT_CROSS_PLATFORM = 2;
 }
 
-/// @brief WebAuthn credential type.
-/// Currently one credential type is defined, namely "public-key".
-/// @since_tizen 7.0
+/// WebAuthn credential type. Currently one credential type is defined, namely "public-key".
 ///
-/// @remarks Refer to the following W3C specification for more information.
-/// https://www.w3.org/TR/webauthn-3/#enumdef-publickeycredentialtype
+/// **Since Tizen:**
+/// - 7.0
+///
+/// **Remarks:**
+/// - Refer to the following W3C specification for more information.
+/// - <https://www.w3.org/TR/webauthn-3/`enumdef`-publickeycredentialtype>
+/// @nodoc
 abstract class wauthn_pubkey_cred_type {
   /// < Public-key
   static const int WAUTHN_PUBKEY_CRED_TYPE_PUBLIC_KEY = 1;
 }
 
-/// @brief The structure for const binary buffer used in this Native API.
-/// @since_tizen 7.0
+/// The structure for const binary buffer used in this Native API.
+///
+/// **Since Tizen:**
+/// - 7.0
+/// @nodoc
 final class __wauthn_const_buffer extends ffi.Struct {
   /// <
   /// Byte array containing binary data
@@ -501,16 +572,21 @@ final class __wauthn_const_buffer extends ffi.Struct {
   external int size;
 }
 
-/// @brief The structure for response of wauthn_make_credential().
-/// @since_tizen 7.0
+/// The structure for response of wauthn_make_credential().
 ///
-/// @remarks Refer to the following W3C specification for more information.
-/// https://www.w3.org/TR/webauthn-3/#authenticatorattestationresponse
+/// **Since Tizen:**
+/// - 7.0
 ///
-/// @see wauthn_make_credential()
-/// @see #wauthn_pubkey_credential_attestation_s
-/// @see #wauthn_authenticator_transport_e
-/// @see #wauthn_cose_algorithm_e
+/// **Remarks:**
+/// - Refer to the following W3C specification for more information.
+/// - <https://www.w3.org/TR/webauthn-3/`authenticatorattestationresponse`>
+///
+/// **See also:**
+/// - `wauthn_make_credential()`
+/// - `wauthn_pubkey_credential_attestation_s`
+/// - `wauthn_authenticator_transport_e`
+/// - `wauthn_cose_algorithm_e`
+/// @nodoc
 final class __wauthn_authenticator_attestation_response extends ffi.Struct {
   /// <
   /// JSON-compatible serialization of client data
@@ -542,18 +618,26 @@ final class __wauthn_authenticator_attestation_response extends ffi.Struct {
   external int pubkey_alg;
 }
 
-/// @brief The structure for const binary buffer used in this Native API.
-/// @since_tizen 7.0
+/// The structure for const binary buffer used in this Native API.
+///
+/// **Since Tizen:**
+/// - 7.0
+/// @nodoc
 typedef wauthn_const_buffer_s = __wauthn_const_buffer;
 
-/// @brief The structure for response of wauthn_get_assertion().
-/// @since_tizen 7.0
+/// The structure for response of wauthn_get_assertion().
 ///
-/// @remarks Refer to the following W3C specification for more information.
-/// https://www.w3.org/TR/webauthn-3/#authenticatorassertionresponse
+/// **Since Tizen:**
+/// - 7.0
 ///
-/// @see wauthn_get_assertion()
-/// @see #wauthn_pubkey_credential_assertion_s
+/// **Remarks:**
+/// - Refer to the following W3C specification for more information.
+/// - <https://www.w3.org/TR/webauthn-3/`authenticatorassertionresponse`>
+///
+/// **See also:**
+/// - `wauthn_get_assertion()`
+/// - `wauthn_pubkey_credential_assertion_s`
+/// @nodoc
 final class __wauthn_authenticator_assertion_response extends ffi.Struct {
   /// <
   /// JSON-compatible serialization of client data
@@ -580,11 +664,15 @@ final class __wauthn_authenticator_assertion_response extends ffi.Struct {
   external ffi.Pointer<wauthn_const_buffer_s> attestation_object;
 }
 
-/// @brief The structure for a RP entity.
-/// @since_tizen 7.0
+/// The structure for a RP entity.
 ///
-/// @remarks Refer to the following W3C specification for more information.
-/// https://www.w3.org/TR/webauthn-3/#dictdef-publickeycredentialrpentity
+/// **Since Tizen:**
+/// - 7.0
+///
+/// **Remarks:**
+/// - Refer to the following W3C specification for more information.
+/// - <https://www.w3.org/TR/webauthn-3/`dictdef`-publickeycredentialrpentity>
+/// @nodoc
 final class __wauthn_rp_entity extends ffi.Struct {
   /// <
   /// The name of RP
@@ -595,11 +683,15 @@ final class __wauthn_rp_entity extends ffi.Struct {
   external ffi.Pointer<ffi.Char> id;
 }
 
-/// @brief The structure for a user entity.
-/// @since_tizen 7.0
+/// The structure for a user entity.
 ///
-/// @remarks Refer to the following W3C specification for more information.
-/// https://www.w3.org/TR/webauthn-3/#dictdef-publickeycredentialuserentity
+/// **Since Tizen:**
+/// - 7.0
+///
+/// **Remarks:**
+/// - Refer to the following W3C specification for more information.
+/// - <https://www.w3.org/TR/webauthn-3/`dictdef`-publickeycredentialuserentity>
+/// @nodoc
 final class __wauthn_user_entity extends ffi.Struct {
   /// < A human-palatable name for the entity.
   external ffi.Pointer<ffi.Char> name;
@@ -614,14 +706,19 @@ final class __wauthn_user_entity extends ffi.Struct {
   external ffi.Pointer<ffi.Char> display_name;
 }
 
-/// @brief The structure for a parameter for credential generation.
-/// @since_tizen 7.0
+/// The structure for a parameter for credential generation.
 ///
-/// @remarks Refer to the following W3C specification for more information.
-/// https://www.w3.org/TR/webauthn-3/#dictdef-publickeycredentialparameters
+/// **Since Tizen:**
+/// - 7.0
 ///
-/// @see #wauthn_pubkey_cred_type_e
-/// @see #wauthn_cose_algorithm_e
+/// **Remarks:**
+/// - Refer to the following W3C specification for more information.
+/// - <https://www.w3.org/TR/webauthn-3/`dictdef`-publickeycredentialparameters>
+///
+/// **See also:**
+/// - `wauthn_pubkey_cred_type_e`
+/// - `wauthn_cose_algorithm_e`
+/// @nodoc
 final class __wauthn_pubkey_cred_param extends ffi.Struct {
   /// <
   /// Well-known credential type specifying a credential to create
@@ -634,9 +731,14 @@ final class __wauthn_pubkey_cred_param extends ffi.Struct {
   external int alg;
 }
 
-/// @brief The list structure for parameters for credential generation.
-/// @since_tizen 7.0
-/// @see #wauthn_pubkey_cred_param_s
+/// The list structure for parameters for credential generation.
+///
+/// **Since Tizen:**
+/// - 7.0
+///
+/// **See also:**
+/// - `wauthn_pubkey_cred_param_s`
+/// @nodoc
 final class __wauthn_pubkey_cred_params extends ffi.Struct {
   /// <
   /// The number of params
@@ -648,24 +750,34 @@ final class __wauthn_pubkey_cred_params extends ffi.Struct {
   external ffi.Pointer<wauthn_pubkey_cred_param_s> params;
 }
 
-/// @brief The structure for a parameter for credential generation.
-/// @since_tizen 7.0
+/// The structure for a parameter for credential generation.
 ///
-/// @remarks Refer to the following W3C specification for more information.
-/// https://www.w3.org/TR/webauthn-3/#dictdef-publickeycredentialparameters
+/// **Since Tizen:**
+/// - 7.0
 ///
-/// @see #wauthn_pubkey_cred_type_e
-/// @see #wauthn_cose_algorithm_e
+/// **Remarks:**
+/// - Refer to the following W3C specification for more information.
+/// - <https://www.w3.org/TR/webauthn-3/`dictdef`-publickeycredentialparameters>
+///
+/// **See also:**
+/// - `wauthn_pubkey_cred_type_e`
+/// - `wauthn_cose_algorithm_e`
+/// @nodoc
 typedef wauthn_pubkey_cred_param_s = __wauthn_pubkey_cred_param;
 
-/// @brief The structure for a public key credential descriptor.
-/// @since_tizen 7.0
+/// The structure for a public key credential descriptor.
 ///
-/// @remarks Refer to the following W3C specification for more information.
-/// https://www.w3.org/TR/webauthn-3/#dictdef-publickeycredentialdescriptor
+/// **Since Tizen:**
+/// - 7.0
 ///
-/// @see #wauthn_pubkey_cred_type_e
-/// @see #wauthn_authenticator_transport_e
+/// **Remarks:**
+/// - Refer to the following W3C specification for more information.
+/// - <https://www.w3.org/TR/webauthn-3/`dictdef`-publickeycredentialdescriptor>
+///
+/// **See also:**
+/// - `wauthn_pubkey_cred_type_e`
+/// - `wauthn_authenticator_transport_e`
+/// @nodoc
 final class __wauthn_pubkey_cred_descriptor extends ffi.Struct {
   /// <
   /// The type of the public key credential
@@ -682,9 +794,14 @@ final class __wauthn_pubkey_cred_descriptor extends ffi.Struct {
   external int transports;
 }
 
-/// @brief The list structure for public key credential descriptors.
-/// @since_tizen 7.0
-/// @see #wauthn_pubkey_cred_descriptor_s
+/// The list structure for public key credential descriptors.
+///
+/// **Since Tizen:**
+/// - 7.0
+///
+/// **See also:**
+/// - `wauthn_pubkey_cred_descriptor_s`
+/// @nodoc
 final class __wauthn_pubkey_cred_descriptors extends ffi.Struct {
   /// <
   /// The number of descriptors
@@ -696,19 +813,29 @@ final class __wauthn_pubkey_cred_descriptors extends ffi.Struct {
   external ffi.Pointer<wauthn_pubkey_cred_descriptor_s> descriptors;
 }
 
-/// @brief The structure for a public key credential descriptor.
-/// @since_tizen 7.0
+/// The structure for a public key credential descriptor.
 ///
-/// @remarks Refer to the following W3C specification for more information.
-/// https://www.w3.org/TR/webauthn-3/#dictdef-publickeycredentialdescriptor
+/// **Since Tizen:**
+/// - 7.0
 ///
-/// @see #wauthn_pubkey_cred_type_e
-/// @see #wauthn_authenticator_transport_e
+/// **Remarks:**
+/// - Refer to the following W3C specification for more information.
+/// - <https://www.w3.org/TR/webauthn-3/`dictdef`-publickeycredentialdescriptor>
+///
+/// **See also:**
+/// - `wauthn_pubkey_cred_type_e`
+/// - `wauthn_authenticator_transport_e`
+/// @nodoc
 typedef wauthn_pubkey_cred_descriptor_s = __wauthn_pubkey_cred_descriptor;
 
-/// @brief The structure for an authentication extension.
-/// @since_tizen 7.0
-/// @see #wauthn_authentication_exts_s
+/// The structure for an authentication extension.
+///
+/// **Since Tizen:**
+/// - 7.0
+///
+/// **See also:**
+/// - `wauthn_authentication_exts_s`
+/// @nodoc
 final class __wauthn_authentication_ext extends ffi.Struct {
   /// <
   /// Extension Identifier defined in the following registry.
@@ -720,13 +847,18 @@ final class __wauthn_authentication_ext extends ffi.Struct {
   external ffi.Pointer<wauthn_const_buffer_s> extension_value;
 }
 
-/// @brief The list structure for authentication extensions.
-/// @since_tizen 7.0
+/// The list structure for authentication extensions.
 ///
-/// @remarks Refer to the following W3C specification for more information.
-/// https://www.w3.org/TR/webauthn-3/#client-extension-input
+/// **Since Tizen:**
+/// - 7.0
 ///
-/// @see #wauthn_authentication_ext_s
+/// **Remarks:**
+/// - Refer to the following W3C specification for more information.
+/// - <https://www.w3.org/TR/webauthn-3/`client`-extension-input>
+///
+/// **See also:**
+/// - `wauthn_authentication_ext_s`
+/// @nodoc
 final class __wauthn_authentication_exts extends ffi.Struct {
   /// <
   /// The number of extensions
@@ -738,20 +870,30 @@ final class __wauthn_authentication_exts extends ffi.Struct {
   external ffi.Pointer<wauthn_authentication_ext_s> extensions;
 }
 
-/// @brief The structure for an authentication extension.
-/// @since_tizen 7.0
-/// @see #wauthn_authentication_exts_s
+/// The structure for an authentication extension.
+///
+/// **Since Tizen:**
+/// - 7.0
+///
+/// **See also:**
+/// - `wauthn_authentication_exts_s`
+/// @nodoc
 typedef wauthn_authentication_ext_s = __wauthn_authentication_ext;
 
-/// @brief The structure for an authenticator selection criteria.
-/// @since_tizen 7.0
+/// The structure for an authenticator selection criteria.
 ///
-/// @remarks Refer to the following W3C specification for more information.
-/// https://www.w3.org/TR/webauthn-3/#dictdef-authenticatorselectioncriteria
+/// **Since Tizen:**
+/// - 7.0
 ///
-/// @see #wauthn_authenticator_attachment_e
-/// @see #wauthn_resident_key_requirement_e
-/// @see #wauthn_user_verification_requirement_e
+/// **Remarks:**
+/// - Refer to the following W3C specification for more information.
+/// - <https://www.w3.org/TR/webauthn-3/`dictdef`-authenticatorselectioncriteria>
+///
+/// **See also:**
+/// - `wauthn_authenticator_attachment_e`
+/// - `wauthn_resident_key_requirement_e`
+/// - `wauthn_user_verification_requirement_e`
+/// @nodoc
 final class __wauthn_authenticator_sel_cri extends ffi.Struct {
   /// <
   /// Authenticator attachment modality
@@ -774,9 +916,14 @@ final class __wauthn_authenticator_sel_cri extends ffi.Struct {
   external int user_verification;
 }
 
-/// @brief The list structure for public key credential hints.
-/// @since_tizen 7.0
-/// @see #wauthn_pubkey_cred_hint_e
+/// The list structure for public key credential hints.
+///
+/// **Since Tizen:**
+/// - 7.0
+///
+/// **See also:**
+/// - `wauthn_pubkey_cred_hint_e`
+/// @nodoc
 final class __wauthn_pubkey_cred_hints extends ffi.Struct {
   /// <
   /// The number of hints
@@ -788,23 +935,25 @@ final class __wauthn_pubkey_cred_hints extends ffi.Struct {
   external ffi.Pointer<ffi.Int32> hints;
 }
 
-/// @brief The structure for a linked device data.
-/// @since_tizen 7.0
+/// The structure for a linked device data.
 ///
-/// @remarks The linked device data is used for state assisted transaction.
-/// From the successful QR initiated transaction, the linked device data
-/// might be returned from an authenticator to a webauthn client
-/// via #wauthn_pubkey_credential_attestation_s or #wauthn_pubkey_credential_assertion_s.
-/// Then the client can store the linked device data and use it in the next call
-/// for #wauthn_pubkey_cred_creation_options_s or #wauthn_pubkey_cred_request_options_s.
-/// Then the stated assisted transaction will start instead of QR initiated transaction.
+/// **Since Tizen:**
+/// - 7.0
 ///
-/// @remarks For more information, find a section with the keyword, "linking map",
-/// from the following specification.
-/// https://fidoalliance.org/specs/fido-v2.2-rd-20230321/fido-client-to-authenticator-protocol-v2.2-rd-20230321.html
-///
-/// @remarks For more information about state assisted transaction, refer to the following.
-/// https://fidoalliance.org/specs/fido-v2.2-rd-20230321/fido-client-to-authenticator-protocol-v2.2-rd-20230321.html#hybrid-state-assisted
+/// **Remarks:**
+/// - The linked device data is used for state assisted transaction.
+/// - From the successful QR initiated transaction, the linked device data
+/// - might be returned from an authenticator to a webauthn client
+/// - via `wauthn_pubkey_credential_attestation_s` or `wauthn_pubkey_credential_assertion_s`.
+/// - Then the client can store the linked device data and use it in the next call
+/// - for `wauthn_pubkey_cred_creation_options_s` or `wauthn_pubkey_cred_request_options_s`.
+/// - Then the stated assisted transaction will start instead of QR initiated transaction.
+/// - For more information, find a section with the keyword, "linking map",
+/// - from the following specification.
+/// - <https://fidoalliance.org/specs/fido-v2.2-rd-20230321/fido-client-to-authenticator-protocol-v2.2-rd-20230321.html>
+/// - For more information about state assisted transaction, refer to the following.
+/// - <https://fidoalliance.org/specs/fido-v2.2-rd-20230321/fido-client-to-authenticator-protocol-v2.2-rd-20230321.html`hybrid`-state-assisted>
+/// @nodoc
 final class __wauthn_hybrid_linked_data extends ffi.Struct {
   /// < CBOR:"1"
   external ffi.Pointer<wauthn_const_buffer_s> contact_id;
@@ -831,17 +980,20 @@ final class __wauthn_hybrid_linked_data extends ffi.Struct {
   external ffi.Pointer<wauthn_const_buffer_s> identity_key;
 }
 
-/// @brief The list structure for attestation formats.
-/// @since_tizen 7.0
+/// The list structure for attestation formats.
 ///
-/// @remarks The attestation formats are a sequence of strings that expresses
-/// the Relying Party's preference for attestation statement formats,
-/// from most to least preferable.
-/// @remarks Each #wauthn_const_buffer_s has a string of an attestation format
-/// such as packed, android-key, fido-u2f, apple, none, and so on.
+/// **Since Tizen:**
+/// - 7.0
 ///
-/// @remarks Refer to the following W3C specification for more information.
-/// https://www.w3.org/TR/webauthn-3/#attestation-statement-format-identifier
+/// **Remarks:**
+/// - The attestation formats are a sequence of strings that expresses
+/// - the Relying Party's preference for attestation statement formats,
+/// - from most to least preferable.
+/// - Each `wauthn_const_buffer_s` has a string of an attestation format
+/// - such as packed, android-key, fido-u2f, apple, none, and so on.
+/// - Refer to the following W3C specification for more information.
+/// - <https://www.w3.org/TR/webauthn-3/`attestation`-statement-format-identifier>
+/// @nodoc
 final class __wauthn_attestation_formats extends ffi.Struct {
   /// <
   /// The number of attestation_formats
@@ -853,23 +1005,28 @@ final class __wauthn_attestation_formats extends ffi.Struct {
   external ffi.Pointer<wauthn_const_buffer_s> attestation_formats;
 }
 
-/// @brief The structure for a make credential option.
-/// @since_tizen 7.0
+/// The structure for a make credential option.
 ///
-/// @remarks Refer to the following W3C specification for more information.
-/// https://www.w3.org/TR/webauthn-3/#dictdef-publickeycredentialcreationoptions
+/// **Since Tizen:**
+/// - 7.0
 ///
-/// @see wauthn_make_credential()
-/// @see #wauthn_rp_entity_s
-/// @see #wauthn_user_entity_s
-/// @see #wauthn_pubkey_cred_params_s
-/// @see #wauthn_pubkey_cred_descriptors_s
-/// @see #wauthn_authenticator_sel_cri_s
-/// @see #wauthn_pubkey_cred_hints_s
-/// @see #wauthn_attestation_pref_e
-/// @see #wauthn_attestation_formats_s
-/// @see #wauthn_authentication_exts_s
-/// @see #wauthn_hybrid_linked_data_s
+/// **Remarks:**
+/// - Refer to the following W3C specification for more information.
+/// - <https://www.w3.org/TR/webauthn-3/`dictdef`-publickeycredentialcreationoptions>
+///
+/// **See also:**
+/// - `wauthn_make_credential()`
+/// - `wauthn_rp_entity_s`
+/// - `wauthn_user_entity_s`
+/// - `wauthn_pubkey_cred_params_s`
+/// - `wauthn_pubkey_cred_descriptors_s`
+/// - `wauthn_authenticator_sel_cri_s`
+/// - `wauthn_pubkey_cred_hints_s`
+/// - `wauthn_attestation_pref_e`
+/// - `wauthn_attestation_formats_s`
+/// - `wauthn_authentication_exts_s`
+/// - `wauthn_hybrid_linked_data_s`
+/// @nodoc
 final class __wauthn_pubkey_cred_creation_options extends ffi.Struct {
   /// < This member contains a name and
   /// an identifier for the Relying Party responsible for the request
@@ -927,101 +1084,144 @@ final class __wauthn_pubkey_cred_creation_options extends ffi.Struct {
   external ffi.Pointer<wauthn_hybrid_linked_data_s> linked_device;
 }
 
-/// @brief The structure for a RP entity.
-/// @since_tizen 7.0
+/// The structure for a RP entity.
 ///
-/// @remarks Refer to the following W3C specification for more information.
-/// https://www.w3.org/TR/webauthn-3/#dictdef-publickeycredentialrpentity
+/// **Since Tizen:**
+/// - 7.0
+///
+/// **Remarks:**
+/// - Refer to the following W3C specification for more information.
+/// - <https://www.w3.org/TR/webauthn-3/`dictdef`-publickeycredentialrpentity>
+/// @nodoc
 typedef wauthn_rp_entity_s = __wauthn_rp_entity;
 
-/// @brief The structure for a user entity.
-/// @since_tizen 7.0
+/// The structure for a user entity.
 ///
-/// @remarks Refer to the following W3C specification for more information.
-/// https://www.w3.org/TR/webauthn-3/#dictdef-publickeycredentialuserentity
+/// **Since Tizen:**
+/// - 7.0
+///
+/// **Remarks:**
+/// - Refer to the following W3C specification for more information.
+/// - <https://www.w3.org/TR/webauthn-3/`dictdef`-publickeycredentialuserentity>
+/// @nodoc
 typedef wauthn_user_entity_s = __wauthn_user_entity;
 
-/// @brief The list structure for parameters for credential generation.
-/// @since_tizen 7.0
-/// @see #wauthn_pubkey_cred_param_s
+/// The list structure for parameters for credential generation.
+///
+/// **Since Tizen:**
+/// - 7.0
+///
+/// **See also:**
+/// - `wauthn_pubkey_cred_param_s`
+/// @nodoc
 typedef wauthn_pubkey_cred_params_s = __wauthn_pubkey_cred_params;
 
-/// @brief The list structure for public key credential descriptors.
-/// @since_tizen 7.0
-/// @see #wauthn_pubkey_cred_descriptor_s
+/// The list structure for public key credential descriptors.
+///
+/// **Since Tizen:**
+/// - 7.0
+///
+/// **See also:**
+/// - `wauthn_pubkey_cred_descriptor_s`
+/// @nodoc
 typedef wauthn_pubkey_cred_descriptors_s = __wauthn_pubkey_cred_descriptors;
 
-/// @brief The structure for an authenticator selection criteria.
-/// @since_tizen 7.0
+/// The structure for an authenticator selection criteria.
 ///
-/// @remarks Refer to the following W3C specification for more information.
-/// https://www.w3.org/TR/webauthn-3/#dictdef-authenticatorselectioncriteria
+/// **Since Tizen:**
+/// - 7.0
 ///
-/// @see #wauthn_authenticator_attachment_e
-/// @see #wauthn_resident_key_requirement_e
-/// @see #wauthn_user_verification_requirement_e
+/// **Remarks:**
+/// - Refer to the following W3C specification for more information.
+/// - <https://www.w3.org/TR/webauthn-3/`dictdef`-authenticatorselectioncriteria>
+///
+/// **See also:**
+/// - `wauthn_authenticator_attachment_e`
+/// - `wauthn_resident_key_requirement_e`
+/// - `wauthn_user_verification_requirement_e`
+/// @nodoc
 typedef wauthn_authenticator_sel_cri_s = __wauthn_authenticator_sel_cri;
 
-/// @brief The list structure for public key credential hints.
-/// @since_tizen 7.0
-/// @see #wauthn_pubkey_cred_hint_e
+/// The list structure for public key credential hints.
+///
+/// **Since Tizen:**
+/// - 7.0
+///
+/// **See also:**
+/// - `wauthn_pubkey_cred_hint_e`
+/// @nodoc
 typedef wauthn_pubkey_cred_hints_s = __wauthn_pubkey_cred_hints;
 
-/// @brief The list structure for attestation formats.
-/// @since_tizen 7.0
+/// The list structure for attestation formats.
 ///
-/// @remarks The attestation formats are a sequence of strings that expresses
-/// the Relying Party's preference for attestation statement formats,
-/// from most to least preferable.
-/// @remarks Each #wauthn_const_buffer_s has a string of an attestation format
-/// such as packed, android-key, fido-u2f, apple, none, and so on.
+/// **Since Tizen:**
+/// - 7.0
 ///
-/// @remarks Refer to the following W3C specification for more information.
-/// https://www.w3.org/TR/webauthn-3/#attestation-statement-format-identifier
+/// **Remarks:**
+/// - The attestation formats are a sequence of strings that expresses
+/// - the Relying Party's preference for attestation statement formats,
+/// - from most to least preferable.
+/// - Each `wauthn_const_buffer_s` has a string of an attestation format
+/// - such as packed, android-key, fido-u2f, apple, none, and so on.
+/// - Refer to the following W3C specification for more information.
+/// - <https://www.w3.org/TR/webauthn-3/`attestation`-statement-format-identifier>
+/// @nodoc
 typedef wauthn_attestation_formats_s = __wauthn_attestation_formats;
 
-/// @brief The list structure for authentication extensions.
-/// @since_tizen 7.0
+/// The list structure for authentication extensions.
 ///
-/// @remarks Refer to the following W3C specification for more information.
-/// https://www.w3.org/TR/webauthn-3/#client-extension-input
+/// **Since Tizen:**
+/// - 7.0
 ///
-/// @see #wauthn_authentication_ext_s
+/// **Remarks:**
+/// - Refer to the following W3C specification for more information.
+/// - <https://www.w3.org/TR/webauthn-3/`client`-extension-input>
+///
+/// **See also:**
+/// - `wauthn_authentication_ext_s`
+/// @nodoc
 typedef wauthn_authentication_exts_s = __wauthn_authentication_exts;
 
-/// @brief The structure for a linked device data.
-/// @since_tizen 7.0
+/// The structure for a linked device data.
 ///
-/// @remarks The linked device data is used for state assisted transaction.
-/// From the successful QR initiated transaction, the linked device data
-/// might be returned from an authenticator to a webauthn client
-/// via #wauthn_pubkey_credential_attestation_s or #wauthn_pubkey_credential_assertion_s.
-/// Then the client can store the linked device data and use it in the next call
-/// for #wauthn_pubkey_cred_creation_options_s or #wauthn_pubkey_cred_request_options_s.
-/// Then the stated assisted transaction will start instead of QR initiated transaction.
+/// **Since Tizen:**
+/// - 7.0
 ///
-/// @remarks For more information, find a section with the keyword, "linking map",
-/// from the following specification.
-/// https://fidoalliance.org/specs/fido-v2.2-rd-20230321/fido-client-to-authenticator-protocol-v2.2-rd-20230321.html
-///
-/// @remarks For more information about state assisted transaction, refer to the following.
-/// https://fidoalliance.org/specs/fido-v2.2-rd-20230321/fido-client-to-authenticator-protocol-v2.2-rd-20230321.html#hybrid-state-assisted
+/// **Remarks:**
+/// - The linked device data is used for state assisted transaction.
+/// - From the successful QR initiated transaction, the linked device data
+/// - might be returned from an authenticator to a webauthn client
+/// - via `wauthn_pubkey_credential_attestation_s` or `wauthn_pubkey_credential_assertion_s`.
+/// - Then the client can store the linked device data and use it in the next call
+/// - for `wauthn_pubkey_cred_creation_options_s` or `wauthn_pubkey_cred_request_options_s`.
+/// - Then the stated assisted transaction will start instead of QR initiated transaction.
+/// - For more information, find a section with the keyword, "linking map",
+/// - from the following specification.
+/// - <https://fidoalliance.org/specs/fido-v2.2-rd-20230321/fido-client-to-authenticator-protocol-v2.2-rd-20230321.html>
+/// - For more information about state assisted transaction, refer to the following.
+/// - <https://fidoalliance.org/specs/fido-v2.2-rd-20230321/fido-client-to-authenticator-protocol-v2.2-rd-20230321.html`hybrid`-state-assisted>
+/// @nodoc
 typedef wauthn_hybrid_linked_data_s = __wauthn_hybrid_linked_data;
 
-/// @brief The structure for a get assertion option.
-/// @since_tizen 7.0
+/// The structure for a get assertion option.
 ///
-/// @remarks Refer to the following W3C specification for more information.
-/// https://www.w3.org/TR/webauthn-3/#dictionary-assertion-options
+/// **Since Tizen:**
+/// - 7.0
 ///
-/// @see wauthn_get_assertion()
-/// @see #wauthn_pubkey_cred_descriptors_s
-/// @see #wauthn_user_verification_requirement_e
-/// @see #wauthn_pubkey_cred_hints_s
-/// @see #wauthn_attestation_pref_e
-/// @see #wauthn_attestation_formats_s
-/// @see #wauthn_authentication_exts_s
-/// @see #wauthn_hybrid_linked_data_s
+/// **Remarks:**
+/// - Refer to the following W3C specification for more information.
+/// - <https://www.w3.org/TR/webauthn-3/`dictionary`-assertion-options>
+///
+/// **See also:**
+/// - `wauthn_get_assertion()`
+/// - `wauthn_pubkey_cred_descriptors_s`
+/// - `wauthn_user_verification_requirement_e`
+/// - `wauthn_pubkey_cred_hints_s`
+/// - `wauthn_attestation_pref_e`
+/// - `wauthn_attestation_formats_s`
+/// - `wauthn_authentication_exts_s`
+/// - `wauthn_hybrid_linked_data_s`
+/// @nodoc
 final class __wauthn_pubkey_cred_request_options extends ffi.Struct {
   /// < This member specifies a time, in milliseconds,
   /// that the Relying Party is willing to wait for the call to complete.
@@ -1071,19 +1271,24 @@ final class __wauthn_pubkey_cred_request_options extends ffi.Struct {
   external ffi.Pointer<wauthn_hybrid_linked_data_s> linked_device;
 }
 
-/// @brief The structure for a publickey_credential response for wauthn_make_credential().
-/// @since_tizen 7.0
+/// The structure for a publickey_credential response for wauthn_make_credential().
 ///
-/// @remarks Refer to the following W3C specification for more information.
-/// https://www.w3.org/TR/webauthn-3/#iface-pkcredential
-/// https://www.w3.org/TR/webauthn-3/#sctn-credentialcreationoptions-extension
+/// **Since Tizen:**
+/// - 7.0
 ///
-/// @see wauthn_make_credential()
-/// @see #wauthn_pubkey_cred_type_e
-/// @see #wauthn_authenticator_attestation_response_s
-/// @see #wauthn_authenticator_attachment_e
-/// @see #wauthn_authentication_exts_s
-/// @see #wauthn_hybrid_linked_data_s
+/// **Remarks:**
+/// - Refer to the following W3C specification for more information.
+/// - <https://www.w3.org/TR/webauthn-3/`iface`-pkcredential>
+/// - <https://www.w3.org/TR/webauthn-3/`sctn`-credentialcreationoptions-extension>
+///
+/// **See also:**
+/// - `wauthn_make_credential()`
+/// - `wauthn_pubkey_cred_type_e`
+/// - `wauthn_authenticator_attestation_response_s`
+/// - `wauthn_authenticator_attachment_e`
+/// - `wauthn_authentication_exts_s`
+/// - `wauthn_hybrid_linked_data_s`
+/// @nodoc
 final class __wauthn_pubkey_credential_attestation extends ffi.Struct {
   /// <
   /// The based64url encoding of credential’s identifier.
@@ -1119,32 +1324,42 @@ final class __wauthn_pubkey_credential_attestation extends ffi.Struct {
   external ffi.Pointer<wauthn_hybrid_linked_data_s> linked_device;
 }
 
-/// @brief The structure for response of wauthn_make_credential().
-/// @since_tizen 7.0
+/// The structure for response of wauthn_make_credential().
 ///
-/// @remarks Refer to the following W3C specification for more information.
-/// https://www.w3.org/TR/webauthn-3/#authenticatorattestationresponse
+/// **Since Tizen:**
+/// - 7.0
 ///
-/// @see wauthn_make_credential()
-/// @see #wauthn_pubkey_credential_attestation_s
-/// @see #wauthn_authenticator_transport_e
-/// @see #wauthn_cose_algorithm_e
+/// **Remarks:**
+/// - Refer to the following W3C specification for more information.
+/// - <https://www.w3.org/TR/webauthn-3/`authenticatorattestationresponse`>
+///
+/// **See also:**
+/// - `wauthn_make_credential()`
+/// - `wauthn_pubkey_credential_attestation_s`
+/// - `wauthn_authenticator_transport_e`
+/// - `wauthn_cose_algorithm_e`
+/// @nodoc
 typedef wauthn_authenticator_attestation_response_s
     = __wauthn_authenticator_attestation_response;
 
-/// @brief The structure for a publickey_credential response for wauthn_get_assertion().
-/// @since_tizen 7.0
+/// The structure for a publickey_credential response for wauthn_get_assertion().
 ///
-/// @remarks Refer to the following W3C specification for more information.
-/// https://www.w3.org/TR/webauthn-3/#iface-pkcredential
-/// https://www.w3.org/TR/webauthn-3/#sctn-credentialrequestoptions-extension
+/// **Since Tizen:**
+/// - 7.0
 ///
-/// @see wauthn_get_assertion()
-/// @see #wauthn_pubkey_cred_type_e
-/// @see #wauthn_authenticator_assertion_response_s
-/// @see #wauthn_authenticator_attachment_e
-/// @see #wauthn_authentication_exts_s
-/// @see #wauthn_hybrid_linked_data_s
+/// **Remarks:**
+/// - Refer to the following W3C specification for more information.
+/// - <https://www.w3.org/TR/webauthn-3/`iface`-pkcredential>
+/// - <https://www.w3.org/TR/webauthn-3/`sctn`-credentialrequestoptions-extension>
+///
+/// **See also:**
+/// - `wauthn_get_assertion()`
+/// - `wauthn_pubkey_cred_type_e`
+/// - `wauthn_authenticator_assertion_response_s`
+/// - `wauthn_authenticator_attachment_e`
+/// - `wauthn_authentication_exts_s`
+/// - `wauthn_hybrid_linked_data_s`
+/// @nodoc
 final class __wauthn_pubkey_credential_assertion extends ffi.Struct {
   /// <
   /// The based64url encoding of credential’s identifier.
@@ -1180,24 +1395,34 @@ final class __wauthn_pubkey_credential_assertion extends ffi.Struct {
   external ffi.Pointer<wauthn_hybrid_linked_data_s> linked_device;
 }
 
-/// @brief The structure for response of wauthn_get_assertion().
-/// @since_tizen 7.0
+/// The structure for response of wauthn_get_assertion().
 ///
-/// @remarks Refer to the following W3C specification for more information.
-/// https://www.w3.org/TR/webauthn-3/#authenticatorassertionresponse
+/// **Since Tizen:**
+/// - 7.0
 ///
-/// @see wauthn_get_assertion()
-/// @see #wauthn_pubkey_credential_assertion_s
+/// **Remarks:**
+/// - Refer to the following W3C specification for more information.
+/// - <https://www.w3.org/TR/webauthn-3/`authenticatorassertionresponse`>
+///
+/// **See also:**
+/// - `wauthn_get_assertion()`
+/// - `wauthn_pubkey_credential_assertion_s`
+/// @nodoc
 typedef wauthn_authenticator_assertion_response_s
     = __wauthn_authenticator_assertion_response;
 
-/// @brief The structure for a client data JSON.
-/// @since_tizen 7.0
+/// The structure for a client data JSON.
 ///
-/// @remarks Refer to the following W3C specification about how to encode the client_data_json.
-/// https://www.w3.org/TR/webauthn-3/#collectedclientdata-json-compatible-serialization-of-client-data
+/// **Since Tizen:**
+/// - 7.0
 ///
-/// @see #wauthn_hash_algorithm_e
+/// **Remarks:**
+/// - Refer to the following W3C specification about how to encode the client_data_json.
+/// - <https://www.w3.org/TR/webauthn-3/`collectedclientdata`-json-compatible-serialization-of-client-data>
+///
+/// **See also:**
+/// - `wauthn_hash_algorithm_e`
+/// @nodoc
 final class __wauthn_client_data extends ffi.Struct {
   /// <
   /// UTF-8 encoded JSON serialization of the client data
@@ -1209,11 +1434,16 @@ final class __wauthn_client_data extends ffi.Struct {
   external int hash_alg;
 }
 
-/// @brief The structure for callback function list used to make credential.
-/// @since_tizen 7.0
-/// @see wauthn_make_credential()
-/// @see wauthn_display_qrcode_cb()
-/// @see wauthn_mc_on_response_cb()
+/// The structure for callback function list used to make credential.
+///
+/// **Since Tizen:**
+/// - 7.0
+///
+/// **See also:**
+/// - `wauthn_make_credential()`
+/// - `wauthn_display_qrcode_cb()`
+/// - `wauthn_mc_on_response_cb()`
+/// @nodoc
 final class __wauthn_mc_callbacks extends ffi.Struct {
   /// <
   /// Callback function for displaying QR code
@@ -1232,25 +1462,31 @@ final class __wauthn_mc_callbacks extends ffi.Struct {
   external ffi.Pointer<ffi.Void> user_data;
 }
 
-/// @brief Invoked when a QR Code need to be displayed.
+/// Invoked when a QR Code need to be displayed.
 ///
-/// @since_tizen 7.0
+/// **Since Tizen:**
+/// - 7.0
 ///
-/// @remarks The qr_contents are encoded as you can see in the encodeQRContents() function of the
-/// FIDO specification:
-/// https://fidoalliance.org/specs/fido-v2.2-rd-20230321/fido-client-to-authenticator-protocol-v2.2-rd-20230321.html#hybrid-qr-initiated.
-/// The qr_contents is encoded like "FIDO:/0254318383..........7406596245".
-/// @remarks The image to be displayed shall be created from qr_contents
-/// with media vision API(mv_barcode_generate_image()).
-/// @remarks If the request does not need to display a QR code
-/// then this callback function won't be invoked.
-/// @remarks The @a qr_contents can be used only in the callback. To use outside, make a copy.
+/// **Remarks:**
+/// - The qr_contents are encoded as you can see in the encodeQRContents() function of the
+/// - FIDO specification:
+/// - <https://fidoalliance.org/specs/fido-v2.2-rd-20230321/fido-client-to-authenticator-protocol-v2.2-rd-20230321.html`hybrid`-qr-initiated.>
+/// - The qr_contents is encoded like "FIDO:/0254318383..........7406596245".
+/// - The image to be displayed shall be created from qr_contents
+/// - with media vision API(mv_barcode_generate_image()).
+/// - If the request does not need to display a QR code
+/// - then this callback function won't be invoked.
+/// - The `qr_contents` can be used only in the callback. To use outside, make a copy.
 ///
-/// @param[in] qr_contents The contents of the QR code to be displayed.
-/// @param[in] user_data The user data passed from the callback structure,
-/// #wauthn_mc_callbacks_s or #wauthn_ga_callbacks_s.
+/// **Parameters:**
+/// - `qr_contents` (in): The contents of the QR code to be displayed.
+/// - `user_data` (in): The user data passed from the callback structure, `wauthn_mc_callbacks_s` or `wauthn_ga_callbacks_s`.
 ///
-/// @code
+/// **See also:**
+/// - `wauthn_mc_callbacks_s`
+/// - `wauthn_ga_callbacks_s`
+///
+/// ```
 /// #include <mv_barcode.h>
 ///
 /// int ret;
@@ -1271,102 +1507,119 @@ final class __wauthn_mc_callbacks extends ffi.Struct {
 /// std::cout << "mv_barcode_generate_image failed. ret=" << ret << std::endl;
 /// return -1;
 /// }
-/// @endcode
-///
-/// @see #wauthn_mc_callbacks_s
-/// @see #wauthn_ga_callbacks_s
+/// ```
+/// @nodoc
 typedef wauthn_display_qrcode_cb
     = ffi.Pointer<ffi.NativeFunction<wauthn_display_qrcode_cbFunction>>;
+/// @nodoc
 typedef wauthn_display_qrcode_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> qr_contents, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartwauthn_display_qrcode_cbFunction = void Function(
     ffi.Pointer<ffi.Char> qr_contents, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Invoked when the response for the make credential request need to be returned.
-/// @since_tizen 7.0
-/// @remarks The @a pubkey_cred can be used only in the callback. To use outside, make a copy.
-/// @param[in] pubkey_cred The public key credential contains response data.
-/// @param[in] result The result of the wauthn_make_credential() request.
-/// #WAUTHN_ERROR_NONE if the request is completed well,
-/// #WAUTHN_ERROR_CANCELED if the request is cancelled by wauthn_cancel() request.
-/// #WAUTHN_ERROR_INVALID_STATE if the server entered invalid state. Known causes:
-/// - proxy issues,
-/// - reached the limit of credentials stored by the authenticator.
-/// #WAUTHN_ERROR_TIMED_OUT if the request times out. Know causes:
-/// - authenticator does not respond during state assisted transactions due to
-/// lack of push notifications support (e.g. missing Google Account).
-/// @param[in] user_data The user data passed from the callback structure, #wauthn_mc_callbacks_s.
+/// Invoked when the response for the make credential request need to be returned.
 ///
-/// @see #wauthn_mc_callbacks_s
-/// @see #wauthn_pubkey_credential_attestation_s
+/// **Since Tizen:**
+/// - 7.0
+///
+/// **Remarks:**
+/// - The `pubkey_cred` can be used only in the callback. To use outside, make a copy.
+///
+/// **Parameters:**
+/// - `pubkey_cred` (in): The public key credential contains response data.
+/// - `result` (in): The result of the wauthn_make_credential() request. `WAUTHN_ERROR_NONE` if the request is completed well, `WAUTHN_ERROR_CANCELED` if the request is cancelled by wauthn_cancel() request. `WAUTHN_ERROR_INVALID_STATE` if the server entered invalid state. Known causes:
+///   - proxy issues,
+///   - reached the limit of credentials stored by the authenticator. `WAUTHN_ERROR_TIMED_OUT` if the request times out. Know causes:
+///   - authenticator does not respond during state assisted transactions due to lack of push notifications support (e.g. missing Google Account).
+/// - `user_data` (in): The user data passed from the callback structure, `wauthn_mc_callbacks_s`.
+///
+/// **See also:**
+/// - `wauthn_mc_callbacks_s`
+/// - `wauthn_pubkey_credential_attestation_s`
+/// @nodoc
 typedef wauthn_mc_on_response_cb
     = ffi.Pointer<ffi.NativeFunction<wauthn_mc_on_response_cbFunction>>;
+/// @nodoc
 typedef wauthn_mc_on_response_cbFunction = ffi.Void Function(
     ffi.Pointer<wauthn_pubkey_credential_attestation_s> pubkey_cred,
     ffi.Int32 result,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartwauthn_mc_on_response_cbFunction = void Function(
     ffi.Pointer<wauthn_pubkey_credential_attestation_s> pubkey_cred,
     int result,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief The structure for a publickey_credential response for wauthn_make_credential().
-/// @since_tizen 7.0
+/// The structure for a publickey_credential response for wauthn_make_credential().
 ///
-/// @remarks Refer to the following W3C specification for more information.
-/// https://www.w3.org/TR/webauthn-3/#iface-pkcredential
-/// https://www.w3.org/TR/webauthn-3/#sctn-credentialcreationoptions-extension
+/// **Since Tizen:**
+/// - 7.0
 ///
-/// @see wauthn_make_credential()
-/// @see #wauthn_pubkey_cred_type_e
-/// @see #wauthn_authenticator_attestation_response_s
-/// @see #wauthn_authenticator_attachment_e
-/// @see #wauthn_authentication_exts_s
-/// @see #wauthn_hybrid_linked_data_s
+/// **Remarks:**
+/// - Refer to the following W3C specification for more information.
+/// - <https://www.w3.org/TR/webauthn-3/`iface`-pkcredential>
+/// - <https://www.w3.org/TR/webauthn-3/`sctn`-credentialcreationoptions-extension>
+///
+/// **See also:**
+/// - `wauthn_make_credential()`
+/// - `wauthn_pubkey_cred_type_e`
+/// - `wauthn_authenticator_attestation_response_s`
+/// - `wauthn_authenticator_attachment_e`
+/// - `wauthn_authentication_exts_s`
+/// - `wauthn_hybrid_linked_data_s`
+/// @nodoc
 typedef wauthn_pubkey_credential_attestation_s
     = __wauthn_pubkey_credential_attestation;
 
-/// @brief Invoked when the authenticator updates its linked device data or
-/// the authenticator disconnects.
-/// @since_tizen 7.0
+/// Invoked when the authenticator updates its linked device data or the authenticator disconnects.
 ///
-/// @remarks An authenticator might send its updated linked device data to a client within 2 minutes
-/// after sending a response to the client.
-/// @remarks If an authenticator updates its linked device data,
-/// this callback is called with #WAUTHN_ERROR_NONE_AND_WAIT and not null linked_data.
-/// @remarks If an authenticator disconnects or 2 minutes have passed after receiving
-/// #wauthn_mc_on_response_cb or #wauthn_ga_on_response_cb,
-/// this callback is called with #WAUTHN_ERROR_NONE and null linked_data.
-/// @remarks The @a linked_data can be used only in the callback. To use outside, make a copy.
+/// **Since Tizen:**
+/// - 7.0
 ///
-/// @param[in] linked_data The Linked Device Connection Info.
-/// If this is not null, the client has to update the data for next use.
-/// @param[in] result The result of the request.
-/// #WAUTHN_ERROR_NONE_AND_WAIT if a update message has arrived and
-/// the client needs to wait for another message to arrive.
-/// #WAUTHN_ERROR_NONE if the client doesn't have to to wait for another message.
-/// #WAUTHN_ERROR_INVALID_STATE if the server entered invalid state. Known causes:
-/// - reached the limit of credentials stored by the authenticator.
-/// @param[in] user_data The user data passed from the callback structure, #wauthn_ga_callbacks_s.
+/// **Remarks:**
+/// - An authenticator might send its updated linked device data to a client within 2 minutes
+/// - after sending a response to the client.
+/// - If an authenticator updates its linked device data,
+/// - this callback is called with `WAUTHN_ERROR_NONE_AND_WAIT` and not null linked_data.
+/// - If an authenticator disconnects or 2 minutes have passed after receiving
+/// - `wauthn_mc_on_response_cb` or `wauthn_ga_on_response_cb`,
+/// - this callback is called with `WAUTHN_ERROR_NONE` and null linked_data.
+/// - The `linked_data` can be used only in the callback. To use outside, make a copy.
 ///
-/// @see #wauthn_ga_callbacks_s
-/// @see #wauthn_hybrid_linked_data_s
+/// **Parameters:**
+/// - `linked_data` (in): The Linked Device Connection Info. If this is not null, the client has to update the data for next use.
+/// - `result` (in): The result of the request. `WAUTHN_ERROR_NONE_AND_WAIT` if a update message has arrived and the client needs to wait for another message to arrive. `WAUTHN_ERROR_NONE` if the client doesn't have to to wait for another message. `WAUTHN_ERROR_INVALID_STATE` if the server entered invalid state. Known causes:
+///   - reached the limit of credentials stored by the authenticator.
+/// - `user_data` (in): The user data passed from the callback structure, `wauthn_ga_callbacks_s`.
+///
+/// **See also:**
+/// - `wauthn_ga_callbacks_s`
+/// - `wauthn_hybrid_linked_data_s`
+/// @nodoc
 typedef wauthn_update_linked_data_cb
     = ffi.Pointer<ffi.NativeFunction<wauthn_update_linked_data_cbFunction>>;
+/// @nodoc
 typedef wauthn_update_linked_data_cbFunction = ffi.Void Function(
     ffi.Pointer<wauthn_hybrid_linked_data_s> linked_data,
     ffi.Int32 result,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartwauthn_update_linked_data_cbFunction = void Function(
     ffi.Pointer<wauthn_hybrid_linked_data_s> linked_data,
     int result,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief The structure for callback function list used to get assertion.
-/// @since_tizen 7.0
-/// @see wauthn_get_assertion()
-/// @see wauthn_display_qrcode_cb()
-/// @see wauthn_ga_on_response_cb()
+/// The structure for callback function list used to get assertion.
+///
+/// **Since Tizen:**
+/// - 7.0
+///
+/// **See also:**
+/// - `wauthn_get_assertion()`
+/// - `wauthn_display_qrcode_cb()`
+/// - `wauthn_ga_on_response_cb()`
+/// @nodoc
 final class __wauthn_ga_callbacks extends ffi.Struct {
   /// <
   /// Callback function for displaying QR code
@@ -1385,108 +1638,144 @@ final class __wauthn_ga_callbacks extends ffi.Struct {
   external ffi.Pointer<ffi.Void> user_data;
 }
 
-/// @brief Invoked when the response for the get assertion request need to be returned.
-/// @since_tizen 7.0
-/// @remarks The @a pubkey_cred can be used only in the callback. To use outside, make a copy.
-/// @param[in] pubkey_cred The public key credential contains response data.
-/// @param[in] result The result of the request.
-/// #WAUTHN_ERROR_NONE if the request is completed well,
-/// #WAUTHN_ERROR_CANCELED if the request is cancelled by wauthn_cancel() request.
-/// #WAUTHN_ERROR_INVALID_STATE if the server entered invalid state. Known causes:
-/// - proxy issues,
-/// - reached the limit of credentials stored by the authenticator.
-/// #WAUTHN_ERROR_TIMED_OUT if the request times out. Know causes:
-/// - authenticator does not respond during state assisted transactions due to
-/// lack of push notifications support (e.g. missing Google Account).
-/// @param[in] user_data The user data passed from the callback structure, #wauthn_ga_callbacks_s.
+/// Invoked when the response for the get assertion request need to be returned.
 ///
-/// @see #wauthn_ga_callbacks_s
-/// @see #wauthn_pubkey_credential_assertion_s
+/// **Since Tizen:**
+/// - 7.0
+///
+/// **Remarks:**
+/// - The `pubkey_cred` can be used only in the callback. To use outside, make a copy.
+///
+/// **Parameters:**
+/// - `pubkey_cred` (in): The public key credential contains response data.
+/// - `result` (in): The result of the request. `WAUTHN_ERROR_NONE` if the request is completed well, `WAUTHN_ERROR_CANCELED` if the request is cancelled by wauthn_cancel() request. `WAUTHN_ERROR_INVALID_STATE` if the server entered invalid state. Known causes:
+///   - proxy issues,
+///   - reached the limit of credentials stored by the authenticator. `WAUTHN_ERROR_TIMED_OUT` if the request times out. Know causes:
+///   - authenticator does not respond during state assisted transactions due to lack of push notifications support (e.g. missing Google Account).
+/// - `user_data` (in): The user data passed from the callback structure, `wauthn_ga_callbacks_s`.
+///
+/// **See also:**
+/// - `wauthn_ga_callbacks_s`
+/// - `wauthn_pubkey_credential_assertion_s`
+/// @nodoc
 typedef wauthn_ga_on_response_cb
     = ffi.Pointer<ffi.NativeFunction<wauthn_ga_on_response_cbFunction>>;
+/// @nodoc
 typedef wauthn_ga_on_response_cbFunction = ffi.Void Function(
     ffi.Pointer<wauthn_pubkey_credential_assertion_s> pubkey_cred,
     ffi.Int32 result,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartwauthn_ga_on_response_cbFunction = void Function(
     ffi.Pointer<wauthn_pubkey_credential_assertion_s> pubkey_cred,
     int result,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief The structure for a publickey_credential response for wauthn_get_assertion().
-/// @since_tizen 7.0
+/// The structure for a publickey_credential response for wauthn_get_assertion().
 ///
-/// @remarks Refer to the following W3C specification for more information.
-/// https://www.w3.org/TR/webauthn-3/#iface-pkcredential
-/// https://www.w3.org/TR/webauthn-3/#sctn-credentialrequestoptions-extension
+/// **Since Tizen:**
+/// - 7.0
 ///
-/// @see wauthn_get_assertion()
-/// @see #wauthn_pubkey_cred_type_e
-/// @see #wauthn_authenticator_assertion_response_s
-/// @see #wauthn_authenticator_attachment_e
-/// @see #wauthn_authentication_exts_s
-/// @see #wauthn_hybrid_linked_data_s
+/// **Remarks:**
+/// - Refer to the following W3C specification for more information.
+/// - <https://www.w3.org/TR/webauthn-3/`iface`-pkcredential>
+/// - <https://www.w3.org/TR/webauthn-3/`sctn`-credentialrequestoptions-extension>
+///
+/// **See also:**
+/// - `wauthn_get_assertion()`
+/// - `wauthn_pubkey_cred_type_e`
+/// - `wauthn_authenticator_assertion_response_s`
+/// - `wauthn_authenticator_attachment_e`
+/// - `wauthn_authentication_exts_s`
+/// - `wauthn_hybrid_linked_data_s`
+/// @nodoc
 typedef wauthn_pubkey_credential_assertion_s
     = __wauthn_pubkey_credential_assertion;
 
-/// @brief The structure for a client data JSON.
-/// @since_tizen 7.0
+/// The structure for a client data JSON.
 ///
-/// @remarks Refer to the following W3C specification about how to encode the client_data_json.
-/// https://www.w3.org/TR/webauthn-3/#collectedclientdata-json-compatible-serialization-of-client-data
+/// **Since Tizen:**
+/// - 7.0
 ///
-/// @see #wauthn_hash_algorithm_e
+/// **Remarks:**
+/// - Refer to the following W3C specification about how to encode the client_data_json.
+/// - <https://www.w3.org/TR/webauthn-3/`collectedclientdata`-json-compatible-serialization-of-client-data>
+///
+/// **See also:**
+/// - `wauthn_hash_algorithm_e`
+/// @nodoc
 typedef wauthn_client_data_s = __wauthn_client_data;
 
-/// @brief The structure for a make credential option.
-/// @since_tizen 7.0
+/// The structure for a make credential option.
 ///
-/// @remarks Refer to the following W3C specification for more information.
-/// https://www.w3.org/TR/webauthn-3/#dictdef-publickeycredentialcreationoptions
+/// **Since Tizen:**
+/// - 7.0
 ///
-/// @see wauthn_make_credential()
-/// @see #wauthn_rp_entity_s
-/// @see #wauthn_user_entity_s
-/// @see #wauthn_pubkey_cred_params_s
-/// @see #wauthn_pubkey_cred_descriptors_s
-/// @see #wauthn_authenticator_sel_cri_s
-/// @see #wauthn_pubkey_cred_hints_s
-/// @see #wauthn_attestation_pref_e
-/// @see #wauthn_attestation_formats_s
-/// @see #wauthn_authentication_exts_s
-/// @see #wauthn_hybrid_linked_data_s
+/// **Remarks:**
+/// - Refer to the following W3C specification for more information.
+/// - <https://www.w3.org/TR/webauthn-3/`dictdef`-publickeycredentialcreationoptions>
+///
+/// **See also:**
+/// - `wauthn_make_credential()`
+/// - `wauthn_rp_entity_s`
+/// - `wauthn_user_entity_s`
+/// - `wauthn_pubkey_cred_params_s`
+/// - `wauthn_pubkey_cred_descriptors_s`
+/// - `wauthn_authenticator_sel_cri_s`
+/// - `wauthn_pubkey_cred_hints_s`
+/// - `wauthn_attestation_pref_e`
+/// - `wauthn_attestation_formats_s`
+/// - `wauthn_authentication_exts_s`
+/// - `wauthn_hybrid_linked_data_s`
+/// @nodoc
 typedef wauthn_pubkey_cred_creation_options_s
     = __wauthn_pubkey_cred_creation_options;
 
-/// @brief The structure for callback function list used to make credential.
-/// @since_tizen 7.0
-/// @see wauthn_make_credential()
-/// @see wauthn_display_qrcode_cb()
-/// @see wauthn_mc_on_response_cb()
+/// The structure for callback function list used to make credential.
+///
+/// **Since Tizen:**
+/// - 7.0
+///
+/// **See also:**
+/// - `wauthn_make_credential()`
+/// - `wauthn_display_qrcode_cb()`
+/// - `wauthn_mc_on_response_cb()`
+/// @nodoc
 typedef wauthn_mc_callbacks_s = __wauthn_mc_callbacks;
 
-/// @brief The structure for a get assertion option.
-/// @since_tizen 7.0
+/// The structure for a get assertion option.
 ///
-/// @remarks Refer to the following W3C specification for more information.
-/// https://www.w3.org/TR/webauthn-3/#dictionary-assertion-options
+/// **Since Tizen:**
+/// - 7.0
 ///
-/// @see wauthn_get_assertion()
-/// @see #wauthn_pubkey_cred_descriptors_s
-/// @see #wauthn_user_verification_requirement_e
-/// @see #wauthn_pubkey_cred_hints_s
-/// @see #wauthn_attestation_pref_e
-/// @see #wauthn_attestation_formats_s
-/// @see #wauthn_authentication_exts_s
-/// @see #wauthn_hybrid_linked_data_s
+/// **Remarks:**
+/// - Refer to the following W3C specification for more information.
+/// - <https://www.w3.org/TR/webauthn-3/`dictionary`-assertion-options>
+///
+/// **See also:**
+/// - `wauthn_get_assertion()`
+/// - `wauthn_pubkey_cred_descriptors_s`
+/// - `wauthn_user_verification_requirement_e`
+/// - `wauthn_pubkey_cred_hints_s`
+/// - `wauthn_attestation_pref_e`
+/// - `wauthn_attestation_formats_s`
+/// - `wauthn_authentication_exts_s`
+/// - `wauthn_hybrid_linked_data_s`
+/// @nodoc
 typedef wauthn_pubkey_cred_request_options_s
     = __wauthn_pubkey_cred_request_options;
 
-/// @brief The structure for callback function list used to get assertion.
-/// @since_tizen 7.0
-/// @see wauthn_get_assertion()
-/// @see wauthn_display_qrcode_cb()
-/// @see wauthn_ga_on_response_cb()
+/// The structure for callback function list used to get assertion.
+///
+/// **Since Tizen:**
+/// - 7.0
+///
+/// **See also:**
+/// - `wauthn_get_assertion()`
+/// - `wauthn_display_qrcode_cb()`
+/// - `wauthn_ga_on_response_cb()`
+/// @nodoc
 typedef wauthn_ga_callbacks_s = __wauthn_ga_callbacks;
 
+/// @nodoc
 const int WAUTHN_API_VERSION_NUMBER = 1;

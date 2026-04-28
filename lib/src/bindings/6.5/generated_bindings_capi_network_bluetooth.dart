@@ -1,3 +1,6 @@
+/// {@category 6.5/tizen}
+library tizen_interop_6_5.capi_network_bluetooth;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen capi-network-bluetooth APIs.
+/// {@category 6.5/tizen}
 class Tizen65CapiNetworkBluetooth {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,19 +28,28 @@ class Tizen65CapiNetworkBluetooth {
           lookup)
       : _lookup = lookup;
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_MODULE
-  /// @brief Initializes the Bluetooth API.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+  /// Initializes the Bluetooth API.
   ///
-  /// @remarks This function must be called before Bluetooth API starts. \n
-  /// You must free all resources of the Bluetooth service by calling bt_deinitialize() if Bluetooth service is no longer needed.
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Remarks:**
+  /// - This function must be called before Bluetooth API starts.
+  /// - You must free all resources of the Bluetooth service by calling bt_deinitialize() if Bluetooth service is no longer needed.
   ///
-  /// @see  bt_deinitialize()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `bt_deinitialize()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_MODULE
   int bt_initialize() {
     return _bt_initialize();
   }
@@ -45,21 +58,31 @@ class Tizen65CapiNetworkBluetooth {
       _lookup<ffi.NativeFunction<ffi.Int Function()>>('bt_initialize');
   late final _bt_initialize = _bt_initializePtr.asFunction<int Function()>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_MODULE
-  /// @brief Releases all resources of the Bluetooth API.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+  /// Releases all resources of the Bluetooth API.
   ///
-  /// @remarks This function must be called if Bluetooth API is no longer needed.
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Remarks:**
+  /// - This function must be called if Bluetooth API is no longer needed.
   ///
-  /// @pre Bluetooth API must be initialized with bt_initialize().
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
   ///
-  /// @see bt_initialize()
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - Bluetooth API must be initialized with bt_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_initialize()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_MODULE
   int bt_deinitialize() {
     return _bt_deinitialize();
   }
@@ -69,20 +92,31 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_deinitialize =
       _bt_deinitializePtr.asFunction<int Function()>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_MODULE
-  /// @brief Gets the specification name for the given UUID.
-  /// @since_tizen 3.0
+  /// Gets the specification name for the given UUID.
   ///
-  /// @remarks The @a name must be released using free().
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @param[in] uuid The UUID
-  /// @param[out] name The specification name defined at www.bluetooth.com
-  /// @return  0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Remarks:**
+  /// - The `name` must be released using free().
   ///
-  /// @see bt_gatt_get_uuid()
+  /// **Parameters:**
+  /// - `uuid` (in): The UUID
+  /// - `name` (out): The specification name defined at www.bluetooth.com
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `bt_gatt_get_uuid()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_MODULE
   int bt_get_uuid_name(
     ffi.Pointer<ffi.Char> uuid,
     ffi.Pointer<ffi.Pointer<ffi.Char>> name,
@@ -101,21 +135,31 @@ class Tizen65CapiNetworkBluetooth {
       int Function(
           ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_MODULE
-  /// @brief Gets the current state of local Bluetooth adapter.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+  /// Gets the current state of local Bluetooth adapter.
   ///
-  /// @param[out] adapter_state The current adapter state
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Parameters:**
+  /// - `adapter_state` (out): The current adapter state
   ///
-  /// @pre Bluetooth service must be initialized with bt_initialize().
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
   ///
-  /// @see bt_initialize()
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_initialize()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_ADAPTER_MODULE
   int bt_adapter_get_state(
     ffi.Pointer<ffi.Int32> adapter_state,
   ) {
@@ -130,25 +174,37 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_adapter_get_state = _bt_adapter_get_statePtr
       .asFunction<int Function(ffi.Pointer<ffi.Int32>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_MODULE
-  /// @brief Gets the address of local Bluetooth adapter.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+  /// Gets the address of local Bluetooth adapter.
   ///
-  /// @remarks The @a local_address must be released with free() by you.
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
   ///
-  /// @param[out] local_address The device address of local Bluetooth adapter
+  /// **Remarks:**
+  /// - The `local_address` must be released with free() by you.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_OUT_OF_MEMORY  Out of memory
-  /// @retval #BT_ERROR_OPERATION_FAILED Operation failed
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Parameters:**
+  /// - `local_address` (out): The device address of local Bluetooth adapter
   ///
-  /// @pre The state of local Bluetooth must be #BT_ADAPTER_ENABLED.
-  /// @see bt_adapter_get_name()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The state of local Bluetooth must be `BT_ADAPTER_ENABLED`.
+  ///
+  /// **See also:**
+  /// - `bt_adapter_get_name()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_ADAPTER_MODULE
   int bt_adapter_get_address(
     ffi.Pointer<ffi.Pointer<ffi.Char>> local_address,
   ) {
@@ -164,30 +220,39 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_adapter_get_address = _bt_adapter_get_addressPtr
       .asFunction<int Function(ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_MODULE
-  /// @brief Gets the name of local Bluetooth adapter.
+  /// Gets the name of local Bluetooth adapter.
   ///
-  /// @details Use this function to get the friendly name associated with Bluetooth \n
-  /// device, retrieved by the remote Bluetooth devices.
+  /// Use this function to get the friendly name associated with Bluetooth device, retrieved by the remote Bluetooth devices.
   ///
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
   ///
-  /// @remarks The @a local_name must be released with free() by you.
+  /// **Remarks:**
+  /// - The `local_name` must be released with free() by you.
   ///
-  /// @param[out] local_name  The local device name
+  /// **Parameters:**
+  /// - `local_name` (out): The local device name
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_OUT_OF_MEMORY  Out of memory
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
   ///
-  /// @pre The state of local Bluetooth must be #BT_ADAPTER_ENABLED.
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
   ///
-  /// @see bt_adapter_set_name()
+  /// **Preconditions:**
+  /// - The state of local Bluetooth must be `BT_ADAPTER_ENABLED`.
+  ///
+  /// **See also:**
+  /// - `bt_adapter_set_name()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_ADAPTER_MODULE
   int bt_adapter_get_name(
     ffi.Pointer<ffi.Pointer<ffi.Char>> local_name,
   ) {
@@ -203,31 +268,46 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_adapter_get_name = _bt_adapter_get_namePtr
       .asFunction<int Function(ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_MODULE
-  /// @brief Sets the name of local Bluetooth adapter.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
+  /// Sets the name of local Bluetooth adapter.
   ///
-  /// @param[in] local_name The name of the Bluetooth device. \n
-  /// The maximum length is 248 characters.
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_OPERATION_FAILED Operation failed
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre The state of local Bluetooth must be #BT_ADAPTER_ENABLED.
-  /// @post bt_adapter_name_changed_cb() will be invoked if this function returns #BT_ERROR_NONE.
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
   ///
-  /// @see bt_adapter_get_name()
-  /// @see bt_adapter_name_changed_cb()
-  /// @see bt_adapter_set_name_changed_cb()
-  /// @see bt_adapter_unset_name_changed_cb()
+  /// **Parameters:**
+  /// - `local_name` (in): The name of the Bluetooth device. The maximum length is 248 characters.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The state of local Bluetooth must be `BT_ADAPTER_ENABLED`.
+  ///
+  /// **Postconditions:**
+  /// - bt_adapter_name_changed_cb() will be invoked if this function returns `BT_ERROR_NONE`.
+  ///
+  /// **See also:**
+  /// - `bt_adapter_get_name()`
+  /// - `bt_adapter_name_changed_cb()`
+  /// - `bt_adapter_set_name_changed_cb()`
+  /// - `bt_adapter_unset_name_changed_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_ADAPTER_MODULE
   int bt_adapter_set_name(
     ffi.Pointer<ffi.Char> local_name,
   ) {
@@ -242,21 +322,31 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_adapter_set_name =
       _bt_adapter_set_namePtr.asFunction<int Function(ffi.Pointer<ffi.Char>)>();
 
-  /// @ingroup  CAPI_NETWORK_BLUETOOTH_ADAPTER_MODULE
-  /// @brief  Gets the visibility mode of local Bluetooth adapter.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @param[out] mode  The visibility mode of the Bluetooth device
-  /// @param[out] duration  The duration until the visibility mode is changed to #BT_ADAPTER_VISIBILITY_MODE_NON_DISCOVERABLE (in seconds).
-  /// @a duration is valid only if @a mode is #BT_ADAPTER_VISIBILITY_MODE_LIMITED_DISCOVERABLE. This value can be NULL.
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// Gets the visibility mode of local Bluetooth adapter.
   ///
-  /// @pre The state of local Bluetooth must be #BT_ADAPTER_ENABLED.
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Parameters:**
+  /// - `mode` (out): The visibility mode of the Bluetooth device
+  /// - `duration` (out): The duration until the visibility mode is changed to `BT_ADAPTER_VISIBILITY_MODE_NON_DISCOVERABLE` (in seconds). `duration` is valid only if `mode` is `BT_ADAPTER_VISIBILITY_MODE_LIMITED_DISCOVERABLE`. This value can be NULL.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The state of local Bluetooth must be `BT_ADAPTER_ENABLED`.
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_ADAPTER_MODULE
   int bt_adapter_get_visibility(
     ffi.Pointer<ffi.Int32> mode,
     ffi.Pointer<ffi.Int> duration,
@@ -274,36 +364,50 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_adapter_get_visibility = _bt_adapter_get_visibilityPtr
       .asFunction<int Function(ffi.Pointer<ffi.Int32>, ffi.Pointer<ffi.Int>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_MODULE
-  /// @brief Starts the device discovery, asynchronously.
+  /// Starts the device discovery, asynchronously.
   ///
-  /// @details If a device is discovered, bt_adapter_device_discovery_state_changed_cb() will be invoked \n
-  /// with #BT_ADAPTER_DEVICE_DISCOVERY_FOUND, and then bt_adapter_device_discovery_state_changed_cb() \n
-  /// will be called with #BT_ADAPTER_DEVICE_DISCOVERY_FINISHED in case of the completion or cancellation of the discovery.
+  /// If a device is discovered, bt_adapter_device_discovery_state_changed_cb() will be invoked with `BT_ADAPTER_DEVICE_DISCOVERY_FOUND`, and then bt_adapter_device_discovery_state_changed_cb() will be called with `BT_ADAPTER_DEVICE_DISCOVERY_FINISHED` in case of the completion or cancellation of the discovery.
   ///
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
-  /// @remarks To connect to peer Bluetooth device, you need to know its Bluetooth address. \n
-  /// The device discovery can be stopped by bt_adapter_stop_device_discovery().
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_NOW_IN_PROGRESS  Operation is now in progress
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre The state of local Bluetooth must be #BT_ADAPTER_ENABLED.
-  /// @post This function invokes bt_adapter_device_discovery_state_changed_cb().
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
   ///
-  /// @see bt_adapter_is_discovering()
-  /// @see bt_adapter_stop_device_discovery()
-  /// @see bt_adapter_device_discovery_state_changed_cb()
-  /// @see bt_adapter_set_device_discovery_state_changed_cb()
-  /// @see bt_adapter_unset_device_discovery_state_changed_cb()
+  /// **Remarks:**
+  /// - To connect to peer Bluetooth device, you need to know its Bluetooth address.
+  /// - The device discovery can be stopped by bt_adapter_stop_device_discovery().
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_NOW_IN_PROGRESS`: Operation is now in progress
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The state of local Bluetooth must be `BT_ADAPTER_ENABLED`.
+  ///
+  /// **Postconditions:**
+  /// - This function invokes bt_adapter_device_discovery_state_changed_cb().
+  ///
+  /// **See also:**
+  /// - `bt_adapter_is_discovering()`
+  /// - `bt_adapter_stop_device_discovery()`
+  /// - `bt_adapter_device_discovery_state_changed_cb()`
+  /// - `bt_adapter_set_device_discovery_state_changed_cb()`
+  /// - `bt_adapter_unset_device_discovery_state_changed_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_ADAPTER_MODULE
   int bt_adapter_start_device_discovery() {
     return _bt_adapter_start_device_discovery();
   }
@@ -314,30 +418,47 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_adapter_start_device_discovery =
       _bt_adapter_start_device_discoveryPtr.asFunction<int Function()>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_MODULE
-  /// @brief Stops the device discovery, asynchronously.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
-  /// @remarks The device discovery process will take 10 ~ 20 seconds to get all the devices in vicinity.
+  /// Stops the device discovery, asynchronously.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_NOT_IN_PROGRESS  Operation is not in progress
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
   ///
-  /// @pre The device discovery must be in progress with bt_adapter_start_device_discovery().
-  /// @post This function invokes bt_adapter_device_discovery_state_changed_cb().
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @see bt_adapter_is_discovering()
-  /// @see bt_adapter_start_device_discovery()
-  /// @see bt_adapter_set_device_discovery_state_changed_cb()
-  /// @see bt_adapter_unset_device_discovery_state_changed_cb()
-  /// @see bt_adapter_device_discovery_state_changed_cb()
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
+  ///
+  /// **Remarks:**
+  /// - The device discovery process will take 10 ~ 20 seconds to get all the devices in vicinity.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_NOT_IN_PROGRESS`: Operation is not in progress
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The device discovery must be in progress with bt_adapter_start_device_discovery().
+  ///
+  /// **Postconditions:**
+  /// - This function invokes bt_adapter_device_discovery_state_changed_cb().
+  ///
+  /// **See also:**
+  /// - `bt_adapter_is_discovering()`
+  /// - `bt_adapter_start_device_discovery()`
+  /// - `bt_adapter_set_device_discovery_state_changed_cb()`
+  /// - `bt_adapter_unset_device_discovery_state_changed_cb()`
+  /// - `bt_adapter_device_discovery_state_changed_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_ADAPTER_MODULE
   int bt_adapter_stop_device_discovery() {
     return _bt_adapter_stop_device_discovery();
   }
@@ -348,28 +469,39 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_adapter_stop_device_discovery =
       _bt_adapter_stop_device_discoveryPtr.asFunction<int Function()>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_MODULE
-  /// @brief Checks for the device discovery is in progress or not.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+  /// Checks for the device discovery is in progress or not.
   ///
-  /// @remarks If Bluetooth discovery is in progress, other operations are not allowed and \n
-  /// you have to either stop the discovery operation, or wait for it to be finished, \n
-  /// before performing other operations.
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
   ///
-  /// @param[out] is_discovering The discovering status: (@c true = in progress , @c  false = not in progress )
+  /// **Remarks:**
+  /// - If Bluetooth discovery is in progress, other operations are not allowed and
+  /// - you have to either stop the discovery operation, or wait for it to be finished,
+  /// - before performing other operations.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Parameters:**
+  /// - `is_discovering` (out): The discovering status: (`true` = in progress , `false` = not in progress )
   ///
-  /// @pre The state of local Bluetooth must be #BT_ADAPTER_ENABLED.
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
   ///
-  /// @see bt_adapter_start_device_discovery()
-  /// @see bt_adapter_stop_device_discovery()
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The state of local Bluetooth must be `BT_ADAPTER_ENABLED`.
+  ///
+  /// **See also:**
+  /// - `bt_adapter_start_device_discovery()`
+  /// - `bt_adapter_stop_device_discovery()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_ADAPTER_MODULE
   int bt_adapter_is_discovering(
     ffi.Pointer<ffi.Bool> is_discovering,
   ) {
@@ -384,20 +516,29 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_adapter_is_discovering = _bt_adapter_is_discoveringPtr
       .asFunction<int Function(ffi.Pointer<ffi.Bool>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
-  /// @brief Gets the service mask from the UUID list.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+  /// Gets the service mask from the UUID list.
   ///
-  /// @param[in] uuids The UUID list of the device.
-  /// @param[in] no_of_service The number of the UUID list count.
-  /// @param[out] service_mask_list Service mask list converted from the given UUID list.
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Parameters:**
+  /// - `uuids` (in): The UUID list of the device.
+  /// - `no_of_service` (in): The number of the UUID list count.
+  /// - `service_mask_list` (out): Service mask list converted from the given UUID list.
   ///
-  /// @see bt_service_class_t
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `bt_service_class_t`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
   int bt_device_get_service_mask_from_uuid_list(
     ffi.Pointer<ffi.Pointer<ffi.Char>> uuids,
     int no_of_service,
@@ -420,26 +561,38 @@ class Tizen65CapiNetworkBluetooth {
           int Function(ffi.Pointer<ffi.Pointer<ffi.Char>>, int,
               ffi.Pointer<ffi.Int32>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_MODULE
-  /// @brief Retrieves the device information of all bonded devices.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+  /// Retrieves the device information of all bonded devices.
   ///
-  /// @param[in] callback The callback function to invoke
-  /// @param[in] user_data The user data passed from the foreach function
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_OUT_OF_MEMORY  Out of memory
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Parameters:**
+  /// - `callback` (in): The callback function to invoke
+  /// - `user_data` (in): The user data passed from the foreach function
   ///
-  /// @pre The state of local Bluetooth must be #BT_ADAPTER_ENABLED.
-  /// @post This function invokes bt_adapter_bonded_device_cb().
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
   ///
-  /// @see bt_adapter_bonded_device_cb()
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The state of local Bluetooth must be `BT_ADAPTER_ENABLED`.
+  ///
+  /// **Postconditions:**
+  /// - This function invokes bt_adapter_bonded_device_cb().
+  ///
+  /// **See also:**
+  /// - `bt_adapter_bonded_device_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_ADAPTER_MODULE
   int bt_adapter_foreach_bonded_device(
     bt_adapter_bonded_device_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -458,28 +611,42 @@ class Tizen65CapiNetworkBluetooth {
       _bt_adapter_foreach_bonded_devicePtr.asFunction<
           int Function(bt_adapter_bonded_device_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_MODULE
-  /// @brief Gets the device information of a bonded device.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @remarks The @a device_info must be released with bt_adapter_free_device_info() by you .
+  /// Gets the device information of a bonded device.
   ///
-  /// @param[in] remote_address The address of remote device
-  /// @param[out] device_info The bonded device information
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_OUT_OF_MEMORY  Out of memory
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_REMOTE_DEVICE_NOT_BONDED  Remote device not bonded
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Remarks:**
+  /// - The `device_info` must be released with bt_adapter_free_device_info() by you .
   ///
-  /// @pre The state of local Bluetooth must be #BT_ADAPTER_ENABLED.
-  /// @post This function invokes bt_adapter_bonded_device_cb().
+  /// **Parameters:**
+  /// - `remote_address` (in): The address of remote device
+  /// - `device_info` (out): The bonded device information
   ///
-  /// @see bt_adapter_bonded_device_cb()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_REMOTE_DEVICE_NOT_BONDED`: Remote device not bonded
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The state of local Bluetooth must be `BT_ADAPTER_ENABLED`.
+  ///
+  /// **Postconditions:**
+  /// - This function invokes bt_adapter_bonded_device_cb().
+  ///
+  /// **See also:**
+  /// - `bt_adapter_bonded_device_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_ADAPTER_MODULE
   int bt_adapter_get_bonded_device_info(
     ffi.Pointer<ffi.Char> remote_address,
     ffi.Pointer<ffi.Pointer<bt_device_info_s>> device_info,
@@ -500,18 +667,27 @@ class Tizen65CapiNetworkBluetooth {
           int Function(ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Pointer<bt_device_info_s>>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_MODULE
-  /// @brief Frees device info.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+  /// Frees device info.
   ///
-  /// @param[in] device_info The bonded device information
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Parameters:**
+  /// - `device_info` (in): The bonded device information
   ///
-  /// @see bt_adapter_get_bonded_device_info()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `bt_adapter_get_bonded_device_info()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_ADAPTER_MODULE
   int bt_adapter_free_device_info(
     ffi.Pointer<bt_device_info_s> device_info,
   ) {
@@ -526,19 +702,29 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_adapter_free_device_info = _bt_adapter_free_device_infoPtr
       .asFunction<int Function(ffi.Pointer<bt_device_info_s>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_MODULE
-  /// @brief Checks whether the UUID of service is used or not.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @param[in] service_uuid The UUID of service
-  /// @param[out] used Indicates whether the service is used or not
-  /// @return true on success, otherwise false.
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// Checks whether the UUID of service is used or not.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Parameters:**
+  /// - `service_uuid` (in): The UUID of service
+  /// - `used` (out): Indicates whether the service is used or not
+  ///
+  /// **Returns:**
+  /// - true on success, otherwise false.
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_ADAPTER_MODULE
   int bt_adapter_is_service_used(
     ffi.Pointer<ffi.Char> service_uuid,
     ffi.Pointer<ffi.Bool> used,
@@ -556,25 +742,37 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_adapter_is_service_used = _bt_adapter_is_service_usedPtr
       .asFunction<int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Bool>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_MODULE
-  /// @brief  Registers a callback function to be invoked when the Bluetooth adapter state changes.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+  /// Registers a callback function to be invoked when the Bluetooth adapter state changes.
   ///
-  /// @param[in] callback The callback function to invoke
-  /// @param[in] user_data The user data to be passed to the callback function
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
   ///
-  /// @return   0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Parameters:**
+  /// - `callback` (in): The callback function to invoke
+  /// - `user_data` (in): The user data to be passed to the callback function
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
-  /// @post bt_adapter_state_changed_cb() will be invoked.
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
   ///
-  /// @see bt_initialize()
-  /// @see bt_adapter_state_changed_cb()
-  /// @see bt_adapter_unset_state_changed_cb()
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **Postconditions:**
+  /// - bt_adapter_state_changed_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `bt_initialize()`
+  /// - `bt_adapter_state_changed_cb()`
+  /// - `bt_adapter_unset_state_changed_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_ADAPTER_MODULE
   int bt_adapter_set_state_changed_cb(
     bt_adapter_state_changed_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -593,19 +791,28 @@ class Tizen65CapiNetworkBluetooth {
       _bt_adapter_set_state_changed_cbPtr.asFunction<
           int Function(bt_adapter_state_changed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_MODULE
-  /// @brief Unregisters the callback function.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+  /// Unregisters the callback function.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
   ///
-  /// @see bt_initialize()
-  /// @see bt_adapter_set_state_changed_cb()
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_initialize()`
+  /// - `bt_adapter_set_state_changed_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_ADAPTER_MODULE
   int bt_adapter_unset_state_changed_cb() {
     return _bt_adapter_unset_state_changed_cb();
   }
@@ -616,25 +823,37 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_adapter_unset_state_changed_cb =
       _bt_adapter_unset_state_changed_cbPtr.asFunction<int Function()>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_MODULE
-  /// @brief  Registers a callback function to be invoked when the name of Bluetooth adapter changes.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+  /// Registers a callback function to be invoked when the name of Bluetooth adapter changes.
   ///
-  /// @param[in] callback The callback function to invoke
-  /// @param[in] user_data The user data to be passed to the callback function
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
   ///
-  /// @return   0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Parameters:**
+  /// - `callback` (in): The callback function to invoke
+  /// - `user_data` (in): The user data to be passed to the callback function
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
-  /// @post  bt_adapter_name_changed_cb() will be invoked.
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
   ///
-  /// @see bt_initialize()
-  /// @see bt_adapter_name_changed_cb()
-  /// @see bt_adapter_unset_name_changed_cb()
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **Postconditions:**
+  /// - bt_adapter_name_changed_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `bt_initialize()`
+  /// - `bt_adapter_name_changed_cb()`
+  /// - `bt_adapter_unset_name_changed_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_ADAPTER_MODULE
   int bt_adapter_set_name_changed_cb(
     bt_adapter_name_changed_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -653,19 +872,28 @@ class Tizen65CapiNetworkBluetooth {
       _bt_adapter_set_name_changed_cbPtr.asFunction<
           int Function(bt_adapter_name_changed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_MODULE
-  /// @brief	Unregisters the callback function.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+  /// Unregisters the callback function.
   ///
-  /// @return	0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
   ///
-  /// @see bt_initialize()
-  /// @see bt_adapter_set_name_changed_cb()
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_initialize()`
+  /// - `bt_adapter_set_name_changed_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_ADAPTER_MODULE
   int bt_adapter_unset_name_changed_cb() {
     return _bt_adapter_unset_name_changed_cb();
   }
@@ -676,25 +904,37 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_adapter_unset_name_changed_cb =
       _bt_adapter_unset_name_changed_cbPtr.asFunction<int Function()>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_MODULE
-  /// @brief  Registers a callback function to be invoked when the visibility mode changes.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+  /// Registers a callback function to be invoked when the visibility mode changes.
   ///
-  /// @param[in] callback The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
   ///
-  /// @return   0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Parameters:**
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
-  /// @post bt_adapter_visibility_mode_changed_cb() will be invoked.
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
   ///
-  /// @see bt_initialize()
-  /// @see bt_adapter_visibility_mode_changed_cb()
-  /// @see bt_adapter_unset_visibility_mode_changed_cb()
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **Postconditions:**
+  /// - bt_adapter_visibility_mode_changed_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `bt_initialize()`
+  /// - `bt_adapter_visibility_mode_changed_cb()`
+  /// - `bt_adapter_unset_visibility_mode_changed_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_ADAPTER_MODULE
   int bt_adapter_set_visibility_mode_changed_cb(
     bt_adapter_visibility_mode_changed_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -715,19 +955,28 @@ class Tizen65CapiNetworkBluetooth {
           int Function(
               bt_adapter_visibility_mode_changed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @ingroup  CAPI_NETWORK_BLUETOOTH_ADAPTER_MODULE
-  /// @brief  Unregisters the callback function.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+  /// Unregisters the callback function.
   ///
-  /// @return  0 on success, otherwise a negative error value.
-  /// @retval  #BT_ERROR_NONE  Successful
-  /// @retval  #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval  #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
   ///
-  /// @pre  The Bluetooth service must be initialized with bt_initialize().
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
   ///
-  /// @see  bt_initialize()
-  /// @see  bt_adapter_set_visibility_mode_changed_cb()
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_initialize()`
+  /// - `bt_adapter_set_visibility_mode_changed_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_ADAPTER_MODULE
   int bt_adapter_unset_visibility_mode_changed_cb() {
     return _bt_adapter_unset_visibility_mode_changed_cb();
   }
@@ -739,28 +988,39 @@ class Tizen65CapiNetworkBluetooth {
       _bt_adapter_unset_visibility_mode_changed_cbPtr
           .asFunction<int Function()>();
 
-  /// @ingroup  CAPI_NETWORK_BLUETOOTH_ADAPTER_MODULE
-  /// @brief  Registers a callback function to be invoked every second.
+  /// Registers a callback function to be invoked every second.
   ///
-  /// @details  When you set visibility mode as #BT_ADAPTER_VISIBILITY_MODE_LIMITED_DISCOVERABLE, \n
-  /// @a callback will be called every second until visibility mode is changed to #BT_ADAPTER_VISIBILITY_MODE_NON_DISCOVERABLE.
+  /// When you set visibility mode as `BT_ADAPTER_VISIBILITY_MODE_LIMITED_DISCOVERABLE`, `callback` will be called every second until visibility mode is changed to `BT_ADAPTER_VISIBILITY_MODE_NON_DISCOVERABLE`.
   ///
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// until the visibility mode is changed from #BT_ADAPTER_VISIBILITY_MODE_LIMITED_DISCOVERABLE
-  /// to #BT_ADAPTER_VISIBILITY_MODE_NON_DISCOVERABLE.
-  /// @param[in]  callback  The callback function to register
-  /// @param[in]  user_data  The user data to be passed to the callback function
-  /// @return  0 on success, otherwise a negative error value.
-  /// @retval  #BT_ERROR_NONE  Successful
-  /// @retval  #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval  #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval  #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3 until the visibility mode is changed from `BT_ADAPTER_VISIBILITY_MODE_LIMITED_DISCOVERABLE` to `BT_ADAPTER_VISIBILITY_MODE_NON_DISCOVERABLE`.
   ///
-  /// @pre  The Bluetooth service must be initialized by bt_initialize().
-  /// @post  bt_adapter_visibility_duration_changed_cb() will be invoked.
-  /// @see  bt_initialize()
-  /// @see  bt_adapter_visibility_duration_changed_cb()
-  /// @see  bt_adapter_unset_visibility_duration_changed_cb()
+  /// **Parameters:**
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized by bt_initialize().
+  ///
+  /// **Postconditions:**
+  /// - bt_adapter_visibility_duration_changed_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `bt_initialize()`
+  /// - `bt_adapter_visibility_duration_changed_cb()`
+  /// - `bt_adapter_unset_visibility_duration_changed_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_ADAPTER_MODULE
   int bt_adapter_set_visibility_duration_changed_cb(
     bt_adapter_visibility_duration_changed_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -781,17 +1041,28 @@ class Tizen65CapiNetworkBluetooth {
           int Function(bt_adapter_visibility_duration_changed_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @ingroup  CAPI_NETWORK_BLUETOOTH_ADAPTER_MODULE
-  /// @brief	 Unregisters the callback function.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @return  0 on success, otherwise a negative error value.
-  /// @retval  #BT_ERROR_NONE  Successful
-  /// @retval  #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval  #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// Unregisters the callback function.
   ///
-  /// @pre  The Bluetooth service must be initialized with bt_initialize().
-  /// @see  bt_initialize()
-  /// @see  bt_adapter_set_visibility_duration_changed_cb()
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_initialize()`
+  /// - `bt_adapter_set_visibility_duration_changed_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_ADAPTER_MODULE
   int bt_adapter_unset_visibility_duration_changed_cb() {
     return _bt_adapter_unset_visibility_duration_changed_cb();
   }
@@ -803,25 +1074,37 @@ class Tizen65CapiNetworkBluetooth {
       _bt_adapter_unset_visibility_duration_changed_cbPtr
           .asFunction<int Function()>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_MODULE
-  /// @brief  Registers a callback function to be invoked when the device discovery state changes.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+  /// Registers a callback function to be invoked when the device discovery state changes.
   ///
-  /// @param[in] callback The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
   ///
-  /// @return   0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Parameters:**
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
-  /// @post bt_adapter_device_discovery_state_changed_cb() will be invoked.
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
   ///
-  /// @see bt_initialize()
-  /// @see bt_adapter_device_discovery_state_changed_cb()
-  /// @see bt_adapter_unset_device_discovery_state_changed_cb()
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **Postconditions:**
+  /// - bt_adapter_device_discovery_state_changed_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `bt_initialize()`
+  /// - `bt_adapter_device_discovery_state_changed_cb()`
+  /// - `bt_adapter_unset_device_discovery_state_changed_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_ADAPTER_MODULE
   int bt_adapter_set_device_discovery_state_changed_cb(
     bt_adapter_device_discovery_state_changed_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -842,19 +1125,28 @@ class Tizen65CapiNetworkBluetooth {
           int Function(bt_adapter_device_discovery_state_changed_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_MODULE
-  /// @brief	Unregisters the callback function.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+  /// Unregisters the callback function.
   ///
-  /// @return	0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
   ///
-  /// @see bt_initialize()
-  /// @see bt_adapter_set_device_discovery_state_changed_cb()
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_initialize()`
+  /// - `bt_adapter_set_device_discovery_state_changed_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_ADAPTER_MODULE
   int bt_adapter_unset_device_discovery_state_changed_cb() {
     return _bt_adapter_unset_device_discovery_state_changed_cb();
   }
@@ -866,28 +1158,46 @@ class Tizen65CapiNetworkBluetooth {
       _bt_adapter_unset_device_discovery_state_changed_cbPtr
           .asFunction<int Function()>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_OOB_MODULE
-  /// @brief Gets the Hash and Randomizer value, synchronously.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
-  /// @remarks %http://tizen.org/privilege/bluetooth (public level privilege) is required to use this API since 5.5.
+  /// Gets the Hash and Randomizer value, synchronously.
   ///
-  /// @param[out] hash The hash value received from the controller
-  /// @param[out] randomizer The hash value received from the controller
-  /// @param[out] hash_len The length of the hash value
-  /// @param[out] randomizer_len The length of the randomizer value
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
   ///
-  /// @pre The state of local Bluetooth must be #BT_ADAPTER_ENABLED.
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
-  /// @see bt_initialize()
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
+  ///
+  /// **Remarks:**
+  /// - <http://tizen.org/privilege/bluetooth (public level privilege) is required to use this API since 5.5.>
+  ///
+  /// **Parameters:**
+  /// - `hash` (out): The hash value received from the controller
+  /// - `randomizer` (out): The hash value received from the controller
+  /// - `hash_len` (out): The length of the hash value
+  /// - `randomizer_len` (out): The length of the randomizer value
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The state of local Bluetooth must be `BT_ADAPTER_ENABLED`.
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_initialize()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_OOB_MODULE
   int bt_adapter_get_local_oob_data(
     ffi.Pointer<ffi.Pointer<ffi.UnsignedChar>> hash,
     ffi.Pointer<ffi.Pointer<ffi.UnsignedChar>> randomizer,
@@ -917,29 +1227,45 @@ class Tizen65CapiNetworkBluetooth {
               ffi.Pointer<ffi.Int>,
               ffi.Pointer<ffi.Int>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_OOB_MODULE
-  /// @brief Sets the Hash and Randomizer value, synchronously.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
+  /// Sets the Hash and Randomizer value, synchronously.
   ///
-  /// @param[in] remote_address Remote device address
-  /// @param[in] hash The hash value received from the controller
-  /// @param[in] randomizer The hash value received from the controller
-  /// @param[in] hash_len The length of the hash value. Allowed value is 16
-  /// @param[in] randomizer_len The length of the randomizer value. Allowed value is 16
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
   ///
-  /// @pre The state of local Bluetooth must be #BT_ADAPTER_ENABLED.
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
-  /// @see bt_initialize()
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
+  ///
+  /// **Parameters:**
+  /// - `remote_address` (in): Remote device address
+  /// - `hash` (in): The hash value received from the controller
+  /// - `randomizer` (in): The hash value received from the controller
+  /// - `hash_len` (in): The length of the hash value. Allowed value is 16
+  /// - `randomizer_len` (in): The length of the randomizer value. Allowed value is 16
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The state of local Bluetooth must be `BT_ADAPTER_ENABLED`.
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_initialize()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_OOB_MODULE
   int bt_adapter_set_remote_oob_data(
     ffi.Pointer<ffi.Char> remote_address,
     ffi.Pointer<ffi.UnsignedChar> hash,
@@ -969,34 +1295,51 @@ class Tizen65CapiNetworkBluetooth {
           int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.UnsignedChar>,
               ffi.Pointer<ffi.UnsignedChar>, int, int)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_OOB_MODULE
-  /// @brief Gets the Hash and Randomizer value, synchronously.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
+  /// Gets the Hash and Randomizer value, synchronously.
   ///
-  /// @remarks %http://tizen.org/privilege/bluetooth (public level privilege) is required to use this API since 5.5.
-  /// @remarks The @a hash192, randomizer192, hash256 and randomizer256 must be released using free().
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @param[out] hash192 The hash value derived from the P-192 public key
-  /// @param[out] randomizer192 The randomizer value associated with the P-192 public key
-  /// @param[out] hash192_len The length of @a hash192
-  /// @param[out] randomizer192_len The length of @a randomizer192
-  /// @param[out] hash256 The hash value derived from the P-256 public key
-  /// @param[out] randomizer256 The randomizer value associated with the P-256 public key
-  /// @param[out] hash256_len The length of @a hash256
-  /// @param[out] randomizer256_len The length of @a randomizer256
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre The state of local Bluetooth must be #BT_ADAPTER_ENABLED.
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
-  /// @see bt_initialize()
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
+  ///
+  /// **Remarks:**
+  /// - <http://tizen.org/privilege/bluetooth (public level privilege) is required to use this API since 5.5.>
+  /// - The `hash192`, randomizer192, hash256 and randomizer256 must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `hash192` (out): The hash value derived from the P-192 public key
+  /// - `randomizer192` (out): The randomizer value associated with the P-192 public key
+  /// - `hash192_len` (out): The length of `hash192`
+  /// - `randomizer192_len` (out): The length of `randomizer192`
+  /// - `hash256` (out): The hash value derived from the P-256 public key
+  /// - `randomizer256` (out): The randomizer value associated with the P-256 public key
+  /// - `hash256_len` (out): The length of `hash256`
+  /// - `randomizer256_len` (out): The length of `randomizer256`
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The state of local Bluetooth must be `BT_ADAPTER_ENABLED`.
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_initialize()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_OOB_MODULE
   int bt_adapter_get_local_oob_ext_data(
     ffi.Pointer<ffi.Pointer<ffi.UnsignedChar>> hash192,
     ffi.Pointer<ffi.Pointer<ffi.UnsignedChar>> randomizer192,
@@ -1042,33 +1385,49 @@ class Tizen65CapiNetworkBluetooth {
               ffi.Pointer<ffi.Int>,
               ffi.Pointer<ffi.Int>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_OOB_MODULE
-  /// @brief Sets the Hash and Randomizer value, synchronously.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
+  /// Sets the Hash and Randomizer value, synchronously.
   ///
-  /// @param[in] remote_address Remote device address
-  /// @param[in] hash192 The P-192 hash value received via OOB from remote device
-  /// @param[in] randomizer192 The P-192 randomizer value received via OOB from remote device
-  /// @param[in] hash192_len The length of @a hash192
-  /// @param[in] randomizer192_len The length of @a randomizer192
-  /// @param[in] hash256 The P-256 hash value received via OOB from remote device
-  /// @param[in] randomizer256 The P-256 randomizer value received via OOB from remote device
-  /// @param[in] hash256_len The length of @a hash256
-  /// @param[in] randomizer256_len The length of @a randomizer256
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @pre The state of local Bluetooth must be #BT_ADAPTER_ENABLED.
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
-  /// @see bt_initialize()
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
+  ///
+  /// **Parameters:**
+  /// - `remote_address` (in): Remote device address
+  /// - `hash192` (in): The P-192 hash value received via OOB from remote device
+  /// - `randomizer192` (in): The P-192 randomizer value received via OOB from remote device
+  /// - `hash192_len` (in): The length of `hash192`
+  /// - `randomizer192_len` (in): The length of `randomizer192`
+  /// - `hash256` (in): The P-256 hash value received via OOB from remote device
+  /// - `randomizer256` (in): The P-256 randomizer value received via OOB from remote device
+  /// - `hash256_len` (in): The length of `hash256`
+  /// - `randomizer256_len` (in): The length of `randomizer256`
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The state of local Bluetooth must be `BT_ADAPTER_ENABLED`.
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_initialize()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_OOB_MODULE
   int bt_adapter_set_remote_oob_ext_data(
     ffi.Pointer<ffi.Char> remote_address,
     ffi.Pointer<ffi.UnsignedChar> hash192,
@@ -1118,25 +1477,41 @@ class Tizen65CapiNetworkBluetooth {
               int,
               int)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_OOB_MODULE
-  /// @brief Deletes the Hash and Randomizer value, synchronously.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
+  /// Deletes the Hash and Randomizer value, synchronously.
   ///
-  /// @param[in] remote_address Remote device address
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
   ///
-  /// @pre The state of local Bluetooth must be #BT_ADAPTER_ENABLED.
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
-  /// @see bt_initialize()
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
+  ///
+  /// **Parameters:**
+  /// - `remote_address` (in): Remote device address
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The state of local Bluetooth must be `BT_ADAPTER_ENABLED`.
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_initialize()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_OOB_MODULE
   int bt_adapter_remove_remote_oob_data(
     ffi.Pointer<ffi.Char> remote_address,
   ) {
@@ -1152,25 +1527,35 @@ class Tizen65CapiNetworkBluetooth {
       _bt_adapter_remove_remote_oob_dataPtr
           .asFunction<int Function(ffi.Pointer<ffi.Char>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
-  /// @brief Checks for the LE device discovery is in progress or not.
-  /// @since_tizen @if MOBILE 2.3 @else 6.0 @endif
+  /// Checks for the LE device discovery is in progress or not.
   ///
-  /// @remarks If Bluetooth LE scan is in progress, other operations are not allowed and \n
-  /// you have to either stop the LE scan operation, or wait for it to be finished, \n
-  /// before performing other operations.
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Otherwise 6.0
   ///
-  /// @param[out] is_discovering The discovering status: (@c true = in progress , @c  false = not in progress )
+  /// **Remarks:**
+  /// - If Bluetooth LE scan is in progress, other operations are not allowed and
+  /// - you have to either stop the LE scan operation, or wait for it to be finished,
+  /// - before performing other operations.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Parameters:**
+  /// - `is_discovering` (out): The discovering status: (`true` = in progress , `false` = not in progress )
   ///
-  /// @pre The state of local Bluetooth must be #BT_ADAPTER_ENABLED.
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The state of local Bluetooth must be `BT_ADAPTER_ENABLED`.
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
   int bt_adapter_le_is_discovering(
     ffi.Pointer<ffi.Bool> is_discovering,
   ) {
@@ -1185,30 +1570,46 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_adapter_le_is_discovering = _bt_adapter_le_is_discoveringPtr
       .asFunction<int Function(ffi.Pointer<ffi.Bool>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
-  /// @brief Starts the LE scan to find LE advertisement.
+  /// Starts the LE scan to find LE advertisement.
   ///
-  /// @details If a LE advertisement is found, bt_adapter_le_scan_result_cb() will be invoked.
+  /// If a LE advertisement is found, bt_adapter_le_scan_result_cb() will be invoked.
   ///
-  /// @since_tizen 2.3.1
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
-  /// @param[in] cb The callback to report the result of this function
-  /// @param[in] user_data The user data to be passed when callback is called
+  /// **Since Tizen:**
+  /// - 2.3.1
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_NOW_IN_PROGRESS  Operation is now in progress
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre The state of local Bluetooth must be #BT_ADAPTER_ENABLED.
-  /// @post This function invokes bt_adapter_le_scan_result_cb().
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
   ///
-  /// @see bt_adapter_le_scan_result_cb()
+  /// **Parameters:**
+  /// - `cb` (in): The callback to report the result of this function
+  /// - `user_data` (in): The user data to be passed when callback is called
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_NOW_IN_PROGRESS`: Operation is now in progress
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The state of local Bluetooth must be `BT_ADAPTER_ENABLED`.
+  ///
+  /// **Postconditions:**
+  /// - This function invokes bt_adapter_le_scan_result_cb().
+  ///
+  /// **See also:**
+  /// - `bt_adapter_le_scan_result_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
   int bt_adapter_le_start_scan(
     bt_adapter_le_scan_result_cb cb,
     ffi.Pointer<ffi.Void> user_data,
@@ -1227,24 +1628,37 @@ class Tizen65CapiNetworkBluetooth {
       _bt_adapter_le_start_scanPtr.asFunction<
           int Function(bt_adapter_le_scan_result_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
-  /// @brief Stops the LE scan.
-  /// @since_tizen 2.3.1
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
+  /// Stops the LE scan.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_NOT_IN_PROGRESS  Operation is not in progress
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Since Tizen:**
+  /// - 2.3.1
   ///
-  /// @pre The LE scan must be in progress with bt_adapter_le_start_scan().
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @see bt_adapter_le_start_scan()
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_NOT_IN_PROGRESS`: Operation is not in progress
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The LE scan must be in progress with bt_adapter_le_start_scan().
+  ///
+  /// **See also:**
+  /// - `bt_adapter_le_start_scan()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
   int bt_adapter_le_stop_scan() {
     return _bt_adapter_le_stop_scan();
   }
@@ -1255,29 +1669,40 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_adapter_le_stop_scan =
       _bt_adapter_le_stop_scanPtr.asFunction<int Function()>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
-  /// @brief Gets the service UUID list from the scan result information.
-  /// @since_tizen 2.3.1
+  /// Gets the service UUID list from the scan result information.
   ///
-  /// @remarks The @a uuids must be iterated as count and each pointed data must be released with free().
-  /// Then @a uuids must be released with free(). \n
-  /// 16-bit service UUID or 128-bit service UUID is supported. (e.g. 180F, 0000180F-0000-1000-8000-00805F9B34FB)
+  /// **Since Tizen:**
+  /// - 2.3.1
   ///
-  /// @param[in] info The scan result information
-  /// @param[in] pkt_type The packet type
-  /// @param[out] uuids The list of string of the service UUID
-  /// @param[out] count The count of the service UUIDs
+  /// **Remarks:**
+  /// - The `uuids` must be iterated as count and each pointed data must be released with free().
+  /// - Then `uuids` must be released with free().
+  /// - 16-bit service UUID or 128-bit service UUID is supported. (e.g. 180F, 0000180F-0000-1000-8000-00805F9B34FB)
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NO_DATA  No data available
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Parameters:**
+  /// - `info` (in): The scan result information
+  /// - `pkt_type` (in): The packet type
+  /// - `uuids` (out): The list of string of the service UUID
+  /// - `count` (out): The count of the service UUIDs
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
   ///
-  /// @see bt_adapter_le_scan_result_cb()
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NO_DATA`: No data available
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_adapter_le_scan_result_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
   int bt_adapter_le_get_scan_result_service_uuids(
     ffi.Pointer<bt_adapter_le_device_scan_result_info_s> info,
     int pkt_type,
@@ -1308,26 +1733,37 @@ class Tizen65CapiNetworkBluetooth {
               ffi.Pointer<ffi.Pointer<ffi.Pointer<ffi.Char>>>,
               ffi.Pointer<ffi.Int>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
-  /// @brief Gets the device name from the scan result information.
-  /// @since_tizen 2.3.1
+  /// Gets the device name from the scan result information.
   ///
-  /// @remarks The @a name must be released with free() by you.
+  /// **Since Tizen:**
+  /// - 2.3.1
   ///
-  /// @param[in] info The scan result information
-  /// @param[in] pkt_type The packet type
-  /// @param[out] name The device name
+  /// **Remarks:**
+  /// - The `name` must be released with free() by you.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NO_DATA  No data available
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Parameters:**
+  /// - `info` (in): The scan result information
+  /// - `pkt_type` (in): The packet type
+  /// - `name` (out): The device name
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
   ///
-  /// @see bt_adapter_le_scan_result_cb()
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NO_DATA`: No data available
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_adapter_le_scan_result_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
   int bt_adapter_le_get_scan_result_device_name(
     ffi.Pointer<bt_adapter_le_device_scan_result_info_s> info,
     int pkt_type,
@@ -1352,24 +1788,34 @@ class Tizen65CapiNetworkBluetooth {
           int Function(ffi.Pointer<bt_adapter_le_device_scan_result_info_s>,
               int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
-  /// @brief Gets the transmission power level from the scan result information.
-  /// @since_tizen 2.3.1
+  /// Gets the transmission power level from the scan result information.
   ///
-  /// @param[in] info The scan result information
-  /// @param[in] pkt_type The packet type
-  /// @param[out] power_level The transmission power level in dBm
+  /// **Since Tizen:**
+  /// - 2.3.1
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NO_DATA  No data available
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Parameters:**
+  /// - `info` (in): The scan result information
+  /// - `pkt_type` (in): The packet type
+  /// - `power_level` (out): The transmission power level in dBm
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
   ///
-  /// @see bt_adapter_le_scan_result_cb()
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NO_DATA`: No data available
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_adapter_le_scan_result_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
   int bt_adapter_le_get_scan_result_tx_power_level(
     ffi.Pointer<bt_adapter_le_device_scan_result_info_s> info,
     int pkt_type,
@@ -1394,30 +1840,41 @@ class Tizen65CapiNetworkBluetooth {
           int Function(ffi.Pointer<bt_adapter_le_device_scan_result_info_s>,
               int, ffi.Pointer<ffi.Int>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
-  /// @brief Gets the service solicitation UUID list from the scan result information.
-  /// @since_tizen 2.3.1
+  /// Gets the service solicitation UUID list from the scan result information.
   ///
-  /// @remarks The @a uuids must be iterated as count and each pointed data must be released with free().
-  /// Then @a uuids must be released with free(). \n
-  /// 16-bit service solicitation UUID or 128-bit service solicitation UUID is supported.
-  /// (e.g. 180F, 0000180F-0000-1000-8000-00805F9B34FB)
+  /// **Since Tizen:**
+  /// - 2.3.1
   ///
-  /// @param[in] info The scan result information
-  /// @param[in] pkt_type The packet type
-  /// @param[out] uuids The list of string of the service solicitation UUID
-  /// @param[out] count The count of the service UUIDs
+  /// **Remarks:**
+  /// - The `uuids` must be iterated as count and each pointed data must be released with free().
+  /// - Then `uuids` must be released with free().
+  /// - 16-bit service solicitation UUID or 128-bit service solicitation UUID is supported.
+  /// - (e.g. 180F, 0000180F-0000-1000-8000-00805F9B34FB)
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NO_DATA  No data available
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Parameters:**
+  /// - `info` (in): The scan result information
+  /// - `pkt_type` (in): The packet type
+  /// - `uuids` (out): The list of string of the service solicitation UUID
+  /// - `count` (out): The count of the service UUIDs
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
   ///
-  /// @see bt_adapter_le_scan_result_cb()
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NO_DATA`: No data available
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_adapter_le_scan_result_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
   int bt_adapter_le_get_scan_result_service_solicitation_uuids(
     ffi.Pointer<bt_adapter_le_device_scan_result_info_s> info,
     int pkt_type,
@@ -1449,27 +1906,38 @@ class Tizen65CapiNetworkBluetooth {
               ffi.Pointer<ffi.Pointer<ffi.Pointer<ffi.Char>>>,
               ffi.Pointer<ffi.Int>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
-  /// @brief Gets the service data list from the scan result information.
-  /// @since_tizen 2.3.1
+  /// Gets the service data list from the scan result information.
   ///
-  /// @remarks The @a data_list must be released with bt_adapter_le_free_service_data_list() by you .
+  /// **Since Tizen:**
+  /// - 2.3.1
   ///
-  /// @param[in] info The scan result information
-  /// @param[in] pkt_type The packet type
-  /// @param[out] data_list The list of the service data
-  /// @param[out] count The count of the service data list
+  /// **Remarks:**
+  /// - The `data_list` must be released with bt_adapter_le_free_service_data_list() by you .
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NO_DATA  No data available
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Parameters:**
+  /// - `info` (in): The scan result information
+  /// - `pkt_type` (in): The packet type
+  /// - `data_list` (out): The list of the service data
+  /// - `count` (out): The count of the service data list
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
   ///
-  /// @see bt_adapter_le_scan_result_cb()
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NO_DATA`: No data available
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_adapter_le_scan_result_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
   int bt_adapter_le_get_scan_result_service_data_list(
     ffi.Pointer<bt_adapter_le_device_scan_result_info_s> info,
     int pkt_type,
@@ -1500,19 +1968,28 @@ class Tizen65CapiNetworkBluetooth {
               ffi.Pointer<ffi.Pointer<bt_adapter_le_service_data_s>>,
               ffi.Pointer<ffi.Int>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
-  /// @brief Frees service data list.
-  /// @since_tizen 2.3.1
+  /// Frees service data list.
   ///
-  /// @param[in] data_list The list of the service data
-  /// @param[in] count The count of the service data list
+  /// **Since Tizen:**
+  /// - 2.3.1
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Parameters:**
+  /// - `data_list` (in): The list of the service data
+  /// - `count` (in): The count of the service data list
   ///
-  /// @see bt_adapter_le_get_scan_result_service_data_list()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `bt_adapter_le_get_scan_result_service_data_list()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
   int bt_adapter_le_free_service_data_list(
     ffi.Pointer<bt_adapter_le_service_data_s> data_list,
     int count,
@@ -1531,24 +2008,34 @@ class Tizen65CapiNetworkBluetooth {
       _bt_adapter_le_free_service_data_listPtr.asFunction<
           int Function(ffi.Pointer<bt_adapter_le_service_data_s>, int)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
-  /// @brief Gets the appearance from the scan result information.
-  /// @since_tizen 2.3.1
+  /// Gets the appearance from the scan result information.
   ///
-  /// @param[in] info The scan result information
-  /// @param[in] pkt_type The packet type
-  /// @param[out] appearance The appearance
+  /// **Since Tizen:**
+  /// - 2.3.1
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NO_DATA  No data available
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Parameters:**
+  /// - `info` (in): The scan result information
+  /// - `pkt_type` (in): The packet type
+  /// - `appearance` (out): The appearance
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
   ///
-  /// @see bt_adapter_le_scan_result_cb()
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NO_DATA`: No data available
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_adapter_le_scan_result_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
   int bt_adapter_le_get_scan_result_appearance(
     ffi.Pointer<bt_adapter_le_device_scan_result_info_s> info,
     int pkt_type,
@@ -1573,28 +2060,39 @@ class Tizen65CapiNetworkBluetooth {
           int Function(ffi.Pointer<bt_adapter_le_device_scan_result_info_s>,
               int, ffi.Pointer<ffi.Int>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
-  /// @brief Gets the manufacturer data from the scan result information.
-  /// @since_tizen 2.3.1
+  /// Gets the manufacturer data from the scan result information.
   ///
-  /// @remarks The @a manufacturer_data must be released with free() by you.
+  /// **Since Tizen:**
+  /// - 2.3.1
   ///
-  /// @param[in] info The scan result information
-  /// @param[in] pkt_type The packet type
-  /// @param[out] manufacturer_id The manufacturer ID
-  /// @param[out] manufacturer_data The manufacturer data (byte array)
-  /// @param[out] manufacturer_data_len The length of manufacturer data
+  /// **Remarks:**
+  /// - The `manufacturer_data` must be released with free() by you.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NO_DATA  No data available
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Parameters:**
+  /// - `info` (in): The scan result information
+  /// - `pkt_type` (in): The packet type
+  /// - `manufacturer_id` (out): The manufacturer ID
+  /// - `manufacturer_data` (out): The manufacturer data (byte array)
+  /// - `manufacturer_data_len` (out): The length of manufacturer data
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
   ///
-  /// @see bt_adapter_le_scan_result_cb()
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NO_DATA`: No data available
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_adapter_le_scan_result_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
   int bt_adapter_le_get_scan_result_manufacturer_data(
     ffi.Pointer<bt_adapter_le_device_scan_result_info_s> info,
     int pkt_type,
@@ -1629,26 +2127,37 @@ class Tizen65CapiNetworkBluetooth {
               ffi.Pointer<ffi.Pointer<ffi.Char>>,
               ffi.Pointer<ffi.Int>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
-  /// @brief Gets iBeacon format's data from the scan result information.
-  /// @since_tizen 4.0
+  /// Gets iBeacon format's data from the scan result information.
   ///
-  /// @remarks The @a ibeacon_info must be released with bt_adapter_le_free_ibeacon_report().
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @param[in] info The scan result information
-  /// @param[in] pkt_type The packet type
-  /// @param[out] ibeacon_info The iBeacon format's scan result data
+  /// **Remarks:**
+  /// - The `ibeacon_info` must be released with bt_adapter_le_free_ibeacon_report().
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NO_DATA  No data available
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Parameters:**
+  /// - `info` (in): The scan result information
+  /// - `pkt_type` (in): The packet type
+  /// - `ibeacon_info` (out): The iBeacon format's scan result data
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
   ///
-  /// @see bt_adapter_le_scan_result_cb()
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NO_DATA`: No data available
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_adapter_le_scan_result_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
   int bt_adapter_le_get_scan_result_ibeacon_report(
     ffi.Pointer<bt_adapter_le_device_scan_result_info_s> info,
     int pkt_type,
@@ -1678,18 +2187,27 @@ class Tizen65CapiNetworkBluetooth {
               ffi.Pointer<
                   ffi.Pointer<bt_adapter_le_ibeacon_scan_result_info_s>>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
-  /// @brief Frees iBeacon information.
-  /// @since_tizen 4.0
+  /// Frees iBeacon information.
   ///
-  /// @param[in] ibeacon_info The iBeacon format's scan result data
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Parameters:**
+  /// - `ibeacon_info` (in): The iBeacon format's scan result data
   ///
-  /// @see bt_adapter_le_get_scan_result_service_data_list()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `bt_adapter_le_get_scan_result_service_data_list()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
   int bt_adapter_le_free_ibeacon_report(
     ffi.Pointer<bt_adapter_le_ibeacon_scan_result_info_s> ibeacon_info,
   ) {
@@ -1708,22 +2226,32 @@ class Tizen65CapiNetworkBluetooth {
           int Function(
               ffi.Pointer<bt_adapter_le_ibeacon_scan_result_info_s>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
-  /// @brief Creates advertiser to advertise device's existence or respond to LE scanning request.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+  /// Creates advertiser to advertise device's existence or respond to LE scanning request.
   ///
-  /// @param[out] advertiser The handle of advertiser
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_OUT_OF_MEMORY  Out of memory
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Parameters:**
+  /// - `advertiser` (out): The handle of advertiser
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
   ///
-  /// @see bt_adapter_le_destroy_advertiser()
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_adapter_le_destroy_advertiser()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
   int bt_adapter_le_create_advertiser(
     ffi.Pointer<bt_advertiser_h> advertiser,
   ) {
@@ -1739,21 +2267,31 @@ class Tizen65CapiNetworkBluetooth {
       _bt_adapter_le_create_advertiserPtr
           .asFunction<int Function(ffi.Pointer<bt_advertiser_h>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
-  /// @brief Destroys advertiser.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+  /// Destroys advertiser.
   ///
-  /// @param[out] advertiser The handle of advertiser
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Parameters:**
+  /// - `advertiser` (out): The handle of advertiser
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
   ///
-  /// @see bt_adapter_le_create_advertiser()
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_adapter_le_create_advertiser()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
   int bt_adapter_le_destroy_advertiser(
     bt_advertiser_h advertiser,
   ) {
@@ -1769,20 +2307,33 @@ class Tizen65CapiNetworkBluetooth {
       _bt_adapter_le_destroy_advertiserPtr
           .asFunction<int Function(bt_advertiser_h)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_IPSP_MODULE
-  /// @brief Initializes the Bluetooth IPSP (Internet Protocol Support Profile) service.
-  /// @since_tizen 4.0
-  /// @param[in] callback The callback called when the initialization is finished
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_NOT_SUPPORTED   Not supported
+  /// Initializes the Bluetooth IPSP (Internet Protocol Support Profile) service.
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
-  /// @see bt_initialize()
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): The callback called when the initialization is finished
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_initialize()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_IPSP_MODULE
   int bt_ipsp_initialize(
     bt_ipsp_init_state_changed_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -1800,17 +2351,28 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_ipsp_initialize = _bt_ipsp_initializePtr.asFunction<
       int Function(bt_ipsp_init_state_changed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_IPSP_MODULE
-  /// @brief Deinitializes the Bluetooth IPSP (Internet Protocol Support Profile) service.
-  /// @since_tizen 4.0
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_NOT_SUPPORTED   Not supported
+  /// Deinitializes the Bluetooth IPSP (Internet Protocol Support Profile) service.
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
-  /// @see bt_initialize()
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_initialize()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_IPSP_MODULE
   int bt_ipsp_deinitialize() {
     return _bt_ipsp_deinitialize();
   }
@@ -1820,23 +2382,40 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_ipsp_deinitialize =
       _bt_ipsp_deinitializePtr.asFunction<int Function()>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_IPSP_MODULE
-  /// @brief Connects to a remote device's IPSP service over LE, asynchronously.
-  /// @since_tizen 4.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
-  /// @param[in] remote_address  The remote address
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED   Not supported
+  /// Connects to a remote device's IPSP service over LE, asynchronously.
   ///
-  /// @post bt_ipsp_set_connection_state_changed_cb() will be invoked.
-  /// @see bt_ipsp_set_connection_state_changed_cb()
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
+  ///
+  /// **Parameters:**
+  /// - `remote_address` (in): The remote address
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Postconditions:**
+  /// - bt_ipsp_set_connection_state_changed_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `bt_ipsp_set_connection_state_changed_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_IPSP_MODULE
   int bt_ipsp_connect(
     ffi.Pointer<ffi.Char> remote_address,
   ) {
@@ -1851,26 +2430,45 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_ipsp_connect =
       _bt_ipsp_connectPtr.asFunction<int Function(ffi.Pointer<ffi.Char>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_IPSP_MODULE
-  /// @brief Disconnects from a remote device's IPSP service, asynchronously.
-  /// @since_tizen 4.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
-  /// @param[in] remote_address  The remote address
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_REMOTE_DEVICE_NOT_CONNECTED  Remote device is not connected
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED   Not supported
+  /// Disconnects from a remote device's IPSP service, asynchronously.
   ///
-  /// @pre The remote device must be connected by bt_ipsp_connect().
-  /// @post bt_ipsp_set_connection_state_changed_cb() will be invoked.
-  /// @see bt_ipsp_connect()
-  /// @see bt_ipsp_set_connection_state_changed_cb()
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
+  ///
+  /// **Parameters:**
+  /// - `remote_address` (in): The remote address
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_REMOTE_DEVICE_NOT_CONNECTED`: Remote device is not connected
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The remote device must be connected by bt_ipsp_connect().
+  ///
+  /// **Postconditions:**
+  /// - bt_ipsp_set_connection_state_changed_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `bt_ipsp_connect()`
+  /// - `bt_ipsp_set_connection_state_changed_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_IPSP_MODULE
   int bt_ipsp_disconnect(
     ffi.Pointer<ffi.Char> remote_address,
   ) {
@@ -1885,19 +2483,32 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_ipsp_disconnect =
       _bt_ipsp_disconnectPtr.asFunction<int Function(ffi.Pointer<ffi.Char>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_IPSP_MODULE
-  /// @brief  Registers a callback function that will be invoked when the connection state changes.
-  /// @since_tizen 4.0
-  /// @param[in] callback The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return   0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED   Not supported
+  /// Registers a callback function that will be invoked when the connection state changes.
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
-  /// @see bt_initialize()
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_initialize()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_IPSP_MODULE
   int bt_ipsp_set_connection_state_changed_cb(
     bt_ipsp_connection_state_changed_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -1918,16 +2529,27 @@ class Tizen65CapiNetworkBluetooth {
           int Function(
               bt_ipsp_connection_state_changed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_IPSP_MODULE
-  /// @brief	Unregisters the callback function called when the connection state changes.
-  /// @since_tizen 4.0
-  /// @return	0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_NOT_SUPPORTED   Not supported
+  /// Unregisters the callback function called when the connection state changes.
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
-  /// @see bt_initialize()
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_initialize()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_IPSP_MODULE
   int bt_ipsp_unset_connection_state_changed_cb() {
     return _bt_ipsp_unset_connection_state_changed_cb();
   }
@@ -1939,35 +2561,44 @@ class Tizen65CapiNetworkBluetooth {
       _bt_ipsp_unset_connection_state_changed_cbPtr
           .asFunction<int Function()>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
-  /// @brief Adds a service UUID to advertise or scan response data.
-  /// The maximum advertised or responded data size is 31 bytes
-  /// including data type and system wide data.
-  /// @since_tizen 2.3.1
+  /// Adds a service UUID to advertise or scan response data. The maximum advertised or responded data size is 31 bytes including data type and system wide data.
   ///
-  /// @remarks 16-bit UUID or 128-bit UUID is supported.
-  /// (e.g. 180F, 0000180F-0000-1000-8000-00805F9B34FB).
-  /// 16-bit UUID is advertised as 16-bit UUID.
-  /// 128-bit UUID made from base UUID(00000000-0000-1000-8000-00805F9B34FB)
-  /// is converted to the 16-bit equivalent form and advertised as such.
-  /// (e.g. 0000180F-0000-1000-8000-00805F9B34FB is converted to 180F 16-bit form).
-  /// Any other 128-bit UUID is advertised as 128-bit UUID.
+  /// **Since Tizen:**
+  /// - 2.3.1
   ///
-  /// @param[in] advertiser The handle of advertiser
-  /// @param[in] pkt_type The packet type
-  /// @param[in] uuid The string of the service UUID.
+  /// **Remarks:**
+  /// - 16-bit UUID or 128-bit UUID is supported.
+  /// - (e.g. 180F, 0000180F-0000-1000-8000-00805F9B34FB).
+  /// - 16-bit UUID is advertised as 16-bit UUID.
+  /// - 128-bit UUID made from base UUID(00000000-0000-1000-8000-00805F9B34FB)
+  /// - is converted to the 16-bit equivalent form and advertised as such.
+  /// - (e.g. 0000180F-0000-1000-8000-00805F9B34FB is converted to 180F 16-bit form).
+  /// - Any other 128-bit UUID is advertised as 128-bit UUID.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_QUOTA_EXCEEDED  Quota exceeded
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Parameters:**
+  /// - `advertiser` (in): The handle of advertiser
+  /// - `pkt_type` (in): The packet type
+  /// - `uuid` (in): The string of the service UUID.
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
   ///
-  /// @see bt_adapter_le_clear_advertising_data()
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_QUOTA_EXCEEDED`: Quota exceeded
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_adapter_le_clear_advertising_data()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
   int bt_adapter_le_add_advertising_service_uuid(
     bt_advertiser_h advertiser,
     int pkt_type,
@@ -1989,35 +2620,44 @@ class Tizen65CapiNetworkBluetooth {
       _bt_adapter_le_add_advertising_service_uuidPtr.asFunction<
           int Function(bt_advertiser_h, int, ffi.Pointer<ffi.Char>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
-  /// @brief Adds a service solicitation UUID to advertise or scan response data.
-  /// The maximum advertised or responded data size is 31 bytes
-  /// including data type and system wide data.
-  /// @since_tizen 2.3.1
+  /// Adds a service solicitation UUID to advertise or scan response data. The maximum advertised or responded data size is 31 bytes including data type and system wide data.
   ///
-  /// @remarks 16-bit service solicitation UUID or 128-bit service solicitation UUID is supported.
-  /// (e.g. 180F, 0000180F-0000-1000-8000-00805F9B34FB).
-  /// 16-bit UUID is advertised as 16-bit UUID.
-  /// 128-bit UUID made from base UUID(00000000-0000-1000-8000-00805F9B34FB)
-  /// is converted to the 16-bit equivalent form and advertised as such.
-  /// (e.g. 0000180F-0000-1000-8000-00805F9B34FB is converted to 180F 16-bit form).
-  /// Any other 128-bit UUID is advertised as 128-bit UUID.
+  /// **Since Tizen:**
+  /// - 2.3.1
   ///
-  /// @param[in] advertiser The handle of advertiser
-  /// @param[in] pkt_type The packet type
-  /// @param[in] uuid The string of the service solicitation UUID.
+  /// **Remarks:**
+  /// - 16-bit service solicitation UUID or 128-bit service solicitation UUID is supported.
+  /// - (e.g. 180F, 0000180F-0000-1000-8000-00805F9B34FB).
+  /// - 16-bit UUID is advertised as 16-bit UUID.
+  /// - 128-bit UUID made from base UUID(00000000-0000-1000-8000-00805F9B34FB)
+  /// - is converted to the 16-bit equivalent form and advertised as such.
+  /// - (e.g. 0000180F-0000-1000-8000-00805F9B34FB is converted to 180F 16-bit form).
+  /// - Any other 128-bit UUID is advertised as 128-bit UUID.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_QUOTA_EXCEEDED  Quota exceeded
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Parameters:**
+  /// - `advertiser` (in): The handle of advertiser
+  /// - `pkt_type` (in): The packet type
+  /// - `uuid` (in): The string of the service solicitation UUID.
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
   ///
-  /// @see bt_adapter_le_clear_advertising_data()
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_QUOTA_EXCEEDED`: Quota exceeded
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_adapter_le_clear_advertising_data()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
   int bt_adapter_le_add_advertising_service_solicitation_uuid(
     bt_advertiser_h advertiser,
     int pkt_type,
@@ -2040,31 +2680,40 @@ class Tizen65CapiNetworkBluetooth {
       _bt_adapter_le_add_advertising_service_solicitation_uuidPtr.asFunction<
           int Function(bt_advertiser_h, int, ffi.Pointer<ffi.Char>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
-  /// @brief Adds service data to advertise or scan response data.
-  /// The maximum advertised or responded data size is 31 bytes
-  /// including data type and system wide data.
-  /// @since_tizen 2.3.1
+  /// Adds service data to advertise or scan response data. The maximum advertised or responded data size is 31 bytes including data type and system wide data.
   ///
-  /// @remarks 16-bit UUID is supported. (e.g. 180F).
+  /// **Since Tizen:**
+  /// - 2.3.1
   ///
-  /// @param[in] advertiser The handle of advertiser
-  /// @param[in] pkt_type The packet type
-  /// @param[in] uuid 16-bit UUID of the service
-  /// @param[in] service_data The service data
-  /// @param[in] service_data_len The data length of service data
+  /// **Remarks:**
+  /// - 16-bit UUID is supported. (e.g. 180F).
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_QUOTA_EXCEEDED  Quota exceeded
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Parameters:**
+  /// - `advertiser` (in): The handle of advertiser
+  /// - `pkt_type` (in): The packet type
+  /// - `uuid` (in): 16-bit UUID of the service
+  /// - `service_data` (in): The service data
+  /// - `service_data_len` (in): The data length of service data
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
   ///
-  /// @see bt_adapter_le_clear_advertising_data()
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_QUOTA_EXCEEDED`: Quota exceeded
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_adapter_le_clear_advertising_data()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
   int bt_adapter_le_add_advertising_service_data(
     bt_advertiser_h advertiser,
     int pkt_type,
@@ -2094,26 +2743,35 @@ class Tizen65CapiNetworkBluetooth {
           int Function(bt_advertiser_h, int, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Char>, int)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
-  /// @brief Sets the external appearance of this device to advertise or scan response data.
-  /// Please refer to the adopted Bluetooth specification for the the appearance.
-  /// @since_tizen 2.3.1
+  /// Sets the external appearance of this device to advertise or scan response data. Please refer to the adopted Bluetooth specification for the the appearance.
   ///
-  /// @param[in] advertiser The handle of advertiser
-  /// @param[in] pkt_type The packet type
-  /// @param[in] appearance The external appearance of device
+  /// **Since Tizen:**
+  /// - 2.3.1
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_QUOTA_EXCEEDED  Quota exceeded
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Parameters:**
+  /// - `advertiser` (in): The handle of advertiser
+  /// - `pkt_type` (in): The packet type
+  /// - `appearance` (in): The external appearance of device
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
   ///
-  /// @see bt_adapter_le_clear_advertising_data()
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_QUOTA_EXCEEDED`: Quota exceeded
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_adapter_le_clear_advertising_data()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
   int bt_adapter_le_set_advertising_appearance(
     bt_advertiser_h advertiser,
     int pkt_type,
@@ -2134,31 +2792,37 @@ class Tizen65CapiNetworkBluetooth {
       _bt_adapter_le_set_advertising_appearancePtr
           .asFunction<int Function(bt_advertiser_h, int, int)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
-  /// @brief Adds manufacturer specific data to advertise or scan response data.
-  /// Please refer to the Bluetooth Assigned Numbers provided by the Bluetooth SIG for a list of existing company identifiers.
-  /// The maximum advertised or responded data size is 31 bytes
-  /// including data type and system wide data.
-  /// @since_tizen 2.3.1
+  /// Adds manufacturer specific data to advertise or scan response data. Please refer to the Bluetooth Assigned Numbers provided by the Bluetooth SIG for a list of existing company identifiers. The maximum advertised or responded data size is 31 bytes including data type and system wide data.
   ///
+  /// **Since Tizen:**
+  /// - 2.3.1
   ///
-  /// @param[in] advertiser The handle of advertiser
-  /// @param[in] pkt_type The packet type
-  /// @param[in] manufacturer_id Manufacturer identifier
-  /// @param[in] manufacturer_data The manufacturer specific data
-  /// @param[in] manufacturer_data_len The data length of manufacturer data
+  /// **Parameters:**
+  /// - `advertiser` (in): The handle of advertiser
+  /// - `pkt_type` (in): The packet type
+  /// - `manufacturer_id` (in): Manufacturer identifier
+  /// - `manufacturer_data` (in): The manufacturer specific data
+  /// - `manufacturer_data_len` (in): The data length of manufacturer data
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_QUOTA_EXCEEDED  Quota exceeded
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_QUOTA_EXCEEDED`: Quota exceeded
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
   ///
-  /// @see bt_adapter_le_clear_advertising_data()
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_adapter_le_clear_advertising_data()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
   int bt_adapter_le_add_advertising_manufacturer_data(
     bt_advertiser_h advertiser,
     int pkt_type,
@@ -2188,27 +2852,35 @@ class Tizen65CapiNetworkBluetooth {
           int Function(
               bt_advertiser_h, int, int, ffi.Pointer<ffi.Char>, int)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
-  /// @brief Sets whether the device name should be included in advertise or scan response data.
-  /// The maximum advertised or responded data size is 31 bytes
-  /// including data type and system wide data.
-  /// @since_tizen 2.3.1
+  /// Sets whether the device name should be included in advertise or scan response data. The maximum advertised or responded data size is 31 bytes including data type and system wide data.
   ///
-  /// @param[in] advertiser The handle of advertiser
-  /// @param[in] pkt_type The packet type
-  /// @param[in] include_name Whether the device name should be included
+  /// **Since Tizen:**
+  /// - 2.3.1
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_QUOTA_EXCEEDED  Quota exceeded
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Parameters:**
+  /// - `advertiser` (in): The handle of advertiser
+  /// - `pkt_type` (in): The packet type
+  /// - `include_name` (in): Whether the device name should be included
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
   ///
-  /// @see bt_adapter_le_clear_advertising_data()
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_QUOTA_EXCEEDED`: Quota exceeded
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_adapter_le_clear_advertising_data()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
   int bt_adapter_le_set_advertising_device_name(
     bt_advertiser_h advertiser,
     int pkt_type,
@@ -2229,27 +2901,35 @@ class Tizen65CapiNetworkBluetooth {
       _bt_adapter_le_set_advertising_device_namePtr
           .asFunction<int Function(bt_advertiser_h, int, bool)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
-  /// @brief Sets whether the transmission power level should be included in advertise or scan response data.
-  /// The maximum advertised or responded data size is 31 bytes
-  /// including data type and system wide data.
-  /// @since_tizen 2.3.1
+  /// Sets whether the transmission power level should be included in advertise or scan response data. The maximum advertised or responded data size is 31 bytes including data type and system wide data.
   ///
-  /// @param[in] advertiser The handle of advertiser
-  /// @param[in] pkt_type The packet type
-  /// @param[in] include_tx_power Whether the transmission power level should be included
+  /// **Since Tizen:**
+  /// - 2.3.1
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_QUOTA_EXCEEDED  Quota exceeded
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Parameters:**
+  /// - `advertiser` (in): The handle of advertiser
+  /// - `pkt_type` (in): The packet type
+  /// - `include_tx_power` (in): Whether the transmission power level should be included
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
   ///
-  /// @see bt_adapter_le_clear_advertising_data()
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_QUOTA_EXCEEDED`: Quota exceeded
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_adapter_le_clear_advertising_data()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
   int bt_adapter_le_set_advertising_tx_power_level(
     bt_advertiser_h advertiser,
     int pkt_type,
@@ -2270,20 +2950,29 @@ class Tizen65CapiNetworkBluetooth {
       _bt_adapter_le_set_advertising_tx_power_levelPtr
           .asFunction<int Function(bt_advertiser_h, int, bool)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
-  /// @brief Clears all data to be advertised or responded to scan request from LE scanning device.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+  /// Clears all data to be advertised or responded to scan request from LE scanning device.
   ///
-  /// @param[in] advertiser The handle of advertiser
-  /// @param[in] pkt_type The packet type to be cleared
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Parameters:**
+  /// - `advertiser` (in): The handle of advertiser
+  /// - `pkt_type` (in): The packet type to be cleared
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
   int bt_adapter_le_clear_advertising_data(
     bt_advertiser_h advertiser,
     int pkt_type,
@@ -2301,29 +2990,45 @@ class Tizen65CapiNetworkBluetooth {
       _bt_adapter_le_clear_advertising_dataPtr
           .asFunction<int Function(bt_advertiser_h, int)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
-  /// @brief Stops the advertising.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
+  /// Stops the advertising.
   ///
-  /// @param[in] advertiser The handle of advertiser
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_NOT_IN_PROGRESS  Operation is not in progress
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre The advertising must be going on with bt_adapter_le_start_advertising_new().
-  /// @post This function invokes bt_adapter_le_advertising_state_changed_cb().
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
   ///
-  /// @see bt_adapter_le_start_advertising_new()
-  /// @see bt_adapter_le_advertising_state_changed_cb()
+  /// **Parameters:**
+  /// - `advertiser` (in): The handle of advertiser
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_NOT_IN_PROGRESS`: Operation is not in progress
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The advertising must be going on with bt_adapter_le_start_advertising_new().
+  ///
+  /// **Postconditions:**
+  /// - This function invokes bt_adapter_le_advertising_state_changed_cb().
+  ///
+  /// **See also:**
+  /// - `bt_adapter_le_start_advertising_new()`
+  /// - `bt_adapter_le_advertising_state_changed_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
   int bt_adapter_le_stop_advertising(
     bt_advertiser_h advertiser,
   ) {
@@ -2339,35 +3044,49 @@ class Tizen65CapiNetworkBluetooth {
       _bt_adapter_le_stop_advertisingPtr
           .asFunction<int Function(bt_advertiser_h)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
-  /// @brief Starts advertising with passed advertiser and advertising parameters.
+  /// Starts advertising with passed advertiser and advertising parameters.
   ///
-  /// @details Once Bluetooth advertising is started, nearby Bluetooth LE (Low Energy) supported \n
-  /// devices can know this device's existence. And one of them can make a connection request, \n
-  /// if it is allowed.
+  /// Once Bluetooth advertising is started, nearby Bluetooth LE (Low Energy) supported devices can know this device's existence. And one of them can make a connection request, if it is allowed.
   ///
-  /// @since_tizen 2.3.1
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
-  /// @param[in] advertiser The handle of advertiser
-  /// @param[in] cb The callback to report the result of this function
-  /// @param[in] user_data The user data to be passed when callback is called
+  /// **Since Tizen:**
+  /// - 2.3.1
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_NOW_IN_PROGRESS  Operation is now in progress
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
-  /// @post This function invokes bt_adapter_le_advertising_state_changed_cb().
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
   ///
-  /// @see bt_adapter_le_stop_advertising()
-  /// @see bt_adapter_le_advertising_state_changed_cb()
+  /// **Parameters:**
+  /// - `advertiser` (in): The handle of advertiser
+  /// - `cb` (in): The callback to report the result of this function
+  /// - `user_data` (in): The user data to be passed when callback is called
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_NOW_IN_PROGRESS`: Operation is now in progress
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **Postconditions:**
+  /// - This function invokes bt_adapter_le_advertising_state_changed_cb().
+  ///
+  /// **See also:**
+  /// - `bt_adapter_le_stop_advertising()`
+  /// - `bt_adapter_le_advertising_state_changed_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
   int bt_adapter_le_start_advertising_new(
     bt_advertiser_h advertiser,
     bt_adapter_le_advertising_state_changed_cb cb,
@@ -2393,27 +3112,41 @@ class Tizen65CapiNetworkBluetooth {
               bt_adapter_le_advertising_state_changed_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
-  /// @brief Sets advertising mode to control the advertising power and latency.
-  /// @since_tizen 2.3.1
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
+  /// Sets advertising mode to control the advertising power and latency.
   ///
-  /// @param[in] advertiser The handle of advertiser
-  /// @param[in] mode The mode of advertising
+  /// **Since Tizen:**
+  /// - 2.3.1
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_NOW_IN_PROGRESS  Operation is now in progress
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
   ///
-  /// @see bt_adapter_le_start_advertising_new()
+  /// **Parameters:**
+  /// - `advertiser` (in): The handle of advertiser
+  /// - `mode` (in): The mode of advertising
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_NOW_IN_PROGRESS`: Operation is now in progress
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_adapter_le_start_advertising_new()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
   int bt_adapter_le_set_advertising_mode(
     bt_advertiser_h advertiser,
     int mode,
@@ -2431,27 +3164,41 @@ class Tizen65CapiNetworkBluetooth {
       _bt_adapter_le_set_advertising_modePtr
           .asFunction<int Function(bt_advertiser_h, int)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
-  /// @brief Sets whether the advertising type should be connectable or non-connectable.
-  /// @since_tizen 2.3.1
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
+  /// Sets whether the advertising type should be connectable or non-connectable.
   ///
-  /// @param[in] advertiser The handle of advertiser
-  /// @param[in] connectable The type of advertising
+  /// **Since Tizen:**
+  /// - 2.3.1
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_NOW_IN_PROGRESS  Operation is now in progress
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
   ///
-  /// @see bt_adapter_le_start_advertising_new()
+  /// **Parameters:**
+  /// - `advertiser` (in): The handle of advertiser
+  /// - `connectable` (in): The type of advertising
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_NOW_IN_PROGRESS`: Operation is now in progress
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_adapter_le_start_advertising_new()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
   int bt_adapter_le_set_advertising_connectable(
     bt_advertiser_h advertiser,
     bool connectable,
@@ -2469,22 +3216,39 @@ class Tizen65CapiNetworkBluetooth {
       _bt_adapter_le_set_advertising_connectablePtr
           .asFunction<int Function(bt_advertiser_h, bool)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
-  /// @brief Sets Bluetooth LE scan mode.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
-  /// @param[in] scan_mode The scan mode
+  /// Sets Bluetooth LE scan mode.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE Successful
-  /// @retval #BT_ERROR_NOT_ENABLED Adapter is not enabled
-  /// @retval #BT_ERROR_INVALID_PARAMETER Parameter is invalid
-  /// @retval #BT_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED Not supported
-  /// @pre The state of local bluetooth must be #BT_ADAPTER_ENABLED.
-  /// @pre The bluetooth service must be initialized with bt_initialize().
-  /// @see bt_initialize()
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
+  ///
+  /// **Parameters:**
+  /// - `scan_mode` (in): The scan mode
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_ENABLED`: Adapter is not enabled
+  /// - `BT_ERROR_INVALID_PARAMETER`: Parameter is invalid
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The state of local bluetooth must be `BT_ADAPTER_ENABLED`.
+  /// - The bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_initialize()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
   int bt_adapter_le_set_scan_mode(
     int scan_mode,
   ) {
@@ -2499,37 +3263,54 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_adapter_le_set_scan_mode =
       _bt_adapter_le_set_scan_modePtr.asFunction<int Function(int)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
-  /// @brief Creates a bond with a remote Bluetooth device, asynchronously.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
+  /// Creates a bond with a remote Bluetooth device, asynchronously.
   ///
-  /// @remarks A bond can be destroyed by bt_device_destroy_bond().\n
-  /// The bonding request can be cancelled by bt_device_cancel_bonding().
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
   ///
-  /// @param[in] remote_address The address of the remote Bluetooth device with which the bond should be created
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_RESOURCE_BUSY  Device or resource busy
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
   ///
-  /// @pre The state of local Bluetooth must be #BT_ADAPTER_ENABLED.
-  /// @pre The remote device must be discoverable with bt_adapter_start_device_discovery().
-  /// @post This function invokes bt_device_bond_created_cb().
+  /// **Remarks:**
+  /// - A bond can be destroyed by bt_device_destroy_bond().
+  /// - The bonding request can be cancelled by bt_device_cancel_bonding().
   ///
-  /// @see bt_adapter_start_device_discovery()
-  /// @see bt_device_bond_created_cb()
-  /// @see bt_device_cancel_bonding()
-  /// @see bt_device_destroy_bond()
-  /// @see bt_device_set_bond_created_cb()
-  /// @see bt_device_unset_bond_created_cb()
+  /// **Parameters:**
+  /// - `remote_address` (in): The address of the remote Bluetooth device with which the bond should be created
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The state of local Bluetooth must be `BT_ADAPTER_ENABLED`.
+  /// - The remote device must be discoverable with bt_adapter_start_device_discovery().
+  ///
+  /// **Postconditions:**
+  /// - This function invokes bt_device_bond_created_cb().
+  ///
+  /// **See also:**
+  /// - `bt_adapter_start_device_discovery()`
+  /// - `bt_device_bond_created_cb()`
+  /// - `bt_device_cancel_bonding()`
+  /// - `bt_device_destroy_bond()`
+  /// - `bt_device_set_bond_created_cb()`
+  /// - `bt_device_unset_bond_created_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
   int bt_device_create_bond(
     ffi.Pointer<ffi.Char> remote_address,
   ) {
@@ -2544,29 +3325,43 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_device_create_bond = _bt_device_create_bondPtr
       .asFunction<int Function(ffi.Pointer<ffi.Char>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
-  /// @brief Cancels the bonding process.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
+  /// Cancels the bonding process.
   ///
-  /// @remarks Use this function when the remote Bluetooth device is not responding to the \n
-  /// bond request or you wish to cancel the bonding request.
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_NOT_IN_PROGRESS  Operation not in progress
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre The creating a bond must be in progress by bt_device_create_bond().
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
   ///
-  /// @see bt_device_create_bond()
-  /// @see bt_device_bond_created_cb()
-  /// @see bt_device_set_bond_created_cb()
-  /// @see bt_device_unset_bond_created_cb()
+  /// **Remarks:**
+  /// - Use this function when the remote Bluetooth device is not responding to the
+  /// - bond request or you wish to cancel the bonding request.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_NOT_IN_PROGRESS`: Operation not in progress
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The creating a bond must be in progress by bt_device_create_bond().
+  ///
+  /// **See also:**
+  /// - `bt_device_create_bond()`
+  /// - `bt_device_bond_created_cb()`
+  /// - `bt_device_set_bond_created_cb()`
+  /// - `bt_device_unset_bond_created_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
   int bt_device_cancel_bonding() {
     return _bt_device_cancel_bonding();
   }
@@ -2577,33 +3372,49 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_device_cancel_bonding =
       _bt_device_cancel_bondingPtr.asFunction<int Function()>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
-  /// @brief Destroys the bond, asynchronously.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
+  /// Destroys the bond, asynchronously.
   ///
-  /// @param[in] remote_address The address of the remote Bluetooth device to remove bonding
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_RESOURCE_BUSY  Device or resource busy
-  /// @retval #BT_ERROR_REMOTE_DEVICE_NOT_BONDED  Remote device not bonded
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre The state of local Bluetooth must be #BT_ADAPTER_ENABLED.
-  /// @pre The bond with the remote device must be created with bt_device_create_bond().
-  /// @post This function invokes bt_device_bond_destroyed_cb().
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
   ///
-  /// @see bt_device_create_bond()
-  /// @see bt_device_bond_destroyed_cb()
-  /// @see bt_device_set_bond_destroyed_cb()
-  /// @see bt_device_unset_bond_destroyed_cb()
+  /// **Parameters:**
+  /// - `remote_address` (in): The address of the remote Bluetooth device to remove bonding
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  /// - `BT_ERROR_REMOTE_DEVICE_NOT_BONDED`: Remote device not bonded
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The state of local Bluetooth must be `BT_ADAPTER_ENABLED`.
+  /// - The bond with the remote device must be created with bt_device_create_bond().
+  ///
+  /// **Postconditions:**
+  /// - This function invokes bt_device_bond_destroyed_cb().
+  ///
+  /// **See also:**
+  /// - `bt_device_create_bond()`
+  /// - `bt_device_bond_destroyed_cb()`
+  /// - `bt_device_set_bond_destroyed_cb()`
+  /// - `bt_device_unset_bond_destroyed_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
   int bt_device_destroy_bond(
     ffi.Pointer<ffi.Char> remote_address,
   ) {
@@ -2618,29 +3429,43 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_device_destroy_bond = _bt_device_destroy_bondPtr
       .asFunction<int Function(ffi.Pointer<ffi.Char>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
-  /// @brief Sets an alias for the bonded device.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
+  /// Sets an alias for the bonded device.
   ///
-  /// @param[in] remote_address The address of the remote Bluetooth device
-  /// @param[in] alias The alias of the remote Bluetooth device
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_REMOTE_DEVICE_NOT_BONDED  Remote device not bonded
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre The state of local Bluetooth must be #BT_ADAPTER_ENABLED.
-  /// @pre The bond with the remote device must be created with bt_device_create_bond().
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
   ///
-  /// @see bt_device_create_bond()
+  /// **Parameters:**
+  /// - `remote_address` (in): The address of the remote Bluetooth device
+  /// - `alias` (in): The alias of the remote Bluetooth device
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_REMOTE_DEVICE_NOT_BONDED`: Remote device not bonded
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The state of local Bluetooth must be `BT_ADAPTER_ENABLED`.
+  /// - The bond with the remote device must be created with bt_device_create_bond().
+  ///
+  /// **See also:**
+  /// - `bt_device_create_bond()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
   int bt_device_set_alias(
     ffi.Pointer<ffi.Char> remote_address,
     ffi.Pointer<ffi.Char> alias,
@@ -2658,35 +3483,52 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_device_set_alias = _bt_device_set_aliasPtr
       .asFunction<int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
-  /// @brief Sets the authorization of a bonded device, asynchronously.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
+  /// Sets the authorization of a bonded device, asynchronously.
   ///
-  /// @remarks Once a device is authorized, you don't need to receive a confirmation.
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
   ///
-  /// @param[in] remote_address The address of the remote Bluetooth device to authorize
-  /// @param[in] authorization_state The Bluetooth authorization state
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_REMOTE_DEVICE_NOT_BONDED  Remote device not bonded
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
   ///
-  /// @pre The state of local Bluetooth must be #BT_ADAPTER_ENABLED.
-  /// @pre The bond with the remote device must be created with bt_device_create_bond().
-  /// @post bt_device_authorization_changed_cb() will be invoked.
+  /// **Remarks:**
+  /// - Once a device is authorized, you don't need to receive a confirmation.
   ///
-  /// @see bt_device_create_bond()
-  /// @see bt_device_authorization_changed_cb()
-  /// @see bt_device_set_authorization_changed_cb()
-  /// @see bt_device_unset_authorization_changed_cb()
+  /// **Parameters:**
+  /// - `remote_address` (in): The address of the remote Bluetooth device to authorize
+  /// - `authorization_state` (in): The Bluetooth authorization state
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_REMOTE_DEVICE_NOT_BONDED`: Remote device not bonded
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The state of local Bluetooth must be `BT_ADAPTER_ENABLED`.
+  /// - The bond with the remote device must be created with bt_device_create_bond().
+  ///
+  /// **Postconditions:**
+  /// - bt_device_authorization_changed_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `bt_device_create_bond()`
+  /// - `bt_device_authorization_changed_cb()`
+  /// - `bt_device_set_authorization_changed_cb()`
+  /// - `bt_device_unset_authorization_changed_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
   int bt_device_set_authorization(
     ffi.Pointer<ffi.Char> remote_address,
     int authorization_state,
@@ -2704,39 +3546,56 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_device_set_authorization = _bt_device_set_authorizationPtr
       .asFunction<int Function(ffi.Pointer<ffi.Char>, int)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
-  /// @brief Starts the search for services supported by the specified device, asynchronously.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
+  /// Starts the search for services supported by the specified device, asynchronously.
   ///
-  /// @remarks If creating a bond succeeds, which means bt_device_bond_created_cb() is called with result #BT_ERROR_NONE, \n
-  /// then you don't need to run this function.\n
-  /// The service search takes a couple of seconds to complete normally.
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
   ///
-  /// @param[in] remote_address The address of the remote Bluetooth device whose services need to be checked
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_REMOTE_DEVICE_NOT_BONDED  Remote device not bonded
-  /// @retval #BT_ERROR_SERVICE_SEARCH_FAILED  Service search failed
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
   ///
-  /// @pre The state of local Bluetooth must be #BT_ADAPTER_ENABLED.
-  /// @pre The remote device must be discoverable with bt_adapter_start_device_discovery().
-  /// @pre The bond with the remote device must be created with bt_device_create_bond().
-  /// @post This function invokes bt_device_service_searched_cb().
+  /// **Remarks:**
+  /// - If creating a bond succeeds, which means bt_device_bond_created_cb() is called with result `BT_ERROR_NONE`,
+  /// - then you don't need to run this function.
+  /// - The service search takes a couple of seconds to complete normally.
   ///
-  /// @see bt_adapter_start_device_discovery()
-  /// @see bt_device_create_bond()
-  /// @see bt_device_bond_created_cb()
-  /// @see bt_device_service_searched_cb()
-  /// @see bt_device_set_service_searched_cb()
-  /// @see bt_device_unset_service_searched_cb()
+  /// **Parameters:**
+  /// - `remote_address` (in): The address of the remote Bluetooth device whose services need to be checked
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_REMOTE_DEVICE_NOT_BONDED`: Remote device not bonded
+  /// - `BT_ERROR_SERVICE_SEARCH_FAILED`: Service search failed
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The state of local Bluetooth must be `BT_ADAPTER_ENABLED`.
+  /// - The remote device must be discoverable with bt_adapter_start_device_discovery().
+  /// - The bond with the remote device must be created with bt_device_create_bond().
+  ///
+  /// **Postconditions:**
+  /// - This function invokes bt_device_service_searched_cb().
+  ///
+  /// **See also:**
+  /// - `bt_adapter_start_device_discovery()`
+  /// - `bt_device_create_bond()`
+  /// - `bt_device_bond_created_cb()`
+  /// - `bt_device_service_searched_cb()`
+  /// - `bt_device_set_service_searched_cb()`
+  /// - `bt_device_unset_service_searched_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
   int bt_device_start_service_search(
     ffi.Pointer<ffi.Char> remote_address,
   ) {
@@ -2752,22 +3611,37 @@ class Tizen65CapiNetworkBluetooth {
       _bt_device_start_service_searchPtr
           .asFunction<int Function(ffi.Pointer<ffi.Char>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
-  /// @brief Gets the connected profiles.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @param[in] remote_address The address of the remote device
-  /// @param[in] callback The callback function to invoke
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// Gets the connected profiles.
   ///
-  /// @pre The state of local Bluetooth must be #BT_ADAPTER_ENABLED.
-  /// @post bt_device_connected_profile() will be invoked.
-  /// @see bt_device_connected_profile()
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Parameters:**
+  /// - `remote_address` (in): The address of the remote device
+  /// - `callback` (in): The callback function to invoke
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The state of local Bluetooth must be `BT_ADAPTER_ENABLED`.
+  ///
+  /// **Postconditions:**
+  /// - bt_device_connected_profile() will be invoked.
+  ///
+  /// **See also:**
+  /// - `bt_device_connected_profile()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
   int bt_device_foreach_connected_profiles(
     ffi.Pointer<ffi.Char> remote_address,
     bt_device_connected_profile callback,
@@ -2789,22 +3663,33 @@ class Tizen65CapiNetworkBluetooth {
           int Function(ffi.Pointer<ffi.Char>, bt_device_connected_profile,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
-  /// @brief Gets the profile connected status.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @param[in] remote_address The address of the remote device
-  /// @param[in] bt_profile wish to know bt_profile
-  /// @param[out] connected_status the connected status
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_REMOTE_DEVICE_NOT_BONDED	Remote device not bonded
-  /// @retval #BT_ERROR_OPERATION_FAILED	Operation failed
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// Gets the profile connected status.
   ///
-  /// @pre The state of local Bluetooth must be #BT_ADAPTER_ENABLED.
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Parameters:**
+  /// - `remote_address` (in): The address of the remote device
+  /// - `bt_profile` (in): wish to know bt_profile
+  /// - `connected_status` (out): the connected status
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_REMOTE_DEVICE_NOT_BONDED`: Remote device not bonded
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The state of local Bluetooth must be `BT_ADAPTER_ENABLED`.
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
   int bt_device_is_profile_connected(
     ffi.Pointer<ffi.Char> remote_address,
     int bt_profile,
@@ -2825,23 +3710,35 @@ class Tizen65CapiNetworkBluetooth {
       _bt_device_is_profile_connectedPtr.asFunction<
           int Function(ffi.Pointer<ffi.Char>, int, ffi.Pointer<ffi.Bool>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
-  /// @brief Updates a LE connection mode.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
+  /// Updates a LE connection mode.
   ///
-  /// @param[in] remote_address The address of the remote Bluetooth device
-  /// @param[in] mode The LE connection mode
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_OPERATION_FAILED   Operation failed
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
+  ///
+  /// **Parameters:**
+  /// - `remote_address` (in): The address of the remote Bluetooth device
+  /// - `mode` (in): The LE connection mode
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
   int bt_device_update_le_connection_mode(
     ffi.Pointer<ffi.Char> remote_address,
     int mode,
@@ -2860,22 +3757,37 @@ class Tizen65CapiNetworkBluetooth {
       _bt_device_update_le_connection_modePtr
           .asFunction<int Function(ffi.Pointer<ffi.Char>, int)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
-  /// @brief  Registers a callback function to be invoked when the bond creates.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @param[in] callback The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return   0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// Registers a callback function to be invoked when the bond creates.
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
-  /// @post  bt_device_bond_created_cb() will be invoked.
-  /// @see bt_initialize()
-  /// @see bt_device_bond_created_cb()
-  /// @see bt_device_unset_bond_created_cb()
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **Postconditions:**
+  /// - bt_device_bond_created_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `bt_initialize()`
+  /// - `bt_device_bond_created_cb()`
+  /// - `bt_device_unset_bond_created_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
   int bt_device_set_bond_created_cb(
     bt_device_bond_created_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -2894,17 +3806,28 @@ class Tizen65CapiNetworkBluetooth {
       _bt_device_set_bond_created_cbPtr.asFunction<
           int Function(bt_device_bond_created_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
-  /// @brief	Unregisters the callback function.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @return	0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// Unregisters the callback function.
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
-  /// @see bt_initialize()
-  /// @see bt_device_set_bond_created_cb()
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_initialize()`
+  /// - `bt_device_set_bond_created_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
   int bt_device_unset_bond_created_cb() {
     return _bt_device_unset_bond_created_cb();
   }
@@ -2915,22 +3838,37 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_device_unset_bond_created_cb =
       _bt_device_unset_bond_created_cbPtr.asFunction<int Function()>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
-  /// @brief  Registers a callback function to be invoked when the bond destroys.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @param[in] callback The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return   0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// Registers a callback function to be invoked when the bond destroys.
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
-  /// @post  bt_device_bond_destroyed_cb() will be invoked.
-  /// @see bt_initialize()
-  /// @see bt_device_bond_destroyed_cb()
-  /// @see bt_device_unset_bond_destroyed_cb()
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **Postconditions:**
+  /// - bt_device_bond_destroyed_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `bt_initialize()`
+  /// - `bt_device_bond_destroyed_cb()`
+  /// - `bt_device_unset_bond_destroyed_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
   int bt_device_set_bond_destroyed_cb(
     bt_device_bond_destroyed_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -2949,17 +3887,28 @@ class Tizen65CapiNetworkBluetooth {
       _bt_device_set_bond_destroyed_cbPtr.asFunction<
           int Function(bt_device_bond_destroyed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
-  /// @brief	Unregisters the callback function.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @return	0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// Unregisters the callback function.
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
-  /// @see bt_initialize()
-  /// @see bt_device_set_bond_destroyed_cb()
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_initialize()`
+  /// - `bt_device_set_bond_destroyed_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
   int bt_device_unset_bond_destroyed_cb() {
     return _bt_device_unset_bond_destroyed_cb();
   }
@@ -2970,22 +3919,37 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_device_unset_bond_destroyed_cb =
       _bt_device_unset_bond_destroyed_cbPtr.asFunction<int Function()>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
-  /// @brief  Registers a callback function to be invoked when the authorization of device changes.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @param[in] callback The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return   0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// Registers a callback function to be invoked when the authorization of device changes.
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
-  /// @post  bt_device_authorization_changed_cb() will be invoked.
-  /// @see bt_initialize()
-  /// @see bt_device_authorization_changed_cb()
-  /// @see bt_device_unset_authorization_changed_cb()
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **Postconditions:**
+  /// - bt_device_authorization_changed_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `bt_initialize()`
+  /// - `bt_device_authorization_changed_cb()`
+  /// - `bt_device_unset_authorization_changed_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
   int bt_device_set_authorization_changed_cb(
     bt_device_authorization_changed_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -3006,17 +3970,28 @@ class Tizen65CapiNetworkBluetooth {
           int Function(
               bt_device_authorization_changed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
-  /// @brief	Unregisters the callback function.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @return	0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// Unregisters the callback function.
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
-  /// @see bt_initialize()
-  /// @see bt_device_set_authorization_changed_cb()
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_initialize()`
+  /// - `bt_device_set_authorization_changed_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
   int bt_device_unset_authorization_changed_cb() {
     return _bt_device_unset_authorization_changed_cb();
   }
@@ -3027,22 +4002,37 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_device_unset_authorization_changed_cb =
       _bt_device_unset_authorization_changed_cbPtr.asFunction<int Function()>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
-  /// @brief  Registers a callback function to be invoked when the process of service search finishes.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @param[in] callback The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return   0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// Registers a callback function to be invoked when the process of service search finishes.
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
-  /// @post  bt_device_service_searched_cb() will be invoked.
-  /// @see bt_initialize()
-  /// @see bt_device_service_searched_cb()
-  /// @see bt_device_unset_service_searched_cb()
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **Postconditions:**
+  /// - bt_device_service_searched_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `bt_initialize()`
+  /// - `bt_device_service_searched_cb()`
+  /// - `bt_device_unset_service_searched_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
   int bt_device_set_service_searched_cb(
     bt_device_service_searched_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -3061,17 +4051,28 @@ class Tizen65CapiNetworkBluetooth {
       _bt_device_set_service_searched_cbPtr.asFunction<
           int Function(bt_device_service_searched_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
-  /// @brief	Unregisters the callback function.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @return	0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// Unregisters the callback function.
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
-  /// @see bt_initialize()
-  /// @see bt_device_set_service_searched_cb()
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_initialize()`
+  /// - `bt_device_set_service_searched_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
   int bt_device_unset_service_searched_cb() {
     return _bt_device_unset_service_searched_cb();
   }
@@ -3082,22 +4083,37 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_device_unset_service_searched_cb =
       _bt_device_unset_service_searched_cbPtr.asFunction<int Function()>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
-  /// @brief  Registers a callback function to be invoked when the connection state is changed.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @param[in] callback The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// Registers a callback function to be invoked when the connection state is changed.
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
-  /// @post bt_device_connection_state_changed_cb() will be invoked.
-  /// @see bt_initialize()
-  /// @see bt_device_connection_state_changed_cb()
-  /// @see bt_device_unset_connection_state_changed_cb()
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **Postconditions:**
+  /// - bt_device_connection_state_changed_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `bt_initialize()`
+  /// - `bt_device_connection_state_changed_cb()`
+  /// - `bt_device_unset_connection_state_changed_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
   int bt_device_set_connection_state_changed_cb(
     bt_device_connection_state_changed_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -3118,17 +4134,28 @@ class Tizen65CapiNetworkBluetooth {
           int Function(
               bt_device_connection_state_changed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
-  /// @brief	Unregisters the callback function to be invoked when the connection state is changed.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// Unregisters the callback function to be invoked when the connection state is changed.
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
-  /// @see bt_initialize()
-  /// @see bt_device_set_connection_state_changed_cb()
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_initialize()`
+  /// - `bt_device_set_connection_state_changed_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
   int bt_device_unset_connection_state_changed_cb() {
     return _bt_device_unset_connection_state_changed_cb();
   }
@@ -3140,30 +4167,45 @@ class Tizen65CapiNetworkBluetooth {
       _bt_device_unset_connection_state_changed_cbPtr
           .asFunction<int Function()>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_SOCKET_MODULE
-  /// @brief Registers a RFCOMM server socket with a specific UUID.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
+  /// Registers a RFCOMM server socket with a specific UUID.
   ///
-  /// @remarks A socket can be destroyed by bt_socket_destroy_rfcomm().
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
   ///
-  /// @param[in] service_uuid The 128-bit UUID of service to provide
-  /// @param[out] socket_fd The file descriptor of socket to listen
-  /// @return 0 on success, otherwise a negative error value.
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
   ///
-  /// @pre The state of local Bluetooth must be #BT_ADAPTER_ENABLED.
+  /// **Remarks:**
+  /// - A socket can be destroyed by bt_socket_destroy_rfcomm().
   ///
-  /// @see bt_socket_listen_and_accept_rfcomm()
-  /// @see bt_socket_destroy_rfcomm()
+  /// **Parameters:**
+  /// - `service_uuid` (in): The 128-bit UUID of service to provide
+  /// - `socket_fd` (out): The file descriptor of socket to listen
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The state of local Bluetooth must be `BT_ADAPTER_ENABLED`.
+  ///
+  /// **See also:**
+  /// - `bt_socket_listen_and_accept_rfcomm()`
+  /// - `bt_socket_destroy_rfcomm()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_SOCKET_MODULE
   int bt_socket_create_rfcomm(
     ffi.Pointer<ffi.Char> service_uuid,
     ffi.Pointer<ffi.Int> socket_fd,
@@ -3181,31 +4223,50 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_socket_create_rfcomm = _bt_socket_create_rfcommPtr
       .asFunction<int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Int>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_SOCKET_MODULE
-  /// @brief Removes the RFCOMM server socket which was created using bt_socket_create_rfcomm().
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
-  /// @remarks If callback function bt_socket_connection_state_changed_cb() is set and the remote Bluetooth device is connected, \n
-  /// then bt_socket_connection_state_changed_cb() will be called when this function is finished successfully.
+  /// Removes the RFCOMM server socket which was created using bt_socket_create_rfcomm().
   ///
-  /// @param[in] socket_fd The file descriptor of socket (which was created using bt_socket_create_rfcomm()) to destroy
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
   ///
-  /// @pre The socket must be created with bt_socket_create_rfcomm().
-  /// @post If callback function bt_socket_connection_state_changed_cb() is set and the remote Bluetooth device is connected,
-  /// then bt_socket_connection_state_changed_cb() will be called.
-  /// @see bt_socket_create_rfcomm()
-  /// @see bt_socket_connection_state_changed_cb()
-  /// @see bt_socket_set_connection_state_changed_cb()
-  /// @see bt_socket_unset_connection_state_changed_cb()
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
+  ///
+  /// **Remarks:**
+  /// - If callback function bt_socket_connection_state_changed_cb() is set and the remote Bluetooth device is connected,
+  /// - then bt_socket_connection_state_changed_cb() will be called when this function is finished successfully.
+  ///
+  /// **Parameters:**
+  /// - `socket_fd` (in): The file descriptor of socket (which was created using bt_socket_create_rfcomm()) to destroy
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The socket must be created with bt_socket_create_rfcomm().
+  ///
+  /// **Postconditions:**
+  /// - If callback function bt_socket_connection_state_changed_cb() is set and the remote Bluetooth device is connected, then bt_socket_connection_state_changed_cb() will be called.
+  ///
+  /// **See also:**
+  /// - `bt_socket_create_rfcomm()`
+  /// - `bt_socket_connection_state_changed_cb()`
+  /// - `bt_socket_set_connection_state_changed_cb()`
+  /// - `bt_socket_unset_connection_state_changed_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_SOCKET_MODULE
   int bt_socket_destroy_rfcomm(
     int socket_fd,
   ) {
@@ -3220,32 +4281,49 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_socket_destroy_rfcomm =
       _bt_socket_destroy_rfcommPtr.asFunction<int Function(int)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_SOCKET_MODULE
-  /// @brief Starts listening on passed RFCOMM socket and accepts connection requests.
-  /// @details Pop-up is shown automatically when a RFCOMM connection is requested. \n
-  /// bt_socket_connection_state_changed_cb() will be called with \n
-  /// #BT_SOCKET_CONNECTED if you click "yes" and connection is finished successfully.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
-  /// @param[in] socket_fd The file descriptor of socket on which start to listen
-  /// @param[in] max_pending_connections The maximum number of pending connections
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// Starts listening on passed RFCOMM socket and accepts connection requests.
   ///
-  /// @pre The socket must be created with bt_socket_create_rfcomm().
-  /// @post If callback function bt_socket_connection_state_changed_cb() is set,
-  /// then bt_socket_connection_state_changed_cb() will be called when the remote Bluetooth device is connected.
-  /// @see bt_socket_create_rfcomm()
-  /// @see bt_socket_connection_state_changed_cb()
-  /// @see bt_socket_set_connection_state_changed_cb()
-  /// @see bt_socket_unset_connection_state_changed_cb()
+  /// Pop-up is shown automatically when a RFCOMM connection is requested. bt_socket_connection_state_changed_cb() will be called with `BT_SOCKET_CONNECTED` if you click "yes" and connection is finished successfully.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
+  ///
+  /// **Parameters:**
+  /// - `socket_fd` (in): The file descriptor of socket on which start to listen
+  /// - `max_pending_connections` (in): The maximum number of pending connections
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The socket must be created with bt_socket_create_rfcomm().
+  ///
+  /// **Postconditions:**
+  /// - If callback function bt_socket_connection_state_changed_cb() is set, then bt_socket_connection_state_changed_cb() will be called when the remote Bluetooth device is connected.
+  ///
+  /// **See also:**
+  /// - `bt_socket_create_rfcomm()`
+  /// - `bt_socket_connection_state_changed_cb()`
+  /// - `bt_socket_set_connection_state_changed_cb()`
+  /// - `bt_socket_unset_connection_state_changed_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_SOCKET_MODULE
   int bt_socket_listen_and_accept_rfcomm(
     int socket_fd,
     int max_pending_connections,
@@ -3263,38 +4341,55 @@ class Tizen65CapiNetworkBluetooth {
       _bt_socket_listen_and_accept_rfcommPtr
           .asFunction<int Function(int, int)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_SOCKET_MODULE
-  /// @brief Connects to a specific RFCOMM based service on a remote Bluetooth device UUID, asynchronously.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
+  /// Connects to a specific RFCOMM based service on a remote Bluetooth device UUID, asynchronously.
   ///
-  /// @remarks A connection can be disconnected by bt_socket_disconnect_rfcomm().
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
   ///
-  /// @param[in] remote_address The address of the remote Bluetooth device
-  /// @param[in] service_uuid The UUID of service provided by the remote Bluetooth device
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
   ///
-  /// @pre The state of local Bluetooth must be #BT_ADAPTER_ENABLED.
-  /// @pre The remote device must be discoverable with bt_adapter_start_device_discovery().
-  /// @pre The bond with the remote device must be created with bt_device_create_bond().
-  /// @post This function invokes bt_socket_connection_state_changed_cb().
+  /// **Remarks:**
+  /// - A connection can be disconnected by bt_socket_disconnect_rfcomm().
   ///
-  /// @see bt_device_create_bond()
-  /// @see bt_adapter_start_device_discovery()
-  /// @see bt_device_start_service_search()
-  /// @see bt_socket_disconnect_rfcomm()
-  /// @see bt_socket_connection_state_changed_cb()
-  /// @see bt_socket_set_connection_state_changed_cb()
-  /// @see bt_socket_unset_connection_state_changed_cb()
+  /// **Parameters:**
+  /// - `remote_address` (in): The address of the remote Bluetooth device
+  /// - `service_uuid` (in): The UUID of service provided by the remote Bluetooth device
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The state of local Bluetooth must be `BT_ADAPTER_ENABLED`.
+  /// - The remote device must be discoverable with bt_adapter_start_device_discovery().
+  /// - The bond with the remote device must be created with bt_device_create_bond().
+  ///
+  /// **Postconditions:**
+  /// - This function invokes bt_socket_connection_state_changed_cb().
+  ///
+  /// **See also:**
+  /// - `bt_device_create_bond()`
+  /// - `bt_adapter_start_device_discovery()`
+  /// - `bt_device_start_service_search()`
+  /// - `bt_socket_disconnect_rfcomm()`
+  /// - `bt_socket_connection_state_changed_cb()`
+  /// - `bt_socket_set_connection_state_changed_cb()`
+  /// - `bt_socket_unset_connection_state_changed_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_SOCKET_MODULE
   int bt_socket_connect_rfcomm(
     ffi.Pointer<ffi.Char> remote_address,
     ffi.Pointer<ffi.Char> service_uuid,
@@ -3312,25 +4407,41 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_socket_connect_rfcomm = _bt_socket_connect_rfcommPtr
       .asFunction<int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_SOCKET_MODULE
-  /// @brief Disconnects the RFCOMM connection with the given file descriptor of connected socket.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
-  /// @param[in] socket_fd  The file descriptor of socket to close which was received using bt_socket_connection_state_changed_cb().
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// Disconnects the RFCOMM connection with the given file descriptor of connected socket.
   ///
-  /// @pre The connection must be established.
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
   ///
-  /// @see bt_socket_connection_state_changed_cb()
-  /// @see bt_socket_set_connection_state_changed_cb()
-  /// @see bt_socket_unset_connection_state_changed_cb()
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
+  ///
+  /// **Parameters:**
+  /// - `socket_fd` (in): The file descriptor of socket to close which was received using bt_socket_connection_state_changed_cb().
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The connection must be established.
+  ///
+  /// **See also:**
+  /// - `bt_socket_connection_state_changed_cb()`
+  /// - `bt_socket_set_connection_state_changed_cb()`
+  /// - `bt_socket_unset_connection_state_changed_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_SOCKET_MODULE
   int bt_socket_disconnect_rfcomm(
     int socket_fd,
   ) {
@@ -3345,30 +4456,48 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_socket_disconnect_rfcomm =
       _bt_socket_disconnect_rfcommPtr.asFunction<int Function(int)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_SOCKET_MODULE
-  /// @brief Sends data to the connected device.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
-  /// @remarks The specific error code can be obtained using the get_last_result() method. Error codes are described in Exception section.
+  /// Sends data to the connected device.
   ///
-  /// @param[in] socket_fd The file descriptor of connected socket which was received using bt_socket_connection_state_changed_cb()
-  /// @param[in] data The data to be sent
-  /// @param[in] length The length of data to be sent
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
   ///
-  /// @return the number of bytes written (zero indicates nothing was written).
-  /// @retval On error, -1 is returned, and errno is set appropriately. See write 2 man page.
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_NOT_SUPPORTED   Not supported
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @exception BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @exception BT_ERROR_AGAIN  Resource temporarily unavailable
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre The connection must be established.
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
   ///
-  /// @see bt_socket_connection_state_changed_cb()
-  /// @see bt_socket_set_connection_state_changed_cb()
-  /// @see bt_socket_unset_connection_state_changed_cb()
+  /// **Remarks:**
+  /// - The specific error code can be obtained using the get_last_result() method. Error codes are described in Exception section.
+  ///
+  /// **Parameters:**
+  /// - `socket_fd` (in): The file descriptor of connected socket which was received using bt_socket_connection_state_changed_cb()
+  /// - `data` (in): The data to be sent
+  /// - `length` (in): The length of data to be sent
+  ///
+  /// **Returns:**
+  /// - the number of bytes written (zero indicates nothing was written).
+  ///
+  /// **Return values:**
+  /// - `On`: error, -1 is returned, and errno is set appropriately. See write 2 man page.
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Exceptions:**
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_AGAIN`: Resource temporarily unavailable
+  ///
+  /// **Preconditions:**
+  /// - The connection must be established.
+  ///
+  /// **See also:**
+  /// - `bt_socket_connection_state_changed_cb()`
+  /// - `bt_socket_set_connection_state_changed_cb()`
+  /// - `bt_socket_unset_connection_state_changed_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_SOCKET_MODULE
   int bt_socket_send_data(
     int socket_fd,
     ffi.Pointer<ffi.Char> data,
@@ -3388,22 +4517,37 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_socket_send_data = _bt_socket_send_dataPtr
       .asFunction<int Function(int, ffi.Pointer<ffi.Char>, int)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_SOCKET_MODULE
-  /// @brief  Registers a callback function that will be invoked when you receive data.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @param[in] callback The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return   0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED   Not supported
+  /// Registers a callback function that will be invoked when you receive data.
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
-  /// @post  bt_socket_data_received_cb() will be invoked.
-  /// @see bt_initialize()
-  /// @see bt_socket_data_received_cb()
-  /// @see bt_socket_unset_data_received_cb()
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **Postconditions:**
+  /// - bt_socket_data_received_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `bt_initialize()`
+  /// - `bt_socket_data_received_cb()`
+  /// - `bt_socket_unset_data_received_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_SOCKET_MODULE
   int bt_socket_set_data_received_cb(
     bt_socket_data_received_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -3422,18 +4566,29 @@ class Tizen65CapiNetworkBluetooth {
       _bt_socket_set_data_received_cbPtr.asFunction<
           int Function(bt_socket_data_received_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_SOCKET_MODULE
-  /// @brief	Unregisters the callback function.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @return	0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_NOT_SUPPORTED   Not supported
+  /// Unregisters the callback function.
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
-  /// @see bt_initialize()
-  /// @see bt_socket_data_received_cb()
-  /// @see bt_socket_set_data_received_cb()
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_initialize()`
+  /// - `bt_socket_data_received_cb()`
+  /// - `bt_socket_set_data_received_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_SOCKET_MODULE
   int bt_socket_unset_data_received_cb() {
     return _bt_socket_unset_data_received_cb();
   }
@@ -3444,21 +4599,36 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_socket_unset_data_received_cb =
       _bt_socket_unset_data_received_cbPtr.asFunction<int Function()>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_SOCKET_MODULE
-  /// @brief  Registers a callback function that will be invoked when a RFCOMM connection is requested.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @param[in] callback The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return   0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED   Not supported
+  /// Registers a callback function that will be invoked when a RFCOMM connection is requested.
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
-  /// @post bt_socket_connection_requested_cb() will be invoked.
-  /// @see bt_initialize()
-  /// @see bt_socket_unset_connection_requested_cb()
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **Postconditions:**
+  /// - bt_socket_connection_requested_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `bt_initialize()`
+  /// - `bt_socket_unset_connection_requested_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_SOCKET_MODULE
   int bt_socket_set_connection_requested_cb(
     bt_socket_connection_requested_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -3478,18 +4648,29 @@ class Tizen65CapiNetworkBluetooth {
           int Function(
               bt_socket_connection_requested_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @ingroup  CAPI_NETWORK_BLUETOOTH_SOCKET_MODULE
-  /// @brief  Unregisters the callback function.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @return  0 on success, otherwise a negative error value.
-  /// @retval  #BT_ERROR_NONE  Successful
-  /// @retval  #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval  #BT_ERROR_NOT_SUPPORTED   Not supported
+  /// Unregisters the callback function.
   ///
-  /// @pre  The Bluetooth service must be initialized with bt_initialize().
-  /// @see  bt_initialize()
-  /// @see  bt_socket_set_connection_requested_cb()
-  /// @see  bt_socket_connection_requested_cb()
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_initialize()`
+  /// - `bt_socket_set_connection_requested_cb()`
+  /// - `bt_socket_connection_requested_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_SOCKET_MODULE
   int bt_socket_unset_connection_requested_cb() {
     return _bt_socket_unset_connection_requested_cb();
   }
@@ -3500,22 +4681,37 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_socket_unset_connection_requested_cb =
       _bt_socket_unset_connection_requested_cbPtr.asFunction<int Function()>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_SOCKET_MODULE
-  /// @brief  Registers a callback function that will be invoked when the connection state changes.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @param[in] callback The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return   0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED   Not supported
+  /// Registers a callback function that will be invoked when the connection state changes.
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
-  /// @post bt_socket_connection_state_changed_cb() will be invoked.
-  /// @see bt_initialize()
-  /// @see bt_socket_connection_state_changed_cb()
-  /// @see bt_socket_unset_connection_state_changed_cb()
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **Postconditions:**
+  /// - bt_socket_connection_state_changed_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `bt_initialize()`
+  /// - `bt_socket_connection_state_changed_cb()`
+  /// - `bt_socket_unset_connection_state_changed_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_SOCKET_MODULE
   int bt_socket_set_connection_state_changed_cb(
     bt_socket_connection_state_changed_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -3536,18 +4732,29 @@ class Tizen65CapiNetworkBluetooth {
           int Function(
               bt_socket_connection_state_changed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_SOCKET_MODULE
-  /// @brief	Unregisters the callback function.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @return	0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_NOT_SUPPORTED   Not supported
+  /// Unregisters the callback function.
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
-  /// @see bt_initialize()
-  /// @see bt_socket_connection_state_changed_cb()
-  /// @see bt_socket_set_connection_state_changed_cb()
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_initialize()`
+  /// - `bt_socket_connection_state_changed_cb()`
+  /// - `bt_socket_set_connection_state_changed_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_SOCKET_MODULE
   int bt_socket_unset_connection_state_changed_cb() {
     return _bt_socket_unset_connection_state_changed_cb();
   }
@@ -3559,30 +4766,42 @@ class Tizen65CapiNetworkBluetooth {
       _bt_socket_unset_connection_state_changed_cbPtr
           .asFunction<int Function()>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_OPP_SERVER_MODULE
-  /// @brief Initializes the Bluetooth OPP server requested by bt_opp_server_connection_requested_cb().
-  /// @details No popup appears when an OPP connection is requested from a remote device. \n
-  /// Instead, @a connection_requested_cb() will be called. \n
-  /// At that time, you can call either bt_opp_server_accept() or bt_opp_server_reject().
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @remarks This function must be called to start Bluetooth OPP server. \n
-  /// You must free all resources of the Bluetooth service by calling bt_opp_server_deinitialize() if Bluetooth OPP service is no longer needed.
-  /// @param[in] destination  The destination path
-  /// @param[in] connection_requested_cb  The callback called when an OPP connection is requested
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_RESOURCE_BUSY  Device or resource busy
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_NOT_SUPPORTED   Not supported
+  /// Initializes the Bluetooth OPP server requested by bt_opp_server_connection_requested_cb().
   ///
-  /// @see  bt_opp_server_connection_requested_cb()
-  /// @see  bt_opp_server_deinitialize()
-  /// @see  bt_opp_server_accept()
-  /// @see  bt_opp_server_reject()
+  /// No popup appears when an OPP connection is requested from a remote device. Instead, `connection_requested_cb(`) will be called. At that time, you can call either bt_opp_server_accept() or bt_opp_server_reject().
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Remarks:**
+  /// - This function must be called to start Bluetooth OPP server.
+  /// - You must free all resources of the Bluetooth service by calling bt_opp_server_deinitialize() if Bluetooth OPP service is no longer needed.
+  ///
+  /// **Parameters:**
+  /// - `destination` (in): The destination path
+  /// - `connection_requested_cb` (in): The callback called when an OPP connection is requested
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `bt_opp_server_connection_requested_cb()`
+  /// - `bt_opp_server_deinitialize()`
+  /// - `bt_opp_server_accept()`
+  /// - `bt_opp_server_reject()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_OPP_SERVER_MODULE
   int bt_opp_server_initialize_by_connection_request(
     ffi.Pointer<ffi.Char> destination,
     bt_opp_server_connection_requested_cb connection_requested_cb,
@@ -3607,17 +4826,26 @@ class Tizen65CapiNetworkBluetooth {
           int Function(ffi.Pointer<ffi.Char>,
               bt_opp_server_connection_requested_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_OPP_SERVER_MODULE
-  /// @brief Deinitializes the Bluetooth OPP server.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_NOT_SUPPORTED   Not supported
+  /// Deinitializes the Bluetooth OPP server.
   ///
-  /// @see  bt_opp_server_initialize_by_connection_request()
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `bt_opp_server_initialize_by_connection_request()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_OPP_SERVER_MODULE
   int bt_opp_server_deinitialize() {
     return _bt_opp_server_deinitialize();
   }
@@ -3628,29 +4856,46 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_opp_server_deinitialize =
       _bt_opp_server_deinitializePtr.asFunction<int Function()>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_OPP_SERVER_MODULE
-  /// @brief Accepts the push request from the remote device.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
-  /// @remarks If you initialize OPP server by bt_opp_server_initialize_by_connection_request(), then name is ignored.
-  /// You can cancel the pushes by bt_opp_server_cancel_transfer() with transfer_id.
-  /// @param[in] progress_cb  The callback called when a file is being transferred
-  /// @param[in] finished_cb  The callback called when a transfer is finished
-  /// @param[in] name  The name to store. This can be NULL if you initialize OPP server by bt_opp_server_initialize_by_connection_request().
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @param[out]  transfer_id  The ID of transfer
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_NOW_IN_PROGRESS  Operation now in progress
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED   Not supported
+  /// Accepts the push request from the remote device.
   ///
-  /// @see  bt_opp_server_reject()
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
+  ///
+  /// **Remarks:**
+  /// - If you initialize OPP server by bt_opp_server_initialize_by_connection_request(), then name is ignored.
+  /// - You can cancel the pushes by bt_opp_server_cancel_transfer() with transfer_id.
+  ///
+  /// **Parameters:**
+  /// - `progress_cb` (in): The callback called when a file is being transferred
+  /// - `finished_cb` (in): The callback called when a transfer is finished
+  /// - `name` (in): The name to store. This can be NULL if you initialize OPP server by bt_opp_server_initialize_by_connection_request().
+  /// - `user_data` (in): The user data to be passed to the callback function
+  /// - `transfer_id` (out): The ID of transfer
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_NOW_IN_PROGRESS`: Operation now in progress
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `bt_opp_server_reject()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_OPP_SERVER_MODULE
   int bt_opp_server_accept(
     bt_opp_server_transfer_progress_cb progress_cb,
     bt_opp_server_transfer_finished_cb finished_cb,
@@ -3683,20 +4928,33 @@ class Tizen65CapiNetworkBluetooth {
           ffi.Pointer<ffi.Void>,
           ffi.Pointer<ffi.Int>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_OPP_SERVER_MODULE
-  /// @brief Rejects the push request from the remote device.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED   Not supported
+  /// Rejects the push request from the remote device.
   ///
-  /// @see  bt_opp_server_accept()
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `bt_opp_server_accept()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_OPP_SERVER_MODULE
   int bt_opp_server_reject() {
     return _bt_opp_server_reject();
   }
@@ -3706,22 +4964,37 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_opp_server_reject =
       _bt_opp_server_rejectPtr.asFunction<int Function()>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_OPP_SERVER_MODULE
-  /// @brief Cancels the transfer.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
-  /// @param[in] transfer_id  The ID of transfer
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED   Not supported
+  /// Cancels the transfer.
   ///
-  /// @see  bt_opp_server_accept()
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
+  ///
+  /// **Parameters:**
+  /// - `transfer_id` (in): The ID of transfer
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `bt_opp_server_accept()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_OPP_SERVER_MODULE
   int bt_opp_server_cancel_transfer(
     int transfer_id,
   ) {
@@ -3736,20 +5009,34 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_opp_server_cancel_transfer =
       _bt_opp_server_cancel_transferPtr.asFunction<int Function(int)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_OPP_SERVER_MODULE
-  /// @brief Sets the destination path of file to be pushed.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
-  /// @param[in] destination  The destination path of file to be pushed
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED   Not supported
+  /// Sets the destination path of file to be pushed.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
+  ///
+  /// **Parameters:**
+  /// - `destination` (in): The destination path of file to be pushed
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_OPP_SERVER_MODULE
   int bt_opp_server_set_destination(
     ffi.Pointer<ffi.Char> destination,
   ) {
@@ -3764,20 +5051,31 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_opp_server_set_destination = _bt_opp_server_set_destinationPtr
       .asFunction<int Function(ffi.Pointer<ffi.Char>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_OPP_CLIENT_MODULE
-  /// @brief Initializes the Bluetooth OPP client.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @remarks This function must be called before Bluetooth OPP client starts. \n
-  /// You must free all resources of the Bluetooth service by calling bt_opp_client_deinitialize() \n
-  /// if Bluetooth OPP service is no longer needed.
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_RESOURCE_BUSY  Device or resource busy
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_NOT_SUPPORTED   Not supported
+  /// Initializes the Bluetooth OPP client.
   ///
-  /// @see  bt_opp_client_deinitialize()
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Remarks:**
+  /// - This function must be called before Bluetooth OPP client starts.
+  /// - You must free all resources of the Bluetooth service by calling bt_opp_client_deinitialize()
+  /// - if Bluetooth OPP service is no longer needed.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_RESOURCE_BUSY`: Device or resource busy
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `bt_opp_client_deinitialize()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_OPP_CLIENT_MODULE
   int bt_opp_client_initialize() {
     return _bt_opp_client_initialize();
   }
@@ -3788,16 +5086,25 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_opp_client_initialize =
       _bt_opp_client_initializePtr.asFunction<int Function()>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_OPP_CLIENT_MODULE
-  /// @brief Deinitializes the Bluetooth OPP client.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_NOT_SUPPORTED   Not supported
+  /// Deinitializes the Bluetooth OPP client.
   ///
-  /// @see  bt_opp_client_initialize()
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `bt_opp_client_initialize()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_OPP_CLIENT_MODULE
   int bt_opp_client_deinitialize() {
     return _bt_opp_client_deinitialize();
   }
@@ -3808,20 +5115,31 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_opp_client_deinitialize =
       _bt_opp_client_deinitializePtr.asFunction<int Function()>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_OPP_CLIENT_MODULE
-  /// @brief Adds file to be pushed.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @param[in] file  The path of file to be pushed
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_NOT_SUPPORTED   Not supported
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// Adds file to be pushed.
   ///
-  /// @see  bt_opp_client_clear_files()
-  /// @see  bt_opp_client_push_files()
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Parameters:**
+  /// - `file` (in): The path of file to be pushed
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `bt_opp_client_clear_files()`
+  /// - `bt_opp_client_push_files()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_OPP_CLIENT_MODULE
   int bt_opp_client_add_file(
     ffi.Pointer<ffi.Char> file,
   ) {
@@ -3836,18 +5154,27 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_opp_client_add_file = _bt_opp_client_add_filePtr
       .asFunction<int Function(ffi.Pointer<ffi.Char>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_OPP_CLIENT_MODULE
-  /// @brief Adds file to be pushed.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_NOT_SUPPORTED   Not supported
+  /// Adds file to be pushed.
   ///
-  /// @see  bt_opp_client_add_file()
-  /// @see  bt_opp_client_push_files()
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `bt_opp_client_add_file()`
+  /// - `bt_opp_client_push_files()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_OPP_CLIENT_MODULE
   int bt_opp_client_clear_files() {
     return _bt_opp_client_clear_files();
   }
@@ -3858,34 +5185,45 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_opp_client_clear_files =
       _bt_opp_client_clear_filesPtr.asFunction<int Function()>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_OPP_CLIENT_MODULE
-  /// @brief Pushes the file to the remote device, asynchronously.
+  /// Pushes the file to the remote device, asynchronously.
   ///
-  /// @details At first, bt_opp_client_push_responded_cb() will be called when OPP server responds to the push request. \n
-  /// After connection is established, bt_opp_client_push_progress_cb() will be called repeatedly until a file is transferred completely. \n
-  /// If you send several files, then bt_opp_client_push_progress_cb() with another file will be called repeatedly until the file is transferred completely. \n
-  /// bt_opp_client_push_finished_cb() will be called when the push request is finished.
+  /// At first, bt_opp_client_push_responded_cb() will be called when OPP server responds to the push request. After connection is established, bt_opp_client_push_progress_cb() will be called repeatedly until a file is transferred completely. If you send several files, then bt_opp_client_push_progress_cb() with another file will be called repeatedly until the file is transferred completely. bt_opp_client_push_finished_cb() will be called when the push request is finished.
   ///
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
-  /// @param[in] remote_address The remote address
-  /// @param[in] responded_cb  The callback called when OPP server responds to the push request
-  /// @param[in] progress_cb  The callback called when each file is being transferred
-  /// @param[in] finished_cb  The callback called when the push request is finished
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_NOW_IN_PROGRESS  Operation now in progress
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED   Not supported
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
   ///
-  /// @see bt_opp_client_initialize()
-  /// @see bt_opp_client_cancel_push()
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
+  ///
+  /// **Parameters:**
+  /// - `remote_address` (in): The remote address
+  /// - `responded_cb` (in): The callback called when OPP server responds to the push request
+  /// - `progress_cb` (in): The callback called when each file is being transferred
+  /// - `finished_cb` (in): The callback called when the push request is finished
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_NOW_IN_PROGRESS`: Operation now in progress
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `bt_opp_client_initialize()`
+  /// - `bt_opp_client_cancel_push()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_OPP_CLIENT_MODULE
   int bt_opp_client_push_files(
     ffi.Pointer<ffi.Char> remote_address,
     bt_opp_client_push_responded_cb responded_cb,
@@ -3919,24 +5257,40 @@ class Tizen65CapiNetworkBluetooth {
               bt_opp_client_push_finished_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_OPP_CLIENT_MODULE
-  /// @brief Cancels the push request in progress, asynchronously.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED   Not supported
+  /// Cancels the push request in progress, asynchronously.
   ///
-  /// @pre bt_opp_client_push_files() must be called.
-  /// @post bt_opp_client_push_finished_cb() will be invoked with result #BT_ERROR_CANCELLED,
-  /// which is a parameter of bt_opp_client_push_files().
-  /// @see bt_opp_client_initialize()
-  /// @see bt_opp_client_push_files()
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - bt_opp_client_push_files() must be called.
+  ///
+  /// **Postconditions:**
+  /// - bt_opp_client_push_finished_cb() will be invoked with result `BT_ERROR_CANCELLED`, which is a parameter of bt_opp_client_push_files().
+  ///
+  /// **See also:**
+  /// - `bt_opp_client_initialize()`
+  /// - `bt_opp_client_push_files()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_OPP_CLIENT_MODULE
   int bt_opp_client_cancel_push() {
     return _bt_opp_client_cancel_push();
   }
@@ -3947,23 +5301,36 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_opp_client_cancel_push =
       _bt_opp_client_cancel_pushPtr.asFunction<int Function()>();
 
-  /// @brief Initializes the Bluetooth HID (Human Interface Device) Host.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @remarks This function must be called before Bluetooth HID Host starts. \n
-  /// You must free all resources of the Bluetooth service by calling bt_hid_host_deinitialize() \n
-  /// if Bluetooth HID Host service is no longer needed.
-  /// @param[in] connection_cb  The callback called when the connection state is changed
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_NOT_SUPPORTED   Not supported
+  /// Initializes the Bluetooth HID (Human Interface Device) Host.
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
-  /// @see bt_initialize()
-  /// @see  bt_hid_host_deinitialize()
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Remarks:**
+  /// - This function must be called before Bluetooth HID Host starts.
+  /// - You must free all resources of the Bluetooth service by calling bt_hid_host_deinitialize()
+  /// - if Bluetooth HID Host service is no longer needed.
+  ///
+  /// **Parameters:**
+  /// - `connection_cb` (in): The callback called when the connection state is changed
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_initialize()`
+  /// - `bt_hid_host_deinitialize()`
   int bt_hid_host_initialize(
     bt_hid_host_connection_state_changed_cb connection_cb,
     ffi.Pointer<ffi.Void> user_data,
@@ -3982,16 +5349,25 @@ class Tizen65CapiNetworkBluetooth {
       int Function(
           bt_hid_host_connection_state_changed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Deinitializes the Bluetooth HID (Human Interface Device) Host.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_NOT_SUPPORTED   Not supported
+  /// Deinitializes the Bluetooth HID (Human Interface Device) Host.
   ///
-  /// @pre The Bluetooth HID service must be initialized with bt_hid_host_initialize().
-  /// @see  bt_hid_host_initialize()
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth HID service must be initialized with bt_hid_host_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_hid_host_initialize()`
   int bt_hid_host_deinitialize() {
     return _bt_hid_host_deinitialize();
   }
@@ -4002,25 +5378,42 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_hid_host_deinitialize =
       _bt_hid_host_deinitializePtr.asFunction<int Function()>();
 
-  /// @brief Connects the remote device with the HID (Human Interface Device) service, asynchronously.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
-  /// @param[in] remote_address  The remote address
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED   Not supported
+  /// Connects the remote device with the HID (Human Interface Device) service, asynchronously.
   ///
-  /// @pre The local device must be bonded with the remote device by bt_device_create_bond().
-  /// @pre The Bluetooth HID service must be initialized with bt_hid_host_initialize().
-  /// @post bt_hid_host_connection_state_changed_cb() will be invoked.
-  /// @see bt_hid_host_disconnect()
-  /// @see bt_hid_host_connection_state_changed_cb()
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
+  ///
+  /// **Parameters:**
+  /// - `remote_address` (in): The remote address
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The local device must be bonded with the remote device by bt_device_create_bond().
+  /// - The Bluetooth HID service must be initialized with bt_hid_host_initialize().
+  ///
+  /// **Postconditions:**
+  /// - bt_hid_host_connection_state_changed_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `bt_hid_host_disconnect()`
+  /// - `bt_hid_host_connection_state_changed_cb()`
   int bt_hid_host_connect(
     ffi.Pointer<ffi.Char> remote_address,
   ) {
@@ -4035,25 +5428,42 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_hid_host_connect =
       _bt_hid_host_connectPtr.asFunction<int Function(ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Disconnects the remote device with the HID (Human Interface Device) service, asynchronously.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
-  /// @param[in] remote_address  The remote address
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_REMOTE_DEVICE_NOT_CONNECTED  Remote device is not connected
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED   Not supported
+  /// Disconnects the remote device with the HID (Human Interface Device) service, asynchronously.
   ///
-  /// @pre The remote device must be connected by bt_hid_host_connect().
-  /// @post bt_hid_host_connection_state_changed_cb() will be invoked.
-  /// @see bt_hid_host_connect()
-  /// @see bt_hid_host_connection_state_changed_cb()
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
+  ///
+  /// **Parameters:**
+  /// - `remote_address` (in): The remote address
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_REMOTE_DEVICE_NOT_CONNECTED`: Remote device is not connected
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The remote device must be connected by bt_hid_host_connect().
+  ///
+  /// **Postconditions:**
+  /// - bt_hid_host_connection_state_changed_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `bt_hid_host_connect()`
+  /// - `bt_hid_host_connection_state_changed_cb()`
   int bt_hid_host_disconnect(
     ffi.Pointer<ffi.Char> remote_address,
   ) {
@@ -4068,31 +5478,50 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_hid_host_disconnect = _bt_hid_host_disconnectPtr
       .asFunction<int Function(ffi.Pointer<ffi.Char>)>();
 
-  /// @WEARABLE_ONLY
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_HID_DEVICE_MODULE
-  /// @brief Activates the Bluetooth HID Device role.
-  /// @since_tizen @if WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
+  /// Activates the Bluetooth HID Device role.
   ///
-  /// @remarks This function must be called to register HID UUID. \n
-  /// Only then a remote device is able to identify this one as a HID device.
+  /// **Since Tizen:**
+  /// - Wearable 3.0
   ///
-  /// @param[in] callback  The callback called when the connection state is changed
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_NOW_IN_PROGRESS  Already activated
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED   Not supported
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
-  /// @see bt_initialize()
-  /// @see bt_hid_device_deactivate()
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
+  ///
+  /// **Remarks:**
+  /// - This function must be called to register HID UUID.
+  /// - Only then a remote device is able to identify this one as a HID device.
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): The callback called when the connection state is changed
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_NOW_IN_PROGRESS`: Already activated
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_initialize()`
+  /// - `bt_hid_device_deactivate()`
+  ///
+  /// **Platform restriction:**
+  /// - Wearable only.
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_HID_DEVICE_MODULE
   int bt_hid_device_activate(
     bt_hid_device_connection_state_changed_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -4111,27 +5540,44 @@ class Tizen65CapiNetworkBluetooth {
       int Function(
           bt_hid_device_connection_state_changed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @WEARABLE_ONLY
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_HID_DEVICE_MODULE
-  /// @brief Deactivates the Bluetooth HID Device role.
-  /// @since_tizen @if WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
+  /// Deactivates the Bluetooth HID Device role.
   ///
-  /// @remarks This function must be called to deregister the HID UUID.
+  /// **Since Tizen:**
+  /// - Wearable 3.0
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_NOT_IN_PROGRESS  Not activated
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED   Not supported
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
-  /// @see bt_initialize()
-  /// @see bt_hid_device_activate()
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
+  ///
+  /// **Remarks:**
+  /// - This function must be called to deregister the HID UUID.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_NOT_IN_PROGRESS`: Not activated
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_initialize()`
+  /// - `bt_hid_device_activate()`
+  ///
+  /// **Platform restriction:**
+  /// - Wearable only.
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_HID_DEVICE_MODULE
   int bt_hid_device_deactivate() {
     return _bt_hid_device_deactivate();
   }
@@ -4142,32 +5588,50 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_hid_device_deactivate =
       _bt_hid_device_deactivatePtr.asFunction<int Function()>();
 
-  /// @WEARABLE_ONLY
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_HID_DEVICE_MODULE
-  /// @brief Initiates the HID device connection with the Device role, asynchronously.
-  /// @since_tizen @if WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
+  /// Initiates the HID device connection with the Device role, asynchronously.
   ///
-  /// @remarks This function must be called to Initiate the HID device role connection.
+  /// **Since Tizen:**
+  /// - Wearable 3.0
   ///
-  /// @param[in] remote_address The remote device's address.
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_NOT_IN_PROGRESS  Not activated
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_ALREADY_DONE   Already connected
-  /// @retval #BT_ERROR_NOT_SUPPORTED   Not supported
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
-  /// @pre The local device must be bonded with the remote device by bt_device_create_bond().
-  /// @see bt_initialize()
-  /// @see bt_hid_device_activate()
+  /// **Remarks:**
+  /// - This function must be called to Initiate the HID device role connection.
+  ///
+  /// **Parameters:**
+  /// - `remote_address` (in): The remote device's address.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_NOT_IN_PROGRESS`: Not activated
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_ALREADY_DONE`: Already connected
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  /// - The local device must be bonded with the remote device by bt_device_create_bond().
+  ///
+  /// **See also:**
+  /// - `bt_initialize()`
+  /// - `bt_hid_device_activate()`
+  ///
+  /// **Platform restriction:**
+  /// - Wearable only.
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_HID_DEVICE_MODULE
   int bt_hid_device_connect(
     ffi.Pointer<ffi.Char> remote_address,
   ) {
@@ -4182,27 +5646,45 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_hid_device_connect = _bt_hid_device_connectPtr
       .asFunction<int Function(ffi.Pointer<ffi.Char>)>();
 
-  /// @WEARABLE_ONLY
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_HID_DEVICE_MODULE
-  /// @brief Disconnects from the HID Host device, asynchronously.
-  /// @since_tizen @if WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
+  /// Disconnects from the HID Host device, asynchronously.
   ///
-  /// @param[in] remote_address The remote device's address.
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_REMOTE_DEVICE_NOT_CONNECTED  Remote device is not connected
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED   Not supported
+  /// **Since Tizen:**
+  /// - Wearable 3.0
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
-  /// @see bt_initialize()
-  /// @see bt_hid_device_connection_state_changed_cb()
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
+  ///
+  /// **Parameters:**
+  /// - `remote_address` (in): The remote device's address.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_REMOTE_DEVICE_NOT_CONNECTED`: Remote device is not connected
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_initialize()`
+  /// - `bt_hid_device_connection_state_changed_cb()`
+  ///
+  /// **Platform restriction:**
+  /// - Wearable only.
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_HID_DEVICE_MODULE
   int bt_hid_device_disconnect(
     ffi.Pointer<ffi.Char> remote_address,
   ) {
@@ -4217,27 +5699,44 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_hid_device_disconnect = _bt_hid_device_disconnectPtr
       .asFunction<int Function(ffi.Pointer<ffi.Char>)>();
 
-  /// @WEARABLE_ONLY
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_HID_DEVICE_MODULE
-  /// @brief Sends the mouse event data to the remote device.
-  /// @since_tizen @if WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
+  /// Sends the mouse event data to the remote device.
   ///
-  /// @param[in] remote_address The remote device's address.
-  /// @param[in] mouse_data The mouse data to be passed to the remote device.
+  /// **Since Tizen:**
+  /// - Wearable 3.0
   ///
-  /// @return the number of bytes written (zero indicates nothing was written).
-  /// @retval On error, -1 is returned, and errno is set appropriately. See write 2 man page.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED   Not supported
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre The HID connection must be established.
-  /// @see bt_hid_device_connection_state_changed_cb()
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
+  ///
+  /// **Parameters:**
+  /// - `remote_address` (in): The remote device's address.
+  /// - `mouse_data` (in): The mouse data to be passed to the remote device.
+  ///
+  /// **Returns:**
+  /// - the number of bytes written (zero indicates nothing was written).
+  ///
+  /// **Return values:**
+  /// - `On`: error, -1 is returned, and errno is set appropriately. See write 2 man page.
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The HID connection must be established.
+  ///
+  /// **See also:**
+  /// - `bt_hid_device_connection_state_changed_cb()`
+  ///
+  /// **Platform restriction:**
+  /// - Wearable only.
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_HID_DEVICE_MODULE
   int bt_hid_device_send_mouse_event(
     ffi.Pointer<ffi.Char> remote_address,
     ffi.Pointer<bt_hid_mouse_data_s> mouse_data,
@@ -4258,27 +5757,44 @@ class Tizen65CapiNetworkBluetooth {
           int Function(
               ffi.Pointer<ffi.Char>, ffi.Pointer<bt_hid_mouse_data_s>)>();
 
-  /// @WEARABLE_ONLY
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_HID_DEVICE_MODULE
-  /// @brief Sends the keyboard event data to the remote device.
-  /// @since_tizen @if WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
+  /// Sends the keyboard event data to the remote device.
   ///
-  /// @param[in] remote_address The remote device's address.
-  /// @param[in] key_data The key data to be passed to the remote device
+  /// **Since Tizen:**
+  /// - Wearable 3.0
   ///
-  /// @return the number of bytes written (zero indicates nothing was written).
-  /// @retval On error, -1 is returned, and errno is set appropriately. See write 2 man page.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED   Not supported
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre The HID connection must be established.
-  /// @see bt_hid_device_connection_state_changed_cb()
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
+  ///
+  /// **Parameters:**
+  /// - `remote_address` (in): The remote device's address.
+  /// - `key_data` (in): The key data to be passed to the remote device
+  ///
+  /// **Returns:**
+  /// - the number of bytes written (zero indicates nothing was written).
+  ///
+  /// **Return values:**
+  /// - `On`: error, -1 is returned, and errno is set appropriately. See write 2 man page.
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The HID connection must be established.
+  ///
+  /// **See also:**
+  /// - `bt_hid_device_connection_state_changed_cb()`
+  ///
+  /// **Platform restriction:**
+  /// - Wearable only.
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_HID_DEVICE_MODULE
   int bt_hid_device_send_key_event(
     ffi.Pointer<ffi.Char> remote_address,
     ffi.Pointer<bt_hid_key_data_s> key_data,
@@ -4298,20 +5814,32 @@ class Tizen65CapiNetworkBluetooth {
           int Function(
               ffi.Pointer<ffi.Char>, ffi.Pointer<bt_hid_key_data_s>)>();
 
-  /// @WEARABLE_ONLY
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_HID_DEVICE_MODULE
-  /// @brief Sets the callback called when the device receives data from the HID Host.
-  /// @since_tizen @if WEARABLE 3.0 @endif
+  /// Sets the callback called when the device receives data from the HID Host.
   ///
-  /// @param[in] callback The callback function to be set when data is received.
-  /// @param[in] user_data The user data to be passed to the callback.
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED   Not supported
+  /// **Since Tizen:**
+  /// - Wearable 3.0
   ///
-  /// @see bt_hid_device_connection_state_changed_cb()
+  /// **Parameters:**
+  /// - `callback` (in): The callback function to be set when data is received.
+  /// - `user_data` (in): The user data to be passed to the callback.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `bt_hid_device_connection_state_changed_cb()`
+  ///
+  /// **Platform restriction:**
+  /// - Wearable only.
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_HID_DEVICE_MODULE
   int bt_hid_device_set_data_received_cb(
     bt_hid_device_data_received_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -4331,17 +5859,27 @@ class Tizen65CapiNetworkBluetooth {
           int Function(
               bt_hid_device_data_received_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @WEARABLE_ONLY
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_HID_DEVICE_MODULE
-  /// @brief Unsets the data received callback.
-  /// @since_tizen @if WEARABLE 3.0 @endif
+  /// Unsets the data received callback.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_NOT_SUPPORTED   Not supported
+  /// **Since Tizen:**
+  /// - Wearable 3.0
   ///
-  /// @see bt_hid_device_connection_state_changed_cb()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `bt_hid_device_connection_state_changed_cb()`
+  ///
+  /// **Platform restriction:**
+  /// - Wearable only.
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_HID_DEVICE_MODULE
   int bt_hid_device_unset_data_received_cb() {
     return _bt_hid_device_unset_data_received_cb();
   }
@@ -4352,31 +5890,48 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_hid_device_unset_data_received_cb =
       _bt_hid_device_unset_data_received_cbPtr.asFunction<int Function()>();
 
-  /// @WEARABLE_ONLY
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_HID_DEVICE_MODULE
-  /// @brief Responds to reports from the HID Host.
-  /// @since_tizen @if WEARABLE 3.0 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
+  /// Responds to reports from the HID Host.
   ///
-  /// @param[in] remote_address The remote device's address.
-  /// @param[in] header_type The response header type
-  /// @param[in] param_type The response parameter type
-  /// @param[in] data The response data
-  /// @param[in] data_len The length of the response data
+  /// **Since Tizen:**
+  /// - Wearable 3.0
   ///
-  /// @return the number of bytes written (zero indicates nothing was written).
-  /// @retval On error, -1 is returned, and errno is set appropriately. See write 2 man page.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED   Not supported
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre The HID connection must be established.
-  /// @see bt_hid_device_connection_state_changed_cb()
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
+  ///
+  /// **Parameters:**
+  /// - `remote_address` (in): The remote device's address.
+  /// - `header_type` (in): The response header type
+  /// - `param_type` (in): The response parameter type
+  /// - `data` (in): The response data
+  /// - `data_len` (in): The length of the response data
+  ///
+  /// **Returns:**
+  /// - the number of bytes written (zero indicates nothing was written).
+  ///
+  /// **Return values:**
+  /// - `On`: error, -1 is returned, and errno is set appropriately. See write 2 man page.
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The HID connection must be established.
+  ///
+  /// **See also:**
+  /// - `bt_hid_device_connection_state_changed_cb()`
+  ///
+  /// **Platform restriction:**
+  /// - Wearable only.
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_HID_DEVICE_MODULE
   int bt_hid_device_reply_to_report(
     ffi.Pointer<ffi.Char> remote_address,
     int header_type,
@@ -4406,21 +5961,34 @@ class Tizen65CapiNetworkBluetooth {
           int Function(
               ffi.Pointer<ffi.Char>, int, int, ffi.Pointer<ffi.Char>, int)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_AUDIO_MODULE
-  /// @brief Initializes the Bluetooth profiles related with audio.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @remarks This function must be called before Bluetooth profiles related with audio starts. \n
-  /// You must free all resources of the this service by calling bt_audio_deinitialize() \n
-  /// if Bluetooth profiles related with audio service is no longer needed.
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_NOT_SUPPORTED   Not supported
+  /// Initializes the Bluetooth profiles related with audio.
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
-  /// @see bt_initialize()
-  /// @see bt_audio_deinitialize()
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Remarks:**
+  /// - This function must be called before Bluetooth profiles related with audio starts.
+  /// - You must free all resources of the this service by calling bt_audio_deinitialize()
+  /// - if Bluetooth profiles related with audio service is no longer needed.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_initialize()`
+  /// - `bt_audio_deinitialize()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_AUDIO_MODULE
   int bt_audio_initialize() {
     return _bt_audio_initialize();
   }
@@ -4430,17 +5998,28 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_audio_initialize =
       _bt_audio_initializePtr.asFunction<int Function()>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_AUDIO_MODULE
-  /// @brief Deinitializes the Bluetooth profiles related with audio.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_NOT_SUPPORTED   Not supported
+  /// Deinitializes the Bluetooth profiles related with audio.
   ///
-  /// @pre The Bluetooth audio service must be initialized with bt_audio_initialize().
-  /// @see bt_audio_initialize()
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth audio service must be initialized with bt_audio_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_audio_initialize()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_AUDIO_MODULE
   int bt_audio_deinitialize() {
     return _bt_audio_deinitialize();
   }
@@ -4450,30 +6029,48 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_audio_deinitialize =
       _bt_audio_deinitializePtr.asFunction<int Function()>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_AUDIO_MODULE
-  /// @brief Connects the remote device with the given audio profile, asynchronously.
-  /// @details If you input type as #BT_AUDIO_PROFILE_TYPE_ALL and connection request succeeds, then bt_audio_connection_state_changed_cb() will be called twice \n
-  /// when #BT_AUDIO_PROFILE_TYPE_HSP_HFP is connected and #BT_AUDIO_PROFILE_TYPE_A2DP is connected.
+  /// Connects the remote device with the given audio profile, asynchronously.
   ///
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
-  /// @param[in] remote_address  The remote address
-  /// @param[in] type  The type of audio profile
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// If you input type as `BT_AUDIO_PROFILE_TYPE_ALL` and connection request succeeds, then bt_audio_connection_state_changed_cb() will be called twice when `BT_AUDIO_PROFILE_TYPE_HSP_HFP` is connected and `BT_AUDIO_PROFILE_TYPE_A2DP` is connected.
   ///
-  /// @pre The Bluetooth audio service must be initialized with bt_audio_initialize().
-  /// @pre The local device must be bonded with the remote device by bt_device_create_bond().
-  /// @post bt_audio_connection_state_changed_cb() will be invoked.
-  /// @see bt_audio_disconnect()
-  /// @see bt_audio_connection_state_changed_cb()
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
+  ///
+  /// **Parameters:**
+  /// - `remote_address` (in): The remote address
+  /// - `type` (in): The type of audio profile
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth audio service must be initialized with bt_audio_initialize().
+  /// - The local device must be bonded with the remote device by bt_device_create_bond().
+  ///
+  /// **Postconditions:**
+  /// - bt_audio_connection_state_changed_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `bt_audio_disconnect()`
+  /// - `bt_audio_connection_state_changed_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_AUDIO_MODULE
   int bt_audio_connect(
     ffi.Pointer<ffi.Char> remote_address,
     int type,
@@ -4491,28 +6088,47 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_audio_connect = _bt_audio_connectPtr
       .asFunction<int Function(ffi.Pointer<ffi.Char>, int)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_AUDIO_MODULE
-  /// @brief Disconnects the remote device with the given audio profile, asynchronously.
-  /// @details If you input type as #BT_AUDIO_PROFILE_TYPE_ALL and disconnection request succeeds, then bt_audio_connection_state_changed_cb() will be called twice \n
-  /// when #BT_AUDIO_PROFILE_TYPE_HSP_HFP is disconnected and #BT_AUDIO_PROFILE_TYPE_A2DP is disconnected.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
-  /// @param[in] remote_address  The remote address
-  /// @param[in] type  The type of audio profile
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// Disconnects the remote device with the given audio profile, asynchronously.
   ///
-  /// @pre The remote device must be connected by bt_audio_connect().
-  /// @post bt_audio_connection_state_changed_cb() will be invoked.
-  /// @see bt_audio_connect()
-  /// @see bt_audio_connection_state_changed_cb()
+  /// If you input type as `BT_AUDIO_PROFILE_TYPE_ALL` and disconnection request succeeds, then bt_audio_connection_state_changed_cb() will be called twice when `BT_AUDIO_PROFILE_TYPE_HSP_HFP` is disconnected and `BT_AUDIO_PROFILE_TYPE_A2DP` is disconnected.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
+  ///
+  /// **Parameters:**
+  /// - `remote_address` (in): The remote address
+  /// - `type` (in): The type of audio profile
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The remote device must be connected by bt_audio_connect().
+  ///
+  /// **Postconditions:**
+  /// - bt_audio_connection_state_changed_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `bt_audio_connect()`
+  /// - `bt_audio_connection_state_changed_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_AUDIO_MODULE
   int bt_audio_disconnect(
     ffi.Pointer<ffi.Char> remote_address,
     int type,
@@ -4530,20 +6146,33 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_audio_disconnect = _bt_audio_disconnectPtr
       .asFunction<int Function(ffi.Pointer<ffi.Char>, int)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_AUDIO_MODULE
-  /// @brief  Registers a callback function that will be invoked when the connection state is changed.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @param[in] callback The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return   0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// Registers a callback function that will be invoked when the connection state is changed.
   ///
-  /// @pre The Bluetooth audio service must be initialized with bt_audio_initialize().
-  /// @see bt_audio_initialize()
-  /// @see bt_audio_connection_state_changed_cb()
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth audio service must be initialized with bt_audio_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_audio_initialize()`
+  /// - `bt_audio_connection_state_changed_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_AUDIO_MODULE
   int bt_audio_set_connection_state_changed_cb(
     bt_audio_connection_state_changed_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -4564,18 +6193,29 @@ class Tizen65CapiNetworkBluetooth {
           int Function(
               bt_audio_connection_state_changed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_AUDIO_MODULE
-  /// @brief  Unregisters a callback function that will be invoked when the connection state is changed.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @return   0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// Unregisters a callback function that will be invoked when the connection state is changed.
   ///
-  /// @pre The Bluetooth audio service must be initialized with bt_audio_initialize().
-  /// @see bt_audio_initialize()
-  /// @see bt_audio_connection_state_changed_cb()
-  /// @see bt_audio_set_connection_state_changed_cb()
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth audio service must be initialized with bt_audio_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_audio_initialize()`
+  /// - `bt_audio_connection_state_changed_cb()`
+  /// - `bt_audio_set_connection_state_changed_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_AUDIO_MODULE
   int bt_audio_unset_connection_state_changed_cb() {
     return _bt_audio_unset_connection_state_changed_cb();
   }
@@ -4587,24 +6227,39 @@ class Tizen65CapiNetworkBluetooth {
       _bt_audio_unset_connection_state_changed_cbPtr
           .asFunction<int Function()>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_AVRCP_TARGET_MODULE
-  /// @brief Initializes the Bluetooth AVRCP (Audio/Video Remote Control Profile) target service.
-  /// @since_tizen @if WEARABLE 3.0 @else 2.4 @endif
-  /// @remarks This function must be called before any other AVRCP target functions are called. \n
-  /// You must free all resources of the this service by calling bt_avrcp_target_deinitialize() \n
-  /// if Bluetooth AVRCP service is no longer needed.
-  /// @param[in] callback The callback function called when the connection state is changed
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// Initializes the Bluetooth AVRCP (Audio/Video Remote Control Profile) target service.
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
-  /// @see bt_initialize()
-  /// @see bt_avrcp_target_deinitialize()
+  /// **Since Tizen:**
+  /// - Wearable 3.0; Otherwise 2.4
+  ///
+  /// **Remarks:**
+  /// - This function must be called before any other AVRCP target functions are called.
+  /// - You must free all resources of the this service by calling bt_avrcp_target_deinitialize()
+  /// - if Bluetooth AVRCP service is no longer needed.
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): The callback function called when the connection state is changed
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_initialize()`
+  /// - `bt_avrcp_target_deinitialize()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_AVRCP_TARGET_MODULE
   int bt_avrcp_target_initialize(
     bt_avrcp_target_connection_state_changed_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -4624,16 +6279,27 @@ class Tizen65CapiNetworkBluetooth {
           int Function(bt_avrcp_target_connection_state_changed_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_AVRCP_TARGET_MODULE
-  /// @brief Deinitializes the Bluetooth AVRCP (Audio/Video Remote Control Profile) target service.
-  /// @since_tizen @if WEARABLE 3.0 @else 2.4 @endif
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// Deinitializes the Bluetooth AVRCP (Audio/Video Remote Control Profile) target service.
   ///
-  /// @pre The Bluetooth audio service must be initialized with bt_avrcp_target_initialize().
-  /// @see bt_avrcp_target_initialize()
+  /// **Since Tizen:**
+  /// - Wearable 3.0; Otherwise 2.4
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth audio service must be initialized with bt_avrcp_target_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_avrcp_target_initialize()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_AVRCP_TARGET_MODULE
   int bt_avrcp_target_deinitialize() {
     return _bt_avrcp_target_deinitialize();
   }
@@ -4644,25 +6310,42 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_avrcp_target_deinitialize =
       _bt_avrcp_target_deinitializePtr.asFunction<int Function()>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_AVRCP_TARGET_MODULE
-  /// @brief  Notifies the equalizer state to the remote device.
-  /// @since_tizen @if WEARABLE 3.0 @else 2.4 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
-  /// @param[in] state The state of equalizer
-  /// @return   0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_REMOTE_DEVICE_NOT_CONNECTED  Remote device is not connected
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// Notifies the equalizer state to the remote device.
   ///
-  /// @pre The remote device must be connected.
-  /// @see bt_avrcp_target_connection_state_changed_cb()
-  /// @see bt_avrcp_target_initialize()
+  /// **Since Tizen:**
+  /// - Wearable 3.0; Otherwise 2.4
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
+  ///
+  /// **Parameters:**
+  /// - `state` (in): The state of equalizer
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_REMOTE_DEVICE_NOT_CONNECTED`: Remote device is not connected
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The remote device must be connected.
+  ///
+  /// **See also:**
+  /// - `bt_avrcp_target_connection_state_changed_cb()`
+  /// - `bt_avrcp_target_initialize()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_AVRCP_TARGET_MODULE
   int bt_avrcp_target_notify_equalizer_state(
     int state,
   ) {
@@ -4678,25 +6361,42 @@ class Tizen65CapiNetworkBluetooth {
       _bt_avrcp_target_notify_equalizer_statePtr
           .asFunction<int Function(int)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_AVRCP_TARGET_MODULE
-  /// @brief  Notifies the repeat mode to the remote device.
-  /// @since_tizen @if WEARABLE 3.0 @else 2.4 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
-  /// @param[in] mode The repeat mode
-  /// @return   0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_REMOTE_DEVICE_NOT_CONNECTED  Remote device is not connected
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// Notifies the repeat mode to the remote device.
   ///
-  /// @pre The remote device must be connected.
-  /// @see bt_avrcp_target_connection_state_changed_cb()
-  /// @see bt_avrcp_target_initialize()
+  /// **Since Tizen:**
+  /// - Wearable 3.0; Otherwise 2.4
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
+  ///
+  /// **Parameters:**
+  /// - `mode` (in): The repeat mode
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_REMOTE_DEVICE_NOT_CONNECTED`: Remote device is not connected
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The remote device must be connected.
+  ///
+  /// **See also:**
+  /// - `bt_avrcp_target_connection_state_changed_cb()`
+  /// - `bt_avrcp_target_initialize()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_AVRCP_TARGET_MODULE
   int bt_avrcp_target_notify_repeat_mode(
     int mode,
   ) {
@@ -4711,25 +6411,42 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_avrcp_target_notify_repeat_mode =
       _bt_avrcp_target_notify_repeat_modePtr.asFunction<int Function(int)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_AVRCP_TARGET_MODULE
-  /// @brief  Notifies the shuffle mode to the remote device.
-  /// @since_tizen @if WEARABLE 3.0 @else 2.4 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
-  /// @param[in] mode The repeat mode
-  /// @return   0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_REMOTE_DEVICE_NOT_CONNECTED  Remote device is not connected
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// Notifies the shuffle mode to the remote device.
   ///
-  /// @pre The remote device must be connected.
-  /// @see bt_avrcp_target_connection_state_changed_cb()
-  /// @see bt_avrcp_target_initialize()
+  /// **Since Tizen:**
+  /// - Wearable 3.0; Otherwise 2.4
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
+  ///
+  /// **Parameters:**
+  /// - `mode` (in): The repeat mode
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_REMOTE_DEVICE_NOT_CONNECTED`: Remote device is not connected
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The remote device must be connected.
+  ///
+  /// **See also:**
+  /// - `bt_avrcp_target_connection_state_changed_cb()`
+  /// - `bt_avrcp_target_initialize()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_AVRCP_TARGET_MODULE
   int bt_avrcp_target_notify_shuffle_mode(
     int mode,
   ) {
@@ -4744,25 +6461,42 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_avrcp_target_notify_shuffle_mode =
       _bt_avrcp_target_notify_shuffle_modePtr.asFunction<int Function(int)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_AVRCP_TARGET_MODULE
-  /// @brief  Notifies the scan mode to the remote device.
-  /// @since_tizen @if WEARABLE 3.0 @else 2.4 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
-  /// @param[in] mode The scan mode
-  /// @return   0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_REMOTE_DEVICE_NOT_CONNECTED  Remote device is not connected
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// Notifies the scan mode to the remote device.
   ///
-  /// @pre The remote device must be connected.
-  /// @see bt_avrcp_target_connection_state_changed_cb()
-  /// @see bt_avrcp_target_initialize()
+  /// **Since Tizen:**
+  /// - Wearable 3.0; Otherwise 2.4
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
+  ///
+  /// **Parameters:**
+  /// - `mode` (in): The scan mode
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_REMOTE_DEVICE_NOT_CONNECTED`: Remote device is not connected
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The remote device must be connected.
+  ///
+  /// **See also:**
+  /// - `bt_avrcp_target_connection_state_changed_cb()`
+  /// - `bt_avrcp_target_initialize()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_AVRCP_TARGET_MODULE
   int bt_avrcp_target_notify_scan_mode(
     int mode,
   ) {
@@ -4777,25 +6511,42 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_avrcp_target_notify_scan_mode =
       _bt_avrcp_target_notify_scan_modePtr.asFunction<int Function(int)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_AVRCP_TARGET_MODULE
-  /// @brief  Notifies the player state to the remote device.
-  /// @since_tizen @if WEARABLE 3.0 @else 2.4 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
-  /// @param[in] state The player state
-  /// @return   0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_REMOTE_DEVICE_NOT_CONNECTED  Remote device is not connected
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// Notifies the player state to the remote device.
   ///
-  /// @pre The remote device must be connected.
-  /// @see bt_avrcp_target_connection_state_changed_cb()
-  /// @see bt_avrcp_target_initialize()
+  /// **Since Tizen:**
+  /// - Wearable 3.0; Otherwise 2.4
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
+  ///
+  /// **Parameters:**
+  /// - `state` (in): The player state
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_REMOTE_DEVICE_NOT_CONNECTED`: Remote device is not connected
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The remote device must be connected.
+  ///
+  /// **See also:**
+  /// - `bt_avrcp_target_connection_state_changed_cb()`
+  /// - `bt_avrcp_target_initialize()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_AVRCP_TARGET_MODULE
   int bt_avrcp_target_notify_player_state(
     int state,
   ) {
@@ -4810,25 +6561,42 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_avrcp_target_notify_player_state =
       _bt_avrcp_target_notify_player_statePtr.asFunction<int Function(int)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_AVRCP_TARGET_MODULE
-  /// @brief  Notifies the current position of song to the remote device.
-  /// @since_tizen @if WEARABLE 3.0 @else 2.4 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
-  /// @param[in] position The current position in milliseconds
-  /// @return  0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_REMOTE_DEVICE_NOT_CONNECTED  Remote device is not connected
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// Notifies the current position of song to the remote device.
   ///
-  /// @pre The remote device must be connected.
-  /// @see bt_avrcp_target_connection_state_changed_cb()
-  /// @see bt_avrcp_target_initialize()
+  /// **Since Tizen:**
+  /// - Wearable 3.0; Otherwise 2.4
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
+  ///
+  /// **Parameters:**
+  /// - `position` (in): The current position in milliseconds
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_REMOTE_DEVICE_NOT_CONNECTED`: Remote device is not connected
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The remote device must be connected.
+  ///
+  /// **See also:**
+  /// - `bt_avrcp_target_connection_state_changed_cb()`
+  /// - `bt_avrcp_target_initialize()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_AVRCP_TARGET_MODULE
   int bt_avrcp_target_notify_position(
     int position,
   ) {
@@ -4843,31 +6611,48 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_avrcp_target_notify_position =
       _bt_avrcp_target_notify_positionPtr.asFunction<int Function(int)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_AVRCP_TARGET_MODULE
-  /// @brief  Notifies the track to the remote device.
-  /// @since_tizen @if WEARABLE 3.0 @else 2.4 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
-  /// @param[in] title The title of track
-  /// @param[in] artist The artist of track
-  /// @param[in] album The album of track
-  /// @param[in] genre The genre of track
-  /// @param[in] track_num The track number
-  /// @param[in] total_tracks The number of all tracks
-  /// @param[in] duration The duration of track in milliseconds
-  /// @return   0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_REMOTE_DEVICE_NOT_CONNECTED  Remote device is not connected
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// Notifies the track to the remote device.
   ///
-  /// @pre The remote device must be connected.
-  /// @see bt_avrcp_target_connection_state_changed_cb()
-  /// @see bt_avrcp_target_initialize()
+  /// **Since Tizen:**
+  /// - Wearable 3.0; Otherwise 2.4
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
+  ///
+  /// **Parameters:**
+  /// - `title` (in): The title of track
+  /// - `artist` (in): The artist of track
+  /// - `album` (in): The album of track
+  /// - `genre` (in): The genre of track
+  /// - `track_num` (in): The track number
+  /// - `total_tracks` (in): The number of all tracks
+  /// - `duration` (in): The duration of track in milliseconds
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_REMOTE_DEVICE_NOT_CONNECTED`: Remote device is not connected
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The remote device must be connected.
+  ///
+  /// **See also:**
+  /// - `bt_avrcp_target_connection_state_changed_cb()`
+  /// - `bt_avrcp_target_initialize()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_AVRCP_TARGET_MODULE
   int bt_avrcp_target_notify_track(
     ffi.Pointer<ffi.Char> title,
     ffi.Pointer<ffi.Char> artist,
@@ -4903,21 +6688,34 @@ class Tizen65CapiNetworkBluetooth {
           int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>, int, int, int)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_AVRCP_MODULE
-  /// @brief  Registers a callback function that will be invoked when the equalizer state is changed. (e.g., by a TV remote control or other input devices).
-  /// @since_tizen @if WEARABLE 3.0 @else 2.4 @endif
-  /// @param[in] callback The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return   0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// Registers a callback function that will be invoked when the equalizer state is changed. (e.g., by a TV remote control or other input devices).
   ///
-  /// @pre The AVRCP service must be initialized with bt_avrcp_target_initialize() or bt_avrcp_control_initialize().
-  /// @see bt_avrcp_target_initialize()
-  /// @see bt_avrcp_control_initialize()
-  /// @see bt_avrcp_unset_equalizer_state_changed_cb()
+  /// **Since Tizen:**
+  /// - Wearable 3.0; Otherwise 2.4
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The AVRCP service must be initialized with bt_avrcp_target_initialize() or bt_avrcp_control_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_avrcp_target_initialize()`
+  /// - `bt_avrcp_control_initialize()`
+  /// - `bt_avrcp_unset_equalizer_state_changed_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_AVRCP_MODULE
   int bt_avrcp_set_equalizer_state_changed_cb(
     bt_avrcp_equalizer_state_changed_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -4938,18 +6736,29 @@ class Tizen65CapiNetworkBluetooth {
           int Function(
               bt_avrcp_equalizer_state_changed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_AVRCP_MODULE
-  /// @brief  Unregisters a callback function that will be invoked when the equalizer state is changed. (e.g., by a TV remote control or other input devices).
-  /// @since_tizen @if WEARABLE 3.0 @else 2.4 @endif
-  /// @return   0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// Unregisters a callback function that will be invoked when the equalizer state is changed. (e.g., by a TV remote control or other input devices).
   ///
-  /// @pre The AVRCP service must be initialized with bt_avrcp_target_initialize() or bt_avrcp_control_initialize().
-  /// @see bt_avrcp_target_initialize()
-  /// @see bt_avrcp_control_initialize()
-  /// @see bt_avrcp_set_equalizer_state_changed_cb()
+  /// **Since Tizen:**
+  /// - Wearable 3.0; Otherwise 2.4
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The AVRCP service must be initialized with bt_avrcp_target_initialize() or bt_avrcp_control_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_avrcp_target_initialize()`
+  /// - `bt_avrcp_control_initialize()`
+  /// - `bt_avrcp_set_equalizer_state_changed_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_AVRCP_MODULE
   int bt_avrcp_unset_equalizer_state_changed_cb() {
     return _bt_avrcp_unset_equalizer_state_changed_cb();
   }
@@ -4961,21 +6770,34 @@ class Tizen65CapiNetworkBluetooth {
       _bt_avrcp_unset_equalizer_state_changed_cbPtr
           .asFunction<int Function()>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_AVRCP_MODULE
-  /// @brief  Registers a callback function that will be invoked when the repeat mode is changed. (e.g., by a TV remote control or other input devices).
-  /// @since_tizen @if WEARABLE 3.0 @else 2.4 @endif
-  /// @param[in] callback The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return   0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// Registers a callback function that will be invoked when the repeat mode is changed. (e.g., by a TV remote control or other input devices).
   ///
-  /// @pre The AVRCP service must be initialized with bt_avrcp_target_initialize() or bt_avrcp_control_initialize().
-  /// @see bt_avrcp_target_initialize()
-  /// @see bt_avrcp_control_initialize()
-  /// @see bt_avrcp_unset_repeat_mode_changed_cb()
+  /// **Since Tizen:**
+  /// - Wearable 3.0; Otherwise 2.4
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The AVRCP service must be initialized with bt_avrcp_target_initialize() or bt_avrcp_control_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_avrcp_target_initialize()`
+  /// - `bt_avrcp_control_initialize()`
+  /// - `bt_avrcp_unset_repeat_mode_changed_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_AVRCP_MODULE
   int bt_avrcp_set_repeat_mode_changed_cb(
     bt_avrcp_repeat_mode_changed_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -4995,18 +6817,29 @@ class Tizen65CapiNetworkBluetooth {
           int Function(
               bt_avrcp_repeat_mode_changed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_AVRCP_MODULE
-  /// @brief  Unregisters a callback function that will be invoked when the repeat mode is changed. (e.g., by a TV remote control or other input devices).
-  /// @since_tizen @if WEARABLE 3.0 @else 2.4 @endif
-  /// @return   0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// Unregisters a callback function that will be invoked when the repeat mode is changed. (e.g., by a TV remote control or other input devices).
   ///
-  /// @pre The AVRCP service must be initialized with bt_avrcp_target_initialize() or bt_avrcp_control_initialize().
-  /// @see bt_avrcp_target_initialize()
-  /// @see bt_avrcp_control_initialize()
-  /// @see bt_avrcp_set_repeat_mode_changed_cb()
+  /// **Since Tizen:**
+  /// - Wearable 3.0; Otherwise 2.4
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The AVRCP service must be initialized with bt_avrcp_target_initialize() or bt_avrcp_control_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_avrcp_target_initialize()`
+  /// - `bt_avrcp_control_initialize()`
+  /// - `bt_avrcp_set_repeat_mode_changed_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_AVRCP_MODULE
   int bt_avrcp_unset_repeat_mode_changed_cb() {
     return _bt_avrcp_unset_repeat_mode_changed_cb();
   }
@@ -5017,21 +6850,34 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_avrcp_unset_repeat_mode_changed_cb =
       _bt_avrcp_unset_repeat_mode_changed_cbPtr.asFunction<int Function()>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_AVRCP_MODULE
-  /// @brief  Registers a callback function that will be invoked when the shuffle mode is changed. (e.g., by a TV remote control or other input devices).
-  /// @since_tizen @if WEARABLE 3.0 @else 2.4 @endif
-  /// @param[in] callback The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return   0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// Registers a callback function that will be invoked when the shuffle mode is changed. (e.g., by a TV remote control or other input devices).
   ///
-  /// @pre The AVRCP service must be initialized with bt_avrcp_target_initialize() or bt_avrcp_control_initialize().
-  /// @see bt_avrcp_target_initialize()
-  /// @see bt_avrcp_control_initialize()
-  /// @see bt_avrcp_unset_shuffle_mode_changed_cb()
+  /// **Since Tizen:**
+  /// - Wearable 3.0; Otherwise 2.4
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The AVRCP service must be initialized with bt_avrcp_target_initialize() or bt_avrcp_control_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_avrcp_target_initialize()`
+  /// - `bt_avrcp_control_initialize()`
+  /// - `bt_avrcp_unset_shuffle_mode_changed_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_AVRCP_MODULE
   int bt_avrcp_set_shuffle_mode_changed_cb(
     bt_avrcp_shuffle_mode_changed_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -5051,18 +6897,29 @@ class Tizen65CapiNetworkBluetooth {
           int Function(
               bt_avrcp_shuffle_mode_changed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_AVRCP_MODULE
-  /// @brief  Unregisters a callback function that will be invoked when the shuffle mode is changed. (e.g., by a TV remote control or other input devices).
-  /// @since_tizen @if WEARABLE 3.0 @else 2.4 @endif
-  /// @return   0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// Unregisters a callback function that will be invoked when the shuffle mode is changed. (e.g., by a TV remote control or other input devices).
   ///
-  /// @pre The AVRCP service must be initialized with bt_avrcp_target_initialize() or bt_avrcp_control_initialize().
-  /// @see bt_avrcp_target_initialize()
-  /// @see bt_avrcp_control_initialize()
-  /// @see bt_avrcp_set_shuffle_mode_changed_cb()
+  /// **Since Tizen:**
+  /// - Wearable 3.0; Otherwise 2.4
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The AVRCP service must be initialized with bt_avrcp_target_initialize() or bt_avrcp_control_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_avrcp_target_initialize()`
+  /// - `bt_avrcp_control_initialize()`
+  /// - `bt_avrcp_set_shuffle_mode_changed_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_AVRCP_MODULE
   int bt_avrcp_unset_shuffle_mode_changed_cb() {
     return _bt_avrcp_unset_shuffle_mode_changed_cb();
   }
@@ -5073,21 +6930,34 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_avrcp_unset_shuffle_mode_changed_cb =
       _bt_avrcp_unset_shuffle_mode_changed_cbPtr.asFunction<int Function()>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_AVRCP_MODULE
-  /// @brief  Registers a callback function that will be invoked when the scan mode is changed. (e.g., by a TV remote control or other input devices).
-  /// @since_tizen @if WEARABLE 3.0 @else 2.4 @endif
-  /// @param[in] callback The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return   0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// Registers a callback function that will be invoked when the scan mode is changed. (e.g., by a TV remote control or other input devices).
   ///
-  /// @pre The AVRCP service must be initialized with bt_avrcp_target_initialize() or bt_avrcp_control_initialize().
-  /// @see bt_avrcp_target_initialize()
-  /// @see bt_avrcp_control_initialize()
-  /// @see bt_avrcp_unset_scan_mode_changed_cb()
+  /// **Since Tizen:**
+  /// - Wearable 3.0; Otherwise 2.4
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The AVRCP service must be initialized with bt_avrcp_target_initialize() or bt_avrcp_control_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_avrcp_target_initialize()`
+  /// - `bt_avrcp_control_initialize()`
+  /// - `bt_avrcp_unset_scan_mode_changed_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_AVRCP_MODULE
   int bt_avrcp_set_scan_mode_changed_cb(
     bt_avrcp_scan_mode_changed_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -5106,18 +6976,29 @@ class Tizen65CapiNetworkBluetooth {
       _bt_avrcp_set_scan_mode_changed_cbPtr.asFunction<
           int Function(bt_avrcp_scan_mode_changed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_AVRCP_MODULE
-  /// @brief  Unregisters a callback function that will be invoked when the scan mode is changed. (e.g., by a TV remote control or other input devices).
-  /// @since_tizen @if WEARABLE 3.0 @else 2.4 @endif
-  /// @return   0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// Unregisters a callback function that will be invoked when the scan mode is changed. (e.g., by a TV remote control or other input devices).
   ///
-  /// @pre The AVRCP service must be initialized with bt_avrcp_target_initialize() or bt_avrcp_control_initialize().
-  /// @see bt_avrcp_target_initialize()
-  /// @see bt_avrcp_control_initialize()
-  /// @see bt_avrcp_set_scan_mode_changed_cb()
+  /// **Since Tizen:**
+  /// - Wearable 3.0; Otherwise 2.4
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The AVRCP service must be initialized with bt_avrcp_target_initialize() or bt_avrcp_control_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_avrcp_target_initialize()`
+  /// - `bt_avrcp_control_initialize()`
+  /// - `bt_avrcp_set_scan_mode_changed_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_AVRCP_MODULE
   int bt_avrcp_unset_scan_mode_changed_cb() {
     return _bt_avrcp_unset_scan_mode_changed_cb();
   }
@@ -5128,21 +7009,34 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_avrcp_unset_scan_mode_changed_cb =
       _bt_avrcp_unset_scan_mode_changed_cbPtr.asFunction<int Function()>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_AVRCP_MODULE
-  /// @brief  Registers a callback function that will be invoked when the song position is changed. (e.g., by a TV remote control or other input devices).
-  /// @since_tizen 3.0
-  /// @param[in] callback The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return   0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// Registers a callback function that will be invoked when the song position is changed. (e.g., by a TV remote control or other input devices).
   ///
-  /// @pre The AVRCP service must be initialized with bt_avrcp_target_initialize() or bt_avrcp_control_initialize().
-  /// @see bt_avrcp_target_initialize()
-  /// @see bt_avrcp_control_initialize()
-  /// @see bt_avrcp_unset_position_changed_cb()
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The AVRCP service must be initialized with bt_avrcp_target_initialize() or bt_avrcp_control_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_avrcp_target_initialize()`
+  /// - `bt_avrcp_control_initialize()`
+  /// - `bt_avrcp_unset_position_changed_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_AVRCP_MODULE
   int bt_avrcp_set_position_changed_cb(
     bt_avrcp_position_changed_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -5161,18 +7055,29 @@ class Tizen65CapiNetworkBluetooth {
       _bt_avrcp_set_position_changed_cbPtr.asFunction<
           int Function(bt_avrcp_position_changed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_AVRCP_MODULE
-  /// @brief  Unregisters a callback function that will be invoked when the song position is changed. (e.g., by a TV remote control or other input devices).
-  /// @since_tizen 3.0
-  /// @return   0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// Unregisters a callback function that will be invoked when the song position is changed. (e.g., by a TV remote control or other input devices).
   ///
-  /// @pre The AVRCP service must be initialized with bt_avrcp_target_initialize() or bt_avrcp_control_initialize().
-  /// @see bt_avrcp_target_initialize()
-  /// @see bt_avrcp_control_initialize()
-  /// @see bt_avrcp_set_position_changed_cb()
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The AVRCP service must be initialized with bt_avrcp_target_initialize() or bt_avrcp_control_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_avrcp_target_initialize()`
+  /// - `bt_avrcp_control_initialize()`
+  /// - `bt_avrcp_set_position_changed_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_AVRCP_MODULE
   int bt_avrcp_unset_position_changed_cb() {
     return _bt_avrcp_unset_position_changed_cb();
   }
@@ -5183,21 +7088,34 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_avrcp_unset_position_changed_cb =
       _bt_avrcp_unset_position_changed_cbPtr.asFunction<int Function()>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_AVRCP_MODULE
-  /// @brief  Registers a callback function that will be invoked when the Play status is changed. (e.g., by a TV remote control or other input devices).
-  /// @since_tizen 3.0
-  /// @param[in] callback The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return   0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// Registers a callback function that will be invoked when the Play status is changed. (e.g., by a TV remote control or other input devices).
   ///
-  /// @pre The AVRCP service must be initialized with bt_avrcp_target_initialize() or bt_avrcp_control_initialize().
-  /// @see bt_avrcp_target_initialize()
-  /// @see bt_avrcp_control_initialize()
-  /// @see bt_avrcp_unset_play_status_changed_cb()
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The AVRCP service must be initialized with bt_avrcp_target_initialize() or bt_avrcp_control_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_avrcp_target_initialize()`
+  /// - `bt_avrcp_control_initialize()`
+  /// - `bt_avrcp_unset_play_status_changed_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_AVRCP_MODULE
   int bt_avrcp_set_play_status_changed_cb(
     bt_avrcp_play_status_changed_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -5217,18 +7135,29 @@ class Tizen65CapiNetworkBluetooth {
           int Function(
               bt_avrcp_play_status_changed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_AVRCP_MODULE
-  /// @brief  Unregisters a callback function that will be invoked when the Play status is changed. (e.g., by a TV remote control or other input devices).
-  /// @since_tizen 3.0
-  /// @return   0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// Unregisters a callback function that will be invoked when the Play status is changed. (e.g., by a TV remote control or other input devices).
   ///
-  /// @pre The AVRCP service must be initialized with bt_avrcp_target_initialize() or bt_avrcp_control_initialize().
-  /// @see bt_avrcp_target_initialize()
-  /// @see bt_avrcp_control_initialize()
-  /// @see bt_avrcp_set_play_status_changed_cb()
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The AVRCP service must be initialized with bt_avrcp_target_initialize() or bt_avrcp_control_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_avrcp_target_initialize()`
+  /// - `bt_avrcp_control_initialize()`
+  /// - `bt_avrcp_set_play_status_changed_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_AVRCP_MODULE
   int bt_avrcp_unset_play_status_changed_cb() {
     return _bt_avrcp_unset_play_status_changed_cb();
   }
@@ -5239,21 +7168,34 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_avrcp_unset_play_status_changed_cb =
       _bt_avrcp_unset_play_status_changed_cbPtr.asFunction<int Function()>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_AVRCP_MODULE
-  /// @brief  Registers a callback function that will be invoked when the track metadata is changed. (e.g., by a TV remote control or other input devices).
-  /// @since_tizen 3.0
-  /// @param[in] callback The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return   0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// Registers a callback function that will be invoked when the track metadata is changed. (e.g., by a TV remote control or other input devices).
   ///
-  /// @pre The AVRCP service must be initialized with bt_avrcp_target_initialize() or bt_avrcp_control_initialize().
-  /// @see bt_avrcp_target_initialize()
-  /// @see bt_avrcp_control_initialize()
-  /// @see bt_avrcp_unset_track_info_changed_cb()
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The AVRCP service must be initialized with bt_avrcp_target_initialize() or bt_avrcp_control_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_avrcp_target_initialize()`
+  /// - `bt_avrcp_control_initialize()`
+  /// - `bt_avrcp_unset_track_info_changed_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_AVRCP_MODULE
   int bt_avrcp_set_track_info_changed_cb(
     bt_avrcp_track_info_changed_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -5273,18 +7215,29 @@ class Tizen65CapiNetworkBluetooth {
           int Function(
               bt_avrcp_track_info_changed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_AVRCP_MODULE
-  /// @brief  Unregisters a callback function that will be invoked when the track metadata is changed. (e.g., by a TV remote control or other input devices).
-  /// @since_tizen 3.0
-  /// @return   0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// Unregisters a callback function that will be invoked when the track metadata is changed. (e.g., by a TV remote control or other input devices).
   ///
-  /// @pre The AVRCP service must be initialized with bt_avrcp_target_initialize() or bt_avrcp_control_initialize().
-  /// @see bt_avrcp_target_initialize()
-  /// @see bt_avrcp_control_initialize()
-  /// @see bt_avrcp_set_track_info_changed_cb()
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The AVRCP service must be initialized with bt_avrcp_target_initialize() or bt_avrcp_control_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_avrcp_target_initialize()`
+  /// - `bt_avrcp_control_initialize()`
+  /// - `bt_avrcp_set_track_info_changed_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_AVRCP_MODULE
   int bt_avrcp_unset_track_info_changed_cb() {
     return _bt_avrcp_unset_track_info_changed_cb();
   }
@@ -5295,23 +7248,39 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_avrcp_unset_track_info_changed_cb =
       _bt_avrcp_unset_track_info_changed_cbPtr.asFunction<int Function()>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_AVRCP_CONTROL_MODULE
-  /// @brief Initializes the Bluetooth AVRCP (Audio/Video Remote Control Profile) controller service.
-  /// @since_tizen 3.0
-  /// @remarks This function must be called before any other AVRCP controller functions are called. \n
-  /// You must free all resources of the this service by calling bt_avrcp_control_deinitialize() \n
-  /// if Bluetooth AVRCP service is no longer needed.
-  /// @param[in] callback The callback function called when the connection state is changed
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
-  /// @see bt_initialize()
-  /// @see bt_avrcp_control_deinitialize()
+  /// Initializes the Bluetooth AVRCP (Audio/Video Remote Control Profile) controller service.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - This function must be called before any other AVRCP controller functions are called.
+  /// - You must free all resources of the this service by calling bt_avrcp_control_deinitialize()
+  /// - if Bluetooth AVRCP service is no longer needed.
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): The callback function called when the connection state is changed
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_initialize()`
+  /// - `bt_avrcp_control_deinitialize()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_AVRCP_CONTROL_MODULE
   int bt_avrcp_control_initialize(
     bt_avrcp_control_connection_state_changed_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -5331,15 +7300,27 @@ class Tizen65CapiNetworkBluetooth {
           int Function(bt_avrcp_control_connection_state_changed_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_AVRCP_CONTROL_MODULE
-  /// @brief Deinitializes the Bluetooth AVRCP (Audio/Video Remote Control Profile) controller service.
-  /// @since_tizen 3.0
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
-  /// @pre The Bluetooth audio service must be initialized with bt_avrcp_control_initialize().
-  /// @see bt_avrcp_control_initialize()
+  /// Deinitializes the Bluetooth AVRCP (Audio/Video Remote Control Profile) controller service.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth audio service must be initialized with bt_avrcp_control_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_avrcp_control_initialize()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_AVRCP_CONTROL_MODULE
   int bt_avrcp_control_deinitialize() {
     return _bt_avrcp_control_deinitialize();
   }
@@ -5350,20 +7331,38 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_avrcp_control_deinitialize =
       _bt_avrcp_control_deinitializePtr.asFunction<int Function()>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_AVRCP_CONTROL_MODULE
-  /// @brief Connects the AVRCP (Audio/Video Remote Control Profile) target device.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
-  /// @param[in] remote_address  The remote address
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @pre The Bluetooth audio service must be initialized with bt_avrcp_control_initialize().
-  /// @see bt_avrcp_control_initialize()
+  /// Connects the AVRCP (Audio/Video Remote Control Profile) target device.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
+  ///
+  /// **Parameters:**
+  /// - `remote_address` (in): The remote address
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth audio service must be initialized with bt_avrcp_control_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_avrcp_control_initialize()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_AVRCP_CONTROL_MODULE
   int bt_avrcp_control_connect(
     ffi.Pointer<ffi.Char> remote_address,
   ) {
@@ -5378,21 +7377,39 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_avrcp_control_connect = _bt_avrcp_control_connectPtr
       .asFunction<int Function(ffi.Pointer<ffi.Char>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_AVRCP_CONTROL_MODULE
-  /// @brief Disconnects from the AVRCP (Audio/Video Remote Control Profile) target device.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
-  /// @param[in] remote_address  The remote address
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @pre The Bluetooth audio service must be initialized with bt_avrcp_control_initialize().
-  /// @see bt_avrcp_control_initialize()
-  /// @see bt_avrcp_control_connect()
+  /// Disconnects from the AVRCP (Audio/Video Remote Control Profile) target device.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
+  ///
+  /// **Parameters:**
+  /// - `remote_address` (in): The remote address
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth audio service must be initialized with bt_avrcp_control_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_avrcp_control_initialize()`
+  /// - `bt_avrcp_control_connect()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_AVRCP_CONTROL_MODULE
   int bt_avrcp_control_disconnect(
     ffi.Pointer<ffi.Char> remote_address,
   ) {
@@ -5407,24 +7424,42 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_avrcp_control_disconnect = _bt_avrcp_control_disconnectPtr
       .asFunction<int Function(ffi.Pointer<ffi.Char>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_AVRCP_CONTROL_MODULE
-  /// @brief Sends a command to the target device.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
-  /// @param[in] cmd The commands, one of: Play, Pause, Next, Rewind.
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_REMOTE_DEVICE_NOT_CONNECTED  Remote device is not connected
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
-  /// @pre The Bluetooth audio service must be initialized with bt_avrcp_control_initialize().
-  /// @see bt_avrcp_control_initialize()
-  /// @see bt_avrcp_control_connect()
+  /// Sends a command to the target device.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
+  ///
+  /// **Parameters:**
+  /// - `cmd` (in): The commands, one of: Play, Pause, Next, Rewind.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_REMOTE_DEVICE_NOT_CONNECTED`: Remote device is not connected
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth audio service must be initialized with bt_avrcp_control_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_avrcp_control_initialize()`
+  /// - `bt_avrcp_control_connect()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_AVRCP_CONTROL_MODULE
   int bt_avrcp_control_send_player_command(
     int cmd,
   ) {
@@ -5439,25 +7474,42 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_avrcp_control_send_player_command =
       _bt_avrcp_control_send_player_commandPtr.asFunction<int Function(int)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_AVRCP_CONTROL_MODULE
-  /// @brief  Sends the equalizer state change request to the remote device.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
-  /// @param[in] state The new equalizer state, one of: ON, OFF
-  /// @return  0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_REMOTE_DEVICE_NOT_CONNECTED  Remote device is not connected
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// Sends the equalizer state change request to the remote device.
   ///
-  /// @pre The remote device must be connected.
-  /// @see bt_avrcp_target_connection_state_changed_cb()
-  /// @see bt_avrcp_target_initialize()
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
+  ///
+  /// **Parameters:**
+  /// - `state` (in): The new equalizer state, one of: ON, OFF
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_REMOTE_DEVICE_NOT_CONNECTED`: Remote device is not connected
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The remote device must be connected.
+  ///
+  /// **See also:**
+  /// - `bt_avrcp_target_connection_state_changed_cb()`
+  /// - `bt_avrcp_target_initialize()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_AVRCP_CONTROL_MODULE
   int bt_avrcp_control_set_equalizer_state(
     int state,
   ) {
@@ -5472,22 +7524,35 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_avrcp_control_set_equalizer_state =
       _bt_avrcp_control_set_equalizer_statePtr.asFunction<int Function(int)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_AVRCP_CONTROL_MODULE
-  /// @brief  Gets the the equalizer state of the remote device.
-  /// @since_tizen 3.0
-  /// @param[out] state The equalizer state, one of: ON, OFF
-  /// @return  0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_REMOTE_DEVICE_NOT_CONNECTED  Remote device is not connected
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// Gets the the equalizer state of the remote device.
   ///
-  /// @pre The remote device must be connected.
-  /// @see bt_avrcp_target_connection_state_changed_cb()
-  /// @see bt_avrcp_target_initialize()
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `state` (out): The equalizer state, one of: ON, OFF
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_REMOTE_DEVICE_NOT_CONNECTED`: Remote device is not connected
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The remote device must be connected.
+  ///
+  /// **See also:**
+  /// - `bt_avrcp_target_connection_state_changed_cb()`
+  /// - `bt_avrcp_target_initialize()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_AVRCP_CONTROL_MODULE
   int bt_avrcp_control_get_equalizer_state(
     ffi.Pointer<ffi.Int32> state,
   ) {
@@ -5503,25 +7568,42 @@ class Tizen65CapiNetworkBluetooth {
       _bt_avrcp_control_get_equalizer_statePtr
           .asFunction<int Function(ffi.Pointer<ffi.Int32>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_AVRCP_CONTROL_MODULE
-  /// @brief  Sends the repeat change request to the remote device.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
-  /// @param[in] mode The new repeat mode, one of: OFF, SINGLE, ALL
-  /// @return  0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_REMOTE_DEVICE_NOT_CONNECTED  Remote device is not connected
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// Sends the repeat change request to the remote device.
   ///
-  /// @pre The remote device must be connected.
-  /// @see bt_avrcp_target_connection_state_changed_cb()
-  /// @see bt_avrcp_target_initialize()
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
+  ///
+  /// **Parameters:**
+  /// - `mode` (in): The new repeat mode, one of: OFF, SINGLE, ALL
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_REMOTE_DEVICE_NOT_CONNECTED`: Remote device is not connected
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The remote device must be connected.
+  ///
+  /// **See also:**
+  /// - `bt_avrcp_target_connection_state_changed_cb()`
+  /// - `bt_avrcp_target_initialize()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_AVRCP_CONTROL_MODULE
   int bt_avrcp_control_set_repeat_mode(
     int mode,
   ) {
@@ -5536,22 +7618,35 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_avrcp_control_set_repeat_mode =
       _bt_avrcp_control_set_repeat_modePtr.asFunction<int Function(int)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_AVRCP_CONTROL_MODULE
-  /// @brief  Gets the repeat state of the remote device.
-  /// @since_tizen 3.0
-  /// @param[out] mode The repeat mode, one of: OFF, SINGLE, ALL
-  /// @return  0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_REMOTE_DEVICE_NOT_CONNECTED  Remote device is not connected
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// Gets the repeat state of the remote device.
   ///
-  /// @pre The remote device must be connected.
-  /// @see bt_avrcp_target_connection_state_changed_cb()
-  /// @see bt_avrcp_target_initialize()
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `mode` (out): The repeat mode, one of: OFF, SINGLE, ALL
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_REMOTE_DEVICE_NOT_CONNECTED`: Remote device is not connected
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The remote device must be connected.
+  ///
+  /// **See also:**
+  /// - `bt_avrcp_target_connection_state_changed_cb()`
+  /// - `bt_avrcp_target_initialize()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_AVRCP_CONTROL_MODULE
   int bt_avrcp_control_get_repeat_mode(
     ffi.Pointer<ffi.Int32> mode,
   ) {
@@ -5567,25 +7662,42 @@ class Tizen65CapiNetworkBluetooth {
       _bt_avrcp_control_get_repeat_modePtr
           .asFunction<int Function(ffi.Pointer<ffi.Int32>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_AVRCP_CONTROL_MODULE
-  /// @brief  Sends the shuffle mode change request to the remote device.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
-  /// @param[in] mode The new shuffle mode, one of: OFF, GROUP, ALL
-  /// @return  0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_REMOTE_DEVICE_NOT_CONNECTED  Remote device is not connected
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// Sends the shuffle mode change request to the remote device.
   ///
-  /// @pre The remote device must be connected.
-  /// @see bt_avrcp_target_connection_state_changed_cb()
-  /// @see bt_avrcp_target_initialize()
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
+  ///
+  /// **Parameters:**
+  /// - `mode` (in): The new shuffle mode, one of: OFF, GROUP, ALL
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_REMOTE_DEVICE_NOT_CONNECTED`: Remote device is not connected
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The remote device must be connected.
+  ///
+  /// **See also:**
+  /// - `bt_avrcp_target_connection_state_changed_cb()`
+  /// - `bt_avrcp_target_initialize()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_AVRCP_CONTROL_MODULE
   int bt_avrcp_control_set_shuffle_mode(
     int mode,
   ) {
@@ -5600,22 +7712,35 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_avrcp_control_set_shuffle_mode =
       _bt_avrcp_control_set_shuffle_modePtr.asFunction<int Function(int)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_AVRCP_CONTROL_MODULE
-  /// @brief  Gets the shuffle mode of the remote device.
-  /// @since_tizen 3.0
-  /// @param[out] mode The shuffle mode, one of: OFF, GROUP, ALL
-  /// @return  0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_REMOTE_DEVICE_NOT_CONNECTED  Remote device is not connected
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// Gets the shuffle mode of the remote device.
   ///
-  /// @pre The remote device must be connected.
-  /// @see bt_avrcp_target_connection_state_changed_cb()
-  /// @see bt_avrcp_target_initialize()
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `mode` (out): The shuffle mode, one of: OFF, GROUP, ALL
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_REMOTE_DEVICE_NOT_CONNECTED`: Remote device is not connected
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The remote device must be connected.
+  ///
+  /// **See also:**
+  /// - `bt_avrcp_target_connection_state_changed_cb()`
+  /// - `bt_avrcp_target_initialize()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_AVRCP_CONTROL_MODULE
   int bt_avrcp_control_get_shuffle_mode(
     ffi.Pointer<ffi.Int32> mode,
   ) {
@@ -5631,25 +7756,42 @@ class Tizen65CapiNetworkBluetooth {
       _bt_avrcp_control_get_shuffle_modePtr
           .asFunction<int Function(ffi.Pointer<ffi.Int32>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_AVRCP_CONTROL_MODULE
-  /// @brief  Sends the scan mode change request to the remote device.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
-  /// @param[in] mode The new scan mode, one of: OFF, GROUP, ALL
-  /// @return  0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_REMOTE_DEVICE_NOT_CONNECTED  Remote device is not connected
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// Sends the scan mode change request to the remote device.
   ///
-  /// @pre The remote device must be connected.
-  /// @see bt_avrcp_target_connection_state_changed_cb()
-  /// @see bt_avrcp_target_initialize()
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
+  ///
+  /// **Parameters:**
+  /// - `mode` (in): The new scan mode, one of: OFF, GROUP, ALL
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_REMOTE_DEVICE_NOT_CONNECTED`: Remote device is not connected
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The remote device must be connected.
+  ///
+  /// **See also:**
+  /// - `bt_avrcp_target_connection_state_changed_cb()`
+  /// - `bt_avrcp_target_initialize()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_AVRCP_CONTROL_MODULE
   int bt_avrcp_control_set_scan_mode(
     int mode,
   ) {
@@ -5664,22 +7806,35 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_avrcp_control_set_scan_mode =
       _bt_avrcp_control_set_scan_modePtr.asFunction<int Function(int)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_AVRCP_CONTROL_MODULE
-  /// @brief  Gets the scan mode of the remote device.
-  /// @since_tizen 3.0
-  /// @param[out] mode The scan mode, one of: OFF, GROUP, ALL
-  /// @return  0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_REMOTE_DEVICE_NOT_CONNECTED  Remote device is not connected
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// Gets the scan mode of the remote device.
   ///
-  /// @pre The remote device must be connected.
-  /// @see bt_avrcp_target_connection_state_changed_cb()
-  /// @see bt_avrcp_target_initialize()
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `mode` (out): The scan mode, one of: OFF, GROUP, ALL
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_REMOTE_DEVICE_NOT_CONNECTED`: Remote device is not connected
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The remote device must be connected.
+  ///
+  /// **See also:**
+  /// - `bt_avrcp_target_connection_state_changed_cb()`
+  /// - `bt_avrcp_target_initialize()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_AVRCP_CONTROL_MODULE
   int bt_avrcp_control_get_scan_mode(
     ffi.Pointer<ffi.Int32> mode,
   ) {
@@ -5695,22 +7850,35 @@ class Tizen65CapiNetworkBluetooth {
       _bt_avrcp_control_get_scan_modePtr
           .asFunction<int Function(ffi.Pointer<ffi.Int32>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_AVRCP_CONTROL_MODULE
-  /// @brief  Gets the position of the song played by the remote device.
-  /// @since_tizen 3.0
-  /// @param[out] position The position, in milliseconds
-  /// @return  0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_REMOTE_DEVICE_NOT_CONNECTED  Remote device is not connected
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// Gets the position of the song played by the remote device.
   ///
-  /// @pre The remote device must be connected.
-  /// @see bt_avrcp_target_connection_state_changed_cb()
-  /// @see bt_avrcp_target_initialize()
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `position` (out): The position, in milliseconds
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_REMOTE_DEVICE_NOT_CONNECTED`: Remote device is not connected
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The remote device must be connected.
+  ///
+  /// **See also:**
+  /// - `bt_avrcp_target_connection_state_changed_cb()`
+  /// - `bt_avrcp_target_initialize()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_AVRCP_CONTROL_MODULE
   int bt_avrcp_control_get_position(
     ffi.Pointer<ffi.UnsignedInt> position,
   ) {
@@ -5725,22 +7893,35 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_avrcp_control_get_position = _bt_avrcp_control_get_positionPtr
       .asFunction<int Function(ffi.Pointer<ffi.UnsignedInt>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_AVRCP_CONTROL_MODULE
-  /// @brief  Gets the play status of the remote device.
-  /// @since_tizen 3.0
-  /// @param[out] status The play status, one of: PLAYING, STOPPED...
-  /// @return  0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_REMOTE_DEVICE_NOT_CONNECTED  Remote device is not connected
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// Gets the play status of the remote device.
   ///
-  /// @pre The remote device must be connected.
-  /// @see bt_avrcp_target_connection_state_changed_cb()
-  /// @see bt_avrcp_target_initialize()
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `status` (out): The play status, one of: PLAYING, STOPPED...
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_REMOTE_DEVICE_NOT_CONNECTED`: Remote device is not connected
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The remote device must be connected.
+  ///
+  /// **See also:**
+  /// - `bt_avrcp_target_connection_state_changed_cb()`
+  /// - `bt_avrcp_target_initialize()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_AVRCP_CONTROL_MODULE
   int bt_avrcp_control_get_play_status(
     ffi.Pointer<ffi.Int32> status,
   ) {
@@ -5756,23 +7937,38 @@ class Tizen65CapiNetworkBluetooth {
       _bt_avrcp_control_get_play_statusPtr
           .asFunction<int Function(ffi.Pointer<ffi.Int32>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_AVRCP_CONTROL_MODULE
-  /// @brief  Gets the metadata of the track played by the remote device.
-  /// @since_tizen 3.0
-  /// @remarks The @a track must be released using bt_avrcp_control_free_track_info().
-  /// @param[out] track The track metadata.
-  /// @return  0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_REMOTE_DEVICE_NOT_CONNECTED  Remote device is not connected
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// Gets the metadata of the track played by the remote device.
   ///
-  /// @pre The remote device must be connected.
-  /// @see bt_avrcp_target_connection_state_changed_cb()
-  /// @see bt_avrcp_target_initialize()
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The `track` must be released using bt_avrcp_control_free_track_info().
+  ///
+  /// **Parameters:**
+  /// - `track` (out): The track metadata.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_REMOTE_DEVICE_NOT_CONNECTED`: Remote device is not connected
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The remote device must be connected.
+  ///
+  /// **See also:**
+  /// - `bt_avrcp_target_connection_state_changed_cb()`
+  /// - `bt_avrcp_target_initialize()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_AVRCP_CONTROL_MODULE
   int bt_avrcp_control_get_track_info(
     ffi.Pointer<ffi.Pointer<bt_avrcp_metadata_attributes_info_s>> track,
   ) {
@@ -5792,18 +7988,32 @@ class Tizen65CapiNetworkBluetooth {
           int Function(
               ffi.Pointer<ffi.Pointer<bt_avrcp_metadata_attributes_info_s>>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_AVRCP_CONTROL_MODULE
-  /// @brief  Frees the track metadata.
-  /// @since_tizen 3.0
-  /// @param[in] track The track metadata.
-  /// @return  0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
-  /// @pre track should point to valid metadata address.
-  /// @see bt_avrcp_control_get_track_info()
-  /// @see bt_avrcp_target_initialize()
+  /// Frees the track metadata.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `track` (in): The track metadata.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - track should point to valid metadata address.
+  ///
+  /// **See also:**
+  /// - `bt_avrcp_control_get_track_info()`
+  /// - `bt_avrcp_target_initialize()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_AVRCP_CONTROL_MODULE
   int bt_avrcp_control_free_track_info(
     ffi.Pointer<bt_avrcp_metadata_attributes_info_s> track,
   ) {
@@ -5821,28 +8031,47 @@ class Tizen65CapiNetworkBluetooth {
       _bt_avrcp_control_free_track_infoPtr.asFunction<
           int Function(ffi.Pointer<bt_avrcp_metadata_attributes_info_s>)>();
 
-  /// @deprecated Deprecated since 5.0.
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_HDP_MODULE
-  /// @brief Registers an application that acts as the Sink role of HDP (Health Device Profile).
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
-  /// @remarks The @a app_id must be released with free() by you. \n
-  /// Deprecated, because of no usecase and supported devices.
-  /// @param[in] data_type  The data type of MDEP. This value is defined in ISO/IEEE 11073-20601 spec.
-  /// For example, pulse oximeter is 0x1004 and blood pressure monitor is 0x1007.
-  /// @param[out] app_id  The ID of application
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_OUT_OF_MEMORY  Out of memory
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Deprecated:** Deprecated since 5.0.
   ///
-  /// @pre The state of local Bluetooth must be #BT_ADAPTER_ENABLED.
-  /// @see bt_hdp_unregister_sink_app()
+  /// Registers an application that acts as the Sink role of HDP (Health Device Profile).
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
+  ///
+  /// **Remarks:**
+  /// - The `app_id` must be released with free() by you.
+  /// - Deprecated, because of no usecase and supported devices.
+  ///
+  /// **Parameters:**
+  /// - `data_type` (in): The data type of MDEP. This value is defined in ISO/IEEE 11073-20601 spec. For example, pulse oximeter is 0x1004 and blood pressure monitor is 0x1007.
+  /// - `app_id` (out): The ID of application
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The state of local Bluetooth must be `BT_ADAPTER_ENABLED`.
+  ///
+  /// **See also:**
+  /// - `bt_hdp_unregister_sink_app()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_HDP_MODULE
   int bt_hdp_register_sink_app(
     int data_type,
     ffi.Pointer<ffi.Pointer<ffi.Char>> app_id,
@@ -5860,24 +8089,42 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_hdp_register_sink_app = _bt_hdp_register_sink_appPtr
       .asFunction<int Function(int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @deprecated Deprecated since 5.0.
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_HDP_MODULE
-  /// @brief Unregisters the given application that acts as the Sink role of HDP (Health Device Profile).
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
-  /// @remarks Deprecated, because of no usecase and supported devices.
-  /// @param[in] app_id  The ID of application
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Deprecated:** Deprecated since 5.0.
   ///
-  /// @see bt_hdp_register_sink_app()
+  /// Unregisters the given application that acts as the Sink role of HDP (Health Device Profile).
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
+  ///
+  /// **Remarks:**
+  /// - Deprecated, because of no usecase and supported devices.
+  ///
+  /// **Parameters:**
+  /// - `app_id` (in): The ID of application
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `bt_hdp_register_sink_app()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_HDP_MODULE
   int bt_hdp_unregister_sink_app(
     ffi.Pointer<ffi.Char> app_id,
   ) {
@@ -5892,31 +8139,53 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_hdp_unregister_sink_app = _bt_hdp_unregister_sink_appPtr
       .asFunction<int Function(ffi.Pointer<ffi.Char>)>();
 
-  /// @deprecated Deprecated since 5.0.
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_HDP_MODULE
-  /// @brief Connects the remote device which acts as Source role, asynchronously.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
-  /// @remarks Deprecated, because of no usecase and supported devices.
-  /// @param[in] remote_address  The remote address
-  /// @param[in] app_id  The ID of application
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_OUT_OF_MEMORY  Out of memory
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Deprecated:** Deprecated since 5.0.
   ///
-  /// @pre The Sink role of HDP must be registered with bt_hdp_register_sink_app().
-  /// @pre The local device must be bonded with the remote device by bt_device_create_bond().
-  /// @post bt_hdp_connected_cb() will be invoked.
-  /// @see bt_hdp_disconnect()
-  /// @see bt_hdp_set_connection_state_changed_cb()
-  /// @see bt_hdp_unset_connection_state_changed_cb()
+  /// Connects the remote device which acts as Source role, asynchronously.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
+  ///
+  /// **Remarks:**
+  /// - Deprecated, because of no usecase and supported devices.
+  ///
+  /// **Parameters:**
+  /// - `remote_address` (in): The remote address
+  /// - `app_id` (in): The ID of application
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Sink role of HDP must be registered with bt_hdp_register_sink_app().
+  /// - The local device must be bonded with the remote device by bt_device_create_bond().
+  ///
+  /// **Postconditions:**
+  /// - bt_hdp_connected_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `bt_hdp_disconnect()`
+  /// - `bt_hdp_set_connection_state_changed_cb()`
+  /// - `bt_hdp_unset_connection_state_changed_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_HDP_MODULE
   int bt_hdp_connect_to_source(
     ffi.Pointer<ffi.Char> remote_address,
     ffi.Pointer<ffi.Char> app_id,
@@ -5934,30 +8203,52 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_hdp_connect_to_source = _bt_hdp_connect_to_sourcePtr
       .asFunction<int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>();
 
-  /// @deprecated Deprecated since 5.0.
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_HDP_MODULE
-  /// @brief Disconnects the remote device, asynchronously.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
-  /// @remarks Deprecated, because of no usecase and supported devices.
-  /// @param[in] remote_address  The remote address
-  /// @param[in] channel  The connected data channel
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_REMOTE_DEVICE_NOT_CONNECTED  Remote device is not connected
-  /// @retval #BT_ERROR_OUT_OF_MEMORY  Out of memory
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Deprecated:** Deprecated since 5.0.
   ///
-  /// @pre The remote device must be connected.
-  /// @post bt_hdp_disconnected_cb() will be invoked.
-  /// @see bt_hdp_set_connection_state_changed_cb()
-  /// @see bt_hdp_unset_connection_state_changed_cb()
+  /// Disconnects the remote device, asynchronously.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
+  ///
+  /// **Remarks:**
+  /// - Deprecated, because of no usecase and supported devices.
+  ///
+  /// **Parameters:**
+  /// - `remote_address` (in): The remote address
+  /// - `channel` (in): The connected data channel
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_REMOTE_DEVICE_NOT_CONNECTED`: Remote device is not connected
+  /// - `BT_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The remote device must be connected.
+  ///
+  /// **Postconditions:**
+  /// - bt_hdp_disconnected_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `bt_hdp_set_connection_state_changed_cb()`
+  /// - `bt_hdp_unset_connection_state_changed_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_HDP_MODULE
   int bt_hdp_disconnect(
     ffi.Pointer<ffi.Char> remote_address,
     int channel,
@@ -5975,29 +8266,49 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_hdp_disconnect = _bt_hdp_disconnectPtr
       .asFunction<int Function(ffi.Pointer<ffi.Char>, int)>();
 
-  /// @deprecated Deprecated since 5.0.
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_HDP_MODULE
-  /// @brief Sends the data to the remote device.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
-  /// @remarks Deprecated, because of no usecase and supported devices.
-  /// @param[in] channel  The connected data channel
-  /// @param[in] data  The data to send
-  /// @param[in] size  The size of data to send (byte)
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Deprecated:** Deprecated since 5.0.
   ///
-  /// @pre The remote device must be connected.
-  /// @see bt_hdp_data_received_cb()
-  /// @see bt_hdp_set_data_received_cb()
-  /// @see bt_hdp_unset_data_received_cb()
+  /// Sends the data to the remote device.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
+  ///
+  /// **Remarks:**
+  /// - Deprecated, because of no usecase and supported devices.
+  ///
+  /// **Parameters:**
+  /// - `channel` (in): The connected data channel
+  /// - `data` (in): The data to send
+  /// - `size` (in): The size of data to send (byte)
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The remote device must be connected.
+  ///
+  /// **See also:**
+  /// - `bt_hdp_data_received_cb()`
+  /// - `bt_hdp_set_data_received_cb()`
+  /// - `bt_hdp_unset_data_received_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_HDP_MODULE
   int bt_hdp_send_data(
     int channel,
     ffi.Pointer<ffi.Char> data,
@@ -6017,22 +8328,38 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_hdp_send_data = _bt_hdp_send_dataPtr
       .asFunction<int Function(int, ffi.Pointer<ffi.Char>, int)>();
 
-  /// @deprecated Deprecated since 5.0.
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_HDP_MODULE
-  /// @brief  Registers a callback function that will be invoked when the connection state is changed.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @remarks Deprecated, because of no usecase and supported devices.
-  /// @param[in] connected_cb The callback function called when a connection is established
-  /// @param[in] disconnected_cb The callback function called when a connection is disconnected
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return   0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Deprecated:** Deprecated since 5.0.
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
-  /// @see bt_hdp_unset_connection_state_changed_cb()
+  /// Registers a callback function that will be invoked when the connection state is changed.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Remarks:**
+  /// - Deprecated, because of no usecase and supported devices.
+  ///
+  /// **Parameters:**
+  /// - `connected_cb` (in): The callback function called when a connection is established
+  /// - `disconnected_cb` (in): The callback function called when a connection is disconnected
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_hdp_unset_connection_state_changed_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_HDP_MODULE
   int bt_hdp_set_connection_state_changed_cb(
     bt_hdp_connected_cb connected_cb,
     bt_hdp_disconnected_cb disconnected_cb,
@@ -6055,18 +8382,32 @@ class Tizen65CapiNetworkBluetooth {
           int Function(bt_hdp_connected_cb, bt_hdp_disconnected_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @deprecated Deprecated since 5.0.
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_HDP_MODULE
-  /// @brief  Unregisters a callback function that will be invoked when the connection state is changed.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @remarks Deprecated, because of no usecase and supported devices.
-  /// @return   0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Deprecated:** Deprecated since 5.0.
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
-  /// @see bt_hdp_set_connection_state_changed_cb()
+  /// Unregisters a callback function that will be invoked when the connection state is changed.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Remarks:**
+  /// - Deprecated, because of no usecase and supported devices.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_hdp_set_connection_state_changed_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_HDP_MODULE
   int bt_hdp_unset_connection_state_changed_cb() {
     return _bt_hdp_unset_connection_state_changed_cb();
   }
@@ -6077,21 +8418,37 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_hdp_unset_connection_state_changed_cb =
       _bt_hdp_unset_connection_state_changed_cbPtr.asFunction<int Function()>();
 
-  /// @deprecated Deprecated since 5.0.
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_HDP_MODULE
-  /// @brief  Registers a callback function that will be invoked when you receive the data.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @remarks Deprecated, because of no usecase and supported devices.
-  /// @param[in] callback The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return   0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Deprecated:** Deprecated since 5.0.
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
-  /// @see bt_hdp_unset_data_received_cb()
+  /// Registers a callback function that will be invoked when you receive the data.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Remarks:**
+  /// - Deprecated, because of no usecase and supported devices.
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_hdp_unset_data_received_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_HDP_MODULE
   int bt_hdp_set_data_received_cb(
     bt_hdp_data_received_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -6110,18 +8467,32 @@ class Tizen65CapiNetworkBluetooth {
       _bt_hdp_set_data_received_cbPtr.asFunction<
           int Function(bt_hdp_data_received_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @deprecated Deprecated since 5.0.
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_HDP_MODULE
-  /// @brief  Unregisters a callback function that will be invoked when you receive the data.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @remarks Deprecated, because of no usecase and supported devices.
-  /// @return   0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Deprecated:** Deprecated since 5.0.
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
-  /// @see bt_hdp_set_data_received_cb()
+  /// Unregisters a callback function that will be invoked when you receive the data.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
+  ///
+  /// **Remarks:**
+  /// - Deprecated, because of no usecase and supported devices.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_hdp_set_data_received_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_HDP_MODULE
   int bt_hdp_unset_data_received_cb() {
     return _bt_hdp_unset_data_received_cb();
   }
@@ -6132,21 +8503,31 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_hdp_unset_data_received_cb =
       _bt_hdp_unset_data_received_cbPtr.asFunction<int Function()>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_MODULE
-  /// @brief  Gets the value of a characteristic or descriptor's GATT handle.
-  /// @since_tizen 2.3.1
+  /// Gets the value of a characteristic or descriptor's GATT handle.
   ///
-  /// @remarks @a value must be released using free(). \n
-  /// When @a gatt_handle is associated with bt_gatt_client_h, bt_gatt_client_read_value() must be used prior to this function \n
-  /// in order to get the remote device's current value.
+  /// **Since Tizen:**
+  /// - 2.3.1
   ///
-  /// @param[in] gatt_handle The handle of a characteristic or descriptor
-  /// @param[out] value The value of @a gatt_handle. It is a byte stream type.
-  /// @param[out] value_length The length of @a value
-  /// @return  0 on success, otherwise a negative error value
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Remarks:**
+  /// - `value` must be released using free().
+  /// - When `gatt_handle` is associated with bt_gatt_client_h, bt_gatt_client_read_value() must be used prior to this function
+  /// - in order to get the remote device's current value.
+  ///
+  /// **Parameters:**
+  /// - `gatt_handle` (in): The handle of a characteristic or descriptor
+  /// - `value` (out): The value of `gatt_handle`. It is a byte stream type.
+  /// - `value_length` (out): The length of `value`
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_GATT_MODULE
   int bt_gatt_get_value(
     bt_gatt_h gatt_handle,
     ffi.Pointer<ffi.Pointer<ffi.Char>> value,
@@ -6167,22 +8548,32 @@ class Tizen65CapiNetworkBluetooth {
       int Function(bt_gatt_h, ffi.Pointer<ffi.Pointer<ffi.Char>>,
           ffi.Pointer<ffi.Int>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_MODULE
-  /// @brief  Gets the value of a characteristic or descriptor's GATT handle as an integer type.
-  /// @since_tizen 2.3.1
+  /// Gets the value of a characteristic or descriptor's GATT handle as an integer type.
   ///
-  /// @remarks This function returns a locally saved value in @a gatt_handle. \n
-  /// When @a gatt_handle is associated with bt_gatt_client_h, bt_gatt_client_read_value() must be used prior to this function \n
-  /// in order to get the remote device's current value.
+  /// **Since Tizen:**
+  /// - 2.3.1
   ///
-  /// @param[in] gatt_handle The handle of a characteristic or descriptor
-  /// @param[in] type The type of a saved value in @a gatt_handle
-  /// @param[in] offset The offset from where a value will be read from @a gatt_handle as an integer type
-  /// @param[out] value The integer type's value of @a gatt_handle
-  /// @return  0 on success, otherwise a negative error value
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Remarks:**
+  /// - This function returns a locally saved value in `gatt_handle`.
+  /// - When `gatt_handle` is associated with bt_gatt_client_h, bt_gatt_client_read_value() must be used prior to this function
+  /// - in order to get the remote device's current value.
+  ///
+  /// **Parameters:**
+  /// - `gatt_handle` (in): The handle of a characteristic or descriptor
+  /// - `type` (in): The type of a saved value in `gatt_handle`
+  /// - `offset` (in): The offset from where a value will be read from `gatt_handle` as an integer type
+  /// - `value` (out): The integer type's value of `gatt_handle`
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_GATT_MODULE
   int bt_gatt_get_int_value(
     bt_gatt_h gatt_handle,
     int type,
@@ -6204,22 +8595,32 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_gatt_get_int_value = _bt_gatt_get_int_valuePtr
       .asFunction<int Function(bt_gatt_h, int, int, ffi.Pointer<ffi.Int>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_MODULE
-  /// @brief  Gets the value of a characteristic or descriptor's GATT handle as a float type.
-  /// @since_tizen 2.3.1
+  /// Gets the value of a characteristic or descriptor's GATT handle as a float type.
   ///
-  /// @remarks This function returns a locally saved value in @a gatt_handle. \n
-  /// When @a gatt_handle is associated with bt_gatt_client_h, bt_gatt_client_read_value() must be used prior to this function \n
-  /// in order to get the remote device's current value.
+  /// **Since Tizen:**
+  /// - 2.3.1
   ///
-  /// @param[in] gatt_handle  The handle of a characteristic or descriptor
-  /// @param[in] type The type of a saved value in @a gatt_handle
-  /// @param[in] offset The offset from where a value will be read from @a gatt_handle as an integer type
-  /// @param[out] value The float type's value of @a gatt_handle
-  /// @return  0 on success, otherwise a negative error value
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Remarks:**
+  /// - This function returns a locally saved value in `gatt_handle`.
+  /// - When `gatt_handle` is associated with bt_gatt_client_h, bt_gatt_client_read_value() must be used prior to this function
+  /// - in order to get the remote device's current value.
+  ///
+  /// **Parameters:**
+  /// - `gatt_handle` (in): The handle of a characteristic or descriptor
+  /// - `type` (in): The type of a saved value in `gatt_handle`
+  /// - `offset` (in): The offset from where a value will be read from `gatt_handle` as an integer type
+  /// - `value` (out): The float type's value of `gatt_handle`
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_GATT_MODULE
   int bt_gatt_get_float_value(
     bt_gatt_h gatt_handle,
     int type,
@@ -6241,22 +8642,32 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_gatt_get_float_value = _bt_gatt_get_float_valuePtr
       .asFunction<int Function(bt_gatt_h, int, int, ffi.Pointer<ffi.Float>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_MODULE
-  /// @brief  Updates the value of a characteristic or descriptor's GATT handle.
-  /// @since_tizen 2.3.1
+  /// Updates the value of a characteristic or descriptor's GATT handle.
   ///
-  /// @remarks This function updates a value of @a gatt_handle locally. \n
-  /// When @a gatt_handle is associated with bt_gatt_client_h, bt_gatt_client_write_value() can be used after this function \n
-  /// in order to update the remote device's value. \n
+  /// **Since Tizen:**
+  /// - 2.3.1
   ///
-  /// @param[in] gatt_handle The handle of a characteristic or descriptor
-  /// @param[in] value The value to be updated
-  /// @param[in] value_length The length of @a value
-  /// @return  0 on success, otherwise a negative error value
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Remarks:**
+  /// - This function updates a value of `gatt_handle` locally.
+  /// - When `gatt_handle` is associated with bt_gatt_client_h, bt_gatt_client_write_value() can be used after this function
+  /// - in order to update the remote device's value.
+  ///
+  /// **Parameters:**
+  /// - `gatt_handle` (in): The handle of a characteristic or descriptor
+  /// - `value` (in): The value to be updated
+  /// - `value_length` (in): The length of `value`
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_GATT_MODULE
   int bt_gatt_set_value(
     bt_gatt_h gatt_handle,
     ffi.Pointer<ffi.Char> value,
@@ -6276,23 +8687,33 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_gatt_set_value = _bt_gatt_set_valuePtr
       .asFunction<int Function(bt_gatt_h, ffi.Pointer<ffi.Char>, int)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_MODULE
-  /// @brief  Updates the value of a characteristic or descriptor's GATT handle using a integer type's value.
-  /// @since_tizen 2.3.1
+  /// Updates the value of a characteristic or descriptor's GATT handle using a integer type's value.
   ///
-  /// @remarks This function updates a value of @a gatt_handle locally. \n
-  /// When @a gatt_handle is associated with bt_gatt_client_h, bt_gatt_client_write_value() can be used after this function \n
-  /// in order to update the remote device's value.
+  /// **Since Tizen:**
+  /// - 2.3.1
   ///
-  /// @param[in] gatt_handle The handle of a characteristic or descriptor
-  /// @param[in] type @a value will be saved in @a gatt_handle as this type
-  /// @param[in] value The integer type's value to be updated
-  /// @param[in] offset The offset from where @a value will be saved in @a gatt_handle
-  /// @return  0 on success, otherwise a negative error value
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Remarks:**
+  /// - This function updates a value of `gatt_handle` locally.
+  /// - When `gatt_handle` is associated with bt_gatt_client_h, bt_gatt_client_write_value() can be used after this function
+  /// - in order to update the remote device's value.
+  ///
+  /// **Parameters:**
+  /// - `gatt_handle` (in): The handle of a characteristic or descriptor
+  /// - `type` (in): `value` will be saved in `gatt_handle` as this type
+  /// - `value` (in): The integer type's value to be updated
+  /// - `offset` (in): The offset from where `value` will be saved in `gatt_handle`
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_GATT_MODULE
   int bt_gatt_set_int_value(
     bt_gatt_h gatt_handle,
     int type,
@@ -6314,24 +8735,34 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_gatt_set_int_value = _bt_gatt_set_int_valuePtr
       .asFunction<int Function(bt_gatt_h, int, int, int)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_MODULE
-  /// @brief  Updates the value of a characteristic or descriptor's GATT handle using a float type's value.
-  /// @since_tizen 2.3.1
+  /// Updates the value of a characteristic or descriptor's GATT handle using a float type's value.
   ///
-  /// @remarks This function updates a value of @a gatt_handle locally. \n
-  /// When @a gatt_handle is associated with bt_gatt_client_h, bt_gatt_client_write_value() can be used after this function \n
-  /// in order to update the remote device's value.
+  /// **Since Tizen:**
+  /// - 2.3.1
   ///
-  /// @param[in] gatt_handle The handle of a characteristic or descriptor
-  /// @param[in] type @a mantissa and @a exponent will be saved in @a gatt_handle as this type
-  /// @param[in] mantissa The mantissa of float type's value to be updated
-  /// @param[in] exponent The exponent of float type's value to be updated
-  /// @param[in] offset The offset from where @a mantissa and @a exponent will be saved in @a gatt_handle
-  /// @return  0 on success, otherwise a negative error value
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Remarks:**
+  /// - This function updates a value of `gatt_handle` locally.
+  /// - When `gatt_handle` is associated with bt_gatt_client_h, bt_gatt_client_write_value() can be used after this function
+  /// - in order to update the remote device's value.
+  ///
+  /// **Parameters:**
+  /// - `gatt_handle` (in): The handle of a characteristic or descriptor
+  /// - `type` (in): `mantissa` and `exponent` will be saved in `gatt_handle` as this type
+  /// - `mantissa` (in): The mantissa of float type's value to be updated
+  /// - `exponent` (in): The exponent of float type's value to be updated
+  /// - `offset` (in): The offset from where `mantissa` and `exponent` will be saved in `gatt_handle`
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_GATT_MODULE
   int bt_gatt_set_float_value(
     bt_gatt_h gatt_handle,
     int type,
@@ -6355,19 +8786,29 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_gatt_set_float_value = _bt_gatt_set_float_valuePtr
       .asFunction<int Function(bt_gatt_h, int, int, int, int)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_MODULE
-  /// @brief  Gets the UUID of a service, characteristic or descriptor's GATT handle.
-  /// @since_tizen 2.3.1
+  /// Gets the UUID of a service, characteristic or descriptor's GATT handle.
   ///
-  /// @remarks @a uuid must be released using free(). \n
-  /// 16-bit UUID or 128-bit UUID is supported. (e.g. 2A19, 00002A19-0000-1000-8000-00805F9B34FB).
+  /// **Since Tizen:**
+  /// - 2.3.1
   ///
-  /// @param[in] gatt_handle The handle of a service, characteristic or descriptor
-  /// @param[out] uuid The string of the UUID of @a gatt_handle
-  /// @return  0 on success, otherwise a negative error value
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Remarks:**
+  /// - `uuid` must be released using free().
+  /// - 16-bit UUID or 128-bit UUID is supported. (e.g. 2A19, 00002A19-0000-1000-8000-00805F9B34FB).
+  ///
+  /// **Parameters:**
+  /// - `gatt_handle` (in): The handle of a service, characteristic or descriptor
+  /// - `uuid` (out): The string of the UUID of `gatt_handle`
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_GATT_MODULE
   int bt_gatt_get_uuid(
     bt_gatt_h gatt_handle,
     ffi.Pointer<ffi.Pointer<ffi.Char>> uuid,
@@ -6385,16 +8826,25 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_gatt_get_uuid = _bt_gatt_get_uuidPtr.asFunction<
       int Function(bt_gatt_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_MODULE
-  /// @brief  Gets the type of GATT handle.
-  /// @since_tizen 2.3.1
+  /// Gets the type of GATT handle.
   ///
-  /// @param[in] gatt_handle The GATT handle
-  /// @param[out] gatt_type The type of @a gatt_handle
-  /// @return  0 on success, otherwise a negative error value
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Since Tizen:**
+  /// - 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `gatt_handle` (in): The GATT handle
+  /// - `gatt_type` (out): The type of `gatt_handle`
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_GATT_MODULE
   int bt_gatt_get_type(
     bt_gatt_h gatt_handle,
     ffi.Pointer<ffi.Int32> gatt_type,
@@ -6412,22 +8862,33 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_gatt_get_type = _bt_gatt_get_typePtr
       .asFunction<int Function(bt_gatt_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_CLIENT_MODULE
-  /// @brief  Gets the GATT client handle which the specified service belongs to.
-  /// @since_tizen 2.3.1
+  /// Gets the GATT client handle which the specified service belongs to.
   ///
-  /// @remarks This function doesn't allocate new memory for GATT client handle. \n
-  /// The returned GATT client handle is the same one which was got from bt_gatt_client_create(). \n
-  /// So if it is destroyed by bt_gatt_client_destroy(), all related GATT handles are freed also.
+  /// **Since Tizen:**
+  /// - 2.3.1
   ///
-  /// @param[in] service The service's GATT handle
-  /// @param[out] client The GATT client handle which @a service belongs to
-  /// @return  0 on success, otherwise a negative error value
-  /// @retval #BT_ERROR_NONE Successful
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Remarks:**
+  /// - This function doesn't allocate new memory for GATT client handle.
+  /// - The returned GATT client handle is the same one which was got from bt_gatt_client_create().
+  /// - So if it is destroyed by bt_gatt_client_destroy(), all related GATT handles are freed also.
   ///
-  /// @see bt_gatt_client_create()
+  /// **Parameters:**
+  /// - `service` (in): The service's GATT handle
+  /// - `client` (out): The GATT client handle which `service` belongs to
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `bt_gatt_client_create()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_GATT_CLIENT_MODULE
   int bt_gatt_service_get_client(
     bt_gatt_h service,
     ffi.Pointer<bt_gatt_client_h> client,
@@ -6445,22 +8906,32 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_gatt_service_get_client = _bt_gatt_service_get_clientPtr
       .asFunction<int Function(bt_gatt_h, ffi.Pointer<bt_gatt_client_h>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_MODULE
-  /// @brief  Gets a characteristic's GATT handle which has specific UUID.
-  /// @since_tizen 2.3.1
+  /// Gets a characteristic's GATT handle which has specific UUID.
   ///
-  /// @remarks The returned GATT handle must not be freed by application. \n
-  /// It will be freed when an associated client is destroyed by bt_gatt_client_destroy(). \n
-  /// If there are multiple characteristics which have same UUID, only the first matched one will be returned.
+  /// **Since Tizen:**
+  /// - 2.3.1
   ///
-  /// @param[in] service The service's GATT handle
-  /// @param[in] uuid The characteristic's GATT handle which has this UUID will be returned if it exists
-  /// @param[out] characteristic The characteristic's GATT handle which has @a uuid if it exists
-  /// @return  0 on success, otherwise a negative error value
-  /// @retval #BT_ERROR_NONE Successful
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NO_DATA  No data available
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Remarks:**
+  /// - The returned GATT handle must not be freed by application.
+  /// - It will be freed when an associated client is destroyed by bt_gatt_client_destroy().
+  /// - If there are multiple characteristics which have same UUID, only the first matched one will be returned.
+  ///
+  /// **Parameters:**
+  /// - `service` (in): The service's GATT handle
+  /// - `uuid` (in): The characteristic's GATT handle which has this UUID will be returned if it exists
+  /// - `characteristic` (out): The characteristic's GATT handle which has `uuid` if it exists
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NO_DATA`: No data available
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_GATT_MODULE
   int bt_gatt_service_get_characteristic(
     bt_gatt_h service,
     ffi.Pointer<ffi.Char> uuid,
@@ -6482,19 +8953,29 @@ class Tizen65CapiNetworkBluetooth {
           int Function(
               bt_gatt_h, ffi.Pointer<ffi.Char>, ffi.Pointer<bt_gatt_h>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_MODULE
-  /// @brief  Invokes @a callback function on each characteristic that belongs to the specified service.
-  /// @since_tizen 2.3.1
+  /// Invokes `callback` function on each characteristic that belongs to the specified service.
   ///
-  /// @param[in] service The service's GATT handle
-  /// @param[in] callback The function to be invoked on each characteristic
-  /// @param[in] user_data The user data to be passed to @a callback function
-  /// @return  0 on success, otherwise a negative error value
-  /// @retval #BT_ERROR_NONE Successful
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Since Tizen:**
+  /// - 2.3.1
   ///
-  /// @see bt_gatt_foreach_cb()
+  /// **Parameters:**
+  /// - `service` (in): The service's GATT handle
+  /// - `callback` (in): The function to be invoked on each characteristic
+  /// - `user_data` (in): The user data to be passed to `callback` function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `bt_gatt_foreach_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_GATT_MODULE
   int bt_gatt_service_foreach_characteristics(
     bt_gatt_h service,
     bt_gatt_foreach_cb callback,
@@ -6516,22 +8997,32 @@ class Tizen65CapiNetworkBluetooth {
       _bt_gatt_service_foreach_characteristicsPtr.asFunction<
           int Function(bt_gatt_h, bt_gatt_foreach_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_MODULE
-  /// @brief  Gets an included service's GATT handle which has specific UUID.
-  /// @since_tizen 2.3.1
+  /// Gets an included service's GATT handle which has specific UUID.
   ///
-  /// @remarks The returned GATT handle must not be freed by application. \n
-  /// It will be freed when an associated client is destroyed by bt_gatt_client_destroy(). \n
-  /// If there are multiple included services which have same UUID, only the first matched one will be returned.
+  /// **Since Tizen:**
+  /// - 2.3.1
   ///
-  /// @param[in] service The service's GATT handle
-  /// @param[in] uuid The included service's GATT handle which has this UUID will be returned if it exists
-  /// @param[out] included_service The included service's GATT handle which has @a uuid if it exists
-  /// @return  0 on success, otherwise a negative error value
-  /// @retval #BT_ERROR_NONE Successful
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NO_DATA  No data available
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Remarks:**
+  /// - The returned GATT handle must not be freed by application.
+  /// - It will be freed when an associated client is destroyed by bt_gatt_client_destroy().
+  /// - If there are multiple included services which have same UUID, only the first matched one will be returned.
+  ///
+  /// **Parameters:**
+  /// - `service` (in): The service's GATT handle
+  /// - `uuid` (in): The included service's GATT handle which has this UUID will be returned if it exists
+  /// - `included_service` (out): The included service's GATT handle which has `uuid` if it exists
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NO_DATA`: No data available
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_GATT_MODULE
   int bt_gatt_service_get_included_service(
     bt_gatt_h service,
     ffi.Pointer<ffi.Char> uuid,
@@ -6553,19 +9044,29 @@ class Tizen65CapiNetworkBluetooth {
           int Function(
               bt_gatt_h, ffi.Pointer<ffi.Char>, ffi.Pointer<bt_gatt_h>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_MODULE
-  /// @brief  Invokes @a callback function on each included service that belongs to the specified service.
-  /// @since_tizen 2.3.1
+  /// Invokes `callback` function on each included service that belongs to the specified service.
   ///
-  /// @param[in] service The service's GATT handle
-  /// @param[in] callback The function to be invoked on each included service
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return  0 on success, otherwise a negative error value
-  /// @retval #BT_ERROR_NONE Successful
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Since Tizen:**
+  /// - 2.3.1
   ///
-  /// @see bt_gatt_foreach_cb()
+  /// **Parameters:**
+  /// - `service` (in): The service's GATT handle
+  /// - `callback` (in): The function to be invoked on each included service
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `bt_gatt_foreach_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_GATT_MODULE
   int bt_gatt_service_foreach_included_services(
     bt_gatt_h service,
     bt_gatt_foreach_cb callback,
@@ -6587,19 +9088,29 @@ class Tizen65CapiNetworkBluetooth {
       _bt_gatt_service_foreach_included_servicesPtr.asFunction<
           int Function(bt_gatt_h, bt_gatt_foreach_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_MODULE
-  /// @brief  Gets the service's GATT handle which the specified characteristic belongs to.
-  /// @since_tizen 2.3.1
+  /// Gets the service's GATT handle which the specified characteristic belongs to.
   ///
-  /// @remarks The returned GATT handle must not be freed by application. \n
-  /// It will be freed when an associated client is destroyed by bt_gatt_client_destroy().
+  /// **Since Tizen:**
+  /// - 2.3.1
   ///
-  /// @param[in] characteristic The characteristic's GATT handle
-  /// @param[out] service The service's GATT handle which @a characteristic belongs to
-  /// @return  0 on success, otherwise a negative error value
-  /// @retval #BT_ERROR_NONE Successful
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Remarks:**
+  /// - The returned GATT handle must not be freed by application.
+  /// - It will be freed when an associated client is destroyed by bt_gatt_client_destroy().
+  ///
+  /// **Parameters:**
+  /// - `characteristic` (in): The characteristic's GATT handle
+  /// - `service` (out): The service's GATT handle which `characteristic` belongs to
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_GATT_MODULE
   int bt_gatt_characteristic_get_service(
     bt_gatt_h characteristic,
     ffi.Pointer<bt_gatt_h> service,
@@ -6618,18 +9129,28 @@ class Tizen65CapiNetworkBluetooth {
       _bt_gatt_characteristic_get_servicePtr
           .asFunction<int Function(bt_gatt_h, ffi.Pointer<bt_gatt_h>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_MODULE
-  /// @brief  Gets the properties which a characteristic's GATT handle has.
-  /// @since_tizen 2.3.1
+  /// Gets the properties which a characteristic's GATT handle has.
   ///
-  /// @param[in] characteristic The characteristic's GATT handle
-  /// @param[out] properties The properties which a characteristic's GATT handle has
-  /// @return  0 on success, otherwise a negative error value
-  /// @retval #BT_ERROR_NONE Successful
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Since Tizen:**
+  /// - 2.3.1
   ///
-  /// @see bt_gatt_property_e
+  /// **Parameters:**
+  /// - `characteristic` (in): The characteristic's GATT handle
+  /// - `properties` (out): The properties which a characteristic's GATT handle has
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `bt_gatt_property_e`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_GATT_MODULE
   int bt_gatt_characteristic_get_properties(
     bt_gatt_h characteristic,
     ffi.Pointer<ffi.Int> properties,
@@ -6648,18 +9169,28 @@ class Tizen65CapiNetworkBluetooth {
       _bt_gatt_characteristic_get_propertiesPtr
           .asFunction<int Function(bt_gatt_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_MODULE
-  /// @brief Gets the write type of the specified characteristic.
-  /// @since_tizen 2.3.1
+  /// Gets the write type of the specified characteristic.
   ///
-  /// @param[in] characteristic The characteristic's GATT handle
-  /// @param[out] write_type The write type of the specified characteristic
-  /// @return  0 on success, otherwise a negative error value
-  /// @retval #BT_ERROR_NONE Successful
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Since Tizen:**
+  /// - 2.3.1
   ///
-  /// @see bt_gatt_write_type_e
+  /// **Parameters:**
+  /// - `characteristic` (in): The characteristic's GATT handle
+  /// - `write_type` (out): The write type of the specified characteristic
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `bt_gatt_write_type_e`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_GATT_MODULE
   int bt_gatt_characteristic_get_write_type(
     bt_gatt_h characteristic,
     ffi.Pointer<ffi.Int32> write_type,
@@ -6678,19 +9209,29 @@ class Tizen65CapiNetworkBluetooth {
       _bt_gatt_characteristic_get_write_typePtr
           .asFunction<int Function(bt_gatt_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_MODULE
-  /// @brief  Updates the write type of the specified characteristic.
-  /// @since_tizen 2.3.1
+  /// Updates the write type of the specified characteristic.
   ///
-  /// @param[in] characteristic The characteristic's GATT handle
-  /// @param[in] write_type The write type to be updated
-  /// @return  0 on success, otherwise a negative error value
-  /// @retval #BT_ERROR_NONE Successful
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Since Tizen:**
+  /// - 2.3.1
   ///
-  /// @see bt_gatt_client_write_value()
-  /// @see bt_gatt_write_type_e
+  /// **Parameters:**
+  /// - `characteristic` (in): The characteristic's GATT handle
+  /// - `write_type` (in): The write type to be updated
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `bt_gatt_client_write_value()`
+  /// - `bt_gatt_write_type_e`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_GATT_MODULE
   int bt_gatt_characteristic_set_write_type(
     bt_gatt_h characteristic,
     int write_type,
@@ -6708,22 +9249,32 @@ class Tizen65CapiNetworkBluetooth {
       _bt_gatt_characteristic_set_write_typePtr
           .asFunction<int Function(bt_gatt_h, int)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_MODULE
-  /// @brief  Gets a descriptor's GATT handle which has specific UUID.
-  /// @since_tizen 2.3.1
+  /// Gets a descriptor's GATT handle which has specific UUID.
   ///
-  /// @remarks The returned GATT handle must not be freed by application. \n
-  /// It will be freed when an associated client is destroyed by bt_gatt_client_destroy(). \n
-  /// If there are multiple descriptors which have same UUID, only the first matched one will be returned.
+  /// **Since Tizen:**
+  /// - 2.3.1
   ///
-  /// @param[in] characteristic The characteristic's GATT handle
-  /// @param[in] uuid The descriptor's GATT handle which has this UUID will be returned if it exists
-  /// @param[out] descriptor The descriptor's GATT handle which has @a uuid if it exists
-  /// @return  0 on success, otherwise a negative error value
-  /// @retval #BT_ERROR_NONE Successful
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NO_DATA  No data available
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Remarks:**
+  /// - The returned GATT handle must not be freed by application.
+  /// - It will be freed when an associated client is destroyed by bt_gatt_client_destroy().
+  /// - If there are multiple descriptors which have same UUID, only the first matched one will be returned.
+  ///
+  /// **Parameters:**
+  /// - `characteristic` (in): The characteristic's GATT handle
+  /// - `uuid` (in): The descriptor's GATT handle which has this UUID will be returned if it exists
+  /// - `descriptor` (out): The descriptor's GATT handle which has `uuid` if it exists
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NO_DATA`: No data available
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_GATT_MODULE
   int bt_gatt_characteristic_get_descriptor(
     bt_gatt_h characteristic,
     ffi.Pointer<ffi.Char> uuid,
@@ -6746,19 +9297,29 @@ class Tizen65CapiNetworkBluetooth {
           int Function(
               bt_gatt_h, ffi.Pointer<ffi.Char>, ffi.Pointer<bt_gatt_h>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_MODULE
-  /// @brief  Invokes @a callback function on each descriptor that belongs to the specified characteristic.
-  /// @since_tizen 2.3.1
+  /// Invokes `callback` function on each descriptor that belongs to the specified characteristic.
   ///
-  /// @param[in] characteristic The characteristic's GATT handle
-  /// @param[in] callback The function to be invoked on each descriptor
-  /// @param[in] user_data The user data to be passed to @a callback function
-  /// @return  0 on success, otherwise a negative error value
-  /// @retval #BT_ERROR_NONE Successful
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Since Tizen:**
+  /// - 2.3.1
   ///
-  /// @see bt_gatt_foreach_cb()
+  /// **Parameters:**
+  /// - `characteristic` (in): The characteristic's GATT handle
+  /// - `callback` (in): The function to be invoked on each descriptor
+  /// - `user_data` (in): The user data to be passed to `callback` function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `bt_gatt_foreach_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_GATT_MODULE
   int bt_gatt_characteristic_foreach_descriptors(
     bt_gatt_h characteristic,
     bt_gatt_foreach_cb callback,
@@ -6780,19 +9341,29 @@ class Tizen65CapiNetworkBluetooth {
       _bt_gatt_characteristic_foreach_descriptorsPtr.asFunction<
           int Function(bt_gatt_h, bt_gatt_foreach_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_MODULE
-  /// @brief  Gets the characteristic's GATT handle which the specified descriptor belongs to.
-  /// @since_tizen 2.3.1
+  /// Gets the characteristic's GATT handle which the specified descriptor belongs to.
   ///
-  /// @remarks The returned GATT handle must not be freed by application. \n
-  /// It will be freed when an associated client is destroyed by bt_gatt_client_destroy().
+  /// **Since Tizen:**
+  /// - 2.3.1
   ///
-  /// @param[in] descriptor The descriptor's GATT handle
-  /// @param[out] characteristic The characteristic's GATT handle which @a descriptor belongs to
-  /// @return  0 on success, otherwise a negative error value
-  /// @retval #BT_ERROR_NONE Successful
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Remarks:**
+  /// - The returned GATT handle must not be freed by application.
+  /// - It will be freed when an associated client is destroyed by bt_gatt_client_destroy().
+  ///
+  /// **Parameters:**
+  /// - `descriptor` (in): The descriptor's GATT handle
+  /// - `characteristic` (out): The characteristic's GATT handle which `descriptor` belongs to
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_GATT_MODULE
   int bt_gatt_descriptor_get_characteristic(
     bt_gatt_h descriptor,
     ffi.Pointer<bt_gatt_h> characteristic,
@@ -6811,22 +9382,33 @@ class Tizen65CapiNetworkBluetooth {
       _bt_gatt_descriptor_get_characteristicPtr
           .asFunction<int Function(bt_gatt_h, ffi.Pointer<bt_gatt_h>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_CLIENT_MODULE
-  /// @brief  Creates the GATT client handle.
-  /// @since_tizen 2.3.1
+  /// Creates the GATT client handle.
   ///
-  /// @remarks The GATT client handle must be freed by bt_gatt_client_destroy() after use.
+  /// **Since Tizen:**
+  /// - 2.3.1
   ///
-  /// @param[in] remote_address The address of the remote device
-  /// @param[out] client The created GATT client's handle
-  /// @return  0 on success, otherwise a negative error value
-  /// @retval #BT_ERROR_NONE Successful
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_OUT_OF_MEMORY  Out of memory
-  /// @retval #BT_ERROR_ALREADY_DONE  Operation is already done
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Remarks:**
+  /// - The GATT client handle must be freed by bt_gatt_client_destroy() after use.
   ///
-  /// @see bt_gatt_client_destroy()
+  /// **Parameters:**
+  /// - `remote_address` (in): The address of the remote device
+  /// - `client` (out): The created GATT client's handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `BT_ERROR_ALREADY_DONE`: Operation is already done
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `bt_gatt_client_destroy()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_GATT_CLIENT_MODULE
   int bt_gatt_client_create(
     ffi.Pointer<ffi.Char> remote_address,
     ffi.Pointer<bt_gatt_client_h> client,
@@ -6844,19 +9426,30 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_gatt_client_create = _bt_gatt_client_createPtr.asFunction<
       int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<bt_gatt_client_h>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_CLIENT_MODULE
-  /// @brief  Destroys the GATT client's handle.
-  /// @since_tizen 2.3.1
+  /// Destroys the GATT client's handle.
   ///
-  /// @remarks All related service, characteristic and descriptor's GATT handles are freed also.
+  /// **Since Tizen:**
+  /// - 2.3.1
   ///
-  /// @param[in] client The GATT client's handle
-  /// @return  0 on success, otherwise a negative error value
-  /// @retval #BT_ERROR_NONE Successful
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Remarks:**
+  /// - All related service, characteristic and descriptor's GATT handles are freed also.
   ///
-  /// @see bt_gatt_client_create()
+  /// **Parameters:**
+  /// - `client` (in): The GATT client's handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `bt_gatt_client_create()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_GATT_CLIENT_MODULE
   int bt_gatt_client_destroy(
     bt_gatt_client_h client,
   ) {
@@ -6871,18 +9464,28 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_gatt_client_destroy =
       _bt_gatt_client_destroyPtr.asFunction<int Function(bt_gatt_client_h)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_CLIENT_MODULE
-  /// @brief  Gets the address of remote device.
-  /// @since_tizen 2.3.1
+  /// Gets the address of remote device.
   ///
-  /// @param[in] client The created GATT client's handle
-  /// @param[out] remote_address The address of the remote device which is associated with @a client
-  /// @return  0 on success, otherwise a negative error value
-  /// @retval #BT_ERROR_NONE Successful
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Since Tizen:**
+  /// - 2.3.1
   ///
-  /// @see bt_gatt_client_create()
+  /// **Parameters:**
+  /// - `client` (in): The created GATT client's handle
+  /// - `remote_address` (out): The address of the remote device which is associated with `client`
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `bt_gatt_client_create()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_GATT_CLIENT_MODULE
   int bt_gatt_client_get_remote_address(
     bt_gatt_client_h client,
     ffi.Pointer<ffi.Pointer<ffi.Char>> remote_address,
@@ -6902,27 +9505,41 @@ class Tizen65CapiNetworkBluetooth {
       _bt_gatt_client_get_remote_addressPtr.asFunction<
           int Function(bt_gatt_client_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @ingroup  CAPI_NETWORK_BLUETOOTH_GATT_CLIENT_MODULE
-  /// @brief  Reads the value of a characteristic or descriptor from the remote device asynchronously.
-  /// @since_tizen 2.3.1
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
+  /// Reads the value of a characteristic or descriptor from the remote device asynchronously.
   ///
-  /// @param[in] gatt_handle The GATT handle of a characteristic or descriptor
-  /// @param[in] callback When a read request is completed, this callback function will be called
-  /// @param[in] user_data The user data to be passed to @a callback function
-  /// @return  0 on success, otherwise a negative error value
-  /// @retval #BT_ERROR_NONE	Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_NOW_IN_PROGRESS  Operation now in progress
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Since Tizen:**
+  /// - 2.3.1
   ///
-  /// @see bt_gatt_client_create()
-  /// @see bt_gatt_client_request_completed_cb()
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
+  ///
+  /// **Parameters:**
+  /// - `gatt_handle` (in): The GATT handle of a characteristic or descriptor
+  /// - `callback` (in): When a read request is completed, this callback function will be called
+  /// - `user_data` (in): The user data to be passed to `callback` function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_NOW_IN_PROGRESS`: Operation now in progress
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `bt_gatt_client_create()`
+  /// - `bt_gatt_client_request_completed_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_GATT_CLIENT_MODULE
   int bt_gatt_client_read_value(
     bt_gatt_h gatt_handle,
     bt_gatt_client_request_completed_cb callback,
@@ -6944,31 +9561,45 @@ class Tizen65CapiNetworkBluetooth {
           int Function(bt_gatt_h, bt_gatt_client_request_completed_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @ingroup  CAPI_NETWORK_BLUETOOTH_GATT_CLIENT_MODULE
-  /// @brief  Writes the value of a characteristic or descriptor to the remote device asynchronously.
-  /// @since_tizen 2.3.1
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
+  /// Writes the value of a characteristic or descriptor to the remote device asynchronously.
   ///
-  /// @param[in] gatt_handle The GATT handle of a characteristic or descriptor
-  /// @param[in] callback When a write request is completed, this callback function will be called
-  /// @param[in] user_data The user data to be passed to @a callback function
-  /// @return  0 on success, otherwise a negative error value
-  /// @retval #BT_ERROR_NONE	Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_NOW_IN_PROGRESS  Operation now in progress
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Since Tizen:**
+  /// - 2.3.1
   ///
-  /// @see bt_gatt_client_create()
-  /// @see bt_gatt_characteristic_set_write_type()
-  /// @see bt_gatt_set_value()
-  /// @see bt_gatt_set_int_value()
-  /// @see bt_gatt_set_float_value()
-  /// @see bt_gatt_client_request_completed_cb()
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
+  ///
+  /// **Parameters:**
+  /// - `gatt_handle` (in): The GATT handle of a characteristic or descriptor
+  /// - `callback` (in): When a write request is completed, this callback function will be called
+  /// - `user_data` (in): The user data to be passed to `callback` function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_NOW_IN_PROGRESS`: Operation now in progress
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `bt_gatt_client_create()`
+  /// - `bt_gatt_characteristic_set_write_type()`
+  /// - `bt_gatt_set_value()`
+  /// - `bt_gatt_set_int_value()`
+  /// - `bt_gatt_set_float_value()`
+  /// - `bt_gatt_client_request_completed_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_GATT_CLIENT_MODULE
   int bt_gatt_client_write_value(
     bt_gatt_h gatt_handle,
     bt_gatt_client_request_completed_cb callback,
@@ -6990,24 +9621,38 @@ class Tizen65CapiNetworkBluetooth {
           int Function(bt_gatt_h, bt_gatt_client_request_completed_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_CLIENT_MODULE
-  /// @brief Requests a change of the ATT MTU value.
-  /// @since_tizen 4.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
+  /// Requests a change of the ATT MTU value.
   ///
-  /// @param[in] client The created GATT client's handle
-  /// @param[in] mtu The new MTU value
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_OPERATION_FAILED   Operation failed
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
-  /// @see bt_gatt_client_set_att_mtu_changed_cb()
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The created GATT client's handle
+  /// - `mtu` (in): The new MTU value
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `bt_gatt_client_set_att_mtu_changed_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_GATT_CLIENT_MODULE
   int bt_gatt_client_request_att_mtu_change(
     bt_gatt_client_h client,
     int mtu,
@@ -7026,21 +9671,29 @@ class Tizen65CapiNetworkBluetooth {
       _bt_gatt_client_request_att_mtu_changePtr
           .asFunction<int Function(bt_gatt_client_h, int)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_CLIENT_MODULE
-  /// @brief Gets the ATT MTU value set for a connection.
-  /// @since_tizen 4.0
+  /// Gets the ATT MTU value set for a connection.
   ///
-  /// @param[in] client The created GATT client's handle
-  /// @param[out] mtu The MTU value set for a connection
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_INVALID_PARAMETER	Invalid parameter
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_OPERATION_FAILED	Operation failed
-  /// @retval #BT_ERROR_NOT_SUPPORTED	Not supported
-  /// @retval #BT_ERROR_REMOTE_DEVICE_NOT_CONNECTED  Remote device is not connected
+  /// **Parameters:**
+  /// - `client` (in): The created GATT client's handle
+  /// - `mtu` (out): The MTU value set for a connection
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `BT_ERROR_REMOTE_DEVICE_NOT_CONNECTED`: Remote device is not connected
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_GATT_CLIENT_MODULE
   int bt_gatt_client_get_att_mtu(
     bt_gatt_client_h client,
     ffi.Pointer<ffi.UnsignedInt> mtu,
@@ -7059,23 +9712,38 @@ class Tizen65CapiNetworkBluetooth {
       _bt_gatt_client_get_att_mtuPtr.asFunction<
           int Function(bt_gatt_client_h, ffi.Pointer<ffi.UnsignedInt>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_CLIENT_MODULE
-  /// @brief  Registers a callback function to be invoked when the ATT MTU is changed.
-  /// @since_tizen 4.0
-  /// @param[in] client The created GATT client's handle
-  /// @param[in] callback The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// Registers a callback function to be invoked when the ATT MTU is changed.
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
-  /// @post bt_device_connection_state_changed_cb() will be invoked.
-  /// @see bt_initialize()
-  /// @see bt_gatt_client_request_att_mtu_change()
-  /// @see bt_gatt_client_unset_att_mtu_changed_cb()
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The created GATT client's handle
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **Postconditions:**
+  /// - bt_device_connection_state_changed_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `bt_initialize()`
+  /// - `bt_gatt_client_request_att_mtu_change()`
+  /// - `bt_gatt_client_unset_att_mtu_changed_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_GATT_CLIENT_MODULE
   int bt_gatt_client_set_att_mtu_changed_cb(
     bt_gatt_client_h client,
     bt_gatt_client_att_mtu_changed_cb callback,
@@ -7097,20 +9765,33 @@ class Tizen65CapiNetworkBluetooth {
           int Function(bt_gatt_client_h, bt_gatt_client_att_mtu_changed_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_CLIENT_MODULE
-  /// @brief Unregisters the callback function to be invoked when the ATT MTU is changed.
-  /// @since_tizen 4.0
-  /// @param[in] client The created GATT client's handle
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// Unregisters the callback function to be invoked when the ATT MTU is changed.
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
-  /// @see bt_initialize()
-  /// @see bt_gatt_client_request_att_mtu_change()
-  /// @see bt_gatt_client_set_att_mtu_changed_cb()
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The created GATT client's handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_initialize()`
+  /// - `bt_gatt_client_request_att_mtu_change()`
+  /// - `bt_gatt_client_set_att_mtu_changed_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_GATT_CLIENT_MODULE
   int bt_gatt_client_unset_att_mtu_changed_cb(
     bt_gatt_client_h client,
   ) {
@@ -7126,21 +9807,31 @@ class Tizen65CapiNetworkBluetooth {
       _bt_gatt_client_unset_att_mtu_changed_cbPtr
           .asFunction<int Function(bt_gatt_client_h)>();
 
-  /// @ingroup  CAPI_NETWORK_BLUETOOTH_GATT_CLIENT_MODULE
-  /// @brief  Registers a callback function to be invoked when the characteristic value is changed on the remote device.
-  /// @since_tizen 2.3.1
+  /// Registers a callback function to be invoked when the characteristic value is changed on the remote device.
   ///
-  /// @param[in] characteristic The characteristic's GATT handle
-  /// @param[in] callback The callback to be invoked when the value is changed and it is informed
-  /// @param[in] user_data The user data to be passed to @a callback function
-  /// @return  0 on success, otherwise a negative error value
-  /// @retval #BT_ERROR_NONE	Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Since Tizen:**
+  /// - 2.3.1
   ///
-  /// @see bt_gatt_client_characteristic_value_changed_cb()
-  /// @see bt_gatt_client_unset_characteristic_value_changed_cb()
+  /// **Parameters:**
+  /// - `characteristic` (in): The characteristic's GATT handle
+  /// - `callback` (in): The callback to be invoked when the value is changed and it is informed
+  /// - `user_data` (in): The user data to be passed to `callback` function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `bt_gatt_client_characteristic_value_changed_cb()`
+  /// - `bt_gatt_client_unset_characteristic_value_changed_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_GATT_CLIENT_MODULE
   int bt_gatt_client_set_characteristic_value_changed_cb(
     bt_gatt_h characteristic,
     bt_gatt_client_characteristic_value_changed_cb callback,
@@ -7167,18 +9858,28 @@ class Tizen65CapiNetworkBluetooth {
               bt_gatt_client_characteristic_value_changed_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @ingroup  CAPI_NETWORK_BLUETOOTH_GATT_CLIENT_MODULE
-  /// @brief  Unregisters a callback function to be invoked when the characteristic value is changed on the remote device.
-  /// @since_tizen 2.3.1
+  /// Unregisters a callback function to be invoked when the characteristic value is changed on the remote device.
   ///
-  /// @param[in] characteristic The characteristic's GATT handle, whose value change will not be informed
-  /// @return  0 on success, otherwise a negative error value
-  /// @retval #BT_ERROR_NONE	Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Since Tizen:**
+  /// - 2.3.1
   ///
-  /// @see bt_gatt_client_set_characteristic_value_changed_cb()
+  /// **Parameters:**
+  /// - `characteristic` (in): The characteristic's GATT handle, whose value change will not be informed
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `bt_gatt_client_set_characteristic_value_changed_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_GATT_CLIENT_MODULE
   int bt_gatt_client_unset_characteristic_value_changed_cb(
     bt_gatt_h characteristic,
   ) {
@@ -7194,22 +9895,32 @@ class Tizen65CapiNetworkBluetooth {
       _bt_gatt_client_unset_characteristic_value_changed_cbPtr
           .asFunction<int Function(bt_gatt_h)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_CLIENT_MODULE
-  /// @brief  Gets a service's GATT handle which has specific UUID.
-  /// @since_tizen 2.3.1
+  /// Gets a service's GATT handle which has specific UUID.
   ///
-  /// @remarks The returned GATT handle must not be freed by application. \n
-  /// It will be freed when an associated client is destroyed by bt_gatt_client_destroy(). \n
-  /// If there are multiple services which have same UUID, only the first matched one will be returned.
+  /// **Since Tizen:**
+  /// - 2.3.1
   ///
-  /// @param[in] client The GATT client's handle
-  /// @param[in] uuid The service's GATT handle which has this UUID will be returned if it exists
-  /// @param[out] service The service's GATT handle which has @a uuid if it exists
-  /// @return  0 on success, otherwise a negative error value
-  /// @retval #BT_ERROR_NONE Successful
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NO_DATA  No data available
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Remarks:**
+  /// - The returned GATT handle must not be freed by application.
+  /// - It will be freed when an associated client is destroyed by bt_gatt_client_destroy().
+  /// - If there are multiple services which have same UUID, only the first matched one will be returned.
+  ///
+  /// **Parameters:**
+  /// - `client` (in): The GATT client's handle
+  /// - `uuid` (in): The service's GATT handle which has this UUID will be returned if it exists
+  /// - `service` (out): The service's GATT handle which has `uuid` if it exists
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NO_DATA`: No data available
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_GATT_CLIENT_MODULE
   int bt_gatt_client_get_service(
     bt_gatt_client_h client,
     ffi.Pointer<ffi.Char> uuid,
@@ -7231,19 +9942,29 @@ class Tizen65CapiNetworkBluetooth {
           int Function(bt_gatt_client_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<bt_gatt_h>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_CLIENT_MODULE
-  /// @brief  Invokes @a callback function on each service that belongs to the specified GATT client.
-  /// @since_tizen 2.3.1
+  /// Invokes `callback` function on each service that belongs to the specified GATT client.
   ///
-  /// @param[in] client The GATT client's handle
-  /// @param[in] callback The function to be invoked on each service
-  /// @param[in] user_data The user data to be passed to @a callback function
-  /// @return  0 on success, otherwise a negative error value
-  /// @retval #BT_ERROR_NONE Successful
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Since Tizen:**
+  /// - 2.3.1
   ///
-  /// @see bt_gatt_foreach_cb()
+  /// **Parameters:**
+  /// - `client` (in): The GATT client's handle
+  /// - `callback` (in): The function to be invoked on each service
+  /// - `user_data` (in): The user data to be passed to `callback` function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `bt_gatt_foreach_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_GATT_CLIENT_MODULE
   int bt_gatt_client_foreach_services(
     bt_gatt_client_h client,
     bt_gatt_foreach_cb callback,
@@ -7265,19 +9986,29 @@ class Tizen65CapiNetworkBluetooth {
           int Function(
               bt_gatt_client_h, bt_gatt_foreach_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_CLIENT_MODULE
-  /// @brief  Registers a callback function to be invoked when service is changed from a remote device(GATT server).
-  /// @since_tizen 3.0
+  /// Registers a callback function to be invoked when service is changed from a remote device(GATT server).
   ///
-  /// @param[in] client The GATT client's handle
-  /// @param[in] callback The callback to be invoked
-  /// @param[in] user_data The user data to be passed to @a callback function
-  /// @return  0 on success, otherwise a negative error value
-  /// @retval #BT_ERROR_NONE Successful
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @see bt_gatt_client_unset_service_changed_cb()
+  /// **Parameters:**
+  /// - `client` (in): The GATT client's handle
+  /// - `callback` (in): The callback to be invoked
+  /// - `user_data` (in): The user data to be passed to `callback` function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `bt_gatt_client_unset_service_changed_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_GATT_CLIENT_MODULE
   int bt_gatt_client_set_service_changed_cb(
     bt_gatt_client_h client,
     bt_gatt_client_service_changed_cb callback,
@@ -7299,17 +10030,27 @@ class Tizen65CapiNetworkBluetooth {
           int Function(bt_gatt_client_h, bt_gatt_client_service_changed_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_CLIENT_MODULE
-  /// @brief  Unregisters a callback function.
-  /// @since_tizen 3.0
+  /// Unregisters a callback function.
   ///
-  /// @param[in] client The GATT client's handle
-  /// @return  0 on success, otherwise a negative error value
-  /// @retval #BT_ERROR_NONE Successful
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @see bt_gatt_client_set_service_changed_cb()
+  /// **Parameters:**
+  /// - `client` (in): The GATT client's handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `bt_gatt_client_set_service_changed_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_GATT_CLIENT_MODULE
   int bt_gatt_client_unset_service_changed_cb(
     bt_gatt_client_h client,
   ) {
@@ -7325,35 +10066,52 @@ class Tizen65CapiNetworkBluetooth {
       _bt_gatt_client_unset_service_changed_cbPtr
           .asFunction<int Function(bt_gatt_client_h)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_CLIENT_MODULE
-  /// @brief Connects to a specific LE based service on a remote bluetooth device address, asynchronously.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
+  /// Connects to a specific LE based service on a remote bluetooth device address, asynchronously.
   ///
-  /// @remarks A connection can be disconnected by bt_gatt_disconnect().
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
   ///
-  /// @param[in] address The address of the remote Bluetooth device.
-  /// @param[in] auto_connect The flag of the auto connection.
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_NOT_ENABLED Not enabled
-  /// @retval #BT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #BT_ERROR_OPERATION_FAILED Operation failed
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
-  /// @pre The remote device must support le connection.
-  /// @post This function invokes bt_gatt_connection_state_changed_cb().
+  /// **Remarks:**
+  /// - A connection can be disconnected by bt_gatt_disconnect().
   ///
-  /// @see bt_initialize()
-  /// @see bt_gatt_disconnect()
-  /// @see bt_gatt_set_connection_state_changed_cb()
-  /// @see bt_gatt_unset_connection_state_changed_cb()
-  /// @see bt_gatt_connection_state_changed_cb()
+  /// **Parameters:**
+  /// - `address` (in): The address of the remote Bluetooth device.
+  /// - `auto_connect` (in): The flag of the auto connection.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  /// - The remote device must support le connection.
+  ///
+  /// **Postconditions:**
+  /// - This function invokes bt_gatt_connection_state_changed_cb().
+  ///
+  /// **See also:**
+  /// - `bt_initialize()`
+  /// - `bt_gatt_disconnect()`
+  /// - `bt_gatt_set_connection_state_changed_cb()`
+  /// - `bt_gatt_unset_connection_state_changed_cb()`
+  /// - `bt_gatt_connection_state_changed_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_GATT_CLIENT_MODULE
   int bt_gatt_connect(
     ffi.Pointer<ffi.Char> address,
     bool auto_connect,
@@ -7371,30 +10129,44 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_gatt_connect = _bt_gatt_connectPtr
       .asFunction<int Function(ffi.Pointer<ffi.Char>, bool)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_CLIENT_MODULE
-  /// @brief Disconnects to LE connection with the given remote Bluetooth device address, asynchronously or cancels a LE connection attempt currently in progress.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
+  /// Disconnects to LE connection with the given remote Bluetooth device address, asynchronously or cancels a LE connection attempt currently in progress.
   ///
-  /// @param[in] address The address of the remote Bluetooth device
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_NOT_ENABLED Not enabled
-  /// @retval #BT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #BT_ERROR_OPERATION_FAILED Operation failed
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @post This function invokes bt_gatt_connection_state_changed_cb().
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
   ///
-  /// @see bt_initialize()
-  /// @see bt_gatt_connect()
-  /// @see bt_gatt_set_connection_state_changed_cb()
-  /// @see bt_gatt_unset_connection_state_changed_cb()
-  /// @see bt_gatt_connection_state_changed_cb()
+  /// **Parameters:**
+  /// - `address` (in): The address of the remote Bluetooth device
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Postconditions:**
+  /// - This function invokes bt_gatt_connection_state_changed_cb().
+  ///
+  /// **See also:**
+  /// - `bt_initialize()`
+  /// - `bt_gatt_connect()`
+  /// - `bt_gatt_set_connection_state_changed_cb()`
+  /// - `bt_gatt_unset_connection_state_changed_cb()`
+  /// - `bt_gatt_connection_state_changed_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_GATT_CLIENT_MODULE
   int bt_gatt_disconnect(
     ffi.Pointer<ffi.Char> address,
   ) {
@@ -7409,22 +10181,31 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_gatt_disconnect =
       _bt_gatt_disconnectPtr.asFunction<int Function(ffi.Pointer<ffi.Char>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_MODULE
-  /// @brief Registers a callback function that will be invoked when the connection state is changed.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+  /// Registers a callback function that will be invoked when the connection state is changed.
   ///
-  /// @param[in] callback The callback function to register.
-  /// @param[in] user_data The user data to be passed  to the callback function.
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Parameters:**
+  /// - `callback` (in): The callback function to register.
+  /// - `user_data` (in): The user data to be passed to the callback function.
   ///
-  /// @see bt_gatt_connect()
-  /// @see bt_gatt_disconnect()
-  /// @see bt_gatt_unset_connection_state_changed_cb()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `bt_gatt_connect()`
+  /// - `bt_gatt_disconnect()`
+  /// - `bt_gatt_unset_connection_state_changed_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_GATT_MODULE
   int bt_gatt_set_connection_state_changed_cb(
     bt_gatt_connection_state_changed_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -7445,18 +10226,26 @@ class Tizen65CapiNetworkBluetooth {
           int Function(
               bt_gatt_connection_state_changed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_MODULE
-  /// @brief Unregisters a callback function that will be invoked when the connection state is changed.
-  /// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+  /// Unregisters a callback function that will be invoked when the connection state is changed.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Otherwise 2.3
   ///
-  /// @see bt_gatt_connect()
-  /// @see bt_gatt_disconnect()
-  /// @see bt_gatt_connection_state_changed_cb()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `bt_gatt_connect()`
+  /// - `bt_gatt_disconnect()`
+  /// - `bt_gatt_connection_state_changed_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_GATT_MODULE
   int bt_gatt_unset_connection_state_changed_cb() {
     return _bt_gatt_unset_connection_state_changed_cb();
   }
@@ -7468,17 +10257,27 @@ class Tizen65CapiNetworkBluetooth {
       _bt_gatt_unset_connection_state_changed_cbPtr
           .asFunction<int Function()>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_SERVER_MODULE
-  /// @brief Destroys the GATT handle of service.
-  /// @since_tizen 3.0
+  /// Destroys the GATT handle of service.
   ///
-  /// @param[in] gatt_handle The handle of service
-  /// @return  0 on success, otherwise a negative error value
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @see bt_gatt_service_create()
+  /// **Parameters:**
+  /// - `gatt_handle` (in): The handle of service
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `bt_gatt_service_create()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_GATT_SERVER_MODULE
   int bt_gatt_service_destroy(
     bt_gatt_h gatt_handle,
   ) {
@@ -7493,17 +10292,27 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_gatt_service_destroy =
       _bt_gatt_service_destroyPtr.asFunction<int Function(bt_gatt_h)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_SERVER_MODULE
-  /// @brief Destroys the GATT handle of characteristic.
-  /// @since_tizen 3.0
+  /// Destroys the GATT handle of characteristic.
   ///
-  /// @param[in] gatt_handle The handle of characteristic
-  /// @return  0 on success, otherwise a negative error value
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @see bt_gatt_characteristic_create()
+  /// **Parameters:**
+  /// - `gatt_handle` (in): The handle of characteristic
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `bt_gatt_characteristic_create()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_GATT_SERVER_MODULE
   int bt_gatt_characteristic_destroy(
     bt_gatt_h gatt_handle,
   ) {
@@ -7518,17 +10327,27 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_gatt_characteristic_destroy =
       _bt_gatt_characteristic_destroyPtr.asFunction<int Function(bt_gatt_h)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_SERVER_MODULE
-  /// @brief Destroys the GATT handle of descriptor.
-  /// @since_tizen 3.0
+  /// Destroys the GATT handle of descriptor.
   ///
-  /// @param[in] gatt_handle The handle of descriptor
-  /// @return  0 on success, otherwise a negative error value
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @see bt_gatt_descriptor_create()
+  /// **Parameters:**
+  /// - `gatt_handle` (in): The handle of descriptor
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `bt_gatt_descriptor_create()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_GATT_SERVER_MODULE
   int bt_gatt_descriptor_destroy(
     bt_gatt_h gatt_handle,
   ) {
@@ -7543,21 +10362,32 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_gatt_descriptor_destroy =
       _bt_gatt_descriptor_destroyPtr.asFunction<int Function(bt_gatt_h)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_MODULE
-  /// @brief  Gets the permissions which a characteristic's GATT handle has.
-  /// @since_tizen 3.0
+  /// Gets the permissions which a characteristic's GATT handle has.
   ///
-  /// @remarks The @a permissions can be one or more values of #bt_gatt_permission_e, combined with bitwise 'or'.
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @param[in] gatt_handle The handle of a characteristic
-  /// @param[out] permissions The permissions which a characteristic's GATT handle has
-  /// @return  0 on success, otherwise a negative error value
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Remarks:**
+  /// - The `permissions` can be one or more values of `bt_gatt_permission_e`, combined with bitwise 'or'.
   ///
-  /// @see bt_gatt_characteristic_create()
-  /// @see bt_gatt_permission_e
+  /// **Parameters:**
+  /// - `gatt_handle` (in): The handle of a characteristic
+  /// - `permissions` (out): The permissions which a characteristic's GATT handle has
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `bt_gatt_characteristic_create()`
+  /// - `bt_gatt_permission_e`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_GATT_MODULE
   int bt_gatt_characteristic_get_permissions(
     bt_gatt_h gatt_handle,
     ffi.Pointer<ffi.Int> permissions,
@@ -7576,21 +10406,32 @@ class Tizen65CapiNetworkBluetooth {
       _bt_gatt_characteristic_get_permissionsPtr
           .asFunction<int Function(bt_gatt_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_MODULE
-  /// @brief  Gets the permissions which a descriptor's GATT handle has.
-  /// @since_tizen 3.0
+  /// Gets the permissions which a descriptor's GATT handle has.
   ///
-  /// @remarks The @a permissions can be one or more values of #bt_gatt_permission_e, combined with bitwise 'or'.
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @param[in] gatt_handle The handle of a descriptor
-  /// @param[out] permissions The permissions which a descriptor's GATT handle has
-  /// @return  0 on success, otherwise a negative error value
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Remarks:**
+  /// - The `permissions` can be one or more values of `bt_gatt_permission_e`, combined with bitwise 'or'.
   ///
-  /// @see bt_gatt_descriptor_create()
-  /// @see bt_gatt_permission_e
+  /// **Parameters:**
+  /// - `gatt_handle` (in): The handle of a descriptor
+  /// - `permissions` (out): The permissions which a descriptor's GATT handle has
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `bt_gatt_descriptor_create()`
+  /// - `bt_gatt_permission_e`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_GATT_MODULE
   int bt_gatt_descriptor_get_permissions(
     bt_gatt_h gatt_handle,
     ffi.Pointer<ffi.Int> permissions,
@@ -7609,22 +10450,33 @@ class Tizen65CapiNetworkBluetooth {
       _bt_gatt_descriptor_get_permissionsPtr
           .asFunction<int Function(bt_gatt_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_SERVER_MODULE
-  /// @brief  Creates the GATT service.
-  /// @since_tizen 3.0
+  /// Creates the GATT service.
   ///
-  /// @remarks The @a service should be destroyed by using bt_gatt_service_destroy().
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @param[in] uuid The UUID of the service
-  /// @param[in] type The type of the service
-  /// @param[out] service The GATT handle of the created service
-  /// @return  0 on success, otherwise a negative error value
-  /// @retval #BT_ERROR_NONE Successful
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_OUT_OF_MEMORY  Out of memory
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Remarks:**
+  /// - The `service` should be destroyed by using bt_gatt_service_destroy().
   ///
-  /// @see bt_gatt_service_destroy()
+  /// **Parameters:**
+  /// - `uuid` (in): The UUID of the service
+  /// - `type` (in): The type of the service
+  /// - `service` (out): The GATT handle of the created service
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `bt_gatt_service_destroy()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_GATT_SERVER_MODULE
   int bt_gatt_service_create(
     ffi.Pointer<ffi.Char> uuid,
     int type,
@@ -7644,19 +10496,29 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_gatt_service_create = _bt_gatt_service_createPtr.asFunction<
       int Function(ffi.Pointer<ffi.Char>, int, ffi.Pointer<bt_gatt_h>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_SERVER_MODULE
-  /// @brief  Adds a characteristic to a specified service.
-  /// @since_tizen 3.0
+  /// Adds a characteristic to a specified service.
   ///
-  /// @param[in] service The service's GATT handle
-  /// @param[in] characteristic The characteristic's GATT handle to be added
-  /// @return  0 on success, otherwise a negative error value
-  /// @retval #BT_ERROR_NONE Successful
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @see bt_gatt_service_create()
-  /// @see bt_gatt_characteristic_create()
+  /// **Parameters:**
+  /// - `service` (in): The service's GATT handle
+  /// - `characteristic` (in): The characteristic's GATT handle to be added
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `bt_gatt_service_create()`
+  /// - `bt_gatt_characteristic_create()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_GATT_SERVER_MODULE
   int bt_gatt_service_add_characteristic(
     bt_gatt_h service,
     bt_gatt_h characteristic,
@@ -7674,18 +10536,28 @@ class Tizen65CapiNetworkBluetooth {
       _bt_gatt_service_add_characteristicPtr
           .asFunction<int Function(bt_gatt_h, bt_gatt_h)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_SERVER_MODULE
-  /// @brief  Adds a service to a specified service as included service.
-  /// @since_tizen 3.0
+  /// Adds a service to a specified service as included service.
   ///
-  /// @param[in] service The service's GATT handle
-  /// @param[in] included_service The service's GATT handle to be added as included service
-  /// @return  0 on success, otherwise a negative error value
-  /// @retval #BT_ERROR_NONE Successful
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @see bt_gatt_service_create()
+  /// **Parameters:**
+  /// - `service` (in): The service's GATT handle
+  /// - `included_service` (in): The service's GATT handle to be added as included service
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `bt_gatt_service_create()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_GATT_SERVER_MODULE
   int bt_gatt_service_add_included_service(
     bt_gatt_h service,
     bt_gatt_h included_service,
@@ -7703,22 +10575,33 @@ class Tizen65CapiNetworkBluetooth {
       _bt_gatt_service_add_included_servicePtr
           .asFunction<int Function(bt_gatt_h, bt_gatt_h)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_SERVER_MODULE
-  /// @brief  Gets the GATT server handle to which the specified service belongs.
-  /// @since_tizen 3.0
+  /// Gets the GATT server handle to which the specified service belongs.
   ///
-  /// @remarks The returned Server handle must not be freed by application.
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @param[in] service The service's GATT handle
-  /// @param[out] server The GATT server handle to which @a service belongs
-  /// @return  0 on success, otherwise a negative error value
-  /// @retval #BT_ERROR_NONE Successful
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Remarks:**
+  /// - The returned Server handle must not be freed by application.
   ///
-  /// @see bt_gatt_server_create()
-  /// @see bt_gatt_service_create()
-  /// @see bt_gatt_server_register_service()
+  /// **Parameters:**
+  /// - `service` (in): The service's GATT handle
+  /// - `server` (out): The GATT server handle to which `service` belongs
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `bt_gatt_server_create()`
+  /// - `bt_gatt_service_create()`
+  /// - `bt_gatt_server_register_service()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_GATT_SERVER_MODULE
   int bt_gatt_service_get_server(
     bt_gatt_h service,
     ffi.Pointer<bt_gatt_server_h> server,
@@ -7736,27 +10619,38 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_gatt_service_get_server = _bt_gatt_service_get_serverPtr
       .asFunction<int Function(bt_gatt_h, ffi.Pointer<bt_gatt_server_h>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_MODULE
-  /// @brief  Creates the GATT characteristic.
-  /// @since_tizen 3.0
+  /// Creates the GATT characteristic.
   ///
-  /// @remarks The @a permissions can be one or more values of #bt_gatt_permission_e, combined with bitwise 'or'. \n
-  /// @remarks The @a properties can be one or more values of #bt_gatt_property_e, combined with bitwise 'or'. \n
-  /// @remarks The @a characteristic should be destroyed by using bt_gatt_characteristic_destroy().
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @param[in] uuid The UUID of the characteristic
-  /// @param[in] permissions the permissions of the characteristic
-  /// @param[in] properties The properties of the characteristic
-  /// @param[in] value The value(byte stream) of the characteristic
-  /// @param[in] value_length The length of @a value
-  /// @param[out] characteristic The GATT handle of the created characteristic
-  /// @return  0 on success, otherwise a negative error value
-  /// @retval #BT_ERROR_NONE Successful
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_OUT_OF_MEMORY  Out of memory
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Remarks:**
+  /// - The `permissions` can be one or more values of `bt_gatt_permission_e`, combined with bitwise 'or'.
+  /// - The `properties` can be one or more values of `bt_gatt_property_e`, combined with bitwise 'or'.
+  /// - The `characteristic` should be destroyed by using bt_gatt_characteristic_destroy().
   ///
-  /// @see bt_gatt_characteristic_destroy()
+  /// **Parameters:**
+  /// - `uuid` (in): The UUID of the characteristic
+  /// - `permissions` (in): the permissions of the characteristic
+  /// - `properties` (in): The properties of the characteristic
+  /// - `value` (in): The value(byte stream) of the characteristic
+  /// - `value_length` (in): The length of `value`
+  /// - `characteristic` (out): The GATT handle of the created characteristic
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `bt_gatt_characteristic_destroy()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_GATT_MODULE
   int bt_gatt_characteristic_create(
     ffi.Pointer<ffi.Char> uuid,
     int permissions,
@@ -7789,19 +10683,29 @@ class Tizen65CapiNetworkBluetooth {
           int Function(ffi.Pointer<ffi.Char>, int, int, ffi.Pointer<ffi.Char>,
               int, ffi.Pointer<bt_gatt_h>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_SERVER_MODULE
-  /// @brief  Adds a descriptor to a specified characteristic.
-  /// @since_tizen 3.0
+  /// Adds a descriptor to a specified characteristic.
   ///
-  /// @param[in] characteristic The GATT handle of the characteristic
-  /// @param[in] descriptor The descriptor's GATT handle to be added
-  /// @return  0 on success, otherwise a negative error value
-  /// @retval #BT_ERROR_NONE Successful
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @see bt_gatt_characteristic_create()
-  /// @see bt_gatt_descriptor_create()
+  /// **Parameters:**
+  /// - `characteristic` (in): The GATT handle of the characteristic
+  /// - `descriptor` (in): The descriptor's GATT handle to be added
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `bt_gatt_characteristic_create()`
+  /// - `bt_gatt_descriptor_create()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_GATT_SERVER_MODULE
   int bt_gatt_characteristic_add_descriptor(
     bt_gatt_h characteristic,
     bt_gatt_h descriptor,
@@ -7819,25 +10723,36 @@ class Tizen65CapiNetworkBluetooth {
       _bt_gatt_characteristic_add_descriptorPtr
           .asFunction<int Function(bt_gatt_h, bt_gatt_h)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_MODULE
-  /// @brief  Creates the GATT characteristic descriptor.
-  /// @since_tizen 3.0
+  /// Creates the GATT characteristic descriptor.
   ///
-  /// @remarks The @a permissions can be one or more values of #bt_gatt_permission_e, combined with bitwise 'or'. \n
-  /// @remarks The @a descriptor should be destroyed by using bt_gatt_descriptor_destroy().
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @param[in] uuid The UUID of the descriptor
-  /// @param[in] permissions The permissions of the descriptor
-  /// @param[in] value The value(byte stream) associated with the descriptor
-  /// @param[in] value_length The length of @a value
-  /// @param[out] descriptor The GATT handle of the created characteristic descriptor
-  /// @return  0 on success, otherwise a negative error value
-  /// @retval #BT_ERROR_NONE Successful
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_OUT_OF_MEMORY  Out of memory
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Remarks:**
+  /// - The `permissions` can be one or more values of `bt_gatt_permission_e`, combined with bitwise 'or'.
+  /// - The `descriptor` should be destroyed by using bt_gatt_descriptor_destroy().
   ///
-  /// @see bt_gatt_descriptor_destroy()
+  /// **Parameters:**
+  /// - `uuid` (in): The UUID of the descriptor
+  /// - `permissions` (in): The permissions of the descriptor
+  /// - `value` (in): The value(byte stream) associated with the descriptor
+  /// - `value_length` (in): The length of `value`
+  /// - `descriptor` (out): The GATT handle of the created characteristic descriptor
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `bt_gatt_descriptor_destroy()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_GATT_MODULE
   int bt_gatt_descriptor_create(
     ffi.Pointer<ffi.Char> uuid,
     int permissions,
@@ -7867,18 +10782,28 @@ class Tizen65CapiNetworkBluetooth {
           int Function(ffi.Pointer<ffi.Char>, int, ffi.Pointer<ffi.Char>, int,
               ffi.Pointer<bt_gatt_h>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_SERVER_MODULE
-  /// @brief Initializes the GATT Server.
-  /// @since_tizen 3.0
+  /// Initializes the GATT Server.
   ///
-  /// @return  0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @pre	The state of local Bluetooth must be #BT_ADAPTER_ENABLED.
-  /// @see	bt_gatt_server_deinitialize()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The state of local Bluetooth must be `BT_ADAPTER_ENABLED`.
+  ///
+  /// **See also:**
+  /// - `bt_gatt_server_deinitialize()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_GATT_SERVER_MODULE
   int bt_gatt_server_initialize() {
     return _bt_gatt_server_initialize();
   }
@@ -7889,18 +10814,28 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_gatt_server_initialize =
       _bt_gatt_server_initializePtr.asFunction<int Function()>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_SERVER_MODULE
-  /// @brief DeInitializes the GATT server.
-  /// @since_tizen 3.0
+  /// DeInitializes the GATT server.
   ///
-  /// @return  0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE	Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @pre	The state of local Bluetooth must be #BT_ADAPTER_ENABLED.
-  /// @see	bt_gatt_server_initialize()
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The state of local Bluetooth must be `BT_ADAPTER_ENABLED`.
+  ///
+  /// **See also:**
+  /// - `bt_gatt_server_initialize()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_GATT_SERVER_MODULE
   int bt_gatt_server_deinitialize() {
     return _bt_gatt_server_deinitialize();
   }
@@ -7911,20 +10846,31 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_gatt_server_deinitialize =
       _bt_gatt_server_deinitializePtr.asFunction<int Function()>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_SERVER_MODULE
-  /// @brief  Creates the GATT server's handle.
-  /// @since_tizen 3.0
+  /// Creates the GATT server's handle.
   ///
-  /// @remarks The @a server handle should be destroyed by using bt_gatt_server_destroy().
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @param[out] server The GATT server's handle
-  /// @return  0 on success, otherwise a negative error value
-  /// @retval #BT_ERROR_NONE Successful
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_OUT_OF_MEMORY  Out of memory
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Remarks:**
+  /// - The `server` handle should be destroyed by using bt_gatt_server_destroy().
   ///
-  /// @see bt_gatt_server_destroy()
+  /// **Parameters:**
+  /// - `server` (out): The GATT server's handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `bt_gatt_server_destroy()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_GATT_SERVER_MODULE
   int bt_gatt_server_create(
     ffi.Pointer<bt_gatt_server_h> server,
   ) {
@@ -7939,19 +10885,30 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_gatt_server_create = _bt_gatt_server_createPtr
       .asFunction<int Function(ffi.Pointer<bt_gatt_server_h>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_SERVER_MODULE
-  /// @brief  Destroys the GATT server's handle.
-  /// @since_tizen 3.0
+  /// Destroys the GATT server's handle.
   ///
-  /// @remarks All registered services to GATT server are unregistered.
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @param[in] server The GATT server's handle
-  /// @return  0 on success, otherwise a negative error value
-  /// @retval #BT_ERROR_NONE Successful
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Remarks:**
+  /// - All registered services to GATT server are unregistered.
   ///
-  /// @see bt_gatt_server_create()
+  /// **Parameters:**
+  /// - `server` (in): The GATT server's handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `bt_gatt_server_create()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_GATT_SERVER_MODULE
   int bt_gatt_server_destroy(
     bt_gatt_server_h server,
   ) {
@@ -7966,20 +10923,30 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_gatt_server_destroy =
       _bt_gatt_server_destroyPtr.asFunction<int Function(bt_gatt_server_h)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_SERVER_MODULE
-  /// @brief  Registers a callback function to be invoked when a read request for a specified characteristic or descriptor is issued from a remote device(GATT client).
-  /// @since_tizen 3.0
+  /// Registers a callback function to be invoked when a read request for a specified characteristic or descriptor is issued from a remote device(GATT client).
   ///
-  /// @param[in] gatt_handle The GATT handle of a characteristic or descriptor
-  /// @param[in] callback The callback to be invoked
-  /// @param[in] user_data The user data to be passed to @a callback function
-  /// @return  0 on success, otherwise a negative error value
-  /// @retval #BT_ERROR_NONE Successful
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @see bt_gatt_server_read_value_requested_cb()
-  /// @see bt_gatt_server_send_response()
+  /// **Parameters:**
+  /// - `gatt_handle` (in): The GATT handle of a characteristic or descriptor
+  /// - `callback` (in): The callback to be invoked
+  /// - `user_data` (in): The user data to be passed to `callback` function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `bt_gatt_server_read_value_requested_cb()`
+  /// - `bt_gatt_server_send_response()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_GATT_SERVER_MODULE
   int bt_gatt_server_set_read_value_requested_cb(
     bt_gatt_h gatt_handle,
     bt_gatt_server_read_value_requested_cb callback,
@@ -8004,19 +10971,29 @@ class Tizen65CapiNetworkBluetooth {
           int Function(bt_gatt_h, bt_gatt_server_read_value_requested_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_SERVER_MODULE
-  /// @brief  Registers a callback function to be invoked when the remote device enables or disables the Notification/Indication for particular characteristics.
-  /// @since_tizen 3.0
+  /// Registers a callback function to be invoked when the remote device enables or disables the Notification/Indication for particular characteristics.
   ///
-  /// @param[in] gatt_handle The GATT handle of a characteristic
-  /// @param[in] callback The callback to be invoked
-  /// @param[in] user_data The user data to be passed to @a callback function
-  /// @return	0 on success, otherwise a negative error value
-  /// @retval #BT_ERROR_NONE Successful
-  /// @retval #BT_ERROR_INVALID_PARAMETER	Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED	Not supported
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @see bt_gatt_server_characteristic_notification_state_changed_cb()
+  /// **Parameters:**
+  /// - `gatt_handle` (in): The GATT handle of a characteristic
+  /// - `callback` (in): The callback to be invoked
+  /// - `user_data` (in): The user data to be passed to `callback` function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `bt_gatt_server_characteristic_notification_state_changed_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_GATT_SERVER_MODULE
   int bt_gatt_server_set_characteristic_notification_state_change_cb(
     bt_gatt_h gatt_handle,
     bt_gatt_server_characteristic_notification_state_changed_cb callback,
@@ -8045,19 +11022,29 @@ class Tizen65CapiNetworkBluetooth {
                   bt_gatt_server_characteristic_notification_state_changed_cb,
                   ffi.Pointer<ffi.Void>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_SERVER_MODULE
-  /// @brief  Registers a callback function to be invoked when a value of a characteristic or descriptor has been changed by a remote device(GATT client)'s request.
-  /// @since_tizen 3.0
+  /// Registers a callback function to be invoked when a value of a characteristic or descriptor has been changed by a remote device(GATT client)'s request.
   ///
-  /// @param[in] gatt_handle The GATT handle of a characteristic or descriptor
-  /// @param[in] callback The callback to be invoked
-  /// @param[in] user_data The user data to be passed to @a callback function
-  /// @return  0 on success, otherwise a negative error value
-  /// @retval #BT_ERROR_NONE Successful
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @see bt_gatt_server_write_value_requested_cb()
+  /// **Parameters:**
+  /// - `gatt_handle` (in): The GATT handle of a characteristic or descriptor
+  /// - `callback` (in): The callback to be invoked
+  /// - `user_data` (in): The user data to be passed to `callback` function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `bt_gatt_server_write_value_requested_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_GATT_SERVER_MODULE
   int bt_gatt_server_set_write_value_requested_cb(
     bt_gatt_h gatt_handle,
     bt_gatt_server_write_value_requested_cb callback,
@@ -8082,26 +11069,40 @@ class Tizen65CapiNetworkBluetooth {
           int Function(bt_gatt_h, bt_gatt_server_write_value_requested_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_SERVER_MODULE
-  /// @brief  Registers a specified service to the specified GATT server that the local device is hosting.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
+  /// Registers a specified service to the specified GATT server that the local device is hosting.
   ///
-  /// @param[in] server The GATT server that local device is hosting
-  /// @param[in] service The service, which needs to be registered in @a server
-  /// @return  0 on success, otherwise a negative error value
-  /// @retval #BT_ERROR_NONE Successful
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_ALREADY_DONE Operation is already done
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @see bt_gatt_server_create()
-  /// @see bt_gatt_service_create()
-  /// @see bt_gatt_server_start()
-  /// @see bt_gatt_server_unregister_service()
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
+  ///
+  /// **Parameters:**
+  /// - `server` (in): The GATT server that local device is hosting
+  /// - `service` (in): The service, which needs to be registered in `server`
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_ALREADY_DONE`: Operation is already done
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `bt_gatt_server_create()`
+  /// - `bt_gatt_service_create()`
+  /// - `bt_gatt_server_start()`
+  /// - `bt_gatt_server_unregister_service()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_GATT_SERVER_MODULE
   int bt_gatt_server_register_service(
     bt_gatt_server_h server,
     bt_gatt_h service,
@@ -8119,22 +11120,36 @@ class Tizen65CapiNetworkBluetooth {
       _bt_gatt_server_register_servicePtr
           .asFunction<int Function(bt_gatt_server_h, bt_gatt_h)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_SERVER_MODULE
-  /// @brief  Unregisters a specified service from the specified GATT server that the local device is hosting.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
+  /// Unregisters a specified service from the specified GATT server that the local device is hosting.
   ///
-  /// @param[in] server The GATT server that local device is hosting
-  /// @param[in] service The service, which needs to be unregistered from @a server
-  /// @return  0 on success, otherwise a negative error value
-  /// @retval #BT_ERROR_NONE Successful
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_SERVICE_NOT_FOUND  Service not found
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @see bt_gatt_server_register_service()
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
+  ///
+  /// **Parameters:**
+  /// - `server` (in): The GATT server that local device is hosting
+  /// - `service` (in): The service, which needs to be unregistered from `server`
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_SERVICE_NOT_FOUND`: Service not found
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `bt_gatt_server_register_service()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_GATT_SERVER_MODULE
   int bt_gatt_server_unregister_service(
     bt_gatt_server_h server,
     bt_gatt_h service,
@@ -8152,20 +11167,34 @@ class Tizen65CapiNetworkBluetooth {
       _bt_gatt_server_unregister_servicePtr
           .asFunction<int Function(bt_gatt_server_h, bt_gatt_h)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_SERVER_MODULE
-  /// @brief  Unregisters all services from the specified GATT server that the local device is hosting.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
+  /// Unregisters all services from the specified GATT server that the local device is hosting.
   ///
-  /// @param[in] server The GATT server that local device is hosting
-  /// @return  0 on success, otherwise a negative error value
-  /// @retval #BT_ERROR_NONE Successful
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @see bt_gatt_server_register_service()
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
+  ///
+  /// **Parameters:**
+  /// - `server` (in): The GATT server that local device is hosting
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `bt_gatt_server_register_service()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_GATT_SERVER_MODULE
   int bt_gatt_server_unregister_all_services(
     bt_gatt_server_h server,
   ) {
@@ -8181,23 +11210,35 @@ class Tizen65CapiNetworkBluetooth {
       _bt_gatt_server_unregister_all_servicesPtr
           .asFunction<int Function(bt_gatt_server_h)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_SERVER_MODULE
-  /// @brief  Registers the application along with the GATT services of the application it is hosting.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
+  /// Registers the application along with the GATT services of the application it is hosting.
   ///
-  /// @return  0 on success, otherwise a negative error value
-  /// @retval #BT_ERROR_NONE Successful
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_ALREADY_DONE Operation is already done
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @see bt_gatt_server_initialize()
-  /// @see bt_gatt_server_create()
-  /// @see bt_gatt_service_create()
-  /// @see bt_gatt_server_unregister_service()
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_ALREADY_DONE`: Operation is already done
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `bt_gatt_server_initialize()`
+  /// - `bt_gatt_server_create()`
+  /// - `bt_gatt_service_create()`
+  /// - `bt_gatt_server_unregister_service()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_GATT_SERVER_MODULE
   int bt_gatt_server_start() {
     return _bt_gatt_server_start();
   }
@@ -8207,27 +11248,42 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_gatt_server_start =
       _bt_gatt_server_startPtr.asFunction<int Function()>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_SERVER_MODULE
-  /// @brief  Sends a response to the remote device as a result of a read/write request.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
+  /// Sends a response to the remote device as a result of a read/write request.
   ///
-  /// @remarks Until this function is called, a read/write request is not finished.
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @param[in] request_id The identification of a read/write request
-  /// @param[in] request_type The request type for read/write
-  /// @param[in] offset The offset from where a value is read
-  /// @param[in] resp_status The application error if any occurred or BT_ERROR_NONE for successful.
-  /// @param[in] value The value to be sent. It will be sent from @a offset. If it is NULL, a requested GATT handle's value will be sent from @a offset.
-  /// @param[in] value_length Value Length
-  /// @return  0 on success, otherwise a negative error value
-  /// @retval #BT_ERROR_NONE Successful
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @see bt_gatt_server_read_value_requested_cb()
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
+  ///
+  /// **Remarks:**
+  /// - Until this function is called, a read/write request is not finished.
+  ///
+  /// **Parameters:**
+  /// - `request_id` (in): The identification of a read/write request
+  /// - `request_type` (in): The request type for read/write
+  /// - `offset` (in): The offset from where a value is read
+  /// - `resp_status` (in): The application error if any occurred or BT_ERROR_NONE for successful.
+  /// - `value` (in): The value to be sent. It will be sent from `offset`. If it is NULL, a requested GATT handle's value will be sent from `offset`.
+  /// - `value_length` (in): Value Length
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `bt_gatt_server_read_value_requested_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_GATT_SERVER_MODULE
   int bt_gatt_server_send_response(
     int request_id,
     int request_type,
@@ -8254,20 +11310,30 @@ class Tizen65CapiNetworkBluetooth {
       _bt_gatt_server_send_responsePtr.asFunction<
           int Function(int, int, int, int, ffi.Pointer<ffi.Char>, int)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_SERVER_MODULE
-  /// @brief  Notifies value change of the characteristic to the remote devices which enable a Client Characteristic Configuration Descriptor.
-  /// @since_tizen 3.0
+  /// Notifies value change of the characteristic to the remote devices which enable a Client Characteristic Configuration Descriptor.
   ///
-  /// @param[in] characteristic The characteristic which has a changed value
-  /// @param[in] callback The function to be invoked on each remote device when a sending operation is done
-  /// @param[in] device_address Remote device address to send notify or indicate and if set to NULL then notify/indicate all is enabled.
-  /// @param[in] user_data The user data to be passed to @a callback function
-  /// @return  0 on success, otherwise a negative error value
-  /// @retval #BT_ERROR_NONE Successful
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @see bt_gatt_server_notification_sent_cb()
+  /// **Parameters:**
+  /// - `characteristic` (in): The characteristic which has a changed value
+  /// - `callback` (in): The function to be invoked on each remote device when a sending operation is done
+  /// - `device_address` (in): Remote device address to send notify or indicate and if set to NULL then notify/indicate all is enabled.
+  /// - `user_data` (in): The user data to be passed to `callback` function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `bt_gatt_server_notification_sent_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_GATT_SERVER_MODULE
   int bt_gatt_server_notify_characteristic_changed_value(
     bt_gatt_h characteristic,
     bt_gatt_server_notification_sent_cb callback,
@@ -8292,22 +11358,32 @@ class Tizen65CapiNetworkBluetooth {
           int Function(bt_gatt_h, bt_gatt_server_notification_sent_cb,
               ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Void>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_SERVER_MODULE
-  /// @brief  Gets a service's GATT handle which has specific UUID.
-  /// @since_tizen 3.0
+  /// Gets a service's GATT handle which has specific UUID.
   ///
-  /// @remarks The returned GATT handle must not be freed by application. \n
-  /// It will be freed when an associated server is destroyed by bt_gatt_server_destroy(). \n
-  /// If there are multiple services which have same UUID, only the first matched one will be returned.
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @param[in] server The GATT server's handle
-  /// @param[in] uuid The service's GATT handle which has this UUID will be returned if it exists
-  /// @param[out] service The service's GATT handle which has @a uuid if it exists
-  /// @return  0 on success, otherwise a negative error value
-  /// @retval #BT_ERROR_NONE Successful
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NO_DATA  No data available
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Remarks:**
+  /// - The returned GATT handle must not be freed by application.
+  /// - It will be freed when an associated server is destroyed by bt_gatt_server_destroy().
+  /// - If there are multiple services which have same UUID, only the first matched one will be returned.
+  ///
+  /// **Parameters:**
+  /// - `server` (in): The GATT server's handle
+  /// - `uuid` (in): The service's GATT handle which has this UUID will be returned if it exists
+  /// - `service` (out): The service's GATT handle which has `uuid` if it exists
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NO_DATA`: No data available
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_GATT_SERVER_MODULE
   int bt_gatt_server_get_service(
     bt_gatt_server_h server,
     ffi.Pointer<ffi.Char> uuid,
@@ -8329,19 +11405,29 @@ class Tizen65CapiNetworkBluetooth {
           int Function(bt_gatt_server_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<bt_gatt_h>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_SERVER_MODULE
-  /// @brief  Invokes @a callback function on each service that belongs to the specified GATT server.
-  /// @since_tizen 3.0
+  /// Invokes `callback` function on each service that belongs to the specified GATT server.
   ///
-  /// @param[in] server The GATT server's handle
-  /// @param[in] callback The function to be invoked on each service
-  /// @param[in] user_data The user data to be passed to @a callback function
-  /// @return  0 on success, otherwise a negative error value
-  /// @retval #BT_ERROR_NONE Successful
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @see bt_gatt_foreach_cb()
+  /// **Parameters:**
+  /// - `server` (in): The GATT server's handle
+  /// - `callback` (in): The function to be invoked on each service
+  /// - `user_data` (in): The user data to be passed to `callback` function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `bt_gatt_foreach_cb()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_GATT_SERVER_MODULE
   int bt_gatt_server_foreach_services(
     bt_gatt_server_h server,
     bt_gatt_foreach_cb callback,
@@ -8363,20 +11449,28 @@ class Tizen65CapiNetworkBluetooth {
           int Function(
               bt_gatt_server_h, bt_gatt_foreach_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_SERVER_MODULE
-  /// @brief Gets an ATT MTU value for a connection.
-  /// @since_tizen 5.5
+  /// Gets an ATT MTU value for a connection.
   ///
-  /// @param[in] remote_address The address of the remote Bluetooth device
-  /// @param[out] mtu The MTU value for a connection
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_SUPPORTED	Not supported
-  /// @retval #BT_ERROR_INVALID_PARAMETER	Invalid parameter
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_OPERATION_FAILED	Operation failed
+  /// **Parameters:**
+  /// - `remote_address` (in): The address of the remote Bluetooth device
+  /// - `mtu` (out): The MTU value for a connection
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_GATT_SERVER_MODULE
   int bt_gatt_server_get_device_mtu(
     ffi.Pointer<ffi.Char> remote_address,
     ffi.Pointer<ffi.UnsignedInt> mtu,
@@ -8395,31 +11489,45 @@ class Tizen65CapiNetworkBluetooth {
       _bt_gatt_server_get_device_mtuPtr.asFunction<
           int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.UnsignedInt>)>();
 
-  /// @WEARABLE_ONLY
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_PBAP_MODULE
-  /// @brief Initializes the Bluetooth PBAP Client.
-  /// @details This initialization is necessary to call other PBAP client APIs.
-  /// @since_tizen 3.0
+  /// Initializes the Bluetooth PBAP Client.
   ///
-  /// @remarks This function must be called to initialize Bluetooth PBAP client. You must free all resources of the Bluetooth service \n
-  /// by calling bt_pbap_client_deinitialize() if Bluetooth PBAP Client is no longer needed.
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// This initialization is necessary to call other PBAP client APIs.
   ///
-  /// @pre The state of the local Bluetooth adapter must be #BT_ADAPTER_ENABLED.
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @see  bt_pbap_client_deinitialize()
-  /// @see  bt_pbap_client_connect()
-  /// @see  bt_pbap_client_disconnect()
-  /// @see  bt_pbap_client_get_phone_book_size()
-  /// @see  bt_pbap_client_get_phone_book()
-  /// @see  bt_pbap_client_get_list()
-  /// @see  bt_pbap_client_pull_vcard()
-  /// @see  bt_pbap_client_search_phone_book()
+  /// **Remarks:**
+  /// - This function must be called to initialize Bluetooth PBAP client. You must free all resources of the Bluetooth service
+  /// - by calling bt_pbap_client_deinitialize() if Bluetooth PBAP Client is no longer needed.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The state of the local Bluetooth adapter must be `BT_ADAPTER_ENABLED`.
+  ///
+  /// **See also:**
+  /// - `bt_pbap_client_deinitialize()`
+  /// - `bt_pbap_client_connect()`
+  /// - `bt_pbap_client_disconnect()`
+  /// - `bt_pbap_client_get_phone_book_size()`
+  /// - `bt_pbap_client_get_phone_book()`
+  /// - `bt_pbap_client_get_list()`
+  /// - `bt_pbap_client_pull_vcard()`
+  /// - `bt_pbap_client_search_phone_book()`
+  ///
+  /// **Platform restriction:**
+  /// - Wearable only.
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_PBAP_MODULE
   int bt_pbap_client_initialize() {
     return _bt_pbap_client_initialize();
   }
@@ -8430,29 +11538,41 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_pbap_client_initialize =
       _bt_pbap_client_initializePtr.asFunction<int Function()>();
 
-  /// @WEARABLE_ONLY
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_PBAP_MODULE
-  /// @brief Deinitializes the Bluetooth PBAP Client.
-  /// @details This deinitialization must be done to free resources when the PBAP client is not longer needed.
-  /// @since_tizen 3.0
+  /// Deinitializes the Bluetooth PBAP Client.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_NOT_ENABLED  Not enabled
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// This deinitialization must be done to free resources when the PBAP client is not longer needed.
   ///
-  /// @pre The state of the local Bluetooth adapter must be #BT_ADAPTER_ENABLED.
-  /// The PBAP client must be initialized with bt_pbap_client_initialize().
-  /// @see  bt_pbap_client_initialize()
-  /// @see  bt_pbap_client_connect()
-  /// @see  bt_pbap_client_disconnect()
-  /// @see  bt_pbap_client_get_phone_book_size()
-  /// @see  bt_pbap_client_get_phone_book()
-  /// @see  bt_pbap_client_get_list()
-  /// @see  bt_pbap_client_pull_vcard()
-  /// @see  bt_pbap_client_search_phone_book()
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_NOT_ENABLED`: Not enabled
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The state of the local Bluetooth adapter must be `BT_ADAPTER_ENABLED`. The PBAP client must be initialized with bt_pbap_client_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_pbap_client_initialize()`
+  /// - `bt_pbap_client_connect()`
+  /// - `bt_pbap_client_disconnect()`
+  /// - `bt_pbap_client_get_phone_book_size()`
+  /// - `bt_pbap_client_get_phone_book()`
+  /// - `bt_pbap_client_get_list()`
+  /// - `bt_pbap_client_pull_vcard()`
+  /// - `bt_pbap_client_search_phone_book()`
+  ///
+  /// **Platform restriction:**
+  /// - Wearable only.
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_PBAP_MODULE
   int bt_pbap_client_deinitialize() {
     return _bt_pbap_client_deinitialize();
   }
@@ -8463,20 +11583,35 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_pbap_client_deinitialize =
       _bt_pbap_client_deinitializePtr.asFunction<int Function()>();
 
-  /// @WEARABLE_ONLY
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_PBAP_MODULE
-  /// @brief  Registers a callback function that will be invoked when the connection state is changed.
-  /// @since_tizen 3.0
-  /// @param[in] callback The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return   0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// Registers a callback function that will be invoked when the connection state is changed.
   ///
-  /// @pre The PBAP client must be initialized with bt_pbap_client_initialize().
-  /// @see bt_pbap_client_initialize()
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The PBAP client must be initialized with bt_pbap_client_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_pbap_client_initialize()`
+  ///
+  /// **Platform restriction:**
+  /// - Wearable only.
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_PBAP_MODULE
   int bt_pbap_client_set_connection_state_changed_cb(
     bt_pbap_connection_state_changed_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -8497,17 +11632,30 @@ class Tizen65CapiNetworkBluetooth {
           int Function(
               bt_pbap_connection_state_changed_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @WEARABLE_ONLY
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_PBAP_MODULE
-  /// @brief  Unregisters a callback function that will be invoked when the connection state is changed.
-  /// @since_tizen 3.0
-  /// @return   0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// Unregisters a callback function that will be invoked when the connection state is changed.
   ///
-  /// @pre The PBAP client must be initialized with bt_pbap_client_initialize().
-  /// @see bt_pbap_client_initialize()
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The PBAP client must be initialized with bt_pbap_client_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_pbap_client_initialize()`
+  ///
+  /// **Platform restriction:**
+  /// - Wearable only.
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_PBAP_MODULE
   int bt_pbap_client_unset_connection_state_changed_cb() {
     return _bt_pbap_client_unset_connection_state_changed_cb();
   }
@@ -8519,31 +11667,50 @@ class Tizen65CapiNetworkBluetooth {
       _bt_pbap_client_unset_connection_state_changed_cbPtr
           .asFunction<int Function()>();
 
-  /// @WEARABLE_ONLY
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_PBAP_MODULE
-  /// @brief Connects to PBAP server, asynchronously.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
+  /// Connects to PBAP server, asynchronously.
   ///
-  /// @param[in] address The other device's address
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_ENABLED  Adapter is not enabled
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
-  /// @retval #BT_ERROR_NOW_IN_PROGRESS  Operation is in progress
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre The state of the local Bluetooth adapter must be #BT_ADAPTER_ENABLED.
-  /// @pre The PBAP client must be initialized with bt_pbap_client_initialize().
-  /// @pre The local device must be bonded with the remote device by bt_device_create_bond().
-  /// @post bt_pbap_connection_state_changed_cb() will be invoked.
-  /// @see bt_pbap_client_disconnect()
-  /// @see bt_pbap_client_set_connection_state_changed_cb()
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
+  ///
+  /// **Parameters:**
+  /// - `address` (in): The other device's address
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_ENABLED`: Adapter is not enabled
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `BT_ERROR_NOW_IN_PROGRESS`: Operation is in progress
+  ///
+  /// **Preconditions:**
+  /// - The state of the local Bluetooth adapter must be `BT_ADAPTER_ENABLED`.
+  /// - The PBAP client must be initialized with bt_pbap_client_initialize().
+  /// - The local device must be bonded with the remote device by bt_device_create_bond().
+  ///
+  /// **Postconditions:**
+  /// - bt_pbap_connection_state_changed_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `bt_pbap_client_disconnect()`
+  /// - `bt_pbap_client_set_connection_state_changed_cb()`
+  ///
+  /// **Platform restriction:**
+  /// - Wearable only.
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_PBAP_MODULE
   int bt_pbap_client_connect(
     ffi.Pointer<ffi.Char> address,
   ) {
@@ -8558,31 +11725,50 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_pbap_client_connect = _bt_pbap_client_connectPtr
       .asFunction<int Function(ffi.Pointer<ffi.Char>)>();
 
-  /// @WEARABLE_ONLY
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_PBAP_MODULE
-  /// @brief Disconnects from PBAP server, asynchronously.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
+  /// Disconnects from PBAP server, asynchronously.
   ///
-  /// @param[in] address The other device's address
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_ENABLED  Adapter is not enabled
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
-  /// @retval #BT_ERROR_NOW_IN_PROGRESS  Operation is in progress
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre The state of the local Bluetooth adapter must be #BT_ADAPTER_ENABLED.
-  /// @pre The PBAP client must be initialized with bt_pbap_client_initialize().
-  /// @pre PBAP connection must be created with bt_pbap_client_connect().
-  /// @post bt_pbap_connection_state_changed_cb() will be invoked.
-  /// @see bt_pbap_client_connect()
-  /// @see bt_pbap_client_set_connection_state_changed_cb()
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
+  ///
+  /// **Parameters:**
+  /// - `address` (in): The other device's address
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_ENABLED`: Adapter is not enabled
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `BT_ERROR_NOW_IN_PROGRESS`: Operation is in progress
+  ///
+  /// **Preconditions:**
+  /// - The state of the local Bluetooth adapter must be `BT_ADAPTER_ENABLED`.
+  /// - The PBAP client must be initialized with bt_pbap_client_initialize().
+  /// - PBAP connection must be created with bt_pbap_client_connect().
+  ///
+  /// **Postconditions:**
+  /// - bt_pbap_connection_state_changed_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `bt_pbap_client_connect()`
+  /// - `bt_pbap_client_set_connection_state_changed_cb()`
+  ///
+  /// **Platform restriction:**
+  /// - Wearable only.
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_PBAP_MODULE
   int bt_pbap_client_disconnect(
     ffi.Pointer<ffi.Char> address,
   ) {
@@ -8597,33 +11783,49 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_pbap_client_disconnect = _bt_pbap_client_disconnectPtr
       .asFunction<int Function(ffi.Pointer<ffi.Char>)>();
 
-  /// @WEARABLE_ONLY
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_PBAP_MODULE
-  /// @brief Gets size of phone book from PBAP server, asynchronously.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
+  /// Gets size of phone book from PBAP server, asynchronously.
   ///
-  /// @param[in] address The other device's address
-  /// @param[in] source Source of the phone book (Phone/SIM)
-  /// @param[in] folder_type Type of folder
-  /// @param[in] callback The callback function called when PBAP phone book size is returned.
-  /// @param[in] user_data Data to be passed to the PBAP phone book size callback.
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_ENABLED  Adapter is not enabled
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre The state of the local Bluetooth adapter must be #BT_ADAPTER_ENABLED.
-  /// @pre The PBAP client must be initialized with bt_pbap_client_initialize().
-  /// @pre PBAP connection must be created with bt_pbap_client_connect().
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
   ///
-  /// @see bt_pbap_client_connect()
+  /// **Parameters:**
+  /// - `address` (in): The other device's address
+  /// - `source` (in): Source of the phone book (Phone/SIM)
+  /// - `folder_type` (in): Type of folder
+  /// - `callback` (in): The callback function called when PBAP phone book size is returned.
+  /// - `user_data` (in): Data to be passed to the PBAP phone book size callback.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_ENABLED`: Adapter is not enabled
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The state of the local Bluetooth adapter must be `BT_ADAPTER_ENABLED`.
+  /// - The PBAP client must be initialized with bt_pbap_client_initialize().
+  /// - PBAP connection must be created with bt_pbap_client_connect().
+  ///
+  /// **See also:**
+  /// - `bt_pbap_client_connect()`
+  ///
+  /// **Platform restriction:**
+  /// - Wearable only.
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_PBAP_MODULE
   int bt_pbap_client_get_phone_book_size(
     ffi.Pointer<ffi.Char> address,
     int source,
@@ -8653,40 +11855,57 @@ class Tizen65CapiNetworkBluetooth {
           int Function(ffi.Pointer<ffi.Char>, int, int,
               bt_pbap_phone_book_size_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @WEARABLE_ONLY
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_PBAP_MODULE
-  /// @brief Gets all contacts and call logs as vCard from PBAP server, asynchronously.
-  /// @details The received phone book file will be saved in the platform downloads folder.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
-  /// %http://tizen.org/privilege/mediastorage
+  /// Gets all contacts and call logs as vCard from PBAP server, asynchronously.
   ///
-  /// @param[in] address The other device's address
-  /// @param[in] source Source of phone book (Phone/SIM)
-  /// @param[in] folder_type Type of folder
-  /// @param[in] format The vCard format
-  /// @param[in] order Specifies which field shall be used to sort vCards.
-  /// @param[in] offset The number of vCards to be excluded, counting from the beginning
-  /// @param[in] max_list_count The maximum number of vCards to be fetched
-  /// @param[in] fields vCard fields to be fetched; one or more #bt_pbap_field_e values combined with bitwise 'or'
-  /// @param[in] callback The callback function called when PBAP phone book is Pulled.
-  /// @param[in] user_data Data to be passed to the PBAP phone book pulling callback.
+  /// The received phone book file will be saved in the platform downloads folder.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_ENABLED  Adapter is not enabled
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @pre The state of the local Bluetooth adapter must be #BT_ADAPTER_ENABLED.
-  /// @pre The PBAP client must be initialized with bt_pbap_client_initialize().
-  /// @pre PBAP connection must be created with bt_pbap_client_connect().
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @see bt_pbap_client_connect()
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
+  /// - <http://tizen.org/privilege/mediastorage>
+  ///
+  /// **Parameters:**
+  /// - `address` (in): The other device's address
+  /// - `source` (in): Source of phone book (Phone/SIM)
+  /// - `folder_type` (in): Type of folder
+  /// - `format` (in): The vCard format
+  /// - `order` (in): Specifies which field shall be used to sort vCards.
+  /// - `offset` (in): The number of vCards to be excluded, counting from the beginning
+  /// - `max_list_count` (in): The maximum number of vCards to be fetched
+  /// - `fields` (in): vCard fields to be fetched; one or more `bt_pbap_field_e` values combined with bitwise 'or'
+  /// - `callback` (in): The callback function called when PBAP phone book is Pulled.
+  /// - `user_data` (in): Data to be passed to the PBAP phone book pulling callback.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_ENABLED`: Adapter is not enabled
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The state of the local Bluetooth adapter must be `BT_ADAPTER_ENABLED`.
+  /// - The PBAP client must be initialized with bt_pbap_client_initialize().
+  /// - PBAP connection must be created with bt_pbap_client_connect().
+  ///
+  /// **See also:**
+  /// - `bt_pbap_client_connect()`
+  ///
+  /// **Platform restriction:**
+  /// - Wearable only.
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_PBAP_MODULE
   int bt_pbap_client_get_phone_book(
     ffi.Pointer<ffi.Char> address,
     int source,
@@ -8731,36 +11950,52 @@ class Tizen65CapiNetworkBluetooth {
           int Function(ffi.Pointer<ffi.Char>, int, int, int, int, int, int, int,
               bt_pbap_phone_book_received_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @WEARABLE_ONLY
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_PBAP_MODULE
-  /// @brief Gets contact and call log information from the PBAP server, asynchronously.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
+  /// Gets contact and call log information from the PBAP server, asynchronously.
   ///
-  /// @param[in] address The other device's address
-  /// @param[in] source Source of phone book (Phone/SIM)
-  /// @param[in] folder_type Type of folder
-  /// @param[in] order Specifies which field shall be used to sort vCards.
-  /// @param[in] offset vCards to be excluded from beginning.
-  /// @param[in] max_list_count Maximum number of vCards to be fetched
-  /// @param[in] callback The callback function called when PBAP List is returned.
-  /// @param[in] user_data Data to be passed to the PBAP phone book pulling callback.
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_ENABLED  Adapter is not enabled
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre The state of the local Bluetooth adapter must be #BT_ADAPTER_ENABLED.
-  /// @pre The PBAP client must be initialized with bt_pbap_client_initialize().
-  /// @pre PBAP connection must be created with bt_pbap_client_connect().
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
   ///
-  /// @see bt_pbap_client_connect()
+  /// **Parameters:**
+  /// - `address` (in): The other device's address
+  /// - `source` (in): Source of phone book (Phone/SIM)
+  /// - `folder_type` (in): Type of folder
+  /// - `order` (in): Specifies which field shall be used to sort vCards.
+  /// - `offset` (in): vCards to be excluded from beginning.
+  /// - `max_list_count` (in): Maximum number of vCards to be fetched
+  /// - `callback` (in): The callback function called when PBAP List is returned.
+  /// - `user_data` (in): Data to be passed to the PBAP phone book pulling callback.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_ENABLED`: Adapter is not enabled
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The state of the local Bluetooth adapter must be `BT_ADAPTER_ENABLED`.
+  /// - The PBAP client must be initialized with bt_pbap_client_initialize().
+  /// - PBAP connection must be created with bt_pbap_client_connect().
+  ///
+  /// **See also:**
+  /// - `bt_pbap_client_connect()`
+  ///
+  /// **Platform restriction:**
+  /// - Wearable only.
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_PBAP_MODULE
   int bt_pbap_client_get_list(
     ffi.Pointer<ffi.Char> address,
     int source,
@@ -8798,42 +12033,58 @@ class Tizen65CapiNetworkBluetooth {
       int Function(ffi.Pointer<ffi.Char>, int, int, int, int, int,
           bt_pbap_list_vcards_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @WEARABLE_ONLY
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_PBAP_MODULE
-  /// @brief Gets the selected contact using the index parameter as vCard from PBAP server, asynchronously.
-  /// @details The received phone book file will be saved in the platform downloads folder.
-  /// The @a index value should be equal to the value of the @a index field in the #bt_pbap_vcard_info_s structure,
-  /// which can be obtained with bt_pbap_client_get_list() or bt_pbap_client_search_phone_book().
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
-  /// %http://tizen.org/privilege/mediastorage
+  /// Gets the selected contact using the index parameter as vCard from PBAP server, asynchronously.
   ///
-  /// @param[in] address The other device's address
-  /// @param[in] source Source of phone book (Phone/SIM)
-  /// @param[in] folder_type Type of folder
-  /// @param[in] index The handle index of vCard to be fetched
-  /// @param[in] format Format of vCard
-  /// @param[in] fields vCard fields to be fetched; one or more #bt_pbap_field_e values combined with bitwise 'or'
-  /// @param[in] callback The callback function called when PBAP phone book is Pulled.
-  /// @param[in] user_data Data to be passed to the PBAP phone book Pulling callback.
+  /// The received phone book file will be saved in the platform downloads folder. The `index` value should be equal to the value of the `index` field in the `bt_pbap_vcard_info_s` structure, which can be obtained with bt_pbap_client_get_list() or bt_pbap_client_search_phone_book().
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_ENABLED  Adapter is not enabled
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @pre The state of the local Bluetooth adapter must be #BT_ADAPTER_ENABLED.
-  /// @pre The PBAP client must be initialized with bt_pbap_client_initialize().
-  /// @pre PBAP connection must be created with bt_pbap_client_connect().
-  /// @pre The vCard information (#bt_pbap_vcard_info_s) must be obtained with bt_pbap_client_get_list() or bt_pbap_client_search_phone_book().
-  /// @see bt_pbap_client_connect()
-  /// @see bt_pbap_client_get_list()
-  /// @see bt_pbap_client_search_phone_book()
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
+  /// - <http://tizen.org/privilege/mediastorage>
+  ///
+  /// **Parameters:**
+  /// - `address` (in): The other device's address
+  /// - `source` (in): Source of phone book (Phone/SIM)
+  /// - `folder_type` (in): Type of folder
+  /// - `index` (in): The handle index of vCard to be fetched
+  /// - `format` (in): Format of vCard
+  /// - `fields` (in): vCard fields to be fetched; one or more `bt_pbap_field_e` values combined with bitwise 'or'
+  /// - `callback` (in): The callback function called when PBAP phone book is Pulled.
+  /// - `user_data` (in): Data to be passed to the PBAP phone book Pulling callback.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_ENABLED`: Adapter is not enabled
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The state of the local Bluetooth adapter must be `BT_ADAPTER_ENABLED`.
+  /// - The PBAP client must be initialized with bt_pbap_client_initialize().
+  /// - PBAP connection must be created with bt_pbap_client_connect().
+  /// - The vCard information (`bt_pbap_vcard_info_s`) must be obtained with bt_pbap_client_get_list() or bt_pbap_client_search_phone_book().
+  ///
+  /// **See also:**
+  /// - `bt_pbap_client_connect()`
+  /// - `bt_pbap_client_get_list()`
+  /// - `bt_pbap_client_search_phone_book()`
+  ///
+  /// **Platform restriction:**
+  /// - Wearable only.
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_PBAP_MODULE
   int bt_pbap_client_pull_vcard(
     ffi.Pointer<ffi.Char> address,
     int source,
@@ -8872,38 +12123,54 @@ class Tizen65CapiNetworkBluetooth {
           int Function(ffi.Pointer<ffi.Char>, int, int, int, int, int,
               bt_pbap_phone_book_received_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @WEARABLE_ONLY
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_PBAP_MODULE
-  /// @brief Finds and fetches the contact and call log information from the PBAP server, asynchronously.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
+  /// Finds and fetches the contact and call log information from the PBAP server, asynchronously.
   ///
-  /// @param[in] address The other device's address
-  /// @param[in] source Source of phone book (Phone/SIM)
-  /// @param[in] folder_type Type of folder
-  /// @param[in] search_attribute field to be search
-  /// @param[in] search_value pattern to be searched for
-  /// @param[in] order Specifies which field shall be used to sort vCards.
-  /// @param[in] offset vCards to be excluded from beginning.
-  /// @param[in] max_list_count Maximum number of vCards to be fetched
-  /// @param[in] callback The callback function called when PBAP List is returned.
-  /// @param[in] user_data Data to be passed to the PBAP phone book pulling callback.
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_ENABLED  Adapter is not enabled
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre The state of the local Bluetooth adapter must be #BT_ADAPTER_ENABLED.
-  /// @pre The PBAP client must be initialized with bt_pbap_client_initialize().
-  /// @pre PBAP connection must be created with bt_pbap_client_connect().
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
   ///
-  /// @see bt_pbap_client_connect()
+  /// **Parameters:**
+  /// - `address` (in): The other device's address
+  /// - `source` (in): Source of phone book (Phone/SIM)
+  /// - `folder_type` (in): Type of folder
+  /// - `search_attribute` (in): field to be search
+  /// - `search_value` (in): pattern to be searched for
+  /// - `order` (in): Specifies which field shall be used to sort vCards.
+  /// - `offset` (in): vCards to be excluded from beginning.
+  /// - `max_list_count` (in): Maximum number of vCards to be fetched
+  /// - `callback` (in): The callback function called when PBAP List is returned.
+  /// - `user_data` (in): Data to be passed to the PBAP phone book pulling callback.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_ENABLED`: Adapter is not enabled
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The state of the local Bluetooth adapter must be `BT_ADAPTER_ENABLED`.
+  /// - The PBAP client must be initialized with bt_pbap_client_initialize().
+  /// - PBAP connection must be created with bt_pbap_client_connect().
+  ///
+  /// **See also:**
+  /// - `bt_pbap_client_connect()`
+  ///
+  /// **Platform restriction:**
+  /// - Wearable only.
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_PBAP_MODULE
   int bt_pbap_client_search_phone_book(
     ffi.Pointer<ffi.Char> address,
     int source,
@@ -8957,33 +12224,37 @@ class Tizen65CapiNetworkBluetooth {
               bt_pbap_list_vcards_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
-  /// @brief Creates a scan filter to find only LE advertisements which match specific requirements.
-  /// @details If the filter's attribute is not set, then the filter will accept
-  /// all values of that attribute. If an attribute is set, the filter
-  /// will accept only advertisements which match the set attribute.
+  /// Creates a scan filter to find only LE advertisements which match specific requirements.
   ///
-  /// For example, if device name is set with
-  /// bt_adapter_le_scan_filter_set_device_name(), the filter will accept
-  /// only advertisements from devices with the given name. If device name
-  /// is not set, advertisements will be filtered without regard to device
-  /// names.
-  /// @since_tizen 4.0
+  /// If the filter's attribute is not set, then the filter will accept all values of that attribute. If an attribute is set, the filter will accept only advertisements which match the set attribute. For example, if device name is set with bt_adapter_le_scan_filter_set_device_name(), the filter will accept only advertisements from devices with the given name. If device name is not set, advertisements will be filtered without regard to device names.
   ///
-  /// @remarks The @a scan_filter should be destroyed with bt_adapter_le_scan_filter_destroy().
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @param[out] scan_filter The scan filter handle
+  /// **Remarks:**
+  /// - The `scan_filter` should be destroyed with bt_adapter_le_scan_filter_destroy().
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_OUT_OF_MEMORY  Out of memory
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Parameters:**
+  /// - `scan_filter` (out): The scan filter handle
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
   ///
-  /// @see bt_adapter_le_scan_filter_destroy()
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_adapter_le_scan_filter_destroy()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
   int bt_adapter_le_scan_filter_create(
     ffi.Pointer<bt_scan_filter_h> scan_filter,
   ) {
@@ -8999,21 +12270,31 @@ class Tizen65CapiNetworkBluetooth {
       _bt_adapter_le_scan_filter_createPtr
           .asFunction<int Function(ffi.Pointer<bt_scan_filter_h>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
-  /// @brief Destroys a scan filter.
-  /// @since_tizen 4.0
+  /// Destroys a scan filter.
   ///
-  /// @param[in] scan_filter The scan filter handle
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Parameters:**
+  /// - `scan_filter` (in): The scan filter handle
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
   ///
-  /// @see bt_adapter_le_scan_filter_create()
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **See also:**
+  /// - `bt_adapter_le_scan_filter_create()`
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
   int bt_adapter_le_scan_filter_destroy(
     bt_scan_filter_h scan_filter,
   ) {
@@ -9029,20 +12310,29 @@ class Tizen65CapiNetworkBluetooth {
       _bt_adapter_le_scan_filter_destroyPtr
           .asFunction<int Function(bt_scan_filter_h)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
-  /// @brief Sets the device address for the advertisements filter.
-  /// @since_tizen 4.0
+  /// Sets the device address for the advertisements filter.
   ///
-  /// @param[in] scan_filter The scan filter handle
-  /// @param[in] address The device address by which advertisements will be filtered
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Parameters:**
+  /// - `scan_filter` (in): The scan filter handle
+  /// - `address` (in): The device address by which advertisements will be filtered
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
   int bt_adapter_le_scan_filter_set_device_address(
     bt_scan_filter_h scan_filter,
     ffi.Pointer<ffi.Char> address,
@@ -9061,21 +12351,31 @@ class Tizen65CapiNetworkBluetooth {
       _bt_adapter_le_scan_filter_set_device_addressPtr
           .asFunction<int Function(bt_scan_filter_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
-  /// @brief Sets the device name for the advertisements filter.
-  /// @details Any previously set value will be overwritten.
-  /// @since_tizen 4.0
+  /// Sets the device name for the advertisements filter.
   ///
-  /// @param[in] scan_filter The scan filter handle
-  /// @param[in] name The device name by which advertisements will be filtered
+  /// Any previously set value will be overwritten.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER	Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED	Not supported
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
+  /// **Parameters:**
+  /// - `scan_filter` (in): The scan filter handle
+  /// - `name` (in): The device name by which advertisements will be filtered
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
   int bt_adapter_le_scan_filter_set_device_name(
     bt_scan_filter_h scan_filter,
     ffi.Pointer<ffi.Char> name,
@@ -9094,21 +12394,31 @@ class Tizen65CapiNetworkBluetooth {
       _bt_adapter_le_scan_filter_set_device_namePtr
           .asFunction<int Function(bt_scan_filter_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
-  /// @brief Sets the service UUID for the advertisements filter.
-  /// @details Any previously set value will be overwritten.
-  /// @since_tizen 4.0
+  /// Sets the service UUID for the advertisements filter.
   ///
-  /// @param[in] scan_filter The scan filter handle
-  /// @param[in] uuid The service UUID by which advertisements will be filtered
+  /// Any previously set value will be overwritten.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER	Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED	Not supported
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
+  /// **Parameters:**
+  /// - `scan_filter` (in): The scan filter handle
+  /// - `uuid` (in): The service UUID by which advertisements will be filtered
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
   int bt_adapter_le_scan_filter_set_service_uuid(
     bt_scan_filter_h scan_filter,
     ffi.Pointer<ffi.Char> uuid,
@@ -9127,28 +12437,35 @@ class Tizen65CapiNetworkBluetooth {
       _bt_adapter_le_scan_filter_set_service_uuidPtr
           .asFunction<int Function(bt_scan_filter_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
-  /// @brief Sets the service UUID and the mask for the advertisements filter,
-  /// to use for filtering by partial data.
-  /// @details Any previously set value will be overwritten. The mask works as follows:
-  /// For each bit set to 1 in the mask, the corresponding bits in @a uuid
-  /// and in the filtered data will have to be equal. If the mask bit is set to 0,
-  /// the corresponding bits will be ignored.
-  /// @since_tizen 4.0
+  /// Sets the service UUID and the mask for the advertisements filter, to use for filtering by partial data.
   ///
-  /// @remarks The @a mask and the service @a uuid must have equal lengths.
+  /// Any previously set value will be overwritten. The mask works as follows: For each bit set to 1 in the mask, the corresponding bits in `uuid` and in the filtered data will have to be equal. If the mask bit is set to 0, the corresponding bits will be ignored.
   ///
-  /// @param[in] scan_filter The scan filter handle
-  /// @param[in] uuid The service UUID by which advertisements will be filtered
-  /// @param[in] mask The mask to filter advertisements
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER	Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED	Not supported
+  /// **Remarks:**
+  /// - The `mask` and the service `uuid` must have equal lengths.
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
+  /// **Parameters:**
+  /// - `scan_filter` (in): The scan filter handle
+  /// - `uuid` (in): The service UUID by which advertisements will be filtered
+  /// - `mask` (in): The mask to filter advertisements
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
   int bt_adapter_le_scan_filter_set_service_uuid_with_mask(
     bt_scan_filter_h scan_filter,
     ffi.Pointer<ffi.Char> uuid,
@@ -9171,21 +12488,31 @@ class Tizen65CapiNetworkBluetooth {
           int Function(bt_scan_filter_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Char>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
-  /// @brief Sets the service solicitation UUID for the advertisements filter.
-  /// @details Any previously set value will be overwritten.
-  /// @since_tizen 4.0
+  /// Sets the service solicitation UUID for the advertisements filter.
   ///
-  /// @param[in] scan_filter The scan filter handle
-  /// @param[in] uuid The service solicitation UUID by which advertisements will be filtered
+  /// Any previously set value will be overwritten.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER	Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED	Not supported
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
+  /// **Parameters:**
+  /// - `scan_filter` (in): The scan filter handle
+  /// - `uuid` (in): The service solicitation UUID by which advertisements will be filtered
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
   int bt_adapter_le_scan_filter_set_service_solicitation_uuid(
     bt_scan_filter_h scan_filter,
     ffi.Pointer<ffi.Char> uuid,
@@ -9205,28 +12532,35 @@ class Tizen65CapiNetworkBluetooth {
       _bt_adapter_le_scan_filter_set_service_solicitation_uuidPtr
           .asFunction<int Function(bt_scan_filter_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
-  /// @brief Sets the service solicitation UUID and the mask for the advertisements filter,
-  /// to use for filtering by partial data.
-  /// @details Any previously set value will be overwritten. The mask works as follows:
-  /// For each bit set to 1 in the mask, the corresponding bits in @a uuid
-  /// and in the filtered data will have to be equal. If the mask bit is set to 0,
-  /// the corresponding bits will be ignored.
-  /// @since_tizen 4.0
+  /// Sets the service solicitation UUID and the mask for the advertisements filter, to use for filtering by partial data.
   ///
-  /// @remarks The @a mask and the service solicitation @a uuid must have equal lengths.
+  /// Any previously set value will be overwritten. The mask works as follows: For each bit set to 1 in the mask, the corresponding bits in `uuid` and in the filtered data will have to be equal. If the mask bit is set to 0, the corresponding bits will be ignored.
   ///
-  /// @param[in] scan_filter The scan filter handle
-  /// @param[in] uuid The service solicitation UUID by which advertisements will be filtered
-  /// @param[in] mask The mask by which advertisements will be filtered
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER	Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED	Not supported
+  /// **Remarks:**
+  /// - The `mask` and the service solicitation `uuid` must have equal lengths.
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
+  /// **Parameters:**
+  /// - `scan_filter` (in): The scan filter handle
+  /// - `uuid` (in): The service solicitation UUID by which advertisements will be filtered
+  /// - `mask` (in): The mask by which advertisements will be filtered
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
   int bt_adapter_le_scan_filter_set_service_solicitation_uuid_with_mask(
     bt_scan_filter_h scan_filter,
     ffi.Pointer<ffi.Char> uuid,
@@ -9251,23 +12585,33 @@ class Tizen65CapiNetworkBluetooth {
               int Function(bt_scan_filter_h, ffi.Pointer<ffi.Char>,
                   ffi.Pointer<ffi.Char>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
-  /// @brief Sets the service data for the advertisements filter.
-  /// @details Any previously set value will be overwritten.
-  /// @since_tizen 4.0
+  /// Sets the service data for the advertisements filter.
   ///
-  /// @param[in] scan_filter The scan filter handle
-  /// @param[in] uuid The service UUID by which advertisements will be filtered
-  /// @param[in] data The service data by which advertisements will be filtered
-  /// @param[in] data_len The length of the service data
+  /// Any previously set value will be overwritten.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER	Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED	Not supported
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
+  /// **Parameters:**
+  /// - `scan_filter` (in): The scan filter handle
+  /// - `uuid` (in): The service UUID by which advertisements will be filtered
+  /// - `data` (in): The service data by which advertisements will be filtered
+  /// - `data_len` (in): The length of the service data
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
   int bt_adapter_le_scan_filter_set_service_data(
     bt_scan_filter_h scan_filter,
     ffi.Pointer<ffi.Char> uuid,
@@ -9294,31 +12638,38 @@ class Tizen65CapiNetworkBluetooth {
           int Function(bt_scan_filter_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Char>, int)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
-  /// @brief Sets the service data and the mask for the advertisements filter,
-  /// to use for filtering by partial data.
-  /// @details Any previously set value will be overwritten. The mask works as follows:
-  /// For each bit set to 1 in the mask, the corresponding bits in @a data
-  /// and in the filtered data will have to be equal. If the mask bit is set to 0,
-  /// the corresponding bits will be ignored.
-  /// @since_tizen 4.0
+  /// Sets the service data and the mask for the advertisements filter, to use for filtering by partial data.
   ///
-  /// @remarks The @a mask and the service @a data must have equal lengths.
+  /// Any previously set value will be overwritten. The mask works as follows: For each bit set to 1 in the mask, the corresponding bits in `data` and in the filtered data will have to be equal. If the mask bit is set to 0, the corresponding bits will be ignored.
   ///
-  /// @param[in] scan_filter The scan filter handle
-  /// @param[in] uuid The service UUID by which advertisements will be filtered
-  /// @param[in] data The service data by which advertisements will be filtered
-  /// @param[in] data_len The length of the service data
-  /// @param[in] mask The mask by which advertisements will be filtered
-  /// @param[in] mask_len The length of the mask
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER	Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED	Not supported
+  /// **Remarks:**
+  /// - The `mask` and the service `data` must have equal lengths.
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
+  /// **Parameters:**
+  /// - `scan_filter` (in): The scan filter handle
+  /// - `uuid` (in): The service UUID by which advertisements will be filtered
+  /// - `data` (in): The service data by which advertisements will be filtered
+  /// - `data_len` (in): The length of the service data
+  /// - `mask` (in): The mask by which advertisements will be filtered
+  /// - `mask_len` (in): The length of the mask
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
   int bt_adapter_le_scan_filter_set_service_data_with_mask(
     bt_scan_filter_h scan_filter,
     ffi.Pointer<ffi.Char> uuid,
@@ -9352,23 +12703,33 @@ class Tizen65CapiNetworkBluetooth {
           int Function(bt_scan_filter_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Char>, int, ffi.Pointer<ffi.Char>, int)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
-  /// @brief Sets the manufacturer data for the advertisements filter.
-  /// @details Any previously set value will be overwritten.
-  /// @since_tizen 4.0
+  /// Sets the manufacturer data for the advertisements filter.
   ///
-  /// @param[in] scan_filter The scan filter handle
-  /// @param[in] manufacturer_id The manufacturer ID (0x0000 ~ 0xFFFF)
-  /// @param[in] data The manufacturer data (byte array)
-  /// @param[in] data_len The length of the manufacturer data
+  /// Any previously set value will be overwritten.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER	Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED	Not supported
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
+  /// **Parameters:**
+  /// - `scan_filter` (in): The scan filter handle
+  /// - `manufacturer_id` (in): The manufacturer ID (0x0000 ~ 0xFFFF)
+  /// - `data` (in): The manufacturer data (byte array)
+  /// - `data_len` (in): The length of the manufacturer data
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
   int bt_adapter_le_scan_filter_set_manufacturer_data(
     bt_scan_filter_h scan_filter,
     int manufacturer_id,
@@ -9392,31 +12753,38 @@ class Tizen65CapiNetworkBluetooth {
       _bt_adapter_le_scan_filter_set_manufacturer_dataPtr.asFunction<
           int Function(bt_scan_filter_h, int, ffi.Pointer<ffi.Char>, int)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
-  /// @brief Sets the manufacturer data and the mask for the advertisements filter,
-  /// to use for filtering by partial data.
-  /// @details Any previously set value will be overwritten. The mask works as follows:
-  /// For each bit set to 1 in the mask, the corresponding bits in @a data
-  /// and in the filtered data will have to be equal. If the mask bit is set to 0,
-  /// the corresponding bits will be ignored.
-  /// @since_tizen 4.0
+  /// Sets the manufacturer data and the mask for the advertisements filter, to use for filtering by partial data.
   ///
-  /// @remarks The @a mask and the manufacturer @a data must have equal lengths.
+  /// Any previously set value will be overwritten. The mask works as follows: For each bit set to 1 in the mask, the corresponding bits in `data` and in the filtered data will have to be equal. If the mask bit is set to 0, the corresponding bits will be ignored.
   ///
-  /// @param[in] scan_filter The scan filter handle
-  /// @param[in] manufacturer_id The manufacturer ID (0x0000 ~ 0xFFFF)
-  /// @param[in] data The manufacturer data (byte array)
-  /// @param[in] data_len The length of the manufacturer data
-  /// @param[in] mask The mask by which advertisements will be filtered
-  /// @param[in] mask_len The length of the mask
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER	Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED	Not supported
+  /// **Remarks:**
+  /// - The `mask` and the manufacturer `data` must have equal lengths.
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
+  /// **Parameters:**
+  /// - `scan_filter` (in): The scan filter handle
+  /// - `manufacturer_id` (in): The manufacturer ID (0x0000 ~ 0xFFFF)
+  /// - `data` (in): The manufacturer data (byte array)
+  /// - `data_len` (in): The length of the manufacturer data
+  /// - `mask` (in): The mask by which advertisements will be filtered
+  /// - `mask_len` (in): The length of the mask
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
   int bt_adapter_le_scan_filter_set_manufacturer_data_with_mask(
     bt_scan_filter_h scan_filter,
     int manufacturer_id,
@@ -9451,24 +12819,31 @@ class Tizen65CapiNetworkBluetooth {
           int Function(bt_scan_filter_h, int, ffi.Pointer<ffi.Char>, int,
               ffi.Pointer<ffi.Char>, int)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
-  /// @brief Sets the scan filter type for the advertisements filter.
-  /// @details The filter type is used when searching only for iBeacon or proximity
-  /// type's advertising data. If the type is not set, LE scanner will
-  /// search devices as with regard to other filtered attributes.
-  /// If the type is set, all other attributes set for the filter are ignored.
-  /// @since_tizen 4.0
+  /// Sets the scan filter type for the advertisements filter.
   ///
-  /// @param[in] scan_filter The scan filter handle
-  /// @param[in] mode The scan filter type
+  /// The filter type is used when searching only for iBeacon or proximity type's advertising data. If the type is not set, LE scanner will search devices as with regard to other filtered attributes. If the type is set, all other attributes set for the filter are ignored.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
+  /// **Parameters:**
+  /// - `scan_filter` (in): The scan filter handle
+  /// - `mode` (in): The scan filter type
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
   int bt_adapter_le_scan_filter_set_type(
     bt_scan_filter_h scan_filter,
     int mode,
@@ -9486,27 +12861,42 @@ class Tizen65CapiNetworkBluetooth {
       _bt_adapter_le_scan_filter_set_typePtr
           .asFunction<int Function(bt_scan_filter_h, int)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
-  /// @brief Registers a scan filter to use for scanning.
-  /// @details If the filter is registered, it cannot be changed.
-  /// @since_tizen 4.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
+  /// Registers a scan filter to use for scanning.
   ///
-  /// @remarks Several scan filters can be registered. If an advertisement passes \n
-  /// any of the registered scan filters, it will be included in the results.
+  /// If the filter is registered, it cannot be changed.
   ///
-  /// @param[in] scan_filter The scan filter handle
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOW_IN_PROGRESS  Scan is in progress
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
+  ///
+  /// **Remarks:**
+  /// - Several scan filters can be registered. If an advertisement passes
+  /// - any of the registered scan filters, it will be included in the results.
+  ///
+  /// **Parameters:**
+  /// - `scan_filter` (in): The scan filter handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOW_IN_PROGRESS`: Scan is in progress
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
   int bt_adapter_le_scan_filter_register(
     bt_scan_filter_h scan_filter,
   ) {
@@ -9522,23 +12912,36 @@ class Tizen65CapiNetworkBluetooth {
       _bt_adapter_le_scan_filter_registerPtr
           .asFunction<int Function(bt_scan_filter_h)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
-  /// @brief Unregisters all registered scan filters.
-  /// @since_tizen 4.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
+  /// Unregisters all registered scan filters.
   ///
-  /// @param[in] scan_filter The scan filter handle
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOW_IN_PROGRESS  Scan is in progress
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
+  ///
+  /// **Parameters:**
+  /// - `scan_filter` (in): The scan filter handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOW_IN_PROGRESS`: Scan is in progress
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
   int bt_adapter_le_scan_filter_unregister(
     bt_scan_filter_h scan_filter,
   ) {
@@ -9554,20 +12957,32 @@ class Tizen65CapiNetworkBluetooth {
       _bt_adapter_le_scan_filter_unregisterPtr
           .asFunction<int Function(bt_scan_filter_h)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
-  /// @brief Unregisters all registered scan filters.
-  /// @since_tizen 4.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/bluetooth
+  /// Unregisters all registered scan filters.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_NOW_IN_PROGRESS  Scan is in progress
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
-  /// @retval #BT_ERROR_PERMISSION_DENIED  Permission denied
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @pre The Bluetooth service must be initialized with bt_initialize().
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bluetooth>
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_NOW_IN_PROGRESS`: Scan is in progress
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `BT_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **Preconditions:**
+  /// - The Bluetooth service must be initialized with bt_initialize().
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
   int bt_adapter_le_scan_filter_unregister_all() {
     return _bt_adapter_le_scan_filter_unregister_all();
   }
@@ -9578,23 +12993,33 @@ class Tizen65CapiNetworkBluetooth {
   late final _bt_adapter_le_scan_filter_unregister_all =
       _bt_adapter_le_scan_filter_unregister_allPtr.asFunction<int Function()>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_50_MODULE
-  /// @brief Checks if LE 2M PHY feature is supported or not.
-  /// @since_tizen 5.0
+  /// Checks if LE 2M PHY feature is supported or not.
   ///
-  /// @remarks The LE 2M PHY feature was introduced in the BT 5.0 core specification.
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @param[out] is_supported The LE 2M PHY feature support: (@c true = supported , @c  false = not supported)
+  /// **Remarks:**
+  /// - The LE 2M PHY feature was introduced in the BT 5.0 core specification.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_ENABLED  Adapter is not enabled
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Parameters:**
+  /// - `is_supported` (out): The LE 2M PHY feature support: (`true` = supported , `false` = not supported)
   ///
-  /// @pre The state of local Bluetooth must be #BT_ADAPTER_ENABLED.
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_ENABLED`: Adapter is not enabled
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The state of local Bluetooth must be `BT_ADAPTER_ENABLED`.
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_50_MODULE
   int bt_adapter_le_is_2m_phy_supported(
     ffi.Pointer<ffi.Bool> is_supported,
   ) {
@@ -9610,23 +13035,33 @@ class Tizen65CapiNetworkBluetooth {
       _bt_adapter_le_is_2m_phy_supportedPtr
           .asFunction<int Function(ffi.Pointer<ffi.Bool>)>();
 
-  /// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_50_MODULE
-  /// @brief Checks if LE CODED PHY feature is supported or not.
-  /// @since_tizen 5.0
+  /// Checks if LE CODED PHY feature is supported or not.
   ///
-  /// @remarks The LE CODED PHY feature was introduced in the BT 5.0 core specification.
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @param[out] is_supported The LE CODED PHY feature support: (@c true = supported , @c  false = not supported)
+  /// **Remarks:**
+  /// - The LE CODED PHY feature was introduced in the BT 5.0 core specification.
   ///
-  /// @return 0 on success, otherwise a negative error value.
-  /// @retval #BT_ERROR_NONE  Successful
-  /// @retval #BT_ERROR_NOT_INITIALIZED  Not initialized
-  /// @retval #BT_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval #BT_ERROR_NOT_ENABLED  Adapter is not enabled
-  /// @retval #BT_ERROR_OPERATION_FAILED  Operation failed
-  /// @retval #BT_ERROR_NOT_SUPPORTED  Not supported
+  /// **Parameters:**
+  /// - `is_supported` (out): The LE CODED PHY feature support: (`true` = supported , `false` = not supported)
   ///
-  /// @pre The state of local Bluetooth must be #BT_ADAPTER_ENABLED.
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `BT_ERROR_NONE`: Successful
+  /// - `BT_ERROR_NOT_INITIALIZED`: Not initialized
+  /// - `BT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `BT_ERROR_NOT_ENABLED`: Adapter is not enabled
+  /// - `BT_ERROR_OPERATION_FAILED`: Operation failed
+  /// - `BT_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - The state of local Bluetooth must be `BT_ADAPTER_ENABLED`.
+  ///
+  /// **Group:**
+  /// - CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_50_MODULE
   int bt_adapter_le_is_coded_phy_supported(
     ffi.Pointer<ffi.Bool> is_supported,
   ) {
@@ -9643,10 +13078,17 @@ class Tizen65CapiNetworkBluetooth {
           .asFunction<int Function(ffi.Pointer<ffi.Bool>)>();
 }
 
-/// @WEARABLE_ONLY
-/// @ingroup CAPI_NETWORK_BLUETOOTH_PBAP_MODULE
-/// @brief  Enumeration of PBAP fields.
-/// @since_tizen 3.0
+/// Enumeration of PBAP fields.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Platform restriction:**
+/// - Wearable only.
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_PBAP_MODULE
+/// @nodoc
 abstract class bt_pbap_field_e {
   /// < All field
   static const int BT_PBAP_FIELD_ALL = -1;
@@ -9739,9 +13181,14 @@ abstract class bt_pbap_field_e {
   static const int BT_PBAP_FIELD_X_IRMC_CALL_DATETIME = 268435456;
 }
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_MODULE
-/// @brief Enumerations of Bluetooth error codes.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+/// Enumerations of Bluetooth error codes.
+///
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_MODULE
+/// @nodoc
 abstract class bt_error_e {
   /// < Successful
   static const int BT_ERROR_NONE = 0;
@@ -9822,9 +13269,14 @@ abstract class bt_error_e {
   static const int BT_ERROR_AUTHORIZATION_REJECTED = -29359858;
 }
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_MODULE
-/// @brief  Enumerations of the Bluetooth adapter state.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+/// Enumerations of the Bluetooth adapter state.
+///
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_ADAPTER_MODULE
+/// @nodoc
 abstract class bt_adapter_state_e {
   /// < Bluetooth adapter is disabled
   static const int BT_ADAPTER_DISABLED = 0;
@@ -9833,9 +13285,14 @@ abstract class bt_adapter_state_e {
   static const int BT_ADAPTER_ENABLED = 1;
 }
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_MODULE
-/// @brief Enumerations of the Bluetooth visibility mode.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+/// Enumerations of the Bluetooth visibility mode.
+///
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_ADAPTER_MODULE
+/// @nodoc
 abstract class bt_adapter_visibility_mode_e {
   /// < Other devices cannot find your device via discovery
   static const int BT_ADAPTER_VISIBILITY_MODE_NON_DISCOVERABLE = 0;
@@ -9848,9 +13305,14 @@ abstract class bt_adapter_visibility_mode_e {
   static const int BT_ADAPTER_VISIBILITY_MODE_LIMITED_DISCOVERABLE = 2;
 }
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_MODULE
-/// @brief Enumerations of the discovery state of Bluetooth device.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+/// Enumerations of the discovery state of Bluetooth device.
+///
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_ADAPTER_MODULE
+/// @nodoc
 abstract class bt_adapter_device_discovery_state_e {
   /// < Device discovery is started
   static const int BT_ADAPTER_DEVICE_DISCOVERY_STARTED = 0;
@@ -9862,9 +13324,14 @@ abstract class bt_adapter_device_discovery_state_e {
   static const int BT_ADAPTER_DEVICE_DISCOVERY_FOUND = 2;
 }
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
-/// @brief  Enumerations of the Bluetooth advertising state.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+/// Enumerations of the Bluetooth advertising state.
+///
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
+/// @nodoc
 abstract class bt_adapter_le_advertising_state_e {
   /// < Bluetooth advertising is stopped
   static const int BT_ADAPTER_LE_ADVERTISING_STOPPED = 0;
@@ -9873,9 +13340,14 @@ abstract class bt_adapter_le_advertising_state_e {
   static const int BT_ADAPTER_LE_ADVERTISING_STARTED = 1;
 }
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
-/// @brief  Enumerations of the Bluetooth advertising mode.
-/// @since_tizen 2.3.1
+/// Enumerations of the Bluetooth advertising mode.
+///
+/// **Since Tizen:**
+/// - 2.3.1
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
+/// @nodoc
 abstract class bt_adapter_le_advertising_mode_e {
   /// < Balanced advertising mode
   static const int BT_ADAPTER_LE_ADVERTISING_MODE_BALANCED = 0;
@@ -9890,9 +13362,14 @@ abstract class bt_adapter_le_advertising_mode_e {
   static const int BT_ADAPTER_LE_ADVERTISING_MODE_CUSTOM = 3;
 }
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
-/// @brief  Enumerations of the Bluetooth advertising filter policy.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+/// Enumerations of the Bluetooth advertising filter policy.
+///
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
+/// @nodoc
 abstract class bt_adapter_le_advertising_filter_policy_e {
   /// < White list is not in use
   static const int BT_ADAPTER_LE_ADVERTISING_FILTER_DEFAULT = 0;
@@ -9910,9 +13387,14 @@ abstract class bt_adapter_le_advertising_filter_policy_e {
   static const int BT_ADAPTER_LE_ADVERTISING_FILTER_ALLOW_SCAN_CONN_WL = 3;
 }
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
-/// @brief  Enumerations of the Bluetooth LE packet type.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+/// Enumerations of the Bluetooth LE packet type.
+///
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
+/// @nodoc
 abstract class bt_adapter_le_packet_type_e {
   /// < Advertising packet
   static const int BT_ADAPTER_LE_PACKET_ADVERTISING = 0;
@@ -9921,9 +13403,14 @@ abstract class bt_adapter_le_packet_type_e {
   static const int BT_ADAPTER_LE_PACKET_SCAN_RESPONSE = 1;
 }
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
-/// @brief  Enumerations of the Bluetooth le scan mode.
-/// @since_tizen 3.0
+/// Enumerations of the Bluetooth le scan mode.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
+/// @nodoc
 abstract class bt_adapter_le_scan_mode_e {
   /// < Balanced mode of power consumption and connection latency
   static const int BT_ADAPTER_LE_SCAN_MODE_BALANCED = 0;
@@ -9935,9 +13422,14 @@ abstract class bt_adapter_le_scan_mode_e {
   static const int BT_ADAPTER_LE_SCAN_MODE_LOW_ENERGY = 2;
 }
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
-/// @brief Enumerations of device disconnect reason.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+/// Enumerations of device disconnect reason.
+///
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
+/// @nodoc
 abstract class bt_device_disconnect_reason_e {
   /// < Disconnected by unknown reason
   static const int BT_DEVICE_DISCONNECT_REASON_UNKNOWN = 0;
@@ -9952,9 +13444,14 @@ abstract class bt_device_disconnect_reason_e {
   static const int BT_DEVICE_DISCONNECT_REASON_REMOTE = 3;
 }
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
-/// @brief Enumerations of connection link type.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+/// Enumerations of connection link type.
+///
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
+/// @nodoc
 abstract class bt_device_connection_link_type_e {
   /// < BR/EDR link
   static const int BT_DEVICE_CONNECTION_LINK_BREDR = 0;
@@ -9966,9 +13463,14 @@ abstract class bt_device_connection_link_type_e {
   static const int BT_DEVICE_CONNECTION_LINK_DEFAULT = 255;
 }
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
-/// @brief Enumerations of device authorization state.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+/// Enumerations of device authorization state.
+///
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
+/// @nodoc
 abstract class bt_device_authorization_e {
   /// < The remote Bluetooth device is authorized
   static const int BT_DEVICE_AUTHORIZED = 0;
@@ -9977,9 +13479,14 @@ abstract class bt_device_authorization_e {
   static const int BT_DEVICE_UNAUTHORIZED = 1;
 }
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
-/// @brief Enumerations of Bluetooth profile.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+/// Enumerations of Bluetooth profile.
+///
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
+/// @nodoc
 abstract class bt_profile_e {
   /// < RFCOMM Profile
   static const int BT_PROFILE_RFCOMM = 1;
@@ -10009,9 +13516,14 @@ abstract class bt_profile_e {
   static const int BT_PROFILE_A2DP_SINK = 256;
 }
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
-/// @brief Enumerations of device address type.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+/// Enumerations of device address type.
+///
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
+/// @nodoc
 abstract class bt_device_address_type_e {
   /// < Public address
   static const int BT_DEVICE_PUBLIC_ADDRESS = 0;
@@ -10020,9 +13532,14 @@ abstract class bt_device_address_type_e {
   static const int BT_DEVICE_RANDOM_ADDRESS = 1;
 }
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
-/// @brief  Enumerations of service class.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+/// Enumerations of service class.
+///
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
+/// @nodoc
 abstract class bt_service_class_t {
   /// < No service class
   static const int BT_SC_NONE = 0;
@@ -10103,9 +13620,14 @@ abstract class bt_service_class_t {
   static const int BT_SC_MAX = 16777216;
 }
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
-/// @brief  Enumerations of major service class.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+/// Enumerations of major service class.
+///
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
+/// @nodoc
 abstract class bt_major_service_class_e {
   /// < Limited discoverable mode
   static const int BT_MAJOR_SERVICE_CLASS_LIMITED_DISCOVERABLE_MODE = 8192;
@@ -10135,9 +13657,14 @@ abstract class bt_major_service_class_e {
   static const int BT_MAJOR_SERVICE_CLASS_INFORMATION = 8388608;
 }
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
-/// @brief  Enumerations of major device class.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+/// Enumerations of major device class.
+///
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
+/// @nodoc
 abstract class bt_major_device_class_e {
   /// < Miscellaneous major device class
   static const int BT_MAJOR_DEVICE_CLASS_MISC = 0;
@@ -10173,9 +13700,14 @@ abstract class bt_major_device_class_e {
   static const int BT_MAJOR_DEVICE_CLASS_UNCATEGORIZED = 31;
 }
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
-/// @brief  Enumerations of minor device class.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+/// Enumerations of minor device class.
+///
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
+/// @nodoc
 abstract class bt_minor_device_class_e {
   /// < Uncategorized minor device class of computer
   static const int BT_MINOR_DEVICE_CLASS_COMPUTER_UNCATEGORIZED = 0;
@@ -10433,9 +13965,14 @@ abstract class bt_minor_device_class_e {
   static const int BT_MINOR_DEVICE_CLASS_HEALTH_ANKLE_PROSTHESIS = 52;
 }
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
-/// @brief  Enumerations of gap appearance type.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+/// Enumerations of gap appearance type.
+///
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
+/// @nodoc
 abstract class bt_appearance_type_e {
   /// < Unknown appearance type
   static const int BT_APPEARANCE_TYPE_UNKNOWN = 0;
@@ -10450,9 +13987,14 @@ abstract class bt_appearance_type_e {
   static const int BT_APPEARANCE_TYPE_GENERIC_WATCH = 192;
 }
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
-/// @brief  Enumerations of the Bluetooth device's LE connection mode.
-/// @since_tizen 3.0
+/// Enumerations of the Bluetooth device's LE connection mode.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
+/// @nodoc
 abstract class bt_device_le_connection_mode_e {
   /// < Balanced mode of power consumption and connection latency
   static const int BT_DEVICE_LE_CONNECTION_MODE_BALANCED = 0;
@@ -10464,9 +14006,14 @@ abstract class bt_device_le_connection_mode_e {
   static const int BT_DEVICE_LE_CONNECTION_MODE_LOW_ENERGY = 2;
 }
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_SOCKET_MODULE
-/// @brief  Enumerations of connected Bluetooth device event role.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+/// Enumerations of connected Bluetooth device event role.
+///
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_SOCKET_MODULE
+/// @nodoc
 abstract class bt_socket_role_e {
   /// < Unknown role
   static const int BT_SOCKET_UNKNOWN = 0;
@@ -10478,9 +14025,14 @@ abstract class bt_socket_role_e {
   static const int BT_SOCKET_CLIENT = 2;
 }
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_SOCKET_MODULE
-/// @brief  Enumerations of Bluetooth socket connection state.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+/// Enumerations of Bluetooth socket connection state.
+///
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_SOCKET_MODULE
+/// @nodoc
 abstract class bt_socket_connection_state_e {
   /// < RFCOMM is connected
   static const int BT_SOCKET_CONNECTED = 0;
@@ -10489,9 +14041,14 @@ abstract class bt_socket_connection_state_e {
   static const int BT_SOCKET_DISCONNECTED = 1;
 }
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_AUDIO_MODULE
-/// @brief  Enumerations for the types of profiles related with audio.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+/// Enumerations for the types of profiles related with audio.
+///
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_AUDIO_MODULE
+/// @nodoc
 abstract class bt_audio_profile_type_e {
   /// < All supported profiles related with audio (Both Host and Device role)
   static const int BT_AUDIO_PROFILE_TYPE_ALL = 0;
@@ -10509,9 +14066,14 @@ abstract class bt_audio_profile_type_e {
   static const int BT_AUDIO_PROFILE_TYPE_A2DP_SINK = 4;
 }
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_AUDIO_AG_MODULE
-/// @brief  Enumerations for the call handling event.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+/// Enumerations for the call handling event.
+///
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_AUDIO_AG_MODULE
+/// @nodoc
 abstract class bt_ag_call_handling_event_e {
   /// < Request to answer an incoming call
   static const int BT_AG_CALL_HANDLING_EVENT_ANSWER = 0;
@@ -10523,9 +14085,14 @@ abstract class bt_ag_call_handling_event_e {
   static const int BT_AG_CALL_HANDLING_EVENT_REJECT = 2;
 }
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_AUDIO_AG_MODULE
-/// @brief  Enumerations for the multi call handling event.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+/// Enumerations for the multi call handling event.
+///
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_AUDIO_AG_MODULE
+/// @nodoc
 abstract class bt_ag_multi_call_handling_event_e {
   /// < Request to release held calls
   static const int BT_AG_MULTI_CALL_HANDLING_EVENT_RELEASE_HELD_CALLS = 0;
@@ -10543,9 +14110,14 @@ abstract class bt_ag_multi_call_handling_event_e {
   static const int BT_AG_MULTI_CALL_HANDLING_EVENT_EXPLICIT_CALL_TRANSFER = 4;
 }
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_AVRCP_MODULE
-/// @brief  Enumerations for the equalizer state.
-/// @since_tizen @if WEARABLE 3.0 @else 2.4 @endif
+/// Enumerations for the equalizer state.
+///
+/// **Since Tizen:**
+/// - Wearable 3.0; Otherwise 2.4
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_AVRCP_MODULE
+/// @nodoc
 abstract class bt_avrcp_equalizer_state_e {
   /// < Equalizer Off
   static const int BT_AVRCP_EQUALIZER_STATE_OFF = 1;
@@ -10554,9 +14126,14 @@ abstract class bt_avrcp_equalizer_state_e {
   static const int BT_AVRCP_EQUALIZER_STATE_ON = 2;
 }
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_AVRCP_MODULE
-/// @brief  Enumerations for the repeat mode.
-/// @since_tizen @if WEARABLE 3.0 @else 2.4 @endif
+/// Enumerations for the repeat mode.
+///
+/// **Since Tizen:**
+/// - Wearable 3.0; Otherwise 2.4
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_AVRCP_MODULE
+/// @nodoc
 abstract class bt_avrcp_repeat_mode_e {
   /// < Repeat Off
   static const int BT_AVRCP_REPEAT_MODE_OFF = 1;
@@ -10571,9 +14148,14 @@ abstract class bt_avrcp_repeat_mode_e {
   static const int BT_AVRCP_REPEAT_MODE_GROUP = 4;
 }
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_AVRCP_MODULE
-/// @brief  Enumerations for the shuffle mode.
-/// @since_tizen @if WEARABLE 3.0 @else 2.4 @endif
+/// Enumerations for the shuffle mode.
+///
+/// **Since Tizen:**
+/// - Wearable 3.0; Otherwise 2.4
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_AVRCP_MODULE
+/// @nodoc
 abstract class bt_avrcp_shuffle_mode_e {
   /// < Shuffle Off
   static const int BT_AVRCP_SHUFFLE_MODE_OFF = 1;
@@ -10585,9 +14167,14 @@ abstract class bt_avrcp_shuffle_mode_e {
   static const int BT_AVRCP_SHUFFLE_MODE_GROUP = 3;
 }
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_AVRCP_MODULE
-/// @brief  Enumerations for the scan mode.
-/// @since_tizen @if WEARABLE 3.0 @else 2.4 @endif
+/// Enumerations for the scan mode.
+///
+/// **Since Tizen:**
+/// - Wearable 3.0; Otherwise 2.4
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_AVRCP_MODULE
+/// @nodoc
 abstract class bt_avrcp_scan_mode_e {
   /// < Scan Off
   static const int BT_AVRCP_SCAN_MODE_OFF = 1;
@@ -10599,9 +14186,14 @@ abstract class bt_avrcp_scan_mode_e {
   static const int BT_AVRCP_SCAN_MODE_GROUP = 3;
 }
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_AVRCP_MODULE
-/// @brief  Enumerations for the player state.
-/// @since_tizen 3.0
+/// Enumerations for the player state.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_AVRCP_MODULE
+/// @nodoc
 abstract class bt_avrcp_player_state_e {
   /// < Stopped
   static const int BT_AVRCP_PLAYER_STATE_STOPPED = 0;
@@ -10619,9 +14211,14 @@ abstract class bt_avrcp_player_state_e {
   static const int BT_AVRCP_PLAYER_STATE_REWIND_SEEK = 4;
 }
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_AVRCP_MODULE
-/// @brief  Enumeration for the player control commands.
-/// @since_tizen 3.0
+/// Enumeration for the player control commands.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_AVRCP_MODULE
+/// @nodoc
 abstract class bt_avrcp_player_command_e {
   /// < Play
   static const int BT_AVRCP_CONTROL_PLAY = 1;
@@ -10645,11 +14242,17 @@ abstract class bt_avrcp_player_command_e {
   static const int BT_AVRCP_CONTROL_REWIND = 7;
 }
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_AVRCP_MODULE
-/// @brief Structure of Track metadata information.
-/// @since_tizen 3.0
+/// Structure of Track metadata information.
 ///
-/// @see #bt_class_s
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **See also:**
+/// - `bt_class_s`
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_AVRCP_MODULE
+/// @nodoc
 final class bt_avrcp_metadata_attributes_info_s extends ffi.Struct {
   /// < Title
   external ffi.Pointer<ffi.Char> title;
@@ -10676,11 +14279,19 @@ final class bt_avrcp_metadata_attributes_info_s extends ffi.Struct {
   external int duration;
 }
 
-/// @deprecated Deprecated since 5.0.
-/// @ingroup CAPI_NETWORK_BLUETOOTH_HDP_MODULE
-/// @brief  Enumerations for the data channel type.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-/// @remarks Deprecated, because of no usecase and supported devices.
+/// **Deprecated:** Deprecated since 5.0.
+///
+/// Enumerations for the data channel type.
+///
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
+///
+/// **Remarks:**
+/// - Deprecated, because of no usecase and supported devices.
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_HDP_MODULE
+/// @nodoc
 abstract class bt_hdp_channel_type_e {
   /// < Reliable Data Channel
   static const int BT_HDP_CHANNEL_TYPE_RELIABLE = 1;
@@ -10689,9 +14300,14 @@ abstract class bt_hdp_channel_type_e {
   static const int BT_HDP_CHANNEL_TYPE_STREAMING = 2;
 }
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_MODULE
-/// @brief  Enumerations of the integer type for GATT handle's value.
-/// @since_tizen 2.3.1
+/// Enumerations of the integer type for GATT handle's value.
+///
+/// **Since Tizen:**
+/// - 2.3.1
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_GATT_MODULE
+/// @nodoc
 abstract class bt_data_type_int_e {
   /// < 8 bit signed int type
   static const int BT_DATA_TYPE_SINT8 = 0;
@@ -10712,9 +14328,14 @@ abstract class bt_data_type_int_e {
   static const int BT_DATA_TYPE_UINT32 = 5;
 }
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_MODULE
-/// @brief  Enumerations of the float type for GATT handle's value.
-/// @since_tizen 2.3.1
+/// Enumerations of the float type for GATT handle's value.
+///
+/// **Since Tizen:**
+/// - 2.3.1
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_GATT_MODULE
+/// @nodoc
 abstract class bt_data_type_float_e {
   /// < 32 bit float type
   static const int BT_DATA_TYPE_FLOAT = 0;
@@ -10723,9 +14344,14 @@ abstract class bt_data_type_float_e {
   static const int BT_DATA_TYPE_SFLOAT = 1;
 }
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_MODULE
-/// @brief  Enumerations of the write type.
-/// @since_tizen 2.3.1
+/// Enumerations of the write type.
+///
+/// **Since Tizen:**
+/// - 2.3.1
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_GATT_MODULE
+/// @nodoc
 abstract class bt_gatt_write_type_e {
   /// < Write without response type
   static const int BT_GATT_WRITE_TYPE_WRITE_NO_RESPONSE = 0;
@@ -10734,9 +14360,14 @@ abstract class bt_gatt_write_type_e {
   static const int BT_GATT_WRITE_TYPE_WRITE = 1;
 }
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_MODULE
-/// @brief  Enumerations of the GATT handle's type.
-/// @since_tizen 2.3.1
+/// Enumerations of the GATT handle's type.
+///
+/// **Since Tizen:**
+/// - 2.3.1
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_GATT_MODULE
+/// @nodoc
 abstract class bt_gatt_type_e {
   /// < GATT service type
   static const int BT_GATT_TYPE_SERVICE = 1;
@@ -10748,9 +14379,14 @@ abstract class bt_gatt_type_e {
   static const int BT_GATT_TYPE_DESCRIPTOR = 3;
 }
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_MODULE
-/// @brief  Enumerations of the service type.
-/// @since_tizen 2.3.1
+/// Enumerations of the service type.
+///
+/// **Since Tizen:**
+/// - 2.3.1
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_GATT_MODULE
+/// @nodoc
 abstract class bt_gatt_service_type_e {
   /// < GATT primary service type
   static const int BT_GATT_SERVICE_TYPE_PRIMARY = 1;
@@ -10759,9 +14395,14 @@ abstract class bt_gatt_service_type_e {
   static const int BT_GATT_SERVICE_TYPE_SECONDARY = 2;
 }
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_MODULE
-/// @brief  Enumerations of the characteristic's property.
-/// @since_tizen 2.3.1
+/// Enumerations of the characteristic's property.
+///
+/// **Since Tizen:**
+/// - 2.3.1
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_GATT_MODULE
+/// @nodoc
 abstract class bt_gatt_property_e {
   /// < Broadcast property
   static const int BT_GATT_PROPERTY_BROADCAST = 1;
@@ -10788,9 +14429,14 @@ abstract class bt_gatt_property_e {
   static const int BT_GATT_PROPERTY_EXTENDED_PROPERTIES = 128;
 }
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_CLIENT_MODULE
-/// @brief  Enumerations of gatt server's service changing mode.
-/// @since_tizen 3.0
+/// Enumerations of gatt server's service changing mode.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_GATT_CLIENT_MODULE
+/// @nodoc
 abstract class bt_gatt_client_service_change_type_e {
   /// < Service added
   static const int BT_GATT_CLIENT_SERVICE_ADDED = 0;
@@ -10802,9 +14448,14 @@ abstract class bt_gatt_client_service_change_type_e {
   static const int BT_GATT_CLIENT_SERVICE_RESYNC = 2;
 }
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_MODULE
-/// @brief  Enumerations of the attribute's permission.
-/// @since_tizen 3.0
+/// Enumerations of the attribute's permission.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_GATT_MODULE
+/// @nodoc
 abstract class bt_gatt_permission_e {
   /// < Readable permission
   static const int BT_GATT_PERMISSION_READ = 1;
@@ -10825,9 +14476,14 @@ abstract class bt_gatt_permission_e {
   static const int BT_GATT_PERMISSION_ENCRYPT_AUTHENTICATED_WRITE = 32;
 }
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_SERVER_MODULE
-/// @brief  Enumerations of the remote device request types for attributes.
-/// @since_tizen 3.0
+/// Enumerations of the remote device request types for attributes.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_GATT_SERVER_MODULE
+/// @nodoc
 abstract class bt_gatt_att_request_type_e {
   /// < Read Requested
   static const int BT_GATT_REQUEST_TYPE_READ = 0;
@@ -10836,18 +14492,30 @@ abstract class bt_gatt_att_request_type_e {
   static const int BT_GATT_REQUEST_TYPE_WRITE = 1;
 }
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_PAN_PANU_MODULE
-/// @brief  Enumerations for the types of PAN (Personal Area Networking) service.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+/// Enumerations for the types of PAN (Personal Area Networking) service.
+///
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_PAN_PANU_MODULE
+/// @nodoc
 abstract class bt_panu_service_type_e {
   /// < Network Access Point
   static const int BT_PANU_SERVICE_TYPE_NAP = 0;
 }
 
-/// @WEARABLE_ONLY
-/// @ingroup CAPI_NETWORK_BLUETOOTH_PBAP_MODULE
-/// @brief  Enumeration of address book location for PBAP.
-/// @since_tizen 3.0
+/// Enumeration of address book location for PBAP.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Platform restriction:**
+/// - Wearable only.
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_PBAP_MODULE
+/// @nodoc
 abstract class bt_pbap_address_book_source_e {
   /// < Request for Addressbook from remote device
   static const int BT_PBAP_SOURCE_DEVICE = 0;
@@ -10856,10 +14524,17 @@ abstract class bt_pbap_address_book_source_e {
   static const int BT_PBAP_SOURCE_SIM = 1;
 }
 
-/// @WEARABLE_ONLY
-/// @ingroup CAPI_NETWORK_BLUETOOTH_PBAP_MODULE
-/// @brief  Enumeration of folder type.
-/// @since_tizen 3.0
+/// Enumeration of folder type.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Platform restriction:**
+/// - Wearable only.
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_PBAP_MODULE
+/// @nodoc
 abstract class bt_pbap_folder_type_e {
   /// < Request for address book
   static const int BT_PBAP_FOLDER_PHONE_BOOK = 0;
@@ -10877,10 +14552,17 @@ abstract class bt_pbap_folder_type_e {
   static const int BT_PBAP_FOLDER_COMBINED = 4;
 }
 
-/// @WEARABLE_ONLY
-/// @ingroup CAPI_NETWORK_BLUETOOTH_PBAP_MODULE
-/// @brief  Enumeration of phone book search fields.
-/// @since_tizen 3.0
+/// Enumeration of phone book search fields.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Platform restriction:**
+/// - Wearable only.
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_PBAP_MODULE
+/// @nodoc
 abstract class bt_pbap_search_field_e {
   /// < Request for search by name (default)
   static const int BT_PBAP_SEARCH_NAME = 0;
@@ -10892,10 +14574,17 @@ abstract class bt_pbap_search_field_e {
   static const int BT_PBAP_SEARCH_SOUND = 2;
 }
 
-/// @WEARABLE_ONLY
-/// @ingroup CAPI_NETWORK_BLUETOOTH_PBAP_MODULE
-/// @brief  Enumeration of vCard Formats.
-/// @since_tizen 3.0
+/// Enumeration of vCard Formats.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Platform restriction:**
+/// - Wearable only.
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_PBAP_MODULE
+/// @nodoc
 abstract class bt_pbap_vcard_format_e {
   /// < vCard format 2.1 (default)
   static const int BT_PBAP_VCARD_FORMAT_VCARD21 = 0;
@@ -10904,10 +14593,17 @@ abstract class bt_pbap_vcard_format_e {
   static const int BT_PBAP_VCARD_FORMAT_VCARD30 = 1;
 }
 
-/// @WEARABLE_ONLY
-/// @ingroup CAPI_NETWORK_BLUETOOTH_PBAP_MODULE
-/// @brief  Enumeration of sorting orders.
-/// @since_tizen 3.0
+/// Enumeration of sorting orders.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Platform restriction:**
+/// - Wearable only.
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_PBAP_MODULE
+/// @nodoc
 abstract class bt_pbap_sort_order_e {
   /// < Filter order indexed (default)
   static const int BT_PBAP_ORDER_INDEXED = 0;
@@ -10919,14 +14615,20 @@ abstract class bt_pbap_sort_order_e {
   static const int BT_PBAP_ORDER_PHONETIC = 2;
 }
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
-/// @brief Class structure of device and service.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+/// Class structure of device and service.
 ///
-/// @see #bt_device_info_s
-/// @see #bt_adapter_device_discovery_info_s
-/// @see bt_device_bond_created_cb()
-/// @see bt_adapter_device_discovery_state_changed_cb()
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
+///
+/// **See also:**
+/// - `bt_device_info_s`
+/// - `bt_adapter_device_discovery_info_s`
+/// - `bt_device_bond_created_cb()`
+/// - `bt_adapter_device_discovery_state_changed_cb()`
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
+/// @nodoc
 final class bt_class_s extends ffi.Struct {
   /// < Major device class.
   @ffi.Int32()
@@ -10942,12 +14644,18 @@ final class bt_class_s extends ffi.Struct {
   external int major_service_class_mask;
 }
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_MODULE
-/// @brief Structure of device discovery information.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+/// Structure of device discovery information.
 ///
-/// @see #bt_class_s
-/// @see bt_adapter_device_discovery_state_changed_cb()
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
+///
+/// **See also:**
+/// - `bt_class_s`
+/// - `bt_adapter_device_discovery_state_changed_cb()`
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_ADAPTER_MODULE
+/// @nodoc
 final class bt_adapter_device_discovery_info_s extends ffi.Struct {
   /// < The address of remote device
   external ffi.Pointer<ffi.Char> remote_address;
@@ -10985,11 +14693,17 @@ final class bt_adapter_device_discovery_info_s extends ffi.Struct {
   external ffi.Pointer<ffi.Char> manufacturer_data;
 }
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
-/// @brief Structure of le scan result information.
-/// @since_tizen 2.3.1
+/// Structure of le scan result information.
 ///
-/// @see bt_adapter_le_start_scan()
+/// **Since Tizen:**
+/// - 2.3.1
+///
+/// **See also:**
+/// - `bt_adapter_le_start_scan()`
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
+/// @nodoc
 final class bt_adapter_le_device_scan_result_info_s extends ffi.Struct {
   /// < The address of remote device
   external ffi.Pointer<ffi.Char> remote_address;
@@ -11017,11 +14731,17 @@ final class bt_adapter_le_device_scan_result_info_s extends ffi.Struct {
   external ffi.Pointer<ffi.Char> scan_data;
 }
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
-/// @brief The structure for LE iBeacon scan result information.
-/// @since_tizen 4.0
+/// The structure for LE iBeacon scan result information.
 ///
-/// @see bt_adapter_le_start_scan()
+/// **Since Tizen:**
+/// - 4.0
+///
+/// **See also:**
+/// - `bt_adapter_le_start_scan()`
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
+/// @nodoc
 final class bt_adapter_le_ibeacon_scan_result_info_s extends ffi.Struct {
   /// < Company ID
   @ffi.Int()
@@ -11047,11 +14767,17 @@ final class bt_adapter_le_ibeacon_scan_result_info_s extends ffi.Struct {
   external int measured_power;
 }
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
-/// @brief LE service data structure.
-/// @since_tizen 2.3.1
+/// LE service data structure.
 ///
-/// @see bt_adapter_le_get_scan_result_service_data()
+/// **Since Tizen:**
+/// - 2.3.1
+///
+/// **See also:**
+/// - `bt_adapter_le_get_scan_result_service_data()`
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
+/// @nodoc
 final class bt_adapter_le_service_data_s extends ffi.Struct {
   /// < 16 bit UUID of the service data
   external ffi.Pointer<ffi.Char> service_uuid;
@@ -11064,12 +14790,18 @@ final class bt_adapter_le_service_data_s extends ffi.Struct {
   external int service_data_len;
 }
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
-/// @brief Device information structure used for identifying pear device.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+/// Device information structure used for identifying pear device.
 ///
-/// @see #bt_class_s
-/// @see bt_device_bond_created_cb()
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
+///
+/// **See also:**
+/// - `bt_class_s`
+/// - `bt_device_bond_created_cb()`
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
+/// @nodoc
 final class bt_device_info_s extends ffi.Struct {
   /// < The address of remote device
   external ffi.Pointer<ffi.Char> remote_address;
@@ -11107,14 +14839,19 @@ final class bt_device_info_s extends ffi.Struct {
   external ffi.Pointer<ffi.Char> manufacturer_data;
 }
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
-/// @brief Service Discovery Protocol (SDP) data structure.
+/// Service Discovery Protocol (SDP) data structure.
 ///
-/// @details This protocol is used for discovering available services or pear device,
-/// and finding one to connect with.
+/// This protocol is used for discovering available services or pear device, and finding one to connect with.
 ///
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-/// @see bt_device_service_searched_cb()
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
+///
+/// **See also:**
+/// - `bt_device_service_searched_cb()`
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
+/// @nodoc
 final class bt_device_sdp_info_s extends ffi.Struct {
   /// < The address of remote device
   external ffi.Pointer<ffi.Char> remote_address;
@@ -11127,11 +14864,17 @@ final class bt_device_sdp_info_s extends ffi.Struct {
   external int service_count;
 }
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
-/// @brief Device connection information structure.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+/// Device connection information structure.
 ///
-/// @see bt_device_connection_state_changed_cb()
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
+///
+/// **See also:**
+/// - `bt_device_connection_state_changed_cb()`
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
+/// @nodoc
 final class bt_device_connection_info_s extends ffi.Struct {
   /// < The address of remote device
   external ffi.Pointer<ffi.Char> remote_address;
@@ -11145,11 +14888,17 @@ final class bt_device_connection_info_s extends ffi.Struct {
   external int disconn_reason;
 }
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_SOCKET_MODULE
-/// @brief Rfcomm connection data used for exchanging data between Bluetooth devices.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+/// Rfcomm connection data used for exchanging data between Bluetooth devices.
 ///
-/// @see bt_socket_connection_state_changed_cb()
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
+///
+/// **See also:**
+/// - `bt_socket_connection_state_changed_cb()`
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_SOCKET_MODULE
+/// @nodoc
 final class bt_socket_connection_s extends ffi.Struct {
   /// < The file descriptor of connected socket
   @ffi.Int()
@@ -11170,14 +14919,21 @@ final class bt_socket_connection_s extends ffi.Struct {
   external ffi.Pointer<ffi.Char> service_uuid;
 }
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_SOCKET_MODULE
-/// @brief Structure of RFCOMM received data.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+/// Structure of RFCOMM received data.
 ///
-/// @remarks User can use standard linux functions for reading/writing \n
-/// data from/to sockets.
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
 ///
-/// @see bt_socket_data_received_cb()
+/// **Remarks:**
+/// - User can use standard linux functions for reading/writing
+/// - data from/to sockets.
+///
+/// **See also:**
+/// - `bt_socket_data_received_cb()`
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_SOCKET_MODULE
+/// @nodoc
 final class bt_socket_received_data_s extends ffi.Struct {
   /// < The socket fd
   @ffi.Int()
@@ -11191,11 +14947,17 @@ final class bt_socket_received_data_s extends ffi.Struct {
   external ffi.Pointer<ffi.Char> data;
 }
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_CLIENT_MODULE
-/// @brief Attribute protocol MTU change information structure.
-/// @since_tizen 4.0
+/// Attribute protocol MTU change information structure.
 ///
-/// @see bt_gatt_client_att_mtu_changed_cb()
+/// **Since Tizen:**
+/// - 4.0
+///
+/// **See also:**
+/// - `bt_gatt_client_att_mtu_changed_cb()`
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_GATT_CLIENT_MODULE
+/// @nodoc
 final class bt_gatt_client_att_mtu_info_s extends ffi.Struct {
   /// < The address of remote device
   external ffi.Pointer<ffi.Char> remote_address;
@@ -11209,9 +14971,14 @@ final class bt_gatt_client_att_mtu_info_s extends ffi.Struct {
   external int status;
 }
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_HID_DEVICE_MODULE
-/// @brief Enumerations of the Bluetooth HID mouse's button.
-/// @since_tizen @if WEARABLE 3.0 @endif
+/// Enumerations of the Bluetooth HID mouse's button.
+///
+/// **Since Tizen:**
+/// - Wearable 3.0
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_HID_DEVICE_MODULE
+/// @nodoc
 abstract class bt_hid_mouse_button_e {
   /// <The mouse's none value
   static const int BT_HID_MOUSE_BUTTON_NONE = 0;
@@ -11226,11 +14993,17 @@ abstract class bt_hid_mouse_button_e {
   static const int BT_HID_MOUSE_BUTTON_MIDDLE = 4;
 }
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_HID_DEVICE_MODULE
-/// @brief The structure type containing the HID mouse event information.
-/// @since_tizen @if WEARABLE 3.0 @endif
+/// The structure type containing the HID mouse event information.
 ///
-/// @see bt_hid_device_send_mouse_event()
+/// **Since Tizen:**
+/// - Wearable 3.0
+///
+/// **See also:**
+/// - `bt_hid_device_send_mouse_event()`
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_HID_DEVICE_MODULE
+/// @nodoc
 final class bt_hid_mouse_data_s extends ffi.Struct {
   /// < The button values, we can combine key's values when we pressed multiple mouse buttons
   @ffi.Int()
@@ -11249,12 +15022,19 @@ final class bt_hid_mouse_data_s extends ffi.Struct {
   external int padding;
 }
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_HID_DEVICE_MODULE
-/// @brief The structure type containing the HID keyboard event information.
-/// @details If you want to know more detail values, refer to http://www.usb.org/developers/hidpage/ and see "HID Usage Tables"
-/// @since_tizen @if WEARABLE 3.0 @endif
+/// The structure type containing the HID keyboard event information.
 ///
-/// @see bt_hid_device_send_key_event()
+/// If you want to know more detail values, refer to http://www.usb.org/developers/hidpage/ and see "HID Usage Tables"
+///
+/// **Since Tizen:**
+/// - Wearable 3.0
+///
+/// **See also:**
+/// - `bt_hid_device_send_key_event()`
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_HID_DEVICE_MODULE
+/// @nodoc
 final class bt_hid_key_data_s extends ffi.Struct {
   /// < The modifier keys : such as shift, alt
   @ffi.UnsignedChar()
@@ -11265,9 +15045,14 @@ final class bt_hid_key_data_s extends ffi.Struct {
   external ffi.Array<ffi.UnsignedChar> key;
 }
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_HID_DEVICE_MODULE
-/// @brief Enumerations of the Bluetooth HID header type.
-/// @since_tizen @if WEARABLE 3.0 @endif
+/// Enumerations of the Bluetooth HID header type.
+///
+/// **Since Tizen:**
+/// - Wearable 3.0
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_HID_DEVICE_MODULE
+/// @nodoc
 abstract class bt_hid_header_type_e {
   /// < The Bluetooth HID header type: Handshake
   static const int BT_HID_HEADER_HANDSHAKE = 0;
@@ -11294,9 +15079,14 @@ abstract class bt_hid_header_type_e {
   static const int BT_HID_HEADER_UNKNOWN = 7;
 }
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_HID_DEVICE_MODULE
-/// @brief Enumerations of the Bluetooth HID parameter type.
-/// @since_tizen @if WEARABLE 3.0 @endif
+/// Enumerations of the Bluetooth HID parameter type.
+///
+/// **Since Tizen:**
+/// - Wearable 3.0
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_HID_DEVICE_MODULE
+/// @nodoc
 abstract class bt_hid_param_type_e {
   /// < Parameter type: Input
   static const int BT_HID_PARAM_DATA_RTYPE_INPUT = 0;
@@ -11305,9 +15095,14 @@ abstract class bt_hid_param_type_e {
   static const int BT_HID_PARAM_DATA_RTYPE_OUTPUT = 1;
 }
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_HID_DEVICE_MODULE
-/// @brief Enumerations of the Bluetooth HID handshake type.
-/// @since_tizen @if WEARABLE 3.0 @endif
+/// Enumerations of the Bluetooth HID handshake type.
+///
+/// **Since Tizen:**
+/// - Wearable 3.0
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_HID_DEVICE_MODULE
+/// @nodoc
 abstract class bt_hid_handshake_type_e {
   /// < Handshake error code none
   static const int BT_HID_HANDSHAKE_SUCCESSFUL = 0;
@@ -11331,9 +15126,14 @@ abstract class bt_hid_handshake_type_e {
   static const int BT_HID_HANDSHAKE_ERR_FATAL = 15;
 }
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_HID_DEVICE_MODULE
-/// @brief The structure type containing data received from the HID Host.
-/// @since_tizen @if WEARABLE 3.0 @endif
+/// The structure type containing data received from the HID Host.
+///
+/// **Since Tizen:**
+/// - Wearable 3.0
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_HID_DEVICE_MODULE
+/// @nodoc
 final class bt_hid_device_received_data_s extends ffi.Struct {
   /// < The remote device's address
   external ffi.Pointer<ffi.Char> address;
@@ -11354,12 +15154,20 @@ final class bt_hid_device_received_data_s extends ffi.Struct {
   external ffi.Pointer<ffi.Char> data;
 }
 
-/// @WEARABLE_ONLY
-/// @ingroup CAPI_NETWORK_BLUETOOTH_PBAP_MODULE
-/// @brief The structure type containing vCard information.
-/// @since_tizen 3.0
+/// The structure type containing vCard information.
 ///
-/// @see bt_pbap_client_pull_vcard()
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **See also:**
+/// - `bt_pbap_client_pull_vcard()`
+///
+/// **Platform restriction:**
+/// - Wearable only.
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_PBAP_MODULE
+/// @nodoc
 final class bt_pbap_vcard_info_s extends ffi.Struct {
   /// < The vcard index, used as a parameter for bt_pbap_client_pull_vcard()
   @ffi.Int()
@@ -11369,10 +15177,17 @@ final class bt_pbap_vcard_info_s extends ffi.Struct {
   external ffi.Pointer<ffi.Char> contact_name;
 }
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
-/// @brief Enumeration for the scan filter type.
-/// @since_tizen 4.0
-/// @see bt_adapter_le_scan_filter_set_type()
+/// Enumeration for the scan filter type.
+///
+/// **Since Tizen:**
+/// - 4.0
+///
+/// **See also:**
+/// - `bt_adapter_le_scan_filter_set_type()`
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
+/// @nodoc
 abstract class bt_adapter_le_scan_filter_type_e {
   /// < iBeacon filter type
   static const int BT_ADAPTER_LE_SCAN_FILTER_TYPE_IBEACON = 0;
@@ -11381,124 +15196,190 @@ abstract class bt_adapter_le_scan_filter_type_e {
   static const int BT_ADAPTER_LE_SCAN_FILTER_TYPE_PROXIMITY_UUID = 1;
 }
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_MODULE
-/// @brief  Called when you get bonded devices repeatedly.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+/// Called when you get bonded devices repeatedly.
 ///
-/// @param[in] device_info The bonded device information
-/// @param[in] user_data The user data passed from the foreach function
-/// @return @c true to continue with the next iteration of the loop,
-/// \n @c false to break out of the loop.
-/// @pre bt_adapter_foreach_bonded_device() will invoke this function.
+/// `false` to break out of the loop.
 ///
-/// @see bt_adapter_foreach_bonded_device()
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
+///
+/// **Parameters:**
+/// - `device_info` (in): The bonded device information
+/// - `user_data` (in): The user data passed from the foreach function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop,
+///
+/// **Preconditions:**
+/// - bt_adapter_foreach_bonded_device() will invoke this function.
+///
+/// **See also:**
+/// - `bt_adapter_foreach_bonded_device()`
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_ADAPTER_MODULE
+/// @nodoc
 typedef bt_adapter_bonded_device_cb
     = ffi.Pointer<ffi.NativeFunction<bt_adapter_bonded_device_cbFunction>>;
+/// @nodoc
 typedef bt_adapter_bonded_device_cbFunction = ffi.Bool Function(
     ffi.Pointer<bt_device_info_s> device_info, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartbt_adapter_bonded_device_cbFunction = bool Function(
     ffi.Pointer<bt_device_info_s> device_info, ffi.Pointer<ffi.Void> user_data);
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_MODULE
-/// @brief  Called when the Bluetooth adapter state changes.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+/// Called when the Bluetooth adapter state changes.
 ///
-/// @param[in]   result  The result of the adapter state changing
-/// @param[in]   adapter_state  The adapter state to be changed
-/// @param[in]   user_data  The user data passed from the callback registration function
-/// @see bt_adapter_set_state_changed_cb()
-/// @see bt_adapter_unset_state_changed_cb()
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
+///
+/// **Parameters:**
+/// - `result` (in): The result of the adapter state changing
+/// - `adapter_state` (in): The adapter state to be changed
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `bt_adapter_set_state_changed_cb()`
+/// - `bt_adapter_unset_state_changed_cb()`
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_ADAPTER_MODULE
+/// @nodoc
 typedef bt_adapter_state_changed_cb
     = ffi.Pointer<ffi.NativeFunction<bt_adapter_state_changed_cbFunction>>;
+/// @nodoc
 typedef bt_adapter_state_changed_cbFunction = ffi.Void Function(
     ffi.Int result, ffi.Int32 adapter_state, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartbt_adapter_state_changed_cbFunction = void Function(
     int result, int adapter_state, ffi.Pointer<ffi.Void> user_data);
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_MODULE
-/// @brief  Called when adapter name changes.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+/// Called when adapter name changes.
 ///
-/// @param[in]   device_name	The name of the Bluetooth device to be changed
-/// @param[in]   user_data	The user data passed from the callback registration function
-/// @pre This function will be invoked when the name of Bluetooth adapter changes
-/// if you register this callback using bt_adapter_set_name_changed_cb().
-/// @see bt_adapter_set_name()
-/// @see bt_adapter_set_name_changed_cb()
-/// @see bt_adapter_unset_name_changed_cb()
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
+///
+/// **Parameters:**
+/// - `device_name` (in): The name of the Bluetooth device to be changed
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - This function will be invoked when the name of Bluetooth adapter changes if you register this callback using bt_adapter_set_name_changed_cb().
+///
+/// **See also:**
+/// - `bt_adapter_set_name()`
+/// - `bt_adapter_set_name_changed_cb()`
+/// - `bt_adapter_unset_name_changed_cb()`
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_ADAPTER_MODULE
+/// @nodoc
 typedef bt_adapter_name_changed_cb
     = ffi.Pointer<ffi.NativeFunction<bt_adapter_name_changed_cbFunction>>;
+/// @nodoc
 typedef bt_adapter_name_changed_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> device_name, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartbt_adapter_name_changed_cbFunction = void Function(
     ffi.Pointer<ffi.Char> device_name, ffi.Pointer<ffi.Void> user_data);
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_MODULE
-/// @brief  Called when the visibility mode changes.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+/// Called when the visibility mode changes.
 ///
-/// @param[in] result The result of the visibility mode changing
-/// @param[in] visibility_mode The visibility mode to be changed
-/// @param[in] user_data The user data passed from the callback registration function
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
 ///
-/// @pre This function will be invoked when the visibility of Bluetooth adapter changes
-/// if you register this callback using bt_adapter_set_visibility_mode_changed_cb().
+/// **Parameters:**
+/// - `result` (in): The result of the visibility mode changing
+/// - `visibility_mode` (in): The visibility mode to be changed
+/// - `user_data` (in): The user data passed from the callback registration function
 ///
-/// @see bt_adapter_set_visibility_mode_changed_cb()
-/// @see bt_adapter_unset_visibility_mode_changed_cb()
+/// **Preconditions:**
+/// - This function will be invoked when the visibility of Bluetooth adapter changes if you register this callback using bt_adapter_set_visibility_mode_changed_cb().
+///
+/// **See also:**
+/// - `bt_adapter_set_visibility_mode_changed_cb()`
+/// - `bt_adapter_unset_visibility_mode_changed_cb()`
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_ADAPTER_MODULE
+/// @nodoc
 typedef bt_adapter_visibility_mode_changed_cb = ffi
     .Pointer<ffi.NativeFunction<bt_adapter_visibility_mode_changed_cbFunction>>;
+/// @nodoc
 typedef bt_adapter_visibility_mode_changed_cbFunction = ffi.Void Function(
     ffi.Int result, ffi.Int32 visibility_mode, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartbt_adapter_visibility_mode_changed_cbFunction = void Function(
     int result, int visibility_mode, ffi.Pointer<ffi.Void> user_data);
 
-/// @ingroup  CAPI_NETWORK_BLUETOOTH_ADAPTER_MODULE
-/// @brief  Called every second until the visibility mode is changed to #BT_ADAPTER_VISIBILITY_MODE_NON_DISCOVERABLE.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+/// Called every second until the visibility mode is changed to `BT_ADAPTER_VISIBILITY_MODE_NON_DISCOVERABLE`.
 ///
-/// @remarks  This callback function is called only if visibility mode is #BT_ADAPTER_VISIBILITY_MODE_LIMITED_DISCOVERABLE.
-/// @param[in]  duration  The duration until the visibility mode is changed to #BT_ADAPTER_VISIBILITY_MODE_NON_DISCOVERABLE (in seconds)
-/// @param[in]  user_data  The user data passed from the callback registration function
-/// @pre  This function will be invoked if you register this callback using bt_adapter_set_visibility_duration_changed_cb().
-/// @see  bt_adapter_set_visibility_duration_changed_cb()
-/// @see  bt_adapter_unset_visibility_duration_changed_cb()
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
+///
+/// **Remarks:**
+/// - This callback function is called only if visibility mode is `BT_ADAPTER_VISIBILITY_MODE_LIMITED_DISCOVERABLE`.
+///
+/// **Parameters:**
+/// - `duration` (in): The duration until the visibility mode is changed to `BT_ADAPTER_VISIBILITY_MODE_NON_DISCOVERABLE` (in seconds)
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - This function will be invoked if you register this callback using bt_adapter_set_visibility_duration_changed_cb().
+///
+/// **See also:**
+/// - `bt_adapter_set_visibility_duration_changed_cb()`
+/// - `bt_adapter_unset_visibility_duration_changed_cb()`
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_ADAPTER_MODULE
+/// @nodoc
 typedef bt_adapter_visibility_duration_changed_cb = ffi.Pointer<
     ffi.NativeFunction<bt_adapter_visibility_duration_changed_cbFunction>>;
+/// @nodoc
 typedef bt_adapter_visibility_duration_changed_cbFunction = ffi.Void Function(
     ffi.Int duration, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartbt_adapter_visibility_duration_changed_cbFunction = void Function(
     int duration, ffi.Pointer<ffi.Void> user_data);
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_MODULE
-/// @brief  Called when the state of device discovery changes.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+/// Called when the state of device discovery changes.
 ///
-/// @remarks If \a discovery_state is #BT_ADAPTER_DEVICE_DISCOVERY_FOUND, \n
-/// then you can get some information, such as remote device address, remote device name, rssi, and bonding state.
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
 ///
-/// @param[in] result The result of the device discovery
-/// @param[in] discovery_state The discovery state to be changed
-/// @param[in] discovery_info The information of the discovered device \n
-/// If \a discovery_state is #BT_ADAPTER_DEVICE_DISCOVERY_STARTED or
-/// #BT_ADAPTER_DEVICE_DISCOVERY_FINISHED, then \a discovery_info is NULL.
-/// @param[in] user_data The user data passed from the callback registration function
+/// **Remarks:**
+/// - If `discovery_state` is `BT_ADAPTER_DEVICE_DISCOVERY_FOUND`,
+/// - then you can get some information, such as remote device address, remote device name, rssi, and bonding state.
 ///
-/// @pre Either bt_adapter_start_device_discovery() or bt_adapter_stop_device_discovery() will invoke this function
-/// if you register this callback using bt_adapter_set_device_discovery_state_changed_cb().
+/// **Parameters:**
+/// - `result` (in): The result of the device discovery
+/// - `discovery_state` (in): The discovery state to be changed
+/// - `discovery_info` (in): The information of the discovered device If `discovery_state` is `BT_ADAPTER_DEVICE_DISCOVERY_STARTED` or `BT_ADAPTER_DEVICE_DISCOVERY_FINISHED`, then `discovery_info` is NULL.
+/// - `user_data` (in): The user data passed from the callback registration function
 ///
-/// @see bt_adapter_start_device_discovery()
-/// @see bt_adapter_stop_device_discovery()
-/// @see bt_adapter_set_device_discovery_state_changed_cb()
-/// @see bt_adapter_unset_device_discovery_state_changed_cb()
+/// **Preconditions:**
+/// - Either bt_adapter_start_device_discovery() or bt_adapter_stop_device_discovery() will invoke this function if you register this callback using bt_adapter_set_device_discovery_state_changed_cb().
+///
+/// **See also:**
+/// - `bt_adapter_start_device_discovery()`
+/// - `bt_adapter_stop_device_discovery()`
+/// - `bt_adapter_set_device_discovery_state_changed_cb()`
+/// - `bt_adapter_unset_device_discovery_state_changed_cb()`
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_ADAPTER_MODULE
+/// @nodoc
 typedef bt_adapter_device_discovery_state_changed_cb = ffi.Pointer<
     ffi.NativeFunction<bt_adapter_device_discovery_state_changed_cbFunction>>;
+/// @nodoc
 typedef bt_adapter_device_discovery_state_changed_cbFunction
     = ffi.Void Function(
         ffi.Int result,
         ffi.Int32 discovery_state,
         ffi.Pointer<bt_adapter_device_discovery_info_s> discovery_info,
         ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartbt_adapter_device_discovery_state_changed_cbFunction
     = void Function(
         int result,
@@ -11506,64 +15387,100 @@ typedef Dartbt_adapter_device_discovery_state_changed_cbFunction
         ffi.Pointer<bt_adapter_device_discovery_info_s> discovery_info,
         ffi.Pointer<ffi.Void> user_data);
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
-/// @brief  Called when the LE advertisement has been found.
-/// @since_tizen 2.3.1
+/// Called when the LE advertisement has been found.
 ///
-/// @param[in] result The result of the LE scan
-/// @param[in] info The information of the found LE advertisement.
-/// @param[in] user_data The user data passed from the start function
+/// **Since Tizen:**
+/// - 2.3.1
 ///
-/// @see bt_adapter_le_start_scan()
+/// **Parameters:**
+/// - `result` (in): The result of the LE scan
+/// - `info` (in): The information of the found LE advertisement.
+/// - `user_data` (in): The user data passed from the start function
+///
+/// **See also:**
+/// - `bt_adapter_le_start_scan()`
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
+/// @nodoc
 typedef bt_adapter_le_scan_result_cb
     = ffi.Pointer<ffi.NativeFunction<bt_adapter_le_scan_result_cbFunction>>;
+/// @nodoc
 typedef bt_adapter_le_scan_result_cbFunction = ffi.Void Function(
     ffi.Int result,
     ffi.Pointer<bt_adapter_le_device_scan_result_info_s> info,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartbt_adapter_le_scan_result_cbFunction = void Function(
     int result,
     ffi.Pointer<bt_adapter_le_device_scan_result_info_s> info,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
-/// @brief The handle to control Bluetooth LE advertising.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+/// The handle to control Bluetooth LE advertising.
+///
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
+/// @nodoc
 typedef bt_advertiser_h = ffi.Pointer<ffi.Void>;
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_IPSP_MODULE
-/// @brief Called when the IPSP initialization state changes.
-/// @since_tizen 4.0
-/// @param[in] result The result of the initialization or deinitialization request
-/// @param[in] ipsp_initialized The initialized state: (@c true = initialized, @c false = deinitialized)
-/// @param[in] user_data The user data passed from the initialization request function
-/// @see bt_ipsp_initialize()
-/// @see bt_ipsp_deinitialize()
+/// Called when the IPSP initialization state changes.
+///
+/// **Since Tizen:**
+/// - 4.0
+///
+/// **Parameters:**
+/// - `result` (in): The result of the initialization or deinitialization request
+/// - `ipsp_initialized` (in): The initialized state: (`true` = initialized, `false` = deinitialized)
+/// - `user_data` (in): The user data passed from the initialization request function
+///
+/// **See also:**
+/// - `bt_ipsp_initialize()`
+/// - `bt_ipsp_deinitialize()`
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_IPSP_MODULE
+/// @nodoc
 typedef bt_ipsp_init_state_changed_cb
     = ffi.Pointer<ffi.NativeFunction<bt_ipsp_init_state_changed_cbFunction>>;
+/// @nodoc
 typedef bt_ipsp_init_state_changed_cbFunction = ffi.Void Function(
     ffi.Int result, ffi.Bool ipsp_initialized, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartbt_ipsp_init_state_changed_cbFunction = void Function(
     int result, bool ipsp_initialized, ffi.Pointer<ffi.Void> user_data);
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_IPSP_MODULE
-/// @brief Called when the IPSP connection state changes.
-/// @since_tizen 4.0
-/// @param[in] result The result of the connection or disconnection request
-/// @param[in] connected The connection status: (@c true = connected, @c false = disconnected)
-/// @param[in] remote_address  Address of remote device
-/// @param[in] iface_name The network interface name for IPv6 network interface
-/// @param[in] user_data The user data passed from the callback registration function
-/// @see bt_ipsp_connect()
-/// @see bt_ipsp_disconnect()
+/// Called when the IPSP connection state changes.
+///
+/// **Since Tizen:**
+/// - 4.0
+///
+/// **Parameters:**
+/// - `result` (in): The result of the connection or disconnection request
+/// - `connected` (in): The connection status: (`true` = connected, `false` = disconnected)
+/// - `remote_address` (in): Address of remote device
+/// - `iface_name` (in): The network interface name for IPv6 network interface
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `bt_ipsp_connect()`
+/// - `bt_ipsp_disconnect()`
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_IPSP_MODULE
+/// @nodoc
 typedef bt_ipsp_connection_state_changed_cb = ffi
     .Pointer<ffi.NativeFunction<bt_ipsp_connection_state_changed_cbFunction>>;
+/// @nodoc
 typedef bt_ipsp_connection_state_changed_cbFunction = ffi.Void Function(
     ffi.Int result,
     ffi.Bool connected,
     ffi.Pointer<ffi.Char> remote_address,
     ffi.Pointer<ffi.Char> iface_name,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartbt_ipsp_connection_state_changed_cbFunction = void Function(
     int result,
     bool connected,
@@ -11571,440 +15488,646 @@ typedef Dartbt_ipsp_connection_state_changed_cbFunction = void Function(
     ffi.Pointer<ffi.Char> iface_name,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
-/// @brief  Called when the state of advertiser changes.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+/// Called when the state of advertiser changes.
 ///
-/// @param[out] result The result of the requested state change of advertiser
-/// @param[out] advertiser The handle of the state changed advertiser
-/// @param[out] adv_state The advertiser state to be changed
-/// @param[out] user_data The user data passed from the start function
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
 ///
-/// @see bt_adapter_le_start_advertising_new()
-/// @see bt_adapter_le_stop_advertising()
+/// **Parameters:**
+/// - `result` (out): The result of the requested state change of advertiser
+/// - `advertiser` (out): The handle of the state changed advertiser
+/// - `adv_state` (out): The advertiser state to be changed
+/// - `user_data` (out): The user data passed from the start function
+///
+/// **See also:**
+/// - `bt_adapter_le_start_advertising_new()`
+/// - `bt_adapter_le_stop_advertising()`
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
+/// @nodoc
 typedef bt_adapter_le_advertising_state_changed_cb = ffi.Pointer<
     ffi.NativeFunction<bt_adapter_le_advertising_state_changed_cbFunction>>;
+/// @nodoc
 typedef bt_adapter_le_advertising_state_changed_cbFunction = ffi.Void Function(
     ffi.Int result,
     bt_advertiser_h advertiser,
     ffi.Int32 adv_state,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartbt_adapter_le_advertising_state_changed_cbFunction = void Function(
     int result,
     bt_advertiser_h advertiser,
     int adv_state,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
-/// @brief  Called when you get connected profiles repeatedly.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+/// Called when you get connected profiles repeatedly.
 ///
-/// @param[in] profile The connected Bluetooth profile
-/// @param[in] user_data The user data passed from the foreach function
-/// @return @c true to continue with the next iteration of the loop,
-/// \n @c false to break out of the loop.
-/// @pre bt_device_foreach_connected_profiles() will invoke this function.
-/// @see bt_device_foreach_connected_profiles()
+/// `false` to break out of the loop.
+///
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
+///
+/// **Parameters:**
+/// - `profile` (in): The connected Bluetooth profile
+/// - `user_data` (in): The user data passed from the foreach function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop,
+///
+/// **Preconditions:**
+/// - bt_device_foreach_connected_profiles() will invoke this function.
+///
+/// **See also:**
+/// - `bt_device_foreach_connected_profiles()`
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
+/// @nodoc
 typedef bt_device_connected_profile
     = ffi.Pointer<ffi.NativeFunction<bt_device_connected_profileFunction>>;
+/// @nodoc
 typedef bt_device_connected_profileFunction = ffi.Bool Function(
     ffi.Int32 profile, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartbt_device_connected_profileFunction = bool Function(
     int profile, ffi.Pointer<ffi.Void> user_data);
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
-/// @brief Called when the process of creating bond finishes.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+/// Called when the process of creating bond finishes.
 ///
-/// @remarks If the remote user does not respond within 60 seconds, a time out will happen with #BT_ERROR_TIMED_OUT result code. \n
-/// If bt_device_cancel_bonding() is called and it returns #BT_ERROR_NONE, then this callback function will be called \n
-/// with #BT_ERROR_CANCELLED result. \n
-/// If creating a bond succeeds but service search fails, then this callback will be called with #BT_ERROR_SERVICE_SEARCH_FAILED. \n
-/// In this case, you should try service search again by bt_device_start_service_search() to get the supported service list.
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
 ///
-/// @param[in] result The result of the bonding device
-/// @param[in] device_info The device information which you creates bond with
-/// @param[in] user_data The user data passed from the callback registration function
+/// **Remarks:**
+/// - If the remote user does not respond within 60 seconds, a time out will happen with `BT_ERROR_TIMED_OUT` result code.
+/// - If bt_device_cancel_bonding() is called and it returns `BT_ERROR_NONE`, then this callback function will be called
+/// - with `BT_ERROR_CANCELLED` result.
+/// - If creating a bond succeeds but service search fails, then this callback will be called with `BT_ERROR_SERVICE_SEARCH_FAILED`.
+/// - In this case, you should try service search again by bt_device_start_service_search() to get the supported service list.
 ///
-/// @pre Either bt_device_create_bond() will invoke this function
-/// if you register this callback using bt_device_set_bond_created_cb().
+/// **Parameters:**
+/// - `result` (in): The result of the bonding device
+/// - `device_info` (in): The device information which you creates bond with
+/// - `user_data` (in): The user data passed from the callback registration function
 ///
-/// @see bt_device_create_bond()
-/// @see bt_device_cancel_bonding()
-/// @see bt_device_set_bond_created_cb()
-/// @see bt_device_unset_bond_created_cb()
+/// **Preconditions:**
+/// - Either bt_device_create_bond() will invoke this function if you register this callback using bt_device_set_bond_created_cb().
+///
+/// **See also:**
+/// - `bt_device_create_bond()`
+/// - `bt_device_cancel_bonding()`
+/// - `bt_device_set_bond_created_cb()`
+/// - `bt_device_unset_bond_created_cb()`
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
+/// @nodoc
 typedef bt_device_bond_created_cb
     = ffi.Pointer<ffi.NativeFunction<bt_device_bond_created_cbFunction>>;
+/// @nodoc
 typedef bt_device_bond_created_cbFunction = ffi.Void Function(ffi.Int result,
     ffi.Pointer<bt_device_info_s> device_info, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartbt_device_bond_created_cbFunction = void Function(int result,
     ffi.Pointer<bt_device_info_s> device_info, ffi.Pointer<ffi.Void> user_data);
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
-/// @brief  Called when the bond destroys.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+/// Called when the bond destroys.
 ///
-/// @param[in] result The result that a bond is destroyed
-/// @param[in] remote_address The address of the remote Bluetooth device to destroy bond with
-/// @param[in] user_data The user data passed from the callback registration function
-/// @pre bt_device_destroy_bond() will invoke this function
-/// if you register this callback using bt_device_set_bond_destroyed_cb().
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
 ///
-/// @see bt_device_destroy_bond()
-/// @see bt_device_set_bond_destroyed_cb()
-/// @see bt_device_unset_bond_destroyed_cb()
+/// **Parameters:**
+/// - `result` (in): The result that a bond is destroyed
+/// - `remote_address` (in): The address of the remote Bluetooth device to destroy bond with
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - bt_device_destroy_bond() will invoke this function if you register this callback using bt_device_set_bond_destroyed_cb().
+///
+/// **See also:**
+/// - `bt_device_destroy_bond()`
+/// - `bt_device_set_bond_destroyed_cb()`
+/// - `bt_device_unset_bond_destroyed_cb()`
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
+/// @nodoc
 typedef bt_device_bond_destroyed_cb
     = ffi.Pointer<ffi.NativeFunction<bt_device_bond_destroyed_cbFunction>>;
+/// @nodoc
 typedef bt_device_bond_destroyed_cbFunction = ffi.Void Function(ffi.Int result,
     ffi.Pointer<ffi.Char> remote_address, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartbt_device_bond_destroyed_cbFunction = void Function(int result,
     ffi.Pointer<ffi.Char> remote_address, ffi.Pointer<ffi.Void> user_data);
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
-/// @brief  Called when the authorization of device changes.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+/// Called when the authorization of device changes.
 ///
-/// @param[in] authorization The authorization of device
-/// @param[in] remote_address The address of the remote Bluetooth device which is (un)authorized
-/// @param[in] user_data The user data passed from the callback registration function
-/// @pre bt_device_set_authorization() will invoke this function if you register this callback using bt_device_set_authorization_changed_cb().
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
 ///
-/// @see bt_device_set_authorization()
-/// @see #bt_device_set_authorization_changed_cb()
-/// @see #bt_device_unset_authorization_changed_cb()
+/// **Parameters:**
+/// - `authorization` (in): The authorization of device
+/// - `remote_address` (in): The address of the remote Bluetooth device which is (un)authorized
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - bt_device_set_authorization() will invoke this function if you register this callback using bt_device_set_authorization_changed_cb().
+///
+/// **See also:**
+/// - `bt_device_set_authorization()`
+/// - `bt_device_set_authorization_changed_cb()`
+/// - `bt_device_unset_authorization_changed_cb()`
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
+/// @nodoc
 typedef bt_device_authorization_changed_cb = ffi
     .Pointer<ffi.NativeFunction<bt_device_authorization_changed_cbFunction>>;
+/// @nodoc
 typedef bt_device_authorization_changed_cbFunction = ffi.Void Function(
     ffi.Int32 authorization,
     ffi.Pointer<ffi.Char> remote_address,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartbt_device_authorization_changed_cbFunction = void Function(
     int authorization,
     ffi.Pointer<ffi.Char> remote_address,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
-/// @brief  Called when the process of service search finishes.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+/// Called when the process of service search finishes.
 ///
-/// @param[in] result The result of the service searching
-/// @param[in] sdp_info The structure of service lists found on a device
-/// @param[in] user_data The user data passed from the callback registration function
-/// @pre Either bt_device_start_service_search() will invoke this function
-/// if you register this callback using  bt_device_set_service_searched_cb().
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
 ///
-/// @see bt_device_start_service_search()
-/// @see bt_device_set_service_searched_cb()
-/// @see bt_device_unset_service_searched_cb()
+/// **Parameters:**
+/// - `result` (in): The result of the service searching
+/// - `sdp_info` (in): The structure of service lists found on a device
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - Either bt_device_start_service_search() will invoke this function if you register this callback using bt_device_set_service_searched_cb().
+///
+/// **See also:**
+/// - `bt_device_start_service_search()`
+/// - `bt_device_set_service_searched_cb()`
+/// - `bt_device_unset_service_searched_cb()`
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
+/// @nodoc
 typedef bt_device_service_searched_cb
     = ffi.Pointer<ffi.NativeFunction<bt_device_service_searched_cbFunction>>;
+/// @nodoc
 typedef bt_device_service_searched_cbFunction = ffi.Void Function(
     ffi.Int result,
     ffi.Pointer<bt_device_sdp_info_s> sdp_info,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartbt_device_service_searched_cbFunction = void Function(
     int result,
     ffi.Pointer<bt_device_sdp_info_s> sdp_info,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
-/// @brief  Called when the connection state is changed.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+/// Called when the connection state is changed.
 ///
-/// @param[in] connected The connection status: (@c true = connected, @c false = disconnected)
-/// @param[in] conn_info The connection information
-/// @param[in] user_data The user data passed from the callback registration function
-/// @see bt_device_set_connection_state_changed_cb()
-/// @see bt_device_unset_connection_state_changed_cb()
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
+///
+/// **Parameters:**
+/// - `connected` (in): The connection status: (`true` = connected, `false` = disconnected)
+/// - `conn_info` (in): The connection information
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `bt_device_set_connection_state_changed_cb()`
+/// - `bt_device_unset_connection_state_changed_cb()`
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_DEVICE_MODULE
+/// @nodoc
 typedef bt_device_connection_state_changed_cb = ffi
     .Pointer<ffi.NativeFunction<bt_device_connection_state_changed_cbFunction>>;
+/// @nodoc
 typedef bt_device_connection_state_changed_cbFunction = ffi.Void Function(
     ffi.Bool connected,
     ffi.Pointer<bt_device_connection_info_s> conn_info,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartbt_device_connection_state_changed_cbFunction = void Function(
     bool connected,
     ffi.Pointer<bt_device_connection_info_s> conn_info,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_SOCKET_MODULE
-/// @brief Called when you receive data.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+/// Called when you receive data.
 ///
-/// @param[in] data The received data from the remote device
-/// @param[in] user_data The user data passed from the callback registration function
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
 ///
-/// @pre When the connected remote Bluetooth device invokes bt_socket_send_data(),
-/// this function will be invoked if you register this function using bt_socket_set_data_received_cb().
+/// **Parameters:**
+/// - `data` (in): The received data from the remote device
+/// - `user_data` (in): The user data passed from the callback registration function
 ///
-/// @see bt_socket_set_data_received_cb()
-/// @see bt_socket_unset_data_received_cb()
-/// @see bt_socket_send_data()
+/// **Preconditions:**
+/// - When the connected remote Bluetooth device invokes bt_socket_send_data(), this function will be invoked if you register this function using bt_socket_set_data_received_cb().
+///
+/// **See also:**
+/// - `bt_socket_set_data_received_cb()`
+/// - `bt_socket_unset_data_received_cb()`
+/// - `bt_socket_send_data()`
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_SOCKET_MODULE
+/// @nodoc
 typedef bt_socket_data_received_cb
     = ffi.Pointer<ffi.NativeFunction<bt_socket_data_received_cbFunction>>;
+/// @nodoc
 typedef bt_socket_data_received_cbFunction = ffi.Void Function(
     ffi.Pointer<bt_socket_received_data_s> data,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartbt_socket_data_received_cbFunction = void Function(
     ffi.Pointer<bt_socket_received_data_s> data,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_SOCKET_MODULE
-/// @brief  Called when a RFCOMM connection is requested.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+/// Called when a RFCOMM connection is requested.
 ///
-/// @param[in] socket_fd  The file descriptor of socket on which a connection is requested
-/// @param[in] remote_address  The address of remote device
-/// @param[in] user_data The user data passed from the callback registration function
-/// @pre If you register this callback function by bt_socket_set_connection_requested_cb(),
-/// bt_socket_connection_requested_cb() will be invoked.
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
+///
+/// **Parameters:**
+/// - `socket_fd` (in): The file descriptor of socket on which a connection is requested
+/// - `remote_address` (in): The address of remote device
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - If you register this callback function by bt_socket_set_connection_requested_cb(), bt_socket_connection_requested_cb() will be invoked.
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_SOCKET_MODULE
+/// @nodoc
 typedef bt_socket_connection_requested_cb = ffi
     .Pointer<ffi.NativeFunction<bt_socket_connection_requested_cbFunction>>;
+/// @nodoc
 typedef bt_socket_connection_requested_cbFunction = ffi.Void Function(
     ffi.Int socket_fd,
     ffi.Pointer<ffi.Char> remote_address,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartbt_socket_connection_requested_cbFunction = void Function(
     int socket_fd,
     ffi.Pointer<ffi.Char> remote_address,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_SOCKET_MODULE
-/// @brief  Called when the socket connection state changes.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+/// Called when the socket connection state changes.
 ///
-/// @param[in] result The result of connection state changing
-/// @param[in] connection_state The connection state
-/// @param[in] connection The connection information which is established or disconnected
-/// @param[in] user_data The user data passed from the callback registration function
-/// @pre Either bt_socket_connect_rfcomm() will invoke this function.
-/// In addition, bt_socket_connection_state_changed_cb() will be invoked when the socket connection state is changed.
-/// @see bt_socket_listen_and_accept_rfcomm()
-/// @see bt_socket_connect_rfcomm()
-/// @see bt_socket_set_connection_state_changed_cb()
-/// @see bt_socket_unset_connection_state_changed_cb()
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
+///
+/// **Parameters:**
+/// - `result` (in): The result of connection state changing
+/// - `connection_state` (in): The connection state
+/// - `connection` (in): The connection information which is established or disconnected
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - Either bt_socket_connect_rfcomm() will invoke this function. In addition, bt_socket_connection_state_changed_cb() will be invoked when the socket connection state is changed.
+///
+/// **See also:**
+/// - `bt_socket_listen_and_accept_rfcomm()`
+/// - `bt_socket_connect_rfcomm()`
+/// - `bt_socket_set_connection_state_changed_cb()`
+/// - `bt_socket_unset_connection_state_changed_cb()`
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_SOCKET_MODULE
+/// @nodoc
 typedef bt_socket_connection_state_changed_cb = ffi
     .Pointer<ffi.NativeFunction<bt_socket_connection_state_changed_cbFunction>>;
+/// @nodoc
 typedef bt_socket_connection_state_changed_cbFunction = ffi.Void Function(
     ffi.Int result,
     ffi.Int32 connection_state,
     ffi.Pointer<bt_socket_connection_s> connection,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartbt_socket_connection_state_changed_cbFunction = void Function(
     int result,
     int connection_state,
     ffi.Pointer<bt_socket_connection_s> connection,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_OPP_SERVER_MODULE
-/// @brief  Called when an OPP connection is requested.
+/// Called when an OPP connection is requested.
 ///
-/// @details You must call bt_opp_server_accept() if you want to accept.
-/// Otherwise, you must call bt_opp_server_reject().
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-/// @param[in] remote_address  The address of remote device
-/// @param[in] user_data The user data passed from the callback registration function
-/// @see bt_opp_server_accept()
-/// @see bt_opp_server_reject()
+/// You must call bt_opp_server_accept() if you want to accept. Otherwise, you must call bt_opp_server_reject().
+///
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
+///
+/// **Parameters:**
+/// - `remote_address` (in): The address of remote device
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `bt_opp_server_accept()`
+/// - `bt_opp_server_reject()`
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_OPP_SERVER_MODULE
+/// @nodoc
 typedef bt_opp_server_connection_requested_cb = ffi
     .Pointer<ffi.NativeFunction<bt_opp_server_connection_requested_cbFunction>>;
+/// @nodoc
 typedef bt_opp_server_connection_requested_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> remote_address, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartbt_opp_server_connection_requested_cbFunction = void Function(
     ffi.Pointer<ffi.Char> remote_address, ffi.Pointer<ffi.Void> user_data);
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_OPP_SERVER_MODULE
-/// @brief  Called when a file is being transferred.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+/// Called when a file is being transferred.
 ///
-/// @param[in] file  The path of file to be pushed
-/// @param[in] size The file size (bytes)
-/// @param[in] percent The progress in percentage (1 ~ 100)
-/// @param[in] user_data The user data passed from the callback registration function
-/// @see bt_opp_server_accept()
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
+///
+/// **Parameters:**
+/// - `file` (in): The path of file to be pushed
+/// - `size` (in): The file size (bytes)
+/// - `percent` (in): The progress in percentage (1 ~ 100)
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `bt_opp_server_accept()`
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_OPP_SERVER_MODULE
+/// @nodoc
 typedef bt_opp_server_transfer_progress_cb = ffi
     .Pointer<ffi.NativeFunction<bt_opp_server_transfer_progress_cbFunction>>;
+/// @nodoc
 typedef bt_opp_server_transfer_progress_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> file,
     ffi.LongLong size,
     ffi.Int percent,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartbt_opp_server_transfer_progress_cbFunction = void Function(
     ffi.Pointer<ffi.Char> file,
     int size,
     int percent,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_OPP_SERVER_MODULE
-/// @brief  Called when a transfer is finished.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+/// Called when a transfer is finished.
 ///
-/// @param[in] result  The result of push
-/// @param[in] file  The path of file to be pushed
-/// @param[in] size The file size (bytes)
-/// @param[in] user_data The user data passed from the callback registration function
-/// @see bt_opp_server_accept()
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
+///
+/// **Parameters:**
+/// - `result` (in): The result of push
+/// - `file` (in): The path of file to be pushed
+/// - `size` (in): The file size (bytes)
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `bt_opp_server_accept()`
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_OPP_SERVER_MODULE
+/// @nodoc
 typedef bt_opp_server_transfer_finished_cb = ffi
     .Pointer<ffi.NativeFunction<bt_opp_server_transfer_finished_cbFunction>>;
+/// @nodoc
 typedef bt_opp_server_transfer_finished_cbFunction = ffi.Void Function(
     ffi.Int result,
     ffi.Pointer<ffi.Char> file,
     ffi.LongLong size,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartbt_opp_server_transfer_finished_cbFunction = void Function(
     int result,
     ffi.Pointer<ffi.Char> file,
     int size,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_OPP_CLIENT_MODULE
-/// @brief  Called when OPP server responds to the push request.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+/// Called when OPP server responds to the push request.
 ///
-/// @param[in] result  The result of OPP server response
-/// @param[in] remote_address  The remote address
-/// @param[in] user_data  The user data passed from the callback registration function
-/// @pre bt_opp_client_push_files() will invoke this function.
-/// @see bt_opp_client_push_files()
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
+///
+/// **Parameters:**
+/// - `result` (in): The result of OPP server response
+/// - `remote_address` (in): The remote address
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - bt_opp_client_push_files() will invoke this function.
+///
+/// **See also:**
+/// - `bt_opp_client_push_files()`
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_OPP_CLIENT_MODULE
+/// @nodoc
 typedef bt_opp_client_push_responded_cb
     = ffi.Pointer<ffi.NativeFunction<bt_opp_client_push_responded_cbFunction>>;
+/// @nodoc
 typedef bt_opp_client_push_responded_cbFunction = ffi.Void Function(
     ffi.Int result,
     ffi.Pointer<ffi.Char> remote_address,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartbt_opp_client_push_responded_cbFunction = void Function(int result,
     ffi.Pointer<ffi.Char> remote_address, ffi.Pointer<ffi.Void> user_data);
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_OPP_CLIENT_MODULE
-/// @brief  Called when each file is being transferred.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+/// Called when each file is being transferred.
 ///
-/// @param[in] file  The path of file to be pushed
-/// @param[in] size The file size (bytes)
-/// @param[in] percent The progress in percentage (1 ~ 100). 100 means that a file is transferred completely.
-/// @param[in] user_data The user data passed from the callback registration function
-/// @pre bt_opp_client_push_files() will invoke this function.
-/// @see bt_opp_client_push_files()
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
+///
+/// **Parameters:**
+/// - `file` (in): The path of file to be pushed
+/// - `size` (in): The file size (bytes)
+/// - `percent` (in): The progress in percentage (1 ~ 100). 100 means that a file is transferred completely.
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - bt_opp_client_push_files() will invoke this function.
+///
+/// **See also:**
+/// - `bt_opp_client_push_files()`
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_OPP_CLIENT_MODULE
+/// @nodoc
 typedef bt_opp_client_push_progress_cb
     = ffi.Pointer<ffi.NativeFunction<bt_opp_client_push_progress_cbFunction>>;
+/// @nodoc
 typedef bt_opp_client_push_progress_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> file,
     ffi.LongLong size,
     ffi.Int percent,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartbt_opp_client_push_progress_cbFunction = void Function(
     ffi.Pointer<ffi.Char> file,
     int size,
     int percent,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_OPP_CLIENT_MODULE
-/// @brief  Called when the push request is finished.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+/// Called when the push request is finished.
 ///
-/// @param[in] result  The result of the push request
-/// @param[in] remote_address  The remote address
-/// @param[in] user_data The user data passed from the callback registration function
-/// @see bt_opp_client_push_files()
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
+///
+/// **Parameters:**
+/// - `result` (in): The result of the push request
+/// - `remote_address` (in): The remote address
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `bt_opp_client_push_files()`
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_OPP_CLIENT_MODULE
+/// @nodoc
 typedef bt_opp_client_push_finished_cb
     = ffi.Pointer<ffi.NativeFunction<bt_opp_client_push_finished_cbFunction>>;
+/// @nodoc
 typedef bt_opp_client_push_finished_cbFunction = ffi.Void Function(
     ffi.Int result,
     ffi.Pointer<ffi.Char> remote_address,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartbt_opp_client_push_finished_cbFunction = void Function(int result,
     ffi.Pointer<ffi.Char> remote_address, ffi.Pointer<ffi.Void> user_data);
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_HID_MODULE
-/// @brief  Called when the connection state is changed.
+/// Called when the connection state is changed.
 ///
-/// @details  This callback is called when the connection state is changed.
-/// When you call bt_hid_host_connect() or bt_hid_host_disconnect(), this callback is also called with error result even though these functions fail.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-/// @param[in] result  The result of changing the connection state
-/// @param[in] connected  The state to be changed. true means connected state, Otherwise, false.
-/// @param[in] remote_address  The remote address
-/// @param[in] user_data The user data passed from the callback registration function
-/// @see bt_hid_host_connect()
-/// @see bt_hid_host_disconnect()
+/// This callback is called when the connection state is changed. When you call bt_hid_host_connect() or bt_hid_host_disconnect(), this callback is also called with error result even though these functions fail.
+///
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
+///
+/// **Parameters:**
+/// - `result` (in): The result of changing the connection state
+/// - `connected` (in): The state to be changed. true means connected state, Otherwise, false.
+/// - `remote_address` (in): The remote address
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `bt_hid_host_connect()`
+/// - `bt_hid_host_disconnect()`
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_HID_MODULE
+/// @nodoc
 typedef bt_hid_host_connection_state_changed_cb = ffi.Pointer<
     ffi.NativeFunction<bt_hid_host_connection_state_changed_cbFunction>>;
+/// @nodoc
 typedef bt_hid_host_connection_state_changed_cbFunction = ffi.Void Function(
     ffi.Int result,
     ffi.Bool connected,
     ffi.Pointer<ffi.Char> remote_address,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartbt_hid_host_connection_state_changed_cbFunction = void Function(
     int result,
     bool connected,
     ffi.Pointer<ffi.Char> remote_address,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_HID_DEVICE_MODULE
-/// @brief  Called when the Bluetooth HID Device connection state changes.
-/// @details The following error codes can be delivered: \n
-/// #BT_ERROR_NONE \n
-/// #BT_ERROR_OPERATION_FAILED \n
-/// @since_tizen @if WEARABLE 3.0 @endif
+/// Called when the Bluetooth HID Device connection state changes.
 ///
-/// @param[in]   result  The result of changing the connection state.
-/// @param[in]   connected  The requested state. true means the connection is enabled, false means the connection is disabled.
-/// @param[in]   remote_address  The remote device's address
-/// @param[in]   user_data  The user data passed from the callback registration function
-/// @see bt_hid_device_activate()
+/// The following error codes can be delivered: `BT_ERROR_NONE` `BT_ERROR_OPERATION_FAILED`
+///
+/// **Since Tizen:**
+/// - Wearable 3.0
+///
+/// **Parameters:**
+/// - `result` (in): The result of changing the connection state.
+/// - `connected` (in): The requested state. true means the connection is enabled, false means the connection is disabled.
+/// - `remote_address` (in): The remote device's address
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `bt_hid_device_activate()`
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_HID_DEVICE_MODULE
+/// @nodoc
 typedef bt_hid_device_connection_state_changed_cb = ffi.Pointer<
     ffi.NativeFunction<bt_hid_device_connection_state_changed_cbFunction>>;
+/// @nodoc
 typedef bt_hid_device_connection_state_changed_cbFunction = ffi.Void Function(
     ffi.Int result,
     ffi.Bool connected,
     ffi.Pointer<ffi.Char> remote_address,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartbt_hid_device_connection_state_changed_cbFunction = void Function(
     int result,
     bool connected,
     ffi.Pointer<ffi.Char> remote_address,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_HID_DEVICE_MODULE
-/// @brief  Called when the HID Device receives data from the HID Host.
-/// @details The following error codes can be delivered: \n
-/// #BT_ERROR_NONE \n
-/// #BT_ERROR_OPERATION_FAILED \n
-/// @since_tizen @if WEARABLE 3.0 @endif
+/// Called when the HID Device receives data from the HID Host.
 ///
-/// @param[in]   data  The data received from the HID Host.
-/// @param[in]   user_data  The user data passed from the callback registration function
-/// @see bt_hid_device_set_data_received_cb()
+/// The following error codes can be delivered: `BT_ERROR_NONE` `BT_ERROR_OPERATION_FAILED`
+///
+/// **Since Tizen:**
+/// - Wearable 3.0
+///
+/// **Parameters:**
+/// - `data` (in): The data received from the HID Host.
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `bt_hid_device_set_data_received_cb()`
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_HID_DEVICE_MODULE
+/// @nodoc
 typedef bt_hid_device_data_received_cb
     = ffi.Pointer<ffi.NativeFunction<bt_hid_device_data_received_cbFunction>>;
+/// @nodoc
 typedef bt_hid_device_data_received_cbFunction = ffi.Void Function(
     ffi.Pointer<bt_hid_device_received_data_s> data,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartbt_hid_device_data_received_cbFunction = void Function(
     ffi.Pointer<bt_hid_device_received_data_s> data,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_AUDIO_MODULE
-/// @brief  Called when the connection state is changed.
+/// Called when the connection state is changed.
 ///
-/// @details  This callback is called when the connection state is changed.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-/// When you call bt_audio_connect() or bt_audio_disconnect(), this callback is also called with error result even though these functions fail.
-/// @param[in] result  The result of changing the connection state
-/// @param[in] connected  The state to be changed. true means connected state, Otherwise, false.
-/// @param[in] remote_address  The remote address
-/// @param[in] type  The type of audio profile except #BT_AUDIO_PROFILE_TYPE_ALL
-/// @param[in] user_data The user data passed from the callback registration function
-/// @see bt_audio_set_connection_state_changed_cb()
-/// @see bt_audio_unset_connection_state_changed_cb()
+/// This callback is called when the connection state is changed.
+///
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3 When you call bt_audio_connect() or bt_audio_disconnect(), this callback is also called with error result even though these functions fail.
+///
+/// **Parameters:**
+/// - `result` (in): The result of changing the connection state
+/// - `connected` (in): The state to be changed. true means connected state, Otherwise, false.
+/// - `remote_address` (in): The remote address
+/// - `type` (in): The type of audio profile except `BT_AUDIO_PROFILE_TYPE_ALL`
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `bt_audio_set_connection_state_changed_cb()`
+/// - `bt_audio_unset_connection_state_changed_cb()`
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_AUDIO_MODULE
+/// @nodoc
 typedef bt_audio_connection_state_changed_cb = ffi
     .Pointer<ffi.NativeFunction<bt_audio_connection_state_changed_cbFunction>>;
+/// @nodoc
 typedef bt_audio_connection_state_changed_cbFunction = ffi.Void Function(
     ffi.Int result,
     ffi.Bool connected,
     ffi.Pointer<ffi.Char> remote_address,
     ffi.Int32 type,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartbt_audio_connection_state_changed_cbFunction = void Function(
     int result,
     bool connected,
@@ -12012,163 +16135,269 @@ typedef Dartbt_audio_connection_state_changed_cbFunction = void Function(
     int type,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_AVRCP_MODULE
-/// @brief  Called when the connection state is changed.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+/// Called when the connection state is changed.
 ///
-/// @param[in] connected  The state to be changed. true means connected state, Otherwise, false.
-/// @param[in] remote_address  The remote address
-/// @param[in] user_data The user data passed from the callback registration function
-/// @see bt_avrcp_target_initialize()
-/// @see bt_avrcp_target_deinitialize()
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
+///
+/// **Parameters:**
+/// - `connected` (in): The state to be changed. true means connected state, Otherwise, false.
+/// - `remote_address` (in): The remote address
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `bt_avrcp_target_initialize()`
+/// - `bt_avrcp_target_deinitialize()`
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_AVRCP_MODULE
+/// @nodoc
 typedef bt_avrcp_target_connection_state_changed_cb = ffi.Pointer<
     ffi.NativeFunction<bt_avrcp_target_connection_state_changed_cbFunction>>;
+/// @nodoc
 typedef bt_avrcp_target_connection_state_changed_cbFunction = ffi.Void Function(
     ffi.Bool connected,
     ffi.Pointer<ffi.Char> remote_address,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartbt_avrcp_target_connection_state_changed_cbFunction = void Function(
     bool connected,
     ffi.Pointer<ffi.Char> remote_address,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_AVRCP_MODULE
-/// @brief  Called when the equalizer state is changed by the remote control device.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+/// Called when the equalizer state is changed by the remote control device.
 ///
-/// @param[in] equalizer The equalizer state
-/// @param[in] user_data The user data passed from the callback registration function
-/// @see bt_avrcp_set_equalizer_state_changed_cb()
-/// @see bt_avrcp_unset_equalizer_state_changed_cb()
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
+///
+/// **Parameters:**
+/// - `equalizer` (in): The equalizer state
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `bt_avrcp_set_equalizer_state_changed_cb()`
+/// - `bt_avrcp_unset_equalizer_state_changed_cb()`
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_AVRCP_MODULE
+/// @nodoc
 typedef bt_avrcp_equalizer_state_changed_cb = ffi
     .Pointer<ffi.NativeFunction<bt_avrcp_equalizer_state_changed_cbFunction>>;
+/// @nodoc
 typedef bt_avrcp_equalizer_state_changed_cbFunction = ffi.Void Function(
     ffi.Int32 equalizer, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartbt_avrcp_equalizer_state_changed_cbFunction = void Function(
     int equalizer, ffi.Pointer<ffi.Void> user_data);
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_AVRCP_MODULE
-/// @brief  Called when the repeat mode is changed by the remote control device.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+/// Called when the repeat mode is changed by the remote control device.
 ///
-/// @param[in] repeat The repeat mode
-/// @param[in] user_data The user data passed from the callback registration function
-/// @see bt_avrcp_set_repeat_mode_changed_cb()
-/// @see bt_avrcp_unset_repeat_mode_changed_cb()
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
+///
+/// **Parameters:**
+/// - `repeat` (in): The repeat mode
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `bt_avrcp_set_repeat_mode_changed_cb()`
+/// - `bt_avrcp_unset_repeat_mode_changed_cb()`
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_AVRCP_MODULE
+/// @nodoc
 typedef bt_avrcp_repeat_mode_changed_cb
     = ffi.Pointer<ffi.NativeFunction<bt_avrcp_repeat_mode_changed_cbFunction>>;
+/// @nodoc
 typedef bt_avrcp_repeat_mode_changed_cbFunction = ffi.Void Function(
     ffi.Int32 repeat, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartbt_avrcp_repeat_mode_changed_cbFunction = void Function(
     int repeat, ffi.Pointer<ffi.Void> user_data);
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_AVRCP_MODULE
-/// @brief  Called when the shuffle mode is changed by the remote control device.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+/// Called when the shuffle mode is changed by the remote control device.
 ///
-/// @param[in] shuffle The shuffle mode
-/// @param[in] user_data The user data passed from the callback registration function
-/// @see bt_avrcp_set_shuffle_mode_changed_cb()
-/// @see bt_avrcp_unset_shuffle_mode_changed_cb()
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
+///
+/// **Parameters:**
+/// - `shuffle` (in): The shuffle mode
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `bt_avrcp_set_shuffle_mode_changed_cb()`
+/// - `bt_avrcp_unset_shuffle_mode_changed_cb()`
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_AVRCP_MODULE
+/// @nodoc
 typedef bt_avrcp_shuffle_mode_changed_cb
     = ffi.Pointer<ffi.NativeFunction<bt_avrcp_shuffle_mode_changed_cbFunction>>;
+/// @nodoc
 typedef bt_avrcp_shuffle_mode_changed_cbFunction = ffi.Void Function(
     ffi.Int32 shuffle, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartbt_avrcp_shuffle_mode_changed_cbFunction = void Function(
     int shuffle, ffi.Pointer<ffi.Void> user_data);
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_AVRCP_MODULE
-/// @brief  Called when the scan mode is changed by the remote control device.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
+/// Called when the scan mode is changed by the remote control device.
 ///
-/// @param[in] scan The scan mode
-/// @param[in] user_data The user data passed from the callback registration function
-/// @see bt_avrcp_set_scan_mode_changed_cb()
-/// @see bt_avrcp_unset_scan_mode_changed_cb()
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
+///
+/// **Parameters:**
+/// - `scan` (in): The scan mode
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `bt_avrcp_set_scan_mode_changed_cb()`
+/// - `bt_avrcp_unset_scan_mode_changed_cb()`
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_AVRCP_MODULE
+/// @nodoc
 typedef bt_avrcp_scan_mode_changed_cb
     = ffi.Pointer<ffi.NativeFunction<bt_avrcp_scan_mode_changed_cbFunction>>;
+/// @nodoc
 typedef bt_avrcp_scan_mode_changed_cbFunction = ffi.Void Function(
     ffi.Int32 scan, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartbt_avrcp_scan_mode_changed_cbFunction = void Function(
     int scan, ffi.Pointer<ffi.Void> user_data);
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_AVRCP_MODULE
-/// @brief  Called when the Song position mode is changed by the remote target device.
-/// @since_tizen 3.0
-/// @param[in] position Playback position in milliseconds. When position is 0 it means the track is starting and when it's greater than or equal to track's duration the track has ended.
-/// @param[in] user_data The user data passed from the callback registration function
-/// @see bt_avrcp_set_position_changed_cb()
-/// @see bt_avrcp_unset_position_changed_cb()
+/// Called when the Song position mode is changed by the remote target device.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `position` (in): Playback position in milliseconds. When position is 0 it means the track is starting and when it's greater than or equal to track's duration the track has ended.
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `bt_avrcp_set_position_changed_cb()`
+/// - `bt_avrcp_unset_position_changed_cb()`
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_AVRCP_MODULE
+/// @nodoc
 typedef bt_avrcp_position_changed_cb
     = ffi.Pointer<ffi.NativeFunction<bt_avrcp_position_changed_cbFunction>>;
+/// @nodoc
 typedef bt_avrcp_position_changed_cbFunction = ffi.Void Function(
     ffi.UnsignedInt position, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartbt_avrcp_position_changed_cbFunction = void Function(
     int position, ffi.Pointer<ffi.Void> user_data);
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_AVRCP_MODULE
-/// @brief  Called when the Song Play status mode is changed by the remote target device.
-/// @since_tizen 3.0
-/// @param[in] play_state The song play status
-/// @param[in] user_data The user data passed from the callback registration function
-/// @see bt_avrcp_set_play_status_changed_cb()
-/// @see bt_avrcp_unset_play_status_changed_cb()
+/// Called when the Song Play status mode is changed by the remote target device.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `play_state` (in): The song play status
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `bt_avrcp_set_play_status_changed_cb()`
+/// - `bt_avrcp_unset_play_status_changed_cb()`
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_AVRCP_MODULE
+/// @nodoc
 typedef bt_avrcp_play_status_changed_cb
     = ffi.Pointer<ffi.NativeFunction<bt_avrcp_play_status_changed_cbFunction>>;
+/// @nodoc
 typedef bt_avrcp_play_status_changed_cbFunction = ffi.Void Function(
     ffi.Int32 play_state, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartbt_avrcp_play_status_changed_cbFunction = void Function(
     int play_state, ffi.Pointer<ffi.Void> user_data);
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_AVRCP_MODULE
-/// @brief  Called when the Song metadata information is changed by the remote target device.
-/// @since_tizen 3.0
-/// @param[in] track The song metadata information
-/// @param[in] user_data The user data passed from the callback registration function
-/// @see bt_avrcp_set_track_info_changed_cb()
-/// @see bt_avrcp_unset_track_info_changed_cb()
+/// Called when the Song metadata information is changed by the remote target device.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `track` (in): The song metadata information
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `bt_avrcp_set_track_info_changed_cb()`
+/// - `bt_avrcp_unset_track_info_changed_cb()`
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_AVRCP_MODULE
+/// @nodoc
 typedef bt_avrcp_track_info_changed_cb
     = ffi.Pointer<ffi.NativeFunction<bt_avrcp_track_info_changed_cbFunction>>;
+/// @nodoc
 typedef bt_avrcp_track_info_changed_cbFunction = ffi.Void Function(
     ffi.Pointer<bt_avrcp_metadata_attributes_info_s> track,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartbt_avrcp_track_info_changed_cbFunction = void Function(
     ffi.Pointer<bt_avrcp_metadata_attributes_info_s> track,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_AVRCP_MODULE
-/// @brief  Called when the connection state is changed.
-/// @since_tizen 3.0
-/// @param[in] connected  The state to be changed. true means connected state, Otherwise, false.
-/// @param[in] remote_address  The remote address
-/// @param[in] user_data The user data passed from the callback registration function
-/// @see bt_avrcp_control_initialize()
-/// @see bt_avrcp_control_deinitialize()
+/// Called when the connection state is changed.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `connected` (in): The state to be changed. true means connected state, Otherwise, false.
+/// - `remote_address` (in): The remote address
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `bt_avrcp_control_initialize()`
+/// - `bt_avrcp_control_deinitialize()`
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_AVRCP_MODULE
+/// @nodoc
 typedef bt_avrcp_control_connection_state_changed_cb = ffi.Pointer<
     ffi.NativeFunction<bt_avrcp_control_connection_state_changed_cbFunction>>;
+/// @nodoc
 typedef bt_avrcp_control_connection_state_changed_cbFunction
     = ffi.Void Function(ffi.Bool connected,
         ffi.Pointer<ffi.Char> remote_address, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartbt_avrcp_control_connection_state_changed_cbFunction
     = void Function(bool connected, ffi.Pointer<ffi.Char> remote_address,
         ffi.Pointer<ffi.Void> user_data);
 
-/// @deprecated Deprecated since 5.0.
-/// @ingroup CAPI_NETWORK_BLUETOOTH_HDP_MODULE
-/// @brief  Called when the connection is established.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-/// @remarks Deprecated, because of no usecase and supported devices.
+/// **Deprecated:** Deprecated since 5.0.
 ///
-/// @param[in] result  The result of connecting to the remote device
-/// @param[in] remote_address  The address of connected remote device
-/// @param[in] app_id  The ID of application
-/// @param[in] type  The type of HDP (Health Device Profile) channel
-/// @param[in] channel  The connected data channel
-/// @param[in] user_data The user data passed from the callback registration function
-/// @see bt_hdp_set_connection_state_changed_cb()
-/// @see bt_hdp_unset_connection_state_changed_cb()
+/// Called when the connection is established.
+///
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
+///
+/// **Remarks:**
+/// - Deprecated, because of no usecase and supported devices.
+///
+/// **Parameters:**
+/// - `result` (in): The result of connecting to the remote device
+/// - `remote_address` (in): The address of connected remote device
+/// - `app_id` (in): The ID of application
+/// - `type` (in): The type of HDP (Health Device Profile) channel
+/// - `channel` (in): The connected data channel
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `bt_hdp_set_connection_state_changed_cb()`
+/// - `bt_hdp_unset_connection_state_changed_cb()`
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_HDP_MODULE
+/// @nodoc
 typedef bt_hdp_connected_cb
     = ffi.Pointer<ffi.NativeFunction<bt_hdp_connected_cbFunction>>;
+/// @nodoc
 typedef bt_hdp_connected_cbFunction = ffi.Void Function(
     ffi.Int result,
     ffi.Pointer<ffi.Char> remote_address,
@@ -12176,6 +16405,7 @@ typedef bt_hdp_connected_cbFunction = ffi.Void Function(
     ffi.Int32 type,
     ffi.UnsignedInt channel,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartbt_hdp_connected_cbFunction = void Function(
     int result,
     ffi.Pointer<ffi.Char> remote_address,
@@ -12184,223 +16414,329 @@ typedef Dartbt_hdp_connected_cbFunction = void Function(
     int channel,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @deprecated Deprecated since 5.0.
-/// @ingroup CAPI_NETWORK_BLUETOOTH_HDP_MODULE
-/// @brief  Called when the connection is disconnected.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-/// @remarks Deprecated, because of no usecase and supported devices.
+/// **Deprecated:** Deprecated since 5.0.
 ///
-/// @param[in] result  The result of disconnecting from the remote device
-/// @param[in] remote_address  The address of disconnected remote device
-/// @param[in] channel  The connected data channel
-/// @param[in] user_data The user data passed from the callback registration function
-/// @see bt_hdp_set_connection_state_changed_cb()
-/// @see bt_hdp_unset_connection_state_changed_cb()
+/// Called when the connection is disconnected.
+///
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
+///
+/// **Remarks:**
+/// - Deprecated, because of no usecase and supported devices.
+///
+/// **Parameters:**
+/// - `result` (in): The result of disconnecting from the remote device
+/// - `remote_address` (in): The address of disconnected remote device
+/// - `channel` (in): The connected data channel
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `bt_hdp_set_connection_state_changed_cb()`
+/// - `bt_hdp_unset_connection_state_changed_cb()`
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_HDP_MODULE
+/// @nodoc
 typedef bt_hdp_disconnected_cb
     = ffi.Pointer<ffi.NativeFunction<bt_hdp_disconnected_cbFunction>>;
+/// @nodoc
 typedef bt_hdp_disconnected_cbFunction = ffi.Void Function(
     ffi.Int result,
     ffi.Pointer<ffi.Char> remote_address,
     ffi.UnsignedInt channel,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartbt_hdp_disconnected_cbFunction = void Function(
     int result,
     ffi.Pointer<ffi.Char> remote_address,
     int channel,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @deprecated Deprecated since 5.0.
-/// @ingroup CAPI_NETWORK_BLUETOOTH_HDP_MODULE
-/// @brief  Called when the you receive the data.
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-/// @remarks Deprecated, because of no usecase and supported devices.
+/// **Deprecated:** Deprecated since 5.0.
 ///
-/// @param[in] channel  The connected data channel
-/// @param[in] data  The received data
-/// @param[in] size  The size of received data (byte)
-/// @param[in] user_data The user data passed from the callback registration function
-/// @see bt_hdp_set_data_received_cb()
-/// @see bt_hdp_unset_data_received_cb()
+/// Called when the you receive the data.
+///
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
+///
+/// **Remarks:**
+/// - Deprecated, because of no usecase and supported devices.
+///
+/// **Parameters:**
+/// - `channel` (in): The connected data channel
+/// - `data` (in): The received data
+/// - `size` (in): The size of received data (byte)
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `bt_hdp_set_data_received_cb()`
+/// - `bt_hdp_unset_data_received_cb()`
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_HDP_MODULE
+/// @nodoc
 typedef bt_hdp_data_received_cb
     = ffi.Pointer<ffi.NativeFunction<bt_hdp_data_received_cbFunction>>;
+/// @nodoc
 typedef bt_hdp_data_received_cbFunction = ffi.Void Function(
     ffi.UnsignedInt channel,
     ffi.Pointer<ffi.Char> data,
     ffi.UnsignedInt size,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartbt_hdp_data_received_cbFunction = void Function(int channel,
     ffi.Pointer<ffi.Char> data, int size, ffi.Pointer<ffi.Void> user_data);
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_MODULE
-/// @brief The handle of a service, characteristic or descriptor.
-/// @since_tizen 2.3.1
+/// The handle of a service, characteristic or descriptor.
+///
+/// **Since Tizen:**
+/// - 2.3.1
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_GATT_MODULE
+/// @nodoc
 typedef bt_gatt_h = ffi.Pointer<ffi.Void>;
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_CLIENT_MODULE
-/// @brief The handle of a GATT client which is associated with a remote device.
-/// @since_tizen 2.3.1
+/// The handle of a GATT client which is associated with a remote device.
+///
+/// **Since Tizen:**
+/// - 2.3.1
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_GATT_CLIENT_MODULE
+/// @nodoc
 typedef bt_gatt_client_h = ffi.Pointer<ffi.Void>;
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_MODULE
-/// @brief  Called when you get GATT handles repeatedly.
-/// @since_tizen 2.3.1
+/// Called when you get GATT handles repeatedly.
 ///
-/// @param[in] total The total number of GATT handles to be called
-/// @param[in] index The index of current GATT handle. It starts from 0.
-/// @param[in] gatt_handle The GATT handle
-/// @param[in] user_data The user data passed from the foreach function
+/// **Since Tizen:**
+/// - 2.3.1
 ///
-/// @see bt_gatt_service_foreach_characteristics()
-/// @see bt_gatt_service_foreach_included_services()
-/// @see bt_gatt_characteristic_foreach_descriptors()
-/// @see bt_gatt_client_foreach_services()
+/// **Parameters:**
+/// - `total` (in): The total number of GATT handles to be called
+/// - `index` (in): The index of current GATT handle. It starts from 0.
+/// - `gatt_handle` (in): The GATT handle
+/// - `user_data` (in): The user data passed from the foreach function
+///
+/// **See also:**
+/// - `bt_gatt_service_foreach_characteristics()`
+/// - `bt_gatt_service_foreach_included_services()`
+/// - `bt_gatt_characteristic_foreach_descriptors()`
+/// - `bt_gatt_client_foreach_services()`
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_GATT_MODULE
+/// @nodoc
 typedef bt_gatt_foreach_cb
     = ffi.Pointer<ffi.NativeFunction<bt_gatt_foreach_cbFunction>>;
+/// @nodoc
 typedef bt_gatt_foreach_cbFunction = ffi.Bool Function(ffi.Int total,
     ffi.Int index, bt_gatt_h gatt_handle, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartbt_gatt_foreach_cbFunction = bool Function(int total, int index,
     bt_gatt_h gatt_handle, ffi.Pointer<ffi.Void> user_data);
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_CLIENT_MODULE
-/// @brief  Called when the client request(e.g. read / write) has been completed.
-/// @since_tizen 2.3.1
+/// Called when the client request(e.g. read / write) has been completed.
 ///
-/// @param[in] result The result of a request
-/// @param[in] request_handle The requesting GATT handle
-/// @param[in] user_data The user data passed from the requesting function
+/// **Since Tizen:**
+/// - 2.3.1
 ///
-/// @see bt_gatt_client_read_value()
-/// @see bt_gatt_client_write_value()
+/// **Parameters:**
+/// - `result` (in): The result of a request
+/// - `request_handle` (in): The requesting GATT handle
+/// - `user_data` (in): The user data passed from the requesting function
+///
+/// **See also:**
+/// - `bt_gatt_client_read_value()`
+/// - `bt_gatt_client_write_value()`
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_GATT_CLIENT_MODULE
+/// @nodoc
 typedef bt_gatt_client_request_completed_cb = ffi
     .Pointer<ffi.NativeFunction<bt_gatt_client_request_completed_cbFunction>>;
+/// @nodoc
 typedef bt_gatt_client_request_completed_cbFunction = ffi.Void Function(
     ffi.Int result, bt_gatt_h request_handle, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartbt_gatt_client_request_completed_cbFunction = void Function(
     int result, bt_gatt_h request_handle, ffi.Pointer<ffi.Void> user_data);
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_CLIENT_MODULE
-/// @brief Called when the ATT MTU value is changed.
-/// @since_tizen 4.0
+/// Called when the ATT MTU value is changed.
 ///
-/// @remarks The @a mtu_info must not be freed by application. \n
-/// @a mtu_info can be used only inside the callback. \n
-/// If it's needed outside, make a copy.
+/// **Since Tizen:**
+/// - 4.0
 ///
-/// @param[in] client The handle of a GATT client which is associated with a remote device
-/// @param[in] mtu_info The MTU information
-/// @param[in] user_data The user data passed from the callback registration function
-/// @see bt_gatt_client_set_att_mtu_changed_cb()
+/// **Remarks:**
+/// - The `mtu_info` must not be freed by application.
+/// - `mtu_info` can be used only inside the callback.
+/// - If it's needed outside, make a copy.
+///
+/// **Parameters:**
+/// - `client` (in): The handle of a GATT client which is associated with a remote device
+/// - `mtu_info` (in): The MTU information
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `bt_gatt_client_set_att_mtu_changed_cb()`
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_GATT_CLIENT_MODULE
+/// @nodoc
 typedef bt_gatt_client_att_mtu_changed_cb = ffi
     .Pointer<ffi.NativeFunction<bt_gatt_client_att_mtu_changed_cbFunction>>;
+/// @nodoc
 typedef bt_gatt_client_att_mtu_changed_cbFunction = ffi.Void Function(
     bt_gatt_client_h client,
     ffi.Pointer<bt_gatt_client_att_mtu_info_s> mtu_info,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartbt_gatt_client_att_mtu_changed_cbFunction = void Function(
     bt_gatt_client_h client,
     ffi.Pointer<bt_gatt_client_att_mtu_info_s> mtu_info,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_CLIENT_MODULE
-/// @brief  Called when a value of a watched characteristic's GATT handle has been changed.
-/// @since_tizen 2.3.1
+/// Called when a value of a watched characteristic's GATT handle has been changed.
 ///
-/// @remarks After this function is returned, a changed value is automatically \n
-/// applied to @a characteristic. Before that, @a characteristic has an old value.
+/// **Since Tizen:**
+/// - 2.3.1
 ///
-/// @param[in] characteristic The characteristic's GATT handle of which value change is informed. It has an old value.
-/// @param[in] value The new value
-/// @param[in] len The length of @a value
-/// @param[in] user_data The user data passed from the registering function
+/// **Remarks:**
+/// - After this function is returned, a changed value is automatically
+/// - applied to `characteristic`. Before that, `characteristic` has an old value.
 ///
-/// @see bt_gatt_client_set_characteristic_value_changed_cb()
+/// **Parameters:**
+/// - `characteristic` (in): The characteristic's GATT handle of which value change is informed. It has an old value.
+/// - `value` (in): The new value
+/// - `len` (in): The length of `value`
+/// - `user_data` (in): The user data passed from the registering function
+///
+/// **See also:**
+/// - `bt_gatt_client_set_characteristic_value_changed_cb()`
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_GATT_CLIENT_MODULE
+/// @nodoc
 typedef bt_gatt_client_characteristic_value_changed_cb = ffi.Pointer<
     ffi.NativeFunction<bt_gatt_client_characteristic_value_changed_cbFunction>>;
+/// @nodoc
 typedef bt_gatt_client_characteristic_value_changed_cbFunction
     = ffi.Void Function(bt_gatt_h characteristic, ffi.Pointer<ffi.Char> value,
         ffi.Int len, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartbt_gatt_client_characteristic_value_changed_cbFunction
     = void Function(bt_gatt_h characteristic, ffi.Pointer<ffi.Char> value,
         int len, ffi.Pointer<ffi.Void> user_data);
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_CLIENT_MODULE
-/// @brief  Called when a service of a remote GATT server has been changed.
-/// @since_tizen 3.0
+/// Called when a service of a remote GATT server has been changed.
 ///
-/// @param[in] client The handle of a GATT client which is associated with a remote device.
-/// @param[in] change_type The changed type
-/// @param[in] service_uuid The changed service uuid
-/// @param[in] user_data The user data passed from the registering function
+/// **Since Tizen:**
+/// - 3.0
 ///
-/// @see bt_gatt_client_set_characteristic_value_changed_cb()
+/// **Parameters:**
+/// - `client` (in): The handle of a GATT client which is associated with a remote device.
+/// - `change_type` (in): The changed type
+/// - `service_uuid` (in): The changed service uuid
+/// - `user_data` (in): The user data passed from the registering function
+///
+/// **See also:**
+/// - `bt_gatt_client_set_characteristic_value_changed_cb()`
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_GATT_CLIENT_MODULE
+/// @nodoc
 typedef bt_gatt_client_service_changed_cb = ffi
     .Pointer<ffi.NativeFunction<bt_gatt_client_service_changed_cbFunction>>;
+/// @nodoc
 typedef bt_gatt_client_service_changed_cbFunction = ffi.Void Function(
     bt_gatt_client_h client,
     ffi.Int32 change_type,
     ffi.Pointer<ffi.Char> service_uuid,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartbt_gatt_client_service_changed_cbFunction = void Function(
     bt_gatt_client_h client,
     int change_type,
     ffi.Pointer<ffi.Char> service_uuid,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_MODULE
-/// @brief Called when the connection state is changed.
+/// Called when the connection state is changed.
 ///
-/// @details This callback is called when the connection state is changed.
-/// When you called bt_gatt_connect() or bt_gatt_disconnect(), this callback is also called with error result even though these functions fail.
+/// This callback is called when the connection state is changed. When you called bt_gatt_connect() or bt_gatt_disconnect(), this callback is also called with error result even though these functions fail.
 ///
-/// @since_tizen @if WEARABLE 2.3.1 @else 2.3 @endif
-/// @param[in] result The result of changing the connection state.
-/// @param[in] connected The state to be changed, true means connected state, Otherwise, false.
-/// @param[in] remote_address The remote_address
-/// @param[in] user_data The user data passed from the callback registration function.
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Otherwise 2.3
 ///
-/// @see bt_gatt_connect()
-/// @see bt_gatt_disconnect()
-/// @see bt_gatt_set_connection_state_changed_cb()
-/// @see bt_gatt_unset_connection_state_changed_cb()
+/// **Parameters:**
+/// - `result` (in): The result of changing the connection state.
+/// - `connected` (in): The state to be changed, true means connected state, Otherwise, false.
+/// - `remote_address` (in): The remote_address
+/// - `user_data` (in): The user data passed from the callback registration function.
+///
+/// **See also:**
+/// - `bt_gatt_connect()`
+/// - `bt_gatt_disconnect()`
+/// - `bt_gatt_set_connection_state_changed_cb()`
+/// - `bt_gatt_unset_connection_state_changed_cb()`
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_GATT_MODULE
+/// @nodoc
 typedef bt_gatt_connection_state_changed_cb = ffi
     .Pointer<ffi.NativeFunction<bt_gatt_connection_state_changed_cbFunction>>;
+/// @nodoc
 typedef bt_gatt_connection_state_changed_cbFunction = ffi.Void Function(
     ffi.Int result,
     ffi.Bool connected,
     ffi.Pointer<ffi.Char> remote_address,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartbt_gatt_connection_state_changed_cbFunction = void Function(
     int result,
     bool connected,
     ffi.Pointer<ffi.Char> remote_address,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_SERVER_MODULE
-/// @brief The handle of a GATT server.
-/// @since_tizen 3.0
+/// The handle of a GATT server.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_GATT_SERVER_MODULE
+/// @nodoc
 typedef bt_gatt_server_h = ffi.Pointer<ffi.Void>;
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_SERVER_MODULE
-/// @brief  Called when the remote device requests to read a value on a GATT server.
+/// Called when the remote device requests to read a value on a GATT server.
 ///
-/// @details For finishing the request, call the function #bt_gatt_server_send_response in callback.
+/// For finishing the request, call the function `bt_gatt_server_send_response` in callback.
 ///
-/// @since_tizen 3.0
-/// @remarks The @a remote_address must not be freed by application.
-/// @remarks The @a server must not be freed by application.
-/// @remarks The @a gatt_handle must not be freed by application.
+/// **Since Tizen:**
+/// - 3.0
 ///
-/// @param[in] remote_address The address of the requesting remote device
-/// @param[in] request_id The identification of this request. It will be used to send a response.
-/// @param[in] server The GATT server handle
-/// @param[in] gatt_handle The characteristic or descriptor's GATT handle to be read
-/// @param[in] offset The requested offset from where the GATT handle's value is read
-/// @param[in] user_data The user data passed from the registration function
+/// **Remarks:**
+/// - The `remote_address` must not be freed by application.
+/// - The `server` must not be freed by application.
+/// - The `gatt_handle` must not be freed by application.
 ///
-/// @see bt_gatt_server_set_read_value_requested_cb()
-/// @see bt_gatt_server_send_response()
+/// **Parameters:**
+/// - `remote_address` (in): The address of the requesting remote device
+/// - `request_id` (in): The identification of this request. It will be used to send a response.
+/// - `server` (in): The GATT server handle
+/// - `gatt_handle` (in): The characteristic or descriptor's GATT handle to be read
+/// - `offset` (in): The requested offset from where the GATT handle's value is read
+/// - `user_data` (in): The user data passed from the registration function
+///
+/// **See also:**
+/// - `bt_gatt_server_set_read_value_requested_cb()`
+/// - `bt_gatt_server_send_response()`
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_GATT_SERVER_MODULE
+/// @nodoc
 typedef bt_gatt_server_read_value_requested_cb = ffi.Pointer<
     ffi.NativeFunction<bt_gatt_server_read_value_requested_cbFunction>>;
+/// @nodoc
 typedef bt_gatt_server_read_value_requested_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> remote_address,
     ffi.Int request_id,
@@ -12408,6 +16744,7 @@ typedef bt_gatt_server_read_value_requested_cbFunction = ffi.Void Function(
     bt_gatt_h gatt_handle,
     ffi.Int offset,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartbt_gatt_server_read_value_requested_cbFunction = void Function(
     ffi.Pointer<ffi.Char> remote_address,
     int request_id,
@@ -12416,58 +16753,77 @@ typedef Dartbt_gatt_server_read_value_requested_cbFunction = void Function(
     int offset,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_SERVER_MODULE
-/// @brief  Called when the remote device enables or disables the Notification/Indication for particular characteristics.
+/// Called when the remote device enables or disables the Notification/Indication for particular characteristics.
 ///
-/// @details By using this callback function, server can know notification state.
+/// By using this callback function, server can know notification state.
 ///
-/// @since_tizen 3.0
-/// @remarks The @a server must not be freed by application.
-/// @remarks The @a gatt_handle must not be freed by application.
+/// **Since Tizen:**
+/// - 3.0
 ///
-/// @param[in] notify Indicates whether the Notification/Indication is enabled or not
-/// @param[in] server The GATT server handle
-/// @param[in] gatt_handle The characteristic's GATT handle to be read
-/// @param[in] user_data The user data passed from the registration function
+/// **Remarks:**
+/// - The `server` must not be freed by application.
+/// - The `gatt_handle` must not be freed by application.
 ///
-/// @see bt_gatt_server_set_read_value_requested_cb()
+/// **Parameters:**
+/// - `notify` (in): Indicates whether the Notification/Indication is enabled or not
+/// - `server` (in): The GATT server handle
+/// - `gatt_handle` (in): The characteristic's GATT handle to be read
+/// - `user_data` (in): The user data passed from the registration function
+///
+/// **See also:**
+/// - `bt_gatt_server_set_read_value_requested_cb()`
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_GATT_SERVER_MODULE
+/// @nodoc
 typedef bt_gatt_server_characteristic_notification_state_changed_cb = ffi.Pointer<
     ffi.NativeFunction<
         bt_gatt_server_characteristic_notification_state_changed_cbFunction>>;
+/// @nodoc
 typedef bt_gatt_server_characteristic_notification_state_changed_cbFunction
     = ffi.Void Function(ffi.Bool notify, bt_gatt_server_h server,
         bt_gatt_h gatt_handle, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartbt_gatt_server_characteristic_notification_state_changed_cbFunction
     = void Function(bool notify, bt_gatt_server_h server, bt_gatt_h gatt_handle,
         ffi.Pointer<ffi.Void> user_data);
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_SERVER_MODULE
-/// @brief  Called when a value of a characteristic or descriptor's GATT handle has been changed.
+/// Called when a value of a characteristic or descriptor's GATT handle has been changed.
 ///
-/// @details For finishing the request, call the function #bt_gatt_server_send_response in callback.
+/// For finishing the request, call the function `bt_gatt_server_send_response` in callback.
 ///
-/// @since_tizen 3.0
-/// @remarks After this function is returned, a changed value is automatically \n
-/// applied to @a gatt_handle. Before that, @a gatt_handle has an old value.
-/// @remarks The @a remote_address must not be freed by application.
-/// @remarks The @a server must not be freed by application.
-/// @remarks The @a gatt_handle must not be freed by application.
-/// @remarks The @a value must not be freed by application.
+/// **Since Tizen:**
+/// - 3.0
 ///
-/// @param[in] remote_address The address of the remote device which requests a change
-/// @param[in] request_id The identification of this request. It will be used to send a response.
-/// @param[in] server The GATT server handle
-/// @param[in] gatt_handle The characteristic or descriptor's GATT handle which has an old value
-/// @param[in] response_needed Indicates whether a response is required by the remote device - @c true if required, @c false if not
-/// @param[in] offset The requested offset from where the @a gatt_handle value will be updated
-/// @param[in] value The new value
-/// @param[in] len The length of @a value
-/// @param[in] user_data The user data passed from the registration function
+/// **Remarks:**
+/// - After this function is returned, a changed value is automatically
+/// - applied to `gatt_handle`. Before that, `gatt_handle` has an old value.
+/// - The `remote_address` must not be freed by application.
+/// - The `server` must not be freed by application.
+/// - The `gatt_handle` must not be freed by application.
+/// - The `value` must not be freed by application.
 ///
-/// @see bt_gatt_server_set_write_value_requested_cb()
-/// @see bt_gatt_server_send_response()
+/// **Parameters:**
+/// - `remote_address` (in): The address of the remote device which requests a change
+/// - `request_id` (in): The identification of this request. It will be used to send a response.
+/// - `server` (in): The GATT server handle
+/// - `gatt_handle` (in): The characteristic or descriptor's GATT handle which has an old value
+/// - `response_needed` (in): Indicates whether a response is required by the remote device - `true` if required, `false` if not
+/// - `offset` (in): The requested offset from where the `gatt_handle` value will be updated
+/// - `value` (in): The new value
+/// - `len` (in): The length of `value`
+/// - `user_data` (in): The user data passed from the registration function
+///
+/// **See also:**
+/// - `bt_gatt_server_set_write_value_requested_cb()`
+/// - `bt_gatt_server_send_response()`
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_GATT_SERVER_MODULE
+/// @nodoc
 typedef bt_gatt_server_write_value_requested_cb = ffi.Pointer<
     ffi.NativeFunction<bt_gatt_server_write_value_requested_cbFunction>>;
+/// @nodoc
 typedef bt_gatt_server_write_value_requested_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> remote_address,
     ffi.Int request_id,
@@ -12478,6 +16834,7 @@ typedef bt_gatt_server_write_value_requested_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> value,
     ffi.Int len,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartbt_gatt_server_write_value_requested_cbFunction = void Function(
     ffi.Pointer<ffi.Char> remote_address,
     int request_id,
@@ -12489,28 +16846,36 @@ typedef Dartbt_gatt_server_write_value_requested_cbFunction = void Function(
     int len,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_GATT_SERVER_MODULE
-/// @brief  Called when the sending notification / indication is done.
-/// @since_tizen 3.0
+/// Called when the sending notification / indication is done.
 ///
-/// @remarks The @a remote_address must not be freed by application.
-/// @remarks The @a server must not be freed by application.
-/// @remarks The @a characteristic must not be freed by application.
+/// **Since Tizen:**
+/// - 3.0
 ///
-/// @remarks In case of an indication, once a confirmation is received from the remote device this callback will be called. \n
-/// This callback will be called several times if there are two or more remote devices which enable a Client Characteristic Configuration Descriptor(CCCD). \n
-/// For the last remote device, @a completed will be set as true.
+/// **Remarks:**
+/// - The `remote_address` must not be freed by application.
+/// - The `server` must not be freed by application.
+/// - The `characteristic` must not be freed by application.
+/// - In case of an indication, once a confirmation is received from the remote device this callback will be called.
+/// - This callback will be called several times if there are two or more remote devices which enable a Client Characteristic Configuration Descriptor(CCCD).
+/// - For the last remote device, `completed` will be set as true.
 ///
-/// @param[in] result The result of a sending operation
-/// @param[in] remote_address The address of the remote device
-/// @param[in] server The GATT server handle
-/// @param[in] characteristic The characteristic's GATT handle
-/// @param[in] completed If this callback is for the last remote device which enables a CCCD, it will be true. Or it will be false.
-/// @param[in] user_data The user data passed from the requesting function
+/// **Parameters:**
+/// - `result` (in): The result of a sending operation
+/// - `remote_address` (in): The address of the remote device
+/// - `server` (in): The GATT server handle
+/// - `characteristic` (in): The characteristic's GATT handle
+/// - `completed` (in): If this callback is for the last remote device which enables a CCCD, it will be true. Or it will be false.
+/// - `user_data` (in): The user data passed from the requesting function
 ///
-/// @see bt_gatt_server_notify_characteristic_changed_value()
+/// **See also:**
+/// - `bt_gatt_server_notify_characteristic_changed_value()`
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_GATT_SERVER_MODULE
+/// @nodoc
 typedef bt_gatt_server_notification_sent_cb = ffi
     .Pointer<ffi.NativeFunction<bt_gatt_server_notification_sent_cbFunction>>;
+/// @nodoc
 typedef bt_gatt_server_notification_sent_cbFunction = ffi.Void Function(
     ffi.Int result,
     ffi.Pointer<ffi.Char> remote_address,
@@ -12518,6 +16883,7 @@ typedef bt_gatt_server_notification_sent_cbFunction = ffi.Void Function(
     bt_gatt_h characteristic,
     ffi.Bool completed,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartbt_gatt_server_notification_sent_cbFunction = void Function(
     int result,
     ffi.Pointer<ffi.Char> remote_address,
@@ -12526,118 +16892,157 @@ typedef Dartbt_gatt_server_notification_sent_cbFunction = void Function(
     bool completed,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @WEARABLE_ONLY
-/// @ingroup CAPI_NETWORK_BLUETOOTH_PBAP_MODULE
-/// @brief  Called when PBAP is Connected or Disconnected.
-/// @details The following error codes can be delivered: \n
-/// #BT_ERROR_NONE \n
-/// #BT_ERROR_AUTH_REJECTED \n
-/// #BT_ERROR_AUTHORIZATION_REJECTED \n
-/// #BT_ERROR_SERVICE_NOT_FOUND \n
-/// #BT_ERROR_TIMED_OUT \n
-/// #BT_ERROR_OPERATION_FAILED \n
-/// @since_tizen 3.0
+/// Called when PBAP is Connected or Disconnected.
 ///
-/// @param[in] result The result of connecting to or disconnecting from the remote device
-/// @param[in] connected The PBAP connection status (@c true = connected, @c false = disconnected)
-/// @param[in] remote_address The remote device address (@a remote_address is valid only inside this function. To use outside the callback, make a copy. @a remote_address should not be freed.)
-/// @param[in] user_data The user data passed from the callback registration function
-/// @see bt_pbap_client_connect()
-/// @see bt_pbap_client_disconnect()
+/// The following error codes can be delivered: `BT_ERROR_NONE` `BT_ERROR_AUTH_REJECTED` `BT_ERROR_AUTHORIZATION_REJECTED` `BT_ERROR_SERVICE_NOT_FOUND` `BT_ERROR_TIMED_OUT` `BT_ERROR_OPERATION_FAILED`
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `result` (in): The result of connecting to or disconnecting from the remote device
+/// - `connected` (in): The PBAP connection status (`true` = connected, `false` = disconnected)
+/// - `remote_address` (in): The remote device address (`remote_address` is valid only inside this function. To use outside the callback, make a copy. `remote_address` should not be freed.)
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `bt_pbap_client_connect()`
+/// - `bt_pbap_client_disconnect()`
+///
+/// **Platform restriction:**
+/// - Wearable only.
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_PBAP_MODULE
+/// @nodoc
 typedef bt_pbap_connection_state_changed_cb = ffi
     .Pointer<ffi.NativeFunction<bt_pbap_connection_state_changed_cbFunction>>;
+/// @nodoc
 typedef bt_pbap_connection_state_changed_cbFunction = ffi.Void Function(
     ffi.Int result,
     ffi.Bool connected,
     ffi.Pointer<ffi.Char> remote_address,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartbt_pbap_connection_state_changed_cbFunction = void Function(
     int result,
     bool connected,
     ffi.Pointer<ffi.Char> remote_address,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @WEARABLE_ONLY
-/// @ingroup CAPI_NETWORK_BLUETOOTH_PBAP_MODULE
-/// @brief  Called when PBAP Phonebook size calculation completes.
-/// @details The following error codes can be delivered: \n
-/// #BT_ERROR_NONE \n
-/// #BT_ERROR_OPERATION_FAILED \n
-/// @since_tizen 3.0
+/// Called when PBAP Phonebook size calculation completes.
 ///
-/// @param[in] result The result of getting the phone book size
-/// @param[in] remote_address The remote device address (@a remote_address is valid only inside this function. To use outside the callback, make a copy. @a remote_address should not be freed.)
-/// @param[in] size Size of Phonebook
-/// @param[in] user_data The user data passed from the callback registration function
-/// @see bt_pbap_client_get_phone_book_size()
-/// @see bt_pbap_client_connect()
-/// @see bt_pbap_client_disconnect()
+/// The following error codes can be delivered: `BT_ERROR_NONE` `BT_ERROR_OPERATION_FAILED`
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `result` (in): The result of getting the phone book size
+/// - `remote_address` (in): The remote device address (`remote_address` is valid only inside this function. To use outside the callback, make a copy. `remote_address` should not be freed.)
+/// - `size` (in): Size of Phonebook
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `bt_pbap_client_get_phone_book_size()`
+/// - `bt_pbap_client_connect()`
+/// - `bt_pbap_client_disconnect()`
+///
+/// **Platform restriction:**
+/// - Wearable only.
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_PBAP_MODULE
+/// @nodoc
 typedef bt_pbap_phone_book_size_cb
     = ffi.Pointer<ffi.NativeFunction<bt_pbap_phone_book_size_cbFunction>>;
+/// @nodoc
 typedef bt_pbap_phone_book_size_cbFunction = ffi.Void Function(
     ffi.Int result,
     ffi.Pointer<ffi.Char> remote_address,
     ffi.Int size,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartbt_pbap_phone_book_size_cbFunction = void Function(
     int result,
     ffi.Pointer<ffi.Char> remote_address,
     int size,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @WEARABLE_ONLY
-/// @ingroup CAPI_NETWORK_BLUETOOTH_PBAP_MODULE
-/// @brief  Called when PBAP Phonebook Pull completes.
-/// @details The received phone book file will be saved in the platform downloads folder. \n
-/// The following error codes can be delivered: \n
-/// #BT_ERROR_NONE \n
-/// #BT_ERROR_OPERATION_FAILED \n
-/// @since_tizen 3.0
+/// Called when PBAP Phonebook Pull completes.
 ///
-/// @param[in] result The result of getting the phone book
-/// @param[in] remote_address The remote device address (@a remote_address is valid only inside this function. To use outside the callback, make a copy. @a remote_address should not be freed.)
-/// @param[in] vcf_file The absolute path of the file in which the vCards are saved (@a vcf_file is valid only inside this function. To use outside the callback, make a copy. @a vcf_file should not be freed.)
-/// @param[in] user_data The user data passed from the callback registration function
-/// @see bt_pbap_client_get_phone_book()
-/// @see bt_pbap_client_connect()
-/// @see bt_pbap_client_disconnect()
+/// The received phone book file will be saved in the platform downloads folder. The following error codes can be delivered: `BT_ERROR_NONE` `BT_ERROR_OPERATION_FAILED`
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `result` (in): The result of getting the phone book
+/// - `remote_address` (in): The remote device address (`remote_address` is valid only inside this function. To use outside the callback, make a copy. `remote_address` should not be freed.)
+/// - `vcf_file` (in): The absolute path of the file in which the vCards are saved (`vcf_file` is valid only inside this function. To use outside the callback, make a copy. `vcf_file` should not be freed.)
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `bt_pbap_client_get_phone_book()`
+/// - `bt_pbap_client_connect()`
+/// - `bt_pbap_client_disconnect()`
+///
+/// **Platform restriction:**
+/// - Wearable only.
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_PBAP_MODULE
+/// @nodoc
 typedef bt_pbap_phone_book_received_cb
     = ffi.Pointer<ffi.NativeFunction<bt_pbap_phone_book_received_cbFunction>>;
+/// @nodoc
 typedef bt_pbap_phone_book_received_cbFunction = ffi.Void Function(
     ffi.Int result,
     ffi.Pointer<ffi.Char> remote_address,
     ffi.Pointer<ffi.Char> vcf_file,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartbt_pbap_phone_book_received_cbFunction = void Function(
     int result,
     ffi.Pointer<ffi.Char> remote_address,
     ffi.Pointer<ffi.Char> vcf_file,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @WEARABLE_ONLY
-/// @ingroup CAPI_NETWORK_BLUETOOTH_PBAP_MODULE
-/// @brief  Called when PBAP List vCards completes.
-/// @details The following error codes can be delivered: \n
-/// #BT_ERROR_NONE \n
-/// #BT_ERROR_OPERATION_FAILED \n
-/// @since_tizen 3.0
+/// Called when PBAP List vCards completes.
 ///
-/// @param[in] result The result of getting the vcard list
-/// @param[in] remote_address The remote device address (@a remote_address is valid only inside this function. To use outside the callback, make a copy. @a remote_address should not be freed.)
-/// @param[in] vcard_info List of vcard information (@a vcard_info is valid only inside this function. To use outside the callback, make a copy. @a vcard_info should not be freed.)
-/// @param[in] count Number of contacts in the list
-/// @param[in] user_data The user data passed from the callback registration function
-/// @see bt_pbap_client_get_list()
-/// @see bt_pbap_client_connect()
-/// @see bt_pbap_client_disconnect()
+/// The following error codes can be delivered: `BT_ERROR_NONE` `BT_ERROR_OPERATION_FAILED`
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `result` (in): The result of getting the vcard list
+/// - `remote_address` (in): The remote device address (`remote_address` is valid only inside this function. To use outside the callback, make a copy. `remote_address` should not be freed.)
+/// - `vcard_info` (in): List of vcard information (`vcard_info` is valid only inside this function. To use outside the callback, make a copy. `vcard_info` should not be freed.)
+/// - `count` (in): Number of contacts in the list
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `bt_pbap_client_get_list()`
+/// - `bt_pbap_client_connect()`
+/// - `bt_pbap_client_disconnect()`
+///
+/// **Platform restriction:**
+/// - Wearable only.
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_PBAP_MODULE
+/// @nodoc
 typedef bt_pbap_list_vcards_cb
     = ffi.Pointer<ffi.NativeFunction<bt_pbap_list_vcards_cbFunction>>;
+/// @nodoc
 typedef bt_pbap_list_vcards_cbFunction = ffi.Void Function(
     ffi.Int result,
     ffi.Pointer<ffi.Char> remote_address,
     ffi.Pointer<bt_pbap_vcard_info_s> vcard_info,
     ffi.Int count,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartbt_pbap_list_vcards_cbFunction = void Function(
     int result,
     ffi.Pointer<ffi.Char> remote_address,
@@ -12645,7 +17050,12 @@ typedef Dartbt_pbap_list_vcards_cbFunction = void Function(
     int count,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @ingroup CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
-/// @brief The handle of a Bluetooth LE scan filter.
-/// @since_tizen 4.0
+/// The handle of a Bluetooth LE scan filter.
+///
+/// **Since Tizen:**
+/// - 4.0
+///
+/// **Group:**
+/// - CAPI_NETWORK_BLUETOOTH_ADAPTER_LE_MODULE
+/// @nodoc
 typedef bt_scan_filter_h = ffi.Pointer<ffi.Void>;

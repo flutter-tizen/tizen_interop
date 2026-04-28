@@ -1,3 +1,6 @@
+/// {@category 9.0/tizen}
+library tizen_interop_9_0.rpc_port;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -11,6 +14,7 @@ import 'generated_bindings_bundle.dart' as bundle;
 import 'generated_bindings_time.dart' as time;
 
 /// Dart bindings for Tizen rpc-port APIs.
+/// {@category 9.0/tizen}
 class Tizen90RpcPort {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -26,19 +30,26 @@ class Tizen90RpcPort {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Reads data from an RPC port.
-  /// @since_tizen 4.0
+  /// Reads data from an RPC port.
   ///
-  /// @param[in] h The rpc port handle
-  /// @param[out] buf Buffer for reading data
-  /// @param[in] size Size for reading data
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RPC_PORT_ERROR_NONE Successful
-  /// @retval #RPC_PORT_ERROR_INVALID_PARAMETER The specified @a h is NULL
-  /// @retval #RPC_PORT_ERROR_IO_ERROR Internal I/O error
-  /// @see rpc_port_write()
+  /// **Parameters:**
+  /// - `h` (in): The rpc port handle
+  /// - `buf` (out): Buffer for reading data
+  /// - `size` (in): Size for reading data
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RPC_PORT_ERROR_NONE`: Successful
+  /// - `RPC_PORT_ERROR_INVALID_PARAMETER`: The specified `h` is NULL
+  /// - `RPC_PORT_ERROR_IO_ERROR`: Internal I/O error
+  ///
+  /// **See also:**
+  /// - `rpc_port_write()`
   int rpc_port_read(
     rpc_port_h h,
     ffi.Pointer<ffi.Void> buf,
@@ -58,19 +69,26 @@ class Tizen90RpcPort {
   late final _rpc_port_read = _rpc_port_readPtr
       .asFunction<int Function(rpc_port_h, ffi.Pointer<ffi.Void>, int)>();
 
-  /// @brief Writes data to an RPC port.
-  /// @since_tizen 4.0
+  /// Writes data to an RPC port.
   ///
-  /// @param[in] h The rpc port handle
-  /// @param[in] buf Buffer for writing data
-  /// @param[in] size Size for writing data
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RPC_PORT_ERROR_NONE Successful
-  /// @retval #RPC_PORT_ERROR_INVALID_PARAMETER The specified @a h is NULL
-  /// @retval #RPC_PORT_ERROR_IO_ERROR Internal I/O error
-  /// @see rpc_port_read()
+  /// **Parameters:**
+  /// - `h` (in): The rpc port handle
+  /// - `buf` (in): Buffer for writing data
+  /// - `size` (in): Size for writing data
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RPC_PORT_ERROR_NONE`: Successful
+  /// - `RPC_PORT_ERROR_INVALID_PARAMETER`: The specified `h` is NULL
+  /// - `RPC_PORT_ERROR_IO_ERROR`: Internal I/O error
+  ///
+  /// **See also:**
+  /// - `rpc_port_read()`
   int rpc_port_write(
     rpc_port_h h,
     ffi.Pointer<ffi.Void> buf,
@@ -90,15 +108,26 @@ class Tizen90RpcPort {
   late final _rpc_port_write = _rpc_port_writePtr
       .asFunction<int Function(rpc_port_h, ffi.Pointer<ffi.Void>, int)>();
 
-  /// @brief Creates a rpc port proxy handle.
-  /// @since_tizen 4.0
-  /// @remarks You must release @a h using rpc_port_proxy_destroy().
-  /// @param[out] h The rpc port proxy handle that is newly created
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RPC_PORT_ERROR_NONE Successful
-  /// @retval #RPC_PORT_ERROR_INVALID_PARAMETER The specified @a h is NULL
-  /// @see rpc_port_proxy_destroy()
+  /// Creates a rpc port proxy handle.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Remarks:**
+  /// - You must release `h` using rpc_port_proxy_destroy().
+  ///
+  /// **Parameters:**
+  /// - `h` (out): The rpc port proxy handle that is newly created
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RPC_PORT_ERROR_NONE`: Successful
+  /// - `RPC_PORT_ERROR_INVALID_PARAMETER`: The specified `h` is NULL
+  ///
+  /// **See also:**
+  /// - `rpc_port_proxy_destroy()`
   int rpc_port_proxy_create(
     ffi.Pointer<rpc_port_proxy_h> h,
   ) {
@@ -113,14 +142,23 @@ class Tizen90RpcPort {
   late final _rpc_port_proxy_create = _rpc_port_proxy_createPtr
       .asFunction<int Function(ffi.Pointer<rpc_port_proxy_h>)>();
 
-  /// @brief Destroys a rpc port proxy handle.
-  /// @since_tizen 4.0
-  /// @param[in] h The rpc port proxy handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RPC_PORT_ERROR_NONE Successful
-  /// @retval #RPC_PORT_ERROR_INVALID_PARAMETER The specified @a h is NULL
-  /// @see rpc_port_proxy_create()
+  /// Destroys a rpc port proxy handle.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `h` (in): The rpc port proxy handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RPC_PORT_ERROR_NONE`: Successful
+  /// - `RPC_PORT_ERROR_INVALID_PARAMETER`: The specified `h` is NULL
+  ///
+  /// **See also:**
+  /// - `rpc_port_proxy_create()`
   int rpc_port_proxy_destroy(
     rpc_port_proxy_h h,
   ) {
@@ -135,22 +173,36 @@ class Tizen90RpcPort {
   late final _rpc_port_proxy_destroy =
       _rpc_port_proxy_destroyPtr.asFunction<int Function(rpc_port_proxy_h)>();
 
-  /// @brief Connects to @a port of @a appid.
-  /// @details To send and receive data, the proxy should connect to port of stub
-  /// @since_tizen 4.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/appmanager.launch \n
-  /// %http://tizen.org/privilege/datasharing
-  /// @remarks If you want to use this function, you must add privileges.
-  /// @param[in] h The rpc port proxy handle
-  /// @param[in] appid The target stub appid
-  /// @param[in] port The name of rpc port
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RPC_PORT_ERROR_NONE Successful
-  /// @retval #RPC_PORT_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #RPC_PORT_ERROR_INVALID_PARAMETER The specified @a h is NULL
-  /// @retval #RPC_PORT_ERROR_IO_ERROR Internal I/O error
+  /// Connects to `port` of `appid`.
+  ///
+  /// To send and receive data, the proxy should connect to port of stub
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/appmanager.launch>
+  /// - <http://tizen.org/privilege/datasharing>
+  ///
+  /// **Remarks:**
+  /// - If you want to use this function, you must add privileges.
+  ///
+  /// **Parameters:**
+  /// - `h` (in): The rpc port proxy handle
+  /// - `appid` (in): The target stub appid
+  /// - `port` (in): The name of rpc port
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RPC_PORT_ERROR_NONE`: Successful
+  /// - `RPC_PORT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `RPC_PORT_ERROR_INVALID_PARAMETER`: The specified `h` is NULL
+  /// - `RPC_PORT_ERROR_IO_ERROR`: Internal I/O error
   int rpc_port_proxy_connect(
     rpc_port_proxy_h h,
     ffi.Pointer<ffi.Char> appid,
@@ -171,16 +223,22 @@ class Tizen90RpcPort {
       int Function(
           rpc_port_proxy_h, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Adds a proxy connected callback.
-  /// @since_tizen 4.0
-  /// @param[in] h The rpc port proxy handle
-  /// @param[in] cb The callback function to be called when proxy is connected
-  /// @param[in] user_data The user data to be passed to
-  /// the rpc_port_proxy_connected_event_cb() function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RPC_PORT_ERROR_NONE Successful
-  /// @retval #RPC_PORT_ERROR_INVALID_PARAMETER The specified @a h is NULL
+  /// Adds a proxy connected callback.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `h` (in): The rpc port proxy handle
+  /// - `cb` (in): The callback function to be called when proxy is connected
+  /// - `user_data` (in): The user data to be passed to the rpc_port_proxy_connected_event_cb() function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RPC_PORT_ERROR_NONE`: Successful
+  /// - `RPC_PORT_ERROR_INVALID_PARAMETER`: The specified `h` is NULL
   int rpc_port_proxy_add_connected_event_cb(
     rpc_port_proxy_h h,
     rpc_port_proxy_connected_event_cb cb,
@@ -202,16 +260,22 @@ class Tizen90RpcPort {
           int Function(rpc_port_proxy_h, rpc_port_proxy_connected_event_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Adds a proxy disconnected callback.
-  /// @since_tizen 4.0
-  /// @param[in] h The rpc port proxy handle
-  /// @param[in] cb The callback function to be called when proxy is disconnected
-  /// @param[in] user_data The user data to be passed to
-  /// the rpc_port_proxy_disconnected_event_cb() function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RPC_PORT_ERROR_NONE Successful
-  /// @retval #RPC_PORT_ERROR_INVALID_PARAMETER The specified @a h is NULL
+  /// Adds a proxy disconnected callback.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `h` (in): The rpc port proxy handle
+  /// - `cb` (in): The callback function to be called when proxy is disconnected
+  /// - `user_data` (in): The user data to be passed to the rpc_port_proxy_disconnected_event_cb() function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RPC_PORT_ERROR_NONE`: Successful
+  /// - `RPC_PORT_ERROR_INVALID_PARAMETER`: The specified `h` is NULL
   int rpc_port_proxy_add_disconnected_event_cb(
     rpc_port_proxy_h h,
     rpc_port_proxy_disconnected_event_cb cb,
@@ -236,16 +300,22 @@ class Tizen90RpcPort {
           int Function(rpc_port_proxy_h, rpc_port_proxy_disconnected_event_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Adds a proxy rejected callback.
-  /// @since_tizen 4.0
-  /// @param[in] h The rpc port proxy handle
-  /// @param[in] cb The callback function to be called when proxy is rejected
-  /// @param[in] user_data The user data to be passed to
-  /// the rpc_port_proxy_rejected_event_cb() function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RPC_PORT_ERROR_NONE Successful
-  /// @retval #RPC_PORT_ERROR_INVALID_PARAMETER The specified @a h is NULL
+  /// Adds a proxy rejected callback.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `h` (in): The rpc port proxy handle
+  /// - `cb` (in): The callback function to be called when proxy is rejected
+  /// - `user_data` (in): The user data to be passed to the rpc_port_proxy_rejected_event_cb() function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RPC_PORT_ERROR_NONE`: Successful
+  /// - `RPC_PORT_ERROR_INVALID_PARAMETER`: The specified `h` is NULL
   int rpc_port_proxy_add_rejected_event_cb(
     rpc_port_proxy_h h,
     rpc_port_proxy_rejected_event_cb cb,
@@ -267,16 +337,22 @@ class Tizen90RpcPort {
           int Function(rpc_port_proxy_h, rpc_port_proxy_rejected_event_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Adds a proxy received callback.
-  /// @since_tizen 4.0
-  /// @param[in] h The rpc port proxy handle
-  /// @param[in] cb The callback function to be called when proxy received data
-  /// @param[in] user_data The user data to be passed to
-  /// the rpc_port_proxy_received_event_cb() function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RPC_PORT_ERROR_NONE Successful
-  /// @retval #RPC_PORT_ERROR_INVALID_PARAMETER The specified @a h is NULL
+  /// Adds a proxy received callback.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `h` (in): The rpc port proxy handle
+  /// - `cb` (in): The callback function to be called when proxy received data
+  /// - `user_data` (in): The user data to be passed to the rpc_port_proxy_received_event_cb() function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RPC_PORT_ERROR_NONE`: Successful
+  /// - `RPC_PORT_ERROR_INVALID_PARAMETER`: The specified `h` is NULL
   int rpc_port_proxy_add_received_event_cb(
     rpc_port_proxy_h h,
     rpc_port_proxy_received_event_cb cb,
@@ -298,21 +374,32 @@ class Tizen90RpcPort {
           int Function(rpc_port_proxy_h, rpc_port_proxy_received_event_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Gets a port from proxy handle.
-  /// @since_tizen 4.0
-  /// @remarks This handle @a port will not be valid if the proxy was disconnected or destroyed.
-  /// @param[in] h The rpc port proxy handle
-  /// @param[in] type The type of port
-  /// @param[out] port The port to communicate
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RPC_PORT_ERROR_NONE Successful
-  /// @retval #RPC_PORT_ERROR_INVALID_PARAMETER The specified @a h is NULL
-  /// @retval #RPC_PORT_ERROR_IO_ERROR No available ports
-  /// @see rpc_port_write()
-  /// @see rpc_port_read()
-  /// @see rpc_port_parcel_create_from_port()
-  /// @see rpc_port_parcel_send();
+  /// Gets a port from proxy handle.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Remarks:**
+  /// - This handle `port` will not be valid if the proxy was disconnected or destroyed.
+  ///
+  /// **Parameters:**
+  /// - `h` (in): The rpc port proxy handle
+  /// - `type` (in): The type of port
+  /// - `port` (out): The port to communicate
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RPC_PORT_ERROR_NONE`: Successful
+  /// - `RPC_PORT_ERROR_INVALID_PARAMETER`: The specified `h` is NULL
+  /// - `RPC_PORT_ERROR_IO_ERROR`: No available ports
+  ///
+  /// **See also:**
+  /// - `rpc_port_write()`
+  /// - `rpc_port_read()`
+  /// - `rpc_port_parcel_create_from_port()`
+  /// - rpc_port_parcel_send();
   int rpc_port_proxy_get_port(
     rpc_port_proxy_h h,
     int type,
@@ -332,16 +419,27 @@ class Tizen90RpcPort {
   late final _rpc_port_proxy_get_port = _rpc_port_proxy_get_portPtr.asFunction<
       int Function(rpc_port_proxy_h, int, ffi.Pointer<rpc_port_h>)>();
 
-  /// @brief Creates a rpc port stub handle.
-  /// @since_tizen 4.0
-  /// @remarks You must release @a h using rpc_port_stub_destroy().
-  /// @param[out] h The rpc port stub handle that is newly created
-  /// @param[in] port_name The name of the port which want to listen
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RPC_PORT_ERROR_NONE Successful
-  /// @retval #RPC_PORT_ERROR_INVALID_PARAMETER The specified @a h is NULL
-  /// @see rpc_port_stub_destroy()
+  /// Creates a rpc port stub handle.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Remarks:**
+  /// - You must release `h` using rpc_port_stub_destroy().
+  ///
+  /// **Parameters:**
+  /// - `h` (out): The rpc port stub handle that is newly created
+  /// - `port_name` (in): The name of the port which want to listen
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RPC_PORT_ERROR_NONE`: Successful
+  /// - `RPC_PORT_ERROR_INVALID_PARAMETER`: The specified `h` is NULL
+  ///
+  /// **See also:**
+  /// - `rpc_port_stub_destroy()`
   int rpc_port_stub_create(
     ffi.Pointer<rpc_port_stub_h> h,
     ffi.Pointer<ffi.Char> port_name,
@@ -359,14 +457,23 @@ class Tizen90RpcPort {
   late final _rpc_port_stub_create = _rpc_port_stub_createPtr.asFunction<
       int Function(ffi.Pointer<rpc_port_stub_h>, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Destroys a rpc port stub handle.
-  /// @since_tizen 4.0
-  /// @param[in] h The rpc port stub handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RPC_PORT_ERROR_NONE Successful
-  /// @retval #RPC_PORT_ERROR_INVALID_PARAMETER The specified @a h is NULL
-  /// @see rpc_port_stub_create()
+  /// Destroys a rpc port stub handle.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `h` (in): The rpc port stub handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RPC_PORT_ERROR_NONE`: Successful
+  /// - `RPC_PORT_ERROR_INVALID_PARAMETER`: The specified `h` is NULL
+  ///
+  /// **See also:**
+  /// - `rpc_port_stub_create()`
   int rpc_port_stub_destroy(
     rpc_port_stub_h h,
   ) {
@@ -381,15 +488,23 @@ class Tizen90RpcPort {
   late final _rpc_port_stub_destroy =
       _rpc_port_stub_destroyPtr.asFunction<int Function(rpc_port_stub_h)>();
 
-  /// @brief Listens to the requests for connections.
-  /// @details The stub listens requests to connect by port
-  /// @since_tizen 4.0
-  /// @param[in] h The rpc port stub handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RPC_PORT_ERROR_NONE Successful
-  /// @retval #RPC_PORT_ERROR_INVALID_PARAMETER The specified @a h is NULL
-  /// @retval #RPC_PORT_ERROR_IO_ERROR Internal I/O error
+  /// Listens to the requests for connections.
+  ///
+  /// The stub listens requests to connect by port
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `h` (in): The rpc port stub handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RPC_PORT_ERROR_NONE`: Successful
+  /// - `RPC_PORT_ERROR_INVALID_PARAMETER`: The specified `h` is NULL
+  /// - `RPC_PORT_ERROR_IO_ERROR`: Internal I/O error
   int rpc_port_stub_listen(
     rpc_port_stub_h h,
   ) {
@@ -404,16 +519,23 @@ class Tizen90RpcPort {
   late final _rpc_port_stub_listen =
       _rpc_port_stub_listenPtr.asFunction<int Function(rpc_port_stub_h)>();
 
-  /// @brief Adds a privilege to the stub.
-  /// @details The stub can control access to the port using tizen privilege.
-  /// It allows connections only if the proxy which have the privileges.
-  /// @since_tizen 4.0
-  /// @param[in] h The rpc port stub handle
-  /// @param[in] privilege The privilege to access this stub
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RPC_PORT_ERROR_NONE Successful
-  /// @retval #RPC_PORT_ERROR_INVALID_PARAMETER The specified @a h is NULL
+  /// Adds a privilege to the stub.
+  ///
+  /// The stub can control access to the port using tizen privilege. It allows connections only if the proxy which have the privileges.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `h` (in): The rpc port stub handle
+  /// - `privilege` (in): The privilege to access this stub
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RPC_PORT_ERROR_NONE`: Successful
+  /// - `RPC_PORT_ERROR_INVALID_PARAMETER`: The specified `h` is NULL
   int rpc_port_stub_add_privilege(
     rpc_port_stub_h h,
     ffi.Pointer<ffi.Char> privilege,
@@ -431,17 +553,23 @@ class Tizen90RpcPort {
   late final _rpc_port_stub_add_privilege = _rpc_port_stub_add_privilegePtr
       .asFunction<int Function(rpc_port_stub_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets trusted to the stub.
-  /// @details The stub can control access to the port using tizen certificate.
-  /// It allows connections only if the proxy is signed with the same
-  /// certificate.
-  /// @since_tizen 4.0
-  /// @param[in] h The rpc port stub handle
-  /// @param[in] trusted Whether stub allows only trusted proxy or not
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RPC_PORT_ERROR_NONE Successful
-  /// @retval #RPC_PORT_ERROR_INVALID_PARAMETER The specified @a h is NULL
+  /// Sets trusted to the stub.
+  ///
+  /// The stub can control access to the port using tizen certificate. It allows connections only if the proxy is signed with the same certificate.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `h` (in): The rpc port stub handle
+  /// - `trusted` (in): Whether stub allows only trusted proxy or not
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RPC_PORT_ERROR_NONE`: Successful
+  /// - `RPC_PORT_ERROR_INVALID_PARAMETER`: The specified `h` is NULL
   int rpc_port_stub_set_trusted(
     rpc_port_stub_h h,
     bool trusted,
@@ -458,17 +586,22 @@ class Tizen90RpcPort {
   late final _rpc_port_stub_set_trusted = _rpc_port_stub_set_trustedPtr
       .asFunction<int Function(rpc_port_stub_h, bool)>();
 
-  /// @brief Adds a stub connected callback.
-  /// @since_tizen 4.0
-  /// @param[in] h The rpc stub stub handle
-  /// @param[in] cb The callback function to be called when proxy is connected
-  /// with the stub
-  /// @param[in] user_data The user data to be passed to
-  /// the rpc_port_stub_connected_event_cb() function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RPC_PORT_ERROR_NONE Successful
-  /// @retval #RPC_PORT_ERROR_INVALID_PARAMETER The specified @a h is NULL
+  /// Adds a stub connected callback.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `h` (in): The rpc stub stub handle
+  /// - `cb` (in): The callback function to be called when proxy is connected with the stub
+  /// - `user_data` (in): The user data to be passed to the rpc_port_stub_connected_event_cb() function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RPC_PORT_ERROR_NONE`: Successful
+  /// - `RPC_PORT_ERROR_INVALID_PARAMETER`: The specified `h` is NULL
   int rpc_port_stub_add_connected_event_cb(
     rpc_port_stub_h h,
     rpc_port_stub_connected_event_cb cb,
@@ -490,17 +623,22 @@ class Tizen90RpcPort {
           int Function(rpc_port_stub_h, rpc_port_stub_connected_event_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Adds a stub disconnected callback.
-  /// @since_tizen 4.0
-  /// @param[in] h The rpc port stub handle
-  /// @param[in] cb The callback function to be called when proxy is disconnected
-  /// with the stub
-  /// @param[in] user_data The user data to be passed to
-  /// the rpc_port_stub_disconnected_event_cb() function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RPC_PORT_ERROR_NONE Successful
-  /// @retval #RPC_PORT_ERROR_INVALID_PARAMETER The specified @a h is NULL
+  /// Adds a stub disconnected callback.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `h` (in): The rpc port stub handle
+  /// - `cb` (in): The callback function to be called when proxy is disconnected with the stub
+  /// - `user_data` (in): The user data to be passed to the rpc_port_stub_disconnected_event_cb() function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RPC_PORT_ERROR_NONE`: Successful
+  /// - `RPC_PORT_ERROR_INVALID_PARAMETER`: The specified `h` is NULL
   int rpc_port_stub_add_disconnected_event_cb(
     rpc_port_stub_h h,
     rpc_port_stub_disconnected_event_cb cb,
@@ -523,16 +661,22 @@ class Tizen90RpcPort {
           int Function(rpc_port_stub_h, rpc_port_stub_disconnected_event_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Adds a stub received callback.
-  /// @since_tizen 4.0
-  /// @param[in] h The rpc port stub handle
-  /// @param[in] cb The callback function to be called when stub received data
-  /// @param[in] user_data The user data to be passed to
-  /// the rpc_port_stub_received_event_cb() function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RPC_PORT_ERROR_NONE Successful
-  /// @retval #RPC_PORT_ERROR_INVALID_PARAMETER The specified @a h is NULL
+  /// Adds a stub received callback.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `h` (in): The rpc port stub handle
+  /// - `cb` (in): The callback function to be called when stub received data
+  /// - `user_data` (in): The user data to be passed to the rpc_port_stub_received_event_cb() function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RPC_PORT_ERROR_NONE`: Successful
+  /// - `RPC_PORT_ERROR_INVALID_PARAMETER`: The specified `h` is NULL
   int rpc_port_stub_add_received_event_cb(
     rpc_port_stub_h h,
     rpc_port_stub_received_event_cb cb,
@@ -554,22 +698,33 @@ class Tizen90RpcPort {
           int Function(rpc_port_stub_h, rpc_port_stub_received_event_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Gets a port from stub handle.
-  /// @since_tizen 4.0
-  /// @remarks This handle @a port will not be valid if the instance of the stub was disconnected or destroyed.
-  /// @param[in] h The rpc port stub handle
-  /// @param[in] type The type of port
-  /// @param[in] instance The ID of the instance which is connected
-  /// @param[out] port The port to communicate
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RPC_PORT_ERROR_NONE Successful
-  /// @retval #RPC_PORT_ERROR_INVALID_PARAMETER The specified @a h is NULL
-  /// @retval #RPC_PORT_ERROR_IO_ERROR No available ports
-  /// @see rpc_port_write()
-  /// @see rpc_port_read()
-  /// @see rpc_port_parcel_create_from_port()
-  /// @see rpc_port_parcel_send();
+  /// Gets a port from stub handle.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Remarks:**
+  /// - This handle `port` will not be valid if the instance of the stub was disconnected or destroyed.
+  ///
+  /// **Parameters:**
+  /// - `h` (in): The rpc port stub handle
+  /// - `type` (in): The type of port
+  /// - `instance` (in): The ID of the instance which is connected
+  /// - `port` (out): The port to communicate
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RPC_PORT_ERROR_NONE`: Successful
+  /// - `RPC_PORT_ERROR_INVALID_PARAMETER`: The specified `h` is NULL
+  /// - `RPC_PORT_ERROR_IO_ERROR`: No available ports
+  ///
+  /// **See also:**
+  /// - `rpc_port_write()`
+  /// - `rpc_port_read()`
+  /// - `rpc_port_parcel_create_from_port()`
+  /// - rpc_port_parcel_send();
   int rpc_port_stub_get_port(
     rpc_port_stub_h h,
     int type,
@@ -592,21 +747,33 @@ class Tizen90RpcPort {
       int Function(rpc_port_stub_h, int, ffi.Pointer<ffi.Char>,
           ffi.Pointer<rpc_port_h>)>();
 
-  /// @brief Connects to @a port_name of @a appid synchronously.
-  /// @details To send and receive data, the proxy should connect to port of stub.
-  /// @since_tizen 6.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/appmanager.launch \n
-  /// %http://tizen.org/privilege/datasharing
-  /// @param[in] h The rpc port proxy handle
-  /// @param[in] appid The application ID of the target stub
-  /// @param[in] port_name The name of rpc port
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RPC_PORT_ERROR_NONE Successful
-  /// @retval #RPC_PORT_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #RPC_PORT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #RPC_PORT_ERROR_IO_ERROR I/O error
+  /// Connects to `port_name` of `appid` synchronously.
+  ///
+  /// To send and receive data, the proxy should connect to port of stub.
+  ///
+  /// **Since Tizen:**
+  /// - 6.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/appmanager.launch>
+  /// - <http://tizen.org/privilege/datasharing>
+  ///
+  /// **Parameters:**
+  /// - `h` (in): The rpc port proxy handle
+  /// - `appid` (in): The application ID of the target stub
+  /// - `port_name` (in): The name of rpc port
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RPC_PORT_ERROR_NONE`: Successful
+  /// - `RPC_PORT_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `RPC_PORT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `RPC_PORT_ERROR_IO_ERROR`: I/O error
   int rpc_port_proxy_connect_sync(
     rpc_port_proxy_h h,
     ffi.Pointer<ffi.Char> appid,
@@ -628,24 +795,28 @@ class Tizen90RpcPort {
           int Function(rpc_port_proxy_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets the paths of private sharing files.
-  /// @details If all added paths are under the caller application's data path which can be obtained by calling app_get_data_path() function,
-  /// those will be shared to the target application. Platform will grant a temporary permission to the target application for those files and revoke it when the target application is terminated or rpc_port_unset_private_sharing() is called.
-  /// Paths should be regular files. The target application can just read them.
-  /// Note that the target application doesn't have read permission of the directory that is obtained by caller's app_get_data_path(),
-  /// You should open the file path with read only mode directly. For example, access() call to the file path will return error because access() needs the read permission of the directory.
-  /// The target application can call open() with O_RDONLY mode for the passed file path, because platform grants read permission to the passed file path.
-  /// @since_tizen 6.0
-  /// @param[in] port The rpc port handle
-  /// @param[in] paths The array of paths of files
-  /// @param[in] size The size of the array of the paths
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RPC_PORT_ERROR_NONE Successful
-  /// @retval #RPC_PORT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #RPC_PORT_ERROR_IO_ERROR I/O error
+  /// Sets the paths of private sharing files.
   ///
-  /// @see rpc_port_unset_private_sharing()
+  /// If all added paths are under the caller application's data path which can be obtained by calling app_get_data_path() function, those will be shared to the target application. Platform will grant a temporary permission to the target application for those files and revoke it when the target application is terminated or rpc_port_unset_private_sharing() is called. Paths should be regular files. The target application can just read them. Note that the target application doesn't have read permission of the directory that is obtained by caller's app_get_data_path(), You should open the file path with read only mode directly. For example, access() call to the file path will return error because access() needs the read permission of the directory. The target application can call open() with O_RDONLY mode for the passed file path, because platform grants read permission to the passed file path.
+  ///
+  /// **Since Tizen:**
+  /// - 6.0
+  ///
+  /// **Parameters:**
+  /// - `port` (in): The rpc port handle
+  /// - `paths` (in): The array of paths of files
+  /// - `size` (in): The size of the array of the paths
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RPC_PORT_ERROR_NONE`: Successful
+  /// - `RPC_PORT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `RPC_PORT_ERROR_IO_ERROR`: I/O error
+  ///
+  /// **See also:**
+  /// - `rpc_port_unset_private_sharing()`
   int rpc_port_set_private_sharing_array(
     rpc_port_h port,
     ffi.Pointer<ffi.Pointer<ffi.Char>> paths,
@@ -666,19 +837,28 @@ class Tizen90RpcPort {
       _rpc_port_set_private_sharing_arrayPtr.asFunction<
           int Function(rpc_port_h, ffi.Pointer<ffi.Pointer<ffi.Char>>, int)>();
 
-  /// @brief Sets the path of the private sharing file.
-  /// @details See the description of rpc_port_set_private_sharing_array() for details.
-  /// @since_tizen 6.0
-  /// @param[in] port The rpc port handle
-  /// @param[in] path The path of the file
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RPC_PORT_ERROR_NONE Successful
-  /// @retval #RPC_PORT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #RPC_PORT_ERROR_IO_ERROR I/O error
+  /// Sets the path of the private sharing file.
   ///
-  /// @see rpc_port_set_private_sharing_array()
-  /// @see rpc_port_unset_private_sharing()
+  /// See the description of rpc_port_set_private_sharing_array() for details.
+  ///
+  /// **Since Tizen:**
+  /// - 6.0
+  ///
+  /// **Parameters:**
+  /// - `port` (in): The rpc port handle
+  /// - `path` (in): The path of the file
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RPC_PORT_ERROR_NONE`: Successful
+  /// - `RPC_PORT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `RPC_PORT_ERROR_IO_ERROR`: I/O error
+  ///
+  /// **See also:**
+  /// - `rpc_port_set_private_sharing_array()`
+  /// - `rpc_port_unset_private_sharing()`
   int rpc_port_set_private_sharing(
     rpc_port_h port,
     ffi.Pointer<ffi.Char> path,
@@ -696,17 +876,25 @@ class Tizen90RpcPort {
   late final _rpc_port_set_private_sharing = _rpc_port_set_private_sharingPtr
       .asFunction<int Function(rpc_port_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Unsets the private sharing.
-  /// @since_tizen 6.0
-  /// @param[in] port The rpc port handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RPC_PORT_ERROR_NONE Successful
-  /// @retval #RPC_PORT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #RPC_PORT_ERROR_IO_ERROR I/O error
+  /// Unsets the private sharing.
   ///
-  /// @see rpc_port_set_private_sharing_array()
-  /// @see rpc_port_set_private_sharing()
+  /// **Since Tizen:**
+  /// - 6.0
+  ///
+  /// **Parameters:**
+  /// - `port` (in): The rpc port handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RPC_PORT_ERROR_NONE`: Successful
+  /// - `RPC_PORT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `RPC_PORT_ERROR_IO_ERROR`: I/O error
+  ///
+  /// **See also:**
+  /// - `rpc_port_set_private_sharing_array()`
+  /// - `rpc_port_set_private_sharing()`
   int rpc_port_unset_private_sharing(
     rpc_port_h port,
   ) {
@@ -721,13 +909,20 @@ class Tizen90RpcPort {
   late final _rpc_port_unset_private_sharing =
       _rpc_port_unset_private_sharingPtr.asFunction<int Function(rpc_port_h)>();
 
-  /// @brief Disconnects the port.
-  /// @since_tizen 6.5
-  /// @param[in] port The rpc port handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RPC_PORT_ERROR_NONE Successful
-  /// @retval #RPC_PORT_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Disconnects the port.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Parameters:**
+  /// - `port` (in): The rpc port handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RPC_PORT_ERROR_NONE`: Successful
+  /// - `RPC_PORT_ERROR_INVALID_PARAMETER`: Invalid parameter
   int rpc_port_disconnect(
     rpc_port_h port,
   ) {
@@ -742,15 +937,26 @@ class Tizen90RpcPort {
   late final _rpc_port_disconnect =
       _rpc_port_disconnectPtr.asFunction<int Function(rpc_port_h)>();
 
-  /// @brief Creates a rpc port parcel handle.
-  /// @since_tizen 4.0
-  /// @remarks You must release @a h using rpc_port_parcel_destroy().
-  /// @param[out] h The rpc port parcel handle that is newly created
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RPC_PORT_ERROR_NONE Successful
-  /// @retval #RPC_PORT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see rpc_port_parcel_destroy()
+  /// Creates a rpc port parcel handle.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Remarks:**
+  /// - You must release `h` using rpc_port_parcel_destroy().
+  ///
+  /// **Parameters:**
+  /// - `h` (out): The rpc port parcel handle that is newly created
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RPC_PORT_ERROR_NONE`: Successful
+  /// - `RPC_PORT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `rpc_port_parcel_destroy()`
   int rpc_port_parcel_create(
     ffi.Pointer<rpc_port_parcel_h> h,
   ) {
@@ -765,20 +971,31 @@ class Tizen90RpcPort {
   late final _rpc_port_parcel_create = _rpc_port_parcel_createPtr
       .asFunction<int Function(ffi.Pointer<rpc_port_parcel_h>)>();
 
-  /// @brief Creates a rpc port parcel handle from port.
-  /// @details Creates a rpc port parcel handle using read data from the port.
-  /// It calls rpc_port_read() internally.
-  /// @since_tizen 4.0
-  /// @remarks You must release @a h using rpc_port_parcel_destroy().
-  /// @param[out] h The rpc port parcel handle that is newly created
-  /// @param[in] port The rpc port handle for creating handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RPC_PORT_ERROR_NONE Successful
-  /// @retval #RPC_PORT_ERROR_INVALID_PARAMETER The specified @a port is NULL
-  /// @retval #RPC_PORT_ERROR_IO_ERROR Internal I/O error
-  /// @see rpc_port_parcel_destroy()
-  /// @see rpc_port_parcel_send()
+  /// Creates a rpc port parcel handle from port.
+  ///
+  /// Creates a rpc port parcel handle using read data from the port. It calls rpc_port_read() internally.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Remarks:**
+  /// - You must release `h` using rpc_port_parcel_destroy().
+  ///
+  /// **Parameters:**
+  /// - `h` (out): The rpc port parcel handle that is newly created
+  /// - `port` (in): The rpc port handle for creating handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RPC_PORT_ERROR_NONE`: Successful
+  /// - `RPC_PORT_ERROR_INVALID_PARAMETER`: The specified `port` is NULL
+  /// - `RPC_PORT_ERROR_IO_ERROR`: Internal I/O error
+  ///
+  /// **See also:**
+  /// - `rpc_port_parcel_destroy()`
+  /// - `rpc_port_parcel_send()`
   int rpc_port_parcel_create_from_port(
     ffi.Pointer<rpc_port_parcel_h> h,
     rpc_port_h port,
@@ -797,18 +1014,27 @@ class Tizen90RpcPort {
       _rpc_port_parcel_create_from_portPtr.asFunction<
           int Function(ffi.Pointer<rpc_port_parcel_h>, rpc_port_h)>();
 
-  /// @brief Sends parcel data through the port.
-  /// @details Sends parcel data through the port. It calls rpc_port_write()
-  /// internally.
-  /// @since_tizen 4.0
-  /// @param[in] h The rpc port parcel handle that is newly created
-  /// @param[in] port The rpc port handle for writing data
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RPC_PORT_ERROR_NONE Successful
-  /// @retval #RPC_PORT_ERROR_INVALID_PARAMETER The specified @a h is NULL
-  /// @retval #RPC_PORT_ERROR_IO_ERROR Internal I/O error
-  /// @see rpc_port_parcel_create_from_port()
+  /// Sends parcel data through the port.
+  ///
+  /// Sends parcel data through the port. It calls rpc_port_write() internally.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `h` (in): The rpc port parcel handle that is newly created
+  /// - `port` (in): The rpc port handle for writing data
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RPC_PORT_ERROR_NONE`: Successful
+  /// - `RPC_PORT_ERROR_INVALID_PARAMETER`: The specified `h` is NULL
+  /// - `RPC_PORT_ERROR_IO_ERROR`: Internal I/O error
+  ///
+  /// **See also:**
+  /// - `rpc_port_parcel_create_from_port()`
   int rpc_port_parcel_send(
     rpc_port_parcel_h h,
     rpc_port_h port,
@@ -825,14 +1051,23 @@ class Tizen90RpcPort {
   late final _rpc_port_parcel_send = _rpc_port_parcel_sendPtr
       .asFunction<int Function(rpc_port_parcel_h, rpc_port_h)>();
 
-  /// @brief Destroys a rpc port parcel handle.
-  /// @since_tizen 4.0
-  /// @param[in] h The rpc port parcel handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RPC_PORT_ERROR_NONE Successful
-  /// @retval #RPC_PORT_ERROR_INVALID_PARAMETER The specified @a h is NULL
-  /// @see rpc_port_parcel_create()
+  /// Destroys a rpc port parcel handle.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `h` (in): The rpc port parcel handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RPC_PORT_ERROR_NONE`: Successful
+  /// - `RPC_PORT_ERROR_INVALID_PARAMETER`: The specified `h` is NULL
+  ///
+  /// **See also:**
+  /// - `rpc_port_parcel_create()`
   int rpc_port_parcel_destroy(
     rpc_port_parcel_h h,
   ) {
@@ -847,15 +1082,24 @@ class Tizen90RpcPort {
   late final _rpc_port_parcel_destroy =
       _rpc_port_parcel_destroyPtr.asFunction<int Function(rpc_port_parcel_h)>();
 
-  /// @brief Writes a byte value into rpc port parcel handle.
-  /// @since_tizen 4.0
-  /// @param[in] h The rpc port parcel handle
-  /// @param[in] b Byte data
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RPC_PORT_ERROR_NONE Successful
-  /// @retval #RPC_PORT_ERROR_INVALID_PARAMETER The specified @a h is NULL
-  /// @see rpc_port_parcel_read_byte()
+  /// Writes a byte value into rpc port parcel handle.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `h` (in): The rpc port parcel handle
+  /// - `b` (in): Byte data
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RPC_PORT_ERROR_NONE`: Successful
+  /// - `RPC_PORT_ERROR_INVALID_PARAMETER`: The specified `h` is NULL
+  ///
+  /// **See also:**
+  /// - `rpc_port_parcel_read_byte()`
   int rpc_port_parcel_write_byte(
     rpc_port_parcel_h h,
     int b,
@@ -872,15 +1116,24 @@ class Tizen90RpcPort {
   late final _rpc_port_parcel_write_byte = _rpc_port_parcel_write_bytePtr
       .asFunction<int Function(rpc_port_parcel_h, int)>();
 
-  /// @brief Writes a short value into rpc port parcel handle.
-  /// @since_tizen 4.0
-  /// @param[in] h The rpc port parcel handle
-  /// @param[in] i short data
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RPC_PORT_ERROR_NONE Successful
-  /// @retval #RPC_PORT_ERROR_INVALID_PARAMETER The specified @a h is NULL
-  /// @see rpc_port_parcel_read_int16()
+  /// Writes a short value into rpc port parcel handle.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `h` (in): The rpc port parcel handle
+  /// - `i` (in): short data
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RPC_PORT_ERROR_NONE`: Successful
+  /// - `RPC_PORT_ERROR_INVALID_PARAMETER`: The specified `h` is NULL
+  ///
+  /// **See also:**
+  /// - `rpc_port_parcel_read_int16()`
   int rpc_port_parcel_write_int16(
     rpc_port_parcel_h h,
     int i,
@@ -897,15 +1150,24 @@ class Tizen90RpcPort {
   late final _rpc_port_parcel_write_int16 = _rpc_port_parcel_write_int16Ptr
       .asFunction<int Function(rpc_port_parcel_h, int)>();
 
-  /// @brief Writes a integer value into rpc port parcel handle.
-  /// @since_tizen 4.0
-  /// @param[in] h The rpc port parcel handle
-  /// @param[in] i int data
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RPC_PORT_ERROR_NONE Successful
-  /// @retval #RPC_PORT_ERROR_INVALID_PARAMETER The specified @a h is NULL
-  /// @see rpc_port_parcel_read_int32()
+  /// Writes a integer value into rpc port parcel handle.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `h` (in): The rpc port parcel handle
+  /// - `i` (in): int data
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RPC_PORT_ERROR_NONE`: Successful
+  /// - `RPC_PORT_ERROR_INVALID_PARAMETER`: The specified `h` is NULL
+  ///
+  /// **See also:**
+  /// - `rpc_port_parcel_read_int32()`
   int rpc_port_parcel_write_int32(
     rpc_port_parcel_h h,
     int i,
@@ -922,15 +1184,24 @@ class Tizen90RpcPort {
   late final _rpc_port_parcel_write_int32 = _rpc_port_parcel_write_int32Ptr
       .asFunction<int Function(rpc_port_parcel_h, int)>();
 
-  /// @brief Writes a long long integer value into rpc port parcel handle.
-  /// @since_tizen 4.0
-  /// @param[in] h The rpc port parcel handle
-  /// @param[in] i long long data
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RPC_PORT_ERROR_NONE Successful
-  /// @retval #RPC_PORT_ERROR_INVALID_PARAMETER The specified @a h is NULL
-  /// @see rpc_port_parcel_read_int64()
+  /// Writes a long long integer value into rpc port parcel handle.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `h` (in): The rpc port parcel handle
+  /// - `i` (in): long long data
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RPC_PORT_ERROR_NONE`: Successful
+  /// - `RPC_PORT_ERROR_INVALID_PARAMETER`: The specified `h` is NULL
+  ///
+  /// **See also:**
+  /// - `rpc_port_parcel_read_int64()`
   int rpc_port_parcel_write_int64(
     rpc_port_parcel_h h,
     int i,
@@ -948,15 +1219,24 @@ class Tizen90RpcPort {
   late final _rpc_port_parcel_write_int64 = _rpc_port_parcel_write_int64Ptr
       .asFunction<int Function(rpc_port_parcel_h, int)>();
 
-  /// @brief Writes a floating point value into rpc port parcel handle.
-  /// @since_tizen 4.0
-  /// @param[in] h The rpc port parcel handle
-  /// @param[in] f float data
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RPC_PORT_ERROR_NONE Successful
-  /// @retval #RPC_PORT_ERROR_INVALID_PARAMETER The specified @a h is NULL
-  /// @see rpc_port_parcel_read_float()
+  /// Writes a floating point value into rpc port parcel handle.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `h` (in): The rpc port parcel handle
+  /// - `f` (in): float data
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RPC_PORT_ERROR_NONE`: Successful
+  /// - `RPC_PORT_ERROR_INVALID_PARAMETER`: The specified `h` is NULL
+  ///
+  /// **See also:**
+  /// - `rpc_port_parcel_read_float()`
   int rpc_port_parcel_write_float(
     rpc_port_parcel_h h,
     double f,
@@ -973,15 +1253,24 @@ class Tizen90RpcPort {
   late final _rpc_port_parcel_write_float = _rpc_port_parcel_write_floatPtr
       .asFunction<int Function(rpc_port_parcel_h, double)>();
 
-  /// @brief Writes a double precision floating point value into rpc port parcel handle.
-  /// @since_tizen 4.0
-  /// @param[in] h The rpc port parcel handle
-  /// @param[in] d double data
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RPC_PORT_ERROR_NONE Successful
-  /// @retval #RPC_PORT_ERROR_INVALID_PARAMETER The specified @a h is NULL
-  /// @see rpc_port_parcel_read_double()
+  /// Writes a double precision floating point value into rpc port parcel handle.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `h` (in): The rpc port parcel handle
+  /// - `d` (in): double data
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RPC_PORT_ERROR_NONE`: Successful
+  /// - `RPC_PORT_ERROR_INVALID_PARAMETER`: The specified `h` is NULL
+  ///
+  /// **See also:**
+  /// - `rpc_port_parcel_read_double()`
   int rpc_port_parcel_write_double(
     rpc_port_parcel_h h,
     double d,
@@ -998,15 +1287,24 @@ class Tizen90RpcPort {
   late final _rpc_port_parcel_write_double = _rpc_port_parcel_write_doublePtr
       .asFunction<int Function(rpc_port_parcel_h, double)>();
 
-  /// @brief Writes a string value into rpc port parcel handle.
-  /// @since_tizen 4.0
-  /// @param[in] h The rpc port parcel handle
-  /// @param[in] str string data
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RPC_PORT_ERROR_NONE Successful
-  /// @retval #RPC_PORT_ERROR_INVALID_PARAMETER The specified @a h is NULL
-  /// @see rpc_port_parcel_read_string()
+  /// Writes a string value into rpc port parcel handle.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `h` (in): The rpc port parcel handle
+  /// - `str` (in): string data
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RPC_PORT_ERROR_NONE`: Successful
+  /// - `RPC_PORT_ERROR_INVALID_PARAMETER`: The specified `h` is NULL
+  ///
+  /// **See also:**
+  /// - `rpc_port_parcel_read_string()`
   int rpc_port_parcel_write_string(
     rpc_port_parcel_h h,
     ffi.Pointer<ffi.Char> str,
@@ -1024,15 +1322,24 @@ class Tizen90RpcPort {
   late final _rpc_port_parcel_write_string = _rpc_port_parcel_write_stringPtr
       .asFunction<int Function(rpc_port_parcel_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Writes a boolean value into rpc port parcel handle.
-  /// @since_tizen 4.0
-  /// @param[in] h The rpc port parcel handle
-  /// @param[in] b boolean data
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RPC_PORT_ERROR_NONE Successful
-  /// @retval #RPC_PORT_ERROR_INVALID_PARAMETER The specified @a h is NULL
-  /// @see rpc_port_parcel_read_bool()
+  /// Writes a boolean value into rpc port parcel handle.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `h` (in): The rpc port parcel handle
+  /// - `b` (in): boolean data
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RPC_PORT_ERROR_NONE`: Successful
+  /// - `RPC_PORT_ERROR_INVALID_PARAMETER`: The specified `h` is NULL
+  ///
+  /// **See also:**
+  /// - `rpc_port_parcel_read_bool()`
   int rpc_port_parcel_write_bool(
     rpc_port_parcel_h h,
     bool b,
@@ -1049,15 +1356,24 @@ class Tizen90RpcPort {
   late final _rpc_port_parcel_write_bool = _rpc_port_parcel_write_boolPtr
       .asFunction<int Function(rpc_port_parcel_h, bool)>();
 
-  /// @brief Writes a bundle data into rpc port parcel handle.
-  /// @since_tizen 4.0
-  /// @param[in] h The rpc port parcel handle
-  /// @param[in] b Bundle data
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RPC_PORT_ERROR_NONE Successful
-  /// @retval #RPC_PORT_ERROR_INVALID_PARAMETER The specified @a h is NULL
-  /// @see rpc_port_parcel_read_bundle()
+  /// Writes a bundle data into rpc port parcel handle.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `h` (in): The rpc port parcel handle
+  /// - `b` (in): Bundle data
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RPC_PORT_ERROR_NONE`: Successful
+  /// - `RPC_PORT_ERROR_INVALID_PARAMETER`: The specified `h` is NULL
+  ///
+  /// **See also:**
+  /// - `rpc_port_parcel_read_bundle()`
   int rpc_port_parcel_write_bundle(
     rpc_port_parcel_h h,
     ffi.Pointer<bundle.bundle> b,
@@ -1076,15 +1392,24 @@ class Tizen90RpcPort {
       _rpc_port_parcel_write_bundlePtr.asFunction<
           int Function(rpc_port_parcel_h, ffi.Pointer<bundle.bundle>)>();
 
-  /// @brief Writes a count for array into rpc port parcel handle.
-  /// @since_tizen 4.0
-  /// @param[in] h The rpc port parcel handle
-  /// @param[in] count Array count
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RPC_PORT_ERROR_NONE Successful
-  /// @retval #RPC_PORT_ERROR_INVALID_PARAMETER The specified @a h is NULL
-  /// @see rpc_port_parcel_read_array_count()
+  /// Writes a count for array into rpc port parcel handle.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `h` (in): The rpc port parcel handle
+  /// - `count` (in): Array count
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RPC_PORT_ERROR_NONE`: Successful
+  /// - `RPC_PORT_ERROR_INVALID_PARAMETER`: The specified `h` is NULL
+  ///
+  /// **See also:**
+  /// - `rpc_port_parcel_read_array_count()`
   int rpc_port_parcel_write_array_count(
     rpc_port_parcel_h h,
     int count,
@@ -1102,16 +1427,25 @@ class Tizen90RpcPort {
       _rpc_port_parcel_write_array_countPtr
           .asFunction<int Function(rpc_port_parcel_h, int)>();
 
-  /// @brief Writes the data into parcel handle using @a parcelable.
-  /// @since_tizen 4.0
-  /// @param[in] h The rpc port parcel handle
-  /// @param[in] parcelable The interface to write the data into parcel handle
-  /// @param[in] data Data which write into parcel
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RPC_PORT_ERROR_NONE Successful
-  /// @retval #RPC_PORT_ERROR_INVALID_PARAMETER The specified @a h is NULL
-  /// @see rpc_port_parcel_read()
+  /// Writes the data into parcel handle using `parcelable`.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `h` (in): The rpc port parcel handle
+  /// - `parcelable` (in): The interface to write the data into parcel handle
+  /// - `data` (in): Data which write into parcel
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RPC_PORT_ERROR_NONE`: Successful
+  /// - `RPC_PORT_ERROR_INVALID_PARAMETER`: The specified `h` is NULL
+  ///
+  /// **See also:**
+  /// - `rpc_port_parcel_read()`
   int rpc_port_parcel_write(
     rpc_port_parcel_h h,
     ffi.Pointer<rpc_port_parcelable_t> parcelable,
@@ -1134,15 +1468,24 @@ class Tizen90RpcPort {
       int Function(rpc_port_parcel_h, ffi.Pointer<rpc_port_parcelable_t>,
           ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Reads a byte value from rpc port parcel handle.
-  /// @since_tizen 4.0
-  /// @param[in] h The rpc port parcel handle
-  /// @param[out] b Byte data
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RPC_PORT_ERROR_NONE Successful
-  /// @retval #RPC_PORT_ERROR_INVALID_PARAMETER The specified @a h is NULL
-  /// @see rpc_port_parcel_write_byte()
+  /// Reads a byte value from rpc port parcel handle.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `h` (in): The rpc port parcel handle
+  /// - `b` (out): Byte data
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RPC_PORT_ERROR_NONE`: Successful
+  /// - `RPC_PORT_ERROR_INVALID_PARAMETER`: The specified `h` is NULL
+  ///
+  /// **See also:**
+  /// - `rpc_port_parcel_write_byte()`
   int rpc_port_parcel_read_byte(
     rpc_port_parcel_h h,
     ffi.Pointer<ffi.Char> b,
@@ -1160,15 +1503,24 @@ class Tizen90RpcPort {
   late final _rpc_port_parcel_read_byte = _rpc_port_parcel_read_bytePtr
       .asFunction<int Function(rpc_port_parcel_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Reads a short value from rpc port parcel handle.
-  /// @since_tizen 4.0
-  /// @param[in] h The rpc port parcel handle
-  /// @param[out] i short data
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RPC_PORT_ERROR_NONE Successful
-  /// @retval #RPC_PORT_ERROR_INVALID_PARAMETER The specified @a h is NULL
-  /// @see rpc_port_parcel_write_int16()
+  /// Reads a short value from rpc port parcel handle.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `h` (in): The rpc port parcel handle
+  /// - `i` (out): short data
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RPC_PORT_ERROR_NONE`: Successful
+  /// - `RPC_PORT_ERROR_INVALID_PARAMETER`: The specified `h` is NULL
+  ///
+  /// **See also:**
+  /// - `rpc_port_parcel_write_int16()`
   int rpc_port_parcel_read_int16(
     rpc_port_parcel_h h,
     ffi.Pointer<ffi.Short> i,
@@ -1186,15 +1538,24 @@ class Tizen90RpcPort {
   late final _rpc_port_parcel_read_int16 = _rpc_port_parcel_read_int16Ptr
       .asFunction<int Function(rpc_port_parcel_h, ffi.Pointer<ffi.Short>)>();
 
-  /// @brief Reads a integer value from rpc port parcel handle.
-  /// @since_tizen 4.0
-  /// @param[in] h The rpc port parcel handle
-  /// @param[out] i int data
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RPC_PORT_ERROR_NONE Successful
-  /// @retval #RPC_PORT_ERROR_INVALID_PARAMETER The specified @a h is NULL
-  /// @see rpc_port_parcel_write_int32()
+  /// Reads a integer value from rpc port parcel handle.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `h` (in): The rpc port parcel handle
+  /// - `i` (out): int data
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RPC_PORT_ERROR_NONE`: Successful
+  /// - `RPC_PORT_ERROR_INVALID_PARAMETER`: The specified `h` is NULL
+  ///
+  /// **See also:**
+  /// - `rpc_port_parcel_write_int32()`
   int rpc_port_parcel_read_int32(
     rpc_port_parcel_h h,
     ffi.Pointer<ffi.Int> i,
@@ -1212,15 +1573,24 @@ class Tizen90RpcPort {
   late final _rpc_port_parcel_read_int32 = _rpc_port_parcel_read_int32Ptr
       .asFunction<int Function(rpc_port_parcel_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Reads a long long integer value from rpc port parcel handle.
-  /// @since_tizen 4.0
-  /// @param[in] h The rpc port parcel handle
-  /// @param[out] i long long data
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RPC_PORT_ERROR_NONE Successful
-  /// @retval #RPC_PORT_ERROR_INVALID_PARAMETER The specified @a h is NULL
-  /// @see rpc_port_parcel_write_int64()
+  /// Reads a long long integer value from rpc port parcel handle.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `h` (in): The rpc port parcel handle
+  /// - `i` (out): long long data
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RPC_PORT_ERROR_NONE`: Successful
+  /// - `RPC_PORT_ERROR_INVALID_PARAMETER`: The specified `h` is NULL
+  ///
+  /// **See also:**
+  /// - `rpc_port_parcel_write_int64()`
   int rpc_port_parcel_read_int64(
     rpc_port_parcel_h h,
     ffi.Pointer<ffi.LongLong> i,
@@ -1238,15 +1608,24 @@ class Tizen90RpcPort {
   late final _rpc_port_parcel_read_int64 = _rpc_port_parcel_read_int64Ptr
       .asFunction<int Function(rpc_port_parcel_h, ffi.Pointer<ffi.LongLong>)>();
 
-  /// @brief Reads a floating point value from rpc port parcel handle.
-  /// @since_tizen 4.0
-  /// @param[in] h The rpc port parcel handle
-  /// @param[out] f float data
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RPC_PORT_ERROR_NONE Successful
-  /// @retval #RPC_PORT_ERROR_INVALID_PARAMETER The specified @a h is NULL
-  /// @see rpc_port_parcel_write_float()
+  /// Reads a floating point value from rpc port parcel handle.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `h` (in): The rpc port parcel handle
+  /// - `f` (out): float data
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RPC_PORT_ERROR_NONE`: Successful
+  /// - `RPC_PORT_ERROR_INVALID_PARAMETER`: The specified `h` is NULL
+  ///
+  /// **See also:**
+  /// - `rpc_port_parcel_write_float()`
   int rpc_port_parcel_read_float(
     rpc_port_parcel_h h,
     ffi.Pointer<ffi.Float> f,
@@ -1264,15 +1643,24 @@ class Tizen90RpcPort {
   late final _rpc_port_parcel_read_float = _rpc_port_parcel_read_floatPtr
       .asFunction<int Function(rpc_port_parcel_h, ffi.Pointer<ffi.Float>)>();
 
-  /// @brief Reads a double precision floating point value from rpc port parcel handle.
-  /// @since_tizen 4.0
-  /// @param[in] h The rpc port parcel handle
-  /// @param[out] d double data
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RPC_PORT_ERROR_NONE Successful
-  /// @retval #RPC_PORT_ERROR_INVALID_PARAMETER The specified @a h is NULL
-  /// @see rpc_port_parcel_write_double()
+  /// Reads a double precision floating point value from rpc port parcel handle.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `h` (in): The rpc port parcel handle
+  /// - `d` (out): double data
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RPC_PORT_ERROR_NONE`: Successful
+  /// - `RPC_PORT_ERROR_INVALID_PARAMETER`: The specified `h` is NULL
+  ///
+  /// **See also:**
+  /// - `rpc_port_parcel_write_double()`
   int rpc_port_parcel_read_double(
     rpc_port_parcel_h h,
     ffi.Pointer<ffi.Double> d,
@@ -1290,16 +1678,27 @@ class Tizen90RpcPort {
   late final _rpc_port_parcel_read_double = _rpc_port_parcel_read_doublePtr
       .asFunction<int Function(rpc_port_parcel_h, ffi.Pointer<ffi.Double>)>();
 
-  /// @brief Reads a string value from rpc port parcel handle.
-  /// @since_tizen 4.0
-  /// @remarks The @a str should be released using free().
-  /// @param[in] h The rpc port parcel handle
-  /// @param[out] str string data
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RPC_PORT_ERROR_NONE Successful
-  /// @retval #RPC_PORT_ERROR_INVALID_PARAMETER The specified @a h is NULL
-  /// @see rpc_port_parcel_write_string()
+  /// Reads a string value from rpc port parcel handle.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Remarks:**
+  /// - The `str` should be released using free().
+  ///
+  /// **Parameters:**
+  /// - `h` (in): The rpc port parcel handle
+  /// - `str` (out): string data
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RPC_PORT_ERROR_NONE`: Successful
+  /// - `RPC_PORT_ERROR_INVALID_PARAMETER`: The specified `h` is NULL
+  ///
+  /// **See also:**
+  /// - `rpc_port_parcel_write_string()`
   int rpc_port_parcel_read_string(
     rpc_port_parcel_h h,
     ffi.Pointer<ffi.Pointer<ffi.Char>> str,
@@ -1320,15 +1719,24 @@ class Tizen90RpcPort {
           int Function(
               rpc_port_parcel_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Reads a boolean value from rpc port parcel handle.
-  /// @since_tizen 4.0
-  /// @param[in] h The rpc port parcel handle
-  /// @param[out] b boolean data
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RPC_PORT_ERROR_NONE Successful
-  /// @retval #RPC_PORT_ERROR_INVALID_PARAMETER The specified @a h is NULL
-  /// @see rpc_port_parcel_write_bool()
+  /// Reads a boolean value from rpc port parcel handle.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `h` (in): The rpc port parcel handle
+  /// - `b` (out): boolean data
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RPC_PORT_ERROR_NONE`: Successful
+  /// - `RPC_PORT_ERROR_INVALID_PARAMETER`: The specified `h` is NULL
+  ///
+  /// **See also:**
+  /// - `rpc_port_parcel_write_bool()`
   int rpc_port_parcel_read_bool(
     rpc_port_parcel_h h,
     ffi.Pointer<ffi.Bool> b,
@@ -1346,16 +1754,27 @@ class Tizen90RpcPort {
   late final _rpc_port_parcel_read_bool = _rpc_port_parcel_read_boolPtr
       .asFunction<int Function(rpc_port_parcel_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Reads a bundle data from rpc port parcel handle.
-  /// @since_tizen 4.0
-  /// @remarks The @a b should be released using bundle_free().
-  /// @param[in] h The rpc port parcel handle
-  /// @param[out] b Bundle data
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RPC_PORT_ERROR_NONE Successful
-  /// @retval #RPC_PORT_ERROR_INVALID_PARAMETER The specified @a h is NULL
-  /// @see rpc_port_parcel_write_bundle()
+  /// Reads a bundle data from rpc port parcel handle.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Remarks:**
+  /// - The `b` should be released using bundle_free().
+  ///
+  /// **Parameters:**
+  /// - `h` (in): The rpc port parcel handle
+  /// - `b` (out): Bundle data
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RPC_PORT_ERROR_NONE`: Successful
+  /// - `RPC_PORT_ERROR_INVALID_PARAMETER`: The specified `h` is NULL
+  ///
+  /// **See also:**
+  /// - `rpc_port_parcel_write_bundle()`
   int rpc_port_parcel_read_bundle(
     rpc_port_parcel_h h,
     ffi.Pointer<ffi.Pointer<bundle.bundle>> b,
@@ -1376,15 +1795,24 @@ class Tizen90RpcPort {
           int Function(
               rpc_port_parcel_h, ffi.Pointer<ffi.Pointer<bundle.bundle>>)>();
 
-  /// @brief Reads a count for array from rpc port parcel handle.
-  /// @since_tizen 4.0
-  /// @param[in] h The rpc port parcel handle
-  /// @param[out] count Array count
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RPC_PORT_ERROR_NONE Successful
-  /// @retval #RPC_PORT_ERROR_INVALID_PARAMETER The specified @a h is NULL
-  /// @see rpc_port_parcel_write_array_count()
+  /// Reads a count for array from rpc port parcel handle.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `h` (in): The rpc port parcel handle
+  /// - `count` (out): Array count
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RPC_PORT_ERROR_NONE`: Successful
+  /// - `RPC_PORT_ERROR_INVALID_PARAMETER`: The specified `h` is NULL
+  ///
+  /// **See also:**
+  /// - `rpc_port_parcel_write_array_count()`
   int rpc_port_parcel_read_array_count(
     rpc_port_parcel_h h,
     ffi.Pointer<ffi.Int> count,
@@ -1403,16 +1831,25 @@ class Tizen90RpcPort {
       _rpc_port_parcel_read_array_countPtr
           .asFunction<int Function(rpc_port_parcel_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Reads a parcel from the data using @a parcelable.
-  /// @since_tizen 4.0
-  /// @param[in] h The rpc port parcel handle
-  /// @param[in] parcelable The interface to get data from parcel handle
-  /// @param[in] data Data which get from parcel
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RPC_PORT_ERROR_NONE Successful
-  /// @retval #RPC_PORT_ERROR_INVALID_PARAMETER The specified @a h is NULL
-  /// @see rpc_port_parcel_write()
+  /// Reads a parcel from the data using `parcelable`.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `h` (in): The rpc port parcel handle
+  /// - `parcelable` (in): The interface to get data from parcel handle
+  /// - `data` (in): Data which get from parcel
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RPC_PORT_ERROR_NONE`: Successful
+  /// - `RPC_PORT_ERROR_INVALID_PARAMETER`: The specified `h` is NULL
+  ///
+  /// **See also:**
+  /// - `rpc_port_parcel_write()`
   int rpc_port_parcel_read(
     rpc_port_parcel_h h,
     ffi.Pointer<rpc_port_parcelable_t> parcelable,
@@ -1435,16 +1872,25 @@ class Tizen90RpcPort {
       int Function(rpc_port_parcel_h, ffi.Pointer<rpc_port_parcelable_t>,
           ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Reads bytes from rpc port parcel handle.
-  /// @since_tizen 4.0
-  /// @param[in] h The rpc port parcel handle
-  /// @param[out] buf The array buffer to read
-  /// @param[in] size Bytes to read
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RPC_PORT_ERROR_NONE Successful
-  /// @retval #RPC_PORT_ERROR_INVALID_PARAMETER The specified @a h is NULL
-  /// @see rpc_port_parcel_write_bool()
+  /// Reads bytes from rpc port parcel handle.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `h` (in): The rpc port parcel handle
+  /// - `buf` (out): The array buffer to read
+  /// - `size` (in): Bytes to read
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RPC_PORT_ERROR_NONE`: Successful
+  /// - `RPC_PORT_ERROR_INVALID_PARAMETER`: The specified `h` is NULL
+  ///
+  /// **See also:**
+  /// - `rpc_port_parcel_write_bool()`
   int rpc_port_parcel_burst_read(
     rpc_port_parcel_h h,
     ffi.Pointer<ffi.UnsignedChar> buf,
@@ -1466,16 +1912,25 @@ class Tizen90RpcPort {
           int Function(
               rpc_port_parcel_h, ffi.Pointer<ffi.UnsignedChar>, int)>();
 
-  /// @brief Writes bytes to rpc port parcel handle.
-  /// @since_tizen 4.0
-  /// @param[in] h The rpc port parcel handle
-  /// @param[in] buf The array buffer to write
-  /// @param[in] size Bytes to write
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RPC_PORT_ERROR_NONE Successful
-  /// @retval #RPC_PORT_ERROR_INVALID_PARAMETER The specified @a h is NULL
-  /// @see rpc_port_parcel_write_bool()
+  /// Writes bytes to rpc port parcel handle.
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `h` (in): The rpc port parcel handle
+  /// - `buf` (in): The array buffer to write
+  /// - `size` (in): Bytes to write
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RPC_PORT_ERROR_NONE`: Successful
+  /// - `RPC_PORT_ERROR_INVALID_PARAMETER`: The specified `h` is NULL
+  ///
+  /// **See also:**
+  /// - `rpc_port_parcel_write_bool()`
   int rpc_port_parcel_burst_write(
     rpc_port_parcel_h h,
     ffi.Pointer<ffi.UnsignedChar> buf,
@@ -1497,15 +1952,24 @@ class Tizen90RpcPort {
           int Function(
               rpc_port_parcel_h, ffi.Pointer<ffi.UnsignedChar>, int)>();
 
-  /// @brief Gets the header handle of the rpc port parcel.
-  /// @since_tizen 6.5
-  /// @remarks The @a header is managed by the platform and will be released when rpc_port_parcel_destroy() is called.
-  /// @param[in] h The rpc port parcel handle
-  /// @param[out] header The header handle of the rpc port parcel
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RPC_PORT_ERROR_NONE Successful
-  /// @retval #RPC_PORT_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Gets the header handle of the rpc port parcel.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Remarks:**
+  /// - The `header` is managed by the platform and will be released when rpc_port_parcel_destroy() is called.
+  ///
+  /// **Parameters:**
+  /// - `h` (in): The rpc port parcel handle
+  /// - `header` (out): The header handle of the rpc port parcel
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RPC_PORT_ERROR_NONE`: Successful
+  /// - `RPC_PORT_ERROR_INVALID_PARAMETER`: Invalid parameter
   int rpc_port_parcel_get_header(
     rpc_port_parcel_h h,
     ffi.Pointer<rpc_port_parcel_header_h> header,
@@ -1526,15 +1990,24 @@ class Tizen90RpcPort {
           int Function(
               rpc_port_parcel_h, ffi.Pointer<rpc_port_parcel_header_h>)>();
 
-  /// @brief Sets the tag to the header handle of the rpc port parcel.
-  /// @since_tizen 6.5
-  /// @param[in] header The header handle of the rpc port parcel
-  /// @param[in] tag The tag
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RPC_PORT_ERROR_NONE Successful
-  /// @retval #RPC_PORT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see rpc_port_parcel_header_get_tag()
+  /// Sets the tag to the header handle of the rpc port parcel.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Parameters:**
+  /// - `header` (in): The header handle of the rpc port parcel
+  /// - `tag` (in): The tag
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RPC_PORT_ERROR_NONE`: Successful
+  /// - `RPC_PORT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `rpc_port_parcel_header_get_tag()`
   int rpc_port_parcel_header_set_tag(
     rpc_port_parcel_header_h header,
     ffi.Pointer<ffi.Char> tag,
@@ -1553,17 +2026,28 @@ class Tizen90RpcPort {
       _rpc_port_parcel_header_set_tagPtr.asFunction<
           int Function(rpc_port_parcel_header_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the tag from the header handle of the rpc port parcel.
-  /// @since_tizen 6.5
-  /// @remarks The @a tag should be released using free().
-  /// @param[in] header The header handle of the rpc port parcel
-  /// @param[out] tag The tag
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RPC_PORT_ERROR_NONE Successful
-  /// @retval #RPC_PORT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #RPC_PORT_ERROR_OUT_OF_MEMORY Out of memory
-  /// @see rpc_port_parcel_header_set_tag()
+  /// Gets the tag from the header handle of the rpc port parcel.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Remarks:**
+  /// - The `tag` should be released using free().
+  ///
+  /// **Parameters:**
+  /// - `header` (in): The header handle of the rpc port parcel
+  /// - `tag` (out): The tag
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RPC_PORT_ERROR_NONE`: Successful
+  /// - `RPC_PORT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `RPC_PORT_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `rpc_port_parcel_header_set_tag()`
   int rpc_port_parcel_header_get_tag(
     rpc_port_parcel_header_h header,
     ffi.Pointer<ffi.Pointer<ffi.Char>> tag,
@@ -1584,15 +2068,24 @@ class Tizen90RpcPort {
           int Function(
               rpc_port_parcel_header_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets the sequence number to the header handle of the rpc port parcel.
-  /// @since_tizen 6.5
-  /// @param[in] header The header handle of the rpc port parcel
-  /// @param[in] seq_num The sequence number
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RPC_PORT_ERROR_NONE Successful
-  /// @retval #RPC_PORT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see rpc_port_parcel_header_get_seq_num()
+  /// Sets the sequence number to the header handle of the rpc port parcel.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Parameters:**
+  /// - `header` (in): The header handle of the rpc port parcel
+  /// - `seq_num` (in): The sequence number
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RPC_PORT_ERROR_NONE`: Successful
+  /// - `RPC_PORT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `rpc_port_parcel_header_get_seq_num()`
   int rpc_port_parcel_header_set_seq_num(
     rpc_port_parcel_header_h header,
     int seq_num,
@@ -1611,15 +2104,24 @@ class Tizen90RpcPort {
       _rpc_port_parcel_header_set_seq_numPtr
           .asFunction<int Function(rpc_port_parcel_header_h, int)>();
 
-  /// @brief Gets the sequence number from the header handle of the rpc port parcel.
-  /// @since_tizen 6.5
-  /// @param[in] header The header handle of the rpc port parcel
-  /// @param[out] seq_num The sequence number
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RPC_PORT_ERROR_NONE Successful
-  /// @retval #RPC_PORT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see rpc_port_parcel_header_set_seq_num()
+  /// Gets the sequence number from the header handle of the rpc port parcel.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Parameters:**
+  /// - `header` (in): The header handle of the rpc port parcel
+  /// - `seq_num` (out): The sequence number
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RPC_PORT_ERROR_NONE`: Successful
+  /// - `RPC_PORT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `rpc_port_parcel_header_set_seq_num()`
   int rpc_port_parcel_header_get_seq_num(
     rpc_port_parcel_header_h header,
     ffi.Pointer<ffi.Int> seq_num,
@@ -1638,16 +2140,25 @@ class Tizen90RpcPort {
       _rpc_port_parcel_header_get_seq_numPtr.asFunction<
           int Function(rpc_port_parcel_header_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the timestamp from the header handle of the rpc port parcel.
-  /// @since_tizen 6.5
-  /// @remarks The @a timestamp represents monotonic time since some unspecified starting point.
-  /// To get elapsed time properly, you have to get the timestamp using the clock_gettime() with CLOCK_MONITONIC_RAW.
-  /// @param[in] header The header handle of the rpc port parcel
-  /// @param[out] timestamp The timestamp
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RPC_PORT_ERROR_NONE Successful
-  /// @retval #RPC_PORT_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Gets the timestamp from the header handle of the rpc port parcel.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Remarks:**
+  /// - The `timestamp` represents monotonic time since some unspecified starting point.
+  /// - To get elapsed time properly, you have to get the timestamp using the clock_gettime() with CLOCK_MONITONIC_RAW.
+  ///
+  /// **Parameters:**
+  /// - `header` (in): The header handle of the rpc port parcel
+  /// - `timestamp` (out): The timestamp
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RPC_PORT_ERROR_NONE`: Successful
+  /// - `RPC_PORT_ERROR_INVALID_PARAMETER`: Invalid parameter
   int rpc_port_parcel_header_get_timestamp(
     rpc_port_parcel_header_h header,
     ffi.Pointer<time.timespec> timestamp,
@@ -1667,16 +2178,25 @@ class Tizen90RpcPort {
       _rpc_port_parcel_header_get_timestampPtr.asFunction<
           int Function(rpc_port_parcel_header_h, ffi.Pointer<time.timespec>)>();
 
-  /// @brief Gets the raw data of the rpc port parcel handle.
-  /// @since_tizen 6.5
-  /// @remarks You MUST NOT release @a raw using free(). It's managed by platform.
-  /// @param[in] h The rpc port parcel handle
-  /// @param[out] raw The raw data
-  /// @param[out] size The size of the raw data
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RPC_PORT_ERROR_NONE Successful
-  /// @retval #RPC_PORT_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Gets the raw data of the rpc port parcel handle.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Remarks:**
+  /// - You MUST NOT release `raw` using free(). It's managed by platform.
+  ///
+  /// **Parameters:**
+  /// - `h` (in): The rpc port parcel handle
+  /// - `raw` (out): The raw data
+  /// - `size` (out): The size of the raw data
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RPC_PORT_ERROR_NONE`: Successful
+  /// - `RPC_PORT_ERROR_INVALID_PARAMETER`: Invalid parameter
   int rpc_port_parcel_get_raw(
     rpc_port_parcel_h h,
     ffi.Pointer<ffi.Pointer<ffi.Void>> raw,
@@ -1699,18 +2219,29 @@ class Tizen90RpcPort {
       int Function(rpc_port_parcel_h, ffi.Pointer<ffi.Pointer<ffi.Void>>,
           ffi.Pointer<ffi.UnsignedInt>)>();
 
-  /// @brief Creates the rpc port parcel handle with given the raw data.
-  /// @since_tizen 6.5
-  /// @remarks You must release @a h using rpc_port_parcel_destroy().
-  /// @param[out] h The rpc port parcel handle
-  /// @param[in] raw The raw data
-  /// @param[in] size The size of the raw data
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RPC_PORT_ERROR_NONE Successful
-  /// @retval #RPC_PORT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #RPC_PORT_ERROR_OUT_OF_MEMORY Out of memory
-  /// @see rpc_port_parcel_destroy()
+  /// Creates the rpc port parcel handle with given the raw data.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Remarks:**
+  /// - You must release `h` using rpc_port_parcel_destroy().
+  ///
+  /// **Parameters:**
+  /// - `h` (out): The rpc port parcel handle
+  /// - `raw` (in): The raw data
+  /// - `size` (in): The size of the raw data
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RPC_PORT_ERROR_NONE`: Successful
+  /// - `RPC_PORT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `RPC_PORT_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `rpc_port_parcel_destroy()`
   int rpc_port_parcel_create_from_raw(
     ffi.Pointer<rpc_port_parcel_h> h,
     ffi.Pointer<ffi.Void> raw,
@@ -1734,16 +2265,27 @@ class Tizen90RpcPort {
           int Function(
               ffi.Pointer<rpc_port_parcel_h>, ffi.Pointer<ffi.Void>, int)>();
 
-  /// @brief Creates the rpc port parcel handle without the header.
-  /// @since_tizen 8.0
-  /// @remarks You must release @a h using rpc_port_parcel_destroy().
-  /// @param[out] h The rpc port parcel handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #RPC_PORT_ERROR_NONE Successful
-  /// @retval #RPC_PORT_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #RPC_PORT_ERROR_OUT_OF_MEMORY Out of memory
-  /// @see rpc_port_parcel_destroy()
+  /// Creates the rpc port parcel handle without the header.
+  ///
+  /// **Since Tizen:**
+  /// - 8.0
+  ///
+  /// **Remarks:**
+  /// - You must release `h` using rpc_port_parcel_destroy().
+  ///
+  /// **Parameters:**
+  /// - `h` (out): The rpc port parcel handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `RPC_PORT_ERROR_NONE`: Successful
+  /// - `RPC_PORT_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `RPC_PORT_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `rpc_port_parcel_destroy()`
   int rpc_port_parcel_create_without_header(
     ffi.Pointer<rpc_port_parcel_h> h,
   ) {
@@ -1760,8 +2302,11 @@ class Tizen90RpcPort {
           .asFunction<int Function(ffi.Pointer<rpc_port_parcel_h>)>();
 }
 
-/// @brief Enumeration for error codes of a rpc port.
-/// @since_tizen 4.0
+/// Enumeration for error codes of a rpc port.
+///
+/// **Since Tizen:**
+/// - 4.0
+/// @nodoc
 abstract class rpc_port_error_e {
   /// < Successful
   static const int RPC_PORT_ERROR_NONE = 0;
@@ -1779,8 +2324,11 @@ abstract class rpc_port_error_e {
   static const int RPC_PORT_ERROR_PERMISSION_DENIED = -13;
 }
 
-/// @brief Enumeration for types of communication channels.
-/// @since_tizen 4.0
+/// Enumeration for types of communication channels.
+///
+/// **Since Tizen:**
+/// - 4.0
+/// @nodoc
 abstract class rpc_port_port_type_e {
   /// < Main channel
   static const int RPC_PORT_PORT_MAIN = 0;
@@ -1789,154 +2337,216 @@ abstract class rpc_port_port_type_e {
   static const int RPC_PORT_PORT_CALLBACK = 1;
 }
 
-/// @brief The rpc port handle.
-/// @since_tizen 4.0
+/// The rpc port handle.
+///
+/// **Since Tizen:**
+/// - 4.0
+/// @nodoc
 typedef rpc_port_h = ffi.Pointer<ffi.Void>;
 
-/// @brief The rpc port proxy handle.
-/// @since_tizen 4.0
+/// The rpc port proxy handle.
+///
+/// **Since Tizen:**
+/// - 4.0
+/// @nodoc
 typedef rpc_port_proxy_h = ffi.Pointer<ffi.Void>;
 
-/// @brief Called when the proxy is connected.
-/// @details The function is called when the proxy is connected with stub by port.
-/// @since_tizen 4.0
-/// @param[in] receiver The target stub app id
-/// @param[in] port_name The name of the port
-/// @param[in] port The rpc port handle for reading and writing
-/// @param[in] user_data The user data passed from the register function
+/// Called when the proxy is connected.
+///
+/// The function is called when the proxy is connected with stub by port.
+///
+/// **Since Tizen:**
+/// - 4.0
+///
+/// **Parameters:**
+/// - `receiver` (in): The target stub app id
+/// - `port_name` (in): The name of the port
+/// - `port` (in): The rpc port handle for reading and writing
+/// - `user_data` (in): The user data passed from the register function
+/// @nodoc
 typedef rpc_port_proxy_connected_event_cb = ffi
     .Pointer<ffi.NativeFunction<rpc_port_proxy_connected_event_cbFunction>>;
+/// @nodoc
 typedef rpc_port_proxy_connected_event_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> receiver,
     ffi.Pointer<ffi.Char> port_name,
     rpc_port_h port,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartrpc_port_proxy_connected_event_cbFunction = void Function(
     ffi.Pointer<ffi.Char> receiver,
     ffi.Pointer<ffi.Char> port_name,
     rpc_port_h port,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the proxy is disconnected.
-/// @details The function is called when the proxy is disconnected from stub.
-/// @since_tizen 4.0
-/// @param[in] receiver The target stub app id
-/// @param[in] port_name The name of the port
-/// @param[in] user_data The user data passed from the register function
+/// Called when the proxy is disconnected.
+///
+/// The function is called when the proxy is disconnected from stub.
+///
+/// **Since Tizen:**
+/// - 4.0
+///
+/// **Parameters:**
+/// - `receiver` (in): The target stub app id
+/// - `port_name` (in): The name of the port
+/// - `user_data` (in): The user data passed from the register function
+/// @nodoc
 typedef rpc_port_proxy_disconnected_event_cb = ffi
     .Pointer<ffi.NativeFunction<rpc_port_proxy_disconnected_event_cbFunction>>;
+/// @nodoc
 typedef rpc_port_proxy_disconnected_event_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> receiver,
     ffi.Pointer<ffi.Char> port_name,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartrpc_port_proxy_disconnected_event_cbFunction = void Function(
     ffi.Pointer<ffi.Char> receiver,
     ffi.Pointer<ffi.Char> port_name,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the proxy is rejected.
-/// @details The function is called when the proxy is rejected to connect stub.
-/// @since_tizen 4.0
-/// @param[in] receiver The target stub app id
-/// @param[in] port_name The name of the port
-/// @param[in] user_data The user data passed from the register function
+/// Called when the proxy is rejected.
+///
+/// The function is called when the proxy is rejected to connect stub.
+///
+/// **Since Tizen:**
+/// - 4.0
+///
+/// **Parameters:**
+/// - `receiver` (in): The target stub app id
+/// - `port_name` (in): The name of the port
+/// - `user_data` (in): The user data passed from the register function
+/// @nodoc
 typedef rpc_port_proxy_rejected_event_cb
     = ffi.Pointer<ffi.NativeFunction<rpc_port_proxy_rejected_event_cbFunction>>;
+/// @nodoc
 typedef rpc_port_proxy_rejected_event_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> receiver,
     ffi.Pointer<ffi.Char> port_name,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartrpc_port_proxy_rejected_event_cbFunction = void Function(
     ffi.Pointer<ffi.Char> receiver,
     ffi.Pointer<ffi.Char> port_name,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the proxy received data.
-/// @details The function is called when the proxy received data from stub.
-/// @since_tizen 4.0
-/// @param[in] receiver The target stub app id
-/// @param[in] port_name The name of the port
-/// @param[in] user_data The user data passed from the register function
+/// Called when the proxy received data.
+///
+/// The function is called when the proxy received data from stub.
+///
+/// **Since Tizen:**
+/// - 4.0
+///
+/// **Parameters:**
+/// - `receiver` (in): The target stub app id
+/// - `port_name` (in): The name of the port
+/// - `user_data` (in): The user data passed from the register function
+/// @nodoc
 typedef rpc_port_proxy_received_event_cb
     = ffi.Pointer<ffi.NativeFunction<rpc_port_proxy_received_event_cbFunction>>;
+/// @nodoc
 typedef rpc_port_proxy_received_event_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> receiver,
     ffi.Pointer<ffi.Char> port_name,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartrpc_port_proxy_received_event_cbFunction = void Function(
     ffi.Pointer<ffi.Char> receiver,
     ffi.Pointer<ffi.Char> port_name,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief The rpc port stub handle.
-/// @since_tizen 4.0
+/// The rpc port stub handle.
+///
+/// **Since Tizen:**
+/// - 4.0
+/// @nodoc
 typedef rpc_port_stub_h = ffi.Pointer<ffi.Void>;
 
-/// @brief Called when the proxy is connected with stub.
-/// @details The function is called when the proxy is connected with stub.
-/// When a proxy connects to stub several times with new port,
-/// you can handle each request by using @a instance.
-/// @since_tizen 4.0
-/// @param[in] sender The target proxy app id
-/// @param[in] instance The information of the request
-/// @param[in] user_data The user data passed from the register function
+/// Called when the proxy is connected with stub.
+///
+/// The function is called when the proxy is connected with stub. When a proxy connects to stub several times with new port, you can handle each request by using `instance`.
+///
+/// **Since Tizen:**
+/// - 4.0
+///
+/// **Parameters:**
+/// - `sender` (in): The target proxy app id
+/// - `instance` (in): The information of the request
+/// - `user_data` (in): The user data passed from the register function
+/// @nodoc
 typedef rpc_port_stub_connected_event_cb
     = ffi.Pointer<ffi.NativeFunction<rpc_port_stub_connected_event_cbFunction>>;
+/// @nodoc
 typedef rpc_port_stub_connected_event_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> sender,
     ffi.Pointer<ffi.Char> instance,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartrpc_port_stub_connected_event_cbFunction = void Function(
     ffi.Pointer<ffi.Char> sender,
     ffi.Pointer<ffi.Char> instance,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the proxy is disconnected from stub.
-/// @details The function is called when the proxy is disconnected from stub.
-/// When a proxy is disconnected, you can check the request
-/// by using @a instance.
-/// @since_tizen 4.0
-/// @param[in] sender The target proxy app id
-/// @param[in] instance The information of the request
-/// @param[in] user_data The user data passed from the register function
+/// Called when the proxy is disconnected from stub.
+///
+/// The function is called when the proxy is disconnected from stub. When a proxy is disconnected, you can check the request by using `instance`.
+///
+/// **Since Tizen:**
+/// - 4.0
+///
+/// **Parameters:**
+/// - `sender` (in): The target proxy app id
+/// - `instance` (in): The information of the request
+/// - `user_data` (in): The user data passed from the register function
+/// @nodoc
 typedef rpc_port_stub_disconnected_event_cb = ffi
     .Pointer<ffi.NativeFunction<rpc_port_stub_disconnected_event_cbFunction>>;
+/// @nodoc
 typedef rpc_port_stub_disconnected_event_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> sender,
     ffi.Pointer<ffi.Char> instance,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartrpc_port_stub_disconnected_event_cbFunction = void Function(
     ffi.Pointer<ffi.Char> sender,
     ffi.Pointer<ffi.Char> instance,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the stub received data from proxy.
-/// @details The function is called when the stub received data from stub.
-/// When a stub received data from several ports, you can handle
-/// each request by using @a instance. If the function returns non zero
-/// value, the stub is disconnected.
-/// @since_tizen 4.0
-/// @param[in] sender The target proxy app id
-/// @param[in] instance The information of the request
-/// @param[in] port The rpc port handle for reading and writing
-/// @param[in] user_data The user data passed from the register function
-/// @return @c zero to continue receive data with the sender,
-/// otherwise @c nonzero to disconnect from the port
+/// Called when the stub received data from proxy.
+///
+/// The function is called when the stub received data from stub. When a stub received data from several ports, you can handle each request by using `instance`. If the function returns non zero value, the stub is disconnected.
+///
+/// **Since Tizen:**
+/// - 4.0
+///
+/// **Parameters:**
+/// - `sender` (in): The target proxy app id
+/// - `instance` (in): The information of the request
+/// - `port` (in): The rpc port handle for reading and writing
+/// - `user_data` (in): The user data passed from the register function
+///
+/// **Returns:**
+/// - `zero` to continue receive data with the sender, otherwise `nonzero` to disconnect from the port
+/// @nodoc
 typedef rpc_port_stub_received_event_cb
     = ffi.Pointer<ffi.NativeFunction<rpc_port_stub_received_event_cbFunction>>;
+/// @nodoc
 typedef rpc_port_stub_received_event_cbFunction = ffi.Int Function(
     ffi.Pointer<ffi.Char> sender,
     ffi.Pointer<ffi.Char> instance,
     rpc_port_h port,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartrpc_port_stub_received_event_cbFunction = int Function(
     ffi.Pointer<ffi.Char> sender,
     ffi.Pointer<ffi.Char> instance,
     rpc_port_h port,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief The interface for converting data to/from a parcel.
-/// @since_tizen 4.0
+/// The interface for converting data to/from a parcel.
+///
+/// **Since Tizen:**
+/// - 4.0
+/// @nodoc
 final class __rpc_port_parcelable extends ffi.Struct {
   /// < The function pointer to read from parcel
   external ffi.Pointer<
@@ -1951,14 +2561,23 @@ final class __rpc_port_parcelable extends ffi.Struct {
               rpc_port_parcel_h h, ffi.Pointer<ffi.Void> data)>> from;
 }
 
-/// @brief The rpc port parcel handle.
-/// @since_tizen 4.0
+/// The rpc port parcel handle.
+///
+/// **Since Tizen:**
+/// - 4.0
+/// @nodoc
 typedef rpc_port_parcel_h = ffi.Pointer<ffi.Void>;
 
-/// @brief The interface for converting data to/from a parcel.
-/// @since_tizen 4.0
+/// The interface for converting data to/from a parcel.
+///
+/// **Since Tizen:**
+/// - 4.0
+/// @nodoc
 typedef rpc_port_parcelable_t = __rpc_port_parcelable;
 
-/// @brief The header handle of the rpc port parcel.
-/// @since_tizen 6.5
+/// The header handle of the rpc port parcel.
+///
+/// **Since Tizen:**
+/// - 6.5
+/// @nodoc
 typedef rpc_port_parcel_header_h = ffi.Pointer<ffi.Void>;

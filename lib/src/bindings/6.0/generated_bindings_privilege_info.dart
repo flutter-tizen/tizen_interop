@@ -1,3 +1,6 @@
+/// {@category 6.0/tizen}
+library tizen_interop_6_0.privilege_info;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen privilege-info APIs.
+/// {@category 6.0/tizen}
 class Tizen60PrivilegeInfo {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,20 +28,29 @@ class Tizen60PrivilegeInfo {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Gets the display name of the given privilege.
-  /// @since_tizen @if WEARABLE 2.3.1 @elseif MOBILE 2.3 @endif
-  /// @remarks @a display_name must be released using free().
-  /// @remarks Since 6.0, this function returns #PRVINFO_ERROR_NO_MATCHING_PRIVILEGE if the given @a privilege doesn't exist.
-  /// @param[in] api_version The API version of the application to get privilege information
-  /// @param[in] privilege The privilege
-  /// @param[out] display_name The display name of the privilege
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PRVINFO_ERROR_NONE Successful
-  /// @retval #PRVINFO_ERROR_NO_MATCHING_PRIVILEGE No matched privilege
-  /// @retval #PRVINFO_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #PRVINFO_ERROR_INVALID_PARAMETER Invalid function parameter
-  /// @retval #PRVINFO_ERROR_INTERNAL_ERROR Unknown error
+  /// Gets the display name of the given privilege.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Mobile 2.3
+  ///
+  /// **Remarks:**
+  /// - `display_name` must be released using free().
+  /// - Since 6.0, this function returns `PRVINFO_ERROR_NO_MATCHING_PRIVILEGE` if the given `privilege` doesn't exist.
+  ///
+  /// **Parameters:**
+  /// - `api_version` (in): The API version of the application to get privilege information
+  /// - `privilege` (in): The privilege
+  /// - `display_name` (out): The display name of the privilege
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PRVINFO_ERROR_NONE`: Successful
+  /// - `PRVINFO_ERROR_NO_MATCHING_PRIVILEGE`: No matched privilege
+  /// - `PRVINFO_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `PRVINFO_ERROR_INVALID_PARAMETER`: Invalid function parameter
+  /// - `PRVINFO_ERROR_INTERNAL_ERROR`: Unknown error
   int privilege_info_get_display_name(
     ffi.Pointer<ffi.Char> api_version,
     ffi.Pointer<ffi.Char> privilege,
@@ -60,22 +73,31 @@ class Tizen60PrivilegeInfo {
           int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the display name of the given privilege.
-  /// @since_tizen @if WEARABLE 2.3.1 @elseif MOBILE 2.3 @endif
-  /// @remarks @a display_name must be released using free().
-  /// @remarks @a package_type must be one of followings: "PRVINFO_PACKAGE_TYPE_NATIVE", "PRVINFO_PACKAGE_TYPE_WEB"
-  /// @remarks Since 6.0, this function returns #PRVINFO_ERROR_NO_MATCHING_PRIVILEGE if the given @a privilege doesn't exist.
-  /// @param[in] package_type The type of application package
-  /// @param[in] api_version The API version of the application to get privilege information
-  /// @param[in] privilege The privilege
-  /// @param[out] display_name The display name of the privilege
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PRVINFO_ERROR_NONE Successful
-  /// @retval #PRVINFO_ERROR_NO_MATCHING_PRIVILEGE No matched privilege
-  /// @retval #PRVINFO_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #PRVINFO_ERROR_INVALID_PARAMETER Invalid function parameter
-  /// @retval #PRVINFO_ERROR_INTERNAL_ERROR Unknown error
+  /// Gets the display name of the given privilege.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Mobile 2.3
+  ///
+  /// **Remarks:**
+  /// - `display_name` must be released using free().
+  /// - `package_type` must be one of followings: "PRVINFO_PACKAGE_TYPE_NATIVE", "PRVINFO_PACKAGE_TYPE_WEB"
+  /// - Since 6.0, this function returns `PRVINFO_ERROR_NO_MATCHING_PRIVILEGE` if the given `privilege` doesn't exist.
+  ///
+  /// **Parameters:**
+  /// - `package_type` (in): The type of application package
+  /// - `api_version` (in): The API version of the application to get privilege information
+  /// - `privilege` (in): The privilege
+  /// - `display_name` (out): The display name of the privilege
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PRVINFO_ERROR_NONE`: Successful
+  /// - `PRVINFO_ERROR_NO_MATCHING_PRIVILEGE`: No matched privilege
+  /// - `PRVINFO_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `PRVINFO_ERROR_INVALID_PARAMETER`: Invalid function parameter
+  /// - `PRVINFO_ERROR_INTERNAL_ERROR`: Unknown error
   int privilege_info_get_display_name_by_pkgtype(
     ffi.Pointer<ffi.Char> package_type,
     ffi.Pointer<ffi.Char> api_version,
@@ -100,20 +122,29 @@ class Tizen60PrivilegeInfo {
           int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the description of the given privilege.
-  /// @since_tizen @if WEARABLE 2.3.1 @elseif MOBILE 2.3 @endif
-  /// @remarks @a description must be released using free().
-  /// @remarks Since 6.0, this function returns #PRVINFO_ERROR_NO_MATCHING_PRIVILEGE if the given @a privilege doesn't exist.
-  /// @param[in] api_version The API version of the application to get privilege information
-  /// @param[in] privilege The privilege
-  /// @param[out] description The description of the privilege
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PRVINFO_ERROR_NONE Successful
-  /// @retval #PRVINFO_ERROR_NO_MATCHING_PRIVILEGE No matched privilege
-  /// @retval #PRVINFO_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #PRVINFO_ERROR_INVALID_PARAMETER Invalid function parameter
-  /// @retval #PRVINFO_ERROR_INTERNAL_ERROR Unknown error
+  /// Gets the description of the given privilege.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Mobile 2.3
+  ///
+  /// **Remarks:**
+  /// - `description` must be released using free().
+  /// - Since 6.0, this function returns `PRVINFO_ERROR_NO_MATCHING_PRIVILEGE` if the given `privilege` doesn't exist.
+  ///
+  /// **Parameters:**
+  /// - `api_version` (in): The API version of the application to get privilege information
+  /// - `privilege` (in): The privilege
+  /// - `description` (out): The description of the privilege
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PRVINFO_ERROR_NONE`: Successful
+  /// - `PRVINFO_ERROR_NO_MATCHING_PRIVILEGE`: No matched privilege
+  /// - `PRVINFO_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `PRVINFO_ERROR_INVALID_PARAMETER`: Invalid function parameter
+  /// - `PRVINFO_ERROR_INTERNAL_ERROR`: Unknown error
   int privilege_info_get_description(
     ffi.Pointer<ffi.Char> api_version,
     ffi.Pointer<ffi.Char> privilege,
@@ -136,22 +167,31 @@ class Tizen60PrivilegeInfo {
           int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the description of the given privilege.
-  /// @since_tizen @if WEARABLE 2.3.1 @elseif MOBILE 2.3 @endif
-  /// @remarks @a description must be released using free().
-  /// @remarks @a package_type must be one of followings: "PRVINFO_PACKAGE_TYPE_NATIVE", "PRVINFO_PACKAGE_TYPE_WEB"
-  /// @remarks Since 6.0, this function returns #PRVINFO_ERROR_NO_MATCHING_PRIVILEGE if the given @a privilege doesn't exist.
-  /// @param[in] package_type The type of application package
-  /// @param[in] api_version The API version of the application to get privilege information
-  /// @param[in]  privilege The privilege
-  /// @param[out] description The description of the privilege
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PRVINFO_ERROR_NONE Successful
-  /// @retval #PRVINFO_ERROR_NO_MATCHING_PRIVILEGE No matched privilege
-  /// @retval #PRVINFO_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #PRVINFO_ERROR_INVALID_PARAMETER Invalid function parameter
-  /// @retval #PRVINFO_ERROR_INTERNAL_ERROR Unknown error
+  /// Gets the description of the given privilege.
+  ///
+  /// **Since Tizen:**
+  /// - Wearable 2.3.1; Mobile 2.3
+  ///
+  /// **Remarks:**
+  /// - `description` must be released using free().
+  /// - `package_type` must be one of followings: "PRVINFO_PACKAGE_TYPE_NATIVE", "PRVINFO_PACKAGE_TYPE_WEB"
+  /// - Since 6.0, this function returns `PRVINFO_ERROR_NO_MATCHING_PRIVILEGE` if the given `privilege` doesn't exist.
+  ///
+  /// **Parameters:**
+  /// - `package_type` (in): The type of application package
+  /// - `api_version` (in): The API version of the application to get privilege information
+  /// - `privilege` (in): The privilege
+  /// - `description` (out): The description of the privilege
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PRVINFO_ERROR_NONE`: Successful
+  /// - `PRVINFO_ERROR_NO_MATCHING_PRIVILEGE`: No matched privilege
+  /// - `PRVINFO_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `PRVINFO_ERROR_INVALID_PARAMETER`: Invalid function parameter
+  /// - `PRVINFO_ERROR_INTERNAL_ERROR`: Unknown error
   int privilege_info_get_description_by_pkgtype(
     ffi.Pointer<ffi.Char> package_type,
     ffi.Pointer<ffi.Char> api_version,
@@ -176,19 +216,28 @@ class Tizen60PrivilegeInfo {
           int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the display name of the privacy group in which the given privilege is included.
-  /// @since_tizen 3.0
-  /// @remarks @a privacy_name must be released using free().
-  /// @remarks @a privilege must be privacy related, otherwise #PRVINFO_ERROR_INVALID_PARAMETER is returned.
-  /// @param[in] privilege The privilege
-  /// @param[out] privacy_name The privacy group's display name that the given privilege is included in
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #PRVINFO_ERROR_NONE Successful
-  /// @retval #PRVINFO_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #PRVINFO_ERROR_INVALID_PARAMETER Invalid function parameter
-  /// @retval #PRVINFO_ERROR_INTERNAL_ERROR Unknown error
-  /// @retval #PRVINFO_ERROR_NOT_SUPPORTED Not supported
+  /// Gets the display name of the privacy group in which the given privilege is included.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - `privacy_name` must be released using free().
+  /// - `privilege` must be privacy related, otherwise `PRVINFO_ERROR_INVALID_PARAMETER` is returned.
+  ///
+  /// **Parameters:**
+  /// - `privilege` (in): The privilege
+  /// - `privacy_name` (out): The privacy group's display name that the given privilege is included in
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PRVINFO_ERROR_NONE`: Successful
+  /// - `PRVINFO_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `PRVINFO_ERROR_INVALID_PARAMETER`: Invalid function parameter
+  /// - `PRVINFO_ERROR_INTERNAL_ERROR`: Unknown error
+  /// - `PRVINFO_ERROR_NOT_SUPPORTED`: Not supported
   int privilege_info_get_privacy_display_name(
     ffi.Pointer<ffi.Char> privilege,
     ffi.Pointer<ffi.Pointer<ffi.Char>> privacy_name,
@@ -209,25 +258,34 @@ class Tizen60PrivilegeInfo {
           int Function(
               ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the privilege information list of the given locale and privileges.
-  /// @details If the given @a locale is not recognized, @a return_result is set to #PRIVILEGE_CONSUMER_RETURN_CODE_UNKNOWN_LOCALE_CODE and the result in the @a privilege_info_list is provided according to the current locale. If all of the privileges in @a privilege_name_list are invalid then @a return_result is set to #PRIVILEGE_CONSUMER_RETURN_CODE_INVALID_PARAMETER. Otherwise, @a return_result is set to #PRIVILEGE_CONSUMER_RETURN_CODE_SUCCESS. If some of the privileges in @a privilege_name_list are invalid then corresponding elements in the @a privilege_info_list will have the display_name and the description set to an empty string.
-  /// @since_tizen 5.5
+  /// Gets the privilege information list of the given locale and privileges.
   ///
-  /// @remarks You must destroy the newly created privilege_info_list by calling privilege_info_free_privilege_info_list() if it is no longer needed.
+  /// If the given `locale` is not recognized, `return_result` is set to `PRIVILEGE_CONSUMER_RETURN_CODE_UNKNOWN_LOCALE_CODE` and the result in the `privilege_info_list` is provided according to the current locale. If all of the privileges in `privilege_name_list` are invalid then `return_result` is set to `PRIVILEGE_CONSUMER_RETURN_CODE_INVALID_PARAMETER`. Otherwise, `return_result` is set to `PRIVILEGE_CONSUMER_RETURN_CODE_SUCCESS`. If some of the privileges in `privilege_name_list` are invalid then corresponding elements in the `privilege_info_list` will have the display_name and the description set to an empty string.
   ///
-  /// @param[in] locale The locale information
-  /// @param[in] privilege_name_list The privilege name list
-  /// @param[out] privilege_info_list The privilege information list of the given locale and privileges
-  /// @param[out] return_result The return code to be sent to consumer.
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @return 0 on success, otherwise a negative error value.
+  /// **Remarks:**
+  /// - You must destroy the newly created privilege_info_list by calling privilege_info_free_privilege_info_list() if it is no longer needed.
   ///
-  /// @retval #PRVINFO_ERROR_NONE Successful
-  /// @retval #PRVINFO_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #PRVINFO_ERROR_INVALID_PARAMETER Invalid function parameter
-  /// @retval #PRVINFO_ERROR_INTERNAL_ERROR Unknown error
-  /// @see privilege_info_free_privilege_info_list()
-  /// @see privilege_consumer_return_code_e
+  /// **Parameters:**
+  /// - `locale` (in): The locale information
+  /// - `privilege_name_list` (in): The privilege name list
+  /// - `privilege_info_list` (out): The privilege information list of the given locale and privileges
+  /// - `return_result` (out): The return code to be sent to consumer.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `PRVINFO_ERROR_NONE`: Successful
+  /// - `PRVINFO_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `PRVINFO_ERROR_INVALID_PARAMETER`: Invalid function parameter
+  /// - `PRVINFO_ERROR_INTERNAL_ERROR`: Unknown error
+  ///
+  /// **See also:**
+  /// - `privilege_info_free_privilege_info_list()`
+  /// - `privilege_consumer_return_code_e`
   int privilege_info_get_privilege_info_list(
     ffi.Pointer<ffi.Char> locale,
     ffi.Pointer<GList> privilege_name_list,
@@ -252,17 +310,23 @@ class Tizen60PrivilegeInfo {
           int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<GList>,
               ffi.Pointer<ffi.Pointer<GList>>, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Destroys the privilege information list.
-  /// @since_tizen 5.5
+  /// Destroys the privilege information list.
   ///
-  /// @remarks If @a privilege_info_list is NULL, no operation is performed and #PRVINFO_ERROR_INVALID_PARAMETER will be returned.
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @param[in] privilege_info_list The privilege information list to destroy
+  /// **Remarks:**
+  /// - If `privilege_info_list` is NULL, no operation is performed and `PRVINFO_ERROR_INVALID_PARAMETER` will be returned.
   ///
-  /// @return 0 on success, otherwise a negative error value.
+  /// **Parameters:**
+  /// - `privilege_info_list` (in): The privilege information list to destroy
   ///
-  /// @retval #PRVINFO_ERROR_NONE Successful
-  /// @retval #PRVINFO_ERROR_INVALID_PARAMETER Invalid function parameter
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value.
+  ///
+  /// **Return values:**
+  /// - `PRVINFO_ERROR_NONE`: Successful
+  /// - `PRVINFO_ERROR_INVALID_PARAMETER`: Invalid function parameter
   int privilege_info_free_privilege_info_list(
     ffi.Pointer<GList> privilege_info_list,
   ) {
@@ -279,8 +343,11 @@ class Tizen60PrivilegeInfo {
           .asFunction<int Function(ffi.Pointer<GList>)>();
 }
 
-/// @brief Enumeration for error code for Privilege Information.
-/// @since_tizen @if WEARABLE 2.3.1 @elseif MOBILE 2.3 @endif
+/// Enumeration for error code for Privilege Information.
+///
+/// **Since Tizen:**
+/// - Wearable 2.3.1; Mobile 2.3
+/// @nodoc
 abstract class privilege_info_error_e {
   /// < Successful
   static const int PRVINFO_ERROR_NONE = 0;
@@ -301,8 +368,11 @@ abstract class privilege_info_error_e {
   static const int PRVINFO_ERROR_NO_MATCHING_PRIVILEGE = -31588351;
 }
 
-/// @brief The structure for privilege information.
-/// @since_tizen 5.5
+/// The structure for privilege information.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 final class _privilege_info_s extends ffi.Struct {
   /// < The privilege name
   external ffi.Pointer<ffi.Char> privilege_name;
@@ -314,8 +384,11 @@ final class _privilege_info_s extends ffi.Struct {
   external ffi.Pointer<ffi.Char> description;
 }
 
-/// @brief Enumeration for return code to be sent to consumer.
-/// @since_tizen 5.5
+/// Enumeration for return code to be sent to consumer.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 abstract class privilege_consumer_return_code_e {
   /// < Successful
   static const int PRIVILEGE_CONSUMER_RETURN_CODE_SUCCESS = 0;
@@ -327,8 +400,10 @@ abstract class privilege_consumer_return_code_e {
   static const int PRIVILEGE_CONSUMER_RETURN_CODE_INVALID_PARAMETER = 2;
 }
 
+/// @nodoc
 typedef GList = _GList;
 
+/// @nodoc
 final class _GList extends ffi.Struct {
   external gpointer data;
 
@@ -337,5 +412,7 @@ final class _GList extends ffi.Struct {
   external ffi.Pointer<GList1> prev;
 }
 
+/// @nodoc
 typedef gpointer = ffi.Pointer<ffi.Void>;
+/// @nodoc
 typedef GList1 = _GList;

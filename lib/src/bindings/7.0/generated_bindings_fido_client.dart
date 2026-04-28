@@ -1,3 +1,6 @@
+/// {@category 7.0/tizen}
+library tizen_interop_7_0.fido_client;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen fido-client APIs.
+/// {@category 7.0/tizen}
 class Tizen70FidoClient {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,22 +28,32 @@ class Tizen70FidoClient {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Retrieves  all the available FIDO authenticators supported by this Device.
-  /// @details fido_authenticator_cb() callback is called synchronously once for each authenticator.
-  /// @since_tizen 3.0
-  /// @privlevel  public
-  /// @privilege  %http://tizen.org/privilege/fido.client
+  /// Retrieves all the available FIDO authenticators supported by this Device.
   ///
-  /// @param[in] cb The iteration callback handle
-  /// @param[in] user_data The user data handle
+  /// fido_authenticator_cb() callback is called synchronously once for each authenticator.
   ///
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #FIDO_ERROR_NONE               Successful
-  /// @retval     #FIDO_ERROR_OUT_OF_MEMORY      Out of Memory
-  /// @retval     #FIDO_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval     #FIDO_ERROR_PERMISSION_DENIED The application does not have permission to call this function.
-  /// @retval     #FIDO_ERROR_NOT_SUPPORTED FIDO is not supported on this device.
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/fido.client>
+  ///
+  /// **Parameters:**
+  /// - `cb` (in): The iteration callback handle
+  /// - `user_data` (in): The user data handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `FIDO_ERROR_NONE`: Successful
+  /// - `FIDO_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `FIDO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `FIDO_ERROR_PERMISSION_DENIED`: The application does not have permission to call this function.
+  /// - `FIDO_ERROR_NOT_SUPPORTED`: FIDO is not supported on this device.
   int fido_foreach_authenticator(
     fido_authenticator_cb cb,
     ffi.Pointer<ffi.Void> user_data,
@@ -57,18 +71,25 @@ class Tizen70FidoClient {
   late final _fido_foreach_authenticator = _fido_foreach_authenticatorPtr
       .asFunction<int Function(fido_authenticator_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Gets the Authenticator title.
-  /// @since_tizen 3.0
+  /// Gets the Authenticator title.
   ///
-  /// @remarks		The @a title should be released using free().
-  /// @param[in] auth The Authenticator handle
-  /// @param[out] title The title
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #FIDO_ERROR_NONE               Successful
-  /// @retval     #FIDO_ERROR_OUT_OF_MEMORY      Out of Memory
-  /// @retval     #FIDO_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// **Remarks:**
+  /// - The `title` should be released using free().
+  ///
+  /// **Parameters:**
+  /// - `auth` (in): The Authenticator handle
+  /// - `title` (out): The title
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `FIDO_ERROR_NONE`: Successful
+  /// - `FIDO_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `FIDO_ERROR_INVALID_PARAMETER`: Invalid parameter
   int fido_authenticator_get_title(
     fido_authenticator_h auth,
     ffi.Pointer<ffi.Pointer<ffi.Char>> title,
@@ -89,18 +110,25 @@ class Tizen70FidoClient {
           int Function(
               fido_authenticator_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Retrieves the Authenticator AAID (Authenticator Attestation ID).
-  /// @since_tizen 3.0
+  /// Retrieves the Authenticator AAID (Authenticator Attestation ID).
   ///
-  /// @remarks		The @a aaid should be released using free().
-  /// @param[in] auth The Authenticator handle
-  /// @param[out] aaid The AAID
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #FIDO_ERROR_NONE               Successful
-  /// @retval     #FIDO_ERROR_OUT_OF_MEMORY      Out of Memory
-  /// @retval     #FIDO_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// **Remarks:**
+  /// - The `aaid` should be released using free().
+  ///
+  /// **Parameters:**
+  /// - `auth` (in): The Authenticator handle
+  /// - `aaid` (out): The AAID
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `FIDO_ERROR_NONE`: Successful
+  /// - `FIDO_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `FIDO_ERROR_INVALID_PARAMETER`: Invalid parameter
   int fido_authenticator_get_aaid(
     fido_authenticator_h auth,
     ffi.Pointer<ffi.Pointer<ffi.Char>> aaid,
@@ -121,18 +149,25 @@ class Tizen70FidoClient {
           int Function(
               fido_authenticator_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Retrieves the Authenticator description
-  /// @since_tizen 3.0
+  /// Retrieves the Authenticator description
   ///
-  /// @remarks		The @a desc should be released using free().
-  /// @param[in] auth The Authenticator handle
-  /// @param[out] desc The description
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #FIDO_ERROR_NONE               Successful
-  /// @retval     #FIDO_ERROR_OUT_OF_MEMORY      Out of Memory
-  /// @retval     #FIDO_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// **Remarks:**
+  /// - The `desc` should be released using free().
+  ///
+  /// **Parameters:**
+  /// - `auth` (in): The Authenticator handle
+  /// - `desc` (out): The description
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `FIDO_ERROR_NONE`: Successful
+  /// - `FIDO_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `FIDO_ERROR_INVALID_PARAMETER`: Invalid parameter
   int fido_authenticator_get_description(
     fido_authenticator_h auth,
     ffi.Pointer<ffi.Pointer<ffi.Char>> desc,
@@ -153,18 +188,25 @@ class Tizen70FidoClient {
           int Function(
               fido_authenticator_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Retrieves the Authenticator assertion scheme.
-  /// @since_tizen 3.0
+  /// Retrieves the Authenticator assertion scheme.
   ///
-  /// @remarks		The @a scheme should be released using free(). Refer to FIDO UAF Registry document for more details.
-  /// @param[in] auth The Authenticator handle
-  /// @param[out] scheme The assertion scheme. UAFV1TLV is the default assertion scheme
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #FIDO_ERROR_NONE               Successful
-  /// @retval     #FIDO_ERROR_OUT_OF_MEMORY      Out of Memory
-  /// @retval     #FIDO_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// **Remarks:**
+  /// - The `scheme` should be released using free(). Refer to FIDO UAF Registry document for more details.
+  ///
+  /// **Parameters:**
+  /// - `auth` (in): The Authenticator handle
+  /// - `scheme` (out): The assertion scheme. UAFV1TLV is the default assertion scheme
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `FIDO_ERROR_NONE`: Successful
+  /// - `FIDO_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `FIDO_ERROR_INVALID_PARAMETER`: Invalid parameter
   int fido_authenticator_get_assertion_scheme(
     fido_authenticator_h auth,
     ffi.Pointer<ffi.Pointer<ffi.Char>> scheme,
@@ -185,16 +227,21 @@ class Tizen70FidoClient {
           int Function(
               fido_authenticator_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Retrieves the Authenticator algorithm.
-  /// @since_tizen 3.0
+  /// Retrieves the Authenticator algorithm.
   ///
-  /// @param[in] auth The Authenticator handle
-  /// @param[out] algo The authentication algorithm
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #FIDO_ERROR_NONE               Successful
-  /// @retval     #FIDO_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// **Parameters:**
+  /// - `auth` (in): The Authenticator handle
+  /// - `algo` (out): The authentication algorithm
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `FIDO_ERROR_NONE`: Successful
+  /// - `FIDO_ERROR_INVALID_PARAMETER`: Invalid parameter
   int fido_authenticator_get_algorithm(
     fido_authenticator_h auth,
     ffi.Pointer<ffi.Int32> algo,
@@ -213,17 +260,22 @@ class Tizen70FidoClient {
       _fido_authenticator_get_algorithmPtr.asFunction<
           int Function(fido_authenticator_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Retrieves all the available attestation types for this Authenticator.
-  /// @since_tizen 3.0
+  /// Retrieves all the available attestation types for this Authenticator.
   ///
-  /// @param[in] auth The Authenticator handle
-  /// @param[in] cb The iteration callback
-  /// @param[in] user_data The user data
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #FIDO_ERROR_NONE               Successful
-  /// @retval     #FIDO_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// **Parameters:**
+  /// - `auth` (in): The Authenticator handle
+  /// - `cb` (in): The iteration callback
+  /// - `user_data` (in): The user data
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `FIDO_ERROR_NONE`: Successful
+  /// - `FIDO_ERROR_INVALID_PARAMETER`: Invalid parameter
   int fido_authenticator_foreach_attestation_type(
     fido_authenticator_h auth,
     fido_attestation_type_cb cb,
@@ -246,16 +298,21 @@ class Tizen70FidoClient {
           int Function(fido_authenticator_h, fido_attestation_type_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Retrieves the user verification method of this Authenticator.
-  /// @since_tizen 3.0
+  /// Retrieves the user verification method of this Authenticator.
   ///
-  /// @param[in] auth The Authenticator handle
-  /// @param[out] user_verification The user verification method
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #FIDO_ERROR_NONE               Successful
-  /// @retval     #FIDO_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// **Parameters:**
+  /// - `auth` (in): The Authenticator handle
+  /// - `user_verification` (out): The user verification method
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `FIDO_ERROR_NONE`: Successful
+  /// - `FIDO_ERROR_INVALID_PARAMETER`: Invalid parameter
   int fido_authenticator_get_verification_method(
     fido_authenticator_h auth,
     ffi.Pointer<ffi.Int32> user_verification,
@@ -274,16 +331,21 @@ class Tizen70FidoClient {
       _fido_authenticator_get_verification_methodPtr.asFunction<
           int Function(fido_authenticator_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Retrieves the key protection method of this Authenticator.
-  /// @since_tizen 3.0
+  /// Retrieves the key protection method of this Authenticator.
   ///
-  /// @param[in] auth The Authenticator handle
-  /// @param[out] key_protection The key protection method
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #FIDO_ERROR_NONE               Successful
-  /// @retval     #FIDO_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// **Parameters:**
+  /// - `auth` (in): The Authenticator handle
+  /// - `key_protection` (out): The key protection method
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `FIDO_ERROR_NONE`: Successful
+  /// - `FIDO_ERROR_INVALID_PARAMETER`: Invalid parameter
   int fido_authenticator_get_key_protection_method(
     fido_authenticator_h auth,
     ffi.Pointer<ffi.Int32> key_protection,
@@ -302,16 +364,21 @@ class Tizen70FidoClient {
       _fido_authenticator_get_key_protection_methodPtr.asFunction<
           int Function(fido_authenticator_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Retrieves the matcher protection method of this Authenticator.
-  /// @since_tizen 3.0
+  /// Retrieves the matcher protection method of this Authenticator.
   ///
-  /// @param[in] auth The Authenticator handle
-  /// @param[out] matcher_protection The matcher protection method
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #FIDO_ERROR_NONE               Successful
-  /// @retval     #FIDO_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// **Parameters:**
+  /// - `auth` (in): The Authenticator handle
+  /// - `matcher_protection` (out): The matcher protection method
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `FIDO_ERROR_NONE`: Successful
+  /// - `FIDO_ERROR_INVALID_PARAMETER`: Invalid parameter
   int fido_authenticator_get_matcher_protection_method(
     fido_authenticator_h auth,
     ffi.Pointer<ffi.Int32> matcher_protection,
@@ -330,16 +397,21 @@ class Tizen70FidoClient {
       _fido_authenticator_get_matcher_protection_methodPtr.asFunction<
           int Function(fido_authenticator_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Retrieves the attachment hint of this Authenticator.
-  /// @since_tizen 3.0
+  /// Retrieves the attachment hint of this Authenticator.
   ///
-  /// @param[in] auth The Authenticator handle
-  /// @param[out] attachment_hint The matcher protection method
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #FIDO_ERROR_NONE               Successful
-  /// @retval     #FIDO_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// **Parameters:**
+  /// - `auth` (in): The Authenticator handle
+  /// - `attachment_hint` (out): The matcher protection method
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `FIDO_ERROR_NONE`: Successful
+  /// - `FIDO_ERROR_INVALID_PARAMETER`: Invalid parameter
   int fido_authenticator_get_attachment_hint(
     fido_authenticator_h auth,
     ffi.Pointer<ffi.Int32> attachment_hint,
@@ -358,13 +430,16 @@ class Tizen70FidoClient {
       _fido_authenticator_get_attachment_hintPtr.asFunction<
           int Function(fido_authenticator_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Checks if the Authenticator is Second factor only which is supported by U2F standards.
-  /// @since_tizen 3.0
+  /// Checks if the Authenticator is Second factor only which is supported by U2F standards.
   ///
-  /// @param[in] auth The Authenticator handle
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return     @c true if its only second factor,
-  /// otherwise false.
+  /// **Parameters:**
+  /// - `auth` (in): The Authenticator handle
+  ///
+  /// **Returns:**
+  /// - `true` if its only second factor, otherwise false.
   bool fido_authenticator_get_is_second_factor_only(
     fido_authenticator_h auth,
   ) {
@@ -380,16 +455,21 @@ class Tizen70FidoClient {
       _fido_authenticator_get_is_second_factor_onlyPtr
           .asFunction<bool Function(fido_authenticator_h)>();
 
-  /// @brief Retrieves the Transaction Confirmation display type of this Authenticator.
-  /// @since_tizen 3.0
+  /// Retrieves the Transaction Confirmation display type of this Authenticator.
   ///
-  /// @param[in] auth The Authenticator handle
-  /// @param[out] tc_display The TC display type
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #FIDO_ERROR_NONE               Successful
-  /// @retval     #FIDO_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// **Parameters:**
+  /// - `auth` (in): The Authenticator handle
+  /// - `tc_display` (out): The TC display type
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `FIDO_ERROR_NONE`: Successful
+  /// - `FIDO_ERROR_INVALID_PARAMETER`: Invalid parameter
   int fido_authenticator_get_tc_discplay(
     fido_authenticator_h auth,
     ffi.Pointer<ffi.Int32> tc_display,
@@ -408,18 +488,25 @@ class Tizen70FidoClient {
       _fido_authenticator_get_tc_discplayPtr.asFunction<
           int Function(fido_authenticator_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Retrieves the Transaction Confirmation display content type of this Authenticator.
-  /// @since_tizen 3.0
+  /// Retrieves the Transaction Confirmation display content type of this Authenticator.
   ///
-  /// @remarks		The @a tc_display_content_type should be released using free().
-  /// @param[in] auth The Authenticator handle
-  /// @param[out] tc_display_content_type The TC display content type which is supported MIME type [RFC2049] such as text/plain or image/png
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #FIDO_ERROR_NONE               Successful
-  /// @retval     #FIDO_ERROR_OUT_OF_MEMORY      Out of Memory
-  /// @retval     #FIDO_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// **Remarks:**
+  /// - The `tc_display_content_type` should be released using free().
+  ///
+  /// **Parameters:**
+  /// - `auth` (in): The Authenticator handle
+  /// - `tc_display_content_type` (out): The TC display content type which is supported MIME type `[RFC2049]` such as text/plain or image/png
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `FIDO_ERROR_NONE`: Successful
+  /// - `FIDO_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `FIDO_ERROR_INVALID_PARAMETER`: Invalid parameter
   int fido_authenticator_get_tc_display_type(
     fido_authenticator_h auth,
     ffi.Pointer<ffi.Pointer<ffi.Char>> tc_display_content_type,
@@ -440,18 +527,25 @@ class Tizen70FidoClient {
           int Function(
               fido_authenticator_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Retrieves the icon of this Authenticator.
-  /// @since_tizen 3.0
+  /// Retrieves the icon of this Authenticator.
   ///
-  /// @remarks		The @a icon should be released using free().
-  /// @param[in] auth The Authenticator handle
-  /// @param[out] icon The icon. Portable Network Graphic (PNG) format image file representing the icon encoded as a data: url[RFC2397]
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #FIDO_ERROR_NONE               Successful
-  /// @retval     #FIDO_ERROR_OUT_OF_MEMORY      Out of Memory
-  /// @retval     #FIDO_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// **Remarks:**
+  /// - The `icon` should be released using free().
+  ///
+  /// **Parameters:**
+  /// - `auth` (in): The Authenticator handle
+  /// - `icon` (out): The icon. Portable Network Graphic (PNG) format image file representing the icon encoded as a data: url`[RFC2397]`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `FIDO_ERROR_NONE`: Successful
+  /// - `FIDO_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `FIDO_ERROR_INVALID_PARAMETER`: Invalid parameter
   int fido_authenticator_get_icon(
     fido_authenticator_h auth,
     ffi.Pointer<ffi.Pointer<ffi.Char>> icon,
@@ -472,17 +566,24 @@ class Tizen70FidoClient {
           int Function(
               fido_authenticator_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the FIDO client vendor name.
-  /// @since_tizen 3.0
+  /// Gets the FIDO client vendor name.
   ///
-  /// @remarks		The @a vendor_name should be released using free().
-  /// @param[out] vendor_name The vendor name
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #FIDO_ERROR_NONE               Successful
-  /// @retval     #FIDO_ERROR_OUT_OF_MEMORY      Out of Memory
-  /// @retval     #FIDO_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// **Remarks:**
+  /// - The `vendor_name` should be released using free().
+  ///
+  /// **Parameters:**
+  /// - `vendor_name` (out): The vendor name
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `FIDO_ERROR_NONE`: Successful
+  /// - `FIDO_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `FIDO_ERROR_INVALID_PARAMETER`: Invalid parameter
   int fido_get_client_vendor(
     ffi.Pointer<ffi.Pointer<ffi.Char>> vendor_name,
   ) {
@@ -498,17 +599,22 @@ class Tizen70FidoClient {
   late final _fido_get_client_vendor = _fido_get_client_vendorPtr
       .asFunction<int Function(ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the FIDO client vendor version information.
-  /// @since_tizen 3.0
+  /// Gets the FIDO client vendor version information.
   ///
-  /// @param[out] client_major_version The FIDO client major version
-  /// @param[out] client_minor_version The FIDO client minor version
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #FIDO_ERROR_NONE               Successful
-  /// @retval     #FIDO_ERROR_OUT_OF_MEMORY      Out of Memory
-  /// @retval     #FIDO_ERROR_INVALID_PARAMETER  Invalid parameter
+  /// **Parameters:**
+  /// - `client_major_version` (out): The FIDO client major version
+  /// - `client_minor_version` (out): The FIDO client minor version
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `FIDO_ERROR_NONE`: Successful
+  /// - `FIDO_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `FIDO_ERROR_INVALID_PARAMETER`: Invalid parameter
   int fido_get_client_version(
     ffi.Pointer<ffi.Int> client_major_version,
     ffi.Pointer<ffi.Int> client_minor_version,
@@ -526,25 +632,34 @@ class Tizen70FidoClient {
   late final _fido_get_client_version = _fido_get_client_versionPtr
       .asFunction<int Function(ffi.Pointer<ffi.Int>, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Checks whether the FIDO message can be processed.
-  /// @since_tizen 3.0
-  /// @privlevel  public
-  /// @privilege  %http://tizen.org/privilege/fido.client
+  /// Checks whether the FIDO message can be processed.
   ///
-  /// @param[in] uaf_message_json The FIDO message in JSON format which is received from the relying party server
-  /// @param[out] is_supported True if the message can be handled by the device, else false
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #FIDO_ERROR_NONE                   Successful
-  /// @retval     #FIDO_ERROR_OUT_OF_MEMORY          Out of Memory
-  /// @retval     #FIDO_ERROR_INVALID_PARAMETER      Invalid parameter
-  /// @retval     #FIDO_ERROR_NOT_SUPPORTED          FIDO is not supported
-  /// @retval     #FIDO_ERROR_PERMISSION_DENIED      The application does not have permission to call this function.
-  /// @retval     #FIDO_ERROR_UNSUPPORTED_VERSION    The UAF Message does not specify a protocol version supported by this FIDO UAF Client.
-  /// @retval     #FIDO_ERROR_NO_SUITABLE_AUTHENTICATOR No suitable authenticators found.
-  /// @retval     #FIDO_ERROR_PROTOCOL_ERROR         The interaction may have timed out, or the UAF message is malformed.
-  /// @retval     #FIDO_ERROR_UNTRUSTED_FACET_ID     The caller's id is not allowed to use this operation.
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/fido.client>
+  ///
+  /// **Parameters:**
+  /// - `uaf_message_json` (in): The FIDO message in JSON format which is received from the relying party server
+  /// - `is_supported` (out): True if the message can be handled by the device, else false
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `FIDO_ERROR_NONE`: Successful
+  /// - `FIDO_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `FIDO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `FIDO_ERROR_NOT_SUPPORTED`: FIDO is not supported
+  /// - `FIDO_ERROR_PERMISSION_DENIED`: The application does not have permission to call this function.
+  /// - `FIDO_ERROR_UNSUPPORTED_VERSION`: The UAF Message does not specify a protocol version supported by this FIDO UAF Client.
+  /// - `FIDO_ERROR_NO_SUITABLE_AUTHENTICATOR`: No suitable authenticators found.
+  /// - `FIDO_ERROR_PROTOCOL_ERROR`: The interaction may have timed out, or the UAF message is malformed.
+  /// - `FIDO_ERROR_UNTRUSTED_FACET_ID`: The caller's id is not allowed to use this operation.
   int fido_uaf_is_supported(
     ffi.Pointer<ffi.Char> uaf_message_json,
     ffi.Pointer<ffi.Bool> is_supported,
@@ -562,26 +677,35 @@ class Tizen70FidoClient {
   late final _fido_uaf_is_supported = _fido_uaf_is_supportedPtr
       .asFunction<int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Processes the given FIDO UAF message.
-  /// @details This function is asynchronous. The response is delivered via fido_uaf_response_message_cb().
-  /// Depending on the FIDO message type, this may involve user interactions.
+  /// Processes the given FIDO UAF message.
   ///
-  /// @since_tizen 3.0
-  /// @privlevel  public
-  /// @privilege  %http://tizen.org/privilege/fido.client
+  /// This function is asynchronous. The response is delivered via fido_uaf_response_message_cb(). Depending on the FIDO message type, this may involve user interactions.
   ///
-  /// @param[in] uaf_request_json The FIDO UAF message in JSON format which is received from the relying party server
-  /// @param[in] channel_binding The channel binding data in JSON format which is received from the relying party server
-  /// @param[in] callback The callback to receive response
-  /// @param[in] user_data The user data to be passed to the callback function
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #FIDO_ERROR_NONE                   Successful
-  /// @retval     #FIDO_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval     #FIDO_ERROR_NOT_SUPPORTED          FIDO is not supported
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @see fido_uaf_response_message_cb()
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/fido.client>
+  ///
+  /// **Parameters:**
+  /// - `uaf_request_json` (in): The FIDO UAF message in JSON format which is received from the relying party server
+  /// - `channel_binding` (in): The channel binding data in JSON format which is received from the relying party server
+  /// - `callback` (in): The callback to receive response
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `FIDO_ERROR_NONE`: Successful
+  /// - `FIDO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `FIDO_ERROR_NOT_SUPPORTED`: FIDO is not supported
+  ///
+  /// **See also:**
+  /// - `fido_uaf_response_message_cb()`
   int fido_uaf_get_response_message(
     ffi.Pointer<ffi.Char> uaf_request_json,
     ffi.Pointer<ffi.Char> channel_binding,
@@ -608,30 +732,41 @@ class Tizen70FidoClient {
           int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>,
               fido_uaf_response_message_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Notifies the FIDO client about the server result. FIDO Server sends the result of processing a UAF message to FIDO client.
-  /// @remarks This is especially important for cases when a new registration may be considered by the client to be in a pending state
-  /// until it is communicated that the server accepted it.
+  /// Notifies the FIDO client about the server result. FIDO Server sends the result of processing a UAF message to FIDO client.
   ///
-  /// @since_tizen 3.0
-  /// @privlevel  public
-  /// @privilege  %http://tizen.org/privilege/fido.client
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @param[in] response_code The status code received from Server, #FIDO_SERVER_STATUS_CODE_OK implies success
-  /// @param[in] uaf_response_json The FIDO response message sent to server in JSON format
+  /// **Privilege level:**
+  /// - public
   ///
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #FIDO_ERROR_NONE                   Successful
-  /// @retval     #FIDO_ERROR_OUT_OF_MEMORY          Out of Memory
-  /// @retval     #FIDO_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval     #FIDO_ERROR_NOT_SUPPORTED          FIDO is not supported
-  /// @retval     #FIDO_ERROR_PERMISSION_DENIED      The application does not have permission to call this function.
-  /// @retval     #FIDO_ERROR_UNSUPPORTED_VERSION    The UAF Message does not specify a protocol version supported by this FIDO UAF Client.
-  /// @retval     #FIDO_ERROR_NO_SUITABLE_AUTHENTICATOR No suitable authenticators found.
-  /// @retval     #FIDO_ERROR_PROTOCOL_ERROR         The interaction may have timed out, or the UAF message is malformed.
-  /// @retval     #FIDO_ERROR_UNTRUSTED_FACET_ID     The caller's id is not allowed to use this operation.
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/fido.client>
   ///
-  /// @see fido_uaf_response_message_cb()
+  /// **Remarks:**
+  /// - This is especially important for cases when a new registration may be considered by the client to be in a pending state
+  /// - until it is communicated that the server accepted it.
+  ///
+  /// **Parameters:**
+  /// - `response_code` (in): The status code received from Server, `FIDO_SERVER_STATUS_CODE_OK` implies success
+  /// - `uaf_response_json` (in): The FIDO response message sent to server in JSON format
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `FIDO_ERROR_NONE`: Successful
+  /// - `FIDO_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `FIDO_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `FIDO_ERROR_NOT_SUPPORTED`: FIDO is not supported
+  /// - `FIDO_ERROR_PERMISSION_DENIED`: The application does not have permission to call this function.
+  /// - `FIDO_ERROR_UNSUPPORTED_VERSION`: The UAF Message does not specify a protocol version supported by this FIDO UAF Client.
+  /// - `FIDO_ERROR_NO_SUITABLE_AUTHENTICATOR`: No suitable authenticators found.
+  /// - `FIDO_ERROR_PROTOCOL_ERROR`: The interaction may have timed out, or the UAF message is malformed.
+  /// - `FIDO_ERROR_UNTRUSTED_FACET_ID`: The caller's id is not allowed to use this operation.
+  ///
+  /// **See also:**
+  /// - `fido_uaf_response_message_cb()`
   int fido_uaf_set_server_result(
     int response_code,
     ffi.Pointer<ffi.Char> uaf_response_json,
@@ -649,28 +784,45 @@ class Tizen70FidoClient {
       .asFunction<int Function(int, ffi.Pointer<ffi.Char>)>();
 }
 
-/// @brief Called once for each result of calling fido_foreach_authenticator()
-/// @since_tizen 3.0
+/// Called once for each result of calling fido_foreach_authenticator()
 ///
-/// @param[in] auth_info The Authenticator info handle. This param will be freed by framework
-/// @param[in] user_data The user data that was attached during fido_foreach_authenticator() call
-/// @see fido_foreach_authenticator()
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `auth_info` (in): The Authenticator info handle. This param will be freed by framework
+/// - `user_data` (in): The user data that was attached during fido_foreach_authenticator() call
+///
+/// **See also:**
+/// - `fido_foreach_authenticator()`
+/// @nodoc
 typedef fido_authenticator_cb
     = ffi.Pointer<ffi.NativeFunction<fido_authenticator_cbFunction>>;
+/// @nodoc
 typedef fido_authenticator_cbFunction = ffi.Void Function(
     fido_authenticator_h auth_info, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartfido_authenticator_cbFunction = void Function(
     fido_authenticator_h auth_info, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief  The structure type for the Authenticator handle.
-/// @since_tizen  3.0
+/// The structure type for the Authenticator handle.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 typedef fido_authenticator_h = ffi.Pointer<fido_authenticator_s>;
 
+/// @nodoc
 final class fido_authenticator_s extends ffi.Opaque {}
 
-/// @brief  Authenticator's supported algorithm and encoding.
-/// @remarks Refer to FIDO UAF Registry document for more details.
-/// @since_tizen 3.0
+/// Authenticator's supported algorithm and encoding.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Remarks:**
+/// - Refer to FIDO UAF Registry document for more details.
+/// @nodoc
 abstract class fido_auth_algo_e {
   /// < SECP256R1 ECDSA SHA256 Raw
   static const int FIDO_AUTH_ALGO_SECP256R1_ECDSA_SHA256_RAW = 1;
@@ -691,21 +843,32 @@ abstract class fido_auth_algo_e {
   static const int FIDO_AUTH_ALGO_SECP256K1_ECDSA_SHA256_DER = 6;
 }
 
-/// @brief Called once for each result of calling fido_authenticator_foreach_attestation_type().
-/// @since_tizen 3.0
+/// Called once for each result of calling fido_authenticator_foreach_attestation_type().
 ///
-/// @param[in] att_type The Authenticator attestation type
-/// @param[in] user_data The user data that was attached during fido_authenticator_foreach_attestation_type() call
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `att_type` (in): The Authenticator attestation type
+/// - `user_data` (in): The user data that was attached during fido_authenticator_foreach_attestation_type() call
+/// @nodoc
 typedef fido_attestation_type_cb
     = ffi.Pointer<ffi.NativeFunction<fido_attestation_type_cbFunction>>;
+/// @nodoc
 typedef fido_attestation_type_cbFunction = ffi.Void Function(
     ffi.Int32 att_type, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartfido_attestation_type_cbFunction = void Function(
     int att_type, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief  Authenticator's supported Attestation type.
-/// @remarks Refer to FIDO UAF Registry document for more details.
-/// @since_tizen 3.0
+/// Authenticator's supported Attestation type.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Remarks:**
+/// - Refer to FIDO UAF Registry document for more details.
+/// @nodoc
 abstract class fido_auth_attestation_type_e {
   /// < Full basic attestation.
   static const int FIDO_AUTH_ATT_TYPE_BASIC_FULL = 15879;
@@ -714,9 +877,14 @@ abstract class fido_auth_attestation_type_e {
   static const int FIDO_AUTH_ATT_TYPE_BASIC_SURROGATE = 15880;
 }
 
-/// @brief  Authenticator's supported user verification method type.
-/// @remarks Refer to FIDO UAF Registry document for more details.
-/// @since_tizen 3.0
+/// Authenticator's supported user verification method type.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Remarks:**
+/// - Refer to FIDO UAF Registry document for more details.
+/// @nodoc
 abstract class fido_auth_user_verify_type_e {
   /// < User presence verification.
   static const int FIDO_AUTH_USR_VERIFY_TYPE_PRESENCE = 1;
@@ -756,9 +924,14 @@ abstract class fido_auth_user_verify_type_e {
   static const int FIDO_AUTH_USR_VERIFY_TYPE_ALL = 1024;
 }
 
-/// @brief  Authenticator's supported key protection method type.
-/// @remarks Refer to FIDO UAF Registry document for more details.
-/// @since_tizen 3.0
+/// Authenticator's supported key protection method type.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Remarks:**
+/// - Refer to FIDO UAF Registry document for more details.
+/// @nodoc
 abstract class fido_auth_key_protection_type_e {
   /// < Software based key management.
   static const int FIDO_AUTH_KEY_PROT_TYPE_SOFTWARE = 1;
@@ -777,9 +950,14 @@ abstract class fido_auth_key_protection_type_e {
   static const int FIDO_AUTH_KEY_PROT_TYPE_REMOTE_HANDLE = 16;
 }
 
-/// @brief  Authenticator's supported matcher protection type.
-/// @remarks Refer to FIDO UAF Registry document for more details.
-/// @since_tizen 3.0
+/// Authenticator's supported matcher protection type.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Remarks:**
+/// - Refer to FIDO UAF Registry document for more details.
+/// @nodoc
 abstract class fido_auth_matcher_protection_type_e {
   /// < Authenticator's matcher is running in software.
   static const int FIDO_AUTH_MATCH_PROT_TYPE_SOFTWARE = 1;
@@ -791,9 +969,14 @@ abstract class fido_auth_matcher_protection_type_e {
   static const int FIDO_AUTH_MATCH_PROT_TYPE_ON_CHIP = 4;
 }
 
-/// @brief  Authenticator's supported method to communicate to FIDO user device.
-/// @remarks Refer to FIDO UAF Registry document for more details.
-/// @since_tizen 3.0
+/// Authenticator's supported method to communicate to FIDO user device.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Remarks:**
+/// - Refer to FIDO UAF Registry document for more details.
+/// @nodoc
 abstract class fido_auth_attachment_hint_e {
   /// < Authenticator is permanently attached to the FIDO User Device.
   static const int FIDO_AUTH_ATTACH_HINT_INTERNAL = 1;
@@ -826,9 +1009,14 @@ abstract class fido_auth_attachment_hint_e {
   static const int FIDO_AUTH_ATTACH_HINT_WIFI_DIRECT = 256;
 }
 
-/// @brief  Transaction confirmation display capability type.
-/// @remarks Refer to FIDO UAF Registry document for more details.
-/// @since_tizen 3.0
+/// Transaction confirmation display capability type.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Remarks:**
+/// - Refer to FIDO UAF Registry document for more details.
+/// @nodoc
 abstract class fido_auth_tc_display_type_e {
   /// < Some form of transaction confirmation display is available on this authenticator.
   static const int FIDO_AUTH_TC_DISP_TYPE_ANY = 1;
@@ -847,43 +1035,42 @@ abstract class fido_auth_tc_display_type_e {
   static const int FIDO_AUTH_TC_DISP_TYPE_REMOTE = 16;
 }
 
-/// @brief Called when fido_uaf_get_response_message() response comes.
-/// @details The following error codes can be delivered:
-/// <pre>
-/// #FIDO_ERROR_NONE                        Successful
-/// #FIDO_ERROR_OUT_OF_MEMORY               Out of Memory
-/// #FIDO_ERROR_USER_ACTION_IN_PROGRESS     User action is in progress.
-/// #FIDO_ERROR_USER_CANCELLED              User has cancelled the operation.
-/// #FIDO_ERROR_PERMISSION_DENIED           The application does not have permission to call this
-/// function.
-/// #FIDO_ERROR_UNSUPPORTED_VERSION         The UAF Message does not specify a protocol version
-/// supported by this FIDO UAF Client.
-/// #FIDO_ERROR_NO_SUITABLE_AUTHENTICATOR   No suitable authenticators found.
-/// #FIDO_ERROR_PROTOCOL_ERROR              The interaction may have timed out, or the UAF message
-/// is malformed.
-/// #FIDO_ERROR_UNTRUSTED_FACET_ID          The caller's id is not allowed to use this operation.
-/// </pre>
-/// @since_tizen 3.0
+/// Called when fido_uaf_get_response_message() response comes.
 ///
-/// @param[in] tizen_error_code Tizen platform error code
-/// @param[in] uaf_response_json FIDO response message in JSON format
-/// @param[in] user_data The user data passed from the callback function
+/// The following error codes can be delivered: <pre> `FIDO_ERROR_NONE` Successful `FIDO_ERROR_OUT_OF_MEMORY` Out of Memory `FIDO_ERROR_USER_ACTION_IN_PROGRESS` User action is in progress. `FIDO_ERROR_USER_CANCELLED` User has cancelled the operation. `FIDO_ERROR_PERMISSION_DENIED` The application does not have permission to call this function. `FIDO_ERROR_UNSUPPORTED_VERSION` The UAF Message does not specify a protocol version supported by this FIDO UAF Client. `FIDO_ERROR_NO_SUITABLE_AUTHENTICATOR` No suitable authenticators found. `FIDO_ERROR_PROTOCOL_ERROR` The interaction may have timed out, or the UAF message is malformed. `FIDO_ERROR_UNTRUSTED_FACET_ID` The caller's id is not allowed to use this operation. </pre>
 ///
-/// @pre fido_uaf_get_response_message() must be called to get this callback invoked.
-/// @see fido_uaf_get_response_message()
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `tizen_error_code` (in): Tizen platform error code
+/// - `uaf_response_json` (in): FIDO response message in JSON format
+/// - `user_data` (in): The user data passed from the callback function
+///
+/// **Preconditions:**
+/// - fido_uaf_get_response_message() must be called to get this callback invoked.
+///
+/// **See also:**
+/// - `fido_uaf_get_response_message()`
+/// @nodoc
 typedef fido_uaf_response_message_cb
     = ffi.Pointer<ffi.NativeFunction<fido_uaf_response_message_cbFunction>>;
+/// @nodoc
 typedef fido_uaf_response_message_cbFunction = ffi.Void Function(
     ffi.Int32 tizen_error_code,
     ffi.Pointer<ffi.Char> uaf_response_json,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartfido_uaf_response_message_cbFunction = void Function(
     int tizen_error_code,
     ffi.Pointer<ffi.Char> uaf_response_json,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief    Enumerations of error codes for FIDO APIs.
-/// @since_tizen 3.0
+/// Enumerations of error codes for FIDO APIs.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class fido_error_e {
   /// < Successful.
   static const int FIDO_ERROR_NONE = 0;

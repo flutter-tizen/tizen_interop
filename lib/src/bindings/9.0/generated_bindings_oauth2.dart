@@ -1,3 +1,6 @@
+/// {@category 9.0/tizen}
+library tizen_interop_9_0.oauth2;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen oauth2 APIs.
+/// {@category 9.0/tizen}
 class Tizen90Oauth2 {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,18 +28,24 @@ class Tizen90Oauth2 {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Creates #oauth2_request_h handle.
-  /// @details The handle must be freed via oauth2_request_destroy().
-  /// @since_tizen 2.4
+  /// Creates `oauth2_request_h` handle.
   ///
-  /// @param[out] handle The created oauth2_request handle, else NULL for error cases
+  /// The handle must be freed via oauth2_request_destroy().
   ///
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #OAUTH2_ERROR_NONE               Successful
-  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
-  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Parameters:**
+  /// - `handle` (out): The created oauth2_request handle, else NULL for error cases
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `OAUTH2_ERROR_NONE`: Successful
+  /// - `OAUTH2_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `OAUTH2_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `OAUTH2_ERROR_NOT_SUPPORTED`: Not supported
   int oauth2_request_create(
     ffi.Pointer<oauth2_request_h> handle,
   ) {
@@ -50,16 +60,21 @@ class Tizen90Oauth2 {
   late final _oauth2_request_create = _oauth2_request_createPtr
       .asFunction<int Function(ffi.Pointer<oauth2_request_h>)>();
 
-  /// @brief Destroys #oauth2_request_h handle.
-  /// @since_tizen 2.4
+  /// Destroys `oauth2_request_h` handle.
   ///
-  /// @param[in] handle The oauth2_request handle to destroy
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #OAUTH2_ERROR_NONE               Successful
-  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  /// **Parameters:**
+  /// - `handle` (in): The oauth2_request handle to destroy
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `OAUTH2_ERROR_NONE`: Successful
+  /// - `OAUTH2_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `OAUTH2_ERROR_NOT_SUPPORTED`: Not supported
   int oauth2_request_destroy(
     oauth2_request_h handle,
   ) {
@@ -74,18 +89,23 @@ class Tizen90Oauth2 {
   late final _oauth2_request_destroy =
       _oauth2_request_destroyPtr.asFunction<int Function(oauth2_request_h)>();
 
-  /// @brief Sets authorization end point URL.
-  /// @since_tizen 2.4
+  /// Sets authorization end point URL.
   ///
-  /// @param[in] handle The request handle
-  /// @param[in] url The url
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #OAUTH2_ERROR_NONE               Successful
-  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
-  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  /// **Parameters:**
+  /// - `handle` (in): The request handle
+  /// - `url` (in): The url
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `OAUTH2_ERROR_NONE`: Successful
+  /// - `OAUTH2_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `OAUTH2_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `OAUTH2_ERROR_NOT_SUPPORTED`: Not supported
   int oauth2_request_set_auth_end_point_url(
     oauth2_request_h handle,
     ffi.Pointer<ffi.Char> url,
@@ -104,18 +124,23 @@ class Tizen90Oauth2 {
       _oauth2_request_set_auth_end_point_urlPtr
           .asFunction<int Function(oauth2_request_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets access token end point URL.
-  /// @since_tizen 2.4
+  /// Sets access token end point URL.
   ///
-  /// @param[in] handle The request handle
-  /// @param[in] url The url
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #OAUTH2_ERROR_NONE               Successful
-  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
-  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  /// **Parameters:**
+  /// - `handle` (in): The request handle
+  /// - `url` (in): The url
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `OAUTH2_ERROR_NONE`: Successful
+  /// - `OAUTH2_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `OAUTH2_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `OAUTH2_ERROR_NOT_SUPPORTED`: Not supported
   int oauth2_request_set_token_end_point_url(
     oauth2_request_h handle,
     ffi.Pointer<ffi.Char> url,
@@ -134,18 +159,23 @@ class Tizen90Oauth2 {
       _oauth2_request_set_token_end_point_urlPtr
           .asFunction<int Function(oauth2_request_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets redirection URL.
-  /// @since_tizen 2.4
+  /// Sets redirection URL.
   ///
-  /// @param[in] handle The request handle
-  /// @param[in] url The url
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #OAUTH2_ERROR_NONE               Successful
-  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
-  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  /// **Parameters:**
+  /// - `handle` (in): The request handle
+  /// - `url` (in): The url
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `OAUTH2_ERROR_NONE`: Successful
+  /// - `OAUTH2_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `OAUTH2_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `OAUTH2_ERROR_NOT_SUPPORTED`: Not supported
   int oauth2_request_set_redirection_url(
     oauth2_request_h handle,
     ffi.Pointer<ffi.Char> url,
@@ -164,18 +194,23 @@ class Tizen90Oauth2 {
       _oauth2_request_set_redirection_urlPtr
           .asFunction<int Function(oauth2_request_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets refresh token end point URL.
-  /// @since_tizen 2.4
+  /// Sets refresh token end point URL.
   ///
-  /// @param[in] handle The request handle
-  /// @param[in] url The url
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #OAUTH2_ERROR_NONE               Successful
-  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
-  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  /// **Parameters:**
+  /// - `handle` (in): The request handle
+  /// - `url` (in): The url
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `OAUTH2_ERROR_NONE`: Successful
+  /// - `OAUTH2_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `OAUTH2_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `OAUTH2_ERROR_NOT_SUPPORTED`: Not supported
   int oauth2_request_set_refresh_token_url(
     oauth2_request_h handle,
     ffi.Pointer<ffi.Char> url,
@@ -194,18 +229,23 @@ class Tizen90Oauth2 {
       _oauth2_request_set_refresh_token_urlPtr
           .asFunction<int Function(oauth2_request_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets refresh token. Used mostly while using oauth2_manager_refresh_access_token().
-  /// @since_tizen 2.4
+  /// Sets refresh token. Used mostly while using oauth2_manager_refresh_access_token().
   ///
-  /// @param[in] handle The request handle
-  /// @param[in] refresh_token The refresh token string
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #OAUTH2_ERROR_NONE               Successful
-  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
-  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  /// **Parameters:**
+  /// - `handle` (in): The request handle
+  /// - `refresh_token` (in): The refresh token string
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `OAUTH2_ERROR_NONE`: Successful
+  /// - `OAUTH2_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `OAUTH2_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `OAUTH2_ERROR_NOT_SUPPORTED`: Not supported
   int oauth2_request_set_refresh_token(
     oauth2_request_h handle,
     ffi.Pointer<ffi.Char> refresh_token,
@@ -224,18 +264,23 @@ class Tizen90Oauth2 {
       _oauth2_request_set_refresh_tokenPtr
           .asFunction<int Function(oauth2_request_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets response type.
-  /// @since_tizen 2.4
+  /// Sets response type.
   ///
-  /// @param[in] handle The request handle
-  /// @param[in] response_type The response type
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #OAUTH2_ERROR_NONE               Successful
-  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
-  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  /// **Parameters:**
+  /// - `handle` (in): The request handle
+  /// - `response_type` (in): The response type
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `OAUTH2_ERROR_NONE`: Successful
+  /// - `OAUTH2_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `OAUTH2_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `OAUTH2_ERROR_NOT_SUPPORTED`: Not supported
   int oauth2_request_set_response_type(
     oauth2_request_h handle,
     int response_type,
@@ -253,18 +298,23 @@ class Tizen90Oauth2 {
       _oauth2_request_set_response_typePtr
           .asFunction<int Function(oauth2_request_h, int)>();
 
-  /// @brief Sets client id.
-  /// @since_tizen 2.4
+  /// Sets client id.
   ///
-  /// @param[in] handle The request handle
-  /// @param[in] client_id The client id
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #OAUTH2_ERROR_NONE               Successful
-  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
-  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  /// **Parameters:**
+  /// - `handle` (in): The request handle
+  /// - `client_id` (in): The client id
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `OAUTH2_ERROR_NONE`: Successful
+  /// - `OAUTH2_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `OAUTH2_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `OAUTH2_ERROR_NOT_SUPPORTED`: Not supported
   int oauth2_request_set_client_id(
     oauth2_request_h handle,
     ffi.Pointer<ffi.Char> client_id,
@@ -282,18 +332,23 @@ class Tizen90Oauth2 {
   late final _oauth2_request_set_client_id = _oauth2_request_set_client_idPtr
       .asFunction<int Function(oauth2_request_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets client secret.
-  /// @since_tizen 2.4
+  /// Sets client secret.
   ///
-  /// @param[in] handle The request handle
-  /// @param[in] client_secret The secret
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #OAUTH2_ERROR_NONE               Successful
-  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
-  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  /// **Parameters:**
+  /// - `handle` (in): The request handle
+  /// - `client_secret` (in): The secret
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `OAUTH2_ERROR_NONE`: Successful
+  /// - `OAUTH2_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `OAUTH2_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `OAUTH2_ERROR_NOT_SUPPORTED`: Not supported
   int oauth2_request_set_client_secret(
     oauth2_request_h handle,
     ffi.Pointer<ffi.Char> client_secret,
@@ -312,21 +367,27 @@ class Tizen90Oauth2 {
       _oauth2_request_set_client_secretPtr
           .asFunction<int Function(oauth2_request_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets client authentication type. Default is OAUTH2_CLIENT_AUTHENTICATION_TYPE_BASIC.
-  /// @since_tizen 2.4
+  /// Sets client authentication type. Default is OAUTH2_CLIENT_AUTHENTICATION_TYPE_BASIC.
   ///
-  /// @remarks Facebook and Google does not support HTTP Basic Authentication, instead they require client credentials to be sent via request body.\n
-  /// So application must set #OAUTH2_CLIENT_AUTHENTICATION_TYPE_REQUEST_BODY for them.
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @param[in] handle The request handle
-  /// @param[in] client_auth_type The client authentication type
+  /// **Remarks:**
+  /// - Facebook and Google does not support HTTP Basic Authentication, instead they require client credentials to be sent via request body.
+  /// - So application must set `OAUTH2_CLIENT_AUTHENTICATION_TYPE_REQUEST_BODY` for them.
   ///
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #OAUTH2_ERROR_NONE               Successful
-  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
-  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  /// **Parameters:**
+  /// - `handle` (in): The request handle
+  /// - `client_auth_type` (in): The client authentication type
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `OAUTH2_ERROR_NONE`: Successful
+  /// - `OAUTH2_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `OAUTH2_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `OAUTH2_ERROR_NOT_SUPPORTED`: Not supported
   int oauth2_request_set_client_authentication_type(
     oauth2_request_h handle,
     int client_auth_type,
@@ -344,18 +405,23 @@ class Tizen90Oauth2 {
       _oauth2_request_set_client_authentication_typePtr
           .asFunction<int Function(oauth2_request_h, int)>();
 
-  /// @brief Sets scope.
-  /// @since_tizen 2.4
+  /// Sets scope.
   ///
-  /// @param[in] handle The request handle
-  /// @param[in] scope The scope
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #OAUTH2_ERROR_NONE               Successful
-  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
-  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  /// **Parameters:**
+  /// - `handle` (in): The request handle
+  /// - `scope` (in): The scope
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `OAUTH2_ERROR_NONE`: Successful
+  /// - `OAUTH2_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `OAUTH2_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `OAUTH2_ERROR_NOT_SUPPORTED`: Not supported
   int oauth2_request_set_scope(
     oauth2_request_h handle,
     ffi.Pointer<ffi.Char> scope,
@@ -373,18 +439,23 @@ class Tizen90Oauth2 {
   late final _oauth2_request_set_scope = _oauth2_request_set_scopePtr
       .asFunction<int Function(oauth2_request_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets state.
-  /// @since_tizen 2.4
+  /// Sets state.
   ///
-  /// @param[in] handle The request handle
-  /// @param[in] state The state
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #OAUTH2_ERROR_NONE               Successful
-  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
-  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  /// **Parameters:**
+  /// - `handle` (in): The request handle
+  /// - `state` (in): The state
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `OAUTH2_ERROR_NONE`: Successful
+  /// - `OAUTH2_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `OAUTH2_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `OAUTH2_ERROR_NOT_SUPPORTED`: Not supported
   int oauth2_request_set_state(
     oauth2_request_h handle,
     ffi.Pointer<ffi.Char> state,
@@ -402,18 +473,23 @@ class Tizen90Oauth2 {
   late final _oauth2_request_set_state = _oauth2_request_set_statePtr
       .asFunction<int Function(oauth2_request_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets grant type.
-  /// @since_tizen 2.4
+  /// Sets grant type.
   ///
-  /// @param[in] handle The request handle
-  /// @param[in] grant_type The grant type
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #OAUTH2_ERROR_NONE               Successful
-  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
-  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  /// **Parameters:**
+  /// - `handle` (in): The request handle
+  /// - `grant_type` (in): The grant type
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `OAUTH2_ERROR_NONE`: Successful
+  /// - `OAUTH2_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `OAUTH2_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `OAUTH2_ERROR_NOT_SUPPORTED`: Not supported
   int oauth2_request_set_grant_type(
     oauth2_request_h handle,
     int grant_type,
@@ -430,20 +506,26 @@ class Tizen90Oauth2 {
   late final _oauth2_request_set_grant_type = _oauth2_request_set_grant_typePtr
       .asFunction<int Function(oauth2_request_h, int)>();
 
-  /// @brief Sets authorization code.
-  /// @since_tizen 2.4
+  /// Sets authorization code.
   ///
-  /// @param[in] handle The request handle
-  /// @param[in] code The authorization code
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #OAUTH2_ERROR_NONE               Successful
-  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
-  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  /// **Parameters:**
+  /// - `handle` (in): The request handle
+  /// - `code` (in): The authorization code
   ///
-  /// @see oauth2_response_get_authorization_code()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `OAUTH2_ERROR_NONE`: Successful
+  /// - `OAUTH2_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `OAUTH2_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `OAUTH2_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `oauth2_response_get_authorization_code()`
   int oauth2_request_set_authorization_code(
     oauth2_request_h handle,
     ffi.Pointer<ffi.Char> code,
@@ -462,18 +544,23 @@ class Tizen90Oauth2 {
       _oauth2_request_set_authorization_codePtr
           .asFunction<int Function(oauth2_request_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets user name.
-  /// @since_tizen 2.4
+  /// Sets user name.
   ///
-  /// @param[in] handle The request handle
-  /// @param[in] user_name The user name
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #OAUTH2_ERROR_NONE               Successful
-  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
-  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  /// **Parameters:**
+  /// - `handle` (in): The request handle
+  /// - `user_name` (in): The user name
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `OAUTH2_ERROR_NONE`: Successful
+  /// - `OAUTH2_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `OAUTH2_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `OAUTH2_ERROR_NOT_SUPPORTED`: Not supported
   int oauth2_request_set_user_name(
     oauth2_request_h handle,
     ffi.Pointer<ffi.Char> user_name,
@@ -491,18 +578,23 @@ class Tizen90Oauth2 {
   late final _oauth2_request_set_user_name = _oauth2_request_set_user_namePtr
       .asFunction<int Function(oauth2_request_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets password.
-  /// @since_tizen 2.4
+  /// Sets password.
   ///
-  /// @param[in] handle The request handle
-  /// @param[in] password The password
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #OAUTH2_ERROR_NONE               Successful
-  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
-  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  /// **Parameters:**
+  /// - `handle` (in): The request handle
+  /// - `password` (in): The password
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `OAUTH2_ERROR_NONE`: Successful
+  /// - `OAUTH2_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `OAUTH2_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `OAUTH2_ERROR_NOT_SUPPORTED`: Not supported
   int oauth2_request_set_password(
     oauth2_request_h handle,
     ffi.Pointer<ffi.Char> password,
@@ -520,21 +612,27 @@ class Tizen90Oauth2 {
   late final _oauth2_request_set_password = _oauth2_request_set_passwordPtr
       .asFunction<int Function(oauth2_request_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Adds custom key-value pair to the request.
-  /// @since_tizen 2.4
+  /// Adds custom key-value pair to the request.
   ///
-  /// @param[in] handle The request handle
-  /// @param[in] key The key
-  /// @param[in] value The value
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #OAUTH2_ERROR_NONE               Successful
-  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
-  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  /// **Parameters:**
+  /// - `handle` (in): The request handle
+  /// - `key` (in): The key
+  /// - `value` (in): The value
   ///
-  /// @see oauth2_request_get_custom_data()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `OAUTH2_ERROR_NONE`: Successful
+  /// - `OAUTH2_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `OAUTH2_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `OAUTH2_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `oauth2_request_get_custom_data()`
   int oauth2_request_add_custom_data(
     oauth2_request_h handle,
     ffi.Pointer<ffi.Char> key,
@@ -556,20 +654,27 @@ class Tizen90Oauth2 {
           int Function(oauth2_request_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets authorization end point URL.
-  /// @since_tizen 2.4
+  /// Gets authorization end point URL.
   ///
-  /// @remarks You must not release @a url using free().
-  /// @param[in] handle The request handle
-  /// @param[out] url The url
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #OAUTH2_ERROR_NONE               Successful
-  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
-  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval     #OAUTH2_ERROR_VALUE_NOT_FOUND    Value not found
-  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  /// **Remarks:**
+  /// - You must not release `url` using free().
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The request handle
+  /// - `url` (out): The url
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `OAUTH2_ERROR_NONE`: Successful
+  /// - `OAUTH2_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `OAUTH2_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `OAUTH2_ERROR_VALUE_NOT_FOUND`: Value not found
+  /// - `OAUTH2_ERROR_NOT_SUPPORTED`: Not supported
   int oauth2_request_get_auth_end_point_url(
     oauth2_request_h handle,
     ffi.Pointer<ffi.Pointer<ffi.Char>> url,
@@ -589,20 +694,27 @@ class Tizen90Oauth2 {
       _oauth2_request_get_auth_end_point_urlPtr.asFunction<
           int Function(oauth2_request_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets access token end point URL.
-  /// @since_tizen 2.4
+  /// Gets access token end point URL.
   ///
-  /// @remarks You must not release @a url using free().
-  /// @param[in] handle The request handle
-  /// @param[out] url The url
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #OAUTH2_ERROR_NONE               Successful
-  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
-  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval     #OAUTH2_ERROR_VALUE_NOT_FOUND    Value not found
-  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  /// **Remarks:**
+  /// - You must not release `url` using free().
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The request handle
+  /// - `url` (out): The url
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `OAUTH2_ERROR_NONE`: Successful
+  /// - `OAUTH2_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `OAUTH2_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `OAUTH2_ERROR_VALUE_NOT_FOUND`: Value not found
+  /// - `OAUTH2_ERROR_NOT_SUPPORTED`: Not supported
   int oauth2_request_get_token_end_point_url(
     oauth2_request_h handle,
     ffi.Pointer<ffi.Pointer<ffi.Char>> url,
@@ -622,20 +734,27 @@ class Tizen90Oauth2 {
       _oauth2_request_get_token_end_point_urlPtr.asFunction<
           int Function(oauth2_request_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets redirection URL.
-  /// @since_tizen 2.4
+  /// Gets redirection URL.
   ///
-  /// @remarks You must not release @a url using free().
-  /// @param[in] handle The request handle
-  /// @param[out] url The url
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #OAUTH2_ERROR_NONE               Successful
-  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
-  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval     #OAUTH2_ERROR_VALUE_NOT_FOUND    Value not found
-  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  /// **Remarks:**
+  /// - You must not release `url` using free().
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The request handle
+  /// - `url` (out): The url
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `OAUTH2_ERROR_NONE`: Successful
+  /// - `OAUTH2_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `OAUTH2_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `OAUTH2_ERROR_VALUE_NOT_FOUND`: Value not found
+  /// - `OAUTH2_ERROR_NOT_SUPPORTED`: Not supported
   int oauth2_request_get_redirection_url(
     oauth2_request_h handle,
     ffi.Pointer<ffi.Pointer<ffi.Char>> url,
@@ -655,20 +774,27 @@ class Tizen90Oauth2 {
       _oauth2_request_get_redirection_urlPtr.asFunction<
           int Function(oauth2_request_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets refresh token end point URL.
-  /// @since_tizen 2.4
+  /// Gets refresh token end point URL.
   ///
-  /// @remarks You must not release @a url using free().
-  /// @param[in] handle The request handle
-  /// @param[out] url The url
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #OAUTH2_ERROR_NONE               Successful
-  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
-  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval     #OAUTH2_ERROR_VALUE_NOT_FOUND    Value not found
-  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  /// **Remarks:**
+  /// - You must not release `url` using free().
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The request handle
+  /// - `url` (out): The url
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `OAUTH2_ERROR_NONE`: Successful
+  /// - `OAUTH2_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `OAUTH2_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `OAUTH2_ERROR_VALUE_NOT_FOUND`: Value not found
+  /// - `OAUTH2_ERROR_NOT_SUPPORTED`: Not supported
   int oauth2_request_get_refresh_token_url(
     oauth2_request_h handle,
     ffi.Pointer<ffi.Pointer<ffi.Char>> url,
@@ -688,20 +814,27 @@ class Tizen90Oauth2 {
       _oauth2_request_get_refresh_token_urlPtr.asFunction<
           int Function(oauth2_request_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets refresh token.
-  /// @since_tizen 2.4
+  /// Gets refresh token.
   ///
-  /// @remarks You must not release @a refresh_token using free().
-  /// @param[in] handle The request handle
-  /// @param[out] refresh_token The refresh token
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #OAUTH2_ERROR_NONE               Successful
-  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
-  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval     #OAUTH2_ERROR_VALUE_NOT_FOUND    Value not found
-  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  /// **Remarks:**
+  /// - You must not release `refresh_token` using free().
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The request handle
+  /// - `refresh_token` (out): The refresh token
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `OAUTH2_ERROR_NONE`: Successful
+  /// - `OAUTH2_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `OAUTH2_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `OAUTH2_ERROR_VALUE_NOT_FOUND`: Value not found
+  /// - `OAUTH2_ERROR_NOT_SUPPORTED`: Not supported
   int oauth2_request_get_refresh_token(
     oauth2_request_h handle,
     ffi.Pointer<ffi.Pointer<ffi.Char>> refresh_token,
@@ -721,20 +854,27 @@ class Tizen90Oauth2 {
       _oauth2_request_get_refresh_tokenPtr.asFunction<
           int Function(oauth2_request_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets response type.
-  /// @since_tizen 2.4
+  /// Gets response type.
   ///
-  /// @remarks		You must not free response_type
-  /// @param[in] handle The request handle
-  /// @param[out] response_type The response type
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #OAUTH2_ERROR_NONE               Successful
-  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
-  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval     #OAUTH2_ERROR_VALUE_NOT_FOUND    Value not found
-  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  /// **Remarks:**
+  /// - You must not free response_type
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The request handle
+  /// - `response_type` (out): The response type
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `OAUTH2_ERROR_NONE`: Successful
+  /// - `OAUTH2_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `OAUTH2_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `OAUTH2_ERROR_VALUE_NOT_FOUND`: Value not found
+  /// - `OAUTH2_ERROR_NOT_SUPPORTED`: Not supported
   int oauth2_request_get_response_type(
     oauth2_request_h handle,
     ffi.Pointer<ffi.Int32> response_type,
@@ -753,20 +893,27 @@ class Tizen90Oauth2 {
       _oauth2_request_get_response_typePtr
           .asFunction<int Function(oauth2_request_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets client id.
-  /// @since_tizen 2.4
+  /// Gets client id.
   ///
-  /// @remarks You must not release @a client_id using free().
-  /// @param[in] handle The request handle
-  /// @param[out] client_id The client id
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #OAUTH2_ERROR_NONE               Successful
-  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
-  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval     #OAUTH2_ERROR_VALUE_NOT_FOUND    Value not found
-  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  /// **Remarks:**
+  /// - You must not release `client_id` using free().
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The request handle
+  /// - `client_id` (out): The client id
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `OAUTH2_ERROR_NONE`: Successful
+  /// - `OAUTH2_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `OAUTH2_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `OAUTH2_ERROR_VALUE_NOT_FOUND`: Value not found
+  /// - `OAUTH2_ERROR_NOT_SUPPORTED`: Not supported
   int oauth2_request_get_client_id(
     oauth2_request_h handle,
     ffi.Pointer<ffi.Pointer<ffi.Char>> client_id,
@@ -786,20 +933,27 @@ class Tizen90Oauth2 {
       _oauth2_request_get_client_idPtr.asFunction<
           int Function(oauth2_request_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets client secret.
-  /// @since_tizen 2.4
+  /// Gets client secret.
   ///
-  /// @remarks You must not release @a client_secret using free().
-  /// @param[in] handle The request handle
-  /// @param[out] client_secret The client_secret
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #OAUTH2_ERROR_NONE               Successful
-  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
-  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval     #OAUTH2_ERROR_VALUE_NOT_FOUND    Value not found
-  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  /// **Remarks:**
+  /// - You must not release `client_secret` using free().
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The request handle
+  /// - `client_secret` (out): The client_secret
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `OAUTH2_ERROR_NONE`: Successful
+  /// - `OAUTH2_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `OAUTH2_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `OAUTH2_ERROR_VALUE_NOT_FOUND`: Value not found
+  /// - `OAUTH2_ERROR_NOT_SUPPORTED`: Not supported
   int oauth2_request_get_client_secret(
     oauth2_request_h handle,
     ffi.Pointer<ffi.Pointer<ffi.Char>> client_secret,
@@ -819,20 +973,27 @@ class Tizen90Oauth2 {
       _oauth2_request_get_client_secretPtr.asFunction<
           int Function(oauth2_request_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets scope.
-  /// @since_tizen 2.4
+  /// Gets scope.
   ///
-  /// @remarks You must not release @a scope using free().
-  /// @param[in] handle The request handle
-  /// @param[out] scope The scope
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #OAUTH2_ERROR_NONE               Successful
-  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
-  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval     #OAUTH2_ERROR_VALUE_NOT_FOUND    Value not found
-  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  /// **Remarks:**
+  /// - You must not release `scope` using free().
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The request handle
+  /// - `scope` (out): The scope
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `OAUTH2_ERROR_NONE`: Successful
+  /// - `OAUTH2_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `OAUTH2_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `OAUTH2_ERROR_VALUE_NOT_FOUND`: Value not found
+  /// - `OAUTH2_ERROR_NOT_SUPPORTED`: Not supported
   int oauth2_request_get_scope(
     oauth2_request_h handle,
     ffi.Pointer<ffi.Pointer<ffi.Char>> scope,
@@ -851,20 +1012,27 @@ class Tizen90Oauth2 {
       _oauth2_request_get_scopePtr.asFunction<
           int Function(oauth2_request_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets state.
-  /// @since_tizen 2.4
+  /// Gets state.
   ///
-  /// @remarks You must not release @a state using free().
-  /// @param[in] handle The request handle
-  /// @param[out] state The state
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #OAUTH2_ERROR_NONE               Successful
-  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
-  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval     #OAUTH2_ERROR_VALUE_NOT_FOUND    Value not found
-  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  /// **Remarks:**
+  /// - You must not release `state` using free().
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The request handle
+  /// - `state` (out): The state
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `OAUTH2_ERROR_NONE`: Successful
+  /// - `OAUTH2_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `OAUTH2_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `OAUTH2_ERROR_VALUE_NOT_FOUND`: Value not found
+  /// - `OAUTH2_ERROR_NOT_SUPPORTED`: Not supported
   int oauth2_request_get_state(
     oauth2_request_h handle,
     ffi.Pointer<ffi.Pointer<ffi.Char>> state,
@@ -883,20 +1051,27 @@ class Tizen90Oauth2 {
       _oauth2_request_get_statePtr.asFunction<
           int Function(oauth2_request_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets grant type.
-  /// @since_tizen 2.4
+  /// Gets grant type.
   ///
-  /// @remarks You must not release @a grant_type using free().
-  /// @param[in] handle The request handle
-  /// @param[out] grant_type The grant type
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #OAUTH2_ERROR_NONE               Successful
-  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
-  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval     #OAUTH2_ERROR_VALUE_NOT_FOUND    Value not found
-  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  /// **Remarks:**
+  /// - You must not release `grant_type` using free().
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The request handle
+  /// - `grant_type` (out): The grant type
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `OAUTH2_ERROR_NONE`: Successful
+  /// - `OAUTH2_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `OAUTH2_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `OAUTH2_ERROR_VALUE_NOT_FOUND`: Value not found
+  /// - `OAUTH2_ERROR_NOT_SUPPORTED`: Not supported
   int oauth2_request_get_grant_type(
     oauth2_request_h handle,
     ffi.Pointer<ffi.Int32> grant_type,
@@ -914,20 +1089,27 @@ class Tizen90Oauth2 {
   late final _oauth2_request_get_grant_type = _oauth2_request_get_grant_typePtr
       .asFunction<int Function(oauth2_request_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets authorization code.
-  /// @since_tizen 2.4
+  /// Gets authorization code.
   ///
-  /// @remarks You must not release @a code using free().
-  /// @param[in] handle The request handle.
-  /// @param[out] code The code.
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #OAUTH2_ERROR_NONE               Successful
-  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
-  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval     #OAUTH2_ERROR_VALUE_NOT_FOUND    Value not found
-  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  /// **Remarks:**
+  /// - You must not release `code` using free().
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The request handle.
+  /// - `code` (out): The code.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `OAUTH2_ERROR_NONE`: Successful
+  /// - `OAUTH2_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `OAUTH2_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `OAUTH2_ERROR_VALUE_NOT_FOUND`: Value not found
+  /// - `OAUTH2_ERROR_NOT_SUPPORTED`: Not supported
   int oauth2_request_get_authorization_code(
     oauth2_request_h handle,
     ffi.Pointer<ffi.Pointer<ffi.Char>> code,
@@ -947,20 +1129,27 @@ class Tizen90Oauth2 {
       _oauth2_request_get_authorization_codePtr.asFunction<
           int Function(oauth2_request_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets user name.
-  /// @since_tizen 2.4
+  /// Gets user name.
   ///
-  /// @remarks You must not release @a user_name using free().
-  /// @param[in] handle The request handle
-  /// @param[out] user_name The user name
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #OAUTH2_ERROR_NONE               Successful
-  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
-  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval     #OAUTH2_ERROR_VALUE_NOT_FOUND    Value not found
-  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  /// **Remarks:**
+  /// - You must not release `user_name` using free().
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The request handle
+  /// - `user_name` (out): The user name
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `OAUTH2_ERROR_NONE`: Successful
+  /// - `OAUTH2_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `OAUTH2_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `OAUTH2_ERROR_VALUE_NOT_FOUND`: Value not found
+  /// - `OAUTH2_ERROR_NOT_SUPPORTED`: Not supported
   int oauth2_request_get_user_name(
     oauth2_request_h handle,
     ffi.Pointer<ffi.Pointer<ffi.Char>> user_name,
@@ -980,20 +1169,27 @@ class Tizen90Oauth2 {
       _oauth2_request_get_user_namePtr.asFunction<
           int Function(oauth2_request_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets password.
-  /// @since_tizen 2.4
+  /// Gets password.
   ///
-  /// @remarks You must not release @a password using free().
-  /// @param[in] handle The request handle
-  /// @param[out] password The password
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #OAUTH2_ERROR_NONE               Successful
-  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
-  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval     #OAUTH2_ERROR_VALUE_NOT_FOUND    Value not found
-  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  /// **Remarks:**
+  /// - You must not release `password` using free().
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The request handle
+  /// - `password` (out): The password
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `OAUTH2_ERROR_NONE`: Successful
+  /// - `OAUTH2_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `OAUTH2_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `OAUTH2_ERROR_VALUE_NOT_FOUND`: Value not found
+  /// - `OAUTH2_ERROR_NOT_SUPPORTED`: Not supported
   int oauth2_request_get_password(
     oauth2_request_h handle,
     ffi.Pointer<ffi.Pointer<ffi.Char>> password,
@@ -1013,21 +1209,28 @@ class Tizen90Oauth2 {
       _oauth2_request_get_passwordPtr.asFunction<
           int Function(oauth2_request_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the custom value.
-  /// @since_tizen 2.4
+  /// Gets the custom value.
   ///
-  /// @remarks You must not release @a custom_value using free().
-  /// @param[in] handle The request handle
-  /// @param[in] custom_key The custom key
-  /// @param[out] custom_value The custom value
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #OAUTH2_ERROR_NONE               Successful
-  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
-  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval     #OAUTH2_ERROR_VALUE_NOT_FOUND    Value not found
-  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  /// **Remarks:**
+  /// - You must not release `custom_value` using free().
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The request handle
+  /// - `custom_key` (in): The custom key
+  /// - `custom_value` (out): The custom value
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `OAUTH2_ERROR_NONE`: Successful
+  /// - `OAUTH2_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `OAUTH2_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `OAUTH2_ERROR_VALUE_NOT_FOUND`: Value not found
+  /// - `OAUTH2_ERROR_NOT_SUPPORTED`: Not supported
   int oauth2_request_get_custom_data(
     oauth2_request_h handle,
     ffi.Pointer<ffi.Char> custom_key,
@@ -1050,21 +1253,28 @@ class Tizen90Oauth2 {
           int Function(oauth2_request_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets error code.
-  /// @since_tizen 2.4
+  /// Gets error code.
   ///
-  /// @remarks You must not release @a server_error_code and @a platform_error_code using free().
-  /// @param[in] handle The error handle
-  /// @param[out] server_error_code Error code (if any) returned by the server
-  /// @param[out] platform_error_code Tizen platform related error code (if any), value is of type #oauth2_error_e
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #OAUTH2_ERROR_NONE               Successful
-  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
-  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval     #OAUTH2_ERROR_VALUE_NOT_FOUND    Value not found
-  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  /// **Remarks:**
+  /// - You must not release `server_error_code` and `platform_error_code` using free().
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The error handle
+  /// - `server_error_code` (out): Error code (if any) returned by the server
+  /// - `platform_error_code` (out): Tizen platform related error code (if any), value is of type `oauth2_error_e`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `OAUTH2_ERROR_NONE`: Successful
+  /// - `OAUTH2_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `OAUTH2_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `OAUTH2_ERROR_VALUE_NOT_FOUND`: Value not found
+  /// - `OAUTH2_ERROR_NOT_SUPPORTED`: Not supported
   int oauth2_error_get_code(
     oauth2_error_h handle,
     ffi.Pointer<ffi.Int> server_error_code,
@@ -1085,20 +1295,27 @@ class Tizen90Oauth2 {
       int Function(
           oauth2_error_h, ffi.Pointer<ffi.Int>, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets error description.
-  /// @since_tizen 2.4
+  /// Gets error description.
   ///
-  /// @remarks You must not release @a description using free().
-  /// @param[in] handle The error handle
-  /// @param[out] description The Error description
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #OAUTH2_ERROR_NONE               Successful
-  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
-  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval     #OAUTH2_ERROR_VALUE_NOT_FOUND    Value not found
-  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  /// **Remarks:**
+  /// - You must not release `description` using free().
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The error handle
+  /// - `description` (out): The Error description
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `OAUTH2_ERROR_NONE`: Successful
+  /// - `OAUTH2_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `OAUTH2_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `OAUTH2_ERROR_VALUE_NOT_FOUND`: Value not found
+  /// - `OAUTH2_ERROR_NOT_SUPPORTED`: Not supported
   int oauth2_error_get_description(
     oauth2_error_h handle,
     ffi.Pointer<ffi.Pointer<ffi.Char>> description,
@@ -1118,20 +1335,27 @@ class Tizen90Oauth2 {
       _oauth2_error_get_descriptionPtr.asFunction<
           int Function(oauth2_error_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets error uri.
-  /// @since_tizen 2.4
+  /// Gets error uri.
   ///
-  /// @remarks You must not release @a uri using free().
-  /// @param[in] handle The error handle
-  /// @param[out] uri The Error URI
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #OAUTH2_ERROR_NONE               Successful
-  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
-  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval     #OAUTH2_ERROR_VALUE_NOT_FOUND    Value not found
-  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  /// **Remarks:**
+  /// - You must not release `uri` using free().
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The error handle
+  /// - `uri` (out): The Error URI
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `OAUTH2_ERROR_NONE`: Successful
+  /// - `OAUTH2_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `OAUTH2_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `OAUTH2_ERROR_VALUE_NOT_FOUND`: Value not found
+  /// - `OAUTH2_ERROR_NOT_SUPPORTED`: Not supported
   int oauth2_error_get_uri(
     oauth2_error_h handle,
     ffi.Pointer<ffi.Pointer<ffi.Char>> uri,
@@ -1149,21 +1373,28 @@ class Tizen90Oauth2 {
   late final _oauth2_error_get_uri = _oauth2_error_get_uriPtr.asFunction<
       int Function(oauth2_error_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the custom data.
-  /// @since_tizen 2.4
+  /// Gets the custom data.
   ///
-  /// @remarks You must not release @a custom_value using free().
-  /// @param[in] handle The error handle
-  /// @param[in] custom_key The custom key
-  /// @param[out] custom_value The custom value
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #OAUTH2_ERROR_NONE               Successful
-  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
-  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval     #OAUTH2_ERROR_VALUE_NOT_FOUND    Value not found
-  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  /// **Remarks:**
+  /// - You must not release `custom_value` using free().
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The error handle
+  /// - `custom_key` (in): The custom key
+  /// - `custom_value` (out): The custom value
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `OAUTH2_ERROR_NONE`: Successful
+  /// - `OAUTH2_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `OAUTH2_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `OAUTH2_ERROR_VALUE_NOT_FOUND`: Value not found
+  /// - `OAUTH2_ERROR_NOT_SUPPORTED`: Not supported
   int oauth2_error_get_custom_data(
     oauth2_error_h handle,
     ffi.Pointer<ffi.Char> custom_key,
@@ -1186,16 +1417,21 @@ class Tizen90Oauth2 {
           int Function(oauth2_error_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Destroys the received handle.
-  /// @since_tizen 2.4
+  /// Destroys the received handle.
   ///
-  /// @param[in] handle The response handle
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #OAUTH2_ERROR_NONE               Successful
-  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  /// **Parameters:**
+  /// - `handle` (in): The response handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `OAUTH2_ERROR_NONE`: Successful
+  /// - `OAUTH2_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `OAUTH2_ERROR_NOT_SUPPORTED`: Not supported
   int oauth2_response_destroy(
     oauth2_response_h handle,
   ) {
@@ -1210,22 +1446,30 @@ class Tizen90Oauth2 {
   late final _oauth2_response_destroy =
       _oauth2_response_destroyPtr.asFunction<int Function(oauth2_response_h)>();
 
-  /// @brief Gets the authorization code.
-  /// @since_tizen 2.4
+  /// Gets the authorization code.
   ///
-  /// @remarks You must not release @a code using free().
-  /// @param[in] handle The response handle
-  /// @param[out] code The code.
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #OAUTH2_ERROR_NONE               Successful
-  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
-  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval     #OAUTH2_ERROR_VALUE_NOT_FOUND    Value not found
-  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  /// **Remarks:**
+  /// - You must not release `code` using free().
   ///
-  /// @see oauth2_request_set_authorization_code()
+  /// **Parameters:**
+  /// - `handle` (in): The response handle
+  /// - `code` (out): The code.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `OAUTH2_ERROR_NONE`: Successful
+  /// - `OAUTH2_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `OAUTH2_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `OAUTH2_ERROR_VALUE_NOT_FOUND`: Value not found
+  /// - `OAUTH2_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `oauth2_request_set_authorization_code()`
   int oauth2_response_get_authorization_code(
     oauth2_response_h handle,
     ffi.Pointer<ffi.Pointer<ffi.Char>> code,
@@ -1246,20 +1490,27 @@ class Tizen90Oauth2 {
           int Function(
               oauth2_response_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets state.
-  /// @since_tizen 2.4
+  /// Gets state.
   ///
-  /// @remarks You must not release @a state using free().
-  /// @param[in] handle The response handle
-  /// @param[out] state The state.
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #OAUTH2_ERROR_NONE               Successful
-  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
-  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval     #OAUTH2_ERROR_VALUE_NOT_FOUND    Value not found
-  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  /// **Remarks:**
+  /// - You must not release `state` using free().
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The response handle
+  /// - `state` (out): The state.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `OAUTH2_ERROR_NONE`: Successful
+  /// - `OAUTH2_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `OAUTH2_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `OAUTH2_ERROR_VALUE_NOT_FOUND`: Value not found
+  /// - `OAUTH2_ERROR_NOT_SUPPORTED`: Not supported
   int oauth2_response_get_state(
     oauth2_response_h handle,
     ffi.Pointer<ffi.Pointer<ffi.Char>> state,
@@ -1280,20 +1531,27 @@ class Tizen90Oauth2 {
           int Function(
               oauth2_response_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets access token.
-  /// @since_tizen 2.4
+  /// Gets access token.
   ///
-  /// @remarks You must not release @a access_token using free().
-  /// @param[in] handle The response handle
-  /// @param[out] access_token The access token
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #OAUTH2_ERROR_NONE               Successful
-  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
-  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval     #OAUTH2_ERROR_VALUE_NOT_FOUND    Value not found
-  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  /// **Remarks:**
+  /// - You must not release `access_token` using free().
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The response handle
+  /// - `access_token` (out): The access token
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `OAUTH2_ERROR_NONE`: Successful
+  /// - `OAUTH2_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `OAUTH2_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `OAUTH2_ERROR_VALUE_NOT_FOUND`: Value not found
+  /// - `OAUTH2_ERROR_NOT_SUPPORTED`: Not supported
   int oauth2_response_get_access_token(
     oauth2_response_h handle,
     ffi.Pointer<ffi.Pointer<ffi.Char>> access_token,
@@ -1314,20 +1572,27 @@ class Tizen90Oauth2 {
           int Function(
               oauth2_response_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets token type.
-  /// @since_tizen 2.4
+  /// Gets token type.
   ///
-  /// @remarks You must not release @a token_type using free().
-  /// @param[in] handle The response handle
-  /// @param[out] token_type The token type
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #OAUTH2_ERROR_NONE               Successful
-  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
-  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval     #OAUTH2_ERROR_VALUE_NOT_FOUND    Value not found
-  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  /// **Remarks:**
+  /// - You must not release `token_type` using free().
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The response handle
+  /// - `token_type` (out): The token type
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `OAUTH2_ERROR_NONE`: Successful
+  /// - `OAUTH2_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `OAUTH2_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `OAUTH2_ERROR_VALUE_NOT_FOUND`: Value not found
+  /// - `OAUTH2_ERROR_NOT_SUPPORTED`: Not supported
   int oauth2_response_get_token_type(
     oauth2_response_h handle,
     ffi.Pointer<ffi.Pointer<ffi.Char>> token_type,
@@ -1348,20 +1613,27 @@ class Tizen90Oauth2 {
           int Function(
               oauth2_response_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets expiry time.
-  /// @since_tizen 2.4
+  /// Gets expiry time.
   ///
-  /// @remarks You must not release @a expires_in using free().
-  /// @param[in] handle The response handle
-  /// @param[out] expires_in Expiry value
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #OAUTH2_ERROR_NONE               Successful
-  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
-  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval     #OAUTH2_ERROR_VALUE_NOT_FOUND    Value not found
-  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  /// **Remarks:**
+  /// - You must not release `expires_in` using free().
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The response handle
+  /// - `expires_in` (out): Expiry value
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `OAUTH2_ERROR_NONE`: Successful
+  /// - `OAUTH2_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `OAUTH2_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `OAUTH2_ERROR_VALUE_NOT_FOUND`: Value not found
+  /// - `OAUTH2_ERROR_NOT_SUPPORTED`: Not supported
   int oauth2_response_get_expires_in(
     oauth2_response_h handle,
     ffi.Pointer<ffi.LongLong> expires_in,
@@ -1380,20 +1652,27 @@ class Tizen90Oauth2 {
       _oauth2_response_get_expires_inPtr.asFunction<
           int Function(oauth2_response_h, ffi.Pointer<ffi.LongLong>)>();
 
-  /// @brief Gets refresh token.
-  /// @since_tizen 2.4
+  /// Gets refresh token.
   ///
-  /// @remarks You must not release @a refresh_token using free().
-  /// @param[in] handle The response handle
-  /// @param[out] refresh_token The refresh token
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #OAUTH2_ERROR_NONE               Successful
-  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
-  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval     #OAUTH2_ERROR_VALUE_NOT_FOUND    Value not found
-  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  /// **Remarks:**
+  /// - You must not release `refresh_token` using free().
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The response handle
+  /// - `refresh_token` (out): The refresh token
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `OAUTH2_ERROR_NONE`: Successful
+  /// - `OAUTH2_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `OAUTH2_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `OAUTH2_ERROR_VALUE_NOT_FOUND`: Value not found
+  /// - `OAUTH2_ERROR_NOT_SUPPORTED`: Not supported
   int oauth2_response_get_refresh_token(
     oauth2_response_h handle,
     ffi.Pointer<ffi.Pointer<ffi.Char>> refresh_token,
@@ -1414,20 +1693,27 @@ class Tizen90Oauth2 {
           int Function(
               oauth2_response_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets scope.
-  /// @since_tizen 2.4
+  /// Gets scope.
   ///
-  /// @remarks You must not release @a scope using free().
-  /// @param[in] handle The response handle
-  /// @param[out] scope The scope
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #OAUTH2_ERROR_NONE               Successful
-  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
-  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval     #OAUTH2_ERROR_VALUE_NOT_FOUND    Value not found
-  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  /// **Remarks:**
+  /// - You must not release `scope` using free().
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The response handle
+  /// - `scope` (out): The scope
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `OAUTH2_ERROR_NONE`: Successful
+  /// - `OAUTH2_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `OAUTH2_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `OAUTH2_ERROR_VALUE_NOT_FOUND`: Value not found
+  /// - `OAUTH2_ERROR_NOT_SUPPORTED`: Not supported
   int oauth2_response_get_scope(
     oauth2_response_h handle,
     ffi.Pointer<ffi.Pointer<ffi.Char>> scope,
@@ -1448,22 +1734,30 @@ class Tizen90Oauth2 {
           int Function(
               oauth2_response_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets error.
-  /// @since_tizen 2.4
+  /// Gets error.
   ///
-  /// @remarks You must not release @a error using free().
-  /// @param[in] handle The response handle
-  /// @param[out] error The error structure
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #OAUTH2_ERROR_NONE               Successful
-  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
-  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval     #OAUTH2_ERROR_VALUE_NOT_FOUND    Value not found
-  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  /// **Remarks:**
+  /// - You must not release `error` using free().
   ///
-  /// @see oauth2_error_h
+  /// **Parameters:**
+  /// - `handle` (in): The response handle
+  /// - `error` (out): The error structure
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `OAUTH2_ERROR_NONE`: Successful
+  /// - `OAUTH2_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `OAUTH2_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `OAUTH2_ERROR_VALUE_NOT_FOUND`: Value not found
+  /// - `OAUTH2_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `oauth2_error_h`
   int oauth2_response_get_error(
     oauth2_response_h handle,
     ffi.Pointer<oauth2_error_h> error,
@@ -1482,22 +1776,30 @@ class Tizen90Oauth2 {
       _oauth2_response_get_errorPtr.asFunction<
           int Function(oauth2_response_h, ffi.Pointer<oauth2_error_h>)>();
 
-  /// @brief Gets the custom data.
-  /// @details Some service providers send additional keys not specified in OAuth 2.0 RFC. To get those additional fields this API needs to be used.
-  /// @since_tizen 2.4
+  /// Gets the custom data.
   ///
-  /// @remarks You must not release @a custom_value using free().
-  /// @param[in] handle The response handle
-  /// @param[in] custom_key The custom key
-  /// @param[out] custom_value The custom value
+  /// Some service providers send additional keys not specified in OAuth 2.0 RFC. To get those additional fields this API needs to be used.
   ///
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #OAUTH2_ERROR_NONE               Successful
-  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
-  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval     #OAUTH2_ERROR_VALUE_NOT_FOUND    Value not found
-  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Remarks:**
+  /// - You must not release `custom_value` using free().
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The response handle
+  /// - `custom_key` (in): The custom key
+  /// - `custom_value` (out): The custom value
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `OAUTH2_ERROR_NONE`: Successful
+  /// - `OAUTH2_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `OAUTH2_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `OAUTH2_ERROR_VALUE_NOT_FOUND`: Value not found
+  /// - `OAUTH2_ERROR_NOT_SUPPORTED`: Not supported
   int oauth2_response_get_custom_data(
     oauth2_response_h handle,
     ffi.Pointer<ffi.Char> custom_key,
@@ -1520,19 +1822,28 @@ class Tizen90Oauth2 {
           int Function(oauth2_response_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Creates #oauth2_manager_h handle.
-  /// @remarks The @a handle must be released using oauth2_manager_destroy().
-  /// @since_tizen 2.4
+  /// Creates `oauth2_manager_h` handle.
   ///
-  /// @param[out]  handle  The created handle
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #OAUTH2_ERROR_NONE               Successful
-  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
-  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @see oauth2_manager_destroy()
+  /// **Remarks:**
+  /// - The `handle` must be released using oauth2_manager_destroy().
+  ///
+  /// **Parameters:**
+  /// - `handle` (out): The created handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `OAUTH2_ERROR_NONE`: Successful
+  /// - `OAUTH2_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `OAUTH2_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `OAUTH2_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **See also:**
+  /// - `oauth2_manager_destroy()`
   int oauth2_manager_create(
     ffi.Pointer<oauth2_manager_h> handle,
   ) {
@@ -1547,16 +1858,21 @@ class Tizen90Oauth2 {
   late final _oauth2_manager_create = _oauth2_manager_createPtr
       .asFunction<int Function(ffi.Pointer<oauth2_manager_h>)>();
 
-  /// @brief Destroys #oauth2_manager_h handle.
-  /// @since_tizen 2.4
+  /// Destroys `oauth2_manager_h` handle.
   ///
-  /// @param[in] handle The oauth2 manager handle
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #OAUTH2_ERROR_NONE               Successful
-  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  /// **Parameters:**
+  /// - `handle` (in): The oauth2 manager handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `OAUTH2_ERROR_NONE`: Successful
+  /// - `OAUTH2_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `OAUTH2_ERROR_NOT_SUPPORTED`: Not supported
   int oauth2_manager_destroy(
     oauth2_manager_h handle,
   ) {
@@ -1571,33 +1887,46 @@ class Tizen90Oauth2 {
   late final _oauth2_manager_destroy =
       _oauth2_manager_destroyPtr.asFunction<int Function(oauth2_manager_h)>();
 
-  /// @brief Request OAuth 2.0 access token.
-  /// @details The response is delivered via oauth2_token_cb().
-  /// @since_tizen 2.4
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/internet
-  /// @remarks The "internet" privilege is required to call this API. Note, only one pending request is allowed.
+  /// Request OAuth 2.0 access token.
   ///
-  /// @param[in] handle   The oauth2 manager handle.
-  /// @param[in] request  The request handle.
-  /// @param[in] callback The callback to receive response.
-  /// @param[in] user_data  The user data to be passed to the callback function.
+  /// The response is delivered via oauth2_token_cb().
   ///
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #OAUTH2_ERROR_NONE               Successful
-  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY Out of memory.
-  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER Invalid input parameter(s) passed.
-  /// @retval     #OAUTH2_ERROR_ALREADY_IN_PROGRESS The previous request is already in progress.
-  /// @retval     #OAUTH2_ERROR_PERMISSION_DENIED Permission denied.
-  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval     #OAUTH2_ERROR_PARSE_FAILED Parsing failed.
-  /// @retval     #OAUTH2_ERROR_NETWORK_ERROR Network Error.
-  /// @retval     #OAUTH2_ERROR_UNKNOWN Unknown system error.
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @see oauth2_token_cb()
-  /// @see oauth2_manager_create()
-  /// @see oauth2_request_create()
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/internet>
+  ///
+  /// **Remarks:**
+  /// - The "internet" privilege is required to call this API. Note, only one pending request is allowed.
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The oauth2 manager handle.
+  /// - `request` (in): The request handle.
+  /// - `callback` (in): The callback to receive response.
+  /// - `user_data` (in): The user data to be passed to the callback function.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `OAUTH2_ERROR_NONE`: Successful
+  /// - `OAUTH2_ERROR_OUT_OF_MEMORY`: Out of memory.
+  /// - `OAUTH2_ERROR_INVALID_PARAMETER`: Invalid input parameter(s) passed.
+  /// - `OAUTH2_ERROR_ALREADY_IN_PROGRESS`: The previous request is already in progress.
+  /// - `OAUTH2_ERROR_PERMISSION_DENIED`: Permission denied.
+  /// - `OAUTH2_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `OAUTH2_ERROR_PARSE_FAILED`: Parsing failed.
+  /// - `OAUTH2_ERROR_NETWORK_ERROR`: Network Error.
+  /// - `OAUTH2_ERROR_UNKNOWN`: Unknown system error.
+  ///
+  /// **See also:**
+  /// - `oauth2_token_cb()`
+  /// - `oauth2_manager_create()`
+  /// - `oauth2_request_create()`
   int oauth2_manager_request_token(
     oauth2_manager_h handle,
     oauth2_request_h request,
@@ -1621,34 +1950,47 @@ class Tizen90Oauth2 {
           int Function(oauth2_manager_h, oauth2_request_h, oauth2_token_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Requests OAuth 2.0 access token with authorization URL.
-  /// @details The response is delivered via oauth2_token_auth_url_cb().
-  /// @since_tizen 9.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/internet
-  /// @remarks The "internet" privilege is required to call this API. Note, only one pending request is allowed.
+  /// Requests OAuth 2.0 access token with authorization URL.
   ///
-  /// @param[in] handle   The oauth2 manager handle.
-  /// @param[in] request  The request handle.
-  /// @param[in] callback The callback to receive response.
-  /// @param[in] response_url  The response URL after successful Google Sign-in which contains the token.
-  /// @param[in] user_data  The user data to be passed to the callback function.
+  /// The response is delivered via oauth2_token_auth_url_cb().
   ///
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #OAUTH2_ERROR_NONE               Successful
-  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval     #OAUTH2_ERROR_PERMISSION_DENIED Permission denied.
-  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER Invalid input parameter(s) passed.
-  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY Out of memory.
-  /// @retval     #OAUTH2_ERROR_ALREADY_IN_PROGRESS The previous request is already in progress.
-  /// @retval     #OAUTH2_ERROR_PARSE_FAILED Parsing failed.
-  /// @retval     #OAUTH2_ERROR_NETWORK_ERROR Network Error.
-  /// @retval     #OAUTH2_ERROR_UNKNOWN Unknown system error.
+  /// **Since Tizen:**
+  /// - 9.0
   ///
-  /// @see oauth2_token_auth_url_cb()
-  /// @see oauth2_manager_create()
-  /// @see oauth2_request_create()
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/internet>
+  ///
+  /// **Remarks:**
+  /// - The "internet" privilege is required to call this API. Note, only one pending request is allowed.
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The oauth2 manager handle.
+  /// - `request` (in): The request handle.
+  /// - `callback` (in): The callback to receive response.
+  /// - `response_url` (in): The response URL after successful Google Sign-in which contains the token.
+  /// - `user_data` (in): The user data to be passed to the callback function.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `OAUTH2_ERROR_NONE`: Successful
+  /// - `OAUTH2_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `OAUTH2_ERROR_PERMISSION_DENIED`: Permission denied.
+  /// - `OAUTH2_ERROR_INVALID_PARAMETER`: Invalid input parameter(s) passed.
+  /// - `OAUTH2_ERROR_OUT_OF_MEMORY`: Out of memory.
+  /// - `OAUTH2_ERROR_ALREADY_IN_PROGRESS`: The previous request is already in progress.
+  /// - `OAUTH2_ERROR_PARSE_FAILED`: Parsing failed.
+  /// - `OAUTH2_ERROR_NETWORK_ERROR`: Network Error.
+  /// - `OAUTH2_ERROR_UNKNOWN`: Unknown system error.
+  ///
+  /// **See also:**
+  /// - `oauth2_token_auth_url_cb()`
+  /// - `oauth2_manager_create()`
+  /// - `oauth2_request_create()`
   int oauth2_manager_request_token_auth_url(
     oauth2_manager_h handle,
     oauth2_request_h request,
@@ -1682,33 +2024,46 @@ class Tizen90Oauth2 {
               ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Request authorization grant.
-  /// @details The response is delivered via oauth2_auth_grant_cb().
-  /// @since_tizen 2.4
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/internet
-  /// @remarks The "internet" privilege is required to call this API. Note, only one pending request is allowed at a time.
+  /// Request authorization grant.
   ///
-  /// @param[in] handle   The oauth2_manager handle.
-  /// @param[in] request  The request handle.
-  /// @param[in] callback The application callback.
-  /// @param[in] user_data  The user data to be passed to the callback function.
+  /// The response is delivered via oauth2_auth_grant_cb().
   ///
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #OAUTH2_ERROR_NONE               Successful
-  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY Out of memory.
-  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER Invalid input parameter(s) passed.
-  /// @retval     #OAUTH2_ERROR_ALREADY_IN_PROGRESS The previous request is already in progress.
-  /// @retval     #OAUTH2_ERROR_PERMISSION_DENIED Permission denied.
-  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval     #OAUTH2_ERROR_PARSE_FAILED Parsing failed.
-  /// @retval     #OAUTH2_ERROR_NETWORK_ERROR Network Error.
-  /// @retval     #OAUTH2_ERROR_UNKNOWN Unknown system error.
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @see oauth2_auth_grant_cb()
-  /// @see oauth2_manager_create()
-  /// @see oauth2_request_create()
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/internet>
+  ///
+  /// **Remarks:**
+  /// - The "internet" privilege is required to call this API. Note, only one pending request is allowed at a time.
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The oauth2_manager handle.
+  /// - `request` (in): The request handle.
+  /// - `callback` (in): The application callback.
+  /// - `user_data` (in): The user data to be passed to the callback function.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `OAUTH2_ERROR_NONE`: Successful
+  /// - `OAUTH2_ERROR_OUT_OF_MEMORY`: Out of memory.
+  /// - `OAUTH2_ERROR_INVALID_PARAMETER`: Invalid input parameter(s) passed.
+  /// - `OAUTH2_ERROR_ALREADY_IN_PROGRESS`: The previous request is already in progress.
+  /// - `OAUTH2_ERROR_PERMISSION_DENIED`: Permission denied.
+  /// - `OAUTH2_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `OAUTH2_ERROR_PARSE_FAILED`: Parsing failed.
+  /// - `OAUTH2_ERROR_NETWORK_ERROR`: Network Error.
+  /// - `OAUTH2_ERROR_UNKNOWN`: Unknown system error.
+  ///
+  /// **See also:**
+  /// - `oauth2_auth_grant_cb()`
+  /// - `oauth2_manager_create()`
+  /// - `oauth2_request_create()`
   int oauth2_manager_request_authorization_grant(
     oauth2_manager_h handle,
     oauth2_request_h request,
@@ -1733,33 +2088,46 @@ class Tizen90Oauth2 {
           int Function(oauth2_manager_h, oauth2_request_h, oauth2_auth_grant_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Requests an access token.
-  /// @details The response is delivered via oauth2_access_token_cb() callback.
-  /// @since_tizen 2.4
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/internet
-  /// @remarks The "internet" privilege is required to call this API. Note, only one pending request is allowed at a time.
+  /// Requests an access token.
   ///
-  /// @param[in] handle   The oauth2_manager handle.
-  /// @param[in] request  The request handle.
-  /// @param[in] callback The application callback.
-  /// @param[in] user_data  The user data to be passed to the callback function.
+  /// The response is delivered via oauth2_access_token_cb() callback.
   ///
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #OAUTH2_ERROR_NONE               Successful
-  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY Out of memory.
-  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER Invalid input parameter(s) passed.
-  /// @retval     #OAUTH2_ERROR_ALREADY_IN_PROGRESS The previous request is already in progress.
-  /// @retval     #OAUTH2_ERROR_PERMISSION_DENIED Permission denied.
-  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval     #OAUTH2_ERROR_PARSE_FAILED Parsing failed.
-  /// @retval     #OAUTH2_ERROR_NETWORK_ERROR Network Error.
-  /// @retval     #OAUTH2_ERROR_UNKNOWN Unknown system error.
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @see oauth2_access_token_cb()
-  /// @see oauth2_manager_create()
-  /// @see oauth2_request_create()
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/internet>
+  ///
+  /// **Remarks:**
+  /// - The "internet" privilege is required to call this API. Note, only one pending request is allowed at a time.
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The oauth2_manager handle.
+  /// - `request` (in): The request handle.
+  /// - `callback` (in): The application callback.
+  /// - `user_data` (in): The user data to be passed to the callback function.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `OAUTH2_ERROR_NONE`: Successful
+  /// - `OAUTH2_ERROR_OUT_OF_MEMORY`: Out of memory.
+  /// - `OAUTH2_ERROR_INVALID_PARAMETER`: Invalid input parameter(s) passed.
+  /// - `OAUTH2_ERROR_ALREADY_IN_PROGRESS`: The previous request is already in progress.
+  /// - `OAUTH2_ERROR_PERMISSION_DENIED`: Permission denied.
+  /// - `OAUTH2_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `OAUTH2_ERROR_PARSE_FAILED`: Parsing failed.
+  /// - `OAUTH2_ERROR_NETWORK_ERROR`: Network Error.
+  /// - `OAUTH2_ERROR_UNKNOWN`: Unknown system error.
+  ///
+  /// **See also:**
+  /// - `oauth2_access_token_cb()`
+  /// - `oauth2_manager_create()`
+  /// - `oauth2_request_create()`
   int oauth2_manager_request_access_token(
     oauth2_manager_h handle,
     oauth2_request_h request,
@@ -1786,33 +2154,46 @@ class Tizen90Oauth2 {
           int Function(oauth2_manager_h, oauth2_request_h,
               oauth2_access_token_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Requests a refresh token.
-  /// @details The response is delivered via oauth2_refresh_token_cb() callback.
-  /// @since_tizen 2.4
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/internet
-  /// @remarks The "internet" privilege is required to call this API. Note, only one pending request is allowed at a time.
+  /// Requests a refresh token.
   ///
-  /// @param[in] handle   The oauth2 manager handle.
-  /// @param[in] request  The request handle.
-  /// @param[in] callback The application callback.
-  /// @param[in]  user_data  The user data to be passed to the callback function.
+  /// The response is delivered via oauth2_refresh_token_cb() callback.
   ///
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #OAUTH2_ERROR_NONE               Successful
-  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY Out of memory.
-  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER Invalid input parameter(s) passed.
-  /// @retval     #OAUTH2_ERROR_ALREADY_IN_PROGRESS The previous request is already in progress.
-  /// @retval     #OAUTH2_ERROR_PERMISSION_DENIED Permission denied.
-  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED Not supported.
-  /// @retval     #OAUTH2_ERROR_PARSE_FAILED Parsing failed.
-  /// @retval     #OAUTH2_ERROR_NETWORK_ERROR Network Error.
-  /// @retval     #OAUTH2_ERROR_UNKNOWN Unknown system error.
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @see oauth2_refresh_token_cb()
-  /// @see oauth2_manager_create()
-  /// @see oauth2_request_create()
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/internet>
+  ///
+  /// **Remarks:**
+  /// - The "internet" privilege is required to call this API. Note, only one pending request is allowed at a time.
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The oauth2 manager handle.
+  /// - `request` (in): The request handle.
+  /// - `callback` (in): The application callback.
+  /// - `user_data` (in): The user data to be passed to the callback function.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `OAUTH2_ERROR_NONE`: Successful
+  /// - `OAUTH2_ERROR_OUT_OF_MEMORY`: Out of memory.
+  /// - `OAUTH2_ERROR_INVALID_PARAMETER`: Invalid input parameter(s) passed.
+  /// - `OAUTH2_ERROR_ALREADY_IN_PROGRESS`: The previous request is already in progress.
+  /// - `OAUTH2_ERROR_PERMISSION_DENIED`: Permission denied.
+  /// - `OAUTH2_ERROR_NOT_SUPPORTED`: Not supported.
+  /// - `OAUTH2_ERROR_PARSE_FAILED`: Parsing failed.
+  /// - `OAUTH2_ERROR_NETWORK_ERROR`: Network Error.
+  /// - `OAUTH2_ERROR_UNKNOWN`: Unknown system error.
+  ///
+  /// **See also:**
+  /// - `oauth2_refresh_token_cb()`
+  /// - `oauth2_manager_create()`
+  /// - `oauth2_request_create()`
   int oauth2_manager_refresh_access_token(
     oauth2_manager_h handle,
     oauth2_request_h request,
@@ -1839,13 +2220,18 @@ class Tizen90Oauth2 {
           int Function(oauth2_manager_h, oauth2_request_h,
               oauth2_refresh_token_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Returns whether oauth2_manager related request is pending.
-  /// @since_tizen 2.4
+  /// Returns whether oauth2_manager related request is pending.
   ///
-  /// @param[in] handle The auth2 manager handle.
-  /// @retval     false No pending request
-  /// @retval     true There is pending request.
-  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED      Not supported
+  /// **Since Tizen:**
+  /// - 2.4
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The auth2 manager handle.
+  ///
+  /// **Return values:**
+  /// - `false`: No pending request
+  /// - `true`: There is pending request.
+  /// - `OAUTH2_ERROR_NOT_SUPPORTED`: Not supported
   bool oauth2_manager_is_request_in_progress(
     oauth2_manager_h handle,
   ) {
@@ -1861,20 +2247,29 @@ class Tizen90Oauth2 {
       _oauth2_manager_is_request_in_progressPtr
           .asFunction<bool Function(oauth2_manager_h)>();
 
-  /// @brief Clears the cookies.
-  /// @since_tizen 2.4
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/internet
+  /// Clears the cookies.
   ///
-  /// @param[in] handle The oauth2 manager handle.
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #OAUTH2_ERROR_NONE               Successful
-  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
-  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval     #OAUTH2_ERROR_PERMISSION_DENIED Permission denied.
-  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED Not supported.
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/internet>
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The oauth2 manager handle.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `OAUTH2_ERROR_NONE`: Successful
+  /// - `OAUTH2_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `OAUTH2_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `OAUTH2_ERROR_PERMISSION_DENIED`: Permission denied.
+  /// - `OAUTH2_ERROR_NOT_SUPPORTED`: Not supported.
   int oauth2_manager_clear_cookies(
     oauth2_manager_h handle,
   ) {
@@ -1889,20 +2284,29 @@ class Tizen90Oauth2 {
   late final _oauth2_manager_clear_cookies = _oauth2_manager_clear_cookiesPtr
       .asFunction<int Function(oauth2_manager_h)>();
 
-  /// @brief Clears the cache.
-  /// @since_tizen 2.4
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/internet
+  /// Clears the cache.
   ///
-  /// @param[in] handle The oauth2 manager handle.
+  /// **Since Tizen:**
+  /// - 2.4
   ///
-  /// @return     @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval     #OAUTH2_ERROR_NONE               Successful
-  /// @retval     #OAUTH2_ERROR_OUT_OF_MEMORY      Out of Memory
-  /// @retval     #OAUTH2_ERROR_INVALID_PARAMETER  Invalid parameter
-  /// @retval     #OAUTH2_ERROR_PERMISSION_DENIED Permission denied.
-  /// @retval     #OAUTH2_ERROR_NOT_SUPPORTED Not supported.
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/internet>
+  ///
+  /// **Parameters:**
+  /// - `handle` (in): The oauth2 manager handle.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `OAUTH2_ERROR_NONE`: Successful
+  /// - `OAUTH2_ERROR_OUT_OF_MEMORY`: Out of Memory
+  /// - `OAUTH2_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `OAUTH2_ERROR_PERMISSION_DENIED`: Permission denied.
+  /// - `OAUTH2_ERROR_NOT_SUPPORTED`: Not supported.
   int oauth2_manager_clear_cache(
     oauth2_manager_h handle,
   ) {
@@ -1918,12 +2322,18 @@ class Tizen90Oauth2 {
       .asFunction<int Function(oauth2_manager_h)>();
 }
 
-/// @brief Enumerations for Client authentication scheme, used to sign client id and client secret accordingly.
-/// @since_tizen 2.4
-/// @remarks Facebook and Google does not support HTTP Basic Authentication, instead they require client credentials to be sent via request body.
-/// Default is #OAUTH2_CLIENT_AUTHENTICATION_TYPE_BASIC (<a href="http://tools.ietf.org/html/rfc2617#section-2">rfc2617#section-2</a>)
+/// Enumerations for Client authentication scheme, used to sign client id and client secret accordingly.
 ///
-/// @see oauth2_request_set_client_authentication_type()
+/// **Since Tizen:**
+/// - 2.4
+///
+/// **Remarks:**
+/// - Facebook and Google does not support HTTP Basic Authentication, instead they require client credentials to be sent via request body.
+/// - Default is `OAUTH2_CLIENT_AUTHENTICATION_TYPE_BASIC` (<a href="http://tools.ietf.org/html/rfc2617`section`-2">rfc2617`section`-2</a>)
+///
+/// **See also:**
+/// - `oauth2_request_set_client_authentication_type()`
+/// @nodoc
 abstract class oauth2_client_authentication_type_e {
   /// < HTTP Basic Authentication for client authentication.
   static const int OAUTH2_CLIENT_AUTHENTICATION_TYPE_BASIC = 0;
@@ -1935,10 +2345,14 @@ abstract class oauth2_client_authentication_type_e {
   static const int OAUTH2_CLIENT_AUTHENTICATION_TYPE_REQUEST_BODY = 2;
 }
 
-/// @brief Enumerations to set grant_type.
-/// @since_tizen 2.4
+/// Enumerations to set grant_type.
 ///
-/// @see oauth2_request_set_grant_type()
+/// **Since Tizen:**
+/// - 2.4
+///
+/// **See also:**
+/// - `oauth2_request_set_grant_type()`
+/// @nodoc
 abstract class oauth2_grant_type_e {
   /// < Access Token Request for Authorization Code Grant type.
   static const int OAUTH2_GRANT_TYPE_AUTH_CODE = 0;
@@ -1953,10 +2367,14 @@ abstract class oauth2_grant_type_e {
   static const int OAUTH2_GRANT_TYPE_REFRESH = 3;
 }
 
-/// @brief Enumerations to set response_type.
-/// @since_tizen 2.4
+/// Enumerations to set response_type.
 ///
-/// @see oauth2_request_set_response_type()
+/// **Since Tizen:**
+/// - 2.4
+///
+/// **See also:**
+/// - `oauth2_request_set_response_type()`
+/// @nodoc
 abstract class oauth2_response_type_e {
   /// < Requesting an authorization code as response type.
   static const int OAUTH2_RESPONSE_TYPE_CODE = 0;
@@ -1965,8 +2383,11 @@ abstract class oauth2_response_type_e {
   static const int OAUTH2_RESPONSE_TYPE_TOKEN = 1;
 }
 
-/// @brief Enumerations of error codes for oauth2 APIs.
-/// @since_tizen 2.4
+/// Enumerations of error codes for oauth2 APIs.
+///
+/// **Since Tizen:**
+/// - 2.4
+/// @nodoc
 abstract class oauth2_error_e {
   /// < Successful
   static const int OAUTH2_ERROR_NONE = 0;
@@ -2005,103 +2426,168 @@ abstract class oauth2_error_e {
   static const int OAUTH2_ERROR_UNKNOWN = -1073741824;
 }
 
+/// @nodoc
 final class oauth2_request_s extends ffi.Opaque {}
 
-/// @brief The structure type for OAuth 2.0 Request handle.
-/// @since_tizen 2.4
+/// The structure type for OAuth 2.0 Request handle.
+///
+/// **Since Tizen:**
+/// - 2.4
+/// @nodoc
 typedef oauth2_request_h = ffi.Pointer<oauth2_request_s>;
 
+/// @nodoc
 final class oauth2_error_s extends ffi.Opaque {}
 
-/// @brief The structure type for OAuth 2.0 Error handle.
-/// @since_tizen 2.4
+/// The structure type for OAuth 2.0 Error handle.
+///
+/// **Since Tizen:**
+/// - 2.4
+/// @nodoc
 typedef oauth2_error_h = ffi.Pointer<oauth2_error_s>;
 
+/// @nodoc
 final class oauth2_response_s extends ffi.Opaque {}
 
-/// @brief The structure type for OAuth 2.0 Response handle.
-/// @since_tizen 2.4
+/// The structure type for OAuth 2.0 Response handle.
+///
+/// **Since Tizen:**
+/// - 2.4
+/// @nodoc
 typedef oauth2_response_h = ffi.Pointer<oauth2_response_s>;
 
+/// @nodoc
 final class oauth2_manager_s extends ffi.Opaque {}
 
-/// @brief The structure type for OAuth 2.0 Manager handle.
-/// @since_tizen 2.4
+/// The structure type for OAuth 2.0 Manager handle.
+///
+/// **Since Tizen:**
+/// - 2.4
+/// @nodoc
 typedef oauth2_manager_h = ffi.Pointer<oauth2_manager_s>;
 
-/// @brief Called when the oauth2_manager_request_token() response comes.
-/// @since_tizen 2.4
-/// @remarks The @a response must be released using oauth2_response_destroy().
+/// Called when the oauth2_manager_request_token() response comes.
 ///
-/// @param[in] response The response
-/// @param[in] user_data The user data passed from the callback function
+/// **Since Tizen:**
+/// - 2.4
 ///
-/// @pre oauth2_manager_request_token() must be called to get this callback invoked.
-/// @see oauth2_manager_request_token()
+/// **Remarks:**
+/// - The `response` must be released using oauth2_response_destroy().
+///
+/// **Parameters:**
+/// - `response` (in): The response
+/// - `user_data` (in): The user data passed from the callback function
+///
+/// **Preconditions:**
+/// - oauth2_manager_request_token() must be called to get this callback invoked.
+///
+/// **See also:**
+/// - `oauth2_manager_request_token()`
+/// @nodoc
 typedef oauth2_token_cb
     = ffi.Pointer<ffi.NativeFunction<oauth2_token_cbFunction>>;
+/// @nodoc
 typedef oauth2_token_cbFunction = ffi.Void Function(
     oauth2_response_h response, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartoauth2_token_cbFunction = void Function(
     oauth2_response_h response, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the oauth2_manager_request_token_auth_url() response comes.
-/// @since_tizen 9.0
-/// @remarks The @a response must be released using oauth2_response_destroy().
+/// Called when the oauth2_manager_request_token_auth_url() response comes.
 ///
-/// @param[in] response The response
-/// @param[in] user_data The user data passed from the callback function
+/// **Since Tizen:**
+/// - 9.0
 ///
-/// @pre oauth2_manager_request_token_auth_url() must be called to get this callback invoked.
-/// @see oauth2_manager_request_token_auth_url()
+/// **Remarks:**
+/// - The `response` must be released using oauth2_response_destroy().
+///
+/// **Parameters:**
+/// - `response` (in): The response
+/// - `user_data` (in): The user data passed from the callback function
+///
+/// **Preconditions:**
+/// - oauth2_manager_request_token_auth_url() must be called to get this callback invoked.
+///
+/// **See also:**
+/// - `oauth2_manager_request_token_auth_url()`
+/// @nodoc
 typedef oauth2_token_auth_url_cb
     = ffi.Pointer<ffi.NativeFunction<oauth2_token_auth_url_cbFunction>>;
+/// @nodoc
 typedef oauth2_token_auth_url_cbFunction = ffi.Void Function(
     oauth2_response_h response, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartoauth2_token_auth_url_cbFunction = void Function(
     oauth2_response_h response, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when oauth2_manager_request_authorization_grant() response comes.
-/// @since_tizen 2.4
+/// Called when oauth2_manager_request_authorization_grant() response comes.
 ///
-/// @param[in] response The response. The @a response must be released using oauth2_response_destroy().
-/// @param[in] user_data The user data passed from the callback function.
+/// **Since Tizen:**
+/// - 2.4
 ///
-/// @pre oauth2_manager_request_authorization_grant() must be called to get this callback invoked.
-/// @see oauth2_manager_request_authorization_grant()
+/// **Parameters:**
+/// - `response` (in): The response. The `response` must be released using oauth2_response_destroy().
+/// - `user_data` (in): The user data passed from the callback function.
+///
+/// **Preconditions:**
+/// - oauth2_manager_request_authorization_grant() must be called to get this callback invoked.
+///
+/// **See also:**
+/// - `oauth2_manager_request_authorization_grant()`
+/// @nodoc
 typedef oauth2_auth_grant_cb
     = ffi.Pointer<ffi.NativeFunction<oauth2_auth_grant_cbFunction>>;
+/// @nodoc
 typedef oauth2_auth_grant_cbFunction = ffi.Void Function(
     oauth2_response_h response, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartoauth2_auth_grant_cbFunction = void Function(
     oauth2_response_h response, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when oauth2_manager_request_access_token() response comes.
-/// @since_tizen 2.4
+/// Called when oauth2_manager_request_access_token() response comes.
 ///
-/// @param[in] response The response. The response must be released using oauth2_response_destroy().
-/// @param[in] user_data The user data passed from the callback function.
+/// **Since Tizen:**
+/// - 2.4
 ///
-/// @pre oauth2_manager_request_access_token() must be called to get this callback invoked.
-/// @see oauth2_manager_request_access_token()
+/// **Parameters:**
+/// - `response` (in): The response. The response must be released using oauth2_response_destroy().
+/// - `user_data` (in): The user data passed from the callback function.
+///
+/// **Preconditions:**
+/// - oauth2_manager_request_access_token() must be called to get this callback invoked.
+///
+/// **See also:**
+/// - `oauth2_manager_request_access_token()`
+/// @nodoc
 typedef oauth2_access_token_cb
     = ffi.Pointer<ffi.NativeFunction<oauth2_access_token_cbFunction>>;
+/// @nodoc
 typedef oauth2_access_token_cbFunction = ffi.Void Function(
     oauth2_response_h response, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartoauth2_access_token_cbFunction = void Function(
     oauth2_response_h response, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when oauth2_manager_refresh_access_token() response comes.
-/// @since_tizen 2.4
+/// Called when oauth2_manager_refresh_access_token() response comes.
 ///
-/// @param[in] response The response. The @a response must be released using oauth2_response_destroy().
-/// @param[in] user_data The user data passed from the callback function.
+/// **Since Tizen:**
+/// - 2.4
 ///
-/// @pre oauth2_manager_refresh_access_token() must be called to get this callback invoked.
-/// @see oauth2_manager_refresh_access_token().
+/// **Parameters:**
+/// - `response` (in): The response. The `response` must be released using oauth2_response_destroy().
+/// - `user_data` (in): The user data passed from the callback function.
+///
+/// **Preconditions:**
+/// - oauth2_manager_refresh_access_token() must be called to get this callback invoked.
+///
+/// **See also:**
+/// - oauth2_manager_refresh_access_token().
+/// @nodoc
 typedef oauth2_refresh_token_cb
     = ffi.Pointer<ffi.NativeFunction<oauth2_refresh_token_cbFunction>>;
+/// @nodoc
 typedef oauth2_refresh_token_cbFunction = ffi.Void Function(
     oauth2_response_h response, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartoauth2_refresh_token_cbFunction = void Function(
     oauth2_response_h response, ffi.Pointer<ffi.Void> user_data);

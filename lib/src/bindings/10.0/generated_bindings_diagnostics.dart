@@ -1,3 +1,6 @@
+/// {@category 10.0/tizen}
+library tizen_interop_10_0.diagnostics;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -10,6 +13,7 @@ import 'dart:ffi' as ffi;
 import 'generated_bindings_bundle.dart' as bundle;
 
 /// Dart bindings for Tizen diagnostics APIs.
+/// {@category 10.0/tizen}
 class Tizen100Diagnostics {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -25,21 +29,28 @@ class Tizen100Diagnostics {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Sets the callback for diagnostics event notification.
-  /// @since_tizen 6.0
-  /// @details This function is dedicated to diagnostic information subscribers.
+  /// Sets the callback for diagnostics event notification.
   ///
-  /// @param[in] callback A callback function to set
-  /// @param[in] user_data The user data to be passed to the callback function
+  /// This function is dedicated to diagnostic information subscribers.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #DIAGNOSTICS_ERROR_NONE Success
-  /// @retval #DIAGNOSTICS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #DIAGNOSTICS_ERROR_INVALID_PARAMETER Provided parameter is invalid
-  /// @retval #DIAGNOSTICS_ERROR_RESOURCE_BUSY Callback already registered
-  /// @retval #DIAGNOSTICS_ERROR_IO_ERROR Internal error occurred
+  /// **Since Tizen:**
+  /// - 6.0
   ///
-  /// @code
+  /// **Parameters:**
+  /// - `callback` (in): A callback function to set
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DIAGNOSTICS_ERROR_NONE`: Success
+  /// - `DIAGNOSTICS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `DIAGNOSTICS_ERROR_INVALID_PARAMETER`: Provided parameter is invalid
+  /// - `DIAGNOSTICS_ERROR_RESOURCE_BUSY`: Callback already registered
+  /// - `DIAGNOSTICS_ERROR_IO_ERROR`: Internal error occurred
+  ///
+  /// ```
   /// #include <diagnostics.h>
   ///
   /// static void notification_handler(diagnostics_ctx_h ctx, void *user_data)
@@ -60,7 +71,7 @@ class Tizen100Diagnostics {
   /// g_main_loop_run(mainloop);
   /// }
   ///
-  /// @endcode
+  /// ```
   int diagnostics_set_notification_cb(
     diagnostics_notification_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -79,15 +90,20 @@ class Tizen100Diagnostics {
       _diagnostics_set_notification_cbPtr.asFunction<
           int Function(diagnostics_notification_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback for diagnostics event notification.
-  /// @since_tizen 6.0
-  /// @details This function is dedicated to diagnostic information subscribers. \n
-  /// It clears all the events added with diagnostics_subscribe_event().
+  /// Unsets the callback for diagnostics event notification.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #DIAGNOSTICS_ERROR_NONE Success
-  /// @retval #DIAGNOSTICS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #DIAGNOSTICS_ERROR_IO_ERROR Internal error occurred
+  /// This function is dedicated to diagnostic information subscribers. It clears all the events added with diagnostics_subscribe_event().
+  ///
+  /// **Since Tizen:**
+  /// - 6.0
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DIAGNOSTICS_ERROR_NONE`: Success
+  /// - `DIAGNOSTICS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `DIAGNOSTICS_ERROR_IO_ERROR`: Internal error occurred
   int diagnostics_unset_notification_cb() {
     return _diagnostics_unset_notification_cb();
   }
@@ -98,26 +114,33 @@ class Tizen100Diagnostics {
   late final _diagnostics_unset_notification_cb =
       _diagnostics_unset_notification_cbPtr.asFunction<int Function()>();
 
-  /// @platform
-  /// @brief Subscribes to an event sent by a diagnostics client.
-  /// @since_tizen 6.5
-  /// @privlevel platform
-  /// @privilege
-  /// @details This function is dedicated to diagnostic information subscribers. \n
-  /// It is permitted only to an app signed by platform level certificates.
+  /// Subscribes to an event sent by a diagnostics client.
   ///
-  /// @param[in] event_name Event name \n
-  /// Its length is limited to 255 characters + null terminator
-  /// @param[in] client_id The ID of the diagnostics client (event sender) \n
-  /// Its length is limited to 255 characters + null terminator
+  /// This function is dedicated to diagnostic information subscribers. It is permitted only to an app signed by platform level certificates.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #DIAGNOSTICS_ERROR_NONE Success
-  /// @retval #DIAGNOSTICS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #DIAGNOSTICS_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DIAGNOSTICS_ERROR_INVALID_PARAMETER Provided parameter is invalid
-  /// @retval #DIAGNOSTICS_ERROR_IO_ERROR Internal error occurred
-  /// @retval #DIAGNOSTICS_ERROR_OUT_OF_MEMORY Out of memory
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Parameters:**
+  /// - `event_name` (in): Event name Its length is limited to 255 characters + null terminator
+  /// - `client_id` (in): The ID of the diagnostics client (event sender) Its length is limited to 255 characters + null terminator
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DIAGNOSTICS_ERROR_NONE`: Success
+  /// - `DIAGNOSTICS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `DIAGNOSTICS_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DIAGNOSTICS_ERROR_INVALID_PARAMETER`: Provided parameter is invalid
+  /// - `DIAGNOSTICS_ERROR_IO_ERROR`: Internal error occurred
+  /// - `DIAGNOSTICS_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int diagnostics_subscribe_event(
     ffi.Pointer<ffi.Char> event_name,
     ffi.Pointer<ffi.Char> client_id,
@@ -135,26 +158,35 @@ class Tizen100Diagnostics {
   late final _diagnostics_subscribe_event = _diagnostics_subscribe_eventPtr
       .asFunction<int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>();
 
-  /// @platform
-  /// @brief Sets the callback for a system diagnostics data request.
-  /// @since_tizen 6.5
-  /// @privlevel platform
-  /// @privilege
-  /// @details This function is dedicated to diagnostic information providers. \n
-  /// It is permitted only to an app signed by platform level certificates.
+  /// Sets the callback for a system diagnostics data request.
   ///
-  /// @param[in] callback A callback function to set
-  /// @param[in] user_data The user data to be passed to the callback function
+  /// This function is dedicated to diagnostic information providers. It is permitted only to an app signed by platform level certificates.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #DIAGNOSTICS_ERROR_NONE Success
-  /// @retval #DIAGNOSTICS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #DIAGNOSTICS_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DIAGNOSTICS_ERROR_INVALID_PARAMETER Provided parameter is invalid or the caller ID not set (required for system services only)
-  /// @retval #DIAGNOSTICS_ERROR_RESOURCE_BUSY Callback already registered
-  /// @retval #DIAGNOSTICS_ERROR_IO_ERROR Internal error occurred
+  /// **Since Tizen:**
+  /// - 6.5
   ///
-  /// @code
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): A callback function to set
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DIAGNOSTICS_ERROR_NONE`: Success
+  /// - `DIAGNOSTICS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `DIAGNOSTICS_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DIAGNOSTICS_ERROR_INVALID_PARAMETER`: Provided parameter is invalid or the caller ID not set (required for system services only)
+  /// - `DIAGNOSTICS_ERROR_RESOURCE_BUSY`: Callback already registered
+  /// - `DIAGNOSTICS_ERROR_IO_ERROR`: Internal error occurred
+  ///
+  /// **Platform:**
+  /// - Platform API.
+  ///
+  /// ```
   /// #include <diagnostics.h>
   ///
   /// static void data_request_cb(diagnostics_data_h data, char **params, int params_size, diagnostics_ctx_h ctx, void *user_data)
@@ -182,7 +214,7 @@ class Tizen100Diagnostics {
   /// g_main_loop_run(mainloop);
   /// }
   ///
-  /// @endcode
+  /// ```
   int diagnostics_set_data_request_cb(
     diagnostics_request_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -201,19 +233,27 @@ class Tizen100Diagnostics {
       _diagnostics_set_data_request_cbPtr.asFunction<
           int Function(diagnostics_request_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @platform
-  /// @brief Unsets the callback for a diagnostics data request.
-  /// @since_tizen 6.5
-  /// @privlevel platform
-  /// @privilege
-  /// @details This function is dedicated to diagnostic information providers. \n
-  /// It is permitted only to an app signed by platform level certificates.
+  /// Unsets the callback for a diagnostics data request.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #DIAGNOSTICS_ERROR_NONE Success
-  /// @retval #DIAGNOSTICS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #DIAGNOSTICS_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DIAGNOSTICS_ERROR_IO_ERROR Internal error occurred
+  /// This function is dedicated to diagnostic information providers. It is permitted only to an app signed by platform level certificates.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DIAGNOSTICS_ERROR_NONE`: Success
+  /// - `DIAGNOSTICS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `DIAGNOSTICS_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DIAGNOSTICS_ERROR_IO_ERROR`: Internal error occurred
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int diagnostics_unset_data_request_cb() {
     return _diagnostics_unset_data_request_cb();
   }
@@ -224,30 +264,37 @@ class Tizen100Diagnostics {
   late final _diagnostics_unset_data_request_cb =
       _diagnostics_unset_data_request_cbPtr.asFunction<int Function()>();
 
-  /// @platform
-  /// @brief Requests a system diagnostics client to dump given data.
-  /// @since_tizen 6.0
-  /// @privlevel platform
-  /// @privilege
-  /// @details This function is dedicated to diagnostic information subscribers. \n
-  /// It is permitted only to an app signed by platform level certificates. \n
-  /// @a data should be released with diagnostics_data_destroy().
+  /// Requests a system diagnostics client to dump given data.
   ///
-  /// @param[in] client_id An ID of application or service to request
-  /// @param[in] params Array of parameters \n
-  /// Refer to specific diagnostics client's documentation for available parameters
-  /// @param[in] params_size Number of parameters
-  /// @param[out] data Dumpsys data handle
+  /// This function is dedicated to diagnostic information subscribers. It is permitted only to an app signed by platform level certificates. `data` should be released with diagnostics_data_destroy().
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #DIAGNOSTICS_ERROR_NONE Success
-  /// @retval #DIAGNOSTICS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #DIAGNOSTICS_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DIAGNOSTICS_ERROR_INVALID_PARAMETER Provided parameter is invalid
-  /// @retval #DIAGNOSTICS_ERROR_IO_ERROR Internal error occurred
-  /// @retval #DIAGNOSTICS_ERROR_OUT_OF_MEMORY Not enough memory to create data handle
+  /// **Since Tizen:**
+  /// - 6.0
   ///
-  /// @code
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Parameters:**
+  /// - `client_id` (in): An ID of application or service to request
+  /// - `params` (in): Array of parameters Refer to specific diagnostics client's documentation for available parameters
+  /// - `params_size` (in): Number of parameters
+  /// - `data` (out): Dumpsys data handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DIAGNOSTICS_ERROR_NONE`: Success
+  /// - `DIAGNOSTICS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `DIAGNOSTICS_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DIAGNOSTICS_ERROR_INVALID_PARAMETER`: Provided parameter is invalid
+  /// - `DIAGNOSTICS_ERROR_IO_ERROR`: Internal error occurred
+  /// - `DIAGNOSTICS_ERROR_OUT_OF_MEMORY`: Not enough memory to create data handle
+  ///
+  /// **Platform:**
+  /// - Platform API.
+  ///
+  /// ```
   /// #include <diagnostics.h>
   ///
   /// int main(int argc, char **argv)
@@ -270,7 +317,7 @@ class Tizen100Diagnostics {
   /// diagnostics_data_destroy(data);
   /// }
   ///
-  /// @endcode
+  /// ```
   int diagnostics_request_client_data(
     ffi.Pointer<ffi.Char> client_id,
     ffi.Pointer<ffi.Pointer<ffi.Char>> params,
@@ -301,32 +348,37 @@ class Tizen100Diagnostics {
               int,
               ffi.Pointer<diagnostics_data_h>)>();
 
-  /// @platform
-  /// @brief Requests diagnostics context's provider to dump data.
-  /// @since_tizen 6.0
-  /// @privlevel platform
-  /// @privilege
-  /// @details This function is dedicated to diagnostic information subscribers. \n
-  /// It is permitted only to an app signed by platform level certificates. \n
-  /// @a data should be released with diagnostics_data_destroy(). \n
-  /// The difference between this function and diagnostics_request_client_data() is that
-  /// this function sends back the whole context to the context's provider to help it find the data specific to the generated event.
+  /// Requests diagnostics context's provider to dump data.
   ///
-  /// @param[in] ctx Diagnostics context handle
-  /// @param[in] params Array of parameters \n
-  /// Refer to specific diagnostics client's documentation for available parameters
-  /// @param[in] params_size Number of parameters
-  /// @param[out] data Diagnostics data handle
+  /// This function is dedicated to diagnostic information subscribers. It is permitted only to an app signed by platform level certificates. `data` should be released with diagnostics_data_destroy(). The difference between this function and diagnostics_request_client_data() is that this function sends back the whole context to the context's provider to help it find the data specific to the generated event.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #DIAGNOSTICS_ERROR_NONE Success
-  /// @retval #DIAGNOSTICS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #DIAGNOSTICS_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DIAGNOSTICS_ERROR_INVALID_PARAMETER Provided parameter is invalid
-  /// @retval #DIAGNOSTICS_ERROR_IO_ERROR Internal error occurred
-  /// @retval #DIAGNOSTICS_ERROR_OUT_OF_MEMORY Not enough memory to create data handle
+  /// **Since Tizen:**
+  /// - 6.0
   ///
-  /// @code
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Parameters:**
+  /// - `ctx` (in): Diagnostics context handle
+  /// - `params` (in): Array of parameters Refer to specific diagnostics client's documentation for available parameters
+  /// - `params_size` (in): Number of parameters
+  /// - `data` (out): Diagnostics data handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DIAGNOSTICS_ERROR_NONE`: Success
+  /// - `DIAGNOSTICS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `DIAGNOSTICS_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DIAGNOSTICS_ERROR_INVALID_PARAMETER`: Provided parameter is invalid
+  /// - `DIAGNOSTICS_ERROR_IO_ERROR`: Internal error occurred
+  /// - `DIAGNOSTICS_ERROR_OUT_OF_MEMORY`: Not enough memory to create data handle
+  ///
+  /// **Platform:**
+  /// - Platform API.
+  ///
+  /// ```
   ///
   /// void notification_handler(diagnostics_ctx_h ctx, void *user_data)
   /// {
@@ -342,7 +394,7 @@ class Tizen100Diagnostics {
   /// diagnostics_destroy(ctx);
   /// }
   ///
-  /// @endcode
+  /// ```
   int diagnostics_get_data(
     diagnostics_ctx_h ctx,
     ffi.Pointer<ffi.Pointer<ffi.Char>> params,
@@ -368,18 +420,24 @@ class Tizen100Diagnostics {
       int Function(diagnostics_ctx_h, ffi.Pointer<ffi.Pointer<ffi.Char>>, int,
           ffi.Pointer<diagnostics_data_h>)>();
 
-  /// @brief Gets a file descriptor for custom diagnostics data handling.
-  /// @since_tizen 6.5
-  /// @details This function provides a file descriptor to read/write diagnostic data in a custom way
-  /// instead of using our diagnostics_data_read() and diagnostics_data_write() functions. \n
-  /// Moreover, keep in mind that reading is allowed for diagnostic data subscribers and writing is allowed for providers.
-  /// @param[in] data Diagnostics data handle
-  /// @param[in,out] fd A file descriptor related to diagnostics data
+  /// Gets a file descriptor for custom diagnostics data handling.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #DIAGNOSTICS_ERROR_NONE Success
-  /// @retval #DIAGNOSTICS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #DIAGNOSTICS_ERROR_INVALID_PARAMETER Provided parameter is invalid
+  /// This function provides a file descriptor to read/write diagnostic data in a custom way instead of using our diagnostics_data_read() and diagnostics_data_write() functions. Moreover, keep in mind that reading is allowed for diagnostic data subscribers and writing is allowed for providers.
+  ///
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Parameters:**
+  /// - `data` (in): Diagnostics data handle
+  /// - `fd` (in,out): A file descriptor related to diagnostics data
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DIAGNOSTICS_ERROR_NONE`: Success
+  /// - `DIAGNOSTICS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `DIAGNOSTICS_ERROR_INVALID_PARAMETER`: Provided parameter is invalid
   int diagnostics_data_get_fd(
     diagnostics_data_h data,
     ffi.Pointer<ffi.Int> fd,
@@ -397,25 +455,30 @@ class Tizen100Diagnostics {
   late final _diagnostics_data_get_fd = _diagnostics_data_get_fdPtr
       .asFunction<int Function(diagnostics_data_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Perform a single iteration of reading diagnostics data.
-  /// @since_tizen 6.0
-  /// @details This function is dedicated to diagnostic information subscribers. \n
-  /// It is intended for use in loop until EOF is reached. EOF is when @a bytes_read == 0 and function returns #DIAGNOSTICS_ERROR_NONE.
+  /// Perform a single iteration of reading diagnostics data.
   ///
-  /// @param[in] data Diagnostics data handle
-  /// @param[in,out] buf Buffer to store read data \n
-  /// Provided buffer must be large enough to contain a @a count number of bytes
-  /// @param[in] count Number of bytes to read
-  /// @param[in] timeout_ms Timeout [ms] for reading requested number of bytes (timeout_ms <= 0 means to wait forever)
-  /// @param[out] bytes_read Real number of bytes read
+  /// This function is dedicated to diagnostic information subscribers. It is intended for use in loop until EOF is reached. EOF is when `bytes_read` == 0 and function returns `DIAGNOSTICS_ERROR_NONE`.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #DIAGNOSTICS_ERROR_NONE Success
-  /// @retval #DIAGNOSTICS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #DIAGNOSTICS_ERROR_INVALID_PARAMETER Provided parameter is invalid
-  /// @retval #DIAGNOSTICS_ERROR_TIMED_OUT Timeout occurred
-  /// @retval #DIAGNOSTICS_ERROR_TRY_AGAIN Try again
-  /// @retval #DIAGNOSTICS_ERROR_IO_ERROR Internal error occurred while trying to read data, result is unspecified and *bytes_read is not updated
+  /// **Since Tizen:**
+  /// - 6.0
+  ///
+  /// **Parameters:**
+  /// - `data` (in): Diagnostics data handle
+  /// - `buf` (in,out): Buffer to store read data Provided buffer must be large enough to contain a `count` number of bytes
+  /// - `count` (in): Number of bytes to read
+  /// - `timeout_ms` (in): Timeout `[ms]` for reading requested number of bytes (timeout_ms <= 0 means to wait forever)
+  /// - `bytes_read` (out): Real number of bytes read
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DIAGNOSTICS_ERROR_NONE`: Success
+  /// - `DIAGNOSTICS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `DIAGNOSTICS_ERROR_INVALID_PARAMETER`: Provided parameter is invalid
+  /// - `DIAGNOSTICS_ERROR_TIMED_OUT`: Timeout occurred
+  /// - `DIAGNOSTICS_ERROR_TRY_AGAIN`: Try again
+  /// - `DIAGNOSTICS_ERROR_IO_ERROR`: Internal error occurred while trying to read data, result is unspecified and *bytes_read is not updated
   int diagnostics_data_read(
     diagnostics_data_h data,
     ffi.Pointer<ffi.Void> buf,
@@ -440,23 +503,28 @@ class Tizen100Diagnostics {
       int Function(diagnostics_data_h, ffi.Pointer<ffi.Void>, int, int,
           ffi.Pointer<ffi.Size>)>();
 
-  /// @brief Perform a single iteration of writing diagnostics data.
-  /// @since_tizen 6.5
-  /// @details This function is dedicated to diagnostic information providers. \n
-  /// Data is being written to the special file descriptor and then copied to the diagnostic information subscriber's endpoint.
+  /// Perform a single iteration of writing diagnostics data.
   ///
-  /// @param[in] data Diagnostics data handle
-  /// @param[in] buf Buffer with data to write \n
-  /// Provided buffer must be of size not less than a @a count number of bytes
-  /// @param[in] count Number of bytes to write
-  /// @param[out] bytes_written Real number of bytes written
+  /// This function is dedicated to diagnostic information providers. Data is being written to the special file descriptor and then copied to the diagnostic information subscriber's endpoint.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #DIAGNOSTICS_ERROR_NONE Success
-  /// @retval #DIAGNOSTICS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #DIAGNOSTICS_ERROR_INVALID_PARAMETER Provided parameter is invalid
-  /// @retval #DIAGNOSTICS_ERROR_TRY_AGAIN Try again
-  /// @retval #DIAGNOSTICS_ERROR_IO_ERROR Internal error occurred while trying to write data, result is unspecified and *bytes_written is not updated
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Parameters:**
+  /// - `data` (in): Diagnostics data handle
+  /// - `buf` (in): Buffer with data to write Provided buffer must be of size not less than a `count` number of bytes
+  /// - `count` (in): Number of bytes to write
+  /// - `bytes_written` (out): Real number of bytes written
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DIAGNOSTICS_ERROR_NONE`: Success
+  /// - `DIAGNOSTICS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `DIAGNOSTICS_ERROR_INVALID_PARAMETER`: Provided parameter is invalid
+  /// - `DIAGNOSTICS_ERROR_TRY_AGAIN`: Try again
+  /// - `DIAGNOSTICS_ERROR_IO_ERROR`: Internal error occurred while trying to write data, result is unspecified and *bytes_written is not updated
   int diagnostics_data_write(
     diagnostics_data_h data,
     ffi.Pointer<ffi.Void> buf,
@@ -479,25 +547,34 @@ class Tizen100Diagnostics {
       int Function(diagnostics_data_h, ffi.Pointer<ffi.Void>, int,
           ffi.Pointer<ffi.Size>)>();
 
-  /// @platform
-  /// @brief Sends a system diagnostics event to a previously specified client.
-  /// @since_tizen 6.5
-  /// @privlevel platform
-  /// @privilege
-  /// @details This function is dedicated to diagnostic information providers. \n
-  /// It is permitted only to an app signed by platform level certificates.
+  /// Sends a system diagnostics event to a previously specified client.
   ///
-  /// @param[in] event_name Diagnostics event name
-  /// @param[in] event_data Event data or NULL.
+  /// This function is dedicated to diagnostic information providers. It is permitted only to an app signed by platform level certificates.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #DIAGNOSTICS_ERROR_NONE Success
-  /// @retval #DIAGNOSTICS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #DIAGNOSTICS_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DIAGNOSTICS_ERROR_INVALID_PARAMETER Provided parameter is invalid or the caller ID not set (required for system services only)
-  /// @retval #DIAGNOSTICS_ERROR_IO_ERROR Internal error occurred
+  /// **Since Tizen:**
+  /// - 6.5
   ///
-  /// @code
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Parameters:**
+  /// - `event_name` (in): Diagnostics event name
+  /// - `event_data` (in): Event data or NULL.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DIAGNOSTICS_ERROR_NONE`: Success
+  /// - `DIAGNOSTICS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `DIAGNOSTICS_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DIAGNOSTICS_ERROR_INVALID_PARAMETER`: Provided parameter is invalid or the caller ID not set (required for system services only)
+  /// - `DIAGNOSTICS_ERROR_IO_ERROR`: Internal error occurred
+  ///
+  /// **Platform:**
+  /// - Platform API.
+  ///
+  /// ```
   ///
   /// int main(int argc, char *argv[])
   /// {
@@ -512,7 +589,7 @@ class Tizen100Diagnostics {
   /// bundle_free(event_data);
   /// }
   ///
-  /// @endcode
+  /// ```
   int diagnostics_send_event(
     ffi.Pointer<ffi.Char> event_name,
     ffi.Pointer<bundle.bundle> event_data,
@@ -530,20 +607,26 @@ class Tizen100Diagnostics {
   late final _diagnostics_send_event = _diagnostics_send_eventPtr.asFunction<
       int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<bundle.bundle>)>();
 
-  /// @brief Gets a system diagnostics client's ID (event sender).
-  /// @since_tizen 6.0
-  /// @details This function is dedicated to diagnostic information subscribers. \n
-  /// @a client_id should be released with free().
+  /// Gets a system diagnostics client's ID (event sender).
   ///
-  /// @param[in] ctx Diagnostics context handle
-  /// @param[out] client_id ID of the diagnostics client
+  /// This function is dedicated to diagnostic information subscribers. `client_id` should be released with free().
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #DIAGNOSTICS_ERROR_NONE Success
-  /// @retval #DIAGNOSTICS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #DIAGNOSTICS_ERROR_INVALID_PARAMETER Provided parameter is invalid
+  /// **Since Tizen:**
+  /// - 6.0
   ///
-  /// @code
+  /// **Parameters:**
+  /// - `ctx` (in): Diagnostics context handle
+  /// - `client_id` (out): ID of the diagnostics client
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DIAGNOSTICS_ERROR_NONE`: Success
+  /// - `DIAGNOSTICS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `DIAGNOSTICS_ERROR_INVALID_PARAMETER`: Provided parameter is invalid
+  ///
+  /// ```
   ///
   /// void notification_handler(diagnostics_ctx_h ctx, void *user_data)
   /// {
@@ -557,7 +640,7 @@ class Tizen100Diagnostics {
   /// diagnostics_destroy(ctx);
   /// }
   ///
-  /// @endcode
+  /// ```
   int diagnostics_get_client_id(
     diagnostics_ctx_h ctx,
     ffi.Pointer<ffi.Pointer<ffi.Char>> client_id,
@@ -578,20 +661,26 @@ class Tizen100Diagnostics {
           int Function(
               diagnostics_ctx_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets a copy of system diagnostics client's event name.
-  /// @since_tizen 6.5
-  /// @details This function is dedicated to diagnostic information subscribers. \n
-  /// @a event_name should be released with free().
+  /// Gets a copy of system diagnostics client's event name.
   ///
-  /// @param[in] ctx Diagnostics context handle
-  /// @param[out] event_name Name of the diagnostics event
+  /// This function is dedicated to diagnostic information subscribers. `event_name` should be released with free().
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #DIAGNOSTICS_ERROR_NONE Success
-  /// @retval #DIAGNOSTICS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #DIAGNOSTICS_ERROR_INVALID_PARAMETER Provided parameter is invalid
+  /// **Since Tizen:**
+  /// - 6.5
   ///
-  /// @code
+  /// **Parameters:**
+  /// - `ctx` (in): Diagnostics context handle
+  /// - `event_name` (out): Name of the diagnostics event
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DIAGNOSTICS_ERROR_NONE`: Success
+  /// - `DIAGNOSTICS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `DIAGNOSTICS_ERROR_INVALID_PARAMETER`: Provided parameter is invalid
+  ///
+  /// ```
   ///
   /// void notification_handler(diagnostics_ctx_h ctx, void *user_data)
   /// {
@@ -605,7 +694,7 @@ class Tizen100Diagnostics {
   /// diagnostics_destroy(ctx);
   /// }
   ///
-  /// @endcode
+  /// ```
   int diagnostics_get_event_name(
     diagnostics_ctx_h ctx,
     ffi.Pointer<ffi.Pointer<ffi.Char>> event_name,
@@ -626,20 +715,26 @@ class Tizen100Diagnostics {
           int Function(
               diagnostics_ctx_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets a copy of a system diagnostics event's attached data.
-  /// @since_tizen 6.5
-  /// @details This function is dedicated to diagnostic information subscribers. \n
-  /// @a event_data should be released with bundle_free().
+  /// Gets a copy of a system diagnostics event's attached data.
   ///
-  /// @param[in] ctx Diagnostics context handle
-  /// @param[out] event_data Data that came with the diagnostics event (may be NULL when no data has been provided)
+  /// This function is dedicated to diagnostic information subscribers. `event_data` should be released with bundle_free().
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #DIAGNOSTICS_ERROR_NONE Success
-  /// @retval #DIAGNOSTICS_ERROR_NOT_SUPPORTED Diagnostics feature is missing or the function has been called by application, not system service
-  /// @retval #DIAGNOSTICS_ERROR_INVALID_PARAMETER Provided parameter is invalid
+  /// **Since Tizen:**
+  /// - 6.5
   ///
-  /// @code
+  /// **Parameters:**
+  /// - `ctx` (in): Diagnostics context handle
+  /// - `event_data` (out): Data that came with the diagnostics event (may be NULL when no data has been provided)
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DIAGNOSTICS_ERROR_NONE`: Success
+  /// - `DIAGNOSTICS_ERROR_NOT_SUPPORTED`: Diagnostics feature is missing or the function has been called by application, not system service
+  /// - `DIAGNOSTICS_ERROR_INVALID_PARAMETER`: Provided parameter is invalid
+  ///
+  /// ```
   ///
   /// void notification_handler(diagnostics_ctx_h ctx, void *user_data)
   /// {
@@ -653,7 +748,7 @@ class Tizen100Diagnostics {
   /// diagnostics_destroy(ctx);
   /// }
   ///
-  /// @endcode
+  /// ```
   int diagnostics_get_event_data(
     diagnostics_ctx_h ctx,
     ffi.Pointer<ffi.Pointer<bundle.bundle>> event_data,
@@ -674,23 +769,25 @@ class Tizen100Diagnostics {
           int Function(
               diagnostics_ctx_h, ffi.Pointer<ffi.Pointer<bundle.bundle>>)>();
 
-  /// @brief Sets the system diagnostics client ID for further calls.
-  /// @since_tizen 6.5
-  /// @details This function is dedicated to diagnostic information providers. \n
-  /// As services do not have any name associated with them, ID must be set explicitly with this function before calling any of the following functions: \n
-  /// diagnostics_set_data_request_cb() \n
-  /// diagnostics_send_event() \n
-  /// diagnostics_request_bugreport() \n
-  /// For applications, client ID is set to the application ID and cannot be changed.
+  /// Sets the system diagnostics client ID for further calls.
   ///
-  /// @param[in] client_id Diagnostics client ID to set.
+  /// This function is dedicated to diagnostic information providers. As services do not have any name associated with them, ID must be set explicitly with this function before calling any of the following functions: diagnostics_set_data_request_cb() diagnostics_send_event() diagnostics_request_bugreport() For applications, client ID is set to the application ID and cannot be changed.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #DIAGNOSTICS_ERROR_NONE Success
-  /// @retval #DIAGNOSTICS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #DIAGNOSTICS_ERROR_INVALID_PARAMETER Provided parameter is invalid
-  /// @retval #DIAGNOSTICS_ERROR_RESOURCE_BUSY Client ID has already been set, not possible to change
-  /// @retval #DIAGNOSTICS_ERROR_IO_ERROR Internal error occurred
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Parameters:**
+  /// - `client_id` (in): Diagnostics client ID to set.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DIAGNOSTICS_ERROR_NONE`: Success
+  /// - `DIAGNOSTICS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `DIAGNOSTICS_ERROR_INVALID_PARAMETER`: Provided parameter is invalid
+  /// - `DIAGNOSTICS_ERROR_RESOURCE_BUSY`: Client ID has already been set, not possible to change
+  /// - `DIAGNOSTICS_ERROR_IO_ERROR`: Internal error occurred
   int diagnostics_set_client_id(
     ffi.Pointer<ffi.Char> client_id,
   ) {
@@ -705,22 +802,34 @@ class Tizen100Diagnostics {
   late final _diagnostics_set_client_id = _diagnostics_set_client_idPtr
       .asFunction<int Function(ffi.Pointer<ffi.Char>)>();
 
-  /// @platform
-  /// @brief Requests the creation of a bugreport, either systemwide or livedump a specific process.
-  /// @since_tizen 6.5
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/bugreport.admin
-  /// @details This function is dedicated to diagnostic information subscribers. \n
-  /// To get bugreport's content, user must subscribe to 'BugreportCreated' diagnostics event, which is sent by crash-service after creating the report.
+  /// Requests the creation of a bugreport, either systemwide or livedump a specific process.
   ///
-  /// @param[in] pid ID of a process that should be livedumped. When @a pid <= 0, system-wide bugreport is created.
+  /// This function is dedicated to diagnostic information subscribers. To get bugreport's content, user must subscribe to 'BugreportCreated' diagnostics event, which is sent by crash-service after creating the report.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #DIAGNOSTICS_ERROR_NONE Success
-  /// @retval #DIAGNOSTICS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #DIAGNOSTICS_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #DIAGNOSTICS_ERROR_INVALID_PARAMETER Provided parameter is invalid or the caller ID not set (required for system services only)
-  /// @retval #DIAGNOSTICS_ERROR_IO_ERROR Internal error occurred
+  /// **Since Tizen:**
+  /// - 6.5
+  ///
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/bugreport.admin>
+  ///
+  /// **Parameters:**
+  /// - `pid` (in): ID of a process that should be livedumped. When `pid` <= 0, system-wide bugreport is created.
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DIAGNOSTICS_ERROR_NONE`: Success
+  /// - `DIAGNOSTICS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `DIAGNOSTICS_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `DIAGNOSTICS_ERROR_INVALID_PARAMETER`: Provided parameter is invalid or the caller ID not set (required for system services only)
+  /// - `DIAGNOSTICS_ERROR_IO_ERROR`: Internal error occurred
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int diagnostics_request_bugreport(
     int pid,
   ) {
@@ -735,16 +844,23 @@ class Tizen100Diagnostics {
   late final _diagnostics_request_bugreport =
       _diagnostics_request_bugreportPtr.asFunction<int Function(int)>();
 
-  /// @brief Frees the resources of a system diagnostics data handle.
-  /// @details This function must be used at the end of the handle's lifetime to avoid a memory leak.
-  /// @since_tizen 6.0
+  /// Frees the resources of a system diagnostics data handle.
   ///
-  /// @param[in] data Diagnostics data handle
+  /// This function must be used at the end of the handle's lifetime to avoid a memory leak.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #DIAGNOSTICS_ERROR_NONE Success
-  /// @retval #DIAGNOSTICS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #DIAGNOSTICS_ERROR_INVALID_PARAMETER Provided parameter is invalid
+  /// **Since Tizen:**
+  /// - 6.0
+  ///
+  /// **Parameters:**
+  /// - `data` (in): Diagnostics data handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DIAGNOSTICS_ERROR_NONE`: Success
+  /// - `DIAGNOSTICS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `DIAGNOSTICS_ERROR_INVALID_PARAMETER`: Provided parameter is invalid
   int diagnostics_data_destroy(
     diagnostics_data_h data,
   ) {
@@ -759,16 +875,23 @@ class Tizen100Diagnostics {
   late final _diagnostics_data_destroy = _diagnostics_data_destroyPtr
       .asFunction<int Function(diagnostics_data_h)>();
 
-  /// @brief Frees the resources of a system diagnostics context handle.
-  /// @details This function must be used at the end of the handle's lifetime, in the notification handler, to avoid a memory leak.
-  /// @since_tizen 6.0
+  /// Frees the resources of a system diagnostics context handle.
   ///
-  /// @param[in] ctx Diagnostics context handle
+  /// This function must be used at the end of the handle's lifetime, in the notification handler, to avoid a memory leak.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #DIAGNOSTICS_ERROR_NONE Success
-  /// @retval #DIAGNOSTICS_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #DIAGNOSTICS_ERROR_INVALID_PARAMETER Provided parameter is invalid
+  /// **Since Tizen:**
+  /// - 6.0
+  ///
+  /// **Parameters:**
+  /// - `ctx` (in): Diagnostics context handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `DIAGNOSTICS_ERROR_NONE`: Success
+  /// - `DIAGNOSTICS_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `DIAGNOSTICS_ERROR_INVALID_PARAMETER`: Provided parameter is invalid
   int diagnostics_destroy(
     diagnostics_ctx_h ctx,
   ) {
@@ -784,9 +907,13 @@ class Tizen100Diagnostics {
       _diagnostics_destroyPtr.asFunction<int Function(diagnostics_ctx_h)>();
 }
 
-/// @brief Enumeration for error codes returned by the diagnostics API.
-/// @details Most diagnostics API functions may return some of these values to indicate specific errors.
-/// @since_tizen 6.0
+/// Enumeration for error codes returned by the diagnostics API.
+///
+/// Most diagnostics API functions may return some of these values to indicate specific errors.
+///
+/// **Since Tizen:**
+/// - 6.0
+/// @nodoc
 abstract class diagnostics_error_e {
   /// < Successful
   static const int DIAGNOSTICS_ERROR_NONE = 0;
@@ -816,46 +943,59 @@ abstract class diagnostics_error_e {
   static const int DIAGNOSTICS_ERROR_PERMISSION_DENIED = -13;
 }
 
-/// @brief Notification callback fired when new diagnostics event arrives.
-/// @since_tizen 6.0
-/// @details @a ctx should be released with diagnostics_destroy() after use.
+/// Notification callback fired when new diagnostics event arrives.
 ///
-/// @param[in] ctx Diagnostics context handle
-/// @param[in] user_data The user data passed from the callback registration function
+/// `ctx` should be released with diagnostics_destroy() after use.
+///
+/// **Since Tizen:**
+/// - 6.0
+///
+/// **Parameters:**
+/// - `ctx` (in): Diagnostics context handle
+/// - `user_data` (in): The user data passed from the callback registration function
+/// @nodoc
 typedef diagnostics_notification_cb
     = ffi.Pointer<ffi.NativeFunction<diagnostics_notification_cbFunction>>;
+/// @nodoc
 typedef diagnostics_notification_cbFunction = ffi.Void Function(
     diagnostics_ctx_h ctx, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartdiagnostics_notification_cbFunction = void Function(
     diagnostics_ctx_h ctx, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief An opaque handle to a system diagnostics context object.
-/// @details The diagnostics context is provided in data event callbacks.
-/// @since_tizen 6.0
+/// An opaque handle to a system diagnostics context object.
+///
+/// The diagnostics context is provided in data event callbacks.
+///
+/// **Since Tizen:**
+/// - 6.0
+/// @nodoc
 typedef diagnostics_ctx_h = ffi.Pointer<ffi.Void>;
 
-/// @brief Request callback fired when someone requests diagnostics data.
-/// @since_tizen 6.5
-/// @details @a data should be released with diagnostics_data_destroy().
+/// Request callback fired when someone requests diagnostics data.
 ///
-/// @param[in] data Diagnostics data handle
-/// @param[in] params Array of request's parameters \n
-/// This array is owned by @a data, so it is available until @a data is released \n
-/// @a params are the same as passed to diagnostics_request_client_data() or diagnostics_get_data()
-/// @param[in] params_size Number of parameters
-/// @param[in] ctx Diagnostics context handling an event that the request is related to \n
-/// @a ctx is available when data has been requested with diagnostics_get_data() \n
-/// @a ctx is NULL when data has been requested with diagnostics_request_client_data() \n
-/// This parameter allows diagnostics client to find diagnostics data related to the specific event
-/// @param[in] user_data The user data passed from the callback registration function
+/// `data` should be released with diagnostics_data_destroy().
+///
+/// **Since Tizen:**
+/// - 6.5
+///
+/// **Parameters:**
+/// - `data` (in): Diagnostics data handle
+/// - `params` (in): Array of request's parameters This array is owned by `data`, so it is available until `data` is released `params` are the same as passed to diagnostics_request_client_data() or diagnostics_get_data()
+/// - `params_size` (in): Number of parameters
+/// - `ctx` (in): Diagnostics context handling an event that the request is related to `ctx` is available when data has been requested with diagnostics_get_data() `ctx` is NULL when data has been requested with diagnostics_request_client_data() This parameter allows diagnostics client to find diagnostics data related to the specific event
+/// - `user_data` (in): The user data passed from the callback registration function
+/// @nodoc
 typedef diagnostics_request_cb
     = ffi.Pointer<ffi.NativeFunction<diagnostics_request_cbFunction>>;
+/// @nodoc
 typedef diagnostics_request_cbFunction = ffi.Void Function(
     diagnostics_data_h data,
     ffi.Pointer<ffi.Pointer<ffi.Char>> params,
     ffi.Int params_size,
     diagnostics_ctx_h ctx,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartdiagnostics_request_cbFunction = void Function(
     diagnostics_data_h data,
     ffi.Pointer<ffi.Pointer<ffi.Char>> params,
@@ -863,7 +1003,11 @@ typedef Dartdiagnostics_request_cbFunction = void Function(
     diagnostics_ctx_h ctx,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief An opaque handle to a system diagnostics data object.
-/// @details A single piece of diagnostics data, to be read or written to.
-/// @since_tizen 6.0
+/// An opaque handle to a system diagnostics data object.
+///
+/// A single piece of diagnostics data, to be read or written to.
+///
+/// **Since Tizen:**
+/// - 6.0
+/// @nodoc
 typedef diagnostics_data_h = ffi.Pointer<ffi.Void>;

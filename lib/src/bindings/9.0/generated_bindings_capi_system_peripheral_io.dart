@@ -1,3 +1,6 @@
+/// {@category 9.0/tizen}
+library tizen_interop_9_0.capi_system_peripheral_io;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen capi-system-peripheral-io APIs.
+/// {@category 9.0/tizen}
 class Tizen90CapiSystemPeripheralIo {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,29 +28,45 @@ class Tizen90CapiSystemPeripheralIo {
           lookup)
       : _lookup = lookup;
 
-  /// @platform
-  /// @brief Opens a GPIO pin and returns a handle representing it
-  /// @details Starts the lifetime of the handle and allocates its needed resources.
-  /// @since_tizen 4.0
-  /// @privlevel platform
-  /// @privilege http://tizen.org/privilege/peripheralio
-  /// @remarks @a gpio should be released with peripheral_gpio_close()
+  /// Opens a GPIO pin and returns a handle representing it
   ///
-  /// @param[in] gpio_pin The GPIO pin number
-  /// @param[out] gpio The GPIO handle is created on success
+  /// Starts the lifetime of the handle and allocates its needed resources.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #PERIPHERAL_ERROR_NONE Successful
-  /// @retval #PERIPHERAL_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #PERIPHERAL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PERIPHERAL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PERIPHERAL_ERROR_IO_ERROR I/O operation failed
-  /// @retval #PERIPHERAL_ERROR_NO_DEVICE Device does not exist or is removed
-  /// @retval #PERIPHERAL_ERROR_OUT_OF_MEMORY Memory allocation failed
-  /// @retval #PERIPHERAL_ERROR_RESOURCE_BUSY Device is in use
-  /// @retval #PERIPHERAL_ERROR_UNKNOWN Unknown internal error
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @post peripheral_gpio_close()
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/peripheralio>
+  ///
+  /// **Remarks:**
+  /// - `gpio` should be released with peripheral_gpio_close()
+  ///
+  /// **Parameters:**
+  /// - `gpio_pin` (in): The GPIO pin number
+  /// - `gpio` (out): The GPIO handle is created on success
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PERIPHERAL_ERROR_NONE`: Successful
+  /// - `PERIPHERAL_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `PERIPHERAL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PERIPHERAL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PERIPHERAL_ERROR_IO_ERROR`: I/O operation failed
+  /// - `PERIPHERAL_ERROR_NO_DEVICE`: Device does not exist or is removed
+  /// - `PERIPHERAL_ERROR_OUT_OF_MEMORY`: Memory allocation failed
+  /// - `PERIPHERAL_ERROR_RESOURCE_BUSY`: Device is in use
+  /// - `PERIPHERAL_ERROR_UNKNOWN`: Unknown internal error
+  ///
+  /// **Postconditions:**
+  /// - peripheral_gpio_close()
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int peripheral_gpio_open(
     int gpio_pin,
     ffi.Pointer<peripheral_gpio_h> gpio,
@@ -64,25 +84,39 @@ class Tizen90CapiSystemPeripheralIo {
   late final _peripheral_gpio_open = _peripheral_gpio_openPtr
       .asFunction<int Function(int, ffi.Pointer<peripheral_gpio_h>)>();
 
-  /// @platform
-  /// @brief Closes a GPIO pin and frees the resources associated with the handle
-  /// @details This function should be called at the end of the object's lifetime to avoid a memleak.
-  /// @since_tizen 4.0
-  /// @privlevel platform
-  /// @privilege http://tizen.org/privilege/peripheralio
+  /// Closes a GPIO pin and frees the resources associated with the handle
   ///
-  /// @param[in] gpio The GPIO handle
+  /// This function should be called at the end of the object's lifetime to avoid a memleak.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #PERIPHERAL_ERROR_NONE Successful
-  /// @retval #PERIPHERAL_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #PERIPHERAL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PERIPHERAL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PERIPHERAL_ERROR_IO_ERROR I/O operation failed
-  /// @retval #PERIPHERAL_ERROR_NO_DEVICE Device does not exist or is removed
-  /// @retval #PERIPHERAL_ERROR_UNKNOWN Unknown internal error
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @pre peripheral_gpio_open()
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/peripheralio>
+  ///
+  /// **Parameters:**
+  /// - `gpio` (in): The GPIO handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PERIPHERAL_ERROR_NONE`: Successful
+  /// - `PERIPHERAL_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `PERIPHERAL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PERIPHERAL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PERIPHERAL_ERROR_IO_ERROR`: I/O operation failed
+  /// - `PERIPHERAL_ERROR_NO_DEVICE`: Device does not exist or is removed
+  /// - `PERIPHERAL_ERROR_UNKNOWN`: Unknown internal error
+  ///
+  /// **Preconditions:**
+  /// - peripheral_gpio_open()
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int peripheral_gpio_close(
     peripheral_gpio_h gpio,
   ) {
@@ -97,28 +131,44 @@ class Tizen90CapiSystemPeripheralIo {
   late final _peripheral_gpio_close =
       _peripheral_gpio_closePtr.asFunction<int Function(peripheral_gpio_h)>();
 
-  /// @platform
-  /// @brief Sets the input/output direction of given GPIO pin.
-  /// @details Sets whether data goes in or out on given GPIO pin.
-  /// @since_tizen 4.0
-  /// @privlevel platform
-  /// @privilege http://tizen.org/privilege/peripheralio
-  /// @remarks To set the direction to #PERIPHERAL_GPIO_DIRECTION_OUT_INITIALLY_HIGH or #PERIPHERAL_GPIO_DIRECTION_OUT_INITIALLY_LOW, the edge mode must be set to #PERIPHERAL_GPIO_EDGE_NONE.
+  /// Sets the input/output direction of given GPIO pin.
   ///
-  /// @param[in] gpio The GPIO handle
-  /// @param[in] direction The direction of the GPIO pin
+  /// Sets whether data goes in or out on given GPIO pin.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #PERIPHERAL_ERROR_NONE Successful
-  /// @retval #PERIPHERAL_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #PERIPHERAL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PERIPHERAL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PERIPHERAL_ERROR_IO_ERROR I/O operation failed
-  /// @retval #PERIPHERAL_ERROR_NO_DEVICE Device does not exist or is removed
-  /// @retval #PERIPHERAL_ERROR_UNKNOWN Unknown internal error
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @see peripheral_gpio_direction_e
-  /// @see peripheral_gpio_set_edge_mode()
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/peripheralio>
+  ///
+  /// **Remarks:**
+  /// - To set the direction to `PERIPHERAL_GPIO_DIRECTION_OUT_INITIALLY_HIGH` or `PERIPHERAL_GPIO_DIRECTION_OUT_INITIALLY_LOW`, the edge mode must be set to `PERIPHERAL_GPIO_EDGE_NONE`.
+  ///
+  /// **Parameters:**
+  /// - `gpio` (in): The GPIO handle
+  /// - `direction` (in): The direction of the GPIO pin
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PERIPHERAL_ERROR_NONE`: Successful
+  /// - `PERIPHERAL_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `PERIPHERAL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PERIPHERAL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PERIPHERAL_ERROR_IO_ERROR`: I/O operation failed
+  /// - `PERIPHERAL_ERROR_NO_DEVICE`: Device does not exist or is removed
+  /// - `PERIPHERAL_ERROR_UNKNOWN`: Unknown internal error
+  ///
+  /// **See also:**
+  /// - `peripheral_gpio_direction_e`
+  /// - `peripheral_gpio_set_edge_mode()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int peripheral_gpio_set_direction(
     peripheral_gpio_h gpio,
     int direction,
@@ -135,28 +185,44 @@ class Tizen90CapiSystemPeripheralIo {
   late final _peripheral_gpio_set_direction = _peripheral_gpio_set_directionPtr
       .asFunction<int Function(peripheral_gpio_h, int)>();
 
-  /// @platform
-  /// @brief Sets the input edge mode of given GPIO pin device.
-  /// @details Changes which kind of edge mode the GPIO pin is in.
-  /// @since_tizen 4.0
-  /// @privlevel platform
-  /// @privilege http://tizen.org/privilege/peripheralio
-  /// @remarks To set the edge mode to #PERIPHERAL_GPIO_EDGE_RISING, #PERIPHERAL_GPIO_EDGE_FALLING, #PERIPHERAL_GPIO_EDGE_BOTH, the data direction must be set to the #PERIPHERAL_GPIO_DIRECTION_IN.
+  /// Sets the input edge mode of given GPIO pin device.
   ///
-  /// @param[in] gpio The GPIO handle
-  /// @param[in] edge The edge mode of the GPIO pin
+  /// Changes which kind of edge mode the GPIO pin is in.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #PERIPHERAL_ERROR_NONE Successful
-  /// @retval #PERIPHERAL_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #PERIPHERAL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PERIPHERAL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PERIPHERAL_ERROR_IO_ERROR I/O operation failed
-  /// @retval #PERIPHERAL_ERROR_NO_DEVICE Device does not exist or is removed
-  /// @retval #PERIPHERAL_ERROR_UNKNOWN Unknown internal error
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @see peripheral_gpio_edge_e
-  /// @see peripheral_gpio_set_direction()
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/peripheralio>
+  ///
+  /// **Remarks:**
+  /// - To set the edge mode to `PERIPHERAL_GPIO_EDGE_RISING`, `PERIPHERAL_GPIO_EDGE_FALLING`, `PERIPHERAL_GPIO_EDGE_BOTH`, the data direction must be set to the `PERIPHERAL_GPIO_DIRECTION_IN`.
+  ///
+  /// **Parameters:**
+  /// - `gpio` (in): The GPIO handle
+  /// - `edge` (in): The edge mode of the GPIO pin
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PERIPHERAL_ERROR_NONE`: Successful
+  /// - `PERIPHERAL_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `PERIPHERAL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PERIPHERAL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PERIPHERAL_ERROR_IO_ERROR`: I/O operation failed
+  /// - `PERIPHERAL_ERROR_NO_DEVICE`: Device does not exist or is removed
+  /// - `PERIPHERAL_ERROR_UNKNOWN`: Unknown internal error
+  ///
+  /// **See also:**
+  /// - `peripheral_gpio_edge_e`
+  /// - `peripheral_gpio_set_direction()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int peripheral_gpio_set_edge_mode(
     peripheral_gpio_h gpio,
     int edge,
@@ -173,26 +239,44 @@ class Tizen90CapiSystemPeripheralIo {
   late final _peripheral_gpio_set_edge_mode = _peripheral_gpio_set_edge_modePtr
       .asFunction<int Function(peripheral_gpio_h, int)>();
 
-  /// @platform
-  /// @brief Sets the GPIO interrupted callback to be invoked when the GPIO interrupt is triggered.
-  /// @details Sets the GPIO interrupted callback to be invoked when the GPIO interrupt is triggered.
-  /// @since_tizen 4.0
-  /// @privlevel platform
-  /// @privilege http://tizen.org/privilege/peripheralio
-  /// @remarks The interrupted callback is unset when called peripheral_gpio_unset_interrupted_cb() or callback receives an error value other than #PERIPHERAL_ERROR_NONE.
+  /// Sets the GPIO interrupted callback to be invoked when the GPIO interrupt is triggered.
   ///
-  /// @param[in] gpio The GPIO handle
-  /// @param[in] callback The GPIO interrupted callback function to set
-  /// @param[in] user_data The user data to be passed to the callback function
+  /// Sets the GPIO interrupted callback to be invoked when the GPIO interrupt is triggered.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #PERIPHERAL_ERROR_NONE Successful
-  /// @retval #PERIPHERAL_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #PERIPHERAL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PERIPHERAL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @post peripheral_gpio_unset_interrupted_cb()
-  /// @see peripheral_gpio_set_edge_mode()
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/peripheralio>
+  ///
+  /// **Remarks:**
+  /// - The interrupted callback is unset when called peripheral_gpio_unset_interrupted_cb() or callback receives an error value other than `PERIPHERAL_ERROR_NONE`.
+  ///
+  /// **Parameters:**
+  /// - `gpio` (in): The GPIO handle
+  /// - `callback` (in): The GPIO interrupted callback function to set
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PERIPHERAL_ERROR_NONE`: Successful
+  /// - `PERIPHERAL_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `PERIPHERAL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PERIPHERAL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Postconditions:**
+  /// - peripheral_gpio_unset_interrupted_cb()
+  ///
+  /// **See also:**
+  /// - `peripheral_gpio_set_edge_mode()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int peripheral_gpio_set_interrupted_cb(
     peripheral_gpio_h gpio,
     peripheral_gpio_interrupted_cb callback,
@@ -214,22 +298,36 @@ class Tizen90CapiSystemPeripheralIo {
           int Function(peripheral_gpio_h, peripheral_gpio_interrupted_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @platform
-  /// @brief Unsets the GPIO interrupted callback invoked when the GPIO interrupt is triggered.
-  /// @details Unsets the GPIO interrupted callback invoked when the GPIO interrupt is triggered.
-  /// @since_tizen 4.0
-  /// @privlevel platform
-  /// @privilege http://tizen.org/privilege/peripheralio
+  /// Unsets the GPIO interrupted callback invoked when the GPIO interrupt is triggered.
   ///
-  /// @param[in] gpio The GPIO handle
+  /// Unsets the GPIO interrupted callback invoked when the GPIO interrupt is triggered.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #PERIPHERAL_ERROR_NONE Successful
-  /// @retval #PERIPHERAL_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #PERIPHERAL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PERIPHERAL_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @pre peripheral_gpio_set_interrupted_cb()
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/peripheralio>
+  ///
+  /// **Parameters:**
+  /// - `gpio` (in): The GPIO handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PERIPHERAL_ERROR_NONE`: Successful
+  /// - `PERIPHERAL_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `PERIPHERAL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PERIPHERAL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - peripheral_gpio_set_interrupted_cb()
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int peripheral_gpio_unset_interrupted_cb(
     peripheral_gpio_h gpio,
   ) {
@@ -245,26 +343,40 @@ class Tizen90CapiSystemPeripheralIo {
       _peripheral_gpio_unset_interrupted_cbPtr
           .asFunction<int Function(peripheral_gpio_h)>();
 
-  /// @platform
-  /// @brief Gets the current value being exposed on the GPIO pin.
-  /// @details Reads data from the GPIO pin to the specified address.
-  /// @since_tizen 4.0
-  /// @privlevel platform
-  /// @privilege http://tizen.org/privilege/peripheralio
+  /// Gets the current value being exposed on the GPIO pin.
   ///
-  /// @param[in] gpio The GPIO handle
-  /// @param[out] value The value to get
+  /// Reads data from the GPIO pin to the specified address.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #PERIPHERAL_ERROR_NONE Successful
-  /// @retval #PERIPHERAL_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #PERIPHERAL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PERIPHERAL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PERIPHERAL_ERROR_IO_ERROR I/O operation failed
-  /// @retval #PERIPHERAL_ERROR_NO_DEVICE Device does not exist or is removed
-  /// @retval #PERIPHERAL_ERROR_UNKNOWN Unknown internal error
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @see peripheral_gpio_write()
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/peripheralio>
+  ///
+  /// **Parameters:**
+  /// - `gpio` (in): The GPIO handle
+  /// - `value` (out): The value to get
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PERIPHERAL_ERROR_NONE`: Successful
+  /// - `PERIPHERAL_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `PERIPHERAL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PERIPHERAL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PERIPHERAL_ERROR_IO_ERROR`: I/O operation failed
+  /// - `PERIPHERAL_ERROR_NO_DEVICE`: Device does not exist or is removed
+  /// - `PERIPHERAL_ERROR_UNKNOWN`: Unknown internal error
+  ///
+  /// **See also:**
+  /// - `peripheral_gpio_write()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int peripheral_gpio_read(
     peripheral_gpio_h gpio,
     ffi.Pointer<ffi.Uint32> value,
@@ -282,28 +394,44 @@ class Tizen90CapiSystemPeripheralIo {
   late final _peripheral_gpio_read = _peripheral_gpio_readPtr
       .asFunction<int Function(peripheral_gpio_h, ffi.Pointer<ffi.Uint32>)>();
 
-  /// @platform
-  /// @brief Sets the value to be exposed on the given GPIO pin.
-  /// @details Writes data into the GPIO pin from the specified address.
-  /// @since_tizen 4.0
-  /// @privlevel platform
-  /// @privilege http://tizen.org/privilege/peripheralio
-  /// @remarks To write binary data, the direction must be set to #PERIPHERAL_GPIO_DIRECTION_OUT_INITIALLY_HIGH or #PERIPHERAL_GPIO_DIRECTION_OUT_INITIALLY_LOW.
+  /// Sets the value to be exposed on the given GPIO pin.
   ///
-  /// @param[in] gpio The GPIO handle
-  /// @param[in] value The value to set (must be 0 or 1)
+  /// Writes data into the GPIO pin from the specified address.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #PERIPHERAL_ERROR_NONE Successful
-  /// @retval #PERIPHERAL_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #PERIPHERAL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PERIPHERAL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PERIPHERAL_ERROR_IO_ERROR I/O operation failed
-  /// @retval #PERIPHERAL_ERROR_NO_DEVICE Device does not exist or is removed
-  /// @retval #PERIPHERAL_ERROR_UNKNOWN Unknown internal error
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @see peripheral_gpio_read()
-  /// @see peripheral_gpio_set_direction()
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/peripheralio>
+  ///
+  /// **Remarks:**
+  /// - To write binary data, the direction must be set to `PERIPHERAL_GPIO_DIRECTION_OUT_INITIALLY_HIGH` or `PERIPHERAL_GPIO_DIRECTION_OUT_INITIALLY_LOW`.
+  ///
+  /// **Parameters:**
+  /// - `gpio` (in): The GPIO handle
+  /// - `value` (in): The value to set (must be 0 or 1)
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PERIPHERAL_ERROR_NONE`: Successful
+  /// - `PERIPHERAL_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `PERIPHERAL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PERIPHERAL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PERIPHERAL_ERROR_IO_ERROR`: I/O operation failed
+  /// - `PERIPHERAL_ERROR_NO_DEVICE`: Device does not exist or is removed
+  /// - `PERIPHERAL_ERROR_UNKNOWN`: Unknown internal error
+  ///
+  /// **See also:**
+  /// - `peripheral_gpio_read()`
+  /// - `peripheral_gpio_set_direction()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int peripheral_gpio_write(
     peripheral_gpio_h gpio,
     int value,
@@ -320,30 +448,46 @@ class Tizen90CapiSystemPeripheralIo {
   late final _peripheral_gpio_write = _peripheral_gpio_writePtr
       .asFunction<int Function(peripheral_gpio_h, int)>();
 
-  /// @platform
-  /// @brief Opens an I2C slave device and returns a handle representing it
-  /// @details Starts the lifetime of the handle and allocates its needed resources.
-  /// @since_tizen 4.0
-  /// @privlevel platform
-  /// @privilege http://tizen.org/privilege/peripheralio
-  /// @remarks @a i2c should be released with peripheral_i2c_close()
+  /// Opens an I2C slave device and returns a handle representing it
   ///
-  /// @param[in] bus The I2C bus number that the slave device is connected
-  /// @param[in] address The address of the slave device
-  /// @param[out] i2c The I2C handle is created on success
+  /// Starts the lifetime of the handle and allocates its needed resources.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #PERIPHERAL_ERROR_NONE Successful
-  /// @retval #PERIPHERAL_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #PERIPHERAL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PERIPHERAL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PERIPHERAL_ERROR_IO_ERROR I/O operation failed
-  /// @retval #PERIPHERAL_ERROR_NO_DEVICE Device does not exist or is removed
-  /// @retval #PERIPHERAL_ERROR_OUT_OF_MEMORY Memory allocation failed
-  /// @retval #PERIPHERAL_ERROR_RESOURCE_BUSY Device is in use
-  /// @retval #PERIPHERAL_ERROR_UNKNOWN Unknown internal error
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @post peripheral_i2c_close()
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/peripheralio>
+  ///
+  /// **Remarks:**
+  /// - `i2c` should be released with peripheral_i2c_close()
+  ///
+  /// **Parameters:**
+  /// - `bus` (in): The I2C bus number that the slave device is connected
+  /// - `address` (in): The address of the slave device
+  /// - `i2c` (out): The I2C handle is created on success
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PERIPHERAL_ERROR_NONE`: Successful
+  /// - `PERIPHERAL_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `PERIPHERAL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PERIPHERAL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PERIPHERAL_ERROR_IO_ERROR`: I/O operation failed
+  /// - `PERIPHERAL_ERROR_NO_DEVICE`: Device does not exist or is removed
+  /// - `PERIPHERAL_ERROR_OUT_OF_MEMORY`: Memory allocation failed
+  /// - `PERIPHERAL_ERROR_RESOURCE_BUSY`: Device is in use
+  /// - `PERIPHERAL_ERROR_UNKNOWN`: Unknown internal error
+  ///
+  /// **Postconditions:**
+  /// - peripheral_i2c_close()
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int peripheral_i2c_open(
     int bus,
     int address,
@@ -363,31 +507,47 @@ class Tizen90CapiSystemPeripheralIo {
   late final _peripheral_i2c_open = _peripheral_i2c_openPtr
       .asFunction<int Function(int, int, ffi.Pointer<peripheral_i2c_h>)>();
 
-  /// @platform
-  /// @brief Opens an I2C slave device and returns a representing handle
-  /// @details Starts the lifetime of the handle and allocates its needed resources.
-  /// @since_tizen 6.5
-  /// @privlevel platform
-  /// @privilege http://tizen.org/privilege/peripheralio
-  /// @remarks @a i2c should be released with peripheral_i2c_close()
+  /// Opens an I2C slave device and returns a representing handle
   ///
-  /// @param[in] bus The I2C bus number that the slave device is connected
-  /// @param[in] address The address of the slave device
-  /// @param[in] flags The flags to open call
-  /// @param[out] i2c The I2C handle is created on success
+  /// Starts the lifetime of the handle and allocates its needed resources.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #PERIPHERAL_ERROR_NONE Successful
-  /// @retval #PERIPHERAL_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #PERIPHERAL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PERIPHERAL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PERIPHERAL_ERROR_IO_ERROR I/O operation failed
-  /// @retval #PERIPHERAL_ERROR_NO_DEVICE Device does not exist or is removed
-  /// @retval #PERIPHERAL_ERROR_OUT_OF_MEMORY Memory allocation failed
-  /// @retval #PERIPHERAL_ERROR_RESOURCE_BUSY Device is in use
-  /// @retval #PERIPHERAL_ERROR_UNKNOWN Unknown internal error
+  /// **Since Tizen:**
+  /// - 6.5
   ///
-  /// @post peripheral_i2c_close()
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/peripheralio>
+  ///
+  /// **Remarks:**
+  /// - `i2c` should be released with peripheral_i2c_close()
+  ///
+  /// **Parameters:**
+  /// - `bus` (in): The I2C bus number that the slave device is connected
+  /// - `address` (in): The address of the slave device
+  /// - `flags` (in): The flags to open call
+  /// - `i2c` (out): The I2C handle is created on success
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PERIPHERAL_ERROR_NONE`: Successful
+  /// - `PERIPHERAL_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `PERIPHERAL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PERIPHERAL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PERIPHERAL_ERROR_IO_ERROR`: I/O operation failed
+  /// - `PERIPHERAL_ERROR_NO_DEVICE`: Device does not exist or is removed
+  /// - `PERIPHERAL_ERROR_OUT_OF_MEMORY`: Memory allocation failed
+  /// - `PERIPHERAL_ERROR_RESOURCE_BUSY`: Device is in use
+  /// - `PERIPHERAL_ERROR_UNKNOWN`: Unknown internal error
+  ///
+  /// **Postconditions:**
+  /// - peripheral_i2c_close()
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int peripheral_i2c_open_flags(
     int bus,
     int address,
@@ -409,23 +569,37 @@ class Tizen90CapiSystemPeripheralIo {
   late final _peripheral_i2c_open_flags = _peripheral_i2c_open_flagsPtr
       .asFunction<int Function(int, int, int, ffi.Pointer<peripheral_i2c_h>)>();
 
-  /// @platform
-  /// @brief Closes an I2C slave device and frees resources associated with the handle.
-  /// @details This function should be called at the end of the object's lifetime to avoid a memleak.
-  /// @since_tizen 4.0
-  /// @privlevel platform
-  /// @privilege http://tizen.org/privilege/peripheralio
+  /// Closes an I2C slave device and frees resources associated with the handle.
   ///
-  /// @param[in] i2c The I2C handle
+  /// This function should be called at the end of the object's lifetime to avoid a memleak.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #PERIPHERAL_ERROR_NONE Successful
-  /// @retval #PERIPHERAL_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #PERIPHERAL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PERIPHERAL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PERIPHERAL_ERROR_UNKNOWN Unknown internal error
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @pre peripheral_i2c_open()
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/peripheralio>
+  ///
+  /// **Parameters:**
+  /// - `i2c` (in): The I2C handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PERIPHERAL_ERROR_NONE`: Successful
+  /// - `PERIPHERAL_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `PERIPHERAL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PERIPHERAL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PERIPHERAL_ERROR_UNKNOWN`: Unknown internal error
+  ///
+  /// **Preconditions:**
+  /// - peripheral_i2c_open()
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int peripheral_i2c_close(
     peripheral_i2c_h i2c,
   ) {
@@ -440,26 +614,40 @@ class Tizen90CapiSystemPeripheralIo {
   late final _peripheral_i2c_close =
       _peripheral_i2c_closePtr.asFunction<int Function(peripheral_i2c_h)>();
 
-  /// @platform
-  /// @brief Reads the bytes data from the I2C slave device into a buffer
-  /// @details Reads the bytes data from the I2C slave device into a buffer
-  /// @since_tizen 4.0
-  /// @privlevel platform
-  /// @privilege http://tizen.org/privilege/peripheralio
+  /// Reads the bytes data from the I2C slave device into a buffer
   ///
-  /// @param[in] i2c The I2C handle
-  /// @param[out] data The data buffer to read
-  /// @param[in] length The size of data buffer (in bytes)
+  /// Reads the bytes data from the I2C slave device into a buffer
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #PERIPHERAL_ERROR_NONE Successful
-  /// @retval #PERIPHERAL_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #PERIPHERAL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PERIPHERAL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PERIPHERAL_ERROR_IO_ERROR I/O operation failed
-  /// @retval #PERIPHERAL_ERROR_UNKNOWN Unknown internal error
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @see peripheral_i2c_write()
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/peripheralio>
+  ///
+  /// **Parameters:**
+  /// - `i2c` (in): The I2C handle
+  /// - `data` (out): The data buffer to read
+  /// - `length` (in): The size of data buffer (in bytes)
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PERIPHERAL_ERROR_NONE`: Successful
+  /// - `PERIPHERAL_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `PERIPHERAL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PERIPHERAL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PERIPHERAL_ERROR_IO_ERROR`: I/O operation failed
+  /// - `PERIPHERAL_ERROR_UNKNOWN`: Unknown internal error
+  ///
+  /// **See also:**
+  /// - `peripheral_i2c_write()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int peripheral_i2c_read(
     peripheral_i2c_h i2c,
     ffi.Pointer<ffi.Uint8> data,
@@ -479,26 +667,40 @@ class Tizen90CapiSystemPeripheralIo {
   late final _peripheral_i2c_read = _peripheral_i2c_readPtr.asFunction<
       int Function(peripheral_i2c_h, ffi.Pointer<ffi.Uint8>, int)>();
 
-  /// @platform
-  /// @brief Writes the bytes data from a buffer to the I2C slave device.
-  /// @details Writes the bytes data from a buffer to the I2C slave device.
-  /// @since_tizen 4.0
-  /// @privlevel platform
-  /// @privilege http://tizen.org/privilege/peripheralio
+  /// Writes the bytes data from a buffer to the I2C slave device.
   ///
-  /// @param[in] i2c The I2C handle
-  /// @param[in] data The data buffer to write
-  /// @param[in] length The size of data buffer (in bytes)
+  /// Writes the bytes data from a buffer to the I2C slave device.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #PERIPHERAL_ERROR_NONE Successful
-  /// @retval #PERIPHERAL_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #PERIPHERAL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PERIPHERAL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PERIPHERAL_ERROR_IO_ERROR I/O operation failed
-  /// @retval #PERIPHERAL_ERROR_UNKNOWN Unknown internal error
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @see peripheral_i2c_read()
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/peripheralio>
+  ///
+  /// **Parameters:**
+  /// - `i2c` (in): The I2C handle
+  /// - `data` (in): The data buffer to write
+  /// - `length` (in): The size of data buffer (in bytes)
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PERIPHERAL_ERROR_NONE`: Successful
+  /// - `PERIPHERAL_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `PERIPHERAL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PERIPHERAL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PERIPHERAL_ERROR_IO_ERROR`: I/O operation failed
+  /// - `PERIPHERAL_ERROR_UNKNOWN`: Unknown internal error
+  ///
+  /// **See also:**
+  /// - `peripheral_i2c_read()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int peripheral_i2c_write(
     peripheral_i2c_h i2c,
     ffi.Pointer<ffi.Uint8> data,
@@ -518,26 +720,40 @@ class Tizen90CapiSystemPeripheralIo {
   late final _peripheral_i2c_write = _peripheral_i2c_writePtr.asFunction<
       int Function(peripheral_i2c_h, ffi.Pointer<ffi.Uint8>, int)>();
 
-  /// @platform
-  /// @brief Reads single byte data from the register of the I2C slave device.
-  /// @details Reads single byte data from the register of the I2C slave device.
-  /// @since_tizen 4.0
-  /// @privlevel platform
-  /// @privilege http://tizen.org/privilege/peripheralio
+  /// Reads single byte data from the register of the I2C slave device.
   ///
-  /// @param[in] i2c The I2C handle
-  /// @param[in] reg The register address of the I2C slave device to read
-  /// @param[out] data The single byte data to read
+  /// Reads single byte data from the register of the I2C slave device.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #PERIPHERAL_ERROR_NONE Successful
-  /// @retval #PERIPHERAL_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #PERIPHERAL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PERIPHERAL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PERIPHERAL_ERROR_IO_ERROR I/O operation failed
-  /// @retval #PERIPHERAL_ERROR_UNKNOWN Unknown internal error
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @see peripheral_i2c_write_register_byte()
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/peripheralio>
+  ///
+  /// **Parameters:**
+  /// - `i2c` (in): The I2C handle
+  /// - `reg` (in): The register address of the I2C slave device to read
+  /// - `data` (out): The single byte data to read
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PERIPHERAL_ERROR_NONE`: Successful
+  /// - `PERIPHERAL_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `PERIPHERAL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PERIPHERAL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PERIPHERAL_ERROR_IO_ERROR`: I/O operation failed
+  /// - `PERIPHERAL_ERROR_UNKNOWN`: Unknown internal error
+  ///
+  /// **See also:**
+  /// - `peripheral_i2c_write_register_byte()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int peripheral_i2c_read_register_byte(
     peripheral_i2c_h i2c,
     int reg,
@@ -558,26 +774,40 @@ class Tizen90CapiSystemPeripheralIo {
       _peripheral_i2c_read_register_bytePtr.asFunction<
           int Function(peripheral_i2c_h, int, ffi.Pointer<ffi.Uint8>)>();
 
-  /// @platform
-  /// @brief Writes single byte data to the register of the I2C slave device.
-  /// @details Writes single byte data to the register of the I2C slave device.
-  /// @since_tizen 4.0
-  /// @privlevel platform
-  /// @privilege http://tizen.org/privilege/peripheralio
+  /// Writes single byte data to the register of the I2C slave device.
   ///
-  /// @param[in] i2c The I2C handle
-  /// @param[in] reg The register address of the I2C slave device to write
-  /// @param[in] data The single byte data to write
+  /// Writes single byte data to the register of the I2C slave device.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #PERIPHERAL_ERROR_NONE Successful
-  /// @retval #PERIPHERAL_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #PERIPHERAL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PERIPHERAL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PERIPHERAL_ERROR_IO_ERROR I/O operation failed
-  /// @retval #PERIPHERAL_ERROR_UNKNOWN Unknown internal error
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @see peripheral_i2c_read_register_byte()
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/peripheralio>
+  ///
+  /// **Parameters:**
+  /// - `i2c` (in): The I2C handle
+  /// - `reg` (in): The register address of the I2C slave device to write
+  /// - `data` (in): The single byte data to write
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PERIPHERAL_ERROR_NONE`: Successful
+  /// - `PERIPHERAL_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `PERIPHERAL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PERIPHERAL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PERIPHERAL_ERROR_IO_ERROR`: I/O operation failed
+  /// - `PERIPHERAL_ERROR_UNKNOWN`: Unknown internal error
+  ///
+  /// **See also:**
+  /// - `peripheral_i2c_read_register_byte()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int peripheral_i2c_write_register_byte(
     peripheral_i2c_h i2c,
     int reg,
@@ -598,26 +828,40 @@ class Tizen90CapiSystemPeripheralIo {
       _peripheral_i2c_write_register_bytePtr
           .asFunction<int Function(peripheral_i2c_h, int, int)>();
 
-  /// @platform
-  /// @brief Reads word data from the register of the I2C slave device.
-  /// @details Reads word data from the register of the I2C slave device.
-  /// @since_tizen 4.0
-  /// @privlevel platform
-  /// @privilege http://tizen.org/privilege/peripheralio
+  /// Reads word data from the register of the I2C slave device.
   ///
-  /// @param[in] i2c The I2C handle
-  /// @param[in] reg The register address of the I2C slave device to read
-  /// @param[out] data The word(2 bytes) data to read
+  /// Reads word data from the register of the I2C slave device.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #PERIPHERAL_ERROR_NONE Successful
-  /// @retval #PERIPHERAL_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #PERIPHERAL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PERIPHERAL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PERIPHERAL_ERROR_IO_ERROR I/O operation failed
-  /// @retval #PERIPHERAL_ERROR_UNKNOWN Unknown internal error
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @see peripheral_i2c_write_register_word()
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/peripheralio>
+  ///
+  /// **Parameters:**
+  /// - `i2c` (in): The I2C handle
+  /// - `reg` (in): The register address of the I2C slave device to read
+  /// - `data` (out): The word(2 bytes) data to read
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PERIPHERAL_ERROR_NONE`: Successful
+  /// - `PERIPHERAL_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `PERIPHERAL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PERIPHERAL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PERIPHERAL_ERROR_IO_ERROR`: I/O operation failed
+  /// - `PERIPHERAL_ERROR_UNKNOWN`: Unknown internal error
+  ///
+  /// **See also:**
+  /// - `peripheral_i2c_write_register_word()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int peripheral_i2c_read_register_word(
     peripheral_i2c_h i2c,
     int reg,
@@ -638,26 +882,40 @@ class Tizen90CapiSystemPeripheralIo {
       _peripheral_i2c_read_register_wordPtr.asFunction<
           int Function(peripheral_i2c_h, int, ffi.Pointer<ffi.Uint16>)>();
 
-  /// @platform
-  /// @brief Writes word data to the register of the I2C slave device.
-  /// @details Writes word data to the register of the I2C slave device.
-  /// @since_tizen 4.0
-  /// @privlevel platform
-  /// @privilege http://tizen.org/privilege/peripheralio
+  /// Writes word data to the register of the I2C slave device.
   ///
-  /// @param[in] i2c The I2C handle
-  /// @param[in] reg The register address of the I2C slave device to write
-  /// @param[in] data The word(2 bytes) data to write
+  /// Writes word data to the register of the I2C slave device.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #PERIPHERAL_ERROR_NONE Successful
-  /// @retval #PERIPHERAL_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #PERIPHERAL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PERIPHERAL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PERIPHERAL_ERROR_IO_ERROR I/O operation failed
-  /// @retval #PERIPHERAL_ERROR_UNKNOWN Unknown internal error
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @see peripheral_i2c_read_register_word()
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/peripheralio>
+  ///
+  /// **Parameters:**
+  /// - `i2c` (in): The I2C handle
+  /// - `reg` (in): The register address of the I2C slave device to write
+  /// - `data` (in): The word(2 bytes) data to write
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PERIPHERAL_ERROR_NONE`: Successful
+  /// - `PERIPHERAL_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `PERIPHERAL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PERIPHERAL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PERIPHERAL_ERROR_IO_ERROR`: I/O operation failed
+  /// - `PERIPHERAL_ERROR_UNKNOWN`: Unknown internal error
+  ///
+  /// **See also:**
+  /// - `peripheral_i2c_read_register_word()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int peripheral_i2c_write_register_word(
     peripheral_i2c_h i2c,
     int reg,
@@ -678,30 +936,46 @@ class Tizen90CapiSystemPeripheralIo {
       _peripheral_i2c_write_register_wordPtr
           .asFunction<int Function(peripheral_i2c_h, int, int)>();
 
-  /// @platform
-  /// @brief Opens the PWM pin and returns a handle representing it
-  /// @details Starts the lifetime of the handle and allocates its needed resources.
-  /// @since_tizen 4.0
-  /// @privlevel platform
-  /// @privilege http://tizen.org/privilege/peripheralio
-  /// @remarks @a pwm should be released with peripheral_pwm_close()
+  /// Opens the PWM pin and returns a handle representing it
   ///
-  /// @param[in] chip The PWM chip number
-  /// @param[in] pin The PWM pin(channel) number to control
-  /// @param[out] pwm The PWM handle is created on success
+  /// Starts the lifetime of the handle and allocates its needed resources.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #PERIPHERAL_ERROR_NONE Successful
-  /// @retval #PERIPHERAL_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #PERIPHERAL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PERIPHERAL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PERIPHERAL_ERROR_IO_ERROR I/O operation failed
-  /// @retval #PERIPHERAL_ERROR_NO_DEVICE Device does not exist or is removed
-  /// @retval #PERIPHERAL_ERROR_OUT_OF_MEMORY Memory allocation failed
-  /// @retval #PERIPHERAL_ERROR_RESOURCE_BUSY Device is in use
-  /// @retval #PERIPHERAL_ERROR_UNKNOWN Unknown internal error
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @post peripheral_pwm_close()
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/peripheralio>
+  ///
+  /// **Remarks:**
+  /// - `pwm` should be released with peripheral_pwm_close()
+  ///
+  /// **Parameters:**
+  /// - `chip` (in): The PWM chip number
+  /// - `pin` (in): The PWM pin(channel) number to control
+  /// - `pwm` (out): The PWM handle is created on success
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PERIPHERAL_ERROR_NONE`: Successful
+  /// - `PERIPHERAL_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `PERIPHERAL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PERIPHERAL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PERIPHERAL_ERROR_IO_ERROR`: I/O operation failed
+  /// - `PERIPHERAL_ERROR_NO_DEVICE`: Device does not exist or is removed
+  /// - `PERIPHERAL_ERROR_OUT_OF_MEMORY`: Memory allocation failed
+  /// - `PERIPHERAL_ERROR_RESOURCE_BUSY`: Device is in use
+  /// - `PERIPHERAL_ERROR_UNKNOWN`: Unknown internal error
+  ///
+  /// **Postconditions:**
+  /// - peripheral_pwm_close()
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int peripheral_pwm_open(
     int chip,
     int pin,
@@ -721,25 +995,39 @@ class Tizen90CapiSystemPeripheralIo {
   late final _peripheral_pwm_open = _peripheral_pwm_openPtr
       .asFunction<int Function(int, int, ffi.Pointer<peripheral_pwm_h>)>();
 
-  /// @platform
-  /// @brief Closes a PWM pin and frees resources associated with the handle.
-  /// @details This function should be called at the end of the object's lifetime to avoid a memleak.
-  /// @since_tizen 4.0
-  /// @privlevel platform
-  /// @privilege http://tizen.org/privilege/peripheralio
+  /// Closes a PWM pin and frees resources associated with the handle.
   ///
-  /// @param[in] pwm The PWM handle
+  /// This function should be called at the end of the object's lifetime to avoid a memleak.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #PERIPHERAL_ERROR_NONE Successful
-  /// @retval #PERIPHERAL_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #PERIPHERAL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PERIPHERAL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PERIPHERAL_ERROR_IO_ERROR I/O operation failed
-  /// @retval #PERIPHERAL_ERROR_NO_DEVICE Device does not exist or is removed
-  /// @retval #PERIPHERAL_ERROR_UNKNOWN Unknown internal error
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @pre peripheral_pwm_open()
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/peripheralio>
+  ///
+  /// **Parameters:**
+  /// - `pwm` (in): The PWM handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PERIPHERAL_ERROR_NONE`: Successful
+  /// - `PERIPHERAL_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `PERIPHERAL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PERIPHERAL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PERIPHERAL_ERROR_IO_ERROR`: I/O operation failed
+  /// - `PERIPHERAL_ERROR_NO_DEVICE`: Device does not exist or is removed
+  /// - `PERIPHERAL_ERROR_UNKNOWN`: Unknown internal error
+  ///
+  /// **Preconditions:**
+  /// - peripheral_pwm_open()
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int peripheral_pwm_close(
     peripheral_pwm_h pwm,
   ) {
@@ -754,24 +1042,37 @@ class Tizen90CapiSystemPeripheralIo {
   late final _peripheral_pwm_close =
       _peripheral_pwm_closePtr.asFunction<int Function(peripheral_pwm_h)>();
 
-  /// @platform
-  /// @brief Sets the period length in nanoseconds for the given PWM pin.
-  /// @details Sets the period length in nanoseconds for the given PWM pin.
-  /// @since_tizen 4.0
-  /// @privlevel platform
-  /// @privilege http://tizen.org/privilege/peripheralio
+  /// Sets the period length in nanoseconds for the given PWM pin.
   ///
-  /// @param[in] pwm The PWM handle
-  /// @param[in] period_ns The total period of the PWM pin (in nanoseconds)
+  /// Sets the period length in nanoseconds for the given PWM pin.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #PERIPHERAL_ERROR_NONE Successful
-  /// @retval #PERIPHERAL_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #PERIPHERAL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PERIPHERAL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PERIPHERAL_ERROR_IO_ERROR I/O operation failed
-  /// @retval #PERIPHERAL_ERROR_NO_DEVICE Device does not exist or is removed
-  /// @retval #PERIPHERAL_ERROR_UNKNOWN Unknown internal error
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/peripheralio>
+  ///
+  /// **Parameters:**
+  /// - `pwm` (in): The PWM handle
+  /// - `period_ns` (in): The total period of the PWM pin (in nanoseconds)
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PERIPHERAL_ERROR_NONE`: Successful
+  /// - `PERIPHERAL_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `PERIPHERAL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PERIPHERAL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PERIPHERAL_ERROR_IO_ERROR`: I/O operation failed
+  /// - `PERIPHERAL_ERROR_NO_DEVICE`: Device does not exist or is removed
+  /// - `PERIPHERAL_ERROR_UNKNOWN`: Unknown internal error
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int peripheral_pwm_set_period(
     peripheral_pwm_h pwm,
     int period_ns,
@@ -788,24 +1089,37 @@ class Tizen90CapiSystemPeripheralIo {
   late final _peripheral_pwm_set_period = _peripheral_pwm_set_periodPtr
       .asFunction<int Function(peripheral_pwm_h, int)>();
 
-  /// @platform
-  /// @brief Sets the length of a duty cycle of the given PWM pin.
-  /// @details Sets the length of a duty cycle of the given PWM pin.
-  /// @since_tizen 4.0
-  /// @privlevel platform
-  /// @privilege http://tizen.org/privilege/peripheralio
+  /// Sets the length of a duty cycle of the given PWM pin.
   ///
-  /// @param[in] pwm The PWM handle
-  /// @param[in] duty_cycle_ns The duty cycle of the PWM pin (in nanoseconds)
+  /// Sets the length of a duty cycle of the given PWM pin.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #PERIPHERAL_ERROR_NONE Successful
-  /// @retval #PERIPHERAL_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #PERIPHERAL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PERIPHERAL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PERIPHERAL_ERROR_IO_ERROR I/O operation failed
-  /// @retval #PERIPHERAL_ERROR_NO_DEVICE Device does not exist or is removed
-  /// @retval #PERIPHERAL_ERROR_UNKNOWN Unknown internal error
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/peripheralio>
+  ///
+  /// **Parameters:**
+  /// - `pwm` (in): The PWM handle
+  /// - `duty_cycle_ns` (in): The duty cycle of the PWM pin (in nanoseconds)
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PERIPHERAL_ERROR_NONE`: Successful
+  /// - `PERIPHERAL_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `PERIPHERAL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PERIPHERAL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PERIPHERAL_ERROR_IO_ERROR`: I/O operation failed
+  /// - `PERIPHERAL_ERROR_NO_DEVICE`: Device does not exist or is removed
+  /// - `PERIPHERAL_ERROR_UNKNOWN`: Unknown internal error
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int peripheral_pwm_set_duty_cycle(
     peripheral_pwm_h pwm,
     int duty_cycle_ns,
@@ -822,26 +1136,40 @@ class Tizen90CapiSystemPeripheralIo {
   late final _peripheral_pwm_set_duty_cycle = _peripheral_pwm_set_duty_cyclePtr
       .asFunction<int Function(peripheral_pwm_h, int)>();
 
-  /// @platform
-  /// @brief Sets the active signal polarity of the given PWM pin.
-  /// @details Sets the active signal polarity of the given PWM pin.
-  /// @since_tizen 4.0
-  /// @privlevel platform
-  /// @privilege http://tizen.org/privilege/peripheralio
+  /// Sets the active signal polarity of the given PWM pin.
   ///
-  /// @param[in] pwm The PWM handle
-  /// @param[in] polarity The polarity of the PWM pin
+  /// Sets the active signal polarity of the given PWM pin.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #PERIPHERAL_ERROR_NONE Successful
-  /// @retval #PERIPHERAL_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #PERIPHERAL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PERIPHERAL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PERIPHERAL_ERROR_IO_ERROR I/O operation failed
-  /// @retval #PERIPHERAL_ERROR_NO_DEVICE Device does not exist or is removed
-  /// @retval #PERIPHERAL_ERROR_UNKNOWN Unknown internal error
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @see peripheral_pwm_polarity_e
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/peripheralio>
+  ///
+  /// **Parameters:**
+  /// - `pwm` (in): The PWM handle
+  /// - `polarity` (in): The polarity of the PWM pin
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PERIPHERAL_ERROR_NONE`: Successful
+  /// - `PERIPHERAL_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `PERIPHERAL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PERIPHERAL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PERIPHERAL_ERROR_IO_ERROR`: I/O operation failed
+  /// - `PERIPHERAL_ERROR_NO_DEVICE`: Device does not exist or is removed
+  /// - `PERIPHERAL_ERROR_UNKNOWN`: Unknown internal error
+  ///
+  /// **See also:**
+  /// - `peripheral_pwm_polarity_e`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int peripheral_pwm_set_polarity(
     peripheral_pwm_h pwm,
     int polarity,
@@ -858,24 +1186,37 @@ class Tizen90CapiSystemPeripheralIo {
   late final _peripheral_pwm_set_polarity = _peripheral_pwm_set_polarityPtr
       .asFunction<int Function(peripheral_pwm_h, int)>();
 
-  /// @platform
-  /// @brief Toggles whether given PWM peripherals pin is enabled.
-  /// @details Toggles whether given PWM peripherals pin is enabled.
-  /// @since_tizen 4.0
-  /// @privlevel platform
-  /// @privilege http://tizen.org/privilege/peripheralio
+  /// Toggles whether given PWM peripherals pin is enabled.
   ///
-  /// @param[in] pwm The PWM handle
-  /// @param[in] enabled Enable/disable the PWM pin
+  /// Toggles whether given PWM peripherals pin is enabled.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #PERIPHERAL_ERROR_NONE Successful
-  /// @retval #PERIPHERAL_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #PERIPHERAL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PERIPHERAL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PERIPHERAL_ERROR_IO_ERROR I/O operation failed
-  /// @retval #PERIPHERAL_ERROR_NO_DEVICE Device does not exist or is removed
-  /// @retval #PERIPHERAL_ERROR_UNKNOWN Unknown internal error
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/peripheralio>
+  ///
+  /// **Parameters:**
+  /// - `pwm` (in): The PWM handle
+  /// - `enabled` (in): Enable/disable the PWM pin
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PERIPHERAL_ERROR_NONE`: Successful
+  /// - `PERIPHERAL_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `PERIPHERAL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PERIPHERAL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PERIPHERAL_ERROR_IO_ERROR`: I/O operation failed
+  /// - `PERIPHERAL_ERROR_NO_DEVICE`: Device does not exist or is removed
+  /// - `PERIPHERAL_ERROR_UNKNOWN`: Unknown internal error
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int peripheral_pwm_set_enabled(
     peripheral_pwm_h pwm,
     bool enabled,
@@ -892,30 +1233,46 @@ class Tizen90CapiSystemPeripheralIo {
   late final _peripheral_pwm_set_enabled = _peripheral_pwm_set_enabledPtr
       .asFunction<int Function(peripheral_pwm_h, bool)>();
 
-  /// @platform
-  /// @brief Opens the ADC pin and returns a handle representing it
-  /// @details Starts the lifetime of the handle and allocates its needed resources.
-  /// @since_tizen 5.0
-  /// @privlevel platform
-  /// @privilege http://tizen.org/privilege/peripheralio
-  /// @remarks @a adc should be released with peripheral_adc_close()
+  /// Opens the ADC pin and returns a handle representing it
   ///
-  /// @param[in] device The ADC device number
-  /// @param[in] channel The ADC channel number to control
-  /// @param[out] adc The ADC handle is created on success
+  /// Starts the lifetime of the handle and allocates its needed resources.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #PERIPHERAL_ERROR_NONE Successful
-  /// @retval #PERIPHERAL_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #PERIPHERAL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PERIPHERAL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PERIPHERAL_ERROR_IO_ERROR I/O operation failed
-  /// @retval #PERIPHERAL_ERROR_NO_DEVICE Device does not exist or is removed
-  /// @retval #PERIPHERAL_ERROR_OUT_OF_MEMORY Memory allocation failed
-  /// @retval #PERIPHERAL_ERROR_RESOURCE_BUSY Device is in use
-  /// @retval #PERIPHERAL_ERROR_UNKNOWN Unknown internal error
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @post peripheral_adc_close()
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/peripheralio>
+  ///
+  /// **Remarks:**
+  /// - `adc` should be released with peripheral_adc_close()
+  ///
+  /// **Parameters:**
+  /// - `device` (in): The ADC device number
+  /// - `channel` (in): The ADC channel number to control
+  /// - `adc` (out): The ADC handle is created on success
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PERIPHERAL_ERROR_NONE`: Successful
+  /// - `PERIPHERAL_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `PERIPHERAL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PERIPHERAL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PERIPHERAL_ERROR_IO_ERROR`: I/O operation failed
+  /// - `PERIPHERAL_ERROR_NO_DEVICE`: Device does not exist or is removed
+  /// - `PERIPHERAL_ERROR_OUT_OF_MEMORY`: Memory allocation failed
+  /// - `PERIPHERAL_ERROR_RESOURCE_BUSY`: Device is in use
+  /// - `PERIPHERAL_ERROR_UNKNOWN`: Unknown internal error
+  ///
+  /// **Postconditions:**
+  /// - peripheral_adc_close()
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int peripheral_adc_open(
     int device,
     int channel,
@@ -935,25 +1292,39 @@ class Tizen90CapiSystemPeripheralIo {
   late final _peripheral_adc_open = _peripheral_adc_openPtr
       .asFunction<int Function(int, int, ffi.Pointer<peripheral_adc_h>)>();
 
-  /// @platform
-  /// @brief Closes the ADC pin and frees the resources associated with it.
-  /// @details This function should be called at the end of the object's lifetime to avoid a memleak.
-  /// @since_tizen 5.0
-  /// @privlevel platform
-  /// @privilege http://tizen.org/privilege/peripheralio
+  /// Closes the ADC pin and frees the resources associated with it.
   ///
-  /// @param[in] adc The ADC handle
+  /// This function should be called at the end of the object's lifetime to avoid a memleak.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #PERIPHERAL_ERROR_NONE Successful
-  /// @retval #PERIPHERAL_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #PERIPHERAL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PERIPHERAL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PERIPHERAL_ERROR_IO_ERROR I/O operation failed
-  /// @retval #PERIPHERAL_ERROR_NO_DEVICE Device does not exist or is removed
-  /// @retval #PERIPHERAL_ERROR_UNKNOWN Unknown internal error
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @pre peripheral_adc_open()
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/peripheralio>
+  ///
+  /// **Parameters:**
+  /// - `adc` (in): The ADC handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PERIPHERAL_ERROR_NONE`: Successful
+  /// - `PERIPHERAL_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `PERIPHERAL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PERIPHERAL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PERIPHERAL_ERROR_IO_ERROR`: I/O operation failed
+  /// - `PERIPHERAL_ERROR_NO_DEVICE`: Device does not exist or is removed
+  /// - `PERIPHERAL_ERROR_UNKNOWN`: Unknown internal error
+  ///
+  /// **Preconditions:**
+  /// - peripheral_adc_open()
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int peripheral_adc_close(
     peripheral_adc_h adc,
   ) {
@@ -968,24 +1339,37 @@ class Tizen90CapiSystemPeripheralIo {
   late final _peripheral_adc_close =
       _peripheral_adc_closePtr.asFunction<int Function(peripheral_adc_h)>();
 
-  /// @platform
-  /// @brief Gets the current value of the ADC peripherals pin.
-  /// @details Gets the current value of the ADC peripherals pin.
-  /// @since_tizen 5.0
-  /// @privlevel platform
-  /// @privilege http://tizen.org/privilege/peripheralio
+  /// Gets the current value of the ADC peripherals pin.
   ///
-  /// @param[in] adc The ADC handle
-  /// @param[out] value The value to get
+  /// Gets the current value of the ADC peripherals pin.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #PERIPHERAL_ERROR_NONE Successful
-  /// @retval #PERIPHERAL_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #PERIPHERAL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PERIPHERAL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PERIPHERAL_ERROR_IO_ERROR I/O operation failed
-  /// @retval #PERIPHERAL_ERROR_NO_DEVICE Device does not exist or is removed
-  /// @retval #PERIPHERAL_ERROR_UNKNOWN Unknown internal error
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/peripheralio>
+  ///
+  /// **Parameters:**
+  /// - `adc` (in): The ADC handle
+  /// - `value` (out): The value to get
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PERIPHERAL_ERROR_NONE`: Successful
+  /// - `PERIPHERAL_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `PERIPHERAL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PERIPHERAL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PERIPHERAL_ERROR_IO_ERROR`: I/O operation failed
+  /// - `PERIPHERAL_ERROR_NO_DEVICE`: Device does not exist or is removed
+  /// - `PERIPHERAL_ERROR_UNKNOWN`: Unknown internal error
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int peripheral_adc_read(
     peripheral_adc_h adc,
     ffi.Pointer<ffi.Uint32> value,
@@ -1003,29 +1387,45 @@ class Tizen90CapiSystemPeripheralIo {
   late final _peripheral_adc_read = _peripheral_adc_readPtr
       .asFunction<int Function(peripheral_adc_h, ffi.Pointer<ffi.Uint32>)>();
 
-  /// @platform
-  /// @brief Opens the UART slave device and returns a handle representing it
-  /// @details Starts the lifetime of the handle and allocates its needed resources.
-  /// @since_tizen 4.0
-  /// @privlevel platform
-  /// @privilege http://tizen.org/privilege/peripheralio
-  /// @remarks @a uart should be released with peripheral_uart_close()
+  /// Opens the UART slave device and returns a handle representing it
   ///
-  /// @param[in] port The UART port number that the slave device is connected
-  /// @param[out] uart The UART handle is created on success
+  /// Starts the lifetime of the handle and allocates its needed resources.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #PERIPHERAL_ERROR_NONE Successful
-  /// @retval #PERIPHERAL_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #PERIPHERAL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PERIPHERAL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PERIPHERAL_ERROR_IO_ERROR I/O operation failed
-  /// @retval #PERIPHERAL_ERROR_NO_DEVICE Device does not exist or is removed
-  /// @retval #PERIPHERAL_ERROR_OUT_OF_MEMORY Memory allocation failed
-  /// @retval #PERIPHERAL_ERROR_RESOURCE_BUSY Device is in use
-  /// @retval #PERIPHERAL_ERROR_UNKNOWN Unknown internal error
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @post peripheral_uart_close()
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/peripheralio>
+  ///
+  /// **Remarks:**
+  /// - `uart` should be released with peripheral_uart_close()
+  ///
+  /// **Parameters:**
+  /// - `port` (in): The UART port number that the slave device is connected
+  /// - `uart` (out): The UART handle is created on success
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PERIPHERAL_ERROR_NONE`: Successful
+  /// - `PERIPHERAL_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `PERIPHERAL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PERIPHERAL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PERIPHERAL_ERROR_IO_ERROR`: I/O operation failed
+  /// - `PERIPHERAL_ERROR_NO_DEVICE`: Device does not exist or is removed
+  /// - `PERIPHERAL_ERROR_OUT_OF_MEMORY`: Memory allocation failed
+  /// - `PERIPHERAL_ERROR_RESOURCE_BUSY`: Device is in use
+  /// - `PERIPHERAL_ERROR_UNKNOWN`: Unknown internal error
+  ///
+  /// **Postconditions:**
+  /// - peripheral_uart_close()
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int peripheral_uart_open(
     int port,
     ffi.Pointer<peripheral_uart_h> uart,
@@ -1043,30 +1443,46 @@ class Tizen90CapiSystemPeripheralIo {
   late final _peripheral_uart_open = _peripheral_uart_openPtr
       .asFunction<int Function(int, ffi.Pointer<peripheral_uart_h>)>();
 
-  /// @platform
-  /// @brief Opens the UART slave device using specified open flags, and returns a handle representing it
-  /// @details Starts the lifetime of the handle and allocates its needed resources.
-  /// @since_tizen 6.5
-  /// @privlevel platform
-  /// @privilege http://tizen.org/privilege/peripheralio
-  /// @remarks @a uart should be released with peripheral_uart_close()
+  /// Opens the UART slave device using specified open flags, and returns a handle representing it
   ///
-  /// @param[in] port The UART port number that the slave device is connected
-  /// @param[in] flags The flags to open call
-  /// @param[out] uart The UART handle is created on success
+  /// Starts the lifetime of the handle and allocates its needed resources.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #PERIPHERAL_ERROR_NONE Successful
-  /// @retval #PERIPHERAL_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #PERIPHERAL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PERIPHERAL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PERIPHERAL_ERROR_IO_ERROR I/O operation failed
-  /// @retval #PERIPHERAL_ERROR_NO_DEVICE Device does not exist or is removed
-  /// @retval #PERIPHERAL_ERROR_OUT_OF_MEMORY Memory allocation failed
-  /// @retval #PERIPHERAL_ERROR_RESOURCE_BUSY Device is in use
-  /// @retval #PERIPHERAL_ERROR_UNKNOWN Unknown internal error
+  /// **Since Tizen:**
+  /// - 6.5
   ///
-  /// @post peripheral_uart_close()
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/peripheralio>
+  ///
+  /// **Remarks:**
+  /// - `uart` should be released with peripheral_uart_close()
+  ///
+  /// **Parameters:**
+  /// - `port` (in): The UART port number that the slave device is connected
+  /// - `flags` (in): The flags to open call
+  /// - `uart` (out): The UART handle is created on success
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PERIPHERAL_ERROR_NONE`: Successful
+  /// - `PERIPHERAL_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `PERIPHERAL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PERIPHERAL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PERIPHERAL_ERROR_IO_ERROR`: I/O operation failed
+  /// - `PERIPHERAL_ERROR_NO_DEVICE`: Device does not exist or is removed
+  /// - `PERIPHERAL_ERROR_OUT_OF_MEMORY`: Memory allocation failed
+  /// - `PERIPHERAL_ERROR_RESOURCE_BUSY`: Device is in use
+  /// - `PERIPHERAL_ERROR_UNKNOWN`: Unknown internal error
+  ///
+  /// **Postconditions:**
+  /// - peripheral_uart_close()
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int peripheral_uart_open_flags(
     int port,
     int flags,
@@ -1086,23 +1502,37 @@ class Tizen90CapiSystemPeripheralIo {
   late final _peripheral_uart_open_flags = _peripheral_uart_open_flagsPtr
       .asFunction<int Function(int, int, ffi.Pointer<peripheral_uart_h>)>();
 
-  /// @platform
-  /// @brief Closes the UART slave device and frees resources associated with the handle.
-  /// @details This function should be called at the end of the object's lifetime to avoid a memleak.
-  /// @since_tizen 4.0
-  /// @privlevel platform
-  /// @privilege http://tizen.org/privilege/peripheralio
+  /// Closes the UART slave device and frees resources associated with the handle.
   ///
-  /// @param[in] uart The UART handle
+  /// This function should be called at the end of the object's lifetime to avoid a memleak.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #PERIPHERAL_ERROR_NONE Successful
-  /// @retval #PERIPHERAL_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #PERIPHERAL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PERIPHERAL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PERIPHERAL_ERROR_UNKNOWN Unknown internal error
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @pre peripheral_uart_open()
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/peripheralio>
+  ///
+  /// **Parameters:**
+  /// - `uart` (in): The UART handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PERIPHERAL_ERROR_NONE`: Successful
+  /// - `PERIPHERAL_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `PERIPHERAL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PERIPHERAL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PERIPHERAL_ERROR_UNKNOWN`: Unknown internal error
+  ///
+  /// **Preconditions:**
+  /// - peripheral_uart_open()
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int peripheral_uart_close(
     peripheral_uart_h uart,
   ) {
@@ -1117,26 +1547,40 @@ class Tizen90CapiSystemPeripheralIo {
   late final _peripheral_uart_close =
       _peripheral_uart_closePtr.asFunction<int Function(peripheral_uart_h)>();
 
-  /// @platform
-  /// @brief Sets the baud rate for the given UART slave device.
-  /// @details Sets the baud rate for the given UART slave device.
-  /// @since_tizen 4.0
-  /// @privlevel platform
-  /// @privilege http://tizen.org/privilege/peripheralio
+  /// Sets the baud rate for the given UART slave device.
   ///
-  /// @param[in] uart The UART handle
-  /// @param[in] baud Baud rate of the UART slave device
+  /// Sets the baud rate for the given UART slave device.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #PERIPHERAL_ERROR_NONE Successful
-  /// @retval #PERIPHERAL_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #PERIPHERAL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PERIPHERAL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PERIPHERAL_ERROR_IO_ERROR I/O operation failed
-  /// @retval #PERIPHERAL_ERROR_NO_DEVICE Device does not exist or is removed
-  /// @retval #PERIPHERAL_ERROR_UNKNOWN Unknown internal error
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @see peripheral_uart_baud_rate_e
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/peripheralio>
+  ///
+  /// **Parameters:**
+  /// - `uart` (in): The UART handle
+  /// - `baud` (in): Baud rate of the UART slave device
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PERIPHERAL_ERROR_NONE`: Successful
+  /// - `PERIPHERAL_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `PERIPHERAL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PERIPHERAL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PERIPHERAL_ERROR_IO_ERROR`: I/O operation failed
+  /// - `PERIPHERAL_ERROR_NO_DEVICE`: Device does not exist or is removed
+  /// - `PERIPHERAL_ERROR_UNKNOWN`: Unknown internal error
+  ///
+  /// **See also:**
+  /// - `peripheral_uart_baud_rate_e`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int peripheral_uart_set_baud_rate(
     peripheral_uart_h uart,
     int baud,
@@ -1153,26 +1597,40 @@ class Tizen90CapiSystemPeripheralIo {
   late final _peripheral_uart_set_baud_rate = _peripheral_uart_set_baud_ratePtr
       .asFunction<int Function(peripheral_uart_h, int)>();
 
-  /// @platform
-  /// @brief Sets data byte size for the given UART slave device.
-  /// @details Sets data byte size for the given UART slave device.
-  /// @since_tizen 4.0
-  /// @privlevel platform
-  /// @privilege http://tizen.org/privilege/peripheralio
+  /// Sets data byte size for the given UART slave device.
   ///
-  /// @param[in] uart The UART handle
-  /// @param[in] byte_size Byte size of the UART slave device
+  /// Sets data byte size for the given UART slave device.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #PERIPHERAL_ERROR_NONE Successful
-  /// @retval #PERIPHERAL_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #PERIPHERAL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PERIPHERAL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PERIPHERAL_ERROR_IO_ERROR I/O operation failed
-  /// @retval #PERIPHERAL_ERROR_NO_DEVICE Device does not exist or is removed
-  /// @retval #PERIPHERAL_ERROR_UNKNOWN Unknown internal error
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @see peripheral_uart_byte_size_e
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/peripheralio>
+  ///
+  /// **Parameters:**
+  /// - `uart` (in): The UART handle
+  /// - `byte_size` (in): Byte size of the UART slave device
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PERIPHERAL_ERROR_NONE`: Successful
+  /// - `PERIPHERAL_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `PERIPHERAL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PERIPHERAL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PERIPHERAL_ERROR_IO_ERROR`: I/O operation failed
+  /// - `PERIPHERAL_ERROR_NO_DEVICE`: Device does not exist or is removed
+  /// - `PERIPHERAL_ERROR_UNKNOWN`: Unknown internal error
+  ///
+  /// **See also:**
+  /// - `peripheral_uart_byte_size_e`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int peripheral_uart_set_byte_size(
     peripheral_uart_h uart,
     int byte_size,
@@ -1189,26 +1647,40 @@ class Tizen90CapiSystemPeripheralIo {
   late final _peripheral_uart_set_byte_size = _peripheral_uart_set_byte_sizePtr
       .asFunction<int Function(peripheral_uart_h, int)>();
 
-  /// @platform
-  /// @brief Sets the parity bit for the given UART slave device.
-  /// @details Sets the parity bit for the given UART slave device.
-  /// @since_tizen 4.0
-  /// @privlevel platform
-  /// @privilege http://tizen.org/privilege/peripheralio
+  /// Sets the parity bit for the given UART slave device.
   ///
-  /// @param[in] uart The UART handle
-  /// @param[in] parity Parity bit of the UART slave device
+  /// Sets the parity bit for the given UART slave device.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #PERIPHERAL_ERROR_NONE Successful
-  /// @retval #PERIPHERAL_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #PERIPHERAL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PERIPHERAL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PERIPHERAL_ERROR_IO_ERROR I/O operation failed
-  /// @retval #PERIPHERAL_ERROR_NO_DEVICE Device does not exist or is removed
-  /// @retval #PERIPHERAL_ERROR_UNKNOWN Unknown internal error
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @see peripheral_uart_parity_e
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/peripheralio>
+  ///
+  /// **Parameters:**
+  /// - `uart` (in): The UART handle
+  /// - `parity` (in): Parity bit of the UART slave device
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PERIPHERAL_ERROR_NONE`: Successful
+  /// - `PERIPHERAL_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `PERIPHERAL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PERIPHERAL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PERIPHERAL_ERROR_IO_ERROR`: I/O operation failed
+  /// - `PERIPHERAL_ERROR_NO_DEVICE`: Device does not exist or is removed
+  /// - `PERIPHERAL_ERROR_UNKNOWN`: Unknown internal error
+  ///
+  /// **See also:**
+  /// - `peripheral_uart_parity_e`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int peripheral_uart_set_parity(
     peripheral_uart_h uart,
     int parity,
@@ -1225,26 +1697,40 @@ class Tizen90CapiSystemPeripheralIo {
   late final _peripheral_uart_set_parity = _peripheral_uart_set_parityPtr
       .asFunction<int Function(peripheral_uart_h, int)>();
 
-  /// @platform
-  /// @brief Sets the number of stop bits for the UART slave device.
-  /// @details Sets the number of stop bits for the UART slave device.
-  /// @since_tizen 4.0
-  /// @privlevel platform
-  /// @privilege http://tizen.org/privilege/peripheralio
+  /// Sets the number of stop bits for the UART slave device.
   ///
-  /// @param[in] uart The UART handle
-  /// @param[in] stop_bits Stop bits of the UART slave device
+  /// Sets the number of stop bits for the UART slave device.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #PERIPHERAL_ERROR_NONE Successful
-  /// @retval #PERIPHERAL_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #PERIPHERAL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PERIPHERAL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PERIPHERAL_ERROR_IO_ERROR I/O operation failed
-  /// @retval #PERIPHERAL_ERROR_NO_DEVICE Device does not exist or is removed
-  /// @retval #PERIPHERAL_ERROR_UNKNOWN Unknown internal error
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @see peripheral_uart_stop_bits_e
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/peripheralio>
+  ///
+  /// **Parameters:**
+  /// - `uart` (in): The UART handle
+  /// - `stop_bits` (in): Stop bits of the UART slave device
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PERIPHERAL_ERROR_NONE`: Successful
+  /// - `PERIPHERAL_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `PERIPHERAL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PERIPHERAL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PERIPHERAL_ERROR_IO_ERROR`: I/O operation failed
+  /// - `PERIPHERAL_ERROR_NO_DEVICE`: Device does not exist or is removed
+  /// - `PERIPHERAL_ERROR_UNKNOWN`: Unknown internal error
+  ///
+  /// **See also:**
+  /// - `peripheral_uart_stop_bits_e`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int peripheral_uart_set_stop_bits(
     peripheral_uart_h uart,
     int stop_bits,
@@ -1261,28 +1747,42 @@ class Tizen90CapiSystemPeripheralIo {
   late final _peripheral_uart_set_stop_bits = _peripheral_uart_set_stop_bitsPtr
       .asFunction<int Function(peripheral_uart_h, int)>();
 
-  /// @platform
-  /// @brief Sets hardware and software flow control of the UART slave device.
-  /// @details Sets hardware and software flow control of the UART slave device.
-  /// @since_tizen 4.0
-  /// @privlevel platform
-  /// @privilege http://tizen.org/privilege/peripheralio
+  /// Sets hardware and software flow control of the UART slave device.
   ///
-  /// @param[in] uart The UART handle
-  /// @param[in] sw_flow_control Software flow control (Turns a transmitter on or off)
-  /// @param[in] hw_flow_control Hardware flow control (Turns "Request to Send/Clear to Send" on or off)
+  /// Sets hardware and software flow control of the UART slave device.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #PERIPHERAL_ERROR_NONE Successful
-  /// @retval #PERIPHERAL_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #PERIPHERAL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PERIPHERAL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PERIPHERAL_ERROR_IO_ERROR I/O operation failed
-  /// @retval #PERIPHERAL_ERROR_NO_DEVICE Device does not exist or is removed
-  /// @retval #PERIPHERAL_ERROR_UNKNOWN Unknown internal error
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @see peripheral_uart_software_flow_control_e
-  /// @see peripheral_uart_hardware_flow_control_e
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/peripheralio>
+  ///
+  /// **Parameters:**
+  /// - `uart` (in): The UART handle
+  /// - `sw_flow_control` (in): Software flow control (Turns a transmitter on or off)
+  /// - `hw_flow_control` (in): Hardware flow control (Turns "Request to Send/Clear to Send" on or off)
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PERIPHERAL_ERROR_NONE`: Successful
+  /// - `PERIPHERAL_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `PERIPHERAL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PERIPHERAL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PERIPHERAL_ERROR_IO_ERROR`: I/O operation failed
+  /// - `PERIPHERAL_ERROR_NO_DEVICE`: Device does not exist or is removed
+  /// - `PERIPHERAL_ERROR_UNKNOWN`: Unknown internal error
+  ///
+  /// **See also:**
+  /// - `peripheral_uart_software_flow_control_e`
+  /// - `peripheral_uart_hardware_flow_control_e`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int peripheral_uart_set_flow_control(
     peripheral_uart_h uart,
     int sw_flow_control,
@@ -1303,27 +1803,41 @@ class Tizen90CapiSystemPeripheralIo {
       _peripheral_uart_set_flow_controlPtr
           .asFunction<int Function(peripheral_uart_h, int, int)>();
 
-  /// @platform
-  /// @brief Reads data from the UART slave device into a local buffer.
-  /// @details Reads data from the UART slave device into a local buffer.
-  /// @since_tizen 4.0
-  /// @privlevel platform
-  /// @privilege http://tizen.org/privilege/peripheralio
+  /// Reads data from the UART slave device into a local buffer.
   ///
-  /// @param[in] uart The UART handle
-  /// @param[out] data The buffer to read
-  /// @param[in] length The size of buffer (in bytes)
+  /// Reads data from the UART slave device into a local buffer.
   ///
-  /// @return the number of bytes read on success, otherwise a negative error value
-  /// @retval #PERIPHERAL_ERROR_NONE Successful
-  /// @retval #PERIPHERAL_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #PERIPHERAL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PERIPHERAL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PERIPHERAL_ERROR_IO_ERROR I/O operation failed
-  /// @retval #PERIPHERAL_ERROR_TRY_AGAIN Try again
-  /// @retval #PERIPHERAL_ERROR_UNKNOWN Unknown internal error
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @see peripheral_uart_write()
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/peripheralio>
+  ///
+  /// **Parameters:**
+  /// - `uart` (in): The UART handle
+  /// - `data` (out): The buffer to read
+  /// - `length` (in): The size of buffer (in bytes)
+  ///
+  /// **Returns:**
+  /// - the number of bytes read on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PERIPHERAL_ERROR_NONE`: Successful
+  /// - `PERIPHERAL_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `PERIPHERAL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PERIPHERAL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PERIPHERAL_ERROR_IO_ERROR`: I/O operation failed
+  /// - `PERIPHERAL_ERROR_TRY_AGAIN`: Try again
+  /// - `PERIPHERAL_ERROR_UNKNOWN`: Unknown internal error
+  ///
+  /// **See also:**
+  /// - `peripheral_uart_write()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int peripheral_uart_read(
     peripheral_uart_h uart,
     ffi.Pointer<ffi.Uint8> data,
@@ -1343,23 +1857,36 @@ class Tizen90CapiSystemPeripheralIo {
   late final _peripheral_uart_read = _peripheral_uart_readPtr.asFunction<
       int Function(peripheral_uart_h, ffi.Pointer<ffi.Uint8>, int)>();
 
-  /// @platform
-  /// @brief Discards data queued for writing to UART slave device, but not yet transmitted.
-  /// @details Discards data queued for writing to UART slave device, but not yet transmitted.
-  /// @since_tizen 8.0
-  /// @privlevel platform
-  /// @privilege http://tizen.org/privilege/peripheralio
+  /// Discards data queued for writing to UART slave device, but not yet transmitted.
   ///
-  /// @param[in] uart The UART handle
+  /// Discards data queued for writing to UART slave device, but not yet transmitted.
   ///
-  /// @return #PERIPHERAL_ERROR_NONE on success, otherwise a negative error value
-  /// @retval #PERIPHERAL_ERROR_NONE Successful
-  /// @retval #PERIPHERAL_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #PERIPHERAL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PERIPHERAL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PERIPHERAL_ERROR_IO_ERROR I/O operation failed
-  /// @retval #PERIPHERAL_ERROR_TRY_AGAIN Try again
-  /// @retval #PERIPHERAL_ERROR_UNKNOWN Unknown internal error
+  /// **Since Tizen:**
+  /// - 8.0
+  ///
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/peripheralio>
+  ///
+  /// **Parameters:**
+  /// - `uart` (in): The UART handle
+  ///
+  /// **Returns:**
+  /// - `PERIPHERAL_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PERIPHERAL_ERROR_NONE`: Successful
+  /// - `PERIPHERAL_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `PERIPHERAL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PERIPHERAL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PERIPHERAL_ERROR_IO_ERROR`: I/O operation failed
+  /// - `PERIPHERAL_ERROR_TRY_AGAIN`: Try again
+  /// - `PERIPHERAL_ERROR_UNKNOWN`: Unknown internal error
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int peripheral_uart_flush(
     peripheral_uart_h uart,
   ) {
@@ -1374,23 +1901,36 @@ class Tizen90CapiSystemPeripheralIo {
   late final _peripheral_uart_flush =
       _peripheral_uart_flushPtr.asFunction<int Function(peripheral_uart_h)>();
 
-  /// @platform
-  /// @brief Waits for all data queued for UART to be transmitted.
-  /// @details Waits for all data queued for UART to be transmitted.
-  /// @since_tizen 8.0
-  /// @privlevel platform
-  /// @privilege http://tizen.org/privilege/peripheralio
+  /// Waits for all data queued for UART to be transmitted.
   ///
-  /// @param[in] uart The UART handle
+  /// Waits for all data queued for UART to be transmitted.
   ///
-  /// @return #PERIPHERAL_ERROR_NONE on success, otherwise a negative error value
-  /// @retval #PERIPHERAL_ERROR_NONE Successful
-  /// @retval #PERIPHERAL_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #PERIPHERAL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PERIPHERAL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PERIPHERAL_ERROR_IO_ERROR I/O operation failed
-  /// @retval #PERIPHERAL_ERROR_TRY_AGAIN Try again
-  /// @retval #PERIPHERAL_ERROR_UNKNOWN Unknown internal error
+  /// **Since Tizen:**
+  /// - 8.0
+  ///
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/peripheralio>
+  ///
+  /// **Parameters:**
+  /// - `uart` (in): The UART handle
+  ///
+  /// **Returns:**
+  /// - `PERIPHERAL_ERROR_NONE` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PERIPHERAL_ERROR_NONE`: Successful
+  /// - `PERIPHERAL_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `PERIPHERAL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PERIPHERAL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PERIPHERAL_ERROR_IO_ERROR`: I/O operation failed
+  /// - `PERIPHERAL_ERROR_TRY_AGAIN`: Try again
+  /// - `PERIPHERAL_ERROR_UNKNOWN`: Unknown internal error
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int peripheral_uart_drain(
     peripheral_uart_h uart,
   ) {
@@ -1405,27 +1945,41 @@ class Tizen90CapiSystemPeripheralIo {
   late final _peripheral_uart_drain =
       _peripheral_uart_drainPtr.asFunction<int Function(peripheral_uart_h)>();
 
-  /// @platform
-  /// @brief Writes data from a buffer to the UART slave device.
-  /// @details Writes data from a buffer to the UART slave device.
-  /// @since_tizen 4.0
-  /// @privlevel platform
-  /// @privilege http://tizen.org/privilege/peripheralio
+  /// Writes data from a buffer to the UART slave device.
   ///
-  /// @param[in] uart The UART handle
-  /// @param[in] data The buffer to write
-  /// @param[in] length The size of buffer (in bytes)
+  /// Writes data from a buffer to the UART slave device.
   ///
-  /// @return the number of bytes write on success, otherwise a negative error value
-  /// @retval #PERIPHERAL_ERROR_NONE Successful
-  /// @retval #PERIPHERAL_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #PERIPHERAL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PERIPHERAL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PERIPHERAL_ERROR_IO_ERROR I/O operation failed
-  /// @retval #PERIPHERAL_ERROR_TRY_AGAIN Try again
-  /// @retval #PERIPHERAL_ERROR_UNKNOWN Unknown internal error
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @see peripheral_uart_read()
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/peripheralio>
+  ///
+  /// **Parameters:**
+  /// - `uart` (in): The UART handle
+  /// - `data` (in): The buffer to write
+  /// - `length` (in): The size of buffer (in bytes)
+  ///
+  /// **Returns:**
+  /// - the number of bytes write on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PERIPHERAL_ERROR_NONE`: Successful
+  /// - `PERIPHERAL_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `PERIPHERAL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PERIPHERAL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PERIPHERAL_ERROR_IO_ERROR`: I/O operation failed
+  /// - `PERIPHERAL_ERROR_TRY_AGAIN`: Try again
+  /// - `PERIPHERAL_ERROR_UNKNOWN`: Unknown internal error
+  ///
+  /// **See also:**
+  /// - `peripheral_uart_read()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int peripheral_uart_write(
     peripheral_uart_h uart,
     ffi.Pointer<ffi.Uint8> data,
@@ -1445,30 +1999,46 @@ class Tizen90CapiSystemPeripheralIo {
   late final _peripheral_uart_write = _peripheral_uart_writePtr.asFunction<
       int Function(peripheral_uart_h, ffi.Pointer<ffi.Uint8>, int)>();
 
-  /// @platform
-  /// @brief Opens a SPI slave device and returns a handle representing it.
-  /// @details Starts the lifetime of the handle and allocates its needed resources.
-  /// @since_tizen 4.0
-  /// @privlevel platform
-  /// @privilege http://tizen.org/privilege/peripheralio
-  /// @remarks @a spi should be released with peripheral_spi_close()
+  /// Opens a SPI slave device and returns a handle representing it.
   ///
-  /// @param[in] bus The SPI bus number
-  /// @param[in] cs The SPI chip select number
-  /// @param[out] spi The SPI slave device handle
+  /// Starts the lifetime of the handle and allocates its needed resources.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #PERIPHERAL_ERROR_NONE Successful
-  /// @retval #PERIPHERAL_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #PERIPHERAL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PERIPHERAL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PERIPHERAL_ERROR_IO_ERROR I/O operation failed
-  /// @retval #PERIPHERAL_ERROR_NO_DEVICE Device does not exist or is removed
-  /// @retval #PERIPHERAL_ERROR_OUT_OF_MEMORY Memory allocation failed
-  /// @retval #PERIPHERAL_ERROR_RESOURCE_BUSY Device is in use
-  /// @retval #PERIPHERAL_ERROR_UNKNOWN Unknown internal error
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @post peripheral_spi_close()
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/peripheralio>
+  ///
+  /// **Remarks:**
+  /// - `spi` should be released with peripheral_spi_close()
+  ///
+  /// **Parameters:**
+  /// - `bus` (in): The SPI bus number
+  /// - `cs` (in): The SPI chip select number
+  /// - `spi` (out): The SPI slave device handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PERIPHERAL_ERROR_NONE`: Successful
+  /// - `PERIPHERAL_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `PERIPHERAL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PERIPHERAL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PERIPHERAL_ERROR_IO_ERROR`: I/O operation failed
+  /// - `PERIPHERAL_ERROR_NO_DEVICE`: Device does not exist or is removed
+  /// - `PERIPHERAL_ERROR_OUT_OF_MEMORY`: Memory allocation failed
+  /// - `PERIPHERAL_ERROR_RESOURCE_BUSY`: Device is in use
+  /// - `PERIPHERAL_ERROR_UNKNOWN`: Unknown internal error
+  ///
+  /// **Postconditions:**
+  /// - peripheral_spi_close()
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int peripheral_spi_open(
     int bus,
     int cs,
@@ -1488,25 +2058,39 @@ class Tizen90CapiSystemPeripheralIo {
   late final _peripheral_spi_open = _peripheral_spi_openPtr
       .asFunction<int Function(int, int, ffi.Pointer<peripheral_spi_h>)>();
 
-  /// @platform
-  /// @brief Closes the SPI slave device and frees resources associated with the handle.
-  /// @details This function should be called at the end of the object's lifetime to avoid a memleak.
-  /// @since_tizen 4.0
-  /// @privlevel platform
-  /// @privilege http://tizen.org/privilege/peripheralio
+  /// Closes the SPI slave device and frees resources associated with the handle.
   ///
-  /// @param[in] spi The SPI slave device handle
+  /// This function should be called at the end of the object's lifetime to avoid a memleak.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #PERIPHERAL_ERROR_NONE Successful
-  /// @retval #PERIPHERAL_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #PERIPHERAL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PERIPHERAL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PERIPHERAL_ERROR_IO_ERROR I/O operation failed
-  /// @retval #PERIPHERAL_ERROR_NO_DEVICE Device does not exist or is removed
-  /// @retval #PERIPHERAL_ERROR_UNKNOWN Unknown internal error
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @see peripheral_spi_open()
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/peripheralio>
+  ///
+  /// **Parameters:**
+  /// - `spi` (in): The SPI slave device handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PERIPHERAL_ERROR_NONE`: Successful
+  /// - `PERIPHERAL_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `PERIPHERAL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PERIPHERAL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PERIPHERAL_ERROR_IO_ERROR`: I/O operation failed
+  /// - `PERIPHERAL_ERROR_NO_DEVICE`: Device does not exist or is removed
+  /// - `PERIPHERAL_ERROR_UNKNOWN`: Unknown internal error
+  ///
+  /// **See also:**
+  /// - `peripheral_spi_open()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int peripheral_spi_close(
     peripheral_spi_h spi,
   ) {
@@ -1521,26 +2105,40 @@ class Tizen90CapiSystemPeripheralIo {
   late final _peripheral_spi_close =
       _peripheral_spi_closePtr.asFunction<int Function(peripheral_spi_h)>();
 
-  /// @platform
-  /// @brief Sets the transfer mode for the given SPI slave device.
-  /// @details Sets the transfer mode for the given SPI slave device.
-  /// @since_tizen 4.0
-  /// @privlevel platform
-  /// @privilege http://tizen.org/privilege/peripheralio
+  /// Sets the transfer mode for the given SPI slave device.
   ///
-  /// @param[in] spi The SPI slave device handle
-  /// @param[in] mode The SPI transfer mode
+  /// Sets the transfer mode for the given SPI slave device.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #PERIPHERAL_ERROR_NONE Successful
-  /// @retval #PERIPHERAL_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #PERIPHERAL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PERIPHERAL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PERIPHERAL_ERROR_IO_ERROR I/O operation failed
-  /// @retval #PERIPHERAL_ERROR_NO_DEVICE Device does not exist or is removed
-  /// @retval #PERIPHERAL_ERROR_UNKNOWN Unknown internal error
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @see peripheral_spi_mode_e
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/peripheralio>
+  ///
+  /// **Parameters:**
+  /// - `spi` (in): The SPI slave device handle
+  /// - `mode` (in): The SPI transfer mode
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PERIPHERAL_ERROR_NONE`: Successful
+  /// - `PERIPHERAL_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `PERIPHERAL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PERIPHERAL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PERIPHERAL_ERROR_IO_ERROR`: I/O operation failed
+  /// - `PERIPHERAL_ERROR_NO_DEVICE`: Device does not exist or is removed
+  /// - `PERIPHERAL_ERROR_UNKNOWN`: Unknown internal error
+  ///
+  /// **See also:**
+  /// - `peripheral_spi_mode_e`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int peripheral_spi_set_mode(
     peripheral_spi_h spi,
     int mode,
@@ -1557,27 +2155,43 @@ class Tizen90CapiSystemPeripheralIo {
   late final _peripheral_spi_set_mode = _peripheral_spi_set_modePtr
       .asFunction<int Function(peripheral_spi_h, int)>();
 
-  /// @platform
-  /// @brief Sets the transfer bit order for given SPI slave device.
-  /// @details Sets the transfer bit order for given SPI slave device.
-  /// @since_tizen 4.0
-  /// @privlevel platform
-  /// @privilege http://tizen.org/privilege/peripheralio
-  /// @remarks ARTIK530 and Raspberry Pi 3 do not support LSB first bit order.
+  /// Sets the transfer bit order for given SPI slave device.
   ///
-  /// @param[in] spi The SPI slave device handle
-  /// @param[in] bit_order The transfer bit order
+  /// Sets the transfer bit order for given SPI slave device.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #PERIPHERAL_ERROR_NONE Successful
-  /// @retval #PERIPHERAL_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #PERIPHERAL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PERIPHERAL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PERIPHERAL_ERROR_IO_ERROR I/O operation failed
-  /// @retval #PERIPHERAL_ERROR_NO_DEVICE Device does not exist or is removed
-  /// @retval #PERIPHERAL_ERROR_UNKNOWN Unknown internal error
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @see peripheral_spi_bit_order_e
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/peripheralio>
+  ///
+  /// **Remarks:**
+  /// - ARTIK530 and Raspberry Pi 3 do not support LSB first bit order.
+  ///
+  /// **Parameters:**
+  /// - `spi` (in): The SPI slave device handle
+  /// - `bit_order` (in): The transfer bit order
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PERIPHERAL_ERROR_NONE`: Successful
+  /// - `PERIPHERAL_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `PERIPHERAL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PERIPHERAL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PERIPHERAL_ERROR_IO_ERROR`: I/O operation failed
+  /// - `PERIPHERAL_ERROR_NO_DEVICE`: Device does not exist or is removed
+  /// - `PERIPHERAL_ERROR_UNKNOWN`: Unknown internal error
+  ///
+  /// **See also:**
+  /// - `peripheral_spi_bit_order_e`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int peripheral_spi_set_bit_order(
     peripheral_spi_h spi,
     int bit_order,
@@ -1594,24 +2208,37 @@ class Tizen90CapiSystemPeripheralIo {
   late final _peripheral_spi_set_bit_order = _peripheral_spi_set_bit_orderPtr
       .asFunction<int Function(peripheral_spi_h, int)>();
 
-  /// @platform
-  /// @brief Sets the number of bits per word for given SPI slave device.
-  /// @details Sets the number of bits per word for given SPI slave device.
-  /// @since_tizen 4.0
-  /// @privlevel platform
-  /// @privilege http://tizen.org/privilege/peripheralio
+  /// Sets the number of bits per word for given SPI slave device.
   ///
-  /// @param[in] spi The SPI slave device handle
-  /// @param[in] bits The number of bits per word (in bits)
+  /// Sets the number of bits per word for given SPI slave device.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #PERIPHERAL_ERROR_NONE Successful
-  /// @retval #PERIPHERAL_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #PERIPHERAL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PERIPHERAL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PERIPHERAL_ERROR_IO_ERROR I/O operation failed
-  /// @retval #PERIPHERAL_ERROR_NO_DEVICE Device does not exist or is removed
-  /// @retval #PERIPHERAL_ERROR_UNKNOWN Unknown internal error
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/peripheralio>
+  ///
+  /// **Parameters:**
+  /// - `spi` (in): The SPI slave device handle
+  /// - `bits` (in): The number of bits per word (in bits)
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PERIPHERAL_ERROR_NONE`: Successful
+  /// - `PERIPHERAL_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `PERIPHERAL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PERIPHERAL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PERIPHERAL_ERROR_IO_ERROR`: I/O operation failed
+  /// - `PERIPHERAL_ERROR_NO_DEVICE`: Device does not exist or is removed
+  /// - `PERIPHERAL_ERROR_UNKNOWN`: Unknown internal error
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int peripheral_spi_set_bits_per_word(
     peripheral_spi_h spi,
     int bits,
@@ -1629,25 +2256,40 @@ class Tizen90CapiSystemPeripheralIo {
       _peripheral_spi_set_bits_per_wordPtr
           .asFunction<int Function(peripheral_spi_h, int)>();
 
-  /// @platform
-  /// @brief Sets the board-dependent frequency of the SPI bus.
-  /// @details Sets the frequency, in hertz, if the board supports it
-  /// @since_tizen 4.0
-  /// @privlevel platform
-  /// @privilege http://tizen.org/privilege/peripheralio
-  /// @remarks The frequencies supported are board dependent.
+  /// Sets the board-dependent frequency of the SPI bus.
   ///
-  /// @param[in] spi The SPI slave device handle
-  /// @param[in] freq_hz Frequency to set (in Hz)
+  /// Sets the frequency, in hertz, if the board supports it
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #PERIPHERAL_ERROR_NONE Successful
-  /// @retval #PERIPHERAL_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #PERIPHERAL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PERIPHERAL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PERIPHERAL_ERROR_IO_ERROR I/O operation failed
-  /// @retval #PERIPHERAL_ERROR_NO_DEVICE Device does not exist or is removed
-  /// @retval #PERIPHERAL_ERROR_UNKNOWN Unknown internal error
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/peripheralio>
+  ///
+  /// **Remarks:**
+  /// - The frequencies supported are board dependent.
+  ///
+  /// **Parameters:**
+  /// - `spi` (in): The SPI slave device handle
+  /// - `freq_hz` (in): Frequency to set (in Hz)
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PERIPHERAL_ERROR_NONE`: Successful
+  /// - `PERIPHERAL_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `PERIPHERAL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PERIPHERAL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PERIPHERAL_ERROR_IO_ERROR`: I/O operation failed
+  /// - `PERIPHERAL_ERROR_NO_DEVICE`: Device does not exist or is removed
+  /// - `PERIPHERAL_ERROR_UNKNOWN`: Unknown internal error
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int peripheral_spi_set_frequency(
     peripheral_spi_h spi,
     int freq_hz,
@@ -1664,27 +2306,41 @@ class Tizen90CapiSystemPeripheralIo {
   late final _peripheral_spi_set_frequency = _peripheral_spi_set_frequencyPtr
       .asFunction<int Function(peripheral_spi_h, int)>();
 
-  /// @platform
-  /// @brief Reads the bytes data from the SPI slave device to a local buffer.
-  /// @details Receives data into the specified buffer from the device.
-  /// @since_tizen 4.0
-  /// @privlevel platform
-  /// @privilege http://tizen.org/privilege/peripheralio
+  /// Reads the bytes data from the SPI slave device to a local buffer.
   ///
-  /// @param[in] spi The SPI slave device handle
-  /// @param[out] data The data buffer to read
-  /// @param[in] length The size of data buffer (in bytes)
+  /// Receives data into the specified buffer from the device.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #PERIPHERAL_ERROR_NONE Successful
-  /// @retval #PERIPHERAL_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #PERIPHERAL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PERIPHERAL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PERIPHERAL_ERROR_IO_ERROR I/O operation failed
-  /// @retval #PERIPHERAL_ERROR_NO_DEVICE Device does not exist or is removed
-  /// @retval #PERIPHERAL_ERROR_UNKNOWN Unknown internal error
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @see peripheral_spi_write()
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/peripheralio>
+  ///
+  /// **Parameters:**
+  /// - `spi` (in): The SPI slave device handle
+  /// - `data` (out): The data buffer to read
+  /// - `length` (in): The size of data buffer (in bytes)
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PERIPHERAL_ERROR_NONE`: Successful
+  /// - `PERIPHERAL_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `PERIPHERAL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PERIPHERAL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PERIPHERAL_ERROR_IO_ERROR`: I/O operation failed
+  /// - `PERIPHERAL_ERROR_NO_DEVICE`: Device does not exist or is removed
+  /// - `PERIPHERAL_ERROR_UNKNOWN`: Unknown internal error
+  ///
+  /// **See also:**
+  /// - `peripheral_spi_write()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int peripheral_spi_read(
     peripheral_spi_h spi,
     ffi.Pointer<ffi.Uint8> data,
@@ -1704,27 +2360,41 @@ class Tizen90CapiSystemPeripheralIo {
   late final _peripheral_spi_read = _peripheral_spi_readPtr.asFunction<
       int Function(peripheral_spi_h, ffi.Pointer<ffi.Uint8>, int)>();
 
-  /// @platform
-  /// @brief Writes the bytes data buffer to the SPI slave device.
-  /// @details Puts data from the specified buffer unto the device.
-  /// @since_tizen 4.0
-  /// @privlevel platform
-  /// @privilege http://tizen.org/privilege/peripheralio
+  /// Writes the bytes data buffer to the SPI slave device.
   ///
-  /// @param[in] spi The SPI slave device handle
-  /// @param[in] data The data buffer to write
-  /// @param[in] length The size of data buffer (in bytes)
+  /// Puts data from the specified buffer unto the device.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #PERIPHERAL_ERROR_NONE Successful
-  /// @retval #PERIPHERAL_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #PERIPHERAL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PERIPHERAL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PERIPHERAL_ERROR_IO_ERROR I/O operation failed
-  /// @retval #PERIPHERAL_ERROR_NO_DEVICE Device does not exist or is removed
-  /// @retval #PERIPHERAL_ERROR_UNKNOWN Unknown internal error
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @see peripheral_spi_read()
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/peripheralio>
+  ///
+  /// **Parameters:**
+  /// - `spi` (in): The SPI slave device handle
+  /// - `data` (in): The data buffer to write
+  /// - `length` (in): The size of data buffer (in bytes)
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PERIPHERAL_ERROR_NONE`: Successful
+  /// - `PERIPHERAL_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `PERIPHERAL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PERIPHERAL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PERIPHERAL_ERROR_IO_ERROR`: I/O operation failed
+  /// - `PERIPHERAL_ERROR_NO_DEVICE`: Device does not exist or is removed
+  /// - `PERIPHERAL_ERROR_UNKNOWN`: Unknown internal error
+  ///
+  /// **See also:**
+  /// - `peripheral_spi_read()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int peripheral_spi_write(
     peripheral_spi_h spi,
     ffi.Pointer<ffi.Uint8> data,
@@ -1744,29 +2414,43 @@ class Tizen90CapiSystemPeripheralIo {
   late final _peripheral_spi_write = _peripheral_spi_writePtr.asFunction<
       int Function(peripheral_spi_h, ffi.Pointer<ffi.Uint8>, int)>();
 
-  /// @platform
-  /// @brief Exchanges (read and write) the bytes data to the SPI slave device.
-  /// @details Performs data switcheroo. Essentially a combined write and read call.
-  /// @since_tizen 4.0
-  /// @privlevel platform
-  /// @privilege http://tizen.org/privilege/peripheralio
+  /// Exchanges (read and write) the bytes data to the SPI slave device.
   ///
-  /// @param[in] spi The SPI slave device handle
-  /// @param[in] txdata The data buffer to write
-  /// @param[out] rxdata The data buffer to read
-  /// @param[in] length The size of txdata and rxdata buffer (in bytes)
+  /// Performs data switcheroo. Essentially a combined write and read call.
   ///
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #PERIPHERAL_ERROR_NONE Successful
-  /// @retval #PERIPHERAL_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #PERIPHERAL_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #PERIPHERAL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #PERIPHERAL_ERROR_IO_ERROR I/O operation failed
-  /// @retval #PERIPHERAL_ERROR_NO_DEVICE Device does not exist or is removed
-  /// @retval #PERIPHERAL_ERROR_UNKNOWN Unknown internal error
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @see peripheral_spi_read()
-  /// @see peripheral_spi_write()
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/peripheralio>
+  ///
+  /// **Parameters:**
+  /// - `spi` (in): The SPI slave device handle
+  /// - `txdata` (in): The data buffer to write
+  /// - `rxdata` (out): The data buffer to read
+  /// - `length` (in): The size of txdata and rxdata buffer (in bytes)
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `PERIPHERAL_ERROR_NONE`: Successful
+  /// - `PERIPHERAL_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `PERIPHERAL_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `PERIPHERAL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `PERIPHERAL_ERROR_IO_ERROR`: I/O operation failed
+  /// - `PERIPHERAL_ERROR_NO_DEVICE`: Device does not exist or is removed
+  /// - `PERIPHERAL_ERROR_UNKNOWN`: Unknown internal error
+  ///
+  /// **See also:**
+  /// - `peripheral_spi_read()`
+  /// - `peripheral_spi_write()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int peripheral_spi_transfer(
     peripheral_spi_h spi,
     ffi.Pointer<ffi.Uint8> txdata,
@@ -1790,9 +2474,13 @@ class Tizen90CapiSystemPeripheralIo {
           ffi.Pointer<ffi.Uint8>, int)>();
 }
 
-/// @brief Enumeration for error codes returned by the peripheral-io API.
-/// @details Most peripheral-io API functions can return one of these codes to specify an error.
-/// @since_tizen 4.0
+/// Enumeration for error codes returned by the peripheral-io API.
+///
+/// Most peripheral-io API functions can return one of these codes to specify an error.
+///
+/// **Since Tizen:**
+/// - 4.0
+/// @nodoc
 abstract class peripheral_error_e {
   /// < Successful
   static const int PERIPHERAL_ERROR_NONE = 0;
@@ -1825,9 +2513,13 @@ abstract class peripheral_error_e {
   static const int PERIPHERAL_ERROR_UNKNOWN = -1073741824;
 }
 
-/// @brief Enumeration representing GPIO device direction options.
-/// @details Some interfaces require you to specify whether data goes in or out.
-/// @since_tizen 4.0
+/// Enumeration representing GPIO device direction options.
+///
+/// Some interfaces require you to specify whether data goes in or out.
+///
+/// **Since Tizen:**
+/// - 4.0
+/// @nodoc
 abstract class peripheral_gpio_direction_e {
   /// < Input Mode
   static const int PERIPHERAL_GPIO_DIRECTION_IN = 0;
@@ -1839,9 +2531,13 @@ abstract class peripheral_gpio_direction_e {
   static const int PERIPHERAL_GPIO_DIRECTION_OUT_INITIALLY_LOW = 2;
 }
 
-/// @brief Enumeration for edge types for the GPIO interrupt.
-/// @details Some interfaces require you to specify what kind of signal edge produces an interrupt.
-/// @since_tizen 4.0
+/// Enumeration for edge types for the GPIO interrupt.
+///
+/// Some interfaces require you to specify what kind of signal edge produces an interrupt.
+///
+/// **Since Tizen:**
+/// - 4.0
+/// @nodoc
 abstract class peripheral_gpio_edge_e {
   /// < No interrupt on GPIO
   static const int PERIPHERAL_GPIO_EDGE_NONE = 0;
@@ -1856,55 +2552,65 @@ abstract class peripheral_gpio_edge_e {
   static const int PERIPHERAL_GPIO_EDGE_BOTH = 3;
 }
 
+/// @nodoc
 final class _peripheral_gpio_s extends ffi.Opaque {}
 
-/// @brief An opaque handle to an object representing a GPIO pin.
-/// @details A handle to a single GPIO pin, for use with most GPIO interfaces
-/// @since_tizen 4.0
+/// An opaque handle to an object representing a GPIO pin.
+///
+/// A handle to a single GPIO pin, for use with most GPIO interfaces
+///
+/// **Since Tizen:**
+/// - 4.0
+/// @nodoc
 typedef peripheral_gpio_h = ffi.Pointer<_peripheral_gpio_s>;
 
-/// @platform
-/// @brief The GPIO interrupted callback called when the GPIO interrupt is triggered.
-/// @details The following errors can be received: \n
-/// #PERIPHERAL_ERROR_NONE Successful \n
-/// #PERIPHERAL_ERROR_NOT_SUPPORTED Not supported \n
-/// #PERIPHERAL_ERROR_PERMISSION_DENIED Permission denied \n
-/// #PERIPHERAL_ERROR_INVALID_PARAMETER Invalid parameter \n
-/// #PERIPHERAL_ERROR_IO_ERROR I/O operation failed \n
-/// #PERIPHERAL_ERROR_NO_DEVICE Device does not exist or is removed \n
-/// #PERIPHERAL_ERROR_TRY_AGAIN Try again \n
-/// #PERIPHERAL_ERROR_OUT_OF_MEMORY Memory allocation failed \n
-/// #PERIPHERAL_ERROR_RESOURCE_BUSY Device is in use \n
-/// #PERIPHERAL_ERROR_UNKNOWN Unknown internal error \n
-/// @since_tizen 4.0
+/// The GPIO interrupted callback called when the GPIO interrupt is triggered.
 ///
-/// @param[in] gpio The GPIO handle
-/// @param[in] error The GPIO error
-/// @param[in] user_data The user data passed from the callback registration function
+/// The following errors can be received: `PERIPHERAL_ERROR_NONE` Successful `PERIPHERAL_ERROR_NOT_SUPPORTED` Not supported `PERIPHERAL_ERROR_PERMISSION_DENIED` Permission denied `PERIPHERAL_ERROR_INVALID_PARAMETER` Invalid parameter `PERIPHERAL_ERROR_IO_ERROR` I/O operation failed `PERIPHERAL_ERROR_NO_DEVICE` Device does not exist or is removed `PERIPHERAL_ERROR_TRY_AGAIN` Try again `PERIPHERAL_ERROR_OUT_OF_MEMORY` Memory allocation failed `PERIPHERAL_ERROR_RESOURCE_BUSY` Device is in use `PERIPHERAL_ERROR_UNKNOWN` Unknown internal error
 ///
-/// @see peripheral_gpio_set_interrupted_cb()
+/// **Since Tizen:**
+/// - 4.0
+///
+/// **Parameters:**
+/// - `gpio` (in): The GPIO handle
+/// - `error` (in): The GPIO error
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `peripheral_gpio_set_interrupted_cb()`
+///
+/// **Platform:**
+/// - Platform API.
+/// @nodoc
 typedef peripheral_gpio_interrupted_cb
     = ffi.Pointer<ffi.NativeFunction<peripheral_gpio_interrupted_cbFunction>>;
+/// @nodoc
 typedef peripheral_gpio_interrupted_cbFunction = ffi.Void Function(
     peripheral_gpio_h gpio, ffi.Int32 error, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartperipheral_gpio_interrupted_cbFunction = void Function(
     peripheral_gpio_h gpio, int error, ffi.Pointer<ffi.Void> user_data);
 
+/// @nodoc
 final class _peripheral_i2c_s extends ffi.Opaque {}
 
-/// @brief An opaque handle representing the I2C slave device.
-/// @details A handle to a single I2C slave device, for use with most I2C slave interfaces
-/// @since_tizen 4.0
+/// An opaque handle representing the I2C slave device.
+///
+/// A handle to a single I2C slave device, for use with most I2C slave interfaces
+///
+/// **Since Tizen:**
+/// - 4.0
+/// @nodoc
 typedef peripheral_i2c_h = ffi.Pointer<_peripheral_i2c_s>;
 
-/// @brief Enumeration for open flags (bitmask) for an i2c device.
-/// @since_tizen 6.5
+/// Enumeration for open flags (bitmask) for an i2c device.
 ///
-/// @details Enum values are supposed to be used as bitmask, where only one
-/// value can be specified for following flag groups:
-/// - locking mode - either #PERIPHERAL_OPEN_FLAGS_PRIVATE or #PERIPHERAL_OPEN_FLAGS_SHARED can be used
+/// Enum values are supposed to be used as bitmask, where only one value can be specified for following flag groups:
+/// - locking mode - either `PERIPHERAL_OPEN_FLAGS_PRIVATE` or `PERIPHERAL_OPEN_FLAGS_SHARED` can be used The `PERIPHERAL_OPEN_FLAGS_NONBLOCK` can be used with all other available flags.
 ///
-/// The #PERIPHERAL_OPEN_FLAGS_NONBLOCK can be used with all other available flags.
+/// **Since Tizen:**
+/// - 6.5
+/// @nodoc
 abstract class peripheral_open_flags_e {
   /// < Exclusive access to device
   static const int PERIPHERAL_OPEN_FLAGS_PRIVATE = 0;
@@ -1917,11 +2623,16 @@ abstract class peripheral_open_flags_e {
   static const int PERIPHERAL_OPEN_FLAGS_NONBLOCK = 2;
 }
 
+/// @nodoc
 final class _peripheral_pwm_s extends ffi.Opaque {}
 
-/// @brief Enumeration for representing PWN active signal Polarity.
-/// @details Controls whether an active PWM signal has high or low/inversed polarity.
-/// @since_tizen 4.0
+/// Enumeration for representing PWN active signal Polarity.
+///
+/// Controls whether an active PWM signal has high or low/inversed polarity.
+///
+/// **Since Tizen:**
+/// - 4.0
+/// @nodoc
 abstract class peripheral_pwm_polarity_e {
   /// < PWM signal start in the active high state (Normal)
   static const int PERIPHERAL_PWM_POLARITY_ACTIVE_HIGH = 0;
@@ -1930,23 +2641,37 @@ abstract class peripheral_pwm_polarity_e {
   static const int PERIPHERAL_PWM_POLARITY_ACTIVE_LOW = 1;
 }
 
-/// @brief An opaque handle representing a PWM peripherals pin.
-/// @details A handle to a single PWM peripherals pin, for use with most PWM interfaces
-/// @since_tizen 4.0
+/// An opaque handle representing a PWM peripherals pin.
+///
+/// A handle to a single PWM peripherals pin, for use with most PWM interfaces
+///
+/// **Since Tizen:**
+/// - 4.0
+/// @nodoc
 typedef peripheral_pwm_h = ffi.Pointer<_peripheral_pwm_s>;
 
+/// @nodoc
 final class _peripheral_adc_s extends ffi.Opaque {}
 
-/// @brief An opaque handle representing an ADC peripherals pin.
-/// @details A handle to a single ADC pin, for use with most ADC interfaces
-/// @since_tizen 5.0
+/// An opaque handle representing an ADC peripherals pin.
+///
+/// A handle to a single ADC pin, for use with most ADC interfaces
+///
+/// **Since Tizen:**
+/// - 5.0
+/// @nodoc
 typedef peripheral_adc_h = ffi.Pointer<_peripheral_adc_s>;
 
+/// @nodoc
 final class _peripheral_uart_s extends ffi.Opaque {}
 
-/// @brief Enumeration for signal baud rate for UART slave devices.
-/// @details Controls the baud rate, i.e. signals per second on a UART device
-/// @since_tizen 4.0
+/// Enumeration for signal baud rate for UART slave devices.
+///
+/// Controls the baud rate, i.e. signals per second on a UART device
+///
+/// **Since Tizen:**
+/// - 4.0
+/// @nodoc
 abstract class peripheral_uart_baud_rate_e {
   /// < The number of signal in one second is 0
   static const int PERIPHERAL_UART_BAUD_RATE_0 = 0;
@@ -2006,9 +2731,13 @@ abstract class peripheral_uart_baud_rate_e {
   static const int PERIPHERAL_UART_BAUD_RATE_230400 = 18;
 }
 
-/// @brief Enumeration for data byte size for UART slave devices.
-/// @details Controls how many bits per byte are there for data, on UART slave devices.
-/// @since_tizen 4.0
+/// Enumeration for data byte size for UART slave devices.
+///
+/// Controls how many bits per byte are there for data, on UART slave devices.
+///
+/// **Since Tizen:**
+/// - 4.0
+/// @nodoc
 abstract class peripheral_uart_byte_size_e {
   /// < 5 data bits
   static const int PERIPHERAL_UART_BYTE_SIZE_5BIT = 0;
@@ -2023,9 +2752,13 @@ abstract class peripheral_uart_byte_size_e {
   static const int PERIPHERAL_UART_BYTE_SIZE_8BIT = 3;
 }
 
-/// @brief Enumeration for parity bit for UART slave devices.
-/// @details Controls whether parity is even, odd, or none for UART devices
-/// @since_tizen 4.0
+/// Enumeration for parity bit for UART slave devices.
+///
+/// Controls whether parity is even, odd, or none for UART devices
+///
+/// **Since Tizen:**
+/// - 4.0
+/// @nodoc
 abstract class peripheral_uart_parity_e {
   /// < No parity is used
   static const int PERIPHERAL_UART_PARITY_NONE = 0;
@@ -2037,9 +2770,13 @@ abstract class peripheral_uart_parity_e {
   static const int PERIPHERAL_UART_PARITY_ODD = 2;
 }
 
-/// @brief Enumeration for the number of stop bits for UART slave devices.
-/// @details Controls whether there is one or two stop bits for UART devices
-/// @since_tizen 4.0
+/// Enumeration for the number of stop bits for UART slave devices.
+///
+/// Controls whether there is one or two stop bits for UART devices
+///
+/// **Since Tizen:**
+/// - 4.0
+/// @nodoc
 abstract class peripheral_uart_stop_bits_e {
   /// < One stop bit
   static const int PERIPHERAL_UART_STOP_BITS_1BIT = 0;
@@ -2048,9 +2785,13 @@ abstract class peripheral_uart_stop_bits_e {
   static const int PERIPHERAL_UART_STOP_BITS_2BIT = 1;
 }
 
-/// @brief Enumeration for hardware flow control for UART slave devices.
-/// @details Controls details of the hardware flow control on UART devices
-/// @since_tizen 4.0
+/// Enumeration for hardware flow control for UART slave devices.
+///
+/// Controls details of the hardware flow control on UART devices
+///
+/// **Since Tizen:**
+/// - 4.0
+/// @nodoc
 abstract class peripheral_uart_hardware_flow_control_e {
   /// < No hardware flow control
   static const int PERIPHERAL_UART_HARDWARE_FLOW_CONTROL_NONE = 0;
@@ -2059,9 +2800,13 @@ abstract class peripheral_uart_hardware_flow_control_e {
   static const int PERIPHERAL_UART_HARDWARE_FLOW_CONTROL_AUTO_RTSCTS = 1;
 }
 
-/// @brief Enumeration for software flow control for UART slave devices.
-/// @details Controls details of the software flow control on UART devices
-/// @since_tizen 4.0
+/// Enumeration for software flow control for UART slave devices.
+///
+/// Controls details of the software flow control on UART devices
+///
+/// **Since Tizen:**
+/// - 4.0
+/// @nodoc
 abstract class peripheral_uart_software_flow_control_e {
   /// < No software flow control
   static const int PERIPHERAL_UART_SOFTWARE_FLOW_CONTROL_NONE = 0;
@@ -2070,16 +2815,25 @@ abstract class peripheral_uart_software_flow_control_e {
   static const int PERIPHERAL_UART_SOFTWARE_FLOW_CONTROL_XONXOFF = 1;
 }
 
-/// @brief An opaque handle representing a UART peripherals device.
-/// @details A handle to a single UART slave device, for use with most UART peripherals interfaces
-/// @since_tizen 4.0
+/// An opaque handle representing a UART peripherals device.
+///
+/// A handle to a single UART slave device, for use with most UART peripherals interfaces
+///
+/// **Since Tizen:**
+/// - 4.0
+/// @nodoc
 typedef peripheral_uart_h = ffi.Pointer<_peripheral_uart_s>;
 
+/// @nodoc
 final class _peripheral_spi_s extends ffi.Opaque {}
 
-/// @brief Enumeration of transfer modes for SPI slave devices.
-/// @details Use this to control CPOL and CPHa modes on the device.
-/// @since_tizen 4.0
+/// Enumeration of transfer modes for SPI slave devices.
+///
+/// Use this to control CPOL and CPHa modes on the device.
+///
+/// **Since Tizen:**
+/// - 4.0
+/// @nodoc
 abstract class peripheral_spi_mode_e {
   /// < CPOL = 0, CPHa = 0 Mode
   static const int PERIPHERAL_SPI_MODE_0 = 0;
@@ -2094,9 +2848,13 @@ abstract class peripheral_spi_mode_e {
   static const int PERIPHERAL_SPI_MODE_3 = 3;
 }
 
-/// @brief Enumeration of bit orders for SPI slave device interfaces.
-/// @details Sets whether the most or the least significant bit goes first
-/// @since_tizen 4.0
+/// Enumeration of bit orders for SPI slave device interfaces.
+///
+/// Sets whether the most or the least significant bit goes first
+///
+/// **Since Tizen:**
+/// - 4.0
+/// @nodoc
 abstract class peripheral_spi_bit_order_e {
   /// < Use most significant bit first
   static const int PERIPHERAL_SPI_BIT_ORDER_MSB = 0;
@@ -2105,7 +2863,11 @@ abstract class peripheral_spi_bit_order_e {
   static const int PERIPHERAL_SPI_BIT_ORDER_LSB = 1;
 }
 
-/// @brief An opaque handle representing a SPI peripherals slave device.
-/// @details A handle to a single SPI slave device, for use with most SPI interfaces
-/// @since_tizen 4.0
+/// An opaque handle representing a SPI peripherals slave device.
+///
+/// A handle to a single SPI slave device, for use with most SPI interfaces
+///
+/// **Since Tizen:**
+/// - 4.0
+/// @nodoc
 typedef peripheral_spi_h = ffi.Pointer<_peripheral_spi_s>;

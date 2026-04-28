@@ -1,3 +1,6 @@
+/// {@category 10.0/tizen}
+library tizen_interop_10_0.capi_system_media_key;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen capi-system-media-key APIs.
+/// {@category 10.0/tizen}
 class Tizen100CapiSystemMediaKey {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,18 +28,25 @@ class Tizen100CapiSystemMediaKey {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Registers a change event callback for all media keys.
+  /// Registers a change event callback for all media keys.
   ///
-  /// @since_tizen 2.3
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @param[in] callback The callback function to invoke
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #MEDIA_KEY_ERROR_NONE Successful
-  /// @retval  #MEDIA_KEY_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval  #MEDIA_KEY_ERROR_OPERATION_FAILED Reserve key failed
-  /// @see media_key_release()
+  /// **Parameters:**
+  /// - `callback` (in): The callback function to invoke
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_KEY_ERROR_NONE`: Successful
+  /// - `MEDIA_KEY_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_KEY_ERROR_OPERATION_FAILED`: Reserve key failed
+  ///
+  /// **See also:**
+  /// - `media_key_release()`
   int media_key_reserve(
     media_key_event_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -53,16 +64,21 @@ class Tizen100CapiSystemMediaKey {
   late final _media_key_reserve = _media_key_reservePtr
       .asFunction<int Function(media_key_event_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unregisters the change event callback function.
+  /// Unregisters the change event callback function.
   ///
-  /// @since_tizen 2.3
+  /// **Since Tizen:**
+  /// - 2.3
   ///
-  /// @return  @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval  #MEDIA_KEY_ERROR_NONE Successful
-  /// @retval  #MEDIA_KEY_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval  #MEDIA_KEY_ERROR_OPERATION_FAILED Release key failed
-  /// @see media_key_reserve()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIA_KEY_ERROR_NONE`: Successful
+  /// - `MEDIA_KEY_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIA_KEY_ERROR_OPERATION_FAILED`: Release key failed
+  ///
+  /// **See also:**
+  /// - `media_key_reserve()`
   int media_key_release() {
     return _media_key_release();
   }
@@ -73,9 +89,11 @@ class Tizen100CapiSystemMediaKey {
       _media_key_releasePtr.asFunction<int Function()>();
 }
 
-/// @brief Enumeration for error codes of a media key.
+/// Enumeration for error codes of a media key.
 ///
-/// @since_tizen 2.3
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 abstract class media_key_error_e {
   /// < Successful
   static const int MEDIA_KEY_ERROR_NONE = 0;
@@ -87,9 +105,11 @@ abstract class media_key_error_e {
   static const int MEDIA_KEY_ERROR_OPERATION_FAILED = -37879807;
 }
 
-/// @brief Enumeration for media keys.
+/// Enumeration for media keys.
 ///
-/// @since_tizen 2.3
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 abstract class media_key_e {
   /// < Play key
   static const int MEDIA_KEY_PLAY = 0;
@@ -122,9 +142,11 @@ abstract class media_key_e {
   static const int MEDIA_KEY_UNKNOWN = 9;
 }
 
-/// @brief Enumeration for event statuses of a media key.
+/// Enumeration for event statuses of a media key.
 ///
-/// @since_tizen 2.3
+/// **Since Tizen:**
+/// - 2.3
+/// @nodoc
 abstract class media_key_event_e {
   /// < Pressed status
   static const int MEDIA_KEY_STATUS_PRESSED = 0;
@@ -136,19 +158,28 @@ abstract class media_key_event_e {
   static const int MEDIA_KEY_STATUS_UNKNOWN = 2;
 }
 
-/// @brief Called when the status of the media key is changed.
+/// Called when the status of the media key is changed.
 ///
-/// @since_tizen 2.3
+/// **Since Tizen:**
+/// - 2.3
 ///
-/// @param[in] key The key whose status is changed
-/// @param[in] status The status of the key
-/// @param[in] user_data The user data passed from the callback registration function
-/// @pre media_key_reserve() will invoke this callback function.
-/// @see media_key_reserve()
-/// @see media_key_release()
+/// **Parameters:**
+/// - `key` (in): The key whose status is changed
+/// - `status` (in): The status of the key
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - media_key_reserve() will invoke this callback function.
+///
+/// **See also:**
+/// - `media_key_reserve()`
+/// - `media_key_release()`
+/// @nodoc
 typedef media_key_event_cb
     = ffi.Pointer<ffi.NativeFunction<media_key_event_cbFunction>>;
+/// @nodoc
 typedef media_key_event_cbFunction = ffi.Void Function(
     ffi.Int32 key, ffi.Int32 status, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmedia_key_event_cbFunction = void Function(
     int key, int status, ffi.Pointer<ffi.Void> user_data);

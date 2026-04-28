@@ -1,3 +1,6 @@
+/// {@category 8.0/tizen}
+library tizen_interop_8_0.yaca;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen yaca APIs.
+/// {@category 8.0/tizen}
 class Tizen80Yaca {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,15 +28,21 @@ class Tizen80Yaca {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Initializes the library. Must be called before any other crypto
-  /// function. Should be called once in each thread that uses yaca.
-  /// @since_tizen 3.0
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see yaca_cleanup()
+  /// Initializes the library. Must be called before any other crypto function. Should be called once in each thread that uses yaca.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Returns:**
+  /// - `YACA_ERROR_NONE` on success, negative on error
+  ///
+  /// **Return values:**
+  /// - `YACA_ERROR_NONE`: Successful
+  /// - `YACA_ERROR_OUT_OF_MEMORY`: Out of memory error
+  /// - `YACA_ERROR_INTERNAL`: Internal error
+  ///
+  /// **See also:**
+  /// - `yaca_cleanup()`
   int yaca_initialize() {
     return _yaca_initialize();
   }
@@ -42,9 +52,13 @@ class Tizen80Yaca {
   late final _yaca_initialize =
       _yaca_initializePtr.asFunction<int Function()>();
 
-  /// @brief Cleans up the library. Must be called before exiting the thread that called yaca_initialize().
-  /// @since_tizen 3.0
-  /// @see yaca_initialize()
+  /// Cleans up the library. Must be called before exiting the thread that called yaca_initialize().
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **See also:**
+  /// - `yaca_initialize()`
   void yaca_cleanup() {
     return _yaca_cleanup();
   }
@@ -53,19 +67,30 @@ class Tizen80Yaca {
       _lookup<ffi.NativeFunction<ffi.Void Function()>>('yaca_cleanup');
   late final _yaca_cleanup = _yaca_cleanupPtr.asFunction<void Function()>();
 
-  /// @brief Allocates the memory.
-  /// @since_tizen 3.0
-  /// @remarks The @a memory should be freed using yaca_free().
-  /// @param[in] size Size of the allocation (bytes)
-  /// @param[out] memory Allocated memory
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0)
-  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
-  /// @see yaca_zalloc()
-  /// @see yaca_realloc()
-  /// @see yaca_free()
+  /// Allocates the memory.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The `memory` should be freed using yaca_free().
+  ///
+  /// **Parameters:**
+  /// - `size` (in): Size of the allocation (bytes)
+  /// - `memory` (out): Allocated memory
+  ///
+  /// **Returns:**
+  /// - `YACA_ERROR_NONE` on success, negative on error
+  ///
+  /// **Return values:**
+  /// - `YACA_ERROR_NONE`: Successful
+  /// - `YACA_ERROR_INVALID_PARAMETER`: Required parameters have incorrect values (NULL, 0)
+  /// - `YACA_ERROR_OUT_OF_MEMORY`: Out of memory error
+  ///
+  /// **See also:**
+  /// - `yaca_zalloc()`
+  /// - `yaca_realloc()`
+  /// - `yaca_free()`
   int yaca_malloc(
     int size,
     ffi.Pointer<ffi.Pointer<ffi.Void>> memory,
@@ -83,19 +108,30 @@ class Tizen80Yaca {
   late final _yaca_malloc = _yaca_mallocPtr
       .asFunction<int Function(int, ffi.Pointer<ffi.Pointer<ffi.Void>>)>();
 
-  /// @brief Allocates the zeroed memory.
-  /// @since_tizen 3.0
-  /// @remarks The @a memory should be freed using yaca_free().
-  /// @param[in] size Size of the allocation (bytes)
-  /// @param[out] memory Allocated memory
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0)
-  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
-  /// @see yaca_malloc()
-  /// @see yaca_realloc()
-  /// @see yaca_free()
+  /// Allocates the zeroed memory.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The `memory` should be freed using yaca_free().
+  ///
+  /// **Parameters:**
+  /// - `size` (in): Size of the allocation (bytes)
+  /// - `memory` (out): Allocated memory
+  ///
+  /// **Returns:**
+  /// - `YACA_ERROR_NONE` on success, negative on error
+  ///
+  /// **Return values:**
+  /// - `YACA_ERROR_NONE`: Successful
+  /// - `YACA_ERROR_INVALID_PARAMETER`: Required parameters have incorrect values (NULL, 0)
+  /// - `YACA_ERROR_OUT_OF_MEMORY`: Out of memory error
+  ///
+  /// **See also:**
+  /// - `yaca_malloc()`
+  /// - `yaca_realloc()`
+  /// - `yaca_free()`
   int yaca_zalloc(
     int size,
     ffi.Pointer<ffi.Pointer<ffi.Void>> memory,
@@ -113,22 +149,33 @@ class Tizen80Yaca {
   late final _yaca_zalloc = _yaca_zallocPtr
       .asFunction<int Function(int, ffi.Pointer<ffi.Pointer<ffi.Void>>)>();
 
-  /// @brief Re-allocates the memory.
-  /// @since_tizen 3.0
-  /// @remarks In case of failure the function doesn't free the memory pointed by @a memory.
-  /// @remarks If @a memory is NULL then the call is equivalent to yaca_malloc().
-  /// @remarks If the function fails the contents of @a memory will be left unchanged.
-  /// @remarks The @a memory should be freed using yaca_free().
-  /// @param[in] size Size of the new allocation (bytes)
-  /// @param[in,out] memory  Memory to be reallocated
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0)
-  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
-  /// @see yaca_malloc()
-  /// @see yaca_zalloc()
-  /// @see yaca_free()
+  /// Re-allocates the memory.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - In case of failure the function doesn't free the memory pointed by `memory`.
+  /// - If `memory` is NULL then the call is equivalent to yaca_malloc().
+  /// - If the function fails the contents of `memory` will be left unchanged.
+  /// - The `memory` should be freed using yaca_free().
+  ///
+  /// **Parameters:**
+  /// - `size` (in): Size of the new allocation (bytes)
+  /// - `memory` (in,out): Memory to be reallocated
+  ///
+  /// **Returns:**
+  /// - `YACA_ERROR_NONE` on success, negative on error
+  ///
+  /// **Return values:**
+  /// - `YACA_ERROR_NONE`: Successful
+  /// - `YACA_ERROR_INVALID_PARAMETER`: Required parameters have incorrect values (NULL, 0)
+  /// - `YACA_ERROR_OUT_OF_MEMORY`: Out of memory error
+  ///
+  /// **See also:**
+  /// - `yaca_malloc()`
+  /// - `yaca_zalloc()`
+  /// - `yaca_free()`
   int yaca_realloc(
     int size,
     ffi.Pointer<ffi.Pointer<ffi.Void>> memory,
@@ -146,13 +193,18 @@ class Tizen80Yaca {
   late final _yaca_realloc = _yaca_reallocPtr
       .asFunction<int Function(int, ffi.Pointer<ffi.Pointer<ffi.Void>>)>();
 
-  /// @brief Frees the memory allocated by yaca_malloc(), yaca_zalloc(),
-  /// yaca_realloc() or one of the cryptographic operations.
-  /// @since_tizen 3.0
-  /// @param[in] memory Pointer to the memory to be freed
-  /// @see yaca_malloc()
-  /// @see yaca_zalloc()
-  /// @see yaca_realloc()
+  /// Frees the memory allocated by yaca_malloc(), yaca_zalloc(), yaca_realloc() or one of the cryptographic operations.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `memory` (in): Pointer to the memory to be freed
+  ///
+  /// **See also:**
+  /// - `yaca_malloc()`
+  /// - `yaca_zalloc()`
+  /// - `yaca_realloc()`
   void yaca_free(
     ffi.Pointer<ffi.Void> memory,
   ) {
@@ -167,16 +219,23 @@ class Tizen80Yaca {
   late final _yaca_free =
       _yaca_freePtr.asFunction<void Function(ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Safely compares first @a len bytes of two buffers.
-  /// @since_tizen 3.0
-  /// @param[in] first Pointer to the first buffer
-  /// @param[in] second Pointer to the second buffer
-  /// @param[in] len Length to compare
-  /// @return #YACA_ERROR_NONE when buffers are equal,
-  /// otherwise #YACA_ERROR_DATA_MISMATCH
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0)
-  /// @retval #YACA_ERROR_DATA_MISMATCH Buffers are different
+  /// Safely compares first `len` bytes of two buffers.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `first` (in): Pointer to the first buffer
+  /// - `second` (in): Pointer to the second buffer
+  /// - `len` (in): Length to compare
+  ///
+  /// **Returns:**
+  /// - `YACA_ERROR_NONE` when buffers are equal, otherwise `YACA_ERROR_DATA_MISMATCH`
+  ///
+  /// **Return values:**
+  /// - `YACA_ERROR_NONE`: Successful
+  /// - `YACA_ERROR_INVALID_PARAMETER`: Required parameters have incorrect values (NULL, 0)
+  /// - `YACA_ERROR_DATA_MISMATCH`: Buffers are different
   int yaca_memcmp(
     ffi.Pointer<ffi.Void> first,
     ffi.Pointer<ffi.Void> second,
@@ -196,15 +255,22 @@ class Tizen80Yaca {
   late final _yaca_memcmp = _yaca_memcmpPtr.asFunction<
       int Function(ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Void>, int)>();
 
-  /// @brief Generates random data.
-  /// @since_tizen 3.0
-  /// @param[in,out] data Pointer to the memory to be randomized
-  /// @param[in] data_len Length of the memory to be randomized
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0)
-  /// @retval #YACA_ERROR_INTERNAL Internal error
+  /// Generates random data.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `data` (in,out): Pointer to the memory to be randomized
+  /// - `data_len` (in): Length of the memory to be randomized
+  ///
+  /// **Returns:**
+  /// - `YACA_ERROR_NONE` on success, negative on error
+  ///
+  /// **Return values:**
+  /// - `YACA_ERROR_NONE`: Successful
+  /// - `YACA_ERROR_INVALID_PARAMETER`: Required parameters have incorrect values (NULL, 0)
+  /// - `YACA_ERROR_INTERNAL`: Internal error
   int yaca_randomize_bytes(
     ffi.Pointer<ffi.Char> data,
     int data_len,
@@ -222,22 +288,32 @@ class Tizen80Yaca {
   late final _yaca_randomize_bytes = _yaca_randomize_bytesPtr
       .asFunction<int Function(ffi.Pointer<ffi.Char>, int)>();
 
-  /// @brief Sets the non-standard context properties. Can only be called on an initialized context.
-  /// @since_tizen 3.0
-  /// @remarks The @a value has to be of type appropriate for given property. See #yaca_property_e
-  /// for details on corresponding types.
-  /// @param[in,out] ctx Previously initialized crypto context
-  /// @param[in] property Property to be set
-  /// @param[in] value Property value
-  /// @param[in] value_len Length of the property value
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0,
-  /// invalid @a ctx or @a property)
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see #yaca_property_e
-  /// @see yaca_context_get_property()
+  /// Sets the non-standard context properties. Can only be called on an initialized context.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The `value` has to be of type appropriate for given property. See `yaca_property_e`
+  /// - for details on corresponding types.
+  ///
+  /// **Parameters:**
+  /// - `ctx` (in,out): Previously initialized crypto context
+  /// - `property` (in): Property to be set
+  /// - `value` (in): Property value
+  /// - `value_len` (in): Length of the property value
+  ///
+  /// **Returns:**
+  /// - `YACA_ERROR_NONE` on success, negative on error
+  ///
+  /// **Return values:**
+  /// - `YACA_ERROR_NONE`: Successful
+  /// - `YACA_ERROR_INVALID_PARAMETER`: Required parameters have incorrect values (NULL, 0, invalid `ctx` or `property`)
+  /// - `YACA_ERROR_INTERNAL`: Internal error
+  ///
+  /// **See also:**
+  /// - `yaca_property_e`
+  /// - `yaca_context_get_property()`
   int yaca_context_set_property(
     yaca_context_h ctx,
     int property,
@@ -260,26 +336,36 @@ class Tizen80Yaca {
       _yaca_context_set_propertyPtr.asFunction<
           int Function(yaca_context_h, int, ffi.Pointer<ffi.Void>, int)>();
 
-  /// @brief Returns the non-standard context properties. Can only be called on an initialized context.
-  /// @since_tizen 3.0
-  /// @remarks The @a value should be freed using yaca_free().
-  /// @remarks The @a value has to be of type appropriate for given property. See #yaca_property_e
-  /// for details on corresponding types.
-  /// @remarks The @a value_len can be NULL if returned @a value is a single object (i.e. not an array/buffer).
-  /// @param[in] ctx Previously initialized crypto context
-  /// @param[in] property Property to be read
-  /// @param[out] value Copy of the property value
-  /// @param[out] value_len Length of the property value will be returned here
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL,
-  /// invalid @a ctx or @a property)
-  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see #yaca_property_e
-  /// @see yaca_context_set_property()
-  /// @see yaca_free()
+  /// Returns the non-standard context properties. Can only be called on an initialized context.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The `value` should be freed using yaca_free().
+  /// - The `value` has to be of type appropriate for given property. See `yaca_property_e`
+  /// - for details on corresponding types.
+  /// - The `value_len` can be NULL if returned `value` is a single object (i.e. not an array/buffer).
+  ///
+  /// **Parameters:**
+  /// - `ctx` (in): Previously initialized crypto context
+  /// - `property` (in): Property to be read
+  /// - `value` (out): Copy of the property value
+  /// - `value_len` (out): Length of the property value will be returned here
+  ///
+  /// **Returns:**
+  /// - `YACA_ERROR_NONE` on success, negative on error
+  ///
+  /// **Return values:**
+  /// - `YACA_ERROR_NONE`: Successful
+  /// - `YACA_ERROR_INVALID_PARAMETER`: Required parameters have incorrect values (NULL, invalid `ctx` or `property`)
+  /// - `YACA_ERROR_OUT_OF_MEMORY`: Out of memory error
+  /// - `YACA_ERROR_INTERNAL`: Internal error
+  ///
+  /// **See also:**
+  /// - `yaca_property_e`
+  /// - `yaca_context_set_property()`
+  /// - `yaca_free()`
   int yaca_context_get_property(
     yaca_context_h ctx,
     int property,
@@ -306,24 +392,32 @@ class Tizen80Yaca {
           int Function(yaca_context_h, int, ffi.Pointer<ffi.Pointer<ffi.Void>>,
               ffi.Pointer<ffi.Size>)>();
 
-  /// @brief Returns the minimum required size of the output buffer for a single crypto function call.
-  /// @since_tizen 3.0
-  /// @remarks This function should be used to learn the required size of the output buffer
-  /// for a single function call (eg. *_update or *_finalize). The actual output length
-  /// (number of bytes that has been used) will be returned by the function call itself.
-  /// @remarks In case the function call has no output (e.g. yaca_sign_update(),
-  /// yaca_digest_update()), there is no need to use this function.
-  /// @remarks In case the function call has no input (eg. *_finalize), the value of
-  /// @a input_len has to be set to 0.
-  /// @param[in] ctx Previously initialized crypto context
-  /// @param[in] input_len Length of the input data to be processed
-  /// @param[out] output_len Required length of the output
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL,
-  /// invalid @a ctx or too big @a input_len)
-  /// @retval #YACA_ERROR_INTERNAL Internal error
+  /// Returns the minimum required size of the output buffer for a single crypto function call.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - This function should be used to learn the required size of the output buffer
+  /// - for a single function call (eg. *_update or *_finalize). The actual output length
+  /// - (number of bytes that has been used) will be returned by the function call itself.
+  /// - In case the function call has no output (e.g. yaca_sign_update(),
+  /// - yaca_digest_update()), there is no need to use this function.
+  /// - In case the function call has no input (eg. *_finalize), the value of
+  /// - `input_len` has to be set to 0.
+  ///
+  /// **Parameters:**
+  /// - `ctx` (in): Previously initialized crypto context
+  /// - `input_len` (in): Length of the input data to be processed
+  /// - `output_len` (out): Required length of the output
+  ///
+  /// **Returns:**
+  /// - `YACA_ERROR_NONE` on success, negative on error
+  ///
+  /// **Return values:**
+  /// - `YACA_ERROR_NONE`: Successful
+  /// - `YACA_ERROR_INVALID_PARAMETER`: Required parameters have incorrect values (NULL, invalid `ctx` or too big `input_len`)
+  /// - `YACA_ERROR_INTERNAL`: Internal error
   int yaca_context_get_output_length(
     yaca_context_h ctx,
     int input_len,
@@ -344,11 +438,16 @@ class Tizen80Yaca {
       _yaca_context_get_output_lengthPtr.asFunction<
           int Function(yaca_context_h, int, ffi.Pointer<ffi.Size>)>();
 
-  /// @brief Destroys the crypto context. Must be called on all contexts that are no longer used.
-  /// Passing #YACA_CONTEXT_NULL is allowed.
-  /// @since_tizen 3.0
-  /// @param[in,out] ctx  Crypto context
-  /// @see #yaca_context_h
+  /// Destroys the crypto context. Must be called on all contexts that are no longer used. Passing `YACA_CONTEXT_NULL` is allowed.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `ctx` (in,out): Crypto context
+  ///
+  /// **See also:**
+  /// - `yaca_context_h`
   void yaca_context_destroy(
     yaca_context_h ctx,
   ) {
@@ -363,22 +462,32 @@ class Tizen80Yaca {
   late final _yaca_context_destroy =
       _yaca_context_destroyPtr.asFunction<void Function(yaca_context_h)>();
 
-  /// @brief Initializes a digest context.
-  /// @since_tizen 3.0
-  /// @remarks The @a ctx should be released using yaca_context_destroy().
-  /// @param[out] ctx Newly created context
-  /// @param[in] algo Digest algorithm that will be used
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL,
-  /// invalid @a algo)
-  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see #yaca_digest_algorithm_e
-  /// @see yaca_digest_update()
-  /// @see yaca_digest_finalize()
-  /// @see yaca_context_destroy()
+  /// Initializes a digest context.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The `ctx` should be released using yaca_context_destroy().
+  ///
+  /// **Parameters:**
+  /// - `ctx` (out): Newly created context
+  /// - `algo` (in): Digest algorithm that will be used
+  ///
+  /// **Returns:**
+  /// - `YACA_ERROR_NONE` on success, negative on error
+  ///
+  /// **Return values:**
+  /// - `YACA_ERROR_NONE`: Successful
+  /// - `YACA_ERROR_INVALID_PARAMETER`: Required parameters have incorrect values (NULL, invalid `algo`)
+  /// - `YACA_ERROR_OUT_OF_MEMORY`: Out of memory error
+  /// - `YACA_ERROR_INTERNAL`: Internal error
+  ///
+  /// **See also:**
+  /// - `yaca_digest_algorithm_e`
+  /// - `yaca_digest_update()`
+  /// - `yaca_digest_finalize()`
+  /// - `yaca_context_destroy()`
   int yaca_digest_initialize(
     ffi.Pointer<yaca_context_h> ctx,
     int algo,
@@ -396,19 +505,27 @@ class Tizen80Yaca {
   late final _yaca_digest_initialize = _yaca_digest_initializePtr
       .asFunction<int Function(ffi.Pointer<yaca_context_h>, int)>();
 
-  /// @brief Feeds the message into the message digest algorithm.
-  /// @since_tizen 3.0
-  /// @param[in,out] ctx Context created by yaca_digest_initialize()
-  /// @param[in] message Message from which the digest is to be calculated
-  /// @param[in] message_len Length of the message
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0,
-  /// invalid @a ctx)
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see yaca_digest_initialize()
-  /// @see yaca_digest_finalize()
+  /// Feeds the message into the message digest algorithm.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `ctx` (in,out): Context created by yaca_digest_initialize()
+  /// - `message` (in): Message from which the digest is to be calculated
+  /// - `message_len` (in): Length of the message
+  ///
+  /// **Returns:**
+  /// - `YACA_ERROR_NONE` on success, negative on error
+  ///
+  /// **Return values:**
+  /// - `YACA_ERROR_NONE`: Successful
+  /// - `YACA_ERROR_INVALID_PARAMETER`: Required parameters have incorrect values (NULL, 0, invalid `ctx`)
+  /// - `YACA_ERROR_INTERNAL`: Internal error
+  ///
+  /// **See also:**
+  /// - `yaca_digest_initialize()`
+  /// - `yaca_digest_finalize()`
   int yaca_digest_update(
     yaca_context_h ctx,
     ffi.Pointer<ffi.Char> message,
@@ -428,23 +545,31 @@ class Tizen80Yaca {
   late final _yaca_digest_update = _yaca_digest_updatePtr
       .asFunction<int Function(yaca_context_h, ffi.Pointer<ffi.Char>, int)>();
 
-  /// @brief Calculates the final digest.
-  /// @since_tizen 3.0
-  /// @remarks Skipping yaca_digest_update() and calling only yaca_digest_finalize() will produce an empty message digest.
-  /// @param[in,out] ctx A valid digest context
-  /// @param[out] digest Buffer for the message digest
-  /// (must be allocated by client, see yaca_context_get_output_length())
-  /// @param[out] digest_len Length of the digest,
-  /// actual number of bytes written will be returned here
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL,
-  /// invalid @a ctx)
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see yaca_digest_initialize()
-  /// @see yaca_digest_update()
-  /// @see yaca_context_get_output_length()
+  /// Calculates the final digest.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - Skipping yaca_digest_update() and calling only yaca_digest_finalize() will produce an empty message digest.
+  ///
+  /// **Parameters:**
+  /// - `ctx` (in,out): A valid digest context
+  /// - `digest` (out): Buffer for the message digest (must be allocated by client, see yaca_context_get_output_length())
+  /// - `digest_len` (out): Length of the digest, actual number of bytes written will be returned here
+  ///
+  /// **Returns:**
+  /// - `YACA_ERROR_NONE` on success, negative on error
+  ///
+  /// **Return values:**
+  /// - `YACA_ERROR_NONE`: Successful
+  /// - `YACA_ERROR_INVALID_PARAMETER`: Required parameters have incorrect values (NULL, invalid `ctx`)
+  /// - `YACA_ERROR_INTERNAL`: Internal error
+  ///
+  /// **See also:**
+  /// - `yaca_digest_initialize()`
+  /// - `yaca_digest_update()`
+  /// - `yaca_context_get_output_length()`
   int yaca_digest_finalize(
     yaca_context_h ctx,
     ffi.Pointer<ffi.Char> digest,
@@ -465,21 +590,28 @@ class Tizen80Yaca {
       int Function(
           yaca_context_h, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Size>)>();
 
-  /// @brief Returns the recommended/default length of the Initialization Vector for a given encryption configuration.
-  /// @since_tizen 3.0
-  /// @remarks If returned @a iv_bit_len equals 0 that means that for this
-  /// specific algorithm and its parameters Initialization Vector is not used.
-  /// @param[in] algo Encryption algorithm
-  /// @param[in] bcm Chain mode
-  /// @param[in] key_bit_len Key length in bits
-  /// @param[out] iv_bit_len Recommended Initialization Vector length in bits
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL,
-  /// invalid @a algo, @a bcm or @a key_bit_len not
-  /// divisible by 8)
-  /// @retval #YACA_ERROR_INTERNAL Internal error
+  /// Returns the recommended/default length of the Initialization Vector for a given encryption configuration.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - If returned `iv_bit_len` equals 0 that means that for this
+  /// - specific algorithm and its parameters Initialization Vector is not used.
+  ///
+  /// **Parameters:**
+  /// - `algo` (in): Encryption algorithm
+  /// - `bcm` (in): Chain mode
+  /// - `key_bit_len` (in): Key length in bits
+  /// - `iv_bit_len` (out): Recommended Initialization Vector length in bits
+  ///
+  /// **Returns:**
+  /// - `YACA_ERROR_NONE` on success, negative on error
+  ///
+  /// **Return values:**
+  /// - `YACA_ERROR_NONE`: Successful
+  /// - `YACA_ERROR_INVALID_PARAMETER`: Required parameters have incorrect values (NULL, invalid `algo`, `bcm` or `key_bit_len` not divisible by 8)
+  /// - `YACA_ERROR_INTERNAL`: Internal error
   int yaca_encrypt_get_iv_bit_length(
     int algo,
     int bcm,
@@ -502,26 +634,36 @@ class Tizen80Yaca {
       _yaca_encrypt_get_iv_bit_lengthPtr
           .asFunction<int Function(int, int, int, ffi.Pointer<ffi.Size>)>();
 
-  /// @brief Initializes an encryption context.
-  /// @since_tizen 3.0
-  /// @remarks The @a ctx should be released using yaca_context_destroy().
-  /// @param[out] ctx Newly created context
-  /// @param[in] algo Encryption algorithm that will be used
-  /// @param[in] bcm Chaining mode that will be used
-  /// @param[in] sym_key Symmetric key that will be used
-  /// @param[in] iv Initialization Vector that will be used
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL,
-  /// invalid @a algo, @a bcm, @a sym_key or @a iv)
-  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see #yaca_encrypt_algorithm_e
-  /// @see #yaca_block_cipher_mode_e
-  /// @see yaca_encrypt_update()
-  /// @see yaca_encrypt_finalize()
-  /// @see yaca_context_destroy()
+  /// Initializes an encryption context.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The `ctx` should be released using yaca_context_destroy().
+  ///
+  /// **Parameters:**
+  /// - `ctx` (out): Newly created context
+  /// - `algo` (in): Encryption algorithm that will be used
+  /// - `bcm` (in): Chaining mode that will be used
+  /// - `sym_key` (in): Symmetric key that will be used
+  /// - `iv` (in): Initialization Vector that will be used
+  ///
+  /// **Returns:**
+  /// - `YACA_ERROR_NONE` on success, negative on error
+  ///
+  /// **Return values:**
+  /// - `YACA_ERROR_NONE`: Successful
+  /// - `YACA_ERROR_INVALID_PARAMETER`: Required parameters have incorrect values (NULL, invalid `algo`, `bcm`, `sym_key` or `iv`)
+  /// - `YACA_ERROR_OUT_OF_MEMORY`: Out of memory error
+  /// - `YACA_ERROR_INTERNAL`: Internal error
+  ///
+  /// **See also:**
+  /// - `yaca_encrypt_algorithm_e`
+  /// - `yaca_block_cipher_mode_e`
+  /// - `yaca_encrypt_update()`
+  /// - `yaca_encrypt_finalize()`
+  /// - `yaca_context_destroy()`
   int yaca_encrypt_initialize(
     ffi.Pointer<yaca_context_h> ctx,
     int algo,
@@ -546,24 +688,30 @@ class Tizen80Yaca {
       int Function(
           ffi.Pointer<yaca_context_h>, int, int, yaca_key_h, yaca_key_h)>();
 
-  /// @brief Encrypts chunk of the data.
-  /// @since_tizen 3.0
-  /// @param[in,out] ctx Context created by yaca_encrypt_initialize()
-  /// @param[in] plaintext Plaintext to be encrypted
-  /// @param[in] plaintext_len Length of the plaintext
-  /// @param[out] ciphertext Buffer for the encrypted data
-  /// (must be allocated by client, see yaca_context_get_output_length())
-  /// @param[out] ciphertext_len Length of the encrypted data,
-  /// actual number of bytes written will be returned here
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0,
-  /// invalid @a ctx)
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see yaca_encrypt_initialize()
-  /// @see yaca_encrypt_finalize()
-  /// @see yaca_context_get_output_length()
+  /// Encrypts chunk of the data.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `ctx` (in,out): Context created by yaca_encrypt_initialize()
+  /// - `plaintext` (in): Plaintext to be encrypted
+  /// - `plaintext_len` (in): Length of the plaintext
+  /// - `ciphertext` (out): Buffer for the encrypted data (must be allocated by client, see yaca_context_get_output_length())
+  /// - `ciphertext_len` (out): Length of the encrypted data, actual number of bytes written will be returned here
+  ///
+  /// **Returns:**
+  /// - `YACA_ERROR_NONE` on success, negative on error
+  ///
+  /// **Return values:**
+  /// - `YACA_ERROR_NONE`: Successful
+  /// - `YACA_ERROR_INVALID_PARAMETER`: Required parameters have incorrect values (NULL, 0, invalid `ctx`)
+  /// - `YACA_ERROR_INTERNAL`: Internal error
+  ///
+  /// **See also:**
+  /// - `yaca_encrypt_initialize()`
+  /// - `yaca_encrypt_finalize()`
+  /// - `yaca_context_get_output_length()`
   int yaca_encrypt_update(
     yaca_context_h ctx,
     ffi.Pointer<ffi.Char> plaintext,
@@ -592,23 +740,31 @@ class Tizen80Yaca {
       int Function(yaca_context_h, ffi.Pointer<ffi.Char>, int,
           ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Size>)>();
 
-  /// @brief Encrypts the final chunk of the data.
-  /// @since_tizen 3.0
-  /// @remarks Skipping yaca_encrypt_update() and calling only yaca_encrypt_finalize() will produce an encryption of an empty message.
-  /// @param[in,out] ctx A valid encrypt context
-  /// @param[out] ciphertext Final piece of the encrypted data
-  /// (must be allocated by client, see yaca_context_get_output_length())
-  /// @param[out] ciphertext_len Length of the final piece,
-  /// actual number of bytes written will be returned here
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL,
-  /// invalid @a ctx)
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see yaca_encrypt_initialize()
-  /// @see yaca_encrypt_update()
-  /// @see yaca_context_get_output_length()
+  /// Encrypts the final chunk of the data.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - Skipping yaca_encrypt_update() and calling only yaca_encrypt_finalize() will produce an encryption of an empty message.
+  ///
+  /// **Parameters:**
+  /// - `ctx` (in,out): A valid encrypt context
+  /// - `ciphertext` (out): Final piece of the encrypted data (must be allocated by client, see yaca_context_get_output_length())
+  /// - `ciphertext_len` (out): Length of the final piece, actual number of bytes written will be returned here
+  ///
+  /// **Returns:**
+  /// - `YACA_ERROR_NONE` on success, negative on error
+  ///
+  /// **Return values:**
+  /// - `YACA_ERROR_NONE`: Successful
+  /// - `YACA_ERROR_INVALID_PARAMETER`: Required parameters have incorrect values (NULL, invalid `ctx`)
+  /// - `YACA_ERROR_INTERNAL`: Internal error
+  ///
+  /// **See also:**
+  /// - `yaca_encrypt_initialize()`
+  /// - `yaca_encrypt_update()`
+  /// - `yaca_context_get_output_length()`
   int yaca_encrypt_finalize(
     yaca_context_h ctx,
     ffi.Pointer<ffi.Char> ciphertext,
@@ -629,26 +785,36 @@ class Tizen80Yaca {
       int Function(
           yaca_context_h, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Size>)>();
 
-  /// @brief Initializes an decryption context.
-  /// @since_tizen 3.0
-  /// @remarks The @a ctx should be released using yaca_context_destroy().
-  /// @param[out] ctx Newly created context
-  /// @param[in] algo Encryption algorithm that was used to encrypt the data
-  /// @param[in] bcm Chaining mode that was used to encrypt the data
-  /// @param[in] sym_key Symmetric key that was used to encrypt the data
-  /// @param[in] iv Initialization Vector that was used to encrypt the data
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL,
-  /// invalid @a algo, @a bcm, @a sym_key or @a iv)
-  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see #yaca_encrypt_algorithm_e
-  /// @see #yaca_block_cipher_mode_e
-  /// @see yaca_decrypt_update()
-  /// @see yaca_decrypt_finalize()
-  /// @see yaca_context_destroy()
+  /// Initializes an decryption context.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The `ctx` should be released using yaca_context_destroy().
+  ///
+  /// **Parameters:**
+  /// - `ctx` (out): Newly created context
+  /// - `algo` (in): Encryption algorithm that was used to encrypt the data
+  /// - `bcm` (in): Chaining mode that was used to encrypt the data
+  /// - `sym_key` (in): Symmetric key that was used to encrypt the data
+  /// - `iv` (in): Initialization Vector that was used to encrypt the data
+  ///
+  /// **Returns:**
+  /// - `YACA_ERROR_NONE` on success, negative on error
+  ///
+  /// **Return values:**
+  /// - `YACA_ERROR_NONE`: Successful
+  /// - `YACA_ERROR_INVALID_PARAMETER`: Required parameters have incorrect values (NULL, invalid `algo`, `bcm`, `sym_key` or `iv`)
+  /// - `YACA_ERROR_OUT_OF_MEMORY`: Out of memory error
+  /// - `YACA_ERROR_INTERNAL`: Internal error
+  ///
+  /// **See also:**
+  /// - `yaca_encrypt_algorithm_e`
+  /// - `yaca_block_cipher_mode_e`
+  /// - `yaca_decrypt_update()`
+  /// - `yaca_decrypt_finalize()`
+  /// - `yaca_context_destroy()`
   int yaca_decrypt_initialize(
     ffi.Pointer<yaca_context_h> ctx,
     int algo,
@@ -673,25 +839,30 @@ class Tizen80Yaca {
       int Function(
           ffi.Pointer<yaca_context_h>, int, int, yaca_key_h, yaca_key_h)>();
 
-  /// @brief Decrypts chunk of the data.
-  /// @since_tizen 3.0
-  /// @param[in,out] ctx Context created by yaca_decrypt_initialize()
-  /// @param[in] ciphertext Ciphertext to be decrypted
-  /// @param[in] ciphertext_len Length of the ciphertext
-  /// @param[out] plaintext Buffer for the decrypted data
-  /// (must be allocated by client, see yaca_context_get_output_length())
-  /// @param[out] plaintext_len Length of the decrypted data,
-  /// actual number of bytes written will be returned here
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0,
-  /// invalid @a ctx), wrong #YACA_PROPERTY_CCM_AAD or
-  /// wrong #YACA_PROPERTY_CCM_TAG was used
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see yaca_decrypt_initialize()
-  /// @see yaca_decrypt_finalize()
-  /// @see yaca_context_get_output_length()
+  /// Decrypts chunk of the data.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `ctx` (in,out): Context created by yaca_decrypt_initialize()
+  /// - `ciphertext` (in): Ciphertext to be decrypted
+  /// - `ciphertext_len` (in): Length of the ciphertext
+  /// - `plaintext` (out): Buffer for the decrypted data (must be allocated by client, see yaca_context_get_output_length())
+  /// - `plaintext_len` (out): Length of the decrypted data, actual number of bytes written will be returned here
+  ///
+  /// **Returns:**
+  /// - `YACA_ERROR_NONE` on success, negative on error
+  ///
+  /// **Return values:**
+  /// - `YACA_ERROR_NONE`: Successful
+  /// - `YACA_ERROR_INVALID_PARAMETER`: Required parameters have incorrect values (NULL, 0, invalid `ctx`), wrong `YACA_PROPERTY_CCM_AAD` or wrong `YACA_PROPERTY_CCM_TAG` was used
+  /// - `YACA_ERROR_INTERNAL`: Internal error
+  ///
+  /// **See also:**
+  /// - `yaca_decrypt_initialize()`
+  /// - `yaca_decrypt_finalize()`
+  /// - `yaca_context_get_output_length()`
   int yaca_decrypt_update(
     yaca_context_h ctx,
     ffi.Pointer<ffi.Char> ciphertext,
@@ -720,24 +891,31 @@ class Tizen80Yaca {
       int Function(yaca_context_h, ffi.Pointer<ffi.Char>, int,
           ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Size>)>();
 
-  /// @brief Decrypts the final chunk of the data.
-  /// @since_tizen 3.0
-  /// @remarks Skipping yaca_decrypt_update() and calling only yaca_decrypt_finalize() will produce a decryption of an empty ciphertext.
-  /// @param[in,out] ctx A valid decrypt context
-  /// @param[out] plaintext Final piece of the decrypted data
-  /// (must be allocated by client, see yaca_context_get_output_length())
-  /// @param[out] plaintext_len Length of the final piece,
-  /// actual number of bytes written will be returned here
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL,
-  /// invalid @a ctx), wrong #YACA_PROPERTY_GCM_AAD or
-  /// wrong #YACA_PROPERTY_GCM_TAG was used
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see yaca_decrypt_initialize()
-  /// @see yaca_decrypt_update()
-  /// @see yaca_context_get_output_length()
+  /// Decrypts the final chunk of the data.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - Skipping yaca_decrypt_update() and calling only yaca_decrypt_finalize() will produce a decryption of an empty ciphertext.
+  ///
+  /// **Parameters:**
+  /// - `ctx` (in,out): A valid decrypt context
+  /// - `plaintext` (out): Final piece of the decrypted data (must be allocated by client, see yaca_context_get_output_length())
+  /// - `plaintext_len` (out): Length of the final piece, actual number of bytes written will be returned here
+  ///
+  /// **Returns:**
+  /// - `YACA_ERROR_NONE` on success, negative on error
+  ///
+  /// **Return values:**
+  /// - `YACA_ERROR_NONE`: Successful
+  /// - `YACA_ERROR_INVALID_PARAMETER`: Required parameters have incorrect values (NULL, invalid `ctx`), wrong `YACA_PROPERTY_GCM_AAD` or wrong `YACA_PROPERTY_GCM_TAG` was used
+  /// - `YACA_ERROR_INTERNAL`: Internal error
+  ///
+  /// **See also:**
+  /// - `yaca_decrypt_initialize()`
+  /// - `yaca_decrypt_update()`
+  /// - `yaca_context_get_output_length()`
   int yaca_decrypt_finalize(
     yaca_context_h ctx,
     ffi.Pointer<ffi.Char> plaintext,
@@ -758,15 +936,24 @@ class Tizen80Yaca {
       int Function(
           yaca_context_h, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Size>)>();
 
-  /// @brief Gets key's type.
-  /// @since_tizen 3.0
-  /// @param[in] key Key which type we return
-  /// @param[out] key_type Key type
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Either of the params is NULL
-  /// @see #yaca_key_type_e
+  /// Gets key's type.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `key` (in): Key which type we return
+  /// - `key_type` (out): Key type
+  ///
+  /// **Returns:**
+  /// - `YACA_ERROR_NONE` on success, negative on error
+  ///
+  /// **Return values:**
+  /// - `YACA_ERROR_NONE`: Successful
+  /// - `YACA_ERROR_INVALID_PARAMETER`: Either of the params is NULL
+  ///
+  /// **See also:**
+  /// - `yaca_key_type_e`
   int yaca_key_get_type(
     yaca_key_h key,
     ffi.Pointer<ffi.Int32> key_type,
@@ -784,24 +971,35 @@ class Tizen80Yaca {
   late final _yaca_key_get_type = _yaca_key_get_typePtr
       .asFunction<int Function(yaca_key_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets key's length (in bits).
-  /// @since_tizen 3.0
-  /// @remarks The @a key can be any symmetric (including an Initialization Vector) or
-  /// asymmetric key (including key generation parameters).
-  /// @remarks For Diffie-Helmann @a key_bit_len returns prime length in bits. Values
-  /// used to generate the key/parameters in yaca_key_generate() are not
-  /// restored. Neither generator number nor values from #yaca_key_bit_length_dh_rfc_e.
-  /// @remarks For Elliptic Curves @a key_bit_len returns values from #yaca_key_bit_length_ec_e.
-  /// @param[in] key Key which length we return
-  /// @param[out] key_bit_len Key length in bits
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Either of the params is NULL
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see #yaca_key_bit_length_e
-  /// @see #yaca_key_bit_length_dh_rfc_e
-  /// @see #yaca_key_bit_length_ec_e
+  /// Gets key's length (in bits).
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The `key` can be any symmetric (including an Initialization Vector) or
+  /// - asymmetric key (including key generation parameters).
+  /// - For Diffie-Helmann `key_bit_len` returns prime length in bits. Values
+  /// - used to generate the key/parameters in yaca_key_generate() are not
+  /// - restored. Neither generator number nor values from `yaca_key_bit_length_dh_rfc_e`.
+  /// - For Elliptic Curves `key_bit_len` returns values from `yaca_key_bit_length_ec_e`.
+  ///
+  /// **Parameters:**
+  /// - `key` (in): Key which length we return
+  /// - `key_bit_len` (out): Key length in bits
+  ///
+  /// **Returns:**
+  /// - `YACA_ERROR_NONE` on success, negative on error
+  ///
+  /// **Return values:**
+  /// - `YACA_ERROR_NONE`: Successful
+  /// - `YACA_ERROR_INVALID_PARAMETER`: Either of the params is NULL
+  /// - `YACA_ERROR_INTERNAL`: Internal error
+  ///
+  /// **See also:**
+  /// - `yaca_key_bit_length_e`
+  /// - `yaca_key_bit_length_dh_rfc_e`
+  /// - `yaca_key_bit_length_ec_e`
   int yaca_key_get_bit_length(
     yaca_key_h key,
     ffi.Pointer<ffi.Size> key_bit_len,
@@ -819,44 +1017,53 @@ class Tizen80Yaca {
   late final _yaca_key_get_bit_length = _yaca_key_get_bit_lengthPtr
       .asFunction<int Function(yaca_key_h, ffi.Pointer<ffi.Size>)>();
 
-  /// @brief Imports a key or key generation parameters.
-  /// @since_tizen 3.0
-  /// @remarks Everywhere where either a key (of any type) or an asymmetric key is referred
-  /// in the documentation of this function key generator parameters are also included.
-  /// @remarks This function imports a key trying to match it to the @a key_type specified.
-  /// It should autodetect both the key format and the file format.
-  /// @remarks For symmetric, Initialization Vector and DES keys RAW binary format and BASE64 encoded
-  /// binary format are supported.
-  /// For asymmetric keys PEM and DER file formats are supported.
-  /// @remarks Asymmetric keys can be in their default ASN1 structure formats (like
-  /// PKCS#1, SSleay or PKCS#3). Private asymmetric keys can also be in
-  /// PKCS#8 format. Additionally it is possible to import public RSA/DSA/EC
-  /// keys from X509 certificate.
-  /// @remarks If the key is encrypted the algorithm will be autodetected and password
-  /// used. If it's not known if the key is encrypted one should pass NULL as
-  /// password and check for the #YACA_ERROR_INVALID_PASSWORD return code.
-  /// @remarks If the imported key will be detected as a format that does not support
-  /// encryption and password was passed #YACA_ERROR_INVALID_PARAMETER will
-  /// be returned. For a list of keys and formats that do support encryption
-  /// see yaca_key_export() documentation.
-  /// @remarks The @a key should be released using yaca_key_destroy().
-  /// @param[in] key_type Type of the key
-  /// @param[in] password Null-terminated password for the key (can be NULL)
-  /// @param[in] data Blob containing the key
-  /// @param[in] data_len Size of the blob
-  /// @param[out] key Returned key
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0,
-  /// invalid @a key_type or @a data_len too big)
-  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @retval #YACA_ERROR_INVALID_PASSWORD Invalid @a password given or @a password was required
-  /// and none was given
-  /// @see #yaca_key_type_e
-  /// @see yaca_key_export()
-  /// @see yaca_key_destroy()
+  /// Imports a key or key generation parameters.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - Everywhere where either a key (of any type) or an asymmetric key is referred
+  /// - in the documentation of this function key generator parameters are also included.
+  /// - This function imports a key trying to match it to the `key_type` specified.
+  /// - It should autodetect both the key format and the file format.
+  /// - For symmetric, Initialization Vector and DES keys RAW binary format and BASE64 encoded
+  /// - binary format are supported.
+  /// - For asymmetric keys PEM and DER file formats are supported.
+  /// - Asymmetric keys can be in their default ASN1 structure formats (like
+  /// - PKCS#1, SSleay or PKCS#3). Private asymmetric keys can also be in
+  /// - PKCS#8 format. Additionally it is possible to import public RSA/DSA/EC
+  /// - keys from X509 certificate.
+  /// - If the key is encrypted the algorithm will be autodetected and password
+  /// - used. If it's not known if the key is encrypted one should pass NULL as
+  /// - password and check for the `YACA_ERROR_INVALID_PASSWORD` return code.
+  /// - If the imported key will be detected as a format that does not support
+  /// - encryption and password was passed `YACA_ERROR_INVALID_PARAMETER` will
+  /// - be returned. For a list of keys and formats that do support encryption
+  /// - see yaca_key_export() documentation.
+  /// - The `key` should be released using yaca_key_destroy().
+  ///
+  /// **Parameters:**
+  /// - `key_type` (in): Type of the key
+  /// - `password` (in): Null-terminated password for the key (can be NULL)
+  /// - `data` (in): Blob containing the key
+  /// - `data_len` (in): Size of the blob
+  /// - `key` (out): Returned key
+  ///
+  /// **Returns:**
+  /// - `YACA_ERROR_NONE` on success, negative on error
+  ///
+  /// **Return values:**
+  /// - `YACA_ERROR_NONE`: Successful
+  /// - `YACA_ERROR_INVALID_PARAMETER`: Required parameters have incorrect values (NULL, 0, invalid `key_type` or `data_len` too big)
+  /// - `YACA_ERROR_OUT_OF_MEMORY`: Out of memory error
+  /// - `YACA_ERROR_INTERNAL`: Internal error
+  /// - `YACA_ERROR_INVALID_PASSWORD`: Invalid `password` given or `password` was required and none was given
+  ///
+  /// **See also:**
+  /// - `yaca_key_type_e`
+  /// - `yaca_key_export()`
+  /// - `yaca_key_destroy()`
   int yaca_key_import(
     int key_type,
     ffi.Pointer<ffi.Char> password,
@@ -885,51 +1092,60 @@ class Tizen80Yaca {
       int Function(int, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>, int,
           ffi.Pointer<yaca_key_h>)>();
 
-  /// @brief Exports a key or key generation parameters to arbitrary format.
-  /// @since_tizen 3.0
-  /// @remarks Everywhere where either a key (of any type) or an asymmetric key is referred
-  /// in the documentation of this function key generator parameters are also included.
-  /// @remarks This function exports the key to an arbitrary key format and key file format.
-  /// @remarks For key formats two values are allowed:
-  /// - #YACA_KEY_FORMAT_DEFAULT: this is the only option possible in case of symmetric keys
-  /// (or Initialization Vector), for asymmetric keys it will
-  /// export to their default ASN1 structure format
-  /// (e.g. PKCS#1, SSLeay, PKCS#3).
-  /// - #YACA_KEY_FORMAT_PKCS8: this will only work for private asymmetric keys.
-  /// @remarks The following file formats are supported:
-  /// - #YACA_KEY_FILE_FORMAT_RAW: used only for symmetric, raw binary format
-  /// - #YACA_KEY_FILE_FORMAT_BASE64: used only for symmetric, BASE64 encoded binary form
-  /// - #YACA_KEY_FILE_FORMAT_PEM: used only for asymmetric, PEM file format
-  /// - #YACA_KEY_FILE_FORMAT_DER: used only for asymmetric, DER file format
-  /// @remarks Encryption is supported and optional for RSA/DSA private keys in the
-  /// #YACA_KEY_FORMAT_DEFAULT with #YACA_KEY_FILE_FORMAT_PEM format. If no password is
-  /// provided the exported key will be unencrypted. The encryption algorithm used
-  /// in this case is AES-256-CBC.
-  /// @remarks Encryption is obligatory for #YACA_KEY_FORMAT_PKCS8 format (for both, PEM and DER
-  /// file formats). If no password is provided the #YACA_ERROR_INVALID_PARAMETER will
-  /// be returned. The encryption algorithm used in this case is AES-256-CBC. The key is
-  /// generated from password using PBKDF2 with HMAC-SHA1 function and 2048 iterations.
-  /// @remarks Encryption is not supported for the symmetric, public keys and key generation
-  /// parameters in all their supported formats. If a password is provided in such
-  /// case the #YACA_ERROR_INVALID_PARAMETER will be returned.
-  /// @param[in] key Key to be exported
-  /// @param[in] key_fmt Format of the key
-  /// @param[in] key_file_fmt Format of the key file
-  /// @param[in] password Password used for the encryption (can be NULL)
-  /// @param[out] data Data, allocated by the library, containing exported key
-  /// (must be freed with yaca_free())
-  /// @param[out] data_len Size of the output data
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0,
-  /// invalid @a key_fmt, @a key_file_fmt or @a data_len too big)
-  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see #yaca_key_format_e
-  /// @see #yaca_key_file_format_e
-  /// @see yaca_key_import()
-  /// @see yaca_key_destroy()
+  /// Exports a key or key generation parameters to arbitrary format.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - Everywhere where either a key (of any type) or an asymmetric key is referred
+  /// - in the documentation of this function key generator parameters are also included.
+  /// - This function exports the key to an arbitrary key format and key file format.
+  /// - For key formats two values are allowed:
+  /// - - `YACA_KEY_FORMAT_DEFAULT`: this is the only option possible in case of symmetric keys
+  /// - (or Initialization Vector), for asymmetric keys it will
+  /// - export to their default ASN1 structure format
+  /// - (e.g. PKCS#1, SSLeay, PKCS#3).
+  /// - - `YACA_KEY_FORMAT_PKCS8`: this will only work for private asymmetric keys.
+  /// - The following file formats are supported:
+  /// - - `YACA_KEY_FILE_FORMAT_RAW`: used only for symmetric, raw binary format
+  /// - - `YACA_KEY_FILE_FORMAT_BASE64`: used only for symmetric, BASE64 encoded binary form
+  /// - - `YACA_KEY_FILE_FORMAT_PEM`: used only for asymmetric, PEM file format
+  /// - - `YACA_KEY_FILE_FORMAT_DER`: used only for asymmetric, DER file format
+  /// - Encryption is supported and optional for RSA/DSA private keys in the
+  /// - `YACA_KEY_FORMAT_DEFAULT` with `YACA_KEY_FILE_FORMAT_PEM` format. If no password is
+  /// - provided the exported key will be unencrypted. The encryption algorithm used
+  /// - in this case is AES-256-CBC.
+  /// - Encryption is obligatory for `YACA_KEY_FORMAT_PKCS8` format (for both, PEM and DER
+  /// - file formats). If no password is provided the `YACA_ERROR_INVALID_PARAMETER` will
+  /// - be returned. The encryption algorithm used in this case is AES-256-CBC. The key is
+  /// - generated from password using PBKDF2 with HMAC-SHA1 function and 2048 iterations.
+  /// - Encryption is not supported for the symmetric, public keys and key generation
+  /// - parameters in all their supported formats. If a password is provided in such
+  /// - case the `YACA_ERROR_INVALID_PARAMETER` will be returned.
+  ///
+  /// **Parameters:**
+  /// - `key` (in): Key to be exported
+  /// - `key_fmt` (in): Format of the key
+  /// - `key_file_fmt` (in): Format of the key file
+  /// - `password` (in): Password used for the encryption (can be NULL)
+  /// - `data` (out): Data, allocated by the library, containing exported key (must be freed with yaca_free())
+  /// - `data_len` (out): Size of the output data
+  ///
+  /// **Returns:**
+  /// - `YACA_ERROR_NONE` on success, negative on error
+  ///
+  /// **Return values:**
+  /// - `YACA_ERROR_NONE`: Successful
+  /// - `YACA_ERROR_INVALID_PARAMETER`: Required parameters have incorrect values (NULL, 0, invalid `key_fmt`, `key_file_fmt` or `data_len` too big)
+  /// - `YACA_ERROR_OUT_OF_MEMORY`: Out of memory error
+  /// - `YACA_ERROR_INTERNAL`: Internal error
+  ///
+  /// **See also:**
+  /// - `yaca_key_format_e`
+  /// - `yaca_key_file_format_e`
+  /// - `yaca_key_import()`
+  /// - `yaca_key_destroy()`
   int yaca_key_export(
     yaca_key_h key,
     int key_fmt,
@@ -961,37 +1177,47 @@ class Tizen80Yaca {
       int Function(yaca_key_h, int, int, ffi.Pointer<ffi.Char>,
           ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Pointer<ffi.Size>)>();
 
-  /// @brief Generates a secure key or key generation parameters (or an Initialization Vector).
-  /// @since_tizen 3.0
-  /// @remarks This function is used to generate symmetric keys, private asymmetric keys
-  /// or key generation parameters for key types that support them (DSA, DH and EC).
-  /// @remarks Supported key lengths:
-  /// - SYMMETRIC/IV: >= 8bits
-  /// - DES: 64, 128 or 192bits
-  /// - RSA: length >= 512bits
-  /// - DSA: length >= 1024bits, multiple of 64
-  /// - DH: a value taken from #yaca_key_bit_length_dh_rfc_e or
-  /// (YACA_KEY_LENGTH_DH_GENERATOR_* | prime_length_in_bits),
-  /// where prime_length_in_bits has to be >= 512
-  /// - EC: a value taken from #yaca_key_bit_length_ec_e
-  /// @remarks The @a key should be released using yaca_key_destroy().
-  /// @param[in] key_type Type of the key to be generated
-  /// @param[in] key_bit_len Length of the key (in bits) to be generated
-  /// @param[out] key Newly generated key
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER @a key is NULL, incorrect @a key_type or
-  /// @a key_bit_len is not divisible by 8
-  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see #yaca_key_type_e
-  /// @see #yaca_key_bit_length_e
-  /// @see #yaca_key_bit_length_dh_rfc_e
-  /// @see #YACA_KEY_LENGTH_DH_GENERATOR_2
-  /// @see #YACA_KEY_LENGTH_DH_GENERATOR_5
-  /// @see #yaca_key_bit_length_ec_e
-  /// @see yaca_key_destroy()
+  /// Generates a secure key or key generation parameters (or an Initialization Vector).
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - This function is used to generate symmetric keys, private asymmetric keys
+  /// - or key generation parameters for key types that support them (DSA, DH and EC).
+  /// - Supported key lengths:
+  /// - - SYMMETRIC/IV: >= 8bits
+  /// - - DES: 64, 128 or 192bits
+  /// - - RSA: length >= 512bits
+  /// - - DSA: length >= 1024bits, multiple of 64
+  /// - - DH: a value taken from `yaca_key_bit_length_dh_rfc_e` or
+  /// - (YACA_KEY_LENGTH_DH_GENERATOR_* | prime_length_in_bits),
+  /// - where prime_length_in_bits has to be >= 512
+  /// - - EC: a value taken from `yaca_key_bit_length_ec_e`
+  /// - The `key` should be released using yaca_key_destroy().
+  ///
+  /// **Parameters:**
+  /// - `key_type` (in): Type of the key to be generated
+  /// - `key_bit_len` (in): Length of the key (in bits) to be generated
+  /// - `key` (out): Newly generated key
+  ///
+  /// **Returns:**
+  /// - `YACA_ERROR_NONE` on success, negative on error
+  ///
+  /// **Return values:**
+  /// - `YACA_ERROR_NONE`: Successful
+  /// - `YACA_ERROR_INVALID_PARAMETER`: `key` is NULL, incorrect `key_type` or `key_bit_len` is not divisible by 8
+  /// - `YACA_ERROR_OUT_OF_MEMORY`: Out of memory error
+  /// - `YACA_ERROR_INTERNAL`: Internal error
+  ///
+  /// **See also:**
+  /// - `yaca_key_type_e`
+  /// - `yaca_key_bit_length_e`
+  /// - `yaca_key_bit_length_dh_rfc_e`
+  /// - `YACA_KEY_LENGTH_DH_GENERATOR_2`
+  /// - `YACA_KEY_LENGTH_DH_GENERATOR_5`
+  /// - `yaca_key_bit_length_ec_e`
+  /// - `yaca_key_destroy()`
   int yaca_key_generate(
     int key_type,
     int key_bit_len,
@@ -1011,24 +1237,35 @@ class Tizen80Yaca {
   late final _yaca_key_generate = _yaca_key_generatePtr
       .asFunction<int Function(int, int, ffi.Pointer<yaca_key_h>)>();
 
-  /// @brief Generates a secure private asymmetric key from parameters.
-  /// @since_tizen 3.0
-  /// @remarks This function is used to generate private asymmetric keys
-  /// based on pre-generated parameters.
-  /// @remarks This function does not support RSA keys, as it's not possible
-  /// to extract parameters from them.
-  /// @remarks The @a prv_key should be released using yaca_key_destroy().
-  /// @param[in] params Pre-generated parameters
-  /// @param[out] prv_key Newly generated private key
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER @a prv_key is NULL or incorrect @a params
-  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see yaca_key_destroy()
-  /// @see yaca_key_generate()
-  /// @see yaca_key_extract_parameters()
+  /// Generates a secure private asymmetric key from parameters.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - This function is used to generate private asymmetric keys
+  /// - based on pre-generated parameters.
+  /// - This function does not support RSA keys, as it's not possible
+  /// - to extract parameters from them.
+  /// - The `prv_key` should be released using yaca_key_destroy().
+  ///
+  /// **Parameters:**
+  /// - `params` (in): Pre-generated parameters
+  /// - `prv_key` (out): Newly generated private key
+  ///
+  /// **Returns:**
+  /// - `YACA_ERROR_NONE` on success, negative on error
+  ///
+  /// **Return values:**
+  /// - `YACA_ERROR_NONE`: Successful
+  /// - `YACA_ERROR_INVALID_PARAMETER`: `prv_key` is NULL or incorrect `params`
+  /// - `YACA_ERROR_OUT_OF_MEMORY`: Out of memory error
+  /// - `YACA_ERROR_INTERNAL`: Internal error
+  ///
+  /// **See also:**
+  /// - `yaca_key_destroy()`
+  /// - `yaca_key_generate()`
+  /// - `yaca_key_extract_parameters()`
   int yaca_key_generate_from_parameters(
     yaca_key_h params,
     ffi.Pointer<yaca_key_h> prv_key,
@@ -1047,20 +1284,31 @@ class Tizen80Yaca {
       _yaca_key_generate_from_parametersPtr
           .asFunction<int Function(yaca_key_h, ffi.Pointer<yaca_key_h>)>();
 
-  /// @brief Extracts public key from a private one.
-  /// @since_tizen 3.0
-  /// @remarks The @a pub_key should be released using yaca_key_destroy().
-  /// @param[in] prv_key Private key to extract the public one from
-  /// @param[out] pub_key Extracted public key
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER @a prv_key is of invalid type or @a pub_key is NULL
-  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see yaca_key_generate()
-  /// @see yaca_key_import()
-  /// @see yaca_key_destroy()
+  /// Extracts public key from a private one.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The `pub_key` should be released using yaca_key_destroy().
+  ///
+  /// **Parameters:**
+  /// - `prv_key` (in): Private key to extract the public one from
+  /// - `pub_key` (out): Extracted public key
+  ///
+  /// **Returns:**
+  /// - `YACA_ERROR_NONE` on success, negative on error
+  ///
+  /// **Return values:**
+  /// - `YACA_ERROR_NONE`: Successful
+  /// - `YACA_ERROR_INVALID_PARAMETER`: `prv_key` is of invalid type or `pub_key` is NULL
+  /// - `YACA_ERROR_OUT_OF_MEMORY`: Out of memory error
+  /// - `YACA_ERROR_INTERNAL`: Internal error
+  ///
+  /// **See also:**
+  /// - `yaca_key_generate()`
+  /// - `yaca_key_import()`
+  /// - `yaca_key_destroy()`
   int yaca_key_extract_public(
     yaca_key_h prv_key,
     ffi.Pointer<yaca_key_h> pub_key,
@@ -1078,22 +1326,33 @@ class Tizen80Yaca {
   late final _yaca_key_extract_public = _yaca_key_extract_publicPtr
       .asFunction<int Function(yaca_key_h, ffi.Pointer<yaca_key_h>)>();
 
-  /// @brief Extracts parameters from a private or a public key.
-  /// @since_tizen 3.0
-  /// @remarks The @a params should be released using yaca_key_destroy().
-  /// @remarks This function does not support RSA keys.
-  /// @param[in] key A key to extract the parameters from
-  /// @param[out] params Extracted parameters
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER @a key is of invalid type or @a params is NULL
-  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see yaca_key_generate()
-  /// @see yaca_key_generate_from_parameters()
-  /// @see yaca_key_import()
-  /// @see yaca_key_destroy()
+  /// Extracts parameters from a private or a public key.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The `params` should be released using yaca_key_destroy().
+  /// - This function does not support RSA keys.
+  ///
+  /// **Parameters:**
+  /// - `key` (in): A key to extract the parameters from
+  /// - `params` (out): Extracted parameters
+  ///
+  /// **Returns:**
+  /// - `YACA_ERROR_NONE` on success, negative on error
+  ///
+  /// **Return values:**
+  /// - `YACA_ERROR_NONE`: Successful
+  /// - `YACA_ERROR_INVALID_PARAMETER`: `key` is of invalid type or `params` is NULL
+  /// - `YACA_ERROR_OUT_OF_MEMORY`: Out of memory error
+  /// - `YACA_ERROR_INTERNAL`: Internal error
+  ///
+  /// **See also:**
+  /// - `yaca_key_generate()`
+  /// - `yaca_key_generate_from_parameters()`
+  /// - `yaca_key_import()`
+  /// - `yaca_key_destroy()`
   int yaca_key_extract_parameters(
     yaca_key_h key,
     ffi.Pointer<yaca_key_h> params,
@@ -1111,27 +1370,37 @@ class Tizen80Yaca {
   late final _yaca_key_extract_parameters = _yaca_key_extract_parametersPtr
       .asFunction<int Function(yaca_key_h, ffi.Pointer<yaca_key_h>)>();
 
-  /// @brief Derives a shared secret using Diffie-Helmann or EC Diffie-Helmann key exchange protocol.
-  /// @since_tizen 3.0
-  /// @remarks The @a secret should not be used as a symmetric key.
-  /// To produce a symmetric key pass the secret to a key derivation function (KDF)
-  /// or a message digest function.
-  /// @remarks Both the keys passed should be of DH or EC type.
-  /// @remarks The @a secret should be freed with yaca_free().
-  /// @param[in] prv_key Our private key
-  /// @param[in] pub_key Peer public key
-  /// @param[out] secret Generated shared secret
-  /// @param[out] secret_len Size of the shared secret
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values
-  /// (invalid @a prv_key or @a pub_key)
-  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see yaca_key_derive_kdf()
-  /// @see yaca_simple_calculate_digest()
-  /// @see yaca_free()
+  /// Derives a shared secret using Diffie-Helmann or EC Diffie-Helmann key exchange protocol.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The `secret` should not be used as a symmetric key.
+  /// - To produce a symmetric key pass the secret to a key derivation function (KDF)
+  /// - or a message digest function.
+  /// - Both the keys passed should be of DH or EC type.
+  /// - The `secret` should be freed with yaca_free().
+  ///
+  /// **Parameters:**
+  /// - `prv_key` (in): Our private key
+  /// - `pub_key` (in): Peer public key
+  /// - `secret` (out): Generated shared secret
+  /// - `secret_len` (out): Size of the shared secret
+  ///
+  /// **Returns:**
+  /// - `YACA_ERROR_NONE` on success, negative on error
+  ///
+  /// **Return values:**
+  /// - `YACA_ERROR_NONE`: Successful
+  /// - `YACA_ERROR_INVALID_PARAMETER`: Required parameters have incorrect values (invalid `prv_key` or `pub_key`)
+  /// - `YACA_ERROR_OUT_OF_MEMORY`: Out of memory error
+  /// - `YACA_ERROR_INTERNAL`: Internal error
+  ///
+  /// **See also:**
+  /// - `yaca_key_derive_kdf()`
+  /// - `yaca_simple_calculate_digest()`
+  /// - `yaca_free()`
   int yaca_key_derive_dh(
     yaca_key_h prv_key,
     yaca_key_h pub_key,
@@ -1157,33 +1426,43 @@ class Tizen80Yaca {
       int Function(yaca_key_h, yaca_key_h, ffi.Pointer<ffi.Pointer<ffi.Char>>,
           ffi.Pointer<ffi.Size>)>();
 
-  /// @brief Derives a key material from shared secret.
-  /// @since_tizen 3.0
-  /// @remarks The @a info parameter is ANSI X9.42 OtherInfo or ANSI X9.62 SharedInfo structure,
-  /// more information can be found in ANSI X9.42/62 standard specification.
-  /// @remarks The @a key_material or separate parts of it can be used to import a symmetric key
-  /// with yaca_key_import().
-  /// @remarks The @a key_material should be freed using yaca_free().
-  /// @param[in] kdf Key derivation function
-  /// @param[in] algo Digest algorithm that should be used in key derivation
-  /// @param[in] secret Shared secret
-  /// @param[in] secret_len Size of the shared secret
-  /// @param[in] info Optional additional info, use NULL if not appending extra info
-  /// @param[in] info_len Length of additional info, use 0 if not using additional info
-  /// @param[in] key_material_len Length of a key material to be generated
-  /// @param[out] key_material Newly generated key material
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0,
-  /// invalid @a algo or @a kdf)
-  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see #yaca_kdf_e
-  /// @see #yaca_digest_algorithm_e
-  /// @see yaca_key_derive_dh()
-  /// @see yaca_key_import()
-  /// @see yaca_free()
+  /// Derives a key material from shared secret.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The `info` parameter is ANSI X9.42 OtherInfo or ANSI X9.62 SharedInfo structure,
+  /// - more information can be found in ANSI X9.42/62 standard specification.
+  /// - The `key_material` or separate parts of it can be used to import a symmetric key
+  /// - with yaca_key_import().
+  /// - The `key_material` should be freed using yaca_free().
+  ///
+  /// **Parameters:**
+  /// - `kdf` (in): Key derivation function
+  /// - `algo` (in): Digest algorithm that should be used in key derivation
+  /// - `secret` (in): Shared secret
+  /// - `secret_len` (in): Size of the shared secret
+  /// - `info` (in): Optional additional info, use NULL if not appending extra info
+  /// - `info_len` (in): Length of additional info, use 0 if not using additional info
+  /// - `key_material_len` (in): Length of a key material to be generated
+  /// - `key_material` (out): Newly generated key material
+  ///
+  /// **Returns:**
+  /// - `YACA_ERROR_NONE` on success, negative on error
+  ///
+  /// **Return values:**
+  /// - `YACA_ERROR_NONE`: Successful
+  /// - `YACA_ERROR_INVALID_PARAMETER`: Required parameters have incorrect values (NULL, 0, invalid `algo` or `kdf`)
+  /// - `YACA_ERROR_OUT_OF_MEMORY`: Out of memory error
+  /// - `YACA_ERROR_INTERNAL`: Internal error
+  ///
+  /// **See also:**
+  /// - `yaca_kdf_e`
+  /// - `yaca_digest_algorithm_e`
+  /// - `yaca_key_derive_dh()`
+  /// - `yaca_key_import()`
+  /// - `yaca_free()`
   int yaca_key_derive_kdf(
     int kdf,
     int algo,
@@ -1221,25 +1500,35 @@ class Tizen80Yaca {
       int Function(int, int, ffi.Pointer<ffi.Char>, int, ffi.Pointer<ffi.Char>,
           int, int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Derives a key from user password (PKCS #5 a.k.a. pbkdf2 algorithm).
-  /// @since_tizen 3.0
-  /// @remarks The @a key should be released using yaca_key_destroy().
-  /// @param[in] password User password as a null-terminated string
-  /// @param[in] salt Salt, should be a non-empty string
-  /// @param[in] salt_len Length of the salt
-  /// @param[in] iterations Number of iterations
-  /// @param[in] algo Digest algorithm that should be used in key generation
-  /// @param[in] key_bit_len Length of a key (in bits) to be generated
-  /// @param[out] key Newly generated key
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0,
-  /// invalid @a algo or @a key_bit_len not divisible by 8)
-  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see #yaca_digest_algorithm_e
-  /// @see yaca_key_destroy()
+  /// Derives a key from user password (PKCS #5 a.k.a. pbkdf2 algorithm).
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The `key` should be released using yaca_key_destroy().
+  ///
+  /// **Parameters:**
+  /// - `password` (in): User password as a null-terminated string
+  /// - `salt` (in): Salt, should be a non-empty string
+  /// - `salt_len` (in): Length of the salt
+  /// - `iterations` (in): Number of iterations
+  /// - `algo` (in): Digest algorithm that should be used in key generation
+  /// - `key_bit_len` (in): Length of a key (in bits) to be generated
+  /// - `key` (out): Newly generated key
+  ///
+  /// **Returns:**
+  /// - `YACA_ERROR_NONE` on success, negative on error
+  ///
+  /// **Return values:**
+  /// - `YACA_ERROR_NONE`: Successful
+  /// - `YACA_ERROR_INVALID_PARAMETER`: Required parameters have incorrect values (NULL, 0, invalid `algo` or `key_bit_len` not divisible by 8)
+  /// - `YACA_ERROR_OUT_OF_MEMORY`: Out of memory error
+  /// - `YACA_ERROR_INTERNAL`: Internal error
+  ///
+  /// **See also:**
+  /// - `yaca_digest_algorithm_e`
+  /// - `yaca_key_destroy()`
   int yaca_key_derive_pbkdf2(
     ffi.Pointer<ffi.Char> password,
     ffi.Pointer<ffi.Char> salt,
@@ -1274,12 +1563,18 @@ class Tizen80Yaca {
       int Function(ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>, int, int, int,
           int, ffi.Pointer<yaca_key_h>)>();
 
-  /// @brief Releases the key created by the library. Passing YACA_KEY_NULL is allowed.
-  /// @since_tizen 3.0
-  /// @param[in,out] key Key to be released
-  /// @see yaca_key_import()
-  /// @see yaca_key_export()
-  /// @see yaca_key_generate()
+  /// Releases the key created by the library. Passing YACA_KEY_NULL is allowed.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `key` (in,out): Key to be released
+  ///
+  /// **See also:**
+  /// - `yaca_key_import()`
+  /// - `yaca_key_export()`
+  /// - `yaca_key_generate()`
   void yaca_key_destroy(
     yaca_key_h key,
   ) {
@@ -1294,30 +1589,40 @@ class Tizen80Yaca {
   late final _yaca_key_destroy =
       _yaca_key_destroyPtr.asFunction<void Function(yaca_key_h)>();
 
-  /// @brief Encrypts data using a RSA public key (low-level encrypt equivalent).
-  /// @since_tizen 3.0
-  /// @remarks The @a ciphertext should be freed using yaca_free().
-  /// @remarks The @a pub_key used has to be of a #YACA_KEY_TYPE_RSA_PUB type.
-  /// @remarks The maximum length of plaintext depends on the key length and padding method.
-  /// See #yaca_padding_e for details.
-  /// @remarks The @a plaintext can be NULL but then the @a plaintext_len must be 0.
-  /// @param[in] padding Padding method
-  /// @param[in] pub_key Public RSA key (see yaca_key.h for key generation functions)
-  /// @param[in] plaintext Plaintext to be encrypted
-  /// @param[in] plaintext_len Length of the plaintext
-  /// @param[out] ciphertext Encrypted data, will be allocated by the library
-  /// @param[out] ciphertext_len Length of the encrypted data (may be larger than decrypted)
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0
-  /// invalid @a padding, @a pub_key or @a plaintext_len)
-  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see #yaca_key_type_e
-  /// @see #yaca_padding_e
-  /// @see yaca_rsa_private_decrypt()
-  /// @see yaca_free()
+  /// Encrypts data using a RSA public key (low-level encrypt equivalent).
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The `ciphertext` should be freed using yaca_free().
+  /// - The `pub_key` used has to be of a `YACA_KEY_TYPE_RSA_PUB` type.
+  /// - The maximum length of plaintext depends on the key length and padding method.
+  /// - See `yaca_padding_e` for details.
+  /// - The `plaintext` can be NULL but then the `plaintext_len` must be 0.
+  ///
+  /// **Parameters:**
+  /// - `padding` (in): Padding method
+  /// - `pub_key` (in): Public RSA key (see yaca_key.h for key generation functions)
+  /// - `plaintext` (in): Plaintext to be encrypted
+  /// - `plaintext_len` (in): Length of the plaintext
+  /// - `ciphertext` (out): Encrypted data, will be allocated by the library
+  /// - `ciphertext_len` (out): Length of the encrypted data (may be larger than decrypted)
+  ///
+  /// **Returns:**
+  /// - `YACA_ERROR_NONE` on success, negative on error
+  ///
+  /// **Return values:**
+  /// - `YACA_ERROR_NONE`: Successful
+  /// - `YACA_ERROR_INVALID_PARAMETER`: Required parameters have incorrect values (NULL, 0 invalid `padding`, `pub_key` or `plaintext_len`)
+  /// - `YACA_ERROR_OUT_OF_MEMORY`: Out of memory error
+  /// - `YACA_ERROR_INTERNAL`: Internal error
+  ///
+  /// **See also:**
+  /// - `yaca_key_type_e`
+  /// - `yaca_padding_e`
+  /// - `yaca_rsa_private_decrypt()`
+  /// - `yaca_free()`
   int yaca_rsa_public_encrypt(
     int padding,
     yaca_key_h pub_key,
@@ -1349,27 +1654,37 @@ class Tizen80Yaca {
       int Function(int, yaca_key_h, ffi.Pointer<ffi.Char>, int,
           ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Pointer<ffi.Size>)>();
 
-  /// @brief Decrypts data using a RSA private key (low-level decrypt equivalent).
-  /// @since_tizen 3.0
-  /// @remarks The @a plaintext should be freed using yaca_free().
-  /// @remarks The @a prv_key used has to be of a #YACA_KEY_TYPE_RSA_PRIV type.
-  /// @param[in] padding Padding method
-  /// @param[in] prv_key Private RSA key matching the public one used to encrypt the data
-  /// @param[in] ciphertext Ciphertext to be decrypted
-  /// @param[in] ciphertext_len Length of ciphertext
-  /// @param[out] plaintext Decrypted data, will be allocated by the library
-  /// @param[out] plaintext_len Length of the decrypted data
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0
-  /// invalid @a padding or @a prv_key), padding check failed
-  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see #yaca_key_type_e
-  /// @see #yaca_padding_e
-  /// @see yaca_rsa_public_encrypt()
-  /// @see yaca_free()
+  /// Decrypts data using a RSA private key (low-level decrypt equivalent).
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The `plaintext` should be freed using yaca_free().
+  /// - The `prv_key` used has to be of a `YACA_KEY_TYPE_RSA_PRIV` type.
+  ///
+  /// **Parameters:**
+  /// - `padding` (in): Padding method
+  /// - `prv_key` (in): Private RSA key matching the public one used to encrypt the data
+  /// - `ciphertext` (in): Ciphertext to be decrypted
+  /// - `ciphertext_len` (in): Length of ciphertext
+  /// - `plaintext` (out): Decrypted data, will be allocated by the library
+  /// - `plaintext_len` (out): Length of the decrypted data
+  ///
+  /// **Returns:**
+  /// - `YACA_ERROR_NONE` on success, negative on error
+  ///
+  /// **Return values:**
+  /// - `YACA_ERROR_NONE`: Successful
+  /// - `YACA_ERROR_INVALID_PARAMETER`: Required parameters have incorrect values (NULL, 0 invalid `padding` or `prv_key`), padding check failed
+  /// - `YACA_ERROR_OUT_OF_MEMORY`: Out of memory error
+  /// - `YACA_ERROR_INTERNAL`: Internal error
+  ///
+  /// **See also:**
+  /// - `yaca_key_type_e`
+  /// - `yaca_padding_e`
+  /// - `yaca_rsa_public_encrypt()`
+  /// - `yaca_free()`
   int yaca_rsa_private_decrypt(
     int padding,
     yaca_key_h prv_key,
@@ -1402,30 +1717,40 @@ class Tizen80Yaca {
           int Function(int, yaca_key_h, ffi.Pointer<ffi.Char>, int,
               ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Pointer<ffi.Size>)>();
 
-  /// @brief Encrypts data using a RSA private key (low-level sign equivalent).
-  /// @since_tizen 3.0
-  /// @remarks The @a ciphertext should be freed using yaca_free().
-  /// @remarks The @a prv_key used has to be of a #YACA_KEY_TYPE_RSA_PRIV type.
-  /// @remarks The maximum length of plaintext depends on the key length and padding method,
-  /// see #yaca_padding_e for details.
-  /// @remarks The @a plaintext can be NULL but then the @a plaintext_len must be 0.
-  /// @param[in] padding Padding method
-  /// @param[in] prv_key Private RSA key (see yaca_key.h for key generation functions)
-  /// @param[in] plaintext Plaintext to be encrypted
-  /// @param[in] plaintext_len Length of the plaintext
-  /// @param[out] ciphertext Encrypted data, will be allocated by the library
-  /// @param[out] ciphertext_len Length of the encrypted data (may be larger than decrypted)
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0
-  /// invalid @a padding, @a prv_key or @a plaintext_len)
-  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see #yaca_key_type_e
-  /// @see #yaca_padding_e
-  /// @see yaca_rsa_public_decrypt()
-  /// @see yaca_free()
+  /// Encrypts data using a RSA private key (low-level sign equivalent).
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The `ciphertext` should be freed using yaca_free().
+  /// - The `prv_key` used has to be of a `YACA_KEY_TYPE_RSA_PRIV` type.
+  /// - The maximum length of plaintext depends on the key length and padding method,
+  /// - see `yaca_padding_e` for details.
+  /// - The `plaintext` can be NULL but then the `plaintext_len` must be 0.
+  ///
+  /// **Parameters:**
+  /// - `padding` (in): Padding method
+  /// - `prv_key` (in): Private RSA key (see yaca_key.h for key generation functions)
+  /// - `plaintext` (in): Plaintext to be encrypted
+  /// - `plaintext_len` (in): Length of the plaintext
+  /// - `ciphertext` (out): Encrypted data, will be allocated by the library
+  /// - `ciphertext_len` (out): Length of the encrypted data (may be larger than decrypted)
+  ///
+  /// **Returns:**
+  /// - `YACA_ERROR_NONE` on success, negative on error
+  ///
+  /// **Return values:**
+  /// - `YACA_ERROR_NONE`: Successful
+  /// - `YACA_ERROR_INVALID_PARAMETER`: Required parameters have incorrect values (NULL, 0 invalid `padding`, `prv_key` or `plaintext_len`)
+  /// - `YACA_ERROR_OUT_OF_MEMORY`: Out of memory error
+  /// - `YACA_ERROR_INTERNAL`: Internal error
+  ///
+  /// **See also:**
+  /// - `yaca_key_type_e`
+  /// - `yaca_padding_e`
+  /// - `yaca_rsa_public_decrypt()`
+  /// - `yaca_free()`
   int yaca_rsa_private_encrypt(
     int padding,
     yaca_key_h prv_key,
@@ -1458,27 +1783,37 @@ class Tizen80Yaca {
           int Function(int, yaca_key_h, ffi.Pointer<ffi.Char>, int,
               ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Pointer<ffi.Size>)>();
 
-  /// @brief Decrypts data using a RSA public key (low-level verify equivalent).
-  /// @since_tizen 3.0
-  /// @remarks The @a plaintext should be freed using yaca_free().
-  /// @remarks The @a pub_key used has to be of a #YACA_KEY_TYPE_RSA_PUB type.
-  /// @param[in] padding Padding method
-  /// @param[in] pub_key Public RSA key matching the private one used to encrypt the data
-  /// @param[in] ciphertext Ciphertext to be decrypted
-  /// @param[in] ciphertext_len Length of ciphertext
-  /// @param[out] plaintext Decrypted data, will be allocated by the library
-  /// @param[out] plaintext_len Length of the decrypted data
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0
-  /// invalid @a padding or @a pub_key), padding check failed
-  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see #yaca_key_type_e
-  /// @see #yaca_padding_e
-  /// @see yaca_rsa_private_encrypt()
-  /// @see yaca_free()
+  /// Decrypts data using a RSA public key (low-level verify equivalent).
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The `plaintext` should be freed using yaca_free().
+  /// - The `pub_key` used has to be of a `YACA_KEY_TYPE_RSA_PUB` type.
+  ///
+  /// **Parameters:**
+  /// - `padding` (in): Padding method
+  /// - `pub_key` (in): Public RSA key matching the private one used to encrypt the data
+  /// - `ciphertext` (in): Ciphertext to be decrypted
+  /// - `ciphertext_len` (in): Length of ciphertext
+  /// - `plaintext` (out): Decrypted data, will be allocated by the library
+  /// - `plaintext_len` (out): Length of the decrypted data
+  ///
+  /// **Returns:**
+  /// - `YACA_ERROR_NONE` on success, negative on error
+  ///
+  /// **Return values:**
+  /// - `YACA_ERROR_NONE`: Successful
+  /// - `YACA_ERROR_INVALID_PARAMETER`: Required parameters have incorrect values (NULL, 0 invalid `padding` or `pub_key`), padding check failed
+  /// - `YACA_ERROR_OUT_OF_MEMORY`: Out of memory error
+  /// - `YACA_ERROR_INTERNAL`: Internal error
+  ///
+  /// **See also:**
+  /// - `yaca_key_type_e`
+  /// - `yaca_padding_e`
+  /// - `yaca_rsa_private_encrypt()`
+  /// - `yaca_free()`
   int yaca_rsa_public_decrypt(
     int padding,
     yaca_key_h pub_key,
@@ -1510,39 +1845,48 @@ class Tizen80Yaca {
       int Function(int, yaca_key_h, ffi.Pointer<ffi.Char>, int,
           ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Pointer<ffi.Size>)>();
 
-  /// @brief Initializes an asymmetric encryption context and generates symmetric key and Initialization Vector.
-  /// @since_tizen 3.0
-  /// @remarks Generated symmetric key is encrypted with public key,
-  /// so can be only used with yaca_open_initialize(). It can be exported,
-  /// but after import it can be only used with yaca_open_initialize() as well.
-  /// @remarks The @a ctx should be released using yaca_context_destroy().
-  /// @remarks The @a pub_key must be #YACA_KEY_TYPE_RSA_PUB.
-  /// @remarks The @a sym_key_bit_len must be at least 88 bits shorter than the @a pub_key bit length.
-  /// @remarks The @a sym_key should be released using yaca_key_destroy().
-  /// @remarks The @a iv should be released using yaca_key_destroy().
-  /// @param[out] ctx Newly created context
-  /// @param[in] pub_key Public key of the peer that will receive the encrypted data
-  /// @param[in] algo Symmetric algorithm that will be used
-  /// @param[in] bcm Block chaining mode for the symmetric algorithm
-  /// @param[in] sym_key_bit_len Symmetric key length (in bits) that will be generated
-  /// @param[out] sym_key Generated symmetric key that will be used,
-  /// it is encrypted with peer's public key
-  /// @param[out] iv Generated Initialization Vector that will be used
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL,
-  /// invalid @a algo, @a bcm, @a sym_key_bit_len or @a pub_key)
-  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see #yaca_encrypt_algorithm_e
-  /// @see #yaca_block_cipher_mode_e
-  /// @see #yaca_key_bit_length_e
-  /// @see yaca_seal_update()
-  /// @see yaca_seal_finalize()
-  /// @see yaca_open_initialize()
-  /// @see yaca_key_destroy()
-  /// @see yaca_context_destroy()
+  /// Initializes an asymmetric encryption context and generates symmetric key and Initialization Vector.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - Generated symmetric key is encrypted with public key,
+  /// - so can be only used with yaca_open_initialize(). It can be exported,
+  /// - but after import it can be only used with yaca_open_initialize() as well.
+  /// - The `ctx` should be released using yaca_context_destroy().
+  /// - The `pub_key` must be `YACA_KEY_TYPE_RSA_PUB`.
+  /// - The `sym_key_bit_len` must be at least 88 bits shorter than the `pub_key` bit length.
+  /// - The `sym_key` should be released using yaca_key_destroy().
+  /// - The `iv` should be released using yaca_key_destroy().
+  ///
+  /// **Parameters:**
+  /// - `ctx` (out): Newly created context
+  /// - `pub_key` (in): Public key of the peer that will receive the encrypted data
+  /// - `algo` (in): Symmetric algorithm that will be used
+  /// - `bcm` (in): Block chaining mode for the symmetric algorithm
+  /// - `sym_key_bit_len` (in): Symmetric key length (in bits) that will be generated
+  /// - `sym_key` (out): Generated symmetric key that will be used, it is encrypted with peer's public key
+  /// - `iv` (out): Generated Initialization Vector that will be used
+  ///
+  /// **Returns:**
+  /// - `YACA_ERROR_NONE` on success, negative on error
+  ///
+  /// **Return values:**
+  /// - `YACA_ERROR_NONE`: Successful
+  /// - `YACA_ERROR_INVALID_PARAMETER`: Required parameters have incorrect values (NULL, invalid `algo`, `bcm`, `sym_key_bit_len` or `pub_key`)
+  /// - `YACA_ERROR_OUT_OF_MEMORY`: Out of memory error
+  /// - `YACA_ERROR_INTERNAL`: Internal error
+  ///
+  /// **See also:**
+  /// - `yaca_encrypt_algorithm_e`
+  /// - `yaca_block_cipher_mode_e`
+  /// - `yaca_key_bit_length_e`
+  /// - `yaca_seal_update()`
+  /// - `yaca_seal_finalize()`
+  /// - `yaca_open_initialize()`
+  /// - `yaca_key_destroy()`
+  /// - `yaca_context_destroy()`
   int yaca_seal_initialize(
     ffi.Pointer<yaca_context_h> ctx,
     yaca_key_h pub_key,
@@ -1577,24 +1921,30 @@ class Tizen80Yaca {
       int Function(ffi.Pointer<yaca_context_h>, yaca_key_h, int, int, int,
           ffi.Pointer<yaca_key_h>, ffi.Pointer<yaca_key_h>)>();
 
-  /// @brief Encrypts piece of the data.
-  /// @since_tizen 3.0
-  /// @param[in,out] ctx Context created by yaca_seal_initialize()
-  /// @param[in] plaintext Plaintext to be encrypted
-  /// @param[in] plaintext_len Length of the plaintext
-  /// @param[out] ciphertext Buffer for the encrypted data
-  /// (must be allocated by client, see yaca_context_get_output_length())
-  /// @param[out] ciphertext_len Length of the encrypted data,
-  /// actual number of bytes written will be returned here
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0,
-  /// invalid @a ctx)
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see yaca_seal_initialize()
-  /// @see yaca_seal_finalize()
-  /// @see yaca_context_get_output_length()
+  /// Encrypts piece of the data.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `ctx` (in,out): Context created by yaca_seal_initialize()
+  /// - `plaintext` (in): Plaintext to be encrypted
+  /// - `plaintext_len` (in): Length of the plaintext
+  /// - `ciphertext` (out): Buffer for the encrypted data (must be allocated by client, see yaca_context_get_output_length())
+  /// - `ciphertext_len` (out): Length of the encrypted data, actual number of bytes written will be returned here
+  ///
+  /// **Returns:**
+  /// - `YACA_ERROR_NONE` on success, negative on error
+  ///
+  /// **Return values:**
+  /// - `YACA_ERROR_NONE`: Successful
+  /// - `YACA_ERROR_INVALID_PARAMETER`: Required parameters have incorrect values (NULL, 0, invalid `ctx`)
+  /// - `YACA_ERROR_INTERNAL`: Internal error
+  ///
+  /// **See also:**
+  /// - `yaca_seal_initialize()`
+  /// - `yaca_seal_finalize()`
+  /// - `yaca_context_get_output_length()`
   int yaca_seal_update(
     yaca_context_h ctx,
     ffi.Pointer<ffi.Char> plaintext,
@@ -1623,24 +1973,32 @@ class Tizen80Yaca {
       int Function(yaca_context_h, ffi.Pointer<ffi.Char>, int,
           ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Size>)>();
 
-  /// @brief Encrypts the final piece of the data.
-  /// @since_tizen 3.0
-  /// @remarks Skipping yaca_seal_update() and calling only yaca_seal_finalize() will produce an
-  /// encryption of an empty message.
-  /// @param[in,out] ctx A valid seal context
-  /// @param[out] ciphertext Final piece of the encrypted data
-  /// (must be allocated by client, see yaca_context_get_output_length())
-  /// @param[out] ciphertext_len Length of the final piece,
-  /// actual number of bytes written will be returned here
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL,
-  /// invalid @a ctx)
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see yaca_seal_initialize()
-  /// @see yaca_seal_update()
-  /// @see yaca_context_get_output_length()
+  /// Encrypts the final piece of the data.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - Skipping yaca_seal_update() and calling only yaca_seal_finalize() will produce an
+  /// - encryption of an empty message.
+  ///
+  /// **Parameters:**
+  /// - `ctx` (in,out): A valid seal context
+  /// - `ciphertext` (out): Final piece of the encrypted data (must be allocated by client, see yaca_context_get_output_length())
+  /// - `ciphertext_len` (out): Length of the final piece, actual number of bytes written will be returned here
+  ///
+  /// **Returns:**
+  /// - `YACA_ERROR_NONE` on success, negative on error
+  ///
+  /// **Return values:**
+  /// - `YACA_ERROR_NONE`: Successful
+  /// - `YACA_ERROR_INVALID_PARAMETER`: Required parameters have incorrect values (NULL, invalid `ctx`)
+  /// - `YACA_ERROR_INTERNAL`: Internal error
+  ///
+  /// **See also:**
+  /// - `yaca_seal_initialize()`
+  /// - `yaca_seal_update()`
+  /// - `yaca_context_get_output_length()`
   int yaca_seal_finalize(
     yaca_context_h ctx,
     ffi.Pointer<ffi.Char> ciphertext,
@@ -1661,32 +2019,40 @@ class Tizen80Yaca {
       int Function(
           yaca_context_h, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Size>)>();
 
-  /// @brief Initializes an asymmetric decryption context.
-  /// @since_tizen 3.0
-  /// @remarks The @a ctx should be released using yaca_context_destroy().
-  /// @remarks The @a prv_key must be #YACA_KEY_TYPE_RSA_PRIV.
-  /// @param[out] ctx Newly created context
-  /// @param[in] prv_key Private key, part of the pair that was used for the encryption
-  /// @param[in] algo Symmetric algorithm that was used for the encryption
-  /// @param[in] bcm Block chaining mode for the symmetric algorithm
-  /// @param[in] sym_key_bit_len Symmetric key length (in bits) that was used for the encryption
-  /// @param[in] sym_key Symmetric key, encrypted with the public key,
-  /// that was used to encrypt the data
-  /// @param[in] iv Initialization Vector that was used for the encryption
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, invalid
-  /// @a algo, @a bcm, @a sym_key_bit_len, @a prv_key,
-  /// @a sym_key or @a iv)
-  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see #yaca_encrypt_algorithm_e
-  /// @see #yaca_block_cipher_mode_e
-  /// @see #yaca_key_bit_length_e
-  /// @see yaca_open_update()
-  /// @see yaca_open_finalize()
-  /// @see yaca_context_destroy()
+  /// Initializes an asymmetric decryption context.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The `ctx` should be released using yaca_context_destroy().
+  /// - The `prv_key` must be `YACA_KEY_TYPE_RSA_PRIV`.
+  ///
+  /// **Parameters:**
+  /// - `ctx` (out): Newly created context
+  /// - `prv_key` (in): Private key, part of the pair that was used for the encryption
+  /// - `algo` (in): Symmetric algorithm that was used for the encryption
+  /// - `bcm` (in): Block chaining mode for the symmetric algorithm
+  /// - `sym_key_bit_len` (in): Symmetric key length (in bits) that was used for the encryption
+  /// - `sym_key` (in): Symmetric key, encrypted with the public key, that was used to encrypt the data
+  /// - `iv` (in): Initialization Vector that was used for the encryption
+  ///
+  /// **Returns:**
+  /// - `YACA_ERROR_NONE` on success, negative on error
+  ///
+  /// **Return values:**
+  /// - `YACA_ERROR_NONE`: Successful
+  /// - `YACA_ERROR_INVALID_PARAMETER`: Required parameters have incorrect values (NULL, invalid `algo`, `bcm`, `sym_key_bit_len`, `prv_key`, `sym_key` or `iv`)
+  /// - `YACA_ERROR_OUT_OF_MEMORY`: Out of memory error
+  /// - `YACA_ERROR_INTERNAL`: Internal error
+  ///
+  /// **See also:**
+  /// - `yaca_encrypt_algorithm_e`
+  /// - `yaca_block_cipher_mode_e`
+  /// - `yaca_key_bit_length_e`
+  /// - `yaca_open_update()`
+  /// - `yaca_open_finalize()`
+  /// - `yaca_context_destroy()`
   int yaca_open_initialize(
     ffi.Pointer<yaca_context_h> ctx,
     yaca_key_h prv_key,
@@ -1721,25 +2087,30 @@ class Tizen80Yaca {
       int Function(ffi.Pointer<yaca_context_h>, yaca_key_h, int, int, int,
           yaca_key_h, yaca_key_h)>();
 
-  /// @brief Decrypts piece of the data.
-  /// @since_tizen 3.0
-  /// @param[in,out] ctx Context created by yaca_open_initialize()
-  /// @param[in] ciphertext Ciphertext to be decrypted
-  /// @param[in] ciphertext_len Length of the ciphertext
-  /// @param[out] plaintext Buffer for the decrypted data
-  /// (must be allocated by client, see yaca_context_get_output_length())
-  /// @param[out] plaintext_len Length of the decrypted data,
-  /// actual number of bytes written will be returned here
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0,
-  /// invalid @a ctx), wrong #YACA_PROPERTY_CCM_AAD or
-  /// wrong #YACA_PROPERTY_CCM_TAG was used
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see yaca_open_initialize()
-  /// @see yaca_open_finalize()
-  /// @see yaca_context_get_output_length()
+  /// Decrypts piece of the data.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `ctx` (in,out): Context created by yaca_open_initialize()
+  /// - `ciphertext` (in): Ciphertext to be decrypted
+  /// - `ciphertext_len` (in): Length of the ciphertext
+  /// - `plaintext` (out): Buffer for the decrypted data (must be allocated by client, see yaca_context_get_output_length())
+  /// - `plaintext_len` (out): Length of the decrypted data, actual number of bytes written will be returned here
+  ///
+  /// **Returns:**
+  /// - `YACA_ERROR_NONE` on success, negative on error
+  ///
+  /// **Return values:**
+  /// - `YACA_ERROR_NONE`: Successful
+  /// - `YACA_ERROR_INVALID_PARAMETER`: Required parameters have incorrect values (NULL, 0, invalid `ctx`), wrong `YACA_PROPERTY_CCM_AAD` or wrong `YACA_PROPERTY_CCM_TAG` was used
+  /// - `YACA_ERROR_INTERNAL`: Internal error
+  ///
+  /// **See also:**
+  /// - `yaca_open_initialize()`
+  /// - `yaca_open_finalize()`
+  /// - `yaca_context_get_output_length()`
   int yaca_open_update(
     yaca_context_h ctx,
     ffi.Pointer<ffi.Char> ciphertext,
@@ -1768,25 +2139,32 @@ class Tizen80Yaca {
       int Function(yaca_context_h, ffi.Pointer<ffi.Char>, int,
           ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Size>)>();
 
-  /// @brief Decrypts last chunk of sealed message.
-  /// @since_tizen 3.0
-  /// @remarks Skipping yaca_open_update() and calling only yaca_open_finalize() will produce a
-  /// decryption of an empty ciphertext.
-  /// @param[in,out] ctx A valid open context
-  /// @param[out] plaintext Final piece of the decrypted data
-  /// (must be allocated by client, see yaca_context_get_output_length())
-  /// @param[out] plaintext_len Length of the final piece,
-  /// actual number of bytes written will be returned here
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL,
-  /// invalid @a ctx), wrong #YACA_PROPERTY_GCM_AAD or
-  /// wrong #YACA_PROPERTY_GCM_TAG was used
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see yaca_open_initialize()
-  /// @see yaca_open_update()
-  /// @see yaca_context_get_output_length()
+  /// Decrypts last chunk of sealed message.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - Skipping yaca_open_update() and calling only yaca_open_finalize() will produce a
+  /// - decryption of an empty ciphertext.
+  ///
+  /// **Parameters:**
+  /// - `ctx` (in,out): A valid open context
+  /// - `plaintext` (out): Final piece of the decrypted data (must be allocated by client, see yaca_context_get_output_length())
+  /// - `plaintext_len` (out): Length of the final piece, actual number of bytes written will be returned here
+  ///
+  /// **Returns:**
+  /// - `YACA_ERROR_NONE` on success, negative on error
+  ///
+  /// **Return values:**
+  /// - `YACA_ERROR_NONE`: Successful
+  /// - `YACA_ERROR_INVALID_PARAMETER`: Required parameters have incorrect values (NULL, invalid `ctx`), wrong `YACA_PROPERTY_GCM_AAD` or wrong `YACA_PROPERTY_GCM_TAG` was used
+  /// - `YACA_ERROR_INTERNAL`: Internal error
+  ///
+  /// **See also:**
+  /// - `yaca_open_initialize()`
+  /// - `yaca_open_update()`
+  /// - `yaca_context_get_output_length()`
   int yaca_open_finalize(
     yaca_context_h ctx,
     ffi.Pointer<ffi.Char> plaintext,
@@ -1807,41 +2185,50 @@ class Tizen80Yaca {
       int Function(
           yaca_context_h, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Size>)>();
 
-  /// @brief Initializes a signature context for asymmetric signatures.
-  /// @since_tizen 3.0
-  /// @remarks For verification use yaca_verify_initialize(), yaca_verify_update() and
-  /// yaca_verify_finalize() functions with matching public key.
-  /// @remarks For RSA operations the default padding used is #YACA_PADDING_PKCS1. It can be
-  /// changed using yaca_context_set_property() with #YACA_PROPERTY_PADDING.
-  /// @remarks For #YACA_DIGEST_SHA384 and #YACA_DIGEST_SHA512 the RSA key size must be bigger than
-  /// #YACA_KEY_LENGTH_512BIT.
-  /// @remarks Using of #YACA_DIGEST_MD5 algorithm for DSA and ECDSA operations is prohibited.
-  /// @remarks Using of #YACA_DIGEST_MD5 or #YACA_DIGEST_SHA224 with #YACA_PADDING_X931 is prohibited.
-  /// @remarks The @a ctx should be released using yaca_context_destroy().
-  /// @param[out] ctx Newly created context
-  /// @param[in] algo Digest algorithm that will be used
-  /// @param[in] prv_key Private key that will be used, algorithm is deduced based
-  /// on key type, supported key types:
-  /// - #YACA_KEY_TYPE_RSA_PRIV,
-  /// - #YACA_KEY_TYPE_DSA_PRIV,
-  /// - #YACA_KEY_TYPE_EC_PRIV
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL,
-  /// invalid @a algo or @a prv_key)
-  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see #yaca_key_type_e
-  /// @see #yaca_digest_algorithm_e
-  /// @see #yaca_padding_e
-  /// @see yaca_context_set_property()
-  /// @see yaca_sign_update()
-  /// @see yaca_sign_finalize()
-  /// @see yaca_verify_initialize()
-  /// @see yaca_verify_update()
-  /// @see yaca_verify_finalize()
-  /// @see yaca_context_destroy()
+  /// Initializes a signature context for asymmetric signatures.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - For verification use yaca_verify_initialize(), yaca_verify_update() and
+  /// - yaca_verify_finalize() functions with matching public key.
+  /// - For RSA operations the default padding used is `YACA_PADDING_PKCS1`. It can be
+  /// - changed using yaca_context_set_property() with `YACA_PROPERTY_PADDING`.
+  /// - For `YACA_DIGEST_SHA384` and `YACA_DIGEST_SHA512` the RSA key size must be bigger than
+  /// - `YACA_KEY_LENGTH_512BIT`.
+  /// - Using of `YACA_DIGEST_MD5` algorithm for DSA and ECDSA operations is prohibited.
+  /// - Using of `YACA_DIGEST_MD5` or `YACA_DIGEST_SHA224` with `YACA_PADDING_X931` is prohibited.
+  /// - The `ctx` should be released using yaca_context_destroy().
+  ///
+  /// **Parameters:**
+  /// - `ctx` (out): Newly created context
+  /// - `algo` (in): Digest algorithm that will be used
+  /// - `prv_key` (in): Private key that will be used, algorithm is deduced based on key type, supported key types:
+  ///   - `YACA_KEY_TYPE_RSA_PRIV`,
+  ///   - `YACA_KEY_TYPE_DSA_PRIV`,
+  ///   - `YACA_KEY_TYPE_EC_PRIV`
+  ///
+  /// **Returns:**
+  /// - `YACA_ERROR_NONE` on success, negative on error
+  ///
+  /// **Return values:**
+  /// - `YACA_ERROR_NONE`: Successful
+  /// - `YACA_ERROR_INVALID_PARAMETER`: Required parameters have incorrect values (NULL, invalid `algo` or `prv_key`)
+  /// - `YACA_ERROR_OUT_OF_MEMORY`: Out of memory error
+  /// - `YACA_ERROR_INTERNAL`: Internal error
+  ///
+  /// **See also:**
+  /// - `yaca_key_type_e`
+  /// - `yaca_digest_algorithm_e`
+  /// - `yaca_padding_e`
+  /// - `yaca_context_set_property()`
+  /// - `yaca_sign_update()`
+  /// - `yaca_sign_finalize()`
+  /// - `yaca_verify_initialize()`
+  /// - `yaca_verify_update()`
+  /// - `yaca_verify_finalize()`
+  /// - `yaca_context_destroy()`
   int yaca_sign_initialize(
     ffi.Pointer<yaca_context_h> ctx,
     int algo,
@@ -1861,28 +2248,38 @@ class Tizen80Yaca {
   late final _yaca_sign_initialize = _yaca_sign_initializePtr
       .asFunction<int Function(ffi.Pointer<yaca_context_h>, int, yaca_key_h)>();
 
-  /// @brief Initializes a signature context for HMAC.
-  /// @since_tizen 3.0
-  /// @remarks For verification, calculate message HMAC and compare with received MAC using yaca_memcmp().
-  /// @remarks The @a ctx should be released using yaca_context_destroy().
-  /// @param[out] ctx Newly created context
-  /// @param[in] algo Digest algorithm that will be used
-  /// @param[in] sym_key Symmetric key that will be used, supported key types:
-  /// - #YACA_KEY_TYPE_SYMMETRIC,
-  /// - #YACA_KEY_TYPE_DES
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL,
-  /// invalid @a algo or @a sym_key)
-  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see #yaca_key_type_e
-  /// @see #yaca_digest_algorithm_e
-  /// @see yaca_sign_update()
-  /// @see yaca_sign_finalize()
-  /// @see yaca_memcmp()
-  /// @see yaca_context_destroy()
+  /// Initializes a signature context for HMAC.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - For verification, calculate message HMAC and compare with received MAC using yaca_memcmp().
+  /// - The `ctx` should be released using yaca_context_destroy().
+  ///
+  /// **Parameters:**
+  /// - `ctx` (out): Newly created context
+  /// - `algo` (in): Digest algorithm that will be used
+  /// - `sym_key` (in): Symmetric key that will be used, supported key types:
+  ///   - `YACA_KEY_TYPE_SYMMETRIC`,
+  ///   - `YACA_KEY_TYPE_DES`
+  ///
+  /// **Returns:**
+  /// - `YACA_ERROR_NONE` on success, negative on error
+  ///
+  /// **Return values:**
+  /// - `YACA_ERROR_NONE`: Successful
+  /// - `YACA_ERROR_INVALID_PARAMETER`: Required parameters have incorrect values (NULL, invalid `algo` or `sym_key`)
+  /// - `YACA_ERROR_OUT_OF_MEMORY`: Out of memory error
+  /// - `YACA_ERROR_INTERNAL`: Internal error
+  ///
+  /// **See also:**
+  /// - `yaca_key_type_e`
+  /// - `yaca_digest_algorithm_e`
+  /// - `yaca_sign_update()`
+  /// - `yaca_sign_finalize()`
+  /// - `yaca_memcmp()`
+  /// - `yaca_context_destroy()`
   int yaca_sign_initialize_hmac(
     ffi.Pointer<yaca_context_h> ctx,
     int algo,
@@ -1902,28 +2299,38 @@ class Tizen80Yaca {
   late final _yaca_sign_initialize_hmac = _yaca_sign_initialize_hmacPtr
       .asFunction<int Function(ffi.Pointer<yaca_context_h>, int, yaca_key_h)>();
 
-  /// @brief Initializes a signature context for CMAC.
-  /// @since_tizen 3.0
-  /// @remarks For verification, calculate message CMAC and compare with received MAC using yaca_memcmp().
-  /// @remarks The @a ctx should be released using yaca_context_destroy().
-  /// @param[out] ctx Newly created context
-  /// @param[in] algo Encryption algorithm that will be used
-  /// @param[in] sym_key Symmetric key that will be used, supported key types:
-  /// - #YACA_KEY_TYPE_SYMMETRIC,
-  /// - #YACA_KEY_TYPE_DES
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL,
-  /// invalid @a algo or @a sym_key)
-  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see #yaca_key_type_e
-  /// @see #yaca_encrypt_algorithm_e
-  /// @see yaca_sign_update()
-  /// @see yaca_sign_finalize()
-  /// @see yaca_memcmp()
-  /// @see yaca_context_destroy()
+  /// Initializes a signature context for CMAC.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - For verification, calculate message CMAC and compare with received MAC using yaca_memcmp().
+  /// - The `ctx` should be released using yaca_context_destroy().
+  ///
+  /// **Parameters:**
+  /// - `ctx` (out): Newly created context
+  /// - `algo` (in): Encryption algorithm that will be used
+  /// - `sym_key` (in): Symmetric key that will be used, supported key types:
+  ///   - `YACA_KEY_TYPE_SYMMETRIC`,
+  ///   - `YACA_KEY_TYPE_DES`
+  ///
+  /// **Returns:**
+  /// - `YACA_ERROR_NONE` on success, negative on error
+  ///
+  /// **Return values:**
+  /// - `YACA_ERROR_NONE`: Successful
+  /// - `YACA_ERROR_INVALID_PARAMETER`: Required parameters have incorrect values (NULL, invalid `algo` or `sym_key`)
+  /// - `YACA_ERROR_OUT_OF_MEMORY`: Out of memory error
+  /// - `YACA_ERROR_INTERNAL`: Internal error
+  ///
+  /// **See also:**
+  /// - `yaca_key_type_e`
+  /// - `yaca_encrypt_algorithm_e`
+  /// - `yaca_sign_update()`
+  /// - `yaca_sign_finalize()`
+  /// - `yaca_memcmp()`
+  /// - `yaca_context_destroy()`
   int yaca_sign_initialize_cmac(
     ffi.Pointer<yaca_context_h> ctx,
     int algo,
@@ -1943,22 +2350,29 @@ class Tizen80Yaca {
   late final _yaca_sign_initialize_cmac = _yaca_sign_initialize_cmacPtr
       .asFunction<int Function(ffi.Pointer<yaca_context_h>, int, yaca_key_h)>();
 
-  /// @brief Feeds the message into the digital signature or MAC algorithm.
-  /// @since_tizen 3.0
-  /// @param[in,out] ctx Context created by yaca_sign_initialize(),
-  /// yaca_sign_initialize_hmac() or yaca_sign_initialize_cmac()
-  /// @param[in] message Message to be signed
-  /// @param[in] message_len Length of the message
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0,
-  /// invalid @a ctx)
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see yaca_sign_initialize()
-  /// @see yaca_sign_finalize()
-  /// @see yaca_sign_initialize_hmac()
-  /// @see yaca_sign_initialize_cmac()
+  /// Feeds the message into the digital signature or MAC algorithm.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `ctx` (in,out): Context created by yaca_sign_initialize(), yaca_sign_initialize_hmac() or yaca_sign_initialize_cmac()
+  /// - `message` (in): Message to be signed
+  /// - `message_len` (in): Length of the message
+  ///
+  /// **Returns:**
+  /// - `YACA_ERROR_NONE` on success, negative on error
+  ///
+  /// **Return values:**
+  /// - `YACA_ERROR_NONE`: Successful
+  /// - `YACA_ERROR_INVALID_PARAMETER`: Required parameters have incorrect values (NULL, 0, invalid `ctx`)
+  /// - `YACA_ERROR_INTERNAL`: Internal error
+  ///
+  /// **See also:**
+  /// - `yaca_sign_initialize()`
+  /// - `yaca_sign_finalize()`
+  /// - `yaca_sign_initialize_hmac()`
+  /// - `yaca_sign_initialize_cmac()`
   int yaca_sign_update(
     yaca_context_h ctx,
     ffi.Pointer<ffi.Char> message,
@@ -1978,26 +2392,34 @@ class Tizen80Yaca {
   late final _yaca_sign_update = _yaca_sign_updatePtr
       .asFunction<int Function(yaca_context_h, ffi.Pointer<ffi.Char>, int)>();
 
-  /// @brief Calculates the final signature or MAC.
-  /// @since_tizen 3.0
-  /// @remarks Skipping yaca_sign_update() and calling only yaca_sign_finalize() will produce a
-  /// signature or MAC of an empty message.
-  /// @param[in,out] ctx A valid sign context
-  /// @param[out] signature Buffer for the MAC or the message signature
-  /// (must be allocated by client, see yaca_context_get_output_length())
-  /// @param[out] signature_len Length of the MAC or the signature,
-  /// actual number of bytes written will be returned here
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL,
-  /// invalid @a ctx)
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see yaca_sign_initialize()
-  /// @see yaca_sign_update()
-  /// @see yaca_sign_initialize_hmac()
-  /// @see yaca_sign_initialize_cmac()
-  /// @see yaca_context_get_output_length()
+  /// Calculates the final signature or MAC.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - Skipping yaca_sign_update() and calling only yaca_sign_finalize() will produce a
+  /// - signature or MAC of an empty message.
+  ///
+  /// **Parameters:**
+  /// - `ctx` (in,out): A valid sign context
+  /// - `signature` (out): Buffer for the MAC or the message signature (must be allocated by client, see yaca_context_get_output_length())
+  /// - `signature_len` (out): Length of the MAC or the signature, actual number of bytes written will be returned here
+  ///
+  /// **Returns:**
+  /// - `YACA_ERROR_NONE` on success, negative on error
+  ///
+  /// **Return values:**
+  /// - `YACA_ERROR_NONE`: Successful
+  /// - `YACA_ERROR_INVALID_PARAMETER`: Required parameters have incorrect values (NULL, invalid `ctx`)
+  /// - `YACA_ERROR_INTERNAL`: Internal error
+  ///
+  /// **See also:**
+  /// - `yaca_sign_initialize()`
+  /// - `yaca_sign_update()`
+  /// - `yaca_sign_initialize_hmac()`
+  /// - `yaca_sign_initialize_cmac()`
+  /// - `yaca_context_get_output_length()`
   int yaca_sign_finalize(
     yaca_context_h ctx,
     ffi.Pointer<ffi.Char> signature,
@@ -2018,33 +2440,42 @@ class Tizen80Yaca {
       int Function(
           yaca_context_h, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Size>)>();
 
-  /// @brief Initializes a signature verification context for asymmetric signatures.
-  /// @since_tizen 3.0
-  /// @remarks For RSA operations the default padding used is #YACA_PADDING_PKCS1. It can be
-  /// changed using yaca_context_set_property() with #YACA_PROPERTY_PADDING.
-  /// For verify to succeed it has to be set to the same value it was signed with.
-  /// @remarks The @a ctx should be released using yaca_context_destroy().
-  /// @param[out] ctx Newly created context
-  /// @param[in] algo Digest algorithm that will be used
-  /// @param[in] pub_key Public key that will be used, algorithm is deduced based on
-  /// key type, supported key types:
-  /// - #YACA_KEY_TYPE_RSA_PUB,
-  /// - #YACA_KEY_TYPE_DSA_PUB,
-  /// - #YACA_KEY_TYPE_EC_PUB
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL,
-  /// invalid @a algo or @a pub_key)
-  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see #yaca_key_type_e
-  /// @see #yaca_digest_algorithm_e
-  /// @see #yaca_padding_e
-  /// @see yaca_context_set_property()
-  /// @see yaca_verify_update()
-  /// @see yaca_verify_finalize()
-  /// @see yaca_context_destroy()
+  /// Initializes a signature verification context for asymmetric signatures.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - For RSA operations the default padding used is `YACA_PADDING_PKCS1`. It can be
+  /// - changed using yaca_context_set_property() with `YACA_PROPERTY_PADDING`.
+  /// - For verify to succeed it has to be set to the same value it was signed with.
+  /// - The `ctx` should be released using yaca_context_destroy().
+  ///
+  /// **Parameters:**
+  /// - `ctx` (out): Newly created context
+  /// - `algo` (in): Digest algorithm that will be used
+  /// - `pub_key` (in): Public key that will be used, algorithm is deduced based on key type, supported key types:
+  ///   - `YACA_KEY_TYPE_RSA_PUB`,
+  ///   - `YACA_KEY_TYPE_DSA_PUB`,
+  ///   - `YACA_KEY_TYPE_EC_PUB`
+  ///
+  /// **Returns:**
+  /// - `YACA_ERROR_NONE` on success, negative on error
+  ///
+  /// **Return values:**
+  /// - `YACA_ERROR_NONE`: Successful
+  /// - `YACA_ERROR_INVALID_PARAMETER`: Required parameters have incorrect values (NULL, invalid `algo` or `pub_key`)
+  /// - `YACA_ERROR_OUT_OF_MEMORY`: Out of memory error
+  /// - `YACA_ERROR_INTERNAL`: Internal error
+  ///
+  /// **See also:**
+  /// - `yaca_key_type_e`
+  /// - `yaca_digest_algorithm_e`
+  /// - `yaca_padding_e`
+  /// - `yaca_context_set_property()`
+  /// - `yaca_verify_update()`
+  /// - `yaca_verify_finalize()`
+  /// - `yaca_context_destroy()`
   int yaca_verify_initialize(
     ffi.Pointer<yaca_context_h> ctx,
     int algo,
@@ -2064,19 +2495,27 @@ class Tizen80Yaca {
   late final _yaca_verify_initialize = _yaca_verify_initializePtr
       .asFunction<int Function(ffi.Pointer<yaca_context_h>, int, yaca_key_h)>();
 
-  /// @brief Feeds the message into the digital signature verification algorithm.
-  /// @since_tizen 3.0
-  /// @param[in,out] ctx Context created by yaca_verify_initialize()
-  /// @param[in] message Message
-  /// @param[in] message_len Length of the message
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0,
-  /// invalid @a ctx)
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see yaca_verify_initialize()
-  /// @see yaca_verify_finalize()
+  /// Feeds the message into the digital signature verification algorithm.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `ctx` (in,out): Context created by yaca_verify_initialize()
+  /// - `message` (in): Message
+  /// - `message_len` (in): Length of the message
+  ///
+  /// **Returns:**
+  /// - `YACA_ERROR_NONE` on success, negative on error
+  ///
+  /// **Return values:**
+  /// - `YACA_ERROR_NONE`: Successful
+  /// - `YACA_ERROR_INVALID_PARAMETER`: Required parameters have incorrect values (NULL, 0, invalid `ctx`)
+  /// - `YACA_ERROR_INTERNAL`: Internal error
+  ///
+  /// **See also:**
+  /// - `yaca_verify_initialize()`
+  /// - `yaca_verify_finalize()`
   int yaca_verify_update(
     yaca_context_h ctx,
     ffi.Pointer<ffi.Char> message,
@@ -2096,23 +2535,33 @@ class Tizen80Yaca {
   late final _yaca_verify_update = _yaca_verify_updatePtr
       .asFunction<int Function(yaca_context_h, ffi.Pointer<ffi.Char>, int)>();
 
-  /// @brief Performs the verification.
-  /// @since_tizen 3.0
-  /// @remarks Skipping yaca_verify_update() and calling only yaca_verify_finalize() will verify
-  /// the signature of an empty message.
-  /// @param[in,out] ctx A valid verify context
-  /// @param[in] signature Message signature to be verified
-  /// @param[in] signature_len Length of the signature
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL,
-  /// invalid @a ctx)
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @retval #YACA_ERROR_DATA_MISMATCH The verification failed
-  /// @see yaca_verify_initialize()
-  /// @see yaca_verify_update()
-  /// @see yaca_sign_finalize()
+  /// Performs the verification.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - Skipping yaca_verify_update() and calling only yaca_verify_finalize() will verify
+  /// - the signature of an empty message.
+  ///
+  /// **Parameters:**
+  /// - `ctx` (in,out): A valid verify context
+  /// - `signature` (in): Message signature to be verified
+  /// - `signature_len` (in): Length of the signature
+  ///
+  /// **Returns:**
+  /// - `YACA_ERROR_NONE` on success, negative on error
+  ///
+  /// **Return values:**
+  /// - `YACA_ERROR_NONE`: Successful
+  /// - `YACA_ERROR_INVALID_PARAMETER`: Required parameters have incorrect values (NULL, invalid `ctx`)
+  /// - `YACA_ERROR_INTERNAL`: Internal error
+  /// - `YACA_ERROR_DATA_MISMATCH`: The verification failed
+  ///
+  /// **See also:**
+  /// - `yaca_verify_initialize()`
+  /// - `yaca_verify_update()`
+  /// - `yaca_sign_finalize()`
   int yaca_verify_finalize(
     yaca_context_h ctx,
     ffi.Pointer<ffi.Char> signature,
@@ -2132,30 +2581,40 @@ class Tizen80Yaca {
   late final _yaca_verify_finalize = _yaca_verify_finalizePtr
       .asFunction<int Function(yaca_context_h, ffi.Pointer<ffi.Char>, int)>();
 
-  /// @brief Encrypts data using a symmetric cipher.
-  /// @since_tizen 3.0
-  /// @remarks yaca_simple_encrypt() doesn't support #YACA_BCM_GCM and #YACA_BCM_CCM.
-  /// @remarks The @a ciphertext should be freed using yaca_free().
-  /// @remarks The @a plaintext can be NULL but then @a plaintext_len must be 0.
-  /// @param[in] algo Encryption algorithm (select #YACA_ENCRYPT_AES if unsure)
-  /// @param[in] bcm Chaining mode (select #YACA_BCM_CBC if unsure)
-  /// @param[in] sym_key Symmetric encryption key (see yaca_key.h for key generation functions)
-  /// @param[in] iv Initialization Vector
-  /// @param[in] plaintext Plaintext to be encrypted
-  /// @param[in] plaintext_len Length of the plaintext
-  /// @param[out] ciphertext Encrypted data, will be allocated by the library
-  /// @param[out] ciphertext_len Length of the encrypted data (may be larger than decrypted)
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0
-  /// invalid @a algo, @a bcm, @a sym_key or @a iv)
-  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see #yaca_encrypt_algorithm_e
-  /// @see #yaca_block_cipher_mode_e
-  /// @see yaca_simple_decrypt()
-  /// @see yaca_free()
+  /// Encrypts data using a symmetric cipher.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - yaca_simple_encrypt() doesn't support `YACA_BCM_GCM` and `YACA_BCM_CCM`.
+  /// - The `ciphertext` should be freed using yaca_free().
+  /// - The `plaintext` can be NULL but then `plaintext_len` must be 0.
+  ///
+  /// **Parameters:**
+  /// - `algo` (in): Encryption algorithm (select `YACA_ENCRYPT_AES` if unsure)
+  /// - `bcm` (in): Chaining mode (select `YACA_BCM_CBC` if unsure)
+  /// - `sym_key` (in): Symmetric encryption key (see yaca_key.h for key generation functions)
+  /// - `iv` (in): Initialization Vector
+  /// - `plaintext` (in): Plaintext to be encrypted
+  /// - `plaintext_len` (in): Length of the plaintext
+  /// - `ciphertext` (out): Encrypted data, will be allocated by the library
+  /// - `ciphertext_len` (out): Length of the encrypted data (may be larger than decrypted)
+  ///
+  /// **Returns:**
+  /// - `YACA_ERROR_NONE` on success, negative on error
+  ///
+  /// **Return values:**
+  /// - `YACA_ERROR_NONE`: Successful
+  /// - `YACA_ERROR_INVALID_PARAMETER`: Required parameters have incorrect values (NULL, 0 invalid `algo`, `bcm`, `sym_key` or `iv`)
+  /// - `YACA_ERROR_OUT_OF_MEMORY`: Out of memory error
+  /// - `YACA_ERROR_INTERNAL`: Internal error
+  ///
+  /// **See also:**
+  /// - `yaca_encrypt_algorithm_e`
+  /// - `yaca_block_cipher_mode_e`
+  /// - `yaca_simple_decrypt()`
+  /// - `yaca_free()`
   int yaca_simple_encrypt(
     int algo,
     int bcm,
@@ -2193,30 +2652,40 @@ class Tizen80Yaca {
       int Function(int, int, yaca_key_h, yaca_key_h, ffi.Pointer<ffi.Char>, int,
           ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Pointer<ffi.Size>)>();
 
-  /// @brief Decrypts data using a symmetric cipher.
-  /// @since_tizen 3.0
-  /// @remarks yaca_simple_decrypt() doesn't support #YACA_BCM_GCM and #YACA_BCM_CCM.
-  /// @remarks The @a plaintext should be freed using yaca_free().
-  /// @remarks The @a ciphertext can be NULL but then @a ciphertext_len must be 0.
-  /// @param[in] algo Decryption algorithm that was used to encrypt the data
-  /// @param[in] bcm Chaining mode that was used to encrypt the data
-  /// @param[in] sym_key Symmetric encryption key that was used to encrypt the data
-  /// @param[in] iv Initialization Vector that was used to encrypt the data
-  /// @param[in] ciphertext Ciphertext to be decrypted
-  /// @param[in] ciphertext_len Length of ciphertext
-  /// @param[out] plaintext Decrypted data, will be allocated by the library
-  /// @param[out] plaintext_len Length of the decrypted data
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0
-  /// invalid @a algo, @a bcm, @a sym_key or @a iv)
-  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see #yaca_encrypt_algorithm_e
-  /// @see #yaca_block_cipher_mode_e
-  /// @see yaca_simple_encrypt()
-  /// @see yaca_free()
+  /// Decrypts data using a symmetric cipher.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - yaca_simple_decrypt() doesn't support `YACA_BCM_GCM` and `YACA_BCM_CCM`.
+  /// - The `plaintext` should be freed using yaca_free().
+  /// - The `ciphertext` can be NULL but then `ciphertext_len` must be 0.
+  ///
+  /// **Parameters:**
+  /// - `algo` (in): Decryption algorithm that was used to encrypt the data
+  /// - `bcm` (in): Chaining mode that was used to encrypt the data
+  /// - `sym_key` (in): Symmetric encryption key that was used to encrypt the data
+  /// - `iv` (in): Initialization Vector that was used to encrypt the data
+  /// - `ciphertext` (in): Ciphertext to be decrypted
+  /// - `ciphertext_len` (in): Length of ciphertext
+  /// - `plaintext` (out): Decrypted data, will be allocated by the library
+  /// - `plaintext_len` (out): Length of the decrypted data
+  ///
+  /// **Returns:**
+  /// - `YACA_ERROR_NONE` on success, negative on error
+  ///
+  /// **Return values:**
+  /// - `YACA_ERROR_NONE`: Successful
+  /// - `YACA_ERROR_INVALID_PARAMETER`: Required parameters have incorrect values (NULL, 0 invalid `algo`, `bcm`, `sym_key` or `iv`)
+  /// - `YACA_ERROR_OUT_OF_MEMORY`: Out of memory error
+  /// - `YACA_ERROR_INTERNAL`: Internal error
+  ///
+  /// **See also:**
+  /// - `yaca_encrypt_algorithm_e`
+  /// - `yaca_block_cipher_mode_e`
+  /// - `yaca_simple_encrypt()`
+  /// - `yaca_free()`
   int yaca_simple_decrypt(
     int algo,
     int bcm,
@@ -2254,24 +2723,34 @@ class Tizen80Yaca {
       int Function(int, int, yaca_key_h, yaca_key_h, ffi.Pointer<ffi.Char>, int,
           ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Pointer<ffi.Size>)>();
 
-  /// @brief Calculates a digest of a message.
-  /// @since_tizen 3.0
-  /// @remarks The @a digest should be freed using yaca_free().
-  /// @remarks The @a message can be NULL but then @a message_len must be 0.
-  /// @param[in] algo Digest algorithm (select #YACA_DIGEST_SHA256 if unsure)
-  /// @param[in] message Message from which the digest is to be calculated
-  /// @param[in] message_len Length of the message
-  /// @param[out] digest Message digest, will be allocated by the library
-  /// @param[out] digest_len Length of message digest (depends on algorithm)
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL,
-  /// invalid @a algo)
-  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see #yaca_digest_algorithm_e
-  /// @see yaca_free()
+  /// Calculates a digest of a message.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The `digest` should be freed using yaca_free().
+  /// - The `message` can be NULL but then `message_len` must be 0.
+  ///
+  /// **Parameters:**
+  /// - `algo` (in): Digest algorithm (select `YACA_DIGEST_SHA256` if unsure)
+  /// - `message` (in): Message from which the digest is to be calculated
+  /// - `message_len` (in): Length of the message
+  /// - `digest` (out): Message digest, will be allocated by the library
+  /// - `digest_len` (out): Length of message digest (depends on algorithm)
+  ///
+  /// **Returns:**
+  /// - `YACA_ERROR_NONE` on success, negative on error
+  ///
+  /// **Return values:**
+  /// - `YACA_ERROR_NONE`: Successful
+  /// - `YACA_ERROR_INVALID_PARAMETER`: Required parameters have incorrect values (NULL, invalid `algo`)
+  /// - `YACA_ERROR_OUT_OF_MEMORY`: Out of memory error
+  /// - `YACA_ERROR_INTERNAL`: Internal error
+  ///
+  /// **See also:**
+  /// - `yaca_digest_algorithm_e`
+  /// - `yaca_free()`
   int yaca_simple_calculate_digest(
     int algo,
     ffi.Pointer<ffi.Char> message,
@@ -2301,34 +2780,43 @@ class Tizen80Yaca {
           int Function(int, ffi.Pointer<ffi.Char>, int,
               ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Pointer<ffi.Size>)>();
 
-  /// @brief Creates a signature using asymmetric private key.
-  /// @since_tizen 3.0
-  /// @remarks For #YACA_DIGEST_SHA384 and #YACA_DIGEST_SHA512 the RSA key size must be bigger than
-  /// #YACA_KEY_LENGTH_512BIT.
-  /// @remarks Using of #YACA_DIGEST_MD5 algorithm for DSA and ECDSA operations is prohibited.
-  /// @remarks The @a signature should be freed using yaca_free().
-  /// @remarks The @a message can be NULL but then @a message_len must be 0.
-  /// @param[in] algo Digest algorithm that will be used
-  /// @param[in] prv_key Private key that will be used, algorithm is
-  /// deduced based on key type, supported key types:
-  /// - #YACA_KEY_TYPE_RSA_PRIV,
-  /// - #YACA_KEY_TYPE_DSA_PRIV,
-  /// - #YACA_KEY_TYPE_EC_PRIV
-  /// @param[in] message Message to be signed
-  /// @param[in] message_len Length of the message
-  /// @param[out] signature Message signature, will be allocated by the library
-  /// @param[out] signature_len Length of the signature
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0
-  /// invalid @a algo or @a prv_key)
-  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see #yaca_key_type_e
-  /// @see #yaca_digest_algorithm_e
-  /// @see yaca_simple_verify_signature()
-  /// @see yaca_free()
+  /// Creates a signature using asymmetric private key.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - For `YACA_DIGEST_SHA384` and `YACA_DIGEST_SHA512` the RSA key size must be bigger than
+  /// - `YACA_KEY_LENGTH_512BIT`.
+  /// - Using of `YACA_DIGEST_MD5` algorithm for DSA and ECDSA operations is prohibited.
+  /// - The `signature` should be freed using yaca_free().
+  /// - The `message` can be NULL but then `message_len` must be 0.
+  ///
+  /// **Parameters:**
+  /// - `algo` (in): Digest algorithm that will be used
+  /// - `prv_key` (in): Private key that will be used, algorithm is deduced based on key type, supported key types:
+  ///   - `YACA_KEY_TYPE_RSA_PRIV`,
+  ///   - `YACA_KEY_TYPE_DSA_PRIV`,
+  ///   - `YACA_KEY_TYPE_EC_PRIV`
+  /// - `message` (in): Message to be signed
+  /// - `message_len` (in): Length of the message
+  /// - `signature` (out): Message signature, will be allocated by the library
+  /// - `signature_len` (out): Length of the signature
+  ///
+  /// **Returns:**
+  /// - `YACA_ERROR_NONE` on success, negative on error
+  ///
+  /// **Return values:**
+  /// - `YACA_ERROR_NONE`: Successful
+  /// - `YACA_ERROR_INVALID_PARAMETER`: Required parameters have incorrect values (NULL, 0 invalid `algo` or `prv_key`)
+  /// - `YACA_ERROR_OUT_OF_MEMORY`: Out of memory error
+  /// - `YACA_ERROR_INTERNAL`: Internal error
+  ///
+  /// **See also:**
+  /// - `yaca_key_type_e`
+  /// - `yaca_digest_algorithm_e`
+  /// - `yaca_simple_verify_signature()`
+  /// - `yaca_free()`
   int yaca_simple_calculate_signature(
     int algo,
     yaca_key_h prv_key,
@@ -2361,30 +2849,39 @@ class Tizen80Yaca {
           int Function(int, yaca_key_h, ffi.Pointer<ffi.Char>, int,
               ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Pointer<ffi.Size>)>();
 
-  /// @brief Verifies a signature using asymmetric public key.
-  /// @since_tizen 3.0
-  /// @remarks The @a message can be NULL but then @a message_len must be 0.
-  /// @param[in] algo Digest algorithm that will be used
-  /// @param[in] pub_key Public key that will be used, algorithm is
-  /// deduced based on key type, supported key types:
-  /// - #YACA_KEY_TYPE_RSA_PUB,
-  /// - #YACA_KEY_TYPE_DSA_PUB,
-  /// - #YACA_KEY_TYPE_EC_PUB
-  /// @param[in] message Message
-  /// @param[in] message_len Length of the message
-  /// @param[in] signature Message signature to be verified
-  /// @param[in] signature_len Length of the signature
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0
-  /// invalid @a algo or @a pub_key)
-  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @retval #YACA_ERROR_DATA_MISMATCH The verification failed
-  /// @see #yaca_key_type_e
-  /// @see #yaca_digest_algorithm_e
-  /// @see yaca_simple_calculate_signature()
+  /// Verifies a signature using asymmetric public key.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The `message` can be NULL but then `message_len` must be 0.
+  ///
+  /// **Parameters:**
+  /// - `algo` (in): Digest algorithm that will be used
+  /// - `pub_key` (in): Public key that will be used, algorithm is deduced based on key type, supported key types:
+  ///   - `YACA_KEY_TYPE_RSA_PUB`,
+  ///   - `YACA_KEY_TYPE_DSA_PUB`,
+  ///   - `YACA_KEY_TYPE_EC_PUB`
+  /// - `message` (in): Message
+  /// - `message_len` (in): Length of the message
+  /// - `signature` (in): Message signature to be verified
+  /// - `signature_len` (in): Length of the signature
+  ///
+  /// **Returns:**
+  /// - `YACA_ERROR_NONE` on success, negative on error
+  ///
+  /// **Return values:**
+  /// - `YACA_ERROR_NONE`: Successful
+  /// - `YACA_ERROR_INVALID_PARAMETER`: Required parameters have incorrect values (NULL, 0 invalid `algo` or `pub_key`)
+  /// - `YACA_ERROR_OUT_OF_MEMORY`: Out of memory error
+  /// - `YACA_ERROR_INTERNAL`: Internal error
+  /// - `YACA_ERROR_DATA_MISMATCH`: The verification failed
+  ///
+  /// **See also:**
+  /// - `yaca_key_type_e`
+  /// - `yaca_digest_algorithm_e`
+  /// - `yaca_simple_calculate_signature()`
   int yaca_simple_verify_signature(
     int algo,
     yaca_key_h pub_key,
@@ -2417,30 +2914,40 @@ class Tizen80Yaca {
           int Function(int, yaca_key_h, ffi.Pointer<ffi.Char>, int,
               ffi.Pointer<ffi.Char>, int)>();
 
-  /// @brief Calculates a HMAC of given message using symmetric key.
-  /// @since_tizen 3.0
-  /// @remarks For verification, calculate message HMAC and compare with received MAC using yaca_memcmp().
-  /// @remarks The @a mac should be freed using yaca_free().
-  /// @remarks The @a message can be NULL but then @a message_len must be 0.
-  /// @param[in] algo Digest algorithm that will be used
-  /// @param[in] sym_key Key that will be used, supported key types:
-  /// - #YACA_KEY_TYPE_SYMMETRIC,
-  /// - #YACA_KEY_TYPE_DES
-  /// @param[in] message Message to calculate HMAC from
-  /// @param[in] message_len Length of the message
-  /// @param[out] mac MAC, will be allocated by the library
-  /// @param[out] mac_len Length of the MAC
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0
-  /// invalid @a algo or @a sym_key)
-  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see #yaca_key_type_e
-  /// @see #yaca_digest_algorithm_e
-  /// @see yaca_memcmp()
-  /// @see yaca_free()
+  /// Calculates a HMAC of given message using symmetric key.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - For verification, calculate message HMAC and compare with received MAC using yaca_memcmp().
+  /// - The `mac` should be freed using yaca_free().
+  /// - The `message` can be NULL but then `message_len` must be 0.
+  ///
+  /// **Parameters:**
+  /// - `algo` (in): Digest algorithm that will be used
+  /// - `sym_key` (in): Key that will be used, supported key types:
+  ///   - `YACA_KEY_TYPE_SYMMETRIC`,
+  ///   - `YACA_KEY_TYPE_DES`
+  /// - `message` (in): Message to calculate HMAC from
+  /// - `message_len` (in): Length of the message
+  /// - `mac` (out): MAC, will be allocated by the library
+  /// - `mac_len` (out): Length of the MAC
+  ///
+  /// **Returns:**
+  /// - `YACA_ERROR_NONE` on success, negative on error
+  ///
+  /// **Return values:**
+  /// - `YACA_ERROR_NONE`: Successful
+  /// - `YACA_ERROR_INVALID_PARAMETER`: Required parameters have incorrect values (NULL, 0 invalid `algo` or `sym_key`)
+  /// - `YACA_ERROR_OUT_OF_MEMORY`: Out of memory error
+  /// - `YACA_ERROR_INTERNAL`: Internal error
+  ///
+  /// **See also:**
+  /// - `yaca_key_type_e`
+  /// - `yaca_digest_algorithm_e`
+  /// - `yaca_memcmp()`
+  /// - `yaca_free()`
   int yaca_simple_calculate_hmac(
     int algo,
     yaca_key_h sym_key,
@@ -2473,30 +2980,40 @@ class Tizen80Yaca {
           int Function(int, yaca_key_h, ffi.Pointer<ffi.Char>, int,
               ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Pointer<ffi.Size>)>();
 
-  /// @brief Calculates a CMAC of given message using symmetric key.
-  /// @since_tizen 3.0
-  /// @remarks For verification, calculate message CMAC and compare with received MAC using yaca_memcmp().
-  /// @remarks The @a mac should be freed using yaca_free().
-  /// @remarks The @a message can be NULL but then @a message_len must be 0.
-  /// @param[in] algo Encryption algorithm that will be used
-  /// @param[in] sym_key Key that will be used, supported key types:
-  /// - #YACA_KEY_TYPE_SYMMETRIC,
-  /// - #YACA_KEY_TYPE_DES
-  /// @param[in] message Message to calculate CMAC from
-  /// @param[in] message_len Length of the message
-  /// @param[out] mac MAC, will be allocated by the library
-  /// @param[out] mac_len Length of the MAC
-  /// @return #YACA_ERROR_NONE on success,
-  /// negative on error
-  /// @retval #YACA_ERROR_NONE Successful
-  /// @retval #YACA_ERROR_INVALID_PARAMETER Required parameters have incorrect values (NULL, 0
-  /// invalid @a algo or @a sym_key)
-  /// @retval #YACA_ERROR_OUT_OF_MEMORY Out of memory error
-  /// @retval #YACA_ERROR_INTERNAL Internal error
-  /// @see #yaca_key_type_e
-  /// @see #yaca_encrypt_algorithm_e
-  /// @see yaca_memcmp()
-  /// @see yaca_free()
+  /// Calculates a CMAC of given message using symmetric key.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - For verification, calculate message CMAC and compare with received MAC using yaca_memcmp().
+  /// - The `mac` should be freed using yaca_free().
+  /// - The `message` can be NULL but then `message_len` must be 0.
+  ///
+  /// **Parameters:**
+  /// - `algo` (in): Encryption algorithm that will be used
+  /// - `sym_key` (in): Key that will be used, supported key types:
+  ///   - `YACA_KEY_TYPE_SYMMETRIC`,
+  ///   - `YACA_KEY_TYPE_DES`
+  /// - `message` (in): Message to calculate CMAC from
+  /// - `message_len` (in): Length of the message
+  /// - `mac` (out): MAC, will be allocated by the library
+  /// - `mac_len` (out): Length of the MAC
+  ///
+  /// **Returns:**
+  /// - `YACA_ERROR_NONE` on success, negative on error
+  ///
+  /// **Return values:**
+  /// - `YACA_ERROR_NONE`: Successful
+  /// - `YACA_ERROR_INVALID_PARAMETER`: Required parameters have incorrect values (NULL, 0 invalid `algo` or `sym_key`)
+  /// - `YACA_ERROR_OUT_OF_MEMORY`: Out of memory error
+  /// - `YACA_ERROR_INTERNAL`: Internal error
+  ///
+  /// **See also:**
+  /// - `yaca_key_type_e`
+  /// - `yaca_encrypt_algorithm_e`
+  /// - `yaca_memcmp()`
+  /// - `yaca_free()`
   int yaca_simple_calculate_cmac(
     int algo,
     yaca_key_h sym_key,
@@ -2530,12 +3047,17 @@ class Tizen80Yaca {
               ffi.Pointer<ffi.Pointer<ffi.Char>>, ffi.Pointer<ffi.Size>)>();
 }
 
+/// @nodoc
 final class yaca_context_s extends ffi.Opaque {}
 
+/// @nodoc
 final class yaca_key_s extends ffi.Opaque {}
 
-/// @brief Enumeration for formats YACA key.
-/// @since_tizen 3.0
+/// Enumeration for formats YACA key.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class yaca_key_format_e {
   /// Key is either PKCS#1 for RSA or SSLeay for DSA, also use this option for symmetric
   static const int YACA_KEY_FORMAT_DEFAULT = 0;
@@ -2544,8 +3066,11 @@ abstract class yaca_key_format_e {
   static const int YACA_KEY_FORMAT_PKCS8 = 1;
 }
 
-/// @brief Enumeration for formats YACA key file.
-/// @since_tizen 3.0
+/// Enumeration for formats YACA key file.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class yaca_key_file_format_e {
   /// Key file is in raw binary format, used for symmetric keys
   static const int YACA_KEY_FILE_FORMAT_RAW = 0;
@@ -2560,8 +3085,11 @@ abstract class yaca_key_file_format_e {
   static const int YACA_KEY_FILE_FORMAT_DER = 3;
 }
 
-/// @brief Enumeration for YACA key types, Initialization Vector is considered as key.
-/// @since_tizen 3.0
+/// Enumeration for YACA key types, Initialization Vector is considered as key.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class yaca_key_type_e {
   /// Generic symmetric cipher KEY
   static const int YACA_KEY_TYPE_SYMMETRIC = 0;
@@ -2606,10 +3134,11 @@ abstract class yaca_key_type_e {
   static const int YACA_KEY_TYPE_EC_PARAMS = 13;
 }
 
-/// @brief Enumeration for YACA key lengths.
-/// It is possible to use arbitrary integer instead,
-/// this enum values are placed here to avoid magic numbers.
-/// @since_tizen 3.0
+/// Enumeration for YACA key lengths. It is possible to use arbitrary integer instead, this enum values are placed here to avoid magic numbers.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class yaca_key_bit_length_e {
   /// 64 bits
   static const int YACA_KEY_LENGTH_IV_64BIT = 64;
@@ -2654,10 +3183,11 @@ abstract class yaca_key_bit_length_e {
   static const int YACA_KEY_LENGTH_4096BIT = 4096;
 }
 
-/// @brief Enumeration for YACA elliptic curve types with their bit lengths.
-/// It's meant to be passed or returned as a @a key_bit_len param
-/// in appropriate functions when dealing with elliptic curves.
-/// @since_tizen 3.0
+/// Enumeration for YACA elliptic curve types with their bit lengths. It's meant to be passed or returned as a `key_bit_len` param in appropriate functions when dealing with elliptic curves.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class yaca_key_bit_length_ec_e {
   /// Elliptic curve prime192v1
   static const int YACA_KEY_LENGTH_EC_PRIME192V1 = 805306560;
@@ -2675,11 +3205,11 @@ abstract class yaca_key_bit_length_ec_e {
   static const int YACA_KEY_LENGTH_EC_SECP521R1 = 823132681;
 }
 
-/// @brief Enumeration for YACA DH parameters taken from RFC 5114.
-/// It's meant to be passed or returned as a @a key_bit_len param
-/// in appropriate functions when dealing with DH and wanting to
-/// use RFC 5114 values.
-/// @since_tizen 3.0
+/// Enumeration for YACA DH parameters taken from RFC 5114. It's meant to be passed or returned as a `key_bit_len` param in appropriate functions when dealing with DH and wanting to use RFC 5114 values.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class yaca_key_bit_length_dh_rfc_e {
   /// RFC 5114 DH parameters 1024_160
   static const int YACA_KEY_LENGTH_DH_RFC_1024_160 = 536871936;
@@ -2691,8 +3221,11 @@ abstract class yaca_key_bit_length_dh_rfc_e {
   static const int YACA_KEY_LENGTH_DH_RFC_2048_256 = 570427392;
 }
 
-/// @brief Enumeration for YACA message digest algorithms.
-/// @since_tizen 3.0
+/// Enumeration for YACA message digest algorithms.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class yaca_digest_algorithm_e {
   /// Message digest algorithm MD5
   static const int YACA_DIGEST_MD5 = 0;
@@ -2713,59 +3246,35 @@ abstract class yaca_digest_algorithm_e {
   static const int YACA_DIGEST_SHA512 = 5;
 }
 
-/// @brief Enumeration for YACA symmetric encryption algorithms.
-/// @since_tizen 3.0
+/// Enumeration for YACA symmetric encryption algorithms.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class yaca_encrypt_algorithm_e {
   /// AES encryption.
-  /// - Supported key lengths: @c 128, @c 192 and @c 256 bits.
-  /// - Supported block cipher modes:\n
-  /// #YACA_BCM_CBC,\n
-  /// #YACA_BCM_OFB,\n
-  /// #YACA_BCM_CFB,\n
-  /// #YACA_BCM_CFB1,\n
-  /// #YACA_BCM_CFB8,\n
-  /// #YACA_BCM_ECB,\n
-  /// #YACA_BCM_GCM,\n
-  /// #YACA_BCM_CCM,\n
-  /// #YACA_BCM_CTR,\n
-  /// #YACA_BCM_WRAP
-  /// - see #yaca_block_cipher_mode_e for details on additional properties (mandatory).
+  /// - Supported key lengths: `128`, `192` and `256` bits.
+  /// - Supported block cipher modes: `YACA_BCM_CBC`, `YACA_BCM_OFB`, `YACA_BCM_CFB`, `YACA_BCM_CFB1`, `YACA_BCM_CFB8`, `YACA_BCM_ECB`, `YACA_BCM_GCM`, `YACA_BCM_CCM`, `YACA_BCM_CTR`, `YACA_BCM_WRAP`
+  /// - see `yaca_block_cipher_mode_e` for details on additional properties (mandatory).
   static const int YACA_ENCRYPT_AES = 0;
 
   /// DES encryption.
-  /// - Supported key lengths: @c 64 bits.
-  /// - Supported block cipher modes:\n
-  /// #YACA_BCM_CBC,\n
-  /// #YACA_BCM_OFB,\n
-  /// #YACA_BCM_CFB,\n
-  /// #YACA_BCM_CFB1,\n
-  /// #YACA_BCM_CFB8,\n
-  /// #YACA_BCM_ECB
-  /// - see #yaca_block_cipher_mode_e for details on additional properties (mandatory).
+  /// - Supported key lengths: `64` bits.
+  /// - Supported block cipher modes: `YACA_BCM_CBC`, `YACA_BCM_OFB`, `YACA_BCM_CFB`, `YACA_BCM_CFB1`, `YACA_BCM_CFB8`, `YACA_BCM_ECB`
+  /// - see `yaca_block_cipher_mode_e` for details on additional properties (mandatory).
   static const int YACA_ENCRYPT_UNSAFE_DES = 1;
 
   /// 3DES 2-key encryption.
-  /// - Supported key lengths: @c 128 bits.
-  /// - Supported block cipher modes:\n
-  /// #YACA_BCM_CBC,\n
-  /// #YACA_BCM_OFB,\n
-  /// #YACA_BCM_CFB,\n
-  /// #YACA_BCM_ECB
-  /// - see #yaca_block_cipher_mode_e for details on additional properties (mandatory).
+  /// - Supported key lengths: `128` bits.
+  /// - Supported block cipher modes: `YACA_BCM_CBC`, `YACA_BCM_OFB`, `YACA_BCM_CFB`, `YACA_BCM_ECB`
+  /// - see `yaca_block_cipher_mode_e` for details on additional properties (mandatory).
   /// - Use double DES keys to perform corresponding 2-key 3DES encryption.
   static const int YACA_ENCRYPT_UNSAFE_3DES_2TDEA = 2;
 
   /// 3DES 3-key encryption.
-  /// - Supported key lengths: @c 192 bits.
-  /// - Supported block cipher modes:\n
-  /// #YACA_BCM_CBC,\n
-  /// #YACA_BCM_OFB,\n
-  /// #YACA_BCM_CFB,\n
-  /// #YACA_BCM_CFB1,\n
-  /// #YACA_BCM_CFB8,\n
-  /// #YACA_BCM_ECB,\n
-  /// #YACA_BCM_WRAP
-  /// - see #yaca_block_cipher_mode_e for details on additional properties (mandatory).
+  /// - Supported key lengths: `192` bits.
+  /// - Supported block cipher modes: `YACA_BCM_CBC`, `YACA_BCM_OFB`, `YACA_BCM_CFB`, `YACA_BCM_CFB1`, `YACA_BCM_CFB8`, `YACA_BCM_ECB`, `YACA_BCM_WRAP`
+  /// - see `yaca_block_cipher_mode_e` for details on additional properties (mandatory).
   /// - Use triple DES keys to perform corresponding 3-key 3DES encryption.
   static const int YACA_ENCRYPT_3DES_3TDEA = 3;
 
@@ -2805,8 +3314,11 @@ abstract class yaca_encrypt_algorithm_e {
   static const int YACA_ENCRYPT_CAST5 = 6;
 }
 
-/// @brief Enumeration for YACA chaining modes for block ciphers.
-/// @since_tizen 3.0
+/// Enumeration for YACA chaining modes for block ciphers.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class yaca_block_cipher_mode_e {
   /// Used when algorithm doesn't support block ciphers modes.
   /// Initialization Vector is not used.
@@ -2840,29 +3352,14 @@ abstract class yaca_block_cipher_mode_e {
   /// it can be set at the latest before the *_update() call.
   static const int YACA_BCM_CBC = 3;
 
-  /// GCM block cipher mode.
-  /// This is a variable Initialization Vector length mode (recommended 96-bits).
-  /// Supported properties:
-  /// - #YACA_PROPERTY_GCM_TAG_LEN = GCM tag length (optional)\n
-  /// Supported tag lengths: @c 4, @c 8, @c 12, @c 13, @c 14, @c 15, @c 16
-  /// (16 bytes tag by default).\n
-  /// Set after yaca_encrypt_finalize() / yaca_seal_finalize() and before
-  /// yaca_context_get_property(#YACA_PROPERTY_GCM_TAG) in encryption / seal operation.\n
-  /// The @a value should be a size_t variable.\n
-  /// In decryption / open operation tag length is not set.\n
-  /// - #YACA_PROPERTY_GCM_TAG = GCM tag\n
-  /// Get after yaca_encrypt_finalize() / yaca_seal_finalize() in encryption / seal operation.\n
-  /// Set after yaca_decrypt_update() / yaca_open_update() and before
-  /// yaca_decrypt_finalize() / yaca_open_finalize() in decryption / open operation.\n
-  /// - #YACA_PROPERTY_GCM_AAD = additional authentication data (optional)\n
-  /// AAD length can have any positive value.\n
-  /// Set after yaca_encrypt_initialize() / yaca_seal_initialize() and before
-  /// yaca_encrypt_update() / yaca_seal_update() in encryption / seal operation.\n
-  /// Set after yaca_decrypt_initialize() / yaca_open_initialize() and before
-  /// yaca_decrypt_update() / yaca_open_update() in decryption / open operation.\n
-  /// .
-  /// @see yaca_context_set_property()
-  /// @see yaca_context_get_property()
+  /// GCM block cipher mode. This is a variable Initialization Vector length mode (recommended 96-bits). Supported properties:
+  /// - `YACA_PROPERTY_GCM_TAG_LEN` = GCM tag length (optional) Supported tag lengths: `4`, `8`, `12`, `13`, `14`, `15`, `16` (16 bytes tag by default). Set after yaca_encrypt_finalize() / yaca_seal_finalize() and before yaca_context_get_property(`YACA_PROPERTY_GCM_TAG`) in encryption / seal operation. The `value` should be a size_t variable. In decryption / open operation tag length is not set.
+  /// - `YACA_PROPERTY_GCM_TAG` = GCM tag Get after yaca_encrypt_finalize() / yaca_seal_finalize() in encryption / seal operation. Set after yaca_decrypt_update() / yaca_open_update() and before yaca_decrypt_finalize() / yaca_open_finalize() in decryption / open operation.
+  /// - `YACA_PROPERTY_GCM_AAD` = additional authentication data (optional) AAD length can have any positive value. Set after yaca_encrypt_initialize() / yaca_seal_initialize() and before yaca_encrypt_update() / yaca_seal_update() in encryption / seal operation. Set after yaca_decrypt_initialize() / yaca_open_initialize() and before yaca_decrypt_update() / yaca_open_update() in decryption / open operation. .
+  ///
+  /// **See also:**
+  /// - `yaca_context_set_property()`
+  /// - `yaca_context_get_property()`
   static const int YACA_BCM_GCM = 4;
 
   /// Default CFB block cipher mode.
@@ -2885,38 +3382,14 @@ abstract class yaca_block_cipher_mode_e {
   /// 64-bit for other algorithms is mandatory.
   static const int YACA_BCM_OFB = 8;
 
-  /// CBC-MAC Mode (AES).
-  /// This is a variable Initialization Vector length mode.\n
-  /// Supported Initialization Vector lengths: 56-104 bits in steps of 8 bits
-  /// (recommended 56-bits).\n
-  /// Supported properties:
-  /// - #YACA_PROPERTY_CCM_TAG_LEN = CCM tag length (optional)\n
-  /// Supported tag lengths: 4-16 bytes in steps of 2 bytes (12 bytes tag by default).\n
-  /// Set after yaca_encrypt_initialize() / yaca_seal_initialize() and before
-  /// yaca_encrypt_update() / yaca_seal_update() in encryption / seal operation.\n
-  /// The @a value should be a size_t variable.\n
-  /// In decryption / open operation tag length is not set.\n
-  /// - #YACA_PROPERTY_CCM_TAG = CCM tag\n
-  /// Get after yaca_encrypt_finalize() / yaca_seal_finalize() in encryption / seal operation.\n
-  /// Set after yaca_decrypt_initialize() / yaca_open_initialize() and before
-  /// yaca_decrypt_update() / yaca_open_update() in decryption / open operation.\n
-  /// - #YACA_PROPERTY_CCM_AAD = additional authentication data (optional)\n
-  /// AAD length can have any positive value.\n
-  /// The total plaintext length must be passed to yaca_encrypt_update() / yaca_seal_update()
-  /// if AAD is used.\n
-  /// Set after yaca_encrypt_initialize() / yaca_seal_initialize() and before
-  /// yaca_encrypt_update() / yaca_seal_update() in encryption / seal operation.\n
-  /// The total encrypted text length must be passed to yaca_decrypt_update() /
-  /// yaca_open_update() if AAD is used.\n
-  /// Set after yaca_decrypt_initialize() / yaca_open_initialize() and before
-  /// yaca_decrypt_update() / yaca_open_update() in decryption / open operation.\n
-  /// .
-  /// You can only call yaca_encrypt_update() / yaca_seal_update() once for AAD (if used)
-  /// and once for the plaintext.\n
-  /// You can only call yaca_decrypt_update() / yaca_open_update() once for AAD (if used)
-  /// and once for the encrypted text.\n
-  /// @see yaca_context_set_property()
-  /// @see yaca_context_get_property()
+  /// CBC-MAC Mode (AES). This is a variable Initialization Vector length mode. Supported Initialization Vector lengths: 56-104 bits in steps of 8 bits (recommended 56-bits). Supported properties:
+  /// - `YACA_PROPERTY_CCM_TAG_LEN` = CCM tag length (optional) Supported tag lengths: 4-16 bytes in steps of 2 bytes (12 bytes tag by default). Set after yaca_encrypt_initialize() / yaca_seal_initialize() and before yaca_encrypt_update() / yaca_seal_update() in encryption / seal operation. The `value` should be a size_t variable. In decryption / open operation tag length is not set.
+  /// - `YACA_PROPERTY_CCM_TAG` = CCM tag Get after yaca_encrypt_finalize() / yaca_seal_finalize() in encryption / seal operation. Set after yaca_decrypt_initialize() / yaca_open_initialize() and before yaca_decrypt_update() / yaca_open_update() in decryption / open operation.
+  /// - `YACA_PROPERTY_CCM_AAD` = additional authentication data (optional) AAD length can have any positive value. The total plaintext length must be passed to yaca_encrypt_update() / yaca_seal_update() if AAD is used. Set after yaca_encrypt_initialize() / yaca_seal_initialize() and before yaca_encrypt_update() / yaca_seal_update() in encryption / seal operation. The total encrypted text length must be passed to yaca_decrypt_update() / yaca_open_update() if AAD is used. Set after yaca_decrypt_initialize() / yaca_open_initialize() and before yaca_decrypt_update() / yaca_open_update() in decryption / open operation. . You can only call yaca_encrypt_update() / yaca_seal_update() once for AAD (if used) and once for the plaintext. You can only call yaca_decrypt_update() / yaca_open_update() once for AAD (if used) and once for the encrypted text.
+  ///
+  /// **See also:**
+  /// - `yaca_context_set_property()`
+  /// - `yaca_context_get_property()`
   static const int YACA_BCM_CCM = 9;
 
   /// Used with #YACA_ENCRYPT_AES or #YACA_ENCRYPT_3DES_3TDEA to perform a key wrapping
@@ -2935,9 +3408,14 @@ abstract class yaca_block_cipher_mode_e {
   static const int YACA_BCM_WRAP = 10;
 }
 
-/// @brief Enumeration for YACA non-standard properties for algorithms.
-/// @since_tizen 3.0
-/// @see #yaca_padding_e
+/// Enumeration for YACA non-standard properties for algorithms.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **See also:**
+/// - `yaca_padding_e`
+/// @nodoc
 abstract class yaca_property_e {
   /// Padding for the encrypt/decrypt or sign/verify operation. Property type is #yaca_padding_e.
   /// This property can be set at the latest before the *_finalize() call.
@@ -2965,8 +3443,11 @@ abstract class yaca_property_e {
   static const int YACA_PROPERTY_RC2_EFFECTIVE_KEY_BITS = 7;
 }
 
-/// @brief Enumeration for YACA paddings.
-/// @since_tizen 3.0
+/// Enumeration for YACA paddings.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class yaca_padding_e {
   /// No padding at all. This method assumes that the input data already has a proper length for
   /// a given cryptographic operation (e.g. it has been padded by the client). Suitable for
@@ -3005,8 +3486,11 @@ abstract class yaca_padding_e {
   static const int YACA_PADDING_PKCS7 = 6;
 }
 
-/// @brief Enumeration for YACA key derivation functions.
-/// @since_tizen 3.0
+/// Enumeration for YACA key derivation functions.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class yaca_kdf_e {
   /// ANSI X9.42 key derivation function,
   /// (shared secret derived using Diffie-Helmann key exchange protocol).
@@ -3017,16 +3501,25 @@ abstract class yaca_kdf_e {
   static const int YACA_KDF_X962 = 1;
 }
 
-/// @brief The context handle.
-/// @since_tizen 3.0
+/// The context handle.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 typedef yaca_context_h = ffi.Pointer<yaca_context_s>;
 
-/// @brief An Initialization Vector or a key generation parameters by the key handle.
-/// @since_tizen 3.0
+/// An Initialization Vector or a key generation parameters by the key handle.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 typedef yaca_key_h = ffi.Pointer<yaca_key_s>;
 
-/// @brief Enumeration for YACA error values.
-/// @since_tizen 3.0
+/// Enumeration for YACA error values.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class yaca_error_e {
   /// Successful
   static const int YACA_ERROR_NONE = 0;
@@ -3047,58 +3540,86 @@ abstract class yaca_error_e {
   static const int YACA_ERROR_INVALID_PASSWORD = -31653885;
 }
 
+/// @nodoc
 const int YACA_KEYLEN_COMPONENT_TYPE_MASK = -268435456;
 
+/// @nodoc
 const int YACA_KEYLEN_COMPONENT_TYPE_BITS = 0;
 
+/// @nodoc
 const int YACA_KEYLEN_COMPONENT_TYPE_DH = 268435456;
 
+/// @nodoc
 const int YACA_KEYLEN_COMPONENT_TYPE_DH_RFC = 536870912;
 
+/// @nodoc
 const int YACA_KEYLEN_COMPONENT_TYPE_EC = 805306368;
 
+/// @nodoc
 const int YACA_KEYLEN_COMPONENT_DH_GEN_MASK = 251658240;
 
+/// @nodoc
 const int YACA_KEYLEN_COMPONENT_DH_GEN_2 = 0;
 
+/// @nodoc
 const int YACA_KEYLEN_COMPONENT_DH_GEN_5 = 16777216;
 
+/// @nodoc
 const int YACA_KEYLEN_COMPONENT_DH_PRIME_MASK = 65535;
 
+/// @nodoc
 const int YACA_KEYLEN_COMPONENT_DH_RFC_MASK = 251658240;
 
+/// @nodoc
 const int YACA_KEYLEN_COMPONENT_DH_RFC_160 = 0;
 
+/// @nodoc
 const int YACA_KEYLEN_COMPONENT_DH_RFC_224 = 16777216;
 
+/// @nodoc
 const int YACA_KEYLEN_COMPONENT_DH_RFC_256 = 33554432;
 
+/// @nodoc
 const int YACA_KEYLEN_COMPONENT_EC_PRIME = 0;
 
+/// @nodoc
 const int YACA_KEYLEN_COMPONENT_EC_SECP = 16777216;
 
+/// @nodoc
 const int YACA_KEYLEN_COMPONENT_EC_SECT = 33554432;
 
+/// @nodoc
 const int YACA_KEYLEN_COMPONENT_EC_BRAINPOOL = 50331648;
 
+/// @nodoc
 const int YACA_KEYLEN_COMPONENT_EC_V = 0;
 
+/// @nodoc
 const int YACA_KEYLEN_COMPONENT_EC_R = 1048576;
 
+/// @nodoc
 const int YACA_KEYLEN_COMPONENT_EC_K = 2097152;
 
+/// @nodoc
 const int YACA_KEYLEN_COMPONENT_EC_T = 3145728;
 
+/// @nodoc
 const int YACA_KEYLEN_COMPONENT_EC_1 = 0;
 
+/// @nodoc
 const int YACA_KEYLEN_COMPONENT_EC_2 = 65536;
 
+/// @nodoc
 const int YACA_KEYLEN_COMPONENT_EC_3 = 131072;
 
+/// @nodoc
 const int YACA_KEYLEN_COMPONENT_EC_4 = 196608;
 
+/// @nodoc
 const int YACA_KEY_LENGTH_DH_GENERATOR_2 = 268435456;
 
+/// @nodoc
 const int YACA_KEY_LENGTH_DH_GENERATOR_5 = 285212672;
 
+/// @nodoc
 const int TIZEN_ERROR_YACA = -31653888;

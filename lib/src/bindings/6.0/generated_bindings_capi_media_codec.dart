@@ -1,3 +1,6 @@
+/// {@category 6.0/tizen}
+library tizen_interop_6_0.capi_media_codec;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -10,6 +13,7 @@ import 'dart:ffi' as ffi;
 import 'generated_bindings_capi_media_tool.dart' as media_tool;
 
 /// Dart bindings for Tizen capi-media-codec APIs.
+/// {@category 6.0/tizen}
 class Tizen60CapiMediaCodec {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -25,20 +29,29 @@ class Tizen60CapiMediaCodec {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Creates a mediacodec handle for decoding/encoding.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks you must release @a mediacodec using mediacodec_destroy().\n
-  /// Although you can create multiple mediacodec handles at the same time,
-  /// the mediacodec cannot guarantee proper operation because of limited resources, like
-  /// audio or display device.
+  /// Creates a mediacodec handle for decoding/encoding.
   ///
-  /// @param[out] mediacodec  A new handle to mediacodec
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIACODEC_ERROR_NONE Successful
-  /// @retval #MEDIACODEC_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIACODEC_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MEDIACODEC_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIACODEC_ERROR_NOT_SUPPORTED_ON_DEVICE Not supported on device (Since 4.0)
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - you must release `mediacodec` using mediacodec_destroy().
+  /// - Although you can create multiple mediacodec handles at the same time,
+  /// - the mediacodec cannot guarantee proper operation because of limited resources, like
+  /// - audio or display device.
+  ///
+  /// **Parameters:**
+  /// - `mediacodec` (out): A new handle to mediacodec
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIACODEC_ERROR_NONE`: Successful
+  /// - `MEDIACODEC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIACODEC_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MEDIACODEC_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIACODEC_ERROR_NOT_SUPPORTED_ON_DEVICE`: Not supported on device (Since 4.0)
   int mediacodec_create(
     ffi.Pointer<mediacodec_h> mediacodec,
   ) {
@@ -53,18 +66,27 @@ class Tizen60CapiMediaCodec {
   late final _mediacodec_create = _mediacodec_createPtr
       .asFunction<int Function(ffi.Pointer<mediacodec_h>)>();
 
-  /// @brief Destroys the mediacodec handle and releases all its resources.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks To completely shutdown the mediacodec operation, call this function with a valid player handle from any
-  /// mediacodec
+  /// Destroys the mediacodec handle and releases all its resources.
   ///
-  /// @param[in] mediacodec The handle to mediacodec to be destroyed.
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIACODEC_ERROR_NONE Successful
-  /// @retval #MEDIACODEC_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIACODEC_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MEDIACODEC_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIACODEC_ERROR_NOT_SUPPORTED_ON_DEVICE Not supported on device (Since 4.0)
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - To completely shutdown the mediacodec operation, call this function with a valid player handle from any
+  /// - mediacodec
+  ///
+  /// **Parameters:**
+  /// - `mediacodec` (in): The handle to mediacodec to be destroyed.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIACODEC_ERROR_NONE`: Successful
+  /// - `MEDIACODEC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIACODEC_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MEDIACODEC_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIACODEC_ERROR_NOT_SUPPORTED_ON_DEVICE`: Not supported on device (Since 4.0)
   int mediacodec_destroy(
     mediacodec_h mediacodec,
   ) {
@@ -79,22 +101,32 @@ class Tizen60CapiMediaCodec {
   late final _mediacodec_destroy =
       _mediacodec_destroyPtr.asFunction<int Function(mediacodec_h)>();
 
-  /// @brief Sets the codec type and decoder/encoder.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks If this codec is to be used as a decoder, pass the #MEDIACODEC_DECODER flag.
-  /// If this codec is to be used as an encoder, pass the #MEDIACODEC_ENCODER flag.\n
-  /// The software codec is used as default setting(#MEDIACODEC_SUPPORT_TYPE_SW) if user doesn't set hardware flag.
-  /// If user wants to use h/w decoder, user needs to pass the #MEDIACODEC_DECODER | #MEDIACODEC_SUPPORT_TYPE_HW.
-  /// @param[in] mediacodec  The handle of mediacodec
-  /// @param[in] codec_type  The identifier of the codec type of the decoder/encoder
-  /// @param[in] flags  The encoding/decoding scheme, defined by #mediacodec_support_type_e
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIACODEC_ERROR_NONE Successful
-  /// @retval #MEDIACODEC_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIACODEC_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MEDIACODEC_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIACODEC_ERROR_CODEC_NOT_FOUND Codec not found
-  /// @retval #MEDIACODEC_ERROR_NOT_SUPPORTED_ON_DEVICE Not supported on device (Since 4.0)
+  /// Sets the codec type and decoder/encoder.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - If this codec is to be used as a decoder, pass the `MEDIACODEC_DECODER` flag.
+  /// - If this codec is to be used as an encoder, pass the `MEDIACODEC_ENCODER` flag.
+  /// - The software codec is used as default setting(`MEDIACODEC_SUPPORT_TYPE_SW`) if user doesn't set hardware flag.
+  /// - If user wants to use h/w decoder, user needs to pass the `MEDIACODEC_DECODER` | `MEDIACODEC_SUPPORT_TYPE_HW`.
+  ///
+  /// **Parameters:**
+  /// - `mediacodec` (in): The handle of mediacodec
+  /// - `codec_type` (in): The identifier of the codec type of the decoder/encoder
+  /// - `flags` (in): The encoding/decoding scheme, defined by `mediacodec_support_type_e`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIACODEC_ERROR_NONE`: Successful
+  /// - `MEDIACODEC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIACODEC_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MEDIACODEC_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIACODEC_ERROR_CODEC_NOT_FOUND`: Codec not found
+  /// - `MEDIACODEC_ERROR_NOT_SUPPORTED_ON_DEVICE`: Not supported on device (Since 4.0)
   int mediacodec_set_codec(
     mediacodec_h mediacodec,
     int codec_type,
@@ -114,17 +146,25 @@ class Tizen60CapiMediaCodec {
   late final _mediacodec_set_codec = _mediacodec_set_codecPtr
       .asFunction<int Function(mediacodec_h, int, int)>();
 
-  /// @brief Sets the default info for the video decoder.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] mediacodec The handle to mediacodec
-  /// @param[in] width      The width for video decoding.
-  /// @param[in] height     The height for video decoding.
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIACODEC_ERROR_NONE Successful
-  /// @retval #MEDIACODEC_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIACODEC_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MEDIACODEC_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIACODEC_ERROR_NOT_SUPPORTED_ON_DEVICE Not supported on device (Since 4.0)
+  /// Sets the default info for the video decoder.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `mediacodec` (in): The handle to mediacodec
+  /// - `width` (in): The width for video decoding.
+  /// - `height` (in): The height for video decoding.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIACODEC_ERROR_NONE`: Successful
+  /// - `MEDIACODEC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIACODEC_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MEDIACODEC_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIACODEC_ERROR_NOT_SUPPORTED_ON_DEVICE`: Not supported on device (Since 4.0)
   int mediacodec_set_vdec_info(
     mediacodec_h mediacodec,
     int width,
@@ -143,21 +183,31 @@ class Tizen60CapiMediaCodec {
   late final _mediacodec_set_vdec_info = _mediacodec_set_vdec_infoPtr
       .asFunction<int Function(mediacodec_h, int, int)>();
 
-  /// @brief Sets the default info for the video encoder.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks The frame rate is the speed of recording and the speed of playback.
-  /// If user wants the default setting for ratecontrol, set @a target_bits to @c 0.
-  /// @param[in] mediacodec  The handle to mediacodec
-  /// @param[in] width  The width for video encoding.
-  /// @param[in] height  The height for video encoding.
-  /// @param[in] fps  The frame rate in frames per second.
-  /// @param[in] target_bits The target bitrates in bits per second.(a unit of kbit)
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIACODEC_ERROR_NONE Successful
-  /// @retval #MEDIACODEC_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIACODEC_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MEDIACODEC_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIACODEC_ERROR_NOT_SUPPORTED_ON_DEVICE Not supported on device (Since 4.0)
+  /// Sets the default info for the video encoder.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - The frame rate is the speed of recording and the speed of playback.
+  /// - If user wants the default setting for ratecontrol, set `target_bits` to `0`.
+  ///
+  /// **Parameters:**
+  /// - `mediacodec` (in): The handle to mediacodec
+  /// - `width` (in): The width for video encoding.
+  /// - `height` (in): The height for video encoding.
+  /// - `fps` (in): The frame rate in frames per second.
+  /// - `target_bits` (in): The target bitrates in bits per second.(a unit of kbit)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIACODEC_ERROR_NONE`: Successful
+  /// - `MEDIACODEC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIACODEC_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MEDIACODEC_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIACODEC_ERROR_NOT_SUPPORTED_ON_DEVICE`: Not supported on device (Since 4.0)
   int mediacodec_set_venc_info(
     mediacodec_h mediacodec,
     int width,
@@ -181,18 +231,26 @@ class Tizen60CapiMediaCodec {
   late final _mediacodec_set_venc_info = _mediacodec_set_venc_infoPtr
       .asFunction<int Function(mediacodec_h, int, int, int, int)>();
 
-  /// @brief Sets the default info for the audio decoder.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] mediacodec The handle to mediacodec
-  /// @param[in] samplerate The samplerate for audio decoding.
-  /// @param[in] channel    The channels for audio decoding.
-  /// @param[in] bit        The bits resolution for audio decoding.
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIACODEC_ERROR_NONE Successful
-  /// @retval #MEDIACODEC_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIACODEC_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MEDIACODEC_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIACODEC_ERROR_NOT_SUPPORTED_ON_DEVICE Not supported on device (Since 4.0)
+  /// Sets the default info for the audio decoder.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `mediacodec` (in): The handle to mediacodec
+  /// - `samplerate` (in): The samplerate for audio decoding.
+  /// - `channel` (in): The channels for audio decoding.
+  /// - `bit` (in): The bits resolution for audio decoding.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIACODEC_ERROR_NONE`: Successful
+  /// - `MEDIACODEC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIACODEC_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MEDIACODEC_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIACODEC_ERROR_NOT_SUPPORTED_ON_DEVICE`: Not supported on device (Since 4.0)
   int mediacodec_set_adec_info(
     mediacodec_h mediacodec,
     int samplerate,
@@ -214,19 +272,27 @@ class Tizen60CapiMediaCodec {
   late final _mediacodec_set_adec_info = _mediacodec_set_adec_infoPtr
       .asFunction<int Function(mediacodec_h, int, int, int)>();
 
-  /// @brief Sets the default info for the audio encoder.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] mediacodec The handle to mediacodec
-  /// @param[in] samplerate The samplerate for audio encoding.
-  /// @param[in] channel    The channels for audio encoding.
-  /// @param[in] bit        The bits resolution for audio encoding.
-  /// @param[in] bitrate  The bitrate for audio encoding.
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIACODEC_ERROR_NONE Successful
-  /// @retval #MEDIACODEC_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIACODEC_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MEDIACODEC_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIACODEC_ERROR_NOT_SUPPORTED_ON_DEVICE Not supported on device (Since 4.0)
+  /// Sets the default info for the audio encoder.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `mediacodec` (in): The handle to mediacodec
+  /// - `samplerate` (in): The samplerate for audio encoding.
+  /// - `channel` (in): The channels for audio encoding.
+  /// - `bit` (in): The bits resolution for audio encoding.
+  /// - `bitrate` (in): The bitrate for audio encoding.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIACODEC_ERROR_NONE`: Successful
+  /// - `MEDIACODEC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIACODEC_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MEDIACODEC_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIACODEC_ERROR_NOT_SUPPORTED_ON_DEVICE`: Not supported on device (Since 4.0)
   int mediacodec_set_aenc_info(
     mediacodec_h mediacodec,
     int samplerate,
@@ -250,41 +316,54 @@ class Tizen60CapiMediaCodec {
   late final _mediacodec_set_aenc_info = _mediacodec_set_aenc_infoPtr
       .asFunction<int Function(mediacodec_h, int, int, int, int)>();
 
-  /// @brief Sets the codec type and codec default info via media format.
-  /// @details Sets the value via media format instead of mediacodec_set_codec(), mediacodec_set_venc_info(),
-  /// mediacodec_set_vdec_info(), mediacodec_set_aenc_info(), and mediacodec_set_adec_info().
-  /// @since_tizen 4.0
-  /// @remarks When using the @a format parameter from the output of the media demuxer, you can use media format via media_packet_get_format().
-  /// Otherwise, you must set the following values after creating media format.
-  /// Set the audio or video codec type via media_format_set_video_mime() or media_format_set_audio_mime().
-  /// For video decoding, width, height must be set via media_format_set_video_width() and media_format_set_video_height().
-  /// For video encoding, width, height, target bitrate, and frame rate must be set via media_format_set_video_avg_bps() and media_format_set_video_frame_rate().
-  /// For audio decoding, samplerate, channel, and bit must be set via media_format_set_audio_samplerate(), media_format_set_audio_channel() and media_format_set_audio_bit().
-  /// For audio encoding, samplerate, channel, bit, and bitrate must be set via media_format_set_audio_avg_bps().\n
-  /// If this codec is to be used as a decoder, pass the #MEDIACODEC_DECODER flag.
-  /// If this codec is to be used as an encoder, pass the #MEDIACODEC_ENCODER flag.\n
-  /// The software codec is used as default setting (#MEDIACODEC_SUPPORT_TYPE_SW) if user doesn't set hardware flag.
-  /// If you wants to use h/w decoder, you needs to pass the #MEDIACODEC_DECODER | #MEDIACODEC_SUPPORT_TYPE_HW.
-  /// @param[in] mediacodec The mediacodec handle
-  /// @param[in] format     The #media_format_h of input data
-  /// @param[in] flags      The encoding/decoding scheme,
-  /// values of #mediacodec_support_type_e combined with bitwise 'or'
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIACODEC_ERROR_NONE Successful
-  /// @retval #MEDIACODEC_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIACODEC_ERROR_CODEC_NOT_FOUND Unsupported codec
-  /// @retval #MEDIACODEC_ERROR_NOT_SUPPORTED_ON_DEVICE Not supported on device (Since 4.0)
-  /// @pre The media format has been created and the required values for configuration have been set.
-  /// @see media_format_set_video_mime()
-  /// @see media_format_set_audio_mime()
-  /// @see media_format_set_video_width()
-  /// @see media_format_set_video_height()
-  /// @see media_format_set_video_avg_bps()
-  /// @see media_format_set_video_frame_rate()
-  /// @see media_format_set_audio_channel()
-  /// @see media_format_set_audio_samplerate()
-  /// @see media_format_set_audio_bit()
-  /// @see media_format_set_audio_avg_bps()
+  /// Sets the codec type and codec default info via media format.
+  ///
+  /// Sets the value via media format instead of mediacodec_set_codec(), mediacodec_set_venc_info(), mediacodec_set_vdec_info(), mediacodec_set_aenc_info(), and mediacodec_set_adec_info().
+  ///
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Remarks:**
+  /// - When using the `format` parameter from the output of the media demuxer, you can use media format via media_packet_get_format().
+  /// - Otherwise, you must set the following values after creating media format.
+  /// - Set the audio or video codec type via media_format_set_video_mime() or media_format_set_audio_mime().
+  /// - For video decoding, width, height must be set via media_format_set_video_width() and media_format_set_video_height().
+  /// - For video encoding, width, height, target bitrate, and frame rate must be set via media_format_set_video_avg_bps() and media_format_set_video_frame_rate().
+  /// - For audio decoding, samplerate, channel, and bit must be set via media_format_set_audio_samplerate(), media_format_set_audio_channel() and media_format_set_audio_bit().
+  /// - For audio encoding, samplerate, channel, bit, and bitrate must be set via media_format_set_audio_avg_bps().
+  /// - If this codec is to be used as a decoder, pass the `MEDIACODEC_DECODER` flag.
+  /// - If this codec is to be used as an encoder, pass the `MEDIACODEC_ENCODER` flag.
+  /// - The software codec is used as default setting (`MEDIACODEC_SUPPORT_TYPE_SW`) if user doesn't set hardware flag.
+  /// - If you wants to use h/w decoder, you needs to pass the `MEDIACODEC_DECODER` | `MEDIACODEC_SUPPORT_TYPE_HW`.
+  ///
+  /// **Parameters:**
+  /// - `mediacodec` (in): The mediacodec handle
+  /// - `format` (in): The `media_format_h` of input data
+  /// - `flags` (in): The encoding/decoding scheme, values of `mediacodec_support_type_e` combined with bitwise 'or'
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIACODEC_ERROR_NONE`: Successful
+  /// - `MEDIACODEC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIACODEC_ERROR_CODEC_NOT_FOUND`: Unsupported codec
+  /// - `MEDIACODEC_ERROR_NOT_SUPPORTED_ON_DEVICE`: Not supported on device (Since 4.0)
+  ///
+  /// **Preconditions:**
+  /// - The media format has been created and the required values for configuration have been set.
+  ///
+  /// **See also:**
+  /// - `media_format_set_video_mime()`
+  /// - `media_format_set_audio_mime()`
+  /// - `media_format_set_video_width()`
+  /// - `media_format_set_video_height()`
+  /// - `media_format_set_video_avg_bps()`
+  /// - `media_format_set_video_frame_rate()`
+  /// - `media_format_set_audio_channel()`
+  /// - `media_format_set_audio_samplerate()`
+  /// - `media_format_set_audio_bit()`
+  /// - `media_format_set_audio_avg_bps()`
   int mediacodec_configure_from_media_format(
     mediacodec_h mediacodec,
     media_tool.media_format_h format,
@@ -305,20 +384,28 @@ class Tizen60CapiMediaCodec {
       _mediacodec_configure_from_media_formatPtr.asFunction<
           int Function(mediacodec_h, media_tool.media_format_h, int)>();
 
-  /// @brief Prepares @a mediacodec for encoding/decoding.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] mediacodec The handle to mediacodec
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIACODEC_ERROR_NONE Successful
-  /// @retval #MEDIACODEC_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIACODEC_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MEDIACODEC_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIACODEC_ERROR_NOT_SUPPORTED_ON_DEVICE Not supported on device (Since 4.0)
-  /// @retval #MEDIACODEC_ERROR_RESOURCE_OVERLOADED Exceed the instance limits (Since 5.0)
-  /// @retval #MEDIACODEC_ERROR_INTERNAL Internal error (Since 5.0)
-  /// @pre The mediacodec should call mediacodec_set_codec()and mediacodec_set_vdec_info()/mediacodec_set_venc_info() before calling mediacodec_prepare()
-  /// If the decoder is set by mediacodec_set_codec(), mediacodec_set_vdec_info() should be called. If the encoder is set by
-  /// mediacodec_set_codec(), mediacodec_set_venc_info() should be called.
+  /// Prepares `mediacodec` for encoding/decoding.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `mediacodec` (in): The handle to mediacodec
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIACODEC_ERROR_NONE`: Successful
+  /// - `MEDIACODEC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIACODEC_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MEDIACODEC_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIACODEC_ERROR_NOT_SUPPORTED_ON_DEVICE`: Not supported on device (Since 4.0)
+  /// - `MEDIACODEC_ERROR_RESOURCE_OVERLOADED`: Exceed the instance limits (Since 5.0)
+  /// - `MEDIACODEC_ERROR_INTERNAL`: Internal error (Since 5.0)
+  ///
+  /// **Preconditions:**
+  /// - The mediacodec should call mediacodec_set_codec()and mediacodec_set_vdec_info()/mediacodec_set_venc_info() before calling mediacodec_prepare() If the decoder is set by mediacodec_set_codec(), mediacodec_set_vdec_info() should be called. If the encoder is set by mediacodec_set_codec(), mediacodec_set_venc_info() should be called.
   int mediacodec_prepare(
     mediacodec_h mediacodec,
   ) {
@@ -333,15 +420,23 @@ class Tizen60CapiMediaCodec {
   late final _mediacodec_prepare =
       _mediacodec_preparePtr.asFunction<int Function(mediacodec_h)>();
 
-  /// @brief Unprepares @a mediacodec for encoding/decoding.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] mediacodec The handle to mediacodec
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIACODEC_ERROR_NONE Successful
-  /// @retval #MEDIACODEC_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIACODEC_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MEDIACODEC_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIACODEC_ERROR_NOT_SUPPORTED_ON_DEVICE Not supported on device (Since 4.0)
+  /// Unprepares `mediacodec` for encoding/decoding.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `mediacodec` (in): The handle to mediacodec
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIACODEC_ERROR_NONE`: Successful
+  /// - `MEDIACODEC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIACODEC_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MEDIACODEC_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIACODEC_ERROR_NOT_SUPPORTED_ON_DEVICE`: Not supported on device (Since 4.0)
   int mediacodec_unprepare(
     mediacodec_h mediacodec,
   ) {
@@ -356,20 +451,26 @@ class Tizen60CapiMediaCodec {
   late final _mediacodec_unprepare =
       _mediacodec_unpreparePtr.asFunction<int Function(mediacodec_h)>();
 
-  /// @brief Decodes/Encodes a packet. The function passed undecoded/unencoded packet to the input queue and decode/encode a
-  /// frame sequentially.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] mediacodec The handle to mediacodec
-  /// @param[in] inbuf      The current input format for the decoder/encoder
-  /// @param[in] timeOutUs  The timeout in microseconds. \n
-  /// The input buffer wait up to "timeOutUs" microseconds.
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIACODEC_ERROR_NONE Successful
-  /// @retval #MEDIACODEC_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIACODEC_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MEDIACODEC_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIACODEC_ERROR_OVERFLOW_INBUFFER Overflow inputbuffer
-  /// @retval #MEDIACODEC_ERROR_NOT_SUPPORTED_ON_DEVICE Not supported on device (Since 4.0)
+  /// Decodes/Encodes a packet. The function passed undecoded/unencoded packet to the input queue and decode/encode a frame sequentially.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `mediacodec` (in): The handle to mediacodec
+  /// - `inbuf` (in): The current input format for the decoder/encoder
+  /// - `timeOutUs` (in): The timeout in microseconds. The input buffer wait up to "timeOutUs" microseconds.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIACODEC_ERROR_NONE`: Successful
+  /// - `MEDIACODEC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIACODEC_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MEDIACODEC_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIACODEC_ERROR_OVERFLOW_INBUFFER`: Overflow inputbuffer
+  /// - `MEDIACODEC_ERROR_NOT_SUPPORTED_ON_DEVICE`: Not supported on device (Since 4.0)
   int mediacodec_process_input(
     mediacodec_h mediacodec,
     media_tool.media_packet_h inbuf,
@@ -389,20 +490,28 @@ class Tizen60CapiMediaCodec {
   late final _mediacodec_process_input = _mediacodec_process_inputPtr
       .asFunction<int Function(mediacodec_h, media_tool.media_packet_h, int)>();
 
-  /// @brief Gets the decoded or encoded packet from the output queue.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @remarks The @a packet should be released using media_packet_destroy().
-  /// @param[in] mediacodec The handle to mediacodec
-  /// @param[out] packet    The current output of the decoder/encoder.
-  /// this function passed decoded/encoded frame to output queue.
-  /// @param[in] timeOutUs  The timeout in microseconds. \n
-  /// The input buffer wait up to "timeOutUs" microseconds.
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIACODEC_ERROR_NONE Successful
-  /// @retval #MEDIACODEC_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIACODEC_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #MEDIACODEC_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #MEDIACODEC_ERROR_NOT_SUPPORTED_ON_DEVICE Not supported on device (Since 4.0)
+  /// Gets the decoded or encoded packet from the output queue.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Remarks:**
+  /// - The `packet` should be released using media_packet_destroy().
+  ///
+  /// **Parameters:**
+  /// - `mediacodec` (in): The handle to mediacodec
+  /// - `packet` (out): The current output of the decoder/encoder. this function passed decoded/encoded frame to output queue.
+  /// - `timeOutUs` (in): The timeout in microseconds. The input buffer wait up to "timeOutUs" microseconds.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIACODEC_ERROR_NONE`: Successful
+  /// - `MEDIACODEC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIACODEC_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MEDIACODEC_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `MEDIACODEC_ERROR_NOT_SUPPORTED_ON_DEVICE`: Not supported on device (Since 4.0)
   int mediacodec_get_output(
     mediacodec_h mediacodec,
     ffi.Pointer<media_tool.media_packet_h> packet,
@@ -423,13 +532,21 @@ class Tizen60CapiMediaCodec {
       int Function(
           mediacodec_h, ffi.Pointer<media_tool.media_packet_h>, int)>();
 
-  /// @brief Flushes both input and output buffers.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @param[in] mediacodec The handle to mediacodec
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIACODEC_ERROR_NONE Successful
-  /// @retval #MEDIACODEC_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIACODEC_ERROR_NOT_SUPPORTED_ON_DEVICE Not supported on device (Since 4.0)
+  /// Flushes both input and output buffers.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `mediacodec` (in): The handle to mediacodec
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIACODEC_ERROR_NONE`: Successful
+  /// - `MEDIACODEC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIACODEC_ERROR_NOT_SUPPORTED_ON_DEVICE`: Not supported on device (Since 4.0)
   int mediacodec_flush_buffers(
     mediacodec_h mediacodec,
   ) {
@@ -444,19 +561,33 @@ class Tizen60CapiMediaCodec {
   late final _mediacodec_flush_buffers =
       _mediacodec_flush_buffersPtr.asFunction<int Function(mediacodec_h)>();
 
-  /// @brief Sets empty buffer callback the media codec for process, asynchronously.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] mediacodec The handle to mediacodec
-  /// @param[in] callback   The callback function to register
-  /// @param[in] user_data  The user data to be passed to the callback function
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIACODEC_ERROR_NONE Successful
-  /// @retval #MEDIACODEC_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIACODEC_ERROR_NOT_SUPPORTED_ON_DEVICE Not supported on device (Since 4.0)
-  /// @pre mediacodec_set_input_buffer_used_cb() should be called before mediacodec_preare().
-  /// @post mediacodec_input_buffer_used_cb() will be invoked.
-  /// @see mediacodec_input_buffer_used_cb()
-  /// @see mediacodec_unset_input_buffer_used_cb()
+  /// Sets empty buffer callback the media codec for process, asynchronously.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `mediacodec` (in): The handle to mediacodec
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIACODEC_ERROR_NONE`: Successful
+  /// - `MEDIACODEC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIACODEC_ERROR_NOT_SUPPORTED_ON_DEVICE`: Not supported on device (Since 4.0)
+  ///
+  /// **Preconditions:**
+  /// - mediacodec_set_input_buffer_used_cb() should be called before mediacodec_preare().
+  ///
+  /// **Postconditions:**
+  /// - mediacodec_input_buffer_used_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `mediacodec_input_buffer_used_cb()`
+  /// - `mediacodec_unset_input_buffer_used_cb()`
   int mediacodec_set_input_buffer_used_cb(
     mediacodec_h mediacodec,
     mediacodec_input_buffer_used_cb callback,
@@ -478,14 +609,24 @@ class Tizen60CapiMediaCodec {
           int Function(mediacodec_h, mediacodec_input_buffer_used_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets input buffer used callback the media codec for process, asynchronously.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] mediacodec The handle to mediacodec
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIACODEC_ERROR_NONE Successful
-  /// @retval #MEDIACODEC_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIACODEC_ERROR_NOT_SUPPORTED_ON_DEVICE Not supported on device (Since 4.0)
-  /// @see mediacodec_set_input_buffer_used_cb()
+  /// Unsets input buffer used callback the media codec for process, asynchronously.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `mediacodec` (in): The handle to mediacodec
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIACODEC_ERROR_NONE`: Successful
+  /// - `MEDIACODEC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIACODEC_ERROR_NOT_SUPPORTED_ON_DEVICE`: Not supported on device (Since 4.0)
+  ///
+  /// **See also:**
+  /// - `mediacodec_set_input_buffer_used_cb()`
   int mediacodec_unset_input_buffer_used_cb(
     mediacodec_h mediacodec,
   ) {
@@ -501,19 +642,33 @@ class Tizen60CapiMediaCodec {
       _mediacodec_unset_input_buffer_used_cbPtr
           .asFunction<int Function(mediacodec_h)>();
 
-  /// @brief Sets output buffer available callback the media codec for process, asynchronously.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] mediacodec The handle to mediacodec
-  /// @param[in] callback   The callback function to register
-  /// @param[in] user_data  The user data to be passed to the callback function
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIACODEC_ERROR_NONE Successful
-  /// @retval #MEDIACODEC_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIACODEC_ERROR_NOT_SUPPORTED_ON_DEVICE Not supported on device (Since 4.0)
-  /// @pre mediacodec_set_output_buffer_available_cb() should be called before mediacodec_preare().
-  /// @post mediacodec_output_buffer_available_cb() will be invoked.
-  /// @see mediacodec_output_buffer_available_cb()
-  /// @see mediacodec_unset_output_buffer_available_cb()
+  /// Sets output buffer available callback the media codec for process, asynchronously.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `mediacodec` (in): The handle to mediacodec
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIACODEC_ERROR_NONE`: Successful
+  /// - `MEDIACODEC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIACODEC_ERROR_NOT_SUPPORTED_ON_DEVICE`: Not supported on device (Since 4.0)
+  ///
+  /// **Preconditions:**
+  /// - mediacodec_set_output_buffer_available_cb() should be called before mediacodec_preare().
+  ///
+  /// **Postconditions:**
+  /// - mediacodec_output_buffer_available_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `mediacodec_output_buffer_available_cb()`
+  /// - `mediacodec_unset_output_buffer_available_cb()`
   int mediacodec_set_output_buffer_available_cb(
     mediacodec_h mediacodec,
     mediacodec_output_buffer_available_cb callback,
@@ -538,14 +693,24 @@ class Tizen60CapiMediaCodec {
           int Function(mediacodec_h, mediacodec_output_buffer_available_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief unsets output buffer available callback the media codec for process, asynchronously.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] mediacodec The handle to mediacodec
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIACODEC_ERROR_NONE Successful
-  /// @retval #MEDIACODEC_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIACODEC_ERROR_NOT_SUPPORTED_ON_DEVICE Not supported on device (Since 4.0)
-  /// @see mediacodec_set_output_buffer_available_cb()
+  /// unsets output buffer available callback the media codec for process, asynchronously.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `mediacodec` (in): The handle to mediacodec
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIACODEC_ERROR_NONE`: Successful
+  /// - `MEDIACODEC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIACODEC_ERROR_NOT_SUPPORTED_ON_DEVICE`: Not supported on device (Since 4.0)
+  ///
+  /// **See also:**
+  /// - `mediacodec_set_output_buffer_available_cb()`
   int mediacodec_unset_output_buffer_available_cb(
     mediacodec_h mediacodec,
   ) {
@@ -561,19 +726,33 @@ class Tizen60CapiMediaCodec {
       _mediacodec_unset_output_buffer_available_cbPtr
           .asFunction<int Function(mediacodec_h)>();
 
-  /// @brief Sets error callback the media codec for process, asynchronously.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] mediacodec The handle to mediacodec
-  /// @param[in] callback   The callback function to register
-  /// @param[in] user_data  The user data to be passed to the callback function
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIACODEC_ERROR_NONE Successful
-  /// @retval #MEDIACODEC_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIACODEC_ERROR_NOT_SUPPORTED_ON_DEVICE Not supported on device (Since 4.0)
-  /// @pre mediacodec_set_error_cb() should be called before mediacodec_preare().
-  /// @post mediacodec_error_cb() will be invoked.
-  /// @see mediacodec_error_cb()
-  /// @see mediacodec_unset_error_cb()
+  /// Sets error callback the media codec for process, asynchronously.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `mediacodec` (in): The handle to mediacodec
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIACODEC_ERROR_NONE`: Successful
+  /// - `MEDIACODEC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIACODEC_ERROR_NOT_SUPPORTED_ON_DEVICE`: Not supported on device (Since 4.0)
+  ///
+  /// **Preconditions:**
+  /// - mediacodec_set_error_cb() should be called before mediacodec_preare().
+  ///
+  /// **Postconditions:**
+  /// - mediacodec_error_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `mediacodec_error_cb()`
+  /// - `mediacodec_unset_error_cb()`
   int mediacodec_set_error_cb(
     mediacodec_h mediacodec,
     mediacodec_error_cb callback,
@@ -593,14 +772,24 @@ class Tizen60CapiMediaCodec {
   late final _mediacodec_set_error_cb = _mediacodec_set_error_cbPtr.asFunction<
       int Function(mediacodec_h, mediacodec_error_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets error callback the media codec for process, asynchronously.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] mediacodec The handle to mediacodec
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIACODEC_ERROR_NONE Successful
-  /// @retval #MEDIACODEC_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIACODEC_ERROR_NOT_SUPPORTED_ON_DEVICE Not supported on device (Since 4.0)
-  /// @see mediacodec_set_error_cb()
+  /// Unsets error callback the media codec for process, asynchronously.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `mediacodec` (in): The handle to mediacodec
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIACODEC_ERROR_NONE`: Successful
+  /// - `MEDIACODEC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIACODEC_ERROR_NOT_SUPPORTED_ON_DEVICE`: Not supported on device (Since 4.0)
+  ///
+  /// **See also:**
+  /// - `mediacodec_set_error_cb()`
   int mediacodec_unset_error_cb(
     mediacodec_h mediacodec,
   ) {
@@ -615,19 +804,33 @@ class Tizen60CapiMediaCodec {
   late final _mediacodec_unset_error_cb =
       _mediacodec_unset_error_cbPtr.asFunction<int Function(mediacodec_h)>();
 
-  /// @brief Sets eos callback the media codec for process, asynchronously.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] mediacodec The handle to mediacodec
-  /// @param[in] callback   The callback function to register
-  /// @param[in] user_data  The user data to be passed to the callback function
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIACODEC_ERROR_NONE Successful
-  /// @retval #MEDIACODEC_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIACODEC_ERROR_NOT_SUPPORTED_ON_DEVICE Not supported on device (Since 4.0)
-  /// @pre mediacodec_set_eos_cb() should be called before mediacodec_preare().
-  /// @post mediacodec_eos_cb() will be invoked.
-  /// @see mediacodec_eos_cb()
-  /// @see mediacodec_unset_eos_cb()
+  /// Sets eos callback the media codec for process, asynchronously.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `mediacodec` (in): The handle to mediacodec
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIACODEC_ERROR_NONE`: Successful
+  /// - `MEDIACODEC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIACODEC_ERROR_NOT_SUPPORTED_ON_DEVICE`: Not supported on device (Since 4.0)
+  ///
+  /// **Preconditions:**
+  /// - mediacodec_set_eos_cb() should be called before mediacodec_preare().
+  ///
+  /// **Postconditions:**
+  /// - mediacodec_eos_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `mediacodec_eos_cb()`
+  /// - `mediacodec_unset_eos_cb()`
   int mediacodec_set_eos_cb(
     mediacodec_h mediacodec,
     mediacodec_eos_cb callback,
@@ -647,14 +850,24 @@ class Tizen60CapiMediaCodec {
   late final _mediacodec_set_eos_cb = _mediacodec_set_eos_cbPtr.asFunction<
       int Function(mediacodec_h, mediacodec_eos_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief unsets eos callback the media codec for process, asynchronously.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in] mediacodec The handle to mediacodec
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIACODEC_ERROR_NONE Successful
-  /// @retval #MEDIACODEC_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIACODEC_ERROR_NOT_SUPPORTED_ON_DEVICE Not supported on device (Since 4.0)
-  /// @see mediacodec_set_eos_cb()
+  /// unsets eos callback the media codec for process, asynchronously.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `mediacodec` (in): The handle to mediacodec
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIACODEC_ERROR_NONE`: Successful
+  /// - `MEDIACODEC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIACODEC_ERROR_NOT_SUPPORTED_ON_DEVICE`: Not supported on device (Since 4.0)
+  ///
+  /// **See also:**
+  /// - `mediacodec_set_eos_cb()`
   int mediacodec_unset_eos_cb(
     mediacodec_h mediacodec,
   ) {
@@ -669,19 +882,33 @@ class Tizen60CapiMediaCodec {
   late final _mediacodec_unset_eos_cb =
       _mediacodec_unset_eos_cbPtr.asFunction<int Function(mediacodec_h)>();
 
-  /// @brief Sets a callback function to be invoked when the mediacodec needs more data or has enough data.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @param[in] mediacodec The handle to mediacodec
-  /// @param[in] callback   The callback function to register
-  /// @param[in] user_data  The user data to be passed to the callback function
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIACODEC_ERROR_NONE Successful
-  /// @retval #MEDIACODEC_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIACODEC_ERROR_NOT_SUPPORTED_ON_DEVICE Not supported on device (Since 4.0)
-  /// @pre mediacodec_set_buffer_status_cb() should be called before mediacodec_preare().
-  /// @post mediacodec_buffer_status_cb() will be invoked.
-  /// @see mediacodec_buffer_status_cb()
-  /// @see mediacodec_unset_buffer_status_cb()
+  /// Sets a callback function to be invoked when the mediacodec needs more data or has enough data.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `mediacodec` (in): The handle to mediacodec
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIACODEC_ERROR_NONE`: Successful
+  /// - `MEDIACODEC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIACODEC_ERROR_NOT_SUPPORTED_ON_DEVICE`: Not supported on device (Since 4.0)
+  ///
+  /// **Preconditions:**
+  /// - mediacodec_set_buffer_status_cb() should be called before mediacodec_preare().
+  ///
+  /// **Postconditions:**
+  /// - mediacodec_buffer_status_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `mediacodec_buffer_status_cb()`
+  /// - `mediacodec_unset_buffer_status_cb()`
   int mediacodec_set_buffer_status_cb(
     mediacodec_h mediacodec,
     mediacodec_buffer_status_cb callback,
@@ -703,14 +930,24 @@ class Tizen60CapiMediaCodec {
           int Function(mediacodec_h, mediacodec_buffer_status_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Unsets the callback function.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @param[in] mediacodec The handle to mediacodec
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIACODEC_ERROR_NONE Successful
-  /// @retval #MEDIACODEC_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIACODEC_ERROR_NOT_SUPPORTED_ON_DEVICE Not supported on device (Since 4.0)
-  /// @see mediacodec_set_buffer_status_cb()
+  /// Unsets the callback function.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `mediacodec` (in): The handle to mediacodec
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIACODEC_ERROR_NONE`: Successful
+  /// - `MEDIACODEC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIACODEC_ERROR_NOT_SUPPORTED_ON_DEVICE`: Not supported on device (Since 4.0)
+  ///
+  /// **See also:**
+  /// - `mediacodec_set_buffer_status_cb()`
   int mediacodec_unset_buffer_status_cb(
     mediacodec_h mediacodec,
   ) {
@@ -726,16 +963,26 @@ class Tizen60CapiMediaCodec {
       _mediacodec_unset_buffer_status_cbPtr
           .asFunction<int Function(mediacodec_h)>();
 
-  /// @brief Retrieves all supported codecs by invoking callback function once for each supported codecs.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @param[in] mediacodec The handle to mediacodec
-  /// @param[in] callback   The callback function to invoke
-  /// @param[in] user_data  The user data to be passed to the callback function
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIACODEC_ERROR_NONE Successful
-  /// @retval #MEDIACODEC_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIACODEC_ERROR_NOT_SUPPORTED_ON_DEVICE Not supported on device (Since 4.0)
-  /// @see mediacodec_supported_codec_cb()
+  /// Retrieves all supported codecs by invoking callback function once for each supported codecs.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `mediacodec` (in): The handle to mediacodec
+  /// - `callback` (in): The callback function to invoke
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIACODEC_ERROR_NONE`: Successful
+  /// - `MEDIACODEC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIACODEC_ERROR_NOT_SUPPORTED_ON_DEVICE`: Not supported on device (Since 4.0)
+  ///
+  /// **See also:**
+  /// - `mediacodec_supported_codec_cb()`
   int mediacodec_foreach_supported_codec(
     mediacodec_h mediacodec,
     mediacodec_supported_codec_cb callback,
@@ -757,17 +1004,26 @@ class Tizen60CapiMediaCodec {
           int Function(mediacodec_h, mediacodec_supported_codec_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Verifies whether encoding can be performed with codec_type or not.
-  /// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-  /// @param[in]  mediacodec   The handle to mediacodec
-  /// @param[in]  codec_type   The identifier of the codec type of the encoder.
-  /// @param[in]  encoder      Whether the encoder or decoder : (@c true = encoder, @c false = decoder).
-  /// @param[out] support_type (@c #MEDIACODEC_SUPPORT_TYPE_HW = mediacodec can be performed with hardware codec, @c #MEDIACODEC_SUPPORT_TYPE_SW = mediacodec can be performed with software codec)
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIACODEC_ERROR_NONE Successful
-  /// @retval #MEDIACODEC_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIACODEC_ERROR_NOT_SUPPORTED_ON_DEVICE Not supported on device (Since 4.0)
-  /// @code
+  /// Verifies whether encoding can be performed with codec_type or not.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.4; Wearable 3.0
+  ///
+  /// **Parameters:**
+  /// - `mediacodec` (in): The handle to mediacodec
+  /// - `codec_type` (in): The identifier of the codec type of the encoder.
+  /// - `encoder` (in): Whether the encoder or decoder : (`true` = encoder, `false` = decoder).
+  /// - `support_type` (out): (``MEDIACODEC_SUPPORT_TYPE_HW`` = mediacodec can be performed with hardware codec, ``MEDIACODEC_SUPPORT_TYPE_SW`` = mediacodec can be performed with software codec)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIACODEC_ERROR_NONE`: Successful
+  /// - `MEDIACODEC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIACODEC_ERROR_NOT_SUPPORTED_ON_DEVICE`: Not supported on device (Since 4.0)
+  ///
+  /// ```
   /// #include <media_codec.h>
   /// mediacodec_h mediacodec;
   /// mediacodec_support_type_e type;
@@ -784,7 +1040,7 @@ class Tizen60CapiMediaCodec {
   /// // both supported
   ///
   /// mediacodec_set_codec(mediacodec, codec_type, MEDIACODEC_ENCODER | MEDIACODEC_SUPPORT_TYPE_HW);
-  /// @endcode
+  /// ```
   int mediacodec_get_supported_type(
     mediacodec_h mediacodec,
     int codec_type,
@@ -807,25 +1063,41 @@ class Tizen60CapiMediaCodec {
       _mediacodec_get_supported_typePtr.asFunction<
           int Function(mediacodec_h, int, bool, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the media packet pool allocated for recycling media packets.
-  /// @details The user can get the pool allocated with the number of packets are required to be used in codecs.\n
-  /// It is recommended to use media packet pool for better stability and performance.
-  /// @since_tizen 3.0
-  /// @remarks The @a pool should be released using media_packet_pool_deallocate() and destroyed using media_packet_pool_destroy().
-  /// @param[in]  mediacodec The mediacodec handle
-  /// @param[out] pool       The allocated pool handle
-  /// @return @c 0 on success, otherwise a negative error value
-  /// @retval #MEDIACODEC_ERROR_NONE Successful
-  /// @retval #MEDIACODEC_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #MEDIACODEC_ERROR_OUT_OF_MEMORY  Out of memory
-  /// @retval #MEDIACODEC_ERROR_INVALID_OPERATION The user calls mediacodec_get_packet_pool() before calling mediacodec_prepare().
-  /// @retval #MEDIACODEC_ERROR_NOT_SUPPORTED_ON_DEVICE Not supported on device (Since 4.0)
-  /// @pre mediacodec_get_packet_pool() should be called after calling mediacodec_prepare().
-  /// @post If the pool is used, media_packet_pool_deallocate() and media_packet_pool_destroy() should be called.
-  /// @see media_packet_pool_acquire_packet()
-  /// @see media_packet_pool_release_packet()
-  /// @see media_packet_pool_deallocate()
-  /// @see media_packet_pool_destroy()
+  /// Gets the media packet pool allocated for recycling media packets.
+  ///
+  /// The user can get the pool allocated with the number of packets are required to be used in codecs. It is recommended to use media packet pool for better stability and performance.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The `pool` should be released using media_packet_pool_deallocate() and destroyed using media_packet_pool_destroy().
+  ///
+  /// **Parameters:**
+  /// - `mediacodec` (in): The mediacodec handle
+  /// - `pool` (out): The allocated pool handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `MEDIACODEC_ERROR_NONE`: Successful
+  /// - `MEDIACODEC_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `MEDIACODEC_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `MEDIACODEC_ERROR_INVALID_OPERATION`: The user calls mediacodec_get_packet_pool() before calling mediacodec_prepare().
+  /// - `MEDIACODEC_ERROR_NOT_SUPPORTED_ON_DEVICE`: Not supported on device (Since 4.0)
+  ///
+  /// **Preconditions:**
+  /// - mediacodec_get_packet_pool() should be called after calling mediacodec_prepare().
+  ///
+  /// **Postconditions:**
+  /// - If the pool is used, media_packet_pool_deallocate() and media_packet_pool_destroy() should be called.
+  ///
+  /// **See also:**
+  /// - `media_packet_pool_acquire_packet()`
+  /// - `media_packet_pool_release_packet()`
+  /// - `media_packet_pool_deallocate()`
+  /// - `media_packet_pool_destroy()`
   int mediacodec_get_packet_pool(
     mediacodec_h mediacodec,
     ffi.Pointer<media_tool.media_packet_pool_h> pool,
@@ -847,12 +1119,18 @@ class Tizen60CapiMediaCodec {
               mediacodec_h, ffi.Pointer<media_tool.media_packet_pool_h>)>();
 }
 
+/// @nodoc
 final class mediacodec_s extends ffi.Opaque {}
 
-/// @brief Enumeration of media codec support type.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-/// @remarks If this codec is to be used as an encoder or decoder, the codec flag must be set to #MEDIACODEC_ENCODER or
-/// #MEDIACODEC_DECODER. If user doesn't set optional flag, default flags will be set to #MEDIACODEC_SUPPORT_TYPE_SW.
+/// Enumeration of media codec support type.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+///
+/// **Remarks:**
+/// - If this codec is to be used as an encoder or decoder, the codec flag must be set to `MEDIACODEC_ENCODER` or
+/// - `MEDIACODEC_DECODER`. If user doesn't set optional flag, default flags will be set to `MEDIACODEC_SUPPORT_TYPE_SW`.
+/// @nodoc
 abstract class mediacodec_support_type_e {
   /// < This flag is for using the encoder
   static const int MEDIACODEC_ENCODER = 1;
@@ -867,8 +1145,11 @@ abstract class mediacodec_support_type_e {
   static const int MEDIACODEC_SUPPORT_TYPE_SW = 8;
 }
 
-/// @brief Enumerations of media codec type.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumerations of media codec type.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class mediacodec_codec_type_e {
   /// < NONE
   static const int MEDIACODEC_NONE = 0;
@@ -918,7 +1199,7 @@ abstract class mediacodec_codec_type_e {
   /// < WMA version 1 (Since @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif)
   static const int MEDIACODEC_WMAV1 = 4256;
 
-  /// < WMA version 2  (Since @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif)
+  /// < WMA version 2 (Since @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif)
   static const int MEDIACODEC_WMAV2 = 4257;
 
   /// < WMA Professional (Since @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif)
@@ -964,8 +1245,11 @@ abstract class mediacodec_codec_type_e {
   static const int MEDIACODEC_VC1 = 8368;
 }
 
-/// @brief Enumeration of media codec error.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration of media codec error.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class mediacodec_error_e {
   /// < Successful
   static const int MEDIACODEC_ERROR_NONE = 0;
@@ -1031,8 +1315,11 @@ abstract class mediacodec_error_e {
   static const int MEDIACODEC_ERROR_RESOURCE_CONFLICT = -26935281;
 }
 
-/// @brief Enumeration of buffer status.
-/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
+/// Enumeration of buffer status.
+///
+/// **Since Tizen:**
+/// - Mobile 2.4; Wearable 3.0
+/// @nodoc
 abstract class mediacodec_status_e {
   /// < The internal queue is running out of data
   static const int MEDIACODEC_NEED_DATA = 0;
@@ -1041,101 +1328,173 @@ abstract class mediacodec_status_e {
   static const int MEDIACODEC_ENOUGH_DATA = 1;
 }
 
-/// @brief Media Codec type handle.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Media Codec type handle.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 typedef mediacodec_h = ffi.Pointer<mediacodec_s>;
 
-/// @brief Called when the input buffer(packet) used up.
-/// @details It will be invoked when mediacodec has used input buffer.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-/// @remarks The @a packet should be released using media_packet_destroy().
-/// @param[in] packet    The media packet handle
-/// @param[in] user_data The user data passed from the callback registration function
-/// @pre It will be invoked when input buffer process completed if you register this callback using mediacodec_set_input_buffer_used_cb().
-/// @see mediacodec_set_input_buffer_used_cb()
-/// @see mediacodec_unset_input_buffer_used_cb()
+/// Called when the input buffer(packet) used up.
+///
+/// It will be invoked when mediacodec has used input buffer.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+///
+/// **Remarks:**
+/// - The `packet` should be released using media_packet_destroy().
+///
+/// **Parameters:**
+/// - `packet` (in): The media packet handle
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - It will be invoked when input buffer process completed if you register this callback using mediacodec_set_input_buffer_used_cb().
+///
+/// **See also:**
+/// - `mediacodec_set_input_buffer_used_cb()`
+/// - `mediacodec_unset_input_buffer_used_cb()`
+/// @nodoc
 typedef mediacodec_input_buffer_used_cb
     = ffi.Pointer<ffi.NativeFunction<mediacodec_input_buffer_used_cbFunction>>;
+/// @nodoc
 typedef mediacodec_input_buffer_used_cbFunction = ffi.Void Function(
     media_tool.media_packet_h packet, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmediacodec_input_buffer_used_cbFunction = void Function(
     media_tool.media_packet_h packet, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the output buffer is available.
-/// @details It will be invoked when mediacodec has output buffer.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-/// @remarks The @a packet should be released using media_packet_destroy().
-/// @param[in] packet    The media packet handle
-/// @param[in] user_data The user data passed from the callback registration function
-/// @pre It will be invoked when mediacodec process completed(had output buffer) if you register this callback using mediacodec_set_fill_buffer_cb().
-/// @see mediacodec_set_output_buffer_available_cb()
-/// @see mediacodec_unset_output_buffer_available_cb()
+/// Called when the output buffer is available.
+///
+/// It will be invoked when mediacodec has output buffer.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+///
+/// **Remarks:**
+/// - The `packet` should be released using media_packet_destroy().
+///
+/// **Parameters:**
+/// - `packet` (in): The media packet handle
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - It will be invoked when mediacodec process completed(had output buffer) if you register this callback using mediacodec_set_fill_buffer_cb().
+///
+/// **See also:**
+/// - `mediacodec_set_output_buffer_available_cb()`
+/// - `mediacodec_unset_output_buffer_available_cb()`
+/// @nodoc
 typedef mediacodec_output_buffer_available_cb = ffi
     .Pointer<ffi.NativeFunction<mediacodec_output_buffer_available_cbFunction>>;
+/// @nodoc
 typedef mediacodec_output_buffer_available_cbFunction = ffi.Void Function(
     media_tool.media_packet_h packet, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmediacodec_output_buffer_available_cbFunction = void Function(
     media_tool.media_packet_h packet, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the error has occurred.
-/// @details It will be invoked when the error has occurred.
-/// Following error codes can be delivered.
-/// #MEDIACODEC_ERROR_INTERNAL,
-/// #MEDIACODEC_ERROR_INVALID_STREAM,
-/// #MEDIACODEC_ERROR_NOT_SUPPORTED_FORMAT,
-/// #MEDIACODEC_ERROR_RESOURCE_CONFLICT
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-/// @param[in] error The error code
-/// @param[in] user_data  The user data passed from the callback registration function
-/// @pre It will be invoked when the error has occurred if you register this callback using mediacodec_set_error_cb().
-/// @see mediacodec_set_error_cb()
-/// @see mediacodec_unset_error_cb()
+/// Called when the error has occurred.
+///
+/// It will be invoked when the error has occurred. Following error codes can be delivered. `MEDIACODEC_ERROR_INTERNAL`, `MEDIACODEC_ERROR_INVALID_STREAM`, `MEDIACODEC_ERROR_NOT_SUPPORTED_FORMAT`, `MEDIACODEC_ERROR_RESOURCE_CONFLICT`
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+///
+/// **Parameters:**
+/// - `error` (in): The error code
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - It will be invoked when the error has occurred if you register this callback using mediacodec_set_error_cb().
+///
+/// **See also:**
+/// - `mediacodec_set_error_cb()`
+/// - `mediacodec_unset_error_cb()`
+/// @nodoc
 typedef mediacodec_error_cb
     = ffi.Pointer<ffi.NativeFunction<mediacodec_error_cbFunction>>;
+/// @nodoc
 typedef mediacodec_error_cbFunction = ffi.Void Function(
     ffi.Int32 error, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmediacodec_error_cbFunction = void Function(
     int error, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when there is no data to decode/encode.
-/// @details It will be invoked when the end-of-stream is reached.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-/// @param[in] user_data The user data passed from the callback registration function
-/// @pre It will be invoked when the eos event generate if you register this callback using mediacodec_set_eos_cb().
-/// @see mediacodec_set_eos_cb()
-/// @see mediacodec_unset_eos_cb()
+/// Called when there is no data to decode/encode.
+///
+/// It will be invoked when the end-of-stream is reached.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+///
+/// **Parameters:**
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - It will be invoked when the eos event generate if you register this callback using mediacodec_set_eos_cb().
+///
+/// **See also:**
+/// - `mediacodec_set_eos_cb()`
+/// - `mediacodec_unset_eos_cb()`
+/// @nodoc
 typedef mediacodec_eos_cb
     = ffi.Pointer<ffi.NativeFunction<mediacodec_eos_cbFunction>>;
+/// @nodoc
 typedef mediacodec_eos_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmediacodec_eos_cbFunction = void Function(
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the mediacodec needs more data or has enough data.
-/// @details It is recommended that the application stops calling mediacodec_process_input() when #MEDIACODEC_ENOUGH_DATA
-/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-/// is invoked.
-/// @param[in] status    The state of the buffer
-/// @param[in] user_data The user data passed from the callback registration function
-/// @see mediacodec_set_buffer_status_cb()
-/// @see mediacodec_unset_buffer_status_cb()
+/// Called when the mediacodec needs more data or has enough data.
+///
+/// It is recommended that the application stops calling mediacodec_process_input() when `MEDIACODEC_ENOUGH_DATA`
+///
+/// **Since Tizen:**
+/// - Mobile 2.4; Wearable 3.0 is invoked.
+///
+/// **Parameters:**
+/// - `status` (in): The state of the buffer
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **See also:**
+/// - `mediacodec_set_buffer_status_cb()`
+/// - `mediacodec_unset_buffer_status_cb()`
+/// @nodoc
 typedef mediacodec_buffer_status_cb
     = ffi.Pointer<ffi.NativeFunction<mediacodec_buffer_status_cbFunction>>;
+/// @nodoc
 typedef mediacodec_buffer_status_cbFunction = ffi.Void Function(
     ffi.Int32 status, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmediacodec_buffer_status_cbFunction = void Function(
     int status, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called once for each supported codec types.
-/// @since_tizen @if MOBILE 2.4 @elseif WEARABLE 3.0 @endif
-/// @param[in] codec_type  The codec type
-/// @param[in] user_data   The user data passed from the foreach function
-/// @return  @c true to continue with the next iteration of the loop, @c false to break out of the loop.
-/// @pre mediacodec_foreach_supported_codec() will invoke this callback.
-/// @see mediacodec_foreach_supported_codec()
+/// Called once for each supported codec types.
+///
+/// **Since Tizen:**
+/// - Mobile 2.4; Wearable 3.0
+///
+/// **Parameters:**
+/// - `codec_type` (in): The codec type
+/// - `user_data` (in): The user data passed from the foreach function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, `false` to break out of the loop.
+///
+/// **Preconditions:**
+/// - mediacodec_foreach_supported_codec() will invoke this callback.
+///
+/// **See also:**
+/// - `mediacodec_foreach_supported_codec()`
+/// @nodoc
 typedef mediacodec_supported_codec_cb
     = ffi.Pointer<ffi.NativeFunction<mediacodec_supported_codec_cbFunction>>;
+/// @nodoc
 typedef mediacodec_supported_codec_cbFunction = ffi.Bool Function(
     ffi.Int32 codec_type, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartmediacodec_supported_codec_cbFunction = bool Function(
     int codec_type, ffi.Pointer<ffi.Void> user_data);

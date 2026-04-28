@@ -1,3 +1,6 @@
+/// {@category 10.0/tizen}
+library tizen_interop_10_0.capi_ui_autofill_manager;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen capi-ui-autofill-manager APIs.
+/// {@category 10.0/tizen}
 class Tizen100CapiUiAutofillManager {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,19 +28,37 @@ class Tizen100CapiUiAutofillManager {
           lookup)
       : _lookup = lookup;
 
-  /// @platform
-  /// @brief Creates a handle for autofill manager.
-  /// @since_tizen 5.5
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/autofillmanager
-  /// @remarks If the function succeeds, @a amh handle must be released with autofill_manager_destroy().
-  /// @param[out] amh The autofill manager handle
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUTOFILL_ERROR_OUT_OF_MEMORY Out of memory
-  /// @see autofill_manager_destroy()
+  /// Creates a handle for autofill manager.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/autofillmanager>
+  ///
+  /// **Remarks:**
+  /// - If the function succeeds, `amh` handle must be released with autofill_manager_destroy().
+  ///
+  /// **Parameters:**
+  /// - `amh` (out): The autofill manager handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUTOFILL_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `autofill_manager_destroy()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int autofill_manager_create(
     ffi.Pointer<autofill_manager_h> amh,
   ) {
@@ -52,17 +74,33 @@ class Tizen100CapiUiAutofillManager {
   late final _autofill_manager_create = _autofill_manager_createPtr
       .asFunction<int Function(ffi.Pointer<autofill_manager_h>)>();
 
-  /// @platform
-  /// @brief Destroys autofill manager handle.
-  /// @since_tizen 5.5
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/autofillmanager
-  /// @param[in] amh The autofill manager handle
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see autofill_manager_create()
+  /// Destroys autofill manager handle.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/autofillmanager>
+  ///
+  /// **Parameters:**
+  /// - `amh` (in): The autofill manager handle
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `autofill_manager_create()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int autofill_manager_destroy(
     autofill_manager_h amh,
   ) {
@@ -77,19 +115,33 @@ class Tizen100CapiUiAutofillManager {
   late final _autofill_manager_destroy = _autofill_manager_destroyPtr
       .asFunction<int Function(autofill_manager_h)>();
 
-  /// @platform
-  /// @brief Connects to autofill manager daemon.
-  /// @since_tizen 5.5
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/autofillmanager
-  /// @param[in] amh The autofill manager handle
-  /// @param[in] callback The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUTOFILL_ERROR_OPERATION_FAILED Operation failure
+  /// Connects to autofill manager daemon.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/autofillmanager>
+  ///
+  /// **Parameters:**
+  /// - `amh` (in): The autofill manager handle
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUTOFILL_ERROR_OPERATION_FAILED`: Operation failure
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int autofill_manager_connect(
     autofill_manager_h amh,
     autofill_manager_connection_status_changed_cb callback,
@@ -115,18 +167,34 @@ class Tizen100CapiUiAutofillManager {
               autofill_manager_connection_status_changed_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @platform
-  /// @brief Sets autofill service.
-  /// @since_tizen 5.5
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/autofillmanager
-  /// @param[in] amh The autofill manager handle
-  /// @param[in] app_id The autofill service app ID
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see autofill_manager_get_autofill_service()
+  /// Sets autofill service.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/autofillmanager>
+  ///
+  /// **Parameters:**
+  /// - `amh` (in): The autofill manager handle
+  /// - `app_id` (in): The autofill service app ID
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `autofill_manager_get_autofill_service()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int autofill_manager_set_autofill_service(
     autofill_manager_h amh,
     ffi.Pointer<ffi.Char> app_id,
@@ -145,19 +213,37 @@ class Tizen100CapiUiAutofillManager {
       _autofill_manager_set_autofill_servicePtr.asFunction<
           int Function(autofill_manager_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @platform
-  /// @brief Gets autofill service app ID.
-  /// @since_tizen 5.5
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/autofillmanager
-  /// @remarks @a service_app_id must be released using free().
-  /// @param[in] amh The autofill manager handle
-  /// @param[out] service_app_id The autofill service app ID
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see autofill_manager_set_autofill_service()
+  /// Gets autofill service app ID.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/autofillmanager>
+  ///
+  /// **Remarks:**
+  /// - `service_app_id` must be released using free().
+  ///
+  /// **Parameters:**
+  /// - `amh` (in): The autofill manager handle
+  /// - `service_app_id` (out): The autofill service app ID
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `autofill_manager_set_autofill_service()`
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int autofill_manager_get_autofill_service(
     autofill_manager_h amh,
     ffi.Pointer<ffi.Pointer<ffi.Char>> service_app_id,
@@ -178,19 +264,33 @@ class Tizen100CapiUiAutofillManager {
           int Function(
               autofill_manager_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @platform
-  /// @brief Retrieves all autofill services.
-  /// @since_tizen 5.5
-  /// @privlevel platform
-  /// @privilege %http://tizen.org/privilege/autofillmanager
-  /// @param[in] amh The autofill manager handle
-  /// @param[in] callback The callback function to register
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #AUTOFILL_ERROR_NONE No error
-  /// @retval #AUTOFILL_ERROR_PERMISSION_DENIED The application does not have the privilege to call this function
-  /// @retval #AUTOFILL_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #AUTOFILL_ERROR_OPERATION_FAILED Operation failure
+  /// Retrieves all autofill services.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Privilege level:**
+  /// - platform
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/autofillmanager>
+  ///
+  /// **Parameters:**
+  /// - `amh` (in): The autofill manager handle
+  /// - `callback` (in): The callback function to register
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `AUTOFILL_ERROR_NONE`: No error
+  /// - `AUTOFILL_ERROR_PERMISSION_DENIED`: The application does not have the privilege to call this function
+  /// - `AUTOFILL_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `AUTOFILL_ERROR_OPERATION_FAILED`: Operation failure
+  ///
+  /// **Platform:**
+  /// - Platform API.
   int autofill_manager_foreach_autofill_service(
     autofill_manager_h amh,
     autofill_manager_autofill_service_cb callback,
@@ -216,8 +316,11 @@ class Tizen100CapiUiAutofillManager {
               ffi.Pointer<ffi.Void>)>();
 }
 
-/// @brief Enumeration of connection status.
-/// @since_tizen 5.5
+/// Enumeration of connection status.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 abstract class autofill_manager_connection_status_e {
   /// < Connected
   static const int AUTOFILL_MANAGER_CONNECTION_STATUS_CONNECTED = 0;
@@ -229,40 +332,69 @@ abstract class autofill_manager_connection_status_e {
   static const int AUTOFILL_MANAGER_CONNECTION_STATUS_REJECTED = 2;
 }
 
+/// @nodoc
 final class autofill_manager_s extends ffi.Opaque {}
 
-/// @brief The autofill manager handle.
-/// @since_tizen 5.5
+/// The autofill manager handle.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 typedef autofill_manager_h = ffi.Pointer<autofill_manager_s>;
 
-/// @brief Called when the connection status is changed.
-/// @since_tizen 5.5
-/// @remarks @a amh should not be freed and can be used only in the callback.
-/// @param[in] amh The autofill manager handle
-/// @param[in] status The connection status
-/// @param[in] user_data The user data passed from the callback function
-/// @see autofill_manager_connect()
+/// Called when the connection status is changed.
+///
+/// **Since Tizen:**
+/// - 5.5
+///
+/// **Remarks:**
+/// - `amh` should not be freed and can be used only in the callback.
+///
+/// **Parameters:**
+/// - `amh` (in): The autofill manager handle
+/// - `status` (in): The connection status
+/// - `user_data` (in): The user data passed from the callback function
+///
+/// **See also:**
+/// - `autofill_manager_connect()`
+/// @nodoc
 typedef autofill_manager_connection_status_changed_cb = ffi.Pointer<
     ffi.NativeFunction<autofill_manager_connection_status_changed_cbFunction>>;
+/// @nodoc
 typedef autofill_manager_connection_status_changed_cbFunction
     = ffi.Void Function(autofill_manager_h amh, ffi.Int32 status,
         ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartautofill_manager_connection_status_changed_cbFunction
     = void Function(
         autofill_manager_h amh, int status, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called for each autofill service information.
-/// @since_tizen 5.5
-/// @remarks @a app_id should not be freed and can be used only in the callback.
-/// @param[in] app_id The autofill service app ID
-/// @param[in] user_data The user data to be passed to the callback function
-/// @return @c true to continue with the next iteration of the loop,
-/// otherwise @c false to break out of the loop
-/// @pre autofill_manager_foreach_autofill_service() will invoke this callback.
-/// @see autofill_manager_foreach_autofill_service()
+/// Called for each autofill service information.
+///
+/// **Since Tizen:**
+/// - 5.5
+///
+/// **Remarks:**
+/// - `app_id` should not be freed and can be used only in the callback.
+///
+/// **Parameters:**
+/// - `app_id` (in): The autofill service app ID
+/// - `user_data` (in): The user data to be passed to the callback function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop
+///
+/// **Preconditions:**
+/// - autofill_manager_foreach_autofill_service() will invoke this callback.
+///
+/// **See also:**
+/// - `autofill_manager_foreach_autofill_service()`
+/// @nodoc
 typedef autofill_manager_autofill_service_cb = ffi
     .Pointer<ffi.NativeFunction<autofill_manager_autofill_service_cbFunction>>;
+/// @nodoc
 typedef autofill_manager_autofill_service_cbFunction = ffi.Bool Function(
     ffi.Pointer<ffi.Char> app_id, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartautofill_manager_autofill_service_cbFunction = bool Function(
     ffi.Pointer<ffi.Char> app_id, ffi.Pointer<ffi.Void> user_data);

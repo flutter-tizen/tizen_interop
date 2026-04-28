@@ -1,3 +1,6 @@
+/// {@category 6.5/tizen}
+library tizen_interop_6_5.capi_media_sound_manager;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen capi-media-sound-manager APIs.
+/// {@category 6.5/tizen}
 class Tizen65CapiMediaSoundManager {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,16 +28,25 @@ class Tizen65CapiMediaSoundManager {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Gets the maximum volume level supported for a particular sound type.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in]		type The sound type
-  /// @param[out]	max	The maximum volume level
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SOUND_MANAGER_ERROR_NONE Success
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see sound_manager_set_volume()
-  /// @see sound_manager_get_volume()
+  /// Gets the maximum volume level supported for a particular sound type.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `type` (in): The sound type
+  /// - `max` (out): The maximum volume level
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SOUND_MANAGER_ERROR_NONE`: Success
+  /// - `SOUND_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `sound_manager_set_volume()`
+  /// - `sound_manager_get_volume()`
   int sound_manager_get_max_volume(
     int type,
     ffi.Pointer<ffi.Int> max,
@@ -51,20 +64,33 @@ class Tizen65CapiMediaSoundManager {
   late final _sound_manager_get_max_volume = _sound_manager_get_max_volumePtr
       .asFunction<int Function(int, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Sets the volume level specified for a particular sound type.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/volume.set
-  /// @param[in]		type The sound type
-  /// @param[in]		volume	The volume level to be set
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SOUND_MANAGER_ERROR_NONE Success
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SOUND_MANAGER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #SOUND_MANAGER_ERROR_INTERNAL Internal error inside the sound system
-  /// @see sound_manager_get_max_volume()
-  /// @see sound_manager_get_volume()
+  /// Sets the volume level specified for a particular sound type.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/volume.set>
+  ///
+  /// **Parameters:**
+  /// - `type` (in): The sound type
+  /// - `volume` (in): The volume level to be set
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SOUND_MANAGER_ERROR_NONE`: Success
+  /// - `SOUND_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOUND_MANAGER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `SOUND_MANAGER_ERROR_INTERNAL`: Internal error inside the sound system
+  ///
+  /// **See also:**
+  /// - `sound_manager_get_max_volume()`
+  /// - `sound_manager_get_volume()`
   int sound_manager_set_volume(
     int type,
     int volume,
@@ -81,17 +107,26 @@ class Tizen65CapiMediaSoundManager {
   late final _sound_manager_set_volume =
       _sound_manager_set_volumePtr.asFunction<int Function(int, int)>();
 
-  /// @brief Gets the volume level specified for a particular sound type.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in]		type The sound type
-  /// @param[out]	volume	The current volume level
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SOUND_MANAGER_ERROR_NONE Success
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SOUND_MANAGER_ERROR_INTERNAL Internal error inside the sound system
-  /// @see sound_manager_get_max_volume()
-  /// @see sound_manager_set_volume()
+  /// Gets the volume level specified for a particular sound type.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `type` (in): The sound type
+  /// - `volume` (out): The current volume level
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SOUND_MANAGER_ERROR_NONE`: Success
+  /// - `SOUND_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOUND_MANAGER_ERROR_INTERNAL`: Internal error inside the sound system
+  ///
+  /// **See also:**
+  /// - `sound_manager_get_max_volume()`
+  /// - `sound_manager_set_volume()`
   int sound_manager_get_volume(
     int type,
     ffi.Pointer<ffi.Int> volume,
@@ -109,15 +144,22 @@ class Tizen65CapiMediaSoundManager {
   late final _sound_manager_get_volume = _sound_manager_get_volumePtr
       .asFunction<int Function(int, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the type of the sound being currently played.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[out]	type The current sound type
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SOUND_MANAGER_ERROR_NONE Success
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SOUND_MANAGER_ERROR_NO_PLAYING_SOUND No playing sound
-  /// @retval #SOUND_MANAGER_ERROR_INTERNAL Internal error inside the sound system
+  /// Gets the type of the sound being currently played.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `type` (out): The current sound type
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SOUND_MANAGER_ERROR_NONE`: Success
+  /// - `SOUND_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOUND_MANAGER_ERROR_NO_PLAYING_SOUND`: No playing sound
+  /// - `SOUND_MANAGER_ERROR_INTERNAL`: Internal error inside the sound system
   int sound_manager_get_current_sound_type(
     ffi.Pointer<ffi.Int32> type,
   ) {
@@ -133,19 +175,30 @@ class Tizen65CapiMediaSoundManager {
       _sound_manager_get_current_sound_typePtr
           .asFunction<int Function(ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Adds a callback function to be invoked when the volume level is changed.
-  /// @since_tizen 3.0
-  /// @param[in]	callback	Callback function to indicate change in volume
-  /// @param[in]	user_data	The user data to be passed to the callback function
-  /// @param[out]	id	The callback id
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SOUND_MANAGER_ERROR_NONE Success
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SOUND_MANAGER_ERROR_INTERNAL Internal error inside the sound system
-  /// @post sound_manager_volume_changed_cb() will be invoked.
-  /// @see sound_manager_remove_volume_changed_cb()
-  /// @see sound_manager_volume_changed_cb()
+  /// Adds a callback function to be invoked when the volume level is changed.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `callback` (in): Callback function to indicate change in volume
+  /// - `user_data` (in): The user data to be passed to the callback function
+  /// - `id` (out): The callback id
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SOUND_MANAGER_ERROR_NONE`: Success
+  /// - `SOUND_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOUND_MANAGER_ERROR_INTERNAL`: Internal error inside the sound system
+  ///
+  /// **Postconditions:**
+  /// - sound_manager_volume_changed_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `sound_manager_remove_volume_changed_cb()`
+  /// - `sound_manager_volume_changed_cb()`
   int sound_manager_add_volume_changed_cb(
     sound_manager_volume_changed_cb callback,
     ffi.Pointer<ffi.Void> user_data,
@@ -169,14 +222,24 @@ class Tizen65CapiMediaSoundManager {
           int Function(sound_manager_volume_changed_cb, ffi.Pointer<ffi.Void>,
               ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Removes the volume change callback.
-  /// @since_tizen 3.0
-  /// @param[in]	id	The id of the callback to remove
-  /// @return 0 on success, otherwise a negative error value
-  /// @retval #SOUND_MANAGER_ERROR_NONE Success
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SOUND_MANAGER_ERROR_INTERNAL Internal error inside the sound system
-  /// @see sound_manager_add_volume_changed_cb()
+  /// Removes the volume change callback.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `id` (in): The id of the callback to remove
+  ///
+  /// **Returns:**
+  /// - 0 on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SOUND_MANAGER_ERROR_NONE`: Success
+  /// - `SOUND_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOUND_MANAGER_ERROR_INTERNAL`: Internal error inside the sound system
+  ///
+  /// **See also:**
+  /// - `sound_manager_add_volume_changed_cb()`
   int sound_manager_remove_volume_changed_cb(
     int id,
   ) {
@@ -192,24 +255,33 @@ class Tizen65CapiMediaSoundManager {
       _sound_manager_remove_volume_changed_cbPtr
           .asFunction<int Function(int)>();
 
-  /// @brief Creates a handle for stream ducking.
-  /// @since_tizen 5.5
+  /// Creates a handle for stream ducking.
   ///
-  /// @remarks @a stream_ducking should be released using sound_manager_destroy_stream_ducking().
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @param[in]	target_stream	The type of target stream
-  /// @param[in]	callback		The callback function called when ducking state is changed (optional, this can be NULL)
-  /// @param[in]	user_data		The user data to be passed to the callback function (optional, this can be NULL)
-  /// @param[out]	stream_ducking	The handle of stream ducking
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SOUND_MANAGER_ERROR_NONE Success
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SOUND_MANAGER_ERROR_INTERNAL Internal error inside the sound system
-  /// @see sound_manager_destroy_stream_ducking()
-  /// @see sound_manager_is_ducked()
-  /// @see sound_manager_activate_ducking()
-  /// @see sound_manager_deactivate_ducking()
+  /// **Remarks:**
+  /// - `stream_ducking` should be released using sound_manager_destroy_stream_ducking().
+  ///
+  /// **Parameters:**
+  /// - `target_stream` (in): The type of target stream
+  /// - `callback` (in): The callback function called when ducking state is changed (optional, this can be NULL)
+  /// - `user_data` (in): The user data to be passed to the callback function (optional, this can be NULL)
+  /// - `stream_ducking` (out): The handle of stream ducking
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SOUND_MANAGER_ERROR_NONE`: Success
+  /// - `SOUND_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOUND_MANAGER_ERROR_INTERNAL`: Internal error inside the sound system
+  ///
+  /// **See also:**
+  /// - `sound_manager_destroy_stream_ducking()`
+  /// - `sound_manager_is_ducked()`
+  /// - `sound_manager_activate_ducking()`
+  /// - `sound_manager_deactivate_ducking()`
   int sound_manager_create_stream_ducking(
     int target_stream,
     sound_stream_ducking_state_changed_cb callback,
@@ -234,20 +306,28 @@ class Tizen65CapiMediaSoundManager {
           int Function(int, sound_stream_ducking_state_changed_cb,
               ffi.Pointer<ffi.Void>, ffi.Pointer<sound_stream_ducking_h>)>();
 
-  /// @brief Checks if the stream is ducked.
-  /// @since_tizen 5.5
+  /// Checks if the stream is ducked.
   ///
-  /// @param[in]	stream_ducking	The handle of stream ducking
-  /// @param[out]	is_ducked		Whether the stream is ducked or not. @c true if ducked, @c false otherwise.
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SOUND_MANAGER_ERROR_NONE Success
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SOUND_MANAGER_ERROR_INTERNAL Internal error inside the sound system
-  /// @see sound_manager_create_stream_ducking()
-  /// @see sound_manager_destroy_stream_ducking()
-  /// @see sound_manager_activate_ducking()
-  /// @see sound_manager_deactivate_ducking()
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `stream_ducking` (in): The handle of stream ducking
+  /// - `is_ducked` (out): Whether the stream is ducked or not. `true` if ducked, `false` otherwise.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SOUND_MANAGER_ERROR_NONE`: Success
+  /// - `SOUND_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOUND_MANAGER_ERROR_INTERNAL`: Internal error inside the sound system
+  ///
+  /// **See also:**
+  /// - `sound_manager_create_stream_ducking()`
+  /// - `sound_manager_destroy_stream_ducking()`
+  /// - `sound_manager_activate_ducking()`
+  /// - `sound_manager_deactivate_ducking()`
   int sound_manager_is_ducked(
     sound_stream_ducking_h stream_ducking,
     ffi.Pointer<ffi.Bool> is_ducked,
@@ -265,30 +345,46 @@ class Tizen65CapiMediaSoundManager {
   late final _sound_manager_is_ducked = _sound_manager_is_duckedPtr.asFunction<
       int Function(sound_stream_ducking_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Activates ducking, asynchronously.
-  /// @since_tizen 5.5
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/volume.set
-  /// @remarks If ducking is activated successfully, the volume of all sound streams
-  /// matched with the target_stream that set in sound_manager_create_stream_ducking()
-  /// is decreased by @a ratio for @a duration.
-  /// The change applies system-wide.
-  /// @param[in]	stream_ducking	The handle of stream ducking
-  /// @param[in]	duration		The duration for ducking (msec, 0 <= duration <= 3000)
-  /// @param[in]	ratio			The volume ratio when ducked (0.0 <= ratio < 1.0)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SOUND_MANAGER_ERROR_NONE Success
-  /// @retval #SOUND_MANAGER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_STATE Invalid state
-  /// @retval #SOUND_MANAGER_ERROR_INTERNAL Internal error inside the sound system
-  /// @pre The stream should be unducked before calling this function,
-  /// otherwise, #SOUND_MANAGER_ERROR_INVALID_STATE is returned.
-  /// @see sound_manager_create_stream_ducking()
-  /// @see sound_manager_destroy_stream_ducking()
-  /// @see sound_manager_is_ducked()
-  /// @see sound_manager_deactivate_ducking()
+  /// Activates ducking, asynchronously.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/volume.set>
+  ///
+  /// **Remarks:**
+  /// - If ducking is activated successfully, the volume of all sound streams
+  /// - matched with the target_stream that set in sound_manager_create_stream_ducking()
+  /// - is decreased by `ratio` for `duration`.
+  /// - The change applies system-wide.
+  ///
+  /// **Parameters:**
+  /// - `stream_ducking` (in): The handle of stream ducking
+  /// - `duration` (in): The duration for ducking (msec, 0 <= duration <= 3000)
+  /// - `ratio` (in): The volume ratio when ducked (0.0 <= ratio < 1.0)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SOUND_MANAGER_ERROR_NONE`: Success
+  /// - `SOUND_MANAGER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `SOUND_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOUND_MANAGER_ERROR_INVALID_STATE`: Invalid state
+  /// - `SOUND_MANAGER_ERROR_INTERNAL`: Internal error inside the sound system
+  ///
+  /// **Preconditions:**
+  /// - The stream should be unducked before calling this function, otherwise, `SOUND_MANAGER_ERROR_INVALID_STATE` is returned.
+  ///
+  /// **See also:**
+  /// - `sound_manager_create_stream_ducking()`
+  /// - `sound_manager_destroy_stream_ducking()`
+  /// - `sound_manager_is_ducked()`
+  /// - `sound_manager_deactivate_ducking()`
   int sound_manager_activate_ducking(
     sound_stream_ducking_h stream_ducking,
     int duration,
@@ -309,24 +405,38 @@ class Tizen65CapiMediaSoundManager {
       _sound_manager_activate_duckingPtr
           .asFunction<int Function(sound_stream_ducking_h, int, double)>();
 
-  /// @brief Deactivates ducking, asynchronously.
-  /// @since_tizen 5.5
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/volume.set
-  /// @param[in]	stream_ducking	The handle of stream ducking
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SOUND_MANAGER_ERROR_NONE Success
-  /// @retval #SOUND_MANAGER_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_STATE Invalid state
-  /// @retval #SOUND_MANAGER_ERROR_INTERNAL Internal error inside the sound system
-  /// @pre The stream should be ducked before calling this function,
-  /// otherwise, #SOUND_MANAGER_ERROR_INVALID_STATE is returned.
-  /// @see sound_manager_create_stream_ducking()
-  /// @see sound_manager_destroy_stream_ducking()
-  /// @see sound_manager_is_ducked()
-  /// @see sound_manager_activate_ducking()
+  /// Deactivates ducking, asynchronously.
+  ///
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/volume.set>
+  ///
+  /// **Parameters:**
+  /// - `stream_ducking` (in): The handle of stream ducking
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SOUND_MANAGER_ERROR_NONE`: Success
+  /// - `SOUND_MANAGER_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `SOUND_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOUND_MANAGER_ERROR_INVALID_STATE`: Invalid state
+  /// - `SOUND_MANAGER_ERROR_INTERNAL`: Internal error inside the sound system
+  ///
+  /// **Preconditions:**
+  /// - The stream should be ducked before calling this function, otherwise, `SOUND_MANAGER_ERROR_INVALID_STATE` is returned.
+  ///
+  /// **See also:**
+  /// - `sound_manager_create_stream_ducking()`
+  /// - `sound_manager_destroy_stream_ducking()`
+  /// - `sound_manager_is_ducked()`
+  /// - `sound_manager_activate_ducking()`
   int sound_manager_deactivate_ducking(
     sound_stream_ducking_h stream_ducking,
   ) {
@@ -342,19 +452,27 @@ class Tizen65CapiMediaSoundManager {
       _sound_manager_deactivate_duckingPtr
           .asFunction<int Function(sound_stream_ducking_h)>();
 
-  /// @brief Destroys the handle for stream ducking.
-  /// @since_tizen 5.5
+  /// Destroys the handle for stream ducking.
   ///
-  /// @param[in]	stream_ducking	The handle of stream ducking
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SOUND_MANAGER_ERROR_NONE Success
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SOUND_MANAGER_ERROR_INTERNAL Internal error inside the sound system
-  /// @see sound_manager_create_stream_ducking()
-  /// @see sound_manager_is_ducked()
-  /// @see sound_manager_activate_ducking()
-  /// @see sound_manager_deactivate_ducking()
+  /// **Since Tizen:**
+  /// - 5.5
+  ///
+  /// **Parameters:**
+  /// - `stream_ducking` (in): The handle of stream ducking
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SOUND_MANAGER_ERROR_NONE`: Success
+  /// - `SOUND_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOUND_MANAGER_ERROR_INTERNAL`: Internal error inside the sound system
+  ///
+  /// **See also:**
+  /// - `sound_manager_create_stream_ducking()`
+  /// - `sound_manager_is_ducked()`
+  /// - `sound_manager_activate_ducking()`
+  /// - `sound_manager_deactivate_ducking()`
   int sound_manager_destroy_stream_ducking(
     sound_stream_ducking_h stream_ducking,
   ) {
@@ -370,34 +488,43 @@ class Tizen65CapiMediaSoundManager {
       _sound_manager_destroy_stream_duckingPtr
           .asFunction<int Function(sound_stream_ducking_h)>();
 
-  /// @brief Creates a handle for stream information.
-  /// @since_tizen 3.0
+  /// Creates a handle for stream information.
   ///
-  /// @remarks	The registered callback is issued in the internal thread of the sound manager.\n
-  /// Do not call this function within sound_stream_focus_state_changed_cb() or sound_stream_focus_state_watch_cb(),\n
-  /// otherwise #SOUND_MANAGER_ERROR_INVALID_OPERATION will be returned.\n
-  /// To apply the stream policy according to this stream information, this handle should be passed to other APIs\n
-  /// related to playback or recording.(e.g. player, wav-player, audio-io, etc.)
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @param[in]	stream_type	The type of stream
-  /// @param[in]	callback	The focus state change callback function (optional, this can be NULL)
-  /// @param[in]	user_data	The user data to be passed to the callback function (optional, this can be NULL)
-  /// @param[out]	stream_info	The handle of stream information
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SOUND_MANAGER_ERROR_NONE Success
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #SOUND_MANAGER_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #SOUND_MANAGER_ERROR_INTERNAL Internal error inside the sound system
-  /// @see sound_manager_destroy_stream_information()
-  /// @see sound_manager_add_device_for_stream_routing()
-  /// @see sound_manager_remove_device_for_stream_routing()
-  /// @see sound_manager_remove_all_devices_for_stream_routing()
-  /// @see sound_manager_apply_stream_routing()
-  /// @see sound_manager_acquire_focus()
-  /// @see sound_manager_release_focus()
-  /// @see sound_manager_get_focus_state()
+  /// **Remarks:**
+  /// - The registered callback is issued in the internal thread of the sound manager.
+  /// - Do not call this function within sound_stream_focus_state_changed_cb() or sound_stream_focus_state_watch_cb(),
+  /// - otherwise `SOUND_MANAGER_ERROR_INVALID_OPERATION` will be returned.
+  /// - To apply the stream policy according to this stream information, this handle should be passed to other APIs
+  /// - related to playback or recording.(e.g. player, wav-player, audio-io, etc.)
+  ///
+  /// **Parameters:**
+  /// - `stream_type` (in): The type of stream
+  /// - `callback` (in): The focus state change callback function (optional, this can be NULL)
+  /// - `user_data` (in): The user data to be passed to the callback function (optional, this can be NULL)
+  /// - `stream_info` (out): The handle of stream information
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SOUND_MANAGER_ERROR_NONE`: Success
+  /// - `SOUND_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOUND_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `SOUND_MANAGER_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `SOUND_MANAGER_ERROR_INTERNAL`: Internal error inside the sound system
+  ///
+  /// **See also:**
+  /// - `sound_manager_destroy_stream_information()`
+  /// - `sound_manager_add_device_for_stream_routing()`
+  /// - `sound_manager_remove_device_for_stream_routing()`
+  /// - `sound_manager_remove_all_devices_for_stream_routing()`
+  /// - `sound_manager_apply_stream_routing()`
+  /// - `sound_manager_acquire_focus()`
+  /// - `sound_manager_release_focus()`
+  /// - `sound_manager_get_focus_state()`
   int sound_manager_create_stream_information(
     int stream_type,
     sound_stream_focus_state_changed_cb callback,
@@ -422,27 +549,36 @@ class Tizen65CapiMediaSoundManager {
           int Function(int, sound_stream_focus_state_changed_cb,
               ffi.Pointer<ffi.Void>, ffi.Pointer<sound_stream_info_h>)>();
 
-  /// @brief Destroys the handle for stream information.
-  /// @since_tizen 3.0
+  /// Destroys the handle for stream information.
   ///
-  /// @remarks	Do not call this function within sound_stream_focus_state_changed_cb() or sound_stream_focus_state_watch_cb(),\n
-  /// otherwise #SOUND_MANAGER_ERROR_INVALID_OPERATION will be returned.
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @param[in]	stream_info	The handle of stream information
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SOUND_MANAGER_ERROR_NONE Success
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #SOUND_MANAGER_ERROR_INTERNAL Internal error inside the sound system
-  /// @see sound_manager_create_stream_information()
-  /// @see sound_manager_add_device_for_stream_routing()
-  /// @see sound_manager_remove_device_for_stream_routing()
-  /// @see sound_manager_remove_all_devices_for_stream_routing()
-  /// @see sound_manager_apply_stream_routing()
-  /// @see sound_manager_acquire_focus()
-  /// @see sound_manager_release_focus()
-  /// @see sound_manager_get_focus_state()
+  /// **Remarks:**
+  /// - Do not call this function within sound_stream_focus_state_changed_cb() or sound_stream_focus_state_watch_cb(),
+  /// - otherwise `SOUND_MANAGER_ERROR_INVALID_OPERATION` will be returned.
+  ///
+  /// **Parameters:**
+  /// - `stream_info` (in): The handle of stream information
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SOUND_MANAGER_ERROR_NONE`: Success
+  /// - `SOUND_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOUND_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `SOUND_MANAGER_ERROR_INTERNAL`: Internal error inside the sound system
+  ///
+  /// **See also:**
+  /// - `sound_manager_create_stream_information()`
+  /// - `sound_manager_add_device_for_stream_routing()`
+  /// - `sound_manager_remove_device_for_stream_routing()`
+  /// - `sound_manager_remove_all_devices_for_stream_routing()`
+  /// - `sound_manager_apply_stream_routing()`
+  /// - `sound_manager_acquire_focus()`
+  /// - `sound_manager_release_focus()`
+  /// - `sound_manager_get_focus_state()`
   int sound_manager_destroy_stream_information(
     sound_stream_info_h stream_info,
   ) {
@@ -458,24 +594,35 @@ class Tizen65CapiMediaSoundManager {
       _sound_manager_destroy_stream_informationPtr
           .asFunction<int Function(sound_stream_info_h)>();
 
-  /// @brief Gets the sound type of the stream information.
-  /// @since_tizen 3.0
+  /// Gets the sound type of the stream information.
   ///
-  /// @remarks	In case of a @a stream_info made with #SOUND_STREAM_TYPE_EMERGENCY, it'll return #SOUND_MANAGER_ERROR_NO_DATA.\n
-  /// The reason is that there is no #sound_type_e matched with this @a stream_info.
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @param[in]	stream_info	The handle of stream information
-  /// @param[out]	sound_type	The sound type
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SOUND_MANAGER_ERROR_NONE Success
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SOUND_MANAGER_ERROR_NO_DATA No data
-  /// @pre Call sound_manager_create_stream_information() before calling this function.
-  /// @see sound_manager_create_stream_information()
-  /// @see sound_manager_set_volume()
-  /// @see sound_manager_get_max_volume()
-  /// @see sound_manager_get_volume()
+  /// **Remarks:**
+  /// - In case of a `stream_info` made with `SOUND_STREAM_TYPE_EMERGENCY`, it'll return `SOUND_MANAGER_ERROR_NO_DATA`.
+  /// - The reason is that there is no `sound_type_e` matched with this `stream_info`.
+  ///
+  /// **Parameters:**
+  /// - `stream_info` (in): The handle of stream information
+  /// - `sound_type` (out): The sound type
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SOUND_MANAGER_ERROR_NONE`: Success
+  /// - `SOUND_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOUND_MANAGER_ERROR_NO_DATA`: No data
+  ///
+  /// **Preconditions:**
+  /// - Call sound_manager_create_stream_information() before calling this function.
+  ///
+  /// **See also:**
+  /// - `sound_manager_create_stream_information()`
+  /// - `sound_manager_set_volume()`
+  /// - `sound_manager_get_max_volume()`
+  /// - `sound_manager_get_volume()`
   int sound_manager_get_sound_type(
     sound_stream_info_h stream_info,
     ffi.Pointer<ffi.Int32> sound_type,
@@ -493,27 +640,40 @@ class Tizen65CapiMediaSoundManager {
   late final _sound_manager_get_sound_type = _sound_manager_get_sound_typePtr
       .asFunction<int Function(sound_stream_info_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Adds the device to the stream information for the stream routing.
-  /// @since_tizen 3.0
+  /// Adds the device to the stream information for the stream routing.
   ///
-  /// @remarks	Use sound_manager_get_device_list() and sound_manager_get_next_device() to get the device.\n
-  /// #SOUND_MANAGER_ERROR_POLICY could be returned according to the stream type of the @a stream_info.\n
-  /// The available types of the @a stream_info for this function are #SOUND_STREAM_TYPE_VOIP and #SOUND_STREAM_TYPE_MEDIA_EXTERNAL_ONLY.
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @param[in]	stream_info	The handle of stream information
-  /// @param[in]	device		The device item from #sound_device_list_h
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SOUND_MANAGER_ERROR_NONE Success
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SOUND_MANAGER_ERROR_POLICY Noncompliance with the sound system policy
-  /// @pre Call sound_manager_create_stream_information() before calling this function.
-  /// @post You can apply this setting by calling sound_manager_apply_stream_routing().
-  /// @see sound_manager_create_stream_information()
-  /// @see sound_manager_destroy_stream_information()
-  /// @see sound_manager_remove_device_for_stream_routing()
-  /// @see sound_manager_remove_all_devices_for_stream_routing()
-  /// @see sound_manager_apply_stream_routing()
+  /// **Remarks:**
+  /// - Use sound_manager_get_device_list() and sound_manager_get_next_device() to get the device.
+  /// - `SOUND_MANAGER_ERROR_POLICY` could be returned according to the stream type of the `stream_info`.
+  /// - The available types of the `stream_info` for this function are `SOUND_STREAM_TYPE_VOIP` and `SOUND_STREAM_TYPE_MEDIA_EXTERNAL_ONLY`.
+  ///
+  /// **Parameters:**
+  /// - `stream_info` (in): The handle of stream information
+  /// - `device` (in): The device item from `sound_device_list_h`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SOUND_MANAGER_ERROR_NONE`: Success
+  /// - `SOUND_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOUND_MANAGER_ERROR_POLICY`: Noncompliance with the sound system policy
+  ///
+  /// **Preconditions:**
+  /// - Call sound_manager_create_stream_information() before calling this function.
+  ///
+  /// **Postconditions:**
+  /// - You can apply this setting by calling sound_manager_apply_stream_routing().
+  ///
+  /// **See also:**
+  /// - `sound_manager_create_stream_information()`
+  /// - `sound_manager_destroy_stream_information()`
+  /// - `sound_manager_remove_device_for_stream_routing()`
+  /// - `sound_manager_remove_all_devices_for_stream_routing()`
+  /// - `sound_manager_apply_stream_routing()`
   int sound_manager_add_device_for_stream_routing(
     sound_stream_info_h stream_info,
     sound_device_h device,
@@ -532,24 +692,37 @@ class Tizen65CapiMediaSoundManager {
       _sound_manager_add_device_for_stream_routingPtr
           .asFunction<int Function(sound_stream_info_h, sound_device_h)>();
 
-  /// @brief Removes the device from the stream information for the stream routing.
-  /// @since_tizen 3.0
+  /// Removes the device from the stream information for the stream routing.
   ///
-  /// @remarks	Use sound_manager_get_device_list() and sound_manager_get_next_device() to get the device.\n
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @param[in]	stream_info	The handle of stream information
-  /// @param[in]	device		The device item from #sound_device_list_h
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SOUND_MANAGER_ERROR_NONE Success
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre Call sound_manager_create_stream_information() and sound_manager_add_device_for_stream_routing() before calling this function.
-  /// @post You can apply this setting by calling sound_manager_apply_stream_routing().
-  /// @see sound_manager_create_stream_information()
-  /// @see sound_manager_destroy_stream_information()
-  /// @see sound_manager_add_device_for_stream_routing()
-  /// @see sound_manager_remove_all_devices_for_stream_routing()
-  /// @see sound_manager_apply_stream_routing()
+  /// **Remarks:**
+  /// - Use sound_manager_get_device_list() and sound_manager_get_next_device() to get the device.
+  ///
+  /// **Parameters:**
+  /// - `stream_info` (in): The handle of stream information
+  /// - `device` (in): The device item from `sound_device_list_h`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SOUND_MANAGER_ERROR_NONE`: Success
+  /// - `SOUND_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - Call sound_manager_create_stream_information() and sound_manager_add_device_for_stream_routing() before calling this function.
+  ///
+  /// **Postconditions:**
+  /// - You can apply this setting by calling sound_manager_apply_stream_routing().
+  ///
+  /// **See also:**
+  /// - `sound_manager_create_stream_information()`
+  /// - `sound_manager_destroy_stream_information()`
+  /// - `sound_manager_add_device_for_stream_routing()`
+  /// - `sound_manager_remove_all_devices_for_stream_routing()`
+  /// - `sound_manager_apply_stream_routing()`
   int sound_manager_remove_device_for_stream_routing(
     sound_stream_info_h stream_info,
     sound_device_h device,
@@ -568,21 +741,31 @@ class Tizen65CapiMediaSoundManager {
       _sound_manager_remove_device_for_stream_routingPtr
           .asFunction<int Function(sound_stream_info_h, sound_device_h)>();
 
-  /// @brief Removes all devices from the stream information for the stream routing.
-  /// @since_tizen 4.0
+  /// Removes all devices from the stream information for the stream routing.
   ///
-  /// @param[in]	stream_info	The handle of stream information
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SOUND_MANAGER_ERROR_NONE Success
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SOUND_MANAGER_ERROR_POLICY Noncompliance with the sound system policy
-  /// @pre Call sound_manager_create_stream_information() before calling this function.
-  /// @see sound_manager_create_stream_information()
-  /// @see sound_manager_destroy_stream_information()
-  /// @see sound_manager_add_device_for_stream_routing()
-  /// @see sound_manager_remove_device_for_stream_routing()
-  /// @see sound_manager_apply_stream_routing()
+  /// **Since Tizen:**
+  /// - 4.0
+  ///
+  /// **Parameters:**
+  /// - `stream_info` (in): The handle of stream information
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SOUND_MANAGER_ERROR_NONE`: Success
+  /// - `SOUND_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOUND_MANAGER_ERROR_POLICY`: Noncompliance with the sound system policy
+  ///
+  /// **Preconditions:**
+  /// - Call sound_manager_create_stream_information() before calling this function.
+  ///
+  /// **See also:**
+  /// - `sound_manager_create_stream_information()`
+  /// - `sound_manager_destroy_stream_information()`
+  /// - `sound_manager_add_device_for_stream_routing()`
+  /// - `sound_manager_remove_device_for_stream_routing()`
+  /// - `sound_manager_apply_stream_routing()`
   int sound_manager_remove_all_devices_for_stream_routing(
     sound_stream_info_h stream_info,
   ) {
@@ -598,24 +781,35 @@ class Tizen65CapiMediaSoundManager {
       _sound_manager_remove_all_devices_for_stream_routingPtr
           .asFunction<int Function(sound_stream_info_h)>();
 
-  /// @brief Applies the stream routing.
-  /// @since_tizen 3.0
+  /// Applies the stream routing.
   ///
-  /// @remarks	If the stream has not been made yet, this setting will be applied when the stream starts to play.\n
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @param[in]	stream_info	The handle of stream information
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SOUND_MANAGER_ERROR_NONE Success
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_STATE Invalid state
-  /// @retval #SOUND_MANAGER_ERROR_INTERNAL Internal error inside the sound system
-  /// @pre Call sound_manager_create_stream_information() and sound_manager_add_device_for_stream_routing() before calling this function.
-  /// @see sound_manager_create_stream_information()
-  /// @see sound_manager_destroy_stream_information()
-  /// @see sound_manager_add_device_for_stream_routing()
-  /// @see sound_manager_remove_device_for_stream_routing()
-  /// @see sound_manager_remove_all_devices_for_stream_routing()
+  /// **Remarks:**
+  /// - If the stream has not been made yet, this setting will be applied when the stream starts to play.
+  ///
+  /// **Parameters:**
+  /// - `stream_info` (in): The handle of stream information
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SOUND_MANAGER_ERROR_NONE`: Success
+  /// - `SOUND_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOUND_MANAGER_ERROR_INVALID_STATE`: Invalid state
+  /// - `SOUND_MANAGER_ERROR_INTERNAL`: Internal error inside the sound system
+  ///
+  /// **Preconditions:**
+  /// - Call sound_manager_create_stream_information() and sound_manager_add_device_for_stream_routing() before calling this function.
+  ///
+  /// **See also:**
+  /// - `sound_manager_create_stream_information()`
+  /// - `sound_manager_destroy_stream_information()`
+  /// - `sound_manager_add_device_for_stream_routing()`
+  /// - `sound_manager_remove_device_for_stream_routing()`
+  /// - `sound_manager_remove_all_devices_for_stream_routing()`
   int sound_manager_apply_stream_routing(
     sound_stream_info_h stream_info,
   ) {
@@ -631,33 +825,46 @@ class Tizen65CapiMediaSoundManager {
       _sound_manager_apply_stream_routingPtr
           .asFunction<int Function(sound_stream_info_h)>();
 
-  /// @brief Sets the preferred built-in device for the stream routing.
-  /// @since_tizen 5.5
+  /// Sets the preferred built-in device for the stream routing.
   ///
-  /// @remarks	This function is to set a specific built-in device when the system has multiple devices of the same built-in device type.
-  /// When there's only one device for a built-in device type in the system, nothing will happen even if this function succeeds in operation.
-  /// If @a device is not supported by @a stream_info, #SOUND_MANAGER_ERROR_POLICY will be returned.
-  /// After this function is called, @a device is not needed for the function's work. It's okay to destroy it by destroying the list from which it was obtained.
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @param[in]	stream_info	The handle of stream information
-  /// @param[in]	io_direction	The IO direction of the device
-  /// @param[in]	device	The preferred device (this can be NULL to unset)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SOUND_MANAGER_ERROR_NONE Success
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SOUND_MANAGER_ERROR_POLICY Noncompliance with the sound system policy
-  /// @retval #SOUND_MANAGER_ERROR_INTERNAL Internal error inside the sound system
-  /// @pre Call sound_manager_create_stream_information() before calling this function.
-  /// @pre Get a device by calling sound_manager_get_device_list() and sound_manager_get_next_device().
-  /// @post You can get preferred devices by calling sound_manager_get_stream_preferred_device().
-  /// @post Call sound_manager_free_device_list() to free the devices.
-  /// @see sound_manager_get_stream_preferred_device()
-  /// @see sound_manager_create_stream_information()
-  /// @see sound_manager_destroy_stream_information()
-  /// @see sound_manager_get_device_list()
-  /// @see sound_manager_get_next_device()
-  /// @see sound_manager_free_device_list()
+  /// **Remarks:**
+  /// - This function is to set a specific built-in device when the system has multiple devices of the same built-in device type.
+  /// - When there's only one device for a built-in device type in the system, nothing will happen even if this function succeeds in operation.
+  /// - If `device` is not supported by `stream_info`, `SOUND_MANAGER_ERROR_POLICY` will be returned.
+  /// - After this function is called, `device` is not needed for the function's work. It's okay to destroy it by destroying the list from which it was obtained.
+  ///
+  /// **Parameters:**
+  /// - `stream_info` (in): The handle of stream information
+  /// - `io_direction` (in): The IO direction of the device
+  /// - `device` (in): The preferred device (this can be NULL to unset)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SOUND_MANAGER_ERROR_NONE`: Success
+  /// - `SOUND_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOUND_MANAGER_ERROR_POLICY`: Noncompliance with the sound system policy
+  /// - `SOUND_MANAGER_ERROR_INTERNAL`: Internal error inside the sound system
+  ///
+  /// **Preconditions:**
+  /// - Call sound_manager_create_stream_information() before calling this function.
+  /// - Get a device by calling sound_manager_get_device_list() and sound_manager_get_next_device().
+  ///
+  /// **Postconditions:**
+  /// - You can get preferred devices by calling sound_manager_get_stream_preferred_device().
+  /// - Call sound_manager_free_device_list() to free the devices.
+  ///
+  /// **See also:**
+  /// - `sound_manager_get_stream_preferred_device()`
+  /// - `sound_manager_create_stream_information()`
+  /// - `sound_manager_destroy_stream_information()`
+  /// - `sound_manager_get_device_list()`
+  /// - `sound_manager_get_next_device()`
+  /// - `sound_manager_free_device_list()`
   int sound_manager_set_stream_preferred_device(
     sound_stream_info_h stream_info,
     int io_direction,
@@ -678,28 +885,37 @@ class Tizen65CapiMediaSoundManager {
       _sound_manager_set_stream_preferred_devicePtr
           .asFunction<int Function(sound_stream_info_h, int, sound_device_h)>();
 
-  /// @brief Gets the preferred device id of the stream info handle.
-  /// @since_tizen 5.5
+  /// Gets the preferred device id of the stream info handle.
   ///
-  /// @remarks	This function is to return the preferred device id per each direction if it has been set.
-  /// If there is no preferred device for a given direction, the corresponding output value will be set to
-  /// #SOUND_MANAGER_STREAM_NO_PREFERRED_DEVICE.
-  /// You can get a device handle of the id value by using sound_manager_get_device_list(),
-  /// sound_manager_get_next_device() and sound_manager_get_device_id().
+  /// **Since Tizen:**
+  /// - 5.5
   ///
-  /// @param[in]	stream_info	The handle of stream information
-  /// @param[out]	in_device_id	The preferred input device id
-  /// @param[out]	out_device_id	The preferred output device id
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SOUND_MANAGER_ERROR_NONE Success
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SOUND_MANAGER_ERROR_INTERNAL Internal error inside the sound system
-  /// @see sound_manager_set_stream_preferred_device()
-  /// @see sound_manager_get_device_list()
-  /// @see sound_manager_get_next_device()
-  /// @see sound_manager_get_device_id()
-  /// @see sound_manager_free_device_list()
+  /// **Remarks:**
+  /// - This function is to return the preferred device id per each direction if it has been set.
+  /// - If there is no preferred device for a given direction, the corresponding output value will be set to
+  /// - `SOUND_MANAGER_STREAM_NO_PREFERRED_DEVICE`.
+  /// - You can get a device handle of the id value by using sound_manager_get_device_list(),
+  /// - sound_manager_get_next_device() and sound_manager_get_device_id().
+  ///
+  /// **Parameters:**
+  /// - `stream_info` (in): The handle of stream information
+  /// - `in_device_id` (out): The preferred input device id
+  /// - `out_device_id` (out): The preferred output device id
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SOUND_MANAGER_ERROR_NONE`: Success
+  /// - `SOUND_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOUND_MANAGER_ERROR_INTERNAL`: Internal error inside the sound system
+  ///
+  /// **See also:**
+  /// - `sound_manager_set_stream_preferred_device()`
+  /// - `sound_manager_get_device_list()`
+  /// - `sound_manager_get_next_device()`
+  /// - `sound_manager_get_device_id()`
+  /// - `sound_manager_free_device_list()`
   int sound_manager_get_stream_preferred_device(
     sound_stream_info_h stream_info,
     ffi.Pointer<ffi.Int> in_device_id,
@@ -722,32 +938,42 @@ class Tizen65CapiMediaSoundManager {
           int Function(sound_stream_info_h, ffi.Pointer<ffi.Int>,
               ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Acquires the stream focus.
-  /// @since_tizen 3.0
+  /// Acquires the stream focus.
   ///
-  /// @remarks	Do not call this function within sound_stream_focus_state_changed_cb() or sound_stream_focus_state_watch_cb(),\n
-  /// otherwise #SOUND_MANAGER_ERROR_INVALID_OPERATION will be returned. Since 4.0, it is allowed and does not return the error.
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @param[in]	stream_info	The handle of stream information
-  /// @param[in]	focus_mask	The focus mask that user wants to acquire
-  /// @param[in]	sound_behavior	The requesting sound behavior, values of #sound_behavior_e combined with bitwise 'or'
-  /// @param[in]	extra_info	The extra information for this request (optional, this can be NULL)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SOUND_MANAGER_ERROR_NONE Success
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_STATE Invalid state
-  /// @retval #SOUND_MANAGER_ERROR_POLICY Noncompliance with the sound system policy
-  /// @retval #SOUND_MANAGER_ERROR_INTERNAL Internal error inside the sound system
-  /// @pre Call sound_manager_create_stream_information() with its parameter for sound_stream_focus_state_changed_cb()\n
-  /// before calling this function.
-  /// @see sound_manager_create_stream_information()
-  /// @see sound_manager_destroy_stream_information()
-  /// @see sound_manager_acquire_focus_all()
-  /// @see sound_manager_release_focus()
-  /// @see sound_manager_release_focus_all()
-  /// @see sound_manager_get_focus_state()
+  /// **Remarks:**
+  /// - Do not call this function within sound_stream_focus_state_changed_cb() or sound_stream_focus_state_watch_cb(),
+  /// - otherwise `SOUND_MANAGER_ERROR_INVALID_OPERATION` will be returned. Since 4.0, it is allowed and does not return the error.
+  ///
+  /// **Parameters:**
+  /// - `stream_info` (in): The handle of stream information
+  /// - `focus_mask` (in): The focus mask that user wants to acquire
+  /// - `sound_behavior` (in): The requesting sound behavior, values of `sound_behavior_e` combined with bitwise 'or'
+  /// - `extra_info` (in): The extra information for this request (optional, this can be NULL)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SOUND_MANAGER_ERROR_NONE`: Success
+  /// - `SOUND_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOUND_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `SOUND_MANAGER_ERROR_INVALID_STATE`: Invalid state
+  /// - `SOUND_MANAGER_ERROR_POLICY`: Noncompliance with the sound system policy
+  /// - `SOUND_MANAGER_ERROR_INTERNAL`: Internal error inside the sound system
+  ///
+  /// **Preconditions:**
+  /// - Call sound_manager_create_stream_information() with its parameter for sound_stream_focus_state_changed_cb() before calling this function.
+  ///
+  /// **See also:**
+  /// - `sound_manager_create_stream_information()`
+  /// - `sound_manager_destroy_stream_information()`
+  /// - `sound_manager_acquire_focus_all()`
+  /// - `sound_manager_release_focus()`
+  /// - `sound_manager_release_focus_all()`
+  /// - `sound_manager_get_focus_state()`
   int sound_manager_acquire_focus(
     sound_stream_info_h stream_info,
     int focus_mask,
@@ -770,30 +996,41 @@ class Tizen65CapiMediaSoundManager {
       _sound_manager_acquire_focusPtr.asFunction<
           int Function(sound_stream_info_h, int, int, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Releases the acquired stream focus.
-  /// @since_tizen 3.0
+  /// Releases the acquired stream focus.
   ///
-  /// @remarks	Do not call this function within sound_stream_focus_state_changed_cb() or sound_stream_focus_state_watch_cb(),\n
-  /// otherwise #SOUND_MANAGER_ERROR_INVALID_OPERATION will be returned. Since 4.0, it is allowed and does not return the error.
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @param[in]	stream_info	The handle of stream information
-  /// @param[in]	focus_mask	The focus mask that user wants to release
-  /// @param[in]	sound_behavior	The requesting sound behavior, values of #sound_behavior_e combined with bitwise 'or'
-  /// @param[in]	extra_info	The extra information for this request (optional, this can be NULL)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SOUND_MANAGER_ERROR_NONE Success
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_STATE Invalid state
-  /// @retval #SOUND_MANAGER_ERROR_INTERNAL Internal error inside the sound system
-  /// @pre Call sound_manager_create_stream_information() and sound_manager_acquire_focus() before calling this function.
-  /// @see sound_manager_create_stream_information()
-  /// @see sound_manager_destroy_stream_information()
-  /// @see sound_manager_acquire_focus()
-  /// @see sound_manager_acquire_focus_all()
-  /// @see sound_manager_release_focus_all()
-  /// @see sound_manager_get_focus_state()
+  /// **Remarks:**
+  /// - Do not call this function within sound_stream_focus_state_changed_cb() or sound_stream_focus_state_watch_cb(),
+  /// - otherwise `SOUND_MANAGER_ERROR_INVALID_OPERATION` will be returned. Since 4.0, it is allowed and does not return the error.
+  ///
+  /// **Parameters:**
+  /// - `stream_info` (in): The handle of stream information
+  /// - `focus_mask` (in): The focus mask that user wants to release
+  /// - `sound_behavior` (in): The requesting sound behavior, values of `sound_behavior_e` combined with bitwise 'or'
+  /// - `extra_info` (in): The extra information for this request (optional, this can be NULL)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SOUND_MANAGER_ERROR_NONE`: Success
+  /// - `SOUND_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOUND_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `SOUND_MANAGER_ERROR_INVALID_STATE`: Invalid state
+  /// - `SOUND_MANAGER_ERROR_INTERNAL`: Internal error inside the sound system
+  ///
+  /// **Preconditions:**
+  /// - Call sound_manager_create_stream_information() and sound_manager_acquire_focus() before calling this function.
+  ///
+  /// **See also:**
+  /// - `sound_manager_create_stream_information()`
+  /// - `sound_manager_destroy_stream_information()`
+  /// - `sound_manager_acquire_focus()`
+  /// - `sound_manager_acquire_focus_all()`
+  /// - `sound_manager_release_focus_all()`
+  /// - `sound_manager_get_focus_state()`
   int sound_manager_release_focus(
     sound_stream_info_h stream_info,
     int focus_mask,
@@ -816,29 +1053,39 @@ class Tizen65CapiMediaSoundManager {
       _sound_manager_release_focusPtr.asFunction<
           int Function(sound_stream_info_h, int, int, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Acquires all the stream focuses.
-  /// @since_tizen 4.0
+  /// Acquires all the stream focuses.
   ///
-  /// @remarks	This function does not return error even though one or all of focuses have already been acquired.\n
-  /// Use sound_manager_get_focus_state() to get acquired focus state if it returns #SOUND_MANAGER_ERROR_POLICY.
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @param[in]	stream_info	The handle of stream information
-  /// @param[in]	sound_behavior	The requesting sound behavior, values of #sound_behavior_e combined with bitwise 'or'
-  /// @param[in]	extra_info	The extra information for this request (optional, this can be NULL)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SOUND_MANAGER_ERROR_NONE Success
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SOUND_MANAGER_ERROR_POLICY Noncompliance with the sound system policy
-  /// @retval #SOUND_MANAGER_ERROR_INTERNAL Internal error inside the sound system
-  /// @pre Call sound_manager_create_stream_information() with its parameter for sound_stream_focus_state_changed_cb()\n
-  /// before calling this function.
-  /// @see sound_manager_create_stream_information()
-  /// @see sound_manager_destroy_stream_information()
-  /// @see sound_manager_acquire_focus()
-  /// @see sound_manager_release_focus()
-  /// @see sound_manager_release_focus_all()
-  /// @see sound_manager_get_focus_state()
+  /// **Remarks:**
+  /// - This function does not return error even though one or all of focuses have already been acquired.
+  /// - Use sound_manager_get_focus_state() to get acquired focus state if it returns `SOUND_MANAGER_ERROR_POLICY`.
+  ///
+  /// **Parameters:**
+  /// - `stream_info` (in): The handle of stream information
+  /// - `sound_behavior` (in): The requesting sound behavior, values of `sound_behavior_e` combined with bitwise 'or'
+  /// - `extra_info` (in): The extra information for this request (optional, this can be NULL)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SOUND_MANAGER_ERROR_NONE`: Success
+  /// - `SOUND_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOUND_MANAGER_ERROR_POLICY`: Noncompliance with the sound system policy
+  /// - `SOUND_MANAGER_ERROR_INTERNAL`: Internal error inside the sound system
+  ///
+  /// **Preconditions:**
+  /// - Call sound_manager_create_stream_information() with its parameter for sound_stream_focus_state_changed_cb() before calling this function.
+  ///
+  /// **See also:**
+  /// - `sound_manager_create_stream_information()`
+  /// - `sound_manager_destroy_stream_information()`
+  /// - `sound_manager_acquire_focus()`
+  /// - `sound_manager_release_focus()`
+  /// - `sound_manager_release_focus_all()`
+  /// - `sound_manager_get_focus_state()`
   int sound_manager_acquire_focus_all(
     sound_stream_info_h stream_info,
     int sound_behavior,
@@ -859,28 +1106,38 @@ class Tizen65CapiMediaSoundManager {
       _sound_manager_acquire_focus_allPtr.asFunction<
           int Function(sound_stream_info_h, int, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Releases all the acquired stream focuses.
-  /// @since_tizen 4.0
+  /// Releases all the acquired stream focuses.
   ///
-  /// @remarks	This function does not return error even though one or all of focuses have already been released.
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @param[in]	stream_info	The handle of stream information
-  /// @param[in]	sound_behavior	The requesting sound behavior, values of #sound_behavior_e combined with bitwise 'or'
-  /// @param[in]	extra_info	The extra information for this request (optional, this can be NULL)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SOUND_MANAGER_ERROR_NONE Success
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SOUND_MANAGER_ERROR_POLICY Noncompliance with the sound system policy
-  /// @retval #SOUND_MANAGER_ERROR_INTERNAL Internal error inside the sound system
-  /// @pre Call sound_manager_create_stream_information(), sound_manager_acquire_focus() and sound_manager_acquire_focus_all()\n
-  /// before calling this function.
-  /// @see sound_manager_create_stream_information()
-  /// @see sound_manager_destroy_stream_information()
-  /// @see sound_manager_acquire_focus()
-  /// @see sound_manager_acquire_focus_all()
-  /// @see sound_manager_release_focus()
-  /// @see sound_manager_get_focus_state()
+  /// **Remarks:**
+  /// - This function does not return error even though one or all of focuses have already been released.
+  ///
+  /// **Parameters:**
+  /// - `stream_info` (in): The handle of stream information
+  /// - `sound_behavior` (in): The requesting sound behavior, values of `sound_behavior_e` combined with bitwise 'or'
+  /// - `extra_info` (in): The extra information for this request (optional, this can be NULL)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SOUND_MANAGER_ERROR_NONE`: Success
+  /// - `SOUND_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOUND_MANAGER_ERROR_POLICY`: Noncompliance with the sound system policy
+  /// - `SOUND_MANAGER_ERROR_INTERNAL`: Internal error inside the sound system
+  ///
+  /// **Preconditions:**
+  /// - Call sound_manager_create_stream_information(), sound_manager_acquire_focus() and sound_manager_acquire_focus_all() before calling this function.
+  ///
+  /// **See also:**
+  /// - `sound_manager_create_stream_information()`
+  /// - `sound_manager_destroy_stream_information()`
+  /// - `sound_manager_acquire_focus()`
+  /// - `sound_manager_acquire_focus_all()`
+  /// - `sound_manager_release_focus()`
+  /// - `sound_manager_get_focus_state()`
   int sound_manager_release_focus_all(
     sound_stream_info_h stream_info,
     int sound_behavior,
@@ -901,21 +1158,31 @@ class Tizen65CapiMediaSoundManager {
       _sound_manager_release_focus_allPtr.asFunction<
           int Function(sound_stream_info_h, int, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the state of focus.
-  /// @since_tizen 3.0
-  /// @param[in]	stream_info	The handle of stream information
-  /// @param[out]	state_for_playback	The state of playback focus
-  /// @param[out]	state_for_recording	The state of recording focus
+  /// Gets the state of focus.
   ///
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SOUND_MANAGER_ERROR_NONE Success
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre Call sound_manager_create_stream_information() before calling this function.
-  /// @see sound_manager_create_stream_information()
-  /// @see sound_manager_destroy_stream_information()
-  /// @see sound_manager_acquire_focus()
-  /// @see sound_manager_release_focus()
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `stream_info` (in): The handle of stream information
+  /// - `state_for_playback` (out): The state of playback focus
+  /// - `state_for_recording` (out): The state of recording focus
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SOUND_MANAGER_ERROR_NONE`: Success
+  /// - `SOUND_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - Call sound_manager_create_stream_information() before calling this function.
+  ///
+  /// **See also:**
+  /// - `sound_manager_create_stream_information()`
+  /// - `sound_manager_destroy_stream_information()`
+  /// - `sound_manager_acquire_focus()`
+  /// - `sound_manager_release_focus()`
   int sound_manager_get_focus_state(
     sound_stream_info_h stream_info,
     ffi.Pointer<ffi.Int32> state_for_playback,
@@ -937,20 +1204,31 @@ class Tizen65CapiMediaSoundManager {
           int Function(sound_stream_info_h, ffi.Pointer<ffi.Int32>,
               ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Sets auto focus reacquisition property.
-  /// @since_tizen 3.0
+  /// Sets auto focus reacquisition property.
   ///
-  /// @remarks	The focus reacquisition is set as default.
-  /// If you don't want to reacquire the focus you've lost automatically, disable the focus reacquisition setting by using this function and vice versa.
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @param[in]	stream_info	The handle of stream information
-  /// @param[in]	enable	The auto focus reacquisition property value to set: (@c true = enable, @c false = disable)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SOUND_MANAGER_ERROR_NONE Success
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre Call sound_manager_create_stream_information() before calling this function.
-  /// @see sound_manager_create_stream_information()
+  /// **Remarks:**
+  /// - The focus reacquisition is set as default.
+  /// - If you don't want to reacquire the focus you've lost automatically, disable the focus reacquisition setting by using this function and vice versa.
+  ///
+  /// **Parameters:**
+  /// - `stream_info` (in): The handle of stream information
+  /// - `enable` (in): The auto focus reacquisition property value to set: (`true` = enable, `false` = disable)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SOUND_MANAGER_ERROR_NONE`: Success
+  /// - `SOUND_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - Call sound_manager_create_stream_information() before calling this function.
+  ///
+  /// **See also:**
+  /// - `sound_manager_create_stream_information()`
   int sound_manager_set_focus_reacquisition(
     sound_stream_info_h stream_info,
     bool enable,
@@ -968,19 +1246,30 @@ class Tizen65CapiMediaSoundManager {
       _sound_manager_set_focus_reacquisitionPtr
           .asFunction<int Function(sound_stream_info_h, bool)>();
 
-  /// @brief Gets auto focus reacquisition property.
-  /// @since_tizen 3.0
+  /// Gets auto focus reacquisition property.
   ///
-  /// @remarks	The default value is true.
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @param[in]	stream_info	The handle of stream information
-  /// @param[out]	enabled	The value of focus auto reacquisition property: (@c true = enabled, @c false = disabled)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SOUND_MANAGER_ERROR_NONE Success
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre Call sound_manager_create_stream_information() before calling this function.
-  /// @see sound_manager_create_stream_information()
+  /// **Remarks:**
+  /// - The default value is true.
+  ///
+  /// **Parameters:**
+  /// - `stream_info` (in): The handle of stream information
+  /// - `enabled` (out): The value of focus auto reacquisition property: (`true` = enabled, `false` = disabled)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SOUND_MANAGER_ERROR_NONE`: Success
+  /// - `SOUND_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - Call sound_manager_create_stream_information() before calling this function.
+  ///
+  /// **See also:**
+  /// - `sound_manager_create_stream_information()`
   int sound_manager_get_focus_reacquisition(
     sound_stream_info_h stream_info,
     ffi.Pointer<ffi.Bool> enabled,
@@ -999,29 +1288,39 @@ class Tizen65CapiMediaSoundManager {
       _sound_manager_get_focus_reacquisitionPtr.asFunction<
           int Function(sound_stream_info_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Delivers focuses to another stream information.
-  /// @since_tizen 4.0
+  /// Delivers focuses to another stream information.
   ///
-  /// @remarks	This function does not affect any invocation of sound_stream_focus_state_changed_cb() or\n
-  /// sound_stream_focus_state_watch_cb(). Do not call this function within sound_stream_focus_state_changed_cb() or\n
-  /// sound_stream_focus_state_watch_cb(), otherwise #SOUND_MANAGER_ERROR_INVALID_OPERATION will be returned.
+  /// **Since Tizen:**
+  /// - 4.0
   ///
-  /// @param[in]	source	The source handle of stream information which has focuses
-  /// @param[in]	destination	The destination handle of stream information which will receive focuses
-  /// @param[in]	focus_mask	The focus mask to deliver
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SOUND_MANAGER_ERROR_NONE Success
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_STATE Invalid state
-  /// @retval #SOUND_MANAGER_ERROR_POLICY Noncompliance with the sound system policy
-  /// @retval #SOUND_MANAGER_ERROR_INTERNAL Internal error inside the sound system
-  /// @pre Call sound_manager_create_stream_information(), sound_manager_acquire_focus() and sound_manager_acquire_focus_all()\n
-  /// before calling this function.
-  /// @see sound_manager_create_stream_information()
-  /// @see sound_manager_acquire_focus()
-  /// @see sound_manager_acquire_focus_all()
+  /// **Remarks:**
+  /// - This function does not affect any invocation of sound_stream_focus_state_changed_cb() or
+  /// - sound_stream_focus_state_watch_cb(). Do not call this function within sound_stream_focus_state_changed_cb() or
+  /// - sound_stream_focus_state_watch_cb(), otherwise `SOUND_MANAGER_ERROR_INVALID_OPERATION` will be returned.
+  ///
+  /// **Parameters:**
+  /// - `source` (in): The source handle of stream information which has focuses
+  /// - `destination` (in): The destination handle of stream information which will receive focuses
+  /// - `focus_mask` (in): The focus mask to deliver
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SOUND_MANAGER_ERROR_NONE`: Success
+  /// - `SOUND_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOUND_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `SOUND_MANAGER_ERROR_INVALID_STATE`: Invalid state
+  /// - `SOUND_MANAGER_ERROR_POLICY`: Noncompliance with the sound system policy
+  /// - `SOUND_MANAGER_ERROR_INTERNAL`: Internal error inside the sound system
+  ///
+  /// **Preconditions:**
+  /// - Call sound_manager_create_stream_information(), sound_manager_acquire_focus() and sound_manager_acquire_focus_all() before calling this function.
+  ///
+  /// **See also:**
+  /// - `sound_manager_create_stream_information()`
+  /// - `sound_manager_acquire_focus()`
+  /// - `sound_manager_acquire_focus_all()`
   int sound_manager_deliver_focus(
     sound_stream_info_h source,
     sound_stream_info_h destination,
@@ -1042,25 +1341,33 @@ class Tizen65CapiMediaSoundManager {
       _sound_manager_deliver_focusPtr.asFunction<
           int Function(sound_stream_info_h, sound_stream_info_h, int)>();
 
-  /// @brief Checks if the stream information is using the device.
-  /// @since_tizen 3.0
+  /// Checks if the stream information is using the device.
   ///
-  /// @param[in]	stream_info	The handle of stream information
-  /// @param[in]	device	The device item
-  /// @param[out]	is_on	Whether the stream info is using the device or not: (@c true = use, @c false = not use)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SOUND_MANAGER_ERROR_NONE Success
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SOUND_MANAGER_ERROR_INTERNAL Internal error inside the sound system
-  /// @see sound_manager_get_device_list()
-  /// @see sound_manager_get_next_device()
-  /// @see sound_manager_get_prev_device()
-  /// @see sound_manager_get_device_type()
-  /// @see sound_manager_get_device_io_direction()
-  /// @see sound_manager_get_device_id()
-  /// @see sound_manager_get_device_name()
-  /// @see sound_manager_free_device_list()
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `stream_info` (in): The handle of stream information
+  /// - `device` (in): The device item
+  /// - `is_on` (out): Whether the stream info is using the device or not: (`true` = use, `false` = not use)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SOUND_MANAGER_ERROR_NONE`: Success
+  /// - `SOUND_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOUND_MANAGER_ERROR_INTERNAL`: Internal error inside the sound system
+  ///
+  /// **See also:**
+  /// - `sound_manager_get_device_list()`
+  /// - `sound_manager_get_next_device()`
+  /// - `sound_manager_get_prev_device()`
+  /// - `sound_manager_get_device_type()`
+  /// - `sound_manager_get_device_io_direction()`
+  /// - `sound_manager_get_device_id()`
+  /// - `sound_manager_get_device_name()`
+  /// - `sound_manager_free_device_list()`
   int sound_manager_is_stream_on_device(
     sound_stream_info_h stream_info,
     sound_device_h device,
@@ -1082,19 +1389,27 @@ class Tizen65CapiMediaSoundManager {
           int Function(
               sound_stream_info_h, sound_device_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Gets the current device type for media playback stream.
-  /// @since_tizen 3.0
+  /// Gets the current device type for media playback stream.
   ///
-  /// @param[out]	device_type	The output device type that a media playback stream can go out
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SOUND_MANAGER_ERROR_NONE Success
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SOUND_MANAGER_ERROR_NO_DATA No data
-  /// @see sound_manager_get_device_type()
-  /// @see sound_manager_get_device_io_direction()
-  /// @see sound_manager_get_device_id()
-  /// @see sound_manager_get_device_name()
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `device_type` (out): The output device type that a media playback stream can go out
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SOUND_MANAGER_ERROR_NONE`: Success
+  /// - `SOUND_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOUND_MANAGER_ERROR_NO_DATA`: No data
+  ///
+  /// **See also:**
+  /// - `sound_manager_get_device_type()`
+  /// - `sound_manager_get_device_io_direction()`
+  /// - `sound_manager_get_device_id()`
+  /// - `sound_manager_get_device_name()`
   int sound_manager_get_current_media_playback_device_type(
     ffi.Pointer<ffi.Int32> device_type,
   ) {
@@ -1110,24 +1425,33 @@ class Tizen65CapiMediaSoundManager {
       _sound_manager_get_current_media_playback_device_typePtr
           .asFunction<int Function(ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the reason for the current acquired playback focus.
-  /// @since_tizen 3.0
+  /// Gets the reason for the current acquired playback focus.
   ///
-  /// @remarks	If there is no acquired playback focus in this system, it'll return #SOUND_MANAGER_ERROR_NO_DATA.\n
-  /// Do not call this function within sound_stream_focus_state_changed_cb() or sound_stream_focus_state_watch_cb(),\n
-  /// otherwise #SOUND_MANAGER_ERROR_INVALID_OPERATION will be returned.\n
-  /// The @a extra_info should be released using free().
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @param[out]	acquired_by	The reason for the current acquired playback focus
-  /// @param[out]	sound_behavior	The requested sound behavior that should be followed, values of #sound_behavior_e combined with bitwise 'or'
-  /// @param[out]	extra_info The extra information of the acquired playback focus (optional, this can be NULL)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SOUND_MANAGER_ERROR_NONE Success
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #SOUND_MANAGER_ERROR_NO_DATA No data
-  /// @see sound_manager_get_current_recording_focus()
+  /// **Remarks:**
+  /// - If there is no acquired playback focus in this system, it'll return `SOUND_MANAGER_ERROR_NO_DATA`.
+  /// - Do not call this function within sound_stream_focus_state_changed_cb() or sound_stream_focus_state_watch_cb(),
+  /// - otherwise `SOUND_MANAGER_ERROR_INVALID_OPERATION` will be returned.
+  /// - The `extra_info` should be released using free().
+  ///
+  /// **Parameters:**
+  /// - `acquired_by` (out): The reason for the current acquired playback focus
+  /// - `sound_behavior` (out): The requested sound behavior that should be followed, values of `sound_behavior_e` combined with bitwise 'or'
+  /// - `extra_info` (out): The extra information of the acquired playback focus (optional, this can be NULL)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SOUND_MANAGER_ERROR_NONE`: Success
+  /// - `SOUND_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOUND_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `SOUND_MANAGER_ERROR_NO_DATA`: No data
+  ///
+  /// **See also:**
+  /// - `sound_manager_get_current_recording_focus()`
   int sound_manager_get_current_playback_focus(
     ffi.Pointer<ffi.Int32> acquired_by,
     ffi.Pointer<ffi.Int> sound_behavior,
@@ -1150,24 +1474,33 @@ class Tizen65CapiMediaSoundManager {
           int Function(ffi.Pointer<ffi.Int32>, ffi.Pointer<ffi.Int>,
               ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the reason for the current acquired recording focus.
-  /// @since_tizen 3.0
+  /// Gets the reason for the current acquired recording focus.
   ///
-  /// @remarks	If there is no acquired recording focus in this system, it'll return #SOUND_MANAGER_ERROR_NO_DATA.\n
-  /// Do not call this function within sound_stream_focus_state_changed_cb() or sound_stream_focus_state_watch_cb(),\n
-  /// otherwise #SOUND_MANAGER_ERROR_INVALID_OPERATION will be returned.\n
-  /// The @a extra_info should be released using free().
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @param[out]	acquired_by	The reason for the current acquired recording focus
-  /// @param[out]	sound_behavior	The requested sound behavior that should be followed, values of #sound_behavior_e combined with bitwise 'or'
-  /// @param[out]	extra_info The extra information of the acquired recording focus (optional, this can be NULL)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SOUND_MANAGER_ERROR_NONE Success
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #SOUND_MANAGER_ERROR_NO_DATA No data
-  /// @see sound_manager_get_current_playback_focus()
+  /// **Remarks:**
+  /// - If there is no acquired recording focus in this system, it'll return `SOUND_MANAGER_ERROR_NO_DATA`.
+  /// - Do not call this function within sound_stream_focus_state_changed_cb() or sound_stream_focus_state_watch_cb(),
+  /// - otherwise `SOUND_MANAGER_ERROR_INVALID_OPERATION` will be returned.
+  /// - The `extra_info` should be released using free().
+  ///
+  /// **Parameters:**
+  /// - `acquired_by` (out): The reason for the current acquired recording focus
+  /// - `sound_behavior` (out): The requested sound behavior that should be followed, values of `sound_behavior_e` combined with bitwise 'or'
+  /// - `extra_info` (out): The extra information of the acquired recording focus (optional, this can be NULL)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SOUND_MANAGER_ERROR_NONE`: Success
+  /// - `SOUND_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOUND_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `SOUND_MANAGER_ERROR_NO_DATA`: No data
+  ///
+  /// **See also:**
+  /// - `sound_manager_get_current_playback_focus()`
   int sound_manager_get_current_recording_focus(
     ffi.Pointer<ffi.Int32> acquired_by,
     ffi.Pointer<ffi.Int> sound_behavior,
@@ -1190,24 +1523,33 @@ class Tizen65CapiMediaSoundManager {
           int Function(ffi.Pointer<ffi.Int32>, ffi.Pointer<ffi.Int>,
               ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Registers the watch callback function to be invoked when the focus state for each sound stream type is changed regardless of the process.
-  /// @since_tizen 3.0
+  /// Registers the watch callback function to be invoked when the focus state for each sound stream type is changed regardless of the process.
   ///
-  /// @remarks	The registered callback is invoked by the internal thread of the sound manager.\n
-  /// Do not call this function within sound_stream_focus_state_changed_cb() or sound_stream_focus_state_watch_cb(),\n
-  /// otherwise #SOUND_MANAGER_ERROR_INVALID_OPERATION will be returned.
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @param[in]	focus_mask	The focus mask that user wants to watch
-  /// @param[in]	callback	The focus state change watch callback function
-  /// @param[in]	user_data	The user data to be passed to the callback function
-  /// @param[out]	id		The focus state change watch callback id
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SOUND_MANAGER_ERROR_NONE Success
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #SOUND_MANAGER_ERROR_INTERNAL Internal error inside the sound system
-  /// @see sound_manager_remove_focus_state_watch_cb()
+  /// **Remarks:**
+  /// - The registered callback is invoked by the internal thread of the sound manager.
+  /// - Do not call this function within sound_stream_focus_state_changed_cb() or sound_stream_focus_state_watch_cb(),
+  /// - otherwise `SOUND_MANAGER_ERROR_INVALID_OPERATION` will be returned.
+  ///
+  /// **Parameters:**
+  /// - `focus_mask` (in): The focus mask that user wants to watch
+  /// - `callback` (in): The focus state change watch callback function
+  /// - `user_data` (in): The user data to be passed to the callback function
+  /// - `id` (out): The focus state change watch callback id
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SOUND_MANAGER_ERROR_NONE`: Success
+  /// - `SOUND_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOUND_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `SOUND_MANAGER_ERROR_INTERNAL`: Internal error inside the sound system
+  ///
+  /// **See also:**
+  /// - `sound_manager_remove_focus_state_watch_cb()`
   int sound_manager_add_focus_state_watch_cb(
     int focus_mask,
     sound_stream_focus_state_watch_cb callback,
@@ -1234,20 +1576,29 @@ class Tizen65CapiMediaSoundManager {
           int Function(int, sound_stream_focus_state_watch_cb,
               ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Unregisters the focus state change watch callback.
-  /// @since_tizen 3.0
+  /// Unregisters the focus state change watch callback.
   ///
-  /// @remarks	Do not call this function within sound_stream_focus_state_changed_cb() or sound_stream_focus_state_watch_cb(),\n
-  /// otherwise #SOUND_MANAGER_ERROR_INVALID_OPERATION will be returned.
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @param[in]	id		The focus state change watch callback id
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SOUND_MANAGER_ERROR_NONE Success
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #SOUND_MANAGER_ERROR_INTERNAL Internal error inside the sound system
-  /// @see sound_manager_add_focus_state_watch_cb()
+  /// **Remarks:**
+  /// - Do not call this function within sound_stream_focus_state_changed_cb() or sound_stream_focus_state_watch_cb(),
+  /// - otherwise `SOUND_MANAGER_ERROR_INVALID_OPERATION` will be returned.
+  ///
+  /// **Parameters:**
+  /// - `id` (in): The focus state change watch callback id
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SOUND_MANAGER_ERROR_NONE`: Success
+  /// - `SOUND_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOUND_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `SOUND_MANAGER_ERROR_INTERNAL`: Internal error inside the sound system
+  ///
+  /// **See also:**
+  /// - `sound_manager_add_focus_state_watch_cb()`
   int sound_manager_remove_focus_state_watch_cb(
     int id,
   ) {
@@ -1263,28 +1614,37 @@ class Tizen65CapiMediaSoundManager {
       _sound_manager_remove_focus_state_watch_cbPtr
           .asFunction<int Function(int)>();
 
-  /// @brief Gets the list consisting of connected devices.
-  /// @since_tizen 3.0
+  /// Gets the list consisting of connected devices.
   ///
-  /// @remarks	@a device_list should be freed using sound_manager_free_device_list().\n
-  /// Use sound_manager_get_next_device() to get the first node of the list.
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @param[in]	device_mask	The mask values of #sound_device_mask_e combined with bitwise 'or'
-  /// @param[out]	device_list	The list of connected devices
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SOUND_MANAGER_ERROR_NONE Success
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SOUND_MANAGER_ERROR_NO_DATA No data
-  /// @retval #SOUND_MANAGER_ERROR_INTERNAL Internal error inside the sound system
-  /// @see sound_manager_get_next_device()
-  /// @see sound_manager_get_prev_device()
-  /// @see sound_manager_get_device_type()
-  /// @see sound_manager_get_device_io_direction()
-  /// @see sound_manager_get_device_id()
-  /// @see sound_manager_get_device_name()
-  /// @see sound_manager_is_device_running()
-  /// @see sound_manager_free_device_list()
+  /// **Remarks:**
+  /// - `device_list` should be freed using sound_manager_free_device_list().
+  /// - Use sound_manager_get_next_device() to get the first node of the list.
+  ///
+  /// **Parameters:**
+  /// - `device_mask` (in): The mask values of `sound_device_mask_e` combined with bitwise 'or'
+  /// - `device_list` (out): The list of connected devices
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SOUND_MANAGER_ERROR_NONE`: Success
+  /// - `SOUND_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOUND_MANAGER_ERROR_NO_DATA`: No data
+  /// - `SOUND_MANAGER_ERROR_INTERNAL`: Internal error inside the sound system
+  ///
+  /// **See also:**
+  /// - `sound_manager_get_next_device()`
+  /// - `sound_manager_get_prev_device()`
+  /// - `sound_manager_get_device_type()`
+  /// - `sound_manager_get_device_io_direction()`
+  /// - `sound_manager_get_device_id()`
+  /// - `sound_manager_get_device_name()`
+  /// - `sound_manager_is_device_running()`
+  /// - `sound_manager_free_device_list()`
   int sound_manager_get_device_list(
     int device_mask,
     ffi.Pointer<sound_device_list_h> device_list,
@@ -1302,26 +1662,33 @@ class Tizen65CapiMediaSoundManager {
   late final _sound_manager_get_device_list = _sound_manager_get_device_listPtr
       .asFunction<int Function(int, ffi.Pointer<sound_device_list_h>)>();
 
-  /// @brief Frees device list and each item of list.
-  /// @since_tizen 3.0
+  /// Frees device list and each item of list.
   ///
-  /// @remarks	This function will deallocate not only device list itself but also each item.
+  /// **Since Tizen:**
+  /// - 3.0
   ///
-  /// @param[in]	device_list	The device list got with sound_manager_get_device_list().
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SOUND_MANAGER_ERROR_NONE Success
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
+  /// **Remarks:**
+  /// - This function will deallocate not only device list itself but also each item.
   ///
+  /// **Parameters:**
+  /// - `device_list` (in): The device list got with sound_manager_get_device_list().
   ///
-  /// @see sound_manager_get_device_list()
-  /// @see sound_manager_get_next_device()
-  /// @see sound_manager_get_prev_device()
-  /// @see sound_manager_get_device_type()
-  /// @see sound_manager_get_device_io_direction()
-  /// @see sound_manager_get_device_id()
-  /// @see sound_manager_get_device_name()
-  /// @see sound_manager_is_device_running()
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SOUND_MANAGER_ERROR_NONE`: Success
+  /// - `SOUND_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `sound_manager_get_device_list()`
+  /// - `sound_manager_get_next_device()`
+  /// - `sound_manager_get_prev_device()`
+  /// - `sound_manager_get_device_type()`
+  /// - `sound_manager_get_device_io_direction()`
+  /// - `sound_manager_get_device_id()`
+  /// - `sound_manager_get_device_name()`
+  /// - `sound_manager_is_device_running()`
   int sound_manager_free_device_list(
     sound_device_list_h device_list,
   ) {
@@ -1337,23 +1704,32 @@ class Tizen65CapiMediaSoundManager {
       _sound_manager_free_device_listPtr
           .asFunction<int Function(sound_device_list_h)>();
 
-  /// @brief Gets the next item of the device list.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in]	device_list	The list of connected devices
-  /// @param[out]	device	The device item
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SOUND_MANAGER_ERROR_NONE Success
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SOUND_MANAGER_ERROR_NO_DATA No data
-  /// @see sound_manager_get_device_list()
-  /// @see sound_manager_get_prev_device()
-  /// @see sound_manager_get_device_type()
-  /// @see sound_manager_get_device_io_direction()
-  /// @see sound_manager_get_device_id()
-  /// @see sound_manager_get_device_name()
-  /// @see sound_manager_is_device_running()
-  /// @see sound_manager_free_device_list()
+  /// Gets the next item of the device list.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `device_list` (in): The list of connected devices
+  /// - `device` (out): The device item
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SOUND_MANAGER_ERROR_NONE`: Success
+  /// - `SOUND_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOUND_MANAGER_ERROR_NO_DATA`: No data
+  ///
+  /// **See also:**
+  /// - `sound_manager_get_device_list()`
+  /// - `sound_manager_get_prev_device()`
+  /// - `sound_manager_get_device_type()`
+  /// - `sound_manager_get_device_io_direction()`
+  /// - `sound_manager_get_device_id()`
+  /// - `sound_manager_get_device_name()`
+  /// - `sound_manager_is_device_running()`
+  /// - `sound_manager_free_device_list()`
   int sound_manager_get_next_device(
     sound_device_list_h device_list,
     ffi.Pointer<sound_device_h> device,
@@ -1372,23 +1748,32 @@ class Tizen65CapiMediaSoundManager {
       _sound_manager_get_next_devicePtr.asFunction<
           int Function(sound_device_list_h, ffi.Pointer<sound_device_h>)>();
 
-  /// @brief Gets the previous item of the device list.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in]	device_list	The list of connected devices
-  /// @param[out]	device	The device item
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SOUND_MANAGER_ERROR_NONE Success
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SOUND_MANAGER_ERROR_NO_DATA No data
-  /// @see sound_manager_get_device_list()
-  /// @see sound_manager_get_next_device()
-  /// @see sound_manager_get_device_type()
-  /// @see sound_manager_get_device_io_direction()
-  /// @see sound_manager_get_device_id()
-  /// @see sound_manager_get_device_name()
-  /// @see sound_manager_is_device_running()
-  /// @see sound_manager_free_device_list()
+  /// Gets the previous item of the device list.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `device_list` (in): The list of connected devices
+  /// - `device` (out): The device item
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SOUND_MANAGER_ERROR_NONE`: Success
+  /// - `SOUND_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOUND_MANAGER_ERROR_NO_DATA`: No data
+  ///
+  /// **See also:**
+  /// - `sound_manager_get_device_list()`
+  /// - `sound_manager_get_next_device()`
+  /// - `sound_manager_get_device_type()`
+  /// - `sound_manager_get_device_io_direction()`
+  /// - `sound_manager_get_device_id()`
+  /// - `sound_manager_get_device_name()`
+  /// - `sound_manager_is_device_running()`
+  /// - `sound_manager_free_device_list()`
   int sound_manager_get_prev_device(
     sound_device_list_h device_list,
     ffi.Pointer<sound_device_h> device,
@@ -1407,22 +1792,31 @@ class Tizen65CapiMediaSoundManager {
       _sound_manager_get_prev_devicePtr.asFunction<
           int Function(sound_device_list_h, ffi.Pointer<sound_device_h>)>();
 
-  /// @brief Gets the type of the device.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in]	device	The device item
-  /// @param[out]	type	The type of the device
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SOUND_MANAGER_ERROR_NONE Success
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see sound_manager_get_device_list()
-  /// @see sound_manager_get_next_device()
-  /// @see sound_manager_get_prev_device()
-  /// @see sound_manager_get_device_io_direction()
-  /// @see sound_manager_get_device_id()
-  /// @see sound_manager_get_device_name()
-  /// @see sound_manager_is_device_running()
-  /// @see sound_manager_free_device_list()
+  /// Gets the type of the device.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `device` (in): The device item
+  /// - `type` (out): The type of the device
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SOUND_MANAGER_ERROR_NONE`: Success
+  /// - `SOUND_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `sound_manager_get_device_list()`
+  /// - `sound_manager_get_next_device()`
+  /// - `sound_manager_get_prev_device()`
+  /// - `sound_manager_get_device_io_direction()`
+  /// - `sound_manager_get_device_id()`
+  /// - `sound_manager_get_device_name()`
+  /// - `sound_manager_is_device_running()`
+  /// - `sound_manager_free_device_list()`
   int sound_manager_get_device_type(
     sound_device_h device,
     ffi.Pointer<ffi.Int32> type,
@@ -1440,22 +1834,31 @@ class Tizen65CapiMediaSoundManager {
   late final _sound_manager_get_device_type = _sound_manager_get_device_typePtr
       .asFunction<int Function(sound_device_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the io direction of the device.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in]	device	The device item
-  /// @param[out]	io_direction	The io direction of the device
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SOUND_MANAGER_ERROR_NONE Success
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see sound_manager_get_device_list()
-  /// @see sound_manager_get_next_device()
-  /// @see sound_manager_get_prev_device()
-  /// @see sound_manager_get_device_type()
-  /// @see sound_manager_get_device_id()
-  /// @see sound_manager_get_device_name()
-  /// @see sound_manager_is_device_running()
-  /// @see sound_manager_free_device_list()
+  /// Gets the io direction of the device.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `device` (in): The device item
+  /// - `io_direction` (out): The io direction of the device
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SOUND_MANAGER_ERROR_NONE`: Success
+  /// - `SOUND_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `sound_manager_get_device_list()`
+  /// - `sound_manager_get_next_device()`
+  /// - `sound_manager_get_prev_device()`
+  /// - `sound_manager_get_device_type()`
+  /// - `sound_manager_get_device_id()`
+  /// - `sound_manager_get_device_name()`
+  /// - `sound_manager_is_device_running()`
+  /// - `sound_manager_free_device_list()`
   int sound_manager_get_device_io_direction(
     sound_device_h device,
     ffi.Pointer<ffi.Int32> io_direction,
@@ -1474,22 +1877,31 @@ class Tizen65CapiMediaSoundManager {
       _sound_manager_get_device_io_directionPtr
           .asFunction<int Function(sound_device_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the id of the device.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in]	device	The device item
-  /// @param[out]	id	The id of the device
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SOUND_MANAGER_ERROR_NONE Success
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see sound_manager_get_device_list()
-  /// @see sound_manager_get_next_device()
-  /// @see sound_manager_get_prev_device()
-  /// @see sound_manager_get_device_type()
-  /// @see sound_manager_get_device_io_direction()
-  /// @see sound_manager_get_device_name()
-  /// @see sound_manager_is_device_running()
-  /// @see sound_manager_free_device_list()
+  /// Gets the id of the device.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `device` (in): The device item
+  /// - `id` (out): The id of the device
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SOUND_MANAGER_ERROR_NONE`: Success
+  /// - `SOUND_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `sound_manager_get_device_list()`
+  /// - `sound_manager_get_next_device()`
+  /// - `sound_manager_get_prev_device()`
+  /// - `sound_manager_get_device_type()`
+  /// - `sound_manager_get_device_io_direction()`
+  /// - `sound_manager_get_device_name()`
+  /// - `sound_manager_is_device_running()`
+  /// - `sound_manager_free_device_list()`
   int sound_manager_get_device_id(
     sound_device_h device,
     ffi.Pointer<ffi.Int> id,
@@ -1507,23 +1919,32 @@ class Tizen65CapiMediaSoundManager {
   late final _sound_manager_get_device_id = _sound_manager_get_device_idPtr
       .asFunction<int Function(sound_device_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the name of the device.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in]	device	The device item
-  /// @param[out]	name	The name of the device
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SOUND_MANAGER_ERROR_NONE Success
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SOUND_MANAGER_ERROR_INTERNAL Internal error inside the sound system
-  /// @see sound_manager_get_device_list()
-  /// @see sound_manager_get_next_device()
-  /// @see sound_manager_get_prev_device()
-  /// @see sound_manager_get_device_type()
-  /// @see sound_manager_get_device_io_direction()
-  /// @see sound_manager_get_device_id()
-  /// @see sound_manager_is_device_running()
-  /// @see sound_manager_free_device_list()
+  /// Gets the name of the device.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `device` (in): The device item
+  /// - `name` (out): The name of the device
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SOUND_MANAGER_ERROR_NONE`: Success
+  /// - `SOUND_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOUND_MANAGER_ERROR_INTERNAL`: Internal error inside the sound system
+  ///
+  /// **See also:**
+  /// - `sound_manager_get_device_list()`
+  /// - `sound_manager_get_next_device()`
+  /// - `sound_manager_get_prev_device()`
+  /// - `sound_manager_get_device_type()`
+  /// - `sound_manager_get_device_io_direction()`
+  /// - `sound_manager_get_device_id()`
+  /// - `sound_manager_is_device_running()`
+  /// - `sound_manager_free_device_list()`
   int sound_manager_get_device_name(
     sound_device_h device,
     ffi.Pointer<ffi.Pointer<ffi.Char>> name,
@@ -1543,22 +1964,31 @@ class Tizen65CapiMediaSoundManager {
       _sound_manager_get_device_namePtr.asFunction<
           int Function(sound_device_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Checks if the device is running.
-  /// @since_tizen 5.0
-  /// @param[in]	device	The device item
-  /// @param[out]	is_running	Whether the device is running or not: (@c true = running, @c false = not running)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SOUND_MANAGER_ERROR_NONE Success
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see sound_manager_get_device_list()
-  /// @see sound_manager_get_next_device()
-  /// @see sound_manager_get_prev_device()
-  /// @see sound_manager_get_device_type()
-  /// @see sound_manager_get_device_io_direction()
-  /// @see sound_manager_get_device_id()
-  /// @see sound_manager_get_device_name()
-  /// @see sound_manager_free_device_list()
+  /// Checks if the device is running.
+  ///
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `device` (in): The device item
+  /// - `is_running` (out): Whether the device is running or not: (`true` = running, `false` = not running)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SOUND_MANAGER_ERROR_NONE`: Success
+  /// - `SOUND_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `sound_manager_get_device_list()`
+  /// - `sound_manager_get_next_device()`
+  /// - `sound_manager_get_prev_device()`
+  /// - `sound_manager_get_device_type()`
+  /// - `sound_manager_get_device_io_direction()`
+  /// - `sound_manager_get_device_id()`
+  /// - `sound_manager_get_device_name()`
+  /// - `sound_manager_free_device_list()`
   int sound_manager_is_device_running(
     sound_device_h device,
     ffi.Pointer<ffi.Bool> is_running,
@@ -1577,23 +2007,33 @@ class Tizen65CapiMediaSoundManager {
       _sound_manager_is_device_runningPtr
           .asFunction<int Function(sound_device_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @deprecated Deprecated since 4.0. Use sound_manager_is_device_running() instead.
-  /// @brief Gets the state of the device.
-  /// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-  /// @param[in]   device  The device item
-  /// @param[out]  state   The state of the device
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SOUND_MANAGER_ERROR_NONE Success
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see sound_manager_get_device_list()
-  /// @see sound_manager_get_next_device()
-  /// @see sound_manager_get_prev_device()
-  /// @see sound_manager_get_device_type()
-  /// @see sound_manager_get_device_io_direction()
-  /// @see sound_manager_get_device_id()
-  /// @see sound_manager_get_device_name()
-  /// @see sound_manager_free_device_list()
+  /// **Deprecated:** Deprecated since 4.0. Use sound_manager_is_device_running() instead.
+  ///
+  /// Gets the state of the device.
+  ///
+  /// **Since Tizen:**
+  /// - Mobile 2.3; Wearable 2.3.1
+  ///
+  /// **Parameters:**
+  /// - `device` (in): The device item
+  /// - `state` (out): The state of the device
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SOUND_MANAGER_ERROR_NONE`: Success
+  /// - `SOUND_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `sound_manager_get_device_list()`
+  /// - `sound_manager_get_next_device()`
+  /// - `sound_manager_get_prev_device()`
+  /// - `sound_manager_get_device_type()`
+  /// - `sound_manager_get_device_io_direction()`
+  /// - `sound_manager_get_device_id()`
+  /// - `sound_manager_get_device_name()`
+  /// - `sound_manager_free_device_list()`
   int sound_manager_get_device_state(
     sound_device_h device,
     ffi.Pointer<ffi.Int32> state,
@@ -1612,25 +2052,34 @@ class Tizen65CapiMediaSoundManager {
       _sound_manager_get_device_statePtr
           .asFunction<int Function(sound_device_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the device's supported sample formats.
-  /// @since_tizen 5.0
+  /// Gets the device's supported sample formats.
   ///
-  /// @remarks	@a device should be #SOUND_DEVICE_USB_AUDIO type and an output device,\n
-  /// otherwise #SOUND_MANAGER_ERROR_INVALID_OPERATION will be returned.\n
-  /// Use sound_manager_get_device_io_direction() to check if it is an output device or not.\n
-  /// The @a formats should be released using free().
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @param[in]	device	The device item
-  /// @param[out]	formats	The supported sample format list
-  /// @param[out]	num_of_elems	The number of elements in the sample format list
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SOUND_MANAGER_ERROR_NONE Success
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #SOUND_MANAGER_ERROR_INTERNAL Internal error inside the sound system
-  /// @see sound_manager_set_sample_format()
-  /// @see sound_manager_get_sample_format()
+  /// **Remarks:**
+  /// - `device` should be `SOUND_DEVICE_USB_AUDIO` type and an output device,
+  /// - otherwise `SOUND_MANAGER_ERROR_INVALID_OPERATION` will be returned.
+  /// - Use sound_manager_get_device_io_direction() to check if it is an output device or not.
+  /// - The `formats` should be released using free().
+  ///
+  /// **Parameters:**
+  /// - `device` (in): The device item
+  /// - `formats` (out): The supported sample format list
+  /// - `num_of_elems` (out): The number of elements in the sample format list
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SOUND_MANAGER_ERROR_NONE`: Success
+  /// - `SOUND_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOUND_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `SOUND_MANAGER_ERROR_INTERNAL`: Internal error inside the sound system
+  ///
+  /// **See also:**
+  /// - `sound_manager_set_sample_format()`
+  /// - `sound_manager_get_sample_format()`
   int sound_manager_get_supported_sample_formats(
     sound_device_h device,
     ffi.Pointer<ffi.Pointer<ffi.Int32>> formats,
@@ -1655,24 +2104,33 @@ class Tizen65CapiMediaSoundManager {
           int Function(sound_device_h, ffi.Pointer<ffi.Pointer<ffi.Int32>>,
               ffi.Pointer<ffi.UnsignedInt>)>();
 
-  /// @brief Sets the device's sample format.
-  /// @since_tizen 5.0
+  /// Sets the device's sample format.
   ///
-  /// @remarks	@a device should be #SOUND_DEVICE_USB_AUDIO type and an output device.\n
-  /// @a format should be one of the values received from sound_manager_get_supported_sample_formats(),\n
-  /// otherwise #SOUND_MANAGER_ERROR_INVALID_OPERATION will be returned.\n
-  /// Use sound_manager_get_device_io_direction() to check if it is an output device or not.
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @param[in]	device	The device item
-  /// @param[in]	format	The sample format
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SOUND_MANAGER_ERROR_NONE Success
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #SOUND_MANAGER_ERROR_INTERNAL Internal error inside the sound system
-  /// @see sound_manager_get_supported_sample_formats()
-  /// @see sound_manager_get_sample_format()
+  /// **Remarks:**
+  /// - `device` should be `SOUND_DEVICE_USB_AUDIO` type and an output device.
+  /// - `format` should be one of the values received from sound_manager_get_supported_sample_formats(),
+  /// - otherwise `SOUND_MANAGER_ERROR_INVALID_OPERATION` will be returned.
+  /// - Use sound_manager_get_device_io_direction() to check if it is an output device or not.
+  ///
+  /// **Parameters:**
+  /// - `device` (in): The device item
+  /// - `format` (in): The sample format
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SOUND_MANAGER_ERROR_NONE`: Success
+  /// - `SOUND_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOUND_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `SOUND_MANAGER_ERROR_INTERNAL`: Internal error inside the sound system
+  ///
+  /// **See also:**
+  /// - `sound_manager_get_supported_sample_formats()`
+  /// - `sound_manager_get_sample_format()`
   int sound_manager_set_sample_format(
     sound_device_h device,
     int format,
@@ -1690,23 +2148,32 @@ class Tizen65CapiMediaSoundManager {
       _sound_manager_set_sample_formatPtr
           .asFunction<int Function(sound_device_h, int)>();
 
-  /// @brief Gets the device's sample format.
-  /// @since_tizen 5.0
+  /// Gets the device's sample format.
   ///
-  /// @remarks	@a device should be #SOUND_DEVICE_USB_AUDIO type and an output device,\n
-  /// otherwise #SOUND_MANAGER_ERROR_INVALID_OPERATION will be returned.\n
-  /// Use sound_manager_get_device_io_direction() to check if it is an output device or not.
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @param[in]	device	The device item
-  /// @param[out]	format	The sample format
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SOUND_MANAGER_ERROR_NONE Success
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #SOUND_MANAGER_ERROR_INTERNAL Internal error inside the sound system
-  /// @see sound_manager_get_supported_sample_formats()
-  /// @see sound_manager_set_sample_format()
+  /// **Remarks:**
+  /// - `device` should be `SOUND_DEVICE_USB_AUDIO` type and an output device,
+  /// - otherwise `SOUND_MANAGER_ERROR_INVALID_OPERATION` will be returned.
+  /// - Use sound_manager_get_device_io_direction() to check if it is an output device or not.
+  ///
+  /// **Parameters:**
+  /// - `device` (in): The device item
+  /// - `format` (out): The sample format
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SOUND_MANAGER_ERROR_NONE`: Success
+  /// - `SOUND_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOUND_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `SOUND_MANAGER_ERROR_INTERNAL`: Internal error inside the sound system
+  ///
+  /// **See also:**
+  /// - `sound_manager_get_supported_sample_formats()`
+  /// - `sound_manager_set_sample_format()`
   int sound_manager_get_sample_format(
     sound_device_h device,
     ffi.Pointer<ffi.Int32> format,
@@ -1725,25 +2192,34 @@ class Tizen65CapiMediaSoundManager {
       _sound_manager_get_sample_formatPtr
           .asFunction<int Function(sound_device_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the device's supported sample rates.
-  /// @since_tizen 5.0
+  /// Gets the device's supported sample rates.
   ///
-  /// @remarks	@a device should be #SOUND_DEVICE_USB_AUDIO type and an output device,\n
-  /// otherwise #SOUND_MANAGER_ERROR_INVALID_OPERATION will be returned.\n
-  /// Use sound_manager_get_device_io_direction() to check if it is an output device or not.\n
-  /// The @a rates should be released using free().
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @param[in]	device	The device item
-  /// @param[out]	rates	The supported sample rate list
-  /// @param[out]	num_of_elems	The number of elements in the sample rate list
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SOUND_MANAGER_ERROR_NONE Success
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #SOUND_MANAGER_ERROR_INTERNAL Internal error inside the sound system
-  /// @see sound_manager_set_sample_rate()
-  /// @see sound_manager_get_sample_rate()
+  /// **Remarks:**
+  /// - `device` should be `SOUND_DEVICE_USB_AUDIO` type and an output device,
+  /// - otherwise `SOUND_MANAGER_ERROR_INVALID_OPERATION` will be returned.
+  /// - Use sound_manager_get_device_io_direction() to check if it is an output device or not.
+  /// - The `rates` should be released using free().
+  ///
+  /// **Parameters:**
+  /// - `device` (in): The device item
+  /// - `rates` (out): The supported sample rate list
+  /// - `num_of_elems` (out): The number of elements in the sample rate list
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SOUND_MANAGER_ERROR_NONE`: Success
+  /// - `SOUND_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOUND_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `SOUND_MANAGER_ERROR_INTERNAL`: Internal error inside the sound system
+  ///
+  /// **See also:**
+  /// - `sound_manager_set_sample_rate()`
+  /// - `sound_manager_get_sample_rate()`
   int sound_manager_get_supported_sample_rates(
     sound_device_h device,
     ffi.Pointer<ffi.Pointer<ffi.Int32>> rates,
@@ -1768,24 +2244,33 @@ class Tizen65CapiMediaSoundManager {
           int Function(sound_device_h, ffi.Pointer<ffi.Pointer<ffi.Int32>>,
               ffi.Pointer<ffi.UnsignedInt>)>();
 
-  /// @brief Sets the device's sample rate.
-  /// @since_tizen 5.0
+  /// Sets the device's sample rate.
   ///
-  /// @remarks	@a device should be #SOUND_DEVICE_USB_AUDIO type and an output device.\n
-  /// @a rate should be one of the values received from sound_manager_get_supported_sample_rates(),\n
-  /// otherwise #SOUND_MANAGER_ERROR_INVALID_OPERATION will be returned.\n
-  /// Use sound_manager_get_device_io_direction() to check if it is an output device or not.
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @param[in]	device	The device item
-  /// @param[in]	rate	The sample rate
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SOUND_MANAGER_ERROR_NONE Success
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #SOUND_MANAGER_ERROR_INTERNAL Internal error inside the sound system
-  /// @see sound_manager_get_supported_sample_rates()
-  /// @see sound_manager_get_sample_rate()
+  /// **Remarks:**
+  /// - `device` should be `SOUND_DEVICE_USB_AUDIO` type and an output device.
+  /// - `rate` should be one of the values received from sound_manager_get_supported_sample_rates(),
+  /// - otherwise `SOUND_MANAGER_ERROR_INVALID_OPERATION` will be returned.
+  /// - Use sound_manager_get_device_io_direction() to check if it is an output device or not.
+  ///
+  /// **Parameters:**
+  /// - `device` (in): The device item
+  /// - `rate` (in): The sample rate
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SOUND_MANAGER_ERROR_NONE`: Success
+  /// - `SOUND_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOUND_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `SOUND_MANAGER_ERROR_INTERNAL`: Internal error inside the sound system
+  ///
+  /// **See also:**
+  /// - `sound_manager_get_supported_sample_rates()`
+  /// - `sound_manager_get_sample_rate()`
   int sound_manager_set_sample_rate(
     sound_device_h device,
     int rate,
@@ -1802,23 +2287,32 @@ class Tizen65CapiMediaSoundManager {
   late final _sound_manager_set_sample_rate = _sound_manager_set_sample_ratePtr
       .asFunction<int Function(sound_device_h, int)>();
 
-  /// @brief Gets the device's sample rate.
-  /// @since_tizen 5.0
+  /// Gets the device's sample rate.
   ///
-  /// @remarks	@a device should be #SOUND_DEVICE_USB_AUDIO type and an output device,\n
-  /// otherwise #SOUND_MANAGER_ERROR_INVALID_OPERATION will be returned.\n
-  /// Use sound_manager_get_device_io_direction() to check if it is an output device or not.
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @param[in]	device	The device item
-  /// @param[out]	rate	The sample rate
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SOUND_MANAGER_ERROR_NONE Success
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #SOUND_MANAGER_ERROR_INTERNAL Internal error inside the sound system
-  /// @see sound_manager_get_supported_sample_rates()
-  /// @see sound_manager_set_sample_rate()
+  /// **Remarks:**
+  /// - `device` should be `SOUND_DEVICE_USB_AUDIO` type and an output device,
+  /// - otherwise `SOUND_MANAGER_ERROR_INVALID_OPERATION` will be returned.
+  /// - Use sound_manager_get_device_io_direction() to check if it is an output device or not.
+  ///
+  /// **Parameters:**
+  /// - `device` (in): The device item
+  /// - `rate` (out): The sample rate
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SOUND_MANAGER_ERROR_NONE`: Success
+  /// - `SOUND_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOUND_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `SOUND_MANAGER_ERROR_INTERNAL`: Internal error inside the sound system
+  ///
+  /// **See also:**
+  /// - `sound_manager_get_supported_sample_rates()`
+  /// - `sound_manager_set_sample_rate()`
   int sound_manager_get_sample_rate(
     sound_device_h device,
     ffi.Pointer<ffi.Int32> rate,
@@ -1836,24 +2330,33 @@ class Tizen65CapiMediaSoundManager {
   late final _sound_manager_get_sample_rate = _sound_manager_get_sample_ratePtr
       .asFunction<int Function(sound_device_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Sets the device's 'avoid resampling' property.
-  /// @since_tizen 5.0
+  /// Sets the device's 'avoid resampling' property.
   ///
-  /// @remarks	@a device should be #SOUND_DEVICE_USB_AUDIO type and an output device,\n
-  /// otherwise #SOUND_MANAGER_ERROR_INVALID_OPERATION will be returned.\n
-  /// Use sound_manager_get_device_io_direction() to check if it is an output device or not.\n
-  /// The 'avoid resampling' property is not enabled as default. With this enabled, @a device will\n
-  /// use the first stream's original sample format and rate without resampling if supported.
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @param[in]	device	The device item
-  /// @param[in]	enable	The 'avoid resampling' property value to set: (@c true = enable, @c false = disable)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SOUND_MANAGER_ERROR_NONE Success
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #SOUND_MANAGER_ERROR_INTERNAL Internal error inside the sound system
-  /// @see sound_manager_get_avoid_resampling()
+  /// **Remarks:**
+  /// - `device` should be `SOUND_DEVICE_USB_AUDIO` type and an output device,
+  /// - otherwise `SOUND_MANAGER_ERROR_INVALID_OPERATION` will be returned.
+  /// - Use sound_manager_get_device_io_direction() to check if it is an output device or not.
+  /// - The 'avoid resampling' property is not enabled as default. With this enabled, `device` will
+  /// - use the first stream's original sample format and rate without resampling if supported.
+  ///
+  /// **Parameters:**
+  /// - `device` (in): The device item
+  /// - `enable` (in): The 'avoid resampling' property value to set: (`true` = enable, `false` = disable)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SOUND_MANAGER_ERROR_NONE`: Success
+  /// - `SOUND_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOUND_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `SOUND_MANAGER_ERROR_INTERNAL`: Internal error inside the sound system
+  ///
+  /// **See also:**
+  /// - `sound_manager_get_avoid_resampling()`
   int sound_manager_set_avoid_resampling(
     sound_device_h device,
     bool enable,
@@ -1871,23 +2374,32 @@ class Tizen65CapiMediaSoundManager {
       _sound_manager_set_avoid_resamplingPtr
           .asFunction<int Function(sound_device_h, bool)>();
 
-  /// @brief Gets the device's 'avoid resampling' property.
-  /// @since_tizen 5.0
+  /// Gets the device's 'avoid resampling' property.
   ///
-  /// @remarks	@a device should be #SOUND_DEVICE_USB_AUDIO type and an output device,\n
-  /// otherwise #SOUND_MANAGER_ERROR_INVALID_OPERATION will be returned.\n
-  /// Use sound_manager_get_device_io_direction() to check if it is an output device or not.\n
-  /// The default value of 'avoid resampling' is false.
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @param[in]	device	The device item
-  /// @param[in]	enabled	The value of 'avoid resampling' property: (@c true = enabled, @c false = disabled)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SOUND_MANAGER_ERROR_NONE Success
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #SOUND_MANAGER_ERROR_INTERNAL Internal error inside the sound system
-  /// @see sound_manager_set_avoid_resampling()
+  /// **Remarks:**
+  /// - `device` should be `SOUND_DEVICE_USB_AUDIO` type and an output device,
+  /// - otherwise `SOUND_MANAGER_ERROR_INVALID_OPERATION` will be returned.
+  /// - Use sound_manager_get_device_io_direction() to check if it is an output device or not.
+  /// - The default value of 'avoid resampling' is false.
+  ///
+  /// **Parameters:**
+  /// - `device` (in): The device item
+  /// - `enabled` (in): The value of 'avoid resampling' property: (`true` = enabled, `false` = disabled)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SOUND_MANAGER_ERROR_NONE`: Success
+  /// - `SOUND_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOUND_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `SOUND_MANAGER_ERROR_INTERNAL`: Internal error inside the sound system
+  ///
+  /// **See also:**
+  /// - `sound_manager_set_avoid_resampling()`
   int sound_manager_get_avoid_resampling(
     sound_device_h device,
     ffi.Pointer<ffi.Bool> enabled,
@@ -1906,24 +2418,33 @@ class Tizen65CapiMediaSoundManager {
       _sound_manager_get_avoid_resamplingPtr
           .asFunction<int Function(sound_device_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Sets the restriction of stream type only for media.
-  /// @since_tizen 5.0
+  /// Sets the restriction of stream type only for media.
   ///
-  /// @remarks	@a device should be #SOUND_DEVICE_USB_AUDIO type and an output device,\n
-  /// otherwise #SOUND_MANAGER_ERROR_INVALID_OPERATION will be returned.\n
-  /// Use sound_manager_get_device_io_direction() to check if it is an output device or not.\n
-  /// This property is not enabled as default. With this enabled, no other stream type\n
-  /// is allowed to @a device to play sound except for #SOUND_STREAM_TYPE_MEDIA.
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @param[in]	device	The device item
-  /// @param[in]	enable	The 'media stream only' property value to set: (@c true = enable, @c false = disable)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SOUND_MANAGER_ERROR_NONE Success
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #SOUND_MANAGER_ERROR_INTERNAL Internal error inside the sound system
-  /// @see sound_manager_get_media_stream_only()
+  /// **Remarks:**
+  /// - `device` should be `SOUND_DEVICE_USB_AUDIO` type and an output device,
+  /// - otherwise `SOUND_MANAGER_ERROR_INVALID_OPERATION` will be returned.
+  /// - Use sound_manager_get_device_io_direction() to check if it is an output device or not.
+  /// - This property is not enabled as default. With this enabled, no other stream type
+  /// - is allowed to `device` to play sound except for `SOUND_STREAM_TYPE_MEDIA`.
+  ///
+  /// **Parameters:**
+  /// - `device` (in): The device item
+  /// - `enable` (in): The 'media stream only' property value to set: (`true` = enable, `false` = disable)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SOUND_MANAGER_ERROR_NONE`: Success
+  /// - `SOUND_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOUND_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `SOUND_MANAGER_ERROR_INTERNAL`: Internal error inside the sound system
+  ///
+  /// **See also:**
+  /// - `sound_manager_get_media_stream_only()`
   int sound_manager_set_media_stream_only(
     sound_device_h device,
     bool enable,
@@ -1941,23 +2462,32 @@ class Tizen65CapiMediaSoundManager {
       _sound_manager_set_media_stream_onlyPtr
           .asFunction<int Function(sound_device_h, bool)>();
 
-  /// @brief Gets the restriction of stream type only for media.
-  /// @since_tizen 5.0
+  /// Gets the restriction of stream type only for media.
   ///
-  /// @remarks	@a device should be #SOUND_DEVICE_USB_AUDIO type and an output device,\n
-  /// otherwise #SOUND_MANAGER_ERROR_INVALID_OPERATION will be returned.\n
-  /// Use sound_manager_get_device_io_direction() to check if it is an output device or not.\n
-  /// The property is not enabled as default.
+  /// **Since Tizen:**
+  /// - 5.0
   ///
-  /// @param[in]	device	The device item
-  /// @param[out]	enabled	The value of 'media stream only' property: (@c true = enabled, @c false = disabled)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SOUND_MANAGER_ERROR_NONE Success
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_OPERATION Invalid operation
-  /// @retval #SOUND_MANAGER_ERROR_INTERNAL Internal error inside the sound system
-  /// @see sound_manager_set_media_stream_only()
+  /// **Remarks:**
+  /// - `device` should be `SOUND_DEVICE_USB_AUDIO` type and an output device,
+  /// - otherwise `SOUND_MANAGER_ERROR_INVALID_OPERATION` will be returned.
+  /// - Use sound_manager_get_device_io_direction() to check if it is an output device or not.
+  /// - The property is not enabled as default.
+  ///
+  /// **Parameters:**
+  /// - `device` (in): The device item
+  /// - `enabled` (out): The value of 'media stream only' property: (`true` = enabled, `false` = disabled)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SOUND_MANAGER_ERROR_NONE`: Success
+  /// - `SOUND_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOUND_MANAGER_ERROR_INVALID_OPERATION`: Invalid operation
+  /// - `SOUND_MANAGER_ERROR_INTERNAL`: Internal error inside the sound system
+  ///
+  /// **See also:**
+  /// - `sound_manager_set_media_stream_only()`
   int sound_manager_get_media_stream_only(
     sound_device_h device,
     ffi.Pointer<ffi.Bool> enabled,
@@ -1976,21 +2506,31 @@ class Tizen65CapiMediaSoundManager {
       _sound_manager_get_media_stream_onlyPtr
           .asFunction<int Function(sound_device_h, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Adds a callback function to be invoked when the connection state of a sound device was changed.
-  /// @since_tizen 3.0
+  /// Adds a callback function to be invoked when the connection state of a sound device was changed.
   ///
-  /// @param[in]	device_mask	Devices for which changes should be tracked, values of #sound_device_mask_e combined with bitwise 'or'
-  /// @param[in]	callback	The device connection state changed callback function
-  /// @param[in]	user_data	The user data to be passed to the callback function
-  /// @param[out]	id	The callback id
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SOUND_MANAGER_ERROR_NONE Success
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SOUND_MANAGER_ERROR_INTERNAL Internal error inside the sound system
-  /// @post sound_device_connection_changed_cb() will be invoked.
-  /// @see sound_manager_remove_device_connection_changed_cb()
-  /// @see sound_device_connection_changed_cb()
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `device_mask` (in): Devices for which changes should be tracked, values of `sound_device_mask_e` combined with bitwise 'or'
+  /// - `callback` (in): The device connection state changed callback function
+  /// - `user_data` (in): The user data to be passed to the callback function
+  /// - `id` (out): The callback id
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SOUND_MANAGER_ERROR_NONE`: Success
+  /// - `SOUND_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOUND_MANAGER_ERROR_INTERNAL`: Internal error inside the sound system
+  ///
+  /// **Postconditions:**
+  /// - sound_device_connection_changed_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `sound_manager_remove_device_connection_changed_cb()`
+  /// - `sound_device_connection_changed_cb()`
   int sound_manager_add_device_connection_changed_cb(
     int device_mask,
     sound_device_connection_changed_cb callback,
@@ -2015,16 +2555,24 @@ class Tizen65CapiMediaSoundManager {
           int Function(int, sound_device_connection_changed_cb,
               ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Removes a callback function invoked when the connection of a sound device was changed.
-  /// @since_tizen 3.0
+  /// Removes a callback function invoked when the connection of a sound device was changed.
   ///
-  /// @param[in]	id	The id of the callback to remove
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SOUND_MANAGER_ERROR_NONE Success
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SOUND_MANAGER_ERROR_INTERNAL Internal error inside the sound system
-  /// @see sound_manager_add_device_connection_changed_cb()
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `id` (in): The id of the callback to remove
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SOUND_MANAGER_ERROR_NONE`: Success
+  /// - `SOUND_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOUND_MANAGER_ERROR_INTERNAL`: Internal error inside the sound system
+  ///
+  /// **See also:**
+  /// - `sound_manager_add_device_connection_changed_cb()`
   int sound_manager_remove_device_connection_changed_cb(
     int id,
   ) {
@@ -2040,21 +2588,31 @@ class Tizen65CapiMediaSoundManager {
       _sound_manager_remove_device_connection_changed_cbPtr
           .asFunction<int Function(int)>();
 
-  /// @brief Adds a callback function to be invoked when the state of a sound device was changed.
-  /// @since_tizen 5.0
+  /// Adds a callback function to be invoked when the state of a sound device was changed.
   ///
-  /// @param[in]	device_mask	Devices for which changes should be tracked, values of #sound_device_mask_e combined with bitwise 'or'
-  /// @param[in]	callback	The device state changed callback function
-  /// @param[in]	user_data	The user data to be passed to the callback function
-  /// @param[out]	id	The callback id
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SOUND_MANAGER_ERROR_NONE Success
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SOUND_MANAGER_ERROR_INTERNAL Internal error inside the sound system
-  /// @post  sound_device_running_changed_cb() will be invoked.
-  /// @see sound_manager_remove_device_running_changed_cb()
-  /// @see sound_device_running_changed_cb()
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `device_mask` (in): Devices for which changes should be tracked, values of `sound_device_mask_e` combined with bitwise 'or'
+  /// - `callback` (in): The device state changed callback function
+  /// - `user_data` (in): The user data to be passed to the callback function
+  /// - `id` (out): The callback id
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SOUND_MANAGER_ERROR_NONE`: Success
+  /// - `SOUND_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOUND_MANAGER_ERROR_INTERNAL`: Internal error inside the sound system
+  ///
+  /// **Postconditions:**
+  /// - sound_device_running_changed_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `sound_manager_remove_device_running_changed_cb()`
+  /// - `sound_device_running_changed_cb()`
   int sound_manager_add_device_running_changed_cb(
     int device_mask,
     sound_device_running_changed_cb callback,
@@ -2079,16 +2637,24 @@ class Tizen65CapiMediaSoundManager {
           int Function(int, sound_device_running_changed_cb,
               ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Removes a callback function invoked when the state of a sound device was changed.
-  /// @since_tizen 5.0
+  /// Removes a callback function invoked when the state of a sound device was changed.
   ///
-  /// @param[in]	id	The id of the callback to remove
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SOUND_MANAGER_ERROR_NONE Success
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SOUND_MANAGER_ERROR_INTERNAL Internal error inside the sound system
-  /// @see sound_manager_add_device_running_changed_cb()
+  /// **Since Tizen:**
+  /// - 5.0
+  ///
+  /// **Parameters:**
+  /// - `id` (in): The id of the callback to remove
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SOUND_MANAGER_ERROR_NONE`: Success
+  /// - `SOUND_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOUND_MANAGER_ERROR_INTERNAL`: Internal error inside the sound system
+  ///
+  /// **See also:**
+  /// - `sound_manager_add_device_running_changed_cb()`
   int sound_manager_remove_device_running_changed_cb(
     int id,
   ) {
@@ -2104,22 +2670,33 @@ class Tizen65CapiMediaSoundManager {
       _sound_manager_remove_device_running_changed_cbPtr
           .asFunction<int Function(int)>();
 
-  /// @deprecated Deprecated since 4.0. Use sound_manager_add_device_running_changed_cb() instead.
-  /// @brief Adds a callback function to be invoked when the state of a sound device was changed.
-  /// @since_tizen 3.0
+  /// **Deprecated:** Deprecated since 4.0. Use sound_manager_add_device_running_changed_cb() instead.
   ///
-  /// @param[in]	device_mask	Devices for which changes should be tracked, values of #sound_device_mask_e combined with bitwise 'or'
-  /// @param[in]	callback	The device state changed callback function
-  /// @param[in]	user_data	The user data to be passed to the callback function
-  /// @param[out]	id	The callback id
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SOUND_MANAGER_ERROR_NONE Success
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SOUND_MANAGER_ERROR_INTERNAL Internal error inside the sound system
-  /// @post  sound_device_state_changed_cb() will be invoked.
-  /// @see sound_manager_remove_device_state_changed_cb()
-  /// @see sound_device_state_changed_cb()
+  /// Adds a callback function to be invoked when the state of a sound device was changed.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `device_mask` (in): Devices for which changes should be tracked, values of `sound_device_mask_e` combined with bitwise 'or'
+  /// - `callback` (in): The device state changed callback function
+  /// - `user_data` (in): The user data to be passed to the callback function
+  /// - `id` (out): The callback id
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SOUND_MANAGER_ERROR_NONE`: Success
+  /// - `SOUND_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOUND_MANAGER_ERROR_INTERNAL`: Internal error inside the sound system
+  ///
+  /// **Postconditions:**
+  /// - sound_device_state_changed_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `sound_manager_remove_device_state_changed_cb()`
+  /// - `sound_device_state_changed_cb()`
   int sound_manager_add_device_state_changed_cb(
     int device_mask,
     sound_device_state_changed_cb callback,
@@ -2144,17 +2721,26 @@ class Tizen65CapiMediaSoundManager {
           int Function(int, sound_device_state_changed_cb,
               ffi.Pointer<ffi.Void>, ffi.Pointer<ffi.Int>)>();
 
-  /// @deprecated Deprecated since 4.0. Use sound_manager_remove_device_running_changed_cb() instead.
-  /// @brief Removes a callback function invoked when the state of a sound device was changed.
-  /// @since_tizen 3.0
+  /// **Deprecated:** Deprecated since 4.0. Use sound_manager_remove_device_running_changed_cb() instead.
   ///
-  /// @param[in]	id	The id of the callback to remove
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #SOUND_MANAGER_ERROR_NONE Success
-  /// @retval #SOUND_MANAGER_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #SOUND_MANAGER_ERROR_INTERNAL Internal error inside the sound system
-  /// @see sound_manager_add_device_state_changed_cb()
+  /// Removes a callback function invoked when the state of a sound device was changed.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `id` (in): The id of the callback to remove
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `SOUND_MANAGER_ERROR_NONE`: Success
+  /// - `SOUND_MANAGER_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `SOUND_MANAGER_ERROR_INTERNAL`: Internal error inside the sound system
+  ///
+  /// **See also:**
+  /// - `sound_manager_add_device_state_changed_cb()`
   int sound_manager_remove_device_state_changed_cb(
     int id,
   ) {
@@ -2171,8 +2757,11 @@ class Tizen65CapiMediaSoundManager {
           .asFunction<int Function(int)>();
 }
 
-/// @brief Enumeration for sound manager's error codes.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration for sound manager's error codes.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class sound_manager_error_e {
   /// < Successful
   static const int SOUND_MANAGER_ERROR_NONE = 0;
@@ -2208,8 +2797,11 @@ abstract class sound_manager_error_e {
   static const int SOUND_MANAGER_ERROR_INVALID_STATE = -26607612;
 }
 
-/// @brief Enumeration for sound type.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration for sound type.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class sound_type_e {
   /// < Sound type for system
   static const int SOUND_TYPE_SYSTEM = 0;
@@ -2236,12 +2828,17 @@ abstract class sound_type_e {
   static const int SOUND_TYPE_VOICE = 7;
 }
 
+/// @nodoc
 final class sound_stream_ducking_s extends ffi.Opaque {}
 
+/// @nodoc
 final class sound_stream_info_s extends ffi.Opaque {}
 
-/// @brief Enumeration for sound stream type.
-/// @since_tizen 3.0
+/// Enumeration for sound stream type.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class sound_stream_type_e {
   /// < Sound stream type for media
   static const int SOUND_STREAM_TYPE_MEDIA = 0;
@@ -2274,8 +2871,11 @@ abstract class sound_stream_type_e {
   static const int SOUND_STREAM_TYPE_MEDIA_EXTERNAL_ONLY = 9;
 }
 
-/// @brief Enumeration for change reason of sound stream focus state.
-/// @since_tizen 3.0
+/// Enumeration for change reason of sound stream focus state.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class sound_stream_focus_change_reason_e {
   /// < Changed by the stream type for media
   static const int SOUND_STREAM_FOCUS_CHANGED_BY_MEDIA = 0;
@@ -2311,8 +2911,11 @@ abstract class sound_stream_focus_change_reason_e {
   static const int SOUND_STREAM_FOCUS_CHANGED_BY_MEDIA_EXTERNAL_ONLY = 10;
 }
 
-/// @brief Enumeration for sound stream focus mask.
-/// @since_tizen 3.0
+/// Enumeration for sound stream focus mask.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class sound_stream_focus_mask_e {
   /// < Mask for playback focus
   static const int SOUND_STREAM_FOCUS_FOR_PLAYBACK = 1;
@@ -2324,8 +2927,11 @@ abstract class sound_stream_focus_mask_e {
   static const int SOUND_STREAM_FOCUS_FOR_BOTH = 3;
 }
 
-/// @brief Enumeration for sound stream focus state.
-/// @since_tizen 3.0
+/// Enumeration for sound stream focus state.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class sound_stream_focus_state_e {
   /// < Focus state for release
   static const int SOUND_STREAM_FOCUS_STATE_RELEASED = 0;
@@ -2334,11 +2940,18 @@ abstract class sound_stream_focus_state_e {
   static const int SOUND_STREAM_FOCUS_STATE_ACQUIRED = 1;
 }
 
-/// @brief Enumeration for sound behavior.
-/// @since_tizen 3.0
-/// @remarks These values can be combined with bitwise 'or'.
-/// @see sound_manager_get_current_playback_focus()
-/// @see sound_manager_get_current_recording_focus()
+/// Enumeration for sound behavior.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Remarks:**
+/// - These values can be combined with bitwise 'or'.
+///
+/// **See also:**
+/// - `sound_manager_get_current_playback_focus()`
+/// - `sound_manager_get_current_recording_focus()`
+/// @nodoc
 abstract class sound_behavior_e {
   /// < None (default)
   static const int SOUND_BEHAVIOR_NONE = 0;
@@ -2350,8 +2963,11 @@ abstract class sound_behavior_e {
   static const int SOUND_BEHAVIOR_FADING = 2;
 }
 
-/// @brief Enumeration for sound device type.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration for sound device type.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class sound_device_type_e {
   /// < Built-in speaker
   static const int SOUND_DEVICE_BUILTIN_SPEAKER = 0;
@@ -2384,8 +3000,11 @@ abstract class sound_device_type_e {
   static const int SOUND_DEVICE_NETWORK = 9;
 }
 
-/// @brief Enumeration for sound device direction.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration for sound device direction.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class sound_device_io_direction_e {
   /// < Input device
   static const int SOUND_DEVICE_IO_DIRECTION_IN = 0;
@@ -2397,9 +3016,13 @@ abstract class sound_device_io_direction_e {
   static const int SOUND_DEVICE_IO_DIRECTION_BOTH = 2;
 }
 
-/// @deprecated Deprecated since 4.0.
-/// @brief Enumeration for sound device state.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// **Deprecated:** Deprecated since 4.0.
+///
+/// Enumeration for sound device state.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class sound_device_state_e {
   /// < Deactivated state
   static const int SOUND_DEVICE_STATE_DEACTIVATED = 0;
@@ -2408,8 +3031,11 @@ abstract class sound_device_state_e {
   static const int SOUND_DEVICE_STATE_ACTIVATED = 1;
 }
 
-/// @brief Enumeration for sound device mask.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Enumeration for sound device mask.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 abstract class sound_device_mask_e {
   /// < Mask for input devices
   static const int SOUND_DEVICE_IO_DIRECTION_IN_MASK = 1;
@@ -2436,8 +3062,11 @@ abstract class sound_device_mask_e {
   static const int SOUND_DEVICE_ALL_MASK = 65535;
 }
 
-/// @brief Enumeration for sound sample format.
-/// @since_tizen 5.0
+/// Enumeration for sound sample format.
+///
+/// **Since Tizen:**
+/// - 5.0
+/// @nodoc
 abstract class sound_sample_format_e {
   /// < Unsigned 8 bit samples
   static const int SOUND_SAMPLE_FORMAT_U8 = 0;
@@ -2452,8 +3081,11 @@ abstract class sound_sample_format_e {
   static const int SOUND_SAMPLE_FORMAT_S24_32_LE = 3;
 }
 
-/// @brief Enumeration for sound sample rate.
-/// @since_tizen 5.0
+/// Enumeration for sound sample rate.
+///
+/// **Since Tizen:**
+/// - 5.0
+/// @nodoc
 abstract class sound_sample_rate_e {
   /// < 8000 Hz sample rate
   static const int SOUND_SAMPLE_RATE_8000 = 0;
@@ -2480,68 +3112,103 @@ abstract class sound_sample_rate_e {
   static const int SOUND_SAMPLE_RATE_192000 = 7;
 }
 
-/// @brief Called when the system volume has changed.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
-/// @param[in]   type	The sound type of the changed volume
-/// @param[in]   volume	The new volume value
-/// @param[in]   user_data	The user data passed from the callback registration function
-/// @pre sound_manager_set_volume() will invoke this callback if you register it using sound_manager_add_volume_changed_cb().
-/// @see sound_manager_add_volume_changed_cb()
-/// @see sound_manager_remove_volume_changed_cb()
+/// Called when the system volume has changed.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+///
+/// **Parameters:**
+/// - `type` (in): The sound type of the changed volume
+/// - `volume` (in): The new volume value
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - sound_manager_set_volume() will invoke this callback if you register it using sound_manager_add_volume_changed_cb().
+///
+/// **See also:**
+/// - `sound_manager_add_volume_changed_cb()`
+/// - `sound_manager_remove_volume_changed_cb()`
+/// @nodoc
 typedef sound_manager_volume_changed_cb
     = ffi.Pointer<ffi.NativeFunction<sound_manager_volume_changed_cbFunction>>;
+/// @nodoc
 typedef sound_manager_volume_changed_cbFunction = ffi.Void Function(
     ffi.Int32 type, ffi.UnsignedInt volume, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartsound_manager_volume_changed_cbFunction = void Function(
     int type, int volume, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the ducking activation or deactivation is finished.
-/// @since_tizen 5.5
+/// Called when the ducking activation or deactivation is finished.
 ///
-/// @remarks	This function is invoked by the internal thread of the sound manager.
-/// Therefore it is recommended not to call functions which update UI in this callback.
-/// @remarks	@a stream_ducking is the same handle as the parameter in sound_manager_create_stream_ducking() that registers this callback,
-/// so the handle should not be released in this callback.
+/// **Since Tizen:**
+/// - 5.5
 ///
-/// @param[in]   stream_ducking	The stream ducking handle
-/// @param[in]   is_ducked	The flag whether it's ducked or not
-/// @param[in]   user_data	The user data passed from the callback registration function
-/// @pre You should register this callback when sound_manager_create_stream_ducking() is called.
-/// @see sound_manager_create_stream_ducking()
+/// **Remarks:**
+/// - This function is invoked by the internal thread of the sound manager.
+/// - Therefore it is recommended not to call functions which update UI in this callback.
+/// - `stream_ducking` is the same handle as the parameter in sound_manager_create_stream_ducking() that registers this callback,
+/// - so the handle should not be released in this callback.
+///
+/// **Parameters:**
+/// - `stream_ducking` (in): The stream ducking handle
+/// - `is_ducked` (in): The flag whether it's ducked or not
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - You should register this callback when sound_manager_create_stream_ducking() is called.
+///
+/// **See also:**
+/// - `sound_manager_create_stream_ducking()`
+/// @nodoc
 typedef sound_stream_ducking_state_changed_cb = ffi
     .Pointer<ffi.NativeFunction<sound_stream_ducking_state_changed_cbFunction>>;
+/// @nodoc
 typedef sound_stream_ducking_state_changed_cbFunction = ffi.Void Function(
     sound_stream_ducking_h stream_ducking,
     ffi.Bool is_ducked,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartsound_stream_ducking_state_changed_cbFunction = void Function(
     sound_stream_ducking_h stream_ducking,
     bool is_ducked,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Sound stream ducking handle.
-/// @since_tizen 5.5
+/// Sound stream ducking handle.
+///
+/// **Since Tizen:**
+/// - 5.5
+/// @nodoc
 typedef sound_stream_ducking_h = ffi.Pointer<sound_stream_ducking_s>;
 
-/// @brief Called when the state of focus that belongs to the stream_info is changed.
-/// @since_tizen 3.0
+/// Called when the state of focus that belongs to the stream_info is changed.
 ///
-/// @remarks	This function is issued in the internal thread of the sound manager.\n
-/// Therefore it is recommended not to call UI update function in this function.
+/// **Since Tizen:**
+/// - 3.0
 ///
-/// @param[in]   stream_info	The handle of stream information
-/// @param[in]   focus_mask	The changed focus mask
-/// @param[in]   focus_state	The changed focus state
-/// @param[in]   reason		The reason for state change of the focus
-/// @param[in]   sound_behavior	The requested sound behavior that should be followed, values of #sound_behavior_e combined with bitwise 'or'
-/// @param[in]   extra_info	The extra information
-/// @param[in]   user_data	The user data passed from the callback registration function
-/// @pre You should register this callback using sound_manager_create_stream_information().
-/// @see sound_manager_create_stream_information()
-/// @see sound_manager_destroy_stream_information()
-/// @see sound_manager_get_focus_state()
+/// **Remarks:**
+/// - This function is issued in the internal thread of the sound manager.
+/// - Therefore it is recommended not to call UI update function in this function.
+///
+/// **Parameters:**
+/// - `stream_info` (in): The handle of stream information
+/// - `focus_mask` (in): The changed focus mask
+/// - `focus_state` (in): The changed focus state
+/// - `reason` (in): The reason for state change of the focus
+/// - `sound_behavior` (in): The requested sound behavior that should be followed, values of `sound_behavior_e` combined with bitwise 'or'
+/// - `extra_info` (in): The extra information
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - You should register this callback using sound_manager_create_stream_information().
+///
+/// **See also:**
+/// - `sound_manager_create_stream_information()`
+/// - `sound_manager_destroy_stream_information()`
+/// - `sound_manager_get_focus_state()`
+/// @nodoc
 typedef sound_stream_focus_state_changed_cb = ffi
     .Pointer<ffi.NativeFunction<sound_stream_focus_state_changed_cbFunction>>;
+/// @nodoc
 typedef sound_stream_focus_state_changed_cbFunction = ffi.Void Function(
     sound_stream_info_h stream_info,
     ffi.Int32 focus_mask,
@@ -2550,6 +3217,7 @@ typedef sound_stream_focus_state_changed_cbFunction = ffi.Void Function(
     ffi.Int sound_behavior,
     ffi.Pointer<ffi.Char> extra_info,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartsound_stream_focus_state_changed_cbFunction = void Function(
     sound_stream_info_h stream_info,
     int focus_mask,
@@ -2559,31 +3227,47 @@ typedef Dartsound_stream_focus_state_changed_cbFunction = void Function(
     ffi.Pointer<ffi.Char> extra_info,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Sound stream information handle.
-/// @since_tizen 3.0
+/// Sound stream information handle.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 typedef sound_stream_info_h = ffi.Pointer<sound_stream_info_s>;
 
-/// @brief Sound device handle.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Sound device handle.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 typedef sound_device_h = ffi.Pointer<ffi.Void>;
 
-/// @brief Called when the focus state for each sound stream type is changed regardless of the process.
-/// @since_tizen 3.0
+/// Called when the focus state for each sound stream type is changed regardless of the process.
 ///
-/// @remarks	This function is invoked by the internal thread of the sound manager.\n
-/// Therefore it is recommended not to call functions which update the UI from this callback.
+/// **Since Tizen:**
+/// - 3.0
 ///
-/// @param[in]   id		The focus state change watch cb id
-/// @param[in]   focus_mask	The changed focus mask
-/// @param[in]   focus_state	The changed focus state
-/// @param[in]   reason		The reason for state change of the focus
-/// @param[in]   extra_info	The extra information
-/// @param[in]   user_data	The user data passed from the callback registration function
-/// @pre You should register this callback using sound_manager_add_focus_state_watch_cb().
-/// @see sound_manager_add_focus_state_watch_cb()
-/// @see sound_manager_remove_focus_state_watch_cb()
+/// **Remarks:**
+/// - This function is invoked by the internal thread of the sound manager.
+/// - Therefore it is recommended not to call functions which update the UI from this callback.
+///
+/// **Parameters:**
+/// - `id` (in): The focus state change watch cb id
+/// - `focus_mask` (in): The changed focus mask
+/// - `focus_state` (in): The changed focus state
+/// - `reason` (in): The reason for state change of the focus
+/// - `extra_info` (in): The extra information
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - You should register this callback using sound_manager_add_focus_state_watch_cb().
+///
+/// **See also:**
+/// - `sound_manager_add_focus_state_watch_cb()`
+/// - `sound_manager_remove_focus_state_watch_cb()`
+/// @nodoc
 typedef sound_stream_focus_state_watch_cb = ffi
     .Pointer<ffi.NativeFunction<sound_stream_focus_state_watch_cbFunction>>;
+/// @nodoc
 typedef sound_stream_focus_state_watch_cbFunction = ffi.Void Function(
     ffi.Int id,
     ffi.Int32 focus_mask,
@@ -2591,6 +3275,7 @@ typedef sound_stream_focus_state_watch_cbFunction = ffi.Void Function(
     ffi.Int32 reason,
     ffi.Pointer<ffi.Char> extra_info,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartsound_stream_focus_state_watch_cbFunction = void Function(
     int id,
     int focus_mask,
@@ -2599,67 +3284,105 @@ typedef Dartsound_stream_focus_state_watch_cbFunction = void Function(
     ffi.Pointer<ffi.Char> extra_info,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Sound device list handle.
-/// @since_tizen @if MOBILE 2.3 @elseif WEARABLE 2.3.1 @endif
+/// Sound device list handle.
+///
+/// **Since Tizen:**
+/// - Mobile 2.3; Wearable 2.3.1
+/// @nodoc
 typedef sound_device_list_h = ffi.Pointer<ffi.Void>;
 
-/// @brief Called when the connection state of a sound device was changed.
-/// @since_tizen 3.0
+/// Called when the connection state of a sound device was changed.
 ///
-/// @remarks @a device is freed by the platform after this callback exits.
+/// **Since Tizen:**
+/// - 3.0
 ///
-/// @param[in]   device	The sound_device
-/// @param[in]   is_connected	The state of device connection: (@c true = connected, @c false = disconnected)
-/// @param[in]   user_data	The user data passed from the callback registration function
-/// @pre You should add this callback using sound_manager_add_device_connection_changed_cb().
-/// @see sound_manager_add_device_connection_changed_cb()
-/// @see sound_manager_remove_device_connection_changed_cb()
+/// **Remarks:**
+/// - `device` is freed by the platform after this callback exits.
+///
+/// **Parameters:**
+/// - `device` (in): The sound_device
+/// - `is_connected` (in): The state of device connection: (`true` = connected, `false` = disconnected)
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - You should add this callback using sound_manager_add_device_connection_changed_cb().
+///
+/// **See also:**
+/// - `sound_manager_add_device_connection_changed_cb()`
+/// - `sound_manager_remove_device_connection_changed_cb()`
+/// @nodoc
 typedef sound_device_connection_changed_cb = ffi
     .Pointer<ffi.NativeFunction<sound_device_connection_changed_cbFunction>>;
+/// @nodoc
 typedef sound_device_connection_changed_cbFunction = ffi.Void Function(
     sound_device_h device,
     ffi.Bool is_connected,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartsound_device_connection_changed_cbFunction = void Function(
     sound_device_h device, bool is_connected, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Called when the state of a sound device was changed.
-/// @since_tizen 5.0
+/// Called when the state of a sound device was changed.
 ///
-/// @remarks @a device is freed by the platform after this callback exits.
+/// **Since Tizen:**
+/// - 5.0
 ///
-/// @param[in]   device	The sound_device
-/// @param[in]   is_running	The state of the device: (@c true = running, @c false = not running)
-/// @param[in]   user_data	The user data passed from the callback registration function
-/// @pre You should add this callback using sound_manager_add_device_running_changed_cb().
-/// @see sound_manager_add_device_running_changed_cb()
-/// @see sound_manager_remove_device_running_changed_cb()
+/// **Remarks:**
+/// - `device` is freed by the platform after this callback exits.
+///
+/// **Parameters:**
+/// - `device` (in): The sound_device
+/// - `is_running` (in): The state of the device: (`true` = running, `false` = not running)
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - You should add this callback using sound_manager_add_device_running_changed_cb().
+///
+/// **See also:**
+/// - `sound_manager_add_device_running_changed_cb()`
+/// - `sound_manager_remove_device_running_changed_cb()`
+/// @nodoc
 typedef sound_device_running_changed_cb
     = ffi.Pointer<ffi.NativeFunction<sound_device_running_changed_cbFunction>>;
+/// @nodoc
 typedef sound_device_running_changed_cbFunction = ffi.Void Function(
     sound_device_h device,
     ffi.Bool is_running,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartsound_device_running_changed_cbFunction = void Function(
     sound_device_h device, bool is_running, ffi.Pointer<ffi.Void> user_data);
 
-/// @deprecated Deprecated since 4.0. Use sound_device_running_changed_cb() instead.
-/// @brief Called when the state of a sound device was changed.
-/// @since_tizen 3.0
+/// **Deprecated:** Deprecated since 4.0. Use sound_device_running_changed_cb() instead.
 ///
-/// @remarks @a device is freed by the platform after this callback exits.
+/// Called when the state of a sound device was changed.
 ///
-/// @param[in]   device	The sound_device
-/// @param[in]   state	The state of the device
-/// @param[in]   user_data	The user data passed from the callback registration function
-/// @pre You should add this callback using sound_manager_add_device_state_changed_cb().
-/// @see sound_manager_add_device_state_changed_cb()
-/// @see sound_manager_remove_device_state_changed_cb()
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Remarks:**
+/// - `device` is freed by the platform after this callback exits.
+///
+/// **Parameters:**
+/// - `device` (in): The sound_device
+/// - `state` (in): The state of the device
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - You should add this callback using sound_manager_add_device_state_changed_cb().
+///
+/// **See also:**
+/// - `sound_manager_add_device_state_changed_cb()`
+/// - `sound_manager_remove_device_state_changed_cb()`
+/// @nodoc
 typedef sound_device_state_changed_cb
     = ffi.Pointer<ffi.NativeFunction<sound_device_state_changed_cbFunction>>;
+/// @nodoc
 typedef sound_device_state_changed_cbFunction = ffi.Void Function(
     sound_device_h device, ffi.Int32 state, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartsound_device_state_changed_cbFunction = void Function(
     sound_device_h device, int state, ffi.Pointer<ffi.Void> user_data);
 
+/// @nodoc
 const int SOUND_MANAGER_STREAM_NO_PREFERRED_DEVICE = 0;

@@ -1,3 +1,6 @@
+/// {@category 6.5/tizen}
+library tizen_interop_6_5.iotcon;
+
 // Copyright 2021 Samsung Electronics Co., Ltd. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -9,6 +12,7 @@
 import 'dart:ffi' as ffi;
 
 /// Dart bindings for Tizen iotcon APIs.
+/// {@category 6.5/tizen}
 class Tizen65Iotcon {
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
@@ -24,18 +28,27 @@ class Tizen65Iotcon {
           lookup)
       : _lookup = lookup;
 
-  /// @brief Creates a new list handle.
-  /// @since_tizen 3.0
-  /// @remarks You must destroy @a list by calling iotcon_list_destroy() if @a list is no longer needed.
-  /// @param[in] type The type of list
-  /// @param[out] list A newly allocated list handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IOTCON_ERROR_INVALID_TYPE Invalid type
+  /// Creates a new list handle.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - You must destroy `list` by calling iotcon_list_destroy() if `list` is no longer needed.
+  ///
+  /// **Parameters:**
+  /// - `type` (in): The type of list
+  /// - `list` (out): A newly allocated list handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IOTCON_ERROR_INVALID_TYPE`: Invalid type
   int iotcon_list_create(
     int type,
     ffi.Pointer<iotcon_list_h> list,
@@ -53,15 +66,23 @@ class Tizen65Iotcon {
   late final _iotcon_list_create = _iotcon_list_createPtr
       .asFunction<int Function(int, ffi.Pointer<iotcon_list_h>)>();
 
-  /// @brief Destroys a list handle.
-  /// @details Releases a @a list and its internal data.
-  /// @since_tizen 3.0
-  /// @param[in] list The handle to the list
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Destroys a list handle.
+  ///
+  /// Releases a `list` and its internal data.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `list` (in): The handle to the list
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
   int iotcon_list_destroy(
     iotcon_list_h list,
   ) {
@@ -76,19 +97,27 @@ class Tizen65Iotcon {
   late final _iotcon_list_destroy =
       _iotcon_list_destroyPtr.asFunction<int Function(iotcon_list_h)>();
 
-  /// @brief Adds a new element integer value into the list at the given position.
-  /// @details If @a pos is negative, or is larger than the number of elements in the list, the new value is added on to the end of the list.
-  /// @since_tizen 3.0
-  /// @param[in] list The list handle
-  /// @param[in] val The new integer value
-  /// @param[in] pos The position to insert value
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IOTCON_ERROR_INVALID_TYPE Invalid type
+  /// Adds a new element integer value into the list at the given position.
+  ///
+  /// If `pos` is negative, or is larger than the number of elements in the list, the new value is added on to the end of the list.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `list` (in): The list handle
+  /// - `val` (in): The new integer value
+  /// - `pos` (in): The position to insert value
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IOTCON_ERROR_INVALID_TYPE`: Invalid type
   int iotcon_list_add_int(
     iotcon_list_h list,
     int val,
@@ -108,19 +137,27 @@ class Tizen65Iotcon {
   late final _iotcon_list_add_int = _iotcon_list_add_intPtr
       .asFunction<int Function(iotcon_list_h, int, int)>();
 
-  /// @brief Adds a new element boolean value into the list at the given position.
-  /// @details If @a pos is negative, or is larger than the number of elements in the list, the new value is added on to the end of the list.
-  /// @since_tizen 3.0
-  /// @param[in] list The list handle
-  /// @param[in] val The new boolean value
-  /// @param[in] pos The position to insert value
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IOTCON_ERROR_INVALID_TYPE Invalid type
+  /// Adds a new element boolean value into the list at the given position.
+  ///
+  /// If `pos` is negative, or is larger than the number of elements in the list, the new value is added on to the end of the list.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `list` (in): The list handle
+  /// - `val` (in): The new boolean value
+  /// - `pos` (in): The position to insert value
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IOTCON_ERROR_INVALID_TYPE`: Invalid type
   int iotcon_list_add_bool(
     iotcon_list_h list,
     bool val,
@@ -140,19 +177,27 @@ class Tizen65Iotcon {
   late final _iotcon_list_add_bool = _iotcon_list_add_boolPtr
       .asFunction<int Function(iotcon_list_h, bool, int)>();
 
-  /// @brief Adds a new element double value into the list at the given position.
-  /// @details If @a pos is negative, or is larger than the number of elements in the list, the new value is added on to the end of the list.
-  /// @since_tizen 3.0
-  /// @param[in] list The list handle
-  /// @param[in] val The new double value
-  /// @param[in] pos The position to insert value
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IOTCON_ERROR_INVALID_TYPE Invalid type
+  /// Adds a new element double value into the list at the given position.
+  ///
+  /// If `pos` is negative, or is larger than the number of elements in the list, the new value is added on to the end of the list.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `list` (in): The list handle
+  /// - `val` (in): The new double value
+  /// - `pos` (in): The position to insert value
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IOTCON_ERROR_INVALID_TYPE`: Invalid type
   int iotcon_list_add_double(
     iotcon_list_h list,
     double val,
@@ -172,19 +217,27 @@ class Tizen65Iotcon {
   late final _iotcon_list_add_double = _iotcon_list_add_doublePtr
       .asFunction<int Function(iotcon_list_h, double, int)>();
 
-  /// @brief Adds a new element string value into the list at the given position.
-  /// @details If @a pos is negative, or is larger than the number of elements in the list, the new value is added on to the end of the list.
-  /// @since_tizen 3.0
-  /// @param[in] list The list handle
-  /// @param[in] val The new char value
-  /// @param[in] pos The position to insert value
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IOTCON_ERROR_INVALID_TYPE Invalid type
+  /// Adds a new element string value into the list at the given position.
+  ///
+  /// If `pos` is negative, or is larger than the number of elements in the list, the new value is added on to the end of the list.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `list` (in): The list handle
+  /// - `val` (in): The new char value
+  /// - `pos` (in): The position to insert value
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IOTCON_ERROR_INVALID_TYPE`: Invalid type
   int iotcon_list_add_str(
     iotcon_list_h list,
     ffi.Pointer<ffi.Char> val,
@@ -204,20 +257,28 @@ class Tizen65Iotcon {
   late final _iotcon_list_add_str = _iotcon_list_add_strPtr
       .asFunction<int Function(iotcon_list_h, ffi.Pointer<ffi.Char>, int)>();
 
-  /// @brief Adds a new element byte string value into the list at the given position.
-  /// @details If @a pos is negative, or is larger than the number of elements in the list, the new value is added on to the end of the list.
-  /// @since_tizen 3.0
-  /// @param[in] list The list handle
-  /// @param[in] val The new byte string value
-  /// @param[in] len The length of @a val
-  /// @param[in] pos The position to insert value
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IOTCON_ERROR_INVALID_TYPE Invalid type
+  /// Adds a new element byte string value into the list at the given position.
+  ///
+  /// If `pos` is negative, or is larger than the number of elements in the list, the new value is added on to the end of the list.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `list` (in): The list handle
+  /// - `val` (in): The new byte string value
+  /// - `len` (in): The length of `val`
+  /// - `pos` (in): The position to insert value
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IOTCON_ERROR_INVALID_TYPE`: Invalid type
   int iotcon_list_add_byte_str(
     iotcon_list_h list,
     ffi.Pointer<ffi.UnsignedChar> val,
@@ -241,19 +302,27 @@ class Tizen65Iotcon {
           int Function(
               iotcon_list_h, ffi.Pointer<ffi.UnsignedChar>, int, int)>();
 
-  /// @brief Adds a new element list into the list at the given position.
-  /// @details If @a pos is negative, or is larger than the number of elements in the list, the new value is added on to the end of the list.
-  /// @since_tizen 3.0
-  /// @param[in] list The list handle
-  /// @param[in] val The new list value
-  /// @param[in] pos The position to insert value
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IOTCON_ERROR_INVALID_TYPE Invalid type
+  /// Adds a new element list into the list at the given position.
+  ///
+  /// If `pos` is negative, or is larger than the number of elements in the list, the new value is added on to the end of the list.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `list` (in): The list handle
+  /// - `val` (in): The new list value
+  /// - `pos` (in): The position to insert value
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IOTCON_ERROR_INVALID_TYPE`: Invalid type
   int iotcon_list_add_list(
     iotcon_list_h list,
     iotcon_list_h val,
@@ -273,19 +342,27 @@ class Tizen65Iotcon {
   late final _iotcon_list_add_list = _iotcon_list_add_listPtr
       .asFunction<int Function(iotcon_list_h, iotcon_list_h, int)>();
 
-  /// @brief Adds a new element attributes value into the list at the given position.
-  /// @details If @a pos is negative, or is larger than the number of elements in the list, the new value is added on to the end of the list.
-  /// @since_tizen 3.0
-  /// @param[in] list The list handle
-  /// @param[in] val The new attributes value
-  /// @param[in] pos The position to insert value
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IOTCON_ERROR_INVALID_TYPE Invalid type
+  /// Adds a new element attributes value into the list at the given position.
+  ///
+  /// If `pos` is negative, or is larger than the number of elements in the list, the new value is added on to the end of the list.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `list` (in): The list handle
+  /// - `val` (in): The new attributes value
+  /// - `pos` (in): The position to insert value
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IOTCON_ERROR_INVALID_TYPE`: Invalid type
   int iotcon_list_add_attributes(
     iotcon_list_h list,
     iotcon_attributes_h val,
@@ -305,19 +382,27 @@ class Tizen65Iotcon {
   late final _iotcon_list_add_attributes = _iotcon_list_add_attributesPtr
       .asFunction<int Function(iotcon_list_h, iotcon_attributes_h, int)>();
 
-  /// @brief Gets the integer value at the given position.
-  /// @details Iterates over the list until it reaches the @a pos-1 position.
-  /// @since_tizen 3.0
-  /// @param[in] list The list handle
-  /// @param[in] pos The position
-  /// @param[out] val The integer value to get
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IOTCON_ERROR_NO_DATA No data available
-  /// @retval #IOTCON_ERROR_REPRESENTATION Representation errors
+  /// Gets the integer value at the given position.
+  ///
+  /// Iterates over the list until it reaches the `pos-1` position.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `list` (in): The list handle
+  /// - `pos` (in): The position
+  /// - `val` (out): The integer value to get
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IOTCON_ERROR_NO_DATA`: No data available
+  /// - `IOTCON_ERROR_REPRESENTATION`: Representation errors
   int iotcon_list_get_nth_int(
     iotcon_list_h list,
     int pos,
@@ -337,19 +422,27 @@ class Tizen65Iotcon {
   late final _iotcon_list_get_nth_int = _iotcon_list_get_nth_intPtr
       .asFunction<int Function(iotcon_list_h, int, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the boolean value at the given position.
-  /// @details Iterates over the list until it reaches the @a pos-1 position.
-  /// @since_tizen 3.0
-  /// @param[in] list The list handle
-  /// @param[in] pos The position
-  /// @param[out] val The boolean value to get
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IOTCON_ERROR_NO_DATA No data available
-  /// @retval #IOTCON_ERROR_REPRESENTATION Representation errors
+  /// Gets the boolean value at the given position.
+  ///
+  /// Iterates over the list until it reaches the `pos-1` position.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `list` (in): The list handle
+  /// - `pos` (in): The position
+  /// - `val` (out): The boolean value to get
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IOTCON_ERROR_NO_DATA`: No data available
+  /// - `IOTCON_ERROR_REPRESENTATION`: Representation errors
   int iotcon_list_get_nth_bool(
     iotcon_list_h list,
     int pos,
@@ -369,19 +462,27 @@ class Tizen65Iotcon {
   late final _iotcon_list_get_nth_bool = _iotcon_list_get_nth_boolPtr
       .asFunction<int Function(iotcon_list_h, int, ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Gets the double value at the given position.
-  /// @details Iterates over the list until it reaches the @a pos-1 position.
-  /// @since_tizen 3.0
-  /// @param[in] list The list handle
-  /// @param[in] pos The position
-  /// @param[out] val The double value to get
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IOTCON_ERROR_NO_DATA No data available
-  /// @retval #IOTCON_ERROR_REPRESENTATION Representation errors
+  /// Gets the double value at the given position.
+  ///
+  /// Iterates over the list until it reaches the `pos-1` position.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `list` (in): The list handle
+  /// - `pos` (in): The position
+  /// - `val` (out): The double value to get
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IOTCON_ERROR_NO_DATA`: No data available
+  /// - `IOTCON_ERROR_REPRESENTATION`: Representation errors
   int iotcon_list_get_nth_double(
     iotcon_list_h list,
     int pos,
@@ -401,20 +502,30 @@ class Tizen65Iotcon {
   late final _iotcon_list_get_nth_double = _iotcon_list_get_nth_doublePtr
       .asFunction<int Function(iotcon_list_h, int, ffi.Pointer<ffi.Double>)>();
 
-  /// @brief Gets the string value at the given position.
-  /// @details Iterates over the list until it reaches the @a pos-1 position.
-  /// @since_tizen 3.0
-  /// @remarks @a val must not be released using free().
-  /// @param[in] list The list handle
-  /// @param[in] pos The position
-  /// @param[out] val The string value to get
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IOTCON_ERROR_NO_DATA No data available
-  /// @retval #IOTCON_ERROR_REPRESENTATION Representation errors
+  /// Gets the string value at the given position.
+  ///
+  /// Iterates over the list until it reaches the `pos-1` position.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - `val` must not be released using free().
+  ///
+  /// **Parameters:**
+  /// - `list` (in): The list handle
+  /// - `pos` (in): The position
+  /// - `val` (out): The string value to get
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IOTCON_ERROR_NO_DATA`: No data available
+  /// - `IOTCON_ERROR_REPRESENTATION`: Representation errors
   int iotcon_list_get_nth_str(
     iotcon_list_h list,
     int pos,
@@ -434,21 +545,31 @@ class Tizen65Iotcon {
   late final _iotcon_list_get_nth_str = _iotcon_list_get_nth_strPtr.asFunction<
       int Function(iotcon_list_h, int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the string value at the given position.
-  /// @details Iterates over the list until it reaches the @a pos-1 position.
-  /// @since_tizen 3.0
-  /// @remarks @a val must not be released using free().
-  /// @param[in] list The list handle
-  /// @param[in] pos The position
-  /// @param[out] val The byte string value to get
-  /// @param[out] len The length of the @a val
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IOTCON_ERROR_NO_DATA No data available
-  /// @retval #IOTCON_ERROR_REPRESENTATION Representation errors
+  /// Gets the string value at the given position.
+  ///
+  /// Iterates over the list until it reaches the `pos-1` position.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - `val` must not be released using free().
+  ///
+  /// **Parameters:**
+  /// - `list` (in): The list handle
+  /// - `pos` (in): The position
+  /// - `val` (out): The byte string value to get
+  /// - `len` (out): The length of the `val`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IOTCON_ERROR_NO_DATA`: No data available
+  /// - `IOTCON_ERROR_REPRESENTATION`: Representation errors
   int iotcon_list_get_nth_byte_str(
     iotcon_list_h list,
     int pos,
@@ -478,20 +599,30 @@ class Tizen65Iotcon {
               ffi.Pointer<ffi.Pointer<ffi.UnsignedChar>>,
               ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the list value at the given position.
-  /// @details Iterates over the list until it reaches the @a pos-1 position.
-  /// @since_tizen 3.0
-  /// @remarks @a dest must not be released using iotcon_list_destroy().
-  /// @param[in] src The list handle
-  /// @param[in] pos The position
-  /// @param[out] dest The list value to get
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IOTCON_ERROR_NO_DATA No data available
-  /// @retval #IOTCON_ERROR_REPRESENTATION Representation errors
+  /// Gets the list value at the given position.
+  ///
+  /// Iterates over the list until it reaches the `pos-1` position.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - `dest` must not be released using iotcon_list_destroy().
+  ///
+  /// **Parameters:**
+  /// - `src` (in): The list handle
+  /// - `pos` (in): The position
+  /// - `dest` (out): The list value to get
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IOTCON_ERROR_NO_DATA`: No data available
+  /// - `IOTCON_ERROR_REPRESENTATION`: Representation errors
   int iotcon_list_get_nth_list(
     iotcon_list_h src,
     int pos,
@@ -512,20 +643,30 @@ class Tizen65Iotcon {
       _iotcon_list_get_nth_listPtr.asFunction<
           int Function(iotcon_list_h, int, ffi.Pointer<iotcon_list_h>)>();
 
-  /// @brief Gets the attributes value at the given position.
-  /// @details Iterates over the list until it reaches the @a pos-1 position.
-  /// @since_tizen 3.0
-  /// @remarks @a attributes must not be released using iotcon_attributes_destroy().
-  /// @param[in] list The list handle
-  /// @param[in] pos The position
-  /// @param[out] attributes The attributes value to get
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IOTCON_ERROR_NO_DATA No data available
-  /// @retval #IOTCON_ERROR_REPRESENTATION Representation errors
+  /// Gets the attributes value at the given position.
+  ///
+  /// Iterates over the list until it reaches the `pos-1` position.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - `attributes` must not be released using iotcon_attributes_destroy().
+  ///
+  /// **Parameters:**
+  /// - `list` (in): The list handle
+  /// - `pos` (in): The position
+  /// - `attributes` (out): The attributes value to get
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IOTCON_ERROR_NO_DATA`: No data available
+  /// - `IOTCON_ERROR_REPRESENTATION`: Representation errors
   int iotcon_list_get_nth_attributes(
     iotcon_list_h list,
     int pos,
@@ -547,17 +688,25 @@ class Tizen65Iotcon {
       _iotcon_list_get_nth_attributesPtr.asFunction<
           int Function(iotcon_list_h, int, ffi.Pointer<iotcon_attributes_h>)>();
 
-  /// @brief Removes the value at the given position.
-  /// @details Iterates over the list until it reaches the @a pos-1 position.
-  /// @since_tizen 3.0
-  /// @param[in] list The list handle
-  /// @param[in] pos The position to delete
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IOTCON_ERROR_NO_DATA No data available
+  /// Removes the value at the given position.
+  ///
+  /// Iterates over the list until it reaches the `pos-1` position.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `list` (in): The list handle
+  /// - `pos` (in): The position to delete
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IOTCON_ERROR_NO_DATA`: No data available
   int iotcon_list_remove_nth(
     iotcon_list_h list,
     int pos,
@@ -574,17 +723,24 @@ class Tizen65Iotcon {
   late final _iotcon_list_remove_nth =
       _iotcon_list_remove_nthPtr.asFunction<int Function(iotcon_list_h, int)>();
 
-  /// @brief Gets the type of the list.
-  /// @details It gets the data type of value related to the @a key in @a attributes.
-  /// The data type could be one of #iotcon_type_e.
-  /// @since_tizen 3.0
-  /// @param[in] list The list handle
-  /// @param[out] type The data type of list
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Gets the type of the list.
+  ///
+  /// It gets the data type of value related to the `key` in `attributes`. The data type could be one of `iotcon_type_e`.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `list` (in): The list handle
+  /// - `type` (out): The data type of list
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
   int iotcon_list_get_type(
     iotcon_list_h list,
     ffi.Pointer<ffi.Int32> type,
@@ -602,15 +758,22 @@ class Tizen65Iotcon {
   late final _iotcon_list_get_type = _iotcon_list_get_typePtr
       .asFunction<int Function(iotcon_list_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets the number of elements in a list.
-  /// @since_tizen 3.0
-  /// @param[in] list The handle to the list
-  /// @param[out] length The length of list
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Gets the number of elements in a list.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `list` (in): The handle to the list
+  /// - `length` (out): The length of list
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
   int iotcon_list_get_length(
     iotcon_list_h list,
     ffi.Pointer<ffi.UnsignedInt> length,
@@ -628,19 +791,31 @@ class Tizen65Iotcon {
   late final _iotcon_list_get_length = _iotcon_list_get_lengthPtr
       .asFunction<int Function(iotcon_list_h, ffi.Pointer<ffi.UnsignedInt>)>();
 
-  /// @brief Gets all integer values of the given list by invoking the callback function.
-  /// @details iotcon_list_int_cb() will be called for each child.
-  /// @since_tizen 3.0
-  /// @param[in] list The handle to the list
-  /// @param[in] cb The callback function to get each integer value
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @post iotcon_list_int_cb() will be called for each item.
-  /// @see iotcon_list_int_cb()
+  /// Gets all integer values of the given list by invoking the callback function.
+  ///
+  /// iotcon_list_int_cb() will be called for each child.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `list` (in): The handle to the list
+  /// - `cb` (in): The callback function to get each integer value
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Postconditions:**
+  /// - iotcon_list_int_cb() will be called for each item.
+  ///
+  /// **See also:**
+  /// - `iotcon_list_int_cb()`
   int iotcon_list_foreach_int(
     iotcon_list_h list,
     iotcon_list_int_cb cb,
@@ -660,19 +835,31 @@ class Tizen65Iotcon {
   late final _iotcon_list_foreach_int = _iotcon_list_foreach_intPtr.asFunction<
       int Function(iotcon_list_h, iotcon_list_int_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Gets all boolean values of the given list by invoking the callback function.
-  /// @details iotcon_list_bool_cb() will be called for each child.
-  /// @since_tizen 3.0
-  /// @param[in] list The handle to the list
-  /// @param[in] cb The callback function to get each boolean value
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @post iotcon_list_bool_cb() will be called for each item.
-  /// @see iotcon_list_bool_cb()
+  /// Gets all boolean values of the given list by invoking the callback function.
+  ///
+  /// iotcon_list_bool_cb() will be called for each child.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `list` (in): The handle to the list
+  /// - `cb` (in): The callback function to get each boolean value
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Postconditions:**
+  /// - iotcon_list_bool_cb() will be called for each item.
+  ///
+  /// **See also:**
+  /// - `iotcon_list_bool_cb()`
   int iotcon_list_foreach_bool(
     iotcon_list_h list,
     iotcon_list_bool_cb cb,
@@ -694,19 +881,31 @@ class Tizen65Iotcon {
           int Function(
               iotcon_list_h, iotcon_list_bool_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Gets all double values of the given list by invoking the callback function.
-  /// @details iotcon_list_double_cb() will be called for each child.
-  /// @since_tizen 3.0
-  /// @param[in] list The handle to the list
-  /// @param[in] cb The callback function to get each double value
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @post iotcon_list_double_cb() will be called for each item.
-  /// @see iotcon_list_double_cb()
+  /// Gets all double values of the given list by invoking the callback function.
+  ///
+  /// iotcon_list_double_cb() will be called for each child.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `list` (in): The handle to the list
+  /// - `cb` (in): The callback function to get each double value
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Postconditions:**
+  /// - iotcon_list_double_cb() will be called for each item.
+  ///
+  /// **See also:**
+  /// - `iotcon_list_double_cb()`
   int iotcon_list_foreach_double(
     iotcon_list_h list,
     iotcon_list_double_cb cb,
@@ -728,19 +927,31 @@ class Tizen65Iotcon {
           int Function(
               iotcon_list_h, iotcon_list_double_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Gets all string values of the given list by invoking the callback function.
-  /// @details iotcon_list_byte_str_cb() will be called for each child.
-  /// @since_tizen 3.0
-  /// @param[in] list The handle to the list
-  /// @param[in] cb The callback function to get each string value
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @post iotcon_list_byte_str_cb() will be called for each item.
-  /// @see iotcon_list_byte_str_cb()
+  /// Gets all string values of the given list by invoking the callback function.
+  ///
+  /// iotcon_list_byte_str_cb() will be called for each child.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `list` (in): The handle to the list
+  /// - `cb` (in): The callback function to get each string value
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Postconditions:**
+  /// - iotcon_list_byte_str_cb() will be called for each item.
+  ///
+  /// **See also:**
+  /// - `iotcon_list_byte_str_cb()`
   int iotcon_list_foreach_byte_str(
     iotcon_list_h list,
     iotcon_list_byte_str_cb cb,
@@ -762,19 +973,31 @@ class Tizen65Iotcon {
           int Function(
               iotcon_list_h, iotcon_list_byte_str_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Gets all string values of the given list by invoking the callback function.
-  /// @details iotcon_list_str_cb() will be called for each child.
-  /// @since_tizen 3.0
-  /// @param[in] list The handle to the list
-  /// @param[in] cb The callback function to get each string value
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @post iotcon_list_str_cb() will be called for each item.
-  /// @see iotcon_list_str_cb()
+  /// Gets all string values of the given list by invoking the callback function.
+  ///
+  /// iotcon_list_str_cb() will be called for each child.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `list` (in): The handle to the list
+  /// - `cb` (in): The callback function to get each string value
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Postconditions:**
+  /// - iotcon_list_str_cb() will be called for each item.
+  ///
+  /// **See also:**
+  /// - `iotcon_list_str_cb()`
   int iotcon_list_foreach_str(
     iotcon_list_h list,
     iotcon_list_str_cb cb,
@@ -794,19 +1017,31 @@ class Tizen65Iotcon {
   late final _iotcon_list_foreach_str = _iotcon_list_foreach_strPtr.asFunction<
       int Function(iotcon_list_h, iotcon_list_str_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Gets all sub lists of the given list by invoking the callback function.
-  /// @details iotcon_list_list_cb() will be called for each child.
-  /// @since_tizen 3.0
-  /// @param[in] list The handle to the origin list
-  /// @param[in] cb The callback function to get each sub list
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @post iotcon_list_list_cb() will be called for each item.
-  /// @see iotcon_list_list_cb()
+  /// Gets all sub lists of the given list by invoking the callback function.
+  ///
+  /// iotcon_list_list_cb() will be called for each child.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `list` (in): The handle to the origin list
+  /// - `cb` (in): The callback function to get each sub list
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Postconditions:**
+  /// - iotcon_list_list_cb() will be called for each item.
+  ///
+  /// **See also:**
+  /// - `iotcon_list_list_cb()`
   int iotcon_list_foreach_list(
     iotcon_list_h list,
     iotcon_list_list_cb cb,
@@ -828,19 +1063,31 @@ class Tizen65Iotcon {
           int Function(
               iotcon_list_h, iotcon_list_list_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Gets all attributes of the given list by invoking the callback function.
-  /// @details iotcon_list_attributes_cb() will be called for each child.
-  /// @since_tizen 3.0
-  /// @param[in] list The handle to the list
-  /// @param[in] cb The callback function to get each attributes
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @post iotcon_list_attributes_cb() will be called for each item.
-  /// @see iotcon_list_attributes_cb()
+  /// Gets all attributes of the given list by invoking the callback function.
+  ///
+  /// iotcon_list_attributes_cb() will be called for each child.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `list` (in): The handle to the list
+  /// - `cb` (in): The callback function to get each attributes
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Postconditions:**
+  /// - iotcon_list_attributes_cb() will be called for each item.
+  ///
+  /// **See also:**
+  /// - `iotcon_list_attributes_cb()`
   int iotcon_list_foreach_attributes(
     iotcon_list_h list,
     iotcon_list_attributes_cb cb,
@@ -862,20 +1109,31 @@ class Tizen65Iotcon {
           int Function(iotcon_list_h, iotcon_list_attributes_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Creates a new query handle.
-  /// @since_tizen 3.0
-  /// @remarks You must destroy @a query by calling iotcon_query_destroy() if @a query is no longer needed.
-  /// @param[out] query A newly allocated query handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see iotcon_query_destroy()
-  /// @see iotcon_query_add()
-  /// @see iotcon_query_remove()
-  /// @see iotcon_query_lookup()
+  /// Creates a new query handle.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - You must destroy `query` by calling iotcon_query_destroy() if `query` is no longer needed.
+  ///
+  /// **Parameters:**
+  /// - `query` (out): A newly allocated query handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `iotcon_query_destroy()`
+  /// - `iotcon_query_add()`
+  /// - `iotcon_query_remove()`
+  /// - `iotcon_query_lookup()`
   int iotcon_query_create(
     ffi.Pointer<iotcon_query_h> query,
   ) {
@@ -890,18 +1148,27 @@ class Tizen65Iotcon {
   late final _iotcon_query_create = _iotcon_query_createPtr
       .asFunction<int Function(ffi.Pointer<iotcon_query_h>)>();
 
-  /// @brief Destroys a query handle.
-  /// @since_tizen 3.0
-  /// @param[in] query The handle of the query
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see iotcon_query_create()
-  /// @see iotcon_query_add()
-  /// @see iotcon_query_remove()
-  /// @see iotcon_query_lookup()
+  /// Destroys a query handle.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `query` (in): The handle of the query
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `iotcon_query_create()`
+  /// - `iotcon_query_add()`
+  /// - `iotcon_query_remove()`
+  /// - `iotcon_query_lookup()`
   int iotcon_query_destroy(
     iotcon_query_h query,
   ) {
@@ -916,25 +1183,36 @@ class Tizen65Iotcon {
   late final _iotcon_query_destroy =
       _iotcon_query_destroyPtr.asFunction<int Function(iotcon_query_h)>();
 
-  /// @brief Gets resource type from the query.
-  /// @since_tizen 3.0
-  /// @remarks @a resource_type must not be released using free().
-  /// @a resource_type must start with a lowercase alphabetic character, followed by a sequence
-  /// of lowercase alphabetic, numeric, ".", or "-" characters, and contains no white space.
-  /// @param[in] query The handle of the query
-  /// @param[out] resource_type Found resource type from query
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IOTCON_ERROR_NO_DATA No data available
-  /// @retval #IOTCON_ERROR_OUT_OF_MEMORY Out of memory
-  /// @see iotcon_query_create()
-  /// @see iotcon_query_destroy()
-  /// @see iotcon_query_add()
-  /// @see iotcon_query_remove()
-  /// @see iotcon_query_set_resource_type()
+  /// Gets resource type from the query.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - `resource_type` must not be released using free().
+  /// - `resource_type` must start with a lowercase alphabetic character, followed by a sequence
+  /// - of lowercase alphabetic, numeric, ".", or "-" characters, and contains no white space.
+  ///
+  /// **Parameters:**
+  /// - `query` (in): The handle of the query
+  /// - `resource_type` (out): Found resource type from query
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IOTCON_ERROR_NO_DATA`: No data available
+  /// - `IOTCON_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `iotcon_query_create()`
+  /// - `iotcon_query_destroy()`
+  /// - `iotcon_query_add()`
+  /// - `iotcon_query_remove()`
+  /// - `iotcon_query_set_resource_type()`
   int iotcon_query_get_resource_type(
     iotcon_query_h query,
     ffi.Pointer<ffi.Pointer<ffi.Char>> resource_type,
@@ -954,23 +1232,34 @@ class Tizen65Iotcon {
       _iotcon_query_get_resource_typePtr.asFunction<
           int Function(iotcon_query_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets resource interface from the query.
-  /// @since_tizen 3.0
-  /// @remarks @a resource_iface could be a value such as #IOTCON_INTERFACE_DEFAULT.
-  /// @remarks @a resource_iface must not be released using free().
-  /// @param[in] query The handle of the query
-  /// @param[out] resource_iface Found resource interface from query
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IOTCON_ERROR_NO_DATA No data available
-  /// @see iotcon_query_create()
-  /// @see iotcon_query_destroy()
-  /// @see iotcon_query_add()
-  /// @see iotcon_query_remove()
-  /// @see iotcon_query_set_interface()
+  /// Gets resource interface from the query.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - `resource_iface` could be a value such as `IOTCON_INTERFACE_DEFAULT`.
+  /// - `resource_iface` must not be released using free().
+  ///
+  /// **Parameters:**
+  /// - `query` (in): The handle of the query
+  /// - `resource_iface` (out): Found resource interface from query
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IOTCON_ERROR_NO_DATA`: No data available
+  ///
+  /// **See also:**
+  /// - `iotcon_query_create()`
+  /// - `iotcon_query_destroy()`
+  /// - `iotcon_query_add()`
+  /// - `iotcon_query_remove()`
+  /// - `iotcon_query_set_interface()`
   int iotcon_query_get_interface(
     iotcon_query_h query,
     ffi.Pointer<ffi.Pointer<ffi.Char>> resource_iface,
@@ -990,22 +1279,31 @@ class Tizen65Iotcon {
       _iotcon_query_get_interfacePtr.asFunction<
           int Function(iotcon_query_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets the resource type into the query.
-  /// @since_tizen 3.0
-  /// @param[in] query The handle of the query
-  /// @param[in] resource_type The resource type to set into the query
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see iotcon_query_create()
-  /// @see iotcon_query_destroy()
-  /// @see iotcon_query_add()
-  /// @see iotcon_query_remove()
-  /// @see iotcon_query_lookup()
-  /// @see iotcon_query_get_resource_type()
+  /// Sets the resource type into the query.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `query` (in): The handle of the query
+  /// - `resource_type` (in): The resource type to set into the query
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `iotcon_query_create()`
+  /// - `iotcon_query_destroy()`
+  /// - `iotcon_query_add()`
+  /// - `iotcon_query_remove()`
+  /// - `iotcon_query_lookup()`
+  /// - `iotcon_query_get_resource_type()`
   int iotcon_query_set_resource_type(
     iotcon_query_h query,
     ffi.Pointer<ffi.Char> resource_type,
@@ -1024,23 +1322,34 @@ class Tizen65Iotcon {
       _iotcon_query_set_resource_typePtr
           .asFunction<int Function(iotcon_query_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets the resource interface into the query.
-  /// @since_tizen 3.0
-  /// @remarks @a resource_iface could be a value such as #IOTCON_INTERFACE_DEFAULT.
-  /// @param[in] query The handle of the query
-  /// @param[in] resource_iface The resource interface to add into the query
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see iotcon_query_create()
-  /// @see iotcon_query_destroy()
-  /// @see iotcon_query_add()
-  /// @see iotcon_query_remove()
-  /// @see iotcon_query_lookup()
-  /// @see iotcon_query_get_interface()
+  /// Sets the resource interface into the query.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - `resource_iface` could be a value such as `IOTCON_INTERFACE_DEFAULT`.
+  ///
+  /// **Parameters:**
+  /// - `query` (in): The handle of the query
+  /// - `resource_iface` (in): The resource interface to add into the query
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `iotcon_query_create()`
+  /// - `iotcon_query_destroy()`
+  /// - `iotcon_query_add()`
+  /// - `iotcon_query_remove()`
+  /// - `iotcon_query_lookup()`
+  /// - `iotcon_query_get_interface()`
   int iotcon_query_set_interface(
     iotcon_query_h query,
     ffi.Pointer<ffi.Char> resource_iface,
@@ -1058,22 +1367,33 @@ class Tizen65Iotcon {
   late final _iotcon_query_set_interface = _iotcon_query_set_interfacePtr
       .asFunction<int Function(iotcon_query_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Adds a new key and corresponding value into the query.
-  /// @since_tizen 3.0
-  /// @remarks The full length of query should be less than or equal to 64.
-  /// @param[in] query The handle of the query
-  /// @param[in] key The key of the query to insert
-  /// @param[in] value The string data to insert into the query
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see iotcon_query_create()
-  /// @see iotcon_query_destroy()
-  /// @see iotcon_query_remove()
-  /// @see iotcon_query_lookup()
+  /// Adds a new key and corresponding value into the query.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The full length of query should be less than or equal to 64.
+  ///
+  /// **Parameters:**
+  /// - `query` (in): The handle of the query
+  /// - `key` (in): The key of the query to insert
+  /// - `value` (in): The string data to insert into the query
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `iotcon_query_create()`
+  /// - `iotcon_query_destroy()`
+  /// - `iotcon_query_remove()`
+  /// - `iotcon_query_lookup()`
   int iotcon_query_add(
     iotcon_query_h query,
     ffi.Pointer<ffi.Char> key,
@@ -1094,19 +1414,28 @@ class Tizen65Iotcon {
       int Function(
           iotcon_query_h, ffi.Pointer<ffi.Char>, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Removes the key and its associated value from the query.
-  /// @since_tizen 3.0
-  /// @param[in] query The handle of the query
-  /// @param[in] key The key of the option to delete
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see iotcon_query_create()
-  /// @see iotcon_query_destroy()
-  /// @see iotcon_query_add()
-  /// @see iotcon_query_lookup()
+  /// Removes the key and its associated value from the query.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `query` (in): The handle of the query
+  /// - `key` (in): The key of the option to delete
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `iotcon_query_create()`
+  /// - `iotcon_query_destroy()`
+  /// - `iotcon_query_add()`
+  /// - `iotcon_query_lookup()`
   int iotcon_query_remove(
     iotcon_query_h query,
     ffi.Pointer<ffi.Char> key,
@@ -1124,21 +1453,32 @@ class Tizen65Iotcon {
   late final _iotcon_query_remove = _iotcon_query_removePtr
       .asFunction<int Function(iotcon_query_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Looks up data at the given key from the query.
-  /// @since_tizen 3.0
-  /// @remarks @a data must not be released using free().
-  /// @param[in] query The handle of the query
-  /// @param[in] key The key of the query to lookup
-  /// @param[out] data Found data from query
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see iotcon_query_create()
-  /// @see iotcon_query_destroy()
-  /// @see iotcon_query_add()
-  /// @see iotcon_query_remove()
+  /// Looks up data at the given key from the query.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - `data` must not be released using free().
+  ///
+  /// **Parameters:**
+  /// - `query` (in): The handle of the query
+  /// - `key` (in): The key of the query to lookup
+  /// - `data` (out): Found data from query
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `iotcon_query_create()`
+  /// - `iotcon_query_destroy()`
+  /// - `iotcon_query_add()`
+  /// - `iotcon_query_remove()`
   int iotcon_query_lookup(
     iotcon_query_h query,
     ffi.Pointer<ffi.Char> key,
@@ -1159,20 +1499,31 @@ class Tizen65Iotcon {
       int Function(iotcon_query_h, ffi.Pointer<ffi.Char>,
           ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets all data of the query by invoking the callback function.
-  /// @details iotcon_query_foreach_cb() will be called for each query. \n
-  /// If iotcon_query_foreach_cb() returns false, iteration will be stopped.
-  /// @since_tizen 3.0
-  /// @param[in] query The handle of the query
-  /// @param[in] cb The callback function to get data
-  /// @param[in] user_data The user data to be passed to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @post iotcon_query_foreach_cb() will be called for each query.
-  /// @see iotcon_query_foreach_cb()
+  /// Gets all data of the query by invoking the callback function.
+  ///
+  /// iotcon_query_foreach_cb() will be called for each query. If iotcon_query_foreach_cb() returns false, iteration will be stopped.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `query` (in): The handle of the query
+  /// - `cb` (in): The callback function to get data
+  /// - `user_data` (in): The user data to be passed to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Postconditions:**
+  /// - iotcon_query_foreach_cb() will be called for each query.
+  ///
+  /// **See also:**
+  /// - `iotcon_query_foreach_cb()`
   int iotcon_query_foreach(
     iotcon_query_h query,
     iotcon_query_foreach_cb cb,
@@ -1193,17 +1544,28 @@ class Tizen65Iotcon {
       int Function(
           iotcon_query_h, iotcon_query_foreach_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Creates a new attributes handle.
-  /// @since_tizen 3.0
-  /// @remarks You must destroy @a attributes by calling iotcon_attributes_destroy() if @a attributes is no longer needed.
-  /// @param[out] attributes A newly allocated attributes handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see iotcon_attributes_destroy()
+  /// Creates a new attributes handle.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - You must destroy `attributes` by calling iotcon_attributes_destroy() if `attributes` is no longer needed.
+  ///
+  /// **Parameters:**
+  /// - `attributes` (out): A newly allocated attributes handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `iotcon_attributes_destroy()`
   int iotcon_attributes_create(
     ffi.Pointer<iotcon_attributes_h> attributes,
   ) {
@@ -1219,16 +1581,26 @@ class Tizen65Iotcon {
   late final _iotcon_attributes_create = _iotcon_attributes_createPtr
       .asFunction<int Function(ffi.Pointer<iotcon_attributes_h>)>();
 
-  /// @brief Destroys the attributes.
-  /// @details Releases @a attributes and its internal data.
-  /// @since_tizen 3.0
-  /// @param[in] attributes The attributes handle to free
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see iotcon_attributes_create()
+  /// Destroys the attributes.
+  ///
+  /// Releases `attributes` and its internal data.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `attributes` (in): The attributes handle to free
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `iotcon_attributes_create()`
   int iotcon_attributes_destroy(
     iotcon_attributes_h attributes,
   ) {
@@ -1243,19 +1615,30 @@ class Tizen65Iotcon {
   late final _iotcon_attributes_destroy = _iotcon_attributes_destroyPtr
       .asFunction<int Function(iotcon_attributes_h)>();
 
-  /// @brief Clones the attributes handle.
-  /// @since_tizen 3.0
-  /// @remarks You must destroy @a attributes_clone by calling iotcon_attributes_destroy() if @a attributes_clone is no longer needed.
-  /// @param[in] attributes The attributes handle
-  /// @param[out] attributes_clone The cloned attributes handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see iotcon_attributes_create()
-  /// @see iotcon_attributes_destroy()
+  /// Clones the attributes handle.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - You must destroy `attributes_clone` by calling iotcon_attributes_destroy() if `attributes_clone` is no longer needed.
+  ///
+  /// **Parameters:**
+  /// - `attributes` (in): The attributes handle
+  /// - `attributes_clone` (out): The cloned attributes handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `iotcon_attributes_create()`
+  /// - `iotcon_attributes_destroy()`
   int iotcon_attributes_clone(
     iotcon_attributes_h attributes,
     ffi.Pointer<iotcon_attributes_h> attributes_clone,
@@ -1273,18 +1656,26 @@ class Tizen65Iotcon {
   late final _iotcon_attributes_clone = _iotcon_attributes_clonePtr.asFunction<
       int Function(iotcon_attributes_h, ffi.Pointer<iotcon_attributes_h>)>();
 
-  /// @brief Adds a new key and integer value into the attributes.
-  /// @details If @a key is already exists, current value will be replaced with new @a val.
-  /// @since_tizen 3.0
-  /// @param[in] attributes The attributes handle
-  /// @param[in] key The key
-  /// @param[in] val The value
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Adds a new key and integer value into the attributes.
+  ///
+  /// If `key` is already exists, current value will be replaced with new `val`.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `attributes` (in): The attributes handle
+  /// - `key` (in): The key
+  /// - `val` (in): The value
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
   int iotcon_attributes_add_int(
     iotcon_attributes_h attributes,
     ffi.Pointer<ffi.Char> key,
@@ -1305,18 +1696,26 @@ class Tizen65Iotcon {
       _iotcon_attributes_add_intPtr.asFunction<
           int Function(iotcon_attributes_h, ffi.Pointer<ffi.Char>, int)>();
 
-  /// @brief Adds a new key and boolean value into the attributes.
-  /// @details If @a key is already exists, current value will be replaced with new @a val.
-  /// @since_tizen 3.0
-  /// @param[in] attributes The attributes handle
-  /// @param[in] key The key
-  /// @param[in] val The value
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Adds a new key and boolean value into the attributes.
+  ///
+  /// If `key` is already exists, current value will be replaced with new `val`.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `attributes` (in): The attributes handle
+  /// - `key` (in): The key
+  /// - `val` (in): The value
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
   int iotcon_attributes_add_bool(
     iotcon_attributes_h attributes,
     ffi.Pointer<ffi.Char> key,
@@ -1337,18 +1736,26 @@ class Tizen65Iotcon {
       _iotcon_attributes_add_boolPtr.asFunction<
           int Function(iotcon_attributes_h, ffi.Pointer<ffi.Char>, bool)>();
 
-  /// @brief Adds a new key and double value into the attributes.
-  /// @details If @a key is already exists, current value will be replaced with new @a val.
-  /// @since_tizen 3.0
-  /// @param[in] attributes The attributes handle
-  /// @param[in] key The key
-  /// @param[in] val The value
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Adds a new key and double value into the attributes.
+  ///
+  /// If `key` is already exists, current value will be replaced with new `val`.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `attributes` (in): The attributes handle
+  /// - `key` (in): The key
+  /// - `val` (in): The value
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
   int iotcon_attributes_add_double(
     iotcon_attributes_h attributes,
     ffi.Pointer<ffi.Char> key,
@@ -1369,18 +1776,26 @@ class Tizen65Iotcon {
       _iotcon_attributes_add_doublePtr.asFunction<
           int Function(iotcon_attributes_h, ffi.Pointer<ffi.Char>, double)>();
 
-  /// @brief Adds a new key and string value into the attributes.
-  /// @details If @a key is already exists, current value will be replaced with new @a val.
-  /// @since_tizen 3.0
-  /// @param[in] attributes The attributes handle
-  /// @param[in] key The key
-  /// @param[in] val The value
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Adds a new key and string value into the attributes.
+  ///
+  /// If `key` is already exists, current value will be replaced with new `val`.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `attributes` (in): The attributes handle
+  /// - `key` (in): The key
+  /// - `val` (in): The value
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
   int iotcon_attributes_add_str(
     iotcon_attributes_h attributes,
     ffi.Pointer<ffi.Char> key,
@@ -1402,19 +1817,27 @@ class Tizen65Iotcon {
           int Function(iotcon_attributes_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Adds a new key and byte string value into the attributes.
-  /// @details If @a key is already exists, current value will be replaced with new @a val.
-  /// @since_tizen 3.0
-  /// @param[in] attributes The attributes handle
-  /// @param[in] key The key
-  /// @param[in] val The value
-  /// @param[in] len The length of @a val
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Adds a new key and byte string value into the attributes.
+  ///
+  /// If `key` is already exists, current value will be replaced with new `val`.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `attributes` (in): The attributes handle
+  /// - `key` (in): The key
+  /// - `val` (in): The value
+  /// - `len` (in): The length of `val`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
   int iotcon_attributes_add_byte_str(
     iotcon_attributes_h attributes,
     ffi.Pointer<ffi.Char> key,
@@ -1441,18 +1864,26 @@ class Tizen65Iotcon {
           int Function(iotcon_attributes_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.UnsignedChar>, int)>();
 
-  /// @brief Adds a new key and list value into the attributes.
-  /// @details If @a key already exists, current list will be replaced with new @a list.
-  /// @since_tizen 3.0
-  /// @param[in] attributes The attributes handle
-  /// @param[in] key The key
-  /// @param[in] list The value
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Adds a new key and list value into the attributes.
+  ///
+  /// If `key` already exists, current list will be replaced with new `list`.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `attributes` (in): The attributes handle
+  /// - `key` (in): The key
+  /// - `list` (in): The value
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
   int iotcon_attributes_add_list(
     iotcon_attributes_h attributes,
     ffi.Pointer<ffi.Char> key,
@@ -1474,18 +1905,26 @@ class Tizen65Iotcon {
           int Function(
               iotcon_attributes_h, ffi.Pointer<ffi.Char>, iotcon_list_h)>();
 
-  /// @brief Adds a new key and attributes value into the attributes.
-  /// @details If @a key already exists, current attributes will be replaced with new @a src.
-  /// @since_tizen 3.0
-  /// @param[in] dest The attributes handle
-  /// @param[in] key The key
-  /// @param[in] src The attributes handle to set newly
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Adds a new key and attributes value into the attributes.
+  ///
+  /// If `key` already exists, current attributes will be replaced with new `src`.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `dest` (in): The attributes handle
+  /// - `key` (in): The key
+  /// - `src` (in): The attributes handle to set newly
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
   int iotcon_attributes_add_attributes(
     iotcon_attributes_h dest,
     ffi.Pointer<ffi.Char> key,
@@ -1507,17 +1946,25 @@ class Tizen65Iotcon {
           int Function(iotcon_attributes_h, ffi.Pointer<ffi.Char>,
               iotcon_attributes_h)>();
 
-  /// @brief Adds a new key with NULL value into the attributes.
-  /// @details If @a key already exists, current value will be replaced with NULL.
-  /// @since_tizen 3.0
-  /// @param[in] attributes The attributes handle
-  /// @param[in] key The key to be set NULL
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Adds a new key with NULL value into the attributes.
+  ///
+  /// If `key` already exists, current value will be replaced with NULL.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `attributes` (in): The attributes handle
+  /// - `key` (in): The key to be set NULL
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
   int iotcon_attributes_add_null(
     iotcon_attributes_h attributes,
     ffi.Pointer<ffi.Char> key,
@@ -1535,18 +1982,25 @@ class Tizen65Iotcon {
   late final _iotcon_attributes_add_null = _iotcon_attributes_add_nullPtr
       .asFunction<int Function(iotcon_attributes_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the integer value from the given key.
-  /// @since_tizen 3.0
-  /// @param[in] attributes The attributes handle
-  /// @param[in] key The key
-  /// @param[out] val The integer value
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IOTCON_ERROR_NO_DATA No data available
-  /// @retval #IOTCON_ERROR_INVALID_TYPE Invalid type
+  /// Gets the integer value from the given key.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `attributes` (in): The attributes handle
+  /// - `key` (in): The key
+  /// - `val` (out): The integer value
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IOTCON_ERROR_NO_DATA`: No data available
+  /// - `IOTCON_ERROR_INVALID_TYPE`: Invalid type
   int iotcon_attributes_get_int(
     iotcon_attributes_h attributes,
     ffi.Pointer<ffi.Char> key,
@@ -1568,18 +2022,25 @@ class Tizen65Iotcon {
           int Function(iotcon_attributes_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the boolean value from the given key.
-  /// @since_tizen 3.0
-  /// @param[in] attributes The attributes handle
-  /// @param[in] key The key
-  /// @param[out] val The boolean value
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IOTCON_ERROR_NO_DATA No data available
-  /// @retval #IOTCON_ERROR_INVALID_TYPE Invalid type
+  /// Gets the boolean value from the given key.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `attributes` (in): The attributes handle
+  /// - `key` (in): The key
+  /// - `val` (out): The boolean value
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IOTCON_ERROR_NO_DATA`: No data available
+  /// - `IOTCON_ERROR_INVALID_TYPE`: Invalid type
   int iotcon_attributes_get_bool(
     iotcon_attributes_h attributes,
     ffi.Pointer<ffi.Char> key,
@@ -1601,18 +2062,25 @@ class Tizen65Iotcon {
           int Function(iotcon_attributes_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Gets the double value from the given key.
-  /// @since_tizen 3.0
-  /// @param[in] attributes The attributes handle
-  /// @param[in] key The key
-  /// @param[out] val The double value
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IOTCON_ERROR_NO_DATA No data available
-  /// @retval #IOTCON_ERROR_INVALID_TYPE Invalid type
+  /// Gets the double value from the given key.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `attributes` (in): The attributes handle
+  /// - `key` (in): The key
+  /// - `val` (out): The double value
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IOTCON_ERROR_NO_DATA`: No data available
+  /// - `IOTCON_ERROR_INVALID_TYPE`: Invalid type
   int iotcon_attributes_get_double(
     iotcon_attributes_h attributes,
     ffi.Pointer<ffi.Char> key,
@@ -1634,19 +2102,28 @@ class Tizen65Iotcon {
           int Function(iotcon_attributes_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Double>)>();
 
-  /// @brief Gets the string value from the given key.
-  /// @since_tizen 3.0
-  /// @remarks @a val must not be released using free().
-  /// @param[in] attributes The attributes handle
-  /// @param[in] key The key
-  /// @param[out] val The string value
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IOTCON_ERROR_NO_DATA No data available
-  /// @retval #IOTCON_ERROR_INVALID_TYPE Invalid type
+  /// Gets the string value from the given key.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - `val` must not be released using free().
+  ///
+  /// **Parameters:**
+  /// - `attributes` (in): The attributes handle
+  /// - `key` (in): The key
+  /// - `val` (out): The string value
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IOTCON_ERROR_NO_DATA`: No data available
+  /// - `IOTCON_ERROR_INVALID_TYPE`: Invalid type
   int iotcon_attributes_get_str(
     iotcon_attributes_h attributes,
     ffi.Pointer<ffi.Char> key,
@@ -1669,20 +2146,29 @@ class Tizen65Iotcon {
           int Function(iotcon_attributes_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the byte string value from the given key.
-  /// @since_tizen 3.0
-  /// @remarks @a val must not be released using free().
-  /// @param[in] attributes The attributes handle
-  /// @param[in] key The key
-  /// @param[out] val The byte string value
-  /// @param[out] len The length of @a val
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IOTCON_ERROR_NO_DATA No data available
-  /// @retval #IOTCON_ERROR_INVALID_TYPE Invalid type
+  /// Gets the byte string value from the given key.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - `val` must not be released using free().
+  ///
+  /// **Parameters:**
+  /// - `attributes` (in): The attributes handle
+  /// - `key` (in): The key
+  /// - `val` (out): The byte string value
+  /// - `len` (out): The length of `val`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IOTCON_ERROR_NO_DATA`: No data available
+  /// - `IOTCON_ERROR_INVALID_TYPE`: Invalid type
   int iotcon_attributes_get_byte_str(
     iotcon_attributes_h attributes,
     ffi.Pointer<ffi.Char> key,
@@ -1712,19 +2198,28 @@ class Tizen65Iotcon {
               ffi.Pointer<ffi.Pointer<ffi.UnsignedChar>>,
               ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Gets the list value from the given key.
-  /// @since_tizen 3.0
-  /// @remarks @a list must not be released using iotcon_list_destroy().
-  /// @param[in] attributes The attributes handle
-  /// @param[in] key The key
-  /// @param[out] list The list value
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IOTCON_ERROR_NO_DATA No data available
-  /// @retval #IOTCON_ERROR_INVALID_TYPE Invalid type
+  /// Gets the list value from the given key.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - `list` must not be released using iotcon_list_destroy().
+  ///
+  /// **Parameters:**
+  /// - `attributes` (in): The attributes handle
+  /// - `key` (in): The key
+  /// - `list` (out): The list value
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IOTCON_ERROR_NO_DATA`: No data available
+  /// - `IOTCON_ERROR_INVALID_TYPE`: Invalid type
   int iotcon_attributes_get_list(
     iotcon_attributes_h attributes,
     ffi.Pointer<ffi.Char> key,
@@ -1746,19 +2241,28 @@ class Tizen65Iotcon {
           int Function(iotcon_attributes_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<iotcon_list_h>)>();
 
-  /// @brief Gets the attributes value from the given key.
-  /// @since_tizen 3.0
-  /// @remarks @a attributes must not be released using iotcon_attributes_destroy().
-  /// @param[in] src The attributes handle
-  /// @param[in] key The key
-  /// @param[out] dest The attributes value at the key
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IOTCON_ERROR_NO_DATA No data available
-  /// @retval #IOTCON_ERROR_INVALID_TYPE Invalid type
+  /// Gets the attributes value from the given key.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - `attributes` must not be released using iotcon_attributes_destroy().
+  ///
+  /// **Parameters:**
+  /// - `src` (in): The attributes handle
+  /// - `key` (in): The key
+  /// - `dest` (out): The attributes value at the key
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IOTCON_ERROR_NO_DATA`: No data available
+  /// - `IOTCON_ERROR_INVALID_TYPE`: Invalid type
   int iotcon_attributes_get_attributes(
     iotcon_attributes_h src,
     ffi.Pointer<ffi.Char> key,
@@ -1781,17 +2285,23 @@ class Tizen65Iotcon {
           int Function(iotcon_attributes_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<iotcon_attributes_h>)>();
 
-  /// @brief Checks whether the value of given key is NULL or not.
-  /// @since_tizen 3.0
-  /// @param[in] attributes The attributes handle
-  /// @param[in] key The key
-  /// @param[out] is_null true if the type of the given key is null,
-  /// otherwise false
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Checks whether the value of given key is NULL or not.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `attributes` (in): The attributes handle
+  /// - `key` (in): The key
+  /// - `is_null` (out): true if the type of the given key is null, otherwise false
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
   int iotcon_attributes_is_null(
     iotcon_attributes_h attributes,
     ffi.Pointer<ffi.Char> key,
@@ -1813,16 +2323,23 @@ class Tizen65Iotcon {
           int Function(iotcon_attributes_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Bool>)>();
 
-  /// @brief Removes the key and its associated value from the attributes.
-  /// @since_tizen 3.0
-  /// @param[in] attributes The attributes handle
-  /// @param[in] key The key
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IOTCON_ERROR_NO_DATA No data available
+  /// Removes the key and its associated value from the attributes.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `attributes` (in): The attributes handle
+  /// - `key` (in): The key
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IOTCON_ERROR_NO_DATA`: No data available
   int iotcon_attributes_remove(
     iotcon_attributes_h attributes,
     ffi.Pointer<ffi.Char> key,
@@ -1840,19 +2357,26 @@ class Tizen65Iotcon {
   late final _iotcon_attributes_remove = _iotcon_attributes_removePtr
       .asFunction<int Function(iotcon_attributes_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets the type of a value at the given key.
-  /// @details It gets the data type of value related to the @a key in @a attributes.
-  /// The data type could be one of #iotcon_type_e.
-  /// @since_tizen 3.0
-  /// @param[in] attributes The attributes handle
-  /// @param[in] key The key
-  /// @param[out] type The data type of value related to the key in attributes handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IOTCON_ERROR_NO_DATA No data available
+  /// Gets the type of a value at the given key.
+  ///
+  /// It gets the data type of value related to the `key` in `attributes`. The data type could be one of `iotcon_type_e`.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `attributes` (in): The attributes handle
+  /// - `key` (in): The key
+  /// - `type` (out): The data type of value related to the key in attributes handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IOTCON_ERROR_NO_DATA`: No data available
   int iotcon_attributes_get_type(
     iotcon_attributes_h attributes,
     ffi.Pointer<ffi.Char> key,
@@ -1874,19 +2398,31 @@ class Tizen65Iotcon {
           int Function(iotcon_attributes_h, ffi.Pointer<ffi.Char>,
               ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Calls a function for each element of attributes.
-  /// @details iotcon_attributes_cb() will be called for each child.
-  /// @since_tizen 3.0
-  /// @param[in] attributes The attributes handle
-  /// @param[in] cb The callback function to invoke
-  /// @param[in] user_data The user data to pass to the function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @post iotcon_attributes_cb() will be called for each child.
-  /// @see iotcon_attributes_cb()
+  /// Calls a function for each element of attributes.
+  ///
+  /// iotcon_attributes_cb() will be called for each child.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `attributes` (in): The attributes handle
+  /// - `cb` (in): The callback function to invoke
+  /// - `user_data` (in): The user data to pass to the function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Postconditions:**
+  /// - iotcon_attributes_cb() will be called for each child.
+  ///
+  /// **See also:**
+  /// - `iotcon_attributes_cb()`
   int iotcon_attributes_foreach(
     iotcon_attributes_h attributes,
     iotcon_attributes_cb cb,
@@ -1908,15 +2444,22 @@ class Tizen65Iotcon {
           int Function(iotcon_attributes_h, iotcon_attributes_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Gets the number of keys in the attributes.
-  /// @since_tizen 3.0
-  /// @param[in] attributes The attributes handle
-  /// @param[out] count The number of keys
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Gets the number of keys in the attributes.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `attributes` (in): The attributes handle
+  /// - `count` (out): The number of keys
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
   int iotcon_attributes_get_keys_count(
     iotcon_attributes_h attributes,
     ffi.Pointer<ffi.UnsignedInt> count,
@@ -1936,20 +2479,31 @@ class Tizen65Iotcon {
       _iotcon_attributes_get_keys_countPtr.asFunction<
           int Function(iotcon_attributes_h, ffi.Pointer<ffi.UnsignedInt>)>();
 
-  /// @brief Creates a new option handle.
-  /// @since_tizen 3.0
-  /// @remarks You must destroy @a options by calling iotcon_options_destroy() if @a options is no longer needed.
-  /// @param[out] options A newly allocated option handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see iotcon_options_destroy()
-  /// @see iotcon_options_add()
-  /// @see iotcon_options_remove()
-  /// @see iotcon_options_lookup()
+  /// Creates a new option handle.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - You must destroy `options` by calling iotcon_options_destroy() if `options` is no longer needed.
+  ///
+  /// **Parameters:**
+  /// - `options` (out): A newly allocated option handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `iotcon_options_destroy()`
+  /// - `iotcon_options_add()`
+  /// - `iotcon_options_remove()`
+  /// - `iotcon_options_lookup()`
   int iotcon_options_create(
     ffi.Pointer<iotcon_options_h> options,
   ) {
@@ -1964,18 +2518,27 @@ class Tizen65Iotcon {
   late final _iotcon_options_create = _iotcon_options_createPtr
       .asFunction<int Function(ffi.Pointer<iotcon_options_h>)>();
 
-  /// @brief Destroys an option handle.
-  /// @since_tizen 3.0
-  /// @param[in] options The handle of the options
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see iotcon_options_create()
-  /// @see iotcon_options_add()
-  /// @see iotcon_options_remove()
-  /// @see iotcon_options_lookup()
+  /// Destroys an option handle.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `options` (in): The handle of the options
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `iotcon_options_create()`
+  /// - `iotcon_options_add()`
+  /// - `iotcon_options_remove()`
+  /// - `iotcon_options_lookup()`
   int iotcon_options_destroy(
     iotcon_options_h options,
   ) {
@@ -1990,24 +2553,35 @@ class Tizen65Iotcon {
   late final _iotcon_options_destroy =
       _iotcon_options_destroyPtr.asFunction<int Function(iotcon_options_h)>();
 
-  /// @brief Adds a new ID and a corresponding data into the options.
-  /// @since_tizen 3.0
-  /// @remarks iotcon_options_h can have up to 2 options. \n
-  /// Option ID is always situated between 2048 and 3000. \n
-  /// Length of option data is less than or equal to 15.
-  /// @param[in] options The handle of the options
-  /// @param[in] id The ID of the option to insert
-  /// @param[in] data The string data to insert into the options
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see iotcon_options_create()
-  /// @see iotcon_options_destroy()
-  /// @see iotcon_options_remove()
-  /// @see iotcon_options_lookup()
+  /// Adds a new ID and a corresponding data into the options.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - iotcon_options_h can have up to 2 options.
+  /// - Option ID is always situated between 2048 and 3000.
+  /// - Length of option data is less than or equal to 15.
+  ///
+  /// **Parameters:**
+  /// - `options` (in): The handle of the options
+  /// - `id` (in): The ID of the option to insert
+  /// - `data` (in): The string data to insert into the options
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `iotcon_options_create()`
+  /// - `iotcon_options_destroy()`
+  /// - `iotcon_options_remove()`
+  /// - `iotcon_options_lookup()`
   int iotcon_options_add(
     iotcon_options_h options,
     int id,
@@ -2027,19 +2601,28 @@ class Tizen65Iotcon {
   late final _iotcon_options_add = _iotcon_options_addPtr
       .asFunction<int Function(iotcon_options_h, int, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Removes the ID and its associated data from the options.
-  /// @since_tizen 3.0
-  /// @param[in] options The handle of the options
-  /// @param[in] id The ID of the option to delete
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see iotcon_options_create()
-  /// @see iotcon_options_destroy()
-  /// @see iotcon_options_add()
-  /// @see iotcon_options_lookup()
+  /// Removes the ID and its associated data from the options.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `options` (in): The handle of the options
+  /// - `id` (in): The ID of the option to delete
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `iotcon_options_create()`
+  /// - `iotcon_options_destroy()`
+  /// - `iotcon_options_add()`
+  /// - `iotcon_options_lookup()`
   int iotcon_options_remove(
     iotcon_options_h options,
     int id,
@@ -2057,21 +2640,32 @@ class Tizen65Iotcon {
   late final _iotcon_options_remove = _iotcon_options_removePtr
       .asFunction<int Function(iotcon_options_h, int)>();
 
-  /// @brief Looks up data at the given ID from the options.
-  /// @since_tizen 3.0
-  /// @remarks @a data must not be released using free().
-  /// @param[in] options The handle of the options
-  /// @param[in] id The ID of the option to lookup
-  /// @param[out] data Found data from options
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see iotcon_options_create()
-  /// @see iotcon_options_destroy()
-  /// @see iotcon_options_add()
-  /// @see iotcon_options_remove()
+  /// Looks up data at the given ID from the options.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - `data` must not be released using free().
+  ///
+  /// **Parameters:**
+  /// - `options` (in): The handle of the options
+  /// - `id` (in): The ID of the option to lookup
+  /// - `data` (out): Found data from options
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `iotcon_options_create()`
+  /// - `iotcon_options_destroy()`
+  /// - `iotcon_options_add()`
+  /// - `iotcon_options_remove()`
   int iotcon_options_lookup(
     iotcon_options_h options,
     int id,
@@ -2092,20 +2686,31 @@ class Tizen65Iotcon {
       int Function(
           iotcon_options_h, int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets all data of the options by invoking the callback function.
-  /// @details iotcon_options_foreach_cb() will be called for each option. \n
-  /// If iotcon_options_foreach_cb() returns false, iteration will be stopped.
-  /// @since_tizen 3.0
-  /// @param[in] options The handle of the options
-  /// @param[in] cb The callback function to get data
-  /// @param[in] user_data The user data to pass to the function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @post iotcon_options_foreach_cb() will be called for each option.
-  /// @see iotcon_options_foreach_cb()
+  /// Gets all data of the options by invoking the callback function.
+  ///
+  /// iotcon_options_foreach_cb() will be called for each option. If iotcon_options_foreach_cb() returns false, iteration will be stopped.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `options` (in): The handle of the options
+  /// - `cb` (in): The callback function to get data
+  /// - `user_data` (in): The user data to pass to the function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Postconditions:**
+  /// - iotcon_options_foreach_cb() will be called for each option.
+  ///
+  /// **See also:**
+  /// - `iotcon_options_foreach_cb()`
   int iotcon_options_foreach(
     iotcon_options_h options,
     iotcon_options_foreach_cb cb,
@@ -2126,17 +2731,28 @@ class Tizen65Iotcon {
       int Function(iotcon_options_h, iotcon_options_foreach_cb,
           ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Creates a new Representation handle.
-  /// @since_tizen 3.0
-  /// @remarks You must destroy @a repr by calling iotcon_representation_destroy() if @a repr is no longer needed.
-  /// @param[out] repr A newly allocated Representation handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see iotcon_representation_destroy()
+  /// Creates a new Representation handle.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - You must destroy `repr` by calling iotcon_representation_destroy() if `repr` is no longer needed.
+  ///
+  /// **Parameters:**
+  /// - `repr` (out): A newly allocated Representation handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `iotcon_representation_destroy()`
   int iotcon_representation_create(
     ffi.Pointer<iotcon_representation_h> repr,
   ) {
@@ -2152,16 +2768,26 @@ class Tizen65Iotcon {
   late final _iotcon_representation_create = _iotcon_representation_createPtr
       .asFunction<int Function(ffi.Pointer<iotcon_representation_h>)>();
 
-  /// @brief Destroys a Representation.
-  /// @details Releases @a Representation and its internal data.
-  /// @since_tizen 3.0
-  /// @param[in] repr The representation handle to free
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see iotcon_representation_create()
+  /// Destroys a Representation.
+  ///
+  /// Releases `Representation` and its internal data.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `repr` (in): The representation handle to free
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `iotcon_representation_create()`
   int iotcon_representation_destroy(
     iotcon_representation_h repr,
   ) {
@@ -2176,16 +2802,26 @@ class Tizen65Iotcon {
   late final _iotcon_representation_destroy = _iotcon_representation_destroyPtr
       .asFunction<int Function(iotcon_representation_h)>();
 
-  /// @brief Clones from the source Representation.
-  /// @details Makes a deep copy of a source Representation.
-  /// @since_tizen 3.0
-  /// @remarks You must destroy @a dest by calling iotcon_representation_destroy() if @a dest is no longer needed.
-  /// @param[in] src Source of Representation to be copied
-  /// @param[out] dest Clone of a source Representation
-  /// @return Clone of a source Representation,
-  /// otherwise NULL on failure
-  /// @retval iotcon_representation_h Success
-  /// @retval NULL Failure
+  /// Clones from the source Representation.
+  ///
+  /// Makes a deep copy of a source Representation.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - You must destroy `dest` by calling iotcon_representation_destroy() if `dest` is no longer needed.
+  ///
+  /// **Parameters:**
+  /// - `src` (in): Source of Representation to be copied
+  /// - `dest` (out): Clone of a source Representation
+  ///
+  /// **Returns:**
+  /// - Clone of a source Representation, otherwise NULL on failure
+  ///
+  /// **Return values:**
+  /// - `iotcon_representation_h`: Success
+  /// - `NULL`: Failure
   int iotcon_representation_clone(
     iotcon_representation_h src,
     ffi.Pointer<iotcon_representation_h> dest,
@@ -2206,17 +2842,26 @@ class Tizen65Iotcon {
           int Function(
               iotcon_representation_h, ffi.Pointer<iotcon_representation_h>)>();
 
-  /// @brief Appends resource type name.
-  /// @since_tizen 3.0
-  /// @remarks Stored string is replaced with @a uri_path. If @a uri_path is NULL, stored string is set to NULL.
-  /// @param[in] repr The handle to the Representation
-  /// @param[in] uri_path The URI of resource
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Appends resource type name.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - Stored string is replaced with `uri_path`. If `uri_path` is NULL, stored string is set to NULL.
+  ///
+  /// **Parameters:**
+  /// - `repr` (in): The handle to the Representation
+  /// - `uri_path` (in): The URI of resource
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
   int iotcon_representation_set_uri_path(
     iotcon_representation_h repr,
     ffi.Pointer<ffi.Char> uri_path,
@@ -2235,17 +2880,26 @@ class Tizen65Iotcon {
       _iotcon_representation_set_uri_pathPtr.asFunction<
           int Function(iotcon_representation_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets a URI path from the Representation.
-  /// @since_tizen 3.0
-  /// @remarks @a uri_path must not be released using free().
-  /// @param[in] repr The Representation handle
-  /// @param[out] uri_path The URI path to get
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IOTCON_ERROR_NO_DATA No data available
+  /// Gets a URI path from the Representation.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - `uri_path` must not be released using free().
+  ///
+  /// **Parameters:**
+  /// - `repr` (in): The Representation handle
+  /// - `uri_path` (out): The URI path to get
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IOTCON_ERROR_NO_DATA`: No data available
   int iotcon_representation_get_uri_path(
     iotcon_representation_h repr,
     ffi.Pointer<ffi.Pointer<ffi.Char>> uri_path,
@@ -2266,16 +2920,25 @@ class Tizen65Iotcon {
           int Function(
               iotcon_representation_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Sets resource type list to the Representation.
-  /// @since_tizen 3.0
-  /// @remarks Stored list is replaced with @a types. If @a types is NULL, stored list is set to NULL.
-  /// @param[in] repr The handle to the Representation
-  /// @param[in] types The resource type list
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Sets resource type list to the Representation.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - Stored list is replaced with `types`. If `types` is NULL, stored list is set to NULL.
+  ///
+  /// **Parameters:**
+  /// - `repr` (in): The handle to the Representation
+  /// - `types` (in): The resource type list
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
   int iotcon_representation_set_resource_types(
     iotcon_representation_h repr,
     iotcon_resource_types_h types,
@@ -2295,16 +2958,25 @@ class Tizen65Iotcon {
       _iotcon_representation_set_resource_typesPtr.asFunction<
           int Function(iotcon_representation_h, iotcon_resource_types_h)>();
 
-  /// @brief Gets list of resource type from the Representation.
-  /// @since_tizen 3.0
-  /// @remarks @a types must not be released using iotcon_resource_types_destroy().
-  /// @param[in] repr The Representation handle
-  /// @param[out] types The list of resource types to get
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Gets list of resource type from the Representation.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - `types` must not be released using iotcon_resource_types_destroy().
+  ///
+  /// **Parameters:**
+  /// - `repr` (in): The Representation handle
+  /// - `types` (out): The list of resource types to get
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
   int iotcon_representation_get_resource_types(
     iotcon_representation_h repr,
     ffi.Pointer<iotcon_resource_types_h> types,
@@ -2325,16 +2997,25 @@ class Tizen65Iotcon {
           int Function(
               iotcon_representation_h, ffi.Pointer<iotcon_resource_types_h>)>();
 
-  /// @brief Sets list of resource interfaces to the Representation.
-  /// @since_tizen 3.0
-  /// @remarks Stored list is replaced with @a ifaces. If @a ifaces is NULL, stored list is set to NULL.
-  /// @param[in] repr The Representation handle
-  /// @param[in] ifaces The list of resource interfaces
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Sets list of resource interfaces to the Representation.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - Stored list is replaced with `ifaces`. If `ifaces` is NULL, stored list is set to NULL.
+  ///
+  /// **Parameters:**
+  /// - `repr` (in): The Representation handle
+  /// - `ifaces` (in): The list of resource interfaces
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
   int iotcon_representation_set_resource_interfaces(
     iotcon_representation_h repr,
     iotcon_resource_interfaces_h ifaces,
@@ -2355,16 +3036,25 @@ class Tizen65Iotcon {
           int Function(
               iotcon_representation_h, iotcon_resource_interfaces_h)>();
 
-  /// @brief Gets list of resource interfaces from the Representation.
-  /// @since_tizen 3.0
-  /// @remarks @a ifaces must not be released using iotcon_resource_interfaces_destroy().
-  /// @param[in] repr The Representation handle
-  /// @param[out] ifaces The list of resource interfaces to get
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Gets list of resource interfaces from the Representation.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - `ifaces` must not be released using iotcon_resource_interfaces_destroy().
+  ///
+  /// **Parameters:**
+  /// - `repr` (in): The Representation handle
+  /// - `ifaces` (out): The list of resource interfaces to get
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
   int iotcon_representation_get_resource_interfaces(
     iotcon_representation_h repr,
     ffi.Pointer<iotcon_resource_interfaces_h> ifaces,
@@ -2385,16 +3075,23 @@ class Tizen65Iotcon {
           int Function(iotcon_representation_h,
               ffi.Pointer<iotcon_resource_interfaces_h>)>();
 
-  /// @brief Sets a new attributes handle into the Representation.
-  /// @since_tizen 3.0
-  /// @param[in] repr The Representation handle
-  /// @param[in] attributes The attributes handle to be set newly
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Sets a new attributes handle into the Representation.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `repr` (in): The Representation handle
+  /// - `attributes` (in): The attributes handle to be set newly
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
   int iotcon_representation_set_attributes(
     iotcon_representation_h repr,
     iotcon_attributes_h attributes,
@@ -2413,16 +3110,25 @@ class Tizen65Iotcon {
       _iotcon_representation_set_attributesPtr.asFunction<
           int Function(iotcon_representation_h, iotcon_attributes_h)>();
 
-  /// @brief Gets the attributes handle in the Representation.
-  /// @since_tizen 3.0
-  /// @remarks @a attributes must not be released using iotcon_attributes_destroy().
-  /// @param[in] repr The Representation handle
-  /// @param[in] attributes The attributes handle to get
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Gets the attributes handle in the Representation.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - `attributes` must not be released using iotcon_attributes_destroy().
+  ///
+  /// **Parameters:**
+  /// - `repr` (in): The Representation handle
+  /// - `attributes` (in): The attributes handle to get
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
   int iotcon_representation_get_attributes(
     iotcon_representation_h repr,
     ffi.Pointer<iotcon_attributes_h> attributes,
@@ -2443,16 +3149,24 @@ class Tizen65Iotcon {
           int Function(
               iotcon_representation_h, ffi.Pointer<iotcon_attributes_h>)>();
 
-  /// @brief Adds a new child Representation on to the end of the parent Representation.
-  /// @details Duplicated child Representation is allowed to append.
-  /// @since_tizen 3.0
-  /// @param[in] parent The parent Representation handle
-  /// @param[in] child The child Representation handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Adds a new child Representation on to the end of the parent Representation.
+  ///
+  /// Duplicated child Representation is allowed to append.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `parent` (in): The parent Representation handle
+  /// - `child` (in): The child Representation handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
   int iotcon_representation_add_child(
     iotcon_representation_h parent,
     iotcon_representation_h child,
@@ -2471,15 +3185,22 @@ class Tizen65Iotcon {
       _iotcon_representation_add_childPtr.asFunction<
           int Function(iotcon_representation_h, iotcon_representation_h)>();
 
-  /// @brief Removes a child Representation from parent Representation without freeing.
-  /// @since_tizen 3.0
-  /// @param[in] parent The parent Representation handle
-  /// @param[in] child The child Representation handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Removes a child Representation from parent Representation without freeing.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `parent` (in): The parent Representation handle
+  /// - `child` (in): The child Representation handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
   int iotcon_representation_remove_child(
     iotcon_representation_h parent,
     iotcon_representation_h child,
@@ -2498,19 +3219,31 @@ class Tizen65Iotcon {
       _iotcon_representation_remove_childPtr.asFunction<
           int Function(iotcon_representation_h, iotcon_representation_h)>();
 
-  /// @brief Calls a function for each child Representation of parent.
-  /// @details iotcon_children_cb() will be called for each child.
-  /// @since_tizen 3.0
-  /// @param[in] parent The parent Representation handle
-  /// @param[in] cb The callback function to invoke
-  /// @param[in] user_data The user data to pass to the function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @post iotcon_children_cb() will be called for each child.
-  /// @see iotcon_children_cb()
+  /// Calls a function for each child Representation of parent.
+  ///
+  /// iotcon_children_cb() will be called for each child.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `parent` (in): The parent Representation handle
+  /// - `cb` (in): The callback function to invoke
+  /// - `user_data` (in): The user data to pass to the function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Postconditions:**
+  /// - iotcon_children_cb() will be called for each child.
+  ///
+  /// **See also:**
+  /// - `iotcon_children_cb()`
   int iotcon_representation_foreach_children(
     iotcon_representation_h parent,
     iotcon_children_cb cb,
@@ -2533,15 +3266,22 @@ class Tizen65Iotcon {
           int Function(iotcon_representation_h, iotcon_children_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Gets the number of child Representations in the parent Representation.
-  /// @since_tizen 3.0
-  /// @param[in] parent The parent Representation handle
-  /// @param[out] count The number of child Representations
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Gets the number of child Representations in the parent Representation.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `parent` (in): The parent Representation handle
+  /// - `count` (out): The number of child Representations
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
   int iotcon_representation_get_child_count(
     iotcon_representation_h parent,
     ffi.Pointer<ffi.UnsignedInt> count,
@@ -2562,19 +3302,29 @@ class Tizen65Iotcon {
           int Function(
               iotcon_representation_h, ffi.Pointer<ffi.UnsignedInt>)>();
 
-  /// @brief Gets the child Representation at the given position.
-  /// @details Iterates over the parent until it reaches the @a pos-1 position.
-  /// @since_tizen 3.0
-  /// @remarks @a child must not be released using iotcon_representation_destroy().
-  /// @param[in] parent The parent Representation handle
-  /// @param[in] pos The position of the child Representation
-  /// @param[out] child The handle to the child Representation
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IOTCON_ERROR_NO_DATA  No data available
+  /// Gets the child Representation at the given position.
+  ///
+  /// Iterates over the parent until it reaches the `pos-1` position.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - `child` must not be released using iotcon_representation_destroy().
+  ///
+  /// **Parameters:**
+  /// - `parent` (in): The parent Representation handle
+  /// - `pos` (in): The position of the child Representation
+  /// - `child` (out): The handle to the child Representation
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IOTCON_ERROR_NO_DATA`: No data available
   int iotcon_representation_get_nth_child(
     iotcon_representation_h parent,
     int pos,
@@ -2597,20 +3347,31 @@ class Tizen65Iotcon {
           int Function(iotcon_representation_h, int,
               ffi.Pointer<iotcon_representation_h>)>();
 
-  /// @brief Creates a new resource types handle.
-  /// @since_tizen 3.0
-  /// @remarks You must destroy @a types by calling iotcon_resource_types_destroy() if @a types is no longer needed.
-  /// @param[out] types A newly allocated list of resource types handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see iotcon_resource_types_destroy()
-  /// @see iotcon_resource_types_add()
-  /// @see iotcon_resource_types_remove()
-  /// @see iotcon_resource_types_clone()
+  /// Creates a new resource types handle.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - You must destroy `types` by calling iotcon_resource_types_destroy() if `types` is no longer needed.
+  ///
+  /// **Parameters:**
+  /// - `types` (out): A newly allocated list of resource types handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `iotcon_resource_types_destroy()`
+  /// - `iotcon_resource_types_add()`
+  /// - `iotcon_resource_types_remove()`
+  /// - `iotcon_resource_types_clone()`
   int iotcon_resource_types_create(
     ffi.Pointer<iotcon_resource_types_h> types,
   ) {
@@ -2626,18 +3387,27 @@ class Tizen65Iotcon {
   late final _iotcon_resource_types_create = _iotcon_resource_types_createPtr
       .asFunction<int Function(ffi.Pointer<iotcon_resource_types_h>)>();
 
-  /// @brief Destroys a resource types handle.
-  /// @since_tizen 3.0
-  /// @param[in] types The handle of the resource types
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see iotcon_resource_types_create()
-  /// @see iotcon_resource_types_add()
-  /// @see iotcon_resource_types_remove()
-  /// @see iotcon_resource_types_clone()
+  /// Destroys a resource types handle.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `types` (in): The handle of the resource types
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `iotcon_resource_types_create()`
+  /// - `iotcon_resource_types_add()`
+  /// - `iotcon_resource_types_remove()`
+  /// - `iotcon_resource_types_clone()`
   int iotcon_resource_types_destroy(
     iotcon_resource_types_h types,
   ) {
@@ -2652,24 +3422,35 @@ class Tizen65Iotcon {
   late final _iotcon_resource_types_destroy = _iotcon_resource_types_destroyPtr
       .asFunction<int Function(iotcon_resource_types_h)>();
 
-  /// @brief Inserts a resource types into the list.
-  /// @since_tizen 3.0
-  /// @remarks The length of @a type should be less than or equal to 61.\n
-  /// The @a type must start with a lowercase alphabetic character, followed by a sequence
-  /// of lowercase alphabetic, numeric, ".", or "-" characters, and contains no white space.\n
-  /// Duplicate strings are not allowed.
-  /// @param[in] types The handle of the resource types
-  /// @param[in] type The string data to insert into the resource types (e.g. "org.tizen.light")
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IOTCON_ERROR_ALREADY Already done
-  /// @see iotcon_resource_types_create()
-  /// @see iotcon_resource_types_destroy()
-  /// @see iotcon_resource_types_remove()
-  /// @see iotcon_resource_types_clone()
+  /// Inserts a resource types into the list.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - The length of `type` should be less than or equal to 61.
+  /// - The `type` must start with a lowercase alphabetic character, followed by a sequence
+  /// - of lowercase alphabetic, numeric, ".", or "-" characters, and contains no white space.
+  /// - Duplicate strings are not allowed.
+  ///
+  /// **Parameters:**
+  /// - `types` (in): The handle of the resource types
+  /// - `type` (in): The string data to insert into the resource types (e.g. "org.tizen.light")
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IOTCON_ERROR_ALREADY`: Already done
+  ///
+  /// **See also:**
+  /// - `iotcon_resource_types_create()`
+  /// - `iotcon_resource_types_destroy()`
+  /// - `iotcon_resource_types_remove()`
+  /// - `iotcon_resource_types_clone()`
   int iotcon_resource_types_add(
     iotcon_resource_types_h types,
     ffi.Pointer<ffi.Char> type,
@@ -2688,20 +3469,29 @@ class Tizen65Iotcon {
       _iotcon_resource_types_addPtr.asFunction<
           int Function(iotcon_resource_types_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Deletes a resource types from the list.
-  /// @since_tizen 3.0
-  /// @param[in] types The handle of the resource types
-  /// @param[in] type The string data to delete from the resource types
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IOTCON_ERROR_NO_DATA No data available
-  /// @see iotcon_resource_types_create()
-  /// @see iotcon_resource_types_destroy()
-  /// @see iotcon_resource_types_add()
-  /// @see iotcon_resource_types_clone()
+  /// Deletes a resource types from the list.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `types` (in): The handle of the resource types
+  /// - `type` (in): The string data to delete from the resource types
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IOTCON_ERROR_NO_DATA`: No data available
+  ///
+  /// **See also:**
+  /// - `iotcon_resource_types_create()`
+  /// - `iotcon_resource_types_destroy()`
+  /// - `iotcon_resource_types_add()`
+  /// - `iotcon_resource_types_clone()`
   int iotcon_resource_types_remove(
     iotcon_resource_types_h types,
     ffi.Pointer<ffi.Char> type,
@@ -2720,20 +3510,31 @@ class Tizen65Iotcon {
       _iotcon_resource_types_removePtr.asFunction<
           int Function(iotcon_resource_types_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets all of the resource types of the list by invoking the callback function.
-  /// @details iotcon_resource_types_foreach_cb() will be called for each type. \n
-  /// If iotcon_resource_types_foreach_cb() returns false, iteration will be stopped.
-  /// @since_tizen 3.0
-  /// @param[in] types The handle of resource types
-  /// @param[in] cb The callback function to get data
-  /// @param[in] user_data The user data to pass to the function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @post iotcon_resource_types_foreach() will be called for each type.
-  /// @see iotcon_resource_types_foreach_cb()
+  /// Gets all of the resource types of the list by invoking the callback function.
+  ///
+  /// iotcon_resource_types_foreach_cb() will be called for each type. If iotcon_resource_types_foreach_cb() returns false, iteration will be stopped.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `types` (in): The handle of resource types
+  /// - `cb` (in): The callback function to get data
+  /// - `user_data` (in): The user data to pass to the function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Postconditions:**
+  /// - iotcon_resource_types_foreach() will be called for each type.
+  ///
+  /// **See also:**
+  /// - `iotcon_resource_types_foreach_cb()`
   int iotcon_resource_types_foreach(
     iotcon_resource_types_h types,
     iotcon_resource_types_foreach_cb cb,
@@ -2757,21 +3558,33 @@ class Tizen65Iotcon {
           int Function(iotcon_resource_types_h,
               iotcon_resource_types_foreach_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Clones the resource types handle.
-  /// @details Makes a deep copy of a source list of resource types.
-  /// @since_tizen 3.0
-  /// @remarks You must @a destroy dest by calling iotcon_resource_types_destroy() if @a dest is no longer needed.
-  /// @param[in] src The origin handle of the resource types
-  /// @param[out] dest Clone of a source list of resource types
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see iotcon_resource_types_create()
-  /// @see iotcon_resource_types_destroy()
-  /// @see iotcon_resource_types_add()
-  /// @see iotcon_resource_types_remove()
+  /// Clones the resource types handle.
+  ///
+  /// Makes a deep copy of a source list of resource types.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - You must `destroy` dest by calling iotcon_resource_types_destroy() if `dest` is no longer needed.
+  ///
+  /// **Parameters:**
+  /// - `src` (in): The origin handle of the resource types
+  /// - `dest` (out): Clone of a source list of resource types
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `iotcon_resource_types_create()`
+  /// - `iotcon_resource_types_destroy()`
+  /// - `iotcon_resource_types_add()`
+  /// - `iotcon_resource_types_remove()`
   int iotcon_resource_types_clone(
     iotcon_resource_types_h src,
     ffi.Pointer<iotcon_resource_types_h> dest,
@@ -2792,20 +3605,31 @@ class Tizen65Iotcon {
           int Function(
               iotcon_resource_types_h, ffi.Pointer<iotcon_resource_types_h>)>();
 
-  /// @brief Creates a new resource interfaces handle.
-  /// @since_tizen 3.0
-  /// @remarks You must destroy @a ifaces by calling iotcon_resource_interfaces_destroy() if @a ifaces is no longer needed.
-  /// @param[out] ifaces A newly allocated list of resource ifaces handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see iotcon_resource_interfaces_destroy()
-  /// @see iotcon_resource_interfaces_add()
-  /// @see iotcon_resource_interfaces_remove()
-  /// @see iotcon_resource_interfaces_clone()
+  /// Creates a new resource interfaces handle.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - You must destroy `ifaces` by calling iotcon_resource_interfaces_destroy() if `ifaces` is no longer needed.
+  ///
+  /// **Parameters:**
+  /// - `ifaces` (out): A newly allocated list of resource ifaces handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `iotcon_resource_interfaces_destroy()`
+  /// - `iotcon_resource_interfaces_add()`
+  /// - `iotcon_resource_interfaces_remove()`
+  /// - `iotcon_resource_interfaces_clone()`
   int iotcon_resource_interfaces_create(
     ffi.Pointer<iotcon_resource_interfaces_h> ifaces,
   ) {
@@ -2822,18 +3646,27 @@ class Tizen65Iotcon {
       _iotcon_resource_interfaces_createPtr.asFunction<
           int Function(ffi.Pointer<iotcon_resource_interfaces_h>)>();
 
-  /// @brief Destroys a resource ifaces handle.
-  /// @since_tizen 3.0
-  /// @param[in] ifaces The handle of the resource ifaces
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see iotcon_resource_interfaces_create()
-  /// @see iotcon_resource_interfaces_add()
-  /// @see iotcon_resource_interfaces_remove()
-  /// @see iotcon_resource_interfaces_clone()
+  /// Destroys a resource ifaces handle.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `ifaces` (in): The handle of the resource ifaces
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `iotcon_resource_interfaces_create()`
+  /// - `iotcon_resource_interfaces_add()`
+  /// - `iotcon_resource_interfaces_remove()`
+  /// - `iotcon_resource_interfaces_clone()`
   int iotcon_resource_interfaces_destroy(
     iotcon_resource_interfaces_h ifaces,
   ) {
@@ -2849,21 +3682,32 @@ class Tizen65Iotcon {
       _iotcon_resource_interfaces_destroyPtr
           .asFunction<int Function(iotcon_resource_interfaces_h)>();
 
-  /// @brief Inserts a resource iface into the list.
-  /// @since_tizen 3.0
-  /// @remarks @a iface could be a value such as #IOTCON_INTERFACE_DEFAULT.
-  /// @param[in] ifaces The handle of the resource ifaces
-  /// @param[in] iface The string data to insert into the resource ifaces
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IOTCON_ERROR_ALREADY Already done
-  /// @see iotcon_resource_interfaces_create()
-  /// @see iotcon_resource_interfaces_destroy()
-  /// @see iotcon_resource_interfaces_remove()
-  /// @see iotcon_resource_interfaces_clone()
+  /// Inserts a resource iface into the list.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - `iface` could be a value such as `IOTCON_INTERFACE_DEFAULT`.
+  ///
+  /// **Parameters:**
+  /// - `ifaces` (in): The handle of the resource ifaces
+  /// - `iface` (in): The string data to insert into the resource ifaces
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IOTCON_ERROR_ALREADY`: Already done
+  ///
+  /// **See also:**
+  /// - `iotcon_resource_interfaces_create()`
+  /// - `iotcon_resource_interfaces_destroy()`
+  /// - `iotcon_resource_interfaces_remove()`
+  /// - `iotcon_resource_interfaces_clone()`
   int iotcon_resource_interfaces_add(
     iotcon_resource_interfaces_h ifaces,
     ffi.Pointer<ffi.Char> iface,
@@ -2882,21 +3726,32 @@ class Tizen65Iotcon {
       _iotcon_resource_interfaces_addPtr.asFunction<
           int Function(iotcon_resource_interfaces_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Deletes a resource iface from the list.
-  /// @since_tizen 3.0
-  /// @remarks @a iface could be a value such as #IOTCON_INTERFACE_DEFAULT.
-  /// @param[in] ifaces The handle of the resource ifaces
-  /// @param[in] iface The string data to delete from the resource ifaces
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IOTCON_ERROR_NO_DATA No data available
-  /// @see iotcon_resource_interfaces_create()
-  /// @see iotcon_resource_interfaces_destroy()
-  /// @see iotcon_resource_interfaces_add()
-  /// @see iotcon_resource_interfaces_clone()
+  /// Deletes a resource iface from the list.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - `iface` could be a value such as `IOTCON_INTERFACE_DEFAULT`.
+  ///
+  /// **Parameters:**
+  /// - `ifaces` (in): The handle of the resource ifaces
+  /// - `iface` (in): The string data to delete from the resource ifaces
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IOTCON_ERROR_NO_DATA`: No data available
+  ///
+  /// **See also:**
+  /// - `iotcon_resource_interfaces_create()`
+  /// - `iotcon_resource_interfaces_destroy()`
+  /// - `iotcon_resource_interfaces_add()`
+  /// - `iotcon_resource_interfaces_clone()`
   int iotcon_resource_interfaces_remove(
     iotcon_resource_interfaces_h ifaces,
     ffi.Pointer<ffi.Char> iface,
@@ -2915,20 +3770,31 @@ class Tizen65Iotcon {
       _iotcon_resource_interfaces_removePtr.asFunction<
           int Function(iotcon_resource_interfaces_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Gets all of the resource ifaces of the list by invoking the callback function.
-  /// @details iotcon_resource_interfaces_foreach_cb() will be called for each iface. \n
-  /// If iotcon_resource_interfaces_foreach_cb() returns false, iteration will be stopped.
-  /// @since_tizen 3.0
-  /// @param[in] ifaces The handle of resource ifaces
-  /// @param[in] cb The callback function to get data
-  /// @param[in] user_data The user data to pass to the function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @post iotcon_resource_interfaces_foreach() will be called for each iface.
-  /// @see iotcon_resource_interfaces_foreach_cb()
+  /// Gets all of the resource ifaces of the list by invoking the callback function.
+  ///
+  /// iotcon_resource_interfaces_foreach_cb() will be called for each iface. If iotcon_resource_interfaces_foreach_cb() returns false, iteration will be stopped.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `ifaces` (in): The handle of resource ifaces
+  /// - `cb` (in): The callback function to get data
+  /// - `user_data` (in): The user data to pass to the function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Postconditions:**
+  /// - iotcon_resource_interfaces_foreach() will be called for each iface.
+  ///
+  /// **See also:**
+  /// - `iotcon_resource_interfaces_foreach_cb()`
   int iotcon_resource_interfaces_foreach(
     iotcon_resource_interfaces_h ifaces,
     iotcon_resource_interfaces_foreach_cb cb,
@@ -2952,21 +3818,33 @@ class Tizen65Iotcon {
           int Function(iotcon_resource_interfaces_h,
               iotcon_resource_interfaces_foreach_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Clones the resource ifaces handle.
-  /// @details Makes a deep copy of a source list of resource ifaces.
-  /// @since_tizen 3.0
-  /// @remarks You must @a destroy dest by calling iotcon_resource_interfaces_destroy() if @a dest is no longer needed.
-  /// @param[in] src The origin handle of the resource ifaces
-  /// @param[out] dest Clone of a source list of resource ifaces
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see iotcon_resource_interfaces_create()
-  /// @see iotcon_resource_interfaces_destroy()
-  /// @see iotcon_resource_interfaces_add()
-  /// @see iotcon_resource_interfaces_remove()
+  /// Clones the resource ifaces handle.
+  ///
+  /// Makes a deep copy of a source list of resource ifaces.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - You must `destroy` dest by calling iotcon_resource_interfaces_destroy() if `dest` is no longer needed.
+  ///
+  /// **Parameters:**
+  /// - `src` (in): The origin handle of the resource ifaces
+  /// - `dest` (out): Clone of a source list of resource ifaces
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `iotcon_resource_interfaces_create()`
+  /// - `iotcon_resource_interfaces_destroy()`
+  /// - `iotcon_resource_interfaces_add()`
+  /// - `iotcon_resource_interfaces_remove()`
   int iotcon_resource_interfaces_clone(
     iotcon_resource_interfaces_h src,
     ffi.Pointer<iotcon_resource_interfaces_h> dest,
@@ -2987,44 +3865,57 @@ class Tizen65Iotcon {
           int Function(iotcon_resource_interfaces_h,
               ffi.Pointer<iotcon_resource_interfaces_h>)>();
 
-  /// @brief Creates a resource handle and registers the resource in server.
-  /// @details Registers a resource specified by @a uri_path, @a res_types, @a ifaces which has @a properties in IoTCon server. \n
-  /// When client finds the registered resource, iotcon_request_handler_cb() will be called automatically. \n
-  /// @a uri_path format would be relative URI path like '/a/light' \n
-  /// @a res_types is a list of resource types. Create a iotcon_resource_types_h handle and add types string to it. \n
-  /// @a ifaces is a list of resource interfaces. Create a iotcon_resource_interfaces_h handle and add interfaces string to it. \n
-  /// @a policies also can contain multiple policies like #IOTCON_RESOURCE_DISCOVERABLE | #IOTCON_RESOURCE_OBSERVABLE. \n
-  /// iotcon_request_handler_cb() will be called when receive CRUD request to the registered resource.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/internet
-  /// @remarks @a uri_path length must be less than 128. \n
-  /// You must destroy @a resource by calling iotcon_resource_destroy() if @a resource is no longer needed.
-  /// @param[in] uri_path The URI path of the resource
-  /// @param[in] res_types The list of type of the resource
-  /// @param[in] ifaces The list of interface of the resource
-  /// @param[in] policies The policies of the resource \n
-  /// Set of #iotcon_resource_policy_e
-  /// @param[in] cb The request handler callback function
-  /// @param[in] user_data The user data to pass to the callback function
-  /// @param[out] resource_handle The handle of the resource
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IOTCON_ERROR_IOTIVITY IoTivity errors
-  /// @retval #IOTCON_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #IOTCON_ERROR_PERMISSION_DENIED Permission denied
-  /// @pre iotcon_initialize() should be called to initialize.
-  /// @post When the resource receive CRUD request, iotcon_request_handler_cb() will be called.
-  /// @see iotcon_resource_destroy()
-  /// @see iotcon_resource_bind_interface()
-  /// @see iotcon_resource_bind_type()
-  /// @see iotcon_resource_set_request_handler()
-  /// @see iotcon_resource_bind_child_resource()
-  /// @see iotcon_resource_unbind_child_resource()
-  /// @see iotcon_request_handler_cb()
+  /// Creates a resource handle and registers the resource in server.
+  ///
+  /// Registers a resource specified by `uri_path`, `res_types`, `ifaces` which has `properties` in IoTCon server. When client finds the registered resource, iotcon_request_handler_cb() will be called automatically. `uri_path` format would be relative URI path like '/a/light' `res_types` is a list of resource types. Create a iotcon_resource_types_h handle and add types string to it. `ifaces` is a list of resource interfaces. Create a iotcon_resource_interfaces_h handle and add interfaces string to it. `policies` also can contain multiple policies like `IOTCON_RESOURCE_DISCOVERABLE` | `IOTCON_RESOURCE_OBSERVABLE`. iotcon_request_handler_cb() will be called when receive CRUD request to the registered resource.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/internet>
+  ///
+  /// **Remarks:**
+  /// - `uri_path` length must be less than 128.
+  /// - You must destroy `resource` by calling iotcon_resource_destroy() if `resource` is no longer needed.
+  ///
+  /// **Parameters:**
+  /// - `uri_path` (in): The URI path of the resource
+  /// - `res_types` (in): The list of type of the resource
+  /// - `ifaces` (in): The list of interface of the resource
+  /// - `policies` (in): The policies of the resource Set of `iotcon_resource_policy_e`
+  /// - `cb` (in): The request handler callback function
+  /// - `user_data` (in): The user data to pass to the callback function
+  /// - `resource_handle` (out): The handle of the resource
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IOTCON_ERROR_IOTIVITY`: IoTivity errors
+  /// - `IOTCON_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `IOTCON_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **Preconditions:**
+  /// - iotcon_initialize() should be called to initialize.
+  ///
+  /// **Postconditions:**
+  /// - When the resource receive CRUD request, iotcon_request_handler_cb() will be called.
+  ///
+  /// **See also:**
+  /// - `iotcon_resource_destroy()`
+  /// - `iotcon_resource_bind_interface()`
+  /// - `iotcon_resource_bind_type()`
+  /// - `iotcon_resource_set_request_handler()`
+  /// - `iotcon_resource_bind_child_resource()`
+  /// - `iotcon_resource_unbind_child_resource()`
+  /// - `iotcon_request_handler_cb()`
   int iotcon_resource_create(
     ffi.Pointer<ffi.Char> uri_path,
     iotcon_resource_types_h res_types,
@@ -3065,27 +3956,44 @@ class Tizen65Iotcon {
           ffi.Pointer<ffi.Void>,
           ffi.Pointer<iotcon_resource_h>)>();
 
-  /// @brief Destroys the resource and releases its data.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/internet
-  /// @remarks When a normal variable is used, there is only permission denied error.
-  /// If the errors of this API are not handled, then you must check an application has the privileges for the API.
-  /// @param[in] resource_handle The handle of the resource to be unregistered
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IOTCON_ERROR_PERMISSION_DENIED Permission denied
-  /// @pre iotcon_initialize() should be called to initialize.
-  /// @see iotcon_resource_create()
-  /// @see iotcon_resource_bind_interface()
-  /// @see iotcon_resource_bind_type()
-  /// @see iotcon_resource_set_request_handler()
-  /// @see iotcon_resource_bind_child_resource()
-  /// @see iotcon_resource_unbind_child_resource()
-  /// @see iotcon_request_handler_cb()
+  /// Destroys the resource and releases its data.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/internet>
+  ///
+  /// **Remarks:**
+  /// - When a normal variable is used, there is only permission denied error.
+  /// - If the errors of this API are not handled, then you must check an application has the privileges for the API.
+  ///
+  /// **Parameters:**
+  /// - `resource_handle` (in): The handle of the resource to be unregistered
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IOTCON_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **Preconditions:**
+  /// - iotcon_initialize() should be called to initialize.
+  ///
+  /// **See also:**
+  /// - `iotcon_resource_create()`
+  /// - `iotcon_resource_bind_interface()`
+  /// - `iotcon_resource_bind_type()`
+  /// - `iotcon_resource_set_request_handler()`
+  /// - `iotcon_resource_bind_child_resource()`
+  /// - `iotcon_resource_unbind_child_resource()`
+  /// - `iotcon_request_handler_cb()`
   int iotcon_resource_destroy(
     iotcon_resource_h resource_handle,
   ) {
@@ -3100,29 +4008,46 @@ class Tizen65Iotcon {
   late final _iotcon_resource_destroy =
       _iotcon_resource_destroyPtr.asFunction<int Function(iotcon_resource_h)>();
 
-  /// @brief Binds an interface to the resource.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/internet
-  /// @remarks @a iface could be a value such as #IOTCON_INTERFACE_DEFAULT.
-  /// @param[in] resource The handle of the resource
-  /// @param[in] iface The interface to be bound to the resource
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IOTCON_ERROR_SYSTEM System error
-  /// @retval #IOTCON_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #IOTCON_ERROR_ALREADY Already done
-  /// @pre iotcon_initialize() should be called to initialize.
-  /// @see iotcon_resource_create()
-  /// @see iotcon_resource_destroy()
-  /// @see iotcon_resource_bind_type()
-  /// @see iotcon_resource_set_request_handler()
-  /// @see iotcon_resource_bind_child_resource()
-  /// @see iotcon_resource_unbind_child_resource()
-  /// @see iotcon_request_handler_cb()
+  /// Binds an interface to the resource.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/internet>
+  ///
+  /// **Remarks:**
+  /// - `iface` could be a value such as `IOTCON_INTERFACE_DEFAULT`.
+  ///
+  /// **Parameters:**
+  /// - `resource` (in): The handle of the resource
+  /// - `iface` (in): The interface to be bound to the resource
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IOTCON_ERROR_SYSTEM`: System error
+  /// - `IOTCON_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `IOTCON_ERROR_ALREADY`: Already done
+  ///
+  /// **Preconditions:**
+  /// - iotcon_initialize() should be called to initialize.
+  ///
+  /// **See also:**
+  /// - `iotcon_resource_create()`
+  /// - `iotcon_resource_destroy()`
+  /// - `iotcon_resource_bind_type()`
+  /// - `iotcon_resource_set_request_handler()`
+  /// - `iotcon_resource_bind_child_resource()`
+  /// - `iotcon_resource_unbind_child_resource()`
+  /// - `iotcon_request_handler_cb()`
   int iotcon_resource_bind_interface(
     iotcon_resource_h resource,
     ffi.Pointer<ffi.Char> iface,
@@ -3141,31 +4066,48 @@ class Tizen65Iotcon {
       _iotcon_resource_bind_interfacePtr
           .asFunction<int Function(iotcon_resource_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Binds a type to the resource.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/internet
-  /// @remarks The length of @a resource_type should be less than or equal to 61.\n
-  /// The @a resource_type must start with a lowercase alphabetic character, followed by a sequence
-  /// of lowercase alphabetic, numeric, ".", or "-" characters, and contains no white space.
-  /// @param[in] resource_handle The handle of the resource
-  /// @param[in] resource_type The type to be bound to the resource
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IOTCON_ERROR_SYSTEM System error
-  /// @retval #IOTCON_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #IOTCON_ERROR_ALREADY Already done
-  /// @pre iotcon_initialize() should be called to initialize.
-  /// @see iotcon_resource_create()
-  /// @see iotcon_resource_destroy()
-  /// @see iotcon_resource_bind_interface()
-  /// @see iotcon_resource_set_request_handler()
-  /// @see iotcon_resource_bind_child_resource()
-  /// @see iotcon_resource_unbind_child_resource()
-  /// @see iotcon_request_handler_cb()
+  /// Binds a type to the resource.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/internet>
+  ///
+  /// **Remarks:**
+  /// - The length of `resource_type` should be less than or equal to 61.
+  /// - The `resource_type` must start with a lowercase alphabetic character, followed by a sequence
+  /// - of lowercase alphabetic, numeric, ".", or "-" characters, and contains no white space.
+  ///
+  /// **Parameters:**
+  /// - `resource_handle` (in): The handle of the resource
+  /// - `resource_type` (in): The type to be bound to the resource
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IOTCON_ERROR_SYSTEM`: System error
+  /// - `IOTCON_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `IOTCON_ERROR_ALREADY`: Already done
+  ///
+  /// **Preconditions:**
+  /// - iotcon_initialize() should be called to initialize.
+  ///
+  /// **See also:**
+  /// - `iotcon_resource_create()`
+  /// - `iotcon_resource_destroy()`
+  /// - `iotcon_resource_bind_interface()`
+  /// - `iotcon_resource_set_request_handler()`
+  /// - `iotcon_resource_bind_child_resource()`
+  /// - `iotcon_resource_unbind_child_resource()`
+  /// - `iotcon_request_handler_cb()`
   int iotcon_resource_bind_type(
     iotcon_resource_h resource_handle,
     ffi.Pointer<ffi.Char> resource_type,
@@ -3183,25 +4125,37 @@ class Tizen65Iotcon {
   late final _iotcon_resource_bind_type = _iotcon_resource_bind_typePtr
       .asFunction<int Function(iotcon_resource_h, ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Sets a request handler to the resource.
-  /// @details When the resource receive CRUD request, iotcon_request_handler_cb() will be called.
-  /// @since_tizen 3.0
-  /// @remarks Registered callback function will be replaced with the new @a cb.
-  /// @param[in] resource The handle of the resource
-  /// @param[in] cb The request handler to be bound to the resource
-  /// @param[in] user_data The user data to pass to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see iotcon_resource_create()
-  /// @see iotcon_resource_destroy()
-  /// @see iotcon_resource_bind_interface()
-  /// @see iotcon_resource_bind_type()
-  /// @see iotcon_resource_bind_child_resource()
-  /// @see iotcon_resource_unbind_child_resource()
-  /// @see iotcon_request_handler_cb()
+  /// Sets a request handler to the resource.
+  ///
+  /// When the resource receive CRUD request, iotcon_request_handler_cb() will be called.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - Registered callback function will be replaced with the new `cb`.
+  ///
+  /// **Parameters:**
+  /// - `resource` (in): The handle of the resource
+  /// - `cb` (in): The request handler to be bound to the resource
+  /// - `user_data` (in): The user data to pass to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `iotcon_resource_create()`
+  /// - `iotcon_resource_destroy()`
+  /// - `iotcon_resource_bind_interface()`
+  /// - `iotcon_resource_bind_type()`
+  /// - `iotcon_resource_bind_child_resource()`
+  /// - `iotcon_resource_unbind_child_resource()`
+  /// - `iotcon_request_handler_cb()`
   int iotcon_resource_set_request_handler(
     iotcon_resource_h resource,
     iotcon_request_handler_cb cb,
@@ -3223,28 +4177,43 @@ class Tizen65Iotcon {
           int Function(iotcon_resource_h, iotcon_request_handler_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Binds a child resource into the parent resource.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/internet
-  /// @param[in] parent The handle of the parent resource
-  /// @param[in] child The handle of the child resource to be added to the parent resource
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IOTCON_ERROR_ALREADY Already done
-  /// @retval #IOTCON_ERROR_SYSTEM System error
-  /// @retval #IOTCON_ERROR_PERMISSION_DENIED Permission denied
-  /// @pre iotcon_initialize() should be called to initialize.
-  /// @see iotcon_resource_create()
-  /// @see iotcon_resource_destroy()
-  /// @see iotcon_resource_bind_interface()
-  /// @see iotcon_resource_bind_type()
-  /// @see iotcon_resource_set_request_handler()
-  /// @see iotcon_resource_unbind_child_resource()
-  /// @see iotcon_request_handler_cb()
+  /// Binds a child resource into the parent resource.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/internet>
+  ///
+  /// **Parameters:**
+  /// - `parent` (in): The handle of the parent resource
+  /// - `child` (in): The handle of the child resource to be added to the parent resource
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IOTCON_ERROR_ALREADY`: Already done
+  /// - `IOTCON_ERROR_SYSTEM`: System error
+  /// - `IOTCON_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **Preconditions:**
+  /// - iotcon_initialize() should be called to initialize.
+  ///
+  /// **See also:**
+  /// - `iotcon_resource_create()`
+  /// - `iotcon_resource_destroy()`
+  /// - `iotcon_resource_bind_interface()`
+  /// - `iotcon_resource_bind_type()`
+  /// - `iotcon_resource_set_request_handler()`
+  /// - `iotcon_resource_unbind_child_resource()`
+  /// - `iotcon_request_handler_cb()`
   int iotcon_resource_bind_child_resource(
     iotcon_resource_h parent,
     iotcon_resource_h child,
@@ -3263,28 +4232,43 @@ class Tizen65Iotcon {
       _iotcon_resource_bind_child_resourcePtr
           .asFunction<int Function(iotcon_resource_h, iotcon_resource_h)>();
 
-  /// @brief Unbinds a child resource from the parent resource.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/internet
-  /// @param[in] parent The handle of the parent resource
-  /// @param[in] child The handle of the child resource to be unbound from the parent resource
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IOTCON_ERROR_SYSTEM System error
-  /// @retval #IOTCON_ERROR_PERMISSION_DENIED Permission denied
-  /// @retval #IOTCON_ERROR_NO_DATA No data available
-  /// @pre iotcon_initialize() should be called to initialize.
-  /// @see iotcon_resource_create()
-  /// @see iotcon_resource_destroy()
-  /// @see iotcon_resource_bind_interface()
-  /// @see iotcon_resource_bind_type()
-  /// @see iotcon_resource_set_request_handler()
-  /// @see iotcon_resource_bind_child_resource()
-  /// @see iotcon_request_handler_cb()
+  /// Unbinds a child resource from the parent resource.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/internet>
+  ///
+  /// **Parameters:**
+  /// - `parent` (in): The handle of the parent resource
+  /// - `child` (in): The handle of the child resource to be unbound from the parent resource
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IOTCON_ERROR_SYSTEM`: System error
+  /// - `IOTCON_ERROR_PERMISSION_DENIED`: Permission denied
+  /// - `IOTCON_ERROR_NO_DATA`: No data available
+  ///
+  /// **Preconditions:**
+  /// - iotcon_initialize() should be called to initialize.
+  ///
+  /// **See also:**
+  /// - `iotcon_resource_create()`
+  /// - `iotcon_resource_destroy()`
+  /// - `iotcon_resource_bind_interface()`
+  /// - `iotcon_resource_bind_type()`
+  /// - `iotcon_resource_set_request_handler()`
+  /// - `iotcon_resource_bind_child_resource()`
+  /// - `iotcon_request_handler_cb()`
   int iotcon_resource_unbind_child_resource(
     iotcon_resource_h parent,
     iotcon_resource_h child,
@@ -3303,31 +4287,47 @@ class Tizen65Iotcon {
       _iotcon_resource_unbind_child_resourcePtr
           .asFunction<int Function(iotcon_resource_h, iotcon_resource_h)>();
 
-  /// @brief Notifies specific clients that resource's attributes have changed.
-  /// @details If @a observers is @c NULL, the @a msg will notify to all observers.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/internet
-  /// @param[in] resource The handle of the resource
-  /// @param[in] repr The handle of the representation
-  /// @param[in] observers The handle of the observers
-  /// @param[in] qos The quality of service for message transfer
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IOTCON_ERROR_REPRESENTATION Representation error
-  /// @retval #IOTCON_ERROR_SYSTEM System error
-  /// @retval #IOTCON_ERROR_PERMISSION_DENIED Permission denied
-  /// @pre iotcon_initialize() should be called to initialize.
-  /// @see iotcon_remote_resource_observe_cb()
-  /// @see iotcon_remote_resource_observe_register()
-  /// @see iotcon_remote_resource_observe_deregister()
-  /// @see iotcon_observers_create()
-  /// @see iotcon_observers_destroy()
-  /// @see iotcon_observers_add()
-  /// @see iotcon_observers_remove()
+  /// Notifies specific clients that resource's attributes have changed.
+  ///
+  /// If `observers` is `NULL`, the `msg` will notify to all observers.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/internet>
+  ///
+  /// **Parameters:**
+  /// - `resource` (in): The handle of the resource
+  /// - `repr` (in): The handle of the representation
+  /// - `observers` (in): The handle of the observers
+  /// - `qos` (in): The quality of service for message transfer
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IOTCON_ERROR_REPRESENTATION`: Representation error
+  /// - `IOTCON_ERROR_SYSTEM`: System error
+  /// - `IOTCON_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **Preconditions:**
+  /// - iotcon_initialize() should be called to initialize.
+  ///
+  /// **See also:**
+  /// - `iotcon_remote_resource_observe_cb()`
+  /// - `iotcon_remote_resource_observe_register()`
+  /// - `iotcon_remote_resource_observe_deregister()`
+  /// - `iotcon_observers_create()`
+  /// - `iotcon_observers_destroy()`
+  /// - `iotcon_observers_add()`
+  /// - `iotcon_observers_remove()`
   int iotcon_resource_notify(
     iotcon_resource_h resource,
     iotcon_representation_h repr,
@@ -3350,20 +4350,29 @@ class Tizen65Iotcon {
       int Function(iotcon_resource_h, iotcon_representation_h,
           iotcon_observers_h, int)>();
 
-  /// @brief Gets the number of child resources of the resource.
-  /// @since_tizen 3.0
-  /// @param[in] resource The handle of the resource
-  /// @param[out] count The number of child resources
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see iotcon_resource_get_nth_child()
-  /// @see iotcon_resource_get_uri_path()
-  /// @see iotcon_resource_get_types()
-  /// @see iotcon_resource_get_interfaces()
-  /// @see iotcon_resource_get_policies()
+  /// Gets the number of child resources of the resource.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `resource` (in): The handle of the resource
+  /// - `count` (out): The number of child resources
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `iotcon_resource_get_nth_child()`
+  /// - `iotcon_resource_get_uri_path()`
+  /// - `iotcon_resource_get_types()`
+  /// - `iotcon_resource_get_interfaces()`
+  /// - `iotcon_resource_get_policies()`
   int iotcon_resource_get_child_count(
     iotcon_resource_h resource,
     ffi.Pointer<ffi.UnsignedInt> count,
@@ -3383,23 +4392,34 @@ class Tizen65Iotcon {
       _iotcon_resource_get_child_countPtr.asFunction<
           int Function(iotcon_resource_h, ffi.Pointer<ffi.UnsignedInt>)>();
 
-  /// @brief Gets the child resource at the given index in the parent resource.
-  /// @since_tizen 3.0
-  /// @remarks @a child must not be released using iotcon_resource_destroy().
-  /// @param[in] parent The handle of the parent resource
-  /// @param[in] index The index of the child resource
-  /// @param[out] child The child resource at the index
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IOTCON_ERROR_NO_DATA No data available
-  /// @see iotcon_resource_get_child_count()
-  /// @see iotcon_resource_get_uri_path()
-  /// @see iotcon_resource_get_types()
-  /// @see iotcon_resource_get_interfaces()
-  /// @see iotcon_resource_get_policies()
+  /// Gets the child resource at the given index in the parent resource.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - `child` must not be released using iotcon_resource_destroy().
+  ///
+  /// **Parameters:**
+  /// - `parent` (in): The handle of the parent resource
+  /// - `index` (in): The index of the child resource
+  /// - `child` (out): The child resource at the index
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IOTCON_ERROR_NO_DATA`: No data available
+  ///
+  /// **See also:**
+  /// - `iotcon_resource_get_child_count()`
+  /// - `iotcon_resource_get_uri_path()`
+  /// - `iotcon_resource_get_types()`
+  /// - `iotcon_resource_get_interfaces()`
+  /// - `iotcon_resource_get_policies()`
   int iotcon_resource_get_nth_child(
     iotcon_resource_h parent,
     int index,
@@ -3422,21 +4442,32 @@ class Tizen65Iotcon {
           int Function(
               iotcon_resource_h, int, ffi.Pointer<iotcon_resource_h>)>();
 
-  /// @brief Gets an URI path of the resource.
-  /// @since_tizen 3.0
-  /// @remarks @a uri_path must not be released using free().
-  /// @param[in] resource The handle of the resource
-  /// @param[out] uri_path The URI path of the resource
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see iotcon_resource_get_child_count()
-  /// @see iotcon_resource_get_nth_child()
-  /// @see iotcon_resource_get_types()
-  /// @see iotcon_resource_get_interfaces()
-  /// @see iotcon_resource_get_policies()
+  /// Gets an URI path of the resource.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - `uri_path` must not be released using free().
+  ///
+  /// **Parameters:**
+  /// - `resource` (in): The handle of the resource
+  /// - `uri_path` (out): The URI path of the resource
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `iotcon_resource_get_child_count()`
+  /// - `iotcon_resource_get_nth_child()`
+  /// - `iotcon_resource_get_types()`
+  /// - `iotcon_resource_get_interfaces()`
+  /// - `iotcon_resource_get_policies()`
   int iotcon_resource_get_uri_path(
     iotcon_resource_h resource,
     ffi.Pointer<ffi.Pointer<ffi.Char>> uri_path,
@@ -3457,21 +4488,32 @@ class Tizen65Iotcon {
           int Function(
               iotcon_resource_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the list of types in the resource.
-  /// @since_tizen 3.0
-  /// @remarks @a types must not be released using iotcon_resource_types_destroy().
-  /// @param[in] resource The handle of the resource
-  /// @param[out] types The types of the resource
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see iotcon_resource_get_child_count()
-  /// @see iotcon_resource_get_nth_child()
-  /// @see iotcon_resource_get_uri_path()
-  /// @see iotcon_resource_get_interfaces()
-  /// @see iotcon_resource_get_policies()
+  /// Gets the list of types in the resource.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - `types` must not be released using iotcon_resource_types_destroy().
+  ///
+  /// **Parameters:**
+  /// - `resource` (in): The handle of the resource
+  /// - `types` (out): The types of the resource
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `iotcon_resource_get_child_count()`
+  /// - `iotcon_resource_get_nth_child()`
+  /// - `iotcon_resource_get_uri_path()`
+  /// - `iotcon_resource_get_interfaces()`
+  /// - `iotcon_resource_get_policies()`
   int iotcon_resource_get_types(
     iotcon_resource_h resource,
     ffi.Pointer<iotcon_resource_types_h> types,
@@ -3492,21 +4534,32 @@ class Tizen65Iotcon {
           int Function(
               iotcon_resource_h, ffi.Pointer<iotcon_resource_types_h>)>();
 
-  /// @brief Gets the interfaces of the resource.
-  /// @since_tizen 3.0
-  /// @remarks @a ifaces must not be released using iotcon_resource_interfaces_destroy().
-  /// @param[in] resource The handle of the resource
-  /// @param[out] ifaces The interfaces of the resource
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see iotcon_resource_get_child_count()
-  /// @see iotcon_resource_get_nth_child()
-  /// @see iotcon_resource_get_uri_path()
-  /// @see iotcon_resource_get_types()
-  /// @see iotcon_resource_get_policies()
+  /// Gets the interfaces of the resource.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - `ifaces` must not be released using iotcon_resource_interfaces_destroy().
+  ///
+  /// **Parameters:**
+  /// - `resource` (in): The handle of the resource
+  /// - `ifaces` (out): The interfaces of the resource
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `iotcon_resource_get_child_count()`
+  /// - `iotcon_resource_get_nth_child()`
+  /// - `iotcon_resource_get_uri_path()`
+  /// - `iotcon_resource_get_types()`
+  /// - `iotcon_resource_get_policies()`
   int iotcon_resource_get_interfaces(
     iotcon_resource_h resource,
     ffi.Pointer<iotcon_resource_interfaces_h> ifaces,
@@ -3527,22 +4580,31 @@ class Tizen65Iotcon {
           int Function(
               iotcon_resource_h, ffi.Pointer<iotcon_resource_interfaces_h>)>();
 
-  /// @brief Gets the policies in the resource.
-  /// @details @a policies can contain multiple policies like #IOTCON_RESOURCE_DISCOVERABLE | #IOTCON_RESOURCE_OBSERVABLE.
-  /// @since_tizen 3.0
-  /// @param[in] resource The handle of the resource
-  /// @param[out] policies The policies of resource \n
-  /// Set of #iotcon_resource_policy_e
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see iotcon_resource_get_child_count()
-  /// @see iotcon_resource_get_nth_child()
-  /// @see iotcon_resource_get_uri_path()
-  /// @see iotcon_resource_get_types()
-  /// @see iotcon_resource_get_interfaces()
+  /// Gets the policies in the resource.
+  ///
+  /// `policies` can contain multiple policies like `IOTCON_RESOURCE_DISCOVERABLE` | `IOTCON_RESOURCE_OBSERVABLE`.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `resource` (in): The handle of the resource
+  /// - `policies` (out): The policies of resource Set of `iotcon_resource_policy_e`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `iotcon_resource_get_child_count()`
+  /// - `iotcon_resource_get_nth_child()`
+  /// - `iotcon_resource_get_uri_path()`
+  /// - `iotcon_resource_get_types()`
+  /// - `iotcon_resource_get_interfaces()`
   int iotcon_resource_get_policies(
     iotcon_resource_h resource,
     ffi.Pointer<ffi.Uint8> policies,
@@ -3560,33 +4622,48 @@ class Tizen65Iotcon {
   late final _iotcon_resource_get_policies = _iotcon_resource_get_policiesPtr
       .asFunction<int Function(iotcon_resource_h, ffi.Pointer<ffi.Uint8>)>();
 
-  /// @brief Creates a lite resource handle and registers the resource in server.
-  /// @details Registers a resource specified by @a uri_path, @a res_types, @a attributes which have @a properties in IoTCon server. \n
-  /// When client requests some operations, it send a response to client, automatically.\n
-  /// The @a policies can contain multiple policies like #IOTCON_RESOURCE_DISCOVERABLE | #IOTCON_RESOURCE_OBSERVABLE.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/internet
-  /// @remarks @a uri_path length must be less than 128. \n
-  /// You must destroy @a resource_handle by calling iotcon_lite_resource_destroy() if @a remote_handle is no longer needed.
-  /// @param[in] uri_path The URI path of the resource
-  /// @param[in] res_types The list of type of the resource
-  /// @param[in] policies The policies of the resource \n
-  /// Set of #iotcon_resource_policy_e
-  /// @param[in] attributes The attributes handle to set
-  /// @param[in] cb The callback function to add into callback list
-  /// @param[in] user_data The user data to pass to the callback function
-  /// @param[out] resource_handle The handle of the resource
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IOTCON_ERROR_IOTIVITY IoTivity errors
-  /// @retval #IOTCON_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #IOTCON_ERROR_PERMISSION_DENIED Permission denied
-  /// @pre iotcon_initialize() should be called to initialize.
-  /// @see iotcon_lite_resource_destroy()
+  /// Creates a lite resource handle and registers the resource in server.
+  ///
+  /// Registers a resource specified by `uri_path`, `res_types`, `attributes` which have `properties` in IoTCon server. When client requests some operations, it send a response to client, automatically. The `policies` can contain multiple policies like `IOTCON_RESOURCE_DISCOVERABLE` | `IOTCON_RESOURCE_OBSERVABLE`.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/internet>
+  ///
+  /// **Remarks:**
+  /// - `uri_path` length must be less than 128.
+  /// - You must destroy `resource_handle` by calling iotcon_lite_resource_destroy() if `remote_handle` is no longer needed.
+  ///
+  /// **Parameters:**
+  /// - `uri_path` (in): The URI path of the resource
+  /// - `res_types` (in): The list of type of the resource
+  /// - `policies` (in): The policies of the resource Set of `iotcon_resource_policy_e`
+  /// - `attributes` (in): The attributes handle to set
+  /// - `cb` (in): The callback function to add into callback list
+  /// - `user_data` (in): The user data to pass to the callback function
+  /// - `resource_handle` (out): The handle of the resource
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IOTCON_ERROR_IOTIVITY`: IoTivity errors
+  /// - `IOTCON_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `IOTCON_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **Preconditions:**
+  /// - iotcon_initialize() should be called to initialize.
+  ///
+  /// **See also:**
+  /// - `iotcon_lite_resource_destroy()`
   int iotcon_lite_resource_create(
     ffi.Pointer<ffi.Char> uri_path,
     iotcon_resource_types_h res_types,
@@ -3629,21 +4706,38 @@ class Tizen65Iotcon {
               ffi.Pointer<ffi.Void>,
               ffi.Pointer<iotcon_lite_resource_h>)>();
 
-  /// @brief Destroys the resource and releases its data.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/internet
-  /// @remarks When a normal variable is used, there is only permission denied error.
-  /// If the errors of this API are not handled, then you must check an application having the privileges for the API.
-  /// @param[in] resource The handle of the lite resource to be unregistered
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IOTCON_ERROR_PERMISSION_DENIED Permission denied
-  /// @pre iotcon_initialize() should be called to initialize.
-  /// @see iotcon_lite_resource_create()
+  /// Destroys the resource and releases its data.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/internet>
+  ///
+  /// **Remarks:**
+  /// - When a normal variable is used, there is only permission denied error.
+  /// - If the errors of this API are not handled, then you must check an application having the privileges for the API.
+  ///
+  /// **Parameters:**
+  /// - `resource` (in): The handle of the lite resource to be unregistered
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IOTCON_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **Preconditions:**
+  /// - iotcon_initialize() should be called to initialize.
+  ///
+  /// **See also:**
+  /// - `iotcon_lite_resource_create()`
   int iotcon_lite_resource_destroy(
     iotcon_lite_resource_h resource,
   ) {
@@ -3658,21 +4752,36 @@ class Tizen65Iotcon {
   late final _iotcon_lite_resource_destroy = _iotcon_lite_resource_destroyPtr
       .asFunction<int Function(iotcon_lite_resource_h)>();
 
-  /// @brief Updates attributes into the lite resource handle.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/internet
-  /// @param[in] resource The handle of the lite resource
-  /// @param[in] attributes The attributes handle to update
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IOTCON_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #IOTCON_ERROR_PERMISSION_DENIED Permission denied
-  /// @pre iotcon_initialize() should be called to initialize.
-  /// @see iotcon_lite_resource_get_attributes()
+  /// Updates attributes into the lite resource handle.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/internet>
+  ///
+  /// **Parameters:**
+  /// - `resource` (in): The handle of the lite resource
+  /// - `attributes` (in): The attributes handle to update
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IOTCON_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `IOTCON_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **Preconditions:**
+  /// - iotcon_initialize() should be called to initialize.
+  ///
+  /// **See also:**
+  /// - `iotcon_lite_resource_get_attributes()`
   int iotcon_lite_resource_update_attributes(
     iotcon_lite_resource_h resource,
     iotcon_attributes_h attributes,
@@ -3691,17 +4800,28 @@ class Tizen65Iotcon {
       _iotcon_lite_resource_update_attributesPtr.asFunction<
           int Function(iotcon_lite_resource_h, iotcon_attributes_h)>();
 
-  /// @brief Gets attributes from the lite resource handle.
-  /// @since_tizen 3.0
-  /// @remarks @a attributes must not be released using iotcon_attributes_destroy().
-  /// @param[in] resource The handle of the lite resource
-  /// @param[out] attributes The attributes handle of the lite resource
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see iotcon_lite_resource_update_attributes()
+  /// Gets attributes from the lite resource handle.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - `attributes` must not be released using iotcon_attributes_destroy().
+  ///
+  /// **Parameters:**
+  /// - `resource` (in): The handle of the lite resource
+  /// - `attributes` (out): The attributes handle of the lite resource
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `iotcon_lite_resource_update_attributes()`
   int iotcon_lite_resource_get_attributes(
     iotcon_lite_resource_h resource,
     ffi.Pointer<iotcon_attributes_h> attributes,
@@ -3722,18 +4842,29 @@ class Tizen65Iotcon {
           int Function(
               iotcon_lite_resource_h, ffi.Pointer<iotcon_attributes_h>)>();
 
-  /// @brief Creates a response handle.
-  /// @since_tizen 3.0
-  /// @remarks You must destroy @a response by calling iotcon_response_destroy() if @a response is no longer needed.
-  /// @param[in] request The handle of received request handle
-  /// @param[out] response Generated response handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IOTCON_ERROR_OUT_OF_MEMORY Out of memory
-  /// @see iotcon_response_destroy()
+  /// Creates a response handle.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - You must destroy `response` by calling iotcon_response_destroy() if `response` is no longer needed.
+  ///
+  /// **Parameters:**
+  /// - `request` (in): The handle of received request handle
+  /// - `response` (out): Generated response handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IOTCON_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `iotcon_response_destroy()`
   int iotcon_response_create(
     iotcon_request_h request,
     ffi.Pointer<iotcon_response_h> response,
@@ -3751,15 +4882,24 @@ class Tizen65Iotcon {
   late final _iotcon_response_create = _iotcon_response_createPtr.asFunction<
       int Function(iotcon_request_h, ffi.Pointer<iotcon_response_h>)>();
 
-  /// @brief Destroys a response handle.
-  /// @since_tizen 3.0
-  /// @param[in] resp The handle of the response
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see iotcon_response_create()
+  /// Destroys a response handle.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `resp` (in): The handle of the response
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `iotcon_response_create()`
   int iotcon_response_destroy(
     iotcon_response_h resp,
   ) {
@@ -3774,18 +4914,29 @@ class Tizen65Iotcon {
   late final _iotcon_response_destroy =
       _iotcon_response_destroyPtr.asFunction<int Function(iotcon_response_h)>();
 
-  /// @brief Gets header options of the response.
-  /// @since_tizen 3.0
-  /// @remarks @a options must not be released using iotcon_options_destroy().
-  /// @param[in] resp The handle of the response
-  /// @param[out] options The handle of the header options
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see iotcon_response_get_representation()
-  /// @see iotcon_response_get_result()
+  /// Gets header options of the response.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - `options` must not be released using iotcon_options_destroy().
+  ///
+  /// **Parameters:**
+  /// - `resp` (in): The handle of the response
+  /// - `options` (out): The handle of the header options
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `iotcon_response_get_representation()`
+  /// - `iotcon_response_get_result()`
   int iotcon_response_get_options(
     iotcon_response_h resp,
     ffi.Pointer<iotcon_options_h> options,
@@ -3804,19 +4955,30 @@ class Tizen65Iotcon {
       _iotcon_response_get_optionsPtr.asFunction<
           int Function(iotcon_response_h, ffi.Pointer<iotcon_options_h>)>();
 
-  /// @brief Gets representation of the response.
-  /// @since_tizen 3.0
-  /// @remarks @a repr must not be released using iotcon_representation_destroy().
-  /// @param[in] resp The handle of the response
-  /// @param[out] repr The handle of the representation
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IOTCON_ERROR_NO_DATA No data
-  /// @see iotcon_response_get_options()
-  /// @see iotcon_response_get_result()
+  /// Gets representation of the response.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - `repr` must not be released using iotcon_representation_destroy().
+  ///
+  /// **Parameters:**
+  /// - `resp` (in): The handle of the response
+  /// - `repr` (out): The handle of the representation
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IOTCON_ERROR_NO_DATA`: No data
+  ///
+  /// **See also:**
+  /// - `iotcon_response_get_options()`
+  /// - `iotcon_response_get_result()`
   int iotcon_response_get_representation(
     iotcon_response_h resp,
     ffi.Pointer<iotcon_representation_h> repr,
@@ -3837,17 +4999,26 @@ class Tizen65Iotcon {
           int Function(
               iotcon_response_h, ffi.Pointer<iotcon_representation_h>)>();
 
-  /// @brief Gets result of the response.
-  /// @since_tizen 3.0
-  /// @param[in] resp The handle of the response
-  /// @param[out] result The result of the response
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see iotcon_response_get_options()
-  /// @see iotcon_response_get_representation()
+  /// Gets result of the response.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `resp` (in): The handle of the response
+  /// - `result` (out): The result of the response
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `iotcon_response_get_options()`
+  /// - `iotcon_response_get_representation()`
   int iotcon_response_get_result(
     iotcon_response_h resp,
     ffi.Pointer<ffi.Int32> result,
@@ -3865,19 +5036,29 @@ class Tizen65Iotcon {
   late final _iotcon_response_get_result = _iotcon_response_get_resultPtr
       .asFunction<int Function(iotcon_response_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Sets result into the response.
-  /// @details The @a result could be one of #iotcon_response_result_e.
-  /// @since_tizen 3.0
-  /// @param[in] resp The handle of the response
-  /// @param[in] result The result to set
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IOTCON_ERROR_OUT_OF_MEMORY Out of memory
-  /// @see iotcon_response_create()
-  /// @see iotcon_response_destroy()
+  /// Sets result into the response.
+  ///
+  /// The `result` could be one of `iotcon_response_result_e`.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `resp` (in): The handle of the response
+  /// - `result` (in): The result to set
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IOTCON_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `iotcon_response_create()`
+  /// - `iotcon_response_destroy()`
   int iotcon_response_set_result(
     iotcon_response_h resp,
     int result,
@@ -3894,18 +5075,27 @@ class Tizen65Iotcon {
   late final _iotcon_response_set_result = _iotcon_response_set_resultPtr
       .asFunction<int Function(iotcon_response_h, int)>();
 
-  /// @brief Sets representation into the response.
-  /// @since_tizen 3.0
-  /// @param[in] resp The handle of the response
-  /// @param[in] repr The representation of the response
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IOTCON_ERROR_OUT_OF_MEMORY Out of memory
-  /// @see iotcon_response_create()
-  /// @see iotcon_response_destroy()
+  /// Sets representation into the response.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `resp` (in): The handle of the response
+  /// - `repr` (in): The representation of the response
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IOTCON_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `iotcon_response_create()`
+  /// - `iotcon_response_destroy()`
   int iotcon_response_set_representation(
     iotcon_response_h resp,
     iotcon_representation_h repr,
@@ -3924,18 +5114,27 @@ class Tizen65Iotcon {
       _iotcon_response_set_representationPtr.asFunction<
           int Function(iotcon_response_h, iotcon_representation_h)>();
 
-  /// @brief Sets header options into the response.
-  /// @since_tizen 3.0
-  /// @param[in] resp The handle of the response
-  /// @param[in] options The header options of the response
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IOTCON_ERROR_OUT_OF_MEMORY Out of memory
-  /// @see iotcon_response_create()
-  /// @see iotcon_response_destroy()
+  /// Sets header options into the response.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `resp` (in): The handle of the response
+  /// - `options` (in): The header options of the response
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IOTCON_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `iotcon_response_create()`
+  /// - `iotcon_response_destroy()`
   int iotcon_response_set_options(
     iotcon_response_h resp,
     iotcon_options_h options,
@@ -3953,19 +5152,32 @@ class Tizen65Iotcon {
   late final _iotcon_response_set_options = _iotcon_response_set_optionsPtr
       .asFunction<int Function(iotcon_response_h, iotcon_options_h)>();
 
-  /// @brief Sends response for incoming request.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/internet
-  /// @param[in] resp The handle of the response to send
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IOTCON_ERROR_SYSTEM System error
-  /// @retval #IOTCON_ERROR_PERMISSION_DENIED Permission denied
-  /// @pre iotcon_initialize() should be called to initialize.
+  /// Sends response for incoming request.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/internet>
+  ///
+  /// **Parameters:**
+  /// - `resp` (in): The handle of the response to send
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IOTCON_ERROR_SYSTEM`: System error
+  /// - `IOTCON_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **Preconditions:**
+  /// - iotcon_initialize() should be called to initialize.
   int iotcon_response_send(
     iotcon_response_h resp,
   ) {
@@ -3980,19 +5192,30 @@ class Tizen65Iotcon {
   late final _iotcon_response_send =
       _iotcon_response_sendPtr.asFunction<int Function(iotcon_response_h)>();
 
-  /// @brief Creates a new observers handle.
-  /// @since_tizen 3.0
-  /// @remarks You must destroy @a observers by calling iotcon_observers_destroy() if @a observers is no longer needed.
-  /// @param[out] observers A newly allocated list of observers handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IOTCON_ERROR_OUT_OF_MEMORY Out of memory
-  /// @see iotcon_observers_destroy()
-  /// @see iotcon_observers_add()
-  /// @see iotcon_observers_remove()
+  /// Creates a new observers handle.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - You must destroy `observers` by calling iotcon_observers_destroy() if `observers` is no longer needed.
+  ///
+  /// **Parameters:**
+  /// - `observers` (out): A newly allocated list of observers handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IOTCON_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `iotcon_observers_destroy()`
+  /// - `iotcon_observers_add()`
+  /// - `iotcon_observers_remove()`
   int iotcon_observers_create(
     ffi.Pointer<iotcon_observers_h> observers,
   ) {
@@ -4008,17 +5231,26 @@ class Tizen65Iotcon {
   late final _iotcon_observers_create = _iotcon_observers_createPtr
       .asFunction<int Function(ffi.Pointer<iotcon_observers_h>)>();
 
-  /// @brief Destroys a observers handle.
-  /// @since_tizen 3.0
-  /// @param[in] observers The handle of the observers
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see iotcon_observers_create()
-  /// @see iotcon_observers_add()
-  /// @see iotcon_observers_remove()
+  /// Destroys a observers handle.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `observers` (in): The handle of the observers
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `iotcon_observers_create()`
+  /// - `iotcon_observers_add()`
+  /// - `iotcon_observers_remove()`
   int iotcon_observers_destroy(
     iotcon_observers_h observers,
   ) {
@@ -4033,18 +5265,27 @@ class Tizen65Iotcon {
   late final _iotcon_observers_destroy = _iotcon_observers_destroyPtr
       .asFunction<int Function(iotcon_observers_h)>();
 
-  /// @brief Adds an observers ID into the observers handle.
-  /// @since_tizen 3.0
-  /// @param[in] observers The handle of the observers
-  /// @param[in] obs_id The ID to be appended to observers
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see iotcon_observers_create()
-  /// @see iotcon_observers_destroy()
-  /// @see iotcon_observers_remove()
+  /// Adds an observers ID into the observers handle.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `observers` (in): The handle of the observers
+  /// - `obs_id` (in): The ID to be appended to observers
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `iotcon_observers_create()`
+  /// - `iotcon_observers_destroy()`
+  /// - `iotcon_observers_remove()`
   int iotcon_observers_add(
     iotcon_observers_h observers,
     int obs_id,
@@ -4061,18 +5302,27 @@ class Tizen65Iotcon {
   late final _iotcon_observers_add = _iotcon_observers_addPtr
       .asFunction<int Function(iotcon_observers_h, int)>();
 
-  /// @brief Removes ID from the observers.
-  /// @since_tizen 3.0
-  /// @param[in] observers observers The handle of the observers
-  /// @param[in] obs_id The ID to be removed from observers
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see iotcon_observers_create()
-  /// @see iotcon_observers_destroy()
-  /// @see iotcon_observers_add()
+  /// Removes ID from the observers.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `observers` (in): observers The handle of the observers
+  /// - `obs_id` (in): The ID to be removed from observers
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `iotcon_observers_create()`
+  /// - `iotcon_observers_destroy()`
+  /// - `iotcon_observers_add()`
   int iotcon_observers_remove(
     iotcon_observers_h observers,
     int obs_id,
@@ -4089,23 +5339,34 @@ class Tizen65Iotcon {
   late final _iotcon_observers_remove = _iotcon_observers_removePtr
       .asFunction<int Function(iotcon_observers_h, int)>();
 
-  /// @brief Gets host address of the request.
-  /// @since_tizen 3.0
-  /// @remarks @a host_address must not be released using free().
-  /// @param[in] request The handle of the request
-  /// @param[out] host_address The host address of the request
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see iotcon_request_get_connectivity_type()
-  /// @see iotcon_request_get_representation()
-  /// @see iotcon_request_get_request_type()
-  /// @see iotcon_request_get_options()
-  /// @see iotcon_request_get_query()
-  /// @see iotcon_request_get_observe_type()
-  /// @see iotcon_request_get_observe_id()
+  /// Gets host address of the request.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - `host_address` must not be released using free().
+  ///
+  /// **Parameters:**
+  /// - `request` (in): The handle of the request
+  /// - `host_address` (out): The host address of the request
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `iotcon_request_get_connectivity_type()`
+  /// - `iotcon_request_get_representation()`
+  /// - `iotcon_request_get_request_type()`
+  /// - `iotcon_request_get_options()`
+  /// - `iotcon_request_get_query()`
+  /// - `iotcon_request_get_observe_type()`
+  /// - `iotcon_request_get_observe_id()`
   int iotcon_request_get_host_address(
     iotcon_request_h request,
     ffi.Pointer<ffi.Pointer<ffi.Char>> host_address,
@@ -4125,22 +5386,31 @@ class Tizen65Iotcon {
       _iotcon_request_get_host_addressPtr.asFunction<
           int Function(iotcon_request_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets connectivity type of the request.
-  /// @since_tizen 3.0
-  /// @param[in] request The handle of the request
-  /// @param[out] connectivity_type The connectivity type of the request
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see iotcon_request_get_host_address()
-  /// @see iotcon_request_get_representation()
-  /// @see iotcon_request_get_request_type()
-  /// @see iotcon_request_get_options()
-  /// @see iotcon_request_get_query()
-  /// @see iotcon_request_get_observe_type()
-  /// @see iotcon_request_get_observe_id()
+  /// Gets connectivity type of the request.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `request` (in): The handle of the request
+  /// - `connectivity_type` (out): The connectivity type of the request
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `iotcon_request_get_host_address()`
+  /// - `iotcon_request_get_representation()`
+  /// - `iotcon_request_get_request_type()`
+  /// - `iotcon_request_get_options()`
+  /// - `iotcon_request_get_query()`
+  /// - `iotcon_request_get_observe_type()`
+  /// - `iotcon_request_get_observe_id()`
   int iotcon_request_get_connectivity_type(
     iotcon_request_h request,
     ffi.Pointer<ffi.Int32> connectivity_type,
@@ -4159,23 +5429,34 @@ class Tizen65Iotcon {
       _iotcon_request_get_connectivity_typePtr
           .asFunction<int Function(iotcon_request_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets a representation of the request.
-  /// @since_tizen 3.0
-  /// @remarks @a repr must not be released using iotcon_representation_destroy().
-  /// @param[in] request The handle of the request
-  /// @param[out] repr The representation of the request
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see iotcon_request_get_host_address()
-  /// @see iotcon_request_get_connectivity_type()
-  /// @see iotcon_request_get_request_type()
-  /// @see iotcon_request_get_options()
-  /// @see iotcon_request_get_query()
-  /// @see iotcon_request_get_observe_type()
-  /// @see iotcon_request_get_observe_id()
+  /// Gets a representation of the request.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - `repr` must not be released using iotcon_representation_destroy().
+  ///
+  /// **Parameters:**
+  /// - `request` (in): The handle of the request
+  /// - `repr` (out): The representation of the request
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `iotcon_request_get_host_address()`
+  /// - `iotcon_request_get_connectivity_type()`
+  /// - `iotcon_request_get_request_type()`
+  /// - `iotcon_request_get_options()`
+  /// - `iotcon_request_get_query()`
+  /// - `iotcon_request_get_observe_type()`
+  /// - `iotcon_request_get_observe_id()`
   int iotcon_request_get_representation(
     iotcon_request_h request,
     ffi.Pointer<iotcon_representation_h> repr,
@@ -4196,23 +5477,33 @@ class Tizen65Iotcon {
           int Function(
               iotcon_request_h, ffi.Pointer<iotcon_representation_h>)>();
 
-  /// @brief Gets type of the request.
-  /// @details @a type could be one of the #iotcon_request_type_e.
-  /// @since_tizen 3.0
-  /// @param[in] request The handle of the request
-  /// @param[out] type The types of the request
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see iotcon_request_get_host_address()
-  /// @see iotcon_request_get_connectivity_type()
-  /// @see iotcon_request_get_representation()
-  /// @see iotcon_request_get_options()
-  /// @see iotcon_request_get_query()
-  /// @see iotcon_request_get_observe_type()
-  /// @see iotcon_request_get_observe_id()
+  /// Gets type of the request.
+  ///
+  /// `type` could be one of the `iotcon_request_type_e`.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `request` (in): The handle of the request
+  /// - `type` (out): The types of the request
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `iotcon_request_get_host_address()`
+  /// - `iotcon_request_get_connectivity_type()`
+  /// - `iotcon_request_get_representation()`
+  /// - `iotcon_request_get_options()`
+  /// - `iotcon_request_get_query()`
+  /// - `iotcon_request_get_observe_type()`
+  /// - `iotcon_request_get_observe_id()`
   int iotcon_request_get_request_type(
     iotcon_request_h request,
     ffi.Pointer<ffi.Int32> type,
@@ -4231,23 +5522,34 @@ class Tizen65Iotcon {
       _iotcon_request_get_request_typePtr
           .asFunction<int Function(iotcon_request_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets options of the request.
-  /// @since_tizen 3.0
-  /// @remarks @a options must not be released using iotcon_options_destroy().
-  /// @param[in] request The handle of the request
-  /// @param[out] options The options of the request
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see iotcon_request_get_host_address()
-  /// @see iotcon_request_get_connectivity_type()
-  /// @see iotcon_request_get_representation()
-  /// @see iotcon_request_get_request_type()
-  /// @see iotcon_request_get_query()
-  /// @see iotcon_request_get_observe_type()
-  /// @see iotcon_request_get_observe_id()
+  /// Gets options of the request.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - `options` must not be released using iotcon_options_destroy().
+  ///
+  /// **Parameters:**
+  /// - `request` (in): The handle of the request
+  /// - `options` (out): The options of the request
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `iotcon_request_get_host_address()`
+  /// - `iotcon_request_get_connectivity_type()`
+  /// - `iotcon_request_get_representation()`
+  /// - `iotcon_request_get_request_type()`
+  /// - `iotcon_request_get_query()`
+  /// - `iotcon_request_get_observe_type()`
+  /// - `iotcon_request_get_observe_id()`
   int iotcon_request_get_options(
     iotcon_request_h request,
     ffi.Pointer<iotcon_options_h> options,
@@ -4266,23 +5568,34 @@ class Tizen65Iotcon {
       _iotcon_request_get_optionsPtr.asFunction<
           int Function(iotcon_request_h, ffi.Pointer<iotcon_options_h>)>();
 
-  /// @brief Gets query of the request.
-  /// @since_tizen 3.0
-  /// @remarks @a query must not be released using iotcon_query_destroy().
-  /// @param[in] request The handle of the request
-  /// @param[out] query The query of the request
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see iotcon_request_get_host_address()
-  /// @see iotcon_request_get_connectivity_type()
-  /// @see iotcon_request_get_representation()
-  /// @see iotcon_request_get_request_type()
-  /// @see iotcon_request_get_options()
-  /// @see iotcon_request_get_observe_type()
-  /// @see iotcon_request_get_observe_id()
+  /// Gets query of the request.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - `query` must not be released using iotcon_query_destroy().
+  ///
+  /// **Parameters:**
+  /// - `request` (in): The handle of the request
+  /// - `query` (out): The query of the request
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `iotcon_request_get_host_address()`
+  /// - `iotcon_request_get_connectivity_type()`
+  /// - `iotcon_request_get_representation()`
+  /// - `iotcon_request_get_request_type()`
+  /// - `iotcon_request_get_options()`
+  /// - `iotcon_request_get_observe_type()`
+  /// - `iotcon_request_get_observe_id()`
   int iotcon_request_get_query(
     iotcon_request_h request,
     ffi.Pointer<iotcon_query_h> query,
@@ -4301,23 +5614,33 @@ class Tizen65Iotcon {
       _iotcon_request_get_queryPtr.asFunction<
           int Function(iotcon_request_h, ffi.Pointer<iotcon_query_h>)>();
 
-  /// @brief Gets observation action of the request.
-  /// @details The @a observe_type could be one of #iotcon_observe_type_e.
-  /// @since_tizen 3.0
-  /// @param[in] request The handle of the request
-  /// @param[out] observe_type The observation type of the request
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see iotcon_request_get_host_address()
-  /// @see iotcon_request_get_connectivity_type()
-  /// @see iotcon_request_get_representation()
-  /// @see iotcon_request_get_request_type()
-  /// @see iotcon_request_get_options()
-  /// @see iotcon_request_get_query()
-  /// @see iotcon_request_get_observe_id()
+  /// Gets observation action of the request.
+  ///
+  /// The `observe_type` could be one of `iotcon_observe_type_e`.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `request` (in): The handle of the request
+  /// - `observe_type` (out): The observation type of the request
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `iotcon_request_get_host_address()`
+  /// - `iotcon_request_get_connectivity_type()`
+  /// - `iotcon_request_get_representation()`
+  /// - `iotcon_request_get_request_type()`
+  /// - `iotcon_request_get_options()`
+  /// - `iotcon_request_get_query()`
+  /// - `iotcon_request_get_observe_id()`
   int iotcon_request_get_observe_type(
     iotcon_request_h request,
     ffi.Pointer<ffi.Int32> observe_type,
@@ -4336,22 +5659,31 @@ class Tizen65Iotcon {
       _iotcon_request_get_observe_typePtr
           .asFunction<int Function(iotcon_request_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets observation ID of the request.
-  /// @since_tizen 3.0
-  /// @param[in] request The handle of the request
-  /// @param[out] observe_id The ID of the observer
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see iotcon_request_get_host_address()
-  /// @see iotcon_request_get_connectivity_type()
-  /// @see iotcon_request_get_representation()
-  /// @see iotcon_request_get_request_type()
-  /// @see iotcon_request_get_options()
-  /// @see iotcon_request_get_query()
-  /// @see iotcon_request_get_observe_type()
+  /// Gets observation ID of the request.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `request` (in): The handle of the request
+  /// - `observe_id` (out): The ID of the observer
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `iotcon_request_get_host_address()`
+  /// - `iotcon_request_get_connectivity_type()`
+  /// - `iotcon_request_get_representation()`
+  /// - `iotcon_request_get_request_type()`
+  /// - `iotcon_request_get_options()`
+  /// - `iotcon_request_get_query()`
+  /// - `iotcon_request_get_observe_type()`
   int iotcon_request_get_observe_id(
     iotcon_request_h request,
     ffi.Pointer<ffi.Int> observe_id,
@@ -4369,25 +5701,42 @@ class Tizen65Iotcon {
   late final _iotcon_request_get_observe_id = _iotcon_request_get_observe_idPtr
       .asFunction<int Function(iotcon_request_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Starts presence of a server.
-  /// @details Use this function to send server's announcements to clients. \n
-  /// Server can call this function when online for the first time or come back from offline to online.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/internet
-  /// @remarks If @a time_to_live is 0, server will set default value as 60 seconds. \n
-  /// If @a time_to_live is very big, server will set maximum value as (60 * 60 * 24) seconds (24 hours).
-  /// @param[in] time_to_live The interval of announcing presence in seconds
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_SYSTEM System error
-  /// @retval #IOTCON_ERROR_PERMISSION_DENIED Permission denied
-  /// @pre iotcon_initialize() should be called to initialize.
-  /// @see iotcon_stop_presence()
-  /// @see iotcon_add_presence_cb()
-  /// @see iotcon_remove_presence_cb()
+  /// Starts presence of a server.
+  ///
+  /// Use this function to send server's announcements to clients. Server can call this function when online for the first time or come back from offline to online.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/internet>
+  ///
+  /// **Remarks:**
+  /// - If `time_to_live` is 0, server will set default value as 60 seconds.
+  /// - If `time_to_live` is very big, server will set maximum value as (60 * 60 * 24) seconds (24 hours).
+  ///
+  /// **Parameters:**
+  /// - `time_to_live` (in): The interval of announcing presence in seconds
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_SYSTEM`: System error
+  /// - `IOTCON_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **Preconditions:**
+  /// - iotcon_initialize() should be called to initialize.
+  ///
+  /// **See also:**
+  /// - `iotcon_stop_presence()`
+  /// - `iotcon_add_presence_cb()`
+  /// - `iotcon_remove_presence_cb()`
   int iotcon_start_presence(
     int time_to_live,
   ) {
@@ -4402,22 +5751,35 @@ class Tizen65Iotcon {
   late final _iotcon_start_presence =
       _iotcon_start_presencePtr.asFunction<int Function(int)>();
 
-  /// @brief Stops presence of a server.
-  /// @details Use this function to stop sending server's announcements to clients.
-  /// Server can call this function when terminating, entering to offline or out of network.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/internet
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_SYSTEM System error
-  /// @retval #IOTCON_ERROR_PERMISSION_DENIED Permission denied
-  /// @pre iotcon_initialize() should be called to initialize.
-  /// @see iotcon_start_presence()
-  /// @see iotcon_add_presence_cb()
-  /// @see iotcon_remove_presence_cb()
+  /// Stops presence of a server.
+  ///
+  /// Use this function to stop sending server's announcements to clients. Server can call this function when terminating, entering to offline or out of network.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/internet>
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_SYSTEM`: System error
+  /// - `IOTCON_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **Preconditions:**
+  /// - iotcon_initialize() should be called to initialize.
+  ///
+  /// **See also:**
+  /// - `iotcon_start_presence()`
+  /// - `iotcon_add_presence_cb()`
+  /// - `iotcon_remove_presence_cb()`
   int iotcon_stop_presence() {
     return _iotcon_stop_presence();
   }
@@ -4427,21 +5789,32 @@ class Tizen65Iotcon {
   late final _iotcon_stop_presence =
       _iotcon_stop_presencePtr.asFunction<int Function()>();
 
-  /// @brief Sets the device name.
-  /// @details The function sets the name of the local device (the device calling the function).
-  /// If the device name is set, clients can get the name using iotcon_device_info_get_property() or iotcon_remote_resource_get_device_name().
-  /// @since_tizen 3.0
-  /// @remarks @a device_name may not be an empty string.
-  /// @param[in] device_name The device name
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IOTCON_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #IOTCON_ERROR_IOTIVITY Iotivity errors
-  /// @see iotcon_device_info_get_property()
-  /// @see iotcon_remote_resource_get_device_name()
+  /// Sets the device name.
+  ///
+  /// The function sets the name of the local device (the device calling the function). If the device name is set, clients can get the name using iotcon_device_info_get_property() or iotcon_remote_resource_get_device_name().
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - `device_name` may not be an empty string.
+  ///
+  /// **Parameters:**
+  /// - `device_name` (in): The device name
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IOTCON_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `IOTCON_ERROR_IOTIVITY`: Iotivity errors
+  ///
+  /// **See also:**
+  /// - `iotcon_device_info_get_property()`
+  /// - `iotcon_remote_resource_get_device_name()`
   int iotcon_set_device_name(
     ffi.Pointer<ffi.Char> device_name,
   ) {
@@ -4456,37 +5829,38 @@ class Tizen65Iotcon {
   late final _iotcon_set_device_name = _iotcon_set_device_namePtr
       .asFunction<int Function(ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Creates a new resource handle.
-  /// @details Creates a resource proxy object so that iotcon_remote_resource_get(),
-  /// iotcon_remote_resource_put(), iotcon_remote_resource_post(),
-  /// iotcon_remote_resource_delete(), iotcon_remote_resource_observe_register(),
-  /// iotcon_remote_resource_start_caching() and iotcon_remote_resource_start_monitoring()
-  /// API can be used without discovering the object in advance.\n
-  /// To use this API, you should provide all of the details required to correctly contact and observe the object.\n
-  /// If not, you should discover the resource object manually.\n
-  /// The @a policies can contain multiple policies like #IOTCON_RESOURCE_DISCOVERABLE | #IOTCON_RESOURCE_OBSERVABLE.
-  /// @since_tizen 3.0
-  /// @remarks You must destroy @a remote_resource by calling iotcon_remote_resource_destroy() if @a remote_resource is no longer needed.
-  /// @param[in] host_address The host address of the resource
-  /// @param[in] connectivity_type The connectivity type. Can not use @a IOTCON_CONNECTIVITY_ALL. \n
-  /// Connectivity type of specific remote resource(It has specific host address, not @a IOTCON_MULTICAST_ADDRESS) is already decided. \n
-  /// Use specific connectivity type of the remote resource. \n
-  /// You can refer to the @a iotcon_remote_resource_get_connectivity_type().
-  /// @param[in] uri_path The URI path of the resource
-  /// @param[in] policies The policies of the resource \n
-  /// Set of #iotcon_resource_policy_e
-  /// @param[in] resource_types The resource types of the resource. For example, "core.light"
-  /// @param[in] resource_ifaces The resource interfaces of the resource
-  /// @param[out] remote_resource Generated resource handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IOTCON_ERROR_IOTIVITY IoTivity errors
-  /// @retval #IOTCON_ERROR_OUT_OF_MEMORY Out of memory
-  /// @see iotcon_remote_resource_destroy()
-  /// @see iotcon_remote_resource_clone()
+  /// Creates a new resource handle.
+  ///
+  /// Creates a resource proxy object so that iotcon_remote_resource_get(), iotcon_remote_resource_put(), iotcon_remote_resource_post(), iotcon_remote_resource_delete(), iotcon_remote_resource_observe_register(), iotcon_remote_resource_start_caching() and iotcon_remote_resource_start_monitoring() API can be used without discovering the object in advance. To use this API, you should provide all of the details required to correctly contact and observe the object. If not, you should discover the resource object manually. The `policies` can contain multiple policies like `IOTCON_RESOURCE_DISCOVERABLE` | `IOTCON_RESOURCE_OBSERVABLE`.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - You must destroy `remote_resource` by calling iotcon_remote_resource_destroy() if `remote_resource` is no longer needed.
+  ///
+  /// **Parameters:**
+  /// - `host_address` (in): The host address of the resource
+  /// - `connectivity_type` (in): The connectivity type. Can not use `IOTCON_CONNECTIVITY_ALL`. Connectivity type of specific remote resource(It has specific host address, not `IOTCON_MULTICAST_ADDRESS`) is already decided. Use specific connectivity type of the remote resource. You can refer to the `iotcon_remote_resource_get_connectivity_type(`).
+  /// - `uri_path` (in): The URI path of the resource
+  /// - `policies` (in): The policies of the resource Set of `iotcon_resource_policy_e`
+  /// - `resource_types` (in): The resource types of the resource. For example, "core.light"
+  /// - `resource_ifaces` (in): The resource interfaces of the resource
+  /// - `remote_resource` (out): Generated resource handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IOTCON_ERROR_IOTIVITY`: IoTivity errors
+  /// - `IOTCON_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **See also:**
+  /// - `iotcon_remote_resource_destroy()`
+  /// - `iotcon_remote_resource_clone()`
   int iotcon_remote_resource_create(
     ffi.Pointer<ffi.Char> host_address,
     int connectivity_type,
@@ -4529,16 +5903,25 @@ class Tizen65Iotcon {
               iotcon_resource_interfaces_h,
               ffi.Pointer<iotcon_remote_resource_h>)>();
 
-  /// @brief Destroys a resource handle.
-  /// @since_tizen 3.0
-  /// @param[in] resource The handle of the resource
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see iotcon_remote_resource_create()
-  /// @see iotcon_remote_resource_clone()
+  /// Destroys a resource handle.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `resource` (in): The handle of the resource
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `iotcon_remote_resource_create()`
+  /// - `iotcon_remote_resource_clone()`
   int iotcon_remote_resource_destroy(
     iotcon_remote_resource_h resource,
   ) {
@@ -4554,18 +5937,29 @@ class Tizen65Iotcon {
       _iotcon_remote_resource_destroyPtr
           .asFunction<int Function(iotcon_remote_resource_h)>();
 
-  /// @brief Clones a clone of a remote resource.
-  /// @since_tizen 3.0
-  /// @remarks You must destroy @a dest by calling iotcon_remote_resource_destroy() if @a dest is no longer needed.
-  /// @param[in] src The Source of resource
-  /// @param[out] dest The cloned resource handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see iotcon_remote_resource_create()
-  /// @see iotcon_remote_resource_destroy()
+  /// Clones a clone of a remote resource.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - You must destroy `dest` by calling iotcon_remote_resource_destroy() if `dest` is no longer needed.
+  ///
+  /// **Parameters:**
+  /// - `src` (in): The Source of resource
+  /// - `dest` (out): The cloned resource handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `iotcon_remote_resource_create()`
+  /// - `iotcon_remote_resource_destroy()`
   int iotcon_remote_resource_clone(
     iotcon_remote_resource_h src,
     ffi.Pointer<iotcon_remote_resource_h> dest,
@@ -4586,30 +5980,47 @@ class Tizen65Iotcon {
           int Function(iotcon_remote_resource_h,
               ffi.Pointer<iotcon_remote_resource_h>)>();
 
-  /// @brief Registers observe callback on the resource.
-  /// @details When server sends notification message, iotcon_remote_resource_observe_cb() will be called.
-  /// The @a observe_policy could be one of #iotcon_observe_policy_e.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/internet
-  /// @param[in] resource The handle of the resource
-  /// @param[in] observe_policy The type to specify how client wants to observe
-  /// @param[in] query The query to send to server
-  /// @param[in] cb The callback function to get notifications from server
-  /// @param[in] user_data The user data to pass to the function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IOTCON_ERROR_IOTIVITY IoTivity errors
-  /// @retval #IOTCON_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #IOTCON_ERROR_PERMISSION_DENIED Permission denied
-  /// @pre iotcon_initialize() should be called to initialize.
-  /// @post When the @a resource receive notification message, iotcon_remote_resource_observe_cb() will be called.
-  /// @see iotcon_remote_resource_observe_cb()
-  /// @see iotcon_remote_resource_observe_deregister()
-  /// @see iotcon_resource_notify()
+  /// Registers observe callback on the resource.
+  ///
+  /// When server sends notification message, iotcon_remote_resource_observe_cb() will be called. The `observe_policy` could be one of `iotcon_observe_policy_e`.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/internet>
+  ///
+  /// **Parameters:**
+  /// - `resource` (in): The handle of the resource
+  /// - `observe_policy` (in): The type to specify how client wants to observe
+  /// - `query` (in): The query to send to server
+  /// - `cb` (in): The callback function to get notifications from server
+  /// - `user_data` (in): The user data to pass to the function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IOTCON_ERROR_IOTIVITY`: IoTivity errors
+  /// - `IOTCON_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `IOTCON_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **Preconditions:**
+  /// - iotcon_initialize() should be called to initialize.
+  ///
+  /// **Postconditions:**
+  /// - When the `resource` receive notification message, iotcon_remote_resource_observe_cb() will be called.
+  ///
+  /// **See also:**
+  /// - `iotcon_remote_resource_observe_cb()`
+  /// - `iotcon_remote_resource_observe_deregister()`
+  /// - `iotcon_resource_notify()`
   int iotcon_remote_resource_observe_register(
     iotcon_remote_resource_h resource,
     int observe_policy,
@@ -4640,22 +6051,37 @@ class Tizen65Iotcon {
           int Function(iotcon_remote_resource_h, int, iotcon_query_h,
               iotcon_remote_resource_observe_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Deregisters observe callback on the resource.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/internet
-  /// @param[in] resource The handle of the resource
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IOTCON_ERROR_SYSTEM System error
-  /// @retval #IOTCON_ERROR_PERMISSION_DENIED Permission denied
-  /// @pre iotcon_initialize() should be called to initialize.
-  /// @see iotcon_remote_resource_observe_cb()
-  /// @see iotcon_remote_resource_observe_register()
-  /// @see iotcon_resource_notify()
+  /// Deregisters observe callback on the resource.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/internet>
+  ///
+  /// **Parameters:**
+  /// - `resource` (in): The handle of the resource
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IOTCON_ERROR_SYSTEM`: System error
+  /// - `IOTCON_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **Preconditions:**
+  /// - iotcon_initialize() should be called to initialize.
+  ///
+  /// **See also:**
+  /// - `iotcon_remote_resource_observe_cb()`
+  /// - `iotcon_remote_resource_observe_register()`
+  /// - `iotcon_resource_notify()`
   int iotcon_remote_resource_observe_deregister(
     iotcon_remote_resource_h resource,
   ) {
@@ -4671,26 +6097,44 @@ class Tizen65Iotcon {
       _iotcon_remote_resource_observe_deregisterPtr
           .asFunction<int Function(iotcon_remote_resource_h)>();
 
-  /// @brief Gets the attributes of a resource asynchronously.
-  /// @details When server sends response on get request, iotcon_remote_resource_response_cb() will be called.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/internet
-  /// @param[in] resource The handle of the resource
-  /// @param[in] query The query to send to server
-  /// @param[in] cb The callback function
-  /// @param[in] user_data The user data to pass to the function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IOTCON_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #IOTCON_ERROR_PERMISSION_DENIED Permission denied
-  /// @pre iotcon_initialize() should be called to initialize.
-  /// @post When the client receive get response, iotcon_remote_resource_response_cb() will be called.
-  /// @see iotcon_remote_resource_response_cb()
-  /// @see iotcon_set_timeout()
+  /// Gets the attributes of a resource asynchronously.
+  ///
+  /// When server sends response on get request, iotcon_remote_resource_response_cb() will be called.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/internet>
+  ///
+  /// **Parameters:**
+  /// - `resource` (in): The handle of the resource
+  /// - `query` (in): The query to send to server
+  /// - `cb` (in): The callback function
+  /// - `user_data` (in): The user data to pass to the function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IOTCON_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `IOTCON_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **Preconditions:**
+  /// - iotcon_initialize() should be called to initialize.
+  ///
+  /// **Postconditions:**
+  /// - When the client receive get response, iotcon_remote_resource_response_cb() will be called.
+  ///
+  /// **See also:**
+  /// - `iotcon_remote_resource_response_cb()`
+  /// - `iotcon_set_timeout()`
   int iotcon_remote_resource_get(
     iotcon_remote_resource_h resource,
     iotcon_query_h query,
@@ -4717,27 +6161,45 @@ class Tizen65Iotcon {
           int Function(iotcon_remote_resource_h, iotcon_query_h,
               iotcon_remote_resource_response_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Puts the representation of a resource asynchronously.
-  /// @details When server sends response on put request, iotcon_remote_resource_response_cb() will be called.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/internet
-  /// @param[in] resource The handle of the resource
-  /// @param[in] repr The handle of the representation
-  /// @param[in] query The query to send to server
-  /// @param[in] cb The callback function
-  /// @param[in] user_data The user data to pass to the function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IOTCON_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #IOTCON_ERROR_PERMISSION_DENIED Permission denied
-  /// @pre iotcon_initialize() should be called to initialize.
-  /// @post When the client receive put response, iotcon_remote_resource_response_cb() will be called.
-  /// @see iotcon_remote_resource_response_cb()
-  /// @see iotcon_set_timeout()
+  /// Puts the representation of a resource asynchronously.
+  ///
+  /// When server sends response on put request, iotcon_remote_resource_response_cb() will be called.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/internet>
+  ///
+  /// **Parameters:**
+  /// - `resource` (in): The handle of the resource
+  /// - `repr` (in): The handle of the representation
+  /// - `query` (in): The query to send to server
+  /// - `cb` (in): The callback function
+  /// - `user_data` (in): The user data to pass to the function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IOTCON_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `IOTCON_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **Preconditions:**
+  /// - iotcon_initialize() should be called to initialize.
+  ///
+  /// **Postconditions:**
+  /// - When the client receive put response, iotcon_remote_resource_response_cb() will be called.
+  ///
+  /// **See also:**
+  /// - `iotcon_remote_resource_response_cb()`
+  /// - `iotcon_set_timeout()`
   int iotcon_remote_resource_put(
     iotcon_remote_resource_h resource,
     iotcon_representation_h repr,
@@ -4771,27 +6233,45 @@ class Tizen65Iotcon {
               iotcon_remote_resource_response_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Posts on a resource asynchronously.
-  /// @details When server sends response on post request, iotcon_remote_resource_response_cb() will be called.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/internet
-  /// @param[in] resource The handle of the resource
-  /// @param[in] repr The handle of the representation
-  /// @param[in] query The query to send to server
-  /// @param[in] cb The callback function
-  /// @param[in] user_data The user data to pass to the function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IOTCON_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #IOTCON_ERROR_PERMISSION_DENIED Permission denied
-  /// @pre iotcon_initialize() should be called to initialize.
-  /// @post When the client receive post response, iotcon_remote_resource_response_cb() will be called.
-  /// @see iotcon_remote_resource_response_cb()
-  /// @see iotcon_set_timeout()
+  /// Posts on a resource asynchronously.
+  ///
+  /// When server sends response on post request, iotcon_remote_resource_response_cb() will be called.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/internet>
+  ///
+  /// **Parameters:**
+  /// - `resource` (in): The handle of the resource
+  /// - `repr` (in): The handle of the representation
+  /// - `query` (in): The query to send to server
+  /// - `cb` (in): The callback function
+  /// - `user_data` (in): The user data to pass to the function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IOTCON_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `IOTCON_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **Preconditions:**
+  /// - iotcon_initialize() should be called to initialize.
+  ///
+  /// **Postconditions:**
+  /// - When the client receive post response, iotcon_remote_resource_response_cb() will be called.
+  ///
+  /// **See also:**
+  /// - `iotcon_remote_resource_response_cb()`
+  /// - `iotcon_set_timeout()`
   int iotcon_remote_resource_post(
     iotcon_remote_resource_h resource,
     iotcon_representation_h repr,
@@ -4825,25 +6305,43 @@ class Tizen65Iotcon {
               iotcon_remote_resource_response_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Deletes a resource asynchronously.
-  /// @details When server sends response on delete request, iotcon_remote_resource_response_cb() will be called.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/internet
-  /// @param[in] resource The handle of the resource
-  /// @param[in] cb The callback function
-  /// @param[in] user_data The user data to pass to the function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IOTCON_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #IOTCON_ERROR_PERMISSION_DENIED Permission denied
-  /// @pre iotcon_initialize() should be called to initialize.
-  /// @post When the client receive delete response, iotcon_remote_resource_response_cb() will be called.
-  /// @see iotcon_remote_resource_response_cb()
-  /// @see iotcon_set_timeout()
+  /// Deletes a resource asynchronously.
+  ///
+  /// When server sends response on delete request, iotcon_remote_resource_response_cb() will be called.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/internet>
+  ///
+  /// **Parameters:**
+  /// - `resource` (in): The handle of the resource
+  /// - `cb` (in): The callback function
+  /// - `user_data` (in): The user data to pass to the function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IOTCON_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `IOTCON_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **Preconditions:**
+  /// - iotcon_initialize() should be called to initialize.
+  ///
+  /// **Postconditions:**
+  /// - When the client receive delete response, iotcon_remote_resource_response_cb() will be called.
+  ///
+  /// **See also:**
+  /// - `iotcon_remote_resource_response_cb()`
+  /// - `iotcon_set_timeout()`
   int iotcon_remote_resource_delete(
     iotcon_remote_resource_h resource,
     iotcon_remote_resource_response_cb cb,
@@ -4867,31 +6365,42 @@ class Tizen65Iotcon {
           int Function(iotcon_remote_resource_h,
               iotcon_remote_resource_response_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Starts caching of a remote resource.
-  /// @details Use this function to start caching the resource's attribute. \n
-  /// Although, remote resource is not observable, it keeps the representation up-to-date.
-  /// Because it checks whether representation is changed periodically. \n
-  /// Therefore, you can get the cached representation even when the remote resource is off-line.
-  /// The default checking interval is 10 seconds.
-  /// It can be changed by iotcon_remote_resource_set_checking_interval().
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/internet
-  /// @param[in] resource The handle of the remote resource to be cached
-  /// @param[in] cb The callback function to add into callback list
-  /// @param[in] user_data The user data to pass to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_SYSTEM System error
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IOTCON_ERROR_ALREADY Already done
-  /// @retval #IOTCON_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #IOTCON_ERROR_PERMISSION_DENIED Permission denied
-  /// @pre iotcon_initialize() should be called to initialize.
-  /// @see iotcon_remote_resource_stop_caching()
-  /// @see iotcon_remote_resource_cached_representation_changed_cb()
+  /// Starts caching of a remote resource.
+  ///
+  /// Use this function to start caching the resource's attribute. Although, remote resource is not observable, it keeps the representation up-to-date. Because it checks whether representation is changed periodically. Therefore, you can get the cached representation even when the remote resource is off-line. The default checking interval is 10 seconds. It can be changed by iotcon_remote_resource_set_checking_interval().
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/internet>
+  ///
+  /// **Parameters:**
+  /// - `resource` (in): The handle of the remote resource to be cached
+  /// - `cb` (in): The callback function to add into callback list
+  /// - `user_data` (in): The user data to pass to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_SYSTEM`: System error
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IOTCON_ERROR_ALREADY`: Already done
+  /// - `IOTCON_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `IOTCON_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **Preconditions:**
+  /// - iotcon_initialize() should be called to initialize.
+  ///
+  /// **See also:**
+  /// - `iotcon_remote_resource_stop_caching()`
+  /// - `iotcon_remote_resource_cached_representation_changed_cb()`
   int iotcon_remote_resource_start_caching(
     iotcon_remote_resource_h resource,
     iotcon_remote_resource_cached_representation_changed_cb cb,
@@ -4917,22 +6426,38 @@ class Tizen65Iotcon {
               iotcon_remote_resource_cached_representation_changed_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Stops caching of a remote resource.
-  /// @details Use this function to stop caching the resource's attribute.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/internet
-  /// @param[in] resource The handle of the remote resource
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IOTCON_ERROR_SYSTEM System error
-  /// @retval #IOTCON_ERROR_PERMISSION_DENIED Permission denied
-  /// @pre iotcon_initialize() should be called to initialize.
-  /// @see iotcon_remote_resource_start_caching()
-  /// @see iotcon_remote_resource_cached_representation_changed_cb()
+  /// Stops caching of a remote resource.
+  ///
+  /// Use this function to stop caching the resource's attribute.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/internet>
+  ///
+  /// **Parameters:**
+  /// - `resource` (in): The handle of the remote resource
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IOTCON_ERROR_SYSTEM`: System error
+  /// - `IOTCON_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **Preconditions:**
+  /// - iotcon_initialize() should be called to initialize.
+  ///
+  /// **See also:**
+  /// - `iotcon_remote_resource_start_caching()`
+  /// - `iotcon_remote_resource_cached_representation_changed_cb()`
   int iotcon_remote_resource_stop_caching(
     iotcon_remote_resource_h resource,
   ) {
@@ -4948,29 +6473,41 @@ class Tizen65Iotcon {
       _iotcon_remote_resource_stop_cachingPtr
           .asFunction<int Function(iotcon_remote_resource_h)>();
 
-  /// @brief Starts monitoring of a remote resource.
-  /// @details When remote resource's state is changed, registered callbacks will be called in turn.
-  /// Although, remote resource does not call iotcon_start_presence(), it knows the state of resource.
-  /// Because it checks the state of resource, periodically. \n
-  /// The default checking interval is 10 seconds.
-  /// It can be changed by iotcon_remote_resource_set_checking_interval().
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/internet
-  /// @param[in] resource The handle of the remote resource
-  /// @param[in] cb The callback function to add into callback list
-  /// @param[in] user_data The user data to pass to the callback function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IOTCON_ERROR_ALREADY Already done
-  /// @retval #IOTCON_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #IOTCON_ERROR_PERMISSION_DENIED Permission denied
-  /// @pre iotcon_initialize() should be called to initialize.
-  /// @see iotcon_remote_resource_stop_monitoring()
-  /// @see iotcon_remote_resource_state_changed_cb()
+  /// Starts monitoring of a remote resource.
+  ///
+  /// When remote resource's state is changed, registered callbacks will be called in turn. Although, remote resource does not call iotcon_start_presence(), it knows the state of resource. Because it checks the state of resource, periodically. The default checking interval is 10 seconds. It can be changed by iotcon_remote_resource_set_checking_interval().
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/internet>
+  ///
+  /// **Parameters:**
+  /// - `resource` (in): The handle of the remote resource
+  /// - `cb` (in): The callback function to add into callback list
+  /// - `user_data` (in): The user data to pass to the callback function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IOTCON_ERROR_ALREADY`: Already done
+  /// - `IOTCON_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `IOTCON_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **Preconditions:**
+  /// - iotcon_initialize() should be called to initialize.
+  ///
+  /// **See also:**
+  /// - `iotcon_remote_resource_stop_monitoring()`
+  /// - `iotcon_remote_resource_state_changed_cb()`
   int iotcon_remote_resource_start_monitoring(
     iotcon_remote_resource_h resource,
     iotcon_remote_resource_state_changed_cb cb,
@@ -4997,22 +6534,38 @@ class Tizen65Iotcon {
               iotcon_remote_resource_state_changed_cb,
               ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Stops monitoring of a remote resource.
-  /// @details Use this function to stop monitoring the remote resource.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/internet
-  /// @param[in] resource The handle of the remote resource
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IOTCON_ERROR_SYSTEM System error
-  /// @retval #IOTCON_ERROR_PERMISSION_DENIED Permission denied
-  /// @pre iotcon_initialize() should be called to initialize.
-  /// @see iotcon_remote_resource_start_monitoring()
-  /// @see iotcon_remote_resource_state_changed_cb()
+  /// Stops monitoring of a remote resource.
+  ///
+  /// Use this function to stop monitoring the remote resource.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/internet>
+  ///
+  /// **Parameters:**
+  /// - `resource` (in): The handle of the remote resource
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IOTCON_ERROR_SYSTEM`: System error
+  /// - `IOTCON_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **Preconditions:**
+  /// - iotcon_initialize() should be called to initialize.
+  ///
+  /// **See also:**
+  /// - `iotcon_remote_resource_start_monitoring()`
+  /// - `iotcon_remote_resource_state_changed_cb()`
   int iotcon_remote_resource_stop_monitoring(
     iotcon_remote_resource_h resource,
   ) {
@@ -5028,24 +6581,35 @@ class Tizen65Iotcon {
       _iotcon_remote_resource_stop_monitoringPtr
           .asFunction<int Function(iotcon_remote_resource_h)>();
 
-  /// @brief Gets an URI path of the remote resource.
-  /// @since_tizen 3.0
-  /// @remarks @a uri_path must not be released using free().
-  /// @param[in] resource The handle of the remote resource
-  /// @param[out] uri_path The URI path of the remote resource
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see iotcon_remote_resource_get_host_address()
-  /// @see iotcon_remote_resource_get_connectivity_type()
-  /// @see iotcon_remote_resource_get_device_id()
-  /// @see iotcon_remote_resource_get_device_name()
-  /// @see iotcon_remote_resource_get_types()
-  /// @see iotcon_remote_resource_get_interfaces()
-  /// @see iotcon_remote_resource_get_policies()
-  /// @see iotcon_remote_resource_set_options()
+  /// Gets an URI path of the remote resource.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - `uri_path` must not be released using free().
+  ///
+  /// **Parameters:**
+  /// - `resource` (in): The handle of the remote resource
+  /// - `uri_path` (out): The URI path of the remote resource
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `iotcon_remote_resource_get_host_address()`
+  /// - `iotcon_remote_resource_get_connectivity_type()`
+  /// - `iotcon_remote_resource_get_device_id()`
+  /// - `iotcon_remote_resource_get_device_name()`
+  /// - `iotcon_remote_resource_get_types()`
+  /// - `iotcon_remote_resource_get_interfaces()`
+  /// - `iotcon_remote_resource_get_policies()`
+  /// - `iotcon_remote_resource_set_options()`
   int iotcon_remote_resource_get_uri_path(
     iotcon_remote_resource_h resource,
     ffi.Pointer<ffi.Pointer<ffi.Char>> uri_path,
@@ -5066,23 +6630,32 @@ class Tizen65Iotcon {
           int Function(
               iotcon_remote_resource_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets a connectivity type of the remote resource.
-  /// @since_tizen 3.0
-  /// @param[in] resource The handle of the remote resource
-  /// @param[out] connectivity_type The connectivity type of the remote resource
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see iotcon_remote_resource_get_uri_path()
-  /// @see iotcon_remote_resource_get_host_address()
-  /// @see iotcon_remote_resource_get_device_id()
-  /// @see iotcon_remote_resource_get_device_name()
-  /// @see iotcon_remote_resource_get_types()
-  /// @see iotcon_remote_resource_get_interfaces()
-  /// @see iotcon_remote_resource_get_policies()
-  /// @see iotcon_remote_resource_set_options()
+  /// Gets a connectivity type of the remote resource.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `resource` (in): The handle of the remote resource
+  /// - `connectivity_type` (out): The connectivity type of the remote resource
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `iotcon_remote_resource_get_uri_path()`
+  /// - `iotcon_remote_resource_get_host_address()`
+  /// - `iotcon_remote_resource_get_device_id()`
+  /// - `iotcon_remote_resource_get_device_name()`
+  /// - `iotcon_remote_resource_get_types()`
+  /// - `iotcon_remote_resource_get_interfaces()`
+  /// - `iotcon_remote_resource_get_policies()`
+  /// - `iotcon_remote_resource_set_options()`
   int iotcon_remote_resource_get_connectivity_type(
     iotcon_remote_resource_h resource,
     ffi.Pointer<ffi.Int32> connectivity_type,
@@ -5102,24 +6675,35 @@ class Tizen65Iotcon {
       _iotcon_remote_resource_get_connectivity_typePtr.asFunction<
           int Function(iotcon_remote_resource_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets a host address of the remote resource.
-  /// @since_tizen 3.0
-  /// @remarks @a host_address must not be released using free().
-  /// @param[in] resource The handle of the remote resource
-  /// @param[out] host_address The host address of the remote resource
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see iotcon_remote_resource_get_connectivity_type()
-  /// @see iotcon_remote_resource_get_uri_path()
-  /// @see iotcon_remote_resource_get_device_id()
-  /// @see iotcon_remote_resource_get_device_name()
-  /// @see iotcon_remote_resource_get_types()
-  /// @see iotcon_remote_resource_get_interfaces()
-  /// @see iotcon_remote_resource_get_policies()
-  /// @see iotcon_remote_resource_set_options()
+  /// Gets a host address of the remote resource.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - `host_address` must not be released using free().
+  ///
+  /// **Parameters:**
+  /// - `resource` (in): The handle of the remote resource
+  /// - `host_address` (out): The host address of the remote resource
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `iotcon_remote_resource_get_connectivity_type()`
+  /// - `iotcon_remote_resource_get_uri_path()`
+  /// - `iotcon_remote_resource_get_device_id()`
+  /// - `iotcon_remote_resource_get_device_name()`
+  /// - `iotcon_remote_resource_get_types()`
+  /// - `iotcon_remote_resource_get_interfaces()`
+  /// - `iotcon_remote_resource_get_policies()`
+  /// - `iotcon_remote_resource_set_options()`
   int iotcon_remote_resource_get_host_address(
     iotcon_remote_resource_h resource,
     ffi.Pointer<ffi.Pointer<ffi.Char>> host_address,
@@ -5140,27 +6724,38 @@ class Tizen65Iotcon {
           int Function(
               iotcon_remote_resource_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets a device ID of the remote resource.
-  /// @since_tizen 3.0
-  /// @remarks @a device_id must not be released using free().\n
-  /// If @a resource is created by calling iotcon_remote_resource_create(), you cannot get @a device_id.
-  /// In this case, the return value of this function is #IOTCON_ERROR_NO_DATA.
-  /// @param[in] resource The handle of the remote resource
-  /// @param[out] device_id The device ID of the remote resource
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IOTCON_ERROR_NO_DATA No data available
-  /// @see iotcon_remote_resource_get_uri_path()
-  /// @see iotcon_remote_resource_get_device_name()
-  /// @see iotcon_remote_resource_get_host_address()
-  /// @see iotcon_remote_resource_get_connectivity_type()
-  /// @see iotcon_remote_resource_get_types()
-  /// @see iotcon_remote_resource_get_interfaces()
-  /// @see iotcon_remote_resource_get_policies()
-  /// @see iotcon_remote_resource_set_options()
+  /// Gets a device ID of the remote resource.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - `device_id` must not be released using free().
+  /// - If `resource` is created by calling iotcon_remote_resource_create(), you cannot get `device_id`.
+  /// - In this case, the return value of this function is `IOTCON_ERROR_NO_DATA`.
+  ///
+  /// **Parameters:**
+  /// - `resource` (in): The handle of the remote resource
+  /// - `device_id` (out): The device ID of the remote resource
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IOTCON_ERROR_NO_DATA`: No data available
+  ///
+  /// **See also:**
+  /// - `iotcon_remote_resource_get_uri_path()`
+  /// - `iotcon_remote_resource_get_device_name()`
+  /// - `iotcon_remote_resource_get_host_address()`
+  /// - `iotcon_remote_resource_get_connectivity_type()`
+  /// - `iotcon_remote_resource_get_types()`
+  /// - `iotcon_remote_resource_get_interfaces()`
+  /// - `iotcon_remote_resource_get_policies()`
+  /// - `iotcon_remote_resource_set_options()`
   int iotcon_remote_resource_get_device_id(
     iotcon_remote_resource_h resource,
     ffi.Pointer<ffi.Pointer<ffi.Char>> device_id,
@@ -5181,27 +6776,38 @@ class Tizen65Iotcon {
           int Function(
               iotcon_remote_resource_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets the device name of the remote resource.
-  /// @since_tizen 3.0
-  /// @remarks @a device_name must not be released using free().\n
-  /// If @a resource is created by calling iotcon_remote_resource_create(), you cannot get @a device_name.
-  /// In this case, the return value of this function is #IOTCON_ERROR_NO_DATA.
-  /// @param[in] resource The handle of the remote resource
-  /// @param[out] device_name The device name of the remote resource
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IOTCON_ERROR_NO_DATA No data available
-  /// @see iotcon_set_device_name()
-  /// @see iotcon_remote_resource_get_uri_path()
-  /// @see iotcon_remote_resource_get_device_id()
-  /// @see iotcon_remote_resource_get_host_address()
-  /// @see iotcon_remote_resource_get_connectivity_type()
-  /// @see iotcon_remote_resource_get_types()
-  /// @see iotcon_remote_resource_get_interfaces()
-  /// @see iotcon_remote_resource_set_options()
+  /// Gets the device name of the remote resource.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - `device_name` must not be released using free().
+  /// - If `resource` is created by calling iotcon_remote_resource_create(), you cannot get `device_name`.
+  /// - In this case, the return value of this function is `IOTCON_ERROR_NO_DATA`.
+  ///
+  /// **Parameters:**
+  /// - `resource` (in): The handle of the remote resource
+  /// - `device_name` (out): The device name of the remote resource
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IOTCON_ERROR_NO_DATA`: No data available
+  ///
+  /// **See also:**
+  /// - `iotcon_set_device_name()`
+  /// - `iotcon_remote_resource_get_uri_path()`
+  /// - `iotcon_remote_resource_get_device_id()`
+  /// - `iotcon_remote_resource_get_host_address()`
+  /// - `iotcon_remote_resource_get_connectivity_type()`
+  /// - `iotcon_remote_resource_get_types()`
+  /// - `iotcon_remote_resource_get_interfaces()`
+  /// - `iotcon_remote_resource_set_options()`
   int iotcon_remote_resource_get_device_name(
     iotcon_remote_resource_h resource,
     ffi.Pointer<ffi.Pointer<ffi.Char>> device_name,
@@ -5222,24 +6828,35 @@ class Tizen65Iotcon {
           int Function(
               iotcon_remote_resource_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets resource types of the remote resource.
-  /// @since_tizen 3.0
-  /// @remarks @a types must not be released using iotcon_resource_types_destroy().
-  /// @param[in] resource The handle of the remote resource
-  /// @param[out] types The resource types of the remote resource
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see iotcon_remote_resource_get_uri_path()
-  /// @see iotcon_remote_resource_get_host_address()
-  /// @see iotcon_remote_resource_get_connectivity_type()
-  /// @see iotcon_remote_resource_get_device_id()
-  /// @see iotcon_remote_resource_get_device_name()
-  /// @see iotcon_remote_resource_get_interfaces()
-  /// @see iotcon_remote_resource_get_policies()
-  /// @see iotcon_remote_resource_set_options()
+  /// Gets resource types of the remote resource.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - `types` must not be released using iotcon_resource_types_destroy().
+  ///
+  /// **Parameters:**
+  /// - `resource` (in): The handle of the remote resource
+  /// - `types` (out): The resource types of the remote resource
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `iotcon_remote_resource_get_uri_path()`
+  /// - `iotcon_remote_resource_get_host_address()`
+  /// - `iotcon_remote_resource_get_connectivity_type()`
+  /// - `iotcon_remote_resource_get_device_id()`
+  /// - `iotcon_remote_resource_get_device_name()`
+  /// - `iotcon_remote_resource_get_interfaces()`
+  /// - `iotcon_remote_resource_get_policies()`
+  /// - `iotcon_remote_resource_set_options()`
   int iotcon_remote_resource_get_types(
     iotcon_remote_resource_h resource,
     ffi.Pointer<iotcon_resource_types_h> types,
@@ -5260,24 +6877,35 @@ class Tizen65Iotcon {
           int Function(iotcon_remote_resource_h,
               ffi.Pointer<iotcon_resource_types_h>)>();
 
-  /// @brief Gets resource interfaces of the remote resource.
-  /// @since_tizen 3.0
-  /// @remarks @a ifaces must not be released using iotcon_resource_interfaces_destroy().
-  /// @param[in] resource The handle of the remote resource
-  /// @param[out] ifaces The resource interfaces of the remote resource
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see iotcon_remote_resource_get_uri_path()
-  /// @see iotcon_remote_resource_get_host_address()
-  /// @see iotcon_remote_resource_get_connectivity_type()
-  /// @see iotcon_remote_resource_get_device_id()
-  /// @see iotcon_remote_resource_get_device_name()
-  /// @see iotcon_remote_resource_get_types()
-  /// @see iotcon_remote_resource_get_policies()
-  /// @see iotcon_remote_resource_set_options()
+  /// Gets resource interfaces of the remote resource.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - `ifaces` must not be released using iotcon_resource_interfaces_destroy().
+  ///
+  /// **Parameters:**
+  /// - `resource` (in): The handle of the remote resource
+  /// - `ifaces` (out): The resource interfaces of the remote resource
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `iotcon_remote_resource_get_uri_path()`
+  /// - `iotcon_remote_resource_get_host_address()`
+  /// - `iotcon_remote_resource_get_connectivity_type()`
+  /// - `iotcon_remote_resource_get_device_id()`
+  /// - `iotcon_remote_resource_get_device_name()`
+  /// - `iotcon_remote_resource_get_types()`
+  /// - `iotcon_remote_resource_get_policies()`
+  /// - `iotcon_remote_resource_set_options()`
   int iotcon_remote_resource_get_interfaces(
     iotcon_remote_resource_h resource,
     ffi.Pointer<iotcon_resource_interfaces_h> ifaces,
@@ -5298,25 +6926,34 @@ class Tizen65Iotcon {
           int Function(iotcon_remote_resource_h,
               ffi.Pointer<iotcon_resource_interfaces_h>)>();
 
-  /// @brief Checks whether the remote resource is observable or not.
-  /// @details The @a policies can contain multiple policies like #IOTCON_RESOURCE_DISCOVERABLE | #IOTCON_RESOURCE_OBSERVABLE.
-  /// @since_tizen 3.0
-  /// @param[in] resource The handle of the resource
-  /// @param[out] policies The policies of the resource \n
-  /// Set of #iotcon_resource_policy_e
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see iotcon_remote_resource_get_uri_path()
-  /// @see iotcon_remote_resource_get_host_address()
-  /// @see iotcon_remote_resource_get_connectivity_type()
-  /// @see iotcon_remote_resource_get_device_id()
-  /// @see iotcon_remote_resource_get_device_name()
-  /// @see iotcon_remote_resource_get_types()
-  /// @see iotcon_remote_resource_get_interfaces()
-  /// @see iotcon_remote_resource_set_options()
+  /// Checks whether the remote resource is observable or not.
+  ///
+  /// The `policies` can contain multiple policies like `IOTCON_RESOURCE_DISCOVERABLE` | `IOTCON_RESOURCE_OBSERVABLE`.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `resource` (in): The handle of the resource
+  /// - `policies` (out): The policies of the resource Set of `iotcon_resource_policy_e`
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `iotcon_remote_resource_get_uri_path()`
+  /// - `iotcon_remote_resource_get_host_address()`
+  /// - `iotcon_remote_resource_get_connectivity_type()`
+  /// - `iotcon_remote_resource_get_device_id()`
+  /// - `iotcon_remote_resource_get_device_name()`
+  /// - `iotcon_remote_resource_get_types()`
+  /// - `iotcon_remote_resource_get_interfaces()`
+  /// - `iotcon_remote_resource_set_options()`
   int iotcon_remote_resource_get_policies(
     iotcon_remote_resource_h resource,
     ffi.Pointer<ffi.Uint8> policies,
@@ -5335,25 +6972,36 @@ class Tizen65Iotcon {
       _iotcon_remote_resource_get_policiesPtr.asFunction<
           int Function(iotcon_remote_resource_h, ffi.Pointer<ffi.Uint8>)>();
 
-  /// @brief Gets options of the remote resource.
-  /// @since_tizen 3.0
-  /// @remarks @a options must not be released using iotcon_options_destroy().
-  /// @param[in] resource The handle of the remote resource
-  /// @param[out] options The handle of the header options
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see iotcon_remote_resource_get_uri_path()
-  /// @see iotcon_remote_resource_get_host_address()
-  /// @see iotcon_remote_resource_get_connectivity_type()
-  /// @see iotcon_remote_resource_get_device_id()
-  /// @see iotcon_remote_resource_get_device_name()
-  /// @see iotcon_remote_resource_get_types()
-  /// @see iotcon_remote_resource_get_interfaces()
-  /// @see iotcon_remote_resource_set_options()
-  /// @see iotcon_remote_resource_get_policies()
+  /// Gets options of the remote resource.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - `options` must not be released using iotcon_options_destroy().
+  ///
+  /// **Parameters:**
+  /// - `resource` (in): The handle of the remote resource
+  /// - `options` (out): The handle of the header options
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `iotcon_remote_resource_get_uri_path()`
+  /// - `iotcon_remote_resource_get_host_address()`
+  /// - `iotcon_remote_resource_get_connectivity_type()`
+  /// - `iotcon_remote_resource_get_device_id()`
+  /// - `iotcon_remote_resource_get_device_name()`
+  /// - `iotcon_remote_resource_get_types()`
+  /// - `iotcon_remote_resource_get_interfaces()`
+  /// - `iotcon_remote_resource_set_options()`
+  /// - `iotcon_remote_resource_get_policies()`
   int iotcon_remote_resource_get_options(
     iotcon_remote_resource_h resource,
     ffi.Pointer<iotcon_options_h> options,
@@ -5374,24 +7022,33 @@ class Tizen65Iotcon {
           int Function(
               iotcon_remote_resource_h, ffi.Pointer<iotcon_options_h>)>();
 
-  /// @brief Sets options into the remote resource.
-  /// @since_tizen 3.0
-  /// @param[in] resource The handle of the remote resource
-  /// @param[in] options The handle of the header options
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see iotcon_remote_resource_get_uri_path()
-  /// @see iotcon_remote_resource_get_host_address()
-  /// @see iotcon_remote_resource_get_connectivity_type()
-  /// @see iotcon_remote_resource_get_device_id()
-  /// @see iotcon_remote_resource_get_device_name()
-  /// @see iotcon_remote_resource_get_types()
-  /// @see iotcon_remote_resource_get_interfaces()
-  /// @see iotcon_remote_resource_get_options()
-  /// @see iotcon_remote_resource_get_policies()
+  /// Sets options into the remote resource.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `resource` (in): The handle of the remote resource
+  /// - `options` (in): The handle of the header options
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `iotcon_remote_resource_get_uri_path()`
+  /// - `iotcon_remote_resource_get_host_address()`
+  /// - `iotcon_remote_resource_get_connectivity_type()`
+  /// - `iotcon_remote_resource_get_device_id()`
+  /// - `iotcon_remote_resource_get_device_name()`
+  /// - `iotcon_remote_resource_get_types()`
+  /// - `iotcon_remote_resource_get_interfaces()`
+  /// - `iotcon_remote_resource_get_options()`
+  /// - `iotcon_remote_resource_get_policies()`
   int iotcon_remote_resource_set_options(
     iotcon_remote_resource_h resource,
     iotcon_options_h options,
@@ -5410,16 +7067,25 @@ class Tizen65Iotcon {
       _iotcon_remote_resource_set_optionsPtr.asFunction<
           int Function(iotcon_remote_resource_h, iotcon_options_h)>();
 
-  /// @brief Gets cached representation from the remote resource.
-  /// @since_tizen 3.0
-  /// @remarks @a representation must not be released using iotcon_representation_destroy().
-  /// @param[in] resource The handle of the remote resource
-  /// @param[out] representation The handle of the representation
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Gets cached representation from the remote resource.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - `representation` must not be released using iotcon_representation_destroy().
+  ///
+  /// **Parameters:**
+  /// - `resource` (in): The handle of the remote resource
+  /// - `representation` (out): The handle of the representation
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
   int iotcon_remote_resource_get_cached_representation(
     iotcon_remote_resource_h resource,
     ffi.Pointer<iotcon_representation_h> representation,
@@ -5440,21 +7106,29 @@ class Tizen65Iotcon {
           int Function(iotcon_remote_resource_h,
               ffi.Pointer<iotcon_representation_h>)>();
 
-  /// @brief Gets the checking interval which is using on the monitoring & caching of remote resource.
-  /// @details This API get the checking interval which is using in the process of monitoring and caching() of remote resource. \n
-  /// The monitoring and caching will operate "GET method" with the checking interval.
-  /// Default checking interval is 10 seconds.
-  /// @since_tizen 3.0
-  /// @param[in] resource The handle of the remote resource
-  /// @param[out] interval Seconds for time interval
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see iotcon_remote_resource_set_checking_interval()
-  /// @see iotcon_remote_resource_start_monitoring()
-  /// @see iotcon_remote_resource_start_caching()
+  /// Gets the checking interval which is using on the monitoring & caching of remote resource.
+  ///
+  /// This API get the checking interval which is using in the process of monitoring and caching() of remote resource. The monitoring and caching will operate "GET method" with the checking interval. Default checking interval is 10 seconds.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `resource` (in): The handle of the remote resource
+  /// - `interval` (out): Seconds for time interval
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `iotcon_remote_resource_set_checking_interval()`
+  /// - `iotcon_remote_resource_start_monitoring()`
+  /// - `iotcon_remote_resource_start_caching()`
   int iotcon_remote_resource_get_checking_interval(
     iotcon_remote_resource_h resource,
     ffi.Pointer<ffi.Int> interval,
@@ -5474,21 +7148,29 @@ class Tizen65Iotcon {
       _iotcon_remote_resource_get_checking_intervalPtr.asFunction<
           int Function(iotcon_remote_resource_h, ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Sets the checking interval which is using on the monitoring & caching of remote resource.
-  /// @details This API set the checking interval which is using in the process of monitoring and caching() of remote resource. \n
-  /// The monitoring and caching will operate "GET method" with the checking interval changed by this function.
-  /// Default checking interval is 10 seconds.
-  /// @since_tizen 3.0
-  /// @param[in] resource The handle of the remote resource
-  /// @param[in] interval Seconds for time interval (must be in range from 1 to 3600)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see iotcon_remote_resource_get_checking_interval()
-  /// @see iotcon_remote_resource_start_monitoring()
-  /// @see iotcon_remote_resource_start_caching()
+  /// Sets the checking interval which is using on the monitoring & caching of remote resource.
+  ///
+  /// This API set the checking interval which is using in the process of monitoring and caching() of remote resource. The monitoring and caching will operate "GET method" with the checking interval changed by this function. Default checking interval is 10 seconds.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `resource` (in): The handle of the remote resource
+  /// - `interval` (in): Seconds for time interval (must be in range from 1 to 3600)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `iotcon_remote_resource_get_checking_interval()`
+  /// - `iotcon_remote_resource_start_monitoring()`
+  /// - `iotcon_remote_resource_start_caching()`
   int iotcon_remote_resource_set_checking_interval(
     iotcon_remote_resource_h resource,
     int interval,
@@ -5507,39 +7189,56 @@ class Tizen65Iotcon {
       _iotcon_remote_resource_set_checking_intervalPtr
           .asFunction<int Function(iotcon_remote_resource_h, int)>();
 
-  /// @brief Adds callback to a server to receive presence events.
-  /// @details Request to receive presence to an interested server's resource with @a resource_type. \n
-  /// If succeeded to subscribe, iotcon_presence_cb() will be invoked when the server sends presence. \n
-  /// A server sends presence events when adds/removes/alters a resource or start/stop presence. \n
-  /// @a host_address could be #IOTCON_MULTICAST_ADDRESS for IPv4 multicast.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/internet
-  /// @remarks The length of @a resource_type should be less than or equal to 61.\n
-  /// The @a resource_type must start with a lowercase alphabetic character, followed by a sequence
-  /// of lowercase alphabetic, numeric, ".", or "-" characters, and contains no white space.\n
-  /// You must destroy @a presence by calling iotcon_unsubscribe_presence()
-  /// if @a presence is no longer needed.
-  /// @param[in] host_address The address or addressable name of the server
-  /// @param[in] connectivity_type The connectivity type
-  /// @param[in] resource_type A resource type that a client is interested in
-  /// @param[in] cb The callback function to invoke
-  /// @param[in] user_data The user data to pass to the function
-  /// @param[out] presence_handle The generated presence handle
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IOTCON_ERROR_IOTIVITY IoTivity errors
-  /// @retval #IOTCON_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #IOTCON_ERROR_PERMISSION_DENIED Permission denied
-  /// @pre iotcon_initialize() should be called to initialize.
-  /// @post When the resource receive presence, iotcon_presence_cb() will be called.
-  /// @see iotcon_start_presence()
-  /// @see iotcon_stop_presence()
-  /// @see iotcon_remove_presence_cb()
-  /// @see iotcon_presence_cb()
+  /// Adds callback to a server to receive presence events.
+  ///
+  /// Request to receive presence to an interested server's resource with `resource_type`. If succeeded to subscribe, iotcon_presence_cb() will be invoked when the server sends presence. A server sends presence events when adds/removes/alters a resource or start/stop presence. `host_address` could be `IOTCON_MULTICAST_ADDRESS` for IPv4 multicast.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/internet>
+  ///
+  /// **Remarks:**
+  /// - The length of `resource_type` should be less than or equal to 61.
+  /// - The `resource_type` must start with a lowercase alphabetic character, followed by a sequence
+  /// - of lowercase alphabetic, numeric, ".", or "-" characters, and contains no white space.
+  /// - You must destroy `presence` by calling iotcon_unsubscribe_presence()
+  /// - if `presence` is no longer needed.
+  ///
+  /// **Parameters:**
+  /// - `host_address` (in): The address or addressable name of the server
+  /// - `connectivity_type` (in): The connectivity type
+  /// - `resource_type` (in): A resource type that a client is interested in
+  /// - `cb` (in): The callback function to invoke
+  /// - `user_data` (in): The user data to pass to the function
+  /// - `presence_handle` (out): The generated presence handle
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IOTCON_ERROR_IOTIVITY`: IoTivity errors
+  /// - `IOTCON_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `IOTCON_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **Preconditions:**
+  /// - iotcon_initialize() should be called to initialize.
+  ///
+  /// **Postconditions:**
+  /// - When the resource receive presence, iotcon_presence_cb() will be called.
+  ///
+  /// **See also:**
+  /// - `iotcon_start_presence()`
+  /// - `iotcon_stop_presence()`
+  /// - `iotcon_remove_presence_cb()`
+  /// - `iotcon_presence_cb()`
   int iotcon_add_presence_cb(
     ffi.Pointer<ffi.Char> host_address,
     int connectivity_type,
@@ -5576,24 +7275,40 @@ class Tizen65Iotcon {
           ffi.Pointer<ffi.Void>,
           ffi.Pointer<iotcon_presence_h>)>();
 
-  /// @brief Removes callback to a server's presence events.
-  /// @details Request not to receive server's presence any more.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/internet
-  /// @param[in] presence_handle The presence handle to be unsubscribed
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IOTCON_ERROR_SYSTEM System error
-  /// @retval #IOTCON_ERROR_PERMISSION_DENIED Permission denied
-  /// @pre iotcon_initialize() should be called to initialize.
-  /// @see iotcon_start_presence()
-  /// @see iotcon_stop_presence()
-  /// @see iotcon_add_presence_cb()
-  /// @see iotcon_presence_cb()
+  /// Removes callback to a server's presence events.
+  ///
+  /// Request not to receive server's presence any more.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/internet>
+  ///
+  /// **Parameters:**
+  /// - `presence_handle` (in): The presence handle to be unsubscribed
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IOTCON_ERROR_SYSTEM`: System error
+  /// - `IOTCON_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **Preconditions:**
+  /// - iotcon_initialize() should be called to initialize.
+  ///
+  /// **See also:**
+  /// - `iotcon_start_presence()`
+  /// - `iotcon_stop_presence()`
+  /// - `iotcon_add_presence_cb()`
+  /// - `iotcon_presence_cb()`
   int iotcon_remove_presence_cb(
     iotcon_presence_h presence_handle,
   ) {
@@ -5608,18 +7323,29 @@ class Tizen65Iotcon {
   late final _iotcon_remove_presence_cb = _iotcon_remove_presence_cbPtr
       .asFunction<int Function(iotcon_presence_h)>();
 
-  /// @brief Gets host address from the presence handle.
-  /// @since_tizen 3.0
-  /// @remarks @a host_address must not be released using free().
-  /// @param[in] presence The handle of the presence
-  /// @param[out] host_address The host address of the presence
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see iotcon_presence_get_connectivity_type()
-  /// @see iotcon_presence_get_resource_type()
+  /// Gets host address from the presence handle.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - `host_address` must not be released using free().
+  ///
+  /// **Parameters:**
+  /// - `presence` (in): The handle of the presence
+  /// - `host_address` (out): The host address of the presence
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `iotcon_presence_get_connectivity_type()`
+  /// - `iotcon_presence_get_resource_type()`
   int iotcon_presence_get_host_address(
     iotcon_presence_h presence,
     ffi.Pointer<ffi.Pointer<ffi.Char>> host_address,
@@ -5640,18 +7366,28 @@ class Tizen65Iotcon {
           int Function(
               iotcon_presence_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets connectivity type from the presence handle.
-  /// @details The @a connectivity_type could be one of #iotcon_connectivity_type_e.
-  /// @since_tizen 3.0
-  /// @param[in] presence The handle of the presence
-  /// @param[out] connectivity_type The connectivity type of the presence
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see iotcon_presence_get_host_address()
-  /// @see iotcon_presence_get_resource_type()
+  /// Gets connectivity type from the presence handle.
+  ///
+  /// The `connectivity_type` could be one of `iotcon_connectivity_type_e`.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `presence` (in): The handle of the presence
+  /// - `connectivity_type` (out): The connectivity type of the presence
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `iotcon_presence_get_host_address()`
+  /// - `iotcon_presence_get_resource_type()`
   int iotcon_presence_get_connectivity_type(
     iotcon_presence_h presence,
     ffi.Pointer<ffi.Int32> connectivity_type,
@@ -5670,18 +7406,29 @@ class Tizen65Iotcon {
       _iotcon_presence_get_connectivity_typePtr.asFunction<
           int Function(iotcon_presence_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets resource type from the presence handle.
-  /// @since_tizen 3.0
-  /// @remarks @a resource_type must not be released using free().
-  /// @param[in] presence The handle of the presence
-  /// @param[out] resource_type The resource type of the presence
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see iotcon_presence_get_host_address()
-  /// @see iotcon_presence_get_connectivity_type()
+  /// Gets resource type from the presence handle.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - `resource_type` must not be released using free().
+  ///
+  /// **Parameters:**
+  /// - `presence` (in): The handle of the presence
+  /// - `resource_type` (out): The resource type of the presence
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `iotcon_presence_get_host_address()`
+  /// - `iotcon_presence_get_connectivity_type()`
   int iotcon_presence_get_resource_type(
     iotcon_presence_h presence,
     ffi.Pointer<ffi.Pointer<ffi.Char>> resource_type,
@@ -5702,20 +7449,30 @@ class Tizen65Iotcon {
           int Function(
               iotcon_presence_h, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets result from the presence response handle.
-  /// @details The @a result could be one of #iotcon_presence_result_e.
-  /// @since_tizen 3.0
-  /// @param[in] response The handle of the presence response
-  /// @param[out] result The result code
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see iotcon_presence_response_get_trigger()
-  /// @see iotcon_presence_response_get_host_address()
-  /// @see iotcon_presence_response_get_connectivity_type()
-  /// @see iotcon_presence_response_get_resource_type()
+  /// Gets result from the presence response handle.
+  ///
+  /// The `result` could be one of `iotcon_presence_result_e`.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `response` (in): The handle of the presence response
+  /// - `result` (out): The result code
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `iotcon_presence_response_get_trigger()`
+  /// - `iotcon_presence_response_get_host_address()`
+  /// - `iotcon_presence_response_get_connectivity_type()`
+  /// - `iotcon_presence_response_get_resource_type()`
   int iotcon_presence_response_get_result(
     iotcon_presence_response_h response,
     ffi.Pointer<ffi.Int32> result,
@@ -5734,21 +7491,30 @@ class Tizen65Iotcon {
       _iotcon_presence_response_get_resultPtr.asFunction<
           int Function(iotcon_presence_response_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets trigger from the presence response handle.
-  /// @details The @a trigger could be one of #iotcon_presence_trigger_e.
-  /// It is set only if a response result is IOTCON_PRESENCE_OK.
-  /// @since_tizen 3.0
-  /// @param[in] response The handle of the presence response
-  /// @param[out] trigger The presence trigger value
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see iotcon_presence_response_get_result()
-  /// @see iotcon_presence_response_get_host_address()
-  /// @see iotcon_presence_response_get_connectivity_type()
-  /// @see iotcon_presence_response_get_resource_type()
+  /// Gets trigger from the presence response handle.
+  ///
+  /// The `trigger` could be one of `iotcon_presence_trigger_e`. It is set only if a response result is IOTCON_PRESENCE_OK.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `response` (in): The handle of the presence response
+  /// - `trigger` (out): The presence trigger value
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `iotcon_presence_response_get_result()`
+  /// - `iotcon_presence_response_get_host_address()`
+  /// - `iotcon_presence_response_get_connectivity_type()`
+  /// - `iotcon_presence_response_get_resource_type()`
   int iotcon_presence_response_get_trigger(
     iotcon_presence_response_h response,
     ffi.Pointer<ffi.Int32> trigger,
@@ -5767,21 +7533,31 @@ class Tizen65Iotcon {
       _iotcon_presence_response_get_triggerPtr.asFunction<
           int Function(iotcon_presence_response_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets host address from the presence response handle.
-  /// @since_tizen 3.0
-  /// @remarks @a host_address must not be released using free().
-  /// @param[in] response The handle of the presence response
-  /// @param[out] host_address The host address of the presence response
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
+  /// Gets host address from the presence response handle.
   ///
-  /// @see iotcon_presence_response_get_result()
-  /// @see iotcon_presence_response_get_trigger()
-  /// @see iotcon_presence_response_get_connectivity_type()
-  /// @see iotcon_presence_response_get_resource_type()
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - `host_address` must not be released using free().
+  ///
+  /// **Parameters:**
+  /// - `response` (in): The handle of the presence response
+  /// - `host_address` (out): The host address of the presence response
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `iotcon_presence_response_get_result()`
+  /// - `iotcon_presence_response_get_trigger()`
+  /// - `iotcon_presence_response_get_connectivity_type()`
+  /// - `iotcon_presence_response_get_resource_type()`
   int iotcon_presence_response_get_host_address(
     iotcon_presence_response_h response,
     ffi.Pointer<ffi.Pointer<ffi.Char>> host_address,
@@ -5802,20 +7578,30 @@ class Tizen65Iotcon {
           int Function(iotcon_presence_response_h,
               ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Gets connectivity type from the presence response handle.
-  /// @details The @a connectivity_type could be one of #iotcon_connectivity_type_e.
-  /// @since_tizen 3.0
-  /// @param[in] response The handle of the presence response
-  /// @param[out] connectivity_type The connectivity type of the presence response
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see iotcon_presence_response_get_result()
-  /// @see iotcon_presence_response_get_trigger()
-  /// @see iotcon_presence_response_get_host_address()
-  /// @see iotcon_presence_response_get_resource_type()
+  /// Gets connectivity type from the presence response handle.
+  ///
+  /// The `connectivity_type` could be one of `iotcon_connectivity_type_e`.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `response` (in): The handle of the presence response
+  /// - `connectivity_type` (out): The connectivity type of the presence response
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `iotcon_presence_response_get_result()`
+  /// - `iotcon_presence_response_get_trigger()`
+  /// - `iotcon_presence_response_get_host_address()`
+  /// - `iotcon_presence_response_get_resource_type()`
   int iotcon_presence_response_get_connectivity_type(
     iotcon_presence_response_h response,
     ffi.Pointer<ffi.Int32> connectivity_type,
@@ -5835,20 +7621,31 @@ class Tizen65Iotcon {
       _iotcon_presence_response_get_connectivity_typePtr.asFunction<
           int Function(iotcon_presence_response_h, ffi.Pointer<ffi.Int32>)>();
 
-  /// @brief Gets resource type from the presence response handle.
-  /// @since_tizen 3.0
-  /// @remarks @a resource_type must not be released using free().
-  /// @param[in] response The handle of the presence response
-  /// @param[out] resource_type The resource type of the presence response
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see iotcon_presence_response_get_result()
-  /// @see iotcon_presence_response_get_trigger()
-  /// @see iotcon_presence_response_get_host_address()
-  /// @see iotcon_presence_response_get_connectivity_type()
+  /// Gets resource type from the presence response handle.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - `resource_type` must not be released using free().
+  ///
+  /// **Parameters:**
+  /// - `response` (in): The handle of the presence response
+  /// - `resource_type` (out): The resource type of the presence response
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `iotcon_presence_response_get_result()`
+  /// - `iotcon_presence_response_get_trigger()`
+  /// - `iotcon_presence_response_get_host_address()`
+  /// - `iotcon_presence_response_get_connectivity_type()`
   int iotcon_presence_response_get_resource_type(
     iotcon_presence_response_h response,
     ffi.Pointer<ffi.Pointer<ffi.Char>> resource_type,
@@ -5869,42 +7666,60 @@ class Tizen65Iotcon {
           int Function(iotcon_presence_response_h,
               ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Finds resources asynchronously.
-  /// @details Request to find a resource of @a host_address server with @a query.\n
-  /// @a host_address could be #IOTCON_MULTICAST_ADDRESS for multicast.\n
-  /// If succeeded to find the resource, iotcon_found_resource_cb() will be invoked with information of the resource.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/internet
-  /// @remarks @a host_address should be in the format coap://address:port. \n
-  /// (ex. coaps://[fe80::ae5a:14ff:fe24:b8fe]:12345, or coaps://192.168.1.10:12345)\n
-  /// @a connectivity_type can be set with extra options.
-  /// If @a connectivity_type is set without IOTCON_CONNECTIVITY_IPV4_ONLY
-  /// and IOTCON_CONNECTIVITY_IPV6_ONLY, the resources are discovered by default setting
-  /// of IoTivity(IPv6 is preferred over IPv4). \n
-  /// If there are no preference options(PREFER_XXX), resources will reply using each of
-  /// opened protocol(TCP/UDP).
-  /// Therefore, you can get remote resource handles which include different host address,
-  /// but indicates same resource. \n
-  /// (coaps://192.168.0.2:1234/res/light, coaps+tcp://192.168.0.2/1235/res/light)
-  /// @a query can be set using specific resource types, or resource interfaces.
-  /// If @a query is NULL, every resource discovered is listed.
-  /// @param[in] host_address The address or addressable name of server
-  /// @param[in] connectivity_type The connectivity type
-  /// @param[in] query The query specified as a filter for the resource
-  /// @param[in] cb The callback function to invoke
-  /// @param[in] user_data The user data to pass to the function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IOTCON_ERROR_SYSTEM System error
-  /// @retval #IOTCON_ERROR_PERMISSION_DENIED Permission denied
-  /// @pre iotcon_initialize() should be called to initialize.
-  /// @post iotcon_found_resource_cb() will be invoked.
-  /// @see iotcon_found_resource_cb()
-  /// @see iotcon_set_timeout()
+  /// Finds resources asynchronously.
+  ///
+  /// Request to find a resource of `host_address` server with `query`. `host_address` could be `IOTCON_MULTICAST_ADDRESS` for multicast. If succeeded to find the resource, iotcon_found_resource_cb() will be invoked with information of the resource.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/internet>
+  ///
+  /// **Remarks:**
+  /// - `host_address` should be in the format coap://address:port.
+  /// - (ex. coaps://`[fe80::ae5a:14ff:fe24:b8fe]`:12345, or coaps://192.168.1.10:12345)
+  /// - `connectivity_type` can be set with extra options.
+  /// - If `connectivity_type` is set without IOTCON_CONNECTIVITY_IPV4_ONLY
+  /// - and IOTCON_CONNECTIVITY_IPV6_ONLY, the resources are discovered by default setting
+  /// - of IoTivity(IPv6 is preferred over IPv4).
+  /// - If there are no preference options(PREFER_XXX), resources will reply using each of
+  /// - opened protocol(TCP/UDP).
+  /// - Therefore, you can get remote resource handles which include different host address,
+  /// - but indicates same resource.
+  /// - (coaps://192.168.0.2:1234/res/light, coaps+tcp://192.168.0.2/1235/res/light)
+  /// - `query` can be set using specific resource types, or resource interfaces.
+  /// - If `query` is NULL, every resource discovered is listed.
+  ///
+  /// **Parameters:**
+  /// - `host_address` (in): The address or addressable name of server
+  /// - `connectivity_type` (in): The connectivity type
+  /// - `query` (in): The query specified as a filter for the resource
+  /// - `cb` (in): The callback function to invoke
+  /// - `user_data` (in): The user data to pass to the function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IOTCON_ERROR_SYSTEM`: System error
+  /// - `IOTCON_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **Preconditions:**
+  /// - iotcon_initialize() should be called to initialize.
+  ///
+  /// **Postconditions:**
+  /// - iotcon_found_resource_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `iotcon_found_resource_cb()`
+  /// - `iotcon_set_timeout()`
   int iotcon_find_resource(
     ffi.Pointer<ffi.Char> host_address,
     int connectivity_type,
@@ -5933,38 +7748,56 @@ class Tizen65Iotcon {
       int Function(ffi.Pointer<ffi.Char>, int, iotcon_query_h,
           iotcon_found_resource_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Finds the device information of remote server asynchronously.
-  /// @details Request device information to server and pass the information by calling iotcon_device_info_cb(). \n
-  /// @a host_address could be #IOTCON_MULTICAST_ADDRESS for multicast. \n
-  /// If succeeded in getting device information, iotcon_device_info_cb() will be invoked with information.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/internet
-  /// @remarks @a host_address should be in the format coap://address:port. \n
-  /// (ex. coap://[fe80::ae5a:14ff:fe24:b8fe]:12345, or coap://192.168.1.10:12345) \n
-  /// @a connectivity_type can be set with extra options.
-  /// If @a connectivity_type is set without IOTCON_CONNECTIVITY_IPV4_ONLY
-  /// and IOTCON_CONNECTIVITY_IPV6_ONLY, device informations are discovered by default setting
-  /// of IoTivity(IPv6 is preferred over IPv4). \n
-  /// If there are no preference options(PREFER_XXX), it will reply using UDP.
-  /// @param[in] host_address The host address of remote server
-  /// @param[in] connectivity_type The connectivity type
-  /// @param[in] query The query specified as a filter for the device information
-  /// @param[in] cb The callback function to invoke
-  /// @param[in] user_data The user data to pass to the function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IOTCON_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #IOTCON_ERROR_PERMISSION_DENIED Permission denied
-  /// @pre iotcon_initialize() should be called to initialize.
-  /// @post iotcon_device_info_cb() will be invoked.
-  /// @see iotcon_set_device_name()
-  /// @see iotcon_device_info_cb()
-  /// @see iotcon_device_info_get_property()
-  /// @see iotcon_set_timeout()
+  /// Finds the device information of remote server asynchronously.
+  ///
+  /// Request device information to server and pass the information by calling iotcon_device_info_cb(). `host_address` could be `IOTCON_MULTICAST_ADDRESS` for multicast. If succeeded in getting device information, iotcon_device_info_cb() will be invoked with information.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/internet>
+  ///
+  /// **Remarks:**
+  /// - `host_address` should be in the format coap://address:port.
+  /// - (ex. coap://`[fe80::ae5a:14ff:fe24:b8fe]`:12345, or coap://192.168.1.10:12345)
+  /// - `connectivity_type` can be set with extra options.
+  /// - If `connectivity_type` is set without IOTCON_CONNECTIVITY_IPV4_ONLY
+  /// - and IOTCON_CONNECTIVITY_IPV6_ONLY, device informations are discovered by default setting
+  /// - of IoTivity(IPv6 is preferred over IPv4).
+  /// - If there are no preference options(PREFER_XXX), it will reply using UDP.
+  ///
+  /// **Parameters:**
+  /// - `host_address` (in): The host address of remote server
+  /// - `connectivity_type` (in): The connectivity type
+  /// - `query` (in): The query specified as a filter for the device information
+  /// - `cb` (in): The callback function to invoke
+  /// - `user_data` (in): The user data to pass to the function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IOTCON_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `IOTCON_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **Preconditions:**
+  /// - iotcon_initialize() should be called to initialize.
+  ///
+  /// **Postconditions:**
+  /// - iotcon_device_info_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `iotcon_set_device_name()`
+  /// - `iotcon_device_info_cb()`
+  /// - `iotcon_device_info_get_property()`
+  /// - `iotcon_set_timeout()`
   int iotcon_find_device_info(
     ffi.Pointer<ffi.Char> host_address,
     int connectivity_type,
@@ -5993,20 +7826,31 @@ class Tizen65Iotcon {
       int Function(ffi.Pointer<ffi.Char>, int, iotcon_query_h,
           iotcon_device_info_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Gets device properties from the device information handle.
-  /// @since_tizen 3.0
-  /// @remarks @a value must not be released using free().
-  /// @param[in] device_info The handle of the device information
-  /// @param[in] property The properties of the device information
-  /// @param[out] value The value of the property
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see iotcon_set_device_name()
-  /// @see iotcon_device_info_cb()
-  /// @see iotcon_find_device_info()
+  /// Gets device properties from the device information handle.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - `value` must not be released using free().
+  ///
+  /// **Parameters:**
+  /// - `device_info` (in): The handle of the device information
+  /// - `property` (in): The properties of the device information
+  /// - `value` (out): The value of the property
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `iotcon_set_device_name()`
+  /// - `iotcon_device_info_cb()`
+  /// - `iotcon_find_device_info()`
   int iotcon_device_info_get_property(
     iotcon_device_info_h device_info,
     int property,
@@ -6029,38 +7873,56 @@ class Tizen65Iotcon {
           int Function(
               iotcon_device_info_h, int, ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Finds the platform information of remote server asynchronously.
-  /// @details Request platform information to server and pass the information by calling iotcon_platform_info_cb(). \n
-  /// @a host_address could be #IOTCON_MULTICAST_ADDRESS for multicast. \n
-  /// If succeeded in getting platform information, iotcon_platform_info_cb() will be invoked with information.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/internet
-  /// @remarks @a host_address should be in the format coap://address:port. \n
-  /// (ex. coap://[fe80::ae5a:14ff:fe24:b8fe]:12345, or coap://192.168.1.10:12345) \n
-  /// @a connectivity_type can be set with extra options.
-  /// If @a connectivity_type is set without IOTCON_CONNECTIVITY_IPV4_ONLY
-  /// and IOTCON_CONNECTIVITY_IPV6_ONLY, platform informations are discovered by default setting
-  /// of IoTivity(IPv6 is preferred over IPv4). \n
-  /// If there are no preference options(PREFER_XXX), it will reply using UDP.
-  /// @param[in] host_address The host address of remote server
-  /// @param[in] connectivity_type The connectivity type
-  /// @param[in] query The query specified as a filter for the platform information
-  /// @param[in] cb The callback function to invoke
-  /// @param[in] user_data The user data to pass to the function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IOTCON_ERROR_SYSTEM System error
-  /// @retval #IOTCON_ERROR_OUT_OF_MEMORY Out of memory
-  /// @retval #IOTCON_ERROR_PERMISSION_DENIED Permission denied
-  /// @pre iotcon_initialize() should be called to initialize.
-  /// @post iotcon_platform_info_cb() will be invoked.
-  /// @see iotcon_platform_info_cb()
-  /// @see iotcon_platform_info_get_property()
-  /// @see iotcon_set_timeout()
+  /// Finds the platform information of remote server asynchronously.
+  ///
+  /// Request platform information to server and pass the information by calling iotcon_platform_info_cb(). `host_address` could be `IOTCON_MULTICAST_ADDRESS` for multicast. If succeeded in getting platform information, iotcon_platform_info_cb() will be invoked with information.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/internet>
+  ///
+  /// **Remarks:**
+  /// - `host_address` should be in the format coap://address:port.
+  /// - (ex. coap://`[fe80::ae5a:14ff:fe24:b8fe]`:12345, or coap://192.168.1.10:12345)
+  /// - `connectivity_type` can be set with extra options.
+  /// - If `connectivity_type` is set without IOTCON_CONNECTIVITY_IPV4_ONLY
+  /// - and IOTCON_CONNECTIVITY_IPV6_ONLY, platform informations are discovered by default setting
+  /// - of IoTivity(IPv6 is preferred over IPv4).
+  /// - If there are no preference options(PREFER_XXX), it will reply using UDP.
+  ///
+  /// **Parameters:**
+  /// - `host_address` (in): The host address of remote server
+  /// - `connectivity_type` (in): The connectivity type
+  /// - `query` (in): The query specified as a filter for the platform information
+  /// - `cb` (in): The callback function to invoke
+  /// - `user_data` (in): The user data to pass to the function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IOTCON_ERROR_SYSTEM`: System error
+  /// - `IOTCON_ERROR_OUT_OF_MEMORY`: Out of memory
+  /// - `IOTCON_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **Preconditions:**
+  /// - iotcon_initialize() should be called to initialize.
+  ///
+  /// **Postconditions:**
+  /// - iotcon_platform_info_cb() will be invoked.
+  ///
+  /// **See also:**
+  /// - `iotcon_platform_info_cb()`
+  /// - `iotcon_platform_info_get_property()`
+  /// - `iotcon_set_timeout()`
   int iotcon_find_platform_info(
     ffi.Pointer<ffi.Char> host_address,
     int connectivity_type,
@@ -6090,19 +7952,30 @@ class Tizen65Iotcon {
           int Function(ffi.Pointer<ffi.Char>, int, iotcon_query_h,
               iotcon_platform_info_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Gets platform properties from the platform information handle.
-  /// @since_tizen 3.0
-  /// @remarks @a value must not be released using free().
-  /// @param[in] platform_info The handle of the platform information
-  /// @param[in] property The properties of the platform information
-  /// @param[out] value The value of the property
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @see iotcon_platform_info_cb()
-  /// @see iotcon_find_platform_info()
+  /// Gets platform properties from the platform information handle.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - `value` must not be released using free().
+  ///
+  /// **Parameters:**
+  /// - `platform_info` (in): The handle of the platform information
+  /// - `property` (in): The properties of the platform information
+  /// - `value` (out): The value of the property
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **See also:**
+  /// - `iotcon_platform_info_cb()`
+  /// - `iotcon_find_platform_info()`
   int iotcon_platform_info_get_property(
     iotcon_platform_info_h platform_info,
     int property,
@@ -6125,24 +7998,40 @@ class Tizen65Iotcon {
           int Function(iotcon_platform_info_h, int,
               ffi.Pointer<ffi.Pointer<ffi.Char>>)>();
 
-  /// @brief Initializes IoTCon.
-  /// @details Calls this function to start IoTCon.
-  /// @since_tizen 3.0
-  /// @privlevel public
-  /// @privilege %http://tizen.org/privilege/network.get
-  /// @privilege %http://tizen.org/privilege/internet
-  /// @remarks The @a file_path point to a file for handling secure virtual resources.
-  /// The file that is CBOR(Concise Binary Object Representation)-format must already exist in @a file_path.
-  /// We recommend to use application-local file for @a file_path. \n
-  /// You must call iotcon_deinitialize() if IoTCon API is no longer needed.
-  /// @param[in] file_path The path of SVR(Secure Virtual Resources) DB
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IOTCON_ERROR_PERMISSION_DENIED Permission denied
-  /// @see iotcon_deinitialize()
+  /// Initializes IoTCon.
+  ///
+  /// Calls this function to start IoTCon.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Privilege level:**
+  /// - public
+  ///
+  /// **Privileges:**
+  /// - <http://tizen.org/privilege/network.get>
+  /// - <http://tizen.org/privilege/internet>
+  ///
+  /// **Remarks:**
+  /// - The `file_path` point to a file for handling secure virtual resources.
+  /// - The file that is CBOR(Concise Binary Object Representation)-format must already exist in `file_path`.
+  /// - We recommend to use application-local file for `file_path`.
+  /// - You must call iotcon_deinitialize() if IoTCon API is no longer needed.
+  ///
+  /// **Parameters:**
+  /// - `file_path` (in): The path of SVR(Secure Virtual Resources) DB
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IOTCON_ERROR_PERMISSION_DENIED`: Permission denied
+  ///
+  /// **See also:**
+  /// - `iotcon_deinitialize()`
   int iotcon_initialize(
     ffi.Pointer<ffi.Char> file_path,
   ) {
@@ -6157,16 +8046,28 @@ class Tizen65Iotcon {
   late final _iotcon_initialize =
       _iotcon_initializePtr.asFunction<int Function(ffi.Pointer<ffi.Char>)>();
 
-  /// @brief Deinitializes IoTCon.
-  /// @details Frees the resources allocated to IoTCon.
-  /// @since_tizen 3.0
-  /// @remarks This function must be called if IoTCon API is no longer needed.
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @pre iotcon_initialize() should be called to initialize.
-  /// @see iotcon_initialize()
+  /// Deinitializes IoTCon.
+  ///
+  /// Frees the resources allocated to IoTCon.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Remarks:**
+  /// - This function must be called if IoTCon API is no longer needed.
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - iotcon_initialize() should be called to initialize.
+  ///
+  /// **See also:**
+  /// - `iotcon_initialize()`
   int iotcon_deinitialize() {
     return _iotcon_deinitialize();
   }
@@ -6176,20 +8077,29 @@ class Tizen65Iotcon {
   late final _iotcon_deinitialize =
       _iotcon_deinitializePtr.asFunction<int Function()>();
 
-  /// @brief Gets the timeout seconds of asynchronous API.
-  /// @details This API get the timeout of iotcon_find_device_info(),
-  /// iotcon_find_platform_info(), iotcon_find_resource(),
-  /// iotcon_remote_resource_get(), iotcon_remote_resource_put(),
-  /// iotcon_remote_resource_post() and iotcon_remote_resource_delete().
-  /// @since_tizen 3.0
-  /// @param[out] timeout_seconds Seconds for timeout
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre iotcon_initialize() should be called to initialize.
-  /// @see iotcon_set_timeout()
+  /// Gets the timeout seconds of asynchronous API.
+  ///
+  /// This API get the timeout of iotcon_find_device_info(), iotcon_find_platform_info(), iotcon_find_resource(), iotcon_remote_resource_get(), iotcon_remote_resource_put(), iotcon_remote_resource_post() and iotcon_remote_resource_delete().
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `timeout_seconds` (out): Seconds for timeout
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - iotcon_initialize() should be called to initialize.
+  ///
+  /// **See also:**
+  /// - `iotcon_set_timeout()`
   int iotcon_get_timeout(
     ffi.Pointer<ffi.Int> timeout_seconds,
   ) {
@@ -6204,21 +8114,29 @@ class Tizen65Iotcon {
   late final _iotcon_get_timeout =
       _iotcon_get_timeoutPtr.asFunction<int Function(ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Sets the timeout seconds of asynchronous APIs.
-  /// @details This API set the timeout of iotcon_find_device_info(),
-  /// iotcon_find_platform_info(), iotcon_find_resource(),
-  /// iotcon_remote_resource_get(), iotcon_remote_resource_put(),
-  /// iotcon_remote_resource_post() and iotcon_remote_resource_delete().\n
-  /// Default timeout interval value is 30.
-  /// @since_tizen 3.0
-  /// @param[in] timeout_seconds Seconds for timeout (must be in range from 1 to 3600)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre iotcon_initialize() should be called to initialize.
-  /// @see iotcon_get_timeout()
+  /// Sets the timeout seconds of asynchronous APIs.
+  ///
+  /// This API set the timeout of iotcon_find_device_info(), iotcon_find_platform_info(), iotcon_find_resource(), iotcon_remote_resource_get(), iotcon_remote_resource_put(), iotcon_remote_resource_post() and iotcon_remote_resource_delete(). Default timeout interval value is 30.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `timeout_seconds` (in): Seconds for timeout (must be in range from 1 to 3600)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - iotcon_initialize() should be called to initialize.
+  ///
+  /// **See also:**
+  /// - `iotcon_get_timeout()`
   int iotcon_set_timeout(
     int timeout_seconds,
   ) {
@@ -6233,18 +8151,29 @@ class Tizen65Iotcon {
   late final _iotcon_set_timeout =
       _iotcon_set_timeoutPtr.asFunction<int Function(int)>();
 
-  /// @brief Gets the polling interval(milliseconds) of IoTCon.
-  /// @details This API gets the polling interval of IoTCon.
-  /// Default polling interval is 100 milliseconds.
-  /// @since_tizen 3.0
-  /// @param[out] interval Milliseconds for polling interval
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre iotcon_initialize() should be called to initialize.
-  /// @see iotcon_set_timeout()
+  /// Gets the polling interval(milliseconds) of IoTCon.
+  ///
+  /// This API gets the polling interval of IoTCon. Default polling interval is 100 milliseconds.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `interval` (out): Milliseconds for polling interval
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - iotcon_initialize() should be called to initialize.
+  ///
+  /// **See also:**
+  /// - `iotcon_set_timeout()`
   int iotcon_polling_get_interval(
     ffi.Pointer<ffi.Int> interval,
   ) {
@@ -6259,20 +8188,29 @@ class Tizen65Iotcon {
   late final _iotcon_polling_get_interval = _iotcon_polling_get_intervalPtr
       .asFunction<int Function(ffi.Pointer<ffi.Int>)>();
 
-  /// @brief Sets the polling interval(milliseconds) of IoTCon.
-  /// @details This API sets the polling interval of IoTCon.
-  /// The closer to 0, the faster it operates. It is invoked immediately for changing the interval.
-  /// Default polling interval is 100 milliseconds. If you want the faster operation,
-  /// we recommend you set 10 milliseconds for polling interval.
-  /// @since_tizen 3.0
-  /// @param[in] interval Milliseconds for polling interval (must be in range from 1 to 999)
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @pre iotcon_initialize() should be called to initialize.
-  /// @see iotcon_polling_get_interval()
+  /// Sets the polling interval(milliseconds) of IoTCon.
+  ///
+  /// This API sets the polling interval of IoTCon. The closer to 0, the faster it operates. It is invoked immediately for changing the interval. Default polling interval is 100 milliseconds. If you want the faster operation, we recommend you set 10 milliseconds for polling interval.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `interval` (in): Milliseconds for polling interval (must be in range from 1 to 999)
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  ///
+  /// **Preconditions:**
+  /// - iotcon_initialize() should be called to initialize.
+  ///
+  /// **See also:**
+  /// - `iotcon_polling_get_interval()`
   int iotcon_polling_set_interval(
     int interval,
   ) {
@@ -6287,15 +8225,22 @@ class Tizen65Iotcon {
   late final _iotcon_polling_set_interval =
       _iotcon_polling_set_intervalPtr.asFunction<int Function(int)>();
 
-  /// @brief Invokes a next message from a queue for receiving messages from others immediately.
-  /// @details This API invokes a next message from a queue for receiving messages from others immediately. \n
-  /// After calling the API, it continues the polling with existing interval.
-  /// @since_tizen 3.0
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED Not supported
-  /// @pre iotcon_initialize() should be called to initialize.
+  /// Invokes a next message from a queue for receiving messages from others immediately.
+  ///
+  /// This API invokes a next message from a queue for receiving messages from others immediately. After calling the API, it continues the polling with existing interval.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  ///
+  /// **Preconditions:**
+  /// - iotcon_initialize() should be called to initialize.
   int iotcon_polling_invoke() {
     return _iotcon_polling_invoke();
   }
@@ -6305,22 +8250,35 @@ class Tizen65Iotcon {
   late final _iotcon_polling_invoke =
       _iotcon_polling_invokePtr.asFunction<int Function()>();
 
-  /// @brief Adds callback to show pin number which is generated automatically.
-  /// @details When a provisioning tool tries to register this device using random pin based \n
-  /// ownership transfer method, it makes pin number which is generated automatically be shown.
-  /// @since_tizen 3.0
-  /// @param[in] cb The callback function to invoke
-  /// @param[in] user_data The user data to pass to the function
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED  Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IOTCON_ERROR_ALREADY Already done
-  /// @retval #IOTCON_ERROR_OUT_OF_MEMORY Out of memory
-  /// @pre iotcon_initialize() should be called to initialize.
-  /// @post When the device is registered by provisioning tool, iotcon_generated_pin_cb() will be called.
-  /// @see iotcon_remove_generated_pin_cb()
+  /// Adds callback to show pin number which is generated automatically.
+  ///
+  /// When a provisioning tool tries to register this device using random pin based ownership transfer method, it makes pin number which is generated automatically be shown.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `cb` (in): The callback function to invoke
+  /// - `user_data` (in): The user data to pass to the function
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IOTCON_ERROR_ALREADY`: Already done
+  /// - `IOTCON_ERROR_OUT_OF_MEMORY`: Out of memory
+  ///
+  /// **Preconditions:**
+  /// - iotcon_initialize() should be called to initialize.
+  ///
+  /// **Postconditions:**
+  /// - When the device is registered by provisioning tool, iotcon_generated_pin_cb() will be called.
+  ///
+  /// **See also:**
+  /// - `iotcon_remove_generated_pin_cb()`
   int iotcon_add_generated_pin_cb(
     iotcon_generated_pin_cb cb,
     ffi.Pointer<ffi.Void> user_data,
@@ -6339,19 +8297,30 @@ class Tizen65Iotcon {
       _iotcon_add_generated_pin_cbPtr.asFunction<
           int Function(iotcon_generated_pin_cb, ffi.Pointer<ffi.Void>)>();
 
-  /// @brief Removes callback to show pin number which is generated automatically.
-  /// @details If this function is called, @a cb will be not called anymore. \n
-  /// For removing @a cb that is used at iotcon_add_generated_pin_cb() should be used.
-  /// @since_tizen 3.0
-  /// @param[in] cb The callback function to invoke
-  /// @return @c 0 on success,
-  /// otherwise a negative error value
-  /// @retval #IOTCON_ERROR_NONE Successful
-  /// @retval #IOTCON_ERROR_NOT_SUPPORTED  Not supported
-  /// @retval #IOTCON_ERROR_INVALID_PARAMETER Invalid parameter
-  /// @retval #IOTCON_ERROR_NO_DATA No data available
-  /// @pre iotcon_initialize() should be called to initialize.
-  /// @see iotcon_add_generated_pin_cb()
+  /// Removes callback to show pin number which is generated automatically.
+  ///
+  /// If this function is called, `cb` will be not called anymore. For removing `cb` that is used at iotcon_add_generated_pin_cb() should be used.
+  ///
+  /// **Since Tizen:**
+  /// - 3.0
+  ///
+  /// **Parameters:**
+  /// - `cb` (in): The callback function to invoke
+  ///
+  /// **Returns:**
+  /// - `0` on success, otherwise a negative error value
+  ///
+  /// **Return values:**
+  /// - `IOTCON_ERROR_NONE`: Successful
+  /// - `IOTCON_ERROR_NOT_SUPPORTED`: Not supported
+  /// - `IOTCON_ERROR_INVALID_PARAMETER`: Invalid parameter
+  /// - `IOTCON_ERROR_NO_DATA`: No data available
+  ///
+  /// **Preconditions:**
+  /// - iotcon_initialize() should be called to initialize.
+  ///
+  /// **See also:**
+  /// - `iotcon_add_generated_pin_cb()`
   int iotcon_remove_generated_pin_cb(
     iotcon_generated_pin_cb cb,
   ) {
@@ -6368,42 +8337,62 @@ class Tizen65Iotcon {
           .asFunction<int Function(iotcon_generated_pin_cb)>();
 }
 
+/// @nodoc
 final class icl_resource extends ffi.Opaque {}
 
+/// @nodoc
 final class icl_lite_resource extends ffi.Opaque {}
 
+/// @nodoc
 final class icl_resource_response extends ffi.Opaque {}
 
+/// @nodoc
 final class icl_observers extends ffi.Opaque {}
 
+/// @nodoc
 final class icl_resource_request extends ffi.Opaque {}
 
+/// @nodoc
 final class icl_remote_resource extends ffi.Opaque {}
 
+/// @nodoc
 final class icl_presence extends ffi.Opaque {}
 
+/// @nodoc
 final class icl_presence_response extends ffi.Opaque {}
 
+/// @nodoc
 final class icl_device_info extends ffi.Opaque {}
 
+/// @nodoc
 final class icl_platform_info extends ffi.Opaque {}
 
+/// @nodoc
 final class icl_resource_ifaces extends ffi.Opaque {}
 
+/// @nodoc
 final class icl_resource_types extends ffi.Opaque {}
 
+/// @nodoc
 final class icl_options extends ffi.Opaque {}
 
+/// @nodoc
 final class icl_query extends ffi.Opaque {}
 
+/// @nodoc
 final class icl_representation_s extends ffi.Opaque {}
 
+/// @nodoc
 final class icl_list_s extends ffi.Opaque {}
 
+/// @nodoc
 final class icl_attributes_s extends ffi.Opaque {}
 
-/// @brief Enumeration for types of representation that is possible to have.
-/// @since_tizen 3.0
+/// Enumeration for types of representation that is possible to have.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class iotcon_type_e {
   /// < Indicates for representation that have no type
   static const int IOTCON_TYPE_NONE = 0;
@@ -6433,291 +8422,458 @@ abstract class iotcon_type_e {
   static const int IOTCON_TYPE_ATTRIBUTES = 8;
 }
 
-/// @brief The iotcon_value_h type values list handle.
-/// @details @a iotcon_list_h is an opaque data structure.
-/// @since_tizen 3.0
+/// The iotcon_value_h type values list handle.
+///
+/// `iotcon_list_h` is an opaque data structure.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 typedef iotcon_list_h = ffi.Pointer<icl_list_s>;
 
-/// @brief The attributes handle.
-/// @details @a iotcon_attributes_h is an opaque data structure to have attribute value map.
-/// Attribute value map consists of a key and a value.
-/// Datatype of the key is string and the value should be one of them #IOTCON_TYPE_INT,
-/// #IOTCON_TYPE_BOOL, #IOTCON_TYPE_DOUBLE, #IOTCON_TYPE_STR, #IOTCON_TYPE_NULL,
-/// #IOTCON_TYPE_LIST and #IOTCON_TYPE_ATTRIBUTES.
-/// @since_tizen 3.0
+/// The attributes handle.
+///
+/// `iotcon_attributes_h` is an opaque data structure to have attribute value map. Attribute value map consists of a key and a value. Datatype of the key is string and the value should be one of them `IOTCON_TYPE_INT`, `IOTCON_TYPE_BOOL`, `IOTCON_TYPE_DOUBLE`, `IOTCON_TYPE_STR`, `IOTCON_TYPE_NULL`, `IOTCON_TYPE_LIST` and `IOTCON_TYPE_ATTRIBUTES`.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 typedef iotcon_attributes_h = ffi.Pointer<icl_attributes_s>;
 
-/// @brief Specifies the type of function passed to iotcon_list_foreach_int().
-/// @since_tizen 3.0
-/// @param[in] pos The number of the integer value (0 being the first)
-/// @param[in] value The integer value
-/// @param[in] user_data The user data to pass to the function
-/// @return @c true to continue with the next iteration of the loop,
-/// otherwise @c false to break out of the loop
-/// #IOTCON_FUNC_CONTINUE and #IOTCON_FUNC_STOP are more friendly values for the return
-/// @pre iotcon_list_foreach_int() will invoke this callback function.
-/// @see iotcon_list_foreach_int()
+/// Specifies the type of function passed to iotcon_list_foreach_int().
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `pos` (in): The number of the integer value (0 being the first)
+/// - `value` (in): The integer value
+/// - `user_data` (in): The user data to pass to the function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop `IOTCON_FUNC_CONTINUE` and `IOTCON_FUNC_STOP` are more friendly values for the return
+///
+/// **Preconditions:**
+/// - iotcon_list_foreach_int() will invoke this callback function.
+///
+/// **See also:**
+/// - `iotcon_list_foreach_int()`
+/// @nodoc
 typedef iotcon_list_int_cb
     = ffi.Pointer<ffi.NativeFunction<iotcon_list_int_cbFunction>>;
+/// @nodoc
 typedef iotcon_list_int_cbFunction = ffi.Bool Function(
     ffi.Int pos, ffi.Int value, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartiotcon_list_int_cbFunction = bool Function(
     int pos, int value, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Specifies the type of function passed to iotcon_list_foreach_bool().
-/// @since_tizen 3.0
-/// @param[in] pos The number of the boolean value (0 being the first)
-/// @param[in] value The boolean value
-/// @param[in] user_data The user data to pass to the function
-/// @return @c true to continue with the next iteration of the loop,
-/// otherwise @c false to break out of the loop
-/// #IOTCON_FUNC_CONTINUE and #IOTCON_FUNC_STOP are more friendly values for the return
-/// @pre iotcon_list_foreach_bool() will invoke this callback function.
-/// @see iotcon_list_foreach_bool()
+/// Specifies the type of function passed to iotcon_list_foreach_bool().
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `pos` (in): The number of the boolean value (0 being the first)
+/// - `value` (in): The boolean value
+/// - `user_data` (in): The user data to pass to the function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop `IOTCON_FUNC_CONTINUE` and `IOTCON_FUNC_STOP` are more friendly values for the return
+///
+/// **Preconditions:**
+/// - iotcon_list_foreach_bool() will invoke this callback function.
+///
+/// **See also:**
+/// - `iotcon_list_foreach_bool()`
+/// @nodoc
 typedef iotcon_list_bool_cb
     = ffi.Pointer<ffi.NativeFunction<iotcon_list_bool_cbFunction>>;
+/// @nodoc
 typedef iotcon_list_bool_cbFunction = ffi.Bool Function(
     ffi.Int pos, ffi.Bool value, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartiotcon_list_bool_cbFunction = bool Function(
     int pos, bool value, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Specifies the type of function passed to iotcon_list_foreach_double().
-/// @since_tizen 3.0
-/// @param[in] pos The number of the double value (0 being the first)
-/// @param[in] value The double value
-/// @param[in] user_data The user data to pass to the function
-/// @return @c true to continue with the next iteration of the loop,
-/// otherwise @c false to break out of the loop
-/// #IOTCON_FUNC_CONTINUE and #IOTCON_FUNC_STOP are more friendly values for the return
-/// @pre iotcon_list_foreach_double() will invoke this callback function.
-/// @see iotcon_list_foreach_double()
+/// Specifies the type of function passed to iotcon_list_foreach_double().
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `pos` (in): The number of the double value (0 being the first)
+/// - `value` (in): The double value
+/// - `user_data` (in): The user data to pass to the function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop `IOTCON_FUNC_CONTINUE` and `IOTCON_FUNC_STOP` are more friendly values for the return
+///
+/// **Preconditions:**
+/// - iotcon_list_foreach_double() will invoke this callback function.
+///
+/// **See also:**
+/// - `iotcon_list_foreach_double()`
+/// @nodoc
 typedef iotcon_list_double_cb
     = ffi.Pointer<ffi.NativeFunction<iotcon_list_double_cbFunction>>;
+/// @nodoc
 typedef iotcon_list_double_cbFunction = ffi.Bool Function(
     ffi.Int pos, ffi.Double value, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartiotcon_list_double_cbFunction = bool Function(
     int pos, double value, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Specifies the type of function passed to iotcon_list_foreach_byte_str().
-/// @since_tizen 3.0
-/// @param[in] pos The number of the string value (0 being the first)
-/// @param[in] value The byte string value
-/// @param[in] len The length of @a value
-/// @param[in] user_data The user data to pass to the function
-/// @return @c true to continue with the next iteration of the loop,
-/// otherwise @c false to break out of the loop
-/// #IOTCON_FUNC_CONTINUE and #IOTCON_FUNC_STOP are more friendly values for the return
-/// @pre iotcon_list_foreach_byte_str() will invoke this callback function.
-/// @see iotcon_list_foreach_byte_str()
+/// Specifies the type of function passed to iotcon_list_foreach_byte_str().
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `pos` (in): The number of the string value (0 being the first)
+/// - `value` (in): The byte string value
+/// - `len` (in): The length of `value`
+/// - `user_data` (in): The user data to pass to the function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop `IOTCON_FUNC_CONTINUE` and `IOTCON_FUNC_STOP` are more friendly values for the return
+///
+/// **Preconditions:**
+/// - iotcon_list_foreach_byte_str() will invoke this callback function.
+///
+/// **See also:**
+/// - `iotcon_list_foreach_byte_str()`
+/// @nodoc
 typedef iotcon_list_byte_str_cb
     = ffi.Pointer<ffi.NativeFunction<iotcon_list_byte_str_cbFunction>>;
+/// @nodoc
 typedef iotcon_list_byte_str_cbFunction = ffi.Bool Function(
     ffi.Int pos,
     ffi.Pointer<ffi.UnsignedChar> value,
     ffi.Int len,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartiotcon_list_byte_str_cbFunction = bool Function(
     int pos,
     ffi.Pointer<ffi.UnsignedChar> value,
     int len,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Specifies the type of function passed to iotcon_list_foreach_str().
-/// @since_tizen 3.0
-/// @param[in] pos The number of the string value (0 being the first)
-/// @param[in] value The string value
-/// @param[in] user_data The user data to pass to the function
-/// @return @c true to continue with the next iteration of the loop,
-/// otherwise @c false to break out of the loop
-/// #IOTCON_FUNC_CONTINUE and #IOTCON_FUNC_STOP are more friendly values for the return
-/// @pre iotcon_list_foreach_str() will invoke this callback function.
-/// @see iotcon_list_foreach_str()
+/// Specifies the type of function passed to iotcon_list_foreach_str().
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `pos` (in): The number of the string value (0 being the first)
+/// - `value` (in): The string value
+/// - `user_data` (in): The user data to pass to the function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop `IOTCON_FUNC_CONTINUE` and `IOTCON_FUNC_STOP` are more friendly values for the return
+///
+/// **Preconditions:**
+/// - iotcon_list_foreach_str() will invoke this callback function.
+///
+/// **See also:**
+/// - `iotcon_list_foreach_str()`
+/// @nodoc
 typedef iotcon_list_str_cb
     = ffi.Pointer<ffi.NativeFunction<iotcon_list_str_cbFunction>>;
+/// @nodoc
 typedef iotcon_list_str_cbFunction = ffi.Bool Function(
     ffi.Int pos, ffi.Pointer<ffi.Char> value, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartiotcon_list_str_cbFunction = bool Function(
     int pos, ffi.Pointer<ffi.Char> value, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Specifies the type of function passed to iotcon_list_foreach_list().
-/// @since_tizen 3.0
-/// @param[in] pos The number of the list value (0 being the first)
-/// @param[in] value The list value
-/// @param[in] user_data The user data to pass to the function
-/// @return @c true to continue with the next iteration of the loop,
-/// otherwise @c false to break out of the loop
-/// #IOTCON_FUNC_CONTINUE and #IOTCON_FUNC_STOP are more friendly values for the return
-/// @pre iotcon_list_foreach_list() will invoke this callback function.
-/// @see iotcon_list_foreach_list()
+/// Specifies the type of function passed to iotcon_list_foreach_list().
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `pos` (in): The number of the list value (0 being the first)
+/// - `value` (in): The list value
+/// - `user_data` (in): The user data to pass to the function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop `IOTCON_FUNC_CONTINUE` and `IOTCON_FUNC_STOP` are more friendly values for the return
+///
+/// **Preconditions:**
+/// - iotcon_list_foreach_list() will invoke this callback function.
+///
+/// **See also:**
+/// - `iotcon_list_foreach_list()`
+/// @nodoc
 typedef iotcon_list_list_cb
     = ffi.Pointer<ffi.NativeFunction<iotcon_list_list_cbFunction>>;
+/// @nodoc
 typedef iotcon_list_list_cbFunction = ffi.Bool Function(
     ffi.Int pos, iotcon_list_h value, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartiotcon_list_list_cbFunction = bool Function(
     int pos, iotcon_list_h value, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Specifies the type of function passed to iotcon_list_foreach_attributes().
-/// @since_tizen 3.0
-/// @param[in] pos The number of the attributes value (0 being the first)
-/// @param[in] value The attributes value
-/// @param[in] user_data The user data to pass to the function
-/// @return @c true to continue with the next iteration of the loop,
-/// otherwise @c false to break out of the loop
-/// #IOTCON_FUNC_CONTINUE and #IOTCON_FUNC_STOP are more friendly values for the return
-/// @pre iotcon_list_foreach_attributes() will invoke this callback function.
-/// @see iotcon_list_foreach_attributes()
+/// Specifies the type of function passed to iotcon_list_foreach_attributes().
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `pos` (in): The number of the attributes value (0 being the first)
+/// - `value` (in): The attributes value
+/// - `user_data` (in): The user data to pass to the function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop `IOTCON_FUNC_CONTINUE` and `IOTCON_FUNC_STOP` are more friendly values for the return
+///
+/// **Preconditions:**
+/// - iotcon_list_foreach_attributes() will invoke this callback function.
+///
+/// **See also:**
+/// - `iotcon_list_foreach_attributes()`
+/// @nodoc
 typedef iotcon_list_attributes_cb
     = ffi.Pointer<ffi.NativeFunction<iotcon_list_attributes_cbFunction>>;
+/// @nodoc
 typedef iotcon_list_attributes_cbFunction = ffi.Bool Function(
     ffi.Int pos, iotcon_attributes_h value, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartiotcon_list_attributes_cbFunction = bool Function(
     int pos, iotcon_attributes_h value, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief The query handle.
-/// @details @a iotcon_query_h is an opaque data structure to have attribute value map which consists of key and value.
-/// Datatype of both key and value are string.
-/// @a iotcon_query_h also have length.
-/// The length is total length of all keys and values of map.
-/// The length should be less than or equal to 64.
-/// @since_tizen 3.0
+/// The query handle.
+///
+/// `iotcon_query_h` is an opaque data structure to have attribute value map which consists of key and value. Datatype of both key and value are string. `iotcon_query_h` also have length. The length is total length of all keys and values of map. The length should be less than or equal to 64.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 typedef iotcon_query_h = ffi.Pointer<icl_query>;
 
-/// @brief Specifies the type of function passed to iotcon_query_foreach().
-/// @since_tizen 3.0
-/// @param[in] key The key of the query
-/// @param[in] value The value of the query
-/// @param[in] user_data The user data to pass to the function
-/// @return @c true to continue with the next iteration of the loop,
-/// otherwise @c false to break out of the loop
-/// #IOTCON_FUNC_CONTINUE and #IOTCON_FUNC_STOP are more friendly values for the return
-/// @pre iotcon_query_foreach() will invoke this callback function.
-/// @see iotcon_query_foreach()
+/// Specifies the type of function passed to iotcon_query_foreach().
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `key` (in): The key of the query
+/// - `value` (in): The value of the query
+/// - `user_data` (in): The user data to pass to the function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop `IOTCON_FUNC_CONTINUE` and `IOTCON_FUNC_STOP` are more friendly values for the return
+///
+/// **Preconditions:**
+/// - iotcon_query_foreach() will invoke this callback function.
+///
+/// **See also:**
+/// - `iotcon_query_foreach()`
+/// @nodoc
 typedef iotcon_query_foreach_cb
     = ffi.Pointer<ffi.NativeFunction<iotcon_query_foreach_cbFunction>>;
+/// @nodoc
 typedef iotcon_query_foreach_cbFunction = ffi.Bool Function(
     ffi.Pointer<ffi.Char> key,
     ffi.Pointer<ffi.Char> value,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartiotcon_query_foreach_cbFunction = bool Function(
     ffi.Pointer<ffi.Char> key,
     ffi.Pointer<ffi.Char> value,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Specifies the type of function passed to iotcon_attributes_foreach().
-/// @since_tizen 3.0
-/// @param[in] attributes The attributes handle
-/// @param[in] key The key
-/// @param[in] user_data The user data to pass to the function
-/// @return @c true to continue with the next iteration of the loop,
-/// otherwise @c false to break out of the loop
-/// #IOTCON_FUNC_CONTINUE and #IOTCON_FUNC_STOP are more friendly values for the return
-/// @pre iotcon_attributes_foreach() will invoke this callback function.
-/// @see iotcon_attributes_foreach()
+/// Specifies the type of function passed to iotcon_attributes_foreach().
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `attributes` (in): The attributes handle
+/// - `key` (in): The key
+/// - `user_data` (in): The user data to pass to the function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop `IOTCON_FUNC_CONTINUE` and `IOTCON_FUNC_STOP` are more friendly values for the return
+///
+/// **Preconditions:**
+/// - iotcon_attributes_foreach() will invoke this callback function.
+///
+/// **See also:**
+/// - `iotcon_attributes_foreach()`
+/// @nodoc
 typedef iotcon_attributes_cb
     = ffi.Pointer<ffi.NativeFunction<iotcon_attributes_cbFunction>>;
+/// @nodoc
 typedef iotcon_attributes_cbFunction = ffi.Bool Function(
     iotcon_attributes_h attributes,
     ffi.Pointer<ffi.Char> key,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartiotcon_attributes_cbFunction = bool Function(
     iotcon_attributes_h attributes,
     ffi.Pointer<ffi.Char> key,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief The options handle.
-/// @details @a iotcon_options_h is an opaque data structure to have attribute value map which consists of a key and a value.
-/// Datatype of key is an integer and value is string.
-/// @since_tizen 3.0
+/// The options handle.
+///
+/// `iotcon_options_h` is an opaque data structure to have attribute value map which consists of a key and a value. Datatype of key is an integer and value is string.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 typedef iotcon_options_h = ffi.Pointer<icl_options>;
 
-/// @brief Specifies the type of function passed to iotcon_options_foreach().
-/// @since_tizen 3.0
-/// @param[in] id The information of the option
-/// @param[in] data The data of the option
-/// @param[in] user_data The user data to pass to the function
-/// @return @c true to continue with the next iteration of the loop,
-/// otherwise @c false to break out of the loop
-/// #IOTCON_FUNC_CONTINUE and #IOTCON_FUNC_STOP are more friendly values for the return
-/// @pre iotcon_options_foreach() will invoke this callback function.
-/// @see iotcon_options_foreach()
+/// Specifies the type of function passed to iotcon_options_foreach().
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `id` (in): The information of the option
+/// - `data` (in): The data of the option
+/// - `user_data` (in): The user data to pass to the function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop `IOTCON_FUNC_CONTINUE` and `IOTCON_FUNC_STOP` are more friendly values for the return
+///
+/// **Preconditions:**
+/// - iotcon_options_foreach() will invoke this callback function.
+///
+/// **See also:**
+/// - `iotcon_options_foreach()`
+/// @nodoc
 typedef iotcon_options_foreach_cb
     = ffi.Pointer<ffi.NativeFunction<iotcon_options_foreach_cbFunction>>;
+/// @nodoc
 typedef iotcon_options_foreach_cbFunction = ffi.Bool Function(
     ffi.UnsignedShort id,
     ffi.Pointer<ffi.Char> data,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartiotcon_options_foreach_cbFunction = bool Function(
     int id, ffi.Pointer<ffi.Char> data, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief The representation handle.
-/// @details @a iotcon_representation_h is an opaque data structure to have uri_path, list of resource types and interfaces.
-/// It could contain other representation as children.
-/// @since_tizen 3.0
+/// The representation handle.
+///
+/// `iotcon_representation_h` is an opaque data structure to have uri_path, list of resource types and interfaces. It could contain other representation as children.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 typedef iotcon_representation_h = ffi.Pointer<icl_representation_s>;
 
-/// @brief The resource types handle.
-/// @details @a iotcon_resource_types_h is an opaque data structure to have list of resource types. A resource type is datatype of string.
-/// @since_tizen 3.0
+/// The resource types handle.
+///
+/// `iotcon_resource_types_h` is an opaque data structure to have list of resource types. A resource type is datatype of string.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 typedef iotcon_resource_types_h = ffi.Pointer<icl_resource_types>;
 
-/// @brief The resource interface handle.
-/// @details @a iotcon_resource_interfaces_h is an opaque data structure to have list of resource interfaces. A resource interface is datatype of string.
-/// @since_tizen 3.0
+/// The resource interface handle.
+///
+/// `iotcon_resource_interfaces_h` is an opaque data structure to have list of resource interfaces. A resource interface is datatype of string.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 typedef iotcon_resource_interfaces_h = ffi.Pointer<icl_resource_ifaces>;
 
-/// @brief Specifies the type of function passed to iotcon_representation_foreach_children().
-/// @since_tizen 3.0
-/// @param[in] child The child Representation handle
-/// @param[in] user_data The user data to pass to the function
-/// @return @c true to continue with the next iteration of the loop,
-/// otherwise @c false to break out of the loop
-/// #IOTCON_FUNC_CONTINUE and #IOTCON_FUNC_STOP are more friendly values for the return
-/// @pre iotcon_representation_foreach_children() will invoke this callback function.
-/// @see iotcon_representation_foreach_children()
+/// Specifies the type of function passed to iotcon_representation_foreach_children().
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `child` (in): The child Representation handle
+/// - `user_data` (in): The user data to pass to the function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop `IOTCON_FUNC_CONTINUE` and `IOTCON_FUNC_STOP` are more friendly values for the return
+///
+/// **Preconditions:**
+/// - iotcon_representation_foreach_children() will invoke this callback function.
+///
+/// **See also:**
+/// - `iotcon_representation_foreach_children()`
+/// @nodoc
 typedef iotcon_children_cb
     = ffi.Pointer<ffi.NativeFunction<iotcon_children_cbFunction>>;
+/// @nodoc
 typedef iotcon_children_cbFunction = ffi.Bool Function(
     iotcon_representation_h child, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartiotcon_children_cbFunction = bool Function(
     iotcon_representation_h child, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Specifies the type of function passed to iotcon_resource_types_foreach().
-/// @since_tizen 3.0
-/// @param[in] type The value of the resource types
-/// @param[in] user_data The user data to pass to the function
-/// @return @c true to continue with the next iteration of the loop,
-/// otherwise @c false to break out of the loop
-/// #IOTCON_FUNC_CONTINUE and #IOTCON_FUNC_STOP are more friendly values for the return
-/// @pre iotcon_resource_types_foreach() will invoke this callback function.
-/// @see iotcon_resource_types_foreach()
+/// Specifies the type of function passed to iotcon_resource_types_foreach().
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `type` (in): The value of the resource types
+/// - `user_data` (in): The user data to pass to the function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop `IOTCON_FUNC_CONTINUE` and `IOTCON_FUNC_STOP` are more friendly values for the return
+///
+/// **Preconditions:**
+/// - iotcon_resource_types_foreach() will invoke this callback function.
+///
+/// **See also:**
+/// - `iotcon_resource_types_foreach()`
+/// @nodoc
 typedef iotcon_resource_types_foreach_cb
     = ffi.Pointer<ffi.NativeFunction<iotcon_resource_types_foreach_cbFunction>>;
+/// @nodoc
 typedef iotcon_resource_types_foreach_cbFunction = ffi.Bool Function(
     ffi.Pointer<ffi.Char> type, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartiotcon_resource_types_foreach_cbFunction = bool Function(
     ffi.Pointer<ffi.Char> type, ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Specifies the iface of function passed to iotcon_resource_interfaces_foreach().
-/// @since_tizen 3.0
-/// @remarks @a iface could be a value such as #IOTCON_INTERFACE_DEFAULT.
-/// @param[in] iface The value of the resource ifaces
-/// @param[in] user_data The user data to pass to the function
-/// @return @c true to continue with the next iteration of the loop,
-/// otherwise @c false to break out of the loop
-/// #IOTCON_FUNC_CONTINUE and #IOTCON_FUNC_STOP are more friendly values for the return
-/// @pre iotcon_resource_interfaces_foreach() will invoke this callback function.
-/// @see iotcon_resource_interfaces_foreach()
+/// Specifies the iface of function passed to iotcon_resource_interfaces_foreach().
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Remarks:**
+/// - `iface` could be a value such as `IOTCON_INTERFACE_DEFAULT`.
+///
+/// **Parameters:**
+/// - `iface` (in): The value of the resource ifaces
+/// - `user_data` (in): The user data to pass to the function
+///
+/// **Returns:**
+/// - `true` to continue with the next iteration of the loop, otherwise `false` to break out of the loop `IOTCON_FUNC_CONTINUE` and `IOTCON_FUNC_STOP` are more friendly values for the return
+///
+/// **Preconditions:**
+/// - iotcon_resource_interfaces_foreach() will invoke this callback function.
+///
+/// **See also:**
+/// - `iotcon_resource_interfaces_foreach()`
+/// @nodoc
 typedef iotcon_resource_interfaces_foreach_cb = ffi
     .Pointer<ffi.NativeFunction<iotcon_resource_interfaces_foreach_cbFunction>>;
+/// @nodoc
 typedef iotcon_resource_interfaces_foreach_cbFunction = ffi.Bool Function(
     ffi.Pointer<ffi.Char> iface, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartiotcon_resource_interfaces_foreach_cbFunction = bool Function(
     ffi.Pointer<ffi.Char> iface, ffi.Pointer<ffi.Void> user_data);
 
-/// @ingroup CAPI_IOT_CONNECTIVITY_MODULE
-/// @brief Enumeration for IoTCon error code.
-/// @since_tizen 3.0
-/// @{
+/// Enumeration for IoTCon error code.
+///
+/// **Since Tizen:**
+/// - 3.0 @{
+///
+/// **Group:**
+/// - CAPI_IOT_CONNECTIVITY_MODULE
+/// @nodoc
 abstract class iotcon_error_e {
   /// < Successful
   static const int IOTCON_ERROR_NONE = 0;
@@ -6759,48 +8915,70 @@ abstract class iotcon_error_e {
   static const int IOTCON_ERROR_SYSTEM = -29884410;
 }
 
-/// @brief Specifies the type of function passed to iotcon_resource_create() and iotcon_resource_set_request_handler().
-/// @details Called when server receives request from the client.
-/// @since_tizen 3.0
-/// @param[in] resource The resource requested
-/// @param[in] request The request from client
-/// @param[in] user_data The user data to pass to the function
-/// @pre The callback must be registered using iotcon_resource_create()
-/// @see iotcon_resource_create()
-/// @see iotcon_resource_set_request_handler()
+/// Specifies the type of function passed to iotcon_resource_create() and iotcon_resource_set_request_handler().
+///
+/// Called when server receives request from the client.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `resource` (in): The resource requested
+/// - `request` (in): The request from client
+/// - `user_data` (in): The user data to pass to the function
+///
+/// **Preconditions:**
+/// - The callback must be registered using iotcon_resource_create()
+///
+/// **See also:**
+/// - `iotcon_resource_create()`
+/// - `iotcon_resource_set_request_handler()`
+/// @nodoc
 typedef iotcon_request_handler_cb
     = ffi.Pointer<ffi.NativeFunction<iotcon_request_handler_cbFunction>>;
+/// @nodoc
 typedef iotcon_request_handler_cbFunction = ffi.Void Function(
     iotcon_resource_h resource,
     iotcon_request_h request,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartiotcon_request_handler_cbFunction = void Function(
     iotcon_resource_h resource,
     iotcon_request_h request,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief The resource handle.
-/// @details @a iotcon_resource_h is an opaque data structure to represent registered resource by server.
-/// A resource has host_address, uri_path, resource types, interfaces and internal handle.
-/// If observable attribute of resource is true, client can observe this resource.
-/// When client requests by CRUD functions, handler will be invoked if registered.
-/// It could contain other resource as children.
-/// @since_tizen 3.0
+/// The resource handle.
+///
+/// `iotcon_resource_h` is an opaque data structure to represent registered resource by server. A resource has host_address, uri_path, resource types, interfaces and internal handle. If observable attribute of resource is true, client can observe this resource. When client requests by CRUD functions, handler will be invoked if registered. It could contain other resource as children.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 typedef iotcon_resource_h = ffi.Pointer<icl_resource>;
 
-/// @brief The request handle.
-/// @details @a iotcon_request_h is an opaque data structure to request to a particular resource.
-/// @a iotcon_request_h is a data type of client's request which consists of header options, query, representation.
-/// @since_tizen 3.0
+/// The request handle.
+///
+/// `iotcon_request_h` is an opaque data structure to request to a particular resource. `iotcon_request_h` is a data type of client's request which consists of header options, query, representation.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 typedef iotcon_request_h = ffi.Pointer<icl_resource_request>;
 
-/// @brief The observers handle.
-/// @details The list of observer IDs.
-/// @since_tizen 3.0
+/// The observers handle.
+///
+/// The list of observer IDs.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 typedef iotcon_observers_h = ffi.Pointer<icl_observers>;
 
-/// @brief Enumeration for quality of service.
-/// @since_tizen 3.0
+/// Enumeration for quality of service.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class iotcon_qos_e {
   /// < Indicates low quality of service
   static const int IOTCON_QOS_LOW = 0;
@@ -6809,41 +8987,61 @@ abstract class iotcon_qos_e {
   static const int IOTCON_QOS_HIGH = 1;
 }
 
-/// @brief Specifies the type of function passed to iotcon_lite_resource_create().
-/// @since_tizen 3.0
-/// @param[in] resource The handle of the lite resource
-/// @param[in] attributes The attributes of the lite resource
-/// @param[in] user_data The user data to pass to the function
-/// @return @c true to accept post request,
-/// otherwise @c false to reject it
-/// @pre The callback must be registered using iotcon_lite_resource_create().
-/// @see iotcon_lite_resource_create()
+/// Specifies the type of function passed to iotcon_lite_resource_create().
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `resource` (in): The handle of the lite resource
+/// - `attributes` (in): The attributes of the lite resource
+/// - `user_data` (in): The user data to pass to the function
+///
+/// **Returns:**
+/// - `true` to accept post request, otherwise `false` to reject it
+///
+/// **Preconditions:**
+/// - The callback must be registered using iotcon_lite_resource_create().
+///
+/// **See also:**
+/// - `iotcon_lite_resource_create()`
+/// @nodoc
 typedef iotcon_lite_resource_post_request_cb = ffi
     .Pointer<ffi.NativeFunction<iotcon_lite_resource_post_request_cbFunction>>;
+/// @nodoc
 typedef iotcon_lite_resource_post_request_cbFunction = ffi.Bool Function(
     iotcon_lite_resource_h resource,
     iotcon_attributes_h attributes,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartiotcon_lite_resource_post_request_cbFunction = bool Function(
     iotcon_lite_resource_h resource,
     iotcon_attributes_h attributes,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief The lite resource handle.
-/// @details @a iotcon_lite_resource_h is an opaque data structure to represent registered resource by server.
-/// A resource has host_address, uri_path, resource types, and internal handle.
-/// If observable attribute of resource is true, client can observe this resource.
-/// @since_tizen 3.0
+/// The lite resource handle.
+///
+/// `iotcon_lite_resource_h` is an opaque data structure to represent registered resource by server. A resource has host_address, uri_path, resource types, and internal handle. If observable attribute of resource is true, client can observe this resource.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 typedef iotcon_lite_resource_h = ffi.Pointer<icl_lite_resource>;
 
-/// @brief The response handle.
-/// @details @a iotcon_response_h is an opaque data structure to respond to client.
-/// @a iotcon_response_h is a data type of server's response which consists of result, header options, query, representation.
-/// @since_tizen 3.0
+/// The response handle.
+///
+/// `iotcon_response_h` is an opaque data structure to respond to client. `iotcon_response_h` is a data type of server's response which consists of result, header options, query, representation.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 typedef iotcon_response_h = ffi.Pointer<icl_resource_response>;
 
-/// @brief Enumeration for result of response.
-/// @since_tizen 3.0
+/// Enumeration for result of response.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class iotcon_response_result_e {
   /// < Indicates result of response for success
   static const int IOTCON_RESPONSE_OK = 0;
@@ -6867,10 +9065,15 @@ abstract class iotcon_response_result_e {
   static const int IOTCON_RESPONSE_FORBIDDEN = 6;
 }
 
-/// @brief Enumeration for connectivities which can be held in a resource.
-/// @remarks IOTCON_CONNECTIVITY_PREFER_UDP and IOTCON_CONNECTIVITY_PREFER_TCP should be mutually exclusive.
-/// @remarks IOTCON_CONNECTIVITY_IPV4_ONLY and IOTCON_CONNECTIVITY_IPV6_ONLY should be mutually exclusive.
-/// @since_tizen 3.0
+/// Enumeration for connectivities which can be held in a resource.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Remarks:**
+/// - IOTCON_CONNECTIVITY_PREFER_UDP and IOTCON_CONNECTIVITY_PREFER_TCP should be mutually exclusive.
+/// - IOTCON_CONNECTIVITY_IPV4_ONLY and IOTCON_CONNECTIVITY_IPV6_ONLY should be mutually exclusive.
+/// @nodoc
 abstract class iotcon_connectivity_type_e {
   /// < Indicates all connectivities
   static const int IOTCON_CONNECTIVITY_ALL = 0;
@@ -6891,8 +9094,11 @@ abstract class iotcon_connectivity_type_e {
   static const int IOTCON_CONNECTIVITY_IPV6_ONLY = 524288;
 }
 
-/// @brief Enumeration for type of request.
-/// @since_tizen 3.0
+/// Enumeration for type of request.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class iotcon_request_type_e {
   /// < Indicates none
   static const int IOTCON_REQUEST_UNKNOWN = 0;
@@ -6910,8 +9116,11 @@ abstract class iotcon_request_type_e {
   static const int IOTCON_REQUEST_DELETE = 4;
 }
 
-/// @brief Enumeration for type of observation.
-/// @since_tizen 3.0
+/// Enumeration for type of observation.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class iotcon_observe_type_e {
   /// < Indicates no option
   static const int IOTCON_OBSERVE_NO_TYPE = 0;
@@ -6923,17 +9132,20 @@ abstract class iotcon_observe_type_e {
   static const int IOTCON_OBSERVE_DEREGISTER = 2;
 }
 
-/// @brief The remote resource handle.
-/// @details When Client is successful to find out resource from remote server, server's resource information is reorganized as @a iotcon_remote_resource_h by IoTCon.
-/// Client can request CRUD to server by using this.
-/// @a iotcon_remote_resource_h is an opaque data structure to have host_address, uri_path, resource types, interfaces, options and device id.
-/// If observable attribute is true, remote resource is observable.
-/// When you observe remote resource, observe_handle will be set.
-/// @since_tizen 3.0
+/// The remote resource handle.
+///
+/// When Client is successful to find out resource from remote server, server's resource information is reorganized as `iotcon_remote_resource_h` by IoTCon. Client can request CRUD to server by using this. `iotcon_remote_resource_h` is an opaque data structure to have host_address, uri_path, resource types, interfaces, options and device id. If observable attribute is true, remote resource is observable. When you observe remote resource, observe_handle will be set.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 typedef iotcon_remote_resource_h = ffi.Pointer<icl_remote_resource>;
 
-/// @brief Enumeration for policy of observation.
-/// @since_tizen 3.0
+/// Enumeration for policy of observation.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class iotcon_observe_policy_e {
   /// < Indicates observation request for most up-to-date notifications only
   static const int IOTCON_OBSERVE_IGNORE_OUT_OF_ORDER = 0;
@@ -6942,27 +9154,36 @@ abstract class iotcon_observe_policy_e {
   static const int IOTCON_OBSERVE_ACCEPT_OUT_OF_ORDER = 1;
 }
 
-/// @brief Specifies the type of observe callback passed to iotcon_remote_resource_observe_register().
-/// The @a err could be one of #iotcon_error_e. \n
-/// The @a response is created by a server. Therefore, you can't get any values that the server didn't set.
-/// @since_tizen 3.0
-/// @param[in] resource The handle of the remote resource
-/// @param[in] err The error code
-/// @param[in] sequence_number The sequence number of observe
-/// @param[in] response The handle of the response
-/// @param[in] user_data The user data passed from the callback registration function
-/// @pre The callback must be registered using iotcon_remote_resource_observe_register()
-/// @see iotcon_remote_resource_observe_register()
-/// @see iotcon_remote_resource_observe_deregister()
-/// @see iotcon_resource_notify()
+/// Specifies the type of observe callback passed to iotcon_remote_resource_observe_register(). The `err` could be one of `iotcon_error_e`. The `response` is created by a server. Therefore, you can't get any values that the server didn't set.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `resource` (in): The handle of the remote resource
+/// - `err` (in): The error code
+/// - `sequence_number` (in): The sequence number of observe
+/// - `response` (in): The handle of the response
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - The callback must be registered using iotcon_remote_resource_observe_register()
+///
+/// **See also:**
+/// - `iotcon_remote_resource_observe_register()`
+/// - `iotcon_remote_resource_observe_deregister()`
+/// - `iotcon_resource_notify()`
+/// @nodoc
 typedef iotcon_remote_resource_observe_cb = ffi
     .Pointer<ffi.NativeFunction<iotcon_remote_resource_observe_cbFunction>>;
+/// @nodoc
 typedef iotcon_remote_resource_observe_cbFunction = ffi.Void Function(
     iotcon_remote_resource_h resource,
     ffi.Int32 err,
     ffi.Int sequence_number,
     iotcon_response_h response,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartiotcon_remote_resource_observe_cbFunction = void Function(
     iotcon_remote_resource_h resource,
     int err,
@@ -6970,31 +9191,39 @@ typedef Dartiotcon_remote_resource_observe_cbFunction = void Function(
     iotcon_response_h response,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Specifies the type of response function.
-/// @details The function passed to iotcon_remote_resource_get(), iotcon_remote_resource_put(),
-/// iotcon_remote_resource_post(), iotcon_remote_resource_delete().\n
-/// The @a err could be one of #iotcon_error_e.\n
-/// The @a request_type could be one of #iotcon_request_type_e.\n
-/// The @a response is created by a server. Therefore, you can't get any values that the server didn't set.
-/// @since_tizen 3.0
-/// @param[in] resource The handle of the resource
-/// @param[in] err The error code
-/// @param[in] request_type The request type
-/// @param[in] response The handle of the response
-/// @param[in] user_data The user data passed from the callback registration function
-/// @pre The callback must be registered using iotcon_remote_resource_get(), iotcon_remote_resource_put(), iotcon_remote_resource_post(), iotcon_remote_resource_delete().
-/// @see iotcon_remote_resource_get()
-/// @see iotcon_remote_resource_put()
-/// @see iotcon_remote_resource_post()
-/// @see iotcon_remote_resource_delete()
+/// Specifies the type of response function.
+///
+/// The function passed to iotcon_remote_resource_get(), iotcon_remote_resource_put(), iotcon_remote_resource_post(), iotcon_remote_resource_delete(). The `err` could be one of `iotcon_error_e`. The `request_type` could be one of `iotcon_request_type_e`. The `response` is created by a server. Therefore, you can't get any values that the server didn't set.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `resource` (in): The handle of the resource
+/// - `err` (in): The error code
+/// - `request_type` (in): The request type
+/// - `response` (in): The handle of the response
+/// - `user_data` (in): The user data passed from the callback registration function
+///
+/// **Preconditions:**
+/// - The callback must be registered using iotcon_remote_resource_get(), iotcon_remote_resource_put(), iotcon_remote_resource_post(), iotcon_remote_resource_delete().
+///
+/// **See also:**
+/// - `iotcon_remote_resource_get()`
+/// - `iotcon_remote_resource_put()`
+/// - `iotcon_remote_resource_post()`
+/// - `iotcon_remote_resource_delete()`
+/// @nodoc
 typedef iotcon_remote_resource_response_cb = ffi
     .Pointer<ffi.NativeFunction<iotcon_remote_resource_response_cbFunction>>;
+/// @nodoc
 typedef iotcon_remote_resource_response_cbFunction = ffi.Void Function(
     iotcon_remote_resource_h resource,
     ffi.Int32 err,
     ffi.Int32 request_type,
     iotcon_response_h response,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartiotcon_remote_resource_response_cbFunction = void Function(
     iotcon_remote_resource_h resource,
     int err,
@@ -7002,49 +9231,74 @@ typedef Dartiotcon_remote_resource_response_cbFunction = void Function(
     iotcon_response_h response,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Specifies the type of function passed to iotcon_remote_resource_start_caching().
-/// @since_tizen 3.0
-/// @param[in] resource The handle of the remote resource
-/// @param[in] representation The handle of the representation
-/// @param[in] user_data The user data to pass to the function
-/// @pre The callback must be registered using iotcon_remote_resource_start_caching()
-/// @see iotcon_remote_resource_start_caching()
-/// @see iotcon_remote_resource_stop_caching()
+/// Specifies the type of function passed to iotcon_remote_resource_start_caching().
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `resource` (in): The handle of the remote resource
+/// - `representation` (in): The handle of the representation
+/// - `user_data` (in): The user data to pass to the function
+///
+/// **Preconditions:**
+/// - The callback must be registered using iotcon_remote_resource_start_caching()
+///
+/// **See also:**
+/// - `iotcon_remote_resource_start_caching()`
+/// - `iotcon_remote_resource_stop_caching()`
+/// @nodoc
 typedef iotcon_remote_resource_cached_representation_changed_cb = ffi.Pointer<
     ffi.NativeFunction<
         iotcon_remote_resource_cached_representation_changed_cbFunction>>;
+/// @nodoc
 typedef iotcon_remote_resource_cached_representation_changed_cbFunction
     = ffi.Void Function(
         iotcon_remote_resource_h resource,
         iotcon_representation_h representation,
         ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartiotcon_remote_resource_cached_representation_changed_cbFunction
     = void Function(
         iotcon_remote_resource_h resource,
         iotcon_representation_h representation,
         ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Specifies the type of function passed to iotcon_remote_resource_start_monitoring().
-/// @since_tizen 3.0
-/// @param[in] resource The handle of the remote resource
-/// @param[in] state The state of the remote resource
-/// @param[in] user_data The user data to pass to the function
-/// @pre The callback must be registered using iotcon_remote_resource_start_monitoring()
-/// @see iotcon_remote_resource_start_monitoring()
-/// @see iotcon_remote_resource_stop_monitoring()
+/// Specifies the type of function passed to iotcon_remote_resource_start_monitoring().
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `resource` (in): The handle of the remote resource
+/// - `state` (in): The state of the remote resource
+/// - `user_data` (in): The user data to pass to the function
+///
+/// **Preconditions:**
+/// - The callback must be registered using iotcon_remote_resource_start_monitoring()
+///
+/// **See also:**
+/// - `iotcon_remote_resource_start_monitoring()`
+/// - `iotcon_remote_resource_stop_monitoring()`
+/// @nodoc
 typedef iotcon_remote_resource_state_changed_cb = ffi.Pointer<
     ffi.NativeFunction<iotcon_remote_resource_state_changed_cbFunction>>;
+/// @nodoc
 typedef iotcon_remote_resource_state_changed_cbFunction = ffi.Void Function(
     iotcon_remote_resource_h resource,
     ffi.Int32 state,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartiotcon_remote_resource_state_changed_cbFunction = void Function(
     iotcon_remote_resource_h resource,
     int state,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Enumeration for states of remote resource.
-/// @since_tizen 3.0
+/// Enumeration for states of remote resource.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class iotcon_remote_resource_state_e {
   /// < Indicates remote resource is alive
   static const int IOTCON_REMOTE_RESOURCE_ALIVE = 0;
@@ -7053,49 +9307,69 @@ abstract class iotcon_remote_resource_state_e {
   static const int IOTCON_REMOTE_RESOURCE_LOST_SIGNAL = 1;
 }
 
-/// @brief Specifies the type of function passed to iotcon_add_presence_cb().
-/// @details Called when client receives presence events from the server.
-/// The @a response handle contains presence information.
-/// @since_tizen 3.0
-/// @param[in] presence The presence handle
-/// @param[in] err The error code(@c 0 on success, otherwise a negative error value)
-/// @param[in] response The presence response handle
-/// @param[in] user_data The user data to pass to the function
-/// @pre The callback must be registered using iotcon_add_presence_cb().
-/// @see iotcon_add_presence_cb()
-/// @see iotcon_remove_presence_cb()
-/// @see iotcon_presence_response_get_connectivity_type()
-/// @see iotcon_presence_response_get_host_address()
-/// @see iotcon_presence_response_get_resource_type()
-/// @see iotcon_presence_response_get_result()
-/// @see iotcon_presence_response_get_trigger()
+/// Specifies the type of function passed to iotcon_add_presence_cb().
+///
+/// Called when client receives presence events from the server. The `response` handle contains presence information.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `presence` (in): The presence handle
+/// - `err` (in): The error code(`0` on success, otherwise a negative error value)
+/// - `response` (in): The presence response handle
+/// - `user_data` (in): The user data to pass to the function
+///
+/// **Preconditions:**
+/// - The callback must be registered using iotcon_add_presence_cb().
+///
+/// **See also:**
+/// - `iotcon_add_presence_cb()`
+/// - `iotcon_remove_presence_cb()`
+/// - `iotcon_presence_response_get_connectivity_type()`
+/// - `iotcon_presence_response_get_host_address()`
+/// - `iotcon_presence_response_get_resource_type()`
+/// - `iotcon_presence_response_get_result()`
+/// - `iotcon_presence_response_get_trigger()`
+/// @nodoc
 typedef iotcon_presence_cb
     = ffi.Pointer<ffi.NativeFunction<iotcon_presence_cbFunction>>;
+/// @nodoc
 typedef iotcon_presence_cbFunction = ffi.Void Function(
     iotcon_presence_h presence,
     ffi.Int32 err,
     iotcon_presence_response_h response,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartiotcon_presence_cbFunction = void Function(
     iotcon_presence_h presence,
     int err,
     iotcon_presence_response_h response,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief The presence handle.
-/// @details @a iotcon_presence_h is a handle of presence subscription.
-/// It is used to cancel presence.
-/// @since_tizen 3.0
+/// The presence handle.
+///
+/// `iotcon_presence_h` is a handle of presence subscription. It is used to cancel presence.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 typedef iotcon_presence_h = ffi.Pointer<icl_presence>;
 
-/// @brief The presence response handle.
-/// @details @a iotcon_presence_response_h is a handle of presence response subscription. \n
-/// It is used to get the information of presence response from server.
-/// @since_tizen 3.0
+/// The presence response handle.
+///
+/// `iotcon_presence_response_h` is a handle of presence response subscription. It is used to get the information of presence response from server.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 typedef iotcon_presence_response_h = ffi.Pointer<icl_presence_response>;
 
-/// @brief Enumeration for result of presence.
-/// @since_tizen 3.0
+/// Enumeration for result of presence.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class iotcon_presence_result_e {
   /// < Indicates for successful action of presence
   static const int IOTCON_PRESENCE_OK = 0;
@@ -7107,8 +9381,11 @@ abstract class iotcon_presence_result_e {
   static const int IOTCON_PRESENCE_TIMEOUT = 2;
 }
 
-/// @brief Enumeration for operation of presence response.
-/// @since_tizen 3.0
+/// Enumeration for operation of presence response.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class iotcon_presence_trigger_e {
   /// < Indicates for resource creation operation of server
   static const int IOTCON_PRESENCE_RESOURCE_CREATED = 0;
@@ -7120,62 +9397,89 @@ abstract class iotcon_presence_trigger_e {
   static const int IOTCON_PRESENCE_RESOURCE_DESTROYED = 2;
 }
 
-/// @brief Specifies the type of function passed to iotcon_find_resource().
-/// @details Called when a resource is found from the remote server. \n
-/// The @a resource completes its life cycle in the function.
-/// If you want to send requests(GET, PUT, POST, DELETE, and OBSERVE) on the @a resource,
-/// you must clone the @a resource using iotcon_remote_resource_clone(). \n
-/// The @a result could be one of #iotcon_error_e.
-/// @since_tizen 3.0
-/// @param[in] resource The handle of resource which is found
-/// @param[in] result The result code (Lesser than 0 on fail, otherwise a response result value)
-/// @param[in] user_data The user data to pass to the function
-/// @return @c true to continue to find resource,
-/// otherwise @c false to stop \n
-/// #IOTCON_FUNC_CONTINUE and #IOTCON_FUNC_STOP are more friendly values for the return
-/// @pre The callback must be registered using iotcon_find_resource()
-/// @see iotcon_find_resource()
+/// Specifies the type of function passed to iotcon_find_resource().
+///
+/// Called when a resource is found from the remote server. The `resource` completes its life cycle in the function. If you want to send requests(GET, PUT, POST, DELETE, and OBSERVE) on the `resource`, you must clone the `resource` using iotcon_remote_resource_clone(). The `result` could be one of `iotcon_error_e`.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `resource` (in): The handle of resource which is found
+/// - `result` (in): The result code (Lesser than 0 on fail, otherwise a response result value)
+/// - `user_data` (in): The user data to pass to the function
+///
+/// **Returns:**
+/// - `true` to continue to find resource, otherwise `false` to stop `IOTCON_FUNC_CONTINUE` and `IOTCON_FUNC_STOP` are more friendly values for the return
+///
+/// **Preconditions:**
+/// - The callback must be registered using iotcon_find_resource()
+///
+/// **See also:**
+/// - `iotcon_find_resource()`
+/// @nodoc
 typedef iotcon_found_resource_cb
     = ffi.Pointer<ffi.NativeFunction<iotcon_found_resource_cbFunction>>;
+/// @nodoc
 typedef iotcon_found_resource_cbFunction = ffi.Bool Function(
     iotcon_remote_resource_h resource,
     ffi.Int32 result,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartiotcon_found_resource_cbFunction = bool Function(
     iotcon_remote_resource_h resource,
     int result,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief Specifies the type of function passed to iotcon_find_device_info().
-/// @details The @a result could be one of #iotcon_error_e.
-/// @since_tizen 3.0
-/// @param[in] device_info The device information from remote server
-/// @param[in] result The result code (@c 0 on success, otherwise a negative error value)
-/// @param[in] user_data The user data to pass to the function
-/// @return @c true to continue to find device information,
-/// otherwise @c false to stop \n
-/// #IOTCON_FUNC_CONTINUE and #IOTCON_FUNC_STOP are more friendly values for the return
-/// @pre iotcon_find_device_info() will invoke this callback function.
-/// @see iotcon_find_device_info()
-/// @see iotcon_device_info_get_property()
+/// Specifies the type of function passed to iotcon_find_device_info().
+///
+/// The `result` could be one of `iotcon_error_e`.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `device_info` (in): The device information from remote server
+/// - `result` (in): The result code (`0` on success, otherwise a negative error value)
+/// - `user_data` (in): The user data to pass to the function
+///
+/// **Returns:**
+/// - `true` to continue to find device information, otherwise `false` to stop `IOTCON_FUNC_CONTINUE` and `IOTCON_FUNC_STOP` are more friendly values for the return
+///
+/// **Preconditions:**
+/// - iotcon_find_device_info() will invoke this callback function.
+///
+/// **See also:**
+/// - `iotcon_find_device_info()`
+/// - `iotcon_device_info_get_property()`
+/// @nodoc
 typedef iotcon_device_info_cb
     = ffi.Pointer<ffi.NativeFunction<iotcon_device_info_cbFunction>>;
+/// @nodoc
 typedef iotcon_device_info_cbFunction = ffi.Bool Function(
     iotcon_device_info_h device_info,
     ffi.Int32 result,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartiotcon_device_info_cbFunction = bool Function(
     iotcon_device_info_h device_info,
     int result,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief The device information handle.
-/// @details @a iotcon_device_info_h is a handle of device information.
-/// @since_tizen 3.0
+/// The device information handle.
+///
+/// `iotcon_device_info_h` is a handle of device information.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 typedef iotcon_device_info_h = ffi.Pointer<icl_device_info>;
 
-/// @brief Enumeration for properties of device information.
-/// @since_tizen 3.0
+/// Enumeration for properties of device information.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class iotcon_device_info_e {
   /// < Indicates human friendly name for device
   static const int IOTCON_DEVICE_INFO_NAME = 0;
@@ -7190,36 +9494,55 @@ abstract class iotcon_device_info_e {
   static const int IOTCON_DEVICE_INFO_DATA_MODEL_VER = 3;
 }
 
-/// @brief Specifies the type of function passed to iotcon_find_platform_info().
-/// @details The @a result could be one of #iotcon_error_e.
-/// @since_tizen 3.0
-/// @param[in] platform_info The platform information from remote server
-/// @param[in] result The result code (@c 0 on success, otherwise a negative error value)
-/// @param[in] user_data The user data to pass to the function
-/// @return @c true to continue to find platform information,
-/// otherwise @c false to stop \n
-/// #IOTCON_FUNC_CONTINUE and #IOTCON_FUNC_STOP are more friendly values for the return
-/// @pre iotcon_find_platform_info() will invoke this callback function.
-/// @see iotcon_find_platform_info()
-/// @see iotcon_platform_info_get_property()
+/// Specifies the type of function passed to iotcon_find_platform_info().
+///
+/// The `result` could be one of `iotcon_error_e`.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `platform_info` (in): The platform information from remote server
+/// - `result` (in): The result code (`0` on success, otherwise a negative error value)
+/// - `user_data` (in): The user data to pass to the function
+///
+/// **Returns:**
+/// - `true` to continue to find platform information, otherwise `false` to stop `IOTCON_FUNC_CONTINUE` and `IOTCON_FUNC_STOP` are more friendly values for the return
+///
+/// **Preconditions:**
+/// - iotcon_find_platform_info() will invoke this callback function.
+///
+/// **See also:**
+/// - `iotcon_find_platform_info()`
+/// - `iotcon_platform_info_get_property()`
+/// @nodoc
 typedef iotcon_platform_info_cb
     = ffi.Pointer<ffi.NativeFunction<iotcon_platform_info_cbFunction>>;
+/// @nodoc
 typedef iotcon_platform_info_cbFunction = ffi.Bool Function(
     iotcon_platform_info_h platform_info,
     ffi.Int32 result,
     ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartiotcon_platform_info_cbFunction = bool Function(
     iotcon_platform_info_h platform_info,
     int result,
     ffi.Pointer<ffi.Void> user_data);
 
-/// @brief The platform information handle.
-/// @details @a iotcon_platform_info_h is a handle of platform information.
-/// @since_tizen 3.0
+/// The platform information handle.
+///
+/// `iotcon_platform_info_h` is a handle of platform information.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 typedef iotcon_platform_info_h = ffi.Pointer<icl_platform_info>;
 
-/// @brief Enumeration for properties of platform information.
-/// @since_tizen 3.0
+/// Enumeration for properties of platform information.
+///
+/// **Since Tizen:**
+/// - 3.0
+/// @nodoc
 abstract class iotcon_platform_info_e {
   /// < Indicates platform identifier
   static const int IOTCON_PLATFORM_INFO_ID = 0;
@@ -7255,17 +9578,29 @@ abstract class iotcon_platform_info_e {
   static const int IOTCON_PLATFORM_INFO_SYSTEM_TIME = 10;
 }
 
-/// @brief Specifies the type of function passed to iotcon_add_generated_pin_cb().
-/// @details When a provisioning tool calls the function for registering this device, it is called, immediately.
-/// @since_tizen 3.0
-/// @param[in] pin The pin number which is generated automatically
-/// @param[in] user_data The user data to pass to the function
-/// @pre The callback must be registered using iotcon_add_generated_pin_cb()
-/// @see iotcon_add_generated_pin_cb()
-/// @see iotcon_remove_generated_pin_cb()
+/// Specifies the type of function passed to iotcon_add_generated_pin_cb().
+///
+/// When a provisioning tool calls the function for registering this device, it is called, immediately.
+///
+/// **Since Tizen:**
+/// - 3.0
+///
+/// **Parameters:**
+/// - `pin` (in): The pin number which is generated automatically
+/// - `user_data` (in): The user data to pass to the function
+///
+/// **Preconditions:**
+/// - The callback must be registered using iotcon_add_generated_pin_cb()
+///
+/// **See also:**
+/// - `iotcon_add_generated_pin_cb()`
+/// - `iotcon_remove_generated_pin_cb()`
+/// @nodoc
 typedef iotcon_generated_pin_cb
     = ffi.Pointer<ffi.NativeFunction<iotcon_generated_pin_cbFunction>>;
+/// @nodoc
 typedef iotcon_generated_pin_cbFunction = ffi.Void Function(
     ffi.Pointer<ffi.Char> pin, ffi.Pointer<ffi.Void> user_data);
+/// @nodoc
 typedef Dartiotcon_generated_pin_cbFunction = void Function(
     ffi.Pointer<ffi.Char> pin, ffi.Pointer<ffi.Void> user_data);
