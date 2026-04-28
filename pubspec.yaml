@@ -12,5 +12,6 @@ dependencies:
 dev_dependencies:
   ffigen: ^11.0.0
   lints: ^3.0.0
+  path: ^1.9.1
   symgen:
     path: packages/symgen

@@ -6,6 +6,7 @@ import 'dart:ffi';
 
 import 'package:ffi/ffi.dart';
 
+/// @nodoc
 extension Int8Pointer on Pointer<Int8> {
   int get length => cast<Utf8>().length;
 
@@ -14,12 +15,14 @@ extension Int8Pointer on Pointer<Int8> {
   }
 }
 
+/// @nodoc
 extension StringInt8Pointer on String {
   Pointer<Int8> toNativeInt8({Allocator allocator = malloc}) {
     return toNativeUtf8(allocator: allocator).cast<Int8>();
   }
 }
 
+/// @nodoc
 extension CharPointer on Pointer<Char> {
   int get length => cast<Utf8>().length;
 
@@ -28,6 +31,7 @@ extension CharPointer on Pointer<Char> {
   }
 }
 
+/// @nodoc
 extension StringCharPointer on String {
   Pointer<Char> toNativeChar({Allocator allocator = malloc}) {
     return toNativeUtf8(allocator: allocator).cast<Char>();

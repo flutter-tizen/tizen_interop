@@ -1,4 +1,5 @@
-library tizen_interop;
+/// Tizen Interop for Tizen 10.0.
+library tizen_interop_10_0;
 
 import 'dart:ffi';
 
